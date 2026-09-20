@@ -27,7 +27,7 @@ Googology/
       DBMS.lean
       Y.lean
       OTB.lean
-test/              demonstration that the scaffolding type-checks
+test/              scaffolding demonstration on invented rules, not on any real system
 ```
 
 ### Layering rules

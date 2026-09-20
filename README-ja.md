@@ -26,7 +26,7 @@ Googology/
       DBMS.lean
       Y.lean
       OTB.lean
-test/              骨組みが型検査を通ることの確認
+test/              骨組みの確認。架空の規則で、実在の系ではない
 ```
 
 ### 層の規則
