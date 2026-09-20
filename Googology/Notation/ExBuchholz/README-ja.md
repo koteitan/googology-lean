@@ -38,6 +38,7 @@ inductive Term where
 | `Std.lean` | `G`、`isOT`、`OT`、決定可能性 |
 | `WF.lean` | `not_wellFounded_lt`、`cmp_cons_cons'`、`OT_head`、`OT_tail`、`OT_tail_head_le`、`OTLt`、`acc_nil` |
 | `Sum.lean` | `leadCount`、`dropLead`、`lead_lex`、`acc_of_headLe`、`acc_of_OT`、`wellFounded_OTLt` |
+| `Ord.lean` | 順序数側。`Omega`、`Clos`、`CSet`、`psi`（mathlib が要る） |
 
 ## 順序
 
@@ -73,7 +74,9 @@ inductive Term where
 | 和：主項の可到達性から `WellFounded OTLt` が出ること | 済 |
 | 主項の可到達性 | **未**。下を見よ |
 | 基本列、`Rewrite` の値 | **未** |
-| 順序数への評価 | **未** |
+| 順序数の上の `ψ` の定義と基本性質 | 済 |
+| `C_v(a)` の濃度評価、したがって `ψ_v(a) < Ω_{v+1}` | **未** |
+| 評価写像 `Term → Ordinal` とその単調性 | **未** |
 
 例外的に `sorry` を許しているわけではない。ファイルに `sorry` も `axiom` も無い。
 
@@ -124,8 +127,14 @@ theorem wellFounded_OTLt (HP : ∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))) :
 ∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))
 ```
 
-これが崩壊の議論である。道は 2 つ。Buchholz の構文的な道（集合 `W_u` と Bachmann
-性質。先に基本列が要る）か、順序数への評価を作って `OrdHom` で整礎性を引き戻す道。
+これが崩壊の議論である。ここで取る道は順序数の側である。`Ord.lean` が Maksudov の
+条項から順序数の上の `ψ` を定義しており、予定は評価写像 `Term → Ordinal` を作って、
+`OT` の上での単調性から `OrdHom.wf` で整礎性を引き戻すことである。
+
+`Ord.lean` の次は濃度評価 `#(C_v(a)) ≤ ℵ_v` である。これから `ψ_v(a) < Ω_{v+1}` が
+出て、その先が全部開く。構文的な道（Buchholz の集合 `W_u` と Bachmann 性質）を
+取らなかったのは、拡張版の基本列が先に要るのに、確認できた出典が手元に無いからで
+ある。
 
 ## 名前について
 
@@ -181,8 +190,14 @@ theorem wellFounded_OTLt (HP : ∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))) :
 ∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))
 ```
 
-これが崩壊の議論である。道は 2 つ。Buchholz の構文的な道（集合 `W_u` と Bachmann
-性質。先に基本列が要る）か、順序数への評価を作って `OrdHom` で整礎性を引き戻す道。
+これが崩壊の議論である。ここで取る道は順序数の側である。`Ord.lean` が Maksudov の
+条項から順序数の上の `ψ` を定義しており、予定は評価写像 `Term → Ordinal` を作って、
+`OT` の上での単調性から `OrdHom.wf` で整礎性を引き戻すことである。
+
+`Ord.lean` の次は濃度評価 `#(C_v(a)) ≤ ℵ_v` である。これから `ψ_v(a) < Ω_{v+1}` が
+出て、その先が全部開く。構文的な道（Buchholz の集合 `W_u` と Bachmann 性質）を
+取らなかったのは、拡張版の基本列が先に要るのに、確認できた出典が手元に無いからで
+ある。
 
 ## 名前について
 

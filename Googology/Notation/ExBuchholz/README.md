@@ -39,6 +39,7 @@ which is the whole content of the extension.
 | `Std.lean` | `G`, `isOT`, `OT`, decidability |
 | `WF.lean` | `not_wellFounded_lt`, `cmp_cons_cons'`, `OT_head`, `OT_tail`, `OT_tail_head_le`, `OTLt`, `acc_nil` |
 | `Sum.lean` | `leadCount`, `dropLead`, `lead_lex`, `acc_of_headLe`, `acc_of_OT`, `wellFounded_OTLt` |
+| `Ord.lean` | the ordinal side: `Omega`, `Clos`, `CSet`, `psi` (needs mathlib) |
 
 ## The order
 
@@ -76,7 +77,9 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | sums: accessibility of principal terms gives `WellFounded OTLt` | done |
 | accessibility of the principal terms | **not done** — see below |
 | fundamental sequences, a `Rewrite` value | **not done** |
-| evaluation into the ordinals | **not done** |
+| `ψ` on the ordinals: definition and first facts | done |
+| the cardinality bound on `C_v(a)`, hence `ψ_v(a) < Ω_{v+1}` | **not done** |
+| the evaluation `Term → Ordinal` and its monotonicity | **not done** |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 `axiom`.
@@ -133,10 +136,16 @@ bounding term is what its induction runs on.
 ∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))
 ```
 
-This is the collapsing argument. Two routes: Buchholz's syntactic one through
-the sets `W_u` and the Bachmann property, which needs fundamental sequences
-first; or an evaluation into the ordinals, with well-foundedness pulled back
-along an `OrdHom`.
+This is the collapsing argument. The route taken here is the ordinal one:
+`Ord.lean` defines `ψ` on the ordinals from Maksudov's clauses, and the plan is
+an evaluation `Term → Ordinal` whose monotonicity on `OT` pulls
+well-foundedness back along `OrdHom.wf`.
+
+Next in `Ord.lean`: the cardinality bound `#(C_v(a)) ≤ ℵ_v`, which gives
+`ψ_v(a) < Ω_{v+1}` and with it everything else. The syntactic alternative —
+Buchholz's sets `W_u` and the Bachmann property — was not taken because it
+needs fundamental sequences for the extended system first, and those have no
+source here that has been checked.
 
 ## Naming
 

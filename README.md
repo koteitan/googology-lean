@@ -104,13 +104,18 @@ system of your own) that strictly decreases on every step.
 lake build
 ```
 
-Lean 4 v4.30.0. `Core/` has no external dependency; mathlib will be required
-only once `Notation/` is added.
+Lean 4 v4.30.0, with mathlib as the one dependency.
+
+`Googology.Core` imports nothing outside core Lean, so the whole termination
+machinery can be read and used without mathlib. mathlib enters only where a
+notation system evaluates into the ordinals — at present
+`Googology.Notation.ExBuchholz.Ord`.
 
 ## Status
 
-`Core/` is complete and builds with no `sorry`. `Notation/` and `Trans/` are
-not populated yet.
+`Core/` is complete and builds with no `sorry`. `Notation/ExBuchholz` has its
+terms, order, standard forms and the reduction of well-foundedness to the
+principal terms; its ordinal semantics is started. `Trans/` is empty.
 
 ## License
 

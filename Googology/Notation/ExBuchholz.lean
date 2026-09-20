@@ -3,3 +3,4 @@ import Googology.Notation.ExBuchholz.Order
 import Googology.Notation.ExBuchholz.Std
 import Googology.Notation.ExBuchholz.WF
 import Googology.Notation.ExBuchholz.Sum
+import Googology.Notation.ExBuchholz.Ord

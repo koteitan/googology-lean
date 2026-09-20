@@ -99,13 +99,17 @@ example (trans : Sim Src Tgt) (o : Eval Tgt ltO) (hO : WellFounded ltO) :
 lake build
 ```
 
-Lean 4 v4.30.0。`Core/` は外部依存なし。mathlib が要るのは `Notation/` を
-足してからである。
+Lean 4 v4.30.0。依存は mathlib 1 つだけである。
+
+`Googology.Core` は core Lean の外を何も import しない。だから停止性の道具一式は
+mathlib 無しで読めて使える。mathlib が入るのは、表記系が順序数へ評価する場所だけで
+ある。今のところ `Googology.Notation.ExBuchholz.Ord` である。
 
 ## 状態
 
-`Core/` は完成しており、`sorry` なしでビルドが通る。`Notation/` と `Trans/` は
-まだ空である。
+`Core/` は完成しており、`sorry` なしでビルドが通る。`Notation/ExBuchholz` は項・
+順序・標準形と、整礎性を主項に帰着させるところまで済んでいる。順序数の意味論は
+着手した。`Trans/` は空である。
 
 ## ライセンス
 
