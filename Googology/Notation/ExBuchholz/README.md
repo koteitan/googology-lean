@@ -39,7 +39,7 @@ which is the whole content of the extension.
 | `Std.lean` | `G`, `isOT`, `OT`, decidability |
 | `WF.lean` | `not_wellFounded_lt`, `cmp_cons_cons'`, `OT_head`, `OT_tail`, `OT_tail_head_le`, `OTLt`, `acc_nil` |
 | `Sum.lean` | `leadCount`, `dropLead`, `lead_lex`, `acc_of_headLe`, `acc_of_OT`, `wellFounded_OTLt` |
-| `Ord.lean` | the ordinal side: `Omega`, `Clos`, `CSet`, `psi` (needs mathlib) |
+| `Ord.lean` | the ordinal side: `Omega`, `Clos`, `CSet`, `psi`, the cardinality bound, `psi_lt_Omega_succ` (needs mathlib) |
 
 ## The order
 
@@ -78,7 +78,7 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | accessibility of the principal terms | **not done** — see below |
 | fundamental sequences, a `Rewrite` value | **not done** |
 | `ψ` on the ordinals: definition and first facts | done |
-| the cardinality bound on `C_v(a)`, hence `ψ_v(a) < Ω_{v+1}` | **not done** |
+| the cardinality bound on `C_v(a)`, hence `ψ_v(a) < Ω_{v+1}` | done |
 | the evaluation `Term → Ordinal` and its monotonicity | **not done** |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
@@ -141,8 +141,16 @@ This is the collapsing argument. The route taken here is the ordinal one:
 an evaluation `Term → Ordinal` whose monotonicity on `OT` pulls
 well-foundedness back along `OrdHom.wf`.
 
-Next in `Ord.lean`: the cardinality bound `#(C_v(a)) ≤ ℵ_v`, which gives
-`ψ_v(a) < Ω_{v+1}` and with it everything else. The syntactic alternative —
+`Ord.lean` now has the cardinality bound. The closure is presented as the
+union of finite stages, each stage is at most `max #(Iio Ω_v) ℵ₀` by cardinal
+arithmetic, and that maximum is `ℵ_v` for every `v` — including `v = 0`, where
+`Ω_0 = 1` but the closure is still countable. Since `ℵ_v < ℵ_{v+1}`, the
+closure cannot exhaust the ordinals below `Ω_{v+1}`, so
+`ψ_v(a) < Ω_{v+1}`.
+
+Next: `ψ_v(a) ∉ C_v(a)` (now immediate, the complement being nonempty),
+monotonicity in the argument, and then the evaluation `Term → Ordinal` with
+its monotonicity on `OT`. The syntactic alternative —
 Buchholz's sets `W_u` and the Bachmann property — was not taken because it
 needs fundamental sequences for the extended system first, and those have no
 source here that has been checked.

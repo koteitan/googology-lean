@@ -38,7 +38,7 @@ inductive Term where
 | `Std.lean` | `G`、`isOT`、`OT`、決定可能性 |
 | `WF.lean` | `not_wellFounded_lt`、`cmp_cons_cons'`、`OT_head`、`OT_tail`、`OT_tail_head_le`、`OTLt`、`acc_nil` |
 | `Sum.lean` | `leadCount`、`dropLead`、`lead_lex`、`acc_of_headLe`、`acc_of_OT`、`wellFounded_OTLt` |
-| `Ord.lean` | 順序数側。`Omega`、`Clos`、`CSet`、`psi`（mathlib が要る） |
+| `Ord.lean` | 順序数側。`Omega`、`Clos`、`CSet`、`psi`、濃度評価、`psi_lt_Omega_succ`（mathlib が要る） |
 
 ## 順序
 
@@ -75,7 +75,7 @@ inductive Term where
 | 主項の可到達性 | **未**。下を見よ |
 | 基本列、`Rewrite` の値 | **未** |
 | 順序数の上の `ψ` の定義と基本性質 | 済 |
-| `C_v(a)` の濃度評価、したがって `ψ_v(a) < Ω_{v+1}` | **未** |
+| `C_v(a)` の濃度評価、したがって `ψ_v(a) < Ω_{v+1}` | 済 |
 | 評価写像 `Term → Ordinal` とその単調性 | **未** |
 
 例外的に `sorry` を許しているわけではない。ファイルに `sorry` も `axiom` も無い。
@@ -131,8 +131,15 @@ theorem wellFounded_OTLt (HP : ∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))) :
 条項から順序数の上の `ψ` を定義しており、予定は評価写像 `Term → Ordinal` を作って、
 `OT` の上での単調性から `OrdHom.wf` で整礎性を引き戻すことである。
 
-`Ord.lean` の次は濃度評価 `#(C_v(a)) ≤ ℵ_v` である。これから `ψ_v(a) < Ω_{v+1}` が
-出て、その先が全部開く。構文的な道（Buchholz の集合 `W_u` と Bachmann 性質）を
+`Ord.lean` には濃度評価が入った。閉包を有限段の合併として表し、各段が濃度
+`max #(Iio Ω_v) ℵ₀` 以下であることを濃度の計算で示し、その最大値がどの `v` でも
+`ℵ_v` であることを示した——`Ω_0 = 1` の `v = 0` でも閉包は可算である。
+`ℵ_v < ℵ_{v+1}` だから、閉包は `Ω_{v+1}` 未満の順序数を覆いきれない。したがって
+`ψ_v(a) < Ω_{v+1}` である。
+
+次は `ψ_v(a) ∉ C_v(a)`（補集合が空でないと分かったので、もう即座に出る）、引数に
+ついての単調性、そして評価写像 `Term → Ordinal` とその `OT` 上での単調性である。
+構文的な道（Buchholz の集合 `W_u` と Bachmann 性質）を
 取らなかったのは、拡張版の基本列が先に要るのに、確認できた出典が手元に無いからで
 ある。
 
@@ -194,8 +201,15 @@ theorem wellFounded_OTLt (HP : ∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))) :
 条項から順序数の上の `ψ` を定義しており、予定は評価写像 `Term → Ordinal` を作って、
 `OT` の上での単調性から `OrdHom.wf` で整礎性を引き戻すことである。
 
-`Ord.lean` の次は濃度評価 `#(C_v(a)) ≤ ℵ_v` である。これから `ψ_v(a) < Ω_{v+1}` が
-出て、その先が全部開く。構文的な道（Buchholz の集合 `W_u` と Bachmann 性質）を
+`Ord.lean` には濃度評価が入った。閉包を有限段の合併として表し、各段が濃度
+`max #(Iio Ω_v) ℵ₀` 以下であることを濃度の計算で示し、その最大値がどの `v` でも
+`ℵ_v` であることを示した——`Ω_0 = 1` の `v = 0` でも閉包は可算である。
+`ℵ_v < ℵ_{v+1}` だから、閉包は `Ω_{v+1}` 未満の順序数を覆いきれない。したがって
+`ψ_v(a) < Ω_{v+1}` である。
+
+次は `ψ_v(a) ∉ C_v(a)`（補集合が空でないと分かったので、もう即座に出る）、引数に
+ついての単調性、そして評価写像 `Term → Ordinal` とその `OT` 上での単調性である。
+構文的な道（Buchholz の集合 `W_u` と Bachmann 性質）を
 取らなかったのは、拡張版の基本列が先に要るのに、確認できた出典が手元に無いからで
 ある。
 
