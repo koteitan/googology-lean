@@ -1,3 +1,5 @@
+import Googology.Core.WF
+
 /-!
 # Expansion systems
 
@@ -40,12 +42,8 @@ def Terminates : Prop :=
 
 /-- A well-founded system admits no infinite descending chain. -/
 theorem no_infinite_chain (h : R.WF) (f : Nat → R.State)
-    (hf : ∀ n, R.Rel (f (n + 1)) (f n)) : False := by
-  have key : ∀ a, Acc R.Rel a → ∀ n, f n ≠ a := by
-    intro a ha
-    induction ha with
-    | intro x _ ih => intro n hn; exact ih (f (n + 1)) (hn ▸ hf n) (n + 1) rfl
-  exact key (f 0) (h.apply (f 0)) 0 rfl
+    (hf : ∀ n, R.Rel (f (n + 1)) (f n)) : False :=
+  not_descending h f hf
 
 /-- Well-foundedness implies termination. -/
 theorem terminates_of_wf (h : R.WF) : R.Terminates := by

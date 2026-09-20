@@ -37,6 +37,7 @@ which is the whole content of the extension.
 | `Basic.lean` | `Term`, `cmp`, `lt`, `le`, decidability, `cmp_self`, `cmp_swap`, `cmp_eq_iff` |
 | `Order.lean` | `lt_irrefl`, `lt_trans`, `lt_trichotomy`, `lt_asymm` |
 | `Std.lean` | `G`, `isOT`, `OT`, decidability |
+| `WF.lean` | `not_wellFounded_lt`, `cmp_cons_cons'`, `OT_head`, `OT_tail`, `OT_tail_head_le`, `OTLt`, `acc_nil` |
 
 ## The order
 
@@ -69,7 +70,9 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | term type, order, decidability | done |
 | strict linear order | done |
 | `G`, standard forms, decidability | done |
-| well-foundedness | **not done** |
+| the unrestricted order is *not* well founded | done |
+| the order as a lexicographic product; standard form inherited by the parts | done |
+| well-foundedness of `OTLt` | **not done** — see below |
 | fundamental sequences, a `Rewrite` value | **not done** |
 | evaluation into the ordinals | **not done** |
 
@@ -85,6 +88,35 @@ and have **not** been calibrated against a reference implementation. The
 `#guard` lines are the only evidence so far, and they cover a handful of small
 terms. Treat the order as settled and the standard-form predicate as
 provisional until a calibration file exists.
+
+## Why standard forms are needed
+
+`WF.lean` proves that the order on *all* terms is not well founded:
+
+```
+Ω > ψ_0(Ω) > ψ_0(ψ_0(Ω)) > ψ_0(ψ_0(ψ_0(Ω))) > ⋯
+```
+
+descends forever, because `cmp` compares subscripts first and `0 < ψ_0(0)`.
+The chain leaves `OT` at its third term. So `not_wellFounded_lt` is not a
+defect; it is the reason the standard-form condition exists.
+
+## What remains for well-foundedness
+
+`WellFounded OTLt` splits in two along `cmp_cons_cons'`.
+
+1. **Principal terms.** `∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))`. This is the
+   collapsing argument and carries all the content. Either Buchholz's
+   syntactic route through the sets `W_u` and the Bachmann property — which
+   needs fundamental sequences first — or an evaluation into the ordinals with
+   well-foundedness pulled back along an `OrdHom`.
+2. **Sums.** Granting 1, every standard form is accessible. Structural
+   induction reduces this to accessibility for a lexicographic product. The
+   nested induction does not close directly, because a term below `cons a b r`
+   with a smaller head carries an unrelated tail; `OT_tail_head_le` repairs it,
+   and the induction then runs on the number of leading copies of the head.
+
+The header of `WF.lean` states both in full.
 
 ## Naming
 
