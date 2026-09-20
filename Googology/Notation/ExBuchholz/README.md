@@ -38,6 +38,7 @@ which is the whole content of the extension.
 | `Order.lean` | `lt_irrefl`, `lt_trans`, `lt_trichotomy`, `lt_asymm` |
 | `Std.lean` | `G`, `isOT`, `OT`, decidability |
 | `WF.lean` | `not_wellFounded_lt`, `cmp_cons_cons'`, `OT_head`, `OT_tail`, `OT_tail_head_le`, `OTLt`, `acc_nil` |
+| `Sum.lean` | `leadCount`, `dropLead`, `lead_lex`, `acc_of_headLe`, `acc_of_OT`, `wellFounded_OTLt` |
 
 ## The order
 
@@ -72,7 +73,8 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | `G`, standard forms, decidability | done |
 | the unrestricted order is *not* well founded | done |
 | the order as a lexicographic product; standard form inherited by the parts | done |
-| well-foundedness of `OTLt` | **not done** — see below |
+| sums: accessibility of principal terms gives `WellFounded OTLt` | done |
+| accessibility of the principal terms | **not done** — see below |
 | fundamental sequences, a `Rewrite` value | **not done** |
 | evaluation into the ordinals | **not done** |
 
@@ -101,22 +103,40 @@ descends forever, because `cmp` compares subscripts first and `0 < ψ_0(0)`.
 The chain leaves `OT` at its third term. So `not_wellFounded_lt` is not a
 defect; it is the reason the standard-form condition exists.
 
-## What remains for well-foundedness
+## Well-foundedness: what is done and what remains
 
-`WellFounded OTLt` splits in two along `cmp_cons_cons'`.
+`Sum.lean` proves
 
-1. **Principal terms.** `∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))`. This is the
-   collapsing argument and carries all the content. Either Buchholz's
-   syntactic route through the sets `W_u` and the Bachmann property — which
-   needs fundamental sequences first — or an evaluation into the ordinals with
-   well-foundedness pulled back along an `OrdHom`.
-2. **Sums.** Granting 1, every standard form is accessible. Structural
-   induction reduces this to accessibility for a lexicographic product. The
-   nested induction does not close directly, because a term below `cons a b r`
-   with a smaller head carries an unrelated tail; `OT_tail_head_le` repairs it,
-   and the induction then runs on the number of leading copies of the head.
+```lean
+theorem wellFounded_OTLt (HP : ∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))) :
+    WellFounded OTLt
+```
 
-The header of `WF.lean` states both in full.
+so the whole question is now **one hypothesis about principal terms**. Sums
+carry no further content.
+
+How that half goes: a standard form has weakly decreasing principal terms
+(`OT_tail_head_le`), so one whose head is at most `p` is a block of copies of
+`p` followed by a term whose head is strictly below `p`. `lead_lex` says the
+comparison reads that presentation lexicographically — a longer block of `p`
+makes a term larger, and only equal blocks let the rest decide. So the
+induction runs on the block length in `Nat` and, within a fixed length, on
+accessibility of the part after the block. A term outside `OT` is accessible
+for free, since `OTLt y t` demands `OT t`.
+
+`acc_of_headLe` needs no global hypothesis at all: accessibility of the
+bounding term is what its induction runs on.
+
+**What remains** is `HP` itself:
+
+```
+∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))
+```
+
+This is the collapsing argument. Two routes: Buchholz's syntactic one through
+the sets `W_u` and the Bachmann property, which needs fundamental sequences
+first; or an evaluation into the ordinals, with well-foundedness pulled back
+along an `OrdHom`.
 
 ## Naming
 

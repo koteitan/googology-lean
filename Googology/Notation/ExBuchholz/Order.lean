@@ -91,6 +91,48 @@ theorem lt_trichotomy (x y : Term) : x < y ∨ x = y ∨ y < x := by
 theorem lt_asymm {x y : Term} (h : x < y) : ¬ y < x :=
   fun h' => lt_irrefl x (lt_trans h h')
 
+/-! ### The non-strict order -/
+
+theorem le_refl (x : Term) : x ≤ x := by
+  show cmp x x ≠ .gt
+  rw [cmp_self]; intro h; cases h
+
+theorem le_iff_lt_or_eq {x y : Term} : x ≤ y ↔ x < y ∨ x = y := by
+  constructor
+  · intro h
+    have h' : cmp x y ≠ .gt := h
+    cases hc : cmp x y with
+    | lt => exact Or.inl hc
+    | eq => exact Or.inr (cmp_eq_iff.mp hc)
+    | gt => exact absurd hc h'
+  · rintro (h | rfl)
+    · show cmp x y ≠ .gt
+      rw [show cmp x y = .lt from h]; intro hh; cases hh
+    · show cmp x x ≠ .gt
+      rw [cmp_self]; intro hh; cases hh
+
+theorem le_of_lt {x y : Term} (h : x < y) : x ≤ y := le_iff_lt_or_eq.mpr (Or.inl h)
+
+theorem le_trans {x y z : Term} (h₁ : x ≤ y) (h₂ : y ≤ z) : x ≤ z := by
+  rcases le_iff_lt_or_eq.mp h₁ with h | rfl
+  · rcases le_iff_lt_or_eq.mp h₂ with h' | rfl
+    · exact le_of_lt (lt_trans h h')
+    · exact le_of_lt h
+  · exact h₂
+
+theorem lt_of_le_of_ne {x y : Term} (h : x ≤ y) (hne : x ≠ y) : x < y := by
+  rcases le_iff_lt_or_eq.mp h with h' | rfl
+  · exact h'
+  · exact absurd rfl hne
+
+theorem not_le_of_lt {x y : Term} (h : x < y) : ¬ y ≤ x := by
+  intro hle
+  have hle' : cmp y x ≠ .gt := hle
+  apply hle'
+  have hs := cmp_swap x y
+  rw [show cmp x y = .lt from h] at hs
+  exact hs.symm
+
 /-! ### Sanity checks
 
 `0`, `1 = ψ_0(0)`, `2 = 1 + 1`, `ω = ψ_0(1)` and `Ω = ψ_1(0)`. -/
