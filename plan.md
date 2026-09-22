@@ -267,7 +267,8 @@ The hierarchy is settled too: `BMS/ZeroRow.lean` says a row of zeros
 underneath changes nothing at every number of rows, and the generator
 `(0,…,0)(1,…,1)` with `r + 2` rows expands at `N` to the generators with
 `r + 1` rows and that zero row already in place, so `bmsL r` sits inside
-`bmsL (r + 1)` and the same for all matrices.
+`bmsL (r + 1)`, and inside `bmsL s` for every `s ≥ r`, the same for all
+matrices.
 
 The two things left are not Lean problems.
 

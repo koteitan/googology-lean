@@ -19,6 +19,9 @@ one more fact, `expandRL_gen`: the generator `(0,…,0)(1,…,1)` with `r + 2`
 rows expands at `N` to `(0,…,0)(1,…,1)⋯(N,…,N)` with `r + 1` rows and a row of
 zeros underneath.  So the zero row of a standard matrix is standard too, by
 induction over reachability.
+
+Iterating the step gives `bmsL_simLe`: `r ≤ s` puts `bmsL r` inside `bmsL s`,
+with `s - r` rows of zeros underneath, which `bmsL_simAdd_map` states.
 -/
 
 namespace Googology.Trans.BMS
@@ -290,5 +293,37 @@ def bmsAllL_homSucc (r : Nat) : StepHom (bmsAllL r) (bmsAllL (r + 1)) where
   map_step := fun l N =>
     Subtype.ext (expandRL_zeroRow (r := r + 1) (by omega) N l.1 l.2).symm
   map_halted := fun l h => (zeroRow_nil_iff l.1).mp h
+
+/-! ### The whole hierarchy -/
+
+/-- **`r + 1` rows sit inside `r + d + 1`**, by writing `d` rows of zeros
+underneath. -/
+def bmsL_simAdd (r : Nat) : ∀ d : Nat, Sim (bmsL r) (bmsL (r + d))
+  | 0 => Sim.refl _
+  | d + 1 => (bmsL_simAdd r d).comp (bmsL_homSucc (r + d)).toSim
+
+/-- And that is what the map does. -/
+theorem bmsL_simAdd_map (r : Nat) : ∀ (d : Nat) (l : (bmsL r).State),
+    ((bmsL_simAdd r d).map l).1 = zeroRow^[d] l.1 := by
+  intro d
+  induction d with
+  | zero => intro l; rfl
+  | succ m ih =>
+    intro l
+    rw [Function.iterate_succ_apply', ← ih l]
+    rfl
+
+/-- **So the number of rows only goes up.** -/
+def bmsL_simLe {r s : Nat} (h : r ≤ s) : Sim (bmsL r) (bmsL s) :=
+  Nat.add_sub_cancel' h ▸ bmsL_simAdd r (s - r)
+
+/-- The same for all matrices, standard or not. -/
+def bmsAllL_simAdd (r : Nat) : ∀ d : Nat, Sim (bmsAllL r) (bmsAllL (r + d))
+  | 0 => Sim.refl _
+  | d + 1 => (bmsAllL_simAdd r d).comp (bmsAllL_homSucc (r + d)).toSim
+
+/-- And the same conclusion. -/
+def bmsAllL_simLe {r s : Nat} (h : r ≤ s) : Sim (bmsAllL r) (bmsAllL s) :=
+  Nat.add_sub_cancel' h ▸ bmsAllL_simAdd r (s - r)
 
 end Googology.Trans.BMS

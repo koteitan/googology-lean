@@ -63,7 +63,7 @@ let it be read as one of the theorems above.
 | BMS with itself | `BMS/AllL.lean` | `Sim` | the rule on **every** matrix, standard or not, as a system that runs, with the standard ones inside it |
 | BMS with itself | `BMS/Zero.lean` | — | that a row of zeros underneath changes nothing: the two-row rule on it is the one-row rule |
 | BMS with itself | `BMS/Embed.lean` | `StepHom` | **the primitive sequence system sits inside the pair sequence system** |
-| BMS with itself | `BMS/ZeroRow.lean` | `StepHom` | **the same at every number of rows**: `r + 1` rows sit inside `r + 2`, standard matrices and all matrices |
+| BMS with itself | `BMS/ZeroRow.lean` | `StepHom`, `Sim` | **the same at every number of rows**: `r + 1` rows sit inside `r + 2`, and inside `s + 1` for any `s ≥ r` |
 | BMS with itself | `BMS/Entries2.lean` | — | **two-row expansion written on the entries, that it is `BM4.expand`, and that a run of it ends** |
 | BMS with itself | `BMS/Pair.lean` | — | the pair sequence system as a `Rewrite` whose step runs, with its generators |
 | BMS with itself | `BMS/Agree.lean` | — | that the one-row, two-row and general rules agree, and the general system as a `Rewrite` with its generators |
