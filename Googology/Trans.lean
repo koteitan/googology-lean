@@ -5,6 +5,7 @@ import Googology.Trans.BMS.Anc
 import Googology.Trans.BMS.EntriesR
 import Googology.Trans.BMS.Entries2
 import Googology.Trans.BMS.AllL
+import Googology.Trans.BMS.Zero
 import Googology.Trans.BMS.Pair
 import Googology.Trans.BMS.Agree
 import Googology.Trans.BMS.Same

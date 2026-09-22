@@ -341,4 +341,16 @@ def runR (r : Nat) : Nat → Nat → List (List Nat) → List (List Nat)
 #guard (List.range 9).map (fun i => (runR 3 i 0 [[5,2,9],[1,1,1],[4,0,3]]).length)
   == [3, 2, 1, 0, 0, 0, 0, 0, 0]
 
+/-! ### A row of zeros underneath
+
+`Trans.BMS.expand2L_withZero` says the two-row rule on a one-row matrix with a
+zero row added is the one-row rule. The matrices stay standard too, which the
+theorem does not claim: `./bms -s` says so for the four below. -/
+
+#guard ([[0,1,2], [0,1,1], [0,1,2,1,1], [0,1,0,1]] : List (List Nat)).all fun l =>
+  expand2L 1 (withZero l) == withZero (expandL 1 0 l)
+
+#guard ([[0,1,2], [0,1,1], [0,1,2,1,1], [0,1,0,1]] : List (List Nat)).all fun l =>
+  (List.range 3).all fun n => expand2L n (withZero l) == withZero (expandL n 0 l)
+
 end Googology.Trans.BMS
