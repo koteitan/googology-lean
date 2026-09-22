@@ -61,7 +61,7 @@ part of `Core`.
 No `sorry`, no external dependency. A project that only wants termination can
 import this and nothing else.
 
-### `Notation/ExBuchholz/` — the pilot, in progress
+### `Notation/ExBuchholz/` — the pilot, done
 
 | file | state |
 |---|---|
@@ -73,10 +73,15 @@ import this and nothing else.
 | `Ord.lean` | done — `ψ` on the ordinals, the cardinality bound, downward closure, additive principality |
 | `Eval.lean` | done — `val`, `Lam`, `val_mem_CSet`, the two `ψ` comparison helpers |
 | `Mono.lean` | done — the simultaneous induction, `val_lt_val`, `OTLt_wf` |
-| `FS.lean` | done except one lemma — `dom`, `fs`, `fs_lt`, `dom_eq_one_or_tw`, `step_lt`, `exb` |
+| `FS.lean` | done — `dom`, `fs`, `fs_lt`, `dom_eq_one_or_tw`, `step_lt`, `exb` |
+| `Closure.lean` | done — Buchholz 3.4, 3.5, 3.6, the Bachmann property, and 3.3 from it: `bachmann`, `OTFS_thm`, `Trian_fs_thm` |
+| `System.lean` | done — `exbOT` on the countable standard forms, `exbOT_wf`, `exbOT_terminates` |
 
-**`ExBuchholz` is finished as a notation system**: `OTLt_wf` says the order on
-its standard forms is well founded, with no hypothesis.
+**`ExBuchholz` is finished**: `OTLt_wf` says the order on its standard forms
+is well founded with no hypothesis, and `exbOT_terminates` says the expansion
+system on the countable ones ends, also with no hypothesis. What is not proved
+is that `val` is onto the ordinals below `Λ`; the injective half is
+`val_inj_of_OT`.
 
 ### `Notation/BMS/` — done
 
@@ -93,13 +98,20 @@ labels in `R_r` and Σ-elementary substructures — which this package requires.
 `Subrelation.wf`; `Core` supplies the rest. `Pat.StdR` there is `Rewrite.Rel`
 here, written out by hand, so the fit needed no adaptation.
 
-### `Trans/` — one row done
+### `Trans/` — one row done, and the hierarchy
 
 `Trans/BMS/` translates a one-row Bashicu matrix into an extended Buchholz
 term and back: `read` and `unread` for the reading, `OneRow.lean` for what
 `BM4.expand` does to one row, `Commute.lean` for the commutation with `[ ]`,
 `Cut.lean` and `Entries.lean` for the bookkeeping, and `Prim.lean` and
 `Bms.lean` for the `StepHom` and the ordinal it gives.
+
+It also relates the systems to each other. `EntriesR.lean` writes the rule on
+the entries at every number of rows, `Agree.lean` says the one-row, two-row
+and general rules are one rule, `Same.lean` says the general system at one and
+two rows **is** the primitive and pair sequence system, and `ZeroRow.lean`
+says a row of zeros underneath changes neither the rule nor the ordinal, so
+`bmsL r` sits inside `bmsL s` whenever `r ≤ s`.
 
 ### `Notation/DBMS/` — done
 

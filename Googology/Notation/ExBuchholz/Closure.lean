@@ -16,7 +16,7 @@ any `c` between them, together with `z`.  The chain is
 | 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b`, `ψ_u(b₀) ⊲_z ψ_u(b)`, `ψ_{b₀}(0) ⊲_z ψ_b(0)` | **done** |
 | 3.2(b) | on a term-indexed domain, `z₁ < z₂` ⟹ `a[z₁] < a[z₂]` | **done** (`fs_mono`) |
 | 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done**, from 3.3 |
-| 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | not yet |
+| 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | **done** (`OTFS_thm`) |
 
 3.4 is the one that does the work: it turns "bounded relative to `z`" into the
 standard-form condition outright.  Buchholz argues by taking a subterm of `b`

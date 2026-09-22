@@ -56,7 +56,7 @@ BMS は停止する
 `sorry` なし、外部依存なし。停止性だけが欲しいプロジェクトは、これだけ import
 すればよい。
 
-### `Notation/ExBuchholz/` — 試験台。作業中
+### `Notation/ExBuchholz/` — 試験台。済
 
 | ファイル | 状態 |
 |---|---|
@@ -68,10 +68,14 @@ BMS は停止する
 | `Ord.lean` | 済。順序数の上の `ψ`、濃度評価、下方閉包性、加法的主要性 |
 | `Eval.lean` | 済。`val`、`Lam`、`val_mem_CSet`、`ψ` の比較補題 2 本 |
 | `Mono.lean` | 済。同時帰納、`val_lt_val`、`OTLt_wf` |
-| `FS.lean` | 補題 1 本を除き済。`dom`、`fs`、`fs_lt`、`dom_eq_one_or_tw`、`step_lt`、`exb` |
+| `FS.lean` | 済。`dom`、`fs`、`fs_lt`、`dom_eq_one_or_tw`、`step_lt`、`exb` |
+| `Closure.lean` | 済。Buchholz 3.4、3.5、3.6、Bachmann 性、そこから 3.3。`bachmann`、`OTFS_thm`、`Trian_fs_thm` |
+| `System.lean` | 済。可算標準形の上の `exbOT`、`exbOT_wf`、`exbOT_terminates` |
 
-**表記系としての `ExBuchholz` は完成した。**`OTLt_wf` が、標準形の上の順序が
-仮定なしで整礎であることを言う。
+**`ExBuchholz` は完成した。**`OTLt_wf` が標準形の上の順序は仮定なしで整礎だと
+言い、`exbOT_terminates` が可算標準形の上の展開系は止まると、これも仮定なしで
+言う。証明していないのは `val` が `Λ` 未満の順序数の上へ全射であることで、単射の
+側は `val_inj_of_OT` である。
 
 ### `Notation/BMS/` — 済
 
@@ -89,12 +93,18 @@ BMS は停止する
 こちらの `Rewrite.Rel` を手で書き下したものになっていたので、合わせ込みは
 要らなかった。
 
-### `Trans/` — 1 行は完了
+### `Trans/` — 1 行は完了。階層も
 
 `Trans/BMS/` は 1 行の BMS を拡張ブーフホルツ項に翻訳し、また戻す。読み取りが
 `read` と `unread`、1 行での `BM4.expand` が `OneRow.lean`、`[ ]` との可換性が
 `Commute.lean`、添字の突き合わせが `Cut.lean` と `Entries.lean`、`StepHom` と
 そこから出る順序数が `Prim.lean` と `Bms.lean` である。
+
+系どうしの関係も扱う。`EntriesR.lean` が行数によらず規則を成分列の上に書き、
+`Agree.lean` が 1 行・2 行・一般の規則は一つの規則だと言い、`Same.lean` が一般の
+系の 1 行と 2 行は原始数列系とペア数列系**そのもの**だと言い、`ZeroRow.lean` が
+下に 0 の行を足しても規則も順序数も変わらないと言う。だから `r ≤ s` なら `bmsL r`
+は `bmsL s` の中に入る。
 
 ### `Notation/DBMS/` — 済
 
