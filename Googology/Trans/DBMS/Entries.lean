@@ -83,4 +83,8 @@ theorem dbmsL_zero_terminates : (dbmsL 0).Terminates := by
   have hl : (g n).len = 0 := hn
   rw [hl, List.range_zero, List.map_nil]
 
+/-- **From a DBMS generator with one row, any expansion sequence ends.** -/
+theorem dbmsLStd_zero_terminates : (dbmsLStd 0).Terminates :=
+  (dbmsLStd 0).of_terminates dbmsL_zero_terminates
+
 end Googology.Trans.DBMS

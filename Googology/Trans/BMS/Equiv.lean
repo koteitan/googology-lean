@@ -98,4 +98,8 @@ def primStd : prim.Std where
   gen_std := fun _ => trivial
   step_std := fun _ _ _ => trivial
 
+/-- **From a generator, any expansion sequence ends.** -/
+theorem primStd_terminates : primStd.Terminates :=
+  primStd.of_terminates prim_terminates
+
 end Googology.Trans.BMS

@@ -24,6 +24,7 @@ Names are written relative to `Googology`.
 | the one-row, two-row and general rules are one rule | `Trans.BMS.expandRL_one`, `Trans.BMS.expandRL_two` |
 | the systems on the entries, with their generators | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
 | the general system at one and two rows is the primitive and pair sequence system | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
+| from a generator, any expansion sequence ends | `Trans.BMS.bmsLStd_terminates`, `Trans.BMS.primStd_terminates`, `Trans.BMS.pairStd_terminates` |
 | DBMS is the same rule with other generators | `Trans.DBMS.dbmsL`, `Trans.DBMS.dbmsL_zero_terminates` |
 
 ### Extended Buchholz's ψ
@@ -48,6 +49,7 @@ Names are written relative to `Googology`.
 | below `ψ_0(Ω)` a term is the least upper bound of its fundamental sequence | `Trans.BMS.fs_lub` |
 | **the standard one-row matrices are exactly the matrices whose term is standard** | `Trans.BMS.std_entries_iff`, `Trans.BMS.exists_bms_of_lt_e0` |
 | **the primitive sequence system and the standard forms below `ψ_0(Ω)` are equivalent** | `Trans.BMS.primEquivE0` |
+| a one-row matrix is determined by the ordinal it names, and is the least upper bound of its own expansions | `Trans.BMS.bmsOrdEval_inj`, `Trans.BMS.expandL_lub` |
 | one row terminates, by translation rather than by labels | `Trans.BMS.bms_one_terminates`, `Trans.BMS.prim_terminates` |
 | the same for one-row DBMS, whose termination is not otherwise proved here | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
 

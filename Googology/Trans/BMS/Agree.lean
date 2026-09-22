@@ -164,4 +164,9 @@ def bmsLStd (r : Nat) : (bmsL r).Std where
   step_std := fun _ _ _ => trivial
 
 
+/-- **From a generator, any expansion sequence ends**, at any number of
+rows. -/
+theorem bmsLStd_terminates (r : Nat) : (bmsLStd r).Terminates :=
+  (bmsLStd r).of_terminates (bmsL_terminates r)
+
 end Googology.Trans.BMS

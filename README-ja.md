@@ -23,6 +23,7 @@
 | 1 行・2 行・一般の規則が一つの規則であること | `Trans.BMS.expandRL_one`, `Trans.BMS.expandRL_two` |
 | 成分列の上の系と、その生成元 | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
 | 一般の系の 1 行が原始数列系、2 行がペア数列系であること | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
+| 生成元から出発した展開列は必ず止まること | `Trans.BMS.bmsLStd_terminates`, `Trans.BMS.primStd_terminates`, `Trans.BMS.pairStd_terminates` |
 | DBMS は同じ規則で生成元だけが違う | `Trans.DBMS.dbmsL`, `Trans.DBMS.dbmsL_zero_terminates` |
 
 ### 拡張ブーフホルツ ψ
@@ -47,6 +48,7 @@
 | `p0(W)` 未満で項が基本列の上限であること | `Trans.BMS.fs_lub` |
 | **標準 1 行行列とは、項が標準形である行列のことちょうどである** | `Trans.BMS.std_entries_iff`, `Trans.BMS.exists_bms_of_lt_e0` |
 | **原始数列系と `p0(W)` 未満の標準形が同値であること** | `Trans.BMS.primEquivE0` |
+| 1 行の行列は名指す順序数で決まり、自分の展開たちの上限であること | `Trans.BMS.bmsOrdEval_inj`, `Trans.BMS.expandL_lub` |
 | ラベルではなく翻訳による 1 行の停止性 | `Trans.BMS.bms_one_terminates`, `Trans.BMS.prim_terminates` |
 | 1 行 DBMS についての同じこと。こちらは他に停止性の証明がない | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
 

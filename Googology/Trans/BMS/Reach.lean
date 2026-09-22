@@ -18,7 +18,9 @@ ends where the two terms are equal, and `unread_read` makes that an equality
 of matrices.
 
 `exists_bms_of_lt_e0` reads the conclusion on the ordinal side: every standard
-form below `ψ_0(Ω)` is named by a one-row matrix.
+form below `ψ_0(Ω)` is named by a one-row matrix, and `bmsOrdEval_inj` says no
+two matrices name the same one.  `expandL_lub` restates `fs_lub` where the
+matrices are: a matrix is the least upper bound of its own expansions.
 -/
 
 namespace Googology.Trans.BMS
@@ -129,5 +131,33 @@ theorem exists_bms_of_lt_e0 {X : Term} (hOT : OT X) (hlt : X < te0) :
   obtain ⟨A, hStd, hA⟩ := exists_std_of_col hc (by rw [hl]; exact hOT)
   exact ⟨⟨A, hStd⟩, by rw [hA]; exact hl⟩
 
+
+/-! ### On the matrices -/
+
+/-- **A one-row matrix is determined by the ordinal it names.** -/
+theorem bmsOrdEval_inj {A B : (Googology.Notation.BMS.bms 1).State}
+    (h : bmsOrdEval.val A = bmsOrdEval.val B) : entries A.1 = entries B.1 := by
+  have hA := std_entries A.1 A.2
+  have hB := std_entries B.1 B.2
+  exact read_inj hA.1 hB.1 (val_inj_of_OT hA.2 hB.2 h)
+
+/-- **A one-row matrix is the least upper bound of its expansions.**  When the
+matrix is not a successor, the terms its expansions read as increase, each is
+below the term the matrix reads as, and nothing below that term is above all
+of them. -/
+theorem expandL_lub {l : List Nat} (hc : Col 0 l) (hOT : OT (read 0 l))
+    (hd : dom (read 0 l) = tw) :
+    (∀ n : Nat, read 0 (expandL n 0 l) < read 0 (expandL (n + 1) 0 l))
+      ∧ (∀ n : Nat, read 0 (expandL n 0 l) < read 0 l)
+      ∧ (∀ m : List Nat, Col 0 m → OT (read 0 m) → read 0 m < read 0 l →
+          ∃ n, read 0 m ≤ read 0 (expandL n 0 l)) := by
+  obtain ⟨hinc, hlt, hcof⟩ := fs_lub hOT (allNil_read 0 l) hd
+  refine ⟨fun n => ?_, fun n => ?_, fun m hcm hOTm hm => ?_⟩
+  · rw [read_expandL n l 0 hc, read_expandL (n + 1) l 0 hc]
+    exact hinc (n + 1)
+  · rw [read_expandL n l 0 hc]
+    exact hlt (n + 1)
+  · obtain ⟨n, hn⟩ := hcof (read 0 m) hOTm (allNil_read 0 m) hm
+    exact ⟨n, by rw [read_expandL n l 0 hc]; exact hn⟩
 
 end Googology.Trans.BMS

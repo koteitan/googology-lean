@@ -62,4 +62,8 @@ def pairStd : pairL.Std where
   gen_std := fun _ => trivial
   step_std := fun _ _ _ => trivial
 
+/-- **From a generator, any expansion sequence ends.** -/
+theorem pairStd_terminates : pairStd.Terminates :=
+  pairStd.of_terminates pairL_terminates
+
 end Googology.Trans.BMS
