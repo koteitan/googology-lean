@@ -201,14 +201,15 @@ admissible index (`tower_lt_dom`). Climbing needs 3.2(b), the monotonicity of
 `fs` in its index, which is `fs_mono` there.
 
 `Trian_case4` then proves the branch from one statement, `SubBound`, about
-the tower's subscript `Z[0]` alone:
+the subscript `Z` of `dom X₂` alone:
 
 ```
-X₂[W₀] ≤ c ≤ X₂ ⟹ G_u(Z[0]) ≼ {c} ∪ G_u(c) ∪ {0}
+X₂[W₀] ≤ c ≤ X₂ ⟹ G_u(Z) ≼ {c} ∪ G_u(c) ∪ {0}
 ```
 
-`tower_G_le` carries that up the tower: the same bound then holds of every
-rung `W_i`, for every `c` between `X₂[W_i]` and `X₂`. Its induction is on the
+`sub_G_le` carries that from `Z` to `Z[0]`, through 3.6 at `Z`, and
+`tower_G_le` carries it from there up the tower: the same bound then holds of
+every rung `W_i`, for every `c` between `X₂[W_i]` and `X₂`. Its induction is on the
 rung, and it uses 3.6 at `X₂` and the monotonicity of the tower.
 
 The bound has to be relative to `c`. Buchholz's own invariant is the absolute
@@ -219,7 +220,7 @@ is also the value it produces, and `G_0` of it holds `ψ_Ω(0)`, above `ψ_A(0)`
 because `A` is countable.
 
 `SubBound` is the one place left where 3.6 calls on 3.3: it asks for something
-about `Z[0]` that the standardness of `X₂` has to supply. Buchholz proves 3.3
+about `Z` that the standardness of `X₂` has to supply. Buchholz proves 3.3
 and 3.6 by one simultaneous induction, and splitting them, as here, is what
 leaves it open. `test/ExBuchholzCheck.lean` carries the term above and checks
 `SubBound` on every standard case-4 form of size at most 7 — 158 of them,

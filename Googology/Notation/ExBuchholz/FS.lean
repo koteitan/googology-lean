@@ -606,6 +606,36 @@ theorem eq_numeral_of_lt_tw : ∀ {Y : Term}, OT Y → Y < tw → ∃ n : Nat, Y
     obtain ⟨k, hk⟩ := iht (OT_tail hOT) ht
     exact ⟨k + 1, by rw [hk]; rfl⟩
 
+/-- `dom` stays inside `OT`: it is built from subterms of a standard form. -/
+theorem OT_dom : ∀ {X : Term}, OT X → OT (dom X) := by
+  intro X
+  induction X with
+  | nil => intro _; exact rfl
+  | cons X₁ X₂ t ih1 ih2 iht =>
+    intro hOT
+    cases t with
+    | cons c d u =>
+      show OT (dom (cons c d u))
+      exact iht (OT_tail hOT)
+    | nil =>
+      rw [dom]
+      split
+      · rename_i h1
+        have hX₂ : X₂ = nil := dom_eq_nil_iff.mp h1
+        subst hX₂
+        split
+        · exact hOT
+        · split
+          · exact hOT
+          · exact ih1 (OT_fst hOT)
+      · split
+        · decide
+        · split
+          · decide
+          · split
+            · exact ih2 (OT_snd hOT)
+            · decide
+
 /-! ## Monotonicity in the index, and the tower of Buchholz's case 4 -/
 
 theorem fs_mono_aux : ∀ n : Nat, ∀ X Y₁ Y₂ : Term, size X ≤ n →
@@ -709,16 +739,18 @@ theorem fs_ne_nil {X Y : Term}
 /-- In the configuration of Buchholz's case 4 the domain is a collapse
 `ψ_Z(0)` with `Z ≠ 0`, so `Z` has a fundamental sequence of its own and
 `Z[0] < Z`. -/
+theorem subOf_dom_ne_nil {W : Term} (h0 : dom W ≠ nil) (h1 : dom W ≠ t1)
+    (hw : dom W ≠ tw) : subOf (dom W) ≠ nil := by
+  intro hZ
+  rcases dom_shape W with h | h | ⟨A, h⟩
+  · exact absurd h h0
+  · exact absurd h hw
+  · rw [h] at hZ; simp only [subOf] at hZ; subst hZ; exact absurd h h1
+
 theorem subOf_fs_lt {W : Term} (h0 : dom W ≠ nil) (h1 : dom W ≠ t1)
-    (hw : dom W ≠ tw) : fs (subOf (dom W)) nil < subOf (dom W) := by
-  have hZ : subOf (dom W) ≠ nil := by
-    intro hZ
-    have := dom_shape W
-    rcases this with h | h | ⟨A, h⟩
-    · exact absurd h h0
-    · exact absurd h hw
-    · rw [h] at hZ; simp only [subOf] at hZ; subst hZ; exact absurd h h1
-  exact fs_lt (lt_of_le_of_ne (nil_le _) (fun h => dom_ne_nil hZ h.symm))
+    (hw : dom W ≠ tw) : fs (subOf (dom W)) nil < subOf (dom W) :=
+  fs_lt (lt_of_le_of_ne (nil_le _)
+    (fun h => dom_ne_nil (subOf_dom_ne_nil h0 h1 hw) h.symm))
 
 theorem isNum_numeral : ∀ n : Nat, isNum (numeral n) = true
   | 0 => rfl

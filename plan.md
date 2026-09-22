@@ -138,9 +138,9 @@ That is `Mono.lean`.
    3.3 for the extended system, and the only thing between the library and
    `exb.WF`. Its route is 3.4 and 3.6, and both are proved in `Closure.lean` —
    3.6 as `Trian_fs`, modulo one statement, `SubBound`: what `G` sees in the
-   subscript of the tower of Buchholz's case 4 is bounded by anything between
-   the first value the tower produces and `X₂`. `tower_G_le` carries that up
-   the whole tower. `SubBound` is the one place where 3.6 calls on 3.3, so the
+   subscript `Z` of `dom X₂` is bounded by anything between the first value
+   the tower of Buchholz's case 4 produces and `X₂`. `sub_G_le` and
+   `tower_G_le` carry that up the whole tower. `SubBound` is the one place where 3.6 calls on 3.3, so the
    two have to be proved by one simultaneous induction. The bound has to be
    relative — Buchholz's absolute form is false once subscripts are terms —
    and `test/ExBuchholzCheck.lean` carries both the term that breaks it and

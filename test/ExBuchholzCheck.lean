@@ -73,9 +73,10 @@ standard. -/
 /-! ## The tower of Buchholz's case 4
 
 `Closure.lean` proves Lemma 3.6 from one statement, `SubBound`: what `G` sees
-in the tower's subscript `Z[0]` is bounded by any `c` between `X₂[W₀]`, the
+in the subscript `Z` of `dom X₂` is bounded by any `c` between `X₂[W₀]`, the
 first value the tower produces, and `X₂` itself, together with `0`.
-`tower_G_le` carries that bound up the whole tower.
+`sub_G_le` carries that bound from `Z` to `Z[0]`, and `tower_G_le` carries it
+from there up the whole tower.
 -/
 
 /-- Is `X = ψ_{X₁}(X₂)` in the configuration of Buchholz's case 4? -/
@@ -85,10 +86,10 @@ def isCase4 : Term → Bool
         && !(decide (dom X₂ < cons X₁ X₂ nil))
   | _ => false
 
-/-- The tower's subscript `Z[0]`, its `i`-th rung `W_i`, the value `X₂[W_i]`
-that rung produces, and `X₂` itself. -/
+/-- The subscript `Z` of `dom X₂`, the `i`-th rung `W_i` of the tower, the
+value `X₂[W_i]` that rung produces, and `X₂` itself. -/
 def zsub : Term → Term
-  | cons _ X₂ nil => fs (subOf (dom X₂)) nil
+  | cons _ X₂ nil => subOf (dom X₂)
   | _ => nil
 
 def rung : Term → Nat → Term
@@ -124,6 +125,15 @@ passes; only size 7 is kept here, to keep the build quick. -/
 #guard ((upTo 7).filter (fun X => isOT X && isCase4 X)).all fun X =>
   (upTo 2).all fun u =>
     (rungVal X 0 :: argOf X :: betweens X (upTo 4)).all fun c => subRel X u c
+
+/-! Stronger than `SubBound` needs, and observed to hold: the `{c}` witness is
+never used — everything `G` sees in `Z` is already at or below something `G`
+sees in `c`, or is `0`. -/
+
+#guard ((upTo 7).filter (fun X => isOT X && isCase4 X)).all fun X =>
+  (upTo 2).all fun u =>
+    (rungVal X 0 :: argOf X :: betweens X (upTo 4)).all fun c =>
+      (G u (zsub X)).all fun x => (G u c ++ [nil]).any fun y => decide (x ≤ y)
 
 /-! The bound that `tower_G_le` carries up the tower has to be relative to
 `c`.  Buchholz's own invariant is the absolute `G_u(W_i) < X₂[W_i]`, which
