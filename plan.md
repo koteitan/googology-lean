@@ -387,13 +387,17 @@ What is left of that is the Lean problem still open.
 
   What comes out is `Trans.BMS.existsUnique_OT_of_lt_zeta0`: **every ordinal
   below `ζ₀` is the value of exactly one standard form**.
-  `Ord.psi_Omega_mul_zeta0` says `ψ_0(Ω·ζ₀) = ζ₀`, so that is exactly the
-  range of what `ψ_0` and `ψ_1` name together — the two-level counterpart of
-  `ε₀` for one level.
+  `Ord.psi_Omega_mul_zeta0` says `ψ_0(Ω·ζ₀) = ζ₀`, and that is where **this
+  construction** stops — not where the terms stop. `ζ₀` is itself the value of
+  a standard form: `ψ_1(ψ_1(0))` is `Ω²` and `Ord.psi_Omega_sq` says
+  `ψ_0(Ω²) = ζ₀`, which is `Trans.BMS.val_tzeta0`. What the terms with
+  subscripts `0` and `1` reach is `ψ_0(Ω_2)`, and the gap between `ζ₀` and it
+  is the arguments of `ψ_1` this construction does not build: it takes them
+  from the levels below, and `ψ_1` of a `ψ_1` is not among those.
 
-  Above `ζ₀` the terms need `ψ_2`, and the pattern repeats: the arguments of
-  `ψ_1` would be built from `ψ_2` the way the arguments of `ψ_0` are built
-  from `ψ_1` here. The ordinal side has the arithmetic for it already —
+  Above `ψ_0(Ω_2)` the terms need `ψ_2`, and the pattern repeats: the
+  arguments of `ψ_1` would be built from `ψ_2` the way the arguments of `ψ_0`
+  are built from `ψ_1` here. The ordinal side has the arithmetic for it already —
   `Ord.psi_eq_Omega_mul_opow` and `Ord.psi_Omega_succ` hold at every
   subscript — so what is missing is the term-level induction over the
   subscript, which is the same shape one level up.

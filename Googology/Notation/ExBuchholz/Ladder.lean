@@ -548,8 +548,9 @@ theorem omega0_le_zeta0 : (ω : Ordinal.{u}) ≤ zeta0.{u} :=
 theorem one_add_zeta0 : 1 + zeta0.{u} = zeta0.{u} :=
   Ordinal.one_add_of_omega0_le omega0_le_zeta0
 
-/-- **`ψ_0(Ω·ζ₀) = ζ₀`.**  It is the first ordinal `ψ_0` and `ψ_1` together do
-not name: every `ε_γ` below it is `ψ_0(Ω·(1+γ))`, and nothing gets past. -/
+/-- **`ψ_0(Ω·ζ₀) = ζ₀`.**  Every `ε_γ` below it is `ψ_0(Ω·(1+γ))`, and the
+ladder gets no further: `Ω·ζ₀` is the first argument of that shape it cannot
+reach.  It is **not** where the terms stop — `ψ_0(Ω²) = ζ₀` as well. -/
 theorem psi_Omega_mul_zeta0 : psi ((Ω_ 1 : Ordinal.{u}) * zeta0.{u}) 0 = zeta0.{u} := by
   refine le_antisymm ?_ ?_
   · have h := psi_Omega_mul_le zeta0.{u}

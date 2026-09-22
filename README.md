@@ -56,9 +56,9 @@ Names are written relative to `Googology`.
 | **and `ψ_0(Ω·(n+1)) = ε_n` at every finite `n`**, with `ψ_0(Ω·(n+1) + a) = ε_n·ω^a` below `ε_{n+1}` | `Notation.ExBuchholz.Ord.psi_OmegaMul`, `Notation.ExBuchholz.Ord.psi_OmegaMul_add` |
 | **and `ψ_0(Ω·ω) = ε_ω`**, with `ψ_1(1) = Ω·ω` | `Notation.ExBuchholz.Ord.psi_Omega_omega`, `Notation.ExBuchholz.Ord.psi_one_one` |
 | **and `ψ_0(Ω·(1+γ)) = ε_γ` at every `γ` below `ζ₀`**, with `ψ_0(Ω·(1+γ) + β) = ε_γ·ω^β` below `ε_{γ+1}` | `Notation.ExBuchholz.Ord.psi_Omega_mul_eps`, `Notation.ExBuchholz.Ord.psi_Omega_mul_add_eps` |
-| **and `ψ_0(Ω·ζ₀) = ψ_0(Ω²) = ζ₀`**, the first ordinal `ψ_0` and `ψ_1` together miss | `Notation.ExBuchholz.Ord.psi_Omega_mul_zeta0`, `Notation.ExBuchholz.Ord.psi_Omega_sq` |
+| **and `ψ_0(Ω·ζ₀) = ψ_0(Ω²) = ζ₀`** | `Notation.ExBuchholz.Ord.psi_Omega_mul_zeta0`, `Notation.ExBuchholz.Ord.psi_Omega_sq` |
 | **and the same ladder at every subscript**: `ψ_v(Ω_{v+1}·(1+γ)) = ε^v_γ` | `Notation.ExBuchholz.Ord.psi_OmegaV_mul_eq`, `Notation.ExBuchholz.Ord.psi_OmegaV_mul_eq_nat` |
-| **`val` is onto the ordinals below `ζ₀`**, by exactly one standard form | `Trans.BMS.exists_OT_of_lt_zeta0`, `Trans.BMS.existsUnique_OT_of_lt_zeta0` |
+| **`val` is onto the ordinals below `ζ₀`**, by exactly one standard form — a lower bound on what the terms reach, since `ζ₀` itself is `val (ψ_0(ψ_1(ψ_1(0))))` | `Trans.BMS.exists_OT_of_lt_zeta0`, `Trans.BMS.existsUnique_OT_of_lt_zeta0`, `Trans.BMS.val_tzeta0` |
 | the map from `ψ_0(Ω_α)` to the three-row matrices, `α < ε₀` — transcribed from [koteitan/trio](https://github.com/koteitan/trio) and calibrated against its table, not a theorem | `Trans.BMS.omegaIndexMatrix` |
 | an additively principal member of `C_v(a)` is below `Ω_v` or a collapse, and any member splits off a leading principal — the first two steps of a normal form theorem | `Notation.ExBuchholz.Ord.principal_mem_CSet`, `Notation.ExBuchholz.Ord.exists_principal_split` |
 | the standard forms reach those: `ψ_0(Ω+1)` names `ε₀·ω` and `ψ_0(Ω+Ω)` names `ε₁` | `Trans.BMS.OT_psi_Omega_add`, `Trans.BMS.val_tew`, `Trans.BMS.OT_te1` |

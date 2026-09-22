@@ -496,8 +496,9 @@ theorem omega0_le_zetaV (v : Ordinal.{u}) : (ω : Ordinal.{u}) ≤ zetaV.{u} v :
 theorem one_add_zetaV (v : Ordinal.{u}) : 1 + zetaV.{u} v = zetaV.{u} v :=
   Ordinal.one_add_of_omega0_le (omega0_le_zetaV v)
 
-/-- **`ψ_v(Ω_{v+1}·ζ^v) = ζ^v`**: the first ordinal the subscript `v` and the
-ones above it do not name together. -/
+/-- **`ψ_v(Ω_{v+1}·ζ^v) = ζ^v`**: where the ladder at subscript `v` stops.
+As at `v = 0`, that is a statement about the arguments of this shape, not
+about what the terms of the notation system reach. -/
 theorem psi_OmegaV_mul_zetaV {v : Ordinal.{u}} (hv : v < Ω_ v) (hv1 : v + 1 < Ω_ (v + 1)) :
     psi ((Ω_ (v + 1) : Ordinal.{u}) * zetaV.{u} v) v = zetaV.{u} v := by
   refine le_antisymm ?_ ?_

@@ -266,8 +266,8 @@ theorem exists_arg_and_OT : ∀ δ : Ordinal.{0}, δ < Ord.zeta0 →
 /-! ### `val` is onto below `ζ₀` -/
 
 /-- **Every ordinal below `ζ₀` is the value of a standard form.**  `ζ₀` is
-`ψ_0(Ω·ζ₀)` — `Ord.psi_Omega_mul_zeta0` — so this says the terms built from
-`ψ_0` and `ψ_1` name every ordinal below the first one they miss. -/
+`ψ_0(Ω·ζ₀)` — `Ord.psi_Omega_mul_zeta0` — which is where this construction
+stops; `val_tzeta0` below shows the terms themselves go further. -/
 theorem exists_OT_of_lt_zeta0 {α : Ordinal.{0}} (h : α < Ord.zeta0) :
     ∃ X : Term, OT X ∧ val X = α := by
   obtain ⟨-, hval⟩ := exists_arg_and_OT α h
@@ -281,5 +281,26 @@ theorem existsUnique_OT_of_lt_zeta0 {α : Ordinal.{0}} (h : α < Ord.zeta0) :
   obtain ⟨X, hOTX, hvX⟩ := exists_OT_of_lt_zeta0 h
   refine ⟨X, ⟨hOTX, hvX⟩, fun Y hY => ?_⟩
   exact val_inj_of_OT hY.1 hOTX (by rw [hY.2, hvX])
+
+/-! ### The bound is not tight
+
+`ζ₀` is where **this construction** stops, not where the terms stop: `ζ₀`
+itself is the value of a standard form, because `ψ_1(ψ_1(0))` is `Ω²` and
+`Ord.psi_Omega_sq` says `ψ_0(Ω²) = ζ₀`.  What the terms with subscripts `0`
+and `1` reach is `ψ_0(Ω_2)`, and the gap between `ζ₀` and it is the arguments
+of `ψ_1` that this file does not build. -/
+
+/-- The term `ψ_0(ψ_1(ψ_1(0)))`, that is `ψ_0(Ω²)`. -/
+abbrev tzeta0 : Term := psi nil (psi t1 (psi t1 nil))
+
+theorem OT_tzeta0 : OT tzeta0 := by decide
+
+/-- **`ψ_0(Ω²)` names `ζ₀`**, so `ζ₀` is itself the value of a standard form
+and `exists_OT_of_lt_zeta0` is a lower bound on what the terms reach, not a
+description of it. -/
+theorem val_tzeta0 : val tzeta0 = Ord.zeta0 := by
+  rw [show tzeta0 = psi nil (psi t1 (psi t1 nil)) from rfl, val_psi, val_nil, val_psi, val_t1,
+    val_psi, val_t1, val_nil, Ord.psi_zero_arg,
+    Ord.psi_one_eq (Ord.Omega_lt_fpOmega 1), Ord.opow_Omega_one, Ord.psi_Omega_sq]
 
 end Googology.Trans.BMS
