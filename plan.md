@@ -54,8 +54,9 @@ particular notation system.
 | `Morphism.lean` | `OrdHom`, `Sim`, `StepHom`, `Equiv`, `Eval`, and the transfer theorems |
 
 `Googology/Rank.lean` sits beside it: a well-founded system carries an ordinal
-measure of its own, the rank of its one-step relation. That needs mathlib, so
-it is not part of `Core`.
+measure of its own, the rank of its one-step relation, and `StepHom.rank_map`
+says an embedding onto the steps keeps it. That needs mathlib, so it is not
+part of `Core`.
 
 No `sorry`, no external dependency. A project that only wants termination can
 import this and nothing else.
@@ -268,7 +269,8 @@ underneath changes nothing at every number of rows, and the generator
 `(0,…,0)(1,…,1)` with `r + 2` rows expands at `N` to the generators with
 `r + 1` rows and that zero row already in place, so `bmsL r` sits inside
 `bmsL (r + 1)`, and inside `bmsL s` for every `s ≥ r`, the same for all
-matrices.
+matrices. `rank_zeroRow` adds that the ordinal is the same on both sides, so
+the extra row names nothing new.
 
 The two things left are not Lean problems.
 

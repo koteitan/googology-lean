@@ -22,6 +22,10 @@ induction over reachability.
 
 Iterating the step gives `bmsL_simLe`: `r ≤ s` puts `bmsL r` inside `bmsL s`,
 with `s - r` rows of zeros underneath, which `bmsL_simAdd_map` states.
+
+`rank_zeroRow` is the same statement about the ordinal rather than the rule:
+the embedding has exactly the steps the source has, so `Rank.lean`'s
+`StepHom.rank_map` carries the rank across unchanged.
 -/
 
 namespace Googology.Trans.BMS
@@ -325,5 +329,25 @@ def bmsAllL_simAdd (r : Nat) : ∀ d : Nat, Sim (bmsAllL r) (bmsAllL (r + d))
 /-- And the same conclusion. -/
 def bmsAllL_simLe {r s : Nat} (h : r ≤ s) : Sim (bmsAllL r) (bmsAllL s) :=
   Nat.add_sub_cancel' h ▸ bmsAllL_simAdd r (s - r)
+
+/-! ### The ordinal it names -/
+
+/-- **A row of zeros underneath does not change the ordinal either.**  The
+rank of the matrix with the row is the rank of the matrix, because the
+embedding has exactly the steps the source has. -/
+theorem rank_zeroRow (r : Nat) (l : (bmsL r).State) :
+    (bmsLRankEval (r + 1)).val ((bmsL_homSucc r).map l) = (bmsLRankEval r).val l := by
+  haveI : IsWellFounded (bmsL r).State (bmsL r).Rel := ⟨bmsL_wf r⟩
+  haveI : IsWellFounded (bmsL (r + 1)).State (bmsL (r + 1)).Rel := ⟨bmsL_wf (r + 1)⟩
+  exact StepHom.rank_map (bmsL_homSucc r) (fun k => ⟨k, rfl⟩)
+    (fun s => (zeroRow_nil_iff s.1).symm) l
+
+/-- The same for all matrices, standard or not. -/
+theorem rank_zeroRow_all (r : Nat) (l : (bmsAllL r).State) :
+    (bmsAllLEval (r + 1)).val ((bmsAllL_homSucc r).map l) = (bmsAllLEval r).val l := by
+  haveI : IsWellFounded (bmsAllL r).State (bmsAllL r).Rel := ⟨bmsAllL_wf r⟩
+  haveI : IsWellFounded (bmsAllL (r + 1)).State (bmsAllL (r + 1)).Rel := ⟨bmsAllL_wf (r + 1)⟩
+  exact StepHom.rank_map (bmsAllL_homSucc r) (fun k => ⟨k, rfl⟩)
+    (fun s => (zeroRow_nil_iff s.1).symm) l
 
 end Googology.Trans.BMS

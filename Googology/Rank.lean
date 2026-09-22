@@ -19,6 +19,11 @@ condition, and `rankEvalOfTerminates` turns either of them into an ordinal
 measure.  It lives here rather than in `Core` because building the chain from
 a non-accessible state needs choice, and `Core` uses none.
 
+`StepHom.rank_map` goes the other way about: a translation that renumbers
+brackets onto and halts exactly where the source halts gives its image the
+steps the source has, so the rank is the same on both sides.  That is what
+says an embedding does not change the ordinal a state names.
+
 This is the one part of the library outside `Notation/` that needs mathlib, so
 it is kept out of `Googology.Core`.
 -/
@@ -65,5 +70,39 @@ own expansion as an ordinal measure. -/
 noncomputable def Rewrite.rankEvalOfTerminates {R : Rewrite} (h : R.Terminates) :
     Eval R (· < · : Ordinal.{0} → Ordinal.{0} → Prop) :=
   Rewrite.rankEval (Rewrite.wf_of_terminates h)
+
+/-! ## A translation that is onto the steps keeps the rank -/
+
+/-- **A `StepHom` whose bracket renumbering is onto and whose image halts
+exactly where the source does carries the rank across unchanged.**  Its image
+has precisely the steps the source has, so the two recursions agree. -/
+theorem StepHom.rank_map {R Q : Rewrite} [hR : IsWellFounded R.State R.Rel]
+    [IsWellFounded Q.State Q.Rel] (f : StepHom R Q)
+    (hre : Function.Surjective f.reindex)
+    (hh : ∀ s, R.halted s ↔ Q.halted (f.map s)) :
+    ∀ a, IsWellFounded.rank Q.Rel (f.map a) = IsWellFounded.rank R.Rel a := by
+  intro a
+  induction a using WellFounded.induction hR.wf with
+  | _ a ih =>
+    refine le_antisymm ?_ ?_
+    · rw [IsWellFounded.rank_eq]
+      refine Ordinal.iSup_le ?_
+      rintro ⟨b, hna, k, rfl⟩
+      obtain ⟨n, rfl⟩ := hre k
+      have hrel : R.Rel (R.step a n) a := ⟨fun hc => hna ((hh a).mp hc), n, rfl⟩
+      have hval : IsWellFounded.rank Q.Rel (Q.step (f.map a) (f.reindex n))
+          = IsWellFounded.rank R.Rel (R.step a n) := by
+        rw [← f.map_step a n]
+        exact ih _ hrel
+      show Order.succ (IsWellFounded.rank Q.Rel (Q.step (f.map a) (f.reindex n))) ≤ _
+      rw [hval]
+      exact Order.succ_le_of_lt (IsWellFounded.rank_lt_of_rel hrel)
+    · rw [IsWellFounded.rank_eq]
+      refine Ordinal.iSup_le ?_
+      rintro ⟨b, hna, k, rfl⟩
+      show Order.succ (IsWellFounded.rank R.Rel (R.step a k)) ≤ _
+      rw [← ih _ ⟨hna, k, rfl⟩]
+      exact Order.succ_le_of_lt (IsWellFounded.rank_lt_of_rel
+        ⟨fun hc => hna ((hh a).mpr hc), f.reindex k, f.map_step a k⟩)
 
 end Googology

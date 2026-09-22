@@ -30,6 +30,7 @@
 | **下に 0 の行を足しても何も変わらないことが、行数によらず成り立つこと** | `Trans.BMS.expandRL_zeroRow` |
 | だから `r + 1` 行は `r + 2` 行の中に入る。標準形でも全行列でも | `Trans.BMS.bmsL_homSucc`, `Trans.BMS.bmsAllL_homSucc` |
 | それを繰り返して、`r ≤ s` なら `r + 1` 行は `s + 1` 行の中に入る | `Trans.BMS.bmsL_simLe`, `Trans.BMS.bmsAllL_simLe` |
+| **0 の行を足しても行列が名指す順序数は変わらないこと** | `Trans.BMS.rank_zeroRow`, `StepHom.rank_map` |
 | 成分列の上の系と、その生成元 | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
 | 一般の系の 1 行が原始数列系、2 行がペア数列系であること | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
 | 生成元から出発した展開列は必ず止まること | `Notation.BMS.bmsStd_terminates`, `Notation.DBMS.dbmsStd_terminates`, `Trans.BMS.bmsLStd_terminates` |

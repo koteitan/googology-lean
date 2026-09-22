@@ -31,6 +31,7 @@ Names are written relative to `Googology`.
 | **and a row of zeros underneath changes nothing at every number of rows** | `Trans.BMS.expandRL_zeroRow` |
 | so `r + 1` rows sit inside `r + 2`, standard matrices and all matrices | `Trans.BMS.bmsL_homSucc`, `Trans.BMS.bmsAllL_homSucc` |
 | and iterating that, `r ≤ s` puts `r + 1` rows inside `s + 1` | `Trans.BMS.bmsL_simLe`, `Trans.BMS.bmsAllL_simLe` |
+| **and the ordinal a matrix names does not change when the zero row is added** | `Trans.BMS.rank_zeroRow`, `StepHom.rank_map` |
 | the systems on the entries, with their generators | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
 | the general system at one and two rows is the primitive and pair sequence system | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
 | from a generator, any expansion sequence ends | `Notation.BMS.bmsStd_terminates`, `Notation.DBMS.dbmsStd_terminates`, `Trans.BMS.bmsLStd_terminates` |
