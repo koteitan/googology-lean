@@ -22,11 +22,9 @@ Googology/
     Std.lean         標準形と生成元
     Morphism.lean    OrdHom、Sim、StepHom、Equiv、Eval
   Notation/        表記系。互いに import しない
-    BMS/             巨大数の側
-    DBMS/
-    Y/
-    OTB/             証明論の側
-    TM/
+    BMS/             バシク行列。行数は任意
+    ExBuchholz/      拡張ブーフホルツ psi
+    DBMS/  Y/  …     まだ無い
   Trans/           具体的な翻訳。2 つの系を import する唯一の層
     BMS/
       DBMS.lean
@@ -105,7 +103,8 @@ example (trans : Sim Src Tgt) (o : Eval Tgt ltO) (hO : WellFounded ltO) :
 lake build
 ```
 
-Lean 4 v4.30.0。依存は mathlib 1 つだけである。
+Lean 4 v4.30.0。依存は 2 つ。mathlib と、BMS の停止性証明のための
+[koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern)。
 
 `Googology.Core` は core Lean の外を何も import しない。だから停止性の道具一式は
 mathlib 無しで読めて使える。mathlib が入るのは、表記系が順序数へ評価する場所だけで
@@ -113,9 +112,9 @@ mathlib 無しで読めて使える。mathlib が入るのは、表記系が順�
 
 ## 状態
 
-`Core/` は完成しており、`sorry` なしでビルドが通る。`Notation/ExBuchholz` は項・
-順序・標準形と、整礎性を主項に帰着させるところまで済んでいる。順序数の意味論は
-着手した。`Trans/` は空である。
+`Core/` は完成。`Notation/ExBuchholz` は表記系として完成しており、`OTLt_wf` に
+仮定は要らない。`Notation/BMS` はどの行数でも停止する。`Trans/` は空である。
+`sorry` も追加公理も無い。
 
 ## ライセンス
 

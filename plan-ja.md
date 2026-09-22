@@ -67,6 +67,19 @@ BMS は停止する
 **表記系としての `ExBuchholz` は完成した。**`OTLt_wf` が、標準形の上の順序が
 仮定なしで整礎であることを言う。
 
+### `Notation/BMS/` — 済
+
+行数が任意のバシク行列。`bms_terminates r` がどの `r` でも成り立つ。
+`r = 1, 2, 3` が原始数列・ペア数列・トリオ数列である。
+
+停止性の証明そのものは
+[koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern)——
+`R_r` のラベルと Σ 初等部分構造による——で、このパッケージはそれを依存に持つ。
+`Notation/BMS/Basic.lean` が出すのは `Rewrite` の 3 フィールドと
+`Subrelation.wf` 1 本だけで、残りは `Core` が出す。向こうの `Pat.StdR` が
+こちらの `Rewrite.Rel` を手で書き下したものになっていたので、合わせ込みは
+要らなかった。
+
 ### `Trans/` — 空
 
 ### 他の系 — 未着手
@@ -113,8 +126,9 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
 1. `ExBuchholz` に基本列と `Rewrite` の値を与える
 2. `G` と `isOT` を参照実装と較正する。今は Buchholz (1986) §2 の自然な拡張として
    書き下したもので、較正していない
-3. `Notation/BMS` を足す
-4. `Trans/BMS/ExBuchholz` を足す。ここで `Sim.terminates` から BMS の停止性が出る
+3. `Trans/BMS/ExBuchholz` を足す。BMS の停止性にはもう要らないので、翻訳が買うのは
+   **値**である。行列がどの順序数を名指すか
+4. DBMS と Y 数列を足す
 
 ## 約束ごと
 

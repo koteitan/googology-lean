@@ -1,5 +1,5 @@
 name = "googology"
-version = "0.2.0"
+version = "0.3.0"
 defaultTargets = ["Googology", "Test"]
 
 [leanOptions]
@@ -16,3 +16,9 @@ srcDir = "test"
 name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4"
 rev = "v4.30.0"
+
+[[require]]
+name = "bmselempattern"
+git = "https://github.com/koteitan/bms-elem-pattern"
+subDir = "lean"
+rev = "main"

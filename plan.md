@@ -71,6 +71,18 @@ import this and nothing else.
 **`ExBuchholz` is finished as a notation system**: `OTLt_wf` says the order on
 its standard forms is well founded, with no hypothesis.
 
+### `Notation/BMS/` — done
+
+Bashicu matrices with any number of rows. `bms_terminates r` holds for every
+`r`; `r = 1, 2, 3` are the primitive, pair and trio sequences.
+
+The termination proof itself is
+[koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) —
+labels in `R_r` and Σ-elementary substructures — which this package requires.
+`Notation/BMS/Basic.lean` supplies the three fields of `Rewrite` and one
+`Subrelation.wf`; `Core` supplies the rest. `Pat.StdR` there is `Rewrite.Rel`
+here, written out by hand, so the fit needed no adaptation.
+
 ### `Trans/` — empty
 
 ### Other systems — not started
@@ -118,9 +130,9 @@ That is `Mono.lean`.
 2. calibrate `G` and `isOT` against a reference implementation — they are
    written out as the natural extension of Buchholz (1986) §2 and have not
    been checked against one;
-3. add `Notation/BMS`;
-4. add `Trans/BMS/ExBuchholz`, at which point BMS termination follows from
-   `Sim.terminates`.
+3. add `Trans/BMS/ExBuchholz`. BMS termination no longer needs it, so what the
+   translation buys is the *value*: which ordinal a matrix names;
+4. add DBMS and the Y sequence.
 
 ## Conventions
 

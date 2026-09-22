@@ -23,11 +23,9 @@ Googology/
     Std.lean         standard forms and generators
     Morphism.lean    OrdHom, Sim, StepHom, Equiv, Eval
   Notation/        notation systems; these never import one another
-    BMS/             the googology side
-    DBMS/
-    Y/
-    OTB/             the proof-theory side
-    TM/
+    BMS/             Bashicu matrices, any number of rows
+    ExBuchholz/      extended Buchholz's psi
+    DBMS/  Y/  ...   not yet
   Trans/           concrete translations; the only layer importing two systems
     BMS/
       DBMS.lean
@@ -110,7 +108,9 @@ system of your own) that strictly decreases on every step.
 lake build
 ```
 
-Lean 4 v4.30.0, with mathlib as the one dependency.
+Lean 4 v4.30.0. Two dependencies: mathlib, and
+[koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) for
+the BMS termination proof.
 
 `Googology.Core` imports nothing outside core Lean, so the whole termination
 machinery can be read and used without mathlib. mathlib enters only where a
@@ -119,9 +119,9 @@ notation system evaluates into the ordinals — at present
 
 ## Status
 
-`Core/` is complete and builds with no `sorry`. `Notation/ExBuchholz` has its
-terms, order, standard forms and the reduction of well-foundedness to the
-principal terms; its ordinal semantics is started. `Trans/` is empty.
+`Core/` is complete. `Notation/ExBuchholz` is finished as a notation system:
+`OTLt_wf` needs no hypothesis. `Notation/BMS` terminates for every number of
+rows. `Trans/` is empty. Nothing carries a `sorry` or an added axiom.
 
 ## License
 
