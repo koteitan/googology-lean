@@ -48,4 +48,4 @@ let it be read as one of the theorems above.
 
 | pair | file | structure | status |
 |---|---|---|---|
-| BMS, extended Buchholz's ψ | `BMS/ExBuchholz.lean` | `Sim`, eventually | the reading `read` for one row, that it is countable, and the shape its terms have |
+| BMS, extended Buchholz's ψ | `BMS/ExBuchholz.lean` | `Sim`, eventually | the reading `read` for one row, and that its terms are standard exactly when they descend |

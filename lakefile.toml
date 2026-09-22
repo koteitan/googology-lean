@@ -1,5 +1,5 @@
 name = "googology"
-version = "0.6.5"
+version = "0.6.6"
 defaultTargets = ["Googology", "Test"]
 
 [leanOptions]
@@ -11,7 +11,7 @@ name = "Googology"
 [[lean_lib]]
 name = "Test"
 srcDir = "test"
-globs = ["Test", "ExBuchholzCheck"]
+globs = ["Test", "ExBuchholzCheck", "TransCheck"]
 
 [[require]]
 name = "mathlib"

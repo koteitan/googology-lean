@@ -18,11 +18,14 @@ reading is countable, that its subscripts are all `0`, and that a term of that
 shape is below `ψ_0` of itself — which is what the standard-form condition
 needs once the descending condition is in hand.
 
-Two things are left before this becomes a `Sim`: that the reading of a
-*standard* matrix is a standard form, and that it commutes with expansion.
-The second is where the work is — `BM4.expand` is stated through
+`OT_of_desc` settles the standard-form side as far as the term goes: with the
+subscripts all `0`, being a standard form is exactly the descending
+condition.  What is left is on the matrix side — that a standard one-row
+matrix reads as a descending term — and the commutation with expansion.  The
+second is where the work is: `BM4.expand` is stated through
 `Classical.choice`, so matching it against `fs` step for step is not a
-rewriting exercise.
+rewriting exercise.  The two are entangled, because the descending condition
+is the invariant the expansion has to preserve.
 -/
 
 namespace Googology.Trans.BMS
@@ -102,5 +105,65 @@ theorem lt_psi_self : ∀ X : Term, AllNil X → ∀ Y : Term, X < cons nil X Y 
     subst ha
     refine cons_lt_cons_iff.mpr (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, ?_⟩)))
     exact ihb hb t
+
+/-- The principal terms do not increase, everywhere in the term. -/
+def DescAll : Term → Prop
+  | nil => True
+  | cons a b t => DescAll b ∧ DescAll t ∧ descHead a b t = true
+
+/-- With the subscripts all `0` and the principal terms descending, the tail
+of a term is below it. -/
+theorem tail_lt_of_desc : ∀ t a b : Term, AllNil (cons a b t) →
+    DescAll (cons a b t) → t < cons a b t := by
+  intro t
+  induction t with
+  | nil => intro a b _ _; exact nil_lt_cons _ _ _
+  | cons c d s _ _ ihs =>
+    intro a b hA hD
+    have hle : psi c d ≤ psi a b := by
+      have := hD.2.2
+      simp only [descHead, head?, decide_eq_true_eq] at this
+      exact this
+    rcases le_iff_lt_or_eq.mp hle with h | h
+    · exact cons_lt_cons_iff.mpr (Or.inl h)
+    · refine cons_lt_cons_iff.mpr (Or.inr ⟨h, ?_⟩)
+      exact ihs c d hA.2.2 hD.2.1
+
+/-- With the subscripts all `0` and the principal terms descending, `G` at
+level `0` stays below the term. -/
+theorem G_lt_of_desc : ∀ X : Term, AllNil X → DescAll X →
+    ∀ y ∈ G nil X, y < X := by
+  intro X
+  induction X with
+  | nil => intro _ _ y hy; rw [G_nil] at hy; exact absurd hy List.not_mem_nil
+  | cons a b t _ ihb iht =>
+    intro hA hD y hy
+    obtain ⟨ha, hAb, hAt⟩ := hA
+    subst ha
+    rw [G_cons, if_pos (le_refl _), G_nil, List.nil_append] at hy
+    rcases List.mem_append.mp hy with hy | hy
+    · rcases List.mem_cons.mp hy with he | hy
+      · rw [he]; exact lt_psi_self b hAb t
+      · exact lt_trans (ihb hAb hD.1 y hy) (lt_psi_self b hAb t)
+    · exact lt_trans (iht hAt hD.2.1 y hy) (tail_lt_of_desc t nil b ⟨rfl, hAb, hAt⟩ hD)
+
+/-- **With the subscripts all `0`, being a standard form is exactly the
+descending condition.** -/
+theorem OT_of_desc : ∀ X : Term, AllNil X → DescAll X → OT X := by
+  intro X
+  induction X with
+  | nil => intro _ _; exact rfl
+  | cons a b t _ ihb iht =>
+    intro hA hD
+    obtain ⟨ha, hAb, hAt⟩ := hA
+    subst ha
+    have hGb : (G nil b).all (fun x => decide (x < b)) = true :=
+      List.all_eq_true.mpr (fun x hx => decide_eq_true (G_lt_of_desc b hAb hD.1 x hx))
+    have hb : isOT b = true := ihb hAb hD.1
+    have ht : isOT t = true := iht hAt hD.2.1
+    show isOT (cons nil b t) = true
+    rw [isOT]
+    simp only [hGb, hb, ht, hD.2.2, Bool.and_true, Bool.true_and]
+    rfl
 
 end Googology.Trans.BMS
