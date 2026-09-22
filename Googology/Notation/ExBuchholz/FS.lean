@@ -975,6 +975,144 @@ theorem G_numeral_eq_nil : ∀ (k : Nat) (u x : Term), x ∈ G u (numeral k) →
       · rw [if_neg h] at hx; exact absurd hx List.not_mem_nil
     · exact ih u x hx
 
+theorem nil_lt_of_ne {X : Term} (h : X ≠ nil) : nil < X :=
+  lt_of_le_of_ne (nil_le X) (fun hx => h hx.symm)
+
+/-- `1` is the least nonzero term. -/
+theorem one_le : ∀ X : Term, X ≠ nil → t1 ≤ X := by
+  intro X hX
+  cases X with
+  | nil => exact absurd rfl hX
+  | cons c d t =>
+    by_cases hc : c = nil
+    · subst hc
+      by_cases hd : d = nil
+      · subst hd
+        cases t with
+        | nil => exact le_refl _
+        | cons e f s =>
+          exact le_of_lt (cons_lt_cons_iff.mpr (Or.inr ⟨rfl, nil_lt_cons _ _ _⟩))
+      · exact le_of_lt (cons_lt_cons_iff.mpr
+          (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, nil_lt_of_ne hd⟩))))
+    · exact le_of_lt (cons_lt_cons_iff.mpr
+        (Or.inl (psi_lt_psi_iff.mpr (Or.inl (nil_lt_of_ne hc)))))
+
+/-- `ω` is at most any principal term with a nonzero argument. -/
+theorem tw_le_psi {a b : Term} (hb : b ≠ nil) : tw ≤ psi a b := by
+  by_cases ha : a = nil
+  · subst ha
+    rcases le_iff_lt_or_eq.mp (one_le b hb) with h | h
+    · exact le_of_lt (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, h⟩))
+    · exact h ▸ le_refl _
+  · exact le_of_lt (psi_lt_psi_iff.mpr (Or.inl (nil_lt_of_ne ha)))
+
+/-- The domain of a standard form does not exceed it. -/
+theorem dom_le : ∀ X : Term, OT X → dom X ≤ X := by
+  intro X
+  induction X with
+  | nil => intro _; exact le_refl _
+  | cons a b t iha ihb iht =>
+    intro hOT
+    cases t with
+    | cons c d r =>
+      exact le_of_lt (lt_of_le_of_lt' (iht (OT_tail hOT)) (tail_lt (cons c d r) a b hOT))
+    | nil =>
+      by_cases e1 : dom b = nil
+      · have hb : b = nil := dom_eq_nil_iff.mp e1
+        subst hb
+        by_cases g1 : dom a = nil
+        · rw [show dom (cons a nil nil) = cons a nil nil from by rw [dom]; simp_all]
+          exact le_refl _
+        · by_cases g2 : dom a = t1
+          · rw [show dom (cons a nil nil) = cons a nil nil from by rw [dom]; simp_all]
+            exact le_refl _
+          · rw [show dom (cons a nil nil) = dom a from by rw [dom]; simp_all]
+            refine le_of_lt (lt_of_le_of_lt' (iha (OT_fst hOT)) ?_)
+            exact sub_lt_psi a nil (OT_head hOT)
+      · have hbne : b ≠ nil := fun h => e1 (by rw [h]; rfl)
+        by_cases e2 : dom b = t1
+        · rw [show dom (cons a b nil) = tw from by rw [dom]; simp_all]
+          exact tw_le_psi hbne
+        · by_cases e3 : dom b = tw
+          · rw [show dom (cons a b nil) = tw from by rw [dom]; simp_all]
+            exact tw_le_psi hbne
+          · by_cases e4 : dom b < cons a b nil
+            · rw [show dom (cons a b nil) = dom b from by rw [dom]; simp_all]
+              exact le_of_lt e4
+            · rw [show dom (cons a b nil) = tw from by rw [dom]; simp_all]
+              exact tw_le_psi hbne
+
+/-- The subscript of the domain of a standard form is strictly below it. -/
+theorem subOf_dom_lt {X : Term} (hOT : OT X) (hX : X ≠ nil) : subOf (dom X) < X := by
+  have hd : dom X ≠ nil := dom_ne_nil hX
+  have hdOT : OT (dom X) := OT_dom hOT
+  cases hdd : dom X with
+  | nil => exact absurd hdd hd
+  | cons c d t =>
+    simp only [subOf]
+    refine lt_of_lt_of_le' (sub_lt_psi c d (by rw [hdd] at hdOT; exact OT_head hdOT)) ?_
+    refine le_trans (psi_le_cons c d t) ?_
+    rw [← hdd]
+    exact dom_le X hOT
+
+/-- What `G` sees in the domain of a standard form, at a level the domain's
+own subscript reaches, it already sees in the form itself. -/
+theorem G_dom_subset : ∀ W Z' u : Term, OT W → dom W = psi Z' nil → u ≤ Z' →
+    ∀ x ∈ G u (dom W), x ∈ G u W := by
+  intro W
+  induction W with
+  | nil => intro Z' u _ hd _; exact absurd hd (fun h => Term.noConfusion h)
+  | cons a b t iha ihb iht =>
+    intro Z' u hOT hd hu x hx
+    cases t with
+    | cons c d r =>
+      rw [G_cons]
+      exact List.mem_append_right _ (iht Z' u (OT_tail hOT) hd hu x hx)
+    | nil =>
+      by_cases e1 : dom b = nil
+      · have hb : b = nil := dom_eq_nil_iff.mp e1
+        subst hb
+        by_cases g1 : dom a = nil
+        · rw [show dom (cons a nil nil) = cons a nil nil from by rw [dom]; simp_all] at hx
+          exact hx
+        · by_cases g2 : dom a = t1
+          · rw [show dom (cons a nil nil) = cons a nil nil from by rw [dom]; simp_all] at hx
+            exact hx
+          · have hdX : dom (cons a nil nil) = dom a := by rw [dom]; simp_all
+            rw [hdX] at hd hx
+            have hane : a ≠ nil := fun h => g1 (by rw [h]; rfl)
+            have hZa : Z' < a := by
+              have hs := subOf_dom_lt (OT_fst hOT) hane
+              rw [hd] at hs
+              simpa [subOf] using hs
+            have hua : u ≤ a := le_trans hu (le_of_lt hZa)
+            rw [G_cons, if_pos hua]
+            exact List.mem_append_left _ (List.mem_cons_of_mem _
+              (List.mem_append_left _ (iha Z' u (OT_fst hOT) hd hu x hx)))
+      · by_cases e2 : dom b = t1
+        · have hdX : dom (cons a b nil) = tw := by rw [dom]; simp_all
+          rw [hdX] at hd
+          exact absurd hd (by intro h; injection h with _ h2 _; exact Term.noConfusion h2)
+        · by_cases e3 : dom b = tw
+          · have hdX : dom (cons a b nil) = tw := by rw [dom]; simp_all
+            rw [hdX] at hd
+            exact absurd hd (by intro h; injection h with _ h2 _; exact Term.noConfusion h2)
+          · by_cases e4 : dom b < cons a b nil
+            · have hdX : dom (cons a b nil) = dom b := by rw [dom]; simp_all
+              rw [hdX] at hd hx
+              have hZa : Z' ≤ a := by
+                rw [hd] at e4
+                rcases psi_lt_psi_iff.mp (cons_lt_psi_iff.mp e4) with h | ⟨h, _⟩
+                · exact le_of_lt h
+                · exact h ▸ le_refl _
+              have hua : u ≤ a := le_trans hu hZa
+              rw [G_cons, if_pos hua]
+              exact List.mem_append_left _ (List.mem_cons_of_mem _
+                (List.mem_append_right _ (ihb Z' u (OT_snd hOT) hd hu x hx)))
+            · have hdX : dom (cons a b nil) = tw := by rw [dom]; simp_all
+              rw [hdX] at hd
+              exact absurd hd (by intro h; injection h with _ h2 _; exact Term.noConfusion h2)
+
 /-! ## As an expansion system -/
 
 /-- Extended Buchholz terms as an expansion system: one step is the
