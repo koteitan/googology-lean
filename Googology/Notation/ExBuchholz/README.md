@@ -113,9 +113,15 @@ beyond the one stated.
 | `ψ_0(Ω + a)`, `a < ε₁` | `ε₀·ω^a` — so `ψ_0(Ω + 1) = ε₀·ω` | `psi_Omega_add_eq` |
 | `ψ_0(Ω·2)` | `ε₁` | `psi_Omega_two` |
 | `ψ_0(ε₀)` | `ε₀` again — the argument is not determined by the value | `psi_eps0` |
+| `ψ_0(Ω·(n+1))`, any `n` | `ε_n` | `psi_OmegaMul` |
+| `ψ_0(Ω·(n+1) + a)`, `a < ε_{n+1}` | `ε_n·ω^a` | `psi_OmegaMul_add` |
 
 `ε₀` is `nfp (ω ^ ·) 0` and `ε₁` is `nfp (ε₀ * ω ^ ·) 0`, the least fixed
-points of those two functions. The terms that name the last two are
+points of those two functions. `Ord/Eps.lean` carries the same two statements
+at every finite level at once: `epsN n` is `ε_n`, the tower one level up each
+time, and the proof is a single strong induction on `n` rather than a ladder
+climbed a rung at a time. What makes it go through is `decomp`: a member of
+`C_0(Ω·(n+1))` below that bound is `Ω·k + c` with `k ≤ n` and `c < ε_n`. The terms that name the last two are
 `Trans.BMS.te1` and `Trans.BMS.tew`, and they are standard forms by
 `Trans.BMS.OT_psi_Omega_add`.
 

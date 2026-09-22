@@ -72,6 +72,8 @@ import this and nothing else.
 | `WF.lean` | done — `not_wellFounded_lt`, `cmp_cons_cons'`, the `OT` structure lemmas, `OTLt` |
 | `Sum.lean` | done — `wellFounded_OTLt` given accessibility of the principal terms |
 | `Ord.lean` | done — `ψ` on the ordinals, the cardinality bound, downward closure, additive principality |
+| `Opow.lean` | done — the closed forms of `ψ_0`: `ω^a` below `ε₀`, `ε₀·ω^a` below `ε₁`, and the first two steps of a normal form theorem |
+| `Eps.lean` | done — `ψ_0(Ω·(n+1)) = ε_n` at every finite `n`, by one induction |
 | `Eval.lean` | done — `val`, `Lam`, `val_mem_CSet`, the two `ψ` comparison helpers |
 | `Mono.lean` | done — the simultaneous induction, `val_lt_val`, `OTLt_wf` |
 | `FS.lean` | done — `dom`, `fs`, `fs_lt`, `dom_eq_one_or_tw`, `step_lt`, `exb` |
@@ -345,12 +347,24 @@ What is left of that is the Lean problem still open.
   `Ord.log_lt_self_of_lt_eps1`, since below `ε₁` the only fixed point of
   `ω ^ ·` above `ε₀` would be `ε₁` itself.
 
-  Going further needs the arithmetic above `ε₁`, and that is not the same
-  shape: `ψ_0(Ω·2 + a)` starts another tower, `ψ_0(Ω^2)` is `ζ₀`, and at some
-  point the argument needs `ψ_1` in it, so the induction has to know which
-  arguments `ψ_1` reaches, which is `C_1` again. Climbing one level at a time
-  will not finish; what would is a normal form theorem, and its first step is
-  in: `Ord.principal_mem_CSet` says an additively principal member of
+  The arithmetic above `ε₁` no longer has to be climbed a level at a time.
+  `Notation/ExBuchholz/Eps.lean` proves `ψ_0(Ω·(n+1)) = ε_n` at every finite
+  `n` at once — `Ord.psi_OmegaMul`, with `Ord.psi_OmegaMul_add` for
+  `ψ_0(Ω·(n+1) + a) = ε_n·ω^a` below `ε_{n+1}` — by one strong induction on
+  `n` rather than by repeating the `ε₀`, `ε₁` proofs. What carries it is
+  `Ord.decomp`: a member of `C_0(Ω·(n+1))` below that bound is `Ω·k + c` with
+  `k ≤ n` and `c < ε_n`, because a sum adds the `Ω·k` parts and `ε_n` swallows
+  the rest, a collapse `ψ_0(Ω·k + c)` is bounded by `ε_{k-1}·ω^c < ε_n`, and a
+  collapse with a nonzero subscript is already past `Ω·(n+1)` unless it is
+  `ψ_1(0) = Ω` itself. The two values `Opow.lean` proves by hand are the cases
+  `n = 0` and `n = 1` of it.
+
+  What that does **not** reach is `Ω·ω` and above, and the reason is the last
+  clause: `ψ_1(1) = Ω·ω`, so at `Ω·ω` the decomposition would have to allow a
+  collapse with subscript `1` and a nonzero argument, which is `C_1` and not
+  `C_0`. Past that, `ψ_0(Ω^2)` is `ζ₀` and the arguments need `ψ_1` inside
+  them, so the induction has to know which arguments `ψ_1` reaches. What would
+  settle all of it is a normal form theorem, and its first step is in: `Ord.principal_mem_CSet` says an additively principal member of
   `C_v(a)` is below `Ω_v` or a collapse `ψ_u(e)` with `u` and `e` in the
   closure. The second step is in too:
   `Ord.exists_principal_split` peels a leading principal off any member, with

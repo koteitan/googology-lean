@@ -107,9 +107,14 @@ inductive Term where
 | `p0(W + a)`、`a < e1` | `e0·w^a`。よって `p0(W + 1) = e0·w` | `psi_Omega_add_eq` |
 | `p0(W·2)` | `e1` | `psi_Omega_two` |
 | `p0(e0)` | また `e0`。引数は値から決まらない | `psi_eps0` |
+| `p0(W·(n+1))`、任意の `n` | `e_n` | `psi_OmegaMul` |
+| `p0(W·(n+1) + a)`、`a < e_{n+1}` | `e_n·w^a` | `psi_OmegaMul_add` |
 
 `e0` は `nfp (w ^ ·) 0`、`e1` は `nfp (e0 * w ^ ·) 0` で、それぞれその関数の最小
-不動点である。最後の二つを名指す項が `Trans.BMS.te1` と `Trans.BMS.tew` で、
+不動点である。`Ord/Eps.lean` は同じ二つを有限の全段で一度に持つ。`epsN n` が
+`e_n` で、一段ずつ上に積むタワーである。証明は `n` についての強い帰納法一本で、
+梯子を一段ずつ登るのではない。それが通る理由が `decomp` である。`C_0(W·(n+1))` の
+元でその上界より下のものは `W·k + c` の形で、`k <= n`、`c < e_n` である。最後の二つを名指す項が `Trans.BMS.te1` と `Trans.BMS.tew` で、
 `Trans.BMS.OT_psi_Omega_add` によって標準形である。
 
 ### 訂正の中身
