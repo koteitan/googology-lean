@@ -10,28 +10,43 @@
 
 ## 何が証明されているか
 
+名前は `Googology` からの相対で書く。
+
+### 系
+
 | | |
 |---|---|
 | **バシク行列はどの行数でも停止する** | `Notation.BMS.bms_terminates` |
-| 原始数列・ペア数列・トリオ数列の停止 | `primitive_terminates`、`pair_terminates`、`trio_terminates` |
+| 原始数列・ペア数列・トリオ数列の停止 | `Notation.BMS.primitive_terminates`、`Notation.BMS.pair_terminates`、`Notation.BMS.trio_terminates` |
 | BMS は順序数の測度を持つ | `Notation.BMS.bmsEval` |
-| **拡張ブーフホルツ ψ の標準形は整列する** | `ExBuchholz.Term.OTLt_wf` |
-| 異なる標準形は異なる順序数を名指す | `ExBuchholz.Term.val_inj_of_OT` |
-| 表記系の正しさ。項の順序と順序数の順序が一致する | `ExBuchholz.Term.val_lt_val` |
-| 基本列が降下する | `ExBuchholz.Term.fs_lt` |
-| **拡張ブーフホルツ項は停止する** | `ExBuchholz.Term.exbOT_terminates` |
-| 基本列が標準形を保つ（Buchholz 補題 3.3） | `ExBuchholz.Term.OTFS_thm` |
-| **1 行の BMS が名指す順序数と、その展開が基本列であること** | `Trans.BMS.read_expandL` |
-| 翻訳によって原始数列系が停止すること | `Trans.BMS.prim_terminates` |
+| **成分列の上に書いた BMS の展開が `BM4.expand` であること** — 行数によらず、だから走る | `Trans.BMS.entriesR_expand` |
+| 1 行・2 行・一般の規則が一つの規則であること | `Trans.BMS.expandRL_one`, `Trans.BMS.expandRL_two` |
+| 成分列の上の系と、その生成元 | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
+| DBMS は同じ規則で生成元だけが違う | `Trans.DBMS.dbmsL`, `Trans.DBMS.dbmsL_zero_terminates` |
+
+### 拡張ブーフホルツ ψ
+
+| | |
+|---|---|
+| **標準形は整列する** | `Notation.ExBuchholz.Term.OTLt_wf` |
+| 異なる標準形は異なる順序数を名指す | `Notation.ExBuchholz.Term.val_inj_of_OT` |
+| 表記系の正しさ。項の順序と順序数の順序が一致する | `Notation.ExBuchholz.Term.val_lt_val` |
+| 基本列が降下する | `Notation.ExBuchholz.Term.fs_lt` |
+| **拡張ブーフホルツ項は停止する** | `Notation.ExBuchholz.Term.exbOT_terminates` |
+| 基本列が標準形を保つ（Buchholz 補題 3.3） | `Notation.ExBuchholz.Term.OTFS_thm` |
+
+### 1 行: 行列が名指す順序数
+
+| | |
+|---|---|
+| **展開が基本列であること** | `Trans.BMS.read_expandL` |
 | **1 行の BMS が名指す順序数** | `Trans.BMS.bmsOrdEval` |
-| その順序数が `p0(W)` 未満であること（原始数列系の上限） | `Trans.BMS.read_lt_e0`, `Trans.BMS.bmsOrdEval_lt_e0` |
+| それが `p0(W)` 未満であること（原始数列系の上限） | `Trans.BMS.read_lt_e0`, `Trans.BMS.bmsOrdEval_lt_e0` |
 | かつ `p0(W)` 未満の標準形はすべてどれかが名指すこと | `Trans.BMS.exists_read`, `Trans.BMS.lt_e0_iff_allNil` |
 | `p0(W)` 未満で項が基本列の上限であること | `Trans.BMS.fs_lub` |
 | **標準 1 行行列とは、項が標準形である行列のことちょうどである** | `Trans.BMS.std_entries_iff`, `Trans.BMS.exists_bms_of_lt_e0` |
 | **原始数列系と `p0(W)` 未満の標準形が同値であること** | `Trans.BMS.primEquivE0` |
-| **成分列の上に書いた BMS の展開が `BM4.expand` であり、かつ走ること** — 行数によらず | `Trans.BMS.entriesR_expand` |
-| 成分列の上に書いた 2 行の展開が `BM4.expand` であり、かつ走ること | `Trans.BMS.entries2_expand`, `Trans.BMS.pairL_terminates` |
-| ラベルではなく翻訳による 1 行 BMS の停止性 | `Trans.BMS.bms_one_terminates` |
+| ラベルではなく翻訳による 1 行の停止性 | `Trans.BMS.bms_one_terminates`, `Trans.BMS.prim_terminates` |
 | 1 行 DBMS についての同じこと。こちらは他に停止性の証明がない | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
 
 `sorry` は無く、公理も `propext`・`Classical.choice`・`Quot.sound` の 3 つだけ。

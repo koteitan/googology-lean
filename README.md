@@ -11,28 +11,43 @@ all of them, and each system supplies only what is its own.
 
 ## What it proves
 
+Names are written relative to `Googology`.
+
+### The systems
+
 | | |
 |---|---|
 | **Bashicu matrices terminate**, for any number of rows | `Notation.BMS.bms_terminates` |
-| the primitive, pair and trio sequences terminate | `primitive_terminates`, `pair_terminates`, `trio_terminates` |
+| the primitive, pair and trio sequences terminate | `Notation.BMS.primitive_terminates`, `Notation.BMS.pair_terminates`, `Notation.BMS.trio_terminates` |
 | BMS carries an ordinal measure | `Notation.BMS.bmsEval` |
-| **the standard forms of extended Buchholz's ψ are well ordered** | `ExBuchholz.Term.OTLt_wf` |
-| distinct standard forms name distinct ordinals | `ExBuchholz.Term.val_inj_of_OT` |
-| the notation system is correct: the term order matches the ordinal order | `ExBuchholz.Term.val_lt_val` |
-| the fundamental sequence descends | `ExBuchholz.Term.fs_lt` |
-| **extended Buchholz terms terminate** | `ExBuchholz.Term.exbOT_terminates` |
-| the fundamental sequence keeps a term standard — Buchholz's Lemma 3.3 | `ExBuchholz.Term.OTFS_thm` |
-| **a one-row Bashicu matrix names an ordinal, and expansion is its fundamental sequence** | `Trans.BMS.read_expandL` |
-| the primitive sequence system terminates, by translation | `Trans.BMS.prim_terminates` |
+| **every Bashicu matrix expansion, written on the entries, is `BM4.expand`** — so it runs, at any number of rows | `Trans.BMS.entriesR_expand` |
+| the one-row, two-row and general rules are one rule | `Trans.BMS.expandRL_one`, `Trans.BMS.expandRL_two` |
+| the systems on the entries, with their generators | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
+| DBMS is the same rule with other generators | `Trans.DBMS.dbmsL`, `Trans.DBMS.dbmsL_zero_terminates` |
+
+### Extended Buchholz's ψ
+
+| | |
+|---|---|
+| **the standard forms are well ordered** | `Notation.ExBuchholz.Term.OTLt_wf` |
+| distinct standard forms name distinct ordinals | `Notation.ExBuchholz.Term.val_inj_of_OT` |
+| the notation system is correct: the term order matches the ordinal order | `Notation.ExBuchholz.Term.val_lt_val` |
+| the fundamental sequence descends | `Notation.ExBuchholz.Term.fs_lt` |
+| **extended Buchholz terms terminate** | `Notation.ExBuchholz.Term.exbOT_terminates` |
+| the fundamental sequence keeps a term standard — Buchholz's Lemma 3.3 | `Notation.ExBuchholz.Term.OTFS_thm` |
+
+### One row: which ordinal a matrix names
+
+| | |
+|---|---|
+| **expansion is the fundamental sequence** | `Trans.BMS.read_expandL` |
 | **which ordinal a one-row Bashicu matrix names** | `Trans.BMS.bmsOrdEval` |
-| that ordinal is below `ψ_0(Ω)` — the ceiling of the primitive sequence system | `Trans.BMS.read_lt_e0`, `Trans.BMS.bmsOrdEval_lt_e0` |
+| it is below `ψ_0(Ω)` — the ceiling of the primitive sequence system | `Trans.BMS.read_lt_e0`, `Trans.BMS.bmsOrdEval_lt_e0` |
 | and every standard form below `ψ_0(Ω)` is named by one | `Trans.BMS.exists_read`, `Trans.BMS.lt_e0_iff_allNil` |
 | below `ψ_0(Ω)` a term is the least upper bound of its fundamental sequence | `Trans.BMS.fs_lub` |
 | **the standard one-row matrices are exactly the matrices whose term is standard** | `Trans.BMS.std_entries_iff`, `Trans.BMS.exists_bms_of_lt_e0` |
 | **the primitive sequence system and the standard forms below `ψ_0(Ω)` are equivalent** | `Trans.BMS.primEquivE0` |
-| **Bashicu matrix expansion, written on the entries, is `BM4.expand` and runs** — at any number of rows | `Trans.BMS.entriesR_expand` |
-| two-row expansion, written on the entries, is `BM4.expand` and runs | `Trans.BMS.entries2_expand`, `Trans.BMS.pairL_terminates` |
-| one-row Bashicu matrices terminate, by translation rather than by labels | `Trans.BMS.bms_one_terminates` |
+| one row terminates, by translation rather than by labels | `Trans.BMS.bms_one_terminates`, `Trans.BMS.prim_terminates` |
 | the same for one-row DBMS, whose termination is not otherwise proved here | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
 
 No `sorry`, and no axiom beyond `propext`, `Classical.choice` and `Quot.sound`.

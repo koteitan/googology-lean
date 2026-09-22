@@ -1,3 +1,4 @@
+import Googology.Trans.BMS.Rows
 import Googology.Trans.BMS.OneRow
 import Googology.Trans.BMS.TwoRow
 import Googology.Trans.BMS.Anc
