@@ -184,7 +184,12 @@ That is `Mono.lean`.
    It is settled both ways: `lt_e0_iff_allNil` says a standard form is below
    `ψ_0(Ω)` exactly when its subscripts are all `0`, and `exists_read` says
    every one of those is read off a matrix. So one row misses nothing below
-   `ψ_0(Ω)` and names nothing above it.
+   `ψ_0(Ω)` and names nothing above it. And as ordinals, not only as terms:
+   `Ord.psi_Omega_one` says `ψ_0(Ω)` **is** `ε₀`, `exists_OT_of_lt_eps0` says
+   `val` is onto the ordinals below it — Cantor normal form, with
+   `Ord.psi_zero_eq_opow` for `ψ_0(a) = ω^a` there — and so
+   `exists_matrix_of_lt_eps0` with `val_read_lt_eps0` says the one-row
+   matrices name the ordinals below `ε₀` and no others.
 
    The states of `prim` — matrices whose term is a standard form — are
    exactly the standard one-row matrices: `std_entries_iff`. And
@@ -284,23 +289,20 @@ underneath changes nothing at every number of rows, and the generator
 matrices. `rank_zeroRow` adds that the ordinal is the same on both sides, so
 the extra row names nothing new.
 
-One thing left is a Lean problem.
+One row is now settled as ordinals too. `val` is onto the ordinals below
+`ε₀` — `Trans.BMS.exists_OT_of_lt_eps0`, by Cantor normal form, with
+`Ord.psi_zero_eq_opow` for `ψ_0(a) = ω^a` there and `Ord.psi_Omega_one` for
+`ψ_0(Ω) = ε₀` — so `exists_matrix_of_lt_eps0` and `val_read_lt_eps0` say the
+one-row matrices name the ordinals below `ε₀` and no others.
 
-* **`val` is onto.** The source states that `val` restricted to `OT` is an
-  order **isomorphism** onto `C_0(Λ)`. The monotone and injective half is here
-  — `val_lt_val` and `val_inj_of_OT` — and surjectivity is not proved, so what
-  the library says about which ordinal a matrix names is exact as terms and
-  one-sided as ordinals. Below `ε₀` the route is Cantor normal form: every
-  `α < ε₀` is `ω^b₁ + ⋯ + ω^bₙ` with `b₁ ≥ ⋯ ≥ bₙ` and every `bᵢ < α` — the
-  least ε-number is `ε₀` itself, so no exponent can equal its own `α` — and an
-  induction on `α` then builds a standard term with every subscript `0`, whose
-  descent condition is `Trans.BMS.OT_of_desc`. What it needs from `Ord.lean`
-  is `ψ_0(β) = ω^β`, and that does **not** hold for every `β < Ω`:
-  `ε₀ ∉ C_0(ε₀ + 1)`, so `ψ_0(ε₀ + 1) = ψ_0(ε₀) = ε₀` while `ω^(ε₀+1) = ε₀·ω`.
-  It holds where `β ∈ C_0(β)`, which is what `val_mem_CSet_arg` says of a
-  standard term's argument. With that much, one row would name **exactly** the
-  ordinals below `ε₀`, as ordinals and not only as terms:
-  `lt_e0_iff_allNil` and `exists_read` already give the other direction.
+What is left of that is the Lean problem still open.
+
+* **`val` is onto above `ε₀`.** The source states that `val` restricted to
+  `OT` is an order **isomorphism** onto `C_0(Λ)`. The monotone and injective
+  half is here — `val_lt_val` and `val_inj_of_OT` — and surjectivity is proved
+  only below `ε₀`. Above it the normal form is not Cantor's: it needs `ψ` at
+  every subscript, so the induction that builds a term has to know which
+  arguments each `ψ_v` reaches, which is `C_v` again.
 
 The other two are not Lean problems.
 

@@ -59,6 +59,9 @@
 | **1 行の BMS が名指す順序数** | `Trans.BMS.bmsOrdEval` |
 | それが `p0(W)` 未満であること（原始数列系の上限） | `Trans.BMS.read_lt_e0`, `Trans.BMS.bmsOrdEval_lt_e0` |
 | かつ `p0(W)` 未満の標準形はすべてどれかが名指すこと | `Trans.BMS.exists_read`, `Trans.BMS.lt_e0_iff_allNil` |
+| **かつ `e0` 未満の順序数はすべてどれかが名指すこと**。`p0(W)` は `e0` である | `Trans.BMS.exists_matrix_of_lt_eps0`, `Trans.BMS.val_te0` |
+| だから 1 行が名指すのはその順序数ちょうどであること | `Trans.BMS.val_read_lt_eps0` |
+| `val` が `e0` 未満の順序数の上へ全射であること | `Trans.BMS.exists_OT_of_lt_eps0` |
 | `p0(W)` 未満で項が基本列の上限であること | `Trans.BMS.fs_lub` |
 | **標準 1 行行列とは、項が標準形である行列のことちょうどである** | `Trans.BMS.std_entries_iff`, `Trans.BMS.exists_bms_of_lt_e0` |
 | **原始数列系と `p0(W)` 未満の標準形が同値であること** | `Trans.BMS.primEquivE0` |

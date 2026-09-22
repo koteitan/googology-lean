@@ -70,6 +70,7 @@ let it be read as one of the theorems above.
 | BMS with itself | `BMS/Same.lean` | `Equiv` | that the general system at one row **is** the primitive sequence system, and at two rows the pair sequence system |
 | BMS with itself | `BMS/Cut.lean` | — | that the block recursion `expandL` is the textbook rule: drop the last column, repeat the bad part `N + 1` times |
 | BMS, extended Buchholz's ψ | `BMS/Calibrate.lean` | — | that below `ψ_0(Ω)` is exactly where the subscripts are all `0`, so the reading reaches every standard form there |
+| BMS, extended Buchholz's ψ | `BMS/Eps0.lean` | — | **that one row names exactly the ordinals below `ε₀`**: `val` is onto there, by Cantor normal form, and `ψ_0(Ω)` is `ε₀` |
 | BMS, extended Buchholz's ψ | `BMS/Prim.lean` | `StepHom` | the primitive sequence system as a `Rewrite`, that it terminates, and its ordinal |
 | BMS, extended Buchholz's ψ | `BMS/Cofinal.lean` | — | that below `ψ_0(Ω)` a term is the least upper bound of `X[0] < X[1] < ⋯` |
 | BMS, extended Buchholz's ψ | `BMS/Bms.lean` | `StepHom` | **the ordinal a one-row Bashicu matrix names**, that it is below `ψ_0(Ω)`, and that one row terminates by translation |

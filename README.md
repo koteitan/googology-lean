@@ -60,6 +60,9 @@ Names are written relative to `Googology`.
 | **which ordinal a one-row Bashicu matrix names** | `Trans.BMS.bmsOrdEval` |
 | it is below `ψ_0(Ω)` — the ceiling of the primitive sequence system | `Trans.BMS.read_lt_e0`, `Trans.BMS.bmsOrdEval_lt_e0` |
 | and every standard form below `ψ_0(Ω)` is named by one | `Trans.BMS.exists_read`, `Trans.BMS.lt_e0_iff_allNil` |
+| **and every ordinal below `ε₀` is named by one** — `ψ_0(Ω)` is `ε₀` | `Trans.BMS.exists_matrix_of_lt_eps0`, `Trans.BMS.val_te0` |
+| so one row names those ordinals and no others | `Trans.BMS.val_read_lt_eps0` |
+| `val` is onto the ordinals below `ε₀` | `Trans.BMS.exists_OT_of_lt_eps0` |
 | below `ψ_0(Ω)` a term is the least upper bound of its fundamental sequence | `Trans.BMS.fs_lub` |
 | **the standard one-row matrices are exactly the matrices whose term is standard** | `Trans.BMS.std_entries_iff`, `Trans.BMS.exists_bms_of_lt_e0` |
 | **the primitive sequence system and the standard forms below `ψ_0(Ω)` are equivalent** | `Trans.BMS.primEquivE0` |

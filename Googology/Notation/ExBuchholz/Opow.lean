@@ -252,4 +252,31 @@ theorem psi_Omega_one : psi (Ω_ 1) 0 = eps0.{u} := by
     have h : psi (Ω_ 1) 0 < eps0.{u} := not_le.mp hc
     exact psi_notMem (Ω_ 1) 0 (key _ h)
 
+/-! ### `ψ_v(0) = Ω_v` -/
+
+theorem isPrincipal_add_Omega (v : Ordinal.{u}) : Ordinal.IsPrincipal (· + ·) (Ω_ v) := by
+  by_cases h : v = 0
+  · rw [h, Omega_zero]
+    intro x y hx hy
+    rw [Order.lt_one_iff] at hx hy
+    subst hx
+    subst hy
+    show (0 : Ordinal.{u}) + 0 < 1
+    rw [add_zero]
+    exact zero_lt_one
+  · rw [Omega_of_ne_zero h, ← Cardinal.ord_aleph]
+    exact Ordinal.isPrincipal_add_ord (Cardinal.aleph0_le_aleph v)
+
+/-- **`ψ_v(0) = Ω_v`**: with no argument below `0` to collapse, the closure is
+everything below `Ω_v`. -/
+theorem psi_zero_arg (v : Ordinal.{u}) : psi 0 v = Ω_ v := by
+  refine le_antisymm (psi_le_of_notMem (fun hmem => ?_)) (Omega_le_psi 0 v)
+  have key : ∀ x : Ordinal.{u}, x ∈ CSet v 0 → x < Ω_ v := by
+    intro x hx
+    induction hx with
+    | @small y h => exact h
+    | @add p q _ _ ihp ihq => exact isPrincipal_add_Omega v ihp ihq
+    | @coll _ e _ _ _ _ => exact absurd e.2 (by simp)
+  exact absurd (key _ hmem) (lt_irrefl _)
+
 end Googology.Notation.ExBuchholz.Ord

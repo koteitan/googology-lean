@@ -111,7 +111,10 @@ which says the proofs never leaned on the extra condition.
 
 The reference states that `o` restricted to `OT` is an order **isomorphism**
 onto `C_0(Λ)`. The monotone and injective halves are theorems here
-(`val_lt_val`, `val_inj_of_OT`); surjectivity is not.
+(`val_lt_val`, `val_inj_of_OT`). Surjectivity is proved **below `ε₀`** —
+`Trans.BMS.exists_OT_of_lt_eps0`, by Cantor normal form, with
+`Ord.psi_zero_eq_opow` supplying `ψ_0(a) = ω^a` there and `Ord.psi_Omega_one`
+saying `ψ_0(Ω) = ε₀`. Above `ε₀` it is not proved.
 
 ## Well-foundedness: how it was closed
 
