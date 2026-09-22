@@ -171,11 +171,14 @@ That is `Mono.lean`.
    every such matrix is reachable from a generator.
 
    Two rows land below the Bachmann–Howard ordinal and three rows on are open,
-   so `r = 2` is the next target. Concretely it needs: the two-row form of
-   `BMS/OneRow.lean`, where `m₀` is `0` or `1` and the `m₀ = 1` case adds an
-   increment on row `0`; a reading that uses `ψ_1` as well as `ψ_0`; and the
-   commutation, whose `dom` trichotomy will have a fourth case — the tower —
-   that one row never reaches;
+   so `r = 2` is the next target. The first piece is in:
+   `BMS/Rows.lean` pins the bad root down for any number of rows, and
+   `BMS/TwoRow.lean` reads the two-row column map off — `m₀` is `0` or `1`,
+   and at `1` row `0` takes an increment on the columns whose bad-part
+   position is a row-`0` ancestor of the bad root. What is left is a reading
+   that uses `ψ_1` as well as `ψ_0`, and the commutation, whose `dom`
+   trichotomy will have a fourth case — the tower — that one row never
+   reaches;
 4. **DBMS done, the Y sequence not.** `Notation/DBMS/` has the expansion
    system: the rule is BM4's, and only the generators differ — column `i`
    holds `i - k` in row `k` rather than `i`. Termination for `r ≥ 2` is not

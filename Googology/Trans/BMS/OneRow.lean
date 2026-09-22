@@ -1,4 +1,4 @@
-import Googology.Notation.BMS
+import Googology.Trans.BMS.Rows
 
 /-!
 # One-row Bashicu matrices
@@ -45,12 +45,7 @@ theorem parent_one {j i : Nat} :
 
 /-- There is at most one parent. -/
 theorem parent_one_unique {j j' i : Nat} (h : parent A 0 j i) (h' : parent A 0 j' i) :
-    j = j' := by
-  rw [parent_one] at h h'
-  rcases Nat.lt_trichotomy j j' with hlt | heq | hgt
-  · exact absurd h'.2.1 (Nat.not_lt.mpr (h.2.2.1 j' hlt h'.1))
-  · exact heq
-  · exact absurd h.2.1 (Nat.not_lt.mpr (h'.2.2.1 j hgt h.1))
+    j = j' := parent_unique h h'
 
 /-- With one row there is only row `0`, so the maximal parent row is `0`. -/
 theorem m₀_one (A : Arr 1) : m₀ A = 0 := rfl
@@ -68,31 +63,25 @@ theorem lastHasParent_one : LastHasParent A ↔ ∃ j, parent A 0 j (A.len - 1) 
 /-- The bad root is *the* parent: the entries pin it down, so the choice in
 its definition picks nothing. -/
 theorem badRoot_one {p : Nat} (h : parent A 0 p (A.len - 1)) : badRoot A = p :=
-  parent_one_unique (m₀_one A ▸ badRoot_parent (lastHasParent_one.mpr ⟨p, h⟩)) h
+  badRoot_of_parent Nat.zero_lt_one (by rw [m₀_one]; exact h)
 
 /-- With one row the column map of an expansion copies entries and adds
 nothing: the row `k < m₀` that would receive the increment does not exist. -/
 theorem tildeCol_one (A : Arr 1) (p s i k : Nat) :
-    tildeCol A p 0 s i k = if i < p then A.col i k else A.col (p + (i - p) % s) k := by
-  unfold tildeCol
-  by_cases h : i < p <;> simp [h]
+    tildeCol A p 0 s i k = if i < p then A.col i k else A.col (p + (i - p) % s) k :=
+  tildeCol_zero A p s i k
 
 /-- **One-row expansion is the primitive sequence rule**: with `p` the last
 index whose entry is below the last entry and `s = len - 1 - p`, expansion
 keeps the first `p` entries and repeats the next `s` of them `N + 1` times. -/
 theorem expand_one_len {p : Nat} (h : parent A 0 p (A.len - 1)) (N : Nat) :
-    (expand A N).len = p + (N + 1) * (A.len - 1 - p) := by
-  have hl : LastHasParent A := lastHasParent_one.mpr ⟨p, h⟩
-  rw [expand_len hl N]
-  simp only [BadRoot.s, toBadRoot_p, badRoot_one h]
+    (expand A N).len = p + (N + 1) * (A.len - 1 - p) :=
+  expand_len_of_parent Nat.zero_lt_one (by rw [m₀_one]; exact h) N
 
 theorem expand_one_col {p : Nat} (h : parent A 0 p (A.len - 1)) (N i k : Nat) :
     (expand A N).col i k =
       if i < p then A.col i k else A.col (p + (i - p) % (A.len - 1 - p)) k := by
-  have hl : LastHasParent A := lastHasParent_one.mpr ⟨p, h⟩
-  have h0 : A.len ≠ 0 := by have := (parent_one.mp h).2.2.2; omega
-  simp only [expand, h0, if_false, hl, if_true]
-  rw [show badRoot A = p from badRoot_one h, m₀_one]
+  rw [expand_col_of_parent Nat.zero_lt_one (by rw [m₀_one]; exact h) N i k, m₀_one]
   exact tildeCol_one A p _ i k
 
 /-- When no earlier entry is smaller than the last, expansion drops the last
