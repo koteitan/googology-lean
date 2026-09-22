@@ -6,6 +6,7 @@ import Googology.Trans.BMS.EntriesR
 import Googology.Trans.BMS.Entries2
 import Googology.Trans.BMS.Pair
 import Googology.Trans.BMS.Agree
+import Googology.Trans.BMS.PrimBms
 import Googology.Trans.BMS.ExBuchholz
 import Googology.Trans.BMS.Commute
 import Googology.Trans.BMS.Cut

@@ -58,6 +58,7 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | BMS 自身 | `BMS/Entries2.lean` | — | **2 行の展開を成分列の上に書き、それが `BM4.expand` であること、そして走らせれば止まること** |
 | BMS 自身 | `BMS/Pair.lean` | — | ペア数列系を、ステップが走る `Rewrite` として与え、生成元も付ける |
 | BMS 自身 | `BMS/Agree.lean` | — | 1 行・2 行・一般の規則が一致すること。一般の系も生成元付きの `Rewrite` にする |
+| BMS 自身 | `BMS/PrimBms.lean` | `Equiv` | 一般の系の 1 行が原始数列系**そのもの**であること |
 | BMS 自身 | `BMS/Cut.lean` | — | ブロック再帰 `expandL` が教科書どおりの規則であること: 最後の列を落とし、悪い部分を `N + 1` 回繰り返す |
 | BMS、拡張ブーフホルツ ψ | `BMS/Calibrate.lean` | — | `p0(W)` 未満が添字全部 0 とちょうど一致すること。よって読み取りはそこの標準形を全部拾う |
 | BMS、拡張ブーフホルツ ψ | `BMS/Prim.lean` | `StepHom` | 原始数列系を `Rewrite` として与え、停止することとその順序数 |
