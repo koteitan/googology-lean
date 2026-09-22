@@ -19,6 +19,10 @@ condition, and `rankEvalOfTerminates` turns either of them into an ordinal
 measure.  It lives here rather than in `Core` because building the chain from
 a non-accessible state needs choice, and `Core` uses none.
 
+`Eval.rank_le` says the rank is the least of these measures: any evaluation
+into the ordinals bounds it.  So a translation gives an upper bound on how far
+a system reaches, and the rank gives a lower one.
+
 `StepHom.rank_map` goes the other way about: a translation that renumbers
 brackets onto and halts exactly where the source halts gives its image the
 steps the source has, so the rank is the same on both sides.  That is what
@@ -138,5 +142,20 @@ theorem Rewrite.rank_halted {R : Rewrite} [IsWellFounded R.State R.Rel] {a : R.S
     (h : R.halted a) : IsWellFounded.rank R.Rel a = 0 := by
   rw [IsWellFounded.rank_eq]
   exact le_antisymm (Ordinal.iSup_le (fun b => absurd h b.2.1)) (by simp)
+
+/-- **The rank is the least ordinal measure.**  Any `Eval` into the ordinals
+bounds it from above, so a translation gives an upper bound and the rank gives
+a lower one. -/
+theorem Eval.rank_le {R : Rewrite} [IsWellFounded R.State R.Rel]
+    (e : Eval R (· < · : Ordinal.{0} → Ordinal.{0} → Prop)) :
+    ∀ a, IsWellFounded.rank R.Rel a ≤ e.val a := by
+  intro a
+  induction a using WellFounded.induction (IsWellFounded.wf (r := R.Rel)) with
+  | _ a IH =>
+    rw [IsWellFounded.rank_eq]
+    refine Ordinal.iSup_le ?_
+    rintro ⟨b, hb⟩
+    show Order.succ (IsWellFounded.rank R.Rel b) ≤ e.val a
+    exact Order.succ_le_of_lt (lt_of_le_of_lt (IH b hb) (e.val_lt a b hb))
 
 end Googology

@@ -214,6 +214,17 @@ generators end. -/
 instance instIsWellFoundedBmsL (r : Nat) : IsWellFounded (bmsL r).State (bmsL r).Rel :=
   ⟨bmsL_wf r⟩
 
+/-- **The general system at one row has that rank too.**  `bmsL 0` is `prim`
+written with one-element columns. -/
+theorem rank_bmsL_zero (l : (bmsL 0).State) :
+    IsWellFounded.rank (bmsL 0).Rel l = val (read 0 (l.1.map (fun c => c.head!))) := by
+  have h := primOfBmsHom.rank_map (fun k => ⟨k, rfl⟩)
+    (fun s => by
+      show s.1 = [] ↔ s.1.map (fun c => c.head!) = []
+      rw [List.map_eq_nil_iff]) l
+  rw [← h]
+  exact rank_prim_eq_val (primOfBmsHom.map l)
+
 theorem step_gen_eq (r N : Nat) :
     (bmsL (r + 1)).step ((bmsLStd (r + 1)).gen 1) N
       = (bmsL_homSucc r).map ((bmsLStd r).gen N) := by
