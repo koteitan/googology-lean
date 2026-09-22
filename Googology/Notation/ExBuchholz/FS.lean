@@ -1113,6 +1113,49 @@ theorem G_dom_subset : ∀ W Z' u : Term, OT W → dom W = psi Z' nil → u ≤ 
               rw [hdX] at hd
               exact absurd hd (by intro h; injection h with _ h2 _; exact Term.noConfusion h2)
 
+/-- The subscript of a term-indexed domain is a successor. -/
+theorem dom_sub_dom_eq_one : ∀ X Z : Term, dom X = psi Z nil → dom X ≠ t1 →
+    dom Z = t1 := by
+  intro X
+  induction X with
+  | nil => intro Z hd _; exact absurd hd (fun h => Term.noConfusion h)
+  | cons a b t iha ihb iht =>
+    intro Z hd hne
+    cases t with
+    | cons c d r => exact iht Z hd hne
+    | nil =>
+      by_cases e1 : dom b = nil
+      · have hb : b = nil := dom_eq_nil_iff.mp e1
+        subst hb
+        by_cases g1 : dom a = nil
+        · have hdX : dom (cons a nil nil) = cons a nil nil := by rw [dom]; simp_all
+          have ha : a = nil := dom_eq_nil_iff.mp g1
+          rw [hdX, ha] at hne
+          exact absurd rfl hne
+        · by_cases g2 : dom a = t1
+          · have hdX : dom (cons a nil nil) = cons a nil nil := by rw [dom]; simp_all
+            rw [hdX] at hd
+            injection hd with e _ _
+            rw [← e]; exact g2
+          · have hdX : dom (cons a nil nil) = dom a := by rw [dom]; simp_all
+            rw [hdX] at hd hne
+            exact iha Z hd hne
+      · by_cases e2 : dom b = t1
+        · have hdX : dom (cons a b nil) = tw := by rw [dom]; simp_all
+          rw [hdX] at hd
+          exact absurd hd (by intro h; injection h with _ h2 _; exact Term.noConfusion h2)
+        · by_cases e3 : dom b = tw
+          · have hdX : dom (cons a b nil) = tw := by rw [dom]; simp_all
+            rw [hdX] at hd
+            exact absurd hd (by intro h; injection h with _ h2 _; exact Term.noConfusion h2)
+          · by_cases e4 : dom b < cons a b nil
+            · have hdX : dom (cons a b nil) = dom b := by rw [dom]; simp_all
+              rw [hdX] at hd hne
+              exact ihb Z hd hne
+            · have hdX : dom (cons a b nil) = tw := by rw [dom]; simp_all
+              rw [hdX] at hd
+              exact absurd hd (by intro h; injection h with _ h2 _; exact Term.noConfusion h2)
+
 /-! ## As an expansion system -/
 
 /-- Extended Buchholz terms as an expansion system: one step is the
