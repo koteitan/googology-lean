@@ -76,6 +76,9 @@ BMS は停止する
 
 行数が任意のバシク行列。`bms_terminates r` がどの `r` でも成り立つ。
 `r = 1, 2, 3` が原始数列・ペア数列・トリオ数列である。
+`Notation/BMS/Any.lean` はさらに進む。**どんな**配列からでも展開は止まるので、
+標準性の条件を付けない規則 `bmsAll r` も停止し、`bms r` も
+`Notation.DBMS.dbms r` もその中に入る。
 
 停止性の証明そのものは
 [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern)——
@@ -83,7 +86,7 @@ BMS は停止する
 `Notation/BMS/Basic.lean` が出すのは `Rewrite` の 3 フィールドと
 `Subrelation.wf` 1 本だけで、残りは `Core` が出す。向こうの `Pat.StdR` が
 こちらの `Rewrite.Rel` を手で書き下したものになっていたので、合わせ込みは
-要りないであった。
+要らなかった。
 
 ### `Trans/` — 1 行は完了
 
@@ -92,7 +95,12 @@ BMS は停止する
 `Commute.lean`、添字の突き合わせが `Cut.lean` と `Entries.lean`、`StepHom` と
 そこから出る順序数が `Prim.lean` と `Bms.lean` である。
 
-### 他の系 — 未着手
+### `Notation/DBMS/` — 済
+
+同じ規則で、生成元の列 `i` の行 `k` が `i - k` になったもの。`dbms_terminates`・
+`dbms_wf`・`dbmsEval` がどの行数でも成り立つ。`bmsAll` への包含から出る。
+
+### 他の系 — Y 数列、未着手
 
 ## ExBuchholz の整礎性 — 済
 
@@ -231,7 +239,7 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
 * **2 行以上の読み取り。** 行列から順序数への写像の定義文が要る。調べた資料は値を
   導いているだけで規則を与えていない。値に合うよう推測した規則は commit する価値が
   ない。
-* **Y 数列。** 公式定義がプログラムで、停止性は未解決である。項目 4 を見よ。
+* **Y 数列。** 公式定義がプログラムで、停止性は未解決である。項目 4 にある。
 
 ## 約束ごと
 

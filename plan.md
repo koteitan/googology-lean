@@ -81,6 +81,9 @@ its standard forms is well founded, with no hypothesis.
 
 Bashicu matrices with any number of rows. `bms_terminates r` holds for every
 `r`; `r = 1, 2, 3` are the primitive, pair and trio sequences.
+`Notation/BMS/Any.lean` goes further: expansion ends from **any** array, so
+`bmsAll r` — the rule with no standardness condition — terminates as well,
+and both `bms r` and `Notation.DBMS.dbms r` sit inside it.
 
 The termination proof itself is
 [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) —
@@ -97,7 +100,13 @@ term and back: `read` and `unread` for the reading, `OneRow.lean` for what
 `Cut.lean` and `Entries.lean` for the bookkeeping, and `Prim.lean` and
 `Bms.lean` for the `StepHom` and the ordinal it gives.
 
-### Other systems — not started
+### `Notation/DBMS/` — done
+
+The same rule with the generators whose column `i` holds `i - k` in row `k`.
+`dbms_terminates`, `dbms_wf` and `dbmsEval` hold at every number of rows, by
+the inclusion into `bmsAll`.
+
+### Other systems — the Y sequence, not started
 
 ## Well-foundedness of ExBuchholz — done
 
