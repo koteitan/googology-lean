@@ -352,10 +352,11 @@ What is left of that is the Lean problem still open.
   will not finish; what would is a normal form theorem, and its first step is
   in: `Ord.principal_mem_CSet` says an additively principal member of
   `C_v(a)` is below `Ω_v` or a collapse `ψ_u(e)` with `u` and `e` in the
-  closure. What is left after that is the decomposition of an arbitrary
-  member into principals — Cantor normal form plus `mem_CSet_of_le` — and
-  then the recursion that turns each `ψ_u(e)` into a term, which is the hard
-  part: `e` may be larger than the ordinal being named. Higher up the normal form is not
+  closure. The second step is in too:
+  `Ord.exists_principal_split` peels a leading principal off any member, with
+  a smaller member behind it. What is left is the recursion that turns each
+  `ψ_u(e)` into a term, which is the hard part: `e` may be larger than the
+  ordinal being named, so the recursion cannot be on the ordinal alone. Higher up the normal form is not
   Cantor's: it needs `ψ` at every subscript, so the induction that builds a
   term has to know which arguments each `ψ_v` reaches, which is `C_v` again.
 

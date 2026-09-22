@@ -19,9 +19,13 @@ the recursion at `e < a` bounds it by `ω^e < ω^a`.
 first uncountable it is not close — `ψ_0(a) < Ω_1` always — and the content is
 below it.
 
-`principal_mem_CSet` is a different kind of fact and the first step of a
-normal form theorem: inside `C_v(a)` an additively principal ordinal is
-either below `Ω_v` or a collapse of something in the closure.
+`principal_mem_CSet` and `exists_principal_split` are a different kind of
+fact and the first two steps of a normal form theorem: inside `C_v(a)` an
+additively principal ordinal is either below `Ω_v` or a collapse of something
+in the closure, and any member splits off a leading principal with a smaller
+member behind it.  What is missing after those is the recursion that turns a
+collapse into a term, which is where the argument can be larger than the
+ordinal it names.
 
 Above `ε₀` the arguments carry `Ω` in front, and the same proof gives
 `ψ_0(Ω + a) = ε₀ · ω^a` up to the first fixed point of `x ↦ ε₀ · ω^x`, which
@@ -717,5 +721,44 @@ theorem principal_mem_CSet {v a : Ordinal.{u}} : ∀ x : Ordinal.{u}, x ∈ CSet
   | @coll u e hu he _ _ =>
     intro _ _
     exact Or.inr ⟨u, e.1, hu, he, e.2, rfl⟩
+
+/-- **And the second step: peel off the leading principal.**  A nonzero member
+of `C_v(a)` small enough to be inside it is `p + r` with `p` an additively
+principal member, `r` a smaller member, so an induction on `x` splits it into
+finitely many principals. -/
+theorem exists_principal_split {v a x : Ordinal.{u}} (hx : x ∈ CSet v a)
+    (hc : x.card ≤ ℵ_ v) (hpos : 0 < x) :
+    ∃ p r : Ordinal.{u}, Ordinal.IsPrincipal (· + ·) p ∧ 0 < p ∧ p ∈ CSet v a ∧
+      r ∈ CSet v a ∧ r < x ∧ p + r = x := by
+  have hx0 : x ≠ 0 := ne_of_gt hpos
+  set e := Ordinal.log (ω : Ordinal.{u}) x with he
+  have hple : (ω : Ordinal.{u}) ^ e ≤ x := Ordinal.opow_log_le_self ω hx0
+  have hppos : (0 : Ordinal.{u}) < (ω : Ordinal.{u}) ^ e := Ordinal.opow_pos _ omega0_pos
+  obtain ⟨n, hn⟩ := Ordinal.lt_omega0.mp (Ordinal.div_opow_log_lt x Ordinal.one_lt_omega0)
+  have hdm : (ω : Ordinal.{u}) ^ e * (n : Ordinal) + x % (ω : Ordinal.{u}) ^ e = x := by
+    have h := Ordinal.div_add_mod x ((ω : Ordinal.{u}) ^ e)
+    rwa [hn] at h
+  have hs : x % (ω : Ordinal.{u}) ^ e < (ω : Ordinal.{u}) ^ e :=
+    Ordinal.mod_lt x (ne_of_gt hppos)
+  have hn1 : 1 ≤ n := by
+    by_contra hcon
+    have hz : n = 0 := by omega
+    rw [hz] at hdm
+    simp only [Nat.cast_zero, mul_zero, zero_add] at hdm
+    exact absurd (hdm ▸ hs) (not_lt.mpr hple)
+  obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
+  have hkey : (ω : Ordinal.{u}) ^ e * (m : Ordinal) + x % (ω : Ordinal.{u}) ^ e < x := by
+    refine lt_of_lt_of_le ((add_lt_add_iff_left _).mpr hs) ?_
+    rw [← mul_add_one, ← Nat.cast_succ]
+    exact le_trans (self_le_add_right _ _) (le_of_eq hdm)
+  refine ⟨(ω : Ordinal.{u}) ^ e, (ω : Ordinal.{u}) ^ e * (m : Ordinal)
+    + x % (ω : Ordinal.{u}) ^ e, Ordinal.isPrincipal_add_omega0_opow e, hppos,
+    mem_CSet_of_le hx _ hple hc, mem_CSet_of_le hx _ hkey.le hc, hkey, ?_⟩
+  rw [← add_assoc, ← mul_one_add, show (1 : Ordinal) + (m : Ordinal) = ((m + 1 : ℕ) : Ordinal)
+    from by
+      rw [Nat.cast_succ, ← Nat.cast_one, ← Nat.cast_add, ← Nat.cast_add]
+      congr 1
+      omega]
+  exact hdm
 
 end Googology.Notation.ExBuchholz.Ord

@@ -52,7 +52,7 @@
 | **`p0(W) = e0`** | `Notation.ExBuchholz.Ord.psi_Omega_one` |
 | **かつ `e1` 未満で `p0(W + a) = e0·w^a`**。よって `p0(W + 1) = e0·w` | `Notation.ExBuchholz.Ord.psi_Omega_add_eq`, `Notation.ExBuchholz.Ord.psi_Omega_add_one` |
 | **かつ `p0(W·2) = e1`**。項 `p0(W+W)` がそれを名指す | `Notation.ExBuchholz.Ord.psi_Omega_two`, `Trans.BMS.val_te1` |
-| `C_v(a)` の加法的主要な元は `W_v` 未満か collapse であること。正規形定理の第一歩 | `Notation.ExBuchholz.Ord.principal_mem_CSet` |
+| `C_v(a)` の加法的主要な元は `W_v` 未満か collapse であること。どの元も先頭の主要な元を切り出せること。正規形定理の最初の二歩 | `Notation.ExBuchholz.Ord.principal_mem_CSet`, `Notation.ExBuchholz.Ord.exists_principal_split` |
 | 標準形がそこへ届くこと。`p0(W+1)` は `e0·w` を、`p0(W+W)` は `e1` を名指す | `Trans.BMS.OT_psi_Omega_add`, `Trans.BMS.val_tew`, `Trans.BMS.OT_te1` |
 
 ### 1 行: 行列が名指す順序数
