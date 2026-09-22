@@ -24,6 +24,13 @@ rather than beside it.
 `pairEquivBms` is the same at two rows, and easier: there the states are the
 entries of standard two-row arrays on both sides, so nothing has to be said
 about which matrices those are.
+
+`prim_wf` and `bmsL_zero_wf` close the `Rewrite` API at one row: the relation
+is well founded, not merely terminating, so `Rewrite.rankEval` applies and
+`primRankEval` is the rank of expansion itself.  Two rows and up do not have
+this yet — carrying well-foundedness back from `Notation.BMS.bms r` would
+need a map of states, and a state on the entries only knows its array through
+an existential.
 -/
 
 namespace Googology.Trans.BMS
@@ -161,5 +168,18 @@ noncomputable def bmsZeroEval :
     Eval (bmsL 0) (· < · : Ordinal.{0} → Ordinal.{0} → Prop) :=
   Eval.ofSim primOfBmsHom.toSim primEval
 
+
+/-! ### Well-foundedness -/
+
+/-- **The primitive sequence system is well founded.** -/
+theorem prim_wf : prim.WF := primHom.toSim.wf exbOT_wf
+
+/-- **And so is the general system at one row**, being the same system. -/
+theorem bmsL_zero_wf : (bmsL 0).WF := bmsEquivPrim.wf_iff.mpr prim_wf
+
+/-- The primitive sequence system carries the rank of its own expansion as an
+ordinal measure, as well as the value `primEval` gives. -/
+noncomputable def primRankEval :
+    Eval prim (· < · : Ordinal.{0} → Ordinal.{0} → Prop) := Rewrite.rankEval prim_wf
 
 end Googology.Trans.BMS
