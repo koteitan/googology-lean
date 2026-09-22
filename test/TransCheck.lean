@@ -206,9 +206,13 @@ def parRow (l : List Nat) : List Int :=
 
 `expand2L` is `BM4.expand` written on the entries — `Trans.BMS.entries2_expand`
 proves that. Running it beside `./bms` is what checks that
-`Googology/Notation/BMS` and the reference implement the same `expand`; the
-twelve below agree exactly, including the cases where the row-`0` increment
-fires. -/
+`Googology/Notation/BMS` and the reference implement the same `expand`.
+
+The sweep: every two-row matrix of length at most `4` whose first column is
+`(0,0)` and whose entries are below `3` — `819` of them, of which `./bms -s`
+calls `46` standard — expanded at `0`, `1` and `2`. All `138` agree. The spot
+checks below are drawn from it, including the cases where the row-`0`
+increment fires and the cases where the matrix grows. -/
 
 #guard expand2L 1 [(0,0),(1,1),(2,1),(3,2)] == [(0,0),(1,1),(2,1),(3,1)]
 #guard expand2L 0 [(0,0),(1,1)] == [(0,0)]
@@ -224,6 +228,12 @@ fires. -/
 #guard expand2L 1 [(0,0),(1,1),(2,2),(3,1)] == [(0,0),(1,1),(2,2),(3,0),(4,1),(5,2)]
 #guard expand2L 2 [(0,0),(1,1),(2,2),(3,2)]
   == [(0,0),(1,1),(2,2),(3,1),(4,2),(5,1),(6,2)]
+
+#guard expand2L 2 [(0,0),(1,0),(1,0)] == [(0,0),(1,0),(0,0),(1,0),(0,0),(1,0)]
+#guard expand2L 2 [(0,0),(1,1),(1,0)] == [(0,0),(1,1),(0,0),(1,1),(0,0),(1,1)]
+#guard expand2L 2 [(0,0),(1,1),(2,1)] == [(0,0),(1,1),(2,0),(3,1),(4,0),(5,1)]
+#guard expand2L 1 [(0,0),(1,0),(1,0),(1,0)] == [(0,0),(1,0),(1,0),(0,0),(1,0),(1,0)]
+#guard expand2L 1 [(0,0),(1,0),(2,0),(1,0)] == [(0,0),(1,0),(2,0),(0,0),(1,0),(2,0)]
 
 /-! A run of expansions at `0` from a pair-sequence generator, one column
 shorter each step, and the empty matrix stays empty. -/
