@@ -327,21 +327,21 @@ one-row matrices name the ordinals below `ε₀` and no others.
 
 What is left of that is the Lean problem still open.
 
-* **`val` is onto above `ε₀`.** The source states that `val` restricted to
+* **`val` is onto above `ε₁`.** The source states that `val` restricted to
   `OT` is an order **isomorphism** onto `C_0(Λ)`. The monotone and injective
   half is here — `val_lt_val` and `val_inj_of_OT` — and surjectivity is proved
-  only below `ε₀`. The arithmetic above it has started: `psi_Omega_add_eq`
-  says `ψ_0(Ω + a) = ε₀·ω^a` up to `ε₁`, and `psi_Omega_two` says `ψ_0(Ω·2)`
-  **is** `ε₁`. Those are what a surjectivity proof below `ε₁` would build
-  terms out of. The standard-form condition for terms with `Ω` in the argument
-  is `OT_psi_Omega_add`: what it asks is that `G_0` sees nothing in the
-  argument that reaches `Ω + B`. `ψ_0(Ω+1)` and `ψ_0(Ω+Ω)` are standard by
-  it, naming `ε₀·ω` and `ε₁`. What is left is the induction itself, which has
-  to carry that `G_0` condition along with the value. Two of its pieces are
-  in: `OT_cons_Omega` builds the sums, and `Ord.log_lt_self_of_lt_eps1` gives
-  the decrease the recursion needs — below `ε₁` the only fixed point of
-  `ω ^ ·` above `ε₀` would be `ε₁` itself, which `Ord.eps1_le_of_opow_fp`
-  rules out. Higher up the normal form is not
+  below `ε₁`: `exists_OT_of_lt_eps0` by Cantor normal form, and
+  `exists_OT_of_lt_eps1` above `ε₀`, where the leading term is `ψ_0(Ω + B)`
+  and `OT_cons_Omega` is the standard-form condition. The arithmetic it rests on is
+  `psi_Omega_add_eq` — `ψ_0(Ω + a) = ε₀·ω^a` up to `ε₁` — and
+  `psi_Omega_two`, that `ψ_0(Ω·2)` **is** `ε₁`; the recursion decreases by
+  `Ord.log_lt_self_of_lt_eps1`, since below `ε₁` the only fixed point of
+  `ω ^ ·` above `ε₀` would be `ε₁` itself.
+
+  Going further needs the arithmetic above `ε₁`, and that is not the same
+  shape: `ψ_0(Ω·2 + a)` starts another tower, `ψ_0(Ω^2)` is `ζ₀`, and at some
+  point the argument needs `ψ_1` in it, so the induction has to know which
+  arguments `ψ_1` reaches, which is `C_1` again. Higher up the normal form is not
   Cantor's: it needs `ψ` at every subscript, so the induction that builds a
   term has to know which arguments each `ψ_v` reaches, which is `C_v` again.
 

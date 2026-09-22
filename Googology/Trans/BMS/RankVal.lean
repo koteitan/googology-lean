@@ -41,11 +41,6 @@ open Ordinal
 open Googology.Notation.ExBuchholz
 open Googology.Notation.ExBuchholz.Term
 
-theorem val_le_val {x y : Term} (hx : OT x) (hy : OT y) (h : x ≤ y) : val x ≤ val y := by
-  rcases le_iff_lt_or_eq.mp h with hlt | rfl
-  · exact (val_lt_val hx hy hlt).le
-  · exact le_refl _
-
 instance instIsWellFoundedPrim : IsWellFounded prim.State prim.Rel := ⟨prim_wf⟩
 
 /-- **The rank of the primitive sequence system is the value of the term.** -/

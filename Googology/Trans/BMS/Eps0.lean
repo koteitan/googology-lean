@@ -17,6 +17,11 @@ into `ω^e`, and `repCons` writes `n` copies of `ψ_0` of the first in front of
 the second.  The exponent `e` is below `α` because nothing below `ε₀` is a
 fixed point of `ω ^ ·`, which is what `Ord.lt_opow_self_of_lt_eps0` says.
 
+`exists_OT_of_lt_eps1` carries the same construction one level up: above `ε₀`
+the leading term is `ψ_0(Ω + B)`, whose value `Ord.psi_Omega_add_eq` computes,
+and the standard-form condition there is `OT_cons_Omega`.  So `val` is onto
+the ordinals below `ε₁` as well.
+
 `val_te0` identifies the ceiling: `ψ_0(Ω)` **is** `ε₀`.  So
 `exists_matrix_of_lt_eps0` and `val_read_lt_eps0` together say the one-row
 matrices name the ordinals below `ε₀` and no others, and with
@@ -179,6 +184,55 @@ theorem G_addT_tW (B : Term) : G nil (addT tW B) = nil :: nil :: G nil B := by
   rw [show G nil t1 = [nil] from rfl, show G nil nil = ([] : List Term) from rfl]
   rfl
 
+theorem val_le_val {x y : Term} (hx : OT x) (hy : OT y) (h : x ≤ y) : val x ≤ val y := by
+  rcases le_iff_lt_or_eq.mp h with hlt | rfl
+  · exact (val_lt_val hx hy hlt).le
+  · exact le_refl _
+
+theorem le_of_val_le {x y : Term} (hx : OT x) (hy : OT y) (h : val x ≤ val y) : x ≤ y := by
+  rcases lt_trichotomy x y with hlt | rfl | hlt
+  · exact le_of_lt hlt
+  · exact le_refl _
+  · exact absurd (val_lt_val hy hx hlt) (not_lt.mpr h)
+
+theorem OT_tW : OT tW := by decide
+
+theorem lt_tW_of_val_lt {X : Term} (hOT : OT X) (h : val X < Ord.Omega 1) : X < tW :=
+  lt_of_val_lt hOT OT_tW (by rw [val_tW]; exact h)
+
+theorem val_lt_Omega_of_lt_tW {X : Term} (hOT : OT X) (h : X < tW) : val X < Ord.Omega 1 := by
+  rw [← val_tW]
+  exact val_lt_val hOT OT_tW h
+
+theorem descHead_of_lt_tW {X : Term} (h : X < tW) : descHead t1 nil X = true := by
+  cases X with
+  | nil => rfl
+  | cons c d u =>
+    show (match head? (cons c d u) with
+      | none => true
+      | some (c', d') => decide (psi c' d' ≤ psi t1 nil)) = true
+    refine decide_eq_true (le_of_lt ?_)
+    rcases le_iff_lt_or_eq.mp (psi_le_cons c d u) with h1 | h1
+    · exact lt_trans h1 h
+    · rw [h1]; exact h
+
+theorem OT_addT_tW {X : Term} (hOT : OT X) (h : X < tW) : OT (addT tW X) := by
+  show isOT (cons t1 nil X) = true
+  rw [isOT]
+  simp only [Bool.and_eq_true]
+  exact ⟨⟨⟨⟨rfl, rfl⟩, rfl⟩, hOT⟩, descHead_of_lt_tW h⟩
+
+theorem lt_addT_tW {X : Term} (hOT : OT X) (h : X < tW) : X < addT tW X := by
+  refine lt_of_val_lt hOT (OT_addT_tW hOT h) ?_
+  rw [val_addT, val_tW]
+  exact lt_of_lt_of_le (val_lt_Omega_of_lt_tW hOT h) (self_le_add_right _ _)
+
+theorem addT_tW_le_addT_tW {X Y : Term} (hX : OT X) (hY : OT Y) (hXt : X < tW) (hYt : Y < tW)
+    (h : X ≤ Y) : addT tW X ≤ addT tW Y := by
+  refine le_of_val_le (OT_addT_tW hX hXt) (OT_addT_tW hY hYt) ?_
+  rw [val_addT, val_addT, add_le_add_iff_left]
+  exact val_le_val hX hY h
+
 theorem G_cons_Omega (B t : Term) :
     G nil (cons nil (addT tW B) t) = addT tW B :: nil :: nil :: (G nil B ++ G nil t) := by
   rw [G, if_pos (nil_le nil), show G nil nil = ([] : List Term) from rfl, List.nil_append,
@@ -218,6 +272,61 @@ theorem OT_psi_Omega_add {B : Term} (hB : OT B)
     OT (psi nil (addT tW B)) :=
   OT_cons_Omega hB hG hhead rfl rfl
 
+/-- `n` copies of `ψ_0(Ω + B)` in front of `t`. -/
+def repOmega (B : Term) : Nat → Term → Term
+  | 0, t => t
+  | n + 1, t => cons nil (addT tW B) (repOmega B n t)
+
+theorem val_repOmega (B t : Term) : ∀ n : Nat,
+    val (repOmega B n t) = Ord.psi (val (addT tW B)) 0 * (n : Ordinal) + val t := by
+  intro n
+  induction n with
+  | zero => rw [Nat.cast_zero, mul_zero, zero_add]; rfl
+  | succ m ih =>
+    have hcomm : (1 : Ordinal) + (m : Ordinal) = (m : Ordinal) + 1 := by
+      rw [← Nat.cast_one, ← Nat.cast_add, ← Nat.cast_add, Nat.add_comm]
+    have h1 : ∀ p : Ordinal, p + p * (m : Ordinal) = p * ((m : Ordinal) + 1) := by
+      intro p
+      rw [← hcomm, mul_add, mul_one]
+    show Ord.psi (val (addT tW B)) (val nil) + val (repOmega B m t) = _
+    rw [val_nil, ih, ← add_assoc, h1, Nat.cast_succ]
+
+theorem descHead_repOmega {B t : Term} (hdesc : descHead nil (addT tW B) t = true) :
+    ∀ n, descHead nil (addT tW B) (repOmega B n t) = true := by
+  intro n
+  cases n with
+  | zero => exact hdesc
+  | succ m =>
+    show descHead nil (addT tW B) (cons nil (addT tW B) (repOmega B m t)) = true
+    rw [descHead]
+    exact decide_eq_true (le_refl _)
+
+theorem OT_repOmega {B t : Term} (hB : OT B) (hBt : B < tW)
+    (hGB : ∀ x ∈ G nil B, x < addT tW B) (ht : OT t)
+    (hdesc : descHead nil (addT tW B) t = true) : ∀ n, OT (repOmega B n t) := by
+  intro n
+  induction n with
+  | zero => exact ht
+  | succ m ih =>
+    exact OT_cons_Omega hB hGB (descHead_of_lt_tW hBt) ih (descHead_repOmega hdesc m)
+
+theorem G_repOmega_mem {B t : Term} {n : Nat} {x : Term} (hx : x ∈ G nil (repOmega B n t)) :
+    x = addT tW B ∨ x = nil ∨ x ∈ G nil B ∨ x ∈ G nil t := by
+  induction n with
+  | zero => exact Or.inr (Or.inr (Or.inr hx))
+  | succ m ih =>
+    rw [show repOmega B (m + 1) t = cons nil (addT tW B) (repOmega B m t) from rfl,
+      G_cons_Omega] at hx
+    rcases List.mem_cons.mp hx with rfl | h1
+    · exact Or.inl rfl
+    · rcases List.mem_cons.mp h1 with rfl | h2
+      · exact Or.inr (Or.inl rfl)
+      · rcases List.mem_cons.mp h2 with rfl | h3
+        · exact Or.inr (Or.inl rfl)
+        · rcases List.mem_append.mp h3 with h4 | h4
+          · exact Or.inr (Or.inr (Or.inl h4))
+          · exact ih h4
+
 /-- The term `ψ_0(Ω + 1)`. -/
 abbrev tew : Term := psi nil (addT tW t1)
 
@@ -233,6 +342,135 @@ theorem OT_te1 : OT te1 := by decide
 /-- **`ψ_0(Ω)` is `ε₀`.** -/
 theorem val_te0 : val te0 = Ord.eps0 := by
   rw [show te0 = psi nil tW from rfl, val_psi, val_nil, val_tW, Ord.psi_Omega_one]
+
+/-! ### `val` is onto below `ε₁` -/
+
+theorem lt_of_lt_of_le' {x y z : Term} (h1 : x < y) (h2 : y ≤ z) : x < z := by
+  rcases le_iff_lt_or_eq.mp h2 with h | rfl
+  · exact lt_trans h1 h
+  · exact h1
+
+theorem descHead_of_val_lt {a b t : Term} (hOTt : OT t) (hOTp : OT (psi a b))
+    (h : val t < val (psi a b)) : descHead a b t = true := by
+  cases t with
+  | nil => rfl
+  | cons c d u =>
+    show (match head? (cons c d u) with
+      | none => true
+      | some (c', d') => decide (psi c' d' ≤ psi a b)) = true
+    refine decide_eq_true (le_of_lt ?_)
+    rcases le_iff_lt_or_eq.mp (psi_le_cons c d u) with h1 | h1
+    · exact lt_trans h1 (lt_of_val_lt hOTt hOTp h)
+    · rw [h1]
+      exact lt_of_val_lt hOTt hOTp h
+
+/-- **Every ordinal below `ε₁` is the value of a standard form.**  Below `ε₀`
+that is `exists_desc_of_lt_eps0`; above it the leading term is `ψ_0(Ω + B)`
+for the `B` naming `log_ω (α / ε₀)`, repeated as often as the normal form
+says, and the rest follows by the same construction. -/
+theorem exists_OT_of_lt_eps1 : ∀ α : Ordinal.{0}, α < Ord.eps1 →
+    ∃ X : Term, OT X ∧ val X = α ∧ ∀ x ∈ G nil X, x < addT tW X := by
+  intro α
+  induction α using WellFoundedLT.induction with
+  | _ α IH =>
+    intro hα
+    have hΩ : α < Ord.Omega 1 := lt_of_lt_of_le hα Ord.eps1_le_Omega_one
+    rcases lt_or_ge α Ord.eps0 with hsmall | hbig
+    · obtain ⟨X, hA, hD, hv⟩ := exists_desc_of_lt_eps0 α hsmall
+      have hOTX : OT X := OT_of_desc X hA hD
+      have hXt : X < tW := lt_tW_of_val_lt hOTX (by rw [hv]; exact hΩ)
+      exact ⟨X, hOTX, hv, fun x hx =>
+        lt_trans (G_lt_of_desc X hA hD x hx) (lt_addT_tW hOTX hXt)⟩
+    rcases eq_or_lt_of_le hbig with heq | hbig'
+    · refine ⟨te0, OT_te0, by rw [val_te0, heq], fun x hx => ?_⟩
+      rw [show G nil te0 = [tW, nil, nil] from rfl] at hx
+      rcases List.mem_cons.mp hx with rfl | h1
+      · show tW < addT tW te0
+        decide
+      · rcases List.mem_cons.mp h1 with rfl | h2
+        · exact nil_lt_cons _ _ _
+        · rcases List.mem_cons.mp h2 with rfl | h3
+          · exact nil_lt_cons _ _ _
+          · exact absurd h3 (by simp)
+    · -- ε₀ < α
+      have heps0pos : (0 : Ordinal) < Ord.eps0 := Ord.eps0_pos
+      have hdm : Ord.eps0 * (α / Ord.eps0) + α % Ord.eps0 = α :=
+        Ordinal.div_add_mod α Ord.eps0
+      have hyle : α / Ord.eps0 ≤ α := by
+        refine le_trans (Ordinal.le_mul_right (α / Ord.eps0) heps0pos) ?_
+        exact le_trans (self_le_add_right _ _) (le_of_eq hdm)
+      have hy0 : α / Ord.eps0 ≠ 0 := by
+        intro h
+        rw [h, mul_zero, zero_add] at hdm
+        exact absurd (hdm ▸ Ordinal.mod_lt α (ne_of_gt heps0pos)) (not_lt.mpr hbig)
+      have hlog : (ω : Ordinal) ^ Ordinal.log ω (α / Ord.eps0) ≤ α / Ord.eps0 :=
+        Ordinal.opow_log_le_self ω hy0
+      have he : Ordinal.log (ω : Ordinal) (α / Ord.eps0) < α := by
+        rcases lt_or_ge (α / Ord.eps0) α with h | h
+        · exact lt_of_le_of_lt (Ordinal.log_le_self _ _) h
+        · rw [le_antisymm hyle h]
+          exact Ord.log_lt_self_of_lt_eps1 hbig' hα
+      obtain ⟨B, hOTB, hvB, hGB⟩ := IH _ he (lt_trans he hα)
+      have hBt : B < tW := lt_tW_of_val_lt hOTB (by rw [hvB]; exact lt_trans he hΩ)
+      have hP : Ord.psi (val (addT tW B)) 0
+          = Ord.eps0 * (ω : Ordinal) ^ Ordinal.log ω (α / Ord.eps0) := by
+        rw [val_addT, val_tW, hvB]
+        exact Ord.psi_Omega_add_eq _ (lt_trans he hα)
+      obtain ⟨n, hn⟩ := Ordinal.lt_omega0.mp
+        (Ordinal.div_opow_log_lt (α / Ord.eps0) Ordinal.one_lt_omega0)
+      have hsplit : (ω : Ordinal) ^ Ordinal.log ω (α / Ord.eps0) * (n : Ordinal)
+          + (α / Ord.eps0) % (ω : Ordinal) ^ Ordinal.log ω (α / Ord.eps0) = α / Ord.eps0 := by
+        have h := Ordinal.div_add_mod (α / Ord.eps0)
+          ((ω : Ordinal) ^ Ordinal.log ω (α / Ord.eps0))
+        rwa [hn] at h
+      have hstep : Ord.eps0 * ((α / Ord.eps0) % (ω : Ordinal) ^ Ordinal.log ω (α / Ord.eps0))
+          + α % Ord.eps0
+            < Ord.eps0 * (ω : Ordinal) ^ Ordinal.log ω (α / Ord.eps0) := by
+        refine lt_of_lt_of_le ((add_lt_add_iff_left _).mpr
+          (Ordinal.mod_lt α (ne_of_gt heps0pos))) ?_
+        rw [← mul_add_one]
+        refine mul_le_mul_right ?_ _
+        rw [← Order.succ_eq_add_one]
+        exact Order.succ_le_of_lt (Ordinal.mod_lt _ (ne_of_gt (Ordinal.opow_pos _ omega0_pos)))
+      have hr : Ord.eps0 * ((α / Ord.eps0) % (ω : Ordinal) ^ Ordinal.log ω (α / Ord.eps0))
+          + α % Ord.eps0 < α := by
+        refine lt_of_lt_of_le hstep ?_
+        refine le_trans (mul_le_mul_right hlog Ord.eps0) ?_
+        exact le_trans (self_le_add_right _ _) (le_of_eq hdm)
+      obtain ⟨T, hOTT, hvT, hGT⟩ := IH _ hr (lt_trans hr hα)
+      have hvX : val (repOmega B n T) = α := by
+        rw [val_repOmega, hP, hvT, mul_assoc, ← add_assoc, ← mul_add, hsplit, hdm]
+      have hOTpsi : OT (psi nil (addT tW B)) := OT_psi_Omega_add hOTB hGB (descHead_of_lt_tW hBt)
+      have hdesc : descHead nil (addT tW B) T = true := by
+        refine descHead_of_val_lt hOTT hOTpsi ?_
+        rw [hvT, val_psi, val_nil, hP]
+        exact hstep
+      have hOTX : OT (repOmega B n T) := OT_repOmega hOTB hBt hGB hOTT hdesc n
+      have hXt : repOmega B n T < tW := lt_tW_of_val_lt hOTX (by rw [hvX]; exact hΩ)
+      have hTt : T < tW := lt_tW_of_val_lt hOTT (by rw [hvT]; exact lt_trans hr hΩ)
+      refine ⟨repOmega B n T, hOTX, hvX, fun x hx => ?_⟩
+      rcases G_repOmega_mem hx with rfl | rfl | h | h
+      · refine lt_of_val_lt (OT_addT_tW hOTB hBt) (OT_addT_tW hOTX hXt) ?_
+        rw [val_addT, val_addT, add_lt_add_iff_left, hvB, hvX]
+        exact he
+      · show nil < addT tW (repOmega B n T)
+        exact nil_lt_cons _ _ _
+      · refine lt_of_lt_of_le' (hGB x h) (addT_tW_le_addT_tW hOTB hOTX hBt hXt ?_)
+        exact le_of_val_le hOTB hOTX (by rw [hvB, hvX]; exact he.le)
+      · refine lt_of_lt_of_le' (hGT x h) (addT_tW_le_addT_tW hOTT hOTX hTt hXt ?_)
+        exact le_of_val_le hOTT hOTX (by rw [hvT, hvX]; exact hr.le)
+
+/-- **The standard forms below `ψ_0(Ω+Ω)` name exactly the ordinals below
+`ε₁`.**  One direction is `exists_OT_of_lt_eps1`, the other is that `val` is
+monotone and `ψ_0(Ω+Ω)` is `ε₁`. -/
+theorem exists_OT_lt_te1 {α : Ordinal.{0}} (h : α < Ord.eps1) :
+    ∃ X : Term, OT X ∧ X < te1 ∧ val X = α := by
+  obtain ⟨X, hOT, hv, _⟩ := exists_OT_of_lt_eps1 α h
+  exact ⟨X, hOT, lt_of_val_lt hOT OT_te1 (by rw [hv, val_te1]; exact h), hv⟩
+
+theorem val_lt_eps1_of_lt_te1 {X : Term} (hOT : OT X) (h : X < te1) : val X < Ord.eps1 := by
+  rw [← val_te1]
+  exact val_lt_val hOT OT_te1 h
 
 /-! ### The matrices -/
 

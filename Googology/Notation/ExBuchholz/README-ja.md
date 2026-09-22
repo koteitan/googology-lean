@@ -124,9 +124,9 @@ inductive Term where
 
 出典は、`o` の `OT` への制限が `C_0(Λ)` への順序**同型**だと述べている。単調で
 単射という半分はここの定理である（`val_lt_val`、`val_inj_of_OT`）。全射性は
-**`e0` 未満では**証明した。`Trans.BMS.exists_OT_of_lt_eps0` が Cantor 標準形で
-それを言い、そこでの `p0(a) = w^a` は `Ord.psi_zero_eq_opow`、`p0(W) = e0` は
-`Ord.psi_Omega_one` である。`e0` 以上は証明していない。
+**`e1` 未満では**証明した。`e0` 未満は `Trans.BMS.exists_OT_of_lt_eps0` が Cantor
+標準形で、その上は `Trans.BMS.exists_OT_of_lt_eps1` が先頭項 `p0(W + B)` で組む。
+`e1` 以上は証明していない。
 
 ## 整礎性：どう閉じたか
 
