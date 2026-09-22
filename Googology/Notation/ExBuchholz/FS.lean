@@ -895,6 +895,35 @@ theorem OT_subOf_dom {X : Term} (hOT : OT X) (h0 : dom X ≠ nil) (hw : dom X �
     simp only [subOf] at hz ⊢
     exact OT_fst hz
 
+/-- The standard-form condition for a principal term, as a constructor. -/
+theorem OT_psi_of {a b : Term} (ha : OT a) (hb : OT b)
+    (hG : ∀ x ∈ G a b, x < b) : OT (psi a b) := by
+  have h1 : (G a b).all (fun x => decide (x < b)) = true :=
+    List.all_eq_true.mpr (fun x hx => decide_eq_true (hG x hx))
+  show isOT (cons a b nil) = true
+  rw [isOT]
+  simp only [h1, Bool.and_true, Bool.true_and, descHead, head?, isOT]
+  rw [show isOT a = true from ha, show isOT b = true from hb]
+  rfl
+
+/-- A finite repeat of a principal standard form is standard. -/
+theorem OT_repeatPrin {a b : Term} (h : OT (psi a b)) :
+    ∀ k : Nat, OT (repeatPrin a b k)
+  | 0 => rfl
+  | k + 1 => by
+    have ih : isOT (repeatPrin a b k) = true := OT_repeatPrin h k
+    have hG : (G a b).all (fun x => decide (x < b)) = true :=
+      List.all_eq_true.mpr (fun x hx => decide_eq_true (OT_G_lt h x hx))
+    have ha : isOT a = true := OT_fst h
+    have hb : isOT b = true := OT_snd h
+    show isOT (cons a b (repeatPrin a b k)) = true
+    rw [isOT]
+    have hd : descHead a b (repeatPrin a b k) = true := by
+      cases k with
+      | zero => rfl
+      | succ j => simp [repeatPrin, descHead, head?, le_refl]
+    simp only [ha, hb, hG, hd, ih, Bool.and_true, Bool.true_and]
+
 /-! ## As an expansion system -/
 
 /-- Extended Buchholz terms as an expansion system: one step is the

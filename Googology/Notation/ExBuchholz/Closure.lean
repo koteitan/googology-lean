@@ -541,6 +541,13 @@ theorem eq_addT_one_of_dom_eq_one : ∀ X : Term, OT X → dom X = t1 →
             · rw [show dom (cons X₁ X₂ nil) = tw from by rw [dom]; simp_all] at hd
               exact absurd hd (by decide)
 
+/-- Buchholz 3.4, applied where 3.3 needs it: a collapse of a value of the
+fundamental sequence is standard. -/
+theorem OT_psi_fs {A B Y : Term} (hOT : OT (psi A B))
+    (hT : Trian Y (fs B Y) B) (hY : ∀ x ∈ G A Y, x < fs B Y)
+    (hfs : OT (fs B Y)) : OT (psi A (fs B Y)) :=
+  OT_psi_of (OT_fst hOT) hfs (hT.G_lt (OT_G_lt hOT) hY)
+
 /-- **Buchholz 3.3** for the extended system: the fundamental sequence keeps
 a term standard. -/
 def OTFS : Prop := ∀ X Y : Term, OT X → Y < dom X → OT Y → OT (fs X Y)
