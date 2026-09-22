@@ -44,4 +44,4 @@ import する。順序数へ評価する系だけが import するのであっ�
 |---|---|---|---|---|---|
 | [ExBuchholz](ExBuchholz/README-ja.md) | 済 | 狭義線形順序 | 決定可能。較正は未 | `exbOT` | `exbOTEval` |
 | [BMS](BMS/README-ja.md) | 配列 | パッケージ側の比較 | 階段から到達可能 | `bms r` | `bmsEval`（階数）、`r = 1` では `Trans.BMS.bmsOrdEval` |
-| [DBMS](DBMS/README-ja.md) | 配列 | BMS と同じ | `dstair` から到達可能 | `dbms r` | `r = 1` では `Trans.DBMS.dbmsOrdEval` |
+| [DBMS](DBMS/README-ja.md) | 配列 | BMS と同じ | `dstair` から到達可能 | `dbms r` | `dbmsEval`（階数）、`r = 1` では `Trans.DBMS.dbmsOrdEval` |

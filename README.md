@@ -18,6 +18,7 @@ Names are written relative to `Googology`.
 | | |
 |---|---|
 | **Bashicu matrices terminate**, for any number of rows | `Notation.BMS.bms_terminates` |
+| **expansion ends from any array at all**, standard or not | `Notation.BMS.terminates_any` |
 | the primitive, pair and trio sequences terminate | `Notation.BMS.primitive_terminates`, `Notation.BMS.pair_terminates`, `Notation.BMS.trio_terminates` |
 | BMS carries an ordinal measure | `Notation.BMS.bmsEval` |
 | **every Bashicu matrix expansion, written on the entries, is `BM4.expand`** — so it runs, at any number of rows | `Trans.BMS.entriesR_expand` |
@@ -27,7 +28,7 @@ Names are written relative to `Googology`.
 | from a generator, any expansion sequence ends | `Trans.BMS.bmsLStd_terminates`, `Trans.BMS.primStd_terminates`, `Trans.BMS.pairStd_terminates` |
 | **well-foundedness and termination are the same condition** | `Rewrite.wf_iff_terminates` |
 | so every system here is well founded and expansion has a rank | `Trans.BMS.bmsL_wf`, `Trans.BMS.pairL_wf`, `Trans.BMS.prim_wf`, `Trans.BMS.bmsLRankEval` |
-| DBMS is the same rule with other generators | `Trans.DBMS.dbmsL`, `Trans.DBMS.dbmsL_zero_terminates` |
+| DBMS is the same rule with other generators, and terminates too | `Notation.DBMS.dbms_terminates`, `Trans.DBMS.dbmsL_terminates` |
 
 ### Extended Buchholz's ψ
 

@@ -17,6 +17,7 @@
 | | |
 |---|---|
 | **バシク行列はどの行数でも停止する** | `Notation.BMS.bms_terminates` |
+| **標準形かどうかに関係なく、どんな配列からでも展開は止まる** | `Notation.BMS.terminates_any` |
 | 原始数列・ペア数列・トリオ数列の停止 | `Notation.BMS.primitive_terminates`、`Notation.BMS.pair_terminates`、`Notation.BMS.trio_terminates` |
 | BMS は順序数の測度を持つ | `Notation.BMS.bmsEval` |
 | **成分列の上に書いた BMS の展開が `BM4.expand` であること** — 行数によらず、だから走る | `Trans.BMS.entriesR_expand` |
@@ -26,7 +27,7 @@
 | 生成元から出発した展開列は必ず止まること | `Trans.BMS.bmsLStd_terminates`, `Trans.BMS.primStd_terminates`, `Trans.BMS.pairStd_terminates` |
 | **整礎性と停止性は同じ条件であること** | `Rewrite.wf_iff_terminates` |
 | だからここにある系はどれも整礎で、展開が階数を持つこと | `Trans.BMS.bmsL_wf`, `Trans.BMS.pairL_wf`, `Trans.BMS.prim_wf`, `Trans.BMS.bmsLRankEval` |
-| DBMS は同じ規則で生成元だけが違う | `Trans.DBMS.dbmsL`, `Trans.DBMS.dbmsL_zero_terminates` |
+| DBMS は同じ規則で生成元だけが違い、やはり停止する | `Notation.DBMS.dbms_terminates`, `Trans.DBMS.dbmsL_terminates` |
 
 ### 拡張ブーフホルツ ψ
 

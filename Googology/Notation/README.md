@@ -47,4 +47,4 @@ mathlib-free.
 |---|---|---|---|---|---|
 | [ExBuchholz](ExBuchholz/README.md) | done | strict linear order | decidable, not calibrated | `exbOT` | `exbOTEval` |
 | [BMS](BMS/README.md) | arrays | comparison in the package | reachable from a stair | `bms r` | `bmsEval` (the rank), and `Trans.BMS.bmsOrdEval` for `r = 1` |
-| [DBMS](DBMS/README.md) | arrays | as BMS | reachable from `dstair` | `dbms r` | `Trans.DBMS.dbmsOrdEval` for `r = 1` |
+| [DBMS](DBMS/README.md) | arrays | as BMS | reachable from `dstair` | `dbms r` | `dbmsEval` (the rank), and `Trans.DBMS.dbmsOrdEval` for `r = 1` |

@@ -35,15 +35,16 @@ noncomputable def dbms (r : ℕ) : Rewrite where
 |---|---|
 | 展開系 | 済 |
 | 生成元 | 済（`dbmsStd`） |
-| 任意の行数での停止性 | **未証明** |
+| 任意の行数での停止性 | 済（`dbms_terminates`） |
 | 1 行での順序数と停止性 | 済。[`Trans/DBMS/`](../../Trans/README-ja.md) にある |
 | 1 行でどの行列が標準形か | 済（`dstd_entries_iff`） |
 | 行数によらず成分列の上での展開 | 済（`Trans.DBMS.dbmsL`） |
 
-`r ≥ 2` の停止性はここでは証明していない。このライブラリが取り込んでいるラベル
-系の証明は階段から到達可能な配列についてのものであり、この生成元に移るかどうかは
-このリポジトリでは決着がついていない。
+停止性は生成元に一切依存しない。`Notation.BMS.terminates_any` が、標準形かどうかに
+関係なく**どんな**配列からでも展開は止まると言う。高さが降下するラベルは `Λ` 鎖で、
+配列を一度も見ないからである。だから `dbms_terminates` はどの行数でも成り立ち、
+`dbms_wf` と `dbmsEval` も出る。
 
-1 行は停止する。`Trans.DBMS.dbms_one_terminates` が拡張ブーフホルツ ψ への翻訳で
-それを出し、`Trans.DBMS.dbmsOrdEval` が 1 行の各行列が名指す順序数を与える。
-1 行では両系が一致するので、これは 1 行 BMS と同じ順序数である。
+1 行は翻訳でも停止する（`Trans.DBMS.dbms_one_terminates`）。
+`Trans.DBMS.dbmsOrdEval` が 1 行の各行列が名指す順序数を与える。1 行では両系が
+一致するので、これは 1 行 BMS と同じ順序数である。

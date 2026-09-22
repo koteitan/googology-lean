@@ -36,16 +36,17 @@ With one row they agree, because `i - 0 = i`.
 |---|---|
 | the expansion system | done |
 | the generators | done (`dbmsStd`) |
-| termination, any number of rows | **not proved** |
+| termination, any number of rows | done (`dbms_terminates`) |
 | one row: an ordinal, and termination | done, in [`Trans/DBMS/`](../../Trans/README.md) |
 | one row: which matrices are standard | done (`dstd_entries_iff`) |
 | the expansion on the entries, at any number of rows | done (`Trans.DBMS.dbmsL`) |
 
-Termination is not proved here for `r ≥ 2`. The label-system proof this
-library imports is about arrays reachable from a stair; whether it carries
-over to these generators is not settled in this repository.
+Termination does not depend on the generators at all.
+`Notation.BMS.terminates_any` says expansion ends from **any** array, standard
+or not: the label whose height descends is the `Λ`-chain, which never looks at
+the array. So `dbms_terminates` holds for every number of rows, and `dbms_wf`
+and `dbmsEval` follow.
 
-One row does terminate. `Trans.DBMS.dbms_one_terminates` gets it by
-translation into extended Buchholz's ψ, and `Trans.DBMS.dbmsOrdEval` gives the
-ordinal each one-row matrix names — the same ordinals as one-row BMS, since
-the two systems agree there.
+One row also terminates by translation — `Trans.DBMS.dbms_one_terminates` —
+and `Trans.DBMS.dbmsOrdEval` gives the ordinal each one-row matrix names, the
+same ordinals as one-row BMS since the two systems agree there.

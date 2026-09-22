@@ -225,9 +225,12 @@ That is `Mono.lean`.
    of `[ ]` that one row never reaches, the tower;
 4. **DBMS done, the Y sequence not.** `Notation/DBMS/` has the expansion
    system: the rule is BM4's, and only the generators differ — column `i`
-   holds `i - k` in row `k` rather than `i`. Termination for `r ≥ 2` is not
-   proved, since the label-system proof this library imports is about arrays
-   reachable from a stair. One row is done, by the same translation as BMS.
+   holds `i - k` in row `k` rather than `i`. Termination holds at every number
+   of rows, and not because of the generators: `Notation.BMS.terminates_any`
+   says expansion ends from any array at all, standard or not, because the
+   label whose height descends is the `Λ`-chain, which never looks at the
+   array. The `Std` hypothesis of the imported `Pat.terminates` is about what
+   an array names, not about whether it halts. One row is done, by the same translation as BMS.
    The Y sequence is **not** going in yet, and the reason is worth recording.
    Its official definition is a program, not a set of equations: the
    [wiki article](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97)
@@ -251,17 +254,11 @@ generators; the one-row, two-row and general forms are proved to be one
 another. One row is settled all the way to the ordinals, in both directions
 and as an equivalence.
 
-Three things are left, and none of them is a Lean problem.
+Two things are left, and neither is a Lean problem.
 
 * **A reading for two rows and up.** It needs a stated definition of the map
   from matrices to ordinals. The sources checked give worked values, not a
   rule, and a rule guessed to fit them is not worth committing.
-* **DBMS termination for two rows and up.** The label-system proof this
-  library imports is about arrays reachable from a stair, and the DBMS
-  generators are not stairs. The two notions of standard form are
-  incomparable — `(0,0)(1,1)` is a BM4 standard form and not a DBMS one,
-  `(0,0)(1,0)(2,1)` the other way round — so neither system's termination
-  gives the other's.
 * **The Y sequence.** Its official definition is a program and its
   termination is open; see item 4.
 
