@@ -116,16 +116,24 @@ the plain shape, proved: the head lands by a size argument through
 `lt_of_size_lt_addT`, and the tail by the same statement at `t` with the head
 appended to the prefix.
 
-The three principal branches are not written yet.  Each of them splits on
-where `x` sits relative to the prefix `p`: below it, equal to it, or above it,
-and only the third needs work.  There `x = p + x'`, and the induction
-hypothesis does not reach `x'`, which is not a member of any `G`.  For
-`ψ_a(0)` with `dom a = 1` the third case closes through `le_pred_of_lt` and a
-size argument; that branch is `bach_succ`, proved.  For `ψ_a(0)` with `dom a ∉ {0,1}` it does not seem to arise at
-all.  The open one is `ψ_a(b)` with `dom b < V`: there `x'` can have `a` as
-its head subscript, and what is then needed is that the argument of that head
-is below `b[W]` — the same statement at `b`, whose hypothesis is available at
-level `a` but not at the level the induction is running at.
+Of the three principal branches, `ψ_a(0)` with `dom a = 1` is `bach_succ`,
+proved: it splits on where `x` sits relative to the prefix — below it, equal
+to it, or above it — and the third case closes through `le_pred_of_lt` and a
+size argument.
+
+The other two reduce, but to statements in other contexts.  `ψ_a(0)` with
+`dom a ∉ {0,1}` is the `P` shape at `a` under the same prefix, because
+`G_u(ψ_a(0))` is `{0}` together with `G_u(a)` and the conclusion is about
+`ψ_{a[W]}(0)`.  `ψ_a(b)` with `dom b < V` splits three ways: `G_u(a)` by a
+size argument, `G_u(b)` by the shape whose context is `p + ψ_a(−)`, and the
+argument `b` itself by the plain shape at `b` **at level `a`**, whose
+hypothesis is exactly `OT_G_lt` on `OT (ψ_a(b))`.  That last step is why the
+induction has to quantify over the level rather than fix it.
+
+The contexts do not close up.  The sum branch of the `P` shape asks for
+`ψ_{p + ψ_α(β) + (−)}(0)`, and so on, so the induction wants a general context
+rather than the three shapes.  Finding the right closure condition on contexts
+is what is left.
 
 The prefix cannot be dropped. For `V = ψ_Ω(0) + ψ_1(ψ_Ω(0))`, which is
 standard with a term-indexed domain, `G_1` sees `ψ_Ω(0)` in the tail — the
