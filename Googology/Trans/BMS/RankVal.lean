@@ -631,6 +631,27 @@ theorem rank_sumAll :
   rw [rank_mul_omega0 sumAll genAll zeroCol (show ¬ ([[0, 0], [1, 1], [0, 0], [1, 0]] : List (List Nat)) = [] by simp) rfl (by simp [zeroCol])
       step_sumAll, rank_genAll, rank_zeroCol, one_mul]
 
+/-! ### The ordinal of the one-row system -/
+
+/-- **The primitive sequence system's ordinal is exactly `ε₀`**: the ranks of
+its states are cofinal in `ε₀` and never reach it. -/
+theorem iSup_rank_prim :
+    ⨆ l : PrimState, IsWellFounded.rank prim.Rel l = Ord.eps0 := by
+  refine le_antisymm (Ordinal.iSup_le (fun l => ?_)) ?_
+  · rw [rank_prim_eq_val]
+    exact (val_read_lt_eps0 l.2.2).le
+  · refine le_of_forall_lt (fun β hβ => ?_)
+    have hβ1 : β + 1 < Ord.eps0 :=
+      Ord.isPrincipal_add_eps0 hβ Ord.one_lt_eps0
+    obtain ⟨l, hc, hOT, hv⟩ := exists_matrix_of_lt_eps0 hβ1
+    refine lt_of_lt_of_le ?_ (Ordinal.le_iSup
+      (fun s : PrimState => IsWellFounded.rank prim.Rel s) ⟨l, hc, hOT⟩)
+    show β < IsWellFounded.rank prim.Rel ⟨l, hc, hOT⟩
+    rw [rank_prim_eq_val]
+    show β < val (read 0 l)
+    rw [hv]
+    exact lt_of_lt_of_le (Order.lt_succ β) (le_of_eq (Order.succ_eq_add_one β))
+
 /-! ### The same ordinals, named as terms
 
 The two-row ranks above are values of extended Buchholz terms, so the
