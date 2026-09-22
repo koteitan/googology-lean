@@ -130,4 +130,18 @@ theorem rank_dbms_eq_val (A : (dbms 1).State) :
   rw [← h]
   exact rank_prim_eq_val (dbmsHom.map A)
 
+/-- **One-row DBMS has ordinal `ε₀`**, as one-row BMS does. -/
+theorem iSup_rank_dbms :
+    ⨆ A : (dbms 1).State, IsWellFounded.rank (dbms 1).Rel A = Ord.eps0 := by
+  refine le_antisymm (Ordinal.iSup_le (fun A => ?_)) ?_
+  · rw [rank_dbms_eq_val]
+    exact (dbmsOrdEval_lt_eps0 A).le
+  · refine le_of_forall_lt (fun β hβ => ?_)
+    have hβ1 : β + 1 < Ord.eps0 := Ord.isPrincipal_add_eps0 hβ Ord.one_lt_eps0
+    obtain ⟨A, hA⟩ := exists_dbms_of_lt_eps0 hβ1
+    refine lt_of_lt_of_le ?_ (Ordinal.le_iSup
+      (fun B : (dbms 1).State => IsWellFounded.rank (dbms 1).Rel B) A)
+    rw [rank_dbms_eq_val, hA]
+    exact lt_of_lt_of_le (Order.lt_succ β) (le_of_eq (Order.succ_eq_add_one β))
+
 end Googology.Trans.DBMS

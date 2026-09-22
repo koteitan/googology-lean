@@ -652,6 +652,22 @@ theorem iSup_rank_prim :
     rw [hv]
     exact lt_of_lt_of_le (Order.lt_succ β) (le_of_eq (Order.succ_eq_add_one β))
 
+/-- **The same for the arrays**: one-row BMS has ordinal `ε₀`. -/
+theorem iSup_rank_bms :
+    ⨆ A : (Googology.Notation.BMS.bms 1).State,
+      IsWellFounded.rank (Googology.Notation.BMS.bms 1).Rel A = Ord.eps0 := by
+  refine le_antisymm (Ordinal.iSup_le (fun A => ?_)) ?_
+  · rw [rank_bms_eq_val]
+    exact (bmsOrdEval_lt_eps0 A).le
+  · refine le_of_forall_lt (fun β hβ => ?_)
+    have hβ1 : β + 1 < Ord.eps0 := Ord.isPrincipal_add_eps0 hβ Ord.one_lt_eps0
+    obtain ⟨A, hA⟩ := exists_bms_of_lt_eps0 hβ1
+    refine lt_of_lt_of_le ?_ (Ordinal.le_iSup
+      (fun B : (Googology.Notation.BMS.bms 1).State =>
+        IsWellFounded.rank (Googology.Notation.BMS.bms 1).Rel B) A)
+    rw [rank_bms_eq_val, hA]
+    exact lt_of_lt_of_le (Order.lt_succ β) (le_of_eq (Order.succ_eq_add_one β))
+
 /-! ### The same ordinals, named as terms
 
 The two-row ranks above are values of extended Buchholz terms, so the
