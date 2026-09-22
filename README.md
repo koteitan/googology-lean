@@ -23,7 +23,7 @@ Names are written relative to `Googology`.
 | **every Bashicu matrix expansion, written on the entries, is `BM4.expand`** — so it runs, at any number of rows | `Trans.BMS.entriesR_expand` |
 | the one-row, two-row and general rules are one rule | `Trans.BMS.expandRL_one`, `Trans.BMS.expandRL_two` |
 | the systems on the entries, with their generators | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
-| the general system at one row is the primitive sequence system | `Trans.BMS.bmsEquivPrim` |
+| the general system at one and two rows is the primitive and pair sequence system | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
 | DBMS is the same rule with other generators | `Trans.DBMS.dbmsL`, `Trans.DBMS.dbmsL_zero_terminates` |
 
 ### Extended Buchholz's ψ

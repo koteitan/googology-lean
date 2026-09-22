@@ -1,8 +1,9 @@
 import Googology.Trans.BMS.Agree
 import Googology.Trans.BMS.Reach
+import Googology.Trans.BMS.Pair
 
 /-!
-# The general system at one row
+# The general system at one and two rows
 
 `bmsL 0` is the system with one row, built from `expandRL` and the entries of
 standard arrays.  `prim` is the primitive sequence system, built from
@@ -19,6 +20,10 @@ So everything `Trans/BMS/Equiv.lean` proves about `prim` — that it is the
 standard forms below `ψ_0(Ω)`, written another way — applies to `bmsL 0` as
 well, and the general machinery has the one-row theory as a special case
 rather than beside it.
+
+`pairEquivBms` is the same at two rows, and easier: there the states are the
+entries of standard two-row arrays on both sides, so nothing has to be said
+about which matrices those are.
 -/
 
 namespace Googology.Trans.BMS
@@ -91,5 +96,70 @@ def bmsEquivPrim : Equiv (bmsL 0) prim where
   invFun := bmsOfPrimHom.toSim
   left_inv := fun l => Subtype.ext (bmsState_zero_eq l).symm
   right_inv := fun l => Subtype.ext (map_head_map_single l.1)
+
+/-! ### Two rows -/
+
+theorem map_pair_map_two (l : List (Nat × Nat)) :
+    (l.map (fun x => [x.1, x.2])).map (fun c => (c.head!, c.tail.head!)) = l := by
+  induction l with
+  | nil => rfl
+  | cons a t ih => rw [List.map_cons, List.map_cons, ih]; rfl
+
+theorem bmsState_one_eq (l : BmsState 1) :
+    l.1 = (l.1.map (fun c => (c.head!, c.tail.head!))).map (fun x => [x.1, x.2]) := by
+  obtain ⟨A, _, hA⟩ := l.2
+  rw [← hA, entriesR_two, map_pair_map_two]
+
+/-- Two rows of the general system, as a state of the pair sequence system. -/
+def toPair (l : BmsState 1) : PairState :=
+  ⟨l.1.map (fun c => (c.head!, c.tail.head!)), by
+    obtain ⟨A, hA, hl⟩ := l.2
+    exact ⟨A, hA, by rw [← hl, entriesR_two, map_pair_map_two]⟩⟩
+
+/-- And back. -/
+def toBms2 (l : PairState) : BmsState 1 :=
+  ⟨l.1.map (fun x => [x.1, x.2]), by
+    obtain ⟨A, hA, hl⟩ := l.2
+    exact ⟨A, hA, by rw [entriesR_two, hl]⟩⟩
+
+def pairOfBmsHom : StepHom (bmsL 1) pairL where
+  map := toPair
+  reindex := id
+  map_step := fun l N => by
+    refine Subtype.ext ?_
+    show (expandRL 2 N l.1).map (fun c => (c.head!, c.tail.head!))
+      = expand2L N (l.1.map (fun c => (c.head!, c.tail.head!)))
+    conv_lhs => rw [bmsState_one_eq l]
+    rw [expandRL_two N _, map_pair_map_two]
+  map_halted := fun l h => by
+    show l.1 = []
+    rw [bmsState_one_eq l, show l.1.map (fun c => (c.head!, c.tail.head!)) = [] from h, List.map_nil]
+
+def bmsOfPairHom : StepHom pairL (bmsL 1) where
+  map := toBms2
+  reindex := id
+  map_step := fun l N => by
+    refine Subtype.ext ?_
+    show (expand2L N l.1).map (fun x => [x.1, x.2])
+      = expandRL 2 N (l.1.map (fun x => [x.1, x.2]))
+    exact (expandRL_two N l.1).symm
+  map_halted := fun l h => by
+    show l.1 = []
+    have hh : l.1.map (fun x => [x.1, x.2]) = [] := h
+    simpa using hh
+
+/-- **The general system at two rows is the pair sequence system.** -/
+def pairEquivBms : Equiv (bmsL 1) pairL where
+  toFun := pairOfBmsHom.toSim
+  invFun := bmsOfPairHom.toSim
+  left_inv := fun l => Subtype.ext (bmsState_one_eq l).symm
+  right_inv := fun l => Subtype.ext (map_pair_map_two l.1)
+
+/-- **The general system at one row names ordinals**, since it is the
+primitive sequence system. -/
+noncomputable def bmsZeroEval :
+    Eval (bmsL 0) (· < · : Ordinal.{0} → Ordinal.{0} → Prop) :=
+  Eval.ofSim primOfBmsHom.toSim primEval
+
 
 end Googology.Trans.BMS

@@ -22,7 +22,7 @@
 | **成分列の上に書いた BMS の展開が `BM4.expand` であること** — 行数によらず、だから走る | `Trans.BMS.entriesR_expand` |
 | 1 行・2 行・一般の規則が一つの規則であること | `Trans.BMS.expandRL_one`, `Trans.BMS.expandRL_two` |
 | 成分列の上の系と、その生成元 | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
-| 一般の系の 1 行が原始数列系であること | `Trans.BMS.bmsEquivPrim` |
+| 一般の系の 1 行が原始数列系、2 行がペア数列系であること | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
 | DBMS は同じ規則で生成元だけが違う | `Trans.DBMS.dbmsL`, `Trans.DBMS.dbmsL_zero_terminates` |
 
 ### 拡張ブーフホルツ ψ
