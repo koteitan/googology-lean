@@ -2,4 +2,5 @@ import Googology.Trans.BMS.OneRow
 import Googology.Trans.BMS.ExBuchholz
 import Googology.Trans.BMS.Commute
 import Googology.Trans.BMS.Cut
+import Googology.Trans.BMS.Entries
 import Googology.Trans.BMS.Prim
