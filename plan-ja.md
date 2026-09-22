@@ -184,6 +184,9 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
    どの行でも `parent A k` と `anc A k` を与え、`expandRL` と `entriesR_expand` を
    出す。だから BMS の展開はどれも走る。配列の形は走らない。3 行では、長さ 3 以下・
    成分 3 未満の標準行列 24 個の展開 72 通りすべてで参照実装と一致する。
+   `BMS/Agree.lean` が三つの規則を結ぶ。1 行と 2 行での `expandRL` は `expandL` と
+   `expand2L` である。そして一般の規則を `bmsL r` として包み、`bmsL_terminates` と
+   `bmsLStd` を付ける。
 
    つまり 2 行の機械的な部分は終わっている。残っているのは読み取りで、これは機械的な
    仕事ではない。2 行の読み取りは有限の添字すべてで `p` を使う必要があり、それを書き

@@ -142,4 +142,13 @@ theorem entries_expand (A : Arr 1) (N : Nat) (h : Col 0 (entries A)) (hne : A.le
       simp only [Function.comp_apply]
       rw [if_neg (by omega), show g.length + j - g.length = j by omega]
 
+/-- Expansion of the entries, with no side condition: an empty array does not
+move, and neither does the empty list. -/
+theorem entries_expand' (A : Arr 1) (N : Nat) (h : Col 0 (entries A)) :
+    entries (expand A N) = expandL N 0 (entries A) := by
+  by_cases hne : A.len = 0
+  · have he : entries A = [] := by rw [entries, hne, List.range_zero, List.map_nil]
+    rw [expand_of_len_zero hne, he, expandL_nil]
+  · exact entries_expand A N h hne
+
 end Googology.Trans.BMS

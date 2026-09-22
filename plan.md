@@ -203,7 +203,9 @@ That is `Mono.lean`.
    `entriesR_expand`. So every Bashicu matrix expansion runs, which the array
    form does not. At three rows it agrees with the reference implementation on
    all `72` expansions of the `24` standard matrices of length at most `3`
-   with entries below `3`.
+   with entries below `3`. `BMS/Agree.lean` ties the three rules together —
+   `expandRL` at one and two rows is `expandL` and `expand2L` — and packages
+   the general one as `bmsL r`, with `bmsL_terminates` and `bmsLStd`.
 
    So the mechanical side of two rows is finished. What is left is the
    reading, and it is not a mechanical job. A two-row reading has to use `ψ`

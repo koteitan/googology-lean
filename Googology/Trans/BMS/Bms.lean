@@ -31,15 +31,6 @@ open BM4 Pat
 open Googology.Notation.ExBuchholz
 open Googology.Notation.ExBuchholz.Term
 
-/-- Expansion of the entries, with no side condition: an empty array does not
-move, and neither does the empty list. -/
-theorem entries_expand' (A : Arr 1) (N : Nat) (h : Col 0 (entries A)) :
-    entries (expand A N) = expandL N 0 (entries A) := by
-  by_cases hne : A.len = 0
-  · have he : entries A = [] := by rw [entries, hne, List.range_zero, List.map_nil]
-    rw [expand_of_len_zero hne, he, expandL_nil]
-  · exact entries_expand A N h hne
-
 /-! ### The generators -/
 
 /-- The tower `ψ_0(ψ_0(⋯ψ_0(0)⋯))`. -/
