@@ -503,4 +503,26 @@ theorem psi_OmegaMul_eq_eps (n : ℕ) :
     psi (OmegaMul.{u} (n + 1)) 0 = eps.{u} (n : Ordinal.{u}) := by
   rw [eps_natCast, psi_OmegaMul]
 
+theorem eps_lt_zeta0 {γ : Ordinal.{u}} (h : γ < zeta0.{u}) : eps.{u} γ < zeta0.{u} := by
+  obtain ⟨n, hn⟩ := Ordinal.lt_nfp_iff.mp h
+  refine lt_of_lt_of_le ?_ (Ordinal.iterate_le_nfp eps.{u} 0 (n + 1))
+  rw [Function.iterate_succ_apply']
+  exact eps_strictMono hn
+
+/-- `ε_ω` is the limit of the finite levels, so `Eps.lean`'s `epsW` is this
+file's `eps ω`. -/
+theorem eps_omega0 : eps.{u} (ω : Ordinal.{u}) = epsW.{u} := by
+  refine le_antisymm ?_ (Ordinal.iSup_le (fun n => ?_))
+  · rw [eps_limit Ordinal.isSuccLimit_omega0]
+    refine Ordinal.iSup_le (fun a => ?_)
+    obtain ⟨n, hn⟩ := Ordinal.lt_omega0.mp a.2
+    rw [show a.1 = (n : Ordinal.{u}) from hn, eps_natCast]
+    exact epsN_le_epsW n
+  · rw [← eps_natCast n]
+    exact eps_mono (le_of_lt (Ordinal.natCast_lt_omega0 n))
+
+/-- And `ψ_0(Ω·ω) = ε_ω` is the ladder at `γ = ω`. -/
+theorem psi_Omega_omega_eq_eps : psi ((Ω_ 1 : Ordinal.{u}) * ω) 0 = eps.{u} (ω : Ordinal.{u}) := by
+  rw [eps_omega0, psi_Omega_omega]
+
 end Googology.Notation.ExBuchholz.Ord
