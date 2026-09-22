@@ -127,6 +127,7 @@ beyond the one stated.
 | `ψ_0(Ω·ζ₀)` | `ζ₀` | `psi_Omega_mul_zeta0` |
 | `ψ_v(Ω_{v+1}·(1+γ))`, `γ < ζ^v` | `ε^v_γ`, at every subscript | `psi_OmegaV_mul_eq` |
 | `ψ_n(Ω_{n+1}·(1+γ))`, finite `n` | the same, with the condition discharged | `psi_OmegaV_mul_eq_nat` |
+| `ψ_v(Ω_{v+1}·ζ^v)` | `ζ^v`, where the subscript stops | `psi_OmegaV_mul_zetaV` |
 | `ε_Ω` | `Ω` — so `ζ₀` is countable | `eps_Omega_one` |
 
 `Ord/LadderV.lean` is the last two rows: `Ladder.lean` with the subscript

@@ -469,4 +469,47 @@ theorem psi_OmegaV_mul_eq_nat (n : ℕ) {γ : Ordinal.{u}} (hz : γ < zetaV.{u} 
   have h := natCast_lt_Omega (n + 1)
   rwa [Nat.cast_succ] at h
 
+/-! ### Where the subscript stops -/
+
+theorem epsV_zetaV (v : Ordinal.{u}) : epsV.{u} v (zetaV.{u} v) = zetaV.{u} v :=
+  Ordinal.nfp_fp (Ordinal.isNormal_deriv _) 0
+
+theorem Omega_le_zetaV (v : Ordinal.{u}) : Ω_ v ≤ zetaV.{u} v := by
+  refine le_trans (Omega_le_epsV v 0) ?_
+  refine le_trans (le_of_eq ?_) (Ordinal.iterate_le_nfp (epsV.{u} v) 0 1)
+  rw [Function.iterate_one]
+
+theorem omega0_le_fpOmega (v : Ordinal.{u}) : (ω : Ordinal.{u}) ≤ fpOmega.{u} v := by
+  refine le_trans ?_ (Ordinal.iterate_le_nfp (fun x => Ω_ v * (ω : Ordinal.{u}) ^ x) 0 2)
+  rw [Function.iterate_succ_apply', Function.iterate_one, Ordinal.opow_zero, mul_one]
+  refine le_trans ?_ (Ordinal.le_mul_right _ (Omega_pos v))
+  conv_lhs => rw [← Ordinal.opow_one (ω : Ordinal.{u})]
+  exact Ordinal.opow_le_opow_right omega0_pos
+    (Order.one_le_iff_ne_zero.mpr (ne_of_gt (Omega_pos v)))
+
+theorem omega0_le_zetaV (v : Ordinal.{u}) : (ω : Ordinal.{u}) ≤ zetaV.{u} v := by
+  refine le_trans (omega0_le_fpOmega v) ?_
+  rw [← epsV_zero v]
+  refine le_trans (le_of_eq ?_) (Ordinal.iterate_le_nfp (epsV.{u} v) 0 1)
+  rw [Function.iterate_one]
+
+theorem one_add_zetaV (v : Ordinal.{u}) : 1 + zetaV.{u} v = zetaV.{u} v :=
+  Ordinal.one_add_of_omega0_le (omega0_le_zetaV v)
+
+/-- **`ψ_v(Ω_{v+1}·ζ^v) = ζ^v`**: the first ordinal the subscript `v` and the
+ones above it do not name together. -/
+theorem psi_OmegaV_mul_zetaV {v : Ordinal.{u}} (hv : v < Ω_ v) (hv1 : v + 1 < Ω_ (v + 1)) :
+    psi ((Ω_ (v + 1) : Ordinal.{u}) * zetaV.{u} v) v = zetaV.{u} v := by
+  refine le_antisymm ?_ ?_
+  · have h := psi_OmegaV_mul_le v (zetaV.{u} v)
+    rw [one_add_zetaV v, epsV_zetaV] at h
+    exact h
+  · refine le_of_forall_lt (fun x hx => ?_)
+    have hxe : x < epsV.{u} v x := lt_epsV_self hx
+    rw [← psi_OmegaV_mul_eq hv hv1 x hx] at hxe
+    refine lt_of_lt_of_le hxe (psi_mono v ?_)
+    refine mul_le_mul_right ?_ _
+    rw [← one_add_zetaV v]
+    exact (add_le_add_iff_left 1).mpr hx.le
+
 end Googology.Notation.ExBuchholz.Ord

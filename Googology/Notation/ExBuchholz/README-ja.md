@@ -121,6 +121,7 @@ inductive Term where
 | `p0(W·z0)` | `z0` | `psi_Omega_mul_zeta0` |
 | `p_v(W_{v+1}·(1+g))`、`g < z^v` | `e^v_g`。全ての添字で | `psi_OmegaV_mul_eq` |
 | `p_n(W_{n+1}·(1+g))`、有限の `n` | 同じもの。条件は自動で満たされる | `psi_OmegaV_mul_eq_nat` |
+| `p_v(W_{v+1}·z^v)` | `z^v`。その添字が止まる所 | `psi_OmegaV_mul_zetaV` |
 | `e_W` | `W`。よって `z0` は可算 | `eps_Omega_one` |
 
 最後の 2 行が `Ord/LadderV.lean` である。`Ladder.lean` の添字を自由にしたもので
