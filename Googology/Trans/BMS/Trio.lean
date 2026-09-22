@@ -29,6 +29,14 @@ So addition is the number of add units, multiplication the number of multiply
 units, and exponentiation the shape of the one-row embedding.  Nothing here is
 proved: `omegaIndexMatrix` is a transcription, and the `#guard`s below are the
 calibration against the published table.
+
+Two further checks were run outside Lean, against the reference
+implementation in [yaBMS](https://github.com/koteitan/yaBMS), on the twenty
+matrices the `#guard`s below produce.  Every one of them is a standard form
+(`bms -s` answers `1` on all twenty), and the map is order-preserving on
+them: taking the table's rows in increasing `α`, each matrix compares `<`
+with the next (`bms -c`).  Neither is a theorem here; both are what the
+one-row case has as `std_entries_iff` and `val_lt_val`.
 -/
 
 namespace Googology.Trans.BMS

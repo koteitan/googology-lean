@@ -465,7 +465,14 @@ The other two are not Lean problems.
   ordinal as well. That is a transcription and `#guard`s, not a theorem: what
   is not proved is that the map lands in standard forms, that it is monotone,
   and that it turns `[ ]` into the fundamental sequence — the three things the
-  one-row case has. The `ε₀ ≤ α < Λ` half of the algorithm, where the
+  one-row case has. The first two were checked outside Lean against the
+  reference implementation on those twenty matrices: all twenty are standard
+  forms, and each compares `<` with the next as `α` increases. The third does
+  **not** hold on the nose: `BM4.expand` at three rows and the canonical
+  fundamental sequence of the notation system are different assignments.
+  `ψ_0(Ω_{ω^ω})` is the smallest case seen — the matrix expands to the one
+  for `ψ_0(Ω_{ω³})` where `X[1]` of the term is `ψ_0(Ω_ω)` — so what a
+  commutation theorem would have to compare is cofinality, not equality. The `ε₀ ≤ α < Λ` half of the algorithm, where the
   embedding of the exponent becomes the whole ordinal notation rather than the
   primitive sequence, is not transcribed yet.
 
