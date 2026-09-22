@@ -631,4 +631,22 @@ theorem rank_sumAll :
   rw [rank_mul_omega0 sumAll genAll zeroCol (show ¬ ([[0, 0], [1, 1], [0, 0], [1, 0]] : List (List Nat)) = [] by simp) rfl (by simp [zeroCol])
       step_sumAll, rank_genAll, rank_zeroCol, one_mul]
 
+/-! ### The same ordinals, named as terms
+
+The two-row ranks above are values of extended Buchholz terms, so the
+question "which ordinal does this matrix name" has an answer in the notation
+system for them, not only in the ordinals. -/
+
+theorem rank_genAll_val : IsWellFounded.rank (bmsAllL 1).Rel genAll = val te0 := by
+  rw [rank_genAll, val_te0]
+
+theorem rank_omegaCol_val : IsWellFounded.rank (bmsAllL 1).Rel omegaCol = val tw := by
+  rw [rank_omegaCol, val_tw]
+
+theorem rank_omegaAll_val : IsWellFounded.rank (bmsAllL 1).Rel omegaAll = val tew := by
+  rw [rank_omegaAll, val_tew]
+
+theorem rank_omegaSqAll_val : IsWellFounded.rank (bmsAllL 1).Rel omegaSqAll = val tew2 := by
+  rw [rank_omegaSqAll, val_tew2]
+
 end Googology.Trans.BMS

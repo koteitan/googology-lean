@@ -96,6 +96,7 @@ expansions are understood.
 | **with `m₀ = 0` the expansion is a fixed part and a block repeated**, so the rank is multiplied by `ω` | `Trans.BMS.expandRL_of_m0_zero`, `Trans.BMS.rank_mul_omega0` |
 | so `(0,0)(1,0)` has rank `ω`, `(0,0)(1,1)(1,0)` has `ε₀·ω`, and `(0,0)(1,1)(0,0)(1,0)` has `ε₀ + ω` | `Trans.BMS.rank_omegaCol`, `Trans.BMS.rank_omegaAll`, `Trans.BMS.rank_sumAll` |
 | and it iterates: `(0,0)(1,1)(1,0)(1,0)` has rank `ε₀·ω²` | `Trans.BMS.rank_omegaSqAll` |
+| **and those ordinals have names**: the same ranks are the values of `ψ_0(Ω)`, `ψ_0(1)`, `ψ_0(Ω+1)` and `ψ_0(Ω+2)` | `Trans.BMS.rank_genAll_val`, `Trans.BMS.rank_omegaAll_val`, `Trans.BMS.rank_omegaSqAll_val` |
 | `rank_split_mul_omega0` takes the split directly, so a matrix of this shape costs three lines: `(0,0)(1,0)(1,0)` is `ω²` and `(0,0)(1,1)(0,0)(1,0)(1,0)` is `ε₀ + ω²` | `Trans.BMS.rank_split_mul_omega0`, `Trans.BMS.rank_omegaSqCol`, `Trans.BMS.rank_sumSqAll` |
 
 What it does not reach: `(0,0)(1,1)(2,1)`, where `m₀` is `1` so the copies
