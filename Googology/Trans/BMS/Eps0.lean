@@ -148,6 +148,23 @@ theorem val_t1 : val t1 = 1 := by
 theorem val_tW : val tW = Ord.Omega 1 := by
   rw [show tW = psi t1 nil from rfl, val_psi, val_nil, val_t1, Ord.psi_zero_arg]
 
+theorem val_addT : ∀ x y : Term, val (addT x y) = val x + val y := by
+  intro x
+  induction x with
+  | nil => intro y; rw [addT_nil_left, val_nil, zero_add]
+  | cons a b t _ _ iht =>
+    intro y
+    show val (cons a b (addT t y)) = _
+    rw [val_cons, val_cons, iht y, add_assoc]
+
+/-- The term `ψ_0(Ω + Ω)`. -/
+abbrev te1 : Term := psi nil (addT tW tW)
+
+/-- **`ψ_0(Ω + Ω)` is `ε₁`.** -/
+theorem val_te1 : val te1 = Ord.eps1 := by
+  rw [show te1 = psi nil (addT tW tW) from rfl, val_psi, val_nil, val_addT, val_tW,
+    Ord.psi_Omega_two]
+
 /-- **`ψ_0(Ω)` is `ε₀`.** -/
 theorem val_te0 : val te0 = Ord.eps0 := by
   rw [show te0 = psi nil tW from rfl, val_psi, val_nil, val_tW, Ord.psi_Omega_one]

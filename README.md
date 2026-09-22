@@ -52,6 +52,7 @@ Names are written relative to `Googology`.
 | **`ψ_0(a) = ω^a` below `ε₀`**, and `ψ_0(a) ≤ ω^a` always | `Notation.ExBuchholz.Ord.psi_zero_eq_opow`, `Notation.ExBuchholz.Ord.psi_zero_le_opow` |
 | **`ψ_0(Ω) = ε₀`** | `Notation.ExBuchholz.Ord.psi_Omega_one` |
 | **and `ψ_0(Ω + a) = ε₀·ω^a` below `ε₁`**, so `ψ_0(Ω + 1) = ε₀·ω` | `Notation.ExBuchholz.Ord.psi_Omega_add_eq`, `Notation.ExBuchholz.Ord.psi_Omega_add_one` |
+| **and `ψ_0(Ω·2) = ε₁`**, which the term `ψ_0(Ω+Ω)` names | `Notation.ExBuchholz.Ord.psi_Omega_two`, `Trans.BMS.val_te1` |
 
 ### One row: which ordinal a matrix names
 
