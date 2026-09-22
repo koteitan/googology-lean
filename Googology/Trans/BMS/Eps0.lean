@@ -1,4 +1,4 @@
-import Googology.Trans.BMS.Calibrate
+import Googology.Trans.BMS.Reach
 import Googology.Notation.ExBuchholz.Opow
 
 /-!
@@ -19,7 +19,9 @@ fixed point of `ω ^ ·`, which is what `Ord.lt_opow_self_of_lt_eps0` says.
 
 `val_te0` identifies the ceiling: `ψ_0(Ω)` **is** `ε₀`.  So
 `exists_matrix_of_lt_eps0` and `val_read_lt_eps0` together say the one-row
-matrices name the ordinals below `ε₀` and no others.
+matrices name the ordinals below `ε₀` and no others, and with
+`Reach.bmsOrdEval_inj` the measure `bmsOrdEval` is a bijection from the
+standard one-row matrices onto `ε₀`.
 -/
 
 namespace Googology.Trans.BMS
@@ -164,5 +166,24 @@ theorem exists_matrix_of_lt_eps0 {α : Ordinal.{0}} (h : α < Ord.eps0) :
 theorem val_read_lt_eps0 {l : List Nat} (hOT : OT (read 0 l)) : val (read 0 l) < Ord.eps0 := by
   rw [← val_te0]
   exact val_lt_val hOT OT_te0 (read_lt_e0 0 l)
+
+/-- **The ordinal measure of the primitive sequence system is onto `ε₀`.**
+With `bmsOrdEval_inj` for the other half, it is a bijection between the
+standard one-row matrices and the ordinals below `ε₀`. -/
+theorem exists_bms_of_lt_eps0 {α : Ordinal.{0}} (h : α < Ord.eps0) :
+    ∃ A : (Googology.Notation.BMS.bms 1).State, bmsOrdEval.val A = α := by
+  obtain ⟨l, hc, hOT, hv⟩ := exists_matrix_of_lt_eps0 h
+  obtain ⟨A, hStd, hE⟩ := exists_std_of_col hc hOT
+  refine ⟨⟨A, hStd⟩, ?_⟩
+  rw [bmsOrdEval_val]
+  show val (read 0 (entries A)) = α
+  rw [hE]
+  exact hv
+
+/-- **And below `ε₀` it stays.** -/
+theorem bmsOrdEval_lt_eps0 (A : (Googology.Notation.BMS.bms 1).State) :
+    bmsOrdEval.val A < Ord.eps0 := by
+  rw [← val_te0]
+  exact bmsOrdEval_lt_e0 A
 
 end Googology.Trans.BMS

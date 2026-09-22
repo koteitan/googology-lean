@@ -63,6 +63,7 @@ Names are written relative to `Googology`.
 | **and every ordinal below `ε₀` is named by one** — `ψ_0(Ω)` is `ε₀` | `Trans.BMS.exists_matrix_of_lt_eps0`, `Trans.BMS.val_te0` |
 | so one row names those ordinals and no others | `Trans.BMS.val_read_lt_eps0` |
 | `val` is onto the ordinals below `ε₀` | `Trans.BMS.exists_OT_of_lt_eps0` |
+| **so the ordinal measure is a bijection onto `ε₀`** | `Trans.BMS.exists_bms_of_lt_eps0`, `Trans.BMS.bmsOrdEval_inj` |
 | below `ψ_0(Ω)` a term is the least upper bound of its fundamental sequence | `Trans.BMS.fs_lub` |
 | **the standard one-row matrices are exactly the matrices whose term is standard** | `Trans.BMS.std_entries_iff`, `Trans.BMS.exists_bms_of_lt_e0` |
 | **the primitive sequence system and the standard forms below `ψ_0(Ω)` are equivalent** | `Trans.BMS.primEquivE0` |
