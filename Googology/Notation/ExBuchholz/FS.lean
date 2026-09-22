@@ -940,6 +940,41 @@ theorem size_subOf_dom_lt {X : Term} (h0 : dom X ≠ nil) :
     simp only [subOf, size_cons] at hle ⊢
     omega
 
+/-- `G` sees nothing in a standard form whose subscripts all stay below `u`. -/
+theorem G_eq_nil_of_lt_psi : ∀ Y u : Term, OT Y → Y < psi u nil → G u Y = [] := by
+  intro Y
+  induction Y with
+  | nil => intro u _ _; rfl
+  | cons a b t _ _ iht =>
+    intro u hOT hlt
+    have hab : psi a b < psi u nil := cons_lt_psi_iff.mp hlt
+    have hau : ¬ u ≤ a := by
+      rcases psi_lt_psi_iff.mp hab with h | ⟨_, h⟩
+      · exact not_le_of_lt h
+      · exact absurd h (not_lt_nil b)
+    rw [G_cons, if_neg hau, List.nil_append]
+    refine iht u (OT_tail hOT) ?_
+    cases t with
+    | nil => exact nil_lt_cons _ _ _
+    | cons c d s => exact cons_lt_psi_iff.mpr (lt_of_le_of_lt' (OT_headLe_tail hOT) hab)
+
+/-- `G` sees only `0` in a numeral. -/
+theorem G_numeral_eq_nil : ∀ (k : Nat) (u x : Term), x ∈ G u (numeral k) → x = nil := by
+  intro k
+  induction k with
+  | zero => intro u x hx; exact absurd hx List.not_mem_nil
+  | succ j ih =>
+    intro u x hx
+    rw [show numeral (j + 1) = cons nil nil (numeral j) from rfl, G_cons] at hx
+    rcases List.mem_append.mp hx with hx | hx
+    · by_cases h : u ≤ nil
+      · rw [if_pos h, G_nil] at hx
+        rcases List.mem_cons.mp hx with h' | hx
+        · exact h'
+        · exact absurd hx List.not_mem_nil
+      · rw [if_neg h] at hx; exact absurd hx List.not_mem_nil
+    · exact ih u x hx
+
 /-! ## As an expansion system -/
 
 /-- Extended Buchholz terms as an expansion system: one step is the

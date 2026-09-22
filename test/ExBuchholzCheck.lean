@@ -70,27 +70,62 @@ standard. -/
 #guard runOT (psi nil (psi t2 nil)) 1 0 800 == some 11                   -- ψ_0(Ω_2), BHO
 #guard runOT (psi nil (psi tW nil)) 1 0 800 == some 8                    -- ψ_0(ψ_Ω(0))
 
-/-! ## The last gap: Buchholz 3.3
+/-! ## The last gap: the tower invariant of Buchholz's case 4
 
-`Closure.lean` proves Lemma 3.6, and with it `SubBound` — the bound on the
-tower of Buchholz's case 4 — from `OTFS` alone, which is his Lemma 3.3 for the
-extended system: the fundamental sequence keeps a term standard.  Nothing else
-is assumed.
-
-**The check.**  Every standard form of size at most 6, expanded at every
-standard index of size at most 3 below its domain, stays standard.
+`Closure.lean` proves 3.3 — and with it 3.6 and `SubBound` — from `TowerOT`
+alone: for `ψ_A(B)` in the configuration of case 4, every rung `W_i` of the
+tower is a standard form, and `G_A` sees in it only things below `B[W_i]`,
+the value that rung produces.  That is Buchholz's second tower invariant, and
+it is the only thing left.
 -/
 
-#guard ((upTo 6).filter isOT).all fun X =>
-  ((upTo 3).filter (fun Y => isOT Y && decide (Y < dom X))).all fun Y =>
-    isOT (fs X Y)
+/-- Is `X = ψ_A(B)` in the configuration of Buchholz's case 4? -/
+def isCase4 : Term → Bool
+  | cons A B nil =>
+      !(dom B == nil) && !(dom B == t1) && !(dom B == tw)
+        && !(decide (dom B < cons A B nil))
+  | _ => false
 
-/-! ## Two terms the proof of 3.6 is shaped around
+/-- The `i`-th rung, the value it produces, and the level of the collapse. -/
+def rung : Term → Nat → Term
+  | cons _ B nil, i => tower (fs (subOf (dom B)) nil) B i
+  | _, _ => nil
 
-Has `X` a domain indexed by terms? -/
+def rungVal : Term → Nat → Term
+  | cons _ B nil, i => fs B (tower (fs (subOf (dom B)) nil) B i)
+  | _, _ => nil
 
-def domTerm (X : Term) : Bool :=
-  !(dom X == nil) && !(dom X == t1) && !(dom X == tw)
+def lvl : Term → Term
+  | cons A _ _ => A
+  | nil => nil
+
+/-- `TowerOT` at one rung. -/
+def towerOT (X : Term) (i : Nat) : Bool :=
+  isOT (rung X i) && (G (lvl X) (rung X i)).all (fun x => decide (x < rungVal X i))
+
+/-! A case-4 form need not be countable, so the check runs over every standard
+form, not only `ctbl`. -/
+
+#guard ((upTo 8).filter (fun X => isOT X && isCase4 X)).length == 651
+
+/-! **The check.**  Each of those 651 forms, on five rungs. -/
+
+#guard ((upTo 8).filter (fun X => isOT X && isCase4 X)).all fun X =>
+  (List.range 5).all fun i => towerOT X i
+
+/-! The level matters.  At level `0` the same statement is false: write
+`A = ψ_0(ψ_Ω(0))`; for `X = ψ_Ω(ψ_{A+1}(0))` the first rung is `ψ_A(0)`, which
+is also the value it produces, and `G_0` of it holds `ψ_Ω(0)`, which is above
+`ψ_A(0)` because `A` is countable.  `tower_G_le` is stated relative to a `c`
+for that reason. -/
+
+def caseA : Term := psi nil (psi tW nil)
+def caseX : Term := psi t1 (psi (cons nil (psi tW nil) t1) nil)
+
+#guard isOT caseX && isCase4 caseX
+#guard rung caseX 0 == psi caseA nil && rungVal caseX 0 == psi caseA nil
+#guard towerOT caseX 0
+#guard !((G nil (rung caseX 0)).all (fun x => decide (x < rungVal caseX 0)))
 
 /-! The index in `SubBound` has to be `ψ_{Z[0]}(0)`; an arbitrary `W < dom X`
 will not do.  For `X = ψ_{ω+1}(0)` the domain is `X` itself and `X[0] = 0`, so
@@ -99,25 +134,9 @@ see something in `Z = ω + 1`. -/
 
 def caseW : Term := psi (cons nil t1 t1) nil
 
-#guard isOT caseW && domTerm caseW
+#guard isOT caseW && !(dom caseW == nil) && !(dom caseW == t1) && !(dom caseW == tw)
 #guard fs caseW nil == nil
 #guard !((G nil (subOf (dom caseW))).all (fun x => (G nil nil ++ [nil]).any
   (fun y => decide (x ≤ y))))
-
-/-! The bound that `tower_G_le` carries up the tower has to be relative to
-`c`.  Buchholz's own invariant is the absolute `G_u(W_i) < X₂[W_i]`, which
-works in his system because his subscripts are numbers and `G` never enters
-them.  Here they are terms.  Write `A = ψ_0(ψ_Ω(0))`.  For
-`X = ψ_Ω(ψ_{A+1}(0))` the first rung of the tower is `ψ_A(0)`, which is also
-the value it produces, and `G_0` of it holds `ψ_Ω(0)`, which is above
-`ψ_A(0)` because `A` is countable. -/
-
-def caseA : Term := psi nil (psi tW nil)
-def caseB : Term := psi (cons nil (psi tW nil) t1) nil
-def caseX : Term := psi t1 caseB
-
-#guard isOT caseX
-#guard tower (fs (subOf (dom caseB)) nil) caseB 0 == psi caseA nil
-#guard !((G nil (psi caseA nil)).all (fun x => decide (x < fs caseB (psi caseA nil))))
 
 end Googology.Notation.ExBuchholz.Term

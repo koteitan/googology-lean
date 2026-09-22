@@ -69,6 +69,22 @@ are terms.  And the index has to be `ψ_{Z[0]}(0)` rather than an arbitrary
 `W < dom X`.
 
 So 3.6 rests on 3.3 and on nothing else.
+
+3.3 itself is `OTFS_aux`, an induction on `size` that carries 3.6 with it.
+Each branch of `fs` is settled by `OT_cons_fs`, `OT_psi_nil`, `OT_psi_fs` — 3.4
+in the shape 3.3 needs — and `OT_repeatPrin`, with `G_eq_nil_of_lt_psi` and
+`G_numeral_eq_nil` to show that `G` at the level of the collapse sees nothing
+in the index.  One branch is left: Buchholz's case 4, where the index is a
+rung of the tower.  What that branch needs is `TowerOT`:
+
+```
+OT W_i   and   ∀ x ∈ G_A(W_i), x < B[W_i]
+```
+
+for `ψ_A(B)` in the configuration of case 4.  That is Buchholz's second tower
+invariant, at the level of the collapse.  The level matters: at level `0` the
+same statement is false, and `test/ExBuchholzCheck.lean` carries the term that
+shows it.  `TowerOT` is the only thing the library still assumes.
 -/
 
 namespace Googology.Notation.ExBuchholz.Term
@@ -1035,5 +1051,142 @@ theorem Trian_fs_aux : ∀ n : Nat,
 theorem Trian_fs (H : OTFS) {X Y : Term} (hOT : OT X) (h : Y < dom X) :
     Trian Y (fs X Y) X :=
   Trian_fs_aux (size X) (fun X' _ => subBound_of_OTFS H X') X Y (Nat.le_refl _) hOT h
+
+/-- What Buchholz's case 4 needs of the tower in the proof of 3.3: each rung
+is a standard form, and `G` at the level of the collapse sees in it only
+things below the value that rung produces. -/
+def TowerOT : Prop :=
+  ∀ A B : Term, OT (cons A B nil) →
+    dom B ≠ nil → dom B ≠ t1 → dom B ≠ tw → ¬ (dom B < cons A B nil) →
+    ∀ i : Nat,
+      OT (tower (fs (subOf (dom B)) nil) B i)
+      ∧ ∀ x ∈ G A (tower (fs (subOf (dom B)) nil) B i),
+          x < fs B (tower (fs (subOf (dom B)) nil) B i)
+
+theorem OTFS_aux (HT : TowerOT) : ∀ n : Nat, ∀ X : Term, size X ≤ n →
+    (OT X → ∀ Y : Term, Y < dom X → Trian Y (fs X Y) X)
+  ∧ (OT X → ∀ Y : Term, Y < dom X → OT Y → OT (fs X Y)) := by
+  intro n
+  induction n with
+  | zero =>
+    intro X hsz
+    cases X with
+    | nil => exact ⟨fun _ Y hY => absurd hY (not_lt_nil Y),
+        fun _ Y hY _ => absurd hY (not_lt_nil Y)⟩
+    | cons a b t => simp only [size_cons] at hsz; omega
+  | succ n ih =>
+    intro X hsz
+    have T36 : ∀ X' : Term, size X' ≤ size X → OT X' → ∀ Y' : Term, Y' < dom X' →
+        Trian Y' (fs X' Y') X' := fun X' hs hOT' Y' hY' =>
+      Trian_fs_aux (size X')
+        (fun X'' hs' => subBound_lt X''
+          (fun a b hs'' h1 h2 h3 => (ih a (by omega)).2 h1 b h2 h3))
+        X' Y' (Nat.le_refl _) hOT' hY'
+    refine ⟨?_, ?_⟩
+    · intro hOT Y hY
+      exact T36 X (Nat.le_refl _) hOT Y hY
+    intro hOT Y hY hOTY
+    cases X with
+    | nil => exact absurd hY (not_lt_nil Y)
+    | cons A B t =>
+      simp only [size_cons] at hsz
+      cases t with
+      | cons c d r =>
+        show OT (fs (cons A B (cons c d r)) Y)
+        rw [fs]
+        exact OT_cons_fs hOT
+          ((ih (cons c d r) (by omega)).2 (OT_tail hOT) Y hY hOTY) hY
+      | nil =>
+        have hOTA : OT A := OT_fst hOT
+        have hOTB : OT B := OT_snd hOT
+        by_cases e1 : dom B = nil
+        · have hB : B = nil := dom_eq_nil_iff.mp e1
+          subst hB
+          by_cases g1 : dom A = nil
+          · rw [show fs (cons A nil nil) Y = nil from by rw [fs]; simp_all]
+            exact rfl
+          · by_cases g2 : dom A = t1
+            · rw [show fs (cons A nil nil) Y = Y from by rw [fs]; simp_all]
+              exact hOTY
+            · have hdX : dom (cons A nil nil) = dom A := by rw [dom]; simp_all
+              rw [show fs (cons A nil nil) Y = psi (fs A Y) nil from by rw [fs]; simp_all]
+              exact OT_psi_nil ((ih A (by omega)).2 hOTA Y (hdX ▸ hY) hOTY)
+        · by_cases e2 : dom B = t1
+          · have hnil : (nil : Term) < dom B := by rw [e2]; exact nil_lt_cons _ _ _
+            have hOTb0 : OT (fs B nil) :=
+              (ih B (by omega)).2 hOTB nil hnil rfl
+            have hpsi : OT (psi A (fs B nil)) :=
+              OT_psi_fs hOT (T36 B (by simp only [size_cons]; omega) hOTB nil hnil)
+                (fun x hx => absurd hx (by rw [G_nil]; exact List.not_mem_nil)) hOTb0
+            by_cases hn : isNum Y = true
+            · rw [show fs (cons A B nil) Y = repeatPrin A (fs B nil) (numVal Y) from by
+                rw [fs]; simp_all]
+              exact OT_repeatPrin hpsi (numVal Y)
+            · rw [show fs (cons A B nil) Y = nil from by rw [fs]; simp_all]
+              exact rfl
+          · by_cases e3 : dom B = tw
+            · have hdX : dom (cons A B nil) = tw := by rw [dom]; simp_all
+              rw [hdX] at hY
+              obtain ⟨k, rfl⟩ := eq_numeral_of_lt_tw hOTY hY
+              have hYB : numeral k < dom B := by rw [e3]; exact hY
+              have hOTbY : OT (fs B (numeral k)) := (ih B (by omega)).2 hOTB _ hYB hOTY
+              rw [show fs (cons A B nil) (numeral k) = psi A (fs B (numeral k)) from by
+                rw [fs]; simp_all]
+              by_cases hz : fs B (numeral k) = nil
+              · rw [hz]; exact OT_psi_nil hOTA
+              · refine OT_psi_fs hOT (T36 B (by simp only [size_cons]; omega) hOTB _ hYB) ?_ hOTbY
+                intro x hx
+                rw [G_numeral_eq_nil k A x hx]
+                exact lt_of_le_of_ne (nil_le _) (fun h => hz h.symm)
+            · by_cases e4 : dom B < cons A B nil
+              · have hdX : dom (cons A B nil) = dom B := by rw [dom]; simp_all
+                rw [hdX] at hY
+                have hOTbY : OT (fs B Y) := (ih B (by omega)).2 hOTB Y hY hOTY
+                have hZA : subOf (dom B) ≤ A := by
+                  rcases dom_shape B with hd | hd | ⟨Z', hd⟩
+                  · exact absurd hd e1
+                  · exact absurd hd e3
+                  · rw [hd] at e4 ⊢
+                    simp only [subOf]
+                    rcases psi_lt_psi_iff.mp (cons_lt_psi_iff.mp e4) with h | ⟨h, _⟩
+                    · exact le_of_lt h
+                    · exact h ▸ le_refl _
+                have hYA : Y < psi A nil := by
+                  refine lt_of_lt_of_le' hY ?_
+                  rcases dom_shape B with hd | hd | ⟨Z', hd⟩
+                  · exact absurd hd e1
+                  · exact absurd hd e3
+                  · rw [hd]
+                    rw [hd] at hZA
+                    simp only [subOf] at hZA
+                    rcases le_iff_lt_or_eq.mp hZA with h | h
+                    · exact le_of_lt (psi_lt_psi_iff.mpr (Or.inl h))
+                    · exact h ▸ le_refl _
+                rw [show fs (cons A B nil) Y = psi A (fs B Y) from by rw [fs]; simp_all]
+                have hGA : G A Y = [] := G_eq_nil_of_lt_psi Y A hOTY hYA
+                refine OT_psi_fs hOT (T36 B (by simp only [size_cons]; omega) hOTB Y hY) ?_ hOTbY
+                intro x hx
+                rw [hGA] at hx
+                exact absurd hx List.not_mem_nil
+              · have hdX : dom (cons A B nil) = tw := by rw [dom]; simp_all
+                rw [hdX] at hY
+                obtain ⟨k, rfl⟩ := eq_numeral_of_lt_tw hOTY hY
+                have hW := HT A B hOT e1 e2 e3 e4 k
+                have hWlt := tower_lt_dom e1 e2 e3 k
+                have hOTbW : OT (fs B (tower (fs (subOf (dom B)) nil) B k)) :=
+                  (ih B (by omega)).2 hOTB _ hWlt hW.1
+                rw [fs_numeral e1 e2 e3 e4 k]
+                exact OT_psi_fs hOT
+                  (T36 B (by simp only [size_cons]; omega) hOTB _ hWlt) hW.2 hOTbW
+
+/-- **Buchholz 3.3** for the extended system, from the tower invariant of his
+case 4. -/
+theorem OTFS_of_TowerOT (HT : TowerOT) : OTFS :=
+  fun X Y hOT hY hOTY => (OTFS_aux HT (size X) X (Nat.le_refl _)).2 hOT Y hY hOTY
+
+/-- **Buchholz 3.6** for the extended system, from the same. -/
+theorem Trian_fs_of_TowerOT (HT : TowerOT) {X Y : Term} (hOT : OT X) (h : Y < dom X) :
+    Trian Y (fs X Y) X :=
+  Trian_fs (OTFS_of_TowerOT HT) hOT h
 
 end Googology.Notation.ExBuchholz.Term
