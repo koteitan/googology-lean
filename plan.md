@@ -134,10 +134,10 @@ That is `Mono.lean`.
 1. **`OT` and `· < Ω` are preserved by one expansion step.** Buchholz's Lemma
    3.3 for the extended system, and the only thing between the library and
    `exb.WF`. It is checked by computation in `test/ExBuchholzCheck.lean`: every
-   one of the 109 countable standard forms of size at most 4, expanded at any
-   of `0`–`4`, stays standard and countable and decreases; and ε₀, ψ_0(Ω+Ω),
-   ψ_0(ψ_1(1)), ψ_0(Ω_2) and ψ_0(ψ_Ω(0)) all run down to `0` with every
-   intermediate term standard. The proof has to follow `fs` branch by branch
+   one of the 3835 countable standard forms of size at most 8, expanded at any
+   of `0`–`4`, stays standard and countable and decreases — and the same at
+   size 9, 15890 forms; and ε₀, ψ_0(Ω+Ω), ψ_0(ψ_1(1)), ψ_0(Ω_2) and
+   ψ_0(ψ_Ω(0)) all run down to `0` with every intermediate term standard. The proof has to follow `fs` branch by branch
    and needs a substitution lemma for `G`;
 2. add `Trans/BMS/ExBuchholz`. BMS termination no longer needs it, so what the
    translation buys is the *value*: which ordinal a matrix names;
