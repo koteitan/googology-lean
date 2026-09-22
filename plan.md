@@ -194,11 +194,22 @@ That is `Mono.lean`.
    that ancestor relation is on the entries, and computes it, and
    `BMS/Entries2.lean` puts the two together: `expand2L` is the whole rule
    written on the entries, and `entries2_expand` says it is `BM4.expand`. It
-   runs, and agrees with the reference implementation on the twelve matrices
-   in `test/TransCheck.lean`. What is left is a reading
-   that uses `ψ_1` as well as `ψ_0`, and the commutation, whose `dom`
-   trichotomy will have a fourth case — the tower — that one row never
-   reaches;
+   runs, and agrees with the reference implementation on every two-row matrix
+   of length at most `4` with entries below `3` — `46` standard forms, `138`
+   expansions, all matching (`test/TransCheck.lean`). `BMS/Pair.lean`
+   packages it as a `Rewrite` with its generators, and carries termination
+   across.
+
+   So the mechanical side of two rows is finished. What is left is the
+   reading, and it is not a mechanical job. A two-row reading has to use `ψ`
+   at every finite subscript, and writing one down means reconstructing the
+   ordinal analysis of the pair sequences. A correspondence table is not
+   enough to do that from: it fixes the map at twenty points and leaves the
+   rule to be guessed, and a guessed rule that happens to fit twenty points
+   is exactly the failure this repository refuses to commit for the Y
+   sequence. What would make it tractable is a stated definition of the map —
+   not a table of its values. The commutation after that will meet the clause
+   of `[ ]` that one row never reaches, the tower;
 4. **DBMS done, the Y sequence not.** `Notation/DBMS/` has the expansion
    system: the rule is BM4's, and only the generators differ — column `i`
    holds `i - k` in row `k` rather than `i`. Termination for `r ≥ 2` is not
