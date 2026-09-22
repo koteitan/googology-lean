@@ -40,7 +40,7 @@ inductive Term where
 | `Ord.lean` | 順序数側。`Omega`、`Clos`、`CSet`、`psi`、濃度評価、`psi_lt_Omega_succ`、`psi_notMem`、`Omega_le_psi`、`psi_mono`（mathlib が要る） |
 | `Eval.lean` | `Term.val`。順序数への評価。`Lam` と `val_lt_Lam`（mathlib が要る） |
 | `Mono.lean` | `val_lt_val`、`val_mem_CSet_arg`、`valHom`、`OTLt_wf`（mathlib が要る） |
-| `FS.lean` | `dom`、`fs`（基本列 `X[Y]`）、`fs_lt`（降下）、展開系 `exb` |
+| `FS.lean` | `dom`、`fs`（基本列 `X[Y]`）、`fs_lt`（降下）、Buchholz 3.2(b)、場合 4 の塔、展開系 `exb` |
 | `Closure.lean` | 連結、`G°`、`⊲`、Buchholz 3.4、3.5、3.6 |
 
 ## 順序
@@ -161,21 +161,40 @@ Buchholz は補題 3.3 を `b ⊲_z a` という関係を経由して証明す�
 |---|---|---|
 | 3.4 | `b ⊲_z a`、`G_u a < a`、`G_u z < b` ⟹ `G_u b < b` | **済** |
 | 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b`、`ψ_u(b₀) ⊲_z ψ_u(b)`、`ψ_{b₀}(0) ⊲_z ψ_b(0)` | **済** |
-| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **済**。ただし `Case4` を仮定 |
+| 3.2(b) | 項で添字づけられた定義域で `z₁ < z₂` ⟹ `a[z₁] < a[z₂]` | **済**（`fs_mono`） |
+| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **済**。ただし `TowerBound` を仮定 |
 | 3.3 | `a, z ∈ OT`、`z ∈ dom a` ⟹ `a[z] ∈ OT` | 未 |
 
 仕事をするのは 3.4 である。「`z` に相対して抑えられる」を、標準形の条件そのものに
 変える。`Closure.lean` には 3.4 と、3.5 の 3 つの形と、3.6（`Trian_fs`）がある。
 3.5 の各形は「2 つの項の狭義の間にある項の形」を決める分解補題に乗っている。
 
-3.6 は `size` についての帰納法で、`fs` の枝ごとに場合を分ける。7 つの枝のうち
-6 つは 3.5 と小さな補題 4 つで閉じる。残る 1 つが Buchholz の場合 4 で、
-`dom X₂` が `ψ_{X₁}(X₂)` より下にない崩壊であり、指標 `W = ψ_{Z[0]}(Γ)` を
-`dom X₂` の添字 `Z` から組み直す枝である。この枝は `Case4` という名前で仮定に
-置いてある。Buchholz はここで `G` を手で計算するが、その計算には、この
-ファイルに無いものが 2 つ要る。1 つは `a[n] ⊲_n a` で、項ではなく指標について
-の帰納法である。もう 1 つは `a[n] < a[n+1]` で、3.3 と 3.6 を同時に回す帰納法
-から出る。ここのように 2 つを分けると、この枝が残る。
+`Trian_fs` が 3.6 である。証明は `size` についての帰納法で、`fs` の枝ごとに
+場合を分ける。7 つの枝のうち 6 つは 3.5 と、小さな補題 `Trian_nil`、
+`Trian_self`、`Trian.of_nil`、`Trian.repeatPrin` で閉じる。残る 1 つが
+Buchholz の場合 4 で、`dom X₂ = ψ_Z(0)` が `ψ_{X₁}(X₂)` より下になく、指標を
+`Z` から組み直す枝である。数字 `n` で展開すると、次の塔を回ることになる。
+
+```
+W₀ = ψ_{Z[0]}(0)        W_{i+1} = ψ_{Z[0]}(X₂[W_i])
+(ψ_{X₁}(X₂))[n̲] = ψ_{X₁}(X₂[W_n])
+```
+
+この塔は `FS.lean` に `tower` として定義してある。枝との一致が `fs_numeral`、
+登ることが `tower_lt` と `tower_val_lt`、各段が `X₂` の指標として使えることが
+`tower_lt_dom` である。登るところに 3.2(b)、すなわち `fs` の指標についての
+単調性が要る。それが同じファイルの `fs_mono` である。
+
+その上で `Trian_case4` が、塔についての次の 1 つの主張から場合 4 を出す。
+これを `TowerBound` と呼ぶ。
+
+```
+x ∈ G_u(W_i) ⟹ x < X₂[W_i]
+```
+
+これは Buchholz の第二の塔不変量であり、3.6 の証明が 3.3 を呼ぶ唯一の箇所で
+ある。段 `W_i` が標準形であることが先に要るからである。Buchholz は 3.3 と 3.6
+を 1 つの同時帰納法で証明しており、ここのように分けると、これが残る。
 
 3.3 は 3.4 と 3.6 を組み合わせる。
 
@@ -207,7 +226,9 @@ Buchholz は補題 3.3 を `b ⊲_z a` という関係を経由して証明す�
 | **一歩の展開が可算標準形を狭義に下げる** | **済**（`step_lt`） |
 | `G` が添字について反単調であること、閉包の和の枝 | 済（`G_subset_of_le`、`OT_cons_fs`） |
 | `⊲` についての Buchholz 3.4 と 3.5 | 済（`Closure.lean`） |
-| Buchholz 3.6：`z ∈ dom a → a[z] ⊲_z a` | 済。ただし `Case4` を仮定（`Trian_fs`） |
+| Buchholz 3.2(b)：`fs` が指標について単調 | 済（`fs_mono`） |
+| 場合 4 の塔と `(ψ_{X₁}(X₂))[n̲] = ψ_{X₁}(X₂[W_n])` | 済（`tower`、`fs_numeral`） |
+| Buchholz 3.6：`z ∈ dom a → a[z] ⊲_z a` | 済。ただし `TowerBound` を仮定（`Trian_fs`） |
 | `OT` と `· < Ω` が展開で保たれること | **未証明**。最後の穴。`test/ExBuchholzCheck.lean` で計算により確認 |
 
 例外的に `sorry` を許しているわけではない。ファイルに `sorry` も `axiom` も無い。

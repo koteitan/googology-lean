@@ -558,6 +558,236 @@ theorem OT_cons_fs {X₁ X₂ t Y : Term} (hOT : OT (cons X₁ X₂ t))
     descHead_of_headLe (headLe_fs (OT_headLe_tail (by
       simp only [OT, isOT, Bool.and_eq_true]; exact hOT)) hY)⟩
 
+/-- A numeral is the numeral of its value. -/
+theorem eq_numeral_numVal : ∀ Y : Term, isNum Y = true → Y = numeral (numVal Y) := by
+  intro Y
+  induction Y with
+  | nil => intro _; rfl
+  | cons a b t _ _ iht =>
+    intro h
+    cases a with
+    | cons _ _ _ => simp [isNum] at h
+    | nil =>
+      cases b with
+      | cons _ _ _ => simp [isNum] at h
+      | nil =>
+        have ht : isNum t = true := h
+        show cons nil nil t = numeral (numVal t + 1)
+        rw [show numeral (numVal t + 1) = cons nil nil (numeral (numVal t)) from rfl, ← iht ht]
+
+/-- A standard form below `ω` is a numeral. -/
+theorem eq_numeral_of_lt_tw : ∀ {Y : Term}, OT Y → Y < tw → ∃ n : Nat, Y = numeral n := by
+  intro Y
+  induction Y with
+  | nil => intro _ _; exact ⟨0, rfl⟩
+  | cons a b t _ _ iht =>
+    intro hOT hlt
+    have hab : psi a b < psi nil t1 := by
+      rcases cons_lt_cons_iff.mp hlt with h | ⟨_, h⟩
+      · exact h
+      · exact absurd h (not_lt_nil t)
+    have ha : a = nil := by
+      rcases psi_lt_psi_iff.mp hab with h | ⟨h, _⟩
+      · exact absurd h (not_lt_nil a)
+      · exact h
+    have hb : b = nil := by
+      rcases psi_lt_psi_iff.mp hab with h | ⟨_, h⟩
+      · exact absurd h (not_lt_nil a)
+      · exact lt_one_iff.mp h
+    subst ha; subst hb
+    have hhead : HeadLe (psi nil nil) t := OT_headLe_tail hOT
+    have ht : t < tw := by
+      cases t with
+      | nil => exact nil_lt_cons _ _ _
+      | cons c d s =>
+        have : psi c d ≤ psi nil nil := hhead
+        exact cons_lt_psi_iff.mpr
+          (lt_of_le_of_lt' this (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, nil_lt_cons _ _ _⟩)))
+    obtain ⟨k, hk⟩ := iht (OT_tail hOT) ht
+    exact ⟨k + 1, by rw [hk]; rfl⟩
+
+/-! ## Monotonicity in the index, and the tower of Buchholz's case 4 -/
+
+theorem fs_mono_aux : ∀ n : Nat, ∀ X Y₁ Y₂ : Term, size X ≤ n →
+    dom X ≠ nil → dom X ≠ t1 → dom X ≠ tw →
+    Y₁ < Y₂ → fs X Y₁ < fs X Y₂ := by
+  intro n
+  induction n with
+  | zero =>
+    intro X Y₁ Y₂ hsz h0 _ _ _
+    cases X with
+    | nil => exact absurd rfl h0
+    | cons a b t => simp only [size_cons] at hsz; omega
+  | succ n ih =>
+  intro X Y₁ Y₂ hsz h0 h1 hw hY
+  cases X with
+  | nil => exact absurd rfl h0
+  | cons X₁ X₂ t =>
+    cases t with
+    | cons c d u =>
+      simp only [size_cons] at hsz
+      have hd : dom (cons X₁ X₂ (cons c d u)) = dom (cons c d u) := rfl
+      rw [hd] at h0 h1 hw
+      have hlt := ih (cons c d u) Y₁ Y₂ (by simp only [size_cons]; omega) h0 h1 hw hY
+      show fs (cons X₁ X₂ (cons c d u)) Y₁ < fs (cons X₁ X₂ (cons c d u)) Y₂
+      rw [fs, fs]
+      exact cons_lt_cons_iff.mpr (Or.inr ⟨rfl, hlt⟩)
+    | nil =>
+      simp only [size_cons] at hsz
+      by_cases e1 : dom X₂ = nil
+      · have hX₂ : X₂ = nil := dom_eq_nil_iff.mp e1
+        subst hX₂
+        by_cases g1 : dom X₁ = nil
+        · have hX₁ : X₁ = nil := dom_eq_nil_iff.mp g1
+          subst hX₁
+          exact absurd (by rw [dom]; simp_all) h1
+        · by_cases g2 : dom X₁ = t1
+          · have e₁ : fs (cons X₁ nil nil) Y₁ = Y₁ := by rw [fs]; simp_all
+            have e₂ : fs (cons X₁ nil nil) Y₂ = Y₂ := by rw [fs]; simp_all
+            rw [e₁, e₂]; exact hY
+          · have hd : dom (cons X₁ nil nil) = dom X₁ := by rw [dom]; simp_all
+            rw [hd] at hw
+            have e₁ : fs (cons X₁ nil nil) Y₁ = psi (fs X₁ Y₁) nil := by rw [fs]; simp_all
+            have e₂ : fs (cons X₁ nil nil) Y₂ = psi (fs X₁ Y₂) nil := by rw [fs]; simp_all
+            rw [e₁, e₂]
+            exact psi_lt_psi_iff.mpr (Or.inl (ih X₁ Y₁ Y₂ (by omega) g1 g2 hw hY))
+      · by_cases e2 : dom X₂ = t1
+        · exact absurd (by rw [dom]; simp_all) hw
+        · by_cases e3 : dom X₂ = tw
+          · exact absurd (by rw [dom]; simp_all) hw
+          · by_cases e4 : dom X₂ < cons X₁ X₂ nil
+            · have hd : dom (cons X₁ X₂ nil) = dom X₂ := by rw [dom]; simp_all
+              rw [hd] at hw
+              have f₁ : fs (cons X₁ X₂ nil) Y₁ = psi X₁ (fs X₂ Y₁) := by rw [fs]; simp_all
+              have f₂ : fs (cons X₁ X₂ nil) Y₂ = psi X₁ (fs X₂ Y₂) := by rw [fs]; simp_all
+              rw [f₁, f₂]
+              exact psi_lt_psi_iff.mpr
+                (Or.inr ⟨rfl, ih X₂ Y₁ Y₂ (by omega) e1 e2 hw hY⟩)
+            · exact absurd (by rw [dom]; simp_all) hw
+
+/-- **Buchholz 3.2(b)**: where the domain is indexed by terms — that is, where
+it is neither `0`, nor `1`, nor `ω` — the fundamental sequence is strictly
+increasing in its index. -/
+theorem fs_mono {X Y₁ Y₂ : Term}
+    (h0 : dom X ≠ nil) (h1 : dom X ≠ t1) (hw : dom X ≠ tw) (hY : Y₁ < Y₂) :
+    fs X Y₁ < fs X Y₂ :=
+  fs_mono_aux (size X) X Y₁ Y₂ (Nat.le_refl _) h0 h1 hw hY
+
+/-- On a domain indexed by terms, a nonzero index gives a nonzero value. -/
+theorem fs_ne_nil {X Y : Term}
+    (h0 : dom X ≠ nil) (h1 : dom X ≠ t1) (hw : dom X ≠ tw) (hY : Y ≠ nil) :
+    fs X Y ≠ nil := by
+  cases X with
+  | nil => exact absurd rfl h0
+  | cons X₁ X₂ t =>
+    cases t with
+    | cons c d u =>
+      show fs (cons X₁ X₂ (cons c d u)) Y ≠ nil
+      rw [fs]; exact fun h => Term.noConfusion h
+    | nil =>
+      by_cases e1 : dom X₂ = nil
+      · have hX₂ : X₂ = nil := dom_eq_nil_iff.mp e1
+        subst hX₂
+        by_cases g1 : dom X₁ = nil
+        · have hX₁ : X₁ = nil := dom_eq_nil_iff.mp g1
+          subst hX₁
+          exact absurd (by rw [dom]; simp_all) h1
+        · by_cases g2 : dom X₁ = t1
+          · have he : fs (cons X₁ nil nil) Y = Y := by rw [fs]; simp_all
+            rw [he]; exact hY
+          · have he : fs (cons X₁ nil nil) Y = psi (fs X₁ Y) nil := by rw [fs]; simp_all
+            rw [he]; exact fun h => Term.noConfusion h
+      · by_cases e2 : dom X₂ = t1
+        · exact absurd (by rw [dom]; simp_all) hw
+        · by_cases e3 : dom X₂ = tw
+          · exact absurd (by rw [dom]; simp_all) hw
+          · by_cases e4 : dom X₂ < cons X₁ X₂ nil
+            · have he : fs (cons X₁ X₂ nil) Y = psi X₁ (fs X₂ Y) := by rw [fs]; simp_all
+              rw [he]; exact fun h => Term.noConfusion h
+            · exact absurd (by rw [dom]; simp_all) hw
+
+/-- In the configuration of Buchholz's case 4 the domain is a collapse
+`ψ_Z(0)` with `Z ≠ 0`, so `Z` has a fundamental sequence of its own and
+`Z[0] < Z`. -/
+theorem subOf_fs_lt {W : Term} (h0 : dom W ≠ nil) (h1 : dom W ≠ t1)
+    (hw : dom W ≠ tw) : fs (subOf (dom W)) nil < subOf (dom W) := by
+  have hZ : subOf (dom W) ≠ nil := by
+    intro hZ
+    have := dom_shape W
+    rcases this with h | h | ⟨A, h⟩
+    · exact absurd h h0
+    · exact absurd h hw
+    · rw [h] at hZ; simp only [subOf] at hZ; subst hZ; exact absurd h h1
+  exact fs_lt (lt_of_le_of_ne (nil_le _) (fun h => dom_ne_nil hZ h.symm))
+
+theorem isNum_numeral : ∀ n : Nat, isNum (numeral n) = true
+  | 0 => rfl
+  | k + 1 => isNum_numeral k
+
+/-- The tower of indices Buchholz's case 4 runs through: `W₀ = ψ_{Z₀}(0)` and
+`W_{i+1} = ψ_{Z₀}(B[W_i])`, where `Z₀ = Z[0]` for `dom B = ψ_Z(0)`. -/
+def tower (Z₀ B : Term) : Nat → Term
+  | 0 => psi Z₀ nil
+  | i + 1 => psi Z₀ (fs B (tower Z₀ B i))
+
+/-- In the configuration of case 4, expanding at the numeral `n` runs the
+tower `n` times: `(ψ_{X₁}(X₂))[n̲] = ψ_{X₁}(X₂[W_n])`. -/
+theorem fs_numeral {X₁ X₂ : Term}
+    (e1 : dom X₂ ≠ nil) (e2 : dom X₂ ≠ t1) (e3 : dom X₂ ≠ tw)
+    (e4 : ¬ (dom X₂ < cons X₁ X₂ nil)) : ∀ n : Nat,
+    fs (cons X₁ X₂ nil) (numeral n)
+      = psi X₁ (fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ n)) := by
+  intro n
+  induction n with
+  | zero =>
+    rw [fs]
+    simp only [if_neg e1, if_neg e2, if_neg e3, if_neg e4]
+    rw [dif_neg (by intro h; exact h.1 rfl)]
+    rfl
+  | succ k ihk =>
+    have hc : (numeral (k + 1)) ≠ nil ∧ isNum (numeral (k + 1)) = true :=
+      ⟨fun h => Term.noConfusion h, isNum_numeral (k + 1)⟩
+    rw [fs]
+    simp only [if_neg e1, if_neg e2, if_neg e3, if_neg e4, dif_pos hc]
+    rw [show numPred (numeral (k + 1)) = numeral k from rfl, ihk]
+    simp only [psi, if_true]
+    rfl
+
+/-- The tower climbs. -/
+theorem tower_lt {Z₀ B : Term} (e1 : dom B ≠ nil) (e2 : dom B ≠ t1) (e3 : dom B ≠ tw) :
+    ∀ i : Nat, tower Z₀ B i < tower Z₀ B (i + 1) := by
+  intro i
+  induction i with
+  | zero =>
+    show psi Z₀ nil < psi Z₀ (fs B (tower Z₀ B 0))
+    refine psi_lt_psi_iff.mpr (Or.inr ⟨rfl, ?_⟩)
+    exact lt_of_le_of_ne (nil_le _)
+      (fun h => fs_ne_nil e1 e2 e3 (fun h' => Term.noConfusion h') h.symm)
+  | succ k ihk =>
+    show psi Z₀ (fs B (tower Z₀ B k)) < psi Z₀ (fs B (tower Z₀ B (k + 1)))
+    exact psi_lt_psi_iff.mpr (Or.inr ⟨rfl, fs_mono e1 e2 e3 ihk⟩)
+
+/-- So do the values it produces. -/
+theorem tower_val_lt {Z₀ B : Term} (e1 : dom B ≠ nil) (e2 : dom B ≠ t1)
+    (e3 : dom B ≠ tw) (i : Nat) :
+    fs B (tower Z₀ B i) < fs B (tower Z₀ B (i + 1)) :=
+  fs_mono e1 e2 e3 (tower_lt e1 e2 e3 i)
+
+/-- Every rung of the tower is an admissible index for `B`. -/
+theorem tower_lt_dom {B : Term} (e1 : dom B ≠ nil) (e2 : dom B ≠ t1)
+    (e3 : dom B ≠ tw) : ∀ i : Nat, tower (fs (subOf (dom B)) nil) B i < dom B := by
+  have hlt : fs (subOf (dom B)) nil < subOf (dom B) := subOf_fs_lt e1 e2 e3
+  intro i
+  rcases dom_shape B with h | h | ⟨Z, h⟩
+  · exact absurd h e1
+  · exact absurd h e3
+  · have hZ : subOf (dom B) = Z := by rw [h]; rfl
+    rw [hZ] at hlt
+    rw [h]
+    cases i with
+    | zero => exact psi_lt_psi_iff.mpr (Or.inl hlt)
+    | succ k => exact psi_lt_psi_iff.mpr (Or.inl hlt)
+
 /-! ## As an expansion system -/
 
 /-- Extended Buchholz terms as an expansion system: one step is the
