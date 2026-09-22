@@ -72,7 +72,7 @@ let it be read as one of the theorems above.
 | BMS with itself | `BMS/Cut.lean` | — | that the block recursion `expandL` is the textbook rule: drop the last column, repeat the bad part `N + 1` times |
 | BMS, extended Buchholz's ψ | `BMS/Calibrate.lean` | — | that below `ψ_0(Ω)` is exactly where the subscripts are all `0`, so the reading reaches every standard form there |
 | BMS, extended Buchholz's ψ | `BMS/Eps0.lean` | — | **that one row names exactly the ordinals below `ε₀`**: `val` is onto there, by Cantor normal form, and `ψ_0(Ω)` is `ε₀`. It carries the same construction up to `ε₁`, where the leading term is `ψ_0(Ω + B)` |
-| BMS, extended Buchholz's ψ | `BMS/RankVal.lean` | — | **that the rank of the system is the value of the term**: the same measure by two definitions |
+| BMS, extended Buchholz's ψ | `BMS/RankVal.lean` | — | **that the rank of the system is the value of the term**: the same measure by two definitions. It then computes the rank where no reading exists — the two-row generator, the successors, the block repetitions and the family `(0,0)(1,1)(1,0)ᵏ` |
 | BMS, extended Buchholz's ψ | `BMS/Prim.lean` | `StepHom` | the primitive sequence system as a `Rewrite`, that it terminates, and its ordinal |
 | BMS, extended Buchholz's ψ | `BMS/Cofinal.lean` | — | that below `ψ_0(Ω)` a term is the least upper bound of `X[0] < X[1] < ⋯` |
 | BMS, extended Buchholz's ψ | `BMS/Bms.lean` | `StepHom` | **the ordinal a one-row Bashicu matrix names**, that it is below `ψ_0(Ω)`, and that one row terminates by translation |
