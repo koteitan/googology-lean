@@ -52,4 +52,31 @@ itself. -/
 
 #guard !(unread 0 (read 0 [0, 2]) == [0, 2])
 
+/-! ### Expansion
+
+The four steps of `(0)(1)(2)(3)[1][1][1][1]` in the reference implementation,
+as `expandL` computes them. -/
+
+#guard expandL 1 0 [0, 1, 2, 3] == [0, 1, 2, 2]
+#guard expandL 1 0 [0, 1, 2, 2] == [0, 1, 2, 1, 2]
+#guard expandL 1 0 [0, 1, 2, 1, 2] == [0, 1, 2, 1, 1]
+#guard expandL 1 0 [0, 1, 2, 1, 1] == [0, 1, 2, 1, 0, 1, 2, 1]
+
+/-! A matrix that ends at level `0` loses its last column. -/
+
+#guard expandL 3 0 [0, 1, 0] == [0, 1]
+#guard expandL 3 0 [0] == []
+
+/-! And the count: `[n]` writes `n + 1` copies. -/
+
+#guard expandL 0 0 [0, 1] == [0]
+#guard expandL 2 0 [0, 1] == [0, 0, 0]
+
+/-! The commutation of `read_expandL`, computed. -/
+
+#guard ([[0], [0, 1], [0, 0], [0, 1, 2], [0, 1, 1], [0, 1, 0, 1],
+  [0, 1, 2, 3], [0, 1, 2, 1, 1]] : List (List Nat)).all fun s =>
+    (List.range 3).all fun n =>
+      read 0 (expandL n 0 s) == fs (read 0 s) (idx (read 0 s) (n + 1))
+
 end Googology.Trans.BMS

@@ -22,6 +22,7 @@ all of them, and each system supplies only what is its own.
 | the fundamental sequence descends | `ExBuchholz.Term.fs_lt` |
 | **extended Buchholz terms terminate** | `ExBuchholz.Term.exbOT_terminates` |
 | the fundamental sequence keeps a term standard — Buchholz's Lemma 3.3 | `ExBuchholz.Term.OTFS_thm` |
+| **a one-row Bashicu matrix names an ordinal, and expansion is its fundamental sequence** | `Trans.BMS.read_expandL` |
 
 No `sorry`, and no axiom beyond `propext`, `Classical.choice` and `Quot.sound`.
 `Googology.Core` uses none of the three.
