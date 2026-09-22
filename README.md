@@ -20,6 +20,8 @@ all of them, and each system supplies only what is its own.
 | distinct standard forms name distinct ordinals | `ExBuchholz.Term.val_inj_of_OT` |
 | the notation system is correct: the term order matches the ordinal order | `ExBuchholz.Term.val_lt_val` |
 | the fundamental sequence descends | `ExBuchholz.Term.fs_lt` |
+| **extended Buchholz terms terminate** | `ExBuchholz.Term.exbOT_terminates` |
+| the fundamental sequence keeps a term standard — Buchholz's Lemma 3.3 | `ExBuchholz.Term.OTFS_thm` |
 
 No `sorry`, and no axiom beyond `propext`, `Classical.choice` and `Quot.sound`.
 `Googology.Core` uses none of the three.
@@ -136,7 +138,7 @@ MIT. See [LICENSE](LICENSE).
   including the rules that govern these documents
 * [plan.md](plan.md) — the whole argument and where the work has got to
 
-Current state: `Core/` is complete. `Notation/ExBuchholz` is finished as a
-notation system. `Notation/BMS` terminates for every number of rows. `Trans/`
-is empty. The one thing still open is that `OT` is preserved by a fundamental
-sequence step, which `plan.md` describes.
+Current state: `Core/` is complete. `Notation/ExBuchholz` is finished, as a
+notation system and as an expansion system: its termination is proved with
+nothing assumed. `Notation/BMS` terminates for every number of rows. `Trans/`
+is empty; `plan.md` says what would go there.

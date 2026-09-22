@@ -19,6 +19,8 @@
 | 異なる標準形は異なる順序数を名指す | `ExBuchholz.Term.val_inj_of_OT` |
 | 表記系の正しさ。項の順序と順序数の順序が一致する | `ExBuchholz.Term.val_lt_val` |
 | 基本列が降下する | `ExBuchholz.Term.fs_lt` |
+| **拡張ブーフホルツ項は停止する** | `ExBuchholz.Term.exbOT_terminates` |
+| 基本列が標準形を保つ（Buchholz 補題 3.3） | `ExBuchholz.Term.OTFS_thm` |
 
 `sorry` は無く、公理も `propext`・`Classical.choice`・`Quot.sound` の 3 つだけ。
 `Googology.Core` はそのどれも使わない。
@@ -134,6 +136,6 @@ MIT ライセンス。[LICENSE](LICENSE) を参照。
   規則も含む
 * [plan-ja.md](plan-ja.md) — 議論の全体と、作業の現在地
 
-現状：`Core/` は完成。`Notation/ExBuchholz` は表記系として完成し、`Notation/BMS` は
-どの行数でも停止する。`Trans/` は空。残っている唯一のものは「`OT` が基本列の一歩で
-保たれる」で、詳しくは `plan-ja.md` にある。
+現状：`Core/` は完成。`Notation/ExBuchholz` は表記系としても展開系としても完成
+した。停止性は何も仮定せずに証明してある。`Notation/BMS` はどの行数でも停止する。
+`Trans/` は空で、そこに何を置くかは `plan-ja.md` にある。
