@@ -26,9 +26,12 @@ The shape is the Cantor normal form read at three levels.  Writing
   library already has, offset in row `0`.
 
 So addition is the number of add units, multiplication the number of multiply
-units, and exponentiation the shape of the one-row embedding.  Nothing here is
-proved: `omegaIndexMatrix` is a transcription, and the `#guard`s below are the
-calibration against the published table.
+units, and exponentiation the shape of the one-row embedding.  The rule itself is a
+transcription, and the `#guard`s below are the calibration against the
+published table; what is proved here is that the output is well formed —
+`WF3_omegaIndexMatrix` and `WF3_trioMatrix` say every column is three rows
+deep with `z < 2`, so the result really is a matrix of the fragment the map
+is about.
 
 Two further checks were run outside Lean, against the reference
 implementation in [yaBMS](https://github.com/koteitan/yaBMS), on the thirty
@@ -221,5 +224,95 @@ def trioMatrix : Term → List (List Nat)
 
 #guard omegaFinMatrix 2
   = [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0]]
+
+/-! ### What the transcription does produce
+
+Two things about the output are theorems rather than checks: every column is
+three rows, so it really is a matrix of the trio system, and every `z` is `0`
+or `1`, so it stays inside the `z < 2` fragment the map is about. -/
+
+/-- A column list is three rows deep, with `z` below `2`. -/
+def WF3 (m : List (List Nat)) : Prop :=
+  ∀ c ∈ m, c.length = 3 ∧ c.getD 2 0 ≤ 1
+
+theorem WF3_nil : WF3 [] := by
+  intro c hc
+  exact absurd hc (by simp)
+
+theorem WF3_append {m n : List (List Nat)} (hm : WF3 m) (hn : WF3 n) : WF3 (m ++ n) := by
+  intro c hc
+  rcases List.mem_append.mp hc with h | h
+  · exact hm c h
+  · exact hn c h
+
+theorem WF3_cons {c : List Nat} {m : List (List Nat)} (hc : c.length = 3 ∧ c.getD 2 0 ≤ 1)
+    (hm : WF3 m) : WF3 (c :: m) := by
+  intro d hd
+  rcases List.mem_cons.mp hd with rfl | h
+  · exact hc
+  · exact hm d h
+
+theorem WF3_prSS (x : Nat) (γ : Term) : WF3 (prSS x γ) := by
+  intro c hc
+  rw [prSS, List.mem_map] at hc
+  obtain ⟨e, -, rfl⟩ := hc
+  exact ⟨rfl, by simp⟩
+
+theorem WF3_mulUnits (x0 y : Nat) : ∀ t : Term, WF3 (mulUnits x0 y t) := by
+  intro t
+  induction t with
+  | nil => exact WF3_nil
+  | cons _ g u _ _ ihu =>
+    refine WF3_append (WF3_cons ⟨rfl, by simp⟩ (WF3_prSS (x0 + 2) g)) ihu
+
+theorem WF3_bodyU (β : Term) (x0 y : Nat) : WF3 (bodyU β x0 y) :=
+  WF3_cons ⟨rfl, by simp⟩ (WF3_mulUnits x0 y (peelOne β))
+
+theorem WF3_addUnits : ∀ (α : Term) (rp1 lastX : Nat) (pz : Bool) (i : Nat),
+    WF3 (addUnits rp1 lastX pz i α) := by
+  intro α
+  induction α with
+  | nil => intro _ _ _ _; exact WF3_nil
+  | cons _ b t _ _ iht =>
+    intro rp1 lastX pz i
+    rw [addUnits]
+    by_cases hb : (b == nil) = true
+    · rw [if_pos hb]
+      cases pz with
+      | true => exact WF3_cons ⟨rfl, by simp⟩ (iht rp1 (lastX + 1) true (i + 1))
+      | false =>
+        exact WF3_cons ⟨rfl, by simp⟩
+          (WF3_cons ⟨rfl, by simp⟩ (iht rp1 (rp1 + 1) true (i + 1)))
+    · rw [if_neg hb]
+      exact WF3_append (WF3_cons ⟨rfl, by simp⟩ (WF3_bodyU b (rp1 + 1) i))
+        (iht (rp1 + 2) (rp1 + 1) false (i + 1))
+
+/-- **Every column of `omegaIndexMatrix` is three rows deep with `z < 2`.** -/
+theorem WF3_omegaIndexMatrix (α : Term) : WF3 (omegaIndexMatrix α) :=
+  WF3_addUnits α 0 0 false 1
+
+theorem WF3_shiftX {m : List (List Nat)} (d : Nat) (hm : WF3 m) : WF3 (shiftX d m) := by
+  intro c hc
+  rw [shiftX, List.mem_map] at hc
+  obtain ⟨e, he, rfl⟩ := hc
+  obtain ⟨hlen, hz⟩ := hm e he
+  match e, hlen with
+  | [x, y, z], _ => exact ⟨rfl, hz⟩
+
+/-- **The same for `trioMatrix`.** -/
+theorem WF3_trioMatrix : ∀ α : Term, WF3 (trioMatrix α) := by
+  intro α
+  induction α using trioMatrix.induct with
+  | case1 X hX =>
+    rw [trioMatrix, if_pos hX]
+    exact WF3_omegaIndexMatrix _
+  | case2 X hX ih =>
+    rw [trioMatrix, if_neg hX]
+    exact WF3_append (WF3_cons ⟨rfl, by simp⟩
+      (WF3_cons ⟨rfl, by simp⟩ (WF3_cons ⟨rfl, by simp⟩ WF3_nil))) (WF3_shiftX 3 ih)
+  | case3 α h1 =>
+    rw [trioMatrix]
+    · exact WF3_omegaIndexMatrix α
+    · exact h1
 
 end Googology.Trans.BMS

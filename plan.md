@@ -466,10 +466,11 @@ The other two are not Lean problems.
   `omegaIndexMatrix` and calibrates it against twenty rows of that table,
   including `ψ_0(Ω_1) = ε₀` as `(0,0)(1,1)` and `ψ_0(Ω_2)` as
   `(0,0)(1,1)(2,2)`, which is where the yaBMS table puts the Bachmann–Howard
-  ordinal as well. That is a transcription and `#guard`s, not a theorem: what
-  is not proved is that the map lands in standard forms, that it is monotone,
-  and that it turns `[ ]` into the fundamental sequence — the three things the
-  one-row case has. The first two were checked outside Lean against the
+  ordinal as well. That is a transcription and `#guard`s, not a theorem, except for the
+  shape of the output: `WF3_omegaIndexMatrix` and `WF3_trioMatrix` prove every
+  column is three rows deep with `z < 2`. What is not proved is that the map
+  lands in standard forms, that it is monotone, and that it turns `[ ]` into
+  the fundamental sequence — the three things the one-row case has. The first two were checked outside Lean against the
   reference implementation on those twenty matrices: all twenty are standard
   forms, and each compares `<` with the next as `α` increases. The third does
   **not** hold on the nose: `BM4.expand` at three rows and the canonical
