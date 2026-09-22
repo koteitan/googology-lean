@@ -8,6 +8,12 @@ and the translations between them.
 The library proves the shared theorems **once**, so that an individual system
 only has to supply what is specific to it — usually a single measure.
 
+## Where to start
+
+| | |
+|---|---|
+| [plan.md](plan.md) | the whole argument and where the work has got to |
+
 ## Directory layout
 
 ```

@@ -71,6 +71,36 @@ theorem val_eq_zero_iff {x : Term} : val x = 0 ↔ x = nil := by
     exact absurd h (val_pos hx).ne'
   · rintro rfl; rfl
 
+/-- The structural size of a term, the measure of the induction below. -/
+def size : Term → Nat
+  | nil => 0
+  | cons a b t => size a + size b + size t + 1
+
+@[simp] theorem size_nil : size nil = 0 := rfl
+@[simp] theorem size_cons (a b t : Term) :
+    size (cons a b t) = size a + size b + size t + 1 := rfl
+
+@[simp] theorem G_nil (a : Term) : G a nil = [] := rfl
+theorem G_cons (a c d t : Term) :
+    G a (cons c d t) =
+      (if a ≤ c then c :: d :: (G a c ++ G a d) else []) ++ G a t := rfl
+
+/-- A smaller subscript gives a smaller collapse, whatever the arguments. -/
+theorem psi_lt_of_sub_lt {a b c d : Ordinal} (h : a < c) :
+    Ord.psi b a < Ord.psi d c := by
+  have h1 : Ord.psi b a < Ord.Omega (a + 1) := Ord.psi_lt_Omega_succ b a
+  have h2 : a + 1 ≤ c := by rwa [← Order.succ_eq_add_one, Order.succ_le_iff]
+  have h3 : Ord.Omega (a + 1) ≤ Ord.Omega c := Ord.Omega_mono h2
+  have h4 : Ord.Omega c ≤ Ord.psi d c := Ord.Omega_le_psi d c
+  exact h1.trans_le (h3.trans h4)
+
+/-- With the same subscript, a bigger argument gives a bigger collapse — as
+long as the smaller argument is reachable inside its own closure. -/
+theorem psi_lt_of_arg_lt {v b d : Ordinal} (hb : b ∈ Ord.CSet v b) (h : b < d)
+    (hv : v ∈ Ord.CSet v d) : Ord.psi b v < Ord.psi d v := by
+  refine Ord.lt_psi_of_mem ?_ (Ord.card_psi_le b v)
+  exact Ord.Clos.coll (e := ⟨b, h⟩) hv (Ord.CSet_mono v h.le hb)
+
 end Term
 
 /-! ## Term values are never omega fixed points -/
