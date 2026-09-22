@@ -1,4 +1,4 @@
-import Googology.Trans.BMS.Agree
+import Googology.Trans.BMS.AllL
 import Googology.Trans.DBMS.OneRow
 
 /-!
@@ -90,5 +90,15 @@ theorem dbmsL_wf (r : Nat) : (dbmsL r).WF := Rewrite.wf_of_terminates (dbmsL_ter
 /-- From a generator, any expansion sequence ends. -/
 theorem dbmsLStd_terminates (r : Nat) : (dbmsLStd r).Terminates :=
   (dbmsLStd r).of_terminates (dbmsL_terminates r)
+
+/-- The DBMS matrices sit inside all matrices, by the same step. -/
+def dbmsLSim (r : Nat) : Sim (dbmsL r) (bmsAllL r) where
+  map := fun l => ⟨l.1, by
+    obtain ⟨A, _, hA⟩ := l.2
+    rw [← hA]
+    exact entriesR_col_len A⟩
+  map_rel := by
+    rintro a b ⟨hna, k, rfl⟩
+    exact ⟨hna, k, rfl⟩
 
 end Googology.Trans.DBMS

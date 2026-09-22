@@ -55,6 +55,7 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | BMS 自身 | `BMS/TwoRow.lean` | — | 2 行の展開: `m₀` は 0 か 1 で、1 のとき行 0 に加算が入る |
 | BMS 自身 | `BMS/Anc.lean` | — | 行 0 の祖先関係を成分列から読み、計算できる形にして `BM4.anc` と一致することを示す |
 | BMS 自身 | `BMS/EntriesR.lean` | — | **BMS の展開を行数によらず成分列の上に書き、それが `BM4.expand` であること** — だから走る |
+| BMS 自身 | `BMS/AllL.lean` | `Sim` | 標準形かどうかによらず**全**行列上の規則を、走る系として与え、標準形はその中に置く |
 | BMS 自身 | `BMS/Entries2.lean` | — | **2 行の展開を成分列の上に書き、それが `BM4.expand` であること、そして走らせれば止まること** |
 | BMS 自身 | `BMS/Pair.lean` | — | ペア数列系を、ステップが走る `Rewrite` として与え、生成元も付ける |
 | BMS 自身 | `BMS/Agree.lean` | — | 1 行・2 行・一般の規則が一致すること。一般の系も生成元付きの `Rewrite` にする |

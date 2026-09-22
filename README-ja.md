@@ -19,6 +19,7 @@
 | **バシク行列はどの行数でも停止する** | `Notation.BMS.bms_terminates` |
 | **標準形かどうかに関係なく、どんな配列からでも展開は止まる** | `Notation.BMS.terminates_any` |
 | だから全配列上の規則も系になり、整礎で階数を持つ | `Notation.BMS.bmsAll`, `Notation.BMS.bmsAll_wf`, `Notation.BMS.bmsAllEval` |
+| 成分列の上でも同じこと。こちらはステップが走る | `Trans.BMS.bmsAllL`, `Trans.BMS.bmsAllL_wf`, `Trans.BMS.bmsAllLEval` |
 | 原始数列・ペア数列・トリオ数列の停止 | `Notation.BMS.primitive_terminates`、`Notation.BMS.pair_terminates`、`Notation.BMS.trio_terminates` |
 | BMS は順序数の測度を持つ | `Notation.BMS.bmsEval` |
 | **成分列の上に書いた BMS の展開が `BM4.expand` であること** — 行数によらず、だから走る | `Trans.BMS.entriesR_expand` |

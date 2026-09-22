@@ -20,6 +20,7 @@ Names are written relative to `Googology`.
 | **Bashicu matrices terminate**, for any number of rows | `Notation.BMS.bms_terminates` |
 | **expansion ends from any array at all**, standard or not | `Notation.BMS.terminates_any` |
 | so the rule on every array is a system, well founded and with a rank | `Notation.BMS.bmsAll`, `Notation.BMS.bmsAll_wf`, `Notation.BMS.bmsAllEval` |
+| and the same on the entries, where the step runs | `Trans.BMS.bmsAllL`, `Trans.BMS.bmsAllL_wf`, `Trans.BMS.bmsAllLEval` |
 | the primitive, pair and trio sequences terminate | `Notation.BMS.primitive_terminates`, `Notation.BMS.pair_terminates`, `Notation.BMS.trio_terminates` |
 | BMS carries an ordinal measure | `Notation.BMS.bmsEval` |
 | **every Bashicu matrix expansion, written on the entries, is `BM4.expand`** — so it runs, at any number of rows | `Trans.BMS.entriesR_expand` |

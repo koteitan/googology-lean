@@ -67,6 +67,11 @@ def ParR (l : List (List Nat)) : Nat → Nat → Nat → Prop
       ∀ j', j < j' → j' < i → Relation.TransGen (ParR l k) j' i →
         (l[i]!)[k + 1]! ≤ (l[j']!)[k + 1]!
 
+theorem ParR_lt {l : List (List Nat)} {k j i : Nat} (h : ParR l k j i) : j < i := by
+  cases k with
+  | zero => exact h.1
+  | succ m => exact h.1
+
 /-- Being a strict row-`k` ancestor. -/
 def AncR (l : List (List Nat)) (k : Nat) : Nat → Nat → Prop :=
   Relation.TransGen (ParR l k)
