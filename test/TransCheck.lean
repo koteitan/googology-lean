@@ -79,4 +79,15 @@ as `expandL` computes them. -/
     (List.range 3).all fun n =>
       read 0 (expandL n 0 s) == fs (read 0 s) (idx (read 0 s) (n + 1))
 
+/-! ### States of the primitive sequence system
+
+The generators `(0)(1)⋯(n)` are states: their terms are standard forms. -/
+
+#guard (List.range 6).all fun n => isOT (read 0 (List.range (n + 1)))
+
+/-! And expansion keeps them so. -/
+
+#guard (List.range 4).all fun n =>
+  (List.range 3).all fun k => isOT (read 0 (expandL k 0 (List.range (n + 1))))
+
 end Googology.Trans.BMS
