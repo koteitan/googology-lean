@@ -23,6 +23,8 @@
 | 基本列が標準形を保つ（Buchholz 補題 3.3） | `ExBuchholz.Term.OTFS_thm` |
 | **1 行の BMS が名指す順序数と、その展開が基本列であること** | `Trans.BMS.read_expandL` |
 | 翻訳によって原始数列系が停止すること | `Trans.BMS.prim_terminates` |
+| **1 行の BMS が名指す順序数** | `Trans.BMS.bmsOrdEval` |
+| ラベルではなく翻訳による 1 行 BMS の停止性 | `Trans.BMS.bms_one_terminates` |
 
 `sorry` は無く、公理も `propext`・`Classical.choice`・`Quot.sound` の 3 つだけ。
 `Googology.Core` はそのどれも使わない。

@@ -48,5 +48,6 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | BMS 自身 | `BMS/Entries.lean` | — | 配列とその成分列が同じ展開をすること |
 | BMS 自身 | `BMS/Cut.lean` | — | ブロック再帰 `expandL` が教科書どおりの規則であること: 最後の列を落とし、悪い部分を `N + 1` 回繰り返す |
 | BMS、拡張ブーフホルツ ψ | `BMS/Prim.lean` | `StepHom` | 原始数列系を `Rewrite` として与え、停止することとその順序数 |
+| BMS、拡張ブーフホルツ ψ | `BMS/Bms.lean` | `StepHom` | **1 行の BMS が名指す順序数**と、翻訳による 1 行の停止性 |
 | BMS、拡張ブーフホルツ ψ | `BMS/Commute.lean` | いずれ `StepHom` | 読み取りが展開を `[ ]` に変えること、添字の付け替え `N ↦ N + 1` を込めて |
 | BMS、拡張ブーフホルツ ψ | `BMS/ExBuchholz.lean` | いずれ `Sim` | 1 行の場合の読み取り `read`、その項が標準形になるのは降順のときちょうどであること、そしてそれが全単射であること |

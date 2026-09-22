@@ -4,3 +4,4 @@ import Googology.Trans.BMS.Commute
 import Googology.Trans.BMS.Cut
 import Googology.Trans.BMS.Entries
 import Googology.Trans.BMS.Prim
+import Googology.Trans.BMS.Bms
