@@ -291,4 +291,22 @@ are below `3` — `756` of them, of which `24` are standard — expanded at `0`,
 #guard expandRL 1 1 [[0],[1],[2],[3]] == (expandL 1 0 [0,1,2,3]).map (fun a => [a])
 #guard expandRL 1 1 [[0],[1],[2],[1],[1]] == (expandL 1 0 [0,1,2,1,1]).map (fun a => [a])
 
+/-! ### DBMS generators, on the entries
+
+Column `i` holds `i - k` in row `k`, which is what `Trans.DBMS.entriesR_dstair`
+says. Three rows give `(0,0,0)(1,0,0)(2,1,0)(3,2,1)`, which `./bms -s -v DBMS`
+calls standard and `./bms -s` does not. -/
+
+#guard (List.range 4).map (fun i => (List.range 3).map (fun k => i - k))
+  == [[0,0,0],[1,0,0],[2,1,0],[3,2,1]]
+
+/-! DBMS expands by the BM4 rule, so `expandRL` serves both, and `./bms` gives
+the same answer under either version. -/
+
+#guard expandRL 3 0 [[0,0,0],[1,0,0],[2,1,0],[3,2,1]] == [[0,0,0],[1,0,0],[2,1,0]]
+#guard expandRL 3 1 [[0,0,0],[1,0,0],[2,1,0],[3,2,1]]
+  == [[0,0,0],[1,0,0],[2,1,0],[3,2,0]]
+#guard expandRL 3 2 [[0,0,0],[1,0,0],[2,1,0],[3,2,1]]
+  == [[0,0,0],[1,0,0],[2,1,0],[3,2,0],[4,3,0]]
+
 end Googology.Trans.BMS

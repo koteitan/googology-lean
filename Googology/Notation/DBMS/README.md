@@ -39,6 +39,7 @@ With one row they agree, because `i - 0 = i`.
 | termination, any number of rows | **not proved** |
 | one row: an ordinal, and termination | done, in [`Trans/DBMS/`](../../Trans/README.md) |
 | one row: which matrices are standard | done (`dstd_entries_iff`) |
+| the expansion on the entries, at any number of rows | done (`Trans.DBMS.dbmsL`) |
 
 Termination is not proved here for `r ≥ 2`. The label-system proof this
 library imports is about arrays reachable from a stair; whether it carries

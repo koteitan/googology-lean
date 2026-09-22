@@ -16,3 +16,4 @@ import Googology.Trans.BMS.Bms
 import Googology.Trans.BMS.Reach
 import Googology.Trans.BMS.Equiv
 import Googology.Trans.DBMS.OneRow
+import Googology.Trans.DBMS.Entries
