@@ -14,7 +14,7 @@ any `c` between them, together with `z`.  The chain is
 |---|---|---|
 | 3.4 | `b ⊲_z a`, `G_u a < a`, `G_u z < b` ⟹ `G_u b < b` | **done** |
 | 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b` and `ψ_u(b₀) ⊲_z ψ_u(b)` | **done** |
-| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | not yet |
+| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | pieces in place, not assembled |
 | 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | not yet |
 
 3.4 is the one that does the work: it turns "bounded relative to `z`" into the
@@ -311,5 +311,72 @@ theorem Trian.G_lt {u z b a : Term} (hba : Trian z b a)
           rw [G_cons, if_neg huv] at hy
           exact ht y (by simpa using hy)
   rcases key (size b) b (Nat.le_refl _) hstep1 with h | h <;> exact h
+
+/-! ## The pieces 3.6 is assembled from
+
+3.6 follows `fs` branch by branch, and each branch needs one of these.
+
+| branch of `fs` | what it needs |
+|---|---|
+| `X = 1`, the step is `0` | `Trian_nil` |
+| `X = ψ_u(0)` with `u` a successor, the step is the index | `Trian_self` |
+| `dom X₂ = 1`, the step is a repeated collapse | `Trian.of_nil`, `Trian.repeatPrin`, `Trian.psi_left` |
+| `dom X₂` an `ω`-limit or below `X`, the step is inside the argument | `Trian.psi_left` |
+| `X` a sum, the step is in the last summand | `Trian.addT_left` |
+
+The branch not covered is the one where the index has to be rebuilt from the
+subscript of `dom X₂`; Buchholz's case 4 computes `G` there by hand.
+-/
+
+/-- `0 ⊲_z a` for any nonzero `a`: `G` sees nothing in `0`. -/
+theorem Trian_nil {z a : Term} (h : nil < a) : Trian z nil a :=
+  ⟨h, fun _ _ _ _ x hx => absurd hx (List.not_mem_nil)⟩
+
+/-- `z ⊲_z a` whenever `z < a`: what `G` sees in `z` is in `G° z` already. -/
+theorem Trian_self {z a : Term} (h : z < a) : Trian z z a :=
+  ⟨h, fun u _ _ _ x hx =>
+    ⟨x, List.mem_append_right _ (List.mem_cons_of_mem _ hx), le_refl x⟩⟩
+
+/-- `⊲_0` is the strongest of the family: `G° 0` sits inside every `G° z`. -/
+theorem Trian.of_nil {z b a : Term} (h : Trian nil b a) : Trian z b a := by
+  refine ⟨h.1, fun u c hlt hle x hx => ?_⟩
+  obtain ⟨y, hy, hle'⟩ := h.2 u c hlt hle x hx
+  rcases List.mem_append.mp hy with hy | hy
+  · exact ⟨y, List.mem_append_left _ hy, hle'⟩
+  · rcases List.mem_cons.mp hy with rfl | hy
+    · exact ⟨nil, List.mem_append_right _ (List.mem_cons_self ..), hle'⟩
+    · exact absurd hy (List.not_mem_nil)
+
+theorem G_repeatPrin (u A B : Term) :
+    ∀ k, ∀ y ∈ G u (repeatPrin A B k), y ∈ G u (psi A B)
+  | 0 => fun y hy => absurd hy (List.not_mem_nil)
+  | k + 1 => by
+      intro y hy
+      rw [show repeatPrin A B (k+1) = cons A B (repeatPrin A B k) from rfl, G_cons] at hy
+      rcases List.mem_append.mp hy with hy | hy
+      · rw [psi, G_cons]; exact List.mem_append_left _ hy
+      · exact G_repeatPrin u A B k y hy
+
+theorem cons_le_cons {a b t u : Term} (h : t ≤ u) : cons a b t ≤ cons a b u := by
+  rcases le_iff_lt_or_eq.mp h with h | rfl
+  · exact le_of_lt (cons_lt_cons_iff.mpr (Or.inr ⟨rfl, h⟩))
+  · exact le_refl _
+
+theorem psi_le_repeatPrin (A B : Term) :
+    ∀ k, 0 < k → psi A B ≤ repeatPrin A B k
+  | 0, h => absurd h (Nat.lt_irrefl 0)
+  | _ + 1, _ => cons_le_cons (nil_le _)
+
+/-- A repeated collapse inherits `⊲` from one copy. -/
+theorem Trian.repeatPrin {z A B a : Term} (h : Trian z (psi A B) a) :
+    ∀ k, repeatPrin A B k < a → Trian z (repeatPrin A B k) a := by
+  intro k hlt
+  refine ⟨hlt, fun u c hc hca x hx => ?_⟩
+  cases k with
+  | zero => exact absurd hx (List.not_mem_nil)
+  | succ k =>
+    have hple : psi A B < c :=
+      lt_of_le_of_lt' (psi_le_repeatPrin A B (k+1) (Nat.succ_pos k)) hc
+    exact h.2 u c hple hca x (G_repeatPrin u A B (k+1) x hx)
 
 end Googology.Notation.ExBuchholz.Term

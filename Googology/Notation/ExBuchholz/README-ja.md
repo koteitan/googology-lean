@@ -42,7 +42,7 @@ inductive Term where
 | `Eval.lean` | `Term.val`。順序数への評価。`Lam` と `val_lt_Lam`（mathlib が要る） |
 | `Mono.lean` | `val_lt_val`、`val_mem_CSet_arg`、`valHom`、`OTLt_wf`（mathlib が要る） |
 | `FS.lean` | `dom`、`fs`（基本列 `X[Y]`）、`fs_lt`（降下）、展開系 `exb` |
-| `Closure.lean` | 連結、`G°`、`⊲`、Buchholz 3.4 と 3.5 |
+| `Closure.lean` | 連結、`G°`、`⊲`、Buchholz 3.4 と 3.5、3.6 の部品 |
 
 ## 順序
 
@@ -200,7 +200,7 @@ Buchholz は補題 3.3 を `b ⊲_z a` という関係を経由して証明し�
 |---|---|---|
 | 3.4 | `b ⊲_z a`、`G_u a < a`、`G_u z < b` ⟹ `G_u b < b` | **済** |
 | 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b` と `ψ_u(b₀) ⊲_z ψ_u(b)` | **済** |
-| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | 未 |
+| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | 部品は揃い、組み立てが未 |
 | 3.3 | `a, z ∈ OT`、`z ∈ dom a` ⟹ `a[z] ∈ OT` | 未 |
 
 仕事をするのは 3.4 です。「`z` に相対して抑えられる」を、標準形の条件そのものに
