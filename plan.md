@@ -290,12 +290,17 @@ One thing left is a Lean problem.
   order **isomorphism** onto `C_0(Λ)`. The monotone and injective half is here
   — `val_lt_val` and `val_inj_of_OT` — and surjectivity is not proved, so what
   the library says about which ordinal a matrix names is exact as terms and
-  one-sided as ordinals. Below `ε₀` it is Cantor normal form: every
-  `α < ε₀` is `ω^a₁ + ⋯ + ω^aₙ` with each `aᵢ < α`, so an induction on `α`
-  builds the term, provided `ψ_0(α) = ω^α` for `α < Ω` — which `Ord.lean`
-  does not have. With that much, one row would name **exactly** the ordinals
-  below `ε₀`, as ordinals and not only as terms: `lt_e0_iff_allNil` and
-  `exists_read` already give the other direction.
+  one-sided as ordinals. Below `ε₀` the route is Cantor normal form: every
+  `α < ε₀` is `ω^b₁ + ⋯ + ω^bₙ` with `b₁ ≥ ⋯ ≥ bₙ` and every `bᵢ < α` — the
+  least ε-number is `ε₀` itself, so no exponent can equal its own `α` — and an
+  induction on `α` then builds a standard term with every subscript `0`, whose
+  descent condition is `Trans.BMS.OT_of_desc`. What it needs from `Ord.lean`
+  is `ψ_0(β) = ω^β`, and that does **not** hold for every `β < Ω`:
+  `ε₀ ∉ C_0(ε₀ + 1)`, so `ψ_0(ε₀ + 1) = ψ_0(ε₀) = ε₀` while `ω^(ε₀+1) = ε₀·ω`.
+  It holds where `β ∈ C_0(β)`, which is what `val_mem_CSet_arg` says of a
+  standard term's argument. With that much, one row would name **exactly** the
+  ordinals below `ε₀`, as ordinals and not only as terms:
+  `lt_e0_iff_allNil` and `exists_read` already give the other direction.
 
 The other two are not Lean problems.
 

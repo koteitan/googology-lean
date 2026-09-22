@@ -18,7 +18,8 @@ x < y → OT x → OT y → val x < val y
 which is the correctness of the notation system, and which — pulled back along
 `OrdHom.wf` — discharges the hypothesis of `wellFounded_OTLt`.
 
-It is not proved yet, and the reason is worth recording. Weak monotonicity of
+`Mono.lean` proves it; this file lays the ground.  Why it is not immediate is
+worth recording.  Weak monotonicity of
 `ψ_v` in the argument (`Ord.psi_mono`) is not enough: `ψ_v(a) = ψ_v(a+1)` does
 happen, exactly when `a` is not itself reachable inside `C_v(a)`. Strictness is
 what the standard-form condition buys, and turning it into a theorem needs, in
