@@ -284,7 +284,20 @@ underneath changes nothing at every number of rows, and the generator
 matrices. `rank_zeroRow` adds that the ordinal is the same on both sides, so
 the extra row names nothing new.
 
-The two things left are not Lean problems.
+One thing left is a Lean problem.
+
+* **`val` is onto.** The source states that `val` restricted to `OT` is an
+  order **isomorphism** onto `C_0(Λ)`. The monotone and injective half is here
+  — `val_lt_val` and `val_inj_of_OT` — and surjectivity is not proved, so what
+  the library says about which ordinal a matrix names is exact as terms and
+  one-sided as ordinals. Below `ε₀` it is Cantor normal form: every
+  `α < ε₀` is `ω^a₁ + ⋯ + ω^aₙ` with each `aᵢ < α`, so an induction on `α`
+  builds the term, provided `ψ_0(α) = ω^α` for `α < Ω` — which `Ord.lean`
+  does not have. With that much, one row would name **exactly** the ordinals
+  below `ε₀`, as ordinals and not only as terms: `lt_e0_iff_allNil` and
+  `exists_read` already give the other direction.
+
+The other two are not Lean problems.
 
 * **A reading for two rows and up.** It needs a stated definition of the map
   from matrices to ordinals. The sources checked give worked values, not a
