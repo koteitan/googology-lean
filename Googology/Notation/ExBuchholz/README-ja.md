@@ -40,6 +40,7 @@ inductive Term where
 | `Sum.lean` | `leadCount`、`dropLead`、`lead_lex`、`acc_of_headLe`、`acc_of_OT`、`wellFounded_OTLt` |
 | `Ord.lean` | 順序数側。`Omega`、`Clos`、`CSet`、`psi`、濃度評価、`psi_lt_Omega_succ`、`psi_notMem`、`Omega_le_psi`、`psi_mono`（mathlib が要る） |
 | `Eval.lean` | `Term.val`。順序数への評価。`Lam` と `val_lt_Lam`（mathlib が要る） |
+| `Mono.lean` | `val_lt_val`、`val_mem_CSet_arg`、`valHom`、`OTLt_wf`（mathlib が要る） |
 
 ## 順序
 
@@ -81,7 +82,8 @@ inductive Term where
 | 閉包が下に閉じていること、`ψ_v(a)` が加法的主要であること | 済 |
 | 評価写像 `Term → Ordinal` | 定義済 |
 | 項の値が `v ↦ ω_v` の不動点にならないこと | 済 |
-| その `OT` 上での単調性 | **未**。下を見よ |
+| その `OT` 上での単調性 | 済 |
+| **`OTLt` の整礎性。仮定なし** | **済**（`OTLt_wf`） |
 
 例外的に `sorry` を許しているわけではない。ファイルに `sorry` も `axiom` も無い。
 

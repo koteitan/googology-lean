@@ -61,21 +61,24 @@ BMS は停止する
 | `WF.lean` | 済。`not_wellFounded_lt`、`cmp_cons_cons'`、`OT` の構造補題、`OTLt` |
 | `Sum.lean` | 済。主項の可到達性を仮定した `wellFounded_OTLt` |
 | `Ord.lean` | 済。順序数の上の `ψ`、濃度評価、下方閉包性、加法的主要性 |
-| `Eval.lean` | **作業中**。`val`、`Lam`、`val_mem_CSet`、`ψ` の比較補題 2 本 |
+| `Eval.lean` | 済。`val`、`Lam`、`val_mem_CSet`、`ψ` の比較補題 2 本 |
+| `Mono.lean` | 済。同時帰納、`val_lt_val`、`OTLt_wf` |
+
+**表記系としての `ExBuchholz` は完成した。**`OTLt_wf` が、標準形の上の順序が
+仮定なしで整礎であることを言う。
 
 ### `Trans/` — 空
 
 ### 他の系 — 未着手
 
-## 残り 1 つ、詳しく
-
-今は全部が次の 1 本に乗っている。
+## ExBuchholz の整礎性 — 済
 
 ```
 val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
 ```
 
-これが `OrdHom.wf` を通して `wellFounded_OTLt` の仮定を外す。
+が `OrdHom.wf` を通して `wellFounded_OTLt` の仮定を外した。無条件の形が
+`OTLt_wf` である。
 
 `ψ_v` の弱い単調性では足りない。`ψ_v(a) = ψ_v(a+1)` は実際に起きる。`a` が
 `C_v(a)` の中に届かないときである。狭義にするのが標準形の条件の役目である。
@@ -86,10 +89,10 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
 | 1 | 閉包の元で十分小さいものは `ψ_v(a)` より下 | 済（`mem_CSet_of_le`、`lt_psi_of_mem`） |
 | 2 | したがって `ψ_v(a)` は加法的主要 | 済（`isPrincipal_add_psi`） |
 | 3a | **添字**は必ず自分の閉包の中にある | 済（`val_mem_CSet`、`val_lt_Lam` 経由） |
-| 3b | **引数**も同様。ここで `G` を読む | **次** |
-| 4 | 項の比較を値の比較に組み立てる | **次** |
+| 3b | **引数**も同様。ここで `G` を読む | 済（`val_mem_CSet_arg`） |
+| 4 | 項の比較を値の比較に組み立てる | 済（`val_lt_val`） |
 
-### 3b と 4 が一緒になる理由
+### 3b と 4 が一緒になった理由
 
 3b は 4 を要る。`G a (cons c d r)` は `a ≤ c` で場合分けし、もう一方の枝では
 構文的に `c < a` が成り立っていて、証明には `val c < val a` が要る。それが 4 で
@@ -103,10 +106,9 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
 * 3b（`(a, cons c d r)`）は 3b を `(a,c)`、`(a,d)`、`(a,r)` で呼び、4 を `(c,a)`
   で呼ぶ
 
-`Term.size` と比較補題 2 本（`psi_lt_of_sub_lt`、`psi_lt_of_arg_lt`）は入って
-いる。残っているのは帰納そのものである。
+それが `Mono.lean` である。
 
-## そのあと
+## 次
 
 1. `ExBuchholz` に基本列と `Rewrite` の値を与える
 2. `G` と `isOT` を参照実装と較正する。今は Buchholz (1986) §2 の自然な拡張として

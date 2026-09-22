@@ -197,4 +197,112 @@ theorem wellFounded_OTLt (HP : ∀ a b, OT (psi a b) → Acc OTLt (psi a b)) :
   · exact acc_of_OT HP t h
   · exact ⟨t, fun _ hy => absurd hy.2.1 h⟩
 
+/-! ## Structural size, and reading the standard-form condition -/
+
+/-- The structural size of a term, the measure of the induction below. -/
+def size : Term → Nat
+  | nil => 0
+  | cons a b t => size a + size b + size t + 1
+
+@[simp] theorem size_nil : size nil = 0 := rfl
+@[simp] theorem size_cons (a b t : Term) :
+    size (cons a b t) = size a + size b + size t + 1 := rfl
+
+@[simp] theorem G_nil (a : Term) : G a nil = [] := rfl
+theorem G_cons (a c d t : Term) :
+    G a (cons c d t) =
+      (if a ≤ c then c :: d :: (G a c ++ G a d) else []) ++ G a t := rfl
+
+theorem lt_of_le_of_lt' {x y z : Term} (h₁ : x ≤ y) (h₂ : y < z) : x < z := by
+  rcases le_iff_lt_or_eq.mp h₁ with h | rfl
+  · exact lt_trans h h₂
+  · exact h₂
+
+theorem lt_of_not_le {x y : Term} (h : ¬ x ≤ y) : y < x := by
+  rcases lt_trichotomy x y with h' | rfl | h'
+  · exact absurd (le_of_lt h') h
+  · exact absurd (le_refl x) h
+  · exact h'
+
+/-- Two principal terms compare lexicographically on subscript and argument. -/
+theorem psi_lt_psi_iff {a b c d : Term} :
+    psi a b < psi c d ↔ a < c ∨ (a = c ∧ b < d) := by
+  show (cmp (cons a b nil) (cons c d nil) = .lt) ↔ _
+  simp only [cmp]
+  constructor
+  · intro h
+    cases hac : cmp a c with
+    | lt => exact Or.inl hac
+    | eq =>
+      rw [hac] at h
+      cases hbd : cmp b d with
+      | lt => exact Or.inr ⟨cmp_eq_iff.mp hac, hbd⟩
+      | eq => rw [hbd] at h; exact Ordering.noConfusion h
+      | gt => rw [hbd] at h; exact Ordering.noConfusion h
+    | gt => rw [hac] at h; exact Ordering.noConfusion h
+  · rintro (h | ⟨h, h'⟩)
+    · rw [show cmp a c = .lt from h]; rfl
+    · rw [cmp_eq_iff.mpr h, show cmp b d = .lt from h']; rfl
+
+theorem OT_fst {c d r : Term} (h : OT (cons c d r)) : OT c := by
+  simp only [OT, isOT, Bool.and_eq_true] at h
+  exact h.1.1.1.1
+
+theorem OT_snd {c d r : Term} (h : OT (cons c d r)) : OT d := by
+  simp only [OT, isOT, Bool.and_eq_true] at h
+  exact h.1.1.1.2
+
+/-- The terms `G` collects are standard forms. -/
+theorem OT_of_mem_G (a : Term) : ∀ t : Term, OT t → ∀ z ∈ G a t, OT z := by
+  intro t
+  induction t with
+  | nil => intro _ z hz; cases hz
+  | cons c d r ihc ihd ihr =>
+    intro h z hz
+    rw [G_cons] at hz
+    rcases List.mem_append.mp hz with hz | hz
+    · split at hz
+      · rcases List.mem_cons.mp hz with rfl | hz
+        · exact OT_fst h
+        rcases List.mem_cons.mp hz with rfl | hz
+        · exact OT_snd h
+        rcases List.mem_append.mp hz with hz | hz
+        · exact ihc (OT_fst h) z hz
+        · exact ihd (OT_snd h) z hz
+      · cases hz
+    · exact ihr (OT_tail h) z hz
+
+/-- The terms `G` collects are structurally smaller. -/
+theorem size_lt_of_mem_G (a : Term) : ∀ t : Term, ∀ z ∈ G a t, size z < size t := by
+  intro t
+  induction t with
+  | nil => intro z hz; cases hz
+  | cons c d r ihc ihd ihr =>
+    intro z hz
+    rw [G_cons] at hz
+    rcases List.mem_append.mp hz with hz | hz
+    · split at hz
+      · rcases List.mem_cons.mp hz with rfl | hz
+        · simp; omega
+        rcases List.mem_cons.mp hz with rfl | hz
+        · simp; omega
+        rcases List.mem_append.mp hz with hz | hz
+        · have := ihc z hz; simp; omega
+        · have := ihd z hz; simp; omega
+      · cases hz
+    · have := ihr z hz; simp; omega
+
+/-- The standard-form condition, read off. -/
+theorem OT_G_lt {a b : Term} (h : OT (psi a b)) : ∀ z ∈ G a b, z < b := by
+  simp only [OT, isOT, descHead, head?, Bool.and_eq_true, List.all_eq_true,
+    decide_eq_true_eq] at h
+  exact fun z hz => h.1.1.2 z hz
+
+/-- A tail whose head is below a principal term is itself below it. -/
+theorem lt_psi_of_headLe {t a b c d : Term} (h : HeadLe (psi a b) t)
+    (hlt : psi a b < psi c d) : t < psi c d := by
+  cases t with
+  | nil => exact nil_lt_cons c d nil
+  | cons a' b' r' => exact cons_lt_cons_iff.mpr (Or.inl (lt_of_le_of_lt' h hlt))
+
 end Googology.Notation.ExBuchholz.Term

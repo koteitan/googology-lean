@@ -71,20 +71,6 @@ theorem val_eq_zero_iff {x : Term} : val x = 0 ↔ x = nil := by
     exact absurd h (val_pos hx).ne'
   · rintro rfl; rfl
 
-/-- The structural size of a term, the measure of the induction below. -/
-def size : Term → Nat
-  | nil => 0
-  | cons a b t => size a + size b + size t + 1
-
-@[simp] theorem size_nil : size nil = 0 := rfl
-@[simp] theorem size_cons (a b t : Term) :
-    size (cons a b t) = size a + size b + size t + 1 := rfl
-
-@[simp] theorem G_nil (a : Term) : G a nil = [] := rfl
-theorem G_cons (a c d t : Term) :
-    G a (cons c d t) =
-      (if a ≤ c then c :: d :: (G a c ++ G a d) else []) ++ G a t := rfl
-
 /-- A smaller subscript gives a smaller collapse, whatever the arguments. -/
 theorem psi_lt_of_sub_lt {a b c d : Ordinal} (h : a < c) :
     Ord.psi b a < Ord.psi d c := by

@@ -65,21 +65,24 @@ import this and nothing else.
 | `WF.lean` | done — `not_wellFounded_lt`, `cmp_cons_cons'`, the `OT` structure lemmas, `OTLt` |
 | `Sum.lean` | done — `wellFounded_OTLt` given accessibility of the principal terms |
 | `Ord.lean` | done — `ψ` on the ordinals, the cardinality bound, downward closure, additive principality |
-| `Eval.lean` | **in progress** — `val`, `Lam`, `val_mem_CSet`, the two `ψ` comparison helpers |
+| `Eval.lean` | done — `val`, `Lam`, `val_mem_CSet`, the two `ψ` comparison helpers |
+| `Mono.lean` | done — the simultaneous induction, `val_lt_val`, `OTLt_wf` |
+
+**`ExBuchholz` is finished as a notation system**: `OTLt_wf` says the order on
+its standard forms is well founded, with no hypothesis.
 
 ### `Trans/` — empty
 
 ### Other systems — not started
 
-## The one thing left, in detail
-
-Everything now rests on
+## Well-foundedness of ExBuchholz — done
 
 ```
 val is strictly monotone on OT:  x < y → OT x → OT y → val x < val y
 ```
 
-which discharges the hypothesis of `wellFounded_OTLt` through `OrdHom.wf`.
+discharges the hypothesis of `wellFounded_OTLt` through `OrdHom.wf`, and
+`OTLt_wf` is the unconditional statement.
 
 Weak monotonicity of `ψ_v` is not enough: `ψ_v(a) = ψ_v(a+1)` does happen,
 whenever `a` is not reachable inside `C_v(a)`. Strictness is what the
@@ -90,10 +93,10 @@ standard-form condition buys. Four steps:
 | 1 | a small member of the closure lies below `ψ_v(a)` | done (`mem_CSet_of_le`, `lt_psi_of_mem`) |
 | 2 | hence `ψ_v(a)` is additively principal | done (`isPrincipal_add_psi`) |
 | 3a | the **subscript** is always in its own closure | done (`val_mem_CSet`, via `val_lt_Lam`) |
-| 3b | the **argument** is too, which is where `G` is read | **next** |
-| 4 | assemble the comparison of terms into the comparison of values | **next** |
+| 3b | the **argument** is too, which is where `G` is read | done (`val_mem_CSet_arg`) |
+| 4 | assemble the comparison of terms into the comparison of values | done (`val_lt_val`) |
 
-### Why 3b and 4 go together
+### Why 3b and 4 went together
 
 3b needs 4. Reading `G a (cons c d r)` splits on `a ≤ c`; in the other branch
 `c < a` holds syntactically and the proof needs `val c < val a`, which is 4.
@@ -107,10 +110,9 @@ strictly decreases:
 * 3b at `(a, cons c d r)` calls 3b at `(a,c)`, `(a,d)`, `(a,r)` and 4 at
   `(c,a)`.
 
-`Term.size` and the two comparison helpers `psi_lt_of_sub_lt` and
-`psi_lt_of_arg_lt` are in place; the induction itself is what remains.
+That is `Mono.lean`.
 
-## After that
+## Next
 
 1. give `ExBuchholz` fundamental sequences and a `Rewrite` value;
 2. calibrate `G` and `isOT` against a reference implementation — they are
