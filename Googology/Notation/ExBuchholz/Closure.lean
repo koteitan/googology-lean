@@ -1114,6 +1114,57 @@ def Bachmann : Prop :=
     dom B ≠ nil → dom B ≠ t1 → dom B ≠ tw → ¬ (dom B < cons A B nil) →
     ∀ x ∈ G A B, x < fs B (psi (fs (subOf (dom B)) nil) nil)
 
+@[simp] theorem size_addT : ∀ X Y : Term, size (addT X Y) = size X + size Y := by
+  intro X
+  induction X with
+  | nil => intro Y; show size Y = 0 + size Y; omega
+  | cons a b t _ _ iht =>
+    intro Y
+    rw [addT_cons]
+    simp only [size_cons, iht]
+    omega
+
+/-- A term below a sum, but too small to reach its prefix, is below that
+prefix. -/
+theorem lt_of_size_lt_addT {x q t : Term} (h : x < addT q t) (hs : size x < size q) :
+    x < q := by
+  rcases lt_trichotomy x q with h' | h' | h'
+  · exact h'
+  · exfalso; rw [h'] at hs; omega
+  · exfalso
+    obtain ⟨x', hx, _, _⟩ := addT_between q
+      (show addT q nil < x by rw [addT_nil_right]; exact h') (le_of_lt h)
+    rw [hx, size_addT] at hs
+    omega
+
+/-- Appending on the right is strictly monotone, and reflects the order. -/
+theorem addT_lt_iff {q x y : Term} : addT q x < addT q y ↔ x < y := by
+  constructor
+  · intro h
+    rcases lt_trichotomy x y with h' | h' | h'
+    · exact h'
+    · exact absurd (h' ▸ h) (lt_irrefl _)
+    · exact absurd (addT_lt q h') (lt_asymm h)
+  · exact addT_lt q
+
+/-- A term is at most anything appended to it. -/
+theorem le_addT_right (q y : Term) : q ≤ addT q y := by
+  cases y with
+  | nil => rw [addT_nil_right]; exact le_refl _
+  | cons c d r =>
+    refine le_of_lt ?_
+    have h := addT_lt q (show (nil : Term) < cons c d r from nil_lt_cons _ _ _)
+    rwa [addT_nil_right] at h
+
+theorem addT_assoc : ∀ X Y Z : Term, addT (addT X Y) Z = addT X (addT Y Z) := by
+  intro X
+  induction X with
+  | nil => intro Y Z; rfl
+  | cons a b t _ _ iht => intro Y Z; rw [addT_cons, addT_cons, addT_cons, iht]
+
+theorem G_cons_eq (u a b t : Term) : G u (cons a b t) = G u (psi a b) ++ G u t := by
+  rw [cons_eq_addT, G_addT]
+
 /-- Buchholz's second tower invariant, from the Bachmann property. -/
 theorem towerOT_of_Bachmann {A B : Term} (hOT : OT (cons A B nil))
     (e1 : dom B ≠ nil) (e2 : dom B ≠ t1) (e3 : dom B ≠ tw)
