@@ -18,9 +18,13 @@ reading is countable, that its subscripts are all `0`, and that a term of that
 shape is below `ψ_0` of itself — which is what the standard-form condition
 needs once the descending condition is in hand.
 
-`unread` writes a term back as a list, and `read_unread` says the reading is
-onto the terms whose subscripts are all `0`: every such term is the reading of
-some one-row matrix.
+`unread` writes a term back as a list, and the two directions together make
+`read` a bijection.  `read_unread` says it is onto the terms whose subscripts
+are all `0`: every such term is the reading of some one-row matrix.
+`unread_read` says it is one to one on the lists that are matrices at all —
+`Col b`, which asks that the list start at `b`, never go below it, and never
+rise by more than one.  Two different matrices therefore never name the same
+ordinal, and every all-zero-subscript term is named by one.
 
 `OT_of_desc` settles the standard-form side as far as the term goes: with the
 subscripts all `0`, being a standard form is exactly the descending
@@ -255,5 +259,90 @@ theorem read_unread : ∀ (X : Term), AllNil X → ∀ b : Nat, read b (unread b
           simp only [List.head?_cons, Option.some.injEq] at hx
           subst hx; simp
     rw [unread_cons, read_cons, hhi, hlo, ihP hP (b + 1), ihQ hQ b]
+
+
+/-- The entries after `prev`, in a one-row matrix whose level is `b`: none goes
+below `b`, and none rises by more than one above the entry before it. -/
+def Chain (b : Nat) : Nat → List Nat → Prop
+  | _, [] => True
+  | prev, c :: r => b ≤ c ∧ c ≤ prev + 1 ∧ Chain b c r
+
+/-- A list is a one-row matrix at level `b`: it starts at `b`, and its entries
+form a chain. -/
+def Col (b : Nat) : List Nat → Prop
+  | [] => True
+  | a :: rest => a = b ∧ Chain b a rest
+
+theorem chain_cons {b prev c : Nat} {r : List Nat} (h : Chain b prev (c :: r)) :
+    b ≤ c ∧ c ≤ prev + 1 ∧ Chain b c r := h
+
+/-- Keeping only the entries above the level, from the front, leaves a chain one
+level up. -/
+theorem chain_takeWhile : ∀ (s : List Nat) (b prev : Nat), Chain b prev s →
+    Chain (b + 1) prev (s.takeWhile (fun x => decide (b < x))) := by
+  intro s
+  induction s with
+  | nil => intro _ _ _; exact trivial
+  | cons c r ih =>
+    intro b prev h
+    obtain ⟨h1, h2, h3⟩ := chain_cons h
+    by_cases hc : b < c
+    · rw [List.takeWhile_cons, if_pos (by simpa using hc)]
+      exact ⟨hc, h2, ih b c h3⟩
+    · rw [List.takeWhile_cons, if_neg (by simpa using hc)]
+      exact trivial
+
+/-- The entries above the level, taken from the front, form a matrix one level
+up. -/
+theorem col_takeWhile : ∀ (s : List Nat) (b prev : Nat), prev ≤ b → Chain b prev s →
+    Col (b + 1) (s.takeWhile (fun x => decide (b < x))) := by
+  intro s b prev hp h
+  cases s with
+  | nil => exact trivial
+  | cons c r =>
+    obtain ⟨h1, h2, h3⟩ := chain_cons h
+    by_cases hc : b < c
+    · rw [List.takeWhile_cons, if_pos (by simpa using hc)]
+      exact ⟨by omega, chain_takeWhile r b c h3⟩
+    · rw [List.takeWhile_cons, if_neg (by simpa using hc)]
+      exact trivial
+
+/-- What is left after them is a matrix at the same level. -/
+theorem col_dropWhile : ∀ (s : List Nat) (b prev : Nat), Chain b prev s →
+    Col b (s.dropWhile (fun x => decide (b < x))) := by
+  intro s
+  induction s with
+  | nil => intro _ _ _; exact trivial
+  | cons c r ih =>
+    intro b prev h
+    obtain ⟨h1, h2, h3⟩ := chain_cons h
+    by_cases hc : b < c
+    · rw [List.dropWhile_cons, if_pos (by simpa using hc)]
+      exact ih b c h3
+    · rw [List.dropWhile_cons, if_neg (by simpa using hc)]
+      exact ⟨by omega, h3⟩
+
+/-- **The reading is one to one on one-row matrices**: reading a matrix and
+writing it back gives the matrix. -/
+theorem unread_read : ∀ (s : List Nat) (b : Nat), Col b s → unread b (read b s) = s := by
+  intro s
+  induction hn : s.length using Nat.strong_induction_on generalizing s with
+  | _ n ih =>
+    cases s with
+    | nil => intro b _; rw [read_nil, unread_nil]
+    | cons a rest =>
+      intro b hc
+      obtain ⟨ha, hch⟩ := hc
+      subst ha
+      rw [read_cons, unread_cons,
+        ih (rest.takeWhile (fun x => decide (a < x))).length
+          (by subst hn; simp only [List.length_cons]
+              exact Nat.lt_succ_of_le (List.takeWhile_sublist _).length_le) _ rfl _
+          (col_takeWhile rest a a (Nat.le_refl _) hch),
+        ih (rest.dropWhile (fun x => decide (a < x))).length
+          (by subst hn; simp only [List.length_cons]
+              exact Nat.lt_succ_of_le (List.dropWhile_sublist _).length_le) _ rfl _
+          (col_dropWhile rest a a hch),
+        List.takeWhile_append_dropWhile]
 
 end Googology.Trans.BMS

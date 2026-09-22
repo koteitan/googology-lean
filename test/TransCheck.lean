@@ -40,4 +40,16 @@ principal terms increase. -/
 #guard ([t1, tw, psi nil tw, cons nil nil t1, cons nil t1 tw] : List Term).all
   fun X => read 0 (unread 0 X) == X
 
+/-! And reading a matrix and writing it back gives the matrix, which is
+`unread_read`.  Each list below is a `Col 0`: it starts at `0`, stays at or
+above it, and never rises by more than one. -/
+
+#guard ([[], [0], [0, 1], [0, 1, 2], [0, 0], [0, 1, 1], [0, 1, 2, 1],
+  [0, 1, 0, 1]] : List (List Nat)).all fun s => unread 0 (read 0 s) == s
+
+/-! A list that rises by two is not a matrix, and is not written back as
+itself. -/
+
+#guard !(unread 0 (read 0 [0, 2]) == [0, 2])
+
 end Googology.Trans.BMS
