@@ -43,7 +43,8 @@ which is the whole content of the extension.
 | `Eval.lean` | `Term.val`, the evaluation into `Ordinal`; `Lam` and `val_lt_Lam` (needs mathlib) |
 | `Mono.lean` | `val_lt_val`, `val_mem_CSet_arg`, `valHom`, `OTLt_wf` (needs mathlib) |
 | `FS.lean` | `dom`, `fs` (the fundamental sequence `X[Y]`), `fs_lt` (it descends), Buchholz 3.2(b), `sub_lt_psi`, `tail_lt`, `G_eq_nil_of_le`, the tower of case 4, and `exb`, the expansion system |
-| `Closure.lean` | concatenation, `G°`, `⊲`, Buchholz 3.4, 3.5 and 3.6 |
+| `Closure.lean` | concatenation, `G°`, `⊲`, Buchholz 3.4, 3.5, 3.6 and 3.3 |
+| `System.lean` | `exbOT`, the expansion system on the countable standard forms, and its well-foundedness |
 
 ## The order
 
@@ -287,6 +288,7 @@ The Bachmann property is what is left.
 | Buchholz 3.3: `z ∈ dom a → a[z] ∈ OT` | done from `Bachmann` (`OTFS_of_Bachmann`) |
 | the tower invariant of case 4 | done from `Bachmann` (`towerOT_of_Bachmann`) |
 | the Bachmann property itself | **not proved** — the last gap; checked by computation on 651 case-4 forms |
+| `exbOT.WF` and `exbOT.Terminates` | done from `Bachmann` (`System.lean`) |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 `axiom`.

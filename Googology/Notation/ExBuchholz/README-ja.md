@@ -41,7 +41,8 @@ inductive Term where
 | `Eval.lean` | `Term.val`。順序数への評価。`Lam` と `val_lt_Lam`（mathlib が要る） |
 | `Mono.lean` | `val_lt_val`、`val_mem_CSet_arg`、`valHom`、`OTLt_wf`（mathlib が要る） |
 | `FS.lean` | `dom`、`fs`（基本列 `X[Y]`）、`fs_lt`（降下）、Buchholz 3.2(b)、`sub_lt_psi`、`tail_lt`、`G_eq_nil_of_le`、場合 4 の塔、展開系 `exb` |
-| `Closure.lean` | 連結、`G°`、`⊲`、Buchholz 3.4、3.5、3.6 |
+| `Closure.lean` | 連結、`G°`、`⊲`、Buchholz 3.4、3.5、3.6、3.3 |
+| `System.lean` | 可算標準形の上の展開系 `exbOT` とその整礎性 |
 
 ## 順序
 
@@ -270,6 +271,7 @@ OT W_i   かつ   ∀ x ∈ G_A(W_i), x < B[W_i]
 | Buchholz 3.3：`z ∈ dom a → a[z] ∈ OT` | 済。`Bachmann` から（`OTFS_of_Bachmann`） |
 | 場合 4 の塔不変量 | 済。`Bachmann` から（`towerOT_of_Bachmann`） |
 | Bachmann 性そのもの | **未証明**。最後の穴。場合 4 の形 651 個について計算で確認 |
+| `exbOT.WF` と `exbOT.Terminates` | 済。`Bachmann` から（`System.lean`） |
 
 例外的に `sorry` を許しているわけではない。ファイルに `sorry` も `axiom` も無い。
 
