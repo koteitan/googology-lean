@@ -217,8 +217,10 @@ That is `Mono.lean`.
    values come out: `(0,0)(1,0)` is `ω`, as the zero row demands,
    `(0,0)(1,1)(1,0)` is `ε₀·ω`, and `(0,0)(1,1)(0,0)(1,0)` is `ε₀ + ω`. `rank_split_mul_omega0`
    packages the two so that a matrix of that shape costs three lines, both
-   hypotheses being `rfl`. What these reach is the ordinals built from `1`
-   and `ε₀` by `+` and `·ω`; what they do not is the rank of the later
+   hypotheses being `rfl`. Every rank they produce lies in the closure of
+   `{1, ε₀}` under `+` and `·ω` — that is what the three rules add up to, and
+   the matrices above are the instances proved, not a claim that the whole
+   closure is realised. What they do not reach is the rank of the later
    generators `(0,0)(1,1)(2,2)` and beyond, whose expansions are neither
    zero-row matrices nor block repetitions.
 
@@ -357,6 +359,10 @@ The other two are not Lean problems.
   that `BMS/Append.lean` reaches. `(0,0)(1,1)(2,1)` is none of those — `m₀`
   is `1` there, so the copies are incremented — and `(0,0)(1,1)(2,0)` repeats
   `(1,1)`, which does not start a block and so carries no rank of its own.
+  Where the rank does reach, the ordinal has a name as well: each of those
+  values is the value of an extended Buchholz term (`rank_genAll_val` and the
+  five beside it), so for those matrices the question is answered in the
+  notation system too.
 * **The Y sequence.** Its official definition is a program and its
   termination is open; see item 4.
 
