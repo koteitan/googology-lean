@@ -80,4 +80,8 @@ noncomputable def dbmsEval (r : ℕ) :
     Eval (dbms r) (· < · : Ordinal.{0} → Ordinal.{0} → Prop) :=
   Rewrite.rankEval (dbms_wf r)
 
+/-- **From a DBMS generator, any expansion sequence ends.** -/
+theorem dbmsStd_terminates (r : ℕ) : (dbmsStd r).Terminates :=
+  (dbmsStd r).of_terminates (dbms_terminates r)
+
 end Googology.Notation.DBMS

@@ -63,6 +63,10 @@ theorem pair_terminates : (bms 2).Terminates := bms_terminates 2
 /-- Trio sequences. -/
 theorem trio_terminates : (bms 3).Terminates := bms_terminates 3
 
+/-- **From a generator, any expansion sequence ends.** -/
+theorem bmsStd_terminates (r : ℕ) : (bmsStd r).Terminates :=
+  (bmsStd r).of_terminates (bms_terminates r)
+
 /-- Bashicu matrices carry an ordinal measure: the rank of one-step expansion.
 It decreases strictly at every step, for every number of rows. -/
 noncomputable def bmsEval (r : ℕ) :
