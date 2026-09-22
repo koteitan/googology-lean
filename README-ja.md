@@ -55,7 +55,12 @@
 | 1 行 DBMS についての同じこと。こちらは他に停止性の証明がない | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
 
 `sorry` は無く、公理も `propext`・`Classical.choice`・`Quot.sound` の 3 つだけ。
-`Googology.Core` はそのどれも使わない。
+`Googology.Core` で公理を使うのは、`Terminates` を結論する六つだけである。
+`Rewrite.terminates_of_wf`、`Rewrite.terminates_of_measure`、`Eval.terminates`、
+`Sim.terminates`、`Sim.terminates_transfer`、`Equiv.terminates_iff`。これらは
+「無限に降下する列が無い」だけを仮定して「止まる状態がある」を要求する。そこが
+古典的になる。`Core` の他のもの — 関係、整礎性、測度、四つの射 — はどれも公理を
+一切使わない。
 
 ## 使い方
 

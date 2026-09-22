@@ -56,7 +56,13 @@ Names are written relative to `Googology`.
 | the same for one-row DBMS, whose termination is not otherwise proved here | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
 
 No `sorry`, and no axiom beyond `propext`, `Classical.choice` and `Quot.sound`.
-`Googology.Core` uses none of the three.
+In `Googology.Core` the only declarations that use any axiom are the six that
+conclude `Terminates`: `Rewrite.terminates_of_wf`,
+`Rewrite.terminates_of_measure`, `Eval.terminates`, `Sim.terminates`,
+`Sim.terminates_transfer` and `Equiv.terminates_iff`. They ask for a state
+that halts, given only that no chain descends forever, and that step is
+classical. Everything else in `Core` — the relation, well-foundedness, the
+measures, and all four morphisms — depends on no axiom at all.
 
 ## Using it
 
