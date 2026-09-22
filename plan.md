@@ -355,8 +355,13 @@ What is left of that is the Lean problem still open.
   closure. The second step is in too:
   `Ord.exists_principal_split` peels a leading principal off any member, with
   a smaller member behind it. What is left is the recursion that turns each
-  `ψ_u(e)` into a term, which is the hard part: `e` may be larger than the
-  ordinal being named, so the recursion cannot be on the ordinal alone. Higher up the normal form is not
+  `ψ_u(e)` into a term, which is the hard part. `e` may be larger than the
+  ordinal being named, so the recursion cannot be on the ordinal alone; and
+  the argument is not determined by the value either. `Ord.psi_eps0` and
+  `Ord.psi_Omega_one` say `ψ_0` takes `ε₀` at `ε₀` and at `Ω` alike, and it
+  is `Ω` that the standard form uses, because `Ω` lies in its own closure and
+  `ε₀` does not. So the recursion has to choose the argument by that
+  condition, not by taking the least one. Higher up the normal form is not
   Cantor's: it needs `ψ` at every subscript, so the induction that builds a
   term has to know which arguments each `ψ_v` reaches, which is `C_v` again.
 

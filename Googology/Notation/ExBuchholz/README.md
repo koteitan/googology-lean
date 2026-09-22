@@ -112,6 +112,7 @@ beyond the one stated.
 | `ψ_0(Ω + a)`, any `a` | `≤ ε₀·ω^a` | `psi_Omega_add_le` |
 | `ψ_0(Ω + a)`, `a < ε₁` | `ε₀·ω^a` — so `ψ_0(Ω + 1) = ε₀·ω` | `psi_Omega_add_eq` |
 | `ψ_0(Ω·2)` | `ε₁` | `psi_Omega_two` |
+| `ψ_0(ε₀)` | `ε₀` again — the argument is not determined by the value | `psi_eps0` |
 
 `ε₀` is `nfp (ω ^ ·) 0` and `ε₁` is `nfp (ε₀ * ω ^ ·) 0`, the least fixed
 points of those two functions. The terms that name the last two are

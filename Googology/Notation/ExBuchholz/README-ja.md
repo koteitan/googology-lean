@@ -106,6 +106,7 @@ inductive Term where
 | `p0(W + a)`、任意の `a` | `<= e0·w^a` | `psi_Omega_add_le` |
 | `p0(W + a)`、`a < e1` | `e0·w^a`。よって `p0(W + 1) = e0·w` | `psi_Omega_add_eq` |
 | `p0(W·2)` | `e1` | `psi_Omega_two` |
+| `p0(e0)` | また `e0`。引数は値から決まらない | `psi_eps0` |
 
 `e0` は `nfp (w ^ ·) 0`、`e1` は `nfp (e0 * w ^ ·) 0` で、それぞれその関数の最小
 不動点である。最後の二つを名指す項が `Trans.BMS.te1` と `Trans.BMS.tew` で、

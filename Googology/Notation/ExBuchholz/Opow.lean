@@ -761,4 +761,32 @@ theorem exists_principal_split {v a x : Ordinal.{u}} (hx : x ∈ CSet v a)
       omega]
   exact hdm
 
+theorem iterate_lt_eps0 : ∀ n : ℕ,
+    (fun x : Ordinal.{u} => (ω : Ordinal.{u}) ^ x)^[n] 0 < eps0 := by
+  intro n
+  induction n with
+  | zero => rw [Function.iterate_zero_apply]; exact eps0_pos
+  | succ m ih =>
+    rw [Function.iterate_succ_apply']
+    exact opow_lt_eps0 ih
+
+/-- **`ψ_0(ε₀) = ε₀`, and `ψ_0(Ω) = ε₀` as well.**  So the argument that names
+a value is not determined by the value: `ψ_0` takes `ε₀` at `ε₀` and at `Ω`
+alike, and it is `Ω` that the standard form uses, because `Ω` lies in its own
+closure and `ε₀` does not.  A recursion that builds terms has to choose the
+argument for that reason, not by taking the least one. -/
+theorem psi_eps0 : psi eps0.{u} 0 = eps0.{u} := by
+  refine le_antisymm ?_ ?_
+  · refine le_trans (psi_zero_le_opow eps0.{u}) ?_
+    exact le_of_eq opow_eps0
+  · refine le_of_forall_lt (fun x hx => ?_)
+    obtain ⟨n, hn⟩ := Ordinal.lt_nfp_iff.mp hx
+    cases n with
+    | zero => exact absurd hn (by simp)
+    | succ m =>
+      rw [Function.iterate_succ_apply'] at hn
+      have hb := iterate_lt_eps0.{u} m
+      rw [← psi_zero_eq_opow _ hb] at hn
+      exact lt_of_lt_of_le hn (psi_mono 0 hb.le)
+
 end Googology.Notation.ExBuchholz.Ord
