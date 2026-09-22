@@ -81,6 +81,7 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | `ψ` on the ordinals: definition and first facts | done |
 | the cardinality bound on `C_v(a)`, hence `ψ_v(a) < Ω_{v+1}` | done |
 | `ψ ∉ C_v(a)`, `Ω_v ≤ ψ_v(a)`, monotonicity in the argument | done |
+| the closure is downward closed; `ψ_v(a)` is additively principal | done |
 | the evaluation `Term → Ordinal` | defined |
 | its monotonicity on `OT` | **not done** — see below |
 

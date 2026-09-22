@@ -264,4 +264,80 @@ theorem psi_mono (v : Ordinal) {a b : Ordinal} (h : a ≤ b) : psi a v ≤ psi b
   exact csInf_le_csInf' (compl_CSet_nonempty v b)
     (compl_subset_compl.2 (CSet_mono v h))
 
+/-! ## The closure is downward closed -/
+
+theorem Omega_mono {u v : Ordinal} (h : u ≤ v) : Ω_ u ≤ Ω_ v := by
+  by_cases hu : u = 0
+  · subst hu
+    rw [Omega_zero]
+    exact Order.one_le_iff_ne_zero.2 (Omega_pos v).ne'
+  · have hv : v ≠ 0 := fun hv => hu (nonpos_iff_eq_zero.mp (hv ▸ h))
+    rw [Omega_of_ne_zero hu, Omega_of_ne_zero hv]
+    exact omega_le_omega.2 h
+
+theorem le_of_card_Omega_le {u v : Ordinal} (h : (Ω_ u).card ≤ ℵ_ v) : u ≤ v := by
+  by_cases hu : u = 0
+  · subst hu; exact bot_le
+  · rw [Omega_of_ne_zero hu, Ordinal.card_omega] at h
+    exact Cardinal.aleph_le_aleph.1 h
+
+/-- A closure at a lower subscript and a smaller argument sits inside. -/
+theorem CSet_subset_CSet {u v e a : Ordinal} (huv : u ≤ v) (hea : e < a) :
+    CSet u e ⊆ CSet v a := by
+  intro x hx
+  induction hx with
+  | small h => exact Clos.small (lt_of_lt_of_le h (Omega_mono huv))
+  | add _ _ ihx ihy => exact Clos.add ihx ihy
+  | @coll w f _ _ ihw ihf =>
+    exact Clos.coll (e := ⟨f.1, lt_trans f.2 hea⟩) ihw ihf
+
+theorem card_psi_le (a v : Ordinal) : (psi a v).card ≤ ℵ_ v := by
+  have h := psi_lt_Omega_succ a v
+  rw [Omega_of_ne_zero (add_one_ne_zero_ord v)] at h
+  have h2 : (psi a v).card < (ω_ (v + 1)).card :=
+    (isInitial_omega (v + 1)).card_lt_card.2 h
+  rw [Ordinal.card_omega, ← Cardinal.succ_aleph] at h2
+  exact Order.lt_succ_iff.mp h2
+
+/-- **The closure is downward closed** below the next uncountable. -/
+theorem mem_CSet_of_le {v a : Ordinal} {x : Ordinal} (hx : x ∈ CSet v a) :
+    ∀ y : Ordinal, y ≤ x → x.card ≤ ℵ_ v → y ∈ CSet v a := by
+  induction hx with
+  | @small x h => exact fun y hy _ => Clos.small (lt_of_le_of_lt hy h)
+  | @add p q hp hq ihp ihq =>
+    intro y hy hcard
+    rw [Ordinal.card_add] at hcard
+    have hcp : p.card ≤ ℵ_ v := le_trans (self_le_add_right _ _) hcard
+    have hcq : q.card ≤ ℵ_ v := le_trans (self_le_add_left _ _) hcard
+    rcases le_or_gt y p with h | h
+    · exact ihp y h hcp
+    · have hsub : y - p ≤ q := Ordinal.sub_le.2 hy
+      have hmem := ihq (y - p) hsub hcq
+      have heq : p + (y - p) = y := Ordinal.add_sub_cancel_of_le h.le
+      exact heq ▸ Clos.add hp hmem
+  | @coll u e hu he _ _ =>
+    intro y hy hcard
+    have hOu : (Ω_ u).card ≤ ℵ_ v :=
+      le_trans (Ordinal.card_le_card (Omega_le_psi e.1 u)) hcard
+    have huv : u ≤ v := le_of_card_Omega_le hOu
+    rcases lt_or_eq_of_le hy with h | h
+    · exact CSet_subset_CSet huv e.2 (mem_CSet_of_lt_psi h)
+    · exact h ▸ Clos.coll hu he
+
+/-- A member of the closure that is small enough lies below `ψ_v(a)`. -/
+theorem lt_psi_of_mem {v a x : Ordinal} (hx : x ∈ CSet v a)
+    (hcard : x.card ≤ ℵ_ v) : x < psi a v := by
+  by_contra hcon
+  exact psi_notMem a v (mem_CSet_of_le hx _ (not_lt.mp hcon) hcard)
+
+/-- **`ψ_v(a)` is additively principal.** -/
+theorem isPrincipal_add_psi (a v : Ordinal) :
+    Ordinal.IsPrincipal (· + ·) (psi a v) := by
+  intro x y hx hy
+  refine lt_psi_of_mem (Clos.add (mem_CSet_of_lt_psi hx) (mem_CSet_of_lt_psi hy)) ?_
+  rw [Ordinal.card_add]
+  have h1 : x.card ≤ ℵ_ v := le_trans (Ordinal.card_le_card hx.le) (card_psi_le a v)
+  have h2 : y.card ≤ ℵ_ v := le_trans (Ordinal.card_le_card hy.le) (card_psi_le a v)
+  exact le_trans (add_le_add h1 h2) (le_of_eq (Cardinal.add_eq_self (aleph0_le_aleph v)))
+
 end Googology.Notation.ExBuchholz.Ord
