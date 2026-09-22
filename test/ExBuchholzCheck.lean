@@ -73,8 +73,8 @@ standard. -/
 /-! ## The tower of Buchholz's case 4
 
 `Closure.lean` proves Lemma 3.6 from one statement, `TowerBound`: what `G`
-sees in a rung of the tower is below the value that rung produces.  `G` is
-antitone in its level, so checking it at level `0` checks it at every level.
+sees in a rung `W_i` of the tower is bounded by any `c` between the value
+`X₂[W_i]` that rung produces and `X₂` itself, together with `0`.
 -/
 
 /-- Is `X = ψ_{X₁}(X₂)` in the configuration of Buchholz's case 4? -/
@@ -84,7 +84,8 @@ def isCase4 : Term → Bool
         && !(decide (dom X₂ < cons X₁ X₂ nil))
   | _ => false
 
-/-- The `i`-th rung `W_i` of the tower, and the value `X₂[W_i]` it produces. -/
+/-- The `i`-th rung `W_i` of the tower, the value `X₂[W_i]` it produces, and
+the argument `X₂`. -/
 def rung : Term → Nat → Term
   | cons _ X₂ nil, i => tower (fs (subOf (dom X₂)) nil) X₂ i
   | _, _ => nil
@@ -93,39 +94,45 @@ def rungVal : Term → Nat → Term
   | cons _ X₂ nil, i => fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ i)
   | _, _ => nil
 
-#guard ((ctbl 8).filter isCase4).length == 532
+def argOf : Term → Term
+  | cons _ X₂ _ => X₂
+  | nil => nil
 
-/-! **`TowerBound`**, at level `0`, on five rungs of each of those 532 forms. -/
+/-- `TowerBound` at one level `u` and one `c`. -/
+def towerRel (X : Term) (i : Nat) (u c : Term) : Bool :=
+  (G u (rung X i)).all fun x => (c :: (G u c ++ [nil])).any fun y => decide (x ≤ y)
 
-#guard ((ctbl 8).filter isCase4).all fun X => (List.range 5).all fun i =>
-  (G nil (rung X i)).all (fun x => decide (x < rungVal X i))
+/-- Those members of `cs` that lie between `X₂[W_i]` and `X₂`. -/
+def betweens (X : Term) (i : Nat) (cs : List Term) : List Term :=
+  cs.filter fun c => decide (rungVal X i ≤ c) && decide (c ≤ argOf X)
 
-/-! The other half of the same invariant: every rung is a standard form. -/
-
-#guard ((ctbl 8).filter isCase4).all fun X => (List.range 5).all fun i =>
-  isOT (rung X i)
-
-/-! A case-4 form need not be countable, and the check does not depend on it:
-all 158 standard case-4 forms of size at most 7, countable or not, pass both
-halves on four rungs. -/
+/-! A case-4 form need not be countable, so the check runs over every standard
+form, not only `ctbl`. -/
 
 #guard ((upTo 7).filter (fun X => isOT X && isCase4 X)).length == 158
+
+/-! **The check.**  Each of those 158 forms, on four rungs, at every level of
+size at most 2, against `X₂[W_i]`, `X₂`, and every term of size at most 4 in
+between.  The same run at size 8 (651 forms, levels up to size 3, terms up to
+size 5) also passes; only size 7 is kept here, to keep the build quick. -/
+
 #guard ((upTo 7).filter (fun X => isOT X && isCase4 X)).all fun X =>
   (List.range 4).all fun i =>
-    isOT (rung X i) && (G nil (rung X i)).all (fun x => decide (x < rungVal X i))
+    (upTo 2).all fun u =>
+      (rungVal X i :: argOf X :: betweens X i (upTo 4)).all fun c =>
+        towerRel X i u c
 
-/-! `TowerBound` needs `G_0(X₂) < X₂`, and the case-4 configuration supplies
-it. -/
+/-! The bound has to be relative to `c`; "below `X₂[W_i]`" is false.  Write
+`A = ψ_0(ψ_Ω(0))`.  For `X = ψ_Ω(ψ_{A+1}(0))` the first rung is `ψ_A(0)`,
+which is also the value it produces, and `G_0` of it holds `ψ_Ω(0)`, which is
+above `ψ_A(0)` because `A` is countable. -/
 
-#guard ((upTo 7).filter (fun X => isOT X && isCase4 X)).all fun X =>
-  match X with
-  | cons _ X₂ nil => (G nil X₂).all (fun x => decide (x < X₂))
-  | _ => true
+def caseA : Term := psi nil (psi tW nil)
+def caseX : Term := psi t1 (psi (cons nil (psi tW nil) t1) nil)
 
-/-! That is not a fact about standard forms in general.  `ψ_Ω(ε₀)` is
-standard, and `G_0(ε₀)` holds `Ω`, which is above `ε₀`. -/
-
-#guard isOT (psi t1 (psi nil tW))
-#guard !((G nil (psi nil tW)).all (fun x => decide (x < psi nil tW)))
+#guard isOT caseX && isCase4 caseX
+#guard rung caseX 0 == psi caseA nil && rungVal caseX 0 == psi caseA nil
+#guard !((G nil (rung caseX 0)).all (fun x => decide (x < rungVal caseX 0)))
+#guard towerRel caseX 0 nil (rungVal caseX 0)
 
 end Googology.Notation.ExBuchholz.Term

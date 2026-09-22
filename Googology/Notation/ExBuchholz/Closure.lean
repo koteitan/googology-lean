@@ -50,20 +50,26 @@ admissible index (`tower_lt_dom`).  Climbing needs 3.2(b), the monotonicity of
 `TowerBound`:
 
 ```
-x ∈ G_u(W_i) ⟹ x < X₂[W_i]
+X₂[W_i] ≤ c ≤ X₂  ⟹  G_u(W_i) ≼ {c} ∪ G_u(c) ∪ {0}
 ```
 
 That is Buchholz's second tower invariant, and it is the one place where his
 proof of 3.6 calls on 3.3: the rung `W_i` has to be a standard form before `G`
 on it can be bounded.  Buchholz proves 3.3 and 3.6 by one simultaneous
 induction, and splitting them, as here, is what leaves this open.
-`TowerBound` is checked by computation in `test/ExBuchholzCheck.lean`: all 532
-countable case-4 forms of size at most 8 on five rungs, and all 158 standard
-case-4 forms of size at most 7, countable or not, on four.  Two facts it needs
-are separated there.  One is `G_0(X₂) < X₂`, which standard forms in general do
-not have — `ψ_Ω(ε₀)` is standard and `G_0(ε₀)` holds `Ω` — but which the
-case-4 configuration does supply.  The other is that what `G` sees in the
-tower's subscript `Z[0]` is below `X₂[W₀]`.
+
+The bound has to be relative to `c`.  Buchholz states his invariant in the
+absolute form `G_u(W_i) < X₂[W_i]`, which works in his system because his
+subscripts are numbers and `G` never enters them.  Here they are terms, `G`
+does enter them, and the absolute form is false: with `A = ψ_0(ψ_Ω(0))` and
+`X = ψ_Ω(ψ_{A+1}(0))`, the first rung is `ψ_A(0)`, which is also the value it
+produces, and `G_0` of it holds `ψ_Ω(0)`, which is above `ψ_A(0)` because `A`
+is countable.
+
+`test/ExBuchholzCheck.lean` carries that term and checks `TowerBound` itself on
+every standard case-4 form of size at most 7 — 158 of them, countable or not —
+on four rungs, at every level of size at most 2, and against every candidate
+`c` of size at most 4.  The same run at size 8, over 651 forms, also passes.
 
 -/
 
@@ -497,22 +503,23 @@ theorem Trian.psi_sub {z u₀ u : Term} (h : Trian z u₀ u) :
     intro x hx; exact absurd hx (List.not_mem_nil)
 
 /-- Buchholz's second tower invariant, and the one place where his proof of
-Lemma 3.6 calls on Lemma 3.3: what `G` sees in a rung of the tower is below
-the value that rung produces. -/
+Lemma 3.6 calls on Lemma 3.3: what `G` sees in a rung of the tower is bounded
+by any `c` between the value that rung produces and `X₂`.
+-/
 def TowerBound : Prop :=
   ∀ X₁ X₂ : Term, OT (cons X₁ X₂ nil) →
     dom X₂ ≠ nil → dom X₂ ≠ t1 → dom X₂ ≠ tw → ¬ (dom X₂ < cons X₁ X₂ nil) →
-    ∀ (i : Nat) (u x : Term),
-      x ∈ G u (tower (fs (subOf (dom X₂)) nil) X₂ i) →
-      x < fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ i)
+    ∀ (i : Nat) (u c : Term),
+      fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ i) ≤ c → c ≤ X₂ →
+      listLe (G u (tower (fs (subOf (dom X₂)) nil) X₂ i)) (c :: (G u c ++ [nil]))
 
 theorem Trian_case4 {X₁ X₂ : Term}
     (e1 : dom X₂ ≠ nil) (e2 : dom X₂ ≠ t1) (e3 : dom X₂ ≠ tw)
     (e4 : ¬ (dom X₂ < cons X₁ X₂ nil))
     (hIH : ∀ W : Term, W < dom X₂ → Trian W (fs X₂ W) X₂)
-    (hB : ∀ (i : Nat) (u x : Term),
-        x ∈ G u (tower (fs (subOf (dom X₂)) nil) X₂ i) →
-        x < fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ i))
+    (hB : ∀ (i : Nat) (u c : Term),
+        fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ i) ≤ c → c ≤ X₂ →
+        listLe (G u (tower (fs (subOf (dom X₂)) nil) X₂ i)) (c :: (G u c ++ [nil])))
     (n : Nat) :
     Trian (numeral n) (fs (cons X₁ X₂ nil) (numeral n)) (cons X₁ X₂ nil) := by
   have hT : Trian (tower (fs (subOf (dom X₂)) nil) X₂ n)
@@ -537,8 +544,17 @@ theorem Trian_case4 {X₁ X₂ : Term}
             (List.mem_cons_of_mem _ (List.mem_append_right _ hy))), hle'⟩
         · rcases List.mem_cons.mp hy with rfl | hy
           · exact ⟨nil, List.mem_append_right _ (List.mem_cons_self ..), hle'⟩
-          · exact ⟨c₀, List.mem_append_left _ (List.mem_append_left _ (List.mem_cons_self ..)),
-              le_trans hle' (le_trans (le_of_lt (hB n v y hy)) hb0)⟩
+          · obtain ⟨z, hz, hyz⟩ := hB n v c₀ hb0 hb1 y hy
+            rcases List.mem_cons.mp hz with rfl | hz
+            · exact ⟨z, List.mem_append_left _ (List.mem_append_left _
+                (List.mem_cons_self ..)), le_trans hle' hyz⟩
+            rcases List.mem_append.mp hz with hz | hz
+            · exact ⟨z, List.mem_append_left _ (List.mem_append_left _
+                (List.mem_cons_of_mem _ (List.mem_append_right _ hz))), le_trans hle' hyz⟩
+            · rcases List.mem_cons.mp hz with rfl | hz
+              · exact ⟨nil, List.mem_append_right _ (List.mem_cons_self ..),
+                  le_trans hle' hyz⟩
+              · exact absurd hz List.not_mem_nil
       · rw [heq0] at hx
         exact ⟨x, List.mem_append_left _ (List.mem_append_left _
           (List.mem_cons_of_mem _ (List.mem_append_right _ hx))), le_refl x⟩
