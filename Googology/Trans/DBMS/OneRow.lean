@@ -62,6 +62,10 @@ noncomputable def dbmsOrdEval :
 theorem dbmsOrdEval_val (A : (dbms 1).State) :
     dbmsOrdEval.val A = (read 0 (entries A.1)).val := rfl
 
+/-- **The ordinal is below `ε₀`**, as for BMS. -/
+theorem dbmsOrdEval_lt_e0 (A : (dbms 1).State) : dbmsOrdEval.val A < te0.val :=
+  val_lt_val (dstd_entries A.1 A.2).2 OT_te0 (read_lt_e0 0 _)
+
 /-- **One-row DBMS terminates.** -/
 theorem dbms_one_terminates : (dbms 1).Terminates :=
   dbmsHom.toSim.terminates (primHom.toSim.wf exbOT_wf)

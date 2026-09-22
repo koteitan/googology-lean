@@ -135,6 +135,11 @@ noncomputable def bmsOrdEval :
 theorem bmsOrdEval_val (A : (Googology.Notation.BMS.bms 1).State) :
     bmsOrdEval.val A = (read 0 (entries A.1)).val := rfl
 
+/-- **The ordinal is below `ε₀`.** -/
+theorem bmsOrdEval_lt_e0 (A : (Googology.Notation.BMS.bms 1).State) :
+    bmsOrdEval.val A < te0.val :=
+  val_lt_val (std_entries A.1 A.2).2 OT_te0 (read_lt_e0 0 _)
+
 /-- **Expansion lowers the ordinal**, stated without the wrapper. -/
 theorem bms_one_val_lt {A B : (Googology.Notation.BMS.bms 1).State}
     (h : (Googology.Notation.BMS.bms 1).Rel B A) :

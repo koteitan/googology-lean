@@ -25,6 +25,7 @@ all of them, and each system supplies only what is its own.
 | **a one-row Bashicu matrix names an ordinal, and expansion is its fundamental sequence** | `Trans.BMS.read_expandL` |
 | the primitive sequence system terminates, by translation | `Trans.BMS.prim_terminates` |
 | **which ordinal a one-row Bashicu matrix names** | `Trans.BMS.bmsOrdEval` |
+| that ordinal is below `ψ_0(Ω)` — the ceiling of the primitive sequence system | `Trans.BMS.read_lt_e0`, `Trans.BMS.bmsOrdEval_lt_e0` |
 | one-row Bashicu matrices terminate, by translation rather than by labels | `Trans.BMS.bms_one_terminates` |
 | the same for one-row DBMS, whose termination is not otherwise proved here | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
 

@@ -166,8 +166,20 @@ That is `Mono.lean`.
    holds `i - k` in row `k` rather than `i`. Termination for `r ≥ 2` is not
    proved, since the label-system proof this library imports is about arrays
    reachable from a stair. One row is done, by the same translation as BMS.
-   The Y sequence is still to come; it needs a definition this repository can
-   check against before anything is written down.
+   The Y sequence is **not** going in yet, and the reason is worth recording.
+   Its official definition is a program, not a set of equations: the
+   [wiki article](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97)
+   states the expansion function only in outline and points at
+   [Naruyoko/YNySequence](https://github.com/Naruyoko/YNySequence) as the
+   definition, which is 477 lines of imperative JavaScript over mutable
+   arrays. Termination is an open problem, so there would be no theorem at the
+   end. And the article records that several third-party formalizations
+   produced infinite loops and disagreed with the official expansion of
+   `(1,2,4,8,10,8)`, which is exactly the failure a transcription invites.
+   Putting a definition here that does not match the program would be worse
+   than having none. What it would take: transcribe the expansion function as
+   a total function with the loop bounds proved, then calibrate against the
+   reference implementation on enough inputs to believe it.
 
 ## Conventions
 

@@ -74,6 +74,24 @@ theorem read_lt_tW (b : Nat) (s : List Nat) : read b s < tW := by
     exact cons_lt_cons_iff.mpr
       (Or.inl (psi_lt_psi_iff.mpr (Or.inl (nil_lt_cons _ _ _))))
 
+/-- `ε₀` as a term.  In extended Buchholz's ψ that is `ψ_0(Ω)`; the library
+does not calibrate values against named ordinals, so the name is the reader's
+to check. -/
+abbrev te0 : Term := psi nil tW
+
+theorem OT_te0 : OT te0 := by decide
+
+/-- **One row lands below `ε₀`.**  Every subscript the reading uses is `0`, so
+what a one-row matrix reads as is below `ψ_0(Ω)`.  This is the known ceiling
+of the primitive sequence system. -/
+theorem read_lt_e0 (b : Nat) (l : List Nat) : read b l < te0 := by
+  cases l with
+  | nil => rw [read_nil]; exact nil_lt_cons _ _ _
+  | cons a rest =>
+    rw [read_cons]
+    exact cons_lt_psi_iff.mpr
+      (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, read_lt_tW (b + 1) _⟩))
+
 /-- The reading of a nonempty list is a nonempty term. -/
 theorem read_ne_nil (b : Nat) (a : Nat) (rest : List Nat) :
     read b (a :: rest) ≠ nil := by
