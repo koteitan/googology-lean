@@ -25,7 +25,8 @@ Names are written relative to `Googology`.
 | the systems on the entries, with their generators | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
 | the general system at one and two rows is the primitive and pair sequence system | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
 | from a generator, any expansion sequence ends | `Trans.BMS.bmsLStd_terminates`, `Trans.BMS.primStd_terminates`, `Trans.BMS.pairStd_terminates` |
-| at one row the relation is well founded, so expansion has a rank | `Trans.BMS.prim_wf`, `Trans.BMS.bmsL_zero_wf`, `Trans.BMS.primRankEval` |
+| **well-foundedness and termination are the same condition** | `Rewrite.wf_iff_terminates` |
+| so every system here is well founded and expansion has a rank | `Trans.BMS.bmsL_wf`, `Trans.BMS.pairL_wf`, `Trans.BMS.prim_wf`, `Trans.BMS.bmsLRankEval` |
 | DBMS is the same rule with other generators | `Trans.DBMS.dbmsL`, `Trans.DBMS.dbmsL_zero_terminates` |
 
 ### Extended Buchholz's ψ

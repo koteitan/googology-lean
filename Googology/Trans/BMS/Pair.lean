@@ -66,4 +66,7 @@ def pairStd : pairL.Std where
 theorem pairStd_terminates : pairStd.Terminates :=
   pairStd.of_terminates pairL_terminates
 
+/-- **The pair sequence system is well founded**, not merely terminating. -/
+theorem pairL_wf : pairL.WF := Rewrite.wf_of_terminates pairL_terminates
+
 end Googology.Trans.BMS

@@ -87,4 +87,7 @@ theorem dbmsL_zero_terminates : (dbmsL 0).Terminates := by
 theorem dbmsLStd_zero_terminates : (dbmsLStd 0).Terminates :=
   (dbmsLStd 0).of_terminates dbmsL_zero_terminates
 
+/-- **One row of DBMS is well founded.** -/
+theorem dbmsL_zero_wf : (dbmsL 0).WF := Rewrite.wf_of_terminates dbmsL_zero_terminates
+
 end Googology.Trans.DBMS

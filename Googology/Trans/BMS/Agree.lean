@@ -169,4 +169,12 @@ rows. -/
 theorem bmsLStd_terminates (r : Nat) : (bmsLStd r).Terminates :=
   (bmsLStd r).of_terminates (bmsL_terminates r)
 
+/-- **The general system is well founded**, at any number of rows. -/
+theorem bmsL_wf (r : Nat) : (bmsL r).WF := Rewrite.wf_of_terminates (bmsL_terminates r)
+
+/-- So it carries the rank of its own expansion as an ordinal measure. -/
+noncomputable def bmsLRankEval (r : Nat) :
+    Eval (bmsL r) (· < · : Ordinal.{0} → Ordinal.{0} → Prop) :=
+  Rewrite.rankEval (bmsL_wf r)
+
 end Googology.Trans.BMS

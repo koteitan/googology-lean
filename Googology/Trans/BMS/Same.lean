@@ -27,10 +27,11 @@ about which matrices those are.
 
 `prim_wf` and `bmsL_zero_wf` close the `Rewrite` API at one row: the relation
 is well founded, not merely terminating, so `Rewrite.rankEval` applies and
-`primRankEval` is the rank of expansion itself.  Two rows and up do not have
-this yet — carrying well-foundedness back from `Notation.BMS.bms r` would
-need a map of states, and a state on the entries only knows its array through
-an existential.
+`primRankEval` is the rank of expansion itself.  Two rows and up get the same
+from `Rewrite.wf_of_terminates`, which is in `Googology/Rank.lean`: a
+descending chain never halts, so a system that terminates cannot have one.
+No map of states is needed, which is what blocked carrying well-foundedness
+back from `Notation.BMS.bms r` directly.
 -/
 
 namespace Googology.Trans.BMS
