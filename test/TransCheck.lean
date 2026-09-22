@@ -121,4 +121,39 @@ standard form below `ψ_0(Ω)` carries a subscript other than `0`. -/
 
 #guard ((upToProbe 6).filter (fun X => isOT X && decide (X < te0))).length == 85
 
+/-! ### Standard forms, against the reference implementation
+
+A one-row matrix is standard in
+[yaBMS](https://github.com/koteitan/yaBMS) — the reference implementation of
+BMS — exactly when its entries are a matrix and its term is a standard form.
+That is what `Trans.BMS.prim` takes for its states, so it is worth checking.
+
+Over all 1024 sequences of length 5 with entries below 4, `./bms -s` and the
+predicate below agree on every one, and 19 come out standard. This is a check,
+not a theorem: it would follow from every such matrix being reachable from a
+generator, which is not proved. -/
+
+def colB : Nat → Nat → List Nat → Bool
+  | _, _, [] => true
+  | b, prev, c :: r => decide (b ≤ c) && decide (c ≤ prev + 1) && colB b c r
+
+def isColB : Nat → List Nat → Bool
+  | _, [] => true
+  | b, a :: r => (a == b) && colB b a r
+
+/-- A matrix at level `0` whose term is a standard form. -/
+def stdB (l : List Nat) : Bool := isColB 0 l && isOT (read 0 l)
+
+/-- Every sequence of length `n` with entries below `4`. -/
+def seqs : Nat → List (List Nat)
+  | 0 => [[]]
+  | n + 1 => (seqs n).flatMap fun l => (List.range 4).map fun k => l ++ [k]
+
+#guard (seqs 5).length == 1024
+#guard ((seqs 5).filter stdB).length == 19
+
+/-! The nineteen, and each is read off by the round trip. -/
+
+#guard ((seqs 5).filter stdB).all fun l => read 0 (unread 0 (read 0 l)) == read 0 l
+
 end Googology.Trans.BMS

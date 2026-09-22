@@ -159,8 +159,23 @@ That is `Mono.lean`.
    the entries; and `bmsOrdEval` is the value that comes out, with
    `bms_one_terminates` falling out as well — one row terminating by the
    well-ordering of extended Buchholz's ψ rather than by the labelling proof.
-   Two rows land below the Bachmann–Howard ordinal and three rows on are
-   open, so `r = 2` is the next target and would need a second collapse;
+   It is settled both ways: `lt_e0_iff_allNil` says a standard form is below
+   `ψ_0(Ω)` exactly when its subscripts are all `0`, and `exists_read` says
+   every one of those is read off a matrix. So one row misses nothing below
+   `ψ_0(Ω)` and names nothing above it.
+
+   What is checked but not proved: that the states of `prim` — matrices whose
+   term is a standard form — are exactly the standard one-row matrices of the
+   reference implementation. The two agree on all 1024 sequences of length 5
+   with entries below 4 (`test/TransCheck.lean`). Proving it means showing
+   every such matrix is reachable from a generator.
+
+   Two rows land below the Bachmann–Howard ordinal and three rows on are open,
+   so `r = 2` is the next target. Concretely it needs: the two-row form of
+   `BMS/OneRow.lean`, where `m₀` is `0` or `1` and the `m₀ = 1` case adds an
+   increment on row `0`; a reading that uses `ψ_1` as well as `ψ_0`; and the
+   commutation, whose `dom` trichotomy will have a fourth case — the tower —
+   that one row never reaches;
 4. **DBMS done, the Y sequence not.** `Notation/DBMS/` has the expansion
    system: the rule is BM4's, and only the generators differ — column `i`
    holds `i - k` in row `k` rather than `i`. Termination for `r ≥ 2` is not
