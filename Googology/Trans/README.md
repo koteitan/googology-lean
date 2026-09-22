@@ -64,6 +64,7 @@ let it be read as one of the theorems above.
 | BMS with itself | `BMS/Zero.lean` | — | that a row of zeros underneath changes nothing: the two-row rule on it is the one-row rule |
 | BMS with itself | `BMS/Embed.lean` | `StepHom` | **the primitive sequence system sits inside the pair sequence system** |
 | BMS with itself | `BMS/ZeroRow.lean` | `StepHom`, `Sim` | **the same at every number of rows**: `r + 1` rows sit inside `r + 2`, and inside `s + 1` for any `s ≥ r` |
+| BMS with itself | `BMS/Append.lean` | — | **that expansion only looks at the last block**: a column whose row-`0` entry is `0` starts one, and no parent reaches back across it |
 | BMS with itself | `BMS/Entries2.lean` | — | **two-row expansion written on the entries, that it is `BM4.expand`, and that a run of it ends** |
 | BMS with itself | `BMS/Pair.lean` | — | the pair sequence system as a `Rewrite` whose step runs, with its generators |
 | BMS with itself | `BMS/Agree.lean` | — | that the one-row, two-row and general rules agree, and the general system as a `Rewrite` with its generators |
