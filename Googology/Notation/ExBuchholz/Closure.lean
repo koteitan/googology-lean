@@ -71,7 +71,15 @@ The index has to be `ψ_{Z[0]}(0)` and not just any `W < dom X`: for
 have to hold against an empty `G_u(0)`.
 
 `SubBound` is the one place left where 3.6 calls on 3.3: it asks for something
-about `Z` that the standardness of `X` has to supply.  Buchholz proves 3.3
+about `Z` that the standardness of `X` has to supply.
+
+The branch that forces the call is the one where `dom X = X = ψ_A(0)` with `A`
+a successor.  There `Z = A`, the value is the index itself, and `c` can be as
+low as `ψ_{A[0]}(0)`, whose `G_u` is empty for a large `u`.  Bounding
+`G_u(A) = G_u(A[0]) ++ G_u(1)` against that empty list needs `G_u(A[0])` to be
+empty too, and `G_eq_nil_of_le` gives it only for a standard `A[0]` — which is
+3.3 at `A`.  The pieces that branch uses, `sub_lt_psi`, `tail_lt`,
+`G_eq_nil_of_le` and `eq_addT_one_of_dom_eq_one`, are proved.  Buchholz proves 3.3
 and 3.6 by one simultaneous induction, and splitting them, as here, is what
 leaves it open.  `test/ExBuchholzCheck.lean` carries both terms above and checks
 `SubBound` on every standard form of size at most 7 whose domain is indexed by
@@ -507,6 +515,47 @@ theorem Trian.psi_sub {z u₀ u : Term} (h : Trian z u₀ u) :
     · exact absurd hx (List.not_mem_nil)
   · rw [G_psi_of_not_le hvu]
     intro x hx; exact absurd hx (List.not_mem_nil)
+
+/-- A standard form whose domain is `1` is its own predecessor plus one. -/
+theorem eq_addT_one_of_dom_eq_one : ∀ X : Term, OT X → dom X = t1 →
+    addT (fs X nil) t1 = X := by
+  intro X
+  induction X with
+  | nil => intro _ h; exact absurd h (by decide)
+  | cons X₁ X₂ t _ _ iht =>
+    intro hOT hd
+    cases t with
+    | cons c d u =>
+      have hdt : dom (cons c d u) = t1 := hd
+      show addT (fs (cons X₁ X₂ (cons c d u)) nil) t1 = _
+      rw [fs, addT_cons, iht (OT_tail hOT) hdt]
+    | nil =>
+      by_cases h1 : dom X₂ = nil
+      · have hX₂ : X₂ = nil := dom_eq_nil_iff.mp h1
+        subst hX₂
+        by_cases g1 : dom X₁ = nil
+        · have hX₁ : X₁ = nil := dom_eq_nil_iff.mp g1
+          subst hX₁
+          rw [show fs (cons nil nil nil) nil = nil from by rw [fs]; simp_all]
+          rfl
+        · by_cases g2 : dom X₁ = t1
+          · rw [show dom (cons X₁ nil nil) = cons X₁ nil nil from by rw [dom]; simp_all] at hd
+            injection hd with e1 _ _
+            subst e1
+            exact absurd rfl g1
+          · rw [show dom (cons X₁ nil nil) = dom X₁ from by rw [dom]; simp_all] at hd
+            exact absurd hd g2
+      · by_cases h2 : dom X₂ = t1
+        · rw [show dom (cons X₁ X₂ nil) = tw from by rw [dom]; simp_all] at hd
+          exact absurd hd (by decide)
+        · by_cases h3 : dom X₂ = tw
+          · rw [show dom (cons X₁ X₂ nil) = tw from by rw [dom]; simp_all] at hd
+            exact absurd hd (by decide)
+          · by_cases h4 : dom X₂ < cons X₁ X₂ nil
+            · rw [show dom (cons X₁ X₂ nil) = dom X₂ from by rw [dom]; simp_all] at hd
+              exact absurd hd h2
+            · rw [show dom (cons X₁ X₂ nil) = tw from by rw [dom]; simp_all] at hd
+              exact absurd hd (by decide)
 
 /-- Buchholz's tower invariant, reduced to a statement about one term: for a
 standard form `X` whose domain is indexed by terms, what `G` sees in the

@@ -40,7 +40,7 @@ inductive Term where
 | `Ord.lean` | 順序数側。`Omega`、`Clos`、`CSet`、`psi`、濃度評価、`psi_lt_Omega_succ`、`psi_notMem`、`Omega_le_psi`、`psi_mono`（mathlib が要る） |
 | `Eval.lean` | `Term.val`。順序数への評価。`Lam` と `val_lt_Lam`（mathlib が要る） |
 | `Mono.lean` | `val_lt_val`、`val_mem_CSet_arg`、`valHom`、`OTLt_wf`（mathlib が要る） |
-| `FS.lean` | `dom`、`fs`（基本列 `X[Y]`）、`fs_lt`（降下）、Buchholz 3.2(b)、場合 4 の塔、展開系 `exb` |
+| `FS.lean` | `dom`、`fs`（基本列 `X[Y]`）、`fs_lt`（降下）、Buchholz 3.2(b)、`sub_lt_psi`、`tail_lt`、`G_eq_nil_of_le`、場合 4 の塔、展開系 `exb` |
 | `Closure.lean` | 連結、`G°`、`⊲`、Buchholz 3.4、3.5、3.6 |
 
 ## 順序
@@ -210,7 +210,15 @@ X[ψ_{Z[0]}(0)] ≤ c ≤ X  ⟹  G_u(Z) ≼ G_u(c) ∪ {0}
 で抑えることになってしまう。
 
 3.6 が 3.3 を呼ぶ箇所は、もう `SubBound` だけである。`Z` についての主張で、
-`X` が標準形であることから出さなければならない。Buchholz は 3.3 と 3.6 を 1 つ
+`X` が標準形であることから出さなければならない。
+
+呼ばざるを得なくしているのは、`dom X = X = ψ_A(0)` で `A` が後続の枝である。
+ここでは `Z = A` で、値は指標そのものになり、`c` は `ψ_{A[0]}(0)` まで下がれる。
+`u` が大きいとその `G_u` は空なので、`G_u(A) = G_u(A[0]) ++ G_u(1)` を空リスト
+で抑えるには `G_u(A[0])` も空でなければならない。`G_eq_nil_of_le` がそれを出す
+のは `A[0]` が標準形のときだけで、それが `A` での 3.3 である。この枝が使う部品
+`sub_lt_psi`、`tail_lt`、`G_eq_nil_of_le`、`eq_addT_one_of_dom_eq_one` は証明
+済みである。Buchholz は 3.3 と 3.6 を 1 つ
 の同時帰納法で証明しており、ここのように分けると、これが残る。上の 2 つの項と
 `SubBound` の確認は `test/ExBuchholzCheck.lean` にある。サイズ 7 以下の標準形で
 定義域が項で添字づけられるもの 571 個（可算とは限らない）について、サイズ 2

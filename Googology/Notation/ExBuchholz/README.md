@@ -42,7 +42,7 @@ which is the whole content of the extension.
 | `Ord.lean` | the ordinal side: `Omega`, `Clos`, `CSet`, `psi`, the cardinality bound, `psi_lt_Omega_succ`, `psi_notMem`, `Omega_le_psi`, `psi_mono` (needs mathlib) |
 | `Eval.lean` | `Term.val`, the evaluation into `Ordinal`; `Lam` and `val_lt_Lam` (needs mathlib) |
 | `Mono.lean` | `val_lt_val`, `val_mem_CSet_arg`, `valHom`, `OTLt_wf` (needs mathlib) |
-| `FS.lean` | `dom`, `fs` (the fundamental sequence `X[Y]`), `fs_lt` (it descends), Buchholz 3.2(b), the tower of case 4, and `exb`, the expansion system |
+| `FS.lean` | `dom`, `fs` (the fundamental sequence `X[Y]`), `fs_lt` (it descends), Buchholz 3.2(b), `sub_lt_psi`, `tail_lt`, `G_eq_nil_of_le`, the tower of case 4, and `exb`, the expansion system |
 | `Closure.lean` | concatenation, `G°`, `⊲`, Buchholz 3.4, 3.5 and 3.6 |
 
 ## The order
@@ -225,7 +225,15 @@ The index has to be `ψ_{Z[0]}(0)` and not just any `W < dom X`: for
 have to hold against an empty `G_u(0)`.
 
 `SubBound` is the one place left where 3.6 calls on 3.3: it asks for something
-about `Z` that the standardness of `X` has to supply. Buchholz proves 3.3
+about `Z` that the standardness of `X` has to supply.
+
+The branch that forces the call is the one where `dom X = X = ψ_A(0)` with `A`
+a successor. There `Z = A`, the value is the index itself, and `c` can be as
+low as `ψ_{A[0]}(0)`, whose `G_u` is empty for a large `u`. Bounding
+`G_u(A) = G_u(A[0]) ++ G_u(1)` against that empty list needs `G_u(A[0])` to be
+empty too, and `G_eq_nil_of_le` gives it only for a standard `A[0]` — which is
+3.3 at `A`. The pieces that branch uses, `sub_lt_psi`, `tail_lt`,
+`G_eq_nil_of_le` and `eq_addT_one_of_dom_eq_one`, are proved. Buchholz proves 3.3
 and 3.6 by one simultaneous induction, and splitting them, as here, is what
 leaves it open. `test/ExBuchholzCheck.lean` carries both terms above and checks
 `SubBound` on every standard form of size at most 7 whose domain is indexed by

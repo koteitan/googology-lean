@@ -147,6 +147,50 @@ theorem dom_shape : ∀ W : Term,
 
 /-! ## Order facts the descent uses -/
 
+theorem lt_of_lt_of_le' {x y z : Term} (h₁ : x < y) (h₂ : y ≤ z) : x < z := by
+  rcases le_iff_lt_or_eq.mp h₂ with h | rfl
+  · exact lt_trans h₁ h
+  · exact h₁
+
+theorem psi_le_cons (a b t : Term) : psi a b ≤ cons a b t := by
+  cases t with
+  | nil => exact le_refl _
+  | cons c d r => exact le_of_lt (cons_lt_cons_iff.mpr (Or.inr ⟨rfl, nil_lt_cons _ _ _⟩))
+
+/-- A principal standard form is above its own subscript. -/
+theorem sub_lt_psi : ∀ a b : Term, OT (psi a b) → a < psi a b := by
+  intro a
+  induction a with
+  | nil => intro b _; exact nil_lt_cons _ _ _
+  | cons a₁ a₂ s ih1 _ _ =>
+    intro b hOT
+    refine cons_lt_cons_iff.mpr (Or.inl (psi_lt_psi_iff.mpr (Or.inl ?_)))
+    exact lt_of_lt_of_le' (ih1 a₂ (OT_head (OT_fst hOT))) (psi_le_cons a₁ a₂ s)
+
+/-- The tail of a standard form is below it. -/
+theorem tail_lt : ∀ t a b : Term, OT (cons a b t) → t < cons a b t := by
+  intro t
+  induction t with
+  | nil => intro a b _; exact nil_lt_cons _ _ _
+  | cons c d s _ _ ihs =>
+    intro a b hOT
+    rcases le_iff_lt_or_eq.mp (OT_headLe_tail hOT) with h | h
+    · exact cons_lt_cons_iff.mpr (Or.inl h)
+    · exact cons_lt_cons_iff.mpr (Or.inr ⟨h, ihs c d (OT_tail hOT)⟩)
+
+/-- `G` sees nothing in a standard form that does not reach its own level. -/
+theorem G_eq_nil_of_le : ∀ X u : Term, OT X → X ≤ u → G u X = [] := by
+  intro X
+  induction X with
+  | nil => intro u _ _; rfl
+  | cons a b t _ _ iht =>
+    intro u hOT hle
+    have hau : ¬ u ≤ a :=
+      not_le_of_lt (lt_of_lt_of_le'
+        (lt_of_lt_of_le' (sub_lt_psi a b (OT_head hOT)) (psi_le_cons a b t)) hle)
+    rw [G_cons, if_neg hau, List.nil_append]
+    exact iht u (OT_tail hOT) (le_of_lt (lt_of_lt_of_le' (tail_lt t a b hOT) hle))
+
 /-- A sum is below a principal term exactly when its head is. -/
 theorem cons_lt_psi_iff {a b t c d : Term} :
     cons a b t < psi c d ↔ psi a b < psi c d := by
