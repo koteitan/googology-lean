@@ -211,7 +211,7 @@ def size : Term → Nat
 @[simp] theorem G_nil (a : Term) : G a nil = [] := rfl
 theorem G_cons (a c d t : Term) :
     G a (cons c d t) =
-      (if a ≤ c then c :: d :: (G a c ++ G a d) else []) ++ G a t := rfl
+      (if a ≤ c then d :: (G a c ++ G a d) else []) ++ G a t := rfl
 
 theorem lt_of_le_of_lt' {x y z : Term} (h₁ : x ≤ y) (h₂ : y < z) : x < z := by
   rcases le_iff_lt_or_eq.mp h₁ with h | rfl
@@ -263,8 +263,6 @@ theorem OT_of_mem_G (a : Term) : ∀ t : Term, OT t → ∀ z ∈ G a t, OT z :=
     rcases List.mem_append.mp hz with hz | hz
     · split at hz
       · rcases List.mem_cons.mp hz with rfl | hz
-        · exact OT_fst h
-        rcases List.mem_cons.mp hz with rfl | hz
         · exact OT_snd h
         rcases List.mem_append.mp hz with hz | hz
         · exact ihc (OT_fst h) z hz
@@ -283,8 +281,6 @@ theorem size_lt_of_mem_G (a : Term) : ∀ t : Term, ∀ z ∈ G a t, size z < si
     rcases List.mem_append.mp hz with hz | hz
     · split at hz
       · rcases List.mem_cons.mp hz with rfl | hz
-        · simp; omega
-        rcases List.mem_cons.mp hz with rfl | hz
         · simp; omega
         rcases List.mem_append.mp hz with hz | hz
         · have := ihc z hz; simp; omega

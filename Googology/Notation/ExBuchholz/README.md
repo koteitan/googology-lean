@@ -74,7 +74,7 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | term type, order, decidability | done |
 | strict linear order | done |
 | `G`, standard forms, decidability | done |
-| the unrestricted order is *not* well founded | done |
+| the unrestricted order is **not** well founded | done |
 | the order as a lexicographic product; standard form inherited by the parts | done |
 | sums: accessibility of principal terms gives `WellFounded OTLt` | done |
 | accessibility of the principal terms | **not done** — see below |
@@ -95,16 +95,14 @@ Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 ### What is and is not sourced
 
 The `ψ` definition above is Maksudov's, as stated on the Googology Wiki. The
-notation system for it is due to p進大好きbot; the `G` and standard-form
-clauses here are written out as the natural extension of Buchholz (1986) §2,
-and have **not** been calibrated against a reference implementation. The
-`#guard` lines are the only evidence so far, and they cover a handful of small
-terms. Treat the order as settled and the standard-form predicate as
-provisional until a calibration file exists.
+notation system for it is due to p進大好きbot, and the terms, the order, `G`,
+`OT` and the evaluation here follow that article; see **Calibration** above for
+the clause-by-clause comparison. The fundamental sequences of that article are
+not implemented yet.
 
 ## Why standard forms are needed
 
-`WF.lean` proves that the order on *all* terms is not well founded:
+`WF.lean` proves that the order on **all** terms is not well founded:
 
 ```
 Ω > ψ_0(Ω) > ψ_0(ψ_0(Ω)) > ψ_0(ψ_0(ψ_0(Ω))) > ⋯
@@ -113,6 +111,37 @@ provisional until a calibration file exists.
 descends forever, because `cmp` compares subscripts first and `0 < ψ_0(0)`.
 The chain leaves `OT` at its third term. So `not_wellFounded_lt` is not a
 defect; it is the reason the standard-form condition exists.
+
+## Calibration
+
+The reference is p進大好きbot's article on the ordinal notation associated with
+the extended Buchholz OCF, on the Japanese Googology Wiki. Everything below
+has been compared against it clause by clause.
+
+| | reference | here | verdict |
+|---|---|---|---|
+| terms | `()`, `⟨X₁,X₂⟩`, `(X₁,…,X_m)` | `nil`, `cons a b nil`, `cons …` | isomorphic |
+| the order `<` | six clauses | `cmp` | agrees on every clause |
+| the evaluation `o` | `o⟨Y₁,Y₂⟩ = ψ_{o Y₁}(o Y₂)`, `o` of a sum is the sum | `Term.val` | identical |
+| `G(X,Y) ◁ Z` | at `X ≤ W₁`: `W₂ < Z` and recurse into `W₁` and `W₂` | `G` | **corrected**; see below |
+| `OT` | `⟨X₁,X₂⟩ ∈ OT ↔ X₁, X₂ ∈ OT ∧ G(X₁,X₂) ◁ X₂`, sums weakly decreasing | `isOT` | agrees |
+| fundamental sequences | `dom` and `X[Y]` | — | not implemented yet |
+
+### The correction
+
+`G` originally collected the subscript `c` of an inner `ψ_c(d)` alongside its
+argument `d`, which made `isOT` strictly stronger than the reference. The
+reference collects only `d`, and reaches `c` only by recursion. `G` now does
+the same.
+
+Every theorem in this directory went through unchanged after the correction,
+which says the proofs never leaned on the extra condition.
+
+### What is still open
+
+The reference states that `o` restricted to `OT` is an order **isomorphism**
+onto `C_0(Λ)`. The monotone and injective halves are theorems here
+(`val_lt_val`, `val_inj_of_OT`); surjectivity is not.
 
 ## Well-foundedness: what is done and what remains
 

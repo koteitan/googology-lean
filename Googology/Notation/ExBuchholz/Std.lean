@@ -15,13 +15,14 @@ term of the system, `c` is collected alongside `d`.
 
 namespace Googology.Notation.ExBuchholz.Term
 
-/-- `G a t` collects the subterms of `t` that `ψ_a(·)` must bound: it descends
-into every `ψ_c(d)` whose subscript satisfies `a ≤ c`, and stops at the ones
-with `c < a`. -/
+/-- `G a t` collects the arguments that `ψ_a(·)` must bound: it descends into
+every `ψ_c(d)` whose subscript satisfies `a ≤ c`, keeping `d`, and stops at the
+ones with `c < a`.  The subscript `c` itself is *not* collected — only what is
+reachable inside it. -/
 def G (a : Term) : Term → List Term
   | nil => []
   | cons c d t =>
-      (if a ≤ c then c :: d :: (G a c ++ G a d) else []) ++ G a t
+      (if a ≤ c then d :: (G a c ++ G a d) else []) ++ G a t
 
 /-- The leading principal term of a term, if there is one. -/
 def head? : Term → Option (Term × Term)

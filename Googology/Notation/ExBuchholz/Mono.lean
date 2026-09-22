@@ -86,23 +86,19 @@ theorem main : ∀ n : Nat,
       rw [val_cons]
       refine Ord.Clos.add ?_ ?_
       · by_cases hac : a ≤ c
-        · have hmemc : c ∈ G a (cons c d r) := by
-            rw [G_cons, if_pos hac]; exact List.mem_append_left _ (List.mem_cons_self ..)
-          have hmemd : d ∈ G a (cons c d r) := by
+        · have hmemd : d ∈ G a (cons c d r) := by
             rw [G_cons, if_pos hac]
-            exact List.mem_append_left _ (List.mem_cons_of_mem _ (List.mem_cons_self ..))
+            exact List.mem_append_left _ (List.mem_cons_self ..)
           have hGc : ∀ z ∈ G a c, z.val < β := by
             intro z hz
             refine hG z ?_
             rw [G_cons, if_pos hac]
-            exact List.mem_append_left _ (List.mem_cons_of_mem _ (List.mem_cons_of_mem _
-              (List.mem_append_left _ hz)))
+            exact List.mem_append_left _ (List.mem_cons_of_mem _ (List.mem_append_left _ hz))
           have hGd : ∀ z ∈ G a d, z.val < β := by
             intro z hz
             refine hG z ?_
             rw [G_cons, if_pos hac]
-            exact List.mem_append_left _ (List.mem_cons_of_mem _ (List.mem_cons_of_mem _
-              (List.mem_append_right _ hz)))
+            exact List.mem_append_left _ (List.mem_cons_of_mem _ (List.mem_append_right _ hz))
           have hc : c.val ∈ Ord.CSet a.val β :=
             (ih (size a + size c) (by omega)).2 a c le_rfl ha (OT_fst ht) β hGc
           have hd : d.val ∈ Ord.CSet a.val β :=
