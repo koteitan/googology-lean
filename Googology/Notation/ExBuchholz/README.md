@@ -364,6 +364,9 @@ Nothing is left: the chain is closed.
 | the Bachmann property itself | **done** (`bachmann`) |
 | **`exbOT.WF` and `exbOT.Terminates`** | **done** (`System.lean`) |
 | the expansion system carries an ordinal measure | done (`exbOTEval`) |
+| the closed forms of `ψ` where there are any | done (`Ord/Opow.lean`; see the table above) |
+| **`val` is onto the ordinals below `ε₁`** | **done** (`Trans.BMS.exists_OT_of_lt_eps1`) |
+| `val` onto `C_0(Λ)` | open |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 `axiom`.

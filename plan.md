@@ -115,6 +115,7 @@ says a row of zeros underneath changes neither the rule nor the ordinal, so
 `bmsL r` sits inside `bmsL s` whenever `r ≤ s`.
 
 `Eps0.lean` closes one row as ordinals — it names exactly those below `ε₀` —
+and carries `val`'s surjectivity up to `ε₁`,
 `RankVal.lean` says the rank of the system is that same ordinal and computes
 the first two-row ranks, and `Append.lean` says expansion never reaches back
 across a block, which makes the rank additive over blocks.

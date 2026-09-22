@@ -340,6 +340,9 @@ Bachmann 性は証明済みである。結局、文脈は要らなかった。�
 | Bachmann 性そのもの | **済**（`bachmann`） |
 | **`exbOT.WF` と `exbOT.Terminates`** | **済**（`System.lean`） |
 | 展開系が順序数の測度を持つこと | 済（`exbOTEval`） |
+| 閉じた形が分かる範囲での `ψ` の値 | 済（`Ord/Opow.lean`。上の表を参照） |
+| **`val` が `e1` 未満の順序数の上へ全射であること** | **済**（`Trans.BMS.exists_OT_of_lt_eps1`） |
+| `val` が `C_0(Λ)` の上へ全射であること | 未 |
 
 例外的に `sorry` を許しているわけではない。ファイルに `sorry` も `axiom` も無い。
 
