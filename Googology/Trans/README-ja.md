@@ -58,6 +58,7 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | BMS、拡張ブーフホルツ ψ | `BMS/Prim.lean` | `StepHom` | 原始数列系を `Rewrite` として与え、停止することとその順序数 |
 | BMS、拡張ブーフホルツ ψ | `BMS/Cofinal.lean` | — | `p0(W)` 未満で項が `X[0] < X[1] < ⋯` の上限であること |
 | BMS、拡張ブーフホルツ ψ | `BMS/Bms.lean` | `StepHom` | **1 行の BMS が名指す順序数**、それが `p0(W)` 未満であること、翻訳による 1 行の停止性 |
+| BMS、拡張ブーフホルツ ψ | `BMS/Equiv.lean` | `Equiv` | **原始数列系と `p0(W)` 未満の標準形は、一つの系の二通りの書き方である** |
 | BMS、拡張ブーフホルツ ψ | `BMS/Reach.lean` | — | **標準 1 行行列とは、項が標準形である行列のことちょうどである** |
 | DBMS、拡張ブーフホルツ ψ | `DBMS/OneRow.lean` | `StepHom` | 1 行の DBMS についての同じこと。1 行では生成元が BM4 と一致する。どの行列が標準形かも含む |
 | BMS、拡張ブーフホルツ ψ | `BMS/Commute.lean` | いずれ `StepHom` | 読み取りが展開を `[ ]` に変えること、添字の付け替え `N ↦ N + 1` を込めて |

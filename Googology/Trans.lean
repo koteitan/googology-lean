@@ -9,4 +9,5 @@ import Googology.Trans.BMS.Cofinal
 import Googology.Trans.BMS.Prim
 import Googology.Trans.BMS.Bms
 import Googology.Trans.BMS.Reach
+import Googology.Trans.BMS.Equiv
 import Googology.Trans.DBMS.OneRow
