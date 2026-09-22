@@ -117,6 +117,17 @@ beyond the one stated.
 | `ψ_0(Ω·(n+1) + a)`, `a < ε_{n+1}` | `ε_n·ω^a` | `psi_OmegaMul_add` |
 | `ψ_1(1)` | `Ω·ω` | `psi_one_one` |
 | `ψ_0(Ω·ω)` | `ε_ω` | `psi_Omega_omega` |
+| `ψ_v(a)`, any `v` and `a` | `≤ Ω_v·ω^a` | `psi_le_Omega_mul_opow` |
+| `ψ_v(a)`, `a < fpOmega v`, `v < Ω_v` | `Ω_v·ω^a` | `psi_eq_Omega_mul_opow` |
+| `ψ_1(a)`, `a < fpOmega 1` | `Ω·ω^a` | `psi_one_eq` |
+| `ψ_v(Ω_{v+1})`, `v < Ω_v` | `fpOmega v`, the first fixed point of `x ↦ Ω_v·ω^x` | `psi_Omega_succ` |
+
+The last four rows are `Ord/Level.lean`, which is `Ord/Opow.lean`'s first
+section with the subscript left free: nothing in `ψ_0(a) ≤ ω^a` is about `0`,
+and at subscript `v` the same proof gives `ψ_v(a) ≤ Ω_v·ω^a`, with `Ω_0 = 1`
+making it the old statement. The equality needs `v` to be inside `C_v(a)`,
+for which `v < Ω_v` is enough — and that is a condition, not a triviality: at
+a fixed point of the aleph function `ψ_v(1) = Ω_v`, not `Ω_v·ω`.
 
 `ε₀` is `nfp (ω ^ ·) 0` and `ε₁` is `nfp (ε₀ * ω ^ ·) 0`, the least fixed
 points of those two functions. `Ord/Eps.lean` carries the same two statements

@@ -1,4 +1,4 @@
-import Googology.Notation.ExBuchholz.Opow
+import Googology.Notation.ExBuchholz.Level
 
 /-!
 # `ψ_0(Ω·n)` at every finite `n`
@@ -395,6 +395,134 @@ theorem lt_epsN_of_mem_CSet (n : ℕ)
     exact absurd hxO (not_lt.mpr (le_trans (Omega_one_le_OmegaMul (by omega))
       (self_le_add_right _ _)))
 
+/-! ## One level up from any base
+
+Nothing in the step from `ψ_0(A) = E` to `ψ_0(A + a) = E · ω^a` uses what `A`
+is.  It needs `E` to be a fixed point of `ω ^ ·`, `A` to lie in the closures
+above it, and the countable members of `C_0(A)` to stay below `E`.  So the
+step is proved once here and instantiated at `A = Ω·(n+1)` and at `A = Ω·ω`.
+-/
+
+section Base
+
+variable {A E : Ordinal.{u}}
+
+theorem isPrincipal_add_mul_opow (hE : (ω : Ordinal.{u}) ^ E = E) (a : Ordinal.{u}) :
+    Ordinal.IsPrincipal (· + ·) (E * ω ^ a) := by
+  have h : E * (ω : Ordinal.{u}) ^ a = (ω : Ordinal.{u}) ^ (E + a) := by
+    rw [Ordinal.opow_add, hE]
+  rw [h]
+  exact Ordinal.isPrincipal_add_omega0_opow _
+
+/-- **Every countable member of `C_0(A + a)` is below `E · ω^a`**, given that
+the ones of `C_0(A)` are below `E`. -/
+theorem lt_mul_opow_of_mem_CSet (hmul : psi A 0 = E) (hE : (ω : Ordinal.{u}) ^ E = E)
+    (hEpos : 0 < E) (hbase : ∀ x : Ordinal.{u}, x ∈ CSet 0 A → x.card ≤ ℵ_ 0 → x < E) :
+    ∀ a x : Ordinal.{u}, x ∈ CSet 0 (A + a) → x.card ≤ ℵ_ 0 → x < E * ω ^ a := by
+  intro a
+  induction a using WellFoundedLT.induction with
+  | _ a IH =>
+    rcases eq_or_ne a 0 with rfl | ha
+    · intro x hx hc
+      rw [add_zero] at hx
+      rw [Ordinal.opow_zero, mul_one]
+      exact hbase x hx hc
+    · have key : ∀ b : Ordinal.{u}, b < a → psi (A + b) 0 ≤ E * ω ^ b := by
+        intro b hb
+        by_cases hc : (E * (ω : Ordinal.{u}) ^ b).card ≤ ℵ_ 0
+        · exact psi_le_of_notMem (fun hmem => absurd (IH b hb _ hmem hc) (lt_irrefl _))
+        · exact le_trans (psi_zero_lt_Omega_one _).le (Omega_one_le_of_not_card_le hc)
+      intro x hx
+      induction hx with
+      | @small y h =>
+        intro _
+        rw [Omega_zero, Order.lt_one_iff] at h
+        rw [h]
+        exact lt_of_lt_of_le hEpos (le_mul_opow_self E a)
+      | @add p q _ _ ihp ihq =>
+        intro hcard
+        rw [Ordinal.card_add] at hcard
+        exact isPrincipal_add_mul_opow hE a
+          (ihp (le_trans (self_le_add_right _ _) hcard))
+          (ihq (le_trans (self_le_add_left _ _) hcard))
+      | @coll u e _ _ _ _ =>
+        intro hcard
+        have hu0 : u = 0 := by
+          have hOu : (Ω_ u).card ≤ ℵ_ 0 :=
+            le_trans (Ordinal.card_le_card (Omega_le_psi e.1 u)) hcard
+          exact nonpos_iff_eq_zero.mp (le_of_card_Omega_le hOu)
+        rw [hu0]
+        rcases lt_or_ge e.1 A with hlt | hge
+        · refine lt_of_le_of_lt ?_ (lt_mul_opow_self hEpos ha)
+          rw [← hmul]
+          exact psi_mono 0 hlt.le
+        · have hb : e.1 - A < a := (Ordinal.sub_lt_of_le hge).mpr e.2
+          have heq : A + (e.1 - A) = e.1 := Ordinal.add_sub_cancel_of_le hge
+          refine lt_of_le_of_lt (le_trans (le_of_eq (congrArg (fun z => psi z 0) heq.symm))
+            (key _ hb)) ?_
+          exact (mul_lt_mul_iff_of_pos_left hEpos).mpr
+            ((Ordinal.opow_lt_opow_iff_right Ordinal.one_lt_omega0).mpr hb)
+
+/-- **`ψ_0(A + a) ≤ E · ω^a`**, with no condition on `a`. -/
+theorem psi_add_le (hmul : psi A 0 = E) (hE : (ω : Ordinal.{u}) ^ E = E) (hEpos : 0 < E)
+    (hbase : ∀ x : Ordinal.{u}, x ∈ CSet 0 A → x.card ≤ ℵ_ 0 → x < E) (a : Ordinal.{u}) :
+    psi (A + a) 0 ≤ E * ω ^ a := by
+  by_cases hc : (E * (ω : Ordinal.{u}) ^ a).card ≤ ℵ_ 0
+  · exact psi_le_of_notMem
+      (fun hmem => absurd (lt_mul_opow_of_mem_CSet hmul hE hEpos hbase a _ hmem hc) (lt_irrefl _))
+  · exact le_trans (psi_zero_lt_Omega_one _).le (Omega_one_le_of_not_card_le hc)
+
+theorem lt_self_mul_opow {b : Ordinal.{u}}
+    (h : b < Ordinal.nfp (fun x => E * (ω : Ordinal.{u}) ^ x) 0) : b < E * ω ^ b := by
+  rcases lt_or_ge b (E * (ω : Ordinal.{u}) ^ b) with hb | hb
+  · exact hb
+  · exact absurd h (not_lt.mpr
+      (Ordinal.nfp_le_fp (mul_opow_monotone E) (by simp : (0 : Ordinal.{u}) ≤ b) hb))
+
+theorem mul_opow_lt_nfp (hEpos : 0 < E) {b : Ordinal.{u}}
+    (h : b < Ordinal.nfp (fun x => E * (ω : Ordinal.{u}) ^ x) 0) :
+    E * ω ^ b < Ordinal.nfp (fun x => E * (ω : Ordinal.{u}) ^ x) 0 := by
+  obtain ⟨j, hj⟩ := Ordinal.lt_nfp_iff.mp h
+  refine lt_of_lt_of_le ?_ (Ordinal.iterate_le_nfp
+    (fun x => E * (ω : Ordinal.{u}) ^ x) 0 (j + 1))
+  rw [Function.iterate_succ_apply']
+  exact (mul_lt_mul_iff_of_pos_left hEpos).mpr
+    ((Ordinal.opow_lt_opow_iff_right Ordinal.one_lt_omega0).mpr hj)
+
+/-- **`ψ_0(A + a) = E · ω^a` up to the first fixed point of `E · ω^·`.** -/
+theorem psi_add_eq (hmul : psi A 0 = E) (hEpos : 0 < E)
+    (hle : ∀ c : Ordinal.{u}, psi (A + c) 0 ≤ E * ω ^ c)
+    (hAmem : ∀ a : Ordinal.{u}, A ∈ CSet 0 (A + a)) :
+    ∀ a : Ordinal.{u}, a < Ordinal.nfp (fun x => E * (ω : Ordinal.{u}) ^ x) 0 →
+      psi (A + a) 0 = E * ω ^ a := by
+  intro a
+  induction a using WellFoundedLT.induction with
+  | _ a IH =>
+    intro ha
+    have hG : a ≤ psi (A + a) 0 := by
+      by_contra hc
+      have hb : psi (A + a) 0 < a := not_le.mp hc
+      have h1 := IH _ hb (lt_trans hb ha)
+      have h2 : psi (A + psi (A + a) 0) 0 ≤ psi (A + a) 0 :=
+        psi_mono 0 ((add_le_add_iff_left _).mpr hb.le)
+      rw [h1] at h2
+      exact absurd h2 (not_le.mpr (lt_self_mul_opow (lt_trans hb ha)))
+    have hpow : ∀ b : Ordinal.{u}, b < a → E * (ω : Ordinal.{u}) ^ b ∈ CSet 0 (A + a) := by
+      intro b hb
+      have hbmem : b ∈ CSet 0 (A + a) := mem_CSet_of_lt_psi (lt_of_lt_of_le hb hG)
+      have := CSet.psi_mem (v := 0) (a := A + a) (u := 0) (e := A + b)
+        ((add_lt_add_iff_left _).mpr hb) (CSet.zero_mem 0 _) (CSet.add_mem (hAmem a) hbmem)
+      rwa [IH b hb (lt_trans hb ha)] at this
+    refine le_antisymm (hle a) ?_
+    by_contra hc
+    refine psi_notMem (A + a) 0 ?_
+    refine mem_of_lt_mul_opow E hEpos (fun z hz => ?_)
+      (fun _ hx _ hy => CSet.add_mem hx hy) hpow _ (not_le.mp hc)
+    exact mem_CSet_of_lt_psi (lt_of_lt_of_le hz (le_trans (le_of_eq hmul.symm)
+      (psi_mono 0 (self_le_add_right _ _))))
+
+end Base
+
 /-- **`ψ_0(Ω·(n+1) + a) ≤ ε_n · ω^a`**, with no condition on `a`, given the
 closure bound. -/
 theorem psi_OmegaMul_add_le (n : ℕ)
@@ -405,99 +533,28 @@ theorem psi_OmegaMul_add_le (n : ℕ)
   · exact psi_le_of_notMem (fun hmem => absurd (hbound a _ hmem hc) (lt_irrefl _))
   · exact le_trans (psi_zero_lt_Omega_one _).le (Omega_one_le_of_not_card_le hc)
 
-/-- **`ψ_0(Ω·(n+1) + a) = ε_n · ω^a` below `ε_{n+1}`.**  The proof is the one
-for `ψ_0(Ω + a) = ε₀ · ω^a`, one level up. -/
+/-- **`ψ_0(Ω·(n+1) + a) = ε_n · ω^a` below `ε_{n+1}`.**  The step above any
+base, at `A = Ω·(n+1)`. -/
 theorem psi_OmegaMul_add_eq (n : ℕ)
     (hmul : psi (OmegaMul.{u} (n + 1)) 0 = epsN.{u} n)
     (hle : ∀ c : Ordinal.{u}, psi (OmegaMul.{u} (n + 1) + c) 0 ≤ epsN.{u} n * ω ^ c) :
     ∀ a : Ordinal.{u}, a < epsN.{u} (n + 1) →
       psi (OmegaMul.{u} (n + 1) + a) 0 = epsN.{u} n * ω ^ a := by
-  intro a
-  induction a using WellFoundedLT.induction with
-  | _ a IH =>
-    intro ha
-    have hG : a ≤ psi (OmegaMul.{u} (n + 1) + a) 0 := by
-      by_contra hc
-      have hb : psi (OmegaMul.{u} (n + 1) + a) 0 < a := not_le.mp hc
-      have h1 := IH _ hb (lt_trans hb ha)
-      have h2 : psi (OmegaMul.{u} (n + 1) + psi (OmegaMul.{u} (n + 1) + a) 0) 0
-          ≤ psi (OmegaMul.{u} (n + 1) + a) 0 :=
-        psi_mono 0 ((add_le_add_iff_left _).mpr hb.le)
-      rw [h1] at h2
-      exact absurd h2 (not_le.mpr (lt_epsN_mul_opow_self (lt_trans hb ha)))
-    have hpos : (0 : Ordinal.{u}) < OmegaMul.{u} (n + 1) + a :=
-      lt_of_lt_of_le (OmegaMul_succ_pos n) (self_le_add_right _ _)
-    have hOmega : OmegaMul.{u} (n + 1) ∈ CSet 0 (OmegaMul.{u} (n + 1) + a) :=
-      OmegaMul_mem_CSet hpos (n + 1)
-    have hpow : ∀ b : Ordinal.{u}, b < a →
-        epsN.{u} n * (ω : Ordinal.{u}) ^ b ∈ CSet 0 (OmegaMul.{u} (n + 1) + a) := by
-      intro b hb
-      have hbmem : b ∈ CSet 0 (OmegaMul.{u} (n + 1) + a) :=
-        mem_CSet_of_lt_psi (lt_of_lt_of_le hb hG)
-      have := CSet.psi_mem (v := 0) (a := OmegaMul.{u} (n + 1) + a) (u := 0)
-        (e := OmegaMul.{u} (n + 1) + b) ((add_lt_add_iff_left _).mpr hb)
-        (CSet.zero_mem 0 _) (CSet.add_mem hOmega hbmem)
-      rwa [IH b hb (lt_trans hb ha)] at this
-    refine le_antisymm (hle a) ?_
-    by_contra hc
-    refine psi_notMem (OmegaMul.{u} (n + 1) + a) 0 ?_
-    refine mem_of_lt_mul_opow (epsN.{u} n) (epsN_pos n) (fun z hz => ?_)
-      (fun _ hx _ hy => CSet.add_mem hx hy) hpow _ (not_le.mp hc)
-    exact mem_CSet_of_lt_psi (lt_of_lt_of_le hz (le_trans (le_of_eq hmul.symm)
-      (psi_mono 0 (self_le_add_right _ _))))
+  intro a ha
+  rw [epsN_succ] at ha
+  refine psi_add_eq hmul (epsN_pos n) hle (fun b => ?_) a ha
+  exact OmegaMul_mem_CSet
+    (lt_of_lt_of_le (OmegaMul_succ_pos n) (self_le_add_right _ _)) (n + 1)
 
-/-- **Every countable member of `C_0(Ω·(n+1) + a)` is below `ε_n · ω^a`.** -/
+/-- **Every countable member of `C_0(Ω·(n+1) + a)` is below `ε_n · ω^a`.**
+The step above any base, at `A = Ω·(n+1)`. -/
 theorem lt_epsN_mul_opow_of_mem_CSet (n : ℕ)
     (hmul : psi (OmegaMul.{u} (n + 1)) 0 = epsN.{u} n)
     (hbase : ∀ x : Ordinal.{u}, x ∈ CSet 0 (OmegaMul.{u} (n + 1)) → x.card ≤ ℵ_ 0 →
       x < epsN.{u} n) :
     ∀ a x : Ordinal.{u}, x ∈ CSet 0 (OmegaMul.{u} (n + 1) + a) → x.card ≤ ℵ_ 0 →
-      x < epsN.{u} n * ω ^ a := by
-  intro a
-  induction a using WellFoundedLT.induction with
-  | _ a IH =>
-    rcases eq_or_ne a 0 with rfl | ha
-    · intro x hx hc
-      rw [add_zero] at hx
-      rw [Ordinal.opow_zero, mul_one]
-      exact hbase x hx hc
-    · have key : ∀ b : Ordinal.{u}, b < a →
-          psi (OmegaMul.{u} (n + 1) + b) 0 ≤ epsN.{u} n * ω ^ b := by
-        intro b hb
-        by_cases hc : (epsN.{u} n * (ω : Ordinal.{u}) ^ b).card ≤ ℵ_ 0
-        · exact psi_le_of_notMem (fun hmem => absurd (IH b hb _ hmem hc) (lt_irrefl _))
-        · exact le_trans (psi_zero_lt_Omega_one _).le (Omega_one_le_of_not_card_le hc)
-      intro x hx
-      induction hx with
-      | @small y h =>
-        intro _
-        rw [Omega_zero, Order.lt_one_iff] at h
-        rw [h]
-        exact lt_of_lt_of_le (epsN_pos n) (epsN_le_mul_opow n a)
-      | @add p q _ _ ihp ihq =>
-        intro hcard
-        rw [Ordinal.card_add] at hcard
-        exact isPrincipal_add_epsN_mul_opow n a
-          (ihp (le_trans (self_le_add_right _ _) hcard))
-          (ihq (le_trans (self_le_add_left _ _) hcard))
-      | @coll u e _ _ _ _ =>
-        intro hcard
-        have hu0 : u = 0 := by
-          have hOu : (Ω_ u).card ≤ ℵ_ 0 :=
-            le_trans (Ordinal.card_le_card (Omega_le_psi e.1 u)) hcard
-          exact nonpos_iff_eq_zero.mp (le_of_card_Omega_le hOu)
-        rw [hu0]
-        rcases lt_or_ge e.1 (OmegaMul.{u} (n + 1)) with hlt | hge
-        · refine lt_of_le_of_lt ?_ (epsN_lt_mul_opow n ha)
-          rw [← hmul]
-          exact psi_mono 0 hlt.le
-        · have hb : e.1 - OmegaMul.{u} (n + 1) < a := (Ordinal.sub_lt_of_le hge).mpr e.2
-          have heq : OmegaMul.{u} (n + 1) + (e.1 - OmegaMul.{u} (n + 1)) = e.1 :=
-            Ordinal.add_sub_cancel_of_le hge
-          refine lt_of_le_of_lt (le_trans (le_of_eq (congrArg (fun z => psi z 0) heq.symm))
-            (key _ hb)) ?_
-          exact (mul_lt_mul_iff_of_pos_left (epsN_pos n)).mpr
-            ((Ordinal.opow_lt_opow_iff_right Ordinal.one_lt_omega0).mpr hb)
+      x < epsN.{u} n * ω ^ a :=
+  lt_mul_opow_of_mem_CSet hmul (opow_epsN n) (epsN_pos n) hbase
 
 /-! ## The theorem -/
 
@@ -709,12 +766,6 @@ theorem psi_Omega_omega : psi ((Ω_ 1 : Ordinal.{u}) * ω) 0 = epsW.{u} := by
 
 /-! ### `ψ_1(1) = Ω·ω` -/
 
-theorem lt_Omega_succ_of_card_le {v x : Ordinal.{u}} (h : x.card ≤ ℵ_ v) : x < Ω_ (v + 1) := by
-  rw [Omega_of_ne_zero (add_one_ne_zero_ord v), ← Cardinal.ord_aleph]
-  refine Cardinal.lt_ord.mpr (lt_of_le_of_lt h ?_)
-  rw [← Cardinal.succ_aleph]
-  exact Order.lt_succ _
-
 theorem card_Omega_one : (Ω_ 1 : Ordinal.{u}).card = ℵ_ 1 := by
   rw [Omega_of_ne_zero one_ne_zero, ← Cardinal.ord_aleph, Cardinal.card_ord]
 
@@ -724,62 +775,5 @@ theorem OmegaMul_omega0_lt_Omega_two : (Ω_ 1 : Ordinal.{u}) * ω < Ω_ 2 := by
   rw [Ordinal.card_mul, card_Omega_one, Ordinal.card_omega0]
   exact le_trans (mul_le_mul' (le_refl _) (Cardinal.aleph0_le_aleph 1))
     (le_of_eq (Cardinal.mul_eq_self (Cardinal.aleph0_le_aleph 1)))
-
-/-- **A member of `C_1(1)` is `Ω·k + c` with `c` countable, or already past
-`Ω_2`.**  With no argument below `1` but `0`, the only collapses in the
-closure are the `Ω_u = ψ_u(0)`. -/
-theorem mem_CSet_one_one : ∀ x : Ordinal.{u}, x ∈ CSet 1 1 →
-    (∃ k : ℕ, ∃ c : Ordinal.{u}, c < Ω_ 1 ∧ x = OmegaMul.{u} k + c) ∨ Ω_ 2 ≤ x := by
-  intro x hx
-  induction hx with
-  | @small y h => exact Or.inl ⟨0, y, h, by rw [OmegaMul_zero, zero_add]⟩
-  | @add p q _ _ ihp ihq =>
-    rcases ihp with ⟨k, c, hc, rfl⟩ | hp
-    · rcases ihq with ⟨k', c', hc', rfl⟩ | hq
-      · cases k' with
-        | zero =>
-          exact Or.inl ⟨k, c + c', isPrincipal_add_Omega 1 hc hc', by
-            rw [OmegaMul_zero, zero_add, add_assoc]⟩
-        | succ j =>
-          refine Or.inl ⟨k + (j + 1), c', hc', ?_⟩
-          rw [← add_assoc, add_assoc (OmegaMul.{u} k) c (OmegaMul.{u} (j + 1)),
-            add_OmegaMul hc (j + 1) (by omega), ← OmegaMul_add]
-      · exact Or.inr (le_trans hq (self_le_add_left _ _))
-    · exact Or.inr (le_trans hp (self_le_add_right _ _))
-  | @coll u e _ _ _ _ =>
-    have he0 : e.1 = 0 := Order.lt_one_iff.mp e.2
-    rw [he0, psi_zero_arg]
-    rcases eq_or_ne u 0 with rfl | hu0
-    · refine Or.inl ⟨0, 1, ?_, by rw [Omega_zero, OmegaMul_zero, zero_add]⟩
-      rw [Omega_of_ne_zero one_ne_zero]
-      exact lt_of_lt_of_le Ordinal.one_lt_omega0 (omega0_le_omega 1)
-    · rcases eq_or_ne u 1 with rfl | hu1
-      · exact Or.inl ⟨1, 0, Omega_pos 1, by rw [OmegaMul_one, add_zero]⟩
-      · refine Or.inr (Omega_mono ?_)
-        have h1 : (1 : Ordinal.{u}) < u := by
-          rcases lt_trichotomy u 1 with h | h | h
-          · exact absurd (Order.lt_one_iff.mp h) hu0
-          · exact absurd h hu1
-          · exact h
-        rw [show (2 : Ordinal.{u}) = 1 + 1 from one_add_one_eq_two.symm,
-          ← Order.succ_eq_add_one]
-        exact Order.succ_le_of_lt h1
-
-/-- **`ψ_1(1) = Ω·ω`.**  Everything below is a finite multiple of `Ω` plus
-something countable, and `Ω·ω` is not. -/
-theorem psi_one_one : psi 1 1 = (Ω_ 1 : Ordinal.{u}) * ω := by
-  refine le_antisymm (psi_le_of_notMem (fun hmem => ?_)) ?_
-  · rcases mem_CSet_one_one _ hmem with ⟨k, c, hc, heq⟩ | hge
-    · have hlt : (Ω_ 1 : Ordinal.{u}) * ω < OmegaMul.{u} (k + 1) := by
-        rw [OmegaMul_succ]
-        conv_lhs => rw [heq]
-        exact (add_lt_add_iff_left _).mpr hc
-      exact absurd (lt_of_lt_of_le hlt (OmegaMul_le_omega0_mul (k + 1))) (lt_irrefl _)
-    · exact absurd (lt_of_lt_of_le OmegaMul_omega0_lt_Omega_two hge) (lt_irrefl _)
-  · refine le_of_forall_lt (fun x hx => ?_)
-    obtain ⟨n, hn⟩ := lt_OmegaMul_omega0_iff.mp hx
-    refine lt_psi_of_mem (mem_CSet_of_le (OmegaMul_mem_CSet_one zero_lt_one n) x hn.le
-      (card_OmegaMul n)) ?_
-    exact le_trans (Ordinal.card_le_card hn.le) (card_OmegaMul n)
 
 end Googology.Notation.ExBuchholz.Ord

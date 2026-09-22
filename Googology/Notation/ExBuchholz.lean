@@ -7,6 +7,7 @@ import Googology.Notation.ExBuchholz.FS
 import Googology.Notation.ExBuchholz.Closure
 import Googology.Notation.ExBuchholz.Ord
 import Googology.Notation.ExBuchholz.Opow
+import Googology.Notation.ExBuchholz.Level
 import Googology.Notation.ExBuchholz.Eps
 import Googology.Notation.ExBuchholz.Eval
 import Googology.Notation.ExBuchholz.Mono

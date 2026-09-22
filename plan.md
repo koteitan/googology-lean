@@ -73,6 +73,7 @@ import this and nothing else.
 | `Sum.lean` | done — `wellFounded_OTLt` given accessibility of the principal terms |
 | `Ord.lean` | done — `ψ` on the ordinals, the cardinality bound, downward closure, additive principality |
 | `Opow.lean` | done — the closed forms of `ψ_0`: `ω^a` below `ε₀`, `ε₀·ω^a` below `ε₁`, and the first two steps of a normal form theorem |
+| `Level.lean` | done — the same at every subscript: `ψ_v(a) ≤ Ω_v·ω^a`, with equality below the first fixed point, and `ψ_v(Ω_{v+1})` is that fixed point |
 | `Eps.lean` | done — `ψ_0(Ω·(n+1)) = ε_n` at every finite `n`, by one induction, and `ψ_0(Ω·ω) = ε_ω` with `ψ_1(1) = Ω·ω` |
 | `Eval.lean` | done — `val`, `Lam`, `val_mem_CSet`, the two `ψ` comparison helpers |
 | `Mono.lean` | done — the simultaneous induction, `val_lt_val`, `OTLt_wf` |

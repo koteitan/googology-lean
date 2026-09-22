@@ -68,6 +68,7 @@ BMS は停止する
 | `Sum.lean` | 済。主項の可到達性を仮定した `wellFounded_OTLt` |
 | `Ord.lean` | 済。順序数の上の `ψ`、濃度評価、下方閉包性、加法的主要性 |
 | `Opow.lean` | 済。`p0` の閉じた形。`e0` 未満で `w^a`、`e1` 未満で `e0·w^a`。正規形定理の最初の二歩 |
+| `Level.lean` | 済。同じことを全添字で。`p_v(a) <= W_v·w^a`。最小不動点未満で等号。`p_v(W_{v+1})` がその不動点 |
 | `Eps.lean` | 済。有限の全段での `p0(W·(n+1)) = e_n`。帰納法一本。`p1(1) = W·w` と `p0(W·w) = e_w` |
 | `Eval.lean` | 済。`val`、`Lam`、`val_mem_CSet`、`ψ` の比較補題 2 本 |
 | `Mono.lean` | 済。同時帰納、`val_lt_val`、`OTLt_wf` |

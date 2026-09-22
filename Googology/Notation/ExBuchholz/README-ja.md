@@ -111,6 +111,17 @@ inductive Term where
 | `p0(W·(n+1) + a)`、`a < e_{n+1}` | `e_n·w^a` | `psi_OmegaMul_add` |
 | `p1(1)` | `W·w` | `psi_one_one` |
 | `p0(W·w)` | `e_w` | `psi_Omega_omega` |
+| `p_v(a)`、任意の `v` と `a` | `<= W_v·w^a` | `psi_le_Omega_mul_opow` |
+| `p_v(a)`、`a < fpOmega v`、`v < W_v` | `W_v·w^a` | `psi_eq_Omega_mul_opow` |
+| `p1(a)`、`a < fpOmega 1` | `W·w^a` | `psi_one_eq` |
+| `p_v(W_{v+1})`、`v < W_v` | `fpOmega v`。`x ↦ W_v·w^x` の最小不動点 | `psi_Omega_succ` |
+
+最後の 4 行が `Ord/Level.lean` である。`Ord/Opow.lean` の最初の節を、添字を自由に
+したものである。`p0(a) <= w^a` の論法は `0` について何も使っていない。添字 `v` でも
+同じ証明が `p_v(a) <= W_v·w^a` を与える。`W_0 = 1` なので、`v = 0` では元の主張に
+なる。等号の方は `v` 自身が `C_v(a)` に入っている必要があり、それには `v < W_v` で
+足りる。これは自明な条件ではない。aleph 関数の不動点では `p_v(1) = W_v` であって
+`W_v·w` ではない。
 
 `e0` は `nfp (w ^ ·) 0`、`e1` は `nfp (e0 * w ^ ·) 0` で、それぞれその関数の最小
 不動点である。`Ord/Eps.lean` は同じ二つを有限の全段で一度に持つ。`epsN n` が
