@@ -1,5 +1,5 @@
 name = "googology"
-version = "0.6.71"
+version = "0.6.72"
 defaultTargets = ["Googology", "Test"]
 
 [leanOptions]

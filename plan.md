@@ -202,9 +202,13 @@ That is `Mono.lean`.
    sequence system ends — with no two-row reading, which there still is
    not. `rank_gen_eq_iSup` is the same at every number of rows: the
    `r + 2`-row generator's rank is the limit of the `r + 1`-row generators'
-   ranks. What it does not give is the rank of the later generators
-   `(0,0)(1,1)(2,2)` and beyond, whose expansions are not zero-row
-   matrices.
+   ranks. `BMS/Append.lean` adds the additive structure: expansion never
+   reaches back across a column whose row-`0` entry is `0`, so the rank is
+   additive over those blocks — `rank_appendState` — and three more two-row
+   values follow: `ε₀·n` for `n` copies of `(0,0)(1,1)`, and `ε₀·ω` for
+   `(0,0)(1,1)(1,0)`, which expands into exactly those. What is still out of
+   reach is the rank of the later generators `(0,0)(1,1)(2,2)` and beyond,
+   whose expansions are neither zero-row matrices nor block repetitions.
 
    The states of `prim` — matrices whose term is a standard form — are
    exactly the standard one-row matrices: `std_entries_iff`. And
@@ -325,10 +329,10 @@ The other two are not Lean problems.
   from matrices to ordinals. The sources checked give worked values, not a
   rule, and a rule guessed to fit them is not worth committing. The rank
   reaches single values without it — `rank_pairGen`, `rank_gen_eq_iSup`,
-  `rank_succAll` — but only where the expansions are already understood:
-  the generators, and the columns that have no parent. A matrix like
-  `(0,0)(1,1)(1,0)` would need the additive structure, which is the reading
-  again.
+  `rank_succAll`, `rank_omegaAll` — but only where the expansions are already understood:
+  the generators, the columns that have no parent, and the block repetitions
+  that `BMS/Append.lean` reaches. A matrix like `(0,0)(1,1)(2,1)` is none of
+  those.
 * **The Y sequence.** Its official definition is a program and its
   termination is open; see item 4.
 

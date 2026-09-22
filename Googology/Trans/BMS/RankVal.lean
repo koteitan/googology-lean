@@ -1,6 +1,7 @@
 import Googology.Trans.BMS.Same
 import Googology.Trans.BMS.Eps0
 import Googology.Trans.BMS.ZeroRow
+import Googology.Trans.BMS.Append
 
 /-!
 # The rank of the system is the ordinal of the term
@@ -27,6 +28,12 @@ underneath, and `BMS/Embed.lean` carries their ordinals across unchanged, so
 its rank comes out as `ε₀` — the pair sequence system starts where the
 primitive sequence system ends.  That is also the value the correspondence
 tables give `(0,0)(1,1)`.
+
+`rank_appendState` takes it further.  `BMS/Append.lean` says expansion never
+reaches back across a column whose row-`0` entry is `0`, so the rank is
+additive over those blocks, and `n` copies of `(0,0)(1,1)` have rank `ε₀·n`.
+`(0,0)(1,1)(1,0)` expands into exactly those, so its rank is `ε₀·ω` — the
+tables' third two-row entry, and again a theorem rather than an assumption.
 -/
 
 namespace Googology.Trans.BMS
@@ -292,5 +299,135 @@ theorem rank_succAll :
     by simp) (fun k => Subtype.ext ?_)
   show expandRL 2 k [[0, 0], [1, 1], [0, 0]] = [[0, 0], [1, 1]]
   rfl
+
+/-! ### The rank is additive over blocks -/
+
+/-- Two matrices, one after the other. -/
+def appendState {r : Nat} (A B : (bmsAllL r).State) : (bmsAllL r).State :=
+  ⟨A.1 ++ B.1, fun c hc => by
+    rcases List.mem_append.mp hc with h | h
+    · exact A.2 c h
+    · exact B.2 c h⟩
+
+/-- **The rank is additive over blocks**: a matrix that starts a block — its
+first column has row-`0` entry `0` — contributes its own rank, whatever
+stands in front of it. -/
+theorem rank_appendState (r : Nat) : ∀ B : (bmsAllL r).State,
+    ((B.1[0]!)[0]! = 0 ∨ B.1 = []) → ∀ A : (bmsAllL r).State,
+      IsWellFounded.rank (bmsAllL r).Rel (appendState A B)
+        = IsWellFounded.rank (bmsAllL r).Rel A + IsWellFounded.rank (bmsAllL r).Rel B := by
+  intro B
+  induction B using WellFounded.induction (bmsAllL_wf r) with
+  | _ B IH =>
+    intro hB0 A
+    by_cases hBnil : B.1 = []
+    · have hA : appendState A B = A := Subtype.ext (by
+        show A.1 ++ B.1 = A.1
+        rw [hBnil, List.append_nil])
+      rw [hA, Rewrite.rank_halted (show (bmsAllL r).halted B from hBnil), add_zero]
+    · have h0 : (B.1[0]!)[0]! = 0 := hB0.resolve_right hBnil
+      have hnh : ¬ (bmsAllL r).halted B := hBnil
+      have hnhAB : ¬ (bmsAllL r).halted (appendState A B) := by
+        show ¬ A.1 ++ B.1 = []
+        intro hc
+        exact hBnil (List.append_eq_nil_iff.mp hc).2
+      rw [Rewrite.rank_eq_iSup_nat hnhAB, Rewrite.rank_eq_iSup_nat hnh, add_iSup]
+      refine iSup_congr (fun N => ?_)
+      have hstep : (bmsAllL r).step (appendState A B) N
+          = appendState A ((bmsAllL r).step B N) :=
+        Subtype.ext (expandRL_append (r + 1) N A.1 B.1 h0 hBnil)
+      rw [hstep, IH ((bmsAllL r).step B N) ⟨hnh, N, rfl⟩ ?_ A, Order.succ_eq_add_one,
+        Order.succ_eq_add_one, add_assoc]
+      exact (head_expandRL (r + 1) N (Nat.succ_pos r) B.1 h0).symm
+
+/-! ### `(0,0)(1,1)(1,0)` has rank `ε₀·ω` -/
+
+/-- `n` copies of `(0,0)(1,1)`. -/
+def blockRep : Nat → List (List Nat)
+  | 0 => []
+  | n + 1 => blockRep n ++ [[0, 0], [1, 1]]
+
+theorem blockRep_col_len : ∀ n, ∀ c ∈ blockRep n, c.length = 1 + 1 := by
+  intro n
+  induction n with
+  | zero => intro c hc; exact absurd hc (by simp [blockRep])
+  | succ m ih =>
+    intro c hc
+    rcases List.mem_append.mp hc with h | h
+    · exact ih c h
+    · rcases List.mem_cons.mp h with rfl | h2
+      · rfl
+      · rcases List.mem_cons.mp h2 with rfl | h3
+        · rfl
+        · exact absurd h3 (by simp)
+
+def blockRepState (n : Nat) : (bmsAllL 1).State := ⟨blockRep n, blockRep_col_len n⟩
+
+theorem blockRepState_succ (n : Nat) :
+    blockRepState (n + 1) = appendState (blockRepState n) genAll := rfl
+
+/-- **`n` copies of `(0,0)(1,1)` have rank `ε₀·n`.** -/
+theorem rank_blockRepState (n : Nat) :
+    IsWellFounded.rank (bmsAllL 1).Rel (blockRepState n) = Ord.eps0 * (n : Ordinal) := by
+  induction n with
+  | zero =>
+    rw [Nat.cast_zero, mul_zero]
+    exact Rewrite.rank_halted (show (blockRepState 0).1 = [] from rfl)
+  | succ m ih =>
+    rw [blockRepState_succ, rank_appendState 1 genAll (Or.inl rfl) (blockRepState m), ih,
+      rank_genAll, Nat.cast_succ, mul_add, mul_one]
+
+theorem map_range_blockRep : ∀ n : Nat,
+    (List.range (n * 2)).map (fun t => if t % 2 = 0 then ([0, 0] : List Nat) else [1, 1])
+      = blockRep n := by
+  intro n
+  induction n with
+  | zero => rfl
+  | succ m ih =>
+    rw [show (m + 1) * 2 = m * 2 + 2 from by ring, List.range_add, List.map_append, ih,
+      show List.range 2 = [0, 1] from rfl]
+    simp only [List.map_cons, List.map_nil]
+    rw [Nat.add_zero, show m * 2 % 2 = 0 from by omega, if_pos rfl,
+      show (m * 2 + 1) % 2 = 1 from by omega, if_neg (by omega)]
+    rfl
+
+/-- `(0,0)(1,1)(1,0)`. -/
+def omegaAll : (bmsAllL 1).State := ⟨[[0, 0], [1, 1], [1, 0]], by decide⟩
+
+theorem step_omegaAll (N : Nat) : (bmsAllL 1).step omegaAll N = blockRepState (N + 1) := by
+  refine Subtype.ext ?_
+  show expandRL 2 N [[0, 0], [1, 1], [1, 0]] = blockRep (N + 1)
+  rw [expandRL, show badRootR 2 [[0, 0], [1, 1], [1, 0]] = some 0 from rfl]
+  dsimp only
+  rw [show ([[0, 0], [1, 1], [1, 0]] : List (List Nat)).length - 1 - 0 = 2 from rfl,
+    List.range_zero, List.map_nil, List.nil_append,
+    show m0L 2 [[0, 0], [1, 1], [1, 0]] = 0 from rfl]
+  refine Eq.trans (List.map_congr_left (fun t _ => ?_)) (map_range_blockRep (N + 1))
+  simp only [Nat.not_lt_zero, decide_false, Bool.false_and, Nat.zero_add]
+  rcases (by omega : t % 2 = 0 ∨ t % 2 = 1) with h | h
+  · rw [h, if_pos rfl]
+    rfl
+  · rw [h, if_neg (by omega)]
+    rfl
+
+/-- **`(0,0)(1,1)(1,0)` has rank `ε₀·ω`.**  Its expansions are `N + 1` copies
+of `(0,0)(1,1)`, and the rank is additive over them. -/
+theorem rank_omegaAll :
+    IsWellFounded.rank (bmsAllL 1).Rel omegaAll = Ord.eps0 * Ordinal.omega0 := by
+  rw [Rewrite.rank_eq_iSup_nat (show ¬ (bmsAllL 1).halted omegaAll from by
+    show ¬ ([[0, 0], [1, 1], [1, 0]] : List (List Nat)) = []
+    simp)]
+  refine le_antisymm (Ordinal.iSup_le (fun N => ?_)) ?_
+  · rw [step_omegaAll, rank_blockRepState]
+    refine Order.succ_le_of_lt ?_
+    exact (mul_lt_mul_iff_of_pos_left Ord.eps0_pos).mpr (Ordinal.natCast_lt_omega0 (N + 1))
+  · rw [← Ordinal.iSup_natCast, Ordinal.mul_iSup]
+    refine Ordinal.iSup_le (fun n => ?_)
+    refine le_trans ?_ (Ordinal.le_iSup
+      (fun N : ℕ => Order.succ (IsWellFounded.rank (bmsAllL 1).Rel
+        ((bmsAllL 1).step omegaAll N))) n)
+    rw [step_omegaAll, rank_blockRepState]
+    refine le_trans ?_ (Order.le_succ _)
+    exact mul_le_mul_right (by exact_mod_cast Nat.le_succ n) _
 
 end Googology.Trans.BMS

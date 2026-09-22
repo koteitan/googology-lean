@@ -69,6 +69,9 @@ Names are written relative to `Googology`.
 | **the two-row generator `(0,0)(1,1)` has rank `ε₀`** — two rows start where one row ends | `Trans.BMS.rank_pairGen` |
 | and at every number of rows the generator is the limit of the previous row's generators | `Trans.BMS.rank_gen_eq_iSup`, `Trans.BMS.rank_gen_lt` |
 | `(0,0)(1,1)(0,0)` has rank `ε₀ + 1`: its last column has no parent, so every bracket drops it | `Trans.BMS.rank_succAll`, `Rewrite.rank_succ_of_const_step` |
+| **expansion never reaches back across a block** — a column whose row-`0` entry is `0` | `Trans.BMS.expandRL_append` |
+| **so the rank is additive over blocks**, and `n` copies of `(0,0)(1,1)` have rank `ε₀·n` | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_blockRepState` |
+| `(0,0)(1,1)(1,0)` has rank `ε₀·ω` | `Trans.BMS.rank_omegaAll` |
 | below `ψ_0(Ω)` a term is the least upper bound of its fundamental sequence | `Trans.BMS.fs_lub` |
 | **the standard one-row matrices are exactly the matrices whose term is standard** | `Trans.BMS.std_entries_iff`, `Trans.BMS.exists_bms_of_lt_e0` |
 | **the primitive sequence system and the standard forms below `ψ_0(Ω)` are equivalent** | `Trans.BMS.primEquivE0` |

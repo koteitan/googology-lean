@@ -1,4 +1,4 @@
-import Googology.Trans.BMS.Agree
+import Googology.Trans.BMS.AllL
 
 /-!
 # Expansion only looks at the last block
@@ -280,5 +280,45 @@ theorem expandRL_append (r N : Nat) (A B : List (List Nat)) (h0 : (B[0]!)[0]! = 
           = (p == p + t % (B.length - 1 - p)) from by
             rw [Bool.eq_iff_iff, beq_iff_eq, beq_iff_eq]
             omega]
+
+/-! ### The first column stays -/
+
+theorem getElem!_map_range {α : Type} [Inhabited α] (n : Nat) (f : Nat → α) {i : Nat}
+    (h : i < n) : ((List.range n).map f)[i]! = f i := by
+  rw [getElem!_pos _ i (by rw [List.length_map, List.length_range]; exact h),
+    List.getElem_map, List.getElem_range]
+
+/-- **Expansion does not change the first column's row-`0` entry.**  So a
+matrix that starts a block still does after every step. -/
+theorem head_expandRL (r N : Nat) (hr : 0 < r) (l : List (List Nat))
+    (h0 : (l[0]!)[0]! = 0) : expandRL r N l = [] ∨ ((expandRL r N l)[0]!)[0]! = 0 := by
+  cases hb : badRootR r l with
+  | none =>
+    rw [expandRL, hb]
+    dsimp only
+    by_cases h1 : 0 < l.length - 1
+    · refine Or.inr ?_
+      rw [getElem!_pos l.dropLast 0 (by rw [List.length_dropLast]; omega),
+        List.getElem_dropLast, ← getElem!_pos l 0 (by omega)]
+      exact h0
+    · exact Or.inl (List.length_eq_zero_iff.mp (by rw [List.length_dropLast]; omega))
+  | some p =>
+    have hp : p + 1 < l.length := badRootR_lt hb
+    rw [expandRL, hb]
+    dsimp only
+    refine Or.inr ?_
+    cases p with
+    | zero =>
+      rw [List.range_zero, List.map_nil, List.nil_append,
+        getElem!_map_range _ _ (show 0 < (N + 1) * (l.length - 1 - 0) from
+          Nat.mul_pos (Nat.succ_pos N) (by omega)),
+        getElem!_map_range _ _ hr]
+      simp only [Nat.zero_mod, Nat.zero_div, zero_mul, add_zero]
+      split <;> exact h0
+    | succ q =>
+      rw [getElem!_append_left _ _ (show 0 < ((List.range (q + 1)).map (fun i => l[i]!)).length from
+          by rw [List.length_map, List.length_range]; omega),
+        getElem!_map_range _ _ (Nat.succ_pos q)]
+      exact h0
 
 end Googology.Trans.BMS

@@ -68,6 +68,9 @@
 | **2 行の生成元 `(0,0)(1,1)` の階数が `e0` であること**。2 行は 1 行が終わる所から始まる | `Trans.BMS.rank_pairGen` |
 | どの行数でも、生成元は一つ少ない行の生成元たちの極限であること | `Trans.BMS.rank_gen_eq_iSup`, `Trans.BMS.rank_gen_lt` |
 | `(0,0)(1,1)(0,0)` の階数が `e0 + 1` であること。最後の列に親が無いのでどの括弧でも落ちる | `Trans.BMS.rank_succAll`, `Rewrite.rank_succ_of_const_step` |
+| **展開がブロックを越えて戻らないこと**。行 `0` の成分が `0` の列がブロックの始まり | `Trans.BMS.expandRL_append` |
+| **だから階数はブロックについて加法的**。`(0,0)(1,1)` の `n` 個並びの階数は `e0·n` | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_blockRepState` |
+| `(0,0)(1,1)(1,0)` の階数が `e0·w` であること | `Trans.BMS.rank_omegaAll` |
 | `p0(W)` 未満で項が基本列の上限であること | `Trans.BMS.fs_lub` |
 | **標準 1 行行列とは、項が標準形である行列のことちょうどである** | `Trans.BMS.std_entries_iff`, `Trans.BMS.exists_bms_of_lt_e0` |
 | **原始数列系と `p0(W)` 未満の標準形が同値であること** | `Trans.BMS.primEquivE0` |

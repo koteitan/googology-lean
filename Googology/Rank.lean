@@ -119,4 +119,24 @@ theorem Rewrite.rank_succ_of_const_step {R : Rewrite} [IsWellFounded R.State R.R
   · exact Ordinal.le_iSup (fun b : {b // R.Rel b a} => Order.succ (IsWellFounded.rank R.Rel b.1))
       ⟨b, hna, 0, (h 0).symm⟩
 
+/-- The rank recursion, with the brackets as the index. -/
+theorem Rewrite.rank_eq_iSup_nat {R : Rewrite} [IsWellFounded R.State R.Rel] {a : R.State}
+    (h : ¬ R.halted a) :
+    IsWellFounded.rank R.Rel a
+      = ⨆ N : Nat, Order.succ (IsWellFounded.rank R.Rel (R.step a N)) := by
+  rw [IsWellFounded.rank_eq]
+  refine le_antisymm (Ordinal.iSup_le ?_) (Ordinal.iSup_le (fun N => ?_))
+  · rintro ⟨m, _, N, rfl⟩
+    exact Ordinal.le_iSup
+      (fun N : Nat => Order.succ (IsWellFounded.rank R.Rel (R.step a N))) N
+  · exact Ordinal.le_iSup
+      (fun b : {b // R.Rel b a} => Order.succ (IsWellFounded.rank R.Rel b.1))
+      ⟨R.step a N, h, N, rfl⟩
+
+/-- A halting state has rank `0`. -/
+theorem Rewrite.rank_halted {R : Rewrite} [IsWellFounded R.State R.Rel] {a : R.State}
+    (h : R.halted a) : IsWellFounded.rank R.Rel a = 0 := by
+  rw [IsWellFounded.rank_eq]
+  exact le_antisymm (Ordinal.iSup_le (fun b => absurd h b.2.1)) (by simp)
+
 end Googology
