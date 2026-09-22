@@ -416,7 +416,7 @@ theorem isPrincipal_add_mul_opow (hE : (ω : Ordinal.{u}) ^ E = E) (a : Ordinal.
 
 /-- **Every countable member of `C_0(A + a)` is below `E · ω^a`**, given that
 the ones of `C_0(A)` are below `E`. -/
-theorem lt_mul_opow_of_mem_CSet (hmul : psi A 0 = E) (hE : (ω : Ordinal.{u}) ^ E = E)
+theorem lt_mul_opow_of_mem_CSet (hmul : psi A 0 ≤ E) (hE : (ω : Ordinal.{u}) ^ E = E)
     (hEpos : 0 < E) (hbase : ∀ x : Ordinal.{u}, x ∈ CSet 0 A → x.card ≤ ℵ_ 0 → x < E) :
     ∀ a x : Ordinal.{u}, x ∈ CSet 0 (A + a) → x.card ≤ ℵ_ 0 → x < E * ω ^ a := by
   intro a
@@ -454,8 +454,7 @@ theorem lt_mul_opow_of_mem_CSet (hmul : psi A 0 = E) (hE : (ω : Ordinal.{u}) ^ 
         rw [hu0]
         rcases lt_or_ge e.1 A with hlt | hge
         · refine lt_of_le_of_lt ?_ (lt_mul_opow_self hEpos ha)
-          rw [← hmul]
-          exact psi_mono 0 hlt.le
+          exact le_trans (psi_mono 0 hlt.le) hmul
         · have hb : e.1 - A < a := (Ordinal.sub_lt_of_le hge).mpr e.2
           have heq : A + (e.1 - A) = e.1 := Ordinal.add_sub_cancel_of_le hge
           refine lt_of_le_of_lt (le_trans (le_of_eq (congrArg (fun z => psi z 0) heq.symm))
@@ -464,12 +463,19 @@ theorem lt_mul_opow_of_mem_CSet (hmul : psi A 0 = E) (hE : (ω : Ordinal.{u}) ^ 
             ((Ordinal.opow_lt_opow_iff_right Ordinal.one_lt_omega0).mpr hb)
 
 /-- **`ψ_0(A + a) ≤ E · ω^a`**, with no condition on `a`. -/
-theorem psi_add_le (hmul : psi A 0 = E) (hE : (ω : Ordinal.{u}) ^ E = E) (hEpos : 0 < E)
+theorem psi_add_le (hmul : psi A 0 ≤ E) (hE : (ω : Ordinal.{u}) ^ E = E) (hEpos : 0 < E)
     (hbase : ∀ x : Ordinal.{u}, x ∈ CSet 0 A → x.card ≤ ℵ_ 0 → x < E) (a : Ordinal.{u}) :
     psi (A + a) 0 ≤ E * ω ^ a := by
   by_cases hc : (E * (ω : Ordinal.{u}) ^ a).card ≤ ℵ_ 0
   · exact psi_le_of_notMem
       (fun hmem => absurd (lt_mul_opow_of_mem_CSet hmul hE hEpos hbase a _ hmem hc) (lt_irrefl _))
+  · exact le_trans (psi_zero_lt_Omega_one _).le (Omega_one_le_of_not_card_le hc)
+
+/-- **`ψ_0(A) ≤ E`** follows from the bound on the countable members alone. -/
+theorem psi_le_of_bound (hbase : ∀ x : Ordinal.{u}, x ∈ CSet 0 A → x.card ≤ ℵ_ 0 → x < E) :
+    psi A 0 ≤ E := by
+  by_cases hc : (E : Ordinal.{u}).card ≤ ℵ_ 0
+  · exact psi_le_of_notMem (fun hmem => absurd (hbase _ hmem hc) (lt_irrefl _))
   · exact le_trans (psi_zero_lt_Omega_one _).le (Omega_one_le_of_not_card_le hc)
 
 theorem lt_self_mul_opow {b : Ordinal.{u}}
@@ -490,7 +496,7 @@ theorem mul_opow_lt_nfp (hEpos : 0 < E) {b : Ordinal.{u}}
     ((Ordinal.opow_lt_opow_iff_right Ordinal.one_lt_omega0).mpr hj)
 
 /-- **`ψ_0(A + a) = E · ω^a` up to the first fixed point of `E · ω^·`.** -/
-theorem psi_add_eq (hmul : psi A 0 = E) (hEpos : 0 < E)
+theorem psi_add_eq (hmul : E ≤ psi A 0) (hEpos : 0 < E)
     (hle : ∀ c : Ordinal.{u}, psi (A + c) 0 ≤ E * ω ^ c)
     (hAmem : ∀ a : Ordinal.{u}, A ∈ CSet 0 (A + a)) :
     ∀ a : Ordinal.{u}, a < Ordinal.nfp (fun x => E * (ω : Ordinal.{u}) ^ x) 0 →
@@ -518,7 +524,7 @@ theorem psi_add_eq (hmul : psi A 0 = E) (hEpos : 0 < E)
     refine psi_notMem (A + a) 0 ?_
     refine mem_of_lt_mul_opow E hEpos (fun z hz => ?_)
       (fun _ hx _ hy => CSet.add_mem hx hy) hpow _ (not_le.mp hc)
-    exact mem_CSet_of_lt_psi (lt_of_lt_of_le hz (le_trans (le_of_eq hmul.symm)
+    exact mem_CSet_of_lt_psi (lt_of_lt_of_le hz (le_trans hmul
       (psi_mono 0 (self_le_add_right _ _))))
 
 end Base
@@ -542,7 +548,7 @@ theorem psi_OmegaMul_add_eq (n : ℕ)
       psi (OmegaMul.{u} (n + 1) + a) 0 = epsN.{u} n * ω ^ a := by
   intro a ha
   rw [epsN_succ] at ha
-  refine psi_add_eq hmul (epsN_pos n) hle (fun b => ?_) a ha
+  refine psi_add_eq hmul.ge (epsN_pos n) hle (fun b => ?_) a ha
   exact OmegaMul_mem_CSet
     (lt_of_lt_of_le (OmegaMul_succ_pos n) (self_le_add_right _ _)) (n + 1)
 
@@ -554,7 +560,7 @@ theorem lt_epsN_mul_opow_of_mem_CSet (n : ℕ)
       x < epsN.{u} n) :
     ∀ a x : Ordinal.{u}, x ∈ CSet 0 (OmegaMul.{u} (n + 1) + a) → x.card ≤ ℵ_ 0 →
       x < epsN.{u} n * ω ^ a :=
-  lt_mul_opow_of_mem_CSet hmul (opow_epsN n) (epsN_pos n) hbase
+  lt_mul_opow_of_mem_CSet hmul.le (opow_epsN n) (epsN_pos n) hbase
 
 /-! ## The theorem -/
 

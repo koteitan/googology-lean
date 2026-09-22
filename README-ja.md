@@ -54,6 +54,7 @@
 | **かつ `p0(W·2) = e1`**。項 `p0(W+W)` がそれを名指す | `Notation.ExBuchholz.Ord.psi_Omega_two`, `Trans.BMS.val_te1` |
 | **かつ有限の全段で `p0(W·(n+1)) = e_n`**。`e_{n+1}` 未満で `p0(W·(n+1) + a) = e_n·w^a` | `Notation.ExBuchholz.Ord.psi_OmegaMul`, `Notation.ExBuchholz.Ord.psi_OmegaMul_add` |
 | **かつ `p0(W·w) = e_w`**。`p1(1) = W·w` である | `Notation.ExBuchholz.Ord.psi_Omega_omega`, `Notation.ExBuchholz.Ord.psi_one_one` |
+| **かつ `z0` 未満の全ての `g` で `p0(W·(1+g)) = e_g`**。`e_{g+1}` 未満で `p0(W·(1+g) + b) = e_g·w^b` | `Notation.ExBuchholz.Ord.psi_Omega_mul_eps`, `Notation.ExBuchholz.Ord.psi_Omega_mul_add_eps` |
 | **`val` が `e_w` 未満へ全射であること**。そこでは全単射である | `Trans.BMS.exists_OT_of_lt_epsN`, `Trans.BMS.existsUnique_OT_lt_teW` |
 | `C_v(a)` の加法的主要な元は `W_v` 未満か collapse であること。どの元も先頭の主要な元を切り出せること。正規形定理の最初の二歩 | `Notation.ExBuchholz.Ord.principal_mem_CSet`, `Notation.ExBuchholz.Ord.exists_principal_split` |
 | 標準形がそこへ届くこと。`p0(W+1)` は `e0·w` を、`p0(W+W)` は `e1` を名指す | `Trans.BMS.OT_psi_Omega_add`, `Trans.BMS.val_tew`, `Trans.BMS.OT_te1` |

@@ -199,9 +199,13 @@ theorem psi_one_one : psi 1 1 = (Ω_ 1 : Ordinal.{u}) * ω := by
 At `v = 0` this is `ψ_0(Ω) = ε₀`: the collapse of the next uncountable is the
 first ordinal the level cannot reach.  The same holds at every level. -/
 
+theorem isNormal_mul_opow {M : Ordinal.{u}} (hM : 0 < M) :
+    Order.IsNormal (fun x : Ordinal.{u} => M * (ω : Ordinal.{u}) ^ x) :=
+  (Ordinal.isNormal_mul_right hM).comp (Ordinal.isNormal_opow Ordinal.one_lt_omega0)
+
 theorem isNormal_Omega_mul_opow (v : Ordinal.{u}) :
     Order.IsNormal (fun x : Ordinal.{u} => Ω_ v * (ω : Ordinal.{u}) ^ x) :=
-  (Ordinal.isNormal_mul_right (Omega_pos v)).comp (Ordinal.isNormal_opow Ordinal.one_lt_omega0)
+  isNormal_mul_opow (Omega_pos v)
 
 theorem fpOmega_fp (v : Ordinal.{u}) : Ω_ v * (ω : Ordinal.{u}) ^ fpOmega.{u} v = fpOmega.{u} v :=
   Ordinal.nfp_fp (isNormal_Omega_mul_opow v) 0

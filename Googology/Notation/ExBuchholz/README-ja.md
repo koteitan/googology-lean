@@ -115,8 +115,22 @@ inductive Term where
 | `p_v(a)`、`a < fpOmega v`、`v < W_v` | `W_v·w^a` | `psi_eq_Omega_mul_opow` |
 | `p1(a)`、`a < fpOmega 1` | `W·w^a` | `psi_one_eq` |
 | `p_v(W_{v+1})`、`v < W_v` | `fpOmega v`。`x ↦ W_v·w^x` の最小不動点 | `psi_Omega_succ` |
+| `p0(W·(1+g))`、任意の `g` | `<= e_g` | `psi_Omega_mul_le` |
+| `p0(W·(1+g))`、`g < z0` | `e_g` | `psi_Omega_mul_eps` |
+| `p0(W·(1+g) + b)`、`g < z0`、`b < e_{g+1}` | `e_g·w^b` | `psi_Omega_mul_add_eps` |
+| `e_W` | `W`。よって `z0` は可算 | `eps_Omega_one` |
 
-最後の 4 行が `Ord/Level.lean` である。`Ord/Opow.lean` の最初の節を、添字を自由に
+`e_W` の手前の 4 行が `Ord/Ladder.lean` である。有限の梯子を e 関数そのものに
+置き換える。`eps g` は `Ordinal.deriv (w ^ ·) g` で、`p0(W·(1+g)) = e_g` が
+`z0`（e の最小不動点）未満の全ての `g` で成り立つ。有限の梯子では閉包の分解が
+必要だったが、超限の段を運ぶのは `W` による順序数の除算である。`C_0(W·(1+g))` の
+どの元も `x % W < e_g` を満たし、collapse の条項は引数を割って `W·d + b` と読む。
+添字が `0` でない collapse は加法的主要で `W` 以上だから、剰余は `0` である。
+`p1` がどの順序数に届くかは知らなくてよい。`z0` で止まる理由もはっきりしている。
+`W·(1+z0)` はもう自分の閉包の中に無い。それを作るには `z0` が要り、それこそが
+collapse の値だからである。
+
+その手前の 4 行が `Ord/Level.lean` である。`Ord/Opow.lean` の最初の節を、添字を自由に
 したものである。`p0(a) <= w^a` の論法は `0` について何も使っていない。添字 `v` でも
 同じ証明が `p_v(a) <= W_v·w^a` を与える。`W_0 = 1` なので、`v = 0` では元の主張に
 なる。等号の方は `v` 自身が `C_v(a)` に入っている必要があり、それには `v < W_v` で

@@ -121,8 +121,24 @@ beyond the one stated.
 | `ψ_v(a)`, `a < fpOmega v`, `v < Ω_v` | `Ω_v·ω^a` | `psi_eq_Omega_mul_opow` |
 | `ψ_1(a)`, `a < fpOmega 1` | `Ω·ω^a` | `psi_one_eq` |
 | `ψ_v(Ω_{v+1})`, `v < Ω_v` | `fpOmega v`, the first fixed point of `x ↦ Ω_v·ω^x` | `psi_Omega_succ` |
+| `ψ_0(Ω·(1+γ))`, any `γ` | `≤ ε_γ` | `psi_Omega_mul_le` |
+| `ψ_0(Ω·(1+γ))`, `γ < ζ₀` | `ε_γ` | `psi_Omega_mul_eps` |
+| `ψ_0(Ω·(1+γ) + β)`, `γ < ζ₀`, `β < ε_{γ+1}` | `ε_γ·ω^β` | `psi_Omega_mul_add_eps` |
+| `ε_Ω` | `Ω` — so `ζ₀` is countable | `eps_Omega_one` |
 
-The last four rows are `Ord/Level.lean`, which is `Ord/Opow.lean`'s first
+The last four rows before `ε_Ω` are `Ord/Ladder.lean`, which replaces the
+finite ladder by the ε function itself: `eps γ` is `Ordinal.deriv (ω ^ ·) γ`,
+and `ψ_0(Ω·(1+γ)) = ε_γ` holds at every `γ` below `ζ₀`, the first fixed point
+of `ε`. What carries the transfinite step, where the finite ladder needed a
+decomposition of the closure, is ordinal division by `Ω`: every member of
+`C_0(Ω·(1+γ))` has `x % Ω < ε_γ`, and the collapse clause reads its argument
+as `Ω·δ + β` by dividing. A collapse with a nonzero subscript is additively
+principal and at least `Ω`, so its remainder is `0` and nothing has to be
+known about which ordinals `ψ_1` reaches. At `ζ₀` it stops for a reason:
+`Ω·(1+ζ₀)` is no longer inside its own closure, since building it needs `ζ₀`,
+which is exactly the value being collapsed to.
+
+The four rows before those are `Ord/Level.lean`, which is `Ord/Opow.lean`'s first
 section with the subscript left free: nothing in `ψ_0(a) ≤ ω^a` is about `0`,
 and at subscript `v` the same proof gives `ψ_v(a) ≤ Ω_v·ω^a`, with `Ω_0 = 1`
 making it the old statement. The equality needs `v` to be inside `C_v(a)`,

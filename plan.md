@@ -75,6 +75,7 @@ import this and nothing else.
 | `Opow.lean` | done — the closed forms of `ψ_0`: `ω^a` below `ε₀`, `ε₀·ω^a` below `ε₁`, and the first two steps of a normal form theorem |
 | `Level.lean` | done — the same at every subscript: `ψ_v(a) ≤ Ω_v·ω^a`, with equality below the first fixed point, and `ψ_v(Ω_{v+1})` is that fixed point |
 | `Eps.lean` | done — `ψ_0(Ω·(n+1)) = ε_n` at every finite `n`, by one induction, and `ψ_0(Ω·ω) = ε_ω` with `ψ_1(1) = Ω·ω` |
+| `Ladder.lean` | done — the same at every `γ < ζ₀` with the ε function, by division by `Ω` |
 | `Eval.lean` | done — `val`, `Lam`, `val_mem_CSet`, the two `ψ` comparison helpers |
 | `Mono.lean` | done — the simultaneous induction, `val_lt_val`, `OTLt_wf` |
 | `FS.lean` | done — `dom`, `fs`, `fs_lt`, `dom_eq_one_or_tw`, `step_lt`, `exb` |
@@ -368,18 +369,29 @@ What is left of that is the Lean problem still open.
   `ψ_1(0) = Ω` itself. The two values `Opow.lean` proves by hand are the cases
   `n = 0` and `n = 1` of it.
 
-  `Ω·ω` itself is reached, by a different argument: `Ord.psi_Omega_omega`
-  says `ψ_0(Ω·ω) = ε_ω`, and that one needs no decomposition at all — an
-  argument below `Ω·ω` is below some `Ω·(n+1)`, so `ψ_0` of it is at most
-  `ε_n` by monotonicity. `Ord.psi_one_one` names the bound as a term's value:
-  `ψ_1(1) = Ω·ω`, because `C_1(1)` has no argument but `0` to collapse, so
-  below `Ω_2` it is the finite multiples of `Ω` plus something countable.
+  The finite ladder is not the end of it either. `Notation/ExBuchholz/Ladder.lean`
+  replaces it by the ε function: `Ord.eps γ` is `Ordinal.deriv (ω ^ ·) γ`, and
+  `Ord.psi_Omega_mul_eps` says `ψ_0(Ω·(1+γ)) = ε_γ` at **every** `γ` below
+  `ζ₀`, the first fixed point of `ε`, with `Ord.psi_Omega_mul_add_eps` for
+  `ψ_0(Ω·(1+γ) + β) = ε_γ·ω^β` below `ε_{γ+1}`. The upper bound
+  `Ord.psi_Omega_mul_le` holds at every `γ` with no condition at all.
 
-  Where it does stop is `Ω·ω + 1`. There `ψ_1(1) = Ω·ω` is itself a legal
-  collapse inside `C_0(Ω·ω + 1)` — subscript `1`, argument `1`, both in the
-  closure — so a decomposition of that closure has to say which ordinals `ψ_1`
-  reaches, which is `C_1` and not `C_0`. Past that, `ψ_0(Ω^2)` is `ζ₀` and the
-  arguments need `ψ_1` inside them as well. What would settle all of it is a
+  What carries the transfinite step, where the finite ladder needed a
+  decomposition of the closure, is ordinal division by `Ω`.
+  `Ord.mod_Omega_lt_eps` is the whole induction: every member of
+  `C_0(Ω·(1+γ))` has `x % Ω < ε_γ`. The collapse clause reads its argument as
+  `Ω·δ + β` by dividing, so the recursion at `δ` and the bound on `β` are both
+  in hand, and a collapse with a nonzero subscript is additively principal and
+  at least `Ω`, so its remainder is `0` — nothing has to be known about which
+  ordinals `ψ_1` reaches. The other direction needs `Ω·(1+γ)` to be inside the
+  closure, which `Ord.Omega_mul_mem_CSet` supplies from Cantor normal form and
+  `Ord.psi_one_eq`: `Ω·ω^e` is `ψ_1(e)`.
+
+  `ζ₀` is where it stops, and for a reason rather than for want of a proof:
+  building `Ω·(1+ζ₀)` inside the closure needs `ζ₀`, which is exactly the
+  value being collapsed to. `Ord.eps_Omega_one` — `ε_Ω = Ω` — says `ζ₀` is
+  countable, so the condition is the only one. Past `ζ₀`, `ψ_0(Ω^2)` is `ζ₀`
+  itself and the arguments need `ψ_1` inside them. What would settle that is a
   normal form theorem, and its first step is in: `Ord.principal_mem_CSet` says an additively principal member of
   `C_v(a)` is below `Ω_v` or a collapse `ψ_u(e)` with `u` and `e` in the
   closure. The second step is in too:
