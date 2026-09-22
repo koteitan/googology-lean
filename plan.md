@@ -214,10 +214,12 @@ That is `Mono.lean`.
    `m₀ = 0` the expansion is a fixed part and a block repeated `N + 1` times,
    so `rank_mul_omega0` multiplies that block's rank by `ω`. Three two-row
    values come out: `(0,0)(1,0)` is `ω`, as the zero row demands,
-   `(0,0)(1,1)(1,0)` is `ε₀·ω`, and `(0,0)(1,1)(0,0)(1,0)` is `ε₀ + ω`. What
-   is still out of reach is the rank of the later generators
-   `(0,0)(1,1)(2,2)` and beyond, whose expansions are neither zero-row
-   matrices nor block repetitions.
+   `(0,0)(1,1)(1,0)` is `ε₀·ω`, and `(0,0)(1,1)(0,0)(1,0)` is `ε₀ + ω`. `rank_split_mul_omega0`
+   packages the two so that a matrix of that shape costs three lines, both
+   hypotheses being `rfl`. What these reach is the ordinals built from `1`
+   and `ε₀` by `+` and `·ω`; what they do not is the rank of the later
+   generators `(0,0)(1,1)(2,2)` and beyond, whose expansions are neither
+   zero-row matrices nor block repetitions.
 
    The states of `prim` — matrices whose term is a standard form — are
    exactly the standard one-row matrices: `std_entries_iff`. And

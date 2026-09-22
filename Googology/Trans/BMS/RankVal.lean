@@ -495,6 +495,52 @@ def emptyAll : (bmsAllL 1).State := ⟨[], by simp⟩
 theorem rank_emptyAll : IsWellFounded.rank (bmsAllL 1).Rel emptyAll = 0 :=
   Rewrite.rank_halted rfl
 
+theorem appendState_col_len {r : Nat} (P G : (bmsAllL r).State) {c : List Nat}
+    (hc : c.length = r + 1) : ∀ x ∈ P.1 ++ G.1 ++ [c], x.length = r + 1 := by
+  intro x hx
+  rcases List.mem_append.mp hx with h | h
+  · rcases List.mem_append.mp h with h2 | h2
+    · exact P.2 x h2
+    · exact G.2 x h2
+  · rw [List.mem_singleton.mp h]
+    exact hc
+
+/-- **The rank of `P ++ G ++ [c]`, when the last column has its bad root at
+`P`'s end and `m₀` is `0`.**  Then the expansion is `P` and `G` repeated, so
+the rank is `P`'s plus `G`'s times `ω`.  For a concrete matrix both
+hypotheses are `rfl`. -/
+theorem rank_split_mul_omega0 {r : Nat} (P G : (bmsAllL r).State) {c : List Nat}
+    (hc : c.length = r + 1) (hG0 : (G.1[0]!)[0]! = 0) (hGne : G.1 ≠ [])
+    (hbad : badRootR (r + 1) (P.1 ++ G.1 ++ [c]) = some P.1.length)
+    (hm0 : m0L (r + 1) (P.1 ++ G.1 ++ [c]) = 0) :
+    IsWellFounded.rank (bmsAllL r).Rel ⟨P.1 ++ G.1 ++ [c], appendState_col_len P G hc⟩
+      = IsWellFounded.rank (bmsAllL r).Rel P
+        + IsWellFounded.rank (bmsAllL r).Rel G * Ordinal.omega0 := by
+  have hlen : (P.1 ++ G.1 ++ [c]).length = P.1.length + G.1.length + 1 := by
+    rw [List.length_append, List.length_append]
+    rfl
+  have hgood : (List.range P.1.length).map (fun i => (P.1 ++ G.1 ++ [c])[i]!) = P.1 := by
+    refine Eq.trans (List.map_congr_left (fun i hi => ?_)) (listEta P.1)
+    have hi' : i < P.1.length := List.mem_range.mp hi
+    rw [getElem!_append_left (P.1 ++ G.1) [c] (by rw [List.length_append]; omega),
+      getElem!_append_left P.1 G.1 hi']
+  have hseg : (List.range ((P.1 ++ G.1 ++ [c]).length - 1 - P.1.length)).map
+      (fun i => (P.1 ++ G.1 ++ [c])[P.1.length + i]!) = G.1 := by
+    rw [hlen, show P.1.length + G.1.length + 1 - 1 - P.1.length = G.1.length from by omega]
+    refine Eq.trans (List.map_congr_left (fun i hi => ?_)) (listEta G.1)
+    have hi' : i < G.1.length := List.mem_range.mp hi
+    rw [getElem!_append_left (P.1 ++ G.1) [c] (by rw [List.length_append]; omega),
+      getElem!_append_right P.1 G.1 i]
+  refine rank_mul_omega0 ⟨P.1 ++ G.1 ++ [c], appendState_col_len P G hc⟩ P G ?_ hG0 hGne
+    (fun N => ?_)
+  · show ¬ P.1 ++ G.1 ++ [c] = []
+    intro h
+    exact absurd (List.append_eq_nil_iff.mp h).2 (by simp)
+  · refine Subtype.ext ?_
+    show expandRL (r + 1) N (P.1 ++ G.1 ++ [c]) = P.1 ++ repN (N + 1) G.1
+    rw [expandRL_of_m0_zero (r + 1) N (P.1 ++ G.1 ++ [c]) P.1.length hbad hm0
+      (appendState_col_len P G hc), hgood, hseg]
+
 /-- `(0,0)(1,0)` — the two-row form of `(0)(1)`. -/
 def omegaCol : (bmsAllL 1).State := ⟨[[0, 0], [1, 0]], by decide⟩
 
@@ -538,6 +584,31 @@ theorem step_sumAll (N : Nat) :
   show expandRL 2 N [[0, 0], [1, 1], [0, 0], [1, 0]] = [[0, 0], [1, 1]] ++ repN (N + 1) [[0, 0]]
   rw [expandRL_of_m0_zero 2 N _ 2 rfl rfl (by decide)]
   rfl
+
+/-- `(0,0)(1,0)(1,0)` — the two-row form of `(0)(1)(1)`. -/
+def omegaSqCol : (bmsAllL 1).State := ⟨[[0, 0], [1, 0], [1, 0]], by decide⟩
+
+/-- **`(0,0)(1,0)(1,0)` has rank `ω²`**, as `(0)(1)(1)` does. -/
+theorem rank_omegaSqCol :
+    IsWellFounded.rank (bmsAllL 1).Rel omegaSqCol = Ordinal.omega0 * Ordinal.omega0 := by
+  have h : omegaSqCol
+      = ⟨emptyAll.1 ++ omegaCol.1 ++ [[1, 0]], appendState_col_len emptyAll omegaCol rfl⟩ :=
+    Subtype.ext rfl
+  rw [h, rank_split_mul_omega0 emptyAll omegaCol rfl rfl (by simp [omegaCol]) rfl rfl,
+    rank_emptyAll, rank_omegaCol, zero_add]
+
+/-- `(0,0)(1,1)(0,0)(1,0)(1,0)`. -/
+def sumSqAll : (bmsAllL 1).State := ⟨[[0, 0], [1, 1], [0, 0], [1, 0], [1, 0]], by decide⟩
+
+/-- **`(0,0)(1,1)(0,0)(1,0)(1,0)` has rank `ε₀ + ω²`.**  Here both parts are
+matrices whose rank is already known. -/
+theorem rank_sumSqAll : IsWellFounded.rank (bmsAllL 1).Rel sumSqAll
+    = Ord.eps0 + Ordinal.omega0 * Ordinal.omega0 := by
+  have h : sumSqAll
+      = ⟨genAll.1 ++ omegaCol.1 ++ [[1, 0]], appendState_col_len genAll omegaCol rfl⟩ :=
+    Subtype.ext rfl
+  rw [h, rank_split_mul_omega0 genAll omegaCol rfl rfl (by simp [omegaCol]) rfl rfl,
+    rank_genAll, rank_omegaCol]
 
 /-- `(0,0)(1,1)(1,0)(1,0)`. -/
 def omegaSqAll : (bmsAllL 1).State := ⟨[[0, 0], [1, 1], [1, 0], [1, 0]], by decide⟩

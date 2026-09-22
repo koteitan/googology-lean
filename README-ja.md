@@ -90,6 +90,7 @@
 | **`m₀ = 0` なら展開は固定部分とブロックの繰り返し**。だから階数は `w` 倍になる | `Trans.BMS.expandRL_of_m0_zero`, `Trans.BMS.rank_mul_omega0` |
 | よって `(0,0)(1,0)` は `w`、`(0,0)(1,1)(1,0)` は `e0·w`、`(0,0)(1,1)(0,0)(1,0)` は `e0 + w` | `Trans.BMS.rank_omegaCol`, `Trans.BMS.rank_omegaAll`, `Trans.BMS.rank_sumAll` |
 | 繰り返せる。`(0,0)(1,1)(1,0)(1,0)` の階数は `e0·w^2` | `Trans.BMS.rank_omegaSqAll` |
+| `rank_split_mul_omega0` は分割を直接受け取るので、この形の行列は 3 行で済む。`(0,0)(1,0)(1,0)` は `w^2`、`(0,0)(1,1)(0,0)(1,0)(1,0)` は `e0 + w^2` | `Trans.BMS.rank_split_mul_omega0`, `Trans.BMS.rank_omegaSqCol`, `Trans.BMS.rank_sumSqAll` |
 
 届かないもの。`(0,0)(1,1)(2,1)` は `m₀ = 1` なので各コピーに加算が付いて互いに
 違う。`(0,0)(1,1)(2,0)` は繰り返しではあるが、繰り返すのが `(1,1)` で、ブロックで
