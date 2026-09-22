@@ -125,9 +125,19 @@ beyond the one stated.
 | `ψ_0(Ω·(1+γ))`, `γ < ζ₀` | `ε_γ` | `psi_Omega_mul_eps` |
 | `ψ_0(Ω·(1+γ) + β)`, `γ < ζ₀`, `β < ε_{γ+1}` | `ε_γ·ω^β` | `psi_Omega_mul_add_eps` |
 | `ψ_0(Ω·ζ₀)` | `ζ₀` | `psi_Omega_mul_zeta0` |
+| `ψ_v(Ω_{v+1}·(1+γ))`, `γ < ζ^v` | `ε^v_γ`, at every subscript | `psi_OmegaV_mul_eq` |
+| `ψ_n(Ω_{n+1}·(1+γ))`, finite `n` | the same, with the condition discharged | `psi_OmegaV_mul_eq_nat` |
 | `ε_Ω` | `Ω` — so `ζ₀` is countable | `eps_Omega_one` |
 
-The last four rows before `ε_Ω` are `Ord/Ladder.lean`, which replaces the
+`Ord/LadderV.lean` is the last two rows: `Ladder.lean` with the subscript
+left free. `epsV v` is the derivative of `x ↦ Ω_v · ω^x`, the function
+`Level.lean` shows `ψ_v` follows below its first fixed point, and the same
+division argument — by `Ω_{v+1}` now — gives `ψ_v(Ω_{v+1}·(1+γ)) = ε^v_γ`
+below `ζ^v`. The conditions `v < Ω_v` and `v+1 < Ω_{v+1}` are what put `v`
+and `v+1` inside the closure; every finite subscript satisfies them, which is
+`psi_OmegaV_mul_eq_nat`.
+
+The rows before that are `Ord/Ladder.lean`, which replaces the
 finite ladder by the ε function itself: `eps γ` is `Ordinal.deriv (ω ^ ·) γ`,
 and `ψ_0(Ω·(1+γ)) = ε_γ` holds at every `γ` below `ζ₀`, the first fixed point
 of `ε`. What carries the transfinite step, where the finite ladder needed a

@@ -88,64 +88,8 @@ theorem eps_add_one (γ : Ordinal.{u}) :
 
 /-! ### Division by `Ω` -/
 
-theorem opow_Omega_one : (ω : Ordinal.{u}) ^ (Ω_ 1 : Ordinal.{u}) = Ω_ 1 := by
-  refine le_antisymm ?_ (Ordinal.right_le_opow _ Ordinal.one_lt_omega0)
-  have hlim : Order.IsSuccLimit (Ω_ 1 : Ordinal.{u}) := by
-    refine Ordinal.isSuccLimit_of_isPrincipal_add ?_ (isPrincipal_add_Omega 1)
-    rw [Omega_of_ne_zero one_ne_zero]
-    exact lt_of_lt_of_le Ordinal.one_lt_omega0 (omega0_le_omega 1)
-  rw [Ordinal.opow_le_of_isSuccLimit (ne_of_gt omega0_pos) hlim]
-  intro b hb
-  refine le_of_lt (lt_Omega_one_of_card_le ?_)
-  rcases eq_or_ne b 0 with rfl | hb0
-  · rw [Ordinal.opow_zero, Ordinal.card_one]
-    exact le_trans Cardinal.one_le_aleph0 (le_of_eq Cardinal.aleph_zero.symm)
-  · rw [Ordinal.card_omega0_opow hb0, Cardinal.aleph_zero]
-    exact max_le (le_refl _) (by
-      rw [← Cardinal.aleph_zero]
-      exact card_le_of_lt_Omega_one hb)
-
-/-- An additively principal ordinal at least `Ω` is a multiple of `Ω`. -/
-theorem principal_mod_Omega {x : Ordinal.{u}} (hx : Ordinal.IsPrincipal (· + ·) x)
-    (h : Ω_ 1 ≤ x) : x % Ω_ 1 = 0 := by
-  obtain (hz | ⟨c, hc⟩) := Ordinal.isPrincipal_add_iff_zero_or_omega0_opow.mp hx
-  · exact absurd (hz ▸ h) (not_le.mpr (Omega_pos 1))
-  · have hc' : (ω : Ordinal.{u}) ^ c = x := hc
-    have hΩc : (Ω_ 1 : Ordinal.{u}) ≤ c := by
-      by_contra hcon
-      have hlt : c < Ω_ 1 := not_le.mp hcon
-      refine absurd h (not_le.mpr ?_)
-      rw [← hc']
-      conv_rhs => rw [← opow_Omega_one]
-      exact (Ordinal.opow_lt_opow_iff_right Ordinal.one_lt_omega0).mpr hlt
-    have hsplit : (ω : Ordinal.{u}) ^ c = Ω_ 1 * (ω : Ordinal.{u}) ^ (c - Ω_ 1) := by
-      conv_lhs => rw [← Ordinal.add_sub_cancel_of_le hΩc, Ordinal.opow_add, opow_Omega_one]
-    rw [← hc', hsplit, Ordinal.mul_mod]
-
-theorem add_mod_Omega_of_lt {p q : Ordinal.{u}} (h : q < Ω_ 1) :
-    (p + q) % Ω_ 1 = p % Ω_ 1 + q := by
-  have hsum : p + q = Ω_ 1 * (p / Ω_ 1) + (p % Ω_ 1 + q) := by
-    conv_lhs => rw [← Ordinal.div_add_mod p (Ω_ 1)]
-    rw [add_assoc]
-  rw [hsum, Ordinal.mul_add_mod_self, Ordinal.mod_eq_of_lt]
-  exact isPrincipal_add_Omega 1 (Ordinal.mod_lt p (ne_of_gt (Omega_pos 1))) h
-
-theorem add_mod_Omega_of_le {p q : Ordinal.{u}} (h : Ω_ 1 ≤ q) :
-    (p + q) % Ω_ 1 = q % Ω_ 1 := by
-  have hc : 1 ≤ q / Ω_ 1 := by
-    refine (Ordinal.mul_le_iff_le_div (ne_of_gt (Omega_pos 1))).mp ?_
-    rw [mul_one]
-    exact h
-  have hpΩ : p + Ω_ 1 = Ω_ 1 * (p / Ω_ 1 + 1) := by
-    conv_lhs => rw [← Ordinal.div_add_mod p (Ω_ 1)]
-    rw [add_assoc, add_Omega_one (Ordinal.mod_lt p (ne_of_gt (Omega_pos 1))), mul_add, mul_one]
-  have hsum : p + q = Ω_ 1 * (p / Ω_ 1 + 1 + (q / Ω_ 1 - 1)) + q % Ω_ 1 := by
-    conv_lhs => rw [← Ordinal.div_add_mod q (Ω_ 1)]
-    rw [← add_assoc]
-    congr 1
-    conv_lhs => rw [← Ordinal.add_sub_cancel_of_le hc, mul_add, mul_one, ← add_assoc, hpΩ]
-    exact (mul_add _ _ _).symm
-  rw [hsum, Ordinal.mul_add_mod_self, Ordinal.mod_mod]
+theorem opow_Omega_one : (ω : Ordinal.{u}) ^ (Ω_ 1 : Ordinal.{u}) = Ω_ 1 :=
+  opow_Omega one_ne_zero
 
 /-! ### The bound -/
 
@@ -167,7 +111,8 @@ theorem mod_Omega_lt_eps : ∀ γ : Ordinal.{u}, ∀ x : Ordinal.{u},
       rwa [Ordinal.mod_eq_of_lt (lt_Omega_one_of_card_le hcard)] at h
     have hle : ∀ δ : Ordinal.{u}, δ < γ → ∀ β : Ordinal.{u},
         psi (Ω_ 1 * (1 + δ) + β) 0 ≤ eps.{u} δ * ω ^ β := fun δ hδ =>
-      psi_add_le (psi_le_of_bound (hbase δ hδ)) (opow_eps δ) (eps_pos δ) (hbase δ hδ)
+      psi_add_le (psi_le_of_bound (hbase δ hδ)) (opow_eps δ)
+        (Omega_zero_le (eps_pos δ)) (hbase δ hδ)
     intro x hx
     induction hx with
     | @small y h =>
@@ -208,7 +153,7 @@ theorem mod_Omega_lt_eps : ∀ γ : Ordinal.{u}, ∀ x : Ordinal.{u},
           exact mul_lt_eps (eps_strictMono hδγ) (opow_lt_eps ihe)
       · have hΩle : (Ω_ 1 : Ordinal.{u}) ≤ psi e.1 u :=
           le_trans (Omega_mono (Order.one_le_iff_ne_zero.mpr hu)) (Omega_le_psi e.1 u)
-        rw [principal_mod_Omega (isPrincipal_add_psi e.1 u) hΩle]
+        rw [principal_mod_Omega one_ne_zero (isPrincipal_add_psi e.1 u) hΩle]
         exact eps_pos γ
 
 /-- **Every countable member of `C_0(Ω·(1+γ))` is below `ε_γ`.** -/
@@ -224,16 +169,16 @@ theorem psi_Omega_mul_le (γ : Ordinal.{u}) : psi (Ω_ 1 * (1 + γ)) 0 ≤ eps.{
 /-- **`ψ_0(Ω·(1+γ) + β) ≤ ε_γ · ω^β`**, with no condition on either. -/
 theorem psi_Omega_mul_add_le (γ β : Ordinal.{u}) :
     psi (Ω_ 1 * (1 + γ) + β) 0 ≤ eps.{u} γ * ω ^ β :=
-  psi_add_le (psi_Omega_mul_le γ) (opow_eps γ) (eps_pos γ)
+  psi_add_le (psi_Omega_mul_le γ) (opow_eps γ) (Omega_zero_le (eps_pos γ))
     (fun _ hx hc => lt_eps_of_mem_CSet γ hx hc) β
 
 /-! ### `Ω·μ` inside the closure -/
 
-theorem mul_natCast_mem_CSet {b y : Ordinal.{u}} (hy : y ∈ CSet 0 b) :
-    ∀ n : ℕ, y * (n : Ordinal.{u}) ∈ CSet 0 b := by
+theorem mul_natCast_mem_CSet {v b y : Ordinal.{u}} (hy : y ∈ CSet v b) :
+    ∀ n : ℕ, y * (n : Ordinal.{u}) ∈ CSet v b := by
   intro n
   induction n with
-  | zero => rw [Nat.cast_zero, mul_zero]; exact CSet.zero_mem 0 b
+  | zero => rw [Nat.cast_zero, mul_zero]; exact CSet.zero_mem v b
   | succ m ih => rw [Nat.cast_succ, mul_add_one]; exact CSet.add_mem ih hy
 
 theorem one_mem_CSet {b : Ordinal.{u}} (hb : 0 < b) : (1 : Ordinal.{u}) ∈ CSet 0 b := by
@@ -359,7 +304,7 @@ theorem psi_Omega_mul_eq : ∀ γ : Ordinal.{u}, γ < zeta0.{u} → eps.{u} γ <
             psi (Ω_ 1 * (1 + δ) + b) 0 = eps.{u} δ * ω ^ b := by
           intro b hb
           rw [eps_add_one] at hb
-          exact psi_add_eq (le_of_eq hIH.symm) (eps_pos δ)
+          exact psi_add_eq zero_lt_Omega_zero (le_of_eq hIH.symm) (eps_pos δ)
             (fun c => psi_Omega_mul_add_le δ c) hAmem b hb
         have hiter : ∀ m : ℕ, ∀ b : Ordinal.{u},
             b < (fun x => eps.{u} δ * (ω : Ordinal.{u}) ^ x)^[m] 0 →
@@ -469,7 +414,7 @@ theorem psi_Omega_mul_add_eps {γ : Ordinal.{u}} (h : γ < zeta0.{u}) {β : Ordi
     (hβ : β < eps.{u} (γ + 1)) :
     psi (Ω_ 1 * (1 + γ) + β) 0 = eps.{u} γ * ω ^ β := by
   rw [eps_add_one] at hβ
-  refine psi_add_eq (le_of_eq (psi_Omega_mul_eps h).symm) (eps_pos γ)
+  refine psi_add_eq zero_lt_Omega_zero (le_of_eq (psi_Omega_mul_eps h).symm) (eps_pos γ)
     (fun c => psi_Omega_mul_add_le γ c) (fun a => ?_) β hβ
   have hpos : (0 : Ordinal.{u}) < Ω_ 1 * (1 + γ) + a :=
     lt_of_lt_of_le (Omega_pos 1) (le_trans (Omega_le_Omega_mul _ (by simp))

@@ -322,4 +322,81 @@ theorem psi_Omega_two_one : psi (Ω_ 2) 1 = fpOmega.{u} 1 := by
   rw [Omega_of_ne_zero one_ne_zero]
   exact lt_of_lt_of_le Ordinal.one_lt_omega0 (omega0_le_omega 1)
 
+/-! ### Division by `Ω_v` -/
+
+theorem isSuccLimit_Omega {v : Ordinal.{u}} (hv : v ≠ 0) : Order.IsSuccLimit (Ω_ v) := by
+  refine Ordinal.isSuccLimit_of_isPrincipal_add ?_ (isPrincipal_add_Omega v)
+  rw [Omega_of_ne_zero hv]
+  exact lt_of_lt_of_le Ordinal.one_lt_omega0 (omega0_le_omega v)
+
+theorem card_lt_of_lt_Omega {v x : Ordinal.{u}} (hv : v ≠ 0) (h : x < Ω_ v) :
+    x.card < ℵ_ v := by
+  rw [Omega_of_ne_zero hv, ← Cardinal.ord_aleph] at h
+  exact Cardinal.lt_ord.mp h
+
+theorem lt_Omega_of_card_lt {v x : Ordinal.{u}} (hv : v ≠ 0) (h : x.card < ℵ_ v) :
+    x < Ω_ v := by
+  rw [Omega_of_ne_zero hv, ← Cardinal.ord_aleph]
+  exact Cardinal.lt_ord.mpr h
+
+/-- **`Ω_v` is a fixed point of `ω ^ ·`.** -/
+theorem opow_Omega {v : Ordinal.{u}} (hv : v ≠ 0) : (ω : Ordinal.{u}) ^ (Ω_ v) = Ω_ v := by
+  refine le_antisymm ?_ (Ordinal.right_le_opow _ Ordinal.one_lt_omega0)
+  rw [Ordinal.opow_le_of_isSuccLimit (ne_of_gt omega0_pos) (isSuccLimit_Omega hv)]
+  intro b hb
+  refine le_of_lt (lt_Omega_of_card_lt hv ?_)
+  rcases eq_or_ne b 0 with rfl | hb0
+  · rw [Ordinal.opow_zero, Ordinal.card_one]
+    exact lt_of_lt_of_le Cardinal.one_lt_aleph0 (Cardinal.aleph0_le_aleph v)
+  · rw [Ordinal.card_omega0_opow hb0]
+    exact max_lt (lt_of_lt_of_le Cardinal.aleph0_lt_aleph_one (by
+      rw [show (1 : Ordinal.{u}) = 0 + 1 from (zero_add 1).symm]
+      exact Cardinal.aleph_le_aleph.mpr (Order.succ_le_of_lt (pos_of_ne_zero' hv))))
+      (card_lt_of_lt_Omega hv hb)
+
+/-- An additively principal ordinal at least `Ω_v` is a multiple of it. -/
+theorem principal_mod_Omega {v x : Ordinal.{u}} (hv : v ≠ 0)
+    (hx : Ordinal.IsPrincipal (· + ·) x) (h : Ω_ v ≤ x) : x % Ω_ v = 0 := by
+  obtain (hz | ⟨c, hc⟩) := Ordinal.isPrincipal_add_iff_zero_or_omega0_opow.mp hx
+  · exact absurd (hz ▸ h) (not_le.mpr (Omega_pos v))
+  · have hc' : (ω : Ordinal.{u}) ^ c = x := hc
+    have hΩc : (Ω_ v : Ordinal.{u}) ≤ c := by
+      by_contra hcon
+      refine absurd h (not_le.mpr ?_)
+      rw [← hc']
+      conv_rhs => rw [← opow_Omega hv]
+      exact (Ordinal.opow_lt_opow_iff_right Ordinal.one_lt_omega0).mpr (not_le.mp hcon)
+    have hsplit : (ω : Ordinal.{u}) ^ c = Ω_ v * (ω : Ordinal.{u}) ^ (c - Ω_ v) := by
+      conv_lhs => rw [← Ordinal.add_sub_cancel_of_le hΩc, Ordinal.opow_add, opow_Omega hv]
+    rw [← hc', hsplit, Ordinal.mul_mod]
+
+theorem add_Omega {v p : Ordinal.{u}} (hp : p < Ω_ v) : p + Ω_ v = Ω_ v :=
+  Ordinal.IsPrincipal.add_eq_right (isPrincipal_add_Omega v) hp
+
+theorem add_mod_Omega_of_lt {v p q : Ordinal.{u}} (h : q < Ω_ v) :
+    (p + q) % Ω_ v = p % Ω_ v + q := by
+  have hsum : p + q = Ω_ v * (p / Ω_ v) + (p % Ω_ v + q) := by
+    conv_lhs => rw [← Ordinal.div_add_mod p (Ω_ v)]
+    rw [add_assoc]
+  rw [hsum, Ordinal.mul_add_mod_self, Ordinal.mod_eq_of_lt]
+  exact isPrincipal_add_Omega v (Ordinal.mod_lt p (ne_of_gt (Omega_pos v))) h
+
+theorem add_mod_Omega_of_le {v p q : Ordinal.{u}} (h : Ω_ v ≤ q) :
+    (p + q) % Ω_ v = q % Ω_ v := by
+  have hc : 1 ≤ q / Ω_ v := by
+    refine (Ordinal.mul_le_iff_le_div (ne_of_gt (Omega_pos v))).mp ?_
+    rw [mul_one]
+    exact h
+  have hpΩ : p + Ω_ v = Ω_ v * (p / Ω_ v + 1) := by
+    conv_lhs => rw [← Ordinal.div_add_mod p (Ω_ v)]
+    rw [add_assoc, add_Omega (Ordinal.mod_lt p (ne_of_gt (Omega_pos v))), mul_add, mul_one]
+  have hsum : p + q = Ω_ v * (p / Ω_ v + 1 + (q / Ω_ v - 1)) + q % Ω_ v := by
+    conv_lhs => rw [← Ordinal.div_add_mod q (Ω_ v)]
+    rw [← add_assoc]
+    congr 1
+    conv_lhs => rw [← Ordinal.add_sub_cancel_of_le hc, mul_add, mul_one, ← add_assoc, hpΩ]
+    exact (mul_add _ _ _).symm
+  rw [hsum, Ordinal.mul_add_mod_self, Ordinal.mod_mod]
+
+
 end Googology.Notation.ExBuchholz.Ord

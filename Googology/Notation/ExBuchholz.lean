@@ -10,6 +10,7 @@ import Googology.Notation.ExBuchholz.Opow
 import Googology.Notation.ExBuchholz.Level
 import Googology.Notation.ExBuchholz.Eps
 import Googology.Notation.ExBuchholz.Ladder
+import Googology.Notation.ExBuchholz.LadderV
 import Googology.Notation.ExBuchholz.Eval
 import Googology.Notation.ExBuchholz.Mono
 import Googology.Notation.ExBuchholz.System

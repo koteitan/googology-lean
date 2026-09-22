@@ -119,7 +119,16 @@ inductive Term where
 | `p0(W·(1+g))`、`g < z0` | `e_g` | `psi_Omega_mul_eps` |
 | `p0(W·(1+g) + b)`、`g < z0`、`b < e_{g+1}` | `e_g·w^b` | `psi_Omega_mul_add_eps` |
 | `p0(W·z0)` | `z0` | `psi_Omega_mul_zeta0` |
+| `p_v(W_{v+1}·(1+g))`、`g < z^v` | `e^v_g`。全ての添字で | `psi_OmegaV_mul_eq` |
+| `p_n(W_{n+1}·(1+g))`、有限の `n` | 同じもの。条件は自動で満たされる | `psi_OmegaV_mul_eq_nat` |
 | `e_W` | `W`。よって `z0` は可算 | `eps_Omega_one` |
+
+最後の 2 行が `Ord/LadderV.lean` である。`Ladder.lean` の添字を自由にしたもので
+ある。`epsV v` が `x ↦ W_v · w^x` の導関数で、その最小不動点未満で `p_v` がこの関数に
+従うことは `Level.lean` が言う。同じ除算の論法（今度は `W_{v+1}` で割る）が
+`z^v` 未満で `p_v(W_{v+1}·(1+g)) = e^v_g` を与える。条件 `v < W_v` と
+`v+1 < W_{v+1}` は `v` と `v+1` を閉包の中に入れるためのもので、有限の添字なら
+自動的に満たされる。それが `psi_OmegaV_mul_eq_nat` である。
 
 `e_W` の手前の 4 行が `Ord/Ladder.lean` である。有限の梯子を e 関数そのものに
 置き換える。`eps g` は `Ordinal.deriv (w ^ ·) g` で、`p0(W·(1+g)) = e_g` が

@@ -71,6 +71,7 @@ BMS は停止する
 | `Level.lean` | 済。同じことを全添字で。`p_v(a) <= W_v·w^a`。最小不動点未満で等号。`p_v(W_{v+1})` がその不動点 |
 | `Eps.lean` | 済。有限の全段での `p0(W·(n+1)) = e_n`。帰納法一本。`p1(1) = W·w` と `p0(W·w) = e_w` |
 | `Ladder.lean` | 済。同じことを `z0` 未満の全ての `g` で。e 関数と `W` による除算 |
+| `LadderV.lean` | 済。同じことを全添字で。`z^v` 未満で `p_v(W_{v+1}·(1+g)) = e^v_g` |
 | `Eval.lean` | 済。`val`、`Lam`、`val_mem_CSet`、`ψ` の比較補題 2 本 |
 | `Mono.lean` | 済。同時帰納、`val_lt_val`、`OTLt_wf` |
 | `FS.lean` | 済。`dom`、`fs`、`fs_lt`、`dom_eq_one_or_tw`、`step_lt`、`exb` |

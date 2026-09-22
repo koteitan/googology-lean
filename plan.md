@@ -76,6 +76,7 @@ import this and nothing else.
 | `Level.lean` | done — the same at every subscript: `ψ_v(a) ≤ Ω_v·ω^a`, with equality below the first fixed point, and `ψ_v(Ω_{v+1})` is that fixed point |
 | `Eps.lean` | done — `ψ_0(Ω·(n+1)) = ε_n` at every finite `n`, by one induction, and `ψ_0(Ω·ω) = ε_ω` with `ψ_1(1) = Ω·ω` |
 | `Ladder.lean` | done — the same at every `γ < ζ₀` with the ε function, by division by `Ω` |
+| `LadderV.lean` | done — the same at every subscript: `ψ_v(Ω_{v+1}·(1+γ)) = ε^v_γ` below `ζ^v` |
 | `Eval.lean` | done — `val`, `Lam`, `val_mem_CSet`, the two `ψ` comparison helpers |
 | `Mono.lean` | done — the simultaneous induction, `val_lt_val`, `OTLt_wf` |
 | `FS.lean` | done — `dom`, `fs`, `fs_lt`, `dom_eq_one_or_tw`, `step_lt`, `exb` |
