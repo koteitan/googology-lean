@@ -576,19 +576,30 @@ theorem G_t1_eq_nil {u : Term} (h : nil < u) : G u t1 = [] :=
 
 /-- The subscript `Z` of `dom X` is bounded, relative to anything between
 `X[ψ_{Z[0]}(0)]` and `X`, once Buchholz 3.3 is available. -/
-theorem subBound_of_OTFS (H : OTFS) : SubBound := by
+theorem subBound_lt : ∀ X : Term,
+    (∀ X' Y' : Term, size X' < size X → OT X' → Y' < dom X' → OT Y' → OT (fs X' Y')) →
+    OT X → dom X ≠ nil → dom X ≠ t1 → dom X ≠ tw →
+    ∀ u c : Term,
+      fs X (psi (fs (subOf (dom X)) nil) nil) ≤ c → c ≤ X →
+      listLe (G u (subOf (dom X))) (G u c ++ [nil]) := by
   intro X
   induction X with
-  | nil => intro _ h0 _ _; exact absurd rfl h0
+  | nil => intro _ _ h0 _ _; exact absurd rfl h0
   | cons A B t ihA ihB iht =>
-    intro hOT h0 h1 hw u c hV hc
+    intro H hOT h0 h1 hw u c hV hc
+    have HA : ∀ X' Y' : Term, size X' < size A → OT X' → Y' < dom X' → OT Y' →
+        OT (fs X' Y') := fun X' Y' hs => H X' Y' (by simp only [size_cons]; omega)
+    have HB : ∀ X' Y' : Term, size X' < size B → OT X' → Y' < dom X' → OT Y' →
+        OT (fs X' Y') := fun X' Y' hs => H X' Y' (by simp only [size_cons]; omega)
+    have Ht : ∀ X' Y' : Term, size X' < size t → OT X' → Y' < dom X' → OT Y' →
+        OT (fs X' Y') := fun X' Y' hs => H X' Y' (by simp only [size_cons]; omega)
     -- the standard data attached to `dom X`
     have hZne : subOf (dom (cons A B t)) ≠ nil := subOf_dom_ne_nil h0 h1 hw
     have hOTZ : OT (subOf (dom (cons A B t))) := OT_subOf_dom hOT h0 hw
     have hZdom : nil < dom (subOf (dom (cons A B t))) :=
       lt_of_le_of_ne (nil_le _) (fun h => dom_ne_nil hZne h.symm)
     have hOTW : OT (psi (fs (subOf (dom (cons A B t))) nil) nil) :=
-      OT_psi_nil (H _ nil hOTZ hZdom rfl)
+      OT_psi_nil (H _ nil (size_subOf_dom_lt h0) hOTZ hZdom rfl)
     have hWlt : psi (fs (subOf (dom (cons A B t))) nil) nil < dom (cons A B t) :=
       W0_lt_dom h0 h1 hw
     cases t with
@@ -596,7 +607,7 @@ theorem subBound_of_OTFS (H : OTFS) : SubBound := by
       have hdt : dom (cons A B (cons c' d' r')) = dom (cons c' d' r') := rfl
       have hfsle : fs (cons c' d' r') (psi (fs (subOf (dom (cons c' d' r'))) nil) nil)
           ≤ cons c' d' r' := le_of_lt (fs_lt hWlt)
-      have hIH := iht (OT_tail hOT) h0 h1 hw u
+      have hIH := iht Ht (OT_tail hOT) h0 h1 hw u
       have hVeq : fs (cons A B (cons c' d' r'))
           (psi (fs (subOf (dom (cons A B (cons c' d' r')))) nil) nil)
           = addT (psi A B) (fs (cons c' d' r')
@@ -630,7 +641,8 @@ theorem subBound_of_OTFS (H : OTFS) : SubBound := by
             have hZ : subOf (dom (cons A nil nil)) = A := by rw [hdX]; rfl
             have hOTA : OT A := OT_fst hOT
             have hOTA0 : OT (fs A nil) :=
-              H A nil hOTA (by rw [g2]; exact nil_lt_cons _ _ _) rfl
+              H A nil (by simp only [size_cons]; omega) hOTA
+                (by rw [g2]; exact nil_lt_cons _ _ _) rfl
             have hAsplit : addT (fs A nil) t1 = A :=
               eq_addT_one_of_dom_eq_one A hOTA g2
             have hAlt : fs A nil < A := by
@@ -690,9 +702,9 @@ theorem subBound_of_OTFS (H : OTFS) : SubBound := by
             have hOTA : OT A := OT_fst hOT
             have hWA : psi (fs (subOf (dom A)) nil) nil < dom A := hdX ▸ hWlt
             have hOTfa : OT (fs A (psi (fs (subOf (dom A)) nil) nil)) :=
-              H A _ hOTA hWA (hdX ▸ hOTW)
+              H A _ (by simp only [size_cons]; omega) hOTA hWA (hdX ▸ hOTW)
             have hfale : fs A (psi (fs (subOf (dom A)) nil) nil) ≤ A := le_of_lt (fs_lt hWA)
-            have hIH := ihA hOTA (hdX ▸ h0) (hdX ▸ h1) (hdX ▸ hw) u
+            have hIH := ihA HA hOTA (hdX ▸ h0) (hdX ▸ h1) (hdX ▸ hw) u
             have hVeq : fs (cons A nil nil)
                 (psi (fs (subOf (dom (cons A nil nil))) nil) nil)
                 = psi (fs A (psi (fs (subOf (dom A)) nil) nil)) nil := by
@@ -740,7 +752,7 @@ theorem subBound_of_OTFS (H : OTFS) : SubBound := by
               have hOTB : OT B := OT_snd hOT
               have hWB : psi (fs (subOf (dom B)) nil) nil < dom B := hdX ▸ hWlt
               have hfble : fs B (psi (fs (subOf (dom B)) nil) nil) ≤ B := le_of_lt (fs_lt hWB)
-              have hIH := ihB hOTB (hdX ▸ h0) (hdX ▸ h1) (hdX ▸ hw) u
+              have hIH := ihB HB hOTB (hdX ▸ h0) (hdX ▸ h1) (hdX ▸ hw) u
               have hVeq : fs (cons A B nil)
                   (psi (fs (subOf (dom (cons A B nil))) nil) nil)
                   = psi A (fs B (psi (fs (subOf (dom B)) nil) nil)) := by
@@ -779,6 +791,9 @@ theorem subBound_of_OTFS (H : OTFS) : SubBound := by
                   (le_trans hZA (le_of_lt (lt_of_not_le hu)))]
                 intro x hx; exact absurd hx List.not_mem_nil
             · exact absurd (show dom (cons A B nil) = tw from by rw [dom]; simp_all) hw
+
+theorem subBound_of_OTFS (H : OTFS) : SubBound :=
+  fun X => subBound_lt X (fun X' Y' _ => H X' Y')
 
 /-- The bound on `Z` carries to `Z[0]`, through 3.6 at `Z`. -/
 theorem sub_G_le {X₂ : Term} (e1 : dom X₂ ≠ nil) (e2 : dom X₂ ≠ t1) (e3 : dom X₂ ≠ tw)
@@ -906,17 +921,24 @@ theorem Trian_case4 {X₁ X₂ : Term}
   · rw [G_psi_of_not_le hvu]
     intro x hx; exact absurd hx List.not_mem_nil
 
-theorem Trian_fs_aux (H : SubBound) :
-    ∀ n : Nat, ∀ X Y : Term, size X ≤ n → OT X → Y < dom X → Trian Y (fs X Y) X := by
+theorem Trian_fs_aux : ∀ n : Nat,
+    (∀ X' : Term, size X' < n → OT X' → dom X' ≠ nil → dom X' ≠ t1 → dom X' ≠ tw →
+      ∀ u c : Term, fs X' (psi (fs (subOf (dom X')) nil) nil) ≤ c → c ≤ X' →
+        listLe (G u (subOf (dom X'))) (G u c ++ [nil])) →
+    ∀ X Y : Term, size X ≤ n → OT X → Y < dom X → Trian Y (fs X Y) X := by
   intro n
   induction n with
   | zero =>
-    intro X Y hsz _ hY
+    intro _ X Y hsz _ hY
     cases X with
     | nil => exact absurd hY (not_lt_nil Y)
     | cons a b t => simp only [size_cons] at hsz; omega
   | succ n ih =>
-  intro X Y hsz hOT hY
+  intro H X Y hsz hOT hY
+  have H' : ∀ X' : Term, size X' < n → OT X' → dom X' ≠ nil → dom X' ≠ t1 → dom X' ≠ tw →
+      ∀ u c : Term, fs X' (psi (fs (subOf (dom X')) nil) nil) ≤ c → c ≤ X' →
+        listLe (G u (subOf (dom X'))) (G u c ++ [nil]) :=
+    fun X' hs => H X' (by omega)
   cases X with
   | nil => exact absurd hY (not_lt_nil Y)
   | cons X₁ X₂ t =>
@@ -925,7 +947,7 @@ theorem Trian_fs_aux (H : SubBound) :
       simp only [size_cons] at hsz
       have hd : dom (cons X₁ X₂ (cons c d u)) = dom (cons c d u) := rfl
       rw [hd] at hY
-      have hT := ih (cons c d u) Y (by simp only [size_cons]; omega) (OT_tail hOT) hY
+      have hT := ih H' (cons c d u) Y (by simp only [size_cons]; omega) (OT_tail hOT) hY
       show Trian Y (fs (cons X₁ X₂ (cons c d u)) Y) (cons X₁ X₂ (cons c d u))
       rw [fs]
       exact Trian.addT_left (psi X₁ X₂) hT
@@ -949,10 +971,10 @@ theorem Trian_fs_aux (H : SubBound) :
             have hd : dom (cons X₁ nil nil) = dom X₁ := by rw [dom]; simp_all
             rw [hd] at hY
             rw [he]
-            exact Trian.psi_sub (ih X₁ Y (by omega) (OT_fst hOT) hY)
+            exact Trian.psi_sub (ih H' X₁ Y (by omega) (OT_fst hOT) hY)
       · by_cases h2 : dom X₂ = t1
         · have hfs : Trian nil (fs X₂ nil) X₂ := by
-            refine ih X₂ nil (by omega) (OT_snd hOT) ?_
+            refine ih H' X₂ nil (by omega) (OT_snd hOT) ?_
             rw [h2]; exact nil_lt_cons _ _ _
           have hpsi : Trian Y (psi X₁ (fs X₂ nil)) (psi X₁ X₂) :=
             Trian.of_nil (Trian.psi_left X₁ hfs)
@@ -969,15 +991,15 @@ theorem Trian_fs_aux (H : SubBound) :
             have hd : dom (cons X₁ X₂ nil) = tw := by rw [dom]; simp_all
             rw [hd, ← h3] at hY
             rw [he]
-            exact Trian.psi_left X₁ (ih X₂ Y (by omega) (OT_snd hOT) hY)
+            exact Trian.psi_left X₁ (ih H' X₂ Y (by omega) (OT_snd hOT) hY)
           · by_cases h4 : dom X₂ < cons X₁ X₂ nil
             · have he : fs (cons X₁ X₂ nil) Y = psi X₁ (fs X₂ Y) := by rw [fs]; simp_all
               have hd : dom (cons X₁ X₂ nil) = dom X₂ := by rw [dom]; simp_all
               rw [hd] at hY
               rw [he]
-              exact Trian.psi_left X₁ (ih X₂ Y (by omega) (OT_snd hOT) hY)
+              exact Trian.psi_left X₁ (ih H' X₂ Y (by omega) (OT_snd hOT) hY)
             · have hIH : ∀ W : Term, W < dom X₂ → Trian W (fs X₂ W) X₂ :=
-                fun W hW => ih X₂ W (by omega) (OT_snd hOT) hW
+                fun W hW => ih H' X₂ W (by omega) (OT_snd hOT) hW
               have hZne : subOf (dom X₂) ≠ nil := subOf_dom_ne_nil h1 h2 h3
               have hOTZ : OT (subOf (dom X₂)) := by
                 rcases dom_shape X₂ with hd | hd | ⟨A, hd⟩
@@ -987,12 +1009,13 @@ theorem Trian_fs_aux (H : SubBound) :
                   rw [hd] at hz ⊢
                   exact OT_fst hz
               have hTZ : Trian nil (fs (subOf (dom X₂)) nil) (subOf (dom X₂)) :=
-                ih (subOf (dom X₂)) nil
+                ih H' (subOf (dom X₂)) nil
                   (Nat.le_trans (Nat.le_trans (size_subOf_le _) (size_dom_le X₂))
                     (by omega)) hOTZ
                   (lt_of_le_of_ne (nil_le _) (fun hz => dom_ne_nil hZne hz.symm))
               have hBd := tower_G_le h1 h2 h3 hIH
-                (sub_G_le h1 h2 h3 hTZ (H X₂ (OT_snd hOT) h1 h2 h3))
+                (sub_G_le h1 h2 h3 hTZ (H X₂ (by omega)
+                  (OT_snd hOT) h1 h2 h3))
               by_cases hn : Y ≠ nil ∧ isNum Y = true
               · have hYn : Y = numeral (numVal Y) := eq_numeral_numVal Y hn.2
                 rw [hYn]
@@ -1011,6 +1034,6 @@ theorem Trian_fs_aux (H : SubBound) :
 /-- **Buchholz 3.6** for the extended system, from 3.3. -/
 theorem Trian_fs (H : OTFS) {X Y : Term} (hOT : OT X) (h : Y < dom X) :
     Trian Y (fs X Y) X :=
-  Trian_fs_aux (subBound_of_OTFS H) (size X) X Y (Nat.le_refl _) hOT h
+  Trian_fs_aux (size X) (fun X' _ => subBound_of_OTFS H X') X Y (Nat.le_refl _) hOT h
 
 end Googology.Notation.ExBuchholz.Term

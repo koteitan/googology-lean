@@ -924,6 +924,22 @@ theorem OT_repeatPrin {a b : Term} (h : OT (psi a b)) :
       | succ j => simp [repeatPrin, descHead, head?, le_refl]
     simp only [ha, hb, hG, hd, ih, Bool.and_true, Bool.true_and]
 
+/-- The subscript of `dom X` is strictly smaller than `X`. -/
+theorem size_subOf_dom_lt {X : Term} (h0 : dom X ≠ nil) :
+    size (subOf (dom X)) < size X := by
+  have hX : X ≠ nil := fun h => h0 (by rw [h]; rfl)
+  have hle := size_dom_le X
+  rcases dom_shape X with h | h | ⟨Z, h⟩
+  · exact absurd h h0
+  · rw [h]
+    simp only [subOf, size]
+    cases X with
+    | nil => exact absurd rfl hX
+    | cons a b t => simp only [size_cons]; omega
+  · rw [h] at hle ⊢
+    simp only [subOf, size_cons] at hle ⊢
+    omega
+
 /-! ## As an expansion system -/
 
 /-- Extended Buchholz terms as an expansion system: one step is the
