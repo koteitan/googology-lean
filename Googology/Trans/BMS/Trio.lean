@@ -31,12 +31,14 @@ proved: `omegaIndexMatrix` is a transcription, and the `#guard`s below are the
 calibration against the published table.
 
 Two further checks were run outside Lean, against the reference
-implementation in [yaBMS](https://github.com/koteitan/yaBMS), on the twenty
-matrices the `#guard`s below produce.  Every one of them is a standard form
-(`bms -s` answers `1` on all twenty), and the map is order-preserving on
-them: taking the table's rows in increasing `α`, each matrix compares `<`
-with the next (`bms -c`).  Neither is a theorem here; both are what the
-one-row case has as `std_entries_iff` and `val_lt_val`.
+implementation in [yaBMS](https://github.com/koteitan/yaBMS), on the thirty
+matrices the `#guard`s below produce — the twenty of the `α < ε₀` table, the
+seven collapse values and `M(Ω_v)` for `v = 1, 2, 3`.  Every one of them is a
+standard form (`bms -s` answers `1` on all thirty), and the map is
+order-preserving on the first twenty: taking the table's rows in increasing
+`α`, each matrix compares `<` with the next (`bms -c`).  Neither is a theorem
+here; both are what the one-row case has as `std_entries_iff` and
+`val_lt_val`.
 -/
 
 namespace Googology.Trans.BMS
@@ -153,5 +155,71 @@ abbrev opowT (a : Term) : Term := psi nil a
 
 #guard omegaIndexMatrix (opowT (addT (opowT (addT t1 t1)) (opowT (addT t1 t1))))
   = [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[3,0,0],[2,1,1],[3,0,0],[3,0,0]]
+
+/-! ### Collapse values and the uncountable base
+
+Two more clauses of the
+[algorithm for `ε₀ ≤ α < Λ`](https://github.com/koteitan/trio/blob/main/ebp2bms/algorithm/2/README-en.md)
+are stated closed, and this section transcribes them.  When `α` is itself a
+collapse `ψ_0(Ω_X)`, the matrix of the subscript goes in unchanged, three
+columns to the right; and `M(Ω_1)` is the base the uncountable region is built
+from, with one cardinal successor per lift.  The calibration is against the
+[table for that range](https://github.com/koteitan/trio/blob/main/ebp2bms/sheet/2/README-en.md).
+-/
+
+/-- Shift every column's `x`. -/
+def shiftX (d : Nat) (m : List (List Nat)) : List (List Nat) :=
+  m.map (fun c => match c with | [x, y, z] => [x + d, y, z] | c => c)
+
+/-- The lift `L(x, y, z) = (x+1, y+1, z)`. -/
+def liftC (m : List (List Nat)) : List (List Nat) :=
+  m.map (fun c => match c with | [x, y, z] => [x + 1, y + 1, z] | c => c)
+
+/-- `M(Ω_1)`, the base of the uncountable region. -/
+def omegaOneMatrix : List (List Nat) := [[0,0,0],[1,1,1],[2,1,1],[3,1,0]]
+
+/-- `M(Ω_v)` for a finite `v`: one lift of the base per cardinal successor. -/
+def omegaFinMatrix (v : Nat) : List (List Nat) :=
+  (List.range v).flatMap (fun i => liftC^[i] omegaOneMatrix)
+
+/-- **The trio matrix of `ψ_0(Ω_α)`**, with `α` a collapse value taken apart
+recursively.  `α < ε₀` falls through to `omegaIndexMatrix`. -/
+def trioMatrix : Term → List (List Nat)
+  | cons nil (cons X nil nil) nil =>
+      if X == nil then omegaIndexMatrix (cons nil (cons nil nil nil) nil)
+      else [[0,0,0],[1,1,1],[2,1,1]] ++ shiftX 3 (trioMatrix X)
+  | α => omegaIndexMatrix α
+
+-- `ψ_0(Ω_{ε₀})`, where `ε₀ = ψ_0(Ω_1)` is `te0`.
+#guard trioMatrix te0 = [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0]]
+
+-- `ψ_0(Ω_{ψ_0(Ω_2)})`.
+#guard trioMatrix (psi nil (psi (addT t1 t1) nil))
+  = [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,2,0]]
+
+-- `ψ_0(Ω_{ψ_0(Ω_ω)})`.
+#guard trioMatrix (psi nil (psi (opowT t1) nil))
+  = [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1]]
+
+-- `ψ_0(Ω_{ψ_0(Ω_{ω+1})})`.
+#guard trioMatrix (psi nil (psi (addT (opowT t1) t1) nil))
+  = [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,0],[6,2,0]]
+
+-- `ψ_0(Ω_{ψ_0(Ω_{ω·2})})`.
+#guard trioMatrix (psi nil (psi (addT (opowT t1) (opowT t1)) nil))
+  = [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,0],[6,2,1]]
+
+-- `ψ_0(Ω_{ψ_0(Ω_{ω²})})`.
+#guard trioMatrix (psi nil (psi (opowT (addT t1 t1)) nil))
+  = [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1]]
+
+-- `ψ_0(Ω_{ψ_0(Ω_{ω^ω})})`.
+#guard trioMatrix (psi nil (psi (opowT (opowT t1)) nil))
+  = [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[6,0,0]]
+
+#guard omegaFinMatrix 1 = [[0,0,0],[1,1,1],[2,1,1],[3,1,0]]
+
+#guard omegaFinMatrix 2
+  = [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0]]
 
 end Googology.Trans.BMS
