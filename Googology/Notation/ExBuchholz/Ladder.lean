@@ -1,4 +1,5 @@
 import Googology.Notation.ExBuchholz.Eps
+import Mathlib.SetTheory.Ordinal.Veblen
 
 /-!
 # `ψ_0(Ω·(1+γ)) = ε_γ` at every `γ`
@@ -710,5 +711,31 @@ theorem psi_Omega_sq : psi ((Ω_ 1 : Ordinal.{u}) * Ω_ 1) 0 = zeta0.{u} := by
     rwa [Ordinal.mod_eq_of_lt hxΩ] at hm
   · rw [← psi_Omega_mul_zeta0]
     exact psi_mono 0 (mul_le_mul_right (le_trans (zeta0_le_Omega_one) (le_refl _)) _)
+
+/-! ### The values in Veblen's notation
+
+`Ordinal.veblen` is mathlib's Veblen hierarchy, with `veblen 0 a = ω^a`.  The
+ε function of this file is `veblen 1` and `ζ₀` is `veblen 2 0`, so the ladder
+reads `ψ_0(Ω·(1+γ)) = φ_1(γ)` and `ψ_0(Ω²) = φ_2(0)` in the usual notation. -/
+
+theorem eps_eq_veblen (γ : Ordinal.{u}) : eps.{u} γ = Ordinal.veblen 1 γ := by
+  rw [eps, show (1 : Ordinal.{u}) = 0 + 1 from (zero_add 1).symm, Ordinal.veblen_add_one,
+    Ordinal.veblen_zero]
+
+theorem zeta0_eq_veblen : zeta0.{u} = Ordinal.veblen 2 0 := by
+  rw [show (2 : Ordinal.{u}) = 1 + 1 from one_add_one_eq_two.symm, Ordinal.veblen_add_one,
+    Ordinal.deriv_zero_right, zeta0]
+  congr 1
+  funext x
+  rw [eps_eq_veblen]
+
+/-- **`ψ_0(Ω·(1+γ)) = φ_1(γ)`.** -/
+theorem psi_Omega_mul_veblen {γ : Ordinal.{u}} (h : γ < zeta0.{u}) :
+    psi ((Ω_ 1 : Ordinal.{u}) * (1 + γ)) 0 = Ordinal.veblen 1 γ := by
+  rw [psi_Omega_mul_eps h, eps_eq_veblen]
+
+/-- **`ψ_0(Ω²) = φ_2(0)`.** -/
+theorem psi_Omega_sq_veblen : psi ((Ω_ 1 : Ordinal.{u}) * Ω_ 1) 0 = Ordinal.veblen 2 0 := by
+  rw [psi_Omega_sq, zeta0_eq_veblen]
 
 end Googology.Notation.ExBuchholz.Ord
