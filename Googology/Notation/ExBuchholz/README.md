@@ -43,7 +43,7 @@ which is the whole content of the extension.
 | `Eval.lean` | `Term.val`, the evaluation into `Ordinal`; `Lam` and `val_lt_Lam` (needs mathlib) |
 | `Mono.lean` | `val_lt_val`, `val_mem_CSet_arg`, `valHom`, `OTLt_wf` (needs mathlib) |
 | `FS.lean` | `dom`, `fs` (the fundamental sequence `X[Y]`), `fs_lt` (it descends), and `exb`, the expansion system |
-| `Closure.lean` | concatenation, `G°`, `⊲`, and the sum half of Buchholz 3.5 |
+| `Closure.lean` | concatenation, `G°`, `⊲`, and Buchholz 3.5 |
 
 ## The order
 
@@ -213,13 +213,14 @@ together with `z`.
 | | statement | state |
 |---|---|---|
 | 3.4 | `b ⊲_z a`, `G_u a < a`, `G_u z < b` ⟹ `G_u b < b` | not yet |
-| 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b` and `ψ_u(b₀) ⊲_z ψ_u(b)` | sum half done |
+| 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b` and `ψ_u(b₀) ⊲_z ψ_u(b)` | **done** |
 | 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | not yet |
 | 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | not yet |
 
 3.4 is where the work is: it turns "bounded relative to `z`" into the
-standard-form condition outright. `Closure.lean` has the vocabulary and the
-sum half of 3.5.
+standard-form condition outright. `Closure.lean` has the vocabulary and both halves of
+3.5, each resting on a decomposition lemma for terms lying strictly between
+two others.
 
 ## Naming
 

@@ -13,7 +13,7 @@ any `c` between them, together with `z`.  The chain is
 | | statement | here |
 |---|---|---|
 | 3.4 | `b ⊲_z a`, `G_u a < a`, `G_u z < b` ⟹ `G_u b < b` | not yet |
-| 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b` and `ψ_u(b₀) ⊲_z ψ_u(b)` | sum half done |
+| 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b` and `ψ_u(b₀) ⊲_z ψ_u(b)` | **done** |
 | 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | not yet |
 | 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | not yet |
 
@@ -22,7 +22,9 @@ standard-form condition outright.  Its proof takes a subterm of `b` of minimal
 length violating the condition and derives a contradiction.
 
 This file has the vocabulary — concatenation, `G°`, the ordering on the lists
-`G` returns, and `⊲` itself — and the sum half of 3.5.
+`G` returns, and `⊲` itself — and both halves of 3.5.  Each half rests on a
+decomposition lemma saying what a term strictly between two others has to look
+like: `addT_between` for sums and `psi_between` for collapses.
 -/
 
 namespace Googology.Notation.ExBuchholz.Term
@@ -130,5 +132,80 @@ theorem Trian.addT_left (a : Term) {z b₀ b : Term} (h : Trian z b₀ b) :
   rcases List.mem_append.mp hy with hy | hy
   · exact ⟨y, List.mem_append_left _ (List.mem_append_right _ hy), hle'⟩
   · exact ⟨y, List.mem_append_right _ hy, hle'⟩
+
+/-- Anything strictly between `ψ_u(b₀)` and `ψ_u(b)` has `ψ_u` at its head,
+with an argument between. -/
+theorem psi_between {u b₀ b c : Term} (h₁ : psi u b₀ < c) (h₂ : c ≤ psi u b) :
+    ∃ c₀ c₁, c = cons u c₀ c₁ ∧ b₀ ≤ c₀ ∧ c₀ ≤ b := by
+  cases c with
+  | nil => exact absurd h₁ (not_lt_nil _)
+  | cons r s c₁ =>
+    have hle_rs : psi r s ≤ psi u b := by
+      rcases le_iff_lt_or_eq.mp h₂ with hB | hB
+      · rcases cons_lt_cons_iff.mp hB with hB' | ⟨_, hB''⟩
+        · exact le_of_lt hB'
+        · exact absurd hB'' (not_lt_nil _)
+      · injection hB with e1 e2 _
+        exact e1 ▸ e2 ▸ le_refl _
+    rcases cons_lt_cons_iff.mp h₁ with hA | ⟨hA, _⟩
+    · rcases psi_lt_psi_iff.mp hA with hlt1 | ⟨e1, hlt1⟩
+      · exfalso
+        rcases le_iff_lt_or_eq.mp hle_rs with h' | h'
+        · rcases psi_lt_psi_iff.mp h' with h'' | ⟨e', _⟩
+          · exact lt_irrefl u (lt_trans hlt1 h'')
+          · exact lt_irrefl u (e' ▸ hlt1)
+        · injection h' with e' _ _
+          exact lt_irrefl u (e' ▸ hlt1)
+      · subst e1
+        refine ⟨s, c₁, rfl, le_of_lt hlt1, ?_⟩
+        rcases le_iff_lt_or_eq.mp hle_rs with h' | h'
+        · rcases psi_lt_psi_iff.mp h' with h'' | ⟨_, h''⟩
+          · exact absurd h'' (lt_irrefl u)
+          · exact le_of_lt h''
+        · injection h' with _ e2 _
+          exact e2 ▸ le_refl _
+    · injection hA with e1 e2 _
+      subst e1
+      refine ⟨s, c₁, rfl, e2 ▸ le_refl _, ?_⟩
+      rcases le_iff_lt_or_eq.mp hle_rs with h' | h'
+      · rcases psi_lt_psi_iff.mp h' with h'' | ⟨_, h''⟩
+        · exact absurd h'' (lt_irrefl u)
+        · exact le_of_lt h''
+      · injection h' with _ e2 _
+        exact e2 ▸ le_refl _
+
+theorem G_psi_of_le {v u b : Term} (h : v ≤ u) :
+    G v (psi u b) = b :: (G v u ++ G v b) := by
+  rw [psi, G_cons, if_pos h]
+  simp [G]
+
+theorem G_psi_of_not_le {v u b : Term} (h : ¬ v ≤ u) : G v (psi u b) = [] := by
+  rw [psi, G_cons, if_neg h]
+  simp [G]
+
+/-- **Buchholz 3.5, the collapse half.** -/
+theorem Trian.psi_left (u : Term) {z b₀ b : Term} (h : Trian z b₀ b) :
+    Trian z (psi u b₀) (psi u b) := by
+  refine ⟨psi_lt_psi_iff.mpr (Or.inr ⟨rfl, h.1⟩), ?_⟩
+  intro v c hlt hle
+  obtain ⟨c₀, c₁, rfl, hb0, hb1⟩ := psi_between hlt hle
+  by_cases hvu : v ≤ u
+  · rw [G_psi_of_le hvu, G_cons, if_pos hvu]
+    intro x hx
+    rcases List.mem_cons.mp hx with rfl | hx
+    · exact ⟨c₀, List.mem_append_left _ (List.mem_append_left _ (List.mem_cons_self ..)), hb0⟩
+    rcases List.mem_append.mp hx with hx | hx
+    · exact ⟨x, List.mem_append_left _ (List.mem_append_left _
+        (List.mem_cons_of_mem _ (List.mem_append_left _ hx))), le_refl x⟩
+    · rcases le_iff_lt_or_eq.mp hb0 with hb | rfl
+      · obtain ⟨y, hy, hle'⟩ := h.2 v c₀ hb hb1 x hx
+        rcases List.mem_append.mp hy with hy | hy
+        · exact ⟨y, List.mem_append_left _ (List.mem_append_left _
+            (List.mem_cons_of_mem _ (List.mem_append_right _ hy))), hle'⟩
+        · exact ⟨y, List.mem_append_right _ hy, hle'⟩
+      · exact ⟨x, List.mem_append_left _ (List.mem_append_left _
+          (List.mem_cons_of_mem _ (List.mem_append_right _ hx))), le_refl x⟩
+  · rw [G_psi_of_not_le hvu]
+    intro x hx; cases hx
 
 end Googology.Notation.ExBuchholz.Term
