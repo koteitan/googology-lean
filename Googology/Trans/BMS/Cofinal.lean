@@ -18,6 +18,10 @@ available at a limit.
 
 The index is written `n + 1` because that is what an expansion supplies:
 `A[N]` is `X[N+1]`.
+
+`fs_idx_lt` is the companion: at an `ω`-limit the members increase.  The two
+together are `fs_lub` — below `ψ_0(Ω)`, `X` is the least upper bound of
+`X[0] < X[1] < ⋯`, which is what calling `[ ]` a fundamental sequence means.
 -/
 
 namespace Googology.Trans.BMS
@@ -269,6 +273,66 @@ theorem exists_le_fs : ∀ (X Y : Term), OT X → OT Y → AllNil X → AllNil Y
             refine cons_lt_psi_iff.mpr (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, ?_⟩))
             rw [idx_of_dom_tw hd] at hm
             exact lt_of_lt_of_le' (lt_addT_t1 e) hm
+
+
+
+theorem repeatPrin_lt_succ : ∀ (A B : Term) (n : Nat),
+    repeatPrin A B n < repeatPrin A B (n + 1) := by
+  intro A B n
+  induction n with
+  | zero => rw [repeatPrin, repeatPrin, repeatPrin]; exact nil_lt_cons _ _ _
+  | succ m ih =>
+    rw [show repeatPrin A B (m + 1) = cons A B (repeatPrin A B m) from rfl,
+      show repeatPrin A B (m + 1 + 1) = cons A B (repeatPrin A B (m + 1)) from rfl]
+    exact cons_lt_cons_iff.mpr (Or.inr ⟨rfl, ih⟩)
+
+/-- **The fundamental sequence increases at an `ω`-limit.**  With
+`exists_le_fs` this makes `X` the least upper bound of `X[0] < X[1] < ⋯`. -/
+theorem fs_idx_lt : ∀ (X : Term), OT X → AllNil X → dom X = tw → ∀ n : Nat,
+    fs X (idx X n) < fs X (idx X (n + 1)) := by
+  intro X
+  induction hs : size X using Nat.strong_induction_on generalizing X with
+  | _ N ih =>
+    cases X with
+    | nil => intro _ _ hd; exact absurd hd (by rw [dom_nil]; decide)
+    | cons a b t =>
+      intro hOT hA hd n
+      obtain ⟨ha, hAb, hAt⟩ := hA
+      subst ha
+      cases t with
+      | cons c d u =>
+        obtain ⟨hc, hAd, hAu⟩ := hAt
+        subst hc
+        rw [dom_cons_cons] at hd
+        rw [fs_sum, fs_sum, idx_sum, idx_sum]
+        exact cons_lt_cons_iff.mpr (Or.inr ⟨rfl,
+          ih (size (cons nil d u)) (by subst hs; simp only [size_cons]; omega) _ rfl
+            (OT_tail hOT) ⟨rfl, hAd, hAu⟩ hd n⟩)
+      | nil =>
+        rcases dom_allNil b hAb with h1 | h1 | h1
+        · exfalso
+          rw [dom_eq_nil_iff.mp h1] at hd
+          exact absurd (dom_t1.symm.trans hd) (by decide)
+        · rw [idx_of_dom_tw hd, idx_of_dom_tw hd, fs_block_succ h1, fs_block_succ h1]
+          exact repeatPrin_lt_succ _ _ n
+        · rw [idx_of_dom_tw hd, idx_of_dom_tw hd, fs_block_lim h1, fs_block_lim h1]
+          refine cons_lt_cons_iff.mpr (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, ?_⟩)))
+          have := ih (size b) (by subst hs; simp only [size_cons]; omega) b rfl
+            (OT_snd hOT) hAb h1 n
+          rwa [idx_of_dom_tw h1, idx_of_dom_tw h1] at this
+
+/-- **A term below `ψ_0(Ω)` is the least upper bound of its fundamental
+sequence.**  The members increase, each is below the term, and nothing below
+the term is above all of them. -/
+theorem fs_lub {X : Term} (hOT : OT X) (hA : AllNil X) (hd : dom X = tw) :
+    (∀ n : Nat, fs X (idx X n) < fs X (idx X (n + 1)))
+      ∧ (∀ n : Nat, fs X (idx X n) < X)
+      ∧ (∀ Y : Term, OT Y → AllNil Y → Y < X → ∃ n, Y ≤ fs X (idx X (n + 1))) := by
+  have hne : X ≠ nil := by
+    intro he; rw [he, dom_nil] at hd; exact absurd hd (by decide)
+  exact ⟨fs_idx_lt X hOT hA hd,
+    fun n => fs_lt (idx_lt_dom hOT (allNil_lt_tW X hA) hne n),
+    fun Y hOTY hAY h => exists_le_fs X Y hOT hOTY hA hAY h⟩
 
 
 end Googology.Trans.BMS
