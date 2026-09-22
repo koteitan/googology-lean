@@ -24,6 +24,12 @@ Every system lives in [Notation](../Notation/README.md), so a translation from
 a googological system into a proof-theoretic one is no different from any other
 pair: `Trans/BMS/OTB.lean`, under the alphabetically earlier name.
 
+One file per pair is the starting point, not a ceiling. A pair that grows —
+`BMS` and extended Buchholz's ψ runs to several files — keeps its directory
+and splits by what is being proved, and the index below lists each piece. A
+file about one system alone, needed only because a translation uses it, goes
+in the same directory and is listed as a pair with itself.
+
 ## What to build
 
 Pick the weakest structure that does the job.
