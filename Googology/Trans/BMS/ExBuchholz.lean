@@ -18,6 +18,10 @@ reading is countable, that its subscripts are all `0`, and that a term of that
 shape is below `ψ_0` of itself — which is what the standard-form condition
 needs once the descending condition is in hand.
 
+`unread` writes a term back as a list, and `read_unread` says the reading is
+onto the terms whose subscripts are all `0`: every such term is the reading of
+some one-row matrix.
+
 `OT_of_desc` settles the standard-form side as far as the term goes: with the
 subscripts all `0`, being a standard form is exactly the descending
 condition.  What is left is on the matrix side — that a standard one-row
@@ -165,5 +169,91 @@ theorem OT_of_desc : ∀ X : Term, AllNil X → DescAll X → OT X := by
     rw [isOT]
     simp only [hGb, hb, ht, hD.2.2, Bool.and_true, Bool.true_and]
     rfl
+
+/-- The inverse reading: a term whose subscripts are all `0` is written back
+as a one-row matrix, at level `b`. -/
+def unread (b : Nat) : Term → List Nat
+  | nil => []
+  | cons _ X Y => b :: (unread (b + 1) X ++ unread b Y)
+
+@[simp] theorem unread_nil (b : Nat) : unread b nil = [] := rfl
+
+@[simp] theorem unread_cons (b : Nat) (a X Y : Term) :
+    unread b (cons a X Y) = b :: (unread (b + 1) X ++ unread b Y) := rfl
+
+/-- Nothing written at level `b` is below `b`. -/
+theorem le_of_mem_unread : ∀ (X : Term) (b a : Nat), a ∈ unread b X → b ≤ a := by
+  intro X
+  induction X with
+  | nil => intro b a h; exact absurd h (by simp)
+  | cons _ P Q _ ihP ihQ =>
+    intro b a h
+    rcases List.mem_cons.mp h with he | h
+    · exact Nat.le_of_eq he.symm
+    rcases List.mem_append.mp h with h | h
+    · exact Nat.le_of_succ_le (ihP (b + 1) a h)
+    · exact ihQ b a h
+
+theorem takeWhile_append_of_all {p : Nat → Bool} : ∀ (l₁ l₂ : List Nat),
+    (∀ a ∈ l₁, p a = true) → (∀ a, l₂.head? = some a → p a = false) →
+    (l₁ ++ l₂).takeWhile p = l₁ := by
+  intro l₁
+  induction l₁ with
+  | nil =>
+    intro l₂ _ h₂
+    cases l₂ with
+    | nil => rfl
+    | cons c s => rw [List.nil_append, List.takeWhile_cons, if_neg (by rw [h₂ c rfl]; simp)]
+  | cons a l₁ ih =>
+    intro l₂ h₁ h₂
+    rw [List.cons_append, List.takeWhile_cons, if_pos (h₁ a (List.mem_cons_self ..))]
+    rw [ih l₂ (fun x hx => h₁ x (List.mem_cons_of_mem _ hx)) h₂]
+
+theorem dropWhile_append_of_all {p : Nat → Bool} : ∀ (l₁ l₂ : List Nat),
+    (∀ a ∈ l₁, p a = true) → (∀ a, l₂.head? = some a → p a = false) →
+    (l₁ ++ l₂).dropWhile p = l₂ := by
+  intro l₁
+  induction l₁ with
+  | nil =>
+    intro l₂ _ h₂
+    cases l₂ with
+    | nil => rfl
+    | cons c s => rw [List.nil_append, List.dropWhile_cons, if_neg (by rw [h₂ c rfl]; simp)]
+  | cons a l₁ ih =>
+    intro l₂ h₁ h₂
+    rw [List.cons_append, List.dropWhile_cons, if_pos (h₁ a (List.mem_cons_self ..))]
+    exact ih l₂ (fun x hx => h₁ x (List.mem_cons_of_mem _ hx)) h₂
+
+/-- **The reading is onto the terms whose subscripts are all `0`**: writing a
+term back and reading it again gives the term. -/
+theorem read_unread : ∀ (X : Term), AllNil X → ∀ b : Nat, read b (unread b X) = X := by
+  intro X
+  induction X with
+  | nil => intro _ b; rw [unread_nil, read_nil]
+  | cons a P Q _ ihP ihQ =>
+    intro h b
+    obtain ⟨ha, hP, hQ⟩ := h
+    subst ha
+    have hhi : (unread (b + 1) P ++ unread b Q).takeWhile (fun x => decide (b < x))
+        = unread (b + 1) P := by
+      refine takeWhile_append_of_all _ _ (fun x hx => ?_) (fun x hx => ?_)
+      · exact decide_eq_true (le_of_mem_unread P (b + 1) x hx)
+      · cases Q with
+        | nil => exact absurd hx (by simp)
+        | cons c R S =>
+          rw [unread_cons] at hx
+          simp only [List.head?_cons, Option.some.injEq] at hx
+          subst hx; simp
+    have hlo : (unread (b + 1) P ++ unread b Q).dropWhile (fun x => decide (b < x))
+        = unread b Q := by
+      refine dropWhile_append_of_all _ _ (fun x hx => ?_) (fun x hx => ?_)
+      · exact decide_eq_true (le_of_mem_unread P (b + 1) x hx)
+      · cases Q with
+        | nil => exact absurd hx (by simp)
+        | cons c R S =>
+          rw [unread_cons] at hx
+          simp only [List.head?_cons, Option.some.injEq] at hx
+          subst hx; simp
+    rw [unread_cons, read_cons, hhi, hlo, ihP hP (b + 1), ihQ hQ b]
 
 end Googology.Trans.BMS

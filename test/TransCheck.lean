@@ -34,4 +34,10 @@ principal terms increase. -/
 
 #guard !(isOT (read 0 [0, 1, 0, 1, 2]))
 
+/-! Writing a term back and reading it again gives the term, which is
+`read_unread`. -/
+
+#guard ([t1, tw, psi nil tw, cons nil nil t1, cons nil t1 tw] : List Term).all
+  fun X => read 0 (unread 0 X) == X
+
 end Googology.Trans.BMS
