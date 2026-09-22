@@ -1156,6 +1156,35 @@ theorem dom_sub_dom_eq_one : ∀ X Z : Term, dom X = psi Z nil → dom X ≠ t1 
               rw [hdX] at hd
               exact absurd hd (by intro h; injection h with _ h2 _; exact Term.noConfusion h2)
 
+/-- A term below a sum, but too small to carry its head, is below that head. -/
+theorem lt_head_of_size_lt {x a b t : Term} (hlt : x < cons a b t)
+    (hsz : size x < size (psi a b)) : x < psi a b := by
+  cases x with
+  | nil => exact nil_lt_cons _ _ _
+  | cons p q r =>
+    rcases cons_lt_cons_iff.mp hlt with h | ⟨h, _⟩
+    · exact cons_lt_psi_iff.mpr h
+    · exfalso
+      injection h with e1 e2 _
+      subst e1; subst e2
+      have hn : size (nil : Term) = 0 := rfl
+      simp only [size_cons, psi, hn] at hsz
+      omega
+
+/-- `G` at the head of a sum is `G` at the sum. -/
+theorem G_psi_subset_cons (u a b t : Term) :
+    ∀ x ∈ G u (psi a b), x ∈ G u (cons a b t) := by
+  intro x hx
+  rw [psi, G_cons, G_nil, List.append_nil] at hx
+  rw [G_cons]
+  exact List.mem_append_left _ hx
+
+/-- What `G` sees at the head of a standard sum is below that head. -/
+theorem G_head_lt {u a b t : Term} (h : ∀ y ∈ G u (cons a b t), y < cons a b t) :
+    ∀ x ∈ G u (psi a b), x < psi a b := fun x hx =>
+  lt_head_of_size_lt (h x (G_psi_subset_cons u a b t x hx))
+    (size_lt_of_mem_G u (psi a b) x hx)
+
 /-! ## As an expansion system -/
 
 /-- Extended Buchholz terms as an expansion system: one step is the
