@@ -85,7 +85,7 @@ expansions are understood.
 |---|---|
 | **the two-row generator `(0,0)(1,1)` has rank `ε₀`** — two rows start where one row ends | `Trans.BMS.rank_pairGen` |
 | and at every number of rows the generator is the limit of the previous row's generators | `Trans.BMS.rank_gen_eq_iSup`, `Trans.BMS.rank_gen_lt` |
-| `(0,0)(1,1)(0,0)` has rank `ε₀ + 1`: its last column has no parent, so every bracket drops it | `Trans.BMS.rank_succAll`, `Rewrite.rank_succ_of_const_step` |
+| `(0,0)` has rank `1`, so a zero column at the end adds one: `(0,0)(1,1)(0,0)` has rank `ε₀ + 1` | `Trans.BMS.rank_zeroCol`, `Trans.BMS.rank_append_zeroCol`, `Trans.BMS.rank_succAll` |
 | **expansion never reaches back across a block** — a column whose row-`0` entry is `0` | `Trans.BMS.expandRL_append` |
 | **so the rank is additive over blocks**, and `n` copies of `(0,0)(1,1)` have rank `ε₀·n` | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_blockRepState` |
 | `(0,0)(1,1)(1,0)` has rank `ε₀·ω` | `Trans.BMS.rank_omegaAll` |

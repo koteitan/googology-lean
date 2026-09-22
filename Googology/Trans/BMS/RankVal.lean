@@ -326,20 +326,6 @@ theorem rank_genAll : IsWellFounded.rank (bmsAllL 1).Rel genAll = Ord.eps0 := by
   have h : genAll = (bmsLHomAll 1).map (bmsOfPairHom.map pairGen) := Subtype.ext rfl
   rw [h, rank_bmsAllL_of_bmsL, rank_bmsL_of_pairL, rank_pairGen]
 
-/-- `(0,0)(1,1)(0,0)`. -/
-def succAll : (bmsAllL 1).State := ⟨[[0, 0], [1, 1], [0, 0]], by decide⟩
-
-/-- **`(0,0)(1,1)(0,0)` has rank `ε₀ + 1`.**  Its last column has no parent,
-so every bracket drops it — `./bms` agrees at `[0]`, `[1]` and `[2]` — and
-the correspondence tables' `ε₀ + 1` is a theorem too. -/
-theorem rank_succAll :
-    IsWellFounded.rank (bmsAllL 1).Rel succAll = Order.succ Ord.eps0 := by
-  rw [← rank_genAll]
-  refine Rewrite.rank_succ_of_const_step (show ¬ ([[0, 0], [1, 1], [0, 0]] : List (List Nat)) = []
-    by simp) (fun k => Subtype.ext ?_)
-  show expandRL 2 k [[0, 0], [1, 1], [0, 0]] = [[0, 0], [1, 1]]
-  rfl
-
 /-! ### The rank is additive over blocks -/
 
 /-- Two matrices, one after the other. -/
@@ -379,6 +365,37 @@ theorem rank_appendState (r : Nat) : ∀ B : (bmsAllL r).State,
       rw [hstep, IH ((bmsAllL r).step B N) ⟨hnh, N, rfl⟩ ?_ A, Order.succ_eq_add_one,
         Order.succ_eq_add_one, add_assoc]
       exact (head_expandRL (r + 1) N (Nat.succ_pos r) B.1 h0).symm
+
+/-- A single all-zero column, `(0,0)`. -/
+def zeroCol : (bmsAllL 1).State := ⟨[[0, 0]], by decide⟩
+
+/-- **`(0,0)` has rank `1`.**  It has no parent, so every bracket empties
+it. -/
+theorem rank_zeroCol : IsWellFounded.rank (bmsAllL 1).Rel zeroCol = 1 := by
+  have hnil : ∀ c ∈ ([] : List (List Nat)), c.length = 1 + 1 := by simp
+  rw [Rewrite.rank_succ_of_const_step
+      (show ¬ ([[0, 0]] : List (List Nat)) = [] by simp)
+      (b := (⟨[], hnil⟩ : (bmsAllL 1).State)) (fun k => Subtype.ext (by
+        show expandRL 2 k [[0, 0]] = []
+        rfl)),
+    Rewrite.rank_halted (show (⟨[], hnil⟩ : (bmsAllL 1).State).1 = [] from rfl),
+    Order.succ_eq_add_one, zero_add]
+
+/-- **A zero column at the end adds one.** -/
+theorem rank_append_zeroCol (A : (bmsAllL 1).State) :
+    IsWellFounded.rank (bmsAllL 1).Rel (appendState A zeroCol)
+      = IsWellFounded.rank (bmsAllL 1).Rel A + 1 := by
+  rw [rank_appendState 1 zeroCol (Or.inl rfl) A, rank_zeroCol]
+
+/-- `(0,0)(1,1)(0,0)`. -/
+def succAll : (bmsAllL 1).State := ⟨[[0, 0], [1, 1], [0, 0]], by decide⟩
+
+/-- **`(0,0)(1,1)(0,0)` has rank `ε₀ + 1`.**  Its last column is a block of
+its own, and that block has rank `1` — `./bms` drops it at `[0]`, `[1]` and
+`[2]` — so the correspondence tables' `ε₀ + 1` is a theorem too. -/
+theorem rank_succAll :
+    IsWellFounded.rank (bmsAllL 1).Rel succAll = Ord.eps0 + 1 := by
+  rw [show succAll = appendState genAll zeroCol from rfl, rank_append_zeroCol, rank_genAll]
 
 /-! ### `(0,0)(1,1)(1,0)` has rank `ε₀·ω` -/
 

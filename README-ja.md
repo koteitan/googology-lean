@@ -83,7 +83,7 @@
 |---|---|
 | **2 行の生成元 `(0,0)(1,1)` の階数が `e0` であること**。2 行は 1 行が終わる所から始まる | `Trans.BMS.rank_pairGen` |
 | どの行数でも、生成元は一つ少ない行の生成元たちの極限であること | `Trans.BMS.rank_gen_eq_iSup`, `Trans.BMS.rank_gen_lt` |
-| `(0,0)(1,1)(0,0)` の階数が `e0 + 1` であること。最後の列に親が無いのでどの括弧でも落ちる | `Trans.BMS.rank_succAll`, `Rewrite.rank_succ_of_const_step` |
+| `(0,0)` の階数が `1` で、末尾の 0 の列は 1 を足すこと。`(0,0)(1,1)(0,0)` は `e0 + 1` | `Trans.BMS.rank_zeroCol`, `Trans.BMS.rank_append_zeroCol`, `Trans.BMS.rank_succAll` |
 | **展開がブロックを越えて戻らないこと**。行 `0` の成分が `0` の列がブロックの始まり | `Trans.BMS.expandRL_append` |
 | **だから階数はブロックについて加法的**。`(0,0)(1,1)` の `n` 個並びの階数は `e0·n` | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_blockRepState` |
 | `(0,0)(1,1)(1,0)` の階数が `e0·w` であること | `Trans.BMS.rank_omegaAll` |
