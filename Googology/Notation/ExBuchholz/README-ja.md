@@ -163,7 +163,7 @@ Buchholz は補題 3.3 を `b ⊲_z a` という関係を経由して証明す�
 | 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b`、`ψ_u(b₀) ⊲_z ψ_u(b)`、`ψ_{b₀}(0) ⊲_z ψ_b(0)` | **済** |
 | 3.2(b) | 項で添字づけられた定義域で `z₁ < z₂` ⟹ `a[z₁] < a[z₂]` | **済**（`fs_mono`） |
 | 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **済**。3.3 から |
-| 3.3 | `a, z ∈ OT`、`z ∈ dom a` ⟹ `a[z] ∈ OT` | **済**。`TowerOT` から |
+| 3.3 | `a, z ∈ OT`、`z ∈ dom a` ⟹ `a[z] ∈ OT` | **済**。`Bachmann` から |
 
 仕事をするのは 3.4 である。「`z` に相対して抑えられる」を、標準形の条件そのものに
 変える。`Closure.lean` には 3.4 と、3.5 の 3 つの形と、3.6（`Trian_fs`）がある。
@@ -212,19 +212,28 @@ X[ψ_{Z[0]}(0)] ≤ c ≤ X  ⟹  G_u(Z) ≼ G_u(c) ∪ {0}     （Z = subOf (do
 各枝は `OT_cons_fs`、`OT_psi_nil`、`OT_psi_fs`（3.3 が要る形にした 3.4）、
 `OT_repeatPrin` で片付く。指標の中に `G` が崩壊の水準で何も見ないことは
 `G_eq_nil_of_lt_psi` と `G_numeral_eq_nil` が与える。残る枝は 1 つ、Buchholz の
-場合 4 で、指標が塔の段になるところである。この枝が要求するのが `TowerOT`
-である。場合 4 の配置にある `ψ_A(B)` について
+場合 4 で、指標が塔の段になるところである。この枝が要求するのは彼の第二の塔
+不変量である。場合 4 の配置にある `ψ_A(B)` について
 
 ```
 OT W_i   かつ   ∀ x ∈ G_A(W_i), x < B[W_i]
 ```
 
-が成り立つこと。Buchholz の第二の塔不変量を、崩壊の水準で述べたものである。
-水準は効いていて、水準 `0` では同じ主張は偽になる。それを示す項は
-`test/ExBuchholzCheck.lean` にある。ライブラリが今なお仮定しているのは
-`TowerOT` だけである。
+が崩壊の水準で成り立つこと。水準は効いていて、水準 `0` では同じ主張は偽に
+なる。それを示す項は `test/ExBuchholzCheck.lean` にある。
 
-残っているのは `TowerOT` である。
+`towerOT_of_Bachmann` が、この不変量を段についての帰納法で、`B` だけについて
+の 1 つの主張から出す。それが `Bachmann` である。
+
+```
+∀ x ∈ G_A(B), x < B[ψ_{Z[0]}(0)]
+```
+
+`B` の基本列が、塔の最初の指標のところで、崩壊の水準に `G` が `B` に見るもの
+を全部追い越す、という主張である。これが Bachmann 性であり、ライブラリが今なお
+仮定している唯一のものである。
+
+残っているのは Bachmann 性である。
 
 ## 状態
 
@@ -258,8 +267,9 @@ OT W_i   かつ   ∀ x ∈ G_A(W_i), x < B[W_i]
 | 場合 4 の塔と `(ψ_{X₁}(X₂))[n̲] = ψ_{X₁}(X₂[W_n])` | 済（`tower`、`fs_numeral`） |
 | Buchholz 3.6：`z ∈ dom a → a[z] ⊲_z a` | 済。3.3 から（`Trian_fs`） |
 | `SubBound` そのもの | 済。3.3 から（`subBound_of_OTFS`） |
-| Buchholz 3.3：`z ∈ dom a → a[z] ∈ OT` | 済。`TowerOT` から（`OTFS_of_TowerOT`） |
-| `TowerOT` そのもの | **未証明**。最後の穴。場合 4 の形 651 個について計算で確認 |
+| Buchholz 3.3：`z ∈ dom a → a[z] ∈ OT` | 済。`Bachmann` から（`OTFS_of_Bachmann`） |
+| 場合 4 の塔不変量 | 済。`Bachmann` から（`towerOT_of_Bachmann`） |
+| Bachmann 性そのもの | **未証明**。最後の穴。場合 4 の形 651 個について計算で確認 |
 
 例外的に `sorry` を許しているわけではない。ファイルに `sorry` も `axiom` も無い。
 

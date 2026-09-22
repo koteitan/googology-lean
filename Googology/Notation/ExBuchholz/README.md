@@ -176,7 +176,7 @@ together with `z`.
 | 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b`, `ψ_u(b₀) ⊲_z ψ_u(b)`, `ψ_{b₀}(0) ⊲_z ψ_b(0)` | **done** |
 | 3.2(b) | on a term-indexed domain, `z₁ < z₂` ⟹ `a[z₁] < a[z₂]` | **done** (`fs_mono`) |
 | 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done**, from 3.3 |
-| 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | **done**, from `TowerOT` |
+| 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | **done**, from `Bachmann` |
 
 3.4 is where the work is: it turns "bounded relative to `z`" into the
 standard-form condition outright. `Closure.lean` has it, all three forms of
@@ -229,18 +229,28 @@ Each branch of `fs` is settled by `OT_cons_fs`, `OT_psi_nil`, `OT_psi_fs` — 3.
 in the shape 3.3 needs — and `OT_repeatPrin`, with `G_eq_nil_of_lt_psi` and
 `G_numeral_eq_nil` to show that `G` at the level of the collapse sees nothing
 in the index. One branch is left: Buchholz's case 4, where the index is a
-rung of the tower. What that branch needs is `TowerOT`:
+rung of the tower. What that branch needs is his second tower invariant,
 
 ```
 OT W_i  and  ∀ x ∈ G_A(W_i), x < B[W_i]
 ```
 
-for `ψ_A(B)` in the configuration of case 4. That is Buchholz's second tower
-invariant, at the level of the collapse. The level matters: at level `0` the
-same statement is false, and `test/ExBuchholzCheck.lean` carries the term that
-shows it. `TowerOT` is the only thing the library still assumes.
+for `ψ_A(B)` in the configuration of case 4, at the level of the collapse.
+The level matters: at level `0` the same statement is false, and
+`test/ExBuchholzCheck.lean` carries the term that shows it.
 
-`TowerOT` is what is left.
+`towerOT_of_Bachmann` proves that invariant by induction on the rung, from
+one statement about `B` alone, `Bachmann`:
+
+```
+∀ x ∈ G_A(B), x < B[ψ_{Z[0]}(0)]
+```
+
+The fundamental sequence of `B` at the tower's first index overshoots
+everything `G` sees in `B` at the level of the collapse. That is the
+Bachmann property, and it is the only thing the library still assumes.
+
+The Bachmann property is what is left.
 
 ## Status
 
@@ -274,8 +284,9 @@ shows it. `TowerOT` is the only thing the library still assumes.
 | the tower of case 4, and `(ψ_{X₁}(X₂))[n̲] = ψ_{X₁}(X₂[W_n])` | done (`tower`, `fs_numeral`) |
 | Buchholz 3.6: `z ∈ dom a → a[z] ⊲_z a` | done from 3.3 (`Trian_fs`) |
 | `SubBound` itself | done from 3.3 (`subBound_of_OTFS`) |
-| Buchholz 3.3: `z ∈ dom a → a[z] ∈ OT` | done from `TowerOT` (`OTFS_of_TowerOT`) |
-| `TowerOT` itself | **not proved** — the last gap; checked by computation on 651 case-4 forms |
+| Buchholz 3.3: `z ∈ dom a → a[z] ∈ OT` | done from `Bachmann` (`OTFS_of_Bachmann`) |
+| the tower invariant of case 4 | done from `Bachmann` (`towerOT_of_Bachmann`) |
+| the Bachmann property itself | **not proved** — the last gap; checked by computation on 651 case-4 forms |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 `axiom`.

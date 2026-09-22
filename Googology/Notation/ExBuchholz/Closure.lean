@@ -75,16 +75,26 @@ Each branch of `fs` is settled by `OT_cons_fs`, `OT_psi_nil`, `OT_psi_fs` — 3.
 in the shape 3.3 needs — and `OT_repeatPrin`, with `G_eq_nil_of_lt_psi` and
 `G_numeral_eq_nil` to show that `G` at the level of the collapse sees nothing
 in the index.  One branch is left: Buchholz's case 4, where the index is a
-rung of the tower.  What that branch needs is `TowerOT`:
+rung of the tower.  What that branch needs is his second tower invariant,
 
 ```
 OT W_i   and   ∀ x ∈ G_A(W_i), x < B[W_i]
 ```
 
-for `ψ_A(B)` in the configuration of case 4.  That is Buchholz's second tower
-invariant, at the level of the collapse.  The level matters: at level `0` the
-same statement is false, and `test/ExBuchholzCheck.lean` carries the term that
-shows it.  `TowerOT` is the only thing the library still assumes.
+for `ψ_A(B)` in the configuration of case 4, at the level of the collapse.
+The level matters: at level `0` the same statement is false, and
+`test/ExBuchholzCheck.lean` carries the term that shows it.
+
+`towerOT_of_Bachmann` proves that invariant by induction on the rung, from
+one statement about `B` alone, `Bachmann`:
+
+```
+∀ x ∈ G_A(B), x < B[ψ_{Z[0]}(0)]
+```
+
+The fundamental sequence of `B` at the tower's first index overshoots
+everything `G` sees in `B` at the level of the collapse.  That is the
+Bachmann property, and it is the only thing the library still assumes.
 -/
 
 namespace Googology.Notation.ExBuchholz.Term
@@ -1076,15 +1086,94 @@ theorem Trian_fs (H : OTFS) {X Y : Term} (hOT : OT X) (h : Y < dom X) :
 /-- What Buchholz's case 4 needs of the tower in the proof of 3.3: each rung
 is a standard form, and `G` at the level of the collapse sees in it only
 things below the value that rung produces. -/
-def TowerOT : Prop :=
+def Bachmann : Prop :=
   ∀ A B : Term, OT (cons A B nil) →
     dom B ≠ nil → dom B ≠ t1 → dom B ≠ tw → ¬ (dom B < cons A B nil) →
+    ∀ x ∈ G A B, x < fs B (psi (fs (subOf (dom B)) nil) nil)
+
+/-- Buchholz's second tower invariant, from the Bachmann property. -/
+theorem towerOT_of_Bachmann {A B : Term} (hOT : OT (cons A B nil))
+    (e1 : dom B ≠ nil) (e2 : dom B ≠ t1) (e3 : dom B ≠ tw)
+    (hAZ : A ≤ subOf (dom B)) (hAZ0 : A ≤ fs (subOf (dom B)) nil)
+    (hBach : ∀ x ∈ G A B, x < fs B (psi (fs (subOf (dom B)) nil) nil))
+    (hOTZ0 : OT (fs (subOf (dom B)) nil))
+    (h33B : ∀ W : Term, W < dom B → OT W → OT (fs B W))
+    (h36B : ∀ W : Term, W < dom B → Trian W (fs B W) B)
+    (hTZ : Trian nil (fs (subOf (dom B)) nil) (subOf (dom B))) :
     ∀ i : Nat,
       OT (tower (fs (subOf (dom B)) nil) B i)
       ∧ ∀ x ∈ G A (tower (fs (subOf (dom B)) nil) B i),
-          x < fs B (tower (fs (subOf (dom B)) nil) B i)
+          x < fs B (tower (fs (subOf (dom B)) nil) B i) := by
+  have hdB : dom B = psi (subOf (dom B)) nil := by
+    rcases dom_shape B with h | h | ⟨Z, h⟩
+    · exact absurd h e1
+    · exact absurd h e3
+    · rw [h]; rfl
+  have hGAB : ∀ y ∈ G A B, y < B := OT_G_lt hOT
+  -- what `G` sees in the tower's subscript is below the first value
+  have hZ0 : ∀ x ∈ G A (fs (subOf (dom B)) nil),
+      x < fs B (psi (fs (subOf (dom B)) nil) nil) := by
+    intro x hx
+    obtain ⟨y, hy, hxy⟩ :=
+      hTZ.2 A (subOf (dom B)) (subOf_fs_lt e1 e2 e3) (le_refl _) x hx
+    rcases List.mem_append.mp hy with hy | hy
+    · refine lt_of_le_of_lt' hxy (hBach y ?_)
+      refine G_dom_subset B (subOf (dom B)) A (OT_snd hOT) hdB hAZ y ?_
+      rw [hdB, G_psi_of_le hAZ]
+      exact List.mem_cons_of_mem _ (List.mem_append_left _ hy)
+    · rcases List.mem_cons.mp hy with hy' | hy'
+      · rw [hy'] at hxy
+        refine lt_of_le_of_lt' hxy ?_
+        exact lt_of_le_of_ne (nil_le _)
+          (fun h => fs_ne_nil e1 e2 e3 (fun h' => Term.noConfusion h') h.symm)
+      · rw [G_nil] at hy'; exact absurd hy' List.not_mem_nil
+  intro i
+  induction i with
+  | zero =>
+    refine ⟨OT_psi_nil hOTZ0, ?_⟩
+    intro x hx
+    rw [show tower (fs (subOf (dom B)) nil) B 0
+        = psi (fs (subOf (dom B)) nil) nil from rfl] at hx
+    show x < fs B (psi (fs (subOf (dom B)) nil) nil)
+    by_cases hu : A ≤ fs (subOf (dom B)) nil
+    · rw [G_psi_of_le hu, G_nil, List.append_nil] at hx
+      rcases List.mem_cons.mp hx with hx' | hx
+      · rw [hx']
+        exact lt_of_le_of_ne (nil_le _)
+          (fun h => fs_ne_nil e1 e2 e3 (fun h' => Term.noConfusion h') h.symm)
+      · exact hZ0 x hx
+    · rw [G_psi_of_not_le hu] at hx; exact absurd hx List.not_mem_nil
+  | succ k ihk =>
+    have hWlt : tower (fs (subOf (dom B)) nil) B k < dom B := tower_lt_dom e1 e2 e3 k
+    have hOTY : OT (fs B (tower (fs (subOf (dom B)) nil) B k)) :=
+      h33B _ hWlt ihk.1
+    have hGY : ∀ u : Term, A ≤ u →
+        ∀ y ∈ G u (fs B (tower (fs (subOf (dom B)) nil) B k)),
+          y < fs B (tower (fs (subOf (dom B)) nil) B k) := by
+      intro u hAu
+      refine (h36B _ hWlt).G_lt ?_ ?_
+      · exact fun y hy => hGAB y (G_subset_of_le hAu B y hy)
+      · exact fun y hy => ihk.2 y (G_subset_of_le hAu _ y hy)
+    refine ⟨OT_psi_of hOTZ0 hOTY (hGY _ hAZ0), ?_⟩
+    intro x hx
+    show x < fs B (tower (fs (subOf (dom B)) nil) B (k + 1))
+    have hstep := tower_val_lt (Z₀ := fs (subOf (dom B)) nil) e1 e2 e3 k
+    by_cases hu : A ≤ fs (subOf (dom B)) nil
+    · rw [show tower (fs (subOf (dom B)) nil) B (k + 1)
+          = psi (fs (subOf (dom B)) nil) (fs B (tower (fs (subOf (dom B)) nil) B k))
+          from rfl, G_psi_of_le hu] at hx
+      rcases List.mem_cons.mp hx with hx' | hx
+      · rw [hx']; exact hstep
+      rcases List.mem_append.mp hx with hx | hx
+      · exact lt_trans (hZ0 x hx)
+          (lt_of_le_of_lt' (tower_val_le_zero e1 e2 e3 k) hstep)
+      · exact lt_trans (hGY A (le_refl _) x hx) hstep
+    · rw [show tower (fs (subOf (dom B)) nil) B (k + 1)
+          = psi (fs (subOf (dom B)) nil) (fs B (tower (fs (subOf (dom B)) nil) B k))
+          from rfl, G_psi_of_not_le hu] at hx
+      exact absurd hx List.not_mem_nil
 
-theorem OTFS_aux (HT : TowerOT) : ∀ n : Nat, ∀ X : Term, size X ≤ n →
+theorem OTFS_aux (HB : Bachmann) : ∀ n : Nat, ∀ X : Term, size X ≤ n →
     (OT X → ∀ Y : Term, Y < dom X → Trian Y (fs X Y) X)
   ∧ (OT X → ∀ Y : Term, Y < dom X → OT Y → OT (fs X Y)) := by
   intro n
@@ -1192,7 +1281,41 @@ theorem OTFS_aux (HT : TowerOT) : ∀ n : Nat, ∀ X : Term, size X ≤ n →
               · have hdX : dom (cons A B nil) = tw := by rw [dom]; simp_all
                 rw [hdX] at hY
                 obtain ⟨k, rfl⟩ := eq_numeral_of_lt_tw hOTY hY
-                have hW := HT A B hOT e1 e2 e3 e4 k
+                have hdB : dom B = psi (subOf (dom B)) nil := by
+                  rcases dom_shape B with h | h | ⟨Z, h⟩
+                  · exact absurd h e1
+                  · exact absurd h e3
+                  · rw [h]; rfl
+                have hZne : subOf (dom B) ≠ nil := subOf_dom_ne_nil e1 e2 e3
+                have hOTZ : OT (subOf (dom B)) := OT_subOf_dom hOTB e1 e3
+                have hZdom : nil < dom (subOf (dom B)) :=
+                  lt_of_le_of_ne (nil_le _) (fun h => dom_ne_nil hZne h.symm)
+                have hszZ : size (subOf (dom B)) < size B := size_subOf_dom_lt e1
+                have hAZ : A ≤ subOf (dom B) := by
+                  rcases lt_trichotomy (subOf (dom B)) A with h | h | h
+                  · refine absurd ?_ e4
+                    rw [hdB]
+                    exact cons_lt_cons_iff.mpr (Or.inl (psi_lt_psi_iff.mpr (Or.inl h)))
+                  · exact h ▸ le_refl _
+                  · exact le_of_lt h
+                have hAltZ : A < subOf (dom B) := by
+                  rcases le_iff_lt_or_eq.mp hAZ with h | h
+                  · exact h
+                  · refine absurd ?_ e4
+                    rw [hdB, ← h]
+                    refine cons_lt_cons_iff.mpr (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, ?_⟩)))
+                    exact lt_of_le_of_ne (nil_le B) (fun hb => e1 (by rw [← hb]; rfl))
+                have hdZ : dom (subOf (dom B)) = t1 :=
+                  dom_sub_dom_eq_one B (subOf (dom B)) hdB e2
+                have hOTZ0 : OT (fs (subOf (dom B)) nil) :=
+                  (ih (subOf (dom B)) (by omega)).2 hOTZ nil hZdom rfl
+                have hTZ : Trian nil (fs (subOf (dom B)) nil) (subOf (dom B)) :=
+                  T36 (subOf (dom B)) (by simp only [size_cons]; omega) hOTZ nil hZdom
+                have hW := towerOT_of_Bachmann hOT e1 e2 e3 hAZ
+                  (le_pred_of_lt hOTZ hdZ hAltZ) (HB A B hOT e1 e2 e3 e4) hOTZ0
+                  (fun W hW hOTW => (ih B (by omega)).2 hOTB W hW hOTW)
+                  (fun W hW => T36 B (by simp only [size_cons]; omega) hOTB W hW)
+                  hTZ k
                 have hWlt := tower_lt_dom e1 e2 e3 k
                 have hOTbW : OT (fs B (tower (fs (subOf (dom B)) nil) B k)) :=
                   (ih B (by omega)).2 hOTB _ hWlt hW.1
@@ -1202,12 +1325,12 @@ theorem OTFS_aux (HT : TowerOT) : ∀ n : Nat, ∀ X : Term, size X ≤ n →
 
 /-- **Buchholz 3.3** for the extended system, from the tower invariant of his
 case 4. -/
-theorem OTFS_of_TowerOT (HT : TowerOT) : OTFS :=
-  fun X Y hOT hY hOTY => (OTFS_aux HT (size X) X (Nat.le_refl _)).2 hOT Y hY hOTY
+theorem OTFS_of_Bachmann (HB : Bachmann) : OTFS :=
+  fun X Y hOT hY hOTY => (OTFS_aux HB (size X) X (Nat.le_refl _)).2 hOT Y hY hOTY
 
 /-- **Buchholz 3.6** for the extended system, from the same. -/
-theorem Trian_fs_of_TowerOT (HT : TowerOT) {X Y : Term} (hOT : OT X) (h : Y < dom X) :
+theorem Trian_fs_of_Bachmann (HB : Bachmann) {X Y : Term} (hOT : OT X) (h : Y < dom X) :
     Trian Y (fs X Y) X :=
-  Trian_fs (OTFS_of_TowerOT HT) hOT h
+  Trian_fs (OTFS_of_Bachmann HB) hOT h
 
 end Googology.Notation.ExBuchholz.Term

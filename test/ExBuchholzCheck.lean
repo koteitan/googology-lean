@@ -70,13 +70,12 @@ standard. -/
 #guard runOT (psi nil (psi t2 nil)) 1 0 800 == some 11                   -- ψ_0(Ω_2), BHO
 #guard runOT (psi nil (psi tW nil)) 1 0 800 == some 8                    -- ψ_0(ψ_Ω(0))
 
-/-! ## The last gap: the tower invariant of Buchholz's case 4
+/-! ## The last gap: the Bachmann property
 
-`Closure.lean` proves 3.3 — and with it 3.6 and `SubBound` — from `TowerOT`
-alone: for `ψ_A(B)` in the configuration of case 4, every rung `W_i` of the
-tower is a standard form, and `G_A` sees in it only things below `B[W_i]`,
-the value that rung produces.  That is Buchholz's second tower invariant, and
-it is the only thing left.
+`Closure.lean` proves 3.3 — and with it 3.6, `SubBound` and the tower
+invariant of Buchholz's case 4 — from `Bachmann` alone: for `ψ_A(B)` in the
+configuration of case 4, everything `G_A` sees in `B` is below `B[ψ_{Z[0]}(0)]`,
+the first value the tower produces.  That is the only thing left.
 -/
 
 /-- Is `X = ψ_A(B)` in the configuration of Buchholz's case 4? -/
@@ -86,7 +85,11 @@ def isCase4 : Term → Bool
         && !(decide (dom B < cons A B nil))
   | _ => false
 
-/-- The `i`-th rung, the value it produces, and the level of the collapse. -/
+/-- The level of the collapse, its argument, the `i`-th rung of the tower and
+the value that rung produces. -/
+def lvl : Term → Term | cons A _ _ => A | nil => nil
+def argB : Term → Term | cons _ B _ => B | nil => nil
+
 def rung : Term → Nat → Term
   | cons _ B nil, i => tower (fs (subOf (dom B)) nil) B i
   | _, _ => nil
@@ -95,36 +98,27 @@ def rungVal : Term → Nat → Term
   | cons _ B nil, i => fs B (tower (fs (subOf (dom B)) nil) B i)
   | _, _ => nil
 
-def lvl : Term → Term
-  | cons A _ _ => A
-  | nil => nil
-
-/-- `TowerOT` at one rung. -/
-def towerOT (X : Term) (i : Nat) : Bool :=
-  isOT (rung X i) && (G (lvl X) (rung X i)).all (fun x => decide (x < rungVal X i))
-
 /-! A case-4 form need not be countable, so the check runs over every standard
-form, not only `ctbl`. -/
+form, not only `ctbl`.  **The check** is `Bachmann` on all 651 of size at most
+8. -/
 
 #guard ((upTo 8).filter (fun X => isOT X && isCase4 X)).length == 651
 
-/-! **The check.**  Each of those 651 forms, on five rungs. -/
-
 #guard ((upTo 8).filter (fun X => isOT X && isCase4 X)).all fun X =>
-  (List.range 5).all fun i => towerOT X i
+  (G (lvl X) (argB X)).all fun x => decide (x < rungVal X 0)
 
-/-! The level matters.  At level `0` the same statement is false: write
-`A = ψ_0(ψ_Ω(0))`; for `X = ψ_Ω(ψ_{A+1}(0))` the first rung is `ψ_A(0)`, which
-is also the value it produces, and `G_0` of it holds `ψ_Ω(0)`, which is above
-`ψ_A(0)` because `A` is countable.  `tower_G_le` is stated relative to a `c`
-for that reason. -/
+/-! The level matters.  At level `0` the tower invariant that `Bachmann`
+feeds is false: write `A = ψ_0(ψ_Ω(0))`; for `X = ψ_Ω(ψ_{A+1}(0))` the first
+rung is `ψ_A(0)`, which is also the value it produces, and `G_0` of it holds
+`ψ_Ω(0)`, which is above `ψ_A(0)` because `A` is countable.  `tower_G_le` is
+stated relative to a `c` for that reason. -/
 
 def caseA : Term := psi nil (psi tW nil)
 def caseX : Term := psi t1 (psi (cons nil (psi tW nil) t1) nil)
 
 #guard isOT caseX && isCase4 caseX
 #guard rung caseX 0 == psi caseA nil && rungVal caseX 0 == psi caseA nil
-#guard towerOT caseX 0
+#guard (G (lvl caseX) (rung caseX 0)).all (fun x => decide (x < rungVal caseX 0))
 #guard !((G nil (rung caseX 0)).all (fun x => decide (x < rungVal caseX 0)))
 
 /-! The index in `SubBound` has to be `ψ_{Z[0]}(0)`; an arbitrary `W < dom X`
