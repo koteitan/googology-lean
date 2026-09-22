@@ -38,7 +38,8 @@ inductive Term where
 | `Std.lean` | `G`、`isOT`、`OT`、決定可能性 |
 | `WF.lean` | `not_wellFounded_lt`、`cmp_cons_cons'`、`OT_head`、`OT_tail`、`OT_tail_head_le`、`OTLt`、`acc_nil` |
 | `Sum.lean` | `leadCount`、`dropLead`、`lead_lex`、`acc_of_headLe`、`acc_of_OT`、`wellFounded_OTLt` |
-| `Ord.lean` | 順序数側。`Omega`、`Clos`、`CSet`、`psi`、濃度評価、`psi_lt_Omega_succ`（mathlib が要る） |
+| `Ord.lean` | 順序数側。`Omega`、`Clos`、`CSet`、`psi`、濃度評価、`psi_lt_Omega_succ`、`psi_notMem`、`Omega_le_psi`、`psi_mono`（mathlib が要る） |
+| `Eval.lean` | `Term.val`。順序数への評価（mathlib が要る） |
 
 ## 順序
 
@@ -76,7 +77,9 @@ inductive Term where
 | 基本列、`Rewrite` の値 | **未** |
 | 順序数の上の `ψ` の定義と基本性質 | 済 |
 | `C_v(a)` の濃度評価、したがって `ψ_v(a) < Ω_{v+1}` | 済 |
-| 評価写像 `Term → Ordinal` とその単調性 | **未** |
+| `ψ ∉ C_v(a)`、`Ω_v ≤ ψ_v(a)`、引数についての単調性 | 済 |
+| 評価写像 `Term → Ordinal` | 定義済 |
+| その `OT` 上での単調性 | **未**。下を見よ |
 
 例外的に `sorry` を許しているわけではない。ファイルに `sorry` も `axiom` も無い。
 
@@ -137,9 +140,11 @@ theorem wellFounded_OTLt (HP : ∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))) :
 `ℵ_v < ℵ_{v+1}` だから、閉包は `Ω_{v+1}` 未満の順序数を覆いきれない。したがって
 `ψ_v(a) < Ω_{v+1}` である。
 
-次は `ψ_v(a) ∉ C_v(a)`（補集合が空でないと分かったので、もう即座に出る）、引数に
-ついての単調性、そして評価写像 `Term → Ordinal` とその `OT` 上での単調性である。
-構文的な道（Buchholz の集合 `W_u` と Bachmann 性質）を
+`Eval.lean` が `Term.val` を定義した。残っているのはその `OT` 上での単調性である。
+すぐに出ない理由は記録しておく価値がある。`ψ_v` の引数についての弱い単調性では
+足りない。`ψ_v(a) = ψ_v(a+1)` は実際に起きる——`a` が `C_v(a)` の中に届かないとき
+ちょうどそうなる。狭義にするのが標準形の条件の役目である。4 段階は `Eval.lean` の
+冒頭に書いてある。構文的な道（Buchholz の集合 `W_u` と Bachmann 性質）を
 取らなかったのは、拡張版の基本列が先に要るのに、確認できた出典が手元に無いからで
 ある。
 
@@ -207,9 +212,11 @@ theorem wellFounded_OTLt (HP : ∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))) :
 `ℵ_v < ℵ_{v+1}` だから、閉包は `Ω_{v+1}` 未満の順序数を覆いきれない。したがって
 `ψ_v(a) < Ω_{v+1}` である。
 
-次は `ψ_v(a) ∉ C_v(a)`（補集合が空でないと分かったので、もう即座に出る）、引数に
-ついての単調性、そして評価写像 `Term → Ordinal` とその `OT` 上での単調性である。
-構文的な道（Buchholz の集合 `W_u` と Bachmann 性質）を
+`Eval.lean` が `Term.val` を定義した。残っているのはその `OT` 上での単調性である。
+すぐに出ない理由は記録しておく価値がある。`ψ_v` の引数についての弱い単調性では
+足りない。`ψ_v(a) = ψ_v(a+1)` は実際に起きる——`a` が `C_v(a)` の中に届かないとき
+ちょうどそうなる。狭義にするのが標準形の条件の役目である。4 段階は `Eval.lean` の
+冒頭に書いてある。構文的な道（Buchholz の集合 `W_u` と Bachmann 性質）を
 取らなかったのは、拡張版の基本列が先に要るのに、確認できた出典が手元に無いからで
 ある。
 

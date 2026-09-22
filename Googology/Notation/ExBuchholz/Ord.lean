@@ -208,17 +208,60 @@ theorem lt_add_one_ord (v : Ordinal) : v < v + 1 := by
 theorem add_one_ne_zero_ord (v : Ordinal) : v + 1 ≠ 0 := by
   rw [← Order.succ_eq_add_one]; exact Order.succ_ne_bot v
 
-/-- **`ψ_v(a)` is below the next uncountable.**  The closure has at most `ℵ_v`
-elements, so it cannot exhaust the `ℵ_{v+1}` ordinals below `Ω_{v+1}`. -/
-theorem psi_lt_Omega_succ (a v : Ordinal.{u}) : psi a v < Ω_ (v + 1) := by
-  by_contra hcon0
-  have hcon : Ω_ (v + 1) ≤ psi a v := not_lt.mp hcon0
-  have hsub : Iio (Ω_ (v + 1)) ⊆ CSet v a := fun x hx =>
-    mem_CSet_of_lt_psi (lt_of_lt_of_le hx hcon)
+/-- Some ordinal below `Ω_{v+1}` escapes the closure. -/
+theorem exists_notMem_lt_Omega_succ (v a : Ordinal.{u}) :
+    ∃ x, x < Ω_ (v + 1) ∧ x ∉ CSet v a := by
+  by_contra hcon
+  have hsub : Iio (Ω_ (v + 1)) ⊆ CSet v a := by
+    intro x hx
+    by_contra hx2
+    exact hcon ⟨x, hx, hx2⟩
   have h1 : #(Iio (Ω_ (v + 1))) ≤ Cardinal.lift.{u+1} (ℵ_ v) :=
     (mk_le_mk_of_subset hsub).trans (mk_CSet_le_aleph v a)
   rw [Omega_of_ne_zero (add_one_ne_zero_ord v), Cardinal.mk_Iio_ordinal,
     Ordinal.card_omega] at h1
-  exact absurd (lift_le.1 h1) (not_le_of_gt (Cardinal.aleph_lt_aleph.2 (lt_add_one_ord v)))
+  exact absurd (lift_le.1 h1)
+    (not_le_of_gt (Cardinal.aleph_lt_aleph.2 (lt_add_one_ord v)))
+
+/-- **`ψ_v(a)` is below the next uncountable.**  The closure has at most `ℵ_v`
+elements, so it cannot exhaust the `ℵ_{v+1}` ordinals below `Ω_{v+1}`. -/
+theorem psi_lt_Omega_succ (a v : Ordinal.{u}) : psi a v < Ω_ (v + 1) := by
+  obtain ⟨x, hx, hx2⟩ := exists_notMem_lt_Omega_succ v a
+  exact lt_of_le_of_lt (psi_le_of_notMem hx2) hx
+
+theorem compl_CSet_nonempty (v a : Ordinal) : (CSet v a)ᶜ.Nonempty := by
+  obtain ⟨x, _, hx⟩ := exists_notMem_lt_Omega_succ v a
+  exact ⟨x, hx⟩
+
+/-- `ψ_v(a)` is itself outside the closure. -/
+theorem psi_notMem (a v : Ordinal) : psi a v ∉ CSet v a := by
+  rw [psi_eq]
+  exact csInf_mem (compl_CSet_nonempty v a)
+
+/-- `Ω_v ≤ ψ_v(a)`. -/
+theorem Omega_le_psi (a v : Ordinal) : Ω_ v ≤ psi a v := by
+  rw [psi_eq]
+  refine le_csInf (compl_CSet_nonempty v a) ?_
+  intro b hb
+  by_contra hcon
+  exact hb (mem_CSet_of_lt_Omega (not_le.mp hcon))
+
+theorem psi_pos (a v : Ordinal) : 0 < psi a v :=
+  lt_of_lt_of_le (Omega_pos v) (Omega_le_psi a v)
+
+theorem CSet_mono (v : Ordinal) {a b : Ordinal} (h : a ≤ b) :
+    CSet v a ⊆ CSet v b := by
+  intro x hx
+  induction hx with
+  | small h => exact Clos.small h
+  | add _ _ ihx ihy => exact Clos.add ihx ihy
+  | @coll u e _ _ ihu ihe =>
+    exact Clos.coll (e := ⟨e.1, lt_of_lt_of_le e.2 h⟩) ihu ihe
+
+/-- `ψ_v` is monotone in the argument. -/
+theorem psi_mono (v : Ordinal) {a b : Ordinal} (h : a ≤ b) : psi a v ≤ psi b v := by
+  rw [psi_eq, psi_eq]
+  exact csInf_le_csInf' (compl_CSet_nonempty v b)
+    (compl_subset_compl.2 (CSet_mono v h))
 
 end Googology.Notation.ExBuchholz.Ord

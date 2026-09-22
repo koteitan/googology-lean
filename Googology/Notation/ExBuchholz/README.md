@@ -39,7 +39,8 @@ which is the whole content of the extension.
 | `Std.lean` | `G`, `isOT`, `OT`, decidability |
 | `WF.lean` | `not_wellFounded_lt`, `cmp_cons_cons'`, `OT_head`, `OT_tail`, `OT_tail_head_le`, `OTLt`, `acc_nil` |
 | `Sum.lean` | `leadCount`, `dropLead`, `lead_lex`, `acc_of_headLe`, `acc_of_OT`, `wellFounded_OTLt` |
-| `Ord.lean` | the ordinal side: `Omega`, `Clos`, `CSet`, `psi`, the cardinality bound, `psi_lt_Omega_succ` (needs mathlib) |
+| `Ord.lean` | the ordinal side: `Omega`, `Clos`, `CSet`, `psi`, the cardinality bound, `psi_lt_Omega_succ`, `psi_notMem`, `Omega_le_psi`, `psi_mono` (needs mathlib) |
+| `Eval.lean` | `Term.val`, the evaluation into `Ordinal` (needs mathlib) |
 
 ## The order
 
@@ -79,7 +80,9 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | fundamental sequences, a `Rewrite` value | **not done** |
 | `ψ` on the ordinals: definition and first facts | done |
 | the cardinality bound on `C_v(a)`, hence `ψ_v(a) < Ω_{v+1}` | done |
-| the evaluation `Term → Ordinal` and its monotonicity | **not done** |
+| `ψ ∉ C_v(a)`, `Ω_v ≤ ψ_v(a)`, monotonicity in the argument | done |
+| the evaluation `Term → Ordinal` | defined |
+| its monotonicity on `OT` | **not done** — see below |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 `axiom`.
@@ -148,9 +151,12 @@ arithmetic, and that maximum is `ℵ_v` for every `v` — including `v = 0`, whe
 closure cannot exhaust the ordinals below `Ω_{v+1}`, so
 `ψ_v(a) < Ω_{v+1}`.
 
-Next: `ψ_v(a) ∉ C_v(a)` (now immediate, the complement being nonempty),
-monotonicity in the argument, and then the evaluation `Term → Ordinal` with
-its monotonicity on `OT`. The syntactic alternative —
+`Eval.lean` defines `Term.val`. What is left is its monotonicity on `OT`, and
+the reason it is not immediate is worth recording: weak monotonicity of `ψ_v`
+in the argument is not enough, because `ψ_v(a) = ψ_v(a+1)` does happen —
+exactly when `a` is not reachable inside `C_v(a)`. Strictness is what the
+standard-form condition buys. The header of `Eval.lean` lists the four steps.
+The syntactic alternative —
 Buchholz's sets `W_u` and the Bachmann property — was not taken because it
 needs fundamental sequences for the extended system first, and those have no
 source here that has been checked.
