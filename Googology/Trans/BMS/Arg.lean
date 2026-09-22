@@ -278,4 +278,119 @@ theorem exists_argTerm : ∀ μ : Ordinal.{0}, μ < Ord.eps0 →
         rw [hvr, hvW]
         exact (mul_lt_mul_iff_of_pos_left (Ord.Omega_pos 1)).mpr hrlt
 
+/-! ### The argument term from arbitrary exponent terms
+
+`exists_argTerm` asks for all-nil terms for the exponents, which is what
+`exists_desc_of_lt_eps0` gives below `ε₀`.  Above `ε₀` an exponent can be an
+ε-number, whose term is not all-nil, so this version takes the exponent terms
+as a hypothesis and asks only that their `G_0` stays below `Ω·μ` as ordinals.
+`OT_of_mem_G` makes that enough: a member of `G_0` of a standard form is one,
+so the term comparison follows from the value comparison. -/
+
+/-- A standard form naming a countable ordinal has `nil` for every subscript,
+so `G_{ψ_0(0)}` of it is empty. -/
+theorem G_t1_of_lt_Omega : ∀ E : Term, OT E → val E < Ord.Omega 1 → G t1 E = [] := by
+  intro E
+  induction E with
+  | nil => intro _ _; rfl
+  | cons c d t _ _ iht =>
+    intro hOT hval
+    rw [val_cons] at hval
+    have hpsi : Ord.psi (val d) (val c) < Ord.Omega 1 :=
+      lt_of_le_of_lt (self_le_add_right _ _) hval
+    have hc0 : val c = 0 := by
+      by_contra hne
+      refine absurd hpsi (not_lt.mpr (le_trans ?_ (Ord.Omega_le_psi (val d) (val c))))
+      exact Ord.Omega_mono (Order.one_le_iff_ne_zero.mpr hne)
+    have hcnil : c = nil := by
+      have hOTc : OT c := by
+        rw [OT, isOT] at hOT
+        simp only [Bool.and_eq_true] at hOT
+        exact hOT.1.1.1.1
+      exact val_inj_of_OT hOTc rfl (by rw [hc0, val_nil])
+    subst hcnil
+    have hnot : ¬ (t1 ≤ nil) := not_le_of_lt (nil_lt_cons nil nil nil)
+    rw [G, if_neg hnot, List.nil_append]
+    exact iht (OT_tail hOT) (lt_of_le_of_lt (self_le_add_left _ _) hval)
+
+/-- **The argument term for `Ω·μ`, from terms for the exponents.** -/
+theorem exists_argTerm_gen : ∀ μ : Ordinal.{0}, μ < Ord.Omega 1 → ∀ S : Ordinal.{0},
+    Ord.Omega 1 * μ ≤ S →
+    (∀ e : Ordinal.{0}, e ≤ Ordinal.log (ω : Ordinal) μ →
+      ∃ E : Term, OT E ∧ val E = e ∧ ∀ x ∈ G nil E, val x < S) →
+    ∃ W : Term, OT W ∧ val W = Ord.Omega 1 * μ ∧ AllBig W ∧ ∀ x ∈ G nil W, val x < S := by
+  intro μ
+  induction μ using WellFoundedLT.induction with
+  | _ μ IH =>
+    intro hμΩ S hSμ hexp
+    rcases eq_or_ne μ 0 with rfl | h0
+    · refine ⟨nil, rfl, by rw [mul_zero]; rfl, trivial, fun x hx => ?_⟩
+      rw [G_nil] at hx
+      exact absurd hx (by simp)
+    · obtain ⟨E, hOTE, hvE, hGE⟩ := hexp _ (le_refl _)
+      have hLμ : Ordinal.log (ω : Ordinal) μ ≤ μ := Ordinal.log_le_self _ _
+      have hple : (ω : Ordinal) ^ Ordinal.log ω μ ≤ μ := Ordinal.opow_log_le_self _ h0
+      obtain ⟨n, hn⟩ := Ordinal.lt_omega0.mp (Ordinal.div_opow_log_lt μ Ordinal.one_lt_omega0)
+      have hdm := Ordinal.div_add_mod μ ((ω : Ordinal) ^ Ordinal.log ω μ)
+      rw [hn] at hdm
+      have hn0 : n ≠ 0 := by
+        intro h
+        rw [h, Nat.cast_zero, mul_zero, zero_add] at hdm
+        have hlt : μ % (ω : Ordinal) ^ Ordinal.log ω μ < (ω : Ordinal) ^ Ordinal.log ω μ :=
+          Ordinal.mod_lt μ (ne_of_gt (Ordinal.opow_pos _ omega0_pos))
+        rw [hdm] at hlt
+        exact absurd hlt (not_lt.mpr hple)
+      have hrlt : μ % (ω : Ordinal) ^ Ordinal.log ω μ < μ :=
+        lt_of_lt_of_le (Ordinal.mod_lt μ (ne_of_gt (Ordinal.opow_pos _ omega0_pos))) hple
+      have hΩμ : Ord.Omega 1 ≤ Ord.Omega 1 * μ :=
+        Ord.Omega_le_Omega_mul μ (Order.one_le_iff_ne_zero.mpr h0)
+      have hrμ : Ord.Omega 1 * (μ % (ω : Ordinal) ^ Ordinal.log ω μ) < Ord.Omega 1 * μ :=
+        (mul_lt_mul_iff_of_pos_left (Ord.Omega_pos 1)).mpr hrlt
+      obtain ⟨Wr, hOTr, hvr, hbigr, hGr⟩ := IH _ hrlt (_root_.lt_trans hrlt hμΩ) S
+        (le_trans hrμ.le hSμ) (fun e he =>
+          hexp e (le_trans he (Ordinal.log_mono_right _ hrlt.le)))
+      have hvY : Ord.psi (val E) (val t1) = Ord.Omega 1 * ω ^ Ordinal.log (ω : Ordinal) μ := by
+        rw [hvE, val_t1]
+        exact Ord.psi_one_eq (lt_of_lt_of_le (lt_of_le_of_lt hLμ hμΩ) (Ord.Omega_le_fpOmega 1))
+      have hbigY : Ord.Omega 1 ≤ Ord.psi (val E) (val t1) := by
+        rw [hvY]
+        exact Ord.le_mul_opow_self _ _
+      have hGt1E : (G t1 E).all (fun x => decide (x < E)) = true := by
+        rw [G_t1_of_lt_Omega E hOTE (by rw [hvE]; exact lt_of_le_of_lt hLμ hμΩ)]
+        rfl
+      have hOTpsi : OT (psi t1 E) := by
+        show isOT (cons t1 E nil) = true
+        rw [isOT]
+        simp only [Bool.and_eq_true]
+        exact ⟨⟨⟨⟨rfl, hOTE⟩, hGt1E⟩, rfl⟩, rfl⟩
+      have hdescr : descHead t1 E Wr = true := by
+        cases Wr with
+        | nil => rfl
+        | cons c d u =>
+          show (match head? (cons c d u) with
+            | none => true
+            | some (a, b) => decide (psi a b ≤ psi t1 E)) = true
+          refine decide_eq_true (le_of_val_le (OT_head hOTr) hOTpsi ?_)
+          rw [val_psi, val_psi, hvY]
+          refine le_trans (head_val_le (show head? (cons c d u) = some (c, d) from rfl)) ?_
+          rw [hvr]
+          refine le_of_lt ((mul_lt_mul_iff_of_pos_left (Ord.Omega_pos 1)).mpr ?_)
+          exact Ordinal.mod_lt μ (show ((ω : Ordinal) ^ Ordinal.log ω μ) ≠ 0 from
+            ne_of_gt (Ordinal.opow_pos _ omega0_pos))
+      have hOTW : OT (repPsi t1 E n Wr) :=
+        OT_repPsi (by decide : OT t1) hOTE hGt1E hOTr hdescr n
+      have hvW : val (repPsi t1 E n Wr) = Ord.Omega 1 * μ := by
+        rw [val_repPsi, hvY, hvr, mul_assoc, ← mul_add, hdm]
+      refine ⟨repPsi t1 E n Wr, hOTW, hvW, AllBig_repPsi hbigY hbigr n, fun x hx => ?_⟩
+      rcases G_repPsi_mem (nil_le t1) hx with rfl | h | h | h
+      · rw [hvE]
+        exact lt_of_lt_of_le (lt_of_le_of_lt hLμ hμΩ) (le_trans hΩμ hSμ)
+      · rw [G_t1] at h
+        rcases List.mem_cons.mp h with rfl | h2
+        · rw [val_nil]
+          exact lt_of_lt_of_le (Ord.Omega_pos 1) (le_trans hΩμ hSμ)
+        · exact absurd h2 (by simp)
+      · exact hGE x h
+      · exact hGr x h
+
 end Googology.Trans.BMS
