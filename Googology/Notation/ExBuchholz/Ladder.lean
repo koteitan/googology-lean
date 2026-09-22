@@ -525,4 +525,15 @@ theorem eps_omega0 : eps.{u} (ω : Ordinal.{u}) = epsW.{u} := by
 theorem psi_Omega_omega_eq_eps : psi ((Ω_ 1 : Ordinal.{u}) * ω) 0 = eps.{u} (ω : Ordinal.{u}) := by
   rw [eps_omega0, psi_Omega_omega]
 
+/-- **Every fixed point of `ω ^ ·` is an `ε_γ`.**  So the level of an ordinal
+is available without constructing it: a term-building recursion that meets an
+ε-number can ask for its index. -/
+theorem exists_eps_index {α : Ordinal.{u}} (h : (ω : Ordinal.{u}) ^ α = α) :
+    ∃ γ : Ordinal.{u}, eps.{u} γ = α :=
+  (Ordinal.le_iff_deriv (Ordinal.isNormal_opow Ordinal.one_lt_omega0)).mp (le_of_eq h)
+
+/-- And below `ζ₀` that index is smaller than the ordinal itself. -/
+theorem eps_index_lt {γ : Ordinal.{u}} (h : eps.{u} γ < zeta0.{u}) : γ < eps.{u} γ :=
+  lt_eps_self (lt_of_le_of_lt (self_le_eps γ) h)
+
 end Googology.Notation.ExBuchholz.Ord
