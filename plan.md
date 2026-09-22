@@ -323,7 +323,12 @@ The other two are not Lean problems.
 
 * **A reading for two rows and up.** It needs a stated definition of the map
   from matrices to ordinals. The sources checked give worked values, not a
-  rule, and a rule guessed to fit them is not worth committing.
+  rule, and a rule guessed to fit them is not worth committing. The rank
+  reaches single values without it — `rank_pairGen`, `rank_gen_eq_iSup`,
+  `rank_succAll` — but only where the expansions are already understood:
+  the generators, and the columns that have no parent. A matrix like
+  `(0,0)(1,1)(1,0)` would need the additive structure, which is the reading
+  again.
 * **The Y sequence.** Its official definition is a program and its
   termination is open; see item 4.
 
