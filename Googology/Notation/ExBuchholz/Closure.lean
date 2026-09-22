@@ -567,21 +567,23 @@ theorem OT_psi_fs {A B Y : Term} (hOT : OT (psi A B))
 /-- Below a successor means at most its predecessor. -/
 theorem le_pred_of_lt {A Z : Term} (hOT : OT Z) (hd : dom Z = t1) (h : A < Z) :
     A ≤ fs Z nil := by
-  by_contra hc
-  have hlt : fs Z nil < A := lt_of_not_le hc
-  have hsplit : addT (fs Z nil) t1 = Z := eq_addT_one_of_dom_eq_one Z hOT hd
-  obtain ⟨r, hr, hpos, hle⟩ := addT_between (fs Z nil)
-    (show addT (fs Z nil) nil < A by rw [addT_nil_right]; exact hlt)
-    (by rw [hsplit]; exact le_of_lt h)
-  have hr1 : r = t1 := by
-    rcases le_iff_lt_or_eq.mp hle with h' | h'
-    · have := lt_one_iff.mp h'
-      rw [this] at hpos
-      exact absurd hpos (lt_irrefl nil)
-    · exact h'
-  rw [hr1, hsplit] at hr
-  rw [hr] at h
-  exact absurd h (lt_irrefl Z)
+  rcases lt_trichotomy (fs Z nil) A with hlt | heq | hgt
+  · exfalso
+    have hsplit : addT (fs Z nil) t1 = Z := eq_addT_one_of_dom_eq_one Z hOT hd
+    obtain ⟨r, hr, hpos, hle⟩ := addT_between (fs Z nil)
+      (show addT (fs Z nil) nil < A by rw [addT_nil_right]; exact hlt)
+      (by rw [hsplit]; exact le_of_lt h)
+    have hr1 : r = t1 := by
+      rcases le_iff_lt_or_eq.mp hle with h' | h'
+      · have hz := lt_one_iff.mp h'
+        rw [hz] at hpos
+        exact absurd hpos (lt_irrefl nil)
+      · exact h'
+    rw [hr1, hsplit] at hr
+    rw [hr] at h
+    exact absurd h (lt_irrefl Z)
+  · exact heq ▸ le_refl _
+  · exact le_of_lt hgt
 
 /-- **Buchholz 3.3** for the extended system: the fundamental sequence keeps
 a term standard. -/
