@@ -96,10 +96,13 @@ before that line and have missed nothing they needed.
 `README.md` in English and `README-ja.md` in Japanese, with the language
 switcher and a back link on the first line. The two say the same thing.
 
-### C3. The Japanese is polite
+### C3. The Japanese is plain, and never orders the reader about
 
-The Japanese documents are written in the です・ます register. No imperatives
-at the reader: not 見よ but ご覧ください, not 〜すること but 〜してください.
+The Japanese documents are written in the plain 常体 register, tables
+included: 〜する or a noun, never 〜します.
+
+That is not licence to command. Not 見よ, not 〜すること, but 〜を参照 or
+〜にある — stated as fact. Terse and overbearing are different things.
 
 ### C4. Say what is not proved
 

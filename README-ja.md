@@ -2,30 +2,30 @@
 
 # googology-lean
 
-巨大数のための Lean 4 ライブラリです。展開系、順序数表記系、その間の翻訳を扱います。
+巨大数のための Lean 4 ライブラリ。展開系、順序数表記系、その間の翻訳を扱う。
 
 巨大数の系——BMS、DBMS、Y 数列——について問われるのは、どの展開列も有限で止まるか
-どうかです。このライブラリはその問いに一度だけ答えて、個別の系はその系に固有のもの
-だけを出せばよいようにしています。
+どうかである。このライブラリはその問いに一度だけ答え、個別の系はその系に固有のもの
+だけを出せばよいようにしてある。
 
 ## 何が証明されているか
 
 | | |
 |---|---|
-| **バシク行列はどの行数でも停止します** | `Notation.BMS.bms_terminates` |
-| 原始数列・ペア数列・トリオ数列が停止します | `primitive_terminates`、`pair_terminates`、`trio_terminates` |
-| BMS は順序数の測度を持ちます | `Notation.BMS.bmsEval` |
-| **拡張ブーフホルツ ψ の標準形は整列します** | `ExBuchholz.Term.OTLt_wf` |
-| 異なる標準形は異なる順序数を名指します | `ExBuchholz.Term.val_inj_of_OT` |
-| 表記系が正しいこと（項の順序と順序数の順序が一致） | `ExBuchholz.Term.val_lt_val` |
-| 基本列が降下します | `ExBuchholz.Term.fs_lt` |
+| **バシク行列はどの行数でも停止する** | `Notation.BMS.bms_terminates` |
+| 原始数列・ペア数列・トリオ数列の停止 | `primitive_terminates`、`pair_terminates`、`trio_terminates` |
+| BMS は順序数の測度を持つ | `Notation.BMS.bmsEval` |
+| **拡張ブーフホルツ ψ の標準形は整列する** | `ExBuchholz.Term.OTLt_wf` |
+| 異なる標準形は異なる順序数を名指す | `ExBuchholz.Term.val_inj_of_OT` |
+| 表記系の正しさ。項の順序と順序数の順序が一致する | `ExBuchholz.Term.val_lt_val` |
+| 基本列が降下する | `ExBuchholz.Term.fs_lt` |
 
-`sorry` はなく、公理も `propext`・`Classical.choice`・`Quot.sound` の 3 つだけです。
-`Googology.Core` はそのどれも使っていません。
+`sorry` は無く、公理も `propext`・`Classical.choice`・`Quot.sound` の 3 つだけ。
+`Googology.Core` はそのどれも使わない。
 
 ## 使い方
 
-`lakefile.toml` に足してください。
+`lakefile.toml` に足す。
 
 ```toml
 [[require]]
@@ -33,21 +33,21 @@ name = "googology"
 git = "https://github.com/koteitan/googology-lean"
 ```
 
-たとえば次のように使えます。
+たとえば次のように使える。
 
 ```lean
 import Googology
 
 open Googology Notation.BMS
 
--- 5 行のバシク行列は停止します。
+-- 5 行のバシク行列は停止する。
 example : (bms 5).Terminates := bms_terminates 5
 ```
 
 ## 考え方
 
-展開系は状態の型そのものをフィールドに持ちます。だから型の違う系が 1 つの命題を
-共有できます。
+展開系は状態の型そのものをフィールドに持つ。だから型の違う系が 1 つの命題を共有
+できる。
 
 ```lean
 structure Rewrite where
@@ -56,9 +56,9 @@ structure Rewrite where
   halted : State → Prop
 ```
 
-型クラスではなく構造体にしてあるのは意図的です。1 つの状態型に複数の展開規則が
+型クラスではなく構造体にしてあるのは意図的である。1 つの状態型に複数の展開規則が
 乗るため（BMS の BM4 / 3.3 / 2 / 1.1）で、状態型を鍵にした型クラスでは 1 つしか
-持てません。
+持てない。
 
 ### 一度だけ証明して、全系が使うもの
 
@@ -68,19 +68,19 @@ structure Rewrite where
 | `Rewrite.wf_of_measure` | 任意の整礎順序への測度 ⟹ 整礎性 |
 | `Rewrite.terminates_of_measure` | 測度 ⟹ 停止性 |
 | `Rewrite.Std.of_terminates` | 全状態の停止性 ⟹ 標準形の停止性 |
-| `OrdHom.wf` | 狭義単調な写像で整礎性が移ります |
+| `OrdHom.wf` | 狭義単調な写像で整礎性が移る |
 | `OrdHom.injective` | 三分律＋非反射律 ⟹ 単射 |
-| `Sim.wf`、`Sim.terminates` | 模倣で整礎性と停止性が移ります |
-| `Sim.terminates_transfer` | 停止性が模倣に沿って手前に移ります |
-| `StepHom.toSim` | 展開と可換なら模倣になります |
-| `Equiv.wf_iff`、`Equiv.terminates_iff` | 互いに逆な翻訳があれば両者は同値です |
+| `Sim.wf`、`Sim.terminates` | 模倣で整礎性と停止性が移る |
+| `Sim.terminates_transfer` | 停止性が模倣に沿って手前に移る |
+| `StepHom.toSim` | 展開と可換なら模倣になる |
+| `Equiv.wf_iff`、`Equiv.terminates_iff` | 互いに逆な翻訳があれば両者は同値 |
 | `Eval.terminates` | 整礎順序への評価 ⟹ 停止性 |
 | `Eval.compOrd` | 評価 ∘ 順序を保つ写像 = 評価 |
-| `Eval.ofSim` | 模倣で評価を手前に引き戻せます |
-| `Rewrite.rankEval` | 整礎な系は自前の順序数の測度を持ちます |
+| `Eval.ofSim` | 模倣で評価を手前に引き戻せる |
+| `Rewrite.rankEval` | 整礎な系は自前の順序数の測度を持つ |
 
-最後の 3 つが背骨です。翻訳と行き先の評価を合わせると、元の系の停止性が 1 行で
-出ます。
+最後の 3 つが背骨である。翻訳と行き先の評価を合わせると、元の系の停止性が 1 行で
+出る。
 
 ```lean
 example (trans : Sim Src Tgt) (o : Eval Tgt ltO) (hO : WellFounded ltO) :
@@ -90,26 +90,26 @@ example (trans : Sim Src Tgt) (o : Eval Tgt ltO) (hO : WellFounded ltO) :
 
 ## 系を足すには
 
-`Rewrite` の 3 つのフィールドを与えて、停止性を証明したいなら測度を 1 つ出します。
-測度の行き先は、整礎関係の入った型なら何でもかまいません（`Nat`、順序数、自作の
-項）。一歩ごとに狭義に下がることを言えば、残りは定理として受け取れます。
+`Rewrite` の 3 つのフィールドを与え、停止性を証明したいなら測度を 1 つ出す。測度の
+行き先は、整礎関係の入った型なら何でもよい（`Nat`、順序数、自作の項）。一歩ごとに
+狭義に下がることを言えば、残りは定理として受け取れる。
 
-すでに別のところで停止性が証明されている系なら、数行で繋がります。`Notation/BMS`
-がその実例です。
+すでに別のところで停止性が証明されている系なら、数行で繋がる。`Notation/BMS` が
+その実例。
 
 ## 中身
 
 ```
 Googology/
   Core/            展開系、標準形、翻訳
-  Rank.lean        整礎な系は順序数の測度を持ちます
+  Rank.lean        整礎な系は順序数の測度を持つ
   Notation/        系そのもの
     BMS/             バシク行列。行数は任意
     ExBuchholz/      拡張ブーフホルツ ψ
   Trans/           2 つの系の間の翻訳
 ```
 
-各ディレクトリに README があります。
+各ディレクトリに README がある。
 
 ## ビルド
 
@@ -118,22 +118,22 @@ lake build
 ```
 
 Lean 4 v4.30.0。依存は 2 つで、mathlib と、BMS の停止性証明のための
-[koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) です。
+[koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern)。
 `Googology.Core` はどちらも import しないので、停止性の道具一式は mathlib 無しで
-読めて使えます。
+読めて使える。
 
 ## ライセンス
 
-MIT ライセンスです。詳しくは [LICENSE](LICENSE) をご覧ください。
+MIT ライセンス。[LICENSE](LICENSE) を参照。
 
 ---
 
-## 開発する方へ
+## 開発する人へ
 
-* [spec-ja.md](spec-ja.md) — ライブラリの構成と書き方の規約。この文書群を
-  どう書くかの規則も含みます
+* [spec-ja.md](spec-ja.md) — ライブラリの構成と書き方の規約。この文書群をどう書くかの
+  規則も含む
 * [plan-ja.md](plan-ja.md) — 議論の全体と、作業の現在地
 
-現状：`Core/` は完成しています。`Notation/ExBuchholz` は表記系として完成し、
-`Notation/BMS` はどの行数でも停止します。`Trans/` は空です。残っている唯一のものは
-「`OT` が基本列の一歩で保たれる」で、詳しくは `plan-ja.md` にあります。
+現状：`Core/` は完成。`Notation/ExBuchholz` は表記系として完成し、`Notation/BMS` は
+どの行数でも停止する。`Trans/` は空。残っている唯一のものは「`OT` が基本列の一歩で
+保たれる」で、詳しくは `plan-ja.md` にある。
