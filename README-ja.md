@@ -48,6 +48,8 @@
 | 基本列が降下する | `Notation.ExBuchholz.Term.fs_lt` |
 | **拡張ブーフホルツ項は停止する** | `Notation.ExBuchholz.Term.exbOT_terminates` |
 | 基本列が標準形を保つ（Buchholz 補題 3.3） | `Notation.ExBuchholz.Term.OTFS_thm` |
+| **`e0` 未満で `p0(a) = w^a` であること**。`p0(a) <= w^a` は常に成り立つ | `Notation.ExBuchholz.Ord.psi_zero_eq_opow`, `Notation.ExBuchholz.Ord.psi_zero_le_opow` |
+| **`p0(W) = e0`** | `Notation.ExBuchholz.Ord.psi_Omega_one` |
 
 ### 1 行: 行列が名指す順序数
 
