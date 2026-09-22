@@ -105,13 +105,19 @@ The route to `Bachmann` itself is an induction on `B`, one case per branch of
 
 | branch of `dom B` | what the case needs |
 |---|---|
-| `B = p + t` | the head part by a size argument; the tail by the same statement at `t` |
+| `B = p + t` | the head by a size argument; the tail by the same statement at `t`, with `p` kept in front |
 | `B = ψ_a(0)`, `dom a = 1` | `a` is a successor, so `le_pred_of_lt` and a size argument |
 | `B = ψ_a(0)`, `dom a ∉ {0,1}` | the same statement at `a`, but stated for `P` — hypothesis `G_u(a) < P(a)`, conclusion `G_u(a) < P(a[W])` |
 | `B = ψ_a(b)`, `dom b < B` | the same statement at `b`, and the closure of `G` under its own members |
 
-So the induction has to carry two statements, the plain one and the `P` one.
-Both are checked by computation in `test/ExBuchholzCheck.lean`.
+So the induction has to carry the statement in three shapes: with a prefix in
+front, plain, and for `P`.
+
+The prefix cannot be dropped. For `V = ψ_Ω(0) + ψ_1(ψ_Ω(0))`, which is
+standard with a term-indexed domain, `G_1` sees `ψ_Ω(0)` in the tail — the
+head of `V` itself. So neither "below the head" nor "below the tail" holds
+there, while the conclusion does. `test/ExBuchholzCheck.lean` carries that
+term, and checks all three shapes.
 -/
 
 namespace Googology.Notation.ExBuchholz.Term

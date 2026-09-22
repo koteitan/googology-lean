@@ -128,6 +128,26 @@ def W0 (B : Term) : Term := psi (fs (subOf (dom B)) nil) nil
     (!((G u B).all (fun y => decide (y < psi B nil)))) ||
       (G u B).all (fun x => decide (x < psi (fs B (W0 B)) nil))
 
+/-! The prefixed shape, which the sum branch needs. -/
+
+#guard (((upTo 5).filter (fun V => isOT V && domTerm V)).flatMap fun V =>
+    ((upTo 4).filter (fun p => isOT (addT p V))).map fun p => (p, V)).all fun q =>
+  (upTo 2).all fun u =>
+    (!(decide (u ≤ subOf (dom q.2)) &&
+        (G u q.2).all (fun y => decide (y < addT q.1 q.2)))) ||
+      (G u q.2).all (fun x => decide (x < addT q.1 (fs q.2 (W0 q.2))))
+
+/-! The prefix cannot be dropped.  For this `V`, `G_1` sees the head of `V`
+itself inside the tail, so neither "below the head" nor "below the tail"
+holds, while the conclusion does. -/
+
+def caseV : Term := cons (psi t1 nil) nil (psi t1 (psi (psi t1 nil) nil))
+
+#guard isOT caseV && domTerm caseV
+#guard (G t1 caseV).all (fun y => decide (y < caseV))
+#guard !((G t1 caseV).all (fun y => decide (y < psi (psi t1 nil) nil)))
+#guard (G t1 caseV).all (fun x => decide (x < fs caseV (W0 caseV)))
+
 /-! The level matters.  At level `0` the tower invariant that `Bachmann`
 feeds is false: write `A = ψ_0(ψ_Ω(0))`; for `X = ψ_Ω(ψ_{A+1}(0))` the first
 rung is `ψ_A(0)`, which is also the value it produces, and `G_0` of it holds
