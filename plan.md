@@ -55,7 +55,8 @@ particular notation system.
 
 `Googology/Rank.lean` sits beside it: a well-founded system carries an ordinal
 measure of its own, the rank of its one-step relation, and `StepHom.rank_map`
-says an embedding onto the steps keeps it. That needs mathlib, so it is not
+says an embedding onto the steps keeps it. `Trans.BMS.rank_prim_eq_val` says
+that at one row it is the value of the term. That needs mathlib, so it is not
 part of `Core`.
 
 No `sorry`, no external dependency. A project that only wants termination can
@@ -189,7 +190,12 @@ That is `Mono.lean`.
    `val` is onto the ordinals below it — Cantor normal form, with
    `Ord.psi_zero_eq_opow` for `ψ_0(a) = ω^a` there — and so
    `exists_matrix_of_lt_eps0` with `val_read_lt_eps0` says the one-row
-   matrices name the ordinals below `ε₀` and no others.
+   matrices name the ordinals below `ε₀` and no others. `rank_prim_eq_val`
+   closes the loop: the rank of the expansion relation, which needs no
+   notation system to define, **is** that value. So calling
+   `Rewrite.rankEval` the ordinal a matrix names is justified where both are
+   defined. One row of DBMS is the same system and gets the same two
+   statements.
 
    The states of `prim` — matrices whose term is a standard form — are
    exactly the standard one-row matrices: `std_entries_iff`. And

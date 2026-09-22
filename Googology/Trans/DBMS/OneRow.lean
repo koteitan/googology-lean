@@ -1,4 +1,4 @@
-import Googology.Trans.BMS.Reach
+import Googology.Trans.BMS.RankVal
 import Googology.Notation.DBMS
 
 /-!
@@ -10,7 +10,9 @@ everything `Trans/BMS/Bms.lean` proves about `Notation.BMS.bms 1` holds of
 `Notation.DBMS.dbms 1`, by the same induction with `DStd` in place of `Std`.
 
 So one-row DBMS names the same ordinals as one-row BMS — both through
-`read ∘ entries` — and terminates.  With two rows or more the generators
+`read ∘ entries` — and terminates.  `exists_dbms_of_lt_eps0` says which
+ordinals those are: exactly the ones below `ε₀`, the same statement
+`Trans/BMS/Eps0.lean` makes for BMS.  With two rows or more the generators
 differ and none of this applies.
 -/
 
@@ -95,5 +97,37 @@ theorem dstd_entries_iff (l : List Nat) :
   · rintro ⟨hc, hOT⟩
     exact reach_gen DReach (fun hm hR N => dreach_expandL hm hR N) dreach_range hc hOT
 
+/-! ### Which ordinals -/
+
+/-- **The ordinal is below `ε₀`**, as an ordinal and not only as a term. -/
+theorem dbmsOrdEval_lt_eps0 (A : (dbms 1).State) : dbmsOrdEval.val A < Ord.eps0 := by
+  rw [← val_te0]
+  exact dbmsOrdEval_lt_e0 A
+
+/-- **And every ordinal below `ε₀` is named by a one-row DBMS matrix.**  So
+one row of DBMS names exactly what one row of BMS names. -/
+theorem exists_dbms_of_lt_eps0 {α : Ordinal.{0}} (h : α < Ord.eps0) :
+    ∃ A : (dbms 1).State, dbmsOrdEval.val A = α := by
+  obtain ⟨l, hc, hOT, hv⟩ := exists_matrix_of_lt_eps0 h
+  obtain ⟨A, hStd, hE⟩ := (dstd_entries_iff l).mpr ⟨hc, hOT⟩
+  refine ⟨⟨A, hStd⟩, ?_⟩
+  rw [dbmsOrdEval_val]
+  show val (read 0 (entries A)) = α
+  rw [hE]
+  exact hv
+
+instance instIsWellFoundedDbms : IsWellFounded (dbms 1).State (dbms 1).Rel :=
+  ⟨dbmsHom.toSim.wf prim_wf⟩
+
+/-- **The rank of one-row DBMS is the ordinal the matrix names**, as for
+BMS. -/
+theorem rank_dbms_eq_val (A : (dbms 1).State) :
+    IsWellFounded.rank (dbms 1).Rel A = dbmsOrdEval.val A := by
+  have h := dbmsHom.rank_map (fun k => ⟨k, rfl⟩)
+    (fun s => by
+      show s.1.len = 0 ↔ entries s.1 = []
+      exact entries_eq_nil_iff.symm) A
+  rw [← h]
+  exact rank_prim_eq_val (dbmsHom.map A)
 
 end Googology.Trans.DBMS

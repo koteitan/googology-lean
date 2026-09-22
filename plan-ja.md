@@ -51,7 +51,8 @@ BMS は停止する
 
 `Googology/Rank.lean` がその隣にある。整礎な系は自前の順序数の測度——一歩の関係の
 階数——を持つ、という定理である。`StepHom.rank_map` はその測度が、ステップの上へ
-写す埋め込みで変わらないと言う。mathlib が要るので `Core` には入れていない。
+写す埋め込みで変わらないと言う。`Trans.BMS.rank_prim_eq_val` は、1 行ではそれが
+項の値だと言う。mathlib が要るので `Core` には入れていない。
 
 `sorry` なし、外部依存なし。停止性だけが欲しいプロジェクトは、これだけ import
 すればよい。
@@ -177,7 +178,10 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
    `exists_OT_of_lt_eps0` が `val` はその未満の順序数の上へ全射だと言う。証明は
    Cantor 標準形で、そこでの `p0(a) = w^a` は `Ord.psi_zero_eq_opow` である。
    だから `exists_matrix_of_lt_eps0` と `val_read_lt_eps0` が、1 行の行列が名指すのは
-   `e0` 未満の順序数ちょうどだと言う。
+   `e0` 未満の順序数ちょうどだと言う。`rank_prim_eq_val` が輪を閉じる。表記系なしで
+   定義できる展開関係の階数が、その値**そのもの**である。だから `Rewrite.rankEval` を
+   「行列が名指す順序数」と読んでよい。両方が定義されているところで一致している。
+   DBMS の 1 行は同じ系なので、同じ二つの主張が成り立つ。
 
    `prim` の状態、つまり項が標準形である行列は、標準 1 行行列とちょうど一致する
    （`std_entries_iff`）。さらに `primEquivE0` は `Equiv` である。原始数列系と
