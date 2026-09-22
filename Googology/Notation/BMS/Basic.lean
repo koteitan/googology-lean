@@ -1,4 +1,5 @@
 import Googology.Core
+import Googology.Rank
 import Pattern.Main
 
 /-!
@@ -61,5 +62,13 @@ theorem primitive_terminates : (bms 1).Terminates := bms_terminates 1
 theorem pair_terminates : (bms 2).Terminates := bms_terminates 2
 /-- Trio sequences. -/
 theorem trio_terminates : (bms 3).Terminates := bms_terminates 3
+
+/-- Bashicu matrices carry an ordinal measure: the rank of one-step expansion.
+It decreases strictly at every step, for every number of rows. -/
+noncomputable def bmsEval (r : ℕ) :
+    Eval (bms r) (· < · : Ordinal.{0} → Ordinal.{0} → Prop) :=
+  Rewrite.rankEval (bms_wf r)
+
+example (r : ℕ) : (bms r).Terminates := (bmsEval r).terminates Ordinal.lt_wf
 
 end Googology.Notation.BMS

@@ -52,6 +52,10 @@ particular notation system.
 | `Std.lean` | `Rewrite.Std`, standard forms and generators |
 | `Morphism.lean` | `OrdHom`, `Sim`, `StepHom`, `Equiv`, `Eval`, and the transfer theorems |
 
+`Googology/Rank.lean` sits beside it: a well-founded system carries an ordinal
+measure of its own, the rank of its one-step relation. That needs mathlib, so
+it is not part of `Core`.
+
 No `sorry`, no external dependency. A project that only wants termination can
 import this and nothing else.
 

@@ -149,4 +149,26 @@ theorem acc_principal (a b : Term) (_ : OT (psi a b)) : Acc OTLt (psi a b) :=
 
 example : WellFounded OTLt := wellFounded_OTLt acc_principal
 
+/-! ## The standard forms are a well order -/
+
+/-- Distinct standard forms name distinct ordinals. -/
+theorem val_inj_of_OT {x y : Term} (hx : OT x) (hy : OT y) (h : x.val = y.val) :
+    x = y := by
+  rcases lt_trichotomy x y with hlt | rfl | hlt
+  · exact absurd h (val_lt_val hx hy hlt).ne
+  · rfl
+  · exact absurd h.symm (val_lt_val hy hx hlt).ne
+
+theorem OTLt_irrefl (x : Term) : ¬ OTLt x x := fun h => lt_irrefl x h.2.2
+
+theorem OTLt_trans {x y z : Term} (h₁ : OTLt x y) (h₂ : OTLt y z) : OTLt x z :=
+  ⟨h₁.1, h₂.2.1, lt_trans h₁.2.2 h₂.2.2⟩
+
+theorem OTLt_trichotomous {x y : Term} (hx : OT x) (hy : OT y) :
+    OTLt x y ∨ x = y ∨ OTLt y x := by
+  rcases lt_trichotomy x y with h | h | h
+  · exact Or.inl ⟨hx, hy, h⟩
+  · exact Or.inr (Or.inl h)
+  · exact Or.inr (Or.inr ⟨hy, hx, h⟩)
+
 end Googology.Notation.ExBuchholz.Term

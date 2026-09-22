@@ -87,6 +87,7 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | term values are never fixed points of `v ↦ ω_v` | done |
 | its monotonicity on `OT` | done |
 | **well-foundedness of `OTLt`, with no hypothesis** | **done** (`OTLt_wf`) |
+| the standard forms are a well order, and `val` is injective on them | done |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 `axiom`.

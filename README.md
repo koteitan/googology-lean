@@ -22,6 +22,7 @@ Googology/
     Rewrite.lean     expansion systems, Rel, WF, Terminates
     Std.lean         standard forms and generators
     Morphism.lean    OrdHom, Sim, StepHom, Equiv, Eval
+  Rank.lean        every well-founded system carries an ordinal measure
   Notation/        notation systems; these never import one another
     BMS/             Bashicu matrices, any number of rows
     ExBuchholz/      extended Buchholz's psi
@@ -86,6 +87,7 @@ state type could hold only one of them.
 | `Eval.terminates` | an evaluation into a well-founded order gives termination |
 | `Eval.compOrd` | an evaluation composed with an order-preserving map is an evaluation |
 | `Eval.ofSim` | a simulation pulls an evaluation back to the source |
+| `Rewrite.rankEval` | a well-founded system carries an ordinal measure of its own (needs mathlib) |
 
 The last two are the spine. Together they turn a translation plus a target
 evaluation into termination of the source, in one line:

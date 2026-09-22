@@ -51,5 +51,5 @@ routes — a measure, a translation, an evaluation — for free.
 |---|---|
 | the expansion system, well-foundedness, termination | done |
 | the generators | done (`bmsStd`) |
-| an evaluation into the ordinals | not done; the labels used in the proof are ordinals, so one could be exposed |
+| an evaluation into the ordinals | done (`bmsEval`), as the rank of one-step expansion |
 | a translation to `ExBuchholz` | not done |

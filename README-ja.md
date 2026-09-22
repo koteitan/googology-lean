@@ -21,6 +21,7 @@ Googology/
     Rewrite.lean     展開系、Rel、WF、Terminates
     Std.lean         標準形と生成元
     Morphism.lean    OrdHom、Sim、StepHom、Equiv、Eval
+  Rank.lean        整礎な系は順序数の測度を持つ
   Notation/        表記系。互いに import しない
     BMS/             バシク行列。行数は任意
     ExBuchholz/      拡張ブーフホルツ psi
@@ -81,6 +82,7 @@ structure Rewrite where
 | `Eval.terminates` | 整礎順序への評価 ⟹ 停止性 |
 | `Eval.compOrd` | 評価 ∘ 順序を保つ写像 = 評価 |
 | `Eval.ofSim` | 模倣で評価を手前に引き戻せる |
+| `Rewrite.rankEval` | 整礎な系は自前の順序数の測度を持つ（mathlib が要る） |
 
 最後の 2 つが背骨である。翻訳と行き先の評価を合わせると、元の系の停止性が
 1 行で出る。

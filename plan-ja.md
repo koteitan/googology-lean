@@ -48,6 +48,9 @@ BMS は停止する
 | `Std.lean` | `Rewrite.Std`。標準形と生成元 |
 | `Morphism.lean` | `OrdHom`、`Sim`、`StepHom`、`Equiv`、`Eval` と移送定理 |
 
+`Googology/Rank.lean` がその隣にある。整礎な系は自前の順序数の測度——一歩の関係の
+階数——を持つ、という定理である。mathlib が要るので `Core` には入れていない。
+
 `sorry` なし、外部依存なし。停止性だけが欲しいプロジェクトは、これだけ import
 すればよい。
 
