@@ -42,6 +42,7 @@ which is the whole content of the extension.
 | `Ord.lean` | the ordinal side: `Omega`, `Clos`, `CSet`, `psi`, the cardinality bound, `psi_lt_Omega_succ`, `psi_notMem`, `Omega_le_psi`, `psi_mono` (needs mathlib) |
 | `Eval.lean` | `Term.val`, the evaluation into `Ordinal`; `Lam` and `val_lt_Lam` (needs mathlib) |
 | `Mono.lean` | `val_lt_val`, `val_mem_CSet_arg`, `valHom`, `OTLt_wf` (needs mathlib) |
+| `FS.lean` | `dom`, the first half of the fundamental sequences |
 
 ## The order
 
@@ -125,7 +126,7 @@ has been compared against it clause by clause.
 | the evaluation `o` | `o⟨Y₁,Y₂⟩ = ψ_{o Y₁}(o Y₂)`, `o` of a sum is the sum | `Term.val` | identical |
 | `G(X,Y) ◁ Z` | at `X ≤ W₁`: `W₂ < Z` and recurse into `W₁` and `W₂` | `G` | **corrected**; see below |
 | `OT` | `⟨X₁,X₂⟩ ∈ OT ↔ X₁, X₂ ∈ OT ∧ G(X₁,X₂) ◁ X₂`, sums weakly decreasing | `isOT` | agrees |
-| fundamental sequences | `dom` and `X[Y]` | — | not implemented yet |
+| fundamental sequences | `dom` and `X[Y]` | `dom` done, `X[Y]` not yet | `dom` transcribed |
 
 ### The correction
 

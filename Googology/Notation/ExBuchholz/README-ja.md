@@ -41,6 +41,7 @@ inductive Term where
 | `Ord.lean` | 順序数側。`Omega`、`Clos`、`CSet`、`psi`、濃度評価、`psi_lt_Omega_succ`、`psi_notMem`、`Omega_le_psi`、`psi_mono`（mathlib が要る） |
 | `Eval.lean` | `Term.val`。順序数への評価。`Lam` と `val_lt_Lam`（mathlib が要る） |
 | `Mono.lean` | `val_lt_val`、`val_mem_CSet_arg`、`valHom`、`OTLt_wf`（mathlib が要る） |
+| `FS.lean` | `dom`。基本列の前半 |
 
 ## 順序
 
@@ -119,7 +120,7 @@ inductive Term where
 | 評価 `o` | `o⟨Y₁,Y₂⟩ = ψ_{o Y₁}(o Y₂)`、和は和 | `Term.val` | 同一 |
 | `G(X,Y) ◁ Z` | `X ≤ W₁` のとき `W₂ < Z` と、`W₁`・`W₂` への再帰 | `G` | **訂正した**。下記 |
 | `OT` | `⟨X₁,X₂⟩ ∈ OT ↔ X₁, X₂ ∈ OT ∧ G(X₁,X₂) ◁ X₂`、和は広義単調減少 | `isOT` | 一致 |
-| 基本列 | `dom` と `X[Y]` | — | 未実装 |
+| 基本列 | `dom` と `X[Y]` | `dom` は済、`X[Y]` は未 | `dom` は転記済み |
 
 ### 訂正の中身
 
