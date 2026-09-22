@@ -246,4 +246,27 @@ def runL : Nat → List (Nat × Nat) → List (Nat × Nat)
   == [4, 3, 2, 1, 0, 0, 0]
 #guard expand2L 3 ([] : List (Nat × Nat)) == []
 
+/-! ### The parent matrix at every row
+
+`parAtR` computes the row-`k` parent for any `k`. Both rows of the Parent
+Index Matrix that `./bms -d` prints, on two matrices:
+
+| matrix | `./bms -d` |
+|---|---|
+| `(0,0)(1,1)(2,1)(1,1)(2,2)` | `(-1,-1)(0,0)(1,0)(0,0)(3,3)` |
+| `(0,0)(1,1)(2,2)(3,1)(4,2)` | `(-1,-1)(0,0)(1,1)(2,0)(3,3)` |
+-/
+
+/-- The row-`k` parents of a matrix, with `-1` for none. -/
+def parRowR (l : List (List Nat)) (k : Nat) : List Int :=
+  (List.range l.length).map fun i =>
+    match parAtR l k i with
+    | none => -1
+    | some j => (j : Int)
+
+#guard parRowR [[0,0],[1,1],[2,1],[1,1],[2,2]] 0 == [-1, 0, 1, 0, 3]
+#guard parRowR [[0,0],[1,1],[2,1],[1,1],[2,2]] 1 == [-1, 0, 0, 0, 3]
+#guard parRowR [[0,0],[1,1],[2,2],[3,1],[4,2]] 0 == [-1, 0, 1, 2, 3]
+#guard parRowR [[0,0],[1,1],[2,2],[3,1],[4,2]] 1 == [-1, 0, 1, 0, 3]
+
 end Googology.Trans.BMS

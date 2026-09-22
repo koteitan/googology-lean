@@ -97,6 +97,54 @@ def parAux (l : List Nat) (x : Nat) : Nat → Option Nat
   | 0 => none
   | j + 1 => if l[j]! < x then some j else parAux l x j
 
+/-- The last index below `k` that is a candidate and whose value is below `x`. -/
+def lastAux (cand : Nat → Bool) (v : Nat → Nat) (x : Nat) : Nat → Option Nat
+  | 0 => none
+  | j + 1 => if cand j && decide (v j < x) then some j else lastAux cand v x j
+
+theorem lastAux_eq_some (cand : Nat → Bool) (v : Nat → Nat) (x : Nat) : ∀ (k j : Nat),
+    lastAux cand v x k = some j ↔ j < k ∧ cand j = true ∧ v j < x ∧
+      ∀ j', j < j' → j' < k → cand j' = true → x ≤ v j' := by
+  intro k
+  induction k with
+  | zero =>
+    intro j
+    constructor
+    · intro h; rw [lastAux] at h; exact absurd h (by simp)
+    · rintro ⟨h, _, _, _⟩; omega
+  | succ m ih =>
+    intro j
+    rw [lastAux]
+    by_cases hm : cand m && decide (v m < x)
+    · rw [if_pos hm]
+      simp only [Bool.and_eq_true, decide_eq_true_eq] at hm
+      constructor
+      · intro h
+        rw [← Option.some.inj h]
+        exact ⟨by omega, hm.1, hm.2, fun j' a b _ => by omega⟩
+      · rintro ⟨h1, h2, h3, h4⟩
+        by_cases hj : j = m
+        · rw [hj]
+        · exfalso
+          have := h4 m (by omega) (by omega) hm.1
+          omega
+    · rw [if_neg hm, ih j]
+      simp only [Bool.and_eq_true, decide_eq_true_eq, not_and] at hm
+      constructor
+      · rintro ⟨h1, h2, h3, h4⟩
+        refine ⟨by omega, h2, h3, fun j' a b hc => ?_⟩
+        by_cases hb : j' < m
+        · exact h4 j' a hb hc
+        · rw [show j' = m by omega]
+          rw [show j' = m by omega] at hc
+          exact Nat.le_of_not_lt (hm hc)
+      · rintro ⟨h1, h2, h3, h4⟩
+        have hjm : j ≠ m := by
+          intro he
+          rw [he] at h2 h3
+          exact absurd h3 (Nat.not_lt.mpr (Nat.le_of_not_lt (hm h2)))
+        exact ⟨by omega, h2, h3, fun j' a b hc => h4 j' a (by omega) hc⟩
+
 /-- The row-`0` parent of `i`, computed from the entries. -/
 def parAt (l : List Nat) (i : Nat) : Option Nat := parAux l l[i]! i
 

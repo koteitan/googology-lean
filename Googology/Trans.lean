@@ -1,6 +1,7 @@
 import Googology.Trans.BMS.OneRow
 import Googology.Trans.BMS.TwoRow
 import Googology.Trans.BMS.Anc
+import Googology.Trans.BMS.EntriesR
 import Googology.Trans.BMS.Entries2
 import Googology.Trans.BMS.Pair
 import Googology.Trans.BMS.ExBuchholz

@@ -207,8 +207,12 @@ That is `Mono.lean`.
    enough to do that from: it fixes the map at twenty points and leaves the
    rule to be guessed, and a guessed rule that happens to fit twenty points
    is exactly the failure this repository refuses to commit for the Y
-   sequence. What would make it tractable is a stated definition of the map —
-   not a table of its values. The commutation after that will meet the clause
+   sequence. The sources checked do not state a rule. The
+   [wiki article](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0)
+   derives the correspondence example by example, approximating with the Hardy
+   hierarchy, and stops at each named ordinal; it never writes the map down.
+   What would make this tractable is a stated definition of the map — not a
+   table of its values, and not a derivation of them one at a time. The commutation after that will meet the clause
    of `[ ]` that one row never reaches, the tower;
 4. **DBMS done, the Y sequence not.** `Notation/DBMS/` has the expansion
    system: the rule is BM4's, and only the generators differ — column `i`
