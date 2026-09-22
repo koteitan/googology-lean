@@ -63,11 +63,14 @@ theorem read_inj {l m : List Nat} (hl : Col 0 l) (hm : Col 0 m) (h : read 0 l = 
     l = m := by
   rw [← unread_read l 0 hl, ← unread_read m 0 hm, h]
 
-/-- **Everything at or below a reachable matrix is reachable.** -/
-theorem reach_of_le (X : Term) : ∀ g : List Nat, Col 0 g → OT (read 0 g) → read 0 g = X →
-    Reach g → ∀ l : List Nat, Col 0 l → OT (read 0 l) → read 0 l ≤ X → Reach l := by
+/-- **Everything at or below a reachable matrix is reachable**, for any notion
+of reachable that is closed under expansion. -/
+theorem reach_of_le_gen (R : List Nat → Prop)
+    (hstep : ∀ {m : List Nat}, Col 0 m → R m → ∀ N, R (expandL N 0 m))
+    (X : Term) : ∀ g : List Nat, Col 0 g → OT (read 0 g) → read 0 g = X →
+      R g → ∀ l : List Nat, Col 0 l → OT (read 0 l) → read 0 l ≤ X → R l := by
   refine WellFounded.induction (C := fun X => ∀ g : List Nat, Col 0 g → OT (read 0 g) →
-    read 0 g = X → Reach g → ∀ l : List Nat, Col 0 l → OT (read 0 l) → read 0 l ≤ X → Reach l)
+    read 0 g = X → R g → ∀ l : List Nat, Col 0 l → OT (read 0 l) → read 0 l ≤ X → R l)
     OTLt_wf X ?_
   intro X ih g hcg hOTg hgX hR l hcl hOTl hle
   subst hgX
@@ -75,29 +78,37 @@ theorem reach_of_le (X : Term) : ∀ g : List Nat, Col 0 g → OT (read 0 g) →
   · obtain ⟨n, hn⟩ := exists_le_fs _ _ hOTg hOTl (allNil_read 0 g) (allNil_read 0 l) h
     have hgne : read 0 g ≠ nil := by
       intro he; rw [he] at h; exact not_lt_nil _ h
-    have hstep : read 0 (expandL n 0 g) = fs (read 0 g) (idx (read 0 g) (n + 1)) :=
+    have hstepE : read 0 (expandL n 0 g) = fs (read 0 g) (idx (read 0 g) (n + 1)) :=
       read_expandL n g 0 hcg
     have hOTe : OT (read 0 (expandL n 0 g)) := (prim_step_ok ⟨g, hcg, hOTg⟩ n).2
     have hlt : OTLt (read 0 (expandL n 0 g)) (read 0 g) := by
       refine ⟨hOTe, hOTg, ?_⟩
-      rw [hstep]
+      rw [hstepE]
       exact fs_lt (idx_lt_dom hOTg (read_lt_tW 0 g) hgne (n + 1))
     exact ih _ hlt (expandL n 0 g) (col_expandL n g 0 hcg) hOTe rfl
-      (reach_expandL hcg hR n) l hcl hOTl (by rw [hstep]; exact hn)
+      (hstep hcg hR n) l hcl hOTl (by rw [hstepE]; exact hn)
   · rw [read_inj hcl hcg h]; exact hR
+
+/-- **Every matrix whose term is a standard form is reachable**, again for any
+notion of reachable that starts at the generators and is closed under
+expansion. -/
+theorem reach_gen (R : List Nat → Prop)
+    (hstep : ∀ {m : List Nat}, Col 0 m → R m → ∀ N, R (expandL N 0 m))
+    (hgen : ∀ n : Nat, R (List.range (n + 1)))
+    {l : List Nat} (hc : Col 0 l) (hOT : OT (read 0 l)) : R l := by
+  obtain ⟨m, hm⟩ := exists_lt_twr (read 0 l) (allNil_read 0 l)
+  cases m with
+  | zero => exact absurd hm (by rw [twr]; exact not_lt_nil _)
+  | succ k =>
+    exact reach_of_le_gen R hstep _ (List.range (k + 1)) (col_range k) (OT_read_range k)
+      (read_range_eq_twr k) (hgen k) l hc hOT (le_of_lt hm)
 
 /-- **Every standard one-row matrix is the entries of a standard array.**  With
 `std_entries` this settles the states of `prim`: they are exactly the entries
 of the standard one-row Bashicu matrices. -/
 theorem exists_std_of_col {l : List Nat} (hc : Col 0 l) (hOT : OT (read 0 l)) :
-    ∃ A : Arr 1, Std 1 A ∧ entries A = l := by
-  obtain ⟨m, hm⟩ := exists_lt_twr (read 0 l) (allNil_read 0 l)
-  cases m with
-  | zero => exact absurd hm (by rw [twr]; exact not_lt_nil _)
-  | succ k =>
-    exact reach_of_le _ (List.range (k + 1)) (col_range k) (OT_read_range k)
-      (read_range_eq_twr k) (reach_range k) l hc hOT
-      (le_of_lt hm)
+    ∃ A : Arr 1, Std 1 A ∧ entries A = l :=
+  reach_gen Reach (fun hm hR N => reach_expandL hm hR N) reach_range hc hOT
 
 /-- **The standard one-row Bashicu matrices are exactly the matrices whose
 term is a standard form.**  Both directions: `std_entries` reads a standard

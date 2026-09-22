@@ -1,4 +1,4 @@
-import Googology.Trans.BMS.Bms
+import Googology.Trans.BMS.Reach
 import Googology.Notation.DBMS
 
 /-!
@@ -69,5 +69,31 @@ theorem dbmsOrdEval_lt_e0 (A : (dbms 1).State) : dbmsOrdEval.val A < te0.val :=
 /-- **One-row DBMS terminates.** -/
 theorem dbms_one_terminates : (dbms 1).Terminates :=
   dbmsHom.toSim.terminates (primHom.toSim.wf exbOT_wf)
+
+/-! ### Which one-row matrices are standard -/
+
+/-- A matrix is DBMS-reachable when it is the entries of a standard array. -/
+def DReach (l : List Nat) : Prop := ∃ A : Arr 1, DStd 1 A ∧ entries A = l
+
+theorem dreach_range (n : Nat) : DReach (List.range (n + 1)) :=
+  ⟨dstair 1 n, DStd.init n, entries_dstair n⟩
+
+theorem dreach_expandL {l : List Nat} (hc : Col 0 l) (h : DReach l) (N : Nat) :
+    DReach (expandL N 0 l) := by
+  obtain ⟨A, hStd, hA⟩ := h
+  refine ⟨expand A N, DStd.step N hStd, ?_⟩
+  rw [entries_expand' A N (by rw [hA]; exact hc), hA]
+
+/-- **The standard one-row DBMS matrices are exactly the matrices whose term is
+a standard form** — the same set as for BMS, since the generators agree with
+one row. -/
+theorem dstd_entries_iff (l : List Nat) :
+    (∃ A : Arr 1, DStd 1 A ∧ entries A = l) ↔ (Col 0 l ∧ OT (read 0 l)) := by
+  constructor
+  · rintro ⟨A, hStd, rfl⟩
+    exact dstd_entries A hStd
+  · rintro ⟨hc, hOT⟩
+    exact reach_gen DReach (fun hm hR N => dreach_expandL hm hR N) dreach_range hc hOT
+
 
 end Googology.Trans.DBMS
