@@ -526,6 +526,22 @@ theorem exists_OT_lt_te1 {α : Ordinal.{0}} (h : α < Ord.eps1) :
   obtain ⟨X, hOT, hv, _⟩ := exists_OT_of_lt_eps1 α h
   exact ⟨X, hOT, lt_of_val_lt hOT OT_te1 (by rw [hv, val_te1]; exact h), hv⟩
 
+/-- **Below `ε₁`, `val` is a bijection from the standard forms onto the
+ordinals.**  Existence is `exists_OT_lt_te1`, uniqueness `val_inj_of_OT`: the
+two halves the source asks for, on that initial segment. -/
+theorem existsUnique_OT_lt_te1 {α : Ordinal.{0}} (h : α < Ord.eps1) :
+    ∃! X : Term, OT X ∧ X < te1 ∧ val X = α := by
+  obtain ⟨X, hOT, hlt, hv⟩ := exists_OT_lt_te1 h
+  refine ⟨X, ⟨hOT, hlt, hv⟩, fun Y hY => ?_⟩
+  exact val_inj_of_OT hY.1 hOT (by rw [hY.2.2, hv])
+
+/-- The same below `ε₀`, where the terms are the all-nil ones. -/
+theorem existsUnique_OT_lt_te0 {α : Ordinal.{0}} (h : α < Ord.eps0) :
+    ∃! X : Term, OT X ∧ X < te0 ∧ val X = α := by
+  obtain ⟨X, hOT, hA, hv⟩ := exists_OT_of_lt_eps0 h
+  refine ⟨X, ⟨hOT, allNil_lt_e0 X hA, hv⟩, fun Y hY => ?_⟩
+  exact val_inj_of_OT hY.1 hOT (by rw [hY.2.2, hv])
+
 theorem val_lt_eps1_of_lt_te1 {X : Term} (hOT : OT X) (h : X < te1) : val X < Ord.eps1 := by
   rw [← val_te1]
   exact val_lt_val hOT OT_te1 h

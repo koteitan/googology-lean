@@ -66,6 +66,7 @@
 | だから 1 行が名指すのはその順序数ちょうどであること | `Trans.BMS.val_read_lt_eps0` |
 | `val` が `e0` 未満の順序数の上へ全射であること | `Trans.BMS.exists_OT_of_lt_eps0` |
 | **`e1` 未満へも全射であること**。`p0(W+W)` 未満の標準形が名指すのはちょうどそれ | `Trans.BMS.exists_OT_of_lt_eps1`, `Trans.BMS.exists_OT_lt_te1` |
+| **だから `e1` 未満で `val` は全単射**。順序数一つに標準形一つ | `Trans.BMS.existsUnique_OT_lt_te1`, `Trans.BMS.existsUnique_OT_lt_te0` |
 | **だから順序数の測度は `e0` への全単射であること** | `Trans.BMS.exists_bms_of_lt_eps0`, `Trans.BMS.bmsOrdEval_inj` |
 | **系の階数がその順序数と一致すること**。二つの測度は一つである | `Trans.BMS.rank_prim_eq_val`, `Trans.BMS.rank_bms_eq_val` |
 | 1 行の生成元が `w` の塔を名指すこと。`(0)` は `1`、`(0)(1)` は `w` | `Trans.BMS.val_twr_succ`, `Trans.BMS.rank_primGen` |
