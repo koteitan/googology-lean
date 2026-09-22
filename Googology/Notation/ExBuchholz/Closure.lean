@@ -57,6 +57,14 @@ That is Buchholz's second tower invariant, and it is the one place where his
 proof of 3.6 calls on 3.3: the rung `W_i` has to be a standard form before `G`
 on it can be bounded.  Buchholz proves 3.3 and 3.6 by one simultaneous
 induction, and splitting them, as here, is what leaves this open.
+`TowerBound` is checked by computation in `test/ExBuchholzCheck.lean`: all 532
+countable case-4 forms of size at most 8 on five rungs, and all 158 standard
+case-4 forms of size at most 7, countable or not, on four.  Two facts it needs
+are separated there.  One is `G_0(X₂) < X₂`, which standard forms in general do
+not have — `ψ_Ω(ε₀)` is standard and `G_0(ε₀)` holds `Ω` — but which the
+case-4 configuration does supply.  The other is that what `G` sees in the
+tower's subscript `Z[0]` is below `X₂[W₀]`.
+
 -/
 
 namespace Googology.Notation.ExBuchholz.Term

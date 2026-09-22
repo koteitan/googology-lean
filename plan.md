@@ -140,8 +140,10 @@ That is `Mono.lean`.
    3.6 as `Trian_fs`, modulo one statement, `TowerBound`, which says that what
    `G` sees in a rung of the tower of Buchholz's case 4 is below the value
    that rung produces. That is the one place where 3.6 calls on 3.3, so the
-   two have to be proved by one simultaneous induction. It is checked by
-   computation in `test/ExBuchholzCheck.lean`: every
+   two have to be proved by one simultaneous induction; the concrete fact it
+   turns on is `G_0(X₂) < X₂`, which the case-4 configuration supplies and
+   standard forms in general do not. Both are checked by computation in
+   `test/ExBuchholzCheck.lean`: every
    one of the 3835 countable standard forms of size at most 8, expanded at any
    of `0`–`4`, stays standard and countable and decreases — and the same at
    size 9, 15890 forms; and ε₀, ψ_0(Ω+Ω), ψ_0(ψ_1(1)), ψ_0(Ω_2) and

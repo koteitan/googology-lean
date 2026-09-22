@@ -211,6 +211,14 @@ That is Buchholz's second tower invariant, and it is the one place where his
 proof of 3.6 calls on 3.3: the rung `W_i` has to be a standard form before `G`
 on it can be bounded. Buchholz proves 3.3 and 3.6 by one simultaneous
 induction, and splitting them, as here, is what leaves this open.
+`TowerBound` is checked by computation in `test/ExBuchholzCheck.lean`: all 532
+countable case-4 forms of size at most 8 on five rungs, and all 158 standard
+case-4 forms of size at most 7, countable or not, on four. Two facts it needs
+are separated there. One is `G_0(X₂) < X₂`, which standard forms in general do
+not have — `ψ_Ω(ε₀)` is standard and `G_0(ε₀)` holds `Ω` — but which the
+case-4 configuration does supply. The other is that what `G` sees in the
+tower's subscript `Z[0]` is below `X₂[W₀]`.
+
 
 Then 3.3 assembles 3.4 and 3.6.
 
@@ -245,6 +253,7 @@ Then 3.3 assembles 3.4 and 3.6.
 | Buchholz 3.2(b): `fs` monotone in its index | done (`fs_mono`) |
 | the tower of case 4, and `(ψ_{X₁}(X₂))[n̲] = ψ_{X₁}(X₂[W_n])` | done (`tower`, `fs_numeral`) |
 | Buchholz 3.6: `z ∈ dom a → a[z] ⊲_z a` | done given `TowerBound` (`Trian_fs`) |
+| `TowerBound` itself | **not proved**; checked by computation on 532 + 158 case-4 forms |
 | `OT` and `· < Ω` preserved by the step | **not proved** — the last gap; checked by computation in `test/ExBuchholzCheck.lean` |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
