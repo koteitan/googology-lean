@@ -161,7 +161,13 @@ That is `Mono.lean`.
    well-ordering of extended Buchholz's ψ rather than by the labelling proof.
    Two rows land below the Bachmann–Howard ordinal and three rows on are
    open, so `r = 2` is the next target and would need a second collapse;
-4. add DBMS and the Y sequence.
+4. **DBMS done, the Y sequence not.** `Notation/DBMS/` has the expansion
+   system: the rule is BM4's, and only the generators differ — column `i`
+   holds `i - k` in row `k` rather than `i`. Termination for `r ≥ 2` is not
+   proved, since the label-system proof this library imports is about arrays
+   reachable from a stair. One row is done, by the same translation as BMS.
+   The Y sequence is still to come; it needs a definition this repository can
+   check against before anything is written down.
 
 ## Conventions
 

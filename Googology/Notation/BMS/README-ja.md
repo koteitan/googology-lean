@@ -52,4 +52,4 @@ StdR r A B      = 0 < B.len ∧ ∃ n, A = expand B n
 | 展開系、整礎性、停止性 | 済 |
 | 生成元 | 済（`bmsStd`） |
 | 順序数への評価 | 済（`bmsEval`）。一歩の展開の階数として |
-| `ExBuchholz` への翻訳 | 未 |
+| `ExBuchholz` への翻訳 | `r = 1` は済。[`Trans/BMS/`](../../Trans/README-ja.md) にある。`r ≥ 2` は未解決 |

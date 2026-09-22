@@ -5,3 +5,4 @@ import Googology.Trans.BMS.Cut
 import Googology.Trans.BMS.Entries
 import Googology.Trans.BMS.Prim
 import Googology.Trans.BMS.Bms
+import Googology.Trans.DBMS.OneRow

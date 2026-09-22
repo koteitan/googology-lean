@@ -25,6 +25,7 @@
 | 翻訳によって原始数列系が停止すること | `Trans.BMS.prim_terminates` |
 | **1 行の BMS が名指す順序数** | `Trans.BMS.bmsOrdEval` |
 | ラベルではなく翻訳による 1 行 BMS の停止性 | `Trans.BMS.bms_one_terminates` |
+| 1 行 DBMS についての同じこと。こちらは他に停止性の証明がない | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
 
 `sorry` は無く、公理も `propext`・`Classical.choice`・`Quot.sound` の 3 つだけ。
 `Googology.Core` はそのどれも使わない。

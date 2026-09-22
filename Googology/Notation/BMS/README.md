@@ -52,4 +52,4 @@ routes — a measure, a translation, an evaluation — for free.
 | the expansion system, well-foundedness, termination | done |
 | the generators | done (`bmsStd`) |
 | an evaluation into the ordinals | done (`bmsEval`), as the rank of one-step expansion |
-| a translation to `ExBuchholz` | not done |
+| a translation to `ExBuchholz` | done for `r = 1`, in [`Trans/BMS/`](../../Trans/README.md); `r ≥ 2` open |

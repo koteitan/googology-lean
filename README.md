@@ -26,6 +26,7 @@ all of them, and each system supplies only what is its own.
 | the primitive sequence system terminates, by translation | `Trans.BMS.prim_terminates` |
 | **which ordinal a one-row Bashicu matrix names** | `Trans.BMS.bmsOrdEval` |
 | one-row Bashicu matrices terminate, by translation rather than by labels | `Trans.BMS.bms_one_terminates` |
+| the same for one-row DBMS, whose termination is not otherwise proved here | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
 
 No `sorry`, and no axiom beyond `propext`, `Classical.choice` and `Quot.sound`.
 `Googology.Core` uses none of the three.
