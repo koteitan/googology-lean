@@ -20,10 +20,8 @@ names a countable ordinal, and expansion lowers it.
 The term stays standard by itself: the commutation turns that question into
 `OTFS_thm`, which is already proved.
 
-What ties this to `Notation.BMS.bms 1` is still missing: `expandL` is the rule
-written on the entries, and `BMS/OneRow.lean` shows `BM4.expand` follows the
-same rule on `BM4.Arr 1`, but the bookkeeping between an array's indices and a
-list's is not done.
+`BMS/Bms.lean` ties this to `Notation.BMS.bms 1`, through the match between
+`expandL` and `BM4.expand` in `BMS/Entries.lean`.
 -/
 
 namespace Googology.Trans.BMS

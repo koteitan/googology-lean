@@ -17,8 +17,8 @@ last column, and `flatten_replicate_map` writes the repeated bad part the same
 way.  No entry is ever indexed by hand.
 
 The hypothesis is that the array's entries form a matrix — `Col 0`.  Every
-array reachable from a stair has that property, but showing it needs an
-induction over reachability that is not here.
+array reachable from a stair has that property; `BMS/Bms.lean` proves it by
+induction over reachability.
 -/
 
 namespace Googology.Trans.BMS

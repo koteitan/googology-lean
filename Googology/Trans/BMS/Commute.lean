@@ -23,8 +23,9 @@ three cases of `expandL` line up with the three clauses of `[ ]`: end the
 block and the term loses its last summand, repeat the block and the term
 becomes `n` copies, go higher and the term follows one level in.
 
-What is still missing for a `StepHom` is the index bookkeeping between `expandL`
-and `BM4.expand` on `BM4.Arr 1`.
+The index bookkeeping between `expandL` and `BM4.expand` on `BM4.Arr 1` is in
+`BMS/Cut.lean` and `BMS/Entries.lean`; the `StepHom` itself is in
+`BMS/Prim.lean` and `BMS/Bms.lean`.
 -/
 
 namespace Googology.Trans.BMS

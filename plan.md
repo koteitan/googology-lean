@@ -89,7 +89,13 @@ labels in `R_r` and Σ-elementary substructures — which this package requires.
 `Subrelation.wf`; `Core` supplies the rest. `Pat.StdR` there is `Rewrite.Rel`
 here, written out by hand, so the fit needed no adaptation.
 
-### `Trans/` — empty
+### `Trans/` — one row done
+
+`Trans/BMS/` translates a one-row Bashicu matrix into an extended Buchholz
+term and back: `read` and `unread` for the reading, `OneRow.lean` for what
+`BM4.expand` does to one row, `Commute.lean` for the commutation with `[ ]`,
+`Cut.lean` and `Entries.lean` for the bookkeeping, and `Prim.lean` and
+`Bms.lean` for the `StepHom` and the ordinal it gives.
 
 ### Other systems — not started
 
@@ -144,16 +150,17 @@ That is `Mono.lean`.
    stays standard and countable and decreases — and the same at size 9, 15890
    forms; and ε₀, ψ_0(Ω+Ω), ψ_0(ψ_1(1)), ψ_0(Ω_2) and ψ_0(ψ_Ω(0)) all run
    down to `0` with every intermediate term standard;
-2. add `Trans/BMS/ExBuchholz`. BMS termination no longer needs it, so what the
-   translation buys is the **value**: which ordinal a matrix names. This is
-   the ordinal analysis of BM4, which is settled only for few rows: one row
-   is the primitive sequence system and lands below ε₀, two rows land below
-   the Bachmann–Howard ordinal, and three rows on are open. So the reachable
-   target is `r = 1` first. The map is clear — split the sequence at its
-   zeros, and a block `0 s` becomes `ψ_0(⟨s shifted down⟩)` — and landing in
-   `OT` below `Ω` follows from that shape. The work is the commutation:
-   `BM4.expand` is stated through `Classical.choice`, so matching it against
-   `fs` step for step is where the effort goes;
+2. **Done for one row: which ordinal a Bashicu matrix names.** `Trans/BMS/`
+   carries the chain. `read` splits a row at the entries that are not above
+   the current level and sends a block to `ψ_0` of what the block above it
+   reads as; `read_expandL` says the reading turns expansion into `[ ]`, up
+   to the renumbering `N ↦ N + 1` that the two conventions differ by;
+   `entries_expand` matches `BM4.expand` on `BM4.Arr 1` against the rule on
+   the entries; and `bmsOrdEval` is the value that comes out, with
+   `bms_one_terminates` falling out as well — one row terminating by the
+   well-ordering of extended Buchholz's ψ rather than by the labelling proof.
+   Two rows land below the Bachmann–Howard ordinal and three rows on are
+   open, so `r = 2` is the next target and would need a second collapse;
 4. add DBMS and the Y sequence.
 
 ## Conventions
