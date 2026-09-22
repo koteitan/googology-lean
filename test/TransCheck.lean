@@ -174,4 +174,32 @@ parent is column 0. Column 0 has none. -/
 #guard !(ancAtB [0, 1, 2, 1] 2 3)
 #guard !(ancAtB [0, 1, 2, 1] 0 0)
 
+/-! ### The parent chain, against the reference implementation
+
+`./bms -d` prints a Parent Index Matrix, with `-1` where a column has no
+parent. Its row `0` is what `parAt` computes. Five two-row matrices, row `0`
+of each:
+
+| matrix | row 0 | `./bms -d` row 0 |
+|---|---|---|
+| `(0,0)(1,1)(2,1)(1,1)(2,2)` | `0 1 2 1 2` | `-1 0 1 0 3` |
+| `(0,0)(1,1)(2,2)(3,3)` | `0 1 2 3` | `-1 0 1 2` |
+| `(0,0)(1,1)(1,1)(2,1)` | `0 1 1 2` | `-1 0 0 2` |
+| `(0,0)(1,0)(2,0)(1,0)(2,0)` | `0 1 2 1 2` | `-1 0 1 0 3` |
+| `(0,0)(1,1)(2,2)(3,1)(4,2)` | `0 1 2 3 4` | `-1 0 1 2 3` |
+-/
+
+/-- The row-`0` parents of a list, with `-1` for none, as `./bms -d` prints
+them. -/
+def parRow (l : List Nat) : List Int :=
+  (List.range l.length).map fun i =>
+    match parAt l i with
+    | none => -1
+    | some j => (j : Int)
+
+#guard parRow [0, 1, 2, 1, 2] == [-1, 0, 1, 0, 3]
+#guard parRow [0, 1, 2, 3] == [-1, 0, 1, 2]
+#guard parRow [0, 1, 1, 2] == [-1, 0, 0, 2]
+#guard parRow [0, 1, 2, 3, 4] == [-1, 0, 1, 2, 3]
+
 end Googology.Trans.BMS
