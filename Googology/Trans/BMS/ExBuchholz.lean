@@ -13,8 +13,10 @@ the reachable target is one row.
 This file has the map for that case.  `read` sends a one-row matrix, read as a
 list of entries, to an extended Buchholz term: split the list at the entries
 that are not above the current level, and send a block `a :: hi` to
-`ψ_0(read (b+1) hi)`, which is `ω` to that power.  What is proved here is that
-the reading is countable and that it is nonempty exactly when the list is.
+`ψ_0(read (b+1) hi)`, which is `ω` to that power.  What is proved here is that the
+reading is countable, that its subscripts are all `0`, and that a term of that
+shape is below `ψ_0` of itself — which is what the standard-form condition
+needs once the descending condition is in hand.
 
 Two things are left before this becomes a `Sim`: that the reading of a
 *standard* matrix is a standard form, and that it commutes with expansion.
@@ -66,5 +68,39 @@ theorem read_lt_tW (b : Nat) (s : List Nat) : read b s < tW := by
 theorem read_ne_nil (b : Nat) (a : Nat) (rest : List Nat) :
     read b (a :: rest) ≠ nil := by
   rw [read_cons]; exact fun h => Term.noConfusion h
+
+/-- Every subscript in the term is `0`.  The reading of a one-row matrix has
+this shape, because `ψ_0` is the only collapse it uses. -/
+def AllNil : Term → Prop
+  | nil => True
+  | cons a b t => a = nil ∧ AllNil b ∧ AllNil t
+
+theorem allNil_read : ∀ (b : Nat) (s : List Nat), AllNil (read b s) := by
+  intro b s
+  induction hn : s.length using Nat.strong_induction_on generalizing b s with
+  | _ n ih =>
+    cases s with
+    | nil => rw [read_nil]; exact trivial
+    | cons a rest =>
+      rw [read_cons]
+      refine ⟨rfl, ?_, ?_⟩
+      · exact ih (rest.takeWhile (fun x => decide (b < x))).length
+          (by subst hn; simp only [List.length_cons]
+              exact Nat.lt_succ_of_le (List.takeWhile_sublist _).length_le) _ _ rfl
+      · exact ih (rest.dropWhile (fun x => decide (b < x))).length
+          (by subst hn; simp only [List.length_cons]
+              exact Nat.lt_succ_of_le (List.dropWhile_sublist _).length_le) _ _ rfl
+
+/-- A term whose subscripts are all `0` is below `ψ_0` of itself. -/
+theorem lt_psi_self : ∀ X : Term, AllNil X → ∀ Y : Term, X < cons nil X Y := by
+  intro X
+  induction X with
+  | nil => intro _ Y; exact nil_lt_cons _ _ _
+  | cons a b t _ ihb _ =>
+    intro h Y
+    obtain ⟨ha, hb, _⟩ := h
+    subst ha
+    refine cons_lt_cons_iff.mpr (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, ?_⟩)))
+    exact ihb hb t
 
 end Googology.Trans.BMS
