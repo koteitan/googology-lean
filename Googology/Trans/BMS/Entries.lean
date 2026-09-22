@@ -26,13 +26,13 @@ namespace Googology.Trans.BMS
 open BM4
 
 /-- The entries of a one-row array, as a list. -/
-def entries (A : Arr 1) : List Nat := (List.range A.len).map (fun i => A.col i 0)
+def entries {r : Nat} (A : Arr r) : List Nat := (List.range A.len).map (fun i => A.col i 0)
 
-@[simp] theorem entries_length (A : Arr 1) : (entries A).length = A.len := by
+@[simp] theorem entries_length {r : Nat} (A : Arr r) : (entries A).length = A.len := by
   rw [entries, List.length_map, List.length_range]
 
 /-- Reading the entries of a one-row array off in three pieces. -/
-theorem entries_split (A : Arr 1) (p s : Nat) (h : A.len = p + (s + 1)) :
+theorem entries_split {r : Nat} (A : Arr r) (p s : Nat) (h : A.len = p + (s + 1)) :
     entries A = (List.range p).map (fun i => A.col i 0)
       ++ ((List.range s).map (fun j => A.col (p + j) 0) ++ [A.col (p + s) 0]) := by
   rw [entries, h, List.range_add, List.map_append, List.map_map, List.range_succ,

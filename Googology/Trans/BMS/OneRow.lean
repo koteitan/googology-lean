@@ -36,12 +36,8 @@ variable {A : Arr 1}
 the last index before `i` whose entry is smaller. -/
 theorem parent_one {j i : Nat} :
     parent A 0 j i ↔ j < i ∧ A.col j 0 < A.col i 0 ∧
-      (∀ j', j < j' → j' < i → A.col i 0 ≤ A.col j' 0) ∧ i < A.len := by
-  constructor
-  · rintro ⟨h1, _, h3, h4, _, h6⟩
-    exact ⟨h1, h3, fun j' a b => h4 j' a b b, h6⟩
-  · rintro ⟨h1, h2, h3, h4⟩
-    exact ⟨h1, h1, h2, fun j' a b _ => h3 j' a b, Nat.zero_lt_one, h4⟩
+      (∀ j', j < j' → j' < i → A.col i 0 ≤ A.col j' 0) ∧ i < A.len :=
+  parent_row0_iff Nat.zero_lt_one
 
 /-- There is at most one parent. -/
 theorem parent_one_unique {j j' i : Nat} (h : parent A 0 j i) (h' : parent A 0 j' i) :

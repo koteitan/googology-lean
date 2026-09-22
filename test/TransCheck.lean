@@ -156,4 +156,22 @@ def seqs : Nat → List (List Nat)
 
 #guard ((seqs 5).filter stdB).all fun l => read 0 (unread 0 (read 0 l)) == read 0 l
 
+/-! ### The row-0 parent chain
+
+`(0)(1)(2)(1)` as the first row of an array: column 3 has entry 1, so its
+parent is column 0; column 2 has entry 2, so its parent is column 1, whose
+parent is column 0. Column 0 has none. -/
+
+#guard parAt [0, 1, 2, 1] 3 == some 0
+#guard parAt [0, 1, 2, 1] 2 == some 1
+#guard parAt [0, 1, 2, 1] 1 == some 0
+#guard parAt [0, 1, 2, 1] 0 == none
+
+#guard ancAtB [0, 1, 2, 1] 0 3
+#guard ancAtB [0, 1, 2, 1] 0 2
+#guard ancAtB [0, 1, 2, 1] 1 2
+#guard !(ancAtB [0, 1, 2, 1] 1 3)
+#guard !(ancAtB [0, 1, 2, 1] 2 3)
+#guard !(ancAtB [0, 1, 2, 1] 0 0)
+
 end Googology.Trans.BMS

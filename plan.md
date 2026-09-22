@@ -190,7 +190,8 @@ That is `Mono.lean`.
    `BMS/Rows.lean` pins the bad root down for any number of rows, and
    `BMS/TwoRow.lean` reads the two-row column map off — `m₀` is `0` or `1`,
    and at `1` row `0` takes an increment on the columns whose bad-part
-   position is a row-`0` ancestor of the bad root. What is left is a reading
+   position is a row-`0` ancestor of the bad root. `BMS/Anc.lean` says what
+   that ancestor relation is on the entries, and computes it. What is left is a reading
    that uses `ψ_1` as well as `ψ_0`, and the commutation, whose `dom`
    trichotomy will have a fourth case — the tower — that one row never
    reaches;

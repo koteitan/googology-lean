@@ -45,12 +45,8 @@ theorem m₀_two (A : Arr 2) :
 the row-`0` entries alone. -/
 theorem parent_zero_iff {j i : Nat} :
     parent A 0 j i ↔ j < i ∧ A.col j 0 < A.col i 0 ∧
-      (∀ j', j < j' → j' < i → A.col i 0 ≤ A.col j' 0) ∧ i < A.len := by
-  constructor
-  · rintro ⟨h1, _, h3, h4, _, h6⟩
-    exact ⟨h1, h3, fun j' a b => h4 j' a b b, h6⟩
-  · rintro ⟨h1, h2, h3, h4⟩
-    exact ⟨h1, h1, h2, fun j' a b _ => h3 j' a b, by omega, h4⟩
+      (∀ j', j < j' → j' < i → A.col i 0 ≤ A.col j' 0) ∧ i < A.len :=
+  parent_row0_iff (by omega)
 
 /-- Row `1` sees only the strict row-`0` ancestors. -/
 theorem parent_one_iff {j i : Nat} :

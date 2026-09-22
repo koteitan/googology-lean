@@ -56,6 +56,17 @@ theorem expand_col_of_parent (hr : 0 < r) {p : Nat} (h : parent A (m₀ A) p (A.
   simp only [expand, h0, if_false, lastHasParent_of_parent hr h, if_true]
   rw [badRoot_of_parent hr h]
 
+/-- Row `0` sees every earlier column, so being its parent is a condition on
+the row-`0` entries alone. -/
+theorem parent_row0_iff (hr : 0 < r) {j i : Nat} :
+    parent A 0 j i ↔ j < i ∧ A.col j 0 < A.col i 0 ∧
+      (∀ j', j < j' → j' < i → A.col i 0 ≤ A.col j' 0) ∧ i < A.len := by
+  constructor
+  · rintro ⟨h1, _, h3, h4, _, h6⟩
+    exact ⟨h1, h3, fun j' a b => h4 j' a b b, h6⟩
+  · rintro ⟨h1, h2, h3, h4⟩
+    exact ⟨h1, h1, h2, fun j' a b _ => h3 j' a b, hr, h4⟩
+
 /-- The column map below the bad root is a copy. -/
 @[simp] theorem tildeCol_lt (A : Arr r) (p m s i k : Nat) (h : i < p) :
     tildeCol A p m s i k = A.col i k := by
