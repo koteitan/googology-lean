@@ -324,4 +324,21 @@ against `./bms`, all agreeing. -/
 #guard expandRL 4 2 [[0,0,0,0],[1,1,1,0],[2,1,0,0]]
   == [[0,0,0,0],[1,1,1,0],[2,0,0,0],[3,1,1,0],[4,0,0,0],[5,1,1,0]]
 
+/-! ### Matrices that are not standard forms
+
+`Trans.BMS.bmsAllL_terminates` says expansion ends from any matrix, standard
+or not. Three that are not standard — a first column other than all zeros,
+entries out of order — run down to the empty matrix. -/
+
+def runR (r : Nat) : Nat → Nat → List (List Nat) → List (List Nat)
+  | 0, _, l => l
+  | n + 1, k, l => runR r n k (expandRL r k l)
+
+#guard (List.range 9).map (fun i => (runR 1 i 1 [[3],[1],[2]]).length)
+  == [3, 3, 2, 1, 0, 0, 0, 0, 0]
+#guard (List.range 9).map (fun i => (runR 2 i 1 [[2,1],[1,3],[3,0]]).length)
+  == [3, 3, 2, 1, 0, 0, 0, 0, 0]
+#guard (List.range 9).map (fun i => (runR 3 i 0 [[5,2,9],[1,1,1],[4,0,3]]).length)
+  == [3, 2, 1, 0, 0, 0, 0, 0, 0]
+
 end Googology.Trans.BMS
