@@ -200,11 +200,12 @@ W₀ = ψ_{Z[0]}(0)    W_{i+1} = ψ_{Z[0]}(X₂[W_i])
 admissible index (`tower_lt_dom`). Climbing needs 3.2(b), the monotonicity of
 `fs` in its index, which is `fs_mono` there.
 
-`Trian_case4` then proves the branch from one statement, `SubBound`, about
-the subscript `Z` of `dom X₂` alone:
+`Trian_case4` then proves the branch from one statement, `SubBound`, about a
+single standard form `X` whose domain is indexed by terms. Write `Z` for the
+subscript of `dom X`:
 
 ```
-X₂[W₀] ≤ c ≤ X₂ ⟹ G_u(Z) ≼ {c} ∪ G_u(c) ∪ {0}
+X[ψ_{Z[0]}(0)] ≤ c ≤ X ⟹ G_u(Z) ≼ G_u(c) ∪ {0}
 ```
 
 `sub_G_le` carries that from `Z` to `Z[0]`, through 3.6 at `Z`, and
@@ -219,14 +220,17 @@ numbers and `G` never enters them. Here they are terms and it is false: with
 is also the value it produces, and `G_0` of it holds `ψ_Ω(0)`, above `ψ_A(0)`
 because `A` is countable.
 
+The index has to be `ψ_{Z[0]}(0)` and not just any `W < dom X`: for
+`X = ψ_{ω+1}(0)` the domain is `X` itself and `X[0] = 0`, so the bound would
+have to hold against an empty `G_u(0)`.
+
 `SubBound` is the one place left where 3.6 calls on 3.3: it asks for something
-about `Z` that the standardness of `X₂` has to supply. Buchholz proves 3.3
+about `Z` that the standardness of `X` has to supply. Buchholz proves 3.3
 and 3.6 by one simultaneous induction, and splitting them, as here, is what
-leaves it open. `test/ExBuchholzCheck.lean` carries the term above and checks
-`SubBound` on every standard case-4 form of size at most 7 — 158 of them,
-countable or not — at every level of size at most 2 and against every
-candidate `c` of size at most 4. The same run at size 8, over 651 forms, also
-passes.
+leaves it open. `test/ExBuchholzCheck.lean` carries both terms above and checks
+`SubBound` on every standard form of size at most 7 whose domain is indexed by
+terms — 571 of them, countable or not — at every level of size at most 2 and
+against every candidate `c` of size at most 4.
 
 Then 3.3 assembles 3.4 and 3.6.
 
@@ -261,7 +265,7 @@ Then 3.3 assembles 3.4 and 3.6.
 | Buchholz 3.2(b): `fs` monotone in its index | done (`fs_mono`) |
 | the tower of case 4, and `(ψ_{X₁}(X₂))[n̲] = ψ_{X₁}(X₂[W_n])` | done (`tower`, `fs_numeral`) |
 | Buchholz 3.6: `z ∈ dom a → a[z] ⊲_z a` | done given `SubBound` (`Trian_fs`) |
-| `SubBound` itself | **not proved**; checked by computation on 158 case-4 forms |
+| `SubBound` itself | **not proved**; checked by computation on 571 standard forms |
 | `OT` and `· < Ω` preserved by the step | **not proved** — the last gap; checked by computation in `test/ExBuchholzCheck.lean` |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no

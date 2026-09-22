@@ -72,83 +72,66 @@ standard. -/
 
 /-! ## The tower of Buchholz's case 4
 
-`Closure.lean` proves Lemma 3.6 from one statement, `SubBound`: what `G` sees
-in the subscript `Z` of `dom X₂` is bounded by any `c` between `X₂[W₀]`, the
-first value the tower produces, and `X₂` itself, together with `0`.
-`sub_G_le` carries that bound from `Z` to `Z[0]`, and `tower_G_le` carries it
-from there up the whole tower.
+`Closure.lean` proves Lemma 3.6 from one statement, `SubBound`, about a single
+standard form `X` whose domain is indexed by terms: what `G` sees in the
+subscript `Z` of `dom X` is bounded by what it sees in anything between
+`X[ψ_{Z[0]}(0)]` and `X`.  `sub_G_le` carries that bound from `Z` to `Z[0]`,
+and `tower_G_le` carries it from there up the whole tower of case 4.
 -/
 
-/-- Is `X = ψ_{X₁}(X₂)` in the configuration of Buchholz's case 4? -/
-def isCase4 : Term → Bool
-  | cons X₁ X₂ nil =>
-      !(dom X₂ == nil) && !(dom X₂ == t1) && !(dom X₂ == tw)
-        && !(decide (dom X₂ < cons X₁ X₂ nil))
-  | _ => false
+/-- Has `X` a domain indexed by terms? -/
+def domTerm (X : Term) : Bool :=
+  !(dom X == nil) && !(dom X == t1) && !(dom X == tw)
 
-/-- The subscript `Z` of `dom X₂`, the `i`-th rung `W_i` of the tower, the
-value `X₂[W_i]` that rung produces, and `X₂` itself. -/
-def zsub : Term → Term
-  | cons _ X₂ nil => subOf (dom X₂)
-  | _ => nil
-
-def rung : Term → Nat → Term
-  | cons _ X₂ nil, i => tower (fs (subOf (dom X₂)) nil) X₂ i
-  | _, _ => nil
-
-def rungVal : Term → Nat → Term
-  | cons _ X₂ nil, i => fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ i)
-  | _, _ => nil
-
-def argOf : Term → Term
-  | cons _ X₂ _ => X₂
-  | nil => nil
+/-- The first value the tower of case 4 produces, `X[ψ_{Z[0]}(0)]`. -/
+def firstVal (X : Term) : Term := fs X (psi (fs (subOf (dom X)) nil) nil)
 
 /-- `SubBound` at one level `u` and one `c`. -/
 def subRel (X : Term) (u c : Term) : Bool :=
-  (G u (zsub X)).all fun x => (c :: (G u c ++ [nil])).any fun y => decide (x ≤ y)
+  (G u (subOf (dom X))).all fun x => (G u c ++ [nil]).any fun y => decide (x ≤ y)
 
-/-- Those members of `cs` that lie between `X₂[W₀]` and `X₂`. -/
+/-- Those members of `cs` that lie between `X[ψ_{Z[0]}(0)]` and `X`. -/
 def betweens (X : Term) (cs : List Term) : List Term :=
-  cs.filter fun c => decide (rungVal X 0 ≤ c) && decide (c ≤ argOf X)
+  cs.filter fun c => decide (firstVal X ≤ c) && decide (c ≤ X)
 
-/-! A case-4 form need not be countable, so the check runs over every standard
-form, not only `ctbl`. -/
+/-! A form with a term-indexed domain need not be countable, so the check runs
+over every standard form, not only `ctbl`. -/
 
-#guard ((upTo 7).filter (fun X => isOT X && isCase4 X)).length == 158
+#guard ((upTo 7).filter (fun X => isOT X && domTerm X)).length == 571
 
-/-! **The check.**  Each of those 158 forms, at every level of size at most 2,
-against `X₂[W₀]`, `X₂`, and every term of size at most 4 in between.  The same
-run at size 8 (651 forms, levels up to size 3, terms up to size 5) also
-passes; only size 7 is kept here, to keep the build quick. -/
+/-! **The check.**  Each of those 571 forms, at every level of size at most 2,
+against `X[ψ_{Z[0]}(0)]`, `X`, and every term of size at most 4 in between. -/
 
-#guard ((upTo 7).filter (fun X => isOT X && isCase4 X)).all fun X =>
+#guard ((upTo 7).filter (fun X => isOT X && domTerm X)).all fun X =>
   (upTo 2).all fun u =>
-    (rungVal X 0 :: argOf X :: betweens X (upTo 4)).all fun c => subRel X u c
+    (firstVal X :: X :: betweens X (upTo 4)).all fun c => subRel X u c
 
-/-! Stronger than `SubBound` needs, and observed to hold: the `{c}` witness is
-never used — everything `G` sees in `Z` is already at or below something `G`
-sees in `c`, or is `0`. -/
+/-! The index in the statement has to be `ψ_{Z[0]}(0)`; an arbitrary
+`W < dom X` will not do.  For `X = ψ_{ω+1}(0)` the domain is `X` itself and
+`X[0] = 0`, so the bound would have to hold against `G_u(0)`, which is empty,
+while `G_0` does see something in `Z = ω + 1`. -/
 
-#guard ((upTo 7).filter (fun X => isOT X && isCase4 X)).all fun X =>
-  (upTo 2).all fun u =>
-    (rungVal X 0 :: argOf X :: betweens X (upTo 4)).all fun c =>
-      (G u (zsub X)).all fun x => (G u c ++ [nil]).any fun y => decide (x ≤ y)
+def caseW : Term := psi (cons nil t1 t1) nil
+
+#guard isOT caseW && domTerm caseW
+#guard fs caseW nil == nil
+#guard !(subRel caseW nil nil)
 
 /-! The bound that `tower_G_le` carries up the tower has to be relative to
 `c`.  Buchholz's own invariant is the absolute `G_u(W_i) < X₂[W_i]`, which
 works in his system because his subscripts are numbers and `G` never enters
 them.  Here they are terms.  Write `A = ψ_0(ψ_Ω(0))`.  For
-`X = ψ_Ω(ψ_{A+1}(0))` the first rung is `ψ_A(0)`, which is also the value it
-produces, and `G_0` of it holds `ψ_Ω(0)`, which is above `ψ_A(0)` because `A`
-is countable. -/
+`X = ψ_Ω(ψ_{A+1}(0))` the first rung of the tower is `ψ_A(0)`, which is also
+the value it produces, and `G_0` of it holds `ψ_Ω(0)`, which is above
+`ψ_A(0)` because `A` is countable. -/
 
 def caseA : Term := psi nil (psi tW nil)
 def caseX : Term := psi t1 (psi (cons nil (psi tW nil) t1) nil)
 
-#guard isOT caseX && isCase4 caseX
-#guard rung caseX 0 == psi caseA nil && rungVal caseX 0 == psi caseA nil
-#guard !((G nil (rung caseX 0)).all (fun x => decide (x < rungVal caseX 0)))
-#guard subRel caseX nil (rungVal caseX 0)
+#guard isOT caseX
+#guard tower (fs (subOf (dom (psi (cons nil (psi tW nil) t1) nil))) nil)
+    (psi (cons nil (psi tW nil) t1) nil) 0 == psi caseA nil
+#guard !((G nil (psi caseA nil)).all
+  (fun x => decide (x < fs (psi (cons nil (psi tW nil) t1) nil) (psi caseA nil))))
 
 end Googology.Notation.ExBuchholz.Term

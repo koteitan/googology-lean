@@ -46,11 +46,12 @@ W₀ = ψ_{Z[0]}(0)        W_{i+1} = ψ_{Z[0]}(X₂[W_i])
 admissible index (`tower_lt_dom`).  Climbing needs 3.2(b), the monotonicity of
 `fs` in its index, which is `fs_mono` there.
 
-`Trian_case4` then proves the branch from one statement, `SubBound`, about
-the subscript `Z` of `dom X₂` alone:
+`Trian_case4` then proves the branch from one statement, `SubBound`, about a
+single standard form `X` whose domain is indexed by terms.  Write `Z` for the
+subscript of `dom X`:
 
 ```
-X₂[W₀] ≤ c ≤ X₂  ⟹  G_u(Z) ≼ {c} ∪ G_u(c) ∪ {0}
+X[ψ_{Z[0]}(0)] ≤ c ≤ X  ⟹  G_u(Z) ≼ G_u(c) ∪ {0}
 ```
 
 `sub_G_le` carries that from `Z` to `Z[0]`, through 3.6 at `Z`, and
@@ -65,14 +66,17 @@ numbers and `G` never enters them.  Here they are terms and it is false: with
 is also the value it produces, and `G_0` of it holds `ψ_Ω(0)`, above `ψ_A(0)`
 because `A` is countable.
 
+The index has to be `ψ_{Z[0]}(0)` and not just any `W < dom X`: for
+`X = ψ_{ω+1}(0)` the domain is `X` itself and `X[0] = 0`, so the bound would
+have to hold against an empty `G_u(0)`.
+
 `SubBound` is the one place left where 3.6 calls on 3.3: it asks for something
-about `Z` that the standardness of `X₂` has to supply.  Buchholz proves 3.3
+about `Z` that the standardness of `X` has to supply.  Buchholz proves 3.3
 and 3.6 by one simultaneous induction, and splitting them, as here, is what
-leaves it open.  `test/ExBuchholzCheck.lean` carries the term above and checks
-`SubBound` on every standard case-4 form of size at most 7 — 158 of them,
-countable or not — at every level of size at most 2 and against every
-candidate `c` of size at most 4.  The same run at size 8, over 651 forms, also
-passes.
+leaves it open.  `test/ExBuchholzCheck.lean` carries both terms above and checks
+`SubBound` on every standard form of size at most 7 whose domain is indexed by
+terms — 571 of them, countable or not — at every level of size at most 2 and
+against every candidate `c` of size at most 4.
 -/
 
 namespace Googology.Notation.ExBuchholz.Term
@@ -504,22 +508,22 @@ theorem Trian.psi_sub {z u₀ u : Term} (h : Trian z u₀ u) :
   · rw [G_psi_of_not_le hvu]
     intro x hx; exact absurd hx (List.not_mem_nil)
 
-/-- Buchholz's tower invariant, reduced to the subscript `Z` of `dom X₂`:
-what `G` sees in `Z` is bounded by anything between the first value the tower
-produces and `X₂`. -/
+/-- Buchholz's tower invariant, reduced to a statement about one term: for a
+standard form `X` whose domain is indexed by terms, what `G` sees in the
+subscript `Z` of `dom X` is bounded by what it sees in anything between
+`X[ψ_{Z[0]}(0)]` and `X`. -/
 def SubBound : Prop :=
-  ∀ X₁ X₂ : Term, OT (cons X₁ X₂ nil) →
-    dom X₂ ≠ nil → dom X₂ ≠ t1 → dom X₂ ≠ tw → ¬ (dom X₂ < cons X₁ X₂ nil) →
+  ∀ X : Term, OT X → dom X ≠ nil → dom X ≠ t1 → dom X ≠ tw →
     ∀ u c : Term,
-      fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ 0) ≤ c → c ≤ X₂ →
-      listLe (G u (subOf (dom X₂))) (c :: (G u c ++ [nil]))
+      fs X (psi (fs (subOf (dom X)) nil) nil) ≤ c → c ≤ X →
+      listLe (G u (subOf (dom X))) (G u c ++ [nil])
 
 /-- The bound on `Z` carries to `Z[0]`, through 3.6 at `Z`. -/
 theorem sub_G_le {X₂ : Term} (e1 : dom X₂ ≠ nil) (e2 : dom X₂ ≠ t1) (e3 : dom X₂ ≠ tw)
     (hTZ : Trian nil (fs (subOf (dom X₂)) nil) (subOf (dom X₂)))
     (hS : ∀ u c : Term,
       fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ 0) ≤ c → c ≤ X₂ →
-      listLe (G u (subOf (dom X₂))) (c :: (G u c ++ [nil]))) :
+      listLe (G u (subOf (dom X₂))) (G u c ++ [nil])) :
     ∀ u c : Term,
       fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ 0) ≤ c → c ≤ X₂ →
       listLe (G u (fs (subOf (dom X₂)) nil)) (c :: (G u c ++ [nil])) := by
@@ -528,7 +532,7 @@ theorem sub_G_le {X₂ : Term} (e1 : dom X₂ ≠ nil) (e2 : dom X₂ ≠ t1) (e
     hTZ.2 u (subOf (dom X₂)) (subOf_fs_lt e1 e2 e3) (le_refl _) x hx
   rcases List.mem_append.mp hy with hy | hy
   · obtain ⟨z, hz, hyz⟩ := hS u c h1 h2 y hy
-    exact ⟨z, hz, le_trans hxy hyz⟩
+    exact ⟨z, List.mem_cons_of_mem _ hz, le_trans hxy hyz⟩
   · rcases List.mem_cons.mp hy with rfl | hy
     · exact ⟨nil, List.mem_cons_of_mem _ (List.mem_append_right _
         (List.mem_cons_self ..)), hxy⟩
@@ -726,7 +730,7 @@ theorem Trian_fs_aux (H : SubBound) :
                     (by omega)) hOTZ
                   (lt_of_le_of_ne (nil_le _) (fun hz => dom_ne_nil hZne hz.symm))
               have hBd := tower_G_le h1 h2 h3 hIH
-                (sub_G_le h1 h2 h3 hTZ (H X₁ X₂ hOT h1 h2 h3 h4))
+                (sub_G_le h1 h2 h3 hTZ (H X₂ (OT_snd hOT) h1 h2 h3))
               by_cases hn : Y ≠ nil ∧ isNum Y = true
               · have hYn : Y = numeral (numVal Y) := eq_numeral_numVal Y hn.2
                 rw [hYn]
