@@ -67,18 +67,29 @@
 | 1 行の生成元が `w` の塔を名指すこと。`(0)` は `1`、`(0)(1)` は `w` | `Trans.BMS.val_twr_succ`, `Trans.BMS.rank_primGen` |
 | **階数は順序数の測度のうち最小であること**。どの評価もそれを上から抑える | `Eval.rank_le` |
 | DBMS の 1 行も同じ順序数を名指し、階数も一致すること | `Trans.DBMS.exists_dbms_of_lt_eps0`, `Trans.DBMS.rank_dbms_eq_val` |
-| **2 行の生成元 `(0,0)(1,1)` の階数が `e0` であること**。2 行は 1 行が終わる所から始まる | `Trans.BMS.rank_pairGen` |
-| どの行数でも、生成元は一つ少ない行の生成元たちの極限であること | `Trans.BMS.rank_gen_eq_iSup`, `Trans.BMS.rank_gen_lt` |
-| `(0,0)(1,1)(0,0)` の階数が `e0 + 1` であること。最後の列に親が無いのでどの括弧でも落ちる | `Trans.BMS.rank_succAll`, `Rewrite.rank_succ_of_const_step` |
-| **展開がブロックを越えて戻らないこと**。行 `0` の成分が `0` の列がブロックの始まり | `Trans.BMS.expandRL_append` |
-| **だから階数はブロックについて加法的**。`(0,0)(1,1)` の `n` 個並びの階数は `e0·n` | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_blockRepState` |
-| `(0,0)(1,1)(1,0)` の階数が `e0·w` であること | `Trans.BMS.rank_omegaAll` |
 | `p0(W)` 未満で項が基本列の上限であること | `Trans.BMS.fs_lub` |
 | **標準 1 行行列とは、項が標準形である行列のことちょうどである** | `Trans.BMS.std_entries_iff`, `Trans.BMS.exists_bms_of_lt_e0` |
 | **原始数列系と `p0(W)` 未満の標準形が同値であること** | `Trans.BMS.primEquivE0` |
 | 1 行の行列は名指す順序数で決まり、自分の展開たちの上限であること | `Trans.BMS.bmsOrdEval_inj`, `Trans.BMS.expandL_lub` |
 | ラベルではなく翻訳による 1 行の停止性 | `Trans.BMS.bms_one_terminates`, `Trans.BMS.prim_terminates` |
 | 1 行 DBMS についての同じこと。こちらは他に停止性の証明がない | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
+
+### 2 行以上: 階数がどこまで届くか
+
+2 行の読み取りは無いので、これらが持つ順序数は展開関係の階数だけである。展開が
+分かっている所なら、それでも計算できる。
+
+| | |
+|---|---|
+| **2 行の生成元 `(0,0)(1,1)` の階数が `e0` であること**。2 行は 1 行が終わる所から始まる | `Trans.BMS.rank_pairGen` |
+| どの行数でも、生成元は一つ少ない行の生成元たちの極限であること | `Trans.BMS.rank_gen_eq_iSup`, `Trans.BMS.rank_gen_lt` |
+| `(0,0)(1,1)(0,0)` の階数が `e0 + 1` であること。最後の列に親が無いのでどの括弧でも落ちる | `Trans.BMS.rank_succAll`, `Rewrite.rank_succ_of_const_step` |
+| **展開がブロックを越えて戻らないこと**。行 `0` の成分が `0` の列がブロックの始まり | `Trans.BMS.expandRL_append` |
+| **だから階数はブロックについて加法的**。`(0,0)(1,1)` の `n` 個並びの階数は `e0·n` | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_blockRepState` |
+| `(0,0)(1,1)(1,0)` の階数が `e0·w` であること | `Trans.BMS.rank_omegaAll` |
+
+届かないのは `(0,0)(1,1)(2,1)` と、それ以降の生成元である。そちらの展開はブロックの
+繰り返しでも 0 の行を持つ行列でもない。
 
 `sorry` は無く、公理も `propext`・`Classical.choice`・`Quot.sound` の 3 つだけ。
 `Googology.Core` で公理を使うのは、`Terminates` を結論する六つだけである。
@@ -201,5 +212,6 @@ MIT ライセンス。[LICENSE](LICENSE) を参照。
 
 現状：`Core/` は完成。`Notation/ExBuchholz` は表記系としても展開系としても完成
 した。停止性は何も仮定せずに証明してある。`Notation/BMS` はどの行数でも停止する。
-`Trans/` には最初の項目が入った。1 行の Bashicu 行列を拡張ブーフホルツ項として
-読む写像である。何が足りないかは `plan-ja.md` にある。
+`Trans/` は 1 行を完全に決着させた。項としても、順序数としても、系の階数としても
+一致する。2 行の読み取りは無いままだが、2 行の順序数もいくつか出ている。何が
+足りないかは `plan-ja.md` にある。
