@@ -165,6 +165,57 @@ theorem val_te1 : val te1 = Ord.eps1 := by
   rw [show te1 = psi nil (addT tW tW) from rfl, val_psi, val_nil, val_addT, val_tW,
     Ord.psi_Omega_two]
 
+/-! ### Terms with `Ω` in the argument
+
+`OT_of_desc` covers the terms whose subscripts are all `0`.  Above `ε₀` the
+arguments carry `Ω`, and `OT_psi_Omega_add` is the standard-form condition
+there: what it asks of `B` is that `G_0` sees nothing in it that reaches
+`Ω + B`. -/
+
+theorem G_addT_tW (B : Term) : G nil (addT tW B) = nil :: nil :: G nil B := by
+  show G nil (cons t1 nil B) = _
+  rw [G, if_pos (nil_le t1)]
+  show nil :: (G nil t1 ++ G nil nil) ++ G nil B = _
+  rw [show G nil t1 = [nil] from rfl, show G nil nil = ([] : List Term) from rfl]
+  rfl
+
+/-- **`ψ_0(Ω + B)` is a standard form** when `B` is one whose `G_0` stays
+below `Ω + B` and whose head is at most `Ω`. -/
+theorem OT_psi_Omega_add {B : Term} (hB : OT B)
+    (hG : ∀ x ∈ G nil B, x < addT tW B) (hhead : descHead t1 nil B = true) :
+    OT (psi nil (addT tW B)) := by
+  have hne : nil < addT tW B := by
+    show nil < cons t1 nil B
+    exact nil_lt_cons _ _ _
+  have hOTsum : isOT (addT tW B) = true := by
+    show isOT (cons t1 nil B) = true
+    rw [isOT]
+    simp only [Bool.and_eq_true]
+    exact ⟨⟨⟨⟨rfl, rfl⟩, rfl⟩, hB⟩, hhead⟩
+  show isOT (cons nil (addT tW B) nil) = true
+  rw [isOT]
+  simp only [Bool.and_eq_true]
+  refine ⟨⟨⟨⟨rfl, hOTsum⟩, ?_⟩, rfl⟩, rfl⟩
+  rw [G_addT_tW]
+  refine List.all_eq_true.mpr (fun x hx => decide_eq_true ?_)
+  rcases List.mem_cons.mp hx with rfl | h1
+  · exact hne
+  · rcases List.mem_cons.mp h1 with rfl | h2
+    · exact hne
+    · exact hG x h2
+
+/-- The term `ψ_0(Ω + 1)`. -/
+abbrev tew : Term := psi nil (addT tW t1)
+
+/-- **`ψ_0(Ω + 1)` is a standard form, and it names `ε₀·ω`.** -/
+theorem OT_tew : OT tew := by decide
+
+theorem val_tew : val tew = Ord.eps0 * Ordinal.omega0 := by
+  rw [show tew = psi nil (addT tW t1) from rfl, val_psi, val_nil, val_addT, val_tW, val_t1,
+    Ord.psi_Omega_add_one]
+
+theorem OT_te1 : OT te1 := by decide
+
 /-- **`ψ_0(Ω)` is `ε₀`.** -/
 theorem val_te0 : val te0 = Ord.eps0 := by
   rw [show te0 = psi nil tW from rfl, val_psi, val_nil, val_tW, Ord.psi_Omega_one]

@@ -333,8 +333,11 @@ What is left of that is the Lean problem still open.
   only below `ε₀`. The arithmetic above it has started: `psi_Omega_add_eq`
   says `ψ_0(Ω + a) = ε₀·ω^a` up to `ε₁`, and `psi_Omega_two` says `ψ_0(Ω·2)`
   **is** `ε₁`. Those are what a surjectivity proof below `ε₁` would build
-  terms out of; what it still needs is the standard-form condition for terms
-  with the subscript `1` in them, which `OT_of_desc` does not cover. Higher up the normal form is not
+  terms out of. The standard-form condition for terms with `Ω` in the argument
+  is `OT_psi_Omega_add`: what it asks is that `G_0` sees nothing in the
+  argument that reaches `Ω + B`. `ψ_0(Ω+1)` and `ψ_0(Ω+Ω)` are standard by
+  it, naming `ε₀·ω` and `ε₁`. What is left is the induction itself, which has
+  to carry that `G_0` condition along with the value. Higher up the normal form is not
   Cantor's: it needs `ψ` at every subscript, so the induction that builds a
   term has to know which arguments each `ψ_v` reaches, which is `C_v` again.
 
