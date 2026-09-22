@@ -251,6 +251,23 @@ The fundamental sequence of `B` at the tower's first index overshoots
 everything `G` sees in `B` at the level of the collapse. That is the
 Bachmann property, and it is the only thing the library still assumes.
 
+`System.lean` carries that through to the end: `exbOT` is the expansion system
+restricted to the countable standard forms, and `exbOT_wf` and
+`exbOT_terminates` are proved from `Bachmann` and nothing else.
+
+The route to `Bachmann` itself is an induction on `B`, one case per branch of
+`dom`, and the cases are not uniform.  Writing `P(V)` for `ψ_V(0)`:
+
+| branch of `dom B` | what the case needs |
+|---|---|
+| `B = p + t` | the head part by a size argument; the tail by the same statement at `t` |
+| `B = ψ_a(0)`, `dom a = 1` | `a` is a successor, so `le_pred_of_lt` and a size argument |
+| `B = ψ_a(0)`, `dom a ∉ {0,1}` | the same statement at `a`, but stated for `P` — hypothesis `G_u(a) < P(a)`, conclusion `G_u(a) < P(a[W])` |
+| `B = ψ_a(b)`, `dom b < B` | the same statement at `b`, and the closure of `G` under its own members |
+
+So the induction has to carry two statements, the plain one and the `P` one.
+Both are checked by computation in `test/ExBuchholzCheck.lean`.
+
 The Bachmann property is what is left.
 
 ## Status

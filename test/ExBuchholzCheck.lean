@@ -107,6 +107,27 @@ form, not only `ctbl`.  **The check** is `Bachmann` on all 651 of size at most
 #guard ((upTo 8).filter (fun X => isOT X && isCase4 X)).all fun X =>
   (G (lvl X) (argB X)).all fun x => decide (x < rungVal X 0)
 
+/-! `Bachmann` has to be proved together with its `ψ` form: the branch where
+`dom B` comes from the subscript reduces to the statement with `x < B`
+replaced by `x < ψ_B(0)` on both sides.  Both are checked here, over every
+standard form of size at most 6 with a term-indexed domain and every level of
+size at most 2 that the hypothesis holds at. -/
+
+def domTerm (X : Term) : Bool :=
+  !(dom X == nil) && !(dom X == t1) && !(dom X == tw)
+
+def W0 (B : Term) : Term := psi (fs (subOf (dom B)) nil) nil
+
+#guard ((upTo 6).filter (fun B => isOT B && domTerm B)).all fun B =>
+  (upTo 2).all fun u =>
+    (!((G u B).all (fun y => decide (y < B)))) ||
+      (G u B).all (fun x => decide (x < fs B (W0 B)))
+
+#guard ((upTo 6).filter (fun B => isOT B && domTerm B)).all fun B =>
+  (upTo 2).all fun u =>
+    (!((G u B).all (fun y => decide (y < psi B nil)))) ||
+      (G u B).all (fun x => decide (x < psi (fs B (W0 B)) nil))
+
 /-! The level matters.  At level `0` the tower invariant that `Bachmann`
 feeds is false: write `A = ψ_0(ψ_Ω(0))`; for `X = ψ_Ω(ψ_{A+1}(0))` the first
 rung is `ψ_A(0)`, which is also the value it produces, and `G_0` of it holds
