@@ -1187,14 +1187,13 @@ theorem G_head_lt {u a b t : Term} (h : ∀ y ∈ G u (cons a b t), y < cons a b
 
 /-! ## As an expansion system -/
 
-/-- Extended Buchholz terms as an expansion system: one step is the
-fundamental sequence at the numeral `n`.
+/-- Extended Buchholz terms as an expansion system on **every** term: one step
+is the fundamental sequence at the numeral `n`.
 
-Well-foundedness is **not** proved, but `step_lt` above is most of it: one step
-strictly decreases any standard form below `Ω` other than `0`.  What is left is
-that `OT` and `· < Ω` are preserved by the step, so that the state can be
-restricted to the countable standard forms and `valHom` with `OrdHom.wf`
-applied. -/
+This one is not well founded, and cannot be: `step_lt` needs the state to be a
+standard form below `Ω`.  `System.lean` restricts the state to those and
+proves `exbOT_wf` there.  What is kept here is the shape of the step, which
+the restricted system reuses. -/
 def exb : Rewrite where
   State := Term
   step := fun X n => fs X (idx X n)

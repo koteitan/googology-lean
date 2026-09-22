@@ -145,7 +145,15 @@ That is `Mono.lean`.
    forms; and ε₀, ψ_0(Ω+Ω), ψ_0(ψ_1(1)), ψ_0(Ω_2) and ψ_0(ψ_Ω(0)) all run
    down to `0` with every intermediate term standard;
 2. add `Trans/BMS/ExBuchholz`. BMS termination no longer needs it, so what the
-   translation buys is the **value**: which ordinal a matrix names;
+   translation buys is the **value**: which ordinal a matrix names. This is
+   the ordinal analysis of BM4, which is settled only for few rows: one row
+   is the primitive sequence system and lands below ε₀, two rows land below
+   the Bachmann–Howard ordinal, and three rows on are open. So the reachable
+   target is `r = 1` first. The map is clear — split the sequence at its
+   zeros, and a block `0 s` becomes `ψ_0(⟨s shifted down⟩)` — and landing in
+   `OT` below `Ω` follows from that shape. The work is the commutation:
+   `BM4.expand` is stated through `Classical.choice`, so matching it against
+   `fs` step for step is where the effort goes;
 4. add DBMS and the Y sequence.
 
 ## Conventions
