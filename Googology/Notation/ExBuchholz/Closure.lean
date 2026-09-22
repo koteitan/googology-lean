@@ -12,19 +12,21 @@ any `c` between them, together with `z`.  The chain is
 
 | | statement | here |
 |---|---|---|
-| 3.4 | `b ⊲_z a`, `G_u a < a`, `G_u z < b` ⟹ `G_u b < b` | not yet |
+| 3.4 | `b ⊲_z a`, `G_u a < a`, `G_u z < b` ⟹ `G_u b < b` | **done** |
 | 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b` and `ψ_u(b₀) ⊲_z ψ_u(b)` | **done** |
 | 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | not yet |
 | 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | not yet |
 
 3.4 is the one that does the work: it turns "bounded relative to `z`" into the
-standard-form condition outright.  Its proof takes a subterm of `b` of minimal
-length violating the condition and derives a contradiction.
+standard-form condition outright.  Buchholz argues by taking a subterm of `b`
+of minimal length that violates the condition; here it is an induction on
+`size`, whose conclusion is a disjunction — either the goal already holds, or
+the condition holds at this subterm — which avoids needing a choice of minimal
+element.
 
-This file has the vocabulary — concatenation, `G°`, the ordering on the lists
-`G` returns, and `⊲` itself — and both halves of 3.5.  Each half rests on a
-decomposition lemma saying what a term strictly between two others has to look
-like: `addT_between` for sums and `psi_between` for collapses.
+Each half of 3.5 rests on a decomposition lemma saying what a term strictly
+between two others has to look like: `addT_between` for sums and `psi_between`
+for collapses.
 -/
 
 namespace Googology.Notation.ExBuchholz.Term
@@ -207,5 +209,107 @@ theorem Trian.psi_left (u : Term) {z b₀ b : Term} (h : Trian z b₀ b) :
           (List.mem_cons_of_mem _ (List.mem_append_right _ hx))), le_refl x⟩
   · rw [G_psi_of_not_le hvu]
     intro x hx; cases hx
+
+/-! ## Buchholz 3.4 -/
+
+theorem G0_lt {u z b : Term} (hz : ∀ x ∈ G u z, x < b) (hb : nil < b) :
+    ∀ x ∈ G0 u z, x < b := by
+  intro x hx
+  rcases List.mem_cons.mp hx with rfl | hx
+  · exact hb
+  · exact hz x hx
+
+/-- Step 1 of Buchholz 3.4: what `G` sees in `b` is bounded by `a`. -/
+theorem G_lt_of_Trian {u z b a : Term} (hba : Trian z b a)
+    (ha : ∀ x ∈ G u a, x < a) (hz : ∀ x ∈ G u z, x < b) :
+    ∀ x ∈ G u b, x < a := by
+  have hane : nil < a := by
+    cases a with
+    | nil => exact absurd hba.1 (not_lt_nil _)
+    | cons _ _ _ => exact nil_lt_cons _ _ _
+  have hbne : nil < b ∨ b = nil := by
+    cases b with
+    | nil => exact Or.inr rfl
+    | cons _ _ _ => exact Or.inl (nil_lt_cons _ _ _)
+  intro x hx
+  obtain ⟨y, hy, hle⟩ := hba.2 u a hba.1 (le_refl a) x hx
+  rcases List.mem_append.mp hy with hy | hy
+  · exact lt_of_le_of_lt' hle (ha y hy)
+  · rcases List.mem_cons.mp hy with rfl | hy
+    · exact lt_of_le_of_lt' hle hane
+    · rcases hbne with h | rfl
+      · exact lt_of_le_of_lt' hle (lt_trans (hz y hy) hba.1)
+      · exact absurd (hz y hy) (not_lt_nil _)
+
+/-- **Buchholz 3.4.**  The relation `⊲` upgrades to the standard-form
+condition outright. -/
+theorem Trian.G_lt {u z b a : Term} (hba : Trian z b a)
+    (ha : ∀ x ∈ G u a, x < a) (hz : ∀ x ∈ G u z, x < b) :
+    ∀ x ∈ G u b, x < b := by
+  have hstep1 := G_lt_of_Trian hba ha hz
+  have key : ∀ n : Nat, ∀ d : Term, size d ≤ n → (∀ y ∈ G u d, y < a) →
+      (∀ y ∈ G u b, y < b) ∨ (∀ y ∈ G u d, y < b) := by
+    intro n
+    induction n with
+    | zero =>
+      intro d hsz _
+      cases d with
+      | nil => exact Or.inr (fun y hy => absurd hy (List.not_mem_nil))
+      | cons _ _ _ => simp only [size_cons] at hsz; omega
+    | succ n ih =>
+      intro d hsz hda
+      cases d with
+      | nil => exact Or.inr (fun y hy => absurd hy (List.not_mem_nil))
+      | cons v c t =>
+        simp only [size_cons] at hsz
+        have hsub : ∀ w, (∀ y ∈ G u w, y ∈ G u (cons v c t)) → ∀ y ∈ G u w, y < a :=
+          fun w hw y hy => hda y (hw y hy)
+        have hGt : ∀ y ∈ G u t, y ∈ G u (cons v c t) := by
+          intro y hy; rw [G_cons]; exact List.mem_append_right _ hy
+        rcases ih t (by omega) (hsub t hGt) with h | ht
+        · exact Or.inl h
+        by_cases huv : u ≤ v
+        · have hGv : ∀ y ∈ G u v, y ∈ G u (cons v c t) := by
+            intro y hy; rw [G_cons, if_pos huv]
+            exact List.mem_append_left _ (List.mem_cons_of_mem _ (List.mem_append_left _ hy))
+          have hGc : ∀ y ∈ G u c, y ∈ G u (cons v c t) := by
+            intro y hy; rw [G_cons, if_pos huv]
+            exact List.mem_append_left _ (List.mem_cons_of_mem _ (List.mem_append_right _ hy))
+          rcases ih v (by omega) (hsub v hGv) with h | hv
+          · exact Or.inl h
+          rcases ih c (by omega) (hsub c hGc) with h | hc
+          · exact Or.inl h
+          have hcmem : c ∈ G u (cons v c t) := by
+            rw [G_cons, if_pos huv]; exact List.mem_append_left _ (List.mem_cons_self ..)
+          have hca : c < a := hda c hcmem
+          have hbne : nil < b ∨ b = nil := by
+            cases b with
+            | nil => exact Or.inr rfl
+            | cons _ _ _ => exact Or.inl (nil_lt_cons _ _ _)
+          rcases lt_trichotomy c b with hcb | rfl | hbc
+          · refine Or.inr ?_
+            intro y hy
+            rw [G_cons, if_pos huv] at hy
+            rcases List.mem_append.mp hy with hy | hy
+            · rcases List.mem_cons.mp hy with rfl | hy
+              · exact hcb
+              rcases List.mem_append.mp hy with hy | hy
+              · exact hv y hy
+              · exact hc y hy
+            · exact ht y hy
+          · exact Or.inl hc
+          · refine Or.inl ?_
+            intro y hy
+            obtain ⟨w, hw, hle⟩ := hba.2 u c hbc (le_of_lt hca) y hy
+            rcases List.mem_append.mp hw with hw | hw
+            · exact lt_of_le_of_lt' hle (hc w hw)
+            · rcases hbne with hb0 | rfl
+              · exact lt_of_le_of_lt' hle (G0_lt hz hb0 w hw)
+              · exact absurd hy (List.not_mem_nil)
+        · refine Or.inr ?_
+          intro y hy
+          rw [G_cons, if_neg huv] at hy
+          exact ht y (by simpa using hy)
+  rcases key (size b) b (Nat.le_refl _) hstep1 with h | h <;> exact h
 
 end Googology.Notation.ExBuchholz.Term
