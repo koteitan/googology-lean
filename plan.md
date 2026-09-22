@@ -348,7 +348,14 @@ What is left of that is the Lean problem still open.
   Going further needs the arithmetic above `ε₁`, and that is not the same
   shape: `ψ_0(Ω·2 + a)` starts another tower, `ψ_0(Ω^2)` is `ζ₀`, and at some
   point the argument needs `ψ_1` in it, so the induction has to know which
-  arguments `ψ_1` reaches, which is `C_1` again. Higher up the normal form is not
+  arguments `ψ_1` reaches, which is `C_1` again. Climbing one level at a time
+  will not finish; what would is a normal form theorem, and its first step is
+  in: `Ord.principal_mem_CSet` says an additively principal member of
+  `C_v(a)` is below `Ω_v` or a collapse `ψ_u(e)` with `u` and `e` in the
+  closure. What is left after that is the decomposition of an arbitrary
+  member into principals — Cantor normal form plus `mem_CSet_of_le` — and
+  then the recursion that turns each `ψ_u(e)` into a term, which is the hard
+  part: `e` may be larger than the ordinal being named. Higher up the normal form is not
   Cantor's: it needs `ψ` at every subscript, so the induction that builds a
   term has to know which arguments each `ψ_v` reaches, which is `C_v` again.
 

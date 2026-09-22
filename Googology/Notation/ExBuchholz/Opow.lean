@@ -19,6 +19,10 @@ the recursion at `e < a` bounds it by `ω^e < ω^a`.
 first uncountable it is not close — `ψ_0(a) < Ω_1` always — and the content is
 below it.
 
+`principal_mem_CSet` is a different kind of fact and the first step of a
+normal form theorem: inside `C_v(a)` an additively principal ordinal is
+either below `Ω_v` or a collapse of something in the closure.
+
 Above `ε₀` the arguments carry `Ω` in front, and the same proof gives
 `ψ_0(Ω + a) = ε₀ · ω^a` up to the first fixed point of `x ↦ ε₀ · ω^x`, which
 is `ε₁`.  `psi_Omega_add_one` is the first value it names: `ψ_0(Ω + 1)` is
@@ -678,5 +682,40 @@ theorem log_lt_self_of_lt_eps1 {a : Ordinal.{u}} (h0 : eps0.{u} < a) (h1 : a < e
       exact Ordinal.opow_log_le_self _ hne
     exact absurd h1 (not_lt.mpr (eps1_le_of_opow_fp
       (le_antisymm hle (Ordinal.right_le_opow _ Ordinal.one_lt_omega0)) h0))
+
+/-! ### The additively principal members of the closure
+
+The first step of a normal form theorem: inside `C_v(a)`, an additively
+principal ordinal is either below `Ω_v` or a collapse `ψ_u(e)` whose
+subscript and argument are in the closure as well.  The induction is on the
+derivation: a sum can be principal only if one summand is the whole of it,
+and then the derivation of that summand is the smaller one. -/
+theorem principal_mem_CSet {v a : Ordinal.{u}} : ∀ x : Ordinal.{u}, x ∈ CSet v a →
+    Ordinal.IsPrincipal (· + ·) x → 0 < x →
+      x < Ω_ v ∨ ∃ u e : Ordinal.{u}, u ∈ CSet v a ∧ e ∈ CSet v a ∧ e < a ∧ x = psi e u := by
+  intro x hx
+  induction hx with
+  | @small y h => intro _ _; exact Or.inl h
+  | @add p q hp hq ihp ihq =>
+    intro hprin hpos
+    rcases eq_or_ne q 0 with rfl | hq0
+    · rw [add_zero] at hprin hpos ⊢
+      exact ihp hprin hpos
+    · have hqpos : 0 < q := pos_of_ne_zero' hq0
+      have hple : p ≤ p + q := self_le_add_right _ _
+      have hqle : q ≤ p + q := self_le_add_left _ _
+      have hq' : q = p + q := by
+        by_contra hne
+        have hqlt : q < p + q := lt_of_le_of_ne hqle hne
+        have hplt : p < p + q := by
+          conv_lhs => rw [← add_zero p]
+          rw [add_lt_add_iff_left]
+          exact hqpos
+        exact absurd (hprin hplt hqlt) (lt_irrefl _)
+      rw [← hq'] at hprin hpos ⊢
+      exact ihq hprin hpos
+  | @coll u e hu he _ _ =>
+    intro _ _
+    exact Or.inr ⟨u, e.1, hu, he, e.2, rfl⟩
 
 end Googology.Notation.ExBuchholz.Ord
