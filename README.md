@@ -54,6 +54,7 @@ Names are written relative to `Googology`.
 | **and `ψ_0(Ω + a) = ε₀·ω^a` below `ε₁`**, so `ψ_0(Ω + 1) = ε₀·ω` | `Notation.ExBuchholz.Ord.psi_Omega_add_eq`, `Notation.ExBuchholz.Ord.psi_Omega_add_one` |
 | **and `ψ_0(Ω·2) = ε₁`**, which the term `ψ_0(Ω+Ω)` names | `Notation.ExBuchholz.Ord.psi_Omega_two`, `Trans.BMS.val_te1` |
 | **and `ψ_0(Ω·(n+1)) = ε_n` at every finite `n`**, with `ψ_0(Ω·(n+1) + a) = ε_n·ω^a` below `ε_{n+1}` | `Notation.ExBuchholz.Ord.psi_OmegaMul`, `Notation.ExBuchholz.Ord.psi_OmegaMul_add` |
+| **`val` is onto the ordinals below every `ε_n`**, and a bijection there | `Trans.BMS.exists_OT_of_lt_epsN`, `Trans.BMS.existsUnique_OT_lt_teN` |
 | an additively principal member of `C_v(a)` is below `Ω_v` or a collapse, and any member splits off a leading principal — the first two steps of a normal form theorem | `Notation.ExBuchholz.Ord.principal_mem_CSet`, `Notation.ExBuchholz.Ord.exists_principal_split` |
 | the standard forms reach those: `ψ_0(Ω+1)` names `ε₀·ω` and `ψ_0(Ω+Ω)` names `ε₁` | `Trans.BMS.OT_psi_Omega_add`, `Trans.BMS.val_tew`, `Trans.BMS.OT_te1` |
 

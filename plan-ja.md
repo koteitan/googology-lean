@@ -110,7 +110,7 @@ BMS は停止する
 は `bmsL s` の中に入る。
 
 `Eps0.lean` が 1 行を順序数として閉じる。名指すのは `e0` 未満ちょうどである。
-`val` の全射性は `e1` まで伸ばしてある。
+`val` の全射性は `e1` まで伸ばしてある。`EpsN.lean` がそれを全ての `e_n` まで運ぶ。
 `RankVal.lean` は系の階数がその順序数だと言い、2 行の最初の階数を計算する。
 `Append.lean` は展開がブロックを越えて戻らないと言い、そこから階数はブロックに
 ついて加法的になる。
@@ -299,15 +299,18 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
 
 その先が、残っている Lean の問題である。
 
-* **`e1` 以上での `val` の全射性。** 出典は `OT` に制限した `val` が `C_0(Λ)` への
+* **`e_w` 以上での `val` の全射性。** 出典は `OT` に制限した `val` が `C_0(Λ)` への
   順序**同型**だと述べている。単調で単射という半分はここにある（`val_lt_val`、
-  `val_inj_of_OT`）。全射性は `e1` 未満まで証明した。`e0` 未満は
-  `exists_OT_of_lt_eps0` が Cantor 標準形で、その上は `exists_OT_of_lt_eps1` が
-  先頭項 `p0(W + B)` で組む。そこでの標準形条件が `OT_cons_Omega` である。土台になる算術は
-  `psi_Omega_add_eq`（`e1` まで `p0(W + a) = e0·w^a`）と `psi_Omega_two`
-  （`p0(W·2)` は `e1` そのもの）である。再帰の減少は
-  `Ord.log_lt_self_of_lt_eps1` が与える。`e0` より上で `w ^ ·` の不動点は `e1`
-  自身しかないからである。
+  `val_inj_of_OT`）。全射性は全ての `e_n` 未満まで証明した。
+  `Trans.BMS.exists_OT_of_lt_epsN` が `n` についての帰納法で、土台が
+  `exists_OT_of_lt_eps0`（Cantor 標準形）、段が先頭項 `p0(W·(n+1) + B)` である。
+  そこでの標準形条件が `OT_cons_OmegaTerm` である。土台になる算術は
+  `Ord.psi_OmegaMul_add`（`e_{n+1}` 未満で `p0(W·(n+1) + a) = e_n·w^a`）と
+  `Ord.psi_OmegaMul`（`p0(W·(n+1))` は `e_n` そのもの）である。再帰の減少は
+  `Ord.log_lt_self_of_lt_epsN_succ` が与える。`e_n` と `e_{n+1}` の間で `w ^ ·` の
+  不動点は `e_{n+1}` 自身しかないからである。`Trans.BMS.existsUnique_OT_lt_teN` が
+  それを全段での全単射としてまとめる。`e0` と `e1` はその `n = 0` と `n = 1` で、
+  `teN 0` と `teN 1` はそのまま `te0` と `te1` である。
 
   `e1` 以上の算術は、もう一段ずつ登らなくてよい。
   `Notation/ExBuchholz/Eps.lean` が `p0(W·(n+1)) = e_n` を有限の全段で一度に

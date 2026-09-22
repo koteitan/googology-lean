@@ -588,4 +588,37 @@ theorem psi_Omega_two_eq : psi (Ω_ 1 + Ω_ 1) 0 = epsN.{u} 1 := by
   rw [← OmegaMul_two]
   exact psi_OmegaMul 1
 
+/-! ### The logarithm below `ε_{n+1}` -/
+
+/-- A fixed point of `ω ^ ·` above `ε_n` is at least `ε_{n+1}`. -/
+theorem epsN_succ_le_of_opow_fp {n : ℕ} {a : Ordinal.{u}} (hfp : (ω : Ordinal.{u}) ^ a = a)
+    (h0 : epsN.{u} n < a) : epsN.{u} (n + 1) ≤ a := by
+  have hprin : Ordinal.IsPrincipal (· + ·) a := by
+    rw [← hfp]
+    exact Ordinal.isPrincipal_add_omega0_opow a
+  have hadd : epsN.{u} n + a = a := Ordinal.IsPrincipal.add_eq_right hprin h0
+  rw [epsN_succ]
+  refine Ordinal.nfp_le_fp (epsN_mul_opow_monotone n) (by simp) ?_
+  show epsN.{u} n * (ω : Ordinal.{u}) ^ a ≤ a
+  refine le_of_eq ?_
+  conv_lhs => rw [← opow_epsN n, hfp, ← hfp, ← Ordinal.opow_add, hadd]
+  exact hfp
+
+/-- **Between `ε_n` and `ε_{n+1}` the logarithm is strictly smaller**, since
+the only fixed point of `ω ^ ·` there would be `ε_{n+1}` itself.  That is what
+makes the recursion that reads off a normal form descend. -/
+theorem log_lt_self_of_lt_epsN_succ {n : ℕ} {a : Ordinal.{u}} (h0 : epsN.{u} n < a)
+    (h1 : a < epsN.{u} (n + 1)) : Ordinal.log (ω : Ordinal.{u}) a < a := by
+  rcases lt_or_ge (Ordinal.log (ω : Ordinal.{u}) a) a with h | h
+  · exact h
+  · exfalso
+    have heq : Ordinal.log (ω : Ordinal.{u}) a = a :=
+      le_antisymm (Ordinal.log_le_self _ _) h
+    have hne : a ≠ 0 := ne_of_gt (lt_trans (epsN_pos n) h0)
+    have hle : (ω : Ordinal.{u}) ^ a ≤ a := by
+      conv_lhs => rw [← heq]
+      exact Ordinal.opow_log_le_self _ hne
+    exact absurd h1 (not_lt.mpr (epsN_succ_le_of_opow_fp
+      (le_antisymm hle (Ordinal.right_le_opow _ Ordinal.one_lt_omega0)) h0))
+
 end Googology.Notation.ExBuchholz.Ord

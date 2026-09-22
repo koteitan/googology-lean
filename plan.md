@@ -117,7 +117,8 @@ says a row of zeros underneath changes neither the rule nor the ordinal, so
 `bmsL r` sits inside `bmsL s` whenever `r ≤ s`.
 
 `Eps0.lean` closes one row as ordinals — it names exactly those below `ε₀` —
-and carries `val`'s surjectivity up to `ε₁`,
+and carries `val`'s surjectivity up to `ε₁`, `EpsN.lean` carries it to every
+`ε_n`,
 `RankVal.lean` says the rank of the system is that same ordinal and computes
 the first two-row ranks, and `Append.lean` says expansion never reaches back
 across a block, which makes the rank additive over blocks.
@@ -336,16 +337,21 @@ one-row matrices name the ordinals below `ε₀` and no others.
 
 What is left of that is the Lean problem still open.
 
-* **`val` is onto above `ε₁`.** The source states that `val` restricted to
+* **`val` is onto above `ε_ω`.** The source states that `val` restricted to
   `OT` is an order **isomorphism** onto `C_0(Λ)`. The monotone and injective
   half is here — `val_lt_val` and `val_inj_of_OT` — and surjectivity is proved
-  below `ε₁`: `exists_OT_of_lt_eps0` by Cantor normal form, and
-  `exists_OT_of_lt_eps1` above `ε₀`, where the leading term is `ψ_0(Ω + B)`
-  and `OT_cons_Omega` is the standard-form condition. The arithmetic it rests on is
-  `psi_Omega_add_eq` — `ψ_0(Ω + a) = ε₀·ω^a` up to `ε₁` — and
-  `psi_Omega_two`, that `ψ_0(Ω·2)` **is** `ε₁`; the recursion decreases by
-  `Ord.log_lt_self_of_lt_eps1`, since below `ε₁` the only fixed point of
-  `ω ^ ·` above `ε₀` would be `ε₁` itself.
+  below every `ε_n`: `Trans.BMS.exists_OT_of_lt_epsN`, by induction on `n`,
+  with `exists_OT_of_lt_eps0` (Cantor normal form) as its base and the leading
+  term `ψ_0(Ω·(n+1) + B)` as its step, `OT_cons_OmegaTerm` being the
+  standard-form condition there. The arithmetic it rests on is
+  `Ord.psi_OmegaMul_add` — `ψ_0(Ω·(n+1) + a) = ε_n·ω^a` up to `ε_{n+1}` — and
+  `Ord.psi_OmegaMul`, that `ψ_0(Ω·(n+1))` **is** `ε_n`; the recursion
+  decreases by `Ord.log_lt_self_of_lt_epsN_succ`, since between `ε_n` and
+  `ε_{n+1}` the only fixed point of `ω ^ ·` would be `ε_{n+1}` itself.
+  `Trans.BMS.existsUnique_OT_lt_teN` packages it as a bijection onto the
+  ordinals below `ψ_0(Ω·(n+1))` at every `n`. `ε₀` and `ε₁` are the cases
+  `n = 0` and `n = 1`, and `teN 0` and `teN 1` are `te0` and `te1` on the
+  nose.
 
   The arithmetic above `ε₁` no longer has to be climbed a level at a time.
   `Notation/ExBuchholz/Eps.lean` proves `ψ_0(Ω·(n+1)) = ε_n` at every finite
