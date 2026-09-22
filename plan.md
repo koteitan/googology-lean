@@ -165,15 +165,28 @@ That is `Mono.lean`.
    `ψ_0(Ω)` and names nothing above it.
 
    The states of `prim` — matrices whose term is a standard form — are
-   exactly the standard one-row matrices: `std_entries_iff`. The way in is
+   exactly the standard one-row matrices: `std_entries_iff`. And
+   `primEquivE0` is an `Equiv`: the primitive sequence system and the standard
+   forms below `ψ_0(Ω)` are one system written two ways, not two systems that
+   simulate each other. `fs_lub` says what `[ ]` is there — the term is the
+   least upper bound of `X[0] < X[1] < ⋯`. The way in is
    `exists_le_fs`, that `[ ]` converges below `ψ_0(Ω)`, which makes the
    descent from a generator land on any given matrix. What is left as a check
    rather than a theorem is that `Pat.Std` and the reference implementation
    agree on which matrices those are; they do on all 1024 sequences of length
    5 with entries below 4 (`test/TransCheck.lean`).
 
-   Two rows land below the Bachmann–Howard ordinal and three rows on are open,
-   so `r = 2` is the next target. The first piece is in:
+   Two rows reach `ψ_0(Ω_ω)`, not the Bachmann–Howard ordinal: the
+   correspondence table in
+   [yaBMS](https://github.com/koteitan/yaBMS) has `(0,0)(1,1)(2,2) = ψ_0(Ω_2)`,
+   which is exactly the Bachmann–Howard ordinal, and `(0,0)(1,1)(2,2)(3,3) =
+   ψ_0(Ω_3)`, so the generators climb through every finite subscript and the
+   limit is `ψ_0(Ω_ω)`. That also fits the pattern: the `r`-row generators
+   start where the `(r-1)`-row system ends — `(0)(1)⋯(n)` gives `ω↑↑n` with
+   limit `ε₀ = ψ_0(Ω)`, which is `(0,0)(1,1)`; and `(0,0,0)(1,1,1) =
+   ψ_0(Ω_ω)`. So a two-row reading has to use `ψ` at every finite subscript,
+   not just `ψ_0` and `ψ_1`. Three rows on are open, so `r = 2` is the next
+   target. The first piece is in:
    `BMS/Rows.lean` pins the bad root down for any number of rows, and
    `BMS/TwoRow.lean` reads the two-row column map off — `m₀` is `0` or `1`,
    and at `1` row `0` takes an increment on the columns whose bad-part

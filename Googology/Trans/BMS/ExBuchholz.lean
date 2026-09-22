@@ -7,7 +7,8 @@ import Googology.Notation.ExBuchholz
 What a translation between the two would buy is the **value**: which ordinal a
 matrix names.  That is the ordinal analysis of BM4, and it is settled only for
 few rows — one row is the primitive sequence system and lands below `ε₀`, two
-rows land below the Bachmann–Howard ordinal, and three rows on are open.  So
+rows reach `ψ_0(Ω_ω)`, passing the Bachmann–Howard ordinal `ψ_0(Ω_2)` on the
+way, and three rows on are open.  So
 the reachable target is one row.
 
 This file has the map for that case.  `read` sends a one-row matrix, read as a

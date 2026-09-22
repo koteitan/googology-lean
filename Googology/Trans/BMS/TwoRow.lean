@@ -12,7 +12,8 @@ is below it and expansion copies, as with one row — `expand_two_col_zero`.
 When it is `1`, row `0` receives an increment on the columns whose position in
 the bad part is a row-`0` ancestor of the bad root — `expand_two_col_one`.
 That increment is what one row never sees, and it is why the pair sequences
-reach the Bachmann–Howard ordinal rather than `ε₀`.
+reach `ψ_0(Ω_ω)` rather than `ε₀` — passing the Bachmann–Howard ordinal
+`ψ_0(Ω_2)`, which is `(0,0)(1,1)(2,2)`, on the way.
 
 The two rows also differ in what counts as a candidate.  Row `0` sees every
 earlier column (`parent_zero_iff`); row `1` sees only the strict row-`0`
