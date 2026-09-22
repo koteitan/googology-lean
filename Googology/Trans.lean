@@ -5,6 +5,8 @@ import Googology.Trans.BMS.Commute
 import Googology.Trans.BMS.Cut
 import Googology.Trans.BMS.Entries
 import Googology.Trans.BMS.Calibrate
+import Googology.Trans.BMS.Cofinal
 import Googology.Trans.BMS.Prim
 import Googology.Trans.BMS.Bms
+import Googology.Trans.BMS.Reach
 import Googology.Trans.DBMS.OneRow

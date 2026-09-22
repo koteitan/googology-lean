@@ -126,12 +126,12 @@ standard form below `ψ_0(Ω)` carries a subscript other than `0`. -/
 A one-row matrix is standard in
 [yaBMS](https://github.com/koteitan/yaBMS) — the reference implementation of
 BMS — exactly when its entries are a matrix and its term is a standard form.
-That is what `Trans.BMS.prim` takes for its states, so it is worth checking.
+That is what `Trans.BMS.prim` takes for its states, and
+`Trans.BMS.std_entries_iff` proves it against `Pat.Std`. What the check adds
+is that `Pat.Std` and the reference implementation agree.
 
 Over all 1024 sequences of length 5 with entries below 4, `./bms -s` and the
-predicate below agree on every one, and 19 come out standard. This is a check,
-not a theorem: it would follow from every such matrix being reachable from a
-generator, which is not proved. -/
+predicate below agree on every one, and 19 come out standard. -/
 
 def colB : Nat → Nat → List Nat → Bool
   | _, _, [] => true

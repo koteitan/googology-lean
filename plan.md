@@ -164,11 +164,13 @@ That is `Mono.lean`.
    every one of those is read off a matrix. So one row misses nothing below
    `ψ_0(Ω)` and names nothing above it.
 
-   What is checked but not proved: that the states of `prim` — matrices whose
-   term is a standard form — are exactly the standard one-row matrices of the
-   reference implementation. The two agree on all 1024 sequences of length 5
-   with entries below 4 (`test/TransCheck.lean`). Proving it means showing
-   every such matrix is reachable from a generator.
+   The states of `prim` — matrices whose term is a standard form — are
+   exactly the standard one-row matrices: `std_entries_iff`. The way in is
+   `exists_le_fs`, that `[ ]` converges below `ψ_0(Ω)`, which makes the
+   descent from a generator land on any given matrix. What is left as a check
+   rather than a theorem is that `Pat.Std` and the reference implementation
+   agree on which matrices those are; they do on all 1024 sequences of length
+   5 with entries below 4 (`test/TransCheck.lean`).
 
    Two rows land below the Bachmann–Howard ordinal and three rows on are open,
    so `r = 2` is the next target. The first piece is in:
