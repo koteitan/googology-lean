@@ -51,6 +51,7 @@ Names are written relative to `Googology`.
 | the fundamental sequence keeps a term standard — Buchholz's Lemma 3.3 | `Notation.ExBuchholz.Term.OTFS_thm` |
 | **`ψ_0(a) = ω^a` below `ε₀`**, and `ψ_0(a) ≤ ω^a` always | `Notation.ExBuchholz.Ord.psi_zero_eq_opow`, `Notation.ExBuchholz.Ord.psi_zero_le_opow` |
 | **`ψ_0(Ω) = ε₀`** | `Notation.ExBuchholz.Ord.psi_Omega_one` |
+| **and `ψ_0(Ω + a) = ε₀·ω^a` below `ε₁`**, so `ψ_0(Ω + 1) = ε₀·ω` | `Notation.ExBuchholz.Ord.psi_Omega_add_eq`, `Notation.ExBuchholz.Ord.psi_Omega_add_one` |
 
 ### One row: which ordinal a matrix names
 

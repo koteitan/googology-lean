@@ -330,9 +330,11 @@ What is left of that is the Lean problem still open.
 * **`val` is onto above `ε₀`.** The source states that `val` restricted to
   `OT` is an order **isomorphism** onto `C_0(Λ)`. The monotone and injective
   half is here — `val_lt_val` and `val_inj_of_OT` — and surjectivity is proved
-  only below `ε₀`. Above it the normal form is not Cantor's: it needs `ψ` at
-  every subscript, so the induction that builds a term has to know which
-  arguments each `ψ_v` reaches, which is `C_v` again.
+  only below `ε₀`. The arithmetic above it has started: `psi_Omega_add_eq`
+  says `ψ_0(Ω + a) = ε₀·ω^a` up to `ε₁`, which is what a surjectivity proof
+  below `ε₁` would build terms out of. Higher up the normal form is not
+  Cantor's: it needs `ψ` at every subscript, so the induction that builds a
+  term has to know which arguments each `ψ_v` reaches, which is `C_v` again.
 
 The other two are not Lean problems.
 

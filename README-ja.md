@@ -50,6 +50,7 @@
 | 基本列が標準形を保つ（Buchholz 補題 3.3） | `Notation.ExBuchholz.Term.OTFS_thm` |
 | **`e0` 未満で `p0(a) = w^a` であること**。`p0(a) <= w^a` は常に成り立つ | `Notation.ExBuchholz.Ord.psi_zero_eq_opow`, `Notation.ExBuchholz.Ord.psi_zero_le_opow` |
 | **`p0(W) = e0`** | `Notation.ExBuchholz.Ord.psi_Omega_one` |
+| **かつ `e1` 未満で `p0(W + a) = e0·w^a`**。よって `p0(W + 1) = e0·w` | `Notation.ExBuchholz.Ord.psi_Omega_add_eq`, `Notation.ExBuchholz.Ord.psi_Omega_add_one` |
 
 ### 1 行: 行列が名指す順序数
 
