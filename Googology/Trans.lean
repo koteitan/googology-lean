@@ -21,6 +21,7 @@ import Googology.Trans.BMS.Eps0
 import Googology.Trans.BMS.EpsN
 import Googology.Trans.BMS.Arg
 import Googology.Trans.BMS.EpsBig
+import Googology.Trans.BMS.Zeta
 import Googology.Trans.BMS.RankVal
 import Googology.Trans.BMS.Cofinal
 import Googology.Trans.BMS.Prim

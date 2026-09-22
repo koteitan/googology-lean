@@ -120,7 +120,7 @@ says a row of zeros underneath changes neither the rule nor the ordinal, so
 
 `Eps0.lean` closes one row as ordinals — it names exactly those below `ε₀` —
 and carries `val`'s surjectivity up to `ε₁`, `EpsN.lean` carries it to every
-`ε_n`, `Arg.lean` and `EpsBig.lean` carry it to `ε_{ε₀}`,
+`ε_n`, `Arg.lean` and `EpsBig.lean` carry it to `ε_{ε₀}` and `Zeta.lean` to `ζ₀`,
 `RankVal.lean` says the rank of the system is that same ordinal and computes
 the first two-row ranks, and `Append.lean` says expansion never reaches back
 across a block, which makes the rank additive over blocks.
@@ -339,7 +339,7 @@ one-row matrices name the ordinals below `ε₀` and no others.
 
 What is left of that is the Lean problem still open.
 
-* **`val` is onto above `ε_{ε₀}`.** The source states that `val` restricted to
+* **`val` is onto above `ζ₀`.** The source states that `val` restricted to
   `OT` is an order **isomorphism** onto `C_0(Λ)`. The monotone and injective
   half is here — `val_lt_val` and `val_inj_of_OT` — and surjectivity is proved
   below every `ε_n`: `Trans.BMS.exists_OT_of_lt_epsN`, by induction on `n`,
@@ -372,17 +372,30 @@ What is left of that is the Lean problem still open.
   for the remainder are built at the same level or below, so their invariants
   are instantiated at the `W` in hand.
 
-  What is left between `ε_{ε₀}` and `ζ₀` is the argument term above `ε₀`.
-  `exists_argTerm` reads the exponents of `μ` off Cantor normal form and asks
-  for all-nil terms for them, which is what `exists_desc_of_lt_eps0` gives.
-  Above `ε₀` an exponent can be an ε-number, named only by a term built at a
-  level above its own index, so the argument terms and the values have to be
-  built by one induction rather than one after the other. The step that looks
-  like it needs an inverse of `ε` does not: `Ord.exists_eps_index` supplies
-  the index from `Ordinal.le_iff_deriv`, and `Ord.eps_index_lt` says it is
-  smaller. What that would reach is `ζ₀`, which is `ψ_0(Ω·ζ₀)` and the first
-  ordinal `ψ_0` and `ψ_1` together do not name — the two-level counterpart of
-  `ε₀`.
+  `Trans/BMS/Zeta.lean` closes the gap to `ζ₀`. `exists_argTerm` asks for
+  all-nil terms for the exponents, which `exists_desc_of_lt_eps0` gives only
+  below `ε₀`; above it an exponent can be an ε-number, named only by a term
+  built at a level above its own index. So `exists_arg_and_OT` builds the
+  argument term and the values by **one** induction on the level: at `δ` it
+  first produces a standard form naming `Ω·(1+δ)`, asking the levels below
+  `δ` for the exponents, and then the values below `ε_{δ+1}` over it. The
+  step that looks like it needs an inverse of `ε` does not:
+  `Ord.exists_eps_index` supplies the index from `Ordinal.le_iff_deriv`, and
+  `Ord.eps_index_lt` says it is smaller, so an exponent that is its own
+  logarithm is named one level down.
+
+  What comes out is `Trans.BMS.existsUnique_OT_of_lt_zeta0`: **every ordinal
+  below `ζ₀` is the value of exactly one standard form**.
+  `Ord.psi_Omega_mul_zeta0` says `ψ_0(Ω·ζ₀) = ζ₀`, so that is exactly the
+  range of what `ψ_0` and `ψ_1` name together — the two-level counterpart of
+  `ε₀` for one level.
+
+  Above `ζ₀` the terms need `ψ_2`, and the pattern repeats: the arguments of
+  `ψ_1` would be built from `ψ_2` the way the arguments of `ψ_0` are built
+  from `ψ_1` here. The ordinal side has the arithmetic for it already —
+  `Ord.psi_eq_Omega_mul_opow` and `Ord.psi_Omega_succ` hold at every
+  subscript — so what is missing is the term-level induction over the
+  subscript, which is the same shape one level up.
 
   The arithmetic above `ε₁` no longer has to be climbed a level at a time.
   `Notation/ExBuchholz/Eps.lean` proves `ψ_0(Ω·(n+1)) = ε_n` at every finite

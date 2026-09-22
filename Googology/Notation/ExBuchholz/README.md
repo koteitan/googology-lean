@@ -124,6 +124,7 @@ beyond the one stated.
 | `ψ_0(Ω·(1+γ))`, any `γ` | `≤ ε_γ` | `psi_Omega_mul_le` |
 | `ψ_0(Ω·(1+γ))`, `γ < ζ₀` | `ε_γ` | `psi_Omega_mul_eps` |
 | `ψ_0(Ω·(1+γ) + β)`, `γ < ζ₀`, `β < ε_{γ+1}` | `ε_γ·ω^β` | `psi_Omega_mul_add_eps` |
+| `ψ_0(Ω·ζ₀)` | `ζ₀` | `psi_Omega_mul_zeta0` |
 | `ε_Ω` | `Ω` — so `ζ₀` is countable | `eps_Omega_one` |
 
 The last four rows before `ε_Ω` are `Ord/Ladder.lean`, which replaces the

@@ -573,4 +573,48 @@ theorem eps0_lt_zeta0 : eps0.{u} < zeta0.{u} := by
 theorem one_add_eps0 : 1 + eps0.{u} = eps0.{u} :=
   Ordinal.IsPrincipal.add_eq_right isPrincipal_add_eps0 one_lt_eps0
 
+theorem iterate_eps_lt_succ : ∀ n : ℕ, eps.{u}^[n] 0 < eps.{u}^[n + 1] 0 := by
+  intro n
+  induction n with
+  | zero =>
+    rw [Function.iterate_zero_apply, Function.iterate_one]
+    exact eps_pos 0
+  | succ m ih =>
+    have h := eps_strictMono ih
+    rwa [← Function.iterate_succ_apply' eps.{u} m 0,
+      ← Function.iterate_succ_apply' eps.{u} (m + 1) 0] at h
+
+/-- **`ζ₀` is a limit.** -/
+theorem succ_lt_zeta0 {δ : Ordinal.{u}} (h : δ < zeta0.{u}) : δ + 1 < zeta0.{u} := by
+  obtain ⟨n, hn⟩ := Ordinal.lt_nfp_iff.mp h
+  rw [← Order.succ_eq_add_one]
+  refine lt_of_le_of_lt (Order.succ_le_of_lt hn) ?_
+  exact lt_of_lt_of_le (iterate_eps_lt_succ n) (Ordinal.iterate_le_nfp eps.{u} 0 (n + 1))
+
+/-! ### The ceiling of the two levels -/
+
+theorem eps_zeta0 : eps.{u} zeta0.{u} = zeta0.{u} :=
+  Ordinal.nfp_fp (Ordinal.isNormal_deriv _) 0
+
+theorem omega0_le_zeta0 : (ω : Ordinal.{u}) ≤ zeta0.{u} :=
+  le_trans omega0_le_eps0 (le_of_lt eps0_lt_zeta0)
+
+theorem one_add_zeta0 : 1 + zeta0.{u} = zeta0.{u} :=
+  Ordinal.one_add_of_omega0_le omega0_le_zeta0
+
+/-- **`ψ_0(Ω·ζ₀) = ζ₀`.**  It is the first ordinal `ψ_0` and `ψ_1` together do
+not name: every `ε_γ` below it is `ψ_0(Ω·(1+γ))`, and nothing gets past. -/
+theorem psi_Omega_mul_zeta0 : psi ((Ω_ 1 : Ordinal.{u}) * zeta0.{u}) 0 = zeta0.{u} := by
+  refine le_antisymm ?_ ?_
+  · have h := psi_Omega_mul_le zeta0.{u}
+    rw [one_add_zeta0, eps_zeta0] at h
+    exact h
+  · refine le_of_forall_lt (fun x hx => ?_)
+    have hxe : x < eps.{u} x := lt_eps_self hx
+    rw [← psi_Omega_mul_eps hx] at hxe
+    refine lt_of_lt_of_le hxe (psi_mono 0 ?_)
+    refine mul_le_mul_right ?_ _
+    rw [← one_add_zeta0]
+    exact (add_le_add_iff_left 1).mpr hx.le
+
 end Googology.Notation.ExBuchholz.Ord

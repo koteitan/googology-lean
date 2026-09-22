@@ -118,6 +118,7 @@ inductive Term where
 | `p0(W·(1+g))`、任意の `g` | `<= e_g` | `psi_Omega_mul_le` |
 | `p0(W·(1+g))`、`g < z0` | `e_g` | `psi_Omega_mul_eps` |
 | `p0(W·(1+g) + b)`、`g < z0`、`b < e_{g+1}` | `e_g·w^b` | `psi_Omega_mul_add_eps` |
+| `p0(W·z0)` | `z0` | `psi_Omega_mul_zeta0` |
 | `e_W` | `W`。よって `z0` は可算 | `eps_Omega_one` |
 
 `e_W` の手前の 4 行が `Ord/Ladder.lean` である。有限の梯子を e 関数そのものに
