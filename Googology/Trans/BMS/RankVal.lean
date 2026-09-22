@@ -19,6 +19,13 @@ nothing below the value escapes the supremum over the expansions.
 That is what licenses reading `Rewrite.rankEval` as "the ordinal this matrix
 names" at numbers of rows where no reading is available: at one row, where
 both are defined, they agree.
+
+`rank_pairGen` is the first use of that licence.  Two rows have no reading,
+but the generator `(0,0)(1,1)` expands into one-row matrices with a zero row
+underneath, and `BMS/Embed.lean` carries their ordinals across unchanged, so
+its rank comes out as `ε₀` — the pair sequence system starts where the
+primitive sequence system ends.  That is also the value the correspondence
+tables give `(0,0)(1,1)`.
 -/
 
 namespace Googology.Trans.BMS
@@ -99,5 +106,64 @@ theorem rank_bms_eq_val (A : (Googology.Notation.BMS.bms 1).State) :
       exact entries_eq_nil_iff.symm) A
   rw [← h]
   exact rank_prim_eq_val (bmsHom.map A)
+
+/-! ### Two rows, at the generator
+
+No reading of a two-row matrix is available, so the rank is the only ordinal
+a two-row state carries.  At `(0,0)(1,1)` it can still be computed, because
+that generator expands into one-row matrices with a zero row underneath, and
+`BMS/Embed.lean` says those carry the one-row ordinals unchanged. -/
+
+instance instIsWellFoundedPair : IsWellFounded pairL.State pairL.Rel := ⟨pairL_wf⟩
+
+/-- Writing a zero row under a one-row matrix does not change its rank. -/
+theorem rank_toPairS (l : PrimState) :
+    IsWellFounded.rank pairL.Rel (toPairS l) = IsWellFounded.rank prim.Rel l :=
+  primHomPair.rank_map (fun k => ⟨k, rfl⟩)
+    (fun s => by
+      show s.1 = [] ↔ withZero s.1 = []
+      rw [withZero, List.map_eq_nil_iff]) l
+
+/-- The one-row generator `(0)(1)⋯(n)`, as a state. -/
+def primGen (n : Nat) : PrimState := ⟨List.range (n + 1), col_range n, OT_read_range n⟩
+
+/-- The two-row generator `(0,0)(1,1)`, as a state. -/
+def pairGen : PairState :=
+  ⟨[(0, 0), (1, 1)], ⟨Pat.stair 2 1, Pat.Std.init 1, by rw [entries2_stair]; rfl⟩⟩
+
+theorem step_pairGen (N : Nat) : pairL.step pairGen N = toPairS (primGen N) :=
+  Subtype.ext (expand2L_gen N)
+
+theorem rank_step_pairGen (N : Nat) :
+    IsWellFounded.rank pairL.Rel (pairL.step pairGen N) = val (read 0 (List.range (N + 1))) := by
+  rw [step_pairGen, rank_toPairS]
+  exact rank_prim_eq_val (primGen N)
+
+/-- **The pair sequence generator `(0,0)(1,1)` has rank `ε₀`.**  So the two-row
+system starts where the one-row system ends, and the correspondence table's
+`(0,0)(1,1) = ε₀` is a theorem here, not an assumption. -/
+theorem rank_pairGen : IsWellFounded.rank pairL.Rel pairGen = Ord.eps0 := by
+  have hnh : ¬ pairL.halted pairGen := by
+    show ¬ ([(0, 0), (1, 1)] : List (Nat × Nat)) = []
+    simp
+  rw [IsWellFounded.rank_eq]
+  refine le_antisymm ?_ ?_
+  · refine Ordinal.iSup_le ?_
+    rintro ⟨m, _, N, rfl⟩
+    show Order.succ (IsWellFounded.rank pairL.Rel (pairL.step pairGen N)) ≤ Ord.eps0
+    rw [rank_step_pairGen N]
+    exact Order.succ_le_of_lt (val_read_lt_eps0 (OT_read_range N))
+  · refine le_of_forall_lt (fun β hβ => ?_)
+    obtain ⟨Y, hOTY, hAY, hvY⟩ := exists_OT_of_lt_eps0 hβ
+    obtain ⟨m, hm⟩ := exists_lt_twr Y hAY
+    cases m with
+    | zero => exact absurd hm (by rw [twr]; exact not_lt_nil Y)
+    | succ k =>
+      have hrel : pairL.Rel (pairL.step pairGen k) pairGen := ⟨hnh, k, rfl⟩
+      refine Ordinal.lt_iSup_iff.mpr ⟨⟨pairL.step pairGen k, hrel⟩, ?_⟩
+      show β < Order.succ (IsWellFounded.rank pairL.Rel (pairL.step pairGen k))
+      refine lt_of_le_of_lt ?_ (Order.lt_succ _)
+      rw [rank_step_pairGen k, read_range_eq_twr k, ← hvY]
+      exact (val_lt_val hOTY (by rw [← read_range_eq_twr k]; exact OT_read_range k) hm).le
 
 end Googology.Trans.BMS

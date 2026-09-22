@@ -195,7 +195,12 @@ That is `Mono.lean`.
    notation system to define, **is** that value. So calling
    `Rewrite.rankEval` the ordinal a matrix names is justified where both are
    defined. One row of DBMS is the same system and gets the same two
-   statements.
+   statements. And it gives the first two-row ordinal: `rank_pairGen` says
+   the generator `(0,0)(1,1)` has rank `ε₀`, because it expands into one-row
+   matrices with a zero row underneath and `BMS/Embed.lean` carries their
+   ordinals across. So the pair sequence system starts where the primitive
+   sequence system ends — with no two-row reading, which there still is
+   not.
 
    The states of `prim` — matrices whose term is a standard form — are
    exactly the standard one-row matrices: `std_entries_iff`. And
