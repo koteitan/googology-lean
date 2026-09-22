@@ -25,6 +25,7 @@
 | 翻訳によって原始数列系が停止すること | `Trans.BMS.prim_terminates` |
 | **1 行の BMS が名指す順序数** | `Trans.BMS.bmsOrdEval` |
 | その順序数が `p0(W)` 未満であること（原始数列系の上限） | `Trans.BMS.read_lt_e0`, `Trans.BMS.bmsOrdEval_lt_e0` |
+| かつ `p0(W)` 未満の標準形はすべてどれかが名指すこと | `Trans.BMS.exists_read`, `Trans.BMS.lt_e0_iff_allNil` |
 | ラベルではなく翻訳による 1 行 BMS の停止性 | `Trans.BMS.bms_one_terminates` |
 | 1 行 DBMS についての同じこと。こちらは他に停止性の証明がない | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
 

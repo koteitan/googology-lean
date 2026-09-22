@@ -47,6 +47,7 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | BMS 自身 | `BMS/OneRow.lean` | — | 1 行の展開が原始数列の規則であること: 最初の `p` 個を残し、続く `s` 個を `N + 1` 回繰り返す |
 | BMS 自身 | `BMS/Entries.lean` | — | 配列とその成分列が同じ展開をすること |
 | BMS 自身 | `BMS/Cut.lean` | — | ブロック再帰 `expandL` が教科書どおりの規則であること: 最後の列を落とし、悪い部分を `N + 1` 回繰り返す |
+| BMS、拡張ブーフホルツ ψ | `BMS/Calibrate.lean` | — | `p0(W)` 未満が添字全部 0 とちょうど一致すること。よって読み取りはそこの標準形を全部拾う |
 | BMS、拡張ブーフホルツ ψ | `BMS/Prim.lean` | `StepHom` | 原始数列系を `Rewrite` として与え、停止することとその順序数 |
 | BMS、拡張ブーフホルツ ψ | `BMS/Bms.lean` | `StepHom` | **1 行の BMS が名指す順序数**、それが `p0(W)` 未満であること、翻訳による 1 行の停止性 |
 | DBMS、拡張ブーフホルツ ψ | `DBMS/OneRow.lean` | `StepHom` | 1 行の DBMS についての同じこと。1 行では生成元が BM4 と一致する |

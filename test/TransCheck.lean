@@ -90,4 +90,35 @@ The generators `(0)(1)⋯(n)` are states: their terms are standard forms. -/
 #guard (List.range 4).all fun n =>
   (List.range 3).all fun k => isOT (read 0 (expandL k 0 (List.range (n + 1))))
 
+/-- Every term of size at most `n`, for the calibration below. -/
+def bySizeProbe : Nat → Array (List Term)
+  | 0 => #[[nil]]
+  | n + 1 =>
+      let prev := bySizeProbe n
+      let here := (List.range (n + 1)).flatMap fun i =>
+        (List.range (n + 1 - i)).flatMap fun j =>
+          let k := n - i - j
+          (prev[i]!).flatMap fun a =>
+            (prev[j]!).flatMap fun b =>
+              (prev[k]!).map fun t => cons a b t
+      prev.push here
+
+def upToProbe (n : Nat) : List Term := ((bySizeProbe n).toList).flatten
+
+/-! ### What the reading reaches
+
+Below `ψ_0(Ω)` is exactly where the subscripts are all `0`, so the reading
+misses nothing there. Terms of size at most 6, both ways. -/
+
+#guard ((upToProbe 6).filter (fun X => isOT X && decide (X < te0))).all
+  fun X => read 0 (unread 0 X) == X
+
+/-! Each of the 85 is standard, below `ψ_0(Ω)`, and read off a matrix; and no
+standard form below `ψ_0(Ω)` carries a subscript other than `0`. -/
+
+#guard ((upToProbe 6).filter (fun X => isOT X && decide (X < te0))).all
+  fun X => isOT (read 0 (unread 0 X))
+
+#guard ((upToProbe 6).filter (fun X => isOT X && decide (X < te0))).length == 85
+
 end Googology.Trans.BMS
