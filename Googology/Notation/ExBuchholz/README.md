@@ -265,8 +265,14 @@ The route to `Bachmann` itself is an induction on `B`, one case per branch of
 | `B = ψ_a(0)`, `dom a ∉ {0,1}` | the same statement at `a`, but stated for `P` — hypothesis `G_u(a) < P(a)`, conclusion `G_u(a) < P(a[W])` |
 | `B = ψ_a(b)`, `dom b < B` | the same statement at `b`, and the closure of `G` under its own members |
 
-So the induction has to carry the statement in three shapes: with a prefix in
-front, plain, and for `P`.
+So the induction has to carry the statement in two shapes, both with a prefix
+in front: the plain one and the one for `P`.  `bach_sum` is the sum branch of
+the plain shape, proved: the head lands by a size argument through
+`lt_of_size_lt_addT`, and the tail by the same statement at `t` with the head
+appended to the prefix.  The three principal branches are not written yet; the
+one that still has no argument is `ψ_a(0)` with `dom a ∉ {0,1}` under a
+nonempty prefix, where an element of `G_u(a)` can sit above the prefix and the
+induction hypothesis does not reach its suffix.
 
 The prefix cannot be dropped. For `V = ψ_Ω(0) + ψ_1(ψ_Ω(0))`, which is
 standard with a term-indexed domain, `G_1` sees `ψ_Ω(0)` in the tail — the

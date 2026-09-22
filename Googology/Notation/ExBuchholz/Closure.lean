@@ -110,8 +110,14 @@ The route to `Bachmann` itself is an induction on `B`, one case per branch of
 | `B = ψ_a(0)`, `dom a ∉ {0,1}` | the same statement at `a`, but stated for `P` — hypothesis `G_u(a) < P(a)`, conclusion `G_u(a) < P(a[W])` |
 | `B = ψ_a(b)`, `dom b < B` | the same statement at `b`, and the closure of `G` under its own members |
 
-So the induction has to carry the statement in three shapes: with a prefix in
-front, plain, and for `P`.
+So the induction has to carry the statement in two shapes, both with a prefix
+in front: the plain one and the one for `P`.  `bach_sum` is the sum branch of
+the plain shape, proved: the head lands by a size argument through
+`lt_of_size_lt_addT`, and the tail by the same statement at `t` with the head
+appended to the prefix.  The three principal branches are not written yet; the
+one that still has no argument is `ψ_a(0)` with `dom a ∉ {0,1}` under a
+nonempty prefix, where an element of `G_u(a)` can sit above the prefix and the
+induction hypothesis does not reach its suffix.
 
 The prefix cannot be dropped. For `V = ψ_Ω(0) + ψ_1(ψ_Ω(0))`, which is
 standard with a term-indexed domain, `G_1` sees `ψ_Ω(0)` in the tail — the
@@ -1164,6 +1170,37 @@ theorem addT_assoc : ∀ X Y Z : Term, addT (addT X Y) Z = addT X (addT Y Z) := 
 
 theorem G_cons_eq (u a b t : Term) : G u (cons a b t) = G u (psi a b) ++ G u t := by
   rw [cons_eq_addT, G_addT]
+
+/-- The first index of the tower of Buchholz's case 4, as a function of the
+domain. -/
+def W0 (V : Term) : Term := psi (fs (subOf (dom V)) nil) nil
+
+/-- **The sum branch of the Bachmann induction.**  The statement has to be
+carried with a prefix `p` in front, because the tail inherits the hypothesis
+only in that form. -/
+theorem bach_sum {a b c d r u p : Term}
+    (hIH : ∀ q : Term, (∀ y ∈ G u (cons c d r), y < addT q (cons c d r)) →
+            ∀ y ∈ G u (cons c d r), y < addT q (fs (cons c d r) (W0 (cons c d r))))
+    (H : ∀ x ∈ G u (cons a b (cons c d r)), x < addT p (cons a b (cons c d r))) :
+    ∀ x ∈ G u (cons a b (cons c d r)),
+      x < addT p (fs (cons a b (cons c d r)) (W0 (cons a b (cons c d r)))) := by
+  intro x hx
+  have hVfs : fs (cons a b (cons c d r)) (W0 (cons a b (cons c d r)))
+      = cons a b (fs (cons c d r) (W0 (cons c d r))) := by rw [fs]; rfl
+  rw [hVfs, cons_eq_addT, ← addT_assoc]
+  rw [G_cons_eq] at hx
+  rcases List.mem_append.mp hx with hx | hx
+  · refine lt_of_lt_of_le' ?_ (le_addT_right _ _)
+    refine lt_of_size_lt_addT
+      (show x < addT (addT p (psi a b)) (cons c d r) by
+        rw [addT_assoc, ← cons_eq_addT]
+        exact H x (by rw [G_cons_eq]; exact List.mem_append_left _ hx)) ?_
+    have hs := size_lt_of_mem_G u (psi a b) x hx
+    rw [size_addT]
+    omega
+  · refine hIH (addT p (psi a b)) (fun y hy => ?_) x hx
+    rw [addT_assoc, ← cons_eq_addT]
+    exact H y (by rw [G_cons_eq]; exact List.mem_append_right _ hy)
 
 /-- Buchholz's second tower invariant, from the Bachmann property. -/
 theorem towerOT_of_Bachmann {A B : Term} (hOT : OT (cons A B nil))

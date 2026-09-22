@@ -116,8 +116,6 @@ size at most 2 that the hypothesis holds at. -/
 def domTerm (X : Term) : Bool :=
   !(dom X == nil) && !(dom X == t1) && !(dom X == tw)
 
-def W0 (B : Term) : Term := psi (fs (subOf (dom B)) nil) nil
-
 #guard ((upTo 6).filter (fun B => isOT B && domTerm B)).all fun B =>
   (upTo 2).all fun u =>
     (!((G u B).all (fun y => decide (y < B)))) ||
