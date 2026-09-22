@@ -42,7 +42,7 @@ which is the whole content of the extension.
 | `Ord.lean` | the ordinal side: `Omega`, `Clos`, `CSet`, `psi`, the cardinality bound, `psi_lt_Omega_succ`, `psi_notMem`, `Omega_le_psi`, `psi_mono` (needs mathlib) |
 | `Eval.lean` | `Term.val`, the evaluation into `Ordinal`; `Lam` and `val_lt_Lam` (needs mathlib) |
 | `Mono.lean` | `val_lt_val`, `val_mem_CSet_arg`, `valHom`, `OTLt_wf` (needs mathlib) |
-| `FS.lean` | `dom`, `fs` (the fundamental sequence `X[Y]`), and `exb`, the expansion system |
+| `FS.lean` | `dom`, `fs` (the fundamental sequence `X[Y]`), `fs_lt` (it descends), and `exb`, the expansion system |
 
 ## The order
 
@@ -91,7 +91,8 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | the standard forms are a well order, and `val` is injective on them | done |
 | `dom` and the fundamental sequence `X[Y]` | done (`FS.lean`) |
 | the expansion system `exb` | defined |
-| `OT` closed under `[ ]`, and `X[n] < X` | **not done** |
+| **the fundamental sequence descends**: `Y < dom X → X[Y] < X` | **done** (`fs_lt`) |
+| `OT` closed under `[ ]`, and `dom X ∈ {1, ω}` below `Ω` | **not done** |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 `axiom`.

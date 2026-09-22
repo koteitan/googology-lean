@@ -41,7 +41,7 @@ inductive Term where
 | `Ord.lean` | 順序数側。`Omega`、`Clos`、`CSet`、`psi`、濃度評価、`psi_lt_Omega_succ`、`psi_notMem`、`Omega_le_psi`、`psi_mono`（mathlib が要る） |
 | `Eval.lean` | `Term.val`。順序数への評価。`Lam` と `val_lt_Lam`（mathlib が要る） |
 | `Mono.lean` | `val_lt_val`、`val_mem_CSet_arg`、`valHom`、`OTLt_wf`（mathlib が要る） |
-| `FS.lean` | `dom`、`fs`（基本列 `X[Y]`）、展開系 `exb` |
+| `FS.lean` | `dom`、`fs`（基本列 `X[Y]`）、`fs_lt`（降下）、展開系 `exb` |
 
 ## 順序
 
@@ -88,7 +88,8 @@ inductive Term where
 | 標準形が整列すること、`val` が単射であること | 済 |
 | `dom` と基本列 `X[Y]` | 済（`FS.lean`） |
 | 展開系 `exb` | 定義済 |
-| `OT` が `[ ]` で閉じること、`X[n] < X` | **未** |
+| **基本列が降下すること**：`Y < dom X → X[Y] < X` | **済**（`fs_lt`） |
+| `OT` が `[ ]` で閉じること、`Ω` 未満で `dom X ∈ {1, ω}` | **未** |
 
 例外的に `sorry` を許しているわけではない。ファイルに `sorry` も `axiom` も無い。
 

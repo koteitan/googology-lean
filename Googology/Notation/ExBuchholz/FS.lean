@@ -35,16 +35,15 @@ otherwise the term whose values index the fundamental sequence.
 It does not call `[ ]`, so it is an ordinary structural recursion. -/
 def dom : Term → Term
   | nil => nil
-  | cons a b nil =>
-      match dom b with
-      | nil =>
-          match dom a with
-          | nil => cons a b nil
-          | cons nil nil nil => cons a b nil
-          | da => da
-      | cons nil nil nil => tw
-      | cons nil (cons nil nil nil) nil => tw
-      | db => if db < cons a b nil then db else tw
+  | cons X₁ X₂ nil =>
+      if dom X₂ = nil then
+        (if dom X₁ = nil then cons X₁ X₂ nil
+         else if dom X₁ = t1 then cons X₁ X₂ nil
+         else dom X₁)
+      else if dom X₂ = t1 then tw
+      else if dom X₂ = tw then tw
+      else if dom X₂ < cons X₁ X₂ nil then dom X₂
+      else tw
   | cons _ _ t => dom t
 
 @[simp] theorem dom_nil : dom nil = nil := rfl
@@ -66,16 +65,112 @@ theorem size_dom_le : ∀ X : Term, size (dom X) ≤ size X := by
       cases b with
       | nil =>
         rw [dom]
-        simp only [dom]
-        split <;> simp only [size_cons] <;> omega
+        split
+        · split
+          · simp only [size_cons, size_nil] <;> omega
+          · split <;> simp only [size_cons, size_nil] <;> omega
+        · exact absurd rfl ‹¬ dom nil = nil›
       | cons p q r =>
         simp only [size_cons] at ihb
         rw [dom]
         split
-        · split <;> simp only [size_cons] <;> omega
-        · simp only [size_tw, size_cons, size_nil]; omega
-        · simp only [size_tw, size_cons, size_nil]; omega
-        · split <;> simp only [size_tw, size_cons, size_nil] <;> omega
+        · split
+          · simp only [size_cons, size_nil] <;> omega
+          · split <;> simp only [size_cons, size_nil] <;> omega
+        · split
+          · simp only [size_tw, size_cons, size_nil] <;> omega
+          · split
+            · simp only [size_tw, size_cons, size_nil] <;> omega
+            · split <;> simp only [size_tw, size_cons, size_nil] <;> omega
+
+@[simp] theorem dom_tw : dom tw = tw := rfl
+
+/-- Only `0` has `dom` equal to `0`. -/
+theorem dom_ne_nil : ∀ {W : Term}, W ≠ nil → dom W ≠ nil := by
+  intro W
+  induction W with
+  | nil => intro h; exact absurd rfl h
+  | cons a b t iha ihb iht =>
+    intro _
+    cases t with
+    | cons c d u => exact iht (fun h => Term.noConfusion h)
+    | nil =>
+      rw [dom]
+      split
+      · split
+        · exact fun h => Term.noConfusion h
+        · split
+          · exact fun h => Term.noConfusion h
+          · assumption
+      · split
+        · exact fun h => Term.noConfusion h
+        · split
+          · exact fun h => Term.noConfusion h
+          · split
+            · assumption
+            · exact fun h => Term.noConfusion h
+
+theorem dom_eq_nil_iff {W : Term} : dom W = nil ↔ W = nil := by
+  constructor
+  · intro h
+    cases W with
+    | nil => rfl
+    | cons a b t => exact absurd h (dom_ne_nil (fun hh => Term.noConfusion hh))
+  · rintro rfl; rfl
+
+/-- `dom W` is `0`, `ω`, or a principal term with argument `0`. -/
+theorem dom_shape : ∀ W : Term,
+    dom W = nil ∨ dom W = tw ∨ ∃ Z, dom W = cons Z nil nil := by
+  intro W
+  induction W with
+  | nil => exact Or.inl rfl
+  | cons a b t iha ihb iht =>
+    cases t with
+    | cons c d u => exact iht
+    | nil =>
+      rw [dom]
+      split
+      · split
+        · next h1 _ =>
+          exact Or.inr (Or.inr ⟨a, by rw [dom_eq_nil_iff.mp h1]⟩)
+        · split
+          · next h1 _ _ =>
+            exact Or.inr (Or.inr ⟨a, by rw [dom_eq_nil_iff.mp h1]⟩)
+          · exact iha
+      · split
+        · exact Or.inr (Or.inl rfl)
+        · split
+          · exact Or.inr (Or.inl rfl)
+          · split
+            · exact ihb
+            · exact Or.inr (Or.inl rfl)
+
+/-! ## Order facts the descent uses -/
+
+/-- A sum is below a principal term exactly when its head is. -/
+theorem cons_lt_psi_iff {a b t c d : Term} :
+    cons a b t < psi c d ↔ psi a b < psi c d := by
+  rw [cons_lt_cons_iff]
+  constructor
+  · rintro (h | ⟨_, h⟩)
+    · exact h
+    · exact absurd h (not_lt_nil t)
+  · exact Or.inl
+
+/-- Only `0` is below `1`. -/
+theorem lt_one_iff {Y : Term} : Y < t1 ↔ Y = nil := by
+  constructor
+  · intro h
+    cases Y with
+    | nil => rfl
+    | cons a b t =>
+      rw [cons_lt_cons_iff] at h
+      rcases h with h | ⟨_, h⟩
+      · rcases psi_lt_psi_iff.mp h with h' | ⟨_, h'⟩
+        · exact absurd h' (not_lt_nil _)
+        · exact absurd h' (not_lt_nil _)
+      · exact absurd h (not_lt_nil _)
+  · rintro rfl; rfl
 
 /-! ## The fundamental sequence -/
 
@@ -118,7 +213,13 @@ theorem size_numPred_lt {X : Term} (h : X ≠ nil) : size (numPred X) < size X :
 /-- `n` copies of the principal term `ψ_A(B)`, as a sum. -/
 def repeatPrin (A B : Term) : Nat → Term
   | 0 => nil
-  | n + 1 => cons A B (repeatPrin A B n)
+  | k + 1 => cons A B (repeatPrin A B k)
+
+/-- A repeated principal term stays below any principal term it is below. -/
+theorem repeatPrin_lt {A B c d : Term} (h : psi A B < psi c d) :
+    ∀ n, repeatPrin A B n < psi c d
+  | 0 => nil_lt_cons c d nil
+  | _ + 1 => cons_lt_psi_iff.mpr h
 
 set_option linter.unusedVariables false in
 /-- The fundamental sequence `X[Y]`, following the reference. -/
@@ -196,6 +297,116 @@ abbrev tww : Term := psi nil tw
 #guard dom (psi nil tW) = tw          -- ε₀ has cofinality ω
 #guard dom (psi nil (psi nil tW)) = tw
 
+/-! ## The fundamental sequence descends -/
+
+set_option linter.unusedVariables false in
+theorem fs_lt_aux : ∀ n : Nat, ∀ X Y : Term, size X ≤ n → Y < dom X → fs X Y < X := by
+  intro n
+  induction n with
+  | zero =>
+    intro X Y hsz hY
+    cases X with
+    | nil => exact absurd hY (not_lt_nil Y)
+    | cons a b t => simp only [size_cons] at hsz; omega
+  | succ n ih =>
+  intro X Y hsz hY
+  cases X with
+  | nil => exact absurd hY (not_lt_nil Y)
+  | cons X₁ X₂ t =>
+    cases t with
+    | cons c d u =>
+      simp only [size_cons] at hsz
+      have hd : dom (cons X₁ X₂ (cons c d u)) = dom (cons c d u) := rfl
+      rw [hd] at hY
+      have hlt := ih (cons c d u) Y (by simp only [size_cons]; omega) hY
+      show fs (cons X₁ X₂ (cons c d u)) Y < cons X₁ X₂ (cons c d u)
+      rw [fs]
+      exact cons_lt_cons_iff.mpr (Or.inr ⟨rfl, hlt⟩)
+    | nil =>
+      simp only [size_cons] at hsz
+      rw [fs]
+      split
+      · rename_i h1
+        subst_vars
+        have hX₂ : X₂ = nil := dom_eq_nil_iff.mp h1
+        subst hX₂
+        split
+        · exact nil_lt_cons _ _ _
+        · split
+          · rename_i h2 h3
+            have hd : dom (cons X₁ nil nil) = cons X₁ nil nil := by rw [dom]; simp_all
+            rw [hd] at hY
+            exact hY
+          · rename_i h2 h3
+            have hd : dom (cons X₁ nil nil) = dom X₁ := by rw [dom]; simp_all
+            rw [hd] at hY
+            have hlt := ih X₁ Y (by omega) hY
+            exact cons_lt_cons_iff.mpr (Or.inl (psi_lt_psi_iff.mpr (Or.inl hlt)))
+      · rename_i h1
+        split
+        · rename_i h2
+          have hfs : fs X₂ nil < X₂ := by
+            refine ih X₂ nil (by omega) ?_
+            rw [h2]; exact nil_lt_cons _ _ _
+          split
+          · exact repeatPrin_lt (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, hfs⟩)) _
+          · exact nil_lt_cons _ _ _
+        · rename_i h2
+          split
+          · rename_i h3
+            have hd : dom (cons X₁ X₂ nil) = tw := by rw [dom]; simp_all
+            rw [hd] at hY
+            rw [← h3] at hY
+            have hlt := ih X₂ Y (by omega) hY
+            exact cons_lt_cons_iff.mpr (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, hlt⟩)))
+          · rename_i h3
+            split
+            · rename_i h4
+              have hd : dom (cons X₁ X₂ nil) = dom X₂ := by rw [dom]; simp_all
+              rw [hd] at hY
+              have hlt := ih X₂ Y (by omega) hY
+              exact cons_lt_cons_iff.mpr (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, hlt⟩)))
+            · rename_i h4
+              -- dom X₂ = cons Z nil nil with Z ≠ nil
+              obtain ⟨Z, hZ⟩ : ∃ Z, dom X₂ = cons Z nil nil := by
+                rcases dom_shape X₂ with h | h | h
+                · exact absurd h h1
+                · exact absurd h h3
+                · exact h
+              have hZne : Z ≠ nil := by
+                intro hz; subst hz; exact h2 hZ
+              have hZs : size Z < size X₂ := by
+                have h5 := size_dom_le X₂
+                rw [hZ] at h5; simp only [size_cons, size_nil] at h5; omega
+              have hz0 : fs Z nil < Z := by
+                refine ih Z nil (by omega) ?_
+                have := dom_ne_nil hZne
+                cases hd : dom Z with
+                | nil => exact absurd hd this
+                | cons _ _ _ => exact nil_lt_cons _ _ _
+              have hsub : subOf (dom X₂) = Z := by rw [hZ]; rfl
+              have key : ∀ Γ : Term,
+                  fs X₂ (cons (fs (subOf (dom X₂)) nil) Γ nil) < X₂ := by
+                intro Γ
+                refine ih X₂ _ (by omega) ?_
+                rw [hsub, hZ]
+                exact psi_lt_psi_iff.mpr (Or.inl hz0)
+              split
+              · split
+                · split
+                  · exact cons_lt_cons_iff.mpr
+                      (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, key _⟩)))
+                  · exact cons_lt_cons_iff.mpr
+                      (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, key _⟩)))
+                · exact cons_lt_cons_iff.mpr
+                    (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, key _⟩)))
+              · exact cons_lt_cons_iff.mpr
+                  (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, key _⟩)))
+
+/-- **The fundamental sequence descends.** -/
+theorem fs_lt {X Y : Term} (h : Y < dom X) : fs X Y < X :=
+  fs_lt_aux (size X) X Y (Nat.le_refl _) h
+
 /-! ## As an expansion system -/
 
 /-- The numeral `n`, as a term. -/
@@ -207,11 +418,12 @@ def numeral (n : Nat) : Term := repeatPrin nil nil n
 /-- Extended Buchholz terms as an expansion system: one step is the
 fundamental sequence at the numeral `n`.
 
-Well-foundedness is **not** proved.  It needs two theorems that are not here
-yet: that `OT` is closed under `[ ]`, and that `X[n̲] < X` for a standard `X`
-other than `0`.  Granting those, restricting the state to `OT` and composing
-`valHom` with `OrdHom.wf` gives it.  The `#guard` lines above are the only
-evidence so far. -/
+Well-foundedness is **not** proved.  `fs_lt` above gives the descent, but only
+under `Y < dom X`, and the order on all terms is not well founded anyway.  Two
+things are still missing: that `OT` is closed under `[ ]`, and that a standard
+`X` below `Ω` other than `0` has `dom X` equal to `1` or `ω`, so that the
+numeral index really is below `dom X`.  Granting those, restricting the state
+to `OT` and composing `valHom` with `OrdHom.wf` gives it. -/
 def exb : Rewrite where
   State := Term
   step := fun X n => fs X (numeral n)
