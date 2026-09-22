@@ -137,6 +137,14 @@ theorem Rewrite.rank_eq_iSup_nat {R : Rewrite} [IsWellFounded R.State R.Rel] {a 
       (fun b : {b // R.Rel b a} => Order.succ (IsWellFounded.rank R.Rel b.1))
       ⟨R.step a N, h, N, rfl⟩
 
+/-- A state that can step has positive rank. -/
+theorem Rewrite.rank_pos {R : Rewrite} [IsWellFounded R.State R.Rel] {a : R.State}
+    (h : ¬ R.halted a) : 0 < IsWellFounded.rank R.Rel a := by
+  rw [Rewrite.rank_eq_iSup_nat h]
+  refine lt_of_lt_of_le ?_ (Ordinal.le_iSup
+    (fun N : Nat => Order.succ (IsWellFounded.rank R.Rel (R.step a N))) 0)
+  exact lt_of_le_of_lt (by simp) (Order.lt_succ _)
+
 /-- A halting state has rank `0`. -/
 theorem Rewrite.rank_halted {R : Rewrite} [IsWellFounded R.State R.Rel] {a : R.State}
     (h : R.halted a) : IsWellFounded.rank R.Rel a = 0 := by

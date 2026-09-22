@@ -85,8 +85,9 @@
 | どの行数でも、生成元は一つ少ない行の生成元たちの極限であること | `Trans.BMS.rank_gen_eq_iSup`, `Trans.BMS.rank_gen_lt` |
 | `(0,0)` の階数が `1` で、末尾の 0 の列は 1 を足すこと。`(0,0)(1,1)(0,0)` は `e0 + 1` | `Trans.BMS.rank_zeroCol`, `Trans.BMS.rank_append_zeroCol`, `Trans.BMS.rank_succAll` |
 | **展開がブロックを越えて戻らないこと**。行 `0` の成分が `0` の列がブロックの始まり | `Trans.BMS.expandRL_append` |
-| **だから階数はブロックについて加法的**。`(0,0)(1,1)` の `n` 個並びの階数は `e0·n` | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_blockRepState` |
-| `(0,0)(1,1)(1,0)` の階数が `e0·w` であること | `Trans.BMS.rank_omegaAll` |
+| **だから階数はブロックについて加法的**。ブロックの `n` 個並びは階数が `n` 倍 | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_repNState` |
+| **`m₀ = 0` なら展開は固定部分とブロックの繰り返し**。だから階数は `w` 倍になる | `Trans.BMS.expandRL_of_m0_zero`, `Trans.BMS.rank_mul_omega0` |
+| よって `(0,0)(1,0)` は `w`、`(0,0)(1,1)(1,0)` は `e0·w`、`(0,0)(1,1)(0,0)(1,0)` は `e0 + w` | `Trans.BMS.rank_omegaCol`, `Trans.BMS.rank_omegaAll`, `Trans.BMS.rank_sumAll` |
 
 届かないのは `(0,0)(1,1)(2,1)` と、それ以降の生成元である。そちらの展開はブロックの
 繰り返しでも 0 の行を持つ行列でもない。

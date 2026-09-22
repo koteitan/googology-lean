@@ -209,11 +209,15 @@ That is `Mono.lean`.
    `r + 2`-row generator's rank is the limit of the `r + 1`-row generators'
    ranks. `BMS/Append.lean` adds the additive structure: expansion never
    reaches back across a column whose row-`0` entry is `0`, so the rank is
-   additive over those blocks — `rank_appendState` — and three more two-row
-   values follow: `ε₀·n` for `n` copies of `(0,0)(1,1)`, and `ε₀·ω` for
-   `(0,0)(1,1)(1,0)`, which expands into exactly those. What is still out of
-   reach is the rank of the later generators `(0,0)(1,1)(2,2)` and beyond,
-   whose expansions are neither zero-row matrices nor block repetitions.
+   additive over those blocks — `rank_appendState` — and `n` copies of a block
+   have `n` times its rank. The other half is `expandRL_of_m0_zero`: with
+   `m₀ = 0` the expansion is a fixed part and a block repeated `N + 1` times,
+   so `rank_mul_omega0` multiplies that block's rank by `ω`. Three two-row
+   values come out: `(0,0)(1,0)` is `ω`, as the zero row demands,
+   `(0,0)(1,1)(1,0)` is `ε₀·ω`, and `(0,0)(1,1)(0,0)(1,0)` is `ε₀ + ω`. What
+   is still out of reach is the rank of the later generators
+   `(0,0)(1,1)(2,2)` and beyond, whose expansions are neither zero-row
+   matrices nor block repetitions.
 
    The states of `prim` — matrices whose term is a standard form — are
    exactly the standard one-row matrices: `std_entries_iff`. And

@@ -321,4 +321,51 @@ theorem head_expandRL (r N : Nat) (hr : 0 < r) (l : List (List Nat))
         getElem!_map_range _ _ (Nat.succ_pos q)]
       exact h0
 
+/-! ### When nothing is incremented, expansion repeats
+
+`m₀ = 0` means no row takes an increment, so the bad part is the columns from
+the bad root on, copied `N + 1` times and nothing else.  That is the shape
+behind `(0)(1)`, `(0,0)(1,0)` and `(0,0)(1,1)(1,0)`. -/
+
+/-- `n` copies of a list, one after another. -/
+def repN {α : Type} : Nat → List α → List α
+  | 0, _ => []
+  | n + 1, l => repN n l ++ l
+
+theorem map_range_mod {α : Type} (s : Nat) (f : Nat → α) : ∀ m : Nat,
+    (List.range (m * s)).map (fun t => f (t % s)) = repN m ((List.range s).map f) := by
+  intro m
+  induction m with
+  | zero => rw [Nat.zero_mul, List.range_zero, List.map_nil, repN]
+  | succ k ih =>
+    rw [show (k + 1) * s = k * s + s from by ring, List.range_add, List.map_append, List.map_map,
+      ih, repN]
+    congr 1
+    refine List.map_congr_left (fun i hi => ?_)
+    have hlt : i < s := List.mem_range.mp hi
+    show f ((k * s + i) % s) = f i
+    rw [Nat.add_comm (k * s) i, Nat.mul_comm k s, Nat.add_mul_mod_self_left,
+      Nat.mod_eq_of_lt hlt]
+
+/-- **With `m₀ = 0` the expansion is the good part and then the bad part
+repeated.** -/
+theorem expandRL_of_m0_zero (r N : Nat) (l : List (List Nat)) (p : Nat)
+    (hb : badRootR r l = some p) (hm : m0L r l = 0) (hlen : ∀ c ∈ l, c.length = r) :
+    expandRL r N l = (List.range p).map (fun i => l[i]!)
+      ++ repN (N + 1) ((List.range (l.length - 1 - p)).map (fun i => l[p + i]!)) := by
+  have hp : p + 1 < l.length := badRootR_lt hb
+  have hs : 0 < l.length - 1 - p := by omega
+  rw [expandRL, hb]
+  dsimp only
+  rw [hm]
+  congr 1
+  refine Eq.trans (List.map_congr_left (fun t _ => ?_))
+    (map_range_mod (l.length - 1 - p) (fun i => l[p + i]!) (N + 1))
+  have hmem : p + t % (l.length - 1 - p) < l.length := by
+    have := Nat.mod_lt t hs
+    omega
+  simp only [Nat.not_lt_zero, decide_false, Bool.false_and, Bool.false_eq_true, if_false]
+  rw [← hlen (l[p + t % (l.length - 1 - p)]!) (getElem!_mem l _ hmem)]
+  exact listEta _
+
 end Googology.Trans.BMS

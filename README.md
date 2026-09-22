@@ -87,8 +87,9 @@ expansions are understood.
 | and at every number of rows the generator is the limit of the previous row's generators | `Trans.BMS.rank_gen_eq_iSup`, `Trans.BMS.rank_gen_lt` |
 | `(0,0)` has rank `1`, so a zero column at the end adds one: `(0,0)(1,1)(0,0)` has rank `ε₀ + 1` | `Trans.BMS.rank_zeroCol`, `Trans.BMS.rank_append_zeroCol`, `Trans.BMS.rank_succAll` |
 | **expansion never reaches back across a block** — a column whose row-`0` entry is `0` | `Trans.BMS.expandRL_append` |
-| **so the rank is additive over blocks**, and `n` copies of `(0,0)(1,1)` have rank `ε₀·n` | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_blockRepState` |
-| `(0,0)(1,1)(1,0)` has rank `ε₀·ω` | `Trans.BMS.rank_omegaAll` |
+| **so the rank is additive over blocks**, and `n` copies of a block have `n` times its rank | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_repNState` |
+| **with `m₀ = 0` the expansion is a fixed part and a block repeated**, so the rank is multiplied by `ω` | `Trans.BMS.expandRL_of_m0_zero`, `Trans.BMS.rank_mul_omega0` |
+| so `(0,0)(1,0)` has rank `ω`, `(0,0)(1,1)(1,0)` has `ε₀·ω`, and `(0,0)(1,1)(0,0)(1,0)` has `ε₀ + ω` | `Trans.BMS.rank_omegaCol`, `Trans.BMS.rank_omegaAll`, `Trans.BMS.rank_sumAll` |
 
 What it does not reach is `(0,0)(1,1)(2,1)` and the later generators, whose
 expansions are neither block repetitions nor matrices with a zero row.
