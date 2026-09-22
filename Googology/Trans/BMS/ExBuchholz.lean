@@ -189,7 +189,7 @@ theorem OT_of_desc : ∀ X : Term, AllNil X → DescAll X → OT X := by
     have ht : isOT t = true := iht hAt hD.2.1
     show isOT (cons nil b t) = true
     rw [isOT]
-    simp only [hGb, hb, ht, hD.2.2, Bool.and_true, Bool.true_and]
+    simp only [hGb, hb, ht, hD.2.2, Bool.and_true]
     rfl
 
 /-- The inverse reading: a term whose subscripts are all `0` is written back

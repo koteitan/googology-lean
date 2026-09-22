@@ -902,7 +902,7 @@ theorem OT_psi_of {a b : Term} (ha : OT a) (hb : OT b)
     List.all_eq_true.mpr (fun x hx => decide_eq_true (hG x hx))
   show isOT (cons a b nil) = true
   rw [isOT]
-  simp only [h1, Bool.and_true, Bool.true_and, descHead, head?, isOT]
+  simp only [h1, Bool.and_true, descHead, head?, isOT]
   rw [show isOT a = true from ha, show isOT b = true from hb]
   rfl
 
@@ -921,8 +921,8 @@ theorem OT_repeatPrin {a b : Term} (h : OT (psi a b)) :
     have hd : descHead a b (repeatPrin a b k) = true := by
       cases k with
       | zero => rfl
-      | succ j => simp [repeatPrin, descHead, head?, le_refl]
-    simp only [ha, hb, hG, hd, ih, Bool.and_true, Bool.true_and]
+      | succ j => simp [repeatPrin, descHead, head?]
+    simp only [ha, hb, hG, hd, ih, Bool.and_true]
 
 /-- The subscript of `dom X` is strictly smaller than `X`. -/
 theorem size_subOf_dom_lt {X : Term} (h0 : dom X ≠ nil) :
