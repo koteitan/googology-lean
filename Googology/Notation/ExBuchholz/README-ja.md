@@ -92,6 +92,25 @@ inductive Term where
 | `OT` | `⟨X₁,X₂⟩ ∈ OT ↔ X₁, X₂ ∈ OT ∧ G(X₁,X₂) ◁ X₂`、和は広義単調減少 | `isOT` | 一致 |
 | 基本列 | `dom` と `X[Y]` | 両方済 | 転記済み。ω・Ω・ω^ω・ε₀ で検算 |
 
+## 証明済みの `p` の値
+
+`Ord/Opow.lean` が、引数が小さくて閉じた形を持つ範囲で collapse を計算する。表の
+中身は全部定理で、仮定は書いてあるものだけである。
+
+| | 値 | 場所 |
+|---|---|---|
+| `p_v(0)` | `W_v`。よって `p0(0) = 1`、`p1(0) = W` | `psi_zero_arg` |
+| `p0(a)`、任意の `a` | `<= w^a` | `psi_zero_le_opow` |
+| `p0(a)`、`a < e0` | `w^a` | `psi_zero_eq_opow` |
+| `p0(W)` | `e0` | `psi_Omega_one` |
+| `p0(W + a)`、任意の `a` | `<= e0·w^a` | `psi_Omega_add_le` |
+| `p0(W + a)`、`a < e1` | `e0·w^a`。よって `p0(W + 1) = e0·w` | `psi_Omega_add_eq` |
+| `p0(W·2)` | `e1` | `psi_Omega_two` |
+
+`e0` は `nfp (w ^ ·) 0`、`e1` は `nfp (e0 * w ^ ·) 0` で、それぞれその関数の最小
+不動点である。最後の二つを名指す項が `Trans.BMS.te1` と `Trans.BMS.tew` で、
+`Trans.BMS.OT_psi_Omega_add` によって標準形である。
+
 ### 訂正の中身
 
 `G` は当初、内側の `ψ_c(d)` について引数 `d` と一緒に添字 `c` も集めており、

@@ -97,6 +97,27 @@ has been compared against it clause by clause.
 | `OT` | `⟨X₁,X₂⟩ ∈ OT ↔ X₁, X₂ ∈ OT ∧ G(X₁,X₂) ◁ X₂`, sums weakly decreasing | `isOT` | agrees |
 | fundamental sequences | `dom` and `X[Y]` | both done | transcribed; checked on ω, Ω, ω^ω and ε₀ |
 
+## The values of `ψ` that are proved
+
+`Ord/Opow.lean` computes the collapse where the arguments are small enough to
+have a closed form. Everything in the table is a theorem with no hypothesis
+beyond the one stated.
+
+| | value | where |
+|---|---|---|
+| `ψ_v(0)` | `Ω_v` — so `ψ_0(0) = 1` and `ψ_1(0) = Ω` | `psi_zero_arg` |
+| `ψ_0(a)`, any `a` | `≤ ω^a` | `psi_zero_le_opow` |
+| `ψ_0(a)`, `a < ε₀` | `ω^a` | `psi_zero_eq_opow` |
+| `ψ_0(Ω)` | `ε₀` | `psi_Omega_one` |
+| `ψ_0(Ω + a)`, any `a` | `≤ ε₀·ω^a` | `psi_Omega_add_le` |
+| `ψ_0(Ω + a)`, `a < ε₁` | `ε₀·ω^a` — so `ψ_0(Ω + 1) = ε₀·ω` | `psi_Omega_add_eq` |
+| `ψ_0(Ω·2)` | `ε₁` | `psi_Omega_two` |
+
+`ε₀` is `nfp (ω ^ ·) 0` and `ε₁` is `nfp (ε₀ * ω ^ ·) 0`, the least fixed
+points of those two functions. The terms that name the last two are
+`Trans.BMS.te1` and `Trans.BMS.tew`, and they are standard forms by
+`Trans.BMS.OT_psi_Omega_add`.
+
 ### The correction
 
 `G` originally collected the subscript `c` of an inner `ψ_c(d)` alongside its
