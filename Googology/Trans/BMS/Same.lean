@@ -1,6 +1,7 @@
 import Googology.Trans.BMS.Agree
 import Googology.Trans.BMS.Reach
 import Googology.Trans.BMS.Pair
+import Googology.Trans.BMS.Embed
 
 /-!
 # The general system at one and two rows
@@ -24,6 +25,13 @@ rather than beside it.
 `pairEquivBms` is the same at two rows, and easier: there the states are the
 entries of standard two-row arrays on both sides, so nothing has to be said
 about which matrices those are.
+
+`bmsL_zero_sim_one` puts the picture together: composing this file's two
+equivalences with `BMS/Embed.lean`'s `primHomPair` gives `bmsL 0` inside
+`bmsL 1`, which is the first step of the hierarchy.  The step from `r` to
+`r + 1` in general is not here; it needs the rule-level statement that a row
+of zeros underneath changes nothing at every number of rows, which
+`BMS/Zero.lean` proves only for one row inside two.
 
 `prim_wf` and `bmsL_zero_wf` close the `Rewrite` API at one row: the relation
 is well founded, not merely terminating, so `Rewrite.rankEval` applies and
@@ -182,5 +190,17 @@ theorem bmsL_zero_wf : (bmsL 0).WF := bmsEquivPrim.wf_iff.mpr prim_wf
 ordinal measure, as well as the value `primEval` gives. -/
 noncomputable def primRankEval :
     Eval prim (· < · : Ordinal.{0} → Ordinal.{0} → Prop) := Rewrite.rankEval prim_wf
+
+/-! ### One row inside two -/
+
+/-- **One row sits inside two**, as the general systems.  Composed from
+`bmsEquivPrim`, `primHomPair` and `bmsOfPairHom`. -/
+def bmsL_zero_sim_one : Sim (bmsL 0) (bmsL 1) :=
+  bmsEquivPrim.toFun.comp (primHomPair.toSim.comp bmsOfPairHom.toSim)
+
+/-- And the value it takes: a one-row matrix, with a row of zeros underneath. -/
+theorem bmsL_zero_sim_one_map (l : (bmsL 0).State) :
+    (bmsL_zero_sim_one.map l).1 = (withZero (l.1.map (fun c => c.head!))).map
+      (fun x => [x.1, x.2]) := rfl
 
 end Googology.Trans.BMS
