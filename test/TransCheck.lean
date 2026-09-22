@@ -375,4 +375,18 @@ generators with one fewer, with the zero row already underneath. Against
 #guard expandRL 3 3 [[0,0,0],[1,1,1]] == zeroRow [[0,0],[1,1],[2,2],[3,3]]
 #guard expandRL 4 2 [[0,0,0,0],[1,1,1,1]] == zeroRow [[0,0,0],[1,1,1],[2,2,2]]
 
+/-! ### The two-row matrices whose ordinal is a theorem
+
+`Trans.BMS.rank_pairGen`, `rank_succAll` and `rank_omegaAll` say these name
+`e0`, `e0 + 1` and `e0 * w`. The expansions they rest on agree with `./bms`:
+`(0,0)(1,1)[3]`, `(0,0)(1,1)(0,0)[k]` for `k = 0, 1, 2`, and
+`(0,0)(1,1)(1,0)[N]` for `N = 0, 1, 2`. -/
+
+#guard expandRL 2 3 [[0,0],[1,1]] == [[0,0],[1,0],[2,0],[3,0]]
+#guard (List.range 3).all fun k => expandRL 2 k [[0,0],[1,1],[0,0]] == [[0,0],[1,1]]
+#guard expandRL 2 0 [[0,0],[1,1],[1,0]] == [[0,0],[1,1]]
+#guard expandRL 2 1 [[0,0],[1,1],[1,0]] == [[0,0],[1,1],[0,0],[1,1]]
+#guard expandRL 2 2 [[0,0],[1,1],[1,0]]
+  == [[0,0],[1,1],[0,0],[1,1],[0,0],[1,1]]
+
 end Googology.Trans.BMS
