@@ -451,8 +451,25 @@ What is left of that is the Lean problem still open.
 The other two are not Lean problems.
 
 * **A reading for two rows and up.** It needs a stated definition of the map
-  from matrices to ordinals. The sources checked give worked values, not a
-  rule, and a rule guessed to fit them is not worth committing. The rank
+  from matrices to ordinals, and there is one for three rows:
+  [koteitan/trio](https://github.com/koteitan/trio) writes down the map from
+  `ψ_0(Ω_α)` to the standard forms of the trio sequence system — the `z < 2`
+  fragment of the three-row matrices — on its
+  [algorithm page](https://github.com/koteitan/trio/blob/main/ebp2bms/algorithm/1/README-en.md),
+  with the values in its
+  [table](https://github.com/koteitan/trio/blob/main/ebp2bms/sheet/1/README-en.md).
+  `Trans/BMS/Trio.lean` transcribes the `α < ε₀` half of it as
+  `omegaIndexMatrix` and calibrates it against twenty rows of that table,
+  including `ψ_0(Ω_1) = ε₀` as `(0,0)(1,1)` and `ψ_0(Ω_2)` as
+  `(0,0)(1,1)(2,2)`, which is where the yaBMS table puts the Bachmann–Howard
+  ordinal as well. That is a transcription and `#guard`s, not a theorem: what
+  is not proved is that the map lands in standard forms, that it is monotone,
+  and that it turns `[ ]` into the fundamental sequence — the three things the
+  one-row case has. The `ε₀ ≤ α < Λ` half of the algorithm, where the
+  embedding of the exponent becomes the whole ordinal notation rather than the
+  primitive sequence, is not transcribed yet.
+
+  Without a reading, the rank
   reaches single values without it — `rank_pairGen`, `rank_gen_eq_iSup`,
   `rank_succAll`, `rank_omegaAll` — but only where the expansions are already understood:
   the generators, the columns that have no parent, and the block repetitions

@@ -393,9 +393,21 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
 
 残る二つは Lean の問題ではない。
 
-* **2 行以上の読み取り。** 行列から順序数への写像の定義文が要る。調べた資料は値を
-  導いているだけで規則を与えていない。値に合うよう推測した規則は commit する価値が
-  ない。階数なら読み取り無しでも個別の値には届く（`rank_pairGen`、
+* **2 行以上の読み取り。** 行列から順序数への写像の定義文が要る。3 行についてはそれが
+  ある。[koteitan/trio](https://github.com/koteitan/trio) が `p0(W_a)` から trio 数列系
+  （3 行行列の `z < 2` 部分）の標準形への写像を
+  [アルゴリズム頁](https://github.com/koteitan/trio/blob/main/ebp2bms/algorithm/1/README-en.md)
+  に書き下ろしており、値は
+  [対応表](https://github.com/koteitan/trio/blob/main/ebp2bms/sheet/1/README-en.md)
+  にある。`Trans/BMS/Trio.lean` がその `a < e0` の側を `omegaIndexMatrix` として転記し、
+  対応表の 20 行で検算してある。`p0(W_1) = e0` が `(0,0)(1,1)`、`p0(W_2)` が
+  `(0,0)(1,1)(2,2)` で、後者は yaBMS の表が Bachmann–Howard 順序数を置く場所でもある。
+  これは転記と `#guard` であって定理ではない。証明していないのは、写像の像が標準形で
+  あること、単調であること、`[ ]` を基本列に直すことの三つで、1 行では揃っているもので
+  ある。アルゴリズムの `e0 <= a < Λ` の側（指数の埋め込みが原始数列ではなく表記系全体に
+  なる所）はまだ転記していない。
+
+  読み取りが無い間は、階数なら個別の値には届く（`rank_pairGen`、
   `rank_gen_eq_iSup`、`rank_succAll`、`rank_omegaAll`）。ただし展開がすでに分かって
   いる所に限る。生成元、親を持たない列、それに `BMS/Append.lean` が届くブロックの
   繰り返しである。`(0,0)(1,1)(2,1)` はそのどれでもない。そこは `m₀ = 1` なので各

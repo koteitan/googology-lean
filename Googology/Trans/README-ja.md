@@ -70,6 +70,7 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | BMS、拡張ブーフホルツ ψ | `BMS/EpsN.lean` | — | **`val` が全ての `e_n` 未満へ、したがって `e_w` 未満へ全射であること**。`n` についての帰納法で、段は `e1` の構成そのものである。`W·n + B` を項にして、先頭項を `p0(W·(n+1) + B)` にする。極限が `p0(p1(1))` である |
 | BMS、拡張ブーフホルツ ψ | `BMS/Arg.lean`, `BMS/EpsBig.lean` | — | **`val` が `e_{e0}` 未満へ全射であること**。そこでは全単射である。`mu < e0` の全てで `W·mu` を名指す項を Cantor 標準形から作り（`W·w^e` は `p1(e)`）、その上で同じ先頭項の構成を `d < e0` の全段で回す |
 | BMS、拡張ブーフホルツ ψ | `BMS/Zeta.lean` | — | **`val` が `z0` 未満へ全射であること**。しかも標準形はただ一つである。引数の項と値の項を一本の帰納法で作るので、指数自身が e 数でも、その添字が与える段で名指される |
+| 3 行の BMS、拡張ブーフホルツ ψ | `BMS/Trio.lean` | [koteitan/trio](https://github.com/koteitan/trio) | `p0(W_a)` から trio 行列への写像（`a < e0`）。[アルゴリズム](https://github.com/koteitan/trio/blob/main/ebp2bms/algorithm/1/README-en.md)から転記し、[対応表](https://github.com/koteitan/trio/blob/main/ebp2bms/sheet/1/README-en.md)で検算した。定理ではなく転記と `#guard` である |
 | BMS、拡張ブーフホルツ ψ | `BMS/RankVal.lean` | — | **系の階数が項の値であること**。定義の違う二つの測度が同じものであること。そのうえで、読み取りが無い所の階数を計算する。2 行の生成元、後続、ブロックの繰り返し、族 `(0,0)(1,1)(1,0)^k` |
 | BMS、拡張ブーフホルツ ψ | `BMS/Prim.lean` | `StepHom` | 原始数列系を `Rewrite` として与え、停止することとその順序数 |
 | BMS、拡張ブーフホルツ ψ | `BMS/Cofinal.lean` | — | `p0(W)` 未満で項が `X[0] < X[1] < ⋯` の上限であること |
