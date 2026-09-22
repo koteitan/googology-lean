@@ -19,6 +19,7 @@ import Googology.Trans.BMS.Entries
 import Googology.Trans.BMS.Calibrate
 import Googology.Trans.BMS.Eps0
 import Googology.Trans.BMS.EpsN
+import Googology.Trans.BMS.Arg
 import Googology.Trans.BMS.RankVal
 import Googology.Trans.BMS.Cofinal
 import Googology.Trans.BMS.Prim
