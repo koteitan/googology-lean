@@ -8,6 +8,7 @@ import Googology.Trans.BMS.AllL
 import Googology.Trans.BMS.Zero
 import Googology.Trans.BMS.Pair
 import Googology.Trans.BMS.Agree
+import Googology.Trans.BMS.Embed
 import Googology.Trans.BMS.Same
 import Googology.Trans.BMS.ExBuchholz
 import Googology.Trans.BMS.Commute
