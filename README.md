@@ -5,59 +5,50 @@
 A Lean 4 library for googology: expansion systems, ordinal notation systems,
 and the translations between them.
 
-The library proves the shared theorems **once**, so that an individual system
-only has to supply what is specific to it — usually a single measure.
+The question about a googological system — BMS, DBMS, the Y sequence — is
+whether every expansion chain terminates. This library answers it once, for
+all of them, and each system supplies only what is its own.
 
-## Where to start
+## What it proves
 
 | | |
 |---|---|
-| [plan.md](plan.md) | the whole argument and where the work has got to |
+| **Bashicu matrices terminate**, for any number of rows | `Notation.BMS.bms_terminates` |
+| the primitive, pair and trio sequences terminate | `primitive_terminates`, `pair_terminates`, `trio_terminates` |
+| BMS carries an ordinal measure | `Notation.BMS.bmsEval` |
+| **the standard forms of extended Buchholz's ψ are well ordered** | `ExBuchholz.Term.OTLt_wf` |
+| distinct standard forms name distinct ordinals | `ExBuchholz.Term.val_inj_of_OT` |
+| the notation system is correct: the term order matches the ordinal order | `ExBuchholz.Term.val_lt_val` |
+| the fundamental sequence descends | `ExBuchholz.Term.fs_lt` |
 
-## Directory layout
+No `sorry`, and no axiom beyond `propext`, `Classical.choice` and `Quot.sound`.
+`Googology.Core` uses none of the three.
 
-```
-Googology/
-  Core/            system-independent core; no dependency beyond core Lean
-    Rewrite.lean     expansion systems, Rel, WF, Terminates
-    Std.lean         standard forms and generators
-    Morphism.lean    OrdHom, Sim, StepHom, Equiv, Eval
-  Rank.lean        every well-founded system carries an ordinal measure
-  Notation/        notation systems; these never import one another
-    BMS/             Bashicu matrices, any number of rows
-    ExBuchholz/      extended Buchholz's psi
-    DBMS/  Y/  ...   not yet
-  Trans/           concrete translations; the only layer importing two systems
-    BMS/
-      DBMS.lean
-      Y.lean
-      OTB.lean
-test/              scaffolding demonstration on invented rules, not on any real system
+## Using it
+
+Add it to your `lakefile.toml`:
+
+```toml
+[[require]]
+name = "googology"
+git = "https://github.com/koteitan/googology-lean"
 ```
 
-### Layering rules
+Then, for instance:
 
-1. `Core/` depends on nothing but core Lean, so a mathlib-free project can use it.
-2. `Notation/X/` never imports `Notation/Y/`. A system knows only itself.
-3. `Trans/` is the only place that imports two systems at once.
-4. An unordered pair `{X, Y}` gets **one** file, placed under the
-   alphabetically earlier name, holding both directions and the `Equiv` if
-   there is one. [Trans/README.md](Googology/Trans/README.md) indexes them so
-   the file is findable from either side.
+```lean
+import Googology
 
-Rule 2 is what keeps the import graph a DAG. If a translation lived under
-`Notation/BMS/Trans/DBMS.lean`, then importing BMS would drag in DBMS, and
-eventually every system.
+open Googology Notation.BMS
 
-Systems defined by the googology community and systems from the proof-theory
-literature are the same kind of object — a type of terms, an order, fundamental
-sequences — so they share one directory. mathlib is imported per system, by the
-ones that evaluate into the ordinals.
+-- Bashicu matrices with five rows terminate.
+example : (bms 5).Terminates := bms_terminates 5
+```
 
-## The core
+## The idea
 
 An expansion system packages the state type itself as a field, so systems with
-different state types inhabit one type and share one proposition.
+different state types share one proposition:
 
 ```lean
 structure Rewrite where
@@ -66,8 +57,8 @@ structure Rewrite where
   halted : State → Prop
 ```
 
-This is a `structure` and not a `class` on purpose: one state type carries
-several expansion rules (BMS has BM4, 3.3, 2, 1.1), and a class keyed on the
+It is a `structure` and not a `class` on purpose: one state type carries
+several expansion rules — BMS has BM4, 3.3, 2, 1.1 — and a class keyed on the
 state type could hold only one of them.
 
 ### Proved once, for every system
@@ -87,10 +78,10 @@ state type could hold only one of them.
 | `Eval.terminates` | an evaluation into a well-founded order gives termination |
 | `Eval.compOrd` | an evaluation composed with an order-preserving map is an evaluation |
 | `Eval.ofSim` | a simulation pulls an evaluation back to the source |
-| `Rewrite.rankEval` | a well-founded system carries an ordinal measure of its own (needs mathlib) |
+| `Rewrite.rankEval` | a well-founded system carries an ordinal measure of its own |
 
-The last two are the spine. Together they turn a translation plus a target
-evaluation into termination of the source, in one line:
+The last three are the spine: a translation plus a target evaluation gives
+termination of the source, in one line.
 
 ```lean
 example (trans : Sim Src Tgt) (o : Eval Tgt ltO) (hO : WellFounded ltO) :
@@ -98,11 +89,29 @@ example (trans : Sim Src Tgt) (o : Eval Tgt ltO) (hO : WellFounded ltO) :
   (Eval.ofSim trans o).terminates hO
 ```
 
-### What a new system has to supply
+## Adding a system
 
-The three fields of `Rewrite`, and then, to prove termination, a measure — a
-map into any type carrying a well-founded relation (`Nat`, an ordinal, a term
-system of your own) that strictly decreases on every step.
+Give the three fields of `Rewrite`, and then, to prove termination, a measure:
+a map into any type carrying a well-founded relation — `Nat`, an ordinal, a
+term system of your own — that strictly decreases on every step. Everything
+else is a theorem you inherit.
+
+If your system already has a termination proof elsewhere, joining takes a few
+lines; `Notation/BMS` is the worked example.
+
+## What is in here
+
+```
+Googology/
+  Core/            expansion systems, standard forms, translations
+  Rank.lean        every well-founded system carries an ordinal measure
+  Notation/        the systems themselves
+    BMS/             Bashicu matrices, any number of rows
+    ExBuchholz/      extended Buchholz's ψ
+  Trans/           translations between two systems
+```
+
+Each directory has its own README.
 
 ## Build
 
@@ -112,19 +121,22 @@ lake build
 
 Lean 4 v4.30.0. Two dependencies: mathlib, and
 [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) for
-the BMS termination proof.
-
-`Googology.Core` imports nothing outside core Lean, so the whole termination
-machinery can be read and used without mathlib. mathlib enters only where a
-notation system evaluates into the ordinals — at present
-`Googology.Notation.ExBuchholz.Ord`.
-
-## Status
-
-`Core/` is complete. `Notation/ExBuchholz` is finished as a notation system:
-`OTLt_wf` needs no hypothesis. `Notation/BMS` terminates for every number of
-rows. `Trans/` is empty. Nothing carries a `sorry` or an added axiom.
+the BMS termination proof. `Googology.Core` imports neither, so the
+termination machinery can be read and used without mathlib.
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+---
+
+## For contributors
+
+* [spec.md](spec.md) — how the library is laid out and how it is written,
+  including the rules that govern these documents
+* [plan.md](plan.md) — the whole argument and where the work has got to
+
+Current state: `Core/` is complete. `Notation/ExBuchholz` is finished as a
+notation system. `Notation/BMS` terminates for every number of rows. `Trans/`
+is empty. The one thing still open is that `OT` is preserved by a fundamental
+sequence step, which `plan.md` describes.

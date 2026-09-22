@@ -69,46 +69,6 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 `1 + ω` not being standard because the principal terms increase, and
 `ψ_0(ψ_0(Ω))` not being standard because `Ω` is not below the argument.
 
-## Status
-
-| | |
-|---|---|
-| term type, order, decidability | done |
-| strict linear order | done |
-| `G`, standard forms, decidability | done |
-| the unrestricted order is **not** well founded | done |
-| the order as a lexicographic product; standard form inherited by the parts | done |
-| sums: accessibility of principal terms gives `WellFounded OTLt` | done |
-| accessibility of the principal terms | **not done** — see below |
-| fundamental sequences, a `Rewrite` value | **not done** |
-| `ψ` on the ordinals: definition and first facts | done |
-| the cardinality bound on `C_v(a)`, hence `ψ_v(a) < Ω_{v+1}` | done |
-| `ψ ∉ C_v(a)`, `Ω_v ≤ ψ_v(a)`, monotonicity in the argument | done |
-| the closure is downward closed; `ψ_v(a)` is additively principal | done |
-| the evaluation `Term → Ordinal` | defined |
-| term values are never fixed points of `v ↦ ω_v` | done |
-| its monotonicity on `OT` | done |
-| **well-foundedness of `OTLt`, with no hypothesis** | **done** (`OTLt_wf`) |
-| the standard forms are a well order, and `val` is injective on them | done |
-| `dom` and the fundamental sequence `X[Y]` | done (`FS.lean`) |
-| the expansion system `exb` | defined |
-| **the fundamental sequence descends**: `Y < dom X → X[Y] < X` | **done** (`fs_lt`) |
-| below `Ω`, a standard form other than `0` is a successor or an `ω`-limit | done (`dom_eq_one_or_tw`) |
-| **one step strictly decreases a countable standard form** | **done** (`step_lt`) |
-| `G` antitone in the subscript; the sum branch of the closure | done (`G_subset_of_le`, `OT_cons_fs`) |
-| `OT` and `· < Ω` preserved by the step | **not proved** — the last gap; checked by computation in `test/ExBuchholzCheck.lean` |
-
-Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
-`axiom`.
-
-### What is and is not sourced
-
-The `ψ` definition above is Maksudov's, as stated on the Googology Wiki. The
-notation system for it is due to p進大好きbot, and the terms, the order, `G`,
-`OT` and the evaluation here follow that article; see **Calibration** above for
-the clause-by-clause comparison. The fundamental sequences of that article are
-not implemented yet.
-
 ## Why standard forms are needed
 
 `WF.lean` proves that the order on **all** terms is not well founded:
@@ -222,6 +182,46 @@ standard-form condition outright. `Closure.lean` has it, together with both
 halves of 3.5. What is left is 3.6, which has to follow `fs` branch by branch; the piece
 each branch needs is in `Closure.lean` already, with one exception, and the
 header there lists which is which. Then 3.3 assembles the two.
+
+## Status
+
+| | |
+|---|---|
+| term type, order, decidability | done |
+| strict linear order | done |
+| `G`, standard forms, decidability | done |
+| the unrestricted order is **not** well founded | done |
+| the order as a lexicographic product; standard form inherited by the parts | done |
+| sums: accessibility of principal terms gives `WellFounded OTLt` | done |
+| accessibility of the principal terms | **not done** — see below |
+| fundamental sequences, a `Rewrite` value | **not done** |
+| `ψ` on the ordinals: definition and first facts | done |
+| the cardinality bound on `C_v(a)`, hence `ψ_v(a) < Ω_{v+1}` | done |
+| `ψ ∉ C_v(a)`, `Ω_v ≤ ψ_v(a)`, monotonicity in the argument | done |
+| the closure is downward closed; `ψ_v(a)` is additively principal | done |
+| the evaluation `Term → Ordinal` | defined |
+| term values are never fixed points of `v ↦ ω_v` | done |
+| its monotonicity on `OT` | done |
+| **well-foundedness of `OTLt`, with no hypothesis** | **done** (`OTLt_wf`) |
+| the standard forms are a well order, and `val` is injective on them | done |
+| `dom` and the fundamental sequence `X[Y]` | done (`FS.lean`) |
+| the expansion system `exb` | defined |
+| **the fundamental sequence descends**: `Y < dom X → X[Y] < X` | **done** (`fs_lt`) |
+| below `Ω`, a standard form other than `0` is a successor or an `ω`-limit | done (`dom_eq_one_or_tw`) |
+| **one step strictly decreases a countable standard form** | **done** (`step_lt`) |
+| `G` antitone in the subscript; the sum branch of the closure | done (`G_subset_of_le`, `OT_cons_fs`) |
+| `OT` and `· < Ω` preserved by the step | **not proved** — the last gap; checked by computation in `test/ExBuchholzCheck.lean` |
+
+Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
+`axiom`.
+
+### What is and is not sourced
+
+The `ψ` definition above is Maksudov's, as stated on the Googology Wiki. The
+notation system for it is due to p進大好きbot, and the terms, the order, `G`,
+`OT` and the evaluation here follow that article; see **Calibration** above for
+the clause-by-clause comparison. The fundamental sequences of that article are
+not implemented yet.
 
 ## Naming
 

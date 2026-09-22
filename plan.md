@@ -2,9 +2,10 @@
 
 # Plan and current position
 
-This file says what the library is for, what the whole argument looks like,
-and exactly where the work has got to. It is the one place to look before
-picking up the next piece.
+This file says what the whole argument looks like and exactly where the work
+has got to. It is the one place to look before picking up the next piece.
+[spec.md](spec.md) is the companion: what the library is and the rules it is
+written by.
 
 ## What the library is for
 
