@@ -43,7 +43,7 @@ which is the whole content of the extension.
 | `Eval.lean` | `Term.val`, the evaluation into `Ordinal`; `Lam` and `val_lt_Lam` (needs mathlib) |
 | `Mono.lean` | `val_lt_val`, `val_mem_CSet_arg`, `valHom`, `OTLt_wf` (needs mathlib) |
 | `FS.lean` | `dom`, `fs` (the fundamental sequence `X[Y]`), `fs_lt` (it descends), and `exb`, the expansion system |
-| `Closure.lean` | concatenation, `G°`, `⊲`, Buchholz 3.4 and 3.5, and the pieces of 3.6 |
+| `Closure.lean` | concatenation, `G°`, `⊲`, Buchholz 3.4, 3.5 and 3.6 |
 
 ## The order
 
@@ -173,15 +173,27 @@ together with `z`.
 | | statement | state |
 |---|---|---|
 | 3.4 | `b ⊲_z a`, `G_u a < a`, `G_u z < b` ⟹ `G_u b < b` | **done** |
-| 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b` and `ψ_u(b₀) ⊲_z ψ_u(b)` | **done** |
-| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | pieces in place, not assembled |
+| 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b`, `ψ_u(b₀) ⊲_z ψ_u(b)`, `ψ_{b₀}(0) ⊲_z ψ_b(0)` | **done** |
+| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done**, given `Case4` |
 | 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | not yet |
 
 3.4 is where the work is: it turns "bounded relative to `z`" into the
-standard-form condition outright. `Closure.lean` has it, together with both
-halves of 3.5. What is left is 3.6, which has to follow `fs` branch by branch; the piece
-each branch needs is in `Closure.lean` already, with one exception, and the
-header there lists which is which. Then 3.3 assembles the two.
+standard-form condition outright. `Closure.lean` has it, all three forms of
+3.5, and 3.6 as `Trian_fs`. Each form of 3.5 rests on a decomposition lemma
+saying what a term strictly between two others has to look like.
+
+3.6 is an induction on `size`, one case per branch of `fs`. Six of the seven
+branches close from 3.5 and four small lemmas. The seventh is Buchholz's case
+4, where `dom X₂` is a collapse that is not below `ψ_{X₁}(X₂)` and the index
+`W = ψ_{Z[0]}(Γ)` is rebuilt from the subscript `Z` of `dom X₂`. That branch
+is stated as `Case4` and taken as a hypothesis. Buchholz settles it by
+computing `G` by hand, and his computation uses two things this file does not
+have: `a[n] ⊲_n a`, which is an induction on the index rather than the term,
+and `a[n] < a[n+1]`, which his proof gets out of the simultaneous induction
+that carries 3.3 and 3.6 together. Keeping them apart, as here, is what leaves
+the branch open.
+
+Then 3.3 assembles 3.4 and 3.6.
 
 ## Status
 
@@ -210,6 +222,8 @@ header there lists which is which. Then 3.3 assembles the two.
 | below `Ω`, a standard form other than `0` is a successor or an `ω`-limit | done (`dom_eq_one_or_tw`) |
 | **one step strictly decreases a countable standard form** | **done** (`step_lt`) |
 | `G` antitone in the subscript; the sum branch of the closure | done (`G_subset_of_le`, `OT_cons_fs`) |
+| Buchholz 3.4 and 3.5 for `⊲` | done (`Closure.lean`) |
+| Buchholz 3.6: `z ∈ dom a → a[z] ⊲_z a` | done given `Case4` (`Trian_fs`) |
 | `OT` and `· < Ω` preserved by the step | **not proved** — the last gap; checked by computation in `test/ExBuchholzCheck.lean` |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no

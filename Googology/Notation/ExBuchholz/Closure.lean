@@ -13,8 +13,8 @@ any `c` between them, together with `z`.  The chain is
 | | statement | here |
 |---|---|---|
 | 3.4 | `b ⊲_z a`, `G_u a < a`, `G_u z < b` ⟹ `G_u b < b` | **done** |
-| 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b` and `ψ_u(b₀) ⊲_z ψ_u(b)` | **done** |
-| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | pieces in place, not assembled |
+| 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b`, `ψ_u(b₀) ⊲_z ψ_u(b)`, `ψ_{b₀}(0) ⊲_z ψ_b(0)` | **done** |
+| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done**, given `Case4` |
 | 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | not yet |
 
 3.4 is the one that does the work: it turns "bounded relative to `z`" into the
@@ -25,8 +25,24 @@ the condition holds at this subterm — which avoids needing a choice of minimal
 element.
 
 Each half of 3.5 rests on a decomposition lemma saying what a term strictly
-between two others has to look like: `addT_between` for sums and `psi_between`
-for collapses.
+between two others has to look like: `addT_between` for sums, `psi_between`
+for the argument of a collapse and `psi_sub_between` for its subscript.
+
+`Trian_fs` is 3.6.  Its proof is an induction on `size`, one case per branch
+of `fs`, and six of the seven branches close from 3.5 and the small lemmas
+`Trian_nil`, `Trian_self`, `Trian.of_nil` and `Trian.repeatPrin`.  The seventh
+is Buchholz's case 4, where `dom X₂` is a collapse that is not below
+`ψ_{X₁}(X₂)` and the index `W = ψ_{Z[0]}(Γ)` is rebuilt from the subscript `Z`
+of `dom X₂`.  It is stated here as `Case4` and assumed.
+
+`Trian.mono_z` does not reach that branch: `G° u W` holds `Γ` and everything
+`G` sees in `Z[0]`, none of which `G° u Y` bounds when `Y` is a numeral.
+Buchholz computes `G` there by hand, and his computation needs two things this
+file does not yet have.  First, an induction on the index as well as the term,
+since `Γ` comes from `a[n]` and the bound on `G_u Γ` comes from `a[n] ⊲_n a`.
+Second, `a[n] < a[n+1]`, which in his proof comes out of the simultaneous
+induction that carries 3.3 and 3.6 together.  Splitting them, as here, is what
+leaves the branch open.
 -/
 
 namespace Googology.Notation.ExBuchholz.Term
@@ -401,5 +417,147 @@ theorem Trian.repeatPrin {z A B a : Term} (h : Trian z (psi A B) a) :
     have hple : psi A B < c :=
       lt_of_le_of_lt' (psi_le_repeatPrin A B (k+1) (Nat.succ_pos k)) hc
     exact h.2 u c hple hca x (G_repeatPrin u A B (k+1) x hx)
+
+/-- Anything strictly between `ψ_{u₀}(0)` and `ψ_u(0)` has a subscript
+between. -/
+theorem psi_sub_between {u₀ u c : Term} (h₁ : psi u₀ nil < c) (h₂ : c ≤ psi u nil) :
+    ∃ r s c₁, c = cons r s c₁ ∧ u₀ ≤ r ∧ r ≤ u := by
+  cases c with
+  | nil => exact absurd h₁ (not_lt_nil _)
+  | cons r s c₁ =>
+    have hrs_le : psi r s ≤ psi u nil := by
+      rcases le_iff_lt_or_eq.mp h₂ with hB | hB
+      · rcases cons_lt_cons_iff.mp hB with hB' | ⟨_, hB''⟩
+        · exact le_of_lt hB'
+        · exact absurd hB'' (not_lt_nil _)
+      · injection hB with e1 e2 _
+        exact e1 ▸ e2 ▸ le_refl _
+    have hru : r ≤ u := by
+      rcases le_iff_lt_or_eq.mp hrs_le with h | h
+      · rcases psi_lt_psi_iff.mp h with h' | ⟨h', _⟩
+        · exact le_of_lt h'
+        · exact h' ▸ le_refl _
+      · injection h with e1 _ _
+        exact e1 ▸ le_refl _
+    have hu0r : u₀ ≤ r := by
+      rcases cons_lt_cons_iff.mp h₁ with hA | ⟨hA, _⟩
+      · rcases psi_lt_psi_iff.mp hA with h' | ⟨h', _⟩
+        · exact le_of_lt h'
+        · exact h' ▸ le_refl _
+      · injection hA with e1 _ _
+        exact e1 ▸ le_refl _
+    exact ⟨r, s, c₁, rfl, hu0r, hru⟩
+
+/-- **The subscript form of 3.5**: `⊲` is carried into the subscript of a
+collapse with argument `0`. -/
+theorem Trian.psi_sub {z u₀ u : Term} (h : Trian z u₀ u) :
+    Trian z (psi u₀ nil) (psi u nil) := by
+  refine ⟨psi_lt_psi_iff.mpr (Or.inl h.1), ?_⟩
+  intro v c hlt hle
+  obtain ⟨r, s, c₁, rfl, hu0r, hru⟩ := psi_sub_between hlt hle
+  by_cases hvu : v ≤ u₀
+  · have hvr : v ≤ r := le_trans hvu hu0r
+    rw [G_psi_of_le hvu, G_cons, if_pos hvr]
+    intro x hx
+    rcases List.mem_cons.mp hx with rfl | hx
+    · exact ⟨nil, List.mem_append_right _ (List.mem_cons_self ..), le_refl nil⟩
+    rcases List.mem_append.mp hx with hx | hx
+    · rcases le_iff_lt_or_eq.mp hu0r with hlt' | rfl
+      · obtain ⟨y, hy, hle'⟩ := h.2 v r hlt' hru x hx
+        rcases List.mem_append.mp hy with hy | hy
+        · exact ⟨y, List.mem_append_left _ (List.mem_append_left _
+            (List.mem_cons_of_mem _ (List.mem_append_left _ hy))), hle'⟩
+        · exact ⟨y, List.mem_append_right _ hy, hle'⟩
+      · exact ⟨x, List.mem_append_left _ (List.mem_append_left _
+          (List.mem_cons_of_mem _ (List.mem_append_left _ hx))), le_refl x⟩
+    · exact absurd hx (List.not_mem_nil)
+  · rw [G_psi_of_not_le hvu]
+    intro x hx; exact absurd hx (List.not_mem_nil)
+
+/-- Buchholz's case 4 of Lemma 3.6, the one branch his proof settles by hand:
+`dom X₂` is a collapse that is not below `ψ_{X₁}(X₂)`, so the index has to be
+rebuilt from its subscript. -/
+def Case4 : Prop :=
+  ∀ X₁ X₂ Y : Term,
+    ¬ (dom X₂ = nil) → ¬ (dom X₂ = t1) → ¬ (dom X₂ = tw) →
+    ¬ (dom X₂ < cons X₁ X₂ nil) →
+    Y < dom (cons X₁ X₂ nil) →
+    Trian Y (fs (cons X₁ X₂ nil) Y) (cons X₁ X₂ nil)
+
+theorem Trian_fs_aux (H : Case4) :
+    ∀ n : Nat, ∀ X Y : Term, size X ≤ n → Y < dom X → Trian Y (fs X Y) X := by
+  intro n
+  induction n with
+  | zero =>
+    intro X Y hsz hY
+    cases X with
+    | nil => exact absurd hY (not_lt_nil Y)
+    | cons a b t => simp only [size_cons] at hsz; omega
+  | succ n ih =>
+  intro X Y hsz hY
+  cases X with
+  | nil => exact absurd hY (not_lt_nil Y)
+  | cons X₁ X₂ t =>
+    cases t with
+    | cons c d u =>
+      simp only [size_cons] at hsz
+      have hd : dom (cons X₁ X₂ (cons c d u)) = dom (cons c d u) := rfl
+      rw [hd] at hY
+      have hT := ih (cons c d u) Y (by simp only [size_cons]; omega) hY
+      show Trian Y (fs (cons X₁ X₂ (cons c d u)) Y) (cons X₁ X₂ (cons c d u))
+      rw [fs]
+      exact Trian.addT_left (psi X₁ X₂) hT
+    | nil =>
+      simp only [size_cons] at hsz
+      have key : fs (cons X₁ X₂ nil) Y < cons X₁ X₂ nil := fs_lt hY
+      by_cases h1 : dom X₂ = nil
+      · have hX₂ : X₂ = nil := dom_eq_nil_iff.mp h1
+        subst hX₂
+        by_cases g1 : dom X₁ = nil
+        · have he : fs (cons X₁ nil nil) Y = nil := by rw [fs]; simp_all
+          rw [he]
+          exact Trian_nil (nil_lt_cons _ _ _)
+        · by_cases g2 : dom X₁ = t1
+          · have he : fs (cons X₁ nil nil) Y = Y := by rw [fs]; simp_all
+            have hd : dom (cons X₁ nil nil) = cons X₁ nil nil := by rw [dom]; simp_all
+            rw [hd] at hY
+            rw [he]
+            exact Trian_self hY
+          · have he : fs (cons X₁ nil nil) Y = psi (fs X₁ Y) nil := by rw [fs]; simp_all
+            have hd : dom (cons X₁ nil nil) = dom X₁ := by rw [dom]; simp_all
+            rw [hd] at hY
+            rw [he]
+            exact Trian.psi_sub (ih X₁ Y (by omega) hY)
+      · by_cases h2 : dom X₂ = t1
+        · have hfs : Trian nil (fs X₂ nil) X₂ := by
+            refine ih X₂ nil (by omega) ?_
+            rw [h2]; exact nil_lt_cons _ _ _
+          have hpsi : Trian Y (psi X₁ (fs X₂ nil)) (psi X₁ X₂) :=
+            Trian.of_nil (Trian.psi_left X₁ hfs)
+          by_cases hn : isNum Y = true
+          · have he : fs (cons X₁ X₂ nil) Y = repeatPrin X₁ (fs X₂ nil) (numVal Y) := by
+              rw [fs]; simp_all
+            rw [he] at key ⊢
+            exact hpsi.repeatPrin _ key
+          · have he : fs (cons X₁ X₂ nil) Y = nil := by rw [fs]; simp_all
+            rw [he]
+            exact Trian_nil (nil_lt_cons _ _ _)
+        · by_cases h3 : dom X₂ = tw
+          · have he : fs (cons X₁ X₂ nil) Y = psi X₁ (fs X₂ Y) := by rw [fs]; simp_all
+            have hd : dom (cons X₁ X₂ nil) = tw := by rw [dom]; simp_all
+            rw [hd, ← h3] at hY
+            rw [he]
+            exact Trian.psi_left X₁ (ih X₂ Y (by omega) hY)
+          · by_cases h4 : dom X₂ < cons X₁ X₂ nil
+            · have he : fs (cons X₁ X₂ nil) Y = psi X₁ (fs X₂ Y) := by rw [fs]; simp_all
+              have hd : dom (cons X₁ X₂ nil) = dom X₂ := by rw [dom]; simp_all
+              rw [hd] at hY
+              rw [he]
+              exact Trian.psi_left X₁ (ih X₂ Y (by omega) hY)
+            · exact H X₁ X₂ Y h1 h2 h3 h4 hY
+
+/-- **Buchholz 3.6** for the extended system, modulo his case 4. -/
+theorem Trian_fs (H : Case4) {X Y : Term} (h : Y < dom X) : Trian Y (fs X Y) X :=
+  Trian_fs_aux H (size X) X Y (Nat.le_refl _) h
 
 end Googology.Notation.ExBuchholz.Term
