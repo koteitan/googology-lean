@@ -135,21 +135,16 @@ That is `Mono.lean`.
 ## Next
 
 1. **`OT` and `· < Ω` are preserved by one expansion step.** Buchholz's Lemma
-   3.3 for the extended system, and the only thing between the library and
-   `exb.WF`. Its route is 3.4 and 3.6, and both are proved in `Closure.lean` —
-   3.6 as `Trian_fs`, modulo one statement, `SubBound`, about a single
-   standard form `X` whose domain is indexed by terms: what `G` sees in the
-   subscript `Z` of `dom X` is bounded by what it sees in anything between
-   `X[ψ_{Z[0]}(0)]` and `X`. `sub_G_le` and `tower_G_le` carry that up the
-   tower of Buchholz's case 4. `SubBound` is the one place where 3.6 calls on 3.3, so the
-   two have to be proved by one simultaneous induction. The bound has to be
-   relative — Buchholz's absolute form is false once subscripts are terms —
-   and `test/ExBuchholzCheck.lean` carries both the term that breaks it and
-   the check of `SubBound` itself. 3.3 is checked there too: every
-   one of the 3835 countable standard forms of size at most 8, expanded at any
-   of `0`–`4`, stays standard and countable and decreases — and the same at
-   size 9, 15890 forms; and ε₀, ψ_0(Ω+Ω), ψ_0(ψ_1(1)), ψ_0(Ω_2) and
-   ψ_0(ψ_Ω(0)) all run down to `0` with every intermediate term standard;
+   3.3 for the extended system, and now the only thing between the library and
+   `exb.WF`. Everything else on that route is proved: 3.2(b), 3.4, 3.5, and
+   3.6 itself, which `Closure.lean` derives from 3.3 and nothing else. It is
+   checked by computation in `test/ExBuchholzCheck.lean`: every one of the
+   3835 countable standard forms of size at most 8, expanded at any of `0`–`4`,
+   stays standard and countable and decreases — and the same at size 9, 15890
+   forms; every standard form of size at most 6 stays standard when expanded
+   at any standard index of size at most 3; and ε₀, ψ_0(Ω+Ω), ψ_0(ψ_1(1)),
+   ψ_0(Ω_2) and ψ_0(ψ_Ω(0)) all run down to `0` with every intermediate term
+   standard;
 2. add `Trans/BMS/ExBuchholz`. BMS termination no longer needs it, so what the
    translation buys is the **value**: which ordinal a matrix names;
 4. add DBMS and the Y sequence.

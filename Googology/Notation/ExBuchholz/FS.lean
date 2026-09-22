@@ -870,6 +870,31 @@ theorem tower_lt_dom {B : Term} (e1 : dom B ≠ nil) (e2 : dom B ≠ t1)
     | zero => exact psi_lt_psi_iff.mpr (Or.inl hlt)
     | succ k => exact psi_lt_psi_iff.mpr (Or.inl hlt)
 
+theorem OT_psi_nil {a : Term} (h : OT a) : OT (psi a nil) :=
+  OT_psi_of_le (nil_le a) (by decide) h
+
+/-- The tower's first index is an admissible index. -/
+theorem W0_lt_dom {X : Term} (h0 : dom X ≠ nil) (h1 : dom X ≠ t1) (hw : dom X ≠ tw) :
+    psi (fs (subOf (dom X)) nil) nil < dom X := by
+  rcases dom_shape X with h | h | ⟨Z, h⟩
+  · exact absurd h h0
+  · exact absurd h hw
+  · have hlt := subOf_fs_lt h0 h1 hw
+    rw [h] at hlt ⊢
+    simp only [subOf] at hlt ⊢
+    exact psi_lt_psi_iff.mpr (Or.inl hlt)
+
+/-- The subscript of `dom X` is a standard form. -/
+theorem OT_subOf_dom {X : Term} (hOT : OT X) (h0 : dom X ≠ nil) (hw : dom X ≠ tw) :
+    OT (subOf (dom X)) := by
+  rcases dom_shape X with h | h | ⟨Z, h⟩
+  · exact absurd h h0
+  · exact absurd h hw
+  · have hz := OT_dom hOT
+    rw [h] at hz ⊢
+    simp only [subOf] at hz ⊢
+    exact OT_fst hz
+
 /-! ## As an expansion system -/
 
 /-- Extended Buchholz terms as an expansion system: one step is the

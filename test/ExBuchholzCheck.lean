@@ -70,52 +70,39 @@ standard. -/
 #guard runOT (psi nil (psi t2 nil)) 1 0 800 == some 11                   -- ψ_0(Ω_2), BHO
 #guard runOT (psi nil (psi tW nil)) 1 0 800 == some 8                    -- ψ_0(ψ_Ω(0))
 
-/-! ## The tower of Buchholz's case 4
+/-! ## The last gap: Buchholz 3.3
 
-`Closure.lean` proves Lemma 3.6 from one statement, `SubBound`, about a single
-standard form `X` whose domain is indexed by terms: what `G` sees in the
-subscript `Z` of `dom X` is bounded by what it sees in anything between
-`X[ψ_{Z[0]}(0)]` and `X`.  `sub_G_le` carries that bound from `Z` to `Z[0]`,
-and `tower_G_le` carries it from there up the whole tower of case 4.
+`Closure.lean` proves Lemma 3.6, and with it `SubBound` — the bound on the
+tower of Buchholz's case 4 — from `OTFS` alone, which is his Lemma 3.3 for the
+extended system: the fundamental sequence keeps a term standard.  Nothing else
+is assumed.
+
+**The check.**  Every standard form of size at most 6, expanded at every
+standard index of size at most 3 below its domain, stays standard.
 -/
 
-/-- Has `X` a domain indexed by terms? -/
+#guard ((upTo 6).filter isOT).all fun X =>
+  ((upTo 3).filter (fun Y => isOT Y && decide (Y < dom X))).all fun Y =>
+    isOT (fs X Y)
+
+/-! ## Two terms the proof of 3.6 is shaped around
+
+Has `X` a domain indexed by terms? -/
+
 def domTerm (X : Term) : Bool :=
   !(dom X == nil) && !(dom X == t1) && !(dom X == tw)
 
-/-- The first value the tower of case 4 produces, `X[ψ_{Z[0]}(0)]`. -/
-def firstVal (X : Term) : Term := fs X (psi (fs (subOf (dom X)) nil) nil)
-
-/-- `SubBound` at one level `u` and one `c`. -/
-def subRel (X : Term) (u c : Term) : Bool :=
-  (G u (subOf (dom X))).all fun x => (G u c ++ [nil]).any fun y => decide (x ≤ y)
-
-/-- Those members of `cs` that lie between `X[ψ_{Z[0]}(0)]` and `X`. -/
-def betweens (X : Term) (cs : List Term) : List Term :=
-  cs.filter fun c => decide (firstVal X ≤ c) && decide (c ≤ X)
-
-/-! A form with a term-indexed domain need not be countable, so the check runs
-over every standard form, not only `ctbl`. -/
-
-#guard ((upTo 7).filter (fun X => isOT X && domTerm X)).length == 571
-
-/-! **The check.**  Each of those 571 forms, at every level of size at most 2,
-against `X[ψ_{Z[0]}(0)]`, `X`, and every term of size at most 4 in between. -/
-
-#guard ((upTo 7).filter (fun X => isOT X && domTerm X)).all fun X =>
-  (upTo 2).all fun u =>
-    (firstVal X :: X :: betweens X (upTo 4)).all fun c => subRel X u c
-
-/-! The index in the statement has to be `ψ_{Z[0]}(0)`; an arbitrary
-`W < dom X` will not do.  For `X = ψ_{ω+1}(0)` the domain is `X` itself and
-`X[0] = 0`, so the bound would have to hold against `G_u(0)`, which is empty,
-while `G_0` does see something in `Z = ω + 1`. -/
+/-! The index in `SubBound` has to be `ψ_{Z[0]}(0)`; an arbitrary `W < dom X`
+will not do.  For `X = ψ_{ω+1}(0)` the domain is `X` itself and `X[0] = 0`, so
+the bound would have to hold against `G_u(0)`, which is empty, while `G_0` does
+see something in `Z = ω + 1`. -/
 
 def caseW : Term := psi (cons nil t1 t1) nil
 
 #guard isOT caseW && domTerm caseW
 #guard fs caseW nil == nil
-#guard !(subRel caseW nil nil)
+#guard !((G nil (subOf (dom caseW))).all (fun x => (G nil nil ++ [nil]).any
+  (fun y => decide (x ≤ y))))
 
 /-! The bound that `tower_G_le` carries up the tower has to be relative to
 `c`.  Buchholz's own invariant is the absolute `G_u(W_i) < X₂[W_i]`, which
@@ -126,12 +113,11 @@ the value it produces, and `G_0` of it holds `ψ_Ω(0)`, which is above
 `ψ_A(0)` because `A` is countable. -/
 
 def caseA : Term := psi nil (psi tW nil)
-def caseX : Term := psi t1 (psi (cons nil (psi tW nil) t1) nil)
+def caseB : Term := psi (cons nil (psi tW nil) t1) nil
+def caseX : Term := psi t1 caseB
 
 #guard isOT caseX
-#guard tower (fs (subOf (dom (psi (cons nil (psi tW nil) t1) nil))) nil)
-    (psi (cons nil (psi tW nil) t1) nil) 0 == psi caseA nil
-#guard !((G nil (psi caseA nil)).all
-  (fun x => decide (x < fs (psi (cons nil (psi tW nil) t1) nil) (psi caseA nil))))
+#guard tower (fs (subOf (dom caseB)) nil) caseB 0 == psi caseA nil
+#guard !((G nil (psi caseA nil)).all (fun x => decide (x < fs caseB (psi caseA nil))))
 
 end Googology.Notation.ExBuchholz.Term

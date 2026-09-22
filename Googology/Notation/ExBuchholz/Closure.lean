@@ -15,7 +15,7 @@ any `c` between them, together with `z`.  The chain is
 | 3.4 | `b ⊲_z a`, `G_u a < a`, `G_u z < b` ⟹ `G_u b < b` | **done** |
 | 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b`, `ψ_u(b₀) ⊲_z ψ_u(b)`, `ψ_{b₀}(0) ⊲_z ψ_b(0)` | **done** |
 | 3.2(b) | on a term-indexed domain, `z₁ < z₂` ⟹ `a[z₁] < a[z₂]` | **done** (`fs_mono`) |
-| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done**, given `SubBound` |
+| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done**, from 3.3 |
 | 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | not yet |
 
 3.4 is the one that does the work: it turns "bounded relative to `z`" into the
@@ -29,12 +29,13 @@ Each half of 3.5 rests on a decomposition lemma saying what a term strictly
 between two others has to look like: `addT_between` for sums, `psi_between`
 for the argument of a collapse and `psi_sub_between` for its subscript.
 
-`Trian_fs` is 3.6.  Its proof is an induction on `size`, one case per branch
-of `fs`, and six of the seven branches close from 3.5 and the small lemmas
-`Trian_nil`, `Trian_self`, `Trian.of_nil` and `Trian.repeatPrin`.  The seventh
-is Buchholz's case 4, where `dom X₂ = ψ_Z(0)` is not below `ψ_{X₁}(X₂)` and
-the index has to be rebuilt from `Z`.  Expanding at the numeral `n` then runs
-a tower
+`Trian_fs` is 3.6, and it takes 3.3 — `OTFS` here — as its only hypothesis.
+Its proof is an induction on `size`, one case per branch of `fs`, and six of
+the seven branches close from 3.5 and the small lemmas `Trian_nil`,
+`Trian_self`, `Trian.of_nil` and `Trian.repeatPrin`.  The seventh is
+Buchholz's case 4, where `dom X₂ = ψ_Z(0)` is not below `ψ_{X₁}(X₂)` and the
+index has to be rebuilt from `Z`.  Expanding at the numeral `n` then runs a
+tower
 
 ```
 W₀ = ψ_{Z[0]}(0)        W_{i+1} = ψ_{Z[0]}(X₂[W_i])
@@ -43,48 +44,31 @@ W₀ = ψ_{Z[0]}(0)        W_{i+1} = ψ_{Z[0]}(X₂[W_i])
 
 `FS.lean` defines that tower as `tower`, identifies it with the branch in
 `fs_numeral`, and shows it climbs (`tower_lt`, `tower_val_lt`) and stays an
-admissible index (`tower_lt_dom`).  Climbing needs 3.2(b), the monotonicity of
-`fs` in its index, which is `fs_mono` there.
+admissible index (`tower_lt_dom`).  Climbing needs 3.2(b), which is `fs_mono`
+there.
 
-`Trian_case4` then proves the branch from one statement, `SubBound`, about a
-single standard form `X` whose domain is indexed by terms.  Write `Z` for the
-subscript of `dom X`:
+`Trian_case4` proves the branch from a bound on the tower.  `tower_G_le`
+reduces that to a bound on `Z[0]`, `sub_G_le` reduces it further to a bound on
+`Z` itself, and `subBound_of_OTFS` derives that from 3.3:
 
 ```
-X[ψ_{Z[0]}(0)] ≤ c ≤ X  ⟹  G_u(Z) ≼ G_u(c) ∪ {0}
+X[ψ_{Z[0]}(0)] ≤ c ≤ X  ⟹  G_u(Z) ≼ G_u(c) ∪ {0}     (Z = subOf (dom X))
 ```
 
-`sub_G_le` carries that from `Z` to `Z[0]`, through 3.6 at `Z`, and
-`tower_G_le` carries it from there up the tower: the same bound then holds of
-every rung `W_i`, for every `c` between `X₂[W_i]` and `X₂`.  Its induction is on the
-rung, and it uses 3.6 at `X₂` and the monotonicity of the tower.
+That last step is an induction on `X` with one case per branch of `dom`, and
+3.3 enters in exactly one of them: where `dom X = X = ψ_A(0)` with `A` a
+successor.  There `G_u(A) = G_u(A[0]) ++ G_u(1)` has to be bounded against an
+empty list when `u` is large, and `G_eq_nil_of_le` gives that only for a
+standard `A[0]`.
 
-The bound has to be relative to `c`.  Buchholz's own invariant is the absolute
-`G_u(W_i) < X₂[W_i]`, which works in his system because his subscripts are
-numbers and `G` never enters them.  Here they are terms and it is false: with
-`A = ψ_0(ψ_Ω(0))` and `X = ψ_Ω(ψ_{A+1}(0))`, the first rung is `ψ_A(0)`, which
-is also the value it produces, and `G_0` of it holds `ψ_Ω(0)`, above `ψ_A(0)`
-because `A` is countable.
+Two shapes had to be got right, and `test/ExBuchholzCheck.lean` carries a term
+for each.  The bound has to be relative to `c`: Buchholz's own invariant is
+the absolute `G_u(W_i) < X₂[W_i]`, which works in his system because his
+subscripts are numbers and `G` never enters them, and which is false once they
+are terms.  And the index has to be `ψ_{Z[0]}(0)` rather than an arbitrary
+`W < dom X`.
 
-The index has to be `ψ_{Z[0]}(0)` and not just any `W < dom X`: for
-`X = ψ_{ω+1}(0)` the domain is `X` itself and `X[0] = 0`, so the bound would
-have to hold against an empty `G_u(0)`.
-
-`SubBound` is the one place left where 3.6 calls on 3.3: it asks for something
-about `Z` that the standardness of `X` has to supply.
-
-The branch that forces the call is the one where `dom X = X = ψ_A(0)` with `A`
-a successor.  There `Z = A`, the value is the index itself, and `c` can be as
-low as `ψ_{A[0]}(0)`, whose `G_u` is empty for a large `u`.  Bounding
-`G_u(A) = G_u(A[0]) ++ G_u(1)` against that empty list needs `G_u(A[0])` to be
-empty too, and `G_eq_nil_of_le` gives it only for a standard `A[0]` — which is
-3.3 at `A`.  The pieces that branch uses, `sub_lt_psi`, `tail_lt`,
-`G_eq_nil_of_le` and `eq_addT_one_of_dom_eq_one`, are proved.  Buchholz proves 3.3
-and 3.6 by one simultaneous induction, and splitting them, as here, is what
-leaves it open.  `test/ExBuchholzCheck.lean` carries both terms above and checks
-`SubBound` on every standard form of size at most 7 whose domain is indexed by
-terms — 571 of them, countable or not — at every level of size at most 2 and
-against every candidate `c` of size at most 4.
+So 3.6 rests on 3.3 and on nothing else.
 -/
 
 namespace Googology.Notation.ExBuchholz.Term
@@ -557,6 +541,10 @@ theorem eq_addT_one_of_dom_eq_one : ∀ X : Term, OT X → dom X = t1 →
             · rw [show dom (cons X₁ X₂ nil) = tw from by rw [dom]; simp_all] at hd
               exact absurd hd (by decide)
 
+/-- **Buchholz 3.3** for the extended system: the fundamental sequence keeps
+a term standard. -/
+def OTFS : Prop := ∀ X Y : Term, OT X → Y < dom X → OT Y → OT (fs X Y)
+
 /-- Buchholz's tower invariant, reduced to a statement about one term: for a
 standard form `X` whose domain is indexed by terms, what `G` sees in the
 subscript `Z` of `dom X` is bounded by what it sees in anything between
@@ -566,6 +554,224 @@ def SubBound : Prop :=
     ∀ u c : Term,
       fs X (psi (fs (subOf (dom X)) nil) nil) ≤ c → c ≤ X →
       listLe (G u (subOf (dom X))) (G u c ++ [nil])
+
+theorem G_t1_le_nil (u : Term) : listLe (G u t1) [nil] := by
+  intro x hx
+  by_cases h : u ≤ nil
+  · rw [G_psi_of_le h, G_nil] at hx
+    rcases List.mem_cons.mp hx with rfl | hx
+    · exact ⟨nil, List.mem_cons_self .., le_refl _⟩
+    · exact absurd hx List.not_mem_nil
+  · rw [G_psi_of_not_le h] at hx; exact absurd hx List.not_mem_nil
+
+theorem G_t1_eq_nil {u : Term} (h : nil < u) : G u t1 = [] :=
+  G_psi_of_not_le (not_le_of_lt h)
+
+/-- The subscript `Z` of `dom X` is bounded, relative to anything between
+`X[ψ_{Z[0]}(0)]` and `X`, once Buchholz 3.3 is available. -/
+theorem subBound_of_OTFS (H : OTFS) : SubBound := by
+  intro X
+  induction X with
+  | nil => intro _ h0 _ _; exact absurd rfl h0
+  | cons A B t ihA ihB iht =>
+    intro hOT h0 h1 hw u c hV hc
+    -- the standard data attached to `dom X`
+    have hZne : subOf (dom (cons A B t)) ≠ nil := subOf_dom_ne_nil h0 h1 hw
+    have hOTZ : OT (subOf (dom (cons A B t))) := OT_subOf_dom hOT h0 hw
+    have hZdom : nil < dom (subOf (dom (cons A B t))) :=
+      lt_of_le_of_ne (nil_le _) (fun h => dom_ne_nil hZne h.symm)
+    have hOTW : OT (psi (fs (subOf (dom (cons A B t))) nil) nil) :=
+      OT_psi_nil (H _ nil hOTZ hZdom rfl)
+    have hWlt : psi (fs (subOf (dom (cons A B t))) nil) nil < dom (cons A B t) :=
+      W0_lt_dom h0 h1 hw
+    cases t with
+    | cons c' d' r' =>
+      have hdt : dom (cons A B (cons c' d' r')) = dom (cons c' d' r') := rfl
+      have hfsle : fs (cons c' d' r') (psi (fs (subOf (dom (cons c' d' r'))) nil) nil)
+          ≤ cons c' d' r' := le_of_lt (fs_lt hWlt)
+      have hIH := iht (OT_tail hOT) h0 h1 hw u
+      have hVeq : fs (cons A B (cons c' d' r'))
+          (psi (fs (subOf (dom (cons A B (cons c' d' r')))) nil) nil)
+          = addT (psi A B) (fs (cons c' d' r')
+              (psi (fs (subOf (dom (cons c' d' r'))) nil) nil)) := by rw [fs]; rfl
+      rw [hVeq] at hV
+      rcases le_iff_lt_or_eq.mp hV with hlt | heq
+      · obtain ⟨c₀, rfl, hc1, hc2⟩ := addT_between (psi A B) hlt hc
+        rw [G_addT]
+        intro x hx
+        obtain ⟨y, hy, hxy⟩ := hIH c₀ (le_of_lt hc1) hc2 x hx
+        rcases List.mem_append.mp hy with hy | hy
+        · exact ⟨y, List.mem_append_left _ (List.mem_append_right _ hy), hxy⟩
+        · exact ⟨y, List.mem_append_right _ hy, hxy⟩
+      · rw [← heq, G_addT]
+        intro x hx
+        obtain ⟨y, hy, hxy⟩ := hIH _ (le_refl _) hfsle x hx
+        rcases List.mem_append.mp hy with hy | hy
+        · exact ⟨y, List.mem_append_left _ (List.mem_append_right _ hy), hxy⟩
+        · exact ⟨y, List.mem_append_right _ hy, hxy⟩
+    | nil =>
+      by_cases e1 : dom B = nil
+      · have hB : B = nil := dom_eq_nil_iff.mp e1
+        subst hB
+        by_cases g1 : dom A = nil
+        · have hA : A = nil := dom_eq_nil_iff.mp g1
+          subst hA
+          exact absurd (show dom (cons nil nil nil) = t1 from rfl) h1
+        · by_cases g2 : dom A = t1
+          · -- the successor branch
+            have hdX : dom (cons A nil nil) = cons A nil nil := by rw [dom]; simp_all
+            have hZ : subOf (dom (cons A nil nil)) = A := by rw [hdX]; rfl
+            have hOTA : OT A := OT_fst hOT
+            have hOTA0 : OT (fs A nil) :=
+              H A nil hOTA (by rw [g2]; exact nil_lt_cons _ _ _) rfl
+            have hAsplit : addT (fs A nil) t1 = A :=
+              eq_addT_one_of_dom_eq_one A hOTA g2
+            have hAlt : fs A nil < A := by
+              have hx := addT_lt (fs A nil) (show (nil : Term) < t1 from nil_lt_cons _ _ _)
+              rwa [addT_nil_right, hAsplit] at hx
+            have hVeq : fs (cons A nil nil)
+                (psi (fs (subOf (dom (cons A nil nil))) nil) nil)
+                = psi (fs A nil) nil := by rw [fs]; simp_all
+            rw [hVeq] at hV
+            rw [hZ]
+            have hGA : G u A = G u (fs A nil) ++ G u t1 := by
+              have hx := G_addT u (fs A nil) t1
+              rwa [hAsplit] at hx
+            by_cases hu : u ≤ fs A nil
+            · have hsub : listLe (G u (fs A nil)) (G u c) := by
+                rcases le_iff_lt_or_eq.mp hV with hlt | heq
+                · obtain ⟨r, s, c₁, hceq, hr1, hr2⟩ := psi_sub_between hlt hc
+                  have hGr : listLe (G u (fs A nil)) (G u r) ∧ u ≤ r := by
+                    rcases le_iff_lt_or_eq.mp hr1 with hlt' | heq'
+                    · obtain ⟨r', hr', hpos, hle'⟩ :=
+                        addT_between (fs A nil) (by rw [addT_nil_right]; exact hlt')
+                          (by rw [hAsplit]; exact hr2)
+                      have hr'1 : r' = t1 := by
+                        rcases le_iff_lt_or_eq.mp hle' with h'' | h''
+                        · have := lt_one_iff.mp h''
+                          rw [this] at hpos
+                          exact absurd hpos (lt_irrefl nil)
+                        · exact h''
+                      have hrA : r = A := by rw [hr', hr'1, hAsplit]
+                      refine ⟨?_, ?_⟩
+                      · rw [hrA, hGA]; exact listLe_append_left (listLe_refl _)
+                      · rw [hrA]; exact le_trans hu (le_of_lt hAlt)
+                    · rw [← heq']; exact ⟨listLe_refl _, hu⟩
+                  rw [hceq, G_cons, if_pos hGr.2]
+                  intro x hx
+                  obtain ⟨y, hy, hxy⟩ := hGr.1 x hx
+                  exact ⟨y, List.mem_append_left _ (List.mem_cons_of_mem _
+                    (List.mem_append_left _ hy)), hxy⟩
+                · rw [← heq, G_psi_of_le hu, G_nil, List.append_nil]
+                  intro x hx
+                  exact ⟨x, List.mem_cons_of_mem _ hx, le_refl x⟩
+              rw [hGA]
+              intro x hx
+              rcases List.mem_append.mp hx with hx | hx
+              · obtain ⟨y, hy, hxy⟩ := hsub x hx
+                exact ⟨y, List.mem_append_left _ hy, hxy⟩
+              · obtain ⟨y, hy, hxy⟩ := G_t1_le_nil u x hx
+                rcases List.mem_cons.mp hy with hy' | hy'
+                · exact ⟨nil, List.mem_append_right _ (List.mem_cons_self ..), hy' ▸ hxy⟩
+                · exact absurd hy' List.not_mem_nil
+            · have hlt' : fs A nil < u := lt_of_not_le hu
+              rw [hGA, G_eq_nil_of_le _ u hOTA0 (le_of_lt hlt'),
+                G_t1_eq_nil (lt_of_le_of_lt' (nil_le _) hlt')]
+              intro x hx; exact absurd hx List.not_mem_nil
+          · -- dom X = dom A
+            have hdX : dom (cons A nil nil) = dom A := by rw [dom]; simp_all
+            have hOTA : OT A := OT_fst hOT
+            have hWA : psi (fs (subOf (dom A)) nil) nil < dom A := hdX ▸ hWlt
+            have hOTfa : OT (fs A (psi (fs (subOf (dom A)) nil) nil)) :=
+              H A _ hOTA hWA (hdX ▸ hOTW)
+            have hfale : fs A (psi (fs (subOf (dom A)) nil) nil) ≤ A := le_of_lt (fs_lt hWA)
+            have hIH := ihA hOTA (hdX ▸ h0) (hdX ▸ h1) (hdX ▸ hw) u
+            have hVeq : fs (cons A nil nil)
+                (psi (fs (subOf (dom (cons A nil nil))) nil) nil)
+                = psi (fs A (psi (fs (subOf (dom A)) nil) nil)) nil := by
+              rw [fs]; simp_all
+            rw [hVeq] at hV
+            rw [hdX]
+            rcases le_iff_lt_or_eq.mp hV with hlt | heq
+            · obtain ⟨r, s, c₁, rfl, hr1, hr2⟩ := psi_sub_between hlt hc
+              by_cases hur : u ≤ r
+              · intro x hx
+                obtain ⟨y, hy, hxy⟩ := hIH r hr1 hr2 x hx
+                rcases List.mem_append.mp hy with hy | hy
+                · refine ⟨y, List.mem_append_left _ ?_, hxy⟩
+                  rw [G_cons, if_pos hur]
+                  exact List.mem_append_left _ (List.mem_cons_of_mem _
+                    (List.mem_append_left _ hy))
+                · exact ⟨y, List.mem_append_right _ hy, hxy⟩
+              · intro x hx
+                obtain ⟨y, hy, hxy⟩ := hIH _ (le_refl _) hfale x hx
+                rw [G_eq_nil_of_le _ u hOTfa (le_trans hr1 (le_of_lt (lt_of_not_le hur)))] at hy
+                rcases List.mem_append.mp hy with hy | hy
+                · exact absurd hy List.not_mem_nil
+                · exact ⟨y, List.mem_append_right _ hy, hxy⟩
+            · rw [← heq]
+              by_cases hur : u ≤ fs A (psi (fs (subOf (dom A)) nil) nil)
+              · intro x hx
+                obtain ⟨y, hy, hxy⟩ := hIH _ (le_refl _) hfale x hx
+                rcases List.mem_append.mp hy with hy | hy
+                · refine ⟨y, List.mem_append_left _ ?_, hxy⟩
+                  rw [G_psi_of_le hur]
+                  exact List.mem_cons_of_mem _ (List.mem_append_left _ hy)
+                · exact ⟨y, List.mem_append_right _ hy, hxy⟩
+              · intro x hx
+                obtain ⟨y, hy, hxy⟩ := hIH _ (le_refl _) hfale x hx
+                rw [G_eq_nil_of_le _ u hOTfa (le_of_lt (lt_of_not_le hur))] at hy
+                rcases List.mem_append.mp hy with hy | hy
+                · exact absurd hy List.not_mem_nil
+                · exact ⟨y, List.mem_append_right _ hy, hxy⟩
+      · by_cases e2 : dom B = t1
+        · exact absurd (show dom (cons A B nil) = tw from by rw [dom]; simp_all) hw
+        · by_cases e3 : dom B = tw
+          · exact absurd (show dom (cons A B nil) = tw from by rw [dom]; simp_all) hw
+          · by_cases e4 : dom B < cons A B nil
+            · have hdX : dom (cons A B nil) = dom B := by rw [dom]; simp_all
+              have hOTB : OT B := OT_snd hOT
+              have hWB : psi (fs (subOf (dom B)) nil) nil < dom B := hdX ▸ hWlt
+              have hfble : fs B (psi (fs (subOf (dom B)) nil) nil) ≤ B := le_of_lt (fs_lt hWB)
+              have hIH := ihB hOTB (hdX ▸ h0) (hdX ▸ h1) (hdX ▸ hw) u
+              have hVeq : fs (cons A B nil)
+                  (psi (fs (subOf (dom (cons A B nil))) nil) nil)
+                  = psi A (fs B (psi (fs (subOf (dom B)) nil) nil)) := by
+                rw [fs]; simp_all
+              rw [hVeq] at hV
+              rw [hdX]
+              by_cases hu : u ≤ A
+              · rcases le_iff_lt_or_eq.mp hV with hlt | heq
+                · obtain ⟨c₀, c₁, rfl, hb0, hb1⟩ := psi_between hlt hc
+                  intro x hx
+                  obtain ⟨y, hy, hxy⟩ := hIH c₀ hb0 hb1 x hx
+                  rcases List.mem_append.mp hy with hy | hy
+                  · refine ⟨y, List.mem_append_left _ ?_, hxy⟩
+                    rw [G_cons, if_pos hu]
+                    exact List.mem_append_left _ (List.mem_cons_of_mem _
+                      (List.mem_append_right _ hy))
+                  · exact ⟨y, List.mem_append_right _ hy, hxy⟩
+                · rw [← heq]
+                  intro x hx
+                  obtain ⟨y, hy, hxy⟩ := hIH _ (le_refl _) hfble x hx
+                  rcases List.mem_append.mp hy with hy | hy
+                  · refine ⟨y, List.mem_append_left _ ?_, hxy⟩
+                    rw [G_psi_of_le hu]
+                    exact List.mem_cons_of_mem _ (List.mem_append_right _ hy)
+                  · exact ⟨y, List.mem_append_right _ hy, hxy⟩
+              · have hZA : subOf (dom B) ≤ A := by
+                  rcases dom_shape B with hd | hd | ⟨Z', hd⟩
+                  · exact absurd hd e1
+                  · exact absurd hd e3
+                  · rw [hd] at e4 ⊢
+                    simp only [subOf]
+                    rcases psi_lt_psi_iff.mp (cons_lt_psi_iff.mp e4) with h | ⟨h, _⟩
+                    · exact le_of_lt h
+                    · exact h ▸ le_refl _
+                rw [G_eq_nil_of_le _ u (by rw [← hdX]; exact hOTZ)
+                  (le_trans hZA (le_of_lt (lt_of_not_le hu)))]
+                intro x hx; exact absurd hx List.not_mem_nil
+            · exact absurd (show dom (cons A B nil) = tw from by rw [dom]; simp_all) hw
 
 /-- The bound on `Z` carries to `Z[0]`, through 3.6 at `Z`. -/
 theorem sub_G_le {X₂ : Term} (e1 : dom X₂ ≠ nil) (e2 : dom X₂ ≠ t1) (e3 : dom X₂ ≠ tw)
@@ -795,9 +1001,9 @@ theorem Trian_fs_aux (H : SubBound) :
                 rw [he]
                 exact Trian.of_nil (Trian_case4 h1 h2 h3 h4 hIH hBd 0)
 
-/-- **Buchholz 3.6** for the extended system, modulo `SubBound`. -/
-theorem Trian_fs (H : SubBound) {X Y : Term} (hOT : OT X) (h : Y < dom X) :
+/-- **Buchholz 3.6** for the extended system, from 3.3. -/
+theorem Trian_fs (H : OTFS) {X Y : Term} (hOT : OT X) (h : Y < dom X) :
     Trian Y (fs X Y) X :=
-  Trian_fs_aux H (size X) X Y (Nat.le_refl _) hOT h
+  Trian_fs_aux (subBound_of_OTFS H) (size X) X Y (Nat.le_refl _) hOT h
 
 end Googology.Notation.ExBuchholz.Term
