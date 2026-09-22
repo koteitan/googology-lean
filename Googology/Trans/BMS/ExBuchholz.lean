@@ -29,10 +29,11 @@ ordinal, and every all-zero-subscript term is named by one.
 `OT_of_desc` settles the standard-form side as far as the term goes: with the
 subscripts all `0`, being a standard form is exactly the descending
 condition.  What is left is on the matrix side — that a standard one-row
-matrix reads as a descending term — and the commutation with expansion.  The
-second is where the work is: `BM4.expand` is stated through
-`Classical.choice`, so matching it against `fs` step for step is not a
-rewriting exercise.  The two are entangled, because the descending condition
+matrix reads as a descending term — and the commutation with expansion.
+`BMS/OneRow.lean` clears the first obstacle to the second: for one row,
+`BM4.expand` is the primitive sequence rule on the entries, with the choice in
+its definition pinned down.  What remains is to match that rule against `fs`
+step for step.  The two halves are entangled, because the descending condition
 is the invariant the expansion has to preserve.
 -/
 
