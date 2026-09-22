@@ -191,7 +191,11 @@ That is `Mono.lean`.
    `BMS/TwoRow.lean` reads the two-row column map off — `m₀` is `0` or `1`,
    and at `1` row `0` takes an increment on the columns whose bad-part
    position is a row-`0` ancestor of the bad root. `BMS/Anc.lean` says what
-   that ancestor relation is on the entries, and computes it. What is left is a reading
+   that ancestor relation is on the entries, and computes it, and
+   `BMS/Entries2.lean` puts the two together: `expand2L` is the whole rule
+   written on the entries, and `entries2_expand` says it is `BM4.expand`. It
+   runs, and agrees with the reference implementation on the twelve matrices
+   in `test/TransCheck.lean`. What is left is a reading
    that uses `ψ_1` as well as `ψ_0`, and the commutation, whose `dom`
    trichotomy will have a fourth case — the tower — that one row never
    reaches;

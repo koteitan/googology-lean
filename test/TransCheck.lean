@@ -202,4 +202,27 @@ def parRow (l : List Nat) : List Int :=
 #guard parRow [0, 1, 1, 2] == [-1, 0, 0, 2]
 #guard parRow [0, 1, 2, 3, 4] == [-1, 0, 1, 2, 3]
 
+/-! ### Two-row expansion, against the reference implementation
+
+`expand2L` is `BM4.expand` written on the entries — `Trans.BMS.entries2_expand`
+proves that. Running it beside `./bms` is what checks that
+`Googology/Notation/BMS` and the reference implement the same `expand`; the
+twelve below agree exactly, including the cases where the row-`0` increment
+fires. -/
+
+#guard expand2L 1 [(0,0),(1,1),(2,1),(3,2)] == [(0,0),(1,1),(2,1),(3,1)]
+#guard expand2L 0 [(0,0),(1,1)] == [(0,0)]
+#guard expand2L 1 [(0,0),(1,1)] == [(0,0),(1,0)]
+#guard expand2L 2 [(0,0),(1,1)] == [(0,0),(1,0),(2,0)]
+#guard expand2L 1 [(0,0),(1,1),(2,2)] == [(0,0),(1,1),(2,1)]
+#guard expand2L 2 [(0,0),(1,1),(2,2)] == [(0,0),(1,1),(2,1),(3,1)]
+#guard expand2L 1 [(0,0),(1,1),(2,1)] == [(0,0),(1,1),(2,0),(3,1)]
+#guard expand2L 2 [(0,0),(1,1),(1,1)] == [(0,0),(1,1),(1,0),(2,1),(2,0),(3,1)]
+#guard expand2L 1 [(0,0),(1,1),(2,2),(3,3)] == [(0,0),(1,1),(2,2),(3,2)]
+#guard expand2L 2 [(0,0),(1,0),(2,0),(1,0)]
+  == [(0,0),(1,0),(2,0),(0,0),(1,0),(2,0),(0,0),(1,0),(2,0)]
+#guard expand2L 1 [(0,0),(1,1),(2,2),(3,1)] == [(0,0),(1,1),(2,2),(3,0),(4,1),(5,2)]
+#guard expand2L 2 [(0,0),(1,1),(2,2),(3,2)]
+  == [(0,0),(1,1),(2,2),(3,1),(4,2),(5,1),(6,2)]
+
 end Googology.Trans.BMS
