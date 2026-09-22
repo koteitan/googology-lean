@@ -91,8 +91,10 @@ expansions are understood.
 | **with `m₀ = 0` the expansion is a fixed part and a block repeated**, so the rank is multiplied by `ω` | `Trans.BMS.expandRL_of_m0_zero`, `Trans.BMS.rank_mul_omega0` |
 | so `(0,0)(1,0)` has rank `ω`, `(0,0)(1,1)(1,0)` has `ε₀·ω`, and `(0,0)(1,1)(0,0)(1,0)` has `ε₀ + ω` | `Trans.BMS.rank_omegaCol`, `Trans.BMS.rank_omegaAll`, `Trans.BMS.rank_sumAll` |
 
-What it does not reach is `(0,0)(1,1)(2,1)` and the later generators, whose
-expansions are neither block repetitions nor matrices with a zero row.
+What it does not reach: `(0,0)(1,1)(2,1)`, where `m₀` is `1` so the copies
+are incremented and differ; `(0,0)(1,1)(2,0)`, which does repeat, but repeats
+`(1,1)`, and a part that does not start a block carries no rank of its own;
+and the later generators.
 
 No `sorry`, and no axiom beyond `propext`, `Classical.choice` and `Quot.sound`.
 In `Googology.Core` the only declarations that use any axiom are the six that

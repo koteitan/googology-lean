@@ -340,8 +340,9 @@ The other two are not Lean problems.
   reaches single values without it — `rank_pairGen`, `rank_gen_eq_iSup`,
   `rank_succAll`, `rank_omegaAll` — but only where the expansions are already understood:
   the generators, the columns that have no parent, and the block repetitions
-  that `BMS/Append.lean` reaches. A matrix like `(0,0)(1,1)(2,1)` is none of
-  those.
+  that `BMS/Append.lean` reaches. `(0,0)(1,1)(2,1)` is none of those — `m₀`
+  is `1` there, so the copies are incremented — and `(0,0)(1,1)(2,0)` repeats
+  `(1,1)`, which does not start a block and so carries no rank of its own.
 * **The Y sequence.** Its official definition is a program and its
   termination is open; see item 4.
 
