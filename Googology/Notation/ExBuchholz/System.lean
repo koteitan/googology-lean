@@ -57,4 +57,10 @@ theorem exbOT_wf : exbOT.WF :=
 theorem exbOT_terminates : exbOT.Terminates :=
   exbOT.terminates_of_wf exbOT_wf
 
+/-- **The expansion system carries an ordinal measure**: a countable standard
+form is sent to the ordinal it names, and one step strictly decreases it. -/
+noncomputable def exbOTEval : Eval exbOT (· < · : Ordinal.{0} → Ordinal.{0} → Prop) where
+  val := fun A => A.1.val
+  val_lt := fun _ _ h => valHom.map_lt (exbOT_Rel_lt h)
+
 end Googology.Notation.ExBuchholz.Term

@@ -1,16 +1,16 @@
 import Googology
 
 /-!
-# Computational evidence for the last gap
+# Computations that agree with the proofs
 
-`Googology.Notation.ExBuchholz.FS` proves that one expansion step strictly
-decreases a countable standard form (`step_lt`).  What is not proved is that
-the step *keeps* a term standard and countable — Buchholz's Lemma 3.3 for the
-extended system — and that is the only thing between the library and
-`exb.WF`.
+Everything this file checks is now a theorem.  The checks are kept because
+they are cheap, because they are independent of the proofs, and because a
+disagreement would be the first sign of a mis-transcribed definition.  These
+are `#guard` lines: finite computations, not theorems, and they are kept out
+of the library for that reason.
 
-This file checks it by computation.  These are `#guard` lines: finite checks,
-not theorems, and they are kept out of the library for that reason.
+The terms carried here are the ones that fixed the shape of the statements
+along the way, and the comments say what each of them rules out.
 -/
 
 namespace Googology.Notation.ExBuchholz.Term
@@ -70,12 +70,13 @@ standard. -/
 #guard runOT (psi nil (psi t2 nil)) 1 0 800 == some 11                   -- ψ_0(Ω_2), BHO
 #guard runOT (psi nil (psi tW nil)) 1 0 800 == some 8                    -- ψ_0(ψ_Ω(0))
 
-/-! ## The last gap: the Bachmann property
+/-! ## The Bachmann property
 
 `Closure.lean` proves 3.3 — and with it 3.6, `SubBound` and the tower
-invariant of Buchholz's case 4 — from `Bachmann` alone: for `ψ_A(B)` in the
+invariant of Buchholz's case 4 — from `bachmann`: for `ψ_A(B)` in the
 configuration of case 4, everything `G_A` sees in `B` is below `B[ψ_{Z[0]}(0)]`,
-the first value the tower produces.  That is the only thing left.
+the first value the tower produces.  That is a theorem; the check below agrees
+with it.
 -/
 
 /-- Is `X = ψ_A(B)` in the configuration of Buchholz's case 4? -/

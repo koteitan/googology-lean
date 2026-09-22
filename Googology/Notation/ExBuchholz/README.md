@@ -309,8 +309,8 @@ Nothing is left: the chain is closed.
 | the unrestricted order is **not** well founded | done |
 | the order as a lexicographic product; standard form inherited by the parts | done |
 | sums: accessibility of principal terms gives `WellFounded OTLt` | done |
-| accessibility of the principal terms | **not done** — see below |
-| fundamental sequences, a `Rewrite` value | **not done** |
+| accessibility of the principal terms | done (`acc_principal`, via `valHom`) |
+| fundamental sequences, and `exb` as a `Rewrite` | done (`FS.lean`) |
 | `ψ` on the ordinals: definition and first facts | done |
 | the cardinality bound on `C_v(a)`, hence `ψ_v(a) < Ω_{v+1}` | done |
 | `ψ ∉ C_v(a)`, `Ω_v ≤ ψ_v(a)`, monotonicity in the argument | done |
@@ -335,6 +335,7 @@ Nothing is left: the chain is closed.
 | the tower invariant of case 4 | done (`towerOT_of_Bachmann`) |
 | the Bachmann property itself | **done** (`bachmann`) |
 | **`exbOT.WF` and `exbOT.Terminates`** | **done** (`System.lean`) |
+| the expansion system carries an ordinal measure | done (`exbOTEval`) |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 `axiom`.
