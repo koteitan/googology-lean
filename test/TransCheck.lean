@@ -269,4 +269,26 @@ def parRowR (l : List (List Nat)) (k : Nat) : List Int :=
 #guard parRowR [[0,0],[1,1],[2,2],[3,1],[4,2]] 0 == [-1, 0, 1, 2, 3]
 #guard parRowR [[0,0],[1,1],[2,2],[3,1],[4,2]] 1 == [-1, 0, 1, 0, 3]
 
+/-! ### Expansion at any number of rows
+
+`expandRL` is `BM4.expand` on the entries for any `r` —
+`Trans.BMS.entriesR_expand` proves that. Against `./bms` at three rows: every
+matrix of length at most `3` whose first column is `(0,0,0)` and whose entries
+are below `3` — `756` of them, of which `24` are standard — expanded at `0`,
+`1` and `2`. All `72` agree. -/
+
+#guard expandRL 3 1 [[0,0,0],[1,1,1]] == [[0,0,0],[1,1,0]]
+#guard expandRL 3 2 [[0,0,0],[1,1,1]] == [[0,0,0],[1,1,0],[2,2,0]]
+#guard expandRL 3 1 [[0,0,0],[1,1,1],[2,1,0]] == [[0,0,0],[1,1,1],[2,0,0],[3,1,1]]
+#guard expandRL 3 2 [[0,0,0],[1,1,1],[2,1,0],[1,1,1]]
+  == [[0,0,0],[1,1,1],[2,1,0],[1,1,0],[2,2,1],[3,2,0],[2,2,0],[3,3,1],[4,3,0]]
+#guard expandRL 3 2 [[0,0,0],[1,1,1],[2,2,1]]
+  == [[0,0,0],[1,1,1],[2,2,0],[3,3,1],[4,4,0],[5,5,1]]
+#guard expandRL 3 1 [[0,0,0],[1,1,1],[2,2,2],[3,3,3]] == [[0,0,0],[1,1,1],[2,2,2],[3,3,2]]
+
+/-! One row, through the same definition, agrees with `expandL`. -/
+
+#guard expandRL 1 1 [[0],[1],[2],[3]] == (expandL 1 0 [0,1,2,3]).map (fun a => [a])
+#guard expandRL 1 1 [[0],[1],[2],[1],[1]] == (expandL 1 0 [0,1,2,1,1]).map (fun a => [a])
+
 end Googology.Trans.BMS

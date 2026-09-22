@@ -59,7 +59,7 @@ let it be read as one of the theorems above.
 | BMS with itself | `BMS/Entries.lean` | — | that an array and its entries expand the same way |
 | BMS with itself | `BMS/TwoRow.lean` | — | two-row expansion: `m₀` is `0` or `1`, and at `1` row `0` takes an increment |
 | BMS with itself | `BMS/Anc.lean` | — | the row-`0` ancestor relation read off the entries, computed and proved to match `BM4.anc` |
-| BMS with itself | `BMS/EntriesR.lean` | — | the same at **every** row, for any number of rows: `parent A k` and `anc A k` read off the entries and computed |
+| BMS with itself | `BMS/EntriesR.lean` | — | **every Bashicu matrix expansion, written on the entries and shown to be `BM4.expand`** — so it runs, at any number of rows |
 | BMS with itself | `BMS/Entries2.lean` | — | **two-row expansion written on the entries, that it is `BM4.expand`, and that a run of it ends** |
 | BMS with itself | `BMS/Pair.lean` | — | the pair sequence system as a `Rewrite` whose step runs, with its generators |
 | BMS with itself | `BMS/Cut.lean` | — | that the block recursion `expandL` is the textbook rule: drop the last column, repeat the bad part `N + 1` times |

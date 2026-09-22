@@ -20,6 +20,11 @@ parameter at the point of definition and its decrease is only available
 afterwards; `chase_iff` is the correctness, and the fuel is the starting index,
 which always suffices.
 
+`expandRL` is then the whole expansion rule on the entries, for any number of
+rows, and `entriesR_expand` says it is `BM4.expand`.  So every Bashicu matrix
+expansion runs, which the array form does not — `BM4.expand` is
+`noncomputable`.
+
 `BMS/Anc.lean` stays: it is the row-`0` case on a flat list of entries, which
 is the shape `BMS/Entries2.lean` uses.
 -/
@@ -275,5 +280,152 @@ theorem ancAtR_iff (l : List (List Nat)) (k p i : Nat) :
     | single hp => exact Relation.TransGen.single ((parAtR_eq_some l k _ _).mpr hp)
     | tail _ hp ih => exact Relation.TransGen.tail ih ((parAtR_eq_some l k _ _).mpr hp)
 
+
+/-! ### Expansion -/
+
+theorem findGreatest_congr {P Q : Nat → Prop} [DecidablePred P] [DecidablePred Q] :
+    ∀ n : Nat, (∀ k, k ≤ n → (P k ↔ Q k)) → Nat.findGreatest P n = Nat.findGreatest Q n := by
+  intro n
+  induction n with
+  | zero => intro _; rfl
+  | succ m ih =>
+    intro h
+    rw [Nat.findGreatest, Nat.findGreatest, ih (fun k hk => h k (by omega))]
+    by_cases hp : P (m + 1)
+    · rw [if_pos hp, if_pos ((h (m + 1) (Nat.le_refl _)).mp hp)]
+    · rw [if_neg hp, if_neg (fun hq => hp ((h (m + 1) (Nat.le_refl _)).mpr hq))]
+
+theorem hasParent_iff (A : Arr r) (k : Nat) (hk : k < r) (i : Nat) :
+    HasParent A k i ↔ (parAtR (entriesR A) k i).isSome = true := by
+  constructor
+  · rintro ⟨j, hj⟩
+    rw [Option.isSome_iff_exists]
+    exact ⟨j, (parAtR_eq_some _ _ _ _).mpr ((ParR_iff_parent A k hk j i).mpr hj)⟩
+  · intro h
+    obtain ⟨j, hj⟩ := Option.isSome_iff_exists.mp h
+    exact ⟨j, (ParR_iff_parent A k hk j i).mp ((parAtR_eq_some _ _ _ _).mp hj)⟩
+
+/-- The maximal parent row of the last column, computed from the entries. -/
+def m0L (r : Nat) (l : List (List Nat)) : Nat :=
+  Nat.findGreatest (fun k => (parAtR l k (l.length - 1)).isSome = true) (r - 1)
+
+open Classical in
+theorem m0L_eq (hr : 0 < r) (A : Arr r) : m0L r (entriesR A) = m₀ A := by
+  rw [m0L, m₀, entriesR_length]
+  exact findGreatest_congr (r - 1) (fun k hk =>
+    (hasParent_iff A k (by omega) (A.len - 1)).symm)
+
+/-- The bad root, computed from the entries. -/
+def badRootR (r : Nat) (l : List (List Nat)) : Option Nat :=
+  if l.isEmpty then none else parAtR l (m0L r l) (l.length - 1)
+
+theorem badRootR_some (hr : 0 < r) {A : Arr r} {p : Nat}
+    (h : badRootR r (entriesR A) = some p) : parent A (m₀ A) p (A.len - 1) := by
+  rw [badRootR] at h
+  rw [if_neg (by
+    simp only [List.isEmpty_iff]
+    intro he
+    rw [he] at h
+    exact absurd h (by simp))] at h
+  rw [entriesR_length, m0L_eq hr A] at h
+  exact (ParR_iff_parent A (m₀ A) (m₀_lt hr) p _).mp ((parAtR_eq_some _ _ _ _).mp h)
+
+theorem badRootR_none (hr : 0 < r) {A : Arr r} (h : badRootR r (entriesR A) = none)
+    (h0 : A.len ≠ 0) : ¬ LastHasParent A := by
+  rw [badRootR, if_neg (by
+    simp only [List.isEmpty_iff]
+    intro he
+    exact h0 (by have := entriesR_length A; rw [he] at this; exact this.symm))] at h
+  rw [entriesR_length, m0L_eq hr A] at h
+  rintro ⟨_, k, hk, hpk⟩
+  have hm : HasParent A (m₀ A) (A.len - 1) := m₀_hasParent (A := A) ⟨by omega, k, hk, hpk⟩
+  rw [hasParent_iff A _ (m₀_lt hr)] at hm
+  rw [h] at hm
+  exact absurd hm (by simp)
+
+/-- **Expansion, written on the entries, for any number of rows.** -/
+def expandRL (r : Nat) (N : Nat) (l : List (List Nat)) : List (List Nat) :=
+  match badRootR r l with
+  | none => l.dropLast
+  | some p =>
+      (List.range p).map (fun i => l[i]!)
+        ++ (List.range ((N + 1) * (l.length - 1 - p))).map (fun t =>
+              (List.range r).map (fun k =>
+                if decide (k < m0L r l) && ((p == p + t % (l.length - 1 - p))
+                    || ancAtR l k p (p + t % (l.length - 1 - p))) then
+                  (l[p + t % (l.length - 1 - p)]!)[k]!
+                    + (t / (l.length - 1 - p))
+                      * ((l[l.length - 1]!)[k]! - (l[p]!)[k]!)
+                else (l[p + t % (l.length - 1 - p)]!)[k]!))
+
+/-- **The array and its entries expand the same way, for any number of
+rows.** -/
+theorem entriesR_expand (hr : 0 < r) (A : Arr r) (N : Nat) :
+    entriesR (expand A N) = expandRL r N (entriesR A) := by
+  cases hb : badRootR r (entriesR A) with
+  | none =>
+    rw [expandRL, hb]
+    dsimp only
+    by_cases h0 : A.len = 0
+    · rw [expand_of_len_zero h0, entriesR, h0, List.range_zero, List.map_nil]
+      rfl
+    · rw [expand_of_not_lastHasParent h0 (badRootR_none hr hb h0) N, entriesR, entriesR,
+        map_range_dropLast]
+      rfl
+  | some p =>
+    have hpar := badRootR_some hr hb
+    have hp1 : p < A.len - 1 := hpar.1
+    have hp6 : A.len - 1 < A.len := hpar.2.2.2.2.2
+    have hsp : 0 < A.len - 1 - p := by omega
+    rw [expandRL, hb, entriesR_length]
+    dsimp only
+    have hgood : ∀ i, i < p →
+        (List.range r).map ((expand A N).col i) = (entriesR A)[i]! := by
+      intro i hi
+      rw [entriesR_col A (by omega)]
+      refine List.map_congr_left (fun k _ => ?_)
+      rw [expand_col_of_parent hr hpar N i k, tildeCol_lt A p (m₀ A) _ i k hi]
+    have hbad : ∀ t : Nat,
+        (List.range r).map ((expand A N).col (p + t))
+          = (List.range r).map (fun k =>
+              if decide (k < m₀ A) && ((p == p + t % (A.len - 1 - p))
+                  || ancAtR (entriesR A) k p (p + t % (A.len - 1 - p))) then
+                ((entriesR A)[p + t % (A.len - 1 - p)]!)[k]!
+                  + (t / (A.len - 1 - p))
+                    * (((entriesR A)[A.len - 1]!)[k]! - ((entriesR A)[p]!)[k]!)
+              else ((entriesR A)[p + t % (A.len - 1 - p)]!)[k]!) := by
+      intro t
+      have hmem : p + t % (A.len - 1 - p) < A.len := by
+        have := Nat.mod_lt t hsp; omega
+      refine List.map_congr_left (fun k hk0 => ?_)
+      have hk : k < r := List.mem_range.mp hk0
+      rw [expand_col_of_parent hr hpar N (p + t) k,
+        tildeCol_ge A p (m₀ A) _ (p + t) k (by omega),
+        show p + t - p = t from by omega,
+        entriesR_getElem A hmem hk, entriesR_getElem A hp6 hk,
+        entriesR_getElem A (by omega) hk]
+      have hcond : ((p == p + t % (A.len - 1 - p))
+          || ancAtR (entriesR A) k p (p + t % (A.len - 1 - p))) = true
+          ↔ ancEq A k p (p + t % (A.len - 1 - p)) := by
+        rw [Bool.or_eq_true, beq_iff_eq, ancAtR_iff, ancEq]
+        exact or_congr Iff.rfl (AncR_iff_anc A k hk p _)
+      by_cases hm : k < m₀ A
+      · by_cases hc : ancEq A k p (p + t % (A.len - 1 - p))
+        · rw [if_pos ⟨hm, hc⟩, if_pos (by
+            rw [Bool.and_eq_true, decide_eq_true_eq]
+            exact ⟨hm, hcond.mpr hc⟩)]
+        · rw [if_neg (fun hx => hc hx.2), if_neg (by
+            rw [Bool.and_eq_true, decide_eq_true_eq]
+            exact fun hx => hc (hcond.mp hx.2))]
+      · rw [if_neg (fun hx => hm hx.1), if_neg (by
+          rw [Bool.and_eq_true, decide_eq_true_eq]
+          exact fun hx => hm hx.1)]
+    rw [entriesR, expand_len_of_parent hr hpar N, List.range_add, List.map_append,
+      List.map_map]
+    congr 1
+    · exact List.map_congr_left (fun i hi => hgood i (List.mem_range.mp hi))
+    · refine List.map_congr_left (fun t _ => ?_)
+      simp only [Function.comp_apply]
+      rw [hbad t, m0L_eq hr A]
 
 end Googology.Trans.BMS

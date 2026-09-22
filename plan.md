@@ -198,7 +198,12 @@ That is `Mono.lean`.
    of length at most `4` with entries below `3` — `46` standard forms, `138`
    expansions, all matching (`test/TransCheck.lean`). `BMS/Pair.lean`
    packages it as a `Rewrite` with its generators, and carries termination
-   across.
+   across. `BMS/EntriesR.lean` does the same for **any** number of rows:
+   `parent A k` and `anc A k` at every row, and `expandRL` with
+   `entriesR_expand`. So every Bashicu matrix expansion runs, which the array
+   form does not. At three rows it agrees with the reference implementation on
+   all `72` expansions of the `24` standard matrices of length at most `3`
+   with entries below `3`.
 
    So the mechanical side of two rows is finished. What is left is the
    reading, and it is not a mechanical job. A two-row reading has to use `ψ`

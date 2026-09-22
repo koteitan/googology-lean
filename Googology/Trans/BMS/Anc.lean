@@ -232,4 +232,13 @@ theorem ancAtB_iff (l : List Nat) (p : Nat) : ∀ i : Nat, ancAtB l p i = true �
         · exact Or.inr ht
 
 
+theorem map_range_dropLast {α : Type} (n : Nat) (f : Nat → α) :
+    ((List.range n).map f).dropLast = (List.range (n - 1)).map f := by
+  cases n with
+  | zero => rw [List.range_zero, List.map_nil]; rfl
+  | succ m =>
+    rw [List.range_succ, List.map_append, List.map_cons, List.map_nil,
+      List.dropLast_concat]
+    rfl
+
 end Googology.Trans.BMS

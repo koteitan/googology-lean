@@ -54,7 +54,7 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | BMS 自身 | `BMS/Entries.lean` | — | 配列とその成分列が同じ展開をすること |
 | BMS 自身 | `BMS/TwoRow.lean` | — | 2 行の展開: `m₀` は 0 か 1 で、1 のとき行 0 に加算が入る |
 | BMS 自身 | `BMS/Anc.lean` | — | 行 0 の祖先関係を成分列から読み、計算できる形にして `BM4.anc` と一致することを示す |
-| BMS 自身 | `BMS/EntriesR.lean` | — | **どの行でも**同じこと。行数を問わず `parent A k` と `anc A k` を成分列から読み、計算する |
+| BMS 自身 | `BMS/EntriesR.lean` | — | **BMS の展開を行数によらず成分列の上に書き、それが `BM4.expand` であること** — だから走る |
 | BMS 自身 | `BMS/Entries2.lean` | — | **2 行の展開を成分列の上に書き、それが `BM4.expand` であること、そして走らせれば止まること** |
 | BMS 自身 | `BMS/Pair.lean` | — | ペア数列系を、ステップが走る `Rewrite` として与え、生成元も付ける |
 | BMS 自身 | `BMS/Cut.lean` | — | ブロック再帰 `expandL` が教科書どおりの規則であること: 最後の列を落とし、悪い部分を `N + 1` 回繰り返す |

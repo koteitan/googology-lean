@@ -191,15 +191,6 @@ theorem badRootL_none {A : Arr 2} (h : badRootL (entries2 A) = none) (h0 : A.len
 
 /-! ### Expansion on the entries -/
 
-theorem map_range_dropLast {α : Type} (n : Nat) (f : Nat → α) :
-    ((List.range n).map f).dropLast = (List.range (n - 1)).map f := by
-  cases n with
-  | zero => rw [List.range_zero, List.map_nil]; rfl
-  | succ m =>
-    rw [List.range_succ, List.map_append, List.map_cons, List.map_nil,
-      List.dropLast_concat]
-    rfl
-
 /-- **Two-row expansion, written on the entries.**  The good part is copied,
 then the bad part is written `N + 1` times, and on copy `q` the first row of a
 column takes `q` increments when its position is a row-`0` descendant of the
