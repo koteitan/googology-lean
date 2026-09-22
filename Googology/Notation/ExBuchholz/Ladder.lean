@@ -536,4 +536,41 @@ theorem exists_eps_index {α : Ordinal.{u}} (h : (ω : Ordinal.{u}) ^ α = α) :
 theorem eps_index_lt {γ : Ordinal.{u}} (h : eps.{u} γ < zeta0.{u}) : γ < eps.{u} γ :=
   lt_eps_self (lt_of_le_of_lt (self_le_eps γ) h)
 
+theorem eps0_le_zeta0 : eps0.{u} ≤ zeta0.{u} := by
+  rw [← eps_zero]
+  refine le_trans (le_of_eq ?_) (Ordinal.iterate_le_nfp eps.{u} 0 1)
+  rw [Function.iterate_one]
+
+/-- A fixed point of `ω ^ ·` above `ε_γ` is at least `ε_{γ+1}`. -/
+theorem eps_succ_le_of_opow_fp {γ a : Ordinal.{u}} (hfp : (ω : Ordinal.{u}) ^ a = a)
+    (h0 : eps.{u} γ < a) : eps.{u} (γ + 1) ≤ a := by
+  obtain ⟨δ, hδ⟩ := exists_eps_index hfp
+  rw [← hδ] at h0 ⊢
+  exact eps_mono (Order.succ_le_of_lt (eps_strictMono.lt_iff_lt.mp h0))
+
+/-- **Between `ε_γ` and `ε_{γ+1}` the logarithm is strictly smaller.** -/
+theorem log_lt_self_of_lt_eps_succ {γ a : Ordinal.{u}} (h0 : eps.{u} γ < a)
+    (h1 : a < eps.{u} (γ + 1)) : Ordinal.log (ω : Ordinal.{u}) a < a := by
+  rcases lt_or_ge (Ordinal.log (ω : Ordinal.{u}) a) a with h | h
+  · exact h
+  · exfalso
+    have heq : Ordinal.log (ω : Ordinal.{u}) a = a := le_antisymm (Ordinal.log_le_self _ _) h
+    have hne : a ≠ 0 := ne_of_gt (lt_trans (eps_pos γ) h0)
+    have hle : (ω : Ordinal.{u}) ^ a ≤ a := by
+      conv_lhs => rw [← heq]
+      exact Ordinal.opow_log_le_self _ hne
+    exact absurd h1 (not_lt.mpr (eps_succ_le_of_opow_fp
+      (le_antisymm hle (Ordinal.right_le_opow _ Ordinal.one_lt_omega0)) h0))
+
+theorem isSuccLimit_eps0 : Order.IsSuccLimit eps0.{u} :=
+  Ordinal.isSuccLimit_of_isPrincipal_add one_lt_eps0 isPrincipal_add_eps0
+
+theorem eps0_lt_zeta0 : eps0.{u} < zeta0.{u} := by
+  refine lt_of_lt_of_le ?_ (Ordinal.iterate_le_nfp eps.{u} 0 2)
+  rw [Function.iterate_succ_apply', Function.iterate_one, ← eps_zero]
+  exact eps_strictMono (by rw [eps_zero]; exact eps0_pos)
+
+theorem one_add_eps0 : 1 + eps0.{u} = eps0.{u} :=
+  Ordinal.IsPrincipal.add_eq_right isPrincipal_add_eps0 one_lt_eps0
+
 end Googology.Notation.ExBuchholz.Ord

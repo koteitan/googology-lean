@@ -120,7 +120,7 @@ says a row of zeros underneath changes neither the rule nor the ordinal, so
 
 `Eps0.lean` closes one row as ordinals — it names exactly those below `ε₀` —
 and carries `val`'s surjectivity up to `ε₁`, `EpsN.lean` carries it to every
-`ε_n`,
+`ε_n`, `Arg.lean` and `EpsBig.lean` carry it to `ε_{ε₀}`,
 `RankVal.lean` says the rank of the system is that same ordinal and computes
 the first two-row ranks, and `Append.lean` says expansion never reaches back
 across a block, which makes the rank additive over blocks.
@@ -339,7 +339,7 @@ one-row matrices name the ordinals below `ε₀` and no others.
 
 What is left of that is the Lean problem still open.
 
-* **`val` is onto above `ε_ω`.** The source states that `val` restricted to
+* **`val` is onto above `ε_{ε₀}`.** The source states that `val` restricted to
   `OT` is an order **isomorphism** onto `C_0(Λ)`. The monotone and injective
   half is here — `val_lt_val` and `val_inj_of_OT` — and surjectivity is proved
   below every `ε_n`: `Trans.BMS.exists_OT_of_lt_epsN`, by induction on `n`,
@@ -356,6 +356,33 @@ What is left of that is the Lean problem still open.
   nose. `Trans.BMS.existsUnique_OT_lt_teW` takes it to the limit: `val` is a
   bijection onto the ordinals below `ε_ω`, which the term
   `teW = ψ_0(ψ_1(1))` names.
+
+  Past that the term side follows the ordinal side. `Trans/BMS/Arg.lean`
+  builds the **argument term for `Ω·μ`** at every `μ < ε₀`: `Ω·ω^e` is
+  `ψ_1(e)` by `Ord.psi_one_eq`, so Cantor normal form turns `Ω·μ` into a sum
+  of `ψ_1` terms whose arguments are the all-nil terms for the exponents.
+  `Trans/BMS/EpsBig.lean` runs the leading-term construction over that
+  argument at every level `δ < ε₀`, so `val` is onto the ordinals below
+  `ε_{ε₀}`, and `Trans.BMS.existsUnique_OT_lt_teE` is the bijection onto
+  them, with `teE = ψ_0(ψ_1(ψ_0(Ω)))` naming `ε_{ε₀} = ψ_0(Ω·ε₀)`.
+
+  What makes the pieces compose is that the invariant is quantified over the
+  argument term: a term built at level `δ` has `G_0` of it below `W` plus it
+  for **every** `W` naming at least `Ω·(1+δ)`. The terms for the exponent and
+  for the remainder are built at the same level or below, so their invariants
+  are instantiated at the `W` in hand.
+
+  What is left between `ε_{ε₀}` and `ζ₀` is the argument term above `ε₀`.
+  `exists_argTerm` reads the exponents of `μ` off Cantor normal form and asks
+  for all-nil terms for them, which is what `exists_desc_of_lt_eps0` gives.
+  Above `ε₀` an exponent can be an ε-number, named only by a term built at a
+  level above its own index, so the argument terms and the values have to be
+  built by one induction rather than one after the other. The step that looks
+  like it needs an inverse of `ε` does not: `Ord.exists_eps_index` supplies
+  the index from `Ordinal.le_iff_deriv`, and `Ord.eps_index_lt` says it is
+  smaller. What that would reach is `ζ₀`, which is `ψ_0(Ω·ζ₀)` and the first
+  ordinal `ψ_0` and `ψ_1` together do not name — the two-level counterpart of
+  `ε₀`.
 
   The arithmetic above `ε₁` no longer has to be climbed a level at a time.
   `Notation/ExBuchholz/Eps.lean` proves `ψ_0(Ω·(n+1)) = ε_n` at every finite
