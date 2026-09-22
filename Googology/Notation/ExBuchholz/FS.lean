@@ -773,6 +773,12 @@ theorem tower_val_lt {Z₀ B : Term} (e1 : dom B ≠ nil) (e2 : dom B ≠ t1)
     fs B (tower Z₀ B i) < fs B (tower Z₀ B (i + 1)) :=
   fs_mono e1 e2 e3 (tower_lt e1 e2 e3 i)
 
+theorem tower_val_le_zero {Z₀ B : Term} (e1 : dom B ≠ nil) (e2 : dom B ≠ t1)
+    (e3 : dom B ≠ tw) : ∀ i : Nat, fs B (tower Z₀ B 0) ≤ fs B (tower Z₀ B i)
+  | 0 => le_refl _
+  | i + 1 => le_trans (tower_val_le_zero e1 e2 e3 i)
+      (le_of_lt (tower_val_lt e1 e2 e3 i))
+
 /-- Every rung of the tower is an admissible index for `B`. -/
 theorem tower_lt_dom {B : Term} (e1 : dom B ≠ nil) (e2 : dom B ≠ t1)
     (e3 : dom B ≠ tw) : ∀ i : Nat, tower (fs (subOf (dom B)) nil) B i < dom B := by

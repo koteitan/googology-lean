@@ -15,7 +15,7 @@ any `c` between them, together with `z`.  The chain is
 | 3.4 | `b ⊲_z a`, `G_u a < a`, `G_u z < b` ⟹ `G_u b < b` | **done** |
 | 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b`, `ψ_u(b₀) ⊲_z ψ_u(b)`, `ψ_{b₀}(0) ⊲_z ψ_b(0)` | **done** |
 | 3.2(b) | on a term-indexed domain, `z₁ < z₂` ⟹ `a[z₁] < a[z₂]` | **done** (`fs_mono`) |
-| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done**, given `TowerBound` |
+| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done**, given `SubBound` |
 | 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | not yet |
 
 3.4 is the one that does the work: it turns "bounded relative to `z`" into the
@@ -46,31 +46,32 @@ W₀ = ψ_{Z[0]}(0)        W_{i+1} = ψ_{Z[0]}(X₂[W_i])
 admissible index (`tower_lt_dom`).  Climbing needs 3.2(b), the monotonicity of
 `fs` in its index, which is `fs_mono` there.
 
-`Trian_case4` then proves the branch from one statement about that tower,
-`TowerBound`:
+`Trian_case4` then proves the branch from one statement, `SubBound`, about
+the tower's subscript `Z[0]` alone:
 
 ```
-X₂[W_i] ≤ c ≤ X₂  ⟹  G_u(W_i) ≼ {c} ∪ G_u(c) ∪ {0}
+X₂[W₀] ≤ c ≤ X₂  ⟹  G_u(Z[0]) ≼ {c} ∪ G_u(c) ∪ {0}
 ```
 
-That is Buchholz's second tower invariant, and it is the one place where his
-proof of 3.6 calls on 3.3: the rung `W_i` has to be a standard form before `G`
-on it can be bounded.  Buchholz proves 3.3 and 3.6 by one simultaneous
-induction, and splitting them, as here, is what leaves this open.
+`tower_G_le` carries that up the tower: the same bound then holds of every
+rung `W_i`, for every `c` between `X₂[W_i]` and `X₂`.  Its induction is on the
+rung, and it uses 3.6 at `X₂` and the monotonicity of the tower.
 
-The bound has to be relative to `c`.  Buchholz states his invariant in the
-absolute form `G_u(W_i) < X₂[W_i]`, which works in his system because his
-subscripts are numbers and `G` never enters them.  Here they are terms, `G`
-does enter them, and the absolute form is false: with `A = ψ_0(ψ_Ω(0))` and
-`X = ψ_Ω(ψ_{A+1}(0))`, the first rung is `ψ_A(0)`, which is also the value it
-produces, and `G_0` of it holds `ψ_Ω(0)`, which is above `ψ_A(0)` because `A`
-is countable.
+The bound has to be relative to `c`.  Buchholz's own invariant is the absolute
+`G_u(W_i) < X₂[W_i]`, which works in his system because his subscripts are
+numbers and `G` never enters them.  Here they are terms and it is false: with
+`A = ψ_0(ψ_Ω(0))` and `X = ψ_Ω(ψ_{A+1}(0))`, the first rung is `ψ_A(0)`, which
+is also the value it produces, and `G_0` of it holds `ψ_Ω(0)`, above `ψ_A(0)`
+because `A` is countable.
 
-`test/ExBuchholzCheck.lean` carries that term and checks `TowerBound` itself on
-every standard case-4 form of size at most 7 — 158 of them, countable or not —
-on four rungs, at every level of size at most 2, and against every candidate
-`c` of size at most 4.  The same run at size 8, over 651 forms, also passes.
-
+`SubBound` is the one place left where 3.6 calls on 3.3: it asks for something
+about `Z[0]` that the standardness of `X₂` has to supply.  Buchholz proves 3.3
+and 3.6 by one simultaneous induction, and splitting them, as here, is what
+leaves it open.  `test/ExBuchholzCheck.lean` carries the term above and checks
+`SubBound` on every standard case-4 form of size at most 7 — 158 of them,
+countable or not — at every level of size at most 2 and against every
+candidate `c` of size at most 4.  The same run at size 8, over 651 forms, also
+passes.
 -/
 
 namespace Googology.Notation.ExBuchholz.Term
@@ -502,16 +503,73 @@ theorem Trian.psi_sub {z u₀ u : Term} (h : Trian z u₀ u) :
   · rw [G_psi_of_not_le hvu]
     intro x hx; exact absurd hx (List.not_mem_nil)
 
-/-- Buchholz's second tower invariant, and the one place where his proof of
-Lemma 3.6 calls on Lemma 3.3: what `G` sees in a rung of the tower is bounded
-by any `c` between the value that rung produces and `X₂`.
--/
-def TowerBound : Prop :=
+/-- Buchholz's tower invariant, reduced to the tower's subscript: what `G`
+sees in `Z[0]` is bounded by anything between the first value the tower
+produces and `X₂`. -/
+def SubBound : Prop :=
   ∀ X₁ X₂ : Term, OT (cons X₁ X₂ nil) →
     dom X₂ ≠ nil → dom X₂ ≠ t1 → dom X₂ ≠ tw → ¬ (dom X₂ < cons X₁ X₂ nil) →
+    ∀ u c : Term,
+      fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ 0) ≤ c → c ≤ X₂ →
+      listLe (G u (fs (subOf (dom X₂)) nil)) (c :: (G u c ++ [nil]))
+
+/-- The tower bound follows from the same bound on the tower's subscript
+alone: no induction on the term, and none on the rung. -/
+theorem tower_G_le {X₂ : Term}
+    (e1 : dom X₂ ≠ nil) (e2 : dom X₂ ≠ t1) (e3 : dom X₂ ≠ tw)
+    (hIH : ∀ W : Term, W < dom X₂ → Trian W (fs X₂ W) X₂)
+    (hS : ∀ u c : Term,
+      fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ 0) ≤ c → c ≤ X₂ →
+      listLe (G u (fs (subOf (dom X₂)) nil)) (c :: (G u c ++ [nil]))) :
     ∀ (i : Nat) (u c : Term),
       fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ i) ≤ c → c ≤ X₂ →
-      listLe (G u (tower (fs (subOf (dom X₂)) nil) X₂ i)) (c :: (G u c ++ [nil]))
+      listLe (G u (tower (fs (subOf (dom X₂)) nil) X₂ i)) (c :: (G u c ++ [nil])) := by
+  intro i
+  induction i with
+  | zero =>
+    intro u c h1 h2
+    by_cases hu : u ≤ fs (subOf (dom X₂)) nil
+    · show listLe (G u (psi (fs (subOf (dom X₂)) nil) nil)) _
+      rw [G_psi_of_le hu, G_nil, List.append_nil]
+      intro x hx
+      rcases List.mem_cons.mp hx with rfl | hx
+      · exact ⟨nil, List.mem_cons_of_mem _ (List.mem_append_right _
+          (List.mem_cons_self ..)), le_refl nil⟩
+      · exact hS u c h1 h2 x hx
+    · show listLe (G u (psi (fs (subOf (dom X₂)) nil) nil)) _
+      rw [G_psi_of_not_le hu]
+      intro x hx; exact absurd hx List.not_mem_nil
+  | succ k ihk =>
+    intro u c h1 h2
+    have hYk : fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ k) ≤ c :=
+      le_trans (le_of_lt (tower_val_lt e1 e2 e3 k)) h1
+    have h0 : fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ 0) ≤ c :=
+      le_trans (tower_val_le_zero e1 e2 e3 (k + 1)) h1
+    by_cases hu : u ≤ fs (subOf (dom X₂)) nil
+    · show listLe (G u (psi (fs (subOf (dom X₂)) nil)
+        (fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ k)))) _
+      rw [G_psi_of_le hu]
+      intro x hx
+      rcases List.mem_cons.mp hx with rfl | hx
+      · exact ⟨c, List.mem_cons_self .., hYk⟩
+      rcases List.mem_append.mp hx with hx | hx
+      · exact hS u c h0 h2 x hx
+      · rcases le_iff_lt_or_eq.mp hYk with hlt | heq
+        · obtain ⟨y, hy, hxy⟩ :=
+            (hIH _ (tower_lt_dom e1 e2 e3 k)).2 u c hlt h2 x hx
+          rcases List.mem_append.mp hy with hy | hy
+          · exact ⟨y, List.mem_cons_of_mem _ (List.mem_append_left _ hy), hxy⟩
+          · rcases List.mem_cons.mp hy with rfl | hy
+            · exact ⟨nil, List.mem_cons_of_mem _ (List.mem_append_right _
+                (List.mem_cons_self ..)), hxy⟩
+            · obtain ⟨z, hz, hyz⟩ := ihk u c hYk h2 y hy
+              exact ⟨z, hz, le_trans hxy hyz⟩
+        · rw [heq] at hx
+          exact ⟨x, List.mem_cons_of_mem _ (List.mem_append_left _ hx), le_refl x⟩
+    · show listLe (G u (psi (fs (subOf (dom X₂)) nil)
+        (fs X₂ (tower (fs (subOf (dom X₂)) nil) X₂ k)))) _
+      rw [G_psi_of_not_le hu]
+      intro x hx; exact absurd hx List.not_mem_nil
 
 theorem Trian_case4 {X₁ X₂ : Term}
     (e1 : dom X₂ ≠ nil) (e2 : dom X₂ ≠ t1) (e3 : dom X₂ ≠ tw)
@@ -561,7 +619,7 @@ theorem Trian_case4 {X₁ X₂ : Term}
   · rw [G_psi_of_not_le hvu]
     intro x hx; exact absurd hx List.not_mem_nil
 
-theorem Trian_fs_aux (H : TowerBound) :
+theorem Trian_fs_aux (H : SubBound) :
     ∀ n : Nat, ∀ X Y : Term, size X ≤ n → OT X → Y < dom X → Trian Y (fs X Y) X := by
   intro n
   induction n with
@@ -633,7 +691,7 @@ theorem Trian_fs_aux (H : TowerBound) :
               exact Trian.psi_left X₁ (ih X₂ Y (by omega) (OT_snd hOT) hY)
             · have hIH : ∀ W : Term, W < dom X₂ → Trian W (fs X₂ W) X₂ :=
                 fun W hW => ih X₂ W (by omega) (OT_snd hOT) hW
-              have hBd := H X₁ X₂ hOT h1 h2 h3 h4
+              have hBd := tower_G_le h1 h2 h3 hIH (H X₁ X₂ hOT h1 h2 h3 h4)
               by_cases hn : Y ≠ nil ∧ isNum Y = true
               · have hYn : Y = numeral (numVal Y) := eq_numeral_numVal Y hn.2
                 rw [hYn]
@@ -649,8 +707,8 @@ theorem Trian_fs_aux (H : TowerBound) :
                 rw [he]
                 exact Trian.of_nil (Trian_case4 h1 h2 h3 h4 hIH hBd 0)
 
-/-- **Buchholz 3.6** for the extended system, modulo `TowerBound`. -/
-theorem Trian_fs (H : TowerBound) {X Y : Term} (hOT : OT X) (h : Y < dom X) :
+/-- **Buchholz 3.6** for the extended system, modulo `SubBound`. -/
+theorem Trian_fs (H : SubBound) {X Y : Term} (hOT : OT X) (h : Y < dom X) :
     Trian Y (fs X Y) X :=
   Trian_fs_aux H (size X) X Y (Nat.le_refl _) hOT h
 

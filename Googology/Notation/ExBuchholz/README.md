@@ -175,7 +175,7 @@ together with `z`.
 | 3.4 | `b ⊲_z a`, `G_u a < a`, `G_u z < b` ⟹ `G_u b < b` | **done** |
 | 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b`, `ψ_u(b₀) ⊲_z ψ_u(b)`, `ψ_{b₀}(0) ⊲_z ψ_b(0)` | **done** |
 | 3.2(b) | on a term-indexed domain, `z₁ < z₂` ⟹ `a[z₁] < a[z₂]` | **done** (`fs_mono`) |
-| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done**, given `TowerBound` |
+| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done**, given `SubBound` |
 | 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | not yet |
 
 3.4 is where the work is: it turns "bounded relative to `z`" into the
@@ -200,30 +200,32 @@ W₀ = ψ_{Z[0]}(0)    W_{i+1} = ψ_{Z[0]}(X₂[W_i])
 admissible index (`tower_lt_dom`). Climbing needs 3.2(b), the monotonicity of
 `fs` in its index, which is `fs_mono` there.
 
-`Trian_case4` then proves the branch from one statement about that tower,
-`TowerBound`:
+`Trian_case4` then proves the branch from one statement, `SubBound`, about
+the tower's subscript `Z[0]` alone:
 
 ```
-X₂[W_i] ≤ c ≤ X₂  ⟹  G_u(W_i) ≼ {c} ∪ G_u(c) ∪ {0}
+X₂[W₀] ≤ c ≤ X₂ ⟹ G_u(Z[0]) ≼ {c} ∪ G_u(c) ∪ {0}
 ```
 
-That is Buchholz's second tower invariant, and it is the one place where his
-proof of 3.6 calls on 3.3: the rung `W_i` has to be a standard form before `G`
-on it can be bounded. Buchholz proves 3.3 and 3.6 by one simultaneous
-induction, and splitting them, as here, is what leaves this open.
+`tower_G_le` carries that up the tower: the same bound then holds of every
+rung `W_i`, for every `c` between `X₂[W_i]` and `X₂`. Its induction is on the
+rung, and it uses 3.6 at `X₂` and the monotonicity of the tower.
 
-The bound has to be relative to `c`. Buchholz states his invariant in the
-absolute form `G_u(W_i) < X₂[W_i]`, which works in his system because his
-subscripts are numbers and `G` never enters them. Here they are terms, `G`
-does enter them, and the absolute form is false: with `A = ψ_0(ψ_Ω(0))` and
-`X = ψ_Ω(ψ_{A+1}(0))`, the first rung is `ψ_A(0)`, which is also the value it
-produces, and `G_0` of it holds `ψ_Ω(0)`, which is above `ψ_A(0)` because `A`
-is countable.
+The bound has to be relative to `c`. Buchholz's own invariant is the absolute
+`G_u(W_i) < X₂[W_i]`, which works in his system because his subscripts are
+numbers and `G` never enters them. Here they are terms and it is false: with
+`A = ψ_0(ψ_Ω(0))` and `X = ψ_Ω(ψ_{A+1}(0))`, the first rung is `ψ_A(0)`, which
+is also the value it produces, and `G_0` of it holds `ψ_Ω(0)`, above `ψ_A(0)`
+because `A` is countable.
 
-`test/ExBuchholzCheck.lean` carries that term and checks `TowerBound` itself on
-every standard case-4 form of size at most 7 — 158 of them, countable or not —
-on four rungs, at every level of size at most 2, and against every candidate
-`c` of size at most 4. The same run at size 8, over 651 forms, also passes.
+`SubBound` is the one place left where 3.6 calls on 3.3: it asks for something
+about `Z[0]` that the standardness of `X₂` has to supply. Buchholz proves 3.3
+and 3.6 by one simultaneous induction, and splitting them, as here, is what
+leaves it open. `test/ExBuchholzCheck.lean` carries the term above and checks
+`SubBound` on every standard case-4 form of size at most 7 — 158 of them,
+countable or not — at every level of size at most 2 and against every
+candidate `c` of size at most 4. The same run at size 8, over 651 forms, also
+passes.
 
 Then 3.3 assembles 3.4 and 3.6.
 
@@ -257,8 +259,8 @@ Then 3.3 assembles 3.4 and 3.6.
 | Buchholz 3.4 and 3.5 for `⊲` | done (`Closure.lean`) |
 | Buchholz 3.2(b): `fs` monotone in its index | done (`fs_mono`) |
 | the tower of case 4, and `(ψ_{X₁}(X₂))[n̲] = ψ_{X₁}(X₂[W_n])` | done (`tower`, `fs_numeral`) |
-| Buchholz 3.6: `z ∈ dom a → a[z] ⊲_z a` | done given `TowerBound` (`Trian_fs`) |
-| `TowerBound` itself | **not proved**; checked by computation on 158 case-4 forms |
+| Buchholz 3.6: `z ∈ dom a → a[z] ⊲_z a` | done given `SubBound` (`Trian_fs`) |
+| `SubBound` itself | **not proved**; checked by computation on 158 case-4 forms |
 | `OT` and `· < Ω` preserved by the step | **not proved** — the last gap; checked by computation in `test/ExBuchholzCheck.lean` |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no

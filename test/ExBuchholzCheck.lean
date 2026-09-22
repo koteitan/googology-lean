@@ -72,9 +72,10 @@ standard. -/
 
 /-! ## The tower of Buchholz's case 4
 
-`Closure.lean` proves Lemma 3.6 from one statement, `TowerBound`: what `G`
-sees in a rung `W_i` of the tower is bounded by any `c` between the value
-`X₂[W_i]` that rung produces and `X₂` itself, together with `0`.
+`Closure.lean` proves Lemma 3.6 from one statement, `SubBound`: what `G` sees
+in the tower's subscript `Z[0]` is bounded by any `c` between `X₂[W₀]`, the
+first value the tower produces, and `X₂` itself, together with `0`.
+`tower_G_le` carries that bound up the whole tower.
 -/
 
 /-- Is `X = ψ_{X₁}(X₂)` in the configuration of Buchholz's case 4? -/
@@ -84,8 +85,12 @@ def isCase4 : Term → Bool
         && !(decide (dom X₂ < cons X₁ X₂ nil))
   | _ => false
 
-/-- The `i`-th rung `W_i` of the tower, the value `X₂[W_i]` it produces, and
-the argument `X₂`. -/
+/-- The tower's subscript `Z[0]`, its `i`-th rung `W_i`, the value `X₂[W_i]`
+that rung produces, and `X₂` itself. -/
+def zsub : Term → Term
+  | cons _ X₂ nil => fs (subOf (dom X₂)) nil
+  | _ => nil
+
 def rung : Term → Nat → Term
   | cons _ X₂ nil, i => tower (fs (subOf (dom X₂)) nil) X₂ i
   | _, _ => nil
@@ -98,34 +103,35 @@ def argOf : Term → Term
   | cons _ X₂ _ => X₂
   | nil => nil
 
-/-- `TowerBound` at one level `u` and one `c`. -/
-def towerRel (X : Term) (i : Nat) (u c : Term) : Bool :=
-  (G u (rung X i)).all fun x => (c :: (G u c ++ [nil])).any fun y => decide (x ≤ y)
+/-- `SubBound` at one level `u` and one `c`. -/
+def subRel (X : Term) (u c : Term) : Bool :=
+  (G u (zsub X)).all fun x => (c :: (G u c ++ [nil])).any fun y => decide (x ≤ y)
 
-/-- Those members of `cs` that lie between `X₂[W_i]` and `X₂`. -/
-def betweens (X : Term) (i : Nat) (cs : List Term) : List Term :=
-  cs.filter fun c => decide (rungVal X i ≤ c) && decide (c ≤ argOf X)
+/-- Those members of `cs` that lie between `X₂[W₀]` and `X₂`. -/
+def betweens (X : Term) (cs : List Term) : List Term :=
+  cs.filter fun c => decide (rungVal X 0 ≤ c) && decide (c ≤ argOf X)
 
 /-! A case-4 form need not be countable, so the check runs over every standard
 form, not only `ctbl`. -/
 
 #guard ((upTo 7).filter (fun X => isOT X && isCase4 X)).length == 158
 
-/-! **The check.**  Each of those 158 forms, on four rungs, at every level of
-size at most 2, against `X₂[W_i]`, `X₂`, and every term of size at most 4 in
-between.  The same run at size 8 (651 forms, levels up to size 3, terms up to
-size 5) also passes; only size 7 is kept here, to keep the build quick. -/
+/-! **The check.**  Each of those 158 forms, at every level of size at most 2,
+against `X₂[W₀]`, `X₂`, and every term of size at most 4 in between.  The same
+run at size 8 (651 forms, levels up to size 3, terms up to size 5) also
+passes; only size 7 is kept here, to keep the build quick. -/
 
 #guard ((upTo 7).filter (fun X => isOT X && isCase4 X)).all fun X =>
-  (List.range 4).all fun i =>
-    (upTo 2).all fun u =>
-      (rungVal X i :: argOf X :: betweens X i (upTo 4)).all fun c =>
-        towerRel X i u c
+  (upTo 2).all fun u =>
+    (rungVal X 0 :: argOf X :: betweens X (upTo 4)).all fun c => subRel X u c
 
-/-! The bound has to be relative to `c`; "below `X₂[W_i]`" is false.  Write
-`A = ψ_0(ψ_Ω(0))`.  For `X = ψ_Ω(ψ_{A+1}(0))` the first rung is `ψ_A(0)`,
-which is also the value it produces, and `G_0` of it holds `ψ_Ω(0)`, which is
-above `ψ_A(0)` because `A` is countable. -/
+/-! The bound that `tower_G_le` carries up the tower has to be relative to
+`c`.  Buchholz's own invariant is the absolute `G_u(W_i) < X₂[W_i]`, which
+works in his system because his subscripts are numbers and `G` never enters
+them.  Here they are terms.  Write `A = ψ_0(ψ_Ω(0))`.  For
+`X = ψ_Ω(ψ_{A+1}(0))` the first rung is `ψ_A(0)`, which is also the value it
+produces, and `G_0` of it holds `ψ_Ω(0)`, which is above `ψ_A(0)` because `A`
+is countable. -/
 
 def caseA : Term := psi nil (psi tW nil)
 def caseX : Term := psi t1 (psi (cons nil (psi tW nil) t1) nil)
@@ -133,6 +139,6 @@ def caseX : Term := psi t1 (psi (cons nil (psi tW nil) t1) nil)
 #guard isOT caseX && isCase4 caseX
 #guard rung caseX 0 == psi caseA nil && rungVal caseX 0 == psi caseA nil
 #guard !((G nil (rung caseX 0)).all (fun x => decide (x < rungVal caseX 0)))
-#guard towerRel caseX 0 nil (rungVal caseX 0)
+#guard subRel caseX nil (rungVal caseX 0)
 
 end Googology.Notation.ExBuchholz.Term
