@@ -495,6 +495,69 @@ theorem step_lt {X : Term} (hOT : OT X) (hlt : X < tW) (hne : X ≠ nil) (n : Na
     fs X (idx X n) < X :=
   fs_lt (idx_lt_dom hOT hlt hne n)
 
+/-! ## Towards closure
+
+`step_lt` says the step decreases.  What is still missing for `exb.WF` is that
+it keeps a term standard.  The sum branch of that is below, together with the
+facts about `G` the other branches will read.  The branch that is not here is
+the one for a collapse at a limit, and it needs a substitution lemma for `G`:
+from `G a b < b`, conclude `G a (b[W]) < b[W]`.  That does not follow from the
+inequality alone, since `b[W] < b`; it has to be read off the shape of `b[W]`,
+which is why Buchholz states it separately.
+-/
+
+/-- A larger subscript collects less: `G` is antitone in its first argument. -/
+theorem G_subset_of_le {a a' : Term} (h : a ≤ a') :
+    ∀ t : Term, ∀ z ∈ G a' t, z ∈ G a t := by
+  intro t
+  induction t with
+  | nil => intro z hz; cases hz
+  | cons c d r ihc ihd ihr =>
+    intro z hz
+    rw [G_cons] at hz ⊢
+    rcases List.mem_append.mp hz with hz | hz
+    · refine List.mem_append_left _ ?_
+      split at hz
+      · next hac =>
+        rw [if_pos (le_trans h hac)]
+        rcases List.mem_cons.mp hz with rfl | hz
+        · exact List.mem_cons_self ..
+        refine List.mem_cons_of_mem _ ?_
+        rcases List.mem_append.mp hz with hz | hz
+        · exact List.mem_append_left _ (ihc z hz)
+        · exact List.mem_append_right _ (ihd z hz)
+      · cases hz
+    · exact List.mem_append_right _ (ihr z hz)
+
+/-- Standardness of a collapse is inherited by any larger subscript. -/
+theorem OT_psi_of_le {a a' b : Term} (h : a ≤ a') (hOT : OT (psi a b))
+    (ha' : OT a') : OT (psi a' b) := by
+  have hb : OT b := OT_snd hOT
+  have hG : ∀ z ∈ G a b, z < b := OT_G_lt hOT
+  simp only [OT, isOT, descHead, head?, Bool.and_eq_true, List.all_eq_true,
+    decide_eq_true_eq]
+  exact ⟨⟨⟨⟨ha', hb⟩, fun z hz => hG z (G_subset_of_le h b z hz)⟩, trivial⟩, trivial⟩
+
+theorem descHead_of_headLe {a b t : Term} (h : HeadLe (psi a b) t) :
+    descHead a b t = true := by
+  cases t with
+  | nil => rfl
+  | cons c d u => exact decide_eq_true h
+
+/-- Expanding a tail keeps it below the head. -/
+theorem headLe_fs {p t Y : Term} (h : HeadLe p t) (hY : Y < dom t) :
+    HeadLe p (fs t Y) :=
+  headLe_of_lt h (fs_lt hY)
+
+/-- **The sum branch of the closure**: expanding the tail of a standard form
+keeps it standard, granting that the tail stays standard. -/
+theorem OT_cons_fs {X₁ X₂ t Y : Term} (hOT : OT (cons X₁ X₂ t))
+    (ht : OT (fs t Y)) (hY : Y < dom t) : OT (cons X₁ X₂ (fs t Y)) := by
+  simp only [OT, isOT, Bool.and_eq_true] at hOT ⊢
+  exact ⟨⟨hOT.1.1, ht⟩,
+    descHead_of_headLe (headLe_fs (OT_headLe_tail (by
+      simp only [OT, isOT, Bool.and_eq_true]; exact hOT)) hY)⟩
+
 /-! ## As an expansion system -/
 
 /-- Extended Buchholz terms as an expansion system: one step is the

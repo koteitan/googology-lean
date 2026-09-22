@@ -94,6 +94,7 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | **the fundamental sequence descends**: `Y < dom X → X[Y] < X` | **done** (`fs_lt`) |
 | below `Ω`, a standard form other than `0` is a successor or an `ω`-limit | done (`dom_eq_one_or_tw`) |
 | **one step strictly decreases a countable standard form** | **done** (`step_lt`) |
+| `G` antitone in the subscript; the sum branch of the closure | done (`G_subset_of_le`, `OT_cons_fs`) |
 | `OT` and `· < Ω` preserved by the step | **not proved** — the last gap; checked by computation in `test/ExBuchholzCheck.lean` |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
