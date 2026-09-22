@@ -40,7 +40,7 @@ which is the whole content of the extension.
 | `WF.lean` | `not_wellFounded_lt`, `cmp_cons_cons'`, `OT_head`, `OT_tail`, `OT_tail_head_le`, `OTLt`, `acc_nil` |
 | `Sum.lean` | `leadCount`, `dropLead`, `lead_lex`, `acc_of_headLe`, `acc_of_OT`, `wellFounded_OTLt` |
 | `Ord.lean` | the ordinal side: `Omega`, `Clos`, `CSet`, `psi`, the cardinality bound, `psi_lt_Omega_succ`, `psi_notMem`, `Omega_le_psi`, `psi_mono` (needs mathlib) |
-| `Eval.lean` | `Term.val`, the evaluation into `Ordinal` (needs mathlib) |
+| `Eval.lean` | `Term.val`, the evaluation into `Ordinal`; `Lam` and `val_lt_Lam` (needs mathlib) |
 
 ## The order
 
@@ -83,6 +83,7 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | `ψ ∉ C_v(a)`, `Ω_v ≤ ψ_v(a)`, monotonicity in the argument | done |
 | the closure is downward closed; `ψ_v(a)` is additively principal | done |
 | the evaluation `Term → Ordinal` | defined |
+| term values are never fixed points of `v ↦ ω_v` | done |
 | its monotonicity on `OT` | **not done** — see below |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
