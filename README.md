@@ -141,4 +141,5 @@ MIT. See [LICENSE](LICENSE).
 Current state: `Core/` is complete. `Notation/ExBuchholz` is finished, as a
 notation system and as an expansion system: its termination is proved with
 nothing assumed. `Notation/BMS` terminates for every number of rows. `Trans/`
-is empty; `plan.md` says what would go there.
+has its first entry, the one-row reading of a Bashicu matrix as an extended
+Buchholz term; `plan.md` says what is still missing there.

@@ -138,4 +138,5 @@ MIT ライセンス。[LICENSE](LICENSE) を参照。
 
 現状：`Core/` は完成。`Notation/ExBuchholz` は表記系としても展開系としても完成
 した。停止性は何も仮定せずに証明してある。`Notation/BMS` はどの行数でも停止する。
-`Trans/` は空で、そこに何を置くかは `plan-ja.md` にある。
+`Trans/` には最初の項目が入った。1 行の Bashicu 行列を拡張ブーフホルツ項として
+読む写像である。何が足りないかは `plan-ja.md` にある。

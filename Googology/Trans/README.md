@@ -48,4 +48,4 @@ let it be read as one of the theorems above.
 
 | pair | file | structure | status |
 |---|---|---|---|
-| — | — | — | none yet |
+| BMS, extended Buchholz's ψ | `BMS/ExBuchholz.lean` | `Sim`, eventually | the reading `read` for one row, and that it is countable |
