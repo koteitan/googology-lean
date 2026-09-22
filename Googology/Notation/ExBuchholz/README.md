@@ -113,7 +113,7 @@ The reference states that `o` restricted to `OT` is an order **isomorphism**
 onto `C_0(Λ)`. The monotone and injective halves are theorems here
 (`val_lt_val`, `val_inj_of_OT`); surjectivity is not.
 
-## Well-foundedness: what is done and what remains
+## Well-foundedness: how it was closed
 
 `Sum.lean` proves
 
@@ -137,16 +137,17 @@ for free, since `OTLt y t` demands `OT t`.
 `acc_of_headLe` needs no global hypothesis at all: accessibility of the
 bounding term is what its induction runs on.
 
-**What remains** is `HP` itself:
+What that left is `HP` itself:
 
 ```
 ∀ a b, OT (ψ_a(b)) → Acc OTLt (ψ_a(b))
 ```
 
-This is the collapsing argument. The route taken here is the ordinal one:
-`Ord.lean` defines `ψ` on the ordinals from Maksudov's clauses, and the plan is
-an evaluation `Term → Ordinal` whose monotonicity on `OT` pulls
-well-foundedness back along `OrdHom.wf`.
+This is the collapsing argument, and it is **done**. The route taken is the
+ordinal one: `Ord.lean` defines `ψ` on the ordinals from Maksudov's clauses,
+`Eval.lean` evaluates terms into them, and `Mono.lean` proves the evaluation
+strictly monotone on `OT` (`val_lt_val`), which pulls well-foundedness back
+along `OrdHom.wf` as `OTLt_wf`.
 
 `Ord.lean` now has the cardinality bound. The closure is presented as the
 union of finite stages, each stage is at most `max #(Iio Ω_v) ℵ₀` by cardinal
@@ -155,15 +156,17 @@ arithmetic, and that maximum is `ℵ_v` for every `v` — including `v = 0`, whe
 closure cannot exhaust the ordinals below `Ω_{v+1}`, so
 `ψ_v(a) < Ω_{v+1}`.
 
-`Eval.lean` defines `Term.val`. What is left is its monotonicity on `OT`, and
-the reason it is not immediate is worth recording: weak monotonicity of `ψ_v`
-in the argument is not enough, because `ψ_v(a) = ψ_v(a+1)` does happen —
-exactly when `a` is not reachable inside `C_v(a)`. Strictness is what the
+`Eval.lean` defines `Term.val` and `Mono.lean` proves it monotone on `OT`.
+Why that was not immediate is worth recording: weak monotonicity of `ψ_v` in
+the argument is not enough, because `ψ_v(a) = ψ_v(a+1)` does happen — exactly
+when `a` is not reachable inside `C_v(a)`. Strictness is what the
 standard-form condition buys. The header of `Eval.lean` lists the four steps.
-The syntactic alternative —
-Buchholz's sets `W_u` and the Bachmann property — was not taken because it
-needs fundamental sequences for the extended system first, and those have no
-source here that has been checked.
+
+The syntactic alternative — Buchholz's sets `W_u` and the Bachmann property —
+was not taken for well-foundedness, because at the time the fundamental
+sequences for the extended system had not been checked against a source. They
+have been since, and the Bachmann property is now a theorem here, but for
+Lemma 3.3 and the termination of the expansion system rather than for this.
 
 ### The route to the last lemma
 
@@ -250,11 +253,12 @@ one statement about `B` alone, `Bachmann`:
 
 The fundamental sequence of `B` at the tower's first index overshoots
 everything `G` sees in `B` at the level of the collapse. That is the
-Bachmann property, and it is the only thing the library still assumes.
+Bachmann property, and it is proved below.
 
 `System.lean` carries that through to the end: `exbOT` is the expansion system
 restricted to the countable standard forms, and `exbOT_wf` and
-`exbOT_terminates` are proved from `Bachmann` and nothing else.
+`exbOT_terminates` follow from `Bachmann`, which is a theorem, so they hold
+outright.
 
 The route to `Bachmann` itself is an induction on `B`, one case per branch of
 `dom`, and the cases are not uniform.  Writing `P(V)` for `ψ_V(0)`:
