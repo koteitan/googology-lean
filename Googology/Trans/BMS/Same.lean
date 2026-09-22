@@ -29,9 +29,8 @@ about which matrices those are.
 `bmsL_zero_sim_one` puts the picture together: composing this file's two
 equivalences with `BMS/Embed.lean`'s `primHomPair` gives `bmsL 0` inside
 `bmsL 1`, which is the first step of the hierarchy.  The step from `r` to
-`r + 1` in general is not here; it needs the rule-level statement that a row
-of zeros underneath changes nothing at every number of rows, which
-`BMS/Zero.lean` proves only for one row inside two.
+`r + 1` in general is `BMS/ZeroRow.lean`'s `bmsL_homSucc`, proved on the
+entries rather than through one and two rows.
 
 `prim_wf` and `bmsL_zero_wf` close the `Rewrite` API at one row: the relation
 is well founded, not merely terminating, so `Rewrite.rankEval` applies and

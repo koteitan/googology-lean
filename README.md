@@ -25,9 +25,11 @@ Names are written relative to `Googology`.
 | BMS carries an ordinal measure | `Notation.BMS.bmsEval` |
 | **every Bashicu matrix expansion, written on the entries, is `BM4.expand`** — so it runs, at any number of rows | `Trans.BMS.entriesR_expand` |
 | the one-row, two-row and general rules are one rule | `Trans.BMS.expandRL_one`, `Trans.BMS.expandRL_two` |
-| and a row of zeros underneath changes nothing | `Trans.BMS.expand2L_withZero` |
+| and a row of zeros underneath changes nothing, for one row inside two | `Trans.BMS.expand2L_withZero` |
 | **the primitive sequence system sits inside the pair sequence system** | `Trans.BMS.primHomPair`, `Trans.BMS.withZero_std` |
 | so does `bmsL 0` inside `bmsL 1`, the first step of the hierarchy | `Trans.BMS.bmsL_zero_sim_one` |
+| **and a row of zeros underneath changes nothing at every number of rows** | `Trans.BMS.expandRL_zeroRow` |
+| so `r + 1` rows sit inside `r + 2`, standard matrices and all matrices | `Trans.BMS.bmsL_homSucc`, `Trans.BMS.bmsAllL_homSucc` |
 | the systems on the entries, with their generators | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
 | the general system at one and two rows is the primitive and pair sequence system | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
 | from a generator, any expansion sequence ends | `Notation.BMS.bmsStd_terminates`, `Notation.DBMS.dbmsStd_terminates`, `Trans.BMS.bmsLStd_terminates` |

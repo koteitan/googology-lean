@@ -353,4 +353,26 @@ theorem does not claim: `./bms -s` says so for the four below. -/
 #guard ([[0,1,2], [0,1,1], [0,1,2,1,1], [0,1,0,1]] : List (List Nat)).all fun l =>
   (List.range 3).all fun n => expand2L n (withZero l) == withZero (expandL n 0 l)
 
+/-! ### A row of zeros underneath, at any number of rows
+
+`Trans.BMS.expandRL_zeroRow` says the same at every number of rows, and
+`./bms` agrees: `(0,0)(1,1)(2,2)(1,1)[2]` and `(0,0,0)(1,1,0)(2,2,0)(1,1,0)[2]`
+give the same matrix, one with the zero row and one without. -/
+
+#guard expandRL 3 2 (zeroRow [[0,0],[1,1],[2,2],[1,1]])
+  == zeroRow [[0,0],[1,1],[2,2],[1,0],[2,1],[3,2],[2,0],[3,1],[4,2]]
+#guard ([[[0,0],[1,1],[2,2],[1,1]], [[0,0],[1,1],[2,1]], [[0,0],[1,1],[2,2],[3,1]]]
+    : List (List (List Nat))).all fun l =>
+  (List.range 3).all fun n => expandRL 3 n (zeroRow l) == zeroRow (expandRL 2 n l)
+#guard ([[[0,0,0],[1,1,1],[2,1,0]], [[0,0,0],[1,1,1],[2,2,2],[3,3,3]]]
+    : List (List (List Nat))).all fun l =>
+  (List.range 3).all fun n => expandRL 4 n (zeroRow l) == zeroRow (expandRL 3 n l)
+
+/-! `Trans.BMS.expandRL_gen`: the generator with one more row expands to the
+generators with one fewer, with the zero row already underneath. Against
+`./bms "(0,0,0)(1,1,1)[3]"` and `./bms "(0,0,0,0)(1,1,1,1)[2]"`. -/
+
+#guard expandRL 3 3 [[0,0,0],[1,1,1]] == zeroRow [[0,0],[1,1],[2,2],[3,3]]
+#guard expandRL 4 2 [[0,0,0,0],[1,1,1,1]] == zeroRow [[0,0,0],[1,1,1],[2,2,2]]
+
 end Googology.Trans.BMS

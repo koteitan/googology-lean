@@ -263,18 +263,13 @@ generators; the one-row, two-row and general forms are proved to be one
 another. One row is settled all the way to the ordinals, in both directions
 and as an equivalence.
 
-One thing is a Lean problem and two are not.
+The hierarchy is settled too: `BMS/ZeroRow.lean` says a row of zeros
+underneath changes nothing at every number of rows, and the generator
+`(0,…,0)(1,…,1)` with `r + 2` rows expands at `N` to the generators with
+`r + 1` rows and that zero row already in place, so `bmsL r` sits inside
+`bmsL (r + 1)` and the same for all matrices.
 
-* **The hierarchy step from `r` to `r + 1`.** `BMS/Embed.lean` puts one row
-  inside two: the two-row generator `(0,0)(1,1)` expands to the one-row
-  generators with a zero row underneath, and `BMS/Zero.lean` says the rule
-  does not notice the extra row. The same argument should run at every `r` —
-  `(0,…,0)(1,…,1)` expands at `N` to `stair r N` with a zero row, which the
-  three-row expansions in `test/TransCheck.lean` show. What it needs is the
-  rule-level statement at every `r`, and that means matching `parent A k` and
-  `anc A k` across the two row counts. Mechanical, and not yet written.
-
-The other two are not Lean problems.
+The two things left are not Lean problems.
 
 * **A reading for two rows and up.** It needs a stated definition of the map
   from matrices to ordinals. The sources checked give worked values, not a
