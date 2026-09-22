@@ -116,24 +116,24 @@ the plain shape, proved: the head lands by a size argument through
 `lt_of_size_lt_addT`, and the tail by the same statement at `t` with the head
 appended to the prefix.
 
-Of the three principal branches, `ψ_a(0)` with `dom a = 1` is `bach_succ`,
-proved: it splits on where `x` sits relative to the prefix — below it, equal
-to it, or above it — and the third case closes through `le_pred_of_lt` and a
-size argument.
+The Bachmann property is proved, and the argument turned out not to need the
+contexts at all.  Three facts do the work:
 
-The other two reduce, but to statements in other contexts.  `ψ_a(0)` with
-`dom a ∉ {0,1}` is the `P` shape at `a` under the same prefix, because
-`G_u(ψ_a(0))` is `{0}` together with `G_u(a)` and the conclusion is about
-`ψ_{a[W]}(0)`.  `ψ_a(b)` with `dom b < V` splits three ways: `G_u(a)` by a
-size argument, `G_u(b)` by the shape whose context is `p + ψ_a(−)`, and the
-argument `b` itself by the plain shape at `b` **at level `a`**, whose
-hypothesis is exactly `OT_G_lt` on `OT (ψ_a(b))`.  That last step is why the
-induction has to quantify over the level rather than fix it.
+* `size_fs_W0` — the fundamental sequence at the tower's first index loses
+  exactly one node: `size (V[W₀]) + 1 = size V`;
+* `G_size_succ_lt` — on a term-indexed domain `G` sees only things at least
+  two nodes smaller: `size x + 1 < size V`;
+* `no_small_between` — nothing that small lies strictly between `V[W₀]` and
+  `V`.
 
-The contexts do not close up.  The sum branch of the `P` shape asks for
-`ψ_{p + ψ_α(β) + (−)}(0)`, and so on, so the induction wants a general context
-rather than the three shapes.  Finding the right closure condition on contexts
-is what is left.
+Given those, `bach_pre` is a trichotomy on `x` against `p + V[W₀]`: below it,
+done; equal to it, impossible on size; above it, and then `addT_between`
+produces a `y` with `V[W₀] < y < V` and `size y + 1 < size V`, which
+`no_small_between` rules out.  `bachmann` is `bach_pre` with an empty prefix,
+its hypothesis being `OT_G_lt` on `OT (ψ_A(B))`.
+
+So 3.3, 3.6, `SubBound`, the tower invariant of case 4, and the termination of
+the expansion system in `System.lean` all hold outright.
 
 The prefix cannot be dropped. For `V = ψ_Ω(0) + ψ_1(ψ_Ω(0))`, which is
 standard with a term-indexed domain, `G_1` sees `ψ_Ω(0)` in the tail — the
@@ -1191,6 +1191,281 @@ theorem G_cons_eq (u a b t : Term) : G u (cons a b t) = G u (psi a b) ++ G u t :
 domain. -/
 def W0 (V : Term) : Term := psi (fs (subOf (dom V)) nil) nil
 
+theorem size_t1 : size t1 = 1 := rfl
+
+/-- A standard form whose domain is `1` loses exactly one node at `0`. -/
+theorem size_fs_nil {V : Term} (hOT : OT V) (hd : dom V = t1) :
+    size (fs V nil) + 1 = size V := by
+  have h := size_addT (fs V nil) t1
+  rw [eq_addT_one_of_dom_eq_one V hOT hd, size_t1] at h
+  exact h.symm
+
+/-- **The fundamental sequence at the tower's first index loses exactly one
+node.** -/
+theorem size_fs_W0 : ∀ V : Term, OT V → dom V ≠ nil → dom V ≠ t1 → dom V ≠ tw →
+    size (fs V (W0 V)) + 1 = size V := by
+  intro V
+  induction V with
+  | nil => intro _ h0 _ _; exact absurd rfl h0
+  | cons a b t iha ihb iht =>
+    intro hOT h0 h1 hw
+    cases t with
+    | cons c d r =>
+      have hVfs : fs (cons a b (cons c d r)) (W0 (cons a b (cons c d r)))
+          = cons a b (fs (cons c d r) (W0 (cons c d r))) := by rw [fs]; rfl
+      have hih := iht (OT_tail hOT) h0 h1 hw
+      rw [hVfs]
+      simp only [size_cons] at hih ⊢
+      omega
+    | nil =>
+      by_cases e1 : dom b = nil
+      · have hb : b = nil := dom_eq_nil_iff.mp e1
+        subst hb
+        by_cases g1 : dom a = nil
+        · have ha : a = nil := dom_eq_nil_iff.mp g1
+          subst ha
+          exact absurd (show dom (cons nil nil nil) = t1 from rfl) h1
+        · by_cases g2 : dom a = t1
+          · have hdV : dom (cons a nil nil) = cons a nil nil := by rw [dom]; simp_all
+            have hW : W0 (cons a nil nil) = psi (fs a nil) nil := by rw [W0, hdV]; rfl
+            have hVfs : fs (cons a nil nil) (W0 (cons a nil nil))
+                = psi (fs a nil) nil := by rw [psi, fs]; simp_all
+            have hs := size_fs_nil (OT_fst hOT) g2
+            rw [hVfs, psi]
+            simp only [size_cons]
+            omega
+          · have hdV : dom (cons a nil nil) = dom a := by rw [dom]; simp_all
+            have hW : W0 (cons a nil nil) = W0 a := by rw [W0, W0, hdV]
+            have hVfs : fs (cons a nil nil) (W0 (cons a nil nil))
+                = psi (fs a (W0 a)) nil := by rw [psi, fs]; simp_all
+            have hih := iha (OT_fst hOT) (hdV ▸ h0) (hdV ▸ h1) (hdV ▸ hw)
+            rw [hVfs, psi]
+            simp only [size_cons]
+            omega
+      · by_cases e2 : dom b = t1
+        · exact absurd (show dom (cons a b nil) = tw from by rw [dom]; simp_all) hw
+        · by_cases e3 : dom b = tw
+          · exact absurd (show dom (cons a b nil) = tw from by rw [dom]; simp_all) hw
+          · by_cases e4 : dom b < cons a b nil
+            · have hdV : dom (cons a b nil) = dom b := by rw [dom]; simp_all
+              have hW : W0 (cons a b nil) = W0 b := by rw [W0, W0, hdV]
+              have hVfs : fs (cons a b nil) (W0 (cons a b nil))
+                  = psi a (fs b (W0 b)) := by rw [psi, fs]; simp_all
+              have hih := ihb (OT_snd hOT) (hdV ▸ e1) (hdV ▸ e2) (hdV ▸ e3)
+              rw [hVfs, psi]
+              simp only [size_cons]
+              omega
+            · exact absurd (show dom (cons a b nil) = tw from by rw [dom]; simp_all) hw
+
+/-- A collapse at level `0` with nothing after it never has a term-indexed
+domain. -/
+theorem dom_psi_nil_shape (b : Term) :
+    dom (cons nil b nil) = t1 ∨ dom (cons nil b nil) = tw := by
+  by_cases e1 : dom b = nil
+  · have hb : b = nil := dom_eq_nil_iff.mp e1
+    subst hb; exact Or.inl rfl
+  · by_cases e2 : dom b = t1
+    · exact Or.inr (by rw [dom]; simp_all)
+    · by_cases e3 : dom b = tw
+      · exact Or.inr (by rw [dom]; simp_all)
+      · by_cases e4 : dom b < cons nil b nil
+        · exfalso
+          rcases dom_shape b with h | h | ⟨Z, h⟩
+          · exact absurd h e1
+          · exact absurd h e3
+          · rw [h] at e4
+            rcases cons_lt_cons_iff.mp e4 with h' | ⟨_, h'⟩
+            · rcases psi_lt_psi_iff.mp h' with h'' | ⟨h'', _⟩
+              · exact absurd h'' (not_lt_nil Z)
+              · rw [h''] at h; exact absurd h e2
+            · exact absurd h' (lt_irrefl nil)
+        · exact Or.inr (by rw [dom]; simp_all)
+
+/-- On a term-indexed domain, `G` sees only things at least two nodes
+smaller. -/
+theorem G_size_succ_lt {V : Term} (h0 : dom V ≠ nil) (h1 : dom V ≠ t1)
+    (hw : dom V ≠ tw) : ∀ u x : Term, x ∈ G u V → size x + 1 < size V := by
+  intro u x hx
+  cases V with
+  | nil => rw [G_nil] at hx; exact absurd hx List.not_mem_nil
+  | cons a b t =>
+    have hne : a ≠ nil ∨ t ≠ nil := by
+      by_cases ha : a = nil
+      · refine Or.inr ?_
+        intro ht
+        subst ha; subst ht
+        rcases dom_psi_nil_shape b with h | h
+        · exact h1 h
+        · exact hw h
+      · exact Or.inl ha
+    have hsz : 0 < size a + size t := by
+      rcases hne with h | h
+      · cases a with
+        | nil => exact absurd rfl h
+        | cons c d r => simp only [size_cons]; omega
+      · cases t with
+        | nil => exact absurd rfl h
+        | cons c d r => simp only [size_cons]; omega
+    rw [G_cons] at hx
+    simp only [size_cons]
+    rcases List.mem_append.mp hx with hx | hx
+    · split at hx
+      · rcases List.mem_cons.mp hx with he | hx'
+        · rw [he]; omega
+        · rcases List.mem_append.mp hx' with hx'' | hx''
+          · have := size_lt_of_mem_G u a x hx''; omega
+          · have := size_lt_of_mem_G u b x hx''; omega
+      · exact absurd hx List.not_mem_nil
+    · have := size_lt_of_mem_G u t x hx; omega
+
+/-- **Nothing small sits between a term and its value at the tower's first
+index.** -/
+theorem no_small_between : ∀ V : Term, OT V → dom V ≠ nil → dom V ≠ t1 → dom V ≠ tw →
+    ∀ y : Term, size y + 1 < size V → fs V (W0 V) < y → ¬ (y < V) := by
+  intro V
+  induction V with
+  | nil => intro _ h0 _ _; exact absurd rfl h0
+  | cons a b t iha ihb iht =>
+    intro hOT h0 h1 hw y hsz hlo hhi
+    have hn : size (nil : Term) = 0 := rfl
+    cases t with
+    | cons c d r =>
+      have hVfs : fs (cons a b (cons c d r)) (W0 (cons a b (cons c d r)))
+          = cons a b (fs (cons c d r) (W0 (cons c d r))) := by rw [fs]; rfl
+      rw [hVfs, cons_eq_addT] at hlo
+      rw [cons_eq_addT] at hhi
+      obtain ⟨y', hye, hy1, hy2⟩ := addT_between (psi a b) hlo (le_of_lt hhi)
+      have hyne : y' ≠ cons c d r := by
+        intro he
+        rw [he, ← cons_eq_addT] at hye
+        rw [hye] at hhi
+        exact absurd hhi (lt_irrefl _)
+      refine iht (OT_tail hOT) h0 h1 hw y' ?_ hy1 (lt_of_le_of_ne hy2 hyne)
+      rw [hye, size_addT] at hsz
+      simp only [psi, size_cons] at hsz ⊢
+      omega
+    | nil =>
+      by_cases e1 : dom b = nil
+      · have hb : b = nil := dom_eq_nil_iff.mp e1
+        subst hb
+        by_cases g1 : dom a = nil
+        · have ha : a = nil := dom_eq_nil_iff.mp g1
+          subst ha
+          exact absurd (show dom (cons nil nil nil) = t1 from rfl) h1
+        · by_cases g2 : dom a = t1
+          · -- successor: y would have to be the predecessor itself
+            have hdV : dom (cons a nil nil) = cons a nil nil := by rw [dom]; simp_all
+            have hW : W0 (cons a nil nil) = psi (fs a nil) nil := by rw [W0, hdV]; rfl
+            have hVfs : fs (cons a nil nil) (W0 (cons a nil nil))
+                = psi (fs a nil) nil := by rw [psi, fs]; simp_all
+            have hsa : size (fs a nil) + 1 = size a := size_fs_nil (OT_fst hOT) g2
+            rw [hVfs] at hlo
+            cases y with
+            | nil => exact absurd hlo (not_lt_nil _)
+            | cons p q s =>
+              have hpa : p < a := by
+                rcases cons_lt_cons_iff.mp hhi with h' | ⟨_, h'⟩
+                · rcases psi_lt_psi_iff.mp h' with h'' | ⟨_, h''⟩
+                  · exact h''
+                  · exact absurd h'' (not_lt_nil q)
+                · exact absurd h' (not_lt_nil s)
+              have hap : fs a nil ≤ p := by
+                rcases cons_lt_cons_iff.mp hlo with h' | ⟨h', _⟩
+                · rcases psi_lt_psi_iff.mp h' with h'' | ⟨h'', _⟩
+                  · exact le_of_lt h''
+                  · exact h'' ▸ le_refl _
+                · injection h' with e _ _
+                  exact e ▸ le_refl _
+              have hple := le_pred_of_lt (OT_fst hOT) g2 hpa
+              have hpe : p = fs a nil := by
+                rcases le_iff_lt_or_eq.mp hple with h' | h'
+                · rcases le_iff_lt_or_eq.mp hap with h'' | h''
+                  · exact absurd h'' (lt_asymm h')
+                  · exact h''.symm
+                · exact h'
+              rw [hpe] at hsz
+              simp only [size_cons] at hsz
+              omega
+          · -- the domain comes from the subscript
+            have hdV : dom (cons a nil nil) = dom a := by rw [dom]; simp_all
+            have hW : W0 (cons a nil nil) = W0 a := by rw [W0, W0, hdV]
+            have hVfs : fs (cons a nil nil) (W0 (cons a nil nil))
+                = psi (fs a (W0 a)) nil := by rw [psi, fs]; simp_all
+            have hsa : size (fs a (W0 a)) + 1 = size a :=
+              size_fs_W0 a (OT_fst hOT) (hdV ▸ h0) (hdV ▸ h1) (hdV ▸ hw)
+            rw [hVfs] at hlo
+            cases y with
+            | nil => exact absurd hlo (not_lt_nil _)
+            | cons p q s =>
+              have hpa : p < a := by
+                rcases cons_lt_cons_iff.mp hhi with h' | ⟨_, h'⟩
+                · rcases psi_lt_psi_iff.mp h' with h'' | ⟨_, h''⟩
+                  · exact h''
+                  · exact absurd h'' (not_lt_nil q)
+                · exact absurd h' (not_lt_nil s)
+              have hap : fs a (W0 a) ≤ p := by
+                rcases cons_lt_cons_iff.mp hlo with h' | ⟨h', _⟩
+                · rcases psi_lt_psi_iff.mp h' with h'' | ⟨h'', _⟩
+                  · exact le_of_lt h''
+                  · exact h'' ▸ le_refl _
+                · injection h' with e _ _
+                  exact e ▸ le_refl _
+              simp only [size_cons, hn] at hsz
+              rcases le_iff_lt_or_eq.mp hap with h' | h'
+              · exact iha (OT_fst hOT) (hdV ▸ h0) (hdV ▸ h1) (hdV ▸ hw) p
+                  (by omega) h' hpa
+              · rw [← h'] at hsz; omega
+      · by_cases e2 : dom b = t1
+        · exact absurd (show dom (cons a b nil) = tw from by rw [dom]; simp_all) hw
+        · by_cases e3 : dom b = tw
+          · exact absurd (show dom (cons a b nil) = tw from by rw [dom]; simp_all) hw
+          · by_cases e4 : dom b < cons a b nil
+            · have hdV : dom (cons a b nil) = dom b := by rw [dom]; simp_all
+              have hW : W0 (cons a b nil) = W0 b := by rw [W0, W0, hdV]
+              have hVfs : fs (cons a b nil) (W0 (cons a b nil))
+                  = psi a (fs b (W0 b)) := by rw [psi, fs]; simp_all
+              have hsb : size (fs b (W0 b)) + 1 = size b :=
+                size_fs_W0 b (OT_snd hOT) (hdV ▸ e1) (hdV ▸ e2) (hdV ▸ e3)
+              rw [hVfs] at hlo
+              cases y with
+              | nil => exact absurd hlo (not_lt_nil _)
+              | cons p q s =>
+                have hpq : psi p q < psi a b := by
+                  rcases cons_lt_cons_iff.mp hhi with h' | ⟨_, h'⟩
+                  · exact h'
+                  · exact absurd h' (not_lt_nil s)
+                have hlo' : psi a (fs b (W0 b)) ≤ psi p q := by
+                  rcases cons_lt_cons_iff.mp hlo with h' | ⟨h', _⟩
+                  · exact le_of_lt h'
+                  · rw [h']; exact le_refl _
+                have hpa : p = a := by
+                  rcases psi_lt_psi_iff.mp hpq with h' | ⟨h', _⟩
+                  · rcases le_iff_lt_or_eq.mp hlo' with h'' | h''
+                    · rcases psi_lt_psi_iff.mp h'' with h3 | ⟨h3, _⟩
+                      · exact absurd h' (lt_asymm h3)
+                      · exact h3.symm
+                    · injection h'' with e _ _
+                      exact e.symm
+                  · exact h'
+                subst hpa
+                have hqb : q < b := by
+                  rcases psi_lt_psi_iff.mp hpq with h' | ⟨_, h'⟩
+                  · exact absurd h' (lt_irrefl p)
+                  · exact h'
+                have hbq : fs b (W0 b) ≤ q := by
+                  rcases le_iff_lt_or_eq.mp hlo' with h'' | h''
+                  · rcases psi_lt_psi_iff.mp h'' with h3 | ⟨_, h3⟩
+                    · exact absurd h3 (lt_irrefl p)
+                    · exact le_of_lt h3
+                  · injection h'' with _ e _
+                    exact e ▸ le_refl _
+                simp only [size_cons, hn] at hsz
+                rcases le_iff_lt_or_eq.mp hbq with h' | h'
+                · exact ihb (OT_snd hOT) (hdV ▸ e1) (hdV ▸ e2) (hdV ▸ e3) q
+                    (by omega) h' hqb
+                · rw [← h'] at hsz; omega
+            · exact absurd (show dom (cons a b nil) = tw from by rw [dom]; simp_all) hw
+
 /-- **The sum branch of the Bachmann induction.**  The statement has to be
 carried with a prefix `p` in front, because the tail inherits the hypothesis
 only in that form. -/
@@ -1516,5 +1791,43 @@ theorem OTFS_of_Bachmann (HB : Bachmann) : OTFS :=
 theorem Trian_fs_of_Bachmann (HB : Bachmann) {X Y : Term} (hOT : OT X) (h : Y < dom X) :
     Trian Y (fs X Y) X :=
   Trian_fs (OTFS_of_Bachmann HB) hOT h
+
+/-- **The Bachmann property**, with a prefix in front. -/
+theorem bach_pre {V : Term} (hOT : OT V) (h0 : dom V ≠ nil) (h1 : dom V ≠ t1)
+    (hw : dom V ≠ tw) {u p : Term} (H : ∀ x ∈ G u V, x < addT p V) :
+    ∀ x ∈ G u V, x < addT p (fs V (W0 V)) := by
+  intro x hx
+  have hszx : size x + 1 < size V := G_size_succ_lt h0 h1 hw u x hx
+  have hsV : size (fs V (W0 V)) + 1 = size V := size_fs_W0 V hOT h0 h1 hw
+  rcases lt_trichotomy x (addT p (fs V (W0 V))) with h | h | h
+  · exact h
+  · exfalso
+    rw [h, size_addT] at hszx
+    omega
+  · exfalso
+    obtain ⟨y, hye, hy1, hy2⟩ := addT_between p h (le_of_lt (H x hx))
+    have hyne : y ≠ V := by
+      intro he
+      have hxe : x = addT p V := by rw [hye, he]
+      exact absurd (hxe ▸ H x hx) (lt_irrefl _)
+    refine no_small_between V hOT h0 h1 hw y ?_ hy1 (lt_of_le_of_ne hy2 hyne)
+    rw [hye, size_addT] at hszx
+    omega
+
+/-- **The Bachmann property for the extended system.**  In the configuration
+of Buchholz's case 4, the fundamental sequence of `B` at the tower's first
+index overshoots everything `G` sees in `B` at the level of the collapse. -/
+theorem bachmann : Bachmann := by
+  intro A B hOT e1 e2 e3 _ x hx
+  have h := bach_pre (u := A) (p := nil) (OT_snd hOT) e1 e2 e3
+    (fun y hy => by rw [addT_nil_left]; exact OT_G_lt hOT y hy) x hx
+  rwa [addT_nil_left] at h
+
+/-- **Buchholz 3.3 for the extended system**, with no hypothesis left. -/
+theorem OTFS_thm : OTFS := OTFS_of_Bachmann bachmann
+
+/-- **Buchholz 3.6 for the extended system**, with no hypothesis left. -/
+theorem Trian_fs_thm {X Y : Term} (hOT : OT X) (h : Y < dom X) :
+    Trian Y (fs X Y) X := Trian_fs OTFS_thm hOT h
 
 end Googology.Notation.ExBuchholz.Term

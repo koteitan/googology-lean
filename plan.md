@@ -134,19 +134,16 @@ That is `Mono.lean`.
 
 ## Next
 
-1. **The Bachmann property.** `Bachmann`, and now the only thing the library
-   assumes: for `ψ_A(B)` in the configuration of Buchholz's case 4, everything
-   `G_A` sees in `B` is below `B[ψ_{Z[0]}(0)]`, the first value the tower
-   produces. Everything else on the route to `exb.WF` is proved — 3.2(b),
-   3.4, 3.5, `SubBound`, 3.6, the tower invariant of case 4, and 3.3 itself.
-   It is checked by computation in `test/ExBuchholzCheck.lean`, over all 651
-   standard case-4 forms of size at most 8; and so is what it feeds: every one
-   of the 3835 countable standard forms of size at most 8, expanded at any of
-   `0`–`4`, stays standard and countable and decreases — and the same at size
-   9, 15890 forms; every standard form of size at most 6 stays standard when
-   expanded at any standard index of size at most 3; and ε₀, ψ_0(Ω+Ω),
-   ψ_0(ψ_1(1)), ψ_0(Ω_2) and ψ_0(ψ_Ω(0)) all run down to `0` with every
-   intermediate term standard;
+1. **Done: extended Buchholz terms terminate.** `System.lean` carries
+   `exbOT`, the expansion system on the countable standard forms, and
+   `exbOT_wf` and `exbOT_terminates` are proved outright. The route was
+   3.2(b), 3.4, 3.5, `SubBound`, 3.6, 3.3 and the Bachmann property, and all
+   of them are now theorems with no hypothesis left. It agrees with the
+   computation in `test/ExBuchholzCheck.lean`: every one of the 3835
+   countable standard forms of size at most 8, expanded at any of `0`–`4`,
+   stays standard and countable and decreases — and the same at size 9, 15890
+   forms; and ε₀, ψ_0(Ω+Ω), ψ_0(ψ_1(1)), ψ_0(Ω_2) and ψ_0(ψ_Ω(0)) all run
+   down to `0` with every intermediate term standard;
 2. add `Trans/BMS/ExBuchholz`. BMS termination no longer needs it, so what the
    translation buys is the **value**: which ordinal a matrix names;
 4. add DBMS and the Y sequence.

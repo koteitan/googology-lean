@@ -176,8 +176,9 @@ together with `z`.
 | 3.4 | `b ⊲_z a`, `G_u a < a`, `G_u z < b` ⟹ `G_u b < b` | **done** |
 | 3.5 | `b₀ ⊲_z b` ⟹ `a + b₀ ⊲_z a + b`, `ψ_u(b₀) ⊲_z ψ_u(b)`, `ψ_{b₀}(0) ⊲_z ψ_b(0)` | **done** |
 | 3.2(b) | on a term-indexed domain, `z₁ < z₂` ⟹ `a[z₁] < a[z₂]` | **done** (`fs_mono`) |
-| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done**, from 3.3 |
-| 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | **done**, from `Bachmann` |
+| 3.6 | `z ∈ dom a` ⟹ `a[z] ⊲_z a` | **done** |
+| 3.3 | `a, z ∈ OT`, `z ∈ dom a` ⟹ `a[z] ∈ OT` | **done** |
+| Bachmann | `G_A(B) < B[ψ_{Z[0]}(0)]` in the configuration of case 4 | **done** |
 
 3.4 is where the work is: it turns "bounded relative to `z`" into the
 standard-form condition outright. `Closure.lean` has it, all three forms of
@@ -271,24 +272,24 @@ the plain shape, proved: the head lands by a size argument through
 `lt_of_size_lt_addT`, and the tail by the same statement at `t` with the head
 appended to the prefix.
 
-Of the three principal branches, `ψ_a(0)` with `dom a = 1` is `bach_succ`,
-proved: it splits on where `x` sits relative to the prefix — below it, equal
-to it, or above it — and the third case closes through `le_pred_of_lt` and a
-size argument.
+The Bachmann property is proved, and the argument turned out not to need the
+contexts at all.  Three facts do the work:
 
-The other two reduce, but to statements in other contexts.  `ψ_a(0)` with
-`dom a ∉ {0,1}` is the `P` shape at `a` under the same prefix, because
-`G_u(ψ_a(0))` is `{0}` together with `G_u(a)` and the conclusion is about
-`ψ_{a[W]}(0)`.  `ψ_a(b)` with `dom b < V` splits three ways: `G_u(a)` by a
-size argument, `G_u(b)` by the shape whose context is `p + ψ_a(−)`, and the
-argument `b` itself by the plain shape at `b` **at level `a`**, whose
-hypothesis is exactly `OT_G_lt` on `OT (ψ_a(b))`.  That last step is why the
-induction has to quantify over the level rather than fix it.
+* `size_fs_W0` — the fundamental sequence at the tower's first index loses
+  exactly one node: `size (V[W₀]) + 1 = size V`;
+* `G_size_succ_lt` — on a term-indexed domain `G` sees only things at least
+  two nodes smaller: `size x + 1 < size V`;
+* `no_small_between` — nothing that small lies strictly between `V[W₀]` and
+  `V`.
 
-The contexts do not close up.  The sum branch of the `P` shape asks for
-`ψ_{p + ψ_α(β) + (−)}(0)`, and so on, so the induction wants a general context
-rather than the three shapes.  Finding the right closure condition on contexts
-is what is left.
+Given those, `bach_pre` is a trichotomy on `x` against `p + V[W₀]`: below it,
+done; equal to it, impossible on size; above it, and then `addT_between`
+produces a `y` with `V[W₀] < y < V` and `size y + 1 < size V`, which
+`no_small_between` rules out.  `bachmann` is `bach_pre` with an empty prefix,
+its hypothesis being `OT_G_lt` on `OT (ψ_A(B))`.
+
+So 3.3, 3.6, `SubBound`, the tower invariant of case 4, and the termination of
+the expansion system in `System.lean` all hold outright.
 
 The prefix cannot be dropped. For `V = ψ_Ω(0) + ψ_1(ψ_Ω(0))`, which is
 standard with a term-indexed domain, `G_1` sees `ψ_Ω(0)` in the tail — the
@@ -296,7 +297,7 @@ head of `V` itself. So neither "below the head" nor "below the tail" holds
 there, while the conclusion does. `test/ExBuchholzCheck.lean` carries that
 term, and checks all three shapes.
 
-The Bachmann property is what is left.
+Nothing is left: the chain is closed.
 
 ## Status
 
@@ -328,12 +329,12 @@ The Bachmann property is what is left.
 | Buchholz 3.4 and 3.5 for `⊲` | done (`Closure.lean`) |
 | Buchholz 3.2(b): `fs` monotone in its index | done (`fs_mono`) |
 | the tower of case 4, and `(ψ_{X₁}(X₂))[n̲] = ψ_{X₁}(X₂[W_n])` | done (`tower`, `fs_numeral`) |
-| Buchholz 3.6: `z ∈ dom a → a[z] ⊲_z a` | done from 3.3 (`Trian_fs`) |
-| `SubBound` itself | done from 3.3 (`subBound_of_OTFS`) |
-| Buchholz 3.3: `z ∈ dom a → a[z] ∈ OT` | done from `Bachmann` (`OTFS_of_Bachmann`) |
-| the tower invariant of case 4 | done from `Bachmann` (`towerOT_of_Bachmann`) |
-| the Bachmann property itself | **not proved** — the last gap; checked by computation on 651 case-4 forms |
-| `exbOT.WF` and `exbOT.Terminates` | done from `Bachmann` (`System.lean`) |
+| Buchholz 3.6: `z ∈ dom a → a[z] ⊲_z a` | done (`Trian_fs_thm`) |
+| `SubBound` itself | done (`subBound_of_OTFS`) |
+| Buchholz 3.3: `z ∈ dom a → a[z] ∈ OT` | done (`OTFS_thm`) |
+| the tower invariant of case 4 | done (`towerOT_of_Bachmann`) |
+| the Bachmann property itself | **done** (`bachmann`) |
+| **`exbOT.WF` and `exbOT.Terminates`** | **done** (`System.lean`) |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 `axiom`.
