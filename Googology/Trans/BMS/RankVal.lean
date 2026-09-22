@@ -135,6 +135,35 @@ theorem rank_toPairS (l : PrimState) :
 /-- The one-row generator `(0)(1)⋯(n)`, as a state. -/
 def primGen (n : Nat) : PrimState := ⟨List.range (n + 1), col_range n, OT_read_range n⟩
 
+theorem OT_twr : ∀ n : Nat, OT (twr n)
+  | 0 => rfl
+  | _ + 1 => OT_of_desc _ (allNil_twr _) (descAll_twr _)
+
+theorem val_twr_lt_eps0 (n : Nat) : val (twr n) < Ord.eps0 := by
+  rw [← val_te0]
+  exact val_lt_val (OT_twr n) OT_te0 (allNil_lt_e0 _ (allNil_twr n))
+
+/-- **The towers the one-row generators read as are the towers of `ω`.** -/
+theorem val_twr_succ (n : Nat) : val (twr (n + 1)) = (ω : Ordinal) ^ val (twr n) := by
+  rw [show twr (n + 1) = psi nil (twr n) from rfl, val_psi, val_nil]
+  exact Ord.psi_zero_eq_opow _ (val_twr_lt_eps0 n)
+
+/-- **So the one-row generator `(0)(1)⋯(n)` names the `n + 1`-st tower.** -/
+theorem rank_primGen (n : Nat) :
+    IsWellFounded.rank prim.Rel (primGen n) = val (twr (n + 1)) := by
+  rw [rank_prim_eq_val]
+  show val (read 0 (List.range (n + 1))) = _
+  rw [read_range_eq_twr]
+
+/-- `(0)` names `1`. -/
+theorem rank_primGen_zero : IsWellFounded.rank prim.Rel (primGen 0) = 1 := by
+  rw [rank_primGen, val_twr_succ, show val (twr 0) = 0 from rfl, Ordinal.opow_zero]
+
+/-- `(0)(1)` names `ω`. -/
+theorem rank_primGen_one : IsWellFounded.rank prim.Rel (primGen 1) = Ordinal.omega0 := by
+  rw [rank_primGen, val_twr_succ, val_twr_succ, show val (twr 0) = 0 from rfl,
+    Ordinal.opow_zero, Ordinal.opow_one]
+
 /-- The two-row generator `(0,0)(1,1)`, as a state. -/
 def pairGen : PairState :=
   ⟨[(0, 0), (1, 1)], ⟨Pat.stair 2 1, Pat.Std.init 1, by rw [entries2_stair]; rfl⟩⟩

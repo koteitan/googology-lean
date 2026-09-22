@@ -65,6 +65,7 @@ Names are written relative to `Googology`.
 | `val` is onto the ordinals below `ε₀` | `Trans.BMS.exists_OT_of_lt_eps0` |
 | **so the ordinal measure is a bijection onto `ε₀`** | `Trans.BMS.exists_bms_of_lt_eps0`, `Trans.BMS.bmsOrdEval_inj` |
 | **the rank of the system is that same ordinal** — the two measures are one | `Trans.BMS.rank_prim_eq_val`, `Trans.BMS.rank_bms_eq_val` |
+| the one-row generators name the towers of `ω`: `(0)` is `1`, `(0)(1)` is `ω` | `Trans.BMS.val_twr_succ`, `Trans.BMS.rank_primGen` |
 | one row of DBMS names the same ordinals, and its rank agrees too | `Trans.DBMS.exists_dbms_of_lt_eps0`, `Trans.DBMS.rank_dbms_eq_val` |
 | **the two-row generator `(0,0)(1,1)` has rank `ε₀`** — two rows start where one row ends | `Trans.BMS.rank_pairGen` |
 | and at every number of rows the generator is the limit of the previous row's generators | `Trans.BMS.rank_gen_eq_iSup`, `Trans.BMS.rank_gen_lt` |
