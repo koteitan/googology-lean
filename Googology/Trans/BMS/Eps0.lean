@@ -179,11 +179,19 @@ theorem G_addT_tW (B : Term) : G nil (addT tW B) = nil :: nil :: G nil B := by
   rw [show G nil t1 = [nil] from rfl, show G nil nil = ([] : List Term) from rfl]
   rfl
 
-/-- **`ψ_0(Ω + B)` is a standard form** when `B` is one whose `G_0` stays
-below `Ω + B` and whose head is at most `Ω`. -/
-theorem OT_psi_Omega_add {B : Term} (hB : OT B)
-    (hG : ∀ x ∈ G nil B, x < addT tW B) (hhead : descHead t1 nil B = true) :
-    OT (psi nil (addT tW B)) := by
+theorem G_cons_Omega (B t : Term) :
+    G nil (cons nil (addT tW B) t) = addT tW B :: nil :: nil :: (G nil B ++ G nil t) := by
+  rw [G, if_pos (nil_le nil), show G nil nil = ([] : List Term) from rfl, List.nil_append,
+    G_addT_tW]
+  rfl
+
+/-- **`ψ_0(Ω + B)` in front of `t` is a standard form** when `B` is one whose
+`G_0` stays below `Ω + B`, whose head is at most `Ω`, and `t` does not rise
+above it. -/
+theorem OT_cons_Omega {B t : Term} (hB : OT B)
+    (hG : ∀ x ∈ G nil B, x < addT tW B) (hhead : descHead t1 nil B = true)
+    (hOTt : OT t) (hdesc : descHead nil (addT tW B) t = true) :
+    OT (cons nil (addT tW B) t) := by
   have hne : nil < addT tW B := by
     show nil < cons t1 nil B
     exact nil_lt_cons _ _ _
@@ -192,10 +200,10 @@ theorem OT_psi_Omega_add {B : Term} (hB : OT B)
     rw [isOT]
     simp only [Bool.and_eq_true]
     exact ⟨⟨⟨⟨rfl, rfl⟩, rfl⟩, hB⟩, hhead⟩
-  show isOT (cons nil (addT tW B) nil) = true
+  show isOT (cons nil (addT tW B) t) = true
   rw [isOT]
   simp only [Bool.and_eq_true]
-  refine ⟨⟨⟨⟨rfl, hOTsum⟩, ?_⟩, rfl⟩, rfl⟩
+  refine ⟨⟨⟨⟨rfl, hOTsum⟩, ?_⟩, hOTt⟩, hdesc⟩
   rw [G_addT_tW]
   refine List.all_eq_true.mpr (fun x hx => decide_eq_true ?_)
   rcases List.mem_cons.mp hx with rfl | h1
@@ -203,6 +211,12 @@ theorem OT_psi_Omega_add {B : Term} (hB : OT B)
   · rcases List.mem_cons.mp h1 with rfl | h2
     · exact hne
     · exact hG x h2
+
+/-- **`ψ_0(Ω + B)` is a standard form** under the same conditions. -/
+theorem OT_psi_Omega_add {B : Term} (hB : OT B)
+    (hG : ∀ x ∈ G nil B, x < addT tW B) (hhead : descHead t1 nil B = true) :
+    OT (psi nil (addT tW B)) :=
+  OT_cons_Omega hB hG hhead rfl rfl
 
 /-- The term `ψ_0(Ω + 1)`. -/
 abbrev tew : Term := psi nil (addT tW t1)

@@ -337,7 +337,11 @@ What is left of that is the Lean problem still open.
   is `OT_psi_Omega_add`: what it asks is that `G_0` sees nothing in the
   argument that reaches `Ω + B`. `ψ_0(Ω+1)` and `ψ_0(Ω+Ω)` are standard by
   it, naming `ε₀·ω` and `ε₁`. What is left is the induction itself, which has
-  to carry that `G_0` condition along with the value. Higher up the normal form is not
+  to carry that `G_0` condition along with the value. Two of its pieces are
+  in: `OT_cons_Omega` builds the sums, and `Ord.log_lt_self_of_lt_eps1` gives
+  the decrease the recursion needs — below `ε₁` the only fixed point of
+  `ω ^ ·` above `ε₀` would be `ε₁` itself, which `Ord.eps1_le_of_opow_fp`
+  rules out. Higher up the normal form is not
   Cantor's: it needs `ψ` at every subscript, so the induction that builds a
   term has to know which arguments each `ψ_v` reaches, which is `C_v` again.
 

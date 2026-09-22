@@ -651,4 +651,32 @@ theorem psi_Omega_two : psi (Ω_ 1 + Ω_ 1) 0 = eps1.{u} := by
       rw [add_le_add_iff_left]
       exact le_trans hb.le eps1_le_Omega_one
 
+/-- A fixed point of `ω ^ ·` above `ε₀` is at least `ε₁`. -/
+theorem eps1_le_of_opow_fp {a : Ordinal.{u}} (hfp : (ω : Ordinal.{u}) ^ a = a)
+    (h0 : eps0.{u} < a) : eps1.{u} ≤ a := by
+  have hprin : Ordinal.IsPrincipal (· + ·) a := by
+    rw [← hfp]
+    exact Ordinal.isPrincipal_add_omega0_opow a
+  have hadd : eps0.{u} + a = a := Ordinal.IsPrincipal.add_eq_right hprin h0
+  refine Ordinal.nfp_le_fp eps0_mul_opow_monotone (by simp) ?_
+  show eps0.{u} * (ω : Ordinal.{u}) ^ a ≤ a
+  refine le_of_eq ?_
+  conv_lhs => rw [← opow_eps0, hfp, ← hfp, ← Ordinal.opow_add, hadd]
+  exact hfp
+
+/-- Below `ε₁` and above `ε₀`, the logarithm is strictly smaller. -/
+theorem log_lt_self_of_lt_eps1 {a : Ordinal.{u}} (h0 : eps0.{u} < a) (h1 : a < eps1.{u}) :
+    Ordinal.log (ω : Ordinal.{u}) a < a := by
+  rcases lt_or_ge (Ordinal.log (ω : Ordinal.{u}) a) a with h | h
+  · exact h
+  · exfalso
+    have heq : Ordinal.log (ω : Ordinal.{u}) a = a :=
+      le_antisymm (Ordinal.log_le_self _ _) h
+    have hne : a ≠ 0 := ne_of_gt (lt_trans eps0_pos h0)
+    have hle : (ω : Ordinal.{u}) ^ a ≤ a := by
+      conv_lhs => rw [← heq]
+      exact Ordinal.opow_log_le_self _ hne
+    exact absurd h1 (not_lt.mpr (eps1_le_of_opow_fp
+      (le_antisymm hle (Ordinal.right_le_opow _ Ordinal.one_lt_omega0)) h0))
+
 end Googology.Notation.ExBuchholz.Ord
