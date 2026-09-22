@@ -1,5 +1,6 @@
 import Googology.Trans.BMS.Same
 import Googology.Trans.BMS.Eps0
+import Googology.Trans.BMS.ZeroRow
 
 /-!
 # The rank of the system is the ordinal of the term
@@ -165,5 +166,63 @@ theorem rank_pairGen : IsWellFounded.rank pairL.Rel pairGen = Ord.eps0 := by
       refine lt_of_le_of_lt ?_ (Order.lt_succ _)
       rw [rank_step_pairGen k, read_range_eq_twr k, ← hvY]
       exact (val_lt_val hOTY (by rw [← read_range_eq_twr k]; exact OT_read_range k) hm).le
+
+/-! ### Every number of rows, at the generator
+
+The same computation runs at every number of rows, because `expandRL_gen` says
+the two-column generator with `r + 2` rows expands into the generators with
+`r + 1` rows and a zero row underneath, and `rank_zeroRow` says that row costs
+nothing.  So the `r + 2`-row system starts exactly where the `r + 1`-row
+generators end. -/
+
+instance instIsWellFoundedBmsL (r : Nat) : IsWellFounded (bmsL r).State (bmsL r).Rel :=
+  ⟨bmsL_wf r⟩
+
+theorem step_gen_eq (r N : Nat) :
+    (bmsL (r + 1)).step ((bmsLStd (r + 1)).gen 1) N
+      = (bmsL_homSucc r).map ((bmsLStd r).gen N) := by
+  refine Subtype.ext ?_
+  show expandRL (r + 1 + 1) N ((List.range 2).map (fun i => List.replicate (r + 1 + 1) i))
+    = zeroRow ((List.range (N + 1)).map (fun i => List.replicate (r + 1) i))
+  rw [show (List.range 2).map (fun i => List.replicate (r + 1 + 1) i)
+      = [List.replicate (r + 1 + 1) 0, List.replicate (r + 1 + 1) 1] from rfl]
+  exact expandRL_gen (r + 1) N (Nat.succ_pos r)
+
+theorem rank_step_gen (r N : Nat) :
+    IsWellFounded.rank (bmsL (r + 1)).Rel ((bmsL (r + 1)).step ((bmsLStd (r + 1)).gen 1) N)
+      = IsWellFounded.rank (bmsL r).Rel ((bmsLStd r).gen N) := by
+  rw [step_gen_eq]
+  exact rank_zeroRow r ((bmsLStd r).gen N)
+
+theorem not_halted_gen (r : Nat) : ¬ (bmsL (r + 1)).halted ((bmsLStd (r + 1)).gen 1) := by
+  show ¬ (List.range 2).map (fun i => List.replicate (r + 1 + 1) i) = []
+  simp
+
+/-- **Every generator of the `r + 1`-row system is below the `r + 2`-row
+generator.** -/
+theorem rank_gen_lt (r N : Nat) :
+    IsWellFounded.rank (bmsL r).Rel ((bmsLStd r).gen N)
+      < IsWellFounded.rank (bmsL (r + 1)).Rel ((bmsLStd (r + 1)).gen 1) := by
+  rw [← rank_step_gen r N]
+  exact IsWellFounded.rank_lt_of_rel ⟨not_halted_gen r, N, rfl⟩
+
+/-- **And it is exactly their limit.**  At `r = 0` that limit is `ε₀`, which
+is `rank_pairGen`. -/
+theorem rank_gen_eq_iSup (r : Nat) :
+    IsWellFounded.rank (bmsL (r + 1)).Rel ((bmsLStd (r + 1)).gen 1)
+      = ⨆ N : ℕ, Order.succ (IsWellFounded.rank (bmsL r).Rel ((bmsLStd r).gen N)) := by
+  rw [IsWellFounded.rank_eq]
+  refine le_antisymm (Ordinal.iSup_le ?_) (Ordinal.iSup_le (fun N => ?_))
+  · rintro ⟨m, _, N, rfl⟩
+    show Order.succ (IsWellFounded.rank (bmsL (r + 1)).Rel
+      ((bmsL (r + 1)).step ((bmsLStd (r + 1)).gen 1) N)) ≤ _
+    rw [rank_step_gen r N]
+    exact Ordinal.le_iSup (fun N : ℕ =>
+      Order.succ (IsWellFounded.rank (bmsL r).Rel ((bmsLStd r).gen N))) N
+  · rw [← rank_step_gen r N]
+    exact Ordinal.le_iSup
+      (fun b : {b // (bmsL (r + 1)).Rel b ((bmsLStd (r + 1)).gen 1)} =>
+        Order.succ (IsWellFounded.rank (bmsL (r + 1)).Rel b.1))
+      ⟨(bmsL (r + 1)).step ((bmsLStd (r + 1)).gen 1) N, not_halted_gen r, N, rfl⟩
 
 end Googology.Trans.BMS

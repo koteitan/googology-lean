@@ -200,7 +200,11 @@ That is `Mono.lean`.
    matrices with a zero row underneath and `BMS/Embed.lean` carries their
    ordinals across. So the pair sequence system starts where the primitive
    sequence system ends — with no two-row reading, which there still is
-   not.
+   not. `rank_gen_eq_iSup` is the same at every number of rows: the
+   `r + 2`-row generator's rank is the limit of the `r + 1`-row generators'
+   ranks. What it does not give is the rank of the later generators
+   `(0,0)(1,1)(2,2)` and beyond, whose expansions are not zero-row
+   matrices.
 
    The states of `prim` — matrices whose term is a standard form — are
    exactly the standard one-row matrices: `std_entries_iff`. And

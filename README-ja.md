@@ -66,6 +66,7 @@
 | **系の階数がその順序数と一致すること**。二つの測度は一つである | `Trans.BMS.rank_prim_eq_val`, `Trans.BMS.rank_bms_eq_val` |
 | DBMS の 1 行も同じ順序数を名指し、階数も一致すること | `Trans.DBMS.exists_dbms_of_lt_eps0`, `Trans.DBMS.rank_dbms_eq_val` |
 | **2 行の生成元 `(0,0)(1,1)` の階数が `e0` であること**。2 行は 1 行が終わる所から始まる | `Trans.BMS.rank_pairGen` |
+| どの行数でも、生成元は一つ少ない行の生成元たちの極限であること | `Trans.BMS.rank_gen_eq_iSup`, `Trans.BMS.rank_gen_lt` |
 | `p0(W)` 未満で項が基本列の上限であること | `Trans.BMS.fs_lub` |
 | **標準 1 行行列とは、項が標準形である行列のことちょうどである** | `Trans.BMS.std_entries_iff`, `Trans.BMS.exists_bms_of_lt_e0` |
 | **原始数列系と `p0(W)` 未満の標準形が同値であること** | `Trans.BMS.primEquivE0` |
