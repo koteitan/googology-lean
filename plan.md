@@ -71,6 +71,7 @@ import this and nothing else.
 | `Ord.lean` | done — `ψ` on the ordinals, the cardinality bound, downward closure, additive principality |
 | `Eval.lean` | done — `val`, `Lam`, `val_mem_CSet`, the two `ψ` comparison helpers |
 | `Mono.lean` | done — the simultaneous induction, `val_lt_val`, `OTLt_wf` |
+| `FS.lean` | done except one lemma — `dom`, `fs`, `fs_lt`, `dom_eq_one_or_tw`, `step_lt`, `exb` |
 
 **`ExBuchholz` is finished as a notation system**: `OTLt_wf` says the order on
 its standard forms is well founded, with no hypothesis.
@@ -130,11 +131,15 @@ That is `Mono.lean`.
 
 ## Next
 
-1. give `ExBuchholz` fundamental sequences and a `Rewrite` value;
-2. calibrate `G` and `isOT` against a reference implementation — they are
-   written out as the natural extension of Buchholz (1986) §2 and have not
-   been checked against one;
-3. add `Trans/BMS/ExBuchholz`. BMS termination no longer needs it, so what the
+1. **`OT` and `· < Ω` are preserved by one expansion step.** Buchholz's Lemma
+   3.3 for the extended system, and the only thing between the library and
+   `exb.WF`. It is checked by computation in `test/ExBuchholzCheck.lean`: every
+   one of the 109 countable standard forms of size at most 4, expanded at any
+   of `0`–`4`, stays standard and countable and decreases; and ε₀, ψ_0(Ω+Ω),
+   ψ_0(ψ_1(1)), ψ_0(Ω_2) and ψ_0(ψ_Ω(0)) all run down to `0` with every
+   intermediate term standard. The proof has to follow `fs` branch by branch
+   and needs a substitution lemma for `G`;
+2. add `Trans/BMS/ExBuchholz`. BMS termination no longer needs it, so what the
    translation buys is the *value*: which ordinal a matrix names;
 4. add DBMS and the Y sequence.
 
