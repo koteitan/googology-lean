@@ -349,8 +349,9 @@ Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 The `ψ` definition above is Maksudov's, as stated on the Googology Wiki. The
 notation system for it is due to p進大好きbot, and the terms, the order, `G`,
 `OT` and the evaluation here follow that article; see **Calibration** above for
-the clause-by-clause comparison. The fundamental sequences of that article are
-not implemented yet.
+the clause-by-clause comparison. Its fundamental sequences are implemented too,
+as `dom` and `fs`, and were transcribed clause by clause from the same
+article.
 
 ## Naming
 
