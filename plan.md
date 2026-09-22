@@ -206,6 +206,8 @@ That is `Mono.lean`.
    with entries below `3`. `BMS/Agree.lean` ties the three rules together —
    `expandRL` at one and two rows is `expandL` and `expand2L` — and packages
    the general one as `bmsL r`, with `bmsL_terminates` and `bmsLStd`.
+   `BMS/Same.lean` ties the systems together: `bmsL 0` is `prim` and `bmsL 1`
+   is `pairL`, as `Equiv`s.
 
    So the mechanical side of two rows is finished. What is left is the
    reading, and it is not a mechanical job. A two-row reading has to use `ψ`
@@ -240,6 +242,28 @@ That is `Mono.lean`.
    than having none. What it would take: transcribe the expansion function as
    a total function with the loop bounds proved, then calibrate against the
    reference implementation on enough inputs to believe it.
+
+## Where the frontier is
+
+Everything mechanical is done. Expansion is a function that runs, at any
+number of rows, and it is `BM4.expand`; the systems are `Rewrite`s with their
+generators; the one-row, two-row and general forms are proved to be one
+another. One row is settled all the way to the ordinals, in both directions
+and as an equivalence.
+
+Three things are left, and none of them is a Lean problem.
+
+* **A reading for two rows and up.** It needs a stated definition of the map
+  from matrices to ordinals. The sources checked give worked values, not a
+  rule, and a rule guessed to fit them is not worth committing.
+* **DBMS termination for two rows and up.** The label-system proof this
+  library imports is about arrays reachable from a stair, and the DBMS
+  generators are not stairs. The two notions of standard form are
+  incomparable — `(0,0)(1,1)` is a BM4 standard form and not a DBMS one,
+  `(0,0)(1,0)(2,1)` the other way round — so neither system's termination
+  gives the other's.
+* **The Y sequence.** Its official definition is a program and its
+  termination is open; see item 4.
 
 ## Conventions
 
