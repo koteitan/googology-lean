@@ -105,4 +105,18 @@ theorem StepHom.rank_map {R Q : Rewrite} [hR : IsWellFounded R.State R.Rel]
       exact Order.succ_le_of_lt (IsWellFounded.rank_lt_of_rel
         ⟨fun hc => hna ((hh a).mpr hc), f.reindex k, f.map_step a k⟩)
 
+/-- **A state whose every step gives the same state has rank one more than
+it.**  These are the successor states of the system: the bracket makes no
+difference there. -/
+theorem Rewrite.rank_succ_of_const_step {R : Rewrite} [IsWellFounded R.State R.Rel]
+    {a b : R.State} (hna : ¬ R.halted a) (h : ∀ k, R.step a k = b) :
+    IsWellFounded.rank R.Rel a = Order.succ (IsWellFounded.rank R.Rel b) := by
+  rw [IsWellFounded.rank_eq]
+  refine le_antisymm (Ordinal.iSup_le ?_) ?_
+  · rintro ⟨m, _, k, rfl⟩
+    show Order.succ (IsWellFounded.rank R.Rel (R.step a k)) ≤ _
+    rw [h k]
+  · exact Ordinal.le_iSup (fun b : {b // R.Rel b a} => Order.succ (IsWellFounded.rank R.Rel b.1))
+      ⟨b, hna, 0, (h 0).symm⟩
+
 end Googology

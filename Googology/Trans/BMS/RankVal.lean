@@ -225,4 +225,72 @@ theorem rank_gen_eq_iSup (r : Nat) :
         Order.succ (IsWellFounded.rank (bmsL (r + 1)).Rel b.1))
       ⟨(bmsL (r + 1)).step ((bmsLStd (r + 1)).gen 1) N, not_halted_gen r, N, rfl⟩
 
+/-! ### The successors
+
+A matrix whose last column has no parent drops that column, whatever the
+bracket, so it is a successor and its rank says so. -/
+
+/-- **Dropping a column that has no parent takes the rank down by one.** -/
+theorem rank_dropLast {r : Nat} (l : (bmsL r).State) (hna : ¬ (bmsL r).halted l)
+    (h : badRootR (r + 1) l.1 = none) :
+    IsWellFounded.rank (bmsL r).Rel l
+      = Order.succ (IsWellFounded.rank (bmsL r).Rel ((bmsL r).step l 0)) := by
+  refine Rewrite.rank_succ_of_const_step hna (fun k => Subtype.ext ?_)
+  show expandRL (r + 1) k l.1 = expandRL (r + 1) 0 l.1
+  rw [expandRL, expandRL, h]
+
+/-! ### Two concrete two-row ordinals
+
+`bmsAllL` has no standardness condition, so a matrix can be written down and
+its rank read off.  For a standard matrix the two systems agree, because the
+inclusion is a `StepHom` with the brackets unchanged. -/
+
+/-- The standard matrices inside all matrices, as a `StepHom`. -/
+def bmsLHomAll (r : Nat) : StepHom (bmsL r) (bmsAllL r) where
+  map := fun l => ⟨l.1, by
+    obtain ⟨A, _, hA⟩ := l.2
+    rw [← hA]
+    exact entriesR_col_len A⟩
+  reindex := id
+  map_step := fun _ _ => Subtype.ext rfl
+  map_halted := fun _ h => h
+
+instance instIsWellFoundedBmsAllL (r : Nat) :
+    IsWellFounded (bmsAllL r).State (bmsAllL r).Rel := ⟨bmsAllL_wf r⟩
+
+theorem rank_bmsAllL_of_bmsL (r : Nat) (l : (bmsL r).State) :
+    IsWellFounded.rank (bmsAllL r).Rel ((bmsLHomAll r).map l)
+      = IsWellFounded.rank (bmsL r).Rel l :=
+  (bmsLHomAll r).rank_map (fun k => ⟨k, rfl⟩) (fun _ => Iff.rfl) l
+
+theorem rank_bmsL_of_pairL (l : PairState) :
+    IsWellFounded.rank (bmsL 1).Rel (bmsOfPairHom.map l)
+      = IsWellFounded.rank pairL.Rel l :=
+  bmsOfPairHom.rank_map (fun k => ⟨k, rfl⟩)
+    (fun s => by
+      show s.1 = [] ↔ s.1.map (fun x => [x.1, x.2]) = []
+      rw [List.map_eq_nil_iff]) l
+
+/-- `(0,0)(1,1)`. -/
+def genAll : (bmsAllL 1).State := ⟨[[0, 0], [1, 1]], by decide⟩
+
+/-- **`(0,0)(1,1)` has rank `ε₀`**, now written as a matrix. -/
+theorem rank_genAll : IsWellFounded.rank (bmsAllL 1).Rel genAll = Ord.eps0 := by
+  have h : genAll = (bmsLHomAll 1).map (bmsOfPairHom.map pairGen) := Subtype.ext rfl
+  rw [h, rank_bmsAllL_of_bmsL, rank_bmsL_of_pairL, rank_pairGen]
+
+/-- `(0,0)(1,1)(0,0)`. -/
+def succAll : (bmsAllL 1).State := ⟨[[0, 0], [1, 1], [0, 0]], by decide⟩
+
+/-- **`(0,0)(1,1)(0,0)` has rank `ε₀ + 1`.**  Its last column has no parent,
+so every bracket drops it — `./bms` agrees at `[0]`, `[1]` and `[2]` — and
+the correspondence tables' `ε₀ + 1` is a theorem too. -/
+theorem rank_succAll :
+    IsWellFounded.rank (bmsAllL 1).Rel succAll = Order.succ Ord.eps0 := by
+  rw [← rank_genAll]
+  refine Rewrite.rank_succ_of_const_step (show ¬ ([[0, 0], [1, 1], [0, 0]] : List (List Nat)) = []
+    by simp) (fun k => Subtype.ext ?_)
+  show expandRL 2 k [[0, 0], [1, 1], [0, 0]] = [[0, 0], [1, 1]]
+  rfl
+
 end Googology.Trans.BMS
