@@ -65,6 +65,7 @@
 | **だから順序数の測度は `e0` への全単射であること** | `Trans.BMS.exists_bms_of_lt_eps0`, `Trans.BMS.bmsOrdEval_inj` |
 | **系の階数がその順序数と一致すること**。二つの測度は一つである | `Trans.BMS.rank_prim_eq_val`, `Trans.BMS.rank_bms_eq_val` |
 | 1 行の生成元が `w` の塔を名指すこと。`(0)` は `1`、`(0)(1)` は `w` | `Trans.BMS.val_twr_succ`, `Trans.BMS.rank_primGen` |
+| 小さい行列は直接読める。`(0)(1)(1)` は `w^2`、`(0)(1)(2)` は `w^w`。対応表で二重に載っている項目はこれで決まる | `Trans.BMS.val_read_one_one`, `Trans.BMS.val_read_one_two` |
 | **階数は順序数の測度のうち最小であること**。どの評価もそれを上から抑える | `Eval.rank_le` |
 | DBMS の 1 行も同じ順序数を名指し、階数も一致すること | `Trans.DBMS.exists_dbms_of_lt_eps0`, `Trans.DBMS.rank_dbms_eq_val` |
 | `p0(W)` 未満で項が基本列の上限であること | `Trans.BMS.fs_lub` |

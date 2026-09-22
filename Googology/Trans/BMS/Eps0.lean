@@ -186,4 +186,68 @@ theorem bmsOrdEval_lt_eps0 (A : (Googology.Notation.BMS.bms 1).State) :
   rw [← val_te0]
   exact bmsOrdEval_lt_e0 A
 
+/-! ### Six matrices, read off
+
+The reading is a function, so the ordinal a small matrix names can be computed
+and stated.  These are the first entries of the published correspondence
+tables, and they agree — with one thing worth recording.  The table in
+[yaBMS](https://github.com/koteitan/yaBMS) lists `(0)(1)(1)` and `(0)(1)(2)`
+twice each, with different values: `ω + 2` and `ω²` for the first, `ω + 3` and
+`ω^ω` for the second.  One of each pair has to be wrong, and
+`val_read_one_one` and `val_read_one_two` say which: the values are `ω²` and
+`ω^ω`. -/
+
+theorem val_cons_nil {X t : Term} (hOT : OT X) (hA : AllNil X) :
+    val (cons nil X t) = (ω : Ordinal) ^ val X + val t := by
+  rw [val_cons, val_nil]
+  congr 1
+  refine Ord.psi_zero_eq_opow _ ?_
+  rw [← val_te0]
+  exact val_lt_val hOT OT_te0 (allNil_lt_e0 X hA)
+
+theorem allNil_t1 : AllNil t1 := ⟨rfl, trivial, trivial⟩
+
+theorem OT_t1 : OT t1 := by decide
+
+/-- `(0)` names `1`. -/
+theorem val_read_zero : val (read 0 [0]) = 1 := by
+  rw [show read 0 [0] = t1 from by simp [read_cons]]
+  exact val_t1
+
+/-- `(0)(0)` names `2`. -/
+theorem val_read_zero_zero : val (read 0 [0, 0]) = 2 := by
+  rw [show read 0 [0, 0] = cons nil nil t1 from by simp [read_cons],
+    val_cons_nil (X := nil) (t := t1) rfl trivial, val_nil, Ordinal.opow_zero, val_t1]
+  norm_num
+
+/-- `(0)(1)` names `ω`. -/
+theorem val_read_one : val (read 0 [0, 1]) = Ordinal.omega0 := by
+  rw [show read 0 [0, 1] = psi nil t1 from by simp [read_cons],
+    show psi nil t1 = cons nil t1 nil from rfl,
+    val_cons_nil OT_t1 allNil_t1, val_nil, add_zero, val_t1, Ordinal.opow_one]
+
+/-- `(0)(1)(0)` names `ω + 1`. -/
+theorem val_read_one_zero : val (read 0 [0, 1, 0]) = Ordinal.omega0 + 1 := by
+  rw [show read 0 [0, 1, 0] = cons nil t1 t1 from by simp [read_cons],
+    val_cons_nil OT_t1 allNil_t1, val_t1, Ordinal.opow_one]
+
+/-- **`(0)(1)(1)` names `ω²`**, not `ω + 2`. -/
+theorem val_read_one_one : val (read 0 [0, 1, 1]) = (ω : Ordinal) ^ (2 : Ordinal) := by
+  have h2 : val (cons nil nil t1) = 2 := val_read_zero_zero ▸ by
+    rw [show read 0 [0, 0] = cons nil nil t1 from by simp [read_cons]]
+  rw [show read 0 [0, 1, 1] = psi nil (cons nil nil t1) from by simp [read_cons],
+    show psi nil (cons nil nil t1) = cons nil (cons nil nil t1) nil from rfl,
+    val_cons_nil (X := cons nil nil t1) (t := nil) (by decide) ⟨rfl, trivial, allNil_t1⟩,
+    val_nil, add_zero, h2]
+
+/-- `(0)(1)(2)` names `ω^ω`. -/
+theorem val_read_one_two :
+    val (read 0 [0, 1, 2]) = (ω : Ordinal) ^ (ω : Ordinal) := by
+  have hw : val (psi nil t1) = Ordinal.omega0 := val_read_one ▸ by
+    rw [show read 0 [0, 1] = psi nil t1 from by simp [read_cons]]
+  rw [show read 0 [0, 1, 2] = psi nil (psi nil t1) from by simp [read_cons],
+    show psi nil (psi nil t1) = cons nil (psi nil t1) nil from rfl,
+    val_cons_nil (X := psi nil t1) (t := nil) (by decide) ⟨rfl, allNil_t1, trivial⟩,
+    val_nil, add_zero, hw]
+
 end Googology.Trans.BMS

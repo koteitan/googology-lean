@@ -66,6 +66,7 @@ Names are written relative to `Googology`.
 | **so the ordinal measure is a bijection onto `ε₀`** | `Trans.BMS.exists_bms_of_lt_eps0`, `Trans.BMS.bmsOrdEval_inj` |
 | **the rank of the system is that same ordinal** — the two measures are one | `Trans.BMS.rank_prim_eq_val`, `Trans.BMS.rank_bms_eq_val` |
 | the one-row generators name the towers of `ω`: `(0)` is `1`, `(0)(1)` is `ω` | `Trans.BMS.val_twr_succ`, `Trans.BMS.rank_primGen` |
+| and small matrices can be read off: `(0)(1)(1)` is `ω²` and `(0)(1)(2)` is `ω^ω`, which settles two duplicated table entries | `Trans.BMS.val_read_one_one`, `Trans.BMS.val_read_one_two` |
 | **the rank is the least ordinal measure** — any evaluation bounds it | `Eval.rank_le` |
 | one row of DBMS names the same ordinals, and its rank agrees too | `Trans.DBMS.exists_dbms_of_lt_eps0`, `Trans.DBMS.rank_dbms_eq_val` |
 | below `ψ_0(Ω)` a term is the least upper bound of its fundamental sequence | `Trans.BMS.fs_lub` |
