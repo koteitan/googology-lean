@@ -46,8 +46,8 @@ test/              骨組みの確認。架空の規則で、実在の系では�
 規則 2 が import の向きを保ちます。翻訳を `Notation/BMS/Trans/DBMS.lean` に置くと、
 BMS を import しただけで DBMS が付いてきて、最後には全部の系が付いてきます。
 
-巨大数の側で定義された系と、証明論の文献から来た系は、同じ種類のものである
-——項の型、順序、基本列——から、1 つのディレクトリに同居させます。mathlib は
+巨大数の側で定義された系と、証明論の文献から来た系は、同じ種類のもの——項の型、
+順序、基本列——なので、1 つのディレクトリに同居させています。mathlib は
 系ごとに import します。順序数へ評価する系だけが import します。
 
 ## 中核
@@ -109,8 +109,8 @@ Lean 4 v4.30.0。依存は 2 つ。mathlib と、BMS の停止性証明のため
 [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern)。
 
 `Googology.Core` は core Lean の外を何も import しません。だから停止性の道具一式は
-mathlib 無しで読めて使えます。mathlib が入るのは、表記系が順序数へ評価する場所だけで
-あります。今のところ `Googology.Notation.ExBuchholz.Ord` です。
+mathlib 無しで読めて使えます。mathlib が必要になるのは、表記系が順序数へ評価する
+ところだけです。今のところ `Googology.Notation.ExBuchholz.Ord` がそれにあたります。
 
 ## 状態
 

@@ -30,7 +30,7 @@ noncomputable def bms (r : ℕ) : Rewrite where
 停止性については、ここでは何も証明していません。証明——`R_r` のラベルと Σ 初等
 部分構造による、任意の行数のもの——は
 [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) に
-あり、このパッケージはそれを依存に持ちます。このファイルがするのは `Rewrite` の
+にあり、このパッケージはそれを依存に持っています。このファイルがするのは `Rewrite` の
 3 つのフィールドと `Subrelation.wf` 1 本を出すことだけで、残りは
 `Googology.Core` が出す。
 

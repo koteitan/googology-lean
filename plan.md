@@ -119,8 +119,10 @@ standard-form condition buys. Four steps:
 `c < a` holds syntactically and the proof needs `val c < val a`, which is 4.
 And 4 needs 3b, for the case where two principal terms share a subscript.
 
-So they are one simultaneous induction, on `size x + size y`, and every call
-strictly decreases:
+So they are one simultaneous induction. The measure is `size x` for the
+monotonicity half and `size a + size t` for the closure half — the left term
+alone, because a call at `(z, b)` for `z` collected by `G` from `b` has no
+bound in terms of the right one. Every call strictly decreases:
 
 * 4 at `(cons a b t, cons c d u)` calls 4 at `(a,c)`, `(b,d)`, `(t,u)` and at
   `(t, ψ_c(d))`, and 3b at `(a,b)`;
