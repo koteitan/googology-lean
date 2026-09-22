@@ -92,7 +92,9 @@ by computation. Those in `Std.lean` include `ε₀ = ψ_0(Ω)` being standard,
 | `dom` and the fundamental sequence `X[Y]` | done (`FS.lean`) |
 | the expansion system `exb` | defined |
 | **the fundamental sequence descends**: `Y < dom X → X[Y] < X` | **done** (`fs_lt`) |
-| `OT` closed under `[ ]`, and `dom X ∈ {1, ω}` below `Ω` | **not done** |
+| below `Ω`, a standard form other than `0` is a successor or an `ω`-limit | done (`dom_eq_one_or_tw`) |
+| **one step strictly decreases a countable standard form** | **done** (`step_lt`) |
+| `OT` and `· < Ω` preserved by the step | **not done** — the last gap |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 `axiom`.

@@ -407,7 +407,7 @@ theorem fs_lt_aux : ∀ n : Nat, ∀ X Y : Term, size X ≤ n → Y < dom X → 
 theorem fs_lt {X Y : Term} (h : Y < dom X) : fs X Y < X :=
   fs_lt_aux (size X) X Y (Nat.le_refl _) h
 
-/-! ## As an expansion system -/
+/-! ## Below Ω: successors and ω-limits -/
 
 /-- The numeral `n`, as a term. -/
 def numeral (n : Nat) : Term := repeatPrin nil nil n
@@ -415,18 +415,99 @@ def numeral (n : Nat) : Term := repeatPrin nil nil n
 #guard numeral 0 = t0
 #guard numeral 3 = t3
 
+
+/-- A term below `Ω` has `0` as its leading subscript. -/
+theorem sub_eq_nil_of_lt_tW {a b t : Term} (h : cons a b t < tW) : a = nil := by
+  rcases cons_lt_cons_iff.mp h with h1 | ⟨_, h1⟩
+  · rcases psi_lt_psi_iff.mp h1 with h2 | ⟨_, h2⟩
+    · exact lt_one_iff.mp h2
+    · exact absurd h2 (not_lt_nil _)
+  · exact absurd h1 (not_lt_nil _)
+
+/-- **Below `Ω`, a standard form other than `0` is a successor or an
+`ω`-limit.** -/
+theorem dom_eq_one_or_tw : ∀ X : Term, OT X → X < tW → X ≠ nil →
+    dom X = t1 ∨ dom X = tw := by
+  intro X
+  induction X with
+  | nil => intro _ _ h; exact absurd rfl h
+  | cons a b t _ _ iht =>
+    intro hOT hlt _
+    cases t with
+    | cons c d u =>
+      have hhead : psi c d ≤ psi a b := OT_tail_head_le hOT
+      have hab : psi a b < psi t1 nil := by
+        rcases cons_lt_cons_iff.mp hlt with h1 | ⟨_, h1⟩
+        · exact h1
+        · exact absurd h1 (not_lt_nil _)
+      refine iht (OT_tail hOT) ?_ (fun h => Term.noConfusion h)
+      exact cons_lt_cons_iff.mpr (Or.inl (lt_of_le_of_lt' hhead hab))
+    | nil =>
+      have ha : a = nil := sub_eq_nil_of_lt_tW hlt
+      subst ha
+      rw [dom]
+      split
+      · rename_i h1
+        have hb : b = nil := dom_eq_nil_iff.mp h1
+        subst hb
+        exact Or.inl rfl
+      · rename_i h1
+        split
+        · exact Or.inr rfl
+        · rename_i h2
+          split
+          · exact Or.inr rfl
+          · rename_i h3
+            split
+            · rename_i h4
+              exfalso
+              obtain ⟨Z, hZ⟩ : ∃ Z, dom b = cons Z nil nil := by
+                rcases dom_shape b with h | h | h
+                · exact absurd h h1
+                · exact absurd h h3
+                · exact h
+              rw [hZ] at h4
+              rcases psi_lt_psi_iff.mp h4 with h5 | ⟨h5, _⟩
+              · exact absurd h5 (not_lt_nil _)
+              · exact h2 (by rw [hZ, h5])
+            · exact Or.inr rfl
+
+theorem numeral_lt_tw (n : Nat) : numeral n < tw := by
+  cases n with
+  | zero => exact nil_lt_cons _ _ _
+  | succ k =>
+    show cons nil nil (numeral k) < cons nil t1 nil
+    exact cons_lt_cons_iff.mpr (Or.inl (psi_lt_psi_iff.mpr (Or.inr ⟨rfl, nil_lt_cons _ _ _⟩)))
+
+/-- The index to expand at: `0` at a successor, the numeral `n` otherwise. -/
+def idx (X : Term) (n : Nat) : Term := if dom X = t1 then nil else numeral n
+
+theorem idx_lt_dom {X : Term} (hOT : OT X) (hlt : X < tW) (hne : X ≠ nil) (n : Nat) :
+    idx X n < dom X := by
+  rcases dom_eq_one_or_tw X hOT hlt hne with h | h
+  · rw [idx, if_pos h, h]; exact nil_lt_cons _ _ _
+  · have hne' : dom X ≠ t1 := by rw [h]; decide
+    rw [idx, if_neg hne', h]
+    exact numeral_lt_tw n
+
+/-- **One expansion step strictly decreases a countable standard form.** -/
+theorem step_lt {X : Term} (hOT : OT X) (hlt : X < tW) (hne : X ≠ nil) (n : Nat) :
+    fs X (idx X n) < X :=
+  fs_lt (idx_lt_dom hOT hlt hne n)
+
+/-! ## As an expansion system -/
+
 /-- Extended Buchholz terms as an expansion system: one step is the
 fundamental sequence at the numeral `n`.
 
-Well-foundedness is **not** proved.  `fs_lt` above gives the descent, but only
-under `Y < dom X`, and the order on all terms is not well founded anyway.  Two
-things are still missing: that `OT` is closed under `[ ]`, and that a standard
-`X` below `Ω` other than `0` has `dom X` equal to `1` or `ω`, so that the
-numeral index really is below `dom X`.  Granting those, restricting the state
-to `OT` and composing `valHom` with `OrdHom.wf` gives it. -/
+Well-foundedness is **not** proved, but `step_lt` above is most of it: one step
+strictly decreases any standard form below `Ω` other than `0`.  What is left is
+that `OT` and `· < Ω` are preserved by the step, so that the state can be
+restricted to the countable standard forms and `valHom` with `OrdHom.wf`
+applied. -/
 def exb : Rewrite where
   State := Term
-  step := fun X n => fs X (numeral n)
+  step := fun X n => fs X (idx X n)
   halted := fun X => X = nil
 
 example : Prop := exb.Terminates
