@@ -562,4 +562,153 @@ theorem psi_Omega_mul_zeta0 : psi ((Ω_ 1 : Ordinal.{u}) * zeta0.{u}) 0 = zeta0.
     rw [← one_add_zeta0]
     exact (add_le_add_iff_left 1).mpr hx.le
 
+/-! ### `ψ_0(Ω²) = ζ₀`
+
+The ladder reaches `ψ_0(Ω·γ)` for `γ < ζ₀`; the argument `Ω²` is past all of
+them, and the collapse is `ζ₀` itself.  What the induction carries is both
+halves of the division by `Ω`: a member of `C_0(Ω²)` below `Ω²` has its
+remainder **and** its quotient below `ζ₀`. -/
+
+theorem opow_zeta0 : (ω : Ordinal.{u}) ^ zeta0.{u} = zeta0.{u} := by
+  conv_lhs => rw [← eps_zeta0]
+  rw [opow_eps, eps_zeta0]
+
+theorem isPrincipal_add_zeta0 : Ordinal.IsPrincipal (· + ·) zeta0.{u} := by
+  conv_rhs => rw [← opow_zeta0]
+  exact Ordinal.isPrincipal_add_omega0_opow _
+
+theorem isPrincipal_mul_zeta0 : Ordinal.IsPrincipal (· * ·) zeta0.{u} := by
+  have := Ordinal.isPrincipal_mul_omega0_opow_opow zeta0.{u}
+  rwa [opow_zeta0, opow_zeta0] at this
+
+theorem opow_lt_zeta0 {b : Ordinal.{u}} (h : b < zeta0.{u}) : (ω : Ordinal.{u}) ^ b < zeta0.{u} := by
+  conv_rhs => rw [← opow_zeta0]
+  exact (Ordinal.opow_lt_opow_iff_right Ordinal.one_lt_omega0).mpr h
+
+theorem zeta0_pos : (0 : Ordinal.{u}) < zeta0.{u} :=
+  lt_of_lt_of_le eps0_pos (le_of_lt eps0_lt_zeta0)
+
+theorem add_div_Omega_of_lt {v p q : Ordinal.{u}} (h : q < Ω_ v) :
+    (p + q) / Ω_ v = p / Ω_ v := by
+  have hsum : p + q = Ω_ v * (p / Ω_ v) + (p % Ω_ v + q) := by
+    conv_lhs => rw [← Ordinal.div_add_mod p (Ω_ v)]
+    rw [add_assoc]
+  rw [hsum, Ordinal.mul_add_div _ (ne_of_gt (Omega_pos v)),
+    Ordinal.div_eq_zero_of_lt (isPrincipal_add_Omega v
+      (Ordinal.mod_lt p (ne_of_gt (Omega_pos v))) h), add_zero]
+
+theorem add_div_Omega_of_le {v p q : Ordinal.{u}} (h : Ω_ v ≤ q) :
+    (p + q) / Ω_ v = p / Ω_ v + q / Ω_ v := by
+  have hc : 1 ≤ q / Ω_ v := by
+    refine (Ordinal.mul_le_iff_le_div (ne_of_gt (Omega_pos v))).mp ?_
+    rw [mul_one]
+    exact h
+  have hpΩ : p + Ω_ v = Ω_ v * (p / Ω_ v + 1) := by
+    conv_lhs => rw [← Ordinal.div_add_mod p (Ω_ v)]
+    rw [add_assoc, add_Omega (Ordinal.mod_lt p (ne_of_gt (Omega_pos v))), mul_add, mul_one]
+  have hsum : p + q = Ω_ v * (p / Ω_ v + 1 + (q / Ω_ v - 1)) + q % Ω_ v := by
+    conv_lhs => rw [← Ordinal.div_add_mod q (Ω_ v)]
+    rw [← add_assoc]
+    congr 1
+    conv_lhs => rw [← Ordinal.add_sub_cancel_of_le hc, mul_add, mul_one, ← add_assoc, hpΩ]
+    exact (mul_add _ _ _).symm
+  rw [hsum, Ordinal.mul_add_div _ (ne_of_gt (Omega_pos v)),
+    Ordinal.div_eq_zero_of_lt (Ordinal.mod_lt q (ne_of_gt (Omega_pos v))), add_zero, add_assoc,
+    Ordinal.add_sub_cancel_of_le hc]
+
+theorem Omega_sq_lt_Omega_two : (Ω_ 1 : Ordinal.{u}) * Ω_ 1 < Ω_ 2 := by
+  rw [show (2 : Ordinal.{u}) = 1 + 1 from one_add_one_eq_two.symm]
+  refine lt_Omega_succ_of_card_le ?_
+  rw [Ordinal.card_mul, card_Omega_one]
+  exact le_of_eq (Cardinal.mul_eq_self (Cardinal.aleph0_le_aleph 1))
+
+theorem Omega_mul_lt_Omega_sq {μ : Ordinal.{u}} (h : μ < Ω_ 1) :
+    (Ω_ 1 : Ordinal.{u}) * μ < Ω_ 1 * Ω_ 1 :=
+  (mul_lt_mul_iff_of_pos_left (Omega_pos 1)).mpr h
+
+/-- **Both halves of the division stay below `ζ₀`.** -/
+theorem div_mod_lt_zeta0 : ∀ x : Ordinal.{u}, x ∈ CSet 0 ((Ω_ 1 : Ordinal.{u}) * Ω_ 1) →
+    x < (Ω_ 1 : Ordinal.{u}) * Ω_ 1 → x % Ω_ 1 < zeta0.{u} ∧ x / Ω_ 1 < zeta0.{u} := by
+  intro x hx
+  induction hx with
+  | @small y h =>
+    intro _
+    rw [Omega_zero, Order.lt_one_iff] at h
+    rw [h]
+    exact ⟨by simpa using zeta0_pos, by simpa using zeta0_pos⟩
+  | @add p q _ _ ihp ihq =>
+    intro hlt
+    obtain ⟨hpm, hpd⟩ := ihp (lt_of_le_of_lt (self_le_add_right _ _) hlt)
+    obtain ⟨hqm, hqd⟩ := ihq (lt_of_le_of_lt (self_le_add_left _ _) hlt)
+    rcases lt_or_ge q (Ω_ 1) with hq | hq
+    · rw [add_mod_Omega_of_lt hq, add_div_Omega_of_lt hq]
+      refine ⟨isPrincipal_add_zeta0 hpm ?_, hpd⟩
+      rwa [Ordinal.mod_eq_of_lt hq] at hqm
+    · rw [add_mod_Omega_of_le hq, add_div_Omega_of_le hq]
+      exact ⟨hqm, isPrincipal_add_zeta0 hpd hqd⟩
+  | @coll u e _ _ _ ihe =>
+    intro hlt
+    rcases eq_or_ne u 0 with rfl | hu0
+    · -- ψ_0(e) is countable, so the quotient is 0
+      have hcount : psi e.1 0 < Ω_ 1 := psi_zero_lt_Omega_one e.1
+      rw [Ordinal.mod_eq_of_lt hcount, Ordinal.div_eq_zero_of_lt hcount]
+      refine ⟨?_, zeta0_pos⟩
+      obtain ⟨hem, hed⟩ := ihe e.2
+      have hdm : Ω_ 1 * (e.1 / Ω_ 1) + e.1 % Ω_ 1 = e.1 := Ordinal.div_add_mod e.1 (Ω_ 1)
+      rcases eq_or_ne (e.1 / Ω_ 1) 0 with hd0 | hd0
+      · have hsm : e.1 < Ω_ 1 := by
+          rw [hd0, mul_zero, zero_add] at hdm
+          rw [← hdm]
+          exact Ordinal.mod_lt _ (ne_of_gt (Omega_pos 1))
+        have he : e.1 < zeta0.{u} := by
+          rwa [Ordinal.mod_eq_of_lt hsm] at hem
+        exact lt_of_le_of_lt (psi_zero_le_opow e.1) (opow_lt_zeta0 he)
+      · obtain ⟨δ, hδ⟩ : ∃ δ : Ordinal.{u}, e.1 / Ω_ 1 = 1 + δ :=
+          ⟨e.1 / Ω_ 1 - 1, (Ordinal.add_sub_cancel_of_le
+            (Order.one_le_iff_ne_zero.mpr hd0)).symm⟩
+        have hδz : δ < zeta0.{u} := by
+          rw [hδ] at hed
+          exact lt_of_le_of_lt (self_le_add_left δ 1) hed
+        have heq : Ω_ 1 * (1 + δ) + e.1 % Ω_ 1 = e.1 := by rw [← hδ, hdm]
+        rw [← heq]
+        refine lt_of_le_of_lt (psi_Omega_mul_add_le δ _) ?_
+        exact isPrincipal_mul_zeta0 (eps_lt_zeta0 hδz) (opow_lt_zeta0 hem)
+    · rcases eq_or_ne u 1 with rfl | hu1
+      · -- ψ_1(e) = Ω·ω^e
+        have heΩ : e.1 < Ω_ 1 := by
+          by_contra hcon
+          refine absurd hlt (not_lt.mpr ?_)
+          have h1 : psi (Ω_ 1 : Ordinal.{u}) 1 ≤ psi e.1 1 := psi_mono 1 (not_lt.mp hcon)
+          have h2 : psi (Ω_ 1 : Ordinal.{u}) 1 = Ω_ 1 * Ω_ 1 := by
+            rw [psi_one_eq (Omega_lt_fpOmega 1), opow_Omega_one]
+          exact le_trans (le_of_eq h2.symm) h1
+        obtain ⟨hem, _⟩ := ihe e.2
+        have he : e.1 < zeta0.{u} := by rwa [Ordinal.mod_eq_of_lt heΩ] at hem
+        have hval : psi e.1 1 = Ω_ 1 * (ω : Ordinal.{u}) ^ e.1 :=
+          psi_one_eq (lt_of_lt_of_le heΩ (Omega_le_fpOmega 1))
+        rw [hval, Ordinal.mul_mod, Ordinal.mul_div_cancel _ (ne_of_gt (Omega_pos 1))]
+        exact ⟨zeta0_pos, opow_lt_zeta0 he⟩
+      · exfalso
+        have h2 : (2 : Ordinal.{u}) ≤ u := by
+          rw [show (2 : Ordinal.{u}) = 1 + 1 from one_add_one_eq_two.symm,
+            ← Order.succ_eq_add_one]
+          refine Order.succ_le_of_lt ?_
+          rcases lt_trichotomy u 1 with h | h | h
+          · exact absurd (Order.lt_one_iff.mp h) hu0
+          · exact absurd h hu1
+          · exact h
+        exact absurd hlt (not_lt.mpr (le_trans Omega_sq_lt_Omega_two.le
+          (le_trans (Omega_mono h2) (Omega_le_psi e.1 u))))
+
+/-- **`ψ_0(Ω²) = ζ₀`.** -/
+theorem psi_Omega_sq : psi ((Ω_ 1 : Ordinal.{u}) * Ω_ 1) 0 = zeta0.{u} := by
+  refine le_antisymm ?_ ?_
+  · refine psi_le_of_bound (fun x hx hc => ?_)
+    have hxΩ : x < Ω_ 1 := lt_Omega_one_of_card_le hc
+    obtain ⟨hm, -⟩ := div_mod_lt_zeta0 x hx
+      (lt_of_lt_of_le hxΩ (Ordinal.le_mul_right _ (Omega_pos 1)))
+    rwa [Ordinal.mod_eq_of_lt hxΩ] at hm
+  · rw [← psi_Omega_mul_zeta0]
+    exact psi_mono 0 (mul_le_mul_right (le_trans (zeta0_le_Omega_one) (le_refl _)) _)
+
 end Googology.Notation.ExBuchholz.Ord

@@ -56,7 +56,7 @@ Names are written relative to `Googology`.
 | **and `ψ_0(Ω·(n+1)) = ε_n` at every finite `n`**, with `ψ_0(Ω·(n+1) + a) = ε_n·ω^a` below `ε_{n+1}` | `Notation.ExBuchholz.Ord.psi_OmegaMul`, `Notation.ExBuchholz.Ord.psi_OmegaMul_add` |
 | **and `ψ_0(Ω·ω) = ε_ω`**, with `ψ_1(1) = Ω·ω` | `Notation.ExBuchholz.Ord.psi_Omega_omega`, `Notation.ExBuchholz.Ord.psi_one_one` |
 | **and `ψ_0(Ω·(1+γ)) = ε_γ` at every `γ` below `ζ₀`**, with `ψ_0(Ω·(1+γ) + β) = ε_γ·ω^β` below `ε_{γ+1}` | `Notation.ExBuchholz.Ord.psi_Omega_mul_eps`, `Notation.ExBuchholz.Ord.psi_Omega_mul_add_eps` |
-| **and `ψ_0(Ω·ζ₀) = ζ₀`**, the first ordinal `ψ_0` and `ψ_1` together miss | `Notation.ExBuchholz.Ord.psi_Omega_mul_zeta0` |
+| **and `ψ_0(Ω·ζ₀) = ψ_0(Ω²) = ζ₀`**, the first ordinal `ψ_0` and `ψ_1` together miss | `Notation.ExBuchholz.Ord.psi_Omega_mul_zeta0`, `Notation.ExBuchholz.Ord.psi_Omega_sq` |
 | **and the same ladder at every subscript**: `ψ_v(Ω_{v+1}·(1+γ)) = ε^v_γ` | `Notation.ExBuchholz.Ord.psi_OmegaV_mul_eq`, `Notation.ExBuchholz.Ord.psi_OmegaV_mul_eq_nat` |
 | **`val` is onto the ordinals below `ζ₀`**, by exactly one standard form | `Trans.BMS.exists_OT_of_lt_zeta0`, `Trans.BMS.existsUnique_OT_of_lt_zeta0` |
 | an additively principal member of `C_v(a)` is below `Ω_v` or a collapse, and any member splits off a leading principal — the first two steps of a normal form theorem | `Notation.ExBuchholz.Ord.principal_mem_CSet`, `Notation.ExBuchholz.Ord.exists_principal_split` |

@@ -119,6 +119,7 @@ inductive Term where
 | `p0(W·(1+g))`、`g < z0` | `e_g` | `psi_Omega_mul_eps` |
 | `p0(W·(1+g) + b)`、`g < z0`、`b < e_{g+1}` | `e_g·w^b` | `psi_Omega_mul_add_eps` |
 | `p0(W·z0)` | `z0` | `psi_Omega_mul_zeta0` |
+| `p0(W^2)` | これも `z0` | `psi_Omega_sq` |
 | `p_v(W_{v+1}·(1+g))`、`g < z^v` | `e^v_g`。全ての添字で | `psi_OmegaV_mul_eq` |
 | `p_n(W_{n+1}·(1+g))`、有限の `n` | 同じもの。条件は自動で満たされる | `psi_OmegaV_mul_eq_nat` |
 | `p_v(W_{v+1}·z^v)` | `z^v`。その添字が止まる所 | `psi_OmegaV_mul_zetaV` |

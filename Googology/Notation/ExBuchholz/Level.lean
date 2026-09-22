@@ -138,6 +138,12 @@ theorem lt_mul_opow_of_lt_fpOmega {v b : Ordinal.{u}} (h : b < fpOmega v) :
   · exact absurd h (not_lt.mpr
       (Ordinal.nfp_le_fp (mul_opow_monotone (Ω_ v)) (by simp : (0 : Ordinal.{u}) ≤ b) hb))
 
+theorem Omega_lt_fpOmega (v : Ordinal.{u}) : Ω_ v < fpOmega v := by
+  refine lt_of_lt_of_le ?_ (Ordinal.iterate_le_nfp
+    (fun x => Ω_ v * (ω : Ordinal.{u}) ^ x) 0 2)
+  rw [Function.iterate_succ_apply', Function.iterate_one, Ordinal.opow_zero, mul_one]
+  exact lt_mul_opow_self (Omega_pos v) (ne_of_gt (Omega_pos v))
+
 theorem Omega_le_fpOmega (v : Ordinal.{u}) : Ω_ v ≤ fpOmega v := by
   refine le_trans (le_of_eq ?_) (Ordinal.iterate_le_nfp
     (fun x => Ω_ v * (ω : Ordinal.{u}) ^ x) 0 1)
