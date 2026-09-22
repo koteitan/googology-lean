@@ -210,6 +210,29 @@ theorem Trian.psi_left (u : Term) {z b₀ b : Term} (h : Trian z b₀ b) :
   · rw [G_psi_of_not_le hvu]
     intro x hx; cases hx
 
+theorem listLe_trans {M N P : List Term} (h₁ : listLe M N) (h₂ : listLe N P) :
+    listLe M P := by
+  intro x hx
+  obtain ⟨y, hy, hxy⟩ := h₁ x hx
+  obtain ⟨w, hw, hyw⟩ := h₂ y hy
+  exact ⟨w, hw, le_trans hxy hyw⟩
+
+theorem listLe_append_congr {M M' N N' : List Term}
+    (h₁ : listLe M M') (h₂ : listLe N N') : listLe (M ++ N) (M' ++ N') := by
+  intro x hx
+  rcases List.mem_append.mp hx with hx | hx
+  · obtain ⟨y, hy, hxy⟩ := h₁ x hx
+    exact ⟨y, List.mem_append_left _ hy, hxy⟩
+  · obtain ⟨y, hy, hxy⟩ := h₂ x hx
+    exact ⟨y, List.mem_append_right _ hy, hxy⟩
+
+/-- `⊲` may be re-based on a larger index, as long as `G°` grows with it. -/
+theorem Trian.mono_z {z z' b a : Term} (h : Trian z b a)
+    (hz : ∀ u, listLe (G0 u z) (G0 u z')) : Trian z' b a :=
+  ⟨h.1, fun u c hc hca =>
+    listLe_trans (h.2 u c hc hca)
+      (listLe_append_congr (listLe_refl _) (hz u))⟩
+
 /-! ## Buchholz 3.4 -/
 
 theorem G0_lt {u z b : Term} (hz : ∀ x ∈ G u z, x < b) (hb : nil < b) :
@@ -330,11 +353,11 @@ subscript of `dom X₂`; Buchholz's case 4 computes `G` there by hand.
 
 /-- `0 ⊲_z a` for any nonzero `a`: `G` sees nothing in `0`. -/
 theorem Trian_nil {z a : Term} (h : nil < a) : Trian z nil a :=
-  ⟨h, fun _ _ _ _ x hx => absurd hx (List.not_mem_nil)⟩
+  ⟨h, fun _ _ _ _ _ hx => absurd hx (List.not_mem_nil)⟩
 
 /-- `z ⊲_z a` whenever `z < a`: what `G` sees in `z` is in `G° z` already. -/
 theorem Trian_self {z a : Term} (h : z < a) : Trian z z a :=
-  ⟨h, fun u _ _ _ x hx =>
+  ⟨h, fun _ _ _ _ x hx =>
     ⟨x, List.mem_append_right _ (List.mem_cons_of_mem _ hx), le_refl x⟩⟩
 
 /-- `⊲_0` is the strongest of the family: `G° 0` sits inside every `G° z`. -/
