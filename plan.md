@@ -99,7 +99,7 @@ labels in `R_r` and Σ-elementary substructures — which this package requires.
 `Subrelation.wf`; `Core` supplies the rest. `Pat.StdR` there is `Rewrite.Rel`
 here, written out by hand, so the fit needed no adaptation.
 
-### `Trans/` — one row done, and the hierarchy
+### `Trans/` — one row done, the hierarchy, and the first two-row ordinals
 
 `Trans/BMS/` translates a one-row Bashicu matrix into an extended Buchholz
 term and back: `read` and `unread` for the reading, `OneRow.lean` for what
@@ -113,6 +113,11 @@ and general rules are one rule, `Same.lean` says the general system at one and
 two rows **is** the primitive and pair sequence system, and `ZeroRow.lean`
 says a row of zeros underneath changes neither the rule nor the ordinal, so
 `bmsL r` sits inside `bmsL s` whenever `r ≤ s`.
+
+`Eps0.lean` closes one row as ordinals — it names exactly those below `ε₀` —
+`RankVal.lean` says the rank of the system is that same ordinal and computes
+the first two-row ranks, and `Append.lean` says expansion never reaches back
+across a block, which makes the rank additive over blocks.
 
 ### `Notation/DBMS/` — done
 
