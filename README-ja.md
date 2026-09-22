@@ -89,6 +89,7 @@
 | **だから階数はブロックについて加法的**。ブロックの `n` 個並びは階数が `n` 倍 | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_repNState` |
 | **`m₀ = 0` なら展開は固定部分とブロックの繰り返し**。だから階数は `w` 倍になる | `Trans.BMS.expandRL_of_m0_zero`, `Trans.BMS.rank_mul_omega0` |
 | よって `(0,0)(1,0)` は `w`、`(0,0)(1,1)(1,0)` は `e0·w`、`(0,0)(1,1)(0,0)(1,0)` は `e0 + w` | `Trans.BMS.rank_omegaCol`, `Trans.BMS.rank_omegaAll`, `Trans.BMS.rank_sumAll` |
+| 繰り返せる。`(0,0)(1,1)(1,0)(1,0)` の階数は `e0·w^2` | `Trans.BMS.rank_omegaSqAll` |
 
 届かないもの。`(0,0)(1,1)(2,1)` は `m₀ = 1` なので各コピーに加算が付いて互いに
 違う。`(0,0)(1,1)(2,0)` は繰り返しではあるが、繰り返すのが `(1,1)` で、ブロックで

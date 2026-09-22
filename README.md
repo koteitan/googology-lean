@@ -91,6 +91,7 @@ expansions are understood.
 | **so the rank is additive over blocks**, and `n` copies of a block have `n` times its rank | `Trans.BMS.rank_appendState`, `Trans.BMS.rank_repNState` |
 | **with `m₀ = 0` the expansion is a fixed part and a block repeated**, so the rank is multiplied by `ω` | `Trans.BMS.expandRL_of_m0_zero`, `Trans.BMS.rank_mul_omega0` |
 | so `(0,0)(1,0)` has rank `ω`, `(0,0)(1,1)(1,0)` has `ε₀·ω`, and `(0,0)(1,1)(0,0)(1,0)` has `ε₀ + ω` | `Trans.BMS.rank_omegaCol`, `Trans.BMS.rank_omegaAll`, `Trans.BMS.rank_sumAll` |
+| and it iterates: `(0,0)(1,1)(1,0)(1,0)` has rank `ε₀·ω²` | `Trans.BMS.rank_omegaSqAll` |
 
 What it does not reach: `(0,0)(1,1)(2,1)`, where `m₀` is `1` so the copies
 are incremented and differ; `(0,0)(1,1)(2,0)`, which does repeat, but repeats

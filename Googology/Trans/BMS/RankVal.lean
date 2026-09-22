@@ -539,6 +539,25 @@ theorem step_sumAll (N : Nat) :
   rw [expandRL_of_m0_zero 2 N _ 2 rfl rfl (by decide)]
   rfl
 
+/-- `(0,0)(1,1)(1,0)(1,0)`. -/
+def omegaSqAll : (bmsAllL 1).State := ⟨[[0, 0], [1, 1], [1, 0], [1, 0]], by decide⟩
+
+theorem step_omegaSqAll (N : Nat) :
+    (bmsAllL 1).step omegaSqAll N = appendState emptyAll (repNState (N + 1) omegaAll) := by
+  refine Subtype.ext ?_
+  show expandRL 2 N [[0, 0], [1, 1], [1, 0], [1, 0]]
+    = [] ++ repN (N + 1) [[0, 0], [1, 1], [1, 0]]
+  rw [expandRL_of_m0_zero 2 N _ 0 rfl rfl (by decide)]
+  rfl
+
+/-- **`(0,0)(1,1)(1,0)(1,0)` has rank `ε₀·ω²`.**  The block that repeats is
+itself one whose rank was computed this way, so the family goes on. -/
+theorem rank_omegaSqAll : IsWellFounded.rank (bmsAllL 1).Rel omegaSqAll
+    = Ord.eps0 * Ordinal.omega0 * Ordinal.omega0 := by
+  rw [rank_mul_omega0 omegaSqAll emptyAll omegaAll
+      (show ¬ ([[0, 0], [1, 1], [1, 0], [1, 0]] : List (List Nat)) = [] by simp) rfl
+      (by simp [omegaAll]) step_omegaSqAll, rank_emptyAll, rank_omegaAll, zero_add]
+
 /-- **`(0,0)(1,1)(0,0)(1,0)` has rank `ε₀ + ω`.**  Here the good part is not
 empty: the first block stays and the second is the one that repeats. -/
 theorem rank_sumAll :
