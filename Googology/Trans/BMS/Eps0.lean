@@ -355,6 +355,22 @@ theorem val_tew2 : val tew2 = Ord.eps0 * Ordinal.omega0 * Ordinal.omega0 := by
     h2, Ord.psi_Omega_add_eq 2 h2lt,
     show (2 : Ordinal) = 1 + 1 from by norm_num, Ordinal.opow_add, Ordinal.opow_one, ← mul_assoc]
 
+/-- The term `ω²`, that is `ψ_0(2)`. -/
+abbrev tw2 : Term := psi nil (addT t1 t1)
+
+theorem OT_tw2 : OT tw2 := by decide
+
+theorem val_tw2 : val tw2 = Ordinal.omega0 * Ordinal.omega0 := by
+  have h2 : val (addT t1 t1) = 2 := by
+    rw [val_addT, val_t1]
+    norm_num
+  have h2lt : (2 : Ordinal) < Ord.eps0 := by
+    refine lt_of_lt_of_le ?_ Ord.omega0_le_eps0
+    exact_mod_cast Ordinal.natCast_lt_omega0 2
+  rw [show tw2 = psi nil (addT t1 t1) from rfl, val_psi, val_nil, h2,
+    Ord.psi_zero_eq_opow 2 h2lt, show (2 : Ordinal) = 1 + 1 from by norm_num,
+    Ordinal.opow_add, Ordinal.opow_one]
+
 /-- The term `ω`, that is `ψ_0(1)`. -/
 abbrev tw : Term := psi nil t1
 
@@ -364,9 +380,26 @@ theorem val_tw : val tw = Ordinal.omega0 := by
   rw [show tw = psi nil t1 from rfl, val_psi, val_nil, val_t1,
     Ord.psi_zero_eq_opow 1 Ord.one_lt_eps0, Ordinal.opow_one]
 
+
 /-- **`ψ_0(Ω)` is `ε₀`.** -/
 theorem val_te0 : val te0 = Ord.eps0 := by
   rw [show te0 = psi nil tW from rfl, val_psi, val_nil, val_tW, Ord.psi_Omega_one]
+
+/-- The term `ε₀ + 1`. -/
+abbrev te0_one : Term := addT te0 t1
+
+theorem OT_te0_one : OT te0_one := by decide
+
+theorem val_te0_one : val te0_one = Ord.eps0 + 1 := by
+  rw [show te0_one = addT te0 t1 from rfl, val_addT, val_te0, val_t1]
+
+/-- The term `ε₀ + ω`. -/
+abbrev te0_w : Term := addT te0 tw
+
+theorem OT_te0_w : OT te0_w := by decide
+
+theorem val_te0_w : val te0_w = Ord.eps0 + Ordinal.omega0 := by
+  rw [show te0_w = addT te0 tw from rfl, val_addT, val_te0, val_tw]
 
 /-! ### `val` is onto below `ε₁` -/
 

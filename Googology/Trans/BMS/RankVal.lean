@@ -649,4 +649,13 @@ theorem rank_omegaAll_val : IsWellFounded.rank (bmsAllL 1).Rel omegaAll = val te
 theorem rank_omegaSqAll_val : IsWellFounded.rank (bmsAllL 1).Rel omegaSqAll = val tew2 := by
   rw [rank_omegaSqAll, val_tew2]
 
+theorem rank_omegaSqCol_val : IsWellFounded.rank (bmsAllL 1).Rel omegaSqCol = val tw2 := by
+  rw [rank_omegaSqCol, val_tw2]
+
+theorem rank_succAll_val : IsWellFounded.rank (bmsAllL 1).Rel succAll = val te0_one := by
+  rw [rank_succAll, val_te0_one]
+
+theorem rank_sumAll_val : IsWellFounded.rank (bmsAllL 1).Rel sumAll = val te0_w := by
+  rw [rank_sumAll, val_te0_w]
+
 end Googology.Trans.BMS
