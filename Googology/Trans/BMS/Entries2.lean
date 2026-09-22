@@ -21,6 +21,11 @@ maps over ranges, so no entry is indexed by hand; the only new work is that
 the block now depends on which copy it is in and on the ancestor test, and
 `BMS/Anc.lean` supplies the second.
 
+`expand2L_terminates` is what comes out for free: a run of two-row expansions
+computed on the entries reaches the empty matrix.  Termination is
+`Notation.BMS.bms_terminates 2`; what is added is that the step is a function
+that runs, which the array version is not — `BM4.expand` is `noncomputable`.
+
 What is still missing for a two-row translation is the reading.  It has to use
 `ψ` at every finite subscript, because the two-row generators climb through
 `ψ_0(Ω_n)`; see the plan.
@@ -28,7 +33,7 @@ What is still missing for a two-row translation is the reading.  It has to use
 
 namespace Googology.Trans.BMS
 
-open BM4
+open BM4 Pat
 
 /-- Both rows of a two-row array, as a list of pairs. -/
 def entries2 (A : Arr 2) : List (Nat × Nat) :=
@@ -157,6 +162,7 @@ theorem parAt_eq_none {l : List Nat} {i : Nat} (h : parAt l i = none) (j : Nat) 
 
 /-- The bad root, and whether the maximal parent row is `1`. -/
 def badRootL (l : List (Nat × Nat)) : Option (Nat × Bool) :=
+  if l.isEmpty then none else
   match parAt1 l (l.length - 1) with
   | some p => some (p, true)
   | none =>
@@ -175,6 +181,7 @@ theorem hasParent1_iff (A : Arr 2) :
 theorem badRootL_true {A : Arr 2} {p : Nat} (h : badRootL (entries2 A) = some (p, true)) :
     HasParent A 1 (A.len - 1) ∧ parent A 1 p (A.len - 1) := by
   rw [badRootL] at h
+  rw [if_neg (by intro he; rw [he] at h; exact absurd h (by simp))] at h
   cases hp : parAt1 (entries2 A) ((entries2 A).length - 1) with
   | none =>
     rw [hp] at h
@@ -192,6 +199,7 @@ theorem badRootL_true {A : Arr 2} {p : Nat} (h : badRootL (entries2 A) = some (p
 theorem badRootL_false {A : Arr 2} {p : Nat} (h : badRootL (entries2 A) = some (p, false)) :
     ¬ HasParent A 1 (A.len - 1) ∧ parent A 0 p (A.len - 1) := by
   rw [badRootL] at h
+  rw [if_neg (by intro he; rw [he] at h; exact absurd h (by simp))] at h
   cases hp : parAt1 (entries2 A) ((entries2 A).length - 1) with
   | some q => rw [hp] at h; simp_all
   | none =>
@@ -210,9 +218,12 @@ theorem badRootL_false {A : Arr 2} {p : Nat} (h : badRootL (entries2 A) = some (
       · rw [← h.1]
         exact (ParL_iff_parent (by omega) A q _).mp ((parAt_eq_some _ _ _).mp hq)
 
-theorem badRootL_none {A : Arr 2} (h : badRootL (entries2 A) = none) :
+theorem badRootL_none {A : Arr 2} (h : badRootL (entries2 A) = none) (h0 : A.len ≠ 0) :
     ¬ LastHasParent A := by
-  rw [badRootL] at h
+  rw [badRootL, if_neg (by
+    simp only [List.isEmpty_iff]
+    intro he
+    exact h0 (by have := entries2_length A; rw [he] at this; exact this.symm))] at h
   cases hp : parAt1 (entries2 A) ((entries2 A).length - 1) with
   | some q => rw [hp] at h; exact absurd h (by simp)
   | none =>
@@ -265,7 +276,7 @@ theorem entries2_expand (A : Arr 2) (N : Nat) :
     by_cases h0 : A.len = 0
     · rw [expand_of_len_zero h0, entries2, h0, List.range_zero, List.map_nil]
       rfl
-    · rw [expand_of_not_lastHasParent h0 (badRootL_none hb) N, entries2, entries2,
+    · rw [expand_of_not_lastHasParent h0 (badRootL_none hb h0) N, entries2, entries2,
         map_range_dropLast]
       rfl
   | some pm =>
@@ -346,5 +357,36 @@ theorem entries2_expand (A : Arr 2) (N : Nat) :
       · refine List.map_congr_left (fun t _ => ?_)
         simp only [Function.comp_apply, Bool.false_and, Bool.false_eq_true, if_false]
         exact hbad t
+
+/-! ### Termination -/
+
+/-- **A run of two-row expansions, computed on the entries, ends.**  The
+matrices are the entries of a standard array, the step is `expand2L`, and the
+run reaches the empty matrix.  Termination is `Notation.BMS.bms_terminates 2`;
+what this adds is that the step is a function that runs. -/
+theorem expand2L_terminates (A : Arr 2) (hA : Std 2 A) (f : Nat → List (Nat × Nat))
+    (h0 : f 0 = entries2 A) (hf : ∀ n, ∃ k, f (n + 1) = expand2L k (f n)) :
+    ∃ n, f n = [] := by
+  choose k hk using hf
+  -- the array sequence that tracks `f`
+  let g : Nat → Arr 2 := fun n => Nat.rec A (fun m B => expand B (k m)) n
+  have hgStd : ∀ n, Std 2 (g n) := by
+    intro n
+    induction n with
+    | zero => exact hA
+    | succ m ih => exact Std.step (k m) ih
+  have hgf : ∀ n, entries2 (g n) = f n := by
+    intro n
+    induction n with
+    | zero => exact h0.symm
+    | succ m ih =>
+      show entries2 (expand (g m) (k m)) = f (m + 1)
+      rw [entries2_expand, ih, ← hk m]
+  obtain ⟨n, hn⟩ := Googology.Notation.BMS.bms_terminates 2
+    (fun n => ⟨g n, hgStd n⟩) (fun n => ⟨k n, rfl⟩)
+  refine ⟨n, ?_⟩
+  rw [← hgf n, entries2]
+  have : (g n).len = 0 := hn
+  rw [this, List.range_zero, List.map_nil]
 
 end Googology.Trans.BMS

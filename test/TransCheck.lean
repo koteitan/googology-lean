@@ -225,4 +225,15 @@ fires. -/
 #guard expand2L 2 [(0,0),(1,1),(2,2),(3,2)]
   == [(0,0),(1,1),(2,2),(3,1),(4,2),(5,1),(6,2)]
 
+/-! A run of expansions at `0` from a pair-sequence generator, one column
+shorter each step, and the empty matrix stays empty. -/
+
+def runL : Nat → List (Nat × Nat) → List (Nat × Nat)
+  | 0, l => l
+  | n + 1, l => runL n (expand2L 0 l)
+
+#guard (List.range 7).map (fun i => (runL i [(0,0),(1,1),(2,2),(3,3)]).length)
+  == [4, 3, 2, 1, 0, 0, 0]
+#guard expand2L 3 ([] : List (Nat × Nat)) == []
+
 end Googology.Trans.BMS
