@@ -269,10 +269,18 @@ So the induction has to carry the statement in two shapes, both with a prefix
 in front: the plain one and the one for `P`.  `bach_sum` is the sum branch of
 the plain shape, proved: the head lands by a size argument through
 `lt_of_size_lt_addT`, and the tail by the same statement at `t` with the head
-appended to the prefix.  The three principal branches are not written yet; the
-one that still has no argument is `ψ_a(0)` with `dom a ∉ {0,1}` under a
-nonempty prefix, where an element of `G_u(a)` can sit above the prefix and the
-induction hypothesis does not reach its suffix.
+appended to the prefix.
+
+The three principal branches are not written yet.  Each of them splits on
+where `x` sits relative to the prefix `p`: below it, equal to it, or above it,
+and only the third needs work.  There `x = p + x'`, and the induction
+hypothesis does not reach `x'`, which is not a member of any `G`.  For
+`ψ_a(0)` with `dom a = 1` the third case closes through `le_pred_of_lt` and a
+size argument; that branch is `bach_succ`, proved.  For `ψ_a(0)` with `dom a ∉ {0,1}` it does not seem to arise at
+all.  The open one is `ψ_a(b)` with `dom b < V`: there `x'` can have `a` as
+its head subscript, and what is then needed is that the argument of that head
+is below `b[W]` — the same statement at `b`, whose hypothesis is available at
+level `a` but not at the level the induction is running at.
 
 The prefix cannot be dropped. For `V = ψ_Ω(0) + ψ_1(ψ_Ω(0))`, which is
 standard with a term-indexed domain, `G_1` sees `ψ_Ω(0)` in the tail — the

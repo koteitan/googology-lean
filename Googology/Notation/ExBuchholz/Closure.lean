@@ -114,10 +114,18 @@ So the induction has to carry the statement in two shapes, both with a prefix
 in front: the plain one and the one for `P`.  `bach_sum` is the sum branch of
 the plain shape, proved: the head lands by a size argument through
 `lt_of_size_lt_addT`, and the tail by the same statement at `t` with the head
-appended to the prefix.  The three principal branches are not written yet; the
-one that still has no argument is `ψ_a(0)` with `dom a ∉ {0,1}` under a
-nonempty prefix, where an element of `G_u(a)` can sit above the prefix and the
-induction hypothesis does not reach its suffix.
+appended to the prefix.
+
+The three principal branches are not written yet.  Each of them splits on
+where `x` sits relative to the prefix `p`: below it, equal to it, or above it,
+and only the third needs work.  There `x = p + x'`, and the induction
+hypothesis does not reach `x'`, which is not a member of any `G`.  For
+`ψ_a(0)` with `dom a = 1` the third case closes through `le_pred_of_lt` and a
+size argument; that branch is `bach_succ`, proved.  For `ψ_a(0)` with `dom a ∉ {0,1}` it does not seem to arise at
+all.  The open one is `ψ_a(b)` with `dom b < V`: there `x'` can have `a` as
+its head subscript, and what is then needed is that the argument of that head
+is below `b[W]` — the same statement at `b`, whose hypothesis is available at
+level `a` but not at the level the induction is running at.
 
 The prefix cannot be dropped. For `V = ψ_Ω(0) + ψ_1(ψ_Ω(0))`, which is
 standard with a term-indexed domain, `G_1` sees `ψ_Ω(0)` in the tail — the
@@ -1201,6 +1209,63 @@ theorem bach_sum {a b c d r u p : Term}
   · refine hIH (addT p (psi a b)) (fun y hy => ?_) x hx
     rw [addT_assoc, ← cons_eq_addT]
     exact H y (by rw [G_cons_eq]; exact List.mem_append_right _ hy)
+
+/-- **The successor branch of the Bachmann induction**: `V = ψ_a(0)` with `a`
+a successor.  There `dom V = V`, the fundamental sequence hands back the index
+itself, and the bound comes from `le_pred_of_lt` and a size argument. -/
+theorem bach_succ {a u p : Term} (hOTa : OT a) (hda : dom a = t1)
+    (H : ∀ x ∈ G u (psi a nil), x < addT p (psi a nil)) :
+    ∀ x ∈ G u (psi a nil), x < addT p (fs (psi a nil) (W0 (psi a nil))) := by
+  have hdV : dom (psi a nil) = psi a nil := by rw [psi, dom]; simp_all
+  have hW : W0 (psi a nil) = psi (fs a nil) nil := by rw [W0, hdV]; rfl
+  have hfsV : fs (psi a nil) (W0 (psi a nil)) = psi (fs a nil) nil := by
+    rw [psi, fs]; simp_all
+  have hsplit : addT (fs a nil) t1 = a := eq_addT_one_of_dom_eq_one a hOTa hda
+  have hsza : size a = size (fs a nil) + 1 := by
+    have h := size_addT (fs a nil) t1
+    rw [hsplit] at h
+    simpa using h
+  rw [hfsV]
+  intro x hx
+  rcases lt_trichotomy x p with h | h | h
+  · exact lt_of_lt_of_le' h (le_addT_right p _)
+  · rw [h]
+    have hp := addT_lt p (show (nil : Term) < psi (fs a nil) nil from nil_lt_cons _ _ _)
+    rwa [addT_nil_right] at hp
+  · -- `p < x`, so `x = p + x'` and the bound is about `x'`
+    obtain ⟨x', hxe, hpos, _⟩ := addT_between p
+      (show addT p nil < x by rw [addT_nil_right]; exact h) (le_of_lt (H x hx))
+    have hszx : size x < size a := by
+      by_cases hu : u ≤ a
+      · rw [G_psi_of_le hu, G_nil, List.append_nil] at hx
+        rcases List.mem_cons.mp hx with he | hx'
+        · exfalso; rw [he] at h; exact absurd h (not_lt_nil p)
+        · exact size_lt_of_mem_G u a x hx'
+      · rw [G_psi_of_not_le hu] at hx
+        exact absurd hx List.not_mem_nil
+    have hszs : size p + size x' = size x := by rw [hxe, size_addT]
+    rw [hxe, addT_lt_iff]
+    cases x' with
+    | nil => exact absurd hpos (lt_irrefl nil)
+    | cons c d r =>
+      have hlt : cons c d r < psi a nil := by
+        have hH := H x hx
+        rw [hxe] at hH
+        exact addT_lt_iff.mp hH
+      have hca : c < a := by
+        rcases cons_lt_cons_iff.mp hlt with h' | ⟨_, h'⟩
+        · rcases psi_lt_psi_iff.mp h' with h'' | ⟨_, h''⟩
+          · exact h''
+          · exact absurd h'' (not_lt_nil d)
+        · exact absurd h' (not_lt_nil r)
+      have hcle : c ≤ fs a nil := le_pred_of_lt hOTa hda hca
+      refine cons_lt_cons_iff.mpr (Or.inl (psi_lt_psi_iff.mpr (Or.inl ?_)))
+      rcases le_iff_lt_or_eq.mp hcle with h' | h'
+      · exact h'
+      · exfalso
+        rw [← h'] at hsza
+        simp only [size_cons] at hszs
+        omega
 
 /-- Buchholz's second tower invariant, from the Bachmann property. -/
 theorem towerOT_of_Bachmann {A B : Term} (hOT : OT (cons A B nil))
