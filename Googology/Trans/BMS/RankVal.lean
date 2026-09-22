@@ -668,6 +668,138 @@ theorem iSup_rank_bms :
     rw [rank_bms_eq_val, hA]
     exact lt_of_lt_of_le (Order.lt_succ β) (le_of_eq (Order.succ_eq_add_one β))
 
+/-! ### A family: `(0,0)(1,1)(1,0)ᵏ`
+
+Each `(1,0)` on the end multiplies the rank by `ω`, because the matrix
+expands into copies of what stands in front of it.  So the two-row system
+reaches `ε₀·ω^k` for every `k`. -/
+
+/-- `(0,0)(1,1)` followed by `k` copies of `(1,0)`. -/
+def Mk (k : Nat) : List (List Nat) := [[0, 0], [1, 1]] ++ List.replicate k [1, 0]
+
+@[simp] theorem Mk_length (k : Nat) : (Mk k).length = k + 2 := by
+  rw [Mk, List.length_append, List.length_replicate,
+    show ([[0, 0], [1, 1]] : List (List Nat)).length = 2 from rfl]
+  omega
+
+theorem Mk_col_len (k : Nat) : ∀ c ∈ Mk k, c.length = 1 + 1 := by
+  intro c hc
+  rcases List.mem_append.mp hc with h | h
+  · rcases List.mem_cons.mp h with rfl | h1
+    · rfl
+    · rcases List.mem_cons.mp h1 with rfl | h2
+      · rfl
+      · exact absurd h2 (by simp)
+  · rw [List.eq_of_mem_replicate h]
+    rfl
+
+def MkState (k : Nat) : (bmsAllL 1).State := ⟨Mk k, Mk_col_len k⟩
+
+theorem Mk_getElem_ge (k i : Nat) (h1 : 2 ≤ i) (h2 : i < k + 2) : (Mk k)[i]! = [1, 0] := by
+  rw [Mk, show i = ([[0, 0], [1, 1]] : List (List Nat)).length + (i - 2) from by
+      show i = 2 + (i - 2); omega,
+    getElem!_append_right]
+  rw [getElem!_pos _ (i - 2) (by rw [List.length_replicate]; omega), List.getElem_replicate]
+
+theorem Mk_entry_pos (k i : Nat) (h1 : 0 < i) (h2 : i < k + 2) : 1 ≤ ((Mk k)[i]!)[0]! := by
+  rcases Nat.lt_or_ge i 2 with h | h
+  · have hi : i = 1 := by omega
+    rw [hi, Mk, getElem!_append_left _ _ (by simp)]
+    rfl
+  · rw [Mk_getElem_ge k i h h2]
+    rfl
+
+theorem Mk_last (k : Nat) : (Mk (k + 1))[(Mk (k + 1)).length - 1]! = [1, 0] := by
+  rw [Mk_length]
+  exact Mk_getElem_ge (k + 1) (k + 1 + 2 - 1) (by omega) (by omega)
+
+theorem Mk_succ (k : Nat) : Mk (k + 1) = Mk k ++ [[1, 0]] := by
+  rw [Mk, Mk, List.append_assoc]
+  congr 1
+  rw [List.replicate_succ']
+
+theorem Mk_ne_nil (k : Nat) : Mk k ≠ [] := by
+  intro h
+  have := Mk_length k
+  rw [h] at this
+  exact absurd this (by simp)
+
+theorem Mk_m0 (k : Nat) : m0L 2 (Mk (k + 1)) = 0 := by
+  have hnone : parAtR (Mk (k + 1)) 1 ((Mk (k + 1)).length - 1) = none := by
+    by_contra hc
+    obtain ⟨j, hj⟩ := Option.ne_none_iff_exists'.mp hc
+    have hlt := ParR_entry ((parAtR_eq_some _ _ _ _).mp hj)
+    rw [Mk_last] at hlt
+    exact absurd hlt (by simp)
+  rw [m0L, show (2 : Nat) - 1 = 1 from rfl, Nat.findGreatest, if_neg (by rw [hnone]; simp)]
+  rfl
+
+theorem Mk_badRoot (k : Nat) : badRootR 2 (Mk (k + 1)) = some 0 := by
+  rw [badRootR, if_neg (by
+    simp only [List.isEmpty_iff]
+    exact Mk_ne_nil (k + 1)), Mk_m0, parAtR_eq_some, ParR]
+  refine ⟨by rw [Mk_length]; omega, ?_, fun j' h1 h2 => ?_⟩
+  · rw [Mk_last, show (Mk (k + 1))[0]! = [0, 0] from rfl]
+    decide
+  · rw [Mk_last]
+    show ([1, 0] : List Nat)[0]! ≤ ((Mk (k + 1))[j']!)[0]!
+    rw [Mk_length] at h2
+    exact Mk_entry_pos (k + 1) j' h1 (by omega)
+
+theorem Mk_step (k N : Nat) : expandRL 2 N (Mk (k + 1)) = repN (N + 1) (Mk k) := by
+  rw [expandRL_of_m0_zero 2 N _ 0 (Mk_badRoot k) (Mk_m0 k) (Mk_col_len (k + 1)),
+    List.range_zero, List.map_nil, List.nil_append]
+  congr 1
+  rw [Mk_length, show k + 1 + 2 - 1 - 0 = (Mk k).length from by rw [Mk_length]; omega]
+  refine Eq.trans (List.map_congr_left (fun i hi => ?_)) (listEta (Mk k))
+  show (Mk (k + 1))[0 + i]! = (Mk k)[i]!
+  rw [Nat.zero_add, Mk_succ]
+  exact getElem!_append_left (Mk k) [[1, 0]] (List.mem_range.mp hi)
+
+/-- **`(0,0)(1,1)(1,0)ᵏ` has rank `ε₀·ω^k`.** -/
+theorem rank_MkState (k : Nat) :
+    IsWellFounded.rank (bmsAllL 1).Rel (MkState k)
+      = Ord.eps0 * Ordinal.omega0 ^ (k : Ordinal) := by
+  induction k with
+  | zero =>
+    rw [Nat.cast_zero, Ordinal.opow_zero, mul_one]
+    exact rank_genAll
+  | succ m ih =>
+    have hstep : ∀ N : Nat, (bmsAllL 1).step (MkState (m + 1)) N
+        = appendState emptyAll (repNState (N + 1) (MkState m)) := by
+      intro N
+      refine Subtype.ext ?_
+      show expandRL 2 N (Mk (m + 1)) = [] ++ repN (N + 1) (Mk m)
+      rw [List.nil_append]
+      exact Mk_step m N
+    rw [rank_mul_omega0 (MkState (m + 1)) emptyAll (MkState m)
+        (show ¬ Mk (m + 1) = [] from Mk_ne_nil (m + 1)) rfl (Mk_ne_nil m) hstep,
+      rank_emptyAll, zero_add, ih, Nat.cast_succ, Ordinal.opow_add, Ordinal.opow_one, mul_assoc]
+
+/-- **So two rows pass every `ε₀·ω^k`.** -/
+theorem le_iSup_rank_bmsAllL (k : Nat) :
+    Ord.eps0 * Ordinal.omega0 ^ (k : Ordinal)
+      ≤ ⨆ l : (bmsAllL 1).State, IsWellFounded.rank (bmsAllL 1).Rel l := by
+  rw [← rank_MkState k]
+  exact Ordinal.le_iSup (fun l : (bmsAllL 1).State =>
+    IsWellFounded.rank (bmsAllL 1).Rel l) (MkState k)
+
+/-- **And so the two-row system's ordinal is at least `ε₀·ω^ω`.**  A crude
+bound — the sources put the pair sequence system far higher — but it is one
+the rank gives with no reading. -/
+theorem eps0_mul_opow_omega0_le_iSup :
+    Ord.eps0 * Ordinal.omega0 ^ Ordinal.omega0
+      ≤ ⨆ l : (bmsAllL 1).State, IsWellFounded.rank (bmsAllL 1).Rel l := by
+  have hsup : (Ordinal.omega0 : Ordinal) ^ (Ordinal.omega0 : Ordinal)
+      ≤ ⨆ k : ℕ, (Ordinal.omega0 : Ordinal) ^ (k : Ordinal) := by
+    refine (Ordinal.opow_le_of_isSuccLimit (by simp) Ordinal.isSuccLimit_omega0).mpr
+      (fun b hb => ?_)
+    obtain ⟨k, rfl⟩ := Ordinal.lt_omega0.mp hb
+    exact Ordinal.le_iSup (fun k : ℕ => (Ordinal.omega0 : Ordinal) ^ (k : Ordinal)) k
+  refine le_trans (le_trans (mul_le_mul_right hsup Ord.eps0) (le_of_eq ?_))
+    (Ordinal.iSup_le (fun k => le_iSup_rank_bmsAllL k))
+  rw [Ordinal.mul_iSup]
+
 /-! ### The same ordinals, named as terms
 
 The two-row ranks above are values of extended Buchholz terms, so the

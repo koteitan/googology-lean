@@ -220,7 +220,11 @@ That is `Mono.lean`.
    hypotheses being `rfl`. Every rank they produce lies in the closure of
    `{1, ε₀}` under `+` and `·ω` — that is what the three rules add up to, and
    the matrices above are the instances proved, not a claim that the whole
-   closure is realised. What they do not reach is the rank of the later
+   closure is realised. One instance is a family rather than a single
+   matrix: `rank_MkState` says `(0,0)(1,1)(1,0)ᵏ` has rank `ε₀·ω^k` for every
+   `k`, so the two-row system's ordinal is at least `ε₀·ω^ω`. That is far
+   below what the sources put it at, and it is what the rank reaches without
+   a reading. What they do not reach is the rank of the later
    generators `(0,0)(1,1)(2,2)` and beyond, whose expansions are neither
    zero-row matrices nor block repetitions.
 

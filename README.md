@@ -100,6 +100,8 @@ expansions are understood.
 | and it iterates: `(0,0)(1,1)(1,0)(1,0)` has rank `ε₀·ω²` | `Trans.BMS.rank_omegaSqAll` |
 | **and every one of those ordinals has a name**: the ranks above are the values of `ψ_0(Ω)`, `ψ_0(1)`, `ψ_0(2)`, `ψ_0(Ω+1)`, `ψ_0(Ω+2)`, `ε₀+1` and `ε₀+ω` | `Trans.BMS.rank_genAll_val` and the five beside it |
 | `rank_split_mul_omega0` takes the split directly, so a matrix of this shape costs three lines: `(0,0)(1,0)(1,0)` is `ω²` and `(0,0)(1,1)(0,0)(1,0)(1,0)` is `ε₀ + ω²` | `Trans.BMS.rank_split_mul_omega0`, `Trans.BMS.rank_omegaSqCol`, `Trans.BMS.rank_sumSqAll` |
+| **a whole family**: `(0,0)(1,1)(1,0)ᵏ` has rank `ε₀·ω^k` | `Trans.BMS.rank_MkState` |
+| **so the two-row system's ordinal is at least `ε₀·ω^ω`** — a crude bound, but one the rank gives with no reading | `Trans.BMS.eps0_mul_opow_omega0_le_iSup` |
 
 What it does not reach: `(0,0)(1,1)(2,1)`, where `m₀` is `1` so the copies
 are incremented and differ; `(0,0)(1,1)(2,0)`, which does repeat, but repeats
