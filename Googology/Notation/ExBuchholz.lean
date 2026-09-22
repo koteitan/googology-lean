@@ -4,6 +4,7 @@ import Googology.Notation.ExBuchholz.Std
 import Googology.Notation.ExBuchholz.WF
 import Googology.Notation.ExBuchholz.Sum
 import Googology.Notation.ExBuchholz.FS
+import Googology.Notation.ExBuchholz.Closure
 import Googology.Notation.ExBuchholz.Ord
 import Googology.Notation.ExBuchholz.Eval
 import Googology.Notation.ExBuchholz.Mono
