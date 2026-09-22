@@ -61,26 +61,19 @@ def dbmsStd (r : ℕ) : (dbms r).Std where
   step_std := fun _ _ _ => trivial
 
 
-/-- **DBMS terminates, for every number of rows.** -/
-theorem dbms_terminates (r : ℕ) : (dbms r).Terminates := by
-  intro f hf
-  choose k hk using hf
-  have hseq : ∀ t, (f t).1 = seq (f 0).1 k t := by
-    intro t
-    induction t with
-    | zero => rfl
-    | succ t ih =>
-      show (f (t + 1)).1 = expand (seq (f 0).1 k t) (k t)
-      rw [← ih]
-      exact congrArg Subtype.val (hk t)
-  obtain ⟨T, hT⟩ := Googology.Notation.BMS.terminates_any (f 0).1 k
-  refine ⟨T, ?_⟩
-  show (f T).1.len = 0
-  rw [hseq T]
-  exact hT
+/-- The DBMS standard arrays sit inside all arrays. -/
+def dbmsSim (r : ℕ) : Sim (dbms r) (Googology.Notation.BMS.bmsAll r) where
+  map := Subtype.val
+  map_rel := fun _ _ h => ⟨h.1, h.2.choose, congrArg Subtype.val h.2.choose_spec⟩
+
+/-- **DBMS terminates, for every number of rows.**  Not because of its
+generators: expansion ends from any array at all. -/
+theorem dbms_terminates (r : ℕ) : (dbms r).Terminates :=
+  (dbmsSim r).terminates (Googology.Notation.BMS.bmsAll_wf r)
 
 /-- **And is well founded.** -/
-theorem dbms_wf (r : ℕ) : (dbms r).WF := Rewrite.wf_of_terminates (dbms_terminates r)
+theorem dbms_wf (r : ℕ) : (dbms r).WF :=
+  (dbmsSim r).wf (Googology.Notation.BMS.bmsAll_wf r)
 
 /-- DBMS carries an ordinal measure: the rank of one-step expansion. -/
 noncomputable def dbmsEval (r : ℕ) :
