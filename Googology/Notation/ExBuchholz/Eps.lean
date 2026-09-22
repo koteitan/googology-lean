@@ -96,8 +96,8 @@ theorem OmegaMul_lt_Omega {u : Ordinal.{v}} (hu : 1 < u) (n : ℕ) :
 /-- **`Ω·n` is below `ψ_1(e)` whenever the argument is nonzero.**  `Ω` itself
 is `ψ_1(0)`, and the closure of `ψ_1(e)` is closed under addition, so it holds
 every finite multiple of `Ω`. -/
-theorem OmegaMul_lt_psi_one {e : Ordinal.{u}} (he : 0 < e) (n : ℕ) :
-    OmegaMul.{u} n < psi e 1 := by
+theorem OmegaMul_mem_CSet_one {e : Ordinal.{u}} (he : 0 < e) (n : ℕ) :
+    OmegaMul.{u} n ∈ CSet 1 e := by
   have h1 : (1 : Ordinal.{u}) ∈ CSet 1 e := by
     refine mem_CSet_of_lt_Omega ?_
     rw [Omega_of_ne_zero one_ne_zero]
@@ -105,12 +105,13 @@ theorem OmegaMul_lt_psi_one {e : Ordinal.{u}} (he : 0 < e) (n : ℕ) :
   have hOm : (Ω_ 1 : Ordinal.{u}) ∈ CSet 1 e := by
     have := CSet.psi_mem (v := 1) (a := e) (u := 1) (e := 0) he h1 (CSet.zero_mem 1 e)
     rwa [psi_zero_arg] at this
-  have hmem : ∀ m : ℕ, OmegaMul.{u} m ∈ CSet 1 e := by
-    intro m
-    induction m with
-    | zero => rw [OmegaMul_zero]; exact CSet.zero_mem 1 e
-    | succ j ih => rw [OmegaMul_succ]; exact CSet.add_mem ih hOm
-  exact lt_psi_of_mem (hmem n) (card_OmegaMul n)
+  induction n with
+  | zero => rw [OmegaMul_zero]; exact CSet.zero_mem 1 e
+  | succ j ih => rw [OmegaMul_succ]; exact CSet.add_mem ih hOm
+
+theorem OmegaMul_lt_psi_one {e : Ordinal.{u}} (he : 0 < e) (n : ℕ) :
+    OmegaMul.{u} n < psi e 1 :=
+  lt_psi_of_mem (OmegaMul_mem_CSet_one he n) (card_OmegaMul n)
 
 /-! ## The family `ε_n` -/
 
@@ -620,5 +621,165 @@ theorem log_lt_self_of_lt_epsN_succ {n : ℕ} {a : Ordinal.{u}} (h0 : epsN.{u} n
       exact Ordinal.opow_log_le_self _ hne
     exact absurd h1 (not_lt.mpr (epsN_succ_le_of_opow_fp
       (le_antisymm hle (Ordinal.right_le_opow _ Ordinal.one_lt_omega0)) h0))
+
+/-! ## `ψ_0(Ω·ω) = ε_ω` -/
+
+/-- `ε_ω`, the limit of the finite levels. -/
+noncomputable def epsW : Ordinal.{u} := ⨆ n : ℕ, epsN.{u} n
+
+theorem epsN_le_epsW (n : ℕ) : epsN.{u} n ≤ epsW.{u} :=
+  Ordinal.le_iSup (fun m : ℕ => epsN.{u} m) n
+
+theorem epsN_lt_epsW (n : ℕ) : epsN.{u} n < epsW.{u} :=
+  lt_of_lt_of_le (epsN_lt_succ n) (epsN_le_epsW (n + 1))
+
+theorem lt_epsW_iff {x : Ordinal.{u}} : x < epsW.{u} ↔ ∃ n : ℕ, x < epsN.{u} n :=
+  Ordinal.lt_iSup_iff
+
+theorem epsW_pos : 0 < epsW.{u} := lt_of_lt_of_le (epsN_pos 0) (epsN_le_epsW 0)
+
+theorem epsW_le_Omega_one : epsW.{u} ≤ Ω_ 1 :=
+  Ordinal.iSup_le (fun n => (epsN_lt_Omega_one n).le)
+
+theorem isPrincipal_add_epsW : Ordinal.IsPrincipal (· + ·) epsW.{u} := by
+  intro x y hx hy
+  obtain ⟨n, hn⟩ := lt_epsW_iff.mp hx
+  obtain ⟨m, hm⟩ := lt_epsW_iff.mp hy
+  refine lt_of_lt_of_le (isPrincipal_add_epsN (max n m) ?_ ?_) (epsN_le_epsW (max n m))
+  · exact lt_of_lt_of_le hn (epsN_mono (le_max_left n m))
+  · exact lt_of_lt_of_le hm (epsN_mono (le_max_right n m))
+
+/-- `Ω·ω` is the limit of the finite multiples. -/
+theorem OmegaMul_omega0 : (Ω_ 1 : Ordinal.{u}) * ω = ⨆ n : ℕ, OmegaMul.{u} n := by
+  rw [show (ω : Ordinal.{u}) = ⨆ n : ℕ, (n : Ordinal.{u}) from Ordinal.iSup_natCast.symm,
+    Ordinal.mul_iSup]
+  rfl
+
+theorem lt_OmegaMul_omega0_iff {x : Ordinal.{u}} :
+    x < (Ω_ 1 : Ordinal.{u}) * ω ↔ ∃ n : ℕ, x < OmegaMul.{u} n := by
+  rw [OmegaMul_omega0]
+  exact Ordinal.lt_iSup_iff
+
+theorem OmegaMul_le_omega0_mul (n : ℕ) : OmegaMul.{u} n ≤ (Ω_ 1 : Ordinal.{u}) * ω := by
+  rw [OmegaMul_omega0]
+  exact Ordinal.le_iSup (fun m : ℕ => OmegaMul.{u} m) n
+
+/-- **Every countable member of `C_0(Ω·ω)` is below `ε_ω`.**  A collapse with
+argument below `Ω·ω` has its argument below some `Ω·(n+1)`, and `ψ_0` is
+monotone, so it is at most `ε_n`. -/
+theorem lt_epsW_of_mem_CSet : ∀ x : Ordinal.{u}, x ∈ CSet 0 ((Ω_ 1 : Ordinal.{u}) * ω) →
+    x.card ≤ ℵ_ 0 → x < epsW.{u} := by
+  intro x hx
+  induction hx with
+  | @small y h =>
+    intro _
+    rw [Omega_zero, Order.lt_one_iff] at h
+    rw [h]
+    exact epsW_pos
+  | @add p q _ _ ihp ihq =>
+    intro hcard
+    rw [Ordinal.card_add] at hcard
+    exact isPrincipal_add_epsW (ihp (le_trans (self_le_add_right _ _) hcard))
+      (ihq (le_trans (self_le_add_left _ _) hcard))
+  | @coll u e _ _ _ _ =>
+    intro hcard
+    have hu0 : u = 0 := by
+      have hOu : (Ω_ u).card ≤ ℵ_ 0 :=
+        le_trans (Ordinal.card_le_card (Omega_le_psi e.1 u)) hcard
+      exact nonpos_iff_eq_zero.mp (le_of_card_Omega_le hOu)
+    rw [hu0]
+    obtain ⟨n, hn⟩ := lt_OmegaMul_omega0_iff.mp e.2
+    cases n with
+    | zero => exact absurd hn (by simp)
+    | succ m =>
+      refine lt_of_le_of_lt (le_trans (psi_mono 0 hn.le) ?_) (epsN_lt_epsW m)
+      exact le_of_eq (psi_OmegaMul m)
+
+/-- **`ψ_0(Ω·ω) = ε_ω`.** -/
+theorem psi_Omega_omega : psi ((Ω_ 1 : Ordinal.{u}) * ω) 0 = epsW.{u} := by
+  refine le_antisymm ?_ ?_
+  · by_contra hc
+    have h : epsW.{u} < psi ((Ω_ 1 : Ordinal.{u}) * ω) 0 := not_le.mp hc
+    exact absurd (lt_epsW_of_mem_CSet _ (mem_CSet_of_lt_psi h)
+      (card_le_of_lt_Omega_one (lt_trans h (psi_zero_lt_Omega_one _)))) (lt_irrefl _)
+  · refine le_of_forall_lt (fun x hx => ?_)
+    obtain ⟨n, hn⟩ := lt_epsW_iff.mp hx
+    rw [← psi_OmegaMul n] at hn
+    exact lt_of_lt_of_le hn (psi_mono 0 (OmegaMul_le_omega0_mul (n + 1)))
+
+/-! ### `ψ_1(1) = Ω·ω` -/
+
+theorem lt_Omega_succ_of_card_le {v x : Ordinal.{u}} (h : x.card ≤ ℵ_ v) : x < Ω_ (v + 1) := by
+  rw [Omega_of_ne_zero (add_one_ne_zero_ord v), ← Cardinal.ord_aleph]
+  refine Cardinal.lt_ord.mpr (lt_of_le_of_lt h ?_)
+  rw [← Cardinal.succ_aleph]
+  exact Order.lt_succ _
+
+theorem card_Omega_one : (Ω_ 1 : Ordinal.{u}).card = ℵ_ 1 := by
+  rw [Omega_of_ne_zero one_ne_zero, ← Cardinal.ord_aleph, Cardinal.card_ord]
+
+theorem OmegaMul_omega0_lt_Omega_two : (Ω_ 1 : Ordinal.{u}) * ω < Ω_ 2 := by
+  rw [show (2 : Ordinal.{u}) = 1 + 1 from one_add_one_eq_two.symm]
+  refine lt_Omega_succ_of_card_le ?_
+  rw [Ordinal.card_mul, card_Omega_one, Ordinal.card_omega0]
+  exact le_trans (mul_le_mul' (le_refl _) (Cardinal.aleph0_le_aleph 1))
+    (le_of_eq (Cardinal.mul_eq_self (Cardinal.aleph0_le_aleph 1)))
+
+/-- **A member of `C_1(1)` is `Ω·k + c` with `c` countable, or already past
+`Ω_2`.**  With no argument below `1` but `0`, the only collapses in the
+closure are the `Ω_u = ψ_u(0)`. -/
+theorem mem_CSet_one_one : ∀ x : Ordinal.{u}, x ∈ CSet 1 1 →
+    (∃ k : ℕ, ∃ c : Ordinal.{u}, c < Ω_ 1 ∧ x = OmegaMul.{u} k + c) ∨ Ω_ 2 ≤ x := by
+  intro x hx
+  induction hx with
+  | @small y h => exact Or.inl ⟨0, y, h, by rw [OmegaMul_zero, zero_add]⟩
+  | @add p q _ _ ihp ihq =>
+    rcases ihp with ⟨k, c, hc, rfl⟩ | hp
+    · rcases ihq with ⟨k', c', hc', rfl⟩ | hq
+      · cases k' with
+        | zero =>
+          exact Or.inl ⟨k, c + c', isPrincipal_add_Omega 1 hc hc', by
+            rw [OmegaMul_zero, zero_add, add_assoc]⟩
+        | succ j =>
+          refine Or.inl ⟨k + (j + 1), c', hc', ?_⟩
+          rw [← add_assoc, add_assoc (OmegaMul.{u} k) c (OmegaMul.{u} (j + 1)),
+            add_OmegaMul hc (j + 1) (by omega), ← OmegaMul_add]
+      · exact Or.inr (le_trans hq (self_le_add_left _ _))
+    · exact Or.inr (le_trans hp (self_le_add_right _ _))
+  | @coll u e _ _ _ _ =>
+    have he0 : e.1 = 0 := Order.lt_one_iff.mp e.2
+    rw [he0, psi_zero_arg]
+    rcases eq_or_ne u 0 with rfl | hu0
+    · refine Or.inl ⟨0, 1, ?_, by rw [Omega_zero, OmegaMul_zero, zero_add]⟩
+      rw [Omega_of_ne_zero one_ne_zero]
+      exact lt_of_lt_of_le Ordinal.one_lt_omega0 (omega0_le_omega 1)
+    · rcases eq_or_ne u 1 with rfl | hu1
+      · exact Or.inl ⟨1, 0, Omega_pos 1, by rw [OmegaMul_one, add_zero]⟩
+      · refine Or.inr (Omega_mono ?_)
+        have h1 : (1 : Ordinal.{u}) < u := by
+          rcases lt_trichotomy u 1 with h | h | h
+          · exact absurd (Order.lt_one_iff.mp h) hu0
+          · exact absurd h hu1
+          · exact h
+        rw [show (2 : Ordinal.{u}) = 1 + 1 from one_add_one_eq_two.symm,
+          ← Order.succ_eq_add_one]
+        exact Order.succ_le_of_lt h1
+
+/-- **`ψ_1(1) = Ω·ω`.**  Everything below is a finite multiple of `Ω` plus
+something countable, and `Ω·ω` is not. -/
+theorem psi_one_one : psi 1 1 = (Ω_ 1 : Ordinal.{u}) * ω := by
+  refine le_antisymm (psi_le_of_notMem (fun hmem => ?_)) ?_
+  · rcases mem_CSet_one_one _ hmem with ⟨k, c, hc, heq⟩ | hge
+    · have hlt : (Ω_ 1 : Ordinal.{u}) * ω < OmegaMul.{u} (k + 1) := by
+        rw [OmegaMul_succ]
+        conv_lhs => rw [heq]
+        exact (add_lt_add_iff_left _).mpr hc
+      exact absurd (lt_of_lt_of_le hlt (OmegaMul_le_omega0_mul (k + 1))) (lt_irrefl _)
+    · exact absurd (lt_of_lt_of_le OmegaMul_omega0_lt_Omega_two hge) (lt_irrefl _)
+  · refine le_of_forall_lt (fun x hx => ?_)
+    obtain ⟨n, hn⟩ := lt_OmegaMul_omega0_iff.mp hx
+    refine lt_psi_of_mem (mem_CSet_of_le (OmegaMul_mem_CSet_one zero_lt_one n) x hn.le
+      (card_OmegaMul n)) ?_
+    exact le_trans (Ordinal.card_le_card hn.le) (card_OmegaMul n)
 
 end Googology.Notation.ExBuchholz.Ord

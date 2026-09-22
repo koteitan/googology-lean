@@ -319,4 +319,43 @@ theorem val_lt_epsN_of_lt_teN {n : ℕ} {X : Term} (hOT : OT X) (h : X < teN n) 
   rw [← val_teN n]
   exact val_lt_val hOT (OT_teN n) h
 
+/-! ### `ψ_0(Ω·ω) = ε_ω`, as a term -/
+
+/-- The term `ψ_0(ψ_1(1))`, that is `ψ_0(Ω·ω)`. -/
+abbrev teW : Term := psi nil (psi t1 t1)
+
+theorem OT_teW : OT teW := by decide
+
+/-- **`ψ_0(Ω·ω)` names `ε_ω`**, the limit of the finite levels. -/
+theorem val_teW : val teW = Ord.epsW := by
+  rw [show teW = psi nil (psi t1 t1) from rfl, val_psi, val_nil, val_psi, val_t1,
+    Ord.psi_one_one, Ord.psi_Omega_omega]
+
+/-- **Every ordinal below `ε_ω` is the value of a standard form**, since it is
+below some `ε_n`. -/
+theorem exists_OT_of_lt_epsW {α : Ordinal.{0}} (h : α < Ord.epsW) :
+    ∃ X : Term, OT X ∧ val X = α := by
+  obtain ⟨n, hn⟩ := Ord.lt_epsW_iff.mp h
+  obtain ⟨X, hOT, hv, _⟩ := exists_OT_of_lt_epsN n α hn
+  exact ⟨X, hOT, hv⟩
+
+/-- **The standard forms below `ψ_0(Ω·ω)` name exactly the ordinals below
+`ε_ω`.** -/
+theorem exists_OT_lt_teW {α : Ordinal.{0}} (h : α < Ord.epsW) :
+    ∃ X : Term, OT X ∧ X < teW ∧ val X = α := by
+  obtain ⟨X, hOT, hv⟩ := exists_OT_of_lt_epsW h
+  exact ⟨X, hOT, lt_of_val_lt hOT OT_teW (by rw [hv, val_teW]; exact h), hv⟩
+
+/-- **Below `ε_ω`, `val` is a bijection from the standard forms onto the
+ordinals.** -/
+theorem existsUnique_OT_lt_teW {α : Ordinal.{0}} (h : α < Ord.epsW) :
+    ∃! X : Term, OT X ∧ X < teW ∧ val X = α := by
+  obtain ⟨X, hOT, hlt, hv⟩ := exists_OT_lt_teW h
+  refine ⟨X, ⟨hOT, hlt, hv⟩, fun Y hY => ?_⟩
+  exact val_inj_of_OT hY.1 hOT (by rw [hY.2.2, hv])
+
+theorem val_lt_epsW_of_lt_teW {X : Term} (hOT : OT X) (h : X < teW) : val X < Ord.epsW := by
+  rw [← val_teW]
+  exact val_lt_val hOT OT_teW h
+
 end Googology.Trans.BMS

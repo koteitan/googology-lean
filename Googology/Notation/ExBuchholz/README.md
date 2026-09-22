@@ -115,6 +115,8 @@ beyond the one stated.
 | `ψ_0(ε₀)` | `ε₀` again — the argument is not determined by the value | `psi_eps0` |
 | `ψ_0(Ω·(n+1))`, any `n` | `ε_n` | `psi_OmegaMul` |
 | `ψ_0(Ω·(n+1) + a)`, `a < ε_{n+1}` | `ε_n·ω^a` | `psi_OmegaMul_add` |
+| `ψ_1(1)` | `Ω·ω` | `psi_one_one` |
+| `ψ_0(Ω·ω)` | `ε_ω` | `psi_Omega_omega` |
 
 `ε₀` is `nfp (ω ^ ·) 0` and `ε₁` is `nfp (ε₀ * ω ^ ·) 0`, the least fixed
 points of those two functions. `Ord/Eps.lean` carries the same two statements

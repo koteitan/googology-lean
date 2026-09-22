@@ -109,6 +109,8 @@ inductive Term where
 | `p0(e0)` | また `e0`。引数は値から決まらない | `psi_eps0` |
 | `p0(W·(n+1))`、任意の `n` | `e_n` | `psi_OmegaMul` |
 | `p0(W·(n+1) + a)`、`a < e_{n+1}` | `e_n·w^a` | `psi_OmegaMul_add` |
+| `p1(1)` | `W·w` | `psi_one_one` |
+| `p0(W·w)` | `e_w` | `psi_Omega_omega` |
 
 `e0` は `nfp (w ^ ·) 0`、`e1` は `nfp (e0 * w ^ ·) 0` で、それぞれその関数の最小
 不動点である。`Ord/Eps.lean` は同じ二つを有限の全段で一度に持つ。`epsN n` が

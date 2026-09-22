@@ -73,7 +73,7 @@ import this and nothing else.
 | `Sum.lean` | done — `wellFounded_OTLt` given accessibility of the principal terms |
 | `Ord.lean` | done — `ψ` on the ordinals, the cardinality bound, downward closure, additive principality |
 | `Opow.lean` | done — the closed forms of `ψ_0`: `ω^a` below `ε₀`, `ε₀·ω^a` below `ε₁`, and the first two steps of a normal form theorem |
-| `Eps.lean` | done — `ψ_0(Ω·(n+1)) = ε_n` at every finite `n`, by one induction |
+| `Eps.lean` | done — `ψ_0(Ω·(n+1)) = ε_n` at every finite `n`, by one induction, and `ψ_0(Ω·ω) = ε_ω` with `ψ_1(1) = Ω·ω` |
 | `Eval.lean` | done — `val`, `Lam`, `val_mem_CSet`, the two `ψ` comparison helpers |
 | `Mono.lean` | done — the simultaneous induction, `val_lt_val`, `OTLt_wf` |
 | `FS.lean` | done — `dom`, `fs`, `fs_lt`, `dom_eq_one_or_tw`, `step_lt`, `exb` |
@@ -351,7 +351,9 @@ What is left of that is the Lean problem still open.
   `Trans.BMS.existsUnique_OT_lt_teN` packages it as a bijection onto the
   ordinals below `ψ_0(Ω·(n+1))` at every `n`. `ε₀` and `ε₁` are the cases
   `n = 0` and `n = 1`, and `teN 0` and `teN 1` are `te0` and `te1` on the
-  nose.
+  nose. `Trans.BMS.existsUnique_OT_lt_teW` takes it to the limit: `val` is a
+  bijection onto the ordinals below `ε_ω`, which the term
+  `teW = ψ_0(ψ_1(1))` names.
 
   The arithmetic above `ε₁` no longer has to be climbed a level at a time.
   `Notation/ExBuchholz/Eps.lean` proves `ψ_0(Ω·(n+1)) = ε_n` at every finite
@@ -365,12 +367,19 @@ What is left of that is the Lean problem still open.
   `ψ_1(0) = Ω` itself. The two values `Opow.lean` proves by hand are the cases
   `n = 0` and `n = 1` of it.
 
-  What that does **not** reach is `Ω·ω` and above, and the reason is the last
-  clause: `ψ_1(1) = Ω·ω`, so at `Ω·ω` the decomposition would have to allow a
-  collapse with subscript `1` and a nonzero argument, which is `C_1` and not
-  `C_0`. Past that, `ψ_0(Ω^2)` is `ζ₀` and the arguments need `ψ_1` inside
-  them, so the induction has to know which arguments `ψ_1` reaches. What would
-  settle all of it is a normal form theorem, and its first step is in: `Ord.principal_mem_CSet` says an additively principal member of
+  `Ω·ω` itself is reached, by a different argument: `Ord.psi_Omega_omega`
+  says `ψ_0(Ω·ω) = ε_ω`, and that one needs no decomposition at all — an
+  argument below `Ω·ω` is below some `Ω·(n+1)`, so `ψ_0` of it is at most
+  `ε_n` by monotonicity. `Ord.psi_one_one` names the bound as a term's value:
+  `ψ_1(1) = Ω·ω`, because `C_1(1)` has no argument but `0` to collapse, so
+  below `Ω_2` it is the finite multiples of `Ω` plus something countable.
+
+  Where it does stop is `Ω·ω + 1`. There `ψ_1(1) = Ω·ω` is itself a legal
+  collapse inside `C_0(Ω·ω + 1)` — subscript `1`, argument `1`, both in the
+  closure — so a decomposition of that closure has to say which ordinals `ψ_1`
+  reaches, which is `C_1` and not `C_0`. Past that, `ψ_0(Ω^2)` is `ζ₀` and the
+  arguments need `ψ_1` inside them as well. What would settle all of it is a
+  normal form theorem, and its first step is in: `Ord.principal_mem_CSet` says an additively principal member of
   `C_v(a)` is below `Ω_v` or a collapse `ψ_u(e)` with `u` and `e` in the
   closure. The second step is in too:
   `Ord.exists_principal_split` peels a leading principal off any member, with
