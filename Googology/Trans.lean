@@ -7,6 +7,7 @@ import Googology.Trans.BMS.Entries2
 import Googology.Trans.BMS.AllL
 import Googology.Trans.BMS.Zero
 import Googology.Trans.BMS.ZeroRow
+import Googology.Trans.BMS.ZeroRowSurj
 import Googology.Trans.BMS.Pair
 import Googology.Trans.BMS.Agree
 import Googology.Trans.BMS.Append
@@ -27,6 +28,8 @@ import Googology.Trans.BMS.TrioMono
 import Googology.Trans.BMS.TrioStd
 import Googology.Trans.BMS.TrioRules
 import Googology.Trans.BMS.TrioRulesSheet
+import Googology.Trans.BMS.TrioRulesE0
+import Googology.Trans.BMS.TrioSheet41
 import Googology.Trans.BMS.TrioCofinal
 import Googology.Trans.BMS.TrioCofPsi
 import Googology.Trans.BMS.RankVal

@@ -330,7 +330,7 @@ def units (a : Od) : List Ex := a.flatMap fun ec => List.replicate ec.2 ec.1
 def predBeta (beta : Od) : Od :=
   match beta with
   | [] => []
-  | (e, k) :: _ => if e == .o [] then nat (k - 1) else beta
+  | (e, k) :: _ => match e with | .o [] => nat (k - 1) | _ => beta
 
 /-- **Rule 1**, Python `strip`: what the children of the column of a summand
 `ω^δ` spell out.  `ψ_v(X)·c + ρ ↦ X + ψ_v(X)·(c-1) + ρ` (the uncollapse),

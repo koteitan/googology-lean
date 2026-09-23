@@ -158,3 +158,10 @@ measures, and all four morphisms — depends on no axiom at all.
 |---|---|
 | **At a limit `α < ε₀`, the fundamental sequence of `ψ_0(Ω_α)` and the expansions of its trio matrix are cofinal in each other** | `Trans.BMS.TrioCofPsi.trioPsi_fs`, `Trans.BMS.TrioCofPsi.trioPsi_expand_prefix` |
 | `ψ_0(Ω_β) < ψ_0(Ω_α)` gives `k` with `M(β) ≤ M(α)[k]` | `Trans.BMS.TrioCofPsi.trioPsi_cofinal`, `Trans.BMS.TrioCofPsi.trioPsi_cofinal_val` |
+
+## Three rows: rules 1–10 and `trioMatrix`; BMS surjectivity
+
+| | |
+|---|---|
+| **The transcription of rules 1–10 agrees with `trioMatrix` below `ε₀`** (depth at most 201) | `Trans.BMS.TrioRulesE0.trioMatrixL_eq_trioMatrix'`, `Trans.BMS.TrioRulesE0.predBetaSpec` |
+| BMS `r` rows → `r + 1` rows is not surjective | `Trans.BMS.bmsToSucc_not_surjective` |

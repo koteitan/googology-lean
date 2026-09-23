@@ -54,7 +54,7 @@ A map sending each state to the ordinal it names.
 | primitive sequences | — | ✅✅✅✅❌✅ |  |  |  |  |  |  | ✅✅✅✅✅✅ |
 | pair sequences |  | — |  |  |  |  |  |  | ✅❌❌✅✅✅(*2) |
 | trio sequences |  |  | — |  |  |  |  |  |  |
-| BMS, `r` rows |  |  |  | — | ✅✅✅✅❌✅ |  |  |  |  |
+| BMS, `r` rows |  |  |  | — | ✅✅✅✅❌✅(*4) |  |  |  |  |
 | BMS, `r+1` rows |  |  |  |  | — |  |  |  |  |
 | one-row DBMS | ✅✅✅✅✅✅ |  |  |  |  | — |  |  |  |
 | DBMS, `r` rows |  |  |  | ✅✅✅✅❌✅ |  |  | — | ✅✅✅✅❌✅(*3) |  |
@@ -67,6 +67,7 @@ A map sending each state to the ordinal it names.
 - defined: the map is defined in Lean. Primitive sequences go to the standard forms below `ψ_0(Ω)`, pair sequences to those below `ψ_0(Ω_ω)`. Primitive sequences → pair sequences, BMS `r` rows → `r+1` rows and DBMS `r` rows → `r+1` rows put a row of zeros underneath. The map into trio sequences is defined for `α < ε₀`. Extended Buchholz's ψ → trio sequences transcribes the map of [koteitan/trio](https://github.com/koteitan/trio). For `α < ε₀` it is proved that the image is a standard form of three-row BMS (`trioMatrix_std`) and that the map preserves and reflects the order (`omegaIndexMatrix_lt_iff`). Rules 1–10 for `ε₀ ≤ α < Λ` are transcribed (`TrioRules.lean`) and checked against the published table, nothing more.
 - (*2) Pair sequences → extended Buchholz's ψ does not preserve expansion and does not commute with it (refuted). The generator `(0,0)(1,1)` expands with `[0]` to `(0,0)`; they go to `ψ_0(Ω_1)` and `1`, and no term of the fundamental sequence of `ψ_0(Ω_1)` is `1` (`Trans/PSS/Expansion.lean`).
 - (*3) DBMS `r` rows → DBMS `r+1` rows is not surjective (refuted): every image has a bottom row of zeros, but the generator `(0,0)(1,0)(2,1)` does not (`dbmsToSucc_not_surjective`).
+- (*4) BMS `r` rows → BMS `r+1` rows is not surjective (refuted): every image has a bottom row of zeros, but the generator `(0,0)(1,1)` does not (`bmsToSucc_not_surjective`).
 - preserves expansion: one expansion step goes to one expansion step in the target.
 - commutes with expansion: bracket numbers included, expanding and then translating gives the same as translating and then expanding.
 - injective, surjective: onto the standard forms of the target. Primitive sequences → extended Buchholz's ψ is both, so the two systems are one system written two ways. One-row DBMS → primitive sequences is both too: the standard one-row DBMS matrices are the primitive sequences.

@@ -483,7 +483,7 @@ def bmsToSucc : TransGoals bmsL (fun r => bmsL (r + 1)) (fun _ _ => True)
     ⟨fun a k _ => ⟨trivial, (bmsL_homSucc i).map_step a k⟩,
      fun a _ h => (bmsL_homSucc i).map_halted a h⟩⟩
   injective := .proved bmsToSucc_injective
-  surjective := .todo
+  surjective := .refuted bmsToSucc_not_surjective
   rank := .proved fun i => ⟨bmsL_wf i, bmsL_wf (i + 1), fun a _ => rank_zeroRow i a⟩
 
 /-- One-row DBMS → primitive sequences, on the matrices (`dbmsL1`): the

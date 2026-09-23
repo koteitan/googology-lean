@@ -530,3 +530,6 @@ What is left is one problem, and it is not a Lean problem.
   - Pair sequences → extended Buchholz's ψ does not preserve expansion and does not commute with it (`Trans/PSS/Expansion.lean`, `pairToExb_not_preserves`, `pairToExb_not_commutes`). The counterexample is the generator `(0,0)(1,1)` with `[0]`.
 - DBMS `r` rows → `r + 1` rows is proved (2026-09-23, `Trans/DBMS/ZeroRow.lean`), with a proof that it is not surjective; the table cell is ✅✅✅✅❌✅(*3). Surjectivity of the BMS map can be refuted the same way (added to the plan).
 - Trio cofinality restated with the ψ terms (2026-09-23, `Trans/BMS/TrioCofPsi.lean`): two-way cofinal at a limit `α`; the successor case stays in the plan.
+- The transcription of rules 1–10 agrees with `trioMatrix` below `ε₀` for depth at most 201 (`TrioRulesE0.lean`). The derived `==` on `Ex` is opaque, so `predBeta` was rewritten with a pattern match (same behaviour). Fuel 200 fails on the tower of depth 203.
+- The 41 rows are decided (`TRIO-SHEET-41.md`): no transcription error; rules right on 17, table right on 22, 1 open, 1 out of scope.
+- BMS `r` rows → `r+1` rows is not surjective (`ZeroRowSurj.lean`); footnote (*4) in the table.

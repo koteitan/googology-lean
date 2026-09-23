@@ -469,3 +469,6 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
   - ペア数列 → 拡張ブーフホルツ ψ の「展開を保つ」「展開と可換」は偽（`Trans/PSS/Expansion.lean`、`pairToExb_not_preserves`、`pairToExb_not_commutes`）。反例は生成元 `(0,0)(1,1)` の `[0]`。
 - DBMS の `r` 行 → `r + 1` 行を証明した（2026-09-23、`Trans/DBMS/ZeroRow.lean`）。全射でないことも証明し、表のマスは ✅✅✅✅❌✅(*3)。BMS の同じ写像の全射性も同じ方法で反証できると分かった（plan に追加）。
 - トリオの共終性を ψ の項の側で述べ直した（2026-09-23、`Trans/BMS/TrioCofPsi.lean`）。極限の `a` では両方向に共終。後続の `a` は plan に残した。
+- 規則 1〜10 の書き起こしが `e0` 未満で `trioMatrix` と一致することを、深さ 201 以下で証明した（`TrioRulesE0.lean`）。導出された `==` が不透明で証明できなかったので、`predBeta` をパターン照合で書き直した（動作は同じ）。燃料 200 では深さ 203 の塔で食い違う。
+- 41 行を判定した（`TRIO-SHEET-41-ja.md`）。書き起こしの誤りは無い。規則が正しい 17 行、表が正しい 22 行、未決 1、対象外 1。
+- BMS の `r` 行 → `r+1` 行が全射でないことを証明した（`ZeroRowSurj.lean`）。表のマスに注 (*4)。

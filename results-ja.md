@@ -155,3 +155,10 @@
 |---|---|
 | **極限の `a < e0` で、`p0(W_a)` の基本列と、その trio 行列の展開は互いに共終** | `Trans.BMS.TrioCofPsi.trioPsi_fs`, `Trans.BMS.TrioCofPsi.trioPsi_expand_prefix` |
 | `p0(W_b) < p0(W_a)` なら `M(b) ≤ M(a)[k]` となる `k` がある | `Trans.BMS.TrioCofPsi.trioPsi_cofinal`, `Trans.BMS.TrioCofPsi.trioPsi_cofinal_val` |
+
+## 3 行：規則 1〜10 と `trioMatrix`、BMS の全射性
+
+| | |
+|---|---|
+| **規則 1〜10 の書き起こしは `e0` 未満で `trioMatrix` と一致する**（深さ 201 以下） | `Trans.BMS.TrioRulesE0.trioMatrixL_eq_trioMatrix'`, `Trans.BMS.TrioRulesE0.predBetaSpec` |
+| BMS の `r` 行 → `r + 1` 行は全射でない | `Trans.BMS.bmsToSucc_not_surjective` |
