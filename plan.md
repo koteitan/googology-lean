@@ -10,6 +10,8 @@
     - state and prove the relation to `[ ]` as cofinality
   - blank cells of the translation tables in the README
     - pair sequences → extended Buchholz's ψ: preserves expansion
+- Core
+  - 🤖 restate and prove the injectivity of one-row DBMS on the matrices (entries): the translation into the ordinals, and one-row DBMS → primitive sequences
 - Notation
   - ω-Y (official)
     - 🤖 prove well-foundedness with the official expansion (a separate repository, koteitan/wy-wo-por)
