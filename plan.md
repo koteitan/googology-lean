@@ -18,4 +18,4 @@
   - DBMS
     - the translation into the ordinals for 3 rows and up
       - 🤖 prove the conjecture "for `n ≥ 1`, `rkL 2 (cgen 2 (n+2))` equals the rank of the BMS generator `(0,0,0)...(n,n,n)`" (so 3-row DBMS and BMS have the same ordinal; `n = 1` is proved)
-      - 🤖 which lists of blocks are standard at 3 rows
+      - the sufficient direction at 3 rows: prove `RkInj 2` (content rank is injective) or `DupProp 2` (the last block can be duplicated) (the necessary direction is proved; numerically, standard = lexicographically non-increasing)
