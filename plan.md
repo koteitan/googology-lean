@@ -3,15 +3,13 @@
 # Plan
 
 - Trans
-  - trio sequences (BMS, 3 rows)
-    - prove that the map of `Trio.lean` lands in the standard forms
-    - prove that it is monotone
-    - transcribe rules 1–10 of the trio algorithm (`ε₀ ≤ α < Λ`)
-    - state and prove the relation to `[ ]` as cofinality
+  - 🤖 trio sequences (BMS, 3 rows) (branch `feature/trio-pair`)
+    - 🤖 prove that the map of `Trio.lean` lands in the standard forms
+    - 🤖 prove that it is monotone
+    - 🤖 transcribe rules 1–10 of the trio algorithm (`ε₀ ≤ α < Λ`)
+    - 🤖 state and prove the relation to `[ ]` as cofinality
   - blank cells of the translation tables in the README
-    - pair sequences → extended Buchholz's ψ: preserves expansion
-- Core
-  - 🤖 restate and prove the injectivity of one-row DBMS on the matrices (entries): the translation into the ordinals, and one-row DBMS → primitive sequences
+    - 🤖 pair sequences → extended Buchholz's ψ: preserves expansion
 - Notation
   - ω-Y (official)
     - 🤖 prove well-foundedness with the official expansion (a separate repository, koteitan/wy-wo-por)
