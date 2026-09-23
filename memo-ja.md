@@ -474,3 +474,4 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
 - BMS の `r` 行 → `r+1` 行が全射でないことを証明した（`ZeroRowSurj.lean`）。表のマスに注 (*4)。
 - 2 行の DBMS の順序数への翻訳写像を作り、6 つの性質を全部証明した（`Trans/DBMS/TwoRow.lean`）。README の行を「2 行の DBMS」（全部 ✅）と「3 行以上の DBMS」に分けた。
 - ペア数列の 1 手は ψ の側の 1 手以上に写ることを証明した（`Trans/PSS/Steps.lean`、`Goals/PairReach.lean`）。
+- トリオの後続の場合の共終性（`TrioSucc.lean`）と、燃料を深さで与えた規則 1〜10 がすべての `a < e0` で一致すること（`TrioRulesFuel.lean`）を証明した（2026-09-23）。

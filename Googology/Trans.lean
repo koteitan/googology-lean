@@ -29,9 +29,11 @@ import Googology.Trans.BMS.TrioStd
 import Googology.Trans.BMS.TrioRules
 import Googology.Trans.BMS.TrioRulesSheet
 import Googology.Trans.BMS.TrioRulesE0
+import Googology.Trans.BMS.TrioRulesFuel
 import Googology.Trans.BMS.TrioSheet41
 import Googology.Trans.BMS.TrioCofinal
 import Googology.Trans.BMS.TrioCofPsi
+import Googology.Trans.BMS.TrioSucc
 import Googology.Trans.BMS.RankVal
 import Googology.Trans.BMS.Cofinal
 import Googology.Trans.BMS.Prim

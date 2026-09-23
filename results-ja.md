@@ -170,3 +170,10 @@
 | **2 行の DBMS の順序数への翻訳写像**。単射、`p0(W_w)` 未満への全射、階数と一致、順序を保つ | `Trans.DBMS.dbmsL2OrdEval`, `Trans.DBMS.dbmsL2OrdEval_injective`, `Trans.DBMS.dbmsL2Ord_image`, `Trans.DBMS.rank_dbmsL2_eq`, `Trans.DBMS.ltPS_iff_dOrdL_lt` |
 | 2 行の DBMS の標準形はブロックの並び | `Trans.DBMS.dreach2_iff_dform`, `Trans.DBMS.expand2L_blk_some`, `Trans.DBMS.expand2L_blk_none` |
 | **ペア数列の 1 手は ψ の側の 1 手以上に写る**。到達は両方向に保たれる | `Trans.PSS.pairToExbOT_transGen_iff`, `Goals.pairToExb_transGen_iff` |
+
+## 3 行：後続での共終性と、燃料
+
+| | |
+|---|---|
+| **後続の `a = b + 1 < e0` で、`p0(W_a)` の基本列と `M(a)` の展開は互いに共終** | `Trans.BMS.TrioSucc.trioPsi_fs_succ`, `Trans.BMS.TrioSucc.fs_psiOmega_succ` |
+| **燃料を深さで与えた規則 1〜10 は、すべての `a < e0` で `trioMatrix` と一致** | `Trans.BMS.TrioFuel.trioMatrixD_eq_trioMatrix`, `Trans.BMS.TrioFuel.trioMatrixF_200` |

@@ -173,3 +173,10 @@ measures, and all four morphisms — depends on no axiom at all.
 | **The translation of two-row DBMS into the ordinals**: injective, onto the ordinals below `ψ_0(Ω_ω)`, equal to the rank, order-preserving | `Trans.DBMS.dbmsL2OrdEval`, `Trans.DBMS.dbmsL2OrdEval_injective`, `Trans.DBMS.dbmsL2Ord_image`, `Trans.DBMS.rank_dbmsL2_eq`, `Trans.DBMS.ltPS_iff_dOrdL_lt` |
 | A two-row DBMS standard form is a list of blocks | `Trans.DBMS.dreach2_iff_dform`, `Trans.DBMS.expand2L_blk_some`, `Trans.DBMS.expand2L_blk_none` |
 | **One pair-sequence step goes to one or more ψ steps**; reachability is preserved and reflected | `Trans.PSS.pairToExbOT_transGen_iff`, `Goals.pairToExb_transGen_iff` |
+
+## Three rows: cofinality at a successor, and fuel
+
+| | |
+|---|---|
+| **At a successor `α = β + 1 < ε₀`, the fundamental sequence of `ψ_0(Ω_α)` and the expansions of `M(α)` are cofinal in each other** | `Trans.BMS.TrioSucc.trioPsi_fs_succ`, `Trans.BMS.TrioSucc.fs_psiOmega_succ` |
+| **Rules 1–10 with fuel from the depth agree with `trioMatrix` for every `α < ε₀`** | `Trans.BMS.TrioFuel.trioMatrixD_eq_trioMatrix`, `Trans.BMS.TrioFuel.trioMatrixF_200` |
