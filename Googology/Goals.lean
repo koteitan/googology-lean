@@ -518,6 +518,20 @@ def dbmsToBms : TransGoals dbms bmsAll (fun _ _ => True) (fun r => (dbmsSim r).m
   surjective := .todo
   rank := .proved dbmsToBms_rank
 
+/-- DBMS `r` rows → DBMS `r + 1` rows: a row of zeros underneath, on the
+entries.  `dbmsL r` has `r + 1` rows. -/
+def dbmsToSucc : TransGoals dbmsL (fun r => dbmsL (r + 1)) (fun _ _ => True)
+    (fun r => (dbmsL_homSucc r).map) where
+  sourceEn := "DBMS, `r` rows"
+  sourceJa := "DBMS `r` 行"
+  targetEn := "DBMS, `r+1` rows"
+  targetJa := "DBMS `r+1` 行"
+  preserves := .proved dbmsToSucc_preserves
+  commutes := .proved dbmsToSucc_commutes
+  injective := .proved dbmsToSucc_injective
+  surjective := .refuted dbmsToSucc_not_surjective
+  rank := .proved dbmsToSucc_rank
+
 /-- Extended Buchholz's ψ → trio sequences: `omegaIndexMatrix`, transcribed
 from koteitan/trio, on the terms `ψ_0(Ω_α)` with `α < ε₀`, into all
 three-row matrices. -/
@@ -554,6 +568,7 @@ def audit : List AuditLine :=
   bmsToSucc.lines (toString ``Googology.Goals.bmsToSucc) ++
   dbmsToPrim.lines (toString ``Googology.Goals.dbmsToPrim) ++
   dbmsToBms.lines (toString ``Googology.Goals.dbmsToBms) ++
+  dbmsToSucc.lines (toString ``Googology.Goals.dbmsToSucc) ++
   exbToTrioGoals.lines (toString ``Googology.Goals.exbToTrioGoals)
 
 end Googology.Goals

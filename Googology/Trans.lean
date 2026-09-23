@@ -39,6 +39,7 @@ import Googology.Trans.DBMS.Entries
 import Googology.Trans.BMS.Tables
 import Googology.Trans.DBMS.Tables
 import Googology.Trans.DBMS.OneRowL
+import Googology.Trans.DBMS.ZeroRow
 import Googology.Trans.PSS.Expand
 import Googology.Trans.PSS.Terms
 import Googology.Trans.PSS.Rank

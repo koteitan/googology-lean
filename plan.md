@@ -15,4 +15,3 @@
     - connect the proof here once it is done
   - DBMS
     - 🤖 the translation into the ordinals for 2 rows and up
-    - 🤖 `r` rows inside `r + 1` rows
