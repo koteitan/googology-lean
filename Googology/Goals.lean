@@ -406,6 +406,23 @@ def dbmsOneRowOrd : OrdGoals (fun _ : Unit => dbmsL1) (fun _ => dbmsL1Std)
     exact (rank_dbmsL1_eq_val a).symm⟩
   order := .proved fun _ a b _ _ => dbmsL1OrdEval_lt_iff a b
 
+
+/-- Two-row DBMS on the matrices (`dbmsL2`, the entries of the standard
+arrays as pairs): `ω^o(M₀) + ω^o(M₁) + ⋯` over the blocks, onto the ordinals
+below `ψ_0(Ω_ω)`, with the lexicographic order of pss-proof. -/
+def dbmsTwoRowOrd : OrdGoals (fun _ : Unit => dbmsL2) (fun _ => dbmsL2Std)
+    (fun _ => dbmsL2OrdEval.val) (fun _ => Set.Iio (Notation.ExBuchholz.Term.val psiOmegaOmega))
+    (fun _ a b => Bijectivity.ltPS a.1 b.1) where
+  labelEn := "DBMS with 2 rows"
+  labelJa := "2 行の DBMS"
+  injective := .proved fun _ _ _ _ _ h => dbmsL2OrdEval_injective h
+  surjective := .proved fun _ => dbmsL2Ord_image
+  decreasing := .proved fun _ a b _ _ h => dbmsL2OrdEval.val_lt a b h
+  rank := .proved fun _ => ⟨dbmsL2Std.wf_of_wf dbmsL2_wf, fun a ha => by
+    rw [Rewrite.Std.rank_eq dbmsL2Std dbmsL2_wf a ha]
+    exact (rank_dbmsL2_eq a).symm⟩
+  order := .proved fun _ a b _ _ => ltPS_iff_dOrdL_lt a b
+
 /-- Extended Buchholz's ψ: the value of a countable standard form, onto the
 ordinals below `ψ_0(Λ)`, with the term order. -/
 def exbOrd : OrdGoals (fun _ : Unit => exbOT) (fun _ => exbOTStd)
@@ -561,6 +578,7 @@ def audit : List AuditLine :=
   bmsOneRowOrd.lines (toString ``Googology.Goals.bmsOneRowOrd) ++
   bmsTwoRowOrd.lines (toString ``Googology.Goals.bmsTwoRowOrd) ++
   dbmsOneRowOrd.lines (toString ``Googology.Goals.dbmsOneRowOrd) ++
+  dbmsTwoRowOrd.lines (toString ``Googology.Goals.dbmsTwoRowOrd) ++
   exbOrd.lines (toString ``Googology.Goals.exbOrd) ++
   primToPair.lines (toString ``Googology.Goals.primToPair) ++
   primToExb.lines (toString ``Googology.Goals.primToExb) ++

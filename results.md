@@ -165,3 +165,11 @@ measures, and all four morphisms — depends on no axiom at all.
 |---|---|
 | **The transcription of rules 1–10 agrees with `trioMatrix` below `ε₀`** (depth at most 201) | `Trans.BMS.TrioRulesE0.trioMatrixL_eq_trioMatrix'`, `Trans.BMS.TrioRulesE0.predBetaSpec` |
 | BMS `r` rows → `r + 1` rows is not surjective | `Trans.BMS.bmsToSucc_not_surjective` |
+
+## Two-row DBMS; reachability for pair sequences → ψ
+
+| | |
+|---|---|
+| **The translation of two-row DBMS into the ordinals**: injective, onto the ordinals below `ψ_0(Ω_ω)`, equal to the rank, order-preserving | `Trans.DBMS.dbmsL2OrdEval`, `Trans.DBMS.dbmsL2OrdEval_injective`, `Trans.DBMS.dbmsL2Ord_image`, `Trans.DBMS.rank_dbmsL2_eq`, `Trans.DBMS.ltPS_iff_dOrdL_lt` |
+| A two-row DBMS standard form is a list of blocks | `Trans.DBMS.dreach2_iff_dform`, `Trans.DBMS.expand2L_blk_some`, `Trans.DBMS.expand2L_blk_none` |
+| **One pair-sequence step goes to one or more ψ steps**; reachability is preserved and reflected | `Trans.PSS.pairToExbOT_transGen_iff`, `Goals.pairToExb_transGen_iff` |

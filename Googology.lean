@@ -6,3 +6,4 @@ import Googology.Notation.DBMS
 import Googology.Notation.Y
 import Googology.Trans
 import Googology.Goals
+import Googology.Goals.PairReach

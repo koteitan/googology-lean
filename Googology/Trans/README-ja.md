@@ -89,8 +89,10 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | DBMS、拡張ブーフホルツ ψ | `DBMS/OneRow.lean` | `StepHom` | 1 行の DBMS についての同じこと。1 行では生成元が BM4 と一致する。どの行列が標準形かも含む |
 | DBMS、BMS（原始数列） | `DBMS/OneRowL.lean` | `StepHom`、`Equiv` | **行列の上の 1 行の DBMS**（`dbmsL1`）。配列は成分によってこの系の上へ写る。この系は原始数列の系そのものである。その順序数への写像は単射で、`e0` 未満の順序数全部に全射、階数と一致し、順序を保つ |
 | DBMS どうし | `DBMS/ZeroRow.lean` | `StepHom`、`Sim` | **DBMS の `r` 行が `r + 1` 行の中に入ること**。下に 0 の行を足す写像は、標準形に入り、括弧の番号を変えずに展開と可換で、単射で、階数を保つ（`dbmsL_homSucc`、`rank_dbmsL_homSucc`）。全射ではない（`dbmsToSucc_not_surjective`） |
+| DBMS、BMS（ペア数列）、拡張ブーフホルツ ψ | `DBMS/TwoRowBlock.lean`、`DBMS/TwoRow.lean` | `Eval` | **2 行の DBMS の順序数への翻訳写像**。標準形は `(0,0)` で始まるブロックの並びで、各ブロックの残りはペア数列（`dreach2_iff_dform`）。値は `w^o(M_0) + w^o(M_1) + ...`（`dbmsL2OrdEval`）。単射、`p0(W_w)` 未満への全射、展開で下がる、階数と一致、順序を保つ（`dbmsL2OrdEval_injective`、`dbmsL2Ord_image`、`rank_dbmsL2_eq`、`ltPS_iff_dOrdL_lt`） |
 | BMS、拡張ブーフホルツ ψ | `BMS/Commute.lean` | いずれ `StepHom` | 読み取りが展開を `[ ]` に変えること、添字の付け替え `N ↦ N + 1` を込めて |
 | BMS（ペア数列）、拡張ブーフホルツ ψ | `PSS/Expand.lean`、`PSS/Terms.lean`、`PSS/Rank.lean` | — | **ペア数列の順序数への翻訳写像**。koteitan/pss-proof の `Trans` を通す。その展開は `expand2L` である（`oper_succ_eq_expand2L_of_ctps`）。その Buchholz 項は `p0(W_w)` 未満の標準的な拡張ブーフホルツ項の上へ写る（`toTerm_bijOn_TransRange`）。ペア数列の階数はその項の `1 + val` で（`rank_pairL_eq`）、値の範囲は `p0(W_w)` 未満の順序数全部である（`range_pairOrd`）。詳しくは [PSS/README-ja.md](PSS/README-ja.md) にある |
 | BMS（ペア数列）、拡張ブーフホルツ ψ | `PSS/Expansion.lean` | — | **ペア数列 → 拡張ブーフホルツ ψ は展開を保たないこと**。生成元 `(0,0)(1,1)` の `[0]` は `(0,0)` で、`p0(W_1)` の基本列の項は `1` にならない（`pairOrdTerm_step_ne_fs`） |
+| BMS（ペア数列）、拡張ブーフホルツ ψ | `PSS/Steps.lean`、`Goals/PairReach.lean` | — | **1 手は ψ の側の 1 手以上に写る**。「何手かで届く」は写像で両方向に保たれる（`pairToExbOT_transGen_iff`、`pairToExb_transGen_iff`）。`(0,0)(1,1)[0]` は `p0(W_1) →[0] w →[1] 1` |
 | BMS、拡張ブーフホルツ ψ | `BMS/Tables.lean`、`DBMS/Tables.lean` | `StepHom` | README の表の小さなセル。原始数列の順序は値の順序であること、1 行の翻訳写像が階数を保つこと、原始数列がペア数列の中へ単射で入ること |
 | BMS、拡張ブーフホルツ ψ | `BMS/ExBuchholz.lean` | いずれ `Sim` | 1 行の場合の読み取り `read`、その項が標準形になるのは降順のときちょうどであること、そしてそれが全単射であること |

@@ -472,3 +472,5 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
 - 規則 1〜10 の書き起こしが `e0` 未満で `trioMatrix` と一致することを、深さ 201 以下で証明した（`TrioRulesE0.lean`）。導出された `==` が不透明で証明できなかったので、`predBeta` をパターン照合で書き直した（動作は同じ）。燃料 200 では深さ 203 の塔で食い違う。
 - 41 行を判定した（`TRIO-SHEET-41-ja.md`）。書き起こしの誤りは無い。規則が正しい 17 行、表が正しい 22 行、未決 1、対象外 1。
 - BMS の `r` 行 → `r+1` 行が全射でないことを証明した（`ZeroRowSurj.lean`）。表のマスに注 (*4)。
+- 2 行の DBMS の順序数への翻訳写像を作り、6 つの性質を全部証明した（`Trans/DBMS/TwoRow.lean`）。README の行を「2 行の DBMS」（全部 ✅）と「3 行以上の DBMS」に分けた。
+- ペア数列の 1 手は ψ の側の 1 手以上に写ることを証明した（`Trans/PSS/Steps.lean`、`Goals/PairReach.lean`）。

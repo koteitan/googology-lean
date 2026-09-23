@@ -34,14 +34,15 @@ A map sending each state to the ordinal it names.
 | BMS with at most 2 rows | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | BMS with 3 rows or more |  |  |  |  |  |  |
 | one-row DBMS | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| DBMS with 2 rows or more |  |  |  |  |  |  |
+| DBMS with 2 rows | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| DBMS with 3 rows or more |  |  |  |  |  |  |
 | Y sequence |  |  |  |  |  |  |
 | ω-Y |  |  |  |  |  |  |
 | extended Buchholz's ψ | ✅ | ✅ | ✅(*1) | ✅ | ✅ | ✅ |
 
-- defined: the map is defined in Lean. For primitive sequences and one-row DBMS it reads the state as an extended Buchholz term and takes its value. For pair sequences it sends the state to a Buchholz term by the `Trans` of [koteitan/pss-proof](https://github.com/koteitan/pss-proof), maps that to an extended Buchholz term, and takes `1 + val` (0 for the empty sequence). For extended Buchholz's ψ it is the value of the term.
+- defined: the map is defined in Lean. For primitive sequences and one-row DBMS it reads the state as an extended Buchholz term and takes its value. For pair sequences it sends the state to a Buchholz term by the `Trans` of [koteitan/pss-proof](https://github.com/koteitan/pss-proof), maps that to an extended Buchholz term, and takes `1 + val` (0 for the empty sequence). For two-row DBMS, a standard form splits into blocks that start with `(0,0)`; the rest of each block is read as a pair sequence `M_i`, and the value is `ω^o(M_0) + ω^o(M_1) + ...`, where `o` is the ordinal of a pair sequence. For extended Buchholz's ψ it is the value of the term.
 - injective: distinct standard forms go to distinct ordinals. For BMS and DBMS a standard form is its matrix, so two states are compared as matrices, by their entries.
-- surjective: the image is known exactly — the ordinals below `ε₀` for primitive sequences and one-row DBMS, the ordinals below `ψ_0(Ω_ω)` for pair sequences, the ordinals below `ψ_0(Λ)` for extended Buchholz's ψ (*1).
+- surjective: the image is known exactly — the ordinals below `ε₀` for primitive sequences and one-row DBMS, the ordinals below `ψ_0(Ω_ω)` for pair sequences and two-row DBMS, the ordinals below `ψ_0(Λ)` for extended Buchholz's ψ (*1).
 - (*1) The states of extended Buchholz's ψ are the standard terms below `Ω`, so the image is not all of `C_0(Λ)` but its part below `Ω`, that is, the ordinals below `ψ_0(Λ)`.
 - decreases on expansion: one expansion step makes the value strictly smaller.
 - equals the rank: the value is the rank of the expansion (how far expansion can descend). Only one map can do this.
@@ -65,7 +66,7 @@ A map sending each state to the ordinal it names.
 - The six marks of a cell are, from left to right: defined, preserves expansion, commutes with expansion, injective, surjective, preserves the rank. ✅ is proved, ❌ is not yet.
 - BMS `r` rows → BMS `r+1` rows is one map for every `r`. The target of DBMS `r` rows → BMS `r` rows is all arrays, not only standard forms. Extended Buchholz's ψ → trio sequences is a map on the terms of the form `ψ_0(Ω_α)` only.
 - defined: the map is defined in Lean. Primitive sequences go to the standard forms below `ψ_0(Ω)`, pair sequences to those below `ψ_0(Ω_ω)`. Primitive sequences → pair sequences, BMS `r` rows → `r+1` rows and DBMS `r` rows → `r+1` rows put a row of zeros underneath. The map into trio sequences is defined for `α < ε₀`. Extended Buchholz's ψ → trio sequences transcribes the map of [koteitan/trio](https://github.com/koteitan/trio). For `α < ε₀` it is proved that the image is a standard form of three-row BMS (`trioMatrix_std`) and that the map preserves and reflects the order (`omegaIndexMatrix_lt_iff`). Rules 1–10 for `ε₀ ≤ α < Λ` are transcribed (`TrioRules.lean`) and checked against the published table, nothing more.
-- (*2) Pair sequences → extended Buchholz's ψ does not preserve expansion and does not commute with it (refuted). The generator `(0,0)(1,1)` expands with `[0]` to `(0,0)`; they go to `ψ_0(Ω_1)` and `1`, and no term of the fundamental sequence of `ψ_0(Ω_1)` is `1` (`Trans/PSS/Expansion.lean`).
+- (*2) Pair sequences → extended Buchholz's ψ does not preserve expansion and does not commute with it (refuted). The generator `(0,0)(1,1)` expands with `[0]` to `(0,0)`; they go to `ψ_0(Ω_1)` and `1`, and no term of the fundamental sequence of `ψ_0(Ω_1)` is `1` (`Trans/PSS/Expansion.lean`). But one step goes to one or more steps on the ψ side, and "reached in one or more steps" is preserved and reflected by the map (`pairToExb_transGen_iff`, `Trans/PSS/Steps.lean`). Example: `(0,0)(1,1)[0]` goes to `ψ_0(Ω_1) →[0] ω →[1] 1`.
 - (*3) DBMS `r` rows → DBMS `r+1` rows is not surjective (refuted): every image has a bottom row of zeros, but the generator `(0,0)(1,0)(2,1)` does not (`dbmsToSucc_not_surjective`).
 - (*4) BMS `r` rows → BMS `r+1` rows is not surjective (refuted): every image has a bottom row of zeros, but the generator `(0,0)(1,1)` does not (`bmsToSucc_not_surjective`).
 - preserves expansion: one expansion step goes to one expansion step in the target.

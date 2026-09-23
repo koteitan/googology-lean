@@ -533,3 +533,5 @@ What is left is one problem, and it is not a Lean problem.
 - The transcription of rules 1–10 agrees with `trioMatrix` below `ε₀` for depth at most 201 (`TrioRulesE0.lean`). The derived `==` on `Ex` is opaque, so `predBeta` was rewritten with a pattern match (same behaviour). Fuel 200 fails on the tower of depth 203.
 - The 41 rows are decided (`TRIO-SHEET-41.md`): no transcription error; rules right on 17, table right on 22, 1 open, 1 out of scope.
 - BMS `r` rows → `r+1` rows is not surjective (`ZeroRowSurj.lean`); footnote (*4) in the table.
+- The translation of two-row DBMS into the ordinals, with all six properties (`Trans/DBMS/TwoRow.lean`); the README row is split into "DBMS with 2 rows" (all ✅) and "DBMS with 3 rows or more".
+- One pair-sequence step goes to one or more ψ steps (`Trans/PSS/Steps.lean`, `Goals/PairReach.lean`).
