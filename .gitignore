@@ -1,3 +1,5 @@
 .lake/
 *.olean
 commit-msg.txt
+__pycache__/
+audit.txt
