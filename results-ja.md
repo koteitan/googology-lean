@@ -185,6 +185,7 @@
 |---|---|
 | **何行でも、DBMS の階数は `w^rank(M_0) + ... + w^rank(M_k)`** | `Trans.DBMS.rank_dbmsL_eq_sum`, `Trans.DBMS.rkL_blkR`, `Trans.DBMS.rkL_append` |
 | **3 行の生成元 `(0,0,0)(1,0,0)(2,1,0)(3,2,1)` の階数は `p0(W_w)`** | `Trans.DBMS.rank_gen_three_three`, `Trans.DBMS.rkL_cgen_three`, `Trans.DBMS.rank_gen_top` |
+| 中身の系の生成元は BMS の生成元を持ち上げたもの。3 行の DBMS の生成元 `(0,0,0)(1,0,0)(2,1,0)(3,2,1)` と BMS の `(0,0,0)(1,1,1)` は同じ階数 | `Trans.DBMS.cgen_two_eq_lift`, `Trans.DBMS.expandRL_lift`, `Trans.DBMS.rank_genL_two_three_eq_bms` |
 
 ## 3 行：添字が 0 か 1 だけの項
 
