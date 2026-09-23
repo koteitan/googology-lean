@@ -40,6 +40,8 @@ import Googology.Trans.BMS.TrioRulesNonLast
 import Googology.Trans.BMS.TrioRulesNonLastSheet
 import Googology.Trans.BMS.TrioRulesAll
 import Googology.Trans.BMS.TrioRulesAllSheet
+import Googology.Trans.BMS.TrioFixMulNormalize
+import Googology.Trans.BMS.TrioFixMulNormalizeSheet
 import Googology.Trans.BMS.TrioRow3480
 import Googology.Trans.BMS.TrioTree
 import Googology.Trans.BMS.TrioTreeStd
