@@ -157,6 +157,8 @@ class SplitAndFind(unittest.TestCase):
     def test_normalize_and_allowed(self):
         self.assertEqual(cr.normalize(" ✅️ "), Y)
         self.assertEqual(cr.normalize(f"{Y} {N}"), Y + N)
+        self.assertEqual(cr.normalize(f"{Y}(*1)"), Y)
+        self.assertEqual(cr.normalize(f"{Y}{N}(*12)"), Y + N)
         self.assertTrue(cr.allowed("notation", ""))
         self.assertTrue(cr.allowed("ordinal", Y))
         self.assertFalse(cr.allowed("ordinal", N))

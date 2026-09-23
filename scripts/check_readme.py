@@ -316,8 +316,12 @@ def locate_tables(text: str, lang: str, name: str) -> dict:
     return result
 
 
+FOOTNOTE = re.compile(r"\(\*\d+\)")
+
+
 def normalize(cell: str) -> str:
-    return cell.replace(" ", "").replace(VS16, "")
+    """Drop spaces, U+FE0F and footnote markers such as `(*1)`."""
+    return FOOTNOTE.sub("", cell.replace(" ", "").replace(VS16, ""))
 
 
 def allowed(table: str, cell: str) -> bool:

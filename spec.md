@@ -677,8 +677,9 @@ are the target labels. Each of the three tables appears exactly once in each
 file. The first cell of each row is its label, and no label appears twice in
 one table.
 
-A cell is compared after removing spaces and U+FE0F (the emoji variation
-selector). The allowed forms are:
+A cell is compared after removing spaces, U+FE0F (the emoji variation
+selector) and footnote markers `(*n)` with `n` a number, such as `✅(*1)`. The
+footnote itself is written under the table. The allowed forms are:
 
 * tables `notation` and `ordinal`: empty or `✅` (U+2705);
 * table `between`: empty, `—` (U+2014), or exactly six characters each `✅`

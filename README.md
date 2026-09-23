@@ -37,11 +37,12 @@ A map sending each state to the ordinal it names.
 | DBMS with 2 rows or more |  |  |  |  |  |  |
 | Y sequence |  |  |  |  |  |  |
 | ω-Y |  |  |  |  |  |  |
-| extended Buchholz's ψ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| extended Buchholz's ψ | ✅ | ✅ | ✅(*1) | ✅ | ✅ | ✅ |
 
 - defined: the map is defined in Lean. For primitive sequences and one-row DBMS it reads the state as an extended Buchholz term and takes its value. For pair sequences it sends the state to a Buchholz term by the `Trans` of [koteitan/pss-proof](https://github.com/koteitan/pss-proof), maps that to an extended Buchholz term, and takes `1 + val` (0 for the empty sequence). For extended Buchholz's ψ it is the value of the term.
 - injective: distinct standard forms go to distinct ordinals. For one-row DBMS this fails literally — two states with the same matrix entries differ in the values they carry outside the matrix, and a counterexample is proved — and holds on the entries.
-- surjective: the image is known exactly — the ordinals below `ε₀` for primitive sequences and one-row DBMS, the ordinals below `ψ_0(Ω_ω)` for pair sequences, all of `C_0(Λ)` for extended Buchholz's ψ.
+- surjective: the image is known exactly — the ordinals below `ε₀` for primitive sequences and one-row DBMS, the ordinals below `ψ_0(Ω_ω)` for pair sequences, the ordinals below `ψ_0(Λ)` for extended Buchholz's ψ (*1).
+- (*1) The states of extended Buchholz's ψ are the standard terms below `Ω`, so the image is not all of `C_0(Λ)` but its part below `Ω`, that is, the ordinals below `ψ_0(Λ)`.
 - decreases on expansion: one expansion step makes the value strictly smaller.
 - equals the rank: the value is the rank of the expansion (how far expansion can descend). Only one map can do this.
 - order-preserving: the order on the states matches the order on the ordinals.
