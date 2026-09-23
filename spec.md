@@ -123,6 +123,104 @@ separate goal because it says that termination does not depend on where the
 expansion starts. It only makes sense where the expansion is defined on
 non-standard states.
 
+### Expansion defined
+
+This column is not a proposition. It is ticked when $`\mathrm{step}`$ is a Lean
+function that runs, and it comes with what ties it to its source: for BMS and
+DBMS, the theorem $`\mathrm{step} = \mathtt{BM4.expand}`$ on the entries; for the
+Y sequence, the comparison with the official program on finitely many cases.
+
+### Translations into the ordinals
+
+A translation into the ordinals is a map $`o : \mathrm{Std} \to \mathrm{Ord}`$.
+Each column is ticked when the proposition under its name is proved.
+
+**defined**: $`o`$ is defined. For the matrix notations it is
+$`o = \mathrm{val} \circ t`$ for a map $`t`$ into the terms of an ordinal
+notation.
+
+**injective**:
+
+```math
+\forall a, b \in \mathrm{Std},\ o(a) = o(b) \Rightarrow a = b .
+```
+
+**surjective**: for an explicitly given set of ordinals $`X`$,
+
+```math
+\{\, o(a) \mid a \in \mathrm{Std} \,\} = X .
+```
+
+The row says which $`X`$: $`\{\alpha \mid \alpha \lt \varepsilon_0\}`$ for
+primitive sequences and one-row DBMS, $`C_0(\Lambda)`$ for extended
+Buchholz's ψ.
+
+**decreases on expansion**:
+
+```math
+\forall a, b \in \mathrm{Std},\ b \prec a \Rightarrow o(b) < o(a) .
+```
+
+**equals the rank**: with the rank defined by
+$`\mathrm{rank}(a) = \sup_{b \prec a} (\mathrm{rank}(b) + 1)`$,
+
+```math
+\forall a \in \mathrm{Std},\ o(a) = \mathrm{rank}(a) .
+```
+
+At most one map satisfies it, since the rank depends on nothing but
+$`\prec`$.
+
+**order-preserving**: for the order $`\lt_S`$ the notation puts on its
+states,
+
+```math
+\forall a, b \in \mathrm{Std},\ a <_S b \iff o(a) < o(b) .
+```
+
+### Translations between notations
+
+A translation from a notation $`R`$ to a notation $`Q`$ is a map
+$`F : S_R \to S_Q`$ between their states. Each column is ticked when the
+proposition under its name is proved.
+
+**defined**: $`F`$ is defined.
+
+**preserves expansion**:
+
+```math
+\forall a, b \in S_R,\ b \prec_R a \Rightarrow F(b) \prec_Q F(a) .
+```
+
+**commutes with expansion**: for some renumbering of brackets
+$`\rho : \mathbb{N} \to \mathbb{N}`$,
+
+```math
+\forall a \in S_R,\ \forall k \in \mathbb{N},\
+F(\mathrm{step}_R(a, k)) = \mathrm{step}_Q(F(a), \rho(k)),
+\qquad F(a) \in H_Q \Rightarrow a \in H_R .
+```
+
+It implies the previous column.
+
+**injective**:
+
+```math
+\forall a, b \in S_R,\ F(a) = F(b) \Rightarrow a = b .
+```
+
+**surjective**:
+
+```math
+\forall c \in S_Q,\ \exists a \in S_R,\ F(a) = c .
+```
+
+**preserves the rank**:
+
+```math
+\forall a \in S_R,\ \mathrm{rank}_Q(F(a)) = \mathrm{rank}_R(a) .
+```
+
 ## Constitutions
 
 These govern the documents, not the code.

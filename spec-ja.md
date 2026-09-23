@@ -114,6 +114,98 @@ $`\mathrm{Std} \subseteq S`$ なので、整礎性を含意する。別の目標
 展開の出発点によらないことを言うからである。標準でない状態の上でも展開が定義されて
 いる表記でだけ意味を持つ。
 
+### 展開の定義
+
+この列は命題ではない。$`\mathrm{step}`$ が Lean の関数として書かれ、実際に計算できると
+✅ になる。出典との結びつきを添える。BMS と DBMS では成分列の上で
+$`\mathrm{step} = \mathtt{BM4.expand}`$ という定理、Y 数列では公式プログラムとの有限個の
+照合である。
+
+### 順序数への翻訳写像
+
+順序数への翻訳写像は写像 $`o : \mathrm{Std} \to \mathrm{Ord}`$ である。各列は、その下に書いた
+命題を証明すると ✅ になる。
+
+**定義**：$`o`$ を定義する。行列の表記では、順序数表記の項への写像 $`t`$ を使って
+$`o = \mathrm{val} \circ t`$ とする。
+
+**単射性**：
+
+```math
+\forall a, b \in \mathrm{Std},\ o(a) = o(b) \Rightarrow a = b .
+```
+
+**全射性**：明示した順序数の集合 $`X`$ について、
+
+```math
+\{\, o(a) \mid a \in \mathrm{Std} \,\} = X .
+```
+
+$`X`$ は行ごとに書く。原始数列と DBMS 1 行では $`\{\alpha \mid \alpha \lt \varepsilon_0\}`$、
+拡張ブーフホルツ ψ では $`C_0(\Lambda)`$ である。
+
+**展開で値が下がる**：
+
+```math
+\forall a, b \in \mathrm{Std},\ b \prec a \Rightarrow o(b) < o(a) .
+```
+
+**階数と一致**：階数を $`\mathrm{rank}(a) = \sup_{b \prec a} (\mathrm{rank}(b) + 1)`$ で
+定めて、
+
+```math
+\forall a \in \mathrm{Std},\ o(a) = \mathrm{rank}(a) .
+```
+
+階数は $`\prec`$ だけで決まるので、これを満たす写像は高々一つである。
+
+**順序を保つ**：表記が状態に入れている順序 $`\lt_S`$ について、
+
+```math
+\forall a, b \in \mathrm{Std},\ a <_S b \iff o(a) < o(b) .
+```
+
+### 表記の間の翻訳写像
+
+表記 $`R`$ から表記 $`Q`$ への翻訳写像は、状態の間の写像 $`F : S_R \to S_Q`$ である。
+各列は、横に書いた命題を証明すると ✅ になる。
+
+**定義**：$`F`$ を定義する。
+
+**展開を保つ**：
+
+```math
+\forall a, b \in S_R,\ b \prec_R a \Rightarrow F(b) \prec_Q F(a) .
+```
+
+**展開と可換**：括弧の番号の付け替え $`\rho : \mathbb{N} \to \mathbb{N}`$ があって、
+
+```math
+\forall a \in S_R,\ \forall k \in \mathbb{N},\
+F(\mathrm{step}_R(a, k)) = \mathrm{step}_Q(F(a), \rho(k)),
+\qquad F(a) \in H_Q \Rightarrow a \in H_R .
+```
+
+一つ前の列を含意する。
+
+**単射性**：
+
+```math
+\forall a, b \in S_R,\ F(a) = F(b) \Rightarrow a = b .
+```
+
+**全射性**：
+
+```math
+\forall c \in S_Q,\ \exists a \in S_R,\ F(a) = c .
+```
+
+**階数を保つ**：
+
+```math
+\forall a \in S_R,\ \mathrm{rank}_Q(F(a)) = \mathrm{rank}_R(a) .
+```
+
 ## 憲章
 
 以下はコードではなく文書についての規則。
