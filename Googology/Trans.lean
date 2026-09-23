@@ -42,6 +42,13 @@ import Googology.Trans.BMS.TrioRulesAll
 import Googology.Trans.BMS.TrioRulesAllSheet
 import Googology.Trans.BMS.TrioFixMulNormalize
 import Googology.Trans.BMS.TrioFixMulNormalizeSheet
+import Googology.Trans.BMS.TrioFixFuel
+import Googology.Trans.BMS.TrioFixFuelE0
+import Googology.Trans.BMS.TrioFixFuelSheet
+import Googology.Trans.BMS.TrioFixLastLeaf
+import Googology.Trans.BMS.TrioFixLastLeafSheet
+import Googology.Trans.BMS.TrioFixStretch
+import Googology.Trans.BMS.TrioFixStretchSheet
 import Googology.Trans.BMS.TrioRow3480
 import Googology.Trans.BMS.TrioTree
 import Googology.Trans.BMS.TrioTreeStd
