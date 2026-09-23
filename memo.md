@@ -442,3 +442,8 @@ What is left is two problems, and neither is a Lean problem.
 - The one-row DBMS translation is not injective literally: a state of
   `dbms 1` carries values outside its matrix. `Trans/DBMS/Tables.lean`
   proves the counterexample and injectivity on the entries.
+- ω-Y with the expansion of Phyrion's Lean formalization (weak magma, no
+  extraction) was re-proved by patterns of resemblance
+  ([koteitan/wmwy-wo-por](https://github.com/koteitan/wmwy-wo-por), 2026-09-23).
+  It is treated as a sequence system distinct from the official ω-Y
+  (weak-magma ω-Y). The official ω-Y is treated in koteitan/wy-wo-por.

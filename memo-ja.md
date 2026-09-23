@@ -390,3 +390,7 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
   共終であることを証明し、`RankVal.lean` が `exbOT` の階数は `val` だと証明する。
 - 1 行の DBMS の翻訳写像は、文字どおりには単射でない。`dbms 1` の状態は行列の外にも
   値を持つからである。`Trans/DBMS/Tables.lean` が反例と、成分の上での単射性を証明する。
+- Phyrion 氏の Lean と同じ展開（weak magma、no extraction）の ω-Y を、patterns of
+  resemblance で再証明した（[koteitan/wmwy-wo-por](https://github.com/koteitan/wmwy-wo-por)、
+  2026-09-23）。これは公式の ω-Y とは別の数列システム（weak-magma ω-Y）として扱う。
+  公式の ω-Y は koteitan/wy-wo-por で扱う。

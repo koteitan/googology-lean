@@ -12,9 +12,10 @@
     - ペア数列 → 拡張ブーフホルツ ψ：展開を保つ
 - Notation
   - Y 数列：停止性をここの定理にする
-    - [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por)（Lean 4.33.1）の証明をここに持ち込む：このライブラリを Lean 4.33.1 に上げるか、4.30.0 に下げて移植する
-  - ω-Y
-    - 🤖 Phyrion 氏の Lean と同じ展開の定義で、ω-Y を patterns of resemblance により再証明する（別のリポジトリ）
+    - 🤖 [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) と [koteitan/1y-expand-equiv](https://github.com/koteitan/1y-expand-equiv) を Lean 4.30.0 に下げて移植し、`expand_eq` でここの `expand` につなぐ
+  - ω-Y（公式）
+    - 🤖 公式の展開の定義で整礎性を証明する（別のリポジトリ koteitan/wy-wo-por）
+    - 証明ができたら、ここにつなぐ
   - DBMS
     - 2 行以上の、順序数への翻訳写像
     - `r` 行が `r + 1` 行の中に入ること
