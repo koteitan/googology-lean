@@ -29,7 +29,7 @@ The finite checks behind this note are in [`TrioSheet41.lean`](TrioSheet41.lean)
 | N: the sheet's matrix belongs to a nearby ordinal | 5 | the rules (for the printed label) |
 | R: the rules are right, and the sheet's matrix names no row | 3 | the rules |
 | S-o: the rules put the matrix in the wrong place in the order | 12 | the sheet |
-| S-c: the rules give one matrix to two ordinals | 10 | the sheet (4 of the 10 are not confirmed independently) |
+| S-c: the rules give one matrix to two ordinals | 10 | the sheet (4 of the 10 are confirmed in [TRIO-SHEET-4746.md](TRIO-SHEET-4746.md)) |
 | X: not a `ψ_0(Ω_α)` row | 1 | out of scope |
 | Z: neither side | 1 | the label is right; the matrix is a third one, `c2` ([TRIO-ROW-3480.md](TRIO-ROW-3480.md)) |
 
@@ -106,12 +106,12 @@ defects of the rules; see "Side findings".
 | 4674 | `Ω_{ψ_{Ω_{ω²+1}}(Ω_{ω²+1})}` | S-o | 8 rows out of order |
 | 4744 | `Ω_{Ω_Ω}+Ω_Ω` | S-c | the sheet ends `+Ω_Ω` with `(2,2,1)(3,2,1)(4,1,0)`, as in 4464, 4465 and 4761 |
 | 4745 | `Ω_{Ω_Ω}+Ω_{Ω+1}` | S-c | `M(Ω_{Ω_Ω}·ω)[1]` = the sheet's matrix; this is `u = Ω` in the calibrated pattern `(Ω_{Ω_u}·ω)[1] = Ω_{Ω_u}+Ω_{u+1}` |
-| 4746 | `Ω_{Ω_Ω}+Ω_{Ω_2}` | S-c (not confirmed) | the rules give 4744 and 4746 one matrix |
-| 4747 | `Ω_{Ω_Ω}·2` | S-c (not confirmed) | the rules give 4745 and 4747 one matrix |
+| 4746 | `Ω_{Ω_Ω}+Ω_{Ω_2}` | S-c | the rules give 4744 and 4746 one matrix |
+| 4747 | `Ω_{Ω_Ω}·2` | S-c | the rules give 4745 and 4747 one matrix |
 | 4750 | `Ω_{Ω_Ω}·Ω_Ω` | S-c | the same tail as 4744 |
 | 4751 | `Ω_{Ω_Ω}·Ω_{Ω+1}` | S-c | the same leaf as 4745 |
-| 4752 | `Ω_{Ω_Ω}·Ω_{Ω_2}` | S-c (not confirmed) | the rules give 4750 and 4752 one matrix |
-| 4753 | `Ω_{Ω_Ω}^2` | S-c (not confirmed) | the rules give 4751 and 4753 one matrix |
+| 4752 | `Ω_{Ω_Ω}·Ω_{Ω_2}` | S-c | the rules give 4750 and 4752 one matrix |
+| 4753 | `Ω_{Ω_Ω}^2` | S-c | the rules give 4751 and 4753 one matrix |
 | 4762 | `Ω_{ψ_{Ω_{Ω+1}}(Ω_{Ω+1})}` | S-o | 14 rows out of order |
 | 4769 | `Ω_{Ω_{ψ_1(Ω_2)}}` | S-o | 20 rows out of order |
 
@@ -178,8 +178,8 @@ The sheet's matrices for these rows are distinct and in order. Some are also con
 - **4497**, by shape: its final `·ω` digit.
 - **4667**, by shape: it has the same form as 4613.
 
-For 4746, 4747, 4752 and 4753 the only evidence is that the sheet's matrices are consistent with
-everything else and the rules' matrices collide. These four rows are not confirmed independently.
+For 4746, 4747, 4752 and 4753 the sheet is confirmed by further evidence (order, the copied-block
+step and the level of the last term) in [TRIO-SHEET-4746.md](TRIO-SHEET-4746.md).
 
 ### X: row 3439 is not a `ψ_0(Ω_α)` row
 
@@ -195,7 +195,7 @@ The label `Ω_ω·Ω+Ω_3` is right, and neither matrix is. The right matrix is 
 ## Side findings
 
 - **The literal label of 3552.** The rules' matrix for `ψ_{Ω_{Ω+1}}(Ω_{ψ_{Ω_{ω+1}}(Ω_{ω+1})})` is
-  not standard, and it lies above `M(ψ_{Ω_{Ω+1}}(Ω_{Ω_2}))`. The rules fail at this ordinal, which
+  not standard, and it lies below `M(ψ_{Ω_{Ω+1}}(Ω_{Ω_2}))`. The rules fail at this ordinal, which
   is not in the sheet.
 - **`ω^3·Ω` is not normalised.** `mul` in the reference program and in `TrioRules.lean` builds the
   exponent `ω^(3+Ω)` as `.o [(.W 1, 1)]` instead of the atom `.W 1`. The rule `ω^atom = atom` is
@@ -213,4 +213,6 @@ The label `Ω_ω·Ω+Ω_3` is right, and neither matrix is. The right matrix is 
 - **Fix C, `copy_storey` with one sub-unit left** (rows 4490, 4491, 4497). The other digits of the first add unit are laid on the copy's root.
 - **Fix D, the countable regime** (row 3492). A non-last digit naming `Ω_p` with `p < r` and a higher leaf is lowered, with the storeys in between laid.
 
-Still open: row 3480; the non-standard output for the printed label of row 3552; confirming rows 4746, 4747, 4752 and 4753 by other evidence; and `Ω_{Ω_Ω}+Ω_{Ω_2}+1`, which the fixed rules still place above `Ω_{Ω_Ω}·2`.
+- **Fix E, the printed label of row 3552** ([`TrioRules3.lean`](TrioRules3.lean), [TRIO-SHEET-FIXES.md](TRIO-SHEET-FIXES.md)). Only for `u = Ω+1` and `Ω_ω ≤ w < Ω_{ω+1}`: `M(ψ_{Ω_{Ω+1}}(Ω_w)) = M(ψ_{Ω_{Ω+1}}(Ω_{Ω_2})) ++` the lifted `M(w)[4:]`. The new matrix is standard and in order; nothing else on the sheet changes.
+
+Still open: the stretch from `Ω_ω·Ω+Ω_2` to `Ω_ω·Ω·2` (row 3480, [TRIO-ROW-3480.md](TRIO-ROW-3480.md)); `u = Ω+1` outside level `ω`, and other uncountable `u`; and `Ω_{Ω_Ω}+Ω_{Ω_2}+1`, which the fixed rules still place above `Ω_{Ω_Ω}·2` (the same `+1` fault occurs among agreeing rows: `Ω_Ω+Ω_2+1` against 4457 and 4458).

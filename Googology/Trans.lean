@@ -33,6 +33,9 @@ import Googology.Trans.BMS.TrioRulesFuel
 import Googology.Trans.BMS.TrioSheet41
 import Googology.Trans.BMS.TrioRules2
 import Googology.Trans.BMS.TrioRules2Sheet
+import Googology.Trans.BMS.TrioSheet41Confirm
+import Googology.Trans.BMS.TrioRules3
+import Googology.Trans.BMS.TrioRules3Sheet
 import Googology.Trans.BMS.TrioRow3480
 import Googology.Trans.BMS.TrioTree
 import Googology.Trans.BMS.TrioTreeStd

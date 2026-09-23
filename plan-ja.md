@@ -7,9 +7,8 @@
     - 規則の燃料 200 を、項とともに増える上限に替え、`trioMatrixL` がどの深さでも単射になるようにする（今は深さ 206 と 207 の二つの項が同じ行列になる）
     - `p0(W_2) <= a < Λ` で、規則 1〜10 の像が標準形に入り、順序を保つことを証明する（添字が 0 か 1 だけの項は証明済み）
     - `TrioRules.ofTerm` が `p0(b)` を読む読み方を決める（`p0(W+1) = e0·w` が `e0^{e0^w}` の行列になる）
-    - 🤖 行 4746、4747、4752、4753 の判定を別の根拠で確かめる（[TRIO-SHEET-41-ja.md](Googology/Trans/BMS/TRIO-SHEET-41-ja.md)）
     - 🤖 直した規則でも順序が逆になる `W_{W_W}+W_{W_2}+1` と `W_{W_W}·2` を直す
-    - 🤖 行 3552 の書かれたラベルに対する出力が標準形でないことを直す
+    - 規則を `u = W+1` の段 `w` 以外と、ほかの非可算の `u` で直す（[TRIO-SHEET-FIXES-ja.md](Googology/Trans/BMS/TRIO-SHEET-FIXES-ja.md)）
     - 規則を `W_w·W+W_2` から `W_w·W·2` までの区間で直す（行 3480 の判定、[TRIO-ROW-3480-ja.md](Googology/Trans/BMS/TRIO-ROW-3480-ja.md)）
     - 規則の `mul` で `w^原子 = 原子` と正規化する（行 4369 の書かれたラベル）
 - Notation
