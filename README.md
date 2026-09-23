@@ -13,21 +13,20 @@ all of them, and each system supplies only what is its own.
 
 Every notation gets the same goals.
 
-| notation | expansion defined | termination, well-foundedness | termination (non-standard) | measure | translation |
-|---|:-:|:-:|:-:|:-:|:-:|
-| primitive sequences (BMS, 1 row) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| pair sequences (BMS, 2 rows) | ✅ | ✅ | ✅ | ✅ |  |
-| trio sequences (BMS, 3 rows) | ✅ | ✅ | ✅ | ✅ |  |
-| BMS (any number of rows) | ✅ | ✅ | ✅ | ✅ |  |
-| DBMS (1 row) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| DBMS (any number of rows) | ✅ | ✅ | ✅ | ✅ |  |
-| Y sequence (1-Y) | ✅ |  |  |  |  |
-| extended Buchholz's ψ | ✅ | ✅ |  | ✅ | ✅ |
+| notation | expansion defined | well-foundedness | termination (non-standard) | translation |
+|---|:-:|:-:|:-:|:-:|
+| primitive sequences (BMS, 1 row) | ✅ | ✅ | ✅ | ✅ |
+| pair sequences (BMS, 2 rows) | ✅ | ✅ | ✅ |  |
+| trio sequences (BMS, 3 rows) | ✅ | ✅ | ✅ |  |
+| BMS (any number of rows) | ✅ | ✅ | ✅ |  |
+| DBMS (1 row) | ✅ | ✅ | ✅ | ✅ |
+| DBMS (any number of rows) | ✅ | ✅ | ✅ |  |
+| Y sequence (1-Y) | ✅ |  |  |  |
+| extended Buchholz's ψ | ✅ | ✅ |  | ✅ |
 
 - expansion defined: the expansion is a Lean function that runs.
-- termination, well-foundedness: every expansion sequence from a standard form ends.
+- well-foundedness: the expansion relation has no infinite descending chain. It is equivalent to termination — every expansion sequence from a standard form ends — and that is proved too.
 - termination (non-standard): it ends from an array that is not a standard form as well.
-- measure: there is an ordinal that every expansion decreases (the rank of the expansion).
 - translation: a map sends each state to a term of an ordinal notation, whose value is the ordinal the state names. For primitive sequences and one-row DBMS the value equals the rank of the expansion, and the states name exactly the ordinals below `ε₀`. For extended Buchholz's ψ it is the value of the term itself, an order isomorphism from the standard forms onto `C_0(Λ)`; that it equals the rank is not proved.
 - The termination of the Y sequence is proved outside this library and only cited.
 - The full list of theorems, including the intermediate lemmas, is in [results.md](results.md).
