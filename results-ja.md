@@ -185,3 +185,10 @@
 |---|---|
 | **何行でも、DBMS の階数は `w^rank(M_0) + ... + w^rank(M_k)`** | `Trans.DBMS.rank_dbmsL_eq_sum`, `Trans.DBMS.rkL_blkR`, `Trans.DBMS.rkL_append` |
 | **3 行の生成元 `(0,0,0)(1,0,0)(2,1,0)(3,2,1)` の階数は `p0(W_w)`** | `Trans.DBMS.rank_gen_three_three`, `Trans.DBMS.rkL_cgen_three`, `Trans.DBMS.rank_gen_top` |
+
+## 3 行：添字が 0 か 1 だけの項
+
+| | |
+|---|---|
+| **添字が 0 か 1 だけの可算な標準形の項で、構造的な写像 `trioE` は標準形を出し、順序を保ち、順序を反映する** | `Trans.BMS.TrioTreeStd.trioE_std`, `Trans.BMS.TrioTree.trioE_lt_iff`, `Trans.BMS.TrioTree.trioE_injective` |
+| 深さ 200 以下では規則 1〜10 は `trioE` と一致し、標準形を出し、順序を保つ | `Trans.BMS.TrioTreeRules.trioMatrixL_eq_trioE`, `Trans.BMS.TrioTreeRules.trioMatrixL_std`, `Trans.BMS.TrioTreeRules.trioMatrixL_lt_iff` |

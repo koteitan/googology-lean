@@ -540,3 +540,4 @@ What is left is one problem, and it is not a Lean problem.
 - Row 3480 decided (`TrioRow3480.lean`, 2026-09-23): the label is right, and both the table and the rules are wrong; the right matrix `c2` is proved standard in Lean.
 - The number of ψ steps for one pair step has no bound (`PSS/StepBound.lean`, `Goals/PairStepBound.lean`). The family found numerically uses `[2]`; the proved family uses `[0]`.
 - The DBMS rank is reduced, for every number of rows, to the ranks of the block contents (`DBMS/Blocks.lean`); at 3 rows the first generators are computed (`DBMS/ThreeRow.lean`). The content system `C_3` is not inside the 3-row BMS standard forms (yaBMS).
+- On terms whose subscripts are 0 or 1, the trio map gives standard forms and preserves the order (`TrioTree*.lean`). Because of fuel 200, two terms at depths 206 and 207 get the same matrix. `ofTerm` reads `ψ_0(Ω+1)` as `ε₀^{ε₀^ω}`, which disagrees with the table's row for `ε₀·ω`.

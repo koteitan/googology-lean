@@ -4,7 +4,9 @@
 
 - Trans
   - trio sequences (BMS, 3 rows)
-    - 🤖 prove that for `ε₀ ≤ α < Λ` too the image lies in the standard forms and the map is order-preserving
+    - replace the fuel 200 of the rules by a bound that grows with the term, so that `trioMatrixL` is injective at every depth (now two terms at depths 206 and 207 get the same matrix)
+    - for `ψ_0(Ω_2) ≤ α < Λ`, prove that the image of rules 1–10 lies in the standard forms and preserves the order (done for terms whose subscripts are `0` or `1`)
+    - decide how `TrioRules.ofTerm` reads `ψ_0(b)` (`ψ_0(Ω+1) = ε₀·ω` gets the matrix of `ε₀^{ε₀^ω}`)
     - 🤖 confirm rows 4746, 4747, 4752 and 4753 by other evidence ([TRIO-SHEET-41.md](Googology/Trans/BMS/TRIO-SHEET-41.md))
     - 🤖 fix the order of `Ω_{Ω_Ω}+Ω_{Ω_2}+1` and `Ω_{Ω_Ω}·2`, which the fixed rules still reverse
     - 🤖 fix the non-standard output for the printed label of row 3552

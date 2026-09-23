@@ -188,3 +188,10 @@ measures, and all four morphisms — depends on no axiom at all.
 |---|---|
 | **For every number of rows, the DBMS rank is `ω^rank(M_0) + ... + ω^rank(M_k)`** | `Trans.DBMS.rank_dbmsL_eq_sum`, `Trans.DBMS.rkL_blkR`, `Trans.DBMS.rkL_append` |
 | **The 3-row generator `(0,0,0)(1,0,0)(2,1,0)(3,2,1)` has rank `ψ_0(Ω_ω)`** | `Trans.DBMS.rank_gen_three_three`, `Trans.DBMS.rkL_cgen_three`, `Trans.DBMS.rank_gen_top` |
+
+## Three rows: terms whose subscripts are 0 or 1
+
+| | |
+|---|---|
+| **On countable standard terms whose subscripts are `0` or `1`, the structural map `trioE` gives standard forms and preserves and reflects the order** | `Trans.BMS.TrioTreeStd.trioE_std`, `Trans.BMS.TrioTree.trioE_lt_iff`, `Trans.BMS.TrioTree.trioE_injective` |
+| At depth at most 200, rules 1–10 agree with `trioE`, give standard forms and preserve the order | `Trans.BMS.TrioTreeRules.trioMatrixL_eq_trioE`, `Trans.BMS.TrioTreeRules.trioMatrixL_std`, `Trans.BMS.TrioTreeRules.trioMatrixL_lt_iff` |
