@@ -544,3 +544,4 @@ What is left is one problem, and it is not a Lean problem.
 - Rows 4746, 4747, 4752 and 4753: the table is confirmed (`TrioSheet41Confirm.lean`). The printed label of row 3552 is fixed by Fix E (`TrioRules3.lean`). "lies above" in the 41-row note was wrong and is now "lies below".
 - The generators of the content system `C_3` are lifted BMS generators, and the conjecture that 3-row DBMS and BMS have the same ordinal is stated (`DBMS/ThreeRowLift.lean`); no counterexample on about 600 standard forms.
 - The necessary condition on standard lists of blocks is proved (`DBMS/BlocksStd.lean`); at 3 rows, on all 43597 lists of at most 8 columns, standard = contents lexicographically non-increasing.
+- Fix N (`TrioRulesNonLast.lean`): in the tower regimes a leaf that is not last is upgraded at once, which fixes the order of `Ω_{Ω_Ω}+Ω_{Ω_2}+1`. The rules now exist in four versions; merging them is added to the plan.

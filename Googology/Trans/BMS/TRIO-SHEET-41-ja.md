@@ -162,4 +162,6 @@
 
 - **修正 E、行 3552 の書かれたラベル**（[`TrioRules3.lean`](TrioRules3.lean)、[TRIO-SHEET-FIXES-ja.md](TRIO-SHEET-FIXES-ja.md)）。`u = W+1` かつ `W_w <= w < W_{w+1}` のときだけ、`M(p_{W_{W+1}}(W_w)) = M(p_{W_{W+1}}(W_{W_2})) ++`（`M(w)[4:]` を一段上げたもの）とする。新しい行列は標準形で順序も合う。シートのほかの行は変わらない。
 
-残っていること：`W_w·W+W_2` から `W_w·W·2` までの区間（行 3480、[TRIO-ROW-3480-ja.md](TRIO-ROW-3480-ja.md)）。`u = W+1` の段 `w` 以外と、ほかの非可算の `u`。`W_{W_W}+W_{W_2}+1` が、直した規則でもまだ `W_{W_W}·2` より上に来ること（同じ `+1` の誤りは一致する行どうしでも起きる：`W_W+W_2+1` と 4457、4458）。
+- **修正 N、最後でない葉**（[`TrioRulesNonLast.lean`](TrioRulesNonLast.lean)、[TRIO-NONLAST-LEAF-ja.md](TRIO-NONLAST-LEAF-ja.md)）。塔 `W, W_W, W_{W_W}, ...` の範囲でだけ働く。後に続きがある葉は、すぐに格上げし、持ち上げた写しを置く。`W_{W_W}+W_{W_2}+1` は `W_{W_W}·2` より下になり、シートの行は変わらない。
+
+残っていること：`W_w·W+W_2` から `W_w·W·2` までの区間（行 3480、[TRIO-ROW-3480-ja.md](TRIO-ROW-3480-ja.md)）。`u = W+1` の段 `w` 以外と、ほかの非可算の `u`。最後でない葉は、塔の範囲でだけ修正 N で直した（[TRIO-NONLAST-LEAF-ja.md](TRIO-NONLAST-LEAF-ja.md)）。範囲 `W_w`、`W_2`、`W+1`、最後でない印のある階、最後の葉でも誤る `W_3`、`W_{W+2}`、`W_{W·2}`、`W_{W_2+1}`、`W_{W_3}` はまだ誤っている。

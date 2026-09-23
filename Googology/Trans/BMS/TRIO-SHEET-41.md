@@ -215,4 +215,6 @@ The label `Ω_ω·Ω+Ω_3` is right, and neither matrix is. The right matrix is 
 
 - **Fix E, the printed label of row 3552** ([`TrioRules3.lean`](TrioRules3.lean), [TRIO-SHEET-FIXES.md](TRIO-SHEET-FIXES.md)). Only for `u = Ω+1` and `Ω_ω ≤ w < Ω_{ω+1}`: `M(ψ_{Ω_{Ω+1}}(Ω_w)) = M(ψ_{Ω_{Ω+1}}(Ω_{Ω_2})) ++` the lifted `M(w)[4:]`. The new matrix is standard and in order; nothing else on the sheet changes.
 
-Still open: the stretch from `Ω_ω·Ω+Ω_2` to `Ω_ω·Ω·2` (row 3480, [TRIO-ROW-3480.md](TRIO-ROW-3480.md)); `u = Ω+1` outside level `ω`, and other uncountable `u`; and `Ω_{Ω_Ω}+Ω_{Ω_2}+1`, which the fixed rules still place above `Ω_{Ω_Ω}·2` (the same `+1` fault occurs among agreeing rows: `Ω_Ω+Ω_2+1` against 4457 and 4458).
+- **Fix N, leaves that are not last** ([`TrioRulesNonLast.lean`](TrioRulesNonLast.lean), [TRIO-NONLAST-LEAF.md](TRIO-NONLAST-LEAF.md)). Only in the regimes of the tower `Ω, Ω_Ω, Ω_{Ω_Ω}, …`: a leaf followed by more terms gets its upgrade at once, then a lifted copy. `Ω_{Ω_Ω}+Ω_{Ω_2}+1` now lies below `Ω_{Ω_Ω}·2`, and no row of the sheet changes.
+
+Still open: the stretch from `Ω_ω·Ω+Ω_2` to `Ω_ω·Ω·2` (row 3480, [TRIO-ROW-3480.md](TRIO-ROW-3480.md)); `u = Ω+1` outside level `ω`, and other uncountable `u`. Leaves that are not last are fixed only in the tower regime by Fix N ([TRIO-NONLAST-LEAF.md](TRIO-NONLAST-LEAF.md)); the regimes `Ω_ω`, `Ω_2`, `Ω+1`, marked levels that are not last, and `Ω_3`, `Ω_{Ω+2}`, `Ω_{Ω·2}`, `Ω_{Ω_2+1}`, `Ω_{Ω_3}` even as last leaves are still wrong.
