@@ -11,7 +11,7 @@ name = "Googology"
 [[lean_lib]]
 name = "Test"
 srcDir = "test"
-globs = ["Test", "ExBuchholzCheck", "TransCheck", "YCheck"]
+globs = ["Test", "ExBuchholzCheck", "TransCheck", "YCheck", "GoalsAudit"]
 
 [[require]]
 name = "mathlib"

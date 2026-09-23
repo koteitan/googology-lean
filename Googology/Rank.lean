@@ -166,4 +166,66 @@ theorem Eval.rank_le {R : Rewrite} [IsWellFounded R.State R.Rel]
     show Order.succ (IsWellFounded.rank R.Rel b) ≤ e.val a
     exact Order.succ_le_of_lt (lt_of_le_of_lt (IH b hb) (e.val_lt a b hb))
 
+/-! ## Well-foundedness and rank on the standard forms -/
+
+/-- **Termination from the standard forms gives well-foundedness on them.**  A
+standard state that is not accessible starts a descending chain of standard
+states, and a chain of steps from a standard state halts. -/
+theorem Rewrite.Std.wf_of_terminates {R : Rewrite} (S : R.Std) (h : S.Terminates) :
+    S.WF := by
+  constructor
+  intro a
+  by_contra hc
+  obtain ⟨f, -, hf⟩ := not_acc_iff_exists_descending_chain.mp hc
+  obtain ⟨n, hn⟩ := h (fun n => (f n).1) (f 0).2 (fun n => (hf n).2)
+  exact (hf n).1 hn
+
+/-- **On the standard forms, well-foundedness and termination are the same
+condition.** -/
+theorem Rewrite.Std.wf_iff_terminates {R : Rewrite} (S : R.Std) : S.WF ↔ S.Terminates :=
+  ⟨S.terminates_of_wf, S.wf_of_terminates⟩
+
+/-- The rank of one step, on all states.  It is `(Rewrite.rankEval h).val`. -/
+noncomputable def Rewrite.rank {R : Rewrite} (h : R.WF) : R.State → Ordinal.{0} :=
+  (Rewrite.rankEval h).val
+
+theorem Rewrite.rank_def {R : Rewrite} (h : R.WF) (a : R.State) :
+    Rewrite.rank h a = @IsWellFounded.rank _ R.Rel ⟨h⟩ a := rfl
+
+/-- The rank of one step restricted to the standard forms. -/
+noncomputable def Rewrite.Std.rank {R : Rewrite} (S : R.Std) (h : S.WF) :
+    (a : R.State) → S.Standard a → Ordinal.{0} :=
+  fun a ha => @IsWellFounded.rank _ (fun b a : {s // S.Standard s} => R.Rel b.1 a.1) ⟨h⟩ ⟨a, ha⟩
+
+/-- **On a standard state the two ranks agree**, because every step of a
+standard state is standard. -/
+theorem Rewrite.Std.rank_eq {R : Rewrite} (S : R.Std) (h : R.WF)
+    (a : R.State) (ha : S.Standard a) :
+    S.rank (S.wf_of_wf h) a ha = Rewrite.rank h a := by
+  haveI : IsWellFounded R.State R.Rel := ⟨h⟩
+  haveI hS : IsWellFounded {s // S.Standard s} (fun b a => R.Rel b.1 a.1) := ⟨S.wf_of_wf h⟩
+  show IsWellFounded.rank (fun b a : {s // S.Standard s} => R.Rel b.1 a.1) ⟨a, ha⟩
+    = IsWellFounded.rank R.Rel a
+  induction a using WellFounded.induction h with
+  | _ a ih =>
+    refine le_antisymm ?_ ?_
+    · rw [IsWellFounded.rank_eq]
+      refine Ordinal.iSup_le ?_
+      rintro ⟨⟨b, hb⟩, hrel⟩
+      show Order.succ (IsWellFounded.rank (fun b a : {s // S.Standard s} => R.Rel b.1 a.1)
+        ⟨b, hb⟩) ≤ _
+      rw [ih b hrel hb]
+      exact Order.succ_le_of_lt (IsWellFounded.rank_lt_of_rel hrel)
+    · rw [IsWellFounded.rank_eq]
+      refine Ordinal.iSup_le ?_
+      rintro ⟨b, hrel⟩
+      have hb : S.Standard b := by
+        obtain ⟨_, k, rfl⟩ := hrel
+        exact S.step_std a k ha
+      show Order.succ (IsWellFounded.rank R.Rel b) ≤ _
+      rw [← ih b hrel hb]
+      exact Order.succ_le_of_lt
+        (IsWellFounded.rank_lt_of_rel (r := fun b a : {s // S.Standard s} => R.Rel b.1 a.1)
+          (a := ⟨b, hb⟩) (b := ⟨a, ha⟩) hrel)
+
 end Googology

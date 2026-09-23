@@ -42,6 +42,15 @@ def exbOT : Rewrite where
   step := fun A n => ⟨fs A.1 (idx A.1 n), step_ok A.2.1 A.2.2 n⟩
   halted := fun A => A.1 = nil
 
+/-- The standard forms of `exbOT`.  The states are already the countable
+standard forms, so `Standard` has nothing left to say.  The generators are the
+numerals; `Standard` is not the set reachable from them. -/
+def exbOTStd : exbOT.Std where
+  Standard := fun _ => True
+  gen := fun n => ⟨numeral n, OT_numeral n, lt_trans (numeral_lt_tw n) (by decide)⟩
+  gen_std := fun _ => trivial
+  step_std := fun _ _ _ => trivial
+
 theorem exbOT_Rel_lt {A B : exbOT.State} (h : exbOT.Rel B A) : OTLt B.1 A.1 := by
   obtain ⟨hne, n, hn⟩ := h
   refine ⟨B.2.1, A.2.1, ?_⟩
