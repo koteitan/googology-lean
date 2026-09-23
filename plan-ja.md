@@ -4,7 +4,7 @@
 
 - Trans
   - トリオ数列（BMS 3 行）
-    - 規則の版（`TrioRules`、修正 A〜D の `TrioRules2`、修正 E の `TrioRules3`、修正 N の `TrioRulesNonLast`）を 1 つにまとめる
+    - 🤖 規則の版（`TrioRules`、修正 A〜D の `TrioRules2`、修正 E の `TrioRules3`、修正 N の `TrioRulesNonLast`）を 1 つにまとめる
     - 最後でない葉を、塔以外の範囲（`W_w`、`W_2`、`W+1`）と、最後でない印のある階で直す（[TRIO-NONLAST-LEAF-ja.md](Googology/Trans/BMS/TRIO-NONLAST-LEAF-ja.md)）
     - 最後の葉でも誤る `W_3`、`W_{W+2}`、`W_{W·2}`、`W_{W_2+1}`、`W_{W_3}` を直す（葉を持ち上げた写しが要る）
     - 規則の燃料 200 を、項とともに増える上限に替え、`trioMatrixL` がどの深さでも単射になるようにする（今は深さ 206 と 207 の二つの項が同じ行列になる）
