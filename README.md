@@ -33,14 +33,14 @@ A map sending each state to the ordinal it names.
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
 | BMS with at most 2 rows | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | BMS with 3 rows or more |  |  |  |  |  |  |
-| one-row DBMS | ✅ |  | ✅ | ✅ | ✅ | ✅ |
+| one-row DBMS | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | DBMS with 2 rows or more |  |  |  |  |  |  |
 | Y sequence |  |  |  |  |  |  |
 | ω-Y |  |  |  |  |  |  |
 | extended Buchholz's ψ | ✅ | ✅ | ✅(*1) | ✅ | ✅ | ✅ |
 
 - defined: the map is defined in Lean. For primitive sequences and one-row DBMS it reads the state as an extended Buchholz term and takes its value. For pair sequences it sends the state to a Buchholz term by the `Trans` of [koteitan/pss-proof](https://github.com/koteitan/pss-proof), maps that to an extended Buchholz term, and takes `1 + val` (0 for the empty sequence). For extended Buchholz's ψ it is the value of the term.
-- injective: distinct standard forms go to distinct ordinals. For one-row DBMS this fails literally — two states with the same matrix entries differ in the values they carry outside the matrix, and a counterexample is proved — and holds on the entries.
+- injective: distinct standard forms go to distinct ordinals. For BMS and DBMS a standard form is its matrix, so two states are compared as matrices, by their entries.
 - surjective: the image is known exactly — the ordinals below `ε₀` for primitive sequences and one-row DBMS, the ordinals below `ψ_0(Ω_ω)` for pair sequences, the ordinals below `ψ_0(Λ)` for extended Buchholz's ψ (*1).
 - (*1) The states of extended Buchholz's ψ are the standard terms below `Ω`, so the image is not all of `C_0(Λ)` but its part below `Ω`, that is, the ordinals below `ψ_0(Λ)`.
 - decreases on expansion: one expansion step makes the value strictly smaller.
@@ -56,7 +56,7 @@ A map sending each state to the ordinal it names.
 | trio sequences |  |  | — |  |  |  |  |  |
 | BMS, `r` rows |  |  |  | — | ✅✅✅✅❌✅ |  |  |  |
 | BMS, `r+1` rows |  |  |  |  | — |  |  |  |
-| one-row DBMS | ✅✅✅❌❌✅ |  |  |  |  | — |  |  |
+| one-row DBMS | ✅✅✅✅✅✅ |  |  |  |  | — |  |  |
 | DBMS, `r` rows |  |  |  | ✅✅✅✅❌✅ |  |  | — |  |
 | extended Buchholz's ψ |  |  | ✅❌❌❌❌❌ |  |  |  |  | — |
 
@@ -66,7 +66,7 @@ A map sending each state to the ordinal it names.
 - defined: the map is defined in Lean. Primitive sequences go to the standard forms below `ψ_0(Ω)`, pair sequences to those below `ψ_0(Ω_ω)`. Primitive sequences → pair sequences and BMS `r` rows → `r+1` rows put a row of zeros underneath. The map into trio sequences is defined for `α < ε₀`. Extended Buchholz's ψ → trio sequences transcribes the map of [koteitan/trio](https://github.com/koteitan/trio); it is defined and checked against the correspondence table, nothing more.
 - preserves expansion: one expansion step goes to one expansion step in the target.
 - commutes with expansion: bracket numbers included, expanding and then translating gives the same as translating and then expanding.
-- injective, surjective: onto the standard forms of the target. Primitive sequences → extended Buchholz's ψ is both, so the two systems are one system written two ways.
+- injective, surjective: onto the standard forms of the target. Primitive sequences → extended Buchholz's ψ is both, so the two systems are one system written two ways. One-row DBMS → primitive sequences is both too: the standard one-row DBMS matrices are the primitive sequences.
 - preserves the rank: the rank is the same before and after the translation.
 - The full list of theorems, including the intermediate lemmas, is in [results.md](results.md).
 

@@ -88,6 +88,15 @@ b \prec a \iff a \notin H \land \exists k \in \mathbb{N},\ b = \mathrm{step}(a, 
 状態である。すなわち $`g_n \in \mathrm{Std}`$ かつ
 $`a \in \mathrm{Std} \Rightarrow \mathrm{step}(a, k) \in \mathrm{Std}`$ を満たす最小の集合である。
 
+BMS と DBMS では、標準形は行列そのものである。成分が同じ二つの状態は、同じ標準形である。
+たとえば生成元 $`g_0 = (0)`$ と $`(0)(1)[0] = (0)`$ は一つの標準形である。そこでこれらの
+表記では、状態は成分の列であり、二つの翻訳写像の表の「単射性」は行列についての命題である。
+成分の上の系は、`prim` と `pairL`（1 行と 2 行の BMS）、`bmsL r`（`r + 1` 行の BMS）、
+`dbmsL1`（1 行の DBMS）である。配列の系 `bms r` と `dbms r` は配列 `Arr r` を状態とし、
+配列は行列の外の値も持つ。配列の上では、この理由だけで単射性が成り立たない
+（`dbmsOrdEval_not_injective`、`dbmsHom_not_injective`）。これは表し方についての事実で
+あり、標準形についての事実ではない。
+
 ### 整礎性
 
 標準な状態の上の関係 $`\prec`$ に、無限降下列が無い。
@@ -510,8 +519,8 @@ def Googology.Goals.audit : List AuditLine
 | extended Buchholz's ψ / 拡張ブーフホルツ ψ | `exbOT` と、新しく作る `exbOT.Std`。`exbOT_wf`。`Runs` は項の上で `run X n := fs X (idx X n)` | 無し |
 
 二つ目と三つ目の表の記録は、今の印をそのまま再現する。定理の名前は
-`results-ja.md` にある。1 行の DBMS の「単射性」は `dbmsOrdEval_not_injective` による
-`Goal.refuted` である。
+`results-ja.md` にある。1 行の DBMS の記録は、成分の上の系 `dbmsL1` を使う（6 節）。
+そのため「単射性」は証明済みである：`dbmsL1OrdEval_injective` と `dbmsL1Prim_injective`。
 
 ### 7.7 監査の出力
 
@@ -665,7 +674,7 @@ python3 scripts/check_readme.py --audit audit.txt [--root DIR]
 食い違いは一つにつき 1 行、標準出力に出す。
 
 ```
-README-ja.md:42: ordinal: row "1 行の DBMS": column injective: expected "", found "✅"
+README-ja.md:35: ordinal: row "1 行の DBMS": column injective: expected "✅", found ""
 ```
 
 すなわち、ファイル、行番号、表、行のラベル、列の id（表 `between` では翻訳先の

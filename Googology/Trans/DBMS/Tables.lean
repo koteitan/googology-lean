@@ -4,17 +4,21 @@ import Googology.Trans.BMS.Tables
 /-!
 # Cells of the translation tables: one-row DBMS
 
-**Injective, on the matrices.**  A state of `dbms 1` is an array `Arr 1`, and
+**Injective, on the matrices.**  A standard form of DBMS is a matrix.  Two
+states have the same ordinal exactly when they have the same entries
+(`dbmsOrdEval_eq_iff`), and the same holds for `dbmsHom`
+(`dbmsHom_map_eq_iff`).  This is the same form as `bmsOrdEval_inj` for BMS.
+`Trans/DBMS/OneRowL.lean` takes the matrices as the states (`dbmsL1`), and
+there both maps are one to one.  The goal records use that system.
+
+**About the representation.**  A state of `dbms 1` is an array `Arr 1`, and
 an array has a total column map: it holds values outside the matrix too.  Two
 standard arrays can be the same matrix and differ only there.
 `dstair 1 0` and `(dstair 1 1)[0]` are both the matrix `(0)`, and they differ
 at column `1`.  So neither `dbmsOrdEval.val` nor `dbmsHom.map` is one to one on
-the arrays: `dbmsOrdEval_not_injective`, `dbmsHom_not_injective`.
-
-What is one to one is the matrix itself, its list of entries.  Two states have
-the same ordinal exactly when they have the same entries
-(`dbmsOrdEval_eq_iff`), and the same holds for `dbmsHom`
-(`dbmsHom_map_eq_iff`).  This is the same form as `bmsOrdEval_inj` for BMS.
+the arrays: `dbmsOrdEval_not_injective`, `dbmsHom_not_injective`.  These are
+true statements about the arrays `Arr 1`, not about the standard forms: `stA`
+and `stB` are one standard form, the matrix `(0)`.
 
 **Preserves the rank.**  `dbmsHom` keeps the bracket numbers and halts exactly
 where the source halts, so `StepHom.rank_map` applies: `rank_dbmsHom`.
@@ -82,11 +86,13 @@ theorem stA_ne_stB : stA ≠ stB := by
   omega
 
 /-- **`dbmsOrdEval` is not one to one on the arrays**: two standard arrays can
-be one matrix. -/
+be one matrix.  This is about the representation `Arr 1`; on the matrices the
+map is one to one (`dbmsOrdEval_eq_iff`, `dbmsL1OrdEval_injective`). -/
 theorem dbmsOrdEval_not_injective : ¬ Function.Injective dbmsOrdEval.val :=
   fun h => stA_ne_stB (h ((dbmsOrdEval_eq_iff stA stB).mpr entries_stA_stB))
 
-/-- **Nor is `dbmsHom.map`**, for the same reason. -/
+/-- **Nor is `dbmsHom.map`**, for the same reason.  On the matrices it is one
+to one (`dbmsHom_map_eq_iff`, `dbmsL1Prim_injective`). -/
 theorem dbmsHom_not_injective : ¬ Function.Injective dbmsHom.map :=
   fun h => stA_ne_stB (h ((dbmsHom_map_eq_iff stA stB).mpr entries_stA_stB))
 

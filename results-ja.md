@@ -23,7 +23,7 @@
 | だから `r + 1` 行は `r + 2` 行の中に入る。標準形でも全行列でも | `Trans.BMS.bmsL_homSucc`, `Trans.BMS.bmsAllL_homSucc` |
 | それを繰り返して、`r ≤ s` なら `r + 1` 行は `s + 1` 行の中に入る | `Trans.BMS.bmsL_simLe`, `Trans.BMS.bmsAllL_simLe` |
 | **0 の行を足しても行列が名指す順序数は変わらないこと** | `Trans.BMS.rank_zeroRow`, `StepHom.rank_map` |
-| 成分列の上の系と、その生成元 | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
+| 成分列の上の系と、その生成元 | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL`, `Trans.DBMS.dbmsL1` |
 | 一般の系の 1 行が原始数列系、2 行がペア数列系であること | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
 | 生成元から出発した展開列は必ず止まること | `Notation.BMS.bmsStd_terminates`, `Notation.DBMS.dbmsStd_terminates`, `Trans.BMS.bmsLStd_terminates` |
 | **整礎性と停止性は同じ条件であること** | `Rewrite.wf_iff_terminates` |
@@ -87,6 +87,11 @@
 | 1 行の行列は名指す順序数で決まり、自分の展開たちの上限であること | `Trans.BMS.bmsOrdEval_inj`, `Trans.BMS.expandL_lub` |
 | ラベルではなく翻訳による 1 行の停止性 | `Trans.BMS.bms_one_terminates`, `Trans.BMS.prim_terminates` |
 | 1 行 DBMS についての同じこと。こちらは他に停止性の証明がない | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
+| **行列の上の 1 行 DBMS**：状態は標準な配列の成分の列で、展開は `expandL` | `Trans.DBMS.dbmsL1`, `Trans.DBMS.dbmsL1Std`, `Trans.DBMS.dbmsL1_wf` |
+| 成分を取る写像は、配列からこの系への全射で、括弧の番号も保つ。二つの配列が同じ状態に写るのは、同じ行列のときちょうどである。階数と順序数は変わらない | `Trans.DBMS.dbmsToL1`, `Trans.DBMS.dbmsToL1_map_eq_iff`, `Trans.DBMS.dbmsToL1_surjective`, `Trans.DBMS.rank_dbmsToL1`, `Trans.DBMS.dbmsOrdEval_val_eq` |
+| **この系は原始数列の系そのもの**：列の上の恒等写像は単射かつ全射 | `Trans.DBMS.dbmsL1EquivPrim`, `Trans.DBMS.dbmsL1Prim_injective`, `Trans.DBMS.dbmsL1Prim_surjective` |
+| **行列の上では順序数への写像は単射**で、`e0` 未満の順序数全部に全射、階数と一致し、順序を保つ | `Trans.DBMS.dbmsL1OrdEval_injective`, `Trans.DBMS.dbmsL1Ord_image`, `Trans.DBMS.rank_dbmsL1_eq_val`, `Trans.DBMS.dbmsL1OrdEval_lt_iff` |
+| 配列 `dbms 1` の上では単射でない。理由は、配列が行列の外の値も持つことだけである。`(0)` と `(0)(1)[0]` は同じ行列である | `Trans.DBMS.dbmsOrdEval_not_injective`, `Trans.DBMS.dbmsHom_not_injective`, `Trans.DBMS.dbmsOrdEval_eq_iff` |
 
 ## 2 行以上: 階数がどこまで届くか
 

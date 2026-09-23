@@ -120,20 +120,6 @@ theorem pairOrd_image :
   ext α
   exact ⟨fun ⟨a, _, h⟩ => ⟨a, h⟩, fun ⟨a, h⟩ => ⟨a, trivial, h⟩⟩
 
-/-- The ordinals of one-row DBMS are the ordinals below `ε₀`. -/
-theorem dbmsOrd_image :
-    {α | ∃ a, (Notation.DBMS.dbmsStd 1).Standard a ∧ Trans.DBMS.dbmsOrdEval.val a = α}
-      = Set.Iio Ord.eps0 := by
-  ext α
-  constructor
-  · rintro ⟨a, -, rfl⟩
-    show _ < Ord.eps0
-    rw [← val_te0]
-    exact Trans.DBMS.dbmsOrdEval_lt_e0 a
-  · intro h
-    obtain ⟨a, ha⟩ := Trans.DBMS.exists_dbms_of_lt_eps0 h
-    exact ⟨a, trivial, ha⟩
-
 /-- The ordinals of the countable standard forms are the ordinals below
 `ψ_0(Λ)`. -/
 theorem exbOT_image :
@@ -364,22 +350,24 @@ def bmsTwoRowOrd : OrdGoals (fun _ : Unit => pairL) (fun _ => pairStd)
     exact (rank_pairL_eq a).symm⟩
   order := .proved fun _ a b _ _ => ltPS_iff_pairOrd_lt a b
 
-/-- One-row DBMS: the ordinal of the reading of the entries, onto the
-ordinals below `ε₀`, with the dictionary order on the entries.  It is not
-injective on the arrays: `dbmsOrdEval_not_injective`. -/
-def dbmsOneRowOrd : OrdGoals (fun _ : Unit => dbms 1) (fun _ => dbmsStd 1)
-    (fun _ => dbmsOrdEval.val) (fun _ => Set.Iio Ord.eps0)
-    (fun _ A B => entries A.1 < entries B.1) where
+/-- One-row DBMS on the matrices (`dbmsL1`, the entries of the standard
+arrays): the ordinal of the reading of the entries, onto the ordinals below
+`ε₀`, with the dictionary order on the entries.  A standard form is its
+matrix, so injectivity is stated on the matrices.  On the arrays `dbms 1` it
+fails only because an array also holds values outside its matrix
+(`dbmsOrdEval_not_injective`). -/
+def dbmsOneRowOrd : OrdGoals (fun _ : Unit => dbmsL1) (fun _ => dbmsL1Std)
+    (fun _ => dbmsL1OrdEval.val) (fun _ => Set.Iio Ord.eps0)
+    (fun _ a b => a.1 < b.1) where
   labelEn := "one-row DBMS"
   labelJa := "1 行の DBMS"
-  injective := .refuted fun h =>
-    dbmsOrdEval_not_injective fun a b hab => h () a b trivial trivial hab
-  surjective := .proved fun _ => dbmsOrd_image
-  decreasing := .proved fun _ a b _ _ h => dbmsOrdEval.val_lt a b h
-  rank := .proved fun _ => ⟨(dbmsStd 1).wf_of_wf (dbms_wf 1), fun a ha => by
-    rw [Rewrite.Std.rank_eq (dbmsStd 1) (dbms_wf 1) a ha]
-    exact (rank_dbms_eq_val a).symm⟩
-  order := .proved fun _ a b _ _ => dbmsOrdEval_lt_iff a b
+  injective := .proved fun _ _ _ _ _ h => dbmsL1OrdEval_injective h
+  surjective := .proved fun _ => dbmsL1Ord_image
+  decreasing := .proved fun _ a b _ _ h => dbmsL1OrdEval.val_lt a b h
+  rank := .proved fun _ => ⟨dbmsL1Std.wf_of_wf dbmsL1_wf, fun a ha => by
+    rw [Rewrite.Std.rank_eq dbmsL1Std dbmsL1_wf a ha]
+    exact (rank_dbmsL1_eq_val a).symm⟩
+  order := .proved fun _ a b _ _ => dbmsL1OrdEval_lt_iff a b
 
 /-- Extended Buchholz's ψ: the value of a countable standard form, onto the
 ordinals below `ψ_0(Λ)`, with the term order. -/
@@ -461,22 +449,25 @@ def bmsToSucc : TransGoals bmsL (fun r => bmsL (r + 1)) (fun _ _ => True)
   surjective := .todo
   rank := .proved fun i => ⟨bmsL_wf i, bmsL_wf (i + 1), fun a _ => rank_zeroRow i a⟩
 
-/-- One-row DBMS → primitive sequences: the entries.  It is not injective on
-the arrays: `dbmsHom_not_injective`. -/
-def dbmsToPrim : TransGoals (fun _ : Unit => dbms 1) (fun _ => prim) (fun _ _ => True)
-    (fun _ => dbmsHom.map) where
+/-- One-row DBMS → primitive sequences, on the matrices (`dbmsL1`): the
+identity on the lists.  On the arrays `dbms 1` the map `dbmsHom` is not one to
+one, only because an array also holds values outside its matrix
+(`dbmsHom_not_injective`). -/
+def dbmsToPrim : TransGoals (fun _ : Unit => dbmsL1) (fun _ => prim) (fun _ _ => True)
+    (fun _ => dbmsL1Prim.map) where
   sourceEn := "one-row DBMS"
   sourceJa := "1 行の DBMS"
   targetEn := "primitive sequences"
   targetJa := "原始数列"
-  preserves := .proved fun _ a b _ _ h => dbmsHom.toSim.map_rel a b h
-  commutes := .proved ⟨fun _ => dbmsHom.reindex, fun _ =>
-    ⟨fun a k _ => ⟨trivial, dbmsHom.map_step a k⟩,
-     fun a _ h => dbmsHom.map_halted a h⟩⟩
-  injective := .refuted fun h =>
-    dbmsHom_not_injective fun a b hab => h () a b trivial trivial hab
-  surjective := .todo
-  rank := .proved fun _ => ⟨dbms_wf 1, prim_wf, fun a _ => rank_dbmsHom a⟩
+  preserves := .proved fun _ a b _ _ h => dbmsL1Prim.toSim.map_rel a b h
+  commutes := .proved ⟨fun _ => dbmsL1Prim.reindex, fun _ =>
+    ⟨fun a k _ => ⟨trivial, dbmsL1Prim.map_step a k⟩,
+     fun a _ h => dbmsL1Prim.map_halted a h⟩⟩
+  injective := .proved fun _ _ _ _ _ h => dbmsL1Prim_injective h
+  surjective := .proved fun _ c => ⟨primToL1 c, trivial, dbmsL1Prim_surjective c⟩
+  rank := .proved fun _ => ⟨dbmsL1_wf, prim_wf, fun a _ => by
+    rw [Rewrite.rank_def, Rewrite.rank_def]
+    exact rank_dbmsL1Prim a⟩
 
 /-- DBMS `r` rows → BMS `r` rows: the array itself, into all arrays. -/
 def dbmsToBms : TransGoals dbms bmsAll (fun _ _ => True) (fun r => (dbmsSim r).map) where

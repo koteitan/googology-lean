@@ -446,3 +446,18 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
   README と一致したままにするため、記録にはつないでいない。
   [plan-ja.md](plan-ja.md) に載せた。
 - 目標の一覧の検査で見つかった 5 つのマスを ✅ にした（2026-09-23）：ペア数列 → 拡張ブーフホルツ ψ の階数を保つ（`pairToExb_rank`）、BMS `r` 行 → `r+1` 行の単射性（`bmsToSucc_injective`）、DBMS `r` 行 → BMS `r` 行の展開と可換・単射性・階数を保つ（`dbmsToBms_commutes`、`dbmsToBms_injective`、`dbmsToBms_rank`）。どれも `Googology/Goals.lean` の Bridges の節にある。
+
+## 2026-09-23：行列の上の 1 行の DBMS
+
+- DBMS の標準形は行列そのものである。`dbms 1` の状態は配列で、配列は行列の外の値も
+  持つ。そのため二つの標準な配列が、一つの標準形になることがある。作者は、単射性を
+  行列の上で述べることに決めた。
+- `Trans/DBMS/OneRowL.lean` で、成分の上の 1 行の DBMS `dbmsL1` を定義した。状態は
+  標準な配列の成分の列、展開は `expandL`、空の列で停止する。`dbmsL1Std` は生成元
+  `(0)(1)⋯(n)` を与える。`dbmsToL1` は配列からこの系への `StepHom` で、階数と順序数を
+  保つ。`dbmsL1EquivPrim` は、この系が原始数列の系そのものであることを言う。
+- 記録 `dbmsOneRowOrd` と `dbmsToPrim` は `dbmsL1` を使うようにした。順序数への翻訳
+  写像の表の行「1 行の DBMS」は 6 列とも ✅ になり、1 行の DBMS → 原始数列のマスは
+  ✅✅✅✅✅✅ になった。
+- 配列の上の反例（`dbmsOrdEval_not_injective`、`dbmsHom_not_injective`）は残した。
+  これは表し方 `Arr 1` についての正しい命題で、標準形についての命題ではない。

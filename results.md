@@ -23,7 +23,7 @@ Names are written relative to `Googology`.
 | so `r + 1` rows sit inside `r + 2`, standard matrices and all matrices | `Trans.BMS.bmsL_homSucc`, `Trans.BMS.bmsAllL_homSucc` |
 | and iterating that, `r ≤ s` puts `r + 1` rows inside `s + 1` | `Trans.BMS.bmsL_simLe`, `Trans.BMS.bmsAllL_simLe` |
 | **and the ordinal a matrix names does not change when the zero row is added** | `Trans.BMS.rank_zeroRow`, `StepHom.rank_map` |
-| the systems on the entries, with their generators | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
+| the systems on the entries, with their generators | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL`, `Trans.DBMS.dbmsL1` |
 | the general system at one and two rows is the primitive and pair sequence system | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
 | from a generator, any expansion sequence ends | `Notation.BMS.bmsStd_terminates`, `Notation.DBMS.dbmsStd_terminates`, `Trans.BMS.bmsLStd_terminates` |
 | **well-foundedness and termination are the same condition** | `Rewrite.wf_iff_terminates` |
@@ -87,6 +87,11 @@ Names are written relative to `Googology`.
 | a one-row matrix is determined by the ordinal it names, and is the least upper bound of its own expansions | `Trans.BMS.bmsOrdEval_inj`, `Trans.BMS.expandL_lub` |
 | one row terminates, by translation rather than by labels | `Trans.BMS.bms_one_terminates`, `Trans.BMS.prim_terminates` |
 | the same for one-row DBMS, whose termination is not otherwise proved here | `Trans.DBMS.dbms_one_terminates`, `Trans.DBMS.dbmsOrdEval` |
+| **one-row DBMS on the matrices**: a state is the list of entries of a standard array, and the step is `expandL` | `Trans.DBMS.dbmsL1`, `Trans.DBMS.dbmsL1Std`, `Trans.DBMS.dbmsL1_wf` |
+| the entries map the arrays onto it, bracket for bracket; two arrays go to one state exactly when they are one matrix, and the rank and the ordinal do not change | `Trans.DBMS.dbmsToL1`, `Trans.DBMS.dbmsToL1_map_eq_iff`, `Trans.DBMS.dbmsToL1_surjective`, `Trans.DBMS.rank_dbmsToL1`, `Trans.DBMS.dbmsOrdEval_val_eq` |
+| **it is the primitive sequence system**: the identity on the lists is one to one and onto | `Trans.DBMS.dbmsL1EquivPrim`, `Trans.DBMS.dbmsL1Prim_injective`, `Trans.DBMS.dbmsL1Prim_surjective` |
+| **on the matrices the ordinal is one to one**, onto the ordinals below `ε₀`, equal to the rank and order-preserving | `Trans.DBMS.dbmsL1OrdEval_injective`, `Trans.DBMS.dbmsL1Ord_image`, `Trans.DBMS.rank_dbmsL1_eq_val`, `Trans.DBMS.dbmsL1OrdEval_lt_iff` |
+| on the arrays `dbms 1` it is not one to one, only because an array holds values outside its matrix: `(0)` and `(0)(1)[0]` are one matrix | `Trans.DBMS.dbmsOrdEval_not_injective`, `Trans.DBMS.dbmsHom_not_injective`, `Trans.DBMS.dbmsOrdEval_eq_iff` |
 
 ## Two rows and up: what the rank reaches
 

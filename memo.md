@@ -504,3 +504,21 @@ What is left is one problem, and it is not a Lean problem.
   This was checked in a scratch file, but they are not wired, so that the
   README keeps matching. They are in [plan.md](plan.md).
 - Five cells found by the goal-record audit became ✅ (2026-09-23): pair sequences → extended Buchholz's ψ preserves the rank (`pairToExb_rank`), BMS `r` rows → `r+1` rows is injective (`bmsToSucc_injective`), DBMS `r` rows → BMS `r` rows commutes with expansion, is injective and preserves the rank (`dbmsToBms_commutes`, `dbmsToBms_injective`, `dbmsToBms_rank`). All are in the Bridges section of `Googology/Goals.lean`.
+
+## 2026-09-23: one-row DBMS on the matrices
+
+- A standard form of DBMS is its matrix. The states of `dbms 1` are arrays,
+  and an array also holds values outside its matrix, so two standard arrays
+  can be one standard form. The author decided to state injectivity on the
+  matrices.
+- `Trans/DBMS/OneRowL.lean` defines `dbmsL1`, one-row DBMS on the entries:
+  a state is the list of entries of a standard array, the step is `expandL`,
+  and the empty list halts. `dbmsL1Std` names the generators `(0)(1)⋯(n)`.
+  `dbmsToL1` maps the arrays onto it as a `StepHom` and keeps the rank and
+  the ordinal. `dbmsL1EquivPrim` says it is the primitive sequence system.
+- The records `dbmsOneRowOrd` and `dbmsToPrim` now use `dbmsL1`. The ordinal
+  table row "one-row DBMS" is ✅ in all six columns, and the cell one-row
+  DBMS → primitive sequences is ✅✅✅✅✅✅.
+- The counterexample on the arrays (`dbmsOrdEval_not_injective`,
+  `dbmsHom_not_injective`) stays. It is a true statement about the
+  representation `Arr 1`, not about the standard forms.

@@ -79,6 +79,7 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | BMS、拡張ブーフホルツ ψ | `BMS/Reach.lean` | — | **標準 1 行行列とは、項が標準形である行列のことちょうどである** |
 | DBMS 自身 | `DBMS/Entries.lean` | — | 行数によらず DBMS を成分列の上に置き、生成元も付け、停止することも示す |
 | DBMS、拡張ブーフホルツ ψ | `DBMS/OneRow.lean` | `StepHom` | 1 行の DBMS についての同じこと。1 行では生成元が BM4 と一致する。どの行列が標準形かも含む |
+| DBMS、BMS（原始数列） | `DBMS/OneRowL.lean` | `StepHom`、`Equiv` | **行列の上の 1 行の DBMS**（`dbmsL1`）。配列は成分によってこの系の上へ写る。この系は原始数列の系そのものである。その順序数への写像は単射で、`e0` 未満の順序数全部に全射、階数と一致し、順序を保つ |
 | BMS、拡張ブーフホルツ ψ | `BMS/Commute.lean` | いずれ `StepHom` | 読み取りが展開を `[ ]` に変えること、添字の付け替え `N ↦ N + 1` を込めて |
 | BMS（ペア数列）、拡張ブーフホルツ ψ | `PSS/Expand.lean`、`PSS/Terms.lean`、`PSS/Rank.lean` | — | **ペア数列の順序数への翻訳写像**。koteitan/pss-proof の `Trans` を通す。その展開は `expand2L` である（`oper_succ_eq_expand2L_of_ctps`）。その Buchholz 項は `p0(W_w)` 未満の標準的な拡張ブーフホルツ項の上へ写る（`toTerm_bijOn_TransRange`）。ペア数列の階数はその項の `1 + val` で（`rank_pairL_eq`）、値の範囲は `p0(W_w)` 未満の順序数全部である（`range_pairOrd`）。詳しくは [PSS/README-ja.md](PSS/README-ja.md) にある |
 | BMS、拡張ブーフホルツ ψ | `BMS/Tables.lean`、`DBMS/Tables.lean` | `StepHom` | README の表の小さなセル。原始数列の順序は値の順序であること、1 行の翻訳写像が階数を保つこと、原始数列がペア数列の中へ単射で入ること |

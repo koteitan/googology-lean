@@ -95,6 +95,18 @@ The standard states $`\mathrm{Std} \subseteq S`$ are those reachable from the
 generators $`g_0, g_1, \dots`$ by finitely many steps: the least set with
 $`g_n \in \mathrm{Std}`$ and $`a \in \mathrm{Std} \Rightarrow \mathrm{step}(a, k) \in \mathrm{Std}`$.
 
+For BMS and DBMS a standard form is its matrix. Two states with the same
+entries are the same standard form: for example, the generator $`g_0 = (0)`$
+and $`(0)(1)[0] = (0)`$ are one standard form. So for these notations the
+states are the lists of entries, and the columns "injective" of the two
+translation tables are about matrices. The systems on the entries are `prim`
+and `pairL` (BMS with 1 and 2 rows), `bmsL r` (BMS with `r + 1` rows) and
+`dbmsL1` (one-row DBMS). The array systems `bms r` and `dbms r` have the arrays
+`Arr r` as states, and an array also holds values outside its matrix. On the
+arrays injectivity fails for that reason only (`dbmsOrdEval_not_injective`,
+`dbmsHom_not_injective`); this is a fact about the representation, not about
+the standard forms.
+
 ### Well-foundedness
 
 The relation $`\prec`$ on the standard states has no infinite descending chain:
@@ -542,8 +554,9 @@ first table comes from these records:
 | extended Buchholz's ψ / 拡張ブーフホルツ ψ | `exbOT` with a new `exbOT.Std`; `exbOT_wf`; `Runs` with `run X n := fs X (idx X n)` on terms | none |
 
 The records of the second and third tables reproduce the current marks.
-`results.md` names the theorems. One-row DBMS "injective" is
-`Goal.refuted`, from `dbmsOrdEval_not_injective`.
+`results.md` names the theorems. The records of one-row DBMS use `dbmsL1`,
+the system on the entries (section 6), so "injective" is proved there:
+`dbmsL1OrdEval_injective` and `dbmsL1Prim_injective`.
 
 ### 7.7 The audit output
 
@@ -707,7 +720,7 @@ Between the two files:
 Each mismatch is printed on standard output as one line:
 
 ```
-README-ja.md:42: ordinal: row "1 行の DBMS": column injective: expected "", found "✅"
+README-ja.md:35: ordinal: row "1 行の DBMS": column injective: expected "✅", found ""
 ```
 
 that is, file, line number, table, row label, column id (and, in the table
