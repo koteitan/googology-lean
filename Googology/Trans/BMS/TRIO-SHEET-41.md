@@ -208,12 +208,13 @@ and `M(Ω_ω·Ω+Ω_3)` is still unknown.
   `addExp e1 e` is a single atom with coefficient 1, use the atom itself. This must be done in both
   the reference program and `TrioRules.lean`, to keep them the same.
 
-## Proposed changes to existing files (for the lead)
+## The rules fixed
 
-- `TrioRulesSheet.lean`, header: replace "The algorithm page sorts them (4 where the sheet repeats a
-  label, 3 where the sheet is right, 34 undecided); nothing here decides them" with a pointer to
-  this note and its counts (9 L, 5 N, 3 R, 12 S-o, 10 S-c, 1 X, 1 O).
-- `Googology/Trans.lean`: add `import Googology.Trans.BMS.TrioSheet41`.
-- `Trans/README.md`, index: add a row for `BMS/TrioSheet41.lean` (see the report).
-- `plan.md`: replace the item "examine the 41 rows" with what is left. That is: fixing the rules
-  on the 22 rows where the sheet is right, confirming 4746, 4747, 4752 and 4753, and row 3480.
+[`TrioRules2.lean`](TrioRules2.lean) is `TrioRules.lean` with four corrections. It gives the sheet's matrix on the 22 rows where the sheet is right (S-o and S-c) and the same matrix as before on the other 763 standard rows. Of the 28 non-standard rows, only row 4533 changes (Fix A), toward the sheet. [`TrioRules2Sheet.lean`](TrioRules2Sheet.lean) checks this with `#guard`s, and checks that the 783 chosen matrices are in the order of their labels (306,153 pairs, no disagreement; the old rules give 171).
+
+- **Fix A, the base `M(Ω_v)`** (rows 4508, 4628, 4674, 4762, 4769). Drop the last column of `M(v)` only if its parent is a level column or the root; otherwise keep it.
+- **Fix B, the uncountable regime** (rows 4488, 4609, 4613, 4618, 4667, 4744–4747, 4750–4753). A single `Ω_w` leaf gets `N(Ω_w) = N(w) + 1`; the old step at `r = Ω_v` is skipped; the final upgrade appends one sub-unit per `Ω` in the tower.
+- **Fix C, `copy_storey` with one sub-unit left** (rows 4490, 4491, 4497). The other digits of the first add unit are laid on the copy's root.
+- **Fix D, the countable regime** (row 3492). A non-last digit naming `Ω_p` with `p < r` and a higher leaf is lowered, with the storeys in between laid.
+
+Still open: row 3480; the non-standard output for the printed label of row 3552; confirming rows 4746, 4747, 4752 and 4753 by other evidence; and `Ω_{Ω_Ω}+Ω_{Ω_2}+1`, which the fixed rules still place above `Ω_{Ω_Ω}·2`.

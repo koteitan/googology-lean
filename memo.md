@@ -536,3 +536,4 @@ What is left is one problem, and it is not a Lean problem.
 - The translation of two-row DBMS into the ordinals, with all six properties (`Trans/DBMS/TwoRow.lean`); the README row is split into "DBMS with 2 rows" (all ✅) and "DBMS with 3 rows or more".
 - One pair-sequence step goes to one or more ψ steps (`Trans/PSS/Steps.lean`, `Goals/PairReach.lean`).
 - Trio cofinality at a successor (`TrioSucc.lean`), and rules 1–10 with depth fuel agreeing for every `α < ε₀` (`TrioRulesFuel.lean`), are proved (2026-09-23).
+- Rules 1–10 fixed in four places (`TrioRules2.lean`, 2026-09-23): the table's matrix on the 22 table-right rows, the other standard rows unchanged. The same fix is needed in koteitan/trio's `tools/probe_eps_range.py`.

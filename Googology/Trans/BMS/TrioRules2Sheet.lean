@@ -1,1802 +1,2503 @@
-import Googology.Trans.BMS.TrioRules
+import Googology.Trans.BMS.TrioRules2
 
 /-!
-# Rules 1–10 against the sheet
+# The corrected rules against the sheet
 
-The calibration of `TrioRules.lean`: the rule-built matrix of `ψ_0(Ω_α)` is
-compared with the published tables, each row under its own label (read by
-`parse`, in the notation of the reference implementation: `w` is `ω`, `W_v` is
-`Ω_v`, `psi_v(X)` is `ψ_v(X)`).
+The calibration of `TrioRules2.lean` on every standard row of
+[`tools/omega_alpha_rows.tsv`](https://github.com/koteitan/trio/blob/main/tools/omega_alpha_rows.tsv)
+(785 of its 813 rows; the other 28 are not standard forms), with the verdicts of
+[TRIO-SHEET-41.md](TRIO-SHEET-41.md):
 
-* **The two tables on the site** — the
-  [table for `α < ε₀`](https://github.com/koteitan/trio/blob/main/ebp2bms/sheet/1/README-en.md)
-  (23 rows) and the
-  [table for `ε₀ ≤ α < Λ`](https://github.com/koteitan/trio/blob/main/ebp2bms/sheet/2/README-en.md)
-  (26 rows): all 49 agree.  Their labels are written in TeX there; the TeX
-  label is kept in a comment beside each.
-* **The whole sheet** —
-  [`tools/omega_alpha_rows.tsv`](https://github.com/koteitan/trio/blob/main/tools/omega_alpha_rows.tsv),
-  the 813 `ψ_0(Ω_α)` rows of the BM4-Analysis sheet the tables are drawn from.
-  28 of them are not standard forms themselves (yaBMS `bms -s` rejects them)
-  and are left out, as the reference implementation leaves them out.  Of the
-  other 785, **744 agree** and are checked below.
-* **The 41 that do not agree** are checked too, as what they are: for each,
-  the rule-built matrix is the one the reference implementation
-  [`tools/probe_eps_range.py`](https://github.com/koteitan/trio/blob/main/tools/probe_eps_range.py)
-  prints, and it differs from the sheet's.  [TRIO-SHEET-41.md](TRIO-SHEET-41.md)
-  decides them (9 L, 5 N, 3 R, 12 S-o, 10 S-c, 1 X, 1 O), and
-  `TrioRules2.lean` fixes the rules on the 22 rows where the sheet is right.
+* **744 rows** where rules 1–10 and the sheet agree: the corrected rules give the
+  sheet's matrix.
+* **22 rows where the sheet is right** (12 `S-o`, 10 `S-c`): the corrected rules
+  give the sheet's matrix, and it differs from what rules 1–10 give.
+* **17 rows where the rules are right**:
+  - 9 label typos (`L`): the corrected rules give the sheet's matrix under the
+    corrected label, and rules 1–10's matrix under the printed label;
+  - 5 `N` and 3 `R` rows: the corrected rules give rules 1–10's matrix, which
+    is not the sheet's.
+* **Row 3439** (`X`, out of scope) and **row 3480** (`O`, open): the corrected
+  rules give rules 1–10's matrix.
 
-So on every row of the sheet the transcription reproduces the reference
-implementation exactly — including where both differ from the sheet — which
-is what makes it a transcription of the algorithm rather than of the table.
+So on the 785 standard rows the corrected rules differ from rules 1–10 on
+exactly the 22 rows.  Of the other 28 rows, only row 4533 changes (Fix A; see
+its section).  At the end, **the order check**: the 783 matrices (744 agreeing rows,
+and the 39 decided rows under their corrected labels) are in the order of their
+labels under `cmpOrd`, on all 306,153 pairs, which also says that no two of
+them coincide.
+
+All of it is `#guard`s: a calibration, not a theorem.
 -/
 
-namespace Googology.Trans.BMS.TrioRules
+namespace Googology.Trans.BMS.TrioRules2
 
-/-! ### The table for `α < ε₀` on the site -/
+open Googology.Trans.BMS.TrioRules
 
-#guard trioRuleMatrixOf "w" -- $\omega$
-  = some [[0,0,0],[1,1,1]]
-#guard trioRuleMatrixOf "w+1" -- $\omega+1$
-  = some [[0,0,0],[1,1,1],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "w+2" -- $\omega+2$
-  = some [[0,0,0],[1,1,1],[2,1,0],[3,2,0],[4,3,0]]
-#guard trioRuleMatrixOf "w*2" -- $\omega\cdot 2$
-  = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "w*2+1" -- $\omega\cdot 2+1$
-  = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "w*2+2" -- $\omega\cdot 2+2$
-  = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "w*2+3" -- $\omega\cdot 2+3$
-  = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "w*3" -- $\omega\cdot 3$
-  = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "w*4" -- $\omega\cdot 4$
-  = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "w^2" -- $\omega^2$
-  = some [[0,0,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "w^2+1" -- $\omega^2+1$
-  = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "w^2+w" -- $\omega^2+\omega$
-  = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "w^2+w+1" -- $\omega^2+\omega+1$
-  = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "w^2*2" -- $\omega^2\cdot 2$
-  = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "w^3" -- $\omega^3$
-  = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "w^w" -- $\omega^\omega$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0]]
-#guard trioRuleMatrixOf "w^w+1" -- $\omega^\omega+1$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "w^(w+1)" -- $\omega^{\omega+1}$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,1]]
-#guard trioRuleMatrixOf "w^w^w" -- $\omega^{\omega^\omega}$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,0,0]]
-#guard trioRuleMatrixOf "w^w^w^w" -- $\omega^{\omega^{\omega^\omega}}$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,0,0],[5,0,0]]
-#guard trioRuleMatrixOf "w^(w^2+w^2)" -- $\omega^{\omega^2+\omega^2}$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[3,0,0],[2,1,1],[3,0,0],[3,0,0]]
-#guard trioRuleMatrixOf "w^(w^2+w^2)+w^(w+w)" -- $\omega^{\omega^2+\omega^2}+\omega^{\omega+\omega}$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[3,0,0],[2,1,1],[3,0,0],[3,0,0],[2,1,0],[3,2,1],[4,2,1],[5,0,0],[4,2,1],[5,0,0]]
-#guard trioRuleMatrixOf "w^(w^(w^(w^2+w^2)+w^2)+w^2)+w^2" -- $\omega^{\omega^{\omega^{\omega^2+\omega^2}+\omega^2}+\omega^2}+\omega^2$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,0,0],[5,0,0],[5,0,0],[4,0,0],[5,0,0],[5,0,0],[3,0,0],[4,0,0],[4,0,0],[2,1,1],[3,0,0],[3,0,0],[2,1,0],[3,2,1],[4,2,1]]
+/-! ### The 744 rows where rules 1–10 and the sheet agree -/
 
-/-! ### The table for `ε₀ ≤ α < Λ` on the site -/
-
-#guard trioRuleMatrixOf "psi(W)" -- $\varepsilon_0$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0]]
-#guard trioRuleMatrixOf "psi(W)+1" -- $\varepsilon_0+1$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "psi(W)+w^2" -- $\varepsilon_0+\omega^2$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "psi(W)*2" -- $\varepsilon_0\cdot 2$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,0],[3,2,1],[4,2,1],[5,0,0],[6,1,0]]
-#guard trioRuleMatrixOf "psi(W)*w" -- $\varepsilon_0\cdot\omega$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,1]]
-#guard trioRuleMatrixOf "psi(W)^2" -- $\varepsilon_0^2$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,1],[3,0,0],[4,1,0]]
-#guard trioRuleMatrixOf "psi(W)^w" -- $\varepsilon_0^\omega$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[3,0,0]]
-#guard trioRuleMatrixOf "psi(W)^psi(W)" -- $\varepsilon_0^{\varepsilon_0}$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[3,0,0],[4,1,0]]
-#guard trioRuleMatrixOf "psi(W)^psi(W)^psi(W)" -- $\varepsilon_0^{\varepsilon_0^{\varepsilon_0}}$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[4,0,0],[5,1,0]]
-#guard trioRuleMatrixOf "psi(W_2)" -- $\psi_0(\Omega_2)$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,2,0]]
-#guard trioRuleMatrixOf "psi(W_3)" -- $\psi_0(\Omega_3)$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,2,0],[6,3,0]]
-#guard trioRuleMatrixOf "psi(W_w)" -- $\psi_0(\Omega_\omega)$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1]]
-#guard trioRuleMatrixOf "psi(W_(w+1))" -- $\psi_0(\Omega_{\omega+1})$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,0],[6,2,0]]
-#guard trioRuleMatrixOf "psi(W_(w*2))" -- $\psi_0(\Omega_{\omega\cdot 2})$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,0],[6,2,1]]
-#guard trioRuleMatrixOf "psi(W_(w^2))" -- $\psi_0(\Omega_{\omega^2})$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1]]
-#guard trioRuleMatrixOf "psi(W_(w^w))" -- $\psi_0(\Omega_{\omega^\omega})$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[6,0,0]]
-#guard trioRuleMatrixOf "psi(W_psi(W))" -- $\psi_0(\Omega_{\varepsilon_0})$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[6,0,0],[7,1,0]]
-#guard trioRuleMatrixOf "psi(W_psi(W_w))" -- $\psi_0(\Omega_{\psi_0(\Omega_\omega)})$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[6,0,0],[7,1,1]]
-#guard trioRuleMatrixOf "psi(W_psi(W_psi(W_w)))" -- $\psi_0(\Omega_{\psi_0(\Omega_{\psi_0(\Omega_\omega)})})$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[6,0,0],[7,1,1],[8,1,1],[9,0,0],[10,1,1]]
-#guard trioRuleMatrixOf "W" -- $\Omega_1$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0]]
-#guard trioRuleMatrixOf "W_2" -- $\Omega_2$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0]]
-#guard trioRuleMatrixOf "W_3" -- $\Omega_3$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0]]
-#guard trioRuleMatrixOf "W_5" -- $\Omega_5$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,4,0],[4,4,0],[5,5,1],[6,5,1],[7,5,0]]
-#guard trioRuleMatrixOf "W_w" -- $\Omega_\omega$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "W_W" -- $\Omega_{\Omega_1}$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0]]
-#guard trioRuleMatrixOf "W_W_2" -- $\Omega_{\Omega_2}$
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0]]
-
-/-! ### The sheet: the 744 rows that agree -/
-
-#guard trioRuleMatrixOf "1" -- row 31
+#guard trioRuleMatrixOf2 "1" -- row 31
   = some [[0,0,0],[1,1,0]]
-#guard trioRuleMatrixOf "2" -- row 180
+#guard trioRuleMatrixOf2 "2" -- row 180
   = some [[0,0,0],[1,1,0],[2,2,0]]
-#guard trioRuleMatrixOf "3" -- row 241
+#guard trioRuleMatrixOf2 "3" -- row 241
   = some [[0,0,0],[1,1,0],[2,2,0],[3,3,0]]
-#guard trioRuleMatrixOf "4" -- row 261
+#guard trioRuleMatrixOf2 "4" -- row 261
   = some [[0,0,0],[1,1,0],[2,2,0],[3,3,0],[4,4,0]]
-#guard trioRuleMatrixOf "5" -- row 265
+#guard trioRuleMatrixOf2 "5" -- row 265
   = some [[0,0,0],[1,1,0],[2,2,0],[3,3,0],[4,4,0],[5,5,0]]
-#guard trioRuleMatrixOf "6" -- row 266
+#guard trioRuleMatrixOf2 "6" -- row 266
   = some [[0,0,0],[1,1,0],[2,2,0],[3,3,0],[4,4,0],[5,5,0],[6,6,0]]
-#guard trioRuleMatrixOf "w" -- row 267
+#guard trioRuleMatrixOf2 "w" -- row 267
   = some [[0,0,0],[1,1,1]]
-#guard trioRuleMatrixOf "(w+1)" -- row 780
+#guard trioRuleMatrixOf2 "(w+1)" -- row 780
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "(w+2)" -- row 913
+#guard trioRuleMatrixOf2 "(w+2)" -- row 913
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,0],[4,3,0]]
-#guard trioRuleMatrixOf "(w+3)" -- row 966
+#guard trioRuleMatrixOf2 "(w+3)" -- row 966
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,0],[4,3,0],[5,4,0]]
-#guard trioRuleMatrixOf "(w+4)" -- row 983
+#guard trioRuleMatrixOf2 "(w+4)" -- row 983
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,0],[4,3,0],[5,4,0],[6,5,0]]
-#guard trioRuleMatrixOf "(w+5)" -- row 986
+#guard trioRuleMatrixOf2 "(w+5)" -- row 986
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,0],[4,3,0],[5,4,0],[6,5,0],[7,6,0]]
-#guard trioRuleMatrixOf "(w+6)" -- row 987
+#guard trioRuleMatrixOf2 "(w+6)" -- row 987
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,0],[4,3,0],[5,4,0],[6,5,0],[7,6,0],[8,7,0]]
-#guard trioRuleMatrixOf "(w2)" -- row 988
+#guard trioRuleMatrixOf2 "(w2)" -- row 988
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "(w2+1)" -- row 1218
+#guard trioRuleMatrixOf2 "(w2+1)" -- row 1218
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(w2+2)" -- row 1266
+#guard trioRuleMatrixOf2 "(w2+2)" -- row 1266
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(w2+3)" -- row 1275
+#guard trioRuleMatrixOf2 "(w2+3)" -- row 1275
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(w2+4)" -- row 1276
+#guard trioRuleMatrixOf2 "(w2+4)" -- row 1276
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0],[6,4,0],[7,5,0],[8,6,0]]
-#guard trioRuleMatrixOf "(w3)" -- row 1277
+#guard trioRuleMatrixOf2 "(w3)" -- row 1277
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(w3+1)" -- row 1306
+#guard trioRuleMatrixOf2 "(w3+1)" -- row 1306
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(w3+2)" -- row 1310
+#guard trioRuleMatrixOf2 "(w3+2)" -- row 1310
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(w4)" -- row 1311
+#guard trioRuleMatrixOf2 "(w4)" -- row 1311
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(w4+1)" -- row 1314
+#guard trioRuleMatrixOf2 "(w4+1)" -- row 1314
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1],[8,4,0],[9,5,0]]
-#guard trioRuleMatrixOf "(w5)" -- row 1315
+#guard trioRuleMatrixOf2 "(w5)" -- row 1315
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1],[8,4,0],[9,5,1]]
-#guard trioRuleMatrixOf "(w6)" -- row 1316
+#guard trioRuleMatrixOf2 "(w6)" -- row 1316
   = some [[0,0,0],[1,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1],[8,4,0],[9,5,1],[10,5,0],[11,6,1]]
-#guard trioRuleMatrixOf "(w^2)" -- row 1317
+#guard trioRuleMatrixOf2 "(w^2)" -- row 1317
   = some [[0,0,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(w^2+1)" -- row 1647
+#guard trioRuleMatrixOf2 "(w^2+1)" -- row 1647
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "(w^2+2)" -- row 1703
+#guard trioRuleMatrixOf2 "(w^2+2)" -- row 1703
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,0],[4,3,0]]
-#guard trioRuleMatrixOf "(w^2+3)" -- row 1711
+#guard trioRuleMatrixOf2 "(w^2+3)" -- row 1711
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,0],[4,3,0],[5,4,0]]
-#guard trioRuleMatrixOf "(w^2+4)" -- row 1713
+#guard trioRuleMatrixOf2 "(w^2+4)" -- row 1713
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,0],[4,3,0],[5,4,0],[6,5,0]]
-#guard trioRuleMatrixOf "(w^2+5)" -- row 1714
+#guard trioRuleMatrixOf2 "(w^2+5)" -- row 1714
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,0],[4,3,0],[5,4,0],[6,5,0],[7,6,0]]
-#guard trioRuleMatrixOf "(w^2+w)" -- row 1715
+#guard trioRuleMatrixOf2 "(w^2+w)" -- row 1715
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "(w^2+w+1)" -- row 1784
+#guard trioRuleMatrixOf2 "(w^2+w+1)" -- row 1784
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(w^2+w+2)" -- row 1801
+#guard trioRuleMatrixOf2 "(w^2+w+2)" -- row 1801
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(w^2+w+3)" -- row 1804
+#guard trioRuleMatrixOf2 "(w^2+w+3)" -- row 1804
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(w^2+w2)" -- row 1805
+#guard trioRuleMatrixOf2 "(w^2+w2)" -- row 1805
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(w^2+w2+1)" -- row 1823
+#guard trioRuleMatrixOf2 "(w^2+w2+1)" -- row 1823
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(w^2+w2+2)" -- row 1832
+#guard trioRuleMatrixOf2 "(w^2+w2+2)" -- row 1832
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(w^2+w2+3)" -- row 1833
+#guard trioRuleMatrixOf2 "(w^2+w2+3)" -- row 1833
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,0],[8,5,0],[9,6,0]]
-#guard trioRuleMatrixOf "(w^2+w3)" -- row 1834
+#guard trioRuleMatrixOf2 "(w^2+w3)" -- row 1834
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(w^2+w3+1)" -- row 1842
+#guard trioRuleMatrixOf2 "(w^2+w3+1)" -- row 1842
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1],[8,4,0],[9,5,0]]
-#guard trioRuleMatrixOf "(w^2+w4)" -- row 1843
+#guard trioRuleMatrixOf2 "(w^2+w4)" -- row 1843
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1],[8,4,0],[9,5,1]]
-#guard trioRuleMatrixOf "(w^2+w5)" -- row 1844
+#guard trioRuleMatrixOf2 "(w^2+w5)" -- row 1844
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1],[8,4,0],[9,5,1],[10,5,0],[11,6,1]]
-#guard trioRuleMatrixOf "(w^2*2)" -- row 1845
+#guard trioRuleMatrixOf2 "(w^2*2)" -- row 1845
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(w^2*2+1)" -- row 1895
+#guard trioRuleMatrixOf2 "(w^2*2+1)" -- row 1895
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(w^2*2+2)" -- row 1911
+#guard trioRuleMatrixOf2 "(w^2*2+2)" -- row 1911
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(w^2*2+3)" -- row 1913
+#guard trioRuleMatrixOf2 "(w^2*2+3)" -- row 1913
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(w^2*2+w)" -- row 1914
+#guard trioRuleMatrixOf2 "(w^2*2+w)" -- row 1914
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(w^2*2+w+1)" -- row 1925
+#guard trioRuleMatrixOf2 "(w^2*2+w+1)" -- row 1925
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(w^2*2+w+2)" -- row 1927
+#guard trioRuleMatrixOf2 "(w^2*2+w+2)" -- row 1927
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(w^2*2+w2)" -- row 1928
+#guard trioRuleMatrixOf2 "(w^2*2+w2)" -- row 1928
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(w^2*2+w3)" -- row 1929
+#guard trioRuleMatrixOf2 "(w^2*2+w3)" -- row 1929
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1],[8,4,0],[9,5,1]]
-#guard trioRuleMatrixOf "(w^2*3)" -- row 1930
+#guard trioRuleMatrixOf2 "(w^2*3)" -- row 1930
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "(w^2*3+1)" -- row 1939
+#guard trioRuleMatrixOf2 "(w^2*3+1)" -- row 1939
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(w^2*3+2)" -- row 1940
+#guard trioRuleMatrixOf2 "(w^2*3+2)" -- row 1940
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(w^2*3+w)" -- row 1941
+#guard trioRuleMatrixOf2 "(w^2*3+w)" -- row 1941
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(w^2*3+w2)" -- row 1942
+#guard trioRuleMatrixOf2 "(w^2*3+w2)" -- row 1942
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,0],[7,4,1],[8,4,0],[9,5,1]]
-#guard trioRuleMatrixOf "(w^2*4)" -- row 1943
+#guard trioRuleMatrixOf2 "(w^2*4)" -- row 1943
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,0],[7,4,1],[8,4,1]]
-#guard trioRuleMatrixOf "(w^2*4+1)" -- row 1944
+#guard trioRuleMatrixOf2 "(w^2*4+1)" -- row 1944
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,0],[7,4,1],[8,4,1],[8,4,0],[9,5,0]]
-#guard trioRuleMatrixOf "(w^2*4+w)" -- row 1945
+#guard trioRuleMatrixOf2 "(w^2*4+w)" -- row 1945
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,0],[7,4,1],[8,4,1],[8,4,0],[9,5,1]]
-#guard trioRuleMatrixOf "(w^2*5)" -- row 1946
+#guard trioRuleMatrixOf2 "(w^2*5)" -- row 1946
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,0],[7,4,1],[8,4,1],[8,4,0],[9,5,1],[10,5,1]]
-#guard trioRuleMatrixOf "(w^3)" -- row 1948
+#guard trioRuleMatrixOf2 "(w^3)" -- row 1948
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(w^3+1)" -- row 2022
+#guard trioRuleMatrixOf2 "(w^3+1)" -- row 2022
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "(w^3+2)" -- row 2040
+#guard trioRuleMatrixOf2 "(w^3+2)" -- row 2040
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,0],[4,3,0]]
-#guard trioRuleMatrixOf "(w^3+3)" -- row 2041
+#guard trioRuleMatrixOf2 "(w^3+3)" -- row 2041
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,0],[4,3,0],[5,4,0]]
-#guard trioRuleMatrixOf "(w^3+w)" -- row 2042
+#guard trioRuleMatrixOf2 "(w^3+w)" -- row 2042
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "(w^3+w+1)" -- row 2049
+#guard trioRuleMatrixOf2 "(w^3+w+1)" -- row 2049
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(w^3+w+2)" -- row 2050
+#guard trioRuleMatrixOf2 "(w^3+w+2)" -- row 2050
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(w^3+w2)" -- row 2051
+#guard trioRuleMatrixOf2 "(w^3+w2)" -- row 2051
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(w^3+w3)" -- row 2052
+#guard trioRuleMatrixOf2 "(w^3+w3)" -- row 2052
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(w^3+w^2)" -- row 2053
+#guard trioRuleMatrixOf2 "(w^3+w^2)" -- row 2053
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(w^3+w^2+1)" -- row 2062
+#guard trioRuleMatrixOf2 "(w^3+w^2+1)" -- row 2062
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(w^3+w^2+2)" -- row 2063
+#guard trioRuleMatrixOf2 "(w^3+w^2+2)" -- row 2063
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(w^3+w^2+w)" -- row 2064
+#guard trioRuleMatrixOf2 "(w^3+w^2+w)" -- row 2064
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(w^3+w^2+w2)" -- row 2065
+#guard trioRuleMatrixOf2 "(w^3+w^2+w2)" -- row 2065
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(w^3+w^2*2)" -- row 2066
+#guard trioRuleMatrixOf2 "(w^3+w^2*2)" -- row 2066
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "(w^3+w^2*3)" -- row 2067
+#guard trioRuleMatrixOf2 "(w^3+w^2*3)" -- row 2067
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,0],[7,4,1],[8,4,1]]
-#guard trioRuleMatrixOf "(w^3*2)" -- row 2068
+#guard trioRuleMatrixOf2 "(w^3*2)" -- row 2068
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(w^3*2+1)" -- row 2078
+#guard trioRuleMatrixOf2 "(w^3*2+1)" -- row 2078
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(w^3*2+2)" -- row 2079
+#guard trioRuleMatrixOf2 "(w^3*2+2)" -- row 2079
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(w^3*2+w)" -- row 2080
+#guard trioRuleMatrixOf2 "(w^3*2+w)" -- row 2080
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(w^3*2+w2)" -- row 2081
+#guard trioRuleMatrixOf2 "(w^3*2+w2)" -- row 2081
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(w^3*2+w^2)" -- row 2082
+#guard trioRuleMatrixOf2 "(w^3*2+w^2)" -- row 2082
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "(w^3*2+w^2*2)" -- row 2083
+#guard trioRuleMatrixOf2 "(w^3*2+w^2*2)" -- row 2083
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,0],[7,4,1],[8,4,1]]
-#guard trioRuleMatrixOf "(w^3*3)" -- row 2084
+#guard trioRuleMatrixOf2 "(w^3*3)" -- row 2084
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "(w^3*4)" -- row 2085
+#guard trioRuleMatrixOf2 "(w^3*4)" -- row 2085
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,1],[6,3,0],[7,4,1],[8,4,1],[8,4,1]]
-#guard trioRuleMatrixOf "(w^4)" -- row 2086
+#guard trioRuleMatrixOf2 "(w^4)" -- row 2086
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(w^4+1)" -- row 2098
+#guard trioRuleMatrixOf2 "(w^4+1)" -- row 2098
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "(w^4+2)" -- row 2099
+#guard trioRuleMatrixOf2 "(w^4+2)" -- row 2099
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,0],[4,3,0]]
-#guard trioRuleMatrixOf "(w^4+w)" -- row 2100
+#guard trioRuleMatrixOf2 "(w^4+w)" -- row 2100
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "(w^4+w2)" -- row 2101
+#guard trioRuleMatrixOf2 "(w^4+w2)" -- row 2101
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(w^4+w^2)" -- row 2102
+#guard trioRuleMatrixOf2 "(w^4+w^2)" -- row 2102
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(w^4+w^2*2)" -- row 2103
+#guard trioRuleMatrixOf2 "(w^4+w^2*2)" -- row 2103
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "(w^4+w^3)" -- row 2104
+#guard trioRuleMatrixOf2 "(w^4+w^3)" -- row 2104
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(w^4+w^3*2)" -- row 2105
+#guard trioRuleMatrixOf2 "(w^4+w^3*2)" -- row 2105
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "(w^4*2)" -- row 2106
+#guard trioRuleMatrixOf2 "(w^4*2)" -- row 2106
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(w^4*3)" -- row 2107
+#guard trioRuleMatrixOf2 "(w^4*3)" -- row 2107
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "(w^5)" -- row 2108
+#guard trioRuleMatrixOf2 "(w^5)" -- row 2108
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(w^5+1)" -- row 2110
+#guard trioRuleMatrixOf2 "(w^5+1)" -- row 2110
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "(w^5+w)" -- row 2111
+#guard trioRuleMatrixOf2 "(w^5+w)" -- row 2111
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "(w^5+w^2)" -- row 2112
+#guard trioRuleMatrixOf2 "(w^5+w^2)" -- row 2112
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(w^6)" -- row 2114
+#guard trioRuleMatrixOf2 "(w^6)" -- row 2114
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(w^7)" -- row 2115
+#guard trioRuleMatrixOf2 "(w^7)" -- row 2115
   = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(w^w)" -- row 2116
+#guard trioRuleMatrixOf2 "(w^w)" -- row 2116
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0]]
-#guard trioRuleMatrixOf "(w^w+1)" -- row 2130
+#guard trioRuleMatrixOf2 "(w^w+1)" -- row 2130
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "(w^w+w)" -- row 2132
+#guard trioRuleMatrixOf2 "(w^w+w)" -- row 2132
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "(w^w+w^2)" -- row 2134
+#guard trioRuleMatrixOf2 "(w^w+w^2)" -- row 2134
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(w^w+w^3)" -- row 2135
+#guard trioRuleMatrixOf2 "(w^w+w^3)" -- row 2135
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[4,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(w^w*2)" -- row 2136
+#guard trioRuleMatrixOf2 "(w^w*2)" -- row 2136
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[4,2,1],[5,0,0]]
-#guard trioRuleMatrixOf "(w^w*3)" -- row 2137
+#guard trioRuleMatrixOf2 "(w^w*3)" -- row 2137
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[4,2,1],[5,0,0],[4,2,0],[5,3,1],[6,3,1],[7,0,0]]
-#guard trioRuleMatrixOf "(w^(w+1))" -- row 2138
+#guard trioRuleMatrixOf2 "(w^(w+1))" -- row 2138
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,1]]
-#guard trioRuleMatrixOf "(w^(w+1)+1)" -- row 2139
+#guard trioRuleMatrixOf2 "(w^(w+1)+1)" -- row 2139
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,1],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "(w^(w+1)+w^w)" -- row 2140
+#guard trioRuleMatrixOf2 "(w^(w+1)+w^w)" -- row 2140
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,0,0]]
-#guard trioRuleMatrixOf "(w^(w+1)*2)" -- row 2141
+#guard trioRuleMatrixOf2 "(w^(w+1)*2)" -- row 2141
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,0,0],[4,2,1]]
-#guard trioRuleMatrixOf "(w^(w+2))" -- row 2142
+#guard trioRuleMatrixOf2 "(w^(w+2))" -- row 2142
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(w^(w+3))" -- row 2143
+#guard trioRuleMatrixOf2 "(w^(w+3))" -- row 2143
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(w^(w2))" -- row 2144
+#guard trioRuleMatrixOf2 "(w^(w2))" -- row 2144
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,1],[3,0,0]]
-#guard trioRuleMatrixOf "(w^(w3))" -- row 2145
+#guard trioRuleMatrixOf2 "(w^(w3))" -- row 2145
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,1],[3,0,0],[2,1,1],[3,0,0]]
-#guard trioRuleMatrixOf "(w^w^2)" -- row 2146
+#guard trioRuleMatrixOf2 "(w^w^2)" -- row 2146
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[3,0,0]]
-#guard trioRuleMatrixOf "(w^w^3)" -- row 2147
+#guard trioRuleMatrixOf2 "(w^w^3)" -- row 2147
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[3,0,0],[3,0,0]]
-#guard trioRuleMatrixOf "(w^w^w)" -- row 2148
+#guard trioRuleMatrixOf2 "(w^w^w)" -- row 2148
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,0,0]]
-#guard trioRuleMatrixOf "(w^w^w^2)" -- row 2149
+#guard trioRuleMatrixOf2 "(w^w^w^2)" -- row 2149
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,0,0],[4,0,0]]
-#guard trioRuleMatrixOf "(w^w^w^w)" -- row 2150
+#guard trioRuleMatrixOf2 "(w^w^w^w)" -- row 2150
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,0,0],[5,0,0]]
-#guard trioRuleMatrixOf "(w^w^w^w^w)" -- row 2151
+#guard trioRuleMatrixOf2 "(w^w^w^w^w)" -- row 2151
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,0,0],[5,0,0],[6,0,0]]
-#guard trioRuleMatrixOf "psi(W)" -- row 2152
+#guard trioRuleMatrixOf2 "psi(W)" -- row 2152
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0]]
-#guard trioRuleMatrixOf "(psi(W)+1)" -- row 2153
+#guard trioRuleMatrixOf2 "(psi(W)+1)" -- row 2153
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,0],[3,2,0]]
-#guard trioRuleMatrixOf "(psi(W)+w)" -- row 2154
+#guard trioRuleMatrixOf2 "(psi(W)+w)" -- row 2154
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "(psi(W)+w^2)" -- row 2155
+#guard trioRuleMatrixOf2 "(psi(W)+w^2)" -- row 2155
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(psi(W)+w^w)" -- row 2156
+#guard trioRuleMatrixOf2 "(psi(W)+w^w)" -- row 2156
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,0],[3,2,1],[4,2,1],[5,0,0]]
-#guard trioRuleMatrixOf "(psi(W)*2)" -- row 2157
+#guard trioRuleMatrixOf2 "(psi(W)*2)" -- row 2157
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,0],[3,2,1],[4,2,1],[5,0,0],[6,1,0]]
-#guard trioRuleMatrixOf "(psi(W)*w)" -- row 2158
+#guard trioRuleMatrixOf2 "(psi(W)*w)" -- row 2158
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,1]]
-#guard trioRuleMatrixOf "(psi(W)*w^w)" -- row 2159
+#guard trioRuleMatrixOf2 "(psi(W)*w^w)" -- row 2159
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,1],[3,0,0]]
-#guard trioRuleMatrixOf "(psi(W)^2)" -- row 2160
+#guard trioRuleMatrixOf2 "(psi(W)^2)" -- row 2160
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[2,1,1],[3,0,0],[4,1,0]]
-#guard trioRuleMatrixOf "(psi(W)^w)" -- row 2161
+#guard trioRuleMatrixOf2 "(psi(W)^w)" -- row 2161
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[3,0,0]]
-#guard trioRuleMatrixOf "(psi(W)^psi(W))" -- row 2162
+#guard trioRuleMatrixOf2 "(psi(W)^psi(W))" -- row 2162
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[3,0,0],[4,1,0]]
-#guard trioRuleMatrixOf "(psi(W)^psi(W)^w)" -- row 2163
+#guard trioRuleMatrixOf2 "(psi(W)^psi(W)^w)" -- row 2163
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[4,0,0]]
-#guard trioRuleMatrixOf "(psi(W)^psi(W)^psi(W))" -- row 2164
+#guard trioRuleMatrixOf2 "(psi(W)^psi(W)^psi(W))" -- row 2164
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[4,0,0],[5,1,0]]
-#guard trioRuleMatrixOf "psi(W2)" -- row 2165
+#guard trioRuleMatrixOf2 "psi(W2)" -- row 2165
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[4,1,0]]
-#guard trioRuleMatrixOf "psi(W3)" -- row 2166
+#guard trioRuleMatrixOf2 "psi(W3)" -- row 2166
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[4,1,0],[4,1,0]]
-#guard trioRuleMatrixOf "psi(W*w)" -- row 2167
+#guard trioRuleMatrixOf2 "psi(W*w)" -- row 2167
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,0,0]]
-#guard trioRuleMatrixOf "psi(W*psi(W))" -- row 2168
+#guard trioRuleMatrixOf2 "psi(W*psi(W))" -- row 2168
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,0,0],[6,1,0]]
-#guard trioRuleMatrixOf "psi(W^2)" -- row 2169
+#guard trioRuleMatrixOf2 "psi(W^2)" -- row 2169
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,1,0]]
-#guard trioRuleMatrixOf "psi(W^3)" -- row 2170
+#guard trioRuleMatrixOf2 "psi(W^3)" -- row 2170
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,1,0],[5,1,0]]
-#guard trioRuleMatrixOf "psi(W^w)" -- row 2171
+#guard trioRuleMatrixOf2 "psi(W^w)" -- row 2171
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,1,0],[6,0,0]]
-#guard trioRuleMatrixOf "psi(W^W)" -- row 2172
+#guard trioRuleMatrixOf2 "psi(W^W)" -- row 2172
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,1,0],[6,1,0]]
-#guard trioRuleMatrixOf "psi(W^W^W)" -- row 2173
+#guard trioRuleMatrixOf2 "psi(W^W^W)" -- row 2173
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,1,0],[6,1,0],[7,1,0]]
-#guard trioRuleMatrixOf "psi(W_2)" -- row 2174
+#guard trioRuleMatrixOf2 "psi(W_2)" -- row 2174
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,2,0]]
-#guard trioRuleMatrixOf "psi(W_2^2)" -- row 2175
+#guard trioRuleMatrixOf2 "psi(W_2^2)" -- row 2175
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,2,0],[6,2,0]]
-#guard trioRuleMatrixOf "psi(W_3)" -- row 2176
+#guard trioRuleMatrixOf2 "psi(W_3)" -- row 2176
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0],[5,2,0],[6,3,0]]
-#guard trioRuleMatrixOf "psi(W_w)" -- row 2177
+#guard trioRuleMatrixOf2 "psi(W_w)" -- row 2177
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1]]
-#guard trioRuleMatrixOf "psi(W_w*2)" -- row 2178
+#guard trioRuleMatrixOf2 "psi(W_w*2)" -- row 2178
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[4,1,1]]
-#guard trioRuleMatrixOf "psi(W_w*W)" -- row 2179
+#guard trioRuleMatrixOf2 "psi(W_w*W)" -- row 2179
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,0]]
-#guard trioRuleMatrixOf "psi(W_w^2)" -- row 2180
+#guard trioRuleMatrixOf2 "psi(W_w^2)" -- row 2180
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,0],[4,1,1]]
-#guard trioRuleMatrixOf "psi(W_w^W_w)" -- row 2181
+#guard trioRuleMatrixOf2 "psi(W_w^W_w)" -- row 2181
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,0],[6,1,0],[4,1,1]]
-#guard trioRuleMatrixOf "psi(W_(w+1))" -- row 2182
+#guard trioRuleMatrixOf2 "psi(W_(w+1))" -- row 2182
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,0],[6,2,0]]
-#guard trioRuleMatrixOf "psi(W_(w+2))" -- row 2183
+#guard trioRuleMatrixOf2 "psi(W_(w+2))" -- row 2183
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,0],[6,2,0],[7,3,0]]
-#guard trioRuleMatrixOf "psi(W_(w2))" -- row 2184
+#guard trioRuleMatrixOf2 "psi(W_(w2))" -- row 2184
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,0],[6,2,1]]
-#guard trioRuleMatrixOf "psi(W_(w3))" -- row 2185
+#guard trioRuleMatrixOf2 "psi(W_(w3))" -- row 2185
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,0],[6,2,1],[7,2,0],[8,3,1]]
-#guard trioRuleMatrixOf "psi(W_(w^2))" -- row 2186
+#guard trioRuleMatrixOf2 "psi(W_(w^2))" -- row 2186
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1]]
-#guard trioRuleMatrixOf "psi(W_(w^3))" -- row 2187
+#guard trioRuleMatrixOf2 "psi(W_(w^3))" -- row 2187
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[5,1,1]]
-#guard trioRuleMatrixOf "psi(W_(w^w))" -- row 2188
+#guard trioRuleMatrixOf2 "psi(W_(w^w))" -- row 2188
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[6,0,0]]
-#guard trioRuleMatrixOf "psi(W_psi(W))" -- row 2189
+#guard trioRuleMatrixOf2 "psi(W_psi(W))" -- row 2189
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[6,0,0],[7,1,0]]
-#guard trioRuleMatrixOf "psi(W_psi(W_w))" -- row 2190
+#guard trioRuleMatrixOf2 "psi(W_psi(W_w))" -- row 2190
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[6,0,0],[7,1,1]]
-#guard trioRuleMatrixOf "psi(W_psi(W_(w^2)))" -- row 2191
+#guard trioRuleMatrixOf2 "psi(W_psi(W_(w^2)))" -- row 2191
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[6,0,0],[7,1,1],[8,1,1]]
-#guard trioRuleMatrixOf "psi(W_psi(W_psi(W_w)))" -- row 2192
+#guard trioRuleMatrixOf2 "psi(W_psi(W_psi(W_w)))" -- row 2192
   = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[6,0,0],[7,1,1],[8,1,1],[9,0,0],[10,1,1]]
-#guard trioRuleMatrixOf "W" -- row 2193
+#guard trioRuleMatrixOf2 "W" -- row 2193
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0]]
-#guard trioRuleMatrixOf "(W+1)" -- row 2328
+#guard trioRuleMatrixOf2 "(W+1)" -- row 2328
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,0]]
-#guard trioRuleMatrixOf "(W+2)" -- row 2362
+#guard trioRuleMatrixOf2 "(W+2)" -- row 2362
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,0],[5,4,0]]
-#guard trioRuleMatrixOf "(W+3)" -- row 2370
+#guard trioRuleMatrixOf2 "(W+3)" -- row 2370
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,0],[5,4,0],[6,5,0]]
-#guard trioRuleMatrixOf "(W+4)" -- row 2371
+#guard trioRuleMatrixOf2 "(W+4)" -- row 2371
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,0],[5,4,0],[6,5,0],[7,6,0]]
-#guard trioRuleMatrixOf "(W+w)" -- row 2372
+#guard trioRuleMatrixOf2 "(W+w)" -- row 2372
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1]]
-#guard trioRuleMatrixOf "(W+w+1)" -- row 2390
+#guard trioRuleMatrixOf2 "(W+w+1)" -- row 2390
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W+w+2)" -- row 2391
+#guard trioRuleMatrixOf2 "(W+w+2)" -- row 2391
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(W+w2)" -- row 2392
+#guard trioRuleMatrixOf2 "(W+w2)" -- row 2392
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W+w3)" -- row 2393
+#guard trioRuleMatrixOf2 "(W+w3)" -- row 2393
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,0],[6,4,1],[7,4,0],[8,5,1]]
-#guard trioRuleMatrixOf "(W+w^2)" -- row 2394
+#guard trioRuleMatrixOf2 "(W+w^2)" -- row 2394
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1]]
-#guard trioRuleMatrixOf "(W+w^2+1)" -- row 2397
+#guard trioRuleMatrixOf2 "(W+w^2+1)" -- row 2397
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W+w^2+w)" -- row 2398
+#guard trioRuleMatrixOf2 "(W+w^2+w)" -- row 2398
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[5,3,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W+w^2*2)" -- row 2399
+#guard trioRuleMatrixOf2 "(W+w^2*2)" -- row 2399
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[5,3,0],[6,4,1],[7,4,1]]
-#guard trioRuleMatrixOf "(W+w^3)" -- row 2400
+#guard trioRuleMatrixOf2 "(W+w^3)" -- row 2400
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[5,3,1]]
-#guard trioRuleMatrixOf "(W+w^4)" -- row 2401
+#guard trioRuleMatrixOf2 "(W+w^4)" -- row 2401
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[5,3,1],[5,3,1]]
-#guard trioRuleMatrixOf "(W+w^w)" -- row 2402
+#guard trioRuleMatrixOf2 "(W+w^w)" -- row 2402
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,0,0]]
-#guard trioRuleMatrixOf "(W+w^w^w)" -- row 2403
+#guard trioRuleMatrixOf2 "(W+w^w^w)" -- row 2403
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,0,0],[7,0,0]]
-#guard trioRuleMatrixOf "(W+psi(W))" -- row 2404
+#guard trioRuleMatrixOf2 "(W+psi(W))" -- row 2404
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,0,0],[7,1,0]]
-#guard trioRuleMatrixOf "(W+psi(W_w))" -- row 2405
+#guard trioRuleMatrixOf2 "(W+psi(W_w))" -- row 2405
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,0,0],[7,1,1]]
-#guard trioRuleMatrixOf "(W+psi(W_W))" -- row 2406
+#guard trioRuleMatrixOf2 "(W+psi(W_W))" -- row 2406
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,0,0],[7,1,1],[8,1,1],[9,1,0]]
-#guard trioRuleMatrixOf "(W2)" -- row 2407
+#guard trioRuleMatrixOf2 "(W2)" -- row 2407
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0]]
-#guard trioRuleMatrixOf "(W2+1)" -- row 2421
+#guard trioRuleMatrixOf2 "(W2+1)" -- row 2421
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W2+2)" -- row 2424
+#guard trioRuleMatrixOf2 "(W2+2)" -- row 2424
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(W2+w)" -- row 2425
+#guard trioRuleMatrixOf2 "(W2+w)" -- row 2425
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W2+w2)" -- row 2426
+#guard trioRuleMatrixOf2 "(W2+w2)" -- row 2426
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,0],[8,5,1]]
-#guard trioRuleMatrixOf "(W2+w^2)" -- row 2427
+#guard trioRuleMatrixOf2 "(W2+w^2)" -- row 2427
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1]]
-#guard trioRuleMatrixOf "(W2+w^w)" -- row 2428
+#guard trioRuleMatrixOf2 "(W2+w^w)" -- row 2428
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,0,0]]
-#guard trioRuleMatrixOf "(W3)" -- row 2429
+#guard trioRuleMatrixOf2 "(W3)" -- row 2429
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0]]
-#guard trioRuleMatrixOf "(W3+1)" -- row 2430
+#guard trioRuleMatrixOf2 "(W3+1)" -- row 2430
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W3+w)" -- row 2431
+#guard trioRuleMatrixOf2 "(W3+w)" -- row 2431
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,0],[8,5,1]]
-#guard trioRuleMatrixOf "(W4)" -- row 2432
+#guard trioRuleMatrixOf2 "(W4)" -- row 2432
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,0],[8,5,1],[9,5,1],[10,1,0]]
-#guard trioRuleMatrixOf "(W5)" -- row 2433
+#guard trioRuleMatrixOf2 "(W5)" -- row 2433
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,0],[8,5,1],[9,5,1],[10,1,0],[9,5,0],[10,6,1],[11,6,1],[12,1,0]]
-#guard trioRuleMatrixOf "(W*w)" -- row 2434
+#guard trioRuleMatrixOf2 "(W*w)" -- row 2434
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W*w+1)" -- row 2485
+#guard trioRuleMatrixOf2 "(W*w+1)" -- row 2485
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,0],[4,3,0]]
-#guard trioRuleMatrixOf "(W*w+2)" -- row 2488
+#guard trioRuleMatrixOf2 "(W*w+2)" -- row 2488
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,0],[4,3,0],[5,4,0]]
-#guard trioRuleMatrixOf "(W*w+w)" -- row 2489
+#guard trioRuleMatrixOf2 "(W*w+w)" -- row 2489
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,0],[4,3,1]]
-#guard trioRuleMatrixOf "(W*w+w^2)" -- row 2490
+#guard trioRuleMatrixOf2 "(W*w+w^2)" -- row 2490
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,0],[4,3,1],[5,3,1]]
-#guard trioRuleMatrixOf "(W*w+w^w)" -- row 2491
+#guard trioRuleMatrixOf2 "(W*w+w^w)" -- row 2491
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,0],[4,3,1],[5,3,1],[6,0,0]]
-#guard trioRuleMatrixOf "(W*w+W)" -- row 2492
+#guard trioRuleMatrixOf2 "(W*w+W)" -- row 2492
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,0],[4,3,1],[5,3,1],[6,1,0]]
-#guard trioRuleMatrixOf "(W*w+W+1)" -- row 2497
+#guard trioRuleMatrixOf2 "(W*w+W+1)" -- row 2497
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W*w+W+w)" -- row 2498
+#guard trioRuleMatrixOf2 "(W*w+W+w)" -- row 2498
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W*w+W2)" -- row 2499
+#guard trioRuleMatrixOf2 "(W*w+W2)" -- row 2499
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0]]
-#guard trioRuleMatrixOf "(W*w2)" -- row 2500
+#guard trioRuleMatrixOf2 "(W*w2)" -- row 2500
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W*w3)" -- row 2501
+#guard trioRuleMatrixOf2 "(W*w3)" -- row 2501
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,1],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W*w^2)" -- row 2502
+#guard trioRuleMatrixOf2 "(W*w^2)" -- row 2502
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,1]]
-#guard trioRuleMatrixOf "(W*w^2*2)" -- row 2503
+#guard trioRuleMatrixOf2 "(W*w^2*2)" -- row 2503
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,1],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,1],[5,3,1]]
-#guard trioRuleMatrixOf "(W*w^3)" -- row 2504
+#guard trioRuleMatrixOf2 "(W*w^3)" -- row 2504
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,1],[3,2,1]]
-#guard trioRuleMatrixOf "(W*w^w)" -- row 2505
+#guard trioRuleMatrixOf2 "(W*w^w)" -- row 2505
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,0,0]]
-#guard trioRuleMatrixOf "(W*psi(W))" -- row 2506
+#guard trioRuleMatrixOf2 "(W*psi(W))" -- row 2506
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,0,0],[5,1,0]]
-#guard trioRuleMatrixOf "(W*psi(W_w))" -- row 2507
+#guard trioRuleMatrixOf2 "(W*psi(W_w))" -- row 2507
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,0,0],[5,1,1]]
-#guard trioRuleMatrixOf "(W^2)" -- row 2508
+#guard trioRuleMatrixOf2 "(W^2)" -- row 2508
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "(W^2+1)" -- row 2513
+#guard trioRuleMatrixOf2 "(W^2+1)" -- row 2513
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,0],[4,3,0]]
-#guard trioRuleMatrixOf "(W^2+2)" -- row 2514
+#guard trioRuleMatrixOf2 "(W^2+2)" -- row 2514
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,0],[4,3,0],[5,4,0]]
-#guard trioRuleMatrixOf "(W^2+w)" -- row 2515
+#guard trioRuleMatrixOf2 "(W^2+w)" -- row 2515
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,0],[4,3,1]]
-#guard trioRuleMatrixOf "(W^2+w^2)" -- row 2516
+#guard trioRuleMatrixOf2 "(W^2+w^2)" -- row 2516
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1]]
-#guard trioRuleMatrixOf "(W^2+W)" -- row 2517
+#guard trioRuleMatrixOf2 "(W^2+W)" -- row 2517
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0]]
-#guard trioRuleMatrixOf "(W^2+W+1)" -- row 2518
+#guard trioRuleMatrixOf2 "(W^2+W+1)" -- row 2518
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W^2+W+w)" -- row 2519
+#guard trioRuleMatrixOf2 "(W^2+W+w)" -- row 2519
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W^2+W2)" -- row 2520
+#guard trioRuleMatrixOf2 "(W^2+W2)" -- row 2520
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0]]
-#guard trioRuleMatrixOf "(W^2+W*w)" -- row 2521
+#guard trioRuleMatrixOf2 "(W^2+W*w)" -- row 2521
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W^2+W*w^2)" -- row 2522
+#guard trioRuleMatrixOf2 "(W^2+W*w^2)" -- row 2522
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,1],[5,3,1]]
-#guard trioRuleMatrixOf "(W^2*2)" -- row 2523
+#guard trioRuleMatrixOf2 "(W^2*2)" -- row 2523
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,1,0],[5,3,1],[6,1,0]]
-#guard trioRuleMatrixOf "(W^2*w)" -- row 2524
+#guard trioRuleMatrixOf2 "(W^2*w)" -- row 2524
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W^2*w^2)" -- row 2525
+#guard trioRuleMatrixOf2 "(W^2*w^2)" -- row 2525
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,1],[3,2,1]]
-#guard trioRuleMatrixOf "(W^2*w^w)" -- row 2526
+#guard trioRuleMatrixOf2 "(W^2*w^w)" -- row 2526
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,1],[4,0,0]]
-#guard trioRuleMatrixOf "(W^3)" -- row 2527
+#guard trioRuleMatrixOf2 "(W^3)" -- row 2527
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "(W^3*w)" -- row 2528
+#guard trioRuleMatrixOf2 "(W^3*w)" -- row 2528
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W^4)" -- row 2529
+#guard trioRuleMatrixOf2 "(W^4)" -- row 2529
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,1],[4,1,0],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "(W^w)" -- row 2530
+#guard trioRuleMatrixOf2 "(W^w)" -- row 2530
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,0,0]]
-#guard trioRuleMatrixOf "(W^w*w)" -- row 2531
+#guard trioRuleMatrixOf2 "(W^w*w)" -- row 2531
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,0,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W^(w2))" -- row 2533
+#guard trioRuleMatrixOf2 "(W^(w2))" -- row 2533
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,0,0],[3,2,1],[4,1,0],[4,0,0]]
-#guard trioRuleMatrixOf "(W^w^2)" -- row 2534
+#guard trioRuleMatrixOf2 "(W^w^2)" -- row 2534
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,0,0],[4,0,0]]
-#guard trioRuleMatrixOf "(W^w^w)" -- row 2535
+#guard trioRuleMatrixOf2 "(W^w^w)" -- row 2535
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,0,0],[5,0,0]]
-#guard trioRuleMatrixOf "(W^W)" -- row 2536
+#guard trioRuleMatrixOf2 "(W^W)" -- row 2536
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,1,0]]
-#guard trioRuleMatrixOf "(W^W*w)" -- row 2537
+#guard trioRuleMatrixOf2 "(W^W*w)" -- row 2537
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W^(W+1))" -- row 2538
+#guard trioRuleMatrixOf2 "(W^(W+1))" -- row 2538
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,1,0],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "(W^(W2))" -- row 2539
+#guard trioRuleMatrixOf2 "(W^(W2))" -- row 2539
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,1,0],[3,2,1],[4,1,0],[4,1,0]]
-#guard trioRuleMatrixOf "(W^W^2)" -- row 2540
+#guard trioRuleMatrixOf2 "(W^W^2)" -- row 2540
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,1,0],[4,1,0]]
-#guard trioRuleMatrixOf "(W^W^W)" -- row 2541
+#guard trioRuleMatrixOf2 "(W^W^W)" -- row 2541
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,1,0]]
-#guard trioRuleMatrixOf "(W^W^W^W)" -- row 2542
+#guard trioRuleMatrixOf2 "(W^W^W^W)" -- row 2542
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,1,0],[6,1,0]]
-#guard trioRuleMatrixOf "psi_1(W_2)" -- row 2543
+#guard trioRuleMatrixOf2 "psi_1(W_2)" -- row 2543
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,0]]
-#guard trioRuleMatrixOf "psi_1(W_2*2)" -- row 2544
+#guard trioRuleMatrixOf2 "psi_1(W_2*2)" -- row 2544
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,0],[5,2,0]]
-#guard trioRuleMatrixOf "psi_1(W_2*W)" -- row 2545
+#guard trioRuleMatrixOf2 "psi_1(W_2*W)" -- row 2545
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,0],[6,1,0]]
-#guard trioRuleMatrixOf "psi_1(W_2^2)" -- row 2546
+#guard trioRuleMatrixOf2 "psi_1(W_2^2)" -- row 2546
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,0],[6,2,0]]
-#guard trioRuleMatrixOf "psi_1(W_2^W_2)" -- row 2547
+#guard trioRuleMatrixOf2 "psi_1(W_2^W_2)" -- row 2547
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,0],[6,2,0],[7,2,0]]
-#guard trioRuleMatrixOf "psi_1(W_3)" -- row 2548
+#guard trioRuleMatrixOf2 "psi_1(W_3)" -- row 2548
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,0],[6,3,0]]
-#guard trioRuleMatrixOf "psi_1(W_4)" -- row 2549
+#guard trioRuleMatrixOf2 "psi_1(W_4)" -- row 2549
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,0],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "psi_1(W_w)" -- row 2550
+#guard trioRuleMatrixOf2 "psi_1(W_w)" -- row 2550
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1]]
-#guard trioRuleMatrixOf "psi_1(W_w*W_2)" -- row 2551
+#guard trioRuleMatrixOf2 "psi_1(W_w*W_2)" -- row 2551
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,0]]
-#guard trioRuleMatrixOf "psi_1(W_w^2)" -- row 2552
+#guard trioRuleMatrixOf2 "psi_1(W_w^2)" -- row 2552
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,0],[5,2,1]]
-#guard trioRuleMatrixOf "psi_1(W_(w+1))" -- row 2553
+#guard trioRuleMatrixOf2 "psi_1(W_(w+1))" -- row 2553
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,0],[7,3,0]]
-#guard trioRuleMatrixOf "psi_1(W_(w2))" -- row 2554
+#guard trioRuleMatrixOf2 "psi_1(W_(w2))" -- row 2554
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,0],[7,3,1]]
-#guard trioRuleMatrixOf "psi_1(W_(w^2))" -- row 2555
+#guard trioRuleMatrixOf2 "psi_1(W_(w^2))" -- row 2555
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,1]]
-#guard trioRuleMatrixOf "psi_1(W_(w^w))" -- row 2556
+#guard trioRuleMatrixOf2 "psi_1(W_(w^w))" -- row 2556
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,1],[7,0,0]]
-#guard trioRuleMatrixOf "psi_1(W_W)" -- row 2557
+#guard trioRuleMatrixOf2 "psi_1(W_W)" -- row 2557
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,1],[7,1,0]]
-#guard trioRuleMatrixOf "psi_1(W_(W*w))" -- row 2558
+#guard trioRuleMatrixOf2 "psi_1(W_(W*w))" -- row 2558
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,1],[7,1,0],[6,2,1]]
-#guard trioRuleMatrixOf "psi_1(W_(W^W))" -- row 2559
+#guard trioRuleMatrixOf2 "psi_1(W_(W^W))" -- row 2559
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,1],[7,1,0],[7,1,0]]
-#guard trioRuleMatrixOf "psi_1(W_psi_1(W_2))" -- row 2560
+#guard trioRuleMatrixOf2 "psi_1(W_psi_1(W_2))" -- row 2560
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,1],[7,1,0],[8,2,0]]
-#guard trioRuleMatrixOf "psi_1(W_psi_1(W_W))" -- row 2561
+#guard trioRuleMatrixOf2 "psi_1(W_psi_1(W_W))" -- row 2561
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,1],[7,1,0],[8,2,1],[9,2,1],[10,1,0]]
-#guard trioRuleMatrixOf "W_2" -- row 2562
+#guard trioRuleMatrixOf2 "W_2" -- row 2562
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0]]
-#guard trioRuleMatrixOf "(W_2+1)" -- row 2674
+#guard trioRuleMatrixOf2 "(W_2+1)" -- row 2674
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,0]]
-#guard trioRuleMatrixOf "(W_2+2)" -- row 2694
+#guard trioRuleMatrixOf2 "(W_2+2)" -- row 2694
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,0],[6,5,0]]
-#guard trioRuleMatrixOf "(W_2+3)" -- row 2697
+#guard trioRuleMatrixOf2 "(W_2+3)" -- row 2697
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,0],[6,5,0],[7,6,0]]
-#guard trioRuleMatrixOf "(W_2+w)" -- row 2698
+#guard trioRuleMatrixOf2 "(W_2+w)" -- row 2698
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1]]
-#guard trioRuleMatrixOf "(W_2+w+1)" -- row 2701
+#guard trioRuleMatrixOf2 "(W_2+w+1)" -- row 2701
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(W_2+w2)" -- row 2702
+#guard trioRuleMatrixOf2 "(W_2+w2)" -- row 2702
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,0],[7,5,1]]
-#guard trioRuleMatrixOf "(W_2+w^2)" -- row 2703
+#guard trioRuleMatrixOf2 "(W_2+w^2)" -- row 2703
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1]]
-#guard trioRuleMatrixOf "(W_2+w^w)" -- row 2704
+#guard trioRuleMatrixOf2 "(W_2+w^w)" -- row 2704
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,0,0]]
-#guard trioRuleMatrixOf "(W_2+W)" -- row 2705
+#guard trioRuleMatrixOf2 "(W_2+W)" -- row 2705
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_2+W+1)" -- row 2708
+#guard trioRuleMatrixOf2 "(W_2+W+1)" -- row 2708
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(W_2+W+w)" -- row 2709
+#guard trioRuleMatrixOf2 "(W_2+W+w)" -- row 2709
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0],[6,4,0],[7,5,1]]
-#guard trioRuleMatrixOf "(W_2+W+w^2)" -- row 2710
+#guard trioRuleMatrixOf2 "(W_2+W+w^2)" -- row 2710
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0],[6,4,0],[7,5,1],[8,5,1]]
-#guard trioRuleMatrixOf "(W_2+W2)" -- row 2711
+#guard trioRuleMatrixOf2 "(W_2+W2)" -- row 2711
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0],[6,4,0],[7,5,1],[8,5,1],[9,1,0]]
-#guard trioRuleMatrixOf "(W_2+W*w)" -- row 2712
+#guard trioRuleMatrixOf2 "(W_2+W*w)" -- row 2712
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W_2+W*w^w)" -- row 2713
+#guard trioRuleMatrixOf2 "(W_2+W*w^w)" -- row 2713
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0],[6,4,1],[7,0,0]]
-#guard trioRuleMatrixOf "(W_2+W^2)" -- row 2714
+#guard trioRuleMatrixOf2 "(W_2+W^2)" -- row 2714
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0],[6,4,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_2+W^W)" -- row 2715
+#guard trioRuleMatrixOf2 "(W_2+W^W)" -- row 2715
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0],[7,1,0]]
-#guard trioRuleMatrixOf "(W_2+psi_1(W_2))" -- row 2716
+#guard trioRuleMatrixOf2 "(W_2+psi_1(W_2))" -- row 2716
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0],[8,2,0]]
-#guard trioRuleMatrixOf "(W_2+psi_1(W_w))" -- row 2717
+#guard trioRuleMatrixOf2 "(W_2+psi_1(W_w))" -- row 2717
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0],[8,2,1]]
-#guard trioRuleMatrixOf "(W_2*2)" -- row 2718
+#guard trioRuleMatrixOf2 "(W_2*2)" -- row 2718
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0]]
-#guard trioRuleMatrixOf "(W_2*2+1)" -- row 2721
+#guard trioRuleMatrixOf2 "(W_2*2+1)" -- row 2721
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(W_2*2+w)" -- row 2722
+#guard trioRuleMatrixOf2 "(W_2*2+w)" -- row 2722
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0],[6,4,0],[7,5,1]]
-#guard trioRuleMatrixOf "(W_2*2+W)" -- row 2724
+#guard trioRuleMatrixOf2 "(W_2*2+W)" -- row 2724
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0],[6,4,0],[7,5,1],[8,5,1],[9,1,0]]
-#guard trioRuleMatrixOf "(W_2*3)" -- row 2725
+#guard trioRuleMatrixOf2 "(W_2*3)" -- row 2725
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0],[6,4,0],[7,5,1],[8,5,1],[9,2,0]]
-#guard trioRuleMatrixOf "(W_2*w)" -- row 2726
+#guard trioRuleMatrixOf2 "(W_2*w)" -- row 2726
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1]]
-#guard trioRuleMatrixOf "(W_2*w+1)" -- row 2739
+#guard trioRuleMatrixOf2 "(W_2*w+1)" -- row 2739
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[4,3,0],[5,4,0]]
-#guard trioRuleMatrixOf "(W_2*w+w)" -- row 2740
+#guard trioRuleMatrixOf2 "(W_2*w+w)" -- row 2740
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[4,3,0],[5,4,1]]
-#guard trioRuleMatrixOf "(W_2*w+w^2)" -- row 2741
+#guard trioRuleMatrixOf2 "(W_2*w+w^2)" -- row 2741
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[4,3,0],[5,4,1],[6,4,1]]
-#guard trioRuleMatrixOf "(W_2*w+W)" -- row 2742
+#guard trioRuleMatrixOf2 "(W_2*w+W)" -- row 2742
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[4,3,0],[5,4,1],[6,4,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_2*w+W_2)" -- row 2743
+#guard trioRuleMatrixOf2 "(W_2*w+W_2)" -- row 2743
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[4,3,0],[5,4,1],[6,4,1],[7,2,0]]
-#guard trioRuleMatrixOf "(W_2*w2)" -- row 2744
+#guard trioRuleMatrixOf2 "(W_2*w2)" -- row 2744
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[4,3,0],[5,4,1],[6,4,1],[7,2,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W_2*w^2)" -- row 2745
+#guard trioRuleMatrixOf2 "(W_2*w^2)" -- row 2745
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[4,3,1]]
-#guard trioRuleMatrixOf "(W_2*w^w)" -- row 2746
+#guard trioRuleMatrixOf2 "(W_2*w^w)" -- row 2746
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,0,0]]
-#guard trioRuleMatrixOf "(W_2*W)" -- row 2747
+#guard trioRuleMatrixOf2 "(W_2*W)" -- row 2747
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,1,0]]
-#guard trioRuleMatrixOf "(W_2*W+1)" -- row 2748
+#guard trioRuleMatrixOf2 "(W_2*W+1)" -- row 2748
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,1,0],[4,3,0],[5,4,0]]
-#guard trioRuleMatrixOf "(W_2*W+w)" -- row 2749
+#guard trioRuleMatrixOf2 "(W_2*W+w)" -- row 2749
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,1,0],[4,3,0],[5,4,1]]
-#guard trioRuleMatrixOf "(W_2*W+W)" -- row 2750
+#guard trioRuleMatrixOf2 "(W_2*W+W)" -- row 2750
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,1,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_2*W+W_2)" -- row 2751
+#guard trioRuleMatrixOf2 "(W_2*W+W_2)" -- row 2751
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,1,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0]]
-#guard trioRuleMatrixOf "(W_2*W2)" -- row 2752
+#guard trioRuleMatrixOf2 "(W_2*W2)" -- row 2752
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,1,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0],[6,4,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_2*W*w)" -- row 2753
+#guard trioRuleMatrixOf2 "(W_2*W*w)" -- row 2753
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,1,0],[4,3,1]]
-#guard trioRuleMatrixOf "(W_2*W^2)" -- row 2754
+#guard trioRuleMatrixOf2 "(W_2*W^2)" -- row 2754
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,1,0],[4,3,1],[5,1,0]]
-#guard trioRuleMatrixOf "(W_2^2)" -- row 2758
+#guard trioRuleMatrixOf2 "(W_2^2)" -- row 2758
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,2,0]]
-#guard trioRuleMatrixOf "(W_2^2+1)" -- row 2759
+#guard trioRuleMatrixOf2 "(W_2^2+1)" -- row 2759
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,2,0],[4,3,0],[5,4,0]]
-#guard trioRuleMatrixOf "(W_2^2+w)" -- row 2760
+#guard trioRuleMatrixOf2 "(W_2^2+w)" -- row 2760
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,2,0],[4,3,0],[5,4,1]]
-#guard trioRuleMatrixOf "(W_2^2+W)" -- row 2761
+#guard trioRuleMatrixOf2 "(W_2^2+W)" -- row 2761
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_2^2+W_2)" -- row 2762
+#guard trioRuleMatrixOf2 "(W_2^2+W_2)" -- row 2762
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0]]
-#guard trioRuleMatrixOf "(W_2^2*2)" -- row 2763
+#guard trioRuleMatrixOf2 "(W_2^2*2)" -- row 2763
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0],[6,4,1],[7,2,0]]
-#guard trioRuleMatrixOf "(W_2^2*w)" -- row 2764
+#guard trioRuleMatrixOf2 "(W_2^2*w)" -- row 2764
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,2,0],[4,3,1]]
-#guard trioRuleMatrixOf "(W_2^2*W)" -- row 2765
+#guard trioRuleMatrixOf2 "(W_2^2*W)" -- row 2765
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,2,0],[4,3,1],[5,1,0]]
-#guard trioRuleMatrixOf "(W_2^3)" -- row 2766
+#guard trioRuleMatrixOf2 "(W_2^3)" -- row 2766
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,1],[5,2,0],[4,3,1],[5,2,0]]
-#guard trioRuleMatrixOf "(W_2^w)" -- row 2767
+#guard trioRuleMatrixOf2 "(W_2^w)" -- row 2767
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[5,0,0]]
-#guard trioRuleMatrixOf "(W_2^W)" -- row 2768
+#guard trioRuleMatrixOf2 "(W_2^W)" -- row 2768
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[5,1,0]]
-#guard trioRuleMatrixOf "(W_2^W_2)" -- row 2769
+#guard trioRuleMatrixOf2 "(W_2^W_2)" -- row 2769
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[5,2,0]]
-#guard trioRuleMatrixOf "(W_2^W_2^W_2)" -- row 2770
+#guard trioRuleMatrixOf2 "(W_2^W_2^W_2)" -- row 2770
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[6,2,0]]
-#guard trioRuleMatrixOf "psi_2(W_3)" -- row 2771
+#guard trioRuleMatrixOf2 "psi_2(W_3)" -- row 2771
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[6,3,0]]
-#guard trioRuleMatrixOf "psi_2(W_w)" -- row 2772
+#guard trioRuleMatrixOf2 "psi_2(W_w)" -- row 2772
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[6,3,1]]
-#guard trioRuleMatrixOf "W_3" -- row 2773
+#guard trioRuleMatrixOf2 "W_3" -- row 2773
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0]]
-#guard trioRuleMatrixOf "(W_3+1)" -- row 2793
+#guard trioRuleMatrixOf2 "(W_3+1)" -- row 2793
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,0],[6,5,0]]
-#guard trioRuleMatrixOf "(W_3+2)" -- row 2794
+#guard trioRuleMatrixOf2 "(W_3+2)" -- row 2794
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,0],[6,5,0],[7,6,0]]
-#guard trioRuleMatrixOf "(W_3+w)" -- row 2795
+#guard trioRuleMatrixOf2 "(W_3+w)" -- row 2795
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,0],[6,5,1]]
-#guard trioRuleMatrixOf "(W_3+w^2)" -- row 2796
+#guard trioRuleMatrixOf2 "(W_3+w^2)" -- row 2796
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,0],[6,5,1],[7,5,1]]
-#guard trioRuleMatrixOf "(W_3+W)" -- row 2797
+#guard trioRuleMatrixOf2 "(W_3+W)" -- row 2797
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,0],[6,5,1],[7,5,1],[8,1,0]]
-#guard trioRuleMatrixOf "(W_3+W_2)" -- row 2798
+#guard trioRuleMatrixOf2 "(W_3+W_2)" -- row 2798
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,0],[6,5,1],[7,5,1],[8,2,0]]
-#guard trioRuleMatrixOf "(W_3*2)" -- row 2799
+#guard trioRuleMatrixOf2 "(W_3*2)" -- row 2799
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,0],[6,5,1],[7,5,1],[8,3,0]]
-#guard trioRuleMatrixOf "(W_3*w)" -- row 2800
+#guard trioRuleMatrixOf2 "(W_3*w)" -- row 2800
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,1]]
-#guard trioRuleMatrixOf "(W_3*w^2)" -- row 2801
+#guard trioRuleMatrixOf2 "(W_3*w^2)" -- row 2801
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,1],[5,4,1]]
-#guard trioRuleMatrixOf "(W_3*W)" -- row 2802
+#guard trioRuleMatrixOf2 "(W_3*W)" -- row 2802
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,1],[6,1,0]]
-#guard trioRuleMatrixOf "(W_3*W_2)" -- row 2803
+#guard trioRuleMatrixOf2 "(W_3*W_2)" -- row 2803
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,1],[6,2,0]]
-#guard trioRuleMatrixOf "(W_3^2)" -- row 2804
+#guard trioRuleMatrixOf2 "(W_3^2)" -- row 2804
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[5,4,1],[6,3,0]]
-#guard trioRuleMatrixOf "(W_3^w)" -- row 2805
+#guard trioRuleMatrixOf2 "(W_3^w)" -- row 2805
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[6,0,0]]
-#guard trioRuleMatrixOf "(W_3^W_3)" -- row 2806
+#guard trioRuleMatrixOf2 "(W_3^W_3)" -- row 2806
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[6,3,0]]
-#guard trioRuleMatrixOf "psi_3(W_4)" -- row 2807
+#guard trioRuleMatrixOf2 "psi_3(W_4)" -- row 2807
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "W_4" -- row 2808
+#guard trioRuleMatrixOf2 "W_4" -- row 2808
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,4,0]]
-#guard trioRuleMatrixOf "W_5" -- row 2809
+#guard trioRuleMatrixOf2 "W_5" -- row 2809
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,4,0],[4,4,0],[5,5,1],[6,5,1],[7,5,0]]
-#guard trioRuleMatrixOf "W_6" -- row 2810
+#guard trioRuleMatrixOf2 "W_6" -- row 2810
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,0],[4,4,1],[5,4,1],[6,4,0],[4,4,0],[5,5,1],[6,5,1],[7,5,0],[5,5,0],[6,6,1],[7,6,1],[8,6,0]]
-#guard trioRuleMatrixOf "W_w" -- row 2811
+#guard trioRuleMatrixOf2 "W_w" -- row 2811
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w+1)" -- row 3272
+#guard trioRuleMatrixOf2 "(W_w+1)" -- row 3272
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(W_w+2)" -- row 3305
+#guard trioRuleMatrixOf2 "(W_w+2)" -- row 3305
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W_w+3)" -- row 3306
+#guard trioRuleMatrixOf2 "(W_w+3)" -- row 3306
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(W_w+w)" -- row 3307
+#guard trioRuleMatrixOf2 "(W_w+w)" -- row 3307
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_w+w+1)" -- row 3329
+#guard trioRuleMatrixOf2 "(W_w+w+1)" -- row 3329
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(W_w+w+2)" -- row 3331
+#guard trioRuleMatrixOf2 "(W_w+w+2)" -- row 3331
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W_w+w2)" -- row 3332
+#guard trioRuleMatrixOf2 "(W_w+w2)" -- row 3332
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_w+w3)" -- row 3333
+#guard trioRuleMatrixOf2 "(W_w+w3)" -- row 3333
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,0],[7,4,1],[8,4,0],[9,5,1]]
-#guard trioRuleMatrixOf "(W_w+w^2)" -- row 3334
+#guard trioRuleMatrixOf2 "(W_w+w^2)" -- row 3334
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "(W_w+w^3)" -- row 3335
+#guard trioRuleMatrixOf2 "(W_w+w^3)" -- row 3335
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "(W_w+w^w)" -- row 3336
+#guard trioRuleMatrixOf2 "(W_w+w^w)" -- row 3336
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,0,0]]
-#guard trioRuleMatrixOf "(W_w+psi(W_w))" -- row 3337
+#guard trioRuleMatrixOf2 "(W_w+psi(W_w))" -- row 3337
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,0,0],[8,1,1]]
-#guard trioRuleMatrixOf "(W_w+W)" -- row 3338
+#guard trioRuleMatrixOf2 "(W_w+W)" -- row 3338
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_w+W+1)" -- row 3367
+#guard trioRuleMatrixOf2 "(W_w+W+1)" -- row 3367
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W_w+W+2)" -- row 3368
+#guard trioRuleMatrixOf2 "(W_w+W+2)" -- row 3368
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,0],[8,5,0],[9,6,0]]
-#guard trioRuleMatrixOf "(W_w+W+w)" -- row 3369
+#guard trioRuleMatrixOf2 "(W_w+W+w)" -- row 3369
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,0],[8,5,1]]
-#guard trioRuleMatrixOf "(W_w+W+w^2)" -- row 3370
+#guard trioRuleMatrixOf2 "(W_w+W+w^2)" -- row 3370
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,0],[8,5,1],[9,5,1]]
-#guard trioRuleMatrixOf "(W_w+W2)" -- row 3371
+#guard trioRuleMatrixOf2 "(W_w+W2)" -- row 3371
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,0],[8,5,1],[9,5,1],[10,1,0]]
-#guard trioRuleMatrixOf "(W_w+W*w)" -- row 3372
+#guard trioRuleMatrixOf2 "(W_w+W*w)" -- row 3372
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_w+W^2)" -- row 3373
+#guard trioRuleMatrixOf2 "(W_w+W^2)" -- row 3373
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,1],[8,1,0]]
-#guard trioRuleMatrixOf "(W_w+W^W)" -- row 3374
+#guard trioRuleMatrixOf2 "(W_w+W^W)" -- row 3374
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[8,1,0]]
-#guard trioRuleMatrixOf "(W_w+psi_1(W_w))" -- row 3375
+#guard trioRuleMatrixOf2 "(W_w+psi_1(W_w))" -- row 3375
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[9,2,1]]
-#guard trioRuleMatrixOf "(W_w+W_2)" -- row 3376
+#guard trioRuleMatrixOf2 "(W_w+W_2)" -- row 3376
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0]]
-#guard trioRuleMatrixOf "(W_w+W_3)" -- row 3377
+#guard trioRuleMatrixOf2 "(W_w+W_3)" -- row 3377
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,1],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1],[9,3,0]]
-#guard trioRuleMatrixOf "(W_w*2)" -- row 3378
+#guard trioRuleMatrixOf2 "(W_w*2)" -- row 3378
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w*2+1)" -- row 3400
+#guard trioRuleMatrixOf2 "(W_w*2+1)" -- row 3400
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(W_w*2+2)" -- row 3401
+#guard trioRuleMatrixOf2 "(W_w*2+2)" -- row 3401
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W_w*2+w)" -- row 3402
+#guard trioRuleMatrixOf2 "(W_w*2+w)" -- row 3402
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_w*2+W)" -- row 3403
+#guard trioRuleMatrixOf2 "(W_w*2+W)" -- row 3403
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0]]
-#guard trioRuleMatrixOf "(W_w*3)" -- row 3404
+#guard trioRuleMatrixOf2 "(W_w*3)" -- row 3404
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w*4)" -- row 3405
+#guard trioRuleMatrixOf2 "(W_w*4)" -- row 3405
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[8,4,0],[9,5,1],[10,5,1],[11,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w*w)" -- row 3406
+#guard trioRuleMatrixOf2 "(W_w*w)" -- row 3406
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1]]
-#guard trioRuleMatrixOf "(W_w*w+1)" -- row 3448
+#guard trioRuleMatrixOf2 "(W_w*w+1)" -- row 3448
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(W_w*w+w)" -- row 3449
+#guard trioRuleMatrixOf2 "(W_w*w+w)" -- row 3449
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_w*w+W_w)" -- row 3451
+#guard trioRuleMatrixOf2 "(W_w*w+W_w)" -- row 3451
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w*w2)" -- row 3454
+#guard trioRuleMatrixOf2 "(W_w*w2)" -- row 3454
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1]]
-#guard trioRuleMatrixOf "(W_w*w3)" -- row 3455
+#guard trioRuleMatrixOf2 "(W_w*w3)" -- row 3455
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[8,4,1]]
-#guard trioRuleMatrixOf "(W_w*w^2)" -- row 3456
+#guard trioRuleMatrixOf2 "(W_w*w^2)" -- row 3456
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(W_w*w^3)" -- row 3457
+#guard trioRuleMatrixOf2 "(W_w*w^3)" -- row 3457
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(W_w*w^w)" -- row 3458
+#guard trioRuleMatrixOf2 "(W_w*w^w)" -- row 3458
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,0,0]]
-#guard trioRuleMatrixOf "(W_w*psi(W_w))" -- row 3459
+#guard trioRuleMatrixOf2 "(W_w*psi(W_w))" -- row 3459
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,0,0],[6,1,1]]
-#guard trioRuleMatrixOf "(W_w*W)" -- row 3460
+#guard trioRuleMatrixOf2 "(W_w*W)" -- row 3460
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0]]
-#guard trioRuleMatrixOf "(W_w*W+1)" -- row 3478
+#guard trioRuleMatrixOf2 "(W_w*W+1)" -- row 3478
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W_w*W+w)" -- row 3479
+#guard trioRuleMatrixOf2 "(W_w*W+w)" -- row 3479
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[5,3,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W_w*W*w)" -- row 3483
+#guard trioRuleMatrixOf2 "(W_w*W*w)" -- row 3483
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_w*W*w^2)" -- row 3484
+#guard trioRuleMatrixOf2 "(W_w*W*w^2)" -- row 3484
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[5,3,1],[5,3,1]]
-#guard trioRuleMatrixOf "(W_w*W*w^w)" -- row 3485
+#guard trioRuleMatrixOf2 "(W_w*W*w^w)" -- row 3485
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[5,3,1],[6,0,0]]
-#guard trioRuleMatrixOf "(W_w*W^2)" -- row 3486
+#guard trioRuleMatrixOf2 "(W_w*W^2)" -- row 3486
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[5,3,1],[6,1,0]]
-#guard trioRuleMatrixOf "(W_w*W^3)" -- row 3487
+#guard trioRuleMatrixOf2 "(W_w*W^3)" -- row 3487
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[5,3,1],[6,1,0],[5,3,1],[6,1,0]]
-#guard trioRuleMatrixOf "(W_w*W^w)" -- row 3488
+#guard trioRuleMatrixOf2 "(W_w*W^w)" -- row 3488
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[6,0,0]]
-#guard trioRuleMatrixOf "(W_w*W^W)" -- row 3489
+#guard trioRuleMatrixOf2 "(W_w*W^W)" -- row 3489
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[6,1,0]]
-#guard trioRuleMatrixOf "(W_w*psi_1(W_w))" -- row 3490
+#guard trioRuleMatrixOf2 "(W_w*psi_1(W_w))" -- row 3490
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[7,2,1]]
-#guard trioRuleMatrixOf "(W_w*W_2)" -- row 3491
+#guard trioRuleMatrixOf2 "(W_w*W_2)" -- row 3491
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0]]
-#guard trioRuleMatrixOf "(W_w*W_3)" -- row 3493
+#guard trioRuleMatrixOf2 "(W_w*W_3)" -- row 3493
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,1],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1],[7,3,0]]
-#guard trioRuleMatrixOf "(W_w^2)" -- row 3494
+#guard trioRuleMatrixOf2 "(W_w^2)" -- row 3494
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w^2+1)" -- row 3518
+#guard trioRuleMatrixOf2 "(W_w^2+1)" -- row 3518
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(W_w^2+w)" -- row 3519
+#guard trioRuleMatrixOf2 "(W_w^2+w)" -- row 3519
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_w^2+W)" -- row 3520
+#guard trioRuleMatrixOf2 "(W_w^2+W)" -- row 3520
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_w^2+W_2)" -- row 3521
+#guard trioRuleMatrixOf2 "(W_w^2+W_2)" -- row 3521
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0]]
-#guard trioRuleMatrixOf "(W_w^2+W_w)" -- row 3522
+#guard trioRuleMatrixOf2 "(W_w^2+W_w)" -- row 3522
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w^2+W_w+1)" -- row 3523
+#guard trioRuleMatrixOf2 "(W_w^2+W_w+1)" -- row 3523
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(W_w^2+W_w*2)" -- row 3524
+#guard trioRuleMatrixOf2 "(W_w^2+W_w*2)" -- row 3524
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w^2+W_w*w)" -- row 3525
+#guard trioRuleMatrixOf2 "(W_w^2+W_w*w)" -- row 3525
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1]]
-#guard trioRuleMatrixOf "(W_w^2+W_w*w^w)" -- row 3526
+#guard trioRuleMatrixOf2 "(W_w^2+W_w*w^w)" -- row 3526
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1],[7,0,0]]
-#guard trioRuleMatrixOf "(W_w^2+W_w*W)" -- row 3527
+#guard trioRuleMatrixOf2 "(W_w^2+W_w*W)" -- row 3527
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_w^2*2)" -- row 3528
+#guard trioRuleMatrixOf2 "(W_w^2*2)" -- row 3528
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1],[7,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w^2*2+1)" -- row 3529
+#guard trioRuleMatrixOf2 "(W_w^2*2+1)" -- row 3529
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1],[7,1,0],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(W_w^2*3)" -- row 3530
+#guard trioRuleMatrixOf2 "(W_w^2*3)" -- row 3530
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1],[7,1,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[8,4,1],[9,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w^2*w)" -- row 3531
+#guard trioRuleMatrixOf2 "(W_w^2*w)" -- row 3531
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1]]
-#guard trioRuleMatrixOf "(W_w^2*w^2)" -- row 3532
+#guard trioRuleMatrixOf2 "(W_w^2*w^2)" -- row 3532
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(W_w^2*w^w)" -- row 3533
+#guard trioRuleMatrixOf2 "(W_w^2*w^w)" -- row 3533
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1],[5,0,0]]
-#guard trioRuleMatrixOf "(W_w^2*W)" -- row 3534
+#guard trioRuleMatrixOf2 "(W_w^2*W)" -- row 3534
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1],[5,1,0]]
-#guard trioRuleMatrixOf "(W_w^2*W_2)" -- row 3535
+#guard trioRuleMatrixOf2 "(W_w^2*W_2)" -- row 3535
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0],[5,3,1],[6,2,0]]
-#guard trioRuleMatrixOf "(W_w^3)" -- row 3536
+#guard trioRuleMatrixOf2 "(W_w^3)" -- row 3536
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w^3*w)" -- row 3537
+#guard trioRuleMatrixOf2 "(W_w^3*w)" -- row 3537
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1]]
-#guard trioRuleMatrixOf "(W_w^3*W)" -- row 3538
+#guard trioRuleMatrixOf2 "(W_w^3*W)" -- row 3538
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1],[5,1,0]]
-#guard trioRuleMatrixOf "(W_w^4)" -- row 3539
+#guard trioRuleMatrixOf2 "(W_w^4)" -- row 3539
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w^w)" -- row 3540
+#guard trioRuleMatrixOf2 "(W_w^w)" -- row 3540
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[5,0,0]]
-#guard trioRuleMatrixOf "(W_w^W)" -- row 3541
+#guard trioRuleMatrixOf2 "(W_w^W)" -- row 3541
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[5,1,0]]
-#guard trioRuleMatrixOf "(W_w^W_2)" -- row 3542
+#guard trioRuleMatrixOf2 "(W_w^W_2)" -- row 3542
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[6,2,0]]
-#guard trioRuleMatrixOf "(W_w^W_w)" -- row 3543
+#guard trioRuleMatrixOf2 "(W_w^W_w)" -- row 3543
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[5,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w^W_w^2)" -- row 3544
+#guard trioRuleMatrixOf2 "(W_w^W_w^2)" -- row 3544
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[5,1,0],[5,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w^W_w^W_w)" -- row 3545
+#guard trioRuleMatrixOf2 "(W_w^W_w^W_w)" -- row 3545
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "psi_W_(w+1)(W_(w+1))" -- row 3546
+#guard trioRuleMatrixOf2 "psi_W_(w+1)(W_(w+1))" -- row 3546
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,0]]
-#guard trioRuleMatrixOf "psi_W_(w+1)(W_(w+2))" -- row 3547
+#guard trioRuleMatrixOf2 "psi_W_(w+1)(W_(w+2))" -- row 3547
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,0],[7,3,0]]
-#guard trioRuleMatrixOf "psi_W_(w+1)(W_(w2))" -- row 3548
+#guard trioRuleMatrixOf2 "psi_W_(w+1)(W_(w2))" -- row 3548
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,1]]
-#guard trioRuleMatrixOf "psi_W_(w+1)(W_(w^2))" -- row 3549
+#guard trioRuleMatrixOf2 "psi_W_(w+1)(W_(w^2))" -- row 3549
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,1],[7,2,1]]
-#guard trioRuleMatrixOf "psi_W_(w+1)(W_W)" -- row 3550
+#guard trioRuleMatrixOf2 "psi_W_(w+1)(W_W)" -- row 3550
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,1],[7,2,1],[8,1,0]]
-#guard trioRuleMatrixOf "W_(w+1)" -- row 3553
+#guard trioRuleMatrixOf2 "W_(w+1)" -- row 3553
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0]]
-#guard trioRuleMatrixOf "(W_(w+1)+1)" -- row 3688
+#guard trioRuleMatrixOf2 "(W_(w+1)+1)" -- row 3688
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W_(w+1)+2)" -- row 3697
+#guard trioRuleMatrixOf2 "(W_(w+1)+2)" -- row 3697
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(W_(w+1)+w)" -- row 3698
+#guard trioRuleMatrixOf2 "(W_(w+1)+w)" -- row 3698
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W_(w+1)+w+1)" -- row 3700
+#guard trioRuleMatrixOf2 "(W_(w+1)+w+1)" -- row 3700
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W_(w+1)+w2)" -- row 3701
+#guard trioRuleMatrixOf2 "(W_(w+1)+w2)" -- row 3701
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,0],[8,5,1]]
-#guard trioRuleMatrixOf "(W_(w+1)+w^2)" -- row 3702
+#guard trioRuleMatrixOf2 "(W_(w+1)+w^2)" -- row 3702
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1]]
-#guard trioRuleMatrixOf "(W_(w+1)+w^3)" -- row 3703
+#guard trioRuleMatrixOf2 "(W_(w+1)+w^3)" -- row 3703
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[7,4,1]]
-#guard trioRuleMatrixOf "(W_(w+1)+W)" -- row 3704
+#guard trioRuleMatrixOf2 "(W_(w+1)+W)" -- row 3704
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0]]
-#guard trioRuleMatrixOf "(W_(w+1)+W_w)" -- row 3705
+#guard trioRuleMatrixOf2 "(W_(w+1)+W_w)" -- row 3705
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_(w+1)*2)" -- row 3707
+#guard trioRuleMatrixOf2 "(W_(w+1)*2)" -- row 3707
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0]]
-#guard trioRuleMatrixOf "(W_(w+1)*2+1)" -- row 3708
+#guard trioRuleMatrixOf2 "(W_(w+1)*2+1)" -- row 3708
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W_(w+1)*3)" -- row 3710
+#guard trioRuleMatrixOf2 "(W_(w+1)*3)" -- row 3710
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0],[7,4,0],[8,5,1],[9,5,1],[10,2,0]]
-#guard trioRuleMatrixOf "(W_(w+1)*w)" -- row 3711
+#guard trioRuleMatrixOf2 "(W_(w+1)*w)" -- row 3711
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_(w+1)*w+1)" -- row 3721
+#guard trioRuleMatrixOf2 "(W_(w+1)*w+1)" -- row 3721
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W_(w+1)*w+W_(w+1))" -- row 3722
+#guard trioRuleMatrixOf2 "(W_(w+1)*w+W_(w+1))" -- row 3722
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[5,3,0],[6,4,1],[7,4,1],[8,2,0]]
-#guard trioRuleMatrixOf "(W_(w+1)*w2)" -- row 3723
+#guard trioRuleMatrixOf2 "(W_(w+1)*w2)" -- row 3723
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[5,3,0],[6,4,1],[7,4,1],[8,2,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_(w+1)*w^2)" -- row 3724
+#guard trioRuleMatrixOf2 "(W_(w+1)*w^2)" -- row 3724
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[5,3,1]]
-#guard trioRuleMatrixOf "(W_(w+1)*W)" -- row 3725
+#guard trioRuleMatrixOf2 "(W_(w+1)*W)" -- row 3725
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0]]
-#guard trioRuleMatrixOf "(W_(w+1)*W_w)" -- row 3726
+#guard trioRuleMatrixOf2 "(W_(w+1)*W_w)" -- row 3726
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_(w+1)^2)" -- row 3727
+#guard trioRuleMatrixOf2 "(W_(w+1)^2)" -- row 3727
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0]]
-#guard trioRuleMatrixOf "(W_(w+1)^W_(w+1))" -- row 3728
+#guard trioRuleMatrixOf2 "(W_(w+1)^W_(w+1))" -- row 3728
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[6,2,0]]
-#guard trioRuleMatrixOf "psi_W_(w+2)(W_(w+2))" -- row 3729
+#guard trioRuleMatrixOf2 "psi_W_(w+2)(W_(w+2))" -- row 3729
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[7,3,0]]
-#guard trioRuleMatrixOf "psi_W_(w+2)(W_W)" -- row 3730
+#guard trioRuleMatrixOf2 "psi_W_(w+2)(W_W)" -- row 3730
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[7,3,1],[8,3,1],[9,1,0]]
-#guard trioRuleMatrixOf "W_(w+2)" -- row 3731
+#guard trioRuleMatrixOf2 "W_(w+2)" -- row 3731
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0]]
-#guard trioRuleMatrixOf "(W_(w+2)+1)" -- row 3770
+#guard trioRuleMatrixOf2 "(W_(w+2)+1)" -- row 3770
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(W_(w+2)+w)" -- row 3778
+#guard trioRuleMatrixOf2 "(W_(w+2)+w)" -- row 3778
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1]]
-#guard trioRuleMatrixOf "(W_(w+2)+w+1)" -- row 3779
+#guard trioRuleMatrixOf2 "(W_(w+2)+w+1)" -- row 3779
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,0],[9,6,0]]
-#guard trioRuleMatrixOf "(W_(w+2)+w2)" -- row 3780
+#guard trioRuleMatrixOf2 "(W_(w+2)+w2)" -- row 3780
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,0],[9,6,1]]
-#guard trioRuleMatrixOf "(W_(w+2)+w^2)" -- row 3781
+#guard trioRuleMatrixOf2 "(W_(w+2)+w^2)" -- row 3781
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1]]
-#guard trioRuleMatrixOf "(W_(w+2)+W)" -- row 3782
+#guard trioRuleMatrixOf2 "(W_(w+2)+W)" -- row 3782
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1],[9,1,0]]
-#guard trioRuleMatrixOf "(W_(w+2)+W_w)" -- row 3783
+#guard trioRuleMatrixOf2 "(W_(w+2)+W_w)" -- row 3783
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1],[9,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_(w+2)+W_(w+1))" -- row 3784
+#guard trioRuleMatrixOf2 "(W_(w+2)+W_(w+1))" -- row 3784
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1],[9,2,0]]
-#guard trioRuleMatrixOf "(W_(w+2)*2)" -- row 3785
+#guard trioRuleMatrixOf2 "(W_(w+2)*2)" -- row 3785
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1],[9,3,0]]
-#guard trioRuleMatrixOf "(W_(w+2)*3)" -- row 3786
+#guard trioRuleMatrixOf2 "(W_(w+2)*3)" -- row 3786
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1],[9,3,0],[8,5,0],[9,6,1],[10,6,1],[11,3,0]]
-#guard trioRuleMatrixOf "(W_(w+2)*w)" -- row 3787
+#guard trioRuleMatrixOf2 "(W_(w+2)*w)" -- row 3787
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W_(w+2)*w^2)" -- row 3788
+#guard trioRuleMatrixOf2 "(W_(w+2)*w^2)" -- row 3788
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1],[6,4,1]]
-#guard trioRuleMatrixOf "(W_(w+2)*W)" -- row 3789
+#guard trioRuleMatrixOf2 "(W_(w+2)*W)" -- row 3789
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_(w+2)*W_w)" -- row 3790
+#guard trioRuleMatrixOf2 "(W_(w+2)*W_w)" -- row 3790
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1],[7,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_(w+2)*W_(w+1))" -- row 3791
+#guard trioRuleMatrixOf2 "(W_(w+2)*W_(w+1))" -- row 3791
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1],[7,2,0]]
-#guard trioRuleMatrixOf "(W_(w+2)^2)" -- row 3792
+#guard trioRuleMatrixOf2 "(W_(w+2)^2)" -- row 3792
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1],[7,3,0]]
-#guard trioRuleMatrixOf "(W_(w+2)^W_(w+2))" -- row 3793
+#guard trioRuleMatrixOf2 "(W_(w+2)^W_(w+2))" -- row 3793
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[7,3,0]]
-#guard trioRuleMatrixOf "psi_W_(w+3)(W_(w+3))" -- row 3794
+#guard trioRuleMatrixOf2 "psi_W_(w+3)(W_(w+3))" -- row 3794
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[8,4,0]]
-#guard trioRuleMatrixOf "W_(w+3)" -- row 3795
+#guard trioRuleMatrixOf2 "W_(w+3)" -- row 3795
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,4,0]]
-#guard trioRuleMatrixOf "(W_(w+3)+1)" -- row 3800
+#guard trioRuleMatrixOf2 "(W_(w+3)+1)" -- row 3800
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,4,0],[5,4,0],[6,5,1],[7,5,1],[8,4,0],[7,5,0],[8,6,0]]
-#guard trioRuleMatrixOf "(W_(w+3)*w)" -- row 3801
+#guard trioRuleMatrixOf2 "(W_(w+3)*w)" -- row 3801
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,4,0],[5,4,0],[6,5,1],[7,5,1],[8,4,0],[7,5,1]]
-#guard trioRuleMatrixOf "W_(w+4)" -- row 3802
+#guard trioRuleMatrixOf2 "W_(w+4)" -- row 3802
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,4,0],[5,4,0],[6,5,1],[7,5,1],[8,5,0]]
-#guard trioRuleMatrixOf "W_(w2)" -- row 3803
+#guard trioRuleMatrixOf2 "W_(w2)" -- row 3803
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W_(w2)+1)" -- row 3867
+#guard trioRuleMatrixOf2 "(W_(w2)+1)" -- row 3867
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(W_(w2)+2)" -- row 3871
+#guard trioRuleMatrixOf2 "(W_(w2)+2)" -- row 3871
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W_(w2)+w)" -- row 3872
+#guard trioRuleMatrixOf2 "(W_(w2)+w)" -- row 3872
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_(w2)+w+1)" -- row 3873
+#guard trioRuleMatrixOf2 "(W_(w2)+w+1)" -- row 3873
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,0],[9,5,0]]
-#guard trioRuleMatrixOf "(W_(w2)+w2)" -- row 3874
+#guard trioRuleMatrixOf2 "(W_(w2)+w2)" -- row 3874
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,0],[9,5,1]]
-#guard trioRuleMatrixOf "(W_(w2)+w^2)" -- row 3875
+#guard trioRuleMatrixOf2 "(W_(w2)+w^2)" -- row 3875
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1]]
-#guard trioRuleMatrixOf "(W_(w2)+w^w)" -- row 3876
+#guard trioRuleMatrixOf2 "(W_(w2)+w^w)" -- row 3876
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,0,0]]
-#guard trioRuleMatrixOf "(W_(w2)+W)" -- row 3877
+#guard trioRuleMatrixOf2 "(W_(w2)+W)" -- row 3877
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0]]
-#guard trioRuleMatrixOf "(W_(w2)+W_w)" -- row 3878
+#guard trioRuleMatrixOf2 "(W_(w2)+W_w)" -- row 3878
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_(w2)+W_(w+1))" -- row 3879
+#guard trioRuleMatrixOf2 "(W_(w2)+W_(w+1))" -- row 3879
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0]]
-#guard trioRuleMatrixOf "(W_(w2)*2)" -- row 3880
+#guard trioRuleMatrixOf2 "(W_(w2)*2)" -- row 3880
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W_(w2)*3)" -- row 3881
+#guard trioRuleMatrixOf2 "(W_(w2)*3)" -- row 3881
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[8,4,0],[9,5,1],[10,5,1],[11,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W_(w2)*w)" -- row 3882
+#guard trioRuleMatrixOf2 "(W_(w2)*w)" -- row 3882
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1]]
-#guard trioRuleMatrixOf "(W_(w2)*W)" -- row 3883
+#guard trioRuleMatrixOf2 "(W_(w2)*W)" -- row 3883
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_(w2)*W_(w+1))" -- row 3884
+#guard trioRuleMatrixOf2 "(W_(w2)*W_(w+1))" -- row 3884
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,2,0]]
-#guard trioRuleMatrixOf "(W_(w2)^2)" -- row 3885
+#guard trioRuleMatrixOf2 "(W_(w2)^2)" -- row 3885
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W_(w2)^W_(w2))" -- row 3886
+#guard trioRuleMatrixOf2 "(W_(w2)^W_(w2))" -- row 3886
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[7,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "psi_W_(w2+1)(W_(w2+1))" -- row 3887
+#guard trioRuleMatrixOf2 "psi_W_(w2+1)(W_(w2+1))" -- row 3887
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[8,3,0]]
-#guard trioRuleMatrixOf "psi_W_(w2+1)(W_W)" -- row 3888
+#guard trioRuleMatrixOf2 "psi_W_(w2+1)(W_W)" -- row 3888
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[8,3,1],[9,3,1],[10,1,0]]
-#guard trioRuleMatrixOf "W_(w2+1)" -- row 3889
+#guard trioRuleMatrixOf2 "W_(w2+1)" -- row 3889
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0]]
-#guard trioRuleMatrixOf "(W_(w2+1)+1)" -- row 3914
+#guard trioRuleMatrixOf2 "(W_(w2+1)+1)" -- row 3914
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W_(w2+1)+w)" -- row 3915
+#guard trioRuleMatrixOf2 "(W_(w2+1)+w)" -- row 3915
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1]]
-#guard trioRuleMatrixOf "(W_(w2+1)+w^2)" -- row 3916
+#guard trioRuleMatrixOf2 "(W_(w2+1)+w^2)" -- row 3916
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1]]
-#guard trioRuleMatrixOf "(W_(w2+1)+W)" -- row 3917
+#guard trioRuleMatrixOf2 "(W_(w2+1)+W)" -- row 3917
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,1,0]]
-#guard trioRuleMatrixOf "(W_(w2+1)*2)" -- row 3918
+#guard trioRuleMatrixOf2 "(W_(w2+1)*2)" -- row 3918
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,3,0]]
-#guard trioRuleMatrixOf "(W_(w2+1)*w)" -- row 3919
+#guard trioRuleMatrixOf2 "(W_(w2+1)*w)" -- row 3919
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_(w2+1)*W)" -- row 3920
+#guard trioRuleMatrixOf2 "(W_(w2+1)*W)" -- row 3920
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,1,0]]
-#guard trioRuleMatrixOf "(W_(w2+1)^2)" -- row 3921
+#guard trioRuleMatrixOf2 "(W_(w2+1)^2)" -- row 3921
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,3,0]]
-#guard trioRuleMatrixOf "(W_(w2+1)^W_(w2+1))" -- row 3922
+#guard trioRuleMatrixOf2 "(W_(w2+1)^W_(w2+1))" -- row 3922
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[8,3,0]]
-#guard trioRuleMatrixOf "W_(w2+2)" -- row 3924
+#guard trioRuleMatrixOf2 "W_(w2+2)" -- row 3924
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,4,0]]
-#guard trioRuleMatrixOf "W_(w2+3)" -- row 3925
+#guard trioRuleMatrixOf2 "W_(w2+3)" -- row 3925
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,4,0],[6,4,0],[7,5,1],[8,5,1],[9,5,0]]
-#guard trioRuleMatrixOf "W_(w3)" -- row 3926
+#guard trioRuleMatrixOf2 "W_(w3)" -- row 3926
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_(w3)+1)" -- row 3942
+#guard trioRuleMatrixOf2 "(W_(w3)+1)" -- row 3942
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,0],[7,4,1],[8,4,1],[9,3,0],[8,4,0],[9,5,0]]
-#guard trioRuleMatrixOf "(W_(w3)+w)" -- row 3943
+#guard trioRuleMatrixOf2 "(W_(w3)+w)" -- row 3943
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,0],[7,4,1],[8,4,1],[9,3,0],[8,4,0],[9,5,1]]
-#guard trioRuleMatrixOf "(W_(w3)+w^2)" -- row 3944
+#guard trioRuleMatrixOf2 "(W_(w3)+w^2)" -- row 3944
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,0],[7,4,1],[8,4,1],[9,3,0],[8,4,0],[9,5,1],[10,5,1]]
-#guard trioRuleMatrixOf "(W_(w3)+W)" -- row 3945
+#guard trioRuleMatrixOf2 "(W_(w3)+W)" -- row 3945
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,0],[7,4,1],[8,4,1],[9,3,0],[8,4,0],[9,5,1],[10,5,1],[11,1,0]]
-#guard trioRuleMatrixOf "(W_(w3)+W_(w2+1))" -- row 3946
+#guard trioRuleMatrixOf2 "(W_(w3)+W_(w2+1))" -- row 3946
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,0],[7,4,1],[8,4,1],[9,3,0],[8,4,0],[9,5,1],[10,5,1],[11,3,0]]
-#guard trioRuleMatrixOf "(W_(w3)*2)" -- row 3947
+#guard trioRuleMatrixOf2 "(W_(w3)*2)" -- row 3947
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,0],[7,4,1],[8,4,1],[9,3,0],[8,4,0],[9,5,1],[10,5,1],[11,3,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_(w3)*w)" -- row 3948
+#guard trioRuleMatrixOf2 "(W_(w3)*w)" -- row 3948
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,0],[7,4,1],[8,4,1],[9,3,0],[8,4,1]]
-#guard trioRuleMatrixOf "(W_(w3)^2)" -- row 3949
+#guard trioRuleMatrixOf2 "(W_(w3)^2)" -- row 3949
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,0],[7,4,1],[8,4,1],[9,3,0],[8,4,1],[9,3,0],[5,3,1]]
-#guard trioRuleMatrixOf "psi_W_(w3+1)(W_(w3+1))" -- row 3950
+#guard trioRuleMatrixOf2 "psi_W_(w3+1)(W_(w3+1))" -- row 3950
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,0],[7,4,1],[8,4,1],[9,3,0],[10,4,0]]
-#guard trioRuleMatrixOf "W_(w3+1)" -- row 3951
+#guard trioRuleMatrixOf2 "W_(w3+1)" -- row 3951
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,0],[7,4,1],[8,4,1],[9,4,0]]
-#guard trioRuleMatrixOf "W_(w4)" -- row 3952
+#guard trioRuleMatrixOf2 "W_(w4)" -- row 3952
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,0],[7,4,1],[8,4,1],[9,4,0],[7,4,1]]
-#guard trioRuleMatrixOf "W_(w^2)" -- row 3954
+#guard trioRuleMatrixOf2 "W_(w^2)" -- row 3954
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2)+1)" -- row 4186
+#guard trioRuleMatrixOf2 "(W_(w^2)+1)" -- row 4186
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(W_(w^2)+2)" -- row 4189
+#guard trioRuleMatrixOf2 "(W_(w^2)+2)" -- row 4189
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W_(w^2)+w)" -- row 4190
+#guard trioRuleMatrixOf2 "(W_(w^2)+w)" -- row 4190
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_(w^2)+w+1)" -- row 4191
+#guard trioRuleMatrixOf2 "(W_(w^2)+w+1)" -- row 4191
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(W_(w^2)+w2)" -- row 4192
+#guard trioRuleMatrixOf2 "(W_(w^2)+w2)" -- row 4192
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_(w^2)+w^2)" -- row 4193
+#guard trioRuleMatrixOf2 "(W_(w^2)+w^2)" -- row 4193
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "(W_(w^2)+W)" -- row 4194
+#guard trioRuleMatrixOf2 "(W_(w^2)+W)" -- row 4194
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_(w^2)+W_w)" -- row 4195
+#guard trioRuleMatrixOf2 "(W_(w^2)+W_w)" -- row 4195
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2)*2)" -- row 4196
+#guard trioRuleMatrixOf2 "(W_(w^2)*2)" -- row 4196
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2)*3)" -- row 4197
+#guard trioRuleMatrixOf2 "(W_(w^2)*3)" -- row 4197
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2)*w)" -- row 4198
+#guard trioRuleMatrixOf2 "(W_(w^2)*w)" -- row 4198
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1]]
-#guard trioRuleMatrixOf "(W_(w^2)*w+1)" -- row 4199
+#guard trioRuleMatrixOf2 "(W_(w^2)*w+1)" -- row 4199
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(W_(w^2)*w+w)" -- row 4200
+#guard trioRuleMatrixOf2 "(W_(w^2)*w+w)" -- row 4200
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_(w^2)*w+W)" -- row 4201
+#guard trioRuleMatrixOf2 "(W_(w^2)*w+W)" -- row 4201
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_(w^2)*w+W_(w^2))" -- row 4202
+#guard trioRuleMatrixOf2 "(W_(w^2)*w+W_(w^2))" -- row 4202
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2)*w2)" -- row 4203
+#guard trioRuleMatrixOf2 "(W_(w^2)*w2)" -- row 4203
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1]]
-#guard trioRuleMatrixOf "(W_(w^2)*w^2)" -- row 4204
+#guard trioRuleMatrixOf2 "(W_(w^2)*w^2)" -- row 4204
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(W_(w^2)*w^w)" -- row 4205
+#guard trioRuleMatrixOf2 "(W_(w^2)*w^w)" -- row 4205
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,0,0]]
-#guard trioRuleMatrixOf "(W_(w^2)*W)" -- row 4206
+#guard trioRuleMatrixOf2 "(W_(w^2)*W)" -- row 4206
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0]]
-#guard trioRuleMatrixOf "(W_(w^2)*W_w)" -- row 4207
+#guard trioRuleMatrixOf2 "(W_(w^2)*W_w)" -- row 4207
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2)^2)" -- row 4208
+#guard trioRuleMatrixOf2 "(W_(w^2)^2)" -- row 4208
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2)^W)" -- row 4209
+#guard trioRuleMatrixOf2 "(W_(w^2)^W)" -- row 4209
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[5,1,0]]
-#guard trioRuleMatrixOf "(W_(w^2)^W_(w^2))" -- row 4210
+#guard trioRuleMatrixOf2 "(W_(w^2)^W_(w^2))" -- row 4210
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[5,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "psi_W_(w^2+1)(W_(w^2+1))" -- row 4211
+#guard trioRuleMatrixOf2 "psi_W_(w^2+1)(W_(w^2+1))" -- row 4211
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,0]]
-#guard trioRuleMatrixOf "psi_W_(w^2+1)(W_W)" -- row 4212
+#guard trioRuleMatrixOf2 "psi_W_(w^2+1)(W_W)" -- row 4212
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,1],[7,2,1],[8,1,0]]
-#guard trioRuleMatrixOf "W_(w^2+1)" -- row 4213
+#guard trioRuleMatrixOf2 "W_(w^2+1)" -- row 4213
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0]]
-#guard trioRuleMatrixOf "(W_(w^2+1)+1)" -- row 4248
+#guard trioRuleMatrixOf2 "(W_(w^2+1)+1)" -- row 4248
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W_(w^2+1)+2)" -- row 4249
+#guard trioRuleMatrixOf2 "(W_(w^2+1)+2)" -- row 4249
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(W_(w^2+1)+w)" -- row 4250
+#guard trioRuleMatrixOf2 "(W_(w^2+1)+w)" -- row 4250
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W_(w^2+1)+W)" -- row 4251
+#guard trioRuleMatrixOf2 "(W_(w^2+1)+W)" -- row 4251
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0]]
-#guard trioRuleMatrixOf "(W_(w^2+1)+W_(w^2))" -- row 4252
+#guard trioRuleMatrixOf2 "(W_(w^2+1)+W_(w^2))" -- row 4252
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2+1)*2)" -- row 4253
+#guard trioRuleMatrixOf2 "(W_(w^2+1)*2)" -- row 4253
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0]]
-#guard trioRuleMatrixOf "(W_(w^2+1)*w)" -- row 4254
+#guard trioRuleMatrixOf2 "(W_(w^2+1)*w)" -- row 4254
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_(w^2+1)*W)" -- row 4255
+#guard trioRuleMatrixOf2 "(W_(w^2+1)*W)" -- row 4255
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0]]
-#guard trioRuleMatrixOf "(W_(w^2+1)*W_(w^2))" -- row 4256
+#guard trioRuleMatrixOf2 "(W_(w^2+1)*W_(w^2))" -- row 4256
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2+1)^2)" -- row 4257
+#guard trioRuleMatrixOf2 "(W_(w^2+1)^2)" -- row 4257
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0]]
-#guard trioRuleMatrixOf "(W_(w^2+1)^W_(w^2+1))" -- row 4258
+#guard trioRuleMatrixOf2 "(W_(w^2+1)^W_(w^2+1))" -- row 4258
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[6,2,0]]
-#guard trioRuleMatrixOf "psi_W_(w^2+2)(W_(w^2+2))" -- row 4259
+#guard trioRuleMatrixOf2 "psi_W_(w^2+2)(W_(w^2+2))" -- row 4259
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[7,3,0]]
-#guard trioRuleMatrixOf "W_(w^2+2)" -- row 4260
+#guard trioRuleMatrixOf2 "W_(w^2+2)" -- row 4260
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0]]
-#guard trioRuleMatrixOf "W_(w^2+3)" -- row 4261
+#guard trioRuleMatrixOf2 "W_(w^2+3)" -- row 4261
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,4,0]]
-#guard trioRuleMatrixOf "W_(w^2+w)" -- row 4262
+#guard trioRuleMatrixOf2 "W_(w^2+w)" -- row 4262
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W_(w^2+w)+1)" -- row 4291
+#guard trioRuleMatrixOf2 "(W_(w^2+w)+1)" -- row 4291
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(W_(w^2+w)+2)" -- row 4292
+#guard trioRuleMatrixOf2 "(W_(w^2+w)+2)" -- row 4292
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W_(w^2+w)+w)" -- row 4293
+#guard trioRuleMatrixOf2 "(W_(w^2+w)+w)" -- row 4293
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_(w^2+w)+W)" -- row 4294
+#guard trioRuleMatrixOf2 "(W_(w^2+w)+W)" -- row 4294
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0]]
-#guard trioRuleMatrixOf "(W_(w^2+w)+W_(w^2))" -- row 4295
+#guard trioRuleMatrixOf2 "(W_(w^2+w)+W_(w^2))" -- row 4295
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2+w)+W_(w^2+1))" -- row 4296
+#guard trioRuleMatrixOf2 "(W_(w^2+w)+W_(w^2+1))" -- row 4296
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0]]
-#guard trioRuleMatrixOf "(W_(w^2+w)*2)" -- row 4297
+#guard trioRuleMatrixOf2 "(W_(w^2+w)*2)" -- row 4297
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W_(w^2+w)*w)" -- row 4298
+#guard trioRuleMatrixOf2 "(W_(w^2+w)*w)" -- row 4298
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1]]
-#guard trioRuleMatrixOf "(W_(w^2+w)*W)" -- row 4299
+#guard trioRuleMatrixOf2 "(W_(w^2+w)*W)" -- row 4299
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_(w^2+w)*W_(w^2))" -- row 4300
+#guard trioRuleMatrixOf2 "(W_(w^2+w)*W_(w^2))" -- row 4300
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2+w)*W_(w^2+1))" -- row 4301
+#guard trioRuleMatrixOf2 "(W_(w^2+w)*W_(w^2+1))" -- row 4301
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,2,0]]
-#guard trioRuleMatrixOf "(W_(w^2+w)^2)" -- row 4302
+#guard trioRuleMatrixOf2 "(W_(w^2+w)^2)" -- row 4302
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "psi_W_(w^2+w+1)(W_(w^2+w+1))" -- row 4304
+#guard trioRuleMatrixOf2 "psi_W_(w^2+w+1)(W_(w^2+w+1))" -- row 4304
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[8,3,0]]
-#guard trioRuleMatrixOf "W_(w^2+w+1)" -- row 4305
+#guard trioRuleMatrixOf2 "W_(w^2+w+1)" -- row 4305
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0]]
-#guard trioRuleMatrixOf "W_(w^2*2)" -- row 4309
+#guard trioRuleMatrixOf2 "W_(w^2*2)" -- row 4309
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(W_(w^2*2)+1)" -- row 4330
+#guard trioRuleMatrixOf2 "(W_(w^2*2)+1)" -- row 4330
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(W_(w^2*2)+w)" -- row 4331
+#guard trioRuleMatrixOf2 "(W_(w^2*2)+w)" -- row 4331
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_(w^2*2)+W)" -- row 4332
+#guard trioRuleMatrixOf2 "(W_(w^2*2)+W)" -- row 4332
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0]]
-#guard trioRuleMatrixOf "(W_(w^2*2)+W_(w^2))" -- row 4333
+#guard trioRuleMatrixOf2 "(W_(w^2*2)+W_(w^2))" -- row 4333
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^2*2)+W_(w^2+1))" -- row 4334
+#guard trioRuleMatrixOf2 "(W_(w^2*2)+W_(w^2+1))" -- row 4334
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0]]
-#guard trioRuleMatrixOf "(W_(w^2*2)*2)" -- row 4335
+#guard trioRuleMatrixOf2 "(W_(w^2*2)*2)" -- row 4335
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(W_(w^2*2)*w)" -- row 4336
+#guard trioRuleMatrixOf2 "(W_(w^2*2)*w)" -- row 4336
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1]]
-#guard trioRuleMatrixOf "(W_(w^2*2)*W)" -- row 4337
+#guard trioRuleMatrixOf2 "(W_(w^2*2)*W)" -- row 4337
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_(w^2*2)*W_(w^2+1))" -- row 4338
+#guard trioRuleMatrixOf2 "(W_(w^2*2)*W_(w^2+1))" -- row 4338
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,2,0]]
-#guard trioRuleMatrixOf "(W_(w^2*2)^2)" -- row 4339
+#guard trioRuleMatrixOf2 "(W_(w^2*2)^2)" -- row 4339
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,2,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "(W_(w^2*2)^W_(w^2*2))" -- row 4340
+#guard trioRuleMatrixOf2 "(W_(w^2*2)^W_(w^2*2))" -- row 4340
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[7,2,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "psi_W_(w^2*2+1)(W_(w^2*2+1))" -- row 4341
+#guard trioRuleMatrixOf2 "psi_W_(w^2*2+1)(W_(w^2*2+1))" -- row 4341
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[8,3,0]]
-#guard trioRuleMatrixOf "W_(w^2*2+1)" -- row 4342
+#guard trioRuleMatrixOf2 "W_(w^2*2+1)" -- row 4342
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0]]
-#guard trioRuleMatrixOf "W_(w^2*2+w)" -- row 4343
+#guard trioRuleMatrixOf2 "W_(w^2*2+w)" -- row 4343
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1]]
-#guard trioRuleMatrixOf "W_(w^2*3)" -- row 4344
+#guard trioRuleMatrixOf2 "W_(w^2*3)" -- row 4344
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "W_(w^2*4)" -- row 4345
+#guard trioRuleMatrixOf2 "W_(w^2*4)" -- row 4345
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,1],[6,3,0],[7,4,1],[8,4,1],[9,4,0],[7,4,1],[8,4,1]]
-#guard trioRuleMatrixOf "W_(w^3)" -- row 4346
+#guard trioRuleMatrixOf2 "W_(w^3)" -- row 4346
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^3)+1)" -- row 4364
+#guard trioRuleMatrixOf2 "(W_(w^3)+1)" -- row 4364
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,0]]
-#guard trioRuleMatrixOf "(W_(w^3)+w)" -- row 4365
+#guard trioRuleMatrixOf2 "(W_(w^3)+w)" -- row 4365
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_(w^3)+W)" -- row 4366
+#guard trioRuleMatrixOf2 "(W_(w^3)+W)" -- row 4366
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_(w^3)*2)" -- row 4367
+#guard trioRuleMatrixOf2 "(W_(w^3)*2)" -- row 4367
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[1,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^3)*w)" -- row 4368
+#guard trioRuleMatrixOf2 "(W_(w^3)*w)" -- row 4368
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1]]
-#guard trioRuleMatrixOf "(W_(w^3)^2)" -- row 4370
+#guard trioRuleMatrixOf2 "(W_(w^3)^2)" -- row 4370
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_(w^3)^W_(w^3))" -- row 4371
+#guard trioRuleMatrixOf2 "(W_(w^3)^W_(w^3))" -- row 4371
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[5,1,0],[1,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "psi_W_(w^3+1)(W_(w^3+1))" -- row 4372
+#guard trioRuleMatrixOf2 "psi_W_(w^3+1)(W_(w^3+1))" -- row 4372
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,0]]
-#guard trioRuleMatrixOf "W_(w^3+1)" -- row 4373
+#guard trioRuleMatrixOf2 "W_(w^3+1)" -- row 4373
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0]]
-#guard trioRuleMatrixOf "W_(w^3+2)" -- row 4374
+#guard trioRuleMatrixOf2 "W_(w^3+2)" -- row 4374
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0]]
-#guard trioRuleMatrixOf "W_(w^3+w)" -- row 4375
+#guard trioRuleMatrixOf2 "W_(w^3+w)" -- row 4375
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "W_(w^3+w^2)" -- row 4376
+#guard trioRuleMatrixOf2 "W_(w^3+w^2)" -- row 4376
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "W_(w^3*2)" -- row 4377
+#guard trioRuleMatrixOf2 "W_(w^3*2)" -- row 4377
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "W_(w^3*3)" -- row 4378
+#guard trioRuleMatrixOf2 "W_(w^3*3)" -- row 4378
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "W_(w^4)" -- row 4379
+#guard trioRuleMatrixOf2 "W_(w^4)" -- row 4379
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "W_(w^5)" -- row 4380
+#guard trioRuleMatrixOf2 "W_(w^5)" -- row 4380
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "W_(w^w)" -- row 4381
+#guard trioRuleMatrixOf2 "W_(w^w)" -- row 4381
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0]]
-#guard trioRuleMatrixOf "W_(w^w+1)" -- row 4382
+#guard trioRuleMatrixOf2 "W_(w^w+1)" -- row 4382
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[4,2,1],[5,2,0]]
-#guard trioRuleMatrixOf "W_(w^w+w)" -- row 4383
+#guard trioRuleMatrixOf2 "W_(w^w+w)" -- row 4383
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "W_(w^(w+1))" -- row 4385
+#guard trioRuleMatrixOf2 "W_(w^(w+1))" -- row 4385
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[2,1,1]]
-#guard trioRuleMatrixOf "W_(w^(w2))" -- row 4386
+#guard trioRuleMatrixOf2 "W_(w^(w2))" -- row 4386
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[2,1,1],[3,0,0]]
-#guard trioRuleMatrixOf "W_(w^w^2)" -- row 4387
+#guard trioRuleMatrixOf2 "W_(w^w^2)" -- row 4387
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[3,0,0]]
-#guard trioRuleMatrixOf "W_(w^w^w)" -- row 4388
+#guard trioRuleMatrixOf2 "W_(w^w^w)" -- row 4388
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[4,0,0]]
-#guard trioRuleMatrixOf "W_psi(W)" -- row 4389
+#guard trioRuleMatrixOf2 "W_psi(W)" -- row 4389
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[4,1,0]]
-#guard trioRuleMatrixOf "W_psi(W_w)" -- row 4390
+#guard trioRuleMatrixOf2 "W_psi(W_w)" -- row 4390
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1]]
-#guard trioRuleMatrixOf "W_psi(W_W)" -- row 4391
+#guard trioRuleMatrixOf2 "W_psi(W_W)" -- row 4391
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1],[5,1,1],[6,1,0]]
-#guard trioRuleMatrixOf "W_W" -- row 4392
+#guard trioRuleMatrixOf2 "W_W" -- row 4392
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0]]
-#guard trioRuleMatrixOf "(W_W+1)" -- row 4450
+#guard trioRuleMatrixOf2 "(W_W+1)" -- row 4450
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,0]]
-#guard trioRuleMatrixOf "(W_W+2)" -- row 4452
+#guard trioRuleMatrixOf2 "(W_W+2)" -- row 4452
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(W_W+w)" -- row 4453
+#guard trioRuleMatrixOf2 "(W_W+w)" -- row 4453
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1]]
-#guard trioRuleMatrixOf "(W_W+w^2)" -- row 4454
+#guard trioRuleMatrixOf2 "(W_W+w^2)" -- row 4454
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1]]
-#guard trioRuleMatrixOf "(W_W+W)" -- row 4455
+#guard trioRuleMatrixOf2 "(W_W+W)" -- row 4455
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0]]
-#guard trioRuleMatrixOf "(W_W+W_2)" -- row 4456
+#guard trioRuleMatrixOf2 "(W_W+W_2)" -- row 4456
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0]]
-#guard trioRuleMatrixOf "(W_W+W_w)" -- row 4457
+#guard trioRuleMatrixOf2 "(W_W+W_w)" -- row 4457
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0],[2,2,1]]
-#guard trioRuleMatrixOf "(W_W*2)" -- row 4458
+#guard trioRuleMatrixOf2 "(W_W*2)" -- row 4458
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0],[2,2,1],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "(W_W*3)" -- row 4459
+#guard trioRuleMatrixOf2 "(W_W*3)" -- row 4459
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0],[7,4,0],[8,5,1],[9,5,1],[10,2,0],[2,2,1],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "(W_W*w)" -- row 4460
+#guard trioRuleMatrixOf2 "(W_W*w)" -- row 4460
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(W_W*W)" -- row 4461
+#guard trioRuleMatrixOf2 "(W_W*W)" -- row 4461
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0]]
-#guard trioRuleMatrixOf "(W_W*W_2)" -- row 4462
+#guard trioRuleMatrixOf2 "(W_W*W_2)" -- row 4462
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0]]
-#guard trioRuleMatrixOf "(W_W*W_w)" -- row 4463
+#guard trioRuleMatrixOf2 "(W_W*W_w)" -- row 4463
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0],[2,2,1]]
-#guard trioRuleMatrixOf "(W_W^2)" -- row 4464
+#guard trioRuleMatrixOf2 "(W_W^2)" -- row 4464
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0],[2,2,1],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "(W_W^W_W)" -- row 4465
+#guard trioRuleMatrixOf2 "(W_W^W_W)" -- row 4465
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[6,2,0],[2,2,1],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "psi_W_(W+1)(W_(W+1))" -- row 4466
+#guard trioRuleMatrixOf2 "psi_W_(W+1)(W_(W+1))" -- row 4466
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[7,3,0]]
-#guard trioRuleMatrixOf "psi_W_(W+1)(W_W_2)" -- row 4467
+#guard trioRuleMatrixOf2 "psi_W_(W+1)(W_W_2)" -- row 4467
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[7,3,1],[8,3,1],[9,2,0]]
-#guard trioRuleMatrixOf "W_(W+1)" -- row 4468
+#guard trioRuleMatrixOf2 "W_(W+1)" -- row 4468
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0]]
-#guard trioRuleMatrixOf "(W_(W+1)+1)" -- row 4485
+#guard trioRuleMatrixOf2 "(W_(W+1)+1)" -- row 4485
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,0]]
-#guard trioRuleMatrixOf "(W_(W+1)+w)" -- row 4486
+#guard trioRuleMatrixOf2 "(W_(W+1)+w)" -- row 4486
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1]]
-#guard trioRuleMatrixOf "(W_(W+1)+W_2)" -- row 4487
+#guard trioRuleMatrixOf2 "(W_(W+1)+W_2)" -- row 4487
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1],[9,2,0]]
-#guard trioRuleMatrixOf "(W_(W+1)*2)" -- row 4489
+#guard trioRuleMatrixOf2 "(W_(W+1)*2)" -- row 4489
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1],[9,3,0]]
-#guard trioRuleMatrixOf "psi_W_(W+2)(W_(W+2))" -- row 4492
+#guard trioRuleMatrixOf2 "psi_W_(W+2)(W_(W+2))" -- row 4492
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[8,4,0]]
-#guard trioRuleMatrixOf "W_(W+2)" -- row 4493
+#guard trioRuleMatrixOf2 "W_(W+2)" -- row 4493
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,4,0]]
-#guard trioRuleMatrixOf "W_(W+3)" -- row 4494
+#guard trioRuleMatrixOf2 "W_(W+3)" -- row 4494
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,4,0],[5,4,0],[6,5,1],[7,5,1],[8,5,0]]
-#guard trioRuleMatrixOf "W_(W+w)" -- row 4495
+#guard trioRuleMatrixOf2 "W_(W+w)" -- row 4495
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1]]
-#guard trioRuleMatrixOf "W_(W+w+1)" -- row 4498
+#guard trioRuleMatrixOf2 "W_(W+w+1)" -- row 4498
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,0],[6,4,1],[7,4,1],[8,4,0]]
-#guard trioRuleMatrixOf "W_(W+w^2)" -- row 4500
+#guard trioRuleMatrixOf2 "W_(W+w^2)" -- row 4500
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1]]
-#guard trioRuleMatrixOf "W_(W+w^w)" -- row 4501
+#guard trioRuleMatrixOf2 "W_(W+w^w)" -- row 4501
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,0,0]]
-#guard trioRuleMatrixOf "W_(W2)" -- row 4502
+#guard trioRuleMatrixOf2 "W_(W2)" -- row 4502
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,1,0]]
-#guard trioRuleMatrixOf "W_(W3)" -- row 4503
+#guard trioRuleMatrixOf2 "W_(W3)" -- row 4503
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,4,0],[6,4,1],[7,4,1],[8,1,0]]
-#guard trioRuleMatrixOf "W_(W*w)" -- row 4504
+#guard trioRuleMatrixOf2 "W_(W*w)" -- row 4504
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "W_(W*w^2)" -- row 4505
+#guard trioRuleMatrixOf2 "W_(W*w^2)" -- row 4505
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[3,2,1]]
-#guard trioRuleMatrixOf "W_(W^2)" -- row 4506
+#guard trioRuleMatrixOf2 "W_(W^2)" -- row 4506
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "W_(W^W)" -- row 4507
+#guard trioRuleMatrixOf2 "W_(W^W)" -- row 4507
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[4,1,0]]
-#guard trioRuleMatrixOf "W_psi_1(W_W)" -- row 4509
+#guard trioRuleMatrixOf2 "W_psi_1(W_W)" -- row 4509
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[5,2,1],[6,2,1],[7,1,0]]
-#guard trioRuleMatrixOf "W_W_2" -- row 4510
+#guard trioRuleMatrixOf2 "W_W_2" -- row 4510
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0]]
-#guard trioRuleMatrixOf "W_W_w" -- row 4536
+#guard trioRuleMatrixOf2 "W_W_w" -- row 4536
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_W_w+1)" -- row 4606
+#guard trioRuleMatrixOf2 "(W_W_w+1)" -- row 4606
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(W_W_w+w)" -- row 4607
+#guard trioRuleMatrixOf2 "(W_W_w+w)" -- row 4607
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_W_w+W)" -- row 4608
+#guard trioRuleMatrixOf2 "(W_W_w+W)" -- row 4608
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0]]
-#guard trioRuleMatrixOf "(W_W_w+W_(w+1))" -- row 4610
+#guard trioRuleMatrixOf2 "(W_W_w+W_(w+1))" -- row 4610
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0]]
-#guard trioRuleMatrixOf "(W_W_w+W_(w2))" -- row 4611
+#guard trioRuleMatrixOf2 "(W_W_w+W_(w2))" -- row 4611
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W_W_w+W_W)" -- row 4612
+#guard trioRuleMatrixOf2 "(W_W_w+W_W)" -- row 4612
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1],[4,2,1],[5,1,0]]
-#guard trioRuleMatrixOf "(W_W_w*w)" -- row 4614
+#guard trioRuleMatrixOf2 "(W_W_w*w)" -- row 4614
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1]]
-#guard trioRuleMatrixOf "(W_W_w*W)" -- row 4615
+#guard trioRuleMatrixOf2 "(W_W_w*W)" -- row 4615
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,1,0]]
-#guard trioRuleMatrixOf "(W_W_w*W_(w+1))" -- row 4616
+#guard trioRuleMatrixOf2 "(W_W_w*W_(w+1))" -- row 4616
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,2,0]]
-#guard trioRuleMatrixOf "(W_W_w*W_W)" -- row 4617
+#guard trioRuleMatrixOf2 "(W_W_w*W_W)" -- row 4617
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,2,0],[3,2,1],[4,2,1],[5,1,0]]
-#guard trioRuleMatrixOf "psi_W_(W_w+1)(W_(W_w+1))" -- row 4619
+#guard trioRuleMatrixOf2 "psi_W_(W_w+1)(W_(W_w+1))" -- row 4619
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[8,3,0]]
-#guard trioRuleMatrixOf "W_(W_w+1)" -- row 4620
+#guard trioRuleMatrixOf2 "W_(W_w+1)" -- row 4620
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,3,0]]
-#guard trioRuleMatrixOf "W_(W_w+2)" -- row 4621
+#guard trioRuleMatrixOf2 "W_(W_w+2)" -- row 4621
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,4,0]]
-#guard trioRuleMatrixOf "W_(W_w+w)" -- row 4622
+#guard trioRuleMatrixOf2 "W_(W_w+w)" -- row 4622
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1]]
-#guard trioRuleMatrixOf "W_(W_w*2)" -- row 4623
+#guard trioRuleMatrixOf2 "W_(W_w*2)" -- row 4623
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,1],[7,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "W_(W_w*3)" -- row 4624
+#guard trioRuleMatrixOf2 "W_(W_w*3)" -- row 4624
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,1],[8,4,1],[9,4,0],[7,4,1],[8,4,1],[9,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "W_(W_w*w)" -- row 4625
+#guard trioRuleMatrixOf2 "W_(W_w*w)" -- row 4625
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1]]
-#guard trioRuleMatrixOf "W_(W_w*W)" -- row 4626
+#guard trioRuleMatrixOf2 "W_(W_w*W)" -- row 4626
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0]]
-#guard trioRuleMatrixOf "W_(W_w^2)" -- row 4627
+#guard trioRuleMatrixOf2 "W_(W_w^2)" -- row 4627
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "W_W_(w+1)" -- row 4629
+#guard trioRuleMatrixOf2 "W_W_(w+1)" -- row 4629
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0]]
-#guard trioRuleMatrixOf "(W_W_(w+1)+1)" -- row 4640
+#guard trioRuleMatrixOf2 "(W_W_(w+1)+1)" -- row 4640
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W_W_(w+1)*2)" -- row 4641
+#guard trioRuleMatrixOf2 "(W_W_(w+1)*2)" -- row 4641
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,3,0],[4,3,1],[5,3,1],[6,2,0]]
-#guard trioRuleMatrixOf "(W_W_(w+1)*w)" -- row 4642
+#guard trioRuleMatrixOf2 "(W_W_(w+1)*w)" -- row 4642
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_W_(w+1)^2)" -- row 4643
+#guard trioRuleMatrixOf2 "(W_W_(w+1)^2)" -- row 4643
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,3,0],[4,3,1],[5,3,1],[6,2,0]]
-#guard trioRuleMatrixOf "W_(W_(w+1)+1)" -- row 4644
+#guard trioRuleMatrixOf2 "W_(W_(w+1)+1)" -- row 4644
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,4,0]]
-#guard trioRuleMatrixOf "W_(W_(w+1)*2)" -- row 4645
+#guard trioRuleMatrixOf2 "W_(W_(w+1)*2)" -- row 4645
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,4,0],[6,4,1],[7,4,1],[8,2,0]]
-#guard trioRuleMatrixOf "W_(W_(w+1)*w)" -- row 4646
+#guard trioRuleMatrixOf2 "W_(W_(w+1)*w)" -- row 4646
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "W_(W_(w+1)^2)" -- row 4647
+#guard trioRuleMatrixOf2 "W_(W_(w+1)^2)" -- row 4647
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0]]
-#guard trioRuleMatrixOf "W_W_(w+2)" -- row 4648
+#guard trioRuleMatrixOf2 "W_W_(w+2)" -- row 4648
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,3,0]]
-#guard trioRuleMatrixOf "W_W_(w2)" -- row 4649
+#guard trioRuleMatrixOf2 "W_W_(w2)" -- row 4649
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "W_W_(w2+1)" -- row 4650
+#guard trioRuleMatrixOf2 "W_W_(w2+1)" -- row 4650
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,1],[7,3,0]]
-#guard trioRuleMatrixOf "W_W_(w3)" -- row 4651
+#guard trioRuleMatrixOf2 "W_W_(w3)" -- row 4651
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1]]
-#guard trioRuleMatrixOf "W_W_(w^2)" -- row 4652
+#guard trioRuleMatrixOf2 "W_W_(w^2)" -- row 4652
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "(W_W_(w^2)+1)" -- row 4665
+#guard trioRuleMatrixOf2 "(W_W_(w^2)+1)" -- row 4665
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,0]]
-#guard trioRuleMatrixOf "(W_W_(w^2)+W_(w^2+1))" -- row 4666
+#guard trioRuleMatrixOf2 "(W_W_(w^2)+W_(w^2+1))" -- row 4666
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0]]
-#guard trioRuleMatrixOf "(W_W_(w^2)*w)" -- row 4668
+#guard trioRuleMatrixOf2 "(W_W_(w^2)*w)" -- row 4668
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1]]
-#guard trioRuleMatrixOf "W_(W_(w^2)+1)" -- row 4669
+#guard trioRuleMatrixOf2 "W_(W_(w^2)+1)" -- row 4669
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,3,0]]
-#guard trioRuleMatrixOf "W_(W_(w^2)+W)" -- row 4670
+#guard trioRuleMatrixOf2 "W_(W_(w^2)+W)" -- row 4670
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,1],[7,1,0]]
-#guard trioRuleMatrixOf "W_(W_(w^2)*2)" -- row 4671
+#guard trioRuleMatrixOf2 "W_(W_(w^2)*2)" -- row 4671
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,1],[6,3,1],[7,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "W_(W_(w^2)*w)" -- row 4672
+#guard trioRuleMatrixOf2 "W_(W_(w^2)*w)" -- row 4672
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1]]
-#guard trioRuleMatrixOf "W_(W_(w^2)^2)" -- row 4673
+#guard trioRuleMatrixOf2 "W_(W_(w^2)^2)" -- row 4673
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "W_W_(w^2+1)" -- row 4675
+#guard trioRuleMatrixOf2 "W_W_(w^2+1)" -- row 4675
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0]]
-#guard trioRuleMatrixOf "W_W_(w^2+2)" -- row 4676
+#guard trioRuleMatrixOf2 "W_W_(w^2+2)" -- row 4676
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,3,0]]
-#guard trioRuleMatrixOf "W_W_(w^2+w)" -- row 4677
+#guard trioRuleMatrixOf2 "W_W_(w^2+w)" -- row 4677
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "W_W_(w^2*2)" -- row 4678
+#guard trioRuleMatrixOf2 "W_W_(w^2*2)" -- row 4678
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "W_W_(w^3)" -- row 4679
+#guard trioRuleMatrixOf2 "W_W_(w^3)" -- row 4679
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "W_W_(w^4)" -- row 4680
+#guard trioRuleMatrixOf2 "W_W_(w^4)" -- row 4680
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "W_W_(w^w)" -- row 4681
+#guard trioRuleMatrixOf2 "W_W_(w^w)" -- row 4681
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0]]
-#guard trioRuleMatrixOf "W_W_psi(W_w)" -- row 4682
+#guard trioRuleMatrixOf2 "W_W_psi(W_w)" -- row 4682
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[4,1,1]]
-#guard trioRuleMatrixOf "W_W_W" -- row 4683
+#guard trioRuleMatrixOf2 "W_W_W" -- row 4683
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0]]
-#guard trioRuleMatrixOf "(W_W_W+1)" -- row 4740
+#guard trioRuleMatrixOf2 "(W_W_W+1)" -- row 4740
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W_W_W+w)" -- row 4741
+#guard trioRuleMatrixOf2 "(W_W_W+w)" -- row 4741
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1]]
-#guard trioRuleMatrixOf "(W_W_W+W_2)" -- row 4742
+#guard trioRuleMatrixOf2 "(W_W_W+W_2)" -- row 4742
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,2,0]]
-#guard trioRuleMatrixOf "(W_W_W+W_w)" -- row 4743
+#guard trioRuleMatrixOf2 "(W_W_W+W_w)" -- row 4743
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,2,0],[2,2,1]]
-#guard trioRuleMatrixOf "(W_W_W*w)" -- row 4748
+#guard trioRuleMatrixOf2 "(W_W_W*w)" -- row 4748
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1]]
-#guard trioRuleMatrixOf "(W_W_W*W_2)" -- row 4749
+#guard trioRuleMatrixOf2 "(W_W_W*W_2)" -- row 4749
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,2,0]]
-#guard trioRuleMatrixOf "psi_W_(W_W+1)(W_(W_W+1))" -- row 4754
+#guard trioRuleMatrixOf2 "psi_W_(W_W+1)(W_(W_W+1))" -- row 4754
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[9,4,0]]
-#guard trioRuleMatrixOf "W_(W_W+1)" -- row 4755
+#guard trioRuleMatrixOf2 "W_(W_W+1)" -- row 4755
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,4,0]]
-#guard trioRuleMatrixOf "W_(W_W+w)" -- row 4756
+#guard trioRuleMatrixOf2 "W_(W_W+w)" -- row 4756
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,4,0],[6,4,1]]
-#guard trioRuleMatrixOf "W_(W_W+W_2)" -- row 4757
+#guard trioRuleMatrixOf2 "W_(W_W+W_2)" -- row 4757
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,4,0],[6,4,1],[7,4,1],[8,2,0]]
-#guard trioRuleMatrixOf "W_(W_W*2)" -- row 4758
+#guard trioRuleMatrixOf2 "W_(W_W*2)" -- row 4758
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,4,0],[6,4,1],[7,4,1],[8,2,0],[2,2,1],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "W_(W_W*w)" -- row 4759
+#guard trioRuleMatrixOf2 "W_(W_W*w)" -- row 4759
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "W_(W_W*W_2)" -- row 4760
+#guard trioRuleMatrixOf2 "W_(W_W*W_2)" -- row 4760
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0]]
-#guard trioRuleMatrixOf "W_(W_W^2)" -- row 4761
+#guard trioRuleMatrixOf2 "W_(W_W^2)" -- row 4761
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0],[2,2,1],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "W_W_(W+1)" -- row 4763
+#guard trioRuleMatrixOf2 "W_W_(W+1)" -- row 4763
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,3,0]]
-#guard trioRuleMatrixOf "W_W_(W+w)" -- row 4764
+#guard trioRuleMatrixOf2 "W_W_(W+w)" -- row 4764
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1]]
-#guard trioRuleMatrixOf "W_W_(W2)" -- row 4765
+#guard trioRuleMatrixOf2 "W_W_(W2)" -- row 4765
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,1,0]]
-#guard trioRuleMatrixOf "W_W_(W*w)" -- row 4766
+#guard trioRuleMatrixOf2 "W_W_(W*w)" -- row 4766
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1]]
-#guard trioRuleMatrixOf "W_W_(W^2)" -- row 4767
+#guard trioRuleMatrixOf2 "W_W_(W^2)" -- row 4767
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "W_W_(W^W)" -- row 4768
+#guard trioRuleMatrixOf2 "W_W_(W^W)" -- row 4768
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[4,1,0]]
-#guard trioRuleMatrixOf "W_W_W_2" -- row 4770
+#guard trioRuleMatrixOf2 "W_W_W_2" -- row 4770
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0]]
-#guard trioRuleMatrixOf "W_W_W_3" -- row 4771
+#guard trioRuleMatrixOf2 "W_W_W_3" -- row 4771
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,1],[4,3,1],[5,3,0],[3,3,1],[4,3,1],[5,3,0]]
-#guard trioRuleMatrixOf "W_W_W_w" -- row 4772
+#guard trioRuleMatrixOf2 "W_W_W_w" -- row 4772
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "W_W_W_(w+1)" -- row 4773
+#guard trioRuleMatrixOf2 "W_W_W_(w+1)" -- row 4773
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0]]
-#guard trioRuleMatrixOf "W_W_W_(w2)" -- row 4774
+#guard trioRuleMatrixOf2 "W_W_W_(w2)" -- row 4774
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "W_W_W_(w^2)" -- row 4775
+#guard trioRuleMatrixOf2 "W_W_W_(w^2)" -- row 4775
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "W_W_W_(w^3)" -- row 4776
+#guard trioRuleMatrixOf2 "W_W_W_(w^3)" -- row 4776
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "W_W_W_(w^w)" -- row 4777
+#guard trioRuleMatrixOf2 "W_W_W_(w^w)" -- row 4777
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0]]
-#guard trioRuleMatrixOf "W_W_W_W" -- row 4778
+#guard trioRuleMatrixOf2 "W_W_W_W" -- row 4778
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0]]
-#guard trioRuleMatrixOf "W_W_W_W_2" -- row 4779
+#guard trioRuleMatrixOf2 "W_W_W_W_2" -- row 4779
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0]]
-#guard trioRuleMatrixOf "W_W_W_W_w" -- row 4780
+#guard trioRuleMatrixOf2 "W_W_W_W_w" -- row 4780
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "W_W_W_W_(w^2)" -- row 4781
+#guard trioRuleMatrixOf2 "W_W_W_W_(w^2)" -- row 4781
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1]]
-#guard trioRuleMatrixOf "W_W_W_W_W" -- row 4782
+#guard trioRuleMatrixOf2 "W_W_W_W_W" -- row 4782
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0]]
-#guard trioRuleMatrixOf "W_W_W_W_W_W" -- row 4783
+#guard trioRuleMatrixOf2 "W_W_W_W_W_W" -- row 4783
   = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0]]
 
-/-! ### The sheet: the 41 rows that do not agree
+/-! ### The 22 rows where the sheet is right: the corrected rules give its matrix -/
 
-Each row: the rule-built matrix (the reference implementation's), and that it is not the
-sheet's. -/
-
--- row 2113 (the matrix has the shape of w^5*2; M(w^6)[3] sides with the builder): the sheet has (0,0,0)(1,1,1)(2,1,1)(2,1,1)(2,1,1)(2,1,1)(2,1,0)(3,2,1)(4,2,1)(4,2,1)(4,2,1)(4,2,1)
-#guard trioRuleMatrixOf "(w^5*3)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,1],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[6,3,1],[6,3,1],[6,3,1]]
-#guard trioRuleMatrixOf "(w^5*3)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,1],[4,2,1]]
--- row 2131 (the content is a two-step +1 staircase, i.e. w^w+2 (label duplicated with 2133)): the sheet has (0,0,0)(1,1,1)(2,1,1)(3,0,0)(2,1,0)(3,2,0)(4,3,0)
-#guard trioRuleMatrixOf "(w^w+w2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(w^w+w2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,0],[4,3,0]]
--- row 2133 ((3,2,0)(4,3,1) vs (4,2,0)(5,3,1); M(w^w+w^2)[2] sides with the builder): the sheet has (0,0,0)(1,1,1)(2,1,1)(3,0,0)(2,1,0)(3,2,1)(3,2,0)(4,3,1)
-#guard trioRuleMatrixOf "(w^w+w2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[4,2,0],[5,3,1]]
-#guard trioRuleMatrixOf "(w^w+w2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[3,2,0],[4,3,1]]
--- row 2532 (the matrix is M(W^(w+1)); the label duplicates 2538, which is W^(W+1)): the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,1,0)(4,0,0)(3,2,1)(4,1,0)
-#guard trioRuleMatrixOf "(W^(W+1))"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,1,0],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "(W^(W+1))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,0,0],[3,2,1],[4,1,0]]
--- row 2723 (the matrix drops the trailing Omega leaf; the label duplicates 2724): the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,0)(3,3,1)(4,3,1)(5,2,0)(4,3,0)(5,4,1)(6,4,1)(7,2,0)(6,4,0)(7,5,1)(8,5,1)
-#guard trioRuleMatrixOf "(W_2*2+W)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0],[6,4,0],[7,5,1],[8,5,1],[9,1,0]]
-#guard trioRuleMatrixOf "(W_2*2+W)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0],[6,4,0],[7,5,1],[8,5,1]]
--- row 3439: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,1,0)(4,2,1)(4,2,0)(3,2,1)(4,2,1)(5,1,0)(4,2,0)(5,3,1)(6,3,1)(7,1,0)(6,3,1)(6,2,0)(5,3,1)(6,3,1)(7,1,0)(6,3,1)
-#guard trioRuleMatrixOf "(W_w*w0*W_W_w+W_(W_w*w))"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1]]
-#guard trioRuleMatrixOf "(W_w*w0*W_W_w+W_(W_w*w))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1],[6,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1]]
--- row 3452: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,1,0)(4,2,1)(4,2,0)(5,3,1)(6,3,1)(7,1,0)(6,3,0)(7,4,0)
-#guard trioRuleMatrixOf "(W_w*w+W_w+10)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,0],[8,5,0],[9,6,0],[10,7,0],[11,8,0],[12,9,0],[13,10,0],[14,11,0],[15,12,0],[16,13,0]]
-#guard trioRuleMatrixOf "(W_w*w+W_w+10)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,0]]
--- row 3453: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,1,0)(4,2,1)(4,2,0)(5,3,1)(6,3,1)(7,1,0)(6,3,0)(7,4,1)(8,4,1)(9,1,0)
-#guard trioRuleMatrixOf "(W_w*w+W_w*2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_w*w+W_w*2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0]]
--- row 3480: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,1,0)(4,2,1)(5,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,0)(4,3,1)(5,3,1)(6,2,0)(5,3,1)(6,1,0)(5,3,0)(6,4,1)(7,4,1)(8,1,0)(7,4,1)
-#guard trioRuleMatrixOf "(W_w*W+W_3)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0]]
-#guard trioRuleMatrixOf "(W_w*W+W_3)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,1]]
--- row 3492: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,1,0)(4,2,1)(5,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,0)(4,3,1)(5,3,1)(6,2,0)(5,3,1)(6,2,0)(2,2,0)(3,3,1)(4,3,1)(5,3,0)(3,3,1)(4,3,0)(5,4,1)(6,4,1)(7,3,0)(6,4,1)(7,2,0)(6,4,1)
-#guard trioRuleMatrixOf "(W_w*W_2*w)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,2,0],[4,2,1]]
+-- row 3492 (S-o)
+#guard trioRuleMatrixOf2 "(W_w*W_2*w)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,1],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1],[7,2,0],[6,4,1]]
 #guard trioRuleMatrixOf "(W_w*W_2*w)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,1],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1],[7,2,0],[6,4,1]]
--- row 3551: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,1,0)(6,2,1)(7,2,1)(8,1,0)(1,1,1)
-#guard trioRuleMatrixOf "psi_W_(w+1)(W_W_w)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,1],[7,2,1],[8,1,0],[6,2,1]]
-#guard trioRuleMatrixOf "psi_W_(w+1)(W_W_w)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,1],[7,2,1],[8,1,0],[1,1,1]]
--- row 3552: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,1,0)(6,2,1)(7,2,1)(8,1,0)(9,2,0)
-#guard trioRuleMatrixOf "psi_W_(W+1)(W_psi_W_(w+1)(W_(w+1)))"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[7,3,1],[8,3,1],[9,1,0],[7,3,1],[8,3,0],[9,4,1],[10,4,1],[11,1,0],[12,4,0]]
-#guard trioRuleMatrixOf "psi_W_(W+1)(W_psi_W_(w+1)(W_(w+1)))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,1],[7,2,1],[8,1,0],[9,2,0]]
--- row 3706: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,0)(4,3,1)(5,3,1)(6,2,0)(5,3,0)(6,4,1)(7,4,1)(8,1,0)(8,1,0)(1,1,1)
-#guard trioRuleMatrixOf "(W_(w+1)+W_w^2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,1],[8,1,0],[1,1,1]]
-#guard trioRuleMatrixOf "(W_(w+1)+W_w^2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[8,1,0],[1,1,1]]
--- row 3709: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,0)(4,3,1)(5,3,1)(6,2,0)(5,3,0)(6,4,1)(7,4,1)(8,2,0)(7,4,0)(8,5,1)
-#guard trioRuleMatrixOf "(W_(w+1)*2+W)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0],[7,4,0],[8,5,1],[9,5,1],[10,1,0]]
-#guard trioRuleMatrixOf "(W_(w+1)*2+W)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0],[7,4,0],[8,5,1]]
--- row 3777: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,0)(5,4,1)(6,4,1)(7,3,0)(6,4,0)(7,5,0)(8,6,0)
-#guard trioRuleMatrixOf "(W_(w+2)+w)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1]]
-#guard trioRuleMatrixOf "(W_(w+2)+w)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,0],[8,6,0]]
--- row 3923: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,1)(4,2,0)(5,3,1)(6,3,1)(7,3,0)(5,3,0)(6,4,1)(7,4,1)(8,3,0)(9,3,0)
-#guard trioRuleMatrixOf "psi_W_(w2+2)(W_(w2+2))"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[9,4,0]]
-#guard trioRuleMatrixOf "psi_W_(w2+2)(W_(w2+2))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[9,3,0]]
--- row 4303: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,1)(4,2,0)(5,3,1)(6,3,1)(7,2,0)(8,2,0)(3,2,1)
-#guard trioRuleMatrixOf "(W_(w^2+w)^W_(w^2+w))"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[7,2,0],[3,2,1]]
-#guard trioRuleMatrixOf "(W_(w^2+w)^W_(w^2+w))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[8,2,0],[3,2,1]]
--- row 4369: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(2,1,1)(2,1,0)(3,2,1)(4,2,1)(5,1,0)(4,2,1)(5,1,0)
-#guard trioRuleMatrixOf "(W_(w^3*W))"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0]]
-#guard trioRuleMatrixOf "(W_(w^3*W))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0]]
--- row 4384: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,0,0)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,1)(4,2,1)(5,0,0)
-#guard trioRuleMatrixOf "W_(w^2*2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1]]
-#guard trioRuleMatrixOf "W_(w^2*2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,0,0]]
--- row 4488: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,0)(5,4,1)(6,4,1)(7,3,0)(6,4,0)(7,5,1)(8,5,1)(9,2,0)(2,2,1)(3,2,1)(4,1,0)
-#guard trioRuleMatrixOf "(W_(W+1)+W_W)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1],[9,1,0]]
+-- row 4488 (S-o)
+#guard trioRuleMatrixOf2 "(W_(W+1)+W_W)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1],[9,2,0],[2,2,1],[3,2,1],[4,1,0]]
 #guard trioRuleMatrixOf "(W_(W+1)+W_W)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,1],[8,5,1],[9,2,0],[2,2,1],[3,2,1],[4,1,0]]
--- row 4490: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,0)(5,4,1)(6,4,1)(7,3,0)(6,4,1)
-#guard trioRuleMatrixOf "(W_(W+1)*w)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0]]
+-- row 4490 (S-o)
+#guard trioRuleMatrixOf2 "(W_(W+1)*w)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1]]
 #guard trioRuleMatrixOf "(W_(W+1)*w)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1]]
--- row 4491: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,0)(5,4,1)(6,4,1)(7,3,0)(6,4,1)(7,3,0)
-#guard trioRuleMatrixOf "(W_(W+1)^2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0]]
+-- row 4491 (S-o)
+#guard trioRuleMatrixOf2 "(W_(W+1)^2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1],[7,3,0]]
 #guard trioRuleMatrixOf "(W_(W+1)^2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,1],[7,3,0]]
--- row 4496: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,1)(5,3,0)(6,4,1)(7,4,1)(8,3,0)(7,4,0)(8,5,1)
-#guard trioRuleMatrixOf "(W_(W+w)+1)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,0]]
-#guard trioRuleMatrixOf "(W_(W+w)+1)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1]]
--- row 4497: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,1)(5,3,0)(6,4,1)(7,4,1)(8,3,0)(7,4,1)
-#guard trioRuleMatrixOf "(W_(W+w)*w)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,0],[6,4,1],[7,4,1],[8,3,0]]
+-- row 4497 (S-c)
+#guard trioRuleMatrixOf2 "(W_(W+w)*w)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1]]
 #guard trioRuleMatrixOf "(W_(W+w)*w)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1]]
--- row 4508: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(5,2,0)
-#guard trioRuleMatrixOf "W_psi_1(W_2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0]]
+-- row 4508 (S-o)
+#guard trioRuleMatrixOf2 "W_psi_1(W_2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[5,2,0]]
 #guard trioRuleMatrixOf "W_psi_1(W_2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[5,2,0]]
--- row 4609: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,1)(4,2,1)(5,1,0)(4,2,0)(5,3,1)(6,3,1)(7,2,0)(6,3,0)(7,4,1)(8,4,1)(9,1,0)(1,1,1)
-#guard trioRuleMatrixOf "(W_W_w+W_w)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1]]
+-- row 4609 (S-o)
+#guard trioRuleMatrixOf2 "(W_W_w+W_w)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[1,1,1]]
 #guard trioRuleMatrixOf "(W_W_w+W_w)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0],[1,1,1]]
--- row 4613: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,1)(4,2,1)(5,1,0)(4,2,0)(5,3,1)(6,3,1)(7,2,0)(6,3,0)(7,4,1)(8,4,1)(9,2,0)(3,2,1)(4,2,1)(5,1,0)(1,1,1)
-#guard trioRuleMatrixOf "(W_W_w*2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1]]
+-- row 4613 (S-o)
+#guard trioRuleMatrixOf2 "(W_W_w*2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1],[4,2,1],[5,1,0],[1,1,1]]
 #guard trioRuleMatrixOf "(W_W_w*2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1],[4,2,1],[5,1,0],[1,1,1]]
--- row 4618: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,1)(4,2,1)(5,1,0)(4,2,0)(5,3,1)(6,3,1)(7,2,0)(6,3,1)(7,2,0)(3,2,1)(4,2,1)(5,1,0)(1,1,1)
-#guard trioRuleMatrixOf "(W_W_w^2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,2,0],[3,2,1]]
+-- row 4618 (S-o)
+#guard trioRuleMatrixOf2 "(W_W_w^2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,2,0],[3,2,1],[4,2,1],[5,1,0],[1,1,1]]
 #guard trioRuleMatrixOf "(W_W_w^2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,1],[7,2,0],[3,2,1],[4,2,1],[5,1,0],[1,1,1]]
--- row 4628: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,1)(4,2,1)(5,1,0)(6,2,0)
-#guard trioRuleMatrixOf "W_psi_W_(w+1)(W_(w+1))"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0]]
+-- row 4628 (S-o)
+#guard trioRuleMatrixOf2 "W_psi_W_(w+1)(W_(w+1))" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[6,2,0]]
 #guard trioRuleMatrixOf "W_psi_W_(w+1)(W_(w+1))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[6,2,0]]
--- row 4667: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,1)(4,2,1)(5,1,0)(4,2,0)(5,3,1)(6,3,1)(7,2,0)(6,3,0)(7,4,1)(8,4,1)(9,2,0)(3,2,1)(4,2,1)(5,1,0)(1,1,1)(2,1,1)
-#guard trioRuleMatrixOf "(W_W_(w^2)*2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1],[4,2,1]]
+-- row 4667 (S-c)
+#guard trioRuleMatrixOf2 "(W_W_(w^2)*2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1],[4,2,1],[5,1,0],[1,1,1],[2,1,1]]
 #guard trioRuleMatrixOf "(W_W_(w^2)*2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[6,3,0],[7,4,1],[8,4,1],[9,2,0],[3,2,1],[4,2,1],[5,1,0],[1,1,1],[2,1,1]]
--- row 4674: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,1)(4,2,1)(5,1,0)(6,2,0)
-#guard trioRuleMatrixOf "W_(psi_W_(w^2+1)(W_(w^2+1)))"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0]]
+-- row 4674 (S-o)
+#guard trioRuleMatrixOf2 "W_(psi_W_(w^2+1)(W_(w^2+1)))" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[6,2,0]]
 #guard trioRuleMatrixOf "W_(psi_W_(w^2+1)(W_(w^2+1)))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,1,0],[6,2,0]]
--- row 4744: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,1)(5,3,1)(6,2,0)(5,3,0)(6,4,1)(7,4,1)(8,3,0)(7,4,0)(8,5,1)(9,5,1)(10,2,0)(2,2,1)(3,2,1)(4,1,0)
-#guard trioRuleMatrixOf "(W_W_W+W_W)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,2,0],[4,3,1],[5,3,1],[6,2,0]]
+-- row 4744 (S-c)
+#guard trioRuleMatrixOf2 "(W_W_W+W_W)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,2,0],[2,2,1],[3,2,1],[4,1,0]]
 #guard trioRuleMatrixOf "(W_W_W+W_W)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,2,0],[2,2,1],[3,2,1],[4,1,0]]
--- row 4745: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,1)(5,3,1)(6,2,0)(5,3,0)(6,4,1)(7,4,1)(8,3,0)(7,4,0)(8,5,1)(9,5,1)(10,3,0)
-#guard trioRuleMatrixOf "(W_W_W+W_(W+1))"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,3,0],[4,3,1],[5,3,1],[6,2,0]]
+-- row 4745 (S-c)
+#guard trioRuleMatrixOf2 "(W_W_W+W_(W+1))" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,3,0]]
 #guard trioRuleMatrixOf "(W_W_W+W_(W+1))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,3,0]]
--- row 4746: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,1)(5,3,1)(6,2,0)(5,3,0)(6,4,1)(7,4,1)(8,3,0)(7,4,0)(8,5,1)(9,5,1)(10,3,0)(4,3,1)(5,3,1)(6,2,0)
-#guard trioRuleMatrixOf "(W_W_W+W_W_2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,2,0],[4,3,1],[5,3,1],[6,2,0]]
+-- row 4746 (S-c)
+#guard trioRuleMatrixOf2 "(W_W_W+W_W_2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,3,0],[4,3,1],[5,3,1],[6,2,0]]
 #guard trioRuleMatrixOf "(W_W_W+W_W_2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,3,0],[4,3,1],[5,3,1],[6,2,0]]
--- row 4747: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,1)(5,3,1)(6,2,0)(5,3,0)(6,4,1)(7,4,1)(8,3,0)(7,4,0)(8,5,1)(9,5,1)(10,3,0)(4,3,1)(5,3,1)(6,2,0)(2,2,1)(3,2,1)(4,1,0)
-#guard trioRuleMatrixOf "(W_W_W*2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,3,0],[4,3,1],[5,3,1],[6,2,0]]
+-- row 4747 (S-c)
+#guard trioRuleMatrixOf2 "(W_W_W*2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,3,0],[4,3,1],[5,3,1],[6,2,0],[2,2,1],[3,2,1],[4,1,0]]
 #guard trioRuleMatrixOf "(W_W_W*2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1],[9,5,1],[10,3,0],[4,3,1],[5,3,1],[6,2,0],[2,2,1],[3,2,1],[4,1,0]]
--- row 4750: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,1)(5,3,1)(6,2,0)(5,3,0)(6,4,1)(7,4,1)(8,3,0)(7,4,1)(8,2,0)(2,2,1)(3,2,1)(4,1,0)
-#guard trioRuleMatrixOf "(W_W_W*W_W)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,2,0],[4,3,1],[5,3,1],[6,2,0]]
+-- row 4750 (S-c)
+#guard trioRuleMatrixOf2 "(W_W_W*W_W)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,2,0],[2,2,1],[3,2,1],[4,1,0]]
 #guard trioRuleMatrixOf "(W_W_W*W_W)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,2,0],[2,2,1],[3,2,1],[4,1,0]]
--- row 4751: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,1)(5,3,1)(6,2,0)(5,3,0)(6,4,1)(7,4,1)(8,3,0)(7,4,1)(8,3,0)
-#guard trioRuleMatrixOf "(W_W_W*W_(W+1))"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,3,0],[4,3,1],[5,3,1],[6,2,0]]
+-- row 4751 (S-c)
+#guard trioRuleMatrixOf2 "(W_W_W*W_(W+1))" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,3,0]]
 #guard trioRuleMatrixOf "(W_W_W*W_(W+1))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,3,0]]
--- row 4752: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,1)(5,3,1)(6,2,0)(5,3,0)(6,4,1)(7,4,1)(8,3,0)(7,4,1)(8,3,0)(4,3,1)(5,3,1)(6,2,0)
-#guard trioRuleMatrixOf "(W_W_W*W_W_2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,2,0],[4,3,1],[5,3,1],[6,2,0]]
+-- row 4752 (S-c)
+#guard trioRuleMatrixOf2 "(W_W_W*W_W_2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,3,0],[4,3,1],[5,3,1],[6,2,0]]
 #guard trioRuleMatrixOf "(W_W_W*W_W_2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,3,0],[4,3,1],[5,3,1],[6,2,0]]
--- row 4753: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,1)(5,3,1)(6,2,0)(5,3,0)(6,4,1)(7,4,1)(8,3,0)(7,4,1)(8,3,0)(4,3,1)(5,3,1)(6,2,0)(2,2,1)(3,2,1)(4,1,0)
-#guard trioRuleMatrixOf "(W_W_W^2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,3,0],[4,3,1],[5,3,1],[6,2,0]]
+-- row 4753 (S-c)
+#guard trioRuleMatrixOf2 "(W_W_W^2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,3,0],[4,3,1],[5,3,1],[6,2,0],[2,2,1],[3,2,1],[4,1,0]]
 #guard trioRuleMatrixOf "(W_W_W^2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,1],[8,3,0],[4,3,1],[5,3,1],[6,2,0],[2,2,1],[3,2,1],[4,1,0]]
--- row 4762: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(3,2,0)(4,3,1)(5,3,1)(6,3,0)(4,3,1)(5,3,1)(6,2,0)(7,3,0)
-#guard trioRuleMatrixOf "W_psi_W_(W+1)(W_(W+1))"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0]]
+-- row 4762 (S-o)
+#guard trioRuleMatrixOf2 "W_psi_W_(W+1)(W_(W+1))" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[7,3,0]]
 #guard trioRuleMatrixOf "W_psi_W_(W+1)(W_(W+1))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,1],[6,2,0],[7,3,0]]
--- row 4769: the sheet has (0,0,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)(1,1,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,2,0)(2,2,1)(3,2,1)(4,1,0)(5,2,0)
-#guard trioRuleMatrixOf "W_W_psi_1(W_2)"
-  = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0]]
+-- row 4769 (S-o)
+#guard trioRuleMatrixOf2 "W_W_psi_1(W_2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[5,2,0]]
 #guard trioRuleMatrixOf "W_W_psi_1(W_2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[5,2,0]]
 
-end Googology.Trans.BMS.TrioRules
+/-! ### The 9 label typos -/
+
+-- row 2113, printed `(w^5*3)`, corrected `(w^5*2)`
+#guard trioRuleMatrixOf2 "(w^5*2)" = some [[0,0,0],[1,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[4,2,1],[4,2,1],[4,2,1]]
+#guard trioRuleMatrixOf2 "(w^5*3)" = trioRuleMatrixOf "(w^5*3)"
+-- row 2131, printed `(w^w+w2)`, corrected `(w^w+2)`
+#guard trioRuleMatrixOf2 "(w^w+2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,0],[4,3,0]]
+#guard trioRuleMatrixOf2 "(w^w+w2)" = trioRuleMatrixOf "(w^w+w2)"
+-- row 2532, printed `(W^(W+1))`, corrected `(W^(w+1))`
+#guard trioRuleMatrixOf2 "(W^(w+1))" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,1,0],[4,0,0],[3,2,1],[4,1,0]]
+#guard trioRuleMatrixOf2 "(W^(W+1))" = trioRuleMatrixOf "(W^(W+1))"
+-- row 2723, printed `(W_2*2+W)`, corrected `(W_2*2+w^2)`
+#guard trioRuleMatrixOf2 "(W_2*2+w^2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,2,0],[4,3,0],[5,4,1],[6,4,1],[7,2,0],[6,4,0],[7,5,1],[8,5,1]]
+#guard trioRuleMatrixOf2 "(W_2*2+W)" = trioRuleMatrixOf "(W_2*2+W)"
+-- row 3452, printed `(W_w*w+W_w+10)`, corrected `(W_w*w+W_w+1)`
+#guard trioRuleMatrixOf2 "(W_w*w+W_w+1)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,0]]
+#guard trioRuleMatrixOf2 "(W_w*w+W_w+10)" = trioRuleMatrixOf "(W_w*w+W_w+10)"
+-- row 3552, printed `psi_W_(W+1)(W_psi_W_(w+1)(W_(w+1)))`, corrected `psi_W_(w+1)(W_psi_W_(w+1)(W_(w+1)))`
+#guard trioRuleMatrixOf2 "psi_W_(w+1)(W_psi_W_(w+1)(W_(w+1)))" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,1],[7,2,1],[8,1,0],[9,2,0]]
+#guard trioRuleMatrixOf2 "psi_W_(W+1)(W_psi_W_(w+1)(W_(w+1)))" = trioRuleMatrixOf "psi_W_(W+1)(W_psi_W_(w+1)(W_(w+1)))"
+-- row 3777, printed `(W_(w+2)+w)`, corrected `(W_(w+2)+2)`
+#guard trioRuleMatrixOf2 "(W_(w+2)+2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,0],[5,4,1],[6,4,1],[7,3,0],[6,4,0],[7,5,0],[8,6,0]]
+#guard trioRuleMatrixOf2 "(W_(w+2)+w)" = trioRuleMatrixOf "(W_(w+2)+w)"
+-- row 4369, printed `(W_(w^3*W))`, corrected `(W_(w^3)*W)`
+#guard trioRuleMatrixOf2 "(W_(w^3)*W)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0]]
+#guard trioRuleMatrixOf2 "(W_(w^3*W))" = trioRuleMatrixOf "(W_(w^3*W))"
+-- row 4384, printed `W_(w^2*2)`, corrected `W_(w^w*2)`
+#guard trioRuleMatrixOf2 "W_(w^w*2)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,1],[5,0,0]]
+#guard trioRuleMatrixOf2 "W_(w^2*2)" = trioRuleMatrixOf "W_(w^2*2)"
+
+/-! ### The 8 rows where the rules are right and the sheet has another matrix -/
+
+-- row 2133 (R)
+#guard trioRuleMatrixOf2 "(w^w+w2)" = trioRuleMatrixOf "(w^w+w2)"
+#guard trioRuleMatrixOf2 "(w^w+w2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,0,0],[2,1,0],[3,2,1],[3,2,0],[4,3,1]]
+-- row 3453 (N)
+#guard trioRuleMatrixOf2 "(W_w*w+W_w*2)" = trioRuleMatrixOf "(W_w*w+W_w*2)"
+#guard trioRuleMatrixOf2 "(W_w*w+W_w*2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,0],[7,4,1],[8,4,1],[9,1,0]]
+-- row 3551 (R (weak))
+#guard trioRuleMatrixOf2 "psi_W_(w+1)(W_W_w)" = trioRuleMatrixOf "psi_W_(w+1)(W_W_w)"
+#guard trioRuleMatrixOf2 "psi_W_(w+1)(W_W_w)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[6,2,1],[7,2,1],[8,1,0],[1,1,1]]
+-- row 3706 (N)
+#guard trioRuleMatrixOf2 "(W_(w+1)+W_w^2)" = trioRuleMatrixOf "(W_(w+1)+W_w^2)"
+#guard trioRuleMatrixOf2 "(W_(w+1)+W_w^2)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[8,1,0],[1,1,1]]
+-- row 3709 (N)
+#guard trioRuleMatrixOf2 "(W_(w+1)*2+W)" = trioRuleMatrixOf "(W_(w+1)*2+W)"
+#guard trioRuleMatrixOf2 "(W_(w+1)*2+W)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,0],[6,4,1],[7,4,1],[8,2,0],[7,4,0],[8,5,1]]
+-- row 3923 (R)
+#guard trioRuleMatrixOf2 "psi_W_(w2+2)(W_(w2+2))" = trioRuleMatrixOf "psi_W_(w2+2)(W_(w2+2))"
+#guard trioRuleMatrixOf2 "psi_W_(w2+2)(W_(w2+2))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,3,0],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[9,3,0]]
+-- row 4303 (N)
+#guard trioRuleMatrixOf2 "(W_(w^2+w)^W_(w^2+w))" = trioRuleMatrixOf "(W_(w^2+w)^W_(w^2+w))"
+#guard trioRuleMatrixOf2 "(W_(w^2+w)^W_(w^2+w))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[2,1,0],[3,2,1],[4,2,1],[5,2,0],[3,2,1],[4,2,0],[5,3,1],[6,3,1],[7,2,0],[8,2,0],[3,2,1]]
+-- row 4496 (N)
+#guard trioRuleMatrixOf2 "(W_(W+w)+1)" = trioRuleMatrixOf "(W_(W+w)+1)"
+#guard trioRuleMatrixOf2 "(W_(W+w)+1)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,1,0],[3,2,0],[4,3,1],[5,3,1],[6,3,0],[4,3,1],[5,3,0],[6,4,1],[7,4,1],[8,3,0],[7,4,0],[8,5,1]]
+
+/-! ### Rows 3439 and 3480: unchanged -/
+
+-- row 3439 (X)
+#guard trioRuleMatrixOf2 "(W_w*w0*W_W_w+W_(W_w*w))" = trioRuleMatrixOf "(W_w*w0*W_W_w+W_(W_w*w))"
+#guard trioRuleMatrixOf2 "(W_w*w0*W_W_w+W_(W_w*w))" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[4,2,0],[3,2,1],[4,2,1],[5,1,0],[4,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1],[6,2,0],[5,3,1],[6,3,1],[7,1,0],[6,3,1]]
+-- row 3480 (O)
+#guard trioRuleMatrixOf2 "(W_w*W+W_3)" = trioRuleMatrixOf "(W_w*W+W_3)"
+#guard trioRuleMatrixOf2 "(W_w*W+W_3)" ≠ some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,0],[3,2,1],[4,2,1],[5,1,0],[4,2,1],[5,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,0],[4,3,1],[5,3,1],[6,2,0],[5,3,1],[6,1,0],[5,3,0],[6,4,1],[7,4,1],[8,1,0],[7,4,1]]
+
+/-! ### Row 4533: the one changed row among the 28 that are not standard
+
+Row 4533 `Ω_{ψ_2(Ω_3)}` is one of the 28 rows whose sheet matrix is not a
+standard form, so it is outside the 785 above.  Fix A keeps the last column
+`(6,3,0)`, which rules 1–10 drop (the same shape as row 4508 `Ω_{ψ_1(Ω_2)}`).
+The sheet's matrix is the corrected one with `(4,3,1)` misprinted as `(4,4,1)`.
+Both outputs are standard (yaBMS `bms -s`) and in order against the 783 matrices
+of the order check below. -/
+
+#guard trioRuleMatrixOf2 "W_psi_2(W_3)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,1],[4,3,1],[5,2,0],[6,3,0]]
+#guard trioRuleMatrixOf "W_psi_2(W_3)" = some [[0,0,0],[1,1,1],[2,1,1],[3,1,0],[1,1,1],[2,1,1],[3,1,0],[1,1,0],[2,2,1],[3,2,1],[4,2,0],[2,2,1],[3,2,1],[4,2,0],[2,2,0],[3,3,1],[4,3,1],[5,3,0],[3,3,1],[4,3,1],[5,2,0]]
+
+/-! ### The order check
+
+`chosen` is the 744 agreeing rows and the 39 decided rows, each under its
+corrected label; on each of them the corrected rules give the chosen matrix
+(the guards above).  For every pair, `cmpOrd` of the labels is the
+lexicographic order of the matrices. -/
+
+/-- Lexicographic order on a column. -/
+def cmpCol : List Nat → List Nat → Ordering
+  | [], [] => .eq
+  | [], _ => .lt
+  | _, [] => .gt
+  | a :: as, b :: bs => (compare a b).then (cmpCol as bs)
+
+/-- Lexicographic order on matrices, column by column. -/
+def cmpMat : List (List Nat) → List (List Nat) → Ordering
+  | [], [] => .eq
+  | [], _ => .lt
+  | _, [] => .gt
+  | a :: as, b :: bs => (cmpCol a b).then (cmpMat as bs)
+
+/-- The labels of the 783 rows, in sheet order. -/
+def chosen : List String := [
+
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "w",
+  "(w+1)",
+  "(w+2)",
+  "(w+3)",
+  "(w+4)",
+  "(w+5)",
+  "(w+6)",
+  "(w2)",
+  "(w2+1)",
+  "(w2+2)",
+  "(w2+3)",
+  "(w2+4)",
+  "(w3)",
+  "(w3+1)",
+  "(w3+2)",
+  "(w4)",
+  "(w4+1)",
+  "(w5)",
+  "(w6)",
+  "(w^2)",
+  "(w^2+1)",
+  "(w^2+2)",
+  "(w^2+3)",
+  "(w^2+4)",
+  "(w^2+5)",
+  "(w^2+w)",
+  "(w^2+w+1)",
+  "(w^2+w+2)",
+  "(w^2+w+3)",
+  "(w^2+w2)",
+  "(w^2+w2+1)",
+  "(w^2+w2+2)",
+  "(w^2+w2+3)",
+  "(w^2+w3)",
+  "(w^2+w3+1)",
+  "(w^2+w4)",
+  "(w^2+w5)",
+  "(w^2*2)",
+  "(w^2*2+1)",
+  "(w^2*2+2)",
+  "(w^2*2+3)",
+  "(w^2*2+w)",
+  "(w^2*2+w+1)",
+  "(w^2*2+w+2)",
+  "(w^2*2+w2)",
+  "(w^2*2+w3)",
+  "(w^2*3)",
+  "(w^2*3+1)",
+  "(w^2*3+2)",
+  "(w^2*3+w)",
+  "(w^2*3+w2)",
+  "(w^2*4)",
+  "(w^2*4+1)",
+  "(w^2*4+w)",
+  "(w^2*5)",
+  "(w^3)",
+  "(w^3+1)",
+  "(w^3+2)",
+  "(w^3+3)",
+  "(w^3+w)",
+  "(w^3+w+1)",
+  "(w^3+w+2)",
+  "(w^3+w2)",
+  "(w^3+w3)",
+  "(w^3+w^2)",
+  "(w^3+w^2+1)",
+  "(w^3+w^2+2)",
+  "(w^3+w^2+w)",
+  "(w^3+w^2+w2)",
+  "(w^3+w^2*2)",
+  "(w^3+w^2*3)",
+  "(w^3*2)",
+  "(w^3*2+1)",
+  "(w^3*2+2)",
+  "(w^3*2+w)",
+  "(w^3*2+w2)",
+  "(w^3*2+w^2)",
+  "(w^3*2+w^2*2)",
+  "(w^3*3)",
+  "(w^3*4)",
+  "(w^4)",
+  "(w^4+1)",
+  "(w^4+2)",
+  "(w^4+w)",
+  "(w^4+w2)",
+  "(w^4+w^2)",
+  "(w^4+w^2*2)",
+  "(w^4+w^3)",
+  "(w^4+w^3*2)",
+  "(w^4*2)",
+  "(w^4*3)",
+  "(w^5)",
+  "(w^5+1)",
+  "(w^5+w)",
+  "(w^5+w^2)",
+  "(w^5*2)",
+  "(w^6)",
+  "(w^7)",
+  "(w^w)",
+  "(w^w+1)",
+  "(w^w+2)",
+  "(w^w+w)",
+  "(w^w+w2)",
+  "(w^w+w^2)",
+  "(w^w+w^3)",
+  "(w^w*2)",
+  "(w^w*3)",
+  "(w^(w+1))",
+  "(w^(w+1)+1)",
+  "(w^(w+1)+w^w)",
+  "(w^(w+1)*2)",
+  "(w^(w+2))",
+  "(w^(w+3))",
+  "(w^(w2))",
+  "(w^(w3))",
+  "(w^w^2)",
+  "(w^w^3)",
+  "(w^w^w)",
+  "(w^w^w^2)",
+  "(w^w^w^w)",
+  "(w^w^w^w^w)",
+  "psi(W)",
+  "(psi(W)+1)",
+  "(psi(W)+w)",
+  "(psi(W)+w^2)",
+  "(psi(W)+w^w)",
+  "(psi(W)*2)",
+  "(psi(W)*w)",
+  "(psi(W)*w^w)",
+  "(psi(W)^2)",
+  "(psi(W)^w)",
+  "(psi(W)^psi(W))",
+  "(psi(W)^psi(W)^w)",
+  "(psi(W)^psi(W)^psi(W))",
+  "psi(W2)",
+  "psi(W3)",
+  "psi(W*w)",
+  "psi(W*psi(W))",
+  "psi(W^2)",
+  "psi(W^3)",
+  "psi(W^w)",
+  "psi(W^W)",
+  "psi(W^W^W)",
+  "psi(W_2)",
+  "psi(W_2^2)",
+  "psi(W_3)",
+  "psi(W_w)",
+  "psi(W_w*2)",
+  "psi(W_w*W)",
+  "psi(W_w^2)",
+  "psi(W_w^W_w)",
+  "psi(W_(w+1))",
+  "psi(W_(w+2))",
+  "psi(W_(w2))",
+  "psi(W_(w3))",
+  "psi(W_(w^2))",
+  "psi(W_(w^3))",
+  "psi(W_(w^w))",
+  "psi(W_psi(W))",
+  "psi(W_psi(W_w))",
+  "psi(W_psi(W_(w^2)))",
+  "psi(W_psi(W_psi(W_w)))",
+  "W",
+  "(W+1)",
+  "(W+2)",
+  "(W+3)",
+  "(W+4)",
+  "(W+w)",
+  "(W+w+1)",
+  "(W+w+2)",
+  "(W+w2)",
+  "(W+w3)",
+  "(W+w^2)",
+  "(W+w^2+1)",
+  "(W+w^2+w)",
+  "(W+w^2*2)",
+  "(W+w^3)",
+  "(W+w^4)",
+  "(W+w^w)",
+  "(W+w^w^w)",
+  "(W+psi(W))",
+  "(W+psi(W_w))",
+  "(W+psi(W_W))",
+  "(W2)",
+  "(W2+1)",
+  "(W2+2)",
+  "(W2+w)",
+  "(W2+w2)",
+  "(W2+w^2)",
+  "(W2+w^w)",
+  "(W3)",
+  "(W3+1)",
+  "(W3+w)",
+  "(W4)",
+  "(W5)",
+  "(W*w)",
+  "(W*w+1)",
+  "(W*w+2)",
+  "(W*w+w)",
+  "(W*w+w^2)",
+  "(W*w+w^w)",
+  "(W*w+W)",
+  "(W*w+W+1)",
+  "(W*w+W+w)",
+  "(W*w+W2)",
+  "(W*w2)",
+  "(W*w3)",
+  "(W*w^2)",
+  "(W*w^2*2)",
+  "(W*w^3)",
+  "(W*w^w)",
+  "(W*psi(W))",
+  "(W*psi(W_w))",
+  "(W^2)",
+  "(W^2+1)",
+  "(W^2+2)",
+  "(W^2+w)",
+  "(W^2+w^2)",
+  "(W^2+W)",
+  "(W^2+W+1)",
+  "(W^2+W+w)",
+  "(W^2+W2)",
+  "(W^2+W*w)",
+  "(W^2+W*w^2)",
+  "(W^2*2)",
+  "(W^2*w)",
+  "(W^2*w^2)",
+  "(W^2*w^w)",
+  "(W^3)",
+  "(W^3*w)",
+  "(W^4)",
+  "(W^w)",
+  "(W^w*w)",
+  "(W^(w+1))",
+  "(W^(w2))",
+  "(W^w^2)",
+  "(W^w^w)",
+  "(W^W)",
+  "(W^W*w)",
+  "(W^(W+1))",
+  "(W^(W2))",
+  "(W^W^2)",
+  "(W^W^W)",
+  "(W^W^W^W)",
+  "psi_1(W_2)",
+  "psi_1(W_2*2)",
+  "psi_1(W_2*W)",
+  "psi_1(W_2^2)",
+  "psi_1(W_2^W_2)",
+  "psi_1(W_3)",
+  "psi_1(W_4)",
+  "psi_1(W_w)",
+  "psi_1(W_w*W_2)",
+  "psi_1(W_w^2)",
+  "psi_1(W_(w+1))",
+  "psi_1(W_(w2))",
+  "psi_1(W_(w^2))",
+  "psi_1(W_(w^w))",
+  "psi_1(W_W)",
+  "psi_1(W_(W*w))",
+  "psi_1(W_(W^W))",
+  "psi_1(W_psi_1(W_2))",
+  "psi_1(W_psi_1(W_W))",
+  "W_2",
+  "(W_2+1)",
+  "(W_2+2)",
+  "(W_2+3)",
+  "(W_2+w)",
+  "(W_2+w+1)",
+  "(W_2+w2)",
+  "(W_2+w^2)",
+  "(W_2+w^w)",
+  "(W_2+W)",
+  "(W_2+W+1)",
+  "(W_2+W+w)",
+  "(W_2+W+w^2)",
+  "(W_2+W2)",
+  "(W_2+W*w)",
+  "(W_2+W*w^w)",
+  "(W_2+W^2)",
+  "(W_2+W^W)",
+  "(W_2+psi_1(W_2))",
+  "(W_2+psi_1(W_w))",
+  "(W_2*2)",
+  "(W_2*2+1)",
+  "(W_2*2+w)",
+  "(W_2*2+w^2)",
+  "(W_2*2+W)",
+  "(W_2*3)",
+  "(W_2*w)",
+  "(W_2*w+1)",
+  "(W_2*w+w)",
+  "(W_2*w+w^2)",
+  "(W_2*w+W)",
+  "(W_2*w+W_2)",
+  "(W_2*w2)",
+  "(W_2*w^2)",
+  "(W_2*w^w)",
+  "(W_2*W)",
+  "(W_2*W+1)",
+  "(W_2*W+w)",
+  "(W_2*W+W)",
+  "(W_2*W+W_2)",
+  "(W_2*W2)",
+  "(W_2*W*w)",
+  "(W_2*W^2)",
+  "(W_2^2)",
+  "(W_2^2+1)",
+  "(W_2^2+w)",
+  "(W_2^2+W)",
+  "(W_2^2+W_2)",
+  "(W_2^2*2)",
+  "(W_2^2*w)",
+  "(W_2^2*W)",
+  "(W_2^3)",
+  "(W_2^w)",
+  "(W_2^W)",
+  "(W_2^W_2)",
+  "(W_2^W_2^W_2)",
+  "psi_2(W_3)",
+  "psi_2(W_w)",
+  "W_3",
+  "(W_3+1)",
+  "(W_3+2)",
+  "(W_3+w)",
+  "(W_3+w^2)",
+  "(W_3+W)",
+  "(W_3+W_2)",
+  "(W_3*2)",
+  "(W_3*w)",
+  "(W_3*w^2)",
+  "(W_3*W)",
+  "(W_3*W_2)",
+  "(W_3^2)",
+  "(W_3^w)",
+  "(W_3^W_3)",
+  "psi_3(W_4)",
+  "W_4",
+  "W_5",
+  "W_6",
+  "W_w",
+  "(W_w+1)",
+  "(W_w+2)",
+  "(W_w+3)",
+  "(W_w+w)",
+  "(W_w+w+1)",
+  "(W_w+w+2)",
+  "(W_w+w2)",
+  "(W_w+w3)",
+  "(W_w+w^2)",
+  "(W_w+w^3)",
+  "(W_w+w^w)",
+  "(W_w+psi(W_w))",
+  "(W_w+W)",
+  "(W_w+W+1)",
+  "(W_w+W+2)",
+  "(W_w+W+w)",
+  "(W_w+W+w^2)",
+  "(W_w+W2)",
+  "(W_w+W*w)",
+  "(W_w+W^2)",
+  "(W_w+W^W)",
+  "(W_w+psi_1(W_w))",
+  "(W_w+W_2)",
+  "(W_w+W_3)",
+  "(W_w*2)",
+  "(W_w*2+1)",
+  "(W_w*2+2)",
+  "(W_w*2+w)",
+  "(W_w*2+W)",
+  "(W_w*3)",
+  "(W_w*4)",
+  "(W_w*w)",
+  "(W_w*w+1)",
+  "(W_w*w+w)",
+  "(W_w*w+W_w)",
+  "(W_w*w+W_w+1)",
+  "(W_w*w+W_w*2)",
+  "(W_w*w2)",
+  "(W_w*w3)",
+  "(W_w*w^2)",
+  "(W_w*w^3)",
+  "(W_w*w^w)",
+  "(W_w*psi(W_w))",
+  "(W_w*W)",
+  "(W_w*W+1)",
+  "(W_w*W+w)",
+  "(W_w*W*w)",
+  "(W_w*W*w^2)",
+  "(W_w*W*w^w)",
+  "(W_w*W^2)",
+  "(W_w*W^3)",
+  "(W_w*W^w)",
+  "(W_w*W^W)",
+  "(W_w*psi_1(W_w))",
+  "(W_w*W_2)",
+  "(W_w*W_2*w)",
+  "(W_w*W_3)",
+  "(W_w^2)",
+  "(W_w^2+1)",
+  "(W_w^2+w)",
+  "(W_w^2+W)",
+  "(W_w^2+W_2)",
+  "(W_w^2+W_w)",
+  "(W_w^2+W_w+1)",
+  "(W_w^2+W_w*2)",
+  "(W_w^2+W_w*w)",
+  "(W_w^2+W_w*w^w)",
+  "(W_w^2+W_w*W)",
+  "(W_w^2*2)",
+  "(W_w^2*2+1)",
+  "(W_w^2*3)",
+  "(W_w^2*w)",
+  "(W_w^2*w^2)",
+  "(W_w^2*w^w)",
+  "(W_w^2*W)",
+  "(W_w^2*W_2)",
+  "(W_w^3)",
+  "(W_w^3*w)",
+  "(W_w^3*W)",
+  "(W_w^4)",
+  "(W_w^w)",
+  "(W_w^W)",
+  "(W_w^W_2)",
+  "(W_w^W_w)",
+  "(W_w^W_w^2)",
+  "(W_w^W_w^W_w)",
+  "psi_W_(w+1)(W_(w+1))",
+  "psi_W_(w+1)(W_(w+2))",
+  "psi_W_(w+1)(W_(w2))",
+  "psi_W_(w+1)(W_(w^2))",
+  "psi_W_(w+1)(W_W)",
+  "psi_W_(w+1)(W_W_w)",
+  "psi_W_(w+1)(W_psi_W_(w+1)(W_(w+1)))",
+  "W_(w+1)",
+  "(W_(w+1)+1)",
+  "(W_(w+1)+2)",
+  "(W_(w+1)+w)",
+  "(W_(w+1)+w+1)",
+  "(W_(w+1)+w2)",
+  "(W_(w+1)+w^2)",
+  "(W_(w+1)+w^3)",
+  "(W_(w+1)+W)",
+  "(W_(w+1)+W_w)",
+  "(W_(w+1)+W_w^2)",
+  "(W_(w+1)*2)",
+  "(W_(w+1)*2+1)",
+  "(W_(w+1)*2+W)",
+  "(W_(w+1)*3)",
+  "(W_(w+1)*w)",
+  "(W_(w+1)*w+1)",
+  "(W_(w+1)*w+W_(w+1))",
+  "(W_(w+1)*w2)",
+  "(W_(w+1)*w^2)",
+  "(W_(w+1)*W)",
+  "(W_(w+1)*W_w)",
+  "(W_(w+1)^2)",
+  "(W_(w+1)^W_(w+1))",
+  "psi_W_(w+2)(W_(w+2))",
+  "psi_W_(w+2)(W_W)",
+  "W_(w+2)",
+  "(W_(w+2)+1)",
+  "(W_(w+2)+2)",
+  "(W_(w+2)+w)",
+  "(W_(w+2)+w+1)",
+  "(W_(w+2)+w2)",
+  "(W_(w+2)+w^2)",
+  "(W_(w+2)+W)",
+  "(W_(w+2)+W_w)",
+  "(W_(w+2)+W_(w+1))",
+  "(W_(w+2)*2)",
+  "(W_(w+2)*3)",
+  "(W_(w+2)*w)",
+  "(W_(w+2)*w^2)",
+  "(W_(w+2)*W)",
+  "(W_(w+2)*W_w)",
+  "(W_(w+2)*W_(w+1))",
+  "(W_(w+2)^2)",
+  "(W_(w+2)^W_(w+2))",
+  "psi_W_(w+3)(W_(w+3))",
+  "W_(w+3)",
+  "(W_(w+3)+1)",
+  "(W_(w+3)*w)",
+  "W_(w+4)",
+  "W_(w2)",
+  "(W_(w2)+1)",
+  "(W_(w2)+2)",
+  "(W_(w2)+w)",
+  "(W_(w2)+w+1)",
+  "(W_(w2)+w2)",
+  "(W_(w2)+w^2)",
+  "(W_(w2)+w^w)",
+  "(W_(w2)+W)",
+  "(W_(w2)+W_w)",
+  "(W_(w2)+W_(w+1))",
+  "(W_(w2)*2)",
+  "(W_(w2)*3)",
+  "(W_(w2)*w)",
+  "(W_(w2)*W)",
+  "(W_(w2)*W_(w+1))",
+  "(W_(w2)^2)",
+  "(W_(w2)^W_(w2))",
+  "psi_W_(w2+1)(W_(w2+1))",
+  "psi_W_(w2+1)(W_W)",
+  "W_(w2+1)",
+  "(W_(w2+1)+1)",
+  "(W_(w2+1)+w)",
+  "(W_(w2+1)+w^2)",
+  "(W_(w2+1)+W)",
+  "(W_(w2+1)*2)",
+  "(W_(w2+1)*w)",
+  "(W_(w2+1)*W)",
+  "(W_(w2+1)^2)",
+  "(W_(w2+1)^W_(w2+1))",
+  "psi_W_(w2+2)(W_(w2+2))",
+  "W_(w2+2)",
+  "W_(w2+3)",
+  "W_(w3)",
+  "(W_(w3)+1)",
+  "(W_(w3)+w)",
+  "(W_(w3)+w^2)",
+  "(W_(w3)+W)",
+  "(W_(w3)+W_(w2+1))",
+  "(W_(w3)*2)",
+  "(W_(w3)*w)",
+  "(W_(w3)^2)",
+  "psi_W_(w3+1)(W_(w3+1))",
+  "W_(w3+1)",
+  "W_(w4)",
+  "W_(w^2)",
+  "(W_(w^2)+1)",
+  "(W_(w^2)+2)",
+  "(W_(w^2)+w)",
+  "(W_(w^2)+w+1)",
+  "(W_(w^2)+w2)",
+  "(W_(w^2)+w^2)",
+  "(W_(w^2)+W)",
+  "(W_(w^2)+W_w)",
+  "(W_(w^2)*2)",
+  "(W_(w^2)*3)",
+  "(W_(w^2)*w)",
+  "(W_(w^2)*w+1)",
+  "(W_(w^2)*w+w)",
+  "(W_(w^2)*w+W)",
+  "(W_(w^2)*w+W_(w^2))",
+  "(W_(w^2)*w2)",
+  "(W_(w^2)*w^2)",
+  "(W_(w^2)*w^w)",
+  "(W_(w^2)*W)",
+  "(W_(w^2)*W_w)",
+  "(W_(w^2)^2)",
+  "(W_(w^2)^W)",
+  "(W_(w^2)^W_(w^2))",
+  "psi_W_(w^2+1)(W_(w^2+1))",
+  "psi_W_(w^2+1)(W_W)",
+  "W_(w^2+1)",
+  "(W_(w^2+1)+1)",
+  "(W_(w^2+1)+2)",
+  "(W_(w^2+1)+w)",
+  "(W_(w^2+1)+W)",
+  "(W_(w^2+1)+W_(w^2))",
+  "(W_(w^2+1)*2)",
+  "(W_(w^2+1)*w)",
+  "(W_(w^2+1)*W)",
+  "(W_(w^2+1)*W_(w^2))",
+  "(W_(w^2+1)^2)",
+  "(W_(w^2+1)^W_(w^2+1))",
+  "psi_W_(w^2+2)(W_(w^2+2))",
+  "W_(w^2+2)",
+  "W_(w^2+3)",
+  "W_(w^2+w)",
+  "(W_(w^2+w)+1)",
+  "(W_(w^2+w)+2)",
+  "(W_(w^2+w)+w)",
+  "(W_(w^2+w)+W)",
+  "(W_(w^2+w)+W_(w^2))",
+  "(W_(w^2+w)+W_(w^2+1))",
+  "(W_(w^2+w)*2)",
+  "(W_(w^2+w)*w)",
+  "(W_(w^2+w)*W)",
+  "(W_(w^2+w)*W_(w^2))",
+  "(W_(w^2+w)*W_(w^2+1))",
+  "(W_(w^2+w)^2)",
+  "(W_(w^2+w)^W_(w^2+w))",
+  "psi_W_(w^2+w+1)(W_(w^2+w+1))",
+  "W_(w^2+w+1)",
+  "W_(w^2*2)",
+  "(W_(w^2*2)+1)",
+  "(W_(w^2*2)+w)",
+  "(W_(w^2*2)+W)",
+  "(W_(w^2*2)+W_(w^2))",
+  "(W_(w^2*2)+W_(w^2+1))",
+  "(W_(w^2*2)*2)",
+  "(W_(w^2*2)*w)",
+  "(W_(w^2*2)*W)",
+  "(W_(w^2*2)*W_(w^2+1))",
+  "(W_(w^2*2)^2)",
+  "(W_(w^2*2)^W_(w^2*2))",
+  "psi_W_(w^2*2+1)(W_(w^2*2+1))",
+  "W_(w^2*2+1)",
+  "W_(w^2*2+w)",
+  "W_(w^2*3)",
+  "W_(w^2*4)",
+  "W_(w^3)",
+  "(W_(w^3)+1)",
+  "(W_(w^3)+w)",
+  "(W_(w^3)+W)",
+  "(W_(w^3)*2)",
+  "(W_(w^3)*w)",
+  "(W_(w^3)*W)",
+  "(W_(w^3)^2)",
+  "(W_(w^3)^W_(w^3))",
+  "psi_W_(w^3+1)(W_(w^3+1))",
+  "W_(w^3+1)",
+  "W_(w^3+2)",
+  "W_(w^3+w)",
+  "W_(w^3+w^2)",
+  "W_(w^3*2)",
+  "W_(w^3*3)",
+  "W_(w^4)",
+  "W_(w^5)",
+  "W_(w^w)",
+  "W_(w^w+1)",
+  "W_(w^w+w)",
+  "W_(w^w*2)",
+  "W_(w^(w+1))",
+  "W_(w^(w2))",
+  "W_(w^w^2)",
+  "W_(w^w^w)",
+  "W_psi(W)",
+  "W_psi(W_w)",
+  "W_psi(W_W)",
+  "W_W",
+  "(W_W+1)",
+  "(W_W+2)",
+  "(W_W+w)",
+  "(W_W+w^2)",
+  "(W_W+W)",
+  "(W_W+W_2)",
+  "(W_W+W_w)",
+  "(W_W*2)",
+  "(W_W*3)",
+  "(W_W*w)",
+  "(W_W*W)",
+  "(W_W*W_2)",
+  "(W_W*W_w)",
+  "(W_W^2)",
+  "(W_W^W_W)",
+  "psi_W_(W+1)(W_(W+1))",
+  "psi_W_(W+1)(W_W_2)",
+  "W_(W+1)",
+  "(W_(W+1)+1)",
+  "(W_(W+1)+w)",
+  "(W_(W+1)+W_2)",
+  "(W_(W+1)+W_W)",
+  "(W_(W+1)*2)",
+  "(W_(W+1)*w)",
+  "(W_(W+1)^2)",
+  "psi_W_(W+2)(W_(W+2))",
+  "W_(W+2)",
+  "W_(W+3)",
+  "W_(W+w)",
+  "(W_(W+w)+1)",
+  "(W_(W+w)*w)",
+  "W_(W+w+1)",
+  "W_(W+w^2)",
+  "W_(W+w^w)",
+  "W_(W2)",
+  "W_(W3)",
+  "W_(W*w)",
+  "W_(W*w^2)",
+  "W_(W^2)",
+  "W_(W^W)",
+  "W_psi_1(W_2)",
+  "W_psi_1(W_W)",
+  "W_W_2",
+  "W_W_w",
+  "(W_W_w+1)",
+  "(W_W_w+w)",
+  "(W_W_w+W)",
+  "(W_W_w+W_w)",
+  "(W_W_w+W_(w+1))",
+  "(W_W_w+W_(w2))",
+  "(W_W_w+W_W)",
+  "(W_W_w*2)",
+  "(W_W_w*w)",
+  "(W_W_w*W)",
+  "(W_W_w*W_(w+1))",
+  "(W_W_w*W_W)",
+  "(W_W_w^2)",
+  "psi_W_(W_w+1)(W_(W_w+1))",
+  "W_(W_w+1)",
+  "W_(W_w+2)",
+  "W_(W_w+w)",
+  "W_(W_w*2)",
+  "W_(W_w*3)",
+  "W_(W_w*w)",
+  "W_(W_w*W)",
+  "W_(W_w^2)",
+  "W_psi_W_(w+1)(W_(w+1))",
+  "W_W_(w+1)",
+  "(W_W_(w+1)+1)",
+  "(W_W_(w+1)*2)",
+  "(W_W_(w+1)*w)",
+  "(W_W_(w+1)^2)",
+  "W_(W_(w+1)+1)",
+  "W_(W_(w+1)*2)",
+  "W_(W_(w+1)*w)",
+  "W_(W_(w+1)^2)",
+  "W_W_(w+2)",
+  "W_W_(w2)",
+  "W_W_(w2+1)",
+  "W_W_(w3)",
+  "W_W_(w^2)",
+  "(W_W_(w^2)+1)",
+  "(W_W_(w^2)+W_(w^2+1))",
+  "(W_W_(w^2)*2)",
+  "(W_W_(w^2)*w)",
+  "W_(W_(w^2)+1)",
+  "W_(W_(w^2)+W)",
+  "W_(W_(w^2)*2)",
+  "W_(W_(w^2)*w)",
+  "W_(W_(w^2)^2)",
+  "W_(psi_W_(w^2+1)(W_(w^2+1)))",
+  "W_W_(w^2+1)",
+  "W_W_(w^2+2)",
+  "W_W_(w^2+w)",
+  "W_W_(w^2*2)",
+  "W_W_(w^3)",
+  "W_W_(w^4)",
+  "W_W_(w^w)",
+  "W_W_psi(W_w)",
+  "W_W_W",
+  "(W_W_W+1)",
+  "(W_W_W+w)",
+  "(W_W_W+W_2)",
+  "(W_W_W+W_w)",
+  "(W_W_W+W_W)",
+  "(W_W_W+W_(W+1))",
+  "(W_W_W+W_W_2)",
+  "(W_W_W*2)",
+  "(W_W_W*w)",
+  "(W_W_W*W_2)",
+  "(W_W_W*W_W)",
+  "(W_W_W*W_(W+1))",
+  "(W_W_W*W_W_2)",
+  "(W_W_W^2)",
+  "psi_W_(W_W+1)(W_(W_W+1))",
+  "W_(W_W+1)",
+  "W_(W_W+w)",
+  "W_(W_W+W_2)",
+  "W_(W_W*2)",
+  "W_(W_W*w)",
+  "W_(W_W*W_2)",
+  "W_(W_W^2)",
+  "W_psi_W_(W+1)(W_(W+1))",
+  "W_W_(W+1)",
+  "W_W_(W+w)",
+  "W_W_(W2)",
+  "W_W_(W*w)",
+  "W_W_(W^2)",
+  "W_W_(W^W)",
+  "W_W_psi_1(W_2)",
+  "W_W_W_2",
+  "W_W_W_3",
+  "W_W_W_w",
+  "W_W_W_(w+1)",
+  "W_W_W_(w2)",
+  "W_W_W_(w^2)",
+  "W_W_W_(w^3)",
+  "W_W_W_(w^w)",
+  "W_W_W_W",
+  "W_W_W_W_2",
+  "W_W_W_W_w",
+  "W_W_W_W_(w^2)",
+  "W_W_W_W_W",
+  "W_W_W_W_W_W"]
+
+
+/-- Each label with its ordinal and its corrected-rule matrix. -/
+def chosenData : Array (Od × List (List Nat)) :=
+  (chosen.map fun s => ((parse s).getD [], (trioRuleMatrixOf2 s).getD [])).toArray
+
+/-- The number of pairs on which the order of the labels and the order of the
+matrices differ. -/
+def orderDisagreements (xs : Array (Od × List (List Nat))) : Nat := Id.run do
+  let mut bad := 0
+  for i in [0:xs.size] do
+    for j in [i+1:xs.size] do
+      let a := xs[i]!
+      let b := xs[j]!
+      if cmpOrd a.1 b.1 != cmpMat a.2 b.2 then bad := bad + 1
+  return bad
+
+#guard chosen.length = 783
+#guard chosenData.all fun p => !p.1.isEmpty && !p.2.isEmpty
+#guard orderDisagreements chosenData = 0
+
+end Googology.Trans.BMS.TrioRules2
