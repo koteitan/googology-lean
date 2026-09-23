@@ -15,30 +15,23 @@ Names are written relative to `Googology`.
 
 ### The systems
 
-| | |
-|---|---|
-| **Bashicu matrices terminate**, for any number of rows | `Notation.BMS.bms_terminates` |
-| **expansion ends from any array at all**, standard or not | `Notation.BMS.terminates_any` |
-| so the rule on every array is a system, well founded and with a rank | `Notation.BMS.bmsAll`, `Notation.BMS.bmsAll_wf`, `Notation.BMS.bmsAllEval` |
-| and the same on the entries, where the step runs | `Trans.BMS.bmsAllL`, `Trans.BMS.bmsAllL_wf`, `Trans.BMS.bmsAllLEval` |
-| the primitive, pair and trio sequences terminate | `Notation.BMS.primitive_terminates`, `Notation.BMS.pair_terminates`, `Notation.BMS.trio_terminates` |
-| BMS carries an ordinal measure | `Notation.BMS.bmsEval` |
-| **every Bashicu matrix expansion, written on the entries, is `BM4.expand`** — so it runs, at any number of rows | `Trans.BMS.entriesR_expand` |
-| the one-row, two-row and general rules are one rule | `Trans.BMS.expandRL_one`, `Trans.BMS.expandRL_two` |
-| and a row of zeros underneath changes nothing, for one row inside two | `Trans.BMS.expand2L_withZero` |
-| **the primitive sequence system sits inside the pair sequence system** | `Trans.BMS.primHomPair`, `Trans.BMS.withZero_std` |
-| so does `bmsL 0` inside `bmsL 1`, the first step of the hierarchy | `Trans.BMS.bmsL_zero_sim_one` |
-| **and a row of zeros underneath changes nothing at every number of rows** | `Trans.BMS.expandRL_zeroRow` |
-| so `r + 1` rows sit inside `r + 2`, standard matrices and all matrices | `Trans.BMS.bmsL_homSucc`, `Trans.BMS.bmsAllL_homSucc` |
-| and iterating that, `r ≤ s` puts `r + 1` rows inside `s + 1` | `Trans.BMS.bmsL_simLe`, `Trans.BMS.bmsAllL_simLe` |
-| **and the ordinal a matrix names does not change when the zero row is added** | `Trans.BMS.rank_zeroRow`, `StepHom.rank_map` |
-| the systems on the entries, with their generators | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
-| the general system at one and two rows is the primitive and pair sequence system | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
-| from a generator, any expansion sequence ends | `Notation.BMS.bmsStd_terminates`, `Notation.DBMS.dbmsStd_terminates`, `Trans.BMS.bmsLStd_terminates` |
-| **well-foundedness and termination are the same condition** | `Rewrite.wf_iff_terminates` |
-| so every system here is well founded and expansion has a rank | `Trans.BMS.bmsL_wf`, `Trans.BMS.pairL_wf`, `Trans.BMS.prim_wf`, `Trans.BMS.bmsLRankEval` |
-| DBMS is the same rule with other generators, and terminates too | `Notation.DBMS.dbms_terminates`, `Trans.DBMS.dbmsL_terminates` |
-| the Y sequence as a system: the official program transcribed, and checked against it on 213 expansions; its termination is proved elsewhere and cited | `Notation.Y.expand`, `Notation.Y.ySys` |
+| notation | expansion defined | termination, well-foundedness | termination from any array | ordinal measure (rank) | contains the system below | ordinal of a state | ordinal of the system |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| primitive sequences (BMS, 1 row) | ✅ | ✅ | ✅ | ✅ |  | ✅ | ✅ |
+| pair sequences (BMS, 2 rows) | ✅ | ✅ | ✅ | ✅ | ✅ |  |  |
+| trio sequences (BMS, 3 rows) | ✅ | ✅ | ✅ | ✅ | ✅ |  |  |
+| BMS (any number of rows) | ✅ | ✅ | ✅ | ✅ | ✅ |  |  |
+| DBMS (1 row) | ✅ | ✅ | ✅ | ✅ |  | ✅ | ✅ |
+| DBMS (any number of rows) | ✅ | ✅ | ✅ | ✅ |  |  |  |
+| Y sequence (1-Y) | ✅ |  |  |  |  |  |  |
+| extended Buchholz's ψ | ✅ | ✅ |  | ✅ |  | ✅ | ✅ |
+
+- expansion defined: the expansion is a Lean function that runs. For BMS it is proved to be `BM4.expand`. For the Y sequence it is a transcription of the official program, checked against its output on 213 cases.
+- termination, well-foundedness: every expansion sequence ends. That the two conditions are the same is proved as well.
+- contains the system below: with a row of zeros underneath, the system with one row fewer sits inside.
+- ordinal of a state: each state is given an ordinal. For primitive sequences and one-row DBMS it equals the rank of the expansion, and these are exactly the ordinals below `ε₀`. For extended Buchholz's ψ it is the value of the standard form, an order isomorphism onto `C_0(Λ)`; that it equals the rank is not proved.
+- ordinal of the system: `ε₀` for primitive sequences and one-row DBMS; the countable standard forms of extended Buchholz's ψ have order type `ψ_0(Λ)`.
+- The termination of the Y sequence is proved outside this library and only cited (`Googology/Notation/Y/README.md`).
 
 ### Extended Buchholz's ψ
 

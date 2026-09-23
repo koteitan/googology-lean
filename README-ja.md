@@ -14,30 +14,23 @@
 
 ### 系
 
-| | |
-|---|---|
-| **バシク行列はどの行数でも停止する** | `Notation.BMS.bms_terminates` |
-| **標準形かどうかに関係なく、どんな配列からでも展開は止まる** | `Notation.BMS.terminates_any` |
-| だから全配列上の規則も系になり、整礎で階数を持つ | `Notation.BMS.bmsAll`, `Notation.BMS.bmsAll_wf`, `Notation.BMS.bmsAllEval` |
-| 成分列の上でも同じこと。こちらはステップが走る | `Trans.BMS.bmsAllL`, `Trans.BMS.bmsAllL_wf`, `Trans.BMS.bmsAllLEval` |
-| 原始数列・ペア数列・トリオ数列の停止 | `Notation.BMS.primitive_terminates`、`Notation.BMS.pair_terminates`、`Notation.BMS.trio_terminates` |
-| BMS は順序数の測度を持つ | `Notation.BMS.bmsEval` |
-| **成分列の上に書いた BMS の展開が `BM4.expand` であること** — 行数によらず、だから走る | `Trans.BMS.entriesR_expand` |
-| 1 行・2 行・一般の規則が一つの規則であること | `Trans.BMS.expandRL_one`, `Trans.BMS.expandRL_two` |
-| 下に 0 の行を足しても何も変わらないこと。1 行を 2 行の中で見たとき | `Trans.BMS.expand2L_withZero` |
-| **原始数列系がペア数列系の中に入ること** | `Trans.BMS.primHomPair`, `Trans.BMS.withZero_std` |
-| `bmsL 0` が `bmsL 1` の中に入ること。階層の最初の一段 | `Trans.BMS.bmsL_zero_sim_one` |
-| **下に 0 の行を足しても何も変わらないことが、行数によらず成り立つこと** | `Trans.BMS.expandRL_zeroRow` |
-| だから `r + 1` 行は `r + 2` 行の中に入る。標準形でも全行列でも | `Trans.BMS.bmsL_homSucc`, `Trans.BMS.bmsAllL_homSucc` |
-| それを繰り返して、`r ≤ s` なら `r + 1` 行は `s + 1` 行の中に入る | `Trans.BMS.bmsL_simLe`, `Trans.BMS.bmsAllL_simLe` |
-| **0 の行を足しても行列が名指す順序数は変わらないこと** | `Trans.BMS.rank_zeroRow`, `StepHom.rank_map` |
-| 成分列の上の系と、その生成元 | `Trans.BMS.prim`, `Trans.BMS.pairL`, `Trans.BMS.bmsL` |
-| 一般の系の 1 行が原始数列系、2 行がペア数列系であること | `Trans.BMS.bmsEquivPrim`, `Trans.BMS.pairEquivBms` |
-| 生成元から出発した展開列は必ず止まること | `Notation.BMS.bmsStd_terminates`, `Notation.DBMS.dbmsStd_terminates`, `Trans.BMS.bmsLStd_terminates` |
-| **整礎性と停止性は同じ条件であること** | `Rewrite.wf_iff_terminates` |
-| だからここにある系はどれも整礎で、展開が階数を持つこと | `Trans.BMS.bmsL_wf`, `Trans.BMS.pairL_wf`, `Trans.BMS.prim_wf`, `Trans.BMS.bmsLRankEval` |
-| DBMS は同じ規則で生成元だけが違い、やはり停止する | `Notation.DBMS.dbms_terminates`, `Trans.DBMS.dbmsL_terminates` |
-| 系としての Y 数列。公式プログラムを書き起こし、213 件の展開で照合した。停止性はよそで証明されていて、引用にとどめる | `Notation.Y.expand`, `Notation.Y.ySys` |
+| 表記 | 展開の定義 | 停止性・整礎性 | 標準形でない配列からも停止 | 順序数の測度（階数） | 下の段の系を含む | 名指す順序数 | 系全体の順序数 |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| 原始数列（BMS 1 行） | ✅ | ✅ | ✅ | ✅ |  | ✅ | ✅ |
+| ペア数列（BMS 2 行） | ✅ | ✅ | ✅ | ✅ | ✅ |  |  |
+| トリオ数列（BMS 3 行） | ✅ | ✅ | ✅ | ✅ | ✅ |  |  |
+| BMS（任意の行数） | ✅ | ✅ | ✅ | ✅ | ✅ |  |  |
+| DBMS（1 行） | ✅ | ✅ | ✅ | ✅ |  | ✅ | ✅ |
+| DBMS（任意の行数） | ✅ | ✅ | ✅ | ✅ |  |  |  |
+| Y 数列（1-Y） | ✅ |  |  |  |  |  |  |
+| 拡張ブーフホルツ ψ | ✅ | ✅ |  | ✅ |  | ✅ | ✅ |
+
+- 展開の定義：展開を Lean の関数として書き、実際に計算できる。BMS は `BM4.expand` と一致することまで証明してある。Y 数列は公式プログラムの書き起こしで、公式実装の出力と 213 件で照合した。
+- 停止性・整礎性：どの展開列も有限で止まる。整礎性と停止性が同じ条件であることも証明してある。
+- 下の段の系を含む：下に 0 の行を足すと、1 行少ない系がそのまま入る。
+- 名指す順序数：状態ごとに順序数を与える。原始数列と DBMS 1 行では、それが展開の階数と一致し、`e0` 未満の順序数ちょうどになる。拡張ブーフホルツ ψ では標準形の値で、標準形から `C_0(Λ)` への順序同型になる（階数との一致は未証明）。
+- 系全体の順序数：原始数列と DBMS 1 行は `e0`、拡張ブーフホルツ ψ の可算な標準形は `p0(Λ)` である。
+- Y 数列の停止性はこのライブラリの外で証明されていて、引用にとどめている（`Googology/Notation/Y/README-ja.md`）。
 
 ### 拡張ブーフホルツ ψ
 
