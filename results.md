@@ -143,3 +143,11 @@ measures, and all four morphisms — depends on no axiom at all.
 | | |
 |---|---|
 | **It does not preserve expansion and does not commute with it**: the generator `(0,0)(1,1)` expands with `[0]` to `(0,0)`; they go to `ψ_0(Ω_1)` and `1`, and no term of the fundamental sequence of `ψ_0(Ω_1)` is `1` | `Trans.PSS.pairOrdTerm_step_ne_fs`, `Goals.pairToExb_not_preserves`, `Goals.pairToExb_not_commutes` |
+
+## DBMS: `r` rows inside `r + 1` rows
+
+| | |
+|---|---|
+| **Adding a row of zeros underneath lands in the standard forms, commutes with expansion, is injective and keeps the rank** | `Trans.DBMS.exists_dstd_zeroRow`, `Trans.DBMS.dbmsL_homSucc`, `Trans.DBMS.dbmsL_homSucc_injective`, `Trans.DBMS.rank_dbmsL_homSucc` |
+| It is not surjective: the generator `(0,0)(1,0)(2,1)` is not in the image | `Trans.DBMS.dbmsToSucc_not_surjective` |
+| For `r ≤ s`, `r` rows simulate `s` rows | `Trans.DBMS.dbmsL_simAdd`, `Trans.DBMS.dbmsL_simLe` |

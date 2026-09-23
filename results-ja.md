@@ -140,3 +140,11 @@
 | | |
 |---|---|
 | **展開を保たず、展開と可換でもない**。生成元 `(0,0)(1,1)` を `[0]` で展開すると `(0,0)` で、`p0(W_1)` と `1` に写る。`p0(W_1)` の基本列の項は `1` にならない | `Trans.PSS.pairOrdTerm_step_ne_fs`, `Goals.pairToExb_not_preserves`, `Goals.pairToExb_not_commutes` |
+
+## DBMS：`r` 行が `r + 1` 行の中に入ること
+
+| | |
+|---|---|
+| **下に 0 の行を足す写像は標準形に入り、展開と可換で、単射で、階数を保つ** | `Trans.DBMS.exists_dstd_zeroRow`, `Trans.DBMS.dbmsL_homSucc`, `Trans.DBMS.dbmsL_homSucc_injective`, `Trans.DBMS.rank_dbmsL_homSucc` |
+| 全射ではない。生成元 `(0,0)(1,0)(2,1)` は像に無い | `Trans.DBMS.dbmsToSucc_not_surjective` |
+| `r ≤ s` なら `r` 行は `s` 行を模倣する | `Trans.DBMS.dbmsL_simAdd`, `Trans.DBMS.dbmsL_simLe` |

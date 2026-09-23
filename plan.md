@@ -8,6 +8,7 @@
     - 🤖 prove that for `ε₀ ≤ α < Λ` too the image lies in the standard forms and the map is order-preserving
     - 🤖 examine the 41 rows that disagree with the table
     - 🤖 restate cofinality on the side of extended Buchholz terms and `[ ]`, not trio's own term type `Three`
+  - refute surjectivity of BMS `r` rows → `r+1` rows (the bottom row of the generator `(0,0)(1,1)` is not zero; the same proof as for DBMS)
   - 🤖 pair sequences → extended Buchholz's ψ: find whether one step goes to finitely many steps of the fundamental sequence
 - Notation
   - ω-Y (official)
