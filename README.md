@@ -48,6 +48,7 @@ Names are written relative to `Googology`.
 | the notation system is correct: the term order matches the ordinal order | `Notation.ExBuchholz.Term.val_lt_val` |
 | **every member of `C_0(Λ)` is the value of a standard form**, so `val` is an order isomorphism from the standard forms onto `C_0(Λ)`, and every ordinal below `ψ_0(Λ)` is named by exactly one standard form | `Notation.ExBuchholz.Term.Vals_eq`, `Notation.ExBuchholz.Term.valEquiv`, `Notation.ExBuchholz.Term.existsUnique_OT_of_lt_psi_Lam` |
 | a standard form names a countable ordinal exactly when it names one below `ψ_0(Λ)` | `Notation.ExBuchholz.Term.val_lt_psi_Lam_iff` |
+| **the standard forms below a countable standard form `X` are, in order, the ordinals below `val X`**, and the countable ones are the ordinals below `ψ_0(Λ)` — so the order type below `X` is the ordinal `X` names | `Notation.ExBuchholz.Term.belowEquiv`, `Notation.ExBuchholz.Term.countableEquiv` |
 | the fundamental sequence descends | `Notation.ExBuchholz.Term.fs_lt` |
 | **extended Buchholz terms terminate** | `Notation.ExBuchholz.Term.exbOT_terminates` |
 | the fundamental sequence keeps a term standard — Buchholz's Lemma 3.3 | `Notation.ExBuchholz.Term.OTFS_thm` |

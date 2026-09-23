@@ -44,7 +44,7 @@ inductive Term where
 | `Closure.lean` | 連結、`G°`、`⊲`、Buchholz 3.4、3.5、3.6、3.3 |
 | `System.lean` | 可算標準形の上の展開系 `exbOT` とその整礎性 |
 | `NF.lean` | 正規形定理の順序数側。`M`（閉包の `x` 以上で最小の元）、`M_mem_of_comp`、`M_psi_mem`、`psi_M_eq`、`arg_mem_of_psi_mem` |
-| `Onto.lean` | **`val` が `C_0(Λ)` の上へ全射であること**。`G_lt_of_mem_CSet`、`addNF`、`psi_mem_Vals`、`Vals_eq`、`valEquiv`、`existsUnique_OT_of_lt_psi_Lam` |
+| `Onto.lean` | **`val` が `C_0(Λ)` の上へ全射であること**。`G_lt_of_mem_CSet`、`addNF`、`psi_mem_Vals`、`Vals_eq`、`valEquiv`、`existsUnique_OT_of_lt_psi_Lam`、初期切片の `belowEquiv`、`countableEquiv` |
 
 ## 順序
 
@@ -174,7 +174,9 @@ collapse の値だからである。
 いま定理である。単調で単射という半分が `val_lt_val` と `val_inj_of_OT`、全射の
 半分が `Onto.lean` の `Vals_eq` で、`valEquiv` が二つをまとめる。だから `p0(Λ)`
 未満の順序数はどれも、ただ一つの標準形の値である（`existsUnique_OT_of_lt_psi_Lam`）。
-可算な標準形が名指すのはちょうどそれらである（`val_lt_psi_Lam_iff`）。
+可算な標準形が名指すのはちょうどそれらである（`val_lt_psi_Lam_iff`）。項の順序で
+可算標準形 `X` の下にある標準形は `val X` 未満の順序数そのものである（`belowEquiv`）。
+だから `X` の下の順序型は `X` が名指す順序数である。
 
 証明は閉包 `C_0(Λ)` についての帰納法である。和の節は正規形の足し算 `addNF` で
 済む。難しいのは collapse の節だけである。`C_0(Λ)` の元 `e` について `p_u(e)` は

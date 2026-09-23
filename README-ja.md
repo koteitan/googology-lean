@@ -47,6 +47,7 @@
 | 表記系の正しさ。項の順序と順序数の順序が一致する | `Notation.ExBuchholz.Term.val_lt_val` |
 | **`C_0(Λ)` の元は全て標準形の値であること**。よって `val` は標準形から `C_0(Λ)` への順序同型で、`p0(Λ)` 未満の順序数はどれもただ一つの標準形が名指す | `Notation.ExBuchholz.Term.Vals_eq`, `Notation.ExBuchholz.Term.valEquiv`, `Notation.ExBuchholz.Term.existsUnique_OT_of_lt_psi_Lam` |
 | 標準形が可算順序数を名指すのは、`p0(Λ)` 未満を名指すときちょうどであること | `Notation.ExBuchholz.Term.val_lt_psi_Lam_iff` |
+| **可算標準形 `X` の下の標準形は、順序も込めて `val X` 未満の順序数そのものであること**。可算標準形全体は `p0(Λ)` 未満の順序数である。だから `X` の下の順序型は `X` が名指す順序数である | `Notation.ExBuchholz.Term.belowEquiv`, `Notation.ExBuchholz.Term.countableEquiv` |
 | 基本列が降下する | `Notation.ExBuchholz.Term.fs_lt` |
 | **拡張ブーフホルツ項は停止する** | `Notation.ExBuchholz.Term.exbOT_terminates` |
 | 基本列が標準形を保つ（Buchholz 補題 3.3） | `Notation.ExBuchholz.Term.OTFS_thm` |

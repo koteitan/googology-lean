@@ -46,7 +46,7 @@ which is the whole content of the extension.
 | `Closure.lean` | concatenation, `G°`, `⊲`, Buchholz 3.4, 3.5, 3.6 and 3.3 |
 | `System.lean` | `exbOT`, the expansion system on the countable standard forms, and its well-foundedness |
 | `NF.lean` | the ordinal side of the normal form theorem: `M` (the least member of a closure above `x`), `M_mem_of_comp`, `M_psi_mem`, `psi_M_eq`, `arg_mem_of_psi_mem` |
-| `Onto.lean` | **`val` is onto `C_0(Λ)`**: `G_lt_of_mem_CSet`, `addNF`, `psi_mem_Vals`, `Vals_eq`, `valEquiv`, `existsUnique_OT_of_lt_psi_Lam` |
+| `Onto.lean` | **`val` is onto `C_0(Λ)`**: `G_lt_of_mem_CSet`, `addNF`, `psi_mem_Vals`, `Vals_eq`, `valEquiv`, `existsUnique_OT_of_lt_psi_Lam`, and the initial segments `belowEquiv`, `countableEquiv` |
 
 ## The order
 
@@ -187,7 +187,10 @@ onto `C_0(Λ)`. That is now a theorem. The monotone and injective halves are
 `val_lt_val` and `val_inj_of_OT`; the onto half is `Vals_eq` in `Onto.lean`,
 and `valEquiv` packages the two. So every ordinal below `ψ_0(Λ)` is the value
 of exactly one standard form (`existsUnique_OT_of_lt_psi_Lam`), and the
-countable standard forms name exactly those (`val_lt_psi_Lam_iff`).
+countable standard forms name exactly those (`val_lt_psi_Lam_iff`). In the
+term order the standard forms below a countable standard form `X` are the
+ordinals below `val X` (`belowEquiv`), so the order type of what lies below
+`X` is the ordinal `X` names.
 
 The proof is an induction on the closure `C_0(Λ)`. The sum clause is
 normal-form addition, `addNF`. The collapse clause is the whole difficulty:

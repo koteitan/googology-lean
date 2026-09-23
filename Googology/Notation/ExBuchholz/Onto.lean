@@ -321,4 +321,71 @@ noncomputable def valEquiv : {X : Term // OT X} ≃ Ord.CSet 0 Lam where
     exact val_inj_of_OT h.1 X.2 h.2
   right_inv x := Subtype.ext (Classical.choose_spec (mem_Vals_of_mem_CSet x.2)).2
 
+/-! ### Initial segments
+
+The countable standard forms, in the term order, are the ordinals below
+`ψ_0(Λ)`, and the ones below a given countable standard form `X` are the
+ordinals below `val X`.  So the order type of what lies below `X` **is** the
+ordinal `X` names — which is what lets the ordinal of a state of another
+system be read as the order type of the standard forms below it, once that
+system is matched to these terms. -/
+
+theorem val_tW_eq : val tW = Ord.Omega 1 := by
+  rw [show tW = psi t1 nil from rfl, val_psi, val_nil, val_t1_eq, Ord.psi_zero_arg]
+
+/-- A standard form is countable, as a term, exactly when its value is below
+`ψ_0(Λ)`. -/
+theorem lt_tW_iff_val_lt_psi_Lam {X : Term} (hX : OT X) : X < tW ↔ val X < Ord.psi Lam 0 := by
+  rw [val_lt_psi_Lam_iff hX, lt_iff_val_lt hX (by decide), val_tW_eq]
+
+/-- **Below a countable standard form, `val` is onto the ordinals below its
+value, by exactly one standard form.** -/
+theorem existsUnique_OT_lt_of_lt_val {X : Term} (hX : OT X) (hc : X < tW) {α : Ordinal.{0}}
+    (h : α < val X) : ∃! Y : Term, OT Y ∧ Y < X ∧ val Y = α := by
+  have hα : α < Ord.psi Lam 0 := _root_.lt_trans h ((lt_tW_iff_val_lt_psi_Lam hX).1 hc)
+  obtain ⟨Y, ⟨hY, hv⟩, huniq⟩ := existsUnique_OT_of_lt_psi_Lam hα
+  exact ⟨Y, ⟨hY, lt_of_val_lt_OT hY hX (by rw [hv]; exact h), hv⟩,
+    fun Y' hY' => huniq Y' ⟨hY'.1, hY'.2.2⟩⟩
+
+/-- **The standard forms below a countable standard form `X` are the ordinals
+below `val X`**: `val` is a bijection, and `belowEquiv_lt_iff` says it keeps
+the order. -/
+noncomputable def belowEquiv {X : Term} (hX : OT X) (hc : X < tW) :
+    {Y : Term // OT Y ∧ Y < X} ≃ Set.Iio (val X) where
+  toFun Y := ⟨val Y.1, val_lt_val Y.2.1 hX Y.2.2⟩
+  invFun α := ⟨Classical.choose (existsUnique_OT_lt_of_lt_val hX hc α.2).exists,
+    (Classical.choose_spec (existsUnique_OT_lt_of_lt_val hX hc α.2).exists).1,
+    (Classical.choose_spec (existsUnique_OT_lt_of_lt_val hX hc α.2).exists).2.1⟩
+  left_inv Y := by
+    apply Subtype.ext
+    have h := Classical.choose_spec
+      (existsUnique_OT_lt_of_lt_val hX hc (val_lt_val Y.2.1 hX Y.2.2)).exists
+    exact val_inj_of_OT h.1 Y.2.1 h.2.2
+  right_inv α := Subtype.ext
+    (Classical.choose_spec (existsUnique_OT_lt_of_lt_val hX hc α.2).exists).2.2
+
+theorem belowEquiv_lt_iff {X : Term} (hX : OT X) (hc : X < tW)
+    (Y₁ Y₂ : {Y : Term // OT Y ∧ Y < X}) :
+    Y₁.1 < Y₂.1 ↔ belowEquiv hX hc Y₁ < belowEquiv hX hc Y₂ :=
+  lt_iff_val_lt Y₁.2.1 Y₂.2.1
+
+/-- **The countable standard forms are the ordinals below `ψ_0(Λ)`.** -/
+noncomputable def countableEquiv : {Y : Term // OT Y ∧ Y < tW} ≃ Set.Iio (Ord.psi Lam 0) where
+  toFun Y := ⟨val Y.1, (lt_tW_iff_val_lt_psi_Lam Y.2.1).1 Y.2.2⟩
+  invFun α := ⟨Classical.choose (existsUnique_OT_of_lt_psi_Lam α.2).exists,
+    (Classical.choose_spec (existsUnique_OT_of_lt_psi_Lam α.2).exists).1,
+    (lt_tW_iff_val_lt_psi_Lam
+      (Classical.choose_spec (existsUnique_OT_of_lt_psi_Lam α.2).exists).1).2
+      (by rw [(Classical.choose_spec (existsUnique_OT_of_lt_psi_Lam α.2).exists).2]; exact α.2)⟩
+  left_inv Y := by
+    apply Subtype.ext
+    have h := Classical.choose_spec
+      (existsUnique_OT_of_lt_psi_Lam ((lt_tW_iff_val_lt_psi_Lam Y.2.1).1 Y.2.2)).exists
+    exact val_inj_of_OT h.1 Y.2.1 h.2
+  right_inv α := Subtype.ext (Classical.choose_spec (existsUnique_OT_of_lt_psi_Lam α.2).exists).2
+
+theorem countableEquiv_lt_iff (Y₁ Y₂ : {Y : Term // OT Y ∧ Y < tW}) :
+    Y₁.1 < Y₂.1 ↔ countableEquiv Y₁ < countableEquiv Y₂ :=
+  lt_iff_val_lt Y₁.2.1 Y₂.2.1
+
 end Googology.Notation.ExBuchholz.Term

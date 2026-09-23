@@ -346,7 +346,12 @@ isomorphism from the standard forms onto `C_0(Λ)`**, which is what the source
 states. `Notation.ExBuchholz.Term.Vals_eq` is the onto half and `valEquiv`
 packages it with the injective half, so every ordinal below `ψ_0(Λ)` is the
 value of exactly one standard form (`existsUnique_OT_of_lt_psi_Lam`), and the
-countable standard forms name exactly those (`val_lt_psi_Lam_iff`).
+countable standard forms name exactly those (`val_lt_psi_Lam_iff`). In the
+term order the standard forms below a countable `X` are the ordinals below
+`val X` (`belowEquiv`): the order type below `X` is the ordinal `X` names. That
+is the form a reading of another system can use without a commutation with
+`[ ]`: match its standard states to these terms in order, and the order type
+below a state is the value of its term.
 
 The step that had blocked it was the collapse clause. The standard form of
 `ψ_u(e)` needs an argument that lies in its own closure, and that argument is
