@@ -61,6 +61,7 @@ import Googology.Trans.DBMS.Blocks
 import Googology.Trans.DBMS.ThreeRow
 import Googology.Trans.DBMS.ContentLift
 import Googology.Trans.DBMS.ThreeRowLift
+import Googology.Trans.DBMS.BlocksStd
 import Googology.Trans.PSS.Expand
 import Googology.Trans.PSS.Terms
 import Googology.Trans.PSS.Rank

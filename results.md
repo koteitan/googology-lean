@@ -189,6 +189,7 @@ measures, and all four morphisms — depends on no axiom at all.
 | **For every number of rows, the DBMS rank is `ω^rank(M_0) + ... + ω^rank(M_k)`** | `Trans.DBMS.rank_dbmsL_eq_sum`, `Trans.DBMS.rkL_blkR`, `Trans.DBMS.rkL_append` |
 | **The 3-row generator `(0,0,0)(1,0,0)(2,1,0)(3,2,1)` has rank `ψ_0(Ω_ω)`** | `Trans.DBMS.rank_gen_three_three`, `Trans.DBMS.rkL_cgen_three`, `Trans.DBMS.rank_gen_top` |
 | The generators of the content system are lifted BMS generators; the 3-row DBMS generator `(0,0,0)(1,0,0)(2,1,0)(3,2,1)` and the BMS `(0,0,0)(1,1,1)` have the same rank | `Trans.DBMS.cgen_two_eq_lift`, `Trans.DBMS.expandRL_lift`, `Trans.DBMS.rank_genL_two_three_eq_bms` |
+| In a standard list of blocks the content ranks do not increase; the converse follows from rank injectivity | `Trans.DBMS.drank_of_dstdL`, `Trans.DBMS.dstdL_blkR`, `Trans.DBMS.dstdL_iff_drank_of_inj` |
 
 ## Three rows: terms whose subscripts are 0 or 1
 
