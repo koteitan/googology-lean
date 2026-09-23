@@ -15,12 +15,7 @@ Every notation gets the same goals. They are defined exactly in section 6 of [sp
 
 | notation | expansion defined | well-foundedness | well-foundedness (non-standard) |
 |---|:-:|:-:|:-:|
-| primitive sequences (BMS, 1 row) | ✅ | ✅ | ✅ |
-| pair sequences (BMS, 2 rows) | ✅ | ✅ | ✅ |
-| trio sequences (BMS, 3 rows) | ✅ | ✅ | ✅ |
-| BMS (any number of rows) | ✅ | ✅ | ✅ |
-| DBMS (1 row) | ✅ | ✅ | ✅ |
-| DBMS (any number of rows) | ✅ | ✅ | ✅ |
+| BMS, DBMS (any number of rows; primitive, pair and trio sequences included) | ✅ | ✅ | ✅ |
 | Y sequence (1-Y) | ✅ |  |  |
 | extended Buchholz's ψ | ✅ | ✅ |  |
 
@@ -36,13 +31,9 @@ A map sending each state to the ordinal it names.
 | notation | defined | injective | surjective | decreases on expansion | equals the rank | order-preserving |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
 | primitive sequences (BMS, 1 row) | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| pair sequences (BMS, 2 rows) |  |  |  |  |  |  |
-| trio sequences (BMS, 3 rows) |  |  |  |  |  |  |
-| BMS (any number of rows) |  |  |  |  |  |  |
 | DBMS (1 row) | ✅ |  | ✅ | ✅ | ✅ |  |
-| DBMS (any number of rows) |  |  |  |  |  |  |
-| Y sequence (1-Y) |  |  |  |  |  |  |
 | extended Buchholz's ψ | ✅ | ✅ | ✅ | ✅ |  | ✅ |
+| BMS and DBMS with 2 rows or more (pair and trio sequences included), Y sequence |  |  |  |  |  |  |
 
 - defined: the map is defined in Lean. For primitive sequences and one-row DBMS it reads the state as an extended Buchholz term and takes its value; for extended Buchholz's ψ it is the value of the term.
 - injective: distinct standard forms go to distinct ordinals.
