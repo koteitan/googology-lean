@@ -11,7 +11,7 @@
     - 🤖 `TrioRules.ofTerm` が `p0(b)` を読む読み方を決める（`p0(W+1) = e0·w` が `e0^{e0^w}` の行列になる）
     - 🤖 規則を `u = W+1` の段 `w` 以外と、ほかの非可算の `u` で直す（[TRIO-SHEET-FIXES-ja.md](Googology/Trans/BMS/TRIO-SHEET-FIXES-ja.md)）
     - 🤖 規則を `W_w·W+W_2` から `W_w·W·2` までの区間で直す（行 3480 の判定、[TRIO-ROW-3480-ja.md](Googology/Trans/BMS/TRIO-ROW-3480-ja.md)）
-    - 🤖 規則の `mul` で `w^原子 = 原子` と正規化する（行 4369 の書かれたラベル）
+    - 別々の修正（`TrioFix*.lean`）が揃ったら、1 つの規則にまとめる
 - Notation
   - ω-Y（公式）
     - 公式の展開の定義で整礎性を証明する（別のリポジトリ koteitan/wy-wo-por）

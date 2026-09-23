@@ -11,7 +11,7 @@
     - 🤖 decide how `TrioRules.ofTerm` reads `ψ_0(b)` (`ψ_0(Ω+1) = ε₀·ω` gets the matrix of `ε₀^{ε₀^ω}`)
     - 🤖 fix the rules for `u = Ω+1` outside level `ω`, and for other uncountable `u` ([TRIO-SHEET-FIXES.md](Googology/Trans/BMS/TRIO-SHEET-FIXES.md))
     - 🤖 fix the rules on the stretch from `Ω_ω·Ω+Ω_2` to `Ω_ω·Ω·2` (the verdict on row 3480, [TRIO-ROW-3480.md](Googology/Trans/BMS/TRIO-ROW-3480.md))
-    - 🤖 normalize `ω^atom = atom` in the rules' `mul` (the printed label of row 4369)
+    - merge the separate fix patches (`TrioFix*.lean`) into one rule set once they are done
 - Notation
   - ω-Y (official)
     - prove well-foundedness with the official expansion (a separate repository, koteitan/wy-wo-por)
