@@ -194,6 +194,65 @@ theorem pairToExb_surjective (c : exbPair.State) : ∃ a, pairToExb a = c := by
   rw [val_pairOrdTerm a.2]
   exact ha
 
+section Extra
+
+open Googology.Notation.BMS Googology.Notation.DBMS
+
+/-- DBMS r → BMS r (all arrays) commutes with expansion. -/
+def dbmsStepHom (r : Nat) : StepHom (dbms r) (bmsAll r) where
+  map := Subtype.val
+  reindex := id
+  map_step := fun _ _ => rfl
+  map_halted := fun _ h => h
+
+theorem dbmsToBms_commutes : ∃ ρ : Nat → Nat → Nat, ∀ i,
+    (∀ a k, True → True ∧
+      (dbmsSim i).map ((dbms i).step a k) = (bmsAll i).step ((dbmsSim i).map a) (ρ i k)) ∧
+    (∀ a, True → (bmsAll i).halted ((dbmsSim i).map a) → (dbms i).halted a) :=
+  ⟨fun _ => id, fun _ => ⟨fun _ _ _ => ⟨trivial, rfl⟩, fun _ _ h => h⟩⟩
+
+theorem dbmsToBms_injective : ∀ (i : Nat) (a b : (dbms i).State), True → True →
+    (dbmsSim i).map a = (dbmsSim i).map b → a = b :=
+  fun _ _ _ _ _ h => Subtype.ext h
+
+theorem dbmsToBms_rank : ∀ i, ∃ (hR : (dbms i).WF) (hQ : (bmsAll i).WF),
+    ∀ a, True → Rewrite.rank hQ ((dbmsSim i).map a) = Rewrite.rank hR a := by
+  intro i
+  refine ⟨dbms_wf i, bmsAll_wf i, fun a _ => ?_⟩
+  haveI : IsWellFounded (dbms i).State (dbms i).Rel := ⟨dbms_wf i⟩
+  haveI : IsWellFounded (bmsAll i).State (bmsAll i).Rel := ⟨bmsAll_wf i⟩
+  rw [Rewrite.rank_def, Rewrite.rank_def]
+  exact (dbmsStepHom i).rank_map (fun k => ⟨k, rfl⟩) (fun _ => Iff.rfl) a
+
+theorem bmsToSucc_injective : ∀ (i : Nat) (a b : (bmsL i).State), True → True →
+    (bmsL_homSucc i).map a = (bmsL_homSucc i).map b → a = b := by
+  intro i a b _ _ h
+  have h' : zeroRow a.1 = zeroRow b.1 := congrArg Subtype.val h
+  apply Subtype.ext
+  exact List.map_injective_iff.mpr (fun x y hxy => List.append_cancel_right hxy) h'
+
+/-- Standard forms below ψ_0(Ω_ω) sit inside the countable standard forms. -/
+def exbPairHom : StepHom exbPair exbOT where
+  map := fun A => ⟨A.1, A.2.1, lt_tW_of_lt_psiOmegaOmega A.2.2⟩
+  reindex := id
+  map_step := fun _ _ => rfl
+  map_halted := fun _ h => h
+
+theorem exbPair_wf : exbPair.WF := (exbPairHom.toSim).wf exbOT_wf
+
+theorem pairToExb_rank : ∀ _ : Unit, ∃ (hR : pairL.WF) (hQ : exbPair.WF),
+    ∀ a, True → Rewrite.rank hQ (pairToExb a) = Rewrite.rank hR a := by
+  intro _
+  refine ⟨pairL_wf, exbPair_wf, fun a _ => ?_⟩
+  haveI : IsWellFounded exbPair.State exbPair.Rel := ⟨exbPair_wf⟩
+  haveI : IsWellFounded pairL.State pairL.Rel := ⟨pairL_wf⟩
+  rw [Rewrite.rank_def, Rewrite.rank_def,
+    ← exbPairHom.rank_map (fun k => ⟨k, rfl⟩) (fun _ => Iff.rfl), rank_exbOT_eq_val,
+    rank_pairL_eq]
+  exact val_pairOrdTerm a.2
+
+end Extra
+
 /-- The trio matrix of `ψ_0(Ω_α)` by `omegaIndexMatrix`, and `[]` on every
 other term. -/
 def omegaIndexOf : Term → List (List Nat)
@@ -384,7 +443,7 @@ def pairToExbGoals : TransGoals (fun _ : Unit => pairL) (fun _ => exbPair) (fun 
   commutes := .todo
   injective := .proved fun _ _ _ _ _ h => pairToExb_injective h
   surjective := .proved fun _ c => (pairToExb_surjective c).imp fun _ h => ⟨trivial, h⟩
-  rank := .todo
+  rank := .proved pairToExb_rank
 
 /-- BMS `r` rows → BMS `r + 1` rows: a row of zeros underneath, on the
 entries.  `bmsL r` has `r + 1` rows. -/
@@ -398,7 +457,7 @@ def bmsToSucc : TransGoals bmsL (fun r => bmsL (r + 1)) (fun _ _ => True)
   commutes := .proved ⟨fun i => (bmsL_homSucc i).reindex, fun i =>
     ⟨fun a k _ => ⟨trivial, (bmsL_homSucc i).map_step a k⟩,
      fun a _ h => (bmsL_homSucc i).map_halted a h⟩⟩
-  injective := .todo
+  injective := .proved bmsToSucc_injective
   surjective := .todo
   rank := .proved fun i => ⟨bmsL_wf i, bmsL_wf (i + 1), fun a _ => rank_zeroRow i a⟩
 
@@ -426,10 +485,10 @@ def dbmsToBms : TransGoals dbms bmsAll (fun _ _ => True) (fun r => (dbmsSim r).m
   targetEn := "BMS, `r` rows"
   targetJa := "BMS `r` 行"
   preserves := .proved fun i a b _ _ h => (dbmsSim i).map_rel a b h
-  commutes := .todo
-  injective := .todo
+  commutes := .proved dbmsToBms_commutes
+  injective := .proved dbmsToBms_injective
   surjective := .todo
-  rank := .todo
+  rank := .proved dbmsToBms_rank
 
 /-- Extended Buchholz's ψ → trio sequences: `omegaIndexMatrix`, transcribed
 from koteitan/trio, on the terms `ψ_0(Ω_α)` with `α < ε₀`, into all

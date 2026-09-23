@@ -51,12 +51,12 @@ A map sending each state to the ordinal it names.
 | from \\ to | primitive sequences | pair sequences | trio sequences | BMS, `r` rows | BMS, `r+1` rows | one-row DBMS | DBMS, `r` rows | extended Buchholz's ψ |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | primitive sequences | — | ✅✅✅✅❌✅ |  |  |  |  |  | ✅✅✅✅✅✅ |
-| pair sequences |  | — |  |  |  |  |  | ✅❌❌✅✅❌ |
+| pair sequences |  | — |  |  |  |  |  | ✅❌❌✅✅✅ |
 | trio sequences |  |  | — |  |  |  |  |  |
-| BMS, `r` rows |  |  |  | — | ✅✅✅❌❌✅ |  |  |  |
+| BMS, `r` rows |  |  |  | — | ✅✅✅✅❌✅ |  |  |  |
 | BMS, `r+1` rows |  |  |  |  | — |  |  |  |
 | one-row DBMS | ✅✅✅❌❌✅ |  |  |  |  | — |  |  |
-| DBMS, `r` rows |  |  |  | ✅✅❌❌❌❌ |  |  | — |  |
+| DBMS, `r` rows |  |  |  | ✅✅✅✅❌✅ |  |  | — |  |
 | extended Buchholz's ψ |  |  | ✅❌❌❌❌❌ |  |  |  |  | — |
 
 - Rows are the source, columns the target. An empty cell is a pair with no translation defined yet.

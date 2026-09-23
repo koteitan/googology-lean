@@ -503,3 +503,4 @@ What is left is one problem, and it is not a Lean problem.
 - Five cells that are ❌ can be proved in a few lines from existing theorems.
   This was checked in a scratch file, but they are not wired, so that the
   README keeps matching. They are in [plan.md](plan.md).
+- Five cells found by the goal-record audit became ✅ (2026-09-23): pair sequences → extended Buchholz's ψ preserves the rank (`pairToExb_rank`), BMS `r` rows → `r+1` rows is injective (`bmsToSucc_injective`), DBMS `r` rows → BMS `r` rows commutes with expansion, is injective and preserves the rank (`dbmsToBms_commutes`, `dbmsToBms_injective`, `dbmsToBms_rank`). All are in the Bridges section of `Googology/Goals.lean`.

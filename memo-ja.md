@@ -445,3 +445,4 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
 - ❌ のセルのうち 5 個は、今ある定理から数行で証明できる。一時ファイルで確かめた。
   README と一致したままにするため、記録にはつないでいない。
   [plan-ja.md](plan-ja.md) に載せた。
+- 目標の一覧の検査で見つかった 5 つのマスを ✅ にした（2026-09-23）：ペア数列 → 拡張ブーフホルツ ψ の階数を保つ（`pairToExb_rank`）、BMS `r` 行 → `r+1` 行の単射性（`bmsToSucc_injective`）、DBMS `r` 行 → BMS `r` 行の展開と可換・単射性・階数を保つ（`dbmsToBms_commutes`、`dbmsToBms_injective`、`dbmsToBms_rank`）。どれも `Googology/Goals.lean` の Bridges の節にある。
