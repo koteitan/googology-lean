@@ -69,6 +69,51 @@ test/              有限の検査。定理ではない
 * 「拡張した X」は `EX` ではなく `ExX`。`EBuchholz` はイニシャルに見えてしまう。
 * `lean_lib` の名前とその根ファイル名は完全に一致させる。
 
+## 6. どの表記にも立てる目標
+
+表記は `Rewrite` である。状態の集合 $`S`$、状態を括弧の番号で展開する一歩
+$`\mathrm{step} : S \times \mathbb{N} \to S`$、停止した状態の集合 $`H \subseteq S`$ から
+なる。展開の一歩は次の関係である。
+
+```math
+b \prec a \iff a \notin H \land \exists k \in \mathbb{N},\ b = \mathrm{step}(a, k).
+```
+
+標準な状態 $`\mathrm{Std} \subseteq S`$ は、生成元 $`g_0, g_1, \dots`$ から有限回の展開で届く
+状態である。すなわち $`g_n \in \mathrm{Std}`$ かつ
+$`a \in \mathrm{Std} \Rightarrow \mathrm{step}(a, k) \in \mathrm{Std}`$ を満たす最小の集合である。
+
+### 整礎性
+
+標準な状態の上の関係 $`\prec`$ に、無限降下列が無い。
+
+```math
+\neg \exists (a_i)_{i \in \mathbb{N}} \subseteq \mathrm{Std},\ \forall i,\ a_{i+1} \prec a_i .
+```
+
+これは**停止性**と同値である。どの標準な状態から始めても、括弧の番号をどう選んでも、
+停止した状態に届く。
+
+```math
+\forall a_0 \in \mathrm{Std},\ \forall f : \mathbb{N} \to \mathbb{N},\
+\exists n,\ a_n \in H \quad\text{ただし } a_{i+1} = \mathrm{step}(a_i, f(i)) .
+```
+
+`Rewrite.wf_iff_terminates` が二つの同値を証明しているので、表記はどちらを示してもよい。
+
+### 整礎性(非標準)
+
+$`\mathrm{Std}`$ を $`S`$ 全体に置き換えたもの。BMS と DBMS では、標準形かどうかに
+関係なくすべての配列である。
+
+```math
+\neg \exists (a_i)_{i \in \mathbb{N}} \subseteq S,\ \forall i,\ a_{i+1} \prec a_i .
+```
+
+$`\mathrm{Std} \subseteq S`$ なので、整礎性を含意する。別の目標にしているのは、停止が
+展開の出発点によらないことを言うからである。標準でない状態の上でも展開が定義されて
+いる表記でだけ意味を持つ。
+
 ## 憲章
 
 以下はコードではなく文書についての規則。

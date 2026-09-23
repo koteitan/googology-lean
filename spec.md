@@ -76,6 +76,53 @@ already has a termination proof elsewhere joins by supplying the fields and a
 * "Extended X" is `ExX`, not `EX` — `EBuchholz` would read as an initial.
 * The `lean_lib` name and its root file must match exactly.
 
+## 6. The goals every notation is measured against
+
+A notation is a `Rewrite`: a set of states $`S`$, one step
+$`\mathrm{step} : S \times \mathbb{N} \to S`$ that expands a state at a bracket,
+and a set of halted states $`H \subseteq S`$. One expansion step is the relation
+
+```math
+b \prec a \iff a \notin H \land \exists k \in \mathbb{N},\ b = \mathrm{step}(a, k).
+```
+
+The standard states $`\mathrm{Std} \subseteq S`$ are those reachable from the
+generators $`g_0, g_1, \dots`$ by finitely many steps: the least set with
+$`g_n \in \mathrm{Std}`$ and $`a \in \mathrm{Std} \Rightarrow \mathrm{step}(a, k) \in \mathrm{Std}`$.
+
+### Well-foundedness
+
+The relation $`\prec`$ on the standard states has no infinite descending chain:
+
+```math
+\neg \exists (a_i)_{i \in \mathbb{N}} \subseteq \mathrm{Std},\ \forall i,\ a_{i+1} \prec a_i .
+```
+
+It is equivalent to **termination**: from every standard state, every choice
+of brackets reaches a halted state,
+
+```math
+\forall a_0 \in \mathrm{Std},\ \forall f : \mathbb{N} \to \mathbb{N},\
+\exists n,\ a_n \in H \quad\text{where } a_{i+1} = \mathrm{step}(a_i, f(i)) .
+```
+
+`Rewrite.wf_iff_terminates` proves the two equivalent, so a notation proves
+either one.
+
+### Well-foundedness (non-standard)
+
+The same with $`\mathrm{Std}`$ replaced by all of $`S`$ — for BMS and DBMS,
+every array, standard or not:
+
+```math
+\neg \exists (a_i)_{i \in \mathbb{N}} \subseteq S,\ \forall i,\ a_{i+1} \prec a_i .
+```
+
+It implies well-foundedness, since $`\mathrm{Std} \subseteq S`$. It is a
+separate goal because it says that termination does not depend on where the
+expansion starts. It only makes sense where the expansion is defined on
+non-standard states.
+
 ## Constitutions
 
 These govern the documents, not the code.
