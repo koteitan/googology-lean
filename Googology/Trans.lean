@@ -69,6 +69,7 @@ import Googology.Trans.DBMS.ThreeRowLower
 import Googology.Trans.DBMS.BlocksStd
 import Googology.Trans.DBMS.BlocksSuff
 import Googology.Trans.DBMS.BlocksLex
+import Googology.Trans.DBMS.LexReachThree
 import Googology.Trans.PSS.Expand
 import Googology.Trans.PSS.Terms
 import Googology.Trans.PSS.Rank

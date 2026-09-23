@@ -41,7 +41,7 @@ Given `LexReach r`: `rt_iff_le` (`M` reaches `M'` iff `M' ≤ M`) and
 `dstdL_iff_dlex_of_lexReach` (standard iff the contents do not increase in the
 dictionary order).  At three rows these are `dstdL_three_dlex` (necessary,
 proved), `rt_iff_le_three_of_lexReach` and `dstdL_three_iff_dlex_of_lexReach`.
-**`LexReach 2` is not proved.**  Numerically it holds on the contents of at
+`LexReach r` is proved for every `r` in `LexReachThree.lean`.  Numerically it holds on the contents of at
 most four columns (see `BlocksStd.lean`), and `LexCof 2` holds on the 1157
 contents of at most 7 columns found from `cgen 2 n` (`n ≤ 7`) by expansions
 `[0]`–`[4]` through lists of at most 7 columns: for all 668746 pairs `X < M`
