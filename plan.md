@@ -135,7 +135,10 @@ The same rule with the generators whose column `i` holds `i - k` in row `k`.
 `dbms_terminates`, `dbms_wf` and `dbmsEval` hold at every number of rows, by
 the inclusion into `bmsAll`.
 
-### Other systems — the Y sequence, not started
+### `Notation/Y/` — defined, termination cited
+
+The official expansion, transcribed from the program, with `ySys` and its
+seeds; see item 4.
 
 ## Well-foundedness of ExBuchholz — done
 
@@ -288,15 +291,15 @@ That is `Mono.lean`.
    ordinal analysis of the pair sequences. A correspondence table is not
    enough to do that from: it fixes the map at twenty points and leaves the
    rule to be guessed, and a guessed rule that happens to fit twenty points
-   is exactly the failure this repository refuses to commit for the Y
-   sequence. The sources checked do not state a rule. The
+   is exactly the failure the Y sequence was kept out for until its program
+   was transcribed. The sources checked do not state a rule. The
    [wiki article](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0)
    derives the correspondence example by example, approximating with the Hardy
    hierarchy, and stops at each named ordinal; it never writes the map down.
    What would make this tractable is a stated definition of the map — not a
    table of its values, and not a derivation of them one at a time. The commutation after that will meet the clause
    of `[ ]` that one row never reaches, the tower;
-4. **DBMS done, the Y sequence not.** `Notation/DBMS/` has the expansion
+4. **DBMS done, the Y sequence defined.** `Notation/DBMS/` has the expansion
    system: the rule is BM4's, and only the generators differ — column `i`
    holds `i - k` in row `k` rather than `i`. Termination holds at every number
    of rows, and not because of the generators: `Notation.BMS.terminates_any`
@@ -304,20 +307,22 @@ That is `Mono.lean`.
    label whose height descends is the `Λ`-chain, which never looks at the
    array. The `Std` hypothesis of the imported `Pat.terminates` is about what
    an array names, not about whether it halts. One row is done, by the same translation as BMS.
-   The Y sequence is **not** going in yet, and the reason is worth recording.
-   Its official definition is a program, not a set of equations: the
-   [wiki article](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97)
-   states the expansion function only in outline and points at
-   [Naruyoko/YNySequence](https://github.com/Naruyoko/YNySequence) as the
-   definition, which is 477 lines of imperative JavaScript over mutable
-   arrays. Termination is an open problem, so there would be no theorem at the
-   end. And the article records that several third-party formalizations
-   produced infinite loops and disagreed with the official expansion of
-   `(1,2,4,8,10,8)`, which is exactly the failure a transcription invites.
-   Putting a definition here that does not match the program would be worse
-   than having none. What it would take: transcribe the expansion function as
-   a total function with the loop bounds proved, then calibrate against the
-   reference implementation on enough inputs to believe it.
+   `Notation/Y/` has the Y sequence (1-Y). Its official definition is a
+   program, `script.js` of
+   [Naruyoko/YNySequence](https://github.com/Naruyoko/YNySequence), and
+   `Yukito.lean` is koteitan's statement-by-statement transcription of it, from
+   [koteitan/1y-expand-equiv](https://github.com/koteitan/1y-expand-equiv).
+   `ySys` is the system on the sequences reachable from `(1, h+1)`, and
+   `test/YCheck.lean` compares `expand` with the program's own output on 213
+   cases, `(1,2,4,8,10,8)` among them — all agree. Termination is proved
+   outside this library: Phyrion's
+   [1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean)
+   proves it for an independently defined expansion, and `expand_eq` in
+   1y-expand-equiv proves that expansion equal to this one. Both are Lean
+   4.33.1 and this library is Lean 4.30.0, so it is a citation here, not a
+   theorem. Importing it would mean moving this library, bms-elem-pattern and
+   every other dependency to Lean 4.33.1 and one common mathlib, and pulling in
+   Phyrion's whole stack, including a BMS snapshot that carries no license.
 
 ## Where the frontier is
 
@@ -411,8 +416,8 @@ What is left is two problems, and neither is a Lean problem.
   values is the value of an extended Buchholz term (`rank_genAll_val` and the
   five beside it), so for those matrices the question is answered in the
   notation system too.
-* **The Y sequence.** Its official definition is a program and its
-  termination is open; see item 4.
+* **The Y sequence's termination as a theorem here.** It is proved in Lean
+  4.33.1 projects this library cannot import; see item 4.
 
 ## Conventions
 

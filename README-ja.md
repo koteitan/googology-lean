@@ -37,6 +37,7 @@
 | **整礎性と停止性は同じ条件であること** | `Rewrite.wf_iff_terminates` |
 | だからここにある系はどれも整礎で、展開が階数を持つこと | `Trans.BMS.bmsL_wf`, `Trans.BMS.pairL_wf`, `Trans.BMS.prim_wf`, `Trans.BMS.bmsLRankEval` |
 | DBMS は同じ規則で生成元だけが違い、やはり停止する | `Notation.DBMS.dbms_terminates`, `Trans.DBMS.dbmsL_terminates` |
+| 系としての Y 数列。公式プログラムを書き起こし、213 件の展開で照合した。停止性はよそで証明されていて、引用にとどめる | `Notation.Y.expand`, `Notation.Y.ySys` |
 
 ### 拡張ブーフホルツ ψ
 
@@ -207,6 +208,8 @@ Googology/
   Notation/        系そのもの
     BMS/             バシク行列。行数は任意
     ExBuchholz/      拡張ブーフホルツ ψ
+    DBMS/            生成元の違う BMS
+    Y/               Y 数列
   Trans/           2 つの系の間の翻訳
 ```
 
@@ -222,6 +225,25 @@ Lean 4 v4.30.0。依存は 2 つで、mathlib と、BMS の停止性証明のた
 [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern)。
 `Googology.Core` はどちらも import しないので、停止性の道具一式は mathlib 無しで
 読めて使える。
+
+## 出典
+
+このライブラリが使っている他者の成果と、使っている場所。koteitan のリポジトリは
+使う場所でリンクしてあり、ここには挙げない。
+
+| 出典 | 何を取ったか | 場所 |
+|---|---|---|
+| [mathlib](https://github.com/leanprover-community/mathlib4)（Apache-2.0） | 順序数、基数、その土台 | 依存。`Core` の外で import する |
+| BashicuHyudora、[BASIC言語による巨大数のまとめ](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:BashicuHyudora/BASIC%E8%A8%80%E8%AA%9E%E3%81%AB%E3%82%88%E3%82%8B%E5%B7%A8%E5%A4%A7%E6%95%B0%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81) | バシク行列システムとその版 BM4 | `Notation/BMS/`。規則の実装は依存先の koteitan/bms-elem-pattern にある |
+| Maksudov の拡張ブーフホルツ ψ。[Googology Wiki](https://googology.miraheze.org/wiki/Extended_Buchholz%27s_function) の記述 | `ψ_v(a)` と `C_v(a)` の定義 | `Notation/ExBuchholz/Ord.lean` |
+| p進大好きbot、[拡張Buchholz OCFに伴う順序数表記](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:P%E9%80%B2%E5%A4%A7%E5%A5%BD%E3%81%8Dbot/%E6%8B%A1%E5%BC%B5Buchholz_OCF%E3%81%AB%E4%BC%B4%E3%81%86%E9%A0%86%E5%BA%8F%E6%95%B0%E8%A1%A8%E8%A8%98) | 項、その順序、`G`、`OT`、評価、`dom` と `[ ]`、`val` が `C_0(Λ)` への同型だという主張 | `Notation/ExBuchholz/` |
+| W. Buchholz, A new system of proof-theoretic ordinal functions, Annals of Pure and Applied Logic 32 (1986) 195–207 | 基本列が依って立つ補題 3.2–3.6 | `Notation/ExBuchholz/FS.lean`、`Closure.lean` |
+| Yukito 氏の Y 数列と、その公式プログラムである Naruyoko/YNySequence の [`script.js`](https://github.com/Naruyoko/YNySequence/blob/2de13970b9ac818c935577b8284c41dec01f0039/script.js)（revision `2de1397`） | 文ごとに書き起こした定義。検算の期待値 | `Notation/Y/Yukito.lean`、`test/YCheck.lean` |
+| [Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean)（Apache-2.0） | 1-Y の停止性の引用のみ。複製も翻案もしていない | `Notation/Y/README.md` |
+| wiki の記事 [ペア数列数](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0) と [Y数列](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97) | 背景と対応表 | `plan.md` |
+
+`Notation/Y/Yukito.lean` の書き起こしは `script.js` を Lean に訳したものである。
+`Naruyoko/YNySequence` にはライセンスのファイルが無い。
 
 ## ライセンス
 

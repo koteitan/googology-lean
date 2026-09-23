@@ -48,3 +48,4 @@ mathlib-free.
 | [ExBuchholz](ExBuchholz/README.md) | done | strict linear order | decidable, not calibrated | `exbOT` | `exbOTEval` |
 | [BMS](BMS/README.md) | arrays | comparison in the package | reachable from a stair | `bms r` | `bmsEval` (the rank), and `Trans.BMS.bmsOrdEval` for `r = 1` |
 | [DBMS](DBMS/README.md) | arrays | as BMS | reachable from `dstair` | `dbms r` | `dbmsEval` (the rank), and `Trans.DBMS.dbmsOrdEval` for `r = 1` |
+| [Y](Y/README.md) | sequences of naturals | — | reachable from `(1, h+1)` | `ySys` | — (termination cited, not proved here) |
