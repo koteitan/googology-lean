@@ -539,3 +539,4 @@ What is left is one problem, and it is not a Lean problem.
 - Rules 1–10 fixed in four places (`TrioRules2.lean`, 2026-09-23): the table's matrix on the 22 table-right rows, the other standard rows unchanged. The same fix is needed in koteitan/trio's `tools/probe_eps_range.py`.
 - Row 3480 decided (`TrioRow3480.lean`, 2026-09-23): the label is right, and both the table and the rules are wrong; the right matrix `c2` is proved standard in Lean.
 - The number of ψ steps for one pair step has no bound (`PSS/StepBound.lean`, `Goals/PairStepBound.lean`). The family found numerically uses `[2]`; the proved family uses `[0]`.
+- The DBMS rank is reduced, for every number of rows, to the ranks of the block contents (`DBMS/Blocks.lean`); at 3 rows the first generators are computed (`DBMS/ThreeRow.lean`). The content system `C_3` is not inside the 3-row BMS standard forms (yaBMS).

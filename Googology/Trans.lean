@@ -51,6 +51,8 @@ import Googology.Trans.DBMS.OneRowL
 import Googology.Trans.DBMS.ZeroRow
 import Googology.Trans.DBMS.TwoRowBlock
 import Googology.Trans.DBMS.TwoRow
+import Googology.Trans.DBMS.Blocks
+import Googology.Trans.DBMS.ThreeRow
 import Googology.Trans.PSS.Expand
 import Googology.Trans.PSS.Terms
 import Googology.Trans.PSS.Rank

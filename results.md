@@ -181,3 +181,10 @@ measures, and all four morphisms — depends on no axiom at all.
 |---|---|
 | **At a successor `α = β + 1 < ε₀`, the fundamental sequence of `ψ_0(Ω_α)` and the expansions of `M(α)` are cofinal in each other** | `Trans.BMS.TrioSucc.trioPsi_fs_succ`, `Trans.BMS.TrioSucc.fs_psiOmega_succ` |
 | **Rules 1–10 with fuel from the depth agree with `trioMatrix` for every `α < ε₀`** | `Trans.BMS.TrioFuel.trioMatrixD_eq_trioMatrix`, `Trans.BMS.TrioFuel.trioMatrixF_200` |
+
+## DBMS: block decomposition for every number of rows; the first 3-row generators
+
+| | |
+|---|---|
+| **For every number of rows, the DBMS rank is `ω^rank(M_0) + ... + ω^rank(M_k)`** | `Trans.DBMS.rank_dbmsL_eq_sum`, `Trans.DBMS.rkL_blkR`, `Trans.DBMS.rkL_append` |
+| **The 3-row generator `(0,0,0)(1,0,0)(2,1,0)(3,2,1)` has rank `ψ_0(Ω_ω)`** | `Trans.DBMS.rank_gen_three_three`, `Trans.DBMS.rkL_cgen_three`, `Trans.DBMS.rank_gen_top` |

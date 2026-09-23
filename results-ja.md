@@ -178,3 +178,10 @@
 |---|---|
 | **後続の `a = b + 1 < e0` で、`p0(W_a)` の基本列と `M(a)` の展開は互いに共終** | `Trans.BMS.TrioSucc.trioPsi_fs_succ`, `Trans.BMS.TrioSucc.fs_psiOmega_succ` |
 | **燃料を深さで与えた規則 1〜10 は、すべての `a < e0` で `trioMatrix` と一致** | `Trans.BMS.TrioFuel.trioMatrixD_eq_trioMatrix`, `Trans.BMS.TrioFuel.trioMatrixF_200` |
+
+## DBMS：何行でもブロック分解、3 行の最初の生成元
+
+| | |
+|---|---|
+| **何行でも、DBMS の階数は `w^rank(M_0) + ... + w^rank(M_k)`** | `Trans.DBMS.rank_dbmsL_eq_sum`, `Trans.DBMS.rkL_blkR`, `Trans.DBMS.rkL_append` |
+| **3 行の生成元 `(0,0,0)(1,0,0)(2,1,0)(3,2,1)` の階数は `p0(W_w)`** | `Trans.DBMS.rank_gen_three_three`, `Trans.DBMS.rkL_cgen_three`, `Trans.DBMS.rank_gen_top` |
