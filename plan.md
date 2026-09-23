@@ -19,4 +19,4 @@
   - DBMS
     - the translation into the ordinals for 3 rows and up
       - 🤖 prove the conjecture "for `n ≥ 1`, `rkL 2 (cgen 2 (n+2))` equals the rank of the BMS generator `(0,0,0)...(n,n,n)`" (so 3-row DBMS and BMS have the same ordinal; `n = 1` is proved)
-      - 🤖 at 3 rows, show that reachability of contents agrees with the lexicographic order, so that standard ⟺ contents lexicographically non-increasing (the reach form is proved)
+      - 🤖 prove `LexReach 2` (at 3 rows, a content lexicographically `≤` another is reached from it; equivalent to `LexCof 2`: for `X < M` some `M[N] ≥ X`). Then standard ⟺ contents lexicographically non-increasing (`DBMS/BlocksLex.lean`)
