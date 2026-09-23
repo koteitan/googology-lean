@@ -10,6 +10,8 @@
     - state and prove the relation to `[ ]` as cofinality
   - blank cells of the translation tables in the README
     - pair sequences → extended Buchholz's ψ: preserves expansion
+- Core
+  - 🤖 goal records: collect in one place, as Lean values, the goals each notation satisfies, and a script that checks that the README tables agree with the audit (specified in spec.md)
 - Notation
   - ω-Y (official)
     - 🤖 prove well-foundedness with the official expansion (a separate repository, koteitan/wy-wo-por)
