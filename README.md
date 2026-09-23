@@ -180,7 +180,7 @@ koteitan's are linked where they are used and are not listed here.
 | W. Buchholz, A new system of proof-theoretic ordinal functions, Annals of Pure and Applied Logic 32 (1986) 195–207 | Lemmas 3.2–3.6, on which the fundamental sequences rest | `Notation/ExBuchholz/FS.lean`, `Closure.lean` |
 | Yukito's Y sequence, and its official program [`script.js`](https://github.com/Naruyoko/YNySequence/blob/2de13970b9ac818c935577b8284c41dec01f0039/script.js) of Naruyoko/YNySequence (revision `2de1397`) | the definition, transcribed statement by statement; the expected values of the checks | `Notation/Y/Yukito.lean`, `test/YCheck.lean` |
 | [Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean) (Apache-2.0) | cited only, for the termination of 1-Y; nothing is copied or adapted | `Notation/Y/README.md` |
-| the wiki articles [ペア数列数](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0) and [Y数列](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97) | background and correspondence tables | `plan.md` |
+| the wiki articles [ペア数列数](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0) and [Y数列](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97) | background and correspondence tables | `memo.md` |
 
 The transcription in `Notation/Y/Yukito.lean` is a translation of `script.js`
 into Lean. `Naruyoko/YNySequence` has no license file.
@@ -195,11 +195,12 @@ MIT. See [LICENSE](LICENSE).
 
 * [spec.md](spec.md) — how the library is laid out and how it is written,
   including the rules that govern these documents
-* [plan.md](plan.md) — the whole argument and where the work has got to
+* [plan.md](plan.md) — the tree of what is left to do
+* [memo.md](memo.md) — the whole argument and where the work has got to
 
 Current state: `Core/` is complete. `Notation/ExBuchholz` is finished, as a
 notation system and as an expansion system: its termination is proved with
 nothing assumed. `Notation/BMS` terminates for every number of rows. `Trans/`
 settles one row completely — as terms, as ordinals, and as the rank of the
 system, which agree — and reaches a few two-row ordinals without a two-row
-reading; `plan.md` says what is still missing.
+reading; `plan.md` lists what is still missing.

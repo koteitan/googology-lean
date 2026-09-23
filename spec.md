@@ -233,7 +233,7 @@ does not open with the plan, the status, or what is left to do.
 
 Notes for whoever is working on the library — the plan, the current state, the
 open questions, the reasoning behind a design — go at the **bottom**, under a
-quiet heading, or in `spec.md` and `plan.md`. A reader should be able to stop
+quiet heading, or in `spec.md`, `plan.md` and `memo.md`. A reader should be able to stop
 before that line and have missed nothing they needed.
 
 ### C2. Every directory has a README, in both languages
@@ -265,3 +265,9 @@ version is bumped in `lakefile.toml` in the same commit.
 
 A document published here refers to other work by its public URL, never by a
 path on the machine it was written on.
+
+### C7. The plan is a tree of what is left
+
+`plan.md` holds only the tree of what is still to be done. Everything else —
+the reasoning, the history, what has been finished, why a route was chosen —
+goes to `memo.md`. A finished item is removed from the plan, not ticked.

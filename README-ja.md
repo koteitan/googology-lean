@@ -178,7 +178,7 @@ Lean 4 v4.30.0。依存は 2 つで、mathlib と、BMS の停止性証明のた
 | W. Buchholz, A new system of proof-theoretic ordinal functions, Annals of Pure and Applied Logic 32 (1986) 195–207 | 基本列が依って立つ補題 3.2–3.6 | `Notation/ExBuchholz/FS.lean`、`Closure.lean` |
 | Yukito 氏の Y 数列と、その公式プログラムである Naruyoko/YNySequence の [`script.js`](https://github.com/Naruyoko/YNySequence/blob/2de13970b9ac818c935577b8284c41dec01f0039/script.js)（revision `2de1397`） | 文ごとに書き起こした定義。検算の期待値 | `Notation/Y/Yukito.lean`、`test/YCheck.lean` |
 | [Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean)（Apache-2.0） | 1-Y の停止性の引用のみ。複製も翻案もしていない | `Notation/Y/README.md` |
-| wiki の記事 [ペア数列数](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0) と [Y数列](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97) | 背景と対応表 | `plan.md` |
+| wiki の記事 [ペア数列数](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0) と [Y数列](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97) | 背景と対応表 | `memo.md` |
 
 `Notation/Y/Yukito.lean` の書き起こしは `script.js` を Lean に訳したものである。
 `Naruyoko/YNySequence` にはライセンスのファイルが無い。
@@ -193,7 +193,8 @@ MIT ライセンス。[LICENSE](LICENSE) を参照。
 
 * [spec-ja.md](spec-ja.md) — ライブラリの構成と書き方の規約。この文書群をどう書くかの
   規則も含む
-* [plan-ja.md](plan-ja.md) — 議論の全体と、作業の現在地
+* [plan-ja.md](plan-ja.md) — これからやることのツリー
+* [memo-ja.md](memo-ja.md) — 議論の全体と、作業の現在地
 
 現状：`Core/` は完成。`Notation/ExBuchholz` は表記系としても展開系としても完成
 した。停止性は何も仮定せずに証明してある。`Notation/BMS` はどの行数でも停止する。
