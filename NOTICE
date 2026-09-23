@@ -1,0 +1,36 @@
+googology-lean
+
+This repository is licensed under the MIT License (see LICENSE), except for the
+files listed below, which are licensed under the Apache License, Version 2.0
+(see LICENSE-APACHE).
+
+Googology/Notation/Y/WellOrder/ZeroY/, Googology/Notation/Y/WellOrder/OneY/ and
+Googology/Notation/Y/WellOrder/Por/
+
+  These files are taken from koteitan, 1y-wo-por
+  https://github.com/koteitan/1y-wo-por
+  revision db86f2d13c2e18a8e2c2fae5e083d00fc4d48a78 (Apache-2.0),
+  and ported from Lean 4.33.1 / Mathlib v4.33.1 to Lean 4.30.0 /
+  Mathlib v4.30.0. The port renames the module names in the imports (prefix
+  `Googology.Notation.Y.WellOrder.`) and changes a few proofs; each file's
+  header says what was changed.
+
+  1y-wo-por in turn contains code adapted from
+
+    Phyrion, 1Y-Well-Ordering-Lean
+    https://github.com/Phyrion1343/1Y-Well-Ordering-Lean
+    revision 6533b2975f3cafb3582dc8f8127e9ea7144d7e69 (Apache-2.0)
+
+  (ZeroY/ and OneY/, adapted from `formalization/ZeroY` and
+  `formalization/OneY`), and helpers of koteitan, bms-elem-pattern
+  (https://github.com/koteitan/bms-elem-pattern), released under Apache-2.0
+  by the same author (Por/Tuple.lean, Por/Omega1.lean, Por/Relation.lean,
+  Por/Closure.lean, Por/Chain.lean). Each file keeps the header that names its
+  origin. Por/BMS/ was written for 1y-wo-por. No code from the unlicensed
+  snapshot that 1Y-Well-Ordering-Lean vendors as `vendor/bms` is copied or
+  adapted.
+
+Googology/Notation/Y/WellOrder/Equiv/ is koteitan's own work, taken from
+koteitan, 1y-expand-equiv (https://github.com/koteitan/1y-expand-equiv,
+revision c9a5368a09ceb62ec671a6c3447a4719d035dfc0), and is licensed under the
+MIT License with the rest of this repository.

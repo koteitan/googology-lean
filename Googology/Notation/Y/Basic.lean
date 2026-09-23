@@ -19,12 +19,8 @@ is that largest entry, and `expand` takes `m = bound s + length s` and
 
 The standard forms are the sequences reachable from the seeds `(1, h+1)`.
 
-**Termination is not proved here.**  It is proved for 1-Y in
-[Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean),
-for Phyrion's own expansion `expandValues`, and `expand_eq` says that expansion
-is this one on every sequence of positive entries starting with `1`.  Both are
-Lean 4.33.1 projects and this one is Lean 4.30.0, so neither can be imported;
-the statement is recorded in `Notation/Y/README.md` and not as a theorem.
+Termination is proved in `WellFounded.lean`, from the ported proof in
+`WellOrder/`.
 -/
 
 namespace Googology.Notation.Y

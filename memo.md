@@ -137,10 +137,11 @@ The same rule with the generators whose column `i` holds `i - k` in row `k`.
 `dbms_terminates`, `dbms_wf` and `dbmsEval` hold at every number of rows, by
 the inclusion into `bmsAll`.
 
-### `Notation/Y/` — defined, termination cited
+### `Notation/Y/` — done
 
 The official expansion, transcribed from the program, with `ySys` and its
-seeds; see item 4.
+seeds; see item 4. Termination is a theorem here: `WellFounded.lean`, from
+the proof ported into `WellOrder/`.
 
 ## Well-foundedness of ExBuchholz — done
 
@@ -316,15 +317,16 @@ That is `Mono.lean`.
    [koteitan/1y-expand-equiv](https://github.com/koteitan/1y-expand-equiv).
    `ySys` is the system on the sequences reachable from `(1, h+1)`, and
    `test/YCheck.lean` compares `expand` with the program's own output on 213
-   cases, `(1,2,4,8,10,8)` among them — all agree. Termination is proved
-   outside this library: Phyrion's
+   cases, `(1,2,4,8,10,8)` among them — all agree. Termination is now a
+   theorem here (2026-09-23 below). It was first a citation: Phyrion's
    [1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean)
    proves it for an independently defined expansion, and `expand_eq` in
-   1y-expand-equiv proves that expansion equal to this one. Both are Lean
-   4.33.1 and this library is Lean 4.30.0, so it is a citation here, not a
-   theorem. Importing it would mean moving this library, bms-elem-pattern and
-   every other dependency to Lean 4.33.1 and one common mathlib, and pulling in
-   Phyrion's whole stack, including a BMS snapshot that carries no license.
+   1y-expand-equiv proves that expansion equal to this one, both in Lean
+   4.33.1. Importing Phyrion's project would have meant moving this library
+   and its dependencies to Lean 4.33.1 and pulling in a BMS snapshot that
+   carries no license. [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por)
+   removed that snapshot, and its files and those of 1y-expand-equiv were
+   ported down to Lean 4.30.0 instead.
 
 ## Where the frontier is
 
@@ -378,7 +380,7 @@ The constructions in `Trans/BMS/` that reach `ε₁`, `ε_ω`, `ε_{ε₀}` and 
 came first and stay: they build the terms by hand and say which term names
 which ordinal, which the general theorem does not.
 
-What is left is two problems, and neither is a Lean problem.
+What is left is one problem, and it is not a Lean problem.
 
 * **A reading for two rows and up.** It needs a stated definition of the map
   from matrices to ordinals, and there is one for three rows:
@@ -418,8 +420,6 @@ What is left is two problems, and neither is a Lean problem.
   values is the value of an extended Buchholz term (`rank_genAll_val` and the
   five beside it), so for those matrices the question is answered in the
   notation system too.
-* **The Y sequence's termination as a theorem here.** It is proved in Lean
-  4.33.1 projects this library cannot import; see item 4.
 
 ## Conventions
 
@@ -447,3 +447,26 @@ What is left is two problems, and neither is a Lean problem.
   ([koteitan/wmwy-wo-por](https://github.com/koteitan/wmwy-wo-por), 2026-09-23).
   It is treated as a sequence system distinct from the official ω-Y
   (weak-magma ω-Y). The official ω-Y is treated in koteitan/wy-wo-por.
+
+## 2026-09-23: the Y sequence terminates here
+
+- `Notation/Y/WellOrder/` is a port of koteitan/1y-wo-por (`ZeroY/`, `OneY/`,
+  `Por/`; Apache-2.0) and koteitan/1y-expand-equiv (`Equiv/` without its copy
+  of the transcription) from Lean 4.33.1 to Lean 4.30.0: 203 modules, about
+  40,000 lines. Only the imports and seven proofs changed. In Lean 4.30.0 a
+  `match` written in a statement keeps a `save_info` annotation on its
+  alternatives, and after the `match` is reduced `omega` cannot see a
+  subtraction under it; the tactic `strip_mdata` of `WellOrder/Port.lean`
+  removes the annotations. `Equiv/Row0.lean` needed one more change, because
+  `Por.BMS.greatestBelow?` is not defined by recursion as the unlicensed
+  `YesMetaZFC` version was.
+- `Notation/Y/WellFounded.lean` joins `Por.expansion_wellFounded` and
+  `Yukito.expand_eq`. `expand_eq_numeric` says that `expand` is
+  `OneY.Numeric.expand` on every legal sequence, the empty one included, with
+  the fuel of `Basic.lean`. From it: `ySys_wf`, `ySys_terminates`,
+  `yStd_terminates`, `yEval` on the standard forms, `yLegal_wf` and
+  `yLegal_terminates` on every legal sequence, and `yStd_strictWellOrder`,
+  the lexicographic well-order of the standard forms.
+- The non-standard column of the README counts `yLegal`, whose states are all
+  sequences with positive entries and first entry `1`. Nothing is proved for
+  other sequences.

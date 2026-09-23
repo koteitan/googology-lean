@@ -11,8 +11,6 @@
   - README の翻訳写像の表の空欄
     - ペア数列 → 拡張ブーフホルツ ψ：展開を保つ
 - Notation
-  - Y 数列：停止性をここの定理にする
-    - 🤖 [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) と [koteitan/1y-expand-equiv](https://github.com/koteitan/1y-expand-equiv) を Lean 4.30.0 に下げて移植し、`expand_eq` でここの `expand` につなぐ
   - ω-Y（公式）
     - 🤖 公式の展開の定義で整礎性を証明する（別のリポジトリ koteitan/wy-wo-por）
     - 証明ができたら、ここにつなぐ

@@ -29,7 +29,10 @@ Names are written relative to `Googology`.
 | **well-foundedness and termination are the same condition** | `Rewrite.wf_iff_terminates` |
 | so every system here is well founded and expansion has a rank | `Trans.BMS.bmsL_wf`, `Trans.BMS.pairL_wf`, `Trans.BMS.prim_wf`, `Trans.BMS.bmsLRankEval` |
 | DBMS is the same rule with other generators, and terminates too | `Notation.DBMS.dbms_terminates`, `Trans.DBMS.dbmsL_terminates` |
-| the Y sequence as a system: the official program transcribed, and checked against it on 213 expansions; its termination is proved elsewhere and cited | `Notation.Y.expand`, `Notation.Y.ySys` |
+| the Y sequence as a system: the official program transcribed, and checked against it on 213 expansions | `Notation.Y.expand`, `Notation.Y.ySys` |
+| **the Y sequence is well founded and terminates**, and carries an ordinal measure | `Notation.Y.ySys_wf`, `Notation.Y.ySys_terminates`, `Notation.Y.yStd_terminates`, `Notation.Y.yEval` |
+| **and so on every legal sequence** (positive entries, first entry `1`), standard or not, and for `expand` on plain lists | `Notation.Y.yLegal_wf`, `Notation.Y.yLegal_terminates`, `Notation.Y.expand_terminates` |
+| on a legal sequence the transcription is Phyrion's expansion, so the standard forms are Phyrion's generated sequences, well ordered by the lexicographic order | `Notation.Y.expand_eq_numeric`, `Notation.Y.yStd_iff_generated`, `Notation.Y.yStd_strictWellOrder` |
 
 ## Extended Buchholz's ψ
 

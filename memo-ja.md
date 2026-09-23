@@ -129,9 +129,10 @@ BMS は停止する
 同じ規則で、生成元の列 `i` の行 `k` が `i - k` になったもの。`dbms_terminates`・
 `dbms_wf`・`dbmsEval` がどの行数でも成り立つ。`bmsAll` への包含から出る。
 
-### `Notation/Y/` — 定義済、停止性は引用
+### `Notation/Y/` — 済
 
-公式の展開をプログラムから書き起こしたもの。`ySys` と種がある。項目 4 を見よ。
+公式の展開をプログラムから書き起こしたもの。`ySys` と種がある。項目 4 にある。
+停止性はここの定理である。`WellOrder/` に移植した証明から `WellFounded.lean` が導く。
 
 ## ExBuchholz の整礎性 — 済
 
@@ -283,15 +284,15 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
    [koteitan/1y-expand-equiv](https://github.com/koteitan/1y-expand-equiv) から
    持ってきた。`ySys` は `(1, h+1)` から到達できる列の上の系である。
    `test/YCheck.lean` が `expand` をプログラム自身の出力と 213 件で比べ、
-   `(1,2,4,8,10,8)` を含めて全部一致する。停止性はこのライブラリの外で証明されて
-   いる。Phyrion 氏の
+   `(1,2,4,8,10,8)` を含めて全部一致する。停止性は今はここの定理である
+   （下の 2026-09-23）。最初は引用だった。Phyrion 氏の
    [1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean)
    が独立に定義した展開について証明し、1y-expand-equiv の `expand_eq` がその展開と
-   ここの展開が等しいことを証明する。どちらも Lean 4.33.1 で、このライブラリは
-   Lean 4.30.0 なので、ここでは定理ではなく引用である。import するには、この
-   ライブラリも bms-elem-pattern も他の依存も Lean 4.33.1 と共通の mathlib に移し、
-   Phyrion 氏の一式を取り込む必要がある。その中にはライセンスの無い BMS の
-   スナップショットが含まれる。
+   ここの展開が等しいことを証明する。どちらも Lean 4.33.1 である。Phyrion 氏の
+   一式を import するには、このライブラリと依存を Lean 4.33.1 に移し、ライセンスの
+   無い BMS のスナップショットも取り込む必要があった。
+   [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) がそのスナップショットを
+   取り除いたので、代わりにそれと 1y-expand-equiv のファイルを Lean 4.30.0 へ移植した。
 
 ## 今どこが前線か
 
@@ -339,7 +340,7 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
 ある。項を手で作り、どの項がどの順序数を名指すかを言う。一般の定理はそれを
 言わない。
 
-残る問題は二つで、どちらも Lean の問題ではない。
+残る問題は一つで、Lean の問題ではない。
 
 * **2 行以上の読み取り。** 行列から順序数への写像の定義文が要る。3 行についてはそれが
   ある。[koteitan/trio](https://github.com/koteitan/trio) が `p0(W_a)` から trio 数列系
@@ -369,8 +370,6 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
   ブロックで始まらない部分は自分の階数を持たない。階数が届く所では、その順序数に
   名前も付く。どの値も拡張ブーフホルツ項の値である（`rank_genAll_val` とその隣の
   五つ）。だからそれらの行列については、表記系の言葉でも答えが出ている。
-* **Y 数列の停止性をここの定理にすること。** Lean 4.33.1 のプロジェクトで証明されて
-  いて、このライブラリからは import できない。項目 4 にある。
 
 ## 約束ごと
 
@@ -394,3 +393,22 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
   resemblance で再証明した（[koteitan/wmwy-wo-por](https://github.com/koteitan/wmwy-wo-por)、
   2026-09-23）。これは公式の ω-Y とは別の数列システム（weak-magma ω-Y）として扱う。
   公式の ω-Y は koteitan/wy-wo-por で扱う。
+
+## 2026-09-23：Y 数列の停止性をここで証明
+
+- `Notation/Y/WellOrder/` は、koteitan/1y-wo-por（`ZeroY/`、`OneY/`、`Por/`。
+  Apache-2.0）と koteitan/1y-expand-equiv（`Equiv/`。書き起こしの写しは除く）を
+  Lean 4.33.1 から Lean 4.30.0 へ移植したものである。203 モジュール、約 40,000 行。
+  変えたのは import と 7 個の証明だけである。Lean 4.30.0 では、命題の中に書いた
+  `match` の選択肢に `save_info` の注釈が残る。`match` を簡約した後、その下の
+  引き算が `omega` から見えない。`WellOrder/Port.lean` のタクティク `strip_mdata` が
+  注釈を取り除く。`Equiv/Row0.lean` はもう一か所変えた。`Por.BMS.greatestBelow?` は、
+  ライセンスの無い `YesMetaZFC` の版と違って、再帰で定義されていないからである。
+- `Notation/Y/WellFounded.lean` が `Por.expansion_wellFounded` と
+  `Yukito.expand_eq` をつなぐ。`expand_eq_numeric` は、`Basic.lean` の燃料で、
+  空の列も含めて合法な列すべての上で `expand` が `OneY.Numeric.expand` に等しい
+  ことを言う。そこから、標準形の上の `ySys_wf`、`ySys_terminates`、
+  `yStd_terminates`、`yEval`、合法な列すべての上の `yLegal_wf`、
+  `yLegal_terminates`、標準形の辞書式整列 `yStd_strictWellOrder` が出る。
+- README の非標準の列は `yLegal` を数える。その状態は、項が正で先頭が `1` の列
+  すべてである。それ以外の列については何も証明していない。

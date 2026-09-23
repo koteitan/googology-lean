@@ -29,7 +29,10 @@
 | **整礎性と停止性は同じ条件であること** | `Rewrite.wf_iff_terminates` |
 | だからここにある系はどれも整礎で、展開が階数を持つこと | `Trans.BMS.bmsL_wf`, `Trans.BMS.pairL_wf`, `Trans.BMS.prim_wf`, `Trans.BMS.bmsLRankEval` |
 | DBMS は同じ規則で生成元だけが違い、やはり停止する | `Notation.DBMS.dbms_terminates`, `Trans.DBMS.dbmsL_terminates` |
-| 系としての Y 数列。公式プログラムを書き起こし、213 件の展開で照合した。停止性はよそで証明されていて、引用にとどめる | `Notation.Y.expand`, `Notation.Y.ySys` |
+| 系としての Y 数列。公式プログラムを書き起こし、213 件の展開で照合した | `Notation.Y.expand`, `Notation.Y.ySys` |
+| **Y 数列は整礎で停止し**、順序数の測度を持つ | `Notation.Y.ySys_wf`, `Notation.Y.ySys_terminates`, `Notation.Y.yStd_terminates`, `Notation.Y.yEval` |
+| **標準形かどうかによらず合法な列（項が正で先頭が `1`）すべての上でも同じ**。素のリストの上の `expand` についても | `Notation.Y.yLegal_wf`, `Notation.Y.yLegal_terminates`, `Notation.Y.expand_terminates` |
+| 合法な列の上で書き起こしは Phyrion 氏の展開に等しい。だから標準形は Phyrion 氏の生成する列と同じで、辞書式順序で整列する | `Notation.Y.expand_eq_numeric`, `Notation.Y.yStd_iff_generated`, `Notation.Y.yStd_strictWellOrder` |
 
 ## 拡張ブーフホルツ ψ
 
