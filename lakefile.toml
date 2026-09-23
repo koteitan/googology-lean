@@ -1,5 +1,5 @@
 name = "googology"
-version = "0.6.180"
+version = "0.6.181"
 defaultTargets = ["Googology", "Test"]
 
 [leanOptions]
@@ -7,6 +7,9 @@ pp.unicode.fun = true
 
 [[lean_lib]]
 name = "Googology"
+
+[[lean_lib]]
+name = "GoogologySheets"
 
 [[lean_lib]]
 name = "Test"

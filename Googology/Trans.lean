@@ -51,6 +51,9 @@ import Googology.Trans.BMS.TrioFixStretch
 import Googology.Trans.BMS.TrioFixStretchSheet
 import Googology.Trans.BMS.TrioFixOfTerm
 import Googology.Trans.BMS.TrioFixOfTermSheet
+import Googology.Trans.BMS.TrioFixStrip
+import Googology.Trans.BMS.TrioFixStripTree
+import Googology.Trans.BMS.TrioFixU
 import Googology.Trans.BMS.TrioRow3480
 import Googology.Trans.BMS.TrioTree
 import Googology.Trans.BMS.TrioTreeStd
