@@ -12,10 +12,9 @@
     - ペア数列 → 拡張ブーフホルツ ψ：展開を保つ
 - Notation
   - Y 数列：停止性をここの定理にする
-    - 🤖 Phyrion 氏の 1-Y の証明の patterns of resemblance による再証明（別のリポジトリ）を仕上げる：文書とファイルの構成
-    - 証明をここに持ち込む：Lean 4.33.1 に上げるか、4.30.0 に下げて移植する
+    - [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por)（Lean 4.33.1）の証明をここに持ち込む：このライブラリを Lean 4.33.1 に上げるか、4.30.0 に下げて移植する
   - ω-Y
-    - 目標を決める：公式の ω-Y（未解決）、weak ω-Y（Phyrion 氏が証明済み）、二つの関係
+    - 🤖 Phyrion 氏の Lean と同じ展開の定義で、ω-Y を patterns of resemblance により再証明する（別のリポジトリ）
   - DBMS
     - 2 行以上の、順序数への翻訳写像
     - `r` 行が `r + 1` 行の中に入ること

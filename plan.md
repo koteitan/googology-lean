@@ -12,10 +12,9 @@
     - pair sequences → extended Buchholz's ψ: preserves expansion
 - Notation
   - Y sequence: make termination a theorem here
-    - 🤖 finish the re-proof of Phyrion's 1-Y proof with patterns of resemblance (a separate repository): documents and file layout
-    - bring the proof in here: move to Lean 4.33.1, or port it down to 4.30.0
+    - bring in the proof of [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) (Lean 4.33.1): move this library to Lean 4.33.1, or port it down to 4.30.0
   - ω-Y
-    - decide the target: the official ω-Y (open), the weak ω-Y (proved by Phyrion), or their relation
+    - 🤖 re-prove ω-Y with the expansion of Phyrion's Lean formalization, with patterns of resemblance (a separate repository)
   - DBMS
     - the translation into the ordinals for 2 rows and up
     - `r` rows inside `r + 1` rows
