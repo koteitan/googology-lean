@@ -23,6 +23,11 @@ import Googology.Trans.BMS.Arg
 import Googology.Trans.BMS.EpsBig
 import Googology.Trans.BMS.Zeta
 import Googology.Trans.BMS.Trio
+import Googology.Trans.BMS.TrioMono
+import Googology.Trans.BMS.TrioStd
+import Googology.Trans.BMS.TrioRules
+import Googology.Trans.BMS.TrioRulesSheet
+import Googology.Trans.BMS.TrioCofinal
 import Googology.Trans.BMS.RankVal
 import Googology.Trans.BMS.Cofinal
 import Googology.Trans.BMS.Prim
@@ -37,3 +42,4 @@ import Googology.Trans.DBMS.OneRowL
 import Googology.Trans.PSS.Expand
 import Googology.Trans.PSS.Terms
 import Googology.Trans.PSS.Rank
+import Googology.Trans.PSS.Expansion

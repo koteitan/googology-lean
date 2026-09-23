@@ -124,3 +124,19 @@
 「無限に降下する列が無い」だけを仮定して「止まる状態がある」を要求する。そこが
 古典的になる。`Core` の他のもの — 関係、整礎性、測度、四つの射 — はどれも公理を
 一切使わない。
+
+## 3 行：トリオ数列
+
+| | |
+|---|---|
+| **`p0(W_a)` の trio 行列は標準形**（`a < e0`）。生成元から有限回の展開で届く 3 行の配列の成分である | `Trans.BMS.trioMatrix_std`, `Trans.BMS.omegaIndexMatrix_std`, `Trans.BMS.omegaIndexState` |
+| **trio の写像は順序を保ち、順序を反映する**（`a < e0`、列の辞書式順序）。したがって単射 | `Trans.BMS.omegaIndexMatrix_lt_iff`, `Trans.BMS.omegaIndexMatrix_strictMono`, `Trans.BMS.omegaIndexMatrix_injective` |
+| `e0 <= a < Λ` の規則 1〜10 の書き起こし。3 行で `z < 2` の形であること | `Trans.BMS.TrioRules.trioMatrixL`, `Trans.BMS.TrioRules.WF3_trioMatrixL` |
+| **trio 数列の展開の共終性**。標準形の `b < a` には `b = a[k]` か `b < a[k]` となる `k` がある | `Trans.BMS.TrioCofinal.trio_cofinal`, `Trans.BMS.TrioCofinal.trioStd_cofinal` |
+| koteitan/trio の展開と、この文庫の BMS の展開は、trio の標準形の上で同じ | `Trans.BMS.TrioCofinal.expandRL_toL`, `Trans.BMS.TrioCofinal.trioStdL_iff` |
+
+## ペア数列 → 拡張ブーフホルツ ψ が展開を保たないこと
+
+| | |
+|---|---|
+| **展開を保たず、展開と可換でもない**。生成元 `(0,0)(1,1)` を `[0]` で展開すると `(0,0)` で、`p0(W_1)` と `1` に写る。`p0(W_1)` の基本列の項は `1` にならない | `Trans.PSS.pairOrdTerm_step_ne_fs`, `Goals.pairToExb_not_preserves`, `Goals.pairToExb_not_commutes` |

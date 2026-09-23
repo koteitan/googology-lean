@@ -127,3 +127,19 @@ conclude `Terminates`: `Rewrite.terminates_of_wf`,
 that halts, given only that no chain descends forever, and that step is
 classical. Everything else in `Core` — the relation, well-foundedness, the
 measures, and all four morphisms — depends on no axiom at all.
+
+## Three rows: trio sequences
+
+| | |
+|---|---|
+| **The trio matrix of `ψ_0(Ω_α)` is a standard form** (`α < ε₀`): the entries of a three-row array reached from a generator by finitely many expansions | `Trans.BMS.trioMatrix_std`, `Trans.BMS.omegaIndexMatrix_std`, `Trans.BMS.omegaIndexState` |
+| **The trio map preserves and reflects the order** (`α < ε₀`, lexicographic order of the columns), so it is injective | `Trans.BMS.omegaIndexMatrix_lt_iff`, `Trans.BMS.omegaIndexMatrix_strictMono`, `Trans.BMS.omegaIndexMatrix_injective` |
+| The transcription of rules 1–10 for `ε₀ ≤ α < Λ`; its output has three rows with `z < 2` | `Trans.BMS.TrioRules.trioMatrixL`, `Trans.BMS.TrioRules.WF3_trioMatrixL` |
+| **Cofinality of trio expansion**: for standard `b < a` there is `k` with `b = a[k]` or `b < a[k]` | `Trans.BMS.TrioCofinal.trio_cofinal`, `Trans.BMS.TrioCofinal.trioStd_cofinal` |
+| koteitan/trio's expansion and this library's BMS expansion agree on trio's standard forms | `Trans.BMS.TrioCofinal.expandRL_toL`, `Trans.BMS.TrioCofinal.trioStdL_iff` |
+
+## Pair sequences → extended Buchholz's ψ does not preserve expansion
+
+| | |
+|---|---|
+| **It does not preserve expansion and does not commute with it**: the generator `(0,0)(1,1)` expands with `[0]` to `(0,0)`; they go to `ψ_0(Ω_1)` and `1`, and no term of the fundamental sequence of `ψ_0(Ω_1)` is `1` | `Trans.PSS.pairOrdTerm_step_ne_fs`, `Goals.pairToExb_not_preserves`, `Goals.pairToExb_not_commutes` |

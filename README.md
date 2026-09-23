@@ -52,18 +52,19 @@ A map sending each state to the ordinal it names.
 | from \\ to | primitive sequences | pair sequences | trio sequences | BMS, `r` rows | BMS, `r+1` rows | one-row DBMS | DBMS, `r` rows | extended Buchholz's ψ |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | primitive sequences | — | ✅✅✅✅❌✅ |  |  |  |  |  | ✅✅✅✅✅✅ |
-| pair sequences |  | — |  |  |  |  |  | ✅❌❌✅✅✅ |
+| pair sequences |  | — |  |  |  |  |  | ✅❌❌✅✅✅(*2) |
 | trio sequences |  |  | — |  |  |  |  |  |
 | BMS, `r` rows |  |  |  | — | ✅✅✅✅❌✅ |  |  |  |
 | BMS, `r+1` rows |  |  |  |  | — |  |  |  |
 | one-row DBMS | ✅✅✅✅✅✅ |  |  |  |  | — |  |  |
 | DBMS, `r` rows |  |  |  | ✅✅✅✅❌✅ |  |  | — |  |
-| extended Buchholz's ψ |  |  | ✅❌❌❌❌❌ |  |  |  |  | — |
+| extended Buchholz's ψ |  |  | ✅❌❌✅❌❌ |  |  |  |  | — |
 
 - Rows are the source, columns the target. An empty cell is a pair with no translation defined yet.
 - The six marks of a cell are, from left to right: defined, preserves expansion, commutes with expansion, injective, surjective, preserves the rank. ✅ is proved, ❌ is not yet.
 - BMS `r` rows → BMS `r+1` rows is one map for every `r`. The target of DBMS `r` rows → BMS `r` rows is all arrays, not only standard forms. Extended Buchholz's ψ → trio sequences is a map on the terms of the form `ψ_0(Ω_α)` only.
-- defined: the map is defined in Lean. Primitive sequences go to the standard forms below `ψ_0(Ω)`, pair sequences to those below `ψ_0(Ω_ω)`. Primitive sequences → pair sequences and BMS `r` rows → `r+1` rows put a row of zeros underneath. The map into trio sequences is defined for `α < ε₀`. Extended Buchholz's ψ → trio sequences transcribes the map of [koteitan/trio](https://github.com/koteitan/trio); it is defined and checked against the correspondence table, nothing more.
+- defined: the map is defined in Lean. Primitive sequences go to the standard forms below `ψ_0(Ω)`, pair sequences to those below `ψ_0(Ω_ω)`. Primitive sequences → pair sequences and BMS `r` rows → `r+1` rows put a row of zeros underneath. The map into trio sequences is defined for `α < ε₀`. Extended Buchholz's ψ → trio sequences transcribes the map of [koteitan/trio](https://github.com/koteitan/trio). For `α < ε₀` it is proved that the image is a standard form of three-row BMS (`trioMatrix_std`) and that the map preserves and reflects the order (`omegaIndexMatrix_lt_iff`). Rules 1–10 for `ε₀ ≤ α < Λ` are transcribed (`TrioRules.lean`) and checked against the published table, nothing more.
+- (*2) Pair sequences → extended Buchholz's ψ does not preserve expansion and does not commute with it (refuted). The generator `(0,0)(1,1)` expands with `[0]` to `(0,0)`; they go to `ψ_0(Ω_1)` and `1`, and no term of the fundamental sequence of `ψ_0(Ω_1)` is `1` (`Trans/PSS/Expansion.lean`).
 - preserves expansion: one expansion step goes to one expansion step in the target.
 - commutes with expansion: bracket numbers included, expanding and then translating gives the same as translating and then expanding.
 - injective, surjective: onto the standard forms of the target. Primitive sequences → extended Buchholz's ψ is both, so the two systems are one system written two ways. One-row DBMS → primitive sequences is both too: the standard one-row DBMS matrices are the primitive sequences.

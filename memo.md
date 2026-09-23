@@ -522,3 +522,9 @@ What is left is one problem, and it is not a Lean problem.
 - The counterexample on the arrays (`dbmsOrdEval_not_injective`,
   `dbmsHom_not_injective`) stays. It is a true statement about the
   representation `Arr 1`, not about the standard forms.
+- Five trio and pair items (2026-09-23, branch `feature/trio-pair`).
+  - The map of `Trio.lean` lands in the standard forms of three-row BMS for `α < ε₀` (`trioMatrix_std`, `Trans/BMS/TrioStd.lean`).
+  - It preserves and reflects the order and is injective (`omegaIndexMatrix_lt_iff`, `omegaIndexMatrix_injective`, `Trans/BMS/TrioMono.lean`). The cell extended Buchholz's ψ → trio sequences / injective became ✅.
+  - Rules 1–10 (`ε₀ ≤ α < Λ`) are transcribed (`Trans/BMS/TrioRules.lean`) and checked by 875 `#guard`s (`TrioRulesSheet.lean`). Of 813 rows, 28 non-standard rows are skipped; of the other 785, 744 agree with the table and 41 agree with the reference program but not with the table.
+  - Cofinality: koteitan/trio's `trio_cofinality` and its 16 dependency files are in `Trans/BMS/TrioCof/`, with a proved bridge to this library's BMS (`trio_cofinal`, `trioStd_cofinal`, `Trans/BMS/TrioCofinal.lean`).
+  - Pair sequences → extended Buchholz's ψ does not preserve expansion and does not commute with it (`Trans/PSS/Expansion.lean`, `pairToExb_not_preserves`, `pairToExb_not_commutes`). The counterexample is the generator `(0,0)(1,1)` with `[0]`.

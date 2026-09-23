@@ -3,13 +3,12 @@
 # Plan
 
 - Trans
-  - trio sequences (BMS, 3 rows) (branch `feature/trio-pair`)
-    - 🤖 prove that the map of `Trio.lean` lands in the standard forms
-    - prove that it is monotone
-    - transcribe rules 1–10 of the trio algorithm (`ε₀ ≤ α < Λ`)
-    - state and prove the relation to `[ ]` as cofinality
-  - blank cells of the translation tables in the README
-    - pair sequences → extended Buchholz's ψ: preserves expansion
+  - trio sequences (BMS, 3 rows)
+    - prove that the transcription of rules 1–10 (`TrioRules.lean`) agrees with `trioMatrix` below `ε₀`, and that fuel 200 is enough
+    - prove that for `ε₀ ≤ α < Λ` too the image lies in the standard forms and the map is order-preserving
+    - examine the 41 rows that disagree with the table
+    - restate cofinality on the side of extended Buchholz terms and `[ ]`, not trio's own term type `Three`
+  - pair sequences → extended Buchholz's ψ: find whether one step goes to finitely many steps of the fundamental sequence
 - Notation
   - ω-Y (official)
     - prove well-foundedness with the official expansion (a separate repository, koteitan/wy-wo-por)

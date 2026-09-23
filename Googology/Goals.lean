@@ -239,6 +239,30 @@ theorem pairToExb_rank : ∀ _ : Unit, ∃ (hR : pairL.WF) (hQ : exbPair.WF),
 
 end Extra
 
+section PairExp
+
+open Googology.Trans.BMS Googology.Trans.PSS
+
+/-- Pair sequences → extended Buchholz's ψ does not preserve expansion: the
+generator `(0,0)(1,1)` steps to `(0,0)`, which goes to `1`, and `1` is no
+`fs (ψ_0(Ω_1)) Y` (`Trans/PSS/Expansion.lean`). -/
+theorem pairToExb_not_preserves : ¬ (∀ (i : Unit) (a b : pairL.State), True → True →
+    pairL.Rel b a → exbPair.Rel (pairToExb b) (pairToExb a)) := by
+  intro h
+  obtain ⟨-, k, hk⟩ := h () (pairStd.gen 1) (pairL.step (pairStd.gen 1) 0) trivial trivial
+    ⟨not_halted_gen1, 0, rfl⟩
+  exact pairOrdTerm_step_ne_fs _ (congrArg Subtype.val hk)
+
+/-- Nor does it commute with expansion, for any reindexing. -/
+theorem pairToExb_not_commutes : ¬ (∃ ρ : Unit → Nat → Nat, ∀ i,
+    (∀ (a : pairL.State) k, True → True ∧
+      pairToExb (pairL.step a k) = exbPair.step (pairToExb a) (ρ i k)) ∧
+    (∀ a, True → exbPair.halted (pairToExb a) → pairL.halted a)) := by
+  rintro ⟨ρ, h⟩
+  exact pairOrdTerm_step_ne_fs _ (congrArg Subtype.val ((h ()).1 (pairStd.gen 1) 0 trivial).2)
+
+end PairExp
+
 /-- The trio matrix of `ψ_0(Ω_α)` by `omegaIndexMatrix`, and `[]` on every
 other term. -/
 def omegaIndexOf : Term → List (List Nat)
@@ -260,6 +284,19 @@ def exbToTrio (A : exbOT.State) : (bmsAllL 2).State :=
 /-- The terms `ψ_0(Ω_α)` with `α < ε₀`: where `exbToTrio` is about. -/
 def TrioDom (A : exbOT.State) : Prop :=
   ∃ α, OT α ∧ α < te0 ∧ A.1 = psi nil (psi α nil)
+
+/-- On its domain, `exbToTrio` is one to one (`omegaIndexMatrix_injective`,
+`Trans/BMS/TrioMono.lean`). -/
+theorem exbToTrio_injective : ∀ (_ : Unit) (a b : exbOT.State), TrioDom a → TrioDom b →
+    exbToTrio a = exbToTrio b → a = b := by
+  rintro _ a b ⟨α, hα, hαe, ha⟩ ⟨β, hβ, hβe, hb⟩ h
+  have h1 : omegaIndexOf a.1 = omegaIndexOf b.1 := congrArg Subtype.val h
+  rw [ha, hb] at h1
+  have h2 : omegaIndexMatrix α = omegaIndexMatrix β := h1
+  have h3 := omegaIndexMatrix_injective (α := ⟨α, hα, hαe⟩) (β := ⟨β, hβ, hβe⟩) h2
+  have hαβ : α = β := congrArg Subtype.val h3
+  subst hαβ
+  exact Subtype.ext (ha.trans hb.symm)
 
 end Bridges
 
@@ -427,8 +464,8 @@ def pairToExbGoals : TransGoals (fun _ : Unit => pairL) (fun _ => exbPair) (fun 
   sourceJa := "ペア数列"
   targetEn := "extended Buchholz's ψ"
   targetJa := "拡張ブーフホルツ ψ"
-  preserves := .todo
-  commutes := .todo
+  preserves := .refuted pairToExb_not_preserves
+  commutes := .refuted pairToExb_not_commutes
   injective := .proved fun _ _ _ _ _ h => pairToExb_injective h
   surjective := .proved fun _ c => (pairToExb_surjective c).imp fun _ h => ⟨trivial, h⟩
   rank := .proved pairToExb_rank
@@ -492,7 +529,7 @@ def exbToTrioGoals : TransGoals (fun _ : Unit => exbOT) (fun _ => bmsAllL 2)
   targetJa := "トリオ数列"
   preserves := .todo
   commutes := .todo
-  injective := .todo
+  injective := .proved exbToTrio_injective
   surjective := .todo
   rank := .todo
 

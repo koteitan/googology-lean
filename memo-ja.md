@@ -461,3 +461,9 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
   ✅✅✅✅✅✅ になった。
 - 配列の上の反例（`dbmsOrdEval_not_injective`、`dbmsHom_not_injective`）は残した。
   これは表し方 `Arr 1` についての正しい命題で、標準形についての命題ではない。
+- トリオとペアの 5 項目（2026-09-23、branch `feature/trio-pair`）。
+  - `Trio.lean` の写像は、`a < e0` で 3 行の BMS の標準形に入る（`trioMatrix_std`、`Trans/BMS/TrioStd.lean`）。
+  - 順序を保ち、順序を反映し、単射である（`omegaIndexMatrix_lt_iff`、`omegaIndexMatrix_injective`、`Trans/BMS/TrioMono.lean`）。表の「拡張ブーフホルツ ψ → トリオ数列」の単射性が ✅ になった。
+  - 規則 1〜10（`e0 <= a < Λ`）を書き起こした（`Trans/BMS/TrioRules.lean`）。`#guard` 875 個で照合した（`TrioRulesSheet.lean`）。813 行のうち、標準形でない 28 行を除く 785 行で、744 行が対応表と一致し、41 行は参照プログラムの出力と一致するが対応表とは違う。
+  - 共終性：koteitan/trio の `trio_cofinality` とその依存 16 ファイルを `Trans/BMS/TrioCof/` に移し、この文庫の BMS への橋を証明した（`trio_cofinal`、`trioStd_cofinal`、`Trans/BMS/TrioCofinal.lean`）。
+  - ペア数列 → 拡張ブーフホルツ ψ の「展開を保つ」「展開と可換」は偽（`Trans/PSS/Expansion.lean`、`pairToExb_not_preserves`、`pairToExb_not_commutes`）。反例は生成元 `(0,0)(1,1)` の `[0]`。

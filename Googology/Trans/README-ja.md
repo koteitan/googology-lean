@@ -71,6 +71,10 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | BMS、拡張ブーフホルツ ψ | `BMS/Arg.lean`, `BMS/EpsBig.lean` | — | **`val` が `e_{e0}` 未満へ全射であること**。そこでは全単射である。`mu < e0` の全てで `W·mu` を名指す項を Cantor 標準形から作り（`W·w^e` は `p1(e)`）、その上で同じ先頭項の構成を `d < e0` の全段で回す |
 | BMS、拡張ブーフホルツ ψ | `BMS/Zeta.lean` | — | **`val` が `z0` 未満へ全射であること**。しかも標準形はただ一つである。引数の項と値の項を一本の帰納法で作るので、指数自身が e 数でも、その添字が与える段で名指される。`C_0(Λ)` への全射という一般の形は `Notation.ExBuchholz.Term.Vals_eq` である。これらのファイルはどの項がどの順序数を名指すかを言い、一般の定理はそれを言わない |
 | 3 行の BMS、拡張ブーフホルツ ψ | `BMS/Trio.lean` | [koteitan/trio](https://github.com/koteitan/trio) | `p0(W_a)` から trio 行列への写像（`a < e0`）。[アルゴリズム](https://github.com/koteitan/trio/blob/main/ebp2bms/algorithm/1/README-en.md)から転記し、[対応表](https://github.com/koteitan/trio/blob/main/ebp2bms/sheet/1/README-en.md)で検算した。定理ではなく転記と `#guard` である |
+| 3 行の BMS、拡張ブーフホルツ ψ | `BMS/TrioStd.lean` | — | **trio 行列が標準形であること**（`a < e0`）。`p0(W_a)` の trio 行列は、生成元から有限回の展開で届く 3 行の配列の成分である（`trioMatrix_std`） |
+| 3 行の BMS、拡張ブーフホルツ ψ | `BMS/TrioMono.lean` | — | **trio の写像が順序を保ち、順序を反映すること**（`a < e0`、列の辞書式順序。`omegaIndexMatrix_lt_iff`）。したがって単射である（`omegaIndexMatrix_injective`） |
+| 3 行の BMS、拡張ブーフホルツ ψ | `BMS/TrioRules.lean`、`BMS/TrioRulesSheet.lean` | [koteitan/trio](https://github.com/koteitan/trio) | `e0 <= a < Λ` の規則 1〜10 の書き起こし（`TrioRules.trioMatrixL`）と、`#guard` 875 個の照合。定理ではなく転記と `#guard` である |
+| 3 行の BMS | `BMS/TrioCof/`、`BMS/TrioCofinal.lean` | [koteitan/trio](https://github.com/koteitan/trio) | **trio 数列の展開の共終性**。koteitan/trio の `trio_cofinality` とその依存 16 ファイルを移し、この文庫の BMS の展開と同じであることを証明した（`expandRL_toL`）。標準形の `b < a` には、`b ≤ a[k]` となる `k` がある（`trio_cofinal`、`trioStd_cofinal`） |
 | BMS、拡張ブーフホルツ ψ | `BMS/RankVal.lean` | — | **系の階数が項の値であること**。定義の違う二つの測度が同じものであること。そのうえで、読み取りが無い所の階数を計算する。2 行の生成元、後続、ブロックの繰り返し、族 `(0,0)(1,1)(1,0)^k` |
 | BMS、拡張ブーフホルツ ψ | `BMS/Prim.lean` | `StepHom` | 原始数列系を `Rewrite` として与え、停止することとその順序数 |
 | BMS、拡張ブーフホルツ ψ | `BMS/Cofinal.lean` | — | `p0(W)` 未満で項が `X[0] < X[1] < ⋯` の上限であること |
@@ -82,5 +86,6 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | DBMS、BMS（原始数列） | `DBMS/OneRowL.lean` | `StepHom`、`Equiv` | **行列の上の 1 行の DBMS**（`dbmsL1`）。配列は成分によってこの系の上へ写る。この系は原始数列の系そのものである。その順序数への写像は単射で、`e0` 未満の順序数全部に全射、階数と一致し、順序を保つ |
 | BMS、拡張ブーフホルツ ψ | `BMS/Commute.lean` | いずれ `StepHom` | 読み取りが展開を `[ ]` に変えること、添字の付け替え `N ↦ N + 1` を込めて |
 | BMS（ペア数列）、拡張ブーフホルツ ψ | `PSS/Expand.lean`、`PSS/Terms.lean`、`PSS/Rank.lean` | — | **ペア数列の順序数への翻訳写像**。koteitan/pss-proof の `Trans` を通す。その展開は `expand2L` である（`oper_succ_eq_expand2L_of_ctps`）。その Buchholz 項は `p0(W_w)` 未満の標準的な拡張ブーフホルツ項の上へ写る（`toTerm_bijOn_TransRange`）。ペア数列の階数はその項の `1 + val` で（`rank_pairL_eq`）、値の範囲は `p0(W_w)` 未満の順序数全部である（`range_pairOrd`）。詳しくは [PSS/README-ja.md](PSS/README-ja.md) にある |
+| BMS（ペア数列）、拡張ブーフホルツ ψ | `PSS/Expansion.lean` | — | **ペア数列 → 拡張ブーフホルツ ψ は展開を保たないこと**。生成元 `(0,0)(1,1)` の `[0]` は `(0,0)` で、`p0(W_1)` の基本列の項は `1` にならない（`pairOrdTerm_step_ne_fs`） |
 | BMS、拡張ブーフホルツ ψ | `BMS/Tables.lean`、`DBMS/Tables.lean` | `StepHom` | README の表の小さなセル。原始数列の順序は値の順序であること、1 行の翻訳写像が階数を保つこと、原始数列がペア数列の中へ単射で入ること |
 | BMS、拡張ブーフホルツ ψ | `BMS/ExBuchholz.lean` | いずれ `Sim` | 1 行の場合の読み取り `read`、その項が標準形になるのは降順のときちょうどであること、そしてそれが全単射であること |
