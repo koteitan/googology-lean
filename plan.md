@@ -17,5 +17,5 @@
     - connect the proof here once it is done
   - DBMS
     - the translation into the ordinals for 3 rows and up
-      - prove the conjecture "for `n ≥ 1`, `rkL 2 (cgen 2 (n+2))` equals the rank of the BMS generator `(0,0,0)...(n,n,n)`" (so 3-row DBMS and BMS have the same ordinal; `n = 1` is proved)
+      - 🤖 prove the conjecture "for `n ≥ 1`, `rkL 2 (cgen 2 (n+2))` equals the rank of the BMS generator `(0,0,0)...(n,n,n)`" (so 3-row DBMS and BMS have the same ordinal; `n = 1` is proved)
       - 🤖 which lists of blocks are standard at 3 rows
