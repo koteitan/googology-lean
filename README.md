@@ -13,20 +13,21 @@ all of them, and each system supplies only what is its own.
 
 Every notation gets the same goals.
 
-| notation | expansion defined | termination, well-foundedness | ordinal measure | ordinal of a state | ordinal of the system |
-|---|:-:|:-:|:-:|:-:|:-:|
-| primitive sequences (BMS, 1 row) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| pair sequences (BMS, 2 rows) | ✅ | ✅ | ✅ |  |  |
-| trio sequences (BMS, 3 rows) | ✅ | ✅ | ✅ |  |  |
-| BMS (any number of rows) | ✅ | ✅ | ✅ |  |  |
-| DBMS (1 row) | ✅ | ✅ | ✅ | ✅ | ✅ |
-| DBMS (any number of rows) | ✅ | ✅ | ✅ |  |  |
-| Y sequence (1-Y) | ✅ |  |  |  |  |
-| extended Buchholz's ψ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| notation | expansion defined | termination, well-foundedness | termination (non-standard) | measure | ordinal of a state | ordinal of the system |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|
+| primitive sequences (BMS, 1 row) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| pair sequences (BMS, 2 rows) | ✅ | ✅ | ✅ | ✅ |  |  |
+| trio sequences (BMS, 3 rows) | ✅ | ✅ | ✅ | ✅ |  |  |
+| BMS (any number of rows) | ✅ | ✅ | ✅ | ✅ |  |  |
+| DBMS (1 row) | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| DBMS (any number of rows) | ✅ | ✅ | ✅ | ✅ |  |  |
+| Y sequence (1-Y) | ✅ |  |  |  |  |  |
+| extended Buchholz's ψ | ✅ | ✅ |  | ✅ | ✅ | ✅ |
 
 - expansion defined: the expansion is a Lean function that runs.
-- termination, well-foundedness: every expansion sequence ends.
-- ordinal measure: there is an ordinal that every expansion decreases (the rank of the expansion).
+- termination, well-foundedness: every expansion sequence from a standard form ends.
+- termination (non-standard): it ends from an array that is not a standard form as well.
+- measure: there is an ordinal that every expansion decreases (the rank of the expansion).
 - ordinal of a state: the ordinal each state names is known.
 - ordinal of the system: the supremum of what the system names is known — `ε₀` for primitive sequences and one-row DBMS, `ψ_0(Λ)` for extended Buchholz's ψ.
 - The termination of the Y sequence is proved outside this library and only cited.
