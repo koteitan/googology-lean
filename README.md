@@ -15,9 +15,9 @@ Every notation gets the same goals. They are defined exactly in section 6 of [sp
 
 | notation | expansion defined | well-foundedness | well-foundedness (non-standard) |
 |---|:-:|:-:|:-:|
-| BMS (any number of rows; primitive, pair and trio sequences included) | ✅ | ✅ | ✅ |
-| DBMS (any number of rows) | ✅ | ✅ | ✅ |
-| Y sequence (1-Y) | ✅ |  |  |
+| BMS | ✅ | ✅ | ✅ |
+| DBMS | ✅ | ✅ | ✅ |
+| Y sequence | ✅ |  |  |
 | extended Buchholz's ψ | ✅ | ✅ |  |
 
 - expansion defined: the expansion is a Lean function that runs.
@@ -31,12 +31,12 @@ A map sending each state to the ordinal it names.
 
 | notation | defined | injective | surjective | decreases on expansion | equals the rank | order-preserving |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
-| primitive sequences (BMS, 1 row) | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| DBMS (1 row) | ✅ |  | ✅ | ✅ | ✅ |  |
+| primitive sequences | ✅ | ✅ | ✅ | ✅ | ✅ |  |
+| one-row DBMS | ✅ |  | ✅ | ✅ | ✅ |  |
 | extended Buchholz's ψ | ✅ | ✅ | ✅ | ✅ |  | ✅ |
-| BMS with 2 rows or more (pair and trio sequences included) |  |  |  |  |  |  |
+| BMS with 2 rows or more |  |  |  |  |  |  |
 | DBMS with 2 rows or more |  |  |  |  |  |  |
-| Y sequence (1-Y) |  |  |  |  |  |  |
+| Y sequence |  |  |  |  |  |  |
 
 - defined: the map is defined in Lean. For primitive sequences and one-row DBMS it reads the state as an extended Buchholz term and takes its value; for extended Buchholz's ψ it is the value of the term.
 - injective: distinct standard forms go to distinct ordinals.
@@ -49,14 +49,14 @@ A map sending each state to the ordinal it names.
 
 | translation | defined | preserves expansion | commutes with expansion | injective | surjective | preserves the rank |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
-| primitive sequences → extended Buchholz's ψ (below `ψ_0(Ω)`) | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| DBMS, 1 row → primitive sequences | ✅ | ✅ | ✅ |  |  |  |
-| primitive sequences → pair sequences (a row of zeros underneath) | ✅ | ✅ | ✅ |  |  |  |
-| BMS, `r` rows → BMS, `r+1` rows (a row of zeros underneath) | ✅ | ✅ | ✅ |  |  | ✅ |
+| primitive sequences → extended Buchholz's ψ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
+| one-row DBMS → primitive sequences | ✅ | ✅ | ✅ |  |  |  |
+| primitive sequences → pair sequences | ✅ | ✅ | ✅ |  |  |  |
+| BMS, `r` rows → BMS, `r+1` rows | ✅ | ✅ | ✅ |  |  | ✅ |
 | DBMS, `r` rows → BMS, all arrays with `r` rows | ✅ | ✅ |  |  |  |  |
-| `ψ_0(Ω_α)` of extended Buchholz's ψ (`α < ε₀`) → trio sequences | ✅ |  |  |  |  |  |
+| `ψ_0(Ω_α)` of extended Buchholz's ψ → trio sequences | ✅ |  |  |  |  |  |
 
-- defined: the map is defined in Lean. The last row transcribes the map of [koteitan/trio](https://github.com/koteitan/trio); it is defined and checked against the correspondence table, nothing more.
+- defined: the map is defined in Lean. Primitive sequences go to the standard forms below `ψ_0(Ω)`. Primitive sequences → pair sequences and BMS `r` rows → `r+1` rows put a row of zeros underneath. The map into trio sequences is defined for `α < ε₀`. The last row transcribes the map of [koteitan/trio](https://github.com/koteitan/trio); it is defined and checked against the correspondence table, nothing more.
 - preserves expansion: one expansion step goes to one expansion step in the target.
 - commutes with expansion: bracket numbers included, expanding and then translating gives the same as translating and then expanding.
 - injective, surjective: onto the standard forms of the target. Primitive sequences → extended Buchholz's ψ is both, so the two systems are one system written two ways.
