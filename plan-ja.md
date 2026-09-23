@@ -77,11 +77,14 @@ BMS は停止する
 | `FS.lean` | 済。`dom`、`fs`、`fs_lt`、`dom_eq_one_or_tw`、`step_lt`、`exb` |
 | `Closure.lean` | 済。Buchholz 3.4、3.5、3.6、Bachmann 性、そこから 3.3。`bachmann`、`OTFS_thm`、`Trian_fs_thm` |
 | `System.lean` | 済。可算標準形の上の `exbOT`、`exbOT_wf`、`exbOT_terminates` |
+| `NF.lean` | 済。正規形定理の順序数側。`M`、`M_mem_of_comp`、`M_psi_mem`、`arg_mem_of_psi_mem` |
+| `Onto.lean` | 済。`val` が `C_0(Λ)` の上へ全射であること。`Vals_eq`、`valEquiv`、`existsUnique_OT_of_lt_psi_Lam` |
 
 **`ExBuchholz` は完成した。**`OTLt_wf` が標準形の上の順序は仮定なしで整礎だと
 言い、`exbOT_terminates` が可算標準形の上の展開系は止まると、これも仮定なしで
-言う。証明していないのは `val` が `Λ` 未満の順序数の上へ全射であることで、単射の
-側は `val_inj_of_OT` である。
+言う。`Vals_eq` が `val` は `C_0(Λ)` の上へ全射だと言うので、`val_inj_of_OT` と
+合わせて出典の述べる順序同型になり、`p0(Λ)` 未満の順序数はどれもただ一つの
+標準形を持つ。
 
 ### `Notation/BMS/` — 済
 
@@ -301,100 +304,29 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
 である。だから `exists_matrix_of_lt_eps0` と `val_read_lt_eps0` が、1 行の行列が
 名指すのは `e0` 未満の順序数ちょうどだと言う。
 
-その先が、残っている Lean の問題である。
+表記系そのものも決着した。**`val` は標準形から `C_0(Λ)` への順序同型である。**
+出典が述べているのはこれである。全射の半分が `Notation.ExBuchholz.Term.Vals_eq`
+で、`valEquiv` が単射の半分とまとめる。だから `p0(Λ)` 未満の順序数はどれも、ただ
+一つの標準形の値である（`existsUnique_OT_of_lt_psi_Lam`）。可算な標準形が名指す
+のはちょうどそれらである（`val_lt_psi_Lam_iff`）。
 
-* **`z0` 以上での `val` の全射性。** 出典は `OT` に制限した `val` が `C_0(Λ)` への
-  順序**同型**だと述べている。単調で単射という半分はここにある（`val_lt_val`、
-  `val_inj_of_OT`）。全射性は全ての `e_n` 未満まで証明した。
-  `Trans.BMS.exists_OT_of_lt_epsN` が `n` についての帰納法で、土台が
-  `exists_OT_of_lt_eps0`（Cantor 標準形）、段が先頭項 `p0(W·(n+1) + B)` である。
-  そこでの標準形条件が `OT_cons_OmegaTerm` である。土台になる算術は
-  `Ord.psi_OmegaMul_add`（`e_{n+1}` 未満で `p0(W·(n+1) + a) = e_n·w^a`）と
-  `Ord.psi_OmegaMul`（`p0(W·(n+1))` は `e_n` そのもの）である。再帰の減少は
-  `Ord.log_lt_self_of_lt_epsN_succ` が与える。`e_n` と `e_{n+1}` の間で `w ^ ·` の
-  不動点は `e_{n+1}` 自身しかないからである。`Trans.BMS.existsUnique_OT_lt_teN` が
-  それを全段での全単射としてまとめる。`e0` と `e1` はその `n = 0` と `n = 1` で、
-  `teN 0` と `teN 1` はそのまま `te0` と `te1` である。極限まで行くのが
-  `Trans.BMS.existsUnique_OT_lt_teW` で、`val` は `e_w` 未満への全単射になる。
-  その `e_w` を名指す項が `teW = p0(p1(1))` である。
+止まっていたのは collapse の節である。`p_u(e)` の標準形の引数は自分の閉包に入って
+いなければならず、その引数は一般に `e` より大きい。`p0(e0) = p0(W)` で、標準形が
+使うのは `W` である。`Notation/ExBuchholz/NF.lean` は引数を `M(e)`、すなわち
+`C_u(e)` の `e` 以上で最小の元へ持ち上げる。これは閉包も値も変えない
+（`Ord.psi_M_eq`）。そのうえで、`+` と `W_·` と `e` 未満での collapse で閉じた
+集合から `M` が出ないことを示す。順序数の `M` は Cantor 標準形の各項の `M` から
+読める（`Ord.M_mem_of_comp`）。項 `p_t(h)` の `M` は `p_t(M(h))`、`W_{t+1}`、
+`W_{M(t)}` のどれかである（`Ord.M_psi_mem`）。その集合に値の集合を置けば、`e` に
+ついての帰納法で項が得られる。`C_v(b)` を置けば、同じ論法で閉包を `G` で読む
+Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(e)` は自分の
+閉包に入る」を標準形の条件に変える。
 
-  その先は項の側が順序数の側に追う。`Trans/BMS/Arg.lean` が **`W·mu` を名指す
-  引数の項**を `mu < e0` の全てで作る。`W·w^e` は `p1(e)` だから（`Ord.psi_one_eq`）、
-  Cantor 標準形が `W·mu` を `p1` の項の和に直す。その引数は指数を名指す all-nil の
-  項である。`Trans/BMS/EpsBig.lean` がその引数の上で先頭項の構成を `d < e0` の全段で
-  回す。だから `val` は `e_{e0}` 未満へ全射で、`Trans.BMS.existsUnique_OT_lt_teE` が
-  そこでの全単射である。`e_{e0} = p0(W·e0)` を名指す項が `teE = p0(p1(p0(W)))` である。
+`Trans/BMS/` の、`e1`、`e_w`、`e_{e0}`、`z0` へ届く構成が先にあり、いまも残して
+ある。項を手で作り、どの項がどの順序数を名指すかを言う。一般の定理はそれを
+言わない。
 
-  部品が噛み合う理由は、不変量が引数の項について全称になっていることである。段 `d` で
-  作った項は、`W·(1+d)` 以上を名指す**どの** `W` についても `G_0` がその項と `W` の和
-  より下に留まる。指数の項も剰余の項も同じ段かそれより下で作られるので、手元の `W` に
-  代入できる。
-
-  `e_{e0}` から `z0` までを埋めるのが `Trans/BMS/Zeta.lean` である。`exists_argTerm` は
-  指数を名指す all-nil の項を要求し、それを与える `exists_desc_of_lt_eps0` は `e0` 未満
-  でしか効かない。`e0` より上では指数自身が e 数になりうて、それを名指す項は自分の添字
-  より上の段でしか作れない。そこで `exists_arg_and_OT` は引数の項と値の項を**一本の**
-  帰納法で作る。段 `d` でまず `W·(1+d)` を名指す標準形を作り（指数は `d` より下の段に
-  頼む）、その上で `e_{d+1}` 未満の値を作る。e の逆関数が要るように見える箇所は要らない。
-  `Ord.exists_eps_index` が `Ordinal.le_iff_deriv` から添字を出し、`Ord.eps_index_lt` が
-  それが小さいと言うので、自分自身が自分の対数であるような指数も一段下で名指される。
-
-  出てくるのが `Trans.BMS.existsUnique_OT_of_lt_zeta0` である。**`z0` 未満の順序数は
-  どれもちょうど一つの標準形の値**である。`Ord.psi_Omega_mul_zeta0` が `p0(W·z0) = z0`
-  と言う。ただしこれは**この構成が止まる所**であって、項が止まる所ではない。`z0` 自身が
-  標準形の値である。`p1(p1(0)) = W^2` で、`Ord.psi_Omega_sq` が `p0(W^2) = z0` と言う
-  からである（`Trans.BMS.val_tzeta0`）。添字 `0` と `1` だけの項が届くのは `p0(W_2)` で、
-  `z0` とそこの間が、この構成がまだ作っていない `p1` の引数である。
-
-  `p0(W_2)` より上では項に `p2` が要る。形は同じ繰り返しである。ここで `p0` の引数を
-  `p1` で組んだように、`p1` の引数を `p2` で組むことになる。順序数側の算術はもう揃って
-  いる。
-  `Ord.psi_eq_Omega_mul_opow` と `Ord.psi_Omega_succ` は全ての添字で成り立つ。足りない
-  のは添字についての項の側の帰納法で、それは一段上げた同じ形である。
-
-  `e1` 以上の算術は、もう一段ずつ登らなくてよい。
-  `Notation/ExBuchholz/Eps.lean` が `p0(W·(n+1)) = e_n` を有限の全段で一度に
-  証明する（`Ord.psi_OmegaMul`。`e_{n+1}` 未満での `p0(W·(n+1) + a) = e_n·w^a` が
-  `Ord.psi_OmegaMul_add`）。`e0`・`e1` の証明を繰り返すのではなく、`n` についての
-  強い帰納法一本である。それを運ぶのが `Ord.decomp` である。`C_0(W·(n+1))` の元で
-  その上界より下のものは `W·k + c` の形で、`k <= n`、`c < e_n` である。和は `W·k` の
-  部分を足し合わせ、残りは `e_n` が飲み込む。collapse `p0(W·k + c)` は
-  `e_{k-1}·w^c < e_n` で抑えられる。添字が `0` でない collapse は、`p1(0) = W` 自身で
-  ない限りもう `W·(n+1)` を越えている。`Opow.lean` が手で証明した二つの値は、その
-  `n = 0` と `n = 1` の場合である。
-
-  有限の梯子も終点ではない。`Notation/ExBuchholz/Ladder.lean` がそれを e 関数に
-  置き換える。`Ord.eps g` が `Ordinal.deriv (w ^ ·) g` で、`Ord.psi_Omega_mul_eps` が
-  `p0(W·(1+g)) = e_g` を、e の最小不動点 `z0` 未満の**全ての** `g` で与える。
-  `e_{g+1}` 未満での `p0(W·(1+g) + b) = e_g·w^b` が `Ord.psi_Omega_mul_add_eps` で
-  ある。上界 `Ord.psi_Omega_mul_le` は条件無しで全ての `g` で成り立つ。
-
-  有限の梯子では閉包の分解が要ったが、超限の段を運ぶのは `W` による除算である。
-  `Ord.mod_Omega_lt_eps` が帰納法の全部である。`C_0(W·(1+g))` のどの元も
-  `x % W < e_g` を満たす。collapse の条項は引数を割って `W·d + b` と読むので、
-  `d` での再帰と `b` の評価がそのまま手に入る。添字が `0` でない collapse は加法的
-  主要で `W` 以上だから剰余は `0` になる。`p1` がどの順序数に届くかは知らなくてよい。
-  逆向きには `W·(1+g)` が閉包の中にある必要があり、それを Cantor 標準形と
-  `Ord.psi_one_eq`（`W·w^e` は `p1(e)`）から与えるのが `Ord.Omega_mul_mem_CSet` である。
-
-  止まるのは `z0` で、証明が足りないからではなく理由がある。`W·(1+z0)` を閉包の中で
-  作るには `z0` が要り、それこそが collapse の値だからである。`Ord.eps_Omega_one`
-  （`e_W = W`）が `z0` の可算性を言うので、条件はそれだけである。`z0` の先は
-  `p0(W^2)` が `z0` 自身で、引数にも `p1` が入る。そこを終わらせるのは正規形定理で、
-  その第一歩は入った。
-  `Ord.principal_mem_CSet` が、`C_v(a)` の加法的主要な元は `W_v` 未満か、閉包の中の
-  `u`・`e` による collapse `p_u(e)` かのどちらかだと言う。第二歩も入った。`Ord.exists_principal_split` が、
-  どの元からも先頭の主要な元を切り出し、後ろにより小さい元を残す。残るのは各
-  `p_u(e)` を項に直す再帰である。そこが難所である。`e` は名指す順序数より大きい
-  ことがあるから、順序数だけの再帰にはできない。しかも引数は値から決まらない。
-  `Ord.psi_eps0` と `Ord.psi_Omega_one` が、`p0` は `e0` でも `W` でも同じ値 `e0` を
-  取ると言う。標準形が使うのは `W` の方である。`W` は自分の閉包の中にあり、`e0` は
-  無いからである。だから再帰は、最小の引数を取るのではなく、その条件で引数を選ぶ
-  必要がある。さらに上では標準形が Cantor のものではなく、
-  どの添字の `p` も要る。だから項を作る帰納法は、各 `p_v` がどの引数に届くかを
-  知っていなければならず、それは `C_v` そのものである。
-
-残る二つは Lean の問題ではない。
+残る問題は二つで、どちらも Lean の問題ではない。
 
 * **2 行以上の読み取り。** 行列から順序数への写像の定義文が要る。3 行についてはそれが
   ある。[koteitan/trio](https://github.com/koteitan/trio) が `p0(W_a)` から trio 数列系

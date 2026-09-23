@@ -45,6 +45,8 @@
 | **標準形は整列する** | `Notation.ExBuchholz.Term.OTLt_wf` |
 | 異なる標準形は異なる順序数を名指す | `Notation.ExBuchholz.Term.val_inj_of_OT` |
 | 表記系の正しさ。項の順序と順序数の順序が一致する | `Notation.ExBuchholz.Term.val_lt_val` |
+| **`C_0(Λ)` の元は全て標準形の値であること**。よって `val` は標準形から `C_0(Λ)` への順序同型で、`p0(Λ)` 未満の順序数はどれもただ一つの標準形が名指す | `Notation.ExBuchholz.Term.Vals_eq`, `Notation.ExBuchholz.Term.valEquiv`, `Notation.ExBuchholz.Term.existsUnique_OT_of_lt_psi_Lam` |
+| 標準形が可算順序数を名指すのは、`p0(Λ)` 未満を名指すときちょうどであること | `Notation.ExBuchholz.Term.val_lt_psi_Lam_iff` |
 | 基本列が降下する | `Notation.ExBuchholz.Term.fs_lt` |
 | **拡張ブーフホルツ項は停止する** | `Notation.ExBuchholz.Term.exbOT_terminates` |
 | 基本列が標準形を保つ（Buchholz 補題 3.3） | `Notation.ExBuchholz.Term.OTFS_thm` |
@@ -57,9 +59,9 @@
 | **かつ `z0` 未満の全ての `g` で `p0(W·(1+g)) = e_g`**。`e_{g+1}` 未満で `p0(W·(1+g) + b) = e_g·w^b` | `Notation.ExBuchholz.Ord.psi_Omega_mul_eps`, `Notation.ExBuchholz.Ord.psi_Omega_mul_add_eps` |
 | **かつ `p0(W·z0) = p0(W^2) = z0`** | `Notation.ExBuchholz.Ord.psi_Omega_mul_zeta0`, `Notation.ExBuchholz.Ord.psi_Omega_sq` |
 | **かつ同じ梯子が全添字で**。`p_v(W_{v+1}·(1+g)) = e^v_g` | `Notation.ExBuchholz.Ord.psi_OmegaV_mul_eq`, `Notation.ExBuchholz.Ord.psi_OmegaV_mul_eq_nat` |
-| **`val` が `z0` 未満へ全射であること**。しかも標準形はただ一つ。項が届く範囲の下界であって上界ではない（`z0` 自身が `p0(p1(p1(0)))` の値） | `Trans.BMS.exists_OT_of_lt_zeta0`, `Trans.BMS.existsUnique_OT_of_lt_zeta0`, `Trans.BMS.val_tzeta0` |
+| `val` が `z0` 未満へ全射であること。一般の定理より前に、項を具体的に作って示したもの。`z0` 自身は `p0(p1(p1(0)))` の値 | `Trans.BMS.exists_OT_of_lt_zeta0`, `Trans.BMS.existsUnique_OT_of_lt_zeta0`, `Trans.BMS.val_tzeta0` |
 | `p0(W_a)` から 3 行行列への写像（`a < e0`）。[koteitan/trio](https://github.com/koteitan/trio) から転記し対応表で検算したもので、定理ではない | `Trans.BMS.omegaIndexMatrix` |
-| `C_v(a)` の加法的主要な元は `W_v` 未満か collapse であること。どの元も先頭の主要な元を切り出せること。正規形定理の最初の二歩 | `Notation.ExBuchholz.Ord.principal_mem_CSet`, `Notation.ExBuchholz.Ord.exists_principal_split` |
+| `C_v(a)` の加法的主要な元は `W_v` 未満か collapse であること。`v <= w` で `p_w(d)` が `C_v(b)` に入り、`d` が自分の閉包に入るなら、`d` は `C_v(b)` に入り `b` 未満であること。閉包を `G` で読む Buchholz の補題で、正規形定理はこれに乗る | `Notation.ExBuchholz.Ord.principal_mem_CSet`, `Notation.ExBuchholz.Ord.arg_mem_of_psi_mem`, `Notation.ExBuchholz.Term.G_lt_of_mem_CSet` |
 | 標準形がそこへ届くこと。`p0(W+1)` は `e0·w` を、`p0(W+W)` は `e1` を名指す | `Trans.BMS.OT_psi_Omega_add`, `Trans.BMS.val_tew`, `Trans.BMS.OT_te1` |
 
 ### 1 行: 行列が名指す順序数

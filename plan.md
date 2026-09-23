@@ -82,12 +82,15 @@ import this and nothing else.
 | `FS.lean` | done — `dom`, `fs`, `fs_lt`, `dom_eq_one_or_tw`, `step_lt`, `exb` |
 | `Closure.lean` | done — Buchholz 3.4, 3.5, 3.6, the Bachmann property, and 3.3 from it: `bachmann`, `OTFS_thm`, `Trian_fs_thm` |
 | `System.lean` | done — `exbOT` on the countable standard forms, `exbOT_wf`, `exbOT_terminates` |
+| `NF.lean` | done — the ordinal side of the normal form theorem: `M`, `M_mem_of_comp`, `M_psi_mem`, `arg_mem_of_psi_mem` |
+| `Onto.lean` | done — `val` is onto `C_0(Λ)`: `Vals_eq`, `valEquiv`, `existsUnique_OT_of_lt_psi_Lam` |
 
 **`ExBuchholz` is finished**: `OTLt_wf` says the order on its standard forms
 is well founded with no hypothesis, and `exbOT_terminates` says the expansion
-system on the countable ones ends, also with no hypothesis. What is not proved
-is that `val` is onto the ordinals below `Λ`; the injective half is
-`val_inj_of_OT`.
+system on the countable ones ends, also with no hypothesis. `Vals_eq` says
+`val` is onto `C_0(Λ)`, so with `val_inj_of_OT` it is the order isomorphism
+the source states, and every ordinal below `ψ_0(Λ)` has exactly one standard
+form.
 
 ### `Notation/BMS/` — done
 
@@ -338,121 +341,32 @@ One row is now settled as ordinals too. `val` is onto the ordinals below
 `ψ_0(Ω) = ε₀` — so `exists_matrix_of_lt_eps0` and `val_read_lt_eps0` say the
 one-row matrices name the ordinals below `ε₀` and no others.
 
-What is left of that is the Lean problem still open.
+The notation system itself is settled as well: **`val` is an order
+isomorphism from the standard forms onto `C_0(Λ)`**, which is what the source
+states. `Notation.ExBuchholz.Term.Vals_eq` is the onto half and `valEquiv`
+packages it with the injective half, so every ordinal below `ψ_0(Λ)` is the
+value of exactly one standard form (`existsUnique_OT_of_lt_psi_Lam`), and the
+countable standard forms name exactly those (`val_lt_psi_Lam_iff`).
 
-* **`val` is onto above `ζ₀`.** The source states that `val` restricted to
-  `OT` is an order **isomorphism** onto `C_0(Λ)`. The monotone and injective
-  half is here — `val_lt_val` and `val_inj_of_OT` — and surjectivity is proved
-  below every `ε_n`: `Trans.BMS.exists_OT_of_lt_epsN`, by induction on `n`,
-  with `exists_OT_of_lt_eps0` (Cantor normal form) as its base and the leading
-  term `ψ_0(Ω·(n+1) + B)` as its step, `OT_cons_OmegaTerm` being the
-  standard-form condition there. The arithmetic it rests on is
-  `Ord.psi_OmegaMul_add` — `ψ_0(Ω·(n+1) + a) = ε_n·ω^a` up to `ε_{n+1}` — and
-  `Ord.psi_OmegaMul`, that `ψ_0(Ω·(n+1))` **is** `ε_n`; the recursion
-  decreases by `Ord.log_lt_self_of_lt_epsN_succ`, since between `ε_n` and
-  `ε_{n+1}` the only fixed point of `ω ^ ·` would be `ε_{n+1}` itself.
-  `Trans.BMS.existsUnique_OT_lt_teN` packages it as a bijection onto the
-  ordinals below `ψ_0(Ω·(n+1))` at every `n`. `ε₀` and `ε₁` are the cases
-  `n = 0` and `n = 1`, and `teN 0` and `teN 1` are `te0` and `te1` on the
-  nose. `Trans.BMS.existsUnique_OT_lt_teW` takes it to the limit: `val` is a
-  bijection onto the ordinals below `ε_ω`, which the term
-  `teW = ψ_0(ψ_1(1))` names.
+The step that had blocked it was the collapse clause. The standard form of
+`ψ_u(e)` needs an argument that lies in its own closure, and that argument is
+in general larger than `e` — `ψ_0(ε₀) = ψ_0(Ω)`, and the standard form uses
+`Ω`. `Notation/ExBuchholz/NF.lean` moves the argument up to `M(e)`, the least
+member of `C_u(e)` at or above `e`, which changes neither the closure nor the
+value (`Ord.psi_M_eq`), and shows that `M` does not leave any set closed under
+`+`, `Ω_·` and the collapses below `e`. `M` of an ordinal is read off `M` of
+its Cantor-normal-form summands (`Ord.M_mem_of_comp`), and `M` of a summand
+`ψ_t(η)` is `ψ_t(M(η))`, `Ω_{t+1}` or `Ω_{M(t)}` (`Ord.M_psi_mem`). With the
+set of values in that role, an induction on `e` gives the term; with `C_v(β)`
+in it, the same argument gives Buchholz's reading of the closure through `G`
+(`Term.G_lt_of_mem_CSet`), which turns "`M(e)` is in its own closure" into the
+standard-form condition.
 
-  Past that the term side follows the ordinal side. `Trans/BMS/Arg.lean`
-  builds the **argument term for `Ω·μ`** at every `μ < ε₀`: `Ω·ω^e` is
-  `ψ_1(e)` by `Ord.psi_one_eq`, so Cantor normal form turns `Ω·μ` into a sum
-  of `ψ_1` terms whose arguments are the all-nil terms for the exponents.
-  `Trans/BMS/EpsBig.lean` runs the leading-term construction over that
-  argument at every level `δ < ε₀`, so `val` is onto the ordinals below
-  `ε_{ε₀}`, and `Trans.BMS.existsUnique_OT_lt_teE` is the bijection onto
-  them, with `teE = ψ_0(ψ_1(ψ_0(Ω)))` naming `ε_{ε₀} = ψ_0(Ω·ε₀)`.
+The constructions in `Trans/BMS/` that reach `ε₁`, `ε_ω`, `ε_{ε₀}` and `ζ₀`
+came first and stay: they build the terms by hand and say which term names
+which ordinal, which the general theorem does not.
 
-  What makes the pieces compose is that the invariant is quantified over the
-  argument term: a term built at level `δ` has `G_0` of it below `W` plus it
-  for **every** `W` naming at least `Ω·(1+δ)`. The terms for the exponent and
-  for the remainder are built at the same level or below, so their invariants
-  are instantiated at the `W` in hand.
-
-  `Trans/BMS/Zeta.lean` closes the gap to `ζ₀`. `exists_argTerm` asks for
-  all-nil terms for the exponents, which `exists_desc_of_lt_eps0` gives only
-  below `ε₀`; above it an exponent can be an ε-number, named only by a term
-  built at a level above its own index. So `exists_arg_and_OT` builds the
-  argument term and the values by **one** induction on the level: at `δ` it
-  first produces a standard form naming `Ω·(1+δ)`, asking the levels below
-  `δ` for the exponents, and then the values below `ε_{δ+1}` over it. The
-  step that looks like it needs an inverse of `ε` does not:
-  `Ord.exists_eps_index` supplies the index from `Ordinal.le_iff_deriv`, and
-  `Ord.eps_index_lt` says it is smaller, so an exponent that is its own
-  logarithm is named one level down.
-
-  What comes out is `Trans.BMS.existsUnique_OT_of_lt_zeta0`: **every ordinal
-  below `ζ₀` is the value of exactly one standard form**.
-  `Ord.psi_Omega_mul_zeta0` says `ψ_0(Ω·ζ₀) = ζ₀`, and that is where **this
-  construction** stops — not where the terms stop. `ζ₀` is itself the value of
-  a standard form: `ψ_1(ψ_1(0))` is `Ω²` and `Ord.psi_Omega_sq` says
-  `ψ_0(Ω²) = ζ₀`, which is `Trans.BMS.val_tzeta0`. What the terms with
-  subscripts `0` and `1` reach is `ψ_0(Ω_2)`, and the gap between `ζ₀` and it
-  is the arguments of `ψ_1` this construction does not build: it takes them
-  from the levels below, and `ψ_1` of a `ψ_1` is not among those.
-
-  Above `ψ_0(Ω_2)` the terms need `ψ_2`, and the pattern repeats: the
-  arguments of `ψ_1` would be built from `ψ_2` the way the arguments of `ψ_0`
-  are built from `ψ_1` here. The ordinal side has the arithmetic for it already —
-  `Ord.psi_eq_Omega_mul_opow` and `Ord.psi_Omega_succ` hold at every
-  subscript — so what is missing is the term-level induction over the
-  subscript, which is the same shape one level up.
-
-  The arithmetic above `ε₁` no longer has to be climbed a level at a time.
-  `Notation/ExBuchholz/Eps.lean` proves `ψ_0(Ω·(n+1)) = ε_n` at every finite
-  `n` at once — `Ord.psi_OmegaMul`, with `Ord.psi_OmegaMul_add` for
-  `ψ_0(Ω·(n+1) + a) = ε_n·ω^a` below `ε_{n+1}` — by one strong induction on
-  `n` rather than by repeating the `ε₀`, `ε₁` proofs. What carries it is
-  `Ord.decomp`: a member of `C_0(Ω·(n+1))` below that bound is `Ω·k + c` with
-  `k ≤ n` and `c < ε_n`, because a sum adds the `Ω·k` parts and `ε_n` swallows
-  the rest, a collapse `ψ_0(Ω·k + c)` is bounded by `ε_{k-1}·ω^c < ε_n`, and a
-  collapse with a nonzero subscript is already past `Ω·(n+1)` unless it is
-  `ψ_1(0) = Ω` itself. The two values `Opow.lean` proves by hand are the cases
-  `n = 0` and `n = 1` of it.
-
-  The finite ladder is not the end of it either. `Notation/ExBuchholz/Ladder.lean`
-  replaces it by the ε function: `Ord.eps γ` is `Ordinal.deriv (ω ^ ·) γ`, and
-  `Ord.psi_Omega_mul_eps` says `ψ_0(Ω·(1+γ)) = ε_γ` at **every** `γ` below
-  `ζ₀`, the first fixed point of `ε`, with `Ord.psi_Omega_mul_add_eps` for
-  `ψ_0(Ω·(1+γ) + β) = ε_γ·ω^β` below `ε_{γ+1}`. The upper bound
-  `Ord.psi_Omega_mul_le` holds at every `γ` with no condition at all.
-
-  What carries the transfinite step, where the finite ladder needed a
-  decomposition of the closure, is ordinal division by `Ω`.
-  `Ord.mod_Omega_lt_eps` is the whole induction: every member of
-  `C_0(Ω·(1+γ))` has `x % Ω < ε_γ`. The collapse clause reads its argument as
-  `Ω·δ + β` by dividing, so the recursion at `δ` and the bound on `β` are both
-  in hand, and a collapse with a nonzero subscript is additively principal and
-  at least `Ω`, so its remainder is `0` — nothing has to be known about which
-  ordinals `ψ_1` reaches. The other direction needs `Ω·(1+γ)` to be inside the
-  closure, which `Ord.Omega_mul_mem_CSet` supplies from Cantor normal form and
-  `Ord.psi_one_eq`: `Ω·ω^e` is `ψ_1(e)`.
-
-  `ζ₀` is where it stops, and for a reason rather than for want of a proof:
-  building `Ω·(1+ζ₀)` inside the closure needs `ζ₀`, which is exactly the
-  value being collapsed to. `Ord.eps_Omega_one` — `ε_Ω = Ω` — says `ζ₀` is
-  countable, so the condition is the only one. Past `ζ₀`, `ψ_0(Ω^2)` is `ζ₀`
-  itself and the arguments need `ψ_1` inside them. What would settle that is a
-  normal form theorem, and its first step is in: `Ord.principal_mem_CSet` says an additively principal member of
-  `C_v(a)` is below `Ω_v` or a collapse `ψ_u(e)` with `u` and `e` in the
-  closure. The second step is in too:
-  `Ord.exists_principal_split` peels a leading principal off any member, with
-  a smaller member behind it. What is left is the recursion that turns each
-  `ψ_u(e)` into a term, which is the hard part. `e` may be larger than the
-  ordinal being named, so the recursion cannot be on the ordinal alone; and
-  the argument is not determined by the value either. `Ord.psi_eps0` and
-  `Ord.psi_Omega_one` say `ψ_0` takes `ε₀` at `ε₀` and at `Ω` alike, and it
-  is `Ω` that the standard form uses, because `Ω` lies in its own closure and
-  `ε₀` does not. So the recursion has to choose the argument by that
-  condition, not by taking the least one. Higher up the normal form is not
-  Cantor's: it needs `ψ` at every subscript, so the induction that builds a
-  term has to know which arguments each `ψ_v` reaches, which is `C_v` again.
-
-The other two are not Lean problems.
+What is left is two problems, and neither is a Lean problem.
 
 * **A reading for two rows and up.** It needs a stated definition of the map
   from matrices to ordinals, and there is one for three rows:

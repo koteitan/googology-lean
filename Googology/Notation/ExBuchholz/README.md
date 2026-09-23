@@ -45,6 +45,8 @@ which is the whole content of the extension.
 | `FS.lean` | `dom`, `fs` (the fundamental sequence `X[Y]`), `fs_lt` (it descends), Buchholz 3.2(b), `sub_lt_psi`, `tail_lt`, `G_eq_nil_of_le`, the tower of case 4, and `exb`, the expansion system |
 | `Closure.lean` | concatenation, `G°`, `⊲`, Buchholz 3.4, 3.5, 3.6 and 3.3 |
 | `System.lean` | `exbOT`, the expansion system on the countable standard forms, and its well-foundedness |
+| `NF.lean` | the ordinal side of the normal form theorem: `M` (the least member of a closure above `x`), `M_mem_of_comp`, `M_psi_mem`, `psi_M_eq`, `arg_mem_of_psi_mem` |
+| `Onto.lean` | **`val` is onto `C_0(Λ)`**: `G_lt_of_mem_CSet`, `addNF`, `psi_mem_Vals`, `Vals_eq`, `valEquiv`, `existsUnique_OT_of_lt_psi_Lam` |
 
 ## The order
 
@@ -178,14 +180,46 @@ the same.
 Every theorem in this directory went through unchanged after the correction,
 which says the proofs never leaned on the extra condition.
 
-### What is still open
+### `val` is an isomorphism onto `C_0(Λ)`
 
 The reference states that `o` restricted to `OT` is an order **isomorphism**
-onto `C_0(Λ)`. The monotone and injective halves are theorems here
-(`val_lt_val`, `val_inj_of_OT`). Surjectivity is proved **below `ε₁`** —
-`Trans.BMS.exists_OT_of_lt_eps0` below `ε₀` by Cantor normal form, and
-`Trans.BMS.exists_OT_of_lt_eps1` above it, where the leading term is
-`ψ_0(Ω + B)`. Above `ε₁` it is not proved.
+onto `C_0(Λ)`. That is now a theorem. The monotone and injective halves are
+`val_lt_val` and `val_inj_of_OT`; the onto half is `Vals_eq` in `Onto.lean`,
+and `valEquiv` packages the two. So every ordinal below `ψ_0(Λ)` is the value
+of exactly one standard form (`existsUnique_OT_of_lt_psi_Lam`), and the
+countable standard forms name exactly those (`val_lt_psi_Lam_iff`).
+
+The proof is an induction on the closure `C_0(Λ)`. The sum clause is
+normal-form addition, `addNF`. The collapse clause is the whole difficulty:
+`ψ_u(e)` is in the closure for every `e` in it, but its standard form needs
+an argument that lies in its own closure, and that argument is in general
+larger than `e` — `ψ_0(ε₀) = ψ_0(Ω)`, and the standard form uses `Ω`. So the
+argument is moved up to
+
+```
+M(e) = min (C_u(e) ∩ [e, ∞))
+```
+
+and three things are proved about it.
+
+* `ψ_u(M(e)) = ψ_u(e)`, and `M(e)` is in its own closure — `psi_M_eq` and
+  `M_mem_self`. Both are short: nothing in `C_u(e)` lies in `[e, M(e))`.
+* `M(e)` is again the value of a standard form. `M_mem_of_comp` reduces `M`
+  of an ordinal to `M` of its Cantor-normal-form summands — the leading
+  summand `p` stays when it is in the closure, and then `M(x) = p + M(rest)`;
+  otherwise `M(x) = M(p)`. `M_psi_mem` does a summand `ψ_t(η)`: the next member
+  of the closure above it is `ψ_t(M(η))`, `Ω_{t+1}` or `Ω_{M(t)}`. The
+  collapses these produce have arguments below `e`, so an induction on `e`
+  supplies them.
+* `M(e)` in its own closure gives the syntactic condition `G_u(M(e)) < M(e)`.
+  That is `G_lt_of_mem_CSet`, the converse of the closure half of `Mono.main`,
+  and its collapse case is `arg_mem_of_psi_mem`: if `ψ_w(d) ∈ C_v(β)` with
+  `v ≤ w` and `d` in its own closure, then `d ∈ C_v(β)` and `d < β`. It is
+  the same `M` again, now with `S = C_v(β)` in place of the set of values.
+
+The constructions in `Trans/BMS/` that climb to `ε₁`, `ε_ω`, `ε_{ε₀}` and `ζ₀`
+came first and are still there; they build the terms by hand and say which
+term names which ordinal, which the general theorem does not.
 
 ## Well-foundedness: how it was closed
 
@@ -416,7 +450,7 @@ Nothing is left: the chain is closed.
 | the expansion system carries an ordinal measure | done (`exbOTEval`) |
 | the closed forms of `ψ` where there are any | done (`Ord/Opow.lean`; see the table above) |
 | **`val` is onto the ordinals below `ε₁`** | **done** (`Trans.BMS.exists_OT_of_lt_eps1`) |
-| `val` onto `C_0(Λ)` | open |
+| **`val` onto `C_0(Λ)`** | **done** (`Vals_eq`, `valEquiv`) |
 
 Nothing here is `sorry`-free by exception: the files contain no `sorry` and no
 `axiom`.

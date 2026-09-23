@@ -286,9 +286,10 @@ theorem existsUnique_OT_of_lt_zeta0 {α : Ordinal.{0}} (h : α < Ord.zeta0) :
 
 `ζ₀` is where **this construction** stops, not where the terms stop: `ζ₀`
 itself is the value of a standard form, because `ψ_1(ψ_1(0))` is `Ω²` and
-`Ord.psi_Omega_sq` says `ψ_0(Ω²) = ζ₀`.  What the terms with subscripts `0`
-and `1` reach is `ψ_0(Ω_2)`, and the gap between `ζ₀` and it is the arguments
-of `ψ_1` that this file does not build. -/
+`Ord.psi_Omega_sq` says `ψ_0(Ω²) = ζ₀`.  The general theorem is
+`Notation.ExBuchholz.Term.existsUnique_OT_of_lt_psi_Lam`: every ordinal below
+`ψ_0(Λ)` is the value of exactly one standard form.  It does not say which
+term names which ordinal, which this file does. -/
 
 /-- The term `ψ_0(ψ_1(ψ_1(0)))`, that is `ψ_0(Ω²)`. -/
 abbrev tzeta0 : Term := psi nil (psi t1 (psi t1 nil))
