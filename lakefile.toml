@@ -1,5 +1,5 @@
 name = "googology"
-version = "0.6.138"
+version = "0.6.139"
 defaultTargets = ["Googology", "Test"]
 
 [leanOptions]
@@ -21,5 +21,11 @@ rev = "v4.30.0"
 [[require]]
 name = "bmselempattern"
 git = "https://github.com/koteitan/bms-elem-pattern"
+subDir = "lean"
+rev = "main"
+
+[[require]]
+name = "pss"
+git = "https://github.com/koteitan/pss-proof"
 subDir = "lean"
 rev = "main"
