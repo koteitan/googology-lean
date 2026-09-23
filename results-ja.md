@@ -187,6 +187,7 @@
 | **3 行の生成元 `(0,0,0)(1,0,0)(2,1,0)(3,2,1)` の階数は `p0(W_w)`** | `Trans.DBMS.rank_gen_three_three`, `Trans.DBMS.rkL_cgen_three`, `Trans.DBMS.rank_gen_top` |
 | 中身の系の生成元は BMS の生成元を持ち上げたもの。3 行の DBMS の生成元 `(0,0,0)(1,0,0)(2,1,0)(3,2,1)` と BMS の `(0,0,0)(1,1,1)` は同じ階数 | `Trans.DBMS.cgen_two_eq_lift`, `Trans.DBMS.expandRL_lift`, `Trans.DBMS.rank_genL_two_three_eq_bms` |
 | 標準形のブロックの並びでは、中身の階数が減っていく。逆向きは階数の単射性から出る | `Trans.DBMS.drank_of_dstdL`, `Trans.DBMS.dstdL_blkR`, `Trans.DBMS.dstdL_iff_drank_of_inj` |
+| **何行でも、ブロックの並びが標準形であることと、中身が前から順に届き合うことは同値** | `Trans.DBMS.dstdL_iff_dchain`, `Trans.DBMS.dupProp`, `Trans.DBMS.dstdL_of_dchain` |
 
 ## 3 行：添字が 0 か 1 だけの項
 

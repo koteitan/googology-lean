@@ -545,3 +545,4 @@ What is left is one problem, and it is not a Lean problem.
 - The generators of the content system `C_3` are lifted BMS generators, and the conjecture that 3-row DBMS and BMS have the same ordinal is stated (`DBMS/ThreeRowLift.lean`); no counterexample on about 600 standard forms.
 - The necessary condition on standard lists of blocks is proved (`DBMS/BlocksStd.lean`); at 3 rows, on all 43597 lists of at most 8 columns, standard = contents lexicographically non-increasing.
 - Fix N (`TrioRulesNonLast.lean`): in the tower regimes a leaf that is not last is upgraded at once, which fixes the order of `Ω_{Ω_Ω}+Ω_{Ω_2}+1`. The rules now exist in four versions; merging them is added to the plan.
+- Standard lists of blocks are characterized for any number of rows by "each content reachable from the earlier ones" (`DBMS/BlocksSuff.lean`), without rank injectivity or the lexicographic order.

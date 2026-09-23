@@ -56,8 +56,9 @@ at `r = 2`):
   above, the rank descends to the target, and Cantor normal form with `RkInj`
   says the matrix reached is the target.
 
-Neither `DupProp 2` nor `RkInj 2` is proved; so the sufficient direction at
-three rows remains open, reduced to either of these.
+`DupProp r` is proved for every `r` in `BlocksSuff.lean` (`dupProp`), so the
+reach form is a characterization for every number of rows (`dstdL_iff_dchain`).
+`RkInj 2` is not proved.
 -/
 
 namespace Googology.Trans.DBMS
