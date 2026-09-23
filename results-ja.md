@@ -148,3 +148,10 @@
 | **下に 0 の行を足す写像は標準形に入り、展開と可換で、単射で、階数を保つ** | `Trans.DBMS.exists_dstd_zeroRow`, `Trans.DBMS.dbmsL_homSucc`, `Trans.DBMS.dbmsL_homSucc_injective`, `Trans.DBMS.rank_dbmsL_homSucc` |
 | 全射ではない。生成元 `(0,0)(1,0)(2,1)` は像に無い | `Trans.DBMS.dbmsToSucc_not_surjective` |
 | `r ≤ s` なら `r` 行は `s` 行を模倣する | `Trans.DBMS.dbmsL_simAdd`, `Trans.DBMS.dbmsL_simLe` |
+
+## 3 行：共終性を ψ の項で
+
+| | |
+|---|---|
+| **極限の `a < e0` で、`p0(W_a)` の基本列と、その trio 行列の展開は互いに共終** | `Trans.BMS.TrioCofPsi.trioPsi_fs`, `Trans.BMS.TrioCofPsi.trioPsi_expand_prefix` |
+| `p0(W_b) < p0(W_a)` なら `M(b) ≤ M(a)[k]` となる `k` がある | `Trans.BMS.TrioCofPsi.trioPsi_cofinal`, `Trans.BMS.TrioCofPsi.trioPsi_cofinal_val` |

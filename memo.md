@@ -529,3 +529,4 @@ What is left is one problem, and it is not a Lean problem.
   - Cofinality: koteitan/trio's `trio_cofinality` and its 16 dependency files are in `Trans/BMS/TrioCof/`, with a proved bridge to this library's BMS (`trio_cofinal`, `trioStd_cofinal`, `Trans/BMS/TrioCofinal.lean`).
   - Pair sequences → extended Buchholz's ψ does not preserve expansion and does not commute with it (`Trans/PSS/Expansion.lean`, `pairToExb_not_preserves`, `pairToExb_not_commutes`). The counterexample is the generator `(0,0)(1,1)` with `[0]`.
 - DBMS `r` rows → `r + 1` rows is proved (2026-09-23, `Trans/DBMS/ZeroRow.lean`), with a proof that it is not surjective; the table cell is ✅✅✅✅❌✅(*3). Surjectivity of the BMS map can be refuted the same way (added to the plan).
+- Trio cofinality restated with the ψ terms (2026-09-23, `Trans/BMS/TrioCofPsi.lean`): two-way cofinal at a limit `α`; the successor case stays in the plan.

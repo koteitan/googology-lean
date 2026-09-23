@@ -75,6 +75,7 @@ Trans/BMS/Y.lean        BMS と Y に関する全部
 | 3 行の BMS、拡張ブーフホルツ ψ | `BMS/TrioMono.lean` | — | **trio の写像が順序を保ち、順序を反映すること**（`a < e0`、列の辞書式順序。`omegaIndexMatrix_lt_iff`）。したがって単射である（`omegaIndexMatrix_injective`） |
 | 3 行の BMS、拡張ブーフホルツ ψ | `BMS/TrioRules.lean`、`BMS/TrioRulesSheet.lean` | [koteitan/trio](https://github.com/koteitan/trio) | `e0 <= a < Λ` の規則 1〜10 の書き起こし（`TrioRules.trioMatrixL`）と、`#guard` 875 個の照合。定理ではなく転記と `#guard` である |
 | 3 行の BMS | `BMS/TrioCof/`、`BMS/TrioCofinal.lean` | [koteitan/trio](https://github.com/koteitan/trio) | **trio 数列の展開の共終性**。koteitan/trio の `trio_cofinality` とその依存 16 ファイルを移し、この文庫の BMS の展開と同じであることを証明した（`expandRL_toL`）。標準形の `b < a` には、`b ≤ a[k]` となる `k` がある（`trio_cofinal`、`trioStd_cofinal`） |
+| 3 行の BMS、拡張ブーフホルツ ψ | `BMS/TrioCofPsi.lean` | — | **trio の展開の共終性を ψ の項で述べたもの**（`a < e0`）。trio 行列は trio の断片に入る（`trioStdL_omegaIndexMatrix`）。`p0(W_b) < p0(W_a)`（またはその `val`）なら `M(b) ≤ M(a)[k]` となる `k` がある（`trioPsi_cofinal`、`trioPsi_cofinal_val`）。極限の `a`（`dom a = w`）では `p0(W_a)[n] = p0(W_{a[n]})` で、列 `M(a)[k]` と `M(a[n])` は互いに共終であり、各 `M(a)[k]` はある `M(a[n])` の先頭部分である（`trioPsi_fs`、`trioPsi_expand_prefix`）。後続の `a` では基本列の項 `p0(p_a(⋯))` が写像の定義域の外にある |
 | BMS、拡張ブーフホルツ ψ | `BMS/RankVal.lean` | — | **系の階数が項の値であること**。定義の違う二つの測度が同じものであること。そのうえで、読み取りが無い所の階数を計算する。2 行の生成元、後続、ブロックの繰り返し、族 `(0,0)(1,1)(1,0)^k` |
 | BMS、拡張ブーフホルツ ψ | `BMS/Prim.lean` | `StepHom` | 原始数列系を `Rewrite` として与え、停止することとその順序数 |
 | BMS、拡張ブーフホルツ ψ | `BMS/Cofinal.lean` | — | `p0(W)` 未満で項が `X[0] < X[1] < ⋯` の上限であること |

@@ -468,3 +468,4 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
   - 共終性：koteitan/trio の `trio_cofinality` とその依存 16 ファイルを `Trans/BMS/TrioCof/` に移し、この文庫の BMS への橋を証明した（`trio_cofinal`、`trioStd_cofinal`、`Trans/BMS/TrioCofinal.lean`）。
   - ペア数列 → 拡張ブーフホルツ ψ の「展開を保つ」「展開と可換」は偽（`Trans/PSS/Expansion.lean`、`pairToExb_not_preserves`、`pairToExb_not_commutes`）。反例は生成元 `(0,0)(1,1)` の `[0]`。
 - DBMS の `r` 行 → `r + 1` 行を証明した（2026-09-23、`Trans/DBMS/ZeroRow.lean`）。全射でないことも証明し、表のマスは ✅✅✅✅❌✅(*3)。BMS の同じ写像の全射性も同じ方法で反証できると分かった（plan に追加）。
+- トリオの共終性を ψ の項の側で述べ直した（2026-09-23、`Trans/BMS/TrioCofPsi.lean`）。極限の `a` では両方向に共終。後続の `a` は plan に残した。

@@ -151,3 +151,10 @@ measures, and all four morphisms — depends on no axiom at all.
 | **Adding a row of zeros underneath lands in the standard forms, commutes with expansion, is injective and keeps the rank** | `Trans.DBMS.exists_dstd_zeroRow`, `Trans.DBMS.dbmsL_homSucc`, `Trans.DBMS.dbmsL_homSucc_injective`, `Trans.DBMS.rank_dbmsL_homSucc` |
 | It is not surjective: the generator `(0,0)(1,0)(2,1)` is not in the image | `Trans.DBMS.dbmsToSucc_not_surjective` |
 | For `r ≤ s`, `r` rows simulate `s` rows | `Trans.DBMS.dbmsL_simAdd`, `Trans.DBMS.dbmsL_simLe` |
+
+## Three rows: cofinality with the ψ terms
+
+| | |
+|---|---|
+| **At a limit `α < ε₀`, the fundamental sequence of `ψ_0(Ω_α)` and the expansions of its trio matrix are cofinal in each other** | `Trans.BMS.TrioCofPsi.trioPsi_fs`, `Trans.BMS.TrioCofPsi.trioPsi_expand_prefix` |
+| `ψ_0(Ω_β) < ψ_0(Ω_α)` gives `k` with `M(β) ≤ M(α)[k]` | `Trans.BMS.TrioCofPsi.trioPsi_cofinal`, `Trans.BMS.TrioCofPsi.trioPsi_cofinal_val` |
