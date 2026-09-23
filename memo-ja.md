@@ -412,3 +412,36 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
   `yLegal_terminates`、標準形の辞書式整列 `yStd_strictWellOrder` が出る。
 - README の非標準の列は `yLegal` を数える。その状態は、項が正で先頭が `1` の列
   すべてである。それ以外の列については何も証明していない。
+
+## 2026-09-23：目標の一覧と README の検査
+
+- 目標の記録の仕方は [spec-ja.md](spec-ja.md) の 7 節にある。記録は
+  `Googology/Core/Goals.lean`、`Googology/Goals/Basic.lean`、
+  `Googology/Goals.lean` にある。記録は 18 個、監査の行は 77 行である。
+- README は生成しない。`scripts/check_readme.py` は監査と、`README.md` と
+  `README-ja.md` の表を読む。一致しないと `1` で終わる。
+- `test/GoalsAudit.lean` が `Test` ライブラリに入っているので、`lake build`
+  （既定のターゲット）が記録を作り、監査を出力する。検査は次のとおり。
+
+  ```sh
+  lake env lean test/GoalsAudit.lean > audit.txt
+  python3 scripts/check_readme.py --audit audit.txt
+  ```
+
+  `lake build` や `leanman check` の出力を `--audit -` にパイプで渡してもよい。
+  2026-09-23 の時点で検査は `0` で終わる。公理は `propext`、
+  `Classical.choice`、`Quot.sound` である。
+- 記録が README の文より少ないことしか言っていない所：
+  - 「2 行以下の BMS」は項の並び（`prim`、`pairL`）の上で記録している。
+    `bms 1` と `bms 2` の配列の上ではない。配列の上では、1 行の DBMS と同じ
+    理由で「単射性」が成り立たない。
+  - 拡張ブーフホルツ ψ の「全射性」：像は $`\psi_0(\Lambda)`$ 未満の順序数
+    である。$`C_0(\Lambda)`$ 全体ではない。`exbOTStd` は `Standard := True`
+    であり、生成元から届く集合ではない。
+  - `bmsNotation`、`dbmsNotation`、`bmsToSucc` は、すべての `r` について
+    `r + 1` 行を扱う。
+  - 写像の無い行（たとえば「3 行以上の BMS」）には記録が無い。spec-ja.md の
+    7.5 により、そのセルは空である。
+- ❌ のセルのうち 5 個は、今ある定理から数行で証明できる。一時ファイルで確かめた。
+  README と一致したままにするため、記録にはつないでいない。
+  [plan-ja.md](plan-ja.md) に載せた。

@@ -10,8 +10,10 @@
     - state and prove the relation to `[ ]` as cofinality
   - blank cells of the translation tables in the README
     - pair sequences → extended Buchholz's ψ: preserves expansion
-- Core
-  - 🤖 goal records: collect in one place, as Lean values, the goals each notation satisfies, and a script that checks that the README tables agree with the audit (specified in spec.md)
+    - pair sequences → extended Buchholz's ψ: preserves the rank (a few lines from `rank_exbOT_eq_val` and `rank_pairL_eq`)
+    - DBMS `r` rows → BMS `r` rows: commutes with expansion, injective, preserves the rank (a few lines each; the map is `Subtype.val`)
+    - BMS `r` rows → BMS `r+1` rows: injective (`zeroRow` is injective)
+    - when one of these is wired into `Googology/Goals.lean`, change its README cell by hand
 - Notation
   - ω-Y (official)
     - 🤖 prove well-foundedness with the official expansion (a separate repository, koteitan/wy-wo-por)

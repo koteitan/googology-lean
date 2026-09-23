@@ -470,3 +470,36 @@ What is left is one problem, and it is not a Lean problem.
 - The non-standard column of the README counts `yLegal`, whose states are all
   sequences with positive entries and first entry `1`. Nothing is proved for
   other sequences.
+
+## 2026-09-23: goal records and the README check
+
+- Section 7 of [spec.md](spec.md) says how the goals are recorded. The records
+  are in `Googology/Core/Goals.lean`, `Googology/Goals/Basic.lean` and
+  `Googology/Goals.lean`: 18 records, 77 lines of the audit.
+- The README is not generated. `scripts/check_readme.py` reads the audit and
+  the tables of `README.md` and `README-ja.md`, and exits `1` on a mismatch.
+- `lake build` (the default targets) builds the records and prints the audit,
+  because `test/GoalsAudit.lean` is in the `Test` library. The check:
+
+  ```sh
+  lake env lean test/GoalsAudit.lean > audit.txt
+  python3 scripts/check_readme.py --audit audit.txt
+  ```
+
+  The output of `lake build` or of `leanman check` can also be piped into
+  `--audit -`. On 2026-09-23 the check exits `0`. The axioms are `propext`,
+  `Classical.choice` and `Quot.sound`.
+- Where a record states less than the README text:
+  - "BMS with at most 2 rows" is recorded on the entries (`prim`, `pairL`),
+    not on the arrays of `bms 1` and `bms 2`. On the arrays, "injective" fails
+    for the same reason as for one-row DBMS.
+  - Extended Buchholz's ψ, "surjective": the image is the ordinals below
+    $`\psi_0(\Lambda)`$, not all of $`C_0(\Lambda)`$. `exbOTStd` has
+    `Standard := True`; it is not the set reachable from the generators.
+  - `bmsNotation`, `dbmsNotation` and `bmsToSucc` cover `r + 1` rows for
+    every `r`.
+  - Rows with no map (for example "BMS with 3 rows or more") have no record.
+    Under 7.5 of spec.md their cells are empty.
+- Five cells that are ❌ can be proved in a few lines from existing theorems.
+  This was checked in a scratch file, but they are not wired, so that the
+  README keeps matching. They are in [plan.md](plan.md).
