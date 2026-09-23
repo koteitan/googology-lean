@@ -18,5 +18,6 @@
     - connect the proof here once it is done
   - DBMS
     - the translation into the ordinals for 3 rows and up
-      - 🤖 prove the conjecture "for `n ≥ 1`, `rkL 2 (cgen 2 (n+2))` equals the rank of the BMS generator `(0,0,0)...(n,n,n)`" (so 3-row DBMS and BMS have the same ordinal; `n = 1` is proved)
+      - prove the upper bound `rkL 2 (cgen 2 (n+2)) ≤ rkL 2 (bgen3 n)` for `n ≥ 2` (then 3-row DBMS and BMS have the same ordinal; the lower bound and `n = 1` are proved)
+        - 🤖 `n = 2`: show `T3(C) ∈ TrioStdL` for the content states `C`, then use `trio_cofinal` and `trio_expand_lt`
       - 🤖 prove `LexReach 2` (at 3 rows, a content lexicographically `≤` another is reached from it; equivalent to `LexCof 2`: for `X < M` some `M[N] ≥ X`). Then standard ⟺ contents lexicographically non-increasing (`DBMS/BlocksLex.lean`)

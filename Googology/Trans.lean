@@ -65,6 +65,7 @@ import Googology.Trans.DBMS.Blocks
 import Googology.Trans.DBMS.ThreeRow
 import Googology.Trans.DBMS.ContentLift
 import Googology.Trans.DBMS.ThreeRowLift
+import Googology.Trans.DBMS.ThreeRowLower
 import Googology.Trans.DBMS.BlocksStd
 import Googology.Trans.DBMS.BlocksSuff
 import Googology.Trans.DBMS.BlocksLex
