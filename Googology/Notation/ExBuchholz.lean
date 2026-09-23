@@ -16,3 +16,5 @@ import Googology.Notation.ExBuchholz.Mono
 import Googology.Notation.ExBuchholz.System
 import Googology.Notation.ExBuchholz.NF
 import Googology.Notation.ExBuchholz.Onto
+import Googology.Notation.ExBuchholz.Cofinal
+import Googology.Notation.ExBuchholz.RankVal

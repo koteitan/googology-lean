@@ -44,6 +44,8 @@ inductive Term where
 | `Closure.lean` | 連結、`G°`、`⊲`、Buchholz 3.4、3.5、3.6、3.3 |
 | `System.lean` | 可算標準形の上の展開系 `exbOT` とその整礎性 |
 | `NF.lean` | 正規形定理の順序数側。`M`（閉包の `x` 以上で最小の元）、`M_mem_of_comp`、`M_psi_mem`、`psi_M_eq`、`arg_mem_of_psi_mem` |
+| `Cofinal.lean` | 基本列の共終性：`exists_lt_fs_numeral`（`dom X = w` のとき、標準形 `Y < X` はどれもある `X[n]` より下にある。塔の場合も含む）、`exists_le_fs_idx`、`exbOT_exists_le_step` |
+| `RankVal.lean` | **`exbOT` の階数が `val` であること**：`rank_exbOT_eq_val`、`exbOTEval_eq_rankEval` |
 | `Onto.lean` | **`val` が `C_0(Λ)` の上へ全射であること**。`G_lt_of_mem_CSet`、`addNF`、`psi_mem_Vals`、`Vals_eq`、`valEquiv`、`existsUnique_OT_of_lt_psi_Lam`、初期切片の `belowEquiv`、`countableEquiv` |
 
 ## 順序

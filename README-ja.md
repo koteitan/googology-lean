@@ -30,16 +30,16 @@
 
 | 表記 | 定義 | 単射性 | 全射性 | 展開で値が下がる | 階数と一致 | 順序を保つ |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
-| 原始数列 | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| 1 行の DBMS | ✅ |  | ✅ | ✅ | ✅ |  |
-| 拡張ブーフホルツ ψ | ✅ | ✅ | ✅ | ✅ |  | ✅ |
-| 2 行以上の BMS |  |  |  |  |  |  |
+| 2 行以下の BMS | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 1 行の DBMS | ✅ |  | ✅ | ✅ | ✅ | ✅ |
+| 拡張ブーフホルツ ψ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 3 行以上の BMS |  |  |  |  |  |  |
 | 2 行以上の DBMS |  |  |  |  |  |  |
 | Y 数列 |  |  |  |  |  |  |
 
-- 定義：写像を Lean で定義してある。原始数列と DBMS 1 行では、拡張ブーフホルツ ψ の項に読んでその値を取る。拡張ブーフホルツ ψ では項の値そのもの。
-- 単射性：異なる標準形は異なる順序数に写る。
-- 全射性：像がちょうど分かっている。原始数列と DBMS 1 行では `e0` 未満の順序数全部、拡張ブーフホルツ ψ では `C_0(Λ)` 全部。
+- 定義：写像を Lean で定義してある。原始数列と 1 行の DBMS では、拡張ブーフホルツ ψ の項に読んでその値を取る。ペア数列では、[koteitan/pss-proof](https://github.com/koteitan/pss-proof) の `Trans` で Buchholz 項に写し、拡張ブーフホルツ項に写して `1 + val` を取る（空列は 0）。拡張ブーフホルツ ψ では項の値そのもの。
+- 単射性：異なる標準形は異なる順序数に写る。1 行の DBMS では、行列の成分として等しい二つの状態が、配列の外に持つ値だけで区別されるので、文字どおりには成り立たない（その反例も証明してある）。成分の上では成り立つ。
+- 全射性：像がちょうど分かっている。原始数列と 1 行の DBMS では `e0` 未満の順序数全部、ペア数列では `p0(W_w)` 未満の順序数全部、拡張ブーフホルツ ψ では `C_0(Λ)` 全部。
 - 展開で値が下がる：一回展開すると値が真に小さくなる。
 - 階数と一致：値が展開の階数（展開で降りられる高さ）に等しい。こうなる写像は一つしかない。
 - 順序を保つ：状態の順序と順序数の順序が一致する。
@@ -48,14 +48,15 @@
 
 | 翻訳 | 定義 | 展開を保つ | 展開と可換 | 単射性 | 全射性 | 階数を保つ |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
-| 原始数列 → 拡張ブーフホルツ ψ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| 1 行の DBMS → 原始数列 | ✅ | ✅ | ✅ |  |  |  |
-| 原始数列 → ペア数列 | ✅ | ✅ | ✅ |  |  |  |
+| 原始数列 → 拡張ブーフホルツ ψ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| ペア数列 → 拡張ブーフホルツ ψ | ✅ |  |  | ✅ | ✅ |  |
+| 1 行の DBMS → 原始数列 | ✅ | ✅ | ✅ |  |  | ✅ |
+| 原始数列 → ペア数列 | ✅ | ✅ | ✅ | ✅ |  | ✅ |
 | BMS `r` 行 → BMS `r+1` 行 | ✅ | ✅ | ✅ |  |  | ✅ |
 | DBMS `r` 行 → BMS `r` 行の全配列 | ✅ | ✅ |  |  |  |  |
 | 拡張ブーフホルツ ψ の `p0(W_a)` → トリオ数列 | ✅ |  |  |  |  |  |
 
-- 定義：写像を Lean で定義してある。原始数列 → 拡張ブーフホルツ ψ の翻訳先は `p0(W)` 未満の標準形である。原始数列 → ペア数列と BMS `r` 行 → `r+1` 行は、下に 0 の行を足す写像である。トリオ数列への写像は `a < e0` の範囲で定義してある。最後の行は [koteitan/trio](https://github.com/koteitan/trio) の写像の書き起こしで、定義したうえで対応表と照合しただけである。
+- 定義：写像を Lean で定義してある。原始数列 → 拡張ブーフホルツ ψ の翻訳先は `p0(W)` 未満の標準形、ペア数列 → 拡張ブーフホルツ ψ の翻訳先は `p0(W_w)` 未満の標準形である。原始数列 → ペア数列と BMS `r` 行 → `r+1` 行は、下に 0 の行を足す写像である。トリオ数列への写像は `a < e0` の範囲で定義してある。最後の行は [koteitan/trio](https://github.com/koteitan/trio) の写像の書き起こしで、定義したうえで対応表と照合しただけである。
 - 展開を保つ：一回の展開が、翻訳先でも一回の展開に写る。
 - 展開と可換：括弧の番号まで含めて、展開してから写しても、写してから展開しても同じになる。
 - 単射性・全射性：翻訳先の標準形に対して。原始数列 → 拡張ブーフホルツ ψ は両方を満たし、二つの系は同じ系の書き換えになる。
@@ -159,9 +160,10 @@ Googology/
 lake build
 ```
 
-Lean 4 v4.30.0。依存は 2 つで、mathlib と、BMS の停止性証明のための
-[koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern)。
-`Googology.Core` はどちらも import しないので、停止性の道具一式は mathlib 無しで
+Lean 4 v4.30.0。依存は 3 つで、mathlib と、BMS の停止性証明のための
+[koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) と、ペア数列の翻訳写像
+`Trans` のための [koteitan/pss-proof](https://github.com/koteitan/pss-proof)。
+`Googology.Core` はどれも import しないので、停止性の道具一式は mathlib 無しで
 読めて使える。
 
 ## 出典
@@ -178,6 +180,7 @@ Lean 4 v4.30.0。依存は 2 つで、mathlib と、BMS の停止性証明のた
 | W. Buchholz, A new system of proof-theoretic ordinal functions, Annals of Pure and Applied Logic 32 (1986) 195–207 | 基本列が依って立つ補題 3.2–3.6 | `Notation/ExBuchholz/FS.lean`、`Closure.lean` |
 | Yukito 氏の Y 数列と、その公式プログラムである Naruyoko/YNySequence の [`script.js`](https://github.com/Naruyoko/YNySequence/blob/2de13970b9ac818c935577b8284c41dec01f0039/script.js)（revision `2de1397`） | 文ごとに書き起こした定義。検算の期待値 | `Notation/Y/Yukito.lean`、`test/YCheck.lean` |
 | [Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean)（Apache-2.0） | 1-Y の停止性の引用のみ。複製も翻案もしていない | `Notation/Y/README.md` |
+| p進大好きbot、[ペア数列の停止性](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:P%E9%80%B2%E5%A4%A7%E5%A5%BD%E3%81%8Dbot/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E3%81%AE%E5%81%9C%E6%AD%A2%E6%80%A7)。Naruyoko、[ペア数列システムの停止性証明に用いられた変換写像の全単射性](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Naruyoko/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E5%81%9C%E6%AD%A2%E6%80%A7%E8%A8%BC%E6%98%8E%E3%81%AB%E7%94%A8%E3%81%84%E3%82%89%E3%82%8C%E3%81%9F%E5%A4%89%E6%8F%9B%E5%86%99%E5%83%8F%E3%81%AE%E5%85%A8%E5%8D%98%E5%B0%84%E6%80%A7) | ペア数列から Buchholz 項への変換写像 `Trans` とその全単射性（依存先の koteitan/pss-proof が形式化したものを使う） | `Googology/Trans/PSS/` |
 | wiki の記事 [ペア数列数](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0) と [Y数列](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97) | 背景と対応表 | `memo.md` |
 
 `Notation/Y/Yukito.lean` の書き起こしは `script.js` を Lean に訳したものである。
@@ -198,6 +201,6 @@ MIT ライセンス。[LICENSE](LICENSE) を参照。
 
 現状：`Core/` は完成。`Notation/ExBuchholz` は表記系としても展開系としても完成
 した。停止性は何も仮定せずに証明してある。`Notation/BMS` はどの行数でも停止する。
-`Trans/` は 1 行を完全に決着させた。項としても、順序数としても、系の階数としても
-一致する。2 行の読み取りは無いままだが、2 行の順序数もいくつか出ている。何が
-足りないかは `plan-ja.md` にある。
+`Trans/` は 1 行と 2 行（ペア数列）を決着させた。どの行列についても、翻訳写像の値が
+展開の階数と一致し、系全体では 1 行が `e0`、2 行が `p0(W_w)` になる。3 行から先の
+読み取りは無い。何が足りないかは `plan-ja.md` にある。

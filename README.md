@@ -31,16 +31,16 @@ A map sending each state to the ordinal it names.
 
 | notation | defined | injective | surjective | decreases on expansion | equals the rank | order-preserving |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
-| primitive sequences | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| one-row DBMS | ✅ |  | ✅ | ✅ | ✅ |  |
-| extended Buchholz's ψ | ✅ | ✅ | ✅ | ✅ |  | ✅ |
-| BMS with 2 rows or more |  |  |  |  |  |  |
+| BMS with at most 2 rows | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| one-row DBMS | ✅ |  | ✅ | ✅ | ✅ | ✅ |
+| extended Buchholz's ψ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| BMS with 3 rows or more |  |  |  |  |  |  |
 | DBMS with 2 rows or more |  |  |  |  |  |  |
 | Y sequence |  |  |  |  |  |  |
 
-- defined: the map is defined in Lean. For primitive sequences and one-row DBMS it reads the state as an extended Buchholz term and takes its value; for extended Buchholz's ψ it is the value of the term.
-- injective: distinct standard forms go to distinct ordinals.
-- surjective: the image is known exactly — the ordinals below `ε₀` for primitive sequences and one-row DBMS, all of `C_0(Λ)` for extended Buchholz's ψ.
+- defined: the map is defined in Lean. For primitive sequences and one-row DBMS it reads the state as an extended Buchholz term and takes its value. For pair sequences it sends the state to a Buchholz term by the `Trans` of [koteitan/pss-proof](https://github.com/koteitan/pss-proof), maps that to an extended Buchholz term, and takes `1 + val` (0 for the empty sequence). For extended Buchholz's ψ it is the value of the term.
+- injective: distinct standard forms go to distinct ordinals. For one-row DBMS this fails literally — two states with the same matrix entries differ in the values they carry outside the matrix, and a counterexample is proved — and holds on the entries.
+- surjective: the image is known exactly — the ordinals below `ε₀` for primitive sequences and one-row DBMS, the ordinals below `ψ_0(Ω_ω)` for pair sequences, all of `C_0(Λ)` for extended Buchholz's ψ.
 - decreases on expansion: one expansion step makes the value strictly smaller.
 - equals the rank: the value is the rank of the expansion (how far expansion can descend). Only one map can do this.
 - order-preserving: the order on the states matches the order on the ordinals.
@@ -49,14 +49,15 @@ A map sending each state to the ordinal it names.
 
 | translation | defined | preserves expansion | commutes with expansion | injective | surjective | preserves the rank |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|
-| primitive sequences → extended Buchholz's ψ | ✅ | ✅ | ✅ | ✅ | ✅ |  |
-| one-row DBMS → primitive sequences | ✅ | ✅ | ✅ |  |  |  |
-| primitive sequences → pair sequences | ✅ | ✅ | ✅ |  |  |  |
+| primitive sequences → extended Buchholz's ψ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| pair sequences → extended Buchholz's ψ | ✅ |  |  | ✅ | ✅ |  |
+| one-row DBMS → primitive sequences | ✅ | ✅ | ✅ |  |  | ✅ |
+| primitive sequences → pair sequences | ✅ | ✅ | ✅ | ✅ |  | ✅ |
 | BMS, `r` rows → BMS, `r+1` rows | ✅ | ✅ | ✅ |  |  | ✅ |
 | DBMS, `r` rows → BMS, all arrays with `r` rows | ✅ | ✅ |  |  |  |  |
 | `ψ_0(Ω_α)` of extended Buchholz's ψ → trio sequences | ✅ |  |  |  |  |  |
 
-- defined: the map is defined in Lean. Primitive sequences go to the standard forms below `ψ_0(Ω)`. Primitive sequences → pair sequences and BMS `r` rows → `r+1` rows put a row of zeros underneath. The map into trio sequences is defined for `α < ε₀`. The last row transcribes the map of [koteitan/trio](https://github.com/koteitan/trio); it is defined and checked against the correspondence table, nothing more.
+- defined: the map is defined in Lean. Primitive sequences go to the standard forms below `ψ_0(Ω)`, pair sequences to those below `ψ_0(Ω_ω)`. Primitive sequences → pair sequences and BMS `r` rows → `r+1` rows put a row of zeros underneath. The map into trio sequences is defined for `α < ε₀`. The last row transcribes the map of [koteitan/trio](https://github.com/koteitan/trio); it is defined and checked against the correspondence table, nothing more.
 - preserves expansion: one expansion step goes to one expansion step in the target.
 - commutes with expansion: bracket numbers included, expanding and then translating gives the same as translating and then expanding.
 - injective, surjective: onto the standard forms of the target. Primitive sequences → extended Buchholz's ψ is both, so the two systems are one system written two ways.
@@ -161,9 +162,11 @@ Each directory has its own README.
 lake build
 ```
 
-Lean 4 v4.30.0. Two dependencies: mathlib, and
+Lean 4 v4.30.0. Three dependencies: mathlib,
 [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) for
-the BMS termination proof. `Googology.Core` imports neither, so the
+the BMS termination proof, and
+[koteitan/pss-proof](https://github.com/koteitan/pss-proof) for the
+translation `Trans` of pair sequences. `Googology.Core` imports none of them, so the
 termination machinery can be read and used without mathlib.
 
 ## Sources
@@ -180,6 +183,7 @@ koteitan's are linked where they are used and are not listed here.
 | W. Buchholz, A new system of proof-theoretic ordinal functions, Annals of Pure and Applied Logic 32 (1986) 195–207 | Lemmas 3.2–3.6, on which the fundamental sequences rest | `Notation/ExBuchholz/FS.lean`, `Closure.lean` |
 | Yukito's Y sequence, and its official program [`script.js`](https://github.com/Naruyoko/YNySequence/blob/2de13970b9ac818c935577b8284c41dec01f0039/script.js) of Naruyoko/YNySequence (revision `2de1397`) | the definition, transcribed statement by statement; the expected values of the checks | `Notation/Y/Yukito.lean`, `test/YCheck.lean` |
 | [Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean) (Apache-2.0) | cited only, for the termination of 1-Y; nothing is copied or adapted | `Notation/Y/README.md` |
+| p進大好きbot, [ペア数列の停止性](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:P%E9%80%B2%E5%A4%A7%E5%A5%BD%E3%81%8Dbot/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E3%81%AE%E5%81%9C%E6%AD%A2%E6%80%A7); Naruyoko, [ペア数列システムの停止性証明に用いられた変換写像の全単射性](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Naruyoko/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E5%81%9C%E6%AD%A2%E6%80%A7%E8%A8%BC%E6%98%8E%E3%81%AB%E7%94%A8%E3%81%84%E3%82%89%E3%82%8C%E3%81%9F%E5%A4%89%E6%8F%9B%E5%86%99%E5%83%8F%E3%81%AE%E5%85%A8%E5%8D%98%E5%B0%84%E6%80%A7) | the translation `Trans` of pair sequences into Buchholz terms and its bijectivity, as formalized in the dependency koteitan/pss-proof | `Googology/Trans/PSS/` |
 | the wiki articles [ペア数列数](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0) and [Y数列](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97) | background and correspondence tables | `memo.md` |
 
 The transcription in `Notation/Y/Yukito.lean` is a translation of `script.js`
@@ -201,6 +205,7 @@ MIT. See [LICENSE](LICENSE).
 Current state: `Core/` is complete. `Notation/ExBuchholz` is finished, as a
 notation system and as an expansion system: its termination is proved with
 nothing assumed. `Notation/BMS` terminates for every number of rows. `Trans/`
-settles one row completely — as terms, as ordinals, and as the rank of the
-system, which agree — and reaches a few two-row ordinals without a two-row
-reading; `plan.md` lists what is still missing.
+settles one row and two rows (pair sequences): for every matrix the value of
+the translation equals the rank of the expansion, and the systems reach `ε₀`
+and `ψ_0(Ω_ω)`. There is no reading from three rows on; `plan.md` lists what is
+still missing.

@@ -46,6 +46,8 @@ which is the whole content of the extension.
 | `Closure.lean` | concatenation, `G°`, `⊲`, Buchholz 3.4, 3.5, 3.6 and 3.3 |
 | `System.lean` | `exbOT`, the expansion system on the countable standard forms, and its well-foundedness |
 | `NF.lean` | the ordinal side of the normal form theorem: `M` (the least member of a closure above `x`), `M_mem_of_comp`, `M_psi_mem`, `psi_M_eq`, `arg_mem_of_psi_mem` |
+| `Cofinal.lean` | the fundamental sequence is cofinal: `exists_lt_fs_numeral` (every standard `Y < X` with `dom X = ω` is below some `X[n]`, the tower case included), `exists_le_fs_idx`, `exbOT_exists_le_step` |
+| `RankVal.lean` | **the rank of `exbOT` is `val`**: `rank_exbOT_eq_val`, `exbOTEval_eq_rankEval` |
 | `Onto.lean` | **`val` is onto `C_0(Λ)`**: `G_lt_of_mem_CSet`, `addNF`, `psi_mem_Vals`, `Vals_eq`, `valEquiv`, `existsUnique_OT_of_lt_psi_Lam`, and the initial segments `belowEquiv`, `countableEquiv` |
 
 ## The order

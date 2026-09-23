@@ -428,3 +428,17 @@ What is left is two problems, and neither is a Lean problem.
   visibly separate;
 * `Core` never imports mathlib; a notation system imports it only when it
   evaluates into the ordinals.
+
+## 2026-09-23: two rows, and the rank of extended Buchholz terms
+
+- Pair sequences are translated into the ordinals through the `Trans` of
+  koteitan/pss-proof, a Lake dependency. `Trans/PSS/` proves that its
+  expansion is `expand2L`, maps its Buchholz terms onto the standard extended
+  Buchholz terms below `ψ_0(Ω_ω)`, and proves that the rank of a pair sequence
+  is `1 + val` of its term; the pair sequence system reaches `ψ_0(Ω_ω)`.
+- `Notation/ExBuchholz/Cofinal.lean` proves that the fundamental sequence is
+  cofinal for every countable standard form, the tower case included, and
+  `RankVal.lean` that the rank of `exbOT` is `val`.
+- The one-row DBMS translation is not injective literally: a state of
+  `dbms 1` carries values outside its matrix. `Trans/DBMS/Tables.lean`
+  proves the counterexample and injectivity on the entries.

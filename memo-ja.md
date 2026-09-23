@@ -379,3 +379,14 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
   分けてありる
 * `Core` は mathlib を import しない。表記系が import するのは、順序数へ評価する
   ときだけである
+
+## 2026-09-23：2 行と、拡張ブーフホルツ項の階数
+
+- ペア数列は、Lake の依存 koteitan/pss-proof の `Trans` を通して順序数に翻訳した。
+  `Trans/PSS/` が、その展開が `expand2L` であること、その Buchholz 項が `p0(W_w)`
+  未満の標準的な拡張ブーフホルツ項の上へ写ること、ペア数列の階数がその項の
+  `1 + val` であることを証明する。ペア数列系は `p0(W_w)` に届く。
+- `Notation/ExBuchholz/Cofinal.lean` が、塔の場合も含めて、どの可算標準形でも基本列が
+  共終であることを証明し、`RankVal.lean` が `exbOT` の階数は `val` だと証明する。
+- 1 行の DBMS の翻訳写像は、文字どおりには単射でない。`dbms 1` の状態は行列の外にも
+  値を持つからである。`Trans/DBMS/Tables.lean` が反例と、成分の上での単射性を証明する。
