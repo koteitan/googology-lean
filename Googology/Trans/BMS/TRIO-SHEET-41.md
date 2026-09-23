@@ -31,13 +31,13 @@ The finite checks behind this note are in [`TrioSheet41.lean`](TrioSheet41.lean)
 | S-o: the rules put the matrix in the wrong place in the order | 12 | the sheet |
 | S-c: the rules give one matrix to two ordinals | 10 | the sheet (4 of the 10 are not confirmed independently) |
 | X: not a `ψ_0(Ω_α)` row | 1 | out of scope |
-| O: open | 1 | the rules are wrong; the sheet is not confirmed |
+| Z: neither side | 1 | the label is right; the matrix is a third one, `c2` ([TRIO-ROW-3480.md](TRIO-ROW-3480.md)) |
 
-In total, the rules are right in 17 rows and the sheet is right in 22 rows.
+In total, the rules are right in 17 rows, the sheet in 22 rows, and neither in 1 row.
 
 The algorithm page sorts the same 41 rows differently: 4 where the rules are right, 3 where the
 sheet is right, and 34 undecided. This note moves 3552 from "the sheet is right" to L (it is a
-label typo). It moves 3480 from "the sheet is right" to O.
+label typo). It moves 3480 from "the sheet is right" to Z.
 
 Check of the whole result: take the 744 agreeing rows, and for each of the other 39 rows (3439
 and 3480 are left out) the matrix chosen here, under its corrected label. That gives 783
@@ -81,7 +81,7 @@ defects of the rules; see "Side findings".
 | 3439 | garbled | X | see below |
 | 3452 | `Ω_ω·ω+Ω_ω+10` | L → `Ω_ω·ω+Ω_ω+1` | the source label is one `)` short; `10` is `1)` |
 | 3453 | `Ω_ω·ω+Ω_ω·2` | N: sheet = `M(Ω_ω·ω+Ω_ω+Ω)` | the sheet leaves out the mark `(1,1,1)` (compare 3403 `Ω_ω·2+Ω` and 3404 `Ω_ω·3`); sheet = `M(Ω_ω·ω·2)[1]`, and `(Ω_ω·ω)[1] = Ω_ω+Ω` |
-| 3480 | `Ω_ω·Ω+Ω_3` | O | the rules' matrix is not standard; the sheet's is the rules' `M(Ω_ω·Ω+Ω·ω)` |
+| 3480 | `Ω_ω·Ω+Ω_3` | Z | the rules' matrix is not standard; the sheet's is `M(Ω_ω·Ω+Ω_ω·ω)`; the right matrix is `c2` ([TRIO-ROW-3480.md](TRIO-ROW-3480.md)) |
 | 3492 | `Ω_ω·Ω_2·ω` | S-o | the rules' matrix is not standard and lies above `M(Ω_ω·Ω_3)` (24 rows out of order) |
 | 3551 | `ψ_{Ω_{ω+1}}(Ω_{Ω_ω})` | R (weak) | the rules write the `Ω_ω` mark inside the argument, `(6,2,1)`, as rows 2180, 2181 and 2552 do; the sheet writes `(1,1,1)` at the top level |
 | 3552 | `ψ_{Ω_{Ω+1}}(Ω_{ψ_{Ω_{ω+1}}(Ω_{ω+1})})` | L → `ψ_{Ω_{ω+1}}(…)` | the row sits between 3551 and 3553, inside `ψ_{Ω_{ω+1}}`; under the printed label it is 209 rows out of order |
@@ -188,13 +188,9 @@ The source label is `psi(W_(W_w*w0*W_W_w+W_(W_w*w))`. The `0` is a slip for `)`,
 sheet: its matrix lies strictly between theirs. The extraction took it for a pure row. The rules
 read `w0` as `ω·0 = 0` and wrote `M(Ω_{Ω_ω·ω})`, which is row 4625's matrix.
 
-### O: row 3480 is open
+### Z: row 3480, neither side
 
-The rules' matrix for `Ω_ω·Ω+Ω_3` ends with the plain leaf `(8,3,0)`. That matrix is not standard.
-The algorithm page itself notes that no depth-3 address exists in this context. The sheet's matrix
-is standard and in order, but it is the rules' matrix of `Ω_ω·Ω+Ω·ω`, a smaller ordinal. The two
-sheet rows after it (3481, 3482) are not standard. So this region of the sheet is not reliable,
-and `M(Ω_ω·Ω+Ω_3)` is still unknown.
+The label `Ω_ω·Ω+Ω_3` is right, and neither matrix is. The right matrix is `c2`: `M(Ω_ω·Ω+Ω_2)` followed by a second storey, built like the agreeing row 3377. It is proved standard in Lean (`trioStdL_c2`, [`TrioRow3480.lean`](TrioRow3480.lean)), it is `M(Ω_ω·Ω+Ω_ω)[1]`, and it lies in order between rows 3479 and 3483. The rules are wrong on the whole stretch from `Ω_ω·Ω+Ω_2` to `Ω_ω·Ω·2`, `TrioRules2.lean` included. The details are in [TRIO-ROW-3480.md](TRIO-ROW-3480.md).
 
 ## Side findings
 

@@ -8,7 +8,8 @@
     - 🤖 confirm rows 4746, 4747, 4752 and 4753 by other evidence ([TRIO-SHEET-41.md](Googology/Trans/BMS/TRIO-SHEET-41.md))
     - 🤖 fix the order of `Ω_{Ω_Ω}+Ω_{Ω_2}+1` and `Ω_{Ω_Ω}·2`, which the fixed rules still reverse
     - 🤖 fix the non-standard output for the printed label of row 3552
-    - 🤖 decide the open row 3480
+    - fix the rules on the stretch from `Ω_ω·Ω+Ω_2` to `Ω_ω·Ω·2` (the verdict on row 3480, [TRIO-ROW-3480.md](Googology/Trans/BMS/TRIO-ROW-3480.md))
+    - normalize `ω^atom = atom` in the rules' `mul` (the printed label of row 4369)
   - 🤖 pair sequences → extended Buchholz's ψ: prove that the number of ψ steps for one step has no bound (numerically `(0,0)...(n,n)(n+1,n)[2]` takes `n+1` steps)
 - Notation
   - ω-Y (official)
