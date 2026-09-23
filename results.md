@@ -173,6 +173,7 @@ measures, and all four morphisms — depends on no axiom at all.
 | **The translation of two-row DBMS into the ordinals**: injective, onto the ordinals below `ψ_0(Ω_ω)`, equal to the rank, order-preserving | `Trans.DBMS.dbmsL2OrdEval`, `Trans.DBMS.dbmsL2OrdEval_injective`, `Trans.DBMS.dbmsL2Ord_image`, `Trans.DBMS.rank_dbmsL2_eq`, `Trans.DBMS.ltPS_iff_dOrdL_lt` |
 | A two-row DBMS standard form is a list of blocks | `Trans.DBMS.dreach2_iff_dform`, `Trans.DBMS.expand2L_blk_some`, `Trans.DBMS.expand2L_blk_none` |
 | **One pair-sequence step goes to one or more ψ steps**; reachability is preserved and reflected | `Trans.PSS.pairToExbOT_transGen_iff`, `Goals.pairToExb_transGen_iff` |
+| **The number of ψ steps has no bound**: `(0,0)...(p,p)(p+1,p)[0]` takes exactly `p+1` steps | `Goals.pairToExb_steps_unbounded`, `Goals.pairToExb_min_steps`, `Trans.PSS.StepBound.lastSub_fs_idx` |
 
 ## Three rows: cofinality at a successor, and fuel
 

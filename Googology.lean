@@ -7,3 +7,4 @@ import Googology.Notation.Y
 import Googology.Trans
 import Googology.Goals
 import Googology.Goals.PairReach
+import Googology.Goals.PairStepBound

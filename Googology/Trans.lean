@@ -56,3 +56,4 @@ import Googology.Trans.PSS.Terms
 import Googology.Trans.PSS.Rank
 import Googology.Trans.PSS.Expansion
 import Googology.Trans.PSS.Steps
+import Googology.Trans.PSS.StepBound

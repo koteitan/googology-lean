@@ -477,3 +477,4 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
 - トリオの後続の場合の共終性（`TrioSucc.lean`）と、燃料を深さで与えた規則 1〜10 がすべての `a < e0` で一致すること（`TrioRulesFuel.lean`）を証明した（2026-09-23）。
 - 規則 1〜10 を 4 か所直した（`TrioRules2.lean`、2026-09-23）。表が正しい 22 行で表の行列を出し、ほかの標準形の行は変えない。koteitan/trio の `tools/probe_eps_range.py` にも同じ修正が要る。
 - 行 3480 を判定した（`TrioRow3480.lean`、2026-09-23）。ラベルは正しく、表も規則も誤り。正しい行列 `c2` は標準形であることを Lean で証明した。
+- ペア数列の 1 手が写る ψ の手数に上限が無いことを証明した（`PSS/StepBound.lean`、`Goals/PairStepBound.lean`）。数値で見つけた族は `[2]` の展開、証明した族は `[0]` の展開で、別の族である。

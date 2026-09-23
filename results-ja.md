@@ -170,6 +170,7 @@
 | **2 行の DBMS の順序数への翻訳写像**。単射、`p0(W_w)` 未満への全射、階数と一致、順序を保つ | `Trans.DBMS.dbmsL2OrdEval`, `Trans.DBMS.dbmsL2OrdEval_injective`, `Trans.DBMS.dbmsL2Ord_image`, `Trans.DBMS.rank_dbmsL2_eq`, `Trans.DBMS.ltPS_iff_dOrdL_lt` |
 | 2 行の DBMS の標準形はブロックの並び | `Trans.DBMS.dreach2_iff_dform`, `Trans.DBMS.expand2L_blk_some`, `Trans.DBMS.expand2L_blk_none` |
 | **ペア数列の 1 手は ψ の側の 1 手以上に写る**。到達は両方向に保たれる | `Trans.PSS.pairToExbOT_transGen_iff`, `Goals.pairToExb_transGen_iff` |
+| **ψ の手数に上限は無い**。`(0,0)...(p,p)(p+1,p)[0]` はちょうど `p+1` 手 | `Goals.pairToExb_steps_unbounded`, `Goals.pairToExb_min_steps`, `Trans.PSS.StepBound.lastSub_fs_idx` |
 
 ## 3 行：後続での共終性と、燃料
 
