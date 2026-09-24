@@ -53,7 +53,10 @@ import Googology.Trans.BMS.TrioFixOfTerm
 import Googology.Trans.BMS.TrioFixOfTermSheet
 import Googology.Trans.BMS.TrioFixStrip
 import Googology.Trans.BMS.TrioFixStripTree
+import Googology.Trans.BMS.TrioFixStripCalib
+import Googology.Trans.BMS.TrioFixStripCalibNo
 import Googology.Trans.BMS.TrioFixU
+import Googology.Trans.BMS.TrioFixU2
 import Googology.Trans.BMS.TrioFixNonLastOther
 import Googology.Trans.BMS.TrioRow3480
 import Googology.Trans.BMS.TrioTree
