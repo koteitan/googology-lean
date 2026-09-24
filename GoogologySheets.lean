@@ -18,3 +18,4 @@ import Googology.Trans.BMS.TrioFixStripSheet9
 import Googology.Trans.BMS.TrioFixStripSheet9Frag7
 import Googology.Trans.BMS.TrioFixStripSheet9Wide
 import Googology.Trans.BMS.TrioFixUSheet
+import Googology.Trans.BMS.TrioFixNonLastOtherSheet

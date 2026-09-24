@@ -18,7 +18,7 @@ The remaining work, arranged by the cells of the README tables.
   - extended Buchholz ψ → trio sequences (✅❌❌✅❌❌)
     - preserves the rank: for all of `ψ_0(Λ)`, the image lies in the standard forms of 3-row BMS and preserves the order
       - fix the rules (fixes go on top of `TrioRulesAll`)
-        - 🤖 fix leaves that are not last outside the tower regimes (`Ω_ω`, `Ω_2`, `Ω+1`) and at marked levels that are not last ([TRIO-NONLAST-LEAF.md](Googology/Trans/BMS/TRIO-NONLAST-LEAF.md))
+        - 🤖 after Fix nonlast-other: narrow the regimes where Fix M, Fix G and change 1 act, so that they stop breaking pairs outside the calibrated families (e.g. `Ω_{Ω_2}+Ω_ω+Ω` vs `Ω_{Ω_2}+Ω+ω`; `BMS/TrioFixNonLastOther.lean`)
         - after Fix L: fix the other levels of the same kind after `Ω_{Ω_Ω}` (`Ω_{ω+1}`, `Ω_{Ω+ω+1}`, `Ω_{Ω+ω·2}`, `Ω_{Ω·2+1}`, `Ω_{Ω·3}`, `Ω_{Ω^2}`, `Ω_{Ω_2·2}`, …) and case K inside a chain (`Ω_{Ω_{Ω_2+1}}` after `Ω_{Ω_{Ω_Ω}}`) ([TRIO-FIX-LASTLEAF.md](Googology/Trans/BMS/TRIO-FIX-LASTLEAF.md))
         - 🤖 after Fix U: rule 9 for `u = Ω+k` with `w ≥ Ω_{Ω+1}` not starting with `ψ` (e.g. `ψ_{Ω_{Ω+2}}(Ω_{Ω_{Ω+1}+Ω_Ω})`), levels `L ≥ 2` with `Ω_Ω < w < Ω_u`, infinite levels, limit and countable `u` ([TRIO-FIX-U.md](Googology/Trans/BMS/TRIO-FIX-U.md))
         - after Fix S: fix `Ω_ω·Ω^2+…`, `Ω_{ω^2}·Ω+Ω_ω·2` and the `Ω_ω+Ω_2+…` family (a lifted copy inside storeys laid by the end-of-unit rule) ([TRIO-FIX-STRETCH.md](Googology/Trans/BMS/TRIO-FIX-STRETCH.md))

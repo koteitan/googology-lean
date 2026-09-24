@@ -54,6 +54,7 @@ import Googology.Trans.BMS.TrioFixOfTermSheet
 import Googology.Trans.BMS.TrioFixStrip
 import Googology.Trans.BMS.TrioFixStripTree
 import Googology.Trans.BMS.TrioFixU
+import Googology.Trans.BMS.TrioFixNonLastOther
 import Googology.Trans.BMS.TrioRow3480
 import Googology.Trans.BMS.TrioTree
 import Googology.Trans.BMS.TrioTreeStd
