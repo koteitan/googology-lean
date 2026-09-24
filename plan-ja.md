@@ -13,7 +13,7 @@ README の表のセルごとに、残りの作業を並べる。
     - 全射性（像がちょうど分かる）：3 行の DBMS の順序数が 3 行の BMS と同じことを示す
       - 上からの不等式 `rkL 2 (cgen 2 (n+2)) ≤ rkL 2 (bgen3 n)` を `n ≥ 2` で証明する（これで 3 行の DBMS と BMS は同じ順序数になる。下からの不等式と `n = 1` は証明済み）
         - `n = 2`：1 つの命題に帰着した（`DBMS/ThreeRowUpperNC*.lean`、`ThreeRowUpperRP*.lean`。`RPLastShape` は証明済み）
-          - 🤖 `T3nPushStd` を証明する：`t3n C` がトリオの標準形なら、`t3n (pushL C y)` もそう（約 160 万の行列で失敗 0）
+          - `TrioPushStd` を証明する（トリオの行列だけの命題。`T3nPushStd` はここから出る。`DBMS/ThreeRowUpperPushBMS.lean`。48,438 例で失敗 0）。koteitan/trio が難しい核としている、標準形の判定の問題
 - 表記の間の翻訳写像の表
   - 拡張ブーフホルツ ψ → トリオ数列（✅❌❌✅❌❌）
     - 階数を保つ：`p0(Λ)` 未満の全部で、像が 3 行の BMS の標準形に入り、順序を保つ
