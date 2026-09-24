@@ -93,6 +93,7 @@ import Googology.Trans.DBMS.ThreeRowUpperNCLast
 import Googology.Trans.DBMS.ThreeRowUpperRPShape
 import Googology.Trans.DBMS.ThreeRowUpperRPInner
 import Googology.Trans.DBMS.ThreeRowUpperRPPush
+import Googology.Trans.DBMS.ThreeRowUpperPushBMS
 import Googology.Trans.DBMS.BlocksStd
 import Googology.Trans.DBMS.BlocksSuff
 import Googology.Trans.DBMS.BlocksLex
