@@ -12,8 +12,8 @@ The remaining work, arranged by the cells of the README tables.
   - DBMS with 3 rows and up
     - surjectivity (the image is known exactly): show that 3-row DBMS has the same ordinal as 3-row BMS
       - prove the upper bound `rkL 2 (cgen 2 (n+2)) ≤ rkL 2 (bgen3 n)` for `n ≥ 2` (then 3-row DBMS and BMS have the same ordinal; the lower bound and `n = 1` are proved)
-        - `n = 2`: `T3RankDescNC` is reduced to two statements (`DBMS/ThreeRowUpperNC*.lean`; the case where the raisable parent is the column before the last is proved)
-          - 🤖 `RPLastShape` and `T3nRankDescRPInner` (0 failures on about 560,000 states)
+        - `n = 2`: reduced to one statement (`DBMS/ThreeRowUpperNC*.lean`, `ThreeRowUpperRP*.lean`; `RPLastShape` is proved)
+          - 🤖 prove `T3nPushStd`: if `t3n C` is trio-standard, so is `t3n (pushL C y)` (0 failures on about 1.6 million matrices)
 - Table of translations between notations
   - extended Buchholz ψ → trio sequences (✅❌❌✅❌❌)
     - preserves the rank: for all of `ψ_0(Λ)`, the image lies in the standard forms of 3-row BMS and preserves the order

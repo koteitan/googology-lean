@@ -83,6 +83,15 @@ import Googology.Trans.DBMS.ThreeRowLower
 import Googology.Trans.DBMS.ThreeRowUpper
 import Googology.Trans.DBMS.ThreeRowUpperRefute
 import Googology.Trans.DBMS.ThreeRowUpperComm
+import Googology.Trans.DBMS.ThreeRowUpperNC
+import Googology.Trans.DBMS.ThreeRowUpperNCComm
+import Googology.Trans.DBMS.ThreeRowUpperNCInv
+import Googology.Trans.DBMS.ThreeRowUpperNCMain
+import Googology.Trans.DBMS.ThreeRowUpperNCZero
+import Googology.Trans.DBMS.ThreeRowUpperNCLast
+import Googology.Trans.DBMS.ThreeRowUpperRPShape
+import Googology.Trans.DBMS.ThreeRowUpperRPInner
+import Googology.Trans.DBMS.ThreeRowUpperRPPush
 import Googology.Trans.DBMS.BlocksStd
 import Googology.Trans.DBMS.BlocksSuff
 import Googology.Trans.DBMS.BlocksLex
