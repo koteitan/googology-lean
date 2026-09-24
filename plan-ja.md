@@ -18,7 +18,7 @@ README の表のセルごとに、残りの作業を並べる。
   - 拡張ブーフホルツ ψ → トリオ数列（✅❌❌✅❌❌）
     - 階数を保つ：`p0(Λ)` 未満の全部で、像が 3 行の BMS の標準形に入り、順序を保つ
       - 規則を直す（修正は `TrioRulesAll` に重ねる）
-        - 🤖 修正 nonlast-other の続き：Fix M、Fix G、変更 1 が働く範囲を絞り、較正した族の外で正しかった組を壊さないようにする（例 `W_{W_2}+W_w+W` と `W_{W_2}+W+w`。`BMS/TrioFixNonLastOther.lean`）
+        - 修正 nonlast-other2 の続き：下の上端と同じ値の葉の後で、まだ順序の違う組（`W_{W_{w+2}}` 52、`W_{W_{W_w}}` 24、`W_{W_{w^2+1}}` 22、`W_{W_{w^2}}` 8、`W_{W_{w+1}}` 6）、`W_{W_{w^2}}` の後で印が規則 6 の階の上に来ること、`W_{W_{w·2}}` の後の非標準の行列 117 個（[TRIO-FIX-NONLAST2-ja.md](Googology/Trans/BMS/TRIO-FIX-NONLAST2-ja.md)）
         - Fix L の続き：`W_{W_W}` の後の同じ種類のほかのレベル（`W_{w+1}`、`W_{W+w+1}`、`W_{W+w·2}`、`W_{W·2+1}`、`W_{W·3}`、`W_{W^2}`、`W_{W_2·2}` など）と、鎖の中の場合 K（`W_{W_{W_W}}` の後の `W_{W_{W_2+1}}`）を直す（[TRIO-FIX-LASTLEAF-ja.md](Googology/Trans/BMS/TRIO-FIX-LASTLEAF-ja.md)）
         - 修正 U2 の続き：主張する範囲の外に残る規則 9 の誤り 22 個、無限のレベル、極限と可算の `u`（[TRIO-FIX-U2-ja.md](Googology/Trans/BMS/TRIO-FIX-U2-ja.md)）
         - Fix S の続き：`W_w·W^2+…`、`W_{w^2}·W+W_w·2`、`W_w+W_2+…` の族を直す（ユニットの終わりの規則が置いた階の中の、持ち上げた写し）（[TRIO-FIX-STRETCH-ja.md](Googology/Trans/BMS/TRIO-FIX-STRETCH-ja.md)）
