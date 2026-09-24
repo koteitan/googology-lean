@@ -12,8 +12,8 @@ README の表のセルごとに、残りの作業を並べる。
   - 3 行以上の DBMS
     - 全射性（像がちょうど分かる）：3 行の DBMS の順序数が 3 行の BMS と同じことを示す
       - 上からの不等式 `rkL 2 (cgen 2 (n+2)) ≤ rkL 2 (bgen3 n)` を `n ≥ 2` で証明する（これで 3 行の DBMS と BMS は同じ順序数になる。下からの不等式と `n = 1` は証明済み）
-        - `n = 2`：`T3RankDescNC` を 2 つの命題に帰着した（`DBMS/ThreeRowUpperNC*.lean`。上げられる親が最後から 2 つ目の列の場合は証明済み）
-          - 🤖 `RPLastShape` と `T3nRankDescRPInner`（約 56 万の状態で失敗 0）
+        - `n = 2`：1 つの命題に帰着した（`DBMS/ThreeRowUpperNC*.lean`、`ThreeRowUpperRP*.lean`。`RPLastShape` は証明済み）
+          - 🤖 `T3nPushStd` を証明する：`t3n C` がトリオの標準形なら、`t3n (pushL C y)` もそう（約 160 万の行列で失敗 0）
 - 表記の間の翻訳写像の表
   - 拡張ブーフホルツ ψ → トリオ数列（✅❌❌✅❌❌）
     - 階数を保つ：`p0(Λ)` 未満の全部で、像が 3 行の BMS の標準形に入り、順序を保つ
