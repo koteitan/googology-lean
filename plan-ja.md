@@ -20,9 +20,9 @@ README の表のセルごとに、残りの作業を並べる。
       - 規則を直す（修正は `TrioRulesAll` に重ねる）
         - 🤖 修正 nonlast-other の続き：Fix M、Fix G、変更 1 が働く範囲を絞り、較正した族の外で正しかった組を壊さないようにする（例 `W_{W_2}+W_w+W` と `W_{W_2}+W+w`。`BMS/TrioFixNonLastOther.lean`）
         - Fix L の続き：`W_{W_W}` の後の同じ種類のほかのレベル（`W_{w+1}`、`W_{W+w+1}`、`W_{W+w·2}`、`W_{W·2+1}`、`W_{W·3}`、`W_{W^2}`、`W_{W_2·2}` など）と、鎖の中の場合 K（`W_{W_{W_W}}` の後の `W_{W_{W_2+1}}`）を直す（[TRIO-FIX-LASTLEAF-ja.md](Googology/Trans/BMS/TRIO-FIX-LASTLEAF-ja.md)）
-        - 🤖 修正 U の続き：`u = W+k` で `w >= W_{W+1}` が `p` で始まらないときの規則 9（例 `p_{W_{W+2}}(W_{W_{W+1}+W_W})`）、`L >= 2` で `W_W < w < W_u` のとき、無限のレベル、極限と可算の `u`（[TRIO-FIX-U-ja.md](Googology/Trans/BMS/TRIO-FIX-U-ja.md)）
+        - 修正 U2 の続き：主張する範囲の外に残る規則 9 の誤り 22 個、無限のレベル、極限と可算の `u`（[TRIO-FIX-U2-ja.md](Googology/Trans/BMS/TRIO-FIX-U2-ja.md)）
         - Fix S の続き：`W_w·W^2+…`、`W_{w^2}·W+W_w·2`、`W_w+W_2+…` の族を直す（ユニットの終わりの規則が置いた階の中の、持ち上げた写し）（[TRIO-FIX-STRETCH-ja.md](Googology/Trans/BMS/TRIO-FIX-STRETCH-ja.md)）
         - 別々の修正（`TrioFix*.lean`）が揃ったら、1 つの規則にまとめる
       - `p0(W_2) <= a < Λ` で、規則 1〜10 の像が標準形に入り、順序を保つことを証明する（添字が 0 か 1 だけの項は証明済み）
-      - 🤖 `CalibSt` を証明する（修正 `strip` の規則の写像は、添字が 0 と 1 の項で木の写像 `trioE2` と一致する。9,782 項でずれ 0）（[TRIO-FIX-STRIP-ja.md](Googology/Trans/BMS/TRIO-FIX-STRIP-ja.md)）
+      - `CalibRd200` を証明する（修正 `strip` の規則の写像は、読みの深さ 200 まで `trioE2` と一致する。100 までは証明済み、201 では偽。上限なしの `CalibSt` は燃料のため偽）（[BMS/TrioFixStripCalibNo.lean](Googology/Trans/BMS/TrioFixStripCalibNo.lean)）
       - `TrioFixFuel` の燃料 `max 200 (a の深さ)` が、どの `a` でも足りることを証明する（燃料を増やしても行列が変わらない。シートのラベルといくつかの族で確認済み）
