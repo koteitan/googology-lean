@@ -58,6 +58,8 @@ import Googology.Trans.BMS.TrioFixStripCalibNo
 import Googology.Trans.BMS.TrioFixU
 import Googology.Trans.BMS.TrioFixU2
 import Googology.Trans.BMS.TrioFixNonLastOther
+import Googology.Trans.BMS.TrioFixNonLastOther2
+import Googology.Trans.BMS.TrioFixNonLastOther2Sheet
 import Googology.Trans.BMS.TrioRow3480
 import Googology.Trans.BMS.TrioTree
 import Googology.Trans.BMS.TrioTreeStd

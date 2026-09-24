@@ -20,3 +20,5 @@ import Googology.Trans.BMS.TrioFixStripSheet9Wide
 import Googology.Trans.BMS.TrioFixUSheet
 import Googology.Trans.BMS.TrioFixNonLastOtherSheet
 import Googology.Trans.BMS.TrioFixU2Sheet
+import Googology.Trans.BMS.TrioFixNonLastOther2SheetHeavy1
+import Googology.Trans.BMS.TrioFixNonLastOther2SheetHeavy2
