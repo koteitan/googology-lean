@@ -15,18 +15,14 @@ koteitan と Phyrion による、巨大数の表記の形式証明をリポジ�
 | Weak Magma ω-Y | [koteitan/wmwy-wo-por](https://github.com/koteitan/wmwy-wo-por) | koteitan | 上と同じ整礎性 | patterns of resemblance（Phyrion 氏の組合せの層はそのまま使う） | ✅ |
 | 1-Y | [Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean) | Phyrion | 1-Y の展開の整礎性、標準形の整列性 | 構成可能宇宙 L の Σ₁ 初等性（Adequate 順序数、Skolem 包と凝縮） | ✅ |
 | 1-Y | [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) | koteitan | 上と同じ整礎性 | patterns of resemblance（層つきの Σ₁ 初等性。Phyrion 氏の組合せの層はそのまま使う） | ✅ |
-| 1-Y | [koteitan/1y-expand-equiv](https://github.com/koteitan/1y-expand-equiv) | koteitan | 1-Y の展開の 3 つの定義（Yukito 版 `script.js`、Phyrion 版、wiki 版）が同じ関数であること | 各定義を書き写し、関数として等しいことを示す | ✅ |
-| 1-Y | googology-lean [Notation/Y](../Googology/Notation/Y/README.md) | koteitan | Yukito 版の定義での整礎性（標準形と、標準でない合法な列） | 1y-wo-por と 1y-expand-equiv の移植 | ✅ |
 | 0-Y | [Phyrion1343/0Y-Well-Ordering-Lean](https://github.com/Phyrion1343/0Y-Well-Ordering-Lean) | Phyrion | 0-Y と BMS の順序同型、0-Y の整列性と停止性（同じ内容は 1Y-Well-Ordering-Lean にもある） | 符号化と復号による BMS への順序同型 | ✅ |
 | BMS（すべての行数） | [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) | koteitan | BM4 の停止性。ペア数列、トリオ数列、すべての行数の順に示す | Carlson の構造 R_N（Σ₁, …, Σ_N 初等部分構造）のラベルと有限反映 | ✅ |
 | BMS（すべての行数） | [koteitan/dh-bms-wf-formal](https://github.com/koteitan/dh-bms-wf-formal) | koteitan | DH 氏の論文「Bashicu Matrix System ver. 4 の停止性と展開関係の整礎性」の形式化 | 論文の証明（安定ラベルと有限反映）に忠実に写す | ✅ |
-| BMS（すべての行数） | googology-lean [Notation/BMS](../Googology/Notation/BMS/README.md) | koteitan | BMS の整礎性（標準形と、すべての行列） | bms-elem-pattern の定理を依存として使う | ✅ |
 | BMS（すべての行数） | [koteitan/bms-paper-formalization](https://github.com/koteitan/bms-paper-formalization) | koteitan | R. Hunter, "Well-Orderedness of the Bashicu Matrix System" の形式化（Isabelle） | L_α の安定性の反映 | 作業中（Lemma 2.6 は公理として置いている） |
 | トリオ数列 | [koteitan/trio](https://github.com/koteitan/trio) | koteitan | トリオ数列の停止性 | 構文的な証明 | 未完成 |
 | ペア数列 | [koteitan/pss-proof](https://github.com/koteitan/pss-proof) | koteitan | P進大好きbot 氏の「ペア数列の停止性」と、Naruyoko 氏の「変換写像の全単射性」の形式化（Isabelle と Lean） | Buchholz の ψ の項への翻訳 Trans | ✅ |
 | ペア数列 | [koteitan/yet-another-pss-proof](https://github.com/koteitan/yet-another-pss-proof) | koteitan | ペア数列の停止性（Lean と Isabelle） | 独自の 3 分木の表記 p_a(b)+c への翻訳。順序数を使わない | ✅ |
 | 原始数列 | [koteitan/prss-proof](https://github.com/koteitan/prss-proof) | koteitan | 原始数列システムの停止性（Isabelle） | ε₀ 未満の順序数（多重集合版と Cantor 標準形版）への写像 | ✅ |
-| DBMS | googology-lean [Notation/DBMS](../Googology/Notation/DBMS/README.md) | koteitan | DBMS の整礎性（標準形と、すべての行列） | 展開規則が BM4 と同じことから、BMS の停止性を使う | ✅ |
 | 拡張ブーフホルツの ψ | googology-lean [Notation/ExBuchholz](../Googology/Notation/ExBuchholz/README.md) | koteitan | 表記系としての整列性と、展開の停止性 | 項の値（順序数）が展開で下がること。Buchholz の Lemma 3.2〜3.6 を自前で証明 | ✅ |
 | 翻訳（BMS・DBMS・拡張ブーフホルツの ψ） | googology-lean [Trans](../Googology/Trans/README.md) | koteitan | 1 行・2 行の BMS と DBMS、拡張ブーフホルツの ψ の間の翻訳と、順序数への翻訳 | 展開の模倣（一歩を一歩に写す）と、値が展開の階数に等しいこと | 一部（3 行以上は作業中） |
 | 翻訳（BMS と Rathjen の ψ） | [koteitan/bms-rathjen](https://github.com/koteitan/bms-rathjen) | koteitan | BMS と Rathjen の順序数崩壊関数の対応表 | 行ごとの証明書の機械検査 | 作業中 |
