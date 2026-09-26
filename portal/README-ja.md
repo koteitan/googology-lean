@@ -28,11 +28,13 @@ koteitan と Phyrion による、巨大数の表記の形式証明をリポジ�
 
 ## 翻訳写像
 
+完了の欄の 🚧α は、α まで完成していて、その先は作業中であることをいう。
+
 | 表記 | リンク | 著者 | 証明内容 | 手法 | 完了 |
 |---|---|---|---|---|:-:|
-| BMS・DBMS・拡張ブーフホルツの ψ | googology-lean [Trans](../Googology/Trans/README.md) | koteitan | 1 行・2 行の BMS と DBMS、拡張ブーフホルツの ψ の間の翻訳と、順序数への翻訳 | 展開の模倣（一歩を一歩に写す）と、値が展開の階数に等しいこと | 一部（3 行以上は作業中） |
-| BMS と Rathjen の ψ | [koteitan/bms-rathjen](https://github.com/koteitan/bms-rathjen) | koteitan | BMS と Rathjen の順序数崩壊関数の対応表 | 行ごとの証明書の機械検査 | 作業中 |
-| UNOCF と Taranovsky の C | [koteitan/bms-vs-taranovskys-c](https://github.com/koteitan/bms-vs-taranovskys-c) | koteitan | UNOCF の項から Taranovsky の表記 C への翻訳写像と対応表 | UNOCF の項を C の項に写す（Lean と JavaScript） | 作業中 |
+| BMS・DBMS・拡張ブーフホルツの ψ | googology-lean [Trans](../Googology/Trans/README.md) | koteitan | 1 行・2 行の BMS と DBMS、拡張ブーフホルツの ψ の間の翻訳と、順序数への翻訳 | 展開の模倣（一歩を一歩に写す）と、値が展開の階数に等しいこと | 🚧ψ₀(Ω_ω) |
+| BMS と Rathjen の ψ | [koteitan/bms-rathjen](https://github.com/koteitan/bms-rathjen) | koteitan | BMS と Rathjen の順序数崩壊関数の対応表 | 行ごとの証明書の機械検査 | 🚧ε_ω+1 |
+| UNOCF と Taranovsky の C | [koteitan/bms-vs-taranovskys-c](https://github.com/koteitan/bms-vs-taranovskys-c) | koteitan | UNOCF の項から Taranovsky の表記 C への翻訳写像と対応表 | UNOCF の項を C の項に写す（Lean と JavaScript） | 🚧ψ₀(Ω_ω) |
 
 ## その他
 
