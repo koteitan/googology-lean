@@ -32,7 +32,7 @@ Formal proofs about googological notations by koteitan and Phyrion, one row per 
 |---|---|---|---|---|:-:|
 | BMS, DBMS, extended Buchholz's ψ | googology-lean [Trans](../Googology/Trans/README.md) | koteitan | translations between BMS and DBMS with one or two rows and extended Buchholz's ψ, and into the ordinals | simulation (one step to one step), and the value equals the rank of the expansion | partly (three rows and up in progress) |
 | BMS and Rathjen's ψ | [koteitan/bms-rathjen](https://github.com/koteitan/bms-rathjen) | koteitan | a table of BMS against Rathjen's ordinal collapsing function | machine-checked certificates, row by row | in progress |
-| BMS and Taranovsky's C | [koteitan/bms-vs-taranovskys-c](https://github.com/koteitan/bms-vs-taranovskys-c) | koteitan | a translation function from BMS to Taranovsky's notation C, and its table | direct translation from the matrix (Lean and JavaScript) | in progress (three rows and up not yet implemented) |
+| UNOCF and Taranovsky's C | [koteitan/bms-vs-taranovskys-c](https://github.com/koteitan/bms-vs-taranovskys-c) | koteitan | a translation map from UNOCF terms to Taranovsky's notation C, and its table | UNOCF terms mapped to C terms (Lean and JavaScript) | in progress |
 
 ## Other
 
