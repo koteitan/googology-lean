@@ -23,7 +23,7 @@ Formal proofs about googological notations by koteitan and Phyrion, one row per 
 | trio sequences | [koteitan/trio](https://github.com/koteitan/trio) | koteitan | a syntactic proof | unfinished |
 | pair sequences | [koteitan/pss-proof](https://github.com/koteitan/pss-proof) | koteitan | the translation Trans into Buchholz ψ terms | ✅ |
 | pair sequences | [koteitan/yet-another-pss-proof](https://github.com/koteitan/yet-another-pss-proof) | koteitan | a syntactic proof | ✅ |
-| primitive sequences | [koteitan/prss-proof](https://github.com/koteitan/prss-proof) | koteitan | a map into the ordinals below ε₀ (multiset and Cantor normal form versions) | ✅ |
+| primitive sequences | [koteitan/prss-proof](https://github.com/koteitan/prss-proof) | koteitan | a map into terms with a well-founded order (hereditarily finite multisets, or Cantor normal form terms); no ordinals | ✅ |
 | extended Buchholz's ψ | googology-lean [Notation/ExBuchholz](../Googology/Notation/ExBuchholz/README.md) | koteitan | the value of a term (an ordinal) decreases on expansion; Buchholz's Lemmas 3.2–3.6 proved in the library | ✅ |
 
 ## Translation maps
