@@ -516,6 +516,7 @@ def Googology.Goals.audit : List AuditLine
 | BMS / BMS | `bms`、`bmsStd`、`Idx := Nat`。`wf` は `bms_wf` から。`Runs` は `entriesR` の上で `expandRL` を使う（`entriesR_expand`）。それが `0 < r` を要するなら、族は `r ↦ bms (r + 1)` | `all := bmsAll`、`Incl` は `Subtype.val`、`bmsAll_wf` |
 | DBMS / DBMS | `dbms`、`dbmsStd`。`dbms_wf`。`Runs` は BMS と同じ | `all := bmsAll`、`bmsAll_wf` |
 | Y sequence / Y 数列 | `ySys`、`yStd`、`Idx := Unit`。`ySys_wf`。`Runs` は `Code := List Nat`、`run := expand`、`halt := List.isEmpty`。`source` に `test/YCheck.lean` と 213 個の展開を書く | `all := yLegal`、`Incl` は `stdSim` から、`yLegal_wf` |
+| ω-Y (official) / ω-Y（公式） | `omegaYSys`、`omegaYStd`、`Idx := Unit`。`omegaYSys_wf`。`Runs` は `Code := List Nat`、`run := expand`、`halt := List.isEmpty`。`source` に `test/OmegaYCheck.lean` と 474 個の展開を書く | `all := omegaYAll`（列すべて。規則のエラーは一歩で `()` へ行く）、`Incl` は `stdSim` から、`omegaYAll_wf` |
 | extended Buchholz's ψ / 拡張ブーフホルツ ψ | `exbOT` と、新しく作る `exbOT.Std`。`exbOT_wf`。`Runs` は項の上で `run X n := fs X (idx X n)` | 無し |
 
 二つ目と三つ目の表の記録は、今の印をそのまま再現する。定理の名前は

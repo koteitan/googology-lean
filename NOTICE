@@ -30,6 +30,56 @@ Googology/Notation/Y/WellOrder/Por/
   snapshot that 1Y-Well-Ordering-Lean vendors as `vendor/bms` is copied or
   adapted.
 
+Googology/Notation/OmegaY/WellOrder/, Googology/Notation/OmegaY/Official.lean
+and test/OmegaYCheck.lean
+
+  These files are taken from koteitan, wy-wo-por
+  https://github.com/koteitan/wy-wo-por
+  revision 7038635644b8d1df3f0f1a80f107210da7e33a94 (Apache-2.0),
+  and ported from Lean 4.33.1 / Mathlib v4.33.1 to Lean 4.30.0 /
+  Mathlib v4.30.0. The port renames the module names in the imports (prefix
+  `Googology.Notation.OmegaY.WellOrder.`), imports the 0-Y modules and the BMS
+  layer from Googology/Notation/Y/WellOrder/ZeroY/ and
+  Googology/Notation/Y/WellOrder/Por/ instead of copying them (wy-wo-por
+  takes the same files from koteitan/1y-wo-por, revision
+  db86f2d13c2e18a8e2c2fae5e083d00fc4d48a78), renames the namespace `Por` of
+  Por/Formula.lean, Por/Relation.lean and Por/Supply.lean to `OmegaY.Por`,
+  sets `backward.do.legacy false` in every file, and changes a few proofs;
+  each file's header says what was changed. OmegaY/Official/Build.lean of
+  wy-wo-por, the official expansion, is moved to
+  Googology/Notation/OmegaY/Official.lean. test/OmegaYCheck.lean is
+  OmegaY/Official/Check.lean of wy-wo-por, without its closing `#eval`.
+
+  wy-wo-por in turn contains code adapted from
+
+    Phyrion, omega-Y-Well-Ordering-Lean
+    https://github.com/Phyrion1343/omega-Y-Well-Ordering-Lean
+    revision 33c16a8ce8f7e01bb3794881f3ff9109474beaed (Apache-2.0)
+
+  (the modules under OmegaY/ other than OmegaY/Official/). Each of these files
+  keeps the header that names its original path and says what was changed:
+  `YesMetaZFC.BMS.transGen_head` is replaced by `Por.BMS.transGen_head` (same
+  statement; of the files that used it, only OmegaY/Forests.lean is ported
+  here), and the reflection layer
+  (OmegaY/Reflection.lean, OmegaY/Reflection/Interface.lean,
+  OmegaY/Reflection/OrdinalSupply.lean, OmegaY/KeyReflection.lean) is proved
+  from the patterns-of-resemblance model in Por/ instead of Phyrion's
+  recursion. Por/Supply.lean adapts `Label`, `top`, `countable_iio_ordinal`
+  and `countable_iio` of OmegaY/Reflection/OrdinalSupply.lean of that project
+  and says so in its header. OmegaY/Official/ (the official omega-Y expansion,
+  a modification of Phyrion's weak-magma expansion, and the proof that it is
+  well founded) and Por/Formula.lean, Por/Relation.lean and Por/Supply.lean
+  were written for wy-wo-por by the same author as this repository. No code
+  from the unlicensed snapshot of YesMetaZFC / BMS-Well-Ordering-Lean that
+  omega-Y-Well-Ordering-Lean depends on is copied or adapted.
+
+  The official omega-Y expansion is defined by `expand` of Naruyoko,
+  StudyAndExpandSequence (https://github.com/Naruyoko/StudyAndExpandSequence,
+  revision b26ba7e5fc2c8edb4065f1d721855a7e0e644ff2), which has no license.
+  None of its code is used: Googology/Notation/OmegaY/Official.lean is written
+  from a description of the rule, and the program was only run to record the
+  expected values in test/OmegaYCheck.lean.
+
 Googology/Notation/Y/WellOrder/Equiv/ is koteitan's own work, taken from
 koteitan, 1y-expand-equiv (https://github.com/koteitan/1y-expand-equiv,
 revision c9a5368a09ceb62ec671a6c3447a4719d035dfc0), and is licensed under the

@@ -10,6 +10,8 @@ question is whether repeated expansion always stops after finitely many steps
 (well-foundedness). This library provides a common framework for proving it;
 each notation only needs to define and prove the parts specific to it.
 
+Links to the formal proofs by koteitan and Phyrion are in [portal/](portal/README.md).
+
 ## What it proves
 
 Every notation gets the same goals. They are defined exactly in section 6 of [spec.md](spec.md).
@@ -19,12 +21,14 @@ Every notation gets the same goals. They are defined exactly in section 6 of [sp
 | BMS | ✅ | ✅ | ✅ |
 | DBMS | ✅ | ✅ | ✅ |
 | Y sequence | ✅ | ✅ | ✅ |
+| ω-Y (official) | ✅ | ✅ | ✅ |
 | extended Buchholz's ψ | ✅ | ✅ |  |
 
 - expansion defined: the expansion is a Lean function that runs.
 - well-foundedness: the expansion relation on the standard forms has no infinite descending chain. It is equivalent to termination — every expansion sequence ends — and that is proved too.
 - well-foundedness (non-standard): the same holds on all states, standard or not.
 - For the Y sequence, "all states" means every legal sequence: its entries are positive and, if it is not empty, its first entry is `1`. The proof is ported from [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) and [koteitan/1y-expand-equiv](https://github.com/koteitan/1y-expand-equiv); see [Notation/Y](Googology/Notation/Y/README.md).
+- ω-Y (official) is the ω-Y sequence with the expansion of its official program, `expand` of [Naruyoko/StudyAndExpandSequence](https://github.com/Naruyoko/StudyAndExpandSequence). For it, "all states" means every list of natural numbers, with no condition. The Lean rule reports an error where a step it expects cannot be carried out, and the step then gives `()`; no error occurs on the 474 expansions checked against the program, but that none occurs on a standard form is not proved. The proof is ported from [koteitan/wy-wo-por](https://github.com/koteitan/wy-wo-por); see [Notation/OmegaY](Googology/Notation/OmegaY/README.md).
 
 ### Translations into the ordinals
 
@@ -163,6 +167,7 @@ Googology/
     ExBuchholz/      extended Buchholz's ψ
     DBMS/            BMS with other generators
     Y/               the Y sequence, and the ported proof of its termination
+    OmegaY/          the official ω-Y sequence, and the ported proof of its termination
   Trans/           translations between two systems
 ```
 
@@ -195,19 +200,26 @@ koteitan's are linked where they are used and are not listed here.
 | W. Buchholz, A new system of proof-theoretic ordinal functions, Annals of Pure and Applied Logic 32 (1986) 195–207 | Lemmas 3.2–3.6, on which the fundamental sequences rest | `Notation/ExBuchholz/FS.lean`, `Closure.lean` |
 | Yukito's Y sequence, and its official program [`script.js`](https://github.com/Naruyoko/YNySequence/blob/2de13970b9ac818c935577b8284c41dec01f0039/script.js) of Naruyoko/YNySequence (revision `2de1397`) | the definition, transcribed statement by statement; the expected values of the checks | `Notation/Y/Yukito.lean`, `test/YCheck.lean` |
 | [Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean) (Apache-2.0), revision `6533b29` | the combinatorial layer of the proof that 1-Y is well founded, adapted in koteitan/1y-wo-por and ported here to Lean 4.30.0 | `Notation/Y/WellOrder/ZeroY/`, `Notation/Y/WellOrder/OneY/` |
+| Yukito's ω-Y sequence, and its official program, `expand` of [Naruyoko/StudyAndExpandSequence](https://github.com/Naruyoko/StudyAndExpandSequence/blob/b26ba7e5fc2c8edb4065f1d721855a7e0e644ff2/script.js) (revision `b26ba7e`, v1.1, default settings) | the definition, written in koteitan/wy-wo-por from a description of the rule, not from the program's code; the expected values of the checks | `Notation/OmegaY/Official.lean`, `test/OmegaYCheck.lean` |
+| [Phyrion1343/omega-Y-Well-Ordering-Lean](https://github.com/Phyrion1343/omega-Y-Well-Ordering-Lean) (Apache-2.0), revision `33c16a8` | the canonical mountain, the weak-magma expansion that the official rule modifies, the forests, the keys and the reflection interface of the proof, adapted in koteitan/wy-wo-por and ported here to Lean 4.30.0 | `Notation/OmegaY/WellOrder/OmegaY/` except `Official/`; `Notation/OmegaY/Official.lean` |
 | p進大好きbot, [ペア数列の停止性](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:P%E9%80%B2%E5%A4%A7%E5%A5%BD%E3%81%8Dbot/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E3%81%AE%E5%81%9C%E6%AD%A2%E6%80%A7); Naruyoko, [ペア数列システムの停止性証明に用いられた変換写像の全単射性](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Naruyoko/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E5%81%9C%E6%AD%A2%E6%80%A7%E8%A8%BC%E6%98%8E%E3%81%AB%E7%94%A8%E3%81%84%E3%82%89%E3%82%8C%E3%81%9F%E5%A4%89%E6%8F%9B%E5%86%99%E5%83%8F%E3%81%AE%E5%85%A8%E5%8D%98%E5%B0%84%E6%80%A7) | the translation `Trans` of pair sequences into Buchholz terms and its bijectivity, as formalized in the dependency koteitan/pss-proof | `Googology/Trans/PSS/` |
 | the wiki articles [ペア数列数](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0) and [Y数列](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97) | background and correspondence tables | `memo.md` |
 
 The transcription in `Notation/Y/Yukito.lean` is a translation of `script.js`
 into Lean. `Naruyoko/YNySequence` has no license file.
+`Naruyoko/StudyAndExpandSequence` has no license file either. No code of it
+is used: `Notation/OmegaY/Official.lean` is written from a description of the
+rule, and `test/OmegaYCheck.lean` records only outputs of the program.
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
 
-The files under `Googology/Notation/Y/WellOrder/ZeroY/`, `Googology/Notation/Y/WellOrder/OneY/`
-and `Googology/Notation/Y/WellOrder/Por/` are the exception: they come from
-[koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) and are licensed under the
+The files under `Googology/Notation/Y/WellOrder/ZeroY/`, `Googology/Notation/Y/WellOrder/OneY/`,
+`Googology/Notation/Y/WellOrder/Por/` and `Googology/Notation/OmegaY/WellOrder/`, and the files
+`Googology/Notation/OmegaY/Official.lean` and `test/OmegaYCheck.lean`, are the exception: they
+come from [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) and
+[koteitan/wy-wo-por](https://github.com/koteitan/wy-wo-por) and are licensed under the
 Apache License 2.0. See [LICENSE-APACHE](LICENSE-APACHE) and [NOTICE](NOTICE).
 
 ---
@@ -222,7 +234,9 @@ Apache License 2.0. See [LICENSE-APACHE](LICENSE-APACHE) and [NOTICE](NOTICE).
 Current state: `Core/` is complete. `Notation/ExBuchholz` is finished, as a
 notation system and as an expansion system: its termination is proved with
 nothing assumed. `Notation/BMS` terminates for every number of rows.
-`Notation/Y` terminates, on the standard forms and on every legal sequence. `Trans/`
+`Notation/Y` terminates, on the standard forms and on every legal sequence.
+`Notation/OmegaY`, the official ω-Y, terminates, on the standard forms and on
+every list of naturals. `Trans/`
 settles one row and two rows (pair sequences): for every matrix the value of
 the translation equals the rank of the expansion, and the systems reach `ε₀`
 and `ψ_0(Ω_ω)`. There is no reading from three rows on; `plan.md` lists what is

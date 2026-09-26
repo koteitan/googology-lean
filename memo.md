@@ -143,6 +143,13 @@ The official expansion, transcribed from the program, with `ySys` and its
 seeds; see item 4. Termination is a theorem here: `WellFounded.lean`, from
 the proof ported into `WellOrder/`.
 
+### `Notation/OmegaY/` — done
+
+The official ω-Y: the rule of Naruyoko's program, `Official.lean`, with
+`omegaYSys`, its seeds `(1, h+2)` and `omegaYAll` on every list. Termination
+is a theorem here: `WellFounded.lean`, from the proof ported into
+`WellOrder/`.
+
 ## Well-foundedness of ExBuchholz — done
 
 ```
@@ -470,6 +477,28 @@ What is left is one problem, and it is not a Lean problem.
 - The non-standard column of the README counts `yLegal`, whose states are all
   sequences with positive entries and first entry `1`. Nothing is proved for
   other sequences.
+
+## 2026-09-26: the official ω-Y terminates here
+
+- `Notation/OmegaY/WellOrder/` is a port of koteitan/wy-wo-por (revision
+  `7038635`, Apache-2.0) from Lean 4.33.1 to Lean 4.30.0: 493 modules, which with
+  `Official.lean` are the import closure of `wellFounded_step`. The 0-Y modules and the BMS layer are
+  imported from `Notation/Y/WellOrder/` instead of copied. The namespace
+  `Por` of the ω-Y model is renamed to `OmegaY.Por`, because ten names clash
+  with the 1-Y model. Every file sets `backward.do.legacy false`, so that
+  Lean 4.30.0 elaborates `do` blocks as Lean 4.33.1 does; 23 files needed
+  proof changes, no statement changed.
+- The rule, `OmegaY/Official/Build.lean` of wy-wo-por, is moved to
+  `Notation/OmegaY/Official.lean`, as `Yukito.lean` sits in `Notation/Y/`.
+- `OmegaY.Official.expand` returns `Except`. `Basic.lean` reads an error as
+  `()`, so a step is total; `()` is standard already, so no standard form is
+  added. That no error occurs on a standard form is not proved; none occurs on
+  the 474 fixtures of `test/OmegaYCheck.lean`.
+- The non-standard column counts `omegaYAll`, whose states are all lists of
+  naturals. The ported theorem has no condition on the list, so this needs no
+  more than the error case.
+- `OmegaY/` imports `Y/WellOrder/ZeroY/`, an exception to layering rule 2 of
+  `spec.md`, like `DBMS/` importing `BMS/`.
 
 ## 2026-09-23: goal records and the README check
 

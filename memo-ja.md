@@ -134,6 +134,12 @@ BMS は停止する
 公式の展開をプログラムから書き起こしたもの。`ySys` と種がある。項目 4 にある。
 停止性はここの定理である。`WellOrder/` に移植した証明から `WellFounded.lean` が導く。
 
+### `Notation/OmegaY/` — 済
+
+公式の ω-Y。Naruyoko 氏のプログラムの規則 `Official.lean` と、`omegaYSys`、種
+`(1, h+2)`、列すべての上の `omegaYAll` がある。停止性はここの定理である。
+`WellOrder/` に移植した証明から `WellFounded.lean` が導く。
+
 ## ExBuchholz の整礎性 — 済
 
 ```
@@ -412,6 +418,25 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
   `yLegal_terminates`、標準形の辞書式整列 `yStd_strictWellOrder` が出る。
 - README の非標準の列は `yLegal` を数える。その状態は、項が正で先頭が `1` の列
   すべてである。それ以外の列については何も証明していない。
+
+## 2026-09-26：公式の ω-Y の停止性をここで証明
+
+- `Notation/OmegaY/WellOrder/` は koteitan/wy-wo-por（revision `7038635`、Apache-2.0）を
+  Lean 4.33.1 から Lean 4.30.0 へ移植したもの。493 モジュールで、
+  `Official.lean` と合わせて `wellFounded_step` の import の閉包になる。0-Y のモジュールと BMS の層はコピーせず、`Notation/Y/WellOrder/` から
+  import する。ω-Y のモデルの名前空間 `Por` は `OmegaY.Por` に変えた。1-Y のモデルと
+  10 個の名前がぶつかるため。どのファイルも `backward.do.legacy false` を置き、Lean 4.30.0
+  にも Lean 4.33.1 と同じに `do` を読ませる。証明を変えたのは 23 ファイルで、命題は
+  変えていない。
+- 規則である wy-wo-por の `OmegaY/Official/Build.lean` は、`Notation/Y/` の
+  `Yukito.lean` と同じ置き方で、`Notation/OmegaY/Official.lean` へ移した。
+- `OmegaY.Official.expand` は `Except` を返す。`Basic.lean` はエラーを `()` と読むので、
+  一歩は全域になる。`()` はもともと標準形なので、標準形は増えない。標準形でエラーが
+  起きないことは証明していない。`test/OmegaYCheck.lean` の 474 件では起きない。
+- 非標準の欄は `omegaYAll` で数える。状態は自然数の列すべてである。移植した定理は列に
+  条件を持たないので、エラーの場合を足すだけで済む。
+- `OmegaY/` は `Y/WellOrder/ZeroY/` を import する。`DBMS/` が `BMS/` を import するのと
+  同じく、`spec-ja.md` の層の規則 2 の例外である。
 
 ## 2026-09-23：目標の一覧と README の検査
 

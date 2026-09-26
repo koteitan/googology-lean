@@ -14,6 +14,10 @@
 `Googology/Core` しか知らない。2 つの系を結びつけるものは全部
 [Trans](../Trans/README-ja.md) に置く。
 
+この規則から外れる系が 2 つある。`DBMS/` は規則を共有する `BMS/` を import する。
+`OmegaY/` は、証明の 0-Y のモジュールをもう一度コピーせず、`Y/WellOrder/ZeroY/` から
+import する。どちらも逆向きの import は無い。
+
 これで import の向きが保たれる。翻訳を `BMS/` の下に置くと、BMS を import
 しただけで翻訳先の系が全部付いてきて、最後にはライブラリ全体が付いてくる。
 
@@ -46,3 +50,4 @@ import する。順序数へ評価する系だけが import するのであっ�
 | [BMS](BMS/README-ja.md) | 配列 | パッケージ側の比較 | 階段から到達可能 | `bms r` | `bmsEval`（階数）、`r = 1` では `Trans.BMS.bmsOrdEval` |
 | [DBMS](DBMS/README-ja.md) | 配列 | BMS と同じ | `dstair` から到達可能 | `dbms r` | `dbmsEval`（階数）、`r = 1` では `Trans.DBMS.dbmsOrdEval` |
 | [Y](Y/README-ja.md) | 自然数の列 | 辞書式。標準形の上の整列順序（`yStd_strictWellOrder`） | `(1, h+1)` から到達可能 | `ySys`、合法な列すべての上では `yLegal` | `yEval`（階数） |
+| [OmegaY](OmegaY/README-ja.md) | 自然数の列 | まだ無い | 公式の規則で `(1, h+2)` から到達可能 | `omegaYSys`、列すべての上では `omegaYAll` | `omegaYEval`（階数） |

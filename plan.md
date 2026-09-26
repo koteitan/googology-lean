@@ -4,9 +4,6 @@
 
 The remaining work, arranged by the cells of the README tables.
 
-- Table of notations (definition of expansion, well-foundedness)
-  - add the row of ω-Y (official)
-    - 🤖 definition of expansion and well-foundedness: port the proof of koteitan/wy-wo-por (v0.1.38) and connect it
 - Table of translations into the ordinals
   - DBMS with 3 rows and up
     - surjectivity (the image is known exactly): show that 3-row DBMS has the same ordinal as 3-row BMS

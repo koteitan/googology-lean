@@ -1,5 +1,6 @@
 import Googology.Goals.Basic
 import Googology.Notation.Y
+import Googology.Notation.OmegaY
 import Googology.Trans
 
 /-!
@@ -66,6 +67,18 @@ def yRuns : Runs Notation.Y.ySys where
   source := "Notation.Y.expand transcribes script.js of Naruyoko/YNySequence (revision 2de1397); \
 test/YCheck.lean checks it against the official program on 213 expansions"
 
+/-- The ω-Y sequence runs on lists. -/
+def omegaYRuns : Runs Notation.OmegaY.omegaYSys where
+  Code := List Nat
+  enc := fun s => s.1
+  run := Notation.OmegaY.expand
+  halt := List.isEmpty
+  enc_step := fun _ _ => rfl
+  halt_iff := fun _ => List.isEmpty_iff
+  source := "Notation.OmegaY.expand is OmegaY.Official.expand of koteitan/wy-wo-por (revision 7038635), \
+written from the rule of expand in Naruyoko/StudyAndExpandSequence (revision b26ba7e); \
+test/OmegaYCheck.lean checks it against the official program on 474 expansions"
+
 /-- Extended Buchholz's ψ runs on terms: one step is `fs X (idx X n)`. -/
 def exbRuns : Runs exbOT where
   Code := Term
@@ -95,6 +108,13 @@ def dbmsIncl (r : Nat) : Incl (Notation.DBMS.dbms r) (Notation.BMS.bmsAll r) whe
 def yIncl : Incl Notation.Y.ySys Notation.Y.yLegal where
   map := Notation.Y.stdSim.map
   map_inj := fun _ _ h => Subtype.ext (congrArg (fun x : Notation.Y.yLegal.State => x.1) h)
+  map_step := fun _ _ => rfl
+  map_halted := fun _ => Iff.rfl
+
+/-- The standard ω-Y sequences inside all lists. -/
+def omegaYIncl : Incl Notation.OmegaY.omegaYSys Notation.OmegaY.omegaYAll where
+  map := Notation.OmegaY.stdSim.map
+  map_inj := fun _ _ h => Subtype.ext h
   map_step := fun _ _ => rfl
   map_halted := fun _ => Iff.rfl
 
@@ -346,6 +366,23 @@ def yNonStd : NonStdGoals (fun _ : Unit => ySys) (fun _ => yLegal) where
   incl := fun _ => ⟨yIncl⟩
   wf := .proved fun _ => yLegal_wf
 
+/-- The official ω-Y sequence on its standard forms, reachable from `(1, h+2)`. -/
+def omegaYNotation :
+    NotationGoals (fun _ : Unit => Notation.OmegaY.omegaYSys) (fun _ => Notation.OmegaY.omegaYStd) where
+  labelEn := "ω-Y (official)"
+  labelJa := "ω-Y（公式）"
+  expansion := some fun _ => omegaYRuns
+  wf := .proved fun _ => Notation.OmegaY.omegaYStd.wf_of_wf Notation.OmegaY.omegaYSys_wf
+
+/-- The official ω-Y sequence on every list of naturals. Where the rule reports
+an error, the step gives `()`. -/
+def omegaYNonStd :
+    NonStdGoals (fun _ : Unit => Notation.OmegaY.omegaYSys) (fun _ => Notation.OmegaY.omegaYAll) where
+  labelEn := "ω-Y (official)"
+  labelJa := "ω-Y（公式）"
+  incl := fun _ => ⟨omegaYIncl⟩
+  wf := .proved fun _ => Notation.OmegaY.omegaYAll_wf
+
 /-- Extended Buchholz's ψ on the countable standard forms. -/
 def exbNotation : NotationGoals (fun _ : Unit => exbOT) (fun _ => exbOTStd) where
   labelEn := "extended Buchholz's ψ"
@@ -574,6 +611,8 @@ def audit : List AuditLine :=
   dbmsNonStd.lines (toString ``Googology.Goals.dbmsNonStd) ++
   yNotation.lines (toString ``Googology.Goals.yNotation) ++
   yNonStd.lines (toString ``Googology.Goals.yNonStd) ++
+  omegaYNotation.lines (toString ``Googology.Goals.omegaYNotation) ++
+  omegaYNonStd.lines (toString ``Googology.Goals.omegaYNonStd) ++
   exbNotation.lines (toString ``Googology.Goals.exbNotation) ++
   bmsOneRowOrd.lines (toString ``Googology.Goals.bmsOneRowOrd) ++
   bmsTwoRowOrd.lines (toString ``Googology.Goals.bmsTwoRowOrd) ++

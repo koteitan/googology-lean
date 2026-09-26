@@ -33,6 +33,10 @@
 | **Y 数列は整礎で停止し**、順序数の測度を持つ | `Notation.Y.ySys_wf`, `Notation.Y.ySys_terminates`, `Notation.Y.yStd_terminates`, `Notation.Y.yEval` |
 | **標準形かどうかによらず合法な列（項が正で先頭が `1`）すべての上でも同じ**。素のリストの上の `expand` についても | `Notation.Y.yLegal_wf`, `Notation.Y.yLegal_terminates`, `Notation.Y.expand_terminates` |
 | 合法な列の上で書き起こしは Phyrion 氏の展開に等しい。だから標準形は Phyrion 氏の生成する列と同じで、辞書式順序で整列する | `Notation.Y.expand_eq_numeric`, `Notation.Y.yStd_iff_generated`, `Notation.Y.yStd_strictWellOrder` |
+| 系としての公式の ω-Y 数列。公式プログラムの規則を、その説明から書き、474 件の展開で照合した。規則のエラーは一歩で `()` へ行く | `Notation.OmegaY.expand`, `Notation.OmegaY.omegaYSys` |
+| **公式の ω-Y の規則の自明でない一歩は整礎**。規則が成功する空でない列すべての上で | `Notation.OmegaY.official_wf`, `Notation.OmegaY.no_infinite_official_chain` |
+| **公式の ω-Y 数列は整礎で停止し**、順序数の測度を持つ | `Notation.OmegaY.omegaYSys_wf`, `Notation.OmegaY.omegaYSys_terminates`, `Notation.OmegaY.omegaYStd_terminates`, `Notation.OmegaY.omegaYEval` |
+| **標準形かどうかによらず自然数の列すべての上でも同じ**。素のリストの上の `expand` についても | `Notation.OmegaY.omegaYAll_wf`, `Notation.OmegaY.omegaYAll_terminates`, `Notation.OmegaY.expand_terminates` |
 
 ## 拡張ブーフホルツ ψ
 

@@ -33,6 +33,10 @@ Names are written relative to `Googology`.
 | **the Y sequence is well founded and terminates**, and carries an ordinal measure | `Notation.Y.ySys_wf`, `Notation.Y.ySys_terminates`, `Notation.Y.yStd_terminates`, `Notation.Y.yEval` |
 | **and so on every legal sequence** (positive entries, first entry `1`), standard or not, and for `expand` on plain lists | `Notation.Y.yLegal_wf`, `Notation.Y.yLegal_terminates`, `Notation.Y.expand_terminates` |
 | on a legal sequence the transcription is Phyrion's expansion, so the standard forms are Phyrion's generated sequences, well ordered by the lexicographic order | `Notation.Y.expand_eq_numeric`, `Notation.Y.yStd_iff_generated`, `Notation.Y.yStd_strictWellOrder` |
+| the official ω-Y sequence as a system: the rule of the official program, written from a description of it and checked against it on 474 expansions; an error of the rule steps to `()` | `Notation.OmegaY.expand`, `Notation.OmegaY.omegaYSys` |
+| **one nontrivial step of the official ω-Y rule is well founded**, on every nonempty list where it succeeds | `Notation.OmegaY.official_wf`, `Notation.OmegaY.no_infinite_official_chain` |
+| **the official ω-Y sequence is well founded and terminates**, and carries an ordinal measure | `Notation.OmegaY.omegaYSys_wf`, `Notation.OmegaY.omegaYSys_terminates`, `Notation.OmegaY.omegaYStd_terminates`, `Notation.OmegaY.omegaYEval` |
+| **and so on every list of naturals**, standard or not, and for `expand` on plain lists | `Notation.OmegaY.omegaYAll_wf`, `Notation.OmegaY.omegaYAll_terminates`, `Notation.OmegaY.expand_terminates` |
 
 ## Extended Buchholz's ψ
 

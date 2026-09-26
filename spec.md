@@ -551,6 +551,7 @@ first table comes from these records:
 | BMS / BMS | `bms`, `bmsStd`, `Idx := Nat`; `wf` from `bms_wf`; `Runs` on `entriesR` with `expandRL` (`entriesR_expand`). If that needs `0 < r`, the family is `r ↦ bms (r + 1)` | `all := bmsAll`, `Incl` by `Subtype.val`, `bmsAll_wf` |
 | DBMS / DBMS | `dbms`, `dbmsStd`; `dbms_wf`; `Runs` as for BMS | `all := bmsAll`, `bmsAll_wf` |
 | Y sequence / Y 数列 | `ySys`, `yStd`, `Idx := Unit`; `ySys_wf`; `Runs` with `Code := List Nat`, `run := expand`, `halt := List.isEmpty`, `source` naming `test/YCheck.lean` and its 213 expansions | `all := yLegal`, `Incl` from `stdSim`, `yLegal_wf` |
+| ω-Y (official) / ω-Y（公式） | `omegaYSys`, `omegaYStd`, `Idx := Unit`; `omegaYSys_wf`; `Runs` with `Code := List Nat`, `run := expand`, `halt := List.isEmpty`, `source` naming `test/OmegaYCheck.lean` and its 474 expansions | `all := omegaYAll` (every list; an error of the rule steps to `()`), `Incl` from `stdSim`, `omegaYAll_wf` |
 | extended Buchholz's ψ / 拡張ブーフホルツ ψ | `exbOT` with a new `exbOT.Std`; `exbOT_wf`; `Runs` with `run X n := fs X (idx X n)` on terms | none |
 
 The records of the second and third tables reproduce the current marks.
