@@ -5,9 +5,10 @@
 A Lean 4 library for googology: expansion systems, ordinal notation systems,
 and the translations between them.
 
-The question about a googological system — BMS, DBMS, the Y sequence — is
-whether every expansion chain terminates. This library answers it once, for
-all of them, and each system supplies only what is its own.
+For googological notations such as BMS, DBMS and the Y sequence, the main
+question is whether repeated expansion always stops after finitely many steps
+(well-foundedness). This library provides a common framework for proving it;
+each notation only needs to define and prove the parts specific to it.
 
 ## What it proves
 
