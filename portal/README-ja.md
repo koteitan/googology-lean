@@ -23,7 +23,7 @@ koteitan と Phyrion による、巨大数の表記の形式証明をリポジ�
 | トリオ数列 | [koteitan/trio](https://github.com/koteitan/trio) | koteitan | 構文的な証明 | 未完成 |
 | ペア数列 | [koteitan/pss-proof](https://github.com/koteitan/pss-proof) | koteitan | Buchholz の ψ の項への翻訳 Trans | ✅ |
 | ペア数列 | [koteitan/yet-another-pss-proof](https://github.com/koteitan/yet-another-pss-proof) | koteitan | 構文的証明 | ✅ |
-| 原始数列 | [koteitan/prss-proof](https://github.com/koteitan/prss-proof) | koteitan | ε₀ 未満の順序数（多重集合版と Cantor 標準形版）への写像 | ✅ |
+| 原始数列 | [koteitan/prss-proof](https://github.com/koteitan/prss-proof) | koteitan | 整礎な順序を持つ項（遺伝的有限多重集合、または Cantor 標準形の項）への写像。順序数は使わない | ✅ |
 | 拡張ブーフホルツの ψ | googology-lean [Notation/ExBuchholz](../Googology/Notation/ExBuchholz/README.md) | koteitan | 項の値（順序数）が展開で下がること。Buchholz の Lemma 3.2〜3.6 を自前で証明 | ✅ |
 
 ## 翻訳写像
