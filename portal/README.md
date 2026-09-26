@@ -20,14 +20,13 @@ Formal proofs about googological notations by koteitan and Phyrion, one row per 
 | 0-Y | [Phyrion1343/0Y-Well-Ordering-Lean](https://github.com/Phyrion1343/0Y-Well-Ordering-Lean) | Phyrion | an order isomorphism to BMS by encoding and decoding | ✅ |
 | BMS | [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) | koteitan | labels in Carlson's structures R_N (Σ₁, …, Σ_N elementary substructures) and finite reflection | ✅ |
 | BMS | [koteitan/dh-bms-wf-formal](https://github.com/koteitan/dh-bms-wf-formal) | koteitan | follows the paper's proof (stable labels and finite reflection) | ✅ |
-| BMS | [koteitan/bms-paper-formalization](https://github.com/koteitan/bms-paper-formalization) | koteitan | stability reflection in L_α | in progress (Lemma 2.6 is an axiom for now) |
 | trio sequences | [koteitan/trio](https://github.com/koteitan/trio) | koteitan | a syntactic proof | unfinished |
 | pair sequences | [koteitan/pss-proof](https://github.com/koteitan/pss-proof) | koteitan | the translation Trans into Buchholz ψ terms | ✅ |
 | pair sequences | [koteitan/yet-another-pss-proof](https://github.com/koteitan/yet-another-pss-proof) | koteitan | a translation into an own three-branch tree notation p_a(b)+c; no ordinals | ✅ |
 | primitive sequences | [koteitan/prss-proof](https://github.com/koteitan/prss-proof) | koteitan | a map into the ordinals below ε₀ (multiset and Cantor normal form versions) | ✅ |
 | extended Buchholz's ψ | googology-lean [Notation/ExBuchholz](../Googology/Notation/ExBuchholz/README.md) | koteitan | the value of a term (an ordinal) decreases on expansion; Buchholz's Lemmas 3.2–3.6 proved in the library | ✅ |
 
-## Translations
+## Translation maps
 
 | notation | link | author | what is proved | method | complete |
 |---|---|---|---|---|:-:|
