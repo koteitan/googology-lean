@@ -35,6 +35,8 @@ In the column "complete", 🚧α means that the map is finished up to α and wor
 | BMS, DBMS, extended Buchholz's ψ | googology-lean [Trans](../Googology/Trans/README.md) | koteitan | translations between BMS and DBMS with one or two rows and extended Buchholz's ψ, and into the ordinals | simulation (one step to one step), and the value equals the rank of the expansion | 🚧ψ₀(Ω_ω) |
 | BMS and Rathjen's ψ | [koteitan/bms-rathjen](https://github.com/koteitan/bms-rathjen) | koteitan | a table of BMS against Rathjen's ordinal collapsing function | machine-checked certificates, row by row | 🚧ε_ω+1 |
 | UNOCF and Taranovsky's C | [koteitan/bms-vs-taranovskys-c](https://github.com/koteitan/bms-vs-taranovskys-c) | koteitan | a translation map from UNOCF terms to Taranovsky's notation C, and its table | UNOCF terms mapped to C terms (Lean and JavaScript) | 🚧ψ₀(Ω_ω) |
+| extended Buchholz's ψ and trio sequences | [koteitan/trio ebp2bms](https://github.com/koteitan/trio/tree/main/ebp2bms) | koteitan | a general formula and table of the standard trio sequences for ψ₀(Ω_α) (α < Λ) | up to ψ₀(Ω_ω) by the formal proofs for pair sequences; beyond it, numerical comparison with the BM4-Analysis sheet | 🚧ψ₀(Ω_ω) |
+| extended Buchholz's ψ and 3-row DBMS | [koteitan/trio ebp2dbms](https://github.com/koteitan/trio/tree/main/ebp2dbms) | koteitan | a table of the standard 3-row DBMS for ψ₀(Ω_α) | numerical comparison with MrredsharkFan's bmsToDbms | 🚧ψ₀(Ω_ω) |
 
 ## Other
 
