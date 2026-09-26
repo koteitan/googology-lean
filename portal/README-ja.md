@@ -38,4 +38,6 @@ koteitan と Phyrion による、巨大数の表記の形式証明をリポジ�
 
 ## その他
 
-ここに入るものは、今はまだ無い。
+| 表記 | リンク | 著者 | 証明内容 | 手法 | 完了 |
+|---|---|---|---|---|:-:|
+| 1-Y | [koteitan/1y-expand-equiv](https://github.com/koteitan/1y-expand-equiv) | koteitan | 1-Y の展開の 3 つの定義（Yukito 版 `script.js`、Phyrion 版、wiki 版）が同じ関数であること | 各定義を書き写し、関数として等しいことを示す | ✅ |

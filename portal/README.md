@@ -38,4 +38,6 @@ In the column "complete", 🚧α means that the map is finished up to α and wor
 
 ## Other
 
-Nothing here yet.
+| notation | link | author | what is proved | method | complete |
+|---|---|---|---|---|:-:|
+| 1-Y | [koteitan/1y-expand-equiv](https://github.com/koteitan/1y-expand-equiv) | koteitan | the three definitions of the 1-Y expansion (Yukito's `script.js`, Phyrion's, the wiki's) are the same function | each definition transcribed, then proved equal as functions | ✅ |
