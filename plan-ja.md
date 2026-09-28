@@ -26,3 +26,8 @@ README の表のセルごとに、残りの作業を並べる。
       - `p0(W_2) <= a < Λ` で、規則 1〜10 の像が標準形に入り、順序を保つことを証明する（添字が 0 か 1 だけの項は証明済み）
       - `CalibRd200` を証明する（修正 `strip` の規則の写像は、読みの深さ 200 まで `trioE2` と一致する。100 までは証明済み、201 では偽。上限なしの `CalibSt` は燃料のため偽）（[BMS/TrioFixStripCalibNo.lean](Googology/Trans/BMS/TrioFixStripCalibNo.lean)）
       - `TrioFixFuel` の燃料 `max 200 (a の深さ)` が、どの `a` でも足りることを証明する（燃料を増やしても行列が変わらない。シートのラベルといくつかの族で確認済み）
+- 表記系
+  - InaccPsi：Buchholz（1992）の ψ を、最初の ω 個の弱到達不能基数へ広げたもの（[Notation/InaccPsi](Googology/Notation/InaccPsi/README-ja.md)）
+    - 集合論による ψ：F5〜F12（F1〜F4 は `Ord.lean` で証明済み）🤖
+    - 項の系、標準形、比較
+    - 正しさ：比較が値の順序と一致し、標準形の項が整列すること
