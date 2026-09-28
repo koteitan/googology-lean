@@ -21,6 +21,10 @@ $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$.
 - **The two-level version** (§6). The case rules were replaced by a recursion with two
   collapses. Agreement with the sheet rose from 444 to 458 rows, and the bad pairs in the
   new range dropped from 19 to 11. Three rules that are not local remain.
+- **Rules read from Carlson's definitions** (§7). Two of the three rules became local
+  rules with a reason from the definition of $`\le_2`$, and the collapse of nested
+  $`\omega`$ columns was fixed. Agreement rose to 468 rows, and both order tests now show 0
+  violations.
 
 ## 2. The shape of the rule
 
@@ -219,16 +223,108 @@ The bad pairs dropped from 19 to 11. The 11 that remain fall into two families.
 4. Still open: rows 764, 819 and 854.
 5. Unchanged. Above row 915 the problem is mostly missing nodes (the sup rows).
 
-## 7. Next
+## 7. Rules read from Carlson's definitions ($`\Phi_{3h}`$)
 
-- The collapse when an $`\omega`$ column is nested inside an index column (the 10
-  violations).
-- Explaining the three non-local rules from Carlson's rules for $`R_2^+`$.
+The three rules of §6 were compared with the definitions of $`\le_1`$ and $`\le_2`$ in Carlson
+(2009) and with the facts on $`R_2`$ listed in §1 of Wilken, "Pure Σ₂-elementarity beyond the
+core" (APAL 172, 2021, [doi:10.1016/j.apal.2021.103001](https://doi.org/10.1016/j.apal.2021.103001)).
+Two of the three became local rules. The new version is `por/phi3h.py`.
+
+Notation: $`N = \psi_0(\alpha)`$ is the point being collapsed, and $`W`$ is the last summand of
+$`\alpha`$.
+
+**Rule 1 (the last column).**
+- **Local form.** A leaf marker $`m`$ is an $`\Omega_1`$-multiplier if and only if $`m`$ is the
+  last column of the argument of the current collapse target, and $`m`$ is a marker of the
+  outermost $`\omega`$ column of that argument.
+- **Reason.** As in the 1-row recursion
+  $`\mathrm{lh}(\alpha) = \alpha + \mathrm{lh}(\rho_1) + \cdots + \mathrm{lh}(\rho_m)`$, the reach of $`N`$
+  depends only on $`W`$.
+  - An $`\Omega_1`$ followed by more terms inside an $`\omega`$ summand is a coefficient at
+    level $`\omega + 0`$. $`C1`$ fixes it, because $`1 + \nu = \nu`$ for $`\nu \ge \omega`$.
+  - The final $`\Omega_1`$ of the whole argument is a finite term of $`W`$. $`C1`$ maps it to
+    $`N`$.
+- **Checked.** With the rule off, $`\Phi(755)`$ and $`\Phi(810)`$ are certified to be at or
+  above the next sheet rows (756 and 811).
+
+**Rule 2 (a unit after a limit).**
+- **Local form.** Write the copied $`\omega`$ summands as
+  $`\Omega_\omega \beta_1 + \cdots + \Omega_\omega \beta_k`$. A $`\le_2`$-level is a successor summand
+  of this multiplier. A unit summand right after a limit summand is that limit's successor.
+- **Reason.** If $`a \lt_2 b`$, then $`a`$ is the proper supremum of an infinite $`\lt_1`$-chain
+  (Wilken 2021, §1; Carlson 2009, Lemma 5.5). A limit summand
+  $`\Omega_\omega \lambda`$ has no such chain, because the $`\Omega_1`$-collapse cuts it. So its
+  level appears at $`\lambda + 1`$.
+- **Checked.** With the rule off, $`\Phi(845)`$ and $`\Phi(863)`$ are certified to be at or
+  above the next sheet rows (846 and 864).
+
+**Rule 3 (the nesting base of a doubled level).**
+- **Local form.** A witness $`w`$ with $`\mathrm{lh}_1(w) \gt \mathrm{lh}_2(w)`$ brings in its
+  $`C1`$-nesting predecessor $`e`$, with $`e \le_1 \mathrm{lh}_1(w)`$.
+- **Reason (not proved).** The isominimal realization is the pointwise least one among the
+  closed coverings (Carlson 2009, Thm 14.10). Without $`e`$, the pair
+  $`(w, \mathrm{lh}_2(w))`$ is not forced to lie inside the reach of the nesting.
+- **Not checked.** With the rule off, the oracle decided neither row 929 nor row 944.
+
+**Nested collapses (the 10 violations of §6).** The oracle showed that the error was in the
+larger matrix: $`\Phi_{3g}(905) \le \text{sheet}(904)`$. In row 905 the last column
+$`(4,2,0)`$ is a marker of the inner $`\omega`$ column $`(3,2,1)`$, which sits under the index
+column $`(2,1,0)`$. $`\Phi_{3g}`$ collapsed it to the outer point; the sheet collapses it to the
+witness of the inner level. The fix:
+
+- (a) A $`z = 0`$ column is an index column of the **nearest** $`\omega`$ ancestor whose level
+  is at most its own $`y`$. Otherwise it is finite. So each column carries a stack of
+  $`\omega`$ ancestors.
+- (b) A marker collapses to the target of the $`\omega`$ column that owns it. Rule 1 applies
+  only to markers of the outermost $`\omega`$ column.
+- (c) Under $`C2_x`$, the last leaf marker of a wrapped $`\omega`$ column is read relative to
+  $`D`$ ($`\Omega_{\omega+1} \mapsto \Omega_1`$). It becomes a finite column of level 1, and then
+  collapses to the witness.
+- (d) The same reading on the last low child of $`W`$ (row 827). This removed the pair with
+  the same pattern.
+
+**Agreement with the sheet** (rows that are iso or sub)
+
+| sheet rows | $`\Phi_{3h}`$ | $`\Phi_{3g}`$ | case-rule version | first version |
+|---|---|---|---|---|
+| 522–754 | 221 | 221 | 221 | 221 |
+| 755–914 | **149** | 144 | 130 | 72 |
+| 915–1156 | **73** | 68 | 68 | 0 |
+| 1157–1299 | 25 | 25 | 25 | 21 |
+| 1300–1642 | 0 | 0 | 0 | 0 |
+| total | **468** | 458 | 444 | 314 |
+
+Rows gained over $`\Phi_{3g}`$: 827, 904, 905, 906, 908, 925, 988, 989, 992, 993. No row
+was lost. Of the 6 new sub rows, 4 were certified equal; 906 and 925 timed out.
+
+**Order tests**
+
+| range | "<" certified | violations | same pattern | undecided |
+|---|---|---|---|---|
+| $`[(0,0,0)(1,1,1),\ (0,0,0)(1,1,1)(2,1,0))`$ (1085 matrices) | 818 | 0 | 0 | 236 |
+| $`[(0,0,0)(1,1,1)(2,1,0),\ (0,0,0)(1,1,1)(2,1,1))`$ (305 matrices) | 145 | **0** | **0** | 148 |
+
+On the 1085 matrices $`\Phi_{3h}`$ equals $`\Phi_{3g}`$. Pairs with a pattern of more than 30
+nodes were skipped (30 and 11 pairs).
+
+**Status of causes 1–5**
+
+1. and 2. Gone (the stack of $`\omega`$ ancestors, and "collapse to the owner's target").
+3. Row 827 fits now. Rows 828 and 831–833 remain.
+4. Still open: rows 764, 819 and 854.
+5. Unchanged: the rows above 915, the $`(2,2,1)`$ family, and the sup rows.
+
+## 8. Next
+
+- Rule 3: a proof from Carlson's definitions, or an oracle check.
+- Cause 3 (rows 828, 831–833) and cause 4 (rows 764, 819, 854).
 - The rows above 915: level bookkeeping, and the $`(2,2,1)`$ family.
+- The 236 and 148 undecided pairs.
 
-## 8. Programs
+## 9. Programs
 
 - `por/tss.py`: 3-row matrices and terms, and the lexicographic order.
+- `por/phi3h.py`: the version $`\Phi_{3h}`$ of §7. `python3 por/phi3h.py "(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)"` prints the same table as `phi3g.py`.
 - `por/phi3g.py`: the two-level version $`\Phi_{3g}`$ (§6). `python3 por/phi3g.py "(0,0,0)(1,1,1)(2,1,0)"` prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors.
 - `por/phi3.py`: the case-rule version $`\Phi_3`$. `python3 por/phi3.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"` prints the
   pattern and the matrix of each node; `--flags=z,dbl` selects the first version.
