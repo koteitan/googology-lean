@@ -190,21 +190,29 @@ x \le_1 z \iff x = z \lor (x \text{ は項が 1 つ} \land x \le z \le \mathrm{l
 
 ## 8. 証明の計画（途中）
 
-目標は強い形 $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$ である。節点 $`x`$ の値 $`1 + \mathrm{val}(\mathrm{pairTerm}(x))`$ を $`o(x)`$ と書く。
+目標は強い形 $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$ である。節点 $`x`$ の値 $`1 + \mathrm{val}(\mathrm{pairTerm}(x))`$ を $`o(x)`$ と書く。項が 1 つの節点 $`N`$ が $`\varepsilon`$ 的かどうかは §3.1 のとおりである。
 
-1. **足し算。** $`M`$ の根の項は $`o(M)`$ の加法標準形を与える。だから §2 の和は、$`o(V)`$ の上で順序数の足し算である。紙の上では証明済み。
-2. **届く先の補題。** 項が 1 つの節点 $`N`$ について、$`o(\mathrm{lh}(N))`$ は、$`R_1^+`$ で $`o(N) \le_1 \beta`$ となる最大の $`\beta`$ である。これが言えれば、$`o`$ は $`\Phi(M)`$ を $`R_1^+`$ の閉じた部分構造に写し、$`\iota(\Phi(M)) \le o(M)`$ が出る。
-   - **未証明。** Wilken による、$`\vartheta`$ 関数を使った $`\le_1`$ の記述から出るはずである。$`\mathrm{Coll}_A`$ は、彼の潰し（$`\vartheta_{k+1} \mapsto \vartheta_k`$）と式ごとに対応する。
-   - **数値の確認。** 74,595 個の根の項で、$`N \le_1 \mathrm{lh}(N) + 1`$ を強制すると、$`N`$ は必ず上に動いた。つまり $`\mathrm{lh}(N)`$ が最大の届く先である。
-3. **最小性。** $`o(V)`$ が、$`o(M)`$ を含む isominimal な集合を含めば、$`\iota(\Phi(M)) = o(M)`$ である。ここで、どのパターンも各点で最小の isominimal なコピーを持つ、という Carlson の定理を使う。
-   - **未証明。** Carlson と Wilken は、$`\{0, \alpha\}`$ を加法の分解、届く先、Wilken の bar 操作で閉じると isominimal な集合になることを示した。足りないのは、$`V`$ がこれらの値を含むことである。anchor はいつも bar の値とは限らない。$`\varepsilon_{\varepsilon_0} = (0,0)(1,1)(2,0)(3,1)`$ には anchor が無いが、bar の値 $`\varepsilon_0`$ は $`\mathrm{lh}`$ を通って $`V`$ に入る。
-   - **数値の確認。** $`\Phi(M)`$ の点を各節点 $`x`$ に動かし、その値を $`\iota(\Phi(x))`$ と比べた。1,244,496 回で、食い違いは 0。
-4. **標準形。** 行列が標準形であることと、根の項が標準形で増えない列であることは同じである。また、$`\mathrm{anchor}`$ と $`\mathrm{lh}`$ は標準形の行列を作る。どちらも未証明で、5,292 個の行列と 125,173 個の節点で例外は無かった。
+**文献。**
+- [C01] Carlson, "Elementary patterns of resemblance", APAL 108 (2001)。
+- [W07a] Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007)。
+- [W07b] Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007)。
 
-2 と 3 には、次の論文が要る。
-- Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007)。
-- Carlson and Wilken, "Normal forms for elementary patterns", JSL 77 (2012)。
-- Carlson, "Elementary patterns of resemblance", APAL 108 (2001)。
+[C01] と [W07b] から使う結果は、順序数の上の $`\le_1`$ についての命題で、表記系は要らない。[C01] Thm 5.9（どのパターンも各点で最小の isominimal なコピーを持つ）、[W07b] Lemma 2.1、Thm 2.2（$`\alpha \le_1 \alpha + \xi`$ となる条件）、Lemma 3.3 と 3.4（$`\alpha`$ の届く先が $`\le_1`$ で最小の段からどう作られるか）である。
+
+1. **足し算。** $`M`$ の根の項は $`o(M)`$ の加法標準形を与える。だから §2 の和は、$`o(V)`$ の上で順序数の足し算である。証明済み。
+2. **畳み込み。** §3.3 の畳み込み $`\oplus`$ は、[W07b] の届く先の計算そのものである。届く先の中の一歩は Lemma 3.3(c)、跳びは Lemma 3.4(b)、結果は Lemma 3.4(a) である。証明済み。
+3. **届く先の補題**（$`o(\mathrm{lh}(N))`$ は $`o(N) \le_1 \beta`$ となる最大の $`\beta`$）。
+   - $`\varepsilon`$ 的でない $`N`$：読み方の補題 R から証明した。R は、$`N \mapsto \log(N)`$（$`\varepsilon`$ 的な $`N`$ では $`N \mapsto (N)`$）が順序を保ち、$`o(N)`$ の指数を与える、という命題である。R は未証明で、74,595 回の数値の確認を通った。
+   - $`\varepsilon`$ 的な $`N`$：未証明。畳み込みの入力 $`Y_1, \ldots, Y_n`$ についての 2 つの命題から出る。$`o(\mathrm{lh}(N)) = o(N) + o(Y_1) + \cdots + o(Y_n)`$ が Wilken の $`\lambda`$ と一致すること、跳びでの入力が $`\le_1`$ で最小であること、である。どちらも、行列から Wilken の $`\vartheta`$ の項への翻訳が要る。$`\varepsilon_0, \varepsilon_1, \varepsilon_\omega, \varphi(2,0), \varepsilon_{\varepsilon_0}, \Gamma_0`$ と Bachmann–Howard 順序数で手で確かめ、40,258 回の跳びで数値で確かめた。
+4. **最小性。** $`M`$ についての帰納法で、$`M`$ より下の節点は最小の実現で値 $`o`$ をとる（[C01] Thm 5.9）。だから、項が 1 つの $`M`$ だけが残る。
+   - $`M = 1`$ と $`\varepsilon`$ 的でない $`M`$：証明済み（R を使う）。
+   - $`\varepsilon`$ 的な $`M`$：未証明。[W07b] の Claim 5.5 と 5.6 に当たる。$`\varepsilon_0, \varepsilon_1, \varepsilon_{\varepsilon_0}`$ で手で確かめ、1,244,496 回の数値の確認を通った。
+5. **標準形と停止。** 未証明で、数値の確認では例外が無い。
+   - 行列が標準形であることと、根の項が標準形で増えない列であることは同じである（標準形の行列の根の項が標準形であることは pss-proof にある）。
+   - $`\mathrm{anchor}`$ と $`\mathrm{lh}`$ は標準形の行列を作る。
+   - $`\mathrm{lh}`$ の再帰は止まる。すぐに思いつく測度ではうまくいかない。$`y \ge 2`$ の部分木の中の $`y = 1`$ の列を $`\mathrm{Coll}_A`$ すると、$`A`$ 全体がまた入るからである。
+
+**定義についての注意。** $`\log`$ の和は、小さい項を捨てる §2 の和でなければならない。例えば $`M = (0,0)(1,1)(1,1)(1,0)(2,1)(2,1)(2,0)(3,0)`$ では、項 $`\varepsilon_1`$ が捨てられる。anchor は Wilken の bar 操作とは違う。$`\varepsilon_{\varepsilon_0} = (0,0)(1,1)(2,0)(3,1)`$ には anchor が無いが、$`\varepsilon_0`$ は $`\mathrm{lh}`$ を通って $`V`$ に入る。
 
 ## 9. これから
 

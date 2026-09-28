@@ -244,35 +244,52 @@ and the lexicographic order was compared with poral's order.
 ## 8. A plan for the proof (not finished)
 
 The aim is the stronger form $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$. Write
-$`o(x)`$ for the value $`1 + \mathrm{val}(\mathrm{pairTerm}(x))`$ of a node $`x`$.
+$`o(x)`$ for the value $`1 + \mathrm{val}(\mathrm{pairTerm}(x))`$ of a node $`x`$. A one-term node
+$`N`$ is non-epsilon or epsilon as in §3.1.
+
+**Sources.**
+- [C01] Carlson, "Elementary patterns of resemblance", APAL 108 (2001).
+- [W07a] Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007).
+- [W07b] Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007).
+
+The results used from [C01] and [W07b] are statements about $`\le_1`$ on ordinals and need no
+notation system: [C01] Thm 5.9 (every pattern has a pointwise least isominimal copy),
+[W07b] Lemma 2.1, Thm 2.2 (when $`\alpha \le_1 \alpha + \xi`$), and Lemmas 3.3 and 3.4 (how the
+reach of $`\alpha`$ is built from $`\le_1`$-minimal steps).
 
 1. **Addition.** The root terms of $`M`$ give the additive normal form of $`o(M)`$, so the sum
-   of §2 is ordinal addition on $`o(V)`$. This is proved on paper.
-2. **Reach lemma.** For a one-term node $`N`$, $`o(\mathrm{lh}(N))`$ is the largest $`\beta`$ with
-   $`o(N) \le_1 \beta`$ in $`R_1^+`$. With this, $`o`$ maps $`\Phi(M)`$ onto a closed substructure
-   of $`R_1^+`$, and so $`\iota(\Phi(M)) \le o(M)`$.
-   - **Open.** It should follow from Wilken's description of $`\le_1`$ by $`\vartheta`$-functions.
-     $`\mathrm{Coll}_A`$ matches his collapse ($`\vartheta_{k+1} \mapsto \vartheta_k`$) clause by clause.
-   - **Numerical check.** On 74,595 root terms, forcing $`N \le_1 \mathrm{lh}(N) + 1`$ always moved
-     $`N`$ strictly higher, so $`\mathrm{lh}(N)`$ is the largest reach.
-3. **Isominimality.** If $`o(V)`$ contains an isominimal set that contains $`o(M)`$, then
-   $`\iota(\Phi(M)) = o(M)`$. This step uses Carlson's theorem that every pattern has a
-   pointwise least isominimal copy.
-   - **Open.** Carlson and Wilken showed that closing $`\{0, \alpha\}`$ under additive
-     decomposition, the reach and Wilken's bar operator gives an isominimal set. What is
-     missing is that $`V`$ contains these values. The anchor is not always the bar value: for
-     $`\varepsilon_{\varepsilon_0} = (0,0)(1,1)(2,0)(3,1)`$ there is no anchor, but the bar value
-     $`\varepsilon_0`$ still enters $`V`$ through $`\mathrm{lh}`$.
-   - **Numerical check.** The point of $`\Phi(M)`$ was moved to each node $`x`$, and the value
-     was compared with $`\iota(\Phi(x))`$: 1,244,496 checks, 0 mismatches.
-4. **Standard forms.** A matrix is standard if and only if its root terms are standard and
-   non-increasing, and $`\mathrm{anchor}`$ and $`\mathrm{lh}`$ give standard matrices. Both are
-   open; no exception was found on 5,292 matrices and 125,173 nodes.
+   of §2 is ordinal addition on $`o(V)`$. Proved.
+2. **The fold.** The fold $`\oplus`$ of §3.3 is the computation of the reach in [W07b]: a step
+   inside the reach is Lemma 3.3(c), a jump is Lemma 3.4(b), and the result is Lemma 3.4(a).
+   Proved.
+3. **Reach lemma** ($`o(\mathrm{lh}(N))`$ is the largest $`\beta`$ with $`o(N) \le_1 \beta`$).
+   - Non-epsilon $`N`$: proved from a reading lemma R. Lemma R says that $`N \mapsto \log(N)`$
+     (and $`N \mapsto (N)`$ for epsilon $`N`$) is order-preserving and gives the exponent of
+     $`o(N)`$. R is open; it passed 74,595 numerical checks.
+   - Epsilon $`N`$: open. It follows from two statements about the fold inputs
+     $`Y_1, \ldots, Y_n`$: that $`o(\mathrm{lh}(N)) = o(N) + o(Y_1) + \cdots + o(Y_n)`$ matches
+     Wilken's $`\lambda`$, and that each input at a jump is $`\le_1`$-minimal. Both need a
+     translation from matrices to Wilken's $`\vartheta`$-terms. Checked by hand on
+     $`\varepsilon_0, \varepsilon_1, \varepsilon_\omega, \varphi(2,0), \varepsilon_{\varepsilon_0}, \Gamma_0`$
+     and the Bachmann–Howard ordinal, and numerically on 40,258 jumps.
+4. **Isominimality.** By induction on $`M`$, every node below $`M`$ gets its value $`o`$ in the
+   least realization ([C01] Thm 5.9), so only a one-term $`M`$ is left.
+   - $`M = 1`$ and non-epsilon $`M`$: proved (with R).
+   - Epsilon $`M`$: open. It corresponds to Claims 5.5 and 5.6 of [W07b]. Checked by hand on
+     $`\varepsilon_0, \varepsilon_1, \varepsilon_{\varepsilon_0}`$, and by 1,244,496 numerical checks.
+5. **Standard forms and termination.** Open, with no exception in the numerical tests:
+   - a matrix is standard if and only if its root terms are standard and non-increasing
+     (that root terms of a standard matrix are standard is in pss-proof);
+   - $`\mathrm{anchor}`$ and $`\mathrm{lh}`$ give standard matrices;
+   - the recursion of $`\mathrm{lh}`$ terminates. The obvious measure does not work, because
+     $`\mathrm{Coll}_A`$ of a $`y = 1`$ column inside a $`y \ge 2`$ subtree inserts all of $`A`$
+     again.
 
-Steps 2 and 3 need these papers:
-- Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007).
-- Carlson and Wilken, "Normal forms for elementary patterns", JSL 77 (2012).
-- Carlson, "Elementary patterns of resemblance", APAL 108 (2001).
+**Notes on the definition.** The sum in $`\log`$ must be the sum of §2, which drops smaller
+terms. For example, for $`M = (0,0)(1,1)(1,1)(1,0)(2,1)(2,1)(2,0)(3,0)`$ the term
+$`\varepsilon_1`$ is dropped. The anchor is not Wilken's bar operator: for
+$`\varepsilon_{\varepsilon_0} = (0,0)(1,1)(2,0)(3,1)`$ there is no anchor, but $`\varepsilon_0`$
+still enters $`V`$ through $`\mathrm{lh}`$.
 
 ## 9. Next
 
