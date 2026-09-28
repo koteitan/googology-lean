@@ -27,7 +27,10 @@ The remaining work, arranged by the cells of the README tables.
       - prove `CalibRd200` (the rule map of Fix `strip` equals `trioE2` up to reading depth 200; proved up to 100, false at 201; `CalibSt` without a bound is false because of the fuel) ([BMS/TrioFixStripCalibNo.lean](Googology/Trans/BMS/TrioFixStripCalibNo.lean))
       - prove that the fuel `max 200 (depth of α)` of `TrioFixFuel` is enough for every `α` (more fuel never changes the matrix; checked on the sheet labels and some families)
 - Pair sequences and additive patterns of resemblance ([Trans/PSS/POR.md](Googology/Trans/PSS/POR.md))
-  - 🤖 prove that the map Φ preserves the order, and that its image is the whole core of R₁⁺
+  - prove that the map Φ preserves the order, and that its image is the whole core of R₁⁺ (plan in §8 of [Trans/PSS/POR.md](Googology/Trans/PSS/POR.md): ι(Φ(M)) = 1 + val(pairTerm M))
+    - the reach lemma: o(lh N) is the largest ≤₁-reach of o(N) (needs Wilken 2007, APAL 145)
+    - isominimality: V contains the bar values (needs Carlson–Wilken 2012, JSL 77)
+    - standard forms: root terms non-increasing; anchor and lh give standard matrices
   - extend Φ to trio sequences and R₂⁺ ([Trans/BMS/POR.md](Googology/Trans/BMS/POR.md); Φ₃i has 0 order violations below (0,0,0)(1,1,1)(2,1,1))
     - below (0,0,0)(1,1,1)(2,1,1): decide the 310 undecided limit-step pairs (prove that ι∘Φ₃ is monotone inside a term), settle rows 844, 907, 1009
     - rows above 915: level bookkeeping, the (2,2,1) family, the missing nodes

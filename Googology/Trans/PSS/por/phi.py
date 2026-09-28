@@ -116,10 +116,11 @@ def closure(seeds, cap=400):
     return nodes
 
 
-def build_pattern(t, cap=400):
-    """Phi of the term t: (nodes in increasing order, reach index of each node,
-    additive decomposition of each node, index of the point)."""
-    pt = (t,)
+def build_pattern(o, cap=400):
+    """Phi of the matrix whose root terms are the tuple o: (nodes in increasing order, reach index
+    of each node, additive decomposition of each node, index of the point).  The point is o itself;
+    a matrix with several roots is a sum of root terms."""
+    pt = tuple(o)
     nodes = sorted(closure([pt], cap=cap), key=lambda o: mat(o))
     idx = {o: i for i, o in enumerate(nodes)}
     reach = []
@@ -162,10 +163,7 @@ def pretty(P):
 
 if __name__ == '__main__':
     for s in sys.argv[1:]:
-        t = from_mat(parse(s))
-        if len(t) != 1:
-            sys.exit('give a matrix with a single root (one row-0 tree): ' + s)
-        P = build_pattern(t[0])
+        P = build_pattern(from_mat(parse(s)))
         print(s, '->', pretty(P))
         for i, o in enumerate(P[0]):
             print('   ', i, show(mat(o)), 'reach', P[1][i])

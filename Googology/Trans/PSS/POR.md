@@ -2,7 +2,7 @@
 
 # A map $`\Phi`$ from pair sequences to additive patterns ($`R_1^+`$)
 
-**Status: a conjecture with numerical evidence.** Nothing here is proved or formalized yet.
+**Status: a conjecture with numerical evidence, and a plan for the proof (§8).** The proof is not finished, and nothing is formalized yet.
 
 This page defines a map from a standard pair sequence $`M`$ to an additive pattern of
 resemblance of order 1, $`\Phi(M)`$, in the sense of Carlson. $`\Phi(M)`$ is built by
@@ -16,6 +16,18 @@ M \lt_{\mathrm{lex}} M' \iff \iota(\Phi(M)) \lt \iota(\Phi(M'))
 
 Here $`\iota(P)`$ is the value of the point of the pattern $`P`$ in its isominimal
 realization.
+
+A stronger form is expected:
+
+```math
+\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))
+```
+
+Here `pairTerm` is the map of `Rank.lean` from pair sequences to Buchholz's $`\psi`$-terms.
+The $`1 +`$ is needed because `pairTerm` sends $`(0,0)`$ to 0, while
+$`\iota(\Phi((0,0))) = 1`$; for infinite values $`1 + \alpha = \alpha`$. `pairTerm` is an order
+isomorphism onto the terms below $`\psi_0(\Omega_\omega)`$, so this form gives the conjecture,
+and also that the points of $`\Phi`$ take every nonzero value in the core.
 
 ## 1. Background
 
@@ -125,23 +137,24 @@ s & (y = 0) \cr
 
 ### 3.5 The pattern $`\Phi(M)`$
 
-Let $`M`$ be a matrix with a single root, and let $`T`$ be its root term.
+Let $`M`$ be a standard matrix with root terms $`T_1, \ldots, T_m`$, and put
+$`\hat{M} = (T_1, \ldots, T_m)`$. A matrix with several roots is the sum of its root terms.
 
-- The set of nodes $`V`$ is the least set that contains $`\{(),\ (1),\ (T)\}`$ and is
+- The set of nodes $`V`$ is the least set that contains $`\{(),\ (1),\ \hat{M}\}`$ and is
   closed under the following operations.
   - Prefix sums: $`(a_1, \ldots, a_m) \in V`$ gives $`(a_1, \ldots, a_j) \in V`$.
   - Root segments: $`(a_1, \ldots, a_m) \in V`$ gives $`(a_i) \in V`$.
   - For a node $`(N) \in V`$ with one term: $`(\mathrm{anchor}(N)) \in V`$ and
     $`\mathrm{lh}(N) \in V`$.
-- Nodes are ordered lexicographically. Addition is given by the decomposition of a node
-  into its terms.
+- Nodes are ordered lexicographically. Addition is the relation
+  $`\{(x, y, z) \in V^3 : x + y = z\}`$, with the sum of §2.
 - $`\le_1`$ is defined by the formula below.
 
 ```math
-x \le_1 z \iff x \text{ has one term} \land x \le z \le \mathrm{lh}(x)
+x \le_1 z \iff x = z \lor (x \text{ has one term} \land x \le z \le \mathrm{lh}(x))
 ```
 
-- The point is $`(T)`$.
+- The point is $`\hat{M}`$.
 
 ## 4. Examples
 
@@ -228,11 +241,41 @@ and the lexicographic order was compared with poral's order.
 | anchor | `anchor` |
 | $`\Phi(M)`$ | `closure`, `build_pattern` |
 
-## 8. Next
+## 8. A plan for the proof (not finished)
 
-- A proof that $`\Phi`$ preserves the order.
-- A proof that the image of $`\Phi`$ is the whole core (no gaps).
-- The extension to 3 rows (trio sequences and $`R_2^+`$); a record of the work so far is [../BMS/POR.md](../BMS/POR.md). An experiment found a rule that
-  works from $`(0,0,0)(1,1,1)`$ up to, but not including, $`(0,0,0)(1,1,1)(2,1,0)`$. Beyond
-  that a second collapse ($`\Omega_\omega \mapsto c`$, $`\Omega_{\omega+\nu} \mapsto \Omega_\nu`$)
-  is needed.
+The aim is the stronger form $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$. Write
+$`o(x)`$ for the value $`1 + \mathrm{val}(\mathrm{pairTerm}(x))`$ of a node $`x`$.
+
+1. **Addition.** The root terms of $`M`$ give the additive normal form of $`o(M)`$, so the sum
+   of §2 is ordinal addition on $`o(V)`$. This is proved on paper.
+2. **Reach lemma.** For a one-term node $`N`$, $`o(\mathrm{lh}(N))`$ is the largest $`\beta`$ with
+   $`o(N) \le_1 \beta`$ in $`R_1^+`$. With this, $`o`$ maps $`\Phi(M)`$ onto a closed substructure
+   of $`R_1^+`$, and so $`\iota(\Phi(M)) \le o(M)`$.
+   - **Open.** It should follow from Wilken's description of $`\le_1`$ by $`\vartheta`$-functions.
+     $`\mathrm{Coll}_A`$ matches his collapse ($`\vartheta_{k+1} \mapsto \vartheta_k`$) clause by clause.
+   - **Numerical check.** On 74,595 root terms, forcing $`N \le_1 \mathrm{lh}(N) + 1`$ always moved
+     $`N`$ strictly higher, so $`\mathrm{lh}(N)`$ is the largest reach.
+3. **Isominimality.** If $`o(V)`$ contains an isominimal set that contains $`o(M)`$, then
+   $`\iota(\Phi(M)) = o(M)`$. This step uses Carlson's theorem that every pattern has a
+   pointwise least isominimal copy.
+   - **Open.** Carlson and Wilken showed that closing $`\{0, \alpha\}`$ under additive
+     decomposition, the reach and Wilken's bar operator gives an isominimal set. What is
+     missing is that $`V`$ contains these values. The anchor is not always the bar value: for
+     $`\varepsilon_{\varepsilon_0} = (0,0)(1,1)(2,0)(3,1)`$ there is no anchor, but the bar value
+     $`\varepsilon_0`$ still enters $`V`$ through $`\mathrm{lh}`$.
+   - **Numerical check.** The point of $`\Phi(M)`$ was moved to each node $`x`$, and the value
+     was compared with $`\iota(\Phi(x))`$: 1,244,496 checks, 0 mismatches.
+4. **Standard forms.** A matrix is standard if and only if its root terms are standard and
+   non-increasing, and $`\mathrm{anchor}`$ and $`\mathrm{lh}`$ give standard matrices. Both are
+   open; no exception was found on 5,292 matrices and 125,173 nodes.
+
+Steps 2 and 3 need these papers:
+- Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007).
+- Carlson and Wilken, "Normal forms for elementary patterns", JSL 77 (2012).
+- Carlson, "Elementary patterns of resemblance", APAL 108 (2001).
+
+## 9. Next
+
+- Steps 2–4 of §8.
+- The extension to 3 rows (trio sequences and $`R_2^+`$); the record is [../BMS/POR.md](../BMS/POR.md).
+  The current rule $`\Phi_{3i}`$ shows no order violation below $`(0,0,0)(1,1,1)(2,1,1)`$.

@@ -27,7 +27,10 @@ README の表のセルごとに、残りの作業を並べる。
       - `CalibRd200` を証明する（修正 `strip` の規則の写像は、読みの深さ 200 まで `trioE2` と一致する。100 までは証明済み、201 では偽。上限なしの `CalibSt` は燃料のため偽）（[BMS/TrioFixStripCalibNo.lean](Googology/Trans/BMS/TrioFixStripCalibNo.lean)）
       - `TrioFixFuel` の燃料 `max 200 (a の深さ)` が、どの `a` でも足りることを証明する（燃料を増やしても行列が変わらない。シートのラベルといくつかの族で確認済み）
 - ペア数列と加法的パターン（[Trans/PSS/POR-ja.md](Googology/Trans/PSS/POR-ja.md)）
-  - 🤖 写像 Φ が順序を保つこと、像が R₁⁺ の核全体であることを証明する
+  - 写像 Φ が順序を保つこと、像が R₁⁺ の核全体であることを証明する（計画は [Trans/PSS/POR-ja.md](Googology/Trans/PSS/POR-ja.md) の §8：ι(Φ(M)) = 1 + val(pairTerm M)）
+    - 届く先の補題：o(lh N) が o(N) の ≤₁ の最大の届く先（Wilken 2007, APAL 145 が要る）
+    - 最小性：V が bar の値を含む（Carlson–Wilken 2012, JSL 77 が要る）
+    - 標準形：根の項が増えない、anchor と lh が標準形を作る
   - Φ をトリオ数列と R₂⁺ へ広げる（[Trans/BMS/POR-ja.md](Googology/Trans/BMS/POR-ja.md)。Φ₃i は (0,0,0)(1,1,1)(2,1,1) の手前まで順序の食い違いが 0）
     - (0,0,0)(1,1,1)(2,1,1) の手前まで：未決の「極限への一歩」の 310 組を決める（項の中で ι∘Φ₃ が単調であることを証明する）、行 844、907、1009 を決着させる
     - 行 915 より上：段の数え方、(2,2,1) の族、足りない節点
