@@ -5,7 +5,7 @@
 **Status: a partial rule and a record of experiments.** Nothing here is proved or
 formalized.
 
-This is a record of an attempt to extend the [2-row map $`\Phi`$](../PSS/POR.md) to a map
+This is a record of an attempt to extend the 2-row map $`\Phi`$ ([PSS/POR.md](../PSS/POR.md)) to a map
 $`\Phi_3`$ from 3-row matrices (trio sequences) to Carlson's additive patterns of order 2,
 $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$.
 
