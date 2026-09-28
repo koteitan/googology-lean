@@ -232,7 +232,7 @@ and the lexicographic order was compared with poral's order.
 
 - A proof that $`\Phi`$ preserves the order.
 - A proof that the image of $`\Phi`$ is the whole core (no gaps).
-- The extension to 3 rows (trio sequences and $`R_2^+`$). An experiment found a rule that
+- The extension to 3 rows (trio sequences and $`R_2^+`$); a record of the work so far is [../BMS/POR.md](../BMS/POR.md). An experiment found a rule that
   works from $`(0,0,0)(1,1,1)`$ up to, but not including, $`(0,0,0)(1,1,1)(2,1,0)`$. Beyond
   that a second collapse ($`\Omega_\omega \mapsto c`$, $`\Omega_{\omega+\nu} \mapsto \Omega_\nu`$)
   is needed.
