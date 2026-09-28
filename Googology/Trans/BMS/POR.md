@@ -25,6 +25,9 @@ $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$.
   rules with a reason from the definition of $`\le_2`$, and the collapse of nested
   $`\omega`$ columns was fixed. Agreement rose to 468 rows, and both order tests now show 0
   violations.
+- **One reflection rule** (§8). Carlson's downward 2-reflection (Def 9.4) gives one rule
+  that replaces the third rule and explains more sheet rows. Agreement rose to 503 rows,
+  still with 0 violations.
 
 ## 2. The shape of the rule
 
@@ -314,16 +317,88 @@ nodes were skipped (30 and 11 pairs).
 4. Still open: rows 764, 819 and 854.
 5. Unchanged: the rows above 915, the $`(2,2,1)`$ family, and the sup rows.
 
-## 8. Next
+## 8. One reflection rule and finite columns ($`\Phi_{3i}`$)
 
-- Rule 3: a proof from Carlson's definitions, or an oracle check.
-- Cause 3 (rows 828, 831–833) and cause 4 (rows 764, 819, 854).
-- The rows above 915: level bookkeeping, and the $`(2,2,1)`$ family.
-- The 236 and 148 undecided pairs.
+$`\Phi_{3i}`$ (`por/phi3i.py`) adds two rules to $`\Phi_{3h}`$. Agreement rose to 503 rows, and
+both order tests still show 0 violations.
 
-## 9. Programs
+**Rule `d94`: the copy from downward 2-reflection.** Carlson 2009, Def 9.4 (downward
+2-reflection), applied to $`X = \{x\}`$ and a $`\le_2`$-successor $`g`$ of $`x`$, gives a copy
+$`\tilde{x} \lt x`$ such that, for $`y \ge x`$,
+$`\tilde{x} \le_1 y \iff (x \le_1 g \text{ and } x \le_1 y)`$.
+- **The rule.** For every $`\le_2`$-able node $`x`$ with $`\mathrm{lh}_1(x) \gt \mathrm{lh}_2(x)`$, add
+  $`\tilde{x}`$: the least $`\le_1`$-nesting base that is not a dead end. Skip this when an
+  earlier node already has $`\le_1`$-reach $`\mathrm{lh}_1(x)`$.
+- **It replaces rule 3 of §7.** At a doubled level $`\mathrm{lh}_1(x) = g + g`$, so
+  $`\tilde{x} \le_1 g + g`$. This is the sheet's extra node $`e`$. With `d94` on, the separate
+  rule 3 changes no row.
+- **It also explains cause 4** (rows 764, 819, 854). The sheet's extra node there is the
+  same copy. These rows now fit exactly.
+- **Checked.** A generating rule is valid (Carlson 2009, Thm 14.11), so the copy does not
+  change the ordinal. The oracle confirmed this: with and without the node, the patterns
+  have the same $`\iota`$ on rows 929, 764, 819, 854 and 833 (certificates of at most one
+  step).
+
+**Rule `infin`: $`\omega`$ columns below a finite column.**
+- **The rule.** Below a finite column (a $`y = 1`$, $`z = 0`$ column of $`W`$, i.e. an
+  $`\Omega_1`$-term), an $`\omega`$ column owns no index columns. Its markers are finite
+  coefficients, and $`C1`$ lowers them by one level ($`\Omega_{k+1} \mapsto \Omega_k`$).
+- **Exception.** A limit summand followed directly by a unit summand keeps its marker as an
+  index (rule 2 of §7). Row 858 needs this.
+- **Reason.** The level $`\omega + j`$ exists only relative to an $`\omega`$ column that is an
+  $`\omega`$-level of the argument. Inside $`\psi_1(\cdots)`$ the column's $`y`$ is just a
+  finite level.
+- **Result.** Rows 828, 831 and 832 (cause 3) now fit.
+
+**Agreement with the sheet** (rows that are iso or sub)
+
+| sheet rows | $`\Phi_{3i}`$ | $`\Phi_{3h}`$ | $`\Phi_{3g}`$ |
+|---|---|---|---|
+| 522–754 | 221 | 221 | 221 |
+| 755–914 | **155** | 149 | 144 |
+| 915–1156 | **102** | 73 | 68 |
+| 1157–1299 | 25 | 25 | 25 |
+| 1300–1642 | 0 | 0 | 0 |
+| total | **503** | 468 | 458 |
+
+36 rows were gained and one (1009) was lost. Of the 34 new sub rows, 31 were certified
+equal; 945, 962 and 977 timed out.
+
+**Rows in 755–914 that still do not fit**
+- 833: not the same shape, but certified to have the same ordinal as the sheet.
+- 844: a row whose point the fix table corrects. Certified:
+  $`\text{sheet}(843) \lt \text{fix} \lt \Phi_{3i}(844) \lt \text{sheet}(845)`$. So both are in the
+  right place, but they differ, and the fix may be incomplete.
+- 907 (and 1009): $`\text{sheet} \le \Phi_{3i}`$ is certified; the other direction was not found.
+
+**Order tests**
+
+| range | "<" certified | violations | same pattern | undecided | skipped (>30 nodes) |
+|---|---|---|---|---|---|
+| $`[(0,0,0)(1,1,1),\ (0,0,0)(1,1,1)(2,1,0))`$ (1085 matrices) | 874 | 0 | 0 | 178 | 32 |
+| $`[(0,0,0)(1,1,1)(2,1,0),\ (0,0,0)(1,1,1)(2,1,1))`$ (305 matrices) | 157 | 0 | 0 | 132 | 15 |
+
+- A longer oracle budget certified 74 more pairs.
+- For $`A = P + a + \cdots`$ and $`B = P + b + \cdots`$ in Cantor normal form, $`A \lt B`$ iff
+  $`a \lt b`$. When both $`a`$ and $`b`$ have $`z = 0`$, the $`R_1^+`$ oracle decides the pair,
+  because $`R_2^+`$ and $`R_1^+`$ agree below the least $`\le_2`$-pair. This decided 3 more
+  pairs.
+- Almost all of the 310 undecided pairs are steps to a limit: the smaller matrix is a long
+  member of the fundamental sequence of the larger one. For example
+  $`(0,0,0)(1,1,1)(2,1,0)(3,2,0)(4,3,0)(5,4,0) \lt (0,0,0)(1,1,1)(2,1,0)(3,2,1)`$.
+  Deciding them needs a proof that $`\iota \circ \Phi_3`$ is monotone inside a term.
+
+## 9. Next
+
+- The 310 undecided pairs: prove that $`\iota \circ \Phi_3`$ is monotone inside a term.
+- Row 844 (the fix table or $`\Phi_{3i}`$), rows 907 and 1009.
+- The rows above 915: level bookkeeping, the $`(2,2,1)`$ family, and the rows where the
+  sheet has nodes that $`\Phi_{3i}`$ lacks.
+
+## 10. Programs
 
 - `por/tss.py`: 3-row matrices and terms, and the lexicographic order.
+- `por/phi3i.py`: the version $`\Phi_{3i}`$ of §8, the current one. `python3 por/phi3i.py "(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)"` prints the same table as `phi3g.py`.
 - `por/phi3h.py`: the version $`\Phi_{3h}`$ of §7. `python3 por/phi3h.py "(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)"` prints the same table as `phi3g.py`.
 - `por/phi3g.py`: the two-level version $`\Phi_{3g}`$ (§6). `python3 por/phi3g.py "(0,0,0)(1,1,1)(2,1,0)"` prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors.
 - `por/phi3.py`: the case-rule version $`\Phi_3`$. `python3 por/phi3.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"` prints the
