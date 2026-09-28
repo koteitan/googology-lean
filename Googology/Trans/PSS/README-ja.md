@@ -16,6 +16,10 @@ Lake の依存であり、定理を使うだけで写してはいない。
 | `Terms.lean` | pss-proof の Buchholz 項（添字は `ℕ ∪ {w}`）は、拡張ブーフホルツ項へ単射で順序を保って写る（`toTerm_injective`、`lessBT_iff_lt`）。標準であることと、像が標準であることは同値（`OT_toTerm_iff`）。像は `p0(W_w)` 未満の標準形全部（`toTerm_bijOn_TransRange`） |
 | `Rank.lean` | **ペア数列の階数は、その項の `1 + val` である**（`rank_pairL_eq`）。空列は 0。値はちょうど `p0(W_w)` 未満の順序数全部（`range_pairOrd`）。写像は単射で、辞書式順序を保つ（`pairOrd_injective`、`ltPS_iff_pairOrd_lt`）。階数は下にある標準ペア数列の順序型である（`rank_eq_typein`） |
 
+## 加法的パターンへの写像（予想）
+
+[POR-ja.md](POR-ja.md) は、標準形のペア数列から Carlson の加法的パターン $`R_1^+`$ への写像 $`\Phi`$ を、行列の木の組み替えで定める。辞書式順序を保つという予想と、その数値の証拠（隣り合う組 144,773、ランダムな組 7,471,992 で食い違い 0）を載せる。Lean ではなく、Python のプログラム `por/phi.py`、`por/pss.py` で書いてある。
+
 ## `1 +` が付く理由
 
 このライブラリのペア数列系は、pss-proof より一歩先まで展開する。pss-proof は

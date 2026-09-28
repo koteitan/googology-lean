@@ -17,6 +17,10 @@ repository is a Lake dependency; its theorems are used, not copied.
 | `Terms.lean` | pss-proof's Buchholz terms, with subscripts in `ℕ ∪ {ω}`, map injectively and order-preservingly into extended Buchholz terms (`toTerm_injective`, `lessBT_iff_lt`), standard exactly when their image is (`OT_toTerm_iff`), onto the standard forms below `ψ_0(Ω_ω)` (`toTerm_bijOn_TransRange`) |
 | `Rank.lean` | **the rank of a pair sequence is `1 + val` of its term** (`rank_pairL_eq`), 0 for the empty sequence; the values are exactly the ordinals below `ψ_0(Ω_ω)` (`range_pairOrd`); the map is injective and order-preserving for the lexicographic order (`pairOrd_injective`, `ltPS_iff_pairOrd_lt`); and the rank is the order type of the standard pair sequences below (`rank_eq_typein`) |
 
+## A map to additive patterns (conjecture)
+
+[POR.md](POR.md) defines a map $`\Phi`$ from standard pair sequences to Carlson's additive patterns $`R_1^+`$, by rearranging the trees of the matrix. It states the conjecture that $`\Phi`$ preserves the lexicographic order and gives the numerical evidence (144,773 adjacent pairs and 7,471,992 random pairs, 0 violations). It is written in Python (`por/phi.py`, `por/pss.py`), not in Lean.
+
 ## Why `1 +`
 
 The pair sequence system of this library runs one step further than
