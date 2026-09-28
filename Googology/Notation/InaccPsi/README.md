@@ -174,8 +174,15 @@ arguments of normal collapses.
    lexicographically, a proper prefix being smaller.
 3. `φ(a, b)` vs `φ(c, d)`: `a < c ∧ b < φ(c, d)`, or `a = c ∧ b < d`, or
    `c < a ∧ φ(a, b) < d`.
-4. `φ(a, b)` vs an SC term `s`: `φ(a, b) < s` iff `a < s ∧ b < s`; `s < φ(a, b)` iff
-   `s ≤ a ∨ s ≤ b`.
+4. `φ(a, b)` vs an SC term `s` (for strongly critical `γ`: `φ(ξ, γ) = γ` when `ξ < γ`, and
+   `φ(γ, 0) = γ`):
+   - if `a < s`: compare `b` with `s`;
+   - if `a = s`: `φ(a, b) = s` when `b = 0`, and `φ(a, b) > s` otherwise;
+   - if `a > s`: `φ(a, b) > s`.
+
+   These are identities of ordinals, so they hold for every `φ(a, b)`, normal or not. The
+   `NF` conditions `a < φ(a, b)` and `b < φ(a, b)` exclude `φ(s, 0)` and `φ(a, s)` with
+   `a < s`.
 5. SC terms among themselves:
    - `Ω_a < Ω_c` iff `a < c`; for `f ∈ F`: `Ω_a < f` iff `a < f`, and `f < Ω_a` iff
      `f < a`;
@@ -186,10 +193,11 @@ arguments of normal collapses.
    - for a cardinal term `k`: `ψ^S_s(a) < k` iff `card(Ω_s) < k`, and `k < ψ^S_s(a)` iff
      `k ≤ card(Ω_s)`.
 
-### Main theorem (target)
+### Main theorem
 
 On `NF` terms, `a < b ⟺ |a| < |b|`. Hence `|·|` is injective on `NF`, and `(NF, <)` is
-a strict well-order, isomorphic to a set of ordinals.
+a strict well-order, isomorphic to a set of ordinals. Proved in `Correct.lean` for every
+`InaccSeq`: `Term.cmp_eq_compare`, `Term.eq_of_val_eq`, `Term.isWellOrder_cmp`.
 
 The facts used, by clause:
 - 3, 4: the Veblen function (Mathlib) and F6;
@@ -206,7 +214,7 @@ The facts used, by clause:
 - **Wilken's claim.** Whether the countable part of the system covers `Core(R₂⁺)` is
   open.
 
-## 6. Files (planned)
+## 6. Files
 
 | file | contents |
 |---|---|

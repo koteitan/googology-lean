@@ -28,5 +28,4 @@ The remaining work, arranged by the cells of the README tables.
       - prove that the fuel `max 200 (depth of α)` of `TrioFixFuel` is enough for every `α` (more fuel never changes the matrix; checked on the sheet labels and some families)
 - Notation systems
   - InaccPsi: Buchholz's ψ (1992) extended to the first ω weakly inaccessible cardinals ([Notation/InaccPsi](Googology/Notation/InaccPsi/README.md))
-    - the term system, its normal forms and its comparison 🤖
-    - correctness: the comparison agrees with the values, so the normal-form terms are well-ordered
+    - completeness: every ordinal of `Cl(ε_{I_ω+1}, 0)` is the value of a normal-form term (the other half of Pohlers's (178); not needed for the well-order)

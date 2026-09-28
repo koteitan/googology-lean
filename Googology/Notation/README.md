@@ -46,6 +46,7 @@ mathlib-free.
 | system | terms | order | standard forms | `Rewrite` | `Eval` |
 |---|---|---|---|---|---|
 | [ExBuchholz](ExBuchholz/README.md) | done | strict linear order | decidable, not calibrated | `exbOT` | `exbOTEval` |
+| [InaccPsi](InaccPsi/README.md) | done (ψ over `ω` weakly inaccessibles) | a strict well-order on the normal forms (`Term.isWellOrder_cmp`) | defined (`Term.NF`), completeness not proved | none | `Term.val`, relative to an `InaccSeq` |
 | [BMS](BMS/README.md) | arrays | comparison in the package | reachable from a stair | `bms r` | `bmsEval` (the rank), and `Trans.BMS.bmsOrdEval` for `r = 1` |
 | [DBMS](DBMS/README.md) | arrays | as BMS | reachable from `dstair` | `dbms r` | `dbmsEval` (the rank), and `Trans.DBMS.dbmsOrdEval` for `r = 1` |
 | [Y](Y/README.md) | sequences of naturals | lexicographic, a well-order on the standard forms (`yStd_strictWellOrder`) | reachable from `(1, h+1)` | `ySys`, and `yLegal` on every legal sequence | `yEval` (the rank) |

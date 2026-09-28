@@ -4,5 +4,6 @@ import Googology.Notation.ExBuchholz
 import Googology.Notation.BMS
 import Googology.Notation.DBMS
 import Googology.Notation.Y
+import Googology.Notation.InaccPsi
 import Googology.Trans
 import Googology.Goals
