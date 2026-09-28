@@ -19,8 +19,9 @@ The proof has three parts.
    are identities of ordinals; the clauses for collapses use F9, F10 and F12.
 3. `sem_of_NF`: every normal form satisfies `Sem`. Induction on the term; the normal
    form condition `K_μ(a) < a` gives `|a| ∈ Cl(|a|, |μ|)` by the soundness of `K`
-   (`KLt_sound`). For `ψ^I_n(a)` the bound `μ = ψ^I_n(a)` is the term itself, and only
-   the direction `cmp x μ = .lt → |x| < |μ|` is needed (`lt_psiI_of_cmp`).
+   (`KLt_sound`). The bound `μ` is the collapse term itself (`ψ^S_s(a)` or `ψ^I_n(a)`),
+   and only the direction `cmp x μ = .lt → |x| < |μ|` is needed (`lt_psiS_of_cmp`,
+   `lt_psiI_of_cmp`).
 -/
 
 namespace Googology.Notation.InaccPsi
@@ -1020,6 +1021,54 @@ theorem lt_psiI_of_cmp {n : ℕ} {a : Term} (ha : NF a) (sa : Sem S a) :
       exact InaccSeq.psi_lt_psi (InaccSeq.InR_I m) (lt_of_cmp_lt hx.1 ha sx.1 sa h) sx.2
     · exact InaccSeq.psiI_lt_psiI _ _ (compare_lt_iff_lt.1 h)
 
+/-- A cardinal term below `ψ^S_s(a)` in the sense of `cmp` is below it in value. -/
+theorem lt_psiS_of_K {s a k : Term} (hs : NF s) (ss : Sem S s) (hk : NF k) (sk : Sem S k)
+    (hK : k.isK = true) (h : cmp k (psiS s a) = .lt) : val S k < val S (psiS s a) := by
+  rw [cmp_K_psiS s a hK] at h
+  have e := ok_of_sem hk (NF_cardT hs) sk (Sem_cardT ss)
+  have hle : val S k ≤ val S (cardT s) := by
+    split_ifs at h with hc
+    rw [e.1] at hc
+    exact not_lt.1 fun h' => hc (compare_gt_iff_gt.2 h')
+  rw [val_cardT] at hle
+  exact lt_of_le_of_lt hle (InaccSeq.psiS_bounds _ _).1
+
+/-- The comparisons with the bound `μ = ψ^S_s(a)` of the normal form of `ψ^S_s(a)` are
+right in the direction `.lt`, without `Sem` for `ψ^S_s(a)` itself. -/
+theorem lt_psiS_of_cmp {s a : Term} (hs : NF s) (ss : Sem S s) (ha : NF a) (sa : Sem S a) :
+    ∀ {x : Term}, NF x → Sem S x → cmp x (psiS s a) = .lt → val S x < val S (psiS s a)
+  | zero, _, _, _ => (InaccSeq.SC_psi (InaccSeq.InR_Om_succ _) _).1
+  | inacc _, hx, sx, h => lt_psiS_of_K hs ss hx sx rfl h
+  | inaccW, hx, sx, h => lt_psiS_of_K hs ss hx sx rfl h
+  | om _, hx, sx, h => lt_psiS_of_K hs ss hx sx rfl h
+  | psiI _ _, hx, sx, h => lt_psiS_of_K hs ss hx sx rfl h
+  | add c d, hx, sx, h => by
+    rw [cmp_add_left c d rfl] at h
+    split_ifs at h with hc
+    exact val_lt_of_head_lt (exact_all _) (Nat.le_succ _) hx sx
+      (InaccSeq.SC_psi (InaccSeq.InR_Om_succ _) _).isPrincipal
+      (lt_psiS_of_cmp hs ss ha sa hx.1 sx.1 hc)
+  | phi c d, hx, sx, h => by
+    rcases hcm : cmp c (psiS s a) with _ | _ | _
+    · rw [cmp_phi_left_lt rfl hcm] at h
+      exact (InaccSeq.SC_psi (InaccSeq.InR_Om_succ _) _).2 _
+        (lt_psiS_of_cmp hs ss ha sa hx.1 sx.1 hcm) _ (lt_psiS_of_cmp hs ss ha sa hx.2.1 sx.2 h)
+    · rw [cmp_phi_left_eq rfl hcm] at h
+      exact absurd h (cmp_zero_right_ne_lt d)
+    · rw [cmp_phi_left_gt rfl hcm] at h
+      exact absurd h (by decide)
+  | psiS t b, hx, sx, h => by
+    rw [cmp_psiS_psiS] at h
+    have est := ok_of_sem hx.1 hs sx.1 ss
+    split_ifs at h with hts
+    · rw [est.1] at hts
+      obtain rfl := est.2 (compare_eq_iff_eq.1 hts)
+      exact InaccSeq.psi_lt_psi (InaccSeq.InR_Om_succ _) (lt_of_cmp_lt hx.2.1 ha sx.2.1 sa h)
+        sx.2.2
+    · rw [est.1] at h
+      exact lt_trans ((InaccSeq.Om_psiS_lt_Om _ _).2 (compare_lt_iff_lt.1 h))
+        (InaccSeq.psiS_bounds _ _).1
+
 /-- **Every normal form satisfies `Sem`.** -/
 theorem sem_of_NF : ∀ {t : Term}, NF t → Sem S t
   | zero, _ => trivial
@@ -1031,12 +1080,9 @@ theorem sem_of_NF : ∀ {t : Term}, NF t → Sem S t
   | psiS s a, h => by
     have ss : Sem S s := sem_of_NF h.1
     have sa : Sem S a := sem_of_NF h.2.1
-    refine ⟨ss, sa, ?_⟩
-    have hm := KLt_sound (S := S) (μ := cardT s) (α := a)
-      (fun x hx sx hc => lt_of_cmp_lt hx (NF_cardT h.1) sx (Sem_cardT ss) hc)
-      (fun y hy sy hc => lt_of_cmp_lt hy h.2.1 sy sa hc) h.2.1 sa h.2.2
-    rw [val_cardT] at hm
-    exact InaccSeq.CSet_mono le_rfl (InaccSeq.psiS_bounds _ _).1.le hm
+    exact ⟨ss, sa, KLt_sound (S := S) (μ := psiS s a) (α := a)
+      (fun x hx sx hc => lt_psiS_of_cmp h.1 ss h.2.1 sa hx sx hc)
+      (fun y hy sy hc => lt_of_cmp_lt hy h.2.1 sy sa hc) h.2.1 sa h.2.2⟩
   | psiI n a, h => by
     have sa : Sem S a := sem_of_NF h.1
     exact ⟨sa, KLt_sound (S := S) (μ := psiI n a) (α := a)

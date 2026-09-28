@@ -26,6 +26,3 @@ The remaining work, arranged by the cells of the README tables.
       - for `ψ_0(Ω_2) ≤ α < Λ`, prove that the image of rules 1–10 lies in the standard forms and preserves the order (done for terms whose subscripts are `0` or `1`)
       - prove `CalibRd200` (the rule map of Fix `strip` equals `trioE2` up to reading depth 200; proved up to 100, false at 201; `CalibSt` without a bound is false because of the fuel) ([BMS/TrioFixStripCalibNo.lean](Googology/Trans/BMS/TrioFixStripCalibNo.lean))
       - prove that the fuel `max 200 (depth of α)` of `TrioFixFuel` is enough for every `α` (more fuel never changes the matrix; checked on the sheet labels and some families)
-- Notation systems
-  - InaccPsi: Buchholz's ψ (1992) extended to the first ω weakly inaccessible cardinals ([Notation/InaccPsi](Googology/Notation/InaccPsi/README.md))
-    - completeness: every ordinal of `Cl(ε_{I_ω+1}, 0)` is the value of a normal-form term (the other half of Pohlers's (178); not needed for the well-order)

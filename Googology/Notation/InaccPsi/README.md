@@ -130,7 +130,7 @@ t ::= 0 | I_n | I_ω | t + t | φ(t, t) | Ω_t | ψ^S_s(t) | ψ^I_n(t)       (n 
   summand of `b` is `≤ a`.
 - `φ(a, b)` is in `NF` iff `a, b ∈ NF`, `a < φ(a, b)` and `b < φ(a, b)`.
 - `Ω_a` is in `NF` iff `a ∈ NF`, `a ≠ 0` and `a ∉ F`.
-- `ψ^S_s(a)` is in `NF` iff `s, a ∈ NF` and `K_{c}(a) < a`, where `c = card(Ω_s)` below.
+- `ψ^S_s(a)` is in `NF` iff `s, a ∈ NF` and `K_{ψ^S_s(a)}(a) < a`.
 - `ψ^I_n(a)` is in `NF` iff `a ∈ NF` and `K_{ψ^I_n(a)}(a) < a`.
 
 Here `<` is the comparison below, and `K_μ(a) < a` means that every member of the
@@ -151,9 +151,16 @@ not below `μ` (Pohlers's Definition 3.4.4.2):
 `K_μ(a)` is `< α`, then `|a| ∈ Cl(α, |μ|)`. — Induction on `a`; each clause of `K`
 matches a clause of `Cl`. The other half is not needed for the well-ordering.
 
-It follows that `ψ^S_s(a) ∈ NF` gives `|a| ∈ Cl(|a|, Ω_{|s|}) ⊆ Cl(|a|, ψ_{Ω_{|s|+1}}(|a|))`
-(F9), and `ψ^I_n(a) ∈ NF` gives `|a| ∈ Cl(|a|, ψ_{I_n}(|a|))`. So F12 applies to the
-arguments of normal collapses.
+It follows that `ψ^S_s(a) ∈ NF` gives `|a| ∈ Cl(|a|, ψ_{Ω_{|s|+1}}(|a|))`, and
+`ψ^I_n(a) ∈ NF` gives `|a| ∈ Cl(|a|, ψ_{I_n}(|a|))`. So F12 applies to the arguments of
+normal collapses. In both cases the bound `μ` is the collapse term itself, which is not yet
+known to be normal; only the direction `cmp x μ = .lt → |x| < |μ|` is used
+(`lt_psiS_of_cmp`, `lt_psiI_of_cmp`).
+
+An earlier version used the bound `card(Ω_s)` for `ψ^S_s(a)`. That condition is too strong:
+for `s = ψ^I_0(I_0)` the ordinal `ψ_{Ω_{|s|+1}}(|s| + 1)` of `⋃_a Cl(a, 0)` had no normal
+form, because `K_s(s + 1) = {I_0}` and `|s| + 1 < I_0`, while `|s| + 1` is the only argument
+`a` in its own closure with that value of `ψ`.
 
 ### The cardinal part `card(t)`
 
@@ -205,14 +212,51 @@ The facts used, by clause:
 - 5, second line: F10;
 - 5, third and fourth lines: F9 and F12 (through the soundness of `K`).
 
+### Completeness
+
+The values of the `NF` terms are exactly `⋃_a Cl(a, 0)`, for every `InaccSeq`
+(`Term.vals_eq` in `Onto.lean`). With the main theorem, each member of `⋃_a Cl(a, 0)` is the
+value of exactly one `NF` term (`Term.existsUnique_NF`).
+
+- `⊆`: each clause of a term is a clause of `Cl` (`Term.exists_mem_CSet`).
+- `⊇`: induction on `Cl`. For `x + y`: `addNF`, which drops the summands of the left term
+  below the head of the right one. For `φ(x, y)`: it is `x`, `y`, or the normal form
+  `φ(a, b)`. For `Ω_x`: it is `0`, `x` (a fixed point of `Ω`), or `Ω_a`.
+- For `ψ_κ(ξ)`: induction on `ξ`. Let `γ = ψ_κ(ξ)` and `M(ξ) = min(Cl(ξ, γ) ∩ [ξ, ∞))`. No
+  collapse with an argument in `[ξ, M(ξ))` enters `Cl(M(ξ), γ)`, so `Cl(M(ξ), γ) = Cl(ξ, γ)`,
+  `ψ_κ(M(ξ)) = γ` and `M(ξ) ∈ Cl(M(ξ), ψ_κ(M(ξ)))` (`psi_M_eq`, `M_mem_self`). `M(ξ)` is
+  computed from the parts of `ξ` (`NFM.lean`), with `R = Cl(ξ, γ)`:
+  - a sum: the leading summand stays when it is in `R`; otherwise `M(x) = M(leading summand)`;
+  - `M(Ω_a) = Ω_{M(a)}` (with Pohlers's (172): if `Cl(α, β)` meets `[Ω_σ, Ω_{σ+1})`, then
+    `Ω_σ ∈ Cl(α, β)`);
+  - `M(ψ_{I_n}(y))` is `ψ_{I_n}(y)`, `I_n` or `ψ_{I_n}(M(y))`;
+  - `M(ψ_{Ω_{s+1}}(y))` is `ψ_{Ω_{s+1}}(y)`, `Ω_{s+1}`, `Ω_{M(s)}` or `ψ_{Ω_{s+1}}(M(y))`;
+  - `M(φ(a, b)) = φ(a, M(b))` if `a ∈ R`, and `φ(M(a), M(q))` otherwise, where `q` is the
+    least ordinal with `b < φ(M(a), q)`.
+
+  So `M(ξ)` is a value, using the collapses at arguments below `ξ` only.
+- **The converse of the soundness of `K`** (the other half of Pohlers's (178)): for
+  `t ∈ NF`, `|t| ∈ Cl(|α|, |μ|)` gives `K_μ(t) < α` (`Term.KLt_complete`). Its collapse case
+  is `arg_mem_of_psi_mem`: if `ψ_κ(d) ∈ Cl(α, β)`, `β ≤ ψ_κ(d)` and `d ∈ Cl(d, ψ_κ(d))`,
+  then `d ∈ Cl(α, β)` and `d < α`. The closure made `ψ_κ(d)` as `ψ_κ(e)` with
+  `e ∈ Cl(α, β)`, `e < α`; then `d = M(e)`, and `M` does not leave `Cl(α, β)`
+  (`MQ_of_mem_CSet`). With `μ = ψ_κ(M(ξ))` and
+  `α = M(ξ)` it turns `M(ξ) ∈ Cl(M(ξ), ψ_κ(M(ξ)))` into the `NF` condition of `ψ_κ(M(ξ))`.
+
 ## 5. What is not done here
 
-- **Completeness.** Every ordinal of `Cl(ε_{I_ω+1}, 0)` is the value of an `NF` term
-  (Pohlers's (174)–(177) and the other half of (178)). Not needed for the well-order.
+- **Completeness** is proved: `Term.vals_eq` (§4). It is stated for `⋃_a Cl(a, 0)`; that
+  this set equals `Cl(ε_{I_ω+1}, 0)` (or another bounded closure) is not proved.
 - **Recursive regular ordinals.** As in Buchholz and Pohlers, the cardinals are true
   cardinals. Replacing them by recursively regular ordinals is not attempted.
 - **Wilken's claim.** Whether the countable part of the system covers `Core(R₂⁺)` is
-  open.
+  open, and it cannot be settled by formalizing known mathematics. Wilken states it as a
+  claim without proof (*A glimpse of Σ₃-elementarity*, 2020, p. 421, repeated in *Pure
+  Σ₂-elementarity beyond the core*, 2021, §1), calls the analysis of `R₂⁺` a topic of
+  future work, and says that it needs a generalization of ordinal arithmetic whose
+  beginning is Weiermann–Wilken 2011. Settling it needs that analysis: an assignment of
+  the isominimal realizations of the finite patterns of `R₂⁺ = (Ord; 0, +; ≤, ≤₁, ≤₂)`
+  to terms of a system such as this one, which no paper provides.
 
 ## 6. Files
 
@@ -223,3 +267,7 @@ The facts used, by clause:
 | `Facts.lean` | F5–F12 |
 | `Term.lean` | terms, values, kinds, `card`, `K`, the comparison, `NF` |
 | `Correct.lean` | soundness of `K`, the main theorem |
+| `CNF.lean` | the leading summand, the principal summands `Comp`, and `q0(c, v)`, the least `q` with `v < φ(c, q)` |
+| `Struct.lean` | the bound `Λ`, (172), the shape of the members of `Cl(α, β)` |
+| `NFM.lean` | `M`, its computation, `M` does not leave `Cl(α, β)`, `arg_mem_of_psi_mem` |
+| `Onto.lean` | the converse of the soundness of `K`, `addNF`, completeness: `Term.vals_eq`, `Term.existsUnique_NF` |

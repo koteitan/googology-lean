@@ -43,7 +43,7 @@ import する。順序数へ評価する系だけが import するのであっ�
 | 系 | 項 | 順序 | 標準形 | `Rewrite` | `Eval` |
 |---|---|---|---|---|---|
 | [ExBuchholz](ExBuchholz/README-ja.md) | 済 | 狭義線形順序 | 決定可能。較正は未 | `exbOT` | `exbOTEval` |
-| [InaccPsi](InaccPsi/README-ja.md) | 済（`ω` 個の弱到達不能基数の上の ψ） | 標準形の上の狭義の整列順序（`Term.isWellOrder_cmp`） | 定義済み（`Term.NF`）。完全性は未証明 | なし | `Term.val`（`InaccSeq` に相対的） |
+| [InaccPsi](InaccPsi/README-ja.md) | 済（`ω` 個の弱到達不能基数の上の ψ） | 標準形の上の狭義の整列順序（`Term.isWellOrder_cmp`） | 定義済み（`Term.NF`）。`⋃_a Cl(a, 0)` のどの元にもちょうど 1 つある（`Term.existsUnique_NF`） | なし | `Term.val`（`InaccSeq` に相対的） |
 | [BMS](BMS/README-ja.md) | 配列 | パッケージ側の比較 | 階段から到達可能 | `bms r` | `bmsEval`（階数）、`r = 1` では `Trans.BMS.bmsOrdEval` |
 | [DBMS](DBMS/README-ja.md) | 配列 | BMS と同じ | `dstair` から到達可能 | `dbms r` | `dbmsEval`（階数）、`r = 1` では `Trans.DBMS.dbmsOrdEval` |
 | [Y](Y/README-ja.md) | 自然数の列 | 辞書式。標準形の上の整列順序（`yStd_strictWellOrder`） | `(1, h+1)` から到達可能 | `ySys`、合法な列すべての上では `yLegal` | `yEval`（階数） |

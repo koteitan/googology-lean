@@ -3,3 +3,4 @@ import Googology.Notation.InaccPsi.Ord
 import Googology.Notation.InaccPsi.Facts
 import Googology.Notation.InaccPsi.Term
 import Googology.Notation.InaccPsi.Correct
+import Googology.Notation.InaccPsi.Onto

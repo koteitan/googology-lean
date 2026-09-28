@@ -209,7 +209,7 @@ def NF : Term → Prop
   | add a b => NF a ∧ NF b ∧ a.isPrin ∧ b ≠ zero ∧ cmp (head b) a ≠ .gt
   | phi a b => NF a ∧ NF b ∧ cmp a (phi a b) = .lt ∧ cmp b (phi a b) = .lt
   | om a => NF a ∧ a ≠ zero ∧ a.isF = false
-  | psiS s a => NF s ∧ NF a ∧ KLt (cardT s) a a
+  | psiS s a => NF s ∧ NF a ∧ KLt (psiS s a) a a
   | psiI n a => NF a ∧ KLt (psiI n a) a a
 
 end Term
