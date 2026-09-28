@@ -86,8 +86,8 @@ successors equal $`1`$; $`\Omega`$-values and $`\psi`$-values are $`0`$ or limit
 
 **F9 (successor subscripts).** For $`\kappa = \Omega_{s+1}`$: $`\Omega_s \lt \psi_\kappa (\alpha) \lt \Omega_{s+1}`$, so $`\psi_\kappa (\alpha)`$
 is not a cardinal (for $`s = 0`$: $`\psi_\kappa (\alpha)`$ is countable). [167] — $`\kappa \in \mathrm{Cl}(\alpha, \psi_\kappa (\alpha))`$
-(F4), so $`s + 1`$ and $`s`$ are in it (F7, F8). As $`s \lt \kappa`$, $`s \in \mathrm{Cl} \cap \kappa`$, so `Ω_s ∈ Cl ∩ κ
-⊆ $`\psi`$_κ(α)`.
+(F4), so $`s + 1`$ and $`s`$ are in it (F7, F8). As $`s \lt \kappa`$, $`s \in \mathrm{Cl} \cap \kappa`$, so $`\Omega_s \in \mathrm{Cl} \cap \kappa
+\subseteq \psi_\kappa(\alpha)`$.
 
 **F10 (inaccessible subscripts).** For $`\kappa = I_n`$: $`\Omega_{\psi_\kappa (\alpha)} = \psi_\kappa (\alpha)`$, and
 $`I_{n-1} \lt \psi_\kappa (\alpha) \lt I_n`$ when $`n \ge 1`$ ($`\Omega_1 \lt \psi_\kappa (\alpha)`$ when $`n = 0`$). [170] — $`I_{n-1}`$

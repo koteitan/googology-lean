@@ -86,8 +86,8 @@ $`\eta \ne 0`$ で $`\xi + \eta = s + 1`$ なら、$`\eta = t + 1`$、$`s = \xi 
 
 **F9（後続の添字）。** $`\kappa = \Omega_{s+1}`$ について: $`\Omega_s \lt \psi_\kappa (\alpha) \lt \Omega_{s+1}`$。よって $`\psi_\kappa (\alpha)`$
 は基数ではない（$`s = 0`$ のとき: $`\psi_\kappa (\alpha)`$ は可算）。[167] — $`\kappa \in \mathrm{Cl}(\alpha, \psi_\kappa (\alpha))`$
-（F4）なので、$`s + 1`$ と $`s`$ もそこに入る（F7、F8）。$`s \lt \kappa`$ なので $`s \in \mathrm{Cl} \cap \kappa`$ で、`Ω_s ∈ Cl ∩ κ
-⊆ $`\psi`$_κ(α)` となる。
+（F4）なので、$`s + 1`$ と $`s`$ もそこに入る（F7、F8）。$`s \lt \kappa`$ なので $`s \in \mathrm{Cl} \cap \kappa`$ で、$`\Omega_s \in \mathrm{Cl} \cap \kappa
+\subseteq \psi_\kappa(\alpha)`$ となる。
 
 **F10（到達不能基数の添字）。** $`\kappa = I_n`$ について: $`\Omega_{\psi_\kappa (\alpha)} = \psi_\kappa (\alpha)`$ である。また
 $`n \ge 1`$ のとき $`I_{n-1} \lt \psi_\kappa (\alpha) \lt I_n`$ である（$`n = 0`$ のときは $`\Omega_1 \lt \psi_\kappa (\alpha)`$）。[170] — $`I_{n-1}`$
