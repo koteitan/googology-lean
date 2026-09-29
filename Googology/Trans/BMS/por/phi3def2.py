@@ -1010,7 +1010,45 @@ def show(P):
     return '\n'.join(out)
 
 
+def pattern(P):
+    """The pattern on one line.  Elements left to right in increasing order: 0, a (= 1), n0, n1, ...
+    (one-term elements), x+y (sums).  (x ... z) means x <=1 z (z is the last element x reaches),
+    [x ... z] means x <=2 z, and * marks the element of the input."""
+    (nodes, reach, le2, pt) = P
+    names = {}
+    k = 0
+    for q in nodes:
+        if len(q) == 1:
+            if tss.oshow(q) == '(0,0,0)':
+                names[q[0]] = 'a'
+            else:
+                names[q[0]] = 'n%d' % k
+                k += 1
+    spans = [(i, reach[i], '(', ')') for i in range(len(nodes)) if reach[i] > i]
+    spans += [(i, j, '[', ']') for (i, j) in le2 if j > i]
+    opens = {i: [] for i in range(len(nodes))}
+    closes = {i: [] for i in range(len(nodes))}
+    order = sorted(spans, key=lambda s: (s[0], -s[1]))  # outer spans open first
+    for (i, j, o, c) in order:
+        opens[i].append(o)
+    for (n, (i, j, o, c)) in sorted(enumerate(order), key=lambda e: (e[1][1], -e[0])):
+        closes[j].append(c)  # at one element, the span opened last closes first
+    toks = []
+    for (i, q) in enumerate(nodes):
+        lab = '0' if not q else '+'.join(names[x] for x in q)
+        if i == pt:
+            lab = '*' + lab
+        toks.append(''.join(opens[i]) + lab + ''.join(closes[i]))
+    return ' '.join(toks)
+
+
 if __name__ == '__main__':
-    for m in sys.argv[1:]:
-        print(m)
-        print(show(build(tss.parse(m))))
+    args = sys.argv[1:]
+    table = '--table' in args
+    for m in [a for a in args if not a.startswith('--')]:
+        P = build(tss.parse(m))
+        if table:
+            print(m)
+            print(show(P))
+        else:
+            print(pattern(P))

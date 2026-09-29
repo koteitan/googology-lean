@@ -17,19 +17,12 @@ python3 phi3def2.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"
 Output:
 
 ```
-(0,0,0)(1,1,1)(1,1,0)(2,2,1)
-   0   reach 0
-   1 (0,0,0)  reach 1
-   2 (0,0,0)(1,1,1)  reach 5
-*  3 (0,0,0)(1,1,1)(1,1,0)(2,2,1)  reach 5
-   4 (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)  reach 5  <=2 5
-   5 (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(1,1,0)(2,2,1)  reach 5
+0 a (n0 (*n1 ([n2 n3])))
 ```
 
-- Each line is one element of the pattern, written as a trio sequence. The first element is 0.
+- The elements of the pattern, from left to right in increasing order: `0`, `a` (= 1), `n0`, `n1`, …; a sum is written `n1+n0`.
 - `*` marks the element that stands for the input.
-- `reach k`: this element is $`\le_1`$ element `k`, and `k` is the largest such.
-- `<=2 k`: this element is $`\le_2`$ element `k`.
+- `(x … z)` means $`x \le_1 z`$, and `[x … z]` means $`x \le_2 z`$.
 
 ### Pattern of resemblance → trio sequence
 
