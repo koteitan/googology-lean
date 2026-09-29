@@ -70,19 +70,6 @@ theorem PosRel.rebuild {c cn : Tm} (h : PosRel c cn) :
 
 /-! ## Lemma W -/
 
-theorem size_le_cols_length (t : Tm) : t.size ≤ t.cols.length := by
-  have : t.cols.length = t.size := by
-    induction t using Tm.ind with
-    | h y cs ih =>
-      rw [Tm.cols_eq, List.length_cons, length_shUp, mat_eq_flatten, List.length_flatten,
-        Tm.size_node, sizeList_eq_sum, List.map_map]
-      congr 1
-      apply congrArg
-      apply List.map_congr_left
-      intro c hc
-      exact ih c hc
-  omega
-
 theorem cols_length_eq_size (t : Tm) : t.cols.length = t.size := by
   induction t using Tm.ind with
   | h y cs ih =>

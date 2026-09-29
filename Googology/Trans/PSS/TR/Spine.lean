@@ -169,7 +169,7 @@ theorem pos_lt_cut_length {sp : Spine} {i : ℕ} (hi : i < sp.length) :
   have := length_rebuild_cols sp 0
   have hsplit := cols_split hi 0
   have := congrArg List.length hsplit
-  simp only [List.length_append, List.length_cons, List.length_singleton] at this
+  simp only [List.length_append, List.length_cons] at this
   rw [pos]
   omega
 

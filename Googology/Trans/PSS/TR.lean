@@ -23,10 +23,28 @@ Wilken's `T¹` is exact: the value of `𝒯(M)` is the ordinal `o(M)` of `M`.
   (`eq_of_val_eq`), `addS`/`addAll` are the ordinal sum, `ω^x` and `log_ω`
   are right (`omegaExp_spec`, `logOmega_spec`), and every image of `𝒯` is a
   term of `T¹` of the right level (`trTm_nf`).
-* `TR/Cof.lean`: **Theorem Cof**, `val 𝒯(t) = sup_n val 𝒯(t[n])`.
+* `TR/Unfold.lean`, `TR/Valid.lean`, `TR/Eps.lean`: the equations of `𝒯`,
+  valid terms (`TGood []`: G\* for reached nodes, child-prefixes are valid,
+  Canon), the epsilon case as `Δ ++ η'` in values.
+* `TR/Bound.lean` (**M4**), `TR/Chain.lean` (**M2**), `TR/MonoAux.lean`,
+  `TR/Mono.lean`: **Theorem M (Mono\*)** (`mono`): `𝒯` is strictly increasing on
+  valid terms, at every level; `mono_node` on nodes.
+* `TR/LCBase.lean`, `TR/PLo.lean`, `TR/PHi.lean`: `LC_B`, its X-form, (Inc) on
+  `T¹`, **Lemma P-lo** (`p_lo`) and **Lemma P-hi** (`arg_step`, `eps_lc`).
+* `TR/Spine.lean`, `TR/FundSeq.lean`: the rightmost path of a term and
+  `M[n] = oper M n` on terms (cases `i₁ = 1` and `i₁ = 0`).
+* `TR/Bases.lean`, `TR/BaseC1.lean`, `TR/Dup.lean`: the bases (Bℓ), (B j₀)
+  (without (Min)) and (B dup).
+* `TR/Blocks.lean`: positions of the blocks, **Lemma W**, one propagation step.
+* `TR/Cof.lean`: **Theorem Cof** (`cof`), `val 𝒯(t) = sup_n val 𝒯(t[n])`.
 * This file: **Lemma TR** (`tr`), by induction on `o`: a sum is the sum of
   its roots, and a root with children is the limit of its fundamental
   sequence on both sides (Theorem Cof, and COMB Lemma 5 (b) `ordOf_eq_iSup`).
+
+`#print axioms tr`: `propext`, `Classical.choice`, `Quot.sound`, and the cited
+facts `vartheta`, `val_level`, `val_isPrincipal`, `vartheta_zero`,
+`vartheta_inj`, `star_lt_val`, `val_lt_val_iff`, `eps_iff`, `val_exp`,
+`val_exp_eps`, `seg` of `TR/Cited.lean`.
 -/
 
 namespace Googology.Trans.PSS.TR

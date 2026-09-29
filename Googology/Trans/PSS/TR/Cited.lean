@@ -42,7 +42,10 @@ translation `𝒯`** (besides Lean's `propext`, `Classical.choice`,
 * (Min) `vartheta_min`.
 
 (Inc) of `proof/TR.md` §1 is not an axiom: on `T¹` it follows from (C)
-(`TR/Basic.lean`).
+(`inc_lt`, `inc_le` in `TR/LCBase.lean`).  (Min) is stated but not used: the
+C1 sub-case of `(B j₀)` is proved by the size induction of the general case
+(`base_C1` in `TR/BaseC1.lean`), as `proof/TR-2.md` §7 suggests.  So the proof of
+Lemma TR uses the axioms (L), (C), (E), (Exp) and (Seg).
 -/
 
 namespace Googology.Trans.PSS.TR
