@@ -489,6 +489,8 @@ because that would be the empty-blob case, which monotonicity excludes.
 - **(Sib)** Siblings (the roots count as siblings) have non-increasing terms.
 - **(G\*)** $`T(u) \lt_p T(v(u))`$ for every descending node $`u`$.
 
+**Lean.** Theorem SC is formalized with no `sorry` in [SC.lean](../SC.lean): `ctps_iff_SC : CTPS M ↔ SC M`, with Part 1 as `sc_of_ctps` ([SC/Step.lean](../SC/Step.lean)) and Part 2 as `ctps_of_sc` (`Forest.ctps_of_SC` in [SC/Part2.lean](../SC/Part2.lean)).
+
 Remarks:
 
 - (I3) of Lemma 1 is the root-$`y`$ part of Sib.

@@ -28,7 +28,7 @@ README の表のセルごとに、残りの作業を並べる。
       - `TrioFixFuel` の燃料 `max 200 (a の深さ)` が、どの `a` でも足りることを証明する（燃料を増やしても行列が変わらない。シートのラベルといくつかの族で確認済み）
 - ペア数列と加法的パターン（[Trans/PSS/POR-ja.md](Googology/Trans/PSS/POR-ja.md)）
   - 写像 Φ が順序を保ち、像が R₁⁺ の核全体であるという紙の上の証明を、Lean で形式化する（[Trans/PSS/proof/](Googology/Trans/PSS/proof/README-ja.md)：ι(Φ(M)) = 1 + val(pairTerm M)）
-    - 🤖 定理 SC（標準形 ⇔ 木の局所的な条件）、次に anchor・log・lh が標準形を作ること、lh の停止、読み方の補題 R
+    - anchor・log・lh が標準形を作ること、lh の停止、読み方の補題 R
     - Wilken の ϑ への翻訳 𝒯（Mono*、Cof）。引用する ϑ の事実は公理にする
     - 主な鎖（畳み込み = Wilken の届く先の計算、V の有限性、bar で閉じること、最小性）。引用する R₁⁺ の事実は公理にする
   - Φ をトリオ数列と R₂⁺ へ広げる（[Trans/BMS/POR-ja.md](Googology/Trans/BMS/POR-ja.md)。Φ₃i は (0,0,0)(1,1,1)(2,1,1) の手前まで順序の食い違いが 0）
