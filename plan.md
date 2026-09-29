@@ -31,5 +31,6 @@ The remaining work, arranged by the cells of the README tables.
     - 🤖 the translation 𝒯 to Wilken's ϑ (Mono*, Cof), with the cited ϑ facts as axioms
     - the main chain (fold = Wilken's reach computation, V finite, bar-closure, isominimality), with the cited R₁⁺ facts as axioms
   - extend Φ to trio sequences and R₂⁺ ([Trans/BMS/POR.md](Googology/Trans/BMS/POR.md); Φ₃i has 0 order violations below (0,0,0)(1,1,1)(2,1,1))
-    - 🤖 below (0,0,0)(1,1,1)(2,1,1): decide the 310 undecided limit-step pairs (prove that ι∘Φ₃ is monotone inside a term), settle rows 844, 907, 1009
+    - below (0,0,0)(1,1,1)(2,1,1): decide the 287 undecided limit-step pairs (prove that ι∘Φ₃ is monotone inside a term), row 907 (the sheet or Φ₃i on rows 906/907), row 1009 (ι(Φ₃i) ≤ ι(sheet)), change the fix-table entry of row 844
+    - analyse R₂⁺ itself (Wilken's R₂ is the pure structure), e.g. prove υ_ι ↔ ε₀·ι between R₂⁺ and R₂
     - rows above 915: level bookkeeping, the (2,2,1) family, the missing nodes

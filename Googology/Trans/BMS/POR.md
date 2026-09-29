@@ -28,6 +28,10 @@ $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$.
 - **One reflection rule** (§8). Carlson's downward 2-reflection (Def 9.4) gives one rule
   that replaces the third rule and explains more sheet rows. Agreement rose to 503 rows,
   still with 0 violations.
+- **Wilken's $`R_2`$ and the undecided pairs** (§9). Wilken's analysis of $`R_2`$ does not
+  describe $`R_2^+`$, so it cannot decide the pairs. The oracle with a longer budget
+  certified 23 of the 310 undecided pairs and found no violation. Row 844: $`\Phi_{3i}`$ is
+  right and the fix table should change. Rows 907 and 1009 are still open.
 
 ## 2. The shape of the rule
 
@@ -388,16 +392,143 @@ equal; 945, 962 and 977 timed out.
   $`(0,0,0)(1,1,1)(2,1,0)(3,2,0)(4,3,0)(5,4,0) \lt (0,0,0)(1,1,1)(2,1,0)(3,2,1)`$.
   Deciding them needs a proof that $`\iota \circ \Phi_3`$ is monotone inside a term.
 
-## 9. Next
+## 9. Wilken's $`R_2`$ and the undecided pairs
 
-- The 310 undecided pairs: prove that $`\iota \circ \Phi_3`$ is monotone inside a term.
-- Row 844 (the fix table or $`\Phi_{3i}`$), rows 907 and 1009.
+`por/tr3.py` translates a trio matrix $`M`$ into Wilken's notation for the pure structure
+$`R_2 = (\mathrm{Ord}; \le, \le_1, \le_2)`$ (Wilken, "Pure Σ₂-elementarity beyond the core",
+APAL 172, 2021, [doi:10.1016/j.apal.2021.103001](https://doi.org/10.1016/j.apal.2021.103001)). Write $`\mathcal{T}_3(M)`$ for the value.
+- $`\upsilon_0 = 0`$, $`\upsilon_{i+1} = (\upsilon_i)^\infty`$, and sups at limits (Wilken's Def 1.5).
+  An ordinal in $`[\upsilon_i, \upsilon_{i+1})`$ is a $`\vartheta`$-term relative to
+  $`\tau = \upsilon_i`$ (Def 1.3), and such terms are compared by Lemma 2.26.
+- The reading is $`\upsilon_{1+\xi} = \psi_0(\Omega_\omega + \psi_1(\Omega_\omega) \cdot \xi)`$.
+  A fixed point $`h = \upsilon_h`$ has no finite index. $`\mathcal{T}_3`$ names it by its
+  matrix, and two such names are compared by the matrix order.
+- On both test sets $`\mathcal{T}_3`$ is strictly increasing along the lex order.
+- **$`R_2`$ is not $`R_2^+`$.** Wilken's $`\le_1`$ and $`\le_2`$ are those of the pure
+  structure. $`\Phi_3`$ aims at $`R_2^+`$, which has $`+`$ in its language. The two differ:
+  Wilken's Thm 1.8 gives $`\upsilon_2 \lt_2 \upsilon_\omega`$, but the sheet (row 534) and
+  $`\Phi_{3i}`$ have no $`\le_2`$-successor of $`\upsilon_2`$. So Wilken's $`R_2`$ cannot serve
+  as the oracle for $`\Phi_3`$. What does fit is to read $`\upsilon_\iota`$ in $`R_2^+`$ as
+  $`\varepsilon_0 \cdot \iota`$ in $`R_2`$, the correspondence that Wilken §3 gives between
+  $`R_1`$ and $`R_1^+`$. On the $`\upsilon`$-points with a finite index, 11758 relations agree
+  and none disagrees.
+
+**The 310 pairs under $`\mathcal{T}_3`$.** Each pair is $`A \lt_{\mathrm{lex}} B`$, and both
+are single root terms with a $`z = 1`$ column.
+
+| how $`\mathcal{T}_3(A) \lt \mathcal{T}_3(B)`$ is decided | pairs |
+|---|---|
+| same $`\upsilon`$-segment, $`\vartheta`$-terms compared by Lemma 2.26 | 43 |
+| different $`\upsilon`$-indices | 2 |
+| same segment, but $`\tau`$ is a fixed point named by its matrix | 13 |
+| only by fixed-point names, i.e. by the matrix order | 252 |
+
+- All 310 have $`\mathcal{T}_3(A) \lt \mathcal{T}_3(B)`$. The 58 pairs of the first three rows
+  are decided by Wilken's comparison. The 252 others lie above the least fixed point of
+  $`\upsilon`$, where $`\mathcal{T}_3`$ adds nothing to the matrix order.
+- This compares the ordinals $`o(A) \lt o(B)`$ of the matrices. It says
+  $`\iota(\Phi_{3i}(A)) \lt \iota(\Phi_{3i}(B))`$ only if $`\iota \circ \Phi_{3i} = o`$, which is
+  the claim under test. So $`\mathcal{T}_3`$ decides none of the pairs by itself.
+
+**The oracle with a longer budget.** Each pair got about 27 seconds. The methods, in order:
+- the covering with the nodes that $`\Phi_{3i}(A)`$ and $`\Phi_{3i}(B)`$ share (the same matrix,
+  so the same $`\mathcal{T}_3`$ value) fixed to themselves, after at most one step;
+- limit macros: repeated upward 2-reflections (Carlson 2009, Def 10.1);
+- best-first search and depth-first search over the generating rules.
+
+Every certificate is replayed with explicit arithmetic.
+
+- **Result.** 23 of the 310 pairs are now certified "<": 20 by the limit macros, 2 by the
+  best-first search, and 1 by the covering with shared nodes fixed. Every certificate has 1
+  to 3 steps.
+- By the classes of the table above: 13 of the 56 same-segment pairs, 1 of the 2 pairs with
+  different $`\upsilon`$-indices, and 9 of the 252 pairs above the least fixed point.
+- **Violations.** None found. A reverse search (8 seconds per pair) found no certificate
+  of $`\iota(\Phi_{3i}(B)) \le \iota(\Phi_{3i}(A))`$ for any of the 287 remaining pairs.
+- 287 pairs remain: 158 in the first range and 129 in the second. The smallest is
+  $`(0,0,0)(1,1,1)(2,0,0)(3,1,0)(4,2,0)(5,3,0) \lt (0,0,0)(1,1,1)(2,0,0)(3,1,1)`$.
+
+**Order tests with the new certificates**
+
+| range | "<" certified | violations | same pattern | undecided | skipped (>30 nodes) |
+|---|---|---|---|---|---|
+| $`[(0,0,0)(1,1,1),\ (0,0,0)(1,1,1)(2,1,0))`$ (1085 matrices) | 894 | 0 | 0 | 158 | 32 |
+| $`[(0,0,0)(1,1,1)(2,1,0),\ (0,0,0)(1,1,1)(2,1,1))`$ (305 matrices) | 160 | 0 | 0 | 129 | 15 |
+
+**Rows 844, 907 and 1009.** Each open row is a member of the fundamental sequence of the
+next sheet row: $`844 = 845[3]`$, $`907 = 909[1]`$ and $`1009 = 1010[1]`$ (BM4 expansions).
+All three lie above the least fixed point of $`\upsilon`$, so $`\mathcal{T}_3`$ names every
+node by its matrix and cannot tell the patterns apart. The arguments below use the sheet's
+own fundamental sequences and the oracle.
+
+- **844: $`\Phi_{3i}`$ is right, and the fix table should change.**
+
+  | matrix | sheet | $`\Phi_{3i}`$ |
+  |---|---|---|
+  | $`845[1]`$ (row 810) | `(b (b' ([c d] d+b')))` | contains it |
+  | $`845[2]`$ (row 843) | `(b (b' (b'' ([c d] d+b''))))` | contains it |
+  | $`845[3]`$ (row 844) | `(b (b' (b'' (b''' ([c d] d+b'')))))` | `(b (b' (b'' (b''' ([c d] d+b''')))))` |
+  | $`845[4]`$ | none | `(b … (b'''' ([c d] d+b'''')))` |
+  | $`845`$ | `(b ([c d] d+c))` | contains it |
+
+  In $`845[n]`$ the summand after $`d`$ is the top of the $`\le_1`$-chain, and in the limit
+  it becomes $`c`$, the sup of the chain. The sheet's row 844 keeps $`d + b''`$ from row 843,
+  and the fix table records that it has the same ordinal as row 843. The fix table then
+  moves the point to $`b'''`$.
+  - Certified: $`\text{fix} \lt \text{corrected}`$, where "corrected" is
+    `0 a (b (b' (b'' (b''' ([c d] d+b''')))))` with point $`b`$.
+  - Certified: $`\iota(\text{corrected}) = \iota(\Phi_{3i}(844))`$. The corrected pattern is
+    a restriction of $`\Phi_{3i}(844)`$, and the oracle gives the other direction.
+  - With the corrected fix, row 844 fits, and the agreement becomes 504 rows.
+- **907: still open.** Certified: $`\text{sheet}(905) \lt \text{sheet}(907) \lt \Phi_{3i}(907)`$.
+  - $`\Phi_{3i}(907)`$ has an extra block `(e₁ (e₁' ([f₁ g₁] g₁+e₁')))` before the sheet's
+    `(e (e' ([f g] g+e')))`, and $`\mathrm{lh}(b) = d + e`$ uses the larger $`e`$. The root
+    term of $`e_1`$ ends in one column $`U = (1,1,0)(2,2,1)(3,2,0)`$, and the root term of
+    $`e`$ ends in two. The two copies of $`U`$ are the $`C2`$ images of two different
+    children of the copied $`\omega`$ column, and the images coincide.
+  - In $`909[2]`$ (row 908) the second image is larger and absorbs the first, and
+    $`\Phi_{3i}`$ equals the sheet.
+  - **A rule tried and rejected** (`c2one` in `por/phi3j.py`): an index column whose $`C2`$
+    image equals the image of the $`\omega`$ column just before it adds nothing. Then rows
+    907 and 947 fit (505 rows) and nothing else changes. But the oracle certifies a
+    violation: $`\iota(\Phi_{3j}(907)) \le \iota(\Phi_{3i}(M'))`$ for the lex-smaller
+    $`M' = (0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(3,2,0)(4,3,1)(5,2,0)(6,3,1)`$.
+  - A direct covering (no generating step) also shows $`\iota(\text{sheet}(907)) \le \iota(\Phi_{3i}(906))`$. So the
+    sheet and $`\Phi_{3i}`$ cannot both be right on 906 and 907. Either the sheet's 907 is too
+    small, or the extra block, which $`\Phi_{3i}`$ also adds to 906, is too big. Deciding this
+    needs $`\iota(\Phi_{3i}(906)) \le \iota(\text{sheet}(906))`$, which was not found in 50
+    seconds.
+- **1009: probably $`\Phi_{3i}`$, not certified.**
+  - The `d94` copies do not change the ordinal here. Certified both ways:
+    $`\iota(\Phi_{3i}(1009)) = \iota(\Phi_{3i}(1009)\text{ without d94})`$.
+  - The sheet's pattern is a restriction of $`\Phi_{3i}(1009)`$ without `d94`. So
+    $`\iota(\text{sheet}) \le \iota(\Phi_{3i})`$; the other direction was not found in 50 seconds.
+  - The difference is the last summand $`e`$ of $`\mathrm{lh}(b) = d + d + e`$. The appended
+    columns $`(2,1,0)(3,2,1)(4,2,1)(4,2,1)(4,2,0)(3,2,1)(4,2,1)`$ have two $`\omega`$ columns,
+    like the two $`\omega`$ summands of row 1008. $`\Phi_{3i}`$ reads both, so $`e`$ carries
+    a copy of the whole pattern of 1008. The sheet's $`e`$ matches only the first
+    $`\omega`$ column.
+  - Certified: $`\Phi_{3i}(1008) \lt \Phi_{3i}(1009)`$ and
+    $`\text{sheet}(1009) \lt \text{sheet}(1010)`$.
+
+## 10. Next
+
+- The 287 undecided pairs (§9): prove that $`\iota \circ \Phi_3`$ is monotone inside a term.
+  A longer oracle budget helps little: 23 of 310 in about 27 seconds each.
+- Row 907: decide whether $`\iota(\Phi_{3i}(906)) = \iota(\text{sheet}(906))`$. Row 1009: the
+  other direction $`\iota(\Phi_{3i}) \le \iota(\text{sheet})`$. Row 844: change the fix table's
+  entry to the corrected pattern of §9.
+- An analysis of $`R_2^+`$ itself, for example by proving the correspondence
+  $`\upsilon_\iota \leftrightarrow \varepsilon_0 \cdot \iota`$ between $`R_2^+`$ and $`R_2`$. Wilken's
+  $`R_2`$ describes the pure structure only.
 - The rows above 915: level bookkeeping, the $`(2,2,1)`$ family, and the rows where the
   sheet has nodes that $`\Phi_{3i}`$ lacks.
 
-## 10. Programs
+## 11. Programs
 
 - `por/tss.py`: 3-row matrices and terms, and the lexicographic order.
+- `por/tr3.py`: the translation $`\mathcal{T}_3`$ into Wilken's notation for $`R_2`$ (§9). `python3 por/tr3.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"` prints `u[1 + 1]`, i.e. $`\upsilon_2`$.
+- `por/phi3j.py`: $`\Phi_{3i}`$ plus the rejected flag `c2one` of §9, which is off by default. `--flags=lastcol,mult,fin,c2rel,lastlo,infin,d94,nobase,c2one` turns it on.
 - `por/phi3i.py`: the version $`\Phi_{3i}`$ of §8, the current one. `python3 por/phi3i.py "(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)"` prints the same table as `phi3g.py`.
 - `por/phi3h.py`: the version $`\Phi_{3h}`$ of §7. `python3 por/phi3h.py "(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)"` prints the same table as `phi3g.py`.
 - `por/phi3g.py`: the two-level version $`\Phi_{3g}`$ (§6). `python3 por/phi3g.py "(0,0,0)(1,1,1)(2,1,0)"` prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors.
