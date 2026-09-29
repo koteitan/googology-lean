@@ -2,49 +2,21 @@
 
 # The 3-row pattern map $`\Phi_3`$ (programs)
 
-This directory holds the programs of [../POR.md](../POR.md). They compute the current map
-$`\Phi_3`$ from standard trio sequences (Bashicu matrices with 3 rows) to Carlson's additive patterns
-of order 2, $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$ (T. J. Carlson, "Patterns of resemblance
-of order 2", Ann. Pure Appl. Logic 158 (2009)). A second program translates a matrix into Wilken's
-notation for $`R_2`$ (G. Wilken, "Pure Σ₂-elementarity beyond the core", Ann. Pure Appl. Logic 172 (2021)).
-Nothing here is proved: $`\Phi_3`$ is the rule found by the experiments recorded in
-[../POR.md](../POR.md) (§15 gives the clauses D1–D11, §16 the rule `kdl0`).
+Programs that convert a trio sequence (a 3-row Bashicu matrix) into a pattern of resemblance of
+order 2 (Carlson, "Patterns of resemblance of order 2", APAL 158, 2009). The background is in
+[../POR.md](../POR.md).
 
 ## Usage
 
-### Files
-
-| file | contents |
-|---|---|
-| `phi3def2.py` | the map $`\Phi_3`$ ($`\Phi_{3\mathrm{def2}}`$ of ../POR.md §16): for a matrix $`M`$ it prints the pattern $`\Phi_3(M)`$ |
-| `tss.py` | a library used by the other two: parsing, the row-0 tree of a matrix, the order, and the sum |
-| `tr3.py` | the translation $`\mathcal{T}_3`$ into Wilken's $`\upsilon`$-notation for $`R_2`$ (../POR.md §9) |
-
-They need Python 3 and nothing else. `tr3.py` also imports `tr.py` and `pss.py` of the 2-row
-directory [../../PSS/por/](../../PSS/por/), and finds them by its own location.
-
-### Input
-
-A matrix is written as its columns, each in parentheses: `"(0,0,0)(1,1,1)(2,2,1)"`. The entries of a
-column are its rows 0, 1, 2; missing entries are 0, so `(1,1)` is `(1,1,0)`. Characters outside the
-parentheses are ignored. The matrix should be standard; the programs do not check this. Each program
-takes any number of matrices as arguments and handles them in turn.
-
-### `phi3def2.py`
+### Trio sequence → pattern of resemblance
 
 ```
-python3 phi3def2.py "(0,0,0)(1,1,1)" "(0,0,0)(1,1,1)(1,1,0)(2,2,1)" "(0,0,0)(1,1,1)(2,2,1)"
+python3 phi3def2.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"
 ```
 
-For each matrix it prints the matrix, and then one line per node of the pattern, in increasing order:
+Output:
 
 ```
-(0,0,0)(1,1,1)
-   0   reach 0
-   1 (0,0,0)  reach 1
-*  2 (0,0,0)(1,1,1)  reach 4
-   3 (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)  reach 4  <=2 4
-   4 (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(1,1,0)(2,2,1)  reach 4
 (0,0,0)(1,1,1)(1,1,0)(2,2,1)
    0   reach 0
    1 (0,0,0)  reach 1
@@ -52,66 +24,16 @@ For each matrix it prints the matrix, and then one line per node of the pattern,
 *  3 (0,0,0)(1,1,1)(1,1,0)(2,2,1)  reach 5
    4 (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)  reach 5  <=2 5
    5 (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(1,1,0)(2,2,1)  reach 5
-(0,0,0)(1,1,1)(2,2,1)
-   0   reach 0
-   1 (0,0,0)  reach 1
-*  2 (0,0,0)(1,1,1)(2,2,1)  reach 5
-   3 (0,0,0)(1,1,1)(2,2,1)(1,1,0)(2,2,1)(3,3,1)(2,0,0)(2,0,0)  reach 5  <=2 4 5
-   4 (0,0,0)(1,1,1)(2,2,1)(1,1,0)(2,2,1)(3,3,1)(2,0,0)(2,0,0)(1,1,0)(2,2,1)(3,3,1)  reach 4
-   5 (0,0,0)(1,1,1)(2,2,1)(1,1,0)(2,2,1)(3,3,1)(2,0,0)(2,0,0)(1,1,0)(2,2,1)(3,3,1)(1,1,0)(2,2,1)(3,3,1)  reach 5
 ```
 
-Each line of a node has these fields:
-- a star `*` if the node is the **point** (the node of the input matrix), a space otherwise;
-- the **index** $`i`$ of the node. Node 0 is the empty sum 0, node 1 is $`(0,0,0) = 1`$;
-- the node as a matrix. A node is a sum of root terms, written out as one matrix;
-- `reach r`: the $`\le_1`$-reach. $`r`$ is the largest index with $`v_i \le_1 v_r`$, and $`v_i \le_1 v_j`$
-  holds exactly for $`i \le j \le r`$. For a node with more than one term, $`r = i`$;
-- `<=2 j …`: the indices $`j`$ with $`v_i \le_2 v_j`$ given by the $`\le_2`$-successors of $`v_i`$ (only
-  if there are any).
+- Each line is one element of the pattern, written as a trio sequence. The first element is 0.
+- `*` marks the element that stands for the input.
+- `reach k`: this element is $`\le_1`$ element `k`, and `k` is the largest such.
+- `<=2 k`: this element is $`\le_2`$ element `k`.
 
-For example, in the first pattern the point is node 2, $`\psi_0(\Omega_\omega)`$, and
-$`v_2 \le_1 v_3`$, $`v_2 \le_1 v_4`$, $`v_3 \le_1 v_4`$ and $`v_3 \le_2 v_4`$. The program does not print the
-bracket form of a pattern. [../POR.md](../POR.md) writes patterns as in the 2-row version, with
-`(x … z)` for $`\le_1`$ and `[x … z]` for $`\le_2`$.
+### Pattern of resemblance → trio sequence
 
-If a pattern gets more than 300 nodes, the program stops with `RuntimeError: too many nodes`.
-
-### `tr3.py`
-
-```
-python3 tr3.py "(0,0,0)(1,1,1)" "(0,0,0)(1,1,1)(1,1,0)(2,2,1)" "(0,0,0)(1,1,1)(2,2,1)"
-```
-
-prints one line per matrix:
-
-```
-(0,0,0)(1,1,1) -> u[1]
-(0,0,0)(1,1,1)(1,1,0)(2,2,1) -> u[1 + 1]
-(0,0,0)(1,1,1)(2,2,1) -> u*<(0,0,0)(1,1,1)(2,2,1)>
-```
-
-`u[i]` is $`\upsilon_i`$. `u*<N>` is an $`\upsilon`$-point that is a fixed point of $`\upsilon`$, named by its
-matrix $`N`$. `u[i]:t0(…)` is a term of $`T^{\upsilon_i}`$, and `{x}` is a parameter below the current
-$`\upsilon`$-point. The docstring of `tr3.py` describes the translation.
-
-### `tss.py`
-
-`tss.py` is a library. For example:
-
-```
->>> import tss
->>> tss.from_mat(tss.parse("(0,0,0)(1,1,1)(2,2,1)(1,1,0)"))
-((0, 0, ((1, 1, ((2, 1, ()),)), (1, 0, ()))),)
-```
-
-A term is a Python tuple `(y, z, children)`, and a sum is a tuple of terms. Its functions are
-described in A.2 below.
-
-### Earlier versions
-
-The earlier versions of $`\Phi_3`$ (`phi3.py` to `phi3o.py`, and `phi3def.py`) are not in the tree.
-They are in git commit `a97a321`; see [../POR.md](../POR.md) §19 for the list and how to run them.
+There is no program for this direction yet.
 
 ## Algorithm
 
