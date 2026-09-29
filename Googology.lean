@@ -8,3 +8,4 @@ import Googology.Trans
 import Googology.Goals
 import Googology.Trans.PSS.SC
 import Googology.Trans.PSS.Phi
+import Googology.Trans.PSS.TR
