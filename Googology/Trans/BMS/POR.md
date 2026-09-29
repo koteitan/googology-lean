@@ -59,6 +59,10 @@ $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$.
 - **A single definition** (§15). $`\Phi_3`$ is restated as one recursion with no flags, in eleven clauses
   (`por/phi3def.py`). It gives exactly the patterns of $`\Phi_{3o}`$ on all 2973 matrices of the order tests
   and on all 1099 sheet rows. Three old flags stay as named cases.
+- **The rows that do not fit** (§16). The 45 rows that do not fit and the 3 sup rows fall into twelve families. One
+  rule, `kdl0` (`por/phi3def2.py`), fits four more rows (1055 rows). Seven rows are certified to have the sheet's
+  ordinal. Row 1177 equals its fix in the fix table. The order tests still show 0 violations and 0 pairs with the
+  same pattern.
 
 ## 2. The shape of the rule
 
@@ -1529,7 +1533,57 @@ child. `nobase` only switched off the old rule 3 of §7, which is not in the def
 | `k2cut` | 15.6 cut | `kownd` | 15.7 owners | `kdlks` | 15.3, 15.6 (a) |
 | `k2chain` | 15.8 chain reach | `wlast` | 15.9 | | |
 
-## 16. Next
+## 16. The rows that do not fit, and one more rule ($`\Phi_{3\mathrm{def2}}`$)
+
+After §15, 45 sheet rows do not fit and 3 are sup rows. They fall into the families below. For each family there
+is a rule, a certificate, or a reason why it stays open. A rule was accepted only if it follows the principles
+of §14, fixes at least two rows and loses none.
+
+**The rule `kdl0`** (`por/phi3def2.py`, which is $`\Phi_{3\mathrm{def}}`$ plus this rule). A $`D`$-level $`\omega`$ column
+$`E`$ inside a level column $`L_m`$ is read on the lowest level of its last chain, not above its top
+($`d_1`$ when it has one chain). This applies when $`E`$ has an elder sibling in $`L_m`$ or is nested in a same-level
+child. As the first child of $`L_m`$, $`E`$ is still read above its levels (`kbase`, rows 1391 and 1502).
+- This is `kdl` of §12, which builds such a column on its own level. The offset of `kbase` belongs to a column
+  that starts the read of $`L_m`$.
+- Rows 1526, 1527, 1553 and 1594 fit now. For each, the oracle certifies $`\iota(\text{sheet}) \le \iota(\Phi_{3\mathrm{def}})`$,
+  so $`\Phi_{3\mathrm{def}}`$ was too large there. Example: row 1526 $`(2,2,1)(3,2,1)(3,1,1)(4,2,1)(5,2,1)`$,
+  `([[[[c (d'] e')] (d] e] e+d'))`.
+- The first version read every such $`E`$ on $`d_1`$. The order test then found a violation:
+  $`(\dots)(3,1,1)(4,2,1)(5,2,1)(4,2,1)(5,2,1)`$, where $`E`$ has two chains, came out below row 1526. Reading on
+  the lowest level of the last chain removes it.
+
+**Rules tried and rejected.**
+- `kbcut0`: a same-level child whose first up-kid equals $`K_1`$ shares $`K_1`$'s level also when $`K_1`$ has no
+  other children. It fits row 1582 and loses 19 rows (1266–1275, 1281, 1294, 1295, 1599–1601, 1606, 1607, 1632).
+- `kbare`: a single bare extra up-kid is a level, not a doubling, when the chain before it has content. It fits
+  row 1516 and loses 7 rows (1474–1479, 1540, 1621).
+
+**The families.** The oracle ran on each row in both directions, 15 seconds each.
+
+| family | rows | result |
+|---|---|---|
+| `kdl0` | 1526, 1527, 1553, 1594 | fit now |
+| same ordinal: the sheet lists nodes that the pattern implies | 833, 1173, 1231, 1232, 1233, 1237, 1238 | $`\iota(\text{sheet}) = \iota(\Phi_{3\mathrm{def2}})`$ certified both ways for all seven; not an error |
+| sheet error, in the fix table | 1177 | $`\iota(\text{fix}) = \iota(\Phi_{3\mathrm{def2}})`$ certified both ways, and $`\Phi_{3\mathrm{def2}}`$ embeds the fix. The fix is not in the parser's form; a row in that form is proposed |
+| sheet error, in the fix table | 660, 661, 1400 (same ordinal as the row before), 1217, 1336, 1349, 1350, 1436 (order errors), 626 (not a standard matrix), 1642 (unreadable, and the first row with $`z = 2`$) | no change |
+| fixed rows that still differ | 601, 718, 1401, 1348 | $`\iota(\text{fix}) \le \iota(\Phi_3)`$ certified for 601, 718, 1401; the reverse was not found. Open: the fix or $`\Phi_3`$ |
+| §9 | 907, 947, 1009 | open (§9) |
+| a level more than the cut chain of the last summand | 1334, 1335, 1434, 1435 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ certified for 1334, 1335, 1435. Open: the level count needs the other summands (§14) |
+| bare extra up-kids: a level or a doubling | 1490, 1503, 1504, 1515, 1516, 1583 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ for all but 1583, the reverse for 1583. Open: `kbare` loses rows |
+| a same-level child that shares a $`K_1`$ with no content | 1582 | one row; `kbcut0` loses rows. Open |
+| $`\Phi_3`$ too large, other | 569, 1476, 1489 | $`\iota(\text{sheet}) \le \iota(\Phi_3)`$ certified. Open |
+| $`\Phi_3`$ at most the sheet, other | 575, 709, 1409, 1460 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ certified. Open |
+| too large for the oracle | 1577 | timeout. Open |
+
+**Agreement with the sheet.** 1055 rows (iso / sub / sup / no = 505 / 550 / 3 / 41). With the proposed row for
+1177 it is 1056.
+
+**Order tests.** All seven sets show 0 violations and 0 pairs with the same pattern. Only 11 matrices changed:
+1 in the fifth set, 6 in the sixth, 4 in the seventh. In the sixth set ($`[(2,2,1)(3,2,1),\ (2,2,1)(3,3,1))`$
+after $`(0,0,0)(1,1,1)`$), 125 pairs are certified "<" and 26 are undecided (before: 126 and 25). The other six
+sets are as in §14.
+
+## 17. Next
 
 - The 287 undecided pairs (§9): prove that $`\iota \circ \Phi_3`$ is monotone inside a term.
   A longer oracle budget helps little: 23 of 310 in about 27 seconds each.
@@ -1539,17 +1593,23 @@ child. `nobase` only switched off the old rule 3 of §7, which is not in the def
 - An analysis of $`R_2^+`$ itself, for example by proving the correspondence
   $`\upsilon_\iota \leftrightarrow \varepsilon_0 \cdot \iota`$ between $`R_2^+`$ and $`R_2`$. Wilken's
   $`R_2`$ describes the pure structure only.
-- The rows above 915 (§10–§14): the point with a level more than the cut chain of its last summand
-  (rows 1334–1336, 1434–1436, which need the other summands when the levels are counted), and the
-  remaining rows of 1450–1642. The 463 undecided pairs of the order tests are mostly steps to a limit.
+- The open rows of §16:
+  - rows 1334, 1335, 1434, 1435 (the level count needs the other summands);
+  - bare extra up-kids as a level or a doubling (1490, 1503, 1504, 1515, 1516, 1583);
+  - rows 1582, 569, 1476, 1489, 575, 709, 1409, 1460, 1577;
+  - the fixed rows 601, 718, 1348, 1401.
+
+  The 464 undecided pairs of the order tests are mostly steps to a limit.
 - The definition of §15 ($`\Phi_{3\mathrm{def}}`$): shorten the list of level columns (15.6) and the reach
   $`\mathrm{lh}_1`$ (15.8), and replace the three named cases by general rules.
 
-## 17. Programs
+## 18. Programs
 
 - `por/tss.py`: 3-row matrices and terms, and the lexicographic order.
 - `por/tr3.py`: the translation $`\mathcal{T}_3`$ into Wilken's notation for $`R_2`$ (§9). `python3 por/tr3.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"` prints `u[1 + 1]`, i.e. $`\upsilon_2`$.
-- `por/phi3def.py`: the single definition of §15, the current one, with no flags. `python3 por/phi3def.py "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(4,2,1)"`
+- `por/phi3def2.py`: $`\Phi_{3\mathrm{def}}`$ with the rule `kdl0` of §16, the current one. `python3 por/phi3def2.py "(0,0,0)(1,1,1)(2,2,1)(3,2,1)(3,1,1)(4,2,1)(5,2,1)"`
+  prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors.
+- `por/phi3def.py`: the single definition of §15, with no flags. `python3 por/phi3def.py "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(4,2,1)"`
   prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors.
 - `por/phi3o.py`: the version $`\Phi_{3o}`$ of §14, the same map with flags. `python3 por/phi3o.py "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(4,2,1)"`
   prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors. `--flags=` selects the flags.
