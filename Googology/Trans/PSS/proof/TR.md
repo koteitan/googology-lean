@@ -39,7 +39,10 @@ COMB is [COMB](COMB.md) (S1, Lemma R, Theorem SC, Lemma 10, …).
   - $`\vartheta_m(\alpha) \lt \vartheta_m(\gamma) \iff (\alpha \lt \gamma \land \alpha^{\star_m} \lt \vartheta_m(\gamma)) \lor \vartheta_m(\alpha) \le \gamma^{\star_m}`$.
   - Here $`\xi^{\star_m}`$ is the largest $`\vartheta_m`$-subterm of $`\xi`$ that does not lie inside a $`\vartheta_j`$ with $`j \lt m`$
     (0 if there is none).
-- **(Min)** Minimality ([W24] Prop 2.2): $`\vartheta_j(\alpha) = \min\{\theta \ge \Omega_j : \alpha^{\star_j} \lt \theta \land \forall \beta \in T^{\Omega_j} \cap \alpha\ (\beta^{\star_j} \lt \theta \to \vartheta_j(\beta) \lt \theta)\}`$.
+- **(Min)** Minimality ([W24] Prop 2.2): $`\vartheta_j(\alpha) = \min\{\theta \in \mathbb{P},\ \theta \ge \Omega_j : \alpha^{\star_j} \lt \theta \land \forall \beta \in T^{\Omega_j} \cap \alpha\ (\beta^{\star_j} \lt \theta \to \vartheta_j(\beta) \lt \theta)\}`$.
+  Here $`\mathbb{P}`$ is the class of additively principal ordinals. Without this restriction the
+  statement is false already at $`\alpha = 1`$: it would give $`\vartheta_0(1) = 2`$ instead of $`\omega`$.
+  (Found while formalizing in Lean.)
   - $`T^{\Omega_j}`$ allows arbitrary parameters below $`\Omega_j`$. For $`j = 0`$ it is $`T^1`$ itself.
   - For $`j \ge 1`$ it is **not** $`T^1`$, because $`T^1 \cap [\Omega_j, \Omega_{j+1})`$ is not an initial segment. An
     example is $`\Omega_1 + \psi_0(\Omega_\omega)`$. For that reason (Min) is used only at level 0, and in the C1

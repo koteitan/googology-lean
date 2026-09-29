@@ -22,7 +22,7 @@ repository is a Lake dependency; its theorems are used, not copied.
 
 ## A map to additive patterns
 
-[POR.md](POR.md) defines a map $`\Phi`$ from standard pair sequences to Carlson's additive patterns $`R_1^+`$, by rearranging the trees of the matrix. $`\Phi`$ preserves the lexicographic order and its image is the whole core of $`R_1^+`$ except 0: this is proved on paper in [proof/](proof/README.md), with numerical evidence (144,773 adjacent pairs and 7,471,992 random pairs, 0 violations). The map and the translation are programs in Python (`por/phi.py`, `por/pss.py`, `por/tr.py`). In Lean, the pair-sequence part of the proof is formalized: Theorem SC (`SC.lean`) and the term operations with Lemma C, Lemma 2.4, Theorem T and Lemma R (`Phi.lean`); the rest of the proof is on paper.
+[POR.md](POR.md) defines a map $`\Phi`$ from standard pair sequences to Carlson's additive patterns $`R_1^+`$, by rearranging the trees of the matrix. $`\Phi`$ preserves the lexicographic order and its image is the whole core of $`R_1^+`$ except 0: this is proved on paper in [proof/](proof/README.md), with numerical evidence (144,773 adjacent pairs and 7,471,992 random pairs, 0 violations). The map and the translation are programs in Python (`por/phi.py`, `por/pss.py`, `por/tr.py`). In Lean, two of the three parts of the proof are formalized: the pair-sequence part — Theorem SC (`SC.lean`) and the term operations with Lemma C, Lemma 2.4, Theorem T and Lemma R (`Phi.lean`) — and Lemma TR, the translation to Wilken's $`\vartheta`$ with $`\mathrm{val} \circ \mathcal{T} = o`$ (`TR.lean`), where the cited facts about $`\vartheta`$ are axioms collected in `TR/Cited.lean`. The main chain is still on paper.
 
 ## Why `1 +`
 
