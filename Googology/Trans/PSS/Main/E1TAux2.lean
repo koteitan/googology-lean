@@ -16,12 +16,12 @@ namespace Googology.Trans.PSS.Main
 
 open TR Ordinal Phi Forest
 
-theorem takeWhile_eq_take' {α : Type*} (p : α → Bool) :
+theorem takeWhile_eq_take_e1 {α : Type*} (p : α → Bool) :
     ∀ l : List α, l.takeWhile p = l.take (l.takeWhile p).length
   | [] => rfl
   | x :: l => by
     by_cases h : p x
-    · simp [h, ← takeWhile_eq_take' p l]
+    · simp [h, ← takeWhile_eq_take_e1 p l]
     · simp [h]
 
 section Items
@@ -189,12 +189,12 @@ end DInputs
 /-! ## The children of `W` with `y = 2` -/
 
 /-- The children with `y ≥ 2` of `W = (1, B)` are its first `p` children. -/
-theorem hi_eq_take {B : List Tm} (hv : Valid (.node 1 B)) :
+theorem hi_eq_take_e1 {B : List Tm} (hv : Valid (.node 1 B)) :
     B.filter (fun s => decide (2 ≤ s.y)) = B.take (B.takeWhile (fun c => decide (c.y = 1 + 1))).length ∧
     B.filter (fun c => decide (c.y = 1 + 1)) = B.take (B.takeWhile (fun c => decide (c.y = 1 + 1))).length := by
   have h2 : B.filter (fun c => decide (c.y = 1 + 1)) =
       B.take (B.takeWhile (fun c => decide (c.y = 1 + 1))).length := by
-    rw [hv.filter_hi, ← takeWhile_eq_take']
+    rw [hv.filter_hi, ← takeWhile_eq_take_e1]
   refine ⟨?_, h2⟩
   rw [← h2]
   apply List.filter_congr

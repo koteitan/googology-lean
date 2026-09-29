@@ -53,7 +53,7 @@ theorem e1T_node {H : List Tm} (hN : Std (.node 0 H)) (he : isEps (.node 0 H) = 
     simp [lastKids, List.getLast?_eq_some_getLast hne, hW]
   have hpB : (B.takeWhile (fun c => decide (c.y = 1 + 1))).length ≤ B.length :=
     (List.takeWhile_sublist _).length_le
-  obtain ⟨hhi, hhi'⟩ := hi_eq_take hv
+  obtain ⟨hhi, hhi'⟩ := hi_eq_take_e1 hv
   generalize hp : (B.takeWhile (fun c => decide (c.y = 1 + 1))).length = p at hhi hhi' hpB
   have hfold : ((foldInputs (.node 0 H)).map fun Y => ordOf [Y]).sum =
       ((List.range p).map
