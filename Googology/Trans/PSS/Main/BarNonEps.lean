@@ -25,10 +25,6 @@ open TR Ordinal Order Phi Forest
 
 /-! ## Iterated anchors stay in `V_M` -/
 
-theorem anchor_node {cs : List Tm} (h : 2 ≤ cs.length) :
-    anchor (.node 0 cs) = some (.node 0 cs.dropLast) := by
-  simp [anchor, h]
-
 theorem inV_prefix {M : List Tm} : ∀ (n : ℕ) {cs : List Tm} {j : ℕ}, cs.length - j = n → 1 ≤ j →
     j ≤ cs.length → InV M [.node 0 cs] → InV M [.node 0 (cs.take j)]
   | 0, cs, j, hn, _, hj, h => by
@@ -133,75 +129,6 @@ theorem bigL_dropLast {N : Tm} (hN : Std N) (hne : isEps N = false) (hcs : N.cs 
     rw [this, List.dropLast_append_of_ne_nil (by simp), List.dropLast_singleton, List.append_nil]
   · rw [hFa, hx, List.dropLast_cons_of_ne_nil (by simp), addT_cons hdA, hF, hx,
       List.dropLast_append_of_ne_nil (by simp), List.dropLast_cons_of_ne_nil (by simp)]
-
-/-! ## Epsilon roots -/
-
-theorem one_lt_ordOf_of_cs {N : Tm} (hN : Std N) (hcs : N.cs ≠ []) : 1 < ordOf [N] := by
-  rw [← ordOf_leaf']
-  apply ordOf_single_lt std_leaf hN
-  rw [std_node_y hN]
-  exact (Tm.lt_iff_cs_lt (s := Tm.node 0 []) (t := Tm.node 0 N.cs) rfl).mpr
-    (by obtain ⟨c, cs, h⟩ := List.exists_cons_of_ne_nil hcs; rw [h]; exact List.nil_lt_cons _ _)
-
-
-theorem last_child_of_noneps {N C : Tm} (hN : Std N) (hne : isEps N = false)
-    (hC : N.cs.getLast? = some C) : C.y = 0 ∧ C ∈ loOf N ∧ Std C := by
-  have hN0 : N.y = 0 := by rw [std_node_y hN]; rfl
-  have hCy : C.y = 0 := isEps_eq_false_y hN0 hne hC
-  have hCmem : C ∈ N.cs := List.mem_of_getLast? hC
-  exact ⟨hCy, List.mem_filter.mpr ⟨hCmem, by simp [hCy]⟩,
-    std_of_tgood_y0 (tgood_child hN hCmem) hCy⟩
-
-theorem log0_getLast {N C : Tm} (hne : isEps N = false) (hN : Std N)
-    (hC : N.cs.getLast? = some C) : (log0 N).getLast? = some C := by
-  obtain ⟨hCy, -, -⟩ := last_child_of_noneps hN hne hC
-  unfold log0
-  rw [getLast?_addAll, List.getLast?_append]
-  have : (N.cs.filter (fun s => decide (s.y = 0))).getLast? = some C := by
-    rw [← List.dropLast_append_getLast? C hC, List.filter_append]
-    simp [hCy]
-  rw [this]; rfl
-
-/-- **An epsilon value comes from an epsilon root.** -/
-theorem isEps_of_InE {z : Tm} (hz : Std z) (h : InE (ordOf [z])) : isEps z = true := by
-  by_contra hne
-  have hne' : isEps z = false := by simpa using hne
-  by_cases hcs : z.cs = []
-  · have hz1 : z = Tm.node 0 [] := by rw [std_node_y hz, hcs]
-    rw [hz1, ordOf_leaf'] at h
-    simp [InE] at h; exact absurd h (ne_of_gt one_lt_omega0)
-  · obtain ⟨C, hC⟩ : ∃ C, z.cs.getLast? = some C := by
-      cases h' : z.cs.getLast? with
-      | none => exact absurd (List.getLast?_eq_none_iff.mp h') hcs
-      | some C => exact ⟨C, rfl⟩
-    have hlog : ordOf [z] = ω ^ ordOf (log0 z) := by
-      rw [ordOf_single, lemmaR_log hz hne']; rfl
-    have e : ordOf [z] = ordOf (log0 z) := by
-      have := h; unfold InE at this; rw [hlog] at this ⊢
-      exact opow_inj this
-    have hlz : log0 z = [z] := ordOf_inj (stdOrd_log0 hz) (stdOrd_single hz) e.symm
-    have hl := log0_getLast hne' hz hC
-    rw [hlz] at hl
-    simp only [List.getLast?_singleton, Option.some.injEq] at hl
-    obtain ⟨-, hCl, -⟩ := last_child_of_noneps hz hne' hC
-    have := lt_of_mem_lo hz hCl
-    rw [← hl] at this
-    exact lt_irrefl _ this
-
-theorem y_of_eps_child {z c : Tm} (hz : Std z) (he : isEps z = true) (hc : c ∈ z.cs) : c.y = 1 := by
-  have hv := valid_of_std hz
-  rw [std_node_y hz] at hv
-  have hne : z.cs ≠ [] := List.ne_nil_of_mem hc
-  have hl : (z.cs.getLast hne).y = 0 + 1 := by
-    have h1 := y_le_of_std hz (List.getLast_mem hne)
-    have h2 : 1 ≤ (z.cs.getLast hne).y := by
-      have := he
-      rw [std_node_y hz] at this
-      simp only [isEps, List.getLast?_eq_some_getLast hne, decide_eq_true_eq] at this
-      exact this
-    omega
-  have := hv.eps_all hne hl c hc
-  omega
 
 /-- **Every epsilon root below a non-epsilon root `w` is below `(0, hi(w))`**, and
 `hi(w) ≠ ()` if there is one. -/

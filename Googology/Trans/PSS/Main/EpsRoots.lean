@@ -1,4 +1,4 @@
-import Googology.Trans.PSS.Main.BarNonEps
+import Googology.Trans.PSS.Main.EpsCore
 
 /-!
 # Epsilon roots and the `ϑ_0`-subterms of `𝒯(N)`

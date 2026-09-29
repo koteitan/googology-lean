@@ -1,4 +1,5 @@
 import Googology.Trans.PSS.Main.Fold
+import Googology.Trans.PSS.Main.BarEps
 
 /-!
 # E1 and E2 (`proof/PROOF.md` §4.5; `proof/PROOF-2.md` §12.5; `proof/PROOF-3.md` §14.3)

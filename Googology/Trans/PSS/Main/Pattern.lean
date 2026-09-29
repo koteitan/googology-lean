@@ -36,10 +36,6 @@ inductive InV (M : List Tm) : List Tm → Prop
   | anc {t a : Tm} : InV M [t] → anchor t = some a → InV M [a]
   | lh {t : Tm} : InV M [t] → InV M (lh t)
 
-theorem std_leaf : Std (Tm.node 0 []) := by
-  show Bijectivity.CTPS (Tm.node 0 []).cols
-  rw [TR.cols_leaf]; exact (ctps_iff_SC _).mpr (by decide)
-
 theorem stdOrd_of_inV {M : List Tm} (hM : StdOrd M) {x : List Tm} (h : InV M x) : StdOrd x := by
   induction h with
   | nil => exact stdOrd_nil
@@ -87,31 +83,6 @@ def phiPat (M : List Tm) : Pat (List Tm) where
   le1 x z := x = z ∨ ∃ t, x = [t] ∧ (x = z ∨ x < z) ∧ (z = lh t ∨ z < lh t)
 
 /-! ## Lemma 5.1 -/
-
-theorem ordOf_inj {x y : List Tm} (hx : StdOrd x) (hy : StdOrd y) (h : ordOf x = ordOf y) :
-    x = y := by
-  rcases (ordOf_le_iff hx hy).mpr h.le with e | e
-  · exact e
-  · exact absurd h (ne_of_lt ((ordOf_lt_iff hx hy).mp e))
-
-theorem ordOf_le_iff' {x y : List Tm} (hx : StdOrd x) (hy : StdOrd y) :
-    ordOf x ≤ ordOf y ↔ (x = y ∨ x < y) := (ordOf_le_iff hx hy).symm
-
-/-- A node with two or more roots is not additive principal. -/
-theorem not_pr_of_two {t t' : Tm} {S : List Tm} (h : StdOrd (t :: t' :: S)) :
-    ¬ Pr (ordOf (t :: t' :: S)) := by
-  intro hP
-  have ht : Std t := ((stdOrd_iff _).mp h).2 t (by simp)
-  obtain ⟨p, hp⟩ := pr_iff.mp hP
-  have hlog := log_ordOf_cons h (ordOf_single_eq_opow ht)
-  rw [hp, log_opow one_lt_omega0] at hlog
-  rw [ordOf_cons h, hlog, ← ordOf_single_eq_opow ht] at hp
-  have hpos : 0 < ordOf (t' :: S) := by
-    have := (ordOf_lt_iff stdOrd_nil (stdOrd_of_append_right (A := [t]) h)).mp (by simp)
-    rwa [ordOf_nil] at this
-  have := lt_add_of_pos_right (ordOf [t]) hpos
-  rw [hp] at this
-  exact lt_irrefl _ this
 
 /-- A node that is not a single root reaches only itself. -/
 theorem isLh_self_of_not_single {x : List Tm} (hx : StdOrd x) (h : ∀ t, x ≠ [t]) :

@@ -39,12 +39,6 @@ theorem lam_eq_bigL {N C : Tm} (hC : N.cs.getLast? = some C) : Phi.lam N = bigL 
     rw [h0]; rfl
   · rw [if_neg h0]
 
-theorem opow_inj {a b : Ordinal.{0}} (h : ω ^ a = ω ^ b) : a = b :=
-  le_antisymm ((opow_le_opow_iff_right one_lt_omega0).mp h.le)
-    ((opow_le_opow_iff_right one_lt_omega0).mp h.ge)
-
-theorem ordOf_leaf' : ordOf [Tm.node 0 []] = 1 := TR.ordOf_leaf
-
 /-- The value of a node whose last term is `C`: its summands are all at least
 `o(C) = ω^γ`, so `ω^γ` divides the sum of the others. -/
 theorem opow_dvd_of_last {R : List Tm} {C : Tm} (h : StdOrd (R ++ [C])) {γ : Ordinal.{0}}
