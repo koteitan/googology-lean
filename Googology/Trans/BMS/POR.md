@@ -31,7 +31,7 @@ $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$.
 - **Wilken's $`R_2`$ and the undecided pairs** (§9). Wilken's analysis of $`R_2`$ does not
   describe $`R_2^+`$, so it cannot decide the pairs. The oracle with a longer budget
   certified 23 of the 310 undecided pairs and found no violation. Row 844: $`\Phi_{3i}`$ is
-  right and the fix table should change. Rows 907 and 1009 are still open.
+  right and the fix table should change. Row 907 is still open; row 1009 is a sheet error (§16).
 - **The rows above 915** (§10). $`\Phi_{3k}`$ fills three gaps of $`\Phi_{3i}`$: $`z = 1`$ children of
   $`D`$ on its own level, index columns of level $`\omega + j`$, and the counting of the
   $`\le_2`$-levels. Agreement rose from 504 to 787 rows. The order test shows 0 violations below
@@ -1567,7 +1567,8 @@ child. As the first child of $`L_m`$, $`E`$ is still read above its levels (`kba
 | sheet error, in the fix table | 1177 | $`\iota(\text{fix}) = \iota(\Phi_{3\mathrm{def2}})`$ certified both ways, and $`\Phi_{3\mathrm{def2}}`$ embeds the fix. The fix is not in the parser's form; a row in that form is proposed |
 | sheet error, in the fix table | 660, 661, 1400 (same ordinal as the row before), 1217, 1336, 1349, 1350, 1436 (order errors), 626 (not a standard matrix), 1642 (unreadable, and the first row with $`z = 2`$) | no change |
 | fixed rows that still differ | 601, 718, 1401, 1348 | $`\iota(\text{fix}) \le \iota(\Phi_3)`$ certified for 601, 718, 1401; the reverse was not found. Open: the fix or $`\Phi_3`$ |
-| §9 | 907, 947, 1009 | open (§9) |
+| §9 | 907, 947 | open. The sheet's rows 905–908 are a lift of lower rows; $`\Phi_{3\mathrm{def2}}`$ leaves the lift as soon as a column follows 905. Needed: the value of `905 (2,0,0)` |
+| sheet error, not in the fix table (§9) | 1009 | $`\iota(\text{sheet}(1009)) = \iota(\Phi_{3\mathrm{def2}}(K))`$ certified both ways for a lex-smaller standard $`K`$ (row 1008 followed by `(2,1,0)(3,2,1)(4,2,1)(4,2,1)(4,2,0)(3,2,1)`). The fix is $`\Phi_{3\mathrm{def2}}(1009)`$ up to $`\iota`$: $`\text{sheet}(1008) \lt \text{fix} \lt \text{sheet}(1010)`$ certified. A fix-table row is proposed |
 | a level more than the cut chain of the last summand | 1334, 1335, 1434, 1435 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ certified for 1334, 1335, 1435. Open: the level count needs the other summands (§14) |
 | bare extra up-kids: a level or a doubling | 1490, 1503, 1504, 1515, 1516, 1583 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ for all but 1583, the reverse for 1583. Open: `kbare` loses rows |
 | a same-level child that shares a $`K_1`$ with no content | 1582 | one row; `kbcut0` loses rows. Open |
@@ -1575,8 +1576,8 @@ child. As the first child of $`L_m`$, $`E`$ is still read above its levels (`kba
 | $`\Phi_3`$ at most the sheet, other | 575, 709, 1409, 1460 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ certified. Open |
 | too large for the oracle | 1577 | timeout. Open |
 
-**Agreement with the sheet.** 1055 rows (iso / sub / sup / no = 505 / 550 / 3 / 41). With the proposed row for
-1177 it is 1056.
+**Agreement with the sheet.** 1055 rows (iso / sub / sup / no = 505 / 550 / 3 / 41). With the proposed rows for
+1177 and 1009 it is 1057.
 
 **Order tests.** All seven sets show 0 violations and 0 pairs with the same pattern. Only 11 matrices changed:
 1 in the fifth set, 6 in the sixth, 4 in the seventh. In the sixth set ($`[(2,2,1)(3,2,1),\ (2,2,1)(3,3,1))`$
@@ -1591,8 +1592,8 @@ The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi
 
 - The 287 undecided pairs (§9): prove that $`\iota \circ \Phi_3`$ is monotone inside a term.
   A longer oracle budget helps little: 23 of 310 in about 27 seconds each.
-- Row 907: decide whether $`\iota(\Phi_{3i}(906)) = \iota(\text{sheet}(906))`$. Row 1009: the
-  other direction $`\iota(\Phi_{3i}) \le \iota(\text{sheet})`$. Row 844: change the fix table's
+- Rows 907 and 947: decide the value of `905 (2,0,0)` = `(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0)`,
+  the sheet's lift reading or $`\Phi_{3\mathrm{def2}}`$ (§16). Row 844: change the fix table's
   entry to the corrected pattern of §9.
 - An analysis of $`R_2^+`$ itself, for example by proving the correspondence
   $`\upsilon_\iota \leftrightarrow \varepsilon_0 \cdot \iota`$ between $`R_2^+`$ and $`R_2`$. Wilken's
