@@ -18,9 +18,9 @@ Lake の依存であり、定理を使うだけで写してはいない。
 | `SC.lean`、`SC/` | [proof/COMB.md](proof/COMB.md) §8b の **定理 SC** を、`sorry` なしで全部証明した。ペア数列が標準であることと、行 0 の親でできる森が (R0)、(I0)、(A)、Sib、G\* を満たすことは同値（`ctps_iff_SC`）。第 1 部「標準 ⇒ SC」は `sc_of_ctps`（展開についての帰納法、`SC/Step.lean`、`SC/Pert.lean`）。第 2 部「SC ⇒ 標準」は `ctps_of_sc`（`SC/Part2.lean` の `Forest.ctps_of_SC`。上にある最小の標準列を使う）。条件は `SC/Defs.lean`、木の見方（親、項、項の順序）は `SC/Basic.lean` と `SC/Tree.lean` にある。公理は `propext`、`Classical.choice`、`Quot.sound` だけ |
 | `Phi.lean`、`Phi/` | $`\Phi`$ の項の操作（[POR-ja.md](POR-ja.md) §3 の anchor、`log`、`Coll_A`、`lh`）。計算できる形で定義し、小さい例で `por/phi.py` と一致することを確かめた。[proof/COMB.md](proof/COMB.md) にあるそれらの性質を、`sorry` なしで全部証明した。項の上の定理 SC（`sc_mat_iff`、`ctps_cols_iff`）。標準な項の anchor、`log`、`lh` は標準（補題 2.4 と補題 6：`ctps_anchor`、`node_log0`、`ctps_lh`）。これは補題 C（`std_lemmaC`）と補題 10（`coll_lt_coll`）から出る。定理 T：どの項でも `lh` の燃料は足りる（`lhF_eq_lh`）。補題 R：標準な $`N`$ で $`o(N) = \omega^{o(\mathcal{L}N)}`$（`lemmaR`、`lemmaR_log`、`lemmaR_eps`）。これは補題 5 (a)（`ordOf_append`）と、$`\mathcal{L}`$ が狭義単調でノード全体への全射であること（`bigL_lt_iff`、`exists_bigL_eq`）から出る。公理は `propext`、`Classical.choice`、`Quot.sound` だけ |
 
-## 加法的パターンへの写像（予想）
+## 加法的パターンへの写像
 
-[POR-ja.md](POR-ja.md) は、標準形のペア数列から Carlson の加法的パターン $`R_1^+`$ への写像 $`\Phi`$ を、行列の木の組み替えで定める。$`\Phi`$ が辞書式順序を保ち、像が $`R_1^+`$ の核の 0 以外の全体であることを、[proof/](proof/README-ja.md) で紙の上で証明した。数値の証拠（隣り合う組 144,773、ランダムな組 7,471,992 で食い違い 0）も載せる。Lean ではなく、Python のプログラム `por/phi.py`、`por/pss.py`、`por/tr.py` で書いてある。
+[POR-ja.md](POR-ja.md) は、標準形のペア数列から Carlson の加法的パターン $`R_1^+`$ への写像 $`\Phi`$ を、行列の木の組み替えで定める。$`\Phi`$ が辞書式順序を保ち、像が $`R_1^+`$ の核の 0 以外の全体であることを、[proof/](proof/README-ja.md) で紙の上で証明した。数値の証拠（隣り合う組 144,773、ランダムな組 7,471,992 で食い違い 0）も載せる。写像と翻訳は Python のプログラム（`por/phi.py`、`por/pss.py`、`por/tr.py`）である。Lean では、証明のうちペア数列の部分を形式化した：定理 SC（`SC.lean`）と、項の操作と補題 C、補題 2.4、定理 T、補題 R（`Phi.lean`）。残りの証明は紙の上にある。
 
 ## `1 +` が付く理由
 
