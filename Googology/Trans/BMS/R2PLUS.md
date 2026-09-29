@@ -42,6 +42,26 @@ pairs therefore hold in $`R_2^C`$, the structure the certificate search implemen
 clause 2 of Def 5.3 is read as "$`X \cup Y`$ closed", as in his own proofs of Lemmas 5.5(6) and
 5.7(3).) Theorem B in $`R_2^C`$ is only sketched. The referee found no gap in Theorem EQ.
 
+**Order preservation on a class of trio matrices (Theorem S).** Let
+$`U = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(1,1,0)(2,2,1)`$, so that $`\mathcal{T}_3(U) = \upsilon_{\omega+1}`$. Let
+$`R_P`$ be the matrices $`\le_{\mathrm{lex}} U`$ that are non-increasing sums of three kinds of root terms:
+pair-sequence terms (no $`z = 1`$), the $`\upsilon`$-points $`\upsilon_n, \upsilon_\omega, \upsilon_{\omega+1}`$, and a
+$`\upsilon_n`$ or $`\upsilon_\omega`$ followed by standard pair-sequence children. On $`R_P`$ the pattern of
+$`\Phi_3`$ has a short explicit form $`\Phi_3^{\mathrm{exp}}`$ (the 2-row $`\Phi`$ below $`\upsilon_1`$, the
+$`\upsilon`$-nodes, and each point with its reach), and for $`M, M' \in R_P`$:
+
+```math
+M \lt_{\mathrm{lex}} M' \iff \iota(\Phi_3^{\mathrm{exp}}(M)) \lt \iota(\Phi_3^{\mathrm{exp}}(M'))
+```
+
+in both $`R_2^S`$ and $`R_2^C`$, with $`\iota = \mathcal{T}_3`$. This is proved on paper from the cited results,
+Theorems A and EQ, Lemma L, Proposition P′ and the 2-row results, and was checked by the
+referee. To read it as a statement about standard matrices and the rule `phi3m.py`, two links
+are checked but not proved: every matrix of $`R_P`$ is standard (all 11,195 tested pass yaBMS),
+and $`\Phi_3^{\mathrm{exp}}`$ equals the patterns of `phi3m.py` and `phi3def2.py` on $`R_P`$ (all tested).
+The rest of the range below $`U`$ also contains single terms of two further shapes and sums
+with such a summand; they are conditional on the remark of Carlson–Wilken 2012 §7.
+
 **Conditional or open.**
 - 10 further pairs below $`\upsilon_{\omega+1}`$ (two more shapes) are decided only under a remark in
   §7 of Carlson–Wilken 2012 that is stated there without proof (and, for general bases, under a
