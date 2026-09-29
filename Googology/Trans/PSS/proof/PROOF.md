@@ -196,7 +196,7 @@ Sources:
 - [C01, Thm 5.12]: the core is the least $`\kappa`$ with $`\kappa \le_1 \infty`$.
 - [W07b, Cor 5.10] with $`\tau=1`$:
   $`T^1 \cap \Omega_1=\min\{\alpha \gt 1:\alpha \lt_1 \infty\}`$.
-- [W07a, Thm 3.23, Cor 3.24]:
+- By [W07a, Thm 3.23, Cor 3.24]:
   $`T^1 \cap \Omega_1=\sup_n \vartheta_0(\cdots\vartheta_n(0)\cdots)`$, which is
   $`\lvert \Pi^1_1\text{-}\mathrm{CA}_0 \rvert`$.
 - Buchholz's $`\psi_0(\Omega_\omega)`$ is also $`\lvert \Pi^1_1\text{-}\mathrm{CA}_0 \rvert`$
@@ -297,7 +297,7 @@ $`o(x)+o(y)=o(z)\iff \mathrm{add}(x,y)=z`$.
 - **Thm 5.3** ($`\tau \in \{1\} \cup E`$; $`\alpha=\vartheta^\tau(\Delta+\eta)\in T^\tau`$;
   $`\alpha \gt \tau`$): **$`\lambda_\alpha=\lambda^\tau_\alpha`$ and
   $`\mathrm{lh}(\alpha)=\mathrm{lh}^\tau(\alpha)`$**. This uses:
-  - [W07a, Def 7.5]: $`\lambda^\tau_\alpha:=\iota_{\tau,\alpha}(\Delta)+\zeta^\tau_\alpha`$
+  - By [W07a, Def 7.5], $`\lambda^\tau_\alpha:=\iota_{\tau,\alpha}(\Delta)+\zeta^\tau_\alpha`$
     if $`\alpha \in E`$, and $`\zeta^\tau_\alpha`$ otherwise.
   - [W07a, Def 4.11]: $`\zeta^\tau_\alpha:=\mathrm{logend}(\eta)`$ if
     $`\eta \lt \sup_{\sigma \lt \eta} \vartheta^\tau(\Delta+\sigma)`$, and 0 otherwise.
