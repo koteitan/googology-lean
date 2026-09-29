@@ -1,5 +1,4 @@
-import Googology.Trans.PSS.TR.Ops
-import Googology.Trans.PSS.Phi
+import Googology.Trans.PSS.TR.Mono
 
 /-!
 # Theorem Cof

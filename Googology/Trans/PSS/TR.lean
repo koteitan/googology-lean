@@ -37,16 +37,6 @@ open Googology.Notation.ExBuchholz
 
 /-! ## Sums -/
 
-theorem valS_trNode (S : List Tm) : WP.valS (trNode S) = (S.map (fun t => (trTm t).val)).sum := by
-  rw [trNode, (addAll_spec (fun x hx => by
-    rw [List.mem_map] at hx
-    obtain ⟨t, -, rfl⟩ := hx
-    exact NFS.single (trTm_nf t).1)).2, List.map_map]
-  congr 1
-  apply List.map_congr_left
-  intro t _
-  simp
-
 /-- A node is the sum of its roots, on both sides. -/
 theorem valS_trNode_eq_of_roots : ∀ {S : List Tm}, StdOrd S →
     (∀ t ∈ S, (trTm t).val = ordOf [t]) → WP.valS (trNode S) = ordOf S
@@ -65,7 +55,7 @@ theorem ordOf_leaf : ordOf [Tm.node 0 []] = 1 := by
   rw [ordOf_single, cols_leaf, pairOrdL_of_ne (by simp), pairTerm_single,
     Googology.Notation.ExBuchholz.Term.val_nil, add_zero]
 
-theorem trTm_leaf : trTm (Tm.node 0 []) = one := by decide
+theorem trTm_leaf0 : trTm (Tm.node 0 []) = one := trTm_leaf 0
 
 /-- For a standard root with children, `o` is a limit ordinal. -/
 theorem isSuccLimit_ordOf {t : Tm} (ht : Std t) (hne : t.cs ≠ []) : IsSuccLimit (ordOf [t]) := by
@@ -144,7 +134,7 @@ theorem tr_of_cof
       rcases eq_or_ne t.cs [] with hc | hne
       · have ht0 : t = Tm.node 0 [] := by rw [std_node_y ht, hc]
         subst ht0
-        rw [trTm_leaf, val_one, ordOf_leaf]
+        rw [trTm_leaf0, val_one, ordOf_leaf]
       · rw [hcof t ht hne, ordOf_eq_iSup ht hne]
         congr 1
         funext n
