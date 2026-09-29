@@ -1,6 +1,5 @@
-import Googology.Trans.PSS.SC.Basic
-import Googology.Trans.PSS.SC.Oper
-import Googology.Trans.PSS.SC.Invariants
+import Googology.Trans.PSS.SC.Defs
+import Googology.Trans.PSS.SC.Step
 import Googology.Trans.PSS.Rank
 
 /-!
@@ -24,20 +23,22 @@ the lexicographic order `<ₚ` with a proper prefix smaller.
 
 ## Contents
 
-* `R0`, `I0`, `CondA`, `Sib`, `Gstar`, and `SC` their conjunction.  All are
-  decidable, and `SC` is checked on small examples at the end.
+* `R0`, `I0`, `CondA`, `Sib`, `Gstar`, and `SC` their conjunction
+  (`SC/Defs.lean`).  All are decidable, and `SC` is checked on small examples
+  at the end.
 * `ctps_iff_SC : CTPS M ↔ SC M`, from the two directions
   `sc_of_ctps` (COMB §8b Part 1) and `ctps_of_sc` (Part 2).
-* `r0_of_ctps` and `i0_of_ctps` (`SC/Invariants.lean`) are proved; the other
-  parts of the two directions are named placeholders (see the list below).
+* Part 1 is proved.  `r0_of_ctps` and `i0_of_ctps` (`SC/Invariants.lean`);
+  `condA_of_ctps`, `sib_of_ctps` and `gstar_of_ctps` by induction on
+  `PSS.STPS` (`SC/Step.lean`): one expansion step `M ↦ M[n]` keeps (A), Sib
+  and G\*.  The columns before the last column `j₁` of `M` are handled in
+  `SC/Pert.lean` (`M[n]` lowers the column `j₁`), the columns from `j₁` on by
+  induction on `n`, since they are a shifted copy of `M[n-1]` from `j₀` on.
+  The tree facts (ancestors, parents, terms, the order `<ₚ`) are in
+  `SC/Tree.lean`; the terms in `oper M n` in `SC/Oper.lean`.
 
-The facts about terms in `oper M n` that Part 1 uses are in `SC/Oper.lean`
-(`term_oper_copy`, `term_oper_anc`).
+## Placeholder (`sorry`)
 
-## Placeholders (`sorry`)
-
-* `condA_of_ctps` (COMB Lemma 1), `sib_of_ctps` (Lemma 7),
-  `gstar_of_ctps` (Lemma 8);
 * `ctps_of_sc` (COMB §8b Part 2).
 -/
 
@@ -46,50 +47,6 @@ namespace Googology.Trans.PSS
 open Forest
 
 open Bijectivity (CTPS ltPS lePS)
-
-/-! ## The five conditions -/
-
-/-- **(R0)** `M₀ = (0,0)`, and every root has `y = 0`. -/
-def R0 (M : PS) : Prop :=
-  M.head? = some (0, 0) ∧ ∀ i < M.length, par M i = none → yAt M i = 0
-
-/-- **(I0)** `x_{j+1} ≤ x_j + 1`. -/
-def I0 (M : PS) : Prop :=
-  ∀ j, j + 1 < M.length → xAt M (j + 1) ≤ xAt M j + 1
-
-/-- **(A)** `y_c ≤ y_{p(c)} + 1` for every non-root `c`. -/
-def CondA (M : PS) : Prop :=
-  ∀ c < M.length, ∀ p < M.length, par M c = some p → yAt M c ≤ yAt M p + 1
-
-/-- **(Sib)** Siblings have non-increasing terms: if `c < c'` have the same
-parent, or are both roots, then `T(c') ≤ₚ T(c)`. -/
-def Sib (M : PS) : Prop :=
-  ∀ c < M.length, ∀ c' < M.length, c < c' → par M c = par M c' → lePS (term M c') (term M c)
-
-/-- `u` is **descending**: it has a parent `p` with `y_u ≤ y_p`. -/
-def Descending (M : PS) (u : ℕ) : Prop := ∃ p < M.length, par M u = some p ∧ yAt M u ≤ yAt M p
-
-instance (M : PS) (u : ℕ) : Decidable (Descending M u) := by unfold Descending; infer_instance
-
-/-- `v(u)`: the nearest proper row-0 ancestor of `u` with `y ≤ y_u`. -/
-def vOf (M : PS) (u : ℕ) : Option ℕ := (ancs M u).find? (fun a => decide (yAt M a ≤ yAt M u))
-
-/-- **(G\*)** `T(u) <ₚ T(v(u))` for every descending node `u`. -/
-def Gstar (M : PS) : Prop :=
-  ∀ u < M.length, Descending M u → ∀ v < M.length, vOf M u = some v → ltPS (term M u) (term M v)
-
-/-- **Theorem SC's criterion**: R0, I0, (A), Sib and G\*. -/
-def SC (M : PS) : Prop := R0 M ∧ I0 M ∧ CondA M ∧ Sib M ∧ Gstar M
-
-instance (M : PS) : Decidable (R0 M) := by unfold R0; infer_instance
-instance (M : PS) : Decidable (I0 M) := by
-  unfold I0
-  exact decidable_of_iff (∀ j < M.length - 1, xAt M (j + 1) ≤ xAt M j + 1)
-    ⟨fun h j hj => h j (by omega), fun h j hj => h j (by omega)⟩
-instance (M : PS) : Decidable (CondA M) := by unfold CondA; infer_instance
-instance (M : PS) : Decidable (Sib M) := by unfold Sib; infer_instance
-instance (M : PS) : Decidable (Gstar M) := by unfold Gstar; infer_instance
-instance (M : PS) : Decidable (SC M) := by unfold SC; infer_instance
 
 /-! ## Part 1: CTPS ⇒ SC -/
 
@@ -124,17 +81,14 @@ theorem r0_of_ctps {M : PS} (h : CTPS M) : R0 M := by
 /-- **(I0) for standard sequences** (COMB Lemma 1). -/
 theorem i0_of_ctps {M : PS} (h : CTPS M) : I0 M := I0_of_stps h.1
 
-/-- **(A) for standard sequences** (COMB Lemma 1, (I2)).  Placeholder. -/
-theorem condA_of_ctps {M : PS} (h : CTPS M) : CondA M := by
-  sorry
+/-- **(A) for standard sequences** (COMB Lemma 1, (I2)). -/
+theorem condA_of_ctps {M : PS} (h : CTPS M) : CondA M := condA_of_stps h.1
 
-/-- **(Sib) for standard sequences** (COMB Lemma 7).  Placeholder. -/
-theorem sib_of_ctps {M : PS} (h : CTPS M) : Sib M := by
-  sorry
+/-- **(Sib) for standard sequences** (COMB Lemma 7). -/
+theorem sib_of_ctps {M : PS} (h : CTPS M) : Sib M := sib_of_stps h.1
 
-/-- **(G\*) for standard sequences** (COMB Lemma 8).  Placeholder. -/
-theorem gstar_of_ctps {M : PS} (h : CTPS M) : Gstar M := by
-  sorry
+/-- **(G\*) for standard sequences** (COMB Lemma 8). -/
+theorem gstar_of_ctps {M : PS} (h : CTPS M) : Gstar M := gstar_of_stps h.1
 
 /-- **Theorem SC, Part 1: a standard sequence satisfies SC.** -/
 theorem sc_of_ctps {M : PS} (h : CTPS M) : SC M :=

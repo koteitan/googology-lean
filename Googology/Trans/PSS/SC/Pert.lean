@@ -72,7 +72,7 @@ theorem exists_end {s : ℕ} (hs : s < j1) (hna : ¬ Anc M s j1) :
   classical
   have : ∃ e, s < e ∧ e ≤ j1 ∧ xAt M e ≤ xAt M s := by
     by_contra hne
-    push_neg at hne
+    push Not at hne
     exact hna ⟨hs, fun j h1 h2 => hne j h1 h2⟩
   obtain ⟨e0, he0⟩ := this
   obtain ⟨e, ⟨h1, h2, h3⟩, _, hmin⟩ :=

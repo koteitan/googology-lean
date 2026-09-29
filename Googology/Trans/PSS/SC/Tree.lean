@@ -34,10 +34,10 @@ theorem xAt_of_ge {M : PS} {j : ℕ} (h : M.length ≤ j) : xAt M j = 0 := by
   simp [xAt, List.getD_eq_getElem?_getD, List.getElem?_eq_none h]
 
 theorem xAt_take {M : PS} {j k : ℕ} (h : j < k) : xAt (M.take k) j = xAt M j := by
-  simp [xAt, List.getD_eq_getElem?_getD, List.getElem?_take, h]
+  simp [xAt, List.getD_eq_getElem?_getD, h]
 
 theorem yAt_take {M : PS} {j k : ℕ} (h : j < k) : yAt (M.take k) j = yAt M j := by
-  simp [yAt, List.getD_eq_getElem?_getD, List.getElem?_take, h]
+  simp [yAt, List.getD_eq_getElem?_getD, h]
 
 theorem yAt_append_left {l₁ l₂ : PS} {j : ℕ} (h : j < l₁.length) :
     yAt (l₁ ++ l₂) j = yAt l₁ j := by
