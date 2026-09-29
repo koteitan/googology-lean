@@ -253,6 +253,14 @@ example : mat (lh exN) =
     [(0, 0), (1, 1), (2, 2), (1, 1), (0, 0), (1, 1), (2, 2), (1, 1)] := by
   decide
 example : anchor (.node 0 [.node 1 [], .node 1 []]) = some (.node 0 [.node 1 []]) := by decide
+/-- `𝓛((0,0)(1,1)) = ((0,0)(1,1))`: it is epsilon. -/
+example : mat (bigL (.node 0 [.node 1 []])) = [(0, 0), (1, 1)] := by decide
+/-- `𝓛((0,0)(1,0)(1,0)) = log = (0,0)(0,0)`: `ω^2 = ω^{1+1}`. -/
+example : mat (bigL (.node 0 [.node 0 [], .node 0 []])) = [(0, 0), (0, 0)] := by decide
+/-- `𝓛((0,0)(1,1)(1,0)(2,1)) = (0,0)(1,1) + (0,0)(1,1)`: the `y = 0` child `(1,0)(2,1)`
+reads `(0,0)(1,1)`, equal to `(0, H)`, so nothing is absorbed. -/
+example : mat (bigL (.node 0 [.node 1 [], .node 0 [.node 1 []]])) =
+    [(0, 0), (1, 1), (0, 0), (1, 1)] := by decide
 example : fuelOf exN = 3 := by decide
 
 end Googology.Trans.PSS.Phi

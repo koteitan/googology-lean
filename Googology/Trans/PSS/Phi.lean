@@ -5,6 +5,10 @@ import Googology.Trans.PSS.Phi.Std
 import Googology.Trans.PSS.Phi.LemmaC
 import Googology.Trans.PSS.Phi.Lh
 import Googology.Trans.PSS.Phi.Term
+import Googology.Trans.PSS.Phi.Nodes
+import Googology.Trans.PSS.Phi.CNF
+import Googology.Trans.PSS.Phi.LogMono
+import Googology.Trans.PSS.Phi.LemmaR
 
 /-!
 # The term operations of `Φ` give standard matrices
@@ -38,6 +42,18 @@ collects what is proved about them, following `proof/COMB.md`.
 * `Phi/Term.lean`: **Theorem T** (`lhF_eq_lh`): for every term `N`, standard or
   not, `lhF f N = lh N` for all `f ≥ fuelOf N`.  The proof follows the
   provenance invariant of COMB §8 (`Inv`, `jump_inv`, `lhF_stable`).
+* `Phi/Nodes.lean`: every standard matrix is the matrix of a node
+  (`exists_mat_eq`); `o` on nodes (`ordOf`) is order-preserving with a
+  downward closed image; **Lemma 5 (a)** `o(A ++ B) = o(A) + o(B)`
+  (`ordOf_append`).
+* `Phi/CNF.lean`: the Cantor normal form as sums `ω^β_1 + ⋯ + ω^β_m`.
+* `Phi/LogMono.lean`: `𝓛 N = (0, H) + Lo` (`bigL_eq`); **`𝓛` is strictly
+  monotone** (`bigL_lt_bigL`) and **onto the nodes** (`exists_bigL_eq`).
+* `Phi/LemmaR.lean`: **Lemma R** (`lemmaR`): `o(N) = ω^{o(𝓛 N)}` for standard
+  `N`; `lemmaR_log` (non-epsilon), `lemmaR_eps` (epsilon: `o(N) = ω^{o(N)}`),
+  `bigL_lt_iff` (`𝓛` is an order embedding).  The proof reads order types
+  (Lemma 5 (a), the Cantor normal form, and `𝓛` onto the nodes) instead of the
+  fundamental sequences of COMB §7.
 
 ## Main statements (on matrices)
 -/
