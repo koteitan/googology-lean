@@ -33,7 +33,13 @@ Two consequences ([PROOF](PROOF.md) Cor 7.2):
   referees found has been repaired; the repairs of PROOF and TR were checked again by the
   same referees. The repairs of COMB were minor (citations and omitted one-line steps) and
   were not re-checked.
-- Not formalized in Lean.
+- **In Lean.** The whole chain is formalized — Theorem SC (`../SC.lean`), the term operations
+  and Lemmas C, 2.4, T, R (`../Phi.lean`), Lemma TR (`../TR.lean`), and the main chain with the
+  Main Theorem `mainTheorem_mat` and Cor 7.2 (`../Main.lean`) — except two statements, E1 and
+  E2, which are still `sorry` in `../Main/E12.lean` (work in progress). The facts cited from the
+  literature are axioms in `../TR/Cited.lean` (11, about Wilken's $`\vartheta`$) and
+  `../Main/Cited.lean` (20, about $`R_1^+`$); a referee checked each of them against the
+  papers and found all of them correct.
 - **One outside assumption.** The Lean function `Ord.psi`
   ([Ord.lean](../../../Notation/ExBuchholz/Ord.lean)) is Buchholz's $`\psi`$. This is used only
   to read Cor 7.2(b) as "the image is $`\mathrm{Core} \setminus \{0\}`$": [Rank.lean](../Rank.lean)
@@ -75,6 +81,24 @@ where it was repaired.
   not published. Some of them used Samuel Alexander's calculator
   [poral](https://github.com/semitrivial/poral) as an oracle. poral has no license, so no
   part of it is included here.
+
+## An erratum in the literature
+
+While formalizing, we found that Lemma 5.7.1 of Carlson and Wilken, "Normal forms for
+elementary patterns" (JSL 77, 2012), disagrees with their own Definition 5.1 of the bar
+operator. Take $`\alpha = \omega^{\omega^{\varepsilon_0+1}} = \vartheta(\vartheta(\vartheta(\Omega_1)))`$ and
+$`\tau = 1`$; its localization is $`(1, \varepsilon_0, \alpha)`$.
+- Definition 5.1 gives $`\bar{\alpha} = \varepsilon_0`$ (here $`\eta' = 0`$ and $`\eta_0 = \omega^{\varepsilon_0+1} \ne 1`$,
+  so $`\bar{\alpha} = \alpha_{n-1}`$).
+- Lemma 5.7.1, non-epsilon case, gives $`\bar{\alpha} = \max(\{\gamma \in (\tau,\alpha) \cap P : \lambda_\gamma \ge \lambda_\alpha\} \cup \{\tau\}) = 1`$,
+  because $`\lambda_\alpha = \varepsilon_0 + 1`$ and every principal $`\gamma \lt \alpha`$ has $`\lambda_\gamma \le \varepsilon_0`$.
+
+The lemma repeats the statement of Wilken's "Ordinal arithmetic based on Skolem hulling" (APAL
+145, 2007), Lemma 8.2, whose proof sets $`\bar{\alpha} = \alpha_{n-1}`$ without checking
+$`\lambda_{\alpha_{n-1}} \ge \lambda_\alpha`$. Definition 5.1 agrees with that proof, and the rest of the
+2012 paper (Lemma 5.10(3), Theorem 6.1) follows Definition 5.1. The proof here uses Definition
+5.1 and never cites Lemma 5.7.1; Corollary 6.3, which it does use, is not affected. The epsilon
+case of Lemma 5.7.1 agrees with Definition 5.1.
 
 ## Sources
 

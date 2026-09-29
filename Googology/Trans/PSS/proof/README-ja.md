@@ -29,7 +29,7 @@ $`\Phi`$ は標準形のペア数列 $`M`$ を、Carlson の意味の 1 階の�
 ## 状態
 
 - 紙の上で証明した。3 つの部分それぞれを、独立した査読者が、反証するつもりで確かめた。偽の命題は見つからなかった。査読者が見つけた穴と細かい点は、すべて直した。PROOF と TR の直しは、同じ査読者がもう一度確かめた。COMB の直しは細かいもの（引用と、省いていた 1 行の手順）で、もう一度は確かめていない。
-- Lean では形式化していない。
+- **Lean。** 鎖の全体を形式化した。定理 SC（`../SC.lean`）、項の操作と補題 C・2.4・T・R（`../Phi.lean`）、Lemma TR（`../TR.lean`）、主な鎖と主定理 `mainTheorem_mat`・Cor 7.2（`../Main.lean`）である。ただし E1 と E2 の 2 つの命題は、まだ `../Main/E12.lean` で `sorry` である（作業中）。文献から引用した事実は、`../TR/Cited.lean`（Wilken の $`\vartheta`$ について 11 個）と `../Main/Cited.lean`（$`R_1^+`$ について 20 個）に公理として置いた。査読者がそれぞれを論文と照らし合わせ、すべて正しいと確かめた。
 - **外からの仮定が 1 つある。** Lean の関数 `Ord.psi`
   （[Ord.lean](../../../Notation/ExBuchholz/Ord.lean)）が Buchholz の $`\psi`$ であること。
   これを使うのは、Cor 7.2(b) を「像は $`\mathrm{Core} \setminus \{0\}`$」と読むところだけである。
@@ -68,6 +68,14 @@ PROOF と TR はいくつかのファイルに分けてある。GitHub は 1 ペ
 - 文書にある数値の確かめには、公開していないスクリプトも使った。その一部は、
   Samuel Alexander の計算機 [poral](https://github.com/semitrivial/poral) を答え合わせに使った。
   poral にはライセンスが無いので、ここには一切含めていない。
+
+## 文献の誤り
+
+形式化の途中で、Carlson と Wilken, "Normal forms for elementary patterns"（JSL 77, 2012）の Lemma 5.7.1 が、同じ論文の bar 操作の定義 Definition 5.1 と食い違うことが分かった。$`\alpha = \omega^{\omega^{\varepsilon_0+1}} = \vartheta(\vartheta(\vartheta(\Omega_1)))`$、$`\tau = 1`$ とする。$`\alpha`$ の localization は $`(1, \varepsilon_0, \alpha)`$ である。
+- Definition 5.1 では $`\bar{\alpha} = \varepsilon_0`$ になる（$`\eta' = 0`$、$`\eta_0 = \omega^{\varepsilon_0+1} \ne 1`$ なので $`\bar{\alpha} = \alpha_{n-1}`$）。
+- Lemma 5.7.1 の $`\varepsilon`$ 数でない場合の式 $`\bar{\alpha} = \max(\{\gamma \in (\tau,\alpha) \cap P : \lambda_\gamma \ge \lambda_\alpha\} \cup \{\tau\})`$ では 1 になる。$`\lambda_\alpha = \varepsilon_0 + 1`$ で、$`\alpha`$ より小さい主要な $`\gamma`$ はどれも $`\lambda_\gamma \le \varepsilon_0`$ だからである。
+
+この補題は、Wilken, "Ordinal arithmetic based on Skolem hulling"（APAL 145, 2007）の Lemma 8.2 の言明を写したものである。その証明は、$`\lambda_{\alpha_{n-1}} \ge \lambda_\alpha`$ を確かめずに $`\bar{\alpha} = \alpha_{n-1}`$ としている。Definition 5.1 はこの証明と合い、2012 年の論文の残り（Lemma 5.10(3)、Theorem 6.1）も Definition 5.1 に従う。ここでの証明は Definition 5.1 を使い、Lemma 5.7.1 は引用しない。使っている Corollary 6.3 には影響しない。Lemma 5.7.1 の $`\varepsilon`$ 数の場合は Definition 5.1 と一致する。
 
 ## 出典
 
