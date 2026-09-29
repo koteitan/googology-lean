@@ -308,7 +308,7 @@ Then:
 - The **point** is the index of $`\hat{M}`$.
 - Addition is the relation $`v_i + v_j = v_k`$ of A.2, as in the 2-row version; the program does not print it.
 
-**Output.** For each $`i`$, one line: `*` if $`i`$ is the point (a space otherwise), $`i`$, $`\mathrm{show}(v_i)`$, `reach` and the reach of $`v_i`$, and, if $`v_i`$ has $`\le_2`$ pairs, `<=2` and their $`j`$ in increasing order.
+**Output.** One line: the elements $`v_0 \lt v_1 \lt \cdots`$ from left to right, written `0` for $`v_0 = 0`$, `a` for the term $`(0,0,0)`$, `n0`, `n1`, … for the other one-term elements in increasing order, and `x+y+…` for a sum of such names; `*` before the point; `(` before $`v_i`$ and `)` after its reach $`v_{r}`$ when $`r \gt i`$; `[` before $`v_i`$ and `]` after $`v_j`$ for each $`\le_2`$ pair $`(i, j)`$. At one element, the brackets of the longer span open first, and the bracket opened last closes first. With `--table`, one line per element instead: `*` if $`i`$ is the point, $`i`$, $`\mathrm{show}(v_i)`$, `reach` and the reach of $`v_i`$, and `<=2` with the $`j`$ of its $`\le_2`$ pairs.
 
 ### A.21 Names in the code
 
@@ -325,7 +325,7 @@ Then:
 | $`\mathrm{le2}`$, $`\mathrm{succ}`$, $`\mathrm{dead}`$, $`\mathrm{d1}`$ | `le2_info`, `le2_succ`, `is_dead`, `d1_info` | $`\mathrm{Img}`$, $`\mathrm{pre}`$ | `IDXIMG`, `PREBLOCK` |
 | $`\mathrm{LK}`$, $`\mathrm{OL}`$, $`\mathrm{OD}`$, $`\mathrm{em}`$ | `level_kids`, `ownleaf`, `owndeep`, `ends_in_marker` | $`\mathrm{F}`$ | `_lh1_kids` |
 | $`\oplus`$, $`\succ`$ | `oplus`, `scmp` | $`\mathrm{lh}`$, $`\mathrm{lh}_1`$, $`\mathrm{LG}`$ | `lh`, `lh1_le2`, `_lh1_groups` |
-| $`\mathrm{wit}`$, $`\mathrm{cl}`$, $`\mathrm{copy}`$ | `le2_wit`, `closure`, `d94_copy` | $`\Phi_3`$, output | `build`, `show` |
+| $`\mathrm{wit}`$, $`\mathrm{cl}`$, $`\mathrm{copy}`$ | `le2_wit`, `closure`, `d94_copy` | $`\Phi_3`$, output | `build`, `pattern`, `show` |
 | $`\mathrm{parse}`$, $`\mathrm{tree}`$ | `tss.parse`, `tss.from_mat` | $`\mathrm{cols}`$, $`\mathrm{mat}`$, $`+`$, $`\Sigma`$ | `tss.cols_term`, `tss.mat`, `tss.add`, `tss.addall` |
 
 **Notes on the code.** The read context is kept in global stacks (`KCTX`, `KDX`, `K1REF`) that a nested call of `lh` does not clear. On all 3290 test matrices, clearing them at every call of `lh` gives the same patterns, so the text states the cleared form (A.5). The parameter `top` of `C2` and `C2s` has no effect.

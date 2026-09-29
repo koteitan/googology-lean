@@ -308,7 +308,7 @@ $`\mathrm{Img}(t)`$ は、1 項の節点 $`(u) \in V`$ の $`\mathrm{lh}(u)`$ �
 - **点**は $`\hat{M}`$ の番号である。
 - 加法は、2 行版と同じく A.2 の関係 $`v_i + v_j = v_k`$ である。プログラムは出力しない。
 
-**出力。** 各 $`i`$ について 1 行：$`i`$ が点なら `*`（そうでなければ空白）、$`i`$、$`\mathrm{show}(v_i)`$、`reach` と $`v_i`$ の届く先、$`v_i`$ が $`\le_2`$ の組を持つなら `<=2` とその $`j`$ を小さい順に。
+**出力。** 1 行で出す。元 $`v_0 \lt v_1 \lt \cdots`$ を左から並べ、$`v_0 = 0`$ は `0`、項 $`(0,0,0)`$ は `a`、ほかの項が 1 つの元は小さい順に `n0`、`n1`、…、和はその名前を `x+y+…` とつないで書く。点の前に `*` を付ける。届く先 $`v_r`$ が $`r \gt i`$ なら、$`v_i`$ の前に `(`、$`v_r`$ の後に `)` を置く。$`\le_2`$ の組 $`(i, j)`$ ごとに、$`v_i`$ の前に `[`、$`v_j`$ の後に `]` を置く。同じ元では、長い区間の括弧が先に開き、後で開いた括弧が先に閉じる。`--table` を付けると、代わりに元ごとに 1 行：$`i`$ が点なら `*`、$`i`$、$`\mathrm{show}(v_i)`$、`reach` と $`v_i`$ の届く先、$`\le_2`$ の組があれば `<=2` とその $`j`$。
 
 ### A.21 コードの中の名前
 
@@ -325,7 +325,7 @@ $`\mathrm{Img}(t)`$ は、1 項の節点 $`(u) \in V`$ の $`\mathrm{lh}(u)`$ �
 | $`\mathrm{le2}`$, $`\mathrm{succ}`$, $`\mathrm{dead}`$, $`\mathrm{d1}`$ | `le2_info`, `le2_succ`, `is_dead`, `d1_info` | $`\mathrm{Img}`$, $`\mathrm{pre}`$ | `IDXIMG`, `PREBLOCK` |
 | $`\mathrm{LK}`$, $`\mathrm{OL}`$, $`\mathrm{OD}`$, $`\mathrm{em}`$ | `level_kids`, `ownleaf`, `owndeep`, `ends_in_marker` | $`\mathrm{F}`$ | `_lh1_kids` |
 | $`\oplus`$, $`\succ`$ | `oplus`, `scmp` | $`\mathrm{lh}`$, $`\mathrm{lh}_1`$, $`\mathrm{LG}`$ | `lh`, `lh1_le2`, `_lh1_groups` |
-| $`\mathrm{wit}`$, $`\mathrm{cl}`$, $`\mathrm{copy}`$ | `le2_wit`, `closure`, `d94_copy` | $`\Phi_3`$, 出力 | `build`, `show` |
+| $`\mathrm{wit}`$, $`\mathrm{cl}`$, $`\mathrm{copy}`$ | `le2_wit`, `closure`, `d94_copy` | $`\Phi_3`$, 出力 | `build`, `pattern`, `show` |
 | $`\mathrm{parse}`$, $`\mathrm{tree}`$ | `tss.parse`, `tss.from_mat` | $`\mathrm{cols}`$, $`\mathrm{mat}`$, $`+`$, $`\Sigma`$ | `tss.cols_term`, `tss.mat`, `tss.add`, `tss.addall` |
 
 **コードについての注。** 読みの文脈は大域の積み重ね（`KCTX`、`KDX`、`K1REF`）に置かれ、入れ子の `lh` の呼び出しはそれを空にしない。3290 個の試験の行列すべてで、`lh` を呼ぶたびにそれらを空にしても同じパターンになる。よって本文は空にする形（A.5）で書いた。`C2` と `C2s` の引数 `top` は何もしない。
