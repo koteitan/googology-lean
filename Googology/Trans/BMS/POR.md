@@ -1583,7 +1583,11 @@ child. As the first child of $`L_m`$, $`E`$ is still read above its levels (`kba
 after $`(0,0,0)(1,1,1)`$), 125 pairs are certified "<" and 26 are undecided (before: 126 and 25). The other six
 sets are as in §14.
 
-## 17. Next
+## 17. Theory: $`R_2^+`$ below $`\upsilon_{\omega+1}`$
+
+The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi_3`$ (Lemma L, Theorems A and B, Proposition P′; 20 undecided pairs of §9 decided) are in [R2PLUS.md](R2PLUS.md), with their status and what stays open.
+
+## 18. Next
 
 - The 287 undecided pairs (§9): prove that $`\iota \circ \Phi_3`$ is monotone inside a term.
   A longer oracle budget helps little: 23 of 310 in about 27 seconds each.
@@ -1603,7 +1607,7 @@ sets are as in §14.
 - The definition of §15 ($`\Phi_{3\mathrm{def}}`$): shorten the list of level columns (15.6) and the reach
   $`\mathrm{lh}_1`$ (15.8), and replace the three named cases by general rules.
 
-## 18. Programs
+## 19. Programs
 
 - `por/tss.py`: 3-row matrices and terms, and the lexicographic order.
 - `por/tr3.py`: the translation $`\mathcal{T}_3`$ into Wilken's notation for $`R_2`$ (§9). `python3 por/tr3.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"` prints `u[1 + 1]`, i.e. $`\upsilon_2`$.
