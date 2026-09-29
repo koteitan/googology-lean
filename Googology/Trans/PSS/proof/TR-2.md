@@ -22,6 +22,8 @@ $`\mathrm{Lng}\ M \ge 2`$:
 - **Limit $`M`$:** $`\mathrm{val}\ \mathcal T(M) = \sup \mathrm{val}\ \mathcal T(M[n])`$ (Cof) $`= \sup o(M[n])`$ (IH, since $`M[n] \lt_p M`$)
   $`= o(M)`$ ([COMB](COMB.md) Lemma 5(b)). ∎
 
+**Lean.** Theorem Cof is `cof` in [TR/Cof.lean](../TR/Cof.lean) and Lemma TR is `tr` (`tr_mat` on matrices) in [TR.lean](../TR.lean), with no `sorry`; the axioms are the facts (L), (C), (E), (Exp) and (Seg) of [§1](TR.md) ([TR/Cited.lean](../TR/Cited.lean)), and (Min) is not needed: the C1 sub-case of (Bj₀) goes by the size induction of the general case (`base_C1`).
+
 In particular $`\mathrm{Clos}(N)`$ holds for every $`N`$ (Theorem TR-red, ⇒), and so do S1b and S2.
 
 ### 4b.0 Setting (pair-sequence facts only)

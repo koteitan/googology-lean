@@ -87,6 +87,8 @@ is strictly increasing on nodes: roots are non-increasing (S1), their images are
 non-increasing (so ANF with no absorption), and nodes are ordered lexicographically on
 root sequences ([PROOF](PROOF.md) Lemma 2.1; [COMB](COMB.md) Lemma 5(a)).
 
+**Lean.** Theorem M is `mono` (and `mono_node` on nodes) in [TR/Mono.lean](../TR/Mono.lean), with no `sorry`, for every term with the tree condition `TGood []`; M2 is `chain` ([TR/Chain.lean](../TR/Chain.lean)), M4 is `bound` ([TR/Bound.lean](../TR/Bound.lean)), and the cited facts of §1 are the axioms of [TR/Cited.lean](../TR/Cited.lean).
+
 **Coll images are covered.** Every term tree that occurs inside a Coll image
 $`Y = (0, A \oplus \mathrm{Coll}_A(\mathrm{ch}(s)[:i]))`$ is valid, because $`Y`$ is standard ([COMB](COMB.md) Lemma C). So Mono\*
 applies to them with no extra argument. This is the form used in [PROOF](PROOF-3.md) §13 (NS, CI,
