@@ -526,7 +526,7 @@ induction of Prop 4.3 (M7, [§4.5](PROOF.md)). So $`K = K(\xi) = o(S_{j-1})`$ wi
   - But a jump input satisfies $`\beta \gt \mathrm{lead}(K)`$. Since $`\beta \in P`$, this gives $`\beta \ge \mathrm{lead}(K) \cdot \omega \gt K`$.
   - Contradiction. ∎
 
-**Lean.** E2 is stated in this value form as `E2` in [Main/E12.lean](../Main/E12.lean) and left as `sorry`: PL and [W07b] Cor 5.9 are not formalized.
+**Lean.** E2 is `E2` in [Main/E12.lean](../Main/E12.lean), in this value form, with no `sorry`; PL is `pl` ([Main/PL.lean](../Main/PL.lean), by KEY and Lemma 10 instead of S-run and LV), and [W07b] Cor 5.9 (`τ = 1`) is the axiom `cor59` of [Main/Cited2.lean](../Main/Cited2.lean).
 
 ### 14.4 Intermediate status (superseded; see [§0](PROOF.md) and [§16](PROOF-4.md))
 

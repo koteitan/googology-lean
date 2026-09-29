@@ -17,7 +17,16 @@ a standard pair sequence `M` puts its point at `o(M) = 1 + val(pairTerm M)`.
   (Lemma 2.2, `o(add(a, b)) = o(a) + o(b)`).
 * `Main/Fold.lean`: **Lemma F** and **Prop 4.3** (the fold computes the reach,
   given E1 and E2).
-* `Main/E12.lean`: **E1** and **E2** (open in Lean, see below).
+* `Main/Cited2.lean`: **the cited facts for E1 and E2 as axioms** — `ι_{τ,α}`, `t^α_τ`,
+  `ζ^τ`, `λ^τ` on `T¹` ([W07a] Def 7.1, 6.2, 4.11, 7.5); [W07a] Cor 7.3, Lemma 6.3 and the
+  remark after Def 7.5; [W07b] Theorem 5.3 and Cor 5.9.
+* `Main/EpsCore.lean`: small facts on roots used by KEY and NS.
+* `Main/TIota.lean`: `t^α_τ ∘ ι_{τ,α}` as a map `J` on `T¹`, and `λ_α = val J(Δ) + ζ_α`
+  (`lam_eq_jS`).
+* `Main/CI.lean`, `Main/CIAux*.lean`: **Lemma CI** (`ci`).
+* `Main/E1T.lean`, `Main/E1TAux*.lean`: **`E1_T`** (`e1T`), from CI and NS.
+* `Main/PL.lean`, `Main/PLAux*.lean`: **Lemma PL** (`pl`), from KEY and Lemma 10.
+* `Main/E12.lean`: **E1** and **E2**.
 * `Main/Reach.lean`: **Lemma 4.2** and **Lemma L** (`lemmaL`), by induction along
   the provenance invariant of Theorem T.
 * `Main/Pattern.lean`: `V_M`, the pattern `Φ(M)`, `ι`, **Lemma 5.1**.
@@ -35,10 +44,9 @@ a standard pair sequence `M` puts its point at `o(M) = 1 + val(pairTerm M)`.
 
 ## Status
 
-Only `E1` and `E2` (`Main/E12.lean`) are left as `sorry`.  They are proved on
-paper (`proof/PROOF-2.md` §12.5, §12.6, `proof/PROOF-3.md` §13.2, §14.3) through
-Wilken's syntactic maps on `T¹` (`t^α_τ`, `ι_{τ,α}`, `λ^τ`), Lemma CI and the
-lemmas of `proof/COMB.md`, which are not formalized here.
+No `sorry`.  `#print axioms mainTheorem_mat`: `propext`, `Classical.choice`,
+`Quot.sound`, and the cited facts of `TR/Cited.lean`, `Main/Cited.lean` and
+`Main/Cited2.lean`.
 -/
 
 namespace Googology.Trans.PSS.Main

@@ -28,7 +28,7 @@ README の表のセルごとに、残りの作業を並べる。
       - `TrioFixFuel` の燃料 `max 200 (a の深さ)` が、どの `a` でも足りることを証明する（燃料を増やしても行列が変わらない。シートのラベルといくつかの族で確認済み）
 - ペア数列と加法的パターン（[Trans/PSS/POR-ja.md](Googology/Trans/PSS/POR-ja.md)）
   - 写像 Φ が順序を保ち、像が R₁⁺ の核全体であるという紙の上の証明を、Lean で形式化する（[Trans/PSS/proof/](Googology/Trans/PSS/proof/README-ja.md)：ι(Φ(M)) = 1 + val(pairTerm M)）
-    - 🤖 主な鎖は E1 と E2（[Main/E12.lean](Googology/Trans/PSS/Main/E12.lean)）を除いて Lean にある（[Trans/PSS/Main.lean](Googology/Trans/PSS/Main.lean)）。標準の epsilon 根 N、α = o(N)、畳み込みの入力 Y_1, …, Y_n について、E1：λ_α = α + o(Y_1) + ⋯ + o(Y_n)。E2：pre の次の入力 Y と ξ = α + o(pre) について o(Y) > lead(lh(κ^α_ξ)) なら、o(Y) は α-≤₁-最小（Wilken の ι_{1,α}、t^α_τ、CI、PL、[W07b] 定理 5.3、系 5.9 が要る）
+    - [Main/Cited2.lean](Googology/Trans/PSS/Main/Cited2.lean) の引用の公理（[W07a] 定義 6.2、7.1、7.5、系 7.3、補題 6.3、[W07b] 定理 5.3、系 5.9）を論文と照らし合わせる（主な鎖に `sorry` はもうない）
   - Φ をトリオ数列と R₂⁺ へ広げる（[Trans/BMS/POR-ja.md](Googology/Trans/BMS/POR-ja.md)。Φ₃i は (0,0,0)(1,1,1)(2,1,1) の手前まで順序の食い違いが 0。Φ₃k、Φ₃l、Φ₃m が行 915 より上へ広げた）
     - (0,0,0)(1,1,1)(2,1,1) の手前まで：未決の「極限への一歩」の 287 組を決める（項の中で ι∘Φ₃ が単調であることを証明する）、行 907（行 906/907 でシートと Φ₃i のどちらが正しいか）、行 1009（ι(Φ₃i) ≤ ι(シート)）
     - R₂⁺ そのものを解析する（Wilken の R₂ は純粋な構造）。たとえば R₂⁺ と R₂ の間の υ_ι ↔ ε₀·ι を証明する

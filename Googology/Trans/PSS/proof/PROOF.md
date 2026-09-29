@@ -970,7 +970,7 @@ Route B (Thm 6.3 with Lemma 6.4) is not used.
 <em>Proof.</em> (a) follows from Thm 7.1 and Lemma 1.1(a). (b) follows from Thm 7.1, Lemma 1.1(b)
 (range of $`o`$ = $`[1,\psi_0(\Omega_\omega))`$ on $`\mathrm{Std}`$), and C3. ∎
 
-**Lean.** Theorem 7.1 is `mainTheorem` and `mainTheorem_mat`, and Cor 7.2 is `cor72a`, `cor72b` and `cor72b_core` (with the axiom `core_eq_psi` for C3 and M13), in [Main.lean](../Main.lean). The only `sorry` they depend on are E1 and E2 ([Main/E12.lean](../Main/E12.lean)).
+**Lean.** Theorem 7.1 is `mainTheorem` and `mainTheorem_mat`, and Cor 7.2 is `cor72a`, `cor72b` and `cor72b_core` (with the axiom `core_eq_psi` for C3 and M13), in [Main.lean](../Main.lean). They depend on no `sorry`; E1 and E2 are in [Main/E12.lean](../Main/E12.lean).
 
 **Prop 7.3 (PROVED from L and C1; justification corrected, M12).** Assume L. Then the order
 half of the conjecture already implies Theorem 7.1. Hence the conjecture is equivalent to

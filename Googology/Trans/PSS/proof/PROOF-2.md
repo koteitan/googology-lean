@@ -528,7 +528,7 @@ gave 66 false mismatches.
 **E1 (PROVED from $`\mathrm{E1}_T`$, TR and [W07b] Thm 5.3).** $`\lambda_{o(N)} = \lambda^1_{\mathcal{T}(N)}`$, because
 $`\mathrm{val}(\mathcal{T}N) = o(N)`$. Then $`\mathrm{E1}_T`$ gives E1.
 
-**Lean.** E1 is stated as `E1` in [Main/E12.lean](../Main/E12.lean) and left as `sorry`: CI, $`\iota_{1,\alpha}`$, $`t^\alpha_\tau`$ and [W07b] Thm 5.3 are not formalized.
+**Lean.** E1 is `E1` in [Main/E12.lean](../Main/E12.lean), with no `sorry`: $`\iota_{1,\alpha}`$, $`t^\alpha_\tau`$, $`\zeta`$, $`\lambda^\tau`$ and the cited [W07b] Thm 5.3, [W07a] Cor 7.3, Lemma 6.3 and the remark after Def 7.5 are in [Main/Cited2.lean](../Main/Cited2.lean); $`\lambda_\alpha = \mathrm{val}\,(t \circ \iota)(\Delta) + \zeta_\alpha`$ is `lam_eq_jS` ([Main/TIota.lean](../Main/TIota.lean)); CI is `ci` ([Main/CI.lean](../Main/CI.lean)) and $`\mathrm{E1}_T`$ is `e1T` ([Main/E1T.lean](../Main/E1T.lean)).
 
 ### 12.6 E2, and the circularity
 

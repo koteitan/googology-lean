@@ -28,7 +28,7 @@ The remaining work, arranged by the cells of the README tables.
       - prove that the fuel `max 200 (depth of α)` of `TrioFixFuel` is enough for every `α` (more fuel never changes the matrix; checked on the sheet labels and some families)
 - Pair sequences and additive patterns of resemblance ([Trans/PSS/POR.md](Googology/Trans/PSS/POR.md))
   - formalize in Lean the paper proof that Φ preserves the order and that its image is the whole core of R₁⁺ ([Trans/PSS/proof/](Googology/Trans/PSS/proof/README.md): ι(Φ(M)) = 1 + val(pairTerm M))
-    - 🤖 the main chain is in Lean ([Trans/PSS/Main.lean](Googology/Trans/PSS/Main.lean)) except E1 and E2 ([Main/E12.lean](Googology/Trans/PSS/Main/E12.lean)): for a standard epsilon root N with α = o(N) and fold inputs Y_1, …, Y_n, E1: λ_α = α + o(Y_1) + ⋯ + o(Y_n); E2: if o(Y) > lead(lh(κ^α_ξ)) for the input Y after pre and ξ = α + o(pre), then o(Y) is α-≤₁-minimal (needs Wilken's ι_{1,α}, t^α_τ, CI, PL and [W07b] Thm 5.3, Cor 5.9)
+    - check the cited axioms of [Main/Cited2.lean](Googology/Trans/PSS/Main/Cited2.lean) ([W07a] Def 6.2, 7.1, 7.5, Cor 7.3, Lemma 6.3; [W07b] Thm 5.3, Cor 5.9) against the papers (the main chain has no `sorry` now)
   - extend Φ to trio sequences and R₂⁺ ([Trans/BMS/POR.md](Googology/Trans/BMS/POR.md); Φ₃i has 0 order violations below (0,0,0)(1,1,1)(2,1,1); Φ₃k, Φ₃l and Φ₃m extend it above row 915)
     - below (0,0,0)(1,1,1)(2,1,1): decide the 287 undecided limit-step pairs (prove that ι∘Φ₃ is monotone inside a term), row 907 (the sheet or Φ₃i on rows 906/907), row 1009 (ι(Φ₃i) ≤ ι(sheet))
     - analyse R₂⁺ itself (Wilken's R₂ is the pure structure), e.g. prove υ_ι ↔ ε₀·ι between R₂⁺ and R₂
