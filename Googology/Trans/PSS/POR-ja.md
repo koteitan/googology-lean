@@ -2,7 +2,7 @@
 
 # ペア数列から加法的パターン（$`R_1^+`$）への写像 $`\Phi`$
 
-**状態：紙の上で証明済み（§8、[proof/](proof/README-ja.md)）。数値の証拠もある。** Lean ではまだ形式化していない。
+**状態：紙の上で証明済み（§8、[proof/](proof/README-ja.md)）。Lean でも `sorry` なしで形式化した（`Main.lean` の `mainTheorem_mat`）。文献から引用した事実は、点検済みの公理として置いた。数値の証拠もある。**
 
 標準形のペア数列 $`M`$ から、Carlson の加法的パターン（階数 1）$`\Phi(M)`$ を作る写像を定める。
 $`\Phi(M)`$ は、行列の木を組み替えるだけで作る。$`\psi`$ の項は書かない。
@@ -191,7 +191,7 @@ x \le_1 z \iff x = z \lor (x \text{ は項が 1 つ} \land x \le z \le \mathrm{l
 
 ## 8. 証明（紙の上）
 
-強い形 $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$ を、紙の上で証明した。証明の全体は [proof/README-ja.md](proof/README-ja.md) にある。これから定理の両方の半分が出る：$`\Phi`$ は順序を保ち、$`\Phi`$ の点は核の 0 でない値を全部とる。3 つの部分それぞれを独立した査読者が確かめた。偽の命題は見つからず、見つかった穴と細かい点は直した。Lean ではまだ形式化していない。外からの仮定は、Lean の `Ord.psi` が Buchholz の $`\psi`$ であることの 1 つだけで、像を核と呼ぶところだけに使う。
+強い形 $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$ を、紙の上で証明した。証明の全体は [proof/README-ja.md](proof/README-ja.md) にある。これから定理の両方の半分が出る：$`\Phi`$ は順序を保ち、$`\Phi`$ の点は核の 0 でない値を全部とる。3 つの部分それぞれを独立した査読者が確かめた。偽の命題は見つからず、見つかった穴と細かい点は直した。Lean でも `sorry` なしで形式化した（[proof/README-ja.md](proof/README-ja.md) の「状態」）。文献から引用した事実はそこで公理として置き、それぞれを論文と照らし合わせた。外からの仮定は、Lean の `Ord.psi` が Buchholz の $`\psi`$ であることの 1 つだけで、像を核と呼ぶところだけに使う。
 
 証明は 3 つの部分からなる。
 1. **ペア数列**（[proof/COMB.md](proof/COMB.md)）。行列が標準形であることは、行 0 の木の局所的な条件と同値である（定理 SC。最後の条件は Buchholz の $`G_\nu(a) \lt a`$ のペア数列版）。ここから：$`\mathrm{anchor}`$、$`\log`$、$`\mathrm{lh}`$ は標準形の行列を作り、$`\mathrm{lh}`$ は止まり、$`\varepsilon`$ 的でない $`N`$ では $`o(N) = \omega^{o(\log N)}`$ である。
@@ -202,5 +202,5 @@ x \le_1 z \iff x = z \lor (x \text{ は項が 1 つ} \land x \le z \le \mathrm{l
 
 ## 9. これから
 
-- 証明の Lean での形式化。定理 SC から始める。
+- 引用した公理 `P1_isominimal` の 1 つの読み方を、Wilken, "Assignment of ordinals to patterns of resemblance"（JSL 72, 2007）で確かめる。
 - 3 行（トリオ数列と $`R_2^+`$）への拡張。記録は [../BMS/POR-ja.md](../BMS/POR-ja.md)。今の規則 $`\Phi_{3i}`$ は、$`(0,0,0)(1,1,1)(2,1,1)`$ の手前まで順序の食い違いが無い。

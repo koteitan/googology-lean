@@ -33,13 +33,17 @@ Two consequences ([PROOF](PROOF.md) Cor 7.2):
   referees found has been repaired; the repairs of PROOF and TR were checked again by the
   same referees. The repairs of COMB were minor (citations and omitted one-line steps) and
   were not re-checked.
-- **In Lean.** The whole chain is formalized — Theorem SC (`../SC.lean`), the term operations
-  and Lemmas C, 2.4, T, R (`../Phi.lean`), Lemma TR (`../TR.lean`), and the main chain with the
-  Main Theorem `mainTheorem_mat` and Cor 7.2 (`../Main.lean`) — except two statements, E1 and
-  E2, which are still `sorry` in `../Main/E12.lean` (work in progress). The facts cited from the
-  literature are axioms in `../TR/Cited.lean` (11, about Wilken's $`\vartheta`$) and
-  `../Main/Cited.lean` (20, about $`R_1^+`$); a referee checked each of them against the
-  papers and found all of them correct.
+- **In Lean, with no `sorry`.** The whole proof is formalized: Theorem SC (`../SC.lean`), the
+  term operations and Lemmas C, 2.4, T, R (`../Phi.lean`), Lemma TR (`../TR.lean`), and the main
+  chain with E1, E2, the Main Theorem `mainTheorem_mat` and Cor 7.2 (`../Main.lean`). Besides
+  Lean's three standard axioms, `#print axioms mainTheorem_mat` lists only the facts cited from
+  the literature, stated as axioms in `../TR/Cited.lean` (about Wilken's $`\vartheta`$),
+  `../Main/Cited.lean` (about $`R_1^+`$) and `../Main/Cited2.lean` (Wilken's collapse
+  $`\iota_{\tau,\alpha}`$, translation $`t^\alpha_\tau`$, [W07b] Thm 5.3 and Cor 5.9). A referee
+  checked each of them against the papers and found all of them correct. One reading could not
+  be checked, because the paper it depends on was not available: in `P1_isominimal`, a
+  "1-relativized isominimal" set is read as an isominimal set (Wilken, "Assignment of ordinals
+  to patterns of resemblance", JSL 72, 2007).
 - **One outside assumption.** The Lean function `Ord.psi`
   ([Ord.lean](../../../Notation/ExBuchholz/Ord.lean)) is Buchholz's $`\psi`$. This is used only
   to read Cor 7.2(b) as "the image is $`\mathrm{Core} \setminus \{0\}`$": [Rank.lean](../Rank.lean)

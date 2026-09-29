@@ -2,7 +2,7 @@
 
 # A map $`\Phi`$ from pair sequences to additive patterns ($`R_1^+`$)
 
-**Status: proved on paper (§8, [proof/](proof/README.md)), with numerical evidence.** Not formalized in Lean yet.
+**Status: proved on paper (§8, [proof/](proof/README.md)) and formalized in Lean with no `sorry` (`Main.lean`: `mainTheorem_mat`), from facts cited from the literature as checked axioms; with numerical evidence.**
 
 This page defines a map from a standard pair sequence $`M`$ to an additive pattern of
 resemblance of order 1, $`\Phi(M)`$, in the sense of Carlson. $`\Phi(M)`$ is built by
@@ -249,7 +249,7 @@ The stronger form $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$ is
 The full proof is in [proof/README.md](proof/README.md). It gives both halves of the theorem:
 $`\Phi`$ preserves the order, and the points of $`\Phi`$ take every nonzero value of the core.
 Each of its three parts was checked by an independent referee; no false statement was found,
-and the gaps and minor points they found were repaired. It is not formalized in Lean. The one
+and the gaps and minor points they found were repaired. It is formalized in Lean with no `sorry` (see [proof/README.md](proof/README.md), Status); the facts cited from the literature are axioms there, each checked against the papers. The one
 outside assumption is that the Lean `Ord.psi` is Buchholz's $`\psi`$; it is used only to name the
 image as the core.
 
@@ -276,6 +276,6 @@ $`\varepsilon_{\varepsilon_0} = (0,0)(1,1)(2,0)(3,1)`$ there is no anchor, and t
 
 ## 9. Next
 
-- A Lean formalization of the proof, starting with Theorem SC.
+- Confirm one reading in the cited axiom `P1_isominimal` with Wilken, "Assignment of ordinals to patterns of resemblance" (JSL 72, 2007).
 - The extension to 3 rows (trio sequences and $`R_2^+`$); the record is [../BMS/POR.md](../BMS/POR.md).
   The current rule $`\Phi_{3i}`$ shows no order violation below $`(0,0,0)(1,1,1)(2,1,1)`$.
