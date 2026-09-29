@@ -1,5 +1,6 @@
 import Googology.Trans.PSS.SC.Basic
 import Googology.Trans.PSS.SC.Oper
+import Googology.Trans.PSS.SC.Invariants
 import Googology.Trans.PSS.Rank
 
 /-!
@@ -27,15 +28,15 @@ the lexicographic order `<ₚ` with a proper prefix smaller.
   decidable, and `SC` is checked on small examples at the end.
 * `ctps_iff_SC : CTPS M ↔ SC M`, from the two directions
   `sc_of_ctps` (COMB §8b Part 1) and `ctps_of_sc` (Part 2).
-* `r0_of_ctps` is proved; the other parts of the two directions are named
-  placeholders (see the list below).
+* `r0_of_ctps` and `i0_of_ctps` (`SC/Invariants.lean`) are proved; the other
+  parts of the two directions are named placeholders (see the list below).
 
 The facts about terms in `oper M n` that Part 1 uses are in `SC/Oper.lean`
 (`term_oper_copy`, `term_oper_anc`).
 
 ## Placeholders (`sorry`)
 
-* `i0_of_ctps`, `condA_of_ctps` (COMB Lemma 1), `sib_of_ctps` (Lemma 7),
+* `condA_of_ctps` (COMB Lemma 1), `sib_of_ctps` (Lemma 7),
   `gstar_of_ctps` (Lemma 8);
 * `ctps_of_sc` (COMB §8b Part 2).
 -/
@@ -120,9 +121,8 @@ theorem r0_of_ctps {M : PS} (h : CTPS M) : R0 M := by
   rw [yAt_of_lt hi]
   exact hinv _ (List.getElem_mem hi) hx
 
-/-- **(I0) for standard sequences** (COMB Lemma 1).  Placeholder. -/
-theorem i0_of_ctps {M : PS} (h : CTPS M) : I0 M := by
-  sorry
+/-- **(I0) for standard sequences** (COMB Lemma 1). -/
+theorem i0_of_ctps {M : PS} (h : CTPS M) : I0 M := I0_of_stps h.1
 
 /-- **(A) for standard sequences** (COMB Lemma 1, (I2)).  Placeholder. -/
 theorem condA_of_ctps {M : PS} (h : CTPS M) : CondA M := by
