@@ -31,7 +31,7 @@ The remaining work, arranged by the cells of the README tables.
   - extend Φ to trio sequences and R₂⁺ ([Trans/BMS/POR.md](Googology/Trans/BMS/POR.md); Φ₃i has 0 order violations below (0,0,0)(1,1,1)(2,1,1); Φ₃k … Φ₃o extend it above row 915; Φ₃def is the single definition, Φ₃def2 adds kdl0)
     - below (0,0,0)(1,1,1)(2,1,1): decide the 287 undecided limit-step pairs (prove that ι∘Φ₃ is monotone inside a term), row 907 (the sheet or Φ₃i on rows 906/907), row 1009 (ι(Φ₃i) ≤ ι(sheet))
     - analyse R₂⁺ itself ([Trans/BMS/R2PLUS.md](Googology/Trans/BMS/R2PLUS.md); Lemma L, Theorems A, B and Prop P′ are proved on paper in the Σ_n structure R₂^S and refereed; 20 undecided pairs decided)
-      - prove that Carlson's covering definition R₂^C (the one the certificate search implements) equals R₂^S, at least on [0, υ_{ω+1}] — Carlson 2009 says it "will be established elsewhere"
+      - prove that Carlson's covering definition R₂^C equals R₂^S beyond υ_{ω+1} (done and refereed on [0, υ_{ω+1}], Theorem EQ; Theorem B in R₂^C is a sketch) — Carlson 2009 says it "will be established elsewhere"
       - prove the remark of [CW12] §7 (M(σ, α) is σ-isominimal) or obtain Wilken, JSL 72 (2007); it decides 10 more pairs below υ_{ω+1}
       - prove the shape hypotheses (S0)–(S4) for all trio matrices below υ_{ω+1} (trio versions of COMB and TR), not only on the test set
       - the backbone conjecture BLK beyond υ_{ω·ω}, then heads with Ω₂-level structure (new ordinal arithmetic)

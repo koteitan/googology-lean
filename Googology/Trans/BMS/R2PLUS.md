@@ -32,12 +32,22 @@ of $`R_1^+`$.
   hypotheses were checked on those matrices, not proved for all. As a consequence, 20
   undecided pairs of [POR.md](POR.md) §9 are decided "$`\lt`$" in $`R_2^S`$.
 
+**The two structures agree on this range (Theorem EQ).** $`R_2^C`$ and $`R_2^S`$ have the same
+$`\le_1`$ and $`\le_2`$ on $`[0, \upsilon_{\omega+1}]`$ and the same cap on reaches. For $`\le_1`$, one direction
+copies a $`\Sigma_1`$-isomorphic copy and replaces each value by its leading term (Carlson 2001,
+Lemmas 3.2, 3.13); the other uses Claim 5.5(b) in the proof of [W07b] Thm 5.3, which excludes
+exactly the coverings of Carlson's Def 5.3. For $`\le_2`$, the only pair is again
+$`\upsilon_\omega \lt_2 \upsilon_{\omega+1}`$. With Carlson 2009, Thm 14.10, Proposition P′ and the 20 decided
+pairs therefore hold in $`R_2^C`$, the structure the certificate search implements. (Carlson's
+clause 2 of Def 5.3 is read as "$`X \cup Y`$ closed", as in his own proofs of Lemmas 5.5(6) and
+5.7(3).) Theorem B in $`R_2^C`$ is only sketched. The referee found no gap in Theorem EQ.
+
 **Conditional or open.**
 - 10 further pairs below $`\upsilon_{\omega+1}`$ (two more shapes) are decided only under a remark in
   §7 of Carlson–Wilken 2012 that is stated there without proof (and, for general bases, under a
   reading of Wilken, "Assignment of ordinals to patterns of resemblance", JSL 72, 2007, which
   was not available).
-- All of the above for $`R_2^C`$, i.e. for the structure the certificate search uses.
+- The equivalence of $`R_2^C`$ and $`R_2^S`$ beyond $`\upsilon_{\omega+1}`$ (Theorem B in $`R_2^C`$ is only sketched).
 - Beyond $`\upsilon_{\omega\cdot\omega}`$: a conjecture that each "backbone" behaves like the $`\varepsilon_0`$-multiples in
   Wilken's $`R_2`$ agrees with all 11,506 facts tested; heads with $`\Omega_2`$-level structure are
   not covered and need arithmetic that the literature leaves to future work.
