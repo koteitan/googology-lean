@@ -29,7 +29,7 @@ The remaining work, arranged by the cells of the README tables.
 - Pair sequences and additive patterns of resemblance ([Trans/PSS/POR.md](Googology/Trans/PSS/POR.md))
   - formalize in Lean the paper proof that Φ preserves the order and that its image is the whole core of R₁⁺ ([Trans/PSS/proof/](Googology/Trans/PSS/proof/README.md): ι(Φ(M)) = 1 + val(pairTerm M))
     - 🤖 the main chain (fold = Wilken's reach computation, V finite, bar-closure, isominimality), with the cited R₁⁺ facts as axioms
-  - extend Φ to trio sequences and R₂⁺ ([Trans/BMS/POR.md](Googology/Trans/BMS/POR.md); Φ₃i has 0 order violations below (0,0,0)(1,1,1)(2,1,1))
+  - extend Φ to trio sequences and R₂⁺ ([Trans/BMS/POR.md](Googology/Trans/BMS/POR.md); Φ₃i has 0 order violations below (0,0,0)(1,1,1)(2,1,1); Φ₃k extends it above row 915)
     - below (0,0,0)(1,1,1)(2,1,1): decide the 287 undecided limit-step pairs (prove that ι∘Φ₃ is monotone inside a term), row 907 (the sheet or Φ₃i on rows 906/907), row 1009 (ι(Φ₃i) ≤ ι(sheet))
     - analyse R₂⁺ itself (Wilken's R₂ is the pure structure), e.g. prove υ_ι ↔ ε₀·ι between R₂⁺ and R₂
-    - rows above 915: level bookkeeping, the (2,2,1) family, the missing nodes
+    - rows above 915 (Φ₃k fits 787 sheet rows; 0 order violations in [(0,0,0)(1,1,1)(2,1,1), (0,0,0)(1,1,1)(2,2,1)), 4 certified just above (0,0,0)(1,1,1)(2,2,1)): root runs whose first summand has several ≤₂-levels (removes the 4 violations), nested frames (rows 1059, 1060, 1147–1151, 1283), markers of K_m followed by y=0 columns (1332–1340), the levels after a K_1 with a same-level child (1463–1550); the 372 undecided pairs of the new order test

@@ -32,6 +32,11 @@ $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$.
   describe $`R_2^+`$, so it cannot decide the pairs. The oracle with a longer budget
   certified 23 of the 310 undecided pairs and found no violation. Row 844: $`\Phi_{3i}`$ is
   right and the fix table should change. Rows 907 and 1009 are still open.
+- **The rows above 915** (§10). $`\Phi_{3k}`$ fills three gaps of $`\Phi_{3i}`$: $`z = 1`$ children of
+  $`D`$ on its own level, index columns of level $`\omega + j`$, and the counting of the
+  $`\le_2`$-levels. Agreement rose from 504 to 787 rows. The order test shows 0 violations below
+  $`(0,0,0)(1,1,1)(2,2,1)`$ and 4 above it, all in root runs and nested frames that the rule
+  does not yet describe.
 
 ## 2. The shape of the rule
 
@@ -511,7 +516,195 @@ own fundamental sequences and the oracle.
   - Certified: $`\Phi_{3i}(1008) \lt \Phi_{3i}(1009)`$ and
     $`\text{sheet}(1009) \lt \text{sheet}(1010)`$.
 
-## 10. Next
+## 10. The rows above 915 ($`\Phi_{3k}`$)
+
+$`\Phi_{3k}`$ (`por/phi3k.py`) adds nine flags to $`\Phi_{3j}`$. Agreement with the sheet rose
+from 504 to 787 rows, and no row was lost. On the matrices below $`(0,0,0)(1,1,1)(2,1,1)`$,
+$`\Phi_{3k}`$ gives the same pattern as $`\Phi_{3i}`$: all 1085 + 305 matrices of the earlier
+test sets were checked. So the earlier order tests still hold.
+
+**How the rules were found.** All rows from 915 on lie above the least fixed point of
+$`\upsilon`$. There $`\mathcal{T}_3`$ names every node by its matrix (§9), and Wilken's $`R_2`$
+is not $`R_2^+`$ anyway. So Wilken 2021 gives no ordinal comparisons here. Instead, the rules
+follow the structure that $`\Phi_{3i}`$ already has. All of them act in the
+$`\le_1`$-reach of a $`\le_2`$-able node
+
+```math
+x = \mathrm{root}(P,\ U+q), \qquad d_m = \mathrm{root}(P,\ U+q,\ U^m)\quad (m = 1, \dots, q),
+```
+
+where $`d_1 \lt \cdots \lt d_q`$ are the $`\le_2`$-successors of $`x`$ and $`D`$ is the last
+$`\omega`$ column of $`U`$. $`\Phi_{3i}`$ had a rule for each kind of child of $`D`$ except
+three. The new rules fill these gaps with the same two tools as before: the $`C2`$ read
+($`\Omega_\omega \mapsto x`$, $`\Omega_{\omega+j} \mapsto \Omega_j`$) and the 2-row fold.
+Each rule was checked on whole families of sheet rows. Each family is one column type with
+all its variants.
+
+**Rule `kimg`: a $`z = 1`$ child $`K`$ of $`D`$ on $`D`$'s own level.** From
+$`(0,0,0)(1,1,1)(2,1,1)`$ on, $`D`$ has such children. $`\Phi_{3i}`$ read $`K`$ as one more copy
+of $`d`$ and dropped the children of $`K`$. So rows 915, 1020, 1040, 1041 and 1061 all got the
+pattern of row 915.
+- **The rule.** $`K`$ gives the summand $`\mathrm{root}(d_1.\text{kids} + \mathrm{KI}(K.\text{kids}))`$,
+  where KI maps
+  - a $`z = 1`$ column on $`D`$'s level by the same rule (nested);
+  - a marker leaf that is the last column and a direct child of $`K`$ to the anchor of $`x`$
+    (the $`\Omega_1`$-multiplier of the point, as `lastcol` does for $`D`$);
+  - every other column by $`C2`$.
+- A bare $`K`$ gives $`d_1`$ itself, so the old doubling $`d + d`$ is the special case.
+
+| row | matrix after $`(0,0,0)(1,1,1)`$ | sheet |
+|---|---|---|
+| 915 | $`(2,1,1)`$ | `(b ([c d] d+d))` |
+| 1020 | $`(2,1,1)(3,0,0)`$ | `(b ([c d] e))` |
+| 1040 | $`(2,1,1)(3,0,0)(4,0,0)`$ | `(b ([c d] (e e+a)))` |
+| 1041 | $`(2,1,1)(3,1,0)`$ | `(b ([c d] (e e+b)))` |
+| 1053 | $`(2,1,1)(3,1,0)(4,0,0)`$ | `(b ([c d] (e e+c+a)))` |
+| 1061 | $`(2,1,1)(3,1,1)`$ | `(b ([c d] (e e+d)))` |
+| 1094 | $`(2,1,1)(3,1,1)(4,1,1)(5,1,1)`$ | `(b ([c d] (e e+d) (f f+e)))` |
+
+  The part after $`[c\ d]`$ is the 2-row pattern of $`K`$'s subtree built on $`d`$. For
+  example $`e = \mathrm{root}(d.\text{kids} + 1)`$ in row 1020, and in row 1094 the nested
+  $`z = 1`$ columns give the chain $`e \le_1 e + d`$, $`f \le_1 f + e`$. Of the rows 1020–1097
+  whose matrix has one root child, all fit except 1059 and 1060 (nested frames, see the end
+  of this section).
+
+**Rule `idx1`: an index column of $`D`$ of level $`\omega + j`$ with $`j \ge 1`$** (from
+$`(0,0,0)(1,1,1)(2,2,0)`$ on). Its $`C2`$ image is a bare $`\Omega_j`$ with no base, and
+$`\Phi_{3i}`$ used it as a summand. So rows 1098–1156 lost their whole $`\le_2`$ pair (the sheet
+had nodes that $`\Phi_{3i}`$ lacked).
+- **The rule.** The image is the summand $`\mathrm{root}(d_q.\text{kids} + \text{image})`$. Consecutive
+  index columns accumulate, as in the prefix fold of the 2-row map.
+- **Rule `ubase`.** These summands are nodes. The sheet has them as the base $`e`$ of a
+  relative $`\psi_0(\Omega_\omega)`$ pattern, for example row 1144
+  `(b ([c d] (e ([f g] g+g))))`.
+
+| row | matrix after $`(0,0,0)(1,1,1)`$ | sheet |
+|---|---|---|
+| 1098 | $`(2,2,0)`$ | `(b ([c d] (e e+e)))` |
+| 1107 | $`(2,2,0)(2,2,0)`$ | `(b ([c d] (e e+e) (f f+f)))` |
+| 1110 | $`(2,2,0)(3,1,1)`$ | `(b ([c d] (e e+e+d)))` |
+| 1117 | $`(2,2,0)(3,3,1)`$ | `(b ([c d] [e f]))` |
+| 1144 | $`(2,2,0)(3,3,1)(4,3,1)`$ | `(b ([c d] (e ([f g] g+g))))` |
+
+**Rules `zsib`, `kbase`, `k2cut`, `k2chain`: the levels.** A $`z = 1`$ child of $`D`$ one
+level up (an $`\Omega_{\omega+1}`$ factor, from $`(0,0,0)(1,1,1)(2,2,1)`$ on) adds a
+$`\le_2`$-level. $`\Phi_{3i}`$ counted such children only along the chain of last children, so
+$`(2,2,1)(2,0,0)`$ lost its second successor.
+- **`zsib`.** Count these children also when they are not the last children of $`D`$. Equal
+  siblings add one level each: `[[[c d] e] f]` for $`(2,2,1)(2,2,1)`$ (row 1286).
+- **`kbase`.** A $`K`$ whose first children are such columns ($`j`$ of them) is built on
+  $`d_{1+j}`$ instead of $`d_1`$: $`(2,2,1)(2,1,1)(3,2,1)`$ gives $`e + e`$ (row 1266), while
+  $`(2,2,1)(2,1,1)`$ gives $`e + d`$ (row 1244).
+- **`k2cut`.** Let $`K_1, K_2, \dots`$ be the chain of first up-children ($`K_1`$ of $`D`$,
+  $`K_{i+1}`$ of $`K_i`$). $`d_m`$ belongs to $`K_m`$.
+  - A column with $`z = 0`$ children ends the chain without a further top level. After such
+    a column, every later up-child of $`D`$ adds its own chain.
+  - If $`K_m`$ has children, then $`d_m`$ is not a $`\le_1`$-dead end. $`\mathrm{lh}_1(d_m)`$ is
+    the fold of the $`C2`$ read of $`K_m`$'s children relative to $`d_m`$. A same-level
+    $`z = 1`$ child of $`K_m`$ reaches $`d_{m+1}`$.
+  - $`\mathrm{lh}_1(x)`$ starts from $`\mathrm{lh}_1(d_q)`$.
+- **`k2chain`.** If $`K_m`$ has only chain children, then $`d_m \le_1 d_q`$.
+- These rules give the crossing intervals of the sheet, such as `[c (d] d+a)`: here
+  $`c \lt_2 d`$ and $`d \le_1 d + 1`$, while $`\mathrm{lh}_1(c) = d + 1`$ as well.
+
+| row | matrix after $`(0,0,0)(1,1,1)`$ | sheet |
+|---|---|---|
+| 1157 | $`(2,2,1)`$ | `(b [[c d] e])` |
+| 1203 | $`(2,2,1)(2,0,0)`$ | `(b ([[c d] e] e+a))` |
+| 1300 | $`(2,2,1)(3,0,0)`$ | `(b ([c (d] d+a)))` |
+| 1320 | $`(2,2,1)(3,0,0)(2,2,1)(3,0,0)`$ | `(b ([[c (d] d+a) (e] e+a)))` |
+| 1431 | $`(2,2,1)(3,2,1)`$ | `(b [[c (d] e)])` |
+| 1573 | $`(2,2,1)(3,3,1)`$ | `(b ([[[c (d] e] f)]))` |
+| 1617 | $`(2,2,1)(3,3,1)(4,3,1)`$ | `(b ([[[c (d] (e] f)])))` |
+
+**Rules `kin` and `klim`.**
+- **`kin`.** A $`z = 1`$ column on $`D`$'s level nested deeper in $`D`$'s children, for example
+  inside an index column, is read by `kimg`. Before, it was moved rigidly. Row 1149
+  `(e ([f g] (h h+d)))`. Without this rule, 18 adjacent pairs of the new test sets have the
+  same pattern.
+- **`klim`.** A marker at the end of a same-level $`K`$ makes $`D`$ a limit summand, in the
+  sense of the rule `mult` of §7. With it, a following unit summand joins $`D`$'s level. Rows
+  1042, 1043, 1050 and 1052.
+
+**Rules tried and rejected.**
+- `kframe`: in a nested frame, read $`K`$ from $`x`$ instead of $`d_1`$ (suggested by rows 1147
+  and 1150). It loses 98 rows.
+- `kidx`: read a marker of $`D`$ with children by KI instead of $`C2`$. It loses 40 rows.
+
+**Each flag is needed.** Rows that fit when one flag is switched off (all flags: 786, not
+counting the rows the fix table drops):
+
+| without | kimg | idx1 | zsib | kbase | ubase | kin | klim | k2cut | k2chain |
+|---|---|---|---|---|---|---|---|---|---|
+| rows | 643 | 700 | 725 | 758 | 745 | 778 | 776 | 701 | 763 |
+
+**Agreement with the sheet** (iso / sub / sup / no)
+
+| sheet rows | $`\Phi_{3i}`$ | $`\Phi_{3k}`$ | rows that fit |
+|---|---|---|---|
+| 522–754 | 34 / 187 / 0 / 8 | 34 / 187 / 0 / 8 | 221 → 221 |
+| 755–914 | 39 / 117 / 0 / 2 | 39 / 117 / 0 / 2 | 156 → 156 |
+| 915–1156 | 28 / 74 / 42 / 94 | 125 / 103 / 2 / 8 | 102 → 228 |
+| 1157–1299 | 12 / 13 / 15 / 101 | 58 / 39 / 3 / 41 | 25 → 97 |
+| 1300–1449 | 0 / 0 / 35 / 107 | 34 / 12 / 15 / 81 | 0 → 46 |
+| 1450–1642 | 0 / 0 / 69 / 122 | 37 / 2 / 49 / 103 | 0 → 39 |
+| total | 113 / 391 / 161 / 434 | 327 / 460 / 69 / 243 | 504 → 787 |
+
+The oracle checked the 69 sub rows whose pattern is new (7 seconds per row, then 25 seconds for the
+rest). It certified 48 of them as equal to the sheet. 21 timed out: 1043, 1054, 1187–1191,
+1193–1197, 1221, 1223, 1437, 1441, 1442, 1447, 1448, 1450 and 1451.
+
+**Order tests on two new sets.** The matrices were generated as before: BM4 expansions with
+copy count at most 3 and at most 9 columns, started from the sheet's matrices in the range.
+All of them are standard.
+
+| range | matrices | adjacent pairs | "<" certified | violations | same pattern | undecided | skipped (>30 nodes) |
+|---|---|---|---|---|---|---|---|
+| $`[(0,0,0)(1,1,1)(2,1,1),\ (0,0,0)(1,1,1)(2,2,1))`$ | 785 | 784 | 470 | 0 | 0 | 306 | 8 |
+| $`[(0,0,0)(1,1,1)(2,2,1),\ (0,0,0)(1,1,1)(2,2,1)(3,0,0))`$ | 290 | 289 | 214 | 4 | 0 | 66 | 5 |
+
+- Each pair got 7 seconds for "<" and, if that failed, 7 seconds (the last 19: 25 seconds) for
+  the reverse $`\iota(\Phi_{3k}(B)) \le \iota(\Phi_{3k}(A))`$. Every certificate is replayed.
+- **Below $`(0,0,0)(1,1,1)(2,2,1)`$: no violation.** The undecided pairs are again mostly steps
+  to a limit. The smallest is
+  $`(0,0,0)(1,1,1)(2,1,1)(2,0,0)(1,1,1)(2,1,1)(2,0,0) \lt (0,0,0)(1,1,1)(2,1,1)(2,0,0)(2,0,0)`$.
+- **Above $`(0,0,0)(1,1,1)(2,2,1)`$: 4 certified violations.** The smallest is
+
+```math
+\begin{aligned}
+A &= (0,0,0)(1,1,1)(2,2,1)(2,1,0)(1,1,0)(2,2,1)(3,3,1)(3,2,0) \quad\text{(row 1211)}\cr
+B &= (0,0,0)(1,1,1)(2,2,1)(2,1,0)(1,1,1) \quad\text{(row 1213)}
+\end{aligned}
+```
+
+  with $`A \lt_{\mathrm{lex}} B`$ but $`\iota(\Phi_{3k}(B)) \le \iota(\Phi_{3k}(A))`$. In all four the
+  larger matrix is a sheet row that $`\Phi_{3k}`$ does not fit (1213, 1231, 1242, 1283), and the
+  smaller one is a row that it fits (1211, 1228, 1240, 1282). For three of them the oracle
+  certifies $`\iota(\Phi_{3k}(A)) \lt \iota(\text{sheet}(B))`$; the fourth (1228/1231) timed out.
+  So the sheet orders these pairs correctly, and $`\Phi_{3k}(B)`$ is too small. Rows 1213, 1231
+  and 1242 are root runs whose first summand is a limit summand with two $`\le_2`$-levels:
+  `mult` merges it with the following unit summand, and its levels are lost. The sheet keeps them as a
+  nested block, for example `(e ([[f g] h] h+c))` in row 1213. Row 1283 is a nested frame
+  (see below). A quick fix, not merging such a summand, makes the closure explode, so it was not
+  kept.
+
+**What is left above 915.**
+- **Root runs with several summands** (rows 1177, 1186–1202, 1204–1249 with a second root
+  child $`(1,1,1)`$). With two $`\le_2`$-levels per summand, the sheet puts the nested pattern
+  of the first summand between $`d_1`$ and $`d_2`$. $`\Phi_{3k}`$ puts it below $`d_1`$, where
+  the witnesses of §6 go.
+- **Nested frames** (rows 1059, 1060, 1147, 1150, 1151). Inside the pattern of an index column, a
+  same-level $`K`$ reads from the frame's $`c`$ in the sheet, but from its $`d`$ in
+  $`\Phi_{3k}`$. The global version of this rule (`kframe`) is wrong.
+- **Markers of $`K_m`$ followed by $`y = 0`$ columns** (rows 1332–1340): the sheet's
+  `[c (d] d+c)` needs a variant of `lastcol`.
+- **After $`K_1`$ with a same-level child** (rows 1463–1550): siblings and further children
+  change the levels in a way that `k2cut` does not yet describe.
+- **An index image that is itself $`\le_2`$-able** (rows 1122, 1123): the sheet also has the
+  nesting base below it, which `ubase` does not add.
+- Row 907 (§9) and row 947 are unchanged; row 1009 still does not fit.
+
+## 11. Next
 
 - The 287 undecided pairs (§9): prove that $`\iota \circ \Phi_3`$ is monotone inside a term.
   A longer oracle budget helps little: 23 of 310 in about 27 seconds each.
@@ -521,15 +714,19 @@ own fundamental sequences and the oracle.
 - An analysis of $`R_2^+`$ itself, for example by proving the correspondence
   $`\upsilon_\iota \leftrightarrow \varepsilon_0 \cdot \iota`$ between $`R_2^+`$ and $`R_2`$. Wilken's
   $`R_2`$ describes the pure structure only.
-- The rows above 915: level bookkeeping, the $`(2,2,1)`$ family, and the rows where the
-  sheet has nodes that $`\Phi_{3i}`$ lacks.
+- The rows above 915 (§10): root runs whose first summand has several $`\le_2`$-levels (this
+  also removes the 4 violations), nested frames, markers of $`K_m`$ followed by $`y = 0`$
+  columns, and the levels after a $`K_1`$ with a same-level child. The 372 undecided pairs of
+  the new order test are, like those of §9, mostly steps to a limit.
 
-## 11. Programs
+## 12. Programs
 
 - `por/tss.py`: 3-row matrices and terms, and the lexicographic order.
 - `por/tr3.py`: the translation $`\mathcal{T}_3`$ into Wilken's notation for $`R_2`$ (§9). `python3 por/tr3.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"` prints `u[1 + 1]`, i.e. $`\upsilon_2`$.
+- `por/phi3k.py`: the version $`\Phi_{3k}`$ of §10, the current one. `python3 por/phi3k.py "(0,0,0)(1,1,1)(2,2,1)(3,0,0)"`
+  prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors. `--flags=` selects the flags.
 - `por/phi3j.py`: $`\Phi_{3i}`$ plus the rejected flag `c2one` of §9, which is off by default. `--flags=lastcol,mult,fin,c2rel,lastlo,infin,d94,nobase,c2one` turns it on.
-- `por/phi3i.py`: the version $`\Phi_{3i}`$ of §8, the current one. `python3 por/phi3i.py "(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)"` prints the same table as `phi3g.py`.
+- `por/phi3i.py`: the version $`\Phi_{3i}`$ of §8. `python3 por/phi3i.py "(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)"` prints the same table as `phi3g.py`.
 - `por/phi3h.py`: the version $`\Phi_{3h}`$ of §7. `python3 por/phi3h.py "(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)"` prints the same table as `phi3g.py`.
 - `por/phi3g.py`: the two-level version $`\Phi_{3g}`$ (§6). `python3 por/phi3g.py "(0,0,0)(1,1,1)(2,1,0)"` prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors.
 - `por/phi3.py`: the case-rule version $`\Phi_3`$. `python3 por/phi3.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"` prints the
