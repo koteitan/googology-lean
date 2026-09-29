@@ -9,3 +9,4 @@ import Googology.Goals
 import Googology.Trans.PSS.SC
 import Googology.Trans.PSS.Phi
 import Googology.Trans.PSS.TR
+import Googology.Trans.PSS.Main
