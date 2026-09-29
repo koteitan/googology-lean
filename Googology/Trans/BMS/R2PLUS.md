@@ -56,18 +56,19 @@ M \lt_{\mathrm{lex}} M' \iff \iota(\Phi_3^{\mathrm{exp}}(M)) \lt \iota(\Phi_3^{\
 
 in both $`R_2^S`$ and $`R_2^C`$, with $`\iota = \mathcal{T}_3`$. This is proved on paper from the cited results,
 Theorems A and EQ, Lemma L, Proposition P′ and the 2-row results, and was checked by the
-referee. To read it as a statement about standard matrices and the rule `phi3m.py` (in commit `a97a321`, see [POR.md](POR.md) §19), two links
-are needed.
+referee. To read it as a statement about standard matrices and the current rule `por/phi3def2.py`, two links
+are needed, and both are now proved on paper.
 - Every matrix of $`R_P`$ is standard: proved on paper, and the referee found no gap. The proof
   reaches each matrix from $`(0,0,0)(1,1,1)(2,2,2)`$ by explicit expansions. It uses the Lean lemmas
   `expandRL_append`, `expandRL_of_m0_zero`, `expandRL_zeroRow` and the pair-sequence results. Two
   short lemmas are on paper only: a middle block does not change the expansion of the tail, and a
   shift commutes with expansion when the last column has $`x \gt 0`$.
-- $`\Phi_3^{\mathrm{exp}}`$ equals the pattern of `por/phi3def2.py` on $`R_P`$: proved on paper. The
-  referee read it against the code and found no error, and no counterexample in 65,000 new cases
-  (verdict: not refuted). It still needs two citations: every node that the 2-row closure makes
-  from a standard pair term is standard, and a root term of a standard pair sum is standard. For
-  `phi3m.py` the same equality is only checked (all tested).
+- $`\Phi_3^{\mathrm{exp}}`$ equals the pattern of `por/phi3def2.py` on $`R_P`$: proved on paper, by
+  following the labelled branches of [por/README.md](por/README.md) for each shape. The referee read
+  it against the code and found no error, and no counterexample in 65,000 new cases. The two facts
+  it needs about pair sequences are in Lean: the 2-row closure keeps standard sums standard
+  (`ctps_lh`, `stdOrd_lh`, `ctps_anchor`), and a root term of a standard sum is standard
+  (`stdOrd_iff`).
 
 The rest of the range below $`U`$ also contains single terms of two further shapes and sums
 with such a summand; they are conditional on the remark of Carlson–Wilken 2012 §7.
