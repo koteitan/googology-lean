@@ -293,6 +293,8 @@ Evidence: S1(a, b) on all 44,653 CTPS with $`\le 8`$ columns (a numerical check)
 - (b) If $`\mathrm{Lng}\,X \ge 2`$ and the last column of $`X`$ is not $`(0,0)`$, then $`X[n]`$ strictly
   increases in $`n`$ (F5, and $`B \ne \emptyset`$) and $`o(X) = \sup_n o(X[n])`$ is a limit (F13).
 
+**Lean.** (a) for concatenations of nodes is `ordOf_append` in [Phi/Nodes.lean](../Phi/Nodes.lean) (with `exists_mat_eq`: every standard matrix is the matrix of a node), and the Cantor normal form is in [Phi/CNF.lean](../Phi/CNF.lean).
+
 ## 6. $`\mathcal{L}N`$ is a node
 
 **Lemma 6 (PROVED).** For $`N \in R`$, $`\mathcal{L}N`$ is standard (or empty).
@@ -307,6 +309,8 @@ Evidence: S1(a, b) on all 44,653 CTPS with $`\le 8`$ columns (a numerical check)
   - addall of $`R`$-terms is non-increasing, hence standard by S1(c). ∎
 
 Evidence: all 33,734 roots with $`\le 8`$ columns (a numerical check).
+
+**Lean.** Lemma 6 is `stdOrd_log0` and `stdOrd_bigL`, and Lemma 4 is `std_of_tgood_y0`, in [Phi/Std.lean](../Phi/Std.lean).
 
 ---
 
@@ -390,6 +394,8 @@ Evidence (numerical checks on all roots with $`\le 8`$ columns, $`n = 1..3`$):
 - $`\mathcal{L}`$ strictly increasing on the 33,734 sorted roots;
 - 0 failures.
 
+**Lean.** Lemma R is `lemmaR` in [Phi/LemmaR.lean](../Phi/LemmaR.lean), with no `sorry`, by another route: the nodes below $`(N)`$ are the non-increasing sequences of terms below $`N`$, and $`\mathcal{L}`$ is strictly monotone and onto the nodes (`bigL_lt_bigL`, `exists_bigL_eq` in [Phi/LogMono.lean](../Phi/LogMono.lean)), so Lemma 5 (a) and the Cantor normal form give $`o(N) = \omega^{o(\mathcal{L}N)}`$ without fundamental sequences.
+
 ---
 
 ## 8. Lemma 2.4 and T
@@ -467,6 +473,8 @@ of [phi.py](../por/phi.py).
 blobs re-insert all of $`A_j`$, so $`W_Z`$ can be larger than $`W_N`$. The measure must follow the
 <em>provenance</em> $`d_Z`$ in the original tree. No recursion ever enters the $`A_j`$-part of a blob,
 because that would be the empty-blob case, which monotonicity excludes.
+
+**Lean.** 2.4 (i) and (ii) are `std_anchor` and `stdOrd_lhF_of_not_eps` in [Phi/Std.lean](../Phi/Std.lean), 2.4 (iii) is `stdOrd_lhF` in [Phi/Lh.lean](../Phi/Lh.lean) (for every fuel, so it does not need T), and T is `lhF_eq_lh` in [Phi/Term.lean](../Phi/Term.lean): `lhF f N = lh N` for all `f ≥ fuelOf N`, one more than the number of nodes on a longest root-to-leaf path of $`W_N`$.
 
 ---
 
@@ -730,6 +738,8 @@ Hence $`Y \in \mathrm{CTPS}`$ by Theorem SC. $`Y`$ is one-root, so $`Y \in R`$. 
 
 Evidence: 138,585 Coll-terms, all standard. Lemma 10 was checked on 270,147 region
 child-sequences, with no internal absorption and no order violation.
+
+**Lean.** Lemma 10 is `coll_lt_coll` and Lemma C is `std_lemmaC` in [Phi/LemmaC.lean](../Phi/LemmaC.lean); Theorem SC is read on terms in [Phi/Bridge.lean](../Phi/Bridge.lean) (`sc_mat_iff`, `ctps_cols_iff`).
 
 ---
 
