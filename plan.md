@@ -28,9 +28,9 @@ The remaining work, arranged by the cells of the README tables.
       - prove that the fuel `max 200 (depth of α)` of `TrioFixFuel` is enough for every `α` (more fuel never changes the matrix; checked on the sheet labels and some families)
 - Pair sequences and additive patterns of resemblance ([Trans/PSS/POR.md](Googology/Trans/PSS/POR.md))
   - formalize in Lean the paper proof that Φ preserves the order and that its image is the whole core of R₁⁺ ([Trans/PSS/proof/](Googology/Trans/PSS/proof/README.md): ι(Φ(M)) = 1 + val(pairTerm M))
-    - Theorem SC (standard ⇔ local tree conditions), then standard forms of anchor/log/lh, termination of lh, the reading lemma R
+    - 🤖 Theorem SC (standard ⇔ local tree conditions), then standard forms of anchor/log/lh, termination of lh, the reading lemma R
     - the translation 𝒯 to Wilken's ϑ (Mono*, Cof), with the cited ϑ facts as axioms
     - the main chain (fold = Wilken's reach computation, V finite, bar-closure, isominimality), with the cited R₁⁺ facts as axioms
   - extend Φ to trio sequences and R₂⁺ ([Trans/BMS/POR.md](Googology/Trans/BMS/POR.md); Φ₃i has 0 order violations below (0,0,0)(1,1,1)(2,1,1))
-    - below (0,0,0)(1,1,1)(2,1,1): decide the 310 undecided limit-step pairs (prove that ι∘Φ₃ is monotone inside a term), settle rows 844, 907, 1009
+    - 🤖 below (0,0,0)(1,1,1)(2,1,1): decide the 310 undecided limit-step pairs (prove that ι∘Φ₃ is monotone inside a term), settle rows 844, 907, 1009
     - rows above 915: level bookkeeping, the (2,2,1) family, the missing nodes
