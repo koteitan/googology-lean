@@ -172,7 +172,7 @@ theorem mem_T1set_succ {v : Ordinal.{0}} (hv : v ∈ T1set) : v + 1 ∈ T1set :=
     exact (isSuccLimit_Om_succ 0).succ_lt hlt |> fun h => by rwa [Order.succ_eq_add_one] at h
   · rw [valS_append, valS_single, val_one]
 
-theorem bddAbove_T1set : BddAbove T1set := ⟨Om 1, fun v ⟨_, _, hlt, e⟩ => e ▸ hlt.le⟩
+theorem bddAbove_T1set : BddAbove T1set := ⟨Om 1, fun _ ⟨_, _, hlt, e⟩ => e ▸ hlt.le⟩
 
 theorem lt_T1bound_of_mem {v : Ordinal.{0}} (hv : v ∈ T1set) : v < T1bound :=
   lt_of_lt_of_le (Order.lt_add_one_iff.mpr le_rfl) (le_csSup bddAbove_T1set (mem_T1set_succ hv))
@@ -211,7 +211,7 @@ theorem kap_strictMono (τ : Ordinal.{0}) : StrictMono (kap τ) :=
 
 theorem le_kap (τ ξ : Ordinal.{0}) : ξ ≤ kap τ ξ := le_enumOrd_self (not_bddAbove_kapSet τ)
 
-theorem minT_self (τ : Ordinal.{0}) : MinT τ τ := ⟨le_rfl, fun β h _ => le1_le h⟩
+theorem minT_self (τ : Ordinal.{0}) : MinT τ τ := ⟨le_rfl, fun _ h _ => le1_le h⟩
 
 theorem kapSet_eq {τ : Ordinal.{0}} (hb : BddAbove (MinSet τ)) :
     kapSet τ = MinSet τ ∪ Set.Ioi (sSup (MinSet τ)) := by

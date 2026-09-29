@@ -62,7 +62,7 @@ theorem le_head_of_eps {ε : Ordinal.{0}} (hε : InE ε) {p : WP} {x : List WP}
     · exact lt_of_le_of_lt (hx.le_head r hr) hlt
   exact absurd h (not_le.mpr this)
 
-theorem isEps_val {q : WP} (hq : NFP q) (hq0 : q.lvl = 0) (he : isEpsLevel q 0 = true) :
+theorem isEps_val {q : WP} (hq : NFP q) (_hq0 : q.lvl = 0) (he : isEpsLevel q 0 = true) :
     InE q.val := eps_fix hq he
 
 theorem not_eps_of_val {q : WP} (hq : NFP q) (hq0 : q.lvl = 0) (he : InE q.val) :

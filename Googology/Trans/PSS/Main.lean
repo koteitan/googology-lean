@@ -22,17 +22,23 @@ a standard pair sequence `M` puts its point at `o(M) = 1 + val(pairTerm M)`.
   the provenance invariant of Theorem T.
 * `Main/Pattern.lean`: `V_M`, the pattern `Φ(M)`, `ι`, **Lemma 5.1**.
 * `Main/Iso.lean`: **Lemma 6.1**, uniqueness of `ι`.
-* `Main/VF.lean`: **Theorem VF** (`V_M` finite), given **Lemma AF**.
-* `Main/BarClosure.lean`: **bar-closure** of `o[V_M]` (open in Lean).
+* `Main/LocSpec.lean`, `Main/FactBar.lean`, `Main/FactBar1.lean`: localization as
+  suffix maxima, **Fact BAR** (bar from [CW12] Def 5.1).
+* `Main/BarNonEps.lean`, `Main/AF.lean`: bar-closure and **Lemma AF** for
+  non-epsilon roots (Lemmas G, H).
+* `Main/EpsRoots.lean`, `Main/BarEps.lean`: **`Bar_T`** for epsilon roots
+  (`barEps`), from the lemma KEY, EL and [W07a] Lemma 6.4 (a) on `T¹`.
+* `Main/VF.lean`: **Lemma AF**, **Theorem VF** (`V_M` finite).
+* `Main/BarClosure.lean`: **bar-closure** of `o[V_M]`.
 * This file: **Theorem 11.1**, **Theorem 7.1** (`mainTheorem`,
   `mainTheorem_mat`), **Cor 7.2** (`cor72a`, `cor72b`, `cor72b_core`).
 
 ## Status
 
-The statements `E1`, `E2`, `lemmaAF` and `barClosure` are proved on paper
-(`proof/PROOF-2.md` §12.5, `proof/PROOF-3.md` §13–§14, `proof/PROOF-4.md` §15)
-through Wilken's syntactic machinery on `T¹` (translation `t^α_τ`, `ι_{τ,α}`,
-`λ^τ`, localization) and are left as `sorry` here.
+Only `E1` and `E2` (`Main/E12.lean`) are left as `sorry`.  They are proved on
+paper (`proof/PROOF-2.md` §12.5, §12.6, `proof/PROOF-3.md` §13.2, §14.3) through
+Wilken's syntactic maps on `T¹` (`t^α_τ`, `ι_{τ,α}`, `λ^τ`), Lemma CI and the
+lemmas of `proof/COMB.md`, which are not formalized here.
 -/
 
 namespace Googology.Trans.PSS.Main
