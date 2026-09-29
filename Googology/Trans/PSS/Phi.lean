@@ -4,6 +4,7 @@ import Googology.Trans.PSS.Phi.Bridge
 import Googology.Trans.PSS.Phi.Std
 import Googology.Trans.PSS.Phi.LemmaC
 import Googology.Trans.PSS.Phi.Lh
+import Googology.Trans.PSS.Phi.Term
 
 /-!
 # The term operations of `Φ` give standard matrices
@@ -34,6 +35,9 @@ collects what is proved about them, following `proof/COMB.md`.
 * `Phi/Lh.lean`: **Lemma 2.4 (iii)**: every fold input is standard
   (`std_foldInputs`), so `lhF f N` is a node for every fuel `f`
   (`stdOrd_lhF`, `stdOrd_lh`).
+* `Phi/Term.lean`: **Theorem T** (`lhF_eq_lh`): for every term `N`, standard or
+  not, `lhF f N = lh N` for all `f ≥ fuelOf N`.  The proof follows the
+  provenance invariant of COMB §8 (`Inv`, `jump_inv`, `lhF_stable`).
 
 ## Main statements (on matrices)
 -/
@@ -63,31 +67,6 @@ theorem ctps_lemmaC {A : List Tm} (hN : CTPS (Tm.node 0 A).cols) {s : Tm} (hs1 :
     {ctx : List (ℕ × Forest.PS)} (hs : TGood ctx s) (hz : ZeroLe A ctx) (i : ℕ) :
     CTPS (Tm.node 0 (addT A (collSum A (s.cs.take i)))).cols :=
   std_lemmaC hN hs1 hs hz i
-
-theorem foldl_oplus_ne_nil {lhY : Tm → List Tm} (hne : ∀ Y, lhY Y ≠ []) :
-    ∀ (ys : List Tm) {S : List Tm}, S ≠ [] → ys.foldl (oplus lhY) S ≠ []
-  | [], _, hS => hS
-  | Z :: ys, S, hS => by
-    refine foldl_oplus_ne_nil hne ys ?_
-    unfold oplus
-    cases S with
-    | nil => exact absurd rfl hS
-    | cons s1 S =>
-      simp only
-      split_ifs
-      · exact hne Z
-      · simp [addT]
-
-/-- `lhF f Y` is never empty. -/
-theorem lhF_ne_nil : ∀ (f : ℕ) (Y : Tm), lhF f Y ≠ []
-  | 0, _ => by simp [lhF]
-  | f + 1, Y => by
-    unfold lhF
-    split_ifs
-    · simp
-    · simp only [addT]
-      cases lam Y <;> simp
-    · exact foldl_oplus_ne_nil (lhF_ne_nil f) _ (by simp)
 
 /-- **Lemma 2.4.**  The reach `lh N` of a standard term is a standard matrix. -/
 theorem ctps_lh {N : Tm} (hN : CTPS N.cols) : CTPS (mat (lh N)) :=
