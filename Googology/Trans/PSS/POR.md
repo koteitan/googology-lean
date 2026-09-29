@@ -2,13 +2,13 @@
 
 # A map $`\Phi`$ from pair sequences to additive patterns ($`R_1^+`$)
 
-**Status: a conjecture with numerical evidence, and a plan for the proof (§8).** The proof is not finished, and nothing is formalized yet.
+**Status: proved on paper (§8, [proof/](proof/README.md)), with numerical evidence.** Not formalized in Lean yet.
 
 This page defines a map from a standard pair sequence $`M`$ to an additive pattern of
 resemblance of order 1, $`\Phi(M)`$, in the sense of Carlson. $`\Phi(M)`$ is built by
 rearranging the trees of the matrix; no $`\psi`$ term is written.
 
-**Conjecture.** For standard pair sequences $`M, M'`$:
+**Theorem (proved on paper, §8).** For standard pair sequences $`M, M'`$:
 
 ```math
 M \lt_{\mathrm{lex}} M' \iff \iota(\Phi(M)) \lt \iota(\Phi(M'))
@@ -17,7 +17,7 @@ M \lt_{\mathrm{lex}} M' \iff \iota(\Phi(M)) \lt \iota(\Phi(M'))
 Here $`\iota(P)`$ is the value of the point of the pattern $`P`$ in its isominimal
 realization.
 
-A stronger form is expected:
+It follows from a stronger form, also proved on paper:
 
 ```math
 \iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))
@@ -26,7 +26,7 @@ A stronger form is expected:
 Here `pairTerm` is the map of `Rank.lean` from pair sequences to Buchholz's $`\psi`$-terms.
 The $`1 +`$ is needed because `pairTerm` sends $`(0,0)`$ to 0, while
 $`\iota(\Phi((0,0))) = 1`$; for infinite values $`1 + \alpha = \alpha`$. `pairTerm` is an order
-isomorphism onto the terms below $`\psi_0(\Omega_\omega)`$, so this form gives the conjecture,
+isomorphism onto the terms below $`\psi_0(\Omega_\omega)`$, so this form gives the theorem,
 and also that the points of $`\Phi`$ take every nonzero value in the core.
 
 ## 1. Background
@@ -209,8 +209,8 @@ and the lexicographic order was compared with poral's order.
 | around sheet rows 460–467, at most 13 columns | 35,626 | 936,327 | 0 |
 | total | 144,773 | 7,471,992 | 0 |
 
-- **Surjectivity is not proved.** Whether the image of $`\Phi`$ covers the core without
-  gaps is not established. At the limits that were tested, no gap was found.
+- **Surjectivity.** The numerical tests found no gap in the image of $`\Phi`$. That the image
+  is the whole core except 0 is now proved on paper (§8).
 
 ## 6. Rejected variants
 
@@ -230,6 +230,8 @@ and the lexicographic order was compared with poral's order.
   the expansion of pair sequences.
 - `por/phi.py`: $`\Phi`$. `python3 por/phi.py "(0,0)(1,1)(2,2)"` prints the pattern and the
   matrix of each node.
+- `por/tr.py`: the translation $`\mathcal{T}`$ to Wilken's $`\vartheta`$-terms used in the proof
+  (§8). `python3 por/tr.py "(0,0)(1,1)(2,2)"` prints `t0(t1(W2))`.
 
 | definition | function |
 |---|---|
@@ -241,79 +243,39 @@ and the lexicographic order was compared with poral's order.
 | anchor | `anchor` |
 | $`\Phi(M)`$ | `closure`, `build_pattern` |
 
-## 8. A plan for the proof (not finished)
+## 8. The proof (on paper)
 
-The aim is the stronger form $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$. Write
-$`o(x)`$ for the value $`1 + \mathrm{val}(\mathrm{pairTerm}(x))`$ of a node $`x`$. A one-term node
-$`N`$ is non-epsilon or epsilon as in §3.1. Everything below is on paper; nothing is in Lean
-yet.
+The stronger form $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$ is proved on paper.
+The full proof is in [proof/README.md](proof/README.md). It gives both halves of the theorem:
+$`\Phi`$ preserves the order, and the points of $`\Phi`$ take every nonzero value of the core.
+Each of its three parts was checked by an independent referee; no false statement was found,
+and the gaps and minor points they found were repaired. It is not formalized in Lean. The one
+outside assumption is that the Lean `Ord.psi` is Buchholz's $`\psi`$; it is used only to name the
+image as the core.
 
-**Sources.**
-- [C01] Carlson, "Elementary patterns of resemblance", APAL 108 (2001).
-- [W07a] Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007).
-- [W07b] Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007).
-- [WW11] Weiermann and Wilken, "Ordinal arithmetic with simultaneously defined theta-functions",
-  MLQ 57 (2011).
-- [CW12] Carlson and Wilken, "Normal forms for elementary patterns", JSL 77 (2012).
-- pss-proof: the Lean facts on standard pair sequences and on the map `Trans`.
-
-**Proved on paper**
-
-1. **Standard forms.** A matrix is standard if and only if it satisfies these local
-   conditions on its row-0 tree (Theorem SC):
-   - the first column is $`(0,0)`$, every root has $`y = 0`$, and $`x_{j+1} \le x_j + 1`$;
-   - a child's $`y`$ is at most its parent's $`y`$ plus 1;
-   - siblings (the roots counted as siblings) have non-increasing terms;
-   - for every non-root column $`u`$ whose $`y`$ is at most its parent's, $`T(u) \lt T(v)`$,
-     where $`v`$ is the nearest proper ancestor with $`y_v \le y_u`$.
-
-   The last condition is the pair-sequence form of Buchholz's condition $`G_\nu(a) \lt a`$.
-   The proof is by induction along expansions, using the pss-proof facts. It also agrees
-   exactly with the standard matrices of at most 8 columns (44,653), and with 142,000 random
-   matrices of 9–12 columns.
-2. **Consequences.**
-   - A matrix is standard if and only if its root terms are standard and non-increasing.
-   - $`\mathrm{anchor}`$, $`\log`$ and $`\mathrm{lh}`$ give standard matrices. For $`\mathrm{lh}`$
-     this uses that $`\mathrm{Coll}_A`$ is strictly monotone on the terms it is applied to.
-   - The recursion of $`\mathrm{lh}`$ terminates: its nesting depth is less than the height of
-     the last child $`W`$. (The obvious measure fails, because $`\mathrm{Coll}_A`$ inserts $`A`$
-     again.)
-3. **Addition.** The root terms of $`M`$ give the additive normal form of $`o(M)`$.
-4. **Reading lemma R.** For a one-term $`N`$, $`o(N) = \omega^{o(\log N)}`$ when $`N`$ is not
-   epsilon; $`\log`$ is order-preserving. Proved by induction on the order of pair sequences,
-   with $`o(M) = \sup_n (o(M[n]) + 1)`$.
-5. **The fold.** The fold $`\oplus`$ of §3.3 is the computation of the reach in [W07b]: a step
-   inside the reach is Lemma 3.3(c), a jump is Lemma 3.4(b), and the result is Lemma 3.4(a).
-6. **Non-epsilon $`N`$.** The reach lemma ($`o(\mathrm{lh}(N))`$ is the largest $`\beta`$ with
-   $`o(N) \le_1 \beta`$) and the closure of the values under Wilken's bar operator.
-7. **Isominimality from bar-closure.** If the values $`o(V)`$ are closed under Wilken's bar
-   operator, then $`\iota(\Phi(M)) = o(M)`$ ([CW12] Thm 6.2 and Cor 6.3, [C01] Thm 5.9).
-
-**Open: the epsilon case**
-
-- **Bar-ε.** For epsilon $`N`$, the bar value of $`o(N)`$ is $`o(\mathrm{anchor}(N))`$ when the
-  root has at least 2 children, and 1 otherwise. It agrees with 11 examples computed by hand,
-  among them $`\varepsilon_{\varepsilon_0}`$ (bar value 1), $`\Gamma_0`$ and the
-  Bachmann–Howard ordinal.
-- **E1.** For epsilon $`N`$ with fold inputs $`Y_1, \ldots, Y_n`$,
-  $`o(\mathrm{lh}(N)) = o(N) + o(Y_1) + \cdots + o(Y_n)`$ agrees with Wilken's $`\lambda`$. Checked by
-  hand on 7 examples.
-- **E2.** Each fold input at a jump is $`\le_1`$-minimal. It reduces to a check on a finite
-  set, which passed on 40,350 jumps.
-
-Bar-ε and E1 need the $`\vartheta`$-form of $`o(N)`$, i.e. a translation from Buchholz's
-$`\psi`$ (or from the matrices directly) to Wilken's $`\vartheta`$. [WW11] (p. 117) leaves this
-translation open, so it has to be built here. The difficulty is that the arguments of
-$`\psi`$ are exponential in $`\Omega`$ and those of $`\vartheta`$ are linear: for example
-$`\psi_0(\Omega^2) = \vartheta(\Omega \cdot 2)`$ and $`\psi_0(\Omega^\Omega) = \Gamma_0`$.
+The proof has three parts.
+1. **Pair sequences** ([proof/COMB.md](proof/COMB.md)). A matrix is standard if and only if it
+   satisfies local conditions on its row-0 tree (Theorem SC; the last condition is the
+   pair-sequence form of Buchholz's $`G_\nu(a) \lt a`$). From it: $`\mathrm{anchor}`$, $`\log`$ and
+   $`\mathrm{lh}`$ give standard matrices, $`\mathrm{lh}`$ terminates, and
+   $`o(N) = \omega^{o(\log N)}`$ for non-epsilon $`N`$.
+2. **A translation to Wilken's $`\vartheta`$** ([proof/TR.md](proof/TR.md)). An explicit map
+   $`\mathcal{T}`$ from matrices to $`\vartheta`$-terms, defined on the trees without going through
+   $`\psi`$, with $`\mathrm{val} \circ \mathcal{T} = o`$. No translation between Buchholz's $`\psi`$ and
+   $`\vartheta`$ was known before (Weiermann and Wilken leave it open).
+3. **The main chain** ([proof/PROOF.md](proof/PROOF.md)). The fold $`\oplus`$ is Wilken's
+   computation of the $`\le_1`$-reach, so $`o(\mathrm{lh}(N))`$ is the largest $`\le_1`$-reach of
+   $`o(N)`$. The node set $`V`$ is finite and its values are closed under Wilken's bar operator,
+   so by Carlson and Wilken's normal forms the isominimal realization of $`\Phi(M)`$ puts the
+   point at $`o(M)`$.
 
 **Notes on the definition.** The sum in $`\log`$ must be the sum of §2, which drops smaller
 terms. For example, for $`M = (0,0)(1,1)(1,1)(1,0)(2,1)(2,1)(2,0)(3,0)`$ the term
-$`\varepsilon_1`$ is dropped. The anchor is not Wilken's bar operator in general.
+$`\varepsilon_1`$ is dropped. The anchor is not Wilken's bar operator in general: for
+$`\varepsilon_{\varepsilon_0} = (0,0)(1,1)(2,0)(3,1)`$ there is no anchor, and the bar value is 1.
 
 ## 9. Next
 
-- The epsilon case of §8 (Bar-ε, E1, E2), through a translation to Wilken's $`\vartheta`$.
-- A Lean formalization of the parts proved on paper, starting with Theorem SC.
+- A Lean formalization of the proof, starting with Theorem SC.
 - The extension to 3 rows (trio sequences and $`R_2^+`$); the record is [../BMS/POR.md](../BMS/POR.md).
   The current rule $`\Phi_{3i}`$ shows no order violation below $`(0,0,0)(1,1,1)(2,1,1)`$.

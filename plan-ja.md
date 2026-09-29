@@ -27,9 +27,10 @@ README の表のセルごとに、残りの作業を並べる。
       - `CalibRd200` を証明する（修正 `strip` の規則の写像は、読みの深さ 200 まで `trioE2` と一致する。100 までは証明済み、201 では偽。上限なしの `CalibSt` は燃料のため偽）（[BMS/TrioFixStripCalibNo.lean](Googology/Trans/BMS/TrioFixStripCalibNo.lean)）
       - `TrioFixFuel` の燃料 `max 200 (a の深さ)` が、どの `a` でも足りることを証明する（燃料を増やしても行列が変わらない。シートのラベルといくつかの族で確認済み）
 - ペア数列と加法的パターン（[Trans/PSS/POR-ja.md](Googology/Trans/PSS/POR-ja.md)）
-  - 写像 Φ が順序を保つこと、像が R₁⁺ の核全体であることを証明する（計画は [Trans/PSS/POR-ja.md](Googology/Trans/PSS/POR-ja.md) の §8：ι(Φ(M)) = 1 + val(pairTerm M)）
-    - 🤖 ε 的な場合：行列（または Buchholz の ψ）から Wilken の ϑ の項への翻訳を作り、Bar-ε（bar の値は anchor の値）、E1（畳み込みの入力の和が Wilken の λ）、E2（跳びの入力は ≤₁ で最小）を示す
-    - 紙の上で証明した部分を Lean で形式化する：定理 SC（標準形 ⇔ 木の局所的な条件）、anchor・log・lh が標準形を作ること、lh の停止、読み方の補題 R、畳み込み = Wilken の届く先の計算
+  - 写像 Φ が順序を保ち、像が R₁⁺ の核全体であるという紙の上の証明を、Lean で形式化する（[Trans/PSS/proof/](Googology/Trans/PSS/proof/README-ja.md)：ι(Φ(M)) = 1 + val(pairTerm M)）
+    - 定理 SC（標準形 ⇔ 木の局所的な条件）、次に anchor・log・lh が標準形を作ること、lh の停止、読み方の補題 R
+    - Wilken の ϑ への翻訳 𝒯（Mono*、Cof）。引用する ϑ の事実は公理にする
+    - 主な鎖（畳み込み = Wilken の届く先の計算、V の有限性、bar で閉じること、最小性）。引用する R₁⁺ の事実は公理にする
   - Φ をトリオ数列と R₂⁺ へ広げる（[Trans/BMS/POR-ja.md](Googology/Trans/BMS/POR-ja.md)。Φ₃i は (0,0,0)(1,1,1)(2,1,1) の手前まで順序の食い違いが 0）
     - (0,0,0)(1,1,1)(2,1,1) の手前まで：未決の「極限への一歩」の 310 組を決める（項の中で ι∘Φ₃ が単調であることを証明する）、行 844、907、1009 を決着させる
     - 行 915 より上：段の数え方、(2,2,1) の族、足りない節点

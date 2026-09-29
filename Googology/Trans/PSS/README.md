@@ -19,7 +19,7 @@ repository is a Lake dependency; its theorems are used, not copied.
 
 ## A map to additive patterns (conjecture)
 
-[POR.md](POR.md) defines a map $`\Phi`$ from standard pair sequences to Carlson's additive patterns $`R_1^+`$, by rearranging the trees of the matrix. It states the conjecture that $`\Phi`$ preserves the lexicographic order and gives the numerical evidence (144,773 adjacent pairs and 7,471,992 random pairs, 0 violations). It is written in Python (`por/phi.py`, `por/pss.py`), not in Lean.
+[POR.md](POR.md) defines a map $`\Phi`$ from standard pair sequences to Carlson's additive patterns $`R_1^+`$, by rearranging the trees of the matrix. $`\Phi`$ preserves the lexicographic order and its image is the whole core of $`R_1^+`$ except 0: this is proved on paper in [proof/](proof/README.md), with numerical evidence (144,773 adjacent pairs and 7,471,992 random pairs, 0 violations). It is written in Python (`por/phi.py`, `por/pss.py`, `por/tr.py`), not in Lean.
 
 ## Why `1 +`
 

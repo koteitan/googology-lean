@@ -2,12 +2,12 @@
 
 # ペア数列から加法的パターン（$`R_1^+`$）への写像 $`\Phi`$
 
-**状態：予想と数値の証拠、および証明の計画（§8）。** 証明は終わっておらず、形式化もまだ無い。
+**状態：紙の上で証明済み（§8、[proof/](proof/README-ja.md)）。数値の証拠もある。** Lean ではまだ形式化していない。
 
 標準形のペア数列 $`M`$ から、Carlson の加法的パターン（階数 1）$`\Phi(M)`$ を作る写像を定める。
 $`\Phi(M)`$ は、行列の木を組み替えるだけで作る。$`\psi`$ の項は書かない。
 
-**予想。** 標準形のペア数列 $`M, M'`$ について、次が成り立つ。
+**定理（紙の上で証明済み、§8）。** 標準形のペア数列 $`M, M'`$ について、次が成り立つ。
 
 ```math
 M \lt_{\mathrm{lex}} M' \iff \iota(\Phi(M)) \lt \iota(\Phi(M'))
@@ -15,13 +15,13 @@ M \lt_{\mathrm{lex}} M' \iff \iota(\Phi(M)) \lt \iota(\Phi(M'))
 
 ここで $`\iota(P)`$ は、パターン $`P`$ の点の、最小の実現（isominimal な実現）での値である。
 
-さらに強い形が成り立つと考えている。
+これは、次の強い形から出る。強い形も紙の上で証明済みである。
 
 ```math
 \iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))
 ```
 
-`pairTerm` は、`Rank.lean` にある、ペア数列から Buchholz の $`\psi`$ の項への写像である。$`1 +`$ が要るのは、`pairTerm` が $`(0,0)`$ を 0 に送る一方で $`\iota(\Phi((0,0))) = 1`$ だからである。無限の値では $`1 + \alpha = \alpha`$ である。`pairTerm` は $`\psi_0(\Omega_\omega)`$ より下の項への順序同型なので、この形から予想が出る。さらに、$`\Phi`$ の点が核の 0 でない値を全部とることも出る。
+`pairTerm` は、`Rank.lean` にある、ペア数列から Buchholz の $`\psi`$ の項への写像である。$`1 +`$ が要るのは、`pairTerm` が $`(0,0)`$ を 0 に送る一方で $`\iota(\Phi((0,0))) = 1`$ だからである。無限の値では $`1 + \alpha = \alpha`$ である。`pairTerm` は $`\psi_0(\Omega_\omega)`$ より下の項への順序同型なので、この形から定理が出る。さらに、$`\Phi`$ の点が核の 0 でない値を全部とることも出る。
 
 ## 1. 背景
 
@@ -160,7 +160,7 @@ x \le_1 z \iff x = z \lor (x \text{ は項が 1 つ} \land x \le z \le \mathrm{l
 | シートの行 460–467 の辺り、13 列以下 | 35,626 | 936,327 | 0 |
 | 合計 | 144,773 | 7,471,992 | 0 |
 
-- **全射性は証明していない。** $`\Phi`$ の像が核にすき間なく届くかは確かめていない。試した極限の所では、すき間は見つからなかった。
+- **全射性。** 数値の試験では、$`\Phi`$ の像にすき間は見つからなかった。像が核の 0 以外の全体であることは、紙の上で証明済みである（§8）。
 
 ## 6. 捨てた版
 
@@ -177,6 +177,7 @@ x \le_1 z \iff x = z \lor (x \text{ は項が 1 つ} \land x \le z \le \mathrm{l
 
 - `por/pss.py`：行列と項の変換、辞書式順序、Cantor 標準形の足し算、ペア数列の展開。
 - `por/phi.py`：$`\Phi`$。`python3 por/phi.py "(0,0)(1,1)(2,2)"` で、パターンと各節点の行列を表示する。
+- `por/tr.py`：証明（§8）で使う、Wilken の $`\vartheta`$ の項への翻訳 $`\mathcal{T}`$。`python3 por/tr.py "(0,0)(1,1)(2,2)"` で `t0(t1(W2))` を表示する。
 
 | 定義 | 関数 |
 |---|---|
@@ -188,49 +189,18 @@ x \le_1 z \iff x = z \lor (x \text{ は項が 1 つ} \land x \le z \le \mathrm{l
 | anchor | `anchor` |
 | $`\Phi(M)`$ | `closure`、`build_pattern` |
 
-## 8. 証明の計画（途中）
+## 8. 証明（紙の上）
 
-目標は強い形 $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$ である。節点 $`x`$ の値 $`1 + \mathrm{val}(\mathrm{pairTerm}(x))`$ を $`o(x)`$ と書く。項が 1 つの節点 $`N`$ が $`\varepsilon`$ 的かどうかは §3.1 のとおりである。以下はすべて紙の上の証明で、Lean にはまだ無い。
+強い形 $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$ を、紙の上で証明した。証明の全体は [proof/README-ja.md](proof/README-ja.md) にある。これから定理の両方の半分が出る：$`\Phi`$ は順序を保ち、$`\Phi`$ の点は核の 0 でない値を全部とる。3 つの部分それぞれを独立した査読者が確かめた。偽の命題は見つからず、見つかった穴と細かい点は直した。Lean ではまだ形式化していない。外からの仮定は、Lean の `Ord.psi` が Buchholz の $`\psi`$ であることの 1 つだけで、像を核と呼ぶところだけに使う。
 
-**文献。**
-- [C01] Carlson, "Elementary patterns of resemblance", APAL 108 (2001)。
-- [W07a] Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007)。
-- [W07b] Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007)。
-- [WW11] Weiermann and Wilken, "Ordinal arithmetic with simultaneously defined theta-functions", MLQ 57 (2011)。
-- [CW12] Carlson and Wilken, "Normal forms for elementary patterns", JSL 77 (2012)。
-- pss-proof：標準形のペア数列と写像 `Trans` についての Lean の事実。
+証明は 3 つの部分からなる。
+1. **ペア数列**（[proof/COMB.md](proof/COMB.md)）。行列が標準形であることは、行 0 の木の局所的な条件と同値である（定理 SC。最後の条件は Buchholz の $`G_\nu(a) \lt a`$ のペア数列版）。ここから：$`\mathrm{anchor}`$、$`\log`$、$`\mathrm{lh}`$ は標準形の行列を作り、$`\mathrm{lh}`$ は止まり、$`\varepsilon`$ 的でない $`N`$ では $`o(N) = \omega^{o(\log N)}`$ である。
+2. **Wilken の $`\vartheta`$ への翻訳**（[proof/TR.md](proof/TR.md)）。行列から $`\vartheta`$ の項への具体的な写像 $`\mathcal{T}`$ を、$`\psi`$ を通さずに木の上で定め、$`\mathrm{val} \circ \mathcal{T} = o`$ を示した。Buchholz の $`\psi`$ と $`\vartheta`$ の間の翻訳は、これまで知られていなかった（Weiermann と Wilken は今後の課題としている）。
+3. **主な鎖**（[proof/PROOF.md](proof/PROOF.md)）。畳み込み $`\oplus`$ は Wilken の $`\le_1`$ の届く先の計算なので、$`o(\mathrm{lh}(N))`$ は $`o(N)`$ の $`\le_1`$ の最大の届く先である。節点の集合 $`V`$ は有限で、その値は Wilken の bar 操作で閉じている。だから Carlson と Wilken の標準形により、$`\Phi(M)`$ の最小の実現は点を $`o(M)`$ に置く。
 
-**紙の上で証明済み**
-
-1. **標準形。** 行列が標準形であることは、行 0 の木についての次の局所的な条件と同値である（定理 SC）。
-   - 最初の列は $`(0,0)`$、根はすべて $`y = 0`$、$`x_{j+1} \le x_j + 1`$。
-   - 子の $`y`$ は、親の $`y`$ に 1 を足したもの以下。
-   - 兄弟（根どうしも兄弟とみなす）の項は増えない。
-   - $`y`$ が親の $`y`$ 以下の、根でない列 $`u`$ について $`T(u) \lt T(v)`$。$`v`$ は、$`y_v \le y_u`$ となる、いちばん近い真の先祖である。
-
-   最後の条件は、Buchholz の条件 $`G_\nu(a) \lt a`$ のペア数列版である。証明は、pss-proof の事実を使った、展開に沿った帰納法である。8 列以下の標準形の行列（44,653 個）とちょうど一致し、9〜12 列の 142,000 個の乱数の行列でも一致した。
-2. **その結果。**
-   - 行列が標準形であることと、根の項が標準形で増えない列であることは同じである。
-   - $`\mathrm{anchor}`$、$`\log`$、$`\mathrm{lh}`$ は標準形の行列を作る。$`\mathrm{lh}`$ については、$`\mathrm{Coll}_A`$ が使う項の上で真に単調であることを使う。
-   - $`\mathrm{lh}`$ の再帰は止まる。入れ子の深さは、最後の子 $`W`$ の高さより小さい（すぐに思いつく測度は、$`\mathrm{Coll}_A`$ が $`A`$ をまた入れるのでうまくいかない）。
-3. **足し算。** $`M`$ の根の項は $`o(M)`$ の加法標準形を与える。
-4. **読み方の補題 R。** 項が 1 つの $`N`$ が $`\varepsilon`$ 的でなければ $`o(N) = \omega^{o(\log N)}`$ で、$`\log`$ は順序を保つ。ペア数列の順序についての帰納法と、$`o(M) = \sup_n (o(M[n]) + 1)`$ で示す。
-5. **畳み込み。** §3.3 の畳み込み $`\oplus`$ は、[W07b] の届く先の計算そのものである。届く先の中の一歩は Lemma 3.3(c)、跳びは Lemma 3.4(b)、結果は Lemma 3.4(a) である。
-6. **$`\varepsilon`$ 的でない $`N`$。** 届く先の補題（$`o(\mathrm{lh}(N))`$ は $`o(N) \le_1 \beta`$ となる最大の $`\beta`$）と、値が Wilken の bar 操作で閉じていること。
-7. **bar で閉じていれば最小。** 値 $`o(V)`$ が Wilken の bar 操作で閉じていれば、$`\iota(\Phi(M)) = o(M)`$ である（[CW12] Thm 6.2 と Cor 6.3、[C01] Thm 5.9）。
-
-**未証明：$`\varepsilon`$ 的な場合**
-
-- **Bar-ε。** $`\varepsilon`$ 的な $`N`$ について、$`o(N)`$ の bar の値は、根の子が 2 つ以上なら $`o(\mathrm{anchor}(N))`$、そうでなければ 1 である。手計算の 11 例と合う。例えば $`\varepsilon_{\varepsilon_0}`$（bar の値は 1）、$`\Gamma_0`$、Bachmann–Howard 順序数である。
-- **E1。** $`\varepsilon`$ 的な $`N`$ の畳み込みの入力 $`Y_1, \ldots, Y_n`$ について、$`o(\mathrm{lh}(N)) = o(N) + o(Y_1) + \cdots + o(Y_n)`$ が Wilken の $`\lambda`$ と一致する。手計算の 7 例で確かめた。
-- **E2。** 跳びでの入力は $`\le_1`$ で最小である。有限集合の上の確認に帰着し、40,350 回の跳びで通った。
-
-Bar-ε と E1 には、$`o(N)`$ の $`\vartheta`$ での形、つまり Buchholz の $`\psi`$（または行列そのもの）から Wilken の $`\vartheta`$ への翻訳が要る。[WW11]（p. 117）はこの翻訳を今後の課題としているので、ここで作る必要がある。難しいのは、$`\psi`$ の引数は $`\Omega`$ について指数的で、$`\vartheta`$ の引数は 1 次式であることである。例えば $`\psi_0(\Omega^2) = \vartheta(\Omega \cdot 2)`$、$`\psi_0(\Omega^\Omega) = \Gamma_0`$ である。
-
-**定義についての注意。** $`\log`$ の和は、小さい項を捨てる §2 の和でなければならない。例えば $`M = (0,0)(1,1)(1,1)(1,0)(2,1)(2,1)(2,0)(3,0)`$ では、項 $`\varepsilon_1`$ が捨てられる。anchor は、一般には Wilken の bar 操作と違う。
+**定義についての注意。** $`\log`$ の和は、小さい項を捨てる §2 の和でなければならない。例えば $`M = (0,0)(1,1)(1,1)(1,0)(2,1)(2,1)(2,0)(3,0)`$ では、項 $`\varepsilon_1`$ が捨てられる。anchor は、一般には Wilken の bar 操作と違う。$`\varepsilon_{\varepsilon_0} = (0,0)(1,1)(2,0)(3,1)`$ には anchor が無く、bar の値は 1 である。
 
 ## 9. これから
 
-- §8 の $`\varepsilon`$ 的な場合（Bar-ε、E1、E2）。Wilken の $`\vartheta`$ への翻訳を通して示す。
-- 紙の上で証明した部分の Lean での形式化。定理 SC から始める。
+- 証明の Lean での形式化。定理 SC から始める。
 - 3 行（トリオ数列と $`R_2^+`$）への拡張。記録は [../BMS/POR-ja.md](../BMS/POR-ja.md)。今の規則 $`\Phi_{3i}`$ は、$`(0,0,0)(1,1,1)(2,1,1)`$ の手前まで順序の食い違いが無い。
