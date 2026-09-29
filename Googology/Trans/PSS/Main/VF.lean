@@ -1,4 +1,6 @@
 import Googology.Trans.PSS.Main.Iso
+import Googology.Trans.PSS.Main.AF
+import Googology.Trans.PSS.Main.BarEps
 
 /-!
 # `V_M` is finite: Theorem VF (`proof/PROOF-4.md` §15.1)
@@ -18,22 +20,18 @@ namespace Googology.Trans.PSS.Main
 
 open TR Ordinal Order Phi Forest
 
-/-- **Good sets** (`proof/PROOF-4.md` §15.1). -/
-def Good (F : Set Ordinal.{0}) : Prop :=
-  0 ∈ F ∧ 1 ∈ F ∧ (∀ l, ANF l → l.sum ∈ F → (∀ x ∈ l, x ∈ F) ∧ ∀ i, (l.take i).sum ∈ F) ∧
-    (∀ β ∈ F, 1 < β → β < T1bound → ∀ δ, IsLh β δ → δ ∈ F) ∧
-    (∀ β ∈ F, Pr β → 1 < β → β < T1bound → barO β ∈ F)
-
-theorem good_P1 (α : Ordinal.{0}) : Good {β | InP1 α β} :=
-  ⟨InP1.zero, InP1.one, fun _ hl hs => ⟨InP1.comp hl hs, InP1.psum hl hs⟩,
-    fun _ hβ h1 hT _ hδ => InP1.lh hβ h1 hT hδ, fun _ hβ hP h1 hT => InP1.bar hβ hP h1 hT⟩
-
-/-- **Lemma AF** (`proof/PROOF-4.md` §15.1): the anchor stays in a good set.  The
-paper's proof uses Fact BAR ([CW12] Def 5.1, Lemmas 5.4, 5.10; [W07a] Lemmas 4.3,
-4.9), Lemma R, `Bar_T` with Lemma TR, and Lemmas G and H. -/
+/-- **Lemma AF** (`proof/PROOF-4.md` §15.1): the anchor stays in a good set.  For
+epsilon `N` this is `Bar_T` (`barEps`): `bar(o(N)) = o(anchor N)`; for non-epsilon `N`
+it is `lemmaAF_noneps` (Fact BAR and Lemmas G, H). -/
 theorem lemmaAF {F : Set Ordinal.{0}} (hF : Good F) {N a : Tm} (hN : Std N)
     (ha : anchor N = some a) (hNF : ordOf [N] ∈ F) : ordOf [a] ∈ F := by
-  sorry
+  cases he : isEps N with
+  | false => exact lemmaAF_noneps hF hN he ha hNF
+  | true =>
+    have hcs : N.cs ≠ [] := by
+      intro h; rw [std_node_y hN, h] at ha; simp [anchor] at ha
+    rw [← (barEps hN he).1 a ha]
+    exact hF.bar_root hN hcs hNF
 
 theorem ordOf_leaf_eq : ordOf [Tm.node 0 []] = 1 := TR.ordOf_leaf
 
