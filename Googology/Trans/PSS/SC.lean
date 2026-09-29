@@ -1,5 +1,6 @@
 import Googology.Trans.PSS.SC.Defs
 import Googology.Trans.PSS.SC.Step
+import Googology.Trans.PSS.SC.Part2
 import Googology.Trans.PSS.Rank
 
 /-!
@@ -36,10 +37,12 @@ the lexicographic order `<ₚ` with a proper prefix smaller.
   induction on `n`, since they are a shifted copy of `M[n-1]` from `j₀` on.
   The tree facts (ancestors, parents, terms, the order `<ₚ`) are in
   `SC/Tree.lean`; the terms in `oper M n` in `SC/Oper.lean`.
-
-## Placeholder (`sorry`)
-
-* `ctps_of_sc` (COMB §8b Part 2).
+* Part 2 is proved in `SC/Part2.lean` (`Forest.ctps_of_SC`), by induction on
+  the length: SC is prefix-closed, so `M = Q ++ [c]` with `Q` standard.  If
+  `M` were not standard, take the least standard `X` above `M`.  Then
+  `X[n] = Q ++ w :: _` with `w < c` for large `n`, and comparing two
+  consecutive copies of the column `j₀` in `X[n]↾|Q| ++ [c]` violates Sib
+  (`i₁ = 0`) or G\* (`i₁ = 1`); when `|Q| = j₁`, (A) or (I0) of `X` fails.
 -/
 
 namespace Googology.Trans.PSS
@@ -97,9 +100,8 @@ theorem sc_of_ctps {M : PS} (h : CTPS M) : SC M :=
 /-! ## Part 2: SC ⇒ CTPS -/
 
 /-- **Theorem SC, Part 2: a sequence satisfying SC is standard** (COMB §8b
-Part 2: the least standard sequence above `M`, and Lemma 9).  Placeholder. -/
-theorem ctps_of_sc {M : PS} (h : SC M) : CTPS M := by
-  sorry
+Part 2: the least standard sequence above `M`; `SC/Part2.lean`). -/
+theorem ctps_of_sc {M : PS} (h : SC M) : CTPS M := Forest.ctps_of_SC h
 
 /-- **Theorem SC.**  A pair sequence is standard and starts at `(0,0)` exactly
 when it satisfies R0, I0, (A), Sib and G\*. -/
