@@ -56,9 +56,9 @@ M \lt_{\mathrm{lex}} M' \iff \iota(\Phi_3^{\mathrm{exp}}(M)) \lt \iota(\Phi_3^{\
 
 in both $`R_2^S`$ and $`R_2^C`$, with $`\iota = \mathcal{T}_3`$. This is proved on paper from the cited results,
 Theorems A and EQ, Lemma L, Proposition P′ and the 2-row results, and was checked by the
-referee. To read it as a statement about standard matrices and the rule `phi3m.py`, two links
+referee. To read it as a statement about standard matrices and the rule `por/history/phi3m.py`, two links
 are checked but not proved: every matrix of $`R_P`$ is standard (all 11,195 tested pass yaBMS),
-and $`\Phi_3^{\mathrm{exp}}`$ equals the patterns of `phi3m.py` and `phi3def2.py` on $`R_P`$ (all tested).
+and $`\Phi_3^{\mathrm{exp}}`$ equals the patterns of `por/history/phi3m.py` and `por/phi3def2.py` on $`R_P`$ (all tested).
 The rest of the range below $`U`$ also contains single terms of two further shapes and sums
 with such a summand; they are conditional on the remark of Carlson–Wilken 2012 §7.
 

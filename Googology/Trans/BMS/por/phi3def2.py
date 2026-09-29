@@ -1,6 +1,6 @@
 """Phi3def2: Phi3def (../POR.md section 15) with one more rule, kdl0 (section 16): a D-level omega column
 read inside a level column after an elder sibling (or nested in a same-level child) is read on the
-lowest level of its last chain (d_1 if it has one chain), not above its top.  The definition is otherwise that of phi3def.py, in clauses D1-D11.
+lowest level of its last chain (d_1 if it has one chain), not above its top.  The definition is otherwise that of history/phi3def.py, in clauses D1-D11.
 
 A trio matrix M is read as a term tree (y, z, children) on its row-0 parent forest.  Phi_3(M) is the
 closure of {0, 1, M} under prefix sums, summands, anchors, the <=1-reach lh, the <=2-successors and the

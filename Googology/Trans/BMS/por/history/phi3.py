@@ -1,4 +1,4 @@
-"""Phi3: trio matrix -> additive pattern of order 2 (R2+).  A PARTIAL rule; see ../POR.md.
+"""Phi3: trio matrix -> additive pattern of order 2 (R2+).  A PARTIAL rule; see ../../POR.md.
 
 Version 0 = the 2-row rule (z ignored) as a baseline; extensions are switched on by FLAGS.
 The recommended set is z,dbl,idx,lvl,lev (the default below).  z,dbl alone is the first
@@ -8,6 +8,8 @@ Usage:  python3 phi3.py [--flags=z,dbl,idx,lvl,lev] "(0,0,0)(1,1,1)(1,1,0)(2,2,1
 """
 import sys
 from functools import lru_cache
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))  # tss.py lives in por/
 import tss
 from tss import ONE, add, addall, tcmp, ocmp, mat, root
 

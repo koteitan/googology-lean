@@ -1,22 +1,11 @@
-"""Phi3j = Phi3i plus one optional flag, c2one, which is OFF by default (a rejected experiment; see
-../POR.md section 9):
-  c2one  : in the C2 read of a kid of the last omega summand D of a <=2-able node, an index column
-           whose C2 image equals the image of the omega column just before it adds nothing (the two
-           images are not summed).
-  With c2one, rows 907 and 947 fit the sheet (505 rows instead of 503), but the order test then has a
-  certified violation: iota(Phi3j(M907)) <= iota(Phi3j(M')) for the lex-smaller
-  M' = (0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(3,2,0)(4,3,1)(5,2,0)(6,3,1).  So the flag is not used, and
-  with the default flags Phi3j is Phi3i.
-Usage:  python3 phi3j.py [--flags=...] "(0,0,0)(1,1,1)(2,1,0)"
-
-Phi3i = phi3h plus three flags:
+"""Phi3i = phi3h plus three flags:
   infin  : below a finite column an omega column owns no index columns; its markers are finite
            coefficients (except a limit summand followed directly by a unit summand);
   d94    : for every <=2-able x with lh1(x) > lh2(x), add the copy x~ given by Carlson 2009
            Def 9.4 (downward 2-reflection): the least <=1-nesting base root(P, U^m) that is not a
            dead end, unless an earlier node already has <=1-reach lh1(x);
   nobase : switch off phi3h's separate nesting-base rule (d94 covers it).
-See ../POR.md.  Recommended flags: lastcol,mult,fin,c2rel,lastlo,infin,d94,nobase (the default of the
+See ../../POR.md.  Recommended flags: lastcol,mult,fin,c2rel,lastlo,infin,d94,nobase (the default of the
 command line).
 Usage:  python3 phi3i.py [--flags=...] "(0,0,0)(1,1,1)(2,1,0)"
 
@@ -50,6 +39,8 @@ lh (<=1-reach) = the 2-row fold  S := 2N ; S (+)= Coll(W|prefix_i) ; S (+)= C1(E
   proper prefixes (the <=2 analogue of the D-prefix fold)."""
 import sys
 from functools import lru_cache
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))  # tss.py lives in por/
 import tss
 from tss import ONE, add, addall, tcmp, mat, root
 
@@ -136,7 +127,7 @@ def C1s(B, N, st, last=False, lastidx=None):
     return addall(tuple((1, 0, r[1]) if r[0] == 'W' else r for r in out))
 
 
-def C2(s, x, Dy, st=(), last=True, top=False):
+def C2(s, x, Dy, st=(), last=True):
     """Omega_omega -> x, Omega_{omega+j} -> Omega_j on a descendant of a copied omega column D at
     level Dy; st = omega columns of the image above s (orig_y, shift), which move rigidly."""
     y, z, B = s
@@ -161,22 +152,17 @@ def C2(s, x, Dy, st=(), last=True, top=False):
         return (j, 0, kids)
     if y < Dy:                                   # a finite (Omega_1-multiplier) column: C1 below it
         return root(add(x[2], C1s(B, x, ())))
-    kids = C2s(B, x, Dy, (), last, top=top)
+    kids = C2s(B, x, Dy, (), last)
     if y == Dy:
         return root(add(x[2], kids))
     return (y - Dy, 0, kids)
 
 
-def C2s(B, x, Dy, st=(), last=True, top=False):
+def C2s(B, x, Dy, st=(), last=True):
     """C2 on a list of kids; consecutive wrapped omega columns merge into one level-1 column."""
     out = []
-    prev = None
     for i, b in enumerate(B):
         r = C2(b, x, Dy, st, last and i == len(B) - 1)
-        if 'c2one' in FLAGS and top and r == prev and b[1] == 0 and B[i - 1][1] == 1:
-            continue                            # c2one: an index column whose image equals the image
-                                                # of the omega column just before it adds nothing
-        prev = r
         if b[1] == 1 and not st and r[0] == 1 and r[1] == 0 and out and out[-1][0] == 1 and out[-1][1] == 0 \
                 and out[-1][2] and out[-1][2][-1][1] == 1 and B[len(out) - 1][1] == 1:
             out[-1] = (1, 0, out[-1][2] + r[2])
@@ -377,7 +363,7 @@ def lh1_le2(x, info):
                     S = oplus(S, S[0])
                 continue
             lst = (lo_ + gi == len(Om) - 1) and ci == len(Dg[2]) - 1
-            S = oplus(S, C2(c, x, Dg[0], (), lst, top=True) if c[0] >= 1 else root(c[2]))
+            S = oplus(S, C2(c, x, Dg[0], (), lst) if c[0] >= 1 else root(c[2]))
     return S
 
 

@@ -1,6 +1,6 @@
 """Phi3def: the map Phi_3 from trio matrices to additive patterns of order 2 (R_2^+), as one definition
 without flags.  It is the same map as Phi3o with its recommended flags (checked on every matrix of the
-seven order-test sets and on every sheet row); see ../POR.md section 15 for the definition in clauses
+seven order-test sets and on every sheet row); see ../../POR.md section 15 for the definition in clauses
 D1-D11 and the table of the old flags.
 
 A trio matrix M is read as a term tree (y, z, children) on its row-0 parent forest.  Phi_3(M) is the
@@ -16,6 +16,8 @@ Usage:  python3 phi3def.py "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(4,2,1)"
 """
 import sys
 from functools import lru_cache
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))  # tss.py lives in por/
 import tss
 from tss import ONE, add, addall, tcmp, mat, root
 # ---- constants and recursion contexts ----

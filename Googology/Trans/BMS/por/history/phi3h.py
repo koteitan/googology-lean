@@ -1,8 +1,10 @@
-"""Phi3g: trio matrix -> R2+ pattern from ONE two-level collapse (no case rules).
+"""Phi3h = phi3g with omega-ancestor stacks: a z=0 column is an index column of the NEAREST omega
+ancestor whose level is <= its own, finite otherwise; a marker collapses to the target of the omega
+column that owns it (flags c2rel, lastlo).
+See ../../POR.md.  Recommended flags: lastcol,mult,fin,c2rel,lastlo (the default of the command line).
+Usage:  python3 phi3h.py [--flags=lastcol,mult,fin,c2rel,lastlo] "(0,0,0)(1,1,1)(2,1,0)"
 
-See ../POR.md.  Recommended flags: lastcol,mult,fin (the default of the command line).
-Usage:  python3 phi3g.py [--flags=lastcol,mult,fin] "(0,0,0)(1,1,1)(2,1,0)"
-
+Phi3g: trio matrix -> R2+ pattern from ONE two-level collapse (no case rules).
 
 Terms t = (y, z, kids) on the row-0 tree (x = depth).  A column is
   finite  : z=0 and (no z=1 ancestor inside the collapsed subtree, or y < that ancestor's y)
@@ -30,6 +32,8 @@ lh (<=1-reach) = the 2-row fold  S := 2N ; S (+)= Coll(W|prefix_i) ; S (+)= C1(E
   proper prefixes (the <=2 analogue of the D-prefix fold)."""
 import sys
 from functools import lru_cache
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))  # tss.py lives in por/
 import tss
 from tss import ONE, add, addall, tcmp, mat, root
 
@@ -54,36 +58,43 @@ def lam(t):
 
 
 # ------------------------------------------------------------------ collapses
-def C1(s, N, anc, last=False):
-    """anc: None, or (y of nearest z=1 ancestor, whether it was lowered).
-    last: s lies on the rightmost path of N (its last column is N's last column)."""
+def _nearest(st, y):
+    """nearest omega ancestor (orig_y, shift) whose level is <= y: the column is its index column."""
+    for a in reversed(st):
+        if a[0] <= y:
+            return a
+    return None
+
+
+def C1(s, N, st, last=False):
+    """st: stack of omega ancestors (orig_y, shift), outermost first.
+    last: s lies on the rightmost path of the last omega summand."""
     y, z, B = s
     if y == 0:
         return s
     if z == 1:
-        if anc is not None:                      # omega under omega: moves rigidly with it
-            return (y - anc[1], 1, C1s(B, N, (y, anc[1]), last))
+        if st:                                   # omega under omega: moves rigidly with it
+            sh = st[-1][1]
+            return (y - sh, 1, C1s(B, N, st + ((y, sh),), last))
         if y == 2:
-            return ('W', (2, 1, C1s(B, N, (2, 0), last)))
-        return (y - 1, 1, C1s(B, N, (y, 1), last))
-    marker_last = 'lastcol' in FLAGS and last and not B and anc is not None and y == anc[0]
-    if anc is not None and y >= anc[0] and not marker_last:
-        return (y - anc[1], 0, C1s(B, N, anc, last))
-    if marker_last:
-        anc = None                                # the last column marker is a finite column
-    if 'fin' in FLAGS:
-        anc = None                                # below a finite column levels are finite again
-    kids = C1s(B, N, anc, last)
+            return ('W', (2, 1, C1s(B, N, ((2, 0),), last)))
+        return (y - 1, 1, C1s(B, N, ((y, 1),), last))
+    a = _nearest(st, y)
+    if a is not None and not ('lastcol' in FLAGS and last and not B and y == a[0] and a is st[0]):
+        return (y - a[1], 0, C1s(B, N, st, last))
+    kids = C1s(B, N, (), last)                   # below a finite column levels are finite again
     if y == 1:
         return root(add(N[2], kids))
     return (y - 1, 0, kids)
 
 
-def C1s(B, N, anc, last=False, lastidx=None):
+def C1s(B, N, st, last=False, lastidx=None):
+    if st is None:
+        st = ()
     out = []
     li = len(B) - 1 if lastidx is None else lastidx
     for i, s in enumerate(B):
-        r = C1(s, N, anc, last and i == li)
+        r = C1(s, N, st, last and i == li)
         if r[0] == 'W':
             if out and out[-1][0] == 'W':
                 out[-1] = ('W', out[-1][1] + (r[1],))
@@ -94,34 +105,44 @@ def C1s(B, N, anc, last=False, lastidx=None):
     return addall(tuple((1, 0, r[1]) if r[0] == 'W' else r for r in out))
 
 
-def C2(s, x, Dy, sh=None):
-    """Omega_omega -> x, Omega_{omega+j} -> Omega_j on a descendant of a copied omega column at level
-    Dy.  Inside an omega column of the image (sh = its shift) levels move rigidly with it."""
+def C2(s, x, Dy, st=(), last=True):
+    """Omega_omega -> x, Omega_{omega+j} -> Omega_j on a descendant of a copied omega column D at
+    level Dy; st = omega columns of the image above s (orig_y, shift), which move rigidly."""
     y, z, B = s
     if y == 0:
         return s
-    if sh is not None:
-        return (y - sh, z, tuple(C2(b, x, Dy, sh) for b in B))
     if z == 1:
+        if st:
+            sh = st[-1][1]
+            return (y - sh, 1, C2s(B, x, Dy, st + ((y, sh),), last))
         if y - Dy <= 1:                          # an omega level cannot sit at level 1: wrap
             nsh = y - 2
-            return (1, 0, ((2, 1, tuple(C2(b, x, Dy, nsh) for b in B)),))
-        return (y - Dy, 1, tuple(C2(b, x, Dy, Dy) for b in B))
-    if 'fin' in FLAGS and y < Dy:                  # a finite (Omega_1-multiplier) column: C1 below it
-        return root(add(x[2], C1s(B, x, None)))
-    kids = C2s(B, x, Dy)
-    if y <= Dy:
+            return (1, 0, ((2, 1, C2s(B, x, Dy, ((y, nsh),), last)),))
+        return (y - Dy, 1, C2s(B, x, Dy, ((y, Dy),), last))
+    a = _nearest(st, y)
+    if a is not None and not ('c2rel' in FLAGS and last and not B and y == a[0] and a[0] - a[1] == 2):
+        return (y - a[1], 0, C2s(B, x, Dy, st, last))
+    if a is not None:                            # marker of a wrapped omega: its level omega+j of D
+        j = y - Dy                               # is read relative to D (Omega_{omega+j} -> Omega_j)
+        kids = C2s(B, x, Dy, st, last)
+        if j <= 0:
+            return root(add(x[2], kids))
+        return (j, 0, kids)
+    if y < Dy:                                   # a finite (Omega_1-multiplier) column: C1 below it
+        return root(add(x[2], C1s(B, x, ())))
+    kids = C2s(B, x, Dy, (), last)
+    if y == Dy:
         return root(add(x[2], kids))
     return (y - Dy, 0, kids)
 
 
-def C2s(B, x, Dy):
+def C2s(B, x, Dy, st=(), last=True):
     """C2 on a list of kids; consecutive wrapped omega columns merge into one level-1 column."""
     out = []
-    for b in B:
-        r = C2(b, x, Dy)
-        if r[0] == 1 and r[1] == 0 and len(r[2]) == 1 and r[2][0][1] == 1 and b[1] == 1 and out \
-                and out[-1][0] == 1 and out[-1][1] == 0 and out[-1][2] and out[-1][2][-1][1] == 1 and B[len(out) - 1][1] == 1:
+    for i, b in enumerate(B):
+        r = C2(b, x, Dy, st, last and i == len(B) - 1)
+        if b[1] == 1 and not st and r[0] == 1 and r[1] == 0 and out and out[-1][0] == 1 and out[-1][1] == 0 \
+                and out[-1][2] and out[-1][2][-1][1] == 1 and B[len(out) - 1][1] == 1:
             out[-1] = (1, 0, out[-1][2] + r[2])
         else:
             out.append(r)
@@ -133,15 +154,17 @@ def Up(a, N=None, last=False):
     level (y=0 columns and their subtrees are unchanged).  With 'lastcol', a marker (y = the y of its
     nearest omega ancestor) that is a leaf and the last column of N is a finite column: the Omega_1
     multiplier, which collapses to N."""
-    def r(s, oy, lst):
+    def r(s, oys, lst):
         y, z, B = s
         if y == 0:
             return s
-        if 'lastcol' in FLAGS and lst and not B and z == 0 and y == oy and N is not None:
-            return root(N[2])
-        noy = y if z == 1 else oy
-        return (y + 1, z, tuple(r(b, noy, lst and i == len(B) - 1) for i, b in enumerate(B)))
-    return (2, 1, tuple(r(b, a[0], last and i == len(a[2]) - 1) for i, b in enumerate(a[2])))
+        if 'lastcol' in FLAGS and lst and not B and z == 0 and N is not None:
+            own = [o for o in oys if o <= y]
+            if own and len(own) == 1 and own[-1] == y and oys[0] == y:
+                return root(N[2])             # an Omega_1-multiplier of the lifted summand a itself
+        noys = oys + (y,) if z == 1 else oys
+        return (y + 1, z, tuple(r(b, noys, lst and i == len(B) - 1) for i, b in enumerate(B)))
+    return (2, 1, tuple(r(b, (a[0],), last and i == len(a[2]) - 1) for i, b in enumerate(a[2])))
 
 
 # ------------------------------------------------------------------ helpers
@@ -165,7 +188,7 @@ def omega_prefix(hi):
 
 def c1fixed(Om, N, last=False):
     """C1 image of the omega columns Om is the single wrapper (1,0,Om).  last: Om ends N."""
-    return bool(Om) and C1s(Om, N, None, last) == ((1, 0, Om),)
+    return bool(Om) and C1s(Om, N, (), last) == ((1, 0, Om),)
 
 
 def zdepth(D):
@@ -258,26 +281,34 @@ def lh(t):
     S = (t, t)
     for i in range(1, len(hi) + 1):
         if 'mult' in FLAGS:
-            Y = root(add(A, C1s(hi[:i], t, None, bool(Om), min(i, len(Om)) - 1)))
+            Y = root(add(A, C1s(hi[:i], t, (), bool(Om), min(i, len(Om)) - 1)))
         else:
-            Y = root(add(A, C1s(hi[:i], t, None, i == len(hi) and not lo)))
+            Y = root(add(A, C1s(hi[:i], t, (), i == len(hi) and not lo)))
         if Y[2][-1] == W and Y[2][:-1] == A:          # the copy is W itself: nesting
             Ap = A[:-1]
             S = oplus(S, root(Ap + (plus(W),)))
             continue
         S = oplus(S, Y)
     for g in lo:
-        S = oplus(S, C1(g, t, None) if g[0] >= 1 else g)
+        S = oplus(S, C1(g, t, (), 'lastlo' in FLAGS and g is lo[-1]) if g[0] >= 1 else g)
     return S
 
 
 def is_limit(D):
-    """the omega summand D ends (along its rightmost path of markers) in a leaf marker:
-    its multiplier ends in Omega_1."""
+    """the multiplier of the omega summand D ends in Omega_1: the last column on D's rightmost path
+    is a z=0 leaf that is a marker (same level) of D itself (nearest omega ancestor with level <= it)."""
+    path = [D]
     c = D
-    while c[2] and c[2][-1][1] == 0 and c[2][-1][0] >= 1:
+    while c[2]:
         c = c[2][-1]
-    return c is not D and not c[2] and c[0] == D[0]
+        path.append(c)
+    L = path[-1]
+    if L is D or L[1] != 0 or L[0] < 1:
+        return False
+    for a in reversed(path[:-1]):
+        if a[1] == 1 and a[0] <= L[0]:
+            return a is D and a[0] == L[0]
+    return False
 
 
 def groups(Om):
@@ -303,13 +334,14 @@ def lh1_le2(x, info):
     if q < d:
         return lh(root(A[:-1] + (plus(W),)))
     lo_, hi_ = groups(Om)[-1] if 'mult' in FLAGS else (len(Om) - 1, len(Om) - 1)
-    for Dg in Om[lo_:hi_ + 1]:
-        for c in Dg[2]:
+    for gi, Dg in enumerate(Om[lo_:hi_ + 1]):
+        for ci, c in enumerate(Dg[2]):
             if c[1] == 1:
                 if c[0] == Dg[0]:
                     S = oplus(S, S[0])
                 continue
-            S = oplus(S, C2(c, x, Dg[0]) if c[0] >= 1 else root(c[2]))
+            lst = (lo_ + gi == len(Om) - 1) and ci == len(Dg[2]) - 1
+            S = oplus(S, C2(c, x, Dg[0], (), lst) if c[0] >= 1 else root(c[2]))
     return S
 
 
@@ -414,7 +446,7 @@ def show(P):
 
 
 if __name__ == '__main__':
-    FLAGS.update({'lastcol', 'mult', 'fin'})
+    FLAGS.update({'lastcol', 'mult', 'fin', 'c2rel', 'lastlo'})
     args = sys.argv[1:]
     for a in [a for a in args if a.startswith('--flags=')]:
         FLAGS.clear()

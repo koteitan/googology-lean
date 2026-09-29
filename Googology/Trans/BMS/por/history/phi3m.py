@@ -1,35 +1,4 @@
-"""Phi3n = Phi3m plus rules for the later level columns, the covered root runs and the rows above
-(0,0,0)(1,1,1)(2,2,1)(3,3,1) (see ../POR.md section 13).  Notation as for Phi3m.
-  kb2    : kbcut's shared up-kid (equal to K_1) reads d_1; each further up-kid of the same-level kid
-           raises the level it reads by one (d_(1+j)).  Inside the level column of d_m the raise stays
-           below d_m, and the up-kids beyond the cap stay as content.  Rows 1479, 1480.
-  kup2   : a single bare later up-kid of D (after an uncut chain) doubles the top level d_q.
-  kup3   : more later up-kids S_1..S_n: a bare S_1 is the top level itself, each further S_i (and S_1
-           with kids) adds its level columns; one with a same-level kid has its own top level.
-           Rows 1474-1510, 1540-1544.
-  ksib2  : a repeat of a chain with content (an equal column with a same-level kid, or a column that
-           starts a repeat of a finished chain with kids) has its own top level.  Rows 1511-1523, 1545.
-  kchain2: a chain-only level column reaches the top of its own chain, not the global top d_q.
-           Rows 1584-1591.
-  kchtop : a level column K_m that continues its chain (an up-kid) and has other kids: those kids are
-           read at the top of lh1(x), each by its owner (a marker of K_m -> d_m, a same-level kid ->
-           d_(m+1) or, if its up-kid equals K_(m+1), that level, a unit -> +1, an index column -> a frame
-           on d_q), and d_m reaches as far as x before an lsup block.  Rows 1592-1632.
-  idxlow : one omega column whose top level is the crossing top of a level column with a same-level
-           kid, and no later up-kid: an index image is built on d_(q-1), below that top.  Rows 1471-1473.
-  lcov3  : lcov2 with a prefix: a limit summand with content followed by a summand that repeats a
-           proper prefix of its kids (up to a ksucc unit), with its levels covered, is covered (merged,
-           no block, its remaining kids read by C2).  Rows 1340-1368, 1462, 1468, 1475.
-  lnest  : several earlier summands before the last group form one block, the U-form of all of them
-           with the last marker read as x; inside it the earlier limits give their blocks (nested).
-           Only row 1331 of the sheet.
-  kcross : when x's reach is taken over by an lsup block, the crossing level just below the top also
-           reaches D's trailing finite kids.  Only row 1524 of the sheet; it removes a same-pattern pair.
-Recommended flags (the default of the command line): those of Phi3m plus
-  kup2,kb2,lcov3,lnest,kup3,ksib2,kcross,kchtop,idxlow,kchain2
-Usage:  python3 phi3n.py [--flags=...] "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(3,0,0)"
-
-Phi3m = Phi3l plus rules for the level columns K_m of the <=2-able nodes above row 1300 (see ../POR.md
+"""Phi3m = Phi3l plus rules for the level columns K_m of the <=2-able nodes above row 1300 (see ../../POR.md
 section 12).  Notation as for Phi3l: x = root(P, U+q), d_m = root(P, U+q, U^m), D = the last omega column
 of U, K_1, K_2, ... its level columns (k2cut); lh1(d_m) is the C2 read of K_m's kids relative to d_m.
   kown  : a marker leaf below K_m belongs to the omega column that owns it (the nearest one with level
@@ -71,7 +40,7 @@ Recommended flags (the default of the command line):
 Usage:  python3 phi3m.py [--flags=...] "(0,0,0)(1,1,1)(2,2,1)(3,1,0)(2,0,0)"
 
 Phi3l = Phi3k plus rules for the root runs with several summands and for the nested frames of the
-sheet rows above 915 (see ../POR.md section 11).  x = root(P, U+q) is a <=2-able node with successors
+sheet rows above 915 (see ../../POR.md section 11).  x = root(P, U+q) is a <=2-able node with successors
 d_m = root(P, U+q, U^m), m = 1..q; the omega columns of U are D_1, ..., D_k (the copied summands of the
 root run); a limit summand ends in a marker (its multiplier lambda ends in Omega_omega), and mult puts
 its level at its successor.
@@ -103,7 +72,7 @@ Recommended flags (the default of the command line):
 Usage:  python3 phi3l.py [--flags=...] "(0,0,0)(1,1,1)(2,2,1)(2,1,0)(1,1,1)"
 
 Phi3k = Phi3j (= Phi3i with the default flags) plus rules for the sheet rows above 915, i.e. the
-matrices from (0,0,0)(1,1,1)(2,1,1) on (see ../POR.md section 10).  All new rules act in the <=1-reach
+matrices from (0,0,0)(1,1,1)(2,1,1) on (see ../../POR.md section 10).  All new rules act in the <=1-reach
 lh1(x) of a <=2-able node x = root(P, U+q), whose <=2-successors are d_m = root(P, U+q, U^m), m = 1..q,
 and D = the last omega column of U.
   kimg   : a z=1 kid K of D on D's own level (Omega_omega * Omega_omega ...) is the summand
@@ -134,7 +103,7 @@ with kids read by KI instead of C2; loses 40 rows).
 Usage:  python3 phi3k.py [--flags=...] "(0,0,0)(1,1,1)(2,2,1)(3,0,0)"
 
 Phi3j = Phi3i plus one optional flag, c2one, which is OFF by default (a rejected experiment; see
-../POR.md section 9):
+../../POR.md section 9):
   c2one  : in the C2 read of a kid of the last omega summand D of a <=2-able node, an index column
            whose C2 image equals the image of the omega column just before it adds nothing (the two
            images are not summed).
@@ -151,7 +120,7 @@ Phi3i = phi3h plus three flags:
            Def 9.4 (downward 2-reflection): the least <=1-nesting base root(P, U^m) that is not a
            dead end, unless an earlier node already has <=1-reach lh1(x);
   nobase : switch off phi3h's separate nesting-base rule (d94 covers it).
-See ../POR.md.  Recommended flags: lastcol,mult,fin,c2rel,lastlo,infin,d94,nobase (the default of the
+See ../../POR.md.  Recommended flags: lastcol,mult,fin,c2rel,lastlo,infin,d94,nobase (the default of the
 command line).
 Usage:  python3 phi3i.py [--flags=...] "(0,0,0)(1,1,1)(2,1,0)"
 
@@ -185,6 +154,8 @@ lh (<=1-reach) = the 2-row fold  S := 2N ; S (+)= Coll(W|prefix_i) ; S (+)= C1(E
   proper prefixes (the <=2 analogue of the D-prefix fold)."""
 import sys
 from functools import lru_cache
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))  # tss.py lives in por/
 import tss
 from tss import ONE, add, addall, tcmp, mat, root
 
@@ -460,35 +431,7 @@ def level_cols(D):
         Kp = [g for c in cols for g in k2kids(c, 'all') if g[1] == 1 and g[0] == D[0]
               and not shares_k1(g, up[0])][0]
         cols = level_cols(Kp) + cols
-    if 'ksib2' in FLAGS:
-        # ksib2: a level column with a same-level omega kid followed by an equal sibling has its own
-        # top level too (its crossing pair (d] e)), before the sibling's levels
-        new = []
-        for i, c in enumerate(cols):
-            new.append(c)
-            if c is not None and i + 1 < len(cols) and cols[i + 1] is not None and (
-                    (cols[i + 1] == c and any(g[1] == 1 and g[0] == c[0] for g in c[2]))
-                    or (cols[i + 1] == up[0] and up[0][2] and not k2kids(c, 'cut'))
-                    or any(cols[k] == cols[i + 1] and cols[k][2] and not k2kids(c, 'cut')
-                           and i - k + 1 == len(subcols(cols[k])) for k in range(i + 1))):
-                new.append(None)                # (a repeat of a chain with content: own top level)
-        cols = new
-    if k2kids(first[-1], 'cut'):
-        return cols
-    cols = cols + [None]
-    if 'kup3' in FLAGS:
-        # kup3: later up-kids S_1..S_n of D that are not level columns (after an uncut chain): a bare
-        # S_1 is the top level itself; every further S_i, and S_1 with kids, adds its own level column
-        ext = [c for c in up[1:] if not any(c is L for L in cols if L is not None)]
-        if ext and not (len(ext) == 1 and not ext[0][2]):
-            for i, S in enumerate(ext):
-                if i == 0 and not S[2]:
-                    continue
-                sc = subcols(S)
-                cols = cols + sc
-                if 'ksib2' in FLAGS and any(g[1] == 1 and g[0] == sc[-1][0] for g in sc[-1][2]):
-                    cols = cols + [None]        # (its crossing pair: own top level)
-    return cols
+    return cols + ([] if k2kids(first[-1], 'cut') else [None])
 
 
 def d1_info(t):
@@ -579,48 +522,42 @@ def lh(t):
             U = t[2][-1]
             top = root(x1[2] + (U,) * q)
             if not k2kids(K2, 'all'):
-                if 'kchain2' in FLAGS:
-                    # kchain2: it reaches the top of its own chain (the next level without a column,
-                    # ksib2), not the global top d_q
-                    cl = level_cols(U[2][-1])
-                    n = len(subcols(K2))         # K_m's chain occupies the next n columns from m-1
-                    last, seen = m - 1, 0
-                    for i in range(m - 1, len(cl)):
-                        if cl[i] is not None:
-                            seen += 1
-                            last = i
-                            if seen == n:
-                                break
-                    for mm in range(last + 1, len(cl)):
-                        if cl[mm] is None:
-                            return (root(x1[2] + (U,) * (mm + 1)),)
                 return (top,)                    # k2chain: a chain-only K_m: d_m reaches d_q
-            if 'kchtop' in FLAGS and m < q and chtop_col(K2):
-                # kchtop: K_m continues its chain (an up-kid): its other kids are read at the top of
-                # lh1(x) (lh1_le2), and d_m reaches as far as x does before an lsup block
-                L = lh(x1)
-                return PREBLOCK.get(x1, L)
             nx = root(x1[2] + (U,) * (m + 1)) if m < q else t
             dks = [nx[2]]
             # d_m reaches the C2 read of K_m's own kids relative to d_m (level of K_m); a same-level
             # omega kid of K_m reaches the next successor d_(m+1)
-            kk = level_kids(x1, K2, m, U, q)
+            kk = tuple(k2kids(K2, 'all'))
+            if 'kown' in FLAGS:
+                # kown: a marker leaf below K_m belongs to the omega column that owns it (the nearest
+                # one with level <= its y): D (level K_m.y - m) or K_j (level D.y + j).  It collapses
+                # to that column's target, d_j (d_0 = x), not to d_m (Phi3h rule (b))
+                cols = level_cols(U[2][-1])
+                own = {U[2][-1][0]: 0}              # level of each owner -> index j of its target d_j
+                for i, col in enumerate(cols[:m - 1]):
+                    if col is not None and col[0] < K2[0]:
+                        own[col[0]] = i + 1         # (K_m owns the markers at its own level)
+                kk = tuple(ownleaf(c, own, x1, U) for c in kk)
+            if 'kdl' in FLAGS:
+                # kdl: such a D-level omega column is the kimg summand built on d_1 (its own level)
+                Dy_ = U[2][-1][0]
+                dall = [root(x1[2] + (U,) * i)[2] for i in range(1, q + 1)]
+                kk2 = []
+                for c in kk:
+                    if c[1] == 1 and c[0] == Dy_:
+                        e = Kimg(c, x1, Dy_, dall, None, False)
+                        IDXIMG.setdefault(x1, set()).add(e)
+                        c = (0, 0, e[2])
+                    kk2.append(c)
+                kk = tuple(kk2)
             KCTX.append((t, K2[0], dks))
             KDX.append((x1, U[2][-1][0]))
             try:
-                S = _lh1_kids((t,), t, (K2[0], K2[1], kk), K2[0], [], t[2], dks, None, True)
+                return _lh1_kids((t,), t, (K2[0], K2[1], kk), K2[0], [], t[2], dks,
+                                 None, True)
             finally:
                 KCTX.pop()
                 KDX.pop()
-            if 'kcross' in FLAGS and m + 1 == q and any(g[1] == 1 and g[0] == K2[0] for g in K2[2]) \
-                    and has_block(U):
-                # kcross: a crossing level (d_m] d_(m+1)) just below the top reaches as far as x does
-                # at the top: D's trailing finite kids (after its omega kids) extend it too
-                Dd = U[2][-1]
-                for c in Dd[2]:
-                    if c[0] == 0:
-                        S = oplus(S, root(c[2]) if c[2] else ONE)
-            return S
     if is_dead(t):
         return (t,)
     A = t[2]
@@ -705,15 +642,6 @@ def strip_marker(D):
 def covers(D1, D2):
     """lcov2: the summand D2 after the limit summand D1 = Omega_omega*(lambda' + Omega_omega) repeats
     lambda' (up to a unit that ksucc absorbs): the pattern of D1 is covered by that of D2."""
-    if 'lcov3' in FLAGS and has_content(D1) and D1[2]:
-        # lcov3: D2 (without a unit that ksucc absorbs) repeats a proper prefix of D1's kids; the rest
-        # of D1 (ending in its marker) is read by C2 into lh1(x)
-        k2 = D2[2]
-        if 'ksucc' in FLAGS and k2 and k2[-1] == LEAF and len(k2) >= 2 and ends_in_marker(k2[-2], D2[0]):
-            k2 = k2[:-1]
-        if k2 and len(k2) < len(D1[2]) and D1[2][:len(k2)] == k2 \
-                and len(level_cols(D1)) <= len(level_cols((D2[0], D2[1], k2))):
-            return True                         # (and D1's levels are covered by D2's)
     if not has_content(D1) or not D1[2] or D1[2][-1] != (D1[0], 0, ()):
         return False                            # only a limit with content whose marker is a kid of D1
     s1 = strip_marker(D1)
@@ -816,7 +744,7 @@ def shares_k1(g, K1):
     return bool(gu) and gu[0] == K1
 
 
-def Kimg(K, x, Dy, dk, t0, last, nested=False, kb2ok=True):
+def Kimg(K, x, Dy, dk, t0, last, nested=False):
     """kimg: a same-level omega kid K of D (Omega_omega * Omega_omega ...) is read as the summand
     d * omega^(K's kids): root(d.kids + KI(K.kids)); a bare K gives d itself (the old doubling).
     kbase: with q successors d_1 < ... < d_q of x, d = d_1; a K whose leading kids are z=1 columns one
@@ -827,20 +755,11 @@ def Kimg(K, x, Dy, dk, t0, last, nested=False, kb2ok=True):
         if 'kbase' in FLAGS:
             j = min(zlead(K), len(dk) - 1)
             up = [c for c in B if c[1] == 1 and c[0] == Dy + 1]
-            k1r = K1REF[-1] if K1REF and K1REF[-1][0] is x else None
-            k1 = k1r[1] if k1r else (k1_of(x) if x is not None and le2_info(x) is not None else None)
-            if 'kbcut' in FLAGS and up and k1 is not None and up[0] == k1 and k2kids(up[0], "all"):
+            if 'kbcut' in FLAGS and up and x is not None and le2_info(x) is not None \
+                    and k1_of(x) is not None and up[0] == k1_of(x) and k2kids(up[0], "all"):
                 # kbcut: a first up-kid equal to K_1 shares K_1's level d_1; only it is consumed
                 j = 0
                 B = tuple(c for c in B if c is not up[0])
-                if 'kb2' in FLAGS:
-                    # kb2: each further up-kid of K raises the level it reads by one (d_(1+j)), and
-                    # is consumed too; inside the level column of d_m the raise stays below d_m
-                    j = min(len(up) - 1, len(dk) - 1)
-                    if kb2ok is not True:
-                        j = max(0, min(j, kb2ok))
-                    used = up[1:1 + j]                  # the up-kids beyond the cap stay as content
-                    B = tuple(c for c in B if not any(c is u for u in used))
             elif j or ('kbcut' in FLAGS and up):
                 # kbcut: leading up-kids are matched with levels also when their chain is cut (j = 0):
                 # with K_1's level if equal to K_1, else with K's own lowest level (ksl)
@@ -854,8 +773,6 @@ def Kimg(K, x, Dy, dk, t0, last, nested=False, kb2ok=True):
     return root(add(dk, KI(K[2], x, Dy, dk, None if not last else t0, last)))
 
 
-PREBLOCK = {}        # kchtop: x -> lh1(x) before the lsup block (the reach of a kchtop level d_m)
-K1REF = []           # kchtop: (d_m, K_(m+1)) - the level column that a same-level kid read on d_m shares
 KDX = []             # kdeep: stack of (x, D.y) of the k2cut reads of lh1(d_m) in progress
 KCTX = []            # kin: stack of (x, Dy, [d_1.kids, ...]) of the lh1_le2 calls in progress
 IDXIMG = {}          # ubase: x -> the index-column images e = root(d.kids + ...) made in lh1_le2(x)
@@ -871,25 +788,13 @@ def lh1_le2(x, info):
         return lh(root(A[:-1] + (plus(W),)))
     lo_, hi_ = groups(Om)[-1] if 'mult' in FLAGS else (len(Om) - 1, len(Om) - 1)
     dk = S[0][2]
-    if 'idxlow' in FLAGS and q >= 2 and len(Om) == 1:
-        cl = level_cols(Om[-1])
-        ups_ = [c for c in Om[-1][2] if c[1] == 1 and c[0] == Om[-1][0] + 1]
-        if len(cl) >= q and cl[q - 1] is None and cl[q - 2] is not None \
-                and any(g[1] == 1 and g[0] == cl[q - 2][0] for g in cl[q - 2][2]) \
-                and all(any(u is L for L in cl if L is not None) for u in ups_):   # no later up-kid
-            # idxlow: the top level is the crossing top of a level column with a same-level kid
-            # ((d_(q-1)] d_q)); an index column's image is built on d_(q-1), below that top
-            dk = root(A + (U,) * (q - 1))[2]
     if 'k2cut' in FLAGS and d1_info(S[0]) is not None:
         S = lh(S[0])                           # k2cut: x reaches as far as its top successor d_q
     if 'kmax' in FLAGS:
         # kmax: x reaches as far as the farthest of its successors d_1..d_q
         for m in range(1, q):
             dm = root(A + (U,) * m)
-            di_ = d1_info(dm)
-            if di_ is not None and 'kchtop' in FLAGS and di_[2] < q and chtop_col(di_[1]):
-                continue                        # (kchtop: d_m reaches lh1(x) itself)
-            if di_ is not None:
+            if d1_info(dm) is not None:
                 L = lh(dm)
                 if scmp(L, S) > 0:
                     S = L
@@ -929,88 +834,15 @@ def _lh1_groups(S, x, A, U, q, Om, lo_, hi_, dk, dks, t0):
             S = _lh1_kids(S, x, Dg, Dy, idx, dk, dks, t0, lo_ + gi == len(Om) - 1)
         finally:
             KCTX.pop()
-    if 'kchtop' in FLAGS:
-        # kchtop: the non-chain kids of a level column K_m that continues its chain are read on top
-        # of lh1(x), each by its owner: a marker of K_m -> d_m, a same-level kid -> d_(m+1), a unit
-        # -> +1, an index column -> a frame on d_q
-        cols = level_cols(Om[-1])
-        dq = root(A + (U,) * q)
-        for m, K in enumerate(cols, 1):
-            if K is None or m >= q or not chtop_col(K):
-                continue
-            dm = root(A + (U,) * m)
-            dn = root(A + (U,) * (m + 1))
-            kk = level_kids(x, K, m, U, q)
-            dks_ = [root(A + (U,) * i)[2] for i in range(m + 1, q + 1)]
-            KCTX.append((dm, K[0], dks_))
-            KDX.append((x, Om[-1][0]))
-            nxt = cols[m] if m < len(cols) else None
-            K1REF.append((dm, nxt))
-            try:
-                S = _lh1_kids(S, dm, (K[0], K[1], kk), K[0], [], dq[2], dks_, None, True)
-            finally:
-                KCTX.pop()
-                KDX.pop()
-                K1REF.pop()
-    PREBLOCK[x] = S
     if 'lsup' in FLAGS:
         # lsup: a limit summand with content in an earlier group (not merged with its successor)
         # also gives its block after d_q, instead of a witness at its successor
-        if 'lnest' in FLAGS and lo_ >= 2 and is_limit(Om[lo_ - 1]) and has_content(Om[lo_ - 1]):
-            # lnest: the earlier summands form one block, the U-form of D_1..D_(i) with the last
-            # marker read as x; inside it the earlier limits give their blocks again (nested)
-            e = root(add(root(A + (U,) * q)[2], ((1, 0, Om[:lo_ - 1] + (limx(Om[lo_ - 1], x),)),)))
-            IDXIMG.setdefault(x, set()).add(e)
-            S = oplus(S, e)
-        else:
-          for Dg in Om[:lo_]:
+        for Dg in Om[:lo_]:
             if is_limit(Dg) and has_content(Dg):
                 e = root(add(root(A + (U,) * q)[2], ((1, 0, (limx(Dg, x),)),)))
                 IDXIMG.setdefault(x, set()).add(e)
                 S = oplus(S, e)
     return S
-
-
-def level_kids(x1, K2, m, U, q):
-    """the kids of the level column K2 = K_m other than its chain kids, as read in lh1(d_m): kown maps
-    markers to their owner's target, kdl reads D-level omega columns as kimg summands."""
-    kk = tuple(k2kids(K2, 'all'))
-    if 'kown' in FLAGS:
-        # kown: a marker leaf below K_m belongs to the omega column that owns it (the nearest
-        # one with level <= its y): D (level K_m.y - m) or K_j (level D.y + j).  It collapses
-        # to that column's target, d_j (d_0 = x), not to d_m (Phi3h rule (b))
-        cols = level_cols(U[2][-1])
-        own = {U[2][-1][0]: 0}              # level of each owner -> index j of its target d_j
-        for i, col in enumerate(cols[:m - 1]):
-            if col is not None and col[0] < K2[0]:
-                own[col[0]] = i + 1         # (K_m owns the markers at its own level)
-        kk = tuple(ownleaf(c, own, x1, U) for c in kk)
-    if 'kdl' in FLAGS:
-        # kdl: such a D-level omega column is the kimg summand built on d_1 (its own level)
-        Dy_ = U[2][-1][0]
-        dall = [root(x1[2] + (U,) * i)[2] for i in range(1, q + 1)]
-        kk2 = []
-        for c in kk:
-            if c[1] == 1 and c[0] == Dy_:
-                e = Kimg(c, x1, Dy_, dall, None, False, kb2ok=m - 2)
-                IDXIMG.setdefault(x1, set()).add(e)
-                c = (0, 0, e[2])
-            kk2.append(c)
-        kk = tuple(kk2)
-    return kk
-
-
-def chtop_col(K):
-    """kchtop: a level column that continues its chain (an up-kid) and has other kids."""
-    return bool(k2kids(K, 'all')) and any(c[1] == 1 and c[0] == K[0] + 1 for c in K[2])
-
-
-def has_block(U):
-    """kcross: x's reach is taken over by an lsup block (an earlier limit summand with content that is
-    not in the last group)."""
-    Om = U[2]
-    lo_, hi_ = groups(Om)[-1]
-    return 'lsup' in FLAGS and any(is_limit(Dg) and has_content(Dg) for Dg in Om[:lo_])
 
 
 def has_content(D):
@@ -1064,20 +896,8 @@ def ends_in_marker(K, Dy):
 
 
 def _lh1_kids(S, x, Dg, Dy, idx, dk, dks, t0, lastD):
-    ups = [c for c in Dg[2] if c[1] == 1 and c[0] == Dy + 1]
-    chain = subcols(ups[0]) if ups else []
-    extra = [c for c in ups[1:] if not any(c is L for L in chain) and c != ups[0]] \
-        if 'kup2' in FLAGS and chain and not k2kids(chain[-1], 'cut') else []
-    one_bare = len(extra) == 1 and not extra[0][2]      # kup2: only a single bare later up-kid
     for ci, c in enumerate(Dg[2]):
         lst = lastD and ci == len(Dg[2]) - 1
-        if 'kup2' in FLAGS and one_bare and c is extra[0] and len(dks) >= 1 and x[2] != dks[0]:
-            # kup2: a later up-kid of D that is not one of D's level columns (smaller than K_1, after an
-            # uncut chain) is an Omega_(omega+1)-summand of the multiplier: it reads the top level d_q
-            # as a doubling (bare), or the kimg summand built on d_q (with kids)
-            dq = dks[-1]
-            S = oplus(S, root(dq) if not c[2] else root(add(dq, KI(c[2], x, Dy, dks, None, lst))))
-            continue
         if 'ksucc' in FLAGS and c == LEAF and ci > 0 and Dg[2][ci - 1][1] == 1 \
                 and Dg[2][ci - 1][0] == Dy + 1 and ends_in_marker(Dg[2][ci - 1], Dy):
             continue                            # ksucc: a unit right after a limit up-kid is its successor
@@ -1276,8 +1096,7 @@ if __name__ == '__main__':
     FLAGS.update({'lastcol', 'mult', 'fin', 'c2rel', 'lastlo', 'infin', 'd94', 'nobase', 'kimg', 'idx1',
                   'zsib', 'kbase', 'ubase', 'kin', 'klim', 'k2cut', 'k2chain', 'wlast', 'lsucc', 'lcov',
                   'kiwrap', 'kown', 'ksucc', 'kownk', 'lsup', 'kcut2', 'kmax', 'ksl', 'ibase', 'lwpos', 'kdl',
-                  'lcov2', 'kbcut', 'kdeep', 'lastkd', 'kup2', 'kb2', 'lcov3', 'lnest', 'kup3', 'ksib2',
-                  'kcross', 'kchtop', 'idxlow', 'kchain2'})
+                  'lcov2', 'kbcut', 'kdeep', 'lastkd'})
     args = sys.argv[1:]
     for a in [a for a in args if a.startswith('--flags=')]:
         FLAGS.clear()

@@ -1,5 +1,5 @@
 """Phi3k = Phi3j (= Phi3i with the default flags) plus rules for the sheet rows above 915, i.e. the
-matrices from (0,0,0)(1,1,1)(2,1,1) on (see ../POR.md section 10).  All new rules act in the <=1-reach
+matrices from (0,0,0)(1,1,1)(2,1,1) on (see ../../POR.md section 10).  All new rules act in the <=1-reach
 lh1(x) of a <=2-able node x = root(P, U+q), whose <=2-successors are d_m = root(P, U+q, U^m), m = 1..q,
 and D = the last omega column of U.
   kimg   : a z=1 kid K of D on D's own level (Omega_omega * Omega_omega ...) is the summand
@@ -30,7 +30,7 @@ with kids read by KI instead of C2; loses 40 rows).
 Usage:  python3 phi3k.py [--flags=...] "(0,0,0)(1,1,1)(2,2,1)(3,0,0)"
 
 Phi3j = Phi3i plus one optional flag, c2one, which is OFF by default (a rejected experiment; see
-../POR.md section 9):
+../../POR.md section 9):
   c2one  : in the C2 read of a kid of the last omega summand D of a <=2-able node, an index column
            whose C2 image equals the image of the omega column just before it adds nothing (the two
            images are not summed).
@@ -47,7 +47,7 @@ Phi3i = phi3h plus three flags:
            Def 9.4 (downward 2-reflection): the least <=1-nesting base root(P, U^m) that is not a
            dead end, unless an earlier node already has <=1-reach lh1(x);
   nobase : switch off phi3h's separate nesting-base rule (d94 covers it).
-See ../POR.md.  Recommended flags: lastcol,mult,fin,c2rel,lastlo,infin,d94,nobase (the default of the
+See ../../POR.md.  Recommended flags: lastcol,mult,fin,c2rel,lastlo,infin,d94,nobase (the default of the
 command line).
 Usage:  python3 phi3i.py [--flags=...] "(0,0,0)(1,1,1)(2,1,0)"
 
@@ -81,6 +81,8 @@ lh (<=1-reach) = the 2-row fold  S := 2N ; S (+)= Coll(W|prefix_i) ; S (+)= C1(E
   proper prefixes (the <=2 analogue of the D-prefix fold)."""
 import sys
 from functools import lru_cache
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))  # tss.py lives in por/
 import tss
 from tss import ONE, add, addall, tcmp, mat, root
 

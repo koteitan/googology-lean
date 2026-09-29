@@ -1,5 +1,5 @@
 """Phi3o = Phi3n plus rules that remove the bad pairs of the order tests above (0,0,0)(1,1,1)(2,2,1)(3,2,1)
-(see ../POR.md section 14, which also has a table of all flags with their principles).
+(see ../../POR.md section 14, which also has a table of all flags with their principles).
   kdl2   : kdl one level up: an omega column at the level of the previous level column K_(m-1) inside
            K_m (Omega_(omega+j) inside an Omega_(omega+j+1) factor) brings its own level columns,
            inserted right below K_m, and K_m reads it as the kimg summand on them.  Rows 1613-1615.
@@ -17,7 +17,7 @@ Recommended flags (the default of the command line): those of Phi3n plus
 Usage:  python3 phi3o.py [--flags=...] "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(4,2,1)"
 
 Phi3n = Phi3m plus rules for the later level columns, the covered root runs and the rows above
-(0,0,0)(1,1,1)(2,2,1)(3,3,1) (see ../POR.md section 13).  Notation as for Phi3m.
+(0,0,0)(1,1,1)(2,2,1)(3,3,1) (see ../../POR.md section 13).  Notation as for Phi3m.
   kb2    : kbcut's shared up-kid (equal to K_1) reads d_1; each further up-kid of the same-level kid
            raises the level it reads by one (d_(1+j)).  Inside the level column of d_m the raise stays
            below d_m, and the up-kids beyond the cap stay as content.  Rows 1479, 1480.
@@ -47,7 +47,7 @@ Recommended flags (the default of the command line): those of Phi3m plus
   kup2,kb2,lcov3,lnest,kup3,ksib2,kcross,kchtop,idxlow,kchain2
 Usage:  python3 phi3n.py [--flags=...] "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(3,0,0)"
 
-Phi3m = Phi3l plus rules for the level columns K_m of the <=2-able nodes above row 1300 (see ../POR.md
+Phi3m = Phi3l plus rules for the level columns K_m of the <=2-able nodes above row 1300 (see ../../POR.md
 section 12).  Notation as for Phi3l: x = root(P, U+q), d_m = root(P, U+q, U^m), D = the last omega column
 of U, K_1, K_2, ... its level columns (k2cut); lh1(d_m) is the C2 read of K_m's kids relative to d_m.
   kown  : a marker leaf below K_m belongs to the omega column that owns it (the nearest one with level
@@ -89,7 +89,7 @@ Recommended flags (the default of the command line):
 Usage:  python3 phi3m.py [--flags=...] "(0,0,0)(1,1,1)(2,2,1)(3,1,0)(2,0,0)"
 
 Phi3l = Phi3k plus rules for the root runs with several summands and for the nested frames of the
-sheet rows above 915 (see ../POR.md section 11).  x = root(P, U+q) is a <=2-able node with successors
+sheet rows above 915 (see ../../POR.md section 11).  x = root(P, U+q) is a <=2-able node with successors
 d_m = root(P, U+q, U^m), m = 1..q; the omega columns of U are D_1, ..., D_k (the copied summands of the
 root run); a limit summand ends in a marker (its multiplier lambda ends in Omega_omega), and mult puts
 its level at its successor.
@@ -121,7 +121,7 @@ Recommended flags (the default of the command line):
 Usage:  python3 phi3l.py [--flags=...] "(0,0,0)(1,1,1)(2,2,1)(2,1,0)(1,1,1)"
 
 Phi3k = Phi3j (= Phi3i with the default flags) plus rules for the sheet rows above 915, i.e. the
-matrices from (0,0,0)(1,1,1)(2,1,1) on (see ../POR.md section 10).  All new rules act in the <=1-reach
+matrices from (0,0,0)(1,1,1)(2,1,1) on (see ../../POR.md section 10).  All new rules act in the <=1-reach
 lh1(x) of a <=2-able node x = root(P, U+q), whose <=2-successors are d_m = root(P, U+q, U^m), m = 1..q,
 and D = the last omega column of U.
   kimg   : a z=1 kid K of D on D's own level (Omega_omega * Omega_omega ...) is the summand
@@ -152,7 +152,7 @@ with kids read by KI instead of C2; loses 40 rows).
 Usage:  python3 phi3k.py [--flags=...] "(0,0,0)(1,1,1)(2,2,1)(3,0,0)"
 
 Phi3j = Phi3i plus one optional flag, c2one, which is OFF by default (a rejected experiment; see
-../POR.md section 9):
+../../POR.md section 9):
   c2one  : in the C2 read of a kid of the last omega summand D of a <=2-able node, an index column
            whose C2 image equals the image of the omega column just before it adds nothing (the two
            images are not summed).
@@ -169,7 +169,7 @@ Phi3i = phi3h plus three flags:
            Def 9.4 (downward 2-reflection): the least <=1-nesting base root(P, U^m) that is not a
            dead end, unless an earlier node already has <=1-reach lh1(x);
   nobase : switch off phi3h's separate nesting-base rule (d94 covers it).
-See ../POR.md.  Recommended flags: lastcol,mult,fin,c2rel,lastlo,infin,d94,nobase (the default of the
+See ../../POR.md.  Recommended flags: lastcol,mult,fin,c2rel,lastlo,infin,d94,nobase (the default of the
 command line).
 Usage:  python3 phi3i.py [--flags=...] "(0,0,0)(1,1,1)(2,1,0)"
 
@@ -203,6 +203,8 @@ lh (<=1-reach) = the 2-row fold  S := 2N ; S (+)= Coll(W|prefix_i) ; S (+)= C1(E
   proper prefixes (the <=2 analogue of the D-prefix fold)."""
 import sys
 from functools import lru_cache
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))  # tss.py lives in por/
 import tss
 from tss import ONE, add, addall, tcmp, mat, root
 
