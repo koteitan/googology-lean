@@ -1609,6 +1609,8 @@ The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi
 
 ## 19. Programs
 
+How to run them, and the full algorithm of `phi3def2.py` branch by branch: [por/README.md](por/README.md).
+
 The current programs (in `por/`):
 
 - `por/phi3def2.py`: **the current $`\Phi_3`$** ($`\Phi_{3\mathrm{def}}`$ of §15 with the rule `kdl0` of §16).
