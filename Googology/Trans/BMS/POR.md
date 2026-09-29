@@ -52,6 +52,10 @@ $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$.
   column that continues its chain at the top of the reach. Agreement rose from 942 to 1030 rows (the
   fix table now has the three sheet errors of §12). The order tests up to $`(0,0,0)(1,1,1)(2,2,1)(3,2,1)`$
   show 0 violations; above, the remaining bad pairs are inherited from $`\Phi_{3m}`$.
+- **No bad pairs, and the flags so far** (§14). $`\Phi_{3o}`$ applies `kdl`, `kup2`/`kup3` and `kown`
+  one level deeper and keeps an index column from cutting a chain. All seven order tests, up to
+  $`(0,0,0)(1,1,1)(2,2,2)`$, show 0 violations and 0 pairs with the same pattern, and agreement rose to
+  1051 rows. §14 lists every flag with its principle; four are one-row rules.
 
 ## 2. The shape of the rule
 
@@ -1133,7 +1137,145 @@ fix table), 1177, 1217, 1231, 1237, 1238, 907, 947, 1009; in 1450–1642 mainly 
 $`\omega`$ column inside $`K_2`$ (e.g. $`(2,2,1)(3,3,1)(4,2,1)`$, `([[[c (d] e'] (e] e+e')))`), which
 would need `kdl` one level up, and repeated chains inside a level column with a unit.
 
-## 14. Next
+## 14. No bad pairs up to $`(0,0,0)(1,1,1)(2,2,2)`$, and the flags so far ($`\Phi_{3o}`$)
+
+$`\Phi_{3o}`$ (`por/phi3o.py`) adds five flags to $`\Phi_{3n}`$. It removes all 17 bad pairs that
+$`\Phi_{3n}`$ left in the two sets of §13, and agreement with the sheet rose from 1030 to 1051 rows,
+with no row lost. On the 1085 + 305 matrices and on the three sets of §10 and §12, $`\Phi_{3o}`$ gives
+the same patterns as $`\Phi_{3n}`$.
+
+**Where the bad pairs came from.** Each pair of §13 belongs to one of three families.
+- **A lower-level $`\omega`$ column inside a later level column** ("`kdl` one level up"): rows
+  1613–1615 had the same pattern, and a $`D`$-level column nested in a same-level child (1552/1553).
+- **Index columns of a level column**: a nest of same-level children $`K_s\{K_s\{\dots\}\}`$ against an
+  index column in the same place (1563/1564, 1588, 1628, 1637), and the cut after an index column.
+- **Repeated up-children inside a level column**: rows 1620–1622.
+
+The family "the point has a level more than the cut chain of its last summand" (rows 1334–1336,
+1434–1436) caused no bad pair here. In row 1304 the two summands are equal
+($`\Omega_\omega \lambda \cdot 2`$), and the witness of the first sits below $`d_1`$ as in `wlast`. In rows
+1334–1336 and 1434–1436 the earlier summand is larger than the last one, and the sheet adds a top level
+above the last summand's cut chain to hold its pattern. A rule for this needs the other summands when the
+levels of $`D`$ are counted, and it is left open.
+
+**The five rules.**
+- **`kdl2`.** `kdl` one level up. An $`\omega`$ column at the level of the previous level column
+  $`K_{m-1}`$ inside $`K_m`$ ($`\Omega_{\omega+j}`$ inside an $`\Omega_{\omega+j+1}`$ factor) brings its own level
+  columns, inserted right below $`K_m`$, and $`K_m`$ reads it as the `kimg` summand built on them. Row
+  1613, $`(2,2,1)(3,3,1)(4,2,1)`$: `(b ([[[c (d] e'] (e] e+e')))`; rows 1613–1615.
+- **`kidxup`.** An index column of a level column $`K_m`$ (a level above $`K_m`$) does not cut the chain,
+  so the top level stays, and its frame is built on the next level $`d_{m+1}`$. It is then above every
+  same-level nest (the frame is a level-1 column on $`d_{m+1}`$, the nest only adds $`y = 0`$ columns). Row
+  1564, $`(2,2,1)(3,3,0)`$: `(b ([[c (d] e] (f f+f))))`; a later up-child with an index column has its
+  own top level (row 1588). Rows 1564–1576, 1588, 1589, 1628, 1637.
+- **`kupn`.** `kup2` and `kup3` one level down: further up-children of a level column after its uncut
+  chain. A single bare one doubles the top level and the column reaches it (row 1621
+  `([[[c (d] (e] f)] f+f))`); more of them add levels (row 1622).
+- **`kownd`.** `kown` for a marker nested in a same-level child of $`K_m`$: it collapses to its
+  owner's target (row 1552 `(f f+c)`).
+- **`kdlks`.** `kdl` for a $`D`$-level column nested in a same-level child of a level column; it is
+  read on its own lowest levels. It fits no further row, but without it the pair 1552/1553 is a
+  violation.
+
+**Agreement with the sheet** (iso / sub / sup / no)
+
+| sheet rows | $`\Phi_{3n}`$ | $`\Phi_{3o}`$ | rows that fit |
+|---|---|---|---|
+| 522–754 | 34 / 187 / 0 / 8 | 34 / 187 / 0 / 8 | 221 → 221 |
+| 755–914 | 39 / 117 / 0 / 2 | 39 / 117 / 0 / 2 | 156 → 156 |
+| 915–1156 | 132 / 104 / 0 / 2 | 132 / 104 / 0 / 2 | 236 → 236 |
+| 1157–1299 | 62 / 71 / 3 / 5 | 62 / 71 / 3 / 5 | 133 → 133 |
+| 1300–1449 | 91 / 39 / 0 / 12 | 91 / 39 / 0 / 12 | 130 → 130 |
+| 1450–1642 | 125 / 29 / 15 / 22 | 143 / 32 / 0 / 16 | 154 → 175 |
+| total | 483 / 547 / 18 / 51 | 501 / 550 / 3 / 45 | 1030 → 1051 |
+
+The three sub rows with a new pattern (1574–1576) timed out in the oracle (15 seconds each).
+
+**Order tests.** All seven sets show 0 violations and 0 pairs with the same pattern.
+
+| range | matrices | adjacent pairs | "<" certified | violations | same pattern | undecided | skipped (>30 nodes) |
+|---|---|---|---|---|---|---|---|
+| $`[(0,0,0)(1,1,1),\ (0,0,0)(1,1,1)(2,1,0))`$ | 1085 | 1084 | 894 | 0 | 0 | 158 | 32 |
+| $`[(0,0,0)(1,1,1)(2,1,0),\ (0,0,0)(1,1,1)(2,1,1))`$ | 305 | 304 | 160 | 0 | 0 | 129 | 15 |
+| $`[(0,0,0)(1,1,1)(2,1,1),\ (0,0,0)(1,1,1)(2,2,1))`$ | 785 | 784 | 470 | 0 | 0 | 306 | 8 |
+| $`[(0,0,0)(1,1,1)(2,2,1),\ (0,0,0)(1,1,1)(2,2,1)(3,0,0))`$ | 290 | 289 | 221 | 0 | 0 | 63 | 5 |
+| $`[(0,0,0)(1,1,1)(2,2,1)(3,0,0),\ (0,0,0)(1,1,1)(2,2,1)(3,2,1))`$ | 262 | 261 | 209 | 0 | 0 | 52 | 0 |
+| $`[(0,0,0)(1,1,1)(2,2,1)(3,2,1),\ (0,0,0)(1,1,1)(2,2,1)(3,3,1))`$ | 152 | 151 | 126 | 0 | 0 | 25 | 0 |
+| $`[(0,0,0)(1,1,1)(2,2,1)(3,3,1),\ (0,0,0)(1,1,1)(2,2,2))`$ | 94 | 93 | 76 | 0 | 0 | 17 | 0 |
+
+The first two rows are the counts of §9 (the patterns there have not changed since $`\Phi_{3i}`$). The
+undecided pairs are, as before, mostly steps to a limit.
+
+**All flags.** The table lists every flag of $`\Phi_{3o}`$ with the principle it instantiates and the
+rows that stop fitting when it alone is switched off (1050 rows fit with all flags, not counting the rows
+the fix table drops). **One-row rules** are marked; "order" means that the flag fits no further row but
+is needed for an order test. The principles:
+- **lastcol**: §7 rule 1, the final $`\Omega_1`$-multiplier of the argument is $`N`$;
+- **mult**: §7 rule 2, a limit summand has its level at its successor (a $`\lt_2`$-point is the proper
+  supremum of a $`\lt_1`$-chain, Carlson 2009 Lemma 5.5);
+- **owner**: §7 (b) and §12, a marker collapses to the target of the $`\omega`$ column that owns it
+  ($`C2`$: $`\Omega_\omega \mapsto x`$);
+- **levels**: §10, every $`\Omega_{\omega+1}`$-summand of the multiplier of $`D`$ is a level column, and each
+  level column's children are read at its level;
+- **fold**: the 2-row fold and the $`C2`$ read of §6;
+- **cofinal**: Carlson 2009 Def 5.3 (part 2), a pattern cofinal below $`x`$ is cofinal below $`d_q`$;
+- **copy**: Carlson 2009 Def 9.4, downward 2-reflection gives a $`\le_1`$-nesting base.
+
+| flag | section | principle | rows | lost without it | note |
+|---|---|---|---|---|---|
+| `lastcol` | §7 | lastcol | 755–1580 | 91 | |
+| `mult` | §7 | mult | 825–1581 | 111 | |
+| `c2rel` | §7 | owner | 905–1382 | 9 | |
+| `infin` | §8 | owner (no index below a finite column) | 828, 831, 832 | 3 | |
+| `d94` | §8 | copy | 764–1067 | 50 | |
+| `kimg` | §10 | fold (same-level child on $`d_1`$) | 1020–1641 | 273 | |
+| `idx1` | §10 | fold (index column on $`d_q`$) | 1098–1637 | 134 | |
+| `zsib` | §10 | levels | 1203–1633 | 222 | |
+| `kbase` | §10 | levels | 1244–1632 | 95 | |
+| `ubase` | §10 | copy (nesting base as a node) | 1122–1589 | 68 | |
+| `kin` | §10 | fold | 1134–1488 | 13 | |
+| `klim` | §10 | mult | 1042–1254 | 13 | |
+| `k2cut` | §10 | levels | 1300–1641 | 305 | |
+| `k2chain` | §10 | levels (reach of a chain column) | 1313–1641 | 114 | |
+| `wlast` | §11 | cofinal | 1198–1578 | 20 | |
+| `lsucc` | §11 | mult + lastcol | 1213–1456 | 14 | |
+| `lcov` | §11 | mult | 1239–1581 | 17 | |
+| `kiwrap` | §11 | fold | 1059, 1060, 1066 | 3 | |
+| `kown` | §12 | owner | 1332–1624 | 60 | |
+| `ksucc` | §12 | mult (inside $`D`$) | 1339–1368 | 10 | |
+| `kownk` | §12 | owner | 1378–1384 | 7 | |
+| `lsup` | §12 | mult + lastcol | 1307–1524 | 16 | |
+| `kcut2` | §12 | levels | 1520–1625 | 17 | |
+| `kmax` | §12 | levels (reach) | 1537–1575 | 5 | |
+| `ksl` | §12 | levels | 1313–1466 | 12 | |
+| `ibase` | §12 | copy | 1122, 1123, 1192 | 3 | |
+| `lwpos` | §12 | cofinal + levels | 1268 | 1 | **one-row** |
+| `kdl` | §12 | levels | 1385–1502 | 16 | |
+| `lcov2` | §12 | mult | 1311–1538 | 20 | |
+| `kbcut` | §12 | levels (shared level) | 1314–1620 | 37 | |
+| `kdeep` | §12 | owner | – | 0 | order |
+| `lastkd` | §12 | lastcol | 1345, 1366 | 2 | |
+| `kup2` | §13 | levels | 1474–1540 | 6 | |
+| `kb2` | §13 | levels | 1368–1502 | 6 | |
+| `lcov3` | §13 | mult | 1340–1475 | 12 | |
+| `lnest` | §13 | mult + lastcol | 1331 | 1 | **one-row** |
+| `kup3` | §13 | levels | 1482–1589 | 36 | |
+| `ksib2` | §13 | levels | 1511–1623 | 19 | |
+| `kcross` | §13 | levels (reach) | 1524 | 1 | **one-row** |
+| `kchtop` | §13 | owner + levels | 1592–1632 | 21 | |
+| `idxlow` | §13 | fold | 1471, 1472, 1473 | 3 | |
+| `kchain2` | §13 | levels (reach) | 1584–1591 | 8 | |
+| `kdl2` | §14 | levels | 1613, 1614, 1615 | 3 | |
+| `kidxup` | §14 | fold + levels | 1564–1637 | 15 | |
+| `kupn` | §14 | levels | 1621, 1622 | 2 | |
+| `kownd` | §14 | owner | 1552 | 1 | **one-row** |
+| `kdlks` | §14 | levels | – | 0 | order |
+
+`fin` and `lastlo` (from the first versions) change no row, and `nobase` only switches off the rule 3 of
+§7 that `d94` replaces. The owner, levels and fold principles cover all but a few flags; the next step
+is to restate $`\Phi_3`$ as one recursive definition built from them.
+
+## 15. Next
 
 - The 287 undecided pairs (§9): prove that $`\iota \circ \Phi_3`$ is monotone inside a term.
   A longer oracle budget helps little: 23 of 310 in about 27 seconds each.
@@ -1143,16 +1285,18 @@ would need `kdl` one level up, and repeated chains inside a level column with a 
 - An analysis of $`R_2^+`$ itself, for example by proving the correspondence
   $`\upsilon_\iota \leftrightarrow \varepsilon_0 \cdot \iota`$ between $`R_2^+`$ and $`R_2`$. Wilken's
   $`R_2`$ describes the pure structure only.
-- The rows above 915 (§10–§13): the point with a level more than the cut chain of its last summand
-  (rows 1334–1336, 1434–1436), a $`K_1`$-level $`\omega`$ column inside $`K_2`$ (`kdl` one level up), and
-  repeated chains inside a level column with a unit. The undecided pairs of the order tests (454 in
-  §13) are, like those of §9, mostly steps to a limit.
+- The rows above 915 (§10–§14): the point with a level more than the cut chain of its last summand
+  (rows 1334–1336, 1434–1436, which need the other summands when the levels are counted), and the
+  remaining rows of 1450–1642. Then restate $`\Phi_3`$ as one recursive definition from the principles of
+  the table in §14. The 463 undecided pairs of the order tests are mostly steps to a limit.
 
-## 15. Programs
+## 16. Programs
 
 - `por/tss.py`: 3-row matrices and terms, and the lexicographic order.
 - `por/tr3.py`: the translation $`\mathcal{T}_3`$ into Wilken's notation for $`R_2`$ (§9). `python3 por/tr3.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"` prints `u[1 + 1]`, i.e. $`\upsilon_2`$.
-- `por/phi3n.py`: the version $`\Phi_{3n}`$ of §13, the current one. `python3 por/phi3n.py "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(3,0,0)"`
+- `por/phi3o.py`: the version $`\Phi_{3o}`$ of §14, the current one. `python3 por/phi3o.py "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(4,2,1)"`
+  prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors. `--flags=` selects the flags.
+- `por/phi3n.py`: the version $`\Phi_{3n}`$ of §13. `python3 por/phi3n.py "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(3,0,0)"`
   prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors. `--flags=` selects the flags.
 - `por/phi3m.py`: the version $`\Phi_{3m}`$ of §12. `python3 por/phi3m.py "(0,0,0)(1,1,1)(2,2,1)(3,1,0)(2,0,0)"`
   prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors. `--flags=` selects the flags.
