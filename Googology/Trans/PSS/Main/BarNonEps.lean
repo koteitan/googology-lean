@@ -136,6 +136,14 @@ theorem bigL_dropLast {N : Tm} (hN : Std N) (hne : isEps N = false) (hcs : N.cs 
 
 /-! ## Epsilon roots -/
 
+theorem one_lt_ordOf_of_cs {N : Tm} (hN : Std N) (hcs : N.cs ≠ []) : 1 < ordOf [N] := by
+  rw [← ordOf_leaf']
+  apply ordOf_single_lt std_leaf hN
+  rw [std_node_y hN]
+  exact (Tm.lt_iff_cs_lt (s := Tm.node 0 []) (t := Tm.node 0 N.cs) rfl).mpr
+    (by obtain ⟨c, cs, h⟩ := List.exists_cons_of_ne_nil hcs; rw [h]; exact List.nil_lt_cons _ _)
+
+
 theorem last_child_of_noneps {N C : Tm} (hN : Std N) (hne : isEps N = false)
     (hC : N.cs.getLast? = some C) : C.y = 0 ∧ C ∈ loOf N ∧ Std C := by
   have hN0 : N.y = 0 := by rw [std_node_y hN]; rfl
