@@ -56,6 +56,9 @@ $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$.
   one level deeper and keeps an index column from cutting a chain. All seven order tests, up to
   $`(0,0,0)(1,1,1)(2,2,2)`$, show 0 violations and 0 pairs with the same pattern, and agreement rose to
   1051 rows. §14 lists every flag with its principle; four are one-row rules.
+- **A single definition** (§15). $`\Phi_3`$ is restated as one recursion with no flags, in eleven clauses
+  (`por/phi3def.py`). It gives exactly the patterns of $`\Phi_{3o}`$ on all 2973 matrices of the order tests
+  and on all 1099 sheet rows. Three old flags stay as named cases.
 
 ## 2. The shape of the rule
 
@@ -1275,7 +1278,258 @@ is needed for an order test. The principles:
 §7 that `d94` replaces. The owner, levels and fold principles cover all but a few flags; the next step
 is to restate $`\Phi_3`$ as one recursive definition built from them.
 
-## 15. Next
+## 15. A single definition of $`\Phi_3`$
+
+`por/phi3def.py` defines $`\Phi_3`$ as one recursion with no flags. It was made from $`\Phi_{3o}`$ by fixing
+each of the 50 flags at its value in §14, removing every branch that this makes dead, and grouping what is
+left into eleven clauses D1–D11. Nothing else was changed.
+
+**It is the same map.** On every matrix of the seven order-test sets
+(1085 + 305 + 785 + 290 + 262 + 152 + 94 = 2973 matrices) and on all 1099 sheet rows, $`\Phi_{3\mathrm{def}}`$
+gives exactly the pattern of $`\Phi_{3o}`$: the same nodes, reaches, $`\le_2`$ pairs and point. So there was no
+difference to resolve, and the agreement (1051 rows) and the order tests of §14 (0 violations, 0 pairs with
+the same pattern) hold for $`\Phi_{3\mathrm{def}}`$ unchanged.
+
+**Size.** 876 lines of code without comments ($`\Phi_{3o}`$: 967), 58 functions, 171 branches ($`\Phi_{3o}`$:
+207). This is far from the half page of the 2-row §3. Most of the length is in D6 (the list of level
+columns) and D9 (the reach of a $`\le_2`$-able node). There the old one-row rules are now side conditions
+of one clause instead of flags.
+
+### 15.1 Terms, owners and levels (D1)
+
+- A term is $`s = (y, z, B)`$: its level $`y`$ (row 1), $`z \in \{0, 1\}`$ (row 2) and its children $`B`$ in order.
+  Sums, $`\mathrm{root}`$, $`\mathrm{anchor}`$, epsilon terms, $`\log`$ and $`\lambda`$ are those of the 2-row §3.
+- An **$`\omega`$ column** has $`z = 1`$. A column with $`z = 0`$ and $`y \ge 1`$ is a **marker**. Its
+  **owner** is the nearest $`\omega`$ column above it on the path to the root whose level is at most $`y`$.
+  A marker on its owner's level stands for the owner's $`\Omega_\omega`$. A marker above that level is an
+  **index column**.
+- An **up-kid** of a column $`K`$ is an $`\omega`$ child of level $`y_K + 1`$ (an $`\Omega_{\omega+1}`$ factor).
+  The **chain** of a column $`C`$ is $`C, C_1, C_2, \dots`$, where $`C_{i+1}`$ is the first up-kid of $`C_i`$.
+  $`K_1, K_2, \dots`$ is the chain of $`D`$ (15.5).
+
+### 15.2 The collapse $`C1_N`$ (D2)
+
+$`C1_N`$ is Buchholz's $`\Omega_1 \mapsto N`$, read with the stack of owners. For a column $`s = (y, z, B)`$:
+
+```math
+C1_N(s) = \begin{cases}
+s & (y = 0) \cr
+(y - h,\ 1,\ C1_N(B)) & (z = 1;\ h \text{ the shift of its owner, or } 1 \text{ at the top}) \cr
+(y - h,\ 0,\ C1_N(B)) & (z = 0,\ \text{owned by an } \omega \text{ column with shift } h) \cr
+\mathrm{root}(N.\mathrm{kids} + C1_N(B)) & (z = 0,\ y = 1,\ \text{no owner}) \cr
+(y - 1,\ 0,\ C1_N(B)) & (\text{otherwise})
+\end{cases}
+```
+
+- **The $`\Omega_1`$-multiplier.** A final bare marker on the level of the outermost $`\omega`$ column is not owned. It
+  is the last factor $`\Omega_1`$ of the argument and becomes $`N`$.
+- Below a column with no owner, the stack is empty: an $`\omega`$ column does not own index columns across a
+  finite column.
+- Consecutive $`\omega`$ columns of level 2 at the top merge into one level-1 column (one $`U`$-form).
+
+### 15.3 The collapse $`C2_x`$ and the read of a same-level $`\omega`$ column (D3)
+
+For a $`\le_2`$-able $`x`$ (15.5) whose last $`\omega`$ column $`D`$ has level $`y_D`$, $`C2_x`$ is
+$`\Omega_\omega \mapsto x`$, $`\Omega_{\omega+j} \mapsto \Omega_j`$:
+
+```math
+C2_x(s) = \begin{cases}
+s & (y = 0) \cr
+(y - h,\ z,\ C2_x(B)) & (\text{owned, or } z = 1 \text{ inside an } \omega \text{ column}) \cr
+\mathrm{root}(x.\mathrm{kids} + C1_x(B)) & (z = 0,\ y \lt y_D,\ \text{no owner}) \cr
+\mathrm{root}(x.\mathrm{kids} + C2_x(B)) & (z = 0,\ y = y_D,\ \text{no owner}) \cr
+(y - y_D,\ z,\ C2_x(B)) & (y \gt y_D,\ \text{no owner})
+\end{cases}
+```
+
+The **owner rule** decides the target of a marker and of an $`\omega`$ column on its owner's level. The
+target is the node that the owner stands for, at any depth:
+- a final bare marker whose owner is two levels up is read relative to $`D`$ (it collapses to $`x`$);
+- an $`\omega`$ column on the level of the level column being read is its summand $`\mathrm{Kimg}`$ (below);
+- a $`D`$-level $`\omega`$ column deep inside a level column is $`\mathrm{Kimg}`$ relative to $`x`$. If it is the
+  column that gave $`D`$ its lowest levels (15.6 (a)), it is read on those levels.
+
+The summand of a same-level $`\omega`$ column $`K`$ is
+
+```math
+\mathrm{Kimg}(K) = \mathrm{root}\bigl(d_{1+j}.\mathrm{kids} + \mathrm{KI}(K.\mathrm{kids})\bigr),
+```
+
+where $`j`$ is the number of levels of $`K`$ above its own (at most $`q - 1`$). If the first up-kid of $`K`$ equals
+$`K_1`$, then $`K`$ shares $`K_1`$'s level: $`j`$ is the number of its further up-kids. Read inside $`L_m`$, $`j`$ is
+at most $`m - 2`$. $`\mathrm{KI}`$ maps
+- a column with $`y = 0`$ to itself, and an $`\omega`$ column on $`y_D`$ to $`\mathrm{Kimg}`$ (nested);
+- the final bare marker on $`y_D`$ to $`\mathrm{anchor}(x)`$ (the $`\Omega_1`$-multiplier one level up), and
+  another marker on $`y_D`$ to $`\mathrm{root}(x.\mathrm{kids} + \mathrm{KI}(B))`$;
+- a $`z = 0`$ column above $`y_D`$ to $`(y - y_D, 0, \mathrm{KI}(B))`$, and runs of other columns to $`C2_x`$.
+
+Consecutive $`\omega`$ columns that $`C2_x`$ wraps into level-1 columns merge into one $`U`$-form.
+
+### 15.4 The copy of a root $`\omega`$ run (D4)
+
+$`\mathrm{Up}`$ raises every column of a root $`\omega`$ column by one level. The final bare marker becomes $`N`$ if
+only the lifted column owns it. The same holds when it is owned by the lifted column and by $`D`$-level
+columns inside an up-kid on the same level.
+
+### 15.5 $`\le_2`$-able nodes, successors and groups (D5, D7)
+
+- $`x`$ is **$`\le_2`$-able** if $`x = \mathrm{root}(P,\ U + q)`$ with $`U = (1, 0, G)`$, where $`G = (G_1, \dots, G_n)`$ is a
+  list of $`\omega`$ columns with $`C1_x(G) = U`$, $`D = G_n`$ and $`1 \le q \le \mathrm{lev}(D)`$ (15.6). Its
+  successors are $`d_m = \mathrm{root}(P,\ U + q,\ U^m)`$ for $`m = 1, \dots, q`$. A node that is some $`d_m`$ is
+  **dead** (a $`\le_1`$ dead end) unless 15.8 gives it a reach.
+- $`G_i`$ is a **limit summand** if its rightmost leaf is a bare marker owned by $`G_i`$ itself, possibly through
+  $`\omega`$ children on $`G_i`$'s level.
+- **Groups** (the principle mult). A limit summand forms one group with the next summand if that summand is
+  one of these:
+  - a bare unit;
+  - levels only (its children are only up-kid chains);
+  - a summand that **covers** it: it repeats the limit summand without its final marker, or a prefix of its
+    children, with at least as many levels.
+- A summand **has content** if one of its level columns has children other than its chain. The **block**
+  of a limit summand $`G_i`$ is $`\mathrm{root}(d_q.\mathrm{kids} + (1, 0, (\mathrm{limx}(G_i, x))))`$, where
+  $`\mathrm{limx}`$ replaces the final marker by $`x`$.
+
+### 15.6 The level columns $`L(D)`$ (D6)
+
+A level column $`K`$ is **cut** if it has a $`z = 0`$ child on or below its level, or an $`\omega`$ child below
+its level. It is not cut if it also has an $`\omega`$ child on its own level or an index column above it.
+$`L(D)`$ is the list of level columns, one for each successor, with $`\bot`$ for a level without a column.
+$`\mathrm{lev}(D) = |L(D)|`$, and $`\mathrm{lev}(D) = 1`$ if $`D`$ has no up-kid. From the bottom:
+- (a) **Lowest levels** (at most one of these):
+  - the levels of a same-level $`\omega`$ child of $`D`$ (none if its first up-kid is $`K_1`$);
+  - the levels of a $`D`$-level $`\omega`$ column that is a child of a level column and does not share $`K_1`$;
+  - the levels of a $`D`$-level $`\omega`$ column nested in a same-level child of a level column.
+- (b) **The chains.** The chain $`K_1, K_2, \dots`$ of $`D`$, then the chains of the repeats of $`K_1`$. After a
+  cut chain, the chain of every later up-kid follows as well.
+- (c) **Previous level inside.** If $`L_m`$ has an $`\omega`$ child on the level of the previous level column,
+  and that child is a different column, its levels are inserted right below $`L_m`$.
+- (d) **Own top levels.** A level $`\bot`$ is inserted between two equal columns that have a same-level
+  $`\omega`$ child, before a repeat of $`K_1`$ with children, and between a complete chain and a repeat of its
+  first column with children. The last two apply only if the column before is not cut.
+- (e) **The top.** If the first chain is not cut, a top level $`\bot`$ follows. Then the chains of the further
+  up-kids follow, except that a single bare extra up-kid is a doubling, not a level. A further chain whose top
+  has a same-level $`\omega`$ child or an index column gets its own top $`\bot`$.
+
+### 15.7 The read of a level column (D8)
+
+$`d_m`$ belongs to the level column $`L_m`$, the $`m`$-th entry of $`L(D)`$. Its children other than up-kids are read in this way:
+- **Owners.** A marker on the level of $`D`$ goes to $`x = d_0`$. A marker on the level of an earlier, lower level
+  column $`K_j`$ goes to $`d_j`$. Such a marker with children goes to the frame
+  $`\mathrm{root}(d_j.\mathrm{kids} + C2_{d_j}(B))`$. The same holds at any depth inside the same-level
+  $`\omega`$ children of $`L_m`$.
+- A $`D`$-level $`\omega`$ column is $`\mathrm{Kimg}`$ on the levels $`d_1, \dots, d_q`$. An $`\omega`$ column on the level
+  of an earlier level column $`L_i`$ is $`\mathrm{Kimg}`$ on the levels between $`L_i`$ and $`L_m`$.
+
+The **fold of a column's children** $`F(S, t, K, b)`$ folds these reads into $`S`$ with $`\oplus`$, relative to
+$`t`$ and with frame base $`b`$:
+- a single bare extra up-kid after an uncut chain gives $`d_q`$ (the doubling);
+- a unit right after a limit up-kid is absorbed;
+- an $`\omega`$ child on $`K`$'s level gives $`\mathrm{Kimg}`$, and other $`\omega`$ children give nothing (they are
+  levels);
+- index columns accumulate: the $`i`$-th gives the frame $`\mathrm{root}(b + I_1 + \cdots + I_i)`$. If the frame is
+  $`\le_2`$-able, its nesting base is a node too;
+- every other column $`c`$ gives $`C2_t(c)`$, or $`\mathrm{root}(c.\mathrm{kids})`$ if $`y = 0`$.
+
+### 15.8 The reach $`\mathrm{lh}`$ (D9)
+
+$`S \oplus Y`$ is the 2-row fold, with $`\mathrm{lh}(Y) + Y`$ when $`Y`$ is $`\le_2`$-able. For a root term $`t`$:
+- $`t = 1`$ or not epsilon: as in the 2-row §3.
+- $`t = d_m`$ and $`L_m`$ has children:
+  - **only chain children** (and $`L_m`$ does not continue its chain below $`d_q`$): $`\mathrm{lh}(t)`$ is
+    $`d_{k+1}`$ for the first level $`k \ge m`$ above $`L_m`$'s own columns that is $`\bot`$, or else $`d_q`$;
+  - **$`m \lt q`$ and $`L_m`$ continues its chain with other children**: $`\mathrm{lh}(x)`$ before the block of 15.8
+    (its children are read at the top);
+  - **otherwise** $`\mathrm{lh}(t) = F((t), t, L_m, d_{m+1})`$ (with $`d_{m+1} = t`$ when $`m = q`$). Here the level
+    column is not cut by an index column, and its frames are built on the next level.
+- $`t`$ dead: $`(t)`$.
+- **Root $`\omega`$ run** $`A = (\dots, a_1, \dots, a_k)`$: $`S = (t, t)`$, and then
+  $`S := S \oplus \mathrm{root}(A,\ (1, 0, \mathrm{Up}(a_1, \dots, a_i)))`$ for $`i = 1, \dots, k`$.
+- **$`t`$ $`\le_2`$-able**: $`\mathrm{lh}_1(t)`$ below.
+- **Nesting limit**: $`t = \mathrm{root}(A, U)`$ gives $`\mathrm{lh}(\mathrm{root}(A', U + 1))`$, where $`A'`$ is $`A`$
+  without its final copies of $`U`$. $`t = \mathrm{root}(A, U + r)`$ with $`r \gt \mathrm{lev}(D)`$ gives
+  $`\mathrm{lh}(\mathrm{root}(A, U + \mathrm{lev}(D))) \oplus 1 \cdots \oplus 1`$.
+- **Otherwise** the 2-row fold: $`S = (t, t)`$, then the $`C1_t`$ images of the prefixes of the high children of
+  the last child $`W`$, then the low children. If the image equals $`W`$, the nesting base $`W + 1`$ is used.
+
+$`\mathrm{lh}_1(x)`$ for $`x = \mathrm{root}(P, U + q)`$ whose last group is $`G_a, \dots, G_b`$:
+- If $`q \lt \mathrm{lev}(D)`$, then $`x`$ is a nesting: $`\mathrm{lh}(\mathrm{root}(P, U + q + 1))`$.
+- Otherwise start from $`S = \mathrm{lh}(d_q)`$ (or $`(d_q)`$). Take the largest $`\mathrm{lh}(d_m)`$ among the $`d_m`$
+  that have their own read.
+- For each $`G_i`$ of the last group: if $`i \lt b`$, $`G_i`$ is a limit summand with more levels than $`G_b`$ or
+  with content, and $`G_b`$ does not cover it, then fold its block. Otherwise fold $`F(S, x, G_i, d_q)`$. The
+  base is $`d_{q-1}`$ when level $`q`$ is an own top level (15.6 (d)) after a column with a same-level child.
+- Fold the reads of the level columns $`L_m`$ ($`m \lt q`$) that continue their chain and have other children,
+  relative to $`d_m`$, at the top.
+- Fold $`d_q`$ once for each level column with a single bare extra up-kid after an uncut chain.
+- **The block of the earlier summands**: fold the block of each limit summand with content before $`G_a`$
+  (one joint block in the named case `lnest`, 15.11).
+
+### 15.9 Witnesses (D10)
+
+For each group of $`G`$ but the last, let $`G_{\le e}`$ be the prefix that ends with it.
+- If $`G_e`$ is a limit summand with content, it has no witness: its block replaces it.
+- If $`G_e`$ is a limit summand with $`1 \lt \mathrm{lev}(G_e) \le q`$ (its levels are covered by those of $`x`$),
+  the witness is its levels-only successor $`\mathrm{root}(P, U + q, U^j, (1, 0, G_{\le e} + \mathrm{chain}))`$.
+  Here $`\mathrm{chain}`$ is a levels-only column with $`\mathrm{lev}(G_e)`$ levels, and $`j`$ is the highest level read by
+  a same-level child of $`G_e`$ (at most $`q - 1`$, and 0 if there is none).
+- Otherwise, add $`(2, 1, ())`$ to $`G_{\le e}`$ if $`G_e`$ is a limit summand (mult). The witness is
+  $`\mathrm{root}(P, U + q, U^{q-1}, (1, 0, G_{\le e}) + 1)`$ if that is $`\le_2`$-able: it lies in the last
+  interval $`(d_{q-1}, d_q)`$ (cofinality, Carlson 2009 Def 5.3 (2)).
+
+### 15.10 The pattern (D11)
+
+- The set of nodes $`V`$ is the least set that contains $`\{(),\ (1),\ \hat{M}\}`$ and is closed under these
+  operations:
+  - prefix sums, root segments, $`\mathrm{anchor}`$, $`\mathrm{lh}`$;
+  - the frames and blocks made in $`\mathrm{lh}(t)`$;
+  - the successors $`d_m`$ and the witnesses.
+- **Def 9.4 copies.** Take each $`\le_2`$-able $`x \in V`$ with $`\mathrm{lh}(x) \ne (d_q)`$ for which no smaller
+  $`u \in V`$ has $`\mathrm{lh}(u) = \mathrm{lh}(x)`$. Add the least $`\mathrm{root}(P, U^m)`$ that is not dead. Close again,
+  and repeat while nodes are added.
+- The order is lexicographic, and addition is as in the 2-row version. $`x \le_1 z`$ iff $`x = z`$, or $`x`$ has
+  one term and $`x \le z \le \mathrm{lh}(x)`$. The $`\le_2`$ pairs are $`x \le_2 d_m`$, closed as in §2.
+
+### 15.11 The old flags
+
+Each flag of §14 and the clause that now holds it. Three flags stay as **named cases**, each with a reason:
+- **`lwpos`** is the position $`j`$ of a covered witness (15.9). Its reason is cofinality: the witness sits just
+  below the highest successor its content reads. For a summand with no same-level child, $`j = 0`$, as before.
+- **`lnest`** is the case of the block (15.8) where the summand right before the last group is a limit summand
+  with content. Then all earlier summands give one block, $`\mathrm{root}(d_q.\mathrm{kids} + (1, 0, (G_1, \dots, G_{a-2}, \mathrm{limx}(G_{a-1}, x))))`$.
+  Otherwise each limit summand with content gives its own block (`lsup`). Its reason is that the earlier summands
+  are one $`U`$-form, and their levels are those of the last one of them.
+- **`kcross`** is a case of $`\mathrm{lh}(d_m)`$ (15.8): $`m + 1 = q`$, $`L_m`$ has a same-level $`\omega`$ child, and
+  some earlier limit summand has a block. Then the finite children of $`D`$ are folded as well. Its reason is
+  that the crossing interval $`(d_m]\ d_{m+1})`$ just below the top reaches as far as $`x`$ does at the top.
+
+The other one-row and order-only flags follow from the general rules once those are stated at every depth:
+- `kownd` and `kdeep` are the owner rule inside a same-level child (15.3, 15.7);
+- `kdlks` is the lowest levels of a nested $`D`$-level column (15.6 (a)).
+
+`fin` and `lastlo` change no row: they are the finite-column stack of $`C1`$ and the last flag of the final low
+child. `nobase` only switched off the old rule 3 of §7, which is not in the definition.
+
+| flag | clause | flag | clause | flag | clause |
+|---|---|---|---|---|---|
+| `lastcol` | 15.2, 15.3 KI, 15.4 | `lsucc` | 15.8 last group | `kdl` | 15.6 (a), 15.7 |
+| `mult` | 15.5 groups, 15.9 | `lcov` | 15.5 covers, 15.9 | `lcov2` | 15.5 covers |
+| `fin` | 15.2 (finite stack) | `kiwrap` | 15.3 merge | `kbcut` | 15.3 Kimg, 15.6 (a) |
+| `c2rel` | 15.3 owner rule | `kown` | 15.7 owners | `kdeep` | 15.3 owner rule |
+| `lastlo` | 15.8 fold | `ksucc` | 15.5 covers, 15.7 | `lastkd` | 15.4 |
+| `infin` | 15.2 | `kownk` | 15.7 owners | `kup2` | 15.7 fold |
+| `d94` | 15.10 | `lsup` | 15.8 block, 15.9 | `kb2` | 15.3 Kimg |
+| `nobase` | (removed) | `kcut2` | 15.6 cut | `lcov3` | 15.5 covers |
+| `kimg` | 15.3, 15.7 fold | `kmax` | 15.8 largest $`\mathrm{lh}(d_m)`$ | `lnest` | 15.8 block (named case) |
+| `idx1` | 15.7 frames | `ksl` | 15.6 (a) | `kup3` | 15.6 (e) |
+| `zsib` | 15.6 $`\mathrm{lev}`$ | `ibase` | 15.7 frames | `ksib2` | 15.6 (d) |
+| `kbase` | 15.3 Kimg | `lwpos` | 15.9 (named case) | `kcross` | 15.8 (named case) |
+| `ubase` | 15.7 frames, 15.10 | `idxlow` | 15.8 base $`d_{q-1}`$ | `kchtop` | 15.8 |
+| `kin` | 15.3 owner rule | `kchain2` | 15.8 chain reach | `kdl2` | 15.6 (c), 15.7 |
+| `klim` | 15.5 limit, 15.7 fold | `kidxup` | 15.6 cut, 15.8 | `kupn` | 15.6 (e), 15.7, 15.8 |
+| `k2cut` | 15.6 cut | `kownd` | 15.7 owners | `kdlks` | 15.3, 15.6 (a) |
+| `k2chain` | 15.8 chain reach | `wlast` | 15.9 | | |
+
+## 16. Next
 
 - The 287 undecided pairs (§9): prove that $`\iota \circ \Phi_3`$ is monotone inside a term.
   A longer oracle budget helps little: 23 of 310 in about 27 seconds each.
@@ -1287,14 +1541,17 @@ is to restate $`\Phi_3`$ as one recursive definition built from them.
   $`R_2`$ describes the pure structure only.
 - The rows above 915 (§10–§14): the point with a level more than the cut chain of its last summand
   (rows 1334–1336, 1434–1436, which need the other summands when the levels are counted), and the
-  remaining rows of 1450–1642. Then restate $`\Phi_3`$ as one recursive definition from the principles of
-  the table in §14. The 463 undecided pairs of the order tests are mostly steps to a limit.
+  remaining rows of 1450–1642. The 463 undecided pairs of the order tests are mostly steps to a limit.
+- The definition of §15 ($`\Phi_{3\mathrm{def}}`$): shorten the list of level columns (15.6) and the reach
+  $`\mathrm{lh}_1`$ (15.8), and replace the three named cases by general rules.
 
-## 16. Programs
+## 17. Programs
 
 - `por/tss.py`: 3-row matrices and terms, and the lexicographic order.
 - `por/tr3.py`: the translation $`\mathcal{T}_3`$ into Wilken's notation for $`R_2`$ (§9). `python3 por/tr3.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"` prints `u[1 + 1]`, i.e. $`\upsilon_2`$.
-- `por/phi3o.py`: the version $`\Phi_{3o}`$ of §14, the current one. `python3 por/phi3o.py "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(4,2,1)"`
+- `por/phi3def.py`: the single definition of §15, the current one, with no flags. `python3 por/phi3def.py "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(4,2,1)"`
+  prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors.
+- `por/phi3o.py`: the version $`\Phi_{3o}`$ of §14, the same map with flags. `python3 por/phi3o.py "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(4,2,1)"`
   prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors. `--flags=` selects the flags.
 - `por/phi3n.py`: the version $`\Phi_{3n}`$ of §13. `python3 por/phi3n.py "(0,0,0)(1,1,1)(2,2,1)(3,3,1)(3,0,0)"`
   prints each node's matrix, its $`\le_1`$-reach and its $`\le_2`$-successors. `--flags=` selects the flags.
