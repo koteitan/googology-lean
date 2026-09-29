@@ -57,7 +57,7 @@ $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$.
   $`(0,0,0)(1,1,1)(2,2,2)`$, show 0 violations and 0 pairs with the same pattern, and agreement rose to
   1051 rows. §14 lists every flag with its principle; four are one-row rules.
 - **A single definition** (§15). $`\Phi_3`$ is restated as one recursion with no flags, in eleven clauses
-  (`por/history/phi3def.py`). It gives exactly the patterns of $`\Phi_{3o}`$ on all 2973 matrices of the order tests
+  (`phi3def.py`). It gives exactly the patterns of $`\Phi_{3o}`$ on all 2973 matrices of the order tests
   and on all 1099 sheet rows. Three old flags stay as named cases.
 - **The rows that do not fit** (§16). The 45 rows that do not fit and the 3 sup rows fall into twelve families. One
   rule, `kdl0` (`por/phi3def2.py`), fits four more rows (1055 rows). Seven rows are certified to have the sheet's
@@ -97,7 +97,7 @@ The main rules added to the 2-row version are these.
 - **Level bookkeeping.** A $`z = 1`$ child on the same level doubles the $`\le_2`$-reach.
   This part is only partly done.
 
-The implementation is `por/history/phi3.py`. Flags select the version.
+The implementation is `phi3.py`. Flags select the version.
 
 | flags | version |
 |---|---|
@@ -167,7 +167,7 @@ lexicographically smaller, but its $`\Phi_3`$ value is at least that of the righ
 
 The 2-row $`\mathrm{Coll}`$ has one collapse target ($`\Omega_1 \mapsto N`$). In 3 rows there
 are two targets. The case rules were replaced by a recursion with two collapses
-(`por/history/phi3g.py`).
+(`phi3g.py`).
 
 **Levels of columns.** Inside a subtree being collapsed, each column is one of the
 following.
@@ -266,7 +266,7 @@ The bad pairs dropped from 19 to 11. The 11 that remain fall into two families.
 The three rules of §6 were compared with the definitions of $`\le_1`$ and $`\le_2`$ in Carlson
 (2009) and with the facts on $`R_2`$ listed in §1 of Wilken, "Pure Σ₂-elementarity beyond the
 core" (APAL 172, 2021, [doi:10.1016/j.apal.2021.103001](https://doi.org/10.1016/j.apal.2021.103001)).
-Two of the three became local rules. The new version is `por/history/phi3h.py`.
+Two of the three became local rules. The new version is `phi3h.py`.
 
 Notation: $`N = \psi_0(\alpha)`$ is the point being collapsed, and $`W`$ is the last summand of
 $`\alpha`$.
@@ -354,7 +354,7 @@ nodes were skipped (30 and 11 pairs).
 
 ## 8. One reflection rule and finite columns ($`\Phi_{3i}`$)
 
-$`\Phi_{3i}`$ (`por/history/phi3i.py`) adds two rules to $`\Phi_{3h}`$. Agreement rose to 503 rows, and
+$`\Phi_{3i}`$ (`phi3i.py`) adds two rules to $`\Phi_{3h}`$. Agreement rose to 503 rows, and
 both order tests still show 0 violations.
 
 **Rule `d94`: the copy from downward 2-reflection.** Carlson 2009, Def 9.4 (downward
@@ -519,7 +519,7 @@ own fundamental sequences and the oracle.
     children of the copied $`\omega`$ column, and the images coincide.
   - In $`909[2]`$ (row 908) the second image is larger and absorbs the first, and
     $`\Phi_{3i}`$ equals the sheet.
-  - **A rule tried and rejected** (`c2one` in `por/history/phi3j.py`): an index column whose $`C2`$
+  - **A rule tried and rejected** (`c2one` in `phi3j.py`): an index column whose $`C2`$
     image equals the image of the $`\omega`$ column just before it adds nothing. Then rows
     907 and 947 fit (505 rows) and nothing else changes. But the oracle certifies a
     violation: $`\iota(\Phi_{3j}(907)) \le \iota(\Phi_{3i}(M'))`$ for the lex-smaller
@@ -544,7 +544,7 @@ own fundamental sequences and the oracle.
 
 ## 10. The rows above 915 ($`\Phi_{3k}`$)
 
-$`\Phi_{3k}`$ (`por/history/phi3k.py`) adds nine flags to $`\Phi_{3j}`$. Agreement with the sheet rose
+$`\Phi_{3k}`$ (`phi3k.py`) adds nine flags to $`\Phi_{3j}`$. Agreement with the sheet rose
 from 504 to 787 rows, and no row was lost. On the matrices below $`(0,0,0)(1,1,1)(2,1,1)`$,
 $`\Phi_{3k}`$ gives the same pattern as $`\Phi_{3i}`$: all 1085 + 305 matrices of the earlier
 test sets were checked. So the earlier order tests still hold.
@@ -732,7 +732,7 @@ B &= (0,0,0)(1,1,1)(2,2,1)(2,1,0)(1,1,1) \quad\text{(row 1213)}
 
 ## 11. Root runs with several summands and nested frames ($`\Phi_{3l}`$)
 
-$`\Phi_{3l}`$ (`por/history/phi3l.py`) adds four flags to $`\Phi_{3k}`$. Agreement with the sheet rose from
+$`\Phi_{3l}`$ (`phi3l.py`) adds four flags to $`\Phi_{3k}`$. Agreement with the sheet rose from
 787 to 834 rows, and no row was lost. The 4 violations of §10 are gone: both new test sets now
 show 0 violations. On the 1085 + 305 matrices of the earlier test sets, $`\Phi_{3l}`$ gives the same
 patterns as $`\Phi_{3k}`$, so those order tests still hold.
@@ -879,7 +879,7 @@ pair is unchanged. New pairs got 7 seconds for "<" and 7 seconds for the reverse
 
 ## 12. The level columns above row 1300 ($`\Phi_{3m}`$)
 
-$`\Phi_{3m}`$ (`por/history/phi3m.py`) adds fourteen flags to $`\Phi_{3l}`$. Agreement with the sheet rose from 834
+$`\Phi_{3m}`$ (`phi3m.py`) adds fourteen flags to $`\Phi_{3l}`$. Agreement with the sheet rose from 834
 to 939 rows; one row (1480) was lost. On the 1085 + 305 matrices of the earlier test sets, $`\Phi_{3m}`$
 gives the same patterns as $`\Phi_{3l}`$.
 
@@ -1031,7 +1031,7 @@ patterns equal $`\Phi_{3l}`$ (iso), and both neighbours are certified:
 
 ## 13. Later level columns and the rows above $`(0,0,0)(1,1,1)(2,2,1)(3,3,1)`$ ($`\Phi_{3n}`$)
 
-$`\Phi_{3n}`$ (`por/history/phi3n.py`) adds ten flags to $`\Phi_{3m}`$. With the fix table that now contains
+$`\Phi_{3n}`$ (`phi3n.py`) adds ten flags to $`\Phi_{3m}`$. With the fix table that now contains
 the three sheet errors of §12, $`\Phi_{3m}`$ fits 942 rows; $`\Phi_{3n}`$ fits 1030, and no row was
 lost. Row 1480, lost in §12, fits again. On the 1085 + 305 matrices and on the sets of §10 and §12,
 $`\Phi_{3n}`$ gives the same patterns as $`\Phi_{3m}`$, so those order tests still show 0 violations.
@@ -1146,7 +1146,7 @@ would need `kdl` one level up, and repeated chains inside a level column with a 
 
 ## 14. No bad pairs up to $`(0,0,0)(1,1,1)(2,2,2)`$, and the flags so far ($`\Phi_{3o}`$)
 
-$`\Phi_{3o}`$ (`por/history/phi3o.py`) adds five flags to $`\Phi_{3n}`$. It removes all 17 bad pairs that
+$`\Phi_{3o}`$ (`phi3o.py`) adds five flags to $`\Phi_{3n}`$. It removes all 17 bad pairs that
 $`\Phi_{3n}`$ left in the two sets of §13, and agreement with the sheet rose from 1030 to 1051 rows,
 with no row lost. On the 1085 + 305 matrices and on the three sets of §10 and §12, $`\Phi_{3o}`$ gives
 the same patterns as $`\Phi_{3n}`$.
@@ -1284,7 +1284,7 @@ is to restate $`\Phi_3`$ as one recursive definition built from them.
 
 ## 15. A single definition of $`\Phi_3`$
 
-`por/history/phi3def.py` defines $`\Phi_3`$ as one recursion with no flags. It was made from $`\Phi_{3o}`$ by fixing
+`phi3def.py` defines $`\Phi_3`$ as one recursion with no flags. It was made from $`\Phi_{3o}`$ by fixing
 each of the 50 flags at its value in §14, removing every branch that this makes dead, and grouping what is
 left into eleven clauses D1–D11. Nothing else was changed.
 
@@ -1618,23 +1618,24 @@ The current programs (in `por/`):
 - `por/tr3.py`: the translation $`\mathcal{T}_3`$ into Wilken's notation for $`R_2`$ (§9, [R2PLUS.md](R2PLUS.md)).
   `python3 por/tr3.py "(0,0,0)(1,1,1)(1,1,0)(2,2,1)"` prints `u[1 + 1]`, i.e. $`\upsilon_2`$.
 
-The earlier versions (in `por/history/`) are kept so that the numbers of each section can be
-reproduced. Each adds rules to the one above it; they are run the same way, and those with flags
-take `--flags=`.
+The earlier versions are not kept in the tree. They are all in commit `a97a321` under `por/`, so
+the numbers of each section can be reproduced, e.g.
+`git show a97a321:Googology/Trans/BMS/por/phi3o.py > phi3o.py`. Each adds rules to the one above
+it; they are run the same way (next to `tss.py`), and those with flags take `--flags=`.
 
 | file | section | what it adds | sheet rows that fit |
 |---|---|---|---|
-| `history/phi3.py` | §2–§5 | the first version, with case rules (`--flags=z,dbl` is the very first) | 444 |
-| `history/phi3g.py` | §6 | two collapses $`C1`$, $`C2`$ | 458 |
-| `history/phi3h.py` | §7 | rules read from Carlson's definitions | 468 |
-| `history/phi3i.py` | §8 | the copy of downward 2-reflection | 503 |
-| `history/phi3j.py` | §9 | the rejected flag `c2one` (off by default) | 504 |
-| `history/phi3k.py` | §10 | the rows above 915 | 787 |
-| `history/phi3l.py` | §11 | root runs and nested frames (rejected flag `kfr` off) | 834 |
-| `history/phi3m.py` | §12 | level columns above row 1300 | 939 |
-| `history/phi3n.py` | §13 | later level columns | 1030 |
-| `history/phi3o.py` | §14 | no bad pairs up to $`(0,0,0)(1,1,1)(2,2,2)`$ (50 flags) | 1051 |
-| `history/phi3def.py` | §15 | $`\Phi_{3o}`$ without flags (the same map) | 1051 |
+| `phi3.py` | §2–§5 | the first version, with case rules (`--flags=z,dbl` is the very first) | 444 |
+| `phi3g.py` | §6 | two collapses $`C1`$, $`C2`$ | 458 |
+| `phi3h.py` | §7 | rules read from Carlson's definitions | 468 |
+| `phi3i.py` | §8 | the copy of downward 2-reflection | 503 |
+| `phi3j.py` | §9 | the rejected flag `c2one` (off by default) | 504 |
+| `phi3k.py` | §10 | the rows above 915 | 787 |
+| `phi3l.py` | §11 | root runs and nested frames (rejected flag `kfr` off) | 834 |
+| `phi3m.py` | §12 | level columns above row 1300 | 939 |
+| `phi3n.py` | §13 | later level columns | 1030 |
+| `phi3o.py` | §14 | no bad pairs up to $`(0,0,0)(1,1,1)(2,2,2)`$ (50 flags) | 1051 |
+| `phi3def.py` | §15 | $`\Phi_{3o}`$ without flags (the same map) | 1051 |
 
 Patterns are written as in the 2-row version, with `(x … z)` for $`\le_1`$ and `[x … z]`
 for $`\le_2`$. The oracle is not included in this repository.
