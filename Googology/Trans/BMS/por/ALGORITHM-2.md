@@ -1,6 +1,6 @@
 [← Back](README.md) | [English](ALGORITHM-2.md) | [Japanese](ALGORITHM-2-ja.md)
 
-# The 3-row pattern map $`\Phi_3`$: the algorithm, part 2
+# Converting trio sequences to patterns of resemblance: algorithm, part 2
 
 This is the second part of the algorithm of `phi3def2.py`. The first part (usage, conventions, A.1–A.8)
 is in [README.md](README.md).

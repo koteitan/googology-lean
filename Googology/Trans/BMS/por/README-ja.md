@@ -1,6 +1,6 @@
 [← 戻る](../POR-ja.md) | [English](README.md) | [Japanese](README-ja.md)
 
-# 3 行のパターンの写像 $`\Phi_3`$（プログラム）
+# トリオ数列をパターンに変換する
 
 トリオ数列（3 行のバシク行列）を、Carlson の階数 2 のパターン（"Patterns of resemblance of order 2", APAL 158, 2009）に変換するプログラムである。背景は [../POR-ja.md](../POR-ja.md) にある。
 

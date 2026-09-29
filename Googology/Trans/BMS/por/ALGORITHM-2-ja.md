@@ -1,6 +1,6 @@
 [← 戻る](README-ja.md) | [English](ALGORITHM-2.md) | [Japanese](ALGORITHM-2-ja.md)
 
-# 3 行のパターンの写像 $`\Phi_3`$：アルゴリズム、その 2
+# トリオ数列をパターンに変換する：アルゴリズムの後半
 
 これは `phi3def2.py` のアルゴリズムの 2 つ目の部分である。1 つ目の部分（使い方、約束、A.1–A.8）は
 [README-ja.md](README-ja.md) にある。

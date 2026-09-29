@@ -1,6 +1,6 @@
 [← Back](../POR.md) | [English](README.md) | [Japanese](README-ja.md)
 
-# The 3-row pattern map $`\Phi_3`$ (programs)
+# Converting trio sequences to patterns of resemblance
 
 Programs that convert a trio sequence (a 3-row Bashicu matrix) into a pattern of resemblance of
 order 2 (Carlson, "Patterns of resemblance of order 2", APAL 158, 2009). The background is in
