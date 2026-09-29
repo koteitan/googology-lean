@@ -178,6 +178,8 @@ bar. The re-pointing test E, 1.24M checks, supports that $`o[V_M]`$ is isominima
 So Route A needs only bar-closure (and finiteness). **Both are PROVED**: bar-closure
 in §11.3 and [§14.2](PROOF-3.md), finiteness in [§15.1](PROOF-4.md). Route B (Thm 6.3 with Lemma 6.4) is not needed.
 
+**Lean.** Theorem 11.1 is `thm111` in [Main.lean](../Main.lean), with Lemma 6.1 as `lemma61` in [Main/Iso.lean](../Main/Iso.lean) and Lemma 5.1 as `lemma51` in [Main/Pattern.lean](../Main/Pattern.lean).
+
 ### 11.3 Bar-closure for non-epsilon nodes (PROVED from R and 2.4, [CW12] Lemma 5.10, [W07a] Def 4.6, Lemmas 4.3 and 4.9)
 
 Let $`N \in V_M`$ be a non-epsilon one-term node, $`N \ne 1`$. Put $`\alpha = o(N) = \omega^\zeta`$, where
@@ -237,6 +239,8 @@ Numerical side check:
   $`\alpha = \omega^{\omega^{\varepsilon_0+2}} \in M`$.
 
 This is why case (b) is needed.
+
+**Lean.** This is `barClosure_noneps` in [Main/BarNonEps.lean](../Main/BarNonEps.lean), with no `sorry`; Fact BAR (`factBar`, `factBar1`) is proved from [CW12] Def 5.1 alone, so [CW12] Lemma 5.10 is not used.
 
 ### 11.4 Bar-closure for epsilon nodes (now PROVED given TR as $`\mathrm{Bar}_T`$, [§14.2](PROOF-3.md))
 
@@ -523,6 +527,8 @@ gave 66 false mismatches.
 
 **E1 (PROVED from $`\mathrm{E1}_T`$, TR and [W07b] Thm 5.3).** $`\lambda_{o(N)} = \lambda^1_{\mathcal{T}(N)}`$, because
 $`\mathrm{val}(\mathcal{T}N) = o(N)`$. Then $`\mathrm{E1}_T`$ gives E1.
+
+**Lean.** E1 is stated as `E1` in [Main/E12.lean](../Main/E12.lean) and left as `sorry`: CI, $`\iota_{1,\alpha}`$, $`t^\alpha_\tau`$ and [W07b] Thm 5.3 are not formalized.
 
 ### 12.6 E2, and the circularity
 

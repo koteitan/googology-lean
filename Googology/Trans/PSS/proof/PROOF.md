@@ -440,6 +440,8 @@ of $`\beta`$.
   - Hence $`K(Y)=\mathrm{lh}(Y)`$.
 - (F3) This is Lemma 3.4(a). ∎
 
+**Lean.** Lemma F is `lemmaF1`, `lemmaF2a`, `lemmaF2b`, `lemmaF3` and Prop 4.3 is `fold_isLh` (given E1 and E2) in [Main/Fold.lean](../Main/Fold.lean); Lemma 4.2 is `isLh_not_eps` and L is `lemmaL` in [Main/Reach.lean](../Main/Reach.lean); the cited facts of [W07b] are the axioms of [Main/Cited.lean](../Main/Cited.lean).
+
 ### 4.5 The epsilon case
 
 Let $`N`$ be epsilon, $`\alpha=o(N)`$, $`A=(C_1,\ldots,C_k)`$ and $`W=C_k`$.
@@ -967,6 +969,8 @@ Route B (Thm 6.3 with Lemma 6.4) is not used.
 
 <em>Proof.</em> (a) follows from Thm 7.1 and Lemma 1.1(a). (b) follows from Thm 7.1, Lemma 1.1(b)
 (range of $`o`$ = $`[1,\psi_0(\Omega_\omega))`$ on $`\mathrm{Std}`$), and C3. ∎
+
+**Lean.** Theorem 7.1 is `mainTheorem` and `mainTheorem_mat`, and Cor 7.2 is `cor72a`, `cor72b` and `cor72b_core` (with the axiom `core_eq_psi` for C3 and M13), in [Main.lean](../Main.lean). The only `sorry` they depend on are E1 and E2 ([Main/E12.lean](../Main/E12.lean)).
 
 **Prop 7.3 (PROVED from L and C1; justification corrected, M12).** Assume L. Then the order
 half of the conjecture already implies Theorem 7.1. Hence the conjecture is equivalent to

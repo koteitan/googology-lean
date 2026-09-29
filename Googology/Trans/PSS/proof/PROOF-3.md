@@ -442,6 +442,8 @@ So $`\alpha`$ has the maximal argument among the $`\vartheta_0`$-subterms above 
 So **bar-closure of $`o[V_M]`$ holds given TR**: $`V`$ is closed under anchor, and non-epsilon
 nodes are handled by [§11.3](PROOF-2.md). Isominimality then follows via Route A (Thm 11.1).
 
+**Lean.** $`\mathrm{Bar}_T`$ is `barEps` in [Main/BarEps.lean](../Main/BarEps.lean), with no `sorry`, by a route that does not use CL, FD, LV or N⁺: the lemma KEY (`key_eps_root`), EL (`argV_lt_of_level_eq`) and [W07a] Lemma 6.4 (a) on $`T^1`$ (`mem_sub0_of_between`, proved from (C)) are in [Main/EpsRoots.lean](../Main/EpsRoots.lean).
+
 ### 14.3 $`\mathrm{E2}_T`$ placement (PROVED from Mono\*, LV, SC, [COMB](COMB.md) Lemma 10 and Lemma C)
 
 **PL.** For a jump input $`Y`$ with $`\beta = \mathcal{T}(Y)`$: every intermediate element $`\beta_i`$ of the
@@ -523,6 +525,8 @@ induction of Prop 4.3 (M7, [§4.5](PROOF.md)). So $`K = K(\xi) = o(S_{j-1})`$ wi
   - $`\beta_0 \le_1 \gamma \le_1 \beta`$ gives $`\beta_0 \le_1 \beta`$. So $`\beta \le \mathrm{lh}(\beta_0) = \mathrm{lh}(\kappa_{\xi'}) \le K`$.
   - But a jump input satisfies $`\beta \gt \mathrm{lead}(K)`$. Since $`\beta \in P`$, this gives $`\beta \ge \mathrm{lead}(K) \cdot \omega \gt K`$.
   - Contradiction. ∎
+
+**Lean.** E2 is stated in this value form as `E2` in [Main/E12.lean](../Main/E12.lean) and left as `sorry`: PL and [W07b] Cor 5.9 are not formalized.
 
 ### 14.4 Intermediate status (superseded; see [§0](PROOF.md) and [§16](PROOF-4.md))
 

@@ -229,6 +229,8 @@ So $`\Phi(M)`$ is exactly Carlson–Wilken's $`P_1(o(M))`$, realized on pair seq
   which 7,513 absorb. 0 failures.
 - A check run by the referee found max $`\lvert V \rvert = 19`$ on 181,405 matrices.
 
+**Lean.** Lemma AF is `lemmaAF` in [Main/VF.lean](../Main/VF.lean) (the non-epsilon part is `lemmaAF_noneps` in [Main/AF.lean](../Main/AF.lean), the epsilon part is $`\mathrm{Bar}_T`$), and Theorem VF and the finiteness of $`V_M`$ are `thmVF` and `finite_V` there.
+
 ### 15.2 The minor items
 
 **Lemma N⁺ (PROVED from the definition of $`\mathcal{T}`$; closes M10).**
