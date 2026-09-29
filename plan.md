@@ -28,8 +28,8 @@ The remaining work, arranged by the cells of the README tables.
       - prove that the fuel `max 200 (depth of α)` of `TrioFixFuel` is enough for every `α` (more fuel never changes the matrix; checked on the sheet labels and some families)
 - Pair sequences and additive patterns of resemblance ([Trans/PSS/POR.md](Googology/Trans/PSS/POR.md))
   - prove that the map Φ preserves the order, and that its image is the whole core of R₁⁺ (plan in §8 of [Trans/PSS/POR.md](Googology/Trans/PSS/POR.md): ι(Φ(M)) = 1 + val(pairTerm M))
-    - 🤖 the reach lemma for epsilon N and isominimality for epsilon M (needs a translation from matrices to Wilken's ϑ-terms, via Weiermann–Wilken 2011)
-    - 🤖 pair-sequence facts: the reading lemma R (log is order-preserving and gives the exponent), standard forms (root terms non-increasing; anchor and lh give standard matrices), termination of lh
+    - 🤖 the epsilon case: a translation from matrices (or Buchholz ψ) to Wilken's ϑ-terms, then Bar-ε (the bar value is the anchor's value), E1 (the fold inputs add up to Wilken's λ) and E2 (jump inputs are ≤₁-minimal)
+    - formalize in Lean the parts proved on paper: Theorem SC (standard ⇔ local tree conditions), standard forms of anchor/log/lh, termination of lh, the reading lemma R, the fold = Wilken's reach computation
   - extend Φ to trio sequences and R₂⁺ ([Trans/BMS/POR.md](Googology/Trans/BMS/POR.md); Φ₃i has 0 order violations below (0,0,0)(1,1,1)(2,1,1))
     - below (0,0,0)(1,1,1)(2,1,1): decide the 310 undecided limit-step pairs (prove that ι∘Φ₃ is monotone inside a term), settle rows 844, 907, 1009
     - rows above 915: level bookkeeping, the (2,2,1) family, the missing nodes

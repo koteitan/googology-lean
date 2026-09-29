@@ -245,54 +245,75 @@ and the lexicographic order was compared with poral's order.
 
 The aim is the stronger form $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$. Write
 $`o(x)`$ for the value $`1 + \mathrm{val}(\mathrm{pairTerm}(x))`$ of a node $`x`$. A one-term node
-$`N`$ is non-epsilon or epsilon as in §3.1.
+$`N`$ is non-epsilon or epsilon as in §3.1. Everything below is on paper; nothing is in Lean
+yet.
 
 **Sources.**
 - [C01] Carlson, "Elementary patterns of resemblance", APAL 108 (2001).
 - [W07a] Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007).
 - [W07b] Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007).
+- [WW11] Weiermann and Wilken, "Ordinal arithmetic with simultaneously defined theta-functions",
+  MLQ 57 (2011).
+- [CW12] Carlson and Wilken, "Normal forms for elementary patterns", JSL 77 (2012).
+- pss-proof: the Lean facts on standard pair sequences and on the map `Trans`.
 
-The results used from [C01] and [W07b] are statements about $`\le_1`$ on ordinals and need no
-notation system: [C01] Thm 5.9 (every pattern has a pointwise least isominimal copy),
-[W07b] Lemma 2.1, Thm 2.2 (when $`\alpha \le_1 \alpha + \xi`$), and Lemmas 3.3 and 3.4 (how the
-reach of $`\alpha`$ is built from $`\le_1`$-minimal steps).
+**Proved on paper**
 
-1. **Addition.** The root terms of $`M`$ give the additive normal form of $`o(M)`$, so the sum
-   of §2 is ordinal addition on $`o(V)`$. Proved.
-2. **The fold.** The fold $`\oplus`$ of §3.3 is the computation of the reach in [W07b]: a step
+1. **Standard forms.** A matrix is standard if and only if it satisfies these local
+   conditions on its row-0 tree (Theorem SC):
+   - the first column is $`(0,0)`$, every root has $`y = 0`$, and $`x_{j+1} \le x_j + 1`$;
+   - a child's $`y`$ is at most its parent's $`y`$ plus 1;
+   - siblings (the roots counted as siblings) have non-increasing terms;
+   - for every non-root column $`u`$ whose $`y`$ is at most its parent's, $`T(u) \lt T(v)`$,
+     where $`v`$ is the nearest proper ancestor with $`y_v \le y_u`$.
+
+   The last condition is the pair-sequence form of Buchholz's condition $`G_\nu(a) \lt a`$.
+   The proof is by induction along expansions, using the pss-proof facts. It also agrees
+   exactly with the standard matrices of at most 8 columns (44,653), and with 142,000 random
+   matrices of 9–12 columns.
+2. **Consequences.**
+   - A matrix is standard if and only if its root terms are standard and non-increasing.
+   - $`\mathrm{anchor}`$, $`\log`$ and $`\mathrm{lh}`$ give standard matrices. For $`\mathrm{lh}`$
+     this uses that $`\mathrm{Coll}_A`$ is strictly monotone on the terms it is applied to.
+   - The recursion of $`\mathrm{lh}`$ terminates: its nesting depth is less than the height of
+     the last child $`W`$. (The obvious measure fails, because $`\mathrm{Coll}_A`$ inserts $`A`$
+     again.)
+3. **Addition.** The root terms of $`M`$ give the additive normal form of $`o(M)`$.
+4. **Reading lemma R.** For a one-term $`N`$, $`o(N) = \omega^{o(\log N)}`$ when $`N`$ is not
+   epsilon; $`\log`$ is order-preserving. Proved by induction on the order of pair sequences,
+   with $`o(M) = \sup_n (o(M[n]) + 1)`$.
+5. **The fold.** The fold $`\oplus`$ of §3.3 is the computation of the reach in [W07b]: a step
    inside the reach is Lemma 3.3(c), a jump is Lemma 3.4(b), and the result is Lemma 3.4(a).
-   Proved.
-3. **Reach lemma** ($`o(\mathrm{lh}(N))`$ is the largest $`\beta`$ with $`o(N) \le_1 \beta`$).
-   - Non-epsilon $`N`$: proved from a reading lemma R. Lemma R says that $`N \mapsto \log(N)`$
-     (and $`N \mapsto (N)`$ for epsilon $`N`$) is order-preserving and gives the exponent of
-     $`o(N)`$. R is open; it passed 74,595 numerical checks.
-   - Epsilon $`N`$: open. It follows from two statements about the fold inputs
-     $`Y_1, \ldots, Y_n`$: that $`o(\mathrm{lh}(N)) = o(N) + o(Y_1) + \cdots + o(Y_n)`$ matches
-     Wilken's $`\lambda`$, and that each input at a jump is $`\le_1`$-minimal. Both need a
-     translation from matrices to Wilken's $`\vartheta`$-terms. Checked by hand on
-     $`\varepsilon_0, \varepsilon_1, \varepsilon_\omega, \varphi(2,0), \varepsilon_{\varepsilon_0}, \Gamma_0`$
-     and the Bachmann–Howard ordinal, and numerically on 40,258 jumps.
-4. **Isominimality.** By induction on $`M`$, every node below $`M`$ gets its value $`o`$ in the
-   least realization ([C01] Thm 5.9), so only a one-term $`M`$ is left.
-   - $`M = 1`$ and non-epsilon $`M`$: proved (with R).
-   - Epsilon $`M`$: open. It corresponds to Claims 5.5 and 5.6 of [W07b]. Checked by hand on
-     $`\varepsilon_0, \varepsilon_1, \varepsilon_{\varepsilon_0}`$, and by 1,244,496 numerical checks.
-5. **Standard forms and termination.** Open, with no exception in the numerical tests:
-   - a matrix is standard if and only if its root terms are standard and non-increasing
-     (that root terms of a standard matrix are standard is in pss-proof);
-   - $`\mathrm{anchor}`$ and $`\mathrm{lh}`$ give standard matrices;
-   - the recursion of $`\mathrm{lh}`$ terminates. The obvious measure does not work, because
-     $`\mathrm{Coll}_A`$ of a $`y = 1`$ column inside a $`y \ge 2`$ subtree inserts all of $`A`$
-     again.
+6. **Non-epsilon $`N`$.** The reach lemma ($`o(\mathrm{lh}(N))`$ is the largest $`\beta`$ with
+   $`o(N) \le_1 \beta`$) and the closure of the values under Wilken's bar operator.
+7. **Isominimality from bar-closure.** If the values $`o(V)`$ are closed under Wilken's bar
+   operator, then $`\iota(\Phi(M)) = o(M)`$ ([CW12] Thm 6.2 and Cor 6.3, [C01] Thm 5.9).
+
+**Open: the epsilon case**
+
+- **Bar-ε.** For epsilon $`N`$, the bar value of $`o(N)`$ is $`o(\mathrm{anchor}(N))`$ when the
+  root has at least 2 children, and 1 otherwise. It agrees with 11 examples computed by hand,
+  among them $`\varepsilon_{\varepsilon_0}`$ (bar value 1), $`\Gamma_0`$ and the
+  Bachmann–Howard ordinal.
+- **E1.** For epsilon $`N`$ with fold inputs $`Y_1, \ldots, Y_n`$,
+  $`o(\mathrm{lh}(N)) = o(N) + o(Y_1) + \cdots + o(Y_n)`$ agrees with Wilken's $`\lambda`$. Checked by
+  hand on 7 examples.
+- **E2.** Each fold input at a jump is $`\le_1`$-minimal. It reduces to a check on a finite
+  set, which passed on 40,350 jumps.
+
+Bar-ε and E1 need the $`\vartheta`$-form of $`o(N)`$, i.e. a translation from Buchholz's
+$`\psi`$ (or from the matrices directly) to Wilken's $`\vartheta`$. [WW11] (p. 117) leaves this
+translation open, so it has to be built here. The difficulty is that the arguments of
+$`\psi`$ are exponential in $`\Omega`$ and those of $`\vartheta`$ are linear: for example
+$`\psi_0(\Omega^2) = \vartheta(\Omega \cdot 2)`$ and $`\psi_0(\Omega^\Omega) = \Gamma_0`$.
 
 **Notes on the definition.** The sum in $`\log`$ must be the sum of §2, which drops smaller
 terms. For example, for $`M = (0,0)(1,1)(1,1)(1,0)(2,1)(2,1)(2,0)(3,0)`$ the term
-$`\varepsilon_1`$ is dropped. The anchor is not Wilken's bar operator: for
-$`\varepsilon_{\varepsilon_0} = (0,0)(1,1)(2,0)(3,1)`$ there is no anchor, but $`\varepsilon_0`$
-still enters $`V`$ through $`\mathrm{lh}`$.
+$`\varepsilon_1`$ is dropped. The anchor is not Wilken's bar operator in general.
 
 ## 9. Next
 
-- Steps 2–4 of §8.
+- The epsilon case of §8 (Bar-ε, E1, E2), through a translation to Wilken's $`\vartheta`$.
+- A Lean formalization of the parts proved on paper, starting with Theorem SC.
 - The extension to 3 rows (trio sequences and $`R_2^+`$); the record is [../BMS/POR.md](../BMS/POR.md).
   The current rule $`\Phi_{3i}`$ shows no order violation below $`(0,0,0)(1,1,1)(2,1,1)`$.

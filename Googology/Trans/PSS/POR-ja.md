@@ -190,31 +190,47 @@ x \le_1 z \iff x = z \lor (x \text{ は項が 1 つ} \land x \le z \le \mathrm{l
 
 ## 8. 証明の計画（途中）
 
-目標は強い形 $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$ である。節点 $`x`$ の値 $`1 + \mathrm{val}(\mathrm{pairTerm}(x))`$ を $`o(x)`$ と書く。項が 1 つの節点 $`N`$ が $`\varepsilon`$ 的かどうかは §3.1 のとおりである。
+目標は強い形 $`\iota(\Phi(M)) = 1 + \mathrm{val}(\mathrm{pairTerm}(M))`$ である。節点 $`x`$ の値 $`1 + \mathrm{val}(\mathrm{pairTerm}(x))`$ を $`o(x)`$ と書く。項が 1 つの節点 $`N`$ が $`\varepsilon`$ 的かどうかは §3.1 のとおりである。以下はすべて紙の上の証明で、Lean にはまだ無い。
 
 **文献。**
 - [C01] Carlson, "Elementary patterns of resemblance", APAL 108 (2001)。
 - [W07a] Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007)。
 - [W07b] Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007)。
+- [WW11] Weiermann and Wilken, "Ordinal arithmetic with simultaneously defined theta-functions", MLQ 57 (2011)。
+- [CW12] Carlson and Wilken, "Normal forms for elementary patterns", JSL 77 (2012)。
+- pss-proof：標準形のペア数列と写像 `Trans` についての Lean の事実。
 
-[C01] と [W07b] から使う結果は、順序数の上の $`\le_1`$ についての命題で、表記系は要らない。[C01] Thm 5.9（どのパターンも各点で最小の isominimal なコピーを持つ）、[W07b] Lemma 2.1、Thm 2.2（$`\alpha \le_1 \alpha + \xi`$ となる条件）、Lemma 3.3 と 3.4（$`\alpha`$ の届く先が $`\le_1`$ で最小の段からどう作られるか）である。
+**紙の上で証明済み**
 
-1. **足し算。** $`M`$ の根の項は $`o(M)`$ の加法標準形を与える。だから §2 の和は、$`o(V)`$ の上で順序数の足し算である。証明済み。
-2. **畳み込み。** §3.3 の畳み込み $`\oplus`$ は、[W07b] の届く先の計算そのものである。届く先の中の一歩は Lemma 3.3(c)、跳びは Lemma 3.4(b)、結果は Lemma 3.4(a) である。証明済み。
-3. **届く先の補題**（$`o(\mathrm{lh}(N))`$ は $`o(N) \le_1 \beta`$ となる最大の $`\beta`$）。
-   - $`\varepsilon`$ 的でない $`N`$：読み方の補題 R から証明した。R は、$`N \mapsto \log(N)`$（$`\varepsilon`$ 的な $`N`$ では $`N \mapsto (N)`$）が順序を保ち、$`o(N)`$ の指数を与える、という命題である。R は未証明で、74,595 回の数値の確認を通った。
-   - $`\varepsilon`$ 的な $`N`$：未証明。畳み込みの入力 $`Y_1, \ldots, Y_n`$ についての 2 つの命題から出る。$`o(\mathrm{lh}(N)) = o(N) + o(Y_1) + \cdots + o(Y_n)`$ が Wilken の $`\lambda`$ と一致すること、跳びでの入力が $`\le_1`$ で最小であること、である。どちらも、行列から Wilken の $`\vartheta`$ の項への翻訳が要る。$`\varepsilon_0, \varepsilon_1, \varepsilon_\omega, \varphi(2,0), \varepsilon_{\varepsilon_0}, \Gamma_0`$ と Bachmann–Howard 順序数で手で確かめ、40,258 回の跳びで数値で確かめた。
-4. **最小性。** $`M`$ についての帰納法で、$`M`$ より下の節点は最小の実現で値 $`o`$ をとる（[C01] Thm 5.9）。だから、項が 1 つの $`M`$ だけが残る。
-   - $`M = 1`$ と $`\varepsilon`$ 的でない $`M`$：証明済み（R を使う）。
-   - $`\varepsilon`$ 的な $`M`$：未証明。[W07b] の Claim 5.5 と 5.6 に当たる。$`\varepsilon_0, \varepsilon_1, \varepsilon_{\varepsilon_0}`$ で手で確かめ、1,244,496 回の数値の確認を通った。
-5. **標準形と停止。** 未証明で、数値の確認では例外が無い。
-   - 行列が標準形であることと、根の項が標準形で増えない列であることは同じである（標準形の行列の根の項が標準形であることは pss-proof にある）。
-   - $`\mathrm{anchor}`$ と $`\mathrm{lh}`$ は標準形の行列を作る。
-   - $`\mathrm{lh}`$ の再帰は止まる。すぐに思いつく測度ではうまくいかない。$`y \ge 2`$ の部分木の中の $`y = 1`$ の列を $`\mathrm{Coll}_A`$ すると、$`A`$ 全体がまた入るからである。
+1. **標準形。** 行列が標準形であることは、行 0 の木についての次の局所的な条件と同値である（定理 SC）。
+   - 最初の列は $`(0,0)`$、根はすべて $`y = 0`$、$`x_{j+1} \le x_j + 1`$。
+   - 子の $`y`$ は、親の $`y`$ に 1 を足したもの以下。
+   - 兄弟（根どうしも兄弟とみなす）の項は増えない。
+   - $`y`$ が親の $`y`$ 以下の、根でない列 $`u`$ について $`T(u) \lt T(v)`$。$`v`$ は、$`y_v \le y_u`$ となる、いちばん近い真の先祖である。
 
-**定義についての注意。** $`\log`$ の和は、小さい項を捨てる §2 の和でなければならない。例えば $`M = (0,0)(1,1)(1,1)(1,0)(2,1)(2,1)(2,0)(3,0)`$ では、項 $`\varepsilon_1`$ が捨てられる。anchor は Wilken の bar 操作とは違う。$`\varepsilon_{\varepsilon_0} = (0,0)(1,1)(2,0)(3,1)`$ には anchor が無いが、$`\varepsilon_0`$ は $`\mathrm{lh}`$ を通って $`V`$ に入る。
+   最後の条件は、Buchholz の条件 $`G_\nu(a) \lt a`$ のペア数列版である。証明は、pss-proof の事実を使った、展開に沿った帰納法である。8 列以下の標準形の行列（44,653 個）とちょうど一致し、9〜12 列の 142,000 個の乱数の行列でも一致した。
+2. **その結果。**
+   - 行列が標準形であることと、根の項が標準形で増えない列であることは同じである。
+   - $`\mathrm{anchor}`$、$`\log`$、$`\mathrm{lh}`$ は標準形の行列を作る。$`\mathrm{lh}`$ については、$`\mathrm{Coll}_A`$ が使う項の上で真に単調であることを使う。
+   - $`\mathrm{lh}`$ の再帰は止まる。入れ子の深さは、最後の子 $`W`$ の高さより小さい（すぐに思いつく測度は、$`\mathrm{Coll}_A`$ が $`A`$ をまた入れるのでうまくいかない）。
+3. **足し算。** $`M`$ の根の項は $`o(M)`$ の加法標準形を与える。
+4. **読み方の補題 R。** 項が 1 つの $`N`$ が $`\varepsilon`$ 的でなければ $`o(N) = \omega^{o(\log N)}`$ で、$`\log`$ は順序を保つ。ペア数列の順序についての帰納法と、$`o(M) = \sup_n (o(M[n]) + 1)`$ で示す。
+5. **畳み込み。** §3.3 の畳み込み $`\oplus`$ は、[W07b] の届く先の計算そのものである。届く先の中の一歩は Lemma 3.3(c)、跳びは Lemma 3.4(b)、結果は Lemma 3.4(a) である。
+6. **$`\varepsilon`$ 的でない $`N`$。** 届く先の補題（$`o(\mathrm{lh}(N))`$ は $`o(N) \le_1 \beta`$ となる最大の $`\beta`$）と、値が Wilken の bar 操作で閉じていること。
+7. **bar で閉じていれば最小。** 値 $`o(V)`$ が Wilken の bar 操作で閉じていれば、$`\iota(\Phi(M)) = o(M)`$ である（[CW12] Thm 6.2 と Cor 6.3、[C01] Thm 5.9）。
+
+**未証明：$`\varepsilon`$ 的な場合**
+
+- **Bar-ε。** $`\varepsilon`$ 的な $`N`$ について、$`o(N)`$ の bar の値は、根の子が 2 つ以上なら $`o(\mathrm{anchor}(N))`$、そうでなければ 1 である。手計算の 11 例と合う。例えば $`\varepsilon_{\varepsilon_0}`$（bar の値は 1）、$`\Gamma_0`$、Bachmann–Howard 順序数である。
+- **E1。** $`\varepsilon`$ 的な $`N`$ の畳み込みの入力 $`Y_1, \ldots, Y_n`$ について、$`o(\mathrm{lh}(N)) = o(N) + o(Y_1) + \cdots + o(Y_n)`$ が Wilken の $`\lambda`$ と一致する。手計算の 7 例で確かめた。
+- **E2。** 跳びでの入力は $`\le_1`$ で最小である。有限集合の上の確認に帰着し、40,350 回の跳びで通った。
+
+Bar-ε と E1 には、$`o(N)`$ の $`\vartheta`$ での形、つまり Buchholz の $`\psi`$（または行列そのもの）から Wilken の $`\vartheta`$ への翻訳が要る。[WW11]（p. 117）はこの翻訳を今後の課題としているので、ここで作る必要がある。難しいのは、$`\psi`$ の引数は $`\Omega`$ について指数的で、$`\vartheta`$ の引数は 1 次式であることである。例えば $`\psi_0(\Omega^2) = \vartheta(\Omega \cdot 2)`$、$`\psi_0(\Omega^\Omega) = \Gamma_0`$ である。
+
+**定義についての注意。** $`\log`$ の和は、小さい項を捨てる §2 の和でなければならない。例えば $`M = (0,0)(1,1)(1,1)(1,0)(2,1)(2,1)(2,0)(3,0)`$ では、項 $`\varepsilon_1`$ が捨てられる。anchor は、一般には Wilken の bar 操作と違う。
 
 ## 9. これから
 
-- §8 の 2〜4。
+- §8 の $`\varepsilon`$ 的な場合（Bar-ε、E1、E2）。Wilken の $`\vartheta`$ への翻訳を通して示す。
+- 紙の上で証明した部分の Lean での形式化。定理 SC から始める。
 - 3 行（トリオ数列と $`R_2^+`$）への拡張。記録は [../BMS/POR-ja.md](../BMS/POR-ja.md)。今の規則 $`\Phi_{3i}`$ は、$`(0,0,0)(1,1,1)(2,1,1)`$ の手前まで順序の食い違いが無い。
