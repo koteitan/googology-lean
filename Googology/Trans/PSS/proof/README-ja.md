@@ -32,6 +32,12 @@ $`\Phi`$ は標準形のペア数列 $`M`$ を、Carlson の意味の 1 階の�
 - **Lean。`sorry` なし。** 証明の全体を形式化した。定理 SC（`../SC.lean`）、項の操作と補題 C・2.4・T・R（`../Phi.lean`）、Lemma TR（`../TR.lean`）、主な鎖と E1・E2・主定理 `mainTheorem_mat`・Cor 7.2（`../Main.lean`）である。`#print axioms mainTheorem_mat` に出るのは、Lean の標準の 3 つの公理のほかは、文献から引用して公理として置いた事実だけである。置き場所は `../TR/Cited.lean`（Wilken の $`\vartheta`$）、`../Main/Cited.lean`（$`R_1^+`$）、`../Main/Cited2.lean`（Wilken の潰し $`\iota_{\tau,\alpha}`$、翻訳 $`t^\alpha_\tau`$、[W07b] 定理 5.3 と系 5.9）である。査読者がそれぞれを論文と照らし合わせ、すべて正しいと確かめた。1 つだけ、元の論文とまだ照らし合わせていない読み方がある。`P1_isominimal` で「1 で相対化した isominimal」を「isominimal」と読むところである。Carlson–Wilken 2012 の §6 はこの言葉を Wilken, "Assignment of ordinals to patterns of resemblance"（JSL 72, 2007）の Def 1.1–1.2 から取り、その Cor 6.3(1) の最小性はこの論文の Thm 4.1 である。この論文は手に入らなかった。
   - 紙の上で証明し、査読済み：$`\tau = 1`$ では、Carlson–Wilken 2012 自身の説明（$`R_1`$ の閉じた部分構造、パラメータの割り当ては恒等写像、相対化の点までは $`\le_1`$ を無視）に合う読み方は、どれも isominimal と同じである。特に、$`Y`$ が彼らの §3 の意味で 0-isominimal であることと、$`\{0\} \cup Y`$ が isominimal であることは同じである。
   - だから公理は、そのどの読み方でも成り立つ。残る穴：JSL 72 の Def 1.2 がこれらの読み方の 1 つであること、そして Cor 6.3(1) が JSL 72 の Thm 4.1 に頼っていること。
+  - 紙の上で証明し、査読済み（全文はまだ公開していない）：主定理には公理 `P1_isominimal`、`exists_isominimal`、`pwLe_of_covering` は要らない。だから JSL 72 も要らない。`P1_isominimal` は 2 か所で使われている：`thm111`（集合が isominimal）と `finite_V`（集合が有限）。
+    - **底 1 での定理 S+。** [../../BMS/R2PLUS-ja.md](../../BMS/R2PLUS-ja.md) の定理 S+ の証明は、底 $`\sigma = 1`$ でも通る。$`\vartheta^1`$ の指数と、底 1 での bar の証人についての新しい補題が 2 つ要る。
+    - **定理 LEAST。** $`X = o[V_M]`$ から任意の集合への同型 $`g`$ は $`g \ge \mathrm{id}`$ を満たす。だから $`X`$ は isominimal で、Core Structure Theorem、Cor 6.3、`lemma61` なしに $`\iota(\Phi(M)) = o(M)`$ が出る。
+    - **定理 FIN。** $`1 \lt \alpha \lt \psi_0(\Omega_\omega)`$ で $`P_1(\alpha)`$ は有限である。$`(\mathrm{ht}_\sigma(y), y)`$ についての帰納法で、[W07a] と [W07b] だけを使う。
+    - 査読者は引用をすべて論文と照らし合わせ、数学の部分を証明済みとした。探索で反例は無かった（$`\varepsilon_0`$ より下：97 個の閉包で値を下げる写像 0。epsilon 数を含めて：103 個の閉包で 0、bar の補題で 4,936 組、失敗 0）。
+    - Lean にはまだ無い。査読者は Lean の計画に誤りを見つけた：新しい引用の事実 2 つが仮定を `variable` の行に置いていた。Lean は `axiom` からこの仮定を落とすので、その公理から `False` が出る（確かめた）。仮定は明示的な引数にしなければならない。Lean 版を書くまで、3 つの公理は残る。
 - **外からの仮定が 1 つある。** Lean の関数 `Ord.psi`
   （[Ord.lean](../../../Notation/ExBuchholz/Ord.lean)）が Buchholz の $`\psi`$ であること。
   これを使うのは、Cor 7.2(b) を「像は $`\mathrm{Core} \setminus \{0\}`$」と読むところだけである。

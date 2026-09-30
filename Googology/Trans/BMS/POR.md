@@ -1567,7 +1567,7 @@ child. As the first child of $`L_m`$, $`E`$ is still read above its levels (`kba
 | sheet error, in the fix table | 1177 | $`\iota(\text{fix}) = \iota(\Phi_{3\mathrm{def2}})`$ certified both ways, and $`\Phi_{3\mathrm{def2}}`$ embeds the fix. The fix is not in the parser's form; a row in that form is proposed |
 | sheet error, in the fix table | 660, 661, 1400 (same ordinal as the row before), 1217, 1336, 1349, 1350, 1436 (order errors), 626 (not a standard matrix), 1642 (unreadable, and the first row with $`z = 2`$) | no change |
 | fixed rows that still differ | 601, 718, 1401, 1348 | $`\iota(\text{fix}) \le \iota(\Phi_3)`$ certified for 601, 718, 1401; the reverse was not found. Open: the fix or $`\Phi_3`$ |
-| §9 | 907, 947 | open; no certified sheet error, and the evidence points to Φ₃def2. At `X = 905 (2,0,0)`, `ι(Φ(X[n])) < ι(R) < ι(Φ(X))` is certified for n ≤ 3 (R = the sheet's reading); the same at `946 (2,0,0)` for n ≤ 2. Lifting Φ's own lower pattern with its lower anchor gives exactly the sheet's value at 906, 907, 908, 947 (certified both ways). Open: the bound for all n (it needs a 3-row sibling lemma). No fix-table row |
+| §9 | 907, 947 | open; no certified sheet error, and the evidence points to Φ₃def2. At `X = 905 (2,0,0)`, `ι(Φ(X[n])) < ι(R) < ι(Φ(X))` is certified for n ≤ 3 (R = the sheet's reading); the same at `946 (2,0,0)` for n ≤ 2. Lifting Φ's own lower pattern with its lower anchor gives exactly the sheet's value at 906, 907, 908, 947 (certified both ways). Every standard `M < X` is `≤ X[n]` for some n (Lemma CF, proved; also checked on 583,471 matrices with ≤ 10 columns), and the same at `X' = 946 (2,0,0)`. From it, `ι(Φ(X[n])) < ι(R)` for all n is proved given the Shape Lemma (checked for n ≤ 6 at X, n ≤ 5 at X') and that R is covered. A candidate rule `lastt` (§18) gives `Φ(X) = R`; not adopted. No fix-table row |
 | sheet error, not in the fix table (§9) | 1009 | $`\iota(\text{sheet}(1009)) = \iota(\Phi_{3\mathrm{def2}}(K))`$ certified both ways for a lex-smaller standard $`K`$ (row 1008 followed by `(2,1,0)(3,2,1)(4,2,1)(4,2,1)(4,2,0)(3,2,1)`). The fix is $`\Phi_{3\mathrm{def2}}(1009)`$ up to $`\iota`$: $`\text{sheet}(1008) \lt \text{fix} \lt \text{sheet}(1010)`$ certified. A fix-table row is proposed |
 | a level more than the cut chain of the last summand | 1334, 1335, 1434, 1435 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ certified for 1334, 1335, 1435. Open: the level count needs the other summands (§14) |
 | bare extra up-kids: a level or a doubling | 1490, 1503, 1504, 1515, 1516, 1583 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ for all but 1583, the reverse for 1583. Open: `kbare` loses rows |
@@ -1593,11 +1593,24 @@ The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi
 - Undecided pairs: the order tests left 777 pairs undecided under Φ₃def2, almost all limit steps
   `A = B[n]`. A new certificate search ([R2PLUS.md](R2PLUS.md)) certifies 720 as "<" and finds no
   violation; 57 stay open. Needed: those 57, and a proof that `ι∘Φ₃` increases along fundamental sequences.
-- Rows 907 and 947: prove `ι(Φ(X[n])) ≤ ι(R)` for all n at `X = 905 (2,0,0)` =
-  `(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0)` (and at `946 (2,0,0)`). Then Φ₃def2 is wrong at 907 and 947,
-  and the lifted readings are the fixes (§16). Proposed rule change, not yet tested: decide whether a column
-  is the last one inside the subtree of the column that owns it (now `Up` copies the whole `(1,1,1)` subtree,
-  with the column after it). Row 844: change the fix table's entry to the corrected pattern of §9.
+- Rows 907 and 947, at `X = 905 (2,0,0)` = `(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0)` and `X' = 946 (2,0,0)`.
+  `ι(Φ(X[n])) < ι(R)` for all n is proved on paper (Carlson 2009, Lemma 5.5.1, Def 5.3.2, Thm 14.10.2)
+  from Lemma CF and two hypotheses; the referee found the argument correct. Left:
+  - the Shape Lemma for all n: `Φ(X[n]) = 0 a Bl_0 … Bl_n`, each block nesting copies of all earlier
+    blocks (checked for n ≤ 6 at X and n ≤ 5 at X'); and that R, and at X' the pattern with its
+    anchor, are covered;
+  - `sup_n ι(Φ(X[n])) = ι(R)`, and that Φ is right on every `X[n]`.
+  - A candidate rule `lastt`: in (C2-5-4-1) and (KI-5), a marker with children that becomes a new
+    root term decides `last` inside that term (the unit child is a separate summand). It gives
+    `Φ(X) = R` and `ι(Φ(X')) = ι(R')` (certified both ways) and the same fit (1057 rows,
+    iso / sub / sup / no = 505 / 552 / 3 / 39; rows 907 and 947 still do not fit), and the seven order
+    tests have 0 pairs with the same pattern. Not adopted: it changes 196 of 583,471 BM4-reachable
+    matrices with ≤ 10 columns, 145 continuations `F(2,…)` and 51 others, all starting
+    `(0,0,0)(1,1,1)(2,2,1)(3,1,1)`; 50 of the 51 change only through the (KI-5) part, for example
+    `(0,0,0)(1,1,1)(2,2,1)(3,1,1)(4,1,0)(5,2,1)(6,2,0)` between sheet rows 1388 and 1389. On the 45
+    pairs next to those the oracle finds 0 violations and 0 "<" certificates, so nothing decides between
+    the two rules there. The variant that decides `last` in the subtree of the owner loses 39 fitting rows.
+  - Row 844: change the fix table's entry to the corrected pattern of §9.
 - An analysis of $`R_2^+`$ itself, for example by proving the correspondence
   $`\upsilon_\iota \leftrightarrow \varepsilon_0 \cdot \iota`$ between $`R_2^+`$ and $`R_2`$. Wilken's
   $`R_2`$ describes the pure structure only.

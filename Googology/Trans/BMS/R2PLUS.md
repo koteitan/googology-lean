@@ -87,17 +87,37 @@ on paper in the form that is needed, without Wilken's JSL 72 paper. The referee 
 So the 10 further pairs below $`\upsilon_{\omega+1}`$ are "$`\lt`$" in $`R_2^S`$, and, by Theorem EQ and
 Carlson 2009 Thm 14.10, in $`R_2^C`$ (given the checked hypotheses).
 
-**Theorem S on all standard matrices below $`U`$: not proved yet.** A proof for every standard trio
-matrix $`M \le_{\mathrm{lex}} U`$ was written. It takes a term down one segment by replacing each nested copy
-of its root by the root's $`m`$-th expansion; on values this is Wilken's base change. The referee
-found no counterexample, but a gap in the step that carries patterns through this map (Theorem
-Pi-PAT). Its proof says every comparison is between parameters, log summands or level nodes. That
-is false in two cases: a sum step may compare with an element of the copied block, and the chosen
-$`m`$ does not bound the size of the other terms (example: $`(0,0,0)(1,1,1)(1,1,0)(2,2,0)`$ with $`m = 2`$).
-The repair needs two lemmas and a larger $`m`$: a sum step never reaches the copied block, and the
-closure never makes a top-part diagonal longer than the term's own. Both held on all tested cases
-(0 of 7,228 and 0 of 4,901). The theorem itself held on all 58,764 standard matrices $`\le U`$ with at
-most 8 columns and on 3,000 random ones with 9–30 columns.
+**Theorem S on all standard matrices below $`U`$: proved on paper, given [W07b] Thm 2.2.** A proof for
+every standard trio matrix $`M \le_{\mathrm{lex}} U`$ was written. It takes a term down one segment by
+replacing each nested copy of its root by the root's $`m`$-th expansion; on values this is Wilken's
+base change. The first referee found a gap in the step that carries patterns through this map
+(Theorem Pi-PAT): a sum step may compare with an element of the copied block, and the chosen $`m`$
+did not bound the size of the other terms (example: $`(0,0,0)(1,1,1)(1,1,0)(2,2,0)`$ with $`m = 2`$).
+The gap is now closed:
+- **Lemma BLK.** On the side of the term, a sum step never removes an element of the copied block.
+- **Lemma POP.** On the side of the image, the removal stops at the image block once $`m \gt H(t)`$.
+- **Lemma INV.** $`H(t)`$ is the largest rise in $`t`$ (the longest chain on which $`y`$ grows by 1). No
+  node of the closure has a larger rise, and the shape, the parameters and the level are kept.
+- **Lemma Pi-ORD′** replaces Pi-ORD; with Lemma PARAM it compares parameters and lower nodes with
+  the image block.
+- The allowed $`m`$ are $`m \ge \max(m_0(t), H(t)+1, \mathrm{Lev}(t))`$. This bound depends on $`t`$ only, so
+  finiteness (Lemma TERM) follows from Pi-PAT.
+
+A second referee found Parts I and II (the patterns, Pi-PAT and TERM) proved; they do not use
+[W07b] Thm 2.2. The rest (the base change, Theorems A and EQ, S+) uses the converse direction of
+[W07b] Thm 2.2, whose proof is only in Wilken 2006 (not available). Under that hypothesis the
+referee found no gap, only minor points that are not yet fixed in the text: a step in the
+transitivity part of Lemma W2 (fix: add $`\alpha`$ to $`Y`$), the $`\Sigma_1`$-substructure test used in [W07b]
+Thm 5.3 (stated without proof in the available papers), one case of the non-epsilon step that
+cannot occur but is not excluded in the text, and the values above $`\upsilon_{\omega+1}`$ in the
+statement that the least copy is taken in $`R_2^C`$.
+
+Checks (each run under 60 seconds): the theorem holds on all 58,764 standard matrices $`\le U`$ with
+at most 8 columns and on 3,000 random ones with 9–30 columns. Pi-PAT with all the invariants holds
+on 8,484 segment terms (at most 8 columns) and 2,878 random ones, and a sum step never enters the
+block on either side. The referee's own search (798 segment terms from 802 new matrices with 12–60
+columns, and 585 terms at $`m + 2`$) found no counterexample; without the bound $`H(t)+1`$, 13 of the
+585 terms fail, so that bound is needed.
 
 **Limit-step pairs.** The order tests of [POR.md](POR.md) left 777 pairs undecided under
 `por/phi3def2.py`. In 723 of them $`A = B[n]`$ with $`n \le 3`$. A certificate is a chain of Carlson's
@@ -111,11 +131,12 @@ stay open in both directions. No violation was found.
 **Conditional or open.**
 - The full equality of the Carlson–Wilken 2012 §7 remark, and the per-matrix hypotheses of the two
   further shapes for all matrices.
-- Theorem S on all standard matrices below $`U`$: the two lemmas above.
+- Theorem S on all standard matrices below $`U`$: the minor points above.
 - The 57 open limit-step pairs, and a general lemma that $`\iota \circ \Phi_3`$ increases along BM4
   fundamental sequences.
-- Wilken 2007 ([W07b]) Thm 2.2 is used throughout (through [W07b] Thm 5.3 and Cor 5.7). Its proof
-  is in Wilken 2006, which was not available.
+- Wilken 2007 ([W07b]) Thm 2.2 is used throughout (through [W07b] Thm 5.3 and Cor 5.7, and in
+  Theorem S on all standard matrices below $`U`$). Its converse direction is proved only in
+  Wilken 2006, which was not available; Carlson 2001 (p. 21) gives only the forward directions.
 - The equivalence of $`R_2^C`$ and $`R_2^S`$ beyond $`\upsilon_{\omega+1}`$ (Theorem B in $`R_2^C`$ is only sketched).
 - Beyond $`\upsilon_{\omega\cdot\omega}`$: a conjecture that each "backbone" behaves like the $`\varepsilon_0`$-multiples in
   Wilken's $`R_2`$ agrees with all 11,506 facts tested; heads with $`\Omega_2`$-level structure are

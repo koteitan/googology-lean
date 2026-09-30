@@ -51,6 +51,25 @@ Two consequences ([PROOF](PROOF.md) Cor 7.2):
     0-isominimal in their §3 sense if and only if $`\{0\} \cup Y`$ is isominimal.
   - So the axiom holds under every such reading. The gap: that JSL 72 Def 1.2 is one of these
     readings, and that Cor 6.3(1) rests on JSL 72 Thm 4.1.
+  - Proved on paper and refereed (the full text is not yet published): the Main Theorem does not
+    need the axioms `P1_isominimal`, `exists_isominimal` and `pwLe_of_covering`, and so does not
+    need JSL 72. `P1_isominimal` is used twice: in `thm111` (the set is isominimal) and in
+    `finite_V` (the set is finite).
+    - **Theorem S+ at base 1.** The proof of Theorem S+ of [../../BMS/R2PLUS.md](../../BMS/R2PLUS.md)
+      also works for the base $`\sigma = 1`$, with two new lemmas on the exponent of $`\vartheta^1`$ and
+      on the bar witnesses at base 1.
+    - **Theorem LEAST.** Every isomorphism $`g`$ of $`X = o[V_M]`$ onto any set satisfies
+      $`g \ge \mathrm{id}`$. So $`X`$ is isominimal, and $`\iota(\Phi(M)) = o(M)`$ follows without the Core
+      Structure Theorem, Cor 6.3 and `lemma61`.
+    - **Theorem FIN.** $`P_1(\alpha)`$ is finite for $`1 \lt \alpha \lt \psi_0(\Omega_\omega)`$, by induction
+      on $`(\mathrm{ht}_\sigma(y), y)`$, using only [W07a] and [W07b].
+    - The referee checked every cited item against the papers and found the mathematics proved.
+      Searches found no counterexample (below $`\varepsilon_0`$: 0 lowering maps on 97 closures; with
+      epsilon numbers: 0 on 103 closures, 4,936 pairs for the bar lemma with 0 failures).
+    - Not yet in Lean. The referee found an error in the Lean plan: two new cited facts had their
+      hypotheses in a `variable` line, which Lean drops from an `axiom`, so those axioms prove
+      `False` (checked). They must take the hypotheses as explicit arguments. Until the Lean
+      version is written, the three axioms stay.
 - **One outside assumption.** The Lean function `Ord.psi`
   ([Ord.lean](../../../Notation/ExBuchholz/Ord.lean)) is Buchholz's $`\psi`$. This is used only
   to read Cor 7.2(b) as "the image is $`\mathrm{Core} \setminus \{0\}`$": [Rank.lean](../Rank.lean)

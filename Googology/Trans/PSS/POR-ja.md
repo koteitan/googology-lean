@@ -202,5 +202,5 @@ x \le_1 z \iff x = z \lor (x \text{ は項が 1 つ} \land x \le z \le \mathrm{l
 
 ## 9. これから
 
-- 引用した公理 `P1_isominimal` の 1 つの読み方を、Wilken, "Assignment of ordinals to patterns of resemblance"（JSL 72, 2007）で確かめる。
+- Lean で引用の公理 `P1_isominimal`、`exists_isominimal`、`pwLe_of_covering` を取り除く。これらと Wilken の JSL 72 の論文を使わない証明は、紙の上でできて査読済みである（[proof/README-ja.md](proof/README-ja.md) の「状態」）。
 - 3 行（トリオ数列と $`R_2^+`$）への拡張。記録は [../BMS/POR-ja.md](../BMS/POR-ja.md)。今の規則 $`\Phi_{3i}`$ は、$`(0,0,0)(1,1,1)(2,1,1)`$ の手前まで順序の食い違いが無い。
