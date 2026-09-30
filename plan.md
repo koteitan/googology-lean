@@ -32,9 +32,9 @@ The remaining work, arranged by the cells of the README tables.
     - fix phi3def2.py at X = 905 (2,0,0) = (0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0): along the fundamental sequence X[n], ι(Φ(X[n])) < ι(R) < ι(Φ(X)), where R is the sheet's reading (certified for n ≤ 3), so Φ leaves a gap below X; the same happens at 946 (2,0,0) (sheet rows 907, 947)
       - prove the bound for all n (and the 3-row sibling lemma it needs)
       - find the rule change that gives R, rerun the fit and the order tests
-    - 🤖 decide the undecided limit-step pairs (about 460; a certificate method is being run)
-    - analyse R₂⁺ itself ([Trans/BMS/R2PLUS.md](Googology/Trans/BMS/R2PLUS.md); Lemma L, Theorems A, B, EQ, S, Prop P′ and the remark of Carlson–Wilken 2012 §7 are proved on paper and refereed)
-      - 🤖 extend Theorem S to all standard trio matrices ≤ U = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(1,1,0)(2,2,1) (single XTgen terms and sums with them); a proof is written and is being refereed
+    - decide the 57 limit-step pairs still undecided (720 of 777 are certified "<"; they seem to need up-steps nested 3 deep), and prove that ι∘Φ₃ increases along BM4 fundamental sequences (needs: a down1 copy keeps the reach of the copied nodes; the base case at the bad root for nested limits)
+    - analyse R₂⁺ itself ([Trans/BMS/R2PLUS.md](Googology/Trans/BMS/R2PLUS.md); Lemma L, Theorems A, B, EQ, S, S+, M, Prop P′ and the remark of Carlson–Wilken 2012 §7 in the needed form are proved on paper and refereed)
+      - close the gap in Theorem S for all standard trio matrices ≤ U = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(1,1,0)(2,2,1): prove Theorem Pi-PAT with two lemmas (a sum step never reaches the copied block; the closure never makes a top-part diagonal longer than the term's own) and a larger m
       - prove that Carlson's covering definition R₂^C equals R₂^S beyond υ_{ω+1} (Theorem B in R₂^C is a sketch)
       - the backbone conjecture BLK beyond υ_{ω·ω}, then heads with Ω₂-level structure (new ordinal arithmetic)
     - sheet rows that do not fit: 1334/1335/1434/1435 (a level more than the cut chain of the last summand), bare extra up-kids (1490, 1503, 1504, 1515, 1516, 1583), 1582, 569, 1476, 1489, 575, 709, 1409, 1460, 1577; fixed rows 601/718/1348/1401 where the fix and Φ differ

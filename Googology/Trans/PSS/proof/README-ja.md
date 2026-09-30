@@ -29,7 +29,9 @@ $`\Phi`$ は標準形のペア数列 $`M`$ を、Carlson の意味の 1 階の�
 ## 状態
 
 - 紙の上で証明した。3 つの部分それぞれを、独立した査読者が、反証するつもりで確かめた。偽の命題は見つからなかった。査読者が見つけた穴と細かい点は、すべて直した。PROOF と TR の直しは、同じ査読者がもう一度確かめた。COMB の直しは細かいもの（引用と、省いていた 1 行の手順）で、もう一度は確かめていない。
-- **Lean。`sorry` なし。** 証明の全体を形式化した。定理 SC（`../SC.lean`）、項の操作と補題 C・2.4・T・R（`../Phi.lean`）、Lemma TR（`../TR.lean`）、主な鎖と E1・E2・主定理 `mainTheorem_mat`・Cor 7.2（`../Main.lean`）である。`#print axioms mainTheorem_mat` に出るのは、Lean の標準の 3 つの公理のほかは、文献から引用して公理として置いた事実だけである。置き場所は `../TR/Cited.lean`（Wilken の $`\vartheta`$）、`../Main/Cited.lean`（$`R_1^+`$）、`../Main/Cited2.lean`（Wilken の潰し $`\iota_{\tau,\alpha}`$、翻訳 $`t^\alpha_\tau`$、[W07b] 定理 5.3 と系 5.9）である。査読者がそれぞれを論文と照らし合わせ、すべて正しいと確かめた。1 つだけ、元の論文が手に入らず確かめられなかった読み方がある。`P1_isominimal` で「1 で相対化した isominimal」を「isominimal」と読むところである（Wilken, "Assignment of ordinals to patterns of resemblance", JSL 72, 2007）。
+- **Lean。`sorry` なし。** 証明の全体を形式化した。定理 SC（`../SC.lean`）、項の操作と補題 C・2.4・T・R（`../Phi.lean`）、Lemma TR（`../TR.lean`）、主な鎖と E1・E2・主定理 `mainTheorem_mat`・Cor 7.2（`../Main.lean`）である。`#print axioms mainTheorem_mat` に出るのは、Lean の標準の 3 つの公理のほかは、文献から引用して公理として置いた事実だけである。置き場所は `../TR/Cited.lean`（Wilken の $`\vartheta`$）、`../Main/Cited.lean`（$`R_1^+`$）、`../Main/Cited2.lean`（Wilken の潰し $`\iota_{\tau,\alpha}`$、翻訳 $`t^\alpha_\tau`$、[W07b] 定理 5.3 と系 5.9）である。査読者がそれぞれを論文と照らし合わせ、すべて正しいと確かめた。1 つだけ、元の論文とまだ照らし合わせていない読み方がある。`P1_isominimal` で「1 で相対化した isominimal」を「isominimal」と読むところである。Carlson–Wilken 2012 の §6 はこの言葉を Wilken, "Assignment of ordinals to patterns of resemblance"（JSL 72, 2007）の Def 1.1–1.2 から取り、その Cor 6.3(1) の最小性はこの論文の Thm 4.1 である。この論文は手に入らなかった。
+  - 紙の上で証明し、査読済み：$`\tau = 1`$ では、Carlson–Wilken 2012 自身の説明（$`R_1`$ の閉じた部分構造、パラメータの割り当ては恒等写像、相対化の点までは $`\le_1`$ を無視）に合う読み方は、どれも isominimal と同じである。特に、$`Y`$ が彼らの §3 の意味で 0-isominimal であることと、$`\{0\} \cup Y`$ が isominimal であることは同じである。
+  - だから公理は、そのどの読み方でも成り立つ。残る穴：JSL 72 の Def 1.2 がこれらの読み方の 1 つであること、そして Cor 6.3(1) が JSL 72 の Thm 4.1 に頼っていること。
 - **外からの仮定が 1 つある。** Lean の関数 `Ord.psi`
   （[Ord.lean](../../../Notation/ExBuchholz/Ord.lean)）が Buchholz の $`\psi`$ であること。
   これを使うのは、Cor 7.2(b) を「像は $`\mathrm{Core} \setminus \{0\}`$」と読むところだけである。

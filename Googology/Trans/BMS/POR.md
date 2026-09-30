@@ -1567,7 +1567,7 @@ child. As the first child of $`L_m`$, $`E`$ is still read above its levels (`kba
 | sheet error, in the fix table | 1177 | $`\iota(\text{fix}) = \iota(\Phi_{3\mathrm{def2}})`$ certified both ways, and $`\Phi_{3\mathrm{def2}}`$ embeds the fix. The fix is not in the parser's form; a row in that form is proposed |
 | sheet error, in the fix table | 660, 661, 1400 (same ordinal as the row before), 1217, 1336, 1349, 1350, 1436 (order errors), 626 (not a standard matrix), 1642 (unreadable, and the first row with $`z = 2`$) | no change |
 | fixed rows that still differ | 601, 718, 1401, 1348 | $`\iota(\text{fix}) \le \iota(\Phi_3)`$ certified for 601, 718, 1401; the reverse was not found. Open: the fix or $`\Phi_3`$ |
-| §9 | 907, 947 | open. The sheet's rows 905–908 are a lift of lower rows; $`\Phi_{3\mathrm{def2}}`$ leaves the lift as soon as a column follows 905. Needed: the value of `905 (2,0,0)` |
+| §9 | 907, 947 | open; no certified sheet error, and the evidence points to Φ₃def2. At `X = 905 (2,0,0)`, `ι(Φ(X[n])) < ι(R) < ι(Φ(X))` is certified for n ≤ 3 (R = the sheet's reading); the same at `946 (2,0,0)` for n ≤ 2. Lifting Φ's own lower pattern with its lower anchor gives exactly the sheet's value at 906, 907, 908, 947 (certified both ways). Open: the bound for all n (it needs a 3-row sibling lemma). No fix-table row |
 | sheet error, not in the fix table (§9) | 1009 | $`\iota(\text{sheet}(1009)) = \iota(\Phi_{3\mathrm{def2}}(K))`$ certified both ways for a lex-smaller standard $`K`$ (row 1008 followed by `(2,1,0)(3,2,1)(4,2,1)(4,2,1)(4,2,0)(3,2,1)`). The fix is $`\Phi_{3\mathrm{def2}}(1009)`$ up to $`\iota`$: $`\text{sheet}(1008) \lt \text{fix} \lt \text{sheet}(1010)`$ certified. A fix-table row is proposed |
 | a level more than the cut chain of the last summand | 1334, 1335, 1434, 1435 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ certified for 1334, 1335, 1435. Open: the level count needs the other summands (§14) |
 | bare extra up-kids: a level or a doubling | 1490, 1503, 1504, 1515, 1516, 1583 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ for all but 1583, the reverse for 1583. Open: `kbare` loses rows |
@@ -1576,8 +1576,8 @@ child. As the first child of $`L_m`$, $`E`$ is still read above its levels (`kba
 | $`\Phi_3`$ at most the sheet, other | 575, 709, 1409, 1460 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ certified. Open |
 | too large for the oracle | 1577 | timeout. Open |
 
-**Agreement with the sheet.** 1055 rows (iso / sub / sup / no = 505 / 550 / 3 / 41). With the proposed rows for
-1177 and 1009 it is 1057.
+**Agreement with the sheet.** Measured with the fix table that now has the rows for 1177 and 1009: 1057 rows
+(iso / sub / sup / no = 505 / 552 / 3 / 39).
 
 **Order tests.** All seven sets show 0 violations and 0 pairs with the same pattern. Only 11 matrices changed:
 1 in the fifth set, 6 in the sixth, 4 in the seventh. In the sixth set ($`[(2,2,1)(3,2,1),\ (2,2,1)(3,3,1))`$
@@ -1586,15 +1586,18 @@ sets are as in §14.
 
 ## 17. Theory: $`R_2^+`$ below $`\upsilon_{\omega+1}`$
 
-The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi_3`$ (Lemma L, Theorems A and B, Proposition P′; 20 undecided pairs of §9 decided) are in [R2PLUS.md](R2PLUS.md), with their status and what stays open.
+The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi_3`$ (Lemma L, Theorems A and B, Proposition P′; 20 undecided pairs of §9 decided; 720 of the 777 undecided limit-step pairs certified "<") are in [R2PLUS.md](R2PLUS.md), with their status and what stays open.
 
 ## 18. Next
 
-- The 287 undecided pairs (§9): prove that $`\iota \circ \Phi_3`$ is monotone inside a term.
-  A longer oracle budget helps little: 23 of 310 in about 27 seconds each.
-- Rows 907 and 947: decide the value of `905 (2,0,0)` = `(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0)`,
-  the sheet's lift reading or $`\Phi_{3\mathrm{def2}}`$ (§16). Row 844: change the fix table's
-  entry to the corrected pattern of §9.
+- Undecided pairs: the order tests left 777 pairs undecided under Φ₃def2, almost all limit steps
+  `A = B[n]`. A new certificate search ([R2PLUS.md](R2PLUS.md)) certifies 720 as "<" and finds no
+  violation; 57 stay open. Needed: those 57, and a proof that `ι∘Φ₃` increases along fundamental sequences.
+- Rows 907 and 947: prove `ι(Φ(X[n])) ≤ ι(R)` for all n at `X = 905 (2,0,0)` =
+  `(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0)` (and at `946 (2,0,0)`). Then Φ₃def2 is wrong at 907 and 947,
+  and the lifted readings are the fixes (§16). Proposed rule change, not yet tested: decide whether a column
+  is the last one inside the subtree of the column that owns it (now `Up` copies the whole `(1,1,1)` subtree,
+  with the column after it). Row 844: change the fix table's entry to the corrected pattern of §9.
 - An analysis of $`R_2^+`$ itself, for example by proving the correspondence
   $`\upsilon_\iota \leftrightarrow \varepsilon_0 \cdot \iota`$ between $`R_2^+`$ and $`R_2`$. Wilken's
   $`R_2`$ describes the pure structure only.
@@ -1603,8 +1606,6 @@ The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi
   - bare extra up-kids as a level or a doubling (1490, 1503, 1504, 1515, 1516, 1583);
   - rows 1582, 569, 1476, 1489, 575, 709, 1409, 1460, 1577;
   - the fixed rows 601, 718, 1348, 1401.
-
-  The 464 undecided pairs of the order tests are mostly steps to a limit.
 - The definition of §15 ($`\Phi_{3\mathrm{def}}`$): shorten the list of level columns (15.6) and the reach
   $`\mathrm{lh}_1`$ (15.8), and replace the three named cases by general rules.
 

@@ -40,10 +40,17 @@ Two consequences ([PROOF](PROOF.md) Cor 7.2):
   the literature, stated as axioms in `../TR/Cited.lean` (about Wilken's $`\vartheta`$),
   `../Main/Cited.lean` (about $`R_1^+`$) and `../Main/Cited2.lean` (Wilken's collapse
   $`\iota_{\tau,\alpha}`$, translation $`t^\alpha_\tau`$, [W07b] Thm 5.3 and Cor 5.9). A referee
-  checked each of them against the papers and found all of them correct. One reading could not
-  be checked, because the paper it depends on was not available: in `P1_isominimal`, a
-  "1-relativized isominimal" set is read as an isominimal set (Wilken, "Assignment of ordinals
-  to patterns of resemblance", JSL 72, 2007).
+  checked each of them against the papers and found all of them correct. One reading is still
+  not checked against its source: in `P1_isominimal`, a "1-relativized isominimal" set is read as
+  an isominimal set. Carlson–Wilken 2012 §6 takes these terms from Wilken, "Assignment of ordinals
+  to patterns of resemblance" (JSL 72, 2007), Defs 1.1–1.2, and the isominimality in their
+  Cor 6.3(1) is Thm 4.1 of that paper. That paper was not available.
+  - Proved on paper and refereed: at $`\tau = 1`$, every reading that fits Carlson–Wilken 2012's own
+    description (closed substructures of $`R_1`$, the identity as parameter assignment, $`\le_1`$
+    ignored up to the relativization point) is the same as isominimality. In particular, $`Y`$ is
+    0-isominimal in their §3 sense if and only if $`\{0\} \cup Y`$ is isominimal.
+  - So the axiom holds under every such reading. The gap: that JSL 72 Def 1.2 is one of these
+    readings, and that Cor 6.3(1) rests on JSL 72 Thm 4.1.
 - **One outside assumption.** The Lean function `Ord.psi`
   ([Ord.lean](../../../Notation/ExBuchholz/Ord.lean)) is Buchholz's $`\psi`$. This is used only
   to read Cor 7.2(b) as "the image is $`\mathrm{Core} \setminus \{0\}`$": [Rank.lean](../Rank.lean)
