@@ -8,22 +8,26 @@ once.
 ## Rule
 
 ```
-Trans/<from>/<to>/     translations between the systems <from> and <to>
-Trans/<from>/common/   facts about <from> alone that two or more <to> use
-Trans/common/          facts shared by several <from> (none yet)
+Trans/<A>/<B>/      the translation A → B
+Trans/<A>/common/   facts about A alone that two or more translations use
+Trans/common/       facts shared by several systems (none yet)
 ```
 
-- `<from>` is the system being analysed and `<to>` the system it is measured
-  against: `BMS/ExBuchholz/`, `BMS/PoR/`, `DBMS/BMS/`, `DBMS/ExBuchholz/`.
-- A pair has **one** directory, not one per direction. Both simulations and
-  the `Equiv`, if there is one, live together; otherwise the `Equiv` has no
-  clear home and the two directions drift apart.
-- A file about `<from>` alone goes to `<from>/common/` if two or more `<to>`
-  use it, and otherwise into the one `<to>` that uses it.
+- One directory per direction. `Trans/<A>/<B>/` is the cell "A → B" of the
+  tables in the [top README](../../README.md), and the goals of that cell
+  (injective, order-preserving, …) are proved there. `B → A` goes to
+  `Trans/<B>/<A>/`: `BMS/ExBuchholz/` reads a matrix as an ordinal, and
+  `ExBuchholz/BMS/` builds the trio matrix of an ordinal.
+- A translation inside one family of systems (primitive sequences → pair
+  sequences, `r` rows → `r + 1` rows) goes to `Trans/<A>/<A>/`.
+- What both directions need, such as a round trip, goes with the direction
+  that defines it first; the other direction imports it.
+- A file about `A` alone goes to `Trans/<A>/common/` if two or more
+  translations use it, and otherwise into the one directory that uses it.
 - A directory that grows splits by the number of rows (`PSS/` for two rows,
   `Trio/` for three).
-- Every `<from>/<to>/` and `<from>/common/` has a README that lists its files
-  and what each proves. The table below links them.
+- Every directory has a README that lists its files and what each proves.
+  The table below links them.
 
 Every system lives in [Notation](../Notation/README.md), so a translation from
 a googological system into a proof-theoretic one is no different from any other
@@ -55,9 +59,12 @@ Each directory has a README listing its files and what each proves.
 
 | directory | what it proves |
 |---|---|
-| [BMS/common/](BMS/common/README.md) | Facts about BMS alone that two or more translations use: expansion written on the entries at every number of rows, zero rows, cutting and appending, and the cofinality of three-row expansion (`TrioCof/`). |
-| [BMS/ExBuchholz/](BMS/ExBuchholz/README.md) | BMS ↔ extended Buchholz ψ. The rank of a matrix as a ψ value: one row, ε-numbers, ζ, and pair sequences (rank = 1 + val, `PSS/`); and the rules that map ψ to trio sequences (`Trio/`). |
+| [BMS/common/](BMS/common/README.md) | Facts about BMS alone that two or more translations use: expansion written on the entries at every number of rows, cutting and appending, and the cofinality of three-row expansion (`TrioCof/`). |
+| [BMS/BMS/](BMS/BMS/README.md) | BMS → BMS: the primitive sequences inside the pair sequences, and `r` rows inside `r + 1` rows (a row of zeros underneath). |
+| [BMS/ExBuchholz/](BMS/ExBuchholz/README.md) | BMS → extended Buchholz ψ: which ordinal a matrix names. One row (below ε₀, ε-numbers, ζ₀, rank = value), and pair sequences (rank = 1 + val, `PSS/`). |
 | [BMS/PoR/](BMS/PoR/README.md) | BMS → Carlson's patterns of resemblance. Two rows (`PSS/`): the map is order-preserving onto the core of R₁⁺ without 0, proved in Lean. Three rows (`Trio/`): the program `por/phi3def2.py` and the proofs on paper. |
+| [ExBuchholz/BMS/](ExBuchholz/BMS/README.md) | Extended Buchholz ψ → BMS: the trio matrix of `ψ_0(Ω_α)` (`Trio/`): rules 1–10 and their fixes, standard forms and order below `ψ_0(Ω_2)`, and the checks against the sheet. |
 | [DBMS/common/](DBMS/common/README.md) | Facts about DBMS alone that two or more translations use. |
-| [DBMS/BMS/](DBMS/BMS/README.md) | DBMS ↔ BMS: one row, blocks and their standard lists, and the comparison of three-row DBMS with three-row BMS (the upper bound, `ThreeRowUpper*`). |
-| [DBMS/ExBuchholz/](DBMS/ExBuchholz/README.md) | DBMS → extended Buchholz ψ: one and two rows, and the tables. |
+| [DBMS/DBMS/](DBMS/DBMS/README.md) | DBMS → DBMS: `r + 1` rows inside `r + 2` rows. |
+| [DBMS/BMS/](DBMS/BMS/README.md) | DBMS → BMS: one row on the entries, blocks and their standard lists, and the comparison of three-row DBMS with three-row BMS (`ThreeRow*`). |
+| [DBMS/ExBuchholz/](DBMS/ExBuchholz/README.md) | DBMS → extended Buchholz ψ: one and two rows into the ordinals, and the table cells of one-row DBMS. |

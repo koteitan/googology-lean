@@ -32,13 +32,13 @@ README の表のセルごとに、残りの作業を並べる。ほかのブラ�
   - 拡張ブーフホルツ ψ → トリオ数列（✅❌❌✅❌❌）
     - 階数を保つ：`p0(Λ)` 未満の全部で、像が 3 行の BMS の標準形に入り、順序を保つ
       - 規則を直す（修正は `TrioRulesAll` に重ねる）
-        - 修正 nonlast-other2 の続き：下の上端と同じ値の葉の後で、まだ順序の違う組（`W_{W_{w+2}}` 52、`W_{W_{W_w}}` 24、`W_{W_{w^2+1}}` 22、`W_{W_{w^2}}` 8、`W_{W_{w+1}}` 6）、`W_{W_{w^2}}` の後で印が規則 6 の階の上に来ること、`W_{W_{w·2}}` の後の非標準の行列 117 個（[TRIO-FIX-NONLAST2-ja.md](Googology/Trans/BMS/ExBuchholz/Trio/TRIO-FIX-NONLAST2-ja.md)）
-        - Fix L の続き：`W_{W_W}` の後の同じ種類のほかのレベル（`W_{w+1}`、`W_{W+w+1}`、`W_{W+w·2}`、`W_{W·2+1}`、`W_{W·3}`、`W_{W^2}`、`W_{W_2·2}` など）と、鎖の中の場合 K（`W_{W_{W_W}}` の後の `W_{W_{W_2+1}}`）を直す（[TRIO-FIX-LASTLEAF-ja.md](Googology/Trans/BMS/ExBuchholz/Trio/TRIO-FIX-LASTLEAF-ja.md)）
-        - 修正 U2 の続き：主張する範囲の外に残る規則 9 の誤り 22 個、無限のレベル、極限と可算の `u`（[TRIO-FIX-U2-ja.md](Googology/Trans/BMS/ExBuchholz/Trio/TRIO-FIX-U2-ja.md)）
-        - Fix S の続き：`W_w·W^2+…`、`W_{w^2}·W+W_w·2`、`W_w+W_2+…` の族を直す（ユニットの終わりの規則が置いた階の中の、持ち上げた写し）（[TRIO-FIX-STRETCH-ja.md](Googology/Trans/BMS/ExBuchholz/Trio/TRIO-FIX-STRETCH-ja.md)）
+        - 修正 nonlast-other2 の続き：下の上端と同じ値の葉の後で、まだ順序の違う組（`W_{W_{w+2}}` 52、`W_{W_{W_w}}` 24、`W_{W_{w^2+1}}` 22、`W_{W_{w^2}}` 8、`W_{W_{w+1}}` 6）、`W_{W_{w^2}}` の後で印が規則 6 の階の上に来ること、`W_{W_{w·2}}` の後の非標準の行列 117 個（[TRIO-FIX-NONLAST2-ja.md](Googology/Trans/ExBuchholz/BMS/Trio/TRIO-FIX-NONLAST2-ja.md)）
+        - Fix L の続き：`W_{W_W}` の後の同じ種類のほかのレベル（`W_{w+1}`、`W_{W+w+1}`、`W_{W+w·2}`、`W_{W·2+1}`、`W_{W·3}`、`W_{W^2}`、`W_{W_2·2}` など）と、鎖の中の場合 K（`W_{W_{W_W}}` の後の `W_{W_{W_2+1}}`）を直す（[TRIO-FIX-LASTLEAF-ja.md](Googology/Trans/ExBuchholz/BMS/Trio/TRIO-FIX-LASTLEAF-ja.md)）
+        - 修正 U2 の続き：主張する範囲の外に残る規則 9 の誤り 22 個、無限のレベル、極限と可算の `u`（[TRIO-FIX-U2-ja.md](Googology/Trans/ExBuchholz/BMS/Trio/TRIO-FIX-U2-ja.md)）
+        - Fix S の続き：`W_w·W^2+…`、`W_{w^2}·W+W_w·2`、`W_w+W_2+…` の族を直す（ユニットの終わりの規則が置いた階の中の、持ち上げた写し）（[TRIO-FIX-STRETCH-ja.md](Googology/Trans/ExBuchholz/BMS/Trio/TRIO-FIX-STRETCH-ja.md)）
         - 別々の修正（`TrioFix*.lean`）が揃ったら、1 つの規則にまとめる
       - `p0(W_2) <= a < Λ` で、規則 1〜10 の像が標準形に入り、順序を保つことを証明する（添字が 0 か 1 だけの項は証明済み）
-      - `CalibRd200` を証明する（修正 `strip` の規則の写像は、読みの深さ 200 まで `trioE2` と一致する。100 までは証明済み、201 では偽。上限なしの `CalibSt` は燃料のため偽）（[BMS/ExBuchholz/Trio/TrioFixStripCalibNo.lean](Googology/Trans/BMS/ExBuchholz/Trio/TrioFixStripCalibNo.lean)）
+      - `CalibRd200` を証明する（修正 `strip` の規則の写像は、読みの深さ 200 まで `trioE2` と一致する。100 までは証明済み、201 では偽。上限なしの `CalibSt` は燃料のため偽）（[BMS/ExBuchholz/Trio/TrioFixStripCalibNo.lean](Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStripCalibNo.lean)）
       - `TrioFixFuel` の燃料 `max 200 (a の深さ)` が、どの `a` でも足りることを証明する（燃料を増やしても行列が変わらない。シートのラベルといくつかの族で確認済み）
 - ライブラリの配置（[Googology/Trans/README-ja.md](Googology/Trans/README-ja.md)）
   - `Trans/BMS/common/Cut.lean` がまだ `Trans/BMS/ExBuchholz/Commute.lean` を import しているので、`BMS/common/` の大半が拡張ブーフホルツ ψ に依存している。リストの補題（`Chain`、`Col`、`expandL`、`lastOf` など）を `ExBuchholz/Basic.lean` と `ExBuchholz/Commute.lean` から `BMS/common/` へ移し、`common/` が `ExBuchholz/` の何も import しないようにする

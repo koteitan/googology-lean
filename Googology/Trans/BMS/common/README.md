@@ -2,7 +2,7 @@
 
 # Trans/BMS/common
 
-Facts about BMS alone that two or more translations use: expansion written on the entries at every number of rows, zero rows, cutting and appending, and the cofinality of three-row expansion (`TrioCof/`).
+Facts about BMS alone that two or more translations use: expansion written on the entries at every number of rows, cutting and appending, and the cofinality of three-row expansion (`TrioCof/`).
 
 ## Files
 
@@ -16,9 +16,6 @@ Facts about BMS alone that two or more translations use: expansion written on th
 | BMS with itself | `EntriesR.lean` | — | **every Bashicu matrix expansion, written on the entries and shown to be `BM4.expand`** — so it runs, at any number of rows |
 | BMS with itself | `AllL.lean` | `Sim` | the rule on **every** matrix, standard or not, as a system that runs, with the standard ones inside it |
 | BMS with itself | `Zero.lean` | — | that a row of zeros underneath changes nothing: the two-row rule on it is the one-row rule |
-| BMS with itself | `Embed.lean` | `StepHom` | **the primitive sequence system sits inside the pair sequence system** |
-| BMS with itself | `ZeroRow.lean` | `StepHom`, `Sim` | **the same at every number of rows**: `r + 1` rows sit inside `r + 2`, and inside `s + 1` for any `s ≥ r` |
-| BMS with itself | `ZeroRowSurj.lean` | — | BMS `r` rows → `r + 1` rows is not surjective: the generator `(0,0)(1,1)` is not in the image (`bmsToSucc_not_surjective`) |
 | BMS with itself | `Append.lean` | — | **that expansion only looks at the last block**: a column whose row-`0` entry is `0` starts one, and no parent reaches back across it |
 | BMS with itself | `Entries2.lean` | — | **two-row expansion written on the entries, that it is `BM4.expand`, and that a run of it ends** |
 | BMS with itself | `Pair.lean` | — | the pair sequence system as a `Rewrite` whose step runs, with its generators |

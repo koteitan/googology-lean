@@ -2,7 +2,7 @@
 
 # Trans/DBMS/ExBuchholz
 
-DBMS → 拡張ブーフホルツ ψ。1 行と 2 行、表。
+DBMS → 拡張ブーフホルツ ψ。1 行と 2 行の順序数、1 行 DBMS の表のセル。
 
 ## ファイル
 

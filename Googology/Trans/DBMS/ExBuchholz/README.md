@@ -2,7 +2,7 @@
 
 # Trans/DBMS/ExBuchholz
 
-DBMS → extended Buchholz ψ: one and two rows, and the tables.
+DBMS → extended Buchholz ψ: one and two rows into the ordinals, and the table cells of one-row DBMS.
 
 ## Files
 

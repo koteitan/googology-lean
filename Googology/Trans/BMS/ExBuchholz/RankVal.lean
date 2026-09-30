@@ -1,6 +1,6 @@
 import Googology.Trans.BMS.common.Same
 import Googology.Trans.BMS.ExBuchholz.Eps0
-import Googology.Trans.BMS.common.ZeroRow
+import Googology.Trans.BMS.BMS.ZeroRow
 import Googology.Trans.BMS.common.Append
 
 /-!

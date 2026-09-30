@@ -25,8 +25,8 @@ Googology/
   Core/            展開系、標準形、翻訳、目標の記録
   Rank.lean        整礎な系は順序数の測度を持つ
   Notation/<名前>/ 系ごとに 1 ディレクトリ
-  Trans/<from>/<to>/   <from> と <to> の間の翻訳。対ごとに 1 ディレクトリ
-  Trans/<from>/common/ 2 つ以上の <to> が使う、<from> だけについての事実
+  Trans/<A>/<B>/       翻訳 A → B。向きごとに 1 ディレクトリ
+  Trans/<A>/common/    2 つ以上の翻訳が使う、A だけについての事実
   Goals/Basic.lean 翻訳写像の目標の記録（7 節）
   Goals.lean       このライブラリの目標の記録と監査
 test/              有限の検査。定理ではない。GoalsAudit.lean が監査の結果を出力する
@@ -40,11 +40,11 @@ scripts/           check_readme.py が README の表と監査の結果を比べ�
 2. `Notation/X/` は `Notation/Y/` を import しない。系は自分自身と `Core` しか
    知らない。
 3. `Trans/` だけが 2 つの系を同時に import する。
-4. 対にはディレクトリ `Trans/<from>/<to>/` を **1 つ**だけ置く。`<from>` は解析する系、
-   `<to>` はそれを測る系である。両方向と、あれば `Equiv` をまとめて入れる。`<from>` だけに
-   ついてのファイルは、2 つ以上の `<to>` が使うなら `Trans/<from>/common/` に、1 つの `<to>`
-   だけが使うならその `<to>` に置く。各ディレクトリに README を置き、`Trans/README-ja.md`
-   から引ける。
+4. 翻訳 `A → B` にはディレクトリ `Trans/<A>/<B>/` を **1 つ**置く。README の表のセル
+   「A → B」であり、その目標をそこで証明する。`B → A` は `Trans/<B>/<A>/` に、同じ系の仲間の中の
+   翻訳は `Trans/<A>/<A>/` に置く。両方向が使うものは、先にそれを定義する向きに置く。`A` だけに
+   ついてのファイルは、2 つ以上の翻訳が使うなら `Trans/<A>/common/` に、1 つだけが使うなら
+   そのディレクトリに置く。各ディレクトリに README を置き、`Trans/README-ja.md` から引ける。
 5. mathlib は系ごとに import する。順序数へ評価する系だけが import し、`Core` は
    決して import しない。
 6. `Goals.lean` はどのモジュールを import してもよい。これを import するのは、根の

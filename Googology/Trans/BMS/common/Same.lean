@@ -1,7 +1,7 @@
 import Googology.Trans.BMS.common.Agree
 import Googology.Trans.BMS.ExBuchholz.Reach
 import Googology.Trans.BMS.common.Pair
-import Googology.Trans.BMS.common.Embed
+import Googology.Trans.BMS.BMS.Embed
 
 /-!
 # The general system at one and two rows

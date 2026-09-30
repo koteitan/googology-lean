@@ -1,6 +1,6 @@
 import Googology.Trans.DBMS.BMS.Blocks
 import Googology.Trans.DBMS.ExBuchholz.TwoRow
-import Googology.Trans.DBMS.BMS.ZeroRow
+import Googology.Trans.DBMS.DBMS.ZeroRow
 
 /-!
 # Three-row DBMS: what the ranks are known to be
