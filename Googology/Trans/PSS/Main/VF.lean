@@ -1,6 +1,7 @@
 import Googology.Trans.PSS.Main.Iso
 import Googology.Trans.PSS.Main.AF
 import Googology.Trans.PSS.Main.BarEps
+import Googology.Trans.PSS.Main.Fin
 
 /-!
 # `V_M` is finite: Theorem VF (`proof/PROOF-4.md` §15.1)
@@ -13,7 +14,8 @@ and it is the least good set containing `α`.
 * **Lemma AF** (`lemmaAF`): if `F` is good, `N` is a standard root with at least
   two children and `o(N) ∈ F`, then `o(anchor N) ∈ F`.
 * **Theorem VF** (`thmVF`): `o[V_M] ⊆ P_1(o(M))` for `o(M) ≥ 2`; so `V_M` is
-  finite (`finite_V`), since `P_1(o(M))` is ([CW12] Cor 6.3 (1)).
+  finite (`finite_V`), since `P_1(o(M))` is (Theorem FIN, `finite_P1` in `Main/Fin.lean`,
+  proved without [CW12] Cor 6.3).
 -/
 
 namespace Googology.Trans.PSS.Main
@@ -75,11 +77,10 @@ theorem thmVF {M : List Tm} (hM : StdOrd M) {x : List Tm} (hx : InV M x) :
 
 /-- **`V_M` is finite.** -/
 theorem finite_V {M : List Tm} (hM : StdOrd M) (h1 : 1 < ordOf M) : {x | InV M x}.Finite := by
-  obtain ⟨X, hX, -⟩ := P1_isominimal h1 (ordOf_lt_T1bound hM)
-  have hsub : ordOf '' {x | InV M x} ⊆ X := by
+  have hsub : ordOf '' {x | InV M x} ⊆ {β | InP1 (ordOf M) β} := by
     rintro _ ⟨x, hx, rfl⟩
-    rw [hX]; exact thmVF hM hx
-  exact Set.Finite.of_finite_image ((X.finite_toSet).subset hsub)
+    exact thmVF hM hx
+  exact Set.Finite.of_finite_image ((finite_P1 h1 (ordOf_lt_T1bound hM)).subset hsub)
     (fun x hx y hy e => ordOf_inj (stdOrd_of_inV hM hx) (stdOrd_of_inV hM hy) e)
 
 end Googology.Trans.PSS.Main

@@ -87,7 +87,7 @@ on paper in the form that is needed, without Wilken's JSL 72 paper. The referee 
 So the 10 further pairs below $`\upsilon_{\omega+1}`$ are "$`\lt`$" in $`R_2^S`$, and, by Theorem EQ and
 Carlson 2009 Thm 14.10, in $`R_2^C`$ (given the checked hypotheses).
 
-**Theorem S on all standard matrices below $`U`$: proved on paper, given [W07b] Thm 2.2.** A proof for
+**Theorem S on all standard matrices below $`U`$: proved on paper and refereed.** A proof for
 every standard trio matrix $`M \le_{\mathrm{lex}} U`$ was written. It takes a term down one segment by
 replacing each nested copy of its root by the root's $`m`$-th expansion; on values this is Wilken's
 base change. The first referee found a gap in the step that carries patterns through this map
@@ -104,20 +104,47 @@ The gap is now closed:
   finiteness (Lemma TERM) follows from Pi-PAT.
 
 A second referee found Parts I and II (the patterns, Pi-PAT and TERM) proved; they do not use
-[W07b] Thm 2.2. The rest (the base change, Theorems A and EQ, S+) uses the converse direction of
-[W07b] Thm 2.2, whose proof is only in Wilken 2006 (not available). Under that hypothesis the
-referee found no gap, only minor points that are not yet fixed in the text: a step in the
-transitivity part of Lemma W2 (fix: add $`\alpha`$ to $`Y`$), the $`\Sigma_1`$-substructure test used in [W07b]
-Thm 5.3 (stated without proof in the available papers), one case of the non-epsilon step that
-cannot occur but is not excluded in the text, and the values above $`\upsilon_{\omega+1}`$ in the
-statement that the least copy is taken in $`R_2^C`$.
+[W07b] Thm 2.2. The rest (the base change, Theorems A and EQ, S+) uses [W07b] Thm 2.2 in both
+directions. Its minor points are now fixed in the text:
+- Lemma W2: in the transitivity step, $`\alpha`$ is put into $`Y`$ first, so the second copy lands in
+  $`[\alpha, \beta)`$.
+- The $`\Sigma_1`$-substructure test used in [W07b] Thm 5.3 (Lemma CRIT) is proved in both
+  directions. It is also in Wilken, "A glimpse of $`\Sigma_3`$-elementarity" (2020), Prop 21.6.
+- The non-epsilon step is rewritten with three new lemmas (SUMM: $`T^\tau[\sigma]`$ keeps the summands
+  of its elements and is closed under $`+`$; LOG: the exponent formula for $`\vartheta^b(\eta)`$; PE: for a
+  non-epsilon $`y = \omega^\zeta`$, $`\zeta \in T^\tau[\sigma]`$ and $`\pi(y) = \omega^{\pi(\zeta)}`$). The case that
+  cannot occur is now excluded.
+- Lemma LEAST-C lists every relation of $`R_2`$ that the proof of the least copy reads. Each is
+  decided in $`R_2^C`$ by Theorem EQ, so the least copy is taken in $`R_2^C`$ also for copies with values
+  above $`\upsilon_{\omega+1}`$.
+
+**[W07b] Thm 2.2: proved on paper and refereed.** The theorem says: for $`0 \lt \xi \le \alpha`$,
+$`\alpha \le_1 \alpha + \xi`$ holds if and only if $`\alpha = \omega^{\alpha'}`$ with $`\mathrm{logend}(\alpha') \ge \xi`$
+($`\mathrm{logend}(\beta)`$ is the exponent of the last term of the Cantor normal form of $`\beta`$). Its
+proof, and that of [W07b] Lemma 2.1, is only in Wilken 2006, which is not available. Both
+directions, Lemma 2.1 and the finite-set test for $`\le_1`$ are now proved from the definition of
+$`\le_1`$ and Cantor-normal-form arithmetic only. The converse direction is an induction on
+$`(\alpha, \xi)`$ in lexicographic order that builds the copy explicitly. The referee checked every case
+and found only minor points (one sentence is missing: $`0 \le_1 b`$ holds only for $`b = 0`$). So
+Theorem S on all standard matrices below $`U`$, and Theorems A, EQ and S+, no longer depend on an
+unavailable paper.
 
 Checks (each run under 60 seconds): the theorem holds on all 58,764 standard matrices $`\le U`$ with
 at most 8 columns and on 3,000 random ones with 9–30 columns. Pi-PAT with all the invariants holds
 on 8,484 segment terms (at most 8 columns) and 2,878 random ones, and a sum step never enters the
 block on either side. The referee's own search (798 segment terms from 802 new matrices with 12–60
 columns, and 585 terms at $`m + 2`$) found no counterexample; without the bound $`H(t)+1`$, 13 of the
-585 terms fail, so that bound is needed.
+585 terms fail, so that bound is needed. Pi-PAT was checked again at three values of $`m`$
+($`m^*`$, $`m^*+1`$, $`m^*+3`$) on the same 12,745 terms, and membership in the class at three values of $`m`$
+per level on the 58,764 and 3,000 matrices: 0 failures (for 6 of the 798 terms the counters were
+lost to the time limit). A second referee ran 500 new random matrices with 9–45 columns at
+$`m^*+2`$ and $`m^*+5`$: 483 of 483 segment terms pass.
+
+Checks of [W07b] Thm 2.2 (each run under 60 seconds, 0 failures): the explicit copies of the
+converse direction on 2 × 2,000 random cases below $`\varepsilon_0`$ (a wrong $`\mathrm{logend}`$ gives
+non-isomorphic copies in 93 and 116 of 1,000 cases, so the check can fail); with the 2-row
+$`\mathrm{lh}`$ as the reference, the theorem on 1,091 principal terms and the copies on 79,376 cases. The referee's own
+check: 3,000 random cases, and every one of 649 wrong copies is caught.
 
 **Limit-step pairs.** The order tests of [POR.md](POR.md) left 777 pairs undecided under
 `por/phi3def2.py`. In 723 of them $`A = B[n]`$ with $`n \le 3`$. A certificate is a chain of Carlson's
@@ -131,12 +158,11 @@ stay open in both directions. No violation was found.
 **Conditional or open.**
 - The full equality of the Carlson–Wilken 2012 §7 remark, and the per-matrix hypotheses of the two
   further shapes for all matrices.
-- Theorem S on all standard matrices below $`U`$: the minor points above.
 - The 57 open limit-step pairs, and a general lemma that $`\iota \circ \Phi_3`$ increases along BM4
   fundamental sequences.
-- Wilken 2007 ([W07b]) Thm 2.2 is used throughout (through [W07b] Thm 5.3 and Cor 5.7, and in
-  Theorem S on all standard matrices below $`U`$). Its converse direction is proved only in
-  Wilken 2006, which was not available; Carlson 2001 (p. 21) gives only the forward directions.
+- Minor points of the second referee, not yet fixed in the text: [W07b] Thm 2.2 needs the sentence
+  "$`0 \le_1 b`$ only for $`b = 0`$"; in Theorem S, Lemma W2 (c) needs (a) for the maximum, and some
+  status lines and one list of citations are out of date.
 - The equivalence of $`R_2^C`$ and $`R_2^S`$ beyond $`\upsilon_{\omega+1}`$ (Theorem B in $`R_2^C`$ is only sketched).
 - Beyond $`\upsilon_{\omega\cdot\omega}`$: a conjecture that each "backbone" behaves like the $`\varepsilon_0`$-multiples in
   Wilken's $`R_2`$ agrees with all 11,506 facts tested; heads with $`\Omega_2`$-level structure are

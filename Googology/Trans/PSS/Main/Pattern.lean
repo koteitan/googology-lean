@@ -12,8 +12,8 @@ import Googology.Trans.PSS.Main.Reach
   `<_p`, the addition graph `add`, and `x ≤₁ z` iff `x = z` or (`x` has one term and
   `x ≤_p z ≤_p lh_Φ(x)`).
 * `iotaPat P a`: **the isominimal realization** `ι(P)` at the point `a`: the image
-  of `a` under the isomorphism of `P` onto its isominimal copy ([C01] Theorem 5.9;
-  [CW12] Core Structure Theorem (2)).
+  of `a` under the isomorphism of `P` onto its isominimal copy ([C01] Theorem 5.9).
+  For `Φ(M)` its value is given by Theorem LEAST (`iotaPat_eq_least`, `Main/Iso.lean`).
 
 **Lemma 5.1** (`lemma51`): `o` is an isomorphism of `Φ(M)` onto `o[V_M]`, and
 `o[V_M]` is closed (`closed_ordV`).
@@ -69,7 +69,8 @@ open Classical in
 /-- **The isominimal realization** `ι(P)` at the point `a` ([C01] Theorem 5.9;
 `proof/PROOF.md` §1.4): the image of `a` under an isomorphism of `P` onto an
 isominimal set of ordinals (`0` if there is none).  The isominimal copy and the
-isomorphism are unique (`iotaPat_eq`). -/
+isomorphism are unique; for `Φ(M)` the value is computed by `iotaPat_eq_least`
+(`Main/Iso.lean`) with Theorem LEAST. -/
 noncomputable def iotaPat {α : Type} (P : Pat α) (a : α) : Ordinal.{0} :=
   if h : ∃ (Y : Finset Ordinal.{0}) (g : α → Ordinal.{0}), Isominimal Y ∧ P.IsoVia Y g then
     h.choose_spec.choose a

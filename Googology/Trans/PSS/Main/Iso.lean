@@ -1,20 +1,18 @@
 import Googology.Trans.PSS.Main.Pattern
 
 /-!
-# Isominimal copies: Lemma 6.1 and the uniqueness of `ι`
+# Isominimal sets and the value of `ι`
 
 * `bij_strictMono_unique`: two strictly increasing bijections of a set of
   ordinals onto the same set agree (a well-order has one isomorphism onto a given
   well-order).
 * `PwLe.antisymm`: `≤_pw` is antisymmetric.
-* **Lemma 6.1** (`lemma61`, the sandwich, `proof/PROOF.md` §6): if `X` is finite and
-  closed, `h` is the isomorphism of `X` onto its isominimal copy, and `α` lies in
-  an isominimal `Z ⊆ X`, then `h(α) = α`.
-* `iotaPat_eq`: if `f` is an isomorphism of a structure `P` onto a finite closed set
-  `X` of ordinals, and `h` one of `X` onto an isominimal set, then
-  `ι(P)` at `a` is `h(f(a))`.
+* `iotaPat_eq_least`: if `f` is an isomorphism of a structure `P` onto a finite closed set
+  `X` of ordinals, and every isomorphism of `X` onto a set of ordinals is `≥ id` on `X`
+  (Theorem LEAST), then `X` is isominimal and `ι(P)` at `a` is `f(a)`.  (This replaces
+  Lemma 6.1 and the uniqueness of the isominimal copy, which used the Core Structure
+  Theorem of [CW12].)
 -/
-
 namespace Googology.Trans.PSS.Main
 
 open Ordinal Function
@@ -113,47 +111,6 @@ theorem IsoVia.restrict {X Y Z : Set Ordinal.{0}} {h : Ordinal.{0} → Ordinal.{
     fun a ha b hb c hc => hh.2.2.1 a (hZ ha) b (hZ hb) c (hZ hc),
     fun a ha b hb => hh.2.2.2 a (hZ ha) b (hZ hb)⟩
 
-/-! ## Lemma 6.1 -/
-
-/-- The isomorphism onto the isominimal copy lowers every point: `h(q) ≤ q`
-([CW12] Core Structure Theorem (2): the copy is `≤_pw` below the covering `X`). -/
-theorem isominimal_copy_le {X Y : Finset Ordinal.{0}} (hX : ClosedSet (X : Set Ordinal.{0}))
-    (hY : Isominimal Y) {h : Ordinal.{0} → Ordinal.{0}} (hh : IsoVia X Y h) :
-    ∀ q ∈ (X : Set Ordinal.{0}), h q ≤ q := by
-  have hs := hh.symm
-  obtain ⟨f, hf, hf', hfy⟩ := pwLe_of_covering hY hX ⟨_, hs.covering⟩
-  have e := bij_strictMono_unique hf hf' hs.1 hs.2.1
-  intro q hq
-  have hy : h q ∈ (Y : Set Ordinal.{0}) := hh.1.mapsTo hq
-  have := hfy (h q) hy
-  rw [e (h q) hy, hh.left_inv hq] at this
-  exact this
-
-/-- **Lemma 6.1** (the sandwich, `proof/PROOF.md` §6).  Let `X` be a finite closed
-set, `h` an isomorphism of `X` onto an isominimal set, `Z ⊆ X` isominimal and
-`α ∈ Z`.  Then `h(α) = α`. -/
-theorem lemma61 {X Y Z : Finset Ordinal.{0}} (hX : ClosedSet (X : Set Ordinal.{0}))
-    (hY : Isominimal Y) {h : Ordinal.{0} → Ordinal.{0}} (hh : IsoVia X Y h) (hZX : Z ⊆ X)
-    (hZ : Isominimal Z) : ∀ α ∈ (Z : Set Ordinal.{0}), h α = α := by
-  have hZX' : (Z : Set Ordinal.{0}) ⊆ X := by simpa using hZX
-  have hle := isominimal_copy_le hX hY hh
-  -- `h[Z]` is a copy of `Z` below `Z`, hence `Z`
-  have hiso : IsoVia (Z : Set Ordinal.{0}) ((Z.image h : Finset Ordinal.{0}) : Set Ordinal.{0}) h := by
-    rw [Finset.coe_image]; exact hh.restrict hZX'
-  have hpw : PwLe ((Z.image h : Finset Ordinal.{0}) : Set Ordinal.{0}) Z := by
-    have hs := hiso.symm
-    refine ⟨_, hs.1, hs.2.1, fun y hy => ?_⟩
-    rw [Finset.coe_image] at hy
-    obtain ⟨a, ha, rfl⟩ := hy
-    rw [hiso.left_inv ha]
-    exact hle a (hZX' ha)
-  have e : Z.image h = Z := hZ.2 _ ⟨h, hiso⟩ hpw
-  -- so `h` maps `Z` onto `Z` and is the identity there
-  have hbij : Set.BijOn h Z Z := by
-    have := hiso.1
-    rwa [e] at this
-  exact bij_strictMono_self hbij (hh.2.1.mono hZX')
-
 /-! ## The isominimal realization is unique -/
 
 theorem Pat.IsoVia.comp {α : Type} {P : Pat α} {X Y : Set Ordinal.{0}} {f : α → Ordinal.{0}}
@@ -191,13 +148,6 @@ theorem Pat.IsoVia.trans_symm {α : Type} [Nonempty α] {P : Pat α} {Y₁ Y₂ 
   · show Main.le1 a b ↔ Main.le1 (g₂ (k a)) (g₂ (k b))
     rw [← le₂ _ (hk a ha) _ (hk b hb), le₁ _ (hk a ha) _ (hk b hb), hgk a ha, hgk b hb]
 
-/-- Isomorphic isominimal sets are equal ([CW12] Core Structure Theorem (2)). -/
-theorem isominimal_unique {Y₁ Y₂ : Finset Ordinal.{0}} (h₁ : Isominimal Y₁) (h₂ : Isominimal Y₂)
-    {k : Ordinal.{0} → Ordinal.{0}} (hk : IsoVia Y₁ Y₂ k) : Y₁ = Y₂ := by
-  have p₁ := pwLe_of_covering h₁ h₂.1 ⟨k, hk.covering⟩
-  have p₂ := pwLe_of_covering h₂ h₁.1 ⟨_, hk.symm.covering⟩
-  exact_mod_cast PwLe.antisymm p₁ p₂
-
 /-- Two isomorphisms of `P` onto the same set of ordinals agree. -/
 theorem Pat.IsoVia.unique {α : Type} [Nonempty α] {P : Pat α} {Y : Set Ordinal.{0}} {g₁ g₂ : α → Ordinal.{0}}
     (h₁ : P.IsoVia Y g₁) (h₂ : P.IsoVia Y g₂) : ∀ a ∈ P.U, g₁ a = g₂ a := by
@@ -210,20 +160,28 @@ theorem Pat.IsoVia.unique {α : Type} [Nonempty α] {P : Pat α} {Y : Set Ordina
     (Function.invFunOn_eq ⟨a, ha, rfl⟩)] at this
   exact this.symm
 
-/-- **`ι` is well defined**: for an isomorphism `f` of `P` onto a finite closed set
-`X` of ordinals, and an isomorphism `h` of `X` onto an isominimal set,
-`ι(P)` at `a` is `h(f(a))`. -/
-theorem iotaPat_eq {α : Type} [Nonempty α] {P : Pat α} {X Y : Finset Ordinal.{0}} {f : α → Ordinal.{0}}
-    (hf : P.IsoVia X f) (hY : Isominimal Y) {h : Ordinal.{0} → Ordinal.{0}}
-    (hh : IsoVia X Y h) {a : α} (ha : a ∈ P.U) : iotaPat P a = h (f a) := by
-  have hc : P.IsoVia Y (h ∘ f) := hf.comp hh
+/-- **`ι` at a least realization** (paper proof, Cor ISO / UNIQ / MAIN).  Let `f` be an
+isomorphism of `P` onto a finite closed set `X` of ordinals such that every isomorphism of
+`X` onto a set of ordinals is `≥ id` on `X` (Theorem LEAST).  Then `X` is isominimal, every
+isominimal realization of `P` is `X` with the isomorphism `f`, and `ι(P)` at `a` is `f(a)`. -/
+theorem iotaPat_eq_least {α : Type} [Nonempty α] {P : Pat α} {X : Finset Ordinal.{0}}
+    {f : α → Ordinal.{0}} (hf : P.IsoVia X f) (hXc : ClosedSet (X : Set Ordinal.{0}))
+    (hleast : ∀ (Y : Set Ordinal.{0}) (g : Ordinal.{0} → Ordinal.{0}), IsoVia X Y g →
+      ∀ β ∈ (X : Set Ordinal.{0}), β ≤ g β)
+    {a : α} (ha : a ∈ P.U) : iotaPat P a = f a := by
+  have hXi : Isominimal X := ⟨hXc, fun Y ⟨g, hg⟩ hpw => by
+    have := PwLe.antisymm ⟨g, hg.1, hg.2.1, hleast _ g hg⟩ hpw
+    exact_mod_cast this.symm⟩
   have hex : ∃ (Y : Finset Ordinal.{0}) (g : α → Ordinal.{0}), Isominimal Y ∧ P.IsoVia Y g :=
-    ⟨Y, h ∘ f, hY, hc⟩
+    ⟨X, f, hXi, hf⟩
   unfold iotaPat
   rw [dif_pos hex]
-  obtain ⟨hY', hg'⟩ := hex.choose_spec.choose_spec
-  have e : hex.choose = Y := isominimal_unique hY' hY (hg'.trans_symm hc)
-  have hg'' : P.IsoVia Y hex.choose_spec.choose := e ▸ hg'
-  exact hg''.unique hc a ha
+  obtain ⟨hY2, hg2⟩ := hex.choose_spec.choose_spec
+  have hk := hf.trans_symm hg2
+  have hpw : PwLe (X : Set Ordinal.{0}) (hex.choose : Set Ordinal.{0}) :=
+    ⟨_, hk.1, hk.2.1, hleast _ _ hk⟩
+  have e : X = hex.choose := hY2.2 X ⟨_, hk.symm⟩ hpw
+  have hg2' : P.IsoVia X hex.choose_spec.choose := e ▸ hg2
+  exact hg2'.unique hf a ha
 
 end Googology.Trans.PSS.Main

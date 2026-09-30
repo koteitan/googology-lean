@@ -36,40 +36,34 @@ Two consequences ([PROOF](PROOF.md) Cor 7.2):
 - **In Lean, with no `sorry`.** The whole proof is formalized: Theorem SC (`../SC.lean`), the
   term operations and Lemmas C, 2.4, T, R (`../Phi.lean`), Lemma TR (`../TR.lean`), and the main
   chain with E1, E2, the Main Theorem `mainTheorem_mat` and Cor 7.2 (`../Main.lean`). Besides
-  Lean's three standard axioms, `#print axioms mainTheorem_mat` lists only the facts cited from
+  Lean's three standard axioms, `#print axioms mainTheorem_mat` lists only 42 facts cited from
   the literature, stated as axioms in `../TR/Cited.lean` (about Wilken's $`\vartheta`$),
-  `../Main/Cited.lean` (about $`R_1^+`$) and `../Main/Cited2.lean` (Wilken's collapse
-  $`\iota_{\tau,\alpha}`$, translation $`t^\alpha_\tau`$, [W07b] Thm 5.3 and Cor 5.9). A referee
-  checked each of them against the papers and found all of them correct. One reading is still
-  not checked against its source: in `P1_isominimal`, a "1-relativized isominimal" set is read as
-  an isominimal set. Carlson–Wilken 2012 §6 takes these terms from Wilken, "Assignment of ordinals
-  to patterns of resemblance" (JSL 72, 2007), Defs 1.1–1.2, and the isominimality in their
-  Cor 6.3(1) is Thm 4.1 of that paper. That paper was not available.
-  - Proved on paper and refereed: at $`\tau = 1`$, every reading that fits Carlson–Wilken 2012's own
-    description (closed substructures of $`R_1`$, the identity as parameter assignment, $`\le_1`$
-    ignored up to the relativization point) is the same as isominimality. In particular, $`Y`$ is
-    0-isominimal in their §3 sense if and only if $`\{0\} \cup Y`$ is isominimal.
-  - So the axiom holds under every such reading. The gap: that JSL 72 Def 1.2 is one of these
-    readings, and that Cor 6.3(1) rests on JSL 72 Thm 4.1.
-  - Proved on paper and refereed (the full text is not yet published): the Main Theorem does not
-    need the axioms `P1_isominimal`, `exists_isominimal` and `pwLe_of_covering`, and so does not
-    need JSL 72. `P1_isominimal` is used twice: in `thm111` (the set is isominimal) and in
-    `finite_V` (the set is finite).
-    - **Theorem S+ at base 1.** The proof of Theorem S+ of [../../BMS/R2PLUS.md](../../BMS/R2PLUS.md)
-      also works for the base $`\sigma = 1`$, with two new lemmas on the exponent of $`\vartheta^1`$ and
-      on the bar witnesses at base 1.
-    - **Theorem LEAST.** Every isomorphism $`g`$ of $`X = o[V_M]`$ onto any set satisfies
-      $`g \ge \mathrm{id}`$. So $`X`$ is isominimal, and $`\iota(\Phi(M)) = o(M)`$ follows without the Core
-      Structure Theorem, Cor 6.3 and `lemma61`.
-    - **Theorem FIN.** $`P_1(\alpha)`$ is finite for $`1 \lt \alpha \lt \psi_0(\Omega_\omega)`$, by induction
-      on $`(\mathrm{ht}_\sigma(y), y)`$, using only [W07a] and [W07b].
-    - The referee checked every cited item against the papers and found the mathematics proved.
-      Searches found no counterexample (below $`\varepsilon_0`$: 0 lowering maps on 97 closures; with
-      epsilon numbers: 0 on 103 closures, 4,936 pairs for the bar lemma with 0 failures).
-    - Not yet in Lean. The referee found an error in the Lean plan: two new cited facts had their
-      hypotheses in a `variable` line, which Lean drops from an `axiom`, so those axioms prove
-      `False` (checked). They must take the hypotheses as explicit arguments. Until the Lean
-      version is written, the three axioms stay.
+  `../Main/Cited.lean` (about $`R_1^+`$), `../Main/Cited2.lean` (Wilken's collapse
+  $`\iota_{\tau,\alpha}`$, translation $`t^\alpha_\tau`$, [W07b] Thm 5.3 and Cor 5.9) and `../Main/Cited3.lean`
+  (the inverse base change $`\pi^{-1}`$ of [W07a] Def 5.1, [W07a] Lemma 5.3, Cor 5.4 and [W07b]
+  Cor 5.7, 5.10; the epsilon case of [CW12] Lemma 5.7.1; [W07a] Thm 3.23 and Lemma 3.27; [W07b]
+  Lemma 4.5). A referee checked each of them against the papers and found all of them correct.
+  Every axiom takes its hypotheses as explicit arguments (no `variable` line).
+  - The axioms `P1_isominimal`, `exists_isominimal` and `pwLe_of_covering` are removed, together
+    with `thm111` and `lemma61`. So the Main Theorem does not use Wilken, "Assignment of ordinals to
+    patterns of resemblance" (JSL 72, 2007), which was not available, nor the Core Structure
+    Theorem and Cor 6.3 of Carlson–Wilken 2012. They are replaced by three theorems, proved on
+    paper, refereed, and now proved in Lean:
+    - **Theorem S+ at base $`\sigma \ge 1`$** (`splus`, `../Main/SPlus.lean`). The proof of Theorem S+ of
+      [../../BMS/R2PLUS.md](../../BMS/R2PLUS.md) works for every base $`\sigma \ge 1`$. In Lean it
+      uses an absorption law ($`x + q = q`$ implies $`h(x) \cdot \omega \le h(q)`$) in place of "principal
+      numbers go to principal numbers".
+    - **Theorem FIN** (`finite_inC`, `finite_P1`, `../Main/Fin.lean`). $`P_1(\alpha)`$ is finite for
+      $`1 \lt \alpha \lt \psi_0(\Omega_\omega)`$, by induction on $`(\mathrm{ht}_\sigma(y), y)`$ in lexicographic order.
+    - **Theorem LEAST** (`ordV_least`, `iotaPat_eq_least`, `../Main/Least.lean`). Every isomorphism
+      $`g`$ of $`X = o[V_M]`$ onto any set satisfies $`g \ge \mathrm{id}`$. So $`X`$ is isominimal, and
+      $`\iota(\Phi(M)) = o(M)`$.
+  - Checks: the library builds (9,242 jobs) with no "declaration uses sorry"; the list of
+    `#print axioms mainTheorem_mat` has no `sorryAx` and none of the removed axioms. The statements of
+    `mainTheorem_mat`, `mainTheorem` and Cor 7.2 are the same as before. The referee looked for a
+    contradiction among the new axioms (for example at $`\gamma = 0`$, $`\alpha = 1`$) and found none.
+    [CW12] Lemma 5.7.1 has a known error in its other (non-epsilon) case, which is not used; the
+    epsilon case is also proved on paper.
 - **One outside assumption.** The Lean function `Ord.psi`
   ([Ord.lean](../../../Notation/ExBuchholz/Ord.lean)) is Buchholz's $`\psi`$. This is used only
   to read Cor 7.2(b) as "the image is $`\mathrm{Core} \setminus \{0\}`$": [Rank.lean](../Rank.lean)

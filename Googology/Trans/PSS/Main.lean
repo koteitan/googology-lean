@@ -1,4 +1,4 @@
-import Googology.Trans.PSS.Main.BarClosure
+import Googology.Trans.PSS.Main.Least
 
 /-!
 # The Main Theorem: `ι(Φ(M)) = o(M)`
@@ -12,7 +12,7 @@ a standard pair sequence `M` puts its point at `o(M) = 1 + val(pairTerm M)`.
 * `Main/Loc.lean`: localization ([W07a] Def 4.6) and bar ([CW12] Def 5.1) on `T¹`.
 * `Main/Cited.lean`: **the cited facts on `R₁⁺` as axioms** — Carlson's `≤₁` is a
   constant `le1`; [W07b] Lemma 2.1, Theorem 2.2, Lemmas 3.3, 3.4, Cor 5.10;
-  [CW12] Core Structure Theorem (2), Cor 6.3; and `core_eq_psi` (C3 with M13).
+  and `core_eq_psi` (C3 with M13).
 * `Main/Basic.lean`, `Main/Nodes.lean`: consequences; the ordinals of nodes
   (Lemma 2.2, `o(add(a, b)) = o(a) + o(b)`).
 * `Main/Fold.lean`: **Lemma F** and **Prop 4.3** (the fold computes the reach,
@@ -30,7 +30,13 @@ a standard pair sequence `M` puts its point at `o(M) = 1 + val(pairTerm M)`.
 * `Main/Reach.lean`: **Lemma 4.2** and **Lemma L** (`lemmaL`), by induction along
   the provenance invariant of Theorem T.
 * `Main/Pattern.lean`: `V_M`, the pattern `Φ(M)`, `ι`, **Lemma 5.1**.
-* `Main/Iso.lean`: **Lemma 6.1**, uniqueness of `ι`.
+* `Main/Iso.lean`: `ι` at a least realization (`iotaPat_eq_least`).
+* `Main/Cited3.lean`: **the cited facts for Theorems S⁺ and FIN as axioms** — base
+  transformation `π^{-1}` ([W07a] Def 5.1, Cor 5.4; [W07b] Cor 5.7, 5.10), [CW12]
+  Lemma 5.7.1 (epsilon case), `ht` ([W07a] Thm 3.23, Lemma 3.27; [W07b] Lemma 4.5).
+* `Main/SPlus.lean`: **Theorem S⁺** (`splus`), rigidity at every base `σ ≥ 1`.
+* `Main/Fin.lean`: **Theorem FIN** (`finite_P1`), `P_1(α)` is finite.
+* `Main/Least.lean`: **Theorem LEAST** (`ordV_least`): `o[V_M] ≤_pw` every copy.
 * `Main/LocSpec.lean`, `Main/FactBar.lean`, `Main/FactBar1.lean`: localization as
   suffix maxima, **Fact BAR** (bar from [CW12] Def 5.1).
 * `Main/BarNonEps.lean`, `Main/AF.lean`: bar-closure and **Lemma AF** for
@@ -39,14 +45,15 @@ a standard pair sequence `M` puts its point at `o(M) = 1 + val(pairTerm M)`.
   (`barEps`), from the lemma KEY, EL and [W07a] Lemma 6.4 (a) on `T¹`.
 * `Main/VF.lean`: **Lemma AF**, **Theorem VF** (`V_M` finite).
 * `Main/BarClosure.lean`: **bar-closure** of `o[V_M]`.
-* This file: **Theorem 11.1**, **Theorem 7.1** (`mainTheorem`,
+* This file: **Theorem 7.1** (`mainTheorem`,
   `mainTheorem_mat`), **Cor 7.2** (`cor72a`, `cor72b`, `cor72b_core`).
 
 ## Status
 
 No `sorry`.  `#print axioms mainTheorem_mat`: `propext`, `Classical.choice`,
-`Quot.sound`, and the cited facts of `TR/Cited.lean`, `Main/Cited.lean` and
-`Main/Cited2.lean`.
+`Quot.sound`, and the cited facts of `TR/Cited.lean`, `Main/Cited.lean`,
+`Main/Cited2.lean` and `Main/Cited3.lean`.  The Core Structure Theorem and [CW12] Cor 6.3
+are not used.
 -/
 
 namespace Googology.Trans.PSS.Main
@@ -54,7 +61,7 @@ namespace Googology.Trans.PSS.Main
 open TR Ordinal Order Phi Forest
 open Bijectivity (CTPS)
 
-/-! ## Theorem 11.1 -/
+/-! ## `P_1(o(M)) ⊆ o[V_M]` -/
 
 /-- `P_1(o(M)) ⊆ o[V_M]` ([CW12] Theorem 6.2, `proof/PROOF-2.md` §11.2 step 3):
 `o[V_M]` contains `0`, `1`, `o(M)` and is closed under additive decomposition,
@@ -87,28 +94,6 @@ theorem P1_sub_V {M : List Tm} (hM : StdOrd M) {β : Ordinal.{0}} (h : InP1 (ord
     · obtain ⟨w, hw, e⟩ := barClosure hM hx h1
       exact ⟨w, hw, e⟩
     · exact absurd hP (not_pr_of_two hxs)
-
-/-- **Theorem 11.1** (`proof/PROOF-2.md` §11.2): for `o(M) ≥ 2`, the isomorphism of
-`o[V_M]` onto its isominimal copy fixes `o(M)`. -/
-theorem thm111 {M : List Tm} (hM : StdOrd M) (h1 : 1 < ordOf M) :
-    ∃ (X Y : Finset Ordinal.{0}) (h : Ordinal.{0} → Ordinal.{0}),
-      (X : Set Ordinal.{0}) = ordOf '' {x | InV M x} ∧ Isominimal Y ∧ IsoVia X Y h ∧
-        h (ordOf M) = ordOf M := by
-  have hfin := (finite_V hM h1).image ordOf
-  set X := hfin.toFinset with hXdef
-  have hX : (X : Set Ordinal.{0}) = ordOf '' {x | InV M x} := hfin.coe_toFinset
-  have hXc : ClosedSet (X : Set Ordinal.{0}) := hX ▸ closed_ordV hM
-  obtain ⟨Y, hY, h, hh⟩ := exists_isominimal hXc
-  obtain ⟨Z, hZ, hZi⟩ := P1_isominimal h1 (ordOf_lt_T1bound hM)
-  have hZX : Z ⊆ X := by
-    intro β hβ
-    have : β ∈ (Z : Set Ordinal.{0}) := hβ
-    rw [hZ] at this
-    have := P1_sub_V hM this
-    rw [← hX] at this
-    exact this
-  have hαZ : ordOf M ∈ (Z : Set Ordinal.{0}) := by rw [hZ]; exact InP1.self
-  exact ⟨X, Y, h, hX, hY, hh, lemma61 hXc hY hh hZX hZi _ hαZ⟩
 
 /-! ## The case `M = (0,0)` -/
 
@@ -192,44 +177,32 @@ theorem isominimal_zero_one : Isominimal ({0, 1} : Finset Ordinal.{0}) := by
 
 /-! ## Theorem 7.1 -/
 
-/-- **Theorem 7.1 (the Main Theorem)**: for every node `M` (a standard pair sequence,
-as its list of root terms), `ι(Φ(M)) = o(M)`. -/
-theorem mainTheorem {M : List Tm} (hM : StdOrd M) (hne : M ≠ []) :
-    iotaPat (phiPat M) M = ordOf M := by
-  have hC : CTPS (mat M) := hM.resolve_left hne
+/-- `V_M` is finite for every nonempty standard node `M`. -/
+theorem finite_V_of_ne {M : List Tm} (hM : StdOrd M) (hne : M ≠ []) : {x | InV M x}.Finite := by
   have hpos : 0 < ordOf M := by
     have := (ordOf_lt_iff stdOrd_nil hM).mp (by
       obtain ⟨t, M', rfl⟩ := List.exists_cons_of_ne_nil hne; simp)
     rwa [ordOf_nil] at this
   rcases (Order.one_le_iff_pos.mpr hpos).lt_or_eq with h1 | h1
-  · obtain ⟨X, Y, h, hX, hY, hh, hfix⟩ := thm111 hM h1
-    have h51 := lemma51 hM
-    rw [← hX] at h51
-    rw [iotaPat_eq h51 hY hh InV.self, hfix]
-  · -- `M = (0,0)`
-    have hMl : M = [Tm.node 0 []] := ordOf_inj hM (stdOrd_single std_leaf)
+  · exact finite_V hM h1
+  · have hMl : M = [Tm.node 0 []] := ordOf_inj hM (stdOrd_single std_leaf)
       (by rw [← h1, ordOf_leaf_eq])
     subst hMl
-    have hV : ordOf '' {x | InV [Tm.node 0 []] x} = (({0, 1} : Finset Ordinal.{0}) :
-        Set Ordinal.{0}) := by
-      ext β
-      simp only [Set.mem_image, Set.mem_setOf_eq, Finset.coe_insert, Finset.coe_singleton,
-        Set.mem_insert_iff, Set.mem_singleton_iff]
-      constructor
-      · rintro ⟨x, hx, rfl⟩
-        rcases inV_leaf hx with rfl | rfl
-        · left; exact ordOf_nil
-        · right; exact ordOf_leaf_eq
-      · rintro (rfl | rfl)
-        · exact ⟨[], InV.nil, ordOf_nil⟩
-        · exact ⟨[Tm.node 0 []], InV.one, ordOf_leaf_eq⟩
-    have h51 := lemma51 hM
-    rw [hV] at h51
-    have hid : IsoVia (({0, 1} : Finset Ordinal.{0}) : Set Ordinal.{0}) ({0, 1} :
-        Finset Ordinal.{0}) id :=
-      ⟨Set.bijOn_id _, strictMonoOn_id, fun _ _ _ _ _ _ => Iff.rfl, fun _ _ _ _ => Iff.rfl⟩
-    rw [iotaPat_eq h51 isominimal_zero_one hid InV.self]
-    rfl
+    exact (Set.toFinite ({[], [Tm.node 0 []]} : Set (List Tm))).subset (fun x hx => by
+      rcases inV_leaf hx with rfl | rfl <;> simp)
+
+/-- **Theorem 7.1 (the Main Theorem)**: for every node `M` (a standard pair sequence,
+as its list of root terms), `ι(Φ(M)) = o(M)`.  By Lemma 5.1, `o` is an isomorphism of `Φ(M)`
+onto the finite closed set `o[V_M]`, and by Theorem LEAST every isomorphism of `o[V_M]` onto
+a set of ordinals is `≥ id`; so `o[V_M]` is the isominimal realization (`iotaPat_eq_least`). -/
+theorem mainTheorem {M : List Tm} (hM : StdOrd M) (hne : M ≠ []) :
+    iotaPat (phiPat M) M = ordOf M := by
+  have hfo := (finite_V_of_ne hM hne).image ordOf
+  set X := hfo.toFinset with hXdef
+  have hX : (X : Set Ordinal.{0}) = ordOf '' {x | InV M x} := hfo.coe_toFinset
+  have h51 := lemma51 hM
+  rw [← hX] at h51
+  exact iotaPat_eq_least h51 (hX ▸ closed_ordV hM) (fun Y g hg => ordV_least hM hX hg) InV.self
 
 /-- **Theorem 7.1 on matrices**: for a standard pair sequence `M`,
 `ι(Φ(M)) = o(M) = 1 + val(pairTerm M)`. -/

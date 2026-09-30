@@ -39,8 +39,9 @@ calls it `R₁`; it is the `R₁⁺` of the conjecture.  Here `≤₁` is the co
   the sums of `T¹` below `Ω_1`.
 * Patterns ([C01] §4, [CW12] p.176): `ANF`, `ClosedSet`, `IsoVia`, `PwLe`,
   `CoveringVia`, `Isominimal`, `CoreR1`.
-* `InP1 α`: `P_1(α)`, the closure of `{0, 1, α}` under additive decomposition,
-  `lh` and bar ([CW12] Cor 6.3 (2)).
+* `InP1 α`: the closure of `{0, 1, α}` under additive decomposition, `lh` and bar
+  (the right side of [CW12] Cor 6.3 (2); only this closure is used, not its identity
+  with Carlson–Wilken's `P_1(α)`).
 
 ## The axioms
 
@@ -51,9 +52,9 @@ calls it `R₁`; it is the `R₁⁺` of the conjecture.  Here `≤₁` is the co
 * [W07b] Lemma 3.3 (b), (c), (d): `kap_small`, `kap_add`, `kap_theta`.
 * [W07b] Lemma 3.4 (a), (b): `lam_spec`, `kap_principal`.
 * [W07b] Corollary 5.10 (`τ = 1`): `le1_T1bound`, `not_lt1_infty`.
-* [CW12] Core Structure Theorem (2): `exists_isominimal`,
-  `pwLe_of_covering`.
-* [CW12] Corollary 6.3 (1), (2) (`τ = 1`): `P1_isominimal`.
+* ([CW12] Core Structure Theorem (2) and Corollary 6.3 are **not** used: the Main
+  Theorem gets isominimality from Theorem LEAST, `Main/Least.lean`, and finiteness of
+  `P_1(α)` from Theorem FIN, `Main/Fin.lean`; their cited facts are in `Main/Cited3.lean`.)
 * The identification of the core with `ψ_0(Ω_ω)`: `core_eq_psi` (C3 and the
   outside assumption M13 of `proof/PROOF.md` §1.4).  It is used only in
   Cor 7.2 (b′).
@@ -272,34 +273,6 @@ axiom le1_T1bound {γ : Ordinal.{0}} (h : T1bound ≤ γ) : le1 T1bound γ
 /-- **[W07b] Corollary 5.10**, `τ = 1`: "`T¹ ∩ Ω_1 = min{α > τ | α <₁ ∞}`" —
 no `α ∈ (1, T¹ ∩ Ω_1)` satisfies `α <₁ ∞` (`α ≤₁ β` for all `β ≥ α`). -/
 axiom not_lt1_infty {α : Ordinal.{0}} (h1 : 1 < α) (h : α < T1bound) : ∃ β, α ≤ β ∧ ¬ le1 α β
-
-/-! ## [CW12] Core Structure Theorem -/
-
-/-- **[CW12] Core Structure Theorem (2)** (from [C01] Theorem 5.9; every pattern
-is covered by [C01] Lemma 6.1): "Every pattern is isomorphic to a unique
-isominimal set of ordinals."  A finite closed set of ordinals is a pattern
-([CW12] p.177), so it has an isominimal isomorphic copy. -/
-axiom exists_isominimal {X : Finset Ordinal.{0}} (hX : ClosedSet (X : Set Ordinal.{0})) :
-    ∃ Y : Finset Ordinal.{0}, Isominimal Y ∧ ∃ g, IsoVia X Y g
-
-/-- **[CW12] Core Structure Theorem (2)**: "Moreover, if `X` is isominimal and
-`X'` is a covering of `X` then `X ≤_pw X'`."  (A covering of `X` is the range of a
-covering map, a closed set of ordinals, [CW12] p.176.) -/
-axiom pwLe_of_covering {X Q : Finset Ordinal.{0}} (hX : Isominimal X)
-    (hQ : ClosedSet (Q : Set Ordinal.{0})) (h : ∃ f, CoveringVia X Q f) : PwLe X Q
-
-/-! ## [CW12] Corollary 6.3 -/
-
-/-- **[CW12] Corollary 6.3 (1), (2)**, `τ = 1`: "`P_τ(α)` is the unique
-`τ`-relativized pattern `P` of minimal cardinality which is isominimally realized by
-the identity and satisfies `α ∈ P`", and "`P_τ(α)` is the closure of `{0, τ, α}`
-under additive decomposition, `lh_τ`, and bar", for `α ∈ (τ, τ^∞)`.  For
-`τ = 1` a `1`-relativized pattern is a finite closed set of ordinals, and
-"isominimally realized by the identity" is isominimality (`proof/PROOF-2.md`
-§11.2, M4); `τ^∞ = T¹ ∩ Ω_1` ([W07b] Cor 5.10).  Stated here: the closure
-`InP1 α` is a finite isominimal set. -/
-axiom P1_isominimal {α : Ordinal.{0}} (h1 : 1 < α) (h : α < T1bound) :
-    ∃ X : Finset Ordinal.{0}, (X : Set Ordinal.{0}) = {β | InP1 α β} ∧ Isominimal X
 
 /-! ## The core and `ψ_0(Ω_ω)` -/
 

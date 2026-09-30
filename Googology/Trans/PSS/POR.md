@@ -276,6 +276,5 @@ $`\varepsilon_{\varepsilon_0} = (0,0)(1,1)(2,0)(3,1)`$ there is no anchor, and t
 
 ## 9. Next
 
-- Remove the cited axioms `P1_isominimal`, `exists_isominimal` and `pwLe_of_covering` in Lean. A proof without them and without Wilken's JSL 72 paper is done on paper and refereed ([proof/README.md](proof/README.md), Status).
 - The extension to 3 rows (trio sequences and $`R_2^+`$); the record is [../BMS/POR.md](../BMS/POR.md).
   The current rule $`\Phi_{3i}`$ shows no order violation below $`(0,0,0)(1,1,1)(2,1,1)`$.
