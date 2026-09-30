@@ -225,12 +225,12 @@ That is `Mono.lean`.
    defined. One row of DBMS is the same system and gets the same two
    statements. And it gives the first two-row ordinal: `rank_pairGen` says
    the generator `(0,0)(1,1)` has rank `ε₀`, because it expands into one-row
-   matrices with a zero row underneath and `BMS/Embed.lean` carries their
+   matrices with a zero row underneath and `BMS/common/Embed.lean` carries their
    ordinals across. So the pair sequence system starts where the primitive
    sequence system ends — with no two-row reading, which there still is
    not. `rank_gen_eq_iSup` is the same at every number of rows: the
    `r + 2`-row generator's rank is the limit of the `r + 1`-row generators'
-   ranks. `BMS/Append.lean` adds the additive structure: expansion never
+   ranks. `BMS/common/Append.lean` adds the additive structure: expansion never
    reaches back across a column whose row-`0` entry is `0`, so the rank is
    additive over those blocks — `rank_appendState` — and `n` copies of a block
    have `n` times its rank. The other half is `expandRL_of_m0_zero`: with
@@ -273,26 +273,26 @@ That is `Mono.lean`.
    ψ_0(Ω_ω)`. So a two-row reading has to use `ψ` at every finite subscript,
    not just `ψ_0` and `ψ_1`. Three rows on are open, so `r = 2` is the next
    target. The first piece is in:
-   `BMS/Rows.lean` pins the bad root down for any number of rows, and
-   `BMS/TwoRow.lean` reads the two-row column map off — `m₀` is `0` or `1`,
+   `BMS/common/Rows.lean` pins the bad root down for any number of rows, and
+   `BMS/common/TwoRow.lean` reads the two-row column map off — `m₀` is `0` or `1`,
    and at `1` row `0` takes an increment on the columns whose bad-part
-   position is a row-`0` ancestor of the bad root. `BMS/Anc.lean` says what
+   position is a row-`0` ancestor of the bad root. `BMS/common/Anc.lean` says what
    that ancestor relation is on the entries, and computes it, and
-   `BMS/Entries2.lean` puts the two together: `expand2L` is the whole rule
+   `BMS/common/Entries2.lean` puts the two together: `expand2L` is the whole rule
    written on the entries, and `entries2_expand` says it is `BM4.expand`. It
    runs, and agrees with the reference implementation on every two-row matrix
    of length at most `4` with entries below `3` — `46` standard forms, `138`
-   expansions, all matching (`test/TransCheck.lean`). `BMS/Pair.lean`
+   expansions, all matching (`test/TransCheck.lean`). `BMS/common/Pair.lean`
    packages it as a `Rewrite` with its generators, and carries termination
-   across. `BMS/EntriesR.lean` does the same for **any** number of rows:
+   across. `BMS/common/EntriesR.lean` does the same for **any** number of rows:
    `parent A k` and `anc A k` at every row, and `expandRL` with
    `entriesR_expand`. So every Bashicu matrix expansion runs, which the array
    form does not. At three rows it agrees with the reference implementation on
    all `72` expansions of the `24` standard matrices of length at most `3`
-   with entries below `3`. `BMS/Agree.lean` ties the three rules together —
+   with entries below `3`. `BMS/common/Agree.lean` ties the three rules together —
    `expandRL` at one and two rows is `expandL` and `expand2L` — and packages
    the general one as `bmsL r`, with `bmsL_terminates` and `bmsLStd`.
-   `BMS/Same.lean` ties the systems together: `bmsL 0` is `prim` and `bmsL 1`
+   `BMS/common/Same.lean` ties the systems together: `bmsL 0` is `prim` and `bmsL 1`
    is `pairL`, as `Equiv`s.
 
    So the mechanical side of two rows is finished. What is left is the
@@ -343,7 +343,7 @@ generators; the one-row, two-row and general forms are proved to be one
 another. One row is settled all the way to the ordinals, in both directions
 and as an equivalence.
 
-The hierarchy is settled too: `BMS/ZeroRow.lean` says a row of zeros
+The hierarchy is settled too: `BMS/common/ZeroRow.lean` says a row of zeros
 underneath changes nothing at every number of rows, and the generator
 `(0,…,0)(1,…,1)` with `r + 2` rows expands at `N` to the generators with
 `r + 1` rows and that zero row already in place, so `bmsL r` sits inside
@@ -397,7 +397,7 @@ What is left is one problem, and it is not a Lean problem.
   [algorithm page](https://github.com/koteitan/trio/blob/main/ebp2bms/algorithm/1/README-en.md),
   with the values in its
   [table](https://github.com/koteitan/trio/blob/main/ebp2bms/sheet/1/README-en.md).
-  `Trans/BMS/Trio.lean` transcribes the `α < ε₀` half of it as
+  `Trans/BMS/ExBuchholz/Trio/Trio.lean` transcribes the `α < ε₀` half of it as
   `omegaIndexMatrix` and calibrates it against twenty rows of that table,
   including `ψ_0(Ω_1) = ε₀` as `(0,0)(1,1)` and `ψ_0(Ω_2)` as
   `(0,0)(1,1)(2,2)`, which is where the yaBMS table puts the Bachmann–Howard
@@ -420,7 +420,7 @@ What is left is one problem, and it is not a Lean problem.
   reaches single values without it — `rank_pairGen`, `rank_gen_eq_iSup`,
   `rank_succAll`, `rank_omegaAll` — but only where the expansions are already understood:
   the generators, the columns that have no parent, and the block repetitions
-  that `BMS/Append.lean` reaches. `(0,0)(1,1)(2,1)` is none of those — `m₀`
+  that `BMS/common/Append.lean` reaches. `(0,0)(1,1)(2,1)` is none of those — `m₀`
   is `1` there, so the copies are incremented — and `(0,0)(1,1)(2,0)` repeats
   `(1,1)`, which does not start a block and so carries no rank of its own.
   Where the rank does reach, the ordinal has a name as well: each of those
@@ -447,7 +447,7 @@ What is left is one problem, and it is not a Lean problem.
   cofinal for every countable standard form, the tower case included, and
   `RankVal.lean` that the rank of `exbOT` is `val`.
 - The one-row DBMS translation is not injective literally: a state of
-  `dbms 1` carries values outside its matrix. `Trans/DBMS/Tables.lean`
+  `dbms 1` carries values outside its matrix. `Trans/DBMS/ExBuchholz/Tables.lean`
   proves the counterexample and injectivity on the entries.
 - ω-Y with the expansion of Phyrion's Lean formalization (weak magma, no
   extraction) was re-proved by patterns of resemblance
@@ -540,7 +540,7 @@ What is left is one problem, and it is not a Lean problem.
   and an array also holds values outside its matrix, so two standard arrays
   can be one standard form. The author decided to state injectivity on the
   matrices.
-- `Trans/DBMS/OneRowL.lean` defines `dbmsL1`, one-row DBMS on the entries:
+- `Trans/DBMS/BMS/OneRowL.lean` defines `dbmsL1`, one-row DBMS on the entries:
   a state is the list of entries of a standard array, the step is `expandL`,
   and the empty list halts. `dbmsL1Std` names the generators `(0)(1)⋯(n)`.
   `dbmsToL1` maps the arrays onto it as a `StepHom` and keeps the rank and
@@ -552,37 +552,37 @@ What is left is one problem, and it is not a Lean problem.
   `dbmsHom_not_injective`) stays. It is a true statement about the
   representation `Arr 1`, not about the standard forms.
 - Five trio and pair items (2026-09-23, branch `feature/trio-pair`).
-  - The map of `Trio.lean` lands in the standard forms of three-row BMS for `α < ε₀` (`trioMatrix_std`, `Trans/BMS/TrioStd.lean`).
-  - It preserves and reflects the order and is injective (`omegaIndexMatrix_lt_iff`, `omegaIndexMatrix_injective`, `Trans/BMS/TrioMono.lean`). The cell extended Buchholz's ψ → trio sequences / injective became ✅.
-  - Rules 1–10 (`ε₀ ≤ α < Λ`) are transcribed (`Trans/BMS/TrioRules.lean`) and checked by 875 `#guard`s (`TrioRulesSheet.lean`). Of 813 rows, 28 non-standard rows are skipped; of the other 785, 744 agree with the table and 41 agree with the reference program but not with the table.
-  - Cofinality: koteitan/trio's `trio_cofinality` and its 16 dependency files are in `Trans/BMS/TrioCof/`, with a proved bridge to this library's BMS (`trio_cofinal`, `trioStd_cofinal`, `Trans/BMS/TrioCofinal.lean`).
-  - Pair sequences → extended Buchholz's ψ does not preserve expansion and does not commute with it (`Trans/PSS/Expansion.lean`, `pairToExb_not_preserves`, `pairToExb_not_commutes`). The counterexample is the generator `(0,0)(1,1)` with `[0]`.
-- DBMS `r` rows → `r + 1` rows is proved (2026-09-23, `Trans/DBMS/ZeroRow.lean`), with a proof that it is not surjective; the table cell is ✅✅✅✅❌✅(*3). Surjectivity of the BMS map can be refuted the same way (added to the plan).
-- Trio cofinality restated with the ψ terms (2026-09-23, `Trans/BMS/TrioCofPsi.lean`): two-way cofinal at a limit `α`; the successor case stays in the plan.
+  - The map of `Trio.lean` lands in the standard forms of three-row BMS for `α < ε₀` (`trioMatrix_std`, `Trans/BMS/ExBuchholz/Trio/TrioStd.lean`).
+  - It preserves and reflects the order and is injective (`omegaIndexMatrix_lt_iff`, `omegaIndexMatrix_injective`, `Trans/BMS/ExBuchholz/Trio/TrioMono.lean`). The cell extended Buchholz's ψ → trio sequences / injective became ✅.
+  - Rules 1–10 (`ε₀ ≤ α < Λ`) are transcribed (`Trans/BMS/ExBuchholz/Trio/TrioRules.lean`) and checked by 875 `#guard`s (`TrioRulesSheet.lean`). Of 813 rows, 28 non-standard rows are skipped; of the other 785, 744 agree with the table and 41 agree with the reference program but not with the table.
+  - Cofinality: koteitan/trio's `trio_cofinality` and its 16 dependency files are in `Trans/BMS/common/TrioCof/`, with a proved bridge to this library's BMS (`trio_cofinal`, `trioStd_cofinal`, `Trans/BMS/common/TrioCofinal.lean`).
+  - Pair sequences → extended Buchholz's ψ does not preserve expansion and does not commute with it (`Trans/BMS/ExBuchholz/PSS/Expansion.lean`, `pairToExb_not_preserves`, `pairToExb_not_commutes`). The counterexample is the generator `(0,0)(1,1)` with `[0]`.
+- DBMS `r` rows → `r + 1` rows is proved (2026-09-23, `Trans/DBMS/BMS/ZeroRow.lean`), with a proof that it is not surjective; the table cell is ✅✅✅✅❌✅(*3). Surjectivity of the BMS map can be refuted the same way (added to the plan).
+- Trio cofinality restated with the ψ terms (2026-09-23, `Trans/BMS/ExBuchholz/Trio/TrioCofPsi.lean`): two-way cofinal at a limit `α`; the successor case stays in the plan.
 - The transcription of rules 1–10 agrees with `trioMatrix` below `ε₀` for depth at most 201 (`TrioRulesE0.lean`). The derived `==` on `Ex` is opaque, so `predBeta` was rewritten with a pattern match (same behaviour). Fuel 200 fails on the tower of depth 203.
 - The 41 rows are decided (`TRIO-SHEET-41.md`): no transcription error; rules right on 17, table right on 22, 1 open, 1 out of scope.
 - BMS `r` rows → `r+1` rows is not surjective (`ZeroRowSurj.lean`); footnote (*4) in the table.
-- The translation of two-row DBMS into the ordinals, with all six properties (`Trans/DBMS/TwoRow.lean`); the README row is split into "DBMS with 2 rows" (all ✅) and "DBMS with 3 rows or more".
-- One pair-sequence step goes to one or more ψ steps (`Trans/PSS/Steps.lean`, `Goals/PairReach.lean`).
+- The translation of two-row DBMS into the ordinals, with all six properties (`Trans/DBMS/ExBuchholz/TwoRow.lean`); the README row is split into "DBMS with 2 rows" (all ✅) and "DBMS with 3 rows or more".
+- One pair-sequence step goes to one or more ψ steps (`Trans/BMS/ExBuchholz/PSS/Steps.lean`, `Goals/PairReach.lean`).
 - Trio cofinality at a successor (`TrioSucc.lean`), and rules 1–10 with depth fuel agreeing for every `α < ε₀` (`TrioRulesFuel.lean`), are proved (2026-09-23).
 - Rules 1–10 fixed in four places (`TrioRules2.lean`, 2026-09-23): the table's matrix on the 22 table-right rows, the other standard rows unchanged. The same fix is needed in koteitan/trio's `tools/probe_eps_range.py`.
 - Row 3480 decided (`TrioRow3480.lean`, 2026-09-23): the label is right, and both the table and the rules are wrong; the right matrix `c2` is proved standard in Lean.
-- The number of ψ steps for one pair step has no bound (`PSS/StepBound.lean`, `Goals/PairStepBound.lean`). The family found numerically uses `[2]`; the proved family uses `[0]`.
-- The DBMS rank is reduced, for every number of rows, to the ranks of the block contents (`DBMS/Blocks.lean`); at 3 rows the first generators are computed (`DBMS/ThreeRow.lean`). The content system `C_3` is not inside the 3-row BMS standard forms (yaBMS).
+- The number of ψ steps for one pair step has no bound (`BMS/ExBuchholz/PSS/StepBound.lean`, `Goals/PairStepBound.lean`). The family found numerically uses `[2]`; the proved family uses `[0]`.
+- The DBMS rank is reduced, for every number of rows, to the ranks of the block contents (`DBMS/BMS/Blocks.lean`); at 3 rows the first generators are computed (`DBMS/BMS/ThreeRow.lean`). The content system `C_3` is not inside the 3-row BMS standard forms (yaBMS).
 - On terms whose subscripts are 0 or 1, the trio map gives standard forms and preserves the order (`TrioTree*.lean`). Because of fuel 200, two terms at depths 206 and 207 get the same matrix. `ofTerm` reads `ψ_0(Ω+1)` as `ε₀^{ε₀^ω}`, which disagrees with the table's row for `ε₀·ω`.
 - Rows 4746, 4747, 4752 and 4753: the table is confirmed (`TrioSheet41Confirm.lean`). The printed label of row 3552 is fixed by Fix E (`TrioRules3.lean`). "lies above" in the 41-row note was wrong and is now "lies below".
-- The generators of the content system `C_3` are lifted BMS generators, and the conjecture that 3-row DBMS and BMS have the same ordinal is stated (`DBMS/ThreeRowLift.lean`); no counterexample on about 600 standard forms.
-- The necessary condition on standard lists of blocks is proved (`DBMS/BlocksStd.lean`); at 3 rows, on all 43597 lists of at most 8 columns, standard = contents lexicographically non-increasing.
+- The generators of the content system `C_3` are lifted BMS generators, and the conjecture that 3-row DBMS and BMS have the same ordinal is stated (`DBMS/BMS/ThreeRowLift.lean`); no counterexample on about 600 standard forms.
+- The necessary condition on standard lists of blocks is proved (`DBMS/BMS/BlocksStd.lean`); at 3 rows, on all 43597 lists of at most 8 columns, standard = contents lexicographically non-increasing.
 - Fix N (`TrioRulesNonLast.lean`): in the tower regimes a leaf that is not last is upgraded at once, which fixes the order of `Ω_{Ω_Ω}+Ω_{Ω_2}+1`. The rules now exist in four versions; merging them is added to the plan.
-- Standard lists of blocks are characterized for any number of rows by "each content reachable from the earlier ones" (`DBMS/BlocksSuff.lean`), without rank injectivity or the lexicographic order.
-- Reaching implies lexicographically `≤` for any number of rows (`DBMS/BlocksLex.lean`). "Standard ⟺ contents lexicographically non-increasing" is equivalent to `LexReach r` (the converse: lexicographically `≤` implies reaching), also to `ReachTotal r` and to `LexCof r`. At 3 rows, `LexCof 2` has no counterexample on 668746 pairs from 1157 contents.
+- Standard lists of blocks are characterized for any number of rows by "each content reachable from the earlier ones" (`DBMS/BMS/BlocksSuff.lean`), without rank injectivity or the lexicographic order.
+- Reaching implies lexicographically `≤` for any number of rows (`DBMS/BMS/BlocksLex.lean`). "Standard ⟺ contents lexicographically non-increasing" is equivalent to `LexReach r` (the converse: lexicographically `≤` implies reaching), also to `ReachTotal r` and to `LexCof r`. At 3 rows, `LexCof 2` has no counterexample on 668746 pairs from 1157 contents.
 - The rule versions are merged into `TrioRulesAll` (Fixes A–E and N); all existing checks pass. Fixes E and N both apply only on 8 hand-made probes, all standard.
-- One half of the 3-row DBMS = BMS conjecture is proved (`DBMS/ThreeRowLower.lean`): `rkL 2 (bgen3 n) ≤ rkL 2 (cgen 2 (n+2))`, so ord(3-row BMS) ≤ ord(3-row DBMS). When the last column is `(x,0,0)` the lift does not commute with expansion; `liftTail` handles it. For n = 2 a candidate map T3 (raise row 2 of column 1 from 0 to 1) sends content states to BMS standard forms and keeps the order on 11731 cases; `T3(lift(G[N])) = G[N+1]` holds for n = 1, 2 but fails for n = 3.
-- `LexReach r` is proved for every `r` (`DBMS/LexReachThree.lean`), without looking at the entries: `M[N+1]` reaches `M[N]`, so everything reached from one state is totally ordered by reaching (induction on rank), and the generators reach each other. Hence standard lists of blocks ⟺ contents in `C_{r+1}`, lexicographically non-increasing.
-- Fix `mul-normalize` (`BMS/TrioFixMulNormalize.lean`) is the first of the separate patches on `TrioRulesAll`. The derived `==` on `Ex` does not unfold in proofs, so the patch uses patterns. The Python program of koteitan/trio has the same `mul` and `power` and needs the same `mkExp` fix to stay equal to the Lean.
-- Fix `fuel` (`BMS/TrioFixFuel*.lean`): no rule changes, only the fuel. Two fuel-200 reads remain (`lvl` in `cmpAtomWith`, `cmpExp` in `add`); both are called only on atoms or constants (`lvl_atom`). Deep uncountable towers such as `Ω_{Ω_{…}}` at depth 150 do not finish computing, because the builder recomputes the same argument many times.
-- Fix L and Fix S (`BMS/TrioFixLastLeaf.lean`, `BMS/TrioFixStretch.lean`) are patches on `TrioRulesAll`. Fix L's case D and the leaf value `N(r)+1` of case K are supported by BMS expansions and the sheet, not derived. Fix S has a scope leak: the between-digit storey gate `!laidS` (line 276) also acts under an uncountable regime; the gate `!(laidS && (regime.bind lvlO).isNone)` gives the same matrices on 1,225 labels and 1,848 probes, to be applied at merge. `TrioFixLastLeafSheet` needs `LEANMAN_TIMEOUT=1500` for a check.
-- Fix `ofterm` (`BMS/TrioFixOfTerm.lean`) fixes only the reader. The counterexample to the order theorem is `α = ε_{ε₀} < β = ε_{ε₀^{ε₀^ω}}` with `M(β) < M(α)`; the fault is rule 1's `strip`, which writes `ω^{ε₀·ω}` as the tree of `ψ_0(ψ_0(Ω+1))` instead of `ψ_0(Ω+ψ_0(Ω+1))`. The identity `ψ_a(b_hi + b_lo) = ω^(P + b_lo)` is proved only for `ψ_0(Ω+t)`, `t < ε₁`, and needs the normal form in general (`ψ_0(Ω+ε₁+1) = ε₁`).
-- `DBMS/ThreeRowUpperRefute.lean`: `C₀ = (0,0,0)(1,1,0)(2,2,1)(3,1,0)` is reached from `cgen 2 4`, and `t3 (C₀[1])` is not trio-standard, because the inner block `(3,0,0)(4,1,0)(5,2,1)` is also a lifted form that `t3` does not raise. The rank still goes down there, through a trio-standard `a` with `(t3 C₁)[k] = a[k+1]`.
+- One half of the 3-row DBMS = BMS conjecture is proved (`DBMS/BMS/ThreeRowLower.lean`): `rkL 2 (bgen3 n) ≤ rkL 2 (cgen 2 (n+2))`, so ord(3-row BMS) ≤ ord(3-row DBMS). When the last column is `(x,0,0)` the lift does not commute with expansion; `liftTail` handles it. For n = 2 a candidate map T3 (raise row 2 of column 1 from 0 to 1) sends content states to BMS standard forms and keeps the order on 11731 cases; `T3(lift(G[N])) = G[N+1]` holds for n = 1, 2 but fails for n = 3.
+- `LexReach r` is proved for every `r` (`DBMS/BMS/LexReachThree.lean`), without looking at the entries: `M[N+1]` reaches `M[N]`, so everything reached from one state is totally ordered by reaching (induction on rank), and the generators reach each other. Hence standard lists of blocks ⟺ contents in `C_{r+1}`, lexicographically non-increasing.
+- Fix `mul-normalize` (`BMS/ExBuchholz/Trio/TrioFixMulNormalize.lean`) is the first of the separate patches on `TrioRulesAll`. The derived `==` on `Ex` does not unfold in proofs, so the patch uses patterns. The Python program of koteitan/trio has the same `mul` and `power` and needs the same `mkExp` fix to stay equal to the Lean.
+- Fix `fuel` (`BMS/ExBuchholz/Trio/TrioFixFuel*.lean`): no rule changes, only the fuel. Two fuel-200 reads remain (`lvl` in `cmpAtomWith`, `cmpExp` in `add`); both are called only on atoms or constants (`lvl_atom`). Deep uncountable towers such as `Ω_{Ω_{…}}` at depth 150 do not finish computing, because the builder recomputes the same argument many times.
+- Fix L and Fix S (`BMS/ExBuchholz/Trio/TrioFixLastLeaf.lean`, `BMS/ExBuchholz/Trio/TrioFixStretch.lean`) are patches on `TrioRulesAll`. Fix L's case D and the leaf value `N(r)+1` of case K are supported by BMS expansions and the sheet, not derived. Fix S has a scope leak: the between-digit storey gate `!laidS` (line 276) also acts under an uncountable regime; the gate `!(laidS && (regime.bind lvlO).isNone)` gives the same matrices on 1,225 labels and 1,848 probes, to be applied at merge. `TrioFixLastLeafSheet` needs `LEANMAN_TIMEOUT=1500` for a check.
+- Fix `ofterm` (`BMS/ExBuchholz/Trio/TrioFixOfTerm.lean`) fixes only the reader. The counterexample to the order theorem is `α = ε_{ε₀} < β = ε_{ε₀^{ε₀^ω}}` with `M(β) < M(α)`; the fault is rule 1's `strip`, which writes `ω^{ε₀·ω}` as the tree of `ψ_0(ψ_0(Ω+1))` instead of `ψ_0(Ω+ψ_0(Ω+1))`. The identity `ψ_a(b_hi + b_lo) = ω^(P + b_lo)` is proved only for `ψ_0(Ω+t)`, `t < ε₁`, and needs the normal form in general (`ψ_0(Ω+ε₁+1) = ε₁`).
+- `DBMS/BMS/ThreeRowUpperRefute.lean`: `C₀ = (0,0,0)(1,1,0)(2,2,1)(3,1,0)` is reached from `cgen 2 4`, and `t3 (C₀[1])` is not trio-standard, because the inner block `(3,0,0)(4,1,0)(5,2,1)` is also a lifted form that `t3` does not raise. The rank still goes down there, through a trio-standard `a` with `(t3 C₁)[k] = a[k+1]`.
 - Heavy sheet files (minutes each) go to the separate library `GoogologySheets` (root `GoogologySheets.lean`), which is not a default target: with many agents checking at once, a default build that runs them holds the exclusive lock for an hour. Their verification is the `leanman check` of each file. The first ones are the `TrioFixStripSheet*` files.
-- DBMS n = 2 (`DBMS/ThreeRowUpperNC*.lean`, `ThreeRowUpperRP*.lean`): the last open statement `T3nPushStd` is about trio-standardness. The paths from `t3n C` to `t3n (pushL C y)` take up to 119 expansion steps with no common shape, and the library characterizes `TrioStdL` only as the set reached from the generators; a proof likely needs a theory of which 3-row matrices are trio-standard.
+- DBMS n = 2 (`DBMS/BMS/ThreeRowUpperNC*.lean`, `ThreeRowUpperRP*.lean`): the last open statement `T3nPushStd` is about trio-standardness. The paths from `t3n C` to `t3n (pushL C y)` take up to 119 expansion steps with no common shape, and the library characterizes `TrioStdL` only as the set reached from the generators; a proof likely needs a theory of which 3-row matrices are trio-standard.

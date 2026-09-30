@@ -209,11 +209,11 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
    「行列が名指す順序数」と読んでよい。両方が定義されているところで一致している。
    DBMS の 1 行は同じ系なので、同じ二つの主張が成り立つ。さらに 2 行の順序数が
    一つ出る。`rank_pairGen` は生成元 `(0,0)(1,1)` の階数が `e0` だと言う。これは 0 の行
-   が付いた 1 行の行列へ展開し、`BMS/Embed.lean` がその順序数をそのまま運ぶからである。
+   が付いた 1 行の行列へ展開し、`BMS/common/Embed.lean` がその順序数をそのまま運ぶからである。
    つまりペア数列系は原始数列系が終わる所から始まる。2 行の読み取りは無いままで
    そう言える。`rank_gen_eq_iSup` はこれをどの行数でも言う。`r + 2` 行の生成元の階数は
    `r + 1` 行の生成元たちの階数の極限である。言えないのは `(0,0)(1,1)(2,2)` 以降の
-   生成元の階数で、そちらの展開は 0 の行を持つ行列にならない。`BMS/Append.lean` が
+   生成元の階数で、そちらの展開は 0 の行を持つ行列にならない。`BMS/common/Append.lean` が
    加法の構造を足す。展開は行 `0` の成分が `0` の列を越えて戻らないので、階数はその
    ブロックについて加法的である（`rank_appendState`）。ブロックの `n` 個並びは階数が
    `n` 倍になる。もう半分が `expandRL_of_m0_zero` である。`m₀ = 0` なら展開は固定
@@ -248,21 +248,21 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
    終わるところから始まる。`(0)(1)…(n)` は `w↑↑n` で上限 `e0 = p0(W)`、それが
    `(0,0)(1,1)` である。そして `(0,0,0)(1,1,1) = p0(W_w)` である。だから 2 行の
    読み取りは `p0` と `p1` だけでなく、有限の添字すべてで `p` を使う必要がある。
-   3 行以上は未解決なので、次の目標は `r = 2` である。最初の部分はできている。`BMS/Rows.lean` が行数によらず
-   bad root を確定させ、`BMS/TwoRow.lean` が 2 行の列写像を読み出す。`m₀` は 0 か
+   3 行以上は未解決なので、次の目標は `r = 2` である。最初の部分はできている。`BMS/common/Rows.lean` が行数によらず
+   bad root を確定させ、`BMS/common/TwoRow.lean` が 2 行の列写像を読み出す。`m₀` は 0 か
    1 で、1 のとき、bad part での位置が bad root の行 0 祖先である列について行 0 に
-   加算が入る。`BMS/Anc.lean` がその祖先関係を成分列の上で与え、計算できる形にする。
-   そして `BMS/Entries2.lean` が二つを合わせる。`expand2L` が規則全体を成分列の上に
+   加算が入る。`BMS/common/Anc.lean` がその祖先関係を成分列の上で与え、計算できる形にする。
+   そして `BMS/common/Entries2.lean` が二つを合わせる。`expand2L` が規則全体を成分列の上に
    書いたもので、`entries2_expand` がそれは `BM4.expand` だと言う。実際に動き、
    長さ 4 以下、成分 3 未満の 2 行行列すべて（標準形 46 個、展開 138 通り）で参照実装と
-   一致する（`test/TransCheck.lean`）。`BMS/Pair.lean` がそれを生成元付きの `Rewrite`
-   として包み、停止性を運ぶ。`BMS/EntriesR.lean` は**任意の行数**で同じことをする。
+   一致する（`test/TransCheck.lean`）。`BMS/common/Pair.lean` がそれを生成元付きの `Rewrite`
+   として包み、停止性を運ぶ。`BMS/common/EntriesR.lean` は**任意の行数**で同じことをする。
    どの行でも `parent A k` と `anc A k` を与え、`expandRL` と `entriesR_expand` を
    出す。だから BMS の展開はどれも走る。配列の形は走らない。3 行では、長さ 3 以下・
    成分 3 未満の標準行列 24 個の展開 72 通りすべてで参照実装と一致する。
-   `BMS/Agree.lean` が三つの規則を結ぶ。1 行と 2 行での `expandRL` は `expandL` と
+   `BMS/common/Agree.lean` が三つの規則を結ぶ。1 行と 2 行での `expandRL` は `expandL` と
    `expand2L` である。そして一般の規則を `bmsL r` として包み、`bmsL_terminates` と
-   `bmsLStd` を付ける。`BMS/Same.lean` が系どうしを結ぶ。`bmsL 0` は `prim`、
+   `bmsLStd` を付ける。`BMS/common/Same.lean` が系どうしを結ぶ。`bmsL 0` は `prim`、
    `bmsL 1` は `pairL` で、いずれも `Equiv` である。
 
    つまり 2 行の機械的な部分は終わっている。残っているのは読み取りで、これは機械的な
@@ -307,7 +307,7 @@ val は OT 上で狭義単調:  x < y → OT x → OT y → val x < val y
 形は互いに同じものだと証明されている。1 行は順序数まで両方向で決着し、同値にも
 なっている。
 
-階層も決着した。`BMS/ZeroRow.lean` が、下に 0 の行を足しても規則は何も変わらない
+階層も決着した。`BMS/common/ZeroRow.lean` が、下に 0 の行を足しても規則は何も変わらない
 ことを行数によらず言う。`r + 2` 行の生成元 `(0,…,0)(1,…,1)` を `N` で展開すると
 `r + 1` 行の生成元に 0 の行が付いたものになるので、`bmsL r` は `bmsL (r + 1)` の
 中に入る。繰り返せば `s ≥ r` なるどの `s` についても `bmsL s` の中に入り、全行列の
@@ -354,7 +354,7 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
   [アルゴリズム頁](https://github.com/koteitan/trio/blob/main/ebp2bms/algorithm/1/README-en.md)
   に書き下ろしており、値は
   [対応表](https://github.com/koteitan/trio/blob/main/ebp2bms/sheet/1/README-en.md)
-  にある。`Trans/BMS/Trio.lean` がその `a < e0` の側を `omegaIndexMatrix` として転記し、
+  にある。`Trans/BMS/ExBuchholz/Trio/Trio.lean` がその `a < e0` の側を `omegaIndexMatrix` として転記し、
   対応表の 20 行で検算してある。`p0(W_1) = e0` が `(0,0)(1,1)`、`p0(W_2)` が
   `(0,0)(1,1)(2,2)` で、後者は yaBMS の表が Bachmann–Howard 順序数を置く場所でもある。
   これは転記と `#guard` であって定理ではない。ただし出力の形だけは定理にしてある。
@@ -370,7 +370,7 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
 
   読み取りが無い間は、階数なら個別の値には届く（`rank_pairGen`、
   `rank_gen_eq_iSup`、`rank_succAll`、`rank_omegaAll`）。ただし展開がすでに分かって
-  いる所に限る。生成元、親を持たない列、それに `BMS/Append.lean` が届くブロックの
+  いる所に限る。生成元、親を持たない列、それに `BMS/common/Append.lean` が届くブロックの
   繰り返しである。`(0,0)(1,1)(2,1)` はそのどれでもない。そこは `m₀ = 1` なので各
   コピーに加算が付く。`(0,0)(1,1)(2,0)` は繰り返しだが、繰り返すのが `(1,1)` で、
   ブロックで始まらない部分は自分の階数を持たない。階数が届く所では、その順序数に
@@ -394,7 +394,7 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
 - `Notation/ExBuchholz/Cofinal.lean` が、塔の場合も含めて、どの可算標準形でも基本列が
   共終であることを証明し、`RankVal.lean` が `exbOT` の階数は `val` だと証明する。
 - 1 行の DBMS の翻訳写像は、文字どおりには単射でない。`dbms 1` の状態は行列の外にも
-  値を持つからである。`Trans/DBMS/Tables.lean` が反例と、成分の上での単射性を証明する。
+  値を持つからである。`Trans/DBMS/ExBuchholz/Tables.lean` が反例と、成分の上での単射性を証明する。
 - Phyrion 氏の Lean と同じ展開（weak magma、no extraction）の ω-Y を、patterns of
   resemblance で再証明した（[koteitan/wmwy-wo-por](https://github.com/koteitan/wmwy-wo-por)、
   2026-09-23）。これは公式の ω-Y とは別の数列システム（weak-magma ω-Y）として扱う。
@@ -477,7 +477,7 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
 - DBMS の標準形は行列そのものである。`dbms 1` の状態は配列で、配列は行列の外の値も
   持つ。そのため二つの標準な配列が、一つの標準形になることがある。作者は、単射性を
   行列の上で述べることに決めた。
-- `Trans/DBMS/OneRowL.lean` で、成分の上の 1 行の DBMS `dbmsL1` を定義した。状態は
+- `Trans/DBMS/BMS/OneRowL.lean` で、成分の上の 1 行の DBMS `dbmsL1` を定義した。状態は
   標準な配列の成分の列、展開は `expandL`、空の列で停止する。`dbmsL1Std` は生成元
   `(0)(1)⋯(n)` を与える。`dbmsToL1` は配列からこの系への `StepHom` で、階数と順序数を
   保つ。`dbmsL1EquivPrim` は、この系が原始数列の系そのものであることを言う。
@@ -487,37 +487,37 @@ Buchholz の補題（`Term.G_lt_of_mem_CSet`）が得られる。これが「`M(
 - 配列の上の反例（`dbmsOrdEval_not_injective`、`dbmsHom_not_injective`）は残した。
   これは表し方 `Arr 1` についての正しい命題で、標準形についての命題ではない。
 - トリオとペアの 5 項目（2026-09-23、branch `feature/trio-pair`）。
-  - `Trio.lean` の写像は、`a < e0` で 3 行の BMS の標準形に入る（`trioMatrix_std`、`Trans/BMS/TrioStd.lean`）。
-  - 順序を保ち、順序を反映し、単射である（`omegaIndexMatrix_lt_iff`、`omegaIndexMatrix_injective`、`Trans/BMS/TrioMono.lean`）。表の「拡張ブーフホルツ ψ → トリオ数列」の単射性が ✅ になった。
-  - 規則 1〜10（`e0 <= a < Λ`）を書き起こした（`Trans/BMS/TrioRules.lean`）。`#guard` 875 個で照合した（`TrioRulesSheet.lean`）。813 行のうち、標準形でない 28 行を除く 785 行で、744 行が対応表と一致し、41 行は参照プログラムの出力と一致するが対応表とは違う。
-  - 共終性：koteitan/trio の `trio_cofinality` とその依存 16 ファイルを `Trans/BMS/TrioCof/` に移し、この文庫の BMS への橋を証明した（`trio_cofinal`、`trioStd_cofinal`、`Trans/BMS/TrioCofinal.lean`）。
-  - ペア数列 → 拡張ブーフホルツ ψ の「展開を保つ」「展開と可換」は偽（`Trans/PSS/Expansion.lean`、`pairToExb_not_preserves`、`pairToExb_not_commutes`）。反例は生成元 `(0,0)(1,1)` の `[0]`。
-- DBMS の `r` 行 → `r + 1` 行を証明した（2026-09-23、`Trans/DBMS/ZeroRow.lean`）。全射でないことも証明し、表のマスは ✅✅✅✅❌✅(*3)。BMS の同じ写像の全射性も同じ方法で反証できると分かった（plan に追加）。
-- トリオの共終性を ψ の項の側で述べ直した（2026-09-23、`Trans/BMS/TrioCofPsi.lean`）。極限の `a` では両方向に共終。後続の `a` は plan に残した。
+  - `Trio.lean` の写像は、`a < e0` で 3 行の BMS の標準形に入る（`trioMatrix_std`、`Trans/BMS/ExBuchholz/Trio/TrioStd.lean`）。
+  - 順序を保ち、順序を反映し、単射である（`omegaIndexMatrix_lt_iff`、`omegaIndexMatrix_injective`、`Trans/BMS/ExBuchholz/Trio/TrioMono.lean`）。表の「拡張ブーフホルツ ψ → トリオ数列」の単射性が ✅ になった。
+  - 規則 1〜10（`e0 <= a < Λ`）を書き起こした（`Trans/BMS/ExBuchholz/Trio/TrioRules.lean`）。`#guard` 875 個で照合した（`TrioRulesSheet.lean`）。813 行のうち、標準形でない 28 行を除く 785 行で、744 行が対応表と一致し、41 行は参照プログラムの出力と一致するが対応表とは違う。
+  - 共終性：koteitan/trio の `trio_cofinality` とその依存 16 ファイルを `Trans/BMS/common/TrioCof/` に移し、この文庫の BMS への橋を証明した（`trio_cofinal`、`trioStd_cofinal`、`Trans/BMS/common/TrioCofinal.lean`）。
+  - ペア数列 → 拡張ブーフホルツ ψ の「展開を保つ」「展開と可換」は偽（`Trans/BMS/ExBuchholz/PSS/Expansion.lean`、`pairToExb_not_preserves`、`pairToExb_not_commutes`）。反例は生成元 `(0,0)(1,1)` の `[0]`。
+- DBMS の `r` 行 → `r + 1` 行を証明した（2026-09-23、`Trans/DBMS/BMS/ZeroRow.lean`）。全射でないことも証明し、表のマスは ✅✅✅✅❌✅(*3)。BMS の同じ写像の全射性も同じ方法で反証できると分かった（plan に追加）。
+- トリオの共終性を ψ の項の側で述べ直した（2026-09-23、`Trans/BMS/ExBuchholz/Trio/TrioCofPsi.lean`）。極限の `a` では両方向に共終。後続の `a` は plan に残した。
 - 規則 1〜10 の書き起こしが `e0` 未満で `trioMatrix` と一致することを、深さ 201 以下で証明した（`TrioRulesE0.lean`）。導出された `==` が不透明で証明できなかったので、`predBeta` をパターン照合で書き直した（動作は同じ）。燃料 200 では深さ 203 の塔で食い違う。
 - 41 行を判定した（`TRIO-SHEET-41-ja.md`）。書き起こしの誤りは無い。規則が正しい 17 行、表が正しい 22 行、未決 1、対象外 1。
 - BMS の `r` 行 → `r+1` 行が全射でないことを証明した（`ZeroRowSurj.lean`）。表のマスに注 (*4)。
-- 2 行の DBMS の順序数への翻訳写像を作り、6 つの性質を全部証明した（`Trans/DBMS/TwoRow.lean`）。README の行を「2 行の DBMS」（全部 ✅）と「3 行以上の DBMS」に分けた。
-- ペア数列の 1 手は ψ の側の 1 手以上に写ることを証明した（`Trans/PSS/Steps.lean`、`Goals/PairReach.lean`）。
+- 2 行の DBMS の順序数への翻訳写像を作り、6 つの性質を全部証明した（`Trans/DBMS/ExBuchholz/TwoRow.lean`）。README の行を「2 行の DBMS」（全部 ✅）と「3 行以上の DBMS」に分けた。
+- ペア数列の 1 手は ψ の側の 1 手以上に写ることを証明した（`Trans/BMS/ExBuchholz/PSS/Steps.lean`、`Goals/PairReach.lean`）。
 - トリオの後続の場合の共終性（`TrioSucc.lean`）と、燃料を深さで与えた規則 1〜10 がすべての `a < e0` で一致すること（`TrioRulesFuel.lean`）を証明した（2026-09-23）。
 - 規則 1〜10 を 4 か所直した（`TrioRules2.lean`、2026-09-23）。表が正しい 22 行で表の行列を出し、ほかの標準形の行は変えない。koteitan/trio の `tools/probe_eps_range.py` にも同じ修正が要る。
 - 行 3480 を判定した（`TrioRow3480.lean`、2026-09-23）。ラベルは正しく、表も規則も誤り。正しい行列 `c2` は標準形であることを Lean で証明した。
-- ペア数列の 1 手が写る ψ の手数に上限が無いことを証明した（`PSS/StepBound.lean`、`Goals/PairStepBound.lean`）。数値で見つけた族は `[2]` の展開、証明した族は `[0]` の展開で、別の族である。
-- DBMS の階数を、何行でもブロックの中身の階数に帰着した（`DBMS/Blocks.lean`）。3 行では最初の生成元まで求めた（`DBMS/ThreeRow.lean`）。中身の系 `C_3` は 3 行の BMS の標準形に含まれない（yaBMS）。
+- ペア数列の 1 手が写る ψ の手数に上限が無いことを証明した（`BMS/ExBuchholz/PSS/StepBound.lean`、`Goals/PairStepBound.lean`）。数値で見つけた族は `[2]` の展開、証明した族は `[0]` の展開で、別の族である。
+- DBMS の階数を、何行でもブロックの中身の階数に帰着した（`DBMS/BMS/Blocks.lean`）。3 行では最初の生成元まで求めた（`DBMS/BMS/ThreeRow.lean`）。中身の系 `C_3` は 3 行の BMS の標準形に含まれない（yaBMS）。
 - 添字が 0 か 1 だけの項で、トリオの写像が標準形を出し順序を保つことを証明した（`TrioTree*.lean`）。規則の燃料 200 のため、深さ 206 と 207 の二つの項が同じ行列になる。`ofTerm` は `p0(W+1)` を `e0^{e0^w}` と読み、表の `e0·w` の行と合わない。
 - 行 4746、4747、4752、4753 で表が正しいことを確かめた（`TrioSheet41Confirm.lean`）。行 3552 の書かれたラベルの行列を修正 E で直した（`TrioRules3.lean`）。41 行のノートの「より上に来る」は誤りで、「より下に来る」に直した。
-- 中身の系 `C_3` の生成元が BMS の生成元の持ち上げであることを証明し、3 行の DBMS と BMS が同じ順序数になるという予想を立てた（`DBMS/ThreeRowLift.lean`）。数値では約 600 個の標準形で反例なし。
-- 標準形のブロックの並びの必要条件を証明した（`DBMS/BlocksStd.lean`）。3 行で 8 列以下の 43597 通りでは、標準形と「中身が辞書式に減る」が一致した。
+- 中身の系 `C_3` の生成元が BMS の生成元の持ち上げであることを証明し、3 行の DBMS と BMS が同じ順序数になるという予想を立てた（`DBMS/BMS/ThreeRowLift.lean`）。数値では約 600 個の標準形で反例なし。
+- 標準形のブロックの並びの必要条件を証明した（`DBMS/BMS/BlocksStd.lean`）。3 行で 8 列以下の 43597 通りでは、標準形と「中身が辞書式に減る」が一致した。
 - 修正 N（`TrioRulesNonLast.lean`）：塔の範囲で最後でない葉をすぐに格上げし、`W_{W_W}+W_{W_2}+1` の順序を直した。規則の版が 4 つになったので、まとめる項目を plan に足した。
-- 標準形のブロックの並びを、何行でも「中身が前から順に届き合う」で特徴づけた（`DBMS/BlocksSuff.lean`）。階数の単射性も辞書式順序も使わない。
-- 何行でも、届けば辞書式に `≤`（`DBMS/BlocksLex.lean`）。「標準形 ⟺ 中身が辞書式に増えない」は `LexReach r`（逆向き：辞書式に `≤` なら届く）と同値で、`ReachTotal r`、`LexCof r` とも同値。3 行では `LexCof 2` に 1157 個の中身の 668746 組で反例なし。
+- 標準形のブロックの並びを、何行でも「中身が前から順に届き合う」で特徴づけた（`DBMS/BMS/BlocksSuff.lean`）。階数の単射性も辞書式順序も使わない。
+- 何行でも、届けば辞書式に `≤`（`DBMS/BMS/BlocksLex.lean`）。「標準形 ⟺ 中身が辞書式に増えない」は `LexReach r`（逆向き：辞書式に `≤` なら届く）と同値で、`ReachTotal r`、`LexCof r` とも同値。3 行では `LexCof 2` に 1157 個の中身の 668746 組で反例なし。
 - 規則の版を `TrioRulesAll` にまとめた（修正 A〜E と N）。既存の検査はすべて通る。修正 E と N が両方効くのは手作りの 8 個だけで、どれも標準形。
-- 3 行の DBMS = BMS の予想の半分を証明した（`DBMS/ThreeRowLower.lean`）。`rkL 2 (bgen3 n) ≤ rkL 2 (cgen 2 (n+2))` なので、3 行の BMS の順序数 ≤ 3 行の DBMS の順序数。最後の列が `(x,0,0)` のときは持ち上げと展開が可換でないので、`liftTail` で扱う。n = 2 では、候補の写像 T3（列 1 の行 2 を 0 から 1 にする）が中身を BMS の標準形に送り、11731 例で順序を保つ。`T3(lift(G[N])) = G[N+1]` は n = 1, 2 で成り立ち、n = 3 では成り立たない。
-- `LexReach r` をすべての `r` で証明した（`DBMS/LexReachThree.lean`）。成分は見ない。`M[N+1]` は `M[N]` に届くので、1 つの状態から届くものは「届く」で全順序になり（階数の帰納法）、生成元どうしも届き合う。よって標準形のブロックの並び ⟺ 中身が `C_{r+1}` にあり、辞書式に増えない。
-- 修正 `mul-normalize`（`BMS/TrioFixMulNormalize.lean`）は、`TrioRulesAll` への別々の修正の 1 つ目。`Ex` の導出された `==` は証明の中で展開できないので、パターンを使う。koteitan/trio の Python のプログラムも同じ `mul` と `power` を持つので、Lean と同じに保つには同じ `mkExp` の修正が要る。
-- 修正 `fuel`（`BMS/TrioFixFuel*.lean`）は規則を変えず、燃料だけを変える。燃料 200 を読む所が 2 つ残る（`cmpAtomWith` の中の `lvl`、`add` の中の `cmpExp`）が、どちらも原子か定数にしか呼ばれない（`lvl_atom`）。深さ 150 の `W_{W_{…}}` のような深い非可算の塔は、組み立てが同じ引数を何度も計算し直すので計算が終わらない。
-- Fix L と Fix S（`BMS/TrioFixLastLeaf.lean`、`BMS/TrioFixStretch.lean`）は `TrioRulesAll` への修正。Fix L の場合 D と、場合 K の葉の値 `N(r)+1` は、BMS の展開とシートで裏付けただけで、導出していない。Fix S には範囲の漏れがある。桁の間の階の判定 `!laidS`（276 行目）は非可算のレジームでも働く。判定を `!(laidS && (regime.bind lvlO).isNone)` にしても 1,225 ラベルと 1,848 個の試しで行列は同じなので、まとめるときに直す。`TrioFixLastLeafSheet` の check には `LEANMAN_TIMEOUT=1500` が要る。
-- 修正 `ofterm`（`BMS/TrioFixOfTerm.lean`）は読み方だけを直す。順序の定理の反例は `a = e_{e0} < b = e_{e0^{e0^w}}` で、`M(b) < M(a)`。原因は規則 1 の `strip` で、`w^{e0·w}` を `p0(W+p0(W+1))` ではなく `p0(p0(W+1))` の木として書く。式 `p_a(b_hi + b_lo) = w^(P + b_lo)` は `p0(W+t)`、`t < e1` でだけ証明した。一般には標準形であることが要る（`p0(W+e1+1) = e1`）。
-- `DBMS/ThreeRowUpperRefute.lean`：`C₀ = (0,0,0)(1,1,0)(2,2,1)(3,1,0)` は `cgen 2 4` から届き、`t3 (C₀[1])` はトリオの標準形でない。内側のブロック `(3,0,0)(4,1,0)(5,2,1)` も持ち上げた形だが、`t3` はそれを上げないため。それでも階数は下がる。トリオの標準形 `a` で `(t3 C₁)[k] = a[k+1]` となるものを通る。
+- 3 行の DBMS = BMS の予想の半分を証明した（`DBMS/BMS/ThreeRowLower.lean`）。`rkL 2 (bgen3 n) ≤ rkL 2 (cgen 2 (n+2))` なので、3 行の BMS の順序数 ≤ 3 行の DBMS の順序数。最後の列が `(x,0,0)` のときは持ち上げと展開が可換でないので、`liftTail` で扱う。n = 2 では、候補の写像 T3（列 1 の行 2 を 0 から 1 にする）が中身を BMS の標準形に送り、11731 例で順序を保つ。`T3(lift(G[N])) = G[N+1]` は n = 1, 2 で成り立ち、n = 3 では成り立たない。
+- `LexReach r` をすべての `r` で証明した（`DBMS/BMS/LexReachThree.lean`）。成分は見ない。`M[N+1]` は `M[N]` に届くので、1 つの状態から届くものは「届く」で全順序になり（階数の帰納法）、生成元どうしも届き合う。よって標準形のブロックの並び ⟺ 中身が `C_{r+1}` にあり、辞書式に増えない。
+- 修正 `mul-normalize`（`BMS/ExBuchholz/Trio/TrioFixMulNormalize.lean`）は、`TrioRulesAll` への別々の修正の 1 つ目。`Ex` の導出された `==` は証明の中で展開できないので、パターンを使う。koteitan/trio の Python のプログラムも同じ `mul` と `power` を持つので、Lean と同じに保つには同じ `mkExp` の修正が要る。
+- 修正 `fuel`（`BMS/ExBuchholz/Trio/TrioFixFuel*.lean`）は規則を変えず、燃料だけを変える。燃料 200 を読む所が 2 つ残る（`cmpAtomWith` の中の `lvl`、`add` の中の `cmpExp`）が、どちらも原子か定数にしか呼ばれない（`lvl_atom`）。深さ 150 の `W_{W_{…}}` のような深い非可算の塔は、組み立てが同じ引数を何度も計算し直すので計算が終わらない。
+- Fix L と Fix S（`BMS/ExBuchholz/Trio/TrioFixLastLeaf.lean`、`BMS/ExBuchholz/Trio/TrioFixStretch.lean`）は `TrioRulesAll` への修正。Fix L の場合 D と、場合 K の葉の値 `N(r)+1` は、BMS の展開とシートで裏付けただけで、導出していない。Fix S には範囲の漏れがある。桁の間の階の判定 `!laidS`（276 行目）は非可算のレジームでも働く。判定を `!(laidS && (regime.bind lvlO).isNone)` にしても 1,225 ラベルと 1,848 個の試しで行列は同じなので、まとめるときに直す。`TrioFixLastLeafSheet` の check には `LEANMAN_TIMEOUT=1500` が要る。
+- 修正 `ofterm`（`BMS/ExBuchholz/Trio/TrioFixOfTerm.lean`）は読み方だけを直す。順序の定理の反例は `a = e_{e0} < b = e_{e0^{e0^w}}` で、`M(b) < M(a)`。原因は規則 1 の `strip` で、`w^{e0·w}` を `p0(W+p0(W+1))` ではなく `p0(p0(W+1))` の木として書く。式 `p_a(b_hi + b_lo) = w^(P + b_lo)` は `p0(W+t)`、`t < e1` でだけ証明した。一般には標準形であることが要る（`p0(W+e1+1) = e1`）。
+- `DBMS/BMS/ThreeRowUpperRefute.lean`：`C₀ = (0,0,0)(1,1,0)(2,2,1)(3,1,0)` は `cgen 2 4` から届き、`t3 (C₀[1])` はトリオの標準形でない。内側のブロック `(3,0,0)(4,1,0)(5,2,1)` も持ち上げた形だが、`t3` はそれを上げないため。それでも階数は下がる。トリオの標準形 `a` で `(t3 C₁)[k] = a[k+1]` となるものを通る。
 - 重い Sheet のファイル（1 本に数分）は、既定の対象でない別のライブラリ `GoogologySheets`（根は `GoogologySheets.lean`）に入れる。多くのエージェントが同時に check していると、それを走らせる既定の build は排他の lock を 1 時間握ってしまうため。検証は各ファイルの `leanman check` で行う。最初に入れたのは `TrioFixStripSheet*` のファイル。
-- DBMS の n = 2（`DBMS/ThreeRowUpperNC*.lean`、`ThreeRowUpperRP*.lean`）：最後に残った `T3nPushStd` はトリオの標準形についての命題。`t3n C` から `t3n (pushL C y)` への道は最長 119 手の展開で、共通の形が無い。ライブラリは `TrioStdL` を生成元から届く集合としてしか持たないので、証明には「3 行のどの行列がトリオの標準形か」の理論が要りそうである。
+- DBMS の n = 2（`DBMS/BMS/ThreeRowUpperNC*.lean`、`ThreeRowUpperRP*.lean`）：最後に残った `T3nPushStd` はトリオの標準形についての命題。`t3n C` から `t3n (pushL C y)` への道は最長 119 手の展開で、共通の形が無い。ライブラリは `TrioStdL` を生成元から届く集合としてしか持たないので、証明には「3 行のどの行列がトリオの標準形か」の理論が要りそうである。

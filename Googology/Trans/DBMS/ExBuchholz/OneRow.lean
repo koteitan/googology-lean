@@ -1,0 +1,147 @@
+import Googology.Trans.BMS.ExBuchholz.RankVal
+import Googology.Notation.DBMS
+
+/-!
+# One-row DBMS
+
+With one row a DBMS generator is a BM4 generator: `(dstair 1 n).col i 0` is
+`i - 0`, which is `i`.  Expansion is the same rule in both systems, so
+everything `Trans/BMS/Bms.lean` proves about `Notation.BMS.bms 1` holds of
+`Notation.DBMS.dbms 1`, by the same induction with `DStd` in place of `Std`.
+
+So one-row DBMS names the same ordinals as one-row BMS — both through
+`read ∘ entries` — and terminates.  `exists_dbms_of_lt_eps0` says which
+ordinals those are: exactly the ones below `ε₀`, the same statement
+`Trans/BMS/Eps0.lean` makes for BMS.  With two rows or more the generators
+differ and none of this applies.
+-/
+
+namespace Googology.Trans.DBMS
+
+open BM4
+open Googology.Notation.DBMS
+open Googology.Trans.BMS
+open Googology.Notation.ExBuchholz
+open Googology.Notation.ExBuchholz.Term
+
+/-- With one row the DBMS generator is `(0)(1)⋯(n)`, as in BM4. -/
+theorem entries_dstair (n : Nat) : entries (dstair 1 n) = List.range (n + 1) := by
+  rw [entries, dstair_len]
+  exact List.map_id _
+
+/-- **Every standard one-row DBMS matrix is a matrix whose term is a standard
+form.** -/
+theorem dstd_entries : ∀ A : Arr 1, DStd 1 A →
+    Col 0 (entries A) ∧ OT (read 0 (entries A)) := by
+  intro A h
+  induction h with
+  | init n => rw [entries_dstair]; exact ⟨col_range n, OT_read_range n⟩
+  | step N _ ih =>
+    rw [entries_expand' _ N ih.1]
+    exact prim_step_ok ⟨_, ih⟩ N
+
+/-- A standard one-row DBMS matrix, as a state of the primitive sequence
+system. -/
+def toEntries (A : (dbms 1).State) : PrimState := ⟨entries A.1, dstd_entries A.1 A.2⟩
+
+/-- **Reading the entries is a translation** from one-row DBMS to the
+primitive sequence system. -/
+def dbmsHom : StepHom (dbms 1) prim where
+  map := toEntries
+  reindex := id
+  map_step := fun A N => Subtype.ext (entries_expand' A.1 N (dstd_entries A.1 A.2).1)
+  map_halted := fun A h => by
+    have hL := entries_length A.1
+    rw [show entries A.1 = [] from h] at hL
+    exact hL.symm
+
+/-- **A one-row DBMS matrix names a countable ordinal**, and expansion lowers
+it. -/
+noncomputable def dbmsOrdEval :
+    Eval (dbms 1) (· < · : Ordinal.{0} → Ordinal.{0} → Prop) :=
+  Eval.ofSim dbmsHom.toSim primEval
+
+theorem dbmsOrdEval_val (A : (dbms 1).State) :
+    dbmsOrdEval.val A = (read 0 (entries A.1)).val := rfl
+
+/-- **The ordinal is below `ε₀`**, as for BMS. -/
+theorem dbmsOrdEval_lt_e0 (A : (dbms 1).State) : dbmsOrdEval.val A < te0.val :=
+  val_lt_val (dstd_entries A.1 A.2).2 OT_te0 (read_lt_e0 0 _)
+
+/-- **One-row DBMS terminates.** -/
+theorem dbms_one_terminates : (dbms 1).Terminates :=
+  dbmsHom.toSim.terminates (primHom.toSim.wf exbOT_wf)
+
+/-! ### Which one-row matrices are standard -/
+
+/-- A matrix is DBMS-reachable when it is the entries of a standard array. -/
+def DReach (l : List Nat) : Prop := ∃ A : Arr 1, DStd 1 A ∧ entries A = l
+
+theorem dreach_range (n : Nat) : DReach (List.range (n + 1)) :=
+  ⟨dstair 1 n, DStd.init n, entries_dstair n⟩
+
+theorem dreach_expandL {l : List Nat} (hc : Col 0 l) (h : DReach l) (N : Nat) :
+    DReach (expandL N 0 l) := by
+  obtain ⟨A, hStd, hA⟩ := h
+  refine ⟨expand A N, DStd.step N hStd, ?_⟩
+  rw [entries_expand' A N (by rw [hA]; exact hc), hA]
+
+/-- **The standard one-row DBMS matrices are exactly the matrices whose term is
+a standard form** — the same set as for BMS, since the generators agree with
+one row. -/
+theorem dstd_entries_iff (l : List Nat) :
+    (∃ A : Arr 1, DStd 1 A ∧ entries A = l) ↔ (Col 0 l ∧ OT (read 0 l)) := by
+  constructor
+  · rintro ⟨A, hStd, rfl⟩
+    exact dstd_entries A hStd
+  · rintro ⟨hc, hOT⟩
+    exact reach_gen DReach (fun hm hR N => dreach_expandL hm hR N) dreach_range hc hOT
+
+/-! ### Which ordinals -/
+
+/-- **The ordinal is below `ε₀`**, as an ordinal and not only as a term. -/
+theorem dbmsOrdEval_lt_eps0 (A : (dbms 1).State) : dbmsOrdEval.val A < Ord.eps0 := by
+  rw [← val_te0]
+  exact dbmsOrdEval_lt_e0 A
+
+/-- **And every ordinal below `ε₀` is named by a one-row DBMS matrix.**  So
+one row of DBMS names exactly what one row of BMS names. -/
+theorem exists_dbms_of_lt_eps0 {α : Ordinal.{0}} (h : α < Ord.eps0) :
+    ∃ A : (dbms 1).State, dbmsOrdEval.val A = α := by
+  obtain ⟨l, hc, hOT, hv⟩ := exists_matrix_of_lt_eps0 h
+  obtain ⟨A, hStd, hE⟩ := (dstd_entries_iff l).mpr ⟨hc, hOT⟩
+  refine ⟨⟨A, hStd⟩, ?_⟩
+  rw [dbmsOrdEval_val]
+  show val (read 0 (entries A)) = α
+  rw [hE]
+  exact hv
+
+instance instIsWellFoundedDbms : IsWellFounded (dbms 1).State (dbms 1).Rel :=
+  ⟨dbmsHom.toSim.wf prim_wf⟩
+
+/-- **The rank of one-row DBMS is the ordinal the matrix names**, as for
+BMS. -/
+theorem rank_dbms_eq_val (A : (dbms 1).State) :
+    IsWellFounded.rank (dbms 1).Rel A = dbmsOrdEval.val A := by
+  have h := dbmsHom.rank_map (fun k => ⟨k, rfl⟩)
+    (fun s => by
+      show s.1.len = 0 ↔ entries s.1 = []
+      exact entries_eq_nil_iff.symm) A
+  rw [← h]
+  exact rank_prim_eq_val (dbmsHom.map A)
+
+/-- **One-row DBMS has ordinal `ε₀`**, as one-row BMS does. -/
+theorem iSup_rank_dbms :
+    ⨆ A : (dbms 1).State, IsWellFounded.rank (dbms 1).Rel A = Ord.eps0 := by
+  refine le_antisymm (Ordinal.iSup_le (fun A => ?_)) ?_
+  · rw [rank_dbms_eq_val]
+    exact (dbmsOrdEval_lt_eps0 A).le
+  · refine le_of_forall_lt (fun β hβ => ?_)
+    have hβ1 : β + 1 < Ord.eps0 := Ord.isPrincipal_add_eps0 hβ Ord.one_lt_eps0
+    obtain ⟨A, hA⟩ := exists_dbms_of_lt_eps0 hβ1
+    refine lt_of_lt_of_le ?_ (Ordinal.le_iSup
+      (fun B : (dbms 1).State => IsWellFounded.rank (dbms 1).Rel B) A)
+    rw [rank_dbms_eq_val, hA]
+    exact lt_of_lt_of_le (Order.lt_succ β) (le_of_eq (Order.succ_eq_add_one β))
+
+end Googology.Trans.DBMS

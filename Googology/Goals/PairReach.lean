@@ -1,5 +1,5 @@
 import Googology.Goals
-import Googology.Trans.PSS.Steps
+import Googology.Trans.BMS.ExBuchholz.PSS.Steps
 
 /-!
 # Pair sequences → extended Buchholz's ψ: reachability

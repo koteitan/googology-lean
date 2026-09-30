@@ -30,7 +30,8 @@ Googology/
   Core/            expansion systems, standard forms, translations, goal records
   Rank.lean        a well-founded system carries an ordinal measure
   Notation/<Name>/ one directory per system
-  Trans/<A>/<B>.lean  translations, one file per unordered pair
+  Trans/<from>/<to>/   translations between <from> and <to>, one directory per pair
+  Trans/<from>/common/ facts about <from> alone that two or more <to> use
   Goals/Basic.lean goal records for translations (section 7)
   Goals.lean       the goal records of this library and the audit
 test/              finite checks, not theorems; GoalsAudit.lean prints the audit
@@ -44,9 +45,12 @@ scripts/           check_readme.py compares the README tables with the audit
 2. `Notation/X/` never imports `Notation/Y/`. A system knows only itself and
    `Core`.
 3. `Trans/` is the only place that imports two systems at once.
-4. An unordered pair `{X, Y}` gets **one** file, under the alphabetically
-   earlier name, holding both directions and the `Equiv` if there is one.
-   `Trans/README.md` indexes them.
+4. A pair gets **one** directory `Trans/<from>/<to>/`, where `<from>` is the
+   system being analysed and `<to>` the system it is measured against. It holds
+   both directions and the `Equiv` if there is one. A file about `<from>`
+   alone goes to `Trans/<from>/common/` if two or more `<to>` use it, and
+   otherwise into the one `<to>` that uses it. Each directory has a README;
+   `Trans/README.md` links them.
 5. mathlib is imported per system, by the ones that evaluate into the
    ordinals — never by `Core`.
 6. `Goals.lean` may import any module. Only the root `Googology.lean` and

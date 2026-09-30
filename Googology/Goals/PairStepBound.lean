@@ -1,5 +1,5 @@
 import Googology.Goals.PairReach
-import Googology.Trans.PSS.StepBound
+import Googology.Trans.BMS.ExBuchholz.PSS.StepBound
 
 /-!
 # Pair sequences → extended Buchholz's ψ: the number of steps has no bound
