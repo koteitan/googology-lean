@@ -9,3 +9,7 @@ import Googology.Trans
 import Googology.Goals
 import Googology.Goals.PairReach
 import Googology.Goals.PairStepBound
+import Googology.Trans.PSS.SC
+import Googology.Trans.PSS.Phi
+import Googology.Trans.PSS.TR
+import Googology.Trans.PSS.Main
