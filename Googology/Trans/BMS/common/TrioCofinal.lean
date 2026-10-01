@@ -12,7 +12,7 @@ below some `A[k]`.
 
 The proof is koteitan/trio's `trio_cofinality`
 ([lean/Core.lean](https://github.com/koteitan/trio/blob/74ef7af49eefaef06ce4c9b57c02ecdcb9975606/lean/Core.lean)),
-ported unchanged into `Googology/Trans/BMS/TrioCof/` (16 modules, about
+ported unchanged into `Googology/Trans/BMS/common/TrioCof/` (16 modules, about
 16,600 lines, no `sorry`).  It is stated there for trio's own definitions: a
 trio sequence is a list of triples, `oper M n` (`M⟦n⟧`) is the expansion with
 `n` copies, `ST_TS` is the set of standard forms, and the order is either

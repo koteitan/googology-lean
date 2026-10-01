@@ -3,7 +3,7 @@ Ported verbatim from koteitan/trio, `lean/Goper.lean`:
 https://github.com/koteitan/trio/blob/74ef7af49eefaef06ce4c9b57c02ecdcb9975606/lean/Goper.lean
 Only the module names of the imports and the namespace (`TRIO` →
 `Googology.Trans.BMS.TrioCof`) were changed. The bridge to this library's
-Bashicu matrices is `Googology/Trans/BMS/TrioCofinal.lean`.
+Bashicu matrices is `Googology/Trans/BMS/common/TrioCofinal.lean`.
 -/
 /-
 Goper.lean: 展開一歩での CNF 保存（無条件）と `cnf_ST_TS`。

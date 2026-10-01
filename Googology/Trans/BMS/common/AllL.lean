@@ -12,7 +12,7 @@ height, which `expandRL_col_len` says expansion preserves.  So `bmsAllL r` is
 the rule on every matrix with `r + 1` rows, it terminates, it is well founded,
 and it carries the rank of its own expansion.
 
-`bmsLSim` includes the standard matrices in it, and `Trans/DBMS/Entries.lean`
+`bmsLSim` includes the standard matrices in it, and `Trans/DBMS/common/Entries.lean`
 includes the DBMS ones.  Neither inclusion needs anything proved: the step is
 the same `expandRL` on both sides.
 -/

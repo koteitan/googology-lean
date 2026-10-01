@@ -5,7 +5,7 @@ import Googology.Trans.BMS.common.Pair
 /-!
 # One row inside two
 
-`BMS/Zero.lean` says a row of zeros underneath changes the rule not at all.
+`BMS/common/Zero.lean` says a row of zeros underneath changes the rule not at all.
 That is about the rule; this file is about the systems, and the missing piece
 was whether a standard one-row matrix stays standard with the zero row added.
 

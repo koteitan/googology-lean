@@ -6,7 +6,7 @@ import Googology.Trans.BMS.common.Entries
 With one row the column map of an expansion only copies.  With two or more it
 does not: when the maximal parent row is `1`, row `0` takes an increment on
 the columns whose position in the bad part is a row-`0` ancestor of the bad
-root (`BMS/TwoRow.lean`).  So any treatment of two rows has to say what
+root (`BMS/common/TwoRow.lean`).  So any treatment of two rows has to say what
 `ancEq A 0` is in terms of the array's entries.
 
 That is this file.  `ParL` is being the row-`0` parent — the last index before

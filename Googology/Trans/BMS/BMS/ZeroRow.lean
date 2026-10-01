@@ -3,11 +3,11 @@ import Googology.Trans.BMS.common.Zero
 /-!
 # A row of zeros underneath, at every number of rows
 
-`BMS/Zero.lean` says a row of zeros underneath changes nothing, for one row
+`BMS/common/Zero.lean` says a row of zeros underneath changes nothing, for one row
 inside two.  This file says the same at every number of rows, and on the
 entries, where the rule runs: `expandRL_zeroRow`.
 
-The argument is the one `BMS/Zero.lean` makes, with the row number a variable.
+The argument is the one `BMS/common/Zero.lean` makes, with the row number a variable.
 Row `r`'s entries are all `0`, so no column has a parent there, so `m₀` is
 unchanged and the bad root is the same column; every row below `r` sees the
 same entries and the same ancestors, so the column map is the same; and row

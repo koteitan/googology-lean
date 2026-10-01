@@ -3,7 +3,7 @@ import Googology.Trans.BMS.common.Anc
 /-!
 # Parents and ancestors at every row
 
-`BMS/Anc.lean` reads `BM4.parent A 0` and `BM4.anc A 0` off the entries, which
+`BMS/common/Anc.lean` reads `BM4.parent A 0` and `BM4.anc A 0` off the entries, which
 is what two rows need.  Three rows need row `1`'s as well, and `r` rows need
 every row below `r`.  This file does all of them at once.
 
@@ -25,8 +25,8 @@ rows, and `entriesR_expand` says it is `BM4.expand`.  So every Bashicu matrix
 expansion runs, which the array form does not — `BM4.expand` is
 `noncomputable`.
 
-`BMS/Anc.lean` stays: it is the row-`0` case on a flat list of entries, which
-is the shape `BMS/Entries2.lean` uses.
+`BMS/common/Anc.lean` stays: it is the row-`0` case on a flat list of entries, which
+is the shape `BMS/common/Entries2.lean` uses.
 -/
 
 namespace Googology.Trans.BMS

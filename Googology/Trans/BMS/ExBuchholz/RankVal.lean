@@ -24,12 +24,12 @@ both are defined, they agree.
 
 `rank_pairGen` is the first use of that licence.  Two rows have no reading,
 but the generator `(0,0)(1,1)` expands into one-row matrices with a zero row
-underneath, and `BMS/Embed.lean` carries their ordinals across unchanged, so
+underneath, and `BMS/BMS/Embed.lean` carries their ordinals across unchanged, so
 its rank comes out as `ε₀` — the pair sequence system starts where the
 primitive sequence system ends.  That is also the value the correspondence
 tables give `(0,0)(1,1)`.
 
-`rank_appendState` takes it further.  `BMS/Append.lean` says expansion never
+`rank_appendState` takes it further.  `BMS/common/Append.lean` says expansion never
 reaches back across a column whose row-`0` entry is `0`, so the rank is
 additive over those blocks, and `n` copies of `(0,0)(1,1)` have rank `ε₀·n`.
 `(0,0)(1,1)(1,0)` expands into exactly those, so its rank is `ε₀·ω` — the
@@ -115,7 +115,7 @@ theorem rank_bms_eq_val (A : (Googology.Notation.BMS.bms 1).State) :
 No reading of a two-row matrix is available, so the rank is the only ordinal
 a two-row state carries.  At `(0,0)(1,1)` it can still be computed, because
 that generator expands into one-row matrices with a zero row underneath, and
-`BMS/Embed.lean` says those carry the one-row ordinals unchanged. -/
+`BMS/BMS/Embed.lean` says those carry the one-row ordinals unchanged. -/
 
 instance instIsWellFoundedPair : IsWellFounded pairL.State pairL.Rel := ⟨pairL_wf⟩
 
@@ -394,7 +394,7 @@ theorem rank_succAll :
 
 /-! ### Repetition multiplies by `ω`
 
-`BMS/Append.lean` says that when `m₀` is `0` the expansion is the good part
+`BMS/common/Append.lean` says that when `m₀` is `0` the expansion is the good part
 and then the bad part repeated `N + 1` times.  The rank of that is the good
 part's rank plus the bad part's times `N + 1`, so the matrix itself has the
 bad part's rank times `ω`. -/

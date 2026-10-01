@@ -18,7 +18,7 @@ two systems that resemble each other — they are one system written two ways.
 Termination, well-foundedness and the ordinal each state names transfer in
 both directions.
 
-`Trans/BMS/Reach.lean` is what makes the statement sharp on the matrix side:
+`Trans/BMS/ExBuchholz/Reach.lean` is what makes the statement sharp on the matrix side:
 the states of `prim` are exactly the standard one-row Bashicu matrices, so
 nothing has been quietly left out of either side.
 -/

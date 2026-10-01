@@ -3,8 +3,8 @@ import Googology.Trans.BMS.common.Entries2
 /-!
 # The pair sequence system
 
-`BMS/Entries2.lean` writes two-row expansion on the entries and proves it is
-`BM4.expand`.  This file packages it as a `Rewrite`, the way `BMS/Prim.lean`
+`BMS/common/Entries2.lean` writes two-row expansion on the entries and proves it is
+`BM4.expand`.  This file packages it as a `Rewrite`, the way `BMS/ExBuchholz/Prim.lean`
 packages one row.
 
 A state is the entries of a standard two-row array.  The step is `expand2L`,

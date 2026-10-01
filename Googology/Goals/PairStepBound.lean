@@ -22,7 +22,7 @@ statement below uses that form.
 * `pairToExb_steps_unbounded`, `pairToExb_steps_unbounded_iterate`:
   `¬ ∃ K, ∀ a b, pairL.Rel b a → ∃ m ≤ K, (m steps from pairToExb a to pairToExb b)`.
 
-The proofs are in `Trans/PSS/StepBound.lean`, on `exbOT`; this file carries
+The proofs are in `Trans/BMS/ExBuchholz/PSS/StepBound.lean`, on `exbOT`; this file carries
 them to `exbPair`, whose steps are those of `exbOT` on the same terms.
 -/
 

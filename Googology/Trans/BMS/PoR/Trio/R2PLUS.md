@@ -1,6 +1,6 @@
 [← Back](POR.md) | [English](R2PLUS.md) | [Japanese](R2PLUS-ja.md)
 
-# Theory: $`R_2^+`$ below $`\upsilon_{\omega+1}`$
+# Theory: $`R_2^+`$ below $`\upsilon_{\omega\cdot\omega}`$
 
 The rules of $`\Phi_3`$ in [POR.md](POR.md) are checked numerically. This page records the first theorems about
 $`R_2^+`$ itself that decide order questions for $`\Phi_3`$. They are proved on paper (not yet
@@ -25,7 +25,7 @@ of $`R_1^+`$.
   base transformation ([W07b] Cor 5.7) in place of a translation.
 - **Theorem B.** Below $`\upsilon_{\omega\cdot\omega}`$ the $`\lt_2`$-pairs are exactly
   $`\upsilon_{\omega k} \lt_2 \upsilon_{\omega k+1}`$, each $`\upsilon_{\omega k+1}`$ is closed, and inside each block
-  $`R_2^S`$ agrees with $`R_1^+`$.
+  $`R_2^S`$ agrees with $`R_1^+`$. The proof, with its Lemma C, is complete and refereed.
 - **Proposition P′.** For the trio matrices of four shapes below $`\upsilon_{\omega+1}`$ (369 of the
   538 standard matrices of the first test set), the isominimal realization of $`\Phi_{3m}(M)`$
   puts the point at $`\mathcal{T}_3(M)`$ (the translation of `por/tr3.py`). The shape
@@ -40,7 +40,11 @@ exactly the coverings of Carlson's Def 5.3. For $`\le_2`$, the only pair is agai
 $`\upsilon_\omega \lt_2 \upsilon_{\omega+1}`$. With Carlson 2009, Thm 14.10, Proposition P′ and the 20 decided
 pairs therefore hold in $`R_2^C`$, the structure the certificate search implements. (Carlson's
 clause 2 of Def 5.3 is read as "$`X \cup Y`$ closed", as in his own proofs of Lemmas 5.5(6) and
-5.7(3).) Theorem B in $`R_2^C`$ is only sketched. The referee found no gap in Theorem EQ.
+5.7(3).) The referee found no gap in Theorem EQ. [W07b] only sketches Cases 2 and 3 of Claim 5.5(b); a proof
+of them (and of Case 1 of Claim 5.6) from [W07b] Thm 2.2 and the fact "$`x + c = c`$ iff $`c \ge x\omega`$" is now
+written, but not yet refereed. A check below $`\varepsilon_0`$ finds no covering among the 14,447 and 448
+candidates of the two cases; with one term removed from the set it finds coverings for 200 of 202 values, so
+the check can fail. The agreement up to $`\upsilon_{\omega\cdot\omega}`$ is Theorem EQB below.
 
 **Order preservation on a class of trio matrices (Theorem S).** Let
 $`U = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(1,1,0)(2,2,1)`$, so that $`\mathcal{T}_3(U) = \upsilon_{\omega+1}`$. Let
@@ -125,7 +129,8 @@ proof, and that of [W07b] Lemma 2.1, is only in Wilken 2006, which is not availa
 directions, Lemma 2.1 and the finite-set test for $`\le_1`$ are now proved from the definition of
 $`\le_1`$ and Cantor-normal-form arithmetic only. The converse direction is an induction on
 $`(\alpha, \xi)`$ in lexicographic order that builds the copy explicitly. The referee checked every case
-and found only minor points (one sentence is missing: $`0 \le_1 b`$ holds only for $`b = 0`$). So
+and found only minor points (one sentence was missing: $`0 \le_1 b`$ holds only for $`b = 0`$; it is now written
+in as a lemma, and every step that uses $`x = 0`$ is written out). So
 Theorem S on all standard matrices below $`U`$, and Theorems A, EQ and S+, no longer depend on an
 unavailable paper.
 
@@ -146,24 +151,109 @@ non-isomorphic copies in 93 and 116 of 1,000 cases, so the check can fail); with
 $`\mathrm{lh}`$ as the reference, the theorem on 1,091 principal terms and the copies on 79,376 cases. The referee's own
 check: 3,000 random cases, and every one of 649 wrong copies is caught.
 
+**Theorem S below $`\upsilon_{\omega\cdot\omega}`$: proved on paper and refereed.** For $`k \ge 1`$ let $`V_k`$ be
+`(0,0,0)(1,1,1)`, then $`k`$ copies of `(1,1,0)(2,2,1)(2,0,0)`, then `(1,1,0)(2,2,1)`. So $`V_1 = U`$ and
+$`V_2 = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(1,1,0)(2,2,1)(2,0,0)(1,1,0)(2,2,1)`$. Let
+$`V = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)`$. Then $`\mathcal{T}_3(V_k) = \upsilon_{\omega k+1}`$,
+$`\mathcal{T}_3(V) = \upsilon_{\omega\cdot\omega}`$, and $`V[N]`$ has the value $`\upsilon_{\omega(N+1)}`$. For all
+standard trio matrices $`M, M' \lt_{\mathrm{lex}} V`$, with $`\Phi_3`$ = `por/phi3def2.py`:
+
+```math
+M \lt_{\mathrm{lex}} M' \iff \iota(\Phi_3(M)) \lt \iota(\Phi_3(M')), \qquad \iota(\Phi_3(M)) \lt \upsilon_{\omega\cdot\omega},
+```
+
+in both $`R_2^S`$ and $`R_2^C`$, and $`\iota(\Phi_3(V_k)) = \upsilon_{\omega k+1}`$. The referee found no FATAL or
+BLOCKING point, only three minor ones (below). The parts:
+- **The range.** Every standard $`M`$ with $`U \lt_{\mathrm{lex}} M \lt_{\mathrm{lex}} V`$ lies below some $`V_k`$ and is a
+  non-increasing sum of root terms of an explicit class (pair-sequence terms, $`\upsilon`$-points, and
+  segment terms whose images one level lower are again in the class). The only way into this interval is
+  through the $`V[N]`$, $`N \ge 1`$ (Lemma ENT′).
+- **Theorem EQB.** $`R_2^C`$ and $`R_2^S`$ agree on $`[0, \upsilon_{\omega\cdot\omega})`$. With block 0 $`= [0, \upsilon_{\omega+1}]`$
+  and block $`j = (\upsilon_{\omega j+1}, \upsilon_{\omega(j+1)+1}]`$: if $`\alpha`$ is in block $`j`$ and $`\alpha \le_1 \gamma`$, then
+  $`\gamma`$ is at most the top of block $`j`$, for every $`\gamma`$. The $`\lt_2`$-pairs with left end below
+  $`\upsilon_{\omega\cdot\omega}`$ are exactly $`\upsilon_{\omega j} \lt_2 \upsilon_{\omega j+1}`$, $`j \ge 1`$. So Theorem B also holds
+  in $`R_2^C`$.
+- **The order proof.** The steps of Theorem S below $`U`$ (Pi-PAT, base change, least copy, existence,
+  order) carry over. One statement had to change, and the numeric check found it: Pi-PAT (b). A
+  $`\upsilon`$-point that comes from a parameter (for example $`\upsilon_2`$ inside a segment term of level
+  $`\omega+1`$) need not lie in the closure of the image root; the corrected (b′) adds these points. The
+  proof below $`U`$ is not affected.
+- **The rule `lastt`** never acts on this range: the two functions it changes are never called there.
+  Proved, and checked: the programs before and after `lastt` print the same patterns on all 107,924
+  enumerated matrices (below).
+
+The referee's minor points: (1) one step in the proof of Lemma ENT′ is false as written (for example
+$`B = (0,0,0)(1,1,1)(1,1,1)`$ has $`B[N][2] = V[2]`$); the lemma still holds (only 13 standard $`B`$ are
+concerned, and none has a $`B[N]`$ between $`U`$ and $`V`$ for $`N \le 40`$), and the repair is short. (2) In
+Theorem EQB, the direction from $`R_2^C`$ to $`R_2^S`$ uses Claim 5.5(b), and the choice of $`\tau`$ there must be
+written out. (3) Coverage of the checks only.
+
+Checks (each run under 60 seconds, 0 failures): all 107,924 standard matrices between $`U`$ and $`V`$ with
+at most 14 columns (program branches, reaches, $`\le_2`$-pairs, the three program versions equal); Pi-PAT′
+at three values of $`m`$ on 12,444 segment terms (5 skipped by the time limit); $`\mathcal{T}_3`$ strictly
+increasing along $`\lt_{\mathrm{lex}}`$ on 17,666 matrices; 900 random matrices with 14–40 columns. The
+referee's own search: 1,860 new random standard matrices between $`U`$ and $`V`$ with 10–60 columns; the
+program checks pass on all, and $`\mathcal{T}_3`$ is strictly increasing on the 1,858 distinct ones.
+
+Not covered: $`V`$ itself and every matrix above it. At $`\upsilon_{\omega\cdot\omega}`$ the reach in the pattern
+leaves its block, and Theorem B does not describe $`R_2`$ there. That $`\iota(\Phi_3(M)) = \mathcal{T}_3(M)`$ in
+general is only checked. Nothing of this is in Lean.
+
+**The sup at $`X`$ (rows 907 and 947 of [POR.md](POR.md)).** Let $`X = (0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0)`$
+and let $`R`$ be the sheet's reading `0 a (b ([c (e ([f g] g+e)) d] d+e d+e+a))` with point `b` (it includes the
+element `d+e` that the sheet's reading implies; `por/phi3def2.py` with `lastt` prints exactly this).
+Write $`P_n = \Phi_3(X[n])`$, $`\sigma = \sup_n \iota(P_n)`$ and $`\beta = \iota(R)`$. It was known that $`\sigma \le \beta`$ and
+that $`\sigma = \beta`$ if and only if $`\sigma \le_1 \beta`$. Write $`R^*`$ for the least realization of $`R`$, and
+$`\gamma, \delta, \varepsilon`$ for the places of `c`, `d`, `e` in it. New, proved on paper and refereed (only
+minor points):
+- **Lemma CG.** The pattern $`C^+`$ = $`R`$ without `b`, that is `0 a ([c (e ([f g] g+e)) d] d+e d+e+a)` with
+  point `c`, generates $`R`$: its least realization is $`R^*`$ without $`\beta`$, so $`\iota(C^+) = \gamma \gt \beta`$.
+- **Lemma NEST.** Every finite configuration below $`\beta`$ whose least element is indecomposable has copies
+  cofinally below $`\gamma`$, inside the nested part of $`R^*`$.
+- **Theorem RED.** $`\sigma = \beta`$ holds if and only if every finite configuration inside the block
+  $`[\beta, \delta+\varepsilon]`$ of $`R^*`$ has cofinally many copies below $`\sigma`$. So only this block matters.
+- The same three hold at $`X' = (0,0,0)(1,1,1)(2,1,1)(2,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(4,2,0)(2,0,0)`$.
+- **Theorem L.** $`\iota(\Phi_3(X[n][k])) \lt \iota(P_n)`$ for all $`n, k`$, at $`X`$ and at $`X'`$, given the shape of
+  $`\Phi_3(X[n][k])`$ (checked in 48 of 48 cases at $`X`$ and 30 of 30 at $`X'`$). So $`P_n`$ is never too small
+  against its own fundamental sequence.
+- At $`M_1 = (0,0,0)(1,1,1)(2,2,1)(3,1,1)(4,1,0)(5,2,1)(6,2,0)`$: $`\iota(\Phi_3(M_1)) \ge \sup_n \iota(\Phi_3(M_1[n]))`$,
+  given only the shape of $`\Phi_3(M_1[n])`$.
+
+Open: $`\sigma \le_1 \beta`$ was neither proved nor refuted. A refutation needs a pattern $`G`$ with
+$`\iota(P_n) \le \iota(G) \lt \beta`$ for all $`n`$; every known way to build one uses a $`C^+`$-configuration, and then
+$`\iota(G) \ge \beta`$ by Lemma CG. A proof needs a simulation of the configurations in the block of $`R^*`$ by those
+in the blocks of the $`P_n`$; it is not written. Also open: equality at $`M_1`$, and whether $`P_n`$ is too large
+(the same limit of a chain of blocks in both). Oracle certificates for $`R \lt C^+`$, its $`X'`$ form and the
+instances of Theorem L were all replayed. The referee tested two candidate refuters ($`R`$ with one relation
+of `c` removed); both are below $`P_1`$, so neither lies between all $`P_n`$ and $`R`$.
+
 **Limit-step pairs.** The order tests of [POR.md](POR.md) left 777 pairs undecided under
 `por/phi3def2.py`. In 723 of them $`A = B[n]`$ with $`n \le 3`$. A certificate is a chain of Carlson's
 reflection steps (Carlson 2009, Defs 9.1, 9.4, 10.1) from $`\Phi_3(B)`$, and a covering of $`\Phi_3(A)`$
 into the result that maps the point of $`A`$ strictly below the point of $`B`$. That a certificate gives
 $`\iota(\Phi_3(A)) \lt \iota(\Phi_3(B))`$ is proved from Carlson 2009 (Thm 14.10, Lemma 14.5, and Lemma 15.11:
 in ZF every pattern is covered), given that the search program implements his definitions. 720 pairs
-have a certificate, each replayed by the checker; the referee replayed all of them again. 57 pairs
-stay open in both directions. No violation was found.
+have a certificate, each replayed by the checker; the referee replayed all of them again. No violation
+was found. The list of the other 57 was lost and was rebuilt with `lastt` (it gives the same patterns on
+all seven test sets): after the same searches, 75 pairs stay open, and the 57 are most likely among them
+(checked by the counts per set only). 67 of the 75 now have a certificate, each replayed twice by the
+checker. New kinds of steps were needed: one up-step with three down-steps inside, two up-steps in a row,
+longer ladders of down-steps, and a "link ladder" (apply the down-step at the last summand of each reach,
+from the far end back to the point; 12 pairs). A general lemma that the link ladder always works is open.
+8 pairs stay open in both directions; for two of them the checker cannot replay what the search found
+(a node made inside an up-step, and a rejected step).
 
 **Conditional or open.**
 - The full equality of the Carlson–Wilken 2012 §7 remark, and the per-matrix hypotheses of the two
   further shapes for all matrices.
-- The 57 open limit-step pairs, and a general lemma that $`\iota \circ \Phi_3`$ increases along BM4
+- The 8 open limit-step pairs, and a general lemma that $`\iota \circ \Phi_3`$ increases along BM4
   fundamental sequences.
-- Minor points of the second referee, not yet fixed in the text: [W07b] Thm 2.2 needs the sentence
-  "$`0 \le_1 b`$ only for $`b = 0`$"; in Theorem S, Lemma W2 (c) needs (a) for the maximum, and some
-  status lines and one list of citations are out of date.
-- The equivalence of $`R_2^C`$ and $`R_2^S`$ beyond $`\upsilon_{\omega+1}`$ (Theorem B in $`R_2^C`$ is only sketched).
+- The last minor points of the second referee ([W07b] Thm 2.2: "$`0 \le_1 b`$ only for $`b = 0`$"; Theorem S:
+  the maximum in Lemma W2 (c) comes from (a); old status lines and a citation list) and the proof of
+  Claim 5.5(b) Cases 2 and 3 are now written, but this text is not refereed again.
+- $`\sigma \le_1 \beta`$ at $`X`$ and $`X'`$ (above).
+- $`V = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)`$ and above, including the equivalence of $`R_2^C`$ and $`R_2^S`$
+  at $`\upsilon_{\omega\cdot\omega}`$ and beyond.
 - Beyond $`\upsilon_{\omega\cdot\omega}`$: a conjecture that each "backbone" behaves like the $`\varepsilon_0`$-multiples in
   Wilken's $`R_2`$ agrees with all 11,506 facts tested; heads with $`\Omega_2`$-level structure are
   not covered and need arithmetic that the literature leaves to future work.

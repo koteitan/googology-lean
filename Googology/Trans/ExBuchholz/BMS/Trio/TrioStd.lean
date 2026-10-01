@@ -8,7 +8,7 @@ import Googology.Trans.BMS.ExBuchholz.Equiv
 /-!
 # The trio matrix of `ψ_0(Ω_α)` is a standard form, for `α < ε₀`
 
-`BMS/Trio.lean` transcribes the map `α ↦ M(α)` of
+`ExBuchholz/BMS/Trio/Trio.lean` transcribes the map `α ↦ M(α)` of
 [koteitan/trio](https://github.com/koteitan/trio) (its
 [algorithm for `α < ε₀`](https://github.com/koteitan/trio/blob/main/ebp2bms/algorithm/1/README-en.md))
 and checks it with `#guard`.  This file proves what the `#guard`s and the
@@ -19,7 +19,7 @@ a standard three-row array**, that is, it is reached from a generator
 
 The proof does not measure the three-row matrices by an ordinal.  It borrows
 the descent that the one-row theory has already done: `reach_gen` in
-`BMS/Reach.lean` says that a property of one-row matrices which holds at the
+`BMS/ExBuchholz/Reach.lean` says that a property of one-row matrices which holds at the
 generators `(0)(1)⋯(n)` and survives every expansion holds at every standard
 one-row matrix.  The property used is
 

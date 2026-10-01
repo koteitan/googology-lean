@@ -265,7 +265,7 @@ open Googology.Trans.BMS Googology.Trans.PSS
 
 /-- Pair sequences → extended Buchholz's ψ does not preserve expansion: the
 generator `(0,0)(1,1)` steps to `(0,0)`, which goes to `1`, and `1` is no
-`fs (ψ_0(Ω_1)) Y` (`Trans/PSS/Expansion.lean`). -/
+`fs (ψ_0(Ω_1)) Y` (`Trans/BMS/ExBuchholz/PSS/Expansion.lean`). -/
 theorem pairToExb_not_preserves : ¬ (∀ (i : Unit) (a b : pairL.State), True → True →
     pairL.Rel b a → exbPair.Rel (pairToExb b) (pairToExb a)) := by
   intro h
@@ -306,7 +306,7 @@ def TrioDom (A : exbOT.State) : Prop :=
   ∃ α, OT α ∧ α < te0 ∧ A.1 = psi nil (psi α nil)
 
 /-- On its domain, `exbToTrio` is one to one (`omegaIndexMatrix_injective`,
-`Trans/BMS/TrioMono.lean`). -/
+`Trans/ExBuchholz/BMS/Trio/TrioMono.lean`). -/
 theorem exbToTrio_injective : ∀ (_ : Unit) (a b : exbOT.State), TrioDom a → TrioDom b →
     exbToTrio a = exbToTrio b → a = b := by
   rintro _ a b ⟨α, hα, hαe, ha⟩ ⟨β, hβ, hβe, hb⟩ h

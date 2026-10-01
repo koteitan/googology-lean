@@ -1,6 +1,8 @@
 """Phi3def2: Phi3def (../POR.md section 15) with one more rule, kdl0 (section 16): a D-level omega column
 read inside a level column after an elder sibling (or nested in a same-level child) is read on the
-lowest level of its last chain (d_1 if it has one chain), not above its top.  The definition is otherwise that of phi3def.py (removed from the tree; see git commit a97a321), in clauses D1-D11.
+lowest level of its last chain (d_1 if it has one chain), not above its top; and the rule lastt: a D-level
+column with no owner (C2) or with children (KI) that becomes a new root term root(x, ...) reads its children
+with last = True, i.e. as the same subtree is read at the root.  The definition is otherwise that of phi3def.py (removed from the tree; see git commit a97a321), in clauses D1-D11.
 
 A trio matrix M is read as a term tree (y, z, children) on its row-0 parent forest.  Phi_3(M) is the
 closure of {0, 1, M} under prefix sums, summands, anchors, the <=1-reach lh, the <=2-successors and the
@@ -177,10 +179,10 @@ def C2(s, x, Dy, st=(), last=True, top=False):
         return (j, 0, kids)
     if y < Dy:
         return root(add(x[2], C1s(B, x, ())))
-    kids = C2s(B, x, Dy, (), last, top=top)
     if y == Dy:
-        return root(add(x[2], kids))
-    return (y - Dy, 0, kids)
+        # rule lastt (C2-5-4-1): the new root term is built from B alone, so B is read with last = True
+        return root(add(x[2], C2s(B, x, Dy, (), True, top=top)))
+    return (y - Dy, 0, C2s(B, x, Dy, (), last, top=top))
 
 def C2s(B, x, Dy, st=(), last=True, top=False):
     """C2_x on a list; consecutive wrapped omega columns merge (one U-form)."""
@@ -218,7 +220,8 @@ def KI(B, x, Dy, dk, t0, last):
         elif g[1] == 0 and g[0] == Dy and (not g[2]) and lg and (t0 is not None):
             out.append(t0)
         elif g[1] == 0 and g[0] == Dy:
-            out.append(root(add(x[2], KI(g[2], x, Dy, dk, None, lg))))
+            # rule lastt (KI-5): the same for a D-level column with children read by KI
+            out.append(root(add(x[2], KI(g[2], x, Dy, dk, None, True))))
         elif g[1] == 0 and g[0] > Dy:
             out.append((g[0] - Dy, 0, KI(g[2], x, Dy, dk, None, lg)))
         else:

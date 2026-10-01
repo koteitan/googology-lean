@@ -4,8 +4,8 @@ import Googology.Trans.BMS.common.Cut
 /-!
 # From the array to the entries
 
-`BMS/OneRow.lean` says what `BM4.expand` does to a one-row array, in terms of
-its columns.  `BMS/Cut.lean` says what `expandL` does to a list, in terms of
+`BMS/common/OneRow.lean` says what `BM4.expand` does to a one-row array, in terms of
+its columns.  `BMS/common/Cut.lean` says what `expandL` does to a list, in terms of
 concatenation.  This file matches them: `entries` reads an array off as a
 list, and `entries_expand` says the two expansions agree,
 
@@ -17,7 +17,7 @@ last column, and `flatten_replicate_map` writes the repeated bad part the same
 way.  No entry is ever indexed by hand.
 
 The hypothesis is that the array's entries form a matrix — `Col 0`.  Every
-array reachable from a stair has that property; `BMS/Bms.lean` proves it by
+array reachable from a stair has that property; `BMS/ExBuchholz/Bms.lean` proves it by
 induction over reachability.
 -/
 

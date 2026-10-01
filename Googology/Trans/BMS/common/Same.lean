@@ -17,7 +17,7 @@ one-row array exactly when its term is a standard form.  The only bookkeeping
 left is that a one-row column is a singleton, so the two shapes convert back
 and forth.
 
-So everything `Trans/BMS/Equiv.lean` proves about `prim` — that it is the
+So everything `Trans/BMS/ExBuchholz/Equiv.lean` proves about `prim` — that it is the
 standard forms below `ψ_0(Ω)`, written another way — applies to `bmsL 0` as
 well, and the general machinery has the one-row theory as a special case
 rather than beside it.
@@ -27,9 +27,9 @@ entries of standard two-row arrays on both sides, so nothing has to be said
 about which matrices those are.
 
 `bmsL_zero_sim_one` puts the picture together: composing this file's two
-equivalences with `BMS/Embed.lean`'s `primHomPair` gives `bmsL 0` inside
+equivalences with `BMS/BMS/Embed.lean`'s `primHomPair` gives `bmsL 0` inside
 `bmsL 1`, which is the first step of the hierarchy.  The step from `r` to
-`r + 1` in general is `BMS/ZeroRow.lean`'s `bmsL_homSucc`, proved on the
+`r + 1` in general is `BMS/BMS/ZeroRow.lean`'s `bmsL_homSucc`, proved on the
 entries rather than through one and two rows.
 
 `prim_wf` and `bmsL_zero_wf` close the `Rewrite` API at one row: the relation

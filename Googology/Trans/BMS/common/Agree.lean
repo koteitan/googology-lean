@@ -15,8 +15,8 @@ bridge theorems then say the two rules compute the same array's expansion.
 There is no standardness hypothesis except the one `entries_expand` already
 needs.
 
-The rest of the file packages the general rule the way `BMS/Prim.lean` and
-`BMS/Pair.lean` package one and two rows: `bmsL r` is the system with `r + 1`
+The rest of the file packages the general rule the way `BMS/ExBuchholz/Prim.lean` and
+`BMS/common/Pair.lean` package one and two rows: `bmsL r` is the system with `r + 1`
 rows on the entries, `bmsL_terminates` carries `Notation.BMS.bms_terminates`
 across, and `bmsLStd` names the generators.
 -/

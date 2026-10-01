@@ -9,7 +9,7 @@ import Bijectivity.«21-ordinal-bijectivity»
 sequence system in its own words: `PSS.oper M n` is the fundamental sequence
 `M[n]`, and `Bijectivity.CTPS` is the set of standard pair sequences that start
 at `(0,0)`.  This repository has its own two-row rule, `BMS.expand2L`, proved
-equal to `BM4.expand` on the entries (`BMS/Entries2.lean`).
+equal to `BM4.expand` on the entries (`BMS/common/Entries2.lean`).
 
 This file shows that the two rules agree, with the bracket shifted by one:
 
@@ -31,8 +31,8 @@ The standard sets then correspond:
 
 The proof compares the two rules case by case.  pss-proof tests the parent
 relations with fuelled Boolean functions (`le0`, `nextrel0`, `nextrel1`); here
-they are shown to be `AncL`, `ParL` and `ParL1` of `BMS/Anc.lean` and
-`BMS/Entries2.lean`.  Two differences in the rules need `Good`:
+they are shown to be `AncL`, `ParL` and `ParL1` of `BMS/common/Anc.lean` and
+`BMS/common/Entries2.lean`.  Two differences in the rules need `Good`:
 
 * pss-proof takes the row-`1` parent whenever the last second entry is
   positive, and drops the last column if there is none; `expand2L` falls back

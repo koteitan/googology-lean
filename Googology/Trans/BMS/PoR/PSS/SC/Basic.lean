@@ -6,7 +6,7 @@ import Mathlib.Data.List.TakeWhile
 # Pair sequences as forests: parents, blocks, terms
 
 This file sets up the tree view of a pair sequence `M : List (ℕ × ℕ)` used by
-Theorem SC (`Googology/Trans/PSS/SC.lean`).  It follows §2 of `POR.md` and the
+Theorem SC (`Googology/Trans/BMS/PoR/PSS/SC.lean`).  It follows §2 of `POR.md` and the
 notation of §8b of `proof/COMB.md` in this directory.
 
 * `xAt M j`, `yAt M j`: the two entries of column `j` (`0` out of range).

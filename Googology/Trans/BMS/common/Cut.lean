@@ -3,7 +3,7 @@ import Googology.Trans.BMS.ExBuchholz.Commute
 /-!
 # Where expansion cuts
 
-`BMS/Commute.lean` defines `expandL` by the block structure of a matrix,
+`BMS/ExBuchholz/Commute.lean` defines `expandL` by the block structure of a matrix,
 because that is the shape the reading follows.  The definition of BMS states
 expansion differently: find the last entry below the last one, drop the last
 column, and repeat what lies between them `N + 1` times.

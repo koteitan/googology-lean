@@ -3,7 +3,7 @@ Ported verbatim from koteitan/trio, `lean/ArgDom.lean`:
 https://github.com/koteitan/trio/blob/74ef7af49eefaef06ce4c9b57c02ecdcb9975606/lean/ArgDom.lean
 Only the module names of the imports and the namespace (`TRIO` →
 `Googology.Trans.BMS.TrioCof`) were changed. The bridge to this library's
-Bashicu matrices is `Googology/Trans/BMS/TrioCofinal.lean`.
+Bashicu matrices is `Googology/Trans/BMS/common/TrioCofinal.lean`.
 -/
 /-
 ArgDom.lean: 引数支配（ホスト非依存の共終性核）。

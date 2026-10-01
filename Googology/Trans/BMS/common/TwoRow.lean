@@ -3,7 +3,7 @@ import Googology.Trans.BMS.common.Rows
 /-!
 # Two-row Bashicu matrices
 
-`BMS/OneRow.lean` reads `BM4.expand` off for one row, where the column map
+`BMS/common/OneRow.lean` reads `BM4.expand` off for one row, where the column map
 only copies.  Two rows is the first case where it does not.
 
 There are two rows, so `m₀` is `0` or `1`, and `m₀_two` says which: `1`

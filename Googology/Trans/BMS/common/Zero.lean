@@ -10,7 +10,7 @@ rule on `(a₀)(a₁)⋯`.
 
 Why it holds is short.  A column has a parent in row `1` only if its row-`1`
 entry is strictly above an earlier one, and they are all `0`, so `m₀` is `0`
-and `BMS/TwoRow.lean`'s column map is the copy — the same rule row `0` follows
+and `BMS/common/TwoRow.lean`'s column map is the copy — the same rule row `0` follows
 on its own.  The bad root is the row-`0` parent either way, because row `0`'s
 candidates are all the earlier columns and nothing else is consulted.
 

@@ -23,7 +23,7 @@ copies of the next `s`.  That is the primitive sequence system.  When no
 earlier entry is smaller than the last, `expand_one_drop` says the last column
 is dropped instead.
 
-This is what the translation in `BMS/ExBuchholz.lean` has to commute with.
+This is what the translation in `BMS/ExBuchholz/Basic.lean` has to commute with.
 -/
 
 namespace Googology.Trans.BMS

@@ -3,7 +3,7 @@ Ported verbatim from koteitan/trio, `lean/Core.lean`:
 https://github.com/koteitan/trio/blob/74ef7af49eefaef06ce4c9b57c02ecdcb9975606/lean/Core.lean
 Only the module names of the imports and the namespace (`TRIO` →
 `Googology.Trans.BMS.TrioCof`) were changed. The bridge to this library's
-Bashicu matrices is `Googology/Trans/BMS/TrioCofinal.lean`.
+Bashicu matrices is `Googology/Trans/BMS/common/TrioCofinal.lean`.
 -/
 /-
 Core.lean: ArgDomCore の ST 帰納（yapss argDomCoreOn の trio 移植）。

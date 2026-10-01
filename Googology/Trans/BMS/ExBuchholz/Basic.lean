@@ -30,9 +30,9 @@ ordinal, and every all-zero-subscript term is named by one.
 `OT_of_desc` settles the standard-form side as far as the term goes: with the
 subscripts all `0`, being a standard form is exactly the descending
 condition.  The rest of the translation is in the four files that follow:
-`BMS/OneRow.lean` for what `BM4.expand` does to one row, `BMS/Commute.lean`
-for the reading turning expansion into `[ ]`, `BMS/Cut.lean` and
-`BMS/Entries.lean` for the bookkeeping, and `BMS/Prim.lean` and `BMS/Bms.lean`
+`BMS/common/OneRow.lean` for what `BM4.expand` does to one row, `BMS/ExBuchholz/Commute.lean`
+for the reading turning expansion into `[ ]`, `BMS/common/Cut.lean` and
+`BMS/common/Entries.lean` for the bookkeeping, and `BMS/ExBuchholz/Prim.lean` and `BMS/ExBuchholz/Bms.lean`
 for the `StepHom` that comes out.
 -/
 

@@ -8,8 +8,8 @@ The choice is inert, though, because a column has at most one parent in a
 given row.  So naming a parent pins the bad root down, and the rest of the
 definition can be read off.
 
-Nothing here depends on the number of rows.  `BMS/OneRow.lean` and
-`BMS/TwoRow.lean` put `m₀` in and read the column map out.
+Nothing here depends on the number of rows.  `BMS/common/OneRow.lean` and
+`BMS/common/TwoRow.lean` put `m₀` in and read the column map out.
 -/
 
 namespace Googology.Trans.BMS

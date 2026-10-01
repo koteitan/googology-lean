@@ -4,8 +4,8 @@ import Googology.Trans.BMS.ExBuchholz.Prim
 /-!
 # One-row Bashicu matrices, translated
 
-This closes the chain.  `BMS/Entries.lean` matches `BM4.expand` on `BM4.Arr 1`
-against `expandL`; `BMS/Prim.lean` translates `expandL` into the extended
+This closes the chain.  `BMS/common/Entries.lean` matches `BM4.expand` on `BM4.Arr 1`
+against `expandL`; `BMS/ExBuchholz/Prim.lean` translates `expandL` into the extended
 Buchholz system.  What is left is that a standard array's entries are a matrix
 whose term is a standard form, which `std_entries` proves by induction over
 reachability: the generator `(0)(1)⋯(n)` reads as the tower

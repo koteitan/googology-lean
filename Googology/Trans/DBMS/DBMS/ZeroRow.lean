@@ -5,7 +5,7 @@ import Googology.Rank
 /-!
 # DBMS: `r + 1` rows inside `r + 2` rows
 
-`Trans/BMS/ZeroRow.lean` puts BMS with `r + 1` rows inside BMS with `r + 2`
+`Trans/BMS/BMS/ZeroRow.lean` puts BMS with `r + 1` rows inside BMS with `r + 2`
 rows, by writing a row of zeros underneath.  This file does the same for DBMS.
 
 The rule is BM4's in both systems, so `expandRL_zeroRow` (a row of zeros

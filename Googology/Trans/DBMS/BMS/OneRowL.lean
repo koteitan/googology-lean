@@ -5,12 +5,12 @@ import Googology.Trans.DBMS.ExBuchholz.Tables
 
 A standard form of DBMS is a matrix.  A state of `dbms 1` is an array `Arr 1`,
 and an array has a total column map, so it also holds values outside the
-matrix.  `Trans/DBMS/Tables.lean` shows two standard arrays, `stA` and `stB`,
+matrix.  `Trans/DBMS/ExBuchholz/Tables.lean` shows two standard arrays, `stA` and `stB`,
 that are the same matrix `(0)` and differ only there.  So `dbms 1` has more
 states than there are standard forms.
 
 This file gives one-row DBMS with the matrices as its states, as
-`Trans/BMS/Prim.lean` and `Trans/BMS/Pair.lean` do for BMS.
+`Trans/BMS/ExBuchholz/Prim.lean` and `Trans/BMS/common/Pair.lean` do for BMS.
 
 * `dbmsL1`: a state is the list of entries of a standard one-row DBMS array;
   the step is `expandL`, and a state halts when it is the empty list.

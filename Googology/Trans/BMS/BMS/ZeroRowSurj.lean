@@ -3,7 +3,7 @@ import Googology.Trans.BMS.BMS.ZeroRow
 /-!
 # BMS: the zero-row embedding is not onto
 
-`Trans/BMS/ZeroRow.lean` puts BMS with `r + 1` rows inside BMS with `r + 2`
+`Trans/BMS/BMS/ZeroRow.lean` puts BMS with `r + 1` rows inside BMS with `r + 2`
 rows, by writing a row of zeros underneath (`bmsL_homSucc`).  Every column of
 an image therefore ends in `0`.  The two-row generator `(0,0)(1,1)` has a
 column ending in `1`, so it is not an image, and the map is not onto.

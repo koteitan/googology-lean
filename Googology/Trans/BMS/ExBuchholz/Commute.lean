@@ -3,8 +3,8 @@ import Googology.Trans.BMS.ExBuchholz.Basic
 /-!
 # Expansion and the fundamental sequence
 
-`BMS/ExBuchholz.lean` reads a one-row matrix as an extended Buchholz term, and
-`BMS/OneRow.lean` says what `BM4.expand` does to one row.  This file joins
+`BMS/ExBuchholz/Basic.lean` reads a one-row matrix as an extended Buchholz term, and
+`BMS/common/OneRow.lean` says what `BM4.expand` does to one row.  This file joins
 them: `expandL` is that expansion written on the entries, and `read_expandL`
 says the reading turns it into `[ ]`,
 
@@ -24,8 +24,8 @@ block and the term loses its last summand, repeat the block and the term
 becomes `n` copies, go higher and the term follows one level in.
 
 The index bookkeeping between `expandL` and `BM4.expand` on `BM4.Arr 1` is in
-`BMS/Cut.lean` and `BMS/Entries.lean`; the `StepHom` itself is in
-`BMS/Prim.lean` and `BMS/Bms.lean`.
+`BMS/common/Cut.lean` and `BMS/common/Entries.lean`; the `StepHom` itself is in
+`BMS/ExBuchholz/Prim.lean` and `BMS/ExBuchholz/Bms.lean`.
 -/
 
 namespace Googology.Trans.BMS

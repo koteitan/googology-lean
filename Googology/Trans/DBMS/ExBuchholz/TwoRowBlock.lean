@@ -15,7 +15,7 @@ generator `(0,0)(1,1)⋯(n-1,n-1)`.  This file says how two-row expansion
 
 * `expand2L_append`: a list that starts with a column whose first entry is `0`
   starts a block, and expansion does not look in front of it.  This is
-  `BMS/Append.lean`'s `expandRL_append` read through `expandRL_two`.
+  `BMS/common/Append.lean`'s `expandRL_append` read through `expandRL_two`.
 * The parents under the raise: `ParL_shift`, `AncL_shift`, `ParL1_blk`.  The
   extra column `(0,0)` in front is a row-`0` ancestor of everything and never
   a row-`1` parent that `M` did not already have, as long as a positive second

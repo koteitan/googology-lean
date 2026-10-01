@@ -8,7 +8,7 @@ import Googology.Trans.BMS.ExBuchholz.Tables
 states have the same ordinal exactly when they have the same entries
 (`dbmsOrdEval_eq_iff`), and the same holds for `dbmsHom`
 (`dbmsHom_map_eq_iff`).  This is the same form as `bmsOrdEval_inj` for BMS.
-`Trans/DBMS/OneRowL.lean` takes the matrices as the states (`dbmsL1`), and
+`Trans/DBMS/BMS/OneRowL.lean` takes the matrices as the states (`dbmsL1`), and
 there both maps are one to one.  The goal records use that system.
 
 **About the representation.**  A state of `dbms 1` is an array `Arr 1`, and

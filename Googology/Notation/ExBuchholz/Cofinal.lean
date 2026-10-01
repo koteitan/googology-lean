@@ -12,7 +12,7 @@ dom X = ω   ⟹  Y < X → ∃ n, Y < X[n]
 ```
 
 for standard `X` and `Y`, with no bound on the subscripts.  The one-row
-version is `Trans/BMS/Cofinal.lean`; it never meets Buchholz's case 4.
+version is `Trans/BMS/ExBuchholz/Cofinal.lean`; it never meets Buchholz's case 4.
 
 ## Case 4
 

@@ -3,7 +3,7 @@ Ported verbatim from koteitan/trio, `lean/Decrease.lean`:
 https://github.com/koteitan/trio/blob/74ef7af49eefaef06ce4c9b57c02ecdcb9975606/lean/Decrease.lean
 Only the module names of the imports and the namespace (`TRIO` →
 `Googology.Trans.BMS.TrioCof`) were changed. The bridge to this library's
-Bashicu matrices is `Googology/Trans/BMS/TrioCofinal.lean`.
+Bashicu matrices is `Googology/Trans/BMS/common/TrioCofinal.lean`.
 -/
 /-
 **展開の 1 歩は測度を真に減らす**（トリオ数列, BM4）。

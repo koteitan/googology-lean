@@ -3,7 +3,7 @@ Ported verbatim from koteitan/trio, `lean/Gcopy.lean`:
 https://github.com/koteitan/trio/blob/74ef7af49eefaef06ce4c9b57c02ecdcb9975606/lean/Gcopy.lean
 Only the module names of the imports and the namespace (`TRIO` →
 `Googology.Trans.BMS.TrioCof`) were changed. The bridge to this library's
-Bashicu matrices is `Googology/Trans/BMS/TrioCofinal.lean`.
+Bashicu matrices is `Googology/Trans/BMS/common/TrioCofinal.lean`.
 -/
 /-
 Gcopy.lean: ガード付きコピー（上昇行列つきの悪い部分のコピー）の translate 分解。

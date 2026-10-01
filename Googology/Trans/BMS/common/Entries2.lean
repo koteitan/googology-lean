@@ -4,7 +4,7 @@ import Googology.Trans.BMS.common.TwoRow
 /-!
 # Two rows, on the entries
 
-`BMS/Entries.lean` matches `BM4.expand` on `BM4.Arr 1` against a rule on the
+`BMS/common/Entries.lean` matches `BM4.expand` on `BM4.Arr 1` against a rule on the
 entries.  This file does the same for two rows, where the rule is no longer a
 copy.
 
@@ -19,7 +19,7 @@ root and the maximal parent row is `1`.
 `entries2_expand` is the match.  Like the one-row proof it keeps both sides as
 maps over ranges, so no entry is indexed by hand; the only new work is that
 the block now depends on which copy it is in and on the ancestor test, and
-`BMS/Anc.lean` supplies the second.
+`BMS/common/Anc.lean` supplies the second.
 
 `expand2L_terminates` is what comes out for free: a run of two-row expansions
 computed on the entries reaches the empty matrix.  Termination is

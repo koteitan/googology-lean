@@ -15,7 +15,7 @@ preserves and reflects the transitive closure of the step relation.
 * `pairToExb_preserves_transGen`: `pairL.Rel b a → TransGen exbPair.Rel
   (pairToExb b) (pairToExb a)`.
 
-The term-level results are in `Trans/PSS/Steps.lean`.
+The term-level results are in `Trans/BMS/ExBuchholz/PSS/Steps.lean`.
 -/
 
 namespace Googology.Goals

@@ -4,7 +4,7 @@ import Googology.Notation.ExBuchholz.Opow
 /-!
 # One row names exactly the ordinals below `ε₀`
 
-`BMS/Calibrate.lean` settles one row as **terms**: the standard forms below
+`BMS/ExBuchholz/Calibrate.lean` settles one row as **terms**: the standard forms below
 `ψ_0(Ω)` are exactly the matrices' terms.  This file settles it as
 **ordinals**.  What was missing is that `val` is onto: every ordinal below
 `ε₀` is the value of some standard form, which `exists_desc_of_lt_eps0`

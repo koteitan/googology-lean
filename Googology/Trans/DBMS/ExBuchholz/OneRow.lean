@@ -6,13 +6,13 @@ import Googology.Notation.DBMS
 
 With one row a DBMS generator is a BM4 generator: `(dstair 1 n).col i 0` is
 `i - 0`, which is `i`.  Expansion is the same rule in both systems, so
-everything `Trans/BMS/Bms.lean` proves about `Notation.BMS.bms 1` holds of
+everything `Trans/BMS/ExBuchholz/Bms.lean` proves about `Notation.BMS.bms 1` holds of
 `Notation.DBMS.dbms 1`, by the same induction with `DStd` in place of `Std`.
 
 So one-row DBMS names the same ordinals as one-row BMS — both through
 `read ∘ entries` — and terminates.  `exists_dbms_of_lt_eps0` says which
 ordinals those are: exactly the ones below `ε₀`, the same statement
-`Trans/BMS/Eps0.lean` makes for BMS.  With two rows or more the generators
+`Trans/BMS/ExBuchholz/Eps0.lean` makes for BMS.  With two rows or more the generators
 differ and none of this applies.
 -/
 

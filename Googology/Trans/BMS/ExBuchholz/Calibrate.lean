@@ -3,7 +3,7 @@ import Googology.Trans.BMS.ExBuchholz.Commute
 /-!
 # What the one-row reading reaches
 
-`BMS/ExBuchholz.lean` says the reading uses no subscript but `0`, and that
+`BMS/ExBuchholz/Basic.lean` says the reading uses no subscript but `0`, and that
 what it produces is below `ψ_0(Ω)`.  This file says those two are the same
 condition, and that the reading reaches everything below `ψ_0(Ω)`.
 

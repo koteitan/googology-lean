@@ -4,7 +4,7 @@ import Googology.Trans.BMS.ExBuchholz.Cofinal
 /-!
 # Which one-row matrices are standard
 
-`Trans/BMS/Bms.lean` reads a standard array off as a matrix whose term is a
+`Trans/BMS/ExBuchholz/Bms.lean` reads a standard array off as a matrix whose term is a
 standard form.  This file goes the other way: every such matrix is the entries
 of a standard array, so `std_entries_iff` settles what the states of `prim`
 are.

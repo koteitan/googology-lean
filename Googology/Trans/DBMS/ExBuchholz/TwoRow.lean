@@ -16,7 +16,7 @@ bracket for bracket, onto, same ranks) and the list system `dbmsL 1`
 `dreach2_iff_dform`: a list is a standard two-row DBMS matrix exactly when it
 is `blk M₀ ++ blk M₁ ++ ⋯ ++ blk Mₖ` with every `Mᵢ` a standard pair sequence
 (a state of `pairL`, possibly empty) and `o(M₀) ≥ o(M₁) ≥ ⋯ ≥ o(Mₖ)`, where
-`o = pairOrdL` is the ordinal of pair sequences (`Trans/PSS/Rank.lean`).
+`o = pairOrdL` is the ordinal of pair sequences (`Trans/BMS/ExBuchholz/PSS/Rank.lean`).
 
 **The ordinal.**
 
