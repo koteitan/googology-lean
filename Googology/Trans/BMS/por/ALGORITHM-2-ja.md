@@ -228,7 +228,7 @@ $`\mathrm{KI}(B;\ x, \ell, \Delta, t_0, \mathrm{last};\ \rho)`$ は、同じ段�
   - (KI-2) もし $`y(g) = 0`$ ならば、$`g`$ を $`O`$ に足す。
   - (KI-3) もし $`z(g) = 1`$ かつ $`y(g) = \ell`$ ならば、$`\mathrm{Kimg}(g;\ x, \ell, \Delta, t_0, \mathrm{lg};\ \rho)`$ を足す。
   - (KI-4) もし $`z(g) = 0`$、$`y(g) = \ell`$、$`\mathrm{ch}(g) = ()`$、$`\mathrm{lg}`$、$`t_0 \ne \mathrm{none}`$ ならば、$`t_0`$ を足す（最後の子の無い印は、1 段上の $`\Omega_1`$ 倍である）。
-  - (KI-5) もし $`z(g) = 0`$ かつ $`y(g) = \ell`$ ならば、$`\mathrm{root}(\mathrm{ch}(x) + \mathrm{KI}(\mathrm{ch}(g);\ x, \ell, \Delta, \mathrm{none}, \mathrm{lg};\ \rho))`$ を足す。
+  - (KI-5) もし $`z(g) = 0`$ かつ $`y(g) = \ell`$ ならば、$`\mathrm{root}(\mathrm{ch}(x) + \mathrm{KI}(\mathrm{ch}(g);\ x, \ell, \Delta, \mathrm{none}, \mathrm{true};\ \rho))`$ を足す（**規則 `lastt`**。(C2-5-4-1) と同じく、$`g`$ の子は $`\mathrm{lg}`$ でなく旗 $`\mathrm{true}`$ で読む）。
   - (KI-6) もし $`z(g) = 0`$ かつ $`y(g) \gt \ell`$ ならば、$`(y(g) - \ell,\ 0,\ \mathrm{KI}(\mathrm{ch}(g);\ x, \ell, \Delta, \mathrm{none}, \mathrm{lg};\ \rho))`$ を足す。
   - (KI-7) そうでなければ、$`\mathrm{C2}_x(g;\ \ell, (), \mathrm{lg};\ \rho)`$ を足す。この場合は起きない。(KI-1) から (KI-6) がすべての列を覆う。
 
@@ -259,9 +259,9 @@ $`\mathrm{C2}_x(s;\ \ell, \sigma, \mathrm{last};\ \rho)`$ は、根の項 $`x`$�
     - (C2-5-2-1) もし $`j \le 0`$ ならば、結果は $`\mathrm{root}(\mathrm{ch}(x) + K)`$ である。
     - (C2-5-2-2) そうでなければ、結果は $`(j,\ 0,\ K)`$ である。
   - (C2-5-3) もし $`a = \mathrm{none}`$ かつ $`y \lt \ell`$ ならば、結果は $`\mathrm{root}(\mathrm{ch}(x) + \mathrm{C1s}_x(B;\ (), \mathrm{false}))`$ である。
-  - (C2-5-4) そうでなければ、ここで $`K = \mathrm{C2s}_x(B;\ \ell, (), \mathrm{last};\ \rho)`$ とする。
-    - (C2-5-4-1) もし $`y = \ell`$ ならば、結果は $`\mathrm{root}(\mathrm{ch}(x) + K)`$ である。
-    - (C2-5-4-2) そうでなければ、結果は $`(y - \ell,\ 0,\ K)`$ である。
+  - (C2-5-4) そうでなければ：
+    - (C2-5-4-1) もし $`y = \ell`$ ならば（**規則 `lastt`**）、結果は $`\mathrm{root}(\mathrm{ch}(x) + \mathrm{C2s}_x(B;\ \ell, (), \mathrm{true};\ \rho))`$ である。理由：新しい根の項は $`B`$ だけから作るので、$`B`$ はその項の中で決めた $`\mathrm{last}`$ で、根で同じ部分木を読むのと同じように読む。その後に続く項は、それぞれの規則でたたむ。
+    - (C2-5-4-2) そうでなければ、結果は $`(y - \ell,\ 0,\ \mathrm{C2s}_x(B;\ \ell, (), \mathrm{last};\ \rho))`$ である。
 
 $`\mathrm{C2s}_x(B;\ \ell, \sigma, \mathrm{last};\ \rho)`$ は並び $`B = (B_1, \ldots, B_k)`$ の上の C2 である。$`r_i = \mathrm{C2}_x(B_i;\ \ell, \sigma, \mathrm{last} \land i = k;\ \rho)`$ とする。$`i = 1, \ldots, k`$ の順に並び $`O`$ を作る。
 - (C2s-1) もし $`z(B_i) = 1`$、$`\sigma = ()`$、$`r_i = (1, 0, R)`$、$`O \ne ()`$ で、$`O`$ の最後の成分 $`o`$ が $`y(o) = 1`$、$`z(o) = 0`$、$`\mathrm{ch}(o) \ne ()`$ を満たし最後の子の $`z = 1`$ であり、かつ $`n = |O|`$ に対して $`z(B_n) = 1`$（位置が今の $`O`$ の長さである入力の列）ならば、$`o`$ を $`(1, 0, (\mathrm{ch}(o), R))`$ に置き換える。（続いた包んだ $`\omega`$ の列は、1 つの $`U`$ の形にまとめる。）

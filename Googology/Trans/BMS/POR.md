@@ -62,7 +62,8 @@ $`R_2^+ = (\mathrm{Ord}; 0, +; \le, \le_1, \le_2)`$.
 - **The rows that do not fit** (§16). The 45 rows that do not fit and the 3 sup rows fall into twelve families. One
   rule, `kdl0` (`por/phi3def2.py`), fits four more rows (1055 rows). Seven rows are certified to have the sheet's
   ordinal. Row 1177 equals its fix in the fix table. The order tests still show 0 violations and 0 pairs with the
-  same pattern.
+  same pattern. The rule `lastt` (end of §16) changes 196 matrices outside the test sets and gives the sheet's
+  reading at row 907; the fit stays 1057 rows and the order tests are unchanged.
 
 ## 2. The shape of the rule
 
@@ -1567,7 +1568,7 @@ child. As the first child of $`L_m`$, $`E`$ is still read above its levels (`kba
 | sheet error, in the fix table | 1177 | $`\iota(\text{fix}) = \iota(\Phi_{3\mathrm{def2}})`$ certified both ways, and $`\Phi_{3\mathrm{def2}}`$ embeds the fix. The fix is not in the parser's form; a row in that form is proposed |
 | sheet error, in the fix table | 660, 661, 1400 (same ordinal as the row before), 1217, 1336, 1349, 1350, 1436 (order errors), 626 (not a standard matrix), 1642 (unreadable, and the first row with $`z = 2`$) | no change |
 | fixed rows that still differ | 601, 718, 1401, 1348 | $`\iota(\text{fix}) \le \iota(\Phi_3)`$ certified for 601, 718, 1401; the reverse was not found. Open: the fix or $`\Phi_3`$ |
-| §9 | 907, 947 | open; no certified sheet error, and the evidence points to Φ₃def2. At `X = 905 (2,0,0)`, `ι(Φ(X[n])) < ι(R) < ι(Φ(X))` is certified for n ≤ 3 (R = the sheet's reading); the same at `946 (2,0,0)` for n ≤ 2. Lifting Φ's own lower pattern with its lower anchor gives exactly the sheet's value at 906, 907, 908, 947 (certified both ways). Every standard `M < X` is `≤ X[n]` for some n (Lemma CF, proved; also checked on 583,471 matrices with ≤ 10 columns), and the same at `X' = 946 (2,0,0)`. From it and the Shape Lemma (proved for all n at X and X') and the coveredness of R (Carlson 2009, Lemma 15.11), `ι(Φ(X[n])) < ι(R)` is proved for all n with no hypothesis; refereed. The rule `lastt` (§18) gives `Φ(X) = R`; chosen, not yet in `phi3def2.py`. No fix-table row |
+| §9 | 907, 947 | open; no certified sheet error, and the evidence points to Φ₃def2. At `X = 905 (2,0,0)`, `ι(Φ(X[n])) < ι(R) < ι(Φ(X))` is certified for n ≤ 3 (R = the sheet's reading); the same at `946 (2,0,0)` for n ≤ 2. Lifting Φ's own lower pattern with its lower anchor gives exactly the sheet's value at 906, 907, 908, 947 (certified both ways). Every standard `M < X` is `≤ X[n]` for some n (Lemma CF, proved; also checked on 583,471 matrices with ≤ 10 columns), and the same at `X' = 946 (2,0,0)`. From it and the Shape Lemma (proved for all n at X and X') and the coveredness of R (Carlson 2009, Lemma 15.11), `ι(Φ(X[n])) < ι(R)` is proved for all n with no hypothesis; refereed. The rule `lastt` (end of §16, now in `phi3def2.py`) gives `Φ(X) = R`. No fix-table row |
 | sheet error, not in the fix table (§9) | 1009 | $`\iota(\text{sheet}(1009)) = \iota(\Phi_{3\mathrm{def2}}(K))`$ certified both ways for a lex-smaller standard $`K`$ (row 1008 followed by `(2,1,0)(3,2,1)(4,2,1)(4,2,1)(4,2,0)(3,2,1)`). The fix is $`\Phi_{3\mathrm{def2}}(1009)`$ up to $`\iota`$: $`\text{sheet}(1008) \lt \text{fix} \lt \text{sheet}(1010)`$ certified. A fix-table row is proposed |
 | a level more than the cut chain of the last summand | 1334, 1335, 1434, 1435 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ certified for 1334, 1335, 1435. Open: the level count needs the other summands (§14) |
 | bare extra up-kids: a level or a doubling | 1490, 1503, 1504, 1515, 1516, 1583 | $`\iota(\Phi_3) \le \iota(\text{sheet})`$ for all but 1583, the reverse for 1583. Open: `kbare` loses rows |
@@ -1584,15 +1585,34 @@ child. As the first child of $`L_m`$, $`E`$ is still read above its levels (`kba
 after $`(0,0,0)(1,1,1)`$), 125 pairs are certified "<" and 26 are undecided (before: 126 and 25). The other six
 sets are as in §14.
 
+**The rule `lastt`** (now in `por/phi3def2.py`; branches (C2-5-4-1) and (KI-5) of [por/ALGORITHM-2.md](por/ALGORITHM-2.md)).
+A `D`-level column that becomes a new root term `root(x, …)` reads its children with `last = True`, as the same
+subtree is read at the root. Before, (C2-5-4-1) (a column with no owner and `y = Dy`) passed `last` and (KI-5)
+passed `lg`. (C2-5-4-2) still passes `last`. Measured with the new file:
+- at `X = 905 (2,0,0)` = `(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0)` it prints
+  `0 a (*b ([c (e ([f g] g+e)) d] d+e d+e+a))` (node names changed), which is the sheet's reading R of row 907 with
+  the element `d+e` that R implies. The file before `lastt` printed an extra block `(e (e' ([f g] g+e')))`;
+- fit: 1057 rows (iso / sub / sup / no = 505 / 552 / 3 / 39). Against the file before `lastt`, 0 of the 1099
+  verdicts and 0 of the 1099 patterns differ;
+- the seven order-test sets (2,973 matrices): 0 patterns change, so their 0 violations and 0 same-pattern pairs
+  stand. None of the 196 matrices that `lastt` changes is in these sets;
+- the 196 changed matrices (§18): the new file prints the expected `lastt` pattern on 196 of 196;
+- an independent program written from [por/README.md](por/README.md) and [por/ALGORITHM-2.md](por/ALGORITHM-2.md)
+  alone prints the same line as `phi3def2.py` on all 4,268 test inputs (3,486 distinct matrices: the sheet rows,
+  the seven sets and the 196). With the two old flags put back, it prints the old pattern on all 196.
+
 ## 17. Theory: $`R_2^+`$ below $`\upsilon_{\omega+1}`$
 
-The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi_3`$ (Lemma L, Theorems A and B, Proposition P′; 20 undecided pairs of §9 decided; 720 of the 777 undecided limit-step pairs certified "<") are in [R2PLUS.md](R2PLUS.md), with their status and what stays open.
+The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi_3`$ (Lemma L, Theorems A and B, Proposition P′; 20 undecided pairs of §9 decided; 720 of the 777 undecided limit-step pairs certified "<") are in [R2PLUS.md](R2PLUS.md), with their status and what stays open. That page now also has the order proof for every standard matrix below `(0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)` (values below $`\upsilon_{\omega\cdot\omega}`$).
 
 ## 18. Next
 
 - Undecided pairs: the order tests left 777 pairs undecided under Φ₃def2, almost all limit steps
   `A = B[n]`. A new certificate search ([R2PLUS.md](R2PLUS.md)) certifies 720 as "<" and finds no
-  violation; 57 stay open. Needed: those 57, and a proof that `ι∘Φ₃` increases along fundamental sequences.
+  violation. The list of the other 57 was lost and was rebuilt: after the same searches, 75 pairs stay open
+  (the 57 are most likely among them; this is checked by the counts per set only). 67 of the 75 are now
+  certified "<", each certificate replayed twice; 8 stay open in both directions; no violation. Needed:
+  those 8, and a proof that `ι∘Φ₃` increases along fundamental sequences.
 - Rows 907 and 947, at `X = 905 (2,0,0)` = `(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0)` and
   `X' = 946 (2,0,0)` = `(0,0,0)(1,1,1)(2,1,1)(2,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(4,2,0)(2,0,0)`. Proved on paper and refereed:
   - the Shape Lemma for all n: `Φ(X[n]) = 0 a Bl_0 … Bl_n`, each block nesting copies of all earlier
@@ -1605,13 +1625,15 @@ The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi
     are covered (Carlson 2009, Lemma 15.11);
   - so `ι(Φ(X[n])) < ι(R)` and `ι(Φ(X'[n])) < ι(R')` hold for all n with no hypothesis.
   Left: `sup_n ι(Φ(X[n])) = ι(R)`. With σ = the supremum and β = ι(R), it is proved that σ ≤ β and that
-  σ = β if and only if σ ≤₁ β; the statement σ ≤₁ β is open. Also left: that Φ is right on every `X[n]`.
+  σ = β if and only if σ ≤₁ β; the statement σ ≤₁ β is open. It is now reduced to the finite configurations
+  inside one block of the realization of R (Theorem RED in [R2PLUS.md](R2PLUS.md), refereed); neither a proof nor a
+  refutation was found. Also left: that Φ is right on every `X[n]` (shown in the direction the fix needs:
+  Φ(X[n]) is never too small against the fundamental sequence of X[n], given the shape of Φ(X[n][k])).
 - The rule `lastt`: in (C2-5-4-1) and (KI-5), a marker with children that becomes a new root term
   decides `last` inside that term (the unit child is a separate summand). It gives `Φ(X) = R` and
   `ι(Φ(X')) = ι(R')`. It changes 196 of the 583,471 BM4-reachable matrices with ≤ 10 columns:
   145 continuations `F(2,…)` and 51 others that start `(0,0,0)(1,1,1)(2,2,1)(3,1,1)`. Decision: use
-  `lastt` in both branches on all 51 (not yet applied to `por/phi3def2.py`; that is a separate step
-  with the README branches). Measured, with the rule `lastt`:
+  `lastt` in both branches on all 51 (now in `por/phi3def2.py`; see the end of §16). Measured, with the rule `lastt`:
   - fit 1057 rows (iso / sub / sup / no = 505 / 552 / 3 / 39), the same as Φ₃def2 on all 1099 rows;
   - the seven order-test sets: 0 of 2,973 matrices change, so their 0 violations stand;
   - on 69 new pairs around the changed runs: 0 violations and 30 pairs certified "<" with `lastt`;
@@ -1642,7 +1664,7 @@ How to run them, and the full algorithm of `phi3def2.py` branch by branch: [por/
 
 The current programs (in `por/`):
 
-- `por/phi3def2.py`: **the current $`\Phi_3`$** ($`\Phi_{3\mathrm{def}}`$ of §15 with the rule `kdl0` of §16).
+- `por/phi3def2.py`: **the current $`\Phi_3`$** ($`\Phi_{3\mathrm{def}}`$ of §15 with the rules `kdl0` and `lastt` of §16).
   `python3 por/phi3def2.py "(0,0,0)(1,1,1)(2,2,1)(3,2,1)(3,1,1)(4,2,1)(5,2,1)"` prints each node's matrix,
   its $`\le_1`$-reach and its $`\le_2`$-successors.
 - `por/tss.py`: 3-row matrices and terms, and the lexicographic order. Every other program uses it.
@@ -1667,6 +1689,7 @@ it; they are run the same way (next to `tss.py`), and those with flags take `--f
 | `phi3n.py` | §13 | later level columns | 1030 |
 | `phi3o.py` | §14 | no bad pairs up to $`(0,0,0)(1,1,1)(2,2,2)`$ (50 flags) | 1051 |
 | `phi3def.py` | §15 | $`\Phi_{3o}`$ without flags (the same map) | 1051 |
+| `phi3def2.py` in commit `9a82e4f` | §16 | the rule `kdl0`, before `lastt` | 1057 |
 
 Patterns are written as in the 2-row version, with `(x … z)` for $`\le_1`$ and `[x … z]`
 for $`\le_2`$. The oracle is not included in this repository.

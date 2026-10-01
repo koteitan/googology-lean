@@ -62,8 +62,9 @@ Two consequences ([PROOF](PROOF.md) Cor 7.2):
     `#print axioms mainTheorem_mat` has no `sorryAx` and none of the removed axioms. The statements of
     `mainTheorem_mat`, `mainTheorem` and Cor 7.2 are the same as before. The referee looked for a
     contradiction among the new axioms (for example at $`\gamma = 0`$, $`\alpha = 1`$) and found none.
-    [CW12] Lemma 5.7.1 has a known error in its other (non-epsilon) case, which is not used; the
-    epsilon case is also proved on paper.
+    [CW12] Lemma 5.7.1 has a known error in its other (non-epsilon) case, which is not used. In the
+    epsilon case, the direction that the axiom `lemma571_eps` states is also proved on paper; the
+    other direction is only cited.
 - **One outside assumption.** The Lean function `Ord.psi`
   ([Ord.lean](../../../Notation/ExBuchholz/Ord.lean)) is Buchholz's $`\psi`$. This is used only
   to read Cor 7.2(b) as "the image is $`\mathrm{Core} \setminus \{0\}`$": [Rank.lean](../Rank.lean)

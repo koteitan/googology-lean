@@ -232,7 +232,7 @@ $`\mathrm{KI}(B;\ x, \ell, \Delta, t_0, \mathrm{last};\ \rho)`$ reads the childr
   - (KI-2) If $`y(g) = 0`$, add $`g`$ to $`O`$.
   - (KI-3) If $`z(g) = 1`$ and $`y(g) = \ell`$, add $`\mathrm{Kimg}(g;\ x, \ell, \Delta, t_0, \mathrm{lg};\ \rho)`$.
   - (KI-4) If $`z(g) = 0`$, $`y(g) = \ell`$, $`\mathrm{ch}(g) = ()`$, $`\mathrm{lg}`$ and $`t_0 \ne \mathrm{none}`$, add $`t_0`$ (the final bare marker is the $`\Omega_1`$-multiplier one level up).
-  - (KI-5) If $`z(g) = 0`$ and $`y(g) = \ell`$, add $`\mathrm{root}(\mathrm{ch}(x) + \mathrm{KI}(\mathrm{ch}(g);\ x, \ell, \Delta, \mathrm{none}, \mathrm{lg};\ \rho))`$.
+  - (KI-5) If $`z(g) = 0`$ and $`y(g) = \ell`$, add $`\mathrm{root}(\mathrm{ch}(x) + \mathrm{KI}(\mathrm{ch}(g);\ x, \ell, \Delta, \mathrm{none}, \mathrm{true};\ \rho))`$ (**the rule `lastt`**, as in (C2-5-4-1): the children of $`g`$ are read with the flag $`\mathrm{true}`$, not $`\mathrm{lg}`$).
   - (KI-6) If $`z(g) = 0`$ and $`y(g) \gt \ell`$, add $`(y(g) - \ell,\ 0,\ \mathrm{KI}(\mathrm{ch}(g);\ x, \ell, \Delta, \mathrm{none}, \mathrm{lg};\ \rho))`$.
   - (KI-7) Otherwise add $`\mathrm{C2}_x(g;\ \ell, (), \mathrm{lg};\ \rho)`$. This case does not occur: (KI-1) to (KI-6) cover every column.
 
@@ -263,9 +263,9 @@ $`\mathrm{C2}_x(s;\ \ell, \sigma, \mathrm{last};\ \rho)`$ takes a root term $`x`
     - (C2-5-2-1) If $`j \le 0`$, the result is $`\mathrm{root}(\mathrm{ch}(x) + K)`$.
     - (C2-5-2-2) Otherwise the result is $`(j,\ 0,\ K)`$.
   - (C2-5-3) If $`a = \mathrm{none}`$ and $`y \lt \ell`$, the result is $`\mathrm{root}(\mathrm{ch}(x) + \mathrm{C1s}_x(B;\ (), \mathrm{false}))`$.
-  - (C2-5-4) Otherwise let $`K = \mathrm{C2s}_x(B;\ \ell, (), \mathrm{last};\ \rho)`$.
-    - (C2-5-4-1) If $`y = \ell`$, the result is $`\mathrm{root}(\mathrm{ch}(x) + K)`$.
-    - (C2-5-4-2) Otherwise the result is $`(y - \ell,\ 0,\ K)`$.
+  - (C2-5-4) Otherwise:
+    - (C2-5-4-1) If $`y = \ell`$ (**the rule `lastt`**), the result is $`\mathrm{root}(\mathrm{ch}(x) + \mathrm{C2s}_x(B;\ \ell, (), \mathrm{true};\ \rho))`$. Reason: the new root term is built from $`B`$ alone, so $`B`$ is read with $`\mathrm{last}`$ decided inside that term, as the same subtree is read at the root; the summands that follow it are folded by their own rules.
+    - (C2-5-4-2) Otherwise the result is $`(y - \ell,\ 0,\ \mathrm{C2s}_x(B;\ \ell, (), \mathrm{last};\ \rho))`$.
 
 $`\mathrm{C2s}_x(B;\ \ell, \sigma, \mathrm{last};\ \rho)`$ is C2 on a list $`B = (B_1, \ldots, B_k)`$. Let $`r_i = \mathrm{C2}_x(B_i;\ \ell, \sigma, \mathrm{last} \land i = k;\ \rho)`$. Build a list $`O`$, for $`i = 1, \ldots, k`$:
 - (C2s-1) If $`z(B_i) = 1`$, $`\sigma = ()`$, $`r_i = (1, 0, R)`$, $`O \ne ()`$, the last entry $`o`$ of $`O`$ has $`y(o) = 1`$, $`z(o) = 0`$, $`\mathrm{ch}(o) \ne ()`$ and a last child with $`z = 1`$, and $`z(B_n) = 1`$ for $`n = |O|`$ (the input column whose position is the current length of $`O`$): replace $`o`$ by $`(1, 0, (\mathrm{ch}(o), R))`$. (Consecutive wrapped $`\omega`$ columns merge into one $`U`$-form.)

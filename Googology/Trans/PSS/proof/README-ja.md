@@ -34,7 +34,7 @@ $`\Phi`$ は標準形のペア数列 $`M`$ を、Carlson の意味の 1 階の�
     - **底 $`\sigma \ge 1`$ での定理 S+**（`splus`、`../Main/SPlus.lean`）。[../../BMS/R2PLUS-ja.md](../../BMS/R2PLUS-ja.md) の定理 S+ の証明は、どの底 $`\sigma \ge 1`$ でも通る。Lean では「主要数を主要数へ移す」の代わりに吸収則（$`x + q = q`$ なら $`h(x) \cdot \omega \le h(q)`$）を使う。
     - **定理 FIN**（`finite_inC`、`finite_P1`、`../Main/Fin.lean`）。$`1 \lt \alpha \lt \psi_0(\Omega_\omega)`$ で $`P_1(\alpha)`$ は有限である。$`(\mathrm{ht}_\sigma(y), y)`$ の辞書式の順についての帰納法で示す。
     - **定理 LEAST**（`ordV_least`、`iotaPat_eq_least`、`../Main/Least.lean`）。$`X = o[V_M]`$ から任意の集合への同型 $`g`$ は $`g \ge \mathrm{id}`$ を満たす。だから $`X`$ は isominimal で、$`\iota(\Phi(M)) = o(M)`$ である。
-  - 確かめたこと：ライブラリのビルド（9,242 ジョブ）で "declaration uses sorry" は 0 件。`#print axioms mainTheorem_mat` の一覧に `sorryAx` も消した公理も無い。`mainTheorem_mat`、`mainTheorem`、Cor 7.2 の文は前と同じ。査読者は新しい公理どうしの矛盾を探したが（たとえば $`\gamma = 0`$、$`\alpha = 1`$）、見つからなかった。[CW12] Lemma 5.7.1 は、もう一方の（epsilon でない）場合に誤りが知られている。そちらは使わない。epsilon の場合は紙の上でも証明した。
+  - 確かめたこと：ライブラリのビルド（9,242 ジョブ）で "declaration uses sorry" は 0 件。`#print axioms mainTheorem_mat` の一覧に `sorryAx` も消した公理も無い。`mainTheorem_mat`、`mainTheorem`、Cor 7.2 の文は前と同じ。査読者は新しい公理どうしの矛盾を探したが（たとえば $`\gamma = 0`$、$`\alpha = 1`$）、見つからなかった。[CW12] Lemma 5.7.1 は、もう一方の（epsilon でない）場合に誤りが知られている。そちらは使わない。epsilon の場合のうち、公理 `lemma571_eps` が述べる向きは紙の上でも証明した。もう一方の向きは引用だけである。
 - **外からの仮定が 1 つある。** Lean の関数 `Ord.psi`
   （[Ord.lean](../../../Notation/ExBuchholz/Ord.lean)）が Buchholz の $`\psi`$ であること。
   これを使うのは、Cor 7.2(b) を「像は $`\mathrm{Core} \setminus \{0\}`$」と読むところだけである。
