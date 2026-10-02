@@ -112,3 +112,4 @@ import Googology.Trans.BMS.ExBuchholz.PSS.StepBound
 import Googology.Trans.PoR.InaccPsi.CountSeg
 import Googology.Trans.PoR.InaccPsi.LowSeg
 import Googology.Trans.PoR.InaccPsi.LowTerms
+import Googology.Trans.PoR.InaccPsi.ConjT
