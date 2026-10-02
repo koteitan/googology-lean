@@ -20,8 +20,6 @@ The remaining work, arranged by the cells of the README tables. Every item is wo
     - sheet rows that do not fit: 1334/1335/1434/1435 (a level more than the cut chain of the last summand), bare extra up-kids (1490, 1503, 1504, 1515, 1516, 1583), 1582, 569, 1476, 1489, 575, 709, 1409, 1460, 1577; fixed rows 601/718/1348/1401 where the fix and the converter differ
   - M ≥ (0,0,0)(1,1,1)(2,2,2): not tested
   - the whole program: shorten the definition of phi3def2.py (the level-column list, lh₁) and replace its named cases lwpos, lnest, kcross by general rules
-- Table of notations (definition of expansion, well-foundedness)
-  - add the row of Buchholz's ψ over ω weakly inaccessibles (InaccPsi): written on branch feature/inacc-psi; not in main yet
 - Table of translations into the ordinals
   - DBMS with 3 rows and up
     - surjectivity (the image is known exactly): show that 3-row DBMS has the same ordinal as 3-row BMS
