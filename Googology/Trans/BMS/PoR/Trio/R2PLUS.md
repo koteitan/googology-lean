@@ -205,7 +205,7 @@ Not covered by this theorem: $`V`$ itself and every matrix above it. At $`\upsil
 in the pattern leaves its block, and Theorem B does not describe $`R_2`$ there; see the next section. Nothing of
 this is in Lean.
 
-**Theorem S from $`V`$ up to $`V_3`$: proved on paper given one new lemma (FRAG).** Let
+**Theorem S from $`V`$ up to $`V_3`$: proved on paper and refereed (with the new Lemma FRAG, refereed 2026-10).** Let
 $`V_3 = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)(2,0,0)`$ ($`V`$ followed by `(2,0,0)`), with
 $`\mathcal{T}_3(V_3) = \upsilon_{\omega^3}`$ (here $`\omega^2 = \omega\cdot\omega`$). For all standard trio matrices
 $`M, M' \lt_{\mathrm{lex}} V_3`$:
@@ -222,17 +222,20 @@ in both $`R_2^S`$ and $`R_2^C`$; in particular $`\iota(\Phi_3(V)) = \upsilon_{\o
   one more than the top of its first block. Every other point is $`\le_1`$ to the same places as in $`R_1^+`$, up to
   the top of its block. All of this is proved without FRAG except the one relation
   $`\rho_h \le_1 \upsilon_{\omega^2 h+\omega+1} + 1`$; without FRAG it is proved that the reach of $`\rho_h`$ is that point
-  or the one below it (Lemma TOP).
+  or the one below it (Lemma TOP). With FRAG the relation is proved (Lemmas RS and RS$`^h`$).
 - **Lemma FRAG.** In $`R_1^+`$, moving finitely many $`\upsilon`$-points at once, together with the parameters that
   depend on them, keeps $`0, +, \le, \le_1`$. The proof adapts Wilken's base change ([W07a] 5.3–7.10, [W07b] 4.4)
-  with a map on the parameters in place of the identity. It is new.
+  with a map on the parameters in place of the identity. It is new. A full proof, which pushes each segment down into a
+  lower one and then moves one base, was written and refereed in 2026-10 (no fatal or blocking point;
+  [Trans/PoR/InaccPsi/RESTARTS.md](../../../PoR/InaccPsi/RESTARTS.md) §1).
 - **Theorem EQB′′.** $`R_2^C`$ and $`R_2^S`$ agree below $`\upsilon_{\omega^3}`$; FRAG is used only for the pair above.
 - **The order proof** follows the one below $`V`$, with a new last block. The only ways into the range are $`V`$
   and finitely many listed kinds of terms (Lemma ENT′′). Without FRAG it is proved that every copy of
   $`\Phi_3(M)`$ is at least $`\mathcal{T}_3(M)`$, but not that this value is reached.
 
 The referee re-derived the new steps and read every cited proof at each step where FRAG changes the parameters.
-No FATAL or BLOCKING point; FRAG is accepted at the level of a sketch, so the range is not marked as proved.
+No FATAL or BLOCKING point; FRAG was accepted at the level of a sketch. The later full proof of FRAG was refereed
+with no FATAL or BLOCKING point, so the range is now proved (the order proof 1 review, FRAG 1 review).
 Six minor points, among them: the choice of $`\tau`$ in Claim 5.5(b) is again not written out; a side remark
 ("all other pairs agree without FRAG") has a hole that a smaller sentence fixes; the move of a base with a limit
 index to one with a successor index needs one line saying that it is valid in $`R_1^+`$ (not in pure $`R_2`$).
@@ -247,7 +250,10 @@ test the program and the translation $`\mathcal{T}_3`$, not $`R_2`$ itself.
 
 Above $`V_3`$ the program gives $`\upsilon_{\omega^3}`$ the reach "top of its block + 2" and
 $`(0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(3,0,0)`$ (value $`\upsilon_{\omega^\omega}`$) the reach "top of its block +
-$`\omega`$"; Lemma TOP does not cover these.
+$`\omega`$". New (2026-10, proved): the reach of $`\upsilon_{\omega^3}`$ is exactly "top + 2" in $`R_2^S`$, and a general Lemma
+TOP$`_\lambda`$ bounds the reach of every restart up to the $`\omega`$-th fixed point of $`\upsilon`$ from above, "top + $`\omega`$" at
+$`\upsilon_{\omega^\omega}`$ included; that these upper bounds are reached is open
+([Trans/PoR/InaccPsi/RESTARTS.md](../../../PoR/InaccPsi/RESTARTS.md) §2–3).
 
 **The sup at $`X`$ (rows 907 and 947 of [POR.md](POR.md)).** Let $`X = (0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0)`$
 and let $`R`$ be the sheet's reading `0 a (b ([c (e ([f g] g+e)) d] d+e d+e+a))` with point `b` (it includes the
@@ -336,11 +342,10 @@ because $`X[n]`$ is not in the test sets. Which of the two patterns is wrong is 
 **Conditional or open.**
 - The full equality of the Carlson–Wilken 2012 §7 remark, and the per-matrix hypotheses of the two
   further shapes for all matrices.
-- A full referee pass on Lemma FRAG; then Theorem S holds below $`V_3`$.
 - $`\sigma \le_1 \beta`$ at $`X`$ and $`X'`$, that is $`\mathrm{Cov}(\gamma) = \bigcup_n \mathrm{Cov}(\gamma_n)`$; the same question at
   $`Y_0`$; equality at $`M_1`$; whether $`P_n`$ is too large.
 - That $`\iota \circ \Phi_3`$ increases along every fundamental sequence from $`V`$ up to the least counterexample
-  (below $`V_3`$ it follows from FRAG), and the base case at the bad root of nested limits.
+  (below $`V_3`$ it follows from Theorem S), and the base case at the bad root of nested limits.
 - Which pattern is wrong at the 26 counterexamples, and a repair of the rule.
-- $`V_3`$ and above: the reaches "top + 2" and "top + $`\omega`$" (above); heads with $`\Omega_2`$-level structure need
+- $`V_3`$ and above: that the reaches reach their upper bounds (above; "top + $`\omega`$" at $`\upsilon_{\omega^\omega}`$), and the order proof; heads with $`\Omega_2`$-level structure need
   arithmetic that the literature leaves to future work.

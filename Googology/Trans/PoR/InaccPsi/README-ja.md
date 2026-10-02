@@ -67,14 +67,18 @@ $`\sup_k \psi_{\Omega_1}(I_k) = \sup_k \psi_{\Omega_1}(\varepsilon_{I_k+1}) = \p
 \mathrm{Core}(R_2^C) = \psi_{\Omega_1}(I_\omega) = \{\, |t| : t \text{ an InaccPsi normal form, all collapse arguments } \lt I_\omega,\ |t| \lt \Omega_1 \,\}.
 ```
 
-どちらの半分も**未解決**。$`\upsilon_{\omega\cdot\omega}`$ より下では両方とも成り立ち、$`R_2^C`$ では $`\upsilon_{\omega^3}`$ より下でも成り立つ（§3）。
+どちらの半分も**未解決**。$`\upsilon_{\omega\cdot\omega}`$ より下では両方とも成り立ち、$`R_2^C`$ では $`\iota \mapsto \upsilon_\iota`$ の最初の不動点
+$`\Xi_1`$ まで成り立つ（§3 と [RESTARTS-ja.md](RESTARTS-ja.md)）。
 
 ## 3. 証明済みのこと
 
 **まとめ。** $`\upsilon_{\omega\cdot\omega}`$ より下では、主張は $`R_2^C`$ でも $`R_2^S`$ でも成り立つ：$`\upsilon_{\omega\cdot\omega}`$ 未満の
 どの順序数も核に入り、しかも、つぶす引数がすべて $`I_\omega`$ 未満の InaccPsi の標準形の可算な値である（下の定理 LOW）。
 Wilken の点には正確な名前がある：$`\eta \lt \Gamma_0`$ で $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$（定理 T、§4）。
-$`R_2^C`$ では、補題 FRAG なしで $`\upsilon_{\omega^3}`$ まで主張が成り立つ（定理 CORE-C3）。その上では、どちらの半分も未解決。
+いまは $`\iota \mapsto \upsilon_\iota`$ の最初の不動点 $`\Xi_1`$ 未満のどの $`\eta`$ でも（定理 T+）。$`R_2^C`$ では $`\Xi_1`$ まで主張が成り立ち、
+$`\Xi_\omega`$（$`\omega`$ 番目の不動点）以下のどの順序数も核に入る。補題 FRAG は証明済みになった。これら 2026-10 の結果
+（FRAG、FRAG2、やり直しのブロック、T+）は 2 ページ目 [RESTARTS-ja.md](RESTARTS-ja.md) にある。$`R_2^C`$ では $`\Xi_1`$ より上、
+$`R_2^S`$ では $`\upsilon_{\omega^3}`$ より上で、どちらの半分も未解決。
 
 **Lean**（このディレクトリの 5 つのファイル。ライブラリ全体と一緒にビルドした）：
 
@@ -153,14 +157,15 @@ $`R_2^C`$ では、補題 FRAG なしで $`\upsilon_{\omega^3}`$ まで主張が
 - **定理 T-LOW**（2026-10、査読 1 回）。どの可算な $`\eta`$ でも
   $`\psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta) \le \upsilon_{1+\eta}`$。証明：LOW-0 と LOW-STEP で帰納法。極限は補題 CONT。
   T-UP と合わせて**定理 T**（§4）。$`\eta = \omega^2`$ までの帰納法は Lean にある（`LowerT.lean`）。
-- **定理 CORE-S**（2026-10）。$`\upsilon_{\omega\cdot\omega}`$ 未満のどの順序数も $`\mathrm{Core}(R_2^S)`$ に入る。補題 FRAG を
-  仮定すれば $`\upsilon_{\omega^3}`$ 未満のどれも。$`\upsilon_{\omega\cdot\omega}`$ より下では、$`R_2^S`$ の最小の閉じた集合は、
+- **定理 CORE-S**（2026-10）。$`\upsilon_{\omega^3}`$ 未満のどの順序数も $`\mathrm{Core}(R_2^S)`$ に入る（$`\upsilon_{\omega\cdot\omega}`$ から先は
+  補題 FRAG を使う。FRAG は証明済みになった。[RESTARTS-ja.md](RESTARTS-ja.md) §1）。$`\upsilon_{\omega\cdot\omega}`$ より下では、$`R_2^S`$ の最小の閉じた集合は、
   ちょうど $`R_2^C`$ の isominimal な集合。要の段は補題 FOLD：$`f`$ が被覆なら、$`f`$ と恒等写像の各点ごとの最小も
   被覆。ただし $`\lt_2`$ の組が入れ子にならないこと。補題 NEST：長さ 3 の鎖より上では、この条件は成り立たない。
   ここで $`R_2^S`$ での「最小」は Wilken の定義（2021, 6 ページ。+ の無い $`R_2`$ のもの）を $`R_2^+`$ に読んだもの。
 - **定理 LOW**（上のまとめ）は、CORE-C、CORE-S、予想 U、補題 L から出る。
 
-**$`\upsilon_{\omega^3}`$ まで、FRAG なしで**（2026-10、$`R_2^C`$）。
+**$`\upsilon_{\omega^3}`$ まで、FRAG なしで**（2026-10、$`R_2^C`$）。定理 CORE-C$`^\Xi`$ で $`[0, \Xi_\omega]`$ まで延びた
+（[RESTARTS-ja.md](RESTARTS-ja.md) §3）。
 
 - **補題 PT**（査読 1 回）。$`Q`$ を Carlson 2009, Def 5.6 の完全な意味でのパターンとする。$`R_2^C`$ の中の $`Q`$ のどの写しも
   $`Q`$ の点を $`\ge v`$ に置くなら、$`[0, v] \subseteq \mathrm{Core}(R_2^C)`$（Carlson 2009, Lemma 15.11, Thms 14.10, 14.14）。
@@ -185,8 +190,8 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   （下の T1）、定理 EQ の先頭の項への置き換え、Wilken 2021 の Lemma 1.7(2) の $`R_2^+`$ 版、$`\Pi_2`$ 文の移し。
 - **系 FIRST。** 右端が $`\beta_0`$ 以下の $`R_2^S`$ の関係（$`\le_1`$ でも $`\le_2`$ でも）は、どれも $`R_2^C`$ で成り立つ
   （「右端が $`\beta_0`$ の $`\le_2`$」の場合は 2 本目の論文で足した。2026-10、査読 1 回）。$`\beta_0`$ での食い違いは、$`R_2^C`$ の余分な関係。だから $`R_2^S = R_2^C`$ は、一致する段のすべてで逆向き
-  （$`C \Rightarrow S`$）が成り立つことと同値。また $`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$、FRAG を仮定すれば
-  $`\beta_0 \ge \upsilon_{\omega^3}`$、$`\beta_0`$ は可算か $`\infty`$。
+  （$`C \Rightarrow S`$）が成り立つことと同値。また $`\beta_0 \ge \upsilon_{\omega^3}`$（FRAG を使う。
+  FRAG は証明済みになった）、$`\beta_0`$ は可算か $`\infty`$。
 - **補題 UPG。** 一致する段では、$`\alpha`$ 未満のどの $`\gamma`$ も $`R_2^C`$ で $`\alpha`$ の isominimal な部分集合に入るなら、
   $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$（$`\alpha = \kappa_C`$ と $`\alpha = \upsilon_{\omega\cdot\omega}`$ で成り立つ）。
 - **KAPPA と CORE-EQ。** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$、$`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$。だから
@@ -252,7 +257,7 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   $`m_2`$ は $`\min C^*_2 = \upsilon_\omega`$ の最小の $`\le_1`$ の前の元。引用した $`R_1^+`$ の核と定理 A・EQ を仮定すれば
   $`m_2 = \upsilon_1`$。
 - $`C^*_3`$ についての事実（2026-10）：$`[0, c_2)`$ の中に長さ 3 の鎖は無い。$`c_0`$ はその $`\lt_1`$ の前の元たちの極限。
-  $`m_3 \ge \upsilon_{\omega^3}`$、いまは FRAG なしで（CORE-C3 の系）。以前から：$`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$。
+  FRAG なしで $`m_3 \gt \Xi_\omega`$、$`c_0 \ge \upsilon_{\Xi_\omega+\omega^2}`$（[RESTARTS-ja.md](RESTARTS-ja.md) §3）。以前から：$`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$。
 - **補題 TOP2**（2026-10、査読 1 回）。どの $`\alpha \lt m_3`$ にも、$`\alpha \lt x \lt y \lt m_3`$ となる長さ 2 の鎖 $`x \lt_2 y`$ がある。
   だから $`m_3`$ は長さ 2 の鎖の極限で、FRAG なしで $`m_3 \ge \upsilon_{\omega\cdot\omega}`$。
 - **補題 REL**（2026-10、査読 1 回。出発点を変えた定理 STEP）。$`r_0 = \tau`$、$`r_{\xi+1} = T^{r_\xi} \cap \Omega_1`$、極限では上限とする。
@@ -299,7 +304,7 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   狭義に増加するものがあれば、$`[0, \gamma) \subseteq \mathrm{Core}(R_2^C)`$。**EPS-RED**：$`F`$ は値が $`\varepsilon`$ 数の項でだけ
   要る。**FS-OE**：狭義の増加は 2 つの局所的な段「前の項は $`t`$ より下」「$`t[n]`$ は $`t`$ より下」から出る。
 - **RED-BMS。** [R2PLUS-ja.md](../../BMS/PoR/Trio/R2PLUS-ja.md) の定理 S と合わせると、$`\gamma`$ より下の下界は、
-  $`\gamma`$ 未満の $`\varepsilon`$ 数の項から $`V`$ 未満（FRAG を仮定すれば $`V_3`$ 未満）の標準形のトリオ行列への順序を保つ
+  $`\gamma`$ 未満の $`\varepsilon`$ 数の項から $`V`$ 未満（FRAG を使えば $`V_3`$ 未満。FRAG は証明済み）の標準形のトリオ行列への順序を保つ
   埋め込み $`\mu`$ から出る。**S-RED**：Lean のクラス `TrioStdL` の行列では、$`\Phi_3`$ の点の狭義の増加は、ただ 1 つの命題
   「どの $`A`$ と $`k`$ でも $`\Phi_3(A[k])`$ の点は $`\Phi_3(A)`$ の点より下」に帰着する（Lean の定理 `trio_fs` と BMS の停止性から）。
 - **補題 MU-A。** 項の断片 $`G_A`$（和。$`\Omega_\omega`$、$`\omega^{\Omega_\omega + c}`$、$`\theta\cdot\omega^e`$ の和の $`\psi_{\Omega_1}`$）の上で、
@@ -331,8 +336,8 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
 
 **証明されていないこと：**
 
-- **$`R_2^C`$ で $`\upsilon_{\omega^3}`$ より上、$`R_2^S`$ で $`\upsilon_{\omega\cdot\omega}`$ より上（FRAG を仮定すれば $`\upsilon_{\omega^3}`$ より上）での主張**、
-  両方の半分。
+- **$`R_2^C`$ で $`\Xi_1`$ より上、$`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上での主張**、両方の半分。$`\upsilon_{\omega^3}`$ より上のやり直しの
+  届く先（補題 RS$`_\lambda`$）と、[RESTARTS-ja.md](RESTARTS-ja.md) §6 の残り。
 - **$`R_2^S = R_2^C`$**：$`\le_1`$ の逆向き $`C \Rightarrow S`$ は、$`\kappa_C`$ より上の後続の段で $`\alpha \notin G_C`$ のとき未解決。
   $`\le_2`$ の逆向きは、(ii) の型の段で未解決（$`\Pi_2`$ 文を上向きに移すことが要るが、上向きの 2-反映でも持ち上げでも
   得られない。いまは段ごとに 1 つの組 $`(a^*, \beta)`$ の話で、$`\kappa_C`$ より下では予想 CORE-2 と同値。残りは PIN と LOW）。
@@ -342,9 +347,8 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   S-RED の局所的な段。$`G_B`$ の外に 4 つの族がある：(M1) 項の中の非可算な $`\kappa`$、$`c`$、$`g`$。(M2)
   $`\Omega_{\xi+1}`$ のような後続の添字。(M3) $`\Omega_{\Omega_\omega}`$ のような非可算な添字。(M4) $`\psi_{\Omega_1}(\Omega_\omega)`$ より下の土台
   全体（$`\varepsilon_1`$、$`\Gamma_0`$、$`a \ge 1`$ の $`\varphi(a, b)`$ など）。段 0 の (M4) は済んだ（MU-0、MU-B0）が、核には何も足さない。
-  残り：段 1 以上の (M4)（補題 TR1）、(M1)–(M3)、$`V_3`$ より上での局所的な段。Wilken の $`\upsilon`$ の範囲の中では、上界は
-  代わりに補題 PT から出て、要の段は $`\upsilon_{\omega^3}`$ より上のパターンの側にある（$`\upsilon_{\omega^3}`$ のやり直しのブロック。
-  予想：CORE-C3 のブロックの議論は $`[0, \upsilon_{\omega^\omega})`$ まで延びる）。その先に区間 $`[\theta_0, \psi_{\Omega_1}(I_0))`$ があり、
+  残り：段 1 以上の (M4)（補題 TR1）、(M1)–(M3)、$`V_3`$ より上での局所的な段。Wilken の $`\upsilon`$ の範囲の中では、下界は
+  代わりに届く先の上限から出て、いまは $`[0, \Xi_\omega]`$ まで（CORE-C$`^\Xi`$）。その先に区間 $`[\theta_0, \psi_{\Omega_1}(I_0))`$ があり、
   $`\psi_{I_0}`$ でつぶす項が要る。
 - **$`C^*_3`$ を具体的に。** 予想 C3′（+ の無い $`R_2`$ での Wilken の最小の 3 鎖、2021, 19–21 ページ、CH、補題 REL から）。
   $`P = \theta = \psi_{\Omega_2}(\Omega_\omega)`$、$`E = \varepsilon_{I_0+1}`$ として $`m_3 = \psi_{\Omega_1}(E)`$、
@@ -352,7 +356,7 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   どれも標準形で、$`\psi_{\Omega_1}(I_0)`$ と $`\psi_{\Omega_1}(I_1)`$ の間にある（Python と Lean で確認済み）。以前の予想は、3 つの鎖の項で
   $`E`$ の代わりに $`E + \Omega_\omega`$ だった。REL により、それはもとの読み方（$`m_3`$ より上でやり直した $`\upsilon`$ の階層）に
   合わない。やり直しの費用は $`+\Omega_\omega`$ ではなく $`+P`$ だから（二者択一として証明、査読 1 回）。上半分は未解決：
-  $`\upsilon_{\omega^3}`$ より上の $`R_2^C`$ の $`\le_2`$ の関係は 1 つも知られていない。集合論の反映は $`\omega_1^{CK}`$ より上にしか鎖を
+  知られている $`R_2^C`$ の $`\le_2`$ の関係（$`\upsilon_{\Xi_\omega+\omega^2}`$ まで）は長さ 3 の鎖を作らない（定理 BLK$`^\Xi`$）。集合論の反映は $`\omega_1^{CK}`$ より上にしか鎖を
   作らず（HIGH）、$`\le_1`$ の届く先だけでは鎖にならない（NO-PROMOTE）。下半分も未解決：長さ 3 の鎖の無いパターンで
   $`\theta_0`$ より下の下界の計画を進めることが要る。
 - $`\Phi_3(M)`$ がパターンであること。そうなら長さ 3 の鎖は無く（系 C）、DOM₂ によりその点は $`m_3`$ より下。出力された関係
@@ -361,7 +365,8 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
 ## 4. Wilken の点の名前（定理 T）
 
 **定理 T**（証明済み。上半分 T-UP は査読 2 回、下半分 T-LOW は査読 1 回）。$`\theta = \psi_{\Omega_2}(\Omega_\omega)`$ として、
-どの $`\eta \lt \Gamma_0`$ でも、とくに $`\eta \le \omega^2`$ で：
+どの $`\eta \lt \Gamma_0`$ でも、とくに $`\eta \le \omega^2`$ で。さらに定理 T+（査読 1 回、[RESTARTS-ja.md](RESTARTS-ja.md) §4）により、
+$`\iota \mapsto \upsilon_\iota`$ の最初の不動点 $`\Xi_1`$ 未満のどの $`\eta`$ でも：
 
 ```math
 \upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta).
@@ -396,6 +401,7 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
     - 定理 T、$`\eta \lt \Gamma_0`$ での正確な名前 — 証明済み（T-UP、T-LOW）
     - $`\mathrm{Core}(R_2^S)`$ が $`\upsilon_{\omega\cdot\omega}`$ 全体を含む — 証明済み（CORE-S）
     - $`R_2^C`$ で $`\upsilon_{\omega^3}`$ まで、FRAG なしで — 証明済み（CORE-C3、PT）
+    - $`R_2^C`$ で $`\Xi_1`$ まで、$`R_2^C`$ の核は $`\Xi_\omega`$ まで — 証明済み（T+、CORE-C$`^\Xi`$。[RESTARTS-ja.md](RESTARTS-ja.md)）
   - **B** 上界 $`\mathrm{Core}(R_2^+) \subseteq \psi_{\Omega_1}(I_\omega)`$ — 未解決
     - B0 最小の鎖への帰着（定理 CC） — $`R_2^C`$ で証明済み
       - B0-S $`R_2^S`$ で同じこと — 未解決。AGR から出る
@@ -409,9 +415,9 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       （$`n = 3`$ の予想は §3）
     - B2 $`R_2^+`$ での $`\lt_2`$ の有限集合による判定 — 証明済み（T1、T2）。一様な形（すべての $`k`$ に 1 つの写し）が
       必要条件でもあるかは $`R_2^+`$ で未解決（+ の無い $`R_2`$ では成り立つと Wilken 2021, 6 ページが言う）
-    - B3 $`0, +, \le, \le_1, \le_2`$ を保つ基の付け替え（補題 FRAG を $`\le_2`$ に広げる）。B4 と一緒に証明する
-      — 未解決、とても難しい
-    - B4 B3 が動かす点の間の $`\le_2`$ の組 — 未解決、とても難しい
+    - B3 $`0, +, \le, \le_1, \le_2`$ を保つ基の付け替え — $`R_2^+`$ が骨組み型の所で証明済み（定理 FRAG2。FRAG そのものも
+      証明済み）。骨組みの外（FRAG2-GEN） — 未解決、とても難しい
+    - B4 B3 が動かす点の間の $`\le_2`$ の組 — $`\upsilon_{\Xi_\omega+\omega^2}`$ より下で証明済み（BLK$`^\Xi`$、PAIR-SK）。その上 — 未解決
     - B5 B2 + B3 + B4 を組み立てる — 形だけ
     - B-PT 証明論の別の道：到達不能基数 $`n`$ 個の理論が「長さ $`n`$ の鎖がある」を証明する — 未解決。
       $`\lt_2`$ の集合論的な十分条件が要るが、知られていない
@@ -419,8 +425,8 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
     - A1 どの基の上でも、すべての $`\Omega_\xi`$ と $`I_n`$ のつぶす関数を同時に定義した包の系を作り、InaccPsi と比べる
       — 未解決、難しい（STEP の写像 $`B`$ が、$`\Omega_\omega`$ より下で片向きにこれをする）
     - A2 上限までの $`R_2^+`$ の $`\le_1`$、$`\le_2`$ の構造定理（Wilken 2021, Thm 4.2 の類似）。
-      [R2PLUS-ja.md](../../BMS/PoR/Trio/R2PLUS-ja.md) の結果は、$`\upsilon_{\omega^3}`$ より下でのこの定理 — 未解決、
-      とても難しい
+      [R2PLUS-ja.md](../../BMS/PoR/Trio/R2PLUS-ja.md) の結果は、$`\upsilon_{\omega^3}`$ より下でのこの定理。定理 BLK$`^\Xi`$ が、
+      やり直しの届く先の正確な値（RS$`_\lambda`$）を除いて $`\upsilon_{\Xi_\omega+\omega^2}`$ まで延ばす — その上は未解決、とても難しい
     - A3 最小の実現を項で書く — 未解決
     - A4 **予想 CH**：長さ $`k+2`$ の最小の鎖には到達不能基数が $`k`$ 個要る — 予想
     - A5 上限より下のどの項も、あるパターンの値 — 未解決
@@ -435,7 +441,7 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       $`\Phi_3`$ が出力する関係にはそういう鎖が決して無い（定理 A、証明済み。閉じた関係では BAR_R、確認済み）
   - **わきの葉**
     - **DOM₂** — 証明済み（SHARP も）。どの $`k`$ でも DOM$`_k`$ — 予想
-    - $`C^*_3`$ の場所を見つける — 未解決（予想 C3′ は §3。分かっていること：FRAG なしで $`m_3 \ge \upsilon_{\omega^3}`$。届く先だけの
+    - $`C^*_3`$ の場所を見つける — 未解決（予想 C3′ は §3。分かっていること：FRAG なしで $`m_3 \gt \Xi_\omega`$。届く先だけの
       道はうまくいかない（NO-PROMOTE））
     - Lean：上を抑えた項の順序型が $`\psi_{\Omega_1}(X)`$ であること。補題 LOC（有限集合が isominimal かどうかは、
       その最大の元までの構造だけで決まる。紙の上、査読なし） — 未解決
@@ -455,7 +461,7 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
 **表**（$`\Phi_3(M)`$ の最小の実現の、予想した項 $`J`$）。表の中で、`p0(a)` は $`\psi_{\Omega_1}(a)`$、
 `p1(a)` は $`\psi_{\Omega_2}(a)`$、`pI0(a)` は $`\psi_{I_0}(a)`$、`W` は $`\Omega_1`$、`W_a` は $`\Omega_a`$、`w` は
 $`\omega`$、`w^x` は $`\omega^x`$、`P` は `p1(W_w)`、`t6` は 6 行目の項。行列：`Z` = (0,0,0)(1,1,1)、`K` =
-(1,1,0)(2,2,1)。値の状態：「証明」= $`V`$ より下の定理 S。「FRAG」= FRAG を仮定した $`V_3`$ より下の定理 S。
+(1,1,0)(2,2,1)。値の状態：「証明」= $`V`$ より下の定理 S。「FRAG」= 補題 FRAG を使う $`V_3`$ より下の定理 S（FRAG は証明済みになったので、この行も証明済み）。
 「数値」= 数値で確かめただけ。一致：同じ $`J`$ に変換される読み方。
 
 | # | 名前 | M | J | 値 | 一致 |
@@ -580,7 +586,8 @@ $`m_3 \lt \min C^*_3`$ より下。以前の 8 個の証明書は、もう要ら
 | [LowerT.lean](LowerT.lean) | 定理 T-LOW の InaccPsi 側：LOW-0 と LOW-STEP を仮定とした $`\eta = \omega^2`$ までの帰納法と、両方の半分からの定理 T |
 | [LowTerms.lean](LowTerms.lean) | §4 の 7 つの項 $`u(\eta)`$：標準形、値、順序、$`u(\omega^2) \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ |
 
-$`R_2^+`$ そのものについては、Lean には何も無い。
+$`R_2^+`$ そのものについては、Lean には何も無い。$`\upsilon_{\omega^3}`$ より上の結果は 2 ページ目
+[RESTARTS-ja.md](RESTARTS-ja.md) にある。
 
 ## 8. 文献
 
