@@ -1603,16 +1603,24 @@ passed `lg`. (C2-5-4-2) still passes `last`. Measured with the new file:
 
 ## 17. Theory: $`R_2^+`$ below $`\upsilon_{\omega+1}`$
 
-The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi_3`$ (Lemma L, Theorems A and B, Proposition P′; 20 undecided pairs of §9 decided; 720 of the 777 undecided limit-step pairs certified "<") are in [R2PLUS.md](R2PLUS.md), with their status and what stays open. That page now also has the order proof for every standard matrix below `(0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)` (values below $`\upsilon_{\omega\cdot\omega}`$).
+The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi_3`$ (Lemma L, Theorems A and B, Proposition P′; 20 undecided pairs of §9 decided; 720 of the 777 undecided limit-step pairs certified "<") are in [R2PLUS.md](R2PLUS.md), with their status and what stays open. That page now also has the order proof for every standard matrix below `(0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)` (values below $`\upsilon_{\omega\cdot\omega}`$), its extension below `(0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)(2,0,0)` given one new lemma (FRAG) that is refereed only as a sketch, certificates for all the undecided limit-step pairs, and 26 limits above that point where `ι∘Φ₃` does not increase along the fundamental sequence.
 
 ## 18. Next
 
 - Undecided pairs: the order tests left 777 pairs undecided under Φ₃def2, almost all limit steps
   `A = B[n]`. A new certificate search ([R2PLUS.md](R2PLUS.md)) certifies 720 as "<" and finds no
   violation. The list of the other 57 was lost and was rebuilt: after the same searches, 75 pairs stay open
-  (the 57 are most likely among them; this is checked by the counts per set only). 67 of the 75 are now
-  certified "<", each certificate replayed twice; 8 stay open in both directions; no violation. Needed:
-  those 8, and a proof that `ι∘Φ₃` increases along fundamental sequences.
+  (the 57 are most likely among them; this is checked by the counts per set only). All 75 are now
+  certified "<"; no violation. Two of the last 8 needed a corrected checker (two bugs of the old checker, not
+  of the search); it replayed every certificate still on file (67, 828 from a rerun of the searches for the 720,
+  whose files are lost, and 69 others) with no verdict changed.
+- Fundamental sequences: `ι(Φ(X[n])) < ι(Φ(X[n+1]))` is proved for every limit `X ≤ (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)`
+  (refereed). Above `(0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)(2,0,0)` it fails for Φ₃def2: at 26 limits of the seven
+  sets, 41 pairs `X[n], X[n+1]` get the same pattern, 3 are certified in the reverse order and 14 "≥" (the same
+  without `lastt`); the least such limit found is `(0,0,0)(1,1,1)(2,1,1)(3,1,0)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,1)`.
+  The pairs `X[n], X[n+1]` are not in the sets, so the 0 violations above stand. Below that limit, from
+  `(0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)` on, 3,342 pairs of 1,114 limits are "<" and 7 undecided. Needed:
+  which pattern is wrong at the 26, and a proof for all limits below the first one.
 - Rows 907 and 947, at `X = 905 (2,0,0)` = `(0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0)` and
   `X' = 946 (2,0,0)` = `(0,0,0)(1,1,1)(2,1,1)(2,1,0)(1,1,1)(2,1,0)(3,2,1)(4,2,1)(4,2,0)(2,0,0)`. Proved on paper and refereed:
   - the Shape Lemma for all n: `Φ(X[n]) = 0 a Bl_0 … Bl_n`, each block nesting copies of all earlier
@@ -1626,7 +1634,8 @@ The first theorems about $`R_2^+`$ itself that decide order questions for $`\Phi
   - so `ι(Φ(X[n])) < ι(R)` and `ι(Φ(X'[n])) < ι(R')` hold for all n with no hypothesis.
   Left: `sup_n ι(Φ(X[n])) = ι(R)`. With σ = the supremum and β = ι(R), it is proved that σ ≤ β and that
   σ = β if and only if σ ≤₁ β; the statement σ ≤₁ β is open. It is now reduced to the finite configurations
-  inside one block of the realization of R (Theorem RED in [R2PLUS.md](R2PLUS.md), refereed); neither a proof nor a
+  inside one block of the realization of R (Theorem RED in [R2PLUS.md](R2PLUS.md), refereed), and further to one
+  equality of sets of patterns, `Cov(γ) = ⋃_n Cov(γ_n)` (Theorem RED2, refereed); neither a proof nor a
   refutation was found. Also left: that Φ is right on every `X[n]` (shown in the direction the fix needs:
   Φ(X[n]) is never too small against the fundamental sequence of X[n], given the shape of Φ(X[n][k])).
 - The rule `lastt`: in (C2-5-4-1) and (KI-5), a marker with children that becomes a new root term

@@ -1,6 +1,6 @@
 [← Back](POR.md) | [English](R2PLUS.md) | [Japanese](R2PLUS-ja.md)
 
-# Theory: $`R_2^+`$ below $`\upsilon_{\omega\cdot\omega}`$
+# Theory: $`R_2^+`$ below $`\upsilon_{\omega^3}`$
 
 The rules of $`\Phi_3`$ in [POR.md](POR.md) are checked numerically. This page records the first theorems about
 $`R_2^+`$ itself that decide order questions for $`\Phi_3`$. They are proved on paper (not yet
@@ -42,9 +42,12 @@ pairs therefore hold in $`R_2^C`$, the structure the certificate search implemen
 clause 2 of Def 5.3 is read as "$`X \cup Y`$ closed", as in his own proofs of Lemmas 5.5(6) and
 5.7(3).) The referee found no gap in Theorem EQ. [W07b] only sketches Cases 2 and 3 of Claim 5.5(b); a proof
 of them (and of Case 1 of Claim 5.6) from [W07b] Thm 2.2 and the fact "$`x + c = c`$ iff $`c \ge x\omega`$" is now
-written, but not yet refereed. A check below $`\varepsilon_0`$ finds no covering among the 14,447 and 448
-candidates of the two cases; with one term removed from the set it finds coverings for 200 of 202 values, so
-the check can fail. The agreement up to $`\upsilon_{\omega\cdot\omega}`$ is Theorem EQB below.
+written and refereed: proved, with only minor points (a page number and a missing status marker). A check below
+$`\varepsilon_0`$ finds no covering among the 14,447 and 448 candidates of the two cases; with one term removed
+from the set it finds coverings for 200 of 202 values, so the check can fail. The referee's own checks (0
+failures) also cover Case 1 of Claim 5.6 and values above $`\varepsilon_0`$: with the 2-row structure as the
+reference, Case 2 on 158 values above $`\varepsilon_0`$ and the explicit copies on 114,832 pairs; with one term
+removed from the set, a covering is found for 144 of 153 values, so this check can fail too. The agreement up to $`\upsilon_{\omega\cdot\omega}`$ is Theorem EQB below.
 
 **Order preservation on a class of trio matrices (Theorem S).** Let
 $`U = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(1,1,0)(2,2,1)`$, so that $`\mathcal{T}_3(U) = \upsilon_{\omega+1}`$. Let
@@ -130,7 +133,10 @@ directions, Lemma 2.1 and the finite-set test for $`\le_1`$ are now proved from 
 $`\le_1`$ and Cantor-normal-form arithmetic only. The converse direction is an induction on
 $`(\alpha, \xi)`$ in lexicographic order that builds the copy explicitly. The referee checked every case
 and found only minor points (one sentence was missing: $`0 \le_1 b`$ holds only for $`b = 0`$; it is now written
-in as a lemma, and every step that uses $`x = 0`$ is written out). So
+in as a lemma, and every step that uses $`x = 0`$ is written out). The text with these fixes was refereed
+again: every step of Lemma 2.1, of both directions and of the consequences was checked, with no FATAL or
+BLOCKING point; the referee's checks below $`\varepsilon_0`$ (about 11,100 candidates and 221 copies) and against
+the 2-row structure (1,885 terms) found 0 failures. So
 Theorem S on all standard matrices below $`U`$, and Theorems A, EQ and S+, no longer depend on an
 unavailable paper.
 
@@ -195,9 +201,53 @@ increasing along $`\lt_{\mathrm{lex}}`$ on 17,666 matrices; 900 random matrices 
 referee's own search: 1,860 new random standard matrices between $`U`$ and $`V`$ with 10–60 columns; the
 program checks pass on all, and $`\mathcal{T}_3`$ is strictly increasing on the 1,858 distinct ones.
 
-Not covered: $`V`$ itself and every matrix above it. At $`\upsilon_{\omega\cdot\omega}`$ the reach in the pattern
-leaves its block, and Theorem B does not describe $`R_2`$ there. That $`\iota(\Phi_3(M)) = \mathcal{T}_3(M)`$ in
-general is only checked. Nothing of this is in Lean.
+Not covered by this theorem: $`V`$ itself and every matrix above it. At $`\upsilon_{\omega\cdot\omega}`$ the reach
+in the pattern leaves its block, and Theorem B does not describe $`R_2`$ there; see the next section. Nothing of
+this is in Lean.
+
+**Theorem S from $`V`$ up to $`V_3`$: proved on paper given one new lemma (FRAG).** Let
+$`V_3 = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)(2,0,0)`$ ($`V`$ followed by `(2,0,0)`), with
+$`\mathcal{T}_3(V_3) = \upsilon_{\omega^3}`$ (here $`\omega^2 = \omega\cdot\omega`$). For all standard trio matrices
+$`M, M' \lt_{\mathrm{lex}} V_3`$:
+
+```math
+M \lt_{\mathrm{lex}} M' \iff \iota(\Phi_3(M)) \lt \iota(\Phi_3(M')), \qquad \iota(\Phi_3(M)) = \mathcal{T}_3(M) \lt \upsilon_{\omega^3},
+```
+
+in both $`R_2^S`$ and $`R_2^C`$; in particular $`\iota(\Phi_3(V)) = \upsilon_{\omega^2}`$. The parts:
+- **The structure (Theorem B′′).** Write $`\rho_h = \upsilon_{\omega^2 h}`$ ($`h \ge 1`$; $`\rho_1`$ is the value of $`V`$).
+  Below $`\upsilon_{\omega^3}`$ the $`\lt_2`$-pairs are exactly $`\upsilon_{\xi} \lt_2 \upsilon_{\xi+1}`$ for
+  $`\xi = \omega^2 h + \omega j`$, $`h \ge 0`$, $`j \ge 1`$. Each $`\rho_h`$ has no $`\lt_1`$-predecessor and no
+  $`\lt_2`$-successor, and $`\rho_h \le_1 \gamma`$ holds exactly for $`\gamma \in [\rho_h, \upsilon_{\omega^2 h+\omega+1} + 1]`$,
+  one more than the top of its first block. Every other point is $`\le_1`$ to the same places as in $`R_1^+`$, up to
+  the top of its block. All of this is proved without FRAG except the one relation
+  $`\rho_h \le_1 \upsilon_{\omega^2 h+\omega+1} + 1`$; without FRAG it is proved that the reach of $`\rho_h`$ is that point
+  or the one below it (Lemma TOP).
+- **Lemma FRAG.** In $`R_1^+`$, moving finitely many $`\upsilon`$-points at once, together with the parameters that
+  depend on them, keeps $`0, +, \le, \le_1`$. The proof adapts Wilken's base change ([W07a] 5.3–7.10, [W07b] 4.4)
+  with a map on the parameters in place of the identity. It is new.
+- **Theorem EQB′′.** $`R_2^C`$ and $`R_2^S`$ agree below $`\upsilon_{\omega^3}`$; FRAG is used only for the pair above.
+- **The order proof** follows the one below $`V`$, with a new last block. The only ways into the range are $`V`$
+  and finitely many listed kinds of terms (Lemma ENT′′). Without FRAG it is proved that every copy of
+  $`\Phi_3(M)`$ is at least $`\mathcal{T}_3(M)`$, but not that this value is reached.
+
+The referee re-derived the new steps and read every cited proof at each step where FRAG changes the parameters.
+No FATAL or BLOCKING point; FRAG is accepted at the level of a sketch, so the range is not marked as proved.
+Six minor points, among them: the choice of $`\tau`$ in Claim 5.5(b) is again not written out; a side remark
+("all other pairs agree without FRAG") has a hole that a smaller sentence fixes; the move of a base with a limit
+index to one with a successor index needs one line saying that it is valid in $`R_1^+`$ (not in pure $`R_2`$).
+
+Checks (each run under 60 seconds, 0 failures): 93,270 standard matrices from $`V`$ to
+$`(0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)(1,1,0)(2,2,1)(2,0,0)(2,0,0)`$ (value $`\upsilon_{\omega^2 \cdot 2}`$) with at most 13 columns; the program
+checks on all 15,150 with at most 12 columns and a 10% sample (7,815) of those with 13; $`\mathcal{T}_3`$ increasing
+on 93,293 matrices; 482 matrices of the next interval and 1,800 random ones; the reach condition on about 49,000
+nodes; the step that carries patterns down on 1,833 terms. The referee's own 900 random matrices below $`V_3`$
+(10–70 columns): the program checks pass on 900 of 900, and 967 matrices show 0 order violations. These checks
+test the program and the translation $`\mathcal{T}_3`$, not $`R_2`$ itself.
+
+Above $`V_3`$ the program gives $`\upsilon_{\omega^3}`$ the reach "top of its block + 2" and
+$`(0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(3,0,0)`$ (value $`\upsilon_{\omega^\omega}`$) the reach "top of its block +
+$`\omega`$"; Lemma TOP does not cover these.
 
 **The sup at $`X`$ (rows 907 and 947 of [POR.md](POR.md)).** Let $`X = (0,0,0)(1,1,1)(2,1,0)(3,2,1)(4,2,0)(2,0,0)`$
 and let $`R`$ be the sheet's reading `0 a (b ([c (e ([f g] g+e)) d] d+e d+e+a))` with point `b` (it includes the
@@ -219,13 +269,25 @@ minor points):
 - At $`M_1 = (0,0,0)(1,1,1)(2,2,1)(3,1,1)(4,1,0)(5,2,1)(6,2,0)`$: $`\iota(\Phi_3(M_1)) \ge \sup_n \iota(\Phi_3(M_1[n]))`$,
   given only the shape of $`\Phi_3(M_1[n])`$.
 
+**New at $`X`$ (proved on paper and refereed, only minor points).** Let $`\gamma_n`$ be the least place of $`P_n`$
+without its point, and $`\mathrm{Cov}(\alpha)`$ the set of patterns that have a copy (a covering) below $`\alpha`$.
+- **Lemma HULL.** $`\beta = \min\{b : b \lt_1 \gamma\}`$ and $`\mathrm{Cov}(\gamma) = \mathrm{Cov}(\beta)`$; the same holds for each
+  $`P_n`$, above the earlier blocks.
+- **Theorem RED2.** These are equivalent: $`\sigma = \beta`$; $`\sigma \lt_1 \gamma`$;
+  $`\mathrm{Cov}(\gamma) = \bigcup_n \mathrm{Cov}(\gamma_n)`$; every finite closed set below $`\beta`$ has a copy below $`\sigma`$.
+  So a refutation is exactly a pattern with a copy below $`\gamma`$ whose least copy reaches $`\sigma`$ or more.
+- **Lemma NOC.** No copy of $`C^+`$ lies inside $`(\gamma, \delta)`$, and none has its point in $`[\sigma, \gamma)`$.
+- The smallest case of the same question is $`Y_0 = (0,0,0)(1,1,1)(2,0,0)`$ with the pattern
+  `0 a (b ([c c'] c'+a))`: every term of its fundamental sequence is proved to be below it; equality is open.
+- HULL, RED2 and NOC hold at $`X'`$ too. At $`M_1`$, HULL holds, but RED2 does not carry over as it is.
+
 Open: $`\sigma \le_1 \beta`$ was neither proved nor refuted. A refutation needs a pattern $`G`$ with
 $`\iota(P_n) \le \iota(G) \lt \beta`$ for all $`n`$; every known way to build one uses a $`C^+`$-configuration, and then
 $`\iota(G) \ge \beta`$ by Lemma CG. A proof needs a simulation of the configurations in the block of $`R^*`$ by those
 in the blocks of the $`P_n`$; it is not written. Also open: equality at $`M_1`$, and whether $`P_n`$ is too large
 (the same limit of a chain of blocks in both). Oracle certificates for $`R \lt C^+`$, its $`X'`$ form and the
-instances of Theorem L were all replayed. The referee tested two candidate refuters ($`R`$ with one relation
-of `c` removed); both are below $`P_1`$, so neither lies between all $`P_n`$ and $`R`$.
+instances of Theorem L were all replayed. The referees tested six candidate refuters (among them weakenings of $`R`$
+that drop a $`C^+`$-configuration); each is below $`P_1`$ or $`P_2`$ or above $`R`$, so none lies between all $`P_n`$ and $`R`$.
 
 **Limit-step pairs.** The order tests of [POR.md](POR.md) left 777 pairs undecided under
 `por/phi3def2.py`. In 723 of them $`A = B[n]`$ with $`n \le 3`$. A certificate is a chain of Carlson's
@@ -236,25 +298,49 @@ in ZF every pattern is covered), given that the search program implements his de
 have a certificate, each replayed by the checker; the referee replayed all of them again. No violation
 was found. The list of the other 57 was lost and was rebuilt with `lastt` (it gives the same patterns on
 all seven test sets): after the same searches, 75 pairs stay open, and the 57 are most likely among them
-(checked by the counts per set only). 67 of the 75 now have a certificate, each replayed twice by the
-checker. New kinds of steps were needed: one up-step with three down-steps inside, two up-steps in a row,
-longer ladders of down-steps, and a "link ladder" (apply the down-step at the last summand of each reach,
-from the far end back to the point; 12 pairs). A general lemma that the link ladder always works is open.
-8 pairs stay open in both directions; for two of them the checker cannot replay what the search found
-(a node made inside an up-step, and a rejected step).
+(checked by the counts per set only). All 75 now have a certificate "<", each replayed; no violation, and a
+reverse search on the last 8 found nothing. New kinds of steps were needed: one up-step with three down-steps
+inside, two up-steps in a row, longer ladders of down-steps, and a "link ladder" (apply the down-step at the
+last summand of each reach, from the far end back to the point). For one of the last 8 the certificate goes
+through $`C = B[1]`$: $`\iota(\Phi_3(A)) \le \iota(\Phi_3(C)) \lt \iota(\Phi_3(B))`$.
+
+For two of the last 8 the checker had rejected what the search found. The cause was two bugs of the checker,
+not of the search: inside an up-step it put a repair at the wrong stage, and it treated a sum of a new node
+and an old node as a copy, although Carlson 2009 Def 10.1 copies only the part below and the new part. A
+corrected checker fixes both; the rule steps themselves are unchanged. It replayed again every certificate
+still on file: the 67, 828 certificates of a rerun of the searches for the 720 (the 720 original files are
+lost), and 69 others; no verdict changed, and 3 candidates rejected before now pass.
+
+**Increase along fundamental sequences.** For a limit matrix $`X`$, write $`X[n]`$ for the $`n`$-th term of its
+fundamental sequence. Proved on paper and refereed (no FATAL or BLOCKING point, 7 minor ones):
+- **Lemma LL (link ladder).** Let $`h_0`$ be a covering of a pattern $`S`$ into $`T`$ with $`\le`$ in place of $`\lt`$ at
+  the point. If $`h_0`$ sends no fact of $`S`$ to the top of the reach of the deepest link of $`T`$, then the
+  down-steps at the links, from the deepest back to the point, give $`\iota(S) \lt \iota(T)`$.
+- **Theorem FS.** For every limit $`X \le_{\mathrm{lex}} V`$: $`\iota(\Phi_3(X[n])) \lt \iota(\Phi_3(X[n+1]))`$.
+- **Theorem V.** $`\iota(\Phi_3(V[N])) \lt \iota(\Phi_3(V))`$ for all $`N`$, so $`\iota(\Phi_3(V)) \ge \upsilon_{\omega^2}`$.
+
+Checks on the 2,928 limits of the seven test sets, pairs $`n \le 2`$ (every certificate replayed): below $`V`$,
+1,497 of 1,497 pairs are "<"; above $`V`$, 7,184 of 7,287. The referee replayed all 10,957 recorded uses of Lemma
+LL, and tried to prove $`\iota(P) \lt \iota(P)`$ for 9,285 patterns: 0 hits.
+
+**Counterexamples above $`V_3`$ (confirmed by the referee).** At 26 limits $`X`$ of the test sets,
+$`\iota(\Phi_3(X[n]))`$ does not increase with $`n`$: in 41 pairs $`\Phi_3(X[n]) = \Phi_3(X[n+1])`$; in 3 pairs
+$`\iota(\Phi_3(X[n+1])) \lt \iota(\Phi_3(X[n]))`$ by Lemma LL; in 14 pairs "$`\ge`$" is certified; 45 pairs stay undecided.
+The same happens without `lastt`. Examples: at $`X = (0,0,0)(1,1,1)(2,2,0)(3,3,1)(4,3,0)(3,3,1)(4,3,0)`$,
+$`\Phi_3(X[1]) = \Phi_3(X[2]) = \Phi_3(X[3])`$; at $`X = (0,0,0)(1,1,1)(2,2,1)(3,2,1)(2,2,1)(3,1,1)(4,2,1)(5,2,1)`$,
+$`\iota(\Phi_3(X)) \lt \iota(\Phi_3(X[0]))`$. The least counterexample found is
+$`(0,0,0)(1,1,1)(2,1,1)(3,1,0)(2,1,0)(3,2,1)(4,2,1)(5,2,0)(3,2,1)`$. Below it, from $`V`$ on, the 1,114 limits of the
+test sets give 3,342 pairs: all "<" except 7 undecided. The order tests of [POR.md](POR.md) did not see these
+because $`X[n]`$ is not in the test sets. Which of the two patterns is wrong is open.
 
 **Conditional or open.**
 - The full equality of the Carlson–Wilken 2012 §7 remark, and the per-matrix hypotheses of the two
   further shapes for all matrices.
-- The 8 open limit-step pairs, and a general lemma that $`\iota \circ \Phi_3`$ increases along BM4
-  fundamental sequences.
-- The last minor points of the second referee ([W07b] Thm 2.2: "$`0 \le_1 b`$ only for $`b = 0`$"; Theorem S:
-  the maximum in Lemma W2 (c) comes from (a); old status lines and a citation list) and the proof of
-  Claim 5.5(b) Cases 2 and 3 are now written, but this text is not refereed again.
-- $`\sigma \le_1 \beta`$ at $`X`$ and $`X'`$ (above).
-- $`V = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)`$ and above, including the equivalence of $`R_2^C`$ and $`R_2^S`$
-  at $`\upsilon_{\omega\cdot\omega}`$ and beyond.
-- Beyond $`\upsilon_{\omega\cdot\omega}`$: a conjecture that each "backbone" behaves like the $`\varepsilon_0`$-multiples in
-  Wilken's $`R_2`$ agrees with all 11,506 facts tested; heads with $`\Omega_2`$-level structure are
-  not covered and need arithmetic that the literature leaves to future work.
-
+- A full referee pass on Lemma FRAG; then Theorem S holds below $`V_3`$.
+- $`\sigma \le_1 \beta`$ at $`X`$ and $`X'`$, that is $`\mathrm{Cov}(\gamma) = \bigcup_n \mathrm{Cov}(\gamma_n)`$; the same question at
+  $`Y_0`$; equality at $`M_1`$; whether $`P_n`$ is too large.
+- That $`\iota \circ \Phi_3`$ increases along every fundamental sequence from $`V`$ up to the least counterexample
+  (below $`V_3`$ it follows from FRAG), and the base case at the bad root of nested limits.
+- Which pattern is wrong at the 26 counterexamples, and a repair of the rule.
+- $`V_3`$ and above: the reaches "top + 2" and "top + $`\omega`$" (above); heads with $`\Omega_2`$-level structure need
+  arithmetic that the literature leaves to future work.
