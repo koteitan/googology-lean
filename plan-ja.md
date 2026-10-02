@@ -4,6 +4,11 @@
 
 README の表のセルごとに、残りの作業を並べる。ほかのブランチを書いていない項目は、ブランチ main で作業する。
 
+- Wilken の主張（A glimpse of Σ₃-elementarity、2020、421 ページ。Pure Σ₂-elementarity beyond the core、2021、§1 でもくり返す）：「最初の ω 個の弱到達不能基数から得られる Skolem 包の表記系が表す可算順序数の区間は、Core(R₂⁺)（の定義域）を覆う」。R₂⁺ = (Ord; 0, +, ≤, ≤₁, ≤₂)、Core(R₂⁺) はその有限パターンの最小の実現の合併、表記系は [Notation/InaccPsi](Googology/Notation/InaccPsi/README-ja.md)（最初の ω 個の弱到達不能基数の上の Buchholz の ψ。項の順序が正しいことは Lean で証明済み）。結果は Trans/PoR/InaccPsi/（パターン → InaccPsi の項）に置く
+  - 🤖 主張を正確にする：「覆う」の意味（Core(R₂⁺) のどの順序数も可算な InaccPsi の項の値である、または 2 つの集合の上限が等しい、または両方）、どの R₂⁺ か（Σₙ による定義 R₂^S。Carlson の被覆による定義 R₂^C は υ_{ω·ω} より下で一致）、InaccPsi の可算な値が Ω₁ の始切片になるか、その上限は何か（たとえば ψ_{Ω₁}(ε_{I_ω+1})）
+  - 🤖 υ_{ω·ω} より下での主張。ここでは R₂⁺ の解析は済んでいる（[R2PLUS-ja.md](Googology/Trans/BMS/PoR/Trio/R2PLUS-ja.md) の定理 A・B・EQB）：Wilken の点 υ_ι と R₁⁺ の核を InaccPsi の項で書き、υ_{ω·ω} より下の Core(R₂⁺) の順序数がどれも可算な InaccPsi の項の値であることを示す
+  - 🤖 主張全体への道筋を見つけ、補題の木として書く：(A) R₂⁺ の解析を広げる（予想 BLK、次に頭が Ω₂ の段の構造を持つ項）、値は InaccPsi の項で書く。(B) 全部を解析せずに上界を出す。たとえば、InaccPsi の可算な値の上限が R₂⁺ の中で反映の性質を持ち、どの有限パターンの写しもその下に置けることを示す。Wilken 2021 が + の無い R₂ で示したこと（≤₁ と ≤₂ の算術的な特徴づけ）と Weiermann–Wilken 2011 を使う
+  - 🤖 実験：小さな R₂⁺ のパターンの最小の実現を証明書の探索で計算し、InaccPsi の項の値と突き合わせて、パターン → 項の対応を予想する
 - BMS → PoR 変換 conv（バシク行列 M をパターン conv(M) に変えるプログラム）。パターン P の表す順序数を ord(P) と書く（R₁⁺ か R₂⁺ = (Ord; 0, +, ≤, ≤₁, ≤₂) で P が現れる最小の場所）。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))。行列は辞書式で比べる。υ₁ = ψ₀(Ω_ω)
   - ✅ M < (0,0,0)(1,1,1)（2 行の行列 = ペア数列。ord(conv(M)) = 1 + M の順序数）：紙の上と Lean（sorry なし、引用した事実だけから）で証明済み。Lean の証明は、もう Wilken の JSL 72 の論文を使わない（[Trans/BMS/PoR/PSS/POR-ja.md](Googology/Trans/BMS/PoR/PSS/POR-ja.md)）
   - ✅ (0,0,0)(1,1,1) ≤ M < (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(2,0,0)（3 行の行列 = トリオ数列、ord(conv(M)) < υ_{ω·ω}。プログラム por/phi3def2.py、[Trans/BMS/PoR/Trio/POR-ja.md](Googology/Trans/BMS/PoR/Trio/POR-ja.md)）：すべての標準形の行列で順序を保つことを紙の上で証明し、査読済み（定理 S。まず ord が υ_{ω+1} の (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)(1,1,0)(2,2,1) まで、次にこの範囲全体。[Trans/BMS/PoR/Trio/R2PLUS-ja.md](Googology/Trans/BMS/PoR/Trio/R2PLUS-ja.md)）。この範囲では ord を計算できる：<₂ の組はちょうど υ_{ω·k} <₂ υ_{ω·k+1}（k ≥ 1）で、その間の各ブロックの中では ≤₁ は R₁⁺ のもの（定理 A・B）。R₂⁺ には定義が 2 つある：R₂^C（Carlson の被覆による定義。検査のプログラムはこれを使う）と R₂^S（Σ_n 初等性による定義）。υ_{ω·ω} より下では両者は一致する（定理 EQ・EQB）。Wilken 2007 の定理 2.2（[W07b]。証明は手に入らない Wilken 2006 にしかなかった）と、[W07b] の Claim 5.5(b) の場合 2 と 3（そこでは見取り図だけ）も、紙の上で証明し、査読済み
