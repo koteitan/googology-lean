@@ -109,3 +109,6 @@ import Googology.Trans.BMS.ExBuchholz.PSS.Rank
 import Googology.Trans.BMS.ExBuchholz.PSS.Expansion
 import Googology.Trans.BMS.ExBuchholz.PSS.Steps
 import Googology.Trans.BMS.ExBuchholz.PSS.StepBound
+import Googology.Trans.PoR.InaccPsi.CountSeg
+import Googology.Trans.PoR.InaccPsi.LowSeg
+import Googology.Trans.PoR.InaccPsi.LowTerms

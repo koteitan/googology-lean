@@ -63,6 +63,7 @@ Each directory has a README listing its files and what each proves.
 | [BMS/BMS/](BMS/BMS/README.md) | BMS → BMS: the primitive sequences inside the pair sequences, and `r` rows inside `r + 1` rows (a row of zeros underneath). |
 | [BMS/ExBuchholz/](BMS/ExBuchholz/README.md) | BMS → extended Buchholz ψ: which ordinal a matrix names. One row (below ε₀, ε-numbers, ζ₀, rank = value), and pair sequences (rank = 1 + val, `PSS/`). |
 | [BMS/PoR/](BMS/PoR/README.md) | BMS → Carlson's patterns of resemblance. Two rows (`PSS/`): the map is order-preserving onto the core of R₁⁺ without 0, proved in Lean. Three rows (`Trio/`): the program `por/phi3def2.py` and the proofs on paper. |
+| [PoR/InaccPsi/](PoR/InaccPsi/README.md) | Patterns of resemblance → InaccPsi terms, for Wilken's claim that the countable part of the notation system over ω weakly inaccessibles covers the core of R₂⁺: the precise statement, the countable values form an initial segment (Lean), every ordinal below υ_{ω·ω} is in the core of Carlson's R₂ (paper, refereed), the route as a tree of lemmas, and the experiments. |
 | [ExBuchholz/BMS/](ExBuchholz/BMS/README.md) | Extended Buchholz ψ → BMS: the trio matrix of `ψ_0(Ω_α)` (`Trio/`): rules 1–10 and their fixes, standard forms and order below `ψ_0(Ω_2)`, and the checks against the sheet. |
 | [DBMS/common/](DBMS/common/README.md) | Facts about DBMS alone that two or more translations use. |
 | [DBMS/DBMS/](DBMS/DBMS/README.md) | DBMS → DBMS: `r + 1` rows inside `r + 2` rows. |
