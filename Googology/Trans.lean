@@ -113,3 +113,4 @@ import Googology.Trans.PoR.InaccPsi.CountSeg
 import Googology.Trans.PoR.InaccPsi.LowSeg
 import Googology.Trans.PoR.InaccPsi.LowTerms
 import Googology.Trans.PoR.InaccPsi.ConjT
+import Googology.Trans.PoR.InaccPsi.LowerT

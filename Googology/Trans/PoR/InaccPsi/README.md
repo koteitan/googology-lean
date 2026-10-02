@@ -8,7 +8,8 @@ G. Wilken: what the claim says, what is proved, what is open, and the experiment
 
 Status words: **Lean** (checked by Lean, no `sorry`, only the axioms `propext`, `Classical.choice`,
 `Quot.sound`); **proved** (on paper, and an independent referee found it proved with no fatal or
-blocking point; results marked 2026-10 had one referee pass); **cited** (a paper and the place); **checked** (computed on finitely many cases);
+blocking point; "(2026-10, 2 reviews)" means the result is from October 2026 and two independent referees
+checked it; a proved result with no count had 1 review); **cited** (a paper and the place); **checked** (computed on finitely many cases);
 **conjecture**; **open**.
 
 ## 1. The claim and its source
@@ -75,9 +76,11 @@ Both halves are **open**. Below $`\upsilon_{\omega\cdot\omega}`$ both hold (§3)
 
 **Summary.** Below $`\upsilon_{\omega\cdot\omega}`$ the claim holds, in both $`R_2^C`$ and $`R_2^S`$: every ordinal
 below $`\upsilon_{\omega\cdot\omega}`$ is in the core, and it is the countable value of an InaccPsi normal form whose
-collapse arguments are below $`I_\omega`$ (Theorem LOW below). Above $`\upsilon_{\omega\cdot\omega}`$ both halves are open.
+collapse arguments are below $`I_\omega`$ (Theorem LOW below). Wilken's points have exact names:
+$`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$ for $`\eta \lt \Gamma_0`$ (Theorem T, §4). Above
+$`\upsilon_{\omega\cdot\omega}`$ both halves are open.
 
-**Lean** (the four files of this directory, built with the whole library):
+**Lean** (the five files of this directory, built with the whole library):
 
 - **Lemma L** (`CSet_inter_Om1`). For every $`\alpha`$: $`\mathrm{Cl}(\alpha, 0) \cap \Omega_1 = \psi_{\Omega_1}(\alpha)`$ as sets.
   So the countable values of the terms bounded by $`X`$ are exactly the ordinals below
@@ -99,10 +102,15 @@ collapse arguments are below $`I_\omega`$ (Theorem LOW below). Above $`\upsilon_
   below $`u(\omega^2)`$ is the value of a normal form (`conjU`); two facts of ordinal arithmetic used in Lemma M
   (`arith_absorb`, `arith_lex`). Wilken's $`\upsilon`$, his systems and the map $`B`$ are not in Lean: the step is a
   hypothesis there, and Lean states it also for $`\xi = 0`$, which is trivial on paper but is not checked in Lean.
+- **The InaccPsi side of Theorem T-LOW** (`LowerT.lean`). For any monotone $`u`$ with
+  $`\psi_{\Omega_1}(\Omega_\omega) \le u(1)`$ and the step of LOW-STEP, assumed only for $`A = A_\eta`$: the bound
+  $`\psi_{\Omega_1}(A_\eta) \le u(1+\eta)`$ for $`\eta \le \omega^2`$ (`lower_bound`, `lower_bound_ww`); with the hypotheses of
+  `upper_bound` too, $`u(1+\eta) = \psi_{\Omega_1}(A_\eta)`$ (`conjT`, `conjT_ww`). LOW-0 and LOW-STEP are hypotheses; the map
+  $`E`$ is not in Lean.
 
-**Proved on paper and refereed.** The items marked (2026-10) had one adversarial referee pass each, with no
-fatal and no blocking point against them. The one blocking point of those reviews is the open gap of the lower
-bound, listed under "Not proved".
+**Proved on paper and refereed.** Each review was adversarial (it tried to refute the result). No review found a
+fatal or blocking point against a result listed here. The blocking points that were found are about open goals,
+listed under "Not proved".
 
 **Below $`\upsilon_{\omega\cdot\omega}`$.**
 
@@ -115,14 +123,14 @@ bound, listed under "Not proved".
   $`\mathrm{ID}_{\lt\omega}`$ (Wilken 2021, §1; Pohlers 1998, Fig. 1) this gives
   $`\upsilon_1 = \psi_{\Omega_1}(\Omega_\omega)`$ (cited, indirect). Two weak links are in the literature: Pohlers
   takes regular cardinals for recursively regular ordinals without proof, and Wilken states the ordinal
-  of $`\mathrm{ID}_{\lt\omega}`$ without proof. Theorem STEP-0 below now gives the upper half
-  $`\upsilon_1 \le \psi_{\Omega_1}(\Omega_\omega)`$ directly.
+  of $`\mathrm{ID}_{\lt\omega}`$ without proof. Theorems STEP-0 and LOW-0 below now give
+  $`\upsilon_1 = \psi_{\Omega_1}(\Omega_\omega)`$ directly, so this citation is no longer needed.
 - $`\psi_{\Omega_1}(0) = \Gamma_0`$, and $`\vartheta_0(\varepsilon_{\Omega+1}) = \psi_{\Omega_1}(\varepsilon_{\Omega_1+1})`$ (cited + RESTR).
 - **Theorem MAIN.** These are equivalent: (i) every ordinal of $`\mathrm{Core}(R_2^C)`$ below
   $`\upsilon_{\omega\cdot\omega}`$ is the value of a countable InaccPsi term; (ii) every ordinal below
   $`\upsilon_{\omega\cdot\omega}`$ is; (iii) **Conjecture U**: $`\upsilon_{\omega\cdot\omega} \le D`$, where
   $`D = \sup_a \psi_{\Omega_1}(a)`$. Proof: CORE-C and Lemma IS.
-- **Theorem STEP** (2026-10). Wilken's points: $`\upsilon_0 = 0`$, $`\upsilon_{\xi+1} = T^{\upsilon_\xi} \cap \Omega_1`$, and the
+- **Theorem STEP** (2026-10, 2 reviews). Wilken's points: $`\upsilon_0 = 0`$, $`\upsilon_{\xi+1} = T^{\upsilon_\xi} \cap \Omega_1`$, and the
   supremum at limits (Wilken 2020, Def 21.4; $`\upsilon_1 = T^1 \cap \Omega_1`$, p. 420). Let $`\tau`$ be $`1`$ or an
   $`\varepsilon`$-number, and let $`\Omega_\omega \le A`$, $`\tau \le \psi_{\Omega_1}(A)`$ and
   (HA) $`A \in \mathrm{Cl}(A+1, \psi_{\Omega_1}(A))`$. Then
@@ -136,13 +144,30 @@ bound, listed under "Not proved".
   $`\mathrm{code}_0(\alpha) = \psi_{\Omega_2}(\omega^{B(\alpha)}) \lt \theta`$, and $`c_i(\alpha)`$ lifts the argument above the image of
   the largest level-$`i`$ parameter of $`\alpha`$. Lemma N: each image argument lies in its own hull. Lemma M: $`B`$
   is strictly increasing. So $`T^\tau \cap \Omega_1 \le \sup B \le \psi_{\Omega_1}(A+\theta)`$. The new lemmas that carry
-  the proof are SAME-SET, N, N2 and M.
-- **Theorem T-UP** (2026-10). $`\upsilon_{1+\eta} \le \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$ for every $`\eta \lt \Gamma_0`$.
+  the proof are SAME-SET, N, N2 and M. The second review also checked the map $`B`$ with its own code (no error).
+- **Theorem T-UP** (2026-10, 2 reviews). $`\upsilon_{1+\eta} \le \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$ for every $`\eta \lt \Gamma_0`$.
   Proof: induction with STEP; limits by Lemma CONT. The induction up to $`\eta = \omega^2`$ is in Lean
   (`ConjT.lean`).
-- **Conjecture U is proved** (2026-10): $`\upsilon_{\omega\cdot\omega} \le \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+2}) \lt D`$. By MAIN,
+- **Conjecture U is proved** (2026-10, 2 reviews): $`\upsilon_{\omega\cdot\omega} \le \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+2}) \lt D`$. By MAIN,
   every ordinal below $`\upsilon_{\omega\cdot\omega}`$ is the value of a countable InaccPsi normal form, with collapse
   arguments below $`\Omega_\omega + \omega^{\theta+2} \lt I_\omega`$ (Lemma L).
+- **Theorem LOW-0** (2026-10, 1 review). $`\psi_{\Omega_1}(\Omega_\omega) \le \upsilon_1`$. With STEP-0:
+  $`\upsilon_1 = \psi_{\Omega_1}(\Omega_\omega)`$, by comparing the two hulls directly.
+- **Theorem LOW-STEP** (2026-10, 1 review). Let $`\sigma`$ be an $`\varepsilon`$-number, $`A = A_\eta`$ and
+  $`\psi_{\Omega_1}(A) \le \sigma`$. Then $`\psi_{\Omega_1}(A + \theta) \le \bar T^\sigma \cap \Omega_1`$. It holds for every
+  $`A \ge \Omega_\omega`$ whose last Cantor normal form summand is $`\ge \theta`$; without this condition it is not proved
+  (e.g. $`A = \Omega_\omega + 1`$). Proof outline: a map $`E`$ from the InaccPsi normal forms below
+  $`\psi_{\Omega_1}(A+\theta)`$ into $`\bar T^\sigma \cap \Omega_1`$ (the other direction from $`B`$):
+  $`\varphi(x, y)`$ at level $`k`$ goes to $`\bar\vartheta_k(\Omega_{k+1}\cdot\omega^{E x} + E y)`$;
+  $`\psi_{\Omega_{k+1}}(a)`$ goes to $`\bar\vartheta_k(\Omega_{k+1}^2 + F(E a))`$ with $`F(x) = \Omega_{m+1}^3\cdot\omega^x`$, $`m`$ the
+  level of $`x`$ ($`F`$ lifts the code above every inner code, as the domain rule needs);
+  $`\psi_{\Omega_1}(A + \zeta)`$ goes to $`\bar\vartheta_0(G(\mathrm{pmax}\,\zeta) + E\zeta)`$, where $`\mathrm{pmax}\,\zeta`$ is the
+  largest $`\psi_{\Omega_2}`$-term at the top of $`\zeta`$ and $`G`$ lifts it the same way; parameters below $`\sigma`$
+  stay. Lemma D: every image is in the domain (Weiermann–Wilken 2011, Lemma 4.3). Lemma M: $`E`$ is strictly
+  increasing (Lemma 4.4 there). New lemmas that carry the proof: PARTS, PMAX, Q, Q1, D, M, ARG0, ARG1.
+- **Theorem T-LOW** (2026-10, 1 review). $`\psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta) \le \upsilon_{1+\eta}`$ for every
+  countable $`\eta`$. Proof: induction with LOW-0 and LOW-STEP; limits by Lemma CONT. With T-UP this gives
+  **Theorem T** (§4). The induction up to $`\eta = \omega^2`$ is in Lean (`LowerT.lean`).
 - **Theorem CORE-S** (2026-10). Every ordinal below $`\upsilon_{\omega\cdot\omega}`$ is in $`\mathrm{Core}(R_2^S)`$; given Lemma
   FRAG, every ordinal below $`\upsilon_{\omega^3}`$. Below $`\upsilon_{\omega\cdot\omega}`$ the least closed sets of $`R_2^S`$
   are exactly the isominimal sets of $`R_2^C`$. Key step, Lemma FOLD: if $`f`$ is a covering, then the pointwise
@@ -159,8 +184,8 @@ $`\kappa_X = \min\{\kappa : \kappa \le_1^X \beta \text{ for all } \beta \ge \kap
   if also $`\le_1`$ to $`\beta`$ agrees, then $`\alpha \le_2^S \beta \Rightarrow \alpha \le_2^C \beta`$. Tools: the finite-set test
   (T1 below), the leading-term map of Theorem EQ, an $`R_2^+`$ form of Wilken 2021, Lemma 1.7(2), and transfer of
   $`\Pi_2`$ sentences.
-- **Corollary FIRST.** Every $`R_2^S`$ relation with right end below $`\beta_0`$, and every $`\le_1^S`$ relation with right
-  end $`\beta_0`$, holds in $`R_2^C`$. At $`\beta_0`$ the difference is an extra relation of $`R_2^C`$. So
+- **Corollary FIRST.** Every $`R_2^S`$ relation ($`\le_1`$ or $`\le_2`$) with right end at most $`\beta_0`$ holds in
+  $`R_2^C`$ (the case "$`\le_2`$ with right end $`\beta_0`$" was added in a second paper, 2026-10, 1 review). At $`\beta_0`$ the difference is an extra relation of $`R_2^C`$. So
   $`R_2^S = R_2^C`$ if and only if the converse ($`C \Rightarrow S`$) holds at every stage of agreement. Also
   $`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$, $`\beta_0 \ge \upsilon_{\omega^3}`$ given FRAG, and $`\beta_0`$ is countable or $`\infty`$.
 - **Lemma UPG.** At a stage of agreement, $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$ when every $`\gamma \lt \alpha`$ lies in an
@@ -168,6 +193,21 @@ $`\kappa_X = \min\{\kappa : \kappa \le_1^X \beta \text{ for all } \beta \ge \kap
 - **KAPPA and CORE-EQ.** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$, and $`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$. So if
   $`\max(\kappa_S, \kappa_C) \le \beta_0`$ (call this AGR), then $`\mathrm{Core}(R_2^S) = \mathrm{Core}(R_2^C)`$. The claim for
   $`R_2^C`$ together with AGR gives the claim for $`R_2^S`$.
+- **The converse $`C \Rightarrow S`$ at a stage of agreement** (2026-10, 1 review). Write $`G_C`$ for the set of $`\alpha`$ such
+  that every $`\gamma \lt \alpha`$ lies in an isominimal subset of $`\alpha`$. For $`\le_1`$:
+  $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$ holds when $`\beta \lt \kappa_C`$ (**CORE-1**, for every $`\alpha`$; proof by
+  Carlson 2009, Def 9.1, Lemma 9.3 and Thm 14.11), when $`\beta`$ is a limit (LIM1), and when $`\beta = \alpha + 1`$
+  (ONE-POINT). For $`\le_2`$: a successor stage has no $`\le_2`$ relation in either structure (SUCC2), and the
+  converse holds when $`\beta`$ is a limit of its $`\le_1`$-predecessors (LIM2).
+- **DICH** (2026-10, 1 review). If $`\beta_0 \lt \infty`$, exactly one case holds. (i) $`\beta_0 = \beta' + 1 \gt \kappa_C`$, and
+  the difference is an extra $`\alpha \le_1^C \beta_0`$ with $`\alpha \lt \beta'`$, $`\alpha \notin G_C`$. (ii) $`\beta_0 = \omega^\lambda`$ with $`\lambda`$
+  a limit, $`\le_1`$ to $`\beta_0`$ agrees, and the difference is an extra $`\alpha \le_2^C \beta_0`$; the
+  $`\le_1`$-predecessors of $`\beta_0`$ have a largest one $`d \lt \beta_0`$, and $`\alpha \le_2 d`$. So below $`\kappa_C`$ the two
+  structures can first differ only by a $`\le_2`$ relation of type (ii).
+- **R-INC** (2026-10, 1 review). Write W(C) for the claim in $`R_2^C`$, Σ2-GAP for "no extra $`\le_2^C`$ relation of
+  type (ii) at a stage $`\le \kappa_C`$" (the referee notes it is equivalent to $`\kappa_C \le \beta_0`$), and INC for
+  "$`\le_i^S \subseteq \le_i^C`$ everywhere". Then W(C), Σ2-GAP and INC give AGR, and so
+  $`\mathrm{Core}(R_2^S) = \mathrm{Core}(R_2^C) = \rho`$.
 
 **Finite-set tests in $`R_2^S`$** (2026-10). The language $`\{0, +, \le, \le_1, \le_2\}`$ is read as a finite relational one.
 
@@ -196,6 +236,12 @@ pointwise least one.
   and $`m_2 = \upsilon_1`$ given the cited core of $`R_1^+`$ and Theorems A, EQ.
 - Facts on $`C^*_3`$ (2026-10): no chain of length 3 lies inside $`[0, c_2)`$; $`c_0`$ is a limit of its
   $`\lt_1`$-predecessors; $`m_3 \ge \upsilon_{\omega^3}`$ given FRAG. Earlier: $`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$.
+- **Lemma TOP2** (2026-10, 1 review). For every $`\alpha \lt m_3`$ there is a chain $`x \lt_2 y`$ of length 2 with
+  $`\alpha \lt x \lt y \lt m_3`$. So $`m_3`$ is a limit of chains of length 2, and $`m_3 \ge \upsilon_{\omega\cdot\omega}`$ without FRAG.
+- **Lemma REL** (2026-10, 1 review; Theorem STEP with another start). Let $`r_0 = \tau`$, $`r_{\xi+1} = T^{r_\xi} \cap \Omega_1`$,
+  and the supremum at limits. If $`\tau`$ is an $`\varepsilon`$-number, $`\tau \le \psi_{\Omega_1}(A)`$, $`\Omega_\omega \le A`$ and (HA) holds
+  for $`A + \theta\cdot\zeta`$ ($`\zeta \lt \Gamma_0`$), then $`r_{1+\eta} \le \psi_{\Omega_1}(A + \theta\cdot(1+\eta))`$ for $`\eta \lt \Gamma_0`$. So a
+  restart above $`\psi_{\Omega_1}(A)`$ costs $`+\theta`$ per step, not $`+\Omega_\omega`$.
 - Small lemmas: **PRINC** ($`x \lt_1 y`$ gives $`x`$ additive principal; $`x \lt_2 y`$ gives $`y`$ additive
   principal), **ISO-UNION** (a finite union of isominimal sets is isominimal), **HULL** (every regular
   uncountable $`\kappa`$ is $`\le_1`$ to everything above it, in both structures), **DOM₁** (a pattern without
@@ -219,40 +265,58 @@ pointwise least one.
 - **Lemma UNIF-V.** For $`A_m = (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,0,0)^m`$, $`m \ge 3`$, and every $`N`$: the point of
   $`\Phi_3(A_m[N])`$ is below that of $`\Phi_3(A_m)`$, given the output shapes of $`\Phi_3`$ (checked for $`m \le 8`$,
   $`N \le 6`$). This extends Theorem V of R2PLUS ($`m = 2`$).
+- **Lemma MU-B** (2026-10, 1 review). A larger fragment $`G_B \supset G_A`$: any countable limit index $`\Omega_\xi`$ (also
+  with $`\psi_{\Omega_1}`$-terms inside $`\xi`$), summands $`\omega^{\Omega_\xi\cdot\kappa + c}`$ with countable $`\kappa \ge 1`$ and $`c`$,
+  sums of summands with different indices, $`\theta`$-tails, and countable $`\omega^x`$ for
+  $`x \ge \psi_{\Omega_1}(\Omega_\omega)`$. The extended map $`\mu_B`$ equals $`\mu`$ on $`G_A`$ and the Lean map `omegaIndexMatrix` on
+  $`\psi_{\Omega_1}(\Omega_\xi)`$, $`\xi \lt \varepsilon_0`$ a limit. $`\mu_B`$ is strictly increasing on $`G_B`$, and every image is below SRO.
+  Standard images: proved (Lean `trioStdL_omegaIndexMatrix`) only for $`\psi_{\Omega_1}(\Omega_\xi)`$, $`\xi \lt \varepsilon_0`$ a limit;
+  elsewhere checked. The review found one blocking point, against the use of MU-B for the core (not against
+  MU-B itself): it adds no ordinal to the known part of the core.
+  $`G_B`$ has no element in $`[\varepsilon_0, \psi_{\Omega_1}(\Omega_\omega))`$ (proved), so its order type is small (conjecture: about
+  the Ackermann ordinal), and Lemma OE gives only $`[0, \mathrm{otp}(G_B))`$. The next step must cover the
+  $`\varepsilon`$-numbers between $`\varepsilon_0`$ and $`\psi_{\Omega_1}(\Omega_\omega)`$.
 
 **Not proved:**
 
-- **Conjecture T itself** (the exact names, §4): the lower half $`\psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta) \le \upsilon_{1+\eta}`$
-  for $`\eta \ge 1`$. It needs a reverse embedding of InaccPsi values into Wilken's $`\bar T^\sigma`$. At $`\eta = 0`$
-  equality holds only by the indirect citation of RESTR.
 - **The claim above $`\upsilon_{\omega\cdot\omega}`$**, both halves.
-- **$`R_2^S = R_2^C`$**: the converse $`C \Rightarrow S`$ (for $`\le_2`$, and for $`\le_1`$ outside UPG), the inclusion
-  $`S \subseteq C`$ beyond $`\beta_0`$, and AGR. Theorem CC and all certificates are about $`R_2^C`$.
+- **$`R_2^S = R_2^C`$**: the converse $`C \Rightarrow S`$ for $`\le_1`$ at a successor stage $`\beta \gt \kappa_C`$ with
+  $`\alpha \notin G_C`$, and for $`\le_2`$ at $`\beta = \omega^\lambda`$ when the $`\le_1`$-predecessors of $`\beta`$ are bounded (this
+  needs an upward transfer of $`\Pi_2`$ sentences, which neither upward 2-reflection nor liftings give); Σ2-GAP,
+  INC, W(C), AGR, and $`\beta_0 = \infty`$. Theorem CC and all certificates are about $`R_2^C`$.
 - **The lower bound below $`\theta_0`$** (referee: blocking gap toward this goal, not an error): an order embedding
   $`\mu`$ of all $`\varepsilon`$-number terms below $`\theta_0`$ into standard trio matrices below SRO, and the local step
-  of S-RED for all matrices below SRO. Then the gap $`[\theta_0, \psi_{\Omega_1}(I_0))`$, which needs
+  of S-RED for all matrices below SRO. Outside $`G_B`$ are four families: (M1) uncountable $`\kappa`$, $`c`$ or $`g`$ in a
+  summand; (M2) successor indices such as $`\Omega_{\xi+1}`$; (M3) uncountable indices such as $`\Omega_{\Omega_\omega}`$; (M4)
+  the whole base below $`\psi_{\Omega_1}(\Omega_\omega)`$ ($`\varepsilon_1`$, $`\Gamma_0`$, $`\varphi(a, b)`$ with $`a \ge 1`$, …). (M4)
+  comes first. Then the gap $`[\theta_0, \psi_{\Omega_1}(I_0))`$, which needs
   $`\psi_{I_0}`$-collapses.
-- **$`C^*_3`$ explicitly.** Conjecture (from Wilken's least 3-chain of pure $`R_2`$, 2021, pp. 19–21, and CH), with
-  $`P = \psi_{\Omega_2}(\Omega_\omega)`$ and $`E = \varepsilon_{I_0+1}`$: $`m_3 = \psi_{\Omega_1}(E)`$ and
-  $`C^*_3 = \{\psi_{\Omega_1}(E + \Omega_\omega),\ \psi_{\Omega_1}(E + \Omega_\omega + \omega^{P+1}),\ \psi_{\Omega_1}(E + \Omega_\omega + \omega^{P+1} + P)\}`$. All are normal forms between
-  $`\psi_{\Omega_1}(I_0)`$ and $`\psi_{\Omega_1}(I_1)`$ (checked, Python and Lean).
+- **$`C^*_3`$ explicitly.** Conjecture C3′ (from Wilken's least 3-chain of pure $`R_2`$, 2021, pp. 19–21, CH and
+  Lemma REL), with $`P = \theta = \psi_{\Omega_2}(\Omega_\omega)`$ and $`E = \varepsilon_{I_0+1}`$: $`m_3 = \psi_{\Omega_1}(E)`$ and
+  $`C^*_3 = \{\psi_{\Omega_1}(E + P),\ \psi_{\Omega_1}(E + \omega^{P+1}),\ \psi_{\Omega_1}(E + \omega^{P+1} + P)\}`$. All are normal forms
+  between $`\psi_{\Omega_1}(I_0)`$ and $`\psi_{\Omega_1}(I_1)`$ (checked, Python and Lean). The earlier guess had
+  $`E + \Omega_\omega`$ in place of $`E`$ in the three chain terms; by REL it does not fit the reading it came from (the
+  $`\upsilon`$-hierarchy restarted above $`m_3`$), because a restart costs $`+P`$, not $`+\Omega_\omega`$ (proved as a
+  dichotomy, 1 review). Upper half open: no $`\le_2`$ relation of $`R_2^C`$ above $`\upsilon_{\omega^3}`$ is known. Lower half
+  open: it needs the lower bound program below $`\theta_0`$ with patterns without a chain of length 3.
 - That $`\Phi_3`$ never makes a chain of length 3 (checked only). With it, DOM₂ would bound every point of
   $`\Phi_3`$ by $`m_3`$.
 
-## 4. Names of Wilken's points (Conjecture T)
+## 4. Names of Wilken's points (Theorem T)
 
-**Conjecture T.** With $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, for $`\eta \le \omega^2`$:
+**Theorem T** (proved; upper half T-UP 2 reviews, lower half T-LOW 1 review). With
+$`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, for every $`\eta \lt \Gamma_0`$, in particular for $`\eta \le \omega^2`$:
 
 ```math
 \upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta).
 ```
 
-The upper half "$`\le`$" is proved, for all $`\eta \lt \Gamma_0`$ (Theorem T-UP). The lower half is open for
-$`\eta \ge 1`$; at $`\eta = 0`$ it is cited (RESTR).
+The upper half "$`\le`$" is Theorem T-UP, the lower half "$`\ge`$" is Theorem T-LOW (§3). Lean has the induction
+up to $`\eta = \omega^2`$, with the steps as hypotheses (`ConjT.lean`, `LowerT.lean`).
 
 | $`\eta`$ | point | term |
 |---|---|---|
-| $`0`$ | $`\upsilon_1`$ | $`\psi_{\Omega_1}(\Omega_\omega)`$ (cited) |
+| $`0`$ | $`\upsilon_1`$ | $`\psi_{\Omega_1}(\Omega_\omega)`$ |
 | $`1`$ | $`\upsilon_2`$ | $`\psi_{\Omega_1}(\Omega_\omega + \theta)`$ |
 | $`2`$ | $`\upsilon_3`$ | $`\psi_{\Omega_1}(\Omega_\omega + \theta\cdot 2)`$ |
 | $`\omega`$ | $`\upsilon_\omega`$ | $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+1})`$ |
@@ -262,10 +326,9 @@ $`\eta \ge 1`$; at $`\eta = 0`$ it is cited (RESTR).
 
 Only $`\psi_{\Omega_1}`$, $`\psi_{\Omega_2}`$ and $`\Omega_\omega`$ occur: no inaccessible is needed below
 $`\upsilon_{\omega\cdot\omega}`$. The naive guess $`\upsilon_\iota = \psi_{\Omega_1}(\Omega_\omega\cdot\iota)`$ is too large from
-$`\iota = 2`$ on if Conjecture T holds (Lean: $`u(\omega^2) \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$). Reason for
-$`+\theta`$: in the proof of STEP, the level-0 code $`\mathrm{code}_0`$ stays below $`\theta`$. Evidence for the lower half: the
-translation `por/tr3.py` of [R2PLUS.md](../../BMS/PoR/Trio/R2PLUS.md) gives these points for the
-matrices of Theorem S (checked).
+$`\iota = 2`$ on (Lean: $`u(\omega^2) \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$). Reason for
+$`+\theta`$: in the proof of STEP, the level-0 code $`\mathrm{code}_0`$ stays below $`\theta`$. The translation `por/tr3.py` of
+[R2PLUS.md](../../BMS/PoR/Trio/R2PLUS.md) gives the same points for the matrices of Theorem S (checked).
 
 ## 5. The route: a tree of lemmas
 
@@ -274,13 +337,14 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
 - **W** Wilken's claim, $`\mathrm{Core}(R_2^+) = \psi_{\Omega_1}(I_\omega)`$ — open
   - **Low** below $`\upsilon_{\omega\cdot\omega}`$, in $`R_2^C`$ and $`R_2^S`$ — proved (Theorem LOW)
     - Conjecture U — proved (STEP, T-UP)
-    - Conjecture T, the exact names — upper half proved; lower half open (a reverse embedding into $`\bar T^\sigma`$)
+    - Theorem T, the exact names for $`\eta \lt \Gamma_0`$ — proved (T-UP, T-LOW)
     - $`\mathrm{Core}(R_2^S)`$ contains all of $`\upsilon_{\omega\cdot\omega}`$ — proved (CORE-S)
   - **B** upper bound $`\mathrm{Core}(R_2^+) \subseteq \psi_{\Omega_1}(I_\omega)`$ — open
     - B0 reduction to least chains (Theorem CC) — proved for $`R_2^C`$
       - B0-S the same for $`R_2^S`$ — open; it follows from AGR
         - $`S \Rightarrow C`$ — proved up to $`\beta_0`$ (STAGE, FIRST); beyond $`\beta_0`$ open (not inductive by itself)
-        - $`C \Rightarrow S`$ at stages of agreement — $`\le_1`$ proved under UPG; $`\le_2`$ and other $`\alpha`$ open
+        - $`C \Rightarrow S`$ at stages of agreement — $`\le_1`$ proved below $`\kappa_C`$, at limits, at $`\alpha+1`$ and under UPG;
+          $`\le_1`$ at successors above $`\kappa_C`$ open; $`\le_2`$ proved at successors and LIM2, open at $`\omega^\lambda`$ (DICH)
     - B1 explicit chains of every length $`n`$ below $`\psi_{\Omega_1}(I_\omega)`$ as InaccPsi values — open
       (conjecture for $`n = 3`$ in §3)
     - B2 a finite-set test for $`\lt_2`$ in $`R_2^+`$ — proved (T1, T2); whether the uniform form (one copy for all
@@ -303,14 +367,15 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
     - A6 $`R_2^S = R_2^C`$ everywhere — open (known below $`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$)
   - **L** lower bound $`\psi_{\Omega_1}(I_\omega) \subseteq \mathrm{Core}(R_2^+)`$ — open
     - L0 in $`R_2^C`$: equivalent to "every $`\gamma \lt \psi_{\Omega_1}(I_\omega)`$ is below some $`\max C^*_n`$" — proved
-    - L-CERT below $`\theta_0`$: reductions proved (I-FREE, OE, EPS-RED, FS-OE, RED-BMS, S-RED, MU-A, UNIF-V); left:
-      the embedding $`\mu`$ of all $`\varepsilon`$-number terms below $`\theta_0`$, and the local step below SRO — open
+    - L-CERT below $`\theta_0`$: reductions proved (I-FREE, OE, EPS-RED, FS-OE, RED-BMS, S-RED, MU-A, MU-B, UNIF-V);
+      left: $`\mu`$ on the families (M1)–(M4), (M4) first, and the local step below SRO — open
     - L-CERT on $`[\theta_0, \psi_{\Omega_1}(I_0))`$ and above — open
     - L-BMS through $`\Phi_3`$ — blocked: by DOM₂ a pattern of $`\Phi_3`$ without a chain of length 3 stays below $`m_3`$,
       and no tested $`\Phi_3`$ pattern has such a chain (§6)
   - **Side leaves**
     - **DOM₂** — proved, with SHARP; DOM$`_k`$ for every $`k`$ — conjecture
-    - locate $`C^*_3`$ — open (conjecture in §3; known: $`m_3 \ge \upsilon_{\omega^3}`$ given FRAG)
+    - locate $`C^*_3`$ — open (Conjecture C3′ in §3; known: $`m_3 \ge \upsilon_{\omega\cdot\omega}`$, and
+      $`m_3 \ge \upsilon_{\omega^3}`$ given FRAG)
     - Lean: the order type of the bounded terms is $`\psi_{\Omega_1}(X)`$; Lemma LOC (whether a finite set is
       isominimal depends only on the structure up to its largest element; on paper, not refereed) — open
 
@@ -335,7 +400,7 @@ readings convert to the same $`J`$.
 
 | # | name | M | J | value | agrees |
 |---|---|---|---|---|---|
-| 1 | υ₁ | `Z` | `p0(W_w)` | cited | tr3, Ytosk |
+| 1 | υ₁ | `Z` | `p0(W_w)` | proved | tr3, Ytosk |
 | 2 | υ₂ | `Z K` | `p0(W_w+P)` | proved | tr3, Ytosk |
 | 3 | υ_ω | `Z K (2,0,0)` | `p0(W_w+w^(P+1))` | proved | tr3, Ytosk |
 | 4 | U = υ_{ω+1} | `Z K (2,0,0) K` | `p0(W_w+w^(P+1)+P)` | proved | tr3, Ytosk |
@@ -372,7 +437,9 @@ readings convert to the same $`J`$.
 | 35 | | `Z (2,1,1)(3,1,0)(1,1,1)(2,1,1)(3,1,0)` | `p0(W_(W_W))` | num | Ytosk |
 | 36 | SRO | `Z (2,1,1)(3,1,0)(2,0,0)` | `p0(pI0(0))` | num | none |
 
-Here BHO is the Bachmann–Howard ordinal, and `phi(1,W+1)` is $`\varepsilon_{\Omega_1+1}`$.
+Here BHO is the Bachmann–Howard ordinal, and `phi(1,W+1)` is $`\varepsilon_{\Omega_1+1}`$. In rows 1–6, 11–18 and
+20–23 the name is $`\upsilon_{1+\eta}`$ with $`\eta \lt \Gamma_0`$, so "name = $`J`$" is proved there by Theorem T; rows 24–26
+have $`\eta \ge \Gamma_0`$. The column "value" says whether the point of $`\Phi_3(M)`$ is that name.
 
 Checked on this table:
 
@@ -390,6 +457,13 @@ Checked on this table:
   variants of $`B`$ fail the same test (68 order errors; 44 non-normal forms). The referee's exhaustive test
   (all small terms): for STEP-0 up to 3,554 terms and 6.3 million pairs, 0 problems; for $`A = \Omega_\omega + \theta`$
   only tiny sets (61 and 35 terms), 0 problems.
+- **The map $`E`$ of LOW-STEP.** 8 random runs ($`\eta = 0, 1, 2`$, up to 5 levels, about 0.4–0.5 million pairs each)
+  and 7 runs on all small terms (up to 8.76 million pairs): 0 order errors, every image in the domain. The
+  referee's own 12 runs ($`\eta`$ up to $`\omega^2`$, larger $`\sigma`$, an $`\varepsilon`$-number $`\sigma`$ that is not strongly
+  critical, up to 6 levels; 770,000–829,000 pairs each): 0 errors. Broken variants (no $`F`$, no $`\Omega^2`$ prefix,
+  swapped $`\varphi`$ arguments) fail.
+- **Second review of $`B`$.** Own code; 14 random runs (1,117,200 pairs) and 7 exhaustive runs (11,197,771 pairs),
+  with $`A = A_0, A_1, A_{\omega+1}, A_{\omega^2}`$: 0 order errors, 0 non-normal images, 0 bound errors.
 - **Lemma FOLD.** The minimum of a covering and the identity was a covering in 9,000 of 9,000 random cases in
   $`R_1^+`$ below $`\varepsilon_0`$; the control map (the maximum) failed 20 times. The leading-term map was a closed
   embedding below the given map, keeping $`\le_1`$ forward, in 9,522 of 9,522 random cases.
@@ -406,6 +480,12 @@ Checked on this table:
   | reversed neighbour pairs (control) | 0 of 24 | — |
 
   No undecided pair was refuted. All 26 known order failures of $`\Phi_3`$ (58 pairs) lie above SRO.
+- **The map $`\mu_B`$ of MU-B.** 17,736 random terms of $`G_B`$ and the referee's 104,071 structured terms: 0 order errors,
+  all below SRO, all images standard (yaBMS). Certificates: of 300 neighbour pairs of a random sample of $`G_B`$
+  (at most 10 columns), 271 certified and replayed, 29 undecided, none refuted; 30 reversed pairs: 0.
+- **Chains below $`m_3`$** (2026-10). 6 certificates "point of the pattern $`\lt m_3`$", replayed, among them
+  $`\Phi_3(\mathrm{SRO})`$ and $`\Phi_3((0,0,0)(1,1,1)(2,2,2)(3,3,3))`$; the referee added patterns with 2, 3, 4 separate
+  chains of length 2. No certificate for the reverse order within 45 seconds.
 - **DOM₂.** Certificates were found for the predicted order "pattern without a chain of length 3 below
   $`m_3`$" on 4 shapes, and none, within 40 seconds each, for the 3 reverse directions. Longest chain of
   $`\Phi_3(M)`$: 2, on 3,875 matrices from $`(0,0,0)(1,1,1)(2,2,2)(3,3,3)`$ (rows $`\le 3`$, $`\le 24`$ columns).
@@ -432,6 +512,7 @@ first inaccessible; with only chains of length 2 it cannot reach $`\psi_{\Omega_
 | [CountSeg.lean](CountSeg.lean) | Lemma L, `bounded_inter_Om1`, `vals_inter_Om1`, `three_bounds` |
 | [LowSeg.lean](LowSeg.lean) | Lemma IS and Lemma CONT |
 | [ConjT.lean](ConjT.lean) | the InaccPsi side of Theorem T-UP: (HA) for $`A_\eta`$, the induction to $`\eta = \omega^2`$ with STEP as a hypothesis, Conjecture U from it, and the arithmetic of Lemma M |
+| [LowerT.lean](LowerT.lean) | the InaccPsi side of Theorem T-LOW: the induction to $`\eta = \omega^2`$ with LOW-0 and LOW-STEP as hypotheses, and Theorem T from both halves |
 | [LowTerms.lean](LowTerms.lean) | the seven terms $`u(\eta)`$ of §4: normal forms, values, order, and $`u(\omega^2) \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ |
 
 Nothing about $`R_2^+`$ itself is in Lean.
