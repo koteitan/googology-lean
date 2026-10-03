@@ -7,7 +7,7 @@ This page continues [RESTARTS.md](RESTARTS.md). The status words are those of [R
 on this page are from 2026-10. "1 review" means one referee. "2 reviews" means that two independent papers proved
 the result and each paper was refereed once. The results of the next round (relativized pins, the exact reaches up
 to $`\Theta_A`$, the names up to $`\Lambda_\varepsilon`$, the bottom of a chain of length 3) are on the fourth page
-[PINS.md](PINS.md), and the four rounds after that are on the fifth page [BREAK.md](BREAK.md); they change some statuses here, as marked.
+[PINS.md](PINS.md), the four rounds after that are on the fifth page [BREAK.md](BREAK.md), and the fifth round on the sixth page [COVER.md](COVER.md); they change some statuses here, as marked.
 
 **Notation.** As on [RESTARTS.md](RESTARTS.md): $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, the reach
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$, the restart $`\rho_\lambda = \upsilon_\lambda`$ for a nonzero multiple
@@ -161,14 +161,16 @@ below that used it, now holds with no hypothesis.
   (Theorem NU-CT, 1 review, [BREAK.md](BREAK.md) §2); $`\nu_C = \nu_S`$ is open. Now (1 review each, [BREAK.md](BREAK.md) §7.3): the name of $`\nu_S`$ is
   equivalent to three statements about $`\upsilon`$-indices, and $`\nu_C = \nu_S`$ is a question about $`R_2^S`$ alone, reduced to two statements
   about it. Then (1 review each, [BREAK.md](BREAK.md) §8): one of them, $`o_2 = \omega`$, is proved in $`R_2^C`$, so $`\nu_C = \upsilon^2_{\omega+1}`$ there;
-  $`\nu_C = \nu_S`$ implies $`o_2 = \omega`$ in $`R_2^S`$; the other, NOLIM above $`\nu_P`$, is reduced to one statement per gap. $`\nu_C = \nu_S`$ is
+  $`\nu_C = \nu_S`$ implies $`o_2 = \omega`$ in $`R_2^S`$; the other, NOLIM above $`\nu_P`$, is reduced to one statement per gap. Then (1 review each,
+  [COVER.md](COVER.md) §3): NOLIM holds in $`R_2^C`$ (at outline level), and $`\nu_C = \nu_S`$ is equivalent to NOLIM and $`o_2 = \omega`$ in $`R_2^S`$. $`\nu_C = \nu_S`$ is
   still open.
 
 ## 5. The least chain of length 3
 
 - **Lower bound** (proved). $`m_3 \ge \Lambda_\varepsilon \gt \Phi_1`$ (§2, 1 review), so $`m_3 \gt \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$.
   A second paper proves the weaker $`m_3 \gt \upsilon_{\Xi_\omega+\omega^2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1+1} + \omega^{\theta+2})`$ (1 review).
-  The shape of the bottom of a chain (now unconditional) and stronger bounds are in [PINS.md](PINS.md) §4.
+  The shape of the bottom of a chain (now unconditional) and stronger bounds are in [PINS.md](PINS.md) §4, and the bounds
+  $`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F \gt T_\omega`$ of the fifth round ($`\varphi_n`$ the least apex of a closed $`n`$-fan) in [COVER.md](COVER.md) §1.
 - **C3′ in its heuristic form is false** (first proved given INC1-S in $`R_2^S`$ and INC1-nonups in $`R_2^C`$, 1 review; now unconditional,
   [BREAK.md](BREAK.md) §1). The next restart $`r_1(\tau)`$ above $`\tau`$ is the least $`\upsilon`$-point
   above $`\tau`$; its index is a successor, so by LEFT it is never a $`\lt_2`$-left end, and the restarted triple
@@ -219,5 +221,5 @@ Each run was under 60 seconds; none is a proof.
   described exactly, its name is a conjecture, [BREAK.md](BREAK.md) §2, reduced in §7.3).
 - FRAG2 beyond $`\nu_S`$: several bases that are not $`\upsilon`$-points at once (FRAG-E), and nested cut data.
 - $`C^*_3`$: the upper half (an ordinal analysis of the generated structure), the lower half $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$,
-  and Conjecture CH.
+  and Conjecture CH. In $`R_2^C`$ the bottoms of chains are now characterized (Theorem CP3, [COVER.md](COVER.md) §1), but not located.
 - The order statement S for the converter above $`V_3`$.

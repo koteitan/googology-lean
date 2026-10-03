@@ -7,7 +7,7 @@
 4 つの論文から来ている。どの論文も 1 回ずつ査読された。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの
 論文がその結果を証明し、それぞれが 1 回ずつ査読されたこと。査読者が未証明と判定した命題は、その論文のほかの部分が
 証明済みでも **未証明** に書く。4 つの論文はどれも Wilken, JSL 72 (2007)、Carlson, AML 38 (1999)、Wilken, AML 45 (2006)
-を使わない。次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) にある。それによってここのいくつかの状態が変わった。
+を使わない。次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目は 6 ページ目 [COVER-ja.md](COVER-ja.md) にある。それによってここのいくつかの状態が変わった。
 
 **記号。** [REACHES-ja.md](REACHES-ja.md) と同じ。$`\upsilon`$ の点 $`\tau`$ に対し、$`\tau^\infty`$ は $`\tau`$ より上の最小の $`\upsilon`$ の点、
 $`\mathrm{seg}(\tau) = [\tau, \tau^\infty)`$。やり直しの添字 $`\lambda`$ に対し、$`\sigma_\lambda = \upsilon_{\lambda+1} = \rho_\lambda^\infty`$、$`\sigma'_\lambda = \upsilon_{\lambda+2}`$。
@@ -193,4 +193,5 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
   $`\Lambda_\varepsilon`$ より上での主張の名前の半分。
 - INC1-S と INC1-nonups は今は証明済み（[BREAK-ja.md](BREAK-ja.md) §1）。RIGHT（どの $`\lt_2`$ の右端も $`\upsilon`$ の点）は未解決。
 - $`C^*_3`$：最小のいちばん下の点（$`\nu_P`$ より上）、上半分、下半分、予想 CH（[BREAK-ja.md](BREAK-ja.md) §10）。最初の扇は $`T_\omega`$ より上で、未解決の仮定 $`FF_N`$ のもとでは到達不能基数が
-  要る（[BREAK-ja.md](BREAK-ja.md) §7.4）。
+  要る（[BREAK-ja.md](BREAK-ja.md) §7.4）。もっと弱い未解決の仮定「$`\min\{m : m \le_1 x_F\}`$ が $`\ge \theta_0`$」のもとでも要る。$`R_2^C`$ では鎖の底は
+  特徴づけられ、$`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F`$。$`\varphi_n`$ は閉じた $`n`$ 扇の最小の頂点（[COVER-ja.md](COVER-ja.md) §1–2）。

@@ -101,7 +101,11 @@ question about $`R_2^S`$ alone, and the name of $`\nu`$ and the base changes bet
 two more. Its §8 has the fourth round: in $`R_2^C`$, every level of nested pairs has exactly $`\omega`$ points below its left end
 ($`o_k = \omega`$ for every $`k`$, Theorem O$`^C`$, 1 review, by Carlson's minimality against coverings), so the shape part of NU-NAME holds in
 $`R_2^C`$; in $`R_2^S`$, $`o_2 = \omega`$, NOLIM above $`\nu_P`$ and $`\nu_C = \nu_S`$ stay open, $`\nu_C = \nu_S`$ now implies $`o_2 = \omega`$, and NOLIM is reduced
-to one statement per gap. Above $`\Lambda_\varepsilon`$ both
+to one statement per gap. The sixth page [COVER.md](COVER.md) has the fifth round, all by the same minimality (1 review each): in
+$`R_2^C`$, a point of the core is the bottom of a chain of length 3 iff it has an infinite $`\le_1`$-chain of right ends (Theorem CP3), the
+least fan is described except its order type, and NOLIM holds (at outline level); in $`R_2^S`$, $`\nu_C = \nu_S`$ is equivalent to NOLIM and
+$`o_2 = \omega`$ there, and $`o_k = \omega`$ is reduced to an $`R_2^S`$ form of Carlson's minimality and one pinning statement. $`C^*_3`$ still has no
+upper bound and no name. Above $`\Lambda_\varepsilon`$ both
 halves are open in $`R_2^C`$ (the core part is proved up to $`\nu_C`$), and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$.
 
 **Lean** (the five files of this directory, built with the whole library):
@@ -237,7 +241,8 @@ $`\kappa_X = \min\{\kappa : \kappa \le_1^X \beta \text{ for all } \beta \ge \kap
   [REACHES.md](REACHES.md) §1–2; then $`\beta_0 \ge \rho_{\Theta_A}`$, [PINS.md](PINS.md) §2; then $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$, [BREAK.md](BREAK.md) §4; now $`\beta_0 \ge \nu_C \gt \nu_P`$, §2), and $`\beta_0`$ is countable or $`\infty`$.
 - **Theorem LOC** (2026-10, 1 review; [BREAK.md](BREAK.md) §7.3). $`\beta_0`$ is the least stage at which Carlson's covering condition,
   evaluated inside $`R_2^S`$, differs from $`R_2^S`$. So whether $`\nu_C = \nu_S`$ (no "ghost") is a question about $`R_2^S`$ alone. Now
-  $`\nu_C = \nu_S`$ implies $`o_2 = \omega`$ in $`R_2^S`$, and given NOLIM the two are equivalent ([BREAK.md](BREAK.md) §8.1, 1 review).
+  $`\nu_C = \nu_S`$ implies $`o_2 = \omega`$ in $`R_2^S`$, and given NOLIM the two are equivalent ([BREAK.md](BREAK.md) §8.1, 1 review). Now $`\nu_C = \nu_S`$ iff NOLIM and $`o_2 = \omega`$ hold in $`R_2^S`$
+  (GHOST-EQ), and NOLIM holds in $`R_2^C`$ (Theorem NOLIM$`^C`$, at outline level) ([COVER.md](COVER.md) §3, 1 review).
 - **Lemma UPG.** At a stage of agreement, $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$ when every $`\gamma \lt \alpha`$ lies in an
   isominimal subset of $`\alpha`$ in $`R_2^C`$ (true for $`\alpha = \kappa_C`$ and $`\alpha = \upsilon_{\omega\cdot\omega}`$).
 - **KAPPA and CORE-EQ.** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$, and $`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$. So if
@@ -317,7 +322,11 @@ pointwise least one.
   $`R_2^S`$ ([BREAK.md](BREAK.md) §2–3); the least tops of nested pairs of every depth lie below $`m_3`$ (NEST, 2 reviews, [BREAK.md](BREAK.md) §5); every
   fan apex lies above their limit $`T_\omega`$, with no hypothesis (2 reviews); the least fan has exactly two $`\lt_2`$-successors, the second
   equal to its reach, and in $`R_2^C`$ it is open, so it lies strictly below the least closed fan; given the hypothesis $`FF_N`$ (open) the
-  first fan, $`m_3`$ and $`C^*_3`$ need an inaccessible ([BREAK.md](BREAK.md) §7.4).
+  first fan, $`m_3`$ and $`C^*_3`$ need an inaccessible ([BREAK.md](BREAK.md) §7.4). In $`R_2^C`$ ([COVER.md](COVER.md), 1 review each): a point of the core is the
+  bottom of a chain of length 3 iff it has an infinite $`\le_1`$-chain of right ends (Theorem CP3); $`c_0`$ is the least such point, and $`c_1`$ is
+  the supremum of an $`\omega`$-sequence made by downward 2-reflection (LEAST3); the least closed $`n`$-fans (apexes $`\varphi_n`$) stay below $`m_3`$, so
+  $`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F`$ (FIN-FAN); given $`FF_{cl}`$ ($`\sup_n \varphi_n \ge \theta_0`$), $`C^*_3`$ needs an inaccessible; whether the first fan
+  needs one is the single statement that the point of $`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)), which is $`\min\{m : m \le_1 x_F\}`$, is $`\ge \theta_0`$.
   Earlier:
   $`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$.
 - **Lemma TOP2** (2026-10, 1 review). For every $`\alpha \lt m_3`$ there is a chain $`x \lt_2 y`$ of length 2 with
@@ -434,7 +443,8 @@ pointwise least one.
   (C3′-FALSE, 1 review, [REACHES.md](REACHES.md) §5; it uses Lemma LEFT, which is now proved,
   [BREAK.md](BREAK.md) §1), so the numeric C3′ has no derivation left. The corrected shape C3′′ is false too: $`c_0, c_1, c_2`$
   are all limit points of the class $`C_{\omega^\omega}`$ (Theorem C3′′-FALSE, [BREAK.md](BREAK.md) §3). A chain of length 3 is exactly a fan with
-  infinitely many successors whose limit is a left end (Theorem CF, unconditional). Upper half open: the
+  infinitely many successors whose limit is a left end (Theorem CF, unconditional); in $`R_2^C`$ this is now a $`\le_1`$-condition on the right ends of one point (Theorem CP3,
+  [COVER.md](COVER.md) §1), which characterizes the chain but does not locate it. Upper half open: the
   known $`\le_2`$ relations of $`R_2^C`$ (up to $`\Lambda_\varepsilon`$) form no chain of length 3 (Theorem BLK$`^O`$); a chain must be in the
   seed of Carlson's generation (NO-GEN); set-theoretic
   reflection gives chains only above $`\omega_1^{CK}`$ (HIGH), and the $`\le_1`$-reach alone does not give a chain
@@ -525,7 +535,9 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       $`R_2^S`$ on $`[0, \nu_P)`$ ([REACHES.md](REACHES.md)), and SKEL⁺ up to $`\nu`$ ([BREAK.md](BREAK.md) §2); the first block of every level of nested pairs (LIFT-0,
       [BREAK.md](BREAK.md) §5), and every block of every level below $`T_\omega`$ (SH, [BREAK.md](BREAK.md) §7.1) — proved; the order type of each level
       ($`o_k = \omega`$, equivalent to a finite base change between its gaps, GI) — proved in $`R_2^C`$ (Theorem O$`^C`$, [BREAK.md](BREAK.md) §8.1,
-      1 review), open in $`R_2^S`$; its reaches and names — open, very hard
+      1 review), open in $`R_2^S`$ (reduced to an $`R_2^S`$ form of Carlson's minimality and one pinning statement, [COVER.md](COVER.md) §4); NOLIM
+      inside the gaps of level 2 — proved in $`R_2^C`$ at outline level (NOLIM$`^C`$, [COVER.md](COVER.md) §3), open in $`R_2^S`$ above $`\nu_P`$; its reaches
+      and names — open, very hard
     - A3 least realizations as terms — open
     - A4 **Conjecture CH**: the least chain of length $`k+2`$ needs $`k`$ inaccessibles — conjecture
     - A5 every term below the bound is the value of a pattern — open
@@ -547,7 +559,9 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       below $`m_3`$; the reach-only route fails (NO-PROMOTE); a chain is a fan whose limit is a left end (CF);
       $`c_0, c_1, c_2`$ are limit points of the class $`C_{\omega^\omega}`$, so C3′′ is false (C3-VEB, C3′′-FALSE; [PINS.md](PINS.md) §4,
       [BREAK.md](BREAK.md) §3); limits of levels lie in no pair, and in $`R_2^C`$ the first fan is below $`m_3`$ (LIM-CAP, DOM_F; [BREAK.md](BREAK.md) §6); the first
-      fan is above $`T_\omega`$, has two successors and is open in $`R_2^C`$ (FAN-CAP, OPEN-C, LONG-NEST; [BREAK.md](BREAK.md) §7.4))
+      fan is above $`T_\omega`$, has two successors and is open in $`R_2^C`$ (FAN-CAP, OPEN-C, LONG-NEST; [BREAK.md](BREAK.md) §7.4); in $`R_2^C`$ the bottoms of
+      chains are exactly the points of the core with an infinite closed fan, and the least closed $`n`$-fans stay below $`m_3`$ (CP3, FIN-FAN);
+      the least fan is described except its order type (FS; [COVER.md](COVER.md) §1–2))
     - Lean: the order type of the bounded terms is $`\psi_{\Omega_1}(X)`$; Lemma LOC (whether a finite set is
       isominimal depends only on the structure up to its largest element; on paper, not refereed) — open
 
@@ -701,7 +715,8 @@ needs "$`\Phi_3(M)`$ is a pattern" (open), and it is about $`R_2^C`$ only.
 
 Nothing about $`R_2^+`$ itself is in Lean. The results above $`\upsilon_{\omega^3}`$ are on the second page
 [RESTARTS.md](RESTARTS.md), those above $`\Xi_\omega`$ on the third page [REACHES.md](REACHES.md), those beyond $`\Lambda_\varepsilon`$ on
-the fourth page [PINS.md](PINS.md), and those where the skeleton ends, with the levels above it, on the fifth page [BREAK.md](BREAK.md).
+the fourth page [PINS.md](PINS.md), and those where the skeleton ends, with the levels above it, on the fifth page [BREAK.md](BREAK.md), and the
+results by covering minimality (the fifth round) on the sixth page [COVER.md](COVER.md).
 
 ## 8. References
 

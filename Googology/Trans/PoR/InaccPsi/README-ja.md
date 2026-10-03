@@ -97,7 +97,10 @@ $`R_2^C`$ では開いている、$`\nu_C = \nu_S`$ かどうかは $`R_2^S`$ �
 ほか 2 つに帰着。その §8 は 4 回目：$`R_2^C`$ では、入れ子の組のどの段も左端より下にちょうど $`\omega`$ 個の点を持つ（どの $`k`$ でも
 $`o_k = \omega`$、定理 O$`^C`$、査読 1 回。被覆に対する Carlson の最小性による）。だから NU-NAME の形の部分が $`R_2^C`$ で成り立つ。$`R_2^S`$ では
 $`o_2 = \omega`$、$`\nu_P`$ より上の NOLIM、$`\nu_C = \nu_S`$ は未解決のまま。$`\nu_C = \nu_S`$ から今は $`o_2 = \omega`$ が出て、NOLIM は隙間ごとの 1 つの
-命題に帰着した。$`R_2^C`$ では $`\Lambda_\varepsilon`$ より上（核の側は $`\nu_C`$ まで証明済み）、$`R_2^S`$ では
+命題に帰着した。6 ページ目 [COVER-ja.md](COVER-ja.md) は 5 回目で、どれも同じ最小性による（どれも査読 1 回）：$`R_2^C`$ では、
+核の点が長さ 3 の鎖の底であるのは、右端の無限の $`\le_1`$ 鎖を持つときちょうど（定理 CP3）。最小の扇は順序型以外は記述でき、
+NOLIM が成り立つ（概略の段階）。$`R_2^S`$ では、$`\nu_C = \nu_S`$ はそこでの NOLIM と $`o_2 = \omega`$ と同じで、$`o_k = \omega`$ は Carlson の最小性の
+$`R_2^S`$ の形と 1 つの止める命題に帰着した。$`C^*_3`$ にはまだ上からの評価も名前も無い。$`R_2^C`$ では $`\Lambda_\varepsilon`$ より上（核の側は $`\nu_C`$ まで証明済み）、$`R_2^S`$ では
 $`\upsilon_{\omega^3}`$ より上で、どちらの半分も未解決。
 
 **Lean**（このディレクトリの 5 つのファイル。ライブラリ全体と一緒にビルドした）：
@@ -217,7 +220,8 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   $`\beta_0`$ は可算か $`\infty`$。
 - **定理 LOC**（2026-10、査読 1 回。[BREAK-ja.md](BREAK-ja.md) §7.3）。$`\beta_0`$ は、Carlson の被覆の条件を $`R_2^S`$ の中で評価したものが
   $`R_2^S`$ と違う最小の段。だから $`\nu_C = \nu_S`$ かどうか（「幽霊」が無いか）は $`R_2^S`$ だけの問い。今は、$`\nu_C = \nu_S`$ から
-  $`R_2^S`$ での $`o_2 = \omega`$ が出て、NOLIM を仮定すれば両者は同じ（[BREAK-ja.md](BREAK-ja.md) §8.1、査読 1 回）。
+  $`R_2^S`$ での $`o_2 = \omega`$ が出て、NOLIM を仮定すれば両者は同じ（[BREAK-ja.md](BREAK-ja.md) §8.1、査読 1 回）。今は、$`\nu_C = \nu_S`$ は $`R_2^S`$ で NOLIM と $`o_2 = \omega`$ が
+  成り立つことと同じ（GHOST-EQ）で、NOLIM は $`R_2^C`$ で成り立つ（定理 NOLIM$`^C`$、概略の段階）（[COVER-ja.md](COVER-ja.md) §3、査読 1 回）。
 - **補題 UPG。** 一致する段では、$`\alpha`$ 未満のどの $`\gamma`$ も $`R_2^C`$ で $`\alpha`$ の isominimal な部分集合に入るなら、
   $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$（$`\alpha = \kappa_C`$ と $`\alpha = \upsilon_{\omega\cdot\omega}`$ で成り立つ）。
 - **KAPPA と CORE-EQ。** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$、$`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$。だから
@@ -292,7 +296,11 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   どの深さの入れ子の組も、最小の上端は $`m_3`$ より下（NEST、査読 2 回、[BREAK-ja.md](BREAK-ja.md) §5）。どの扇の頂点も、その極限
   $`T_\omega`$ より上で、仮定は要らない（査読 2 回）。最小の扇の $`\lt_2`$ の後の元はちょうど 2 つで、2 つ目はその届く先。$`R_2^C`$ では
   最小の扇は開いているので、最小の閉じた扇より真に下。仮定 $`FF_N`$（未解決）のもとでは、最初の扇、$`m_3`$、$`C^*_3`$ に到達不能基数が
-  要る（[BREAK-ja.md](BREAK-ja.md) §7.4）。
+  要る（[BREAK-ja.md](BREAK-ja.md) §7.4）。$`R_2^C`$ では（[COVER-ja.md](COVER-ja.md)、どれも査読 1 回）：核の点が長さ 3 の鎖の底であるのは、
+  右端の無限の $`\le_1`$ 鎖を持つときちょうど（定理 CP3）。$`c_0`$ はそういう最小の点で、$`c_1`$ は下向きの 2 反映が作る $`\omega`$ 列の上限
+  （LEAST3）。最小の閉じた $`n`$ 扇（頂点 $`\varphi_n`$）は $`m_3`$ より下にとどまるので $`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F`$（FIN-FAN）。$`FF_{cl}`$
+  （$`\sup_n \varphi_n \ge \theta_0`$）を仮定すれば $`C^*_3`$ に到達不能基数が要る。最初の扇に要るかは、$`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)) の点
+  （それは $`\min\{m : m \le_1 x_F\}`$）が $`\ge \theta_0`$ という 1 つの命題。
   以前から：$`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$。
 - **補題 TOP2**（2026-10、査読 1 回）。どの $`\alpha \lt m_3`$ にも、$`\alpha \lt x \lt y \lt m_3`$ となる長さ 2 の鎖 $`x \lt_2 y`$ がある。
   だから $`m_3`$ は長さ 2 の鎖の極限で、FRAG なしで $`m_3 \ge \upsilon_{\omega\cdot\omega}`$。
@@ -396,7 +404,8 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   証明済み、[BREAK-ja.md](BREAK-ja.md) §1）。
   だから数の形の C3′ には導き方が残っていない。直した形 C3′′ も偽：$`c_0, c_1, c_2`$ はどれも集まり
   $`C_{\omega^\omega}`$ の極限点（定理 C3′′-FALSE、[BREAK-ja.md](BREAK-ja.md) §3）。長さ 3 の鎖とはちょうど、後の元を無限に持ち、その極限が
-  左端である扇（定理 CF、条件なし）。上半分は未解決：知られている $`R_2^C`$ の $`\le_2`$ の関係
+  左端である扇（定理 CF、条件なし）。$`R_2^C`$ では、これは今は 1 つの点の右端の間の $`\le_1`$ の条件（定理 CP3、[COVER-ja.md](COVER-ja.md) §1）。
+  これは鎖の特徴づけで、場所は決めない。上半分は未解決：知られている $`R_2^C`$ の $`\le_2`$ の関係
   （$`\Lambda_\varepsilon`$ まで）は長さ 3 の鎖を作らない（定理 BLK$`^O`$）。鎖は Carlson の生成の種の中に無ければならない（NO-GEN）。集合論の反映は $`\omega_1^{CK}`$ より上にしか鎖を
   作らず（HIGH）、$`\le_1`$ の届く先だけでは鎖にならない（NO-PROMOTE）。下半分も未解決：長さ 3 の鎖の無いパターンで
   $`\theta_0`$ より下の下界の計画を進めることが要る。
@@ -485,7 +494,9 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       SKEL⁺ が $`\nu`$ まで与える（[BREAK-ja.md](BREAK-ja.md) §2）。入れ子の組のどの段でも最初のブロック（LIFT-0、
       [BREAK-ja.md](BREAK-ja.md) §5）、$`T_\omega`$ より下のどの段のどのブロックも（SH、[BREAK-ja.md](BREAK-ja.md) §7.1） — 証明済み。各段の順序型
       （$`o_k = \omega`$。隙間の間の有限の基の付け替え GI と同じ） — $`R_2^C`$ では証明済み（定理 O$`^C`$、[BREAK-ja.md](BREAK-ja.md) §8.1、
-      査読 1 回）、$`R_2^S`$ では未解決。届く先と名前 — 未解決、とても難しい
+      査読 1 回）、$`R_2^S`$ では未解決（Carlson の最小性の $`R_2^S`$ の形と 1 つの止める命題に帰着、[COVER-ja.md](COVER-ja.md) §4）。段 2 の
+      隙間の中の NOLIM — $`R_2^C`$ では概略の段階で証明済み（NOLIM$`^C`$、[COVER-ja.md](COVER-ja.md) §3）、$`R_2^S`$ では $`\nu_P`$ より上で未解決。
+      届く先と名前 — 未解決、とても難しい
     - A3 最小の実現を項で書く — 未解決
     - A4 **予想 CH**：長さ $`k+2`$ の最小の鎖には到達不能基数が $`k`$ 個要る — 予想
     - A5 上限より下のどの項も、あるパターンの値 — 未解決
@@ -507,7 +518,9 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       骨組みは $`m_3`$ より下で終わる。届く先だけの道はうまくいかない（NO-PROMOTE）。鎖とは極限が左端である扇（CF）。
       $`c_0, c_1, c_2`$ は集まり $`C_{\omega^\omega}`$ の極限点なので C3′′ は偽（C3-VEB、C3′′-FALSE。[PINS-ja.md](PINS-ja.md) §4、
       [BREAK-ja.md](BREAK-ja.md) §3）。段の極限はどの組にも入らず、$`R_2^C`$ では最初の扇は $`m_3`$ より下（LIM-CAP、DOM_F。[BREAK-ja.md](BREAK-ja.md) §6）。最初の
-      扇は $`T_\omega`$ より上で、後の元は 2 つ、$`R_2^C`$ では開いている（FAN-CAP、OPEN-C、LONG-NEST。[BREAK-ja.md](BREAK-ja.md) §7.4））
+      扇は $`T_\omega`$ より上で、後の元は 2 つ、$`R_2^C`$ では開いている（FAN-CAP、OPEN-C、LONG-NEST。[BREAK-ja.md](BREAK-ja.md) §7.4）。$`R_2^C`$ では
+      鎖の底はちょうど無限の閉じた扇を持つ核の点で、最小の閉じた $`n`$ 扇は $`m_3`$ より下にとどまる（CP3、FIN-FAN）。最小の扇は順序型
+      以外は記述できた（FS。[COVER-ja.md](COVER-ja.md) §1–2））
     - Lean：上を抑えた項の順序型が $`\psi_{\Omega_1}(X)`$ であること。補題 LOC（有限集合が isominimal かどうかは、
       その最大の元までの構造だけで決まる。紙の上、査読なし） — 未解決
 
@@ -654,7 +667,8 @@ $`m_3 \lt \min C^*_3`$ より下。以前の 8 個の証明書は、もう要ら
 
 $`R_2^+`$ そのものについては、Lean には何も無い。$`\upsilon_{\omega^3}`$ より上の結果は 2 ページ目
 [RESTARTS-ja.md](RESTARTS-ja.md) に、$`\Xi_\omega`$ より上の結果は 3 ページ目 [REACHES-ja.md](REACHES-ja.md) に、$`\Lambda_\varepsilon`$ より先の
-結果は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、骨組みが終わる所とその上の段の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) にある。
+結果は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、骨組みが終わる所とその上の段の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、
+被覆に対する最小性による結果（5 回目）は 6 ページ目 [COVER-ja.md](COVER-ja.md) にある。
 
 ## 8. 文献
 

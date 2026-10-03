@@ -6,7 +6,7 @@
 **証明済み**は、独立した査読者が、致命的な点も止める点も無く証明済みと判定したもの。このページの結果はどれも
 2026-10 のもの。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの論文がその結果を証明し、それぞれが
 1 回ずつ査読されたこと。次の回の結果（相対化したピン、$`\Theta_A`$ までの正確な届く先、$`\Lambda_\varepsilon`$ までの名前、
-長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) にある。
+長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目の結果は 6 ページ目 [COVER-ja.md](COVER-ja.md) にある。
 それによってここのいくつかの状態が変わった。
 変わった所には印を付けた。
 
@@ -157,13 +157,15 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
   [BREAK-ja.md](BREAK-ja.md) §7.3）：$`\nu_S`$ の名前は $`\upsilon`$ の添字の 3 つの命題と同じになり、$`\nu_C = \nu_S`$ は $`R_2^S`$ だけの問いで、それについての
   2 つの命題に帰着した。さらに（どれも査読 1 回、[BREAK-ja.md](BREAK-ja.md) §8）：その 1 つ $`o_2 = \omega`$ は $`R_2^C`$ で証明済みで、そこでは
   $`\nu_C = \upsilon^2_{\omega+1}`$。$`\nu_C = \nu_S`$ から $`R_2^S`$ での $`o_2 = \omega`$ が出る。もう 1 つ、$`\nu_P`$ より上の NOLIM は隙間ごとの 1 つの命題に
-  帰着した。$`\nu_C = \nu_S`$ はまだ未解決。
+  帰着した。そのあと（どれも査読 1 回、[COVER-ja.md](COVER-ja.md) §3）：NOLIM は $`R_2^C`$ で成り立ち（概略の段階）、$`\nu_C = \nu_S`$ は $`R_2^S`$ での NOLIM と
+  $`o_2 = \omega`$ と同じ。$`\nu_C = \nu_S`$ はまだ未解決。
 
 ## 5. 長さ 3 の最小の鎖
 
 - **下界**（証明済み）。$`m_3 \ge \Lambda_\varepsilon \gt \Phi_1`$（§2、査読 1 回）。だから $`m_3 \gt \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$。
   別の論文が、弱い $`m_3 \gt \upsilon_{\Xi_\omega+\omega^2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1+1} + \omega^{\theta+2})`$ を示す（査読 1 回）。
-  鎖のいちばん下の形（今は条件なし）ともっと強い評価は [PINS-ja.md](PINS-ja.md) §4 にある。
+  鎖のいちばん下の形（今は条件なし）ともっと強い評価は [PINS-ja.md](PINS-ja.md) §4 に、5 回目の評価
+  $`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F \gt T_\omega`$ （$`\varphi_n`$ は閉じた $`n`$ 扇の最小の頂点）は [COVER-ja.md](COVER-ja.md) §1 にある。
 - **発見的な形の C3′ は偽**（はじめは $`R_2^S`$ では INC1-S、$`R_2^C`$ では INC1-nonups を仮定して証明済み、査読 1 回。今は条件なし、
   [BREAK-ja.md](BREAK-ja.md) §1）。$`\tau`$ の上の次のやり直し $`r_1(\tau)`$ は $`\tau`$ の上の最小の $`\upsilon`$ の点。
   その添字は後続なので、LEFT により $`\lt_2`$ の左端にならない。だからやり直した 3 点 $`\{r_1, r_\omega, r_{\omega+1}\}(\tau)`$ は決して
@@ -210,5 +212,6 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
 - $`\Theta_P`$、$`\Lambda^*`$、$`\nu_P`$、$`\nu_S`$ の値（$`\Lambda_\varepsilon`$ までの名前は今は証明済み、[PINS-ja.md](PINS-ja.md) §3。$`\nu_S`$ は今は正確に
   記述できたが、名前は予想、[BREAK-ja.md](BREAK-ja.md) §2。§7.3 で帰着）。
 - $`\nu_S`$ より先の FRAG2：$`\upsilon`$ の点でない基をいくつも同時に（FRAG-E）、および入れ子の切るデータ。
-- $`C^*_3`$：上半分（生成した構造の順序数解析）、下半分 $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$、予想 CH。
+- $`C^*_3`$：上半分（生成した構造の順序数解析）、下半分 $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$、予想 CH。$`R_2^C`$ では鎖の底は今は特徴づけられた
+  （定理 CP3、[COVER-ja.md](COVER-ja.md) §1）が、場所は決まっていない。
 - $`V_3`$ より上での変換器の順序の命題 S。

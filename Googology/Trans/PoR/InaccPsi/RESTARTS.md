@@ -8,7 +8,8 @@ independent referee found the result proved with no fatal or blocking point. Eve
 refuted" by its referee; it is not counted as proved. The results above $`\Xi_\omega`$ (exact reaches, the end of the
 skeleton, the least chain of length 3) are on the third page [REACHES.md](REACHES.md), and those beyond $`\Lambda_\varepsilon`$
 (relativized pins, the reaches up to $`\Theta_A`$, the names of all $`\upsilon`$-points up to $`\Lambda_\varepsilon`$) on the fourth page
-[PINS.md](PINS.md), and those where the skeleton ends, with the levels of nested pairs above it, on the fifth page [BREAK.md](BREAK.md).
+[PINS.md](PINS.md), and those where the skeleton ends, with the levels of nested pairs above it, on the fifth page [BREAK.md](BREAK.md), and the results by covering minimality on the sixth page
+[COVER.md](COVER.md).
 
 **Notation.** $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$. The reach of a point $`\alpha`$ is
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$. A restart index is a nonzero multiple $`\lambda`$ of $`\omega^2`$. Write
@@ -95,6 +96,7 @@ skeleton FRAG2 must also move $`\varepsilon`$-bases that are not $`\upsilon`$-po
 1 review), and in $`R_2^C`$ the first non-skeletal point $`\nu_C`$ is $`\le \nu_S`$ and $`\gt \nu_P`$ (Theorem NU-CT, 1 review), both on
 [BREAK.md](BREAK.md) §2. Its name is a conjecture; it is now equivalent to three statements about $`\upsilon`$-indices (1 review, [BREAK.md](BREAK.md) §7.3).
 In $`R_2^C`$ the shape part is proved: $`\nu_C = \upsilon^2_{\omega+1}`$, from $`o_2 = \omega`$ (Theorem O$`^C`$, 1 review, [BREAK.md](BREAK.md) §8.1).
+In $`R_2^C`$ NOLIM holds too (at outline level), and $`\nu_C = \nu_S`$ is equivalent to NOLIM and $`o_2 = \omega`$ in $`R_2^S`$ (1 review, [COVER.md](COVER.md) §3).
 Below the limit $`T_\omega`$ of the levels of nested pairs, FRAG2 holds in the weaker form "every pair joins two $`\upsilon`$-points" (outline
 only, [BREAK.md](BREAK.md) §7.1).
 

@@ -8,7 +8,7 @@ independent referee found the result proved with no fatal or blocking point. All
 "2 reviews" means that two independent papers proved the result and each paper was refereed once. A statement that its
 referee found not proved, or false as written, is listed under **Not proved**, even when the rest of its paper is proved.
 None of the sixteen papers uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). No result on this
-page is in Lean.
+page is in Lean. The fifth round (four more papers) is on the next page, [COVER.md](COVER.md).
 
 **Notation.** As on [REACHES.md](REACHES.md) and [PINS.md](PINS.md). $`\nu_P = \upsilon_{\Lambda^*+\omega^2}`$ is the end of Theorem SKEL. $`\mathrm{lh}_1(a)`$ is the
 reach of $`a`$ in $`R_1^+`$. A gap is the interval between two consecutive $`\upsilon`$-points. A **standard pair** is a
@@ -578,7 +578,7 @@ realization of $`C_K`$ above $`g`$, $`E(g) = \sup_K e_K(g)`$, and $`b^*(g)`$ is 
 - **The ghost** (proved, 1 review). In cases (P1), (P2), (P3a) of LOCATE a ghost forces $`b^*(g) \lt g^+`$ in its gap. So $`b^*(g) = g^+`$ for all $`g`$,
   together with $`o_2 = \omega`$, excludes the ghost (GR in this form).
 - **$`R_2^C`$** (proved, 1 review). All of the above holds in $`R_2^C`$.
-- **Open**: NOLIM above $`\nu_P`$, in both structures. Below $`\nu`$ the proved results fix every relation except the reaches of the restarts
+- **Open**: NOLIM above $`\nu_P`$, in both structures (now proved in $`R_2^C`$ at outline level, [COVER.md](COVER.md) §3). Below $`\nu`$ the proved results fix every relation except the reaches of the restarts
   inside the gaps, and NOLIM is a statement about those reaches only; they are unknown above the analogue of $`\Theta_A`$ in each gap.
 
 ### 8.5 Status after this round
@@ -645,14 +645,17 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 - **RIGHT-ISO** (and so RIGHT; for pairs with left end below $`T_\omega`$ it follows from SKEL$`^\omega`$, an outline, §7.1). CC as an isomorphism
   (not needed).
 - The name of $`\nu`$: now the three statements (O) $`o_2 = \omega`$ (proved in $`R_2^C`$, §8.1), (N-χ) and (N-ν) (§7.3). $`\nu_C = \nu_S`$ (exclude the ghost): it implies (O) in $`R_2^S`$ (§8.1), and it is reduced to
-  NOLIM above $`\nu_P`$ and $`o_2 = \omega`$, both about $`R_2^S`$ (§7.3); NOLIM is now the statement $`b^*(g) = g^+`$ for every gap of $`U_2`$ (§8.4).
+  NOLIM above $`\nu_P`$ and $`o_2 = \omega`$, both about $`R_2^S`$ (§7.3); NOLIM is now the statement $`b^*(g) = g^+`$ for every gap of $`U_2`$ (§8.4); it is proved in $`R_2^C`$ at outline level, and $`\nu_C = \nu_S`$ is
+  equivalent to NOLIM and $`o_2 = \omega`$ in $`R_2^S`$ ([COVER.md](COVER.md) §3).
 - The structure above $`\nu`$: $`o_k = \omega`$ for $`k \ge 2`$ in $`R_2^S`$ (equivalently $`GI^{fin}_k(\omega)`$; proved in $`R_2^C`$, §8.1), the global base change $`GI_k(\omega)`$, the exact reaches of
   level-$`k`$ restarts, the gaps as base-changed copies, and the names (§7.1, §7.2); SKEL$`^\omega`$, TAIL, TAIL-GAP and TOP at proof level;
   the reach of $`T_\omega`$.
-- The least fan: its name, the name of $`f_0`$, $`FF_N`$, L1p-HYP, POINT-SRO, and whether the least fan of $`R_2^S`$ is open (§7.4).
+- The least fan: its name, the name of $`f_0`$, $`FF_N`$, L1p-HYP, POINT-SRO, and whether the least fan of $`R_2^S`$ is open (§7.4). Its structure in
+  $`R_2^C`$ is now fixed except its order type $`o_F`$ ([COVER.md](COVER.md) §2).
 - A chain of length 3: a point of $`(C_{\omega^\omega})'`$ above $`B`$ whose successors accumulate at a left end. Being a left end is not a
   property of a finite configuration, so Carlson's generating rules cannot produce it (NO-GEN). FF, DOM_F in $`R_2^S`$, open fans
-  below $`\sigma_F`$, and the upper half below $`\theta_1`$. Conjecture CH.
+  below $`\sigma_F`$, and the upper half below $`\theta_1`$. Conjecture CH. In $`R_2^C`$ the bottoms of chains of length 3 are now exactly the points of the core
+  with an infinite $`\le_1`$-chain of right ends (Theorem CP3, [COVER.md](COVER.md) §1); this characterizes the chain but does not locate it.
 - The reaches for candidates in $`[\delta_j\cdot\omega, \delta_{j+1})`$; a review of the repaired TOP-REG and REACH; $`R_2^C`$ above $`\nu_C`$; the closed
   forms and names above $`\Lambda_\Gamma`$ ($`\Theta_P`$, $`\Theta_1`$, $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$); names above $`\upsilon^*`$ beyond GEN-EXT.
 - That the assignments between ordinals and patterns are elementary recursive (outline only), and that UNIF is onto.

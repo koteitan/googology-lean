@@ -7,7 +7,7 @@
 **査読 1 回**。**概略**と書いたものは、査読者が「証明済み（概略）、反証されず」と判定したもの。証明済みには数えない。$`\Xi_\omega`$ より上の結果（正確な届く先、骨組みの終わり、長さ 3 の最小の鎖）は
 3 ページ目 [REACHES-ja.md](REACHES-ja.md) にある。$`\Lambda_\varepsilon`$ より先の結果（相対化したピン、$`\Theta_A`$ までの届く先、
 $`\Lambda_\varepsilon`$ までのすべての $`\upsilon`$ の点の名前）は 4 ページ目 [PINS-ja.md](PINS-ja.md) にある。骨組みが終わる所と、その上の入れ子の組の段の結果は
-5 ページ目 [BREAK-ja.md](BREAK-ja.md) にある。
+5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、被覆に対する最小性による結果は 6 ページ目 [COVER-ja.md](COVER-ja.md) にある。
 
 **記号。** $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$。点 $`\alpha`$ の届く先を $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$ と書く。
 やり直しの添字とは、$`\omega^2`$ の 0 でない倍数 $`\lambda`$ のこと。$`\lambda = \lambda_0 + \omega^e`$（カントール標準形の最後の項、
@@ -89,6 +89,7 @@ $`\nu_S`$ は今は正確に分かっている：中に別の $`\lt_2`$ の組�
 査読 1 回）。$`R_2^C`$ が骨組み型でなくなる最初の点 $`\nu_C`$ は $`\nu_S`$ 以下で $`\nu_P`$ より上（定理 NU-CT、査読 1 回）。どちらも
 [BREAK-ja.md](BREAK-ja.md) §2。名前は予想。今は $`\upsilon`$ の添字の 3 つの命題と同じ（査読 1 回、[BREAK-ja.md](BREAK-ja.md) §7.3）。
 $`R_2^C`$ では形の部分が証明済み：$`o_2 = \omega`$ から $`\nu_C = \upsilon^2_{\omega+1}`$（定理 O$`^C`$、査読 1 回、[BREAK-ja.md](BREAK-ja.md) §8.1）。
+$`R_2^C`$ では NOLIM も成り立ち（概略の段階）、$`\nu_C = \nu_S`$ は $`R_2^S`$ での NOLIM と $`o_2 = \omega`$ と同じ（査読 1 回、[COVER-ja.md](COVER-ja.md) §3）。
 入れ子の組の段の極限 $`T_\omega`$ より下では、FRAG2 は弱い形「どの組も 2 つの $`\upsilon`$ の点を結ぶ」で成り立つ（概略だけ、
 [BREAK-ja.md](BREAK-ja.md) §7.1）。
 

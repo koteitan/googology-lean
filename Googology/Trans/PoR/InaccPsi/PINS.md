@@ -8,7 +8,7 @@ page are from 2026-10; they come from four papers, each refereed once. "1 review
 means that two independent papers proved the result and each paper was refereed once. A statement that its referee
 found not proved is listed under **Not proved**, even when the rest of its paper is proved. None of the four papers
 uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). The next four rounds are on the fifth page
-[BREAK.md](BREAK.md); it changes some statuses here, as marked.
+[BREAK.md](BREAK.md), and the fifth round on the sixth page [COVER.md](COVER.md); they change some statuses here, as marked.
 
 **Notation.** As on [REACHES.md](REACHES.md). For a $`\upsilon`$-point $`\tau`$, $`\tau^\infty`$ is the least $`\upsilon`$-point above
 $`\tau`$, and $`\mathrm{seg}(\tau) = [\tau, \tau^\infty)`$. For a restart index $`\lambda`$: $`\sigma_\lambda = \upsilon_{\lambda+1} = \rho_\lambda^\infty`$ and
@@ -197,4 +197,5 @@ Each run was under 60 seconds; none is a proof.
   reaches; the names half of the claim above $`\Lambda_\varepsilon`$.
 - INC1-S and INC1-nonups are now proved ([BREAK.md](BREAK.md) §1); RIGHT (every $`\lt_2`$-right end is a $`\upsilon`$-point) is open.
 - $`C^*_3`$: the least bottom (above $`\nu_P`$), the upper half, the lower half, and Conjecture CH ([BREAK.md](BREAK.md) §10); the first fan is above $`T_\omega`$, and it needs an inaccessible given the open hypothesis
-  $`FF_N`$ ([BREAK.md](BREAK.md) §7.4).
+  $`FF_N`$ ([BREAK.md](BREAK.md) §7.4), or given the weaker open hypothesis that $`\min\{m : m \le_1 x_F\}`$ is $`\ge \theta_0`$; in $`R_2^C`$ the bottoms of chains are
+  characterized, and $`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F`$, with $`\varphi_n`$ the least apex of a closed $`n`$-fan ([COVER.md](COVER.md) §1–2).
