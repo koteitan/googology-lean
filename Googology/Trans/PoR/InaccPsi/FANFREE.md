@@ -1,10 +1,10 @@
 [← Back](README.md) | [English](FANFREE.md) | [Japanese](FANFREE-ja.md)
 
-# $`R_2^+`$, the eighth and ninth rounds: the limit jumps, native codes, restart reaches between segments, chains in the fan-free core, and the shapes of $`\Phi_3`$
+# $`R_2^+`$, the eighth to tenth rounds: the limit jumps, native codes, restart reaches between segments, chains in the fan-free core, the shapes of $`\Phi_3`$, and names past $`\Lambda_\varepsilon`$
 
 This page continues [COVER.md](COVER.md). The status words are those of [README.md](README.md) §3: **proved** means that an
 independent referee found the result proved with no fatal or blocking point. All results on this page are from 2026-10. They
-come from two rounds of four papers, the eighth (§1–§6) and the ninth (§7–§9); each paper was refereed once, so a result has 1 review unless a count is given. "2 reviews"
+come from three rounds of four papers, the eighth (§1–§6), the ninth (§7–§9) and the tenth (§10–§12); each paper was refereed once, so a result has 1 review unless a count is given. "2 reviews"
 means that two independent papers proved the result and each paper was refereed once. A result marked **outline** was found
 "proved (outline)" by its referee; it is not counted as proved. A statement with a blocking point against it is listed under
 **Not proved**, even when the rest of its paper is proved. A true statement that its referee found to restate the target, or to
@@ -206,7 +206,8 @@ The bad root and $`t`$ are those of the BMS expansion of $`A`$.
   B = (0,0,0)(1,1,0)(2,1,0)(3,0,0)(4,1,0), the index part of $`\Phi_3(A[n])`$ is $`\Phi_3(B[n])`$ for every $`n`$, so its explicit shape (a chain of
   1-row towers, checked for $`n \le 12`$) is not needed. A second proof by induction with LOW moves uses that chain.
 - **Corollary ZB-FS** (proved). The step holds for every $`n`$ at every $`A = Z_1\cdot\mathrm{sh}_2(B)`$ with $`B`$ a standard pair sequence whose last
-  column is not a root column, and at nests of these.
+  column is not a root column, and at nests of these. (The referee: when $`B`$ has two root terms, the copy of the core is the restricted copy with
+  the sums of its prefixes; the rest is unchanged.)
 - **Corollary IND** (proved). If the bad root is a root column and $`t = 0`$ ("successor at a root"), every one-term node of $`\Phi_3(A[n])`$ is one
   of $`\Phi_3(A)`$, so the step holds by IND-SUB. This covers 372 sample matrices and every such matrix beyond the sample.
 - **Theorem SELF-top** (proved, after a one-word fix by the referee: the summands must lie in the first block $`I_0`$). In the
@@ -229,7 +230,7 @@ The bad root and $`t`$ are those of the BMS expansion of $`A`$.
 | column 0 | 635 | 206 | 429 open (the self-reference type) |
 | in the $`\Omega`$-level structure | 1,347 | 0 | open; no decomposition found |
 
-  The 480 proved include the 21 that are proved given LOW. What is missing, class by class: that $`\Phi_3`$ treats the index term as one unit
+  The 480 proved include the 21 that are proved given LOW. (Now 874 proved, §10.1.) What is missing, class by class: that $`\Phi_3`$ treats the index term as one unit
   in every context; a copy of the changed summand that interleaves with the fixed earlier summands (a CODE lemma with parameters, the
   same kind of gap as in §2); the shapes of the self-reference type for every $`n`$; and, for the last class (it contains POINT-REF, LONG-K and
   the type of SRO itself), any decomposition.
@@ -244,16 +245,18 @@ end ($`x_1 \lt_2 y_1 \lt x_2 \lt_2 y_2`$ with $`x_1 \le_1 x_2`$, $`x_1 \le_1 y_2
   index that $`g`$ is compared with.
 - **Lemma CODE′** (proved; it replaces Lemma CODE of §2). With this rule every new index has a host, the realized order is the index
   order, and every decoration needed is smaller than the host's in the realized order. So $`N(\gamma + \omega^{b'}) \ll N(\gamma + \omega^b)`$ for every
-  $`1 \le b' \lt b`$, not only for $`b' = b[n]`$. In the counterexample of §2 the new index $`\omega`$ now has the host $`\omega^\omega`$.
+  $`1 \le b' \lt b`$, not only for $`b' = b[n]`$. In the counterexample of §2 the new index $`\omega`$ now has the host $`\omega^\omega`$. (The referee: when a decoration
+  has two or more summands, the set that is placed must also contain its partial sums, which R4 gives; the proof goes through.)
 - **Theorem IDX** (proved; this repairs the blocking point of §2). $`N(\alpha') \ll N(\alpha)`$ for $`\omega \le \alpha' \lt \alpha \lt \varepsilon_0`$.
 - **Theorem IDX′** (proved). With the measure $`m(\varphi_j(\xi)) = (j, \xi)`$ at $`\varepsilon`$-numbers and the decorations $`p \le_1 p\cdot(k+1) + E(\mu)`$,
   the codes $`N(\alpha)`$ are defined for $`\omega \le \alpha \lt \varphi_\omega(0)`$, they are RF fan-free patterns, and $`N(\alpha') \ll N(\alpha)`$ for $`\alpha' \lt \alpha`$
-  there. Past $`\varphi_\omega(0)`$ the decorations need more points inside the reach: outline only.
+  there. Past $`\varphi_\omega(0)`$ the decorations need more points inside the reach: outline only. Now ordered up to the Bachmann–Howard ordinal with other codes (§10.2).
 - **Lemma REF** (proved). If $`Q' \ll Q`$ and $`T`$ refers to $`Q`$ only through its point, then $`T`$ with $`Q'`$ in place of $`Q`$ is $`\ll T`$. But references do
   not raise the order type: a family closed under sums and references to index codes stays below $`\psi_{\Omega_1}(\Omega_{\Omega_1}) \lt \theta_0`$
   (§2). So what is left is the whole map $`\nu`$ on $`D`$, not "(O1), then (O2)".
 - **Theorem HOST2** (proved). In every copy of $`\mathrm{CH}_2`$, every L1p-free RF fan-free pattern has copies cofinally below $`u_1`$. So
-  $`\max P^* \lt \iota(\mathrm{CH}_2)`$ for every L1p-free RF fan-free pattern $`P`$. No condition on interior sums is needed.
+  $`\max P^* \lt \iota(\mathrm{CH}_2)`$ for every L1p-free RF fan-free pattern $`P`$. No condition on interior sums is needed. (The referee: the enlarged pattern in the proof
+  uses a new indecomposable, so it is a pattern only up to isomorphism; that is enough, and it keeps RF, fan-free and L1p-free.)
 - **Corollaries** (proved). Every code $`N(\alpha)`$ with $`\alpha \lt \varphi_\omega(0)`$ and every native family so far (the towers $`A_n`$ for every $`n`$,
   SRO and others) is $`\ll \mathrm{CH}_2`$. So $`\iota(\mathrm{CH}_2) \ge \varphi_\omega(0)`$; this is far below the known $`\iota(\mathrm{CH}_2) \gt \nu_C`$.
 - **Reduction RED-ν2** (proved). A map $`\nu`$ from $`D`$ to L1p-free RF fan-free patterns with $`\nu(s) \ll \nu(t)`$ at every step gives
@@ -280,14 +283,15 @@ these are the $`V_{1+j}`$. $`C^{\xi+1}`$ is the set of $`\iota \in C^\xi`$ that 
   $`O(\lambda) = b_\xi(\rho) + \rho\cdot j + \mathrm{logend}(\eta)`$, where $`\rho = \rho_\lambda`$, $`b_1(\rho) = \rho`$ and $`b_\xi(\rho) = \rho^2\cdot(-1+\xi)`$ for $`\xi \ge 2`$. Layer 1 is the
   offset $`\rho\cdot\gamma + \mathrm{logend}(\alpha)`$ of GEN-OFF (§3) with no bound and no outline step, so GEN-OFF for $`\gamma \ge 1`$ is now proved.
 - **Corollary CR1** (proved). A critical index that is not a limit of critical indices has offset $`\rho^3`$; the least limit of critical
-  indices above a base has offset $`\rho^3 + 1`$. So the reach of every restart below $`\nu`$ is known, except at limits of critical indices.
+  indices above a base has offset $`\rho^3 + 1`$ (the reach $`\delta + \rho^3 + 1`$ there follows from TAIL-GAP with that base; the referee: this step should be
+  written). So the reach of every restart below $`\nu`$ is known, except at limits of critical indices.
   Every long restart and every point of level 2 has such an index.
 - **Corollary FIX-L** (proved). $`u_n`$ and $`x`$ are critical and are limits of critical indices. This replaces the outline half of FIX-Γ (§3).
   The critical indices $`\chi^{(n)}_k`$ ($`k \le \omega`$) above $`u_n`$ lie in $`S_n`$.
 - **Lemma TRANS** (proved; $`R_2^C`$, from Carlson 2009, Def 5.3 clause 2 at $`x \le_2 \nu`$). A finite family of restarts whose reaches are at least
   $`\delta + t(\rho)`$ ($`t`$ an offset term with constants from a fixed finite set) that occurs cofinally below $`x`$ also occurs cofinally below $`\nu`$
   above $`x`$. The witness: the $`R_1^+`$ relations $`p \le_1 p + q`$ inside block 0 of a restart force the exponents of the copied offset; $`+`$ alone
-  cannot.
+  cannot. (The referee: the proof applies an earlier lemma outside its stated hypotheses; this is correct, but the variant should be stated as a lemma.)
 - **Theorem IMG-D** (proved). $`\chi^{(\omega)}_\omega \lt \nu`$. So $`\Psi^{(\omega)}_g \lt \nu`$ for every $`g`$ below the least Γ-type index above $`x`$ (IMG of §3 was an
   outline for $`g \lt \omega^\omega`$).
 - **Lemma T** (proved, after a one-line repair by the referee of one comparison rule). A map $`T_n : D_n \to [0, \chi^{(\omega)}_\omega)`$, the identity below
@@ -298,7 +302,7 @@ these are the $`V_{1+j}`$. $`C^{\xi+1}`$ is the set of $`\iota \in C^\xi`$ that 
   SC for every finite $`Y \subset [x, \chi^{(\omega)}_\omega)`$ and every $`W \subset D_n`$. These prove the outlines of §3 ($`T_n`$, IMG, RM-P, the finite LBC,
   SC-P) on the larger part $`D_n \supset P_n`$.
 - **Conjecture KV.** Beyond $`\chi^{(n)}_\omega`$ the offsets are $`\sum_\xi \rho^\xi\cdot a_\xi + \mathrm{logend}(a_0)`$ (the pattern of Klammersymbols), up to $`\rho^\rho`$.
-  The six program points beyond $`D_n`$ fit it.
+  The six program points beyond $`D_n`$ fit it. Now proved (Theorem KV, §10.3).
 - **Not proved** (blocking point, stated by the paper): RM, LBC and SC beyond $`D_n`$, and so $`\nu_C = \nu_S`$. SEG-RED needs $`W`$ anywhere in $`S_n`$,
   and every point of $`(u_n, \chi^{(n)}_\omega)`$ has reach at most $`\delta + \rho^3 + 1 \lt \delta\cdot 2`$, so the push-down step of SEG-RED cannot be
   placed inside $`D_n`$. Missing: canonical forms and offsets above $`\chi^{(n)}_\omega`$ (KV), a collapsing notation over $`\upsilon`$ at a critical base,
@@ -360,7 +364,7 @@ Each run was under 60 seconds; none is a proof.
 - Codes (§7.2). The host rule in realized order: 572,150 steps, 0 failures; two altered rules are caught; the referee's run with a new seed:
   about 283,000 steps, 0 failures. Every pattern that $`\Phi_3`$ prints for the 10,633 standard matrices below SRO with at most 7 columns and for
   1,423 landmarks is L1p-free (given the printed shapes); in the scanned tree of fundamental sequences the first pattern with L1p is
-  $`\mathrm{NCH}_2`$. Certificates in the predicted direction: 15, and the referee's 2, replayed. In the refuting direction ($`\mathrm{CH}_2 \lt P`$ for
+  $`\mathrm{NCH}_2`$ (scanned: those matrices and the tree of depth at most 3 below (0,0,0)(1,1,1)(2,2,1), with the printed shapes, which can be wrong). Certificates in the predicted direction: 15, and the referee's 2, replayed. In the refuting direction ($`\mathrm{CH}_2 \lt P`$ for
   L1p-free $`P`$): none found, in 2 searches by the paper and 4 searches of 50 s by the referee.
 - Restarts (§7.3). In the program model at base 0, 21 standard matrices: the 15 layer points read exactly the offsets of LAYERS and CR1
   ($`\rho^2`$, $`\rho^2+1`$, $`\rho^2+\rho`$, $`\rho^2\cdot 2`$, $`\rho^2\cdot\omega`$, $`\rho^2\cdot\omega^2`$, $`\rho^3`$), and the 6 beyond fit KV. The referee reproduced this byte for byte,
@@ -370,12 +374,193 @@ Each run was under 60 seconds; none is a proof.
   pattern that is $`\mathrm{CH}_2^*`$ plus extra nodes would be missed. The referee: over 1,890 matrices below $`\mathrm{NCH}_3`$ and 686 below $`\mathrm{NCH}_4`$, no
   pattern has a copy of $`\mathrm{CH}_k`$ at or below its point, so no counterexample to $`\iota(\mathrm{NCH}_k) \lt \iota(\mathrm{CH}_k)`$ or to any proved item.
 
-## 10. Open
+## 10. The tenth round
+
+Four papers, each refereed once, so every result here has 1 review. One paper (§10.4) checked a Lean test file of named points with
+leanman (green, and green again in the referee's rerun); that file only compares terms, and it is not added to the library. The other
+three papers make no Lean claim.
+
+### 10.1 The shapes of $`\Phi_3`$: the classes I, SUM, ROOT and III
+
+Notation of §7.1. The four classes of the table in §7.1 are named by where the bad root $`R`$ sits: I (inside an index term), SUM (in a later
+summand), ROOT (column 0) and III (in the $`\Omega`$-level structure). FS$`^+(A)`$ means $`\Phi_3(A[n]) \ll' \Phi_3(A)`$ for every $`n`$. The theorems are about
+the text definition of $`\Phi_3`$; that the program agrees with it is checked only. Everything is in $`R_2^C`$.
+
+- **Lemma IX-ι, restated** (proved). The hypothesis found missing in §7.1 is now part of the statement: the top node of the block has a
+  prefix of $`c`$ as its last summand. A summand 1 may sit anywhere (Lemma N0 below).
+- **Lemma CHAIN** (proved, after a repair by the referee). If the top node has no such summand, but the slack reaches the point through a
+  chain of nested blocks, the copy is built by R1 applied block by block. The referee: the paper says "innermost block first", but the
+  proof lowers outer blocks first, and then a later stage can meet a letter that is already moved. Repair: skip a block whose root is already
+  moved; the skipped stages are never needed. CHAIN proves 6 of the 9 matrices of the blocking point of §7.1 (the other 3 have a successor
+  step at the index root) and 14 more.
+- **SELF-top with (B0′)** (proved). Every relation of $`\Phi_3(A[0])`$ whose left element lies in the first block must also hold in the copy. This
+  repairs the second blocking point of §7.1. Whether a matrix satisfies the hypotheses is still checked only for $`n \le 3`$ (58 matrices).
+- **STD-ROOT and N0** (proved). Every root term of a standard matrix is standard. Every copy can be normalized so that its least plain
+  indecomposables are $`1, \omega, \omega^2, \ldots`$; in particular $`1 \mapsto 1`$. (The referee: the definition of "standard" that STD-ROOT cites is not in
+  [R2PLUS.md](../../BMS/PoR/Trio/R2PLUS.md); the proof works for any seed family of single root terms.)
+- **Theorem SUM-LOW and Corollary SUM-PAIR** (proved). Let $`A = Q + c`$ with $`c`$ the last root term, a pair term or $`Z_1`$. If three conditions on $`Q`$
+  alone hold ((Q1) the only indecomposable of $`V(Q)`$ below $`Z_1`$ is 1; (Q2) Lemma UNIV of §2 holds at the least other indecomposable of $`V(Q)`$;
+  (Q3), only for $`c = Z_1`$, a condition on $`Z_1`$), then FS$`^+(A)`$. A trio term $`c`$ reduces to a placement of the smaller matrix $`c`$ (proved as a
+  reduction; the placement is open). (The referee: the lemma CL-LOC used here is true only with its trailing clause.)
+- **Lemma SYM** (proved as a paper argument about the program's Python semantics; not machine-checked). Run the program on $`F[b]`$, where $`b`$ is
+  an index that refuses every read whose answer could depend on it. If the run finishes, it gives $`\Phi_3(F[c])`$ for every pair root term $`c`$
+  (not the leaf, first child with $`y \le 1`$) at once. Two rewrites of the program are needed; both are exact identities. The paper left one point
+  checked only (76 identity tests); the referee's run with a faithful second rewrite gives the same templates, so this point is settled for
+  the contexts below.
+- **Theorems I-SYM and III-SYM** (proved). For 31 contexts $`F`$ of class I, and 12 of class III where the pair subterm hangs under a column with
+  $`z = 0`$: FS$`^+(F[c])`$ for every $`n`$ and every standard pair root term $`c`$ of the class. So in these contexts $`\Phi_3`$ treats the index term as one
+  unit.
+- **Not counted**: the paper's "reduction" for ROOT with $`t = 1`$. No symbolic run finishes (302 of 302 stop at the same point), so the
+  referee calls it vacuous.
+- **The proved classes on the sample** of §1 (3,166 matrices). Each count below counts members of classes defined by finite conditions,
+  and these classes are infinite.
+
+| class | matrices | proved for every $`n`$ | given LOW | given a condition checked for small $`n`$ | open |
+|---|---|---|---|---|---|
+| I | 581 | 210 | 21 | 0 | 350 |
+| SUM | 603 | 418 | 0 | 7 | 178 |
+| ROOT | 635 | 206 | 0 | 58 | 371 |
+| III | 1,347 | 40 | 0 | 0 | 1,307 |
+| all | 3,166 | 874 (before: 459) | 21 | 65 | 2,206 |
+
+- **Not proved** (blocking point, bookkeeping only): the paper's list of the "exact open parts" is not complete. 267 of the 2,206 open sample
+  matrices fall under none of its items: 77 of class I whose step is a successor at the index root, and 104 + 86 of class III where $`R`$ is a
+  (0,0) column with $`t = 2`$, or with $`t = 1`$ and a trio subterm. So the list below is not exhaustive.
+- **Open**: UNIF-FS below SRO. The listed parts: the placement for small trio cores such as $`Z_1`$(1,1,1), $`Z_1`$(1,1,0), $`Z_1`$(2,0,0); 10 contexts of
+  class I and 52 of class III where the program reads the index itself; ROOT with $`t \ge 1`$ for every $`n`$ (it needs a symbol for the periodic
+  term $`A[m]^\wedge`$; every step with $`t = 1`$, in any class, substitutes the matrix into itself in this way); III with $`t = 0`$, and III where $`R`$ is a
+  column with $`z = 1`$ or $`y \ge 1`$; and the 267 matrices above.
+
+### 10.2 Native codes up to the Bachmann–Howard ordinal
+
+Notation of §2 and §7.2. $`B`$ is the Bachmann–Howard ordinal, $`\vartheta^2_0`$ of Wilken, "Ordinal arithmetic based on Skolem hulling" (APAL 145,
+2007), Def 3.13 and Thm 3.14; $`\vartheta`$ is Wilken's $`\vartheta_0`$ there, and $`a^*`$ is the largest countable additive principal subterm of $`a`$.
+
+- **The ordinals below $`B`$** (cited; the referee checked the places and their hypotheses). Every additive principal $`g \lt B`$ is $`\vartheta(a)`$ for one
+  $`a \lt \varepsilon_{\Omega_1+1}`$ with $`a^* \lt g`$; $`g`$ is an $`\varepsilon`$-number iff $`a = \Omega_1\cdot\delta + \eta`$ with $`\delta \ge 1`$, $`\eta \lt \Omega_1`$; two values are compared by
+  Lemma 3.30 of that paper.
+- **Lemma TAU** (proved). $`\tau_g`$, which replaces $`\Omega_1`$ by $`g`$, is an order isomorphism onto its image, and the shift $`\sigma_{g\to h}`$ is strictly increasing.
+- **The codes and Lemma PAT-B** (proved). For an $`\varepsilon`$-number index $`g = \vartheta(\Omega_1\cdot\delta + \eta)`$ the prefix point $`p(g)`$ gets the reach $`E(\zeta(g))`$ with
+  $`\zeta(g) = g\cdot\tau_g(\delta)\cdot 2 + \eta`$. The indices between $`g`$ and the top of $`\zeta(g)`$ are its satellites; they are ordinary indices, not $`\varepsilon`$-numbers.
+  Every code is an RF fan-free, L1p-free pattern, and the reach intervals of the prefix are nested or disjoint (the factor 2 is what gives
+  this). Below $`\varepsilon_0`$ the codes are those of §2 (checked on 1,041 indices); above $`\varepsilon_0`$ they differ from those of §7.2, and both families are valid.
+- **Lemmas HOST-B and ZC** (proved). If $`h`$ is the least old index above a new $`\varepsilon`$-number index $`g`$, then $`h`$ is an $`\varepsilon`$-number, $`a_g \lt a_h`$, and
+  $`\sigma_{g\to h}(\zeta(g)) \lt \zeta(h)`$.
+- **Lemma CODE-B** (proved). A new $`\varepsilon`$-number index is placed together with its satellites: they are realized inside the reach of $`p(h)`$ by the shift
+  $`g \to h`$, and then the whole group is reflected below $`p(h)`$ by R1. Copies only need coverings, so no negative relation has to be produced.
+- **Theorem IDX-B** (proved). $`N(\alpha') \ll N(\alpha)`$ for $`\omega \le \alpha' \lt \alpha \lt B`$. With HOST2 (§7.2): $`\iota(\mathrm{CH}_2) \ge B`$ (before: $`\varphi_\omega(0)`$). This is still far below
+  the known $`\iota(\mathrm{CH}_2) \gt \nu_C`$.
+- **Remark** (not counted): past $`B`$ the rule breaks; the reach of a satellite crosses the reach of its index, and the reach must be the fold of
+  [PSS/POR.md](../../BMS/PoR/PSS/POR.md) §3.3. The paper says the first failure is at $`\vartheta_0(\vartheta_1(\Omega_2\cdot 2))`$; the referee: the smaller index
+  $`\vartheta_0(\vartheta_1(\Omega_2 + 1))`$ already fails, and at $`B`$ itself the two reach tops are equal (the open case EQUAL-TOP).
+- **Not proved**: the map $`\nu`$ of RED-ν2 on all of $`D`$. The gap has three parts: codes and $`\ll`$ steps on $`[B, \upsilon_1)`$ (folded reaches, with the case
+  EQUAL-TOP); then the references for indices $`\ge \upsilon_1`$; then the block grammar of the $`\Omega`$-levels. The paper says so itself. (The referee: the
+  names of the Veblen and Klammer landmarks that the paper gives are neither cited nor proved; nothing uses them.)
+
+### 10.3 Klammer sets over $`\upsilon`$ and the reaches up to $`\rho^\rho`$
+
+Notation of §3 and §7.3. A symbol $`A`$ is a finite map from positions $`\xi \ge 1`$ to coefficients $`a_\xi \ge 1`$, ordered by the top position where two
+symbols differ. The paper defines, with no literature, clubs $`F_A`$ with enumerations $`\varphi_A`$, starting from $`\varphi_0 = \upsilon`$: $`F_A`$ is the set of $`\eta`$
+that are fixed by every $`\varphi_B`$ with $`B`$ below $`A`$ in the Klammer sense and entries below $`\eta`$. So $`F_{(1@1)} = \mathrm{Fix}_1`$, $`\varphi_{(g@1)} = V_g`$, $`F_{(1@2)}`$ is the
+set of Γ-type indices and $`F_{(1@3)}`$ the set of critical indices. $`K`$ is the set of indices fixed by every $`\varphi_B`$ with entries below them, and $`k`$
+enumerates $`K`$. $`P_A(\rho) = \sum_\xi \rho^\xi\cdot a_\xi`$. A restart is **long** if its reach is at least $`\delta\cdot 2`$. The paper numbers the levels one lower.
+
+- **The Klammer hierarchy** (proved). The $`F_A`$ are clubs; FIX and LB-coef; below its top position $`F_A`$ meets only $`K`$ (ANOM). Every index in
+  $`\mathrm{Fix}_1 \setminus K`$ has one canonical form $`(A, \eta)`$, all entries below it. A comparison rule (it contains the repair of Lemma T in §7.3) and a
+  membership rule (the referee: its third case is valid only after the first). The layers, levels and critical indices of §7.3 are the symbols with
+  positions $`\le 2`$ and $`F_{(1@3)}`$.
+- **Theorem KV** (proved; it was Conjecture KV of §7.3). For every restart index $`\lambda \notin K`$ with $`\rho_\lambda \lt \nu`$ and canonical form $`(A, \eta)`$:
+  $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + P_A(\rho) + \mathrm{logend}(\eta)`$, $`\rho = \rho_\lambda`$, and this offset is below $`\rho^\rho`$. LAYERS and CR1 are special cases. (The referee: in one
+  subcase of the lower bound the chosen point may not exist; the repair takes it by continuity of $`\varphi_A`$. "Conjecture KV" here means this
+  hierarchy, not a Klammer theory from the literature.)
+- **CR-K, CR-K2, FIX-K** (proved). At $`k(\beta)`$ with $`\beta \lt k(\beta)`$ the offset is $`\rho^\rho + \mathrm{logend}(\beta)`$; at a fixed point of $`k`$ that is not a limit of
+  fixed points of $`k`$ it is $`\rho^\rho + \rho`$. Every point of $`U_2 \setminus \{\nu\}`$ is in $`K`$, is a fixed point of $`k`$ and is a limit of fixed points of $`k`$;
+  every long restart has such an index.
+- **IMG-K** (proved). The $`\omega`$-th point of $`K`$ above $`x`$ is below $`\nu`$.
+- **Lemma T#, RM#, LBC$`^{fin}`$#, SC#** (proved). Let $`u^\#`$ be the next point of $`F_{(1@u)}`$ above $`u`$; $`[u, u^\#)`$ holds the points whose canonical
+  positions are all below $`u`$. On $`D^\#_n = [0, u_n^\#) \supset D_n`$ the map $`T_n`$ of §7.3 keeps reaches, the finite LBC holds, and SC holds for every finite
+  $`Y \subset [x, x^\#)`$ and every $`W \subset D^\#_n`$.
+- **PROP LONG and NEED-C** (proved; the second in a weaker wording, as the referee notes). In SEG-RED the push-down always lands on a long
+  restart of $`S_n`$, above $`D^\#_n`$. Every long restart lies in **zone C**: in every tail below it some restart has no formal reach. So SEG-RED needs SC for
+  sets $`W`$ that meet zone C, and no closed form of the reaches can give that.
+- **Not proved** (blocking point, stated by the paper): $`\nu_C = \nu_S`$, and RM and SC for $`W`$ that meet zone C. **Open**: between $`u_n^\#`$ and the
+  $`\omega`$-th point of $`K`$ above $`u_n`$, $`T_n`$ needs $`u_n`$ and $`x`$ to have the same membership profile for symbols with positions $`\ge u_n`$ (PROF); and
+  the reaches at limits of fixed points of $`k`$.
+
+### 10.4 Names past $`\Lambda_\varepsilon`$, and the claim up to $`\rho_{\Lambda'+\omega^2}`$
+
+Notation of [PINS.md](PINS.md) §2–§3: $`H(\eta) = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$, $`D`$, $`\iota(\eta)`$, $`\eta_\lambda`$, $`e_\lambda = \mathrm{logend}(\eta_\lambda)`$, and the formal
+offset $`c^+`$. $`\zeta_{\Omega_1+1}`$ is the least fixed point of $`\alpha \mapsto \varepsilon_\alpha`$ above $`\Omega_1`$, and $`\zeta^r`$ the same above $`r`$.
+$`\Lambda' = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{\Omega_1+1}+1}})`$.
+
+- **EPS-THETA** (proved, from Wilken 2007 (APAL 145, 130–161), L.3.30, 4.3, 4.4). For a $`\upsilon`$-point $`\tau`$, $`\eta \mapsto \vartheta^\tau(\Omega_1 + \eta)`$ lists in order the
+  $`\varepsilon`$-numbers above $`\tau`$, below the next $`\upsilon`$-point, that are not fixed points of $`\alpha \mapsto \varepsilon_\alpha`$; the first fixed point is
+  $`\zeta^\tau = \vartheta^\tau(\Omega_1\cdot 2)`$.
+- **EXACT-Z** (proved). Wilken's base change moves exactly every offset term built from small constants, the base $`x`$, $`\zeta^x`$, $`+`$, $`\omega^{\cdot}`$ and $`\varepsilon_{\cdot}`$
+  below $`\varepsilon_{\zeta^x+1}`$ (before: only Cantor normal forms in $`x`$).
+- **Theorem NAME-OFFSET-Z** (proved). For every restart index $`\lambda`$ in the range of GEN with $`e_\lambda \le \varepsilon_{\zeta_{\Omega_1+1}+1}`$:
+  $`c^+(\lambda) = (-1 + e_\lambda)[\Omega_1 := \rho_\lambda]`$ (with $`\zeta_{\Omega_1+1}`$ sent to $`\zeta^{\rho_\lambda}`$). This contains NAME-OFFSET of [PINS.md](PINS.md) §3, and proves
+  Conjecture NAME-OFFSET+ there for these offsets.
+- **THETA-P** (proved; a conjecture before). $`\Theta_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+\omega}})`$. Also: the least restart with $`c^+ = \zeta_{\rho+1} + 1`$ is
+  $`\Lambda_\zeta = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\zeta_{\Omega_1+1}+1})`$, $`c^+(\Lambda') = \varepsilon_{\zeta^\rho+1}`$, and $`\Lambda' \lt \Theta_1`$.
+- **Not proved** (false as stated): "for every term $`t`$ the least $`\lambda`$ with $`c^+(\lambda) \ge t`$ is $`\iota(\omega^{1+t})`$". It needs $`\omega^{1+t} \in D`$; the referee's
+  counterexample is $`t = \Xi_1 = H(\Omega_1)`$. THETA-P has finite constants and is not affected.
+- **STRUCT′** (proved). On $`[0, \rho_{\Lambda'+\omega^2})`$, in $`R_2^C`$ and $`R_2^S`$ (they agree there): the $`\lt_2`$-pairs are exactly $`(H(\eta_\lambda + \omega\cdot j), H(\eta_\lambda + \omega\cdot j + 1))`$; a
+  restart $`\rho_\lambda = H(\eta_\lambda)`$ has $`\rho_\lambda \le_1 g`$ iff $`g \le H(\eta_\lambda + \omega + 1) + (-1 + e_\lambda)[\Omega_1 := H(\eta_\lambda)]`$; every other point has its $`R_1^+`$
+  reach inside its block. (The referee: the paper's "every atom named" is too strong; inside a block $`\le_1`$ is given by $`R_1^+`$, not by an InaccPsi
+  expression.)
+- **Wilken's claim on $`[0, \rho_{\Lambda'+\omega^2})`$ in $`R_2^C`$**, both halves (proved): every ordinal below
+  $`\rho_{\Lambda'+\omega^2} = H(\varepsilon_{\zeta_{\Omega_1+1}+1} + \omega^2) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{\Omega_1+1}+1}} + \omega^{\theta+2})`$ is in the core and is the value of an InaccPsi
+  normal form with collapse arguments below $`I_\omega`$. Before: $`[0, \Lambda_\varepsilon)`$. The referee: for the claim itself the only new fact is the position
+  $`\Lambda' + \omega^2 \le \Theta_1`$, because the core part was known up to $`\nu_C`$; and the upper bound $`\mathrm{Core} \subseteq \psi_{\Omega_1}(I_\omega)`$ does not move. The paper
+  states $`\rho_{\Theta_1} \gt \rho_{\Lambda'+\omega^2}`$ but proves only $`\ge`$; NAME-OFFSET-Z at $`\Lambda' + \omega^2`$ gives the strict form in one line. **Remark** (the
+  referee's, not counted): the same proof reaches $`H(\varepsilon_{\zeta_{\Omega_1+1}+1}\cdot\omega + \omega^2)`$.
+- **NAME-LAYERS** (proved). For a restart index $`\lambda \le \Lambda'`$ with $`e = e_\lambda`$: $`\lambda \in C^\xi`$ ($`2 \le \xi \lt \lambda`$) iff $`e \ge \Omega_1^2\cdot(-1+\xi)`$, and $`\lambda`$ is
+  critical iff $`e \ge \Omega_1^3`$. So the first limit of critical indices at base 0 is $`\chi^0_\omega = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1^3+1}) \lt \Lambda_\varepsilon`$. (The referee: $`e`$ fixes
+  the canonical form only up to the last exponent of its third entry; the step uses the earlier result that the two formal reaches agree.)
+  TRANS, Lemma T and FIX-L were not needed: they matter only in the segments of level 2, above $`\nu_P`$.
+- **$`\iota(\mathrm{CH}_2)`$** (proved). $`\iota(\mathrm{CH}_2) \gt \iota(\Phi_3(\mathrm{SRO})) \gt \nu_C \gt \nu_P \gt \rho_{\Theta_1} \ge \rho_{\Lambda'+\omega^2}`$. Below $`\nu_C`$ no point has the three relations of §7.4,
+  so this structure gives no bound for $`\iota(\mathrm{CH}_2)`$. Conjecture: $`\iota(\mathrm{CH}_2) \gt \theta_0`$.
+- **Open**: offsets up to $`\Gamma_{\rho+1}`$ (one more lemma, VEB-THETA, and a uniform comparison of Veblen forms); $`\Theta_1 = H(\theta)`$ (the maps STEP and
+  LOW-STEP one level down); the names of $`\Theta_1`$, $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$; an InaccPsi upper bound for $`\nu_C`$ (it would give the claim on
+  $`[0, \nu_C]`$).
+
+## 11. Status after the tenth round
+
+- Wilken's claim in $`R_2^C`$: both halves hold on $`[0, \rho_{\Lambda'+\omega^2})`$ (§10.4); $`\Theta_P`$ has its name.
+- The lower-bound program below $`\theta_0`$: the step below SRO is proved for every $`n`$ on 874 of the 3,166 sample matrices (§10.1); the native codes
+  are ordered up to the Bachmann–Howard ordinal, so $`\iota(\mathrm{CH}_2) \ge B`$ (§10.2). UNIF-FS and the map $`\nu`$ on all of $`D`$ are open.
+- The first inaccessible: $`H_m`$ is open; it would follow from $`\iota(\mathrm{CH}_2) \ge \theta_0`$.
+- Upper bounds: no InaccPsi bound is proved for any $`\iota(\mathrm{CH}_k)`$, $`m_F`$, $`x_F`$ or $`C^*_3`$; $`\iota(\mathrm{CH}_2)`$ lies above $`\nu_C`$.
+- $`\nu_C = \nu_S`$: the reach of every restart below $`\nu`$ is known except at limits of fixed points of $`k`$ (§10.3); SC is proved on $`D^\#_n \supset D_n`$; what is left
+  is SC for sets that meet zone C, which SEG-RED always needs.
+
+## 12. Checks of the tenth round
+
+Each run was under 60 seconds; none is a proof.
+
+- Shapes (§10.1). The symbolic templates equal the concrete $`\Phi_3`$ on every sample member of every proved context for $`n \le 3`$, in text and
+  program mode. The referee, on the unpatched program: 10,760 builds of $`F[c]`$ with random pair indices $`c`$ (standard and not, up to 10
+  columns) and 4,680 expansions, 0 differences; 1,349 members of the class of SUM-PAIR beyond the sample, 0 failures.
+- Codes (§10.2). The group placement in realized order: 99,371 steps, with 188,989 new $`\varepsilon`$-number indices and 100,733 satellites, 0 failures;
+  18,539 random codes are RF fan-free, L1p-free patterns; three altered rules are caught. 8 certificates in the predicted direction (among
+  them $`N(\vartheta(\Omega_1^2))`$, $`N(\vartheta(\Omega_1^\omega))`$ and $`N(\vartheta(\Omega_1^{\Omega_1}))`$ below $`\mathrm{CH}_2`$) replay; 2 reverse searches found nothing. The referee: the
+  order axioms of the ordinal comparison on 6.1 million triples, ZC on about 175,000 pairs, HOST-B on 52,000 hard cases, nesting of reach intervals on
+  10,700 codes, and a placement run with a new seed (31,917 steps): 0 failures.
+- Restarts (§10.3). In the program model at base 0 the first point of $`K`$ reads $`\rho^\rho`$, then $`\rho^\rho + 1`$ and $`\rho^\rho + \rho`$, as CR-K and CR-K2 say. The
+  referee reproduced this byte for byte; of 12 new probes, the 9 that KV covers read its values ($`\rho^2`$, $`\rho^2 + 1`$, $`\rho^2 + \rho`$, $`\rho^3`$, $`\rho^3 + \rho`$, $`\rho^\omega`$, $`\rho`$,
+  $`\rho^{\omega^2}`$, $`\rho^{\omega+1}`$). These are the program's own reaches, not $`R_2^C`$.
+- Names (§10.4). The 25 named points are normal forms and strictly increasing, in Python and in a Lean test file (green, also in the referee's
+  rerun). On 300 random offsets $`e`$ below $`\zeta_{\Omega_1+1}`$, $`\omega^e \in D`$ and $`e \mapsto H(\omega^e)`$ keeps the order (89,700 pairs, 0 failures). The referee: 250 random
+  offset terms at 5 bases, 124,500 comparisons, 0 mismatches.
+
+## 13. Open
 
 - The first inaccessible: $`H_m`$ (equivalently, some $`\iota(\mathrm{CH}_k) \ge \theta_0`$; enough: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, from a map $`\nu`$ on all of $`D`$ with L1p-free
-  values and $`\nu(s) \ll \nu(t)`$ at every step); UNIF-FS below SRO on the four open classes of §7.1; codes past $`\varphi_\omega(0)`$; $`\iota(A_n) \ge |\tau_n|`$.
-- Upper bounds: any InaccPsi bound for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$; STEP-CH (on a class closed under $`\Phi`$, with collapse arguments
+  values and $`\nu(s) \ll \nu(t)`$ at every step); UNIF-FS below SRO on the open parts of §10.1; codes on $`[B, \upsilon_1)`$ (folded reaches) and past them;
+  $`\iota(A_n) \ge |\tau_n|`$.
+- Upper bounds: any InaccPsi bound for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, or for $`\nu_C`$; STEP-CH (on a class closed under $`\Phi`$, with collapse arguments
   below $`I_0`$); REL-SHARP; (HQ).
-- $`\nu_C = \nu_S`$: SC for $`W`$ that meet $`S_n \setminus D_n`$ and for $`Y \subset S_\omega \setminus [x, \chi^{(\omega)}_\omega)`$: canonical forms and offsets above $`\chi^{(n)}_\omega`$
-  (Conjecture KV up to $`\rho^\rho`$), a collapsing notation over $`\upsilon`$ at a critical base, and the restarts at limits of critical indices.
+- Names and offsets past $`\Lambda'`$: offsets up to $`\Gamma_{\rho+1}`$ (VEB-THETA), $`\Theta_1 = H(\theta)`$, and the names of $`\Theta_1`$, $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$.
+- $`\nu_C = \nu_S`$: SC for $`W`$ that meet zone C; (PROF); the reaches at limits of fixed points of $`k`$; $`Y \subset S_\omega`$ beyond $`[x, x^\#)`$.
 - The rest of [COVER.md](COVER.md) §9.

@@ -8,7 +8,7 @@ independent referee found the result proved with no fatal or blocking point. All
 "2 reviews" means that two independent papers proved the result and each paper was refereed once. A statement that its
 referee found not proved, or false as written, is listed under **Not proved**, even when the rest of its paper is proved.
 None of the sixteen papers uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). No result on this
-page is in Lean. The fifth to seventh rounds (four papers each) are on the next page, [COVER.md](COVER.md), and the eighth and ninth on [FANFREE.md](FANFREE.md). The sixth round proves
+page is in Lean. The fifth to seventh rounds (four papers each) are on the next page, [COVER.md](COVER.md), and the eighth to tenth on [FANFREE.md](FANFREE.md). The sixth round proves
 SKEL⁺ and SKEL$`^\omega`$ in full, so several results of §1, §7.1 and §8 below that were proved only at outline level are now proved
 ([COVER.md](COVER.md) §5.1); the labels below say so.
 
@@ -563,7 +563,8 @@ Here $`k = 2`$, $`\nu = \nu_S`$ and $`s = \upsilon^2_\omega`$.
   of finite Cantor–Bendixson rank) is false as stated at the base index and correct above it (outline). What is left is one
   statement: the skipped restarts never change where the reach of a moved restart cuts the domain. It joins the two blockers
   of GI (§7.2: the onto hull and the reaches) into one. On the initial part of each segment of level 2 this statement is now settled
-  at outline level (RM-P, [FANFREE.md](FANFREE.md) §3), and now proved below the first limit of critical indices of each segment (RM-D, [FANFREE.md](FANFREE.md) §7.3).
+  at outline level (RM-P, [FANFREE.md](FANFREE.md) §3), and now proved below the first limit of critical indices of each segment (RM-D, [FANFREE.md](FANFREE.md) §7.3), and on a larger part (RM#,
+  [FANFREE.md](FANFREE.md) §10.3); but the reduction always needs long restarts, where no closed form applies (NEED-C, same place).
 
 ### 8.4 NOLIM above $`\nu_P`$
 
@@ -668,5 +669,6 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
   below $`\sigma_F`$, and the upper half below $`\theta_1`$. Conjecture CH. In $`R_2^C`$ the bottoms of chains of length 3 are now exactly the points of the core
   with an infinite $`\le_1`$-chain of right ends (Theorem CP3, [COVER.md](COVER.md) §1); this characterizes the chain but does not locate it.
 - The reaches for candidates in $`[\delta_j\cdot\omega, \delta_{j+1})`$; a review of the repaired TOP-REG and REACH; $`R_2^C`$ above $`\nu_C`$; the closed
-  forms and names above $`\Lambda_\Gamma`$ ($`\Theta_P`$, $`\Theta_1`$, $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$); names above $`\upsilon^*`$ beyond GEN-EXT.
+  forms and names above $`\Lambda_\Gamma`$ ($`\Theta_1`$, $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$; the closed forms up to $`\Lambda'`$ and the name of $`\Theta_P`$ are
+  now proved, [FANFREE.md](FANFREE.md) §10.4); names above $`\upsilon^*`$ beyond GEN-EXT.
 - That the assignments between ordinals and patterns are elementary recursive (outline only), and that UNIF is onto.

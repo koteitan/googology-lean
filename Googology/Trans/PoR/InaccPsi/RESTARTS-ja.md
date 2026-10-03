@@ -8,7 +8,7 @@
 3 ページ目 [REACHES-ja.md](REACHES-ja.md) にある。$`\Lambda_\varepsilon`$ より先の結果（相対化したピン、$`\Theta_A`$ までの届く先、
 $`\Lambda_\varepsilon`$ までのすべての $`\upsilon`$ の点の名前）は 4 ページ目 [PINS-ja.md](PINS-ja.md) にある。骨組みが終わる所と、その上の入れ子の組の段の結果は
 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、被覆に対する最小性による結果と、どの可算順序数でも成り立つ $`R_2^S`$ の段 0 の記述は
-6 ページ目 [COVER-ja.md](COVER-ja.md) にあり、8 回目と 9 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md) にある。
+6 ページ目 [COVER-ja.md](COVER-ja.md) にあり、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md) にある。
 
 **記号。** $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$。点 $`\alpha`$ の届く先を $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$ と書く。
 やり直しの添字とは、$`\omega^2`$ の 0 でない倍数 $`\lambda`$ のこと。$`\lambda = \lambda_0 + \omega^e`$（カントール標準形の最後の項、
@@ -94,7 +94,9 @@ $`R_2^C`$ では NOLIM も成り立ち（査読 1 回、[COVER-ja.md](COVER-ja.m
 これは、$`R_2^S`$ と $`R_2^C`$ が $`\nu_C`$ より下で共有する構造の中の 1 つの $`\Sigma_2`$ の命題 $`x_2 \lt_2^S \nu_C`$ とも同じ（査読 1 回、[COVER-ja.md](COVER-ja.md) §6.3）。
 段 2 の点 $`\upsilon^2_n`$ と $`x_2`$ は $`\iota \mapsto \upsilon_\iota`$ の不動点（査読 1 回）。段 2 の各区間の最初の部分では、区間の間でやり直しの点の
 届く先が対応する（概略だけ。[FANFREE-ja.md](FANFREE-ja.md) §3）。今は（査読 1 回）各区間の「臨界な」添字の最初の極限より下でこれが証明済みで、$`\nu_C`$ より下の
-どのやり直しの点の届く先も、臨界な添字の極限を除いて分かる（[FANFREE-ja.md](FANFREE-ja.md) §7.3）。
+どのやり直しの点の届く先も、臨界な添字の極限を除いて分かる（[FANFREE-ja.md](FANFREE-ja.md) §7.3）。さらに（査読 1 回）届く先はずれ $`\rho^\rho`$ まで分かり、
+対応はより大きい部分で成り立つ。しかし帰着はいつも長いやり直しの点を要り、そこでは届く先のどんな閉じた形も使えないので、$`\nu_C = \nu_S`$ は未解決のまま
+（[FANFREE-ja.md](FANFREE-ja.md) §10.3）。
 $`R_2^S`$ では、どの可算順序数でも、どの組も標準の組か 2 つのやり直しの点を結ぶ組なので、FRAG2 は弱い形「どの組も 2 つの
 $`\upsilon`$ の点を結ぶ」で成り立つ（定理 SKEL$`^\infty`$、査読 1 回、[COVER-ja.md](COVER-ja.md) §5.1。前は $`T_\omega`$ より下で、概略だけ）。
 

@@ -7,7 +7,7 @@ This page continues [RESTARTS.md](RESTARTS.md). The status words are those of [R
 on this page are from 2026-10. "1 review" means one referee. "2 reviews" means that two independent papers proved
 the result and each paper was refereed once. The results of the next round (relativized pins, the exact reaches up
 to $`\Theta_A`$, the names up to $`\Lambda_\varepsilon`$, the bottom of a chain of length 3) are on the fourth page
-[PINS.md](PINS.md), the four rounds after that are on the fifth page [BREAK.md](BREAK.md), the fifth to seventh rounds on the sixth page [COVER.md](COVER.md), and the eighth and ninth on the seventh page [FANFREE.md](FANFREE.md); they change some statuses here, as marked.
+[PINS.md](PINS.md), the four rounds after that are on the fifth page [BREAK.md](BREAK.md), the fifth to seventh rounds on the sixth page [COVER.md](COVER.md), and the eighth to tenth on the seventh page [FANFREE.md](FANFREE.md); they change some statuses here, as marked.
 
 **Notation.** As on [RESTARTS.md](RESTARTS.md): $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, the reach
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$, the restart $`\rho_\lambda = \upsilon_\lambda`$ for a nonzero multiple
@@ -44,7 +44,8 @@ realized cofinally.
   $`O(\lambda) = \rho_\lambda\cdot\gamma + \mathrm{logend}(\alpha)`$. Also $`O(\Lambda_\Gamma) = \omega^{\rho\cdot 2}`$, so $`\Lambda_\Gamma \lt \Lambda_\varepsilon`$. Now ([FANFREE.md](FANFREE.md) §3, Theorem GEN-OFF) the same formula holds
   for the formal-reach recursion at every restart index below $`\nu`$ that is not in the range of $`V_\gamma`$ for every $`\gamma \lt \lambda`$ (proved
   for $`\gamma(\lambda) = 0`$, outline for $`\gamma(\lambda) \ge 1`$). Now (1 review, Theorem LAYERS, [FANFREE.md](FANFREE.md) §7.3) it is proved in full, and extended through
-  all layers above $`\upsilon`$: every restart below $`\nu`$ has a known reach except at limits of critical indices.
+  all layers above $`\upsilon`$: every restart below $`\nu`$ has a known reach except at limits of critical indices. Then (1 review, Theorem KV,
+  [FANFREE.md](FANFREE.md) §10.3) the formula extends to offsets below $`\rho^\rho`$ by a Klammer hierarchy over $`\upsilon`$.
 - **Lemma RS$`_\lambda`$** (proved, 2 reviews). For every restart index $`\lambda \le \Xi_\omega`$, in $`R`$:
   $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + c^*(\lambda)`$. This is BLK$`^O`$ with OFF-V. The second proof is Theorem EXACT of §3.
 - **Theorem EXACT and OFF-k** (proved, 1 review; a second, independent proof of the exact reaches). With a formal
@@ -221,7 +222,8 @@ Each run was under 60 seconds; none is a proof.
   now proved ([PINS.md](PINS.md) §2–3).
 - $`R_2^C`$ above $`\nu_C`$ (the core of $`R_2^C`$ now contains $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$, [BREAK.md](BREAK.md) §2). INC1-nonups and INC1-S are now
   proved ([BREAK.md](BREAK.md) §1).
-- The values of $`\Theta_P`$, $`\Lambda^*`$, $`\nu_P`$ and $`\nu_S`$ (the names up to $`\Lambda_\varepsilon`$ are now proved, [PINS.md](PINS.md) §3; $`\nu_S`$ is now
+- The values of $`\Theta_P`$, $`\Lambda^*`$, $`\nu_P`$ and $`\nu_S`$ (the names up to $`\Lambda_\varepsilon`$ are now proved, [PINS.md](PINS.md) §3; the name of $`\Theta_P`$
+  is now proved, [FANFREE.md](FANFREE.md) §10.4; $`\nu_S`$ is now
   described exactly, its name is a conjecture, [BREAK.md](BREAK.md) §2, reduced in §7.3).
 - FRAG2 beyond $`\nu_S`$: several bases that are not $`\upsilon`$-points at once (FRAG-E), and nested cut data.
 - $`C^*_3`$: the upper half (an ordinal analysis of the generated structure), the lower half $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$,

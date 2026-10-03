@@ -7,7 +7,7 @@
 4 つの論文から来ている。どの論文も 1 回ずつ査読された。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの
 論文がその結果を証明し、それぞれが 1 回ずつ査読されたこと。査読者が未証明と判定した命題は、その論文のほかの部分が
 証明済みでも **未証明** に書く。4 つの論文はどれも Wilken, JSL 72 (2007)、Carlson, AML 38 (1999)、Wilken, AML 45 (2006)
-を使わない。次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目から 7 回目は 6 ページ目 [COVER-ja.md](COVER-ja.md)、8 回目と 9 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md) にある。それによってここのいくつかの状態が変わった。
+を使わない。次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目から 7 回目は 6 ページ目 [COVER-ja.md](COVER-ja.md)、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md) にある。それによってここのいくつかの状態が変わった。
 
 **記号。** [REACHES-ja.md](REACHES-ja.md) と同じ。$`\upsilon`$ の点 $`\tau`$ に対し、$`\tau^\infty`$ は $`\tau`$ より上の最小の $`\upsilon`$ の点、
 $`\mathrm{seg}(\tau) = [\tau, \tau^\infty)`$。やり直しの添字 $`\lambda`$ に対し、$`\sigma_\lambda = \upsilon_{\lambda+1} = \rho_\lambda^\infty`$、$`\sigma'_\lambda = \upsilon_{\lambda+2}`$。
@@ -85,7 +85,8 @@ $`\tau`$-最小同型なパターンの $`B`$ をすべて合わせたもの。
   EQB-A はそこで $`R_2^C \ne R_2^S`$ を許す。この文を使う定理は無い。今は $`\Theta_A`$ での届く先は $`\delta + \varepsilon_{\sigma+\omega}`$ なので、
   $`\lambda \le \Theta_A`$ のどこでも HC が成り立ち、$`[0, \rho_{\Theta_A+\omega^2})`$ で $`R_2^C = R_2^S`$（[BREAK-ja.md](BREAK-ja.md) §4、査読 1 回）。
 - **予想**（名前は確認済み）：$`\Theta_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+\omega}})`$、
-  $`\Theta_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$、$`\Theta_A = \psi_{\Omega_1}(\Omega_\omega + \varepsilon_{\theta+\omega})`$。
+  $`\Theta_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$、$`\Theta_A = \psi_{\Omega_1}(\Omega_\omega + \varepsilon_{\theta+\omega})`$。$`\Theta_P`$ の名前は今は証明済み（査読 1 回、THETA-P、
+  [FANFREE-ja.md](FANFREE-ja.md) §10.4）。
 
 ## 3. すべての $`\upsilon`$ の点の名前（定理 GEN）
 
@@ -117,11 +118,13 @@ $`\Omega_\omega + \theta\cdot\eta`$ が標準形の引数になる $`\eta`$ の�
   閉じた形。$`\Lambda_\Gamma`$ より下では査読 2 回（NAMES-Γ も同じずれを出す）。
 - だから **$`R_2^C`$ では Wilken の主張は $`[0, \Lambda_\varepsilon)`$ で成り立つ**、両方の半分とも（査読 1 回。$`[0, \Lambda_\Gamma]`$ では
   査読 2 回）：そこのどの順序数も核に入り、つぶす引数が $`\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1} \lt I_\omega`$ より小さい InaccPsi
-  の標準形の値。前は $`[0, \Phi_1]`$。
+  の標準形の値。前は $`[0, \Phi_1]`$。今は（査読 1 回）$`\Lambda' = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{\Omega_1+1}+1}})`$ として
+  $`[0, \rho_{\Lambda'+\omega^2})`$ で成り立つ（[FANFREE-ja.md](FANFREE-ja.md) §10.4）。
 - **未証明で、しかも偽**（止める点、命題だけ）：著者の形「$`\lambda \lt \Lambda_\varepsilon`$ は $`e_\lambda \le \varepsilon_{\Omega_1+1}`$ と同じ」。
   査読者の反例：$`\eta = \varepsilon_{\Omega_1+1}\cdot\omega + \omega^2`$ は $`D`$ に入り $`e = 2`$ だが、$`\iota(\eta) \gt \Lambda_\varepsilon`$。直した形は上のもの。
   偽の向きを使うほかの結果は無い。
-- **予想 NAME-OFFSET+。** $`\eta_\lambda \lt \theta`$ のすべてのやり直しの点で、同じずれの式が成り立つ。
+- **予想 NAME-OFFSET+。** $`\eta_\lambda \lt \theta`$ のすべてのやり直しの点で、同じずれの式が成り立つ。今は（査読 1 回）
+  $`e_\lambda \le \varepsilon_{\zeta_{\Omega_1+1}+1}`$ で証明済み。$`\zeta_{\Omega_1+1}`$ は $`\Omega_1`$ より上の $`\alpha \mapsto \varepsilon_\alpha`$ の最小の不動点（NAME-OFFSET-Z、[FANFREE-ja.md](FANFREE-ja.md) §10.4）。
 
 ## 4. 長さ 3 の鎖のいちばん下
 
@@ -187,11 +190,13 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
   後のブロック）での H-RC。いくつもの区間にまたがる一般のピン（CL-FIN、LHPAR\*、有限集合の判定 T1 の一部に帰着
   済み）。$`y \ge \delta_j\cdot\omega`$ の点。$`\rho_{\Theta_A+\omega^2}`$ より上の $`R_2^C`$。$`T_\omega`$ より下のどの基の上でも、届く先はその基の上で
   走らせた形式的な届く先の再帰に従う（TAIL-GAP、今は証明済み、査読 1 回、[COVER-ja.md](COVER-ja.md) §5.1）。$`\nu`$ より下の Γ 型でないどのやり直しの添字でも、その値は
-  OFF-V の閉じた形（$`\gamma = 0`$ で証明済み、今は $`\gamma \ge 1`$ も。[FANFREE-ja.md](FANFREE-ja.md) §3、§7.3）。未解決なのは臨界な添字の極限での届く先（[FANFREE-ja.md](FANFREE-ja.md) §7.3）。
+  OFF-V の閉じた形（$`\gamma = 0`$ で証明済み、今は $`\gamma \ge 1`$ も。[FANFREE-ja.md](FANFREE-ja.md) §3、§7.3）。未解決なのは臨界な添字の極限での届く先（[FANFREE-ja.md](FANFREE-ja.md) §7.3）。今は閉じた形はずれ $`\rho^\rho`$ まで届き、
+  未解決なのは Klammer の臨界な類の数え上げの不動点の極限での届く先（[FANFREE-ja.md](FANFREE-ja.md) §10.3）。
 - CL-FIN と LHPAR\*、だから初等再帰的な対応。今は CL-FIN と LHPAR\* の Cl\* の形は証明済み。LHPAR\* の鋭い形は書いた
   ままでは成り立たず、「初等再帰的」は概略だけ（[BREAK-ja.md](BREAK-ja.md) §4）。
 - $`[\Lambda_\varepsilon, \Theta_1)`$ での $`c^+`$ の閉じた形。$`\Theta_P`$、$`\Theta_1`$、$`\Theta_A`$、$`\Lambda^*`$、$`\nu_P`$ の名前。$`D`$ がどこまで延びるか。
-  $`\Lambda_\varepsilon`$ より上での主張の名前の半分。
+  $`\Lambda_\varepsilon`$ より上での主張の名前の半分。今は閉じた形がずれ $`\varepsilon_{\zeta_{\rho+1}+1}`$ まで成り立ち、$`\Theta_P`$ に名前が付き、主張は
+  $`\rho_{\Lambda'+\omega^2}`$ まで成り立つ（[FANFREE-ja.md](FANFREE-ja.md) §10.4）。残り：$`(\Lambda', \Theta_1)`$ での閉じた形と、ほかの名前。
 - INC1-S と INC1-nonups は今は証明済み（[BREAK-ja.md](BREAK-ja.md) §1）。RIGHT（どの $`\lt_2`$ の右端も $`\upsilon`$ の点）は今は $`R_2^S`$ で証明済み（[COVER-ja.md](COVER-ja.md) §5.1）で、$`\beta_0`$ より上の $`R_2^C`$ では未解決。
 - $`C^*_3`$：最小のいちばん下の点（$`\nu_P`$ より上）、上半分、下半分、予想 CH（[BREAK-ja.md](BREAK-ja.md) §10）。最初の扇は $`T_\omega`$ より上で、未解決の仮定 $`FF_N`$ のもとでは到達不能基数が
   要る（[BREAK-ja.md](BREAK-ja.md) §7.4。今は $`m_F \ge \theta_0`$ と同じ、[FANFREE-ja.md](FANFREE-ja.md) §4）。もっと弱い未解決の仮定「$`\min\{m : m \le_1 x_F\}`$ が $`\ge \theta_0`$」のもとでも要る（この仮定は今は、右端に届く先の無い、扇の無い
