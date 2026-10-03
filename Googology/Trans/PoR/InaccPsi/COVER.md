@@ -5,7 +5,7 @@
 This page continues [BREAK.md](BREAK.md). The status words are those of [README.md](README.md) §3: **proved** means that an
 independent referee found the result proved with no fatal or blocking point. All results on this page are from 2026-10. They
 come from three rounds of four papers, each paper refereed once: the fifth round (§1–§4), the sixth round (§5) and the seventh
-round (§6). "1 review"
+round (§6). The eighth round is on the next page, [FANFREE.md](FANFREE.md). "1 review"
 means one referee. "2 reviews" means that two independent papers proved the result and each paper was refereed once. A
 statement that its referee found not proved is listed under **Not proved**, even when the rest of its paper is proved. The
 papers of the fifth round, three of the sixth and most of the seventh use Carlson's minimality against coverings (Carlson 2009, Thm 14.10(2)),
@@ -372,7 +372,7 @@ $`U_2 = \{\upsilon^2_n : n \lt \omega\} \cup \{x, \nu\}`$. Below $`\nu_C`$ the t
 segments are $`S_n = [\upsilon^2_n, \upsilon^2_{n+1})`$ and $`S_\omega = [x, \nu)`$.
 
 - **Theorem EQ** (proved, 1 review; it uses no NOLIM, MIN$`^S`$ or CORE-S). $`\nu_C = \nu_S`$ iff $`x \lt_2^S \nu_C`$ iff $`R|x`$ is $`\Sigma_2`$-elementary in $`R|\nu_C`$
-  (for the language $`0, +, \le, \le_1, \le_2`$). If they differ, then $`\beta_0 = \nu_C`$, and the only atom with right end $`\le \beta_0`$ on which the
+  (for the language $`0, +, \le, \le_1, \le_2`$; this is the definition of $`\le_2`$ in $`R_2^S`$, read in the common structure). If they differ, then $`\beta_0 = \nu_C`$, and the only atom with right end $`\le \beta_0`$ on which the
   structures differ is $`x \lt_2 \nu_C`$. This is the level-2 analogue of $`\upsilon_\omega \lt_2 \upsilon_{\omega+1}`$. The referee: it follows almost directly from
   NU-CT, so it adds little.
 - **Lemma CUT** (proved, 1 review). No $`\lt_2`$-pair crosses a point of $`U_2`$, and a point below $`u \in U_2 \setminus \{\nu\}`$ is in $`U_2`$ or has its reach
@@ -384,7 +384,9 @@ segments are $`S_n = [\upsilon^2_n, \upsilon^2_{n+1})`$ and $`S_\omega = [x, \nu
   condition SC implies $`x \lt_2^S \nu`$, so $`\nu_C = \nu_S`$. SC: every finite piece of $`S_\omega`$ has a copy in some $`S_n`$ above the given parameters
   such that every finite extension inside $`S_n`$ can be carried back into $`S_\omega`$, keeping sums with small parameters.
 - **LBC ⇒ SC** (proved, 1 review). LBC is a base change $`T : S_n \to S_\omega`$ with $`T(\upsilon^2_n) = x`$ that keeps $`+`$, $`\le_1`$ and $`\le_2`$. RM ⇒ LBC
-  (outline only, through FRAG2): beyond Wilken's base changes, LBC asks only that $`T`$ keep the reaches of restarts.
+  (outline only, through FRAG2): beyond Wilken's base changes, LBC asks only that $`T`$ keep the reaches of restarts. The referee: SC
+  needs only finite maps, so a finite form of LBC is enough, and it matches the scope of FRAG2 (now at outline level on the
+  initial part of each segment, [FANFREE.md](FANFREE.md) §3).
 - **BLOCK-SC** (proved, 1 review) and **REGION-SC** (outline only, through FRAG). SC holds when the piece lies in $`[x, x^+)`$, with $`x^+`$ the
   next $`\upsilon`$-point, and the extension lies below the first $`\delta`$-point above $`\upsilon^2_n`$ (BLOCK-SC), or in the whole restart region of
   $`\upsilon^2_n`$ (REGION-SC).
@@ -478,7 +480,7 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 - The lower side (§6.1). The explicit patterns equal the patterns that $`\Phi_3`$ prints for SRO, $`A_0, \ldots, A_4`$ and 25 more comparisons (the
   referee's rerun: 25 of 25; the paper said 29). Replayed certificates: $`\Phi_3(\mathrm{SRO}[n]) \lt \Phi_3(\mathrm{SRO})`$ for $`n = 1, 2, 3`$, and 11 sample steps. Of the 26
   undecided limit jumps of the lower-bound program, 5 now have replayed certificates (one of them is LJ1), LJ2 is proved by hand, and
-  20 stay undecided; none is refuted. The referee's searches in the reverse direction on 6 of the 20 (50 s each) found nothing. The
+  20 stay undecided; none is refuted (all 26 are now proved, [FANFREE.md](FANFREE.md) §1). The referee's searches in the reverse direction on 6 of the 20 (50 s each) found nothing. The
   reading of the indices $`\Omega_\xi`$ as nested blocks of pairs is checked on 1,423 landmarks and 40 members of fundamental sequences.
 - Upper bounds (§6.2). The terms $`\Lambda_\varepsilon \lt \theta_0 \lt \psi_{\Omega_1}(I_0) \lt \psi_{\Omega_1}(I_0\cdot\omega) \lt \psi_{\Omega_1}(I_1) \lt \psi_{\Omega_1}(I_\omega)`$ are normal forms and increasing,
   and so are the bounds of ITER for the tested bases (the referee's rerun gave the same output). One line of the check compares a
@@ -493,9 +495,9 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 
 - $`C^*_3`$: an upper bound by an InaccPsi term (conjecture: $`c_0 \lt \psi_{\Omega_1}(I_1)`$) and names; whether $`\varphi_{\lt\omega} \lt m_3`$; whether $`c_0`$ is the least
   apex with closed $`n`$-fans for every $`n`$, and whether it is the least apex with infinitely many $`\lt_2`$-successors; Conjecture CH.
-- The inaccessible: $`H_m`$ ($`= FF_{RF}`$; what is left is a map from all of $`D`$ to RF fan-free patterns with $`\nu(s) \ll \nu(t)`$ at every step, §6.1),
-  $`FF_{cl}`$, $`FF_N`$, FF, POINT-SRO; whether $`H_m`$ is equivalent to $`x_F \gt \theta_0`$.
-- The least fan: the names (the base $`B_F`$; conjecture $`I_0`$, §6.4), an upper bound such as $`x_F \lt \psi_{\Omega_1}(I_0\cdot\omega)`$, and whether $`\sigma_N = m_F`$.
+- The inaccessible: $`H_m`$ ($`= FF_{RF} = FF_N`$, and $`m_F = \sup_k \iota(\mathrm{CH}_k)`$, [FANFREE.md](FANFREE.md) §4; what is left is a map from all of $`D`$ to RF fan-free patterns with $`\nu(s) \ll \nu(t)`$ at every step, §6.1),
+  $`FF_{cl}`$, FF, POINT-SRO; whether $`H_m`$ is equivalent to $`x_F \gt \theta_0`$.
+- The least fan: the names (the base $`B_F`$; conjecture $`I_0`$, §6.4), and an upper bound such as $`x_F \lt \psi_{\Omega_1}(I_0\cdot\omega)`$ ($`\sigma_N = m_F`$ is now proved, [FANFREE.md](FANFREE.md) §4).
 - $`R_2^S`$: (ii) ⇒ (i) of CP3 and "⇐" of LEFT-CHAR; MIN$`^S`$ above $`\beta_0`$; PINNING and CORE-S; $`o_k = \omega`$ for $`k \ge 2`$; NOLIM with a ghost
-  above $`\beta_0`$ (and NOLIM$`^*`$); $`\nu_C = \nu_S`$ (by §6.3: SC, or RM); the names (N-χ) and (N-ν) of [BREAK.md](BREAK.md) §7.3; RIGHT in $`R_2^C`$ above
+  above $`\beta_0`$ (and NOLIM$`^*`$); $`\nu_C = \nu_S`$ (by §6.3: SC, or RM; SC beyond the initial part of each segment, [FANFREE.md](FANFREE.md) §3); the names (N-χ) and (N-ν) of [BREAK.md](BREAK.md) §7.3; RIGHT in $`R_2^C`$ above
   $`\beta_0`$.

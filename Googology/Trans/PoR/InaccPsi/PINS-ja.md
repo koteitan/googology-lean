@@ -7,7 +7,7 @@
 4 つの論文から来ている。どの論文も 1 回ずつ査読された。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの
 論文がその結果を証明し、それぞれが 1 回ずつ査読されたこと。査読者が未証明と判定した命題は、その論文のほかの部分が
 証明済みでも **未証明** に書く。4 つの論文はどれも Wilken, JSL 72 (2007)、Carlson, AML 38 (1999)、Wilken, AML 45 (2006)
-を使わない。次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目と 6 回目は 6 ページ目 [COVER-ja.md](COVER-ja.md) にある。それによってここのいくつかの状態が変わった。
+を使わない。次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目から 7 回目は 6 ページ目 [COVER-ja.md](COVER-ja.md)、8 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md) にある。それによってここのいくつかの状態が変わった。
 
 **記号。** [REACHES-ja.md](REACHES-ja.md) と同じ。$`\upsilon`$ の点 $`\tau`$ に対し、$`\tau^\infty`$ は $`\tau`$ より上の最小の $`\upsilon`$ の点、
 $`\mathrm{seg}(\tau) = [\tau, \tau^\infty)`$。やり直しの添字 $`\lambda`$ に対し、$`\sigma_\lambda = \upsilon_{\lambda+1} = \rho_\lambda^\infty`$、$`\sigma'_\lambda = \upsilon_{\lambda+2}`$。
@@ -186,14 +186,15 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
 - $`\Theta_A`$ より上の正確な届く先：後の区間（$`\varepsilon_{\sigma+\omega}`$ より上の $`\mathrm{seg}(\sigma)`$、$`\mathrm{seg}(\upsilon_{\lambda+n})`$、$`\mathrm{seg}(\tau_1)`$、
   後のブロック）での H-RC。いくつもの区間にまたがる一般のピン（CL-FIN、LHPAR\*、有限集合の判定 T1 の一部に帰着
   済み）。$`y \ge \delta_j\cdot\omega`$ の点。$`\rho_{\Theta_A+\omega^2}`$ より上の $`R_2^C`$。$`T_\omega`$ より下のどの基の上でも、届く先はその基の上で
-  走らせた形式的な届く先の再帰に従う（TAIL-GAP、今は証明済み、査読 1 回、[COVER-ja.md](COVER-ja.md) §5.1）。
+  走らせた形式的な届く先の再帰に従う（TAIL-GAP、今は証明済み、査読 1 回、[COVER-ja.md](COVER-ja.md) §5.1）。$`\nu`$ より下の Γ 型でないどのやり直しの添字でも、その値は
+  OFF-V の閉じた形（$`\gamma = 0`$ で証明済み、$`\gamma \ge 1`$ は概略。[FANFREE-ja.md](FANFREE-ja.md) §3）。未解決なのは Γ 型の添字での届く先。
 - CL-FIN と LHPAR\*、だから初等再帰的な対応。今は CL-FIN と LHPAR\* の Cl\* の形は証明済み。LHPAR\* の鋭い形は書いた
   ままでは成り立たず、「初等再帰的」は概略だけ（[BREAK-ja.md](BREAK-ja.md) §4）。
 - $`[\Lambda_\varepsilon, \Theta_1)`$ での $`c^+`$ の閉じた形。$`\Theta_P`$、$`\Theta_1`$、$`\Theta_A`$、$`\Lambda^*`$、$`\nu_P`$ の名前。$`D`$ がどこまで延びるか。
   $`\Lambda_\varepsilon`$ より上での主張の名前の半分。
 - INC1-S と INC1-nonups は今は証明済み（[BREAK-ja.md](BREAK-ja.md) §1）。RIGHT（どの $`\lt_2`$ の右端も $`\upsilon`$ の点）は今は $`R_2^S`$ で証明済み（[COVER-ja.md](COVER-ja.md) §5.1）で、$`\beta_0`$ より上の $`R_2^C`$ では未解決。
 - $`C^*_3`$：最小のいちばん下の点（$`\nu_P`$ より上）、上半分、下半分、予想 CH（[BREAK-ja.md](BREAK-ja.md) §10）。最初の扇は $`T_\omega`$ より上で、未解決の仮定 $`FF_N`$ のもとでは到達不能基数が
-  要る（[BREAK-ja.md](BREAK-ja.md) §7.4）。もっと弱い未解決の仮定「$`\min\{m : m \le_1 x_F\}`$ が $`\ge \theta_0`$」のもとでも要る（この仮定は今は、右端に届く先の無い、扇の無い
+  要る（[BREAK-ja.md](BREAK-ja.md) §7.4。今は $`m_F \ge \theta_0`$ と同じ、[FANFREE-ja.md](FANFREE-ja.md) §4）。もっと弱い未解決の仮定「$`\min\{m : m \le_1 x_F\}`$ が $`\ge \theta_0`$」のもとでも要る（この仮定は今は、右端に届く先の無い、扇の無い
   パターンについての下からの評価と同じ、[COVER-ja.md](COVER-ja.md) §5.3。そのいくつかの一様な段は証明済み、[COVER-ja.md](COVER-ja.md) §6.1。
   また $`m_F \gt \nu_C`$、[COVER-ja.md](COVER-ja.md) §6.4）。$`R_2^C`$ では鎖の底は
   特徴づけられ、$`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F`$。$`\varphi_n`$ は閉じた $`n`$ 扇の最小の頂点（[COVER-ja.md](COVER-ja.md) §1–2）。

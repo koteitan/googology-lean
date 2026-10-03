@@ -7,7 +7,7 @@ This page continues [RESTARTS.md](RESTARTS.md). The status words are those of [R
 on this page are from 2026-10. "1 review" means one referee. "2 reviews" means that two independent papers proved
 the result and each paper was refereed once. The results of the next round (relativized pins, the exact reaches up
 to $`\Theta_A`$, the names up to $`\Lambda_\varepsilon`$, the bottom of a chain of length 3) are on the fourth page
-[PINS.md](PINS.md), the four rounds after that are on the fifth page [BREAK.md](BREAK.md), and the fifth and sixth rounds on the sixth page [COVER.md](COVER.md); they change some statuses here, as marked.
+[PINS.md](PINS.md), the four rounds after that are on the fifth page [BREAK.md](BREAK.md), the fifth to seventh rounds on the sixth page [COVER.md](COVER.md), and the eighth on the seventh page [FANFREE.md](FANFREE.md); they change some statuses here, as marked.
 
 **Notation.** As on [RESTARTS.md](RESTARTS.md): $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, the reach
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$, the restart $`\rho_\lambda = \upsilon_\lambda`$ for a nonzero multiple
@@ -41,7 +41,9 @@ realized cofinally.
   difference $`\beta_0`$ is at least $`\Lambda_\varepsilon`$.
 - **Theorem OFF-V** (proved, 1 review). For every restart index $`\lambda \lt \Lambda_\Gamma`$: if $`\gamma(\lambda) = 0`$ and
   $`\lambda = \lambda_0 + \omega^e`$, then $`O(\lambda) = -1 + e`$; if $`\lambda = V_\gamma(\alpha)`$ with $`\gamma = \gamma(\lambda) \ge 1`$, then
-  $`O(\lambda) = \rho_\lambda\cdot\gamma + \mathrm{logend}(\alpha)`$. Also $`O(\Lambda_\Gamma) = \omega^{\rho\cdot 2}`$, so $`\Lambda_\Gamma \lt \Lambda_\varepsilon`$.
+  $`O(\lambda) = \rho_\lambda\cdot\gamma + \mathrm{logend}(\alpha)`$. Also $`O(\Lambda_\Gamma) = \omega^{\rho\cdot 2}`$, so $`\Lambda_\Gamma \lt \Lambda_\varepsilon`$. Now ([FANFREE.md](FANFREE.md) §3, Theorem GEN-OFF) the same formula holds
+  for the formal-reach recursion at every restart index below $`\nu`$ that is not in the range of $`V_\gamma`$ for every $`\gamma \lt \lambda`$ (proved
+  for $`\gamma(\lambda) = 0`$, outline for $`\gamma(\lambda) \ge 1`$).
 - **Lemma RS$`_\lambda`$** (proved, 2 reviews). For every restart index $`\lambda \le \Xi_\omega`$, in $`R`$:
   $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + c^*(\lambda)`$. This is BLK$`^O`$ with OFF-V. The second proof is Theorem EXACT of §3.
 - **Theorem EXACT and OFF-k** (proved, 1 review; a second, independent proof of the exact reaches). With a formal
@@ -224,4 +226,4 @@ Each run was under 60 seconds; none is a proof.
 - $`C^*_3`$: the upper half (an ordinal analysis of the generated structure), the lower half $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$,
   and Conjecture CH. In $`R_2^C`$ the bottoms of chains are now characterized (Theorem CP3, [COVER.md](COVER.md) §1), but not located. An upper bound needs only one $`\lt_2`$-pair below it with one more point
   between (Lemma CRIT, [COVER.md](COVER.md) §6.2), but no InaccPsi term is proved to bound $`c_0`$.
-- The order statement S for the converter above $`V_3`$.
+- The order statement S for the converter above $`V_3`$ (the 26 undecided neighbour pairs of the sample are now proved, [FANFREE.md](FANFREE.md) §1).

@@ -8,7 +8,7 @@ independent referee found the result proved with no fatal or blocking point. All
 "2 reviews" means that two independent papers proved the result and each paper was refereed once. A statement that its
 referee found not proved, or false as written, is listed under **Not proved**, even when the rest of its paper is proved.
 None of the sixteen papers uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). No result on this
-page is in Lean. The fifth and sixth rounds (four papers each) are on the next page, [COVER.md](COVER.md). The sixth round proves
+page is in Lean. The fifth to seventh rounds (four papers each) are on the next page, [COVER.md](COVER.md), and the eighth on [FANFREE.md](FANFREE.md). The sixth round proves
 SKEL⁺ and SKEL$`^\omega`$ in full, so several results of §1, §7.1 and §8 below that were proved only at outline level are now proved
 ([COVER.md](COVER.md) §5.1); the labels below say so.
 
@@ -466,7 +466,8 @@ Here $`\nu = \nu_S`$ and $`U_2 = \{\upsilon^2_\zeta\}`$ as in §7.2. $`\mathrm{C
 - **FF made precise** (1 review). FF of §6 ($`\sigma_F \ge \theta_0`$) stays open. The paper replaces it by $`FF_N`$: $`\sigma_N \ge \theta_0`$. Proved:
   L1p-HYP implies $`FF_N`$, and $`FF_N`$ implies both $`x_F \gt \theta_0`$ and FF. Here L1p-HYP says that every realization of the configuration
   L1p ($`x_1 \lt_2 y_1 \lt x_2 \lt_2 y_2`$ with $`x_1 \le_1 x_2`$, $`x_1 \le_1 y_2`$) has $`x_1 \ge \theta_0`$. Checked (one replayed certificate): POINT-SRO
-  implies L1p-HYP, where POINT-SRO says that the point of $`\Phi_3(\mathrm{SRO})`$ is $`\ge \theta_0`$. "FF implies $`x_F \gt \theta_0`$" is still open.
+  implies L1p-HYP, where POINT-SRO says that the point of $`\Phi_3(\mathrm{SRO})`$ is $`\ge \theta_0`$. "FF implies $`x_F \gt \theta_0`$" is still open. Now (1 review each, [FANFREE.md](FANFREE.md) §4): $`\sigma_N = m_F`$, so $`FF_N`$ is
+  equivalent to $`m_F \ge \theta_0`$; and POINT-SRO implies L1p-HYP by a hand proof.
 - **Theorem CH-LOW-1′** (proved given $`FF_N`$, 1 review; $`R_2^C`$). Given $`FF_N`$, the points $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, $`c_1`$, $`c_2`$ are all
   $`\gt \theta_0`$, so their InaccPsi names contain an inaccessible. This answers the blocking point of §6 only under $`FF_N`$, which is
   stronger than FF.
@@ -561,7 +562,8 @@ Here $`k = 2`$, $`\nu = \nu_S`$ and $`s = \upsilon^2_\omega`$.
   (checked). Any block map has to act on index offsets like the substitution, not by order type. Proposition RANK (RI at restarts
   of finite Cantor–Bendixson rank) is false as stated at the base index and correct above it (outline). What is left is one
   statement: the skipped restarts never change where the reach of a moved restart cuts the domain. It joins the two blockers
-  of GI (§7.2: the onto hull and the reaches) into one.
+  of GI (§7.2: the onto hull and the reaches) into one. On the initial part of each segment of level 2 this statement is now settled
+  at outline level (RM-P, [FANFREE.md](FANFREE.md) §3).
 
 ### 8.4 NOLIM above $`\nu_P`$
 
@@ -659,7 +661,7 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 - The structure above $`\nu`$: $`o_k = \omega`$ for $`k \ge 2`$ in $`R_2^S`$ (equivalently $`GI^{fin}_k(\omega)`$; proved in $`R_2^C`$, §8.1), the global base change $`GI_k(\omega)`$, the exact reaches of
   level-$`k`$ restarts, the gaps as base-changed copies, and the names (§7.1, §7.2); the reach of $`T_\omega`$. (SKEL$`^\omega`$, TAIL, TAIL-GAP and
   TOP are now proved, [COVER.md](COVER.md) §5.1.)
-- The least fan: its name, the name of $`f_0`$, $`FF_N`$, L1p-HYP, POINT-SRO, and whether the least fan of $`R_2^S`$ is open (§7.4). Its structure in
+- The least fan: its name, the name of $`f_0`$, $`FF_N`$ (now the same as $`m_F \ge \theta_0`$, [FANFREE.md](FANFREE.md) §4), L1p-HYP, POINT-SRO, and whether the least fan of $`R_2^S`$ is open (§7.4). Its structure in
   $`R_2^C`$ is now fixed, with order type $`o_F = \omega^2`$ ([COVER.md](COVER.md) §2 and §5.2).
 - A chain of length 3: a point of $`(C_{\omega^\omega})'`$ above $`B`$ whose successors accumulate at a left end. Being a left end is not a
   property of a finite configuration, so Carlson's generating rules cannot produce it (NO-GEN). FF, DOM_F in $`R_2^S`$, open fans

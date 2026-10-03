@@ -9,7 +9,7 @@ refuted" by its referee; it is not counted as proved. The results above $`\Xi_\o
 skeleton, the least chain of length 3) are on the third page [REACHES.md](REACHES.md), and those beyond $`\Lambda_\varepsilon`$
 (relativized pins, the reaches up to $`\Theta_A`$, the names of all $`\upsilon`$-points up to $`\Lambda_\varepsilon`$) on the fourth page
 [PINS.md](PINS.md), and those where the skeleton ends, with the levels of nested pairs above it, on the fifth page [BREAK.md](BREAK.md), and the results by covering minimality, and the
-level-0 description of $`R_2^S`$ at every countable ordinal, on the sixth page [COVER.md](COVER.md).
+level-0 description of $`R_2^S`$ at every countable ordinal, on the sixth page [COVER.md](COVER.md), and the eighth round on the seventh page [FANFREE.md](FANFREE.md).
 
 **Notation.** $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$. The reach of a point $`\alpha`$ is
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$. A restart index is a nonzero multiple $`\lambda`$ of $`\omega^2`$. Write
@@ -98,6 +98,8 @@ skeleton FRAG2 must also move $`\varepsilon`$-bases that are not $`\upsilon`$-po
 In $`R_2^C`$ the shape part is proved: $`\nu_C = \upsilon^2_{\omega+1}`$, from $`o_2 = \omega`$ (Theorem O$`^C`$, 1 review, [BREAK.md](BREAK.md) §8.1).
 In $`R_2^C`$ NOLIM holds too (1 review, [COVER.md](COVER.md) §3 and §5.1), and $`\nu_C = \nu_S`$ is equivalent to NOLIM and $`o_2 = \omega`$ in $`R_2^S`$ (1 review, [COVER.md](COVER.md) §3).
 It is also equivalent to one $`\Sigma_2`$ statement, $`x_2 \lt_2^S \nu_C`$, inside the structure that $`R_2^S`$ and $`R_2^C`$ share below $`\nu_C`$ (1 review, [COVER.md](COVER.md) §6.3).
+The points $`\upsilon^2_n`$ and $`x_2`$ of level 2 are fixed points of $`\iota \mapsto \upsilon_\iota`$ (1 review), and the reaches of restarts correspond between
+the segments of level 2 on the initial part of each segment (outline only; [FANFREE.md](FANFREE.md) §3).
 In $`R_2^S`$, at every countable ordinal, every pair is a standard pair or joins two restarts, so FRAG2 holds in the weaker form
 "every pair joins two $`\upsilon`$-points" (Theorem SKEL$`^\infty`$, 1 review, [COVER.md](COVER.md) §5.1; before, below $`T_\omega`$ and at outline level only).
 
@@ -196,5 +198,5 @@ The open problems above $`\Xi_\omega`$ are listed in [REACHES.md](REACHES.md) §
 offsets beyond $`\Xi_\omega`$ (up to $`\Lambda_\varepsilon`$) and the equality for $`s_1`$ are now proved ([REACHES.md](REACHES.md) §1–2). Still open here:
 
 - The order statement S for the converter above $`V_3`$ (the reaches are now known up to $`\Lambda_\varepsilon`$; the order proof for
-  the new prefixes is missing).
+  the new prefixes is missing). The 26 undecided neighbour pairs of the sample above $`V_3`$ are now proved ([FANFREE.md](FANFREE.md) §1).
 - The core of $`R_2^S`$ above $`\upsilon_{\omega^3}`$ (Theorem CORE-S stops there).
