@@ -5,7 +5,8 @@
 このページは [README-ja.md](README-ja.md) の §3 の続き。状態の言葉はそこと同じ：**証明済み**は、独立した査読者が、
 致命的な点も止める点も無く証明済みと判定したもの。このページの結果はどれも 2026-10 のもので、回数を書いていなければ
 **査読 1 回**。**概略**と書いたものは、査読者が「証明済み（概略）、反証されず」と判定したもの。証明済みには数えない。$`\Xi_\omega`$ より上の結果（正確な届く先、骨組みの終わり、長さ 3 の最小の鎖）は
-3 ページ目 [REACHES-ja.md](REACHES-ja.md) にある。
+3 ページ目 [REACHES-ja.md](REACHES-ja.md) にある。$`\Lambda_\varepsilon`$ より先の結果（相対化したピン、$`\Theta_A`$ までの届く先、
+$`\Lambda_\varepsilon`$ までのすべての $`\upsilon`$ の点の名前）は 4 ページ目 [PINS-ja.md](PINS-ja.md) にある。
 
 **記号。** $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$。点 $`\alpha`$ の届く先を $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$ と書く。
 やり直しの添字とは、$`\omega^2`$ の 0 でない倍数 $`\lambda`$ のこと。$`\lambda = \lambda_0 + \omega^e`$（カントール標準形の最後の項、
@@ -114,7 +115,8 @@ EQB$`^\lambda`$ の例外の組も一致する。
 
 - **定理 CORE-C$`^\Xi`$**（証明済み、FRAG なし）。$`\Xi_\omega`$ 以下のどの順序数も $`\mathrm{Core}(R_2^C)`$ に入る（届く先の上限と
   Carlson 2009, Thm 14.14 から）。前は $`\upsilon_{\omega^3}`$ までだった。査読者の注：上限から $`[0, \upsilon_{\Xi_\omega+\omega^2})`$ まで出る。
-  いまは $`[0, \Lambda_\varepsilon)`$ と $`[0, \rho_{\Theta_P})`$ まで広がった（[REACHES-ja.md](REACHES-ja.md) §2）。
+  いまは $`[0, \Lambda_\varepsilon)`$ と $`[0, \rho_{\Theta_P})`$ まで広がった（[REACHES-ja.md](REACHES-ja.md) §2）。さらに
+  $`[0, \rho_{\Theta_A+\omega^2})`$ まで（[PINS-ja.md](PINS-ja.md) §2）。
 - **系**（証明済み）。FRAG なしで $`\min C^*_3 \ge \upsilon_{\Xi_\omega+\omega^2}`$、$`m_3 \gt \Xi_\omega`$。いまは $`m_3 \ge \Lambda_\varepsilon`$
   （[REACHES-ja.md](REACHES-ja.md) §5）。
 
@@ -127,15 +129,17 @@ $`\delta + c(\lambda)`$）、証明書 10 個中 10 個を再生、Lean の名�
 
 $`g(x) = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot x)`$、$`s_1 = \sup_n g^n(0)`$ とおく。
 
-- **定理 T+**（証明済み）。$`\eta \lt s_1`$ のすべてで $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$。また $`\Xi_1 = s_1`$。
+- **定理 T+**（証明済み、査読 2 回。2 つ目の証明は、すべての $`\upsilon`$ の点に名前を付ける [PINS-ja.md](PINS-ja.md) §3 の
+  定理 GEN）。$`\eta \lt s_1`$ のすべてで $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$。また $`\Xi_1 = s_1`$。
   T-UP の前の上限 $`\Gamma_0`$ は仮定 (HA) からだけ来ていた。(HA) は $`\eta \lt g(\eta)`$ ならいつも成り立つ。
-- $`s_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1})`$（証明済み、査読 2 回。[REACHES-ja.md](REACHES-ja.md) §2 の定理 T++）。
+- $`s_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1})`$（証明済み、査読 3 回。[REACHES-ja.md](REACHES-ja.md) §2 の定理 T++）。
   これは README §6 の表の 26 行目の名前。
 - だから **$`R_2^C`$ では $`[0, \Xi_1]`$ で Wilken の主張が成り立つ**（両方の半分）：そこのどの順序数も核に入り、つぶす引数が
   $`\Omega_\omega + \omega^{\theta+\Omega_1}`$ 未満の InaccPsi の標準形の値になる（補題 IS）。
 - $`\Xi_1`$ のすぐ上の上からの名前（補題 REL）：$`\eta \lt \Gamma_0`$ で
   $`\upsilon_{\Xi_1+1+\eta} \le \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1} + \theta\cdot(1+\eta))`$（証明済み）。いまは
   $`\Xi_1 + 1 + \eta \lt \Xi_2`$ のすべての $`\eta`$ で等式で、主張は $`\Phi_1`$ まで成り立つ（[REACHES-ja.md](REACHES-ja.md) §2）。
+  今は $`\Lambda_\varepsilon`$ まで（[PINS-ja.md](PINS-ja.md) §3）。
 
 ## 5. 構造定理に向けて（Wilken 2021, Thm 4.2）
 

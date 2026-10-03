@@ -6,7 +6,9 @@ This page continues §3 of [README.md](README.md). The status words are the same
 independent referee found the result proved with no fatal or blocking point. Every result on this page is from
 2026-10 and had **1 review** unless a count is given. A result marked **outline** was found "proved (outline), not
 refuted" by its referee; it is not counted as proved. The results above $`\Xi_\omega`$ (exact reaches, the end of the
-skeleton, the least chain of length 3) are on the third page [REACHES.md](REACHES.md).
+skeleton, the least chain of length 3) are on the third page [REACHES.md](REACHES.md), and those beyond $`\Lambda_\varepsilon`$
+(relativized pins, the reaches up to $`\Theta_A`$, the names of all $`\upsilon`$-points up to $`\Lambda_\varepsilon`$) on the fourth page
+[PINS.md](PINS.md).
 
 **Notation.** $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$. The reach of a point $`\alpha`$ is
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$. A restart index is a nonzero multiple $`\lambda`$ of $`\omega^2`$. Write
@@ -121,7 +123,8 @@ exceptional pairs of EQB$`^\lambda`$ below agree too.
 
 - **Theorem CORE-C$`^\Xi`$** (proved, no FRAG). Every ordinal $`\le \Xi_\omega`$ is in $`\mathrm{Core}(R_2^C)`$ (by the caps and
   Carlson 2009, Thm 14.14). Before, this was known up to $`\upsilon_{\omega^3}`$. The referee notes that the caps give
-  $`[0, \upsilon_{\Xi_\omega+\omega^2})`$. Now extended to $`[0, \Lambda_\varepsilon)`$ and $`[0, \rho_{\Theta_P})`$ ([REACHES.md](REACHES.md) §2).
+  $`[0, \upsilon_{\Xi_\omega+\omega^2})`$. Now extended to $`[0, \Lambda_\varepsilon)`$ and $`[0, \rho_{\Theta_P})`$ ([REACHES.md](REACHES.md) §2), and to
+  $`[0, \rho_{\Theta_A+\omega^2})`$ ([PINS.md](PINS.md) §2).
 - **Corollary** (proved). $`\min C^*_3 \ge \upsilon_{\Xi_\omega+\omega^2}`$ and $`m_3 \gt \Xi_\omega`$, without FRAG. Now $`m_3 \ge \Lambda_\varepsilon`$
   ([REACHES.md](REACHES.md) §5).
 
@@ -135,16 +138,17 @@ check green.
 
 Let $`g(x) = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot x)`$ and $`s_1 = \sup_n g^n(0)`$.
 
-- **Theorem T+** (proved). $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$ for every $`\eta \lt s_1`$, and
+- **Theorem T+** (proved, 2 reviews; the second proof is Theorem GEN of [PINS.md](PINS.md) §3, which names every
+  $`\upsilon`$-point). $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$ for every $`\eta \lt s_1`$, and
   $`\Xi_1 = s_1`$. The old bound $`\Gamma_0`$ of T-UP came only from the hypothesis (HA), and (HA) holds whenever
   $`\eta \lt g(\eta)`$.
-- $`s_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1})`$ (proved, 2 reviews; [REACHES.md](REACHES.md) §2, Theorem T++). This is
+- $`s_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1})`$ (proved, 3 reviews; [REACHES.md](REACHES.md) §2, Theorem T++). This is
   the name of row 26 of the table in README §6.
 - So **Wilken's claim holds on $`[0, \Xi_1]`$ in $`R_2^C`$**, both halves: every ordinal there is in the core and is the
   value of an InaccPsi normal form with collapse arguments below $`\Omega_\omega + \omega^{\theta+\Omega_1}`$ (Lemma IS).
 - Upper names just above $`\Xi_1`$, by Lemma REL: $`\upsilon_{\Xi_1+1+\eta} \le \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1} + \theta\cdot(1+\eta))`$
   for $`\eta \lt \Gamma_0`$ (proved). Now an equality for every $`\eta`$ with $`\Xi_1 + 1 + \eta \lt \Xi_2`$, and the claim holds up to
-  $`\Phi_1`$ ([REACHES.md](REACHES.md) §2).
+  $`\Phi_1`$ ([REACHES.md](REACHES.md) §2), and now up to $`\Lambda_\varepsilon`$ ([PINS.md](PINS.md) §3).
 
 ## 5. Toward a structure theorem (Wilken 2021, Thm 4.2)
 

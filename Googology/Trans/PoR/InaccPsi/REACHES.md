@@ -5,7 +5,9 @@
 This page continues [RESTARTS.md](RESTARTS.md). The status words are those of [README.md](README.md) §3:
 **proved** means that an independent referee found the result proved with no fatal or blocking point. All results
 on this page are from 2026-10. "1 review" means one referee. "2 reviews" means that two independent papers proved
-the result and each paper was refereed once.
+the result and each paper was refereed once. The results of the next round (relativized pins, the exact reaches up
+to $`\Theta_A`$, the names up to $`\Lambda_\varepsilon`$, the bottom of a chain of length 3) are on the fourth page
+[PINS.md](PINS.md); they change some statuses here, as marked.
 
 **Notation.** As on [RESTARTS.md](RESTARTS.md): $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, the reach
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$, the restart $`\rho_\lambda = \upsilon_\lambda`$ for a nonzero multiple
@@ -48,7 +50,8 @@ realized cofinally.
   FRAG (new Lemma PIN, from Wilken's Thm 2.2 above); the lower bound uses FRAG. The closed form of $`c^+`$ up to
   $`\Theta_{add} = V_\omega(1)`$, the least common fixed point of all $`V_k`$ ($`k \lt \omega`$), is the one of OFF-V, and
   $`c^+(\Theta_{add}) = \rho\cdot\omega`$. So the exact reach and its closed form have **2 reviews** for every restart
-  index $`\lambda \le V_\omega(1)`$. Proved order: $`\Xi_\omega \lt V_\omega(1) \lt \Theta_P`$.
+  index $`\lambda \le V_\omega(1)`$. Proved order: $`\Xi_\omega \lt V_\omega(1) \lt \Theta_P`$. Extended past $`\Theta_P`$ to $`\Theta_1`$ (2 reviews) and
+  $`\Theta_A`$ (1 review) in [PINS.md](PINS.md) §2.
 
 | $`\lambda`$ | $`O(\lambda)`$ | $`\lambda`$ | $`O(\lambda)`$ |
 |---|---|---|---|
@@ -68,8 +71,9 @@ $`\rho`$; the reach has $`\rho + 1`$).
   1 review): $`\Lambda_\varepsilon \lt \Omega_1`$ (after a citation repair by the referee: Carlson 2009, Lemma 15.11, Thm 14.14 and
   Cor 15.15), $`\min C^*_3 \ge \Lambda_\varepsilon`$, $`m_3 \ge \Lambda_\varepsilon`$, and $`\kappa_S \ge \Lambda_\varepsilon`$.
 - **Theorem CORE-C$`^+`$** (proved, 1 review; no FRAG). $`[0, \rho_{\Theta_P}) \subseteq \mathrm{Core}(R_2^C)`$, and on this segment $`R_2^C`$
-  has the pairs and blocks of $`R_2^S`$ and equals it (using FRAG). So $`\beta_0 \ge \rho_{\Theta_P}`$.
-- **Theorem T++** (proved, 2 reviews). Let $`\Phi_1`$ be the least $`\alpha \ge 1`$ with $`\Xi_\alpha = \alpha`$; it is $`V_2(1)`$. For
+  has the pairs and blocks of $`R_2^S`$ and equals it (using FRAG). So $`\beta_0 \ge \rho_{\Theta_P}`$. Now extended to
+  $`[0, \rho_{\Theta_A+\omega^2})`$ ([PINS.md](PINS.md) §2).
+- **Theorem T++** (proved, 3 reviews; the third proof is Theorem GEN of [PINS.md](PINS.md) §3). Let $`\Phi_1`$ be the least $`\alpha \ge 1`$ with $`\Xi_\alpha = \alpha`$; it is $`V_2(1)`$. For
   $`1 \le \alpha \lt \Phi_1`$:
   $`\Xi_\alpha = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1}\cdot\alpha)`$, and
   $`\upsilon_{\Xi_\alpha + x} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1}\cdot\alpha + \theta\cdot x)`$ for $`x \lt \Xi_{\alpha+1}`$.
@@ -77,15 +81,15 @@ $`\rho`$; the reach has $`\rho + 1`$).
   $`\Xi_\omega = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1+1})`$, and Lemma REL above $`\Xi_1`$ is an equality. Tools: Lemma SUB
   and the hull lemma HL (first paper); Lemma GAP, the countable part of the hull $`\mathrm{Cl}(\Omega_\omega + \omega^{\theta+\Omega_1}\cdot(z+1), s)`$
   stays below $`s`$ (second paper).
-- **Theorem PHI** (proved, 1 review). $`\Phi_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$.
+- **Theorem PHI** (proved, 2 reviews; the second proof is in [PINS.md](PINS.md) §3). $`\Phi_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$.
 - So **Wilken's claim holds on $`[0, \Phi_1]`$ in $`R_2^C`$**, both halves: every ordinal there is in the core and is the
   value of an InaccPsi normal form with collapse arguments at most $`\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2} \lt I_\omega`$
-  (2 reviews below $`\Phi_1`$; the name of $`\Phi_1`$ itself, 1 review). Before: $`[0, \Xi_1]`$.
+  (2 reviews). Before: $`[0, \Xi_1]`$. Now it holds on $`[0, \Lambda_\varepsilon)`$ ([PINS.md](PINS.md) §3).
 - **Below $`\Xi_1`$ in InaccPsi terms** (proved, 1 review; Conjecture 42+.I of [RESTARTS.md](RESTARTS.md) §5 is now a
   theorem there). With $`A = \omega^{\theta+a_1} + \cdots + \omega^{\theta+a_k}`$ ($`a_1 \ge \cdots \ge a_k = e \ge 2`$): the pairs are
   $`\psi_{\Omega_1}(\Omega_\omega + A + \omega^{\theta+1}\cdot j) \lt_2 \psi_{\Omega_1}(\Omega_\omega + A + \omega^{\theta+1}\cdot j + \theta)`$, the
   restart is $`\psi_{\Omega_1}(\Omega_\omega + A)`$, and its reach is $`\psi_{\Omega_1}(\Omega_\omega + A + \omega^{\theta+1} + \theta) + (-1 + e)`$.
-- **Conjectures.** NAME-V: $`V_\gamma(\alpha) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot\gamma}\cdot\alpha)`$ ($`\gamma \ge 1`$). NAME-OFFSET: if
+- **Conjectures, now proved** ([PINS.md](PINS.md) §3; NAME-OFFSET in a corrected form). NAME-V: $`V_\gamma(\alpha) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot\gamma}\cdot\alpha)`$ ($`\gamma \ge 1`$). NAME-OFFSET: if
   the last summand of the name of $`\rho_\lambda`$ is $`\omega^{\theta+e}`$, then $`O(\lambda)`$ is $`-1 + e`$ with $`\Omega_1`$ replaced by
   $`\rho_\lambda`$. They give $`\Lambda_\Gamma = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1^2})`$ and
   $`\Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$.
@@ -105,7 +109,8 @@ and $`\nu_P = \upsilon_{\Lambda^*+\omega^2}`$.
 - **Not proved.** $`R_2^C`$ on $`[\rho_{\Theta_P}, \nu_P)`$: only an outline, under the open hypothesis HC (the $`R_2^C`$ reach of
   every restart below $`\Lambda^*`$ is at most its $`R_2^S`$ reach). The exact reaches on $`[\Theta_P, \Lambda^*]`$: the lower bound
   of a general transport form is proved (using FRAG); the upper bound needs a relativized core of $`R_1^+`$ that Wilken
-  announces (APAL 145 (2007) 162–175, p. 174) in a paper we do not have.
+  announces (APAL 145 (2007) 162–175, p. 174) in a paper we do not have. Now: that core is rebuilt, the exact reaches are
+  known up to $`\Theta_A`$, HC holds below $`\Theta_A`$, and $`R_2^C`$ is known on $`[0, \rho_{\Theta_A+\omega^2})`$ ([PINS.md](PINS.md) §1–2).
 - **Conjectures** (checked with the program). $`\upsilon_{\Lambda^*} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2})`$ with
   $`\theta_2 = \psi_{\Omega_3}(\Omega_\omega)`$, the point of the matrix (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,2,0)(3,3,1)(3,0,0)(3,0,0);
   $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$.
@@ -115,12 +120,17 @@ and $`\nu_P = \upsilon_{\Lambda^*+\omega^2}`$.
 $`R_2^+`$ is skeletal on a set if (SK1) every point that is not a $`\upsilon`$-point has its $`R_1^+`$ reach there, and (SK3) every
 $`\lt_2`$-pair is $`(\upsilon_\xi, \upsilon_{\xi+1})`$ ([RESTARTS.md](RESTARTS.md) §2). $`\nu_S`$ and $`\nu_C`$ are the first points where
 $`R_2^S`$ and $`R_2^C`$ stop being skeletal. INC1-nonups is the statement "if $`a`$ is not a $`\upsilon`$-point and $`a \le_1 b`$ in $`R_2^C`$,
-then $`a \le_1 b`$ in $`R_1^+`$"; it is proved below $`\upsilon_{\Xi_\omega+\omega^2}`$ and open above.
+then $`a \le_1 b`$ in $`R_1^+`$"; it is proved below $`\upsilon_{\Xi_\omega+\omega^2}`$ and open above. INC1-S is the same for $`R_2^S`$
+and every $`a`$; it is open.
 
-- **Lemma LEFT** (proved, 1 review; $`R_2^S`$, and $`R_2^C`$ given INC1-nonups). Every $`\lt_2`$-left end is $`\upsilon_\lambda`$ with $`\lambda`$ a
+**Status change** (blocking point found in the next round, [PINS.md](PINS.md) §4). The proof of LEFT in $`R_2^S`$ assumed that
+$`\Sigma_1`$-elementarity in the language of $`R_2^S`$ gives $`\le_1`$ of $`R_1^+`$; it does not. So LEFT, and every result below that uses
+it (3CH, FIRST-BREAK, FRAG2-W, FRAG2-C, and C3′-FALSE of §5), holds in $`R_2^S`$ only given INC1-S.
+
+- **Lemma LEFT** (proved given INC1-S in $`R_2^S`$ and given INC1-nonups in $`R_2^C`$, 1 review). Every $`\lt_2`$-left end is $`\upsilon_\lambda`$ with $`\lambda`$ a
   limit. **Corollary 3CH**: in every chain $`c_0 \lt_2 c_1 \lt_2 c_2`$, $`c_0 = \upsilon_\Lambda`$ with $`\Lambda`$ a restart index and
   $`c_1 = \upsilon_\mu`$ with $`\mu`$ a limit; so $`\nu_S \le c_1`$.
-- **Theorem FIRST-BREAK** (proved, 1 review; $`R_2^S`$). $`\nu_S = \min(\nu_a, \nu_b)`$, where $`\nu_a`$ is the least $`b`$ with
+- **Theorem FIRST-BREAK** (proved given INC1-S, 1 review; $`R_2^S`$). $`\nu_S = \min(\nu_a, \nu_b)`$, where $`\nu_a`$ is the least $`b`$ with
   $`\upsilon_\lambda \lt_2 b`$ and $`b \ne \upsilon_{\lambda+1}`$, and $`\nu_b`$ is the least $`\mathrm{cap}(u) + 1`$ such that the cap of a $`\upsilon`$-point $`u`$
   cuts the $`R_1^+`$ reach of a point $`a`$ that is not a $`\upsilon`$-point ($`u \lt a \le \mathrm{cap}(u) \lt \mathrm{lh}_1(a)`$). Also proved:
   $`\nu_S \gt \nu_P`$ (§3).
@@ -144,7 +154,8 @@ then $`a \le_1 b`$ in $`R_1^+`$"; it is proved below $`\upsilon_{\Xi_\omega+\ome
 
 - **Lower bound** (proved). $`m_3 \ge \Lambda_\varepsilon \gt \Phi_1`$ (§2, 1 review), so $`m_3 \gt \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$.
   A second paper proves the weaker $`m_3 \gt \upsilon_{\Xi_\omega+\omega^2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1+1} + \omega^{\theta+2})`$ (1 review).
-- **C3′ in its heuristic form is false** (proved, 1 review). The next restart $`r_1(\tau)`$ above $`\tau`$ is the least $`\upsilon`$-point
+  The shape of the bottom of a chain (given INC1-S or INC1-nonups) and stronger bounds are in [PINS.md](PINS.md) §4.
+- **C3′ in its heuristic form is false** (proved given INC1-S in $`R_2^S`$ and INC1-nonups in $`R_2^C`$, 1 review). The next restart $`r_1(\tau)`$ above $`\tau`$ is the least $`\upsilon`$-point
   above $`\tau`$; its index is a successor, so by LEFT it is never a $`\lt_2`$-left end, and the restarted triple
   $`\{r_1, r_\omega, r_{\omega+1}\}(\tau)`$ is never a chain. The numeric form of C3′ ([README.md](README.md) §3) has lost its derivation; it
   stays a conjecture. Corrected shape C3′′ (conjecture): $`C^*_3 = \{\upsilon_\Lambda, \upsilon_{\Lambda+\omega}, \upsilon_{\Lambda+\omega+1}\}`$ for a restart
@@ -183,10 +194,10 @@ Each run was under 60 seconds; none is a proof.
 
 ## 7. Open
 
-- The exact reaches above $`\Lambda_\varepsilon`$ and $`\Theta_P`$ (they need more of Wilken 2007 than Thm 2.2), and the closed form
-  of $`O`$ on $`[\Lambda_\Gamma, \Lambda_\varepsilon)`$.
-- $`R_2^C`$ on $`[\rho_{\Theta_P}, \nu_P)`$ (hypothesis HC), and INC1-nonups above $`\upsilon_{\Xi_\omega+\omega^2}`$.
-- Names above $`\Phi_1`$ (NAME-V, NAME-OFFSET), and the values of $`\Lambda_\varepsilon`$, $`\Theta_P`$, $`\Lambda^*`$, $`\nu_P`$ and $`\nu_S`$.
+- The exact reaches above $`\Theta_A`$; the reaches up to $`\Theta_A`$, and the closed form of $`O`$ on $`[\Lambda_\Gamma, \Lambda_\varepsilon)`$, are
+  now proved ([PINS.md](PINS.md) §2–3).
+- $`R_2^C`$ on $`[\rho_{\Theta_A+\omega^2}, \nu_P)`$ (hypothesis HC), INC1-nonups above $`\upsilon_{\Xi_\omega+\omega^2}`$, and INC1-S.
+- The values of $`\Theta_P`$, $`\Lambda^*`$, $`\nu_P`$ and $`\nu_S`$ (the names up to $`\Lambda_\varepsilon`$ are now proved, [PINS.md](PINS.md) §3).
 - FRAG2 beyond $`\nu_S`$: several bases that are not $`\upsilon`$-points at once (FRAG-E), and nested cut data.
 - $`C^*_3`$: the upper half (an ordinal analysis of the generated structure), the lower half $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$,
   and Conjecture CH.

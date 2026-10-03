@@ -5,7 +5,9 @@
 このページは [RESTARTS-ja.md](RESTARTS-ja.md) の続き。状態の言葉は [README-ja.md](README-ja.md) の §3 と同じ：
 **証明済み**は、独立した査読者が、致命的な点も止める点も無く証明済みと判定したもの。このページの結果はどれも
 2026-10 のもの。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの論文がその結果を証明し、それぞれが
-1 回ずつ査読されたこと。
+1 回ずつ査読されたこと。次の回の結果（相対化したピン、$`\Theta_A`$ までの正確な届く先、$`\Lambda_\varepsilon`$ までの名前、
+長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) にある。それによってここのいくつかの状態が変わった。
+変わった所には印を付けた。
 
 **記号。** [RESTARTS-ja.md](RESTARTS-ja.md) と同じ：$`\theta = \psi_{\Omega_2}(\Omega_\omega)`$、届く先
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$、$`\omega^2`$ の 0 でない倍数 $`\lambda`$ に対するやり直しの点 $`\rho_\lambda = \upsilon_\lambda`$、
@@ -44,7 +46,8 @@ $`t(\rho_\lambda) + 1`$ の上限。$`\Lambda_\varepsilon`$ は、その下で $
   $`c^+(\lambda) \ge \varepsilon_{\rho_\lambda+\omega}`$ となる最小の $`\lambda`$。上からの評価は FRAG を使わない（新しい補題 PIN。上の Wilken の
   Thm 2.2 から）。下からの評価は FRAG を使う。$`\Theta_{add} = V_\omega(1)`$（すべての $`V_k`$、$`k \lt \omega`$ の最小の共通の不動点）
   までの $`c^+`$ の閉じた形は OFF-V と同じで、$`c^+(\Theta_{add}) = \rho\cdot\omega`$。だから正確な届く先とその閉じた形は、
-  $`\lambda \le V_\omega(1)`$ のすべてのやり直しの添字で **査読 2 回**。証明済みの大小：$`\Xi_\omega \lt V_\omega(1) \lt \Theta_P`$。
+  $`\lambda \le V_\omega(1)`$ のすべてのやり直しの添字で **査読 2 回**。証明済みの大小：$`\Xi_\omega \lt V_\omega(1) \lt \Theta_P`$。$`\Theta_P`$ を越えて、
+  $`\Theta_1`$ まで（査読 2 回）と $`\Theta_A`$ まで（査読 1 回）延びた（[PINS-ja.md](PINS-ja.md) §2）。
 
 | $`\lambda`$ | $`O(\lambda)`$ | $`\lambda`$ | $`O(\lambda)`$ |
 |---|---|---|---|
@@ -64,23 +67,24 @@ $`\lambda = \omega^{\Xi_\omega+1}`$ でずれの補題が成り立たなかっ�
   $`\Lambda_\varepsilon \lt \Omega_1`$（査読者が引用を直したあと：Carlson 2009 の Lemma 15.11、Thm 14.14、Cor 15.15）、
   $`\min C^*_3 \ge \Lambda_\varepsilon`$、$`m_3 \ge \Lambda_\varepsilon`$、$`\kappa_S \ge \Lambda_\varepsilon`$。
 - **定理 CORE-C$`^+`$**（証明済み、査読 1 回。FRAG 無し）。$`[0, \rho_{\Theta_P}) \subseteq \mathrm{Core}(R_2^C)`$。この区間で $`R_2^C`$ は
-  $`R_2^S`$ と同じ組とブロックを持ち、（FRAG を使えば）$`R_2^S`$ と等しい。だから $`\beta_0 \ge \rho_{\Theta_P}`$。
-- **定理 T++**（証明済み、査読 2 回）。$`\Xi_\alpha = \alpha`$ となる最小の $`\alpha \ge 1`$ を $`\Phi_1`$ とする。これは $`V_2(1)`$。
+  $`R_2^S`$ と同じ組とブロックを持ち、（FRAG を使えば）$`R_2^S`$ と等しい。だから $`\beta_0 \ge \rho_{\Theta_P}`$。今は
+  $`[0, \rho_{\Theta_A+\omega^2})`$ まで延びた（[PINS-ja.md](PINS-ja.md) §2）。
+- **定理 T++**（証明済み、査読 3 回。3 つ目の証明は [PINS-ja.md](PINS-ja.md) §3 の定理 GEN）。$`\Xi_\alpha = \alpha`$ となる最小の $`\alpha \ge 1`$ を $`\Phi_1`$ とする。これは $`V_2(1)`$。
   $`1 \le \alpha \lt \Phi_1`$ で：
   $`\Xi_\alpha = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1}\cdot\alpha)`$、そして $`x \lt \Xi_{\alpha+1}`$ で
   $`\upsilon_{\Xi_\alpha + x} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1}\cdot\alpha + \theta\cdot x)`$。
   特に $`\Xi_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1})`$（前の予想）、$`\Xi_\omega = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1+1})`$。
   $`\Xi_1`$ より上の補題 REL は等式になる。道具：補題 SUB と包の補題 HL（1 つ目の論文）。補題 GAP、すなわち包
   $`\mathrm{Cl}(\Omega_\omega + \omega^{\theta+\Omega_1}\cdot(z+1), s)`$ の可算な部分は $`s`$ より下に留まる（2 つ目の論文）。
-- **定理 PHI**（証明済み、査読 1 回）。$`\Phi_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$。
+- **定理 PHI**（証明済み、査読 2 回。2 つ目の証明は [PINS-ja.md](PINS-ja.md) §3）。$`\Phi_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$。
 - だから **$`R_2^C`$ で Wilken の主張は $`[0, \Phi_1]`$ で成り立つ**。両方の半分とも：そこのどの順序数も核に入り、
   つぶす関数の引数がどれも $`\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2} \lt I_\omega`$ 以下の InaccPsi の標準形の値になる
-  （$`\Phi_1`$ より下は査読 2 回。$`\Phi_1`$ 自身の名前は査読 1 回）。前は $`[0, \Xi_1]`$。
+  （査読 2 回）。前は $`[0, \Xi_1]`$。今は $`[0, \Lambda_\varepsilon)`$ で成り立つ（[PINS-ja.md](PINS-ja.md) §3）。
 - **$`\Xi_1`$ より下を InaccPsi の項で**（証明済み、査読 1 回。[RESTARTS-ja.md](RESTARTS-ja.md) §5 の予想 42+.I は、ここでは
   定理になった）。$`A = \omega^{\theta+a_1} + \cdots + \omega^{\theta+a_k}`$（$`a_1 \ge \cdots \ge a_k = e \ge 2`$）とすると：組は
   $`\psi_{\Omega_1}(\Omega_\omega + A + \omega^{\theta+1}\cdot j) \lt_2 \psi_{\Omega_1}(\Omega_\omega + A + \omega^{\theta+1}\cdot j + \theta)`$、
   やり直しの点は $`\psi_{\Omega_1}(\Omega_\omega + A)`$、その届く先は $`\psi_{\Omega_1}(\Omega_\omega + A + \omega^{\theta+1} + \theta) + (-1 + e)`$。
-- **予想。** NAME-V：$`V_\gamma(\alpha) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot\gamma}\cdot\alpha)`$（$`\gamma \ge 1`$）。NAME-OFFSET：
+- **予想、今は証明済み**（[PINS-ja.md](PINS-ja.md) §3。NAME-OFFSET は直した形で）。NAME-V：$`V_\gamma(\alpha) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot\gamma}\cdot\alpha)`$（$`\gamma \ge 1`$）。NAME-OFFSET：
   $`\rho_\lambda`$ の名前の最後の項が $`\omega^{\theta+e}`$ なら、$`O(\lambda)`$ は $`-1 + e`$ の $`\Omega_1`$ を $`\rho_\lambda`$ に置き換えたもの。
   これらから $`\Lambda_\Gamma = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1^2})`$、
   $`\Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$。
@@ -100,7 +104,8 @@ $`\nu_P = \upsilon_{\Lambda^*+\omega^2}`$ とおく。
 - **未証明。** $`[\rho_{\Theta_P}, \nu_P)`$ の $`R_2^C`$：未解決の仮定 HC（$`\Lambda^*`$ より下のどのやり直しの点も、$`R_2^C`$ の届く先が
   $`R_2^S`$ の届く先以下）の下での概略だけ。$`[\Theta_P, \Lambda^*]`$ の正確な届く先：一般の移し方の形の下からの評価は
   証明済み（FRAG を使う）。上からの評価には、Wilken が予告した（APAL 145 (2007) 162–175, p. 174）$`R_1^+`$ の相対化した
-  核が要るが、その論文は手元に無い。
+  核が要るが、その論文は手元に無い。今は：その核は作り直され、正確な届く先は $`\Theta_A`$ まで分かり、HC は $`\Theta_A`$
+  より下で成り立ち、$`R_2^C`$ は $`[0, \rho_{\Theta_A+\omega^2})`$ で分かった（[PINS-ja.md](PINS-ja.md) §1–2）。
 - **予想**（プログラムで確かめた）。$`\upsilon_{\Lambda^*} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2})`$、ここで
   $`\theta_2 = \psi_{\Omega_3}(\Omega_\omega)`$。これは行列 (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,2,0)(3,3,1)(3,0,0)(3,0,0) の点。
   $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$。
@@ -110,12 +115,17 @@ $`\nu_P = \upsilon_{\Lambda^*+\omega^2}`$ とおく。
 ある集合の上で $`R_2^+`$ が骨組み型とは：(SK1) $`\upsilon`$ の点でない点はそこで $`R_1^+`$ の届く先を持ち、(SK3) $`\lt_2`$ の組は
 どれも $`(\upsilon_\xi, \upsilon_{\xi+1})`$（[RESTARTS-ja.md](RESTARTS-ja.md) §2）。$`R_2^S`$ と $`R_2^C`$ が骨組み型でなくなる最初の点を
 $`\nu_S`$、$`\nu_C`$ と書く。INC1-nonups は「$`a`$ が $`\upsilon`$ の点でなく、$`R_2^C`$ で $`a \le_1 b`$ なら、$`R_1^+`$ でも $`a \le_1 b`$」
-という命題。$`\upsilon_{\Xi_\omega+\omega^2}`$ より下では証明済み、その上は未解決。
+という命題。$`\upsilon_{\Xi_\omega+\omega^2}`$ より下では証明済み、その上は未解決。INC1-S は、$`R_2^S`$ とすべての $`a`$ についての
+同じ命題で、未解決。
 
-- **補題 LEFT**（証明済み、査読 1 回。$`R_2^S`$、および INC1-nonups を仮定した $`R_2^C`$）。$`\lt_2`$ の左端はどれも $`\lambda`$ が
+**状態の変更**（次の回に見つかった止める点、[PINS-ja.md](PINS-ja.md) §4）。$`R_2^S`$ での LEFT の証明は、$`R_2^S`$ の言語での
+$`\Sigma_1`$ 初等性から $`R_1^+`$ の $`\le_1`$ が出ると仮定していたが、出ない。だから LEFT と、それを使う下の結果（3CH、
+FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では INC1-S を仮定したときだけ成り立つ。
+
+- **補題 LEFT**（$`R_2^S`$ では INC1-S、$`R_2^C`$ では INC1-nonups を仮定して証明済み、査読 1 回）。$`\lt_2`$ の左端はどれも $`\lambda`$ が
   極限の $`\upsilon_\lambda`$。**系 3CH**：どの鎖 $`c_0 \lt_2 c_1 \lt_2 c_2`$ でも、$`c_0 = \upsilon_\Lambda`$（$`\Lambda`$ はやり直しの添字）、
   $`c_1 = \upsilon_\mu`$（$`\mu`$ は極限）。だから $`\nu_S \le c_1`$。
-- **定理 FIRST-BREAK**（証明済み、査読 1 回。$`R_2^S`$）。$`\nu_S = \min(\nu_a, \nu_b)`$。ここで $`\nu_a`$ は $`\upsilon_\lambda \lt_2 b`$ かつ
+- **定理 FIRST-BREAK**（INC1-S を仮定して証明済み、査読 1 回。$`R_2^S`$）。$`\nu_S = \min(\nu_a, \nu_b)`$。ここで $`\nu_a`$ は $`\upsilon_\lambda \lt_2 b`$ かつ
   $`b \ne \upsilon_{\lambda+1}`$ となる最小の $`b`$。$`\nu_b`$ は、$`\upsilon`$ の点 $`u`$ の届く先 $`\mathrm{cap}(u)`$ が、$`\upsilon`$ の点でない点 $`a`$ の $`R_1^+`$ の
   届く先を切る（$`u \lt a \le \mathrm{cap}(u) \lt \mathrm{lh}_1(a)`$）ような最小の $`\mathrm{cap}(u) + 1`$。ほかに証明済み：$`\nu_S \gt \nu_P`$（§3）。
 - **骨組みは $`m_3`$ より下で終わる**（証明済み、査読 2 回）。定理 NU-C：$`\upsilon_{\Xi_\omega+\omega^2} \le \nu_C \lt m_3`$。「2 つの
@@ -138,7 +148,8 @@ $`\nu_S`$、$`\nu_C`$ と書く。INC1-nonups は「$`a`$ が $`\upsilon`$ の�
 
 - **下界**（証明済み）。$`m_3 \ge \Lambda_\varepsilon \gt \Phi_1`$（§2、査読 1 回）。だから $`m_3 \gt \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$。
   別の論文が、弱い $`m_3 \gt \upsilon_{\Xi_\omega+\omega^2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1+1} + \omega^{\theta+2})`$ を示す（査読 1 回）。
-- **発見的な形の C3′ は偽**（証明済み、査読 1 回）。$`\tau`$ の上の次のやり直し $`r_1(\tau)`$ は $`\tau`$ の上の最小の $`\upsilon`$ の点。
+  鎖のいちばん下の形（INC1-S か INC1-nonups を仮定）ともっと強い評価は [PINS-ja.md](PINS-ja.md) §4 にある。
+- **発見的な形の C3′ は偽**（$`R_2^S`$ では INC1-S、$`R_2^C`$ では INC1-nonups を仮定して証明済み、査読 1 回）。$`\tau`$ の上の次のやり直し $`r_1(\tau)`$ は $`\tau`$ の上の最小の $`\upsilon`$ の点。
   その添字は後続なので、LEFT により $`\lt_2`$ の左端にならない。だからやり直した 3 点 $`\{r_1, r_\omega, r_{\omega+1}\}(\tau)`$ は決して
   鎖にならない。C3′ の数の形（[README-ja.md](README-ja.md) §3）は導き方を失った。予想としては残る。直した形 C3′′（予想）：
   あるやり直しの添字 $`\Lambda`$ で $`C^*_3 = \{\upsilon_\Lambda, \upsilon_{\Lambda+\omega}, \upsilon_{\Lambda+\omega+1}\}`$。査読者は反対の材料を挙げた：
@@ -174,10 +185,10 @@ $`\nu_S`$、$`\nu_C`$ と書く。INC1-nonups は「$`a`$ が $`\upsilon`$ の�
 
 ## 7. 未解決
 
-- $`\Lambda_\varepsilon`$ と $`\Theta_P`$ より上の正確な届く先（Wilken 2007 の Thm 2.2 より多くが要る）、および
-  $`[\Lambda_\Gamma, \Lambda_\varepsilon)`$ での $`O`$ の閉じた形。
-- $`[\rho_{\Theta_P}, \nu_P)`$ の $`R_2^C`$（仮定 HC）、および $`\upsilon_{\Xi_\omega+\omega^2}`$ より上の INC1-nonups。
-- $`\Phi_1`$ より上の名前（NAME-V、NAME-OFFSET）、および $`\Lambda_\varepsilon`$、$`\Theta_P`$、$`\Lambda^*`$、$`\nu_P`$、$`\nu_S`$ の値。
+- $`\Theta_A`$ より上の正確な届く先。$`\Theta_A`$ までの届く先と、$`[\Lambda_\Gamma, \Lambda_\varepsilon)`$ での $`O`$ の閉じた形は、今は
+  証明済み（[PINS-ja.md](PINS-ja.md) §2–3）。
+- $`[\rho_{\Theta_A+\omega^2}, \nu_P)`$ の $`R_2^C`$（仮定 HC）、$`\upsilon_{\Xi_\omega+\omega^2}`$ より上の INC1-nonups、および INC1-S。
+- $`\Theta_P`$、$`\Lambda^*`$、$`\nu_P`$、$`\nu_S`$ の値（$`\Lambda_\varepsilon`$ までの名前は今は証明済み、[PINS-ja.md](PINS-ja.md) §3）。
 - $`\nu_S`$ より先の FRAG2：$`\upsilon`$ の点でない基をいくつも同時に（FRAG-E）、および入れ子の切るデータ。
 - $`C^*_3`$：上半分（生成した構造の順序数解析）、下半分 $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$、予想 CH。
 - $`V_3`$ より上での変換器の順序の命題 S。
