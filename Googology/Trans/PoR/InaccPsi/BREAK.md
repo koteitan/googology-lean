@@ -8,7 +8,7 @@ independent referee found the result proved with no fatal or blocking point. All
 "2 reviews" means that two independent papers proved the result and each paper was refereed once. A statement that its
 referee found not proved, or false as written, is listed under **Not proved**, even when the rest of its paper is proved.
 None of the sixteen papers uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). No result on this
-page is in Lean. The fifth to seventh rounds (four papers each) are on the next page, [COVER.md](COVER.md), and the eighth on [FANFREE.md](FANFREE.md). The sixth round proves
+page is in Lean. The fifth to seventh rounds (four papers each) are on the next page, [COVER.md](COVER.md), and the eighth and ninth on [FANFREE.md](FANFREE.md). The sixth round proves
 SKEL⁺ and SKEL$`^\omega`$ in full, so several results of §1, §7.1 and §8 below that were proved only at outline level are now proved
 ([COVER.md](COVER.md) §5.1); the labels below say so.
 
@@ -563,7 +563,7 @@ Here $`k = 2`$, $`\nu = \nu_S`$ and $`s = \upsilon^2_\omega`$.
   of finite Cantor–Bendixson rank) is false as stated at the base index and correct above it (outline). What is left is one
   statement: the skipped restarts never change where the reach of a moved restart cuts the domain. It joins the two blockers
   of GI (§7.2: the onto hull and the reaches) into one. On the initial part of each segment of level 2 this statement is now settled
-  at outline level (RM-P, [FANFREE.md](FANFREE.md) §3).
+  at outline level (RM-P, [FANFREE.md](FANFREE.md) §3), and now proved below the first limit of critical indices of each segment (RM-D, [FANFREE.md](FANFREE.md) §7.3).
 
 ### 8.4 NOLIM above $`\nu_P`$
 

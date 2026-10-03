@@ -8,7 +8,7 @@ page are from 2026-10; they come from four papers, each refereed once. "1 review
 means that two independent papers proved the result and each paper was refereed once. A statement that its referee
 found not proved is listed under **Not proved**, even when the rest of its paper is proved. None of the four papers
 uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). The next four rounds are on the fifth page
-[BREAK.md](BREAK.md), the fifth to seventh rounds on the sixth page [COVER.md](COVER.md), and the eighth on the seventh page [FANFREE.md](FANFREE.md); they change some statuses here, as marked.
+[BREAK.md](BREAK.md), the fifth to seventh rounds on the sixth page [COVER.md](COVER.md), and the eighth and ninth on the seventh page [FANFREE.md](FANFREE.md); they change some statuses here, as marked.
 
 **Notation.** As on [REACHES.md](REACHES.md). For a $`\upsilon`$-point $`\tau`$, $`\tau^\infty`$ is the least $`\upsilon`$-point above
 $`\tau`$, and $`\mathrm{seg}(\tau) = [\tau, \tau^\infty)`$. For a restart index $`\lambda`$: $`\sigma_\lambda = \upsilon_{\lambda+1} = \rho_\lambda^\infty`$ and
@@ -191,8 +191,8 @@ Each run was under 60 seconds; none is a proof.
   $`\mathrm{seg}(\tau_1)`$, the later blocks); the general pin over several segments (reduced to CL-FIN, LHPAR\* and part of the
   finite-set test T1); points $`y \ge \delta_j\cdot\omega`$; $`R_2^C`$ above $`\rho_{\Theta_A+\omega^2}`$. Above any base below $`T_\omega`$ the reaches follow the
   formal-reach recursion run above that base (TAIL-GAP, now proved, 1 review, [COVER.md](COVER.md) §5.1). Below $`\nu`$ its value at every
-  restart index that is not Γ-type has the closed form of OFF-V (proved for $`\gamma = 0`$, an outline for $`\gamma \ge 1`$; [FANFREE.md](FANFREE.md) §3); what is open is
-  the reaches at Γ-type indices.
+  restart index that is not Γ-type has the closed form of OFF-V (proved for $`\gamma = 0`$, and now for $`\gamma \ge 1`$ too; [FANFREE.md](FANFREE.md) §3, §7.3); what is open is
+  the reaches at limits of critical indices ([FANFREE.md](FANFREE.md) §7.3).
 - CL-FIN and LHPAR\*, and so the elementary recursive assignments. Now CL-FIN and the Cl\*-form of LHPAR\* are proved; the
   sharp form of LHPAR\* fails as stated, and "elementary recursive" is an outline ([BREAK.md](BREAK.md) §4).
 - The closed form of $`c^+`$ on $`[\Lambda_\varepsilon, \Theta_1)`$; the names of $`\Theta_P`$, $`\Theta_1`$, $`\Theta_A`$, $`\Lambda^*`$ and $`\nu_P`$; how far $`D`$

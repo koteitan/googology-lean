@@ -4,7 +4,7 @@
 
 このページは [BREAK-ja.md](BREAK-ja.md) の続き。状態の言葉は [README-ja.md](README-ja.md) の §3 と同じ：**証明済み**は、独立した査読者が、
 致命的な点も止める点も無く証明済みと判定したもの。このページの結果はどれも 2026-10 のもので、4 つの論文からなる 3 つの回、
-5 回目（§1〜§4）、6 回目（§5）、7 回目（§6）から来ている。8 回目は次のページ [FANFREE-ja.md](FANFREE-ja.md) にある。どの論文も 1 回ずつ査読された。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの論文がその結果を証明し、それぞれが
+5 回目（§1〜§4）、6 回目（§5）、7 回目（§6）から来ている。8 回目と 9 回目は次のページ [FANFREE-ja.md](FANFREE-ja.md) にある。どの論文も 1 回ずつ査読された。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの論文がその結果を証明し、それぞれが
 1 回ずつ査読されたこと。査読者が未証明と判定した命題は、その論文のほかの部分が証明済みでも **未証明** に書く。5 回目の論文、
 6 回目の 3 つ、7 回目の多くの論文は、被覆に対する Carlson の最小性（Carlson 2009, Thm 14.10(2)）を使う。これは [BREAK-ja.md](BREAK-ja.md) §8.1 の道具。どの論文も
 Wilken, JSL 72 (2007)、Carlson, AML 38 (1999)、Wilken, AML 45 (2006) を使わず、Carlson 2009, p. 97 が予告する「Carlson の定義と
@@ -371,7 +371,7 @@ $`S_n = [\upsilon^2_n, \upsilon^2_{n+1})`$ と $`S_\omega = [x, \nu)`$。
 - **LBC ⇒ SC**（証明済み、査読 1 回）。LBC は、$`T(\upsilon^2_n) = x`$ で $`+`$、$`\le_1`$、$`\le_2`$ を保つ基の付け替え $`T : S_n \to S_\omega`$。RM ⇒ LBC（FRAG2 を
   通した概略だけ）：Wilken の基の付け替えを超えて LBC が求めるのは、$`T`$ がやり直しの点の届く先を保つことだけ。査読者の注意：SC が
   要るのは有限の写像だけなので、LBC の有限の形で足り、それは FRAG2 の範囲に合う（今は各区間の最初の部分で概略の水準、
-  [FANFREE-ja.md](FANFREE-ja.md) §3）。
+  [FANFREE-ja.md](FANFREE-ja.md) §3。臨界な添字の最初の極限より下では証明済み、[FANFREE-ja.md](FANFREE-ja.md) §7.3）。
 - **BLOCK-SC**（証明済み、査読 1 回）と **REGION-SC**（FRAG を通した概略だけ）。断片が $`[x, x^+)`$（$`x^+`$ は次の $`\upsilon`$ の点）にあり、拡張が
   $`\upsilon^2_n`$ の上の最初の $`\delta`$ の点より下にあるとき（BLOCK-SC）、または $`\upsilon^2_n`$ のやり直しの領域全体にあるとき（REGION-SC）、SC は成り立つ。
 - **未解決**（論文自身が書く止める点）：SC、LBC、RM、だから $`\nu_C = \nu_S`$。RM は、段 2 の区間の間でやり直しの点の届く先が対応する、
@@ -476,9 +476,9 @@ $`S_n = [\upsilon^2_n, \upsilon^2_{n+1})`$ と $`S_\omega = [x, \nu)`$。
 
 - $`C^*_3`$：InaccPsi の項による上からの評価（予想：$`c_0 \lt \psi_{\Omega_1}(I_1)`$）と名前。$`\varphi_{\lt\omega} \lt m_3`$ か。$`c_0`$ は、どの $`n`$ でも閉じた $`n`$ 扇を
   持つ最小の頂点か。$`\lt_2`$ の後の元を無限に持つ最小の頂点か。予想 CH。
-- 到達不能基数：$`H_m`$（$`= FF_{RF} = FF_N`$、そして $`m_F = \sup_k \iota(\mathrm{CH}_k)`$、[FANFREE-ja.md](FANFREE-ja.md) §4。残りは、$`D`$ 全体から扇の無い RF パターンへの写像で、どの段でも $`\nu(s) \ll \nu(t)`$ となるもの、§6.1）、
+- 到達不能基数：$`H_m`$（$`= FF_{RF} = FF_N`$、そして $`m_F = \sup_k \iota(\mathrm{CH}_k)`$、[FANFREE-ja.md](FANFREE-ja.md) §4。残りは、$`D`$ 全体から扇の無い RF パターンへの写像で、どの段でも $`\nu(s) \ll \nu(t)`$ となるもの、§6.1。値が L1p の無いパターンなら $`\iota(\mathrm{CH}_2) \ge \theta_0`$ が出る、[FANFREE-ja.md](FANFREE-ja.md) §7.2）、
   $`FF_{cl}`$、FF、POINT-SRO。$`H_m`$ は $`x_F \gt \theta_0`$ と同じか。
 - 最小の扇：名前（基 $`B_F`$。予想は $`I_0`$、§6.4）、$`x_F \lt \psi_{\Omega_1}(I_0\cdot\omega)`$ のような上からの評価（$`\sigma_N = m_F`$ は今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §4）。
 - $`R_2^S`$：CP3 の (ii) ⇒ (i) と LEFT-CHAR の「⇐」。$`\beta_0`$ より上の MIN$`^S`$。PINNING と CORE-S。$`k \ge 2`$ での $`o_k = \omega`$。幽霊があるときの
-  $`\beta_0`$ より上の NOLIM（と NOLIM$`^*`$）。$`\nu_C = \nu_S`$（§6.3 により：SC、または RM。各区間の最初の部分の外での SC、[FANFREE-ja.md](FANFREE-ja.md) §3）。[BREAK-ja.md](BREAK-ja.md) §7.3 の名前 (N-χ) と (N-ν)。$`\beta_0`$ より
+  $`\beta_0`$ より上の NOLIM（と NOLIM$`^*`$）。$`\nu_C = \nu_S`$（§6.3 により：SC、または RM。各区間の臨界な添字の最初の極限より先での SC、[FANFREE-ja.md](FANFREE-ja.md) §7.3）。[BREAK-ja.md](BREAK-ja.md) §7.3 の名前 (N-χ) と (N-ν)。$`\beta_0`$ より
   上の $`R_2^C`$ の RIGHT。

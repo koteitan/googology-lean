@@ -112,7 +112,12 @@ $`R_2^S`$ の形と 1 つの止める命題に帰着した。その §5 は 6 �
 決まらない 26 個の極限の跳びはすべて証明済み。$`m_F`$ は組の列の 1 本の具体的な列の点の極限なので、最初の扇に到達不能基数が要るのは、
 その列のどれかの点が $`\theta_0`$ 以上のときちょうど（$`FF_N`$ も同じ仮定）。$`m_F`$ の上からの評価はこの 1 本の列の評価。$`\varepsilon_0`$ より下の
 添字の族の上に行列を使わない写像を作ったが、その順序の証明には穴がある。段 2 の各区間の最初の部分では、区間の間でやり直しの点の
-届く先が対応する（概略だけ）。$`C^*_3`$ は $`\omega_1^{CK}`$ より下（Carlson 2009,
+届く先が対応する（概略だけ）。同じページに 9 回目（どれも査読 1 回）もある：SRO より下の下界の計画の段は、標本の 3,166 個の行列のうち
+459 個で、すべての $`n`$ で証明済み（以前の穴 IDX-ADD を含む）。残りは 4 つの未解決の部分に分かれる。素の符号は $`\varphi_\omega(0)`$ まで順序が
+証明され、配置 L1p の無い扇の無いパターンはどれも $`\mathrm{CH}_2`$ の点より下にある。だから $`\theta_0`$ より下のすべての項をそのようなパターンに
+写す写像があれば、最初の扇に到達不能基数が要ることが出る。$`\nu_C`$ より下のどのやり直しの点の届く先も、「臨界な」添字の極限を除いて
+分かり、区間の条件 SC はそのような最初の極限まで証明済みだが、$`\nu_C = \nu_S`$ は未解決のまま。$`\mathrm{CH}_2`$ の点の InaccPsi による上からの
+評価は証明されておらず、そのような評価は、ちょうど $`\nu_C`$ より上の 1 点での 3 つの関係。$`C^*_3`$ は $`\omega_1^{CK}`$ より下（Carlson 2009,
 Thm 15.2）だが、InaccPsi の項による上からの評価も名前もまだ無い。$`R_2^C`$ では $`\Lambda_\varepsilon`$ より上（核の側は $`\nu_C`$ まで証明済み）、$`R_2^S`$ では
 $`\upsilon_{\omega^3}`$ より上で、どちらの半分も未解決。
 
@@ -236,7 +241,7 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   $`R_2^S`$ での $`o_2 = \omega`$ が出て、NOLIM を仮定すれば両者は同じ（[BREAK-ja.md](BREAK-ja.md) §8.1、査読 1 回）。今は、$`\nu_C = \nu_S`$ は $`R_2^S`$ で NOLIM と $`o_2 = \omega`$ が
   成り立つことと同じ（GHOST-EQ）で、NOLIM は $`R_2^C`$ で成り立つ（定理 NOLIM$`^C`$）（[COVER-ja.md](COVER-ja.md) の §3 と §5.1、査読 1 回）。今は、$`\nu_C = \nu_S`$ ⇔
   $`x_2 \lt_2^S \nu_C`$。これは $`\nu_C`$ より下の共通の構造の中の 1 つの $`\Sigma_2`$ の命題（定理 EQ、[COVER-ja.md](COVER-ja.md) §6.3、査読 1 回）。その元の条件 SC は、段 2 の各区間の
-  最初の部分で成り立つ（概略だけ、[FANFREE-ja.md](FANFREE-ja.md) §3）。
+  最初の部分で成り立つ（概略だけ、[FANFREE-ja.md](FANFREE-ja.md) §3）。今は、臨界な添字の最初の極限より下の、より大きい部分で証明済み（[FANFREE-ja.md](FANFREE-ja.md) §7.3）。
 - **補題 UPG。** 一致する段では、$`\alpha`$ 未満のどの $`\gamma`$ も $`R_2^C`$ で $`\alpha`$ の isominimal な部分集合に入るなら、
   $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$（$`\alpha = \kappa_C`$ と $`\alpha = \upsilon_{\omega\cdot\omega}`$ で成り立つ）。
 - **KAPPA と CORE-EQ。** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$、$`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$。だから
@@ -320,6 +325,8 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   計画から出る。そして $`c_2 \lt \omega_1^{CK}`$。さらに（どれも査読 1 回、[COVER-ja.md](COVER-ja.md) §6）：$`m_F \gt \nu_C`$。パターンの間の比較の計算で、
   $`\theta_0`$ のいちばん上の段といくつかの一様な段の族を証明した。名前 $`m_F = \psi_{\Omega_1}(B_F)`$ について $`B_F \ge \psi_{I_0}(0)`$ ⇔ $`m_F \ge \theta_0`$。$`B_F = I_0`$
   での名前は予想。さらに（どれも査読 1 回、[FANFREE-ja.md](FANFREE-ja.md) §4）：$`m_F`$ は組の列 $`\mathrm{CH}_k`$ の点の極限で、$`\sigma_N = m_F`$。
+  さらに（どれも査読 1 回、[FANFREE-ja.md](FANFREE-ja.md) §7.2 と §7.4）：配置 L1p の無い扇の無いパターンはどれも $`\iota(\mathrm{CH}_2)`$ より下にあり、
+  $`\iota(\mathrm{CH}_2) \lt t`$ は、$`t`$ より下のある 1 点 $`a`$ が $`a \lt_2 b`$、$`b \lt c`$ となる組 $`c \lt_2 d`$、$`a \le_1 d`$ を持つことと同値。
   以前から：$`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$。
 - **補題 TOP2**（2026-10、査読 1 回）。どの $`\alpha \lt m_3`$ にも、$`\alpha \lt x \lt y \lt m_3`$ となる長さ 2 の鎖 $`x \lt_2 y`$ がある。
   だから $`m_3`$ は長さ 2 の鎖の極限で、FRAG なしで $`m_3 \ge \upsilon_{\omega\cdot\omega}`$。
@@ -400,13 +407,14 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
 **証明されていないこと：**
 
 - **$`R_2^C`$ で $`\Lambda_\varepsilon`$ より上、$`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上での主張**、両方の半分。$`\Theta_A`$ より上の
-  やり直しの届く先（$`\Theta_A`$ そのものでの届く先は今は分かっている）と、[FANFREE-ja.md](FANFREE-ja.md) §7、[COVER-ja.md](COVER-ja.md) §9、[BREAK-ja.md](BREAK-ja.md) §10、[PINS-ja.md](PINS-ja.md) §6、[REACHES-ja.md](REACHES-ja.md) §7、[RESTARTS-ja.md](RESTARTS-ja.md) §6 の残り。
+  やり直しの届く先（$`\Theta_A`$ そのものでの届く先は今は分かっている）と、[FANFREE-ja.md](FANFREE-ja.md) §10、[COVER-ja.md](COVER-ja.md) §9、[BREAK-ja.md](BREAK-ja.md) §10、[PINS-ja.md](PINS-ja.md) §6、[REACHES-ja.md](REACHES-ja.md) §7、[RESTARTS-ja.md](RESTARTS-ja.md) §6 の残り。
 - **$`R_2^S = R_2^C`$**：$`\le_1`$ の逆向き $`C \Rightarrow S`$ は、$`\kappa_C`$ より上の後続の段で $`\alpha \notin G_C`$ のとき未解決。
   $`\le_2`$ の逆向きは、(ii) の型の段で未解決（$`\Pi_2`$ 文を上向きに移すことが要るが、上向きの 2-反映でも持ち上げでも
   得られない。いまは段ごとに 1 つの組 $`(a^*, \beta)`$ の話で、$`\kappa_C`$ より下では予想 CORE-2 と同値。残りは PIN と LOW）。
   Σ2-GAP、INC、W(C)、(R)、AGR、$`\beta_0 = \infty`$ も未解決。定理 CC とすべての証明書は $`R_2^C`$ の話。
 - **$`\theta_0`$ より下の下界**（査読：この目標に向けた止める穴。本文の誤りではない。$`V_3`$ より上の標本の決まらない 26 個の極限の
-  跳びは今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §1）：$`\theta_0`$ 未満のすべての
+  跳びは今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §1。SRO より下の段は今は標本の 3,166 個のうち 459 個で、すべての $`n`$ で証明済み、
+  [FANFREE-ja.md](FANFREE-ja.md) §7.1）：$`\theta_0`$ 未満のすべての
   $`\varepsilon`$ 数の項から SRO 未満の標準形のトリオ行列への順序を保つ埋め込み $`\mu`$ と、SRO 未満のすべての行列での
   S-RED の局所的な段。$`G_B`$ の外に 4 つの族がある：(M1) 項の中の非可算な $`\kappa`$、$`c`$、$`g`$。(M2)
   $`\Omega_{\xi+1}`$ のような後続の添字。(M3) $`\Omega_{\Omega_\omega}`$ のような非可算な添字。(M4) $`\psi_{\Omega_1}(\Omega_\omega)`$ より下の土台
@@ -494,7 +502,8 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
         - (R) は $`\kappa_C \le_1^S \Omega_1`$ と同値、AGR は (E) かつ (R) と同値 — 証明済み（R-OM）
     - B1 どの長さ $`n`$ でも、$`\psi_{\Omega_1}(I_\omega)`$ より下の鎖を InaccPsi の値で具体的に書く — 未解決。評価には組 1 つともう 1 点で
       足りる（CRIT、[COVER-ja.md](COVER-ja.md) §6.2）が、$`x_F`$ や $`c_0`$ を押さえる InaccPsi の項は証明されていない
-      （$`n = 3`$ の予想は §3）。$`m_F`$ の評価は組の列の 1 本の列の評価（[FANFREE-ja.md](FANFREE-ja.md) §4）
+      （$`n = 3`$ の予想は §3）。$`m_F`$ の評価は組の列の 1 本の列の評価（[FANFREE-ja.md](FANFREE-ja.md) §4）。評価 $`\iota(\mathrm{CH}_2) \lt t`$ は、ちょうど
+      $`t`$ より下の 1 点での 3 つの関係（[FANFREE-ja.md](FANFREE-ja.md) §7.4）
     - B2 $`R_2^+`$ での $`\lt_2`$ の有限集合による判定 — 証明済み（T1、T2）。一様な形（すべての $`k`$ に 1 つの写し）が
       必要条件でもあるかは $`R_2^+`$ で未解決（+ の無い $`R_2`$ では成り立つと Wilken 2021, 6 ページが言う）
     - B3 $`0, +, \le, \le_1, \le_2`$ を保つ基の付け替え — $`R_2^+`$ が骨組み型の所で証明済み（定理 FRAG2。FRAG そのものも
@@ -528,7 +537,7 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
     - A5 上限より下のどの項も、あるパターンの値 — 未解決
     - A6 どこでも $`R_2^S = R_2^C`$ — 未解決（$`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$ より下では一致）。その最初の場合 $`\nu_C = \nu_S`$ は 1 つの $`\Sigma_2`$ の
       命題（EQ）で、最初のブロックで証明済みの区間の条件 SC から出る（[COVER-ja.md](COVER-ja.md) §6.3）。SC は各区間の最初の部分で
-      概略の水準で成り立つ（[FANFREE-ja.md](FANFREE-ja.md) §3）
+      概略の水準で成り立ち（[FANFREE-ja.md](FANFREE-ja.md) §3）、今は臨界な添字の最初の極限より下で証明済み（[FANFREE-ja.md](FANFREE-ja.md) §7.3）
     - A7 $`R_1^+`$ の相対化したパターンと、順序数とパターンの間の一様な対応（Wilken が予告） — 証明済み（RC-PIN、RC、U、
       UNIF。[PINS-ja.md](PINS-ja.md) §1。閉包は有限（CL-FIN）で、具体的なピンのパターン（EXPL）、[BREAK-ja.md](BREAK-ja.md) §4）。
       対応が初等再帰的であること — 概略だけ
@@ -538,7 +547,8 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       MU-0 と MU-B0 も（段 0 の (M4)。核には何も足さない）。残り：段 1 以上の (M4)、(M1)–(M3)、SRO 未満での局所的な段
       — 未解決（これらがあれば最初の扇に到達不能基数が要る、RED-HM、[COVER-ja.md](COVER-ja.md) §5.3）。SRO でのいちばん上の段と、いくつかの
       一様な段の族 — 具体的なパターンについて証明済み（[COVER-ja.md](COVER-ja.md) §6.1）。$`V_3`$ より上の標本の決まらない
-      26 個の極限の跳び — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §1）。SRO より下のすべての行列での段と、すべての項の上の行列を使わない写像 — 未解決
+      26 個の極限の跳び — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §1）。SRO より下の標本の 3,166 個のうち 459 個（IDX-ADD を含む）での、すべての $`n`$ での段 — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §7.1）。
+      SRO より下のすべての行列での段と、すべての項の上の行列を使わない写像 — 未解決（値が L1p の無いパターンなら $`\iota(\mathrm{CH}_2) \ge \theta_0`$ が出る、[FANFREE-ja.md](FANFREE-ja.md) §7.2）
     - L-CERT $`[\theta_0, \psi_{\Omega_1}(I_0))`$ とその上 — 未解決
     - L-BMS $`\Phi_3`$ を通す道 — 止まっている：DOM₂ により、長さ 3 の鎖の無い $`\Phi_3`$ のパターンは $`m_3`$ より下にとどまり、
       $`\Phi_3`$ が出力する関係にはそういう鎖が決して無い（定理 A、証明済み。閉じた関係では BAR_R、確認済み）
@@ -700,7 +710,7 @@ $`m_3 \lt \min C^*_3`$ より下。以前の 8 個の証明書は、もう要ら
 $`R_2^+`$ そのものについては、Lean には何も無い。$`\upsilon_{\omega^3}`$ より上の結果は 2 ページ目
 [RESTARTS-ja.md](RESTARTS-ja.md) に、$`\Xi_\omega`$ より上の結果は 3 ページ目 [REACHES-ja.md](REACHES-ja.md) に、$`\Lambda_\varepsilon`$ より先の
 結果は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、骨組みが終わる所とその上の段の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、
-被覆に対する最小性による結果と段 0 の記述（5 回目から 7 回目）は 6 ページ目 [COVER-ja.md](COVER-ja.md) に、8 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md) にある。
+被覆に対する最小性による結果と段 0 の記述（5 回目から 7 回目）は 6 ページ目 [COVER-ja.md](COVER-ja.md) に、8 回目と 9 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md) にある。
 
 ## 8. 文献
 

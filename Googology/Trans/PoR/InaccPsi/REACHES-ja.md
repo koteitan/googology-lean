@@ -6,7 +6,7 @@
 **証明済み**は、独立した査読者が、致命的な点も止める点も無く証明済みと判定したもの。このページの結果はどれも
 2026-10 のもの。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの論文がその結果を証明し、それぞれが
 1 回ずつ査読されたこと。次の回の結果（相対化したピン、$`\Theta_A`$ までの正確な届く先、$`\Lambda_\varepsilon`$ までの名前、
-長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目から 7 回目の結果は 6 ページ目 [COVER-ja.md](COVER-ja.md)、8 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md) にある。
+長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目から 7 回目の結果は 6 ページ目 [COVER-ja.md](COVER-ja.md)、8 回目と 9 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md) にある。
 それによってここのいくつかの状態が変わった。
 変わった所には印を付けた。
 
@@ -41,7 +41,8 @@ $`t(\rho_\lambda) + 1`$ の上限。$`\Lambda_\varepsilon`$ は、その下で $
   $`\lambda = \lambda_0 + \omega^e`$ なら $`O(\lambda) = -1 + e`$。$`\gamma = \gamma(\lambda) \ge 1`$ で $`\lambda = V_\gamma(\alpha)`$ なら
   $`O(\lambda) = \rho_\lambda\cdot\gamma + \mathrm{logend}(\alpha)`$。また $`O(\Lambda_\Gamma) = \omega^{\rho\cdot 2}`$。だから $`\Lambda_\Gamma \lt \Lambda_\varepsilon`$。今は（[FANFREE-ja.md](FANFREE-ja.md) §3、定理 GEN-OFF）、
   どの $`\gamma \lt \lambda`$ でも $`V_\gamma`$ の値域に入る、ということの無い、$`\nu`$ より下のどのやり直しの添字でも、形式的な届く先の再帰で同じ式が
-  成り立つ（$`\gamma(\lambda) = 0`$ で証明済み、$`\gamma(\lambda) \ge 1`$ で概略）。
+  成り立つ（$`\gamma(\lambda) = 0`$ で証明済み、$`\gamma(\lambda) \ge 1`$ で概略）。今は（査読 1 回、定理 LAYERS、[FANFREE-ja.md](FANFREE-ja.md) §7.3）全部が証明済みで、$`\upsilon`$ の上の
+  すべての層に広がった：$`\nu`$ より下のどのやり直しの点も、臨界な添字の極限を除いて届く先が分かる。
 - **補題 RS$`_\lambda`$**（証明済み、査読 2 回）。どのやり直しの添字 $`\lambda \le \Xi_\omega`$ でも、$`R`$ で
   $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + c^*(\lambda)`$。これは BLK$`^O`$ と OFF-V から出る。もう 1 つの証明は §3 の定理 EXACT。
 - **定理 EXACT と OFF-k**（証明済み、査読 1 回。正確な届く先の、独立したもう 1 つの証明）。基の付け替えで定めた
@@ -218,4 +219,4 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
 - $`C^*_3`$：上半分（生成した構造の順序数解析）、下半分 $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$、予想 CH。$`R_2^C`$ では鎖の底は今は特徴づけられた
   （定理 CP3、[COVER-ja.md](COVER-ja.md) §1）が、場所は決まっていない。上からの評価には、その下の $`\lt_2`$ の組 1 つと、その間の
   もう 1 点があれば足りる（補題 CRIT、[COVER-ja.md](COVER-ja.md) §6.2）が、$`c_0`$ を押さえる InaccPsi の項は証明されていない。
-- $`V_3`$ より上での変換器の順序の命題 S（標本の決まらない隣り合う組 26 個は今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §1）。
+- $`V_3`$ より上での変換器の順序の命題 S（標本の決まらない隣り合う組 26 個は今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §1。SRO より下の段は標本の 3,166 個のうち 459 個ですべての $`n`$ で証明済み、[FANFREE-ja.md](FANFREE-ja.md) §7.1）。

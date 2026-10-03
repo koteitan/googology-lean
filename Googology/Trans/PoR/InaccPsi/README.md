@@ -119,7 +119,13 @@ undecided limit jumps of the lower-bound sample are proved; $`m_F`$ is the limit
 pairs, so the first fan needs an inaccessible iff one of these chains has its point at or above $`\theta_0`$ (and $`FF_N`$ is the same
 hypothesis), and an upper bound for $`m_F`$ is a bound for that one sequence; a map without matrices is built on the index family
 below $`\varepsilon_0`$, but the proof of its order has a gap; and the reaches of restarts correspond between the segments of level 2 on
-the initial part of each segment, at outline level only. $`C^*_3`$ lies below $`\omega_1^{CK}`$ (Carlson 2009, Thm 15.2), but it still has
+the initial part of each segment, at outline level only. The same page has the ninth round (1 review each): the step of the
+lower-bound program below SRO is proved for every $`n`$ on 459 of the 3,166 sample matrices (one earlier gap, IDX-ADD, included), and
+the rest falls into four open classes; the native codes are ordered up to $`\varphi_\omega(0)`$, and every fan-free pattern without the
+configuration L1p lies below the point of $`\mathrm{CH}_2`$, so a map of all terms below $`\theta_0`$ to such patterns would show that the first fan
+needs an inaccessible; the reach of every restart below $`\nu_C`$ is known except at limits of "critical" indices, and the segment
+condition SC is proved up to the first such limit, but $`\nu_C = \nu_S`$ stays open; no InaccPsi upper bound for the point of $`\mathrm{CH}_2`$ is
+proved, and such a bound is exactly three relations at one point above $`\nu_C`$. $`C^*_3`$ lies below $`\omega_1^{CK}`$ (Carlson 2009, Thm 15.2), but it still has
 no upper bound by an InaccPsi term and no name. Above $`\Lambda_\varepsilon`$ both
 halves are open in $`R_2^C`$ (the core part is proved up to $`\nu_C`$), and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$.
 
@@ -259,7 +265,7 @@ $`\kappa_X = \min\{\kappa : \kappa \le_1^X \beta \text{ for all } \beta \ge \kap
   $`\nu_C = \nu_S`$ implies $`o_2 = \omega`$ in $`R_2^S`$, and given NOLIM the two are equivalent ([BREAK.md](BREAK.md) §8.1, 1 review). Now $`\nu_C = \nu_S`$ iff NOLIM and $`o_2 = \omega`$ hold in $`R_2^S`$
   (GHOST-EQ), and NOLIM holds in $`R_2^C`$ (Theorem NOLIM$`^C`$) ([COVER.md](COVER.md) §3 and §5.1, 1 review). Now $`\nu_C = \nu_S`$ iff
   $`x_2 \lt_2^S \nu_C`$, one $`\Sigma_2`$ statement inside the common structure below $`\nu_C`$ (Theorem EQ, [COVER.md](COVER.md) §6.3, 1 review). The condition SC behind it holds on the initial part of each segment of level 2,
-  at outline level only ([FANFREE.md](FANFREE.md) §3).
+  at outline level only ([FANFREE.md](FANFREE.md) §3); now it is proved on the larger part below the first limit of critical indices ([FANFREE.md](FANFREE.md) §7.3).
 - **Lemma UPG.** At a stage of agreement, $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$ when every $`\gamma \lt \alpha`$ lies in an
   isominimal subset of $`\alpha`$ in $`R_2^C`$ (true for $`\alpha = \kappa_C`$ and $`\alpha = \upsilon_{\omega\cdot\omega}`$).
 - **KAPPA and CORE-EQ.** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$, and $`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$. So if
@@ -350,6 +356,8 @@ pointwise least one.
   [COVER.md](COVER.md) §6): $`m_F \gt \nu_C`$; the top step of $`\theta_0`$ and several uniform families of steps are proved by a calculus of
   comparisons between patterns; $`B_F \ge \psi_{I_0}(0)`$ iff $`m_F \ge \theta_0`$ for a name $`m_F = \psi_{\Omega_1}(B_F)`$; the names with $`B_F = I_0`$ are a
   conjecture. Then (1 review each, [FANFREE.md](FANFREE.md) §4): $`m_F`$ is the limit of the points of the chains of pairs $`\mathrm{CH}_k`$, and $`\sigma_N = m_F`$.
+  Then (1 review each, [FANFREE.md](FANFREE.md) §7.2 and §7.4): every fan-free pattern without the configuration L1p lies below $`\iota(\mathrm{CH}_2)`$, and
+  $`\iota(\mathrm{CH}_2) \lt t`$ holds exactly when one point $`a \lt t`$ has $`a \lt_2 b`$, a pair $`c \lt_2 d`$ with $`b \lt c`$, and $`a \le_1 d`$.
   Earlier:
   $`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$.
 - **Lemma TOP2** (2026-10, 1 review). For every $`\alpha \lt m_3`$ there is a chain $`x \lt_2 y`$ of length 2 with
@@ -441,14 +449,15 @@ pointwise least one.
 **Not proved:**
 
 - **The claim above $`\Lambda_\varepsilon`$** in $`R_2^C`$, and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$, both halves. The reaches of the restarts
-  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [FANFREE.md](FANFREE.md) §7, [COVER.md](COVER.md) §9, [BREAK.md](BREAK.md) §10, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
+  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [FANFREE.md](FANFREE.md) §10, [COVER.md](COVER.md) §9, [BREAK.md](BREAK.md) §10, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
 - **$`R_2^S = R_2^C`$**: the converse $`C \Rightarrow S`$ for $`\le_1`$ at a successor stage $`\beta \gt \kappa_C`$ with
   $`\alpha \notin G_C`$, and for $`\le_2`$ at stages of type (ii) (this needs an upward transfer of $`\Pi_2`$ sentences, which
   neither upward 2-reflection nor liftings give; it is now one pair $`(a^*, \beta)`$ per stage, and below $`\kappa_C`$ it is
   Conjecture CORE-2; left: PIN and LOW); Σ2-GAP, INC, W(C), (R), AGR, and $`\beta_0 = \infty`$. Theorem CC and all
   certificates are about $`R_2^C`$.
 - **The lower bound below $`\theta_0`$** (referee: blocking gap toward this goal, not an error; the 26 undecided limit jumps of
-  the sample above $`V_3`$ are now proved, [FANFREE.md](FANFREE.md) §1): an order embedding
+  the sample above $`V_3`$ are now proved, [FANFREE.md](FANFREE.md) §1; the step below SRO is now proved for every $`n`$ on 459 of the 3,166 sample
+  matrices, [FANFREE.md](FANFREE.md) §7.1): an order embedding
   $`\mu`$ of all $`\varepsilon`$-number terms below $`\theta_0`$ into standard trio matrices below SRO, and the local step
   of S-RED for all matrices below SRO. Outside $`G_B`$ are four families: (M1) uncountable $`\kappa`$, $`c`$ or $`g`$ in a
   summand; (M2) successor indices such as $`\Omega_{\xi+1}`$; (M3) uncountable indices such as $`\Omega_{\Omega_\omega}`$; (M4)
@@ -538,7 +547,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
         - (R) iff $`\kappa_C \le_1^S \Omega_1`$, and AGR iff (E) and (R) — proved (R-OM)
     - B1 explicit chains of every length $`n`$ below $`\psi_{\Omega_1}(I_\omega)`$ as InaccPsi values — open; a bound needs only one pair with one
       more point (CRIT, [COVER.md](COVER.md) §6.2), but no InaccPsi term is proved to bound $`x_F`$ or $`c_0`$
-      (conjecture for $`n = 3`$ in §3); a bound for $`m_F`$ is a bound for one sequence of chains of pairs ([FANFREE.md](FANFREE.md) §4)
+      (conjecture for $`n = 3`$ in §3); a bound for $`m_F`$ is a bound for one sequence of chains of pairs ([FANFREE.md](FANFREE.md) §4); a bound $`\iota(\mathrm{CH}_2) \lt t`$ is exactly three
+      relations at one point below $`t`$ ([FANFREE.md](FANFREE.md) §7.4)
     - B2 a finite-set test for $`\lt_2`$ in $`R_2^+`$ — proved (T1, T2); whether the uniform form (one copy for all
       $`k`$) is also necessary is open in $`R_2^+`$ (Wilken 2021, p. 6, says it is for pure $`R_2`$)
     - B3 base changes that keep $`0, +, \le, \le_1, \le_2`$ — proved where $`R_2^+`$ is skeletal (Theorem FRAG2; FRAG itself is
@@ -573,7 +583,7 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
     - A5 every term below the bound is the value of a pattern — open
     - A6 $`R_2^S = R_2^C`$ everywhere — open (known below $`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$); its first case $`\nu_C = \nu_S`$ is one $`\Sigma_2`$ statement
       (EQ), implied by a segment condition SC that is proved on the first block ([COVER.md](COVER.md) §6.3), and on the initial part of each
-      segment at outline level ([FANFREE.md](FANFREE.md) §3)
+      segment at outline level ([FANFREE.md](FANFREE.md) §3), now proved below the first limit of critical indices ([FANFREE.md](FANFREE.md) §7.3)
     - A7 relativized patterns of $`R_1^+`$ and uniform assignments between ordinals and patterns (announced by Wilken) —
       proved (RC-PIN, RC, U, UNIF; [PINS.md](PINS.md) §1; the closures are finite, CL-FIN, and are explicit pin patterns, EXPL,
       [BREAK.md](BREAK.md) §4); that the assignments are elementary recursive — outline only
@@ -583,7 +593,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       also MU-0 and MU-B0 ((M4) at level 0; adds nothing to the core); left: (M4) at level $`\ge 1`$, (M1)–(M3), and the
       local step below SRO — open (with them the first fan needs an inaccessible, RED-HM, [COVER.md](COVER.md) §5.3); the top step at SRO
       and several uniform families of steps — proved for explicit patterns ([COVER.md](COVER.md) §6.1); all 26 undecided limit jumps of the
-      sample above $`V_3`$ — proved ([FANFREE.md](FANFREE.md) §1); the step for all matrices below SRO, and a map without matrices on all terms — open
+      sample above $`V_3`$ — proved ([FANFREE.md](FANFREE.md) §1); the step for every $`n`$ on 459 of the 3,166 sample matrices below SRO, IDX-ADD among them — proved ([FANFREE.md](FANFREE.md) §7.1); the step for all
+      matrices below SRO, and a map without matrices on all terms — open (with values without L1p it would give $`\iota(\mathrm{CH}_2) \ge \theta_0`$, [FANFREE.md](FANFREE.md) §7.2)
     - L-CERT on $`[\theta_0, \psi_{\Omega_1}(I_0))`$ and above — open
     - L-BMS through $`\Phi_3`$ — blocked: by DOM₂ a pattern of $`\Phi_3`$ without a chain of length 3 stays below $`m_3`$,
       and the output relation of $`\Phi_3`$ never has such a chain (Theorem A, proved; for the closure, BAR_R, checked)
@@ -752,7 +763,7 @@ needs "$`\Phi_3(M)`$ is a pattern" (open), and it is about $`R_2^C`$ only.
 Nothing about $`R_2^+`$ itself is in Lean. The results above $`\upsilon_{\omega^3}`$ are on the second page
 [RESTARTS.md](RESTARTS.md), those above $`\Xi_\omega`$ on the third page [REACHES.md](REACHES.md), those beyond $`\Lambda_\varepsilon`$ on
 the fourth page [PINS.md](PINS.md), and those where the skeleton ends, with the levels above it, on the fifth page [BREAK.md](BREAK.md), and the
-results by covering minimality and the level-0 description (the fifth to seventh rounds) on the sixth page [COVER.md](COVER.md), and the eighth round on the seventh page [FANFREE.md](FANFREE.md).
+results by covering minimality and the level-0 description (the fifth to seventh rounds) on the sixth page [COVER.md](COVER.md), and the eighth and ninth rounds on the seventh page [FANFREE.md](FANFREE.md).
 
 ## 8. References
 
