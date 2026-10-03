@@ -6,7 +6,7 @@
 **証明済み**は、独立した査読者が、致命的な点も止める点も無く証明済みと判定したもの。このページの結果はどれも
 2026-10 のもの。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの論文がその結果を証明し、それぞれが
 1 回ずつ査読されたこと。次の回の結果（相対化したピン、$`\Theta_A`$ までの正確な届く先、$`\Lambda_\varepsilon`$ までの名前、
-長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目の結果は 6 ページ目 [COVER-ja.md](COVER-ja.md) にある。
+長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目と 6 回目の結果は 6 ページ目 [COVER-ja.md](COVER-ja.md) にある。
 それによってここのいくつかの状態が変わった。
 変わった所には印を付けた。
 
@@ -157,7 +157,7 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
   [BREAK-ja.md](BREAK-ja.md) §7.3）：$`\nu_S`$ の名前は $`\upsilon`$ の添字の 3 つの命題と同じになり、$`\nu_C = \nu_S`$ は $`R_2^S`$ だけの問いで、それについての
   2 つの命題に帰着した。さらに（どれも査読 1 回、[BREAK-ja.md](BREAK-ja.md) §8）：その 1 つ $`o_2 = \omega`$ は $`R_2^C`$ で証明済みで、そこでは
   $`\nu_C = \upsilon^2_{\omega+1}`$。$`\nu_C = \nu_S`$ から $`R_2^S`$ での $`o_2 = \omega`$ が出る。もう 1 つ、$`\nu_P`$ より上の NOLIM は隙間ごとの 1 つの命題に
-  帰着した。そのあと（どれも査読 1 回、[COVER-ja.md](COVER-ja.md) §3）：NOLIM は $`R_2^C`$ で成り立ち（概略の段階）、$`\nu_C = \nu_S`$ は $`R_2^S`$ での NOLIM と
+  帰着した。そのあと（どれも査読 1 回、[COVER-ja.md](COVER-ja.md) §3）：NOLIM は $`R_2^C`$ で成り立ち（[COVER-ja.md](COVER-ja.md) §5.1 から証明の段階）、$`\nu_C = \nu_S`$ は $`R_2^S`$ での NOLIM と
   $`o_2 = \omega`$ と同じ。$`\nu_C = \nu_S`$ はまだ未解決。
 
 ## 5. 長さ 3 の最小の鎖
@@ -205,7 +205,7 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
 ## 7. 未解決
 
 - $`\Theta_A`$ より上の正確な届く先（$`T_\omega`$ より下のどの基の上でも、その基の上で走らせた形式的な届く先の再帰に従う。
-  概略だけ、[BREAK-ja.md](BREAK-ja.md) §7.1）。$`\Theta_A`$ までの届く先と、$`[\Lambda_\Gamma, \Lambda_\varepsilon)`$ での $`O`$ の閉じた形は、今は
+  今は証明済み、査読 1 回、[COVER-ja.md](COVER-ja.md) §5.1）。$`\Theta_A`$ までの届く先と、$`[\Lambda_\Gamma, \Lambda_\varepsilon)`$ での $`O`$ の閉じた形は、今は
   証明済み（[PINS-ja.md](PINS-ja.md) §2–3）。
 - $`\nu_C`$ より上の $`R_2^C`$（$`R_2^C`$ の核は今は $`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ を含む、[BREAK-ja.md](BREAK-ja.md) §2）。INC1-nonups と INC1-S は今は
   証明済み（[BREAK-ja.md](BREAK-ja.md) §1）。

@@ -4,10 +4,11 @@
 
 This page continues [BREAK.md](BREAK.md). The status words are those of [README.md](README.md) §3: **proved** means that an
 independent referee found the result proved with no fatal or blocking point. All results on this page are from 2026-10. They
-come from the fifth round: four papers, each refereed once. "1 review" means one referee. "2 reviews" means that two
-independent papers proved the result and each paper was refereed once. A statement that its referee found not proved is
-listed under **Not proved**, even when the rest of its paper is proved. All four papers use Carlson's minimality against
-coverings (Carlson 2009, Thm 14.10(2)), the tool of [BREAK.md](BREAK.md) §8.1. None of them uses Wilken, JSL 72 (2007), Carlson,
+come from two rounds of four papers, each paper refereed once: the fifth round (§1–§4) and the sixth round (§5). "1 review"
+means one referee. "2 reviews" means that two independent papers proved the result and each paper was refereed once. A
+statement that its referee found not proved is listed under **Not proved**, even when the rest of its paper is proved. The
+papers of the fifth round, and three of the sixth, use Carlson's minimality against coverings (Carlson 2009, Thm 14.10(2)),
+the tool of [BREAK.md](BREAK.md) §8.1. None of them uses Wilken, JSL 72 (2007), Carlson,
 AML 38 (1999), Wilken, AML 45 (2006), or the equivalence of Carlson's definition with $`\Sigma_n`$-elementarity that Carlson 2009, p. 97,
 announces. No result on this page is in Lean; the one Lean lemma used is Lemma CONT (`psi_one_iSup`, [README.md](README.md) §3).
 
@@ -99,12 +100,12 @@ whose least realization is the least fan ([BREAK.md](BREAK.md) §7.4); PTm is PT
   $`t_s`$ and an indecomposable in $`(s, t_s)`$.
 - **Conjecture** $`o_F = \omega^2`$, that is $`x_F = v_{\omega^2}`$. The paper reduces it to an "interior copy" statement about the gaps. The
   implication is proved, but the referee shows that the statement fails at every limit member below $`x_F`$, so the reduction only
-  restates the conjecture.
+  restates the conjecture. **Now proved** by another route (Theorem OF, §5.2, 1 review).
 - **The inaccessible.** Let $`H_m`$ be the hypothesis $`m_F \ge \theta_0`$, that is, the point of $`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)) is $`\ge \theta_0`$.
   Proved (1 review): $`FF_N \Rightarrow H_m \Rightarrow x_F \gt \theta_0`$; POINT-SRO $`\Rightarrow H_m`$, from the replayed certificate
   $`\Phi_3(\mathrm{SRO}) \lt \Phi_3`$((0,0,0)(1,1,1)(2,2,1)); and if the point of $`\Phi_3(\mathrm{SRO})`$ is $`\theta_0`$ (the conjecture of [README.md](README.md) §3),
   then $`m_F \gt \theta_0`$ (from replayed certificates). So whether the first fan needs an inaccessible is one statement about one
-  matrix. Open; conjecture: yes.
+  matrix. Open; conjecture: yes. Now $`H_m`$ has an exact equivalent, with no matrix in it (§5.3).
 - **Not proved** (blocking point, side claim only). That $`m_F \gt \theta_0`$ refutes a candidate name of the least fan built over the base
   $`\psi_{I_0}(0)`$. The candidate names only $`x_F`$, $`y_1`$, $`y_2`$; the argument adds a clause about its root that the candidate does not
   contain.
@@ -116,19 +117,20 @@ Notation of [BREAK.md](BREAK.md) §7.3 and §8.4: $`U_2`$, its gaps $`(g, g^+)`$
 - **Lemma PIN-LH** (proved, 1 review; $`R_2^C`$). If $`Z`$ is isominimal, $`b \in Z`$ and $`\mathrm{lh}(b)`$ exists, then $`\mathrm{lh}(b) \in Z`$.
 - **Lemma FRAG2→** (proved, 1 review). A FRAG map that satisfies the conditions of FRAG2 ([RESTARTS.md](RESTARTS.md) §2) in the forward direction
   only, on a finite set where the structure is skeletal, is a covering onto its image.
-- **Lemma BLOCK-MOVE** (proved at outline level, 1 review; it rests on SKEL⁺; $`R_2^C`$). Let $`Z`$ be finite and closed, $`b \in Z`$ an AP restart with
+- **Lemma BLOCK-MOVE** (proved, 1 review; $`R_2^C`$). It used SKEL⁺, which the referee accepted only at outline level; SKEL⁺ now has a
+  complete proof (§5.1). Let $`Z`$ be finite and closed, $`b \in Z`$ an AP restart with
   $`h = \mathrm{lh}(b) \lt \nu`$, and $`b`$ a LIM point. Then $`Z`$ has a covering $`f^+ \le \mathrm{id}`$ onto a closed set with $`f^+(b) \lt b`$. It is the identity on
   $`Z \cap b`$ and above $`h`$; on $`Z \cap [b, h]`$ it is a FRAG map that sends the restart regions met by $`Z`$ to the regions of a $`K`$-chain
   $`c_1 \lt_1 \cdots \lt_1 c_K`$ below $`b`$, offset for offset. The reach of a moved restart is never used: every image lies below
   $`\mathrm{lh}(c_K) \le \mathrm{lh}(c_i)`$.
-- **Theorem NOLIM$`^C`$** (proved at outline level, 1 review; it rests on SKEL⁺). In $`R_2^C`$ no point of $`(0, \nu) \setminus U_2`$ is a LIM point. So
+- **Theorem NOLIM$`^C`$** (proved, 1 review; through SKEL⁺, §5.1). In $`R_2^C`$ no point of $`(0, \nu) \setminus U_2`$ is a LIM point. So
   $`b^*(g) = g^+`$ in every gap (ITER), and the LIM points in $`(0, \nu]`$ are exactly the members of $`U_2`$. Proof: such a $`b`$ is in the core,
   so in an isominimal set; it is a restart with $`\mathrm{lh}(b) \lt \nu`$; BLOCK-MOVE moves it down by a covering, against Carlson 2009,
   Thm 14.10(2). The referee gave a shorter proof: the same map checks Carlson 2009, Def 5.3, clause 1 for $`b \le_1 \beta`$ for every
   $`\beta \lt \nu`$, so $`b \le_1 \nu`$ and $`b \in U_2`$, with no core bound and no Thm 14.10.
-- **Corollary LL$`^C`$** (proved at outline level, 1 review). In $`R_2^C`$ the supremum of an infinite $`\lt_1`$-chain of restarts below $`\nu`$ is in $`U_2`$
+- **Corollary LL$`^C`$** (proved, 1 review; through SKEL⁺, §5.1). In $`R_2^C`$ the supremum of an infinite $`\lt_1`$-chain of restarts below $`\nu`$ is in $`U_2`$
   (the statement LL of [BREAK.md](BREAK.md) §7.3).
-- **$`R_2^S`$** (proved at outline level, 1 review). (a) With no ghost (case (A) of NU-CT), NOLIM holds in $`R_2^S`$ on $`(0, \nu_S)`$. (b) With a
+- **$`R_2^S`$** (proved, 1 review; through SKEL⁺, §5.1). (a) With no ghost (case (A) of NU-CT), NOLIM holds in $`R_2^S`$ on $`(0, \nu_S)`$. (b) With a
   ghost, every LIM point of $`R_2^S`$ in $`(0, \beta_0)`$ is in $`U_2`$ of $`R_2^C`$; so in cases (P3a) and (P3b) of LOCATE, NOLIM holds in $`R_2^S`$ on
   $`(0, \beta_0)`$. (c) **GHOST-EQ**: $`\nu_C = \nu_S`$ iff NOLIM holds in $`R_2^S`$ and $`o_2 = \omega`$ in $`R_2^S`$. (d) If NOLIM holds in $`R_2^S`$, the only possible
   ghost is case (P3b) (proved, 2 reviews with [BREAK.md](BREAK.md) §8.1).
@@ -166,17 +168,144 @@ S-covering of it (the $`R_2^S`$ form of Thm 14.10(2)).
   known $`R_2^S`$ form.
 - **Open**: PINNING (equivalently: is $`\mathrm{Core}_C(R_2^S)`$ an initial segment up to $`\nu_S`$?), and $`o_k = \omega`$ in $`R_2^S`$ for $`k \ge 2`$.
 
-## 5. Status after this round
+## 5. The sixth round
 
-- The least chain of length 3 ($`R_2^C`$): characterized (CP3, LEAST3), not located. Only lower bounds are known (§1); no upper
-  bound and no name. Whether $`C^*_3`$ needs an inaccessible: open; yes given $`FF_{cl}`$, or given $`H_m`$.
-- The least fan ($`R_2^C`$): its structure is fixed except the order type $`o_F`$ (conjecture $`\omega^2`$). Whether it needs an inaccessible
-  is the one statement $`H_m`$: open.
-- NOLIM: proved in $`R_2^C`$ at outline level. In $`R_2^S`$ it is open above $`\nu_P`$, and $`\nu_C = \nu_S`$ is equivalent to NOLIM and $`o_2 = \omega`$ in
-  $`R_2^S`$.
-- $`o_k = \omega`$ in $`R_2^S`$ ($`k \ge 2`$): open, reduced to the global MIN$`^S`$ and PINNING.
+Four papers, each refereed once. The papers number the levels one lower than these pages; here they are renumbered, so the
+first block of nested pairs above $`\nu`$ is level 2, as in §4.
 
-## 6. Checks
+### 5.1 The level-0 description of $`R_2^S`$ at every countable ordinal (SKEL⁺ in full)
+
+Words of [BREAK.md](BREAK.md) §2 and §7.1. A **restart** is $`\upsilon_\lambda`$ with $`\lambda`$ a nonzero multiple of $`\omega^2`$. A **block** is the interval from one
+$`\delta`$-point $`\upsilon_{\lambda+\omega j+1}`$ to the next, or from a restart to its first $`\delta`$-point; its **top** is its right end point. A standard
+pair has the form $`(\upsilon_{\lambda+\omega j}, \upsilon_{\lambda+\omega j+1})`$ ([BREAK.md](BREAK.md), Notation).
+
+- **Theorem SKEL$`^\infty`$** (proved, 1 review; $`R_2^S`$; no FRAG). For every countable ordinal $`b`$:
+  (D0) if $`a \lt_2 b`$ and $`a`$ is not a restart, then $`(a, b)`$ is a standard pair; if $`a`$ is a restart, then $`b`$ is a restart and some
+  standard pair lies strictly inside $`(a, b)`$;
+  (D1) if $`a \lt b`$ is not a restart, then $`a \le_1 b`$ iff $`b`$ is at most the top of the block of $`a`$ and $`a \le_1 b`$ in $`R_1^+`$;
+  (D2) a restart that is not a right end is $`\le_1`$ the top of its first block;
+  (D3) every standard pair is a $`\lt_2`$-pair.
+  The proof is one induction on $`b`$. It never computes a reach of a restart: a restart $`z`$ enters only through the facts
+  $`z \le_1 y`$, which are true for $`y \le \mathrm{lh}(z)`$ and false above. It does not use the stopping point $`\nu_{new}`$. The referee found one
+  minor gap (in the comparison lemma the reach of the bottom of the block must be added to the parameters) and gave the fix.
+- **Consequences** (proved, 1 review; $`R_2^S`$, every countable ordinal). The $`\lt_1`$-predecessors of $`\alpha`$ are the restarts $`z \lt \alpha`$ with
+  $`\mathrm{lh}(z) \ge \alpha`$ and the points $`g`$ of the block of $`\alpha`$ with $`g \lt_1 \alpha`$ in $`R_1^+`$. INC1-S, LEFT, and **RIGHT**: every pair is a
+  standard pair or joins two restarts, so every right end is a $`\upsilon`$-point. So Conjecture RIGHT-ISO of [BREAK.md](BREAK.md) §1 is proved in $`R_2^S`$.
+- **SKEL⁺** (proved, 1 review). The statement of [BREAK.md](BREAK.md) §2 on $`[0, \nu_{new})`$, with one correction of wording: "the reach of a restart
+  is closed in $`R_1^+`$" needs that reach to be below the top of its block. Also $`\nu_{new} \lt \omega_1`$, $`\nu_{new}`$ is a restart whose left end
+  is a restart, and $`\nu_{nest} = \nu_{new}`$. The paper of [BREAK.md](BREAK.md) §2 was accepted only at outline level; this is the first proof
+  refereed at proof level.
+- **SKEL$`^\omega`$** (proved, 1 review). The statement of [BREAK.md](BREAK.md) §7.1, with the same correction in its clause on reaches. Below
+  $`\Theta_P`$ the correction changes nothing: there the reach of a restart is below twice its first $`\delta`$-point.
+- **$`R_2^C`$** (proved, 1 review). D0–D3 hold in $`R_2^C`$ below $`\beta_0`$, so RIGHT holds there for right ends below $`\beta_0`$. SKEL⁺ holds in $`R_2^C`$
+  on $`[0, \nu_C)`$ with no hypothesis ([BREAK.md](BREAK.md) §2 had HC and INC1-nonups), and SKEL$`^\omega`$ below the smaller of $`\beta_0`$ and $`T_\omega`$.
+- **Results that used SKEL⁺ or SKEL$`^\omega`$** are now proved (1 review each; each review had found that this was their only input at
+  outline level): Theorem HR (a), (c) ([BREAK.md](BREAK.md) §8.2); Theorem RED and its corollary ([BREAK.md](BREAK.md) §8.3); Lemma CH ([BREAK.md](BREAK.md) §8.4);
+  BLOCK-MOVE, NOLIM$`^C`$, LL$`^C`$ and the $`R_2^S`$ items of §3, among them GHOST-EQ; TAIL, TAIL-GAP, TOP and the clauses of the level-2
+  structure theorem on level 1 and on reaches ([BREAK.md](BREAK.md) §7.1; equality in TAIL and the lower bound in TOP use FRAG, which is
+  proved); and "$`T_\omega`$ is a restart, a limit of $`\mathrm{Top}_k`$ for every $`k`$, and its block 0 is standard" ([BREAK.md](BREAK.md) §7.1). The referee of this
+  round checked the reviews of the first four; the items of [BREAK.md](BREAK.md) §7.1 rest on the earlier review alone. Not changed: "given
+  FRAG, $`T_\omega \le_1 \rho_{T_\omega+\omega^2}`$" is still not proved, although its missing input (the whole region of $`T_\omega`$ is standard) is now
+  proved; no value of a reach; $`\nu_C = \nu_S`$.
+
+### 5.2 The least fan has order type $`\omega^2`$ ($`R_2^C`$)
+
+Notation of §2.
+
+- **Lemma BT** (block transfer; proved, 1 review). Let $`Z`$ be finite and closed, $`s \in Z`$ AP with $`s \lt_2 t`$, and let $`\alpha \lt_2 t'`$ with
+  $`\max(Z \cap s) \lt \alpha`$ and $`t' \lt s`$. Suppose (T1) $`\alpha \le_1 v`$ for every $`v \in Z`$ with $`s \le_1 v`$;
+  (T3) $`t`$ is the only right end of $`s`$ in $`Z`$, and $`t`$ is $`\le_1`$ no larger point of $`Z`$; (T4) the points $`a \lt \alpha`$ with $`a \le_1 b`$ for some
+  $`b \ge t`$ are unbounded in $`\alpha`$. Then $`Z`$ has a covering $`f^+ \le \mathrm{id}`$ onto a closed set with $`f^+(s) = \alpha`$; so $`Z`$ is not isominimal.
+  The new step: the points of $`Z`$ inside $`(s, t)`$ are not copied down together with $`s`$ (the attempt of §2 that failed). They are
+  first 1-reflected below a point $`a`$ of (T4), and then carried up into $`(\alpha, t')`$ by clause 2 of Carlson 2009, Def 5.3 for $`\alpha \le_2 t'`$. The
+  paper has one more condition T2; the referee shows that it follows from T1.
+- **Theorem OF** (proved, 1 review). $`o_F = \omega^2`$, so $`x_F = v_{\omega^2} = \sup_n v_{\omega\cdot n}`$. If $`o_F \gt \omega^2`$, BT applies to $`s = v_{\omega^2}`$ with $`\alpha`$ a limit
+  member and $`t' = t_\alpha`$. This proves the conjecture of §2.
+- **PIN-F⁺** (proved, 1 review). Every isominimal set that contains $`x_F`$ contains both $`y_1`$ and $`y_2`$ (the second case of PIN-F does not
+  occur).
+- **GEN-F** (proved, 1 review). Let $`Q_{n,k}`$ be PT with $`n`$ pairs $`u_1 \lt_2 v_1 \lt \cdots \lt u_n \lt_2 v_n`$ and then $`k`$ points $`w_1 \lt \cdots \lt w_k`$ below $`x`$,
+  each $`u_i`$ and $`w_j`$ $`\le_1`$ every later point. In the least realization, $`u_i = v_{\omega\cdot i}`$, $`w_j = v_{\omega\cdot n+j}`$ for $`n \ge 1`$, and $`w_j = v_{j-1}`$
+  for $`n = 0`$; so $`m_F = v_0`$. Each $`Q_{n,k}`$ comes from PT by downward 2-reflections (Carlson 2009, Def 9.4) of $`\{x, y_1\}`$ (a new pair)
+  and of $`\{x\}`$ (a new member). So every $`\le_1`$-predecessor of $`x_F`$ is the point of an explicit pattern.
+- **Shape** (proved, 1 review). $`V_F`$ is closed with order type $`\omega^2`$. Its left ends are the $`v_{\omega\cdot n}`$ ($`n \ge 1`$); each has exactly one right
+  end $`t_n`$, with $`v_{\omega\cdot n} \lt t_n \lt v_{\omega\cdot n+1}`$ and $`\mathrm{lh}(t_n) = t_n`$. With §2 this fixes the least fan except its names. In pure $`R_2`$
+  the least point with two $`\lt_2`$-successors has the same index $`\omega^2`$ (Wilken 2021, p. 20); the referee notes that this supports only
+  the index.
+- **Names** (conjecture; normal forms and order checked for four bases). With an unknown base $`B_F`$ and $`P_F = \psi_{\Omega_2}(B_F)`$:
+  $`v_{\omega\cdot n} = \psi_{\Omega_1}(B_F + \omega^{P_F+1}\cdot n)`$, $`t_n = \psi_{\Omega_1}(B_F + \omega^{P_F+1}\cdot n + P_F)`$, $`x_F = \psi_{\Omega_1}(B_F + \omega^{P_F+2})`$,
+  $`y_i = \psi_{\Omega_1}(B_F + \omega^{P_F+2} + P_F\cdot i)`$. Lemma CONT makes the name of $`x_F`$ the supremum of those of the $`v_{\omega\cdot n}`$, as OF needs.
+- **Upper bounds** (proved, 1 review). $`c_2 \lt \kappa_C \le \omega_1^{CK}`$ (Carlson 2009, Thm 15.2). As implications: Wilken's claim gives
+  $`c_2 \lt \psi_{\Omega_1}(I_\omega)`$, and the names above with $`B_F \lt I_0`$ give $`y_2 \lt \psi_{\Omega_1}(I_0)`$. No InaccPsi term is proved to bound $`x_F`$, $`f_0`$, $`m_3`$
+  or $`c_0`$: covering minimality bounds a least realization only by other points of $`R_2^C`$, never by a term. Open, conjecture yes:
+  $`c_0 \lt \psi_{\Omega_1}(I_1)`$.
+
+### 5.3 Whether the first fan needs an inaccessible ($`R_2^C`$)
+
+A pattern is **RF** ("right ends without reach") if no right end $`z`$ of a $`\lt_2`$-pair of it is $`\le_1`$ a larger element of it. $`\mathrm{Core}_F`$ is the
+union of the isominimal sets below $`x_F`$. $`FF_{RF}`$ says: every $`\gamma \lt \theta_0`$ lies below the least realization of some RF fan-free
+pattern. $`H_m`$ is $`m_F \ge \theta_0`$ (§2).
+
+- **Theorem DOM_RF** (proved, 1 review). Let $`(x; y_1, y_2)`$ be any fan, open or closed, and $`m \le x`$ with $`m \le_1 y_2`$. Every RF fan-free
+  pattern has its least realization below $`m`$; in particular below $`m_F`$. (DOM_F of [BREAK.md](BREAK.md) §6 needs a closed fan; in an RF pattern the
+  point sent to $`y_1`$ never needs a reach.)
+- **Theorem SHARP_F** (proved, 1 review). $`\mathrm{Core}_F = [0, m_F)`$. So $`m_F`$ is the supremum of the points of the RF fan-free patterns, and of the
+  caps below $`x_F`$.
+- **Corollary** (proved, 1 review). $`H_m \Leftrightarrow FF_{RF} \Leftrightarrow [0, \theta_0) \subseteq \mathrm{Core}_F`$, and $`m_F \gt \theta_0 \Leftrightarrow \theta_0 \in \mathrm{Core}_F`$. Also
+  $`FF_N \Rightarrow FF_{RF}`$. So $`H_m`$ is a lower-bound statement about RF fan-free patterns only; no comparison with a matrix is needed.
+- **Proposition RR** (proved, 1 review). RR $`= \{x \lt_2 y,\ x \le_1 c,\ y \le_1 c\}`$ is fan-free but not RF, and its point is above $`x_F`$. So
+  $`x_F \lt \sigma_F \lt f_0`$ (this settles the open question of [BREAK.md](BREAK.md) §6), and "fan-free caps stay below $`m_F`$" is false; it holds for RF
+  patterns only.
+- **Lower bound** (proved from one program reading, 1 review). $`\Phi_3(V_3)`$ is RF and fan-free, so $`m_F \gt \upsilon_{\omega^3} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+3})`$. The
+  referee adds (not reviewed separately): PS is RF and fan-free, so $`m_F \gt \nu_C`$.
+- **Reduction RED-HM** (proved, 1 review, in the referee's shorter form). The map $`\mu`$ of the lower-bound program below SRO
+  ([README.md](README.md) §3: the families (M1)–(M3) and the bases at level $`\ge 1`$) together with the fundamental-sequence step below SRO
+  gives $`m_F \gt \theta_0`$, so the first fan needs an inaccessible. The paper also assumed RF_SRO (every $`\Phi_3(M)`$ with $`M \le`$ SRO is RF and
+  fan-free; checked, §7). The referee shows that RF_SRO is not needed: the step puts every image below the point of $`\Phi_3(\mathrm{SRO})`$, and
+  that point is below $`m_F`$ (by the replayed certificate $`\Phi_3(\mathrm{SRO}) \lt`$ PTm, or by DOM_RF). POINT-SRO $`\Rightarrow H_m`$ now holds without
+  that certificate (by DOM_RF, reading $`\Phi_3(\mathrm{SRO})`$ as an RF fan-free pattern).
+- **Open**, conjecture yes: the first fan needs $`I_0`$ ($`H_m`$). What is left is exactly the lower-bound program below $`\theta_0`$.
+
+### 5.4 Covering minimality in $`R_2^S`$ up to $`\beta_0`$
+
+Notation of §4, with $`k = 2`$. In case (P3b), $`\beta_0 = s^+ = \upsilon^2_{\omega+1}`$, and the only difference at $`\beta_0`$ is $`s \lt_2 s^+`$ in $`R_2^C`$.
+
+- **Lemma GT** (proved, 1 review). The way to get minimality in $`R_2^S`$ from Carlson 2009, Thm 14.10(2): let $`Z`$ be S-isominimal and let
+  $`P^*`$ be the least realization in $`R_2^C`$ of the pattern of $`Z`$ in $`R_2^S`$. If $`P^*`$ lies pointwise below $`Z`$ and the two structures agree on
+  the relations among the points of $`P^*`$, then $`P^* = Z`$, $`Z`$ is isominimal in $`R_2^C`$, and $`Z`$ lies pointwise below every closed S-covering
+  whose relations hold in $`R_2^C`$.
+- **ISO-EQ** (proved, 1 review; case (P3b)). A finite closed $`Z \subseteq [0, \beta_0]`$ is S-isominimal iff it is isominimal in $`R_2^C`$ and does not
+  contain both $`s`$ and $`s^+`$.
+- **LOCAL⁺** (proved, 1 review; case (P3b)). MIN$`^S`$ holds on the closed interval $`[0, \beta_0]`$ (LOCAL had $`[0, \beta_0)`$). So no S-isominimal
+  subset of $`[0, \beta_0]`$ contains $`s`$, every S-isominimal set that contains $`s`$ has a point $`\gt s^+`$, and Theorem CP holds in $`R_2^S`$ on $`[0, \beta_0]`$.
+- **INCOMP** (proved, 1 review; case (P3b)). On $`[0, \nu_S]`$ neither structure contains the other: $`s \lt_2 s^+`$ holds in $`R_2^C`$ but not in $`R_2^S`$;
+  $`s \le_1 z`$ and $`s^+ \le_1 z`$ hold in $`R_2^S`$ for every $`z \in (s^+, \nu_S]`$ but not in $`R_2^C`$.
+- **NOGO-T** (proved, 1 review; case (P3b)). GT never applies to an S-isominimal set that contains $`s`$, and those are the sets where
+  MIN$`^S`$ is needed for $`o_2 = \omega`$. The referee: in case (P3b) MOVE$`^S`$ already refutes MIN$`^S`$ at those sets, so NOGO-T does not change
+  what has to be proved; and the paper's further claim "any proof must work inside $`R_2^S`$" is a remark about methods, not a theorem.
+- **BLOCK-MOVE$`^S`$, NOLIM-COND$`^S`$ and RED** (proved, 1 review; they used SKEL⁺, now proved, §5.1). BLOCK-MOVE of §3 works in $`R_2^S`$ as an
+  S-covering. MIN$`^S`$ implies that no LIM point of $`R_2^S`$ in $`(0, \nu_S) \setminus U_2`$ is in $`\mathrm{Core}_C(R_2^S)`$. $`\nu_C = \nu_S`$ follows from MIN$`^S`$ and
+  CORE-S, where CORE-S says that every such LIM point, and $`s`$ when $`o_2 \gt \omega`$, is in $`\mathrm{Core}_C(R_2^S)`$ (true if $`\mathrm{Core}_C(R_2^S)`$ is an
+  initial segment). The referee: given CORE-S, the instances of MIN$`^S`$ used are equivalent to the conclusion, so RED has content only
+  through the global MIN$`^S`$.
+- **DESCENT** (proved, 1 review). Carlson's argument of his L.14.6 works in $`R_2^S`$: if every S-covering of $`Z`$ extends to one of $`Z \cup Q`$, then
+  $`Z`$ lies pointwise below $`Q`$. The extension property it needs fails at the same place as DEFECT and NEC (§4).
+- **Not proved** (false as written, repairable). The remark that one "bad pair" pins nothing: its witness $`a = \omega^{\omega^s}`$ equals $`s`$, since $`s`$
+  is an $`\varepsilon`$-number; a correct witness is $`a = \omega^{s\cdot 2}`$.
+
+## 6. Status after the sixth round
+
+- The level-0 description of $`R_2^S`$ holds at every countable ordinal (§5.1). So SKEL⁺, SKEL$`^\omega`$, RIGHT in $`R_2^S`$, NOLIM in $`R_2^C`$, and the
+  results of [BREAK.md](BREAK.md) §7.1 and §8 that used them are proved (1 review each).
+- The least chain of length 3 ($`R_2^C`$): characterized (CP3, LEAST3), not located. Lower bounds (§1), and $`c_2 \lt \omega_1^{CK}`$ (§5.2); no
+  upper bound by an InaccPsi term, and no name. Whether $`C^*_3`$ needs an inaccessible: open; yes given $`FF_{cl}`$, or given $`H_m`$.
+- The least fan ($`R_2^C`$): its structure is fixed, with order type $`o_F = \omega^2`$ (§5.2); its names are a conjecture. Whether it needs an
+  inaccessible: $`H_m \Leftrightarrow FF_{RF}`$, which the lower-bound program below $`\theta_0`$ would give (§5.3); open.
+- NOLIM: proved in $`R_2^C`$. In $`R_2^S`$ it is proved when there is no ghost, and below $`\beta_0`$ in cases (P3a), (P3b) (§3); otherwise open.
+  $`\nu_C = \nu_S`$ is equivalent to NOLIM and $`o_2 = \omega`$ in $`R_2^S`$.
+- $`o_k = \omega`$ in $`R_2^S`$ ($`k \ge 2`$): open. MIN$`^S`$ holds up to $`\beta_0`$ (§5.4); above $`\beta_0`$ it is open, and no transfer from $`R_2^C`$ can give it
+  at the sets that matter.
+
+## 7. Checks
 
 Each run was under 60 seconds; none is a proof. Certificates count only when replayed.
 
@@ -194,12 +323,24 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
   include the $`R_1^+`$ part.
 - $`R_2^S`$ (§4). The referee's model (ordinals below $`\omega^{\omega\cdot 4}`$, $`o = \omega\cdot 2`$): DEFECT on 12,000 trials (503 with a pair in $`B`$), NEC
   on 149 tests, 0 failures. The model has only the laws that the proofs use.
+- Level 0 (§5.1). D0–D3 cannot be tested on program patterns, which carry no $`\upsilon`$-indices. The referee checked the index
+  arithmetic of the proof on all indices below $`\omega^3\cdot 4`$: 0 failures.
+- Block transfer (§5.2). The referee's random finite models, with the copy searched inside the model (only the steps of BT that are
+  not facts about $`R_2`$): 1,669 cases met T1–T3 and found a copy (230 with points inside $`(s, t)`$), 0 failures. Dropping T1 or T3 gives
+  failures; dropping T2 never does. The names of §5.2 are normal forms and in the required order for four bases (rerun: same output).
+- The first fan (§5.3; replayed). RF_SRO on 18,206 patterns: all 10,633 standard matrices below SRO with at most 7 columns, 1,423
+  landmarks, 6,149 images of the map of MU-B0, and SRO; 0 fans and 0 right ends with reach (57 images were too large
+  for the program). The scan does flag (0,0,0)(1,1,1)(2,2,1), so it can fail; the referee's rerun on the first two sets gave the same.
+  Certificates: PT $`\lt`$ RR, PT $`\lt`$ RRs (RR without $`c`$, with $`y \le_1 y+1`$), PTm $`\lt`$ RRm and PT $`\lt`$ RRm (RRm: RR with a point $`m \le_1 x, y, c`$);
+  LP, L2, LNL, two nest patterns and $`\Phi_3(\mathrm{SRO})`$ each below PTm, as DOM_RF predicts. The referee certified seven more RF
+  fan-free patterns below PTm, found no certificate in the refuting direction, and certified a non-RF control above PT.
+- $`R_2^S`$ (§5.4). Two runs on tiny finite structures gave no information: a finite universe cannot satisfy Carlson 2009, Thm 14.10(1).
 
-## 7. Open
+## 8. Open
 
-- $`C^*_3`$: an upper bound and names; whether $`\varphi_{\lt\omega} \lt m_3`$; whether $`c_0`$ is the least apex with closed $`n`$-fans for every $`n`$, and
-  whether it is the least apex with infinitely many $`\lt_2`$-successors; Conjecture CH.
-- The inaccessible: $`FF_{cl}`$, $`H_m`$, $`FF_N`$, FF, POINT-SRO.
-- The least fan: $`o_F = \omega^2`$ and the name of $`x_F`$.
-- $`R_2^S`$: (ii) ⇒ (i) of CP3 and "⇐" of LEFT-CHAR; the global MIN$`^S`$; PINNING; $`o_k = \omega`$ for $`k \ge 2`$; NOLIM above $`\nu_P`$ (and NOLIM$`^*`$);
-  $`\nu_C = \nu_S`$; the names (N-χ) and (N-ν) of [BREAK.md](BREAK.md) §7.3.
+- $`C^*_3`$: an upper bound by an InaccPsi term (conjecture: $`c_0 \lt \psi_{\Omega_1}(I_1)`$) and names; whether $`\varphi_{\lt\omega} \lt m_3`$; whether $`c_0`$ is the least
+  apex with closed $`n`$-fans for every $`n`$, and whether it is the least apex with infinitely many $`\lt_2`$-successors; Conjecture CH.
+- The inaccessible: $`H_m`$ ($`= FF_{RF}`$; it reduces to the lower-bound program below $`\theta_0`$, §5.3), $`FF_{cl}`$, $`FF_N`$, FF, POINT-SRO.
+- The least fan: the names (the base $`B_F`$). Whether $`\sigma_N = m_F`$, and whether $`H_m`$ is equivalent to $`x_F \gt \theta_0`$.
+- $`R_2^S`$: (ii) ⇒ (i) of CP3 and "⇐" of LEFT-CHAR; MIN$`^S`$ above $`\beta_0`$; PINNING and CORE-S; $`o_k = \omega`$ for $`k \ge 2`$; NOLIM with a ghost
+  above $`\beta_0`$ (and NOLIM$`^*`$); $`\nu_C = \nu_S`$; the names (N-χ) and (N-ν) of [BREAK.md](BREAK.md) §7.3; RIGHT in $`R_2^C`$ above $`\beta_0`$.

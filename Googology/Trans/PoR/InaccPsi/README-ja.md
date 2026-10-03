@@ -99,8 +99,12 @@ $`o_k = \omega`$、定理 O$`^C`$、査読 1 回。被覆に対する Carlson �
 $`o_2 = \omega`$、$`\nu_P`$ より上の NOLIM、$`\nu_C = \nu_S`$ は未解決のまま。$`\nu_C = \nu_S`$ から今は $`o_2 = \omega`$ が出て、NOLIM は隙間ごとの 1 つの
 命題に帰着した。6 ページ目 [COVER-ja.md](COVER-ja.md) は 5 回目で、どれも同じ最小性による（どれも査読 1 回）：$`R_2^C`$ では、
 核の点が長さ 3 の鎖の底であるのは、右端の無限の $`\le_1`$ 鎖を持つときちょうど（定理 CP3）。最小の扇は順序型以外は記述でき、
-NOLIM が成り立つ（概略の段階）。$`R_2^S`$ では、$`\nu_C = \nu_S`$ はそこでの NOLIM と $`o_2 = \omega`$ と同じで、$`o_k = \omega`$ は Carlson の最小性の
-$`R_2^S`$ の形と 1 つの止める命題に帰着した。$`C^*_3`$ にはまだ上からの評価も名前も無い。$`R_2^C`$ では $`\Lambda_\varepsilon`$ より上（核の側は $`\nu_C`$ まで証明済み）、$`R_2^S`$ では
+NOLIM が成り立つ。$`R_2^S`$ では、$`\nu_C = \nu_S`$ はそこでの NOLIM と $`o_2 = \omega`$ と同じで、$`o_k = \omega`$ は Carlson の最小性の
+$`R_2^S`$ の形と 1 つの止める命題に帰着した。その §5 は 6 回目（どれも査読 1 回）：$`R_2^S`$ の段 0 の記述はどの可算順序数でも
+成り立つ（だから SKEL⁺、SKEL$`^\omega`$、$`R_2^S`$ の RIGHT は証明済みで、それらを使う結果、$`R_2^C`$ の NOLIM もその 1 つ、は概略から証明の
+段階に上がる）。$`R_2^C`$ の最小の扇の順序型は $`\omega^2`$。それに到達不能基数が要るかは、右端に届く先の無い、扇の無いパターンに
+ついての下からの評価とちょうど同じ。Carlson の最小性の $`R_2^S`$ の形は $`\beta_0`$ まで成り立つ。$`C^*_3`$ は $`\omega_1^{CK}`$ より下（Carlson 2009,
+Thm 15.2）だが、InaccPsi の項による上からの評価も名前もまだ無い。$`R_2^C`$ では $`\Lambda_\varepsilon`$ より上（核の側は $`\nu_C`$ まで証明済み）、$`R_2^S`$ では
 $`\upsilon_{\omega^3}`$ より上で、どちらの半分も未解決。
 
 **Lean**（このディレクトリの 5 つのファイル。ライブラリ全体と一緒にビルドした）：
@@ -221,7 +225,7 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
 - **定理 LOC**（2026-10、査読 1 回。[BREAK-ja.md](BREAK-ja.md) §7.3）。$`\beta_0`$ は、Carlson の被覆の条件を $`R_2^S`$ の中で評価したものが
   $`R_2^S`$ と違う最小の段。だから $`\nu_C = \nu_S`$ かどうか（「幽霊」が無いか）は $`R_2^S`$ だけの問い。今は、$`\nu_C = \nu_S`$ から
   $`R_2^S`$ での $`o_2 = \omega`$ が出て、NOLIM を仮定すれば両者は同じ（[BREAK-ja.md](BREAK-ja.md) §8.1、査読 1 回）。今は、$`\nu_C = \nu_S`$ は $`R_2^S`$ で NOLIM と $`o_2 = \omega`$ が
-  成り立つことと同じ（GHOST-EQ）で、NOLIM は $`R_2^C`$ で成り立つ（定理 NOLIM$`^C`$、概略の段階）（[COVER-ja.md](COVER-ja.md) §3、査読 1 回）。
+  成り立つことと同じ（GHOST-EQ）で、NOLIM は $`R_2^C`$ で成り立つ（定理 NOLIM$`^C`$）（[COVER-ja.md](COVER-ja.md) の §3 と §5.1、査読 1 回）。
 - **補題 UPG。** 一致する段では、$`\alpha`$ 未満のどの $`\gamma`$ も $`R_2^C`$ で $`\alpha`$ の isominimal な部分集合に入るなら、
   $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$（$`\alpha = \kappa_C`$ と $`\alpha = \upsilon_{\omega\cdot\omega}`$ で成り立つ）。
 - **KAPPA と CORE-EQ。** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$、$`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$。だから
@@ -300,7 +304,9 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   右端の無限の $`\le_1`$ 鎖を持つときちょうど（定理 CP3）。$`c_0`$ はそういう最小の点で、$`c_1`$ は下向きの 2 反映が作る $`\omega`$ 列の上限
   （LEAST3）。最小の閉じた $`n`$ 扇（頂点 $`\varphi_n`$）は $`m_3`$ より下にとどまるので $`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F`$（FIN-FAN）。$`FF_{cl}`$
   （$`\sup_n \varphi_n \ge \theta_0`$）を仮定すれば $`C^*_3`$ に到達不能基数が要る。最初の扇に要るかは、$`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)) の点
-  （それは $`\min\{m : m \le_1 x_F\}`$）が $`\ge \theta_0`$ という 1 つの命題。
+  （それは $`\min\{m : m \le_1 x_F\}`$）が $`\ge \theta_0`$ という 1 つの命題。今は（どれも査読 1 回、[COVER-ja.md](COVER-ja.md) §5.2〜5.3）：最小の扇の
+  順序型は $`\omega^2`$。その命題は、右端に届く先の無い、扇の無いパターンについての下からの評価と同じで、$`\theta_0`$ より下の下界の
+  計画から出る。そして $`c_2 \lt \omega_1^{CK}`$。
   以前から：$`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$。
 - **補題 TOP2**（2026-10、査読 1 回）。どの $`\alpha \lt m_3`$ にも、$`\alpha \lt x \lt y \lt m_3`$ となる長さ 2 の鎖 $`x \lt_2 y`$ がある。
   だから $`m_3`$ は長さ 2 の鎖の極限で、FRAG なしで $`m_3 \ge \upsilon_{\omega\cdot\omega}`$。
@@ -407,7 +413,8 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   左端である扇（定理 CF、条件なし）。$`R_2^C`$ では、これは今は 1 つの点の右端の間の $`\le_1`$ の条件（定理 CP3、[COVER-ja.md](COVER-ja.md) §1）。
   これは鎖の特徴づけで、場所は決めない。上半分は未解決：知られている $`R_2^C`$ の $`\le_2`$ の関係
   （$`\Lambda_\varepsilon`$ まで）は長さ 3 の鎖を作らない（定理 BLK$`^O`$）。鎖は Carlson の生成の種の中に無ければならない（NO-GEN）。集合論の反映は $`\omega_1^{CK}`$ より上にしか鎖を
-  作らず（HIGH）、$`\le_1`$ の届く先だけでは鎖にならない（NO-PROMOTE）。下半分も未解決：長さ 3 の鎖の無いパターンで
+  作らず（HIGH）、$`\le_1`$ の届く先だけでは鎖にならない（NO-PROMOTE）。Carlson 2009, Thm 15.2 から $`c_2 \lt \omega_1^{CK}`$ が出るが、
+  InaccPsi の項による評価は証明されていない（[COVER-ja.md](COVER-ja.md) §5.2）。下半分も未解決：長さ 3 の鎖の無いパターンで
   $`\theta_0`$ より下の下界の計画を進めることが要る。
 - $`\Phi_3(M)`$ がパターンであること。そうなら長さ 3 の鎖は無く（系 C）、DOM₂ によりその点は $`m_3`$ より下。出力された関係
   そのものにはそういう鎖は無い（定理 A、証明済み）。閉じた関係では BAR_R（確認済みだけ）。
@@ -479,8 +486,9 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
     - B4 B3 が動かす点の間の $`\le_2`$ の組 — $`R_2^S`$ で $`\nu_P`$ より下、両方の構造で $`\rho_{\Theta_A+\omega^2}`$ より下で証明済み
       （SKEL、BLK$`^O`$、EQB-A）、$`R_2^S`$ では骨組み型でない最初の点 $`\nu`$ まで（SKEL⁺、FIRST-PAIR）。$`\lt_2`$ の左端はどれも
       $`\lambda`$ が極限の $`\upsilon_\lambda`$（LEFT。今は仮定なし：INC1 と NOBAD、
-      [BREAK-ja.md](BREAK-ja.md) §1）。$`T_\omega`$ より下ではどの組も 2 つの $`\upsilon`$ の点を結ぶ（SKEL$`^\omega`$、概略だけ、[BREAK-ja.md](BREAK-ja.md) §7.1）。
-      $`\nu`$ より上の組の全体と、RIGHT（どの右端も $`\upsilon`$ の点。孤立した組に帰着） — 未解決
+      [BREAK-ja.md](BREAK-ja.md) §1）。$`R_2^S`$ では、どの可算順序数でも、どの組も標準の組か 2 つの
+      やり直しの点を結ぶ組なので、$`R_2^S`$ で RIGHT（どの右端も $`\upsilon`$ の点）が成り立つ（SKEL$`^\infty`$、[COVER-ja.md](COVER-ja.md) §5.1）。
+      $`\nu`$ より上のやり直しの点の間の組の全体と、$`\beta_0`$ より上の $`R_2^C`$ の RIGHT — 未解決
     - B5 B2 + B3 + B4 を組み立てる — 形だけ
     - B-PT 証明論の別の道：到達不能基数 $`n`$ 個の理論が「長さ $`n`$ の鎖がある」を証明する — 未解決。
       $`\lt_2`$ の集合論的な十分条件が要るが、知られていない
@@ -491,11 +499,12 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       [R2PLUS-ja.md](../../BMS/PoR/Trio/R2PLUS-ja.md) の結果は、$`\upsilon_{\omega^3}`$ より下でのこの定理。定理 BLK$`^O`$ が
       正確な届く先とともに $`\Lambda_\varepsilon`$ まで、定理 EXACT-A が $`\Theta_A`$ まで延ばし（[PINS-ja.md](PINS-ja.md)）、$`\Theta_A`$ での値と
       目印 $`\Theta_\delta`$、$`\Theta_{d\omega}`$（[BREAK-ja.md](BREAK-ja.md) §4）、定理 SKEL が $`R_2^S`$ で $`[0, \nu_P)`$ で与え（[REACHES-ja.md](REACHES-ja.md)）、
-      SKEL⁺ が $`\nu`$ まで与える（[BREAK-ja.md](BREAK-ja.md) §2）。入れ子の組のどの段でも最初のブロック（LIFT-0、
+      SKEL⁺ が $`\nu`$ まで与え（[BREAK-ja.md](BREAK-ja.md) §2）、$`R_2^S`$ の段 0 の記述はどの可算順序数でも成り立つ（SKEL$`^\infty`$、[COVER-ja.md](COVER-ja.md) §5.1）。入れ子の組のどの段でも最初のブロック（LIFT-0、
       [BREAK-ja.md](BREAK-ja.md) §5）、$`T_\omega`$ より下のどの段のどのブロックも（SH、[BREAK-ja.md](BREAK-ja.md) §7.1） — 証明済み。各段の順序型
       （$`o_k = \omega`$。隙間の間の有限の基の付け替え GI と同じ） — $`R_2^C`$ では証明済み（定理 O$`^C`$、[BREAK-ja.md](BREAK-ja.md) §8.1、
-      査読 1 回）、$`R_2^S`$ では未解決（Carlson の最小性の $`R_2^S`$ の形と 1 つの止める命題に帰着、[COVER-ja.md](COVER-ja.md) §4）。段 2 の
-      隙間の中の NOLIM — $`R_2^C`$ では概略の段階で証明済み（NOLIM$`^C`$、[COVER-ja.md](COVER-ja.md) §3）、$`R_2^S`$ では $`\nu_P`$ より上で未解決。
+      査読 1 回）、$`R_2^S`$ では未解決（Carlson の最小性の $`R_2^S`$ の形と 1 つの止める命題に帰着、[COVER-ja.md](COVER-ja.md) §4。その最小性は
+      $`\beta_0`$ まで成り立つ、§5.4）。段 2 の隙間の中の NOLIM — $`R_2^C`$ では証明済み（NOLIM$`^C`$、[COVER-ja.md](COVER-ja.md) の §3 と §5.1）、
+      $`R_2^S`$ では幽霊が無ければ証明済み、幽霊があれば $`\beta_0`$ より上で未解決。
       届く先と名前 — 未解決、とても難しい
     - A3 最小の実現を項で書く — 未解決
     - A4 **予想 CH**：長さ $`k+2`$ の最小の鎖には到達不能基数が $`k`$ 個要る — 予想
@@ -508,7 +517,7 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
     - L0 $`R_2^C`$ では「どの $`\gamma \lt \psi_{\Omega_1}(I_\omega)`$ も、ある $`\max C^*_n`$ より下」と同値 — 証明済み
     - L-CERT $`\theta_0`$ より下：帰着は証明済み（I-FREE、OE、EPS-RED、FS-OE、RED-BMS、S-RED、MU-A、MU-B、UNIF-V）。
       MU-0 と MU-B0 も（段 0 の (M4)。核には何も足さない）。残り：段 1 以上の (M4)、(M1)–(M3)、SRO 未満での局所的な段
-      — 未解決
+      — 未解決（これらがあれば最初の扇に到達不能基数が要る、RED-HM、[COVER-ja.md](COVER-ja.md) §5.3）
     - L-CERT $`[\theta_0, \psi_{\Omega_1}(I_0))`$ とその上 — 未解決
     - L-BMS $`\Phi_3`$ を通す道 — 止まっている：DOM₂ により、長さ 3 の鎖の無い $`\Phi_3`$ のパターンは $`m_3`$ より下にとどまり、
       $`\Phi_3`$ が出力する関係にはそういう鎖が決して無い（定理 A、証明済み。閉じた関係では BAR_R、確認済み）
@@ -519,8 +528,8 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       $`c_0, c_1, c_2`$ は集まり $`C_{\omega^\omega}`$ の極限点なので C3′′ は偽（C3-VEB、C3′′-FALSE。[PINS-ja.md](PINS-ja.md) §4、
       [BREAK-ja.md](BREAK-ja.md) §3）。段の極限はどの組にも入らず、$`R_2^C`$ では最初の扇は $`m_3`$ より下（LIM-CAP、DOM_F。[BREAK-ja.md](BREAK-ja.md) §6）。最初の
       扇は $`T_\omega`$ より上で、後の元は 2 つ、$`R_2^C`$ では開いている（FAN-CAP、OPEN-C、LONG-NEST。[BREAK-ja.md](BREAK-ja.md) §7.4）。$`R_2^C`$ では
-      鎖の底はちょうど無限の閉じた扇を持つ核の点で、最小の閉じた $`n`$ 扇は $`m_3`$ より下にとどまる（CP3、FIN-FAN）。最小の扇は順序型
-      以外は記述できた（FS。[COVER-ja.md](COVER-ja.md) §1–2））
+      鎖の底はちょうど無限の閉じた扇を持つ核の点で、最小の閉じた $`n`$ 扇は $`m_3`$ より下にとどまる（CP3、FIN-FAN）。最小の扇は記述でき、
+      順序型は $`\omega^2`$（FS、OF。[COVER-ja.md](COVER-ja.md) の §2 と §5.2）。$`c_2 \lt \omega_1^{CK}`$）
     - Lean：上を抑えた項の順序型が $`\psi_{\Omega_1}(X)`$ であること。補題 LOC（有限集合が isominimal かどうかは、
       その最大の元までの構造だけで決まる。紙の上、査読なし） — 未解決
 
@@ -668,7 +677,7 @@ $`m_3 \lt \min C^*_3`$ より下。以前の 8 個の証明書は、もう要ら
 $`R_2^+`$ そのものについては、Lean には何も無い。$`\upsilon_{\omega^3}`$ より上の結果は 2 ページ目
 [RESTARTS-ja.md](RESTARTS-ja.md) に、$`\Xi_\omega`$ より上の結果は 3 ページ目 [REACHES-ja.md](REACHES-ja.md) に、$`\Lambda_\varepsilon`$ より先の
 結果は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、骨組みが終わる所とその上の段の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、
-被覆に対する最小性による結果（5 回目）は 6 ページ目 [COVER-ja.md](COVER-ja.md) にある。
+被覆に対する最小性による結果と段 0 の記述（5 回目と 6 回目）は 6 ページ目 [COVER-ja.md](COVER-ja.md) にある。
 
 ## 8. 文献
 

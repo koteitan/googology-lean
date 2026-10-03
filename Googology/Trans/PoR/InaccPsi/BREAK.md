@@ -8,7 +8,9 @@ independent referee found the result proved with no fatal or blocking point. All
 "2 reviews" means that two independent papers proved the result and each paper was refereed once. A statement that its
 referee found not proved, or false as written, is listed under **Not proved**, even when the rest of its paper is proved.
 None of the sixteen papers uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). No result on this
-page is in Lean. The fifth round (four more papers) is on the next page, [COVER.md](COVER.md).
+page is in Lean. The fifth and sixth rounds (four papers each) are on the next page, [COVER.md](COVER.md). The sixth round proves
+SKEL⁺ and SKEL$`^\omega`$ in full, so several results of §1, §7.1 and §8 below that were proved only at outline level are now proved
+([COVER.md](COVER.md) §5.1); the labels below say so.
 
 **Notation.** As on [REACHES.md](REACHES.md) and [PINS.md](PINS.md). $`\nu_P = \upsilon_{\Lambda^*+\omega^2}`$ is the end of Theorem SKEL. $`\mathrm{lh}_1(a)`$ is the
 reach of $`a`$ in $`R_1^+`$. A gap is the interval between two consecutive $`\upsilon`$-points. A **standard pair** is a
@@ -51,7 +53,8 @@ conjecture (NOBAD, and CC in $`R_2^C`$); the second round proved them.
   Theorem RE of §3, run at a stage where LEFT already holds below $`b`$.
 - **Corollaries NOBAD and LEFT** (proved, 1 review; both structures). There is no bad right end. Every $`\lt_2`$-left end is
   $`\upsilon_\lambda`$ with $`\lambda`$ a limit. The lower bounds for the least bad right end proved in the first round are no longer needed.
-- **RIGHT** (every $`\lt_2`$-right end is a $`\upsilon`$-point) is **not proved**. Proved (1 review each):
+- **RIGHT** (every $`\lt_2`$-right end is a $`\upsilon`$-point) was **not proved** in these rounds. **Now proved** in $`R_2^S`$, and in $`R_2^C`$ for right
+  ends below $`\beta_0`$ (Theorem SKEL$`^\infty`$, [COVER.md](COVER.md) §5.1, 1 review). Proved here (1 review each):
   - RE-U: Theorem RE of §3 holds with no hypothesis. If $`\lt_2`$-pairs are cofinal below $`\alpha`$ and $`\alpha \lt_2 \beta`$, then $`\beta = \upsilon_\mu`$
     with $`\mu`$ a restart index.
   - FAN-R: every $`\lt_2`$-successor of a fan is $`\upsilon_\mu`$ with $`\mu`$ a restart index.
@@ -84,11 +87,12 @@ pair, and $`\nu_{nest}`$ the least top $`y`$ of a realization of PS.
 
 - **Premise corrected** (proved / cited, 1 review). $`\nu_P`$ is not a non-skeletal point: $`R_2^S`$ is skeletal on $`[0, \nu_P]`$
   (Theorem SKEL), so $`\nu_S \gt \nu_P`$. And the first break is not a fan (see CAP below).
-- **Theorem SKEL⁺** (proved, 1 review; $`R_2^S`$; no FRAG). The description of Theorem SKEL holds on $`[0, \nu_{new})`$ with one change:
+- **Theorem SKEL⁺** (proved, 1 review at proof level, [COVER.md](COVER.md) §5.1; this first paper was accepted at outline level; $`R_2^S`$; no FRAG). The description of Theorem SKEL holds on $`[0, \nu_{new})`$ with one change:
   a restart may have $`\lt_1`$-predecessors, and they are exactly the restarts below it whose reach covers it. The pairs are
   the standard pairs, block points have their block caps, and the reaches of restarts are closed. So $`R_2^S`$ is
   skeletal, and INC1-S and LEFT hold, on $`[0, \nu_{new})`$. The referee found two minor gaps (a choice of a bound, and one step
-  that used SKEL at its own end point) and gave a fix for each.
+  that used SKEL at its own end point) and gave a fix for each. The complete proof corrects one wording: "the reach of a restart is
+  closed" in $`R_1^+`$ needs that reach to be below the top of its block.
 - **Theorem FIRST-PAIR** (proved, 1 review; $`R_2^S`$; no FRAG). $`\nu_S = \nu_{new} = \nu_{nest}`$; call it $`\nu`$.
   - The break is a non-standard $`\lt_2`$-pair. A $`\upsilon`$-cap that cuts a reach does not occur at or below $`\nu`$.
   - Exactly one new pair has right end $`\le \nu`$: $`(a_0, \nu)`$, where $`a_0`$ is the least new left end. $`a_0 = \rho_\Lambda`$ with
@@ -120,7 +124,7 @@ pair, and $`\nu_{nest}`$ the least top $`y`$ of a realization of PS.
   - $`\beta_0 \ge \nu_C \gt \nu_P`$. Before: $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$.
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$, so the core of $`R_2^C`$ contains $`[0, \nu_P]`$. Before: $`[0, \rho_{\Theta_{d\omega}})`$, and $`[0, T_C]`$ with $`T_C`$ not
     compared with $`\nu_P`$.
-  - SKEL⁺ (with HC and INC1-nonups) holds in $`R_2^C`$ on $`[0, \nu_C)`$.
+  - SKEL⁺ (with HC and INC1-nonups) holds in $`R_2^C`$ on $`[0, \nu_C)`$. Now with no hypothesis ([COVER.md](COVER.md) §5.1).
   - No fan of $`R_2^C`$ has its apex $`\le \nu_C`$, every chain of length 3 has $`c_0 \gt \nu_C`$, and $`m_3 \gt \nu_C`$. Before, this came only
     from certificates.
 - **$`\nu_C = \nu_S`$** is open. Excluding the ghost is one case of Conjecture CORE-2: the $`\Pi_2`$ upward-transfer clause of the
@@ -261,7 +265,7 @@ of §2 (in $`R_2^C`$, $`T_2 = \nu_C`$ by NU-CT). $`T_\omega = \sup_k T_k`$.
 - **Not proved** (blocking point, 1 review): Proposition TAIL, "inside a gap of $`U_2`$ the reaches of the restarts follow the
   formal-reach recursion of §4, run inside the gap". It is an outline. The results it uses assume a restart index at most
   $`\Lambda^*`$, every restart in such a gap has a larger index, and the paper does not check the other places that use this
-  assumption. Now (§7.1) every use is listed and replaced; the result is still an outline.
+  assumption. Now (§7.1) every use is listed and replaced; the result was still an outline, and is now proved ([COVER.md](COVER.md) §5.1).
 - **Conjecture LIFT-REC** (names): $`s_k = \psi_{\Omega_1}(\Omega_\omega\cdot k)`$, $`x_k = \psi_{\Omega_1}(\Omega_\omega\cdot k + \omega^{P_k+1})`$, $`T_k = \psi_{\Omega_1}(\Omega_\omega\cdot k + \omega^{P_k+1} + P_k)`$.
   For $`k = 1`$ these are proved (Theorem T); for $`k = 2`$ they are NU-NAME. The paper also states a structure for
   $`[s_k, T_{k+1})`$ (level $`k`$ built like SKEL⁺ over the level-$`k`$ points). The referee found that statement wrong (blocking point):
@@ -304,7 +308,7 @@ T_\omega \le \sigma_F \lt f_0 \lt m_3 \lt c_0, \qquad x_F \le f_0 .
   together with "the patterns $`\Phi_3(M)`$ for standard $`M`$ below SRO have no fan" (checked on every scanned matrix). In $`R_2^S`$ the same
   argument is circular.
 - **Not proved** (blocking point, 1 review): "given FF, the first fan $`x_F`$ is $`\gt \theta_0`$, so it needs an inaccessible". FF bounds only
-  $`\sigma_F`$, and DOM_F puts $`\sigma_F`$ only below the first closed fan $`f_0`$; $`x_F \lt \sigma_F`$ is not excluded. Also not proved as stated:
+  $`\sigma_F`$, and DOM_F puts $`\sigma_F`$ only below the first closed fan $`f_0`$; $`x_F \lt \sigma_F`$ is not excluded (now $`x_F \lt \sigma_F`$ is proved, [COVER.md](COVER.md) §5.3). Also not proved as stated:
   "$`\theta_0`$ is excluded as a limit of caps, given FF". Now $`x_F \gt \theta_0`$ is proved given a stronger hypothesis $`FF_N`$ (§7.4).
 - **Open**: no fan and no chain of length 3 is exhibited below $`\theta_1 = \psi_{\Omega_1}(\psi_{I_1}(0))`$ (the upper half for $`k = 1`$).
 
@@ -345,9 +349,10 @@ that is $`a \le_1 b+1`$. $`(x_L, y_L)`$ is the least long pair, and $`m_L = \min
   right end below $`T_\omega`$, and all of §7.1 holds in $`R_2^C`$. Or $`\beta_0 \lt T_\omega`$ and $`\beta_0`$ is a ghost stage: $`R_2^C`$ has an
   extra pair $`\rho_L \lt_2 \beta_0`$, where $`\rho_L`$, the largest $`\lt_1`$-predecessor of $`\beta_0`$, is a restart and the only
   $`\lt_2`$-predecessor of $`\beta_0`$ in $`R_2^C`$; $`\beta_0`$ is a restart and not a right end in $`R_2^S`$; the extra pair has depth at least 2.
-- **Outline only.** The referee found no error in the following, but each uses Theorem SKEL$`^\omega`$, which the paper gives as an
-  outline and which was not refereed to proof level. The paper labels some of them "proved"; the referee relabels them
-  (blocking point about labels only).
+- **Outline only in this round, now proved** ([COVER.md](COVER.md) §5.1, 1 review each). The referee found no error in the following, but each
+  uses Theorem SKEL$`^\omega`$, which the paper gives as an outline and which was not refereed to proof level. The paper labels some
+  of them "proved"; the referee relabels them (blocking point about labels only). SKEL$`^\omega`$ now has a refereed proof, with
+  the corrected wording of SKEL⁺ (§2), so all of them are proved.
   - SKEL$`^\omega`$: SKEL⁺ (§2) holds on all of $`[0, T_\omega)`$ with the pairs of higher depth allowed. The pairs of depth 1 are exactly
     the standard pairs, and every other pair joins two restarts. So $`R_2^S`$ is skeletal there in the weaker form "every pair joins
     two $`\upsilon`$-points", FRAG2 holds in that form, and RIGHT (§1) holds for every pair with left end below $`T_\omega`$.
@@ -363,9 +368,10 @@ that is $`a \le_1 b+1`$. $`(x_L, y_L)`$ is the least long pair, and $`m_L = \min
     long left end on $`[0, T_\omega]`$.
 - **$`T_\omega`$** (Theorem NU-OMEGA). Proved (1 review): $`T_\omega`$ is in no pair and has no $`\lt_1`$-predecessor (as in NEST);
   $`\mathrm{lh}(T_\omega) \le Y_{LL}`$, where $`Y_{LL}`$ is the least $`y'`$ with $`x \lt_2 y \lt y'`$ and $`x \le_1 y'`$ for some $`x, y`$; and $`Y_{LL}`$ lies
-  above every level structure that starts just above $`T_\omega`$. Outline: $`T_\omega`$ is a restart, a limit of $`\mathrm{Top}_k`$ for every
+  above every level structure that starts just above $`T_\omega`$. Outline in this round, now proved ([COVER.md](COVER.md) §5.1): $`T_\omega`$ is a restart, a limit of $`\mathrm{Top}_k`$ for every
   $`k`$, and its block 0 is standard. **Not proved** (blocking point): "given FRAG, $`T_\omega \le_1 \rho_{T_\omega+\omega^2}`$". The proof needs
-  the whole region of $`T_\omega`$ to be standard, and only block 0 is shown. "Every level decomposition goes on above $`T_\omega`$" is
+  the whole region of $`T_\omega`$ to be standard, and only block 0 is shown. (The whole region is now shown standard, [COVER.md](COVER.md) §5.1;
+  the rest of this proof has not been reviewed again, so it stays not proved.) "Every level decomposition goes on above $`T_\omega`$" is
   argued only in part. **Conjecture**: $`\mathrm{lh}(T_\omega) = y^* + 1 = Y_{LL}`$, where $`(x^*, y^*)`$ is the least pair of infinite depth above
   $`T_\omega`$. Then the first block at level $`\omega`$ does not have the LIFT-0 shape.
 
@@ -395,7 +401,7 @@ GI_k(\zeta) \Rightarrow GI^{loc}_k(\zeta) \Rightarrow GI^{fin}_k(\zeta) \Leftrig
   $`c \cup (T^a[c] \cap [a, a^\infty))`$ onto $`[0, c^\infty)`$, where $`a^\infty`$ is the least $`\upsilon`$-point above $`a`$. This is GI on the first
   $`R_1^+`$-segment of every gap.
 - **Not proved.** Proposition LOW1 (the substitution map is an isomorphism on the low part of a gap): an outline built on TAIL-GAP,
-  which is itself an outline; its statement and proof do not match (blocking point). Neither $`o_k = \omega`$ for $`k \ge 2`$ nor any
+  which was then an outline (TAIL-GAP is now proved, [COVER.md](COVER.md) §5.1); its statement and proof do not match (blocking point). Neither $`o_k = \omega`$ for $`k \ge 2`$ nor any
   form of $`GI_k(\omega)`$ was proved in this round (now $`o_k = \omega`$ and $`GI^{fin}_k(\omega)`$ are proved in $`R_2^C`$, §8.1; $`R_2^S`$ is open). What blocks: an onto level-$`k`$ hull (for $`k = 2`$ this is (N-χ) of §7.3), the reaches beyond the
   low part of a gap, and for $`k \ge 3`$ a test for new pairs.
 
@@ -464,7 +470,8 @@ Here $`\nu = \nu_S`$ and $`U_2 = \{\upsilon^2_\zeta\}`$ as in §7.2. $`\mathrm{C
   stronger than FF.
 - **Does the first fan need $`I_0`$?** Open. The answer is yes given $`FF_N`$, but this is immediate, since $`FF_N`$ already gives
   $`x_F \gt \theta_0`$. With the referee's addition above it is one statement about one matrix: if the point of
-  $`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)) is $`\ge \theta_0`$, then the first fan needs $`I_0`$.
+  $`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)) is $`\ge \theta_0`$, then the first fan needs $`I_0`$. Now this statement is equivalent to a lower bound for fan-free
+  patterns whose right ends have no reach ([COVER.md](COVER.md) §5.3).
 - **Names** (conjecture; conv and Ytosk's reading agree on the three matrices). With $`P_\omega = \psi_{\Omega_2}(\Omega_\omega\cdot\omega)`$:
   $`m_L = T_\omega = \psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$, $`x_L = \psi_{\Omega_1}(\Omega_\omega\cdot\omega + \omega^{P_\omega+1})`$, $`y_L = \psi_{\Omega_1}(\Omega_\omega\cdot\omega + \omega^{P_\omega+1} + P_\omega)`$.
   None of them needs an inaccessible. The same terms are the conjectured $`(x^*, y^*)`$ of §7.1. The least fan and $`f_0`$ have no
@@ -525,7 +532,7 @@ Here $`k = 2`$, $`\nu = \nu_S`$ and $`s = \upsilon^2_\omega`$.
   bound. It keeps the kinds of points and the pairs.
 - **Proposition MONO** (proved, 1 review). If for infinitely many $`n`$ the map $`\Psi^n`$ is an isomorphism below $`z`$ and $`\Psi^n\rho \le_1 \Psi^n z`$,
   then $`\rho \le_1 z`$. So where $`G_\omega`$ and almost all finite gaps first disagree, the cap in $`G_\omega`$ is the larger one.
-- **Theorem HR** (proved as an implication, 1 review; parts (a), (c) given SKEL⁺, an outline). If two statements HULL$`(n)`$ (on the hull,
+- **Theorem HR** (proved as an implication, 1 review; parts (a), (c) used SKEL⁺, now proved, [COVER.md](COVER.md) §5.1). If two statements HULL$`(n)`$ (on the hull,
   the $`\le_1`$-test can be passed inside the hull) and LEN$`(n)`$ (the index lengths of $`G_n`$ and $`G_\omega`$ are equal) hold for infinitely
   many $`n`$, then $`s \lt_2 \upsilon^2_{\omega+1}`$, so $`o_2 = \omega`$.
 - **Not proved** (blocking points). The route is likely empty: LEN$`(n)`$ forces the index length of $`G_\omega`$ to be below $`s`$ (that of $`G_n`$
@@ -540,10 +547,10 @@ Here $`k = 2`$, $`\nu = \nu_S`$ and $`s = \upsilon^2_\omega`$.
   from a set of restart indices of $`G_\zeta`$, containing its base index, onto all restart indices of $`G_\eta`$. Its substitution map $`T_\sigma`$
   is an isomorphism for $`0`$, $`\le`$, $`+`$ and the $`\le_1`$ of $`R_1^+`$ from $`c \cup D_\sigma`$ onto $`[0, \upsilon^2_{\eta+1})`$, where $`c = \upsilon^2_\eta`$; it is the
   identity below $`c`$, sends $`\upsilon^2_\zeta`$ to $`c`$, has closed domain and range, and commutes with Wilken's maps.
-- **Theorem RED** (proved at outline level, 1 review; it rests on SKEL⁺). $`T_\sigma`$ is an isomorphism of $`R_2^S`$ iff the reaches of the
+- **Theorem RED** (proved, 1 review; through SKEL⁺, now proved, [COVER.md](COVER.md) §5.1). $`T_\sigma`$ is an isomorphism of $`R_2^S`$ iff the reaches of the
   moved restarts correspond: for every moved restart $`\lambda`$ and $`z \in D_\sigma`$, $`z \le r(\lambda) \Leftrightarrow T_\sigma z \le r(\sigma'\lambda)`$ (RI). The
   same holds in $`R_2^C`$ below $`\nu_C`$ with coverings. So if such maps exist for every finite subset of $`G_\omega`$ and cofinally many $`n`$,
-  then $`GI_2(\omega)`$ and $`o_2 = \omega`$ (outline).
+  then $`GI_2(\omega)`$ and $`o_2 = \omega`$ (proved; it was an outline before [COVER.md](COVER.md) §5.1).
 - **Lemma INT** (proved, 1 review). A block map that shifts an initial segment moves only bases of small index offset; under the
   conjectured names $`G_\omega`$ has points beyond (checked).
 - **Not proved** (blocking point). The shift map already fails (RI) at the restart with index offset $`c`$, so it is an isomorphism only
@@ -560,7 +567,7 @@ $`K`$ and every $`\gamma \lt b`$ there is a $`K`$-chain inside $`(\gamma, b)`$; 
 configuration $`\chi_1 \lt t_1 \lt d_1 \lt \cdots \lt \chi_K \lt t_K \lt d_K \lt \chi_{K+1}`$ with $`\chi_i \le_1 \chi_{K+1}`$ and $`t_i \lt_2 d_i`$; $`e_K(g)`$ is the least top of a
 realization of $`C_K`$ above $`g`$, $`E(g) = \sup_K e_K(g)`$, and $`b^*(g)`$ is the least LIM point above $`g`$.
 
-- **Lemma CH** (proved at outline level, 1 review; it rests on SKEL⁺). Below $`\nu`$, $`K`$-chains and realizations of $`C_K`$ give each other.
+- **Lemma CH** (proved, 1 review; through SKEL⁺, now proved, [COVER.md](COVER.md) §5.1). Below $`\nu`$, $`K`$-chains and realizations of $`C_K`$ give each other.
 - **Lemma TRANSFER** (proved, 1 review). For points up to $`\nu`$, LIM goes down along $`\le_1`$ and up along $`\le_2`$; a supremum of LIM points is
   a LIM point; every member of $`U_2`$ is a LIM point.
 - **Lemma CAP$`_K`$** (proved, 1 review). No $`\alpha \in (g, e_K(g)]`$ has reach above $`e_K(g)`$. $`E(g)`$ is a restart whose index is a multiple of
@@ -578,7 +585,7 @@ realization of $`C_K`$ above $`g`$, $`E(g) = \sup_K e_K(g)`$, and $`b^*(g)`$ is 
 - **The ghost** (proved, 1 review). In cases (P1), (P2), (P3a) of LOCATE a ghost forces $`b^*(g) \lt g^+`$ in its gap. So $`b^*(g) = g^+`$ for all $`g`$,
   together with $`o_2 = \omega`$, excludes the ghost (GR in this form).
 - **$`R_2^C`$** (proved, 1 review). All of the above holds in $`R_2^C`$.
-- **Open**: NOLIM above $`\nu_P`$, in both structures (now proved in $`R_2^C`$ at outline level, [COVER.md](COVER.md) §3). Below $`\nu`$ the proved results fix every relation except the reaches of the restarts
+- **Open**: NOLIM above $`\nu_P`$, in both structures (now proved in $`R_2^C`$, [COVER.md](COVER.md) §3 and §5.1). Below $`\nu`$ the proved results fix every relation except the reaches of the restarts
   inside the gaps, and NOLIM is a statement about those reaches only; they are unknown above the analogue of $`\Theta_A`$ in each gap.
 
 ### 8.5 Status after this round
@@ -642,16 +649,15 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 
 ## 10. Open
 
-- **RIGHT-ISO** (and so RIGHT; for pairs with left end below $`T_\omega`$ it follows from SKEL$`^\omega`$, an outline, §7.1). CC as an isomorphism
-  (not needed).
+- RIGHT in $`R_2^C`$ above $`\beta_0`$ (RIGHT-ISO and RIGHT are now proved in $`R_2^S`$, [COVER.md](COVER.md) §5.1). CC as an isomorphism (not needed).
 - The name of $`\nu`$: now the three statements (O) $`o_2 = \omega`$ (proved in $`R_2^C`$, §8.1), (N-χ) and (N-ν) (§7.3). $`\nu_C = \nu_S`$ (exclude the ghost): it implies (O) in $`R_2^S`$ (§8.1), and it is reduced to
-  NOLIM above $`\nu_P`$ and $`o_2 = \omega`$, both about $`R_2^S`$ (§7.3); NOLIM is now the statement $`b^*(g) = g^+`$ for every gap of $`U_2`$ (§8.4); it is proved in $`R_2^C`$ at outline level, and $`\nu_C = \nu_S`$ is
+  NOLIM above $`\nu_P`$ and $`o_2 = \omega`$, both about $`R_2^S`$ (§7.3); NOLIM is now the statement $`b^*(g) = g^+`$ for every gap of $`U_2`$ (§8.4); it is proved in $`R_2^C`$, and $`\nu_C = \nu_S`$ is
   equivalent to NOLIM and $`o_2 = \omega`$ in $`R_2^S`$ ([COVER.md](COVER.md) §3).
 - The structure above $`\nu`$: $`o_k = \omega`$ for $`k \ge 2`$ in $`R_2^S`$ (equivalently $`GI^{fin}_k(\omega)`$; proved in $`R_2^C`$, §8.1), the global base change $`GI_k(\omega)`$, the exact reaches of
-  level-$`k`$ restarts, the gaps as base-changed copies, and the names (§7.1, §7.2); SKEL$`^\omega`$, TAIL, TAIL-GAP and TOP at proof level;
-  the reach of $`T_\omega`$.
+  level-$`k`$ restarts, the gaps as base-changed copies, and the names (§7.1, §7.2); the reach of $`T_\omega`$. (SKEL$`^\omega`$, TAIL, TAIL-GAP and
+  TOP are now proved, [COVER.md](COVER.md) §5.1.)
 - The least fan: its name, the name of $`f_0`$, $`FF_N`$, L1p-HYP, POINT-SRO, and whether the least fan of $`R_2^S`$ is open (§7.4). Its structure in
-  $`R_2^C`$ is now fixed except its order type $`o_F`$ ([COVER.md](COVER.md) §2).
+  $`R_2^C`$ is now fixed, with order type $`o_F = \omega^2`$ ([COVER.md](COVER.md) §2 and §5.2).
 - A chain of length 3: a point of $`(C_{\omega^\omega})'`$ above $`B`$ whose successors accumulate at a left end. Being a left end is not a
   property of a finite configuration, so Carlson's generating rules cannot produce it (NO-GEN). FF, DOM_F in $`R_2^S`$, open fans
   below $`\sigma_F`$, and the upper half below $`\theta_1`$. Conjecture CH. In $`R_2^C`$ the bottoms of chains of length 3 are now exactly the points of the core

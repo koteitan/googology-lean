@@ -7,7 +7,7 @@ This page continues [RESTARTS.md](RESTARTS.md). The status words are those of [R
 on this page are from 2026-10. "1 review" means one referee. "2 reviews" means that two independent papers proved
 the result and each paper was refereed once. The results of the next round (relativized pins, the exact reaches up
 to $`\Theta_A`$, the names up to $`\Lambda_\varepsilon`$, the bottom of a chain of length 3) are on the fourth page
-[PINS.md](PINS.md), the four rounds after that are on the fifth page [BREAK.md](BREAK.md), and the fifth round on the sixth page [COVER.md](COVER.md); they change some statuses here, as marked.
+[PINS.md](PINS.md), the four rounds after that are on the fifth page [BREAK.md](BREAK.md), and the fifth and sixth rounds on the sixth page [COVER.md](COVER.md); they change some statuses here, as marked.
 
 **Notation.** As on [RESTARTS.md](RESTARTS.md): $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, the reach
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$, the restart $`\rho_\lambda = \upsilon_\lambda`$ for a nonzero multiple
@@ -162,7 +162,7 @@ below that used it, now holds with no hypothesis.
   equivalent to three statements about $`\upsilon`$-indices, and $`\nu_C = \nu_S`$ is a question about $`R_2^S`$ alone, reduced to two statements
   about it. Then (1 review each, [BREAK.md](BREAK.md) §8): one of them, $`o_2 = \omega`$, is proved in $`R_2^C`$, so $`\nu_C = \upsilon^2_{\omega+1}`$ there;
   $`\nu_C = \nu_S`$ implies $`o_2 = \omega`$ in $`R_2^S`$; the other, NOLIM above $`\nu_P`$, is reduced to one statement per gap. Then (1 review each,
-  [COVER.md](COVER.md) §3): NOLIM holds in $`R_2^C`$ (at outline level), and $`\nu_C = \nu_S`$ is equivalent to NOLIM and $`o_2 = \omega`$ in $`R_2^S`$. $`\nu_C = \nu_S`$ is
+  [COVER.md](COVER.md) §3): NOLIM holds in $`R_2^C`$ (at proof level since [COVER.md](COVER.md) §5.1), and $`\nu_C = \nu_S`$ is equivalent to NOLIM and $`o_2 = \omega`$ in $`R_2^S`$. $`\nu_C = \nu_S`$ is
   still open.
 
 ## 5. The least chain of length 3
@@ -213,7 +213,7 @@ Each run was under 60 seconds; none is a proof.
 ## 7. Open
 
 - The exact reaches above $`\Theta_A`$ (above any base below $`T_\omega`$ they follow the formal-reach recursion run above that base;
-  outline only, [BREAK.md](BREAK.md) §7.1); the reaches up to $`\Theta_A`$, and the closed form of $`O`$ on $`[\Lambda_\Gamma, \Lambda_\varepsilon)`$, are
+  now proved, 1 review, [COVER.md](COVER.md) §5.1); the reaches up to $`\Theta_A`$, and the closed form of $`O`$ on $`[\Lambda_\Gamma, \Lambda_\varepsilon)`$, are
   now proved ([PINS.md](PINS.md) §2–3).
 - $`R_2^C`$ above $`\nu_C`$ (the core of $`R_2^C`$ now contains $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$, [BREAK.md](BREAK.md) §2). INC1-nonups and INC1-S are now
   proved ([BREAK.md](BREAK.md) §1).
