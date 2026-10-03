@@ -91,7 +91,9 @@ Conjectures: **CAP**, $`\mathrm{lh}(\upsilon_{\omega^2\eta}) = \upsilon_{\omega^
 (the program agrees on 11 restarts, among them "top + $`\omega`$" at $`\upsilon_{\omega^\omega}`$; by Theorem OFF-V of [REACHES.md](REACHES.md)
 §1 it holds at every restart of level 0 and fails at $`\Xi_\omega`$); **FRAG2-GEN**, beyond the
 skeleton FRAG2 must also move $`\varepsilon`$-bases that are not $`\upsilon`$-points, with Wilken's $`\iota_{\tau,\alpha}`$ (partly proved,
-[REACHES.md](REACHES.md) §4). The value of $`\nu_S`$ is open; its bounds and its two possible kinds are in [REACHES.md](REACHES.md) §4.
+[REACHES.md](REACHES.md) §4). $`\nu_S`$ is now known exactly: it is the top of the least $`\lt_2`$-pair with another $`\lt_2`$-pair nested inside (Theorem FIRST-PAIR,
+1 review), and in $`R_2^C`$ the first non-skeletal point $`\nu_C`$ is $`\le \nu_S`$ and $`\gt \nu_P`$ (Theorem NU-CT, 1 review), both on
+[BREAK.md](BREAK.md) §2. Its name is a conjecture.
 
 Checks (0 failures): 25,238 maps on 4,144 patterns in a model (dropping C1 or C2 gives mismatches); 35,104 moved
 standard matrices and 5,384,652 pairs in the program `phi3def2`, whose $`\le_1`$ and $`\le_2`$ facts change exactly where

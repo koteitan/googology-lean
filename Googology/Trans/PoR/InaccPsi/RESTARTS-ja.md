@@ -85,7 +85,9 @@ $`\mathrm{lh}(\upsilon_{\omega^2\eta}) = \upsilon_{\omega^2\eta+\omega+1} + (1 +
 $`\upsilon_{\omega^\omega}`$ での「上端 + $`\omega`$」がある。[REACHES-ja.md](REACHES-ja.md) §1 の定理 OFF-V により、段 0 のすべての
 やり直しで成り立ち、$`\Xi_\omega`$ で外れる）。**FRAG2-GEN**、骨組みの外では、FRAG2 は $`\upsilon`$ の点でない
 $`\varepsilon`$ 数の基も、Wilken の $`\iota_{\tau,\alpha}`$ で動かす必要がある（一部は証明済み、[REACHES-ja.md](REACHES-ja.md) §4）。
-$`\nu_S`$ の値は未解決。その上下の評価と、ありうる 2 つの種類は [REACHES-ja.md](REACHES-ja.md) §4 にある。
+$`\nu_S`$ は今は正確に分かっている：中に別の $`\lt_2`$ の組が入れ子になった最小の $`\lt_2`$ の組の上端（定理 FIRST-PAIR、
+査読 1 回）。$`R_2^C`$ が骨組み型でなくなる最初の点 $`\nu_C`$ は $`\nu_S`$ 以下で $`\nu_P`$ より上（定理 NU-CT、査読 1 回）。どちらも
+[BREAK-ja.md](BREAK-ja.md) §2。名前は予想。
 
 確かめたこと（失敗 0）：モデルで 4,144 個のパターンの上の 25,238 個の写像（C1 か C2 を外すと食い違う）。プログラム
 `phi3def2` で、動かした標準形の行列 35,104 個と 5,384,652 組：$`\le_1`$ と $`\le_2`$ の事実は、FRAG2 が予言する所でちょうど変わる。

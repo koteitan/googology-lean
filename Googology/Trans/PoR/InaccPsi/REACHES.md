@@ -120,8 +120,8 @@ and $`\nu_P = \upsilon_{\Lambda^*+\omega^2}`$.
 $`R_2^+`$ is skeletal on a set if (SK1) every point that is not a $`\upsilon`$-point has its $`R_1^+`$ reach there, and (SK3) every
 $`\lt_2`$-pair is $`(\upsilon_\xi, \upsilon_{\xi+1})`$ ([RESTARTS.md](RESTARTS.md) §2). $`\nu_S`$ and $`\nu_C`$ are the first points where
 $`R_2^S`$ and $`R_2^C`$ stop being skeletal. INC1-nonups is the statement "if $`a`$ is not a $`\upsilon`$-point and $`a \le_1 b`$ in $`R_2^C`$,
-then $`a \le_1 b`$ in $`R_1^+`$"; it is proved below $`\upsilon_{\Xi_\omega+\omega^2}`$ and open above. INC1-S is the same for $`R_2^S`$
-and every $`a`$; it is open. Both are now reduced to Conjecture NOBAD (and CC for $`R_2^C`$), [BREAK.md](BREAK.md) §1.
+then $`a \le_1 b`$ in $`R_1^+`$"; it was first proved below $`\upsilon_{\Xi_\omega+\omega^2}`$. INC1-S is the same for $`R_2^S`$ and every $`a`$.
+Both are now proved everywhere (Theorem INC1, 1 review, [BREAK.md](BREAK.md) §1).
 
 **Status change** (blocking point found in the next round, [PINS.md](PINS.md) §4). The proof of LEFT in $`R_2^S`$ assumed that
 $`\Sigma_1`$-elementarity in the language of $`R_2^S`$ gives $`\le_1`$ of $`R_1^+`$; it does not. So LEFT, and every result below that uses
@@ -129,8 +129,10 @@ it (3CH, FIRST-BREAK, FRAG2-W, FRAG2-C, and C3′-FALSE of §5), holds in $`R_2^
 **Second status change** ([BREAK.md](BREAK.md) §1, 1 review). LEFT holds for every left end below the first bad right end, which in
 $`R_2^S`$ lies above $`\nu_P`$, and everywhere given Conjecture NOBAD (in $`R_2^C`$ also given CC). FIRST-BREAK and 3CH (iv) are
 unconditional again; the other results hold given NOBAD, and unconditionally low enough.
+**Third status change** ([BREAK.md](BREAK.md) §1, 1 review). NOBAD, INC1-S and INC1-nonups are proved. So LEFT, and every result
+below that used it, now holds with no hypothesis.
 
-- **Lemma LEFT** (proved given INC1-S in $`R_2^S`$ and given INC1-nonups in $`R_2^C`$, 1 review; now given NOBAD, see above). Every $`\lt_2`$-left end is $`\upsilon_\lambda`$ with $`\lambda`$ a
+- **Lemma LEFT** (first proved given INC1-S in $`R_2^S`$ and given INC1-nonups in $`R_2^C`$, 1 review; now proved, see above). Every $`\lt_2`$-left end is $`\upsilon_\lambda`$ with $`\lambda`$ a
   limit. **Corollary 3CH**: in every chain $`c_0 \lt_2 c_1 \lt_2 c_2`$, $`c_0 = \upsilon_\Lambda`$ with $`\Lambda`$ a restart index and
   $`c_1 = \upsilon_\mu`$ with $`\mu`$ a limit; so $`\nu_S \le c_1`$.
 - **Theorem FIRST-BREAK** (proved, 1 review, and unconditional by [BREAK.md](BREAK.md) §1, 1 review; $`R_2^S`$). $`\nu_S = \min(\nu_a, \nu_b)`$, where $`\nu_a`$ is the least $`b`$ with
@@ -148,27 +150,28 @@ unconditional again; the other results hold given NOBAD, and unconditionally low
   FRAG2 needs only SK1. FRAG2-C: with the extra datum $`\mathrm{Cut}(a) = \min\{\mathrm{cap}(u) : u \text{ a } \upsilon\text{-point}, u \le_1 a\}`$ it holds
   where reaches are "cut-skeletal". FRAG2-1E: one base change between any two $`\varepsilon`$-bases (the $`R_2^+`$ form of Wilken's
   $`\iota_{\tau,\alpha}`$), under Wilken's side condition. By LEFT only $`\upsilon`$-points are $`\lt_2`$-left ends, so other bases carry
-  only $`\le_1`$ data. **Not proved** (blocking point): the ranges "FRAG2-W up to $`\nu_b`$" and "cut-skeletal beyond $`\nu_b`$"; the
+  only $`\le_1`$ data. FRAG2-W and FRAG2-C also assumed INC1, which is now proved ([BREAK.md](BREAK.md) §1). **Not proved** (blocking point): the ranges "FRAG2-W up to $`\nu_b`$" and "cut-skeletal beyond $`\nu_b`$"; the
   proof assumes SK3, which fails above $`\nu_a`$. The referee's fix: restrict them to $`[0, \nu_S)`$ ($`\nu_S`$ is now known exactly,
   [BREAK.md](BREAK.md) §2).
 - **Conjecture NS.** $`\nu_S = \nu_C`$ is the top of the least "pair with a nested pair", between $`\psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ and
   $`\psi_{\Omega_1}(\omega^{\Omega_\omega+1})`$, far below $`\theta_0`$; the first inaccessible enters only with the first point with two
   $`\lt_2`$-successors. Now: for $`R_2^S`$, "$`\nu_S`$ is the top of the least pair with a nested pair" is proved (Theorem FIRST-PAIR,
   1 review, [BREAK.md](BREAK.md) §2); its name ($`\psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'+1} + \theta')`$ with $`\theta' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)`$, inside the
-  conjectured interval) and $`\nu_S = \nu_C`$ stay conjectures.
+  conjectured interval) stays a conjecture. In $`R_2^C`$, $`\nu_C = T_C \le \nu_S`$, and $`\nu_C = \nu_S`$ unless $`R_2^C`$ has one extra "ghost" pair
+  (Theorem NU-CT, 1 review, [BREAK.md](BREAK.md) §2); $`\nu_C = \nu_S`$ is open.
 
 ## 5. The least chain of length 3
 
 - **Lower bound** (proved). $`m_3 \ge \Lambda_\varepsilon \gt \Phi_1`$ (§2, 1 review), so $`m_3 \gt \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$.
   A second paper proves the weaker $`m_3 \gt \upsilon_{\Xi_\omega+\omega^2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1+1} + \omega^{\theta+2})`$ (1 review).
-  The shape of the bottom of a chain (given INC1-S or INC1-nonups) and stronger bounds are in [PINS.md](PINS.md) §4.
-- **C3′ in its heuristic form is false** (proved given INC1-S in $`R_2^S`$ and INC1-nonups in $`R_2^C`$, 1 review; now given NOBAD, and
-  unconditionally when $`r_1(\tau)`$ is below the first bad right end, [BREAK.md](BREAK.md) §1). The next restart $`r_1(\tau)`$ above $`\tau`$ is the least $`\upsilon`$-point
+  The shape of the bottom of a chain (now unconditional) and stronger bounds are in [PINS.md](PINS.md) §4.
+- **C3′ in its heuristic form is false** (first proved given INC1-S in $`R_2^S`$ and INC1-nonups in $`R_2^C`$, 1 review; now unconditional,
+  [BREAK.md](BREAK.md) §1). The next restart $`r_1(\tau)`$ above $`\tau`$ is the least $`\upsilon`$-point
   above $`\tau`$; its index is a successor, so by LEFT it is never a $`\lt_2`$-left end, and the restarted triple
   $`\{r_1, r_\omega, r_{\omega+1}\}(\tau)`$ is never a chain. The numeric form of C3′ ([README.md](README.md) §3) has lost its derivation; it
   stays a conjecture. Corrected shape C3′′ (conjecture): $`C^*_3 = \{\upsilon_\Lambda, \upsilon_{\Lambda+\omega}, \upsilon_{\Lambda+\omega+1}\}`$ for a restart
   index $`\Lambda`$. The referee points out evidence against it: in pure $`R_2`$ the least chain has indices
-  $`(\Lambda, \Lambda\cdot\omega, \Lambda\cdot(\omega+1))`$ (Wilken 2021). Now C3′′ is false given LEFT (Theorem C3′′-FALSE, 1 review,
+  $`(\Lambda, \Lambda\cdot\omega, \Lambda\cdot(\omega+1))`$ (Wilken 2021). Now C3′′ is false (Theorem C3′′-FALSE, 1 review, unconditional,
   [BREAK.md](BREAK.md) §3).
 - **NO-GEN** (proved, 1 review; $`R_2^C`$). A covered pattern without a chain of length 3 generates (Carlson 2009, Defs 9.1,
   9.4, 10.1, 13.10, Thm 14.11) only patterns without one. So the chain must be in the seed, and Carlson proves the seed
@@ -205,8 +208,8 @@ Each run was under 60 seconds; none is a proof.
 
 - The exact reaches above $`\Theta_A`$; the reaches up to $`\Theta_A`$, and the closed form of $`O`$ on $`[\Lambda_\Gamma, \Lambda_\varepsilon)`$, are
   now proved ([PINS.md](PINS.md) §2–3).
-- $`R_2^C`$ on $`[\rho_{\Theta_{d\omega}}, \nu_P)`$ (now known up to $`\rho_{\Theta_{d\omega}}`$, [BREAK.md](BREAK.md) §4); INC1-nonups and INC1-S, now reduced to
-  NOBAD and CC ([BREAK.md](BREAK.md) §1).
+- $`R_2^C`$ above $`\nu_C`$ (the core of $`R_2^C`$ now contains $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$, [BREAK.md](BREAK.md) §2). INC1-nonups and INC1-S are now
+  proved ([BREAK.md](BREAK.md) §1).
 - The values of $`\Theta_P`$, $`\Lambda^*`$, $`\nu_P`$ and $`\nu_S`$ (the names up to $`\Lambda_\varepsilon`$ are now proved, [PINS.md](PINS.md) §3; $`\nu_S`$ is now
   described exactly, its name is a conjecture, [BREAK.md](BREAK.md) §2).
 - FRAG2 beyond $`\nu_S`$: several bases that are not $`\upsilon`$-points at once (FRAG-E), and nested cut data.

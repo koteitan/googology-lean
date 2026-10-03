@@ -136,13 +136,13 @@ $`\upsilon`$-point ([REACHES.md](REACHES.md) §4). $`U`$ is the class of $`\upsi
   ([REACHES.md](REACHES.md) §4) says that $`\Sigma_1`$-elementarity in the language of $`R_2^S`$ gives it for $`R_1^+`$. That is
   wrong: $`\le_1`$ of $`R_1^+`$ is defined through itself (Carlson 2001, p. 19; Wilken 2020, pp. 418, 420), so a $`\Sigma_1`$-copy in
   $`R_2^S`$ need not keep $`\le_1`$ of $`R_1^+`$. So LEFT, and the results that use it, now hold in $`R_2^S`$ only given INC1-S, as
-  in $`R_2^C`$ only given INC1-nonups. The statement may still be true; neither paper nor referee has a proof. Now both
-  are reduced to Conjecture NOBAD (and CC in $`R_2^C`$), and VEB and C3-VEB hold given NOBAD, and unconditionally low enough
-  ([BREAK.md](BREAK.md) §1).
+  in $`R_2^C`$ only given INC1-nonups. Later both were reduced to Conjecture NOBAD, and now INC1-S and INC1-nonups are proved (Theorem INC1, 1 review,
+  [BREAK.md](BREAK.md) §1). So LEFT, VEB and C3-VEB hold with no hypothesis.
 - **Lemma PRINC-S** (proved, 1 review). In $`R_2^S`$, left ends of $`\lt_1`$ and right ends of $`\lt_2`$ are additively principal.
 - **The ladder** (proved, 1 review; Lemma DIAG). $`C_0 = U'`$, $`C_{l+1}`$ is the diagonal of $`C_l`$, and $`C_l`$ is the
   intersection at limits $`l`$. $`C_1`$ is the class of fixed points of $`\iota \mapsto \upsilon_\iota`$, and $`C_2`$ that of $`\alpha \mapsto \Xi_\alpha`$.
-- **Lemma VEB** (proved given INC1-S in $`R_2^S`$, given INC1-nonups in $`R_2^C`$; 1 review). Let $`y \lt f_1 \lt \cdots \lt f_n`$ with
+- **Lemma VEB** (first proved given INC1-S in $`R_2^S`$, given INC1-nonups in $`R_2^C`$; 1 review; now unconditional, [BREAK.md](BREAK.md) §1; a minor fix
+  to one case, from its review, is still to be written in). Let $`y \lt f_1 \lt \cdots \lt f_n`$ with
   $`y \lt_2 f_i`$ for all $`i`$, and $`s = f_n\cdot a_n + \cdots + f_1\cdot a_1 + y\cdot a_0 + b`$ with $`b \lt y`$ and $`a_i \lt \omega`$. If
   $`y \le_1 f_1 + s`$, then $`y \in (C_l)^{(b)}`$ with $`l = \omega^n\cdot a_n + \cdots + \omega\cdot a_1 + a_0`$. For example, $`y \lt_2 e`$ and
   $`y \le_1 e + y`$ give $`y = \upsilon_y`$.
@@ -150,7 +150,7 @@ $`\upsilon`$-point ([REACHES.md](REACHES.md) §4). $`U`$ is the class of $`\upsi
   $`C_{\omega^\omega}`$; every $`m \lt c_0`$ with $`m \le_1 c_0`$ lies in $`C_{\omega^\omega}`$, so $`m_3`$ is a $`\upsilon`$-point (no Conjecture MONO
   needed) with no $`\lt_1`$-predecessor; the $`\lt_2`$-successors $`d`$ of $`c_0`$ with $`d \le_1 c_1`$ are $`\upsilon`$-points. For the shape
   C3′′, $`C^*_3 = \{\upsilon_\Lambda, \upsilon_{\Lambda+\omega}, \upsilon_{\Lambda+\omega+1}\}`$: $`\Lambda = \upsilon_\Lambda`$ lies in $`(C_{\omega^\omega})'`$,
-  $`\mathrm{lh}(c_1) = c_2`$, $`c_2`$ is the only $`\lt_2`$-successor of $`c_1`$, and $`c_0 \lt_2 \upsilon_{\Lambda+k}`$ for infinitely many $`k`$. Given LEFT,
+  $`\mathrm{lh}(c_1) = c_2`$, $`c_2`$ is the only $`\lt_2`$-successor of $`c_1`$, and $`c_0 \lt_2 \upsilon_{\Lambda+k}`$ for infinitely many $`k`$. But
   C3′′ is false ([BREAK.md](BREAK.md) §3), so these consequences of C3′′ are vacuous.
 - **Not proved** (blocking point): "the least $`\Lambda`$ that the proved theorems allow is $`\Lambda_{struct}`$, the least limit point
   of $`C_{\omega^\omega}`$". It leaves out Theorem SKEL ([REACHES.md](REACHES.md) §3: $`c_0 \ge \nu_P`$ in $`R_2^S`$), which with C3-VEB gives
@@ -161,10 +161,11 @@ $`\upsilon`$-point ([REACHES.md](REACHES.md) §4). $`U`$ is the class of $`\upsi
 - **Certificates** ($`R_2^C`$; the author replayed all 39 runs, the referee replayed 7 again).
   $`\Lambda \gt m_3 \gt`$ the point of $`\Phi_3((0,0,0)(1,1,1)(2,2,2)(3,3,3))`$, which is above the point of $`\Phi_3(\mathrm{SRO})`$. If the
   conjecture of [README.md](README.md) §6 that the point of $`\Phi_3(\mathrm{SRO})`$ is $`\theta_0`$ holds, then $`m_3 \gt \theta_0`$. The
-  stronger "$`\Lambda \ge \Lambda_{cert}`$" (the least limit point of $`C_{\omega^\omega}`$ above that point) needs INC1-nonups.
+  stronger "$`\Lambda \ge \Lambda_{cert}`$" (the least limit point of $`C_{\omega^\omega}`$ above that point) needed INC1-nonups, which is now proved,
+  so it holds ([BREAK.md](BREAK.md) §1).
 - **Conjectures, now proved** ([BREAK.md](BREAK.md) §3, 1 review). $`\min C_l = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot l})`$ and
   $`\Lambda_{struct} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot\omega^\omega+1})`$. The lower half of CH ($`m_3 \gt \psi_{\Omega_1}(I_0)`$) is open; the
-  route "upper half from C3′′" is gone, because C3′′ is false given LEFT. The numeric C3′ needs
+  route "upper half from C3′′" is gone, because C3′′ is false. The numeric C3′ needs
   $`\psi_{\Omega_1}(E + \theta)`$ to be a fixed point of $`\iota \mapsto \upsilon_\iota`$, which fails if Lemma REL is an equality there.
 
 ## 5. Checks
@@ -193,5 +194,5 @@ Each run was under 60 seconds; none is a proof.
   sharp form of LHPAR\* fails as stated, and "elementary recursive" is an outline ([BREAK.md](BREAK.md) §4).
 - The closed form of $`c^+`$ on $`[\Lambda_\varepsilon, \Theta_1)`$; the names of $`\Theta_P`$, $`\Theta_1`$, $`\Theta_A`$, $`\Lambda^*`$ and $`\nu_P`$; how far $`D`$
   reaches; the names half of the claim above $`\Lambda_\varepsilon`$.
-- INC1-S and INC1-nonups, now reduced to NOBAD and CC ([BREAK.md](BREAK.md) §1).
-- $`C^*_3`$: the least bottom (above $`\nu_P`$), the upper half, the lower half, and Conjecture CH ([BREAK.md](BREAK.md) §6).
+- INC1-S and INC1-nonups are now proved ([BREAK.md](BREAK.md) §1); RIGHT (every $`\lt_2`$-right end is a $`\upsilon`$-point) is open.
+- $`C^*_3`$: the least bottom (above $`\nu_P`$), the upper half, the lower half, and Conjecture CH ([BREAK.md](BREAK.md) §8).

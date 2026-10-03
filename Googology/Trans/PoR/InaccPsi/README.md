@@ -74,7 +74,7 @@ Both halves are **open**. Below $`\upsilon_{\omega\cdot\omega}`$ both hold, and 
 $`\Phi_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$, with $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, the first fixed point of $`\alpha \mapsto \Xi_\alpha`$, where $`\Xi_\alpha`$ is the
 $`\alpha`$-th fixed point of $`\iota \mapsto \upsilon_\iota`$ (§3, [RESTARTS.md](RESTARTS.md) and [REACHES.md](REACHES.md)), and now up to
 $`\Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$ ([PINS.md](PINS.md) §3). The core half alone is proved in $`R_2^C`$ further, on
-$`[0, \rho_{\Theta_{d\omega}})`$ and on $`[0, T_C]`$ ([BREAK.md](BREAK.md) §2, §4).
+$`[0, \nu_C]`$, where $`\nu_C \gt \nu_P`$ is the first point where $`R_2^C`$ stops being skeletal ([BREAK.md](BREAK.md) §2).
 
 ## 3. What is proved
 
@@ -91,10 +91,11 @@ of length 3. The fourth page [PINS.md](PINS.md) has the results of the next roun
 (Wilken's announced relativized core, rebuilt except "elementary recursive"), the exact reaches up to $`\Theta_A`$, the names
 $`\upsilon_{1+\iota(\eta)} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$ of all $`\upsilon`$-points (Theorem GEN), so that in $`R_2^C`$ the claim holds up
 to $`\Lambda_\varepsilon`$, and the shape of the bottom of a chain of length 3. It also records a gap found in Lemma LEFT. The fifth
-page [BREAK.md](BREAK.md) has the latest round: Lemma LEFT reduced to one hypothesis (NOBAD), the first non-skeletal point of
-$`R_2^S`$ found exactly, chains of length 3 as fans whose limit is a left end (so the shape C3′′ is false, given LEFT), the
-finiteness of the closures $`C_\tau(z)`$, and the core of $`R_2^C`$ up to $`\rho_{\Theta_{d\omega}}`$. Above $`\Lambda_\varepsilon`$ both halves are open in
-$`R_2^C`$ (the core part is proved up to $`\rho_{\Theta_{d\omega}} \gt \Lambda_\varepsilon`$), and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$.
+page [BREAK.md](BREAK.md) has the latest two rounds: INC1, NOBAD and Lemma LEFT proved with no hypothesis left, the first
+non-skeletal point of $`R_2^S`$ found exactly, that of $`R_2^C`$ equal to it unless one extra pair exists, the first block of every
+level of nested pairs, limits of these levels never in a pair, chains of length 3 as fans whose limit is a left end (so the
+shape C3′′ is false), the finiteness of the closures $`C_\tau(z)`$, and the core of $`R_2^C`$ up to $`\nu_C \gt \nu_P`$. Above $`\Lambda_\varepsilon`$ both
+halves are open in $`R_2^C`$ (the core part is proved up to $`\nu_C`$), and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$.
 
 **Lean** (the five files of this directory, built with the whole library):
 
@@ -195,7 +196,7 @@ listed under "Not proved".
 
 **Up to $`\upsilon_{\omega^3}`$, without FRAG** (2026-10, $`R_2^C`$). Extended to $`[0, \Xi_\omega]`$ by Theorem CORE-C$`^\Xi`$
 ([RESTARTS.md](RESTARTS.md) §3), to $`[0, \Lambda_\varepsilon)`$ and $`[0, \rho_{\Theta_P})`$ ([REACHES.md](REACHES.md) §2), and to
-$`[0, \rho_{\Theta_A+\omega^2})`$ ([PINS.md](PINS.md) §2), and to $`[0, \rho_{\Theta_{d\omega}})`$ and $`[0, T_C]`$ ([BREAK.md](BREAK.md) §2, §4).
+$`[0, \rho_{\Theta_A+\omega^2})`$ ([PINS.md](PINS.md) §2), and to $`[0, \rho_{\Theta_{d\omega}})`$, and to $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$ ([BREAK.md](BREAK.md) §2, §4).
 
 - **Lemma PT** (1 review). Let $`Q`$ be a pattern in the full sense of Carlson 2009, Def 5.6. If every copy of $`Q`$ in
   $`R_2^C`$ puts the point of $`Q`$ at $`\ge v`$, then $`[0, v] \subseteq \mathrm{Core}(R_2^C)`$ (Carlson 2009, Lemma 15.11,
@@ -226,7 +227,7 @@ $`\kappa_X = \min\{\kappa : \kappa \le_1^X \beta \text{ for all } \beta \ge \kap
   $`R_2^C`$ (the case "$`\le_2`$ with right end $`\beta_0`$" was added in a second paper, 2026-10, 1 review). At $`\beta_0`$ the difference is an extra relation of $`R_2^C`$. So
   $`R_2^S = R_2^C`$ if and only if the converse ($`C \Rightarrow S`$) holds at every stage of agreement. Also
   $`\beta_0 \ge \upsilon_{\omega^3}`$ (with FRAG, now proved; now $`\beta_0 \ge \Lambda_\varepsilon`$ and $`\beta_0 \ge \rho_{\Theta_P}`$,
-  [REACHES.md](REACHES.md) §1–2; then $`\beta_0 \ge \rho_{\Theta_A}`$, [PINS.md](PINS.md) §2; now $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$, [BREAK.md](BREAK.md) §4), and $`\beta_0`$ is countable or $`\infty`$.
+  [REACHES.md](REACHES.md) §1–2; then $`\beta_0 \ge \rho_{\Theta_A}`$, [PINS.md](PINS.md) §2; then $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$, [BREAK.md](BREAK.md) §4; now $`\beta_0 \ge \nu_C \gt \nu_P`$, §2), and $`\beta_0`$ is countable or $`\infty`$.
 - **Lemma UPG.** At a stage of agreement, $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$ when every $`\gamma \lt \alpha`$ lies in an
   isominimal subset of $`\alpha`$ in $`R_2^C`$ (true for $`\alpha = \kappa_C`$ and $`\alpha = \upsilon_{\omega\cdot\omega}`$).
 - **KAPPA and CORE-EQ.** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$, and $`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$. So if
@@ -299,11 +300,12 @@ pointwise least one.
 - Facts on $`C^*_3`$ (2026-10): no chain of length 3 lies inside $`[0, c_2)`$; $`c_0`$ is a limit of its
   $`\lt_1`$-predecessors; $`m_3 \gt \Xi_\omega`$ and $`c_0 \ge \upsilon_{\Xi_\omega+\omega^2}`$, without FRAG ([RESTARTS.md](RESTARTS.md) §3); now
   $`m_3 \ge \Lambda_\varepsilon \gt \Phi_1`$ ([REACHES.md](REACHES.md) §5); from replayed certificates, $`m_3`$ is above the point of
-  $`\Phi_3((0,0,0)(1,1,1)(2,2,2)(3,3,3))`$; given INC1-S (or INC1-nonups in $`R_2^C`$), $`m_3`$ is a $`\upsilon`$-point and $`c_0`$ is a
+  $`\Phi_3((0,0,0)(1,1,1)(2,2,2)(3,3,3))`$; $`m_3`$ is a $`\upsilon`$-point and $`c_0`$ is a
   fixed point of $`\iota \mapsto \upsilon_\iota`$ that lies $`\omega^\omega`$ levels deep in a ladder of such classes (Theorem C3-VEB,
-  [PINS.md](PINS.md) §4); LEFT, and so these results, now need only Conjecture NOBAD (and CC in $`R_2^C`$), and hold
-  unconditionally low enough ([BREAK.md](BREAK.md) §1); in $`R_2^S`$, $`m_3`$ and every fan apex lie above the first non-skeletal point
-  $`\nu \gt \nu_P`$ (Lemma CAP), and $`m_3 \gt \nu_P`$ has 2 reviews ([BREAK.md](BREAK.md) §2–3). Earlier:
+  [PINS.md](PINS.md) §4; its hypothesis INC1 is now proved, [BREAK.md](BREAK.md) §1); $`m_3`$ and every fan apex lie above the first
+  non-skeletal point ($`\nu`$ in $`R_2^S`$, Lemma CAP; $`\nu_C`$ in $`R_2^C`$, Theorem NU-CT), which is $`\gt \nu_P`$, and $`m_3 \gt \nu_P`$ has 2 reviews in
+  $`R_2^S`$ ([BREAK.md](BREAK.md) §2–3); the least tops of nested pairs of every depth lie below $`m_3`$ (NEST, 2 reviews, [BREAK.md](BREAK.md) §5).
+  Earlier:
   $`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$.
 - **Lemma TOP2** (2026-10, 1 review). For every $`\alpha \lt m_3`$ there is a chain $`x \lt_2 y`$ of length 2 with
   $`\alpha \lt x \lt y \lt m_3`$. So $`m_3`$ is a limit of chains of length 2, and $`m_3 \ge \upsilon_{\omega\cdot\omega}`$ without FRAG.
@@ -394,7 +396,7 @@ pointwise least one.
 **Not proved:**
 
 - **The claim above $`\Lambda_\varepsilon`$** in $`R_2^C`$, and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$, both halves. The reaches of the restarts
-  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [BREAK.md](BREAK.md) §6, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
+  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [BREAK.md](BREAK.md) §8, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
 - **$`R_2^S = R_2^C`$**: the converse $`C \Rightarrow S`$ for $`\le_1`$ at a successor stage $`\beta \gt \kappa_C`$ with
   $`\alpha \notin G_C`$, and for $`\le_2`$ at stages of type (ii) (this needs an upward transfer of $`\Pi_2`$ sentences, which
   neither upward 2-reflection nor liftings give; it is now one pair $`(a^*, \beta)`$ per stage, and below $`\kappa_C`$ it is
@@ -416,8 +418,8 @@ pointwise least one.
   $`E + \Omega_\omega`$ in place of $`E`$ in the three chain terms; by REL it does not fit the reading it came from (the
   $`\upsilon`$-hierarchy restarted above $`m_3`$), because a restart costs $`+P`$, not $`+\Omega_\omega`$ (proved as a
   dichotomy, 1 review). The reading itself is now refuted: the restarted triple above a point is never a chain
-  (C3′-FALSE, 1 review, [REACHES.md](REACHES.md) §5; it uses Lemma LEFT, so it now holds given Conjecture NOBAD,
-  [BREAK.md](BREAK.md) §1), so the numeric C3′ has no derivation left. The corrected shape C3′′ is false too, given LEFT: $`c_0, c_1, c_2`$
+  (C3′-FALSE, 1 review, [REACHES.md](REACHES.md) §5; it uses Lemma LEFT, which is now proved,
+  [BREAK.md](BREAK.md) §1), so the numeric C3′ has no derivation left. The corrected shape C3′′ is false too: $`c_0, c_1, c_2`$
   are all limit points of the class $`C_{\omega^\omega}`$ (Theorem C3′′-FALSE, [BREAK.md](BREAK.md) §3). A chain of length 3 is exactly a fan with
   infinitely many successors whose limit is a left end (Theorem CF, unconditional). Upper half open: the
   known $`\le_2`$ relations of $`R_2^C`$ (up to $`\Lambda_\varepsilon`$) form no chain of length 3 (Theorem BLK$`^O`$); a chain must be in the
@@ -475,7 +477,7 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       [REACHES.md](REACHES.md))
     - in $`R_2^C`$ up to $`\Lambda_\varepsilon`$, and the core of $`R_2^C`$ up to $`\rho_{\Theta_A+\omega^2}`$ — proved (GEN, NAME-V,
       NAME-OFFSET, CORE-C$`^A`$; [PINS.md](PINS.md))
-    - the core of $`R_2^C`$ up to $`\rho_{\Theta_{d\omega}}`$ and on $`[0, T_C]`$ — proved (CORE-C$`^{d\omega}`$, CAP; [BREAK.md](BREAK.md))
+    - the core of $`R_2^C`$ up to $`\rho_{\Theta_{d\omega}}`$, and on $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$ — proved (CORE-C$`^{d\omega}`$, CAP, NU-CT; [BREAK.md](BREAK.md))
   - **B** upper bound $`\mathrm{Core}(R_2^+) \subseteq \psi_{\Omega_1}(I_\omega)`$ — open
     - B0 reduction to least chains (Theorem CC) — proved for $`R_2^C`$
       - B0-S the same for $`R_2^S`$ — open; it follows from AGR
@@ -494,8 +496,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       hypotheses (FRAG2-W, FRAG2-C, FRAG2-1E); several non-$`\upsilon`$ bases at once (FRAG-E) — open, very hard
     - B4 the $`\le_2`$-pairs among the points that B3 moves — proved below $`\nu_P`$ in $`R_2^S`$ and below $`\rho_{\Theta_A+\omega^2}`$ in both
       structures (SKEL, BLK$`^O`$, EQB-A), and up to the first non-skeletal point $`\nu`$ in $`R_2^S`$ (SKEL⁺, FIRST-PAIR); every
-      $`\lt_2`$-left end is a $`\upsilon_\lambda`$ with $`\lambda`$ a limit (LEFT: below the first bad right end, which is $`\gt \nu_P`$ in $`R_2^S`$; everywhere
-      given NOBAD, and CC in $`R_2^C`$; [BREAK.md](BREAK.md) §1); above — open
+      $`\lt_2`$-left end is a $`\upsilon_\lambda`$ with $`\lambda`$ a limit (LEFT, now with no hypothesis: INC1
+      and NOBAD, [BREAK.md](BREAK.md) §1); the pairs above $`\nu`$, and RIGHT (every right end is a $`\upsilon`$-point; reduced to isolated pairs) — open
     - B5 assembly B2 + B3 + B4 — proof form only
     - B-PT proof-theoretic variant: theories with $`n`$ inaccessibles prove "a chain of length $`n`$ exists" —
       open; needs a set-theoretic condition for $`\lt_2`$ that is not known
@@ -506,7 +508,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       Thm 4.2); the results of [R2PLUS.md](../../BMS/PoR/Trio/R2PLUS.md) are this theorem below
       $`\upsilon_{\omega^3}`$, Theorem BLK$`^O`$ extends it with exact reaches to $`\Lambda_\varepsilon`$, Theorem EXACT-A to $`\Theta_A`$
       ([PINS.md](PINS.md)), the value at $`\Theta_A`$ and the landmarks $`\Theta_\delta`$, $`\Theta_{d\omega}`$ ([BREAK.md](BREAK.md) §4), Theorem SKEL gives it in
-      $`R_2^S`$ on $`[0, \nu_P)`$ ([REACHES.md](REACHES.md)), and SKEL⁺ up to $`\nu`$ ([BREAK.md](BREAK.md) §2) — open above, very hard
+      $`R_2^S`$ on $`[0, \nu_P)`$ ([REACHES.md](REACHES.md)), and SKEL⁺ up to $`\nu`$ ([BREAK.md](BREAK.md) §2); the first block of every level of nested pairs (LIFT-0,
+      [BREAK.md](BREAK.md) §5) — open above, very hard
     - A3 least realizations as terms — open
     - A4 **Conjecture CH**: the least chain of length $`k+2`$ needs $`k`$ inaccessibles — conjecture
     - A5 every term below the bound is the value of a pattern — open
@@ -525,9 +528,9 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
   - **Side leaves**
     - **DOM₂** — proved, with SHARP; DOM$`_k`$ for every $`k`$ — conjecture
     - locate $`C^*_3`$ — open (Conjecture C3′ in §3, its derivation refuted; known: $`m_3 \ge \Lambda_\varepsilon`$, and the skeleton ends
-      below $`m_3`$; the reach-only route fails (NO-PROMOTE); a chain is a fan whose limit is a left end (CF); given LEFT,
+      below $`m_3`$; the reach-only route fails (NO-PROMOTE); a chain is a fan whose limit is a left end (CF);
       $`c_0, c_1, c_2`$ are limit points of the class $`C_{\omega^\omega}`$, so C3′′ is false (C3-VEB, C3′′-FALSE; [PINS.md](PINS.md) §4,
-      [BREAK.md](BREAK.md) §3))
+      [BREAK.md](BREAK.md) §3); limits of levels lie in no pair, and in $`R_2^C`$ the first fan is below $`m_3`$ (LIM-CAP, DOM_F; [BREAK.md](BREAK.md) §6))
     - Lean: the order type of the bounded terms is $`\psi_{\Omega_1}(X)`$; Lemma LOC (whether a finite set is
       isominimal depends only on the structure up to its largest element; on paper, not refereed) — open
 

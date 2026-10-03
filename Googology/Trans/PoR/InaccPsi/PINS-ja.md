@@ -132,13 +132,14 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
   $`R_2^S`$ の言語での $`\Sigma_1`$ 初等性から $`R_1^+`$ での初等性が出る、と言う。これは誤り：$`R_1^+`$ の $`\le_1`$ はそれ自身を
   使って定義される（Carlson 2001, p. 19；Wilken 2020, pp. 418, 420）ので、$`R_2^S`$ での $`\Sigma_1`$ の写しは $`R_1^+`$ の $`\le_1`$ を
   保つとは限らない。だから LEFT とそれを使う結果は、$`R_2^S`$ では INC1-S を仮定したときだけ成り立つ（$`R_2^C`$ で
-  INC1-nonups を仮定したときだけ成り立つのと同じ）。命題そのものは正しいかもしれない。論文にも査読者にも証明は無い。
-  今はどちらも予想 NOBAD（$`R_2^C`$ では CC も）に帰着し、VEB と C3-VEB は NOBAD を仮定して、また十分下では条件なしで
-  成り立つ（[BREAK-ja.md](BREAK-ja.md) §1）。
+  INC1-nonups を仮定したときだけ成り立つのと同じ）。あとでどちらも予想 NOBAD に帰着し、
+  今は INC1-S と INC1-nonups は証明済み（定理 INC1、査読 1 回、[BREAK-ja.md](BREAK-ja.md) §1）。だから LEFT、VEB、C3-VEB は仮定なしで
+  成り立つ。
 - **補題 PRINC-S**（証明済み、査読 1 回）。$`R_2^S`$ では、$`\lt_1`$ の左端と $`\lt_2`$ の右端は加法的主要数。
 - **はしご**（証明済み、査読 1 回。補題 DIAG）。$`C_0 = U'`$、$`C_{l+1}`$ は $`C_l`$ の対角、極限の $`l`$ では $`C_l`$ は共通部分。
   $`C_1`$ は $`\iota \mapsto \upsilon_\iota`$ の不動点の集まり、$`C_2`$ は $`\alpha \mapsto \Xi_\alpha`$ の不動点の集まり。
-- **補題 VEB**（$`R_2^S`$ では INC1-S、$`R_2^C`$ では INC1-nonups を仮定して証明済み、査読 1 回）。$`y \lt f_1 \lt \cdots \lt f_n`$ で、
+- **補題 VEB**（はじめは $`R_2^S`$ では INC1-S、$`R_2^C`$ では INC1-nonups を仮定して証明済み、査読 1 回。今は条件なし、[BREAK-ja.md](BREAK-ja.md) §1。
+  査読の小さな直し（1 つの場合）をまだ書き込んでいない）。$`y \lt f_1 \lt \cdots \lt f_n`$ で、
   すべての $`i`$ で $`y \lt_2 f_i`$ とし、$`b \lt y`$、$`a_i \lt \omega`$ で $`s = f_n\cdot a_n + \cdots + f_1\cdot a_1 + y\cdot a_0 + b`$ とおく。
   $`y \le_1 f_1 + s`$ なら $`y \in (C_l)^{(b)}`$。ここで $`l = \omega^n\cdot a_n + \cdots + \omega\cdot a_1 + a_0`$。例えば $`y \lt_2 e`$ と $`y \le_1 e + y`$
   から $`y = \upsilon_y`$ が出る。
@@ -146,7 +147,7 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
   $`m \le_1 c_0`$ となる $`m \lt c_0`$ はどれも $`C_{\omega^\omega}`$ に入る。だから $`m_3`$ は $`\upsilon`$ の点で（予想 MONO は要らない）、$`\lt_1`$ の
   前の元を持たない。$`d \le_1 c_1`$ となる $`c_0`$ の $`\lt_2`$ の後の元 $`d`$ は $`\upsilon`$ の点。形 C3′′、
   $`C^*_3 = \{\upsilon_\Lambda, \upsilon_{\Lambda+\omega}, \upsilon_{\Lambda+\omega+1}\}`$ では：$`\Lambda = \upsilon_\Lambda`$ は $`(C_{\omega^\omega})'`$ に入り、$`\mathrm{lh}(c_1) = c_2`$、$`c_2`$ は
-  $`c_1`$ のただ 1 つの $`\lt_2`$ の後の元、そして無限に多くの $`k`$ で $`c_0 \lt_2 \upsilon_{\Lambda+k}`$。LEFT を仮定すると C3′′ は偽
+  $`c_1`$ のただ 1 つの $`\lt_2`$ の後の元、そして無限に多くの $`k`$ で $`c_0 \lt_2 \upsilon_{\Lambda+k}`$。C3′′ は偽
   （[BREAK-ja.md](BREAK-ja.md) §3）なので、これらの C3′′ の帰結は中身が無い。
 - **未証明**（止める点）：「証明済みの定理が許す最小の $`\Lambda`$ は $`\Lambda_{struct}`$（$`C_{\omega^\omega}`$ の最小の極限点）」。これは定理
   SKEL（[REACHES-ja.md](REACHES-ja.md) §3：$`R_2^S`$ で $`c_0 \ge \nu_P`$）を見落としている。SKEL と C3-VEB から $`m_3 \ge \rho_{\Lambda^*}`$
@@ -157,10 +158,10 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
 - **証明書**（$`R_2^C`$。著者が 39 回の実行をすべて再生し、査読者が 7 つをもう一度再生した）。
   $`\Lambda \gt m_3 \gt`$ $`\Phi_3((0,0,0)(1,1,1)(2,2,2)(3,3,3))`$ の点、これは $`\Phi_3(\mathrm{SRO})`$ の点より上。[README-ja.md](README-ja.md) §6
   の予想「$`\Phi_3(\mathrm{SRO})`$ の点は $`\theta_0`$」が成り立てば $`m_3 \gt \theta_0`$。もっと強い「$`\Lambda \ge \Lambda_{cert}`$」（その点より上の
-  $`C_{\omega^\omega}`$ の最小の極限点）は INC1-nonups が要る。
+  $`C_{\omega^\omega}`$ の最小の極限点）は INC1-nonups が要ったが、それは今は証明済みなので成り立つ（[BREAK-ja.md](BREAK-ja.md) §1）。
 - **予想、今は証明済み**（[BREAK-ja.md](BREAK-ja.md) §3、査読 1 回）。$`\min C_l = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot l})`$、
   $`\Lambda_{struct} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot\omega^\omega+1})`$。CH の下半分（$`m_3 \gt \psi_{\Omega_1}(I_0)`$）は未解決。「上半分は C3′′
-  から」という道は無くなった。LEFT を仮定すると C3′′ は偽だから。数で書いた C3′ には
+  から」という道は無くなった。C3′′ は偽だから。数で書いた C3′ には
   $`\psi_{\Omega_1}(E + \theta)`$ が $`\iota \mapsto \upsilon_\iota`$ の不動点であることが要るが、そこで補題 REL が等号なら成り立たない。
 
 ## 5. 確認
@@ -189,5 +190,5 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
   ままでは成り立たず、「初等再帰的」は概略だけ（[BREAK-ja.md](BREAK-ja.md) §4）。
 - $`[\Lambda_\varepsilon, \Theta_1)`$ での $`c^+`$ の閉じた形。$`\Theta_P`$、$`\Theta_1`$、$`\Theta_A`$、$`\Lambda^*`$、$`\nu_P`$ の名前。$`D`$ がどこまで延びるか。
   $`\Lambda_\varepsilon`$ より上での主張の名前の半分。
-- INC1-S と INC1-nonups、今は NOBAD と CC に帰着（[BREAK-ja.md](BREAK-ja.md) §1）。
-- $`C^*_3`$：最小のいちばん下の点（$`\nu_P`$ より上）、上半分、下半分、予想 CH（[BREAK-ja.md](BREAK-ja.md) §6）。
+- INC1-S と INC1-nonups は今は証明済み（[BREAK-ja.md](BREAK-ja.md) §1）。RIGHT（どの $`\lt_2`$ の右端も $`\upsilon`$ の点）は未解決。
+- $`C^*_3`$：最小のいちばん下の点（$`\nu_P`$ より上）、上半分、下半分、予想 CH（[BREAK-ja.md](BREAK-ja.md) §8）。

@@ -116,8 +116,8 @@ $`\nu_P = \upsilon_{\Lambda^*+\omega^2}`$ とおく。
 ある集合の上で $`R_2^+`$ が骨組み型とは：(SK1) $`\upsilon`$ の点でない点はそこで $`R_1^+`$ の届く先を持ち、(SK3) $`\lt_2`$ の組は
 どれも $`(\upsilon_\xi, \upsilon_{\xi+1})`$（[RESTARTS-ja.md](RESTARTS-ja.md) §2）。$`R_2^S`$ と $`R_2^C`$ が骨組み型でなくなる最初の点を
 $`\nu_S`$、$`\nu_C`$ と書く。INC1-nonups は「$`a`$ が $`\upsilon`$ の点でなく、$`R_2^C`$ で $`a \le_1 b`$ なら、$`R_1^+`$ でも $`a \le_1 b`$」
-という命題。$`\upsilon_{\Xi_\omega+\omega^2}`$ より下では証明済み、その上は未解決。INC1-S は、$`R_2^S`$ とすべての $`a`$ についての
-同じ命題で、未解決。どちらも今は予想 NOBAD（$`R_2^C`$ では CC も）に帰着した、[BREAK-ja.md](BREAK-ja.md) §1。
+という命題。はじめは $`\upsilon_{\Xi_\omega+\omega^2}`$ より下で証明された。INC1-S は、$`R_2^S`$ とすべての $`a`$ についての同じ命題。
+どちらも今はどこでも証明済み（定理 INC1、査読 1 回、[BREAK-ja.md](BREAK-ja.md) §1）。
 
 **状態の変更**（次の回に見つかった止める点、[PINS-ja.md](PINS-ja.md) §4）。$`R_2^S`$ での LEFT の証明は、$`R_2^S`$ の言語での
 $`\Sigma_1`$ 初等性から $`R_1^+`$ の $`\le_1`$ が出ると仮定していたが、出ない。だから LEFT と、それを使う下の結果（3CH、
@@ -125,8 +125,10 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
 **2 度目の状態の変更**（[BREAK-ja.md](BREAK-ja.md) §1、査読 1 回）。LEFT は、最初の悪い右端より下のどの左端でも成り立つ。
 それは $`R_2^S`$ では $`\nu_P`$ より上。予想 NOBAD を仮定すれば（$`R_2^C`$ では CC も）どこでも成り立つ。FIRST-BREAK と 3CH (iv) は
 また条件なしになった。ほかの結果は NOBAD を仮定して成り立ち、十分下では条件なしで成り立つ。
+**3 度目の状態の変更**（[BREAK-ja.md](BREAK-ja.md) §1、査読 1 回）。NOBAD、INC1-S、INC1-nonups は証明済み。だから LEFT と、
+それを使う下のどの結果も、今は仮定なしで成り立つ。
 
-- **補題 LEFT**（$`R_2^S`$ では INC1-S、$`R_2^C`$ では INC1-nonups を仮定して証明済み、査読 1 回。今は NOBAD を仮定して、上を見よ）。$`\lt_2`$ の左端はどれも $`\lambda`$ が
+- **補題 LEFT**（はじめは $`R_2^S`$ では INC1-S、$`R_2^C`$ では INC1-nonups を仮定して証明済み、査読 1 回。今は証明済み、上を見よ）。$`\lt_2`$ の左端はどれも $`\lambda`$ が
   極限の $`\upsilon_\lambda`$。**系 3CH**：どの鎖 $`c_0 \lt_2 c_1 \lt_2 c_2`$ でも、$`c_0 = \upsilon_\Lambda`$（$`\Lambda`$ はやり直しの添字）、
   $`c_1 = \upsilon_\mu`$（$`\mu`$ は極限）。だから $`\nu_S \le c_1`$。
 - **定理 FIRST-BREAK**（証明済み、査読 1 回。[BREAK-ja.md](BREAK-ja.md) §1 で条件なし、査読 1 回。$`R_2^S`$）。$`\nu_S = \min(\nu_a, \nu_b)`$。ここで $`\nu_a`$ は $`\upsilon_\lambda \lt_2 b`$ かつ
@@ -143,27 +145,28 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
   だけで足りる。FRAG2-C：追加のデータ $`\mathrm{Cut}(a) = \min\{\mathrm{cap}(u) : u \text{ a } \upsilon\text{-point}, u \le_1 a\}`$ を使えば、届く先が
   「切られた骨組み型」の所で成り立つ。FRAG2-1E：任意の 2 つの $`\varepsilon`$ 数の基の間の 1 回の付け替え（Wilken の
   $`\iota_{\tau,\alpha}`$ の $`R_2^+`$ 版）、Wilken の付帯条件の下で。LEFT により $`\lt_2`$ の左端は $`\upsilon`$ の点だけなので、ほかの基は
-  $`\le_1`$ のデータしか持たない。**未証明**（止める点）：範囲の主張「FRAG2-W は $`\nu_b`$ まで」と「$`\nu_b`$ より先も切られた
+  $`\le_1`$ のデータしか持たない。FRAG2-W と FRAG2-C は INC1 も仮定していたが、それは今は証明済み（[BREAK-ja.md](BREAK-ja.md) §1）。**未証明**（止める点）：範囲の主張「FRAG2-W は $`\nu_b`$ まで」と「$`\nu_b`$ より先も切られた
   骨組み型」。証明は SK3 を仮定するが、それは $`\nu_a`$ より上で成り立たない。査読者の直し方：$`[0, \nu_S)`$ に制限する（$`\nu_S`$ は今は
   正確に分かっている、[BREAK-ja.md](BREAK-ja.md) §2）。
 - **予想 NS。** $`\nu_S = \nu_C`$ は「入れ子の組を持つ組」の最小のものの上端で、$`\psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ と
   $`\psi_{\Omega_1}(\omega^{\Omega_\omega+1})`$ の間、$`\theta_0`$ よりはるかに下。最初の到達不能基数は、2 つの $`\lt_2`$ の後の元を持つ最初の点で
   初めて入る。今は：$`R_2^S`$ では「$`\nu_S`$ は入れ子の組を持つ最小の組の上端」が証明済み（定理 FIRST-PAIR、査読 1 回、
   [BREAK-ja.md](BREAK-ja.md) §2）。その名前（$`\theta' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)`$ として $`\psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'+1} + \theta')`$、予想した
-  区間の中）と $`\nu_S = \nu_C`$ は予想のまま。
+  区間の中）は予想のまま。$`R_2^C`$ では $`\nu_C = T_C \le \nu_S`$ で、$`R_2^C`$ に余分な「幽霊」の組が 1 つある場合を除けば
+  $`\nu_C = \nu_S`$（定理 NU-CT、査読 1 回、[BREAK-ja.md](BREAK-ja.md) §2）。$`\nu_C = \nu_S`$ は未解決。
 
 ## 5. 長さ 3 の最小の鎖
 
 - **下界**（証明済み）。$`m_3 \ge \Lambda_\varepsilon \gt \Phi_1`$（§2、査読 1 回）。だから $`m_3 \gt \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$。
   別の論文が、弱い $`m_3 \gt \upsilon_{\Xi_\omega+\omega^2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1+1} + \omega^{\theta+2})`$ を示す（査読 1 回）。
-  鎖のいちばん下の形（INC1-S か INC1-nonups を仮定）ともっと強い評価は [PINS-ja.md](PINS-ja.md) §4 にある。
-- **発見的な形の C3′ は偽**（$`R_2^S`$ では INC1-S、$`R_2^C`$ では INC1-nonups を仮定して証明済み、査読 1 回。今は NOBAD を仮定して、
-  また $`r_1(\tau)`$ が最初の悪い右端より下なら条件なしで、[BREAK-ja.md](BREAK-ja.md) §1）。$`\tau`$ の上の次のやり直し $`r_1(\tau)`$ は $`\tau`$ の上の最小の $`\upsilon`$ の点。
+  鎖のいちばん下の形（今は条件なし）ともっと強い評価は [PINS-ja.md](PINS-ja.md) §4 にある。
+- **発見的な形の C3′ は偽**（はじめは $`R_2^S`$ では INC1-S、$`R_2^C`$ では INC1-nonups を仮定して証明済み、査読 1 回。今は条件なし、
+  [BREAK-ja.md](BREAK-ja.md) §1）。$`\tau`$ の上の次のやり直し $`r_1(\tau)`$ は $`\tau`$ の上の最小の $`\upsilon`$ の点。
   その添字は後続なので、LEFT により $`\lt_2`$ の左端にならない。だからやり直した 3 点 $`\{r_1, r_\omega, r_{\omega+1}\}(\tau)`$ は決して
   鎖にならない。C3′ の数の形（[README-ja.md](README-ja.md) §3）は導き方を失った。予想としては残る。直した形 C3′′（予想）：
   あるやり直しの添字 $`\Lambda`$ で $`C^*_3 = \{\upsilon_\Lambda, \upsilon_{\Lambda+\omega}, \upsilon_{\Lambda+\omega+1}\}`$。査読者は反対の材料を挙げた：
-  + の無い $`R_2`$ では、最小の鎖の添字は $`(\Lambda, \Lambda\cdot\omega, \Lambda\cdot(\omega+1))`$（Wilken 2021）。今は、LEFT を仮定すると
-  C3′′ は偽（定理 C3′′-FALSE、査読 1 回、[BREAK-ja.md](BREAK-ja.md) §3）。
+  + の無い $`R_2`$ では、最小の鎖の添字は $`(\Lambda, \Lambda\cdot\omega, \Lambda\cdot(\omega+1))`$（Wilken 2021）。今は
+  C3′′ は偽（定理 C3′′-FALSE、査読 1 回、条件なし、[BREAK-ja.md](BREAK-ja.md) §3）。
 - **NO-GEN**（証明済み、査読 1 回。$`R_2^C`$）。長さ 3 の鎖を持たない被覆されたパターンから生成される（Carlson 2009 の
   Defs 9.1、9.4、10.1、13.10、Thm 14.11）のは、それを持たないパターンだけ。だから鎖は種の中に無ければならない。
   Carlson が種を被覆されると示すのは Lemma 15.11 だけ（集合論、証人は $`\omega_1^{CK}`$ より上）。
@@ -197,8 +200,8 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
 
 - $`\Theta_A`$ より上の正確な届く先。$`\Theta_A`$ までの届く先と、$`[\Lambda_\Gamma, \Lambda_\varepsilon)`$ での $`O`$ の閉じた形は、今は
   証明済み（[PINS-ja.md](PINS-ja.md) §2–3）。
-- $`[\rho_{\Theta_{d\omega}}, \nu_P)`$ の $`R_2^C`$（今は $`\rho_{\Theta_{d\omega}}`$ まで分かった、[BREAK-ja.md](BREAK-ja.md) §4）。INC1-nonups と INC1-S、今は
-  NOBAD と CC に帰着した（[BREAK-ja.md](BREAK-ja.md) §1）。
+- $`\nu_C`$ より上の $`R_2^C`$（$`R_2^C`$ の核は今は $`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ を含む、[BREAK-ja.md](BREAK-ja.md) §2）。INC1-nonups と INC1-S は今は
+  証明済み（[BREAK-ja.md](BREAK-ja.md) §1）。
 - $`\Theta_P`$、$`\Lambda^*`$、$`\nu_P`$、$`\nu_S`$ の値（$`\Lambda_\varepsilon`$ までの名前は今は証明済み、[PINS-ja.md](PINS-ja.md) §3。$`\nu_S`$ は今は正確に
   記述できたが、名前は予想、[BREAK-ja.md](BREAK-ja.md) §2）。
 - $`\nu_S`$ より先の FRAG2：$`\upsilon`$ の点でない基をいくつも同時に（FRAG-E）、および入れ子の切るデータ。
