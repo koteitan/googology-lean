@@ -94,7 +94,10 @@ $`\upsilon_{1+\iota(\eta)} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$�
 $`R_2^C`$ の核が $`\nu_C \gt \nu_P`$ まで延びたこと。その §7 は 3 回目の結果：入れ子の組の段の極限 $`T_\omega`$ より下では、どの段の
 どのブロックも最初のブロックと同じ形（定理 SH）、どの扇の頂点も $`T_\omega`$ より上（査読 2 回）、最小の扇の後の元はちょうど 2 つで、
 $`R_2^C`$ では開いている、$`\nu_C = \nu_S`$ かどうかは $`R_2^S`$ だけの問い、$`\nu`$ の名前と隙間の間の基の付け替えは添字の命題 $`o_2 = \omega`$ と
-ほか 2 つに帰着。$`R_2^C`$ では $`\Lambda_\varepsilon`$ より上（核の側は $`\nu_C`$ まで証明済み）、$`R_2^S`$ では
+ほか 2 つに帰着。その §8 は 4 回目：$`R_2^C`$ では、入れ子の組のどの段も左端より下にちょうど $`\omega`$ 個の点を持つ（どの $`k`$ でも
+$`o_k = \omega`$、定理 O$`^C`$、査読 1 回。被覆に対する Carlson の最小性による）。だから NU-NAME の形の部分が $`R_2^C`$ で成り立つ。$`R_2^S`$ では
+$`o_2 = \omega`$、$`\nu_P`$ より上の NOLIM、$`\nu_C = \nu_S`$ は未解決のまま。$`\nu_C = \nu_S`$ から今は $`o_2 = \omega`$ が出て、NOLIM は隙間ごとの 1 つの
+命題に帰着した。$`R_2^C`$ では $`\Lambda_\varepsilon`$ より上（核の側は $`\nu_C`$ まで証明済み）、$`R_2^S`$ では
 $`\upsilon_{\omega^3}`$ より上で、どちらの半分も未解決。
 
 **Lean**（このディレクトリの 5 つのファイル。ライブラリ全体と一緒にビルドした）：
@@ -213,7 +216,8 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   $`\beta_0 \ge \rho_{\Theta_A}`$、[PINS-ja.md](PINS-ja.md) §2。さらに $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$、[BREAK-ja.md](BREAK-ja.md) §4。いまは $`\beta_0 \ge \nu_C \gt \nu_P`$、§2）、
   $`\beta_0`$ は可算か $`\infty`$。
 - **定理 LOC**（2026-10、査読 1 回。[BREAK-ja.md](BREAK-ja.md) §7.3）。$`\beta_0`$ は、Carlson の被覆の条件を $`R_2^S`$ の中で評価したものが
-  $`R_2^S`$ と違う最小の段。だから $`\nu_C = \nu_S`$ かどうか（「幽霊」が無いか）は $`R_2^S`$ だけの問い。
+  $`R_2^S`$ と違う最小の段。だから $`\nu_C = \nu_S`$ かどうか（「幽霊」が無いか）は $`R_2^S`$ だけの問い。今は、$`\nu_C = \nu_S`$ から
+  $`R_2^S`$ での $`o_2 = \omega`$ が出て、NOLIM を仮定すれば両者は同じ（[BREAK-ja.md](BREAK-ja.md) §8.1、査読 1 回）。
 - **補題 UPG。** 一致する段では、$`\alpha`$ 未満のどの $`\gamma`$ も $`R_2^C`$ で $`\alpha`$ の isominimal な部分集合に入るなら、
   $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$（$`\alpha = \kappa_C`$ と $`\alpha = \upsilon_{\omega\cdot\omega}`$ で成り立つ）。
 - **KAPPA と CORE-EQ。** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$、$`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$。だから
@@ -369,7 +373,7 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
 **証明されていないこと：**
 
 - **$`R_2^C`$ で $`\Lambda_\varepsilon`$ より上、$`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上での主張**、両方の半分。$`\Theta_A`$ より上の
-  やり直しの届く先（$`\Theta_A`$ そのものでの届く先は今は分かっている）と、[BREAK-ja.md](BREAK-ja.md) §9、[PINS-ja.md](PINS-ja.md) §6、[REACHES-ja.md](REACHES-ja.md) §7、[RESTARTS-ja.md](RESTARTS-ja.md) §6 の残り。
+  やり直しの届く先（$`\Theta_A`$ そのものでの届く先は今は分かっている）と、[BREAK-ja.md](BREAK-ja.md) §10、[PINS-ja.md](PINS-ja.md) §6、[REACHES-ja.md](REACHES-ja.md) §7、[RESTARTS-ja.md](RESTARTS-ja.md) §6 の残り。
 - **$`R_2^S = R_2^C`$**：$`\le_1`$ の逆向き $`C \Rightarrow S`$ は、$`\kappa_C`$ より上の後続の段で $`\alpha \notin G_C`$ のとき未解決。
   $`\le_2`$ の逆向きは、(ii) の型の段で未解決（$`\Pi_2`$ 文を上向きに移すことが要るが、上向きの 2-反映でも持ち上げでも
   得られない。いまは段ごとに 1 つの組 $`(a^*, \beta)`$ の話で、$`\kappa_C`$ より下では予想 CORE-2 と同値。残りは PIN と LOW）。
@@ -480,7 +484,8 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       目印 $`\Theta_\delta`$、$`\Theta_{d\omega}`$（[BREAK-ja.md](BREAK-ja.md) §4）、定理 SKEL が $`R_2^S`$ で $`[0, \nu_P)`$ で与え（[REACHES-ja.md](REACHES-ja.md)）、
       SKEL⁺ が $`\nu`$ まで与える（[BREAK-ja.md](BREAK-ja.md) §2）。入れ子の組のどの段でも最初のブロック（LIFT-0、
       [BREAK-ja.md](BREAK-ja.md) §5）、$`T_\omega`$ より下のどの段のどのブロックも（SH、[BREAK-ja.md](BREAK-ja.md) §7.1） — 証明済み。各段の順序型
-      （$`o_k = \omega`$。隙間の間の有限の基の付け替え GI と同じ）、届く先と名前 — 未解決、とても難しい
+      （$`o_k = \omega`$。隙間の間の有限の基の付け替え GI と同じ） — $`R_2^C`$ では証明済み（定理 O$`^C`$、[BREAK-ja.md](BREAK-ja.md) §8.1、
+      査読 1 回）、$`R_2^S`$ では未解決。届く先と名前 — 未解決、とても難しい
     - A3 最小の実現を項で書く — 未解決
     - A4 **予想 CH**：長さ $`k+2`$ の最小の鎖には到達不能基数が $`k`$ 個要る — 予想
     - A5 上限より下のどの項も、あるパターンの値 — 未解決

@@ -98,7 +98,10 @@ shape C3′′ is false), the finiteness of the closures $`C_\tau(z)`$, and the 
 every block of every level of nested pairs below their limit $`T_\omega`$ has the shape of the first block (Theorem SH), every fan apex
 lies above $`T_\omega`$ (2 reviews), the least fan has exactly two successors and in $`R_2^C`$ is open, the question $`\nu_C = \nu_S`$ is a
 question about $`R_2^S`$ alone, and the name of $`\nu`$ and the base changes between gaps are reduced to the index statement $`o_2 = \omega`$ and
-two more. Above $`\Lambda_\varepsilon`$ both
+two more. Its §8 has the fourth round: in $`R_2^C`$, every level of nested pairs has exactly $`\omega`$ points below its left end
+($`o_k = \omega`$ for every $`k`$, Theorem O$`^C`$, 1 review, by Carlson's minimality against coverings), so the shape part of NU-NAME holds in
+$`R_2^C`$; in $`R_2^S`$, $`o_2 = \omega`$, NOLIM above $`\nu_P`$ and $`\nu_C = \nu_S`$ stay open, $`\nu_C = \nu_S`$ now implies $`o_2 = \omega`$, and NOLIM is reduced
+to one statement per gap. Above $`\Lambda_\varepsilon`$ both
 halves are open in $`R_2^C`$ (the core part is proved up to $`\nu_C`$), and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$.
 
 **Lean** (the five files of this directory, built with the whole library):
@@ -233,7 +236,8 @@ $`\kappa_X = \min\{\kappa : \kappa \le_1^X \beta \text{ for all } \beta \ge \kap
   $`\beta_0 \ge \upsilon_{\omega^3}`$ (with FRAG, now proved; now $`\beta_0 \ge \Lambda_\varepsilon`$ and $`\beta_0 \ge \rho_{\Theta_P}`$,
   [REACHES.md](REACHES.md) §1–2; then $`\beta_0 \ge \rho_{\Theta_A}`$, [PINS.md](PINS.md) §2; then $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$, [BREAK.md](BREAK.md) §4; now $`\beta_0 \ge \nu_C \gt \nu_P`$, §2), and $`\beta_0`$ is countable or $`\infty`$.
 - **Theorem LOC** (2026-10, 1 review; [BREAK.md](BREAK.md) §7.3). $`\beta_0`$ is the least stage at which Carlson's covering condition,
-  evaluated inside $`R_2^S`$, differs from $`R_2^S`$. So whether $`\nu_C = \nu_S`$ (no "ghost") is a question about $`R_2^S`$ alone.
+  evaluated inside $`R_2^S`$, differs from $`R_2^S`$. So whether $`\nu_C = \nu_S`$ (no "ghost") is a question about $`R_2^S`$ alone. Now
+  $`\nu_C = \nu_S`$ implies $`o_2 = \omega`$ in $`R_2^S`$, and given NOLIM the two are equivalent ([BREAK.md](BREAK.md) §8.1, 1 review).
 - **Lemma UPG.** At a stage of agreement, $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$ when every $`\gamma \lt \alpha`$ lies in an
   isominimal subset of $`\alpha`$ in $`R_2^C`$ (true for $`\alpha = \kappa_C`$ and $`\alpha = \upsilon_{\omega\cdot\omega}`$).
 - **KAPPA and CORE-EQ.** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$, and $`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$. So if
@@ -405,7 +409,7 @@ pointwise least one.
 **Not proved:**
 
 - **The claim above $`\Lambda_\varepsilon`$** in $`R_2^C`$, and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$, both halves. The reaches of the restarts
-  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [BREAK.md](BREAK.md) §9, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
+  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [BREAK.md](BREAK.md) §10, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
 - **$`R_2^S = R_2^C`$**: the converse $`C \Rightarrow S`$ for $`\le_1`$ at a successor stage $`\beta \gt \kappa_C`$ with
   $`\alpha \notin G_C`$, and for $`\le_2`$ at stages of type (ii) (this needs an upward transfer of $`\Pi_2`$ sentences, which
   neither upward 2-reflection nor liftings give; it is now one pair $`(a^*, \beta)`$ per stage, and below $`\kappa_C`$ it is
@@ -520,7 +524,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       ([PINS.md](PINS.md)), the value at $`\Theta_A`$ and the landmarks $`\Theta_\delta`$, $`\Theta_{d\omega}`$ ([BREAK.md](BREAK.md) §4), Theorem SKEL gives it in
       $`R_2^S`$ on $`[0, \nu_P)`$ ([REACHES.md](REACHES.md)), and SKEL⁺ up to $`\nu`$ ([BREAK.md](BREAK.md) §2); the first block of every level of nested pairs (LIFT-0,
       [BREAK.md](BREAK.md) §5), and every block of every level below $`T_\omega`$ (SH, [BREAK.md](BREAK.md) §7.1) — proved; the order type of each level
-      ($`o_k = \omega`$, equivalent to a finite base change between its gaps, GI), its reaches and names — open, very hard
+      ($`o_k = \omega`$, equivalent to a finite base change between its gaps, GI) — proved in $`R_2^C`$ (Theorem O$`^C`$, [BREAK.md](BREAK.md) §8.1,
+      1 review), open in $`R_2^S`$; its reaches and names — open, very hard
     - A3 least realizations as terms — open
     - A4 **Conjecture CH**: the least chain of length $`k+2`$ needs $`k`$ inaccessibles — conjecture
     - A5 every term below the bound is the value of a pattern — open

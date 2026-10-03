@@ -88,6 +88,7 @@ $`\varepsilon`$ 数の基も、Wilken の $`\iota_{\tau,\alpha}`$ で動かす�
 $`\nu_S`$ は今は正確に分かっている：中に別の $`\lt_2`$ の組が入れ子になった最小の $`\lt_2`$ の組の上端（定理 FIRST-PAIR、
 査読 1 回）。$`R_2^C`$ が骨組み型でなくなる最初の点 $`\nu_C`$ は $`\nu_S`$ 以下で $`\nu_P`$ より上（定理 NU-CT、査読 1 回）。どちらも
 [BREAK-ja.md](BREAK-ja.md) §2。名前は予想。今は $`\upsilon`$ の添字の 3 つの命題と同じ（査読 1 回、[BREAK-ja.md](BREAK-ja.md) §7.3）。
+$`R_2^C`$ では形の部分が証明済み：$`o_2 = \omega`$ から $`\nu_C = \upsilon^2_{\omega+1}`$（定理 O$`^C`$、査読 1 回、[BREAK-ja.md](BREAK-ja.md) §8.1）。
 入れ子の組の段の極限 $`T_\omega`$ より下では、FRAG2 は弱い形「どの組も 2 つの $`\upsilon`$ の点を結ぶ」で成り立つ（概略だけ、
 [BREAK-ja.md](BREAK-ja.md) §7.1）。
 

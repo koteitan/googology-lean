@@ -6,7 +6,7 @@
 **証明済み**は、独立した査読者が、致命的な点も止める点も無く証明済みと判定したもの。このページの結果はどれも
 2026-10 のもの。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの論文がその結果を証明し、それぞれが
 1 回ずつ査読されたこと。次の回の結果（相対化したピン、$`\Theta_A`$ までの正確な届く先、$`\Lambda_\varepsilon`$ までの名前、
-長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の 2 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) にある。
+長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) にある。
 それによってここのいくつかの状態が変わった。
 変わった所には印を付けた。
 
@@ -153,7 +153,11 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
   初めて入る。今は：$`R_2^S`$ では「$`\nu_S`$ は入れ子の組を持つ最小の組の上端」が証明済み（定理 FIRST-PAIR、査読 1 回、
   [BREAK-ja.md](BREAK-ja.md) §2）。その名前（$`\theta' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)`$ として $`\psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'+1} + \theta')`$、予想した
   区間の中）は予想のまま。$`R_2^C`$ では $`\nu_C = T_C \le \nu_S`$ で、$`R_2^C`$ に余分な「幽霊」の組が 1 つある場合を除けば
-  $`\nu_C = \nu_S`$（定理 NU-CT、査読 1 回、[BREAK-ja.md](BREAK-ja.md) §2）。$`\nu_C = \nu_S`$ は未解決。
+  $`\nu_C = \nu_S`$（定理 NU-CT、査読 1 回、[BREAK-ja.md](BREAK-ja.md) §2）。$`\nu_C = \nu_S`$ は未解決。そのあと（どれも査読 1 回、
+  [BREAK-ja.md](BREAK-ja.md) §7.3）：$`\nu_S`$ の名前は $`\upsilon`$ の添字の 3 つの命題と同じになり、$`\nu_C = \nu_S`$ は $`R_2^S`$ だけの問いで、それについての
+  2 つの命題に帰着した。さらに（どれも査読 1 回、[BREAK-ja.md](BREAK-ja.md) §8）：その 1 つ $`o_2 = \omega`$ は $`R_2^C`$ で証明済みで、そこでは
+  $`\nu_C = \upsilon^2_{\omega+1}`$。$`\nu_C = \nu_S`$ から $`R_2^S`$ での $`o_2 = \omega`$ が出る。もう 1 つ、$`\nu_P`$ より上の NOLIM は隙間ごとの 1 つの命題に
+  帰着した。$`\nu_C = \nu_S`$ はまだ未解決。
 
 ## 5. 長さ 3 の最小の鎖
 

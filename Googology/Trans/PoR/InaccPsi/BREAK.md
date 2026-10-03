@@ -4,10 +4,10 @@
 
 This page continues [PINS.md](PINS.md). The status words are those of [README.md](README.md) §3: **proved** means that an
 independent referee found the result proved with no fatal or blocking point. All results on this page are from
-2026-10. They come from twelve papers in three rounds of four, each paper refereed once (the third round is §7). "1 review" means one referee.
+2026-10. They come from sixteen papers in four rounds of four, each paper refereed once (the third round is §7, the fourth §8). "1 review" means one referee.
 "2 reviews" means that two independent papers proved the result and each paper was refereed once. A statement that its
 referee found not proved, or false as written, is listed under **Not proved**, even when the rest of its paper is proved.
-None of the twelve papers uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). No result on this
+None of the sixteen papers uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). No result on this
 page is in Lean.
 
 **Notation.** As on [REACHES.md](REACHES.md) and [PINS.md](PINS.md). $`\nu_P = \upsilon_{\Lambda^*+\omega^2}`$ is the end of Theorem SKEL. $`\mathrm{lh}_1(a)`$ is the
@@ -253,7 +253,8 @@ of §2 (in $`R_2^C`$, $`T_2 = \nu_C`$ by NU-CT). $`T_\omega = \sup_k T_k`$.
   analogue at level $`k`$ of Wilken's maps; open, it needs a notation for level $`k`$). Then, counting $`s_k`$ as the 0-th member of $`U_k`$,
   $`x_k`$ is the $`\omega`$-th member and $`T_k`$ the $`(\omega+1)`$-th, as $`\upsilon_\omega`$ and $`\upsilon_{\omega+1}`$ at level 1. For $`k = 2`$ this is the shape part of
   NU-NAME. The paper's claim that this shape is equivalent to GI is not proved (only one direction is shown). Now (§7.2) the
-  hypothesis can be weakened to a finite form $`GI^{fin}`$, and this finite form is equivalent to the shape.
+  hypothesis can be weakened to a finite form $`GI^{fin}`$, and this finite form is equivalent to the shape. In $`R_2^C`$ the shape now holds for
+  every $`k`$ with no hypothesis (Theorem O$`^C`$, §8.1, 1 review); in $`R_2^S`$ it is open for $`k \ge 2`$.
 - **What a lift can be** (proved, 1 review; trivial). No order isomorphism maps $`[0, T_2)`$ onto $`[s_2, T_3)`$: the order types differ. The
   stronger claim that even the skeletons of two levels are not order-isomorphic is not proved. The paper therefore looks
   for a recursion one level up, as with Wilken's base changes, not for an image.
@@ -395,7 +396,7 @@ GI_k(\zeta) \Rightarrow GI^{loc}_k(\zeta) \Rightarrow GI^{fin}_k(\zeta) \Leftrig
   $`R_1^+`$-segment of every gap.
 - **Not proved.** Proposition LOW1 (the substitution map is an isomorphism on the low part of a gap): an outline built on TAIL-GAP,
   which is itself an outline; its statement and proof do not match (blocking point). Neither $`o_k = \omega`$ for $`k \ge 2`$ nor any
-  form of $`GI_k(\omega)`$ is proved. What blocks: an onto level-$`k`$ hull (for $`k = 2`$ this is (N-χ) of §7.3), the reaches beyond the
+  form of $`GI_k(\omega)`$ was proved in this round (now $`o_k = \omega`$ and $`GI^{fin}_k(\omega)`$ are proved in $`R_2^C`$, §8.1; $`R_2^S`$ is open). What blocks: an onto level-$`k`$ hull (for $`k = 2`$ this is (N-χ) of §7.3), the reaches beyond the
   low part of a gap, and for $`k \ge 3`$ a test for new pairs.
 
 ### 7.3 The ghost and the name of $`\nu`$
@@ -424,7 +425,7 @@ Here $`\nu = \nu_S`$ and $`U_2 = \{\upsilon^2_\zeta\}`$ as in §7.2. $`\mathrm{C
   (O) $`o_2 = \omega`$; (N-χ) $`\upsilon^2_n = L(n)`$ for every $`n \lt \omega`$; (N-ν) $`\nu = L(\omega+1)`$. The name of $`m_0`$ is (N-χ) at $`n = 0`$, and the
   name $`a_0 = L(\omega)`$ follows from (O) and (N-χ). The statement (O) is shared with the ghost question. The referee notes that a proof of
   (N-ν) still needs $`\Sigma_1`$ copies at restarts with long reaches (the kind of FRAG-E).
-- **Open**: $`\nu_C = \nu_S`$, $`o_2 = \omega`$, NOLIM above $`\nu_P`$, (N-χ) and (N-ν). The referee notes that no proved fact contradicts NOLIM or
+- **Open**: $`\nu_C = \nu_S`$, $`o_2 = \omega`$ (now proved in $`R_2^C`$, §8.1), NOLIM above $`\nu_P`$ (now reduced to one statement per gap, §8.4), (N-χ) and (N-ν). The referee notes that no proved fact contradicts NOLIM or
   LL, and that LL with $`o_2 = \omega`$ says that $`a_0`$ is the least point whose $`\lt_1`$-predecessors form a cofinal set of restarts.
   That is the remaining content of these questions.
 
@@ -469,7 +470,127 @@ Here $`\nu = \nu_S`$ and $`U_2 = \{\upsilon^2_\zeta\}`$ as in §7.2. $`\mathrm{C
   None of them needs an inaccessible. The same terms are the conjectured $`(x^*, y^*)`$ of §7.1. The least fan and $`f_0`$ have no
   supported name.
 
-## 8. Checks
+## 8. The fourth round: $`o_k = \omega`$ and NOLIM
+
+This section is the fourth round: four papers, each refereed once. Three of them attack $`o_2 = \omega`$ (§7.2, §7.3) by three
+routes, and the fourth attacks NOLIM above $`\nu_P`$ (§7.3). Notation as in §7.2: $`U_k = \{\upsilon^k_\zeta : \zeta \le o_k + 1\}`$,
+$`x_k = \upsilon^k_{o_k}`$, $`T_k = \upsilon^k_{o_k+1}`$, and $`G_\zeta = [\upsilon^k_\zeta, \upsilon^k_{\zeta+1})`$. $`\mathrm{Pred}_1(b) = \{a \lt b : a \le_1 b\}`$.
+**Result of the round:** $`o_k = \omega`$ is proved in $`R_2^C`$ for every $`k`$ (§8.1). In $`R_2^S`$, $`o_2 = \omega`$ and NOLIM above $`\nu_P`$ stay
+open, and so does $`\nu_C = \nu_S`$.
+
+### 8.1 $`o_k = \omega`$ in $`R_2^C`$ (the covering route)
+
+- **Lemma MOVE** (proved, 1 review; $`R_2^C`$). Let $`Z`$ be a finite closed set, $`u \in Z`$ additively principal, $`X = Z \cap u`$, and
+  $`\alpha`$ additively principal with $`\max X \lt \alpha \lt u`$. Let $`f^+`$ be the closed embedding of $`Z`$ that sends $`u`$ to $`\alpha`$ and
+  fixes every other indecomposable of $`Z`$ (Carlson 2009, L.4.4–4.5). Then $`f^+ \le \mathrm{id}`$, and $`f^+`$ is a covering of $`Z`$ if
+  (M1) $`\alpha \le_1 v^*`$ with $`v^* = \max\{v \in Z : u \le_1 v\}`$, and (M2) no $`v \in Z`$ has $`u \lt_2 v`$. No reach is used. (The paper
+  also asks $`\alpha \le_1 u`$; the referee notes that this follows from (M1).)
+- **Theorem CP** (proved, 1 review; $`R_2^C`$). Let $`u`$ be additively principal and in the core of $`R_2^C`$. If $`\mathrm{Pred}_1(u)`$ is cofinal
+  in $`u`$, then $`u`$ is a $`\lt_2`$-left end. Proof: an isominimal set that contains $`u`$ is its own least realization (Carlson 2009,
+  Def 2.6 and Thm 14.10(2)); MOVE gives a closed covering of it that moves $`u`$ down, against the minimality of Thm 14.10(2),
+  which holds against all coverings, not only against isomorphic copies. The referee checked this citation word for word.
+- **Theorem O$`^C`$** (proved, 1 review; $`R_2^C`$; every $`k \ge 1`$; no hypothesis). $`o_k = \omega`$. So
+  $`x_k = \upsilon^k_\omega = \sup_n \upsilon^k_n`$, $`T_k = \upsilon^k_{\omega+1}`$ and $`\mathrm{Pred}_1(x_k) = \{\upsilon^k_n : n \lt \omega\}`$. Proof: if $`o_k \gt \omega`$,
+  then $`s = \upsilon^k_\omega \lt x_k`$ lies in the core (the core contains $`[0, T_k]`$, because $`T_k`$ is the top of the least realization of a
+  $`k`$-nest; Carlson 2009, Thm 14.14), and the points $`\upsilon^k_n`$ are cofinal in $`s`$ and $`\le_1 s`$. CP makes $`s`$ a left end, but by
+  LIFT-0 (§5) the only left end in $`U_k`$ is $`x_k`$. No base change, hull or reach is used. For $`k = 1`$ this is a new proof of
+  $`o_1 = \omega`$ in $`R_2^C`$ from Carlson 2009 alone.
+- **Corollary LEAST** (proved, 1 review). In the least realization of a $`k`$-nest, $`x_k`$ is the supremum of the points made by $`n`$
+  downward 2-reflections of the pattern (Carlson 2009, Def 9.4), and the $`n`$-th of them is $`\upsilon^k_{n-1}`$.
+- **Consequences in $`R_2^C`$** (proved, 1 review). Theorem O of §5 and $`GI^{fin}_k(\omega)`$ of §7.2 hold for every $`k`$ with no hypothesis;
+  $`U_k \cap x_k`$ has no limit point; the last gap $`[x_k, T_k)`$ is copied, base to base, into gaps $`G_n`$ with $`n \lt \omega`$. The shape part
+  of NU-NAME holds in $`R_2^C`$: $`x_2 = \upsilon^2_\omega`$ and $`\nu_C = \upsilon^2_{\omega+1}`$. Every isominimal set that contains $`x_k`$ contains $`T_k`$.
+- **Transfer to $`R_2^S`$** (proved, 1 review). (a) If the two structures agree on every relation with right end at most $`T_k`$ of
+  $`R_2^S`$, then $`o_k = \omega`$ in $`R_2^S`$; in particular $`\nu_C = \nu_S`$ implies $`o_2 = \omega`$ in $`R_2^S`$ (before, only the converse direction,
+  given NOLIM, was known: GR, §7.3). (b) If $`o_2 \gt \omega`$ in $`R_2^S`$, a ghost exists; in case (P2) of LOCATE its gap has a finite index.
+  (c) Given NOLIM: $`\nu_C = \nu_S`$ iff $`o_2 = \omega`$ in $`R_2^S`$, and the only possible ghost is the pair $`(\upsilon^2_\omega, \upsilon^2_{\omega+1})`$ of $`R_2^S`$
+  (case (P3b)). The paper marked (b) and (c) as resting on unreviewed results; the referee notes that LOC, LOCATE and GR are reviewed
+  (§7.3), so they are proved.
+- **Open in $`R_2^S`$**: $`o_k = \omega`$ for $`k \ge 2`$. The covering proof does not carry over, for two reasons: $`[0, \nu_S] \subseteq \mathrm{Core}(R_2^S)`$
+  is not known, and an isominimal set of $`R_2^S`$ is minimal only against isomorphic copies, while the moved map of MOVE can add a
+  $`\le_1`$-relation.
+
+### 8.2 The $`\Sigma_2`$ route ($`R_2^S`$)
+
+Here $`k = 2`$, $`\nu = \nu_S`$ and $`s = \upsilon^2_\omega`$.
+
+- **Proved, but only restating the problem** (1 review; the referee: restatements of the pair clause of LIFT-0, LOC and HIER).
+  $`U_2 \setminus \{\nu\}`$ is the set of $`\Sigma_1`$-closed ordinals of $`R|\nu`$, and $`x_2`$ is the only $`\Sigma_2`$-closed one, so
+  $`o_2 = \omega \Leftrightarrow s \le_2 \nu \Leftrightarrow s \lt_2 \nu`$. For a finite $`X`$ and a $`\Pi_2`$ sentence with parameters $`X`$, the indices $`\zeta`$ with
+  $`R|\upsilon^2_\zeta`$ satisfying it form an initial segment, closed at limits, that contains $`o_2 + 1`$ or ends at a successor index. So
+  $`o_2 = \omega`$ iff every $`\Pi_2`$ sentence with parameters below $`s`$ that fails in $`R|\nu`$ fails already in some $`R|\upsilon^2_n`$, $`n \lt \omega`$; and iff
+  no $`\Pi_1`$ formula with parameters below $`s`$ has its first realization in the gap $`G_\omega`$.
+- **Lemma OFF** (proved, 1 review, from the substitution lemma of §4). Wilken's substitution, segment by segment, gives a map $`\Psi^n`$:
+  a $`(\lt, +)`$-isomorphism from the hull of $`G_\omega`$ over the parameters below $`\upsilon^2_n`$ onto the gap $`G_n`$, below an offset
+  bound. It keeps the kinds of points and the pairs.
+- **Proposition MONO** (proved, 1 review). If for infinitely many $`n`$ the map $`\Psi^n`$ is an isomorphism below $`z`$ and $`\Psi^n\rho \le_1 \Psi^n z`$,
+  then $`\rho \le_1 z`$. So where $`G_\omega`$ and almost all finite gaps first disagree, the cap in $`G_\omega`$ is the larger one.
+- **Theorem HR** (proved as an implication, 1 review; parts (a), (c) given SKEL⁺, an outline). If two statements HULL$`(n)`$ (on the hull,
+  the $`\le_1`$-test can be passed inside the hull) and LEN$`(n)`$ (the index lengths of $`G_n`$ and $`G_\omega`$ are equal) hold for infinitely
+  many $`n`$, then $`s \lt_2 \upsilon^2_{\omega+1}`$, so $`o_2 = \omega`$.
+- **Not proved** (blocking points). The route is likely empty: LEN$`(n)`$ forces the index length of $`G_\omega`$ to be below $`s`$ (that of $`G_n`$
+  is at most $`\upsilon^2_{n+1} \lt s`$), but under the conjectured names (NU-NAME, GEN-EXT) $`G_\omega`$ has $`\upsilon`$-points at index offsets
+  $`\ge s`$ (4 instances checked). So, if the names are right, LEN fails for every $`n`$. An onto map must also replace $`s`$ by $`\upsilon^2_n`$
+  inside the offsets, as the map of §8.3 does. The claims that HULL and LEN follow from LIFT-REC are not proved; the "no-go"
+  remark (an argument about $`U_2`$ alone cannot give $`o_2 = \omega`$) is a remark, not a proof.
+
+### 8.3 The global substitution route ($`R_2^S`$)
+
+- **Theorem GS** (proved, 1 review; transfer of the substitution lemma of §4, no FRAG). A **block map** $`\sigma'`$ is an order isomorphism
+  from a set of restart indices of $`G_\zeta`$, containing its base index, onto all restart indices of $`G_\eta`$. Its substitution map $`T_\sigma`$
+  is an isomorphism for $`0`$, $`\le`$, $`+`$ and the $`\le_1`$ of $`R_1^+`$ from $`c \cup D_\sigma`$ onto $`[0, \upsilon^2_{\eta+1})`$, where $`c = \upsilon^2_\eta`$; it is the
+  identity below $`c`$, sends $`\upsilon^2_\zeta`$ to $`c`$, has closed domain and range, and commutes with Wilken's maps.
+- **Theorem RED** (proved at outline level, 1 review; it rests on SKEL⁺). $`T_\sigma`$ is an isomorphism of $`R_2^S`$ iff the reaches of the
+  moved restarts correspond: for every moved restart $`\lambda`$ and $`z \in D_\sigma`$, $`z \le r(\lambda) \Leftrightarrow T_\sigma z \le r(\sigma'\lambda)`$ (RI). The
+  same holds in $`R_2^C`$ below $`\nu_C`$ with coverings. So if such maps exist for every finite subset of $`G_\omega`$ and cofinally many $`n`$,
+  then $`GI_2(\omega)`$ and $`o_2 = \omega`$ (outline).
+- **Lemma INT** (proved, 1 review). A block map that shifts an initial segment moves only bases of small index offset; under the
+  conjectured names $`G_\omega`$ has points beyond (checked).
+- **Not proved** (blocking point). The shift map already fails (RI) at the restart with index offset $`c`$, so it is an isomorphism only
+  if the restart indices of $`G_\eta`$ have order type at most $`c`$, which fails under the conjectured names for $`\eta = 0, 1, 2`$
+  (checked). Any block map has to act on index offsets like the substitution, not by order type. Proposition RANK (RI at restarts
+  of finite Cantor–Bendixson rank) is false as stated at the base index and correct above it (outline). What is left is one
+  statement: the skipped restarts never change where the reach of a moved restart cuts the domain. It joins the two blockers
+  of GI (§7.2: the onto hull and the reaches) into one.
+
+### 8.4 NOLIM above $`\nu_P`$
+
+For $`g \in G = \{0\} \cup (U_2 \setminus \{\nu\})`$ let $`g^+`$ be the next member of $`U_2`$; the gap of $`g`$ is $`(g, g^+)`$. $`b`$ is a **LIM point** if for every
+$`K`$ and every $`\gamma \lt b`$ there is a $`K`$-chain inside $`(\gamma, b)`$; NOLIM says that no point of $`(0, \nu) \setminus U_2`$ is a LIM point. $`C_K`$ is the
+configuration $`\chi_1 \lt t_1 \lt d_1 \lt \cdots \lt \chi_K \lt t_K \lt d_K \lt \chi_{K+1}`$ with $`\chi_i \le_1 \chi_{K+1}`$ and $`t_i \lt_2 d_i`$; $`e_K(g)`$ is the least top of a
+realization of $`C_K`$ above $`g`$, $`E(g) = \sup_K e_K(g)`$, and $`b^*(g)`$ is the least LIM point above $`g`$.
+
+- **Lemma CH** (proved at outline level, 1 review; it rests on SKEL⁺). Below $`\nu`$, $`K`$-chains and realizations of $`C_K`$ give each other.
+- **Lemma TRANSFER** (proved, 1 review). For points up to $`\nu`$, LIM goes down along $`\le_1`$ and up along $`\le_2`$; a supremum of LIM points is
+  a LIM point; every member of $`U_2`$ is a LIM point.
+- **Lemma CAP$`_K`$** (proved, 1 review). No $`\alpha \in (g, e_K(g)]`$ has reach above $`e_K(g)`$. $`E(g)`$ is a restart whose index is a multiple of
+  $`\omega^3`$, and $`\mathrm{Pred}_1(E(g)) = U_2 \cap (0, g]`$.
+- **Theorem ITER** (proved, 1 review; the referee also checked its abstract step in a Lean test file, not part of this library).
+  $`b^*(g)`$ is the value where the iteration $`b_0 = g`$, $`b_{n+1} = E(b_n)`$ stops at a LIM point, or the limit of the $`b_n`$. So
+
+```math
+\text{NOLIM} \Leftrightarrow \forall g \in G :\ b^*(g) = g^+ ,
+```
+
+  and $`E(g) = g^+`$ for every $`g`$ (NOLIM$`^*`$, a conjecture) is enough. (The explicit $`K`$ in the paper's remark is wrong; the
+  corollary is not affected.)
+- **GAP-LOW** (proved, 1 review; one bound at outline level). NOLIM holds in every gap up to the analogue of $`\nu_P`$ above $`g`$.
+- **The ghost** (proved, 1 review). In cases (P1), (P2), (P3a) of LOCATE a ghost forces $`b^*(g) \lt g^+`$ in its gap. So $`b^*(g) = g^+`$ for all $`g`$,
+  together with $`o_2 = \omega`$, excludes the ghost (GR in this form).
+- **$`R_2^C`$** (proved, 1 review). All of the above holds in $`R_2^C`$.
+- **Open**: NOLIM above $`\nu_P`$, in both structures. Below $`\nu`$ the proved results fix every relation except the reaches of the restarts
+  inside the gaps, and NOLIM is a statement about those reaches only; they are unknown above the analogue of $`\Theta_A`$ in each gap.
+
+### 8.5 Status after this round
+
+- $`o_k = \omega`$: proved in $`R_2^C`$ for every $`k`$ (1 review, §8.1); open in $`R_2^S`$ for $`k \ge 2`$. The two $`R_2^S`$ routes (§8.2, §8.3) end at
+  statements that are likely false as stated (LEN) or not proved (the reach statement of §8.3).
+- Consequences in $`R_2^C`$ (1 review): Theorem O and $`GI^{fin}_k(\omega)`$ for every $`k`$; the shape part of NU-NAME.
+- $`\nu_C = \nu_S`$: open. It implies $`o_2 = \omega`$ in $`R_2^S`$, and given NOLIM it is equivalent to it. NOLIM above $`\nu_P`$: open, reduced to
+  $`b^*(g) = g^+`$ in every gap.
+- The names (N-χ) and (N-ν) of §7.3: untouched.
+
+## 9. Checks
 
 Each run was under 60 seconds; none is a proof. Certificates count only when replayed.
 
@@ -511,13 +632,21 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
   probes that should fail (PTc below PT, two names for one diagram) gave none. conv prints no fan for the scanned matrices below
   (0,0,0)(1,1,1)(2,2,1), and an open fan for that matrix. 16 names are normal forms and increasing (Python and a Lean test file).
 
-## 9. Open
+- Fourth round (§8). MOVE: the referee ran its atom logic on random finite models of reflection over $`(\omega^E, +)`$ (3 seeds):
+  3,467 cases met (M1) and (M2) with 0 failures; dropping (M2) gave 74 failures and dropping $`\alpha \le_1 v^*`$ gave 2,053, so both
+  conditions are needed. §8.2: the 4 named points at offsets $`\ge s`$ are normal forms (the referee's script). §8.3: the program's
+  structure of the gaps $`G_1`$, $`G_2`$, $`G_3`$ and the last gap agrees after renumbering on 2,916 standard suffixes (the referee: 2,915,
+  0 differences); the program is uniform in the gaps by construction, so this is only a consistency check, and its small cases do
+  not reach index offset $`c`$. §8.4: 4,885 program patterns (the referee's rerun: 3,378) show $`C_K`$ only for $`K \le 2`$; the program
+  describes one point and what lies above it, so it cannot test NOLIM.
+
+## 10. Open
 
 - **RIGHT-ISO** (and so RIGHT; for pairs with left end below $`T_\omega`$ it follows from SKEL$`^\omega`$, an outline, §7.1). CC as an isomorphism
   (not needed).
-- The name of $`\nu`$: now the three statements (O) $`o_2 = \omega`$, (N-χ) and (N-ν) (§7.3). $`\nu_C = \nu_S`$ (exclude the ghost): now reduced to
-  NOLIM above $`\nu_P`$ and $`o_2 = \omega`$, both about $`R_2^S`$ (§7.3).
-- The structure above $`\nu`$: $`o_k = \omega`$ for $`k \ge 2`$ (equivalently $`GI^{fin}_k(\omega)`$), the global base change $`GI_k(\omega)`$, the exact reaches of
+- The name of $`\nu`$: now the three statements (O) $`o_2 = \omega`$ (proved in $`R_2^C`$, §8.1), (N-χ) and (N-ν) (§7.3). $`\nu_C = \nu_S`$ (exclude the ghost): it implies (O) in $`R_2^S`$ (§8.1), and it is reduced to
+  NOLIM above $`\nu_P`$ and $`o_2 = \omega`$, both about $`R_2^S`$ (§7.3); NOLIM is now the statement $`b^*(g) = g^+`$ for every gap of $`U_2`$ (§8.4).
+- The structure above $`\nu`$: $`o_k = \omega`$ for $`k \ge 2`$ in $`R_2^S`$ (equivalently $`GI^{fin}_k(\omega)`$; proved in $`R_2^C`$, §8.1), the global base change $`GI_k(\omega)`$, the exact reaches of
   level-$`k`$ restarts, the gaps as base-changed copies, and the names (§7.1, §7.2); SKEL$`^\omega`$, TAIL, TAIL-GAP and TOP at proof level;
   the reach of $`T_\omega`$.
 - The least fan: its name, the name of $`f_0`$, $`FF_N`$, L1p-HYP, POINT-SRO, and whether the least fan of $`R_2^S`$ is open (§7.4).

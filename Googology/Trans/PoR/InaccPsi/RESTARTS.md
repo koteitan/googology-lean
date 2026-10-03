@@ -94,6 +94,7 @@ skeleton FRAG2 must also move $`\varepsilon`$-bases that are not $`\upsilon`$-po
 [REACHES.md](REACHES.md) §4). $`\nu_S`$ is now known exactly: it is the top of the least $`\lt_2`$-pair with another $`\lt_2`$-pair nested inside (Theorem FIRST-PAIR,
 1 review), and in $`R_2^C`$ the first non-skeletal point $`\nu_C`$ is $`\le \nu_S`$ and $`\gt \nu_P`$ (Theorem NU-CT, 1 review), both on
 [BREAK.md](BREAK.md) §2. Its name is a conjecture; it is now equivalent to three statements about $`\upsilon`$-indices (1 review, [BREAK.md](BREAK.md) §7.3).
+In $`R_2^C`$ the shape part is proved: $`\nu_C = \upsilon^2_{\omega+1}`$, from $`o_2 = \omega`$ (Theorem O$`^C`$, 1 review, [BREAK.md](BREAK.md) §8.1).
 Below the limit $`T_\omega`$ of the levels of nested pairs, FRAG2 holds in the weaker form "every pair joins two $`\upsilon`$-points" (outline
 only, [BREAK.md](BREAK.md) §7.1).
 
