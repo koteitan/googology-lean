@@ -7,7 +7,7 @@
 4 つの論文から来ている。どの論文も 1 回ずつ査読された。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの
 論文がその結果を証明し、それぞれが 1 回ずつ査読されたこと。査読者が未証明と判定した命題は、その論文のほかの部分が
 証明済みでも **未証明** に書く。4 つの論文はどれも Wilken, JSL 72 (2007)、Carlson, AML 38 (1999)、Wilken, AML 45 (2006)
-を使わない。
+を使わない。次の回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) にある。それによってここのいくつかの状態が変わった。
 
 **記号。** [REACHES-ja.md](REACHES-ja.md) と同じ。$`\upsilon`$ の点 $`\tau`$ に対し、$`\tau^\infty`$ は $`\tau`$ より上の最小の $`\upsilon`$ の点、
 $`\mathrm{seg}(\tau) = [\tau, \tau^\infty)`$。やり直しの添字 $`\lambda`$ に対し、$`\sigma_\lambda = \upsilon_{\lambda+1} = \rho_\lambda^\infty`$、$`\sigma'_\lambda = \upsilon_{\lambda+2}`$。
@@ -44,8 +44,10 @@ $`\tau`$-最小同型なパターンの $`B`$ をすべて合わせたもの。
   $`\{0, \tau, z\}`$ を成分、$`\mathrm{lh}`$、bar 演算で閉じたもの $`C_\tau(z)`$ は $`\pi`$ と交換する。
 - **未証明。** UNIF が全射であること（引き戻したパターンの $`\tau`$-写しは $`\pi`$ の定義域から出うる）。パラメータを上げる
   被覆に対しても $`\pi[P^\tau(z)]`$ が $`P^\sigma(\pi z)`$ の役をすること。書かれた形での「$`C_\tau(z)`$ は $`\tau`$-最小同型なピンの
-  パターン」（引用した定理は Carlson–Wilken, JSL 77 (2012) の被覆を使い、ここの被覆ではない）。
+  パターン」（引用した定理は Carlson–Wilken, JSL 77 (2012) の被覆を使い、ここの被覆ではない）。最後のものは今は定理
+  EXPL で証明済み（[BREAK-ja.md](BREAK-ja.md) §4、査読 1 回）。
 - **未解決。** $`C_\tau(z)`$ がいつも有限か（CL-FIN）、だから対応が初等再帰的か。定義のままでは対応は計算できる形でない。
+  今は CL-FIN は証明済み（[BREAK-ja.md](BREAK-ja.md) §4、査読 1 回）。「初等再帰的」は概略だけ。
   査読者の注：Carlson–Wilken 2012 の §3（Def 3.6、Thm 3.9(1)）に、核の中での相対化したパターンの理論がもうある。
   定理 RC はこの弱い概念での類似で、どの $`\tau`$ でも、核より上でも成り立つ。
 
@@ -75,12 +77,13 @@ $`\tau`$-最小同型なパターンの $`B`$ をすべて合わせたもの。
   点も、添字をずらした点以上の $`\upsilon`$ の点へ送る。**TOP-FLAT$`_0`$**（FRAG 無し）と **REACH$`_0`$**（FRAG を使う）：
   反映されない最小の点 $`y_0 \ge \delta`$ が FLAT$`_0`$（$`[\rho, \delta_j]`$ の $`\upsilon`$ の点、$`\mathrm{seg}(\rho)`$ の点、$`\rho`$ より下の定数の和）に
   入るなら、$`\mathrm{lh}(\rho_\lambda) = y_0`$。プログラムの届く先 $`\delta_{n+1} + \tau_{n+1}`$ はこの形。**TOP-FLAT$`_1`$**（$`\rho`$ より上の
-  1 つの区間）：未解決の補題 LHPAR\* と CL-FIN を仮定して証明済み。
+  1 つの区間）：補題 LHPAR\* と CL-FIN を仮定して証明済み、今は仮定なしで証明済み（定理 EXPL、[BREAK-ja.md](BREAK-ja.md) §4）。
 - **条件付き**（FRAG と仮定 H-RC（その領域のどの区間でも、添字をずらすピンがある）を仮定して証明済み、査読 1 回）。
   どの $`\lambda \le \Lambda^*`$ でも、$`\rho_\lambda`$ の届く先は反映される点 $`y`$ についての $`y + 1`$ の上限で、$`\Lambda^*`$ は完全に反映される
-  最小の $`\lambda`$。H-RC は最初の区間より先では未解決。
+  最小の $`\lambda`$。H-RC は最初の区間より先では未解決だったが、今は証明済み（補題 PIN-S、[BREAK-ja.md](BREAK-ja.md) §4、査読 1 回）。
 - **未証明**（止める点、1 文）：「HC は $`[0, \rho_{\Theta_A+\omega^2})`$ 全体で成り立つ」。$`\Theta_A`$ そのものでは上の評価しか分からず、
-  EQB-A はそこで $`R_2^C \ne R_2^S`$ を許す。この文を使う定理は無い。
+  EQB-A はそこで $`R_2^C \ne R_2^S`$ を許す。この文を使う定理は無い。今は $`\Theta_A`$ での届く先は $`\delta + \varepsilon_{\sigma+\omega}`$ なので、
+  $`\lambda \le \Theta_A`$ のどこでも HC が成り立ち、$`[0, \rho_{\Theta_A+\omega^2})`$ で $`R_2^C = R_2^S`$（[BREAK-ja.md](BREAK-ja.md) §4、査読 1 回）。
 - **予想**（名前は確認済み）：$`\Theta_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+\omega}})`$、
   $`\Theta_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$、$`\Theta_A = \psi_{\Omega_1}(\Omega_\omega + \varepsilon_{\theta+\omega})`$。
 
@@ -90,7 +93,9 @@ $`H(\eta) = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$、$`D = \{\eta \l
 $`\Omega_\omega + \theta\cdot\eta`$ が標準形の引数になる $`\eta`$ の集合。可算な $`\eta`$ では、$`\eta \in D`$ と $`\eta \lt H(\eta)`$ は同じ。
 
 - **定理 GEN**（証明済み、査読 1 回）。どの $`\eta \in D`$ でも $`H(\eta) = \upsilon_{1+\iota(\eta)}`$。ここで $`\iota(\eta) = \mathrm{otp}(D \cap \eta)`$。
-  だから項 $`\psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$（$`\eta \in D`$）は、すべての $`\upsilon`$ の点を小さい順に並べる。証明：後続では
+  だから項 $`\psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$（$`\eta \in D`$）は、$`\upsilon`$ の点を小さい順に並べる。ただし
+  $`\upsilon^* = \sup H[D]`$ より下のものだけ：$`\upsilon`$ の点は $`\omega_1`$ の中で共終なので、すべてではない（訂正、[BREAK-ja.md](BREAK-ja.md) §3。
+  GEN-EXT が $`\eta \lt \Omega_\omega\cdot\omega`$ まで延ばす、§2）。証明：後続では
   STEP と LOW-STEP、極限では CONT と、包の隙間についての一般的な補題 1 つ。すべての $`\eta \lt \Omega_2`$ で成り立つ。
   定理 T+、T++、PHI はその特別な場合。だから T+ は **査読 2 回**、T++ は **3 回**、PHI は **2 回** になった。
 - **補題 GAP\*、SUP、DOWN、RI**（証明済み、査読 1 回）。RI：$`\iota(\eta)`$ がやり直しの添字であるのは $`\mathrm{logend}(\eta) \ge 2`$ の
@@ -128,6 +133,8 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
   使って定義される（Carlson 2001, p. 19；Wilken 2020, pp. 418, 420）ので、$`R_2^S`$ での $`\Sigma_1`$ の写しは $`R_1^+`$ の $`\le_1`$ を
   保つとは限らない。だから LEFT とそれを使う結果は、$`R_2^S`$ では INC1-S を仮定したときだけ成り立つ（$`R_2^C`$ で
   INC1-nonups を仮定したときだけ成り立つのと同じ）。命題そのものは正しいかもしれない。論文にも査読者にも証明は無い。
+  今はどちらも予想 NOBAD（$`R_2^C`$ では CC も）に帰着し、VEB と C3-VEB は NOBAD を仮定して、また十分下では条件なしで
+  成り立つ（[BREAK-ja.md](BREAK-ja.md) §1）。
 - **補題 PRINC-S**（証明済み、査読 1 回）。$`R_2^S`$ では、$`\lt_1`$ の左端と $`\lt_2`$ の右端は加法的主要数。
 - **はしご**（証明済み、査読 1 回。補題 DIAG）。$`C_0 = U'`$、$`C_{l+1}`$ は $`C_l`$ の対角、極限の $`l`$ では $`C_l`$ は共通部分。
   $`C_1`$ は $`\iota \mapsto \upsilon_\iota`$ の不動点の集まり、$`C_2`$ は $`\alpha \mapsto \Xi_\alpha`$ の不動点の集まり。
@@ -139,19 +146,21 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
   $`m \le_1 c_0`$ となる $`m \lt c_0`$ はどれも $`C_{\omega^\omega}`$ に入る。だから $`m_3`$ は $`\upsilon`$ の点で（予想 MONO は要らない）、$`\lt_1`$ の
   前の元を持たない。$`d \le_1 c_1`$ となる $`c_0`$ の $`\lt_2`$ の後の元 $`d`$ は $`\upsilon`$ の点。形 C3′′、
   $`C^*_3 = \{\upsilon_\Lambda, \upsilon_{\Lambda+\omega}, \upsilon_{\Lambda+\omega+1}\}`$ では：$`\Lambda = \upsilon_\Lambda`$ は $`(C_{\omega^\omega})'`$ に入り、$`\mathrm{lh}(c_1) = c_2`$、$`c_2`$ は
-  $`c_1`$ のただ 1 つの $`\lt_2`$ の後の元、そして無限に多くの $`k`$ で $`c_0 \lt_2 \upsilon_{\Lambda+k}`$。
+  $`c_1`$ のただ 1 つの $`\lt_2`$ の後の元、そして無限に多くの $`k`$ で $`c_0 \lt_2 \upsilon_{\Lambda+k}`$。LEFT を仮定すると C3′′ は偽
+  （[BREAK-ja.md](BREAK-ja.md) §3）なので、これらの C3′′ の帰結は中身が無い。
 - **未証明**（止める点）：「証明済みの定理が許す最小の $`\Lambda`$ は $`\Lambda_{struct}`$（$`C_{\omega^\omega}`$ の最小の極限点）」。これは定理
   SKEL（[REACHES-ja.md](REACHES-ja.md) §3：$`R_2^S`$ で $`c_0 \ge \nu_P`$）を見落としている。SKEL と C3-VEB から $`m_3 \ge \rho_{\Lambda^*}`$
   （査読者の議論）。だから評価は：$`\Lambda`$ は、$`\nu_P`$ 以上の $`(C_{\omega^\omega})'`$ の最小の元以上。予想した名前では
   $`\Lambda_{struct} \lt \Theta_P \le \Lambda^* \lt \nu_P`$（大小は Python と Lean で確認済み）なので、$`\Lambda_{struct}`$ は外れる。これらの構造からの
-  評価はどれもまだ $`\theta_0`$ より下。
+  評価はどれもまだ $`\theta_0`$ より下。今は $`\Lambda_{struct} \lt \nu_P`$ と「$`\Lambda_{struct}`$ では鎖が始まらない」が、名前も条件も
+  使わずに証明済み（[BREAK-ja.md](BREAK-ja.md) §3、査読 1 回）。
 - **証明書**（$`R_2^C`$。著者が 39 回の実行をすべて再生し、査読者が 7 つをもう一度再生した）。
   $`\Lambda \gt m_3 \gt`$ $`\Phi_3((0,0,0)(1,1,1)(2,2,2)(3,3,3))`$ の点、これは $`\Phi_3(\mathrm{SRO})`$ の点より上。[README-ja.md](README-ja.md) §6
   の予想「$`\Phi_3(\mathrm{SRO})`$ の点は $`\theta_0`$」が成り立てば $`m_3 \gt \theta_0`$。もっと強い「$`\Lambda \ge \Lambda_{cert}`$」（その点より上の
   $`C_{\omega^\omega}`$ の最小の極限点）は INC1-nonups が要る。
-- **予想。** $`\min C_l = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot l})`$、
-  $`\Lambda_{struct} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot\omega^\omega+1})`$（標準形であることと大小は確認済み）。CH の下半分
-  （$`m_3 \gt \psi_{\Omega_1}(I_0)`$）は未解決。上半分は $`\Lambda \lt \psi_{\Omega_1}(I_1)`$ の C3′′ から出る。数で書いた C3′ には
+- **予想、今は証明済み**（[BREAK-ja.md](BREAK-ja.md) §3、査読 1 回）。$`\min C_l = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot l})`$、
+  $`\Lambda_{struct} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot\omega^\omega+1})`$。CH の下半分（$`m_3 \gt \psi_{\Omega_1}(I_0)`$）は未解決。「上半分は C3′′
+  から」という道は無くなった。LEFT を仮定すると C3′′ は偽だから。数で書いた C3′ には
   $`\psi_{\Omega_1}(E + \theta)`$ が $`\iota \mapsto \upsilon_\iota`$ の不動点であることが要るが、そこで補題 REL が等号なら成り立たない。
 
 ## 5. 確認
@@ -176,8 +185,9 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
 - $`\Theta_A`$ より上の正確な届く先：後の区間（$`\varepsilon_{\sigma+\omega}`$ より上の $`\mathrm{seg}(\sigma)`$、$`\mathrm{seg}(\upsilon_{\lambda+n})`$、$`\mathrm{seg}(\tau_1)`$、
   後のブロック）での H-RC。いくつもの区間にまたがる一般のピン（CL-FIN、LHPAR\*、有限集合の判定 T1 の一部に帰着
   済み）。$`y \ge \delta_j\cdot\omega`$ の点。$`\rho_{\Theta_A+\omega^2}`$ より上の $`R_2^C`$。
-- CL-FIN と LHPAR\*、だから初等再帰的な対応。
+- CL-FIN と LHPAR\*、だから初等再帰的な対応。今は CL-FIN と LHPAR\* の Cl\* の形は証明済み。LHPAR\* の鋭い形は書いた
+  ままでは成り立たず、「初等再帰的」は概略だけ（[BREAK-ja.md](BREAK-ja.md) §4）。
 - $`[\Lambda_\varepsilon, \Theta_1)`$ での $`c^+`$ の閉じた形。$`\Theta_P`$、$`\Theta_1`$、$`\Theta_A`$、$`\Lambda^*`$、$`\nu_P`$ の名前。$`D`$ がどこまで延びるか。
   $`\Lambda_\varepsilon`$ より上での主張の名前の半分。
-- INC1-S と INC1-nonups。
-- $`C^*_3`$：最小の $`\Lambda`$（今は $`\nu_P`$ より上）、C3′′、上半分、下半分、予想 CH。
+- INC1-S と INC1-nonups、今は NOBAD と CC に帰着（[BREAK-ja.md](BREAK-ja.md) §1）。
+- $`C^*_3`$：最小のいちばん下の点（$`\nu_P`$ より上）、上半分、下半分、予想 CH（[BREAK-ja.md](BREAK-ja.md) §6）。

@@ -7,7 +7,8 @@ means that an independent referee found the result proved with no fatal or block
 page are from 2026-10; they come from four papers, each refereed once. "1 review" means one referee. "2 reviews"
 means that two independent papers proved the result and each paper was refereed once. A statement that its referee
 found not proved is listed under **Not proved**, even when the rest of its paper is proved. None of the four papers
-uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006).
+uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). The next round is on the fifth page
+[BREAK.md](BREAK.md); it changes some statuses here, as marked.
 
 **Notation.** As on [REACHES.md](REACHES.md). For a $`\upsilon`$-point $`\tau`$, $`\tau^\infty`$ is the least $`\upsilon`$-point above
 $`\tau`$, and $`\mathrm{seg}(\tau) = [\tau, \tau^\infty)`$. For a restart index $`\lambda`$: $`\sigma_\lambda = \upsilon_{\lambda+1} = \rho_\lambda^\infty`$ and
@@ -46,9 +47,10 @@ $`\mathrm{Core}^\tau`$ is the union of the sets $`B`$ of the $`\tau`$-isominimal
   bar operation commutes with $`\pi`$.
 - **Not proved.** That UNIF is onto (a $`\tau`$-copy of the pulled-back pattern can leave the domain of $`\pi`$); that
   $`\pi[P^\tau(z)]`$ serves as $`P^\sigma(\pi z)`$ against coverings that raise the parameters; that $`C_\tau(z)`$ is a $`\tau`$-isominimal pin
-  pattern as stated (the cited theorem uses the coverings of Carlson–Wilken, JSL 77 (2012), not these).
+  pattern as stated (the cited theorem uses the coverings of Carlson–Wilken, JSL 77 (2012), not these). The last point is now
+  proved by Theorem EXPL ([BREAK.md](BREAK.md) §4, 1 review).
 - **Open.** Whether $`C_\tau(z)`$ is always finite (CL-FIN), so whether the assignments are elementary recursive. As
-  defined they are not effective. The referee notes that Carlson–Wilken 2012, §3 (Def 3.6, Thm 3.9(1)) already has a
+  defined they are not effective. Now CL-FIN is proved ([BREAK.md](BREAK.md) §4, 1 review); "elementary recursive" is only an outline. The referee notes that Carlson–Wilken 2012, §3 (Def 3.6, Thm 3.9(1)) already has a
   relativized pattern theory inside the core; Theorem RC is the analogue for this weaker notion, for every $`\tau`$ and
   above the core.
 
@@ -77,13 +79,15 @@ $`\mathrm{Core}^\tau`$ is the union of the sets $`B`$ of the $`\tau`$-isominimal
   that it carries with their witnesses to $`\upsilon`$-points at or above their index shift. **TOP-FLAT$`_0`$** (no FRAG) and
   **REACH$`_0`$** (using FRAG): if the least point $`y_0 \ge \delta`$ that is not reflected lies in FLAT$`_0`$ (sums of $`\upsilon`$-points
   of $`[\rho, \delta_j]`$, points of $`\mathrm{seg}(\rho)`$ and constants below $`\rho`$), then $`\mathrm{lh}(\rho_\lambda) = y_0`$. This covers the
-  program's reaches of the form $`\delta_{n+1} + \tau_{n+1}`$. **TOP-FLAT$`_1`$** (one segment above $`\rho`$): proved given the open
-  lemmas LHPAR\* and CL-FIN.
+  program's reaches of the form $`\delta_{n+1} + \tau_{n+1}`$. **TOP-FLAT$`_1`$** (one segment above $`\rho`$): proved given the
+  lemmas LHPAR\* and CL-FIN, and now proved outright (Theorem EXPL, [BREAK.md](BREAK.md) §4).
 - **Conditional** (proved, 1 review, given FRAG and the hypothesis H-RC: pins with index shift for every segment of the
   region). For every $`\lambda \le \Lambda^*`$ the reach of $`\rho_\lambda`$ is the supremum of $`y + 1`$ over the reflected points $`y`$, and
-  $`\Lambda^*`$ is the least $`\lambda`$ that is fully reflected. H-RC is open beyond the first segment.
+  $`\Lambda^*`$ is the least $`\lambda`$ that is fully reflected. H-RC was open beyond the first segment; it is now proved (Lemma PIN-S,
+  [BREAK.md](BREAK.md) §4, 1 review).
 - **Not proved** (blocking point, one sentence): "HC holds on all of $`[0, \rho_{\Theta_A+\omega^2})`$". At $`\Theta_A`$ itself only the
-  bounds above are known, and EQB-A allows $`R_2^C \ne R_2^S`$ there. No theorem uses the sentence.
+  bounds above are known, and EQB-A allows $`R_2^C \ne R_2^S`$ there. No theorem uses the sentence. Now the reach at $`\Theta_A`$ is
+  $`\delta + \varepsilon_{\sigma+\omega}`$, so HC holds at every $`\lambda \le \Theta_A`$ and $`R_2^C = R_2^S`$ on $`[0, \rho_{\Theta_A+\omega^2})`$ ([BREAK.md](BREAK.md) §4, 1 review).
 - **Conjectures** (names checked): $`\Theta_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+\omega}})`$,
   $`\Theta_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$, $`\Theta_A = \psi_{\Omega_1}(\Omega_\omega + \varepsilon_{\theta+\omega})`$.
 
@@ -93,7 +97,9 @@ Let $`H(\eta) = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$ and $`D = \{\
 $`\eta`$ for which $`\Omega_\omega + \theta\cdot\eta`$ is a normal argument. For a countable $`\eta`$: $`\eta \in D`$ iff $`\eta \lt H(\eta)`$.
 
 - **Theorem GEN** (proved, 1 review). For every $`\eta \in D`$: $`H(\eta) = \upsilon_{1+\iota(\eta)}`$ with $`\iota(\eta) = \mathrm{otp}(D \cap \eta)`$.
-  So the terms $`\psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$, $`\eta \in D`$, list all $`\upsilon`$-points in increasing order. Proof:
+  So the terms $`\psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$, $`\eta \in D`$, list the $`\upsilon`$-points in increasing order, but only those below
+  $`\upsilon^* = \sup H[D]`$: the $`\upsilon`$-points are cofinal in $`\omega_1`$, so not all of them (correction, [BREAK.md](BREAK.md) §3; GEN-EXT
+  extends the list to $`\eta \lt \Omega_\omega\cdot\omega`$, §2). Proof:
   STEP and LOW-STEP at successors; CONT and one general hull-gap lemma at limits. It holds for all $`\eta \lt \Omega_2`$.
   Theorems T+, T++ and PHI are special cases, so T+ now has **2 reviews**, T++ **3** and PHI **2**.
 - **Lemmas GAP\*, SUP, DOWN, RI** (proved, 1 review). RI: $`\iota(\eta)`$ is a restart index iff $`\mathrm{logend}(\eta) \ge 2`$, and a
@@ -130,7 +136,9 @@ $`\upsilon`$-point ([REACHES.md](REACHES.md) §4). $`U`$ is the class of $`\upsi
   ([REACHES.md](REACHES.md) §4) says that $`\Sigma_1`$-elementarity in the language of $`R_2^S`$ gives it for $`R_1^+`$. That is
   wrong: $`\le_1`$ of $`R_1^+`$ is defined through itself (Carlson 2001, p. 19; Wilken 2020, pp. 418, 420), so a $`\Sigma_1`$-copy in
   $`R_2^S`$ need not keep $`\le_1`$ of $`R_1^+`$. So LEFT, and the results that use it, now hold in $`R_2^S`$ only given INC1-S, as
-  in $`R_2^C`$ only given INC1-nonups. The statement may still be true; neither paper nor referee has a proof.
+  in $`R_2^C`$ only given INC1-nonups. The statement may still be true; neither paper nor referee has a proof. Now both
+  are reduced to Conjecture NOBAD (and CC in $`R_2^C`$), and VEB and C3-VEB hold given NOBAD, and unconditionally low enough
+  ([BREAK.md](BREAK.md) §1).
 - **Lemma PRINC-S** (proved, 1 review). In $`R_2^S`$, left ends of $`\lt_1`$ and right ends of $`\lt_2`$ are additively principal.
 - **The ladder** (proved, 1 review; Lemma DIAG). $`C_0 = U'`$, $`C_{l+1}`$ is the diagonal of $`C_l`$, and $`C_l`$ is the
   intersection at limits $`l`$. $`C_1`$ is the class of fixed points of $`\iota \mapsto \upsilon_\iota`$, and $`C_2`$ that of $`\alpha \mapsto \Xi_\alpha`$.
@@ -142,19 +150,21 @@ $`\upsilon`$-point ([REACHES.md](REACHES.md) §4). $`U`$ is the class of $`\upsi
   $`C_{\omega^\omega}`$; every $`m \lt c_0`$ with $`m \le_1 c_0`$ lies in $`C_{\omega^\omega}`$, so $`m_3`$ is a $`\upsilon`$-point (no Conjecture MONO
   needed) with no $`\lt_1`$-predecessor; the $`\lt_2`$-successors $`d`$ of $`c_0`$ with $`d \le_1 c_1`$ are $`\upsilon`$-points. For the shape
   C3′′, $`C^*_3 = \{\upsilon_\Lambda, \upsilon_{\Lambda+\omega}, \upsilon_{\Lambda+\omega+1}\}`$: $`\Lambda = \upsilon_\Lambda`$ lies in $`(C_{\omega^\omega})'`$,
-  $`\mathrm{lh}(c_1) = c_2`$, $`c_2`$ is the only $`\lt_2`$-successor of $`c_1`$, and $`c_0 \lt_2 \upsilon_{\Lambda+k}`$ for infinitely many $`k`$.
+  $`\mathrm{lh}(c_1) = c_2`$, $`c_2`$ is the only $`\lt_2`$-successor of $`c_1`$, and $`c_0 \lt_2 \upsilon_{\Lambda+k}`$ for infinitely many $`k`$. Given LEFT,
+  C3′′ is false ([BREAK.md](BREAK.md) §3), so these consequences of C3′′ are vacuous.
 - **Not proved** (blocking point): "the least $`\Lambda`$ that the proved theorems allow is $`\Lambda_{struct}`$, the least limit point
   of $`C_{\omega^\omega}`$". It leaves out Theorem SKEL ([REACHES.md](REACHES.md) §3: $`c_0 \ge \nu_P`$ in $`R_2^S`$), which with C3-VEB gives
   $`m_3 \ge \rho_{\Lambda^*}`$ (the referee's argument). So the bound is: $`\Lambda`$ is at least the least element of $`(C_{\omega^\omega})'`$
   that is $`\ge \nu_P`$. By the conjectured names, $`\Lambda_{struct} \lt \Theta_P \le \Lambda^* \lt \nu_P`$ (order checked in Python and
-  Lean), so $`\Lambda_{struct}`$ is excluded. These structural bounds still all lie below $`\theta_0`$.
+  Lean), so $`\Lambda_{struct}`$ is excluded. These structural bounds still all lie below $`\theta_0`$. Now $`\Lambda_{struct} \lt \nu_P`$ and "no chain
+  starts at $`\Lambda_{struct}`$" are proved without names or conditions ([BREAK.md](BREAK.md) §3, 1 review).
 - **Certificates** ($`R_2^C`$; the author replayed all 39 runs, the referee replayed 7 again).
   $`\Lambda \gt m_3 \gt`$ the point of $`\Phi_3((0,0,0)(1,1,1)(2,2,2)(3,3,3))`$, which is above the point of $`\Phi_3(\mathrm{SRO})`$. If the
   conjecture of [README.md](README.md) §6 that the point of $`\Phi_3(\mathrm{SRO})`$ is $`\theta_0`$ holds, then $`m_3 \gt \theta_0`$. The
   stronger "$`\Lambda \ge \Lambda_{cert}`$" (the least limit point of $`C_{\omega^\omega}`$ above that point) needs INC1-nonups.
-- **Conjectures.** $`\min C_l = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot l})`$ and
-  $`\Lambda_{struct} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot\omega^\omega+1})`$ (normal forms and order checked). The lower half of CH
-  ($`m_3 \gt \psi_{\Omega_1}(I_0)`$) is open; its upper half follows from C3′′ with $`\Lambda \lt \psi_{\Omega_1}(I_1)`$. The numeric C3′ needs
+- **Conjectures, now proved** ([BREAK.md](BREAK.md) §3, 1 review). $`\min C_l = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot l})`$ and
+  $`\Lambda_{struct} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot\omega^\omega+1})`$. The lower half of CH ($`m_3 \gt \psi_{\Omega_1}(I_0)`$) is open; the
+  route "upper half from C3′′" is gone, because C3′′ is false given LEFT. The numeric C3′ needs
   $`\psi_{\Omega_1}(E + \theta)`$ to be a fixed point of $`\iota \mapsto \upsilon_\iota`$, which fails if Lemma REL is an equality there.
 
 ## 5. Checks
@@ -179,8 +189,9 @@ Each run was under 60 seconds; none is a proof.
 - The exact reaches above $`\Theta_A`$: H-RC for the later segments ($`\mathrm{seg}(\sigma)`$ above $`\varepsilon_{\sigma+\omega}`$, $`\mathrm{seg}(\upsilon_{\lambda+n})`$,
   $`\mathrm{seg}(\tau_1)`$, the later blocks); the general pin over several segments (reduced to CL-FIN, LHPAR\* and part of the
   finite-set test T1); points $`y \ge \delta_j\cdot\omega`$; $`R_2^C`$ above $`\rho_{\Theta_A+\omega^2}`$.
-- CL-FIN and LHPAR\*, and so the elementary recursive assignments.
+- CL-FIN and LHPAR\*, and so the elementary recursive assignments. Now CL-FIN and the Cl\*-form of LHPAR\* are proved; the
+  sharp form of LHPAR\* fails as stated, and "elementary recursive" is an outline ([BREAK.md](BREAK.md) §4).
 - The closed form of $`c^+`$ on $`[\Lambda_\varepsilon, \Theta_1)`$; the names of $`\Theta_P`$, $`\Theta_1`$, $`\Theta_A`$, $`\Lambda^*`$ and $`\nu_P`$; how far $`D`$
   reaches; the names half of the claim above $`\Lambda_\varepsilon`$.
-- INC1-S and INC1-nonups.
-- $`C^*_3`$: the least $`\Lambda`$ (now above $`\nu_P`$), C3′′, the upper half, the lower half, and Conjecture CH.
+- INC1-S and INC1-nonups, now reduced to NOBAD and CC ([BREAK.md](BREAK.md) §1).
+- $`C^*_3`$: the least bottom (above $`\nu_P`$), the upper half, the lower half, and Conjecture CH ([BREAK.md](BREAK.md) §6).

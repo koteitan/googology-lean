@@ -8,7 +8,7 @@ independent referee found the result proved with no fatal or blocking point. Eve
 refuted" by its referee; it is not counted as proved. The results above $`\Xi_\omega`$ (exact reaches, the end of the
 skeleton, the least chain of length 3) are on the third page [REACHES.md](REACHES.md), and those beyond $`\Lambda_\varepsilon`$
 (relativized pins, the reaches up to $`\Theta_A`$, the names of all $`\upsilon`$-points up to $`\Lambda_\varepsilon`$) on the fourth page
-[PINS.md](PINS.md).
+[PINS.md](PINS.md), and those where the skeleton ends on the fifth page [BREAK.md](BREAK.md).
 
 **Notation.** $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$. The reach of a point $`\alpha`$ is
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$. A restart index is a nonzero multiple $`\lambda`$ of $`\omega^2`$. Write
@@ -57,7 +57,8 @@ Checks (each run under 60 s, 0 failures): 20,239 random configurations with 1 to
 and $`+`$; 836,413 pairs for $`\le_1`$ inside a segment; three planted bugs were all caught. The referee's runs with new
 seeds: about 1.9 million pairs, 0 failures. These runs test a program model of Wilken's terms, not $`R_1^+`$ itself.
 
-**Conjecture** (checked, not used): the map of the proof does not depend on the choice of the $`\beta_k`$.
+**Conjecture** (checked, not used): the map of the proof does not depend on the choice of the $`\beta_k`$. Now proved: the map
+equals a substitution map (FRAG-SUBST, [BREAK.md](BREAK.md) §4, 1 review).
 
 ## 2. Base changes that keep $`\le_2`$ (Theorem FRAG2)
 
