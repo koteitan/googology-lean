@@ -6,7 +6,7 @@
 **証明済み**は、独立した査読者が、致命的な点も止める点も無く証明済みと判定したもの。このページの結果はどれも
 2026-10 のもの。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの論文がその結果を証明し、それぞれが
 1 回ずつ査読されたこと。次の回の結果（相対化したピン、$`\Theta_A`$ までの正確な届く先、$`\Lambda_\varepsilon`$ までの名前、
-長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) にある。
+長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の 2 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) にある。
 それによってここのいくつかの状態が変わった。
 変わった所には印を付けた。
 
@@ -198,12 +198,13 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
 
 ## 7. 未解決
 
-- $`\Theta_A`$ より上の正確な届く先。$`\Theta_A`$ までの届く先と、$`[\Lambda_\Gamma, \Lambda_\varepsilon)`$ での $`O`$ の閉じた形は、今は
+- $`\Theta_A`$ より上の正確な届く先（$`T_\omega`$ より下のどの基の上でも、その基の上で走らせた形式的な届く先の再帰に従う。
+  概略だけ、[BREAK-ja.md](BREAK-ja.md) §7.1）。$`\Theta_A`$ までの届く先と、$`[\Lambda_\Gamma, \Lambda_\varepsilon)`$ での $`O`$ の閉じた形は、今は
   証明済み（[PINS-ja.md](PINS-ja.md) §2–3）。
 - $`\nu_C`$ より上の $`R_2^C`$（$`R_2^C`$ の核は今は $`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ を含む、[BREAK-ja.md](BREAK-ja.md) §2）。INC1-nonups と INC1-S は今は
   証明済み（[BREAK-ja.md](BREAK-ja.md) §1）。
 - $`\Theta_P`$、$`\Lambda^*`$、$`\nu_P`$、$`\nu_S`$ の値（$`\Lambda_\varepsilon`$ までの名前は今は証明済み、[PINS-ja.md](PINS-ja.md) §3。$`\nu_S`$ は今は正確に
-  記述できたが、名前は予想、[BREAK-ja.md](BREAK-ja.md) §2）。
+  記述できたが、名前は予想、[BREAK-ja.md](BREAK-ja.md) §2。§7.3 で帰着）。
 - $`\nu_S`$ より先の FRAG2：$`\upsilon`$ の点でない基をいくつも同時に（FRAG-E）、および入れ子の切るデータ。
 - $`C^*_3`$：上半分（生成した構造の順序数解析）、下半分 $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$、予想 CH。
 - $`V_3`$ より上での変換器の順序の命題 S。

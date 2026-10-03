@@ -7,7 +7,7 @@ This page continues [RESTARTS.md](RESTARTS.md). The status words are those of [R
 on this page are from 2026-10. "1 review" means one referee. "2 reviews" means that two independent papers proved
 the result and each paper was refereed once. The results of the next round (relativized pins, the exact reaches up
 to $`\Theta_A`$, the names up to $`\Lambda_\varepsilon`$, the bottom of a chain of length 3) are on the fourth page
-[PINS.md](PINS.md), and the round after that is on the fifth page [BREAK.md](BREAK.md); they change some statuses here, as marked.
+[PINS.md](PINS.md), and the two rounds after that are on the fifth page [BREAK.md](BREAK.md); they change some statuses here, as marked.
 
 **Notation.** As on [RESTARTS.md](RESTARTS.md): $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, the reach
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$, the restart $`\rho_\lambda = \upsilon_\lambda`$ for a nonzero multiple
@@ -158,7 +158,9 @@ below that used it, now holds with no hypothesis.
   $`\lt_2`$-successors. Now: for $`R_2^S`$, "$`\nu_S`$ is the top of the least pair with a nested pair" is proved (Theorem FIRST-PAIR,
   1 review, [BREAK.md](BREAK.md) §2); its name ($`\psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'+1} + \theta')`$ with $`\theta' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)`$, inside the
   conjectured interval) stays a conjecture. In $`R_2^C`$, $`\nu_C = T_C \le \nu_S`$, and $`\nu_C = \nu_S`$ unless $`R_2^C`$ has one extra "ghost" pair
-  (Theorem NU-CT, 1 review, [BREAK.md](BREAK.md) §2); $`\nu_C = \nu_S`$ is open.
+  (Theorem NU-CT, 1 review, [BREAK.md](BREAK.md) §2); $`\nu_C = \nu_S`$ is open. Now (1 review each, [BREAK.md](BREAK.md) §7.3): the name of $`\nu_S`$ is
+  equivalent to three statements about $`\upsilon`$-indices, and $`\nu_C = \nu_S`$ is a question about $`R_2^S`$ alone, reduced to two statements
+  about it.
 
 ## 5. The least chain of length 3
 
@@ -206,12 +208,13 @@ Each run was under 60 seconds; none is a proof.
 
 ## 7. Open
 
-- The exact reaches above $`\Theta_A`$; the reaches up to $`\Theta_A`$, and the closed form of $`O`$ on $`[\Lambda_\Gamma, \Lambda_\varepsilon)`$, are
+- The exact reaches above $`\Theta_A`$ (above any base below $`T_\omega`$ they follow the formal-reach recursion run above that base;
+  outline only, [BREAK.md](BREAK.md) §7.1); the reaches up to $`\Theta_A`$, and the closed form of $`O`$ on $`[\Lambda_\Gamma, \Lambda_\varepsilon)`$, are
   now proved ([PINS.md](PINS.md) §2–3).
 - $`R_2^C`$ above $`\nu_C`$ (the core of $`R_2^C`$ now contains $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$, [BREAK.md](BREAK.md) §2). INC1-nonups and INC1-S are now
   proved ([BREAK.md](BREAK.md) §1).
 - The values of $`\Theta_P`$, $`\Lambda^*`$, $`\nu_P`$ and $`\nu_S`$ (the names up to $`\Lambda_\varepsilon`$ are now proved, [PINS.md](PINS.md) §3; $`\nu_S`$ is now
-  described exactly, its name is a conjecture, [BREAK.md](BREAK.md) §2).
+  described exactly, its name is a conjecture, [BREAK.md](BREAK.md) §2, reduced in §7.3).
 - FRAG2 beyond $`\nu_S`$: several bases that are not $`\upsilon`$-points at once (FRAG-E), and nested cut data.
 - $`C^*_3`$: the upper half (an ordinal analysis of the generated structure), the lower half $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$,
   and Conjecture CH.

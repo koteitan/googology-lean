@@ -1,13 +1,13 @@
 [← Back](README.md) | [English](BREAK.md) | [Japanese](BREAK-ja.md)
 
-# $`R_2^+`$ where the skeleton ends: INC1 and NOBAD, the first non-skeletal point, nested pairs, chains from fans, and finite closures
+# $`R_2^+`$ where the skeleton ends: INC1 and NOBAD, the first non-skeletal point, nested pairs, chains from fans, finite closures, and the levels above $`\nu`$
 
 This page continues [PINS.md](PINS.md). The status words are those of [README.md](README.md) §3: **proved** means that an
 independent referee found the result proved with no fatal or blocking point. All results on this page are from
-2026-10. They come from eight papers in two rounds of four, each paper refereed once. "1 review" means one referee.
+2026-10. They come from twelve papers in three rounds of four, each paper refereed once (the third round is §7). "1 review" means one referee.
 "2 reviews" means that two independent papers proved the result and each paper was refereed once. A statement that its
 referee found not proved, or false as written, is listed under **Not proved**, even when the rest of its paper is proved.
-None of the eight papers uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). No result on this
+None of the twelve papers uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). No result on this
 page is in Lean.
 
 **Notation.** As on [REACHES.md](REACHES.md) and [PINS.md](PINS.md). $`\nu_P = \upsilon_{\Lambda^*+\omega^2}`$ is the end of Theorem SKEL. $`\mathrm{lh}_1(a)`$ is the
@@ -252,21 +252,22 @@ of §2 (in $`R_2^C`$, $`T_2 = \nu_C`$ by NU-CT). $`T_\omega = \sup_k T_k`$.
 - **Theorem O** (proved given GI, 1 review; both structures). Suppose a base change GI between the gaps of $`U_k`$ exists (the
   analogue at level $`k`$ of Wilken's maps; open, it needs a notation for level $`k`$). Then, counting $`s_k`$ as the 0-th member of $`U_k`$,
   $`x_k`$ is the $`\omega`$-th member and $`T_k`$ the $`(\omega+1)`$-th, as $`\upsilon_\omega`$ and $`\upsilon_{\omega+1}`$ at level 1. For $`k = 2`$ this is the shape part of
-  NU-NAME. The paper's claim that this shape is equivalent to GI is not proved (only one direction is shown).
+  NU-NAME. The paper's claim that this shape is equivalent to GI is not proved (only one direction is shown). Now (§7.2) the
+  hypothesis can be weakened to a finite form $`GI^{fin}`$, and this finite form is equivalent to the shape.
 - **What a lift can be** (proved, 1 review; trivial). No order isomorphism maps $`[0, T_2)`$ onto $`[s_2, T_3)`$: the order types differ. The
   stronger claim that even the skeletons of two levels are not order-isomorphic is not proved. The paper therefore looks
   for a recursion one level up, as with Wilken's base changes, not for an image.
 - **Not proved** (blocking point, 1 review): Proposition TAIL, "inside a gap of $`U_2`$ the reaches of the restarts follow the
   formal-reach recursion of §4, run inside the gap". It is an outline. The results it uses assume a restart index at most
   $`\Lambda^*`$, every restart in such a gap has a larger index, and the paper does not check the other places that use this
-  assumption.
+  assumption. Now (§7.1) every use is listed and replaced; the result is still an outline.
 - **Conjecture LIFT-REC** (names): $`s_k = \psi_{\Omega_1}(\Omega_\omega\cdot k)`$, $`x_k = \psi_{\Omega_1}(\Omega_\omega\cdot k + \omega^{P_k+1})`$, $`T_k = \psi_{\Omega_1}(\Omega_\omega\cdot k + \omega^{P_k+1} + P_k)`$.
   For $`k = 1`$ these are proved (Theorem T); for $`k = 2`$ they are NU-NAME. The paper also states a structure for
   $`[s_k, T_{k+1})`$ (level $`k`$ built like SKEL⁺ over the level-$`k`$ points). The referee found that statement wrong (blocking point):
   it ends the points of each level at the start of the next level, but already the $`\upsilon`$-points go on past $`s_2`$ ($`m_0`$, $`a_0`$
-  and $`\nu`$ are restarts). It has to be restated.
+  and $`\nu`$ are restarts). It has to be restated. Now restated, with this point fixed (§7.1).
 - **At $`\Omega_\omega\cdot\omega`$** (conjecture). The uniform pattern of the levels cannot go on there; either no new kind of $`\Sigma_1`$
-  sentence appears until the first fan (Conjecture FF, §6) or new fan-free kinds appear from long reaches. The referee
+  sentence appears until the first fan (Conjecture FF-LIFT; now proved false, §7.4) or new fan-free kinds appear from long reaches. The referee
   notes that the paper argues this less strongly than it states it.
 
 ## 6. The first fan and the first chain against the limit of the levels
@@ -294,7 +295,8 @@ T_\omega \le \sigma_F \lt f_0 \lt m_3 \lt c_0, \qquad x_F \le f_0 .
   "just above" $`m_3`$ is not proved: fans and nested fans are cofinal below $`c_0`$.
 - **Given H-LIFT** (proved, 1 review). H-LIFT is the hypothesis that the levels $`k \lt \omega`$ are fan-free and that $`T_k`$ has the name of
   LIFT-REC. Given it, $`x_F \gt T_\omega = \psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$ (by Lemma CONT, which is in Lean). This is the reading of row 28,
-  (0,0,0)(1,1,1)(2,0,0), and it needs no inaccessible.
+  (0,0,0)(1,1,1)(2,0,0), and it needs no inaccessible. Now $`x_F \gt T_\omega`$ holds with no hypothesis (§7.1 and §7.4, 2 reviews);
+  H-LIFT is needed only for the name of $`T_\omega`$.
 - **Theorem CH-LOW-1** (proved given FF, 1 review; $`R_2^C`$). FF is the hypothesis that every $`\gamma \lt \theta_0`$ lies below the least
   realization of some fan-free pattern. Given FF, $`f_0`$, $`m_3`$, $`c_0`$, $`c_1`$, $`c_2`$ are all $`\gt \theta_0`$, so every InaccPsi name of them
   contains an inaccessible. FF is open; it would follow from the lower-bound program below $`\theta_0`$ ([README.md](README.md) §3)
@@ -302,10 +304,172 @@ T_\omega \le \sigma_F \lt f_0 \lt m_3 \lt c_0, \qquad x_F \le f_0 .
   argument is circular.
 - **Not proved** (blocking point, 1 review): "given FF, the first fan $`x_F`$ is $`\gt \theta_0`$, so it needs an inaccessible". FF bounds only
   $`\sigma_F`$, and DOM_F puts $`\sigma_F`$ only below the first closed fan $`f_0`$; $`x_F \lt \sigma_F`$ is not excluded. Also not proved as stated:
-  "$`\theta_0`$ is excluded as a limit of caps, given FF".
+  "$`\theta_0`$ is excluded as a limit of caps, given FF". Now $`x_F \gt \theta_0`$ is proved given a stronger hypothesis $`FF_N`$ (§7.4).
 - **Open**: no fan and no chain of length 3 is exhibited below $`\theta_1 = \psi_{\Omega_1}(\psi_{I_1}(0))`$ (the upper half for $`k = 1`$).
 
-## 7. Checks
+## 7. The levels above $`\nu`$, the ghost, and the first fan
+
+This section is the third round: four papers, each refereed once. It uses the notation of §5 and §6. The **depth** of a pair
+$`(x, y)`$ is the largest $`k`$ such that $`(x, y)`$ is the outer pair of a $`k`$-nest. For $`\xi \lt T_\omega`$, $`T_k(\xi)`$ is the least top of a
+$`k`$-nest above $`\xi`$. The **level-$`k`$ tops** $`\mathrm{Top}_k`$ are the points $`\beta^k_0 = T_k`$, $`\beta^k_{g+1} = T_k(\beta^k_g)`$, and the
+**level-$`k`$ restarts** $`\mathrm{Res}_k`$ are the suprema $`\beta^k_l`$ at limits $`l`$. At level 1 these are the $`\delta`$-points and the restarts
+of §4 (by SKEL$`^\omega`$ below); level 2 starts with $`(s_2, x_2, T_2) = (m_0, a_0, \nu)`$. A **long pair** is $`a \lt_2 b`$ with $`b \lt \mathrm{lh}(a)`$,
+that is $`a \le_1 b+1`$. $`(x_L, y_L)`$ is the least long pair, and $`m_L = \min\{m : m \le_1 x_L\}`$.
+
+### 7.1 The structure below $`T_\omega`$ (LIFT-REC restated)
+
+- **Lemma DEEP** (proved, 1 review; $`R_2^S`$ and $`R_2^C`$). If $`x \lt_2 y`$ and $`\mathrm{lh}(x) \gt y`$, then $`(x, y)`$ is the outer pair of a
+  $`k`$-nest for every $`k`$.
+- **Corollary D** (proved, 1 review; both). Below $`T_\omega`$ every pair has finite depth, and the reach of its left end is its right end.
+  Two pairs are nested or disjoint. Each left end has one right end, each right end has one left end, and no point is both. A
+  point strictly inside a pair $`(x, y)`$ has its reach below $`y`$.
+- **Every fan apex and every long left end lies above $`T_\omega`$** (proved, **2 reviews**: Corollary D here and LONG-NEST of §7.4,
+  two independent papers). So $`x_F \gt T_\omega`$ with no hypothesis.
+- **Theorem SH** (proved, 1 review; both; every level $`k`$). LIFT-0 (§5) holds for every block of every level, not only the first.
+  For $`\xi \lt T_\omega`$: $`T_k(\xi)`$ exists; no point of $`(\xi, T_k(\xi)]`$ reaches beyond $`T_k(\xi)`$; $`T_k(\xi)`$ has exactly one
+  $`\lt_2`$-predecessor $`x_k(\xi) \gt \xi`$; and the set $`U_k(\xi)`$ of the $`\lt_1`$-predecessors of $`x_k(\xi)`$ above $`\xi`$, together with
+  $`x_k(\xi)`$ and $`T_k(\xi)`$, has the shape of $`U_k`$ in LIFT-0. The level-$`k`$ tops and restarts exhaust $`[0, T_\omega)`$. Only points of
+  $`\mathrm{Res}_k`$ reach past a level-$`k`$ top above them. No pair of depth at most $`k`$ crosses a point of $`\mathrm{Top}_k \cup \mathrm{Res}_k`$. The
+  level-$`(k+1)`$ tops, the left ends of pairs of depth $`k+1`$, and every $`U_{k+1}(\xi)`$ lie in $`\mathrm{Res}_k`$. The referee asked
+  for two wording fixes (one descent step, and one missing line in the cofinality argument).
+- **LIFT-REC, restated** (1 review). The lift is now a recursion, not an image. Level $`k`$ carries over level $`k-1`$ the structure that the
+  $`\upsilon`$-points, the $`\delta`$-points and the restarts carry over $`R_1^+`$. Its skeleton $`Y_k`$ is $`\mathrm{Res}_k`$ together with all the
+  chains $`U_k(\xi)`$. The shape clauses are proved in both structures (by DEEP and SH). They include
+  $`Y_{k+1} \subseteq \mathrm{Res}_k \subseteq Y_k`$, which fixes the blocking point of §5: level $`k`$ goes on past $`s_{k+1}`$, and the
+  conjectured names $`\xi \mapsto \psi_{\Omega_1}(\Omega_\omega\cdot k + P_k\cdot\xi)`$ go on past $`\xi = \Omega_\omega`$. Open: that every chain $`U_k(\xi)`$ has the shape
+  of §5 Theorem O (index $`\omega`$ at its left end), the exact reaches, the gaps as base-changed copies of $`[1, s_k)`$, and the names. The
+  "level-$`k`$ base change" in the paper is not defined, so that clause is a program, not a statement. That $`P_k`$ is an
+  $`\varepsilon`$-number is checked only.
+- **Theorem NU-CT$`_\omega`$** (proved, 1 review; $`R_2^C`$). Either $`\beta_0 \ge T_\omega`$ (of $`R_2^S`$): then $`R_2^C = R_2^S`$ on every relation with
+  right end below $`T_\omega`$, and all of §7.1 holds in $`R_2^C`$. Or $`\beta_0 \lt T_\omega`$ and $`\beta_0`$ is a ghost stage: $`R_2^C`$ has an
+  extra pair $`\rho_L \lt_2 \beta_0`$, where $`\rho_L`$, the largest $`\lt_1`$-predecessor of $`\beta_0`$, is a restart and the only
+  $`\lt_2`$-predecessor of $`\beta_0`$ in $`R_2^C`$; $`\beta_0`$ is a restart and not a right end in $`R_2^S`$; the extra pair has depth at least 2.
+- **Outline only.** The referee found no error in the following, but each uses Theorem SKEL$`^\omega`$, which the paper gives as an
+  outline and which was not refereed to proof level. The paper labels some of them "proved"; the referee relabels them
+  (blocking point about labels only).
+  - SKEL$`^\omega`$: SKEL⁺ (§2) holds on all of $`[0, T_\omega)`$ with the pairs of higher depth allowed. The pairs of depth 1 are exactly
+    the standard pairs, and every other pair joins two restarts. So $`R_2^S`$ is skeletal there in the weaker form "every pair joins
+    two $`\upsilon`$-points", FRAG2 holds in that form, and RIGHT (§1) holds for every pair with left end below $`T_\omega`$.
+  - TAIL and TAIL-GAP: every use of the assumption $`\lambda \le \Lambda^*`$ is listed and replaced. So above any base $`w \lt T_\omega`$, in
+    particular in every gap of every chain, the reaches of the restarts follow the formal-reach recursion of §4 run above $`w`$
+    (the upper bound uses no FRAG; equality uses FRAG).
+  - TOP: let $`k \ge 2`$, let $`L \in \mathrm{Res}_k`$ not be a right end, and let $`T_k(L)`$ be the first level-$`k`$ top above $`L`$. Then
+    $`\mathrm{lh}(L) \le T_k(L) + c^k(L)`$, where $`c^k`$ is the formal offset of §4 run among the level-$`k`$ restarts. If $`L`$ has finite
+    Cantor–Bendixson rank $`n`$ in $`\mathrm{Res}_k`$, this gives $`\mathrm{lh}(L) \le T_k(L) + n + 1`$. Lower bounds: $`L \le_1 \delta^L_1`$, and
+    $`L \le_1 \rho_{L+\omega^2}`$ given FRAG.
+  - In the level-2 structure theorem on $`[s_2, T_3)`$, the clauses on level 1 inside it and on the reaches. Its other clauses are
+    proved (1 review): one pair per level-2 block, the blocks, caps and chains as in SH, and no fan, no chain of length 3 and no
+    long left end on $`[0, T_\omega]`$.
+- **$`T_\omega`$** (Theorem NU-OMEGA). Proved (1 review): $`T_\omega`$ is in no pair and has no $`\lt_1`$-predecessor (as in NEST);
+  $`\mathrm{lh}(T_\omega) \le Y_{LL}`$, where $`Y_{LL}`$ is the least $`y'`$ with $`x \lt_2 y \lt y'`$ and $`x \le_1 y'`$ for some $`x, y`$; and $`Y_{LL}`$ lies
+  above every level structure that starts just above $`T_\omega`$. Outline: $`T_\omega`$ is a restart, a limit of $`\mathrm{Top}_k`$ for every
+  $`k`$, and its block 0 is standard. **Not proved** (blocking point): "given FRAG, $`T_\omega \le_1 \rho_{T_\omega+\omega^2}`$". The proof needs
+  the whole region of $`T_\omega`$ to be standard, and only block 0 is shown. "Every level decomposition goes on above $`T_\omega`$" is
+  argued only in part. **Conjecture**: $`\mathrm{lh}(T_\omega) = y^* + 1 = Y_{LL}`$, where $`(x^*, y^*)`$ is the least pair of infinite depth above
+  $`T_\omega`$. Then the first block at level $`\omega`$ does not have the LIFT-0 shape.
+
+### 7.2 Base changes between the gaps of a level (GI)
+
+Write $`U_k = \{\upsilon^k_\zeta : \zeta \le o_k + 1\}`$ in increasing order, so $`s_k = \upsilon^k_0`$, $`x_k = \upsilon^k_{o_k}`$, $`T_k = \upsilon^k_{o_k+1}`$. By
+LIFT-0, $`o_k`$ is a limit $`\ge \omega`$, and $`o_1 = \omega`$ (Theorem T). The gaps are $`G_\zeta = [\upsilon^k_\zeta, \upsilon^k_{\zeta+1})`$. A base change
+at a limit $`\zeta \le o_k`$ copies $`G_\zeta`$ into an earlier gap $`G_\eta`$ and sends $`\upsilon^k_\zeta`$ to $`\upsilon^k_\eta`$. There are three forms:
+the global $`GI_k(\zeta)`$ (an onto map; in $`R_2^C`$ both directions are coverings), the local $`GI^{loc}_k(\zeta)`$ (finite copies inside
+one gap, with a back property inside that gap), and the finite $`GI^{fin}_k(\zeta)`$ (finite copies with Wilken's Property 2 of
+2020, Prop 21.11, bounded by a number $`m`$).
+
+- **Lemma GAPCAP** (proved, 1 review; both). For $`y`$ in a gap $`G_\zeta`$, $`\sup\{\mathrm{lh}(u) : \upsilon^k_\zeta \lt u \le y\} \lt \upsilon^k_{\zeta+1}`$.
+- **Theorem HIER** (proved, 1 review; both). For every limit $`\zeta \le o_k`$:
+
+```math
+GI_k(\zeta) \Rightarrow GI^{loc}_k(\zeta) \Rightarrow GI^{fin}_k(\zeta) \Leftrightarrow \upsilon^k_\zeta <_2 \upsilon^k_{\zeta+1} \Leftrightarrow \zeta = o_k .
+```
+
+  The new step "$`\lt_2`$ gives $`GI^{fin}`$" (Lemma LOC, proved) uses GAPCAP and one $`\Sigma_2`$ sentence. So the last gap $`[x_k, T_k)`$ is
+  always copied, base to base, into cofinally many earlier gaps, and every form of GI fails at every limit $`\zeta \lt o_k`$. Theorem O
+  of §5 now needs only $`GI^{fin}_k(\omega)`$, and conversely $`o_k = \omega`$ gives $`GI^{fin}_k(\omega)`$. The referee's blocking point is about
+  what this means: $`GI^{fin}_k(\omega)`$ is another name for $`\upsilon^k_\omega \lt_2 \upsilon^k_{\omega+1}`$, so "$`o_k = \omega`$ iff $`GI^{fin}_k(\omega)`$" restates
+  the pair clause of LIFT-0. It is not progress on $`o_k = \omega`$.
+- **Proposition SEG1** (proved given Lemma ST of FRAG, 1 review; $`k = 2`$; $`R_2^S`$, and $`R_2^C`$ below $`\nu_C`$). For
+  $`\eta \lt \zeta \le o_2`$, Wilken's map $`\pi_{c,a}`$ with $`a = \upsilon^2_\zeta`$ and $`c = \upsilon^2_\eta`$ is an isomorphism from
+  $`c \cup (T^a[c] \cap [a, a^\infty))`$ onto $`[0, c^\infty)`$, where $`a^\infty`$ is the least $`\upsilon`$-point above $`a`$. This is GI on the first
+  $`R_1^+`$-segment of every gap.
+- **Not proved.** Proposition LOW1 (the substitution map is an isomorphism on the low part of a gap): an outline built on TAIL-GAP,
+  which is itself an outline; its statement and proof do not match (blocking point). Neither $`o_k = \omega`$ for $`k \ge 2`$ nor any
+  form of $`GI_k(\omega)`$ is proved. What blocks: an onto level-$`k`$ hull (for $`k = 2`$ this is (N-χ) of §7.3), the reaches beyond the
+  low part of a gap, and for $`k \ge 3`$ a test for new pairs.
+
+### 7.3 The ghost and the name of $`\nu`$
+
+Here $`\nu = \nu_S`$ and $`U_2 = \{\upsilon^2_\zeta\}`$ as in §7.2. $`\mathrm{Car}_S(\alpha, \beta, i)`$ is Carlson's covering condition for $`\le_i`$ (Carlson
+2009, Def 5.3), evaluated inside $`R_2^S`$. A **long restart** is a restart whose reach passes its first pair and the next restart. A
+**$`K`$-chain** is a $`\lt_1`$-chain of $`K`$ long restarts.
+
+- **Theorem LOC** (proved, 1 review). $`\beta_0`$ is the least $`\beta`$ at which $`\mathrm{Car}_S(\cdot, \beta, i)`$ differs from $`R_2^S`$. So $`\nu_C = \nu_S`$ iff
+  $`\mathrm{Car}_S(\alpha, \beta, i)`$ implies $`\alpha \le_i^S \beta`$ for all $`\alpha \lt \beta \le \nu_S`$ and $`i = 1, 2`$. The ghost question is a question
+  about $`R_2^S`$ alone; Conjecture CORE-2 is not needed for it.
+- **Lemma G1′** (proved, 1 review). If there is a ghost, then for every $`K`$ the $`K`$-chains are cofinal below $`\beta_0`$. This fixes a minor
+  gap in Lemma GHOST (§2).
+- **Theorem LOCATE** (proved, 1 review). A ghost pair $`\rho_L \lt_2 \beta_0`$ lies in exactly one of four places: (P1) $`\beta_0 \lt m_0`$;
+  (P2) $`\rho_L`$ is inside a gap of $`U_2`$ and $`\beta_0`$ is below the next point of $`U_2`$; (P3a) $`\rho_L = \upsilon^2_\zeta`$ with $`\zeta`$ a limit, and
+  $`\beta_0`$ is strictly inside the next gap; (P3b) $`(\rho_L, \beta_0) = (\upsilon^2_\zeta, \upsilon^2_{\zeta+1})`$ with $`\zeta`$ a limit below $`o_2`$, which forces
+  $`o_2 \gt \omega`$.
+- **Theorem GR** (proved as a reduction, 1 review). NOLIM and $`o_2 = \omega`$ together give $`\nu_C = \nu_S`$. NOLIM says that no point of
+  $`(0, \nu)`$ outside $`U_2`$ has $`K`$-chains cofinal below it for every $`K`$; it is the level-2 form of "the supremum of an infinite
+  $`\lt_1`$-chain of $`R_1^+`$ is a $`\upsilon`$-point". NOLIM holds on $`(0, \nu_P]`$ (proved); above $`\nu_P`$ it is open.
+- **Proposition RICH** (proved, 1 review). Let $`b`$ be a restart in $`(a_0, \nu)`$ such that no point of $`(a_0, b)`$ is $`\le_1 b`$. Then
+  $`\mathrm{Car}_S(a_0, b, 2)`$ holds iff every finite pattern of the gap $`(a_0, \nu)`$ occurs cofinally below $`b`$. Such a $`b`$ always gives a
+  ghost. Given $`o_2 = \omega`$ and LL (an infinite $`\lt_1`$-chain of restarts below $`\nu`$ has its supremum in $`U_2`$), a ghost exists iff
+  such a $`b`$ exists.
+- **Lemma NAME-RED** (proved, 1 review). Let $`L(\xi) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \theta'\cdot\xi)`$. NU-NAME (§2) holds iff all three hold:
+  (O) $`o_2 = \omega`$; (N-χ) $`\upsilon^2_n = L(n)`$ for every $`n \lt \omega`$; (N-ν) $`\nu = L(\omega+1)`$. The name of $`m_0`$ is (N-χ) at $`n = 0`$, and the
+  name $`a_0 = L(\omega)`$ follows from (O) and (N-χ). The statement (O) is shared with the ghost question. The referee notes that a proof of
+  (N-ν) still needs $`\Sigma_1`$ copies at restarts with long reaches (the kind of FRAG-E).
+- **Open**: $`\nu_C = \nu_S`$, $`o_2 = \omega`$, NOLIM above $`\nu_P`$, (N-χ) and (N-ν). The referee notes that no proved fact contradicts NOLIM or
+  LL, and that LL with $`o_2 = \omega`$ says that $`a_0`$ is the least point whose $`\lt_1`$-predecessors form a cofinal set of restarts.
+  That is the remaining content of these questions.
+
+### 7.4 The first fan and the first inaccessible
+
+- **Lemma MATCH** (proved, 1 review; both). Below $`x_F`$, $`\lt_2`$ is a laminar matching: each left end has exactly one right end, a right
+  end is never a left end, and two pairs are nested or disjoint.
+- **Theorem FAN-CAP** (proved, 1 review; both). $`x_F`$ has exactly two $`\lt_2`$-successors $`y_1 \lt y_2`$, and $`y_2 = \mathrm{lh}(x_F)`$ is the
+  least top of any fan. For the least closed fan, $`\mathrm{lh}(f_0)`$ is its largest right end, which is the least top of a closed fan.
+- **Theorem OPEN-C** (proved, 1 review; $`R_2^C`$, from Carlson 2009, Thm 14.10). The least fan is the least realization of the
+  open-fan pattern PT, and it is open ($`y_1 \le_1 y_2`$ fails). So $`x_F \lt f_0`$ strictly. In $`R_2^S`$ the same holds if $`\beta_0`$ is above the
+  least top of a fan of $`R_2^C`$.
+- **Lemma LONG** (proved, 1 review; both; a routine fix: add the point 1 to the parameters). Every fan apex is the left end of a long
+  pair, and long pairs are cofinal below every fan apex. The least long pair has exactly one right end, and
+  $`\mathrm{lh}(x_L) = y_L + 1`$. The referee adds a proof of $`\mathrm{lh}(m_L) = y_L + 1`$, which the paper had as a conjecture.
+- **Theorem LONG-NEST** (proved, 1 review; both). Below every long left end, $`k`$-nests are cofinal for every $`k`$. So
+  $`T_\omega \lt x_L \lt x_F`$ with no hypothesis (2 reviews together with Corollary D of §7.1).
+- **Conjecture FF-LIFT of §5 is false** (proved, 1 review). The configuration LP of one long pair ($`x \lt_2 y`$, $`x \le_1 y+1`$) has no fan,
+  and its least realization $`(x_L, y_L, y_L+1)`$ lies strictly between $`T_\omega`$ and $`x_F`$; $`\mathrm{lh}(T_\omega) \le y_L + 1 \lt x_F`$. So new
+  fan-free kinds of $`\Sigma_1`$ sentences appear between $`T_\omega`$ and the first fan.
+- **Theorem FAN-REFL** (proved, 1 review; both; the same routine fix). Let N be the least class of configurations that contains the
+  empty one and is closed under three steps: N($`Q_1`$, $`Q_2`$) (a pair $`a \lt_2 b`$ with the point $`b+1`$, $`Q_1`$ inside $`(a, b)`$, $`Q_2`$ above
+  $`b+1`$, and $`a \le_1`$ every point of $`Q_1`$, of $`Q_2`$ and $`b`$, $`b+1`$), putting one configuration above another, and taking
+  sub-configurations. Every configuration of N occurs cofinally below every fan apex. So $`\sigma_N \lt x_F`$, where $`\sigma_N`$ is the
+  supremum of the least tops of the configurations of N.
+- **conv at level $`\omega`$** (proved, 1 review; $`R_2^C`$). Let $`Q_\omega`$ = (0,0,0)(1,1,1)(2,0,0) (row 28 of [README.md](README.md) §6),
+  $`K_\omega`$ = (1,1,0)(2,2,1)(3,0,0), $`X_\omega = Q_\omega K_\omega(2,0,0)`$ and $`Y_\omega = X_\omega K_\omega`$. The points of $`\Phi_3(Q_\omega)`$, $`\Phi_3(X_\omega)`$ and
+  $`\Phi_3(Y_\omega)`$ are exactly $`m_L`$, $`x_L`$ and $`y_L`$. The referee adds, by the same proof (not reviewed separately): the point of
+  $`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)) is exactly $`m_F = \min\{m : m \le_1 x_F\}`$, and $`\sigma_N \le m_F \lt x_F`$.
+- **FF made precise** (1 review). FF of §6 ($`\sigma_F \ge \theta_0`$) stays open. The paper replaces it by $`FF_N`$: $`\sigma_N \ge \theta_0`$. Proved:
+  L1p-HYP implies $`FF_N`$, and $`FF_N`$ implies both $`x_F \gt \theta_0`$ and FF. Here L1p-HYP says that every realization of the configuration
+  L1p ($`x_1 \lt_2 y_1 \lt x_2 \lt_2 y_2`$ with $`x_1 \le_1 x_2`$, $`x_1 \le_1 y_2`$) has $`x_1 \ge \theta_0`$. Checked (one replayed certificate): POINT-SRO
+  implies L1p-HYP, where POINT-SRO says that the point of $`\Phi_3(\mathrm{SRO})`$ is $`\ge \theta_0`$. "FF implies $`x_F \gt \theta_0`$" is still open.
+- **Theorem CH-LOW-1′** (proved given $`FF_N`$, 1 review; $`R_2^C`$). Given $`FF_N`$, the points $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, $`c_1`$, $`c_2`$ are all
+  $`\gt \theta_0`$, so their InaccPsi names contain an inaccessible. This answers the blocking point of §6 only under $`FF_N`$, which is
+  stronger than FF.
+- **Does the first fan need $`I_0`$?** Open. The answer is yes given $`FF_N`$, but this is immediate, since $`FF_N`$ already gives
+  $`x_F \gt \theta_0`$. With the referee's addition above it is one statement about one matrix: if the point of
+  $`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)) is $`\ge \theta_0`$, then the first fan needs $`I_0`$.
+- **Names** (conjecture; conv and Ytosk's reading agree on the three matrices). With $`P_\omega = \psi_{\Omega_2}(\Omega_\omega\cdot\omega)`$:
+  $`m_L = T_\omega = \psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$, $`x_L = \psi_{\Omega_1}(\Omega_\omega\cdot\omega + \omega^{P_\omega+1})`$, $`y_L = \psi_{\Omega_1}(\Omega_\omega\cdot\omega + \omega^{P_\omega+1} + P_\omega)`$.
+  None of them needs an inaccessible. The same terms are the conjectured $`(x^*, y^*)`$ of §7.1. The least fan and $`f_0`$ have no
+  supported name.
+
+## 8. Checks
 
 Each run was under 60 seconds; none is a proof. Certificates count only when replayed.
 
@@ -330,12 +494,33 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 - Finite closures: the author's checker on 910 random terms (1,130 children, 3,414 values of LHPAR\*) and the referee's on
   300 terms (539 children, 1,445 values): 0 violations. These tests use only principal parameters, so they never test the
   counterexample to the sharp LHPAR\*; the referee confirmed that counterexample with ordinal values.
+- Levels (§7.1). The patterns of 3,667 standard matrices below row 28 satisfy every finite consequence of DEEP and SH (0
+  violations), and the first restarts of levels 2 and 3 reach exactly "top + 1", the bound of TOP. Above row 28 (199 matrices)
+  the only violations are long left ends reaching "partner + 1". The referee reran 16,396 standard patterns: no counterexample.
+  But below row 28 the referee found 9 points that reach past two level-2 tops without a long left end, e.g. in
+  Q(1,1,0)(2,2,1)(2,2,1)(2,2,0)(3,3,1)(3,3,1)(3,1,0)(4,2,1)(4,2,1)(4,2,0)(5,3,1)(5,3,1). Its pattern is a level-1 restart above $`\Lambda^*`$
+  moved one level up, so it is not a counterexample to TOP, but the paper's "no such point below row 28" came from a small
+  sample. The names are normal forms and increasing; "$`P_k`$ is an $`\varepsilon`$-number" was checked for $`k = 1, \dots, 4`$.
+- Ghost and names (§7.3). $`L(\xi)`$ for $`\xi = 0, \dots, 6, \omega, \omega+1, \omega+2, \omega\cdot 2`$: normal forms and increasing, in Python (two independent
+  scripts) and in Lean (a test file, not a proof).
+- Base changes (§7.2). Under the conjectured names, $`x_2`$ is below the next $`\upsilon`$-point of level 1, which is below $`\nu`$ (the referee's run).
+- First fan (§7.4; $`R_2^C`$; replayed, 5 of them again by the referee): $`\Phi_3(Q_\omega) \lt`$ LP $`\lt \Phi_3(Q_\omega(1,1,1))`$;
+  LP $`\lt`$ LNL $`\lt \Phi_3(\mathrm{SRO}) \lt`$ L1p $`\lt`$ L2; L1p, L2 and LP below PT; PT below PTc. With FAN-REFL this gives
+  $`x_F \gt`$ the point of L1p $`\gt`$ the point of $`\Phi_3(\mathrm{SRO})`$. No certificate in either direction between $`\Phi_3(X_\omega)`$ and LP, as the
+  equal points predict. The referee's searches for certificates that would refute LONG-NEST or FAN-REFL found none, and the
+  probes that should fail (PTc below PT, two names for one diagram) gave none. conv prints no fan for the scanned matrices below
+  (0,0,0)(1,1,1)(2,2,1), and an open fan for that matrix. 16 names are normal forms and increasing (Python and a Lean test file).
 
-## 8. Open
+## 9. Open
 
-- **RIGHT-ISO** (and so RIGHT). CC as an isomorphism (not needed).
-- The name of $`\nu`$ (NU-NAME, now the two index statements (N-χ) and (N-ν)); $`\nu_C = \nu_S`$ (exclude the ghost); the structure above
-  $`\nu`$: GI, TAIL, a restated LIFT-REC; the least fan and its name.
+- **RIGHT-ISO** (and so RIGHT; for pairs with left end below $`T_\omega`$ it follows from SKEL$`^\omega`$, an outline, §7.1). CC as an isomorphism
+  (not needed).
+- The name of $`\nu`$: now the three statements (O) $`o_2 = \omega`$, (N-χ) and (N-ν) (§7.3). $`\nu_C = \nu_S`$ (exclude the ghost): now reduced to
+  NOLIM above $`\nu_P`$ and $`o_2 = \omega`$, both about $`R_2^S`$ (§7.3).
+- The structure above $`\nu`$: $`o_k = \omega`$ for $`k \ge 2`$ (equivalently $`GI^{fin}_k(\omega)`$), the global base change $`GI_k(\omega)`$, the exact reaches of
+  level-$`k`$ restarts, the gaps as base-changed copies, and the names (§7.1, §7.2); SKEL$`^\omega`$, TAIL, TAIL-GAP and TOP at proof level;
+  the reach of $`T_\omega`$.
+- The least fan: its name, the name of $`f_0`$, $`FF_N`$, L1p-HYP, POINT-SRO, and whether the least fan of $`R_2^S`$ is open (§7.4).
 - A chain of length 3: a point of $`(C_{\omega^\omega})'`$ above $`B`$ whose successors accumulate at a left end. Being a left end is not a
   property of a finite configuration, so Carlson's generating rules cannot produce it (NO-GEN). FF, DOM_F in $`R_2^S`$, open fans
   below $`\sigma_F`$, and the upper half below $`\theta_1`$. Conjecture CH.

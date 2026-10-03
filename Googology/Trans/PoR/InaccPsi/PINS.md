@@ -7,7 +7,7 @@ means that an independent referee found the result proved with no fatal or block
 page are from 2026-10; they come from four papers, each refereed once. "1 review" means one referee. "2 reviews"
 means that two independent papers proved the result and each paper was refereed once. A statement that its referee
 found not proved is listed under **Not proved**, even when the rest of its paper is proved. None of the four papers
-uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). The next round is on the fifth page
+uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). The next two rounds are on the fifth page
 [BREAK.md](BREAK.md); it changes some statuses here, as marked.
 
 **Notation.** As on [REACHES.md](REACHES.md). For a $`\upsilon`$-point $`\tau`$, $`\tau^\infty`$ is the least $`\upsilon`$-point above
@@ -189,10 +189,12 @@ Each run was under 60 seconds; none is a proof.
 
 - The exact reaches above $`\Theta_A`$: H-RC for the later segments ($`\mathrm{seg}(\sigma)`$ above $`\varepsilon_{\sigma+\omega}`$, $`\mathrm{seg}(\upsilon_{\lambda+n})`$,
   $`\mathrm{seg}(\tau_1)`$, the later blocks); the general pin over several segments (reduced to CL-FIN, LHPAR\* and part of the
-  finite-set test T1); points $`y \ge \delta_j\cdot\omega`$; $`R_2^C`$ above $`\rho_{\Theta_A+\omega^2}`$.
+  finite-set test T1); points $`y \ge \delta_j\cdot\omega`$; $`R_2^C`$ above $`\rho_{\Theta_A+\omega^2}`$. Above any base below $`T_\omega`$ the reaches follow the
+  formal-reach recursion run above that base (TAIL-GAP, outline only, [BREAK.md](BREAK.md) §7.1).
 - CL-FIN and LHPAR\*, and so the elementary recursive assignments. Now CL-FIN and the Cl\*-form of LHPAR\* are proved; the
   sharp form of LHPAR\* fails as stated, and "elementary recursive" is an outline ([BREAK.md](BREAK.md) §4).
 - The closed form of $`c^+`$ on $`[\Lambda_\varepsilon, \Theta_1)`$; the names of $`\Theta_P`$, $`\Theta_1`$, $`\Theta_A`$, $`\Lambda^*`$ and $`\nu_P`$; how far $`D`$
   reaches; the names half of the claim above $`\Lambda_\varepsilon`$.
 - INC1-S and INC1-nonups are now proved ([BREAK.md](BREAK.md) §1); RIGHT (every $`\lt_2`$-right end is a $`\upsilon`$-point) is open.
-- $`C^*_3`$: the least bottom (above $`\nu_P`$), the upper half, the lower half, and Conjecture CH ([BREAK.md](BREAK.md) §8).
+- $`C^*_3`$: the least bottom (above $`\nu_P`$), the upper half, the lower half, and Conjecture CH ([BREAK.md](BREAK.md) §9); the first fan is above $`T_\omega`$, and it needs an inaccessible given the open hypothesis
+  $`FF_N`$ ([BREAK.md](BREAK.md) §7.4).
