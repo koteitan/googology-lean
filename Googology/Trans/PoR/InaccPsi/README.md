@@ -70,8 +70,9 @@ So the main statement is, in $`R_2^C`$ and reading A:
 \mathrm{Core}(R_2^C) = \psi_{\Omega_1}(I_\omega) = \{\, |t| : t \text{ an InaccPsi normal form, all collapse arguments } \lt I_\omega,\ |t| \lt \Omega_1 \,\}.
 ```
 
-Both halves are **open**. Below $`\upsilon_{\omega\cdot\omega}`$ both hold, and in $`R_2^C`$ also up to $`\Xi_1`$, the first
-fixed point of $`\iota \mapsto \upsilon_\iota`$ (§3 and [RESTARTS.md](RESTARTS.md)).
+Both halves are **open**. Below $`\upsilon_{\omega\cdot\omega}`$ both hold, and in $`R_2^C`$ also up to
+$`\Phi_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$, with $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, the first fixed point of $`\alpha \mapsto \Xi_\alpha`$, where $`\Xi_\alpha`$ is the
+$`\alpha`$-th fixed point of $`\iota \mapsto \upsilon_\iota`$ (§3, [RESTARTS.md](RESTARTS.md) and [REACHES.md](REACHES.md)).
 
 ## 3. What is proved
 
@@ -79,10 +80,13 @@ fixed point of $`\iota \mapsto \upsilon_\iota`$ (§3 and [RESTARTS.md](RESTARTS.
 below $`\upsilon_{\omega\cdot\omega}`$ is in the core, and it is the countable value of an InaccPsi normal form whose
 collapse arguments are below $`I_\omega`$ (Theorem LOW below). Wilken's points have exact names:
 $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$ for $`\eta \lt \Gamma_0`$ (Theorem T, §4), and now for every
-$`\eta`$ below the first fixed point $`\Xi_1`$ of $`\iota \mapsto \upsilon_\iota`$ (Theorem T+). In $`R_2^C`$ the claim holds up to $`\Xi_1`$, and
-every ordinal $`\le \Xi_\omega`$ (the $`\omega`$-th fixed point) is in the core. Lemma FRAG is now proved. These results of
-2026-10 (FRAG, FRAG2, the restart blocks, T+) are on the second page [RESTARTS.md](RESTARTS.md). Above $`\Xi_1`$ both halves
-are open in $`R_2^C`$, and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$.
+$`\eta`$ below the first fixed point $`\Xi_1`$ of $`\iota \mapsto \upsilon_\iota`$ (Theorem T+). Lemma FRAG is now proved. These results of
+2026-10 (FRAG, FRAG2, the restart blocks, T+) are on the second page [RESTARTS.md](RESTARTS.md). The third page
+[REACHES.md](REACHES.md) has the newest ones: the exact reach of every restart up to $`\Lambda_\varepsilon`$ (some results with
+2 reviews), the names $`\Xi_\alpha = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1}\cdot\alpha)`$ (2 reviews), so that in $`R_2^C`$ the claim
+holds up to $`\Phi_1`$, the structure of $`R_2^S`$ on the whole skeletal regime, where the skeleton ends, and the least chain
+of length 3. Above $`\Phi_1`$ both halves are open in $`R_2^C`$ (the core part is proved up to $`\rho_{\Theta_P} \gt \Phi_1`$), and
+above $`\upsilon_{\omega^3}`$ in $`R_2^S`$.
 
 **Lean** (the five files of this directory, built with the whole library):
 
@@ -182,7 +186,7 @@ listed under "Not proved".
 - **Theorem LOW** (the summary above) follows from CORE-C, CORE-S, Conjecture U and Lemma L.
 
 **Up to $`\upsilon_{\omega^3}`$, without FRAG** (2026-10, $`R_2^C`$). Extended to $`[0, \Xi_\omega]`$ by Theorem CORE-C$`^\Xi`$
-([RESTARTS.md](RESTARTS.md) §3).
+([RESTARTS.md](RESTARTS.md) §3), and to $`[0, \Lambda_\varepsilon)`$ and $`[0, \rho_{\Theta_P})`$ ([REACHES.md](REACHES.md) §2).
 
 - **Lemma PT** (1 review). Let $`Q`$ be a pattern in the full sense of Carlson 2009, Def 5.6. If every copy of $`Q`$ in
   $`R_2^C`$ puts the point of $`Q`$ at $`\ge v`$, then $`[0, v] \subseteq \mathrm{Core}(R_2^C)`$ (Carlson 2009, Lemma 15.11,
@@ -212,7 +216,8 @@ $`\kappa_X = \min\{\kappa : \kappa \le_1^X \beta \text{ for all } \beta \ge \kap
 - **Corollary FIRST.** Every $`R_2^S`$ relation ($`\le_1`$ or $`\le_2`$) with right end at most $`\beta_0`$ holds in
   $`R_2^C`$ (the case "$`\le_2`$ with right end $`\beta_0`$" was added in a second paper, 2026-10, 1 review). At $`\beta_0`$ the difference is an extra relation of $`R_2^C`$. So
   $`R_2^S = R_2^C`$ if and only if the converse ($`C \Rightarrow S`$) holds at every stage of agreement. Also
-  $`\beta_0 \ge \upsilon_{\omega^3}`$ (with FRAG, now proved), and $`\beta_0`$ is countable or $`\infty`$.
+  $`\beta_0 \ge \upsilon_{\omega^3}`$ (with FRAG, now proved; now $`\beta_0 \ge \Lambda_\varepsilon`$ and $`\beta_0 \ge \rho_{\Theta_P}`$,
+  [REACHES.md](REACHES.md) §1–2), and $`\beta_0`$ is countable or $`\infty`$.
 - **Lemma UPG.** At a stage of agreement, $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$ when every $`\gamma \lt \alpha`$ lies in an
   isominimal subset of $`\alpha`$ in $`R_2^C`$ (true for $`\alpha = \kappa_C`$ and $`\alpha = \upsilon_{\omega\cdot\omega}`$).
 - **KAPPA and CORE-EQ.** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$, and $`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$. So if
@@ -283,7 +288,8 @@ pointwise least one.
   $`\lt_2`$-pairs: their union is $`[0, m_2)`$, with $`m_2`$ the least $`\le_1`$-predecessor of $`\min C^*_2 = \upsilon_\omega`$,
   and $`m_2 = \upsilon_1`$ given the cited core of $`R_1^+`$ and Theorems A, EQ.
 - Facts on $`C^*_3`$ (2026-10): no chain of length 3 lies inside $`[0, c_2)`$; $`c_0`$ is a limit of its
-  $`\lt_1`$-predecessors; $`m_3 \gt \Xi_\omega`$ and $`c_0 \ge \upsilon_{\Xi_\omega+\omega^2}`$, without FRAG ([RESTARTS.md](RESTARTS.md) §3). Earlier:
+  $`\lt_1`$-predecessors; $`m_3 \gt \Xi_\omega`$ and $`c_0 \ge \upsilon_{\Xi_\omega+\omega^2}`$, without FRAG ([RESTARTS.md](RESTARTS.md) §3); now
+  $`m_3 \ge \Lambda_\varepsilon \gt \Phi_1`$ ([REACHES.md](REACHES.md) §5). Earlier:
   $`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$.
 - **Lemma TOP2** (2026-10, 1 review). For every $`\alpha \lt m_3`$ there is a chain $`x \lt_2 y`$ of length 2 with
   $`\alpha \lt x \lt y \lt m_3`$. So $`m_3`$ is a limit of chains of length 2, and $`m_3 \ge \upsilon_{\omega\cdot\omega}`$ without FRAG.
@@ -373,8 +379,8 @@ pointwise least one.
 
 **Not proved:**
 
-- **The claim above $`\Xi_1`$** in $`R_2^C`$, and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$, both halves. The reaches of the restarts
-  above $`\upsilon_{\omega^3}`$ (Lemma RS$`_\lambda`$) and the rest of [RESTARTS.md](RESTARTS.md) §6.
+- **The claim above $`\Phi_1`$** in $`R_2^C`$, and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$, both halves. The reaches of the restarts
+  above $`\Lambda_\varepsilon`$ and $`\Theta_P`$, and the rest of [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
 - **$`R_2^S = R_2^C`$**: the converse $`C \Rightarrow S`$ for $`\le_1`$ at a successor stage $`\beta \gt \kappa_C`$ with
   $`\alpha \notin G_C`$, and for $`\le_2`$ at stages of type (ii) (this needs an upward transfer of $`\Pi_2`$ sentences, which
   neither upward 2-reflection nor liftings give; it is now one pair $`(a^*, \beta)`$ per stage, and below $`\kappa_C`$ it is
@@ -387,7 +393,7 @@ pointwise least one.
   the whole base below $`\psi_{\Omega_1}(\Omega_\omega)`$ ($`\varepsilon_1`$, $`\Gamma_0`$, $`\varphi(a, b)`$ with $`a \ge 1`$, …). (M4) at
   level 0 is done (MU-0, MU-B0) but adds nothing to the core; left: (M4) at level $`\ge 1`$ (Lemma TR1), (M1)–(M3), and the
   local step above $`V_3`$. Inside the range of Wilken's $`\upsilon`$ the bound comes from the caps instead; they now give
-  $`[0, \Xi_\omega]`$ (CORE-C$`^\Xi`$). Then the gap $`[\theta_0, \psi_{\Omega_1}(I_0))`$, which
+  $`[0, \rho_{\Theta_P})`$ (CORE-C$`^+`$, [REACHES.md](REACHES.md) §2). Then the gap $`[\theta_0, \psi_{\Omega_1}(I_0))`$, which
   needs $`\psi_{I_0}`$-collapses.
 - **$`C^*_3`$ explicitly.** Conjecture C3′ (from Wilken's least 3-chain of pure $`R_2`$, 2021, pp. 19–21, CH and
   Lemma REL), with $`P = \theta = \psi_{\Omega_2}(\Omega_\omega)`$ and $`E = \varepsilon_{I_0+1}`$: $`m_3 = \psi_{\Omega_1}(E)`$ and
@@ -395,8 +401,10 @@ pointwise least one.
   between $`\psi_{\Omega_1}(I_0)`$ and $`\psi_{\Omega_1}(I_1)`$ (checked, Python and Lean). The earlier guess had
   $`E + \Omega_\omega`$ in place of $`E`$ in the three chain terms; by REL it does not fit the reading it came from (the
   $`\upsilon`$-hierarchy restarted above $`m_3`$), because a restart costs $`+P`$, not $`+\Omega_\omega`$ (proved as a
-  dichotomy, 1 review). Upper half open: the known $`\le_2`$ relations of $`R_2^C`$ (up to $`\upsilon_{\Xi_\omega+\omega^2}`$) form no chain of
-  length 3 (Theorem BLK$`^\Xi`$); set-theoretic
+  dichotomy, 1 review). The reading itself is now refuted: the restarted triple above a point is never a chain
+  (C3′-FALSE, 1 review, [REACHES.md](REACHES.md) §5), so the numeric C3′ has no derivation left. Upper half open: the
+  known $`\le_2`$ relations of $`R_2^C`$ (up to $`\Lambda_\varepsilon`$) form no chain of length 3 (Theorem BLK$`^O`$); a chain must be in the
+  seed of Carlson's generation (NO-GEN); set-theoretic
   reflection gives chains only above $`\omega_1^{CK}`$ (HIGH), and the $`\le_1`$-reach alone does not give a chain
   (NO-PROMOTE). Lower half open: it needs the lower bound program below $`\theta_0`$ with patterns without a chain of
   length 3.
@@ -407,7 +415,8 @@ pointwise least one.
 
 **Theorem T** (proved; upper half T-UP 2 reviews, lower half T-LOW 1 review). With
 $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, for every $`\eta \lt \Gamma_0`$, in particular for $`\eta \le \omega^2`$, and by Theorem T+
-(1 review, [RESTARTS.md](RESTARTS.md) §4) for every $`\eta`$ below the first fixed point $`\Xi_1`$ of $`\iota \mapsto \upsilon_\iota`$:
+(1 review, [RESTARTS.md](RESTARTS.md) §4) for every $`\eta`$ below the first fixed point $`\Xi_1`$ of $`\iota \mapsto \upsilon_\iota`$
+(beyond, Theorem T++ of [REACHES.md](REACHES.md) §2 names every $`\Xi_\alpha`$ and the points between them up to $`\Phi_1`$):
 
 ```math
 \upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta).
@@ -442,7 +451,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
     - Theorem T, the exact names for $`\eta \lt \Gamma_0`$ — proved (T-UP, T-LOW)
     - $`\mathrm{Core}(R_2^S)`$ contains all of $`\upsilon_{\omega\cdot\omega}`$ — proved (CORE-S)
     - in $`R_2^C`$ up to $`\upsilon_{\omega^3}`$, without FRAG — proved (CORE-C3, PT)
-    - in $`R_2^C`$ up to $`\Xi_1`$, and the core of $`R_2^C`$ up to $`\Xi_\omega`$ — proved (T+, CORE-C$`^\Xi`$; [RESTARTS.md](RESTARTS.md))
+    - in $`R_2^C`$ up to $`\Phi_1`$, and the core of $`R_2^C`$ up to $`\rho_{\Theta_P}`$ — proved (T++, PHI, CORE-C$`^O`$, CORE-C$`^+`$;
+      [REACHES.md](REACHES.md))
   - **B** upper bound $`\mathrm{Core}(R_2^+) \subseteq \psi_{\Omega_1}(I_\omega)`$ — open
     - B0 reduction to least chains (Theorem CC) — proved for $`R_2^C`$
       - B0-S the same for $`R_2^S`$ — open; it follows from AGR
@@ -457,9 +467,10 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
     - B2 a finite-set test for $`\lt_2`$ in $`R_2^+`$ — proved (T1, T2); whether the uniform form (one copy for all
       $`k`$) is also necessary is open in $`R_2^+`$ (Wilken 2021, p. 6, says it is for pure $`R_2`$)
     - B3 base changes that keep $`0, +, \le, \le_1, \le_2`$ — proved where $`R_2^+`$ is skeletal (Theorem FRAG2; FRAG itself is
-      proved); beyond the skeleton (FRAG2-GEN) — open, very hard
-    - B4 the $`\le_2`$-pairs among the points that B3 moves — proved below $`\upsilon_{\Xi_\omega+\omega^2}`$ (BLK$`^\Xi`$, PAIR-SK);
-      above — open
+      proved); beyond the skeleton, proved with their hypotheses (FRAG2-W, FRAG2-C, FRAG2-1E); several non-$`\upsilon`$ bases
+      at once (FRAG-E) — open, very hard
+    - B4 the $`\le_2`$-pairs among the points that B3 moves — proved below $`\nu_P`$ in $`R_2^S`$ and below $`\Lambda_\varepsilon`$ in both
+      structures (SKEL, BLK$`^O`$); every $`\lt_2`$-left end is a $`\upsilon_\lambda`$ with $`\lambda`$ a limit (LEFT); above — open
     - B5 assembly B2 + B3 + B4 — proof form only
     - B-PT proof-theoretic variant: theories with $`n`$ inaccessibles prove "a chain of length $`n`$ exists" —
       open; needs a set-theoretic condition for $`\lt_2`$ that is not known
@@ -468,8 +479,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       compared with InaccPsi — open, high (the map $`B`$ of STEP does this below $`\Omega_\omega`$, one way)
     - A2 a structure theorem for $`\le_1`$, $`\le_2`$ of $`R_2^+`$ up to the bound (the analogue of Wilken 2021,
       Thm 4.2); the results of [R2PLUS.md](../../BMS/PoR/Trio/R2PLUS.md) are this theorem below
-      $`\upsilon_{\omega^3}`$, and Theorem BLK$`^\Xi`$ extends it to $`\upsilon_{\Xi_\omega+\omega^2}`$ except the exact reaches of the restarts
-      (RS$`_\lambda`$) — open above, very hard
+      $`\upsilon_{\omega^3}`$, Theorem BLK$`^O`$ extends it with exact reaches to $`\Lambda_\varepsilon`$, and Theorem SKEL gives it in $`R_2^S`$ on
+      the whole skeletal regime $`[0, \nu_P)`$ ([REACHES.md](REACHES.md)) — open above, very hard
     - A3 least realizations as terms — open
     - A4 **Conjecture CH**: the least chain of length $`k+2`$ needs $`k`$ inaccessibles — conjecture
     - A5 every term below the bound is the value of a pattern — open
@@ -484,8 +495,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       and the output relation of $`\Phi_3`$ never has such a chain (Theorem A, proved; for the closure, BAR_R, checked)
   - **Side leaves**
     - **DOM₂** — proved, with SHARP; DOM$`_k`$ for every $`k`$ — conjecture
-    - locate $`C^*_3`$ — open (Conjecture C3′ in §3; known: $`m_3 \gt \Xi_\omega`$ without FRAG; the reach-only
-      route fails (NO-PROMOTE))
+    - locate $`C^*_3`$ — open (Conjecture C3′ in §3, its derivation refuted; known: $`m_3 \ge \Lambda_\varepsilon`$, and the skeleton ends
+      below $`m_3`$; the reach-only route fails (NO-PROMOTE))
     - Lean: the order type of the bounded terms is $`\psi_{\Omega_1}(X)`$; Lemma LOC (whether a finite set is
       isominimal depends only on the structure up to its largest element; on paper, not refereed) — open
 
@@ -550,7 +561,8 @@ readings convert to the same $`J`$.
 
 Here BHO is the Bachmann–Howard ordinal, and `phi(1,W+1)` is $`\varepsilon_{\Omega_1+1}`$. In rows 1–6, 11–18 and
 20–23 the name is $`\upsilon_{1+\eta}`$ with $`\eta \lt \Gamma_0`$, so "name = $`J`$" is proved there by Theorem T; rows 24–26
-have $`\eta \ge \Gamma_0`$. The column "value" says whether the point of $`\Phi_3(M)`$ is that name.
+have $`\eta \ge \Gamma_0`$; the term of row 26 is now proved to be $`\Xi_1`$ (Theorem T++, [REACHES.md](REACHES.md) §2). The column
+"value" says whether the point of $`\Phi_3(M)`$ is that name.
 
 Checked on this table:
 
@@ -637,7 +649,7 @@ needs "$`\Phi_3(M)`$ is a pattern" (open), and it is about $`R_2^C`$ only.
 | [LowTerms.lean](LowTerms.lean) | the seven terms $`u(\eta)`$ of §4: normal forms, values, order, and $`u(\omega^2) \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ |
 
 Nothing about $`R_2^+`$ itself is in Lean. The results above $`\upsilon_{\omega^3}`$ are on the second page
-[RESTARTS.md](RESTARTS.md).
+[RESTARTS.md](RESTARTS.md), and those above $`\Xi_\omega`$ on the third page [REACHES.md](REACHES.md).
 
 ## 8. References
 

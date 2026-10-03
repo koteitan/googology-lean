@@ -4,7 +4,8 @@
 
 このページは [README-ja.md](README-ja.md) の §3 の続き。状態の言葉はそこと同じ：**証明済み**は、独立した査読者が、
 致命的な点も止める点も無く証明済みと判定したもの。このページの結果はどれも 2026-10 のもので、回数を書いていなければ
-**査読 1 回**。**概略**と書いたものは、査読者が「証明済み（概略）、反証されず」と判定したもの。証明済みには数えない。
+**査読 1 回**。**概略**と書いたものは、査読者が「証明済み（概略）、反証されず」と判定したもの。証明済みには数えない。$`\Xi_\omega`$ より上の結果（正確な届く先、骨組みの終わり、長さ 3 の最小の鎖）は
+3 ページ目 [REACHES-ja.md](REACHES-ja.md) にある。
 
 **記号。** $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$。点 $`\alpha`$ の届く先を $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$ と書く。
 やり直しの添字とは、$`\omega^2`$ の 0 でない倍数 $`\lambda`$ のこと。$`\lambda = \lambda_0 + \omega^e`$（カントール標準形の最後の項、
@@ -74,11 +75,14 @@ $`\le_1`$ で 836,413 組。わざと入れた 3 つのバグはすべて見つ�
   どの長さ 3 の鎖の上端以下。§3 により $`\upsilon_{\Xi_\omega+\omega^2}`$ 以上。
 
 証明されていないこと：FRAG2 が §3 の補題 RS$`_\lambda`$ をどの $`\lambda`$ でも片付けるという注意（行き先のやり直しの選び方と、
-動かしたずれを持つ行き先の cap が示されていない）。脇の注意「FRAG なしで、定義域全体の同型 ⇔ RS が成り立たない」
+動かしたずれを持つ行き先の cap が示されていない。RS$`_\lambda`$ そのものは別の道で証明済みになった、
+[REACHES-ja.md](REACHES-ja.md) §1）。脇の注意「FRAG なしで、定義域全体の同型 ⇔ RS が成り立たない」
 （「⇐」の向きは FRAG が要る。もう一度は確かめていない）。予想：**CAP**、$`\eta \ge 1`$ で
 $`\mathrm{lh}(\upsilon_{\omega^2\eta}) = \upsilon_{\omega^2\eta+\omega+1} + (1 + \mathrm{logend}(\eta))`$（プログラムは 11 個のやり直しで一致。その中に
-$`\upsilon_{\omega^\omega}`$ での「上端 + $`\omega`$」がある）。**FRAG2-GEN**、骨組みの外では、FRAG2 は $`\upsilon`$ の点でない
-$`\varepsilon`$ 数の基も、Wilken の $`\iota_{\tau,\alpha}`$ で動かす必要がある。$`\nu_S`$ の値は未解決。
+$`\upsilon_{\omega^\omega}`$ での「上端 + $`\omega`$」がある。[REACHES-ja.md](REACHES-ja.md) §1 の定理 OFF-V により、段 0 のすべての
+やり直しで成り立ち、$`\Xi_\omega`$ で外れる）。**FRAG2-GEN**、骨組みの外では、FRAG2 は $`\upsilon`$ の点でない
+$`\varepsilon`$ 数の基も、Wilken の $`\iota_{\tau,\alpha}`$ で動かす必要がある（一部は証明済み、[REACHES-ja.md](REACHES-ja.md) §4）。
+$`\nu_S`$ の値は未解決。その上下の評価と、ありうる 2 つの種類は [REACHES-ja.md](REACHES-ja.md) §4 にある。
 
 確かめたこと（失敗 0）：モデルで 4,144 個のパターンの上の 25,238 個の写像（C1 か C2 を外すと食い違う）。プログラム
 `phi3def2` で、動かした標準形の行列 35,104 個と 5,384,652 組：$`\le_1`$ と $`\le_2`$ の事実は、FRAG2 が予言する所でちょうど変わる。
@@ -103,13 +107,16 @@ TOP$`_3`$ で、$`R_2^C`$ の核の下界を止めていたもの。前のメモ
 $`R_2^C`$ と $`R_2^S`$ は一致する。例外になりうるのは組 $`(\rho_\mu, \delta_\mu + \xi)`$、$`0 \lt \xi \le c^*(\mu)`$ だけで、そこでは
 $`S \Rightarrow C`$ が成り立つ。
 
-**補題 RS$`_\lambda`$**（下の端、$`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + c^*(\lambda)`$）：**証明されていない**。見取り図で、行き先の
-やり直しの選び方が $`e = e' + 1`$ のとき（例えば $`\lambda = \omega^4`$）うまくいかない。査読者が直し方を出した
-（$`\omega^{e'}`$ の倍数を使う）。証明済みの場合：$`\lambda = \omega^2 h`$（RS$`^h`$、§1）と $`\lambda = \omega^3`$（RS$`^{\omega^3}`$、§2）。
+**補題 RS$`_\lambda`$**（下の端、$`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + c^*(\lambda)`$）：最初の見取り図は証明されていなかった（行き先の
+やり直しの選び方が $`e = e' + 1`$ のとき、例えば $`\lambda = \omega^4`$ でうまくいかない）。いまは $`\lambda \le \Xi_\omega`$ のすべてで、
+$`R_2^S`$ でも $`R_2^C`$ でも、独立した 2 つの論文で**証明済み**（査読 2 回。[REACHES-ja.md](REACHES-ja.md) §1）。だから上の
+EQB$`^\lambda`$ の例外の組も一致する。
 
 - **定理 CORE-C$`^\Xi`$**（証明済み、FRAG なし）。$`\Xi_\omega`$ 以下のどの順序数も $`\mathrm{Core}(R_2^C)`$ に入る（届く先の上限と
   Carlson 2009, Thm 14.14 から）。前は $`\upsilon_{\omega^3}`$ までだった。査読者の注：上限から $`[0, \upsilon_{\Xi_\omega+\omega^2})`$ まで出る。
-- **系**（証明済み）。FRAG なしで $`\min C^*_3 \ge \upsilon_{\Xi_\omega+\omega^2}`$、$`m_3 \gt \Xi_\omega`$。
+  いまは $`[0, \Lambda_\varepsilon)`$ と $`[0, \rho_{\Theta_P})`$ まで広がった（[REACHES-ja.md](REACHES-ja.md) §2）。
+- **系**（証明済み）。FRAG なしで $`\min C^*_3 \ge \upsilon_{\Xi_\omega+\omega^2}`$、$`m_3 \gt \Xi_\omega`$。いまは $`m_3 \ge \Lambda_\varepsilon`$
+  （[REACHES-ja.md](REACHES-ja.md) §5）。
 
 確かめたこと：予言のある 25 個のやり直しの行列（$`V_3`$ から $`\Xi_\omega`$ まで）で、プログラムでの点の届く先は
 $`\delta + c^*(\lambda)`$。証明書 79 個中 79 個を見つけて再生した（続く 19 個のやり直しと、60 組の $`M[N] \lt M`$）。逆向きは 19 個中 0 個。
@@ -122,11 +129,13 @@ $`g(x) = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot x)`$、$`s_1 = \sup_n g^n(0
 
 - **定理 T+**（証明済み）。$`\eta \lt s_1`$ のすべてで $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$。また $`\Xi_1 = s_1`$。
   T-UP の前の上限 $`\Gamma_0`$ は仮定 (HA) からだけ来ていた。(HA) は $`\eta \lt g(\eta)`$ ならいつも成り立つ。
-- $`s_1 \le \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1})`$（証明済み）。等号は**予想**（README §6 の表の 26 行目の名前）。
+- $`s_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1})`$（証明済み、査読 2 回。[REACHES-ja.md](REACHES-ja.md) §2 の定理 T++）。
+  これは README §6 の表の 26 行目の名前。
 - だから **$`R_2^C`$ では $`[0, \Xi_1]`$ で Wilken の主張が成り立つ**（両方の半分）：そこのどの順序数も核に入り、つぶす引数が
   $`\Omega_\omega + \omega^{\theta+\Omega_1}`$ 未満の InaccPsi の標準形の値になる（補題 IS）。
 - $`\Xi_1`$ のすぐ上の上からの名前（補題 REL）：$`\eta \lt \Gamma_0`$ で
-  $`\upsilon_{\Xi_1+1+\eta} \le \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1} + \theta\cdot(1+\eta))`$（証明済み）。
+  $`\upsilon_{\Xi_1+1+\eta} \le \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1} + \theta\cdot(1+\eta))`$（証明済み）。いまは
+  $`\Xi_1 + 1 + \eta \lt \Xi_2`$ のすべての $`\eta`$ で等式で、主張は $`\Phi_1`$ まで成り立つ（[REACHES-ja.md](REACHES-ja.md) §2）。
 
 ## 5. 構造定理に向けて（Wilken 2021, Thm 4.2）
 
@@ -153,15 +162,14 @@ $`\lt_2`$ の前の元の集合はどれも有限。定理 CC を使う）。**T
 **予想 42+.I**（$`\upsilon_{\Xi_1}`$ より下。定理 T+ で InaccPsi の項で書く）：$`\lt_2`$ の組は、適当な $`A`$ について
 $`\psi_{\Omega_1}(\Omega_\omega + A + \omega^{\theta+1}) \lt_2 \psi_{\Omega_1}(\Omega_\omega + A + \omega^{\theta+1} + \theta)`$ だけ。各ブロックの中では
 $`R_2^+`$ は上端で切った $`R_1^+`$。やり直しの点 $`\upsilon_\lambda`$ の届く先はちょうど $`\delta_\lambda + (-1 + \mathrm{logend}\,\lambda)`$。組と
-ブロックの部分は証明済み（§3）。届く先の正確な値は RS$`_\lambda`$ で、未解決。**第 II 部**（$`\upsilon_{\Xi_1}`$ から
+ブロックの部分は証明済み（§3）。届く先の正確な値も証明済みで、$`\upsilon_{\Xi_1}`$ より下ではこの予想は定理
+（[REACHES-ja.md](REACHES-ja.md) §2）。**第 II 部**（$`\upsilon_{\Xi_1}`$ から
 $`\psi_{\Omega_1}(I_\omega)`$ まで）：形しか分かっていない。手に入るどの論文も定義していない演算が要る。
 
 ## 6. 未解決
 
-- すべてのやり直しでの補題 RS$`_\lambda`$（届く先の下の端）。$`\lambda = \omega^2 h`$ と $`\lambda = \omega^3`$ では証明済み。
-- $`\Xi_\omega`$ より先のずれ：$`\lambda = \omega^{\Xi_\omega+1}`$ でずれの補題が成り立たなくなり、ずれの定義を細かくする必要がある
-  （予想 OFFSET）。
-- $`V_3`$ より上での変換の順序の命題 S（上の届く先と、新しい頭の部分での順序の証明が要る）。
-- 等式 $`s_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1})`$ と、$`\Xi_1`$ より上の下からの名前。
-- $`R_2^+`$ が骨組み型でなくなる場所（$`\nu_S`$）と、その先での FRAG2-GEN。
+$`\Xi_\omega`$ より上の未解決の問題は [REACHES-ja.md](REACHES-ja.md) §7 にまとめた。前のリストのうち、補題 RS$`_\lambda`$、
+$`\Xi_\omega`$ より先のずれ（$`\Lambda_\varepsilon`$ まで）、$`s_1`$ の等式は証明済みになった（[REACHES-ja.md](REACHES-ja.md) §1–2）。ここに残るもの：
+
+- $`V_3`$ より上での変換の順序の命題 S（届く先は $`\Lambda_\varepsilon`$ まで分かった。新しい頭の部分での順序の証明が無い）。
 - $`\upsilon_{\omega^3}`$ より上での $`R_2^S`$ の核（定理 CORE-S はそこで止まる）。

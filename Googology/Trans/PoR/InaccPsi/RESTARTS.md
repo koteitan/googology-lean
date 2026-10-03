@@ -5,7 +5,8 @@
 This page continues §3 of [README.md](README.md). The status words are the same as there: **proved** means that an
 independent referee found the result proved with no fatal or blocking point. Every result on this page is from
 2026-10 and had **1 review** unless a count is given. A result marked **outline** was found "proved (outline), not
-refuted" by its referee; it is not counted as proved.
+refuted" by its referee; it is not counted as proved. The results above $`\Xi_\omega`$ (exact reaches, the end of the
+skeleton, the least chain of length 3) are on the third page [REACHES.md](REACHES.md).
 
 **Notation.** $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$. The reach of a point $`\alpha`$ is
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$. A restart index is a nonzero multiple $`\lambda`$ of $`\omega^2`$. Write
@@ -81,12 +82,13 @@ $`\lt_2`$-pair is $`(\upsilon_\xi, \upsilon_{\xi+1})`$. Write $`\mathrm{cap}(u) 
   skeletal is countable and at most the top of any chain of length 3; by §3 it is at least $`\upsilon_{\Xi_\omega+\omega^2}`$.
 
 Not proved: the remark that FRAG2 reduces Lemma RS$`_\lambda`$ of §3 for every $`\lambda`$ (the choice of the target restart,
-and the cap of a target with a moved offset, are not shown); the aside "without FRAG, an isomorphism of the whole
+and the cap of a target with a moved offset, are not shown; RS$`_\lambda`$ itself is now proved another way, [REACHES.md](REACHES.md) §1); the aside "without FRAG, an isomorphism of the whole
 domain iff RS fails" (its "if" direction needs FRAG; it was not checked again).
 Conjectures: **CAP**, $`\mathrm{lh}(\upsilon_{\omega^2\eta}) = \upsilon_{\omega^2\eta+\omega+1} + (1 + \mathrm{logend}(\eta))`$ for $`\eta \ge 1`$
-(the program agrees on 11 restarts, among them "top + $`\omega`$" at $`\upsilon_{\omega^\omega}`$); **FRAG2-GEN**, beyond the
-skeleton FRAG2 must also move $`\varepsilon`$-bases that are not $`\upsilon`$-points, with Wilken's $`\iota_{\tau,\alpha}`$. The value of
-$`\nu_S`$ is open.
+(the program agrees on 11 restarts, among them "top + $`\omega`$" at $`\upsilon_{\omega^\omega}`$; by Theorem OFF-V of [REACHES.md](REACHES.md)
+§1 it holds at every restart of level 0 and fails at $`\Xi_\omega`$); **FRAG2-GEN**, beyond the
+skeleton FRAG2 must also move $`\varepsilon`$-bases that are not $`\upsilon`$-points, with Wilken's $`\iota_{\tau,\alpha}`$ (partly proved,
+[REACHES.md](REACHES.md) §4). The value of $`\nu_S`$ is open; its bounds and its two possible kinds are in [REACHES.md](REACHES.md) §4.
 
 Checks (0 failures): 25,238 maps on 4,144 patterns in a model (dropping C1 or C2 gives mismatches); 35,104 moved
 standard matrices and 5,384,652 pairs in the program `phi3def2`, whose $`\le_1`$ and $`\le_2`$ facts change exactly where
@@ -112,14 +114,16 @@ argument cannot bound a reach "top + $`\omega`$"; that was wrong ($`\omega`$ is 
 (proved): $`R_2^C`$ and $`R_2^S`$ agree on $`[0, \upsilon_{\lambda+\omega^2})`$ except possibly on the pairs
 $`(\rho_\mu, \delta_\mu + \xi)`$, $`0 \lt \xi \le c^*(\mu)`$, where $`S \Rightarrow C`$ holds.
 
-**Lemma RS$`_\lambda`$** (the lower end, $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + c^*(\lambda)`$): **not proved**. It is a sketch, and its
-choice of the target restart fails when $`e = e' + 1`$ (for example $`\lambda = \omega^4`$); the referee gave the fix (a
-multiple of $`\omega^{e'}`$). Proved cases: $`\lambda = \omega^2 h`$ (RS$`^h`$, §1) and $`\lambda = \omega^3`$ (RS$`^{\omega^3}`$, §2).
+**Lemma RS$`_\lambda`$** (the lower end, $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + c^*(\lambda)`$): the first sketch was not proved (its
+choice of the target restart fails when $`e = e' + 1`$, for example $`\lambda = \omega^4`$). It is now **proved** for every
+$`\lambda \le \Xi_\omega`$, in $`R_2^S`$ and $`R_2^C`$, by two independent papers (2 reviews; [REACHES.md](REACHES.md) §1). So the
+exceptional pairs of EQB$`^\lambda`$ below agree too.
 
 - **Theorem CORE-C$`^\Xi`$** (proved, no FRAG). Every ordinal $`\le \Xi_\omega`$ is in $`\mathrm{Core}(R_2^C)`$ (by the caps and
   Carlson 2009, Thm 14.14). Before, this was known up to $`\upsilon_{\omega^3}`$. The referee notes that the caps give
-  $`[0, \upsilon_{\Xi_\omega+\omega^2})`$.
-- **Corollary** (proved). $`\min C^*_3 \ge \upsilon_{\Xi_\omega+\omega^2}`$ and $`m_3 \gt \Xi_\omega`$, without FRAG.
+  $`[0, \upsilon_{\Xi_\omega+\omega^2})`$. Now extended to $`[0, \Lambda_\varepsilon)`$ and $`[0, \rho_{\Theta_P})`$ ([REACHES.md](REACHES.md) §2).
+- **Corollary** (proved). $`\min C^*_3 \ge \upsilon_{\Xi_\omega+\omega^2}`$ and $`m_3 \gt \Xi_\omega`$, without FRAG. Now $`m_3 \ge \Lambda_\varepsilon`$
+  ([REACHES.md](REACHES.md) §5).
 
 Checks: on the 25 restart matrices with a prediction, from $`V_3`$ to $`\Xi_\omega`$, the reach of the point in the
 program is $`\delta + c^*(\lambda)`$; 79 of 79 certificates found and replayed (19 consecutive restarts, 60 pairs
@@ -134,12 +138,13 @@ Let $`g(x) = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot x)`$ and $`s_1 = \sup_n
 - **Theorem T+** (proved). $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$ for every $`\eta \lt s_1`$, and
   $`\Xi_1 = s_1`$. The old bound $`\Gamma_0`$ of T-UP came only from the hypothesis (HA), and (HA) holds whenever
   $`\eta \lt g(\eta)`$.
-- $`s_1 \le \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1})`$ (proved). Equality is a **conjecture** (it is the name of row 26
-  of the table in README §6).
+- $`s_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1})`$ (proved, 2 reviews; [REACHES.md](REACHES.md) §2, Theorem T++). This is
+  the name of row 26 of the table in README §6.
 - So **Wilken's claim holds on $`[0, \Xi_1]`$ in $`R_2^C`$**, both halves: every ordinal there is in the core and is the
   value of an InaccPsi normal form with collapse arguments below $`\Omega_\omega + \omega^{\theta+\Omega_1}`$ (Lemma IS).
 - Upper names just above $`\Xi_1`$, by Lemma REL: $`\upsilon_{\Xi_1+1+\eta} \le \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1} + \theta\cdot(1+\eta))`$
-  for $`\eta \lt \Gamma_0`$ (proved).
+  for $`\eta \lt \Gamma_0`$ (proved). Now an equality for every $`\eta`$ with $`\Xi_1 + 1 + \eta \lt \Xi_2`$, and the claim holds up to
+  $`\Phi_1`$ ([REACHES.md](REACHES.md) §2).
 
 ## 5. Toward a structure theorem (Wilken 2021, Thm 4.2)
 
@@ -168,16 +173,15 @@ proved by Lemma TOP$`_\lambda`$ of §3 instead.
 **Conjecture 42+.I** (below $`\upsilon_{\Xi_1}`$, in InaccPsi terms through Theorem T+): the only $`\lt_2`$-pairs are, for suitable $`A`$,
 $`\psi_{\Omega_1}(\Omega_\omega + A + \omega^{\theta+1}) \lt_2 \psi_{\Omega_1}(\Omega_\omega + A + \omega^{\theta+1} + \theta)`$; inside each block
 $`R_2^+`$ is $`R_1^+`$ cut at the top; a restart $`\upsilon_\lambda`$ has reach exactly $`\delta_\lambda + (-1 + \mathrm{logend}\,\lambda)`$. The pair
-and block parts are now proved (§3); the exact reach is RS$`_\lambda`$, open. **Part II** (from $`\upsilon_{\Xi_1}`$ to
+and block parts are now proved (§3), and so is the exact reach: below $`\upsilon_{\Xi_1}`$ the conjecture is a theorem
+([REACHES.md](REACHES.md) §2). **Part II** (from $`\upsilon_{\Xi_1}`$ to
 $`\psi_{\Omega_1}(I_\omega)`$): only its shape is known; it needs operators that no available paper defines.
 
 ## 6. Open
 
-- Lemma RS$`_\lambda`$ for every restart (the lower end of the reach); proved for $`\lambda = \omega^2 h`$ and $`\lambda = \omega^3`$.
-- The offsets beyond $`\Xi_\omega`$: at $`\lambda = \omega^{\Xi_\omega+1}`$ the offset lemma fails, and the offset needs a refined
-  definition (conjecture OFFSET).
-- The order statement S for the converter above $`V_3`$ (it needs the reaches above and the order proof for the new
-  prefixes).
-- The equality $`s_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1})`$, and lower names above $`\Xi_1`$.
-- Where $`R_2^+`$ stops being skeletal ($`\nu_S`$), and FRAG2-GEN beyond that point.
+The open problems above $`\Xi_\omega`$ are listed in [REACHES.md](REACHES.md) §7. Of the earlier list: Lemma RS$`_\lambda`$, the
+offsets beyond $`\Xi_\omega`$ (up to $`\Lambda_\varepsilon`$) and the equality for $`s_1`$ are now proved ([REACHES.md](REACHES.md) §1–2). Still open here:
+
+- The order statement S for the converter above $`V_3`$ (the reaches are now known up to $`\Lambda_\varepsilon`$; the order proof for
+  the new prefixes is missing).
 - The core of $`R_2^S`$ above $`\upsilon_{\omega^3}`$ (Theorem CORE-S stops there).
