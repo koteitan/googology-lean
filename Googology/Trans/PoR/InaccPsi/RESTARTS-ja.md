@@ -91,6 +91,7 @@ $`\nu_S`$ は今は正確に分かっている：中に別の $`\lt_2`$ の組�
 [BREAK-ja.md](BREAK-ja.md) §2。名前は予想。今は $`\upsilon`$ の添字の 3 つの命題と同じ（査読 1 回、[BREAK-ja.md](BREAK-ja.md) §7.3）。
 $`R_2^C`$ では形の部分が証明済み：$`o_2 = \omega`$ から $`\nu_C = \upsilon^2_{\omega+1}`$（定理 O$`^C`$、査読 1 回、[BREAK-ja.md](BREAK-ja.md) §8.1）。
 $`R_2^C`$ では NOLIM も成り立ち（査読 1 回、[COVER-ja.md](COVER-ja.md) の §3 と §5.1）、$`\nu_C = \nu_S`$ は $`R_2^S`$ での NOLIM と $`o_2 = \omega`$ と同じ（査読 1 回、[COVER-ja.md](COVER-ja.md) §3）。
+これは、$`R_2^S`$ と $`R_2^C`$ が $`\nu_C`$ より下で共有する構造の中の 1 つの $`\Sigma_2`$ の命題 $`x_2 \lt_2^S \nu_C`$ とも同じ（査読 1 回、[COVER-ja.md](COVER-ja.md) §6.3）。
 $`R_2^S`$ では、どの可算順序数でも、どの組も標準の組か 2 つのやり直しの点を結ぶ組なので、FRAG2 は弱い形「どの組も 2 つの
 $`\upsilon`$ の点を結ぶ」で成り立つ（定理 SKEL$`^\infty`$、査読 1 回、[COVER-ja.md](COVER-ja.md) §5.1。前は $`T_\omega`$ より下で、概略だけ）。
 

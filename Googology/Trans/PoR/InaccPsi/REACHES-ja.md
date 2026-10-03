@@ -158,7 +158,8 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
   2 つの命題に帰着した。さらに（どれも査読 1 回、[BREAK-ja.md](BREAK-ja.md) §8）：その 1 つ $`o_2 = \omega`$ は $`R_2^C`$ で証明済みで、そこでは
   $`\nu_C = \upsilon^2_{\omega+1}`$。$`\nu_C = \nu_S`$ から $`R_2^S`$ での $`o_2 = \omega`$ が出る。もう 1 つ、$`\nu_P`$ より上の NOLIM は隙間ごとの 1 つの命題に
   帰着した。そのあと（どれも査読 1 回、[COVER-ja.md](COVER-ja.md) §3）：NOLIM は $`R_2^C`$ で成り立ち（[COVER-ja.md](COVER-ja.md) §5.1 から証明の段階）、$`\nu_C = \nu_S`$ は $`R_2^S`$ での NOLIM と
-  $`o_2 = \omega`$ と同じ。$`\nu_C = \nu_S`$ はまだ未解決。
+  $`o_2 = \omega`$ と同じ。さらに（どれも査読 1 回、[COVER-ja.md](COVER-ja.md) §6.3）：これは $`\nu_C`$ より下の共通の構造の中の 1 つの $`\Sigma_2`$ の命題と同じで、
+  最初のブロックで証明済みの、段 2 の区間についての条件から出る。$`\nu_C = \nu_S`$ はまだ未解決。
 
 ## 5. 長さ 3 の最小の鎖
 
@@ -213,5 +214,6 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
   記述できたが、名前は予想、[BREAK-ja.md](BREAK-ja.md) §2。§7.3 で帰着）。
 - $`\nu_S`$ より先の FRAG2：$`\upsilon`$ の点でない基をいくつも同時に（FRAG-E）、および入れ子の切るデータ。
 - $`C^*_3`$：上半分（生成した構造の順序数解析）、下半分 $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$、予想 CH。$`R_2^C`$ では鎖の底は今は特徴づけられた
-  （定理 CP3、[COVER-ja.md](COVER-ja.md) §1）が、場所は決まっていない。
+  （定理 CP3、[COVER-ja.md](COVER-ja.md) §1）が、場所は決まっていない。上からの評価には、その下の $`\lt_2`$ の組 1 つと、その間の
+  もう 1 点があれば足りる（補題 CRIT、[COVER-ja.md](COVER-ja.md) §6.2）が、$`c_0`$ を押さえる InaccPsi の項は証明されていない。
 - $`V_3`$ より上での変換器の順序の命題 S。

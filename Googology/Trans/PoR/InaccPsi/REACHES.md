@@ -162,8 +162,9 @@ below that used it, now holds with no hypothesis.
   equivalent to three statements about $`\upsilon`$-indices, and $`\nu_C = \nu_S`$ is a question about $`R_2^S`$ alone, reduced to two statements
   about it. Then (1 review each, [BREAK.md](BREAK.md) §8): one of them, $`o_2 = \omega`$, is proved in $`R_2^C`$, so $`\nu_C = \upsilon^2_{\omega+1}`$ there;
   $`\nu_C = \nu_S`$ implies $`o_2 = \omega`$ in $`R_2^S`$; the other, NOLIM above $`\nu_P`$, is reduced to one statement per gap. Then (1 review each,
-  [COVER.md](COVER.md) §3): NOLIM holds in $`R_2^C`$ (at proof level since [COVER.md](COVER.md) §5.1), and $`\nu_C = \nu_S`$ is equivalent to NOLIM and $`o_2 = \omega`$ in $`R_2^S`$. $`\nu_C = \nu_S`$ is
-  still open.
+  [COVER.md](COVER.md) §3): NOLIM holds in $`R_2^C`$ (at proof level since [COVER.md](COVER.md) §5.1), and $`\nu_C = \nu_S`$ is equivalent to NOLIM and $`o_2 = \omega`$ in $`R_2^S`$. Then (1 review each,
+  [COVER.md](COVER.md) §6.3): it is equivalent to one $`\Sigma_2`$ statement inside the common structure below $`\nu_C`$, and it follows from a
+  condition on the segments of level 2 that is proved on the first block. $`\nu_C = \nu_S`$ is still open.
 
 ## 5. The least chain of length 3
 
@@ -221,5 +222,6 @@ Each run was under 60 seconds; none is a proof.
   described exactly, its name is a conjecture, [BREAK.md](BREAK.md) §2, reduced in §7.3).
 - FRAG2 beyond $`\nu_S`$: several bases that are not $`\upsilon`$-points at once (FRAG-E), and nested cut data.
 - $`C^*_3`$: the upper half (an ordinal analysis of the generated structure), the lower half $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$,
-  and Conjecture CH. In $`R_2^C`$ the bottoms of chains are now characterized (Theorem CP3, [COVER.md](COVER.md) §1), but not located.
+  and Conjecture CH. In $`R_2^C`$ the bottoms of chains are now characterized (Theorem CP3, [COVER.md](COVER.md) §1), but not located. An upper bound needs only one $`\lt_2`$-pair below it with one more point
+  between (Lemma CRIT, [COVER.md](COVER.md) §6.2), but no InaccPsi term is proved to bound $`c_0`$.
 - The order statement S for the converter above $`V_3`$.

@@ -355,7 +355,9 @@ that is $`a \le_1 b+1`$. $`(x_L, y_L)`$ is the least long pair, and $`m_L = \min
   the corrected wording of SKEL⁺ (§2), so all of them are proved.
   - SKEL$`^\omega`$: SKEL⁺ (§2) holds on all of $`[0, T_\omega)`$ with the pairs of higher depth allowed. The pairs of depth 1 are exactly
     the standard pairs, and every other pair joins two restarts. So $`R_2^S`$ is skeletal there in the weaker form "every pair joins
-    two $`\upsilon`$-points", FRAG2 holds in that form, and RIGHT (§1) holds for every pair with left end below $`T_\omega`$.
+    two $`\upsilon`$-points", FRAG2 holds in that form, and RIGHT (§1) holds for every pair with left end below $`T_\omega`$. Its clause on
+    reaches has the same correction as SKEL⁺: the reach of a restart is closed in $`R_1^+`$ only when that reach is below the top of its
+    block (always so below $`\Theta_P`$).
   - TAIL and TAIL-GAP: every use of the assumption $`\lambda \le \Lambda^*`$ is listed and replaced. So above any base $`w \lt T_\omega`$, in
     particular in every gap of every chain, the reaches of the restarts follow the formal-reach recursion of §4 run above $`w`$
     (the upper bound uses no FRAG; equality uses FRAG).
@@ -470,8 +472,9 @@ Here $`\nu = \nu_S`$ and $`U_2 = \{\upsilon^2_\zeta\}`$ as in §7.2. $`\mathrm{C
   stronger than FF.
 - **Does the first fan need $`I_0`$?** Open. The answer is yes given $`FF_N`$, but this is immediate, since $`FF_N`$ already gives
   $`x_F \gt \theta_0`$. With the referee's addition above it is one statement about one matrix: if the point of
-  $`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)) is $`\ge \theta_0`$, then the first fan needs $`I_0`$. Now this statement is equivalent to a lower bound for fan-free
-  patterns whose right ends have no reach ([COVER.md](COVER.md) §5.3).
+  $`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)) is $`\ge \theta_0`$, then the first fan needs $`I_0`$ (the converse is open). Now this statement is equivalent to a lower bound for
+  fan-free patterns whose right ends have no reach ([COVER.md](COVER.md) §5.3); the seventh round proves several uniform steps of it, not all
+  ([COVER.md](COVER.md) §6.1).
 - **Names** (conjecture; conv and Ytosk's reading agree on the three matrices). With $`P_\omega = \psi_{\Omega_2}(\Omega_\omega\cdot\omega)`$:
   $`m_L = T_\omega = \psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$, $`x_L = \psi_{\Omega_1}(\Omega_\omega\cdot\omega + \omega^{P_\omega+1})`$, $`y_L = \psi_{\Omega_1}(\Omega_\omega\cdot\omega + \omega^{P_\omega+1} + P_\omega)`$.
   None of them needs an inaccessible. The same terms are the conjectured $`(x^*, y^*)`$ of §7.1. The least fan and $`f_0`$ have no

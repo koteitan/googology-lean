@@ -194,5 +194,6 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
 - INC1-S と INC1-nonups は今は証明済み（[BREAK-ja.md](BREAK-ja.md) §1）。RIGHT（どの $`\lt_2`$ の右端も $`\upsilon`$ の点）は今は $`R_2^S`$ で証明済み（[COVER-ja.md](COVER-ja.md) §5.1）で、$`\beta_0`$ より上の $`R_2^C`$ では未解決。
 - $`C^*_3`$：最小のいちばん下の点（$`\nu_P`$ より上）、上半分、下半分、予想 CH（[BREAK-ja.md](BREAK-ja.md) §10）。最初の扇は $`T_\omega`$ より上で、未解決の仮定 $`FF_N`$ のもとでは到達不能基数が
   要る（[BREAK-ja.md](BREAK-ja.md) §7.4）。もっと弱い未解決の仮定「$`\min\{m : m \le_1 x_F\}`$ が $`\ge \theta_0`$」のもとでも要る（この仮定は今は、右端に届く先の無い、扇の無い
-  パターンについての下からの評価と同じ、[COVER-ja.md](COVER-ja.md) §5.3）。$`R_2^C`$ では鎖の底は
+  パターンについての下からの評価と同じ、[COVER-ja.md](COVER-ja.md) §5.3。そのいくつかの一様な段は証明済み、[COVER-ja.md](COVER-ja.md) §6.1。
+  また $`m_F \gt \nu_C`$、[COVER-ja.md](COVER-ja.md) §6.4）。$`R_2^C`$ では鎖の底は
   特徴づけられ、$`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F`$。$`\varphi_n`$ は閉じた $`n`$ 扇の最小の頂点（[COVER-ja.md](COVER-ja.md) §1–2）。

@@ -97,6 +97,7 @@ skeleton FRAG2 must also move $`\varepsilon`$-bases that are not $`\upsilon`$-po
 [BREAK.md](BREAK.md) §2. Its name is a conjecture; it is now equivalent to three statements about $`\upsilon`$-indices (1 review, [BREAK.md](BREAK.md) §7.3).
 In $`R_2^C`$ the shape part is proved: $`\nu_C = \upsilon^2_{\omega+1}`$, from $`o_2 = \omega`$ (Theorem O$`^C`$, 1 review, [BREAK.md](BREAK.md) §8.1).
 In $`R_2^C`$ NOLIM holds too (1 review, [COVER.md](COVER.md) §3 and §5.1), and $`\nu_C = \nu_S`$ is equivalent to NOLIM and $`o_2 = \omega`$ in $`R_2^S`$ (1 review, [COVER.md](COVER.md) §3).
+It is also equivalent to one $`\Sigma_2`$ statement, $`x_2 \lt_2^S \nu_C`$, inside the structure that $`R_2^S`$ and $`R_2^C`$ share below $`\nu_C`$ (1 review, [COVER.md](COVER.md) §6.3).
 In $`R_2^S`$, at every countable ordinal, every pair is a standard pair or joins two restarts, so FRAG2 holds in the weaker form
 "every pair joins two $`\upsilon`$-points" (Theorem SKEL$`^\infty`$, 1 review, [COVER.md](COVER.md) §5.1; before, below $`T_\omega`$ and at outline level only).
 

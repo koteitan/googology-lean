@@ -198,5 +198,6 @@ Each run was under 60 seconds; none is a proof.
 - INC1-S and INC1-nonups are now proved ([BREAK.md](BREAK.md) §1); RIGHT (every $`\lt_2`$-right end is a $`\upsilon`$-point) is now proved in $`R_2^S`$ ([COVER.md](COVER.md) §5.1), and open in $`R_2^C`$ above $`\beta_0`$.
 - $`C^*_3`$: the least bottom (above $`\nu_P`$), the upper half, the lower half, and Conjecture CH ([BREAK.md](BREAK.md) §10); the first fan is above $`T_\omega`$, and it needs an inaccessible given the open hypothesis
   $`FF_N`$ ([BREAK.md](BREAK.md) §7.4), or given the weaker open hypothesis that $`\min\{m : m \le_1 x_F\}`$ is $`\ge \theta_0`$ (now equivalent to a lower bound for
-  fan-free patterns whose right ends have no reach, [COVER.md](COVER.md) §5.3); in $`R_2^C`$ the bottoms of chains are
+  fan-free patterns whose right ends have no reach, [COVER.md](COVER.md) §5.3; several uniform steps of it are proved, [COVER.md](COVER.md) §6.1, and
+  $`m_F \gt \nu_C`$, [COVER.md](COVER.md) §6.4); in $`R_2^C`$ the bottoms of chains are
   characterized, and $`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F`$, with $`\varphi_n`$ the least apex of a closed $`n`$-fan ([COVER.md](COVER.md) §1–2).

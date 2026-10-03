@@ -107,8 +107,14 @@ least fan is described except its order type, and NOLIM holds; in $`R_2^S`$, $`\
 $`o_2 = \omega`$ there, and $`o_k = \omega`$ is reduced to an $`R_2^S`$ form of Carlson's minimality and one pinning statement. Its §5 has the sixth
 round (1 review each): the level-0 description of $`R_2^S`$ holds at every countable ordinal (so SKEL⁺, SKEL$`^\omega`$ and RIGHT in $`R_2^S`$ are
 proved, and the results that used them, NOLIM in $`R_2^C`$ among them, move from outline to proof level); the least fan of $`R_2^C`$ has
-order type $`\omega^2`$; whether it needs an inaccessible is exactly a lower bound for fan-free patterns whose right ends have no reach;
-and the $`R_2^S`$ form of Carlson's minimality holds up to $`\beta_0`$. $`C^*_3`$ lies below $`\omega_1^{CK}`$ (Carlson 2009, Thm 15.2), but it still has
+order type $`\omega^2`$; whether its least $`\le_1`$-predecessor $`m_F`$ is $`\ge \theta_0`$ (which makes the fan need an inaccessible) is exactly a lower
+bound for fan-free patterns whose right ends have no reach; and the $`R_2^S`$ form of Carlson's minimality holds up to $`\beta_0`$. Its §6 has
+the seventh round (1 review each): a calculus of comparisons between patterns proves the top step of $`\theta_0`$ (at SRO) and several
+uniform families of steps, but not all, so whether the first fan needs an inaccessible stays open; $`m_F \gt \nu_C`$; an upper bound for
+the least fan or the least chain needs only one $`\lt_2`$-pair with one more point, but no bound by an InaccPsi term is proved, and two
+proposed reductions only restate the targets; $`\nu_C = \nu_S`$ is one $`\Sigma_2`$ statement inside the structure that $`R_2^S`$ and $`R_2^C`$ share,
+and it follows from a condition on the segments of level 2 that is proved on the first block; the names of the least fan are
+conjectured with the base $`I_0`$, on analogy only. $`C^*_3`$ lies below $`\omega_1^{CK}`$ (Carlson 2009, Thm 15.2), but it still has
 no upper bound by an InaccPsi term and no name. Above $`\Lambda_\varepsilon`$ both
 halves are open in $`R_2^C`$ (the core part is proved up to $`\nu_C`$), and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$.
 
@@ -246,7 +252,8 @@ $`\kappa_X = \min\{\kappa : \kappa \le_1^X \beta \text{ for all } \beta \ge \kap
 - **Theorem LOC** (2026-10, 1 review; [BREAK.md](BREAK.md) §7.3). $`\beta_0`$ is the least stage at which Carlson's covering condition,
   evaluated inside $`R_2^S`$, differs from $`R_2^S`$. So whether $`\nu_C = \nu_S`$ (no "ghost") is a question about $`R_2^S`$ alone. Now
   $`\nu_C = \nu_S`$ implies $`o_2 = \omega`$ in $`R_2^S`$, and given NOLIM the two are equivalent ([BREAK.md](BREAK.md) §8.1, 1 review). Now $`\nu_C = \nu_S`$ iff NOLIM and $`o_2 = \omega`$ hold in $`R_2^S`$
-  (GHOST-EQ), and NOLIM holds in $`R_2^C`$ (Theorem NOLIM$`^C`$) ([COVER.md](COVER.md) §3 and §5.1, 1 review).
+  (GHOST-EQ), and NOLIM holds in $`R_2^C`$ (Theorem NOLIM$`^C`$) ([COVER.md](COVER.md) §3 and §5.1, 1 review). Now $`\nu_C = \nu_S`$ iff
+  $`x_2 \lt_2^S \nu_C`$, one $`\Sigma_2`$ statement inside the common structure below $`\nu_C`$ (Theorem EQ, [COVER.md](COVER.md) §6.3, 1 review).
 - **Lemma UPG.** At a stage of agreement, $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$ when every $`\gamma \lt \alpha`$ lies in an
   isominimal subset of $`\alpha`$ in $`R_2^C`$ (true for $`\alpha = \kappa_C`$ and $`\alpha = \upsilon_{\omega\cdot\omega}`$).
 - **KAPPA and CORE-EQ.** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$, and $`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$. So if
@@ -329,10 +336,14 @@ pointwise least one.
   first fan, $`m_3`$ and $`C^*_3`$ need an inaccessible ([BREAK.md](BREAK.md) §7.4). In $`R_2^C`$ ([COVER.md](COVER.md), 1 review each): a point of the core is the
   bottom of a chain of length 3 iff it has an infinite $`\le_1`$-chain of right ends (Theorem CP3); $`c_0`$ is the least such point, and $`c_1`$ is
   the supremum of an $`\omega`$-sequence made by downward 2-reflection (LEAST3); the least closed $`n`$-fans (apexes $`\varphi_n`$) stay below $`m_3`$, so
-  $`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F`$ (FIN-FAN); given $`FF_{cl}`$ ($`\sup_n \varphi_n \ge \theta_0`$), $`C^*_3`$ needs an inaccessible; whether the first fan
-  needs one is the single statement that the point of $`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)), which is $`\min\{m : m \le_1 x_F\}`$, is $`\ge \theta_0`$. Now (1 review each,
+  $`c_0 \gt m_3 \ge \sup_n \varphi_n \gt f_0 \gt x_F`$ (FIN-FAN); given $`FF_{cl}`$ ($`\sup_n \varphi_n \ge \theta_0`$), $`C^*_3`$ needs an inaccessible; a sufficient condition
+  for the first fan to need one is the single statement that the point of $`\Phi_3`$((0,0,0)(1,1,1)(2,2,1)), which is $`\min\{m : m \le_1 x_F\}`$, is $`\ge \theta_0`$
+  (the converse is open). Now (1 review each,
   [COVER.md](COVER.md) §5.2–5.3): the least fan has order type $`\omega^2`$; that statement is equivalent to a lower bound for fan-free patterns whose
-  right ends have no reach, and it follows from the lower-bound program below $`\theta_0`$; and $`c_2 \lt \omega_1^{CK}`$.
+  right ends have no reach, and it follows from the lower-bound program below $`\theta_0`$; and $`c_2 \lt \omega_1^{CK}`$. Then (1 review each,
+  [COVER.md](COVER.md) §6): $`m_F \gt \nu_C`$; the top step of $`\theta_0`$ and several uniform families of steps are proved by a calculus of
+  comparisons between patterns; $`B_F \ge \psi_{I_0}(0)`$ iff $`m_F \ge \theta_0`$ for a name $`m_F = \psi_{\Omega_1}(B_F)`$; the names with $`B_F = I_0`$ are a
+  conjecture.
   Earlier:
   $`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$.
 - **Lemma TOP2** (2026-10, 1 review). For every $`\alpha \lt m_3`$ there is a chain $`x \lt_2 y`$ of length 2 with
@@ -454,7 +465,9 @@ pointwise least one.
   known $`\le_2`$ relations of $`R_2^C`$ (up to $`\Lambda_\varepsilon`$) form no chain of length 3 (Theorem BLK$`^O`$); a chain must be in the
   seed of Carlson's generation (NO-GEN); set-theoretic
   reflection gives chains only above $`\omega_1^{CK}`$ (HIGH), and the $`\le_1`$-reach alone does not give a chain
-  (NO-PROMOTE). Carlson 2009, Thm 15.2 gives $`c_2 \lt \omega_1^{CK}`$, but no bound by an InaccPsi term is proved ([COVER.md](COVER.md) §5.2). Lower half open: it needs the lower bound program below $`\theta_0`$ with patterns without a chain of
+  (NO-PROMOTE). Carlson 2009, Thm 15.2 gives $`c_2 \lt \omega_1^{CK}`$, but no bound by an InaccPsi term is proved ([COVER.md](COVER.md) §5.2). Such a bound needs only one
+  pair $`a \lt_2 c`$ below it and a second left end $`b \lt_2 c`$ between (Lemma CRIT, [COVER.md](COVER.md) §6.2, 1 review); splitting it into a start
+  and a cost per step is equivalent to the bound itself. Lower half open: it needs the lower bound program below $`\theta_0`$ with patterns without a chain of
   length 3.
 - That $`\Phi_3(M)`$ is a pattern. Then it has no chain of length 3 (Corollary C), and DOM₂ bounds its point by $`m_3`$.
   The output relation itself has no such chain (Theorem A, proved); for its closure this is BAR_R (checked only).
@@ -516,7 +529,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
           - $`\le_2`$ at stages of type (ii): reduced to one pair and to $`\Pi_2`$-UP (MAX2, RED-d, UPCOPY), equivalent below
             $`\kappa_C`$ to Conjecture CORE-2 (EQ-E) — proved; PIN and LOW — open
         - (R) iff $`\kappa_C \le_1^S \Omega_1`$, and AGR iff (E) and (R) — proved (R-OM)
-    - B1 explicit chains of every length $`n`$ below $`\psi_{\Omega_1}(I_\omega)`$ as InaccPsi values — open
+    - B1 explicit chains of every length $`n`$ below $`\psi_{\Omega_1}(I_\omega)`$ as InaccPsi values — open; a bound needs only one pair with one
+      more point (CRIT, [COVER.md](COVER.md) §6.2), but no InaccPsi term is proved to bound $`x_F`$ or $`c_0`$
       (conjecture for $`n = 3`$ in §3)
     - B2 a finite-set test for $`\lt_2`$ in $`R_2^+`$ — proved (T1, T2); whether the uniform form (one copy for all
       $`k`$) is also necessary is open in $`R_2^+`$ (Wilken 2021, p. 6, says it is for pure $`R_2`$)
@@ -550,7 +564,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
     - A3 least realizations as terms — open
     - A4 **Conjecture CH**: the least chain of length $`k+2`$ needs $`k`$ inaccessibles — conjecture
     - A5 every term below the bound is the value of a pattern — open
-    - A6 $`R_2^S = R_2^C`$ everywhere — open (known below $`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$)
+    - A6 $`R_2^S = R_2^C`$ everywhere — open (known below $`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$); its first case $`\nu_C = \nu_S`$ is one $`\Sigma_2`$ statement
+      (EQ), implied by a segment condition SC that is proved on the first block ([COVER.md](COVER.md) §6.3)
     - A7 relativized patterns of $`R_1^+`$ and uniform assignments between ordinals and patterns (announced by Wilken) —
       proved (RC-PIN, RC, U, UNIF; [PINS.md](PINS.md) §1; the closures are finite, CL-FIN, and are explicit pin patterns, EXPL,
       [BREAK.md](BREAK.md) §4); that the assignments are elementary recursive — outline only
@@ -558,7 +573,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
     - L0 in $`R_2^C`$: equivalent to "every $`\gamma \lt \psi_{\Omega_1}(I_\omega)`$ is below some $`\max C^*_n`$" — proved
     - L-CERT below $`\theta_0`$: reductions proved (I-FREE, OE, EPS-RED, FS-OE, RED-BMS, S-RED, MU-A, MU-B, UNIF-V);
       also MU-0 and MU-B0 ((M4) at level 0; adds nothing to the core); left: (M4) at level $`\ge 1`$, (M1)–(M3), and the
-      local step below SRO — open (with them the first fan needs an inaccessible, RED-HM, [COVER.md](COVER.md) §5.3)
+      local step below SRO — open (with them the first fan needs an inaccessible, RED-HM, [COVER.md](COVER.md) §5.3); the top step at SRO
+      and several uniform families of steps — proved for explicit patterns ([COVER.md](COVER.md) §6.1)
     - L-CERT on $`[\theta_0, \psi_{\Omega_1}(I_0))`$ and above — open
     - L-BMS through $`\Phi_3`$ — blocked: by DOM₂ a pattern of $`\Phi_3`$ without a chain of length 3 stays below $`m_3`$,
       and the output relation of $`\Phi_3`$ never has such a chain (Theorem A, proved; for the closure, BAR_R, checked)
@@ -570,7 +586,7 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       [BREAK.md](BREAK.md) §3); limits of levels lie in no pair, and in $`R_2^C`$ the first fan is below $`m_3`$ (LIM-CAP, DOM_F; [BREAK.md](BREAK.md) §6); the first
       fan is above $`T_\omega`$, has two successors and is open in $`R_2^C`$ (FAN-CAP, OPEN-C, LONG-NEST; [BREAK.md](BREAK.md) §7.4); in $`R_2^C`$ the bottoms of
       chains are exactly the points of the core with an infinite closed fan, and the least closed $`n`$-fans stay below $`m_3`$ (CP3, FIN-FAN);
-      the least fan is described, with order type $`\omega^2`$ (FS, OF; [COVER.md](COVER.md) §2, §5.2); $`c_2 \lt \omega_1^{CK}`$)
+      the least fan is described, with order type $`\omega^2`$ (FS, OF; [COVER.md](COVER.md) §2, §5.2), and $`m_F \gt \nu_C`$ ([COVER.md](COVER.md) §6.4); $`c_2 \lt \omega_1^{CK}`$)
     - Lean: the order type of the bounded terms is $`\psi_{\Omega_1}(X)`$; Lemma LOC (whether a finite set is
       isominimal depends only on the structure up to its largest element; on paper, not refereed) — open
 
@@ -691,7 +707,8 @@ Checked on this table:
   111 order errors and 182 non-standard images, so the test can fail. The referee's new sample (400 terms): 0 errors.
 - **The local step above $`V_3`$.** 160 neighbour pairs of images of $`G_{B0}`$ (at most 10 columns): 134 certified and
   replayed (again by the referee), 26 undecided (all at limits whose last columns come from a base term), none
-  refuted; 30 reversed pairs: 0. For $`V_3`$ itself: 11 of 11 certificates for $`N \le 10`$, replayed.
+  refuted; 30 reversed pairs: 0. Now 5 of the 26 have replayed certificates, one more is proved by hand, and 20 stay
+  undecided ([COVER.md](COVER.md) §6.1). For $`V_3`$ itself: 11 of 11 certificates for $`N \le 10`$, replayed.
 - **Chains of $`\Phi_3`$.** Theorem A, BAR, BAR_R, "closure = output relation" and "longest chain of the closure is 2":
   0 failures on 12,963 matrices from six starts (78,991 nested pairs). The referee: Theorem A had 0 failures on 229,888
   random inputs; BAR_R failed on 824 of them (a re-run: 664), and none of those is standard.
@@ -725,7 +742,7 @@ needs "$`\Phi_3(M)`$ is a pattern" (open), and it is about $`R_2^C`$ only.
 Nothing about $`R_2^+`$ itself is in Lean. The results above $`\upsilon_{\omega^3}`$ are on the second page
 [RESTARTS.md](RESTARTS.md), those above $`\Xi_\omega`$ on the third page [REACHES.md](REACHES.md), those beyond $`\Lambda_\varepsilon`$ on
 the fourth page [PINS.md](PINS.md), and those where the skeleton ends, with the levels above it, on the fifth page [BREAK.md](BREAK.md), and the
-results by covering minimality and the level-0 description (the fifth and sixth rounds) on the sixth page [COVER.md](COVER.md).
+results by covering minimality and the level-0 description (the fifth to seventh rounds) on the sixth page [COVER.md](COVER.md).
 
 ## 8. References
 
