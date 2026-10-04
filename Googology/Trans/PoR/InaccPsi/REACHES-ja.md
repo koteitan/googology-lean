@@ -6,7 +6,7 @@
 **証明済み**は、独立した査読者が、致命的な点も止める点も無く証明済みと判定したもの。このページの結果はどれも
 2026-10 のもの。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した 2 つの論文がその結果を証明し、それぞれが
 1 回ずつ査読されたこと。次の回の結果（相対化したピン、$`\Theta_A`$ までの正確な届く先、$`\Lambda_\varepsilon`$ までの名前、
-長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目から 7 回目の結果は 6 ページ目 [COVER-ja.md](COVER-ja.md)、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md)、11 回目は 8 ページ目 [VEBLEN-ja.md](VEBLEN-ja.md) にある。
+長さ 3 の鎖のいちばん下）は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、その次の 4 回の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、5 回目から 7 回目の結果は 6 ページ目 [COVER-ja.md](COVER-ja.md)、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md)、11 回目と 12 回目は 8 ページ目 [VEBLEN-ja.md](VEBLEN-ja.md) にある。
 それによってここのいくつかの状態が変わった。
 変わった所には印を付けた。
 
@@ -45,7 +45,8 @@ $`t(\rho_\lambda) + 1`$ の上限。$`\Lambda_\varepsilon`$ は、その下で $
   すべての層に広がった：$`\nu`$ より下のどのやり直しの点も、臨界な添字の極限を除いて届く先が分かる。さらに（査読 1 回、定理 KV、
   [FANFREE-ja.md](FANFREE-ja.md) §10.3）$`\upsilon`$ の上の Klammer の階層で、式は $`\rho^\rho`$ より下のずれまで延びる。さらに（査読 1 回、
   定理 KV-NAMES、[VEBLEN-ja.md](VEBLEN-ja.md) §1）そのようなやり直しの点の Klammer の形はその InaccPsi の名前から読め、式は
-  $`e_\lambda \le \psi_{\Omega_2}(\Omega_2) + 1`$ のどのやり直しの点でも閉じた形で成り立つ（NAME-OFFSET-G）。
+  $`e_\lambda \le \psi_{\Omega_2}(\Omega_2) + 1`$ のどのやり直しの点でも閉じた形で成り立つ（NAME-OFFSET-G）。さらに（査読 1 回、[VEBLEN-ja.md](VEBLEN-ja.md) §8）
+  $`e_\lambda \le \psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$ でも（NAME-OFFSET-G⁺）。
 - **補題 RS$`_\lambda`$**（証明済み、査読 2 回）。どのやり直しの添字 $`\lambda \le \Xi_\omega`$ でも、$`R`$ で
   $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + c^*(\lambda)`$。これは BLK$`^O`$ と OFF-V から出る。もう 1 つの証明は §3 の定理 EXACT。
 - **定理 EXACT と OFF-k**（証明済み、査読 1 回。正確な届く先の、独立したもう 1 つの証明）。基の付け替えで定めた

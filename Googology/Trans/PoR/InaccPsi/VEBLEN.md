@@ -1,17 +1,17 @@
 [← Back](README.md) | [English](VEBLEN.md) | [Japanese](VEBLEN-ja.md)
 
-# $`R_2^+`$, the eleventh round: offsets past Γ, native codes up to $`\upsilon_1`$, a periodic symbol for the shapes of $`\Phi_3`$, and a direct $`\Sigma_2`$ argument
+# $`R_2^+`$, the eleventh and twelfth rounds: offsets past Γ, native codes up to $`\Phi_1`$, symbols for the shapes of $`\Phi_3`$, and a direct $`\Sigma_2`$ argument
 
 This page continues [FANFREE.md](FANFREE.md). The status words are those of [README.md](README.md) §3: **proved** means that an
 independent referee found the result proved with no fatal or blocking point. All results on this page are from 2026-10; they come from
-the eleventh round of four papers. A statement with a blocking point against it is listed under **Not proved**; a statement that its
+the eleventh round (§1–§7) and the twelfth round (§8–§14), four papers each. A statement with a blocking point against it is listed under **Not proved**; a statement that its
 referee found to restate the target, or to be trivial, is listed under **Not counted**. A certificate counts only when it was replayed.
 None of the papers uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), Wilken, AML 45 (2006), or the equivalence that Carlson 2009,
 p. 97, announces. No result on this page is in Lean, and no Lean file was added. The notation is that of [FANFREE.md](FANFREE.md).
 
-Four papers, each refereed once, so every result here has 1 review. One paper (§1) checked a Lean test file of named points with
-leanman (green, and green again in the referee's rerun); that file only compares terms (`#eval`, no theorem), and it is not added to
-the library. The other three papers make no Lean claim. The papers number the levels one lower; here they are renumbered (a point of
+Every paper was refereed once, so a result here has 1 review unless a count is given. In each round one paper (§1, §8) checked a Lean test
+file of named points with leanman (green, and green again in the referee's rerun); these files only compare terms (`#eval`, no theorem), and they are
+not added to the library. The other papers make no Lean claim. The papers number the levels one lower; here they are renumbered (a point of
 $`U_2`$ below is a point of their first level).
 
 ## 1. Offsets past Γ, and the claim up to $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$
@@ -65,7 +65,7 @@ $`\Omega_1`$, $`\Gamma_{a[\Omega_1 := r]}`$ for $`\Gamma_a`$ and $`\Gamma^{\math
   the InaccPsi hull of $`(\Omega_\omega + \theta\cdot g, H(g))`$ and Wilken's hull $`T^{\Omega_1}[H(g)]`$ have the same elements below $`\theta`$.
 - **Not proved**: $`\Theta_1 = H(\theta)`$ and the claim on $`[0, H(\theta))`$: (H2a) and (H2b) are open beyond $`\psi_{\Omega_2}(\Omega_2)`$, as the paper says.
   The paper's sentence "(H2a) and (H2b) hold on $`[0, \psi_{\Omega_2}(\Omega_2)]`$" is not proved either (one direction of (H2b) and the shifted
-  VEB-THETA are only asserted); no proved result uses it.
+  VEB-THETA are only asserted); no proved result uses it. (The twelfth round reduces $`\Theta_1 = H(\theta)`$ to another lemma, PAR-SAME, §8.)
 - **Points of $`U_2`$ and long restarts** (proved). Every point of $`U_2`$ below $`\upsilon^*`$ and every long restart below $`\min(\nu_C, \upsilon^*)`$ is $`H(\eta)`$
   with $`\mathrm{logend}(\eta) \gt \psi_{\Omega_2}(\Omega_2) + 1`$ (and $`\ge \theta`$ given (H2a)).
 - **Open**: an InaccPsi upper bound for $`\nu_C`$. It needs a positive relation, a $`\lt_2`$-pair that contains a second pair, at a named point
@@ -95,6 +95,7 @@ $`x^+ = \vartheta(D_x + \eta_x + 1)`$, and $`\iota_x`$ is Wilken's level shift (
   the referee checked the three cases by hand and they hold, but the relativized placement was never run). The index family $`[\omega, \upsilon_1)`$
   followed by one copy of $`[\upsilon_1, \upsilon_2)`$ for each $`\beta \lt \upsilon_1`$ (read with the base $`\psi_{\Omega_1}(\Omega_\beta)`$) has order type $`\upsilon_2\cdot\upsilon_1`$,
   and its codes are $`\ll`$-increasing (Lemma REF of [FANFREE.md](FANFREE.md) §7.2 at limits, and new Lemmas UNIV-P and BRIDGE). So $`\iota(\mathrm{CH}_2) \ge \upsilon_2\cdot\upsilon_1`$.
+  (STEP-IN is now written in full and refereed, §9.)
 - **Not counted**: the paper's remark that the inflated reach is necessary. The failures of Wilken's reach show only that this placement
   plan breaks with it.
 - **Not proved**: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, as the paper says. The gap: nested references, which stay below $`\psi_{\Omega_1}(\Omega_{\Omega_1}) \lt \theta_0`$, and
@@ -208,18 +209,185 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 - Shapes (§3). The symbolic templates equal the concrete $`\Phi_3`$ for 4 values of $`j`$ on every accepted matrix (285 ROOT, 249 IX-PER, 245
   IX-CORE); 603 accepted random matrices beyond the sample are all valid. The referee: SEQ on 60,000 word pairs (53,171 decided, 10,616 of them by
   a jump), 0 wrong; PER and SELF-CHAIN-C at higher levels ($`n`$ up to 11 for step 1 and up to 14 for step 2); IX-PER and IX-CORE up to $`n = 9`$; all
-  3,166 matrices built in three ways, 0 differences.
+  3,166 matrices built in three ways, 0 differences. (The referee: for IX-PER the validation compares only the nodes from the template up, so it
+  covers the templates, not the index part.)
 - $`\Sigma_2`$ (§4). The paper ran nothing. The referee checked one fact on sums used in TOP on 93,411 random cases below $`\omega^\omega`$, 0 failures.
 
-## 7. Open
+## 7. Open after the eleventh round
 
-- The first inaccessible: $`H_m`$ (equivalently, some $`\iota(\mathrm{CH}_k) \ge \theta_0`$; enough: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, from a map $`\nu`$ on all of $`D`$ with L1p-free
-  values and $`\nu(s) \ll \nu(t)`$ at every step); UNIF-FS below SRO on the open classes of §3; codes with nested references and the block
-  grammar of the $`\Omega`$-levels (§2); $`\iota(A_n) \ge |\tau_n|`$.
+The twelfth round changed this list; the current list is §14.
+
+## 8. Offsets up to the second Γ-fixed point, and $`\Theta_1`$ reduced to one lemma on parameters
+
+Notation of §1. $`\Gamma^{\mathrm{fp}}_2(x)`$ is the least Γ-fixed ordinal above $`\Gamma^{\mathrm{fp}}(x)`$. Put $`b_\Gamma(z) = z + 1`$ if $`z = F + n`$ with $`F`$ Γ-fixed and $`n \lt \omega`$, and
+$`b_\Gamma(z) = z`$ otherwise; so $`a \mapsto \Gamma_{b_\Gamma(a)}`$ lists the strongly critical ordinals that are not Γ-fixed. $`C_g`$ is the InaccPsi hull of
+$`(\Omega_\omega + \theta\cdot g, H(g))`$, and $`T^{\Omega_1}`$ is Wilken's system over the base $`\Omega_1`$ (§1). In $`t[\Omega_1 := r]`$ also $`\psi_{\Omega_2}(\Omega_2\cdot 2)`$ goes to $`\Gamma^{\mathrm{fp}}_2(r)`$.
+$`\Lambda_{\mathrm{fp}2} = H(\psi_{\Omega_2}(\Omega_2\cdot 2)\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\psi_{\Omega_2}(\Omega_2\cdot 2)+1})`$.
+
+- **Repairs of §1** (proved). The three points of the eleventh-round referee: $`\psi_{\Omega_2}(\Omega_2) + 1 \in C_0`$, so $`\omega^{\psi_{\Omega_2}(\Omega_2)+1} \in D`$; in FIXP the
+  needed fact is that the least fixed point of $`\varphi_\delta`$ is $`\varphi_{\delta+1}(0) \gt \delta`$; UNIF-G is proved in two passes (first decide normal forms by
+  induction on size, then compare them).
+- **GAM-THETA′ and FIXP-Γ** (proved). $`\vartheta^\tau(\Omega_1^2 + \eta) = \Gamma_{b_\Gamma(\tau+\eta)}`$ for every $`\eta \lt \tau^\infty`$ (GAM-THETA was the part below $`\Gamma^{\mathrm{fp}}(\tau)`$), and
+  $`\Gamma^{\mathrm{fp}}_2(\tau) = \vartheta^\tau(\Omega_1^2 + \Omega_1 + 1)`$. Wilken's base change between $`\upsilon`$-points keeps "Γ-fixed" in both directions.
+- **PSI2⁺ and the InaccPsi side** (proved; the referee re-derived PSI2⁺ by hand at $`b = 0`$ and at $`b = \psi_{\Omega_2}(\Omega_2)`$).
+  $`\psi_{\Omega_2}(\Omega_2 + 1 + b) = \Gamma_{\psi_{\Omega_2}(\Omega_2)+1+b}`$ for $`b \lt \psi_{\Omega_2}(\Omega_2\cdot 2)`$, and $`\psi_{\Omega_2}(\Omega_2\cdot 2) = \Gamma^{\mathrm{fp}}_2(\Omega_1)`$. EXACT-G⁺, COMP-G⁺, UNIF-G⁺,
+  TERM-G⁺: EXACT-G, COMP-G, UNIF-G and TERM-G of §1 with $`\Gamma^{\mathrm{fp}}`$ of the base as one more atom.
+- **Theorem NAME-OFFSET-G⁺** (proved). For every restart index $`\lambda`$ with $`\rho_\lambda \lt \upsilon^*`$ and $`e_\lambda \le \psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$:
+  $`c^+(\lambda) = (-1 + e_\lambda)[\Omega_1 := \rho_\lambda]`$. This contains NAME-OFFSET-G of §1, and the offsets $`\psi_{\Omega_2}(\Omega_2) + c`$ of the referee's remark there.
+- **The landmarks** (proved). The least restart with $`c^+ = \Gamma_{\Gamma^{\mathrm{fp}}(\rho)+1}`$ is $`H(\psi_{\Omega_2}(\Omega_2 + 1))`$; with $`c^+ = \Gamma_{\Gamma^{\mathrm{fp}}(\rho)\cdot 2}`$ it is
+  $`H(\psi_{\Omega_2}(\Omega_2 + \psi_{\Omega_2}(\Omega_2)))`$; with $`c^+ = \Gamma^{\mathrm{fp}}_2(\rho)`$ it is $`H(\psi_{\Omega_2}(\Omega_2\cdot 2))`$; with $`c^+ = \Gamma^{\mathrm{fp}}_2(\rho) + 1`$ it is $`\Lambda_{\mathrm{fp}2}`$.
+- **STRUCT″ and Wilken's claim on $`[0, \rho_{\Lambda_{\mathrm{fp}2}+\omega^2})`$ in $`R_2^C`$**, both halves (proved). STRUCT″ holds on this segment with every restart reach in
+  closed form, and every ordinal below $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\psi_{\Omega_2}(\Omega_2\cdot 2)+1} + \omega^{\theta+2})`$ is in the core and is the value of an
+  InaccPsi normal form with collapse arguments below $`I_\omega`$. Before: $`[0, \rho_{\Lambda_{\mathrm{fp}}+\omega^2})`$. As in §1, the new fact for the claim is where this point lies.
+- **VIS and PAR-ψ** (proved; the referee checked that the cited Lean lemmas of [InaccPsi](../../../Notation/InaccPsi/README.md), among them `KLt_complete` and
+  `arg_mem_of_psi_mem`, exist and that their hypotheses match). If $`C_g \cap \Omega_1 = H(g)`$ and $`\tau \in C_g`$, then every countable maximal subterm of the normal
+  form of $`\tau`$ is below $`H(g)`$.
+- **L3, the shifted LOW-0** (proved, as a transfer of LOW-0 to the base $`\Omega_1`$, at the same standard as H3 of §1). A strictly increasing map $`E^{\Omega_1}`$
+  from $`\theta`$ into $`T^{\Omega_1} \cap \Omega_2`$ whose parameters are among the countable maximal subterms and 0 (the paper says "are"; the referee: only "are
+  among" is true, and only that is used). With H3: $`T^{\Omega_1} \cap \Omega_2 = \theta`$ exactly.
+- **B-PAR** (proved). The map $`B`$ of H3 sends every term of the simultaneous system of Weiermann–Wilken (MLQ 57, 2011) whose parameters are below
+  $`H(g)`$ into $`C_g`$.
+- **Not proved** (blocking point): Theorem THETA1, $`\Theta_1 = H(\theta) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$ with $`\mathrm{lh}(H(\theta)) = H(\theta+\omega+1) + H(\theta+1)`$, and its
+  bounds for $`c^+`$ below $`\Theta_1`$; Theorem THETA-A, $`\Theta_A = H(\varepsilon_{\theta+\omega}) = \psi_{\Omega_1}(\Omega_\omega + \varepsilon_{\theta+\omega})`$; so also the claim with the named end
+  $`H(\varepsilon_{\theta+\omega} + \omega^2)`$, and "$`\nu_C`$ is above it". The proofs treat two notions of parameter as one: those of a term of Wilken's system
+  (Wilken 2007, Defs 3.27, 5.1), which the base-change results of §1 use, and those of a term of the simultaneous system (Weiermann–Wilken 2011,
+  Defs 4.7, 5.2), which $`B`$ and $`E^{\Omega_1}`$ control. That the two systems have the same values does not give this. The missing lemma, PAR-SAME, says
+  that the two parameter sets of an ordinal are equal. The referee: it looks true and short (an induction along Def 3.2 of the 2011 paper, with
+  Def 4.6 of Wilken 2007), and every other step of THETA1 and THETA-A is correct. The core half on $`[0, \rho_{\Theta_A+\omega^2})`$ was already proved
+  (CORE-C$`^A`$, [PINS.md](PINS.md) §2); what PAR-SAME would add is the names.
+- **The hull lemma** (H2a), (H2b) of §1. With PAR-SAME it is not needed for $`\Theta_1`$; it would give only the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and
+  $`\Theta_1`$. The paper's proof of it below $`\psi_{\Omega_2}(\Omega_2\cdot 2)`$ is an outline of a transfer (the referee: plausible; nothing uses it). Beyond that it is open.
+- **Not counted**: NEST-UP and NEST-CHAR (proved, but the referee finds that together they restate $`\nu_C = T_C`$, the least top of a nested pair,
+  [BREAK.md](BREAK.md) §2): $`\nu_C`$ is the least right end $`b`$ of a pair $`a \lt_2 b`$ with pairs cofinal below $`a`$. (The fact needed in $`R_2^C`$ is NU-CT, not the
+  $`R_2^S`$ result that the paper cites.)
+- **Open**: an InaccPsi upper bound for $`\nu_C`$ (one positive $`\lt_2`$-relation at a named point, whose left end is a restart with pairs cofinal below it);
+  the names of $`\Theta_\delta`$, $`\Theta_{d\omega}`$ and $`\Lambda^*`$, which need maps like $`B`$ and $`E^{\Omega_1}`$ at other bases.
+
+## 9. Native codes up to $`\Phi_1`$
+
+Notation of §2. $`\Xi_\alpha`$ is the $`\alpha`$-th nonzero fixed point of $`\zeta \mapsto \upsilon_\zeta`$, and $`\Phi_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$ is the least fixed point of
+$`\alpha \mapsto \Xi_\alpha`$ (Theorem T++, [REACHES.md](REACHES.md) §2; the paper does not use these names in its proofs). A layer is $`[\upsilon_\zeta, \upsilon_{\zeta+1})`$; its
+ordinals are values of Wilken's terms over the base $`\upsilon_\zeta`$ with parameters below the base.
+
+- **REL and STEP-IN** (proved). Over every base, with any closed set of outer parameters held fixed, the four local steps inside a layer hold in the
+  strong form: the copy fixes the outer parameters and puts the new chain just below the root. The three cases that the eleventh-round referee
+  checked by hand are written out. So **IDX-REF** of §2 holds without its caveat (2 reviews). (The referee: the relative arithmetic is never run
+  numerically, and the steps that start at the base of a layer itself need one more sentence.)
+- **The layered codes** (proved: FIN-N, PAT-N, DROP, KIND, EXIST-AMB, UNIV-B, PLACE-AMB). Each layer gets one module, the code of the index of its base. The
+  parameters of a code are points and modules of lower layers, nested to any depth. Every code is a finite L1p-free RF fan-free pattern. (The referee:
+  one case of PLACE-AMB, a new fixed module below a host that is not fixed, is not written; it never occurs, and the proof should say why.)
+- **Theorem IDX-Y** (proved). $`N(\gamma') \ll N(\gamma)`$ for $`\omega \le \gamma' \lt \gamma \lt \Xi_1`$. With HOST2: $`\iota(\mathrm{CH}_2) \ge \Xi_1`$. Without nested parameters the order type stops at
+  $`\upsilon_2^\omega`$.
+- **Blocks, and Theorem IDX-XI** (proved: CHAIN, RANK, RANK-HOST). A block of rank 0 is the pattern of SRO[0], of rank 1 a block G, of rank $`1 + \sigma`$ a block
+  SRO$`_\sigma`$ (SRO$`_1`$ is the pattern of SRO). A block hosts every ordinary chain with small increments and every block of smaller rank. The fixed point
+  $`\Xi_{\lambda+\omega^\kappa}`$ gets as module the code of $`\Xi_\lambda + 1`$ followed by a block of rank $`\kappa`$. Then $`N(\gamma') \ll N(\gamma)`$ for $`\omega \le \gamma' \lt \gamma \lt \Phi_1`$, so
+  $`\iota(\mathrm{CH}_2) \ge \Phi_1`$; the pattern of SRO[0] lies above every code of an index below $`\Xi_1`$, and the pattern of SRO above every code of an index below $`\Xi_{\omega^2}`$.
+- These bounds are native: they come from codes, not from reaches. The referee: they are far below the known $`\iota(\mathrm{CH}_2) \gt \nu_C \gt \Lambda_\varepsilon`$; the progress is
+  on the route toward $`\iota(\mathrm{CH}_2) \ge \theta_0`$ only.
+- **Not proved**: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, as the paper says. The gap is a native family of order type $`\theta_0`$. This family already spends SRO (which conv
+  reads as $`\theta_0`$) at the index $`\Xi_{\omega^2}`$; the next kind of block is an outline only, and a grammar that follows conv (with codes for the collapse
+  arguments too) is open. Also not proved: "the codes are cofinal below the pattern of SRO[0]"; only "below" is proved.
+
+## 10. The shapes of $`\Phi_3`$: sibling copies ($`t = 0`$)
+
+Notation of §3. For $`t = 0`$ with the bad root $`R`$ not a root column, the parent of $`R`$ has in $`A[n]`$ the children $`K`$ followed by $`n + 1`$ copies of
+the subtree $`S`$ of $`R`$: the copies are siblings.
+
+- **Lemmas NF, SEQ-N and FAM** (proved; FAM for the families that the program creates). A run symbol stands for $`K`$, then $`S^{j+c}`$, then a suffix, for
+  every $`j \ge J_0`$ at once, inside children tuples and sums; runs may be nested. Normal forms of runs are unique, and a walker compares words with
+  nested runs for every $`j`$ at once. (The referee: the program misses one case of a family, when it starts at once; it occurs in none of 1,764 symbolic
+  runs, and the validation would reject it.)
+- **Lemma SYM-R** (proved given (REP)). The program is rewritten in memory by seven rules, each the original code on concrete input; a finishing
+  symbolic run gives the concrete run for every $`j \ge J_0`$. (REP) says that the run does not depend on how objects are stored and shared, which
+  decides the program's identity tests. (REP) is checked (by the referee up to $`j = 20`$), not proved. The referee: it is used more widely than it is
+  stated, and the symbolic entries since [FANFREE.md](FANFREE.md) §10.1, those of §3 among them, carry the same condition.
+- **Theorem SH0-A** (proved given (REP)), with **Lemma BASE-PHI-U** (proved): one template for every $`n`$, and FS⁺ for every $`n`$ from BASE-PHI checked once on the
+  template. 234 matrices (19 of them were proved only given LOW before).
+- **Theorem PER0** (proved given (REP)) with **Lemma STEP-PHI** (proved): the run in the children of the root, with the chain of anchors as the black box.
+  178 matrices. **Corollary SUM-CORE0** (proved): 8 matrices.
+- **Lemmas BASE-PHI-R and DIRECT-R** (proved). For $`t = 2`$, each gives FS⁺ at one level $`n`$, for a chain of any length. The shape for every $`n`$ is open.
+- **The tally** (the referee checked the counts):
+
+| class | matrices | proved for every $`n`$, given (REP) | given LOW | given a condition checked for small $`n`$ | $`t = 2`$, derivation checked for $`n \le 7`$ | open |
+|---|---|---|---|---|---|---|
+| I | 581 | 381 | 2 | 0 | 0 | 198 |
+| SUM | 603 | 488 | 0 | 7 | 0 | 108 |
+| ROOT | 635 | 491 | 0 | 0 | 87 | 57 |
+| III | 1,347 | 502 | 0 | 0 | 53 | 792 |
+| all | 3,166 | 1,862 (before: 1,442) | 2 | 7 | 140 | 1,155 |
+
+- **Open**: UNIF-FS below SRO. The 1,304 matrices that are not proved:
+
+| class | matrices | why it is open |
+|---|---|---|
+| $`t = 0`$, M1 | 258 | the $`\omega`$-run fold of the reach; the block per step is not fixed (nested blocks) |
+| $`t = 0`$, M2 | 139 | anchors peeled inside the closure: families of one-term nodes |
+| $`t = 0`$, M3–M5 | 65 | a low template outside the image (28), interleaved families (14), PER0 fails, short bodies or identity of run copies (23) |
+| $`t = 2`$ | 460 | 140 with the derivation checked for small $`n`$; 320 where it fails at some $`n \le 5`$ (all of I and SUM among them: they need a lifting of the core) |
+| $`t = 1`$ | 382 | as in §3: III with the bad root in the $`\Omega`$-level structure 201, other 140, ROOT 17, SUM 24 |
+
+## 11. $`\nu_C = \nu_S`$: the corrected residue
+
+Notation of §4 and of [FANFREE.md](FANFREE.md) §10.3 ($`u^\#`$, $`D^\#_n`$, the maps $`T_n`$). $`u_m = \upsilon^2_m`$. $`P^*`$ is an isominimal set with $`x, \nu \in P^*`$,
+$`X = P^* \cap [x, x^\#)`$, and $`\tilde X`$ is its downward copy, with $`\tilde x = u_m`$. (HC) says that the hereditary parameters of $`X`$ are below $`u_m`$.
+
+- **RED$`_T`$** (proved as an implication). The corrected reduction of §4: with any finite set $`T \lt \tilde x`$ held fixed and closed extension sets, (LOC$`_T`$)
+  and (TR$`_T`$) give $`\nu_C = \nu_S`$. But (TR$`_T`$) fails whenever $`P^*`$ has a point in $`[x^\#, \nu)`$, which is the setting of the results below (see **Not proved**).
+- **ISO-COV, AP2, LH#** (proved). An isominimal set is pointwise below every closed covering of itself; a proper $`\le_1`$-left end is indecomposable, and
+  below $`\nu`$ both ends of a $`\lt_2`$-pair are $`\upsilon`$-points; $`\mathrm{lh}(z) \lt u^\#`$ for $`z \in (u, u^\#)`$.
+- **COPY-EQ and LOC#** (proved given (HC), which is open). The downward copy is the image under the map of [FANFREE.md](FANFREE.md) §10.3:
+  $`\tilde X = T_{x\to u_m}[X]`$ (two coverings and isominimality, in the style of Carlson 2009, the proof of L.15.7). Then (LOC$`_T`$) holds there, with $`T_m`$ as the map.
+- **CROSS** (proved). Every $`\le_1`$- or $`\le_2`$-relation between a low point and a point above the copy is the same on both sides.
+- **ET-TF** (proved). Under (HC), with $`Y \subset [x, x^\#)`$ and $`x^\# \in P^*`$: every extension of the copy of $`Y`$ whose closure has no sum $`z + w`$ with $`z \ge u_m^\#`$ and
+  $`0 \lt w \lt u_m^\#`$, $`w \notin P^*`$, is realized over $`Y`$ below $`\nu`$ with the same diagram.
+- **Example TW** (proved). For $`a = \upsilon_\iota`$ with $`\iota = u_{m+1} + \omega^{u_m}`$: $`\mathrm{lh}(a) = \delta_\iota + \tilde x`$, but the upward copy $`a^{**}`$ has $`\mathrm{lh}(a^{**}) \lt \delta^{**} + x`$. So the
+  copy that Carlson's upward rule gives breaks a $`\le_1`$-relation that a translation needs.
+- **Not proved**: GHOST-TR as stated (a boundary case at $`u_m^\#`$; with the referee's fix, terms $`\ge u_m^\#`$ in place of $`\gt u_m^\#`$, it holds); TR-RED, "(TR$`_T`$) is
+  exactly a condition on reach tails" (the low part of a sum can lie outside the set); "Carlson's rules cannot give (TR$`_T`$)" (Example TW shows only that
+  one image fails); and (blocking point) "(R1)–(R3) below give $`\nu_C = \nu_S`$". For $`e = \max\tilde X + \tilde x`$ every extension must send $`e`$ to $`\max X + x \lt x^\#`$, below
+  the points of $`P^*`$ in $`[x^\#, \nu)`$, so (TR$`_T`$) fails; and (R3) does not control the sums $`B + q`$ with $`q \in P^* \cap x`$. The referee's repair (not written): a
+  reduction in the form of ET-TF, with the reach-tail condition for every nonzero low part.
+- **Open**: (R1) (HC) for some isominimal $`P^*`$; (R2) the local part when $`Y`$ meets $`[x^\#, \nu)`$ (it needs the maps beyond $`D^\#`$: (PROF) and zone C); (R3) a
+  "twisted" upward rule that moves the reach tails of the points above the copy; and $`\nu_C = \nu_S`$ itself.
+
+## 12. Status after the twelfth round
+
+- Wilken's claim in $`R_2^C`$: both halves hold on $`[0, \rho_{\Lambda_{\mathrm{fp}2}+\omega^2})`$, with the reaches there in closed form (§8). $`\Theta_1 = H(\theta)`$ and $`\Theta_A = H(\varepsilon_{\theta+\omega})`$
+  need only the lemma PAR-SAME.
+- The lower-bound program below $`\theta_0`$: the step below SRO is proved for every $`n`$ on 1,862 of the 3,166 sample matrices, given (REP) (§10); the native
+  codes are ordered on $`[\omega, \Phi_1)`$, so $`\iota(\mathrm{CH}_2) \ge \Phi_1`$ natively (§9).
+- The first inaccessible: $`H_m`$ is open; it would follow from $`\iota(\mathrm{CH}_2) \ge \theta_0`$.
+- Upper bounds: no InaccPsi bound is proved for any $`\iota(\mathrm{CH}_k)`$, $`m_F`$, $`x_F`$, $`C^*_3`$ or $`\nu_C`$.
+- $`\nu_C = \nu_S`$: given (HC), the downward copy is the copy by $`T`$, the local part holds, and every extension without such translations is realized
+  (§11); the reduction to (LOC$`_T`$) and (TR$`_T`$) does not work there. Left: (R1)–(R3) and a reduction in the form of ET-TF.
+
+## 13. Checks of the twelfth round
+
+Each run was under 60 seconds; none is a proof. Certificates count only when replayed.
+
+- Offsets and parameters (§8). $`E^{\Omega_1}`$ on 2,998 terms and 998,543 pairs: 0 order or domain failures; three deliberately broken versions all fail. $`B`$
+  keeps parameters on 3,352 pairs; PAR-ψ agrees with the Lean comparison on 5,400 pairs. PSI2⁺ and UNIF-G⁺ at 3 bases (57,360 comparisons): 0 mismatches.
+  The 24 named points are normal forms and strictly increasing (Python, and a Lean test file, green). The referee: the same results on a rerun with
+  four seeds; an own adversarial test with 31 countable atoms (1,793 terms, 558,245 pairs): 0 failures; PAR-ψ on 12,551 pairs: 0 disagreements; the Lean
+  file green again. PAR-SAME cannot be tested here, because Wilken's system has no implementation.
+- Codes (§9). 258,648 codes are L1p-free RF fan-free patterns; in 169,227 random steps every new parameter gets a host of the claimed kind, 0 failures;
+  11 certificates in the predicted direction, all replayed; none in 3 reverse searches. The referee: 19 searches against the claimed order found
+  nothing (each stopped at about 45 s), and 3 new certificates in the claimed direction were replayed. This is weak evidence: the searches are shallow,
+  and no copy, chain or rank step is run.
+- Shapes (§10). Every acceptance equals the concrete conv for $`j = 3, \ldots, 9`$; 752 random acceptances outside the sample are valid. The referee: $`j`$ up to 20
+  on all 234 + 178 matrices, 0 differences, and a planted mismatch is caught; SEQ-N on 116,197 comparisons with nested runs, 0 wrong; the $`t = 2`$
+  derivation up to $`n = 7`$ on all 140; 283 new random matrices valid up to $`j = 15`$.
+- $`\Sigma_2`$ (§11). The paper ran nothing. The referee's toy model of Cantor normal forms shows the failure of (TR$`_T`$) (6 of 6 forced images below $`x^\#`$) and
+  the gap in TR-RED.
+
+## 14. Open
+
+- The first inaccessible: $`H_m`$ (equivalently, some $`\iota(\mathrm{CH}_k) \ge \theta_0`$; enough: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, from a native family of codes of order type $`\theta_0`$, or a
+  map $`\nu`$ on all of $`D`$ with L1p-free values and $`\nu(s) \ll \nu(t)`$ at every step); UNIF-FS below SRO on the open classes of §10, and a proof of (REP);
+  $`\iota(A_n) \ge |\tau_n|`$.
 - Upper bounds: any InaccPsi bound for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, or for $`\nu_C`$; STEP-CH (on a class closed under $`\Phi`$, with collapse arguments
   below $`I_0`$); REL-SHARP; (HQ).
-- Names and offsets past $`\Lambda_{\mathrm{fp}}`$: (H2a) and (H2b) beyond $`\psi_{\Omega_2}(\Omega_2)`$, which give $`\Theta_1 = H(\theta)`$; the names of $`\Theta_A`$, $`\Theta_\delta`$,
-  $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$; whether $`\nu_C \lt \upsilon^*`$.
-- $`\nu_C = \nu_S`$: (LOC) and (TR) with a fixed finite set below the copy (§4); (PROF); the reaches at limits of fixed points of $`k`$; $`Y \subset S_\omega`$
-  beyond $`[x, x^\#)`$.
+- Names past $`\Lambda_{\mathrm{fp}2}`$: PAR-SAME (it gives $`\Theta_1 = H(\theta)`$, $`\Theta_A = H(\varepsilon_{\theta+\omega})`$, and the claim up to $`H(\varepsilon_{\theta+\omega} + \omega^2)`$); (H2a) and (H2b) beyond
+  $`\psi_{\Omega_2}(\Omega_2\cdot 2)`$, for the exact offsets below $`\Theta_1`$; the names of $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$; whether $`\nu_C \lt \upsilon^*`$.
+- $`\nu_C = \nu_S`$: (R1)–(R3) of §11, or a reduction in the form of ET-TF; (PROF); the reaches at limits of fixed points of $`k`$.
 - The rest of [COVER.md](COVER.md) §9.

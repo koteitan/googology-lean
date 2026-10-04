@@ -7,7 +7,7 @@
 合わせて 16 の論文から来ている（3 回目は §7、4 回目は §8）。どの論文も 1 回ずつ査読された。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した
 2 つの論文がその結果を証明し、それぞれが 1 回ずつ査読されたこと。査読者が未証明、または書いたままでは偽と判定した
 命題は、その論文のほかの部分が証明済みでも **未証明** に書く。16 の論文はどれも Wilken, JSL 72 (2007)、
-Carlson, AML 38 (1999)、Wilken, AML 45 (2006) を使わない。このページの結果はどれも Lean には無い。5 回目から 7 回目（どれも 4 つの論文）は次のページ [COVER-ja.md](COVER-ja.md)、8 回目から 10 回目は [FANFREE-ja.md](FANFREE-ja.md)、11 回目は [VEBLEN-ja.md](VEBLEN-ja.md) にある。6 回目は
+Carlson, AML 38 (1999)、Wilken, AML 45 (2006) を使わない。このページの結果はどれも Lean には無い。5 回目から 7 回目（どれも 4 つの論文）は次のページ [COVER-ja.md](COVER-ja.md)、8 回目から 10 回目は [FANFREE-ja.md](FANFREE-ja.md)、11 回目と 12 回目は [VEBLEN-ja.md](VEBLEN-ja.md) にある。6 回目は
 SKEL⁺ と SKEL$`^\omega`$ を完全に証明したので、下の §1、§7.1、§8 で概略の段階でしか証明されていなかった結果のいくつかは今は証明済み
 （[COVER-ja.md](COVER-ja.md) §5.1）。下の付け方はそれを書いている。
 
@@ -541,7 +541,8 @@ $`G_\zeta = [\upsilon^k_\zeta, \upsilon^k_{\zeta+1})`$。$`\mathrm{Pred}_1(b) = 
   1 つにまとめたもの。段 2 の各区間の最初の部分では、この命題は今は概略の水準で片付いた（RM-P、[FANFREE-ja.md](FANFREE-ja.md) §3）。さらに各区間の臨界な添字の最初の極限より下では証明済み（RM-D、[FANFREE-ja.md](FANFREE-ja.md) §7.3）、もっと大きい部分でも証明済み（RM#、
   [FANFREE-ja.md](FANFREE-ja.md) §10.3）。しかし帰着はいつも長いやり直しの点を要り、そこではどんな閉じた形も使えない（NEED-C、同じ所）。直接の
   $`\Sigma_2`$ の議論は、写しより上のどの拡張も長いやり直しの点を含めて合わせ、写しより下の有限集合を止めたままの局所的な部分を残す（査読 1 回、
-  [VEBLEN-ja.md](VEBLEN-ja.md) §4）。
+  [VEBLEN-ja.md](VEBLEN-ja.md) §4）。その集合を止めると、基の取り替えの区域で未解決の条件 (HC) のもとで局所的な部分は成り立つが、そこでは
+  平行移動が成り立たないので、その帰着は働かない（査読 1 回、[VEBLEN-ja.md](VEBLEN-ja.md) §11）。
 
 ### 8.4 $`\nu_P`$ より上の NOLIM
 
@@ -645,5 +646,5 @@ $`\chi_i \le_1 \chi_{K+1}`$、$`t_i \lt_2 d_i`$ を満たす配置 $`\chi_1 \lt 
   これは鎖の特徴づけで、場所は決めない。
 - $`[\delta_j\cdot\omega, \delta_{j+1})`$ にある候補での届く先。直した TOP-REG と REACH の査読。$`\nu_C`$ より上の $`R_2^C`$。$`\Lambda_\Gamma`$ より上の
   閉じた形と名前（$`\Theta_1`$、$`\Theta_A`$、$`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$、$`\nu_P`$。$`\Lambda'`$ までの閉じた形と $`\Theta_P`$ の名前は今は証明済み、
-  [FANFREE-ja.md](FANFREE-ja.md) §10.4。$`\Lambda_{\mathrm{fp}}`$ までの閉じた形も証明済みで、$`\Theta_1 = H(\theta)`$ は未解決の包の補題に帰着した、[VEBLEN-ja.md](VEBLEN-ja.md) §1）。GEN-EXT を越えた $`\upsilon^*`$ より上の名前。
+  [FANFREE-ja.md](FANFREE-ja.md) §10.4。$`\Lambda_{\mathrm{fp}}`$ までの閉じた形も証明済み、[VEBLEN-ja.md](VEBLEN-ja.md) §1。$`\Lambda_{\mathrm{fp}2}`$ までも証明済みで、$`\Theta_1`$ と $`\Theta_A`$ は未解決の補題 PAR-SAME に帰着した、§8）。GEN-EXT を越えた $`\upsilon^*`$ より上の名前。
 - 順序数とパターンの間の対応が初等再帰的であること（概略だけ）と、UNIF が全射であること。

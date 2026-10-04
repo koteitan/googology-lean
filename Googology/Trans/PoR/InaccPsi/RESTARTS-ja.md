@@ -8,7 +8,7 @@
 3 ページ目 [REACHES-ja.md](REACHES-ja.md) にある。$`\Lambda_\varepsilon`$ より先の結果（相対化したピン、$`\Theta_A`$ までの届く先、
 $`\Lambda_\varepsilon`$ までのすべての $`\upsilon`$ の点の名前）は 4 ページ目 [PINS-ja.md](PINS-ja.md) にある。骨組みが終わる所と、その上の入れ子の組の段の結果は
 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、被覆に対する最小性による結果と、どの可算順序数でも成り立つ $`R_2^S`$ の段 0 の記述は
-6 ページ目 [COVER-ja.md](COVER-ja.md) にあり、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md)、11 回目は 8 ページ目 [VEBLEN-ja.md](VEBLEN-ja.md) にある。
+6 ページ目 [COVER-ja.md](COVER-ja.md) にあり、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md)、11 回目と 12 回目は 8 ページ目 [VEBLEN-ja.md](VEBLEN-ja.md) にある。
 
 **記号。** $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$。点 $`\alpha`$ の届く先を $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$ と書く。
 やり直しの添字とは、$`\omega^2`$ の 0 でない倍数 $`\lambda`$ のこと。$`\lambda = \lambda_0 + \omega^e`$（カントール標準形の最後の項、
@@ -97,7 +97,8 @@ $`R_2^C`$ では NOLIM も成り立ち（査読 1 回、[COVER-ja.md](COVER-ja.m
 どのやり直しの点の届く先も、臨界な添字の極限を除いて分かる（[FANFREE-ja.md](FANFREE-ja.md) §7.3）。さらに（査読 1 回）届く先はずれ $`\rho^\rho`$ まで分かり、
 対応はより大きい部分で成り立つ。しかし帰着はいつも長いやり直しの点を要り、そこでは届く先のどんな閉じた形も使えないので、$`\nu_C = \nu_S`$ は未解決のまま
 （[FANFREE-ja.md](FANFREE-ja.md) §10.3）。$`\Sigma_2`$ の命題を直接扱うと（査読 1 回）、写しより上のどの拡張も、長いやり直しの点を含めて合わせられるが、
-写しより下の有限集合を止めたままの局所的な部分が残るので、$`\nu_C = \nu_S`$ はまだ未解決（[VEBLEN-ja.md](VEBLEN-ja.md) §4）。
+写しより下の有限集合を止めたままの局所的な部分が残るので、$`\nu_C = \nu_S`$ はまだ未解決（[VEBLEN-ja.md](VEBLEN-ja.md) §4）。その集合を止めると、写しが正確に分かる区域で
+帰着が働かない（[VEBLEN-ja.md](VEBLEN-ja.md) §11）。
 $`R_2^S`$ では、どの可算順序数でも、どの組も標準の組か 2 つのやり直しの点を結ぶ組なので、FRAG2 は弱い形「どの組も 2 つの
 $`\upsilon`$ の点を結ぶ」で成り立つ（定理 SKEL$`^\infty`$、査読 1 回、[COVER-ja.md](COVER-ja.md) §5.1。前は $`T_\omega`$ より下で、概略だけ）。
 

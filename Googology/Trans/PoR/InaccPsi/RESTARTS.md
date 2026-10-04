@@ -9,7 +9,7 @@ refuted" by its referee; it is not counted as proved. The results above $`\Xi_\o
 skeleton, the least chain of length 3) are on the third page [REACHES.md](REACHES.md), and those beyond $`\Lambda_\varepsilon`$
 (relativized pins, the reaches up to $`\Theta_A`$, the names of all $`\upsilon`$-points up to $`\Lambda_\varepsilon`$) on the fourth page
 [PINS.md](PINS.md), and those where the skeleton ends, with the levels of nested pairs above it, on the fifth page [BREAK.md](BREAK.md), and the results by covering minimality, and the
-level-0 description of $`R_2^S`$ at every countable ordinal, on the sixth page [COVER.md](COVER.md), and the eighth to tenth rounds on the seventh page [FANFREE.md](FANFREE.md), and the eleventh on the eighth page [VEBLEN.md](VEBLEN.md).
+level-0 description of $`R_2^S`$ at every countable ordinal, on the sixth page [COVER.md](COVER.md), and the eighth to tenth rounds on the seventh page [FANFREE.md](FANFREE.md), and the eleventh and twelfth on the eighth page [VEBLEN.md](VEBLEN.md).
 
 **Notation.** $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$. The reach of a point $`\alpha`$ is
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$. A restart index is a nonzero multiple $`\lambda`$ of $`\omega^2`$. Write
@@ -104,7 +104,8 @@ limit of "critical" indices of each segment, and the reach of every restart belo
 Then (1 review) the reaches are known up to offset $`\rho^\rho`$ and the correspondence holds on a larger part, but the reduction always needs long restarts, where no closed
 form of the reaches applies, so $`\nu_C = \nu_S`$ stays open ([FANFREE.md](FANFREE.md) §10.3). Working with the $`\Sigma_2`$ statement directly (1 review), every
 extension above the copy, the long restarts included, is matched, but a local part with a fixed finite set below the copy is left, so
-$`\nu_C = \nu_S`$ is still open ([VEBLEN.md](VEBLEN.md) §4).
+$`\nu_C = \nu_S`$ is still open ([VEBLEN.md](VEBLEN.md) §4). With that set held fixed, the reduction fails on the zone where the copy is known
+exactly ([VEBLEN.md](VEBLEN.md) §11).
 In $`R_2^S`$, at every countable ordinal, every pair is a standard pair or joins two restarts, so FRAG2 holds in the weaker form
 "every pair joins two $`\upsilon`$-points" (Theorem SKEL$`^\infty`$, 1 review, [COVER.md](COVER.md) §5.1; before, below $`T_\omega`$ and at outline level only).
 

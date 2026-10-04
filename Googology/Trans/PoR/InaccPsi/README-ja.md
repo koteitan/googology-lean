@@ -71,9 +71,9 @@ $`\sup_k \psi_{\Omega_1}(I_k) = \sup_k \psi_{\Omega_1}(\varepsilon_{I_k+1}) = \p
 $`\Phi_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$（$`\theta = \psi_{\Omega_2}(\Omega_\omega)`$）まで成り立つ。$`\Phi_1`$ は
 $`\alpha \mapsto \Xi_\alpha`$ の最初の不動点で、$`\Xi_\alpha`$ は $`\iota \mapsto \upsilon_\iota`$ の $`\alpha`$ 番目の不動点（§3、[RESTARTS-ja.md](RESTARTS-ja.md)、
 [REACHES-ja.md](REACHES-ja.md)）。今は $`\Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$ まで成り立ち
-（[PINS-ja.md](PINS-ja.md) §3）、次に $`\rho_{\Lambda'+\omega^2}`$ まで成り立ち（査読 1 回、[FANFREE-ja.md](FANFREE-ja.md) §10.4）、今は
-$`\rho_{\Lambda_{\mathrm{fp}}+\omega^2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\psi_{\Omega_2}(\Omega_2)+1} + \omega^{\theta+2})`$ まで成り立つ。$`\psi_{\Omega_2}(\Omega_2)`$ は $`\Omega_1`$ より上の $`\alpha \mapsto \Gamma_\alpha`$ の
-最小の不動点（査読 1 回、[VEBLEN-ja.md](VEBLEN-ja.md) §1。査読者たちの注意：主張にとって新しい事実はこの点の位置で、核の側はもっと先まで知られていた）。核の側だけなら $`R_2^C`$ でさらに先、$`[0, \nu_C]`$ で証明済み。$`\nu_C \gt \nu_P`$ は $`R_2^C`$ が骨組み型でなくなる最初の点
+（[PINS-ja.md](PINS-ja.md) §3）、次に $`\rho_{\Lambda'+\omega^2}`$（[FANFREE-ja.md](FANFREE-ja.md) §10.4）と $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$（[VEBLEN-ja.md](VEBLEN-ja.md) §1）まで成り立ち、今は
+$`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\psi_{\Omega_2}(\Omega_2\cdot 2)+1} + \omega^{\theta+2})`$ まで成り立つ。$`\psi_{\Omega_2}(\Omega_2\cdot 2)`$ は $`\Omega_1`$ より上の $`\alpha \mapsto \Gamma_\alpha`$ の
+2 つ目の不動点（査読 1 回、[VEBLEN-ja.md](VEBLEN-ja.md) §8。査読者たちの注意：主張にとって新しい事実はこの点の位置で、核の側はもっと先まで知られていた）。核の側だけなら $`R_2^C`$ でさらに先、$`[0, \nu_C]`$ で証明済み。$`\nu_C \gt \nu_P`$ は $`R_2^C`$ が骨組み型でなくなる最初の点
 （[BREAK-ja.md](BREAK-ja.md) §2）。
 
 ## 3. 証明済みのこと
@@ -120,16 +120,20 @@ $`R_2^S`$ の形と 1 つの止める命題に帰着した。その §5 は 6 �
 写す写像があれば、最初の扇に到達不能基数が要ることが出る。$`\nu_C`$ より下のどのやり直しの点の届く先も、「臨界な」添字の極限を除いて
 分かり、区間の条件 SC はそのような最初の極限まで証明済みだが、$`\nu_C = \nu_S`$ は未解決のまま。$`\mathrm{CH}_2`$ の点の InaccPsi による上からの
 評価は証明されておらず、そのような評価は、ちょうど $`\nu_C`$ より上の 1 点での 3 つの関係。同じページに 10 回目もある（どれも査読 1 回）：
-$`R_2^C`$ で主張は $`\Lambda' = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{\Omega_1+1}+1}})`$ として $`\rho_{\Lambda'+\omega^2}`$ まで成り立ち、そこのどのやり直しの点の届く先も閉じた形で
+$`R_2^C`$ で主張は $`\rho_{\Lambda'+\omega^2}`$ まで成り立ち、そこのどのやり直しの点の届く先も閉じた形で
 書け、$`\Theta_P`$ に名前が付いた。SRO より下の段は標本の 3,166 個のうち 874 個ですべての $`n`$ で証明済み。素の符号は Bachmann–Howard 順序数まで
 順序が証明された。$`\nu_C`$ より下の届く先はずれ $`\rho^\rho`$ まで分かり（$`\upsilon`$ の上の Klammer の階層）、SC は各区間のより大きい部分で成り立つ。
 しかし SC への帰着はいつも長いやり直しの点を要り、そこでは届く先のどんな閉じた形も使えないので、$`\nu_C = \nu_S`$ は未解決のまま。8 ページ目 [VEBLEN-ja.md](VEBLEN-ja.md) に 11 回目がある（どれも査読 1 回）：
-Wilken の包の段を Veblen 関数と $`\Gamma`$ に合わせたので、$`R_2^C`$ で主張は $`\Lambda_{\mathrm{fp}} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\psi_{\Omega_2}(\Omega_2)+1})`$ として $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$ まで成り立つ。
+Wilken の包の段を Veblen 関数と $`\Gamma`$ に合わせたので、$`R_2^C`$ で主張は $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$ まで成り立つ。
 $`\nu_C`$ より下では、やり直しの点の Klammer の形がその InaccPsi の名前から読める。$`\Theta_1 = H(\theta)`$ は未解決の包の補題 1 つに帰着した。SRO より下の段は
 標本の 3,166 個のうち 1,442 個ですべての $`n`$ で証明済み。素の符号は $`\upsilon_1`$ より下のすべての添字と 1 段の参照で順序が証明され、だから
 $`\iota(\mathrm{CH}_2) \ge \upsilon_2\cdot\upsilon_1`$。$`\nu_C = \nu_S`$ については、Carlson の 2-反映が正確な写しを与え、写しより上のどの拡張も合わせられるが、2 つの局所的な
-命題への帰着には止める穴があるので、$`\nu_C = \nu_S`$ は未解決のまま。$`C^*_3`$ は $`\omega_1^{CK}`$ より下（Carlson 2009,
-Thm 15.2）だが、InaccPsi の項による上からの評価も名前もまだ無い。$`R_2^C`$ では $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$ より上（核の側は $`\nu_C`$ まで証明済み）、$`R_2^S`$ では
+命題への帰着には止める穴があるので、$`\nu_C = \nu_S`$ は未解決のまま。同じページに 12 回目もある（どれも査読 1 回）：主張は Γ の 2 つ目の
+不動点までのずれで $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$ まで成り立つ。$`\Theta_1`$ と $`\Theta_A`$ の名前には、パラメータについての短い未解決の補題 PAR-SAME が 1 つだけ要る
+（それが無いと証明に止める穴がある）。SRO より下の段は標本の 3,166 個のうち 1,862 個で、プログラムの確かめた性質 (REP) のもとで、すべての $`n`$ で
+証明済み。素の符号は $`\Phi_1`$ より下のすべての添字で順序が証明され、だから $`\iota(\mathrm{CH}_2) \ge \Phi_1`$。$`\nu_C = \nu_S`$ については、写しが正確に分かる区域で、正した
+帰着が働かないので、未解決のまま。$`C^*_3`$ は $`\omega_1^{CK}`$ より下（Carlson 2009,
+Thm 15.2）だが、InaccPsi の項による上からの評価も名前もまだ無い。$`R_2^C`$ では $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$ より上（核の側は $`\nu_C`$ まで証明済み）、$`R_2^S`$ では
 $`\upsilon_{\omega^3}`$ より上で、どちらの半分も未解決。
 
 **Lean**（このディレクトリの 5 つのファイル。ライブラリ全体と一緒にビルドした）：
@@ -256,7 +260,9 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   証明済み（[FANFREE-ja.md](FANFREE-ja.md) §10.3）。しかし SC への帰着は、届く先のどんな閉じた形も使えない長いやり直しの点での SC をいつも要る（NEED-C、同じ所）。
   $`\Sigma_2`$ の命題を直接扱うと（査読 1 回、[VEBLEN-ja.md](VEBLEN-ja.md) §4）：isominimal な集合の上では Carlson の 2-反映が正確な写しを与え、写しより上のどの
   拡張も、長いやり直しの点を含めて合わせられる（TOP）。残るのは、写しより下の有限集合を止めたままの、局所的な基の取り替えと平行移動（その
-  集合無しの 2 つへの論文の帰着には止める穴がある）。
+  集合無しの 2 つへの論文の帰着には止める穴がある）。その集合を止めると（査読 1 回、[VEBLEN-ja.md](VEBLEN-ja.md) §11）：未解決の条件 (HC) のもとで、
+  下向きの写しは SC の基の取り替えによる写しで、局所的な部分が成り立つ。しかしそこでは平行移動が成り立たないので、この帰着は働かない。
+  残り：(HC)、その区域より先の局所的な部分、「ねじれた」上向きの規則。
 - **補題 UPG。** 一致する段では、$`\alpha`$ 未満のどの $`\gamma`$ も $`R_2^C`$ で $`\alpha`$ の isominimal な部分集合に入るなら、
   $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$（$`\alpha = \kappa_C`$ と $`\alpha = \upsilon_{\omega\cdot\omega}`$ で成り立つ）。
 - **KAPPA と CORE-EQ。** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$、$`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$。だから
@@ -343,7 +349,7 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
   さらに（どれも査読 1 回、[FANFREE-ja.md](FANFREE-ja.md) §7.2 と §7.4）：配置 L1p の無い扇の無いパターンはどれも $`\iota(\mathrm{CH}_2)`$ より下にあり、
   $`\iota(\mathrm{CH}_2) \lt t`$ は、$`t`$ より下のある 1 点 $`a`$ が $`a \lt_2 b`$、$`b \lt c`$ となる組 $`c \lt_2 d`$、$`a \le_1 d`$ を持つことと同値。
   さらに（査読 1 回、[FANFREE-ja.md](FANFREE-ja.md) §10.2）：素の符号により $`\iota(\mathrm{CH}_2)`$ は Bachmann–Howard 順序数以上（既に知られた $`\iota(\mathrm{CH}_2) \gt \nu_C`$ よりずっと弱い）。
-  さらに（査読 1 回、[VEBLEN-ja.md](VEBLEN-ja.md) §2）：$`\upsilon_2\cdot\upsilon_1`$ 以上。
+  さらに（査読 1 回、[VEBLEN-ja.md](VEBLEN-ja.md) §2）：$`\upsilon_2\cdot\upsilon_1`$ 以上。さらに（査読 1 回、[VEBLEN-ja.md](VEBLEN-ja.md) §9）：$`\Phi_1`$ 以上。
   以前から：$`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$。
 - **補題 TOP2**（2026-10、査読 1 回）。どの $`\alpha \lt m_3`$ にも、$`\alpha \lt x \lt y \lt m_3`$ となる長さ 2 の鎖 $`x \lt_2 y`$ がある。
   だから $`m_3`$ は長さ 2 の鎖の極限で、FRAG なしで $`m_3 \ge \upsilon_{\omega\cdot\omega}`$。
@@ -423,15 +429,15 @@ $`\beta_0`$ とする（等しければ $`\beta_0 = \infty`$）。$`\beta \ge \k
 
 **証明されていないこと：**
 
-- **$`R_2^C`$ で $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$ より上、$`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上での主張**、両方の半分。$`\Theta_A`$ より上の
-  やり直しの届く先（$`\Theta_A`$ そのものでの届く先は今は分かっている）と、[VEBLEN-ja.md](VEBLEN-ja.md) §7、[COVER-ja.md](COVER-ja.md) §9、[BREAK-ja.md](BREAK-ja.md) §10、[PINS-ja.md](PINS-ja.md) §6、[REACHES-ja.md](REACHES-ja.md) §7、[RESTARTS-ja.md](RESTARTS-ja.md) §6 の残り。
+- **$`R_2^C`$ で $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$ より上、$`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上での主張**、両方の半分。$`\Theta_A`$ より上の
+  やり直しの届く先（$`\Theta_A`$ そのものでの届く先は今は分かっている）と、[VEBLEN-ja.md](VEBLEN-ja.md) §14、[COVER-ja.md](COVER-ja.md) §9、[BREAK-ja.md](BREAK-ja.md) §10、[PINS-ja.md](PINS-ja.md) §6、[REACHES-ja.md](REACHES-ja.md) §7、[RESTARTS-ja.md](RESTARTS-ja.md) §6 の残り。
 - **$`R_2^S = R_2^C`$**：$`\le_1`$ の逆向き $`C \Rightarrow S`$ は、$`\kappa_C`$ より上の後続の段で $`\alpha \notin G_C`$ のとき未解決。
   $`\le_2`$ の逆向きは、(ii) の型の段で未解決（$`\Pi_2`$ 文を上向きに移すことが要るが、上向きの 2-反映でも持ち上げでも
   得られない。いまは段ごとに 1 つの組 $`(a^*, \beta)`$ の話で、$`\kappa_C`$ より下では予想 CORE-2 と同値。残りは PIN と LOW）。
   Σ2-GAP、INC、W(C)、(R)、AGR、$`\beta_0 = \infty`$ も未解決。定理 CC とすべての証明書は $`R_2^C`$ の話。
 - **$`\theta_0`$ より下の下界**（査読：この目標に向けた止める穴。本文の誤りではない。$`V_3`$ より上の標本の決まらない 26 個の極限の
-  跳びは今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §1。SRO より下の段は今は標本の 3,166 個のうち 1,442 個で、すべての $`n`$ で証明済み、
-  [FANFREE-ja.md](FANFREE-ja.md) §7.1、§10.1、§13.3）：$`\theta_0`$ 未満のすべての
+  跳びは今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §1。SRO より下の段は今は標本の 3,166 個のうち 1,862 個で、(REP) のもとですべての $`n`$ で証明済み、
+  [FANFREE-ja.md](FANFREE-ja.md) §7.1、§10.1、[VEBLEN-ja.md](VEBLEN-ja.md) §3、§10）：$`\theta_0`$ 未満のすべての
   $`\varepsilon`$ 数の項から SRO 未満の標準形のトリオ行列への順序を保つ埋め込み $`\mu`$ と、SRO 未満のすべての行列での
   S-RED の局所的な段。$`G_B`$ の外に 4 つの族がある：(M1) 項の中の非可算な $`\kappa`$、$`c`$、$`g`$。(M2)
   $`\Omega_{\xi+1}`$ のような後続の添字。(M3) $`\Omega_{\Omega_\omega}`$ のような非可算な添字。(M4) $`\psi_{\Omega_1}(\Omega_\omega)`$ より下の土台
@@ -509,9 +515,9 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       CORE-C$`^A`$。[PINS-ja.md](PINS-ja.md)）
     - $`R_2^C`$ で $`\rho_{\Lambda'+\omega^2}`$ まで、そこの届く先の閉じた形と $`\Theta_P`$ の名前とともに — 証明済み（NAME-OFFSET-Z、STRUCT′、THETA-P。
       [FANFREE-ja.md](FANFREE-ja.md) §10.4）
-    - $`R_2^C`$ で $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$ まで、そこの届く先の閉じた形とともに — 証明済み（VEB-THETA、GAM-THETA、EXACT-G、PSI2、
-      NAME-OFFSET-G、STRUCT″。[VEBLEN-ja.md](VEBLEN-ja.md) §1）。$`\Theta_1 = H(\theta)`$ として $`H(\theta) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$ まで — 包の補題
-      (H2a)、(H2b) に帰着（THETA1-RED、H3）。補題は未解決
+    - $`R_2^C`$ で $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$ まで、そこの届く先の閉じた形とともに — 証明済み（VEB-THETA、GAM-THETA′、EXACT-G⁺、PSI2⁺、
+      NAME-OFFSET-G⁺、STRUCT″。[VEBLEN-ja.md](VEBLEN-ja.md) §1、§8）。$`\Theta_1 = H(\theta)`$ と $`\Theta_A = H(\varepsilon_{\theta+\omega})`$ として $`H(\varepsilon_{\theta+\omega} + \omega^2)`$ まで — パラメータに
+      ついての補題 PAR-SAME に帰着（L3、B-PAR、PAR-ψ、H3）。補題は未解決
     - $`R_2^C`$ の核は $`\rho_{\Theta_{d\omega}}`$ までと、$`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ で — 証明済み（CORE-C$`^{d\omega}`$、CAP、NU-CT。[BREAK-ja.md](BREAK-ja.md)）
   - **B** 上界 $`\mathrm{Core}(R_2^+) \subseteq \psi_{\Omega_1}(I_\omega)`$ — 未解決
     - B0 最小の鎖への帰着（定理 CC） — $`R_2^C`$ で証明済み
@@ -546,7 +552,7 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       Veblen 関数と $`\Gamma`$、VEB-THETA と GAM-THETA、[VEBLEN-ja.md](VEBLEN-ja.md) §1）
     - A2 上限までの $`R_2^+`$ の $`\le_1`$、$`\le_2`$ の構造定理（Wilken 2021, Thm 4.2 の類似）。
       [R2PLUS-ja.md](../../BMS/PoR/Trio/R2PLUS-ja.md) の結果は、$`\upsilon_{\omega^3}`$ より下でのこの定理。定理 BLK$`^O`$ が
-      正確な届く先とともに $`\Lambda_\varepsilon`$ まで、定理 EXACT-A が $`\Theta_A`$ まで延ばし（[PINS-ja.md](PINS-ja.md)）、STRUCT′ が $`\rho_{\Lambda'+\omega^2}`$ まで名前で書き（[FANFREE-ja.md](FANFREE-ja.md) §10.4）、STRUCT″ が $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$ まで（[VEBLEN-ja.md](VEBLEN-ja.md) §1）、KV-NAMES が
+      正確な届く先とともに $`\Lambda_\varepsilon`$ まで、定理 EXACT-A が $`\Theta_A`$ まで延ばし（[PINS-ja.md](PINS-ja.md)）、STRUCT′ が $`\rho_{\Lambda'+\omega^2}`$ まで名前で書き（[FANFREE-ja.md](FANFREE-ja.md) §10.4）、STRUCT″ が $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$ まで（[VEBLEN-ja.md](VEBLEN-ja.md) §8）、KV-NAMES が
       $`\nu_C`$ より下の Klammer の届く先を名前から読み（同じ所）、$`\Theta_A`$ での値と
       目印 $`\Theta_\delta`$、$`\Theta_{d\omega}`$（[BREAK-ja.md](BREAK-ja.md) §4）、定理 SKEL が $`R_2^S`$ で $`[0, \nu_P)`$ で与え（[REACHES-ja.md](REACHES-ja.md)）、
       SKEL⁺ が $`\nu`$ まで与え（[BREAK-ja.md](BREAK-ja.md) §2）、$`R_2^S`$ の段 0 の記述はどの可算順序数でも成り立つ（SKEL$`^\infty`$、[COVER-ja.md](COVER-ja.md) §5.1）。入れ子の組のどの段でも最初のブロック（LIFT-0、
@@ -563,7 +569,8 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       命題（EQ）で、最初のブロックで証明済みの区間の条件 SC から出る（[COVER-ja.md](COVER-ja.md) §6.3）。SC は各区間の最初の部分で
       概略の水準で成り立ち（[FANFREE-ja.md](FANFREE-ja.md) §3）、今は臨界な添字の最初の極限より下（[FANFREE-ja.md](FANFREE-ja.md) §7.3）と、より大きい部分（[FANFREE-ja.md](FANFREE-ja.md) §10.3）で証明済み。
       残り：帰着がいつも要る、長いやり直しの点での SC。$`\Sigma_2`$ の形で直接扱うと、写しより上のどの拡張も合わせられる（TOP、[VEBLEN-ja.md](VEBLEN-ja.md) §4）。
-      そこでの残り：写しより下の有限集合を止めたままの、局所的な基の取り替えと平行移動
+      そこでの残り：写しより下の有限集合を止めたままの、局所的な基の取り替えと平行移動。局所的な部分は未解決の条件 (HC) のもとで基の
+      取り替えの区域で成り立つが、そこでは平行移動が成り立たない（[VEBLEN-ja.md](VEBLEN-ja.md) §11）
     - A7 $`R_1^+`$ の相対化したパターンと、順序数とパターンの間の一様な対応（Wilken が予告） — 証明済み（RC-PIN、RC、U、
       UNIF。[PINS-ja.md](PINS-ja.md) §1。閉包は有限（CL-FIN）で、具体的なピンのパターン（EXPL）、[BREAK-ja.md](BREAK-ja.md) §4）。
       対応が初等再帰的であること — 概略だけ
@@ -573,8 +580,8 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       MU-0 と MU-B0 も（段 0 の (M4)。核には何も足さない）。残り：段 1 以上の (M4)、(M1)–(M3)、SRO 未満での局所的な段
       — 未解決（これらがあれば最初の扇に到達不能基数が要る、RED-HM、[COVER-ja.md](COVER-ja.md) §5.3）。SRO でのいちばん上の段と、いくつかの
       一様な段の族 — 具体的なパターンについて証明済み（[COVER-ja.md](COVER-ja.md) §6.1）。$`V_3`$ より上の標本の決まらない
-      26 個の極限の跳び — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §1）。SRO より下の標本の 3,166 個のうち 1,442 個（IDX-ADD を含む）での、すべての $`n`$ での段 — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §7.1、§10.1、§13.3）。Bachmann–Howard
-      順序数までの素の符号、そして $`\upsilon_1`$ より下のすべての添字と 1 段の参照での素の符号（$`\iota(\mathrm{CH}_2) \ge \upsilon_2\cdot\upsilon_1`$） — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §10.2、§13.2）。
+      26 個の極限の跳び — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §1）。SRO より下の標本の 3,166 個のうち 1,862 個（IDX-ADD を含む）での、すべての $`n`$ での段 — プログラムの確かめた性質 (REP) のもとで証明済み（[FANFREE-ja.md](FANFREE-ja.md) §7.1、§10.1、[VEBLEN-ja.md](VEBLEN-ja.md) §3、§10）。Bachmann–Howard
+      順序数までの素の符号、そして $`\upsilon_1`$ より下のすべての添字と 1 段の参照での、さらに入れ子の参照と最初のブロックで $`\Phi_1`$ より下での素の符号（$`\iota(\mathrm{CH}_2) \ge \Phi_1`$） — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §10.2、[VEBLEN-ja.md](VEBLEN-ja.md) §2、§9）。
       SRO より下のすべての行列での段と、すべての項の上の行列を使わない写像 — 未解決（値が L1p の無いパターンなら $`\iota(\mathrm{CH}_2) \ge \theta_0`$ が出る、[FANFREE-ja.md](FANFREE-ja.md) §7.2）
     - L-CERT $`[\theta_0, \psi_{\Omega_1}(I_0))`$ とその上 — 未解決
     - L-BMS $`\Phi_3`$ を通す道 — 止まっている：DOM₂ により、長さ 3 の鎖の無い $`\Phi_3`$ のパターンは $`m_3`$ より下にとどまり、
@@ -737,7 +744,7 @@ $`m_3 \lt \min C^*_3`$ より下。以前の 8 個の証明書は、もう要ら
 $`R_2^+`$ そのものについては、Lean には何も無い。$`\upsilon_{\omega^3}`$ より上の結果は 2 ページ目
 [RESTARTS-ja.md](RESTARTS-ja.md) に、$`\Xi_\omega`$ より上の結果は 3 ページ目 [REACHES-ja.md](REACHES-ja.md) に、$`\Lambda_\varepsilon`$ より先の
 結果は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、骨組みが終わる所とその上の段の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、
-被覆に対する最小性による結果と段 0 の記述（5 回目から 7 回目）は 6 ページ目 [COVER-ja.md](COVER-ja.md) に、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md)、11 回目は 8 ページ目 [VEBLEN-ja.md](VEBLEN-ja.md) にある。
+被覆に対する最小性による結果と段 0 の記述（5 回目から 7 回目）は 6 ページ目 [COVER-ja.md](COVER-ja.md) に、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md)、11 回目と 12 回目は 8 ページ目 [VEBLEN-ja.md](VEBLEN-ja.md) にある。
 
 ## 8. 文献
 
