@@ -212,7 +212,7 @@ $`\Phi_3`$ の文章の定義とは、変換器の README と [ALGORITHM-2.md](.
 | 0 列目 | 635 | 206 | 429 個が未解決（自分を参照する型） |
 | $`\Omega`$ の段の構造の中 | 1,347 | 0 | 未解決。分解は見つかっていない |
 
-  証明済みの 480 個には、LOW のもとで証明済みの 21 個を含む。（今は 874 個が証明済み、§10.1。さらに 1,442 個、[VEBLEN-ja.md](VEBLEN-ja.md) §3。さらにプログラムの確かめた性質のもとで 1,862 個、[VEBLEN-ja.md](VEBLEN-ja.md) §10。さらにその性質が証明されて 1,987 個、[THETA-ja.md](THETA-ja.md) §3。）足りないものは部分ごとに：$`\Phi_3`$ がどの文脈でも添字の項を 1 つのまとまりと
+  証明済みの 480 個には、LOW のもとで証明済みの 21 個を含む。（今は 874 個が証明済み、§10.1。さらに 1,442 個、[VEBLEN-ja.md](VEBLEN-ja.md) §3。さらにプログラムの確かめた性質のもとで 1,862 個、[VEBLEN-ja.md](VEBLEN-ja.md) §10。さらにその性質が証明されて 1,987 個、[THETA-ja.md](THETA-ja.md) §3。さらに 2,330 個、[THETA-ja.md](THETA-ja.md) §9.3。）足りないものは部分ごとに：$`\Phi_3`$ がどの文脈でも添字の項を 1 つのまとまりと
   して扱うこと。変わった和の項の写しを、前の決まった和の項と交互に並べること（引数付きの CODE の補題で、§2 と同じ種類の穴）。自分を
   参照する型のすべての $`n`$ での形。最後の部分（POINT-REF、LONG-K、SRO そのものの型を含む）では、どんな分解も。
 
@@ -488,7 +488,7 @@ $`\Lambda' = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{
 - **$`\iota(\mathrm{CH}_2)`$**（証明済み）。$`\iota(\mathrm{CH}_2) \gt \iota(\Phi_3(\mathrm{SRO})) \gt \nu_C \gt \nu_P \gt \rho_{\Theta_1} \ge \rho_{\Lambda'+\omega^2}`$。$`\nu_C`$ より下には §7.4 の 3 つの関係を持つ点が
   無いので、この構造からは $`\iota(\mathrm{CH}_2)`$ の評価は出ない。予想：$`\iota(\mathrm{CH}_2) \gt \theta_0`$。
 - **未解決**：$`\Gamma_{\rho+1}`$ までのずれ（補題 VEB-THETA をもう 1 つと、Veblen の形の一様な比較）。$`\Theta_1 = H(\theta)`$（写像 STEP と LOW-STEP を 1 つ下の段へ）。
-  $`\Theta_1`$、$`\Theta_A`$、$`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$、$`\nu_P`$ の名前。$`\nu_C`$ の InaccPsi による上からの評価（あれば $`[0, \nu_C]`$ での主張が出る）。（今は $`\Gamma_{\rho+1}`$ より先の $`\psi_{\Omega_2}(\Omega_2) + 1`$ までのずれが証明済みで、$`\Theta_1 = H(\theta)`$ は包の補題 1 つに帰着した。[VEBLEN-ja.md](VEBLEN-ja.md) §1。さらに $`\psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$ までのずれが証明済みで、$`\Theta_1`$ と $`\Theta_A`$ はパラメータについての補題 1 つに帰着した。[VEBLEN-ja.md](VEBLEN-ja.md) §8。さらにその補題 PAR-SAME が証明され、$`\Theta_1`$ と $`\Theta_A`$ に名前が付き、主張は $`\psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ まで成り立つ。[THETA-ja.md](THETA-ja.md) §1。）
+  $`\Theta_1`$、$`\Theta_A`$、$`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$、$`\nu_P`$ の名前。$`\nu_C`$ の InaccPsi による上からの評価（あれば $`[0, \nu_C]`$ での主張が出る）。（今は $`\Gamma_{\rho+1}`$ より先の $`\psi_{\Omega_2}(\Omega_2) + 1`$ までのずれが証明済みで、$`\Theta_1 = H(\theta)`$ は包の補題 1 つに帰着した。[VEBLEN-ja.md](VEBLEN-ja.md) §1。さらに $`\psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$ までのずれが証明済みで、$`\Theta_1`$ と $`\Theta_A`$ はパラメータについての補題 1 つに帰着した。[VEBLEN-ja.md](VEBLEN-ja.md) §8。さらにその補題 PAR-SAME が証明され、$`\Theta_1`$ と $`\Theta_A`$ に名前が付き、主張は $`\psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ まで成り立つ。[THETA-ja.md](THETA-ja.md) §1。さらに $`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$、$`\nu_P`$ に名前が付き、主張は $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$ まで成り立つ。[THETA-ja.md](THETA-ja.md) §9.1。）
 
 ## 11. 10 回目のあとの状況
 
@@ -520,4 +520,4 @@ $`\Lambda' = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{
 
 ## 13. 未解決
 
-あとの回でこの一覧は変わった。今の一覧は [THETA-ja.md](THETA-ja.md) §7 にある。
+あとの回でこの一覧は変わった。今の一覧は [THETA-ja.md](THETA-ja.md) §9.7 にある。

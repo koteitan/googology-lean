@@ -1,14 +1,14 @@
 [← Back](README.md) | [English](THETA.md) | [Japanese](THETA-ja.md)
 
-# $`R_2^+`$, the thirteenth round: PAR-SAME, the claim up to $`\upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, modules for the fixed points of $`\upsilon`$, (REP), and (HC)
+# $`R_2^+`$, the thirteenth and fourteenth rounds: PAR-SAME, the names up to $`\nu_P`$, the claim up to $`X_3`$, modules for the fixed points of $`\upsilon`$, (REP), (HC) and twisted copies
 
 This page continues [VEBLEN.md](VEBLEN.md). The status words are those of [README.md](README.md) §3: **proved** means that an
-independent referee found the result proved with no fatal or blocking point. §1–§7 are the thirteenth round (2026-10, four papers). §8 holds two
+independent referee found the result proved with no fatal or blocking point. §1–§7 are the thirteenth round (2026-10, four papers), and §9 is the fourteenth round (2026-10, four papers). §8 holds two
 parts that were moved here from the README to keep it short: the summary of the rounds 1–12, and the results on $`R_2^S`$ against $`R_2^C`$.
 A statement with a blocking point against it is listed under **Not proved**; a statement that its referee found to restate the target, or to be
 a remark, is listed under **Not counted**. A certificate counts only when it was replayed. **Proved as a transfer** means: a refereed proof
 repeated with one map, base or index range changed, where the paper names every place that needs an extra fact and the referee accepted
-each of them (the same standard as L3 and H3 of [VEBLEN.md](VEBLEN.md) §1 and §8).
+each of them (the same standard as L3 and H3 of [VEBLEN.md](VEBLEN.md) §1 and §8). The transfers of §1 are written out as full proofs in §9.1.
 
 Every paper was refereed once, so a result here has 1 review unless a count is given. None of the papers uses Wilken, JSL 72 (2007), Carlson,
 AML 38 (1999), Wilken, AML 45 (2006), or the equivalence that Carlson 2009, p. 97, announces. No Lean file was added: one paper (§1) checked a Lean
@@ -53,7 +53,7 @@ $`\iota'(\eta)`$ the order type of $`D' \cap \eta`$. $`X_2 = \psi_{\Omega_1}(\Om
   the other bases proved as a transfer, SLOW$`_\zeta`$, which the referee finds to be an index shift). A map $`E^{G(\zeta)}`$ from the InaccPsi normal forms
   with values in $`[G(\zeta), G(\zeta+1))`$ into $`\bar T^{G(\zeta)}`$: strictly increasing, every node in its domain, with the maximal subterms below $`G(\zeta)`$ as its
   parameters. **Lemma S** (proved as a transfer of SUBST-ISO): substitution at an uncountable base.
-- **Theorem U\*** (proved, resting on Lemma S at the base $`\theta`$; the referee: the induction must run on $`\lambda`$, as in R-CAP, and one bound $`\kappa`$ must be
+- **Theorem U\*** (proved, resting on Lemma S at the base $`\theta`$, which is now proved in full, §9.1; the referee: the induction must run on $`\lambda`$, as in R-CAP, and one bound $`\kappa`$ must be
   chosen additively principal). Every restart $`\lambda`$ with $`\rho_\lambda \lt \upsilon^*`$ has formal reach below $`\delta_\lambda + \upsilon_{\lambda+2}`$. So $`\Theta_\delta`$, $`\Theta_{d\omega}`$ and
   $`\Lambda^*`$ are all at or above $`\upsilon^*`$, outside the names of GEN.
 - **Theorem F1: Wilken's claim on $`[0, \upsilon^*)`$ in $`R_2^C`$**, both halves (proved, resting on one transfer, Lemma S at the base $`\theta`$). Every ordinal below
@@ -62,7 +62,7 @@ $`\iota'(\eta)`$ the order type of $`D' \cap \eta`$. $`X_2 = \psi_{\Omega_1}(\Om
   half is Lemmas L and IS. This also answers a question of [VEBLEN.md](VEBLEN.md) §1: $`\nu_C`$ is not below $`\upsilon^*`$.
 - **R-CAP and Theorem F2** (proved as a transfer: GEN⁺, SLOW$`_\zeta`$, and Lemma S at the bases $`G(\zeta)`$). Every restart $`\lambda`$ with $`\eta_\lambda \lt \theta_2\cdot\omega^2`$
   is below $`\Lambda^*`$, so $`\Lambda^* \ge \iota'(\omega^{\theta_2+2})`$. With [BREAK.md](BREAK.md) §2: $`\nu_C \gt \nu_P \ge X_2`$, and Wilken's claim holds in $`R_2^C`$ on $`[0, X_2)`$, both halves.
-- **The names** (lower bounds proved as a transfer; equality a conjecture). The name of $`\rho_{\Lambda^*}`$ comes out of this derivation and matches
+- **The names** (lower bounds proved as a transfer; equality a conjecture; **now all four are proved**, §9.1). The name of $`\rho_{\Lambda^*}`$ comes out of this derivation and matches
   the earlier conjecture of [REACHES.md](REACHES.md) §3, which was made from matrices.
 
 | point | conjectured InaccPsi name |
@@ -74,7 +74,7 @@ $`\iota'(\eta)`$ the order type of $`D' \cap \eta`$. $`X_2 = \psi_{\Omega_1}(\Om
 
 - **Not counted**: NEST-CHAR (a restatement of NU-CT, as said above). (The referee: a remark of the paper overstates where the closed form of the reaches
   is known; it is exact only for $`e_\lambda \le \psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$ and at $`\Theta_A`$, with bounds only in between.)
-- **Open**: the equality halves of the names (they need the shifted STEP at the bases $`G(\zeta)`$, codes for the realizers, and lower bounds for the reaches
+- **Open** (the equality halves and $`\nu_P`$ are now proved, §9.1): the equality halves of the names (they need the shifted STEP at the bases $`G(\zeta)`$, codes for the realizers, and lower bounds for the reaches
   between $`\delta_j\cdot\omega`$ and the next block top); the exact value of $`\nu_P`$; an InaccPsi upper bound for $`\nu_C`$ (one positive $`\lt_2`$-relation whose left end is a
   restart). PAR-SAME and Lemma S could not be tested: there is no implementation of Wilken's $`T^\tau`$.
 
@@ -167,6 +167,9 @@ Notation of [VEBLEN.md](VEBLEN.md) §11: $`u_m = \upsilon^2_m`$, $`x = x_2`$, $`
 
 ## 5. Status after the thirteenth round
 
+The fourteenth round changed this status; see §9.5.
+
+
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, \upsilon^*)`$ with $`\upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ (resting on one transfer), and on $`[0, X_2)`$ with
   $`X_2 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ (proved as a transfer); $`\Theta_1 = H(\theta)`$ and $`\Theta_A = H(\varepsilon_{\theta+\omega})`$ (2 reviews); $`\nu_C \gt \nu_P \ge X_2`$.
 - The lower-bound program below $`\theta_0`$: the step below SRO is proved for every $`n`$ on 1,987 of the 3,166 sample matrices, with no condition on the program
@@ -195,6 +198,9 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 - §4. The paper ran nothing. The referee's toy model of the RED-TF map on Cantor normal forms: 14,400 pairs, 0 failures.
 
 ## 7. Open
+
+The fourteenth round changed this list; the current list is §9.7.
+
 
 - The first inaccessible: $`H_m`$ (enough: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, through modules for the fixed points of $`\upsilon`$ from $`\Lambda_\Gamma`$ up to $`\theta_0`$, with MODULE-RED widened
   beyond shape (MA), or the grammar (G1)–(G3)); UNIF-FS below SRO on the 1,179 open matrices of §3; $`\iota(A_n) \ge |\tau_n|`$.
@@ -343,3 +349,183 @@ $`\kappa_X = \min\{\kappa : \kappa \le_1^X \beta \text{ for all } \beta \ge \kap
   - **AGR iff (E) and (R).** W(C) is not needed for AGR, only for "$`= \rho`$".
   - Open: **PIN** (move the extension from the upward copy back onto $`Y^\circ`$) and **LOW** (extensions with a new
     point $`\le \max X`$, or whose least new point is not additive principal). Only "PIN and LOW give CORE-2" is shown.
+
+## 9. The fourteenth round
+
+Four papers (2026-10), each refereed once, so a result of this section has 1 review unless a count is given. **2 reviews** means that the
+referee of §1 accepted the result as a transfer and the referee of this round checked the full proof. No paper uses the papers listed at the
+top of this page. No Lean file was added: one paper (§9.1) checked a Lean test file of named points with leanman (green, and green in the
+referee's rerun); it only compares terms with a test copy of the normal-form test, so it counts as a check. Levels are renumbered as in §4.
+
+### 9.1 The transfers as full proofs, the names up to $`\nu_P`$, and the claim up to $`X_3`$
+
+Notation of §1. For a restart $`\lambda`$: $`s_2 = \upsilon_{\lambda+2}`$, $`\tau_1 = \upsilon_{\lambda+\omega}`$, $`\delta = \delta_\lambda = \upsilon_{\lambda+\omega+1}`$, and $`R(\lambda)`$ is the formal reach of
+[BREAK.md](BREAK.md) §4. $`\Theta_{s2}`$ and $`\Theta_{\tau 1}`$ are the least restart indices with $`R(\lambda) \ge \delta + s_2`$ and $`R(\lambda) \ge \delta + \tau_1`$ (like $`\Theta_\delta`$, $`\Theta_{d\omega}`$).
+$`\mathrm{cmax}(x)`$ is the set of countable maximal subterms of the normal form of $`x`$, and $`\pi_g = \psi_{\Omega_2}(A_g)`$.
+
+- **Definition of $`R`$, amended** (the referee: this must be written down, because every upper half below rests on it). $`R(\lambda)`$ is the least
+  $`y`$ in $`(\delta, \rho_{\lambda+\omega^2})`$, not in $`[\delta, \rho_{\lambda+\omega^2})`$, with the property of [BREAK.md](BREAK.md) §4. Read literally, the old definition gives $`R(\lambda) = \delta`$ at
+  every restart with $`\mathrm{logend}(\eta_\lambda) = 2`$, because the condition is empty there; then the chain of proofs below falls apart. The amended $`R`$ is
+  the one the earlier proofs use, and the bound "reach $`\le R`$" holds for it. This is the off-by-one repair of [BREAK.md](BREAK.md) §4, now accepted.
+- **Lemma S and COMP-S** (proved, 2 reviews). For any two $`\varepsilon`$-bases below $`\Omega_2`$, countable or not, and any strictly increasing additive
+  parameter map that sends principal numbers to principal numbers, substitution is an isomorphism of Wilken's systems for $`\lt`$ and $`+`$, and it
+  moves the parameters by the map; composites of substitutions are substitutions. The proof follows Wilken 2007 (APAL 145, 130–161), L.5.3. REN,
+  SUBST-ISO and the uses at the bases $`\theta`$ and $`G(\zeta)`$ in §1 are special cases.
+- **GEN⁺** (cited): the case $`\eta \lt \Omega_\omega`$ of GEN-EXT ([BREAK.md](BREAK.md) §2).
+- **SLOW$`_\zeta`$** (proved, 2 reviews). Every lemma of LOW-STEP (ARG, PMAX, Q, Q1, D, M) restated at the levels of the base $`G(\zeta)`$ and proved.
+  (The referee: one sentence of 5.4 (ii) is wrong for nodes inside a stop; those nodes lie below the stop, so the conclusion holds.)
+- **PHI, U\* and R-CAP** (proved, 2 reviews), now by one induction on $`\lambda`$, with $`\kappa`$ an $`\varepsilon`$-number and VIS applied at $`A_\eta`$ (the points m4, m5, m7
+  of the review of §1). No FRAG. Lower bounds: $`\Theta_{s2} \ge \iota'(\theta_2)`$, $`\Theta_{\tau 1} \ge \iota'(\theta_2\cdot\omega)`$, $`\Theta_\delta \ge \iota'(\theta_2\cdot(\omega+1))`$, $`\Theta_{d\omega} \ge \iota'(\eta_{d\omega})`$,
+  $`\Lambda^* \ge \iota'(\theta_2\cdot\omega^2)`$.
+- **SSTEP$`_\zeta`$** (proved). Theorem STEP one level up: the map $`B`$ at the base $`G(\zeta)`$, with $`X_0 = \Omega_\omega + \theta_2\cdot\zeta`$ and the level-0 code
+  $`\psi_{\Omega_3}(\omega^{B(\alpha)})`$, is strictly increasing into $`G(\zeta+1)`$. So $`T^{G(\zeta)} \cap \Omega_2 \le G(\zeta+1)`$. The other inequality is open and unused: it needs
+  every ordinal below the bound, and Lemma IS covers only countably many. **Erratum** to L3 of [VEBLEN.md](VEBLEN.md) §8: for the same reason only
+  $`T^{\Omega_1} \cap \Omega_2 \le \theta`$ is proved there, not equality; nothing uses equality.
+- **Lemma C, the realizer map, B-PAR, HULL-SEG, REAL, Lemma L$`_R`$, BRACKET** (proved). The offsets of a restart are read through Wilken's terms (Lemma C).
+  A realizer map sends them to exponents of restarts, with control of the parameters (B-PAR; the referee: run its induction on the terms of the
+  simultaneous system, since Lemma S is proved for Wilken's terms). HULL-SEG:
+
+```math
+C_g \cap \Omega_2 = \{\, x \lt \pi_g : \mathrm{cmax}(x) \subseteq H(g) \,\}.
+```
+
+  REAL: realizers exist cofinally (the referee: only for $`\nu \le \eta_0`$, which is all its uses need). Lemma L$`_R`$ (the paper's "Lemma L"; renamed
+  here because Lemma L is a Lean lemma of [README.md](README.md) §3): every restart $`\mu`$ whose exponent is the image of an offset $`m`$ has
+  $`R(\mu) \ge \delta_\mu + c_\mu(m)`$, without FRAG; the same for the reach, given FRAG. BRACKET: lower and upper bounds for $`R(\lambda) - \delta`$ from the two maps.
+  (The referee: the base case of Lemma L$`_R`$ should cite a different earlier lemma; same conclusion.)
+- **NAMES-EQ** (proved; the referee checked both halves of every row). With $`\eta_{d\omega} = \omega^{\theta_2+1} + \theta_2 + \omega^{\omega^{G+1}}`$ and
+  $`G = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+1} + \theta_2)`$:
+
+| restart | index | $`\rho`$ | $`R`$ | FRAG |
+|---|---|---|---|---|
+| $`\Theta_{s2}`$ | $`\iota'(\theta_2)`$ | $`\psi_{\Omega_1}(\Omega_\omega + \theta_2)`$ | $`\delta + s_2`$ | not used |
+| $`\Theta_{\tau 1}`$ | $`\iota'(\theta_2\cdot\omega)`$ | $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+1})`$ | $`\delta + \tau_1`$ | not used |
+| $`\Theta_\delta`$ | $`\iota'(\theta_2\cdot(\omega+1))`$ | $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+1} + \theta_2)`$ | $`\delta\cdot 2`$ | not used |
+| $`\Theta_{d\omega}`$ | $`\iota'(\eta_{d\omega})`$ | $`\psi_{\Omega_1}(\Omega_\omega + \eta_{d\omega})`$ | in $`[\delta\cdot\omega, \delta_2)`$ | not used |
+| $`\Lambda^*`$ | $`\iota'(\theta_2\cdot\omega^2)`$ | $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2})`$ | | upper half |
+| $`\Lambda^* + \omega^2`$ | | $`\nu_P = X_2 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ | | upper half |
+
+- So the names that §1 conjectured are proved (FRAG is proved, [BREAK.md](BREAK.md) §4). $`\Theta_{d\omega}`$ needs a mixed realizer (multiples of $`G`$ plus an image),
+  because the plain map overshoots there. The value of $`R(\Theta_{d\omega})`$ is not determined.
+- **Theorem X3** (proved, no FRAG). With $`\lambda_2 = \iota'(\theta_2\cdot\omega^2)`$:
+
+```math
+\nu_C \ge X_3 = \upsilon_{\lambda_2+\omega^3\cdot 2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2).
+```
+
+  Proof: R-CAP, and in both cases of NU-CT ([BREAK.md](BREAK.md) §2) the left end of the pair at $`\nu_C`$ is a $`\rho_L`$ with $`\omega^3 \mid L \gt \lambda_2`$ and the right end has
+  index $`\ge L + \omega^3`$ (FIRST-PAIR and Lemma GHOST, [BREAK.md](BREAK.md) §2). (The referee: case (A) uses $`R_2^S`$ facts through $`\nu_C = \nu_S`$; correct, the
+  wording should say so.) So **Wilken's claim holds in $`R_2^C`$ on $`[0, X_3]`$, both halves** (no FRAG): the core half by $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$, the
+  names half by Lemmas L and IS. Also on $`[0, \nu_P] = [0, X_2]`$ (2 reviews: as a transfer in §1, in full here).
+- **Open**: an InaccPsi upper bound for $`\nu_C`$. Realizers, the upward and downward copies, and the twisted copies TW-0 give only $`\le_1`$-facts or copies of a
+  $`\lt_2`$-pair already known to exist. A named bound needs one new pair $`\rho_L \lt_2 b`$ with $`b`$ named: an isomorphism of a final segment $`[\rho_L, b)`$
+  onto a segment above a $`\le_1`$-predecessor of $`\rho_L`$, as in Wilken 2020, Thm 21.13 (then Prop 21.11 gives the pair). The candidate pair is
+  $`a_0 \lt_2 \nu`$ of Conjecture NU-NAME ([BREAK.md](BREAK.md) §2). Also open: the value of $`R(\Theta_{d\omega})`$, and whether
+  $`m_0 \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ for the least $`\le_1`$-predecessor $`m_0`$ of the left end of the first new pair.
+
+### 9.2 Native codes: modules up to $`\Lambda_T`$
+
+Notation of §2. $`F(\alpha) = \upsilon_{1+\alpha}`$. For a normal map $`H`$: $`O_1(H)`$ enumerates the fixed points of $`H`$; $`O_{n+1}(H)`$ enumerates the $`z`$ with $`O_n^z(H)(0) = z`$;
+$`S(H)`$ enumerates the common values of all $`O_n(H)`$; $`T(H)`$ enumerates the $`z`$ with $`S^z(H)(0) = z`$. So $`\Gamma^\upsilon_1 = O_2(F)(0)`$, and $`\Lambda_T = T^{\omega^2}(F)(0)`$.
+
+- **MODULE-RED⁺** (proved, as an implication). MODULE-RED of §2 holds for every module block of shape (MA⁺): $`r \lt x \lt_2 y`$, $`r`$ and $`x`$ are $`\le_1`$ to the top $`R`$,
+  and some $`c \in (y, R]`$ has $`c \le_1 c + A`$ with $`A \ge r`$ and $`c + A \le R`$. This allows several inner chains, nested pairs, sums containing $`x`$, and the blocks
+  $`c \le_1 c + y`$ and $`c \le_1 c\cdot 2`$ of conv. EXIST-AMB gets the case asked for in the review of §2. (The referee: a remark that every other pair lies in $`(x, y)`$ needs
+  "no element in $`(r, x)`$"; no proof uses it.)
+- **CHAIN⁺** (proved). A block with $`c \le_1 c + A`$ hosts every nest of blocks that each carry one decoration $`u \le_1 u + D`$ ($`D`$ may contain $`u`$), as long as every
+  $`D`$, read in the host, is below $`A`$. (The referee: CHAIN of [VEBLEN.md](VEBLEN.md) §9 is its base case, not a special case.)
+- **DOM-T, NO-HIGH-T** (proved). Every fixed point of $`\upsilon`$ below $`\Lambda_T`$ has canonical data (a tier below $`\omega^2`$, a level, a greedy signature), and two
+  fixed points compare by their data.
+- **LEX-HOST, (MC) and Theorem IDX-T** (proved). Modules of scheme T: the finite positions are coded by a nest of blocks, the tier and the level by
+  the decoration. So the native codes are ordered on $`[\omega, \Lambda_T)`$, and natively
+
+```math
+\iota(\mathrm{CH}_2) \ge \Lambda_T \gt T^\omega(F)(0) \gt T(F)(0) \gt S(F)(0) \gt \Gamma^\upsilon_1 = \Lambda_\Gamma.
+```
+
+  (The referee: the same bounds for the conv patterns of (0,0,0)(1,1,1)(2,1,1)(3,1,1) and (0,0,0)(1,1,1)(2,2,0) are proved for the module patterns; that
+  these equal conv's output is checked.) Conjectured names, with $`H'(\Delta) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Delta})`$: $`O_n(F)(0) = H'(\Omega_1^n)`$,
+  $`S(F)(0) = H'(\Omega_1^\omega)`$, $`T(F)(0) = H'(\Omega_1^{\omega+1})`$, $`\Lambda_T = H'(\Omega_1^{\omega+1}\cdot\omega^2)`$. Still far below $`\Lambda_\varepsilon \lt \nu_C`$; the progress is on the native route only.
+- **Not counted** (the referee: a remark about two proof methods): "no module of $`\Lambda_T`$ by CHAIN⁺ or LEX-HOST".
+- **Open**: the module of $`\Lambda_T`$ itself: decorations with several slots (an outline, checked on paper for 2 slots), then CHAIN-REL (hosting inner parts
+  that use the outer $`x`$, where GEN (a) cannot be used). (G2): a collapsing function $`\vartheta^\upsilon`$ over $`\upsilon`$ is defined, with its comparison lemma, dictionary and
+  names as conjectures; DOM-T is an analogue of one direction of that lemma (the referee); expected reach $`\Theta_1`$. $`\iota(\mathrm{CH}_2) \ge \theta_0`$ stays open.
+
+### 9.3 The shapes of $`\Phi_3`$: nested blocks, 2,330 of 3,166
+
+Notation of §3.
+
+- **OPQ-R** (proved, meta) and **LEMMA OPEN** (proved). Runs of the rewritten program on terms with opaque prefixes, open run counts and staircase
+  segments give the result on every instance. (The referee: the code opens only the first run; every open term built for the matrices below has
+  at most one run.)
+- **Theorem NB** (proved; part (a) of LEMMA SLOT is false as written, and the referee's repair, checked on all 155 matrices, makes it and NB proved).
+  For an M1 matrix whose run is among the children of the root: $`V(A[n]) = V_{base} \cup \beta(0) \cup \dots \cup \beta(n)`$, where each block $`\beta(j)`$ is a fixed list of
+  nodes with family slots, each member again such a list (so the blocks double).
+- **NB-DER** (proved). Each block type maps onto a long pair $`x \lt_2 y`$ in the top block of the matrix; GEN gives conv$`(A[n]) \ll`$ conv$`(A)`$. 155 matrices.
+- **SUM-CORE-NB** (26), **IX-NB** (59; its lemma IX-PHI\* is written only as a sketch), **SUM-CORE-2** (30), **IX-STAIR** (73), and $`(0,0,0)(1,1,1)`$ as a staircase
+  core (39 of the 73): proved.
+- **Not proved**: the GEN induction of 2.6 (no check that the run count decreases). No counted matrix uses it.
+- **The tally** (the referee reproduced it; $`2{,}330 = 1{,}987 + 343`$):
+
+| class | matrices | proved for every $`n`$ | given a condition checked for small $`n`$ | $`t = 2`$, given a shape checked for small $`n`$ | open |
+|---|---|---|---|---|---|
+| I | 581 | 479 | 0 | 0 | 102 |
+| SUM | 603 | 544 | 7 | 0 | 52 |
+| ROOT | 635 | 587 | 0 | 0 | 48 |
+| III | 1,347 | 720 | 0 | 24 | 603 |
+| all | 3,166 | 2,330 | 7 | 24 | 805 |
+
+- The 2 matrices "given LOW" of §3 are among the new ones. **Left** (836): M1 18 (5 whose reach recurses through every smaller run length, 6 with one
+  of these as core, 1 whose template fails at the first block, 3 SUM, 3 with a template node below the core); M2 139, M3 28, M4 14, M5 23; $`t = 2`$:
+  III 160, ROOT 31, I 15, SUM 26; $`t = 1`$: 382. The minor points m1–m6 of the review of §3 are applied as errata.
+
+### 9.4 $`\nu_C = \nu_S`$: twisted copies
+
+Notation of §4.
+
+- **PUSH** (proved). $`u_{m+1} \le_1 x`$, so no point of $`U_2`$ needs a twisted copy: the case "the points $`u_{m+j}`$" of (TWIST\*) does not occur.
+- **TOPSUM, REACH-RED, TW-CLASS** (proved; the citation of Wilken 2007, APAL 145, 162–175, Thm 2.2 matches the paper). (CUT′) follows from an exact
+  transfer of reaches: $`\mathrm{lh}(\Psi_0(a)) = \Psi_0(L_{top}) + T_m(L_{low})`$. A twisted triple occurs only at a twisted point, and the twisted points are
+  classified by their closed forms.
+- **LADDER, DIAG, FIX-LADDER, LH-DELTA** (proved; one step inherits a repairable slip of Theorem KV, [FANFREE.md](FANFREE.md) §10.3). Every restart whose index is
+  not in the diagonal class $`\mathrm{Fix}(f_\Delta)`$ has a closed reach below $`\delta\cdot 2`$. Long restarts, the points of $`U_2`$ and $`\nu`$ have indices in it.
+- **NU-K** (proved). Long restarts are cofinal below $`\nu`$ (Carlson 2009, Def 5.3, clause 2).
+- **FRESH**: not proved as written (at level 0 the new index can fail to be a restart index); the referee gives a one-line repair. **TW-MULTI** (proved
+  with that repair and one more): twisted copies exist for any finite union of skeletons of small closed-form restarts, so for several blocks at
+  once, for the restarts in $`\mathrm{Fix}_1 \setminus K`$, and for the points of $`K`$ outside $`\mathrm{Fix}(f_\Delta)`$. **TW-MIX** (proved, with runs built in increasing
+  order): these copies combine with Carlson's copy on the anchors, under four conditions.
+- **DICT, PROF-1** (proved). (PROF) holds for every symbol with at most one position $`\ge u`$.
+- **Not proved**: (TWIST\*) in general. Left: twisted points with index in $`\mathrm{Fix}(f_\Delta)`$ (long restarts among them), top data, points of a run region
+  that are not in a skeleton (twisted or not; the referee's example $`\omega^{\rho_a+1}`$ shows that the paper's list of the residue is not complete), and
+  failures of the conditions SEP and ROOM. (PROF) with two or more positions $`\ge u`$, and the base change beyond $`u^\#`$, are open. Neither $`\nu_C = \nu_S`$ nor
+  $`\nu_C \lt \nu_S`$ is proved.
+
+### 9.5 Status after the fourteenth round
+
+- Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_3]`$ with $`X_3 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, no FRAG and no transfer left;
+  the names of $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$ and $`\nu_P = X_2`$ are proved; the core half holds on $`[0, \nu_C]`$ with $`\nu_C \ge X_3`$.
+- The lower-bound program below $`\theta_0`$: the step below SRO is proved for every $`n`$ on 2,330 of the 3,166 sample matrices; $`\iota(\mathrm{CH}_2) \ge \Lambda_T`$ natively.
+- Upper bounds: still none by an InaccPsi term for $`\iota(\mathrm{CH}_k)`$, $`m_F`$, $`x_F`$, $`C^*_3`$ or $`\nu_C`$.
+- $`\nu_C = \nu_S`$: twisted copies exist for small closed-form skeletons; left: the residue at $`\mathrm{Fix}(f_\Delta)`$, SEP, ROOM and (PROF).
+
+### 9.6 Checks of the fourteenth round
+
+Each run was under 60 seconds; none is a proof. Certificates count only when replayed.
+
+- §9.1. The shifted map $`B`$ at the bases $`G(0)`$, $`G(1)`$, $`G(\omega)`$, $`G(\omega+1)`$: 1,278,400 pairs, 0 failures; two broken controls fail. B-PAR as an equivalence: 9,000 pairs,
+  0 disagreements. HULL-SEG: 33,800 pairs, 0 disagreements. The 9 named points are normal forms and increasing. The referee: $`E(B(t)) \ge t`$ on 2,995 terms
+  at 4 bases (if it failed, BRACKET would contradict itself), 1,200 realizers built as in REAL, all valid, and the runs reproduced with 0 disagreements.
+- §9.2. 23 module blocks (19 new) are patterns, RF, fan-free and L1p-free; 4 are equal to conv's output; certificates: 18 of 20 in the predicted
+  direction and 5 of 7 for CHAIN⁺, all replayed; 0 of 6 in the reverse direction. The referee's reruns are identical, and 5 own reverse searches
+  found nothing (each stopped at 45 s).
+- §9.3. Full builds at $`n = 6, 7`$ agree for all 155 NB matrices, and the 132 index templates agree. The referee: ordered lists with lh and succ at $`j = 6, 7`$
+  (155 of 155) and $`j = 8`$ (52 of 52); the templates at $`n = 8, 9`$; $`(0,0,0)(1,1,1)`$ passes the step for $`n = 2, \ldots, 20`$.
+- §9.4. The readings of K(3,0,0), K(3,0,0)(3,0,0) and K(3,1,0) match LADDER and DIAG. The referee: 18 strings with the program, which also match 4 new predictions.
+
+### 9.7 Open
+
+- Upper bounds: an InaccPsi bound for $`\nu_C`$ (one new pair $`\rho_L \lt_2 b`$ at a named $`b`$, §9.1), for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
+- The first inaccessible: $`H_m`$, through $`\iota(\mathrm{CH}_2) \ge \theta_0`$ (modules from $`\Lambda_T`$ on: several slots, CHAIN-REL, or the collapsing function $`\vartheta^\upsilon`$);
+  UNIF-FS below SRO on the 836 matrices of §9.3.
+- $`\nu_C = \nu_S`$: (TWIST\*) at $`\mathrm{Fix}(f_\Delta)`$ and for points outside the skeletons, SEP and ROOM, (PROF) with two or more positions.
+- Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; names beyond $`X_3`$; the rest of [COVER.md](COVER.md) §9.

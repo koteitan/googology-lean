@@ -226,7 +226,7 @@ $`\Lambda_{\mathrm{fp}2} = H(\psi_{\Omega_2}(\Omega_2\cdot 2)\cdot\omega) = \psi
   あり、仮定が合うことを査読者が確かめた）。$`C_g \cap \Omega_1 = H(g)`$ で $`\tau \in C_g`$ なら、$`\tau`$ の標準形の可算で極大な部分項はどれも $`H(g)`$ より下。
 - **L3、ずらした LOW-0**（証明済み。LOW-0 を基 $`\Omega_1`$ に移したもので、§1 の H3 と同じ水準）。$`\theta`$ から $`T^{\Omega_1} \cap \Omega_2`$ への狭義に増加する
   写像 $`E^{\Omega_1}`$ で、そのパラメータは可算で極大な部分項と 0 の中にある（論文は「等しい」と書く。査読者：正しいのは「中にある」だけで、使うのも
-  それだけ）。H3 と合わせて、ちょうど $`T^{\Omega_1} \cap \Omega_2 = \theta`$。
+  それだけ）。H3 と合わせて、ちょうど $`T^{\Omega_1} \cap \Omega_2 = \theta`$。（正誤、[THETA-ja.md](THETA-ja.md) §9.1：証明されているのは $`\le`$ だけ。等号を使う所は無い。）
 - **B-PAR**（証明済み）。H3 の写像 $`B`$ は、Weiermann–Wilken（MLQ 57, 2011）の同時に定めた系の項で、パラメータが $`H(g)`$ より下のものを $`C_g`$ に送る。
 - **未証明**（止める点）：定理 THETA1、つまり $`\Theta_1 = H(\theta) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$ と $`\mathrm{lh}(H(\theta)) = H(\theta+\omega+1) + H(\theta+1)`$、それと
   $`\Theta_1`$ より下での $`c^+`$ の上下の評価。定理 THETA-A、つまり $`\Theta_A = H(\varepsilon_{\theta+\omega}) = \psi_{\Omega_1}(\Omega_\omega + \varepsilon_{\theta+\omega})`$。だから、名前の付いた端
@@ -244,7 +244,7 @@ $`\Lambda_{\mathrm{fp}2} = H(\psi_{\Omega_2}(\Omega_2\cdot 2)\cdot\omega) = \psi
   $`R_2^S`$ の結果ではない。）
 - **未解決**：$`\nu_C`$ の InaccPsi による上からの評価（名前のある点での正の $`\lt_2`$ の関係が 1 つ。その左端は、下に組が共終的にあるやり直しの点）。
   $`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$ の名前。それには、ほかの基での $`B`$ や $`E^{\Omega_1}`$ のような写像が要る。（今はそのような写像が基
-  $`\psi_{\Omega_2}(\Omega_\omega + \theta_2\cdot\zeta)`$ であり、これらの名前の下からの評価は移し替えとして証明済み、[THETA-ja.md](THETA-ja.md) §1。）
+  $`\psi_{\Omega_2}(\Omega_\omega + \theta_2\cdot\zeta)`$ であり、これらの名前の下からの評価は移し替えとして証明済み、[THETA-ja.md](THETA-ja.md) §1。今は名前が証明済み、そこの §9.1。）
 
 ## 9. $`\Phi_1`$ までの素の符号
 
@@ -348,7 +348,7 @@ $`X = P^* \cap [x, x^\#)`$、$`\tilde X`$ はその下向きの写しで $`\tild
 - $`\nu_C = \nu_S`$：(HC) のもとで、下向きの写しは $`T`$ による写しで、局所的な部分が成り立ち、そのような平行移動を持たないどの拡張も実現される
   （§11）。(LOC$`_T`$) と (TR$`_T`$) への帰着はそこでは働かない。残り：(R1)〜(R3) と、ET-TF の形の帰着。
 
-13 回目でこの状況は変わった。[THETA-ja.md](THETA-ja.md) §5 を見よ。
+13 回目と 14 回目でこの状況は変わった。[THETA-ja.md](THETA-ja.md) の §5 と §9.5 を見よ。
 
 ## 13. 12 回目の確認
 
@@ -370,4 +370,4 @@ $`X = P^* \cap [x, x^\#)`$、$`\tilde X`$ はその下向きの写しで $`\tild
 
 ## 14. 未解決
 
-13 回目でこの一覧は変わった。今の一覧は [THETA-ja.md](THETA-ja.md) §7 にある。
+13 回目と 14 回目でこの一覧は変わった。今の一覧は [THETA-ja.md](THETA-ja.md) §9.7 にある。

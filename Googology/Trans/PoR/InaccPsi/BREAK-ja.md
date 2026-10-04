@@ -121,7 +121,8 @@ $`\nu_{nest}`$ は PS の実現の最小の上端 $`y`$。
   $`\beta_0 \gt \nu_S`$ ⇔ $`T_C = \nu_S`$。
 - **系**（証明済み、査読 1 回。$`R_2^C`$）。
   - $`\beta_0 \ge \nu_C \gt \nu_P`$。前は $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$。（今は $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$、査読 1 回。そして
-    移し替えとして証明済みの $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$、[THETA-ja.md](THETA-ja.md) §1。）
+    移し替えとして証明済みの $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$、[THETA-ja.md](THETA-ja.md) §1。今は $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ と
+    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$、[THETA-ja.md](THETA-ja.md) §9.1。）
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$。だから $`R_2^C`$ の核は $`[0, \nu_P]`$ を含む。前は $`[0, \rho_{\Theta_{d\omega}})`$ と、$`\nu_P`$ と比べて
     いない $`T_C`$ での $`[0, T_C]`$。
   - SKEL⁺（HC と INC1-nonups も）が $`R_2^C`$ の $`[0, \nu_C)`$ で成り立つ。今は仮定なしで（[COVER-ja.md](COVER-ja.md) §5.1）。
@@ -227,7 +228,8 @@ $`C_\tau(z)`$ は $`\{0, \tau, z\}`$ を、カントール標準形の部分と�
 - **未証明、書いたままでは偽**（止める点。$`y = \delta`$ で 1 ずれる）。定理 TOP-REG（「反映されない点は届く先を抑える」）、
   REACH (a)、「届く先 = 形式的な届く先」という主張、定理 EQB-dw の評価 $`r_C \le R`$。反例：$`\lambda = \omega^2`$ では形式的な届く先は
   $`\delta`$ だが $`\rho \le_1 \delta + 1`$。一般に、ずれが有限のとき形式的な届く先は届く先より 1 小さい。査読者の直し方（$`y \gt \delta`$ だけ
-  数える）は査読の中で証明されたが、それ自身はまだ査読されていない。$`\Theta_A`$、$`\Theta_\delta`$、$`\Theta_{d\omega}`$ での値と CORE-C$`^{d\omega}`$ は
+  数える）は査読の中で証明されたが、それ自身はまだ査読されていない。（今は、直した形式的な届く先の定義（$`y`$ は $`(\delta, \rho_{\lambda+\omega^2})`$ の中）が
+  [THETA-ja.md](THETA-ja.md) §9.1 で使われ、その査読者が、矛盾が無く「届く先 $`\le`$ 形式的な届く先」がそれで成り立つことを確かめた。）$`\Theta_A`$、$`\Theta_\delta`$、$`\Theta_{d\omega}`$ での値と CORE-C$`^{d\omega}`$ は
   これによらない。
 
 ## 5. $`\nu`$ より上の入れ子の組：どの段でも最初のブロック
@@ -648,5 +650,5 @@ $`\chi_i \le_1 \chi_{K+1}`$、$`t_i \lt_2 d_i`$ を満たす配置 $`\chi_1 \lt 
 - $`[\delta_j\cdot\omega, \delta_{j+1})`$ にある候補での届く先。直した TOP-REG と REACH の査読。$`\nu_C`$ より上の $`R_2^C`$。$`\Lambda_\Gamma`$ より上の
   閉じた形と名前（$`\Theta_1`$、$`\Theta_A`$、$`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$、$`\nu_P`$。$`\Lambda'`$ までの閉じた形と $`\Theta_P`$ の名前は今は証明済み、
   [FANFREE-ja.md](FANFREE-ja.md) §10.4。$`\Lambda_{\mathrm{fp}}`$ までの閉じた形も証明済み、[VEBLEN-ja.md](VEBLEN-ja.md) §1。$`\Lambda_{\mathrm{fp}2}`$ までも証明済みで、$`\Theta_1`$ と $`\Theta_A`$ は未解決の補題 PAR-SAME に帰着した、§8。今は PAR-SAME が証明され $`\Theta_1`$、$`\Theta_A`$ に名前が付き、
-  $`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$、$`\nu_P`$ は下からの評価が移し替えとして証明済み、[THETA-ja.md](THETA-ja.md) §1）。GEN-EXT を越えた $`\upsilon^*`$ より上の名前。
+  $`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$、$`\nu_P`$ は下からの評価が移し替えとして証明済み、[THETA-ja.md](THETA-ja.md) §1。今はこれらの名前も証明済み、[THETA-ja.md](THETA-ja.md) §9.1）。GEN-EXT を越えた $`\upsilon^*`$ より上の名前。
 - 順序数とパターンの間の対応が初等再帰的であること（概略だけ）と、UNIF が全射であること。

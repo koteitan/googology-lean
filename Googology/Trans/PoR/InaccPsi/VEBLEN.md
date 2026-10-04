@@ -244,7 +244,7 @@ $`\Lambda_{\mathrm{fp}2} = H(\psi_{\Omega_2}(\Omega_2\cdot 2)\cdot\omega) = \psi
   form of $`\tau`$ is below $`H(g)`$.
 - **L3, the shifted LOW-0** (proved, as a transfer of LOW-0 to the base $`\Omega_1`$, at the same standard as H3 of §1). A strictly increasing map $`E^{\Omega_1}`$
   from $`\theta`$ into $`T^{\Omega_1} \cap \Omega_2`$ whose parameters are among the countable maximal subterms and 0 (the paper says "are"; the referee: only "are
-  among" is true, and only that is used). With H3: $`T^{\Omega_1} \cap \Omega_2 = \theta`$ exactly.
+  among" is true, and only that is used). With H3: $`T^{\Omega_1} \cap \Omega_2 = \theta`$ exactly. (Erratum, [THETA.md](THETA.md) §9.1: only $`\le`$ is proved; nothing uses equality.)
 - **B-PAR** (proved). The map $`B`$ of H3 sends every term of the simultaneous system of Weiermann–Wilken (MLQ 57, 2011) whose parameters are below
   $`H(g)`$ into $`C_g`$.
 - **Not proved** (blocking point): Theorem THETA1, $`\Theta_1 = H(\theta) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$ with $`\mathrm{lh}(H(\theta)) = H(\theta+\omega+1) + H(\theta+1)`$, and its
@@ -264,7 +264,7 @@ $`\Lambda_{\mathrm{fp}2} = H(\psi_{\Omega_2}(\Omega_2\cdot 2)\cdot\omega) = \psi
   $`R_2^S`$ result that the paper cites.)
 - **Open**: an InaccPsi upper bound for $`\nu_C`$ (one positive $`\lt_2`$-relation at a named point, whose left end is a restart with pairs cofinal below it);
   the names of $`\Theta_\delta`$, $`\Theta_{d\omega}`$ and $`\Lambda^*`$, which need maps like $`B`$ and $`E^{\Omega_1}`$ at other bases. (Now these maps exist at the bases
-  $`\psi_{\Omega_2}(\Omega_\omega + \theta_2\cdot\zeta)`$, and lower bounds for these names are proved as a transfer, [THETA.md](THETA.md) §1.)
+  $`\psi_{\Omega_2}(\Omega_\omega + \theta_2\cdot\zeta)`$, and lower bounds for these names are proved as a transfer, [THETA.md](THETA.md) §1; now the names are proved, §9.1 there.)
 
 ## 9. Native codes up to $`\Phi_1`$
 
@@ -369,7 +369,7 @@ $`X = P^* \cap [x, x^\#)`$, and $`\tilde X`$ is its downward copy, with $`\tilde
 - $`\nu_C = \nu_S`$: given (HC), the downward copy is the copy by $`T`$, the local part holds, and every extension without such translations is realized
   (§11); the reduction to (LOC$`_T`$) and (TR$`_T`$) does not work there. Left: (R1)–(R3) and a reduction in the form of ET-TF.
 
-The thirteenth round changed this status; see [THETA.md](THETA.md) §5.
+The thirteenth and fourteenth rounds changed this status; see [THETA.md](THETA.md) §5 and §9.5.
 
 ## 13. Checks of the twelfth round
 
@@ -392,4 +392,4 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 
 ## 14. Open
 
-The thirteenth round changed this list; the current list is [THETA.md](THETA.md) §7.
+The thirteenth and fourteenth rounds changed this list; the current list is [THETA.md](THETA.md) §9.7.

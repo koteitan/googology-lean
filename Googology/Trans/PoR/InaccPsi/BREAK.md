@@ -122,7 +122,8 @@ pair, and $`\nu_{nest}`$ the least top $`y`$ of a realization of PS.
   no ghost iff $`\beta_0 \gt \nu_S`$ iff $`T_C = \nu_S`$.
 - **Corollaries** (proved, 1 review; $`R_2^C`$).
   - $`\beta_0 \ge \nu_C \gt \nu_P`$. Before: $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$. (Now $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, 1 review, and
-    $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$, proved as a transfer, [THETA.md](THETA.md) §1.)
+    $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$, proved as a transfer, [THETA.md](THETA.md) §1; now $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ and
+    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, [THETA.md](THETA.md) §9.1.)
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$, so the core of $`R_2^C`$ contains $`[0, \nu_P]`$. Before: $`[0, \rho_{\Theta_{d\omega}})`$, and $`[0, T_C]`$ with $`T_C`$ not
     compared with $`\nu_P`$.
   - SKEL⁺ (with HC and INC1-nonups) holds in $`R_2^C`$ on $`[0, \nu_C)`$. Now with no hypothesis ([COVER.md](COVER.md) §5.1).
@@ -230,7 +231,8 @@ $`C_\tau(z)`$ is the closure of $`\{0, \tau, z\}`$ under Cantor normal form part
   bounds the reach"), REACH (a), the claim "reach = formal reach", and the bound $`r_C \le R`$ in Theorem EQB-dw. Counterexample:
   at $`\lambda = \omega^2`$ the formal reach is $`\delta`$, but $`\rho \le_1 \delta + 1`$. In general the formal reach is one less than the reach
   when the offset is finite. The referee's repair (count only $`y \gt \delta`$) is proved in the review, but not yet reviewed
-  itself. The values at $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$ and CORE-C$`^{d\omega}`$ do not depend on it.
+  itself. (Now the amended definition of the formal reach, $`y`$ in $`(\delta, \rho_{\lambda+\omega^2})`$, is used in [THETA.md](THETA.md) §9.1, and its referee confirmed
+  that it is consistent and that the bound "reach $`\le`$ formal reach" holds for it.) The values at $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$ and CORE-C$`^{d\omega}`$ do not depend on it.
 
 
 ## 5. Nested pairs above $`\nu`$: the first block of every level
@@ -675,5 +677,5 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 - The reaches for candidates in $`[\delta_j\cdot\omega, \delta_{j+1})`$; a review of the repaired TOP-REG and REACH; $`R_2^C`$ above $`\nu_C`$; the closed
   forms and names above $`\Lambda_\Gamma`$ ($`\Theta_1`$, $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$; the closed forms up to $`\Lambda'`$ and the name of $`\Theta_P`$ are
   now proved, [FANFREE.md](FANFREE.md) §10.4, the closed forms up to $`\Lambda_{\mathrm{fp}}`$ too, [VEBLEN.md](VEBLEN.md) §1, and up to $`\Lambda_{\mathrm{fp}2}`$, with $`\Theta_1`$ and $`\Theta_A`$ reduced to the open lemma PAR-SAME, §8; now PAR-SAME is proved and $`\Theta_1`$, $`\Theta_A`$ are named,
-  and for $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$ lower bounds are proved as a transfer, [THETA.md](THETA.md) §1); names above $`\upsilon^*`$ beyond GEN-EXT.
+  and for $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$ lower bounds are proved as a transfer, [THETA.md](THETA.md) §1; now these names are proved, [THETA.md](THETA.md) §9.1); names above $`\upsilon^*`$ beyond GEN-EXT.
 - That the assignments between ordinals and patterns are elementary recursive (outline only), and that UNIF is onto.
