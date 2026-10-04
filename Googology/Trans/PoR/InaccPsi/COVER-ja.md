@@ -158,7 +158,7 @@ Carlson の被覆（Carlson 2009, Def 5.2）を $`R_2^S`$ で読んだもの。$
   $`s \in \mathrm{Core}_C(R_2^S)`$）から $`o_k = \omega`$ が出る。$`[0, \max Z]`$ で $`R_2^S = R_2^C`$ なら、$`Z`$ で MIN$`^S`$ が成り立つ。査読者の注意：
   PINNING を仮定すると、$`s`$ を含む集合での MIN$`^S`$ は $`o_k = \omega`$ と同じ。別の目標になるのは大域の MIN$`^S`$ だけ。
 - **段 2、場合 (P3b) の幽霊**（証明済み、査読 1 回）。$`o_2 \gt \omega`$ なら $`\beta_0 \le \nu_S`$。場合 (P3b) では $`\beta_0 = s^+ = \upsilon^2_{\omega+1}`$、
-  増える関係は $`R_2^C`$ の $`s \lt_2 s^+`$ だけ、$`\max \mathrm{Pred}_1(s^+) = s`$（だから [README-ja.md](README-ja.md) §3 の LIM2 は使えない）、$`s`$ を含む
+  増える関係は $`R_2^C`$ の $`s \lt_2 s^+`$ だけ、$`\max \mathrm{Pred}_1(s^+) = s`$（だから [THETA-ja.md](THETA-ja.md) §8.2 の LIM2 は使えない）、$`s`$ を含む
   どの S 最小な集合も $`\ge s^+`$ の点を持つ。だから幽霊の問いは、1 つの組 $`(s, s^+)`$ での逆向き $`C \Rightarrow S`$。
 - **予想** MIN$`^S`$。2 つの構造が一致する所では成り立つ。Carlson の Thm 14.10(2) の証明は彼の補題 14.9 を使い、その $`R_2^S`$ の形は
   知られていない。
@@ -389,7 +389,7 @@ $`S_n = [\upsilon^2_n, \upsilon^2_{n+1})`$ と $`S_\omega = [x, \nu)`$。
 - **系 GP**（証明済み、査読 1 回）。Gp を、PTm に組 $`p \lt_2 q`$ を加えたものとする。その最小の実現の根は $`m_F`$ で、$`m_F \lt p^* \lt q^* \lt v_1`$。
   だから $`m_F`$ より上の最小の $`\lt_2`$ の組は $`v_1`$ より下にあり、$`p^*`$ は $`(m_F, v_1)`$ の中の最小の左端。
 - **下からの評価**（証明済み、査読 1 回。NU-CT と PINS から、どちらも査読 1 回）。
-  $`m_F \gt \nu_C \gt \nu_P \gt \rho_{\Lambda^*} \gt \Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$（以前は $`m_F \gt \upsilon_{\omega^3}`$、§5.3）。それぞれプログラムの
+  $`m_F \gt \nu_C \gt \nu_P \gt \rho_{\Lambda^*} \gt \Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$（以前は $`m_F \gt \upsilon_{\omega^3}`$、§5.3。今は $`\nu_C \gt \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ も、[THETA-ja.md](THETA-ja.md) §1）。それぞれプログラムの
   1 つの読みから、M = SRO、(0,0,0)(1,1,1)(2,1,1)(3,1,1)、(0,0,0)(1,1,1)(2,2,0)、$`n \le 4`$ の (0,0,0)(1,1,1)(2,2,1)[n] で $`\Phi_3(M)`$ は扇の無い RF
   パターンなので、その点は $`m_F`$ より下。
 - **命題 NEED**（証明済み、査読 1 回）。$`m_F`$ が InaccPsi の名前を持つなら、$`m_F`$ のどの名前も到達不能基数を含む ⇔ $`H_m`$。
@@ -480,5 +480,5 @@ $`S_n = [\upsilon^2_n, \upsilon^2_{n+1})`$ と $`S_\omega = [x, \nu)`$。
   $`FF_{cl}`$、FF、POINT-SRO。$`H_m`$ は $`x_F \gt \theta_0`$ と同じか。
 - 最小の扇：名前（基 $`B_F`$。予想は $`I_0`$、§6.4）、$`x_F \lt \psi_{\Omega_1}(I_0\cdot\omega)`$ のような上からの評価（$`\sigma_N = m_F`$ は今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §4）。
 - $`R_2^S`$：CP3 の (ii) ⇒ (i) と LEFT-CHAR の「⇐」。$`\beta_0`$ より上の MIN$`^S`$。PINNING と CORE-S。$`k \ge 2`$ での $`o_k = \omega`$。幽霊があるときの
-  $`\beta_0`$ より上の NOLIM（と NOLIM$`^*`$）。$`\nu_C = \nu_S`$（§6.3 により：SC、または RM。各区間の臨界な添字の最初の極限より先での SC、[FANFREE-ja.md](FANFREE-ja.md) §7.3。今は、帰着がいつも要る長いやり直しの点での SC、[FANFREE-ja.md](FANFREE-ja.md) §10.3。$`\Sigma_2`$ の形で直接扱えば、写しより下の有限集合を止めたままの、局所的な基の取り替えと平行移動、[VEBLEN-ja.md](VEBLEN-ja.md) §4。その集合を止めると、基の取り替えの区域で帰着が働かない、§11）。[BREAK-ja.md](BREAK-ja.md) §7.3 の名前 (N-χ) と (N-ν)。$`\beta_0`$ より
+  $`\beta_0`$ より上の NOLIM（と NOLIM$`^*`$）。$`\nu_C = \nu_S`$（§6.3 により：SC、または RM。各区間の臨界な添字の最初の極限より先での SC、[FANFREE-ja.md](FANFREE-ja.md) §7.3。今は、帰着がいつも要る長いやり直しの点での SC、[FANFREE-ja.md](FANFREE-ja.md) §10.3。$`\Sigma_2`$ の形で直接扱えば、写しより下の有限集合を止めたままの、局所的な基の取り替えと平行移動、[VEBLEN-ja.md](VEBLEN-ja.md) §4。その集合を止めると、基の取り替えの区域で帰着が働かない、§11。今は (HC) が証明され帰着が直された。残りはねじれた上向きの規則、[THETA-ja.md](THETA-ja.md) §4）。[BREAK-ja.md](BREAK-ja.md) §7.3 の名前 (N-χ) と (N-ν)。$`\beta_0`$ より
   上の $`R_2^C`$ の RIGHT。

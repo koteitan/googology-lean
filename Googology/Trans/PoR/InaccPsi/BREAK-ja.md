@@ -17,7 +17,7 @@ $`\lt_2`$ の組 $`(\upsilon_{\lambda+\omega j}, \upsilon_{\lambda+\omega j+1})`
 **扇**とは $`\lt_2`$ の後の元を 2 つ持つ点。**$`k`$ 重の入れ子**とは $`x_i \lt_2 y_i`$ となる $`x_1 \lt \cdots \lt x_k \lt y_k \lt \cdots \lt y_1`$（入れ子に
 なった $`k`$ 個の組）。その上端は $`y_1`$。PS は 2 重の入れ子のパターン（中に別の組が入れ子になった組）。
 $`H(\eta) = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$、$`P_k = \psi_{\Omega_2}(\Omega_\omega\cdot k)`$。だから $`P_1 = \theta`$、$`P_2 = \theta' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)`$。
-$`\beta_0`$ は $`R_2^S`$ と $`R_2^C`$ の最初の違い（[README-ja.md](README-ja.md) §3）。
+$`\beta_0`$ は $`R_2^S`$ と $`R_2^C`$ の最初の違い（[THETA-ja.md](THETA-ja.md) §8.2）。
 
 ## 1. INC1 と NOBAD：証明済み
 
@@ -120,7 +120,8 @@ $`\nu_{nest}`$ は PS の実現の最小の上端 $`y`$。
   どちらの場合も、2 つの構造は右端が $`\nu_C`$ 未満のどの関係でも一致する。さらに証明済み：$`\nu_C = \nu_S`$ ⇔ 幽霊が無い ⇔
   $`\beta_0 \gt \nu_S`$ ⇔ $`T_C = \nu_S`$。
 - **系**（証明済み、査読 1 回。$`R_2^C`$）。
-  - $`\beta_0 \ge \nu_C \gt \nu_P`$。前は $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$。
+  - $`\beta_0 \ge \nu_C \gt \nu_P`$。前は $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$。（今は $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$、査読 1 回。そして
+    移し替えとして証明済みの $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$、[THETA-ja.md](THETA-ja.md) §1。）
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$。だから $`R_2^C`$ の核は $`[0, \nu_P]`$ を含む。前は $`[0, \rho_{\Theta_{d\omega}})`$ と、$`\nu_P`$ と比べて
     いない $`T_C`$ での $`[0, T_C]`$。
   - SKEL⁺（HC と INC1-nonups も）が $`R_2^C`$ の $`[0, \nu_C)`$ で成り立つ。今は仮定なしで（[COVER-ja.md](COVER-ja.md) §5.1）。
@@ -646,5 +647,6 @@ $`\chi_i \le_1 \chi_{K+1}`$、$`t_i \lt_2 d_i`$ を満たす配置 $`\chi_1 \lt 
   これは鎖の特徴づけで、場所は決めない。
 - $`[\delta_j\cdot\omega, \delta_{j+1})`$ にある候補での届く先。直した TOP-REG と REACH の査読。$`\nu_C`$ より上の $`R_2^C`$。$`\Lambda_\Gamma`$ より上の
   閉じた形と名前（$`\Theta_1`$、$`\Theta_A`$、$`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$、$`\nu_P`$。$`\Lambda'`$ までの閉じた形と $`\Theta_P`$ の名前は今は証明済み、
-  [FANFREE-ja.md](FANFREE-ja.md) §10.4。$`\Lambda_{\mathrm{fp}}`$ までの閉じた形も証明済み、[VEBLEN-ja.md](VEBLEN-ja.md) §1。$`\Lambda_{\mathrm{fp}2}`$ までも証明済みで、$`\Theta_1`$ と $`\Theta_A`$ は未解決の補題 PAR-SAME に帰着した、§8）。GEN-EXT を越えた $`\upsilon^*`$ より上の名前。
+  [FANFREE-ja.md](FANFREE-ja.md) §10.4。$`\Lambda_{\mathrm{fp}}`$ までの閉じた形も証明済み、[VEBLEN-ja.md](VEBLEN-ja.md) §1。$`\Lambda_{\mathrm{fp}2}`$ までも証明済みで、$`\Theta_1`$ と $`\Theta_A`$ は未解決の補題 PAR-SAME に帰着した、§8。今は PAR-SAME が証明され $`\Theta_1`$、$`\Theta_A`$ に名前が付き、
+  $`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$、$`\nu_P`$ は下からの評価が移し替えとして証明済み、[THETA-ja.md](THETA-ja.md) §1）。GEN-EXT を越えた $`\upsilon^*`$ より上の名前。
 - 順序数とパターンの間の対応が初等再帰的であること（概略だけ）と、UNIF が全射であること。

@@ -87,7 +87,8 @@ $`\tau`$-最小同型なパターンの $`B`$ をすべて合わせたもの。
 - **予想**（名前は確認済み）：$`\Theta_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+\omega}})`$、
   $`\Theta_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$、$`\Theta_A = \psi_{\Omega_1}(\Omega_\omega + \varepsilon_{\theta+\omega})`$。$`\Theta_P`$ の名前は今は証明済み（査読 1 回、THETA-P、
   [FANFREE-ja.md](FANFREE-ja.md) §10.4）。$`\Theta_1`$ の名前は今は未解決の包の補題に帰着した（THETA1-RED、[VEBLEN-ja.md](VEBLEN-ja.md) §1）。さらに $`\Theta_1`$ と $`\Theta_A`$ の名前は、
-  パラメータについての短い未解決の補題 1 つに帰着した（PAR-SAME、[VEBLEN-ja.md](VEBLEN-ja.md) §8。それが無いと証明に止める穴がある）。
+  パラメータについての短い未解決の補題 1 つに帰着した（PAR-SAME、[VEBLEN-ja.md](VEBLEN-ja.md) §8。それが無いと証明に止める穴がある）。今は PAR-SAME が証明されたので、どちらの名前も証明済み
+  （THETA1 と THETA-A、査読 2 回、[THETA-ja.md](THETA-ja.md) §1）。
 
 ## 3. すべての $`\upsilon`$ の点の名前（定理 GEN）
 
@@ -97,7 +98,7 @@ $`\Omega_\omega + \theta\cdot\eta`$ が標準形の引数になる $`\eta`$ の�
 - **定理 GEN**（証明済み、査読 1 回）。どの $`\eta \in D`$ でも $`H(\eta) = \upsilon_{1+\iota(\eta)}`$。ここで $`\iota(\eta) = \mathrm{otp}(D \cap \eta)`$。
   だから項 $`\psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$（$`\eta \in D`$）は、$`\upsilon`$ の点を小さい順に並べる。ただし
   $`\upsilon^* = \sup H[D]`$ より下のものだけ：$`\upsilon`$ の点は $`\omega_1`$ の中で共終なので、すべてではない（訂正、[BREAK-ja.md](BREAK-ja.md) §3。
-  GEN-EXT が $`\eta \lt \Omega_\omega\cdot\omega`$ まで延ばす、§2）。証明：後続では
+  GEN-EXT が $`\eta \lt \Omega_\omega\cdot\omega`$ まで延ばす、§2。今は $`\upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ が証明済み、査読 1 回、[THETA-ja.md](THETA-ja.md) §1）。証明：後続では
   STEP と LOW-STEP、極限では CONT と、包の隙間についての一般的な補題 1 つ。すべての $`\eta \lt \Omega_2`$ で成り立つ。
   定理 T+、T++、PHI はその特別な場合。だから T+ は **査読 2 回**、T++ は **3 回**、PHI は **2 回** になった。
 - **補題 GAP\*、SUP、DOWN、RI**（証明済み、査読 1 回）。RI：$`\iota(\eta)`$ がやり直しの添字であるのは $`\mathrm{logend}(\eta) \ge 2`$ の
@@ -203,7 +204,8 @@ INC1-S は「$`R_2^S`$ で $`a \le_1 b`$ なら $`R_1^+`$ でも $`a \le_1 b`$�
   $`\Lambda_\varepsilon`$ より上での主張の名前の半分。今は閉じた形がずれ $`\varepsilon_{\zeta_{\rho+1}+1}`$ まで成り立ち、$`\Theta_P`$ に名前が付き、主張は
   $`\rho_{\Lambda'+\omega^2}`$ まで成り立つ（[FANFREE-ja.md](FANFREE-ja.md) §10.4）。残り：$`(\Lambda', \Theta_1)`$ での閉じた形と、ほかの名前。今は閉じた形が
   $`e_\lambda \le \psi_{\Omega_2}(\Omega_2) + 1`$ のどのやり直しの点でも成り立ち、主張が $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$ まで成り立つ。$`\Theta_1 = H(\theta)`$ は未解決の包の補題に帰着した（[VEBLEN-ja.md](VEBLEN-ja.md) §1）。今は閉じた形が
-  $`e_\lambda \le \psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$ で成り立ち、主張が $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$ まで成り立つ。$`\Theta_1`$ と $`\Theta_A`$ の名前には未解決の補題 PAR-SAME だけが要る（[VEBLEN-ja.md](VEBLEN-ja.md) §8）。
+  $`e_\lambda \le \psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$ で成り立ち、主張が $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$ まで成り立つ。$`\Theta_1`$ と $`\Theta_A`$ の名前には未解決の補題 PAR-SAME だけが要る（[VEBLEN-ja.md](VEBLEN-ja.md) §8）。今は PAR-SAME が証明され、$`\Theta_1`$ と $`\Theta_A`$ に
+  名前が付き、主張は $`\psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ まで成り立つ。$`\Lambda^*`$ と $`\nu_P`$ は下からの評価だけが証明済み（[THETA-ja.md](THETA-ja.md) §1）。
 - INC1-S と INC1-nonups は今は証明済み（[BREAK-ja.md](BREAK-ja.md) §1）。RIGHT（どの $`\lt_2`$ の右端も $`\upsilon`$ の点）は今は $`R_2^S`$ で証明済み（[COVER-ja.md](COVER-ja.md) §5.1）で、$`\beta_0`$ より上の $`R_2^C`$ では未解決。
 - $`C^*_3`$：最小のいちばん下の点（$`\nu_P`$ より上）、上半分、下半分、予想 CH（[BREAK-ja.md](BREAK-ja.md) §10）。最初の扇は $`T_\omega`$ より上で、未解決の仮定 $`FF_N`$ のもとでは到達不能基数が
   要る（[BREAK-ja.md](BREAK-ja.md) §7.4。今は $`m_F \ge \theta_0`$ と同じ、[FANFREE-ja.md](FANFREE-ja.md) §4）。もっと弱い未解決の仮定「$`\min\{m : m \le_1 x_F\}`$ が $`\ge \theta_0`$」のもとでも要る（この仮定は今は、右端に届く先の無い、扇の無い

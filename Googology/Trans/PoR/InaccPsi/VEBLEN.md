@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the eleventh and twelfth rounds: offsets past Γ, native codes up to $`\Phi_1`$, symbols for the shapes of $`\Phi_3`$, and a direct $`\Sigma_2`$ argument
 
-This page continues [FANFREE.md](FANFREE.md). The status words are those of [README.md](README.md) §3: **proved** means that an
+This page continues [FANFREE.md](FANFREE.md), and [THETA.md](THETA.md) continues it. The status words are those of [README.md](README.md) §3: **proved** means that an
 independent referee found the result proved with no fatal or blocking point. All results on this page are from 2026-10; they come from
 the eleventh round (§1–§7) and the twelfth round (§8–§14), four papers each. A statement with a blocking point against it is listed under **Not proved**; a statement that its
 referee found to restate the target, or to be trivial, is listed under **Not counted**. A certificate counts only when it was replayed.
@@ -254,14 +254,17 @@ $`\Lambda_{\mathrm{fp}2} = H(\psi_{\Omega_2}(\Omega_2\cdot 2)\cdot\omega) = \psi
   Defs 4.7, 5.2), which $`B`$ and $`E^{\Omega_1}`$ control. That the two systems have the same values does not give this. The missing lemma, PAR-SAME, says
   that the two parameter sets of an ordinal are equal. The referee: it looks true and short (an induction along Def 3.2 of the 2011 paper, with
   Def 4.6 of Wilken 2007), and every other step of THETA1 and THETA-A is correct. The core half on $`[0, \rho_{\Theta_A+\omega^2})`$ was already proved
-  (CORE-C$`^A`$, [PINS.md](PINS.md) §2); what PAR-SAME would add is the names.
+  (CORE-C$`^A`$, [PINS.md](PINS.md) §2); what PAR-SAME would add is the names. (The referee also asked that the map $`\Psi^\#`$ be used only where the
+  parameters of its constants are below $`\rho_\mu`$, and that NU-CT, not an $`R_2^S`$ result, be cited for $`\nu_C`$.) **Now proved**: PAR-SAME, and with it THETA1 and
+  THETA-A (2 reviews, [THETA.md](THETA.md) §1).
 - **The hull lemma** (H2a), (H2b) of §1. With PAR-SAME it is not needed for $`\Theta_1`$; it would give only the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and
   $`\Theta_1`$. The paper's proof of it below $`\psi_{\Omega_2}(\Omega_2\cdot 2)`$ is an outline of a transfer (the referee: plausible; nothing uses it). Beyond that it is open.
 - **Not counted**: NEST-UP and NEST-CHAR (proved, but the referee finds that together they restate $`\nu_C = T_C`$, the least top of a nested pair,
   [BREAK.md](BREAK.md) §2): $`\nu_C`$ is the least right end $`b`$ of a pair $`a \lt_2 b`$ with pairs cofinal below $`a`$. (The fact needed in $`R_2^C`$ is NU-CT, not the
   $`R_2^S`$ result that the paper cites.)
 - **Open**: an InaccPsi upper bound for $`\nu_C`$ (one positive $`\lt_2`$-relation at a named point, whose left end is a restart with pairs cofinal below it);
-  the names of $`\Theta_\delta`$, $`\Theta_{d\omega}`$ and $`\Lambda^*`$, which need maps like $`B`$ and $`E^{\Omega_1}`$ at other bases.
+  the names of $`\Theta_\delta`$, $`\Theta_{d\omega}`$ and $`\Lambda^*`$, which need maps like $`B`$ and $`E^{\Omega_1}`$ at other bases. (Now these maps exist at the bases
+  $`\psi_{\Omega_2}(\Omega_\omega + \theta_2\cdot\zeta)`$, and lower bounds for these names are proved as a transfer, [THETA.md](THETA.md) §1.)
 
 ## 9. Native codes up to $`\Phi_1`$
 
@@ -282,6 +285,8 @@ ordinals are values of Wilken's terms over the base $`\upsilon_\zeta`$ with para
   SRO$`_\sigma`$ (SRO$`_1`$ is the pattern of SRO). A block hosts every ordinary chain with small increments and every block of smaller rank. The fixed point
   $`\Xi_{\lambda+\omega^\kappa}`$ gets as module the code of $`\Xi_\lambda + 1`$ followed by a block of rank $`\kappa`$. Then $`N(\gamma') \ll N(\gamma)`$ for $`\omega \le \gamma' \lt \gamma \lt \Phi_1`$, so
   $`\iota(\mathrm{CH}_2) \ge \Phi_1`$; the pattern of SRO[0] lies above every code of an index below $`\Xi_1`$, and the pattern of SRO above every code of an index below $`\Xi_{\omega^2}`$.
+  (The referee: one step uses PLACE-AMB for a set that ends in a block and so is not a code; the proof carries over word for word. In EXIST-AMB one bound is
+  given a reason that holds only for a point host; for a module host it holds because the bound lies below the next layer.)
 - These bounds are native: they come from codes, not from reaches. The referee: they are far below the known $`\iota(\mathrm{CH}_2) \gt \nu_C \gt \Lambda_\varepsilon`$; the progress is
   on the route toward $`\iota(\mathrm{CH}_2) \ge \theta_0`$ only.
 - **Not proved**: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, as the paper says. The gap is a native family of order type $`\theta_0`$. This family already spends SRO (which conv
@@ -306,6 +311,8 @@ the subtree $`S`$ of $`R`$: the copies are siblings.
 - **Theorem PER0** (proved given (REP)) with **Lemma STEP-PHI** (proved): the run in the children of the root, with the chain of anchors as the black box.
   178 matrices. **Corollary SUM-CORE0** (proved): 8 matrices.
 - **Lemmas BASE-PHI-R and DIRECT-R** (proved). For $`t = 2`$, each gives FS⁺ at one level $`n`$, for a chain of any length. The shape for every $`n`$ is open.
+  (The referee: the check of DIRECT-R lets the point lie in the root block, which the text excludes; the proof is valid either way, and only the counts
+  checked for small $`n`$ are affected. The fact that a left end of $`\lt_2`$ is additively principal needs Carlson 2009, Def 5.6, together with L.5.5(6).)
 - **The tally** (the referee checked the counts):
 
 | class | matrices | proved for every $`n`$, given (REP) | given LOW | given a condition checked for small $`n`$ | $`t = 2`$, derivation checked for $`n \le 7`$ | open |
@@ -339,7 +346,8 @@ $`X = P^* \cap [x, x^\#)`$, and $`\tilde X`$ is its downward copy, with $`\tilde
   $`\tilde X = T_{x\to u_m}[X]`$ (two coverings and isominimality, in the style of Carlson 2009, the proof of L.15.7). Then (LOC$`_T`$) holds there, with $`T_m`$ as the map.
 - **CROSS** (proved). Every $`\le_1`$- or $`\le_2`$-relation between a low point and a point above the copy is the same on both sides.
 - **ET-TF** (proved). Under (HC), with $`Y \subset [x, x^\#)`$ and $`x^\# \in P^*`$: every extension of the copy of $`Y`$ whose closure has no sum $`z + w`$ with $`z \ge u_m^\#`$ and
-  $`0 \lt w \lt u_m^\#`$, $`w \notin P^*`$, is realized over $`Y`$ below $`\nu`$ with the same diagram.
+  $`0 \lt w \lt u_m^\#`$, $`w \notin P^*`$, is realized over $`Y`$ below $`\nu`$ with the same diagram. (The referee: the reason given for one case of sums is wrong, since a low
+  summand can be a suffix of a point of $`P^*`$ without being in $`P^*`$; the case holds by Cantor normal form arithmetic. AP2 and COPY-EQ should cite Carlson 2009, L.5.5(7).)
 - **Example TW** (proved). For $`a = \upsilon_\iota`$ with $`\iota = u_{m+1} + \omega^{u_m}`$: $`\mathrm{lh}(a) = \delta_\iota + \tilde x`$, but the upward copy $`a^{**}`$ has $`\mathrm{lh}(a^{**}) \lt \delta^{**} + x`$. So the
   copy that Carlson's upward rule gives breaks a $`\le_1`$-relation that a translation needs.
 - **Not proved**: GHOST-TR as stated (a boundary case at $`u_m^\#`$; with the referee's fix, terms $`\ge u_m^\#`$ in place of $`\gt u_m^\#`$, it holds); TR-RED, "(TR$`_T`$) is
@@ -360,6 +368,8 @@ $`X = P^* \cap [x, x^\#)`$, and $`\tilde X`$ is its downward copy, with $`\tilde
 - Upper bounds: no InaccPsi bound is proved for any $`\iota(\mathrm{CH}_k)`$, $`m_F`$, $`x_F`$, $`C^*_3`$ or $`\nu_C`$.
 - $`\nu_C = \nu_S`$: given (HC), the downward copy is the copy by $`T`$, the local part holds, and every extension without such translations is realized
   (§11); the reduction to (LOC$`_T`$) and (TR$`_T`$) does not work there. Left: (R1)–(R3) and a reduction in the form of ET-TF.
+
+The thirteenth round changed this status; see [THETA.md](THETA.md) §5.
 
 ## 13. Checks of the twelfth round
 
@@ -382,12 +392,4 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 
 ## 14. Open
 
-- The first inaccessible: $`H_m`$ (equivalently, some $`\iota(\mathrm{CH}_k) \ge \theta_0`$; enough: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, from a native family of codes of order type $`\theta_0`$, or a
-  map $`\nu`$ on all of $`D`$ with L1p-free values and $`\nu(s) \ll \nu(t)`$ at every step); UNIF-FS below SRO on the open classes of §10, and a proof of (REP);
-  $`\iota(A_n) \ge |\tau_n|`$.
-- Upper bounds: any InaccPsi bound for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, or for $`\nu_C`$; STEP-CH (on a class closed under $`\Phi`$, with collapse arguments
-  below $`I_0`$); REL-SHARP; (HQ).
-- Names past $`\Lambda_{\mathrm{fp}2}`$: PAR-SAME (it gives $`\Theta_1 = H(\theta)`$, $`\Theta_A = H(\varepsilon_{\theta+\omega})`$, and the claim up to $`H(\varepsilon_{\theta+\omega} + \omega^2)`$); (H2a) and (H2b) beyond
-  $`\psi_{\Omega_2}(\Omega_2\cdot 2)`$, for the exact offsets below $`\Theta_1`$; the names of $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$; whether $`\nu_C \lt \upsilon^*`$.
-- $`\nu_C = \nu_S`$: (R1)–(R3) of §11, or a reduction in the form of ET-TF; (PROF); the reaches at limits of fixed points of $`k`$.
-- The rest of [COVER.md](COVER.md) §9.
+The thirteenth round changed this list; the current list is [THETA.md](THETA.md) §7.

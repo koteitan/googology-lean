@@ -116,7 +116,8 @@ $`\nu_P = \upsilon_{\Lambda^*+\omega^2}`$ とおく。
   より下で成り立ち、$`R_2^C`$ は $`[0, \rho_{\Theta_A+\omega^2})`$ で分かった（[PINS-ja.md](PINS-ja.md) §1–2）。
 - **予想**（プログラムで確かめた）。$`\upsilon_{\Lambda^*} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2})`$、ここで
   $`\theta_2 = \psi_{\Omega_3}(\Omega_\omega)`$。これは行列 (0,0,0)(1,1,1)(1,1,0)(2,2,1)(2,2,0)(3,3,1)(3,0,0)(3,0,0) の点。
-  $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$。
+  $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$。（今はどちらも、査読済みの証明の移し替えとして、下からの評価が証明済み、査読 1 回。
+  $`\upsilon_{\Lambda^*}`$ の名前はその導き方から独立に出てくる。等しいことはまだ予想、[THETA-ja.md](THETA-ja.md) §1。）
 
 ## 4. 骨組みが終わる所
 
@@ -215,12 +216,12 @@ FIRST-BREAK、FRAG2-W、FRAG2-C、§5 の C3′-FALSE）は、$`R_2^S`$ では I
 - $`\Theta_A`$ より上の正確な届く先（$`T_\omega`$ より下のどの基の上でも、その基の上で走らせた形式的な届く先の再帰に従う。
   今は証明済み、査読 1 回、[COVER-ja.md](COVER-ja.md) §5.1）。$`\Theta_A`$ までの届く先と、$`[\Lambda_\Gamma, \Lambda_\varepsilon)`$ での $`O`$ の閉じた形は、今は
   証明済み（[PINS-ja.md](PINS-ja.md) §2–3）。
-- $`\nu_C`$ より上の $`R_2^C`$（$`R_2^C`$ の核は今は $`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ を含む、[BREAK-ja.md](BREAK-ja.md) §2）。INC1-nonups と INC1-S は今は
+- $`\nu_C`$ より上の $`R_2^C`$（$`R_2^C`$ の核は今は $`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ を含む、[BREAK-ja.md](BREAK-ja.md) §2。今は $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$、そして移し替えとして $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$、[THETA-ja.md](THETA-ja.md) §1）。INC1-nonups と INC1-S は今は
   証明済み（[BREAK-ja.md](BREAK-ja.md) §1）。
 - $`\Theta_P`$、$`\Lambda^*`$、$`\nu_P`$、$`\nu_S`$ の値（$`\Lambda_\varepsilon`$ までの名前は今は証明済み、[PINS-ja.md](PINS-ja.md) §3。$`\Theta_P`$ の名前は今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §10.4。$`\nu_S`$ は今は正確に
-  記述できたが、名前は予想、[BREAK-ja.md](BREAK-ja.md) §2。§7.3 で帰着）。
+  記述できたが、名前は予想、[BREAK-ja.md](BREAK-ja.md) §2。§7.3 で帰着。§3 の予想と合う $`\Lambda^*`$ と $`\nu_P`$ の下からの評価は、今は移し替えとして証明済み、[THETA-ja.md](THETA-ja.md) §1）。
 - $`\nu_S`$ より先の FRAG2：$`\upsilon`$ の点でない基をいくつも同時に（FRAG-E）、および入れ子の切るデータ。
 - $`C^*_3`$：上半分（生成した構造の順序数解析）、下半分 $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$、予想 CH。$`R_2^C`$ では鎖の底は今は特徴づけられた
   （定理 CP3、[COVER-ja.md](COVER-ja.md) §1）が、場所は決まっていない。上からの評価には、その下の $`\lt_2`$ の組 1 つと、その間の
   もう 1 点があれば足りる（補題 CRIT、[COVER-ja.md](COVER-ja.md) §6.2）が、$`c_0`$ を押さえる InaccPsi の項は証明されていない。
-- $`V_3`$ より上での変換器の順序の命題 S（標本の決まらない隣り合う組 26 個は今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §1。SRO より下の段は標本の 3,166 個のうち 459 個ですべての $`n`$ で証明済み、[FANFREE-ja.md](FANFREE-ja.md) §7.1）。
+- $`V_3`$ より上での変換器の順序の命題 S（標本の決まらない隣り合う組 26 個は今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §1。SRO より下の段は標本の 3,166 個のうち 459 個ですべての $`n`$ で証明済み、[FANFREE-ja.md](FANFREE-ja.md) §7.1、今は 1,987 個で、[THETA-ja.md](THETA-ja.md) §3）。

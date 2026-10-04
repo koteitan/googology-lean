@@ -91,7 +91,8 @@ $`\mathrm{Core}^\tau`$ is the union of the sets $`B`$ of the $`\tau`$-isominimal
 - **Conjectures** (names checked): $`\Theta_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+\omega}})`$,
   $`\Theta_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$, $`\Theta_A = \psi_{\Omega_1}(\Omega_\omega + \varepsilon_{\theta+\omega})`$. The name of $`\Theta_P`$ is now proved (1 review, THETA-P,
   [FANFREE.md](FANFREE.md) §10.4). The name of $`\Theta_1`$ is now reduced to an open hull lemma (THETA1-RED, [VEBLEN.md](VEBLEN.md) §1), and then the names of $`\Theta_1`$ and $`\Theta_A`$ to one short open
-  lemma on parameters (PAR-SAME, [VEBLEN.md](VEBLEN.md) §8; the proofs have a blocking gap without it).
+  lemma on parameters (PAR-SAME, [VEBLEN.md](VEBLEN.md) §8; the proofs have a blocking gap without it). PAR-SAME is now proved, so both names are proved
+  (THETA1 and THETA-A, 2 reviews, [THETA.md](THETA.md) §1).
 
 ## 3. Names of all $`\upsilon`$-points (Theorem GEN)
 
@@ -101,7 +102,7 @@ $`\eta`$ for which $`\Omega_\omega + \theta\cdot\eta`$ is a normal argument. For
 - **Theorem GEN** (proved, 1 review). For every $`\eta \in D`$: $`H(\eta) = \upsilon_{1+\iota(\eta)}`$ with $`\iota(\eta) = \mathrm{otp}(D \cap \eta)`$.
   So the terms $`\psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$, $`\eta \in D`$, list the $`\upsilon`$-points in increasing order, but only those below
   $`\upsilon^* = \sup H[D]`$: the $`\upsilon`$-points are cofinal in $`\omega_1`$, so not all of them (correction, [BREAK.md](BREAK.md) §3; GEN-EXT
-  extends the list to $`\eta \lt \Omega_\omega\cdot\omega`$, §2). Proof:
+  extends the list to $`\eta \lt \Omega_\omega\cdot\omega`$, §2; now $`\upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ is proved, 1 review, [THETA.md](THETA.md) §1). Proof:
   STEP and LOW-STEP at successors; CONT and one general hull-gap lemma at limits. It holds for all $`\eta \lt \Omega_2`$.
   Theorems T+, T++ and PHI are special cases, so T+ now has **2 reviews**, T++ **3** and PHI **2**.
 - **Lemmas GAP\*, SUP, DOWN, RI** (proved, 1 review). RI: $`\iota(\eta)`$ is a restart index iff $`\mathrm{logend}(\eta) \ge 2`$, and a
@@ -208,7 +209,8 @@ Each run was under 60 seconds; none is a proof.
   reaches; the names half of the claim above $`\Lambda_\varepsilon`$. Now the closed form holds for offsets up to $`\varepsilon_{\zeta_{\rho+1}+1}`$, $`\Theta_P`$ is named, and the
   claim holds up to $`\rho_{\Lambda'+\omega^2}`$ ([FANFREE.md](FANFREE.md) §10.4); left: the closed form on $`(\Lambda', \Theta_1)`$ and the other names. Now the closed form
   holds for every restart with $`e_\lambda \le \psi_{\Omega_2}(\Omega_2) + 1`$ and the claim up to $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$; $`\Theta_1 = H(\theta)`$ is reduced to an open hull lemma ([VEBLEN.md](VEBLEN.md) §1). Now the closed form holds for
-  $`e_\lambda \le \psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$ and the claim up to $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$; the names of $`\Theta_1`$ and $`\Theta_A`$ need only the open lemma PAR-SAME ([VEBLEN.md](VEBLEN.md) §8).
+  $`e_\lambda \le \psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$ and the claim up to $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$; the names of $`\Theta_1`$ and $`\Theta_A`$ need only the open lemma PAR-SAME ([VEBLEN.md](VEBLEN.md) §8). Now PAR-SAME is proved, $`\Theta_1`$ and $`\Theta_A`$
+  are named, and the claim holds up to $`\psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$; for $`\Lambda^*`$ and $`\nu_P`$ only lower bounds are proved ([THETA.md](THETA.md) §1).
 - INC1-S and INC1-nonups are now proved ([BREAK.md](BREAK.md) §1); RIGHT (every $`\lt_2`$-right end is a $`\upsilon`$-point) is now proved in $`R_2^S`$ ([COVER.md](COVER.md) §5.1), and open in $`R_2^C`$ above $`\beta_0`$.
 - $`C^*_3`$: the least bottom (above $`\nu_P`$), the upper half, the lower half, and Conjecture CH ([BREAK.md](BREAK.md) §10); the first fan is above $`T_\omega`$, and it needs an inaccessible given the open hypothesis
   $`FF_N`$ ([BREAK.md](BREAK.md) §7.4; now equivalent to $`m_F \ge \theta_0`$, [FANFREE.md](FANFREE.md) §4), or given the weaker open hypothesis that $`\min\{m : m \le_1 x_F\}`$ is $`\ge \theta_0`$ (now equivalent to a lower bound for

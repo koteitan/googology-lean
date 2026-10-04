@@ -18,7 +18,7 @@ $`\lt_2`$-pair $`(\upsilon_{\lambda+\omega j}, \upsilon_{\lambda+\omega j+1})`$ 
 **new pair**. A **fan** is a point with two $`\lt_2`$-successors. A **$`k`$-nest** is $`x_1 \lt \cdots \lt x_k \lt y_k \lt \cdots \lt y_1`$ with $`x_i \lt_2 y_i`$
 ($`k`$ nested pairs); its top is $`y_1`$. PS is the pattern of a 2-nest (a pair with a pair nested inside).
 $`H(\eta) = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$, $`P_k = \psi_{\Omega_2}(\Omega_\omega\cdot k)`$, so $`P_1 = \theta`$ and $`P_2 = \theta' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)`$.
-$`\beta_0`$ is the first difference between $`R_2^S`$ and $`R_2^C`$ ([README.md](README.md) §3).
+$`\beta_0`$ is the first difference between $`R_2^S`$ and $`R_2^C`$ ([THETA.md](THETA.md) §8.2).
 
 ## 1. INC1 and NOBAD: proved
 
@@ -121,7 +121,8 @@ pair, and $`\nu_{nest}`$ the least top $`y`$ of a realization of PS.
   In both cases the two structures agree on every relation with right end $`\lt \nu_C`$. Also proved: $`\nu_C = \nu_S`$ iff there is
   no ghost iff $`\beta_0 \gt \nu_S`$ iff $`T_C = \nu_S`$.
 - **Corollaries** (proved, 1 review; $`R_2^C`$).
-  - $`\beta_0 \ge \nu_C \gt \nu_P`$. Before: $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$.
+  - $`\beta_0 \ge \nu_C \gt \nu_P`$. Before: $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$. (Now $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, 1 review, and
+    $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$, proved as a transfer, [THETA.md](THETA.md) §1.)
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$, so the core of $`R_2^C`$ contains $`[0, \nu_P]`$. Before: $`[0, \rho_{\Theta_{d\omega}})`$, and $`[0, T_C]`$ with $`T_C`$ not
     compared with $`\nu_P`$.
   - SKEL⁺ (with HC and INC1-nonups) holds in $`R_2^C`$ on $`[0, \nu_C)`$. Now with no hypothesis ([COVER.md](COVER.md) §5.1).
@@ -673,5 +674,6 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
   with an infinite $`\le_1`$-chain of right ends (Theorem CP3, [COVER.md](COVER.md) §1); this characterizes the chain but does not locate it.
 - The reaches for candidates in $`[\delta_j\cdot\omega, \delta_{j+1})`$; a review of the repaired TOP-REG and REACH; $`R_2^C`$ above $`\nu_C`$; the closed
   forms and names above $`\Lambda_\Gamma`$ ($`\Theta_1`$, $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$; the closed forms up to $`\Lambda'`$ and the name of $`\Theta_P`$ are
-  now proved, [FANFREE.md](FANFREE.md) §10.4, the closed forms up to $`\Lambda_{\mathrm{fp}}`$ too, [VEBLEN.md](VEBLEN.md) §1, and up to $`\Lambda_{\mathrm{fp}2}`$, with $`\Theta_1`$ and $`\Theta_A`$ reduced to the open lemma PAR-SAME, §8); names above $`\upsilon^*`$ beyond GEN-EXT.
+  now proved, [FANFREE.md](FANFREE.md) §10.4, the closed forms up to $`\Lambda_{\mathrm{fp}}`$ too, [VEBLEN.md](VEBLEN.md) §1, and up to $`\Lambda_{\mathrm{fp}2}`$, with $`\Theta_1`$ and $`\Theta_A`$ reduced to the open lemma PAR-SAME, §8; now PAR-SAME is proved and $`\Theta_1`$, $`\Theta_A`$ are named,
+  and for $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$ lower bounds are proved as a transfer, [THETA.md](THETA.md) §1); names above $`\upsilon^*`$ beyond GEN-EXT.
 - That the assignments between ordinals and patterns are elementary recursive (outline only), and that UNIF is onto.

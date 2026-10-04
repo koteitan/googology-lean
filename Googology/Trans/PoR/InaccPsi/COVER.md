@@ -164,7 +164,7 @@ S-covering of it (the $`R_2^S`$ form of Thm 14.10(2)).
   $`o_k \gt \omega`$) implies $`o_k = \omega`$. $`R_2^S = R_2^C`$ on $`[0, \max Z]`$ implies MIN$`^S`$ at $`Z`$. The referee notes that, given PINNING, MIN$`^S`$
   at the sets that contain $`s`$ is the same as $`o_k = \omega`$; only the global MIN$`^S`$ is a separate target.
 - **Level 2, the ghost of case (P3b)** (proved, 1 review). If $`o_2 \gt \omega`$, then $`\beta_0 \le \nu_S`$. In case (P3b), $`\beta_0 = s^+ = \upsilon^2_{\omega+1}`$, the only
-  extra relation is $`s \lt_2 s^+`$ in $`R_2^C`$, $`\max \mathrm{Pred}_1(s^+) = s`$ (so LIM2 of [README.md](README.md) §3 does not apply), and every S-isominimal
+  extra relation is $`s \lt_2 s^+`$ in $`R_2^C`$, $`\max \mathrm{Pred}_1(s^+) = s`$ (so LIM2 of [THETA.md](THETA.md) §8.2 does not apply), and every S-isominimal
   set that contains $`s`$ has a point $`\ge s^+`$. So the ghost question is the converse $`C \Rightarrow S`$ at the one pair $`(s, s^+)`$.
 - **Conjecture** MIN$`^S`$. It holds wherever the two structures agree; Carlson's proof of Thm 14.10(2) uses his Lemma 14.9, which has no
   known $`R_2^S`$ form.
@@ -406,7 +406,7 @@ Notation of §2 and §5.2.
 - **Corollary GP** (proved, 1 review). Let Gp be PTm with a pair $`p \lt_2 q`$ added. Its least realization has root $`m_F`$, and
   $`m_F \lt p^* \lt q^* \lt v_1`$. So the least $`\lt_2`$-pair above $`m_F`$ lies below $`v_1`$, and $`p^*`$ is the least left end in $`(m_F, v_1)`$.
 - **Lower bounds** (proved, 1 review; from NU-CT and PINS, 1 review each).
-  $`m_F \gt \nu_C \gt \nu_P \gt \rho_{\Lambda^*} \gt \Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$ (before: $`m_F \gt \upsilon_{\omega^3}`$, §5.3). From one program
+  $`m_F \gt \nu_C \gt \nu_P \gt \rho_{\Lambda^*} \gt \Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$ (before: $`m_F \gt \upsilon_{\omega^3}`$, §5.3; now also $`\nu_C \gt \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, [THETA.md](THETA.md) §1). From one program
   reading each, $`\Phi_3(M)`$ is RF and fan-free, so its point is below $`m_F`$, for M = SRO, (0,0,0)(1,1,1)(2,1,1)(3,1,1), (0,0,0)(1,1,1)(2,2,0),
   and (0,0,0)(1,1,1)(2,2,1)[n] for $`n \le 4`$.
 - **Proposition NEED** (proved, 1 review). If $`m_F`$ has an InaccPsi name, then every name of $`m_F`$ contains an inaccessible iff $`H_m`$. With
@@ -499,5 +499,5 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
   $`FF_{cl}`$, FF, POINT-SRO; whether $`H_m`$ is equivalent to $`x_F \gt \theta_0`$.
 - The least fan: the names (the base $`B_F`$; conjecture $`I_0`$, §6.4), and an upper bound such as $`x_F \lt \psi_{\Omega_1}(I_0\cdot\omega)`$ ($`\sigma_N = m_F`$ is now proved, [FANFREE.md](FANFREE.md) §4).
 - $`R_2^S`$: (ii) ⇒ (i) of CP3 and "⇐" of LEFT-CHAR; MIN$`^S`$ above $`\beta_0`$; PINNING and CORE-S; $`o_k = \omega`$ for $`k \ge 2`$; NOLIM with a ghost
-  above $`\beta_0`$ (and NOLIM$`^*`$); $`\nu_C = \nu_S`$ (by §6.3: SC, or RM; SC beyond the first limit of critical indices in each segment, [FANFREE.md](FANFREE.md) §7.3; now SC at the long restarts, which the reduction always needs, [FANFREE.md](FANFREE.md) §10.3; directly in $`\Sigma_2`$ form, a local base change and translations with a fixed finite set below the copy, [VEBLEN.md](VEBLEN.md) §4; with that set the reduction fails on the zone of the base change, §11); the names (N-χ) and (N-ν) of [BREAK.md](BREAK.md) §7.3; RIGHT in $`R_2^C`$ above
+  above $`\beta_0`$ (and NOLIM$`^*`$); $`\nu_C = \nu_S`$ (by §6.3: SC, or RM; SC beyond the first limit of critical indices in each segment, [FANFREE.md](FANFREE.md) §7.3; now SC at the long restarts, which the reduction always needs, [FANFREE.md](FANFREE.md) §10.3; directly in $`\Sigma_2`$ form, a local base change and translations with a fixed finite set below the copy, [VEBLEN.md](VEBLEN.md) §4; with that set the reduction fails on the zone of the base change, §11; now (HC) is proved and the reduction repaired, left: a twisted upward rule, [THETA.md](THETA.md) §4); the names (N-χ) and (N-ν) of [BREAK.md](BREAK.md) §7.3; RIGHT in $`R_2^C`$ above
   $`\beta_0`$.
