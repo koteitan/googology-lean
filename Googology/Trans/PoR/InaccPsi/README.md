@@ -74,8 +74,9 @@ Both halves are **open**. Below $`\upsilon_{\omega\cdot\omega}`$ both hold, and 
 $`\Phi_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Omega_1\cdot 2})`$, with $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, the first fixed point of $`\alpha \mapsto \Xi_\alpha`$, where $`\Xi_\alpha`$ is the
 $`\alpha`$-th fixed point of $`\iota \mapsto \upsilon_\iota`$ (§3, [RESTARTS.md](RESTARTS.md) and [REACHES.md](REACHES.md)), and now up to
 $`\Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$ ([PINS.md](PINS.md) §3), and now up to
-$`\rho_{\Lambda'+\omega^2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{\Omega_1+1}+1}} + \omega^{\theta+2})`$, where $`\zeta_{\Omega_1+1}`$ is the least fixed point of $`\alpha \mapsto \varepsilon_\alpha`$ above $`\Omega_1`$
-(1 review, [FANFREE.md](FANFREE.md) §10.4; the referee: for the claim the new fact is where this point lies, since the core half was known further). The core half alone is proved in $`R_2^C`$ further, on
+$`\rho_{\Lambda'+\omega^2}`$ (1 review, [FANFREE.md](FANFREE.md) §10.4), and now up to
+$`\rho_{\Lambda_{\mathrm{fp}}+\omega^2} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\psi_{\Omega_2}(\Omega_2)+1} + \omega^{\theta+2})`$, where $`\psi_{\Omega_2}(\Omega_2)`$ is the least fixed point of $`\alpha \mapsto \Gamma_\alpha`$ above $`\Omega_1`$
+(1 review, [VEBLEN.md](VEBLEN.md) §1; as the referees note, for the claim the new fact is where this point lies, since the core half was known further). The core half alone is proved in $`R_2^C`$ further, on
 $`[0, \nu_C]`$, where $`\nu_C \gt \nu_P`$ is the first point where $`R_2^C`$ stops being skeletal ([BREAK.md](BREAK.md) §2).
 
 ## 3. What is proved
@@ -131,8 +132,13 @@ proved, and such a bound is exactly three relations at one point above $`\nu_C`$
 $`R_2^C`$ the claim now holds up to $`\rho_{\Lambda'+\omega^2}`$ with $`\Lambda' = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{\Omega_1+1}+1}})`$, with the reach of every restart there in closed form, and
 $`\Theta_P`$ has its name; the step below SRO is proved for every $`n`$ on 874 of the 3,166 sample matrices; the native codes are ordered up to the
 Bachmann–Howard ordinal; the reaches below $`\nu_C`$ are known up to offset $`\rho^\rho`$ (a Klammer hierarchy over $`\upsilon`$), and SC holds on a larger part of each
-segment, but the reduction to SC always needs the long restarts, where no closed form of the reaches applies, so $`\nu_C = \nu_S`$ stays open. $`C^*_3`$ lies below $`\omega_1^{CK}`$ (Carlson 2009, Thm 15.2), but it still has
-no upper bound by an InaccPsi term and no name. Above $`\rho_{\Lambda'+\omega^2}`$ both
+segment, but the reduction to SC always needs the long restarts, where no closed form of the reaches applies, so $`\nu_C = \nu_S`$ stays open. The eighth page [VEBLEN.md](VEBLEN.md) has the eleventh round (1 review each): in
+$`R_2^C`$ the claim now holds up to $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$, with $`\Lambda_{\mathrm{fp}} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\psi_{\Omega_2}(\Omega_2)+1})`$, because Wilken's hull levels are now matched with the Veblen
+functions and with $`\Gamma`$; below $`\nu_C`$ the Klammer forms of the restarts are read off their InaccPsi names; $`\Theta_1 = H(\theta)`$ is reduced to one open hull lemma; the step below SRO
+is proved for every $`n`$ on 1,442 of the 3,166 sample matrices; the native codes are ordered on all indices below $`\upsilon_1`$ and one level of references, so
+$`\iota(\mathrm{CH}_2) \ge \upsilon_2\cdot\upsilon_1`$; for $`\nu_C = \nu_S`$, Carlson's 2-reflection gives exact copies and every extension above the copy is matched, but the claimed reduction
+to two local statements has a blocking gap, so $`\nu_C = \nu_S`$ stays open. $`C^*_3`$ lies below $`\omega_1^{CK}`$ (Carlson 2009, Thm 15.2), but it still has
+no upper bound by an InaccPsi term and no name. Above $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$ both
 halves are open in $`R_2^C`$ (the core part is proved up to $`\nu_C`$), and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$.
 
 **Lean** (the five files of this directory, built with the whole library):
@@ -273,6 +279,9 @@ $`\kappa_X = \min\{\kappa : \kappa \le_1^X \beta \text{ for all } \beta \ge \kap
   $`x_2 \lt_2^S \nu_C`$, one $`\Sigma_2`$ statement inside the common structure below $`\nu_C`$ (Theorem EQ, [COVER.md](COVER.md) §6.3, 1 review). The condition SC behind it holds on the initial part of each segment of level 2,
   at outline level only ([FANFREE.md](FANFREE.md) §3); now it is proved on the larger part below the first limit of critical indices ([FANFREE.md](FANFREE.md) §7.3), and on a still larger part
   ([FANFREE.md](FANFREE.md) §10.3). But the reduction to SC always needs SC at long restarts, where no closed form of the reaches applies (NEED-C, same place).
+  Working with the $`\Sigma_2`$ statement directly (1 review, [VEBLEN.md](VEBLEN.md) §4): over isominimal sets Carlson's 2-reflection gives exact copies, and
+  every extension above the copy, the long restarts included, is matched (TOP); what is left is a local base change and translations, with a
+  fixed finite set below the copy (the paper's reduction to these two without that set has a blocking gap).
 - **Lemma UPG.** At a stage of agreement, $`\alpha \le_1^C \beta \Rightarrow \alpha \le_1^S \beta`$ when every $`\gamma \lt \alpha`$ lies in an
   isominimal subset of $`\alpha`$ in $`R_2^C`$ (true for $`\alpha = \kappa_C`$ and $`\alpha = \upsilon_{\omega\cdot\omega}`$).
 - **KAPPA and CORE-EQ.** $`\kappa_C \le \beta_0 \Rightarrow \kappa_C \le \kappa_S`$, and $`\kappa_S \le \beta_0 \Rightarrow \kappa_S \le \kappa_C`$. So if
@@ -365,7 +374,8 @@ pointwise least one.
   conjecture. Then (1 review each, [FANFREE.md](FANFREE.md) §4): $`m_F`$ is the limit of the points of the chains of pairs $`\mathrm{CH}_k`$, and $`\sigma_N = m_F`$.
   Then (1 review each, [FANFREE.md](FANFREE.md) §7.2 and §7.4): every fan-free pattern without the configuration L1p lies below $`\iota(\mathrm{CH}_2)`$, and
   $`\iota(\mathrm{CH}_2) \lt t`$ holds exactly when one point $`a \lt t`$ has $`a \lt_2 b`$, a pair $`c \lt_2 d`$ with $`b \lt c`$, and $`a \le_1 d`$.
-  Then (1 review, [FANFREE.md](FANFREE.md) §10.2): $`\iota(\mathrm{CH}_2)`$ is at least the Bachmann–Howard ordinal by native codes (far below the known $`\iota(\mathrm{CH}_2) \gt \nu_C`$).
+  Then (1 review, [FANFREE.md](FANFREE.md) §10.2): $`\iota(\mathrm{CH}_2)`$ is at least the Bachmann–Howard ordinal by native codes (far below the known $`\iota(\mathrm{CH}_2) \gt \nu_C`$),
+  and then (1 review, [VEBLEN.md](VEBLEN.md) §2) at least $`\upsilon_2\cdot\upsilon_1`$.
   Earlier:
   $`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$.
 - **Lemma TOP2** (2026-10, 1 review). For every $`\alpha \lt m_3`$ there is a chain $`x \lt_2 y`$ of length 2 with
@@ -456,16 +466,16 @@ pointwise least one.
 
 **Not proved:**
 
-- **The claim above $`\rho_{\Lambda'+\omega^2}`$** in $`R_2^C`$, and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$, both halves. The reaches of the restarts
-  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [FANFREE.md](FANFREE.md) §13, [COVER.md](COVER.md) §9, [BREAK.md](BREAK.md) §10, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
+- **The claim above $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$** in $`R_2^C`$, and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$, both halves. The reaches of the restarts
+  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [VEBLEN.md](VEBLEN.md) §7, [COVER.md](COVER.md) §9, [BREAK.md](BREAK.md) §10, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
 - **$`R_2^S = R_2^C`$**: the converse $`C \Rightarrow S`$ for $`\le_1`$ at a successor stage $`\beta \gt \kappa_C`$ with
   $`\alpha \notin G_C`$, and for $`\le_2`$ at stages of type (ii) (this needs an upward transfer of $`\Pi_2`$ sentences, which
   neither upward 2-reflection nor liftings give; it is now one pair $`(a^*, \beta)`$ per stage, and below $`\kappa_C`$ it is
   Conjecture CORE-2; left: PIN and LOW); Σ2-GAP, INC, W(C), (R), AGR, and $`\beta_0 = \infty`$. Theorem CC and all
   certificates are about $`R_2^C`$.
 - **The lower bound below $`\theta_0`$** (referee: blocking gap toward this goal, not an error; the 26 undecided limit jumps of
-  the sample above $`V_3`$ are now proved, [FANFREE.md](FANFREE.md) §1; the step below SRO is now proved for every $`n`$ on 874 of the 3,166 sample
-  matrices, [FANFREE.md](FANFREE.md) §7.1 and §10.1): an order embedding
+  the sample above $`V_3`$ are now proved, [FANFREE.md](FANFREE.md) §1; the step below SRO is now proved for every $`n`$ on 1,442 of the 3,166 sample
+  matrices, [FANFREE.md](FANFREE.md) §7.1, §10.1 and §13.3): an order embedding
   $`\mu`$ of all $`\varepsilon`$-number terms below $`\theta_0`$ into standard trio matrices below SRO, and the local step
   of S-RED for all matrices below SRO. Outside $`G_B`$ are four families: (M1) uncountable $`\kappa`$, $`c`$ or $`g`$ in a
   summand; (M2) successor indices such as $`\Omega_{\xi+1}`$; (M3) uncountable indices such as $`\Omega_{\Omega_\omega}`$; (M4)
@@ -545,6 +555,9 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       NAME-OFFSET, CORE-C$`^A`$; [PINS.md](PINS.md))
     - in $`R_2^C`$ up to $`\rho_{\Lambda'+\omega^2}`$, with the reaches there in closed form and the name of $`\Theta_P`$ — proved (NAME-OFFSET-Z, STRUCT′,
       THETA-P; [FANFREE.md](FANFREE.md) §10.4)
+    - in $`R_2^C`$ up to $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$, with the reaches there in closed form — proved (VEB-THETA, GAM-THETA, EXACT-G, PSI2,
+      NAME-OFFSET-G, STRUCT″; [VEBLEN.md](VEBLEN.md) §1); up to $`H(\theta) = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$, with $`\Theta_1 = H(\theta)`$ — reduced to the hull
+      lemma (H2a), (H2b) (THETA1-RED, H3), which is open
     - the core of $`R_2^C`$ up to $`\rho_{\Theta_{d\omega}}`$, and on $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$ — proved (CORE-C$`^{d\omega}`$, CAP, NU-CT; [BREAK.md](BREAK.md))
   - **B** upper bound $`\mathrm{Core}(R_2^+) \subseteq \psi_{\Omega_1}(I_\omega)`$ — open
     - B0 reduction to least chains (Theorem CC) — proved for $`R_2^C`$
@@ -575,11 +588,13 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       open; needs a set-theoretic condition for $`\lt_2`$ that is not known
   - **A** full analysis — open
     - A1 hull systems over every base, with simultaneous collapsing functions for all $`\Omega_\xi`$ and $`I_n`$,
-      compared with InaccPsi — open, high (the map $`B`$ of STEP does this below $`\Omega_\omega`$, one way)
+      compared with InaccPsi — open, high (the map $`B`$ of STEP does this below $`\Omega_\omega`$, one way; at the level of $`\Omega_1`$, Wilken's
+      levels below $`\Omega_1^2 + \Omega_1`$ are the Veblen functions and $`\Gamma`$, VEB-THETA and GAM-THETA, [VEBLEN.md](VEBLEN.md) §1)
     - A2 a structure theorem for $`\le_1`$, $`\le_2`$ of $`R_2^+`$ up to the bound (the analogue of Wilken 2021,
       Thm 4.2); the results of [R2PLUS.md](../../BMS/PoR/Trio/R2PLUS.md) are this theorem below
       $`\upsilon_{\omega^3}`$, Theorem BLK$`^O`$ extends it with exact reaches to $`\Lambda_\varepsilon`$, Theorem EXACT-A to $`\Theta_A`$
-      ([PINS.md](PINS.md)), STRUCT′ writes it with names up to $`\rho_{\Lambda'+\omega^2}`$ ([FANFREE.md](FANFREE.md) §10.4), the value at $`\Theta_A`$ and the landmarks $`\Theta_\delta`$, $`\Theta_{d\omega}`$ ([BREAK.md](BREAK.md) §4), Theorem SKEL gives it in
+      ([PINS.md](PINS.md)), STRUCT′ writes it with names up to $`\rho_{\Lambda'+\omega^2}`$ ([FANFREE.md](FANFREE.md) §10.4) and STRUCT″ up to $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$ ([VEBLEN.md](VEBLEN.md) §1), KV-NAMES reads the
+      Klammer reaches below $`\nu_C`$ off the names (same place), the value at $`\Theta_A`$ and the landmarks $`\Theta_\delta`$, $`\Theta_{d\omega}`$ ([BREAK.md](BREAK.md) §4), Theorem SKEL gives it in
       $`R_2^S`$ on $`[0, \nu_P)`$ ([REACHES.md](REACHES.md)), SKEL⁺ up to $`\nu`$ ([BREAK.md](BREAK.md) §2), and the level-0 description of $`R_2^S`$ at every
       countable ordinal (SKEL$`^\infty`$, [COVER.md](COVER.md) §5.1); the first block of every level of nested pairs (LIFT-0,
       [BREAK.md](BREAK.md) §5), and every block of every level below $`T_\omega`$ (SH, [BREAK.md](BREAK.md) §7.1) — proved; the order type of each level
@@ -594,7 +609,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
     - A6 $`R_2^S = R_2^C`$ everywhere — open (known below $`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$); its first case $`\nu_C = \nu_S`$ is one $`\Sigma_2`$ statement
       (EQ), implied by a segment condition SC that is proved on the first block ([COVER.md](COVER.md) §6.3), and on the initial part of each
       segment at outline level ([FANFREE.md](FANFREE.md) §3), now proved below the first limit of critical indices ([FANFREE.md](FANFREE.md) §7.3) and on a larger part ([FANFREE.md](FANFREE.md) §10.3);
-      left: SC at the long restarts, which the reduction always needs
+      left: SC at the long restarts, which the reduction always needs; directly in $`\Sigma_2`$ form, every extension above the copy is matched
+      (TOP, [VEBLEN.md](VEBLEN.md) §4); left there: a local base change and translations with a fixed finite set below the copy
     - A7 relativized patterns of $`R_1^+`$ and uniform assignments between ordinals and patterns (announced by Wilken) —
       proved (RC-PIN, RC, U, UNIF; [PINS.md](PINS.md) §1; the closures are finite, CL-FIN, and are explicit pin patterns, EXPL,
       [BREAK.md](BREAK.md) §4); that the assignments are elementary recursive — outline only
@@ -604,8 +620,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       also MU-0 and MU-B0 ((M4) at level 0; adds nothing to the core); left: (M4) at level $`\ge 1`$, (M1)–(M3), and the
       local step below SRO — open (with them the first fan needs an inaccessible, RED-HM, [COVER.md](COVER.md) §5.3); the top step at SRO
       and several uniform families of steps — proved for explicit patterns ([COVER.md](COVER.md) §6.1); all 26 undecided limit jumps of the
-      sample above $`V_3`$ — proved ([FANFREE.md](FANFREE.md) §1); the step for every $`n`$ on 874 of the 3,166 sample matrices below SRO, IDX-ADD among them — proved ([FANFREE.md](FANFREE.md) §7.1, §10.1); native codes up to the
-      Bachmann–Howard ordinal — proved ([FANFREE.md](FANFREE.md) §10.2); the step for all
+      sample above $`V_3`$ — proved ([FANFREE.md](FANFREE.md) §1); the step for every $`n`$ on 1,442 of the 3,166 sample matrices below SRO, IDX-ADD among them — proved ([FANFREE.md](FANFREE.md) §7.1, §10.1, §13.3); native codes up to the
+      Bachmann–Howard ordinal, then on all indices below $`\upsilon_1`$ and one level of references ($`\iota(\mathrm{CH}_2) \ge \upsilon_2\cdot\upsilon_1`$) — proved ([FANFREE.md](FANFREE.md) §10.2, §13.2); the step for all
       matrices below SRO, and a map without matrices on all terms — open (with values without L1p it would give $`\iota(\mathrm{CH}_2) \ge \theta_0`$, [FANFREE.md](FANFREE.md) §7.2)
     - L-CERT on $`[\theta_0, \psi_{\Omega_1}(I_0))`$ and above — open
     - L-BMS through $`\Phi_3`$ — blocked: by DOM₂ a pattern of $`\Phi_3`$ without a chain of length 3 stays below $`m_3`$,
@@ -775,7 +791,7 @@ needs "$`\Phi_3(M)`$ is a pattern" (open), and it is about $`R_2^C`$ only.
 Nothing about $`R_2^+`$ itself is in Lean. The results above $`\upsilon_{\omega^3}`$ are on the second page
 [RESTARTS.md](RESTARTS.md), those above $`\Xi_\omega`$ on the third page [REACHES.md](REACHES.md), those beyond $`\Lambda_\varepsilon`$ on
 the fourth page [PINS.md](PINS.md), and those where the skeleton ends, with the levels above it, on the fifth page [BREAK.md](BREAK.md), and the
-results by covering minimality and the level-0 description (the fifth to seventh rounds) on the sixth page [COVER.md](COVER.md), and the eighth to tenth rounds on the seventh page [FANFREE.md](FANFREE.md).
+results by covering minimality and the level-0 description (the fifth to seventh rounds) on the sixth page [COVER.md](COVER.md), and the eighth to tenth rounds on the seventh page [FANFREE.md](FANFREE.md), and the eleventh on the eighth page [VEBLEN.md](VEBLEN.md).
 
 ## 8. References
 

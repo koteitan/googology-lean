@@ -8,7 +8,7 @@ page are from 2026-10; they come from four papers, each refereed once. "1 review
 means that two independent papers proved the result and each paper was refereed once. A statement that its referee
 found not proved is listed under **Not proved**, even when the rest of its paper is proved. None of the four papers
 uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006). The next four rounds are on the fifth page
-[BREAK.md](BREAK.md), the fifth to seventh rounds on the sixth page [COVER.md](COVER.md), and the eighth to tenth on the seventh page [FANFREE.md](FANFREE.md); they change some statuses here, as marked.
+[BREAK.md](BREAK.md), the fifth to seventh rounds on the sixth page [COVER.md](COVER.md), and the eighth to tenth on the seventh page [FANFREE.md](FANFREE.md), and the eleventh on the eighth page [VEBLEN.md](VEBLEN.md); they change some statuses here, as marked.
 
 **Notation.** As on [REACHES.md](REACHES.md). For a $`\upsilon`$-point $`\tau`$, $`\tau^\infty`$ is the least $`\upsilon`$-point above
 $`\tau`$, and $`\mathrm{seg}(\tau) = [\tau, \tau^\infty)`$. For a restart index $`\lambda`$: $`\sigma_\lambda = \upsilon_{\lambda+1} = \rho_\lambda^\infty`$ and
@@ -90,7 +90,7 @@ $`\mathrm{Core}^\tau`$ is the union of the sets $`B`$ of the $`\tau`$-isominimal
   $`\delta + \varepsilon_{\sigma+\omega}`$, so HC holds at every $`\lambda \le \Theta_A`$ and $`R_2^C = R_2^S`$ on $`[0, \rho_{\Theta_A+\omega^2})`$ ([BREAK.md](BREAK.md) §4, 1 review).
 - **Conjectures** (names checked): $`\Theta_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+\omega}})`$,
   $`\Theta_1 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta\cdot 2})`$, $`\Theta_A = \psi_{\Omega_1}(\Omega_\omega + \varepsilon_{\theta+\omega})`$. The name of $`\Theta_P`$ is now proved (1 review, THETA-P,
-  [FANFREE.md](FANFREE.md) §10.4).
+  [FANFREE.md](FANFREE.md) §10.4). The name of $`\Theta_1`$ is now reduced to an open hull lemma (THETA1-RED, [VEBLEN.md](VEBLEN.md) §1).
 
 ## 3. Names of all $`\upsilon`$-points (Theorem GEN)
 
@@ -123,12 +123,14 @@ $`\eta`$ for which $`\Omega_\omega + \theta\cdot\eta`$ is a normal argument. For
 - So **Wilken's claim holds on $`[0, \Lambda_\varepsilon)`$ in $`R_2^C`$**, both halves (1 review; on $`[0, \Lambda_\Gamma]`$ 2 reviews): every
   ordinal there is in the core and is the value of an InaccPsi normal form with collapse arguments below
   $`\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1} \lt I_\omega`$. Before: $`[0, \Phi_1]`$. Now (1 review) on $`[0, \rho_{\Lambda'+\omega^2})`$ with
-  $`\Lambda' = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{\Omega_1+1}+1}})`$ ([FANFREE.md](FANFREE.md) §10.4).
+  $`\Lambda' = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{\Omega_1+1}+1}})`$ ([FANFREE.md](FANFREE.md) §10.4), and now (1 review) on $`[0, \rho_{\Lambda_{\mathrm{fp}}+\omega^2})`$ with
+  $`\Lambda_{\mathrm{fp}} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\psi_{\Omega_2}(\Omega_2)+1})`$ ([VEBLEN.md](VEBLEN.md) §1).
 - **Not proved, and false** (blocking point, statement only): the author's form "$`\lambda \lt \Lambda_\varepsilon`$ iff
   $`e_\lambda \le \varepsilon_{\Omega_1+1}`$". The referee's counterexample: $`\eta = \varepsilon_{\Omega_1+1}\cdot\omega + \omega^2`$ is in $`D`$ with $`e = 2`$, but
   $`\iota(\eta) \gt \Lambda_\varepsilon`$. The corrected form is the one above; no other result uses the false direction.
 - **Conjecture NAME-OFFSET+.** The same offset formula for every restart with $`\eta_\lambda \lt \theta`$. Now proved (1 review) for
-  $`e_\lambda \le \varepsilon_{\zeta_{\Omega_1+1}+1}`$, with $`\zeta_{\Omega_1+1}`$ the least fixed point of $`\alpha \mapsto \varepsilon_\alpha`$ above $`\Omega_1`$ (NAME-OFFSET-Z, [FANFREE.md](FANFREE.md) §10.4).
+  $`e_\lambda \le \varepsilon_{\zeta_{\Omega_1+1}+1}`$, with $`\zeta_{\Omega_1+1}`$ the least fixed point of $`\alpha \mapsto \varepsilon_\alpha`$ above $`\Omega_1`$ (NAME-OFFSET-Z, [FANFREE.md](FANFREE.md) §10.4), and now
+  for $`e_\lambda \le \psi_{\Omega_2}(\Omega_2) + 1`$, with $`\psi_{\Omega_2}(\Omega_2)`$ the least fixed point of $`\alpha \mapsto \Gamma_\alpha`$ above $`\Omega_1`$ (NAME-OFFSET-G, [VEBLEN.md](VEBLEN.md) §1).
 
 ## 4. The bottom of a chain of length 3
 
@@ -201,7 +203,8 @@ Each run was under 60 seconds; none is a proof.
   sharp form of LHPAR\* fails as stated, and "elementary recursive" is an outline ([BREAK.md](BREAK.md) §4).
 - The closed form of $`c^+`$ on $`[\Lambda_\varepsilon, \Theta_1)`$; the names of $`\Theta_P`$, $`\Theta_1`$, $`\Theta_A`$, $`\Lambda^*`$ and $`\nu_P`$; how far $`D`$
   reaches; the names half of the claim above $`\Lambda_\varepsilon`$. Now the closed form holds for offsets up to $`\varepsilon_{\zeta_{\rho+1}+1}`$, $`\Theta_P`$ is named, and the
-  claim holds up to $`\rho_{\Lambda'+\omega^2}`$ ([FANFREE.md](FANFREE.md) §10.4); left: the closed form on $`(\Lambda', \Theta_1)`$ and the other names.
+  claim holds up to $`\rho_{\Lambda'+\omega^2}`$ ([FANFREE.md](FANFREE.md) §10.4); left: the closed form on $`(\Lambda', \Theta_1)`$ and the other names. Now the closed form
+  holds for every restart with $`e_\lambda \le \psi_{\Omega_2}(\Omega_2) + 1`$ and the claim up to $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$; $`\Theta_1 = H(\theta)`$ is reduced to an open hull lemma ([VEBLEN.md](VEBLEN.md) §1).
 - INC1-S and INC1-nonups are now proved ([BREAK.md](BREAK.md) §1); RIGHT (every $`\lt_2`$-right end is a $`\upsilon`$-point) is now proved in $`R_2^S`$ ([COVER.md](COVER.md) §5.1), and open in $`R_2^C`$ above $`\beta_0`$.
 - $`C^*_3`$: the least bottom (above $`\nu_P`$), the upper half, the lower half, and Conjecture CH ([BREAK.md](BREAK.md) §10); the first fan is above $`T_\omega`$, and it needs an inaccessible given the open hypothesis
   $`FF_N`$ ([BREAK.md](BREAK.md) §7.4; now equivalent to $`m_F \ge \theta_0`$, [FANFREE.md](FANFREE.md) §4), or given the weaker open hypothesis that $`\min\{m : m \le_1 x_F\}`$ is $`\ge \theta_0`$ (now equivalent to a lower bound for

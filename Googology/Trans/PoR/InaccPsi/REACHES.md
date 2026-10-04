@@ -7,7 +7,7 @@ This page continues [RESTARTS.md](RESTARTS.md). The status words are those of [R
 on this page are from 2026-10. "1 review" means one referee. "2 reviews" means that two independent papers proved
 the result and each paper was refereed once. The results of the next round (relativized pins, the exact reaches up
 to $`\Theta_A`$, the names up to $`\Lambda_\varepsilon`$, the bottom of a chain of length 3) are on the fourth page
-[PINS.md](PINS.md), the four rounds after that are on the fifth page [BREAK.md](BREAK.md), the fifth to seventh rounds on the sixth page [COVER.md](COVER.md), and the eighth to tenth on the seventh page [FANFREE.md](FANFREE.md); they change some statuses here, as marked.
+[PINS.md](PINS.md), the four rounds after that are on the fifth page [BREAK.md](BREAK.md), the fifth to seventh rounds on the sixth page [COVER.md](COVER.md), and the eighth to tenth on the seventh page [FANFREE.md](FANFREE.md), and the eleventh on the eighth page [VEBLEN.md](VEBLEN.md); they change some statuses here, as marked.
 
 **Notation.** As on [RESTARTS.md](RESTARTS.md): $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, the reach
 $`\mathrm{lh}(\alpha) = \max\{\gamma : \alpha \le_1 \gamma\}`$, the restart $`\rho_\lambda = \upsilon_\lambda`$ for a nonzero multiple
@@ -45,7 +45,9 @@ realized cofinally.
   for the formal-reach recursion at every restart index below $`\nu`$ that is not in the range of $`V_\gamma`$ for every $`\gamma \lt \lambda`$ (proved
   for $`\gamma(\lambda) = 0`$, outline for $`\gamma(\lambda) \ge 1`$). Now (1 review, Theorem LAYERS, [FANFREE.md](FANFREE.md) §7.3) it is proved in full, and extended through
   all layers above $`\upsilon`$: every restart below $`\nu`$ has a known reach except at limits of critical indices. Then (1 review, Theorem KV,
-  [FANFREE.md](FANFREE.md) §10.3) the formula extends to offsets below $`\rho^\rho`$ by a Klammer hierarchy over $`\upsilon`$.
+  [FANFREE.md](FANFREE.md) §10.3) the formula extends to offsets below $`\rho^\rho`$ by a Klammer hierarchy over $`\upsilon`$. Then (1 review,
+  Theorem KV-NAMES, [VEBLEN.md](VEBLEN.md) §1) the Klammer form of each such restart is read off its InaccPsi name, and the formula holds in
+  closed form for every restart with $`e_\lambda \le \psi_{\Omega_2}(\Omega_2) + 1`$ (NAME-OFFSET-G).
 - **Lemma RS$`_\lambda`$** (proved, 2 reviews). For every restart index $`\lambda \le \Xi_\omega`$, in $`R`$:
   $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + c^*(\lambda)`$. This is BLK$`^O`$ with OFF-V. The second proof is Theorem EXACT of §3.
 - **Theorem EXACT and OFF-k** (proved, 1 review; a second, independent proof of the exact reaches). With a formal

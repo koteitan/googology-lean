@@ -4,7 +4,7 @@
 
 This page continues [COVER.md](COVER.md). The status words are those of [README.md](README.md) §3: **proved** means that an
 independent referee found the result proved with no fatal or blocking point. All results on this page are from 2026-10. They
-come from three rounds of four papers, the eighth (§1–§6), the ninth (§7–§9) and the tenth (§10–§12); each paper was refereed once, so a result has 1 review unless a count is given. "2 reviews"
+come from three rounds of four papers, the eighth (§1–§6), the ninth (§7–§9) and the tenth (§10–§12); the eleventh round is on the next page, [VEBLEN.md](VEBLEN.md); each paper was refereed once, so a result has 1 review unless a count is given. "2 reviews"
 means that two independent papers proved the result and each paper was refereed once. A result marked **outline** was found
 "proved (outline)" by its referee; it is not counted as proved. A statement with a blocking point against it is listed under
 **Not proved**, even when the rest of its paper is proved. A true statement that its referee found to restate the target, or to
@@ -230,7 +230,7 @@ The bad root and $`t`$ are those of the BMS expansion of $`A`$.
 | column 0 | 635 | 206 | 429 open (the self-reference type) |
 | in the $`\Omega`$-level structure | 1,347 | 0 | open; no decomposition found |
 
-  The 480 proved include the 21 that are proved given LOW. (Now 874 proved, §10.1.) What is missing, class by class: that $`\Phi_3`$ treats the index term as one unit
+  The 480 proved include the 21 that are proved given LOW. (Now 874 proved, §10.1, and 1,442, [VEBLEN.md](VEBLEN.md) §3.) What is missing, class by class: that $`\Phi_3`$ treats the index term as one unit
   in every context; a copy of the changed summand that interleaves with the fixed earlier summands (a CODE lemma with parameters, the
   same kind of gap as in §2); the shapes of the self-reference type for every $`n`$; and, for the last class (it contains POINT-REF, LONG-K and
   the type of SRO itself), any decomposition.
@@ -478,7 +478,7 @@ enumerates $`K`$. $`P_A(\rho) = \sum_\xi \rho^\xi\cdot a_\xi`$. A restart is **l
   every long restart has such an index.
 - **IMG-K** (proved). The $`\omega`$-th point of $`K`$ above $`x`$ is below $`\nu`$.
 - **Lemma T#, RM#, LBC$`^{fin}`$#, SC#** (proved). Let $`u^\#`$ be the next point of $`F_{(1@u)}`$ above $`u`$; $`[u, u^\#)`$ holds the points whose canonical
-  positions are all below $`u`$. On $`D^\#_n = [0, u_n^\#) \supset D_n`$ the map $`T_n`$ of §7.3 keeps reaches, the finite LBC holds, and SC holds for every finite
+  positions are all below $`u`$ (the paper writes one direction; the referee: the converse is true but not written). On $`D^\#_n = [0, u_n^\#) \supset D_n`$ the map $`T_n`$ of §7.3 keeps reaches, the finite LBC holds, and SC holds for every finite
   $`Y \subset [x, x^\#)`$ and every $`W \subset D^\#_n`$.
 - **PROP LONG and NEED-C** (proved; the second in a weaker wording, as the referee notes). In SEG-RED the push-down always lands on a long
   restart of $`S_n`$, above $`D^\#_n`$. Every long restart lies in **zone C**: in every tail below it some restart has no formal reach. So SEG-RED needs SC for
@@ -523,7 +523,7 @@ $`\Lambda' = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{
   so this structure gives no bound for $`\iota(\mathrm{CH}_2)`$. Conjecture: $`\iota(\mathrm{CH}_2) \gt \theta_0`$.
 - **Open**: offsets up to $`\Gamma_{\rho+1}`$ (one more lemma, VEB-THETA, and a uniform comparison of Veblen forms); $`\Theta_1 = H(\theta)`$ (the maps STEP and
   LOW-STEP one level down); the names of $`\Theta_1`$, $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$; an InaccPsi upper bound for $`\nu_C`$ (it would give the claim on
-  $`[0, \nu_C]`$).
+  $`[0, \nu_C]`$). (Now the offsets up to $`\psi_{\Omega_2}(\Omega_2) + 1`$, past $`\Gamma_{\rho+1}`$, are proved, and $`\Theta_1 = H(\theta)`$ is reduced to one hull lemma, [VEBLEN.md](VEBLEN.md) §1.)
 
 ## 11. Status after the tenth round
 
@@ -552,15 +552,9 @@ Each run was under 60 seconds; none is a proof.
   $`\rho^{\omega^2}`$, $`\rho^{\omega+1}`$). These are the program's own reaches, not $`R_2^C`$.
 - Names (§10.4). The 25 named points are normal forms and strictly increasing, in Python and in a Lean test file (green, also in the referee's
   rerun). On 300 random offsets $`e`$ below $`\zeta_{\Omega_1+1}`$, $`\omega^e \in D`$ and $`e \mapsto H(\omega^e)`$ keeps the order (89,700 pairs, 0 failures). The referee: 250 random
-  offset terms at 5 bases, 124,500 comparisons, 0 mismatches.
+  offset terms at 5 bases, 124,500 comparisons, 0 mismatches. (The referee also notes that the test of $`D`$ used only the constants $`H(0)`$ and $`H(1)`$,
+  where the hypothesis missing from ATTAIN-NAMES does not matter.)
 
 ## 13. Open
 
-- The first inaccessible: $`H_m`$ (equivalently, some $`\iota(\mathrm{CH}_k) \ge \theta_0`$; enough: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, from a map $`\nu`$ on all of $`D`$ with L1p-free
-  values and $`\nu(s) \ll \nu(t)`$ at every step); UNIF-FS below SRO on the open parts of §10.1; codes on $`[B, \upsilon_1)`$ (folded reaches) and past them;
-  $`\iota(A_n) \ge |\tau_n|`$.
-- Upper bounds: any InaccPsi bound for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, or for $`\nu_C`$; STEP-CH (on a class closed under $`\Phi`$, with collapse arguments
-  below $`I_0`$); REL-SHARP; (HQ).
-- Names and offsets past $`\Lambda'`$: offsets up to $`\Gamma_{\rho+1}`$ (VEB-THETA), $`\Theta_1 = H(\theta)`$, and the names of $`\Theta_1`$, $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$.
-- $`\nu_C = \nu_S`$: SC for $`W`$ that meet zone C; (PROF); the reaches at limits of fixed points of $`k`$; $`Y \subset S_\omega`$ beyond $`[x, x^\#)`$.
-- The rest of [COVER.md](COVER.md) §9.
+The eleventh round changed this list; the current list is on the next page, [VEBLEN.md](VEBLEN.md) §7.

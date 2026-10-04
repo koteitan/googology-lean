@@ -5,7 +5,7 @@
 This page continues [BREAK.md](BREAK.md). The status words are those of [README.md](README.md) §3: **proved** means that an
 independent referee found the result proved with no fatal or blocking point. All results on this page are from 2026-10. They
 come from three rounds of four papers, each paper refereed once: the fifth round (§1–§4), the sixth round (§5) and the seventh
-round (§6). The eighth to tenth rounds are on the next page, [FANFREE.md](FANFREE.md). "1 review"
+round (§6). The eighth to tenth rounds are on the next page, [FANFREE.md](FANFREE.md), and the eleventh on [VEBLEN.md](VEBLEN.md). "1 review"
 means one referee. "2 reviews" means that two independent papers proved the result and each paper was refereed once. A
 statement that its referee found not proved is listed under **Not proved**, even when the rest of its paper is proved. The
 papers of the fifth round, three of the sixth and most of the seventh use Carlson's minimality against coverings (Carlson 2009, Thm 14.10(2)),
@@ -495,9 +495,9 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 
 - $`C^*_3`$: an upper bound by an InaccPsi term (conjecture: $`c_0 \lt \psi_{\Omega_1}(I_1)`$) and names; whether $`\varphi_{\lt\omega} \lt m_3`$; whether $`c_0`$ is the least
   apex with closed $`n`$-fans for every $`n`$, and whether it is the least apex with infinitely many $`\lt_2`$-successors; Conjecture CH.
-- The inaccessible: $`H_m`$ ($`= FF_{RF} = FF_N`$, and $`m_F = \sup_k \iota(\mathrm{CH}_k)`$, [FANFREE.md](FANFREE.md) §4; what is left is a map from all of $`D`$ to RF fan-free patterns with $`\nu(s) \ll \nu(t)`$ at every step, §6.1; with values without L1p it gives $`\iota(\mathrm{CH}_2) \ge \theta_0`$, [FANFREE.md](FANFREE.md) §7.2; native codes reach the Bachmann–Howard ordinal, [FANFREE.md](FANFREE.md) §10.2),
+- The inaccessible: $`H_m`$ ($`= FF_{RF} = FF_N`$, and $`m_F = \sup_k \iota(\mathrm{CH}_k)`$, [FANFREE.md](FANFREE.md) §4; what is left is a map from all of $`D`$ to RF fan-free patterns with $`\nu(s) \ll \nu(t)`$ at every step, §6.1; with values without L1p it gives $`\iota(\mathrm{CH}_2) \ge \theta_0`$, [FANFREE.md](FANFREE.md) §7.2; native codes reach the Bachmann–Howard ordinal, [FANFREE.md](FANFREE.md) §10.2, and now $`\upsilon_2\cdot\upsilon_1`$, [VEBLEN.md](VEBLEN.md) §2),
   $`FF_{cl}`$, FF, POINT-SRO; whether $`H_m`$ is equivalent to $`x_F \gt \theta_0`$.
 - The least fan: the names (the base $`B_F`$; conjecture $`I_0`$, §6.4), and an upper bound such as $`x_F \lt \psi_{\Omega_1}(I_0\cdot\omega)`$ ($`\sigma_N = m_F`$ is now proved, [FANFREE.md](FANFREE.md) §4).
 - $`R_2^S`$: (ii) ⇒ (i) of CP3 and "⇐" of LEFT-CHAR; MIN$`^S`$ above $`\beta_0`$; PINNING and CORE-S; $`o_k = \omega`$ for $`k \ge 2`$; NOLIM with a ghost
-  above $`\beta_0`$ (and NOLIM$`^*`$); $`\nu_C = \nu_S`$ (by §6.3: SC, or RM; SC beyond the first limit of critical indices in each segment, [FANFREE.md](FANFREE.md) §7.3; now SC at the long restarts, which the reduction always needs, [FANFREE.md](FANFREE.md) §10.3); the names (N-χ) and (N-ν) of [BREAK.md](BREAK.md) §7.3; RIGHT in $`R_2^C`$ above
+  above $`\beta_0`$ (and NOLIM$`^*`$); $`\nu_C = \nu_S`$ (by §6.3: SC, or RM; SC beyond the first limit of critical indices in each segment, [FANFREE.md](FANFREE.md) §7.3; now SC at the long restarts, which the reduction always needs, [FANFREE.md](FANFREE.md) §10.3; directly in $`\Sigma_2`$ form, a local base change and translations with a fixed finite set below the copy, [VEBLEN.md](VEBLEN.md) §4); the names (N-χ) and (N-ν) of [BREAK.md](BREAK.md) §7.3; RIGHT in $`R_2^C`$ above
   $`\beta_0`$.
