@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the fifteenth to seventeenth rounds: $`\nu_C \ge X_4`$, $`X_5`$ and $`X_8`$, the shift criterion, schemes K and R, GEN-IND, STAIR2, far tails and ghost tests
 
-This page continues [THETA.md](THETA.md); §1–§7 are the fifteenth round, §8 the sixteenth and §9 the seventeenth. The status words are those of [README.md](README.md) §3: **proved** means that an independent
+This page continues [THETA.md](THETA.md); §1–§7 are the fifteenth round, §8 the sixteenth and §9 the seventeenth. The eighteenth round is on [SHIFT2.md](SHIFT2.md). The status words are those of [README.md](README.md) §3: **proved** means that an independent
 referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed.
 
@@ -492,7 +492,7 @@ Notation of §3 and §8.3.
   M3, are invalid. The referee repaired the program; the other certificates pass the repaired check, and the referee found valid coverings for the 7
   (one checked by hand). Counted: M3 21 of 28, M4 14 of 14, M5 2 of 15, and the T1-ROOT matrix (0,0,0)(1,1,1)(2,1,0)(1,1,0)(2,2,1)(3,1,0) (GR+ at
   $`n = 0`$, then SELF-CHAIN-C′). The 7 count once the paper's program is replaced and rerun.
-- **Not proved**: $`t = 1`$, class III (308). $`V(A[n])`$ grows by 1 to 7 nodes per level, and $`V(A[n-1])`$ is never contained in $`V(A[n])`$. The cause is a nest family whose
+- **Not proved**: $`t = 1`$, class III (308). From $`n = 3`$ on, $`V(A[n])`$ grows by 1 to 7 nodes per level (counted from $`n = 2`$, 113 of the 308 are irregular), and $`V(A[n-1])`$ is never contained in $`V(A[n])`$. The cause is a nest family whose
   members reach the member two steps down; so the image of the periodic part is a periodic word whose copies contain whole copies of the period,
   which the present jump rule cannot handle.
 - **The tally** (checked; $`2{,}690 = 2{,}589 + 108 - 7`$):
@@ -509,7 +509,7 @@ Notation of §3 and §8.3.
 
 ### 9.4 $`\nu_C = \nu_S`$: no ghost candidate left, and only room can block (W)
 
-Notation of §4 and §8.4 ($`g = u_m^\#`$; long, wide and far as in §8.4). "Given FRAG" no longer carries an outline level (§9.1).
+Notation of §4 and §8.4 ($`g = u_m^\#`$; long, wide and far as in §8.4). "Given FRAG" here: the referees of the seventeenth and eighteenth rounds rate these results at the outline level of LT, HEAD-TAIL and REFL-ξ ([SHIFT2.md](SHIFT2.md) §1.4), although §9.1 removed the outline level of SKEL⁺.
 
 - **The repair of (B1)** (proved, 2 reviews: the sixteenth-round referee proposed it). $`g`$ is a small restart: its data $`u_m`$, 1, 0 are below $`g`$, and it has no far
   constants. Its fresh twisted copy is given in closed form, and its twisted head term $`t_g = \omega^{g\cdot u_m}`$, with reach $`t_g + g + u_m`$, goes to a term with reach
@@ -517,7 +517,7 @@ Notation of §4 and §8.4 ($`g = u_m^\#`$; long, wide and far as in §8.4). "Giv
 - **CAND-2-DIAG** (proved, 2 reviews). Every CAND-2 configuration realizes the $`\Sigma_1`$ diagram of its own kind; the converse is not needed, since G-SCHEMA uses
   each diagram separately. (The referee: one sentence on the points above $`g`$ fails when the reach has a twisted term in $`(u_m, g)`$.)
 - **CAP-MONO, W-EQ, ROOM, MULTI-ROOM, TS-CLOSE** (proved, given FRAG). For a gap $`(V_0, K)`$ ($`K`$ a restart or $`\nu`$), a uniform head $`h`$ and a tail $`t \le V_0`$: some
-  restart in the gap has reach exactly $`h + t`$ iff some restart in the gap has reach $`\ge h + t`$. One step moves the base past every cap, so caps never block
+  restart in the gap has reach exactly $`h + t`$ iff some restart in the gap has reach $`\ge h + t`$ (not for $`h = \delta_1`$, $`t = 1`$, [SHIFT2.md](SHIFT2.md) §1.4). One step moves the base past every cap, so caps never block
   the placement (W); only room can. Room holds when $`K = \nu`$, when $`K`$ is far, when $`\mathrm{lh}(K) \gt h(K) + t`$, or when the recorded right ends show it, and several
   long copies fit in a row. If a gap has restarts with every tail $`u_n`$, it has one with tail $`x`$, unless a cap lands inside a region.
 - **CLOS, MAX-LAND, FIN-LAND** (proved). The $`\le_1`$-predecessors of a point form a closed set, and the reaches of the points $`b \lt A`$ with $`b \le_1 A`$ take only finitely
@@ -538,6 +538,8 @@ Notation of §4 and §8.4 ($`g = u_m^\#`$; long, wide and far as in §8.4). "Giv
   map $`T`$ on $`[u^\#, \lambda^\Delta_u)`$ and zone C.
 
 ### 9.5 Status after the seventeenth round
+
+The eighteenth round changed this status; see [SHIFT2.md](SHIFT2.md) §1.5.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_8]`$ given FRAG (on $`[0, X_7]`$ without the transfer MULTI-RC), with no outline
   input; the core half holds on $`[0, \nu_C]`$. No InaccPsi upper bound for $`\nu_C`$: (P) and (Q) at a named pair stay open.
@@ -561,6 +563,8 @@ Each run was under 60 seconds; none is a proof.
 - §9.4. No run by the paper. The referee: the base step of W-EQ on 869,616 finite cases, and parts of FIN-LAND on random finite models; 0 failures.
 
 ### 9.7 Open
+
+The eighteenth round changed this list; the current list is [SHIFT2.md](SHIFT2.md) §1.7.
 
 - Upper bounds: (P) and (Q), or (Q′), at one named pair for $`\nu_C`$; they need reaches across uncountable offsets, codes of the second region, and the
   isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
