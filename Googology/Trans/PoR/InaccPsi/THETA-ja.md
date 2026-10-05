@@ -169,7 +169,7 @@ $`g = u_m^\#`$。
 
 ## 5. 13 回目のあとの状況
 
-14〜18 回目でこの状況は変わった。§9.5、[SHIFT-ja.md](SHIFT-ja.md) の §5、§8.5、§9.5、[SHIFT2-ja.md](SHIFT2-ja.md) §1.5 を見よ。
+14〜19 回目でこの状況は変わった。§9.5、[SHIFT-ja.md](SHIFT-ja.md) の §5、§8.5、§9.5、[SHIFT2-ja.md](SHIFT2-ja.md) §1.5、§2.5 を見よ。
 
 
 - $`R_2^C`$ での Wilken の主張：両方の半分が $`\upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ として $`[0, \upsilon^*)`$ で成り立ち（1 つの移し替えに依る）、
@@ -201,7 +201,7 @@ $`g = u_m^\#`$。
 
 ## 7. 未解決
 
-14〜18 回目でこのリストは変わった。今のリストは [SHIFT2-ja.md](SHIFT2-ja.md) §1.7。
+14〜19 回目でこのリストは変わった。今のリストは [SHIFT2-ja.md](SHIFT2-ja.md) §2.7。
 
 
 - 最初の到達不能基数：$`H_m`$（$`\iota(\mathrm{CH}_2) \ge \theta_0`$ で足りる。それには、MODULE-RED を形 (MA) の外に広げて、$`\Lambda_\Gamma`$ から $`\theta_0`$ までの $`\upsilon`$ の
@@ -411,7 +411,7 @@ C_g \cap \Omega_2 = \{\, x \lt \pi_g : \mathrm{cmax}(x) \subseteq H(g) \,\}.
   $`\lt_2`$ の組の写ししか出さない。名前の付いた評価には、$`b`$ に名前の付いた新しい組 $`\rho_L \lt_2 b`$ が 1 つ要る：Wilken 2020, Thm 21.13 のように、終わりの区間
   $`[\rho_L, b)`$ を $`\rho_L`$ の $`\le_1`$ の前の点の上の区間へ移す同型（そうすれば Prop 21.11 が組を出す）。候補の組は予想 NU-NAME（[BREAK-ja.md](BREAK-ja.md) §2）の
   $`a_0 \lt_2 \nu`$。（今は $`\nu_C \ge X_4`$ で、新しい組は要らない：名前の付いた 1 つの組での 2 つの $`\le_1`$ の命題が評価を与える、
-  [SHIFT-ja.md](SHIFT-ja.md) §1。さらに FRAG のもとで $`\nu_C \ge X_5`$ で、2 つの命題はまだ未解決、そこの §8.1。さらに FRAG のもとで $`\nu_C \ge X_8`$ で、(P) には非可算のずれを越える届く先が要る、そこの §9.1。さらに FRAG のもとで $`\nu_C \ge X_9`$、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1。）ほかに未解決：$`R(\Theta_{d\omega})`$ の値、最初の新しい組の左端の最小の $`\le_1`$ の前の点 $`m_0`$ について $`m_0 \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ かどうか。
+  [SHIFT-ja.md](SHIFT-ja.md) §1。さらに FRAG のもとで $`\nu_C \ge X_5`$ で、2 つの命題はまだ未解決、そこの §8.1。さらに FRAG のもとで $`\nu_C \ge X_8`$ で、(P) には非可算のずれを越える届く先が要る、そこの §9.1。さらに FRAG のもとで $`\nu_C \ge X_9`$、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{11}`$、そこの §2.1。）ほかに未解決：$`R(\Theta_{d\omega})`$ の値、最初の新しい組の左端の最小の $`\le_1`$ の前の点 $`m_0`$ について $`m_0 \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ かどうか。
 
 ### 9.2 素の符号：$`\Lambda_T`$ までの部品
 
@@ -490,7 +490,7 @@ C_g \cap \Omega_2 = \{\, x \lt \pi_g : \mathrm{cmax}(x) \subseteq H(g) \,\}.
 
 ### 9.5 14 回目のあとの状態
 
-15〜18 回目でこの状態は変わった。[SHIFT-ja.md](SHIFT-ja.md) の §5、§8.5、§9.5、[SHIFT2-ja.md](SHIFT2-ja.md) §1.5 を見よ。
+15〜19 回目でこの状態は変わった。[SHIFT-ja.md](SHIFT-ja.md) の §5、§8.5、§9.5、[SHIFT2-ja.md](SHIFT2-ja.md) §1.5、§2.5 を見よ。
 
 - $`R_2^C`$ での Wilken の主張：$`X_3 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$ として $`[0, X_3]`$ で両方の半分とも成り立つ。FRAG も移し替えも残っていない。
   $`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$、$`\nu_P = X_2`$ の名前は証明済み。核の側は $`\nu_C \ge X_3`$ として $`[0, \nu_C]`$ で成り立つ。
@@ -513,7 +513,7 @@ C_g \cap \Omega_2 = \{\, x \lt \pi_g : \mathrm{cmax}(x) \subseteq H(g) \,\}.
 
 ### 9.7 未解決
 
-15〜18 回目でこのリストは変わった。今のリストは [SHIFT2-ja.md](SHIFT2-ja.md) §1.7。
+15〜19 回目でこのリストは変わった。今のリストは [SHIFT2-ja.md](SHIFT2-ja.md) §2.7。
 
 - 上からの評価：$`\nu_C`$ の InaccPsi による評価（名前の付いた $`b`$ での新しい組 $`\rho_L \lt_2 b`$ が 1 つ、§9.1）、$`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価。
 - 最初の到達不能基数：$`H_m`$。$`\iota(\mathrm{CH}_2) \ge \theta_0`$ を通して（$`\Lambda_T`$ から先の部品：いくつもの枠、CHAIN-REL、またはつぶす関数 $`\vartheta^\upsilon`$）。

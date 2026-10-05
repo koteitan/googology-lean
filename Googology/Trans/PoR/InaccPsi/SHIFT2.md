@@ -1,12 +1,12 @@
 [← Back](README.md) | [English](SHIFT2.md) | [Japanese](SHIFT2-ja.md)
 
-# $`R_2^+`$, the eighteenth round: $`\nu_C \ge X_9`$ given FRAG, MULTI-RC in full, reaches across regions, flat codes, SYM-Q and RE-PLACE
+# $`R_2^+`$, the eighteenth and nineteenth rounds: $`\nu_C \ge X_9`$ and $`X_{11}`$ given FRAG, reaches across index fixed points, flat and nested codes, SYM-Q, GRN and MIN-EXACT
 
-This page continues [SHIFT.md](SHIFT.md) (§9 there is the seventeenth round). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT.md](SHIFT.md) (§9 there is the seventeenth round); §1 is the eighteenth round and §2 the nineteenth. The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
-Four papers (2026-10), each refereed once, so a result here has 1 review unless a count is given. **2 reviews** means that the referee of the
+§1: four papers (2026-10), each refereed once, so a result in §1 has 1 review unless a count is given. **2 reviews** means that the referee of the
 seventeenth round proposed the repair (or checked the result) and the referee of this round checked it again as written out. None of the papers uses
 Wilken, JSL 72 (2007), Carlson, AML 38 (1999), Wilken, AML 45 (2006), or the equivalence that Carlson 2009, p. 97, announces. No Lean file was added:
 one paper (§1) checked a Lean test file of named points with leanman (green, and green with the same output in the referee's rerun); it only compares
@@ -148,7 +148,7 @@ state it.
 - **DOUBLE-FAR, ROOM-FAR, W-EQ-FAR** (proved, given FRAG). Cofinally below $`\nu`$ there are long restarts $`l'`$ with $`\mathrm{lh}(l') \ge \rho_{l'\cdot(k+1)}`$ for each $`k \lt \omega`$, and with $`\mathrm{lh}(l') \ge \rho_{l'\cdot\omega}`$.
   So far heads have room below $`\nu`$, and W-EQ holds for them. This repairs the blocking point of NEAR-BLOCK in [SHIFT.md](SHIFT.md) §9.4: its target exists, so **NEAR-BLOCK is proved**.
 - **CAP-VIS, FREE-OFFSET** (proved, given FRAG, for restarts and skeleton points; for other points an outline). Index distances are seen in the structure only through
-  the caps $`\delta + (-1 + \mathrm{logend}\,\varepsilon)`$ of the restarts. So a shallow span gets its target index distances by choice, $`\eta'_i = \omega^N\cdot i + \omega^{1+l'_i}`$, and no map $`T`$ on the top
+  the caps $`\delta + (-1 + \mathrm{logend}\,\varepsilon)`$ of the restarts. So a shallow span gets its target index distances by choice (the referee: this uses that the region restart is recorded; otherwise no atom sees the distance and it is free anyway), $`\eta'_i = \omega^N\cdot i + \omega^{1+l'_i}`$, and no map $`T`$ on the top
   ordinals is needed. This covers NEAR-BLOCK and the shallow far configurations (F1).
 - **RE-PLACE** (proved, given FRAG, with the referee's two repairs). The reduction RED-TF needs only some map on the top points, not the anchor copy $`\mu`$. So every top point
   is placed in increasing order by its own rule: W-EQ under the ceiling $`\nu`$, FREE-OFFSET, the region skeleton, or the rule for points that are not $`\varepsilon`$-numbers. No ceiling
@@ -158,7 +158,8 @@ state it.
 - **Correction** (the referee; an error inherited from LT of the sixteenth round): W-EQ and HEAD-TAIL fail for the head $`h = \delta_1`$ and tail $`t = 1`$. The least restart that is a limit of
   restarts has reach $`\delta + 2`$, not $`\delta + 1`$; the proof applies TOP-REG⁺ at $`y = \delta_1`$, which TOP-REG⁺ excludes. Nothing else used this case; successor restarts (logend 2) are now placed
   by KV0 and FRESH.
-- **DEEP-UNC** (proved): every span over a recorded long restart has an uncountable offset of the index exponent, so it is deep.
+- **DEEP-UNC** (proved): every span over a recorded long restart has an uncountable offset of the index exponent, so it is deep (the referee: the second claim is for
+  the restarts of $`(u, L]`$; at $`u`$ itself the offset is 0).
 - **Not proved**: $`\nu_C = \nu_S`$, and $`\nu_C \lt \nu_S`$. The paper's list of what is left (RES-ALL) is incomplete (blocking point). Its items: (D1) deep spans, with countable offset
   $`\ge \rho_u`$ (upper half by TOP-REG-FAR; lower half needs REFL-MOV, an outline) or uncountable offset (open; the same missing tool as for (P) in §1.1); (D2) spans whose reach has
   Cantor-normal-form terms in $`[u, L)`$; (D3) reaches inside the own region in $`[\delta_j\cdot\omega, \upsilon_{a+\omega j+2})`$, and zero tails; (D4) top points that are $`\varepsilon`$-numbers but not $`\upsilon`$-points,
@@ -166,6 +167,8 @@ state it.
   has a term that is not a $`\upsilon`$-point, or whose far reach has tail 0. The proposed ghost test P_NEST for the deep spans is ill-formed as written.
 
 ### 1.5 Status after the eighteenth round
+
+The nineteenth round changed this status; see §2.5.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_9]`$ given FRAG (on $`[0, X_9^S]`$ if MULTI-RC\* is accepted only on one segment); the core
   half holds on $`[0, \nu_C]`$. No InaccPsi upper bound for $`\nu_C`$: (P) and (Q′) at a named pair stay open.
@@ -190,6 +193,8 @@ Each run was under 60 seconds; none is a proof.
 
 ### 1.7 Open
 
+The nineteenth round changed this list; the current list is §2.7.
+
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs upper bounds for reaches across an uncountable exponent and codes past the first index fixed
   point, (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
 - The claim above $`X_9`$ given FRAG: moved index distances (outline; Conjecture $`X_{10}`$).
@@ -198,3 +203,177 @@ Each run was under 60 seconds; none is a proof.
 - $`\nu_C = \nu_S`$: the residue of §1.4 with the three missing kinds of shallow spans; HEAD-GEN; REFL-MOV.
 - Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; the exact reaches of the long restarts (now between the lower bound RL-UNC and the upper
   bound R-CAP-FAR\*); names beyond $`X_9`$; the rest of [COVER.md](COVER.md) §9.
+
+## 2. The nineteenth round
+
+Four papers (2026-10), each refereed once, so a result in this section has 1 review unless a count is given. **2 reviews** means that the referee of
+the eighteenth round checked the result (or proposed the repair) and the referee of this round checked it again as written out. None of the papers uses
+Wilken, JSL 72 (2007), Carlson, AML 38 (1999), Wilken, AML 45 (2006), or the equivalence that Carlson 2009, p. 97, announces. No Lean file was added:
+one paper (§2.1) again checked a Lean test file of named points with leanman (green, and green with the same output in the referee's rerun); it only
+compares terms (`#eval`, no theorem), so it counts as a check. The minor points of the eighteenth-round reviews are applied, in §1 and below.
+
+### 2.1 Past the first index fixed point: $`\nu_C \ge X_{11}`$ given FRAG; (P) still open
+
+Notation of §1.1. $`\Phi_\Omega = \psi_{\Omega_2}(\Omega_2)`$ is the least fixed point of $`\alpha \mapsto \Gamma_\alpha`$ above $`\Omega_1`$, $`\Phi_2 = \psi_{\Omega_3}(\Omega_3)`$, $`\hat G = G(\Omega_2)`$ and $`\mathbb{G} = G(\Phi_2)`$.
+For a restart $`\lambda`$, $`F_\lambda = H(\eta_\lambda + \Omega_1)`$. An **η-offset** of $`\eta \in D'`$ is an ordinal $`\xi \lt \theta`$ with $`\eta + \xi \in D'`$; every ordinal is written $`\xi = \xi_u + \xi_c`$
+with $`\xi_u`$ a multiple of $`\Omega_1`$ and $`\xi_c`$ countable. A **multiplier** is a $`\zeta \lt \Phi_2`$ in its Veblen and $`\Gamma`$ normal form over $`\Omega_2`$; it is **normal** if its constants lie below $`G(\zeta)`$.
+
+- **The minor points of the eighteenth-round review are applied** (bookkeeping, proved): FRAG2 on the finite set of reflected points in LONG-RS\*\*, the
+  base $`\kappa`$ above the parameters of the code, $`\rho_{\mu+\zeta} \lt \nu_S`$ strictly in CROSS, $`\rho_\lambda`$ listed in $`P^*(F)`$, and the wording points (all listed in §1.1).
+- **D′-UNC** (proved, no FRAG). For $`\eta \in D'`$ and a normal form $`\xi \lt \theta`$, also an uncountable one: $`\eta + \xi \in D'`$ iff the countable maximal subterms of $`\xi`$ lie below $`H(\eta + \xi)`$.
+- **FIX, DICT** (proved, no FRAG). $`F_\lambda`$ is the first index fixed point of $`\lambda`$, and the countable η-offsets are exactly $`[0, F_\lambda)`$. The η-offset $`\xi_u + \xi_c`$ with $`\xi_u \gt 0`$
+  has index distance $`H(\eta_\lambda + \xi_u) + \xi_c`$. So η-offsets name the index distances at and past every index fixed point: this is the tool (V2) of §1.1, for
+  η-offsets below $`\Phi_\Omega`$. **T$`^U`$** (proved): a transport of η-offsets that moves the constants and keeps the uncountable part; it keeps the order, sums, logend and DICT.
+- **Theorem EXACT-V** (proved; "$`\le`$" without FRAG, "$`\ge`$" given FRAG). Every restart $`\nu`$ with $`\rho_{\nu+\omega^2} \le \nu_S`$ and $`\tau_\nu = -1 + e_\nu \lt \Phi_\Omega`$ has
+  $`r(\nu) = \delta_\nu + \Theta_\nu(\tau_\nu)`$, where $`\Theta_\nu(\tau)`$ is the Veblen and $`\Gamma`$ normal form of $`\tau`$ with $`\Omega_1`$ replaced by $`\rho_\nu`$. EXACT-C (countable $`e`$) and EXACT-W
+  ($`e \in [\Omega_1, \Omega_1\cdot 2)`$) are cases; now the caps are exact also for $`e \in [\Omega_1\cdot 2, \Phi_\Omega)`$. This is the tool (V1) of §1.1 for the short crossed restarts.
+- **FAR-PIN$`^U`$, MULTI-RC$`^U`$, TOP-REG-FAR$`^U`$** (proved, given FRAG): the pins, H-RC and the far upper-bound rule across every η-offset below $`\Phi_\Omega`$, uncountable ones
+  included, with the transport T$`^U`$. (The referee: the finite pattern must also contain the closures of the constants of the η-offsets.)
+- **Codes past the first index fixed point** (proved, no FRAG). PSI2-3: $`\psi_{\Omega_3}(\beta) = \Gamma_{\Omega_2+1+\beta}`$ for $`\beta \lt \Phi_2`$. GHAT: $`\hat G`$ is the least fixed point of $`G`$ (the name that §1.1
+  conjectured). COVER: $`[\theta, \mathbb{G})`$ is the disjoint union of the intervals $`[G(\zeta), G(\zeta+1))`$ over the normal multipliers $`\zeta`$. SLOW and SSTEP hold at every normal
+  multiplier. PHI$`^U`$: the code map $`\Phi_\lambda`$ is defined on all codes below $`\mathbb{G}`$; it reads the base $`G(\zeta)`$ as the $`\upsilon`$-point $`H(\eta_\lambda + 1 + R_\lambda(\zeta))`$ at an η-offset, which is
+  uncountable when $`\zeta \ge \Omega_2`$. For example $`\Phi_\lambda(\hat G) = F_\lambda`$ and $`\Phi_\lambda(G(\Omega_2\cdot k)) = H(\eta_\lambda + \Omega_1\cdot k)`$. (The referee: one bound in the proof of GHAT is off; the conclusion holds.)
+- **Theorem R-CAP$`^U`$** (proved, given FRAG): the upper bound of R-CAP-FAR\* for every restart with $`G_2 \le m_\lambda \lt \mathbb{G}`$. Its case $`m_\lambda \lt G(\Omega_1)`$ is R-CAP-FAR\*, which
+  this referee derived again, so **$`\nu_C \ge X_9`$ given FRAG now has 2 reviews**.
+- **Lower bounds** (proved, given FRAG). CROSS-F: $`m_\mu \ge \hat G`$ gives $`r(\mu) \ge F_\mu`$, the first reach across an uncountable η-offset. The codes for realizers (O$`^U`$, Lemma C$`^U`$, B-PAR$`^U`$),
+  LONG-RS$`^U`$, RL-U and CROSS-U carry the realizers past $`F_\mu`$. (The referee: these three need the added hypothesis $`\rho_{R+\omega^2} \le \nu_S`$ for the restarts $`R`$ below the target, and a
+  multiplier code needs its constants below its base; neither point touches CROSS-SHARP or X11.)
+- **Theorem CROSS-SHARP** (proved, given FRAG). Let $`M`$ be a multiple of $`\Omega_2`$ with no constants, $`\Omega_2 \le M \le \Phi_2`$, and let $`M'`$ be $`M`$ with $`\Omega_2`$ replaced by $`\Omega_1`$ (read $`\Phi_\Omega`$
+  at $`M = \Phi_2`$). For every restart $`\lambda`$ with $`\rho_\lambda \lt \min(\nu_S, \psi_{\Omega_1}(\Omega_\omega\cdot 2))`$ and $`H(\eta_\lambda + M') \le \nu_S`$: $`r(\lambda) \ge H(\eta_\lambda + M')`$ iff $`m_\lambda \ge G(M)`$.
+  In particular $`\lambda`$ reaches its first index fixed point iff $`m_\lambda \ge \hat G`$. So the conjecture of [SHIFT.md](SHIFT.md) §9.1 holds, in both directions, at every index fixed point of this range.
+- **CEIL$`^U`$** (proved, no FRAG): $`m_u \ge \mathbb{G}`$ gives $`\eta_u \ge \theta_2\cdot\Phi_2`$.
+- **Theorem X11** (proved, given FRAG). With R-CAP$`^U`$, CEIL$`^U`$, CEIL\* and TAIL (no lower-bound lemma is used):
+
+```math
+\begin{aligned}
+\nu_C \ge X_{10} &= \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Omega_2} + \omega^{\hat G+1} + \omega^{G_2+1}),\cr
+\nu_C \ge X_{11} &= \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Phi_2} + \omega^{\mathbb{G}+1} + \omega^{G_2+1}),\qquad \mathbb{G} = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Phi_2}),\quad \Phi_2 = \psi_{\Omega_3}(\Omega_3).
+\end{aligned}
+```
+
+So the conjecture $`X_{10}`$ of §1.1 is proved, and **Wilken's claim holds in $`R_2^C`$ on $`[0, X_{11}]`$, both halves, given FRAG**. A reader who accepts PSI2-3 only at $`\beta = 0`$
+gets $`[0, X_{11}^V]`$, where $`X_{11}^V`$ is $`X_{11}`$ with $`\Phi_2`$ replaced by $`\psi_{\Omega_3}(0)`$; $`X_{10} \lt X_{11}^V \lt X_{11}`$. Without FRAG the range stays $`[0, X_4]`$. Also (P-LOW$`^U`$) every
+restart $`a`$ with (P) has $`e_a \ge \mathbb{G} + 1`$.
+
+- **Labelled as open, correctly**: Conjecture EXACT-PHI (exact caps for $`\tau \in [\Phi_\Omega, G_2)`$); (D1b) of §2.4 for spans over short restarts with offset below $`\Phi_\Omega`$ (an outline).
+- **Not proved** (the referee: blocking point against the leaf only): (P) and (Q′) at $`(L(\omega), L(\omega+1))`$ or at any named pair, and so an InaccPsi upper bound for $`\nu_C`$.
+  Every new result is a lower bound for $`\nu_C`$, a cap for reaches with codes below $`\mathbb{G}`$, or a realizer. Missing: (V1′) exact caps for the crossed restarts with
+  $`\tau \in [\Phi_\Omega, G_2)`$ and for the long crossed restarts (only CROSS-U $`\le r \le`$ R-CAP$`^U`$, and nothing for codes $`\ge \mathbb{G}`$); (V2′) η-offsets at or above $`\Phi_\Omega`$ (multipliers $`\ge \Phi_2`$).
+
+### 2.2 Native codes: $`\iota(\mathrm{CH}_2) \ge Z_\omega`$
+
+Notation of §1.2. For $`n \ge 2`$ the $`n`$-ary system has collapsing hierarchies $`\vartheta^2, \dots, \vartheta^n`$: $`\vartheta^j`$ is the hierarchy of [SHIFT.md](SHIFT.md) §9.2 moved up to the pair
+$`(\Omega_{j-1}, \Omega_j)`$, and its indices are terms of the next level. $`P_j = \vartheta^j_{P_{j+1}}(0)`$ (downward from the top level), $`\Xi_n = P_2`$, and $`Z_n`$ is the least fixed point of $`\theta_{\Xi_n}`$.
+For $`n = 2`$ this is $`\Xi_2`$ of §1.2.
+
+- **The minor points of the eighteenth-round review** are remarks; they are applied in §1.2.
+- **The $`n`$-ary system** (proved): the terms of each level, $`\vartheta^j`$ with CLUB-j, NF-j, DOM-j, T1-j, NO-HIGH-j and VEB-j. AGREE-n: the $`(n+1)`$-system extends the $`n`$-system,
+  $`\Xi_n \lt \Xi_{n+1}`$ and $`Z_n \lt \theta_{\Xi_{n+1}}(0) \lt Z_{n+1}`$; also $`\Xi_2^+ \lt \Xi_3`$. (The referee: the two systems have the same $`\vartheta_D`$ and $`\theta_\Delta`$, but their sets of constants differ
+  by finite ordinals, so "restriction" is too strong.)
+- **Nested rows** (proved). Inside the block of each $`\varepsilon`$-number $`e = \vartheta^{j+1}_D(\beta)`$ below $`\Omega_j`$ there is a sorted row of $`\le_1`$-items for the index $`D`$, between $`b_e`$ and $`k_e`$,
+  with $`k_e \le_1 k_e + V_{j+1}(D)`$ and $`b_e \le_1 k_e + V_{j+1}(D) + b_e + V_j(\beta)`$; an item $`h`$ for a term $`(E, c)`$ has $`h \le_1 h + V_{j+1}(E) + V_j(c)`$. This replaces the coefficient $`b\cdot m`$ of §1.2.
+  SHAPE-N, SUM-CMP$`_j`$, the items of every level (VAL$`_j`$, MAX-ITEM$`_j`$, LARGEST-EPS$`_j`$), and the comparison lemma **ROW$`_j`$** for all levels at once: a new atom is built inside the
+  block of the host atom by ROW$`_{j+1}`$, then by R1 at $`k_e`$, then moved below the head by R1 at $`b_e`$ (the referee checked every case). ATOM-HOST-N, TOP-MAKE$`_j`$ and
+  **TOP-HOST$`_n`$**: the block $`\mathrm{TOP}_n`$, with points $`c_2 \lt \dots \lt c_n`$ and $`c_j \le_1 c_n\cdot 2`$ for every $`j`$, hosts every code of the $`n`$-ary system.
+- **Theorem IDX-n** (proved). For every $`n \ge 2`$, natively,
+
+```math
+\iota(\mathrm{CH}_2) \ge Z_n \gt \theta_{\Xi_n}(0) \gt Z_{n-1},\qquad\text{so}\qquad \iota(\mathrm{CH}_2) \ge Z_\omega = \sup_n Z_n.
+```
+
+- Conjectured names: $`\sup_n \Xi_n = \theta`$, so $`Z_\omega = H(\theta) = \Theta_1`$.
+- **Lemma V-COND** (proved, but it gives no route; the referee): a block of the shape that conv prints would host every $`\mathrm{TOP}_n`$ if pairs $`u \lt_2 w`$ with $`u \le_1 x`$ were
+  cofinal below its left end $`x`$. But such a pair together with $`x \lt_2 y`$ is a copy of $`\mathrm{CH}_2`$ with point $`u`$, so it never exists below $`\iota(\mathrm{CH}_2)`$.
+- The referee's other minor points: the constants of a level are defined by recursion on the value inside the level (an index can be larger than its atom);
+  in ROW$`_j`$ only sums below $`b_e`$ may be added in the first step; $`\mathrm{TOP}_2, \dots, \mathrm{TOP}_5`$ have 7 to 10 nodes (the codes have 15 to 28).
+- **Open** (TOP-ω): one finite pattern, RF, fan-free and without L1p, that hosts every $`\mathrm{TOP}_n`$ (the module of $`Z_\omega`$). conv prints the upper block of $`\mathrm{TOP}_n`$ as the matrix
+  $`(0,0,0)(1,1,0)\dots(n-1,n-1,0)`$, and their limit $`(0,0,0)(1,1,1)`$ as a $`\le_2`$-pair, which above $`y`$ is the configuration L1p. Then $`\iota(\mathrm{CH}_2) \ge \theta_0`$ needs the region $`H(D)`$
+  for $`D \gt \theta`$, and then the structure at the level of $`\Omega`$ up to SRO.
+
+### 2.3 The shapes of $`\Phi_3`$: 3,050 of 3,166
+
+Notation of §1.3.
+
+- **The blocking point of the eighteenth round is repaired** (proved). The program now checks the four conditions itself: the alias identities outside the
+  checked region, the condition on the bottom members, the two missing comparisons of the monotonicity, and Step 4 for each template. The referee read the code
+  against the case split. All 146 matrices of §1.3 are proved again with these checks, so **FAM-Q and SHAPE-Q are proved as general theorems** (at the level of the
+  program), and **the 146 have 2 reviews**. The tag comparison that the eighteenth-round referee questioned only misses caches: this referee logged all 47,944
+  such calls on the 353 matrices with $`t = 1`$.
+- **SHAPE-Q2** (proved): relations with a positive count shift and landing nodes, repeated explicit nodes, bottom instances inside a family, explicit nodes inside a
+  family, and Step 4 for members that can be left ends of $`\le_2`$. 39 of the 42 matrices of §1.3 without a shape now have one.
+- **Lemma GRN** (proved): GR+ with nested copies of any depth (copies made inside copies), with one reach rule for every depth. This is the rule for batches over
+  two levels that §1.3 asked for; depth 3 occurs in 6 classes. (The referee: "the search is complete" holds only inside the slots that the program tries.)
+- **DER-Q2, GR-UNIF2** (accepted, like GR-UNIF): slot rules with free top members, and units of members that share one batch.
+- **Proved for every $`n`$**: 207 new matrices (III 177, I 15, SUM 7, ROOT 8). The referee ran the final program again on all 353 matrices with $`t = 1`$: all 353 proved. (The
+  paper's outputs were made before the last change of the program, so the paper must cite this run.)
+- **M5** (13): the family of witnesses is a binomial tree: the $`i`$-th witness has $`i`$ witnesses of its own (checked; the referee: recursively, with no node twice). The size of
+  $`\mathrm{conv}(A[n])`$ grows like $`c_A\cdot 2^n`$ (the paper's single formula $`c\cdot 2^{n+1} + 7`$ holds for only 3 of the 13). No family of the present kind describes this. Open.
+- **The tally** (checked; $`3{,}050 = 2{,}843 + 207`$):
+
+| class | matrices | proved for every $`n`$ | given a condition checked for small $`n`$ | $`t = 2`$, given a shape checked for small $`n`$ | open |
+|---|---|---|---|---|---|
+| I | 581 | 571 | 0 | 0 | 10 |
+| SUM | 603 | 582 | 1 | 0 | 20 |
+| ROOT | 635 | 632 | 0 | 0 | 3 |
+| III | 1,347 | 1,265 | 0 | 24 | 58 |
+| all | 3,166 | 3,050 | 1 | 24 | 91 |
+
+- **Left** (116): $`t = 0`$: M5 13; $`t = 1`$: 24 (III 20, I 2, ROOT 2; of the 20, 9 were proved by an earlier version of the program but not again within 60 seconds,
+  3 have no shape, and 8 have a shape but no slot rule was found); $`t = 2`$: III 49, ROOT 1, I 8, SUM 21.
+
+### 2.4 $`\nu_C = \nu_S`$: every span below the first index fixed point is placed
+
+Notation of §1.4.
+
+- **The blocking point of the eighteenth round is repaired** (proved, given FRAG). One placement rule replaces the list of cases. **MIN-EXACT**: if a TOP-REG theorem holds for
+  a transport and $`M = \{a \in (c, \nu) : r(a) \ge y(a)\}`$ is not empty, the least $`a' \in M`$ has $`r(a') = y(a')`$ exactly (the lower bound because $`a' \in M`$, the upper bound because no smaller
+  restart is in $`M`$, which is the hypothesis of TOP-REG). **SEGCL**: every reach is closed under the reaches of its components, so TOP-REG holds also on $`[\delta_j\cdot\omega, \upsilon_{a+\omega j+2})`$
+  (TOP-REG$`^{\mathrm{seg}}`$, no FRAG). The three kinds of shallow spans missing from the list of §1.4 are instances. The minor points of the review are applied (among them the
+  forced exponent rule and the case $`h = \delta_1`$, $`t = 1`$ of §1.4).
+- **PHI-EXT, COMP, block maps** (proved): an increasing map on the $`\varepsilon`$-leaves of the hereditary closure extends in exactly one way to a map that keeps $`+`$ and $`\omega^x`$, and
+  the transports of regions compose. So the bookkeeping conditions are closed, and **HEAD-GEN** (heads of a general form) is proved.
+- **FAR-PIN$`^\iota`$, MULTI-RC$`^\iota`$, TOP-REG$`^\iota`$, SPAN-PLACE** (proved, given FRAG): the pins in index form, from the cap formula $`-1 + \mathrm{logend}`$ at every index that is not a fixed point
+  (instead of EXACT-C); H-RC over every region of a span below the first index fixed point; and the far TOP-REG at every landing of such a span. So every span below
+  the first index fixed point has an exact twisted target. This closes (D1a), (D2), (D3) and (D4) of §1.4.
+- **REFL-MOV**: it holds only under the hypotheses of LONG-RS\*\*, and it is no longer needed (MIN-EXACT gives the lower half).
+- **RE-PLACE\*, RES-ALL\*** (proved, given FRAG): if ET fails, every realization contains a deep span over an uncountable offset ((D1b)). So on the copying side **the only
+  obstruction left is (D1b)**, next to (E4).
+- **Not proved**: the reduction "$`\nu_C = \nu_S`$ follows from FRAG, a tool for (D1b) and (E4)" (blocking point; it is an outline). The tool must also give room for the targets
+  of (D1b) past the η-offset $`\omega^{G_2}`$, a TOP-REG past the first index fixed point (the caps used below it stop there), and the bookkeeping of the transports past index
+  fixed points, where the present induction is circular. $`\nu_C = \nu_S`$ and $`\nu_C \lt \nu_S`$: neither is proved; no ghost was found. The ghost test P_NEST for (D1b) is now
+  well formed; it is open.
+- The referee's other minor points: the $`\upsilon`$-fixed points are a proper subclass of the $`\varepsilon`$-numbers (only the inclusion is used); room below $`\omega^{G_2}`$ also needs the
+  hypotheses of LONG-CLASS; two of the paper's finite checks test only the arithmetic.
+
+### 2.5 Status after the nineteenth round
+
+- Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{11}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$.
+  No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
+- The lower-bound program below $`\theta_0`$: the step below SRO holds for every $`n`$ on 3,050 of the 3,166 sample matrices; natively $`\iota(\mathrm{CH}_2) \ge Z_\omega`$.
+- Upper bounds: still none by an InaccPsi term for $`\iota(\mathrm{CH}_k)`$, $`m_F`$, $`x_F`$, $`C^*_3`$ or $`\nu_C`$.
+- $`\nu_C = \nu_S`$: every span below the first index fixed point is placed; left: the deep spans over an uncountable offset (D1b), and (E4).
+
+### 2.6 Checks of the nineteenth round
+
+Each run was under 60 seconds; none is a proof.
+
+- §2.1. Names, normal forms, $`D'`$ and the order $`X_9 \lt X_{10} \lt X_{11}^V \lt X_{11} \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$: Python and Lean agree (the referee's Lean rerun is green with the same
+  output). D′-UNC on 716 η-offsets with 0 disagreements (the 89 offsets outside $`D'`$ are no evidence); COVER on 530 top atoms with 0 violations. The referee: 500 random
+  multipliers below $`\hat G`$, all normal; 56 η-offsets near the boundary of $`D'`$, 0 disagreements; the code maps at 5 new bases, about 231,000 pairs, 0 failures.
+- §2.2. 18 blocks (14 codes and $`\mathrm{TOP}_2, \dots, \mathrm{TOP}_5`$) are patterns, RF, fan-free and without L1p. Certificates, all replayed: 20 of 20 in the predicted direction, 0 of 20 in the
+  reverse direction. The referee: 11 more blocks with deeper nesting (up to a code of the 5-ary system), 0 failures; 9 of 11 forward found and replayed, 0 of 11 reverse.
+- §2.3. The same slot pattern at two more levels for all 353 matrices with $`t = 1`$ (paper); the shape equals the concrete build at two further levels, 353 of 353 (referee).
+  The sizes of M5 for $`n \le 7`$.
+- §2.4. Children below the reach (1,586), closures (1,050), PHI-EXT (2,400 pairs), least multiples, and MIN-EXACT on a finite model (1,400): 0 violations. The referee: PHI-EXT
+  in an encoding of their own (2,000 triples) and the arithmetic of the cap lemmas (1,687 cases): 0 violations.
+
+### 2.7 Open
+
+- Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs (V1′) and (V2′) of §2.1, and (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$,
+  $`m_3`$, $`c_0`$.
+- The claim above $`X_{11}`$ given FRAG: η-offsets at or above $`\Phi_\Omega`$, and Conjecture EXACT-PHI.
+- The first inaccessible: $`H_m`$, through $`\iota(\mathrm{CH}_2) \ge \theta_0`$ (from $`Z_\omega`$ on: one finite top for all $`\mathrm{TOP}_n`$, then the region $`H(D)`$ for $`D \gt \theta`$, then the levels of $`\Omega`$ up
+  to SRO); UNIF-FS below SRO on the 116 matrices of §2.3 (M5 needs a family shaped like a tree).
+- $`\nu_C = \nu_S`$: (D1b), which needs the same tools as (P) and room past $`\omega^{G_2}`$; (E4).
+- Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; the exact reaches of the long crossed restarts (between CROSS-U and R-CAP$`^U`$); names beyond
+  $`X_{11}`$; the rest of [COVER.md](COVER.md) §9.
