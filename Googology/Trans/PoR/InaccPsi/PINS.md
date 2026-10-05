@@ -84,7 +84,7 @@ $`\mathrm{Core}^\tau`$ is the union of the sets $`B`$ of the $`\tau`$-isominimal
 - **Conditional** (proved, 1 review, given FRAG and the hypothesis H-RC: pins with index shift for every segment of the
   region). For every $`\lambda \le \Lambda^*`$ the reach of $`\rho_\lambda`$ is the supremum of $`y + 1`$ over the reflected points $`y`$, and
   $`\Lambda^*`$ is the least $`\lambda`$ that is fully reflected. H-RC was open beyond the first segment; it is now proved (Lemma PIN-S,
-  [BREAK.md](BREAK.md) §4, 1 review).
+  [BREAK.md](BREAK.md) §4, 1 review), and it holds at every restart below $`\nu_S`$ ([SHIFT.md](SHIFT.md) §9.1).
 - **Not proved** (blocking point, one sentence): "HC holds on all of $`[0, \rho_{\Theta_A+\omega^2})`$". At $`\Theta_A`$ itself only the
   bounds above are known, and EQB-A allows $`R_2^C \ne R_2^S`$ there. No theorem uses the sentence. Now the reach at $`\Theta_A`$ is
   $`\delta + \varepsilon_{\sigma+\omega}`$, so HC holds at every $`\lambda \le \Theta_A`$ and $`R_2^C = R_2^S`$ on $`[0, \rho_{\Theta_A+\omega^2})`$ ([BREAK.md](BREAK.md) §4, 1 review).
@@ -211,7 +211,7 @@ Each run was under 60 seconds; none is a proof.
   holds for every restart with $`e_\lambda \le \psi_{\Omega_2}(\Omega_2) + 1`$ and the claim up to $`\rho_{\Lambda_{\mathrm{fp}}+\omega^2}`$; $`\Theta_1 = H(\theta)`$ is reduced to an open hull lemma ([VEBLEN.md](VEBLEN.md) §1). Now the closed form holds for
   $`e_\lambda \le \psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$ and the claim up to $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$; the names of $`\Theta_1`$ and $`\Theta_A`$ need only the open lemma PAR-SAME ([VEBLEN.md](VEBLEN.md) §8). Now PAR-SAME is proved, $`\Theta_1`$ and $`\Theta_A`$
   are named, and the claim holds up to $`\psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$; for $`\Lambda^*`$ and $`\nu_P`$ only lower bounds are proved ([THETA.md](THETA.md) §1). Now $`\Lambda^*`$ and $`\nu_P`$ are named and the claim holds up to
-  $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$ ([THETA.md](THETA.md) §9.1), then up to $`X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$ with $`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$ ([SHIFT.md](SHIFT.md) §1), and, given FRAG, up to $`X_5`$ ([SHIFT.md](SHIFT.md) §8.1).
+  $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$ ([THETA.md](THETA.md) §9.1), then up to $`X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$ with $`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$ ([SHIFT.md](SHIFT.md) §1), and, given FRAG, up to $`X_5`$ ([SHIFT.md](SHIFT.md) §8.1) and then up to $`X_8`$ ([SHIFT.md](SHIFT.md) §9.1).
 - INC1-S and INC1-nonups are now proved ([BREAK.md](BREAK.md) §1); RIGHT (every $`\lt_2`$-right end is a $`\upsilon`$-point) is now proved in $`R_2^S`$ ([COVER.md](COVER.md) §5.1), and open in $`R_2^C`$ above $`\beta_0`$.
 - $`C^*_3`$: the least bottom (above $`\nu_P`$), the upper half, the lower half, and Conjecture CH ([BREAK.md](BREAK.md) §10); the first fan is above $`T_\omega`$, and it needs an inaccessible given the open hypothesis
   $`FF_N`$ ([BREAK.md](BREAK.md) §7.4; now equivalent to $`m_F \ge \theta_0`$, [FANFREE.md](FANFREE.md) §4), or given the weaker open hypothesis that $`\min\{m : m \le_1 x_F\}`$ is $`\ge \theta_0`$ (now equivalent to a lower bound for

@@ -411,7 +411,7 @@ C_g \cap \Omega_2 = \{\, x \lt \pi_g : \mathrm{cmax}(x) \subseteq H(g) \,\}.
   $`\lt_2`$ の組の写ししか出さない。名前の付いた評価には、$`b`$ に名前の付いた新しい組 $`\rho_L \lt_2 b`$ が 1 つ要る：Wilken 2020, Thm 21.13 のように、終わりの区間
   $`[\rho_L, b)`$ を $`\rho_L`$ の $`\le_1`$ の前の点の上の区間へ移す同型（そうすれば Prop 21.11 が組を出す）。候補の組は予想 NU-NAME（[BREAK-ja.md](BREAK-ja.md) §2）の
   $`a_0 \lt_2 \nu`$。（今は $`\nu_C \ge X_4`$ で、新しい組は要らない：名前の付いた 1 つの組での 2 つの $`\le_1`$ の命題が評価を与える、
-  [SHIFT-ja.md](SHIFT-ja.md) §1。さらに FRAG のもとで $`\nu_C \ge X_5`$ で、2 つの命題はまだ未解決、そこの §8.1。）ほかに未解決：$`R(\Theta_{d\omega})`$ の値、最初の新しい組の左端の最小の $`\le_1`$ の前の点 $`m_0`$ について $`m_0 \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ かどうか。
+  [SHIFT-ja.md](SHIFT-ja.md) §1。さらに FRAG のもとで $`\nu_C \ge X_5`$ で、2 つの命題はまだ未解決、そこの §8.1。さらに FRAG のもとで $`\nu_C \ge X_8`$ で、(P) には非可算のずれを越える届く先が要る、そこの §9.1。）ほかに未解決：$`R(\Theta_{d\omega})`$ の値、最初の新しい組の左端の最小の $`\le_1`$ の前の点 $`m_0`$ について $`m_0 \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ かどうか。
 
 ### 9.2 素の符号：$`\Lambda_T`$ までの部品
 

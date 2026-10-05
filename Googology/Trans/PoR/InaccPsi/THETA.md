@@ -422,7 +422,7 @@ C_g \cap \Omega_2 = \{\, x \lt \pi_g : \mathrm{cmax}(x) \subseteq H(g) \,\}.
   $`\lt_2`$-pair already known to exist. A named bound needs one new pair $`\rho_L \lt_2 b`$ with $`b`$ named: an isomorphism of a final segment $`[\rho_L, b)`$
   onto a segment above a $`\le_1`$-predecessor of $`\rho_L`$, as in Wilken 2020, Thm 21.13 (then Prop 21.11 gives the pair). The candidate pair is
   $`a_0 \lt_2 \nu`$ of Conjecture NU-NAME ([BREAK.md](BREAK.md) §2). (Now $`\nu_C \ge X_4`$, and no new pair is needed: two $`\le_1`$-statements at one named pair
-  give the bound, [SHIFT.md](SHIFT.md) §1; then $`\nu_C \ge X_5`$ given FRAG, and the two statements are still open, §8.1 there.) Also open: the value of $`R(\Theta_{d\omega})`$, and whether
+  give the bound, [SHIFT.md](SHIFT.md) §1; then $`\nu_C \ge X_5`$ given FRAG, and the two statements are still open, §8.1 there; then $`\nu_C \ge X_8`$ given FRAG, and (P) needs reaches across an uncountable offset, §9.1 there.) Also open: the value of $`R(\Theta_{d\omega})`$, and whether
   $`m_0 \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ for the least $`\le_1`$-predecessor $`m_0`$ of the left end of the first new pair.
 
 ### 9.2 Native codes: modules up to $`\Lambda_T`$

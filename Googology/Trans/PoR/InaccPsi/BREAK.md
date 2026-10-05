@@ -123,7 +123,7 @@ pair, and $`\nu_{nest}`$ the least top $`y`$ of a realization of PS.
 - **Corollaries** (proved, 1 review; $`R_2^C`$).
   - $`\beta_0 \ge \nu_C \gt \nu_P`$. Before: $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$. (Now $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, 1 review, and
     $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$, proved as a transfer, [THETA.md](THETA.md) §1; now $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ and
-    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, [THETA.md](THETA.md) §9.1; then $`\nu_C \ge X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$ with $`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$, [SHIFT.md](SHIFT.md) §1; then $`\nu_C \ge X_5`$ given FRAG, [SHIFT.md](SHIFT.md) §8.1.)
+    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, [THETA.md](THETA.md) §9.1; then $`\nu_C \ge X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$ with $`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$, [SHIFT.md](SHIFT.md) §1; then $`\nu_C \ge X_5`$ given FRAG, [SHIFT.md](SHIFT.md) §8.1; then $`\nu_C \ge X_8`$ given FRAG, §9.1 there.)
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$, so the core of $`R_2^C`$ contains $`[0, \nu_P]`$. Before: $`[0, \rho_{\Theta_{d\omega}})`$, and $`[0, T_C]`$ with $`T_C`$ not
     compared with $`\nu_P`$.
   - SKEL⁺ (with HC and INC1-nonups) holds in $`R_2^C`$ on $`[0, \nu_C)`$. Now with no hypothesis ([COVER.md](COVER.md) §5.1).

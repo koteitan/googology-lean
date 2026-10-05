@@ -122,7 +122,7 @@ $`\nu_{nest}`$ は PS の実現の最小の上端 $`y`$。
 - **系**（証明済み、査読 1 回。$`R_2^C`$）。
   - $`\beta_0 \ge \nu_C \gt \nu_P`$。前は $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$。（今は $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$、査読 1 回。そして
     移し替えとして証明済みの $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$、[THETA-ja.md](THETA-ja.md) §1。今は $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ と
-    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$、[THETA-ja.md](THETA-ja.md) §9.1。さらに $`\nu_C \ge X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$（$`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$）、[SHIFT-ja.md](SHIFT-ja.md) §1。さらに FRAG のもとで $`\nu_C \ge X_5`$、[SHIFT-ja.md](SHIFT-ja.md) §8.1。）
+    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$、[THETA-ja.md](THETA-ja.md) §9.1。さらに $`\nu_C \ge X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$（$`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$）、[SHIFT-ja.md](SHIFT-ja.md) §1。さらに FRAG のもとで $`\nu_C \ge X_5`$、[SHIFT-ja.md](SHIFT-ja.md) §8.1。さらに FRAG のもとで $`\nu_C \ge X_8`$、そこの §9.1。）
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$。だから $`R_2^C`$ の核は $`[0, \nu_P]`$ を含む。前は $`[0, \rho_{\Theta_{d\omega}})`$ と、$`\nu_P`$ と比べて
     いない $`T_C`$ での $`[0, T_C]`$。
   - SKEL⁺（HC と INC1-nonups も）が $`R_2^C`$ の $`[0, \nu_C)`$ で成り立つ。今は仮定なしで（[COVER-ja.md](COVER-ja.md) §5.1）。
