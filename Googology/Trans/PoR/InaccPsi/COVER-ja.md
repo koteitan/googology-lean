@@ -389,7 +389,7 @@ $`S_n = [\upsilon^2_n, \upsilon^2_{n+1})`$ と $`S_\omega = [x, \nu)`$。
 - **系 GP**（証明済み、査読 1 回）。Gp を、PTm に組 $`p \lt_2 q`$ を加えたものとする。その最小の実現の根は $`m_F`$ で、$`m_F \lt p^* \lt q^* \lt v_1`$。
   だから $`m_F`$ より上の最小の $`\lt_2`$ の組は $`v_1`$ より下にあり、$`p^*`$ は $`(m_F, v_1)`$ の中の最小の左端。
 - **下からの評価**（証明済み、査読 1 回。NU-CT と PINS から、どちらも査読 1 回）。
-  $`m_F \gt \nu_C \gt \nu_P \gt \rho_{\Lambda^*} \gt \Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$（以前は $`m_F \gt \upsilon_{\omega^3}`$、§5.3。今は $`\nu_C \gt \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ も、[THETA-ja.md](THETA-ja.md) §1。さらに $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$、そこの §9.1。さらに $`\nu_C \ge X_4`$、[SHIFT-ja.md](SHIFT-ja.md) §1）。それぞれプログラムの
+  $`m_F \gt \nu_C \gt \nu_P \gt \rho_{\Lambda^*} \gt \Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$（以前は $`m_F \gt \upsilon_{\omega^3}`$、§5.3。今は $`\nu_C \gt \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ も、[THETA-ja.md](THETA-ja.md) §1。さらに $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$、そこの §9.1。さらに $`\nu_C \ge X_4`$、[SHIFT-ja.md](SHIFT-ja.md) §1。さらに FRAG のもとで $`\nu_C \ge X_5`$、そこの §8.1）。それぞれプログラムの
   1 つの読みから、M = SRO、(0,0,0)(1,1,1)(2,1,1)(3,1,1)、(0,0,0)(1,1,1)(2,2,0)、$`n \le 4`$ の (0,0,0)(1,1,1)(2,2,1)[n] で $`\Phi_3(M)`$ は扇の無い RF
   パターンなので、その点は $`m_F`$ より下。
 - **命題 NEED**（証明済み、査読 1 回）。$`m_F`$ が InaccPsi の名前を持つなら、$`m_F`$ のどの名前も到達不能基数を含む ⇔ $`H_m`$。
