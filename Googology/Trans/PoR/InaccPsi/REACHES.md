@@ -224,7 +224,7 @@ Each run was under 60 seconds; none is a proof.
 - The exact reaches above $`\Theta_A`$ (above any base below $`T_\omega`$ they follow the formal-reach recursion run above that base;
   now proved, 1 review, [COVER.md](COVER.md) §5.1); the reaches up to $`\Theta_A`$, and the closed form of $`O`$ on $`[\Lambda_\Gamma, \Lambda_\varepsilon)`$, are
   now proved ([PINS.md](PINS.md) §2–3).
-- $`R_2^C`$ above $`\nu_C`$ (the core of $`R_2^C`$ now contains $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$, [BREAK.md](BREAK.md) §2; now $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, and $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ as a transfer, [THETA.md](THETA.md) §1; now $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, [THETA.md](THETA.md) §9.1). INC1-nonups and INC1-S are now
+- $`R_2^C`$ above $`\nu_C`$ (the core of $`R_2^C`$ now contains $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$, [BREAK.md](BREAK.md) §2; now $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, and $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ as a transfer, [THETA.md](THETA.md) §1; now $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, [THETA.md](THETA.md) §9.1; then $`\nu_C \ge X_4`$, [SHIFT.md](SHIFT.md) §1). INC1-nonups and INC1-S are now
   proved ([BREAK.md](BREAK.md) §1).
 - The values of $`\Theta_P`$, $`\Lambda^*`$, $`\nu_P`$ and $`\nu_S`$ (the names up to $`\Lambda_\varepsilon`$ are now proved, [PINS.md](PINS.md) §3; the name of $`\Theta_P`$
   is now proved, [FANFREE.md](FANFREE.md) §10.4; $`\nu_S`$ is now
@@ -233,4 +233,4 @@ Each run was under 60 seconds; none is a proof.
 - $`C^*_3`$: the upper half (an ordinal analysis of the generated structure), the lower half $`m_3 \ge \psi_{\Omega_1}(\varepsilon_{I_0+1})`$,
   and Conjecture CH. In $`R_2^C`$ the bottoms of chains are now characterized (Theorem CP3, [COVER.md](COVER.md) §1), but not located. An upper bound needs only one $`\lt_2`$-pair below it with one more point
   between (Lemma CRIT, [COVER.md](COVER.md) §6.2), but no InaccPsi term is proved to bound $`c_0`$.
-- The order statement S for the converter above $`V_3`$ (the 26 undecided neighbour pairs of the sample are now proved, [FANFREE.md](FANFREE.md) §1; the step below SRO is proved for every $`n`$ on 459 of the 3,166 sample matrices, [FANFREE.md](FANFREE.md) §7.1, now on 1,987, [THETA.md](THETA.md) §3, then on 2,330, [THETA.md](THETA.md) §9.3).
+- The order statement S for the converter above $`V_3`$ (the 26 undecided neighbour pairs of the sample are now proved, [FANFREE.md](FANFREE.md) §1; the step below SRO is proved for every $`n`$ on 459 of the 3,166 sample matrices, [FANFREE.md](FANFREE.md) §7.1, now on 1,987, [THETA.md](THETA.md) §3, then on 2,330, [THETA.md](THETA.md) §9.3, then on 2,526, [SHIFT.md](SHIFT.md) §3).

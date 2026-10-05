@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the thirteenth and fourteenth rounds: PAR-SAME, the names up to $`\nu_P`$, the claim up to $`X_3`$, modules for the fixed points of $`\upsilon`$, (REP), (HC) and twisted copies
 
-This page continues [VEBLEN.md](VEBLEN.md). The status words are those of [README.md](README.md) §3: **proved** means that an
+This page continues [VEBLEN.md](VEBLEN.md), and [SHIFT.md](SHIFT.md) continues it. The status words are those of [README.md](README.md) §3: **proved** means that an
 independent referee found the result proved with no fatal or blocking point. §1–§7 are the thirteenth round (2026-10, four papers), and §9 is the fourteenth round (2026-10, four papers). §8 holds two
 parts that were moved here from the README to keep it short: the summary of the rounds 1–12, and the results on $`R_2^S`$ against $`R_2^C`$.
 A statement with a blocking point against it is listed under **Not proved**; a statement that its referee found to restate the target, or to be
@@ -167,7 +167,7 @@ Notation of [VEBLEN.md](VEBLEN.md) §11: $`u_m = \upsilon^2_m`$, $`x = x_2`$, $`
 
 ## 5. Status after the thirteenth round
 
-The fourteenth round changed this status; see §9.5.
+The fourteenth and fifteenth rounds changed this status; see §9.5 and [SHIFT.md](SHIFT.md) §5.
 
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, \upsilon^*)`$ with $`\upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ (resting on one transfer), and on $`[0, X_2)`$ with
@@ -199,7 +199,7 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 
 ## 7. Open
 
-The fourteenth round changed this list; the current list is §9.7.
+The fourteenth and fifteenth rounds changed this list; the current list is [SHIFT.md](SHIFT.md) §7.
 
 
 - The first inaccessible: $`H_m`$ (enough: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, through modules for the fixed points of $`\upsilon`$ from $`\Lambda_\Gamma`$ up to $`\theta_0`$, with MODULE-RED widened
@@ -392,7 +392,8 @@ C_g \cap \Omega_2 = \{\, x \lt \pi_g : \mathrm{cmax}(x) \subseteq H(g) \,\}.
   REAL: realizers exist cofinally (the referee: only for $`\nu \le \eta_0`$, which is all its uses need). Lemma L$`_R`$ (the paper's "Lemma L"; renamed
   here because Lemma L is a Lean lemma of [README.md](README.md) §3): every restart $`\mu`$ whose exponent is the image of an offset $`m`$ has
   $`R(\mu) \ge \delta_\mu + c_\mu(m)`$, without FRAG; the same for the reach, given FRAG. BRACKET: lower and upper bounds for $`R(\lambda) - \delta`$ from the two maps.
-  (The referee: the base case of Lemma L$`_R`$ should cite a different earlier lemma; same conclusion.)
+  (The referee: the base case of Lemma L$`_R`$ should cite a different earlier lemma; same conclusion. Corrected in the fifteenth round: $`\delta`$ is not reflected at a
+  restart with logend 2, so the base case uses the step lemma for block targets with step 1, [SHIFT.md](SHIFT.md) §1.)
 - **NAMES-EQ** (proved; the referee checked both halves of every row). With $`\eta_{d\omega} = \omega^{\theta_2+1} + \theta_2 + \omega^{\omega^{G+1}}`$ and
   $`G = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+1} + \theta_2)`$:
 
@@ -420,7 +421,8 @@ C_g \cap \Omega_2 = \{\, x \lt \pi_g : \mathrm{cmax}(x) \subseteq H(g) \,\}.
 - **Open**: an InaccPsi upper bound for $`\nu_C`$. Realizers, the upward and downward copies, and the twisted copies TW-0 give only $`\le_1`$-facts or copies of a
   $`\lt_2`$-pair already known to exist. A named bound needs one new pair $`\rho_L \lt_2 b`$ with $`b`$ named: an isomorphism of a final segment $`[\rho_L, b)`$
   onto a segment above a $`\le_1`$-predecessor of $`\rho_L`$, as in Wilken 2020, Thm 21.13 (then Prop 21.11 gives the pair). The candidate pair is
-  $`a_0 \lt_2 \nu`$ of Conjecture NU-NAME ([BREAK.md](BREAK.md) §2). Also open: the value of $`R(\Theta_{d\omega})`$, and whether
+  $`a_0 \lt_2 \nu`$ of Conjecture NU-NAME ([BREAK.md](BREAK.md) §2). (Now $`\nu_C \ge X_4`$, and no new pair is needed: two $`\le_1`$-statements at one named pair
+  give the bound, [SHIFT.md](SHIFT.md) §1.) Also open: the value of $`R(\Theta_{d\omega})`$, and whether
   $`m_0 \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ for the least $`\le_1`$-predecessor $`m_0`$ of the left end of the first new pair.
 
 ### 9.2 Native codes: modules up to $`\Lambda_T`$
@@ -464,7 +466,8 @@ Notation of §3.
 - **NB-DER** (proved). Each block type maps onto a long pair $`x \lt_2 y`$ in the top block of the matrix; GEN gives conv$`(A[n]) \ll`$ conv$`(A)`$. 155 matrices.
 - **SUM-CORE-NB** (26), **IX-NB** (59; its lemma IX-PHI\* is written only as a sketch), **SUM-CORE-2** (30), **IX-STAIR** (73), and $`(0,0,0)(1,1,1)`$ as a staircase
   core (39 of the 73): proved.
-- **Not proved**: the GEN induction of 2.6 (no check that the run count decreases). No counted matrix uses it.
+- **Not proved**: the GEN induction of 2.6 (no check that the run count decreases). No counted matrix uses it. (Now replaced by GEN-IND, proved,
+  [SHIFT.md](SHIFT.md) §3.)
 - **The tally** (the referee reproduced it; $`2{,}330 = 1{,}987 + 343`$):
 
 | class | matrices | proved for every $`n`$ | given a condition checked for small $`n`$ | $`t = 2`$, given a shape checked for small $`n`$ | open |
@@ -502,6 +505,8 @@ Notation of §4.
 
 ### 9.5 Status after the fourteenth round
 
+The fifteenth round changed this status; see [SHIFT.md](SHIFT.md) §5.
+
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_3]`$ with $`X_3 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, no FRAG and no transfer left;
   the names of $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$ and $`\nu_P = X_2`$ are proved; the core half holds on $`[0, \nu_C]`$ with $`\nu_C \ge X_3`$.
 - The lower-bound program below $`\theta_0`$: the step below SRO is proved for every $`n`$ on 2,330 of the 3,166 sample matrices; $`\iota(\mathrm{CH}_2) \ge \Lambda_T`$ natively.
@@ -518,11 +523,13 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 - §9.2. 23 module blocks (19 new) are patterns, RF, fan-free and L1p-free; 4 are equal to conv's output; certificates: 18 of 20 in the predicted
   direction and 5 of 7 for CHAIN⁺, all replayed; 0 of 6 in the reverse direction. The referee's reruns are identical, and 5 own reverse searches
   found nothing (each stopped at 45 s).
-- §9.3. Full builds at $`n = 6, 7`$ agree for all 155 NB matrices, and the 132 index templates agree. The referee: ordered lists with lh and succ at $`j = 6, 7`$
+- §9.3. The node sets of the full builds at $`n = 6, 7`$ agree for all 155 NB matrices (node sets only), and the 132 index templates agree. The referee: ordered lists with lh and succ at $`j = 6, 7`$
   (155 of 155) and $`j = 8`$ (52 of 52); the templates at $`n = 8, 9`$; $`(0,0,0)(1,1,1)`$ passes the step for $`n = 2, \ldots, 20`$.
 - §9.4. The readings of K(3,0,0), K(3,0,0)(3,0,0) and K(3,1,0) match LADDER and DIAG. The referee: 18 strings with the program, which also match 4 new predictions.
 
 ### 9.7 Open
+
+The fifteenth round changed this list; the current list is [SHIFT.md](SHIFT.md) §7.
 
 - Upper bounds: an InaccPsi bound for $`\nu_C`$ (one new pair $`\rho_L \lt_2 b`$ at a named $`b`$, §9.1), for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
 - The first inaccessible: $`H_m`$, through $`\iota(\mathrm{CH}_2) \ge \theta_0`$ (modules from $`\Lambda_T`$ on: several slots, CHAIN-REL, or the collapsing function $`\vartheta^\upsilon`$);

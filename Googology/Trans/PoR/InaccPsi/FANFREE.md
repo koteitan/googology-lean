@@ -230,7 +230,7 @@ The bad root and $`t`$ are those of the BMS expansion of $`A`$.
 | column 0 | 635 | 206 | 429 open (the self-reference type) |
 | in the $`\Omega`$-level structure | 1,347 | 0 | open; no decomposition found |
 
-  The 480 proved include the 21 that are proved given LOW. (Now 874 proved, §10.1, then 1,442, [VEBLEN.md](VEBLEN.md) §3, then 1,862 given a checked property of the program, [VEBLEN.md](VEBLEN.md) §10, then 1,987 with that property proved, [THETA.md](THETA.md) §3, then 2,330, [THETA.md](THETA.md) §9.3.) What is missing, class by class: that $`\Phi_3`$ treats the index term as one unit
+  The 480 proved include the 21 that are proved given LOW. (Now 874 proved, §10.1, then 1,442, [VEBLEN.md](VEBLEN.md) §3, then 1,862 given a checked property of the program, [VEBLEN.md](VEBLEN.md) §10, then 1,987 with that property proved, [THETA.md](THETA.md) §3, then 2,330, [THETA.md](THETA.md) §9.3, then 2,526, [SHIFT.md](SHIFT.md) §3.) What is missing, class by class: that $`\Phi_3`$ treats the index term as one unit
   in every context; a copy of the changed summand that interleaves with the fixed earlier summands (a CODE lemma with parameters, the
   same kind of gap as in §2); the shapes of the self-reference type for every $`n`$; and, for the last class (it contains POINT-REF, LONG-K and
   the type of SRO itself), any decomposition.
@@ -523,7 +523,7 @@ $`\Lambda' = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{
   so this structure gives no bound for $`\iota(\mathrm{CH}_2)`$. Conjecture: $`\iota(\mathrm{CH}_2) \gt \theta_0`$.
 - **Open**: offsets up to $`\Gamma_{\rho+1}`$ (one more lemma, VEB-THETA, and a uniform comparison of Veblen forms); $`\Theta_1 = H(\theta)`$ (the maps STEP and
   LOW-STEP one level down); the names of $`\Theta_1`$, $`\Theta_A`$, $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$; an InaccPsi upper bound for $`\nu_C`$ (it would give the claim on
-  $`[0, \nu_C]`$). (Now the offsets up to $`\psi_{\Omega_2}(\Omega_2) + 1`$, past $`\Gamma_{\rho+1}`$, are proved, and $`\Theta_1 = H(\theta)`$ is reduced to one hull lemma, [VEBLEN.md](VEBLEN.md) §1; then the offsets up to $`\psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$, and $`\Theta_1`$, $`\Theta_A`$ are reduced to one lemma on parameters, [VEBLEN.md](VEBLEN.md) §8; then that lemma, PAR-SAME, is proved, $`\Theta_1`$ and $`\Theta_A`$ are named, and the claim holds up to $`\psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, [THETA.md](THETA.md) §1; then $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$ are named and the claim holds up to $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, [THETA.md](THETA.md) §9.1.)
+  $`[0, \nu_C]`$). (Now the offsets up to $`\psi_{\Omega_2}(\Omega_2) + 1`$, past $`\Gamma_{\rho+1}`$, are proved, and $`\Theta_1 = H(\theta)`$ is reduced to one hull lemma, [VEBLEN.md](VEBLEN.md) §1; then the offsets up to $`\psi_{\Omega_2}(\Omega_2\cdot 2) + 1`$, and $`\Theta_1`$, $`\Theta_A`$ are reduced to one lemma on parameters, [VEBLEN.md](VEBLEN.md) §8; then that lemma, PAR-SAME, is proved, $`\Theta_1`$ and $`\Theta_A`$ are named, and the claim holds up to $`\psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, [THETA.md](THETA.md) §1; then $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$, $`\nu_P`$ are named and the claim holds up to $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, [THETA.md](THETA.md) §9.1; then up to $`X_4`$, [SHIFT.md](SHIFT.md) §1.)
 
 ## 11. Status after the tenth round
 
@@ -557,4 +557,4 @@ Each run was under 60 seconds; none is a proof.
 
 ## 13. Open
 
-The later rounds changed this list; the current list is [THETA.md](THETA.md) §9.7.
+The later rounds changed this list; the current list is [SHIFT.md](SHIFT.md) §7.

@@ -406,7 +406,7 @@ Notation of §2 and §5.2.
 - **Corollary GP** (proved, 1 review). Let Gp be PTm with a pair $`p \lt_2 q`$ added. Its least realization has root $`m_F`$, and
   $`m_F \lt p^* \lt q^* \lt v_1`$. So the least $`\lt_2`$-pair above $`m_F`$ lies below $`v_1`$, and $`p^*`$ is the least left end in $`(m_F, v_1)`$.
 - **Lower bounds** (proved, 1 review; from NU-CT and PINS, 1 review each).
-  $`m_F \gt \nu_C \gt \nu_P \gt \rho_{\Lambda^*} \gt \Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$ (before: $`m_F \gt \upsilon_{\omega^3}`$, §5.3; now also $`\nu_C \gt \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, [THETA.md](THETA.md) §1, and $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, §9.1 there). From one program
+  $`m_F \gt \nu_C \gt \nu_P \gt \rho_{\Lambda^*} \gt \Lambda_\varepsilon = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\Omega_1+1}+1})`$ (before: $`m_F \gt \upsilon_{\omega^3}`$, §5.3; now also $`\nu_C \gt \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, [THETA.md](THETA.md) §1, and $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, §9.1 there, and $`\nu_C \ge X_4`$, [SHIFT.md](SHIFT.md) §1). From one program
   reading each, $`\Phi_3(M)`$ is RF and fan-free, so its point is below $`m_F`$, for M = SRO, (0,0,0)(1,1,1)(2,1,1)(3,1,1), (0,0,0)(1,1,1)(2,2,0),
   and (0,0,0)(1,1,1)(2,2,1)[n] for $`n \le 4`$.
 - **Proposition NEED** (proved, 1 review). If $`m_F`$ has an InaccPsi name, then every name of $`m_F`$ contains an inaccessible iff $`H_m`$. With

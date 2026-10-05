@@ -122,7 +122,7 @@ $`\nu_{nest}`$ は PS の実現の最小の上端 $`y`$。
 - **系**（証明済み、査読 1 回。$`R_2^C`$）。
   - $`\beta_0 \ge \nu_C \gt \nu_P`$。前は $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$。（今は $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$、査読 1 回。そして
     移し替えとして証明済みの $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$、[THETA-ja.md](THETA-ja.md) §1。今は $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ と
-    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$、[THETA-ja.md](THETA-ja.md) §9.1。）
+    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$、[THETA-ja.md](THETA-ja.md) §9.1。さらに $`\nu_C \ge X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$（$`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$）、[SHIFT-ja.md](SHIFT-ja.md) §1。）
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$。だから $`R_2^C`$ の核は $`[0, \nu_P]`$ を含む。前は $`[0, \rho_{\Theta_{d\omega}})`$ と、$`\nu_P`$ と比べて
     いない $`T_C`$ での $`[0, T_C]`$。
   - SKEL⁺（HC と INC1-nonups も）が $`R_2^C`$ の $`[0, \nu_C)`$ で成り立つ。今は仮定なしで（[COVER-ja.md](COVER-ja.md) §5.1）。
@@ -229,7 +229,8 @@ $`C_\tau(z)`$ は $`\{0, \tau, z\}`$ を、カントール標準形の部分と�
   REACH (a)、「届く先 = 形式的な届く先」という主張、定理 EQB-dw の評価 $`r_C \le R`$。反例：$`\lambda = \omega^2`$ では形式的な届く先は
   $`\delta`$ だが $`\rho \le_1 \delta + 1`$。一般に、ずれが有限のとき形式的な届く先は届く先より 1 小さい。査読者の直し方（$`y \gt \delta`$ だけ
   数える）は査読の中で証明されたが、それ自身はまだ査読されていない。（今は、直した形式的な届く先の定義（$`y`$ は $`(\delta, \rho_{\lambda+\omega^2})`$ の中）が
-  [THETA-ja.md](THETA-ja.md) §9.1 で使われ、その査読者が、矛盾が無く「届く先 $`\le`$ 形式的な届く先」がそれで成り立つことを確かめた。）$`\Theta_A`$、$`\Theta_\delta`$、$`\Theta_{d\omega}`$ での値と CORE-C$`^{d\omega}`$ は
+  [THETA-ja.md](THETA-ja.md) §9.1 で使われ、その査読者が、矛盾が無く「届く先 $`\le`$ 形式的な届く先」がそれで成り立つことを確かめた。さらに直しとして書き出され、
+  2 人目の査読者が確かめた、[SHIFT-ja.md](SHIFT-ja.md) §1。）$`\Theta_A`$、$`\Theta_\delta`$、$`\Theta_{d\omega}`$ での値と CORE-C$`^{d\omega}`$ は
   これによらない。
 
 ## 5. $`\nu`$ より上の入れ子の組：どの段でも最初のブロック
