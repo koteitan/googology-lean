@@ -167,7 +167,7 @@ Notation of [VEBLEN.md](VEBLEN.md) §11: $`u_m = \upsilon^2_m`$, $`x = x_2`$, $`
 
 ## 5. Status after the thirteenth round
 
-The fourteenth to twenty-first rounds changed this status; see §9.5, [SHIFT.md](SHIFT.md) §5, §8.5, §9.5, [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5 and [SHIFT3.md](SHIFT3.md) §1.5.
+The fourteenth to twenty-second rounds changed this status; see §9.5, [SHIFT.md](SHIFT.md) §5, §8.5, §9.5, [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5 and [SHIFT3.md](SHIFT3.md) §1.5, §2.5.
 
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, \upsilon^*)`$ with $`\upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ (resting on one transfer), and on $`[0, X_2)`$ with
@@ -199,7 +199,7 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 
 ## 7. Open
 
-The fourteenth to twenty-first rounds changed this list; the current list is [SHIFT3.md](SHIFT3.md) §1.7.
+The fourteenth to twenty-second rounds changed this list; the current list is [SHIFT3.md](SHIFT3.md) §2.7.
 
 
 - The first inaccessible: $`H_m`$ (enough: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, through modules for the fixed points of $`\upsilon`$ from $`\Lambda_\Gamma`$ up to $`\theta_0`$, with MODULE-RED widened
@@ -422,7 +422,7 @@ C_g \cap \Omega_2 = \{\, x \lt \pi_g : \mathrm{cmax}(x) \subseteq H(g) \,\}.
   $`\lt_2`$-pair already known to exist. A named bound needs one new pair $`\rho_L \lt_2 b`$ with $`b`$ named: an isomorphism of a final segment $`[\rho_L, b)`$
   onto a segment above a $`\le_1`$-predecessor of $`\rho_L`$, as in Wilken 2020, Thm 21.13 (then Prop 21.11 gives the pair). The candidate pair is
   $`a_0 \lt_2 \nu`$ of Conjecture NU-NAME ([BREAK.md](BREAK.md) §2). (Now $`\nu_C \ge X_4`$, and no new pair is needed: two $`\le_1`$-statements at one named pair
-  give the bound, [SHIFT.md](SHIFT.md) §1; then $`\nu_C \ge X_5`$ given FRAG, and the two statements are still open, §8.1 there; then $`\nu_C \ge X_8`$ given FRAG, and (P) needs reaches across an uncountable offset, §9.1 there; then $`\nu_C \ge X_9`$ given FRAG, [SHIFT2.md](SHIFT2.md) §1.1; then $`\nu_C \ge X_{11}`$ given FRAG, §2.1 there; then $`\nu_C \ge X_{12}`$ given FRAG, §3.1 there; then $`\nu_C \ge X_{13}`$ given FRAG, [SHIFT3.md](SHIFT3.md) §1.1.) Also open: the value of $`R(\Theta_{d\omega})`$, and whether
+  give the bound, [SHIFT.md](SHIFT.md) §1; then $`\nu_C \ge X_5`$ given FRAG, and the two statements are still open, §8.1 there; then $`\nu_C \ge X_8`$ given FRAG, and (P) needs reaches across an uncountable offset, §9.1 there; then $`\nu_C \ge X_9`$ given FRAG, [SHIFT2.md](SHIFT2.md) §1.1; then $`\nu_C \ge X_{11}`$ given FRAG, §2.1 there; then $`\nu_C \ge X_{12}`$ given FRAG, §3.1 there; then $`\nu_C \ge X_{13}`$ given FRAG, [SHIFT3.md](SHIFT3.md) §1.1; then $`\nu_C \ge X_{14}`$ given FRAG, §2.1 there.) Also open: the value of $`R(\Theta_{d\omega})`$, and whether
   $`m_0 \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ for the least $`\le_1`$-predecessor $`m_0`$ of the left end of the first new pair.
 
 ### 9.2 Native codes: modules up to $`\Lambda_T`$
@@ -505,7 +505,7 @@ Notation of §4.
 
 ### 9.5 Status after the fourteenth round
 
-The fifteenth to twenty-first rounds changed this status; see [SHIFT.md](SHIFT.md) §5, §8.5, §9.5, [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5 and [SHIFT3.md](SHIFT3.md) §1.5.
+The fifteenth to twenty-second rounds changed this status; see [SHIFT.md](SHIFT.md) §5, §8.5, §9.5, [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5 and [SHIFT3.md](SHIFT3.md) §1.5, §2.5.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_3]`$ with $`X_3 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, no FRAG and no transfer left;
   the names of $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$ and $`\nu_P = X_2`$ are proved; the core half holds on $`[0, \nu_C]`$ with $`\nu_C \ge X_3`$.
@@ -529,7 +529,7 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 
 ### 9.7 Open
 
-The fifteenth to twenty-first rounds changed this list; the current list is [SHIFT3.md](SHIFT3.md) §1.7.
+The fifteenth to twenty-second rounds changed this list; the current list is [SHIFT3.md](SHIFT3.md) §2.7.
 
 - Upper bounds: an InaccPsi bound for $`\nu_C`$ (one new pair $`\rho_L \lt_2 b`$ at a named $`b`$, §9.1), for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
 - The first inaccessible: $`H_m`$, through $`\iota(\mathrm{CH}_2) \ge \theta_0`$ (modules from $`\Lambda_T`$ on: several slots, CHAIN-REL, or the collapsing function $`\vartheta^\upsilon`$);
