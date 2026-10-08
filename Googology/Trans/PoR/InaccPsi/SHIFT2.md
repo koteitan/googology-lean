@@ -1,8 +1,8 @@
 [← Back](README.md) | [English](SHIFT2.md) | [Japanese](SHIFT2-ja.md)
 
-# $`R_2^+`$, the eighteenth and nineteenth rounds: $`\nu_C \ge X_9`$ and $`X_{11}`$ given FRAG, reaches across index fixed points, flat and nested codes, SYM-Q, GRN and MIN-EXACT
+# $`R_2^+`$, the eighteenth to twentieth rounds: $`\nu_C \ge X_9`$, $`X_{11}`$ and $`X_{12}`$ given FRAG, reaches across index fixed points, exact caps by order type, flat and nested codes, HOST$`_k`$, SYM-Q, GRN and MIN-EXACT
 
-This page continues [SHIFT.md](SHIFT.md) (§9 there is the seventeenth round); §1 is the eighteenth round and §2 the nineteenth. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT.md](SHIFT.md) (§9 there is the seventeenth round); §1 is the eighteenth round, §2 the nineteenth and §3 the twentieth. The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -168,7 +168,7 @@ state it.
 
 ### 1.5 Status after the eighteenth round
 
-The nineteenth round changed this status; see §2.5.
+The nineteenth and twentieth rounds changed this status; see §2.5, §3.5.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_9]`$ given FRAG (on $`[0, X_9^S]`$ if MULTI-RC\* is accepted only on one segment); the core
   half holds on $`[0, \nu_C]`$. No InaccPsi upper bound for $`\nu_C`$: (P) and (Q′) at a named pair stay open.
@@ -193,7 +193,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 1.7 Open
 
-The nineteenth round changed this list; the current list is §2.7.
+The nineteenth and twentieth rounds changed this list; the current list is §3.7.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs upper bounds for reaches across an uncountable exponent and codes past the first index fixed
   point, (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
@@ -255,7 +255,7 @@ So the conjecture $`X_{10}`$ of §1.1 is proved, and **Wilken's claim holds in $
 gets $`[0, X_{11}^V]`$, where $`X_{11}^V`$ is $`X_{11}`$ with $`\Phi_2`$ replaced by $`\psi_{\Omega_3}(0)`$; $`X_{10} \lt X_{11}^V \lt X_{11}`$. Without FRAG the range stays $`[0, X_4]`$. Also (P-LOW$`^U`$) every
 restart $`a`$ with (P) has $`e_a \ge \mathbb{G} + 1`$.
 
-- **Labelled as open, correctly**: Conjecture EXACT-PHI (exact caps for $`\tau \in [\Phi_\Omega, G_2)`$); (D1b) of §2.4 for spans over short restarts with offset below $`\Phi_\Omega`$ (an outline).
+- **Labelled as open, correctly**: Conjecture EXACT-PHI (exact caps for $`\tau \in [\Phi_\Omega, G_2)`$; refuted in the twentieth round, §3.1); (D1b) of §2.4 for spans over short restarts with offset below $`\Phi_\Omega`$ (an outline).
 - **Not proved** (the referee: blocking point against the leaf only): (P) and (Q′) at $`(L(\omega), L(\omega+1))`$ or at any named pair, and so an InaccPsi upper bound for $`\nu_C`$.
   Every new result is a lower bound for $`\nu_C`$, a cap for reaches with codes below $`\mathbb{G}`$, or a realizer. Missing: (V1′) exact caps for the crossed restarts with
   $`\tau \in [\Phi_\Omega, G_2)`$ and for the long crossed restarts (only CROSS-U $`\le r \le`$ R-CAP$`^U`$, and nothing for codes $`\ge \mathbb{G}`$); (V2′) η-offsets at or above $`\Phi_\Omega`$ (multipliers $`\ge \Phi_2`$).
@@ -347,6 +347,8 @@ Notation of §1.4.
 
 ### 2.5 Status after the nineteenth round
 
+The twentieth round changed this status; see §3.5.
+
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{11}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$.
   No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
 - The lower-bound program below $`\theta_0`$: the step below SRO holds for every $`n`$ on 3,050 of the 3,166 sample matrices; natively $`\iota(\mathrm{CH}_2) \ge Z_\omega`$.
@@ -369,6 +371,8 @@ Each run was under 60 seconds; none is a proof.
 
 ### 2.7 Open
 
+The twentieth round changed this list; the current list is §3.7.
+
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs (V1′) and (V2′) of §2.1, and (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$,
   $`m_3`$, $`c_0`$.
 - The claim above $`X_{11}`$ given FRAG: η-offsets at or above $`\Phi_\Omega`$, and Conjecture EXACT-PHI.
@@ -377,3 +381,161 @@ Each run was under 60 seconds; none is a proof.
 - $`\nu_C = \nu_S`$: (D1b), which needs the same tools as (P) and room past $`\omega^{G_2}`$; (E4).
 - Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; the exact reaches of the long crossed restarts (between CROSS-U and R-CAP$`^U`$); names beyond
   $`X_{11}`$; the rest of [COVER.md](COVER.md) §9.
+
+## 3. The twentieth round
+
+Four papers (2026-10), each refereed once, so a result in this section has 1 review unless a count is given. **2 reviews** means that the referee of
+the nineteenth round proposed the repair (or checked the result) and the referee of this round checked it again as written out. None of the papers uses
+Wilken, JSL 72 (2007), Carlson, AML 38 (1999), Wilken, AML 45 (2006), or the equivalence that Carlson 2009, p. 97, announces. New papers cited here:
+Carlson–Wilken, "Tracking chains of Σ₂-elementarity", APAL 163 (2012) ([link](https://www.sciencedirect.com/science/article/pii/S0168007211001199)), Wilken, "Pure patterns of order 2"
+([arXiv:1608.08421](https://arxiv.org/abs/1608.08421)) and Wilken, "Tracking chains revisited" ([arXiv:1611.04348](https://arxiv.org/abs/1611.04348)). No Lean file was added: one paper (§3.1)
+checked a Lean test file of named points with leanman, and one referee (§3.4) wrote a Lean file for two small lemmas (both green); they are counted as
+checks. The minor points of the nineteenth-round reviews are applied, in §2 and below.
+
+### 3.1 Exact caps by order type: EXACT-PHI is false, $`\nu_C \ge X_{12}`$ given FRAG; (P) still open
+
+Notation of §2.1. $`\chi_0 = \Gamma`$ enumerates the strongly critical ordinals, and for $`d \gt 0`$, $`\chi_d`$ enumerates the common fixed points of all $`\chi_{d'}`$, $`d' \lt d`$
+(the Veblen hierarchy over $`\Gamma`$). An ordinal $`\gamma`$ is **χ-critical** if it is in the range of every $`\chi_d`$, $`d \lt \gamma`$. $`\Phi^\chi_X`$ is the least χ-critical ordinal above $`X`$; $`\Phi^\chi_\Omega = \Phi^\chi_{\Omega_1}`$,
+$`\Phi^\chi_2 = \Phi^\chi_{\Omega_2}`$ and $`\mathbb{G}^\chi = G(\Phi^\chi_2)`$. For a restart $`\nu`$, $`\mathrm{Dom}_\nu`$ is the set of normal-form values below $`\Omega_2`$ whose countable maximal
+subterms are below $`\rho_\nu`$, and $`o_\nu(\tau)`$ is the order type of $`\mathrm{Dom}_\nu \cap \tau`$. $`\Phi^\rho`$ is the least fixed point of $`\alpha \mapsto \Gamma_\alpha`$ above $`\rho`$.
+
+- **The minor points of the nineteenth-round review are applied** (proved, **2 reviews** for the repaired statements): LONG-RS$`^U`$, RL-U and CROSS-U get the hypothesis
+  $`\rho_{R+\omega^2} \le \nu_S`$ for the crossed restarts $`R`$ (automatic when the target is an index fixed point, so CROSS-SHARP and X11 are unchanged); a multiplier code has its
+  constants below its base; the bound in the proof of GHAT; the closures of the constants of the η-offsets in the finite pattern of MULTI-RC$`^U`$; EXACT-V is for $`e \lt \Phi_\Omega`$.
+- **NO-PHI** (proved; it uses EXACT-V). **Conjecture EXACT-PHI of §2.1 ($`r(\nu) = \delta_\nu + \Phi_\nu(\tau_\nu)`$ with the code map $`\Phi_\nu`$ of §1.1) is false.** At a restart with $`\tau_\nu = \Gamma_{\Omega_1\cdot 2}`$ (inside
+  the range of EXACT-V) the reach is $`\delta_\nu + \Gamma_{\rho\cdot 2}`$, below $`\delta_\nu + \Phi^\rho`$, while $`\Phi_\nu(\tau_\nu) \gt \Phi^\rho`$. At $`\tau_\nu = \Phi_\Omega`$ the reach is $`\delta_\nu + \Phi^\rho`$, again below
+  $`\delta_\nu + \Phi_\nu(\tau_\nu)`$, and the continuity test that the paper of §2.1 proposed fails there. The cause: $`\Phi_\nu`$ goes through Wilken's embedding into his own terms,
+  which is strictly increasing but not onto.
+  (The referee: the two example restarts in the paper have $`\tau`$ one too large; correct examples exist, and the refutation does not depend on them.)
+- **BRACKET-O, RED-O** (proved). The lower bounds by realizers are at most $`o_\nu(\tau)`$, and $`o_\nu(\tau) \le \Phi_\nu(\tau)`$. A term language that is unique, the same over every
+  base, and onto gives exact reaches $`r(\nu) = \delta_\nu + o_\nu(\tau_\nu)`$.
+- **The Veblen hierarchy over $`\Gamma`$ on both sides** (proved; the referee re-derived the main lemmas by hand). Wilken's side: a strongly critical $`\alpha`$ in a segment of his system has
+  level at least $`\Omega_1^2 + \Omega_1\cdot d`$ iff $`\alpha`$ is in the range of $`\chi_d`$, it is χ-critical iff its level is at least $`\Omega_1^2\cdot 2`$, every $`\upsilon`$-point is χ-critical, and his base
+  change commutes with the χ-terms. InaccPsi side (PSI2-χ): for an admissible $`\beta = \beta^- + \Omega_2^v\cdot c \lt \Omega_2^{\Phi^\chi_\Omega}`$ (base-$`\Omega_2`$ Cantor normal form),
+  $`\psi_{\Omega_2}(\beta)`$ is the $`c`$-th element of the range of $`\chi_v`$ above $`\psi_{\Omega_2}(\beta^-)`$ (above $`\Omega_1`$ if $`\beta^- = 0`$). So
+  $`\Phi^\chi_\Omega = \psi_{\Omega_2}(\Omega_2^{\Omega_2})`$, and one level up $`\Phi^\chi_2 = \psi_{\Omega_3}(\Omega_3^{\Omega_3})`$.
+- **Theorem EXACT-O** (proved; "$`\le`$" without FRAG, "$`\ge`$" given FRAG). Every restart $`\nu`$ with $`\rho_{\nu+\omega^2} \le \nu_S`$ and $`\tau_\nu \le \Phi^\chi_\Omega + 1`$ has
+  $`r(\nu) = \delta_\nu + \Theta_\nu(\tau_\nu) = \delta_\nu + o_\nu(\tau_\nu)`$, where $`\Theta_\nu`$ reads the χ-term of $`\tau_\nu`$ at the base $`\rho_\nu`$. EXACT-V is the case $`\tau_\nu \lt \Phi_\Omega`$. For example
+  $`\tau_\nu = \Phi_\Omega`$ gives $`\delta_\nu + \Phi^\rho`$. Conjecture: the same holds for $`\tau_\nu \lt G\cdot\omega`$.
+- **Long restarts** (proved, given FRAG). Let $`m_\lambda = G_2\cdot D + m_0`$ with $`1 \le D \lt \Phi^\chi_\Omega`$, $`m_0 \lt G_2`$, and let $`\nu`$ be the restart at index distance $`\omega^2\cdot o_\lambda(D)`$.
+  R-CAP$`^O`$ and LB bound $`r(\lambda)`$ inside the region of $`\nu`$, and **EXACT-LONG**: if $`m_0 \lt \Phi^\chi_\Omega`$, then $`r(\lambda) = r(\nu) + o_\nu(m_0)`$. This includes the exact reach of the
+  least long restarts found earlier, and $`m = G_2 + n`$ gives $`\delta + 1 + n`$, as was conjectured. **CROSS-O**: for $`1 \le x \le \Phi^\chi_{\rho_\lambda}`$, $`r(\lambda) \ge \upsilon_{\lambda+\omega^2\cdot x}`$ iff
+  $`m_\lambda \ge G_2\cdot D_x`$, where $`o_\lambda(D_x) = x`$; so crossing is sharp at every such index distance, not only at index fixed points. (The referee: EXACT-LONG uses the far
+  upper-bound rule TOP-REG-FAR in a case its refereed proof does not state; the same proof works, but it should be a lemma of its own; one line is missing in LB.)
+- **The χ-tier of η-offsets and multipliers** (proved, given FRAG, as a list of substitutions into the proofs of §2.1): the transport, pins, H-RC and the far rule across every
+  η-offset below $`\Phi^\chi_\Omega`$; multipliers below $`\Phi^\chi_2`$; **R-CAP$`^\chi`$** for every code $`G_2 \le m \lt \mathbb{G}^\chi`$; **CEIL$`^\chi`$** (no FRAG): $`m_u \ge \mathbb{G}^\chi`$ gives
+  $`\eta_u \ge \theta_2\cdot\Phi^\chi_2`$; **CROSS-SHARP$`^\chi`$** for the constant-free multiples $`M`$ of $`\Omega_2`$ up to $`\Phi^\chi_2`$. (The referee: a hull lemma one level up is used but
+  not stated; one example threshold is wrong, the right one is $`G(\Omega_2^2) = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_2\cdot 2})`$.)
+- **Theorem X12** (proved, given FRAG). As X11, with R-CAP$`^\chi`$ and CEIL$`^\chi`$:
+
+```math
+\nu_C \ge X_{12} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Phi^\chi_2} + \omega^{\mathbb{G}^\chi+1} + \omega^{G_2+1}),\qquad \mathbb{G}^\chi = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Phi^\chi_2}),\quad \Phi^\chi_2 = \psi_{\Omega_3}(\Omega_3^{\Omega_3}).
+```
+
+So **Wilken's claim holds in $`R_2^C`$ on $`[0, X_{12}]`$, both halves, given FRAG**, and $`X_{11} \lt X_{12} \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$. Without FRAG the range stays $`[0, X_4]`$. Also
+(P-LOW$`^\chi`$) every restart $`a`$ with (P) has $`e_a \ge \mathbb{G}^\chi + 1`$.
+
+- **Not proved** (open, as the paper says): (P) and (Q′) at $`(L(\omega), L(\omega+1))`$ or at any named pair, and so an InaccPsi upper bound for $`\nu_C`$. Missing:
+  (V1″) exact caps for short restarts with $`\tau \in (\Phi^\chi_\Omega + 1, G_2)`$, and for long restarts with $`D \ge \Phi^\chi_\Omega`$ or $`m_0 \ge \Phi^\chi_\Omega`$ (for codes $`\ge \mathbb{G}^\chi`$, where the
+  predecessors in (P) are, there is no upper bound at all); (V2″) η-offsets at or above $`\Phi^\chi_\Omega`$. Next (outline): redo the three parts above (levels on Wilken's side, the values
+  of $`\psi_{\Omega_2}`$, base change) with the collapsing hierarchies $`\vartheta_D`$ of §1.2 and §2.2 in place of $`\chi_v`$.
+- Remark: the formulas have the shape of the tracking chains of Carlson–Wilken 2012, Thm 7.9 (the reach of a long restart is the reach of a later restart plus an offset read
+  there); there the description is exact because the coding is onto, as here below $`\Phi^\chi_\Omega`$.
+
+### 3.2 Native codes for $`\mathrm{CH}_3`$: HOST$`_k`$ and the top TOP$`_\omega`$
+
+Notation of §2.2. The **chain number** $`\mathrm{cn}(P)`$ of a pattern is the largest $`m`$ with pairs $`x_1 \lt_2 y_1, \dots, x_m \lt_2 y_m`$, $`y_i \lt x_{i+1}`$ and $`x_i \le_1 x_{i+1}`$. So $`\mathrm{cn}(P) \le 1`$
+iff $`P`$ has no L1p configuration, and $`\mathrm{cn}(\mathrm{CH}_k) = k`$. $`Z'_\omega`$ is the least fixed point of $`\theta_{\Xi_\omega}`$ with $`\Xi_\omega = \sup_n \Xi_n`$, and $`Z''_\omega`$ the least fixed point of
+$`\theta_{\Xi'_\omega}`$, where $`\Xi'_\omega`$ is the least fixed point of $`\vartheta^2_{P}`$ with $`P = \sup_n P_3^{(n)}`$ (the $`P_3`$ of the $`n`$-ary systems).
+
+- **Theorem HOST$`_k`$** (proved). For $`k \ge 1`$, every RF fan-free pattern $`P`$ with $`\mathrm{cn}(P) \le k-1`$ lies in $`C(u_1)`$ of every copy of $`\mathrm{CH}_k`$, so $`\max P^* \lt \iota(\mathrm{CH}_k)`$. This is
+  sharp. $`k = 2`$ is HOST2 ([FANFREE.md](FANFREE.md) §7.2); the proof is the same, except that the part above the first pair is mapped, by the case $`k-1`$, into the copy of $`\mathrm{CH}_{k-1}`$ with the same top.
+- **MODULE-RED$`_k`$** (proved): the module reduction with "$`\mathrm{cn} \le k-1`$" and $`\mathrm{CH}_k`$. **RED-TOWER** (proved, a reduction): the statement $`H_m`$, so "the first fan needs an
+  inaccessible", already follows if every $`t \lt \theta_0`$ has some $`k`$ and a module system with $`\mathrm{cn} \le k-1`$ above $`t`$; one fixed $`k`$ is not needed.
+- **TOP$`_\omega`$, Theorem IDX-ω** (proved). The block $`[r \lt x \lt_2 y \lt a \lt_2 b,\ a \le_1 b,\ r, x \le_1 b + E(\beta)]`$ has chain number 2 and hosts every $`\mathrm{TOP}_n`$ (the levels are roots of $`a`$).
+  So $`\iota(\mathrm{CH}_3) \ge Z'_\omega`$. This settles the open item TOP-ω of §2.2 for $`\mathrm{CH}_3`$ (for $`\mathrm{CH}_2`$ it stays open, since this block has an L1p configuration).
+- **Theorem IDX-ω⁺** (proved). The atom $`\vartheta^2_P(\alpha)`$ is coded by a pair placed like the block of an atom, with its own top. So, natively, $`\iota(\mathrm{CH}_3) \ge Z''_\omega \gt Z'_\omega`$.
+  Conjectured names: $`\Xi'_\omega = \psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$ (relativized to $`\Omega_1`$) and $`Z''_\omega = H(\Xi'_\omega + \Omega_1)`$. This is still far below the known bound
+  $`\iota(\mathrm{CH}_3) \gt \iota(\mathrm{CH}_2) \gt \nu_C \ge X_{12}`$ given FRAG.
+- **The normal-form template of Wilken's "Pure patterns of order 2"** (for pure $`R_2`$): a closure of a point under its needs, module parameters, layer bases and items gives a native
+  pattern $`N(\gamma)`$. Proved: the closure is finite, and $`\iota(N(\gamma)) \ge \gamma`$ (the lower half of his Thm 4.4). Open: base minimization, the upper half of Thm 4.4 (it needs an
+  $`R_2^C`$ form of Cor 5.8 of "Tracking chains revisited"), least cardinality. (The referee: the paper's other "transfers" are only a dictionary, so they are remarks.)
+- The referee's other minor points: the checked shape of one atom code differs from the one in the proof; three wording points.
+- **Open**: the atom item for indices $`\ge P + 1`$ (outline), the same one cardinal higher, then $`\Omega_{\omega\cdot 2}`$ (chain number 3, or a comparison lemma for pairs nested in a pair).
+
+### 3.3 The shapes of $`\Phi_3`$: 3,071 of 3,166
+
+Notation of §2.3.
+
+- **The minor points of the nineteenth-round review are applied**: the program version of each run is stated, the size formula of M5 is now
+  $`|E_0 \cdots E_n| = (g+f)\cdot 2^n - f`$ (**2 reviews**; the referee re-derived it), "the search is complete" is limited to the slots that the program tries, and one reason is corrected.
+- **9 proofs re-confirmed** (proved): the 9 matrices with $`t = 1`$ that the earlier version proved but not again within 60 seconds are re-proved by the same derivation cut into
+  tasks of less than 60 seconds; the added hints only change the search order.
+- **12 more with $`t = 1`$** (III 8, ROOT 2, I 2; proved, accepted at the same level as GR-UNIF2): members of a unit may be made in copies nested inside the unit's batch (GR-UNIF3).
+- **M5** (13): BIN-SHAPE, checked for $`n \le 9`$: $`\mathrm{conv}(A[n])`$ is a fixed skeleton plus a binomial segment $`E_1 \cdots E_n`$ inside one $`\le_2`$-pair, with $`E_j = F[E_0 \cdots E_{j-1}]`$ for a frame $`F`$.
+  BIN-F and BIN-INS (proved) turn one covering of the skeleton into coverings for every $`n`$ with that shape, and such coverings exist for all 13. So the step is proved for $`n \le 9`$, and
+  for every $`n`$ given BIN-SHAPE. BIN-SHAPE for every $`n`$ is open, so M5 is not counted.
+- **The tally** (checked; $`3{,}071 = 3{,}050 + 21`$):
+
+| class | matrices | proved for every $`n`$ | given BIN-SHAPE | given a condition checked for small $`n`$ | $`t = 2`$, given a shape checked for small $`n`$ | open |
+|---|---|---|---|---|---|---|
+| I | 581 | 573 | 0 | 0 | 0 | 8 |
+| SUM | 603 | 582 | 0 | 1 | 0 | 20 |
+| ROOT | 635 | 634 | 0 | 0 | 0 | 1 |
+| III | 1,347 | 1,282 | 13 | 0 | 24 | 28 |
+| all | 3,166 | 3,071 | 13 | 1 | 24 | 57 |
+
+- **Left** (95): $`t = 0`$: M5 13; $`t = 1`$: 3 of class III with no shape; $`t = 2`$: III 49, ROOT 1, I 8, SUM 21.
+- The referee's minor points: BIN-F uses two facts it does not state; three points in BIN-INS that the 13 coverings do not use; one remark is informal; one old program
+  version is no longer kept (the referee's fresh reruns used the current one).
+
+### 3.4 $`\nu_C = \nu_S`$ and the converse in Carlson–Wilken 2012
+
+Notation of §2.4. Carlson–Wilken 2012, Thm 7.9 (b), says for pure $`R_2`$ that a uniform finite-set criterion (one copy for all sizes) holds at every pair $`\gamma \lt_2 \alpha`$. The paper asks
+whether this carries over to $`R_2^+`$ at the pair $`(x, \nu)`$.
+
+- **How the converse is proved there** (proved, as a reading of the proof): it is carried in the induction hypothesis; every pair is made by a direct check, by an interval isomorphism
+  from an earlier pair, or by suprema, and the list is complete. (The referee: the list omits two cases, both covered by suprema.)
+- **TR-FAIL, FORCED** (proved): with $`+`$, a translation over an additive principal $`u`$ is not an isomorphism once $`u\cdot 2`$ is in its interval, and a map that is the identity below
+  $`u_n`$ and sends $`u_n`$ to $`x`$ sends sums to sums. (The referee: that such maps must be base changes is not forced, since $`\omega^a`$ is not in the language.)
+- **COMMON, NEC$`^C`$ ⇒ GOAL, NEC$`^S`$** (proved): in $`R_2^C`$ the uniform criterion at $`(x, \nu)`$ implies $`\nu_C = \nu_S`$, so it is at least as hard as the goal; in $`R_2^S`$ it adds nothing.
+  **LOAD** (proved): every $`\lt_2`$-pair with right end below $`\nu_S`$ (in $`R_2^S`$) or below $`\nu_C`$ (in $`R_2^C`$) meets the uniform criterion. **XT** (proved): every admissible copy sends $`x`$ to some $`u_m`$.
+- **Not proved** (blocking point, against the paper's location claim): that $`(x, \nu)`$ is the case of the 2012 proof that uses one interval isomorphism. The two intervals have different
+  order types ($`u_{n+1}`$ against $`\nu`$), and the level of the copy must grow with the extension: for $`X = \{u_{n-1}\}`$ and $`Y = \{x, x + u_{n+1}\}`$ no copy at level $`u_n`$ works. So no case of
+  the 2012 proof fits literally. What survives: the reaches of the restarts must commute with a base change adapted to the extension.
+- Not counted: the test ET is only $`\Sigma_2`$-elementarity written with finite diagrams (a restatement); "no general converse" is a remark; the claim that no choice of copies removes
+  (D1b) rests on unrefereed parts.
+- **Open**: $`\nu_C = \nu_S`$ and $`\nu_C \lt \nu_S`$. Missing: reaches that commute with base change for the long restarts and on $`[x^\#, \nu)`$, that is (D1b) and (E4). §3.1 gives such caps for
+  short restarts with $`\tau \le \Phi^\chi_\Omega + 1`$ and long ones with $`D, m_0 \lt \Phi^\chi_\Omega`$; their use for (D1b) is an outline.
+
+### 3.5 Status after the twentieth round
+
+- Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{12}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$.
+  No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
+- The lower-bound program below $`\theta_0`$: the step below SRO holds for every $`n`$ on 3,071 of the 3,166 sample matrices; natively $`\iota(\mathrm{CH}_2) \ge Z_\omega`$ and $`\iota(\mathrm{CH}_3) \ge Z''_\omega`$.
+- Upper bounds: still none by an InaccPsi term for $`\iota(\mathrm{CH}_k)`$, $`m_F`$, $`x_F`$, $`C^*_3`$ or $`\nu_C`$.
+- $`\nu_C = \nu_S`$: left: (D1b) and (E4); the converse of Carlson–Wilken 2012 does not give it.
+
+### 3.6 Checks of the twentieth round
+
+Each run was under 60 seconds; none is a proof.
+
+- §3.1. Names, normal forms, $`D'`$ and $`X_{11} \lt X_{12} \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$: Python and Lean agree (the Lean file only compares terms; green, and green in the referee's rerun). 56 predicted
+  normal-form results at the boundaries of PSI2-χ (all as predicted); the level shift on 51,200 term pairs (order and normal forms kept); the counterexamples to EXACT-PHI in
+  Wilken's terms. The referee: 23 more boundary predictions and 889 sampled exponents, all as predicted.
+- §3.2. All new blocks are patterns, RF and fan-free with the stated chain number. Certificates, all replayed: 20 of 21 in the predicted direction (the missing one follows
+  from two found ones); in the reverse direction only one, which is true. The referee: three patterns with chain number 2 are below $`\mathrm{CH}_3`$; a control with chain number 3 is not found.
+- §3.3. The referee: 13 of 13 M5 derivations rerun; BIN-SHAPE at $`n = 10`$ for 8 of 13 (the other 5 hit the size or time limit); 5 fresh reruns of $`t = 1`$ proofs, all proved; the slot
+  rule at four far levels, the same.
+- §3.4. No run by the paper. The referee: the order types at the conjectured names for $`n \le 4`$, and a Lean file with the core of TR-FAIL and the order-type mismatch (green).
+
+### 3.7 Open
+
+- Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs (V1″) and (V2″) of §3.1, and (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$,
+  $`m_3`$, $`c_0`$.
+- The claim above $`X_{12}`$ given FRAG: the same three parts with the hierarchies $`\vartheta_D`$ (EXACT-O past $`\Phi^\chi_\Omega`$, η-offsets at or above $`\Phi^\chi_\Omega`$).
+- The first inaccessible: $`H_m`$, through $`\iota(\mathrm{CH}_2) \ge \theta_0`$ or, by RED-TOWER, through native codes with a growing chain number (next: the atom item for indices
+  $`\ge P + 1`$, then $`\Omega_{\omega\cdot 2}`$); UNIF-FS below SRO on the 95 matrices of §3.3 (M5 needs BIN-SHAPE for every $`n`$).
+- $`\nu_C = \nu_S`$: (D1b), which needs the same tools as (P), room past $`\omega^{G_2}`$ and caps that commute with base change; (E4).
+- Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; the exact reaches of the long restarts with $`D \ge \Phi^\chi_\Omega`$ or $`m_0 \ge \Phi^\chi_\Omega`$; names beyond
+  $`X_{12}`$; the rest of [COVER.md](COVER.md) §9.

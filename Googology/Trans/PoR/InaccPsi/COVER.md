@@ -199,7 +199,7 @@ pair has the form $`(\upsilon_{\lambda+\omega j}, \upsilon_{\lambda+\omega j+1})
   refereed at proof level. (The seventeenth round: with it, H-RC holds at every restart below $`\nu_S`$, so the results of [SHIFT.md](SHIFT.md) §1
   and §8 that were at the outline level of SKEL⁺ rest on no outline, [SHIFT.md](SHIFT.md) §9.1. The eighteenth round: on this basis H-RC over every
   region at a fixed index distance, MULTI-RC\*, is proved in full, [SHIFT2.md](SHIFT2.md) §1.1. The nineteenth round carries it across every η-offset below
-  $`\psi_{\Omega_2}(\Omega_2)`$, MULTI-RC$`^U`$, §2.1 there.)
+  $`\psi_{\Omega_2}(\Omega_2)`$, MULTI-RC$`^U`$, §2.1 there; the twentieth round below $`\psi_{\Omega_2}(\Omega_2^{\Omega_2})`$, §3.1 there.)
 - **SKEL$`^\omega`$** (proved, 1 review). The statement of [BREAK.md](BREAK.md) §7.1, with the same correction in its clause on reaches. Below
   $`\Theta_P`$ the correction changes nothing: there the reach of a restart is below twice its first $`\delta`$-point.
 - **$`R_2^C`$** (proved, 1 review). D0–D3 hold in $`R_2^C`$ below $`\beta_0`$, so RIGHT holds there for right ends below $`\beta_0`$. SKEL⁺ holds in $`R_2^C`$
