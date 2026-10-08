@@ -369,7 +369,7 @@ $`X = P^* \cap [x, x^\#)`$, and $`\tilde X`$ is its downward copy, with $`\tilde
 - $`\nu_C = \nu_S`$: given (HC), the downward copy is the copy by $`T`$, the local part holds, and every extension without such translations is realized
   (§11); the reduction to (LOC$`_T`$) and (TR$`_T`$) does not work there. Left: (R1)–(R3) and a reduction in the form of ET-TF.
 
-The thirteenth to twentieth rounds changed this status; see [THETA.md](THETA.md) §5, §9.5, [SHIFT.md](SHIFT.md) §5, §8.5, §9.5 and [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5.
+The thirteenth to twenty-first rounds changed this status; see [THETA.md](THETA.md) §5, §9.5, [SHIFT.md](SHIFT.md) §5, §8.5, §9.5, [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5 and [SHIFT3.md](SHIFT3.md) §1.5.
 
 ## 13. Checks of the twelfth round
 
@@ -392,4 +392,4 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 
 ## 14. Open
 
-The thirteenth to twentieth rounds changed this list; the current list is [SHIFT2.md](SHIFT2.md) §3.7.
+The thirteenth to twenty-first rounds changed this list; the current list is [SHIFT3.md](SHIFT3.md) §1.7.

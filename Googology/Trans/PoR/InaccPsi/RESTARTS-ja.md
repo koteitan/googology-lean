@@ -192,5 +192,5 @@ $`\psi_{\Omega_1}(I_\omega)`$ まで）：形しか分かっていない。手�
 $`\Xi_\omega`$ より上の未解決の問題は [REACHES-ja.md](REACHES-ja.md) §7 にまとめた。前のリストのうち、補題 RS$`_\lambda`$、
 $`\Xi_\omega`$ より先のずれ（$`\Lambda_\varepsilon`$ まで）、$`s_1`$ の等式は証明済みになった（[REACHES-ja.md](REACHES-ja.md) §1–2）。ここに残るもの：
 
-- $`V_3`$ より上での変換の順序の命題 S（届く先は $`\Lambda_\varepsilon`$ まで分かった。新しい頭の部分での順序の証明が無い）。$`V_3`$ より上の標本の決まらない隣り合う組 26 個は今は証明済み（[FANFREE-ja.md](FANFREE-ja.md) §1）。SRO より下の段は、標本の 3,166 個のうち 459 個ですべての $`n`$ で証明済み（[FANFREE-ja.md](FANFREE-ja.md) §7.1）、今は 1,987 個で（[THETA-ja.md](THETA-ja.md) §3）、さらに 2,330 個で（[THETA-ja.md](THETA-ja.md) §9.3）、さらに 2,526 個で（[SHIFT-ja.md](SHIFT-ja.md) §3）、さらに 2,589 個で（[SHIFT-ja.md](SHIFT-ja.md) §8.3）。
+- $`V_3`$ より上での変換の順序の命題 S（届く先は $`\Lambda_\varepsilon`$ まで分かった。新しい頭の部分での順序の証明が無い）。$`V_3`$ より上の標本の決まらない隣り合う組 26 個は今は証明済み（[FANFREE-ja.md](FANFREE-ja.md) §1）。SRO より下の段は、標本の 3,166 個のうち 459 個ですべての $`n`$ で証明済み（[FANFREE-ja.md](FANFREE-ja.md) §7.1）、今は 1,987 個で（[THETA-ja.md](THETA-ja.md) §3）、さらに 2,330 個で（[THETA-ja.md](THETA-ja.md) §9.3）、さらに 2,526 個で（[SHIFT-ja.md](SHIFT-ja.md) §3）、さらに 2,589 個で（[SHIFT-ja.md](SHIFT-ja.md) §8.3）、今は 3,113 個で（[SHIFT3-ja.md](SHIFT3-ja.md) §1.3）。
 - $`\upsilon_{\omega^3}`$ より上での $`R_2^S`$ の核（定理 CORE-S はそこで止まる）。

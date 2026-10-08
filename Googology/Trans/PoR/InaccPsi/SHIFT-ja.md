@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 15 回目から 17 回目：$`\nu_C \ge X_4`$、$`X_5`$、$`X_8`$、ずらしの判定、型 K と型 R、GEN-IND、STAIR2、遠い尾、幽霊の判定
 
-このページは [THETA-ja.md](THETA-ja.md) の続き。§1〜§7 が 15 回目、§8 が 16 回目、§9 が 17 回目。18〜20 回目は [SHIFT2-ja.md](SHIFT2-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [THETA-ja.md](THETA-ja.md) の続き。§1〜§7 が 15 回目、§8 が 16 回目、§9 が 17 回目。18〜20 回目は [SHIFT2-ja.md](SHIFT2-ja.md)、21 回目は [SHIFT3-ja.md](SHIFT3-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 
 4 つの論文（2026-10）。どれも 1 回ずつ査読された。だからここの結果は、回数を書いていなければ査読 1 回。**査読 2 回** とは、14 回目の査読者が
@@ -453,7 +453,7 @@ C_D = \{\beta \in \mathrm{EW} : \vartheta_{D'}(\beta) = \beta \text{ for every }
 \iota(\mathrm{CH}_2) \ge \theta_{\Xi_2}(0) \gt Z_\Xi \gt \theta_{\varepsilon_{\Omega_1+1}}(0) \gt Z_K .
 ```
 
-- 予想する名前：$`\Xi_2`$ は $`\Omega_1`$ に相対化した Bachmann–Howard 順序数で、$`\theta_{\Xi_2}(0) = H'(\Xi_2)`$。$`\Theta_1 = H(\theta)`$ よりは下のまま。
+- 予想する名前：$`\Xi_2`$ は $`\Omega_1`$ に相対化した Bachmann–Howard 順序数（今は証明済み：$`\Xi_2 = \psi_{\Omega_2}(\varepsilon_{\Omega_2+1})`$、[SHIFT3-ja.md](SHIFT3-ja.md) §1.1）で、$`\theta_{\Xi_2}(0) = H'(\Xi_2)`$。$`\Theta_1 = H(\theta)`$ よりは下のまま。
 - **未解決**：$`\iota(\mathrm{CH}_2) \ge \theta_0`$。次は $`\theta_{\Xi_2}(0)`$ の部品そのもの。つまり、比べる補題と、どの上の入れ子も宿す有限のてっぺんの両方を持つ、上の入れ子の
   1 つの並べ方（$`\le_1`$ の原子だけでは、高さ $`n`$ の指数の塔に $`n`$ 個の入れ子の届く区間が要る。指数の符号を頭より下に置く型は有限のてっぺんを持つ（証明済み）
   が、比べる補題が無い。下の元を 1 つ足す型はあらすじだけ）。その先は $`\Omega_2`$ より上の $`\varepsilon`$ 数（$`\Omega_3`$ の段のつぶし）、$`\Theta_1`$ に向かう $`\Omega_n`$ の段、そして $`\theta_0`$。
@@ -519,7 +519,7 @@ C_D = \{\beta \in \mathrm{EW} : \vartheta_{D'}(\beta) = \beta \text{ for every }
 
 ### 9.5 17 回目のあとの状態
 
-18〜20 回目でこの状態は変わった。[SHIFT2-ja.md](SHIFT2-ja.md) §1.5、§2.5、§3.5 を見よ。
+18〜21 回目でこの状態は変わった。[SHIFT2-ja.md](SHIFT2-ja.md) §1.5、§2.5、§3.5 と [SHIFT3-ja.md](SHIFT3-ja.md) §1.5 を見よ。
 
 - $`R_2^C`$ での Wilken の主張：$`[0, X_4]`$ では FRAG 無しで、$`[0, X_8]`$ では FRAG のもとで（移し替え MULTI-RC 無しなら $`[0, X_7]`$）、あらすじの入力無しに、
   両方の半分とも成り立つ。核の側は $`[0, \nu_C]`$ で成り立つ。$`\nu_C`$ の InaccPsi による上からの評価は無い：名前の付いた組での (P) と (Q) は未解決のまま。
@@ -544,7 +544,7 @@ C_D = \{\beta \in \mathrm{EW} : \vartheta_{D'}(\beta) = \beta \text{ for every }
 
 ### 9.7 未解決
 
-18〜20 回目でこの一覧は変わった。今の一覧は [SHIFT2-ja.md](SHIFT2-ja.md) §3.7 にある。
+18〜21 回目でこの一覧は変わった。今の一覧は [SHIFT3-ja.md](SHIFT3-ja.md) §1.7 にある。
 
 - 上からの評価：$`\nu_C`$ について名前の付いた 1 つの組での (P) と (Q)（または (Q′)）。非可算のずれを越える届く先、2 つ目の区域の符号、$`L(\omega)`$ の等最小の
   パターンが要る。$`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価。
