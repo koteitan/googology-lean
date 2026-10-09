@@ -510,7 +510,7 @@ whether this carries over to $`R_2^+`$ at the pair $`(x, \nu)`$.
 
 ### 3.5 Status after the twentieth round
 
-The twenty-first to twenty-seventh rounds changed this status; see [SHIFT3.md](SHIFT3.md) §1.5, §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4 and [SHIFT6.md](SHIFT6.md) §1.4.
+The twenty-first to twenty-ninth rounds changed this status; see [SHIFT3.md](SHIFT3.md) §1.5, §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4 and [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{12}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$.
   No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -533,7 +533,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 3.7 Open
 
-The twenty-first to twenty-seventh rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §1.6.
+The twenty-first to twenty-ninth rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §3.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs (V1″) and (V2″) of §3.1, and (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$,
   $`m_3`$, $`c_0`$.

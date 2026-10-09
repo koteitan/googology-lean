@@ -505,7 +505,7 @@ $`\Phi^\chi_2 = \Phi^\chi_{\Omega_2}`$、$`\mathbb{G}^\chi = G(\Phi^\chi_2)`$。
 
 ### 3.5 20 回目のあとの状態
 
-21〜27 回目でこの状態は変わった。[SHIFT3-ja.md](SHIFT3-ja.md) §1.5、§2.5 、[SHIFT4-ja.md](SHIFT4-ja.md) §1.5、§2.5、[SHIFT5-ja.md](SHIFT5-ja.md) §1.4、§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §1.4 を見よ。
+21〜29 回目でこの状態は変わった。[SHIFT3-ja.md](SHIFT3-ja.md) §1.5、§2.5 、[SHIFT4-ja.md](SHIFT4-ja.md) §1.5、§2.5、[SHIFT5-ja.md](SHIFT5-ja.md) §1.4、§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §1.4、§2.4、§3.4 を見よ。
 
 - $`R_2^C`$ での Wilken の主張：$`[0, X_4]`$ では FRAG 無しで、$`[0, X_{12}]`$ では FRAG のもとで（$`[0, X_9]`$ は査読 2 回）、両方の半分とも成り立つ。核の側は $`[0, \nu_C]`$ で成り立つ。
   $`\nu_C`$ の InaccPsi による上からの評価は無い：名前の付いた組での (P) は未解決のまま。
@@ -528,7 +528,7 @@ $`\Phi^\chi_2 = \Phi^\chi_{\Omega_2}`$、$`\mathbb{G}^\chi = G(\Phi^\chi_2)`$。
 
 ### 3.7 未解決
 
-21〜27 回目でこの一覧は変わった。今の一覧は [SHIFT6-ja.md](SHIFT6-ja.md) §1.6 にある。
+21〜29 回目でこの一覧は変わった。今の一覧は [SHIFT6-ja.md](SHIFT6-ja.md) §3.6 にある。
 
 - 上からの評価：$`\nu_C`$ について名前の付いた 1 つの組での (P) と (Q′)。(P) には §3.1 の (V1″) と (V2″) が要り、(Q′) には $`L(\omega)`$ の等最小のパターンが要る。
   $`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価。

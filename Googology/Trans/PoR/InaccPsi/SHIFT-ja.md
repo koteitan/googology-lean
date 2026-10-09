@@ -519,7 +519,7 @@ C_D = \{\beta \in \mathrm{EW} : \vartheta_{D'}(\beta) = \beta \text{ for every }
 
 ### 9.5 17 回目のあとの状態
 
-18〜27 回目でこの状態は変わった。[SHIFT2-ja.md](SHIFT2-ja.md) §1.5、§2.5、§3.5、[SHIFT3-ja.md](SHIFT3-ja.md) §1.5、§2.5、[SHIFT4-ja.md](SHIFT4-ja.md) §1.5、§2.5、[SHIFT5-ja.md](SHIFT5-ja.md) §1.4、§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §1.4 を見よ。
+18〜29 回目でこの状態は変わった。[SHIFT2-ja.md](SHIFT2-ja.md) §1.5、§2.5、§3.5、[SHIFT3-ja.md](SHIFT3-ja.md) §1.5、§2.5、[SHIFT4-ja.md](SHIFT4-ja.md) §1.5、§2.5、[SHIFT5-ja.md](SHIFT5-ja.md) §1.4、§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §1.4、§2.4、§3.4 を見よ。
 
 - $`R_2^C`$ での Wilken の主張：$`[0, X_4]`$ では FRAG 無しで、$`[0, X_8]`$ では FRAG のもとで（移し替え MULTI-RC 無しなら $`[0, X_7]`$）、あらすじの入力無しに、
   両方の半分とも成り立つ。核の側は $`[0, \nu_C]`$ で成り立つ。$`\nu_C`$ の InaccPsi による上からの評価は無い：名前の付いた組での (P) と (Q) は未解決のまま。
@@ -544,7 +544,7 @@ C_D = \{\beta \in \mathrm{EW} : \vartheta_{D'}(\beta) = \beta \text{ for every }
 
 ### 9.7 未解決
 
-18〜27 回目でこの一覧は変わった。今の一覧は [SHIFT6-ja.md](SHIFT6-ja.md) §1.6 にある。
+18〜29 回目でこの一覧は変わった。今の一覧は [SHIFT6-ja.md](SHIFT6-ja.md) §3.6 にある。
 
 - 上からの評価：$`\nu_C`$ について名前の付いた 1 つの組での (P) と (Q)（または (Q′)）。非可算のずれを越える届く先、2 つ目の区域の符号、$`L(\omega)`$ の等最小の
   パターンが要る。$`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価。

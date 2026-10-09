@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the twenty-fifth and twenty-sixth rounds: $`\nu_C \ge X_{21}`$ given FRAG, the landing cap and the hull cap, exact long reaches up to the first index fixed point, TC⁺ at every level, GEN for every η, and native codes up to $`\psi_{\Omega_1}(\Omega_\omega\cdot\varepsilon_0)`$
 
-This page continues [SHIFT4.md](SHIFT4.md) (§2 there is the twenty-fourth round); §1 is the twenty-fifth round and §2 the twenty-sixth; the twenty-seventh round is on [SHIFT6.md](SHIFT6.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT4.md](SHIFT4.md) (§2 there is the twenty-fourth round); §1 is the twenty-fifth round and §2 the twenty-sixth; the twenty-seventh to twenty-ninth rounds are on [SHIFT6.md](SHIFT6.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -136,7 +136,7 @@ The strict $`\gt`$ would need a remark of [SHIFT3.md](SHIFT3.md) §1.2 that is n
 
 ### 1.4 Status after the twenty-fifth round
 
-The twenty-sixth and twenty-seventh rounds changed this status; see §2.4 and [SHIFT6.md](SHIFT6.md) §1.4.
+The twenty-sixth to twenty-ninth rounds changed this status; see §2.4 and [SHIFT6.md](SHIFT6.md) §3.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{19}]`$ given FRAG ($`[0, X_{18}]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$. No InaccPsi upper
   bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -162,7 +162,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 1.6 Open
 
-The twenty-sixth and twenty-seventh rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §1.6.
+The twenty-sixth to twenty-ninth rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §3.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps past $`G(\hat\zeta_\varepsilon)`$ and a lower bound at code $`P'`$; (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
@@ -237,7 +237,7 @@ Also (P-LOW$`^{21}`$) every restart $`a`$ with $`H(\theta_2\cdot\omega^2) \lt a 
 $`\nu_C \ge X_{20} = \psi_{\Omega_1}(\Omega_\omega + \theta_2\cdot\hat\zeta_A + \omega^{G(\hat\zeta_A)+1}\cdot 2)`$, and with fewer of the new tools three smaller points between $`X_{19}`$ and $`X_{20}`$. (The referee: the ceiling at
 $`\hat\zeta_A`$ is proved, not only checked.) **Conditional, not counted**: under not-LOW, $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{G(\hat\zeta_H)+1})`$.
 
-- **Not proved** (open; the exact long reaches for $`D \lt G(\hat\zeta_3)`$ with PSI-θ at $`\theta_2+1`$, [SHIFT6.md](SHIFT6.md) §1.1, have a blocking point at some codes, §2.1 there): exact long reaches for $`D \gt \hat G`$ (outline below $`\Phi^{\hat G}`$, the analogue of $`\Phi'`$ over $`\hat G`$, read at the base $`F_\lambda`$; from $`\Phi^{\hat G}`$ on they need PSI-θ at the
+- **Not proved** (open; the exact long reaches for $`D \lt G(\hat\zeta_3)`$ with PSI-θ at $`\theta_2+1`$, [SHIFT6.md](SHIFT6.md) §1.1, had a blocking point at some codes, §2.1 there; they are proved with the corrected value of §3.1 there, and so are those up to $`\varepsilon_{G(\hat\zeta_G)+1}`$): exact long reaches for $`D \gt \hat G`$ (outline below $`\Phi^{\hat G}`$, the analogue of $`\Phi'`$ over $`\hat G`$, read at the base $`F_\lambda`$; from $`\Phi^{\hat G}`$ on they need PSI-θ at the
   index $`\theta_2 + 1`$, which is not proved; this is where the realizer reading and the cap reading still differ); READ$`^\sharp`$ past $`\hat\zeta_H`$ (conjecture; the first overshoot by a
   restart's own prefix is at $`\hat\zeta_f`$; at $`\Omega_k`$, $`k \ge 4`$, and at $`\Omega_\omega`$ the hulls nest); READ$`^\sharp`$ at every normal multiplier would give CAP-0 below $`P'`$, hence not-LOW; LOW; (P); (Q′).
 - The referee's other minor points: NO-READL depends on the new EXACT-LONG$`^G`$ and EXACT-F (NO-LIT did not); one line on the caps of long intermediate restarts (they lie in the
@@ -305,7 +305,7 @@ and $`\iota(\mathrm{CH}_4) \gt \psi_{\Omega_1}(\Omega_\omega\cdot T)`$ for every
 
 ### 2.4 Status after the twenty-sixth round
 
-The twenty-seventh round changed this status; see [SHIFT6.md](SHIFT6.md) §1.4.
+The twenty-seventh to twenty-ninth rounds changed this status; see [SHIFT6.md](SHIFT6.md) §3.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{21}]`$ given FRAG ($`[0, X_{18}]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$. No InaccPsi upper
   bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -333,7 +333,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 2.6 Open
 
-The twenty-seventh round changed this list; the current list is [SHIFT6.md](SHIFT6.md) §1.6.
+The twenty-seventh to twenty-ninth rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §3.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps past $`G(\hat\zeta_H)`$ and a lower bound at code $`P'`$; (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.

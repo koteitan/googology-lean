@@ -102,9 +102,9 @@ of the stages below $`T`$. $`\Xi[k]`$ is the end point (below $`\Omega_2`$) of t
 - **What this adds** (the referee's point on the program, not a defect of the paper): as ordinal bounds, all of §1.2 already follows from the known
   $`\iota(\mathrm{CH}_3) \gt \iota(\mathrm{CH}_2) \gt \nu_C \ge X_{11}`$; its value is that the codes are native module systems for RED-TOWER. By a remark that rests on a conjectured dictionary,
   every index system below $`\Omega_2`$ (any chain number) stays below $`\upsilon^* \lt \theta_0`$, so reaching $`\theta_0`$ needs index systems above that level. (The twenty-second round shows that the
-  argument of this remark fails, so the statement is open; also the level of the indices does not matter, §2.2; the twenty-third round gives a native bound past $`\upsilon^*`$, [SHIFT4.md](SHIFT4.md) §1.2.)
+  argument of this remark fails, so the statement is open; also the level of the indices does not matter, §2.2; the twenty-third round gives a native bound past $`\upsilon^*`$, [SHIFT4.md](SHIFT4.md) §1.2; the twenty-ninth round shows that systems with indices below $`\Omega_2`$ go far past $`\upsilon^*`$, so the remark is superseded, [SHIFT6.md](SHIFT6.md) §3.3.)
 - **Open**: stages $`T \ge \omega^\omega`$ (outline, with $`\mathrm{cn} = 3`$); uncountable stage indices (the copy rule needs a gap above the code of the smaller stage, which an index below
-  $`\Omega_2`$ cannot give in this block format; no impossibility is proved); $`\Omega_{\omega+1}`$ and $`\Omega_{\omega\cdot 2}`$ (conjecture: the chain number must grow, so RED-TOWER is the frame).
+  $`\Omega_2`$ cannot give in this block format; no impossibility is proved; the twenty-ninth round removes this gap by reflecting the pair at its own left end first, [SHIFT6.md](SHIFT6.md) §3.3); $`\Omega_{\omega+1}`$ and $`\Omega_{\omega\cdot 2}`$ (conjecture: the chain number must grow, so RED-TOWER is the frame).
 
 ### 1.3 The shapes of $`\Phi_3`$: 3,113 of 3,166
 
@@ -166,7 +166,7 @@ that the reaches of restarts commute with base change.
 - Upper bounds: still none by an InaccPsi term for $`\iota(\mathrm{CH}_k)`$, $`m_F`$, $`x_F`$, $`C^*_3`$ or $`\nu_C`$.
 - $`\nu_C = \nu_S`$: left: (D1b) and (E4); every η-form tool needs LOW, which is open.
 
-The twenty-second to twenty-seventh rounds changed this status; see §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4 and [SHIFT6.md](SHIFT6.md) §1.4.
+The twenty-second to twenty-ninth rounds changed this status; see §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4 and [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4.
 
 ### 1.6 Checks of the twenty-first round
 
@@ -188,7 +188,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 1.7 Open
 
-The twenty-second to twenty-seventh rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §1.6.
+The twenty-second to twenty-ninth rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §3.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs the caps listed in §1.1, and (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$,
   $`f_0`$, $`m_3`$, $`c_0`$.
@@ -344,7 +344,7 @@ and of level 2 if it is in $`[\psi_{\Omega_1}(\Omega_\omega\cdot 2), \psi_{\Omeg
 
 ### 2.5 Status after the twenty-second round
 
-The twenty-third to twenty-seventh rounds changed this status; see [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4 and [SHIFT6.md](SHIFT6.md) §1.4.
+The twenty-third to twenty-ninth rounds changed this status; see [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4 and [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{14}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$.
   No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -372,7 +372,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 2.7 Open
 
-The twenty-third to twenty-seventh rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §1.6.
+The twenty-third to twenty-ninth rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §3.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps of §2.1 and a lower bound at code $`P'`$ (§2.4); (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.

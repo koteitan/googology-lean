@@ -539,7 +539,7 @@ Notation of §4 and §8.4 ($`g = u_m^\#`$; long, wide and far as in §8.4). "Giv
 
 ### 9.5 Status after the seventeenth round
 
-The eighteenth to twenty-seventh rounds changed this status; see [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5, [SHIFT3.md](SHIFT3.md) §1.5, §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4 and [SHIFT6.md](SHIFT6.md) §1.4.
+The eighteenth to twenty-ninth rounds changed this status; see [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5, [SHIFT3.md](SHIFT3.md) §1.5, §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4 and [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_8]`$ given FRAG (on $`[0, X_7]`$ without the transfer MULTI-RC), with no outline
   input; the core half holds on $`[0, \nu_C]`$. No InaccPsi upper bound for $`\nu_C`$: (P) and (Q) at a named pair stay open.
@@ -564,7 +564,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 9.7 Open
 
-The eighteenth to twenty-seventh rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §1.6.
+The eighteenth to twenty-ninth rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §3.6.
 
 - Upper bounds: (P) and (Q), or (Q′), at one named pair for $`\nu_C`$; they need reaches across uncountable offsets, codes of the second region, and the
   isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
