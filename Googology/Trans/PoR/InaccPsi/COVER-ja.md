@@ -193,7 +193,7 @@ $`\delta`$ の点 $`\upsilon_{\lambda+\omega j+1}`$ から次の $`\delta`$ の�
   証明の段階で査読された最初の証明。（17 回目：これで H-RC は $`\nu_S`$ より下のどのやり直しでも成り立ち、[SHIFT-ja.md](SHIFT-ja.md) §1 と §8 の
   SKEL⁺ のあらすじの水準だった結果はあらすじに頼らない、[SHIFT-ja.md](SHIFT-ja.md) §9.1。18 回目：これをもとに、決めた添字の距離のどの区域にも
   わたる H-RC、MULTI-RC\* を全部証明した、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1。19 回目：それを
-  $`\psi_{\Omega_2}(\Omega_2)`$ より下のどの η ずれにも広げた、MULTI-RC$`^U`$、そこの §2.1。20 回目：$`\psi_{\Omega_2}(\Omega_2^{\Omega_2})`$ より下に広げた、そこの §3.1。21 回目：$`\psi_{\Omega_2}(\varepsilon_{\Omega_2+1})`$ より下に広げた、[SHIFT3-ja.md](SHIFT3-ja.md) §1.1。22 回目：$`\theta`$ より下に広げた、そこの §2.1。23 回目：$`\psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$ より下に広げた、[SHIFT4-ja.md](SHIFT4-ja.md) §1.1、§1.4。24 回目：$`\Omega_3`$ 以上で、そこの §2.2 の点 $`\hat\zeta_2`$ より下の乗数に広げた、そこの §2.1、§2.2。）
+  $`\psi_{\Omega_2}(\Omega_2)`$ より下のどの η ずれにも広げた、MULTI-RC$`^U`$、そこの §2.1。20 回目：$`\psi_{\Omega_2}(\Omega_2^{\Omega_2})`$ より下に広げた、そこの §3.1。21 回目：$`\psi_{\Omega_2}(\varepsilon_{\Omega_2+1})`$ より下に広げた、[SHIFT3-ja.md](SHIFT3-ja.md) §1.1。22 回目：$`\theta`$ より下に広げた、そこの §2.1。23 回目：$`\psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$ より下に広げた、[SHIFT4-ja.md](SHIFT4-ja.md) §1.1、§1.4。24 回目：$`\Omega_3`$ 以上で、そこの §2.2 の点 $`\hat\zeta_2`$ より下の乗数に広げた、そこの §2.1、§2.2。25 回目：長い前置きのやり直しがあっても $`\hat\zeta_\varepsilon`$ より下に広げた、[SHIFT5-ja.md](SHIFT5-ja.md) §1。）
 - **SKEL$`^\omega`$**（証明済み、査読 1 回）。[BREAK-ja.md](BREAK-ja.md) §7.1 の命題が、届く先についての条項で同じ直しをして成り立つ。
   $`\Theta_P`$ より下ではこの直しは何も変えない：そこではやり直しの点の届く先は、その最初の $`\delta`$ の点の 2 倍より下。
 - **$`R_2^C`$**（証明済み、査読 1 回）。D0〜D3 は $`\beta_0`$ より下の $`R_2^C`$ で成り立つ。だから右端が $`\beta_0`$ より下なら RIGHT はそこで成り立つ。
