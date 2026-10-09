@@ -235,7 +235,7 @@ $`R(\hat\zeta_G) = \hat G`$、$`R(\hat\zeta_A) = \hat G + \Omega_1`$、$`R(\hat\
 $`\nu_C \ge X_{20} = \psi_{\Omega_1}(\Omega_\omega + \theta_2\cdot\hat\zeta_A + \omega^{G(\hat\zeta_A)+1}\cdot 2)`$ を与え、新しい道具の一部だけでは $`X_{19}`$ と $`X_{20}`$ の間の 3 つの点を与える。（査読者：$`\hat\zeta_A`$ での
 天井は確かめただけでなく証明済み。）**仮定つき。数えない**：LOW が偽なら $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{G(\hat\zeta_H)+1})`$。
 
-- **未証明**（未解決。長いちょうどの届く先は今は $`\theta_2+1`$ での PSI-θ で $`D \lt G(\hat\zeta_3)`$ まで証明済み、[SHIFT6-ja.md](SHIFT6-ja.md) §1.1）：$`D \gt \hat G`$ での長いちょうどの届く先（$`\Phi^{\hat G}`$（$`\hat G`$ の上の $`\Phi'`$ の類似）より下では基 $`F_\lambda`$ で読むあらすじ。$`\Phi^{\hat G}`$ からは添字
+- **未証明**（未解決。$`\theta_2+1`$ での PSI-θ による $`D \lt G(\hat\zeta_3)`$ の長いちょうどの届く先、[SHIFT6-ja.md](SHIFT6-ja.md) §1.1、はいくつかの符号で進行を止める点を持つ、そこの §2.1）：$`D \gt \hat G`$ での長いちょうどの届く先（$`\Phi^{\hat G}`$（$`\hat G`$ の上の $`\Phi'`$ の類似）より下では基 $`F_\lambda`$ で読むあらすじ。$`\Phi^{\hat G}`$ からは添字
   $`\theta_2 + 1`$ での PSI-θ が要り、それは証明されていない。実現の読み方と蓋の読み方がまだ違うのはここ）。$`\hat\zeta_H`$ より先の READ$`^\sharp`$（予想。やり直し自身の前置きによる
   最初の越えは $`\hat\zeta_f`$。$`\Omega_k`$（$`k \ge 4`$）と $`\Omega_\omega`$ では包が入れ子になる）。どの正規の乗数でも READ$`^\sharp`$ なら $`P'`$ より下で CAP-0、だから LOW は偽。LOW。(P)。(Q′)。
 - 査読者のほかの細かい点：NO-READL は新しい EXACT-LONG$`^G`$ と EXACT-F に頼る（NO-LIT は頼らなかった）。途中の長いやり直しの蓋について 1 行（移しの定義域に入る）。
