@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the twenty-fifth and twenty-sixth rounds: $`\nu_C \ge X_{21}`$ given FRAG, the landing cap and the hull cap, exact long reaches up to the first index fixed point, TC⁺ at every level, GEN for every η, and native codes up to $`\psi_{\Omega_1}(\Omega_\omega\cdot\varepsilon_0)`$
 
-This page continues [SHIFT4.md](SHIFT4.md) (§2 there is the twenty-fourth round); §1 is the twenty-fifth round and §2 the twenty-sixth. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT4.md](SHIFT4.md) (§2 there is the twenty-fourth round); §1 is the twenty-fifth round and §2 the twenty-sixth; the twenty-seventh round is on [SHIFT6.md](SHIFT6.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -136,6 +136,8 @@ The strict $`\gt`$ would need a remark of [SHIFT3.md](SHIFT3.md) §1.2 that is n
 
 ### 1.4 Status after the twenty-fifth round
 
+The twenty-sixth and twenty-seventh rounds changed this status; see §2.4 and [SHIFT6.md](SHIFT6.md) §1.4.
+
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{19}]`$ given FRAG ($`[0, X_{18}]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$. No InaccPsi upper
   bound for $`\nu_C`$: (P) at a named pair stays open.
 - Reaches: exact (given FRAG) for every short restart with $`\tau \lt G_2`$ and every long restart with $`D \lt \varepsilon_+`$; caps for every code below $`G(\hat\zeta_\varepsilon)`$.
@@ -159,6 +161,8 @@ Each run was under 60 seconds; none is a proof.
   offsets in $`[P_\xi, \pi_\eta)`$ (792 tests), $`B`$ and $`E`$ with countable atoms in $`A`$ (about 600,000 pairs): 0 failures; the Lean rerun is identical.
 
 ### 1.6 Open
+
+The twenty-sixth and twenty-seventh rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §1.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps past $`G(\hat\zeta_\varepsilon)`$ and a lower bound at code $`P'`$; (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
@@ -202,7 +206,7 @@ with $`R(\hat\zeta_G) = \hat G`$, $`R(\hat\zeta_A) = \hat G + \Omega_1`$, $`R(\h
   is defined on all codes below $`\hat G`$: it reads a code in $`[G(\zeta), G(\zeta+1))`$ at the moved base $`\upsilon_{\lambda+1+\Theta_\lambda(\zeta)}`$. It maps these codes onto $`[0, F_\lambda)`$
   and commutes with the transports. The realizer reading and the cap reading of [SHIFT2.md](SHIFT2.md) §2.1, which differ past $`G(\Omega_1)`$, lie below and above it.
   (The referee: one step, "the supremum is at most $`F_\lambda`$", is argued wrongly; it holds by an induction the referee gives. Two citations must be added: the forms at
-  uncountable multipliers need PSI-n with a high part, and the covering lemma of the codes; the paper should state that the reading stays in the hull.)
+  uncountable multipliers need PSI-n with a high part, and the covering lemma of the codes; the paper should state that the reading stays in the hull. Applied in the twenty-seventh round, [SHIFT6.md](SHIFT6.md) §1.1.)
 - **EXACT-LONG$`^G`$, EXACT-F** (proved by transfer, given FRAG). A long restart $`\lambda`$ with code $`G_2\cdot D + m_0`$, $`m_0 \lt G_2`$, has its exact reach for every $`D \lt \hat G`$:
   it lands at the index distance $`\omega^2\cdot\Theta_\lambda(D)`$, below $`F_\lambda`$. For $`D = \hat G`$ it lands at $`F_\lambda`$ itself: $`r(\lambda) = r(F) + \Theta_F(m_0)`$ for the restart $`F = H(\eta_\lambda + \Omega_1)`$
   (for $`m_0 \lt \theta`$). So the exact long reaches now reach the first index fixed point. Before, they were known for $`D \lt \varepsilon_+`$. (The referee: cite the rule TOP-REG-LAND of §1.1
@@ -233,11 +237,11 @@ Also (P-LOW$`^{21}`$) every restart $`a`$ with $`H(\theta_2\cdot\omega^2) \lt a 
 $`\nu_C \ge X_{20} = \psi_{\Omega_1}(\Omega_\omega + \theta_2\cdot\hat\zeta_A + \omega^{G(\hat\zeta_A)+1}\cdot 2)`$, and with fewer of the new tools three smaller points between $`X_{19}`$ and $`X_{20}`$. (The referee: the ceiling at
 $`\hat\zeta_A`$ is proved, not only checked.) **Conditional, not counted**: under not-LOW, $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{G(\hat\zeta_H)+1})`$.
 
-- **Not proved** (open): exact long reaches for $`D \gt \hat G`$ (outline below $`\Phi^{\hat G}`$, the analogue of $`\Phi'`$ over $`\hat G`$, read at the base $`F_\lambda`$; from $`\Phi^{\hat G}`$ on they need PSI-θ at the
+- **Not proved** (open; the exact long reaches are now proved for $`D \lt G(\hat\zeta_3)`$ with PSI-θ at $`\theta_2+1`$, [SHIFT6.md](SHIFT6.md) §1.1): exact long reaches for $`D \gt \hat G`$ (outline below $`\Phi^{\hat G}`$, the analogue of $`\Phi'`$ over $`\hat G`$, read at the base $`F_\lambda`$; from $`\Phi^{\hat G}`$ on they need PSI-θ at the
   index $`\theta_2 + 1`$, which is not proved; this is where the realizer reading and the cap reading still differ); READ$`^\sharp`$ past $`\hat\zeta_H`$ (conjecture; the first overshoot by a
   restart's own prefix is at $`\hat\zeta_f`$; at $`\Omega_k`$, $`k \ge 4`$, and at $`\Omega_\omega`$ the hulls nest); READ$`^\sharp`$ at every normal multiplier would give CAP-0 below $`P'`$, hence not-LOW; LOW; (P); (Q′).
 - The referee's other minor points: NO-READL depends on the new EXACT-LONG$`^G`$ and EXACT-F (NO-LIT did not); one line on the caps of long intermediate restarts (they lie in the
-  domain of the transport); one missing line on the domain of the realizer map; a remark on offsets above the bound of the transport lemma, which earlier referees accepted.
+  domain of the transport); one missing line on the domain of the realizer map; a remark on offsets above the bound of the transport lemma, which earlier referees accepted. (All applied in the twenty-seventh round, [SHIFT6.md](SHIFT6.md) §1.1.)
 
 ### 2.2 $`\nu_C = \nu_S`$: the tools at every level, and TC⁺ at every level
 
@@ -261,12 +265,12 @@ Notation of §1.2; $`m^*_\xi = \psi_{\Omega_1}(\Omega_\omega\cdot(1+\xi))`$ (the
   **Conditional, not counted**: if $`\nu_C \gt m^*_\xi`$ and $`\xi \lt I_\omega`$, the claim holds in $`R_2^C`$ on $`[0, Y'_\xi]`$; under not-LOW, $`\nu_C \ge Y'_1`$.
 - **Conditional, not counted** (correct under LOW$`^\infty`$, given FRAG): the bookkeeping, the room and the zone system of §1.2 for the (D1b) spans whose η-offset is below $`\omega^{G_2^2}`$.
   **Blocking point**: the pin of a long prefix whose code has atoms in moved regions needs a form of PIN-ALL for moved lower atoms, which is not written (the referee thinks it can be
-  repaired). Until then the pins, the far TOP-REG, the placement PLACE$`^{T2}`$, RES-ALL$`^{T2}`$ and the residue below hold only for spans whose long prefix codes have no such atoms.
+  repaired; it is repaired in the twenty-seventh round, [SHIFT6.md](SHIFT6.md) §1.2). Until then the pins, the far TOP-REG, the placement PLACE$`^{T2}`$, RES-ALL$`^{T2}`$ and the residue below hold only for spans whose long prefix codes have no such atoms.
   So the blocking point of §1.2 moves: the level-2 tools are now proved, and what is missing is this pin and LOW$`^\infty`$.
 - **The residue** (the paper's assembly, after the blocking point is repaired). $`\nu_C = \nu_S`$ would follow from: exact reaches that commute with base change for codes in
   $`[G_2^2, \Omega_2)`$; caps for codes $`\ge G(\hat\zeta_3)`$ (room); the inspection after TWIST (outline); and LOW$`^\infty`$ (open). $`\nu_C = \nu_S`$ and $`\nu_C \lt \nu_S`$ are both **open**.
 - The referee's other minor points: the paper says that an earlier blocking point on TC⁺ is lifted, which overclaims, since the route now rests on LOW$`^\infty`$; one case of the cross-level base change
-  ($`a' = m^*_\xi`$) is missing but holds; code 0 gives no restart.
+  ($`a' = m^*_\xi`$) is missing but holds; code 0 gives no restart. (Applied in the twenty-seventh round, [SHIFT6.md](SHIFT6.md) §1.2.)
 
 ### 2.3 Native codes: decorations as stage regions, and $`\iota(\mathrm{CH}_3) \ge \psi_{\Omega_1}(\Omega_\omega\cdot\varepsilon_0)`$
 
@@ -289,17 +293,19 @@ Words of [SHIFT3.md](SHIFT3.md) §1.2 and §1.3: stages, pair blocks, chain numb
 ```
 
 and $`\iota(\mathrm{CH}_4) \gt \psi_{\Omega_1}(\Omega_\omega\cdot T)`$ for every $`T \lt \varepsilon_0`$. Before, $`\iota(\mathrm{CH}_3) \ge \psi_{\Omega_1}(\Omega_\omega\cdot\omega^\omega)`$. So RED-TOWER covers every $`t \lt \psi_{\Omega_1}(\Omega_\omega\cdot\varepsilon_0)`$ natively.
-- **Conditional, not counted**: $`\psi_{\Omega_1}(\Omega_\omega\cdot\Omega_1)`$ is the least fixed point of $`T \mapsto \psi_{\Omega_1}(\Omega_\omega\cdot T)`$ (checked; the proof is an outline). STAGE-TOWER (outline): a whole
+- **Conditional, not counted** (now proved, [SHIFT6.md](SHIFT6.md) §1.3): $`\psi_{\Omega_1}(\Omega_\omega\cdot\Omega_1)`$ is the least fixed point of $`T \mapsto \psi_{\Omega_1}(\Omega_\omega\cdot T)`$ (checked; the proof is an outline). STAGE-TOWER (outline): a whole
   lower system of codes as the code of a stage label; with the ordinal side for countable labels $`\ge \varepsilon_0`$ (outline) it would give $`\sup_k \iota(\mathrm{CH}_k) \ge \psi_{\Omega_1}(\Omega_\omega\cdot\Omega_1)`$.
   (The referee: two gaps sit inside the outline: there is no single system below $`Z_\omega`$, so the systems below each $`Z_n`$ must be used one by one; and the copied label needs a carrier
-  and must be shown to lie above the base.)
+  and must be shown to lie above the base. Both are done in the twenty-seventh round, [SHIFT6.md](SHIFT6.md) §1.3.)
 - **Open**: a pair-free region code past $`\varepsilon_0`$ with chain number 2; labels of the form $`\Omega_\omega\cdot\xi`$ with $`\xi \ge \Omega_1`$ (their codes carry parameters, which the stage systems
   exclude); labels $`\ge \Omega_\omega`$. $`\theta_0`$ lies far above: $`\psi_{\Omega_1}(\Omega_\omega\cdot\varepsilon_0) \lt \psi_{\Omega_1}(\Omega_\omega\cdot\Omega_1) \lt \psi_{\Omega_1}(\Omega_{\omega+1}) \lt \psi_{\Omega_1}(\Omega_{\Omega_\omega}) \lt \theta_0`$ (checked, Python and Lean).
 - The referee's other minor points: one lemma part is never needed; the closure of the old and new elements should be stated; the second pair is "not needed" rather than "false";
   one comparison should cite HOST$`_4`$; one sample has no certificate (checked by hand; nothing proved rests on it); Carlson 2001 (pp. 19–20) only announces the identification that the
-  paper quotes.
+  paper quotes. (Applied in the twenty-seventh round, [SHIFT6.md](SHIFT6.md) §1.3.)
 
 ### 2.4 Status after the twenty-sixth round
+
+The twenty-seventh round changed this status; see [SHIFT6.md](SHIFT6.md) §1.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{21}]`$ given FRAG ($`[0, X_{18}]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$. No InaccPsi upper
   bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -326,6 +332,8 @@ Each run was under 60 seconds; none is a proof.
   62 name checks: 0 failures; Lean green. The referee: own re-implementation of the regions (above), the author's runs byte-identical, 2 certificates reproduced; the Lean rerun is identical.
 
 ### 2.6 Open
+
+The twenty-seventh round changed this list; the current list is [SHIFT6.md](SHIFT6.md) §1.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps past $`G(\hat\zeta_H)`$ and a lower bound at code $`P'`$; (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
