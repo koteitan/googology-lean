@@ -230,7 +230,7 @@ The bad root and $`t`$ are those of the BMS expansion of $`A`$.
 | column 0 | 635 | 206 | 429 open (the self-reference type) |
 | in the $`\Omega`$-level structure | 1,347 | 0 | open; no decomposition found |
 
-  The 480 proved include the 21 that are proved given LOW. (Now 874 proved, §10.1, then 1,442, [VEBLEN.md](VEBLEN.md) §3, then 1,862 given a checked property of the program, [VEBLEN.md](VEBLEN.md) §10, then 1,987 with that property proved, [THETA.md](THETA.md) §3, then 2,330, [THETA.md](THETA.md) §9.3, then 2,526, [SHIFT.md](SHIFT.md) §3, then 2,589, §8.3 there, then 2,690, §9.3 there, then 2,843, [SHIFT2.md](SHIFT2.md) §1.3, then 3,050, §2.3 there, then 3,071, §3.3 there, then 3,113, [SHIFT3.md](SHIFT3.md) §1.3, then 3,139, §2.3 there, then 3,163, [SHIFT4.md](SHIFT4.md) §1.3.) What is missing, class by class: that $`\Phi_3`$ treats the index term as one unit
+  The 480 proved include the 21 that are proved given LOW. (Now 874 proved, §10.1, then 1,442, [VEBLEN.md](VEBLEN.md) §3, then 1,862 given a checked property of the program, [VEBLEN.md](VEBLEN.md) §10, then 1,987 with that property proved, [THETA.md](THETA.md) §3, then 2,330, [THETA.md](THETA.md) §9.3, then 2,526, [SHIFT.md](SHIFT.md) §3, then 2,589, §8.3 there, then 2,690, §9.3 there, then 2,843, [SHIFT2.md](SHIFT2.md) §1.3, then 3,050, §2.3 there, then 3,071, §3.3 there, then 3,113, [SHIFT3.md](SHIFT3.md) §1.3, then 3,139, §2.3 there, then 3,163, [SHIFT4.md](SHIFT4.md) §1.3, then all 3,166, §2.3 there.) What is missing, class by class: that $`\Phi_3`$ treats the index term as one unit
   in every context; a copy of the changed summand that interleaves with the fixed earlier summands (a CODE lemma with parameters, the
   same kind of gap as in §2); the shapes of the self-reference type for every $`n`$; and, for the last class (it contains POINT-REF, LONG-K and
   the type of SRO itself), any decomposition.
@@ -557,4 +557,4 @@ Each run was under 60 seconds; none is a proof.
 
 ## 13. Open
 
-The later rounds changed this list; the current list is [SHIFT4.md](SHIFT4.md) §1.7.
+The later rounds changed this list; the current list is [SHIFT4.md](SHIFT4.md) §2.7.

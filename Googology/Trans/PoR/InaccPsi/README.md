@@ -89,14 +89,14 @@ X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 
 ```
 
 (1 review, no FRAG, [SHIFT.md](SHIFT.md) §1), and, given FRAG, up to $`X_5`$ ([SHIFT.md](SHIFT.md) §8.1), up to $`X_8`$ (2 reviews, [SHIFT.md](SHIFT.md) §9.1), up to $`X_9 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Omega_1} + \omega^{G(\Omega_1)+1} + \omega^{G_2+1})`$ with $`G(\Omega_1) = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_1})`$
-(2 reviews, [SHIFT2.md](SHIFT2.md) §1.1, §2.1), then, past the first index fixed point, up to $`X_{11}`$ ([SHIFT2.md](SHIFT2.md) §2.1), up to $`X_{12}`$ ([SHIFT2.md](SHIFT2.md) §3.1), up to $`X_{13}`$ ([SHIFT3.md](SHIFT3.md) §1.1), up to $`X_{14}`$ ([SHIFT3.md](SHIFT3.md) §2.1), up to $`X_{15} = \psi_{\Omega_1}(\Omega_\omega + \Omega_3 + \omega^{G(\Omega_3)+1} + \omega^{G_2+1})`$ ([SHIFT4.md](SHIFT4.md) §1.1), and now up to
+(2 reviews, [SHIFT2.md](SHIFT2.md) §1.1, §2.1), then, past the first index fixed point, up to $`X_{11}`$ ([SHIFT2.md](SHIFT2.md) §2.1), up to $`X_{12}`$ ([SHIFT2.md](SHIFT2.md) §3.1), up to $`X_{13}`$ ([SHIFT3.md](SHIFT3.md) §1.1), up to $`X_{14}`$ ([SHIFT3.md](SHIFT3.md) §2.1), up to $`X_{15}`$ and $`X_{16}`$ (2 reviews, [SHIFT4.md](SHIFT4.md) §1.1, §1.4, §2.1), up to $`X_{17}`$ ([SHIFT4.md](SHIFT4.md) §2.1), and now up to
 
 ```math
-X_{16} = \psi_{\Omega_1}(\Omega_\omega + \Omega_3 + \theta_2 + \omega^{G(\Omega_3+1)+1}\cdot 2),\quad G(\Omega_3+1) = \psi_{\Omega_2}(\Omega_\omega + \Omega_3 + \theta_2)
+X_{18} = \psi_{\Omega_1}(\Omega_\omega + \hat\zeta_2 + \omega^{G(\hat\zeta_2)+1}\cdot 2),\quad G(\hat\zeta_2) = \psi_{\Omega_2}(\Omega_\omega + \hat\zeta_2)
 ```
 
-(1 review; [SHIFT4.md](SHIFT4.md) §1.4). The core half alone is proved in $`R_2^C`$ further, on
-$`[0, \nu_C]`$, where $`\nu_C`$ ($`\ge X_{16}`$ given FRAG, $`\ge X_4`$ without it) is the first point where $`R_2^C`$ stops being skeletal ([BREAK.md](BREAK.md) §2).
+with $`\hat\zeta_2 = \theta_3\cdot(\omega+1) + \varphi(\omega, \psi_{\Omega_3}(\Omega_\omega + \theta_3\cdot(\omega+1)) + 1)\cdot\omega`$ and $`\theta_3 = \psi_{\Omega_4}(\Omega_\omega)`$ (1 review; [SHIFT4.md](SHIFT4.md) §2.2). The core half alone is proved in $`R_2^C`$ further, on
+$`[0, \nu_C]`$, where $`\nu_C`$ ($`\ge X_{18}`$ given FRAG, $`\ge X_4`$ without it) is the first point where $`R_2^C`$ stops being skeletal ([BREAK.md](BREAK.md) §2).
 
 ## 3. What is proved
 
@@ -104,7 +104,7 @@ $`[0, \nu_C]`$, where $`\nu_C`$ ($`\ge X_{16}`$ given FRAG, $`\ge X_4`$ without 
 below $`\upsilon_{\omega\cdot\omega}`$ is in the core, and it is the countable value of an InaccPsi normal form whose
 collapse arguments are below $`I_\omega`$ (Theorem LOW below). Wilken's points have exact names:
 $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$ for $`\eta \lt \Gamma_0`$ (Theorem T, §4), later for every $`\upsilon`$-point below
-$`\upsilon^*`$ (Theorem GEN), and for $`\eta \lt \Omega_\omega`$ (GEN⁺, a case of GEN-EXT). In $`R_2^C`$ the claim holds up to $`X_4`$, and up to $`X_{16}`$ given FRAG, and the core contains
+$`\upsilon^*`$ (Theorem GEN), and for $`\eta \lt \Omega_\omega`$ (GEN⁺, a case of GEN-EXT). In $`R_2^C`$ the claim holds up to $`X_4`$, and up to $`X_{18}`$ given FRAG, and the core contains
 $`[0, \nu_C]`$ (§2). The work came in rounds of four refereed papers. This page has the results of the first round (some are on [ROUND1.md](ROUND1.md)); the later rounds are on the pages
 [RESTARTS.md](RESTARTS.md), [REACHES.md](REACHES.md), [PINS.md](PINS.md), [BREAK.md](BREAK.md), [COVER.md](COVER.md), [FANFREE.md](FANFREE.md), [VEBLEN.md](VEBLEN.md),
 [THETA.md](THETA.md), [SHIFT.md](SHIFT.md), [SHIFT2.md](SHIFT2.md), [SHIFT3.md](SHIFT3.md) and [SHIFT4.md](SHIFT4.md). A summary of the rounds 1–12 is in [THETA.md](THETA.md) §8.1, the thirteenth round is [THETA.md](THETA.md) §1–§7: PAR-SAME, the names
@@ -128,8 +128,10 @@ the step below SRO on 3,113 of the 3,166 sample matrices, and that every tool of
 given FRAG, by one counting rule PSI-n for every $`\psi_{\Omega_j}`$ below $`\varepsilon_{\Omega_n+1}`$, the first native bound with an InaccPsi name, the step below SRO on 3,139 of the 3,166 sample
 matrices, and the tools of the η-form up to $`\psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$, with LOW still open; the twenty-third round is [SHIFT4.md](SHIFT4.md): the claim up to $`X_{16}`$ given FRAG,
 with closed reaches (the missing upper-bound rule is false as stated, and its corrected form is proved) and the plateau of $`G`$ at $`\Omega_3`$, which decides the first test case of
-CAP-0, the first native bound past $`\upsilon^*`$, the step below SRO on 3,163 of the 3,166 sample matrices, and LOW still open.
-Open: both halves above $`X_{16}`$ (above $`X_4`$ without FRAG) in
+CAP-0, the first native bound past $`\upsilon^*`$, the step below SRO on 3,163 of the 3,166 sample matrices, and LOW still open; the twenty-fourth round is [SHIFT4.md](SHIFT4.md) §2: the claim up to $`X_{18}`$
+given FRAG, with exact reaches below $`G_2`$ and the reading READ on the ordinal side at every $`\Omega_k`$, the step below SRO on all 3,166 sample matrices, native
+bounds past $`\psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$, and LOW still open.
+Open: both halves above $`X_{18}`$ (above $`X_4`$ without FRAG) in
 $`R_2^C`$ and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$; $`R_2^S = R_2^C`$, whose first case $`\nu_C = \nu_S`$ needs the reaches of long restarts; the
 lower bound below $`\theta_0`$; whether the first fan needs an inaccessible; any InaccPsi upper bound for $`C^*_3`$, which lies below $`\omega_1^{CK}`$
 (Carlson 2009, Thm 15.2).
@@ -233,7 +235,7 @@ listed under "Not proved".
 
 **Up to $`\upsilon_{\omega^3}`$, without FRAG** (2026-10, $`R_2^C`$). Extended to $`[0, \Xi_\omega]`$ by Theorem CORE-C$`^\Xi`$
 ([RESTARTS.md](RESTARTS.md) §3), to $`[0, \Lambda_\varepsilon)`$ and $`[0, \rho_{\Theta_P})`$ ([REACHES.md](REACHES.md) §2), and to
-$`[0, \rho_{\Theta_A+\omega^2})`$ ([PINS.md](PINS.md) §2), and to $`[0, \rho_{\Theta_{d\omega}})`$, and to $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$ ([BREAK.md](BREAK.md) §2, §4), now with $`\nu_C \ge X_4`$ ([SHIFT.md](SHIFT.md) §1), and $`\nu_C \ge X_5`$ given FRAG ([SHIFT.md](SHIFT.md) §8.1), and $`\nu_C \ge X_8`$ given FRAG ([SHIFT.md](SHIFT.md) §9.1), and $`\nu_C \ge X_9`$ given FRAG ([SHIFT2.md](SHIFT2.md) §1.1), and $`\nu_C \ge X_{11}`$ given FRAG ([SHIFT2.md](SHIFT2.md) §2.1), and $`\nu_C \ge X_{13}`$ given FRAG ([SHIFT3.md](SHIFT3.md) §1.1), and $`\nu_C \ge X_{14}`$ given FRAG ([SHIFT3.md](SHIFT3.md) §2.1), and $`\nu_C \ge X_{15}`$ and $`\nu_C \ge X_{16}`$ given FRAG ([SHIFT4.md](SHIFT4.md) §1.1, §1.4).
+$`[0, \rho_{\Theta_A+\omega^2})`$ ([PINS.md](PINS.md) §2), and to $`[0, \rho_{\Theta_{d\omega}})`$, and to $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$ ([BREAK.md](BREAK.md) §2, §4), now with $`\nu_C \ge X_4`$ ([SHIFT.md](SHIFT.md) §1), and $`\nu_C \ge X_5`$ given FRAG ([SHIFT.md](SHIFT.md) §8.1), and $`\nu_C \ge X_8`$ given FRAG ([SHIFT.md](SHIFT.md) §9.1), and $`\nu_C \ge X_9`$ given FRAG ([SHIFT2.md](SHIFT2.md) §1.1), and $`\nu_C \ge X_{11}`$ given FRAG ([SHIFT2.md](SHIFT2.md) §2.1), and $`\nu_C \ge X_{13}`$ given FRAG ([SHIFT3.md](SHIFT3.md) §1.1), and $`\nu_C \ge X_{14}`$ given FRAG ([SHIFT3.md](SHIFT3.md) §2.1), and $`\nu_C \ge X_{15}`$ and $`\nu_C \ge X_{16}`$ given FRAG ([SHIFT4.md](SHIFT4.md) §1.1, §1.4), and $`\nu_C \ge X_{17}`$ and $`\nu_C \ge X_{18}`$ given FRAG ([SHIFT4.md](SHIFT4.md) §2.1, §2.2).
 
 - **Lemma PT** (1 review). Let $`Q`$ be a pattern in the full sense of Carlson 2009, Def 5.6. If every copy of $`Q`$ in
   $`R_2^C`$ puts the point of $`Q`$ at $`\ge v`$, then $`[0, v] \subseteq \mathrm{Core}(R_2^C)`$ (Carlson 2009, Lemma 15.11,
@@ -311,7 +313,8 @@ pointwise least one.
   For $`\mathrm{CH}_k`$ (1 review, [SHIFT2.md](SHIFT2.md) §3.2): every RF fan-free pattern whose chain number (the longest chain of pairs linked by L1p) is at most $`k-1`$ lies
   below $`\iota(\mathrm{CH}_k)`$, and natively $`\iota(\mathrm{CH}_3) \ge Z''_\omega \gt Z_\omega`$; then (1 review, [SHIFT3.md](SHIFT3.md) §1.2) by pair blocks natively $`\iota(\mathrm{CH}_3) \ge \theta_{\Xi[\omega]}(0) \gt Z''_\omega`$. The native $`\theta_{\Xi_2}(0)`$ is
   at least $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\psi_{\Omega_2}(\varepsilon_{\Omega_2+1})})`$ (1 review, [SHIFT3.md](SHIFT3.md) §2.2), the first native bound with a proved InaccPsi name (it is below $`\upsilon^*`$). Then (1 review, [SHIFT4.md](SHIFT4.md) §1.2) natively $`\iota(\mathrm{CH}_3) \ge Z''_\omega \gt \theta_{\Xi'_\omega}(0) \ge \upsilon^*`$, the first native
-  bound past $`\upsilon^*`$, with $`\Xi'_\omega = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_2})`$, and by transfer $`\theta_{\Xi'_\omega}(0) \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Omega_2})`$ (both still below the known $`\iota(\mathrm{CH}_2) \gt \nu_C`$).
+  bound past $`\upsilon^*`$, with $`\Xi'_\omega = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_2})`$, and by transfer $`\theta_{\Xi'_\omega}(0) \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Omega_2})`$ (both still below the known $`\iota(\mathrm{CH}_2) \gt \nu_C`$). Then (1 review, [SHIFT4.md](SHIFT4.md) §2.4) natively $`\iota(\mathrm{CH}_3) \gt \psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$, the first native
+  bound above the known non-native bounds.
   Earlier:
   $`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$.
 - **Lemma TOP2** (2026-10, 1 review). For every $`\alpha \lt m_3`$ there is a chain $`x \lt_2 y`$ of length 2 with
@@ -337,18 +340,18 @@ pointwise least one.
 
 **Not proved:**
 
-- **The claim above $`X_{16}`$ given FRAG, and above $`X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$ without FRAG,** in $`R_2^C`$, and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$, both halves (an InaccPsi
+- **The claim above $`X_{18}`$ given FRAG, and above $`X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$ without FRAG,** in $`R_2^C`$, and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$, both halves (an InaccPsi
   upper bound for $`\nu_C`$ would give it up to $`\nu_C`$; it needs only two $`\le_1`$-statements (P) and (Q) at one named pair, both about reaches of long
-  restarts, [SHIFT.md](SHIFT.md) §1; (Q) cannot come from the known upper bounds on the reaches below the left end, §8.1; (P) needs reaches across an uncountable offset, §9.1, that is past the first index fixed point, [SHIFT2.md](SHIFT2.md) §1.1; the tools now reach the η-offsets below $`\theta`$, with exact caps by order type, [SHIFT3.md](SHIFT3.md) §1.1, §2.1, then the η-offsets below $`\psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$ and the codes below $`G(\Omega_3+1)`$, [SHIFT4.md](SHIFT4.md) §1.1, §1.4, but (P) needs more). The reaches of the restarts
-  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [SHIFT4.md](SHIFT4.md) §1.7, [COVER.md](COVER.md) §9, [BREAK.md](BREAK.md) §10, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
+  restarts, [SHIFT.md](SHIFT.md) §1; (Q) cannot come from the known upper bounds on the reaches below the left end, §8.1; (P) needs reaches across an uncountable offset, §9.1, that is past the first index fixed point, [SHIFT2.md](SHIFT2.md) §1.1; the tools now reach the η-offsets below $`\theta`$, with exact caps by order type, [SHIFT3.md](SHIFT3.md) §1.1, §2.1, then the η-offsets below $`\psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$ and the codes below $`G(\Omega_3+1)`$, [SHIFT4.md](SHIFT4.md) §1.1, §1.4, then the codes below $`G(\hat\zeta_2)`$, §2.1, §2.2 there, but (P) needs more). The reaches of the restarts
+  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [SHIFT4.md](SHIFT4.md) §2.7, [COVER.md](COVER.md) §9, [BREAK.md](BREAK.md) §10, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
 - **$`R_2^S = R_2^C`$**: the converse $`C \Rightarrow S`$ for $`\le_1`$ at a successor stage $`\beta \gt \kappa_C`$ with
   $`\alpha \notin G_C`$, and for $`\le_2`$ at stages of type (ii) (this needs an upward transfer of $`\Pi_2`$ sentences, which
   neither upward 2-reflection nor liftings give; it is now one pair $`(a^*, \beta)`$ per stage, and below $`\kappa_C`$ it is
   Conjecture CORE-2; left: PIN and LOW); Σ2-GAP, INC, W(C), (R), AGR, and $`\beta_0 = \infty`$ (these words are defined in [THETA.md](THETA.md) §8.2).
   Theorem CC and all certificates are about $`R_2^C`$.
 - **The lower bound below $`\theta_0`$** (referee: blocking gap toward this goal, not an error; the 26 undecided limit jumps of
-  the sample above $`V_3`$ are now proved, [FANFREE.md](FANFREE.md) §1; the step below SRO is now proved for every $`n`$ on 3,163 of the 3,166 sample
-  matrices, [FANFREE.md](FANFREE.md) §7.1, §10.1, [VEBLEN.md](VEBLEN.md) §3, §10, [THETA.md](THETA.md) §3, §9.3, [SHIFT.md](SHIFT.md) §3, §8.3, §9.3, [SHIFT2.md](SHIFT2.md) §1.3, §2.3, §3.3, [SHIFT3.md](SHIFT3.md) §1.3, §2.3, [SHIFT4.md](SHIFT4.md) §1.3): an order embedding
+  the sample above $`V_3`$ are now proved, [FANFREE.md](FANFREE.md) §1; the step below SRO is now proved for every $`n`$ on all 3,166 sample
+  matrices, [FANFREE.md](FANFREE.md) §7.1, §10.1, [VEBLEN.md](VEBLEN.md) §3, §10, [THETA.md](THETA.md) §3, §9.3, [SHIFT.md](SHIFT.md) §3, §8.3, §9.3, [SHIFT2.md](SHIFT2.md) §1.3, §2.3, §3.3, [SHIFT3.md](SHIFT3.md) §1.3, §2.3, [SHIFT4.md](SHIFT4.md) §1.3, §2.3): an order embedding
   $`\mu`$ of all $`\varepsilon`$-number terms below $`\theta_0`$ into standard trio matrices below SRO, and the local step
   of S-RED for all matrices below SRO. Outside $`G_B`$ are four families: (M1) uncountable $`\kappa`$, $`c`$ or $`g`$ in a
   summand; (M2) successor indices such as $`\Omega_{\xi+1}`$; (M3) uncountable indices such as $`\Omega_{\Omega_\omega}`$; (M4)
@@ -387,7 +390,7 @@ $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, for every $`\eta \lt \Gamma_0`$, in
 (beyond, Theorem T++ of [REACHES.md](REACHES.md) §2 names every $`\Xi_\alpha`$ and the points between them up to $`\Phi_1`$, and
 Theorem GEN of [PINS.md](PINS.md) §3 names the $`\upsilon`$-points below $`\upsilon^*`$, now known to be $`\psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ ([THETA.md](THETA.md) §1):
 $`\psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta) = \upsilon_{1+\iota(\eta)}`$ for every $`\eta`$ in the set $`D`$ of the $`\eta \lt \Omega_2`$ that give a normal form, with
-$`\iota(\eta)`$ the order type of $`D \cap \eta`$; GEN-EXT extends this to $`\eta \lt \Omega_\omega\cdot\omega`$, [BREAK.md](BREAK.md) §2, and GEN⁺, a case of GEN-EXT, states it on the set of all $`\eta \lt \Omega_\omega`$ that give a normal form, [THETA.md](THETA.md) §1):
+$`\iota(\eta)`$ the order type of $`D \cap \eta`$; GEN-EXT extends this to $`\eta \lt \Omega_\omega\cdot\omega`$, [BREAK.md](BREAK.md) §2, and GEN⁺, a case of GEN-EXT, states it on the set of all $`\eta \lt \Omega_\omega`$ that give a normal form, [THETA.md](THETA.md) §1, where it was labelled a transfer; it is proved by citing GEN-EXT, [SHIFT4.md](SHIFT4.md) §2.4):
 
 ```math
 \upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta).
@@ -443,7 +446,9 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       (TOP-REG-FAR′, VEB-THETA$`^\vartheta`$, PSI2-θ, EXACT-O$`^\vartheta`$, R-CAP$`^\vartheta`$, CEIL$`^\vartheta`$, Theorem X13; [SHIFT3.md](SHIFT3.md) §1.1); up to $`X_{14}`$, with $`\nu_C \ge X_{14}`$ — proved given FRAG
       (PSI-n, CNST$`^n`$, EXACT-O$`^n`$, R-CAP$`^\theta`$, CEIL$`^\theta`$, Theorem X14; [SHIFT3.md](SHIFT3.md) §2.1); up to $`X_{15}`$, with $`\nu_C \ge X_{15}`$ — proved given FRAG
       (CLOSED-REACH, TOP-REG$`^\omega`$, EXACT-CL, the tier below $`\zeta^*`$, Theorem X15; [SHIFT4.md](SHIFT4.md) §1.1); up to $`X_{16}`$, with $`\nu_C \ge X_{16}`$ — proved given FRAG
-      (PLATEAU, D-UNC$`^Z`$, the θ⁺ tier, R-U, Theorem X16; [SHIFT4.md](SHIFT4.md) §1.4)
+      (PLATEAU, D-UNC$`^Z`$, the θ⁺ tier, R-U, Theorem X16; [SHIFT4.md](SHIFT4.md) §1.4; both 2 reviews, §2.1); up to $`X_{17}`$, with $`\nu_C \ge X_{17}`$ — proved given FRAG
+      (ROOT-LOC, ENUM, EXACT-CL\*, the tier up to $`\Omega_3\cdot\omega`$, Theorem X17; [SHIFT4.md](SHIFT4.md) §2.1); up to $`X_{18}`$, with $`\nu_C \ge X_{18}`$ — proved given FRAG
+      (PHI-COMM, READ on the ordinal side, the caps below $`G(\hat\zeta_2)`$, Theorem X18; [SHIFT4.md](SHIFT4.md) §2.2)
     - the core of $`R_2^C`$ up to $`\rho_{\Theta_{d\omega}}`$, and on $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$ — proved (CORE-C$`^{d\omega}`$, CAP, NU-CT; [BREAK.md](BREAK.md))
   - **B** upper bound $`\mathrm{Core}(R_2^+) \subseteq \psi_{\Omega_1}(I_\omega)`$ — open
     - B0 reduction to least chains (Theorem CC) — proved for $`R_2^C`$
@@ -460,12 +465,12 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       relations at one point below $`t`$ ([FANFREE.md](FANFREE.md) §7.4)
     - B-NU an InaccPsi upper bound for $`\nu_C`$ — open; reduced to two $`\le_1`$-statements (P) and (Q) at one named pair, both about reaches of
       long restarts (NU-MIN, CPB-S; the shift criterion SHIFT is proved, its named instance is open; [SHIFT.md](SHIFT.md) §1); a pair with both has its
-      right end $`\ge X_{16}`$ given FRAG, and (Q) cannot come from the known upper bounds on the reaches below the left end (CL, P-LOW, Q-OBST; [SHIFT.md](SHIFT.md) §8.1);
+      right end $`\ge X_{18}`$ given FRAG, and (Q) cannot come from the known upper bounds on the reaches below the left end (CL, P-LOW, Q-OBST; [SHIFT.md](SHIFT.md) §8.1);
       (P) needs reaches across an uncountable offset, and (Q) can be weakened to a statement (Q′) on one isominimal set (P-UNC, CPB-LOC; [SHIFT.md](SHIFT.md) §9.1);
       (P) needs upper bounds for reaches and codes past the first index fixed point ([SHIFT2.md](SHIFT2.md) §1.1); now exact caps by order type, sharp crossing and η-offsets go up to
       $`\theta`$ ([SHIFT2.md](SHIFT2.md) §2.1, §3.1, [SHIFT3.md](SHIFT3.md) §1.1, §2.1; the conjecture EXACT-PHI is false), then, with closed reaches (the literal rule TOP-REG past $`\delta_1\cdot\omega`$ is false, its corrected form is proved), exact caps up to
-      $`\varphi(\omega, G(\omega+1)+1)`$, long restarts with $`D \lt G_2`$, η-offsets below $`\psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$ and codes below $`G(\Omega_3+1)`$ ([SHIFT4.md](SHIFT4.md) §1.1, §1.4), but (P) still
-      needs caps past that point; the next missing lemmas are GAP$`_j`$ and ROOT-CL, and the tier with $`\eta \ge \Omega_3`$
+      $`\varphi(\omega, G(\omega+1)+1)`$, long restarts with $`D \lt G_2`$, η-offsets below $`\psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$ and codes below $`G(\Omega_3+1)`$ ([SHIFT4.md](SHIFT4.md) §1.1, §1.4), then exact reaches below $`G_2`$ (GAP$`_j`$, ROOT-CL) and codes below $`G(\hat\zeta_2)`$ ([SHIFT4.md](SHIFT4.md) §2.1, §2.2), but (P) still
+      needs caps past that point; the next missing pieces are a pin at the exponent $`\varphi(\omega, G(\omega+1)+1) + 1`$ and, further up, an upper-bound rule with a far target
     - B2 a finite-set test for $`\lt_2`$ in $`R_2^+`$ — proved (T1, T2); whether the uniform form (one copy for all
       $`k`$) is also necessary is open in $`R_2^+`$ (Wilken 2021, p. 6, says it is for pure $`R_2`$)
     - B3 base changes that keep $`0, +, \le, \le_1, \le_2`$ — proved where $`R_2^+`$ is skeletal (Theorem FRAG2; FRAG itself is
@@ -513,8 +518,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       only room can ([SHIFT.md](SHIFT.md) §9.4); now the copying plan needs no anchor copy, so room under ceilings is no obstruction, and far heads have room
       (RE-PLACE, DOUBLE-FAR; [SHIFT2.md](SHIFT2.md) §1.4); now every span below the first index fixed point is placed exactly
       (MIN-EXACT, SPAN-PLACE, RES-ALL\*; [SHIFT2.md](SHIFT2.md) §2.4); left: the deep spans over an uncountable offset (D1b), and the sets that meet $`[x^\#, \nu)`$; the converse in Carlson–Wilken 2012 does not give them ([SHIFT2.md](SHIFT2.md) §3.4), and the present tools reach them only under the open hypothesis LOW ([SHIFT3.md](SHIFT3.md) §1.4), now weakened to $`\nu_C \lt \psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$, while LOW itself is
-      reduced to a cap for self-crossing restarts ([SHIFT3.md](SHIFT3.md) §2.4); that cap now holds at its first test case and for every code below $`G(\Omega_3+1)`$,
-      and LOW is still open ([SHIFT4.md](SHIFT4.md) §1.4)
+      reduced to a cap for self-crossing restarts ([SHIFT3.md](SHIFT3.md) §2.4); that cap now holds at its first test case and for every code below $`G(\hat\zeta_2)`$,
+      and LOW is still open ([SHIFT4.md](SHIFT4.md) §1.4, §2.2)
     - A7 relativized patterns of $`R_1^+`$ and uniform assignments between ordinals and patterns (announced by Wilken) —
       proved (RC-PIN, RC, U, UNIF; [PINS.md](PINS.md) §1; the closures are finite, CL-FIN, and are explicit pin patterns, EXPL,
       [BREAK.md](BREAK.md) §4); that the assignments are elementary recursive — outline only
@@ -524,8 +529,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       also MU-0 and MU-B0 ((M4) at level 0; adds nothing to the core); left: (M4) at level $`\ge 1`$, (M1)–(M3), and the
       local step below SRO — open (with them the first fan needs an inaccessible, RED-HM, [COVER.md](COVER.md) §5.3); the top step at SRO
       and several uniform families of steps — proved for explicit patterns ([COVER.md](COVER.md) §6.1); all 26 undecided limit jumps of the
-      sample above $`V_3`$ — proved ([FANFREE.md](FANFREE.md) §1); the step for every $`n`$ on 3,163 of the 3,166 sample matrices below SRO, IDX-ADD among them, and the property (REP) of the program — proved ([FANFREE.md](FANFREE.md) §7.1, §10.1, [VEBLEN.md](VEBLEN.md) §3, §10, [THETA.md](THETA.md) §3, §9.3, [SHIFT.md](SHIFT.md) §3, §8.3, §9.3, [SHIFT2.md](SHIFT2.md) §1.3, §2.3, §3.3, [SHIFT3.md](SHIFT3.md) §1.3, §2.3, [SHIFT4.md](SHIFT4.md) §1.3); native codes up to the
-      Bachmann–Howard ordinal, then on all indices below $`\upsilon_1`$ with one level of references, then below $`\Phi_1`$ with nested references and the first blocks ($`\iota(\mathrm{CH}_2) \ge \Phi_1`$), then below $`\Lambda_\Gamma`$ with modules for the fixed points of $`\upsilon`$ ($`\iota(\mathrm{CH}_2) \ge \Lambda_\Gamma`$), then below $`\Lambda_T`$ with nested and decorated blocks ($`\iota(\mathrm{CH}_2) \ge \Lambda_T`$, MODULE-RED⁺, CHAIN⁺, IDX-T), then below $`Z_K`$ with nested levels as slots ($`\iota(\mathrm{CH}_2) \ge Z_K`$, CHAIN-K, IDX-K), then below $`Z_\Xi`$ with absolute codes ($`\iota(\mathrm{CH}_2) \ge Z_\Xi`$, HOST-Γ, IDX-R), then below $`\theta_{\Xi_2}(0)`$ with a collapsing hierarchy over $`\Omega_1`$ and upper nests of $`\le_1`$-atoms ($`\iota(\mathrm{CH}_2) \ge \theta_{\Xi_2}(0)`$, UPPER-HOST, IDX-U), then below $`Z^+`$ with one flat row of $`\le_1`$-items and atom blocks ($`\iota(\mathrm{CH}_2) \ge Z^+`$, ROW2, IDX-3), then below $`Z_\omega`$ with nested rows at every level ($`\iota(\mathrm{CH}_2) \ge Z_\omega`$, ROW$`_j`$, IDX-n), and for $`\mathrm{CH}_3`$ a top with one L1p configuration ($`\iota(\mathrm{CH}_3) \ge Z''_\omega`$, HOST$`_k`$, IDX-ω⁺; by RED-TOWER the chain number may grow with the target), then pair blocks for the stages below $`\omega^\omega`$ ($`\iota(\mathrm{CH}_3) \ge \theta_{\Xi[\omega]}(0)`$, IDX$`^p`$), then past $`\upsilon^*`$ ($`\iota(\mathrm{CH}_3) \ge Z''_\omega \gt \upsilon^*`$, EN=EX, EMB) — proved ([FANFREE.md](FANFREE.md) §10.2, [VEBLEN.md](VEBLEN.md) §2, §9, [THETA.md](THETA.md) §2, §9.2, [SHIFT.md](SHIFT.md) §2, §8.2, §9.2, [SHIFT2.md](SHIFT2.md) §1.2, §2.2, §3.2, [SHIFT3.md](SHIFT3.md) §1.2, §2.2, [SHIFT4.md](SHIFT4.md) §1.2); the step for all
+      sample above $`V_3`$ — proved ([FANFREE.md](FANFREE.md) §1); the step for every $`n`$ on all 3,166 sample matrices below SRO, IDX-ADD among them, and the property (REP) of the program — proved ([FANFREE.md](FANFREE.md) §7.1, §10.1, [VEBLEN.md](VEBLEN.md) §3, §10, [THETA.md](THETA.md) §3, §9.3, [SHIFT.md](SHIFT.md) §3, §8.3, §9.3, [SHIFT2.md](SHIFT2.md) §1.3, §2.3, §3.3, [SHIFT3.md](SHIFT3.md) §1.3, §2.3, [SHIFT4.md](SHIFT4.md) §1.3, §2.3); native codes up to the
+      Bachmann–Howard ordinal, then on all indices below $`\upsilon_1`$ with one level of references, then below $`\Phi_1`$ with nested references and the first blocks ($`\iota(\mathrm{CH}_2) \ge \Phi_1`$), then below $`\Lambda_\Gamma`$ with modules for the fixed points of $`\upsilon`$ ($`\iota(\mathrm{CH}_2) \ge \Lambda_\Gamma`$), then below $`\Lambda_T`$ with nested and decorated blocks ($`\iota(\mathrm{CH}_2) \ge \Lambda_T`$, MODULE-RED⁺, CHAIN⁺, IDX-T), then below $`Z_K`$ with nested levels as slots ($`\iota(\mathrm{CH}_2) \ge Z_K`$, CHAIN-K, IDX-K), then below $`Z_\Xi`$ with absolute codes ($`\iota(\mathrm{CH}_2) \ge Z_\Xi`$, HOST-Γ, IDX-R), then below $`\theta_{\Xi_2}(0)`$ with a collapsing hierarchy over $`\Omega_1`$ and upper nests of $`\le_1`$-atoms ($`\iota(\mathrm{CH}_2) \ge \theta_{\Xi_2}(0)`$, UPPER-HOST, IDX-U), then below $`Z^+`$ with one flat row of $`\le_1`$-items and atom blocks ($`\iota(\mathrm{CH}_2) \ge Z^+`$, ROW2, IDX-3), then below $`Z_\omega`$ with nested rows at every level ($`\iota(\mathrm{CH}_2) \ge Z_\omega`$, ROW$`_j`$, IDX-n), and for $`\mathrm{CH}_3`$ a top with one L1p configuration ($`\iota(\mathrm{CH}_3) \ge Z''_\omega`$, HOST$`_k`$, IDX-ω⁺; by RED-TOWER the chain number may grow with the target), then pair blocks for the stages below $`\omega^\omega`$ ($`\iota(\mathrm{CH}_3) \ge \theta_{\Xi[\omega]}(0)`$, IDX$`^p`$), then past $`\upsilon^*`$ ($`\iota(\mathrm{CH}_3) \ge Z''_\omega \gt \upsilon^*`$, EN=EX, EMB), then past $`\psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$ ($`\iota(\mathrm{CH}_3) \ge Z[0]`$, PSI$`^T`$, EN=EX$`^T`$) — proved ([FANFREE.md](FANFREE.md) §10.2, [VEBLEN.md](VEBLEN.md) §2, §9, [THETA.md](THETA.md) §2, §9.2, [SHIFT.md](SHIFT.md) §2, §8.2, §9.2, [SHIFT2.md](SHIFT2.md) §1.2, §2.2, §3.2, [SHIFT3.md](SHIFT3.md) §1.2, §2.2, [SHIFT4.md](SHIFT4.md) §1.2, §2.4); the step for all
       matrices below SRO, and a map without matrices on all terms — open (with values without L1p it would give $`\iota(\mathrm{CH}_2) \ge \theta_0`$, [FANFREE.md](FANFREE.md) §7.2)
     - L-CERT on $`[\theta_0, \psi_{\Omega_1}(I_0))`$ and above — open
     - L-BMS through $`\Phi_3`$ — blocked: by DOM₂ a pattern of $`\Phi_3`$ without a chain of length 3 stays below $`m_3`$,
@@ -695,7 +700,7 @@ needs "$`\Phi_3(M)`$ is a pattern" (open), and it is about $`R_2^C`$ only.
 Nothing about $`R_2^+`$ itself is in Lean. The results above $`\upsilon_{\omega^3}`$ are on the second page
 [RESTARTS.md](RESTARTS.md), those above $`\Xi_\omega`$ on the third page [REACHES.md](REACHES.md), those beyond $`\Lambda_\varepsilon`$ on
 the fourth page [PINS.md](PINS.md), and those where the skeleton ends, with the levels above it, on the fifth page [BREAK.md](BREAK.md), and the
-results by covering minimality and the level-0 description (the fifth to seventh rounds) on the sixth page [COVER.md](COVER.md), and the eighth to tenth rounds on the seventh page [FANFREE.md](FANFREE.md), and the eleventh and twelfth on the eighth page [VEBLEN.md](VEBLEN.md), and the thirteenth and fourteenth on the ninth page [THETA.md](THETA.md) (with the summary of the earlier rounds and the results on $`R_2^S`$ against $`R_2^C`$, moved there from this page), and the fifteenth to seventeenth on the tenth page [SHIFT.md](SHIFT.md), and the eighteenth to twentieth on the eleventh page [SHIFT2.md](SHIFT2.md), and the twenty-first and twenty-second on the twelfth page [SHIFT3.md](SHIFT3.md), and the twenty-third on the thirteenth page [SHIFT4.md](SHIFT4.md); some results of the first round are on [ROUND1.md](ROUND1.md).
+results by covering minimality and the level-0 description (the fifth to seventh rounds) on the sixth page [COVER.md](COVER.md), and the eighth to tenth rounds on the seventh page [FANFREE.md](FANFREE.md), and the eleventh and twelfth on the eighth page [VEBLEN.md](VEBLEN.md), and the thirteenth and fourteenth on the ninth page [THETA.md](THETA.md) (with the summary of the earlier rounds and the results on $`R_2^S`$ against $`R_2^C`$, moved there from this page), and the fifteenth to seventeenth on the tenth page [SHIFT.md](SHIFT.md), and the eighteenth to twentieth on the eleventh page [SHIFT2.md](SHIFT2.md), and the twenty-first and twenty-second on the twelfth page [SHIFT3.md](SHIFT3.md), and the twenty-third and twenty-fourth on the thirteenth page [SHIFT4.md](SHIFT4.md); some results of the first round are on [ROUND1.md](ROUND1.md).
 
 ## 8. References
 

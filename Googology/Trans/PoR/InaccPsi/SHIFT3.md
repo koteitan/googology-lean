@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the twenty-first and twenty-second rounds: $`\nu_C \ge X_{14}`$ given FRAG, the hierarchies $`\vartheta_D`$ and the counting rule PSI-n, pair blocks, the shapes of $`\Phi_3`$, and LOW
 
-This page continues [SHIFT2.md](SHIFT2.md) (§3 there is the twentieth round); §1 is the twenty-first round and §2 the twenty-second. The twenty-third round is on [SHIFT4.md](SHIFT4.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT2.md](SHIFT2.md) (§3 there is the twentieth round); §1 is the twenty-first round and §2 the twenty-second. The twenty-third and twenty-fourth rounds are on [SHIFT4.md](SHIFT4.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -98,7 +98,7 @@ of the stages below $`T`$. $`\Xi[k]`$ is the end point (below $`\Omega_2`$) of t
   at every higher cardinal, both open in [SHIFT2.md](SHIFT2.md) §3.2.
 - **TOP$`^3`$, Theorem IDX$`^3`$** (proved). A top with a second pair above $`b`$ ($`\mathrm{cn} = 3`$) hosts every code of every stage, so natively $`\iota(\mathrm{CH}_4) \ge Z^{(3)}`$, the least fixed point of
   $`\theta_{\Xi[\omega]}`$. (The referee: correct, but $`Z^{(3)}`$ is only the next fixed point.)
-- Conjectured names: $`\Xi[\omega] = \psi_{\Omega_2}(\Omega_\omega\cdot\omega^\omega)`$ and $`\theta_{\Xi[\omega]}(0) = H(\Xi[\omega])`$.
+- Conjectured names: $`\Xi[\omega] = \psi_{\Omega_2}(\Omega_\omega\cdot\omega^\omega)`$ and $`\theta_{\Xi[\omega]}(0) = H(\Xi[\omega])`$. (The twenty-fourth round proves the first and refutes the second, [SHIFT4.md](SHIFT4.md) §2.4.)
 - **What this adds** (the referee's point on the program, not a defect of the paper): as ordinal bounds, all of §1.2 already follows from the known
   $`\iota(\mathrm{CH}_3) \gt \iota(\mathrm{CH}_2) \gt \nu_C \ge X_{11}`$; its value is that the codes are native module systems for RED-TOWER. By a remark that rests on a conjectured dictionary,
   every index system below $`\Omega_2`$ (any chain number) stays below $`\upsilon^* \lt \theta_0`$, so reaching $`\theta_0`$ needs index systems above that level. (The twenty-second round shows that the
@@ -166,7 +166,7 @@ that the reaches of restarts commute with base change.
 - Upper bounds: still none by an InaccPsi term for $`\iota(\mathrm{CH}_k)`$, $`m_F`$, $`x_F`$, $`C^*_3`$ or $`\nu_C`$.
 - $`\nu_C = \nu_S`$: left: (D1b) and (E4); every η-form tool needs LOW, which is open.
 
-The twenty-second and twenty-third rounds changed this status; see §2.5 and [SHIFT4.md](SHIFT4.md) §1.5.
+The twenty-second to twenty-fourth rounds changed this status; see §2.5 and [SHIFT4.md](SHIFT4.md) §1.5, §2.5.
 
 ### 1.6 Checks of the twenty-first round
 
@@ -188,7 +188,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 1.7 Open
 
-The twenty-second and twenty-third rounds changed this list; the current list is [SHIFT4.md](SHIFT4.md) §1.7.
+The twenty-second to twenty-fourth rounds changed this list; the current list is [SHIFT4.md](SHIFT4.md) §2.7.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs the caps listed in §1.1, and (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$,
   $`f_0`$, $`m_3`$, $`c_0`$.
@@ -344,7 +344,7 @@ and of level 2 if it is in $`[\psi_{\Omega_1}(\Omega_\omega\cdot 2), \psi_{\Omeg
 
 ### 2.5 Status after the twenty-second round
 
-The twenty-third round changed this status; see [SHIFT4.md](SHIFT4.md) §1.5.
+The twenty-third and twenty-fourth rounds changed this status; see [SHIFT4.md](SHIFT4.md) §1.5, §2.5.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{14}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$.
   No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -372,7 +372,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 2.7 Open
 
-The twenty-third round changed this list; the current list is [SHIFT4.md](SHIFT4.md) §1.7.
+The twenty-third and twenty-fourth rounds changed this list; the current list is [SHIFT4.md](SHIFT4.md) §2.7.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps of §2.1 and a lower bound at code $`P'`$ (§2.4); (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
