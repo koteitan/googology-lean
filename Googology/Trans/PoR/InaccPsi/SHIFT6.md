@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the twenty-seventh to twenty-ninth rounds: exact long reaches, the cushion cap, the blocking point B-1 and its repair, the reduction EX-RED$`^w`$, the moved-lower pin, and native codes up to $`\psi_{\Omega_1}(\Omega_\omega\cdot\Omega_2)`$
 
-This page continues [SHIFT5.md](SHIFT5.md) (§2 there is the twenty-sixth round); §1 is the twenty-seventh round, §2 the twenty-eighth, §3 the twenty-ninth. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT5.md](SHIFT5.md) (§2 there is the twenty-sixth round); §1 is the twenty-seventh round, §2 the twenty-eighth, §3 the twenty-ninth; the thirtieth round is on [SHIFT7.md](SHIFT7.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -457,6 +457,8 @@ g \lt a \lt_2 b,\qquad a \le_1 b + q(T),\qquad g \le_1 b + g + V_j(\beta).
 
 ### 3.4 Status after the twenty-ninth round
 
+Superseded by [SHIFT7.md](SHIFT7.md) §1.4.
+
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{23}]`$ given FRAG ($`[0, X_{21}]`$ with 2 reviews; $`X_{22}`$ and $`X_{23}`$ with 1 review of the repair, §3.1).
   The core half holds on $`[0, \nu_C]`$. No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
 - Reaches (given FRAG): exact for every short restart with $`\tau \lt G_2`$ and every long restart with code below $`G(\hat\zeta_3)`$ (2 reviews), and with code below $`\varepsilon_{G(\hat\zeta_G)+1}`$ (1 review);
@@ -484,6 +486,8 @@ Each run was under 60 seconds; none is a proof.
   for $`m = 1, \dots, 7`$, 0 failures, Lean green and identical to Python.
 
 ### 3.6 Open
+
+Superseded by [SHIFT7.md](SHIFT7.md) §1.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs caps past $`G(\hat\zeta_{23})`$ and a lower bound at the code $`P'`$; (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, and an upper bound for $`\iota(\mathrm{CH}_3)`$.

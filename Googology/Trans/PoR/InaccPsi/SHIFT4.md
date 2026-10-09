@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the twenty-third and twenty-fourth rounds: $`\nu_C \ge X_{18}`$ given FRAG, closed and exact reaches, the plateaus at $`\Omega_k`$, the shapes of $`\Phi_3`$, and native codes past $`\psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$
 
-This page continues [SHIFT3.md](SHIFT3.md) (§2 there is the twenty-second round); §1 is the twenty-third round and §2 the twenty-fourth. The twenty-fifth and twenty-sixth rounds are on [SHIFT5.md](SHIFT5.md), the twenty-seventh on [SHIFT6.md](SHIFT6.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT3.md](SHIFT3.md) (§2 there is the twenty-second round); §1 is the twenty-third round and §2 the twenty-fourth. The twenty-fifth and twenty-sixth rounds are on [SHIFT5.md](SHIFT5.md), the twenty-seventh to twenty-ninth on [SHIFT6.md](SHIFT6.md), the thirtieth on [SHIFT7.md](SHIFT7.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -168,7 +168,7 @@ $`\nu_C \ge X_{14}^+ = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2\cdot 2} 
 
 ### 1.5 Status after the twenty-third round
 
-The twenty-fourth to twenty-ninth rounds changed this status; see §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4 and [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4.
+The twenty-fourth to thirtieth rounds changed this status; see §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 and [SHIFT7.md](SHIFT7.md) §1.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{16}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews; $`X_{15}`$ and $`X_{16}`$ rest on tiers proved as lists of
   substitutions); the core half holds on $`[0, \nu_C]`$. No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -198,7 +198,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 1.7 Open
 
-The twenty-fourth to twenty-ninth rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §3.6.
+The twenty-fourth to thirtieth rounds changed this list; the current list is [SHIFT7.md](SHIFT7.md) §1.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps past §1.1 and §1.4 and a lower bound at code $`P'`$; (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
@@ -358,7 +358,7 @@ $`X_{18} \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$).
 
 ### 2.5 Status after the twenty-fourth round
 
-The twenty-fifth to twenty-ninth rounds changed this status; see [SHIFT5.md](SHIFT5.md) §1.4, §2.4 and [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4.
+The twenty-fifth to thirtieth rounds changed this status; see [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 and [SHIFT7.md](SHIFT7.md) §1.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{18}]`$ given FRAG ($`[0, X_{16}]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$. No InaccPsi upper
   bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -386,7 +386,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 2.7 Open
 
-The twenty-fifth to twenty-ninth rounds changed this list; the current list is [SHIFT6.md](SHIFT6.md) §3.6.
+The twenty-fifth to thirtieth rounds changed this list; the current list is [SHIFT7.md](SHIFT7.md) §1.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps past $`G(\hat\zeta_2)`$ and a lower bound at code $`P'`$; (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
