@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 21 回目と 22 回目：FRAG のもとで $`\nu_C \ge X_{14}`$、階層 $`\vartheta_D`$ と数える規則 PSI-n、組のブロック、$`\Phi_3`$ の形、LOW
 
-このページは [SHIFT2-ja.md](SHIFT2-ja.md) の続き（そこの §3 が 20 回目）。§1 が 21 回目、§2 が 22 回目。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT2-ja.md](SHIFT2-ja.md) の続き（そこの §3 が 20 回目）。§1 が 21 回目、§2 が 22 回目。23 回目は [SHIFT4-ja.md](SHIFT4-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -99,7 +99,7 @@ $`b \in C^U_0`$ の集合。これは [SHIFT-ja.md](SHIFT-ja.md) §9.2 の階層
 - **これが足すもの**（計画についての査読者の点で、論文の欠陥ではない）：順序数の評価としては、§1.2 のすべてが知られた
   $`\iota(\mathrm{CH}_3) \gt \iota(\mathrm{CH}_2) \gt \nu_C \ge X_{11}`$ からもう出る。値打ちは、符号が RED-TOWER のための素の部品の系であること。予想する辞書に頼る注意によれば、
   $`\Omega_2`$ より下のどの添字の系も（鎖の数がいくつでも）$`\upsilon^* \lt \theta_0`$ より下にとどまるので、$`\theta_0`$ に届くにはその段より上の添字の系が要る。（22 回目に、この注意の議論は
-  成り立たないと分かり、命題は未解決になった。また添字の段は効かない。§2.2。）
+  成り立たないと分かり、命題は未解決になった。また添字の段は効かない。§2.2。23 回目は $`\upsilon^*`$ の先へ行く素の評価を与える、[SHIFT4-ja.md](SHIFT4-ja.md) §1.2。）
 - **未解決**：段階 $`T \ge \omega^\omega`$（あらすじ、$`\mathrm{cn} = 3`$）。非可算の段階の添字（写しの規則には小さい段階の符号の上にすき間が要るが、$`\Omega_2`$ より下の添字は
   このブロックの形ではそれを与えられない。不可能は証明されていない）。$`\Omega_{\omega+1}`$ と $`\Omega_{\omega\cdot 2}`$（予想：鎖の数は増えなければならず、RED-TOWER が枠組み）。
 
@@ -162,7 +162,7 @@ $`b \in C^U_0`$ の集合。これは [SHIFT-ja.md](SHIFT-ja.md) §9.2 の階層
 - 上からの評価：$`\iota(\mathrm{CH}_k)`$、$`m_F`$、$`x_F`$、$`C^*_3`$、$`\nu_C`$ の InaccPsi の項による評価はまだ無い。
 - $`\nu_C = \nu_S`$：残り：(D1b) と (E4)。η の形の道具はどれも LOW を要し、LOW は未解決。
 
-22 回目でこの状態は変わった。§2.5 を見よ。
+22 回目と 23 回目でこの状態は変わった。§2.5 と [SHIFT4-ja.md](SHIFT4-ja.md) §1.5 を見よ。
 
 ### 1.6 21 回目の確かめ
 
@@ -182,7 +182,7 @@ $`b \in C^U_0`$ の集合。これは [SHIFT-ja.md](SHIFT-ja.md) §9.2 の階層
 
 ### 1.7 未解決
 
-22 回目でこの一覧は変わった。今の一覧は §2.7 にある。
+22 回目と 23 回目でこの一覧は変わった。今の一覧は [SHIFT4-ja.md](SHIFT4-ja.md) §1.7 にある。
 
 - 上からの評価：$`\nu_C`$ について名前の付いた 1 つの組での (P) と (Q′)。(P) には §1.1 に挙げた蓋が要り、(Q′) には $`L(\omega)`$ の等最小のパターンが要る。$`\iota(\mathrm{CH}_2)`$、$`m_F`$、
   $`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価。
@@ -224,7 +224,7 @@ X_{14} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2\cdot 2} + \omega^{G(\t
   $`\psi_{\Omega_{j+1}}(H)`$。例：$`\psi_{\Omega_2}(\Omega_3)`$ は $`\Omega_1`$ より上の $`C^{\Omega_2}_{\psi_{\Omega_3}(\Omega_3)}`$ の最小の元。証明：$`j`$ について上から、次に $`\beta`$ についての帰納法で、3 つの段階
   （標準形は止まらない、小さい標準形は小さい値を持つ、下の値はどれも届く）。帰結：$`\psi_{\Omega_2}(\varepsilon_{\Omega_n+1})`$ は $`n`$ の系の終点。どの $`\psi_\kappa`$ でも成り立つ補題 CONT から
   $`\sup_n \psi_{\Omega_2}(\varepsilon_{\Omega_n+1}) = \theta`$、$`\sup_n \psi_{\Omega_3}(\varepsilon_{\Omega_n+1}) = \theta_2`$。[SHIFT2-ja.md](SHIFT2-ja.md) §2.2 の素の符号の終点 $`\Xi_n`$ が同じ順序数かは、証明されて
-  おらず、使わない。（査読者：2 つの段階は言い切っているだけで、それぞれ短い議論が要る。$`\beta`$ より上の高い基との比べと、項の大きさについての帰納法。）
+  おらず、使わない（23 回目が証明した、[SHIFT4-ja.md](SHIFT4-ja.md) §1.2）。（査読者：2 つの段階は言い切っているだけで、それぞれ短い議論が要る。$`\beta`$ より上の高い基との比べと、項の大きさについての帰納法。[SHIFT4-ja.md](SHIFT4-ja.md) §1.1 で反映した。査読 2 回。）
 - **CNST$`^n`$**（証明済み）。順序数の形の定数がある境より下なのは、その InaccPsi の項の、単位より下の極大の部分項がその境より下のときに限る。だから包の補題 (R4) は
   $`\theta`$ より下のどの符号でも、$`\theta_2`$ より下の乗数でも成り立つ。
 - **Wilken の側**（引用を変えたうえで証明済み）。[W07a] の L.4.3 と L.4.4 はどの段 $`\theta_m`$ でも成り立つ。VEB-THETA$`^n`$ と EXACT-LEVEL$`^n`$ が成り立つ。基の取り替えは形の上で
@@ -238,8 +238,8 @@ X_{14} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2\cdot 2} + \omega^{G(\t
 - **$`[\theta, G_2)`$ の符号**（証明済み）。PSI-θ：$`\theta = \mathrm{ex}^{\Omega_1}_{\theta_2}(0)`$、$`G(\zeta) = \mathrm{ex}^{\Omega_1}_{\theta_2}(\zeta)`$（単位 $`\Omega_2`$ での添字 $`\theta_2`$）。$`\pi_g`$ より上では、包の補題は
   (R4′) の形をとる：$`\tau \in C_g`$ となるのは $`K_\tau \subset H(g)`$ かつ $`\tau \lt \pi_g`$ のときに限る。FRAG のもとで：$`\tau_\nu \lt G(\omega+1)\cdot\omega`$ で EXACT-O$`^\theta`$（行き先は TOP-REG⁺ の
   窓の中にとどまる）、どの $`\tau_\nu \lt G_2`$ でも下からの評価 $`r(\nu) \ge \delta_\nu + o_\nu(\tau_\nu)`$（LB$`^\theta`$）。（査読者：読み方が上への写像なのは $`\pi_{\eta_\nu}`$ より下だけ。上からの評価では、
-  小さいやり直しでの読み方は形から取ること。事実 $`\upsilon_{a+1} = \upsilon_a^\infty`$ は Wilken 2007, APAL 145, Cor 5.10。）
-- **未証明**（論文の言うとおり未解決）：$`\tau_\nu \in [G(\omega+1)\cdot\omega, G_2)`$ での上からの評価（足りない補題は、行き先 $`y \ge \delta_1\cdot\omega`$ での上からの評価の規則 TOP-REG）。
+  小さいやり直しでの読み方は形から取ること。事実 $`\upsilon_{a+1} = \upsilon_a^\infty`$ は Wilken 2007, APAL 145, Cor 5.10。[SHIFT4-ja.md](SHIFT4-ja.md) §1.1 で反映した。）
+- **未証明**（論文の言うとおり未解決）：$`\tau_\nu \in [G(\omega+1)\cdot\omega, G_2)`$ での上からの評価（足りない補題は、行き先 $`y \ge \delta_1\cdot\omega`$ での上からの評価の規則 TOP-REG。23 回目は、この規則が書いたままでは偽であることを示し、直した形を証明し、$`\varphi(\omega, G(\omega+1)+1)`$ までのちょうどの届く先を得た、[SHIFT4-ja.md](SHIFT4-ja.md) §1.1）。
   $`D \ge \theta`$ か $`m_0 \ge \theta`$ の長いやり直し。$`\theta`$ 以上の η ずれ。$`\theta_2`$ 以上の乗数。名前の付いた組での (P) と (Q′)、だから $`\nu_C`$ の InaccPsi による上からの評価。
   P-LOW$`^\theta`$ は (P) の前の元を、この回のどの蓋よりも先に置く。
 
@@ -267,7 +267,7 @@ X_{14} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2\cdot 2} + \omega^{G(\t
 
 - **仮定つき。数えない。** [SHIFT2-ja.md](SHIFT2-ja.md) §3.2 の添字の系で EMB が成り立てば、$`\upsilon^*`$ の先へ行く部品の系により、素の符号で $`\upsilon^* \lt \iota(\mathrm{CH}_3)`$（含意として証明済み）。
 - **未証明**（2 回目の査読の進行を止める点）：EMB を $`[\Phi^\vartheta_\Omega, Z)`$ の符号に帰着したという主張。EMB-2 は混ぜたパラメータについて証明されていて、評価には純なパラメータが要り、
-  2 つの部分をつなぐ必要がある。
+  2 つの部分をつなぐ必要がある。（[SHIFT4-ja.md](SHIFT4-ja.md) §1.2 で直した。査読 2 回：EMB は $`D`$ 全体で成り立ち、素の符号で $`\upsilon^* \lt \iota(\mathrm{CH}_3)`$。）
 - **未解決**：$`\upsilon^*`$ の先へ行く素の評価。「鎖の数は増えなければならない」（系がある符号を宿せないという定理は無い）。$`\omega^\omega`$ 以上の段階と非可算の段階の添字。
 
 ### 2.3 $`\Phi_3`$ の形：3,166 個のうち 3,139 個
@@ -296,7 +296,7 @@ X_{14} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2\cdot 2} + \omega^{G(\t
   導きは 27 個のうち 16 個で確かめた。要るもの：階段の印、その族の補題（あらすじ）、映したブロック 1 つの段階の証明（今は段ごとに確かめただけ）、周期 2 か 4 のブロックの印、
   $`t = 1`$ のための自分を指す印。
 - 査読者の細かい点：「像は弱く増える」は和では偽（評価は 1 行で直る。受け入れた解はその偽の段階を使っていない）。入力の事実 1 つが、前のファイルに無い芯について
-  引かれている（査読者が確かめた）。否定の試しは 20,000 個の解で止め、それを失敗と数える。プログラムの辞書 1 つに 1 文要る。コメントの節の番号が 2 つ違う。
+  引かれている（査読者が確かめた）。否定の試しは 20,000 個の解で止め、それを失敗と数える。プログラムの辞書 1 つに 1 文要る。コメントの節の番号が 2 つ違う。（[SHIFT4-ja.md](SHIFT4-ja.md) §1.3 で反映した。査読 2 回。）
 
 ### 2.4 $`\nu_C = \nu_S`$：$`\psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ より上での η の形と LOW（査読 2 回）
 
@@ -311,7 +311,7 @@ $`[\psi_{\Omega_1}(\Omega_\omega\cdot 2), \psi_{\Omega_1}(\Omega_\omega\cdot 3))
   （FRAG 無しでは $`G_2 \le m_u`$）。符号が $`\mathbb{G}^\vartheta`$ より下のやり直しは自分を越えない。だから CAP-0 が成り立てば LOW は偽（含意として証明済み）。
 - **LOW は決まっていない。** 仮定無しに言えること：LOW$`_x`$ が成り立ち、符号が $`[\mathbb{G}^\vartheta, P')`$ の自分を越える長いやり直しが $`\psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ より下にあるか、
   $`\nu_C \ge Y_1 = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\mathbb{G}^\vartheta+1})`$ か。（2 人目の査読者：符号が $`[\mathbb{G}^\vartheta, P')`$ での CAP-0 の証拠は無く、CROSS-SHARP の型を証明された範囲の
-  先まで読むと逆を予想する。最初の試しの例：$`u = \psi_{\Omega_1}(\Omega_\omega + \Omega_3)`$、符号は $`\psi_{\Omega_2}(\Omega_\omega + \Omega_3)`$。）
+  先まで読むと逆を予想する。最初の試しの例：$`u = \psi_{\Omega_1}(\Omega_\omega + \Omega_3)`$、符号は $`\psi_{\Omega_2}(\Omega_\omega + \Omega_3)`$。23 回目がこれを決めた：$`u`$ で CAP-0 が成り立つ、[SHIFT4-ja.md](SHIFT4-ja.md) §1.4。）
 - **X13⁺**（証明済み、FRAG のもと）：$`\nu_C \ge X_{13}^+ = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Phi^\vartheta_2} + \omega^{\mathbb{G}^\vartheta+1}\cdot 2)`$。これは §2.1 の $`X_{14}`$ より下。
 - **$`\psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ より上での η の形**（証明済み）。**D-UNC$`^{(2)}`$**：$`\eta \ge \Omega_\omega`$ の $`\eta \in D`$ と $`\xi \lt P'`$ について、$`\eta + \xi \in D`$ となるのは、$`\xi`$ の可算な原子が
   $`H(\eta + \xi)`$ より下のときに限る（境が $`\theta`$ から $`P'`$ に伸びる）。**FIX$`^{(2)}`$、DICT$`^{(2)}`$、T$`^B`$**：基 $`\Omega_\omega\cdot 2`$ での定理 T。最初の添字の不動点
@@ -324,7 +324,7 @@ $`[\psi_{\Omega_1}(\Omega_\omega\cdot 2), \psi_{\Omega_1}(\Omega_\omega\cdot 3))
   段 2 のやり直しの間の基の取り替えで（符号の移しを書き出した）。(D1b)：場所を決める道具は $`D`$ で成り立ち、$`\mathbb{G}^\vartheta`$ より下での場所は段 2 では中身がある。
 - **仮定つき。数えない。** 2 回の査読の進行を止める点は記録についてのもの：LOW は未解決なので、これらの結果は仮定をつけて書くこと。LOW が偽なら：
   $`\nu_C \ge Y_1`$、だから主張は $`[0, Y_1]`$ で成り立つ（定理 X$`^{(2)}`$）。また $`r(\psi_{\Omega_1}(\Omega_\omega\cdot 2)) \ge H(\Omega_\omega + \Phi^\vartheta_\Omega)`$。CAP-0 と CAP-1 のもとで（NU-LOW″）：$`x \ge L(\omega)`$、
-  $`\mathrm{Pred}_1(x)`$ の最後の区間は点 $`L(e)`$ からなり、$`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + \omega^{\mathbb{G}^\vartheta+1})`$。これらは予想する名前 $`m_0 = L(0)`$ と $`a_0 = L(\omega)`$ の下半分。
+  $`\mathrm{Pred}_1(x)`$ の最後の区間は点 $`L(e)`$ からなり（$`x \lt \psi_{\Omega_1}(\Omega_\omega\cdot 3)`$ のとき）、$`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + \omega^{\mathbb{G}^\vartheta+1})`$。これらは予想する名前 $`m_0 = L(0)`$ と $`a_0 = L(\omega)`$ の下半分。
   組 $`(x, \nu)`$ では、長いやり直しの TC⁺ の基は、CAP-1 か予想する名前のもとでしか無い。
 - **未証明**（未解決）：LOW。$`(L(\omega), L(\omega+1))`$ での (P)。これには、符号 $`P'`$ のやり直しの、ずれ $`\omega^{P'+1}`$ を越える届く先の下からの評価（「やり直しは自分の $`\delta_1`$ に届く」の段 2 の形：やり直し $`L(\lambda)`$ は $`L(\lambda+\omega+1)`$ に届く）が要る。
   (P1)、つまり符号が $`(\Phi^\vartheta_\Omega + 1, G_2)`$ のものと EXACT-LONG の外の長い符号での、基の取り替えと入れ替えられるちょうどの蓋（§2.1 のちょうどの蓋が基の取り替えと
@@ -333,6 +333,8 @@ $`[\psi_{\Omega_1}(\Omega_\omega\cdot 2), \psi_{\Omega_1}(\Omega_\omega\cdot 3))
   使うところは独立した補題にすること。NU-LOW″ の仮定の 1 つは $`\nu_C`$ ではなく $`x`$ についてのもの。
 
 ### 2.5 22 回目のあとの状態
+
+23 回目でこの状態は変わった。[SHIFT4-ja.md](SHIFT4-ja.md) §1.5 を見よ。
 
 - $`R_2^C`$ での Wilken の主張：$`[0, X_4]`$ では FRAG 無しで、$`[0, X_{14}]`$ では FRAG のもとで（$`[0, X_9]`$ は査読 2 回）、両方の半分とも成り立つ。核の側は $`[0, \nu_C]`$ で成り立つ。
   $`\nu_C`$ の InaccPsi による上からの評価は無い：名前の付いた組での (P) は未解決のまま。
@@ -359,6 +361,8 @@ $`[\psi_{\Omega_1}(\Omega_\omega\cdot 2), \psi_{\Omega_1}(\Omega_\omega\cdot 3))
   食い違い 0。
 
 ### 2.7 未解決
+
+23 回目でこの一覧は変わった。今の一覧は [SHIFT4-ja.md](SHIFT4-ja.md) §1.7 にある。
 
 - 上からの評価：$`\nu_C`$ について名前の付いた 1 つの組での (P) と (Q′)。(P) には §2.1 の蓋と、符号 $`P'`$ での下からの評価（§2.4）が要り、(Q′) には $`L(\omega)`$ の等最小のパターンが要る。
   $`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価。

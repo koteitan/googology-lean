@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 18 回目から 20 回目：FRAG のもとで $`\nu_C \ge X_9`$、$`X_{11}`$、$`X_{12}`$、添字の不動点を越える届く先、順序型によるちょうどの蓋、平らな符号と入れ子の符号、HOST$`_k`$、SYM-Q、GRN、MIN-EXACT
 
-このページは [SHIFT-ja.md](SHIFT-ja.md) の続き（そこの §9 が 17 回目）。§1 が 18 回目、§2 が 19 回目、§3 が 20 回目。21 回目と 22 回目は [SHIFT3-ja.md](SHIFT3-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT-ja.md](SHIFT-ja.md) の続き（そこの §9 が 17 回目）。§1 が 18 回目、§2 が 19 回目、§3 が 20 回目。21 回目と 22 回目は [SHIFT3-ja.md](SHIFT3-ja.md)、23 回目は [SHIFT4-ja.md](SHIFT4-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -450,7 +450,7 @@ $`\Phi^\chi_2 = \Phi^\chi_{\Omega_2}`$、$`\mathbb{G}^\chi = G(\Phi^\chi_2)`$。
 - **TOP$`_\omega`$、定理 IDX-ω**（証明済み）。ブロック $`[r \lt x \lt_2 y \lt a \lt_2 b,\ a \le_1 b,\ r, x \le_1 b + E(\beta)]`$ は鎖の数が 2 で、どの $`\mathrm{TOP}_n`$ も宿す（段は $`a`$ の根）。
   だから $`\iota(\mathrm{CH}_3) \ge Z'_\omega`$。これで §2.2 の未解決の項目 TOP-ω は $`\mathrm{CH}_3`$ について片づく（$`\mathrm{CH}_2`$ では未解決のまま。このブロックは配置 L1p を持つから）。
 - **定理 IDX-ω⁺**（証明済み）。原子 $`\vartheta^2_P(\alpha)`$ を、原子のブロックのように置いた組で符号にし、そのてっぺんも作る。だから素の符号で $`\iota(\mathrm{CH}_3) \ge Z''_\omega \gt Z'_\omega`$。
-  予想する名前：$`\Xi'_\omega = \psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$（$`\Omega_1`$ に相対化）、$`Z''_\omega = H(\Xi'_\omega + \Omega_1)`$。これは、FRAG のもとで知られた評価
+  予想する名前：$`\Xi'_\omega = \psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$（$`\Omega_1`$ に相対化）、$`Z''_\omega = H(\Xi'_\omega + \Omega_1)`$（1 つ目は偽：$`\Xi'_\omega = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_2})`$、[SHIFT4-ja.md](SHIFT4-ja.md) §1.2）。これは、FRAG のもとで知られた評価
   $`\iota(\mathrm{CH}_3) \gt \iota(\mathrm{CH}_2) \gt \nu_C \ge X_{12}`$ よりまだずっと下。
 - **Wilken の "Pure patterns of order 2" の標準形の型**（素の $`R_2`$ について）：点を、要るもの、部品のパラメータ、層の基、項目で閉じると、素のパターン $`N(\gamma)`$ ができる。
   証明済み：閉包は有限で、$`\iota(N(\gamma)) \ge \gamma`$（彼の Thm 4.4 の下の半分）。未解決：基の最小化、Thm 4.4 の上の半分（"Tracking chains revisited" の Cor 5.8 の $`R_2^C`$ の形が要る）、
@@ -505,7 +505,7 @@ $`\Phi^\chi_2 = \Phi^\chi_{\Omega_2}`$、$`\mathbb{G}^\chi = G(\Phi^\chi_2)`$。
 
 ### 3.5 20 回目のあとの状態
 
-21 回目と 22 回目でこの状態は変わった。[SHIFT3-ja.md](SHIFT3-ja.md) §1.5、§2.5 を見よ。
+21〜23 回目でこの状態は変わった。[SHIFT3-ja.md](SHIFT3-ja.md) §1.5、§2.5 と [SHIFT4-ja.md](SHIFT4-ja.md) §1.5 を見よ。
 
 - $`R_2^C`$ での Wilken の主張：$`[0, X_4]`$ では FRAG 無しで、$`[0, X_{12}]`$ では FRAG のもとで（$`[0, X_9]`$ は査読 2 回）、両方の半分とも成り立つ。核の側は $`[0, \nu_C]`$ で成り立つ。
   $`\nu_C`$ の InaccPsi による上からの評価は無い：名前の付いた組での (P) は未解決のまま。
@@ -528,7 +528,7 @@ $`\Phi^\chi_2 = \Phi^\chi_{\Omega_2}`$、$`\mathbb{G}^\chi = G(\Phi^\chi_2)`$。
 
 ### 3.7 未解決
 
-21 回目と 22 回目でこの一覧は変わった。今の一覧は [SHIFT3-ja.md](SHIFT3-ja.md) §2.7 にある。
+21〜23 回目でこの一覧は変わった。今の一覧は [SHIFT4-ja.md](SHIFT4-ja.md) §1.7 にある。
 
 - 上からの評価：$`\nu_C`$ について名前の付いた 1 つの組での (P) と (Q′)。(P) には §3.1 の (V1″) と (V2″) が要り、(Q′) には $`L(\omega)`$ の等最小のパターンが要る。
   $`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価。

@@ -348,7 +348,7 @@ $`X = P^* \cap [x, x^\#)`$、$`\tilde X`$ はその下向きの写しで $`\tild
 - $`\nu_C = \nu_S`$：(HC) のもとで、下向きの写しは $`T`$ による写しで、局所的な部分が成り立ち、そのような平行移動を持たないどの拡張も実現される
   （§11）。(LOC$`_T`$) と (TR$`_T`$) への帰着はそこでは働かない。残り：(R1)〜(R3) と、ET-TF の形の帰着。
 
-13〜22 回目でこの状況は変わった。[THETA-ja.md](THETA-ja.md) の §5 と §9.5、[SHIFT-ja.md](SHIFT-ja.md) の §5、§8.5、§9.5、[SHIFT2-ja.md](SHIFT2-ja.md) §1.5、§2.5、§3.5、[SHIFT3-ja.md](SHIFT3-ja.md) §1.5、§2.5 を見よ。
+13〜23 回目でこの状況は変わった。[THETA-ja.md](THETA-ja.md) の §5 と §9.5、[SHIFT-ja.md](SHIFT-ja.md) の §5、§8.5、§9.5、[SHIFT2-ja.md](SHIFT2-ja.md) §1.5、§2.5、§3.5、[SHIFT3-ja.md](SHIFT3-ja.md) §1.5、§2.5、[SHIFT4-ja.md](SHIFT4-ja.md) §1.5 を見よ。
 
 ## 13. 12 回目の確認
 
@@ -370,4 +370,4 @@ $`X = P^* \cap [x, x^\#)`$、$`\tilde X`$ はその下向きの写しで $`\tild
 
 ## 14. 未解決
 
-13〜22 回目でこの一覧は変わった。今の一覧は [SHIFT3-ja.md](SHIFT3-ja.md) §2.7 にある。
+13〜23 回目でこの一覧は変わった。今の一覧は [SHIFT4-ja.md](SHIFT4-ja.md) §1.7 にある。

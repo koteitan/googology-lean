@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the eighteenth to twentieth rounds: $`\nu_C \ge X_9`$, $`X_{11}`$ and $`X_{12}`$ given FRAG, reaches across index fixed points, exact caps by order type, flat and nested codes, HOST$`_k`$, SYM-Q, GRN and MIN-EXACT
 
-This page continues [SHIFT.md](SHIFT.md) (§9 there is the seventeenth round); §1 is the eighteenth round, §2 the nineteenth and §3 the twentieth. The twenty-first and twenty-second rounds are on [SHIFT3.md](SHIFT3.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT.md](SHIFT.md) (§9 there is the seventeenth round); §1 is the eighteenth round, §2 the nineteenth and §3 the twentieth. The twenty-first and twenty-second rounds are on [SHIFT3.md](SHIFT3.md), the twenty-third on [SHIFT4.md](SHIFT4.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -455,7 +455,7 @@ $`\theta_{\Xi'_\omega}`$, where $`\Xi'_\omega`$ is the least fixed point of $`\v
 - **TOP$`_\omega`$, Theorem IDX-ω** (proved). The block $`[r \lt x \lt_2 y \lt a \lt_2 b,\ a \le_1 b,\ r, x \le_1 b + E(\beta)]`$ has chain number 2 and hosts every $`\mathrm{TOP}_n`$ (the levels are roots of $`a`$).
   So $`\iota(\mathrm{CH}_3) \ge Z'_\omega`$. This settles the open item TOP-ω of §2.2 for $`\mathrm{CH}_3`$ (for $`\mathrm{CH}_2`$ it stays open, since this block has an L1p configuration).
 - **Theorem IDX-ω⁺** (proved). The atom $`\vartheta^2_P(\alpha)`$ is coded by a pair placed like the block of an atom, with its own top. So, natively, $`\iota(\mathrm{CH}_3) \ge Z''_\omega \gt Z'_\omega`$.
-  Conjectured names: $`\Xi'_\omega = \psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$ (relativized to $`\Omega_1`$) and $`Z''_\omega = H(\Xi'_\omega + \Omega_1)`$. This is still far below the known bound
+  Conjectured names: $`\Xi'_\omega = \psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$ (relativized to $`\Omega_1`$) and $`Z''_\omega = H(\Xi'_\omega + \Omega_1)`$ (the first is false: $`\Xi'_\omega = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_2})`$, [SHIFT4.md](SHIFT4.md) §1.2). This is still far below the known bound
   $`\iota(\mathrm{CH}_3) \gt \iota(\mathrm{CH}_2) \gt \nu_C \ge X_{12}`$ given FRAG.
 - **The normal-form template of Wilken's "Pure patterns of order 2"** (for pure $`R_2`$): a closure of a point under its needs, module parameters, layer bases and items gives a native
   pattern $`N(\gamma)`$. Proved: the closure is finite, and $`\iota(N(\gamma)) \ge \gamma`$ (the lower half of his Thm 4.4). Open: base minimization, the upper half of Thm 4.4 (it needs an
@@ -510,7 +510,7 @@ whether this carries over to $`R_2^+`$ at the pair $`(x, \nu)`$.
 
 ### 3.5 Status after the twentieth round
 
-The twenty-first and twenty-second rounds changed this status; see [SHIFT3.md](SHIFT3.md) §1.5, §2.5.
+The twenty-first to twenty-third rounds changed this status; see [SHIFT3.md](SHIFT3.md) §1.5, §2.5 and [SHIFT4.md](SHIFT4.md) §1.5.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{12}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$.
   No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -533,7 +533,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 3.7 Open
 
-The twenty-first and twenty-second rounds changed this list; the current list is [SHIFT3.md](SHIFT3.md) §2.7.
+The twenty-first to twenty-third rounds changed this list; the current list is [SHIFT4.md](SHIFT4.md) §1.7.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs (V1″) and (V2″) of §3.1, and (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$,
   $`m_3`$, $`c_0`$.

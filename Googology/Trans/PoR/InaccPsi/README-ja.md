@@ -86,24 +86,24 @@ X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 
 ```
 
 まで成り立つ（査読 1 回、FRAG 無し、[SHIFT-ja.md](SHIFT-ja.md) §1）。FRAG のもとで $`X_5`$ まで（[SHIFT-ja.md](SHIFT-ja.md) §8.1）、$`X_8`$ まで（査読 2 回、[SHIFT-ja.md](SHIFT-ja.md) §9.1）、$`X_9 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Omega_1} + \omega^{G(\Omega_1)+1} + \omega^{G_2+1})`$ まで（$`G(\Omega_1) = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_1})`$。
-査読 2 回、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1、§2.1）、最初の添字の不動点を越えて $`X_{11}`$ まで（[SHIFT2-ja.md](SHIFT2-ja.md) §2.1）、$`X_{12}`$ まで（[SHIFT2-ja.md](SHIFT2-ja.md) §3.1）、$`X_{13}`$ まで（[SHIFT3-ja.md](SHIFT3-ja.md) §1.1）、そして今は
+査読 2 回、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1、§2.1）、最初の添字の不動点を越えて $`X_{11}`$ まで（[SHIFT2-ja.md](SHIFT2-ja.md) §2.1）、$`X_{12}`$ まで（[SHIFT2-ja.md](SHIFT2-ja.md) §3.1）、$`X_{13}`$ まで（[SHIFT3-ja.md](SHIFT3-ja.md) §1.1）、$`X_{14}`$ まで（[SHIFT3-ja.md](SHIFT3-ja.md) §2.1）、$`X_{15} = \psi_{\Omega_1}(\Omega_\omega + \Omega_3 + \omega^{G(\Omega_3)+1} + \omega^{G_2+1})`$ まで（[SHIFT4-ja.md](SHIFT4-ja.md) §1.1）、そして今は
 
 ```math
-X_{14} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2\cdot 2} + \omega^{G(\theta_2)+1} + \omega^{G_2+1}),\quad G(\theta_2) = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2\cdot 2})
+X_{16} = \psi_{\Omega_1}(\Omega_\omega + \Omega_3 + \theta_2 + \omega^{G(\Omega_3+1)+1}\cdot 2),\quad G(\Omega_3+1) = \psi_{\Omega_2}(\Omega_\omega + \Omega_3 + \theta_2)
 ```
 
-まで成り立つ（査読 1 回。[SHIFT3-ja.md](SHIFT3-ja.md) §2.1）。核の側だけなら $`R_2^C`$ でさらに先、
-$`[0, \nu_C]`$ で証明済み。$`\nu_C`$（FRAG のもとで $`\ge X_{14}`$、FRAG 無しで $`\ge X_4`$）は $`R_2^C`$ が骨組み型でなくなる最初の点（[BREAK-ja.md](BREAK-ja.md) §2）。
+まで成り立つ（査読 1 回。[SHIFT4-ja.md](SHIFT4-ja.md) §1.4）。核の側だけなら $`R_2^C`$ でさらに先、
+$`[0, \nu_C]`$ で証明済み。$`\nu_C`$（FRAG のもとで $`\ge X_{16}`$、FRAG 無しで $`\ge X_4`$）は $`R_2^C`$ が骨組み型でなくなる最初の点（[BREAK-ja.md](BREAK-ja.md) §2）。
 
 ## 3. 証明済みのこと
 
 **まとめ。** $`\upsilon_{\omega\cdot\omega}`$ より下では、主張は $`R_2^C`$ でも $`R_2^S`$ でも成り立つ：$`\upsilon_{\omega\cdot\omega}`$ 未満の
 どの順序数も核に入り、しかも、つぶす引数がすべて $`I_\omega`$ 未満の InaccPsi の標準形の可算な値である（下の定理 LOW）。
 Wilken の点には正確な名前がある：$`\eta \lt \Gamma_0`$ で $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$（定理 T、§4）。のちに $`\upsilon^*`$ より下の
-すべての $`\upsilon`$ 点に（定理 GEN）、$`\eta \lt \Omega_\omega`$ に（GEN⁺、GEN-EXT の場合）広がった。$`R_2^C`$ では主張は $`X_4`$ まで、FRAG のもとで $`X_{14}`$ まで成り立ち、核は $`[0, \nu_C]`$ を含む（§2）。
+すべての $`\upsilon`$ 点に（定理 GEN）、$`\eta \lt \Omega_\omega`$ に（GEN⁺、GEN-EXT の場合）広がった。$`R_2^C`$ では主張は $`X_4`$ まで、FRAG のもとで $`X_{16}`$ まで成り立ち、核は $`[0, \nu_C]`$ を含む（§2）。
 研究は、査読された 4 つの論文ずつの回で進んだ。このページには 1 回目の結果がある（その一部は [ROUND1-ja.md](ROUND1-ja.md)）。のちの回はページ
 [RESTARTS-ja.md](RESTARTS-ja.md)、[REACHES-ja.md](REACHES-ja.md)、[PINS-ja.md](PINS-ja.md)、[BREAK-ja.md](BREAK-ja.md)、[COVER-ja.md](COVER-ja.md)、[FANFREE-ja.md](FANFREE-ja.md)、[VEBLEN-ja.md](VEBLEN-ja.md)、
-[THETA-ja.md](THETA-ja.md)、[SHIFT-ja.md](SHIFT-ja.md)、[SHIFT2-ja.md](SHIFT2-ja.md)、[SHIFT3-ja.md](SHIFT3-ja.md) にある。1〜12 回目のまとめは [THETA-ja.md](THETA-ja.md) §8.1 に、13 回目は [THETA-ja.md](THETA-ja.md) §1〜§7 にある：PAR-SAME、名前
+[THETA-ja.md](THETA-ja.md)、[SHIFT-ja.md](SHIFT-ja.md)、[SHIFT2-ja.md](SHIFT2-ja.md)、[SHIFT3-ja.md](SHIFT3-ja.md)、[SHIFT4-ja.md](SHIFT4-ja.md) にある。1〜12 回目のまとめは [THETA-ja.md](THETA-ja.md) §8.1 に、13 回目は [THETA-ja.md](THETA-ja.md) §1〜§7 にある：PAR-SAME、名前
 $`\Theta_1 = H(\theta)`$ と $`\Theta_A = H(\varepsilon_{\theta+\omega})`$（査読 2 回）、$`\upsilon^*`$ までの主張、プログラムの性質 (REP)、$`\Lambda_\Gamma`$ までの素の符号、$`\nu_C = \nu_S`$ のための (HC)。
 14 回目は [THETA-ja.md](THETA-ja.md) §9 にある：移し替えを全部書いた証明、$`\Theta_\delta`$、$`\Theta_{d\omega}`$、$`\Lambda^*`$、$`\nu_P`$ の名前、$`X_3`$ までの主張、$`\Lambda_T`$ までの素の符号、
 標本の 3,166 個のうち 2,330 個の行列での SRO より下のすべての $`n`$ での段、小さい骨組みのねじれた写し。15 回目は [SHIFT-ja.md](SHIFT-ja.md) にある：
@@ -122,7 +122,9 @@ SRO より下の段、Carlson–Wilken 2012 の逆からは $`\nu_C = \nu_S`$ �
 FRAG のもとで $`X_{13}`$ までの主張（$`\psi_{\Omega_2}`$ を $`\varepsilon_{\Omega_2+1}`$ 全体で計算した）、組のブロックによる $`\mathrm{CH}_3`$ の素の符号、標本の 3,166 個のうち 3,113 個での
 SRO より下の段、$`\nu_C = \nu_S`$ のための η の形の道具はどれも未解決の仮定 LOW を要すること。22 回目は [SHIFT3-ja.md](SHIFT3-ja.md) §2 にある：$`\varepsilon_{\Omega_n+1}`$ より下の
 どの $`\psi_{\Omega_j}`$ も 1 つの数える規則 PSI-n で計算して、FRAG のもとで $`X_{14}`$ までの主張、InaccPsi の名前の付いた最初の素の評価、標本の 3,166 個のうち 3,139 個での
-SRO より下の段、$`\psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$ までの η の形の道具（LOW はまだ未解決）。未解決：$`R_2^C`$ では $`X_{14}`$ より上（FRAG 無しでは $`X_4`$ より上）、
+SRO より下の段、$`\psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$ までの η の形の道具（LOW はまだ未解決）。23 回目は [SHIFT4-ja.md](SHIFT4-ja.md) にある：閉じた届く先（足りなかった上からの評価の規則は
+書いたままでは偽で、直した形を証明した）と、CAP-0 の最初の試しの例を決める $`\Omega_3`$ での $`G`$ の平らによる、FRAG のもとで $`X_{16}`$ までの主張、$`\upsilon^*`$ の先へ行く
+最初の素の評価、標本の 3,166 個のうち 3,163 個での SRO より下の段（LOW はまだ未解決）。未解決：$`R_2^C`$ では $`X_{16}`$ より上（FRAG 無しでは $`X_4`$ より上）、
 $`R_2^S`$ では $`\upsilon_{\omega^3}`$ より上の両方の半分；$`R_2^S = R_2^C`$（最初の場合 $`\nu_C = \nu_S`$ には、長いやり直しの届く先が要る）；$`\theta_0`$ より下の下界；
 最初の扇に到達不能基数が要るか；$`C^*_3`$ の InaccPsi による上からの評価（$`C^*_3`$ は $`\omega_1^{CK}`$ より下、Carlson 2009, Thm 15.2）。
 
@@ -212,7 +214,7 @@ $`R_2^S`$ では $`\upsilon_{\omega^3}`$ より上の両方の半分；$`R_2^S =
 
 **$`\upsilon_{\omega^3}`$ まで、FRAG なしで**（2026-10、$`R_2^C`$）。定理 CORE-C$`^\Xi`$ で $`[0, \Xi_\omega]`$ まで延びた
 （[RESTARTS-ja.md](RESTARTS-ja.md) §3）。さらに $`[0, \Lambda_\varepsilon)`$ と $`[0, \rho_{\Theta_P})`$ まで延びた（[REACHES-ja.md](REACHES-ja.md) §2）。
-さらに $`[0, \rho_{\Theta_A+\omega^2})`$ まで（[PINS-ja.md](PINS-ja.md) §2）。さらに $`[0, \rho_{\Theta_{d\omega}})`$ まで、さらに $`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ まで（[BREAK-ja.md](BREAK-ja.md) §2、§4）、今は $`\nu_C \ge X_4`$（[SHIFT-ja.md](SHIFT-ja.md) §1）、FRAG のもとで $`\nu_C \ge X_5`$（[SHIFT-ja.md](SHIFT-ja.md) §8.1）、FRAG のもとで $`\nu_C \ge X_8`$（[SHIFT-ja.md](SHIFT-ja.md) §9.1）、FRAG のもとで $`\nu_C \ge X_9`$（[SHIFT2-ja.md](SHIFT2-ja.md) §1.1）、FRAG のもとで $`\nu_C \ge X_{11}`$（[SHIFT2-ja.md](SHIFT2-ja.md) §2.1）、FRAG のもとで $`\nu_C \ge X_{13}`$（[SHIFT3-ja.md](SHIFT3-ja.md) §1.1）、FRAG のもとで $`\nu_C \ge X_{14}`$（[SHIFT3-ja.md](SHIFT3-ja.md) §2.1）。
+さらに $`[0, \rho_{\Theta_A+\omega^2})`$ まで（[PINS-ja.md](PINS-ja.md) §2）。さらに $`[0, \rho_{\Theta_{d\omega}})`$ まで、さらに $`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ まで（[BREAK-ja.md](BREAK-ja.md) §2、§4）、今は $`\nu_C \ge X_4`$（[SHIFT-ja.md](SHIFT-ja.md) §1）、FRAG のもとで $`\nu_C \ge X_5`$（[SHIFT-ja.md](SHIFT-ja.md) §8.1）、FRAG のもとで $`\nu_C \ge X_8`$（[SHIFT-ja.md](SHIFT-ja.md) §9.1）、FRAG のもとで $`\nu_C \ge X_9`$（[SHIFT2-ja.md](SHIFT2-ja.md) §1.1）、FRAG のもとで $`\nu_C \ge X_{11}`$（[SHIFT2-ja.md](SHIFT2-ja.md) §2.1）、FRAG のもとで $`\nu_C \ge X_{13}`$（[SHIFT3-ja.md](SHIFT3-ja.md) §1.1）、FRAG のもとで $`\nu_C \ge X_{14}`$（[SHIFT3-ja.md](SHIFT3-ja.md) §2.1）、FRAG のもとで $`\nu_C \ge X_{15}`$ と $`\nu_C \ge X_{16}`$（[SHIFT4-ja.md](SHIFT4-ja.md) §1.1、§1.4）。
 
 - **補題 PT**（査読 1 回）。$`Q`$ を Carlson 2009, Def 5.6 の完全な意味でのパターンとする。$`R_2^C`$ の中の $`Q`$ のどの写しも
   $`Q`$ の点を $`\ge v`$ に置くなら、$`[0, v] \subseteq \mathrm{Core}(R_2^C)`$（Carlson 2009, Lemma 15.11, Thms 14.10, 14.14）。
@@ -277,10 +279,11 @@ DICH；R-INC；型 (ii) の段（MAX2、RED-d、FIRST2、UPCOPY、予想 CORE-2 
   $`Z_\Xi`$ 以上。$`Z_\Xi`$ は $`\upsilon`$ の上の Veblen 型の関数 $`\theta_\Delta`$ の階層での $`\theta_{\Gamma_{\Omega_1+1}}`$ の最小の不動点（予想する名前は $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\Gamma_{\Omega_1+1}+\Omega_1})`$）。さらに（査読 1 回、[SHIFT-ja.md](SHIFT-ja.md) §9.2）：
   $`\theta_{\Xi_2}(0)`$ 以上。ここで $`\Xi_2 = \vartheta_{\varepsilon_{\Omega_2+1}}(0)`$、$`\vartheta`$ は $`\Omega_1`$ の上のつぶす階層（$`\Xi_2 = \psi_{\Omega_2}(\varepsilon_{\Omega_2+1})`$、つまり $`\Omega_1`$ に相対化した Bachmann–Howard 順序数、[SHIFT3-ja.md](SHIFT3-ja.md) §1.1）。さらに（査読 1 回、[SHIFT2-ja.md](SHIFT2-ja.md) §1.2）：
   $`Z^+`$ 以上。$`Z^+`$ は $`\theta_{\Xi_2^+}`$ の最小の不動点で、$`\Xi_2^+ = \vartheta_\Psi(0) \gt \Xi_2`$、$`\Psi`$ は $`\Omega_2`$ の上の同じ種類の階層から来る。さらに（査読 1 回、[SHIFT2-ja.md](SHIFT2-ja.md) §2.2）：
-  $`Z_\omega = \sup_n Z_n`$ 以上。$`Z_n`$ は、$`\Omega_1, \dots, \Omega_{n-1}`$ の上の同じ種類の階層での $`\theta_{\Xi_n}`$ の最小の不動点（予想：$`Z_\omega = \Theta_1`$）。
+  $`Z_\omega = \sup_n Z_n`$ 以上。$`Z_n`$ は、$`\Omega_1, \dots, \Omega_{n-1}`$ の上の同じ種類の階層での $`\theta_{\Xi_n}`$ の最小の不動点（予想：$`Z_\omega = \Theta_1`$。その下半分は証明済み、[SHIFT4-ja.md](SHIFT4-ja.md) §1.2）。
   $`\mathrm{CH}_k`$ について（査読 1 回、[SHIFT2-ja.md](SHIFT2-ja.md) §3.2）：鎖の数（L1p でつながった組の最長の鎖）が $`k-1`$ 以下の RF で扇の無いどのパターンも
   $`\iota(\mathrm{CH}_k)`$ より下にあり、素の符号で $`\iota(\mathrm{CH}_3) \ge Z''_\omega \gt Z_\omega`$。さらに（査読 1 回、[SHIFT3-ja.md](SHIFT3-ja.md) §1.2）組のブロックにより素の符号で $`\iota(\mathrm{CH}_3) \ge \theta_{\Xi[\omega]}(0) \gt Z''_\omega`$。素の $`\theta_{\Xi_2}(0)`$ は
-  $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\psi_{\Omega_2}(\varepsilon_{\Omega_2+1})})`$ 以上（査読 1 回、[SHIFT3-ja.md](SHIFT3-ja.md) §2.2）。InaccPsi の名前が証明された最初の素の評価（$`\upsilon^*`$ より下）。
+  $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\psi_{\Omega_2}(\varepsilon_{\Omega_2+1})})`$ 以上（査読 1 回、[SHIFT3-ja.md](SHIFT3-ja.md) §2.2）。InaccPsi の名前が証明された最初の素の評価（$`\upsilon^*`$ より下）。さらに（査読 1 回、[SHIFT4-ja.md](SHIFT4-ja.md) §1.2）素の符号で $`\iota(\mathrm{CH}_3) \ge Z''_\omega \gt \theta_{\Xi'_\omega}(0) \ge \upsilon^*`$。
+  $`\upsilon^*`$ の先へ行く最初の素の評価で、$`\Xi'_\omega = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_2})`$。移しで $`\theta_{\Xi'_\omega}(0) \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Omega_2})`$（どちらも知られた $`\iota(\mathrm{CH}_2) \gt \nu_C`$ より下）。
   以前から：$`C^*_2 = \{\upsilon_\omega, \upsilon_{\omega+1}\}`$。
 - **補題 TOP2**（2026-10、査読 1 回）。どの $`\alpha \lt m_3`$ にも、$`\alpha \lt x \lt y \lt m_3`$ となる長さ 2 の鎖 $`x \lt_2 y`$ がある。
   だから $`m_3`$ は長さ 2 の鎖の極限で、FRAG なしで $`m_3 \ge \upsilon_{\omega\cdot\omega}`$。
@@ -302,17 +305,17 @@ DICH；R-INC；型 (ii) の段（MAX2、RED-d、FIRST2、UPCOPY、予想 CORE-2 
 
 **証明されていないこと：**
 
-- **$`R_2^C`$ で FRAG のもとで $`X_{14}`$ より上（FRAG 無しで $`X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$ より上）、$`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上での主張**、両方の半分（$`\nu_C`$ の InaccPsi による
+- **$`R_2^C`$ で FRAG のもとで $`X_{16}`$ より上（FRAG 無しで $`X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$ より上）、$`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上での主張**、両方の半分（$`\nu_C`$ の InaccPsi による
   上からの評価があれば $`\nu_C`$ まで出る。それには名前の付いた 1 つの組での 2 つの $`\le_1`$ の命題 (P) と (Q) だけが要り、どちらも長いやり直しの届く先に
-  ついての命題、[SHIFT-ja.md](SHIFT-ja.md) §1。(Q) は左端より下の届く先の知られた上からの評価からは出ない、§8.1。(P) には非可算のずれ、つまり最初の添字の不動点の先を越える届く先が要る、§9.1、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1。道具は今は順序型によるちょうどの蓋とともに $`\theta`$ より下の η ずれまで届くが、(P) にはもっと要る、[SHIFT3-ja.md](SHIFT3-ja.md) §1.1、§2.1）。$`\Theta_A`$ より上の
-  やり直しの届く先（$`\Theta_A`$ そのものでの届く先は今は分かっている）と、[SHIFT3-ja.md](SHIFT3-ja.md) §2.7、[COVER-ja.md](COVER-ja.md) §9、[BREAK-ja.md](BREAK-ja.md) §10、[PINS-ja.md](PINS-ja.md) §6、[REACHES-ja.md](REACHES-ja.md) §7、[RESTARTS-ja.md](RESTARTS-ja.md) §6 の残り。
+  ついての命題、[SHIFT-ja.md](SHIFT-ja.md) §1。(Q) は左端より下の届く先の知られた上からの評価からは出ない、§8.1。(P) には非可算のずれ、つまり最初の添字の不動点の先を越える届く先が要る、§9.1、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1。道具は今は順序型によるちょうどの蓋とともに $`\theta`$ より下の η ずれまで届き、[SHIFT3-ja.md](SHIFT3-ja.md) §1.1、§2.1、さらに $`\psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$ より下の η ずれと $`G(\Omega_3+1)`$ より下の符号まで届くが、[SHIFT4-ja.md](SHIFT4-ja.md) §1.1、§1.4、(P) にはもっと要る）。$`\Theta_A`$ より上の
+  やり直しの届く先（$`\Theta_A`$ そのものでの届く先は今は分かっている）と、[SHIFT4-ja.md](SHIFT4-ja.md) §1.7、[COVER-ja.md](COVER-ja.md) §9、[BREAK-ja.md](BREAK-ja.md) §10、[PINS-ja.md](PINS-ja.md) §6、[REACHES-ja.md](REACHES-ja.md) §7、[RESTARTS-ja.md](RESTARTS-ja.md) §6 の残り。
 - **$`R_2^S = R_2^C`$**：$`\le_1`$ の逆向き $`C \Rightarrow S`$ は、$`\kappa_C`$ より上の後続の段で $`\alpha \notin G_C`$ のとき未解決。
   $`\le_2`$ の逆向きは、(ii) の型の段で未解決（$`\Pi_2`$ 文を上向きに移すことが要るが、上向きの 2-反映でも持ち上げでも
   得られない。いまは段ごとに 1 つの組 $`(a^*, \beta)`$ の話で、$`\kappa_C`$ より下では予想 CORE-2 と同値。残りは PIN と LOW）。
   Σ2-GAP、INC、W(C)、(R)、AGR、$`\beta_0 = \infty`$ も未解決（これらの言葉は [THETA-ja.md](THETA-ja.md) §8.2 で定める）。定理 CC とすべての証明書は $`R_2^C`$ の話。
 - **$`\theta_0`$ より下の下界**（査読：この目標に向けた止める穴。本文の誤りではない。$`V_3`$ より上の標本の決まらない 26 個の極限の
-  跳びは今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §1。SRO より下の段は今は標本の 3,166 個のうち 3,139 個で、すべての $`n`$ で証明済み、
-  [FANFREE-ja.md](FANFREE-ja.md) §7.1、§10.1、[VEBLEN-ja.md](VEBLEN-ja.md) §3、§10、[THETA-ja.md](THETA-ja.md) §3、§9.3、[SHIFT-ja.md](SHIFT-ja.md) §3、§8.3、§9.3、[SHIFT2-ja.md](SHIFT2-ja.md) §1.3、§2.3、§3.3、[SHIFT3-ja.md](SHIFT3-ja.md) §1.3、§2.3）：$`\theta_0`$ 未満のすべての
+  跳びは今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §1。SRO より下の段は今は標本の 3,166 個のうち 3,163 個で、すべての $`n`$ で証明済み、
+  [FANFREE-ja.md](FANFREE-ja.md) §7.1、§10.1、[VEBLEN-ja.md](VEBLEN-ja.md) §3、§10、[THETA-ja.md](THETA-ja.md) §3、§9.3、[SHIFT-ja.md](SHIFT-ja.md) §3、§8.3、§9.3、[SHIFT2-ja.md](SHIFT2-ja.md) §1.3、§2.3、§3.3、[SHIFT3-ja.md](SHIFT3-ja.md) §1.3、§2.3、[SHIFT4-ja.md](SHIFT4-ja.md) §1.3）：$`\theta_0`$ 未満のすべての
   $`\varepsilon`$ 数の項から SRO 未満の標準形のトリオ行列への順序を保つ埋め込み $`\mu`$ と、SRO 未満のすべての行列での
   S-RED の局所的な段。$`G_B`$ の外に 4 つの族がある：(M1) 項の中の非可算な $`\kappa`$、$`c`$、$`g`$。(M2)
   $`\Omega_{\xi+1}`$ のような後続の添字。(M3) $`\Omega_{\Omega_\omega}`$ のような非可算な添字。(M4) $`\psi_{\Omega_1}(\Omega_\omega)`$ より下の土台
@@ -403,7 +406,9 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       $`\nu_C \ge X_{11}`$ として $`X_{11}`$ まで — FRAG のもとで証明済み（D′-UNC、DICT、EXACT-V、MULTI-RC$`^U`$、PHI$`^U`$、R-CAP$`^U`$、CEIL$`^U`$、定理 X11。[SHIFT2-ja.md](SHIFT2-ja.md) §2.1）。
       $`\nu_C \ge X_{12}`$ として $`X_{12}`$ まで — FRAG のもとで証明済み（NO-PHI、PSI2-χ、EXACT-O、EXACT-LONG、R-CAP$`^\chi`$、CEIL$`^\chi`$、定理 X12。[SHIFT2-ja.md](SHIFT2-ja.md) §3.1）。
       $`\nu_C \ge X_{13}`$ として $`X_{13}`$ まで — FRAG のもとで証明済み（TOP-REG-FAR′、VEB-THETA$`^\vartheta`$、PSI2-θ、EXACT-O$`^\vartheta`$、R-CAP$`^\vartheta`$、CEIL$`^\vartheta`$、定理 X13。[SHIFT3-ja.md](SHIFT3-ja.md) §1.1）。$`\nu_C \ge X_{14}`$ として $`X_{14}`$ まで — FRAG のもとで証明済み
-      （PSI-n、CNST$`^n`$、EXACT-O$`^n`$、R-CAP$`^\theta`$、CEIL$`^\theta`$、定理 X14。[SHIFT3-ja.md](SHIFT3-ja.md) §2.1）
+      （PSI-n、CNST$`^n`$、EXACT-O$`^n`$、R-CAP$`^\theta`$、CEIL$`^\theta`$、定理 X14。[SHIFT3-ja.md](SHIFT3-ja.md) §2.1）。$`\nu_C \ge X_{15}`$ として $`X_{15}`$ まで — FRAG のもとで証明済み
+      （CLOSED-REACH、TOP-REG$`^\omega`$、EXACT-CL、$`\zeta^*`$ より下の層、定理 X15。[SHIFT4-ja.md](SHIFT4-ja.md) §1.1）。$`\nu_C \ge X_{16}`$ として $`X_{16}`$ まで — FRAG のもとで証明済み
+      （PLATEAU、D-UNC$`^Z`$、θ⁺ の層、R-U、定理 X16。[SHIFT4-ja.md](SHIFT4-ja.md) §1.4）
     - $`R_2^C`$ の核は $`\rho_{\Theta_{d\omega}}`$ までと、$`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ で — 証明済み（CORE-C$`^{d\omega}`$、CAP、NU-CT。[BREAK-ja.md](BREAK-ja.md)）
   - **B** 上界 $`\mathrm{Core}(R_2^+) \subseteq \psi_{\Omega_1}(I_\omega)`$ — 未解決
     - B0 最小の鎖への帰着（定理 CC） — $`R_2^C`$ で証明済み
@@ -420,11 +425,12 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       $`t`$ より下の 1 点での 3 つの関係（[FANFREE-ja.md](FANFREE-ja.md) §7.4）
     - B-NU $`\nu_C`$ の InaccPsi による上からの評価 — 未解決。名前の付いた 1 つの組での 2 つの $`\le_1`$ の命題 (P) と (Q) に帰着し、どちらも
       長いやり直しの届く先についての命題（NU-MIN、CPB-S。ずらしの判定 SHIFT は証明済み、名前の付いた場合は未解決。[SHIFT-ja.md](SHIFT-ja.md) §1）。両方を満たす組の右端は
-      FRAG のもとで $`\ge X_{14}`$ で、(Q) は左端より下の届く先の知られた上からの評価からは出ない（CL、P-LOW、Q-OBST。[SHIFT-ja.md](SHIFT-ja.md) §8.1）。
+      FRAG のもとで $`\ge X_{16}`$ で、(Q) は左端より下の届く先の知られた上からの評価からは出ない（CL、P-LOW、Q-OBST。[SHIFT-ja.md](SHIFT-ja.md) §8.1）。
       (P) には非可算のずれを越える届く先が要り、(Q) は 1 つの等最小の集合についての命題 (Q′) に弱められる（P-UNC、CPB-LOC。[SHIFT-ja.md](SHIFT-ja.md) §9.1）。
       (P) には、最初の添字の不動点の先での届く先の上からの評価と符号が要る（[SHIFT2-ja.md](SHIFT2-ja.md) §1.1）。今は順序型によるちょうどの蓋、鋭い越え方、η ずれが
-      $`\theta`$ まで届く（[SHIFT2-ja.md](SHIFT2-ja.md) §2.1、§3.1、[SHIFT3-ja.md](SHIFT3-ja.md) §1.1、§2.1。予想 EXACT-PHI は偽）が、(P) にはまだその先の蓋と η ずれが要る。次に足りない
-      補題は、行き先が $`\delta_1\cdot\omega`$ より先での上からの評価の規則 TOP-REG
+      $`\theta`$ まで届く（[SHIFT2-ja.md](SHIFT2-ja.md) §2.1、§3.1、[SHIFT3-ja.md](SHIFT3-ja.md) §1.1、§2.1。予想 EXACT-PHI は偽）。さらに閉じた届く先（$`\delta_1\cdot\omega`$ より先の文字どおりの規則 TOP-REG は偽で、直した形を証明した）により、$`\varphi(\omega, G(\omega+1)+1)`$ までの
+      ちょうどの蓋、$`D \lt G_2`$ の長いやり直し、$`\psi_{\Omega_2}(\Omega_\omega + \Omega_2)`$ より下の η ずれ、$`G(\Omega_3+1)`$ より下の符号に届く（[SHIFT4-ja.md](SHIFT4-ja.md) §1.1、§1.4）が、(P) にはまだ
+      その先の蓋が要る。次に足りない補題は GAP$`_j`$ と ROOT-CL、そして $`\eta \ge \Omega_3`$ の層
     - B2 $`R_2^+`$ での $`\lt_2`$ の有限集合による判定 — 証明済み（T1、T2）。一様な形（すべての $`k`$ に 1 つの写し）が
       必要条件でもあるかは $`R_2^+`$ で未解決（+ の無い $`R_2`$ では成り立つと Wilken 2021, 6 ページが言う）
     - B3 $`0, +, \le, \le_1, \le_2`$ を保つ基の付け替え — $`R_2^+`$ が骨組み型の所で証明済み（定理 FRAG2。FRAG そのものも
@@ -472,7 +478,8 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       止めず、止めうるのは場所だけ（[SHIFT-ja.md](SHIFT-ja.md) §9.4）。今は写しの計画に錨の写しが要らないので、天井の下の場所は障害でなく、遠い頭には
       場所がある（RE-PLACE、DOUBLE-FAR。[SHIFT2-ja.md](SHIFT2-ja.md) §1.4）。今は最初の添字の不動点より下のまたぎはどれもちょうど置ける
       （MIN-EXACT、SPAN-PLACE、RES-ALL\*。[SHIFT2-ja.md](SHIFT2-ja.md) §2.4）。残り：ずれが非可算の深いまたぎ (D1b) と、$`[x^\#, \nu)`$ と交わる集合。Carlson–Wilken 2012 の逆からはこれらは出ず（[SHIFT2-ja.md](SHIFT2-ja.md) §3.4）、今の道具は未解決の仮定 LOW のもとでしかそこに届かない（[SHIFT3-ja.md](SHIFT3-ja.md) §1.4）。その仮定は今は $`\nu_C \lt \psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$ に弱まり、
-      LOW そのものは自分を越えるやり直しの蓋に帰着した。それは未解決（[SHIFT3-ja.md](SHIFT3-ja.md) §2.4）
+      LOW そのものは自分を越えるやり直しの蓋に帰着した（[SHIFT3-ja.md](SHIFT3-ja.md) §2.4）。その蓋は今は最初の試しの例と $`G(\Omega_3+1)`$ より下のどの符号でも
+      成り立ち、LOW はまだ未解決（[SHIFT4-ja.md](SHIFT4-ja.md) §1.4）
     - A7 $`R_1^+`$ の相対化したパターンと、順序数とパターンの間の一様な対応（Wilken が予告） — 証明済み（RC-PIN、RC、U、
       UNIF。[PINS-ja.md](PINS-ja.md) §1。閉包は有限（CL-FIN）で、具体的なピンのパターン（EXPL）、[BREAK-ja.md](BREAK-ja.md) §4）。
       対応が初等再帰的であること — 概略だけ
@@ -482,8 +489,8 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       MU-0 と MU-B0 も（段 0 の (M4)。核には何も足さない）。残り：段 1 以上の (M4)、(M1)–(M3)、SRO 未満での局所的な段
       — 未解決（これらがあれば最初の扇に到達不能基数が要る、RED-HM、[COVER-ja.md](COVER-ja.md) §5.3）。SRO でのいちばん上の段と、いくつかの
       一様な段の族 — 具体的なパターンについて証明済み（[COVER-ja.md](COVER-ja.md) §6.1）。$`V_3`$ より上の標本の決まらない
-      26 個の極限の跳び — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §1）。SRO より下の標本の 3,166 個のうち 3,139 個（IDX-ADD を含む）での、すべての $`n`$ での段と、プログラムの性質 (REP) — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §7.1、§10.1、[VEBLEN-ja.md](VEBLEN-ja.md) §3、§10、[THETA-ja.md](THETA-ja.md) §3、§9.3、[SHIFT-ja.md](SHIFT-ja.md) §3、§8.3、§9.3、[SHIFT2-ja.md](SHIFT2-ja.md) §1.3、§2.3、§3.3、[SHIFT3-ja.md](SHIFT3-ja.md) §1.3、§2.3）。Bachmann–Howard
-      順序数までの素の符号、そして $`\upsilon_1`$ より下のすべての添字と 1 段の参照での、さらに入れ子の参照と最初のブロックで $`\Phi_1`$ より下での、さらに $`\upsilon`$ の不動点のための部品で $`\Lambda_\Gamma`$ より下での（$`\iota(\mathrm{CH}_2) \ge \Lambda_\Gamma`$）、さらに入れ子の部品と飾りの付いた部品で $`\Lambda_T`$ より下での（$`\iota(\mathrm{CH}_2) \ge \Lambda_T`$、MODULE-RED⁺、CHAIN⁺、IDX-T）、さらに枠としての入れ子の段で $`Z_K`$ より下での（$`\iota(\mathrm{CH}_2) \ge Z_K`$、CHAIN-K、IDX-K）、さらに絶対的な符号で $`Z_\Xi`$ より下での（$`\iota(\mathrm{CH}_2) \ge Z_\Xi`$、HOST-Γ、IDX-R）、さらに $`\Omega_1`$ の上のつぶす階層と $`\le_1`$ の原子の上の入れ子で $`\theta_{\Xi_2}(0)`$ より下での素の符号（$`\iota(\mathrm{CH}_2) \ge \theta_{\Xi_2}(0)`$、UPPER-HOST、IDX-U）、さらに $`\le_1`$ の項目の平らな 1 列と原子のブロックで $`Z^+`$ より下での素の符号（$`\iota(\mathrm{CH}_2) \ge Z^+`$、ROW2、IDX-3）、さらにどの段にも入れ子の列を置いて $`Z_\omega`$ より下での素の符号（$`\iota(\mathrm{CH}_2) \ge Z_\omega`$、ROW$`_j`$、IDX-n）、さらに $`\mathrm{CH}_3`$ について配置 L1p を 1 つ持つてっぺん（$`\iota(\mathrm{CH}_3) \ge Z''_\omega`$、HOST$`_k`$、IDX-ω⁺。RED-TOWER により鎖の数は行き先とともに増やしてよい）、さらに $`\omega^\omega`$ より下の段階のための組のブロック（$`\iota(\mathrm{CH}_3) \ge \theta_{\Xi[\omega]}(0)`$、IDX$`^p`$） — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §10.2、[VEBLEN-ja.md](VEBLEN-ja.md) §2、§9、[THETA-ja.md](THETA-ja.md) §2、§9.2、[SHIFT-ja.md](SHIFT-ja.md) §2、§8.2、§9.2、[SHIFT2-ja.md](SHIFT2-ja.md) §1.2、§2.2、§3.2、[SHIFT3-ja.md](SHIFT3-ja.md) §1.2、§2.2）。
+      26 個の極限の跳び — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §1）。SRO より下の標本の 3,166 個のうち 3,163 個（IDX-ADD を含む）での、すべての $`n`$ での段と、プログラムの性質 (REP) — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §7.1、§10.1、[VEBLEN-ja.md](VEBLEN-ja.md) §3、§10、[THETA-ja.md](THETA-ja.md) §3、§9.3、[SHIFT-ja.md](SHIFT-ja.md) §3、§8.3、§9.3、[SHIFT2-ja.md](SHIFT2-ja.md) §1.3、§2.3、§3.3、[SHIFT3-ja.md](SHIFT3-ja.md) §1.3、§2.3、[SHIFT4-ja.md](SHIFT4-ja.md) §1.3）。Bachmann–Howard
+      順序数までの素の符号、そして $`\upsilon_1`$ より下のすべての添字と 1 段の参照での、さらに入れ子の参照と最初のブロックで $`\Phi_1`$ より下での、さらに $`\upsilon`$ の不動点のための部品で $`\Lambda_\Gamma`$ より下での（$`\iota(\mathrm{CH}_2) \ge \Lambda_\Gamma`$）、さらに入れ子の部品と飾りの付いた部品で $`\Lambda_T`$ より下での（$`\iota(\mathrm{CH}_2) \ge \Lambda_T`$、MODULE-RED⁺、CHAIN⁺、IDX-T）、さらに枠としての入れ子の段で $`Z_K`$ より下での（$`\iota(\mathrm{CH}_2) \ge Z_K`$、CHAIN-K、IDX-K）、さらに絶対的な符号で $`Z_\Xi`$ より下での（$`\iota(\mathrm{CH}_2) \ge Z_\Xi`$、HOST-Γ、IDX-R）、さらに $`\Omega_1`$ の上のつぶす階層と $`\le_1`$ の原子の上の入れ子で $`\theta_{\Xi_2}(0)`$ より下での素の符号（$`\iota(\mathrm{CH}_2) \ge \theta_{\Xi_2}(0)`$、UPPER-HOST、IDX-U）、さらに $`\le_1`$ の項目の平らな 1 列と原子のブロックで $`Z^+`$ より下での素の符号（$`\iota(\mathrm{CH}_2) \ge Z^+`$、ROW2、IDX-3）、さらにどの段にも入れ子の列を置いて $`Z_\omega`$ より下での素の符号（$`\iota(\mathrm{CH}_2) \ge Z_\omega`$、ROW$`_j`$、IDX-n）、さらに $`\mathrm{CH}_3`$ について配置 L1p を 1 つ持つてっぺん（$`\iota(\mathrm{CH}_3) \ge Z''_\omega`$、HOST$`_k`$、IDX-ω⁺。RED-TOWER により鎖の数は行き先とともに増やしてよい）、さらに $`\omega^\omega`$ より下の段階のための組のブロック（$`\iota(\mathrm{CH}_3) \ge \theta_{\Xi[\omega]}(0)`$、IDX$`^p`$）、さらに $`\upsilon^*`$ の先（$`\iota(\mathrm{CH}_3) \ge Z''_\omega \gt \upsilon^*`$、EN=EX、EMB） — 証明済み（[FANFREE-ja.md](FANFREE-ja.md) §10.2、[VEBLEN-ja.md](VEBLEN-ja.md) §2、§9、[THETA-ja.md](THETA-ja.md) §2、§9.2、[SHIFT-ja.md](SHIFT-ja.md) §2、§8.2、§9.2、[SHIFT2-ja.md](SHIFT2-ja.md) §1.2、§2.2、§3.2、[SHIFT3-ja.md](SHIFT3-ja.md) §1.2、§2.2、[SHIFT4-ja.md](SHIFT4-ja.md) §1.2）。
       SRO より下のすべての行列での段と、すべての項の上の行列を使わない写像 — 未解決（値が L1p の無いパターンなら $`\iota(\mathrm{CH}_2) \ge \theta_0`$ が出る、[FANFREE-ja.md](FANFREE-ja.md) §7.2）
     - L-CERT $`[\theta_0, \psi_{\Omega_1}(I_0))`$ とその上 — 未解決
     - L-BMS $`\Phi_3`$ を通す道 — 止まっている：DOM₂ により、長さ 3 の鎖の無い $`\Phi_3`$ のパターンは $`m_3`$ より下にとどまり、
@@ -646,7 +653,7 @@ $`m_3 \lt \min C^*_3`$ より下。以前の 8 個の証明書は、もう要ら
 $`R_2^+`$ そのものについては、Lean には何も無い。$`\upsilon_{\omega^3}`$ より上の結果は 2 ページ目
 [RESTARTS-ja.md](RESTARTS-ja.md) に、$`\Xi_\omega`$ より上の結果は 3 ページ目 [REACHES-ja.md](REACHES-ja.md) に、$`\Lambda_\varepsilon`$ より先の
 結果は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、骨組みが終わる所とその上の段の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md) に、
-被覆に対する最小性による結果と段 0 の記述（5 回目から 7 回目）は 6 ページ目 [COVER-ja.md](COVER-ja.md) に、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md)、11 回目と 12 回目は 8 ページ目 [VEBLEN-ja.md](VEBLEN-ja.md) に、13 回目と 14 回目は 9 ページ目 [THETA-ja.md](THETA-ja.md) にある（そこには、前の回のまとめと、$`R_2^S`$ と $`R_2^C`$ を比べた結果も、このページから移した）。15 回目から 17 回目は 10 ページ目 [SHIFT-ja.md](SHIFT-ja.md) に、18 回目から 20 回目は 11 ページ目 [SHIFT2-ja.md](SHIFT2-ja.md) に、21 回目と 22 回目は 12 ページ目 [SHIFT3-ja.md](SHIFT3-ja.md) にある。1 回目の結果の一部は [ROUND1-ja.md](ROUND1-ja.md) にある。
+被覆に対する最小性による結果と段 0 の記述（5 回目から 7 回目）は 6 ページ目 [COVER-ja.md](COVER-ja.md) に、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md)、11 回目と 12 回目は 8 ページ目 [VEBLEN-ja.md](VEBLEN-ja.md) に、13 回目と 14 回目は 9 ページ目 [THETA-ja.md](THETA-ja.md) にある（そこには、前の回のまとめと、$`R_2^S`$ と $`R_2^C`$ を比べた結果も、このページから移した）。15 回目から 17 回目は 10 ページ目 [SHIFT-ja.md](SHIFT-ja.md) に、18 回目から 20 回目は 11 ページ目 [SHIFT2-ja.md](SHIFT2-ja.md) に、21 回目と 22 回目は 12 ページ目 [SHIFT3-ja.md](SHIFT3-ja.md) に、23 回目は 13 ページ目 [SHIFT4-ja.md](SHIFT4-ja.md) にある。1 回目の結果の一部は [ROUND1-ja.md](ROUND1-ja.md) にある。
 
 ## 8. 文献
 

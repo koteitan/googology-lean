@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the twenty-first and twenty-second rounds: $`\nu_C \ge X_{14}`$ given FRAG, the hierarchies $`\vartheta_D`$ and the counting rule PSI-n, pair blocks, the shapes of $`\Phi_3`$, and LOW
 
-This page continues [SHIFT2.md](SHIFT2.md) (§3 there is the twentieth round); §1 is the twenty-first round and §2 the twenty-second. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT2.md](SHIFT2.md) (§3 there is the twentieth round); §1 is the twenty-first round and §2 the twenty-second. The twenty-third round is on [SHIFT4.md](SHIFT4.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -102,7 +102,7 @@ of the stages below $`T`$. $`\Xi[k]`$ is the end point (below $`\Omega_2`$) of t
 - **What this adds** (the referee's point on the program, not a defect of the paper): as ordinal bounds, all of §1.2 already follows from the known
   $`\iota(\mathrm{CH}_3) \gt \iota(\mathrm{CH}_2) \gt \nu_C \ge X_{11}`$; its value is that the codes are native module systems for RED-TOWER. By a remark that rests on a conjectured dictionary,
   every index system below $`\Omega_2`$ (any chain number) stays below $`\upsilon^* \lt \theta_0`$, so reaching $`\theta_0`$ needs index systems above that level. (The twenty-second round shows that the
-  argument of this remark fails, so the statement is open; also the level of the indices does not matter, §2.2.)
+  argument of this remark fails, so the statement is open; also the level of the indices does not matter, §2.2; the twenty-third round gives a native bound past $`\upsilon^*`$, [SHIFT4.md](SHIFT4.md) §1.2.)
 - **Open**: stages $`T \ge \omega^\omega`$ (outline, with $`\mathrm{cn} = 3`$); uncountable stage indices (the copy rule needs a gap above the code of the smaller stage, which an index below
   $`\Omega_2`$ cannot give in this block format; no impossibility is proved); $`\Omega_{\omega+1}`$ and $`\Omega_{\omega\cdot 2}`$ (conjecture: the chain number must grow, so RED-TOWER is the frame).
 
@@ -166,7 +166,7 @@ that the reaches of restarts commute with base change.
 - Upper bounds: still none by an InaccPsi term for $`\iota(\mathrm{CH}_k)`$, $`m_F`$, $`x_F`$, $`C^*_3`$ or $`\nu_C`$.
 - $`\nu_C = \nu_S`$: left: (D1b) and (E4); every η-form tool needs LOW, which is open.
 
-The twenty-second round changed this status; see §2.5.
+The twenty-second and twenty-third rounds changed this status; see §2.5 and [SHIFT4.md](SHIFT4.md) §1.5.
 
 ### 1.6 Checks of the twenty-first round
 
@@ -188,7 +188,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 1.7 Open
 
-The twenty-second round changed this list; the current list is §2.7.
+The twenty-second and twenty-third rounds changed this list; the current list is [SHIFT4.md](SHIFT4.md) §1.7.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs the caps listed in §1.1, and (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$,
   $`f_0`$, $`m_3`$, $`c_0`$.
@@ -231,8 +231,8 @@ X_{14} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2\cdot 2} + \omega^{G(\t
   index $`\psi_{\Omega_{j+1}}(H)`$ of the high base. Example: $`\psi_{\Omega_2}(\Omega_3)`$ is the least element of $`C^{\Omega_2}_{\psi_{\Omega_3}(\Omega_3)}`$ above $`\Omega_1`$. Proof: downward induction on $`j`$, then on $`\beta`$,
   in three steps (no stop for a normal form; every smaller normal form has a smaller value; every value below is reached). Consequences: $`\psi_{\Omega_2}(\varepsilon_{\Omega_n+1})`$ is the
   end point of the $`n`$-system, and, by Lemma CONT for every $`\psi_\kappa`$, $`\sup_n \psi_{\Omega_2}(\varepsilon_{\Omega_n+1}) = \theta`$ and $`\sup_n \psi_{\Omega_3}(\varepsilon_{\Omega_n+1}) = \theta_2`$. Whether the end points
-  $`\Xi_n`$ of the native codes of [SHIFT2.md](SHIFT2.md) §2.2 are the same ordinals is not proved and not used. (The referee: two steps are asserted and need a short argument
-  each, a comparison with high bases above $`\beta`$ and an induction on the size of terms.)
+  $`\Xi_n`$ of the native codes of [SHIFT2.md](SHIFT2.md) §2.2 are the same ordinals is not proved and not used (the twenty-third round proves it, [SHIFT4.md](SHIFT4.md) §1.2). (The referee: two steps are asserted and need a short argument
+  each, a comparison with high bases above $`\beta`$ and an induction on the size of terms. Applied in [SHIFT4.md](SHIFT4.md) §1.1, with 2 reviews.)
 - **CNST$`^n`$** (proved). The constants of the form of an ordinal are below a threshold exactly when the maximal subterms of its InaccPsi term below the unit are. So
   the hull lemma (R4) holds for every code below $`\theta`$, and for multipliers below $`\theta_2`$.
 - **Wilken's side** (proved after a change of citation). [W07a] L.4.3 and L.4.4 hold at every level $`\theta_m`$; VEB-THETA$`^n`$ and EXACT-LEVEL$`^n`$ hold; base change is the identity on
@@ -246,8 +246,8 @@ X_{14} = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2\cdot 2} + \omega^{G(\t
 - **Codes in $`[\theta, G_2)`$** (proved). PSI-θ: $`\theta = \mathrm{ex}^{\Omega_1}_{\theta_2}(0)`$ and $`G(\zeta) = \mathrm{ex}^{\Omega_1}_{\theta_2}(\zeta)`$ (the index $`\theta_2`$ at the unit $`\Omega_2`$). Above $`\pi_g`$ the hull lemma takes
   the form (R4′): $`\tau \in C_g`$ iff $`K_\tau \subset H(g)`$ and $`\tau \lt \pi_g`$. Given FRAG: EXACT-O$`^\theta`$ for $`\tau_\nu \lt G(\omega+1)\cdot\omega`$, where the target stays in the window of TOP-REG⁺,
   and the lower bound $`r(\nu) \ge \delta_\nu + o_\nu(\tau_\nu)`$ for every $`\tau_\nu \lt G_2`$ (LB$`^\theta`$). (The referee: the reading is onto only below $`\pi_{\eta_\nu}`$, and in the upper bound the reading
-  at a smaller restart must be taken from the forms; the fact $`\upsilon_{a+1} = \upsilon_a^\infty`$ is Wilken 2007, APAL 145, Cor 5.10.)
-- **Not proved** (open, as the paper says): the upper bound for $`\tau_\nu \in [G(\omega+1)\cdot\omega, G_2)`$ (the missing lemma is the upper-bound rule TOP-REG for targets $`y \ge \delta_1\cdot\omega`$); long
+  at a smaller restart must be taken from the forms; the fact $`\upsilon_{a+1} = \upsilon_a^\infty`$ is Wilken 2007, APAL 145, Cor 5.10. Applied in [SHIFT4.md](SHIFT4.md) §1.1.)
+- **Not proved** (open, as the paper says): the upper bound for $`\tau_\nu \in [G(\omega+1)\cdot\omega, G_2)`$ (the missing lemma is the upper-bound rule TOP-REG for targets $`y \ge \delta_1\cdot\omega`$; the twenty-third round shows that this rule is false as stated, proves its corrected form, and gets exact reaches up to $`\varphi(\omega, G(\omega+1)+1)`$, [SHIFT4.md](SHIFT4.md) §1.1); long
   restarts with $`D \ge \theta`$ or $`m_0 \ge \theta`$; η-offsets $`\ge \theta`$; multipliers $`\ge \theta_2`$; (P) and (Q′) at a named pair, and so an InaccPsi upper bound for $`\nu_C`$. P-LOW$`^\theta`$ puts the
   predecessors in (P) past every cap of this round.
 
@@ -276,7 +276,7 @@ adds nothing (the referee). $`H(\eta) \le \theta_\eta(0)`$ is the lower half of 
 
 - **Conditional, not counted.** Given EMB for the index system of [SHIFT2.md](SHIFT2.md) §3.2, natively $`\upsilon^* \lt \iota(\mathrm{CH}_3)`$ by a module system past $`\upsilon^*`$ (proved as an implication).
 - **Not proved** (blocking point of the second review): the claimed reduction of EMB to the codes in $`[\Phi^\vartheta_\Omega, Z)`$. EMB-2 is proved for the hybrid parameters, the bound needs the pure
-  ones, and the two parts must be joined.
+  ones, and the two parts must be joined. (Repaired in [SHIFT4.md](SHIFT4.md) §1.2, with 2 reviews: EMB holds on all of $`D`$, and natively $`\upsilon^* \lt \iota(\mathrm{CH}_3)`$.)
 - **Open**: a native bound past $`\upsilon^*`$; "the chain number must grow" (no theorem says that a system cannot host a code); stages $`\ge \omega^\omega`$ and uncountable stage indices.
 
 ### 2.3 The shapes of $`\Phi_3`$: 3,139 of 3,166
@@ -307,7 +307,7 @@ Notation of §1.3.
   level by level), markers for blocks of period 2 or 4, and a marker that refers to itself for $`t = 1`$.
 - The referee's minor points: "the image is weakly increasing" is false on sums (the bound needs one line; no accepted solution used the false step); one input fact is cited for
   a core that is not in the earlier files (the referee checked it); the negative probes stop at 20,000 solutions and count that as a failure; one dictionary of the program needs a
-  sentence; two section numbers in comments.
+  sentence; two section numbers in comments. (Applied in [SHIFT4.md](SHIFT4.md) §1.3, with 2 reviews.)
 
 ### 2.4 $`\nu_C = \nu_S`$: the η-form above $`\psi_{\Omega_1}(\Omega_\omega\cdot 2)`$, and LOW (2 reviews)
 
@@ -321,7 +321,7 @@ and of level 2 if it is in $`[\psi_{\Omega_1}(\Omega_\omega\cdot 2), \psi_{\Omeg
   $`G_2 \le m_u`$); no restart with code below $`\mathbb{G}^\vartheta`$ is self-crossing. So CAP-0 would refute LOW (proved as an implication).
 - **LOW is not decided.** Without hypothesis: either LOW$`_x`$ holds and self-crossing long restarts with codes in $`[\mathbb{G}^\vartheta, P')`$ exist below $`\psi_{\Omega_1}(\Omega_\omega\cdot 2)`$, or
   $`\nu_C \ge Y_1 = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\mathbb{G}^\vartheta+1})`$. (The second referee: there is no evidence for CAP-0 at codes in $`[\mathbb{G}^\vartheta, P')`$, and the pattern of CROSS-SHARP, read past its
-  proved range, predicts the opposite. First test case: $`u = \psi_{\Omega_1}(\Omega_\omega + \Omega_3)`$, with code $`\psi_{\Omega_2}(\Omega_\omega + \Omega_3)`$.)
+  proved range, predicts the opposite. First test case: $`u = \psi_{\Omega_1}(\Omega_\omega + \Omega_3)`$, with code $`\psi_{\Omega_2}(\Omega_\omega + \Omega_3)`$. The twenty-third round decides it: CAP-0 holds at $`u`$, [SHIFT4.md](SHIFT4.md) §1.4.)
 - **X13⁺** (proved, given FRAG): $`\nu_C \ge X_{13}^+ = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Phi^\vartheta_2} + \omega^{\mathbb{G}^\vartheta+1}\cdot 2)`$. It is below $`X_{14}`$ of §2.1.
 - **The η-form above $`\psi_{\Omega_1}(\Omega_\omega\cdot 2)`$** (proved). **D-UNC$`^{(2)}`$**: for $`\eta \in D`$ with $`\eta \ge \Omega_\omega`$ and $`\xi \lt P'`$, $`\eta + \xi \in D`$ iff the countable atoms of $`\xi`$ are below
   $`H(\eta + \xi)`$ (the bound grows from $`\theta`$ to $`P'`$). **FIX$`^{(2)}`$, DICT$`^{(2)}`$, T$`^B`$**: Theorem T at the base $`\Omega_\omega\cdot 2`$, $`\psi_{\Omega_1}(\Omega_\omega\cdot 2 + \theta\cdot\xi) = \upsilon_{\Lambda_1+\xi}`$ for
@@ -334,7 +334,7 @@ and of level 2 if it is in $`[\psi_{\Omega_1}(\Omega_\omega\cdot 2), \psi_{\Omeg
   of level 2 with exponent $`\ge P'`$ (the code transport is written out). (D1b): the placement tools hold on $`D`$, and room below $`\mathbb{G}^\vartheta`$ is no longer empty at level 2.
 - **Conditional, not counted.** The blocking point of both reviews is about the record: LOW is open, so these results must carry their hypothesis. Under not-LOW:
   $`\nu_C \ge Y_1`$, so the claim holds on $`[0, Y_1]`$ (Theorem X$`^{(2)}`$), and $`r(\psi_{\Omega_1}(\Omega_\omega\cdot 2)) \ge H(\Omega_\omega + \Phi^\vartheta_\Omega)`$. Under CAP-0 and CAP-1 (NU-LOW″): $`x \ge L(\omega)`$, a final segment of
-  $`\mathrm{Pred}_1(x)`$ consists of points $`L(e)`$, and $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + \omega^{\mathbb{G}^\vartheta+1})`$; these are the lower halves of the conjectured names $`m_0 = L(0)`$ and $`a_0 = L(\omega)`$.
+  $`\mathrm{Pred}_1(x)`$ consists of points $`L(e)`$ (when $`x \lt \psi_{\Omega_1}(\Omega_\omega\cdot 3)`$), and $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + \omega^{\mathbb{G}^\vartheta+1})`$; these are the lower halves of the conjectured names $`m_0 = L(0)`$ and $`a_0 = L(\omega)`$.
   At the pair $`(x, \nu)`$, the bases of TC⁺ for long restarts exist only under CAP-1 or the conjectured names.
 - **Not proved** (open): LOW; (P) at $`(L(\omega), L(\omega+1))`$, which needs a lower bound for the reaches of restarts of code $`P'`$ across the offset $`\omega^{P'+1}`$ (the level-2 form of "a restart reaches its $`\delta_1`$": the restart $`L(\lambda)`$ reaches $`L(\lambda+\omega+1)`$);
   (P1), the exact caps that commute with base change for codes in $`(\Phi^\vartheta_\Omega + 1, G_2)`$ and for long codes outside EXACT-LONG (the exact caps of §2.1 are not yet shown to commute with
@@ -343,6 +343,8 @@ and of level 2 if it is in $`[\psi_{\Omega_1}(\Omega_\omega\cdot 2), \psi_{\Omeg
   $`\psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ should be a lemma of its own; one hypothesis of NU-LOW″ is about $`x`$, not about $`\nu_C`$.
 
 ### 2.5 Status after the twenty-second round
+
+The twenty-third round changed this status; see [SHIFT4.md](SHIFT4.md) §1.5.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{14}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$.
   No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -369,6 +371,8 @@ Each run was under 60 seconds; none is a proof.
   (memberships and order): 0 disagreements.
 
 ### 2.7 Open
+
+The twenty-third round changed this list; the current list is [SHIFT4.md](SHIFT4.md) §1.7.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps of §2.1 and a lower bound at code $`P'`$ (§2.4); (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
