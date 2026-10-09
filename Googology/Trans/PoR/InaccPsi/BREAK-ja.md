@@ -122,7 +122,7 @@ $`\nu_{nest}`$ は PS の実現の最小の上端 $`y`$。
 - **系**（証明済み、査読 1 回。$`R_2^C`$）。
   - $`\beta_0 \ge \nu_C \gt \nu_P`$。前は $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$。（今は $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$、査読 1 回。そして
     移し替えとして証明済みの $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$、[THETA-ja.md](THETA-ja.md) §1。今は $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ と
-    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$、[THETA-ja.md](THETA-ja.md) §9.1。さらに $`\nu_C \ge X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$（$`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$）、[SHIFT-ja.md](SHIFT-ja.md) §1。さらに FRAG のもとで $`\nu_C \ge X_5`$、[SHIFT-ja.md](SHIFT-ja.md) §8.1。さらに FRAG のもとで $`\nu_C \ge X_8`$、そこの §9.1。さらに FRAG のもとで $`\nu_C \ge X_9`$、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{11}`$、そこの §2.1。さらに FRAG のもとで $`\nu_C \ge X_{12}`$、そこの §3.1。さらに FRAG のもとで $`\nu_C \ge X_{13}`$、[SHIFT3-ja.md](SHIFT3-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{14}`$、そこの §2.1。さらに FRAG のもとで $`\nu_C \ge X_{15}`$、[SHIFT4-ja.md](SHIFT4-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{16}`$、そこの §1.4。さらに FRAG のもとで $`\nu_C \ge X_{17}`$ と $`\nu_C \ge X_{18}`$、そこの §2.1、§2.2。さらに FRAG のもとで $`\nu_C \ge X_{19}`$、[SHIFT5-ja.md](SHIFT5-ja.md) §1。）
+    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$、[THETA-ja.md](THETA-ja.md) §9.1。さらに $`\nu_C \ge X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$（$`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$）、[SHIFT-ja.md](SHIFT-ja.md) §1。さらに FRAG のもとで $`\nu_C \ge X_5`$、[SHIFT-ja.md](SHIFT-ja.md) §8.1。さらに FRAG のもとで $`\nu_C \ge X_8`$、そこの §9.1。さらに FRAG のもとで $`\nu_C \ge X_9`$、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{11}`$、そこの §2.1。さらに FRAG のもとで $`\nu_C \ge X_{12}`$、そこの §3.1。さらに FRAG のもとで $`\nu_C \ge X_{13}`$、[SHIFT3-ja.md](SHIFT3-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{14}`$、そこの §2.1。さらに FRAG のもとで $`\nu_C \ge X_{15}`$、[SHIFT4-ja.md](SHIFT4-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{16}`$、そこの §1.4。さらに FRAG のもとで $`\nu_C \ge X_{17}`$ と $`\nu_C \ge X_{18}`$、そこの §2.1、§2.2。さらに FRAG のもとで $`\nu_C \ge X_{19}`$、[SHIFT5-ja.md](SHIFT5-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{21}`$、そこの §2.1。）
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$。だから $`R_2^C`$ の核は $`[0, \nu_P]`$ を含む。前は $`[0, \rho_{\Theta_{d\omega}})`$ と、$`\nu_P`$ と比べて
     いない $`T_C`$ での $`[0, T_C]`$。
   - SKEL⁺（HC と INC1-nonups も）が $`R_2^C`$ の $`[0, \nu_C)`$ で成り立つ。今は仮定なしで（[COVER-ja.md](COVER-ja.md) §5.1）。
@@ -134,7 +134,7 @@ $`\nu_{nest}`$ は PS の実現の最小の上端 $`y`$。
   $`K`$ = (1,1,0)(2,2,1)(2,2,1)、$`M_a = QK(2,0,0)`$、$`M_\nu = M_a(1,1,0)(2,2,1)(2,2,1)`$ とする。PS の最小の点は $`\Phi_3(QK^3)`$ と
   $`\Phi_3(M_a(1,0,0))`$ の点の間、$`T_C`$ は $`\Phi_3(M_\nu[2])`$ と $`\Phi_3(M_\nu(1,0,0))`$ の点の間。最小の扇のパターン PT の点は
   $`\Phi_3(\mathrm{SRO})`$ の点より上で $`m_3`$ より下。
-- **定理 GEN-EXT**（証明済み、査読 1 回。GEN-ALL がどの η にも広げた、[SHIFT5-ja.md](SHIFT5-ja.md) §3）。定理 GEN（[PINS-ja.md](PINS-ja.md) §3）は $`\eta \lt \Omega_\omega\cdot\omega`$ でもそのまま成り立つ：
+- **定理 GEN-EXT**（証明済み、査読 1 回。GEN-ALL がどの η にも広げた、[SHIFT5-ja.md](SHIFT5-ja.md) §1.3）。定理 GEN（[PINS-ja.md](PINS-ja.md) §3）は $`\eta \lt \Omega_\omega\cdot\omega`$ でもそのまま成り立つ：
   $`D`$ に入るそういう $`\eta`$ のどれでも $`H(\eta) = \upsilon_{1+\iota(\eta)}`$。**補題 RI3**：$`\iota(\eta)`$ が $`\omega^3`$ の倍数であることと
   $`\mathrm{logend}(\eta) \ge 3`$ は同じ。査読者の無作為な試験：480 個の $`\eta`$ で食い違い 0。
 - **定理 PS-TERMS**（証明済み、査読 1 回）。$`R_2^S`$ での PS の最小の実現は
@@ -154,7 +154,7 @@ $`\nu_{nest}`$ は PS の実現の最小の上端 $`y`$。
   示す十分条件が無い。証明済みの評価：$`\nu \gt a_0 \ge m_0 \ge \rho_{\Lambda^*}`$、$`\nu \lt m_3`$。
 - **未証明**（止める点、査読 1 回）：「名前の InaccPsi の側は完成していて、GEN-EXT の写像 $`B`$、$`E`$ を延ばす必要は無い」。
   GEN-EXT が名前を付けるのは $`\sup H[D]`$ より下の $`\upsilon`$ の点だけで、$`a_0`$ や $`\nu`$ の InaccPsi での上界は証明されていない
-  （あるのは $`\nu \lt m_3`$ だけで、$`m_3`$ には名前が無い）。（GEN-ALL（[SHIFT5-ja.md](SHIFT5-ja.md) §3）は今は $`\upsilon^\infty \gt \psi_{\Omega_1}(I_\omega)`$ より下のどの $`\upsilon`$ 点にも名前を付ける。$`a_0`$ と $`\nu`$ の評価はまだ未解決。）
+  （あるのは $`\nu \lt m_3`$ だけで、$`m_3`$ には名前が無い）。（GEN-ALL（[SHIFT5-ja.md](SHIFT5-ja.md) §1.3）は今は $`\upsilon^\infty \gt \psi_{\Omega_1}(I_\omega)`$ より下のどの $`\upsilon`$ 点にも名前を付ける。$`a_0`$ と $`\nu`$ の評価はまだ未解決。）
 - **最初の扇**（証明済み、査読 1 回）。$`R_2^S`$ ではその頂点は $`\nu`$ より上の新しい左端で、後の元は 2 つとも $`\nu`$ より上。
   $`R_2^C`$ では $`\nu_C`$ より上（NU-CT）で、$`\Phi_3(\mathrm{SRO})`$ の点より上（証明書）。入れ子の組の段と比べてどこにあるかは
   §6。名前は未解決。

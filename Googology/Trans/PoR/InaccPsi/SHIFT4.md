@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the twenty-third and twenty-fourth rounds: $`\nu_C \ge X_{18}`$ given FRAG, closed and exact reaches, the plateaus at $`\Omega_k`$, the shapes of $`\Phi_3`$, and native codes past $`\psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$
 
-This page continues [SHIFT3.md](SHIFT3.md) (§2 there is the twenty-second round); §1 is the twenty-third round and §2 the twenty-fourth. The twenty-fifth round is on [SHIFT5.md](SHIFT5.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT3.md](SHIFT3.md) (§2 there is the twenty-second round); §1 is the twenty-third round and §2 the twenty-fourth. The twenty-fifth and twenty-sixth rounds are on [SHIFT5.md](SHIFT5.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -168,7 +168,7 @@ $`\nu_C \ge X_{14}^+ = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2\cdot 2} 
 
 ### 1.5 Status after the twenty-third round
 
-The twenty-fourth and twenty-fifth rounds changed this status; see §2.5 and [SHIFT5.md](SHIFT5.md) §4.
+The twenty-fourth to twenty-sixth rounds changed this status; see §2.5 and [SHIFT5.md](SHIFT5.md) §1.4, §2.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{16}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews; $`X_{15}`$ and $`X_{16}`$ rest on tiers proved as lists of
   substitutions); the core half holds on $`[0, \nu_C]`$. No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -198,7 +198,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 1.7 Open
 
-The twenty-fourth and twenty-fifth rounds changed this list; the current list is [SHIFT5.md](SHIFT5.md) §6.
+The twenty-fourth to twenty-sixth rounds changed this list; the current list is [SHIFT5.md](SHIFT5.md) §2.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps past §1.1 and §1.4 and a lower bound at code $`P'`$; (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
@@ -240,7 +240,8 @@ Notation of §1.1. For an additive principal $`x \in \mathrm{seg}(b)`$, its **ro
 - **Theorem EXACT-CL\*** (proved; "$`\le`$" without FRAG, "$`=`$" given FRAG). Every restart $`\nu`$ with $`\rho_{\nu+\omega^2} \le \nu_S`$ and $`\tau_\nu \lt G_2`$ has $`r(\nu) = e_{\delta_j}(c_\nu(\tau_\nu))`$, where
   $`\tau_\nu \in [G(\omega(j-1)+2), G(\omega j+2))`$ and $`c_\nu(\tau_\nu) = \delta_j + (-\delta_{j-1}^\infty + \Theta_\nu(\tau_\nu))`$ ($`\delta_0^\infty = 0`$). So the conjecture EXACT-CL\* of §1.1 holds, **GAP$`_j`$ holds for every $`j`$** (no FRAG), and for
   example $`r(\nu) = \varphi(\omega, \delta_\nu+1)\cdot\omega`$ at $`\tau_\nu = \tau_{\mathrm{LH}}`$. The same for long restarts with $`D, m_0 \lt G_2`$ (EXACT-LONG-CL\*), and pins at every exponent below $`G_2`$ (given FRAG).
-  (The referee: the induction must start from EXACT-O$`^\vartheta`$, since $`\tau_\nu`$ can be $`0`$; one sentence about the onto part uses "$`=`$", so it is given FRAG.)
+  (The referee: the induction must start from EXACT-O$`^\vartheta`$, since $`\tau_\nu`$ can be $`0`$; one sentence about the onto part uses "$`=`$", so it is given FRAG.) (The referee of the twenty-sixth round: the rule that a tail stays in its segment needs the start of the tail
+  above $`H(z_0)`$, as the proof chooses; as worded, $`\nu = H(\omega^\omega + \omega^2)`$ is a counterexample. [SHIFT5.md](SHIFT5.md) §2.2.)
 - **The tiers of §1.1 and §1.4 written out** (proved by transfer, given FRAG, **2 reviews**). The tier below $`\zeta^*`$ of §1.1 is the θ⁺ tier of §1.4 below its top, and the θ⁺ tier is now
   written as 20 steps, each with its changed input, the proof of that input and the places where it enters, as the referee of §1.1 asked. So $`X_{15}`$ and $`X_{16}`$ have
   2 reviews. (The referee: the steps of the lower-bound side are sketches; they are not used for $`X_{15}`$, $`X_{16}`$ or $`X_{17}`$.)
@@ -289,14 +290,14 @@ So **Wilken's claim holds in $`R_2^C`$ on $`[0, X_{18}]`$, both halves, given FR
 proves $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \hat\zeta_0 + \omega^{G(\hat\zeta_0)+1}\cdot 2)`$, also above $`X_{17}`$. LOW now needs self-crossing long restarts with codes in $`[G(\hat\zeta_2), P')`$ and $`\eta \ge \hat\zeta_2`$. **Conditional, not counted**: under
 not-LOW, $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{G(\hat\zeta_2)+1})`$ (this raises $`Y_1`$ again).
 
-- **Not proved** (the referee's blocking points; none is on the line to $`X_{18}`$; the twenty-fifth round proves the restricted sharp form, makes the second point exact and repairs the third, [SHIFT5.md](SHIFT5.md) §1):
+- **Not proved** (the referee's blocking points; none is on the line to $`X_{18}`$; the twenty-fifth round proves the restricted sharp form, makes the second point exact and repairs the third, [SHIFT5.md](SHIFT5.md) §1.1):
   - The sharp form for $`\Omega_3 \le M \le \hat\zeta_1`$, "$`r(\lambda) \ge H(\eta_\lambda + R(M))`$ iff $`m_\lambda \ge G(M)`$", is **false** at $`M = \Omega_3 + 1`$ (given FRAG): $`u = H(\Omega_3)`$ has the code $`G(\Omega_3) \lt G(\Omega_3+1)`$, but
     $`r(u) \gt H(\Omega_3 + Z + 1)`$ by R-U (§1.4). The direction "if" holds; "only if" holds when $`R(M)`$ is a multiple of $`\Omega_1`$.
   - "Pins at every code below $`P'`$ give READ at every $`\Omega_k`$". For an exponent above $`G_2`$ the separation in the needed form is false (a restart with code $`G_2`$ is long and reaches
     past its own region), and such exponents occur from $`\theta_3\cdot\omega^2`$ on. So past $`\theta_3\cdot\omega^2`$ READ needs a new upper-bound rule with a target in a far region.
   - The dichotomy at $`H(\Omega_4)`$ (CAP-0 there, or cofinally many crossings below it). The lower bound $`r(H(\Omega_4)) \ge H(\Omega_4 + \tau_{\mathrm{LH}})`$ holds.
 - **Where it stops**: $`\hat\zeta_2`$ needs a pin at the exponent $`\tau_{\mathrm{LH}} + 1`$, and the known lower bounds at the codes $`\tau_{\mathrm{LH}}`$ and $`\tau_{\mathrm{LH}} + 1`$ coincide. (The referee: what is missing is an
-  upper bound for the reach at $`\tau_{\mathrm{LH}}`$. EXACT-CL\* of §2.1 now gives it, $`r = \varphi(\omega, \delta+1)\cdot\omega`$; no paper derives the pin at $`\tau_{\mathrm{LH}} + 1`$ from it yet.) (The referee of the twenty-fifth round: the coincidence of the lower bounds is only a remark, valid for targets up to $`\mathrm{lh}_1(\varphi(\omega, \delta+1))`$; the pin exists, [SHIFT5.md](SHIFT5.md) §1.)
+  upper bound for the reach at $`\tau_{\mathrm{LH}}`$. EXACT-CL\* of §2.1 now gives it, $`r = \varphi(\omega, \delta+1)\cdot\omega`$; no paper derives the pin at $`\tau_{\mathrm{LH}} + 1`$ from it yet.) (The referee of the twenty-fifth round: the coincidence of the lower bounds is only a remark, valid for targets up to $`\mathrm{lh}_1(\varphi(\omega, \delta+1))`$; the pin exists, [SHIFT5.md](SHIFT5.md) §1.1.)
 - The referee's minor points: one case split in the proof of X18 is wrong, and the conclusion holds by a least-multiple argument; the tail bases need $`\kappa \ge H(\Omega_3)`$; the pins at
   points of the lh-shift need H-RC there; two suprema at gap tops with constants are asserted by analogy; wording; sampling.
 
@@ -350,14 +351,14 @@ $`X_{18} \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$).
 
 - **Labels** (the referee's point). GEN-EXT was proved by running the proof of GEN on a larger domain, the kind of proof that gave GEN⁺ the label "transfer" ([THETA.md](THETA.md) §1).
   These pages count GEN-EXT as proved (1 review, [BREAK.md](BREAK.md) §2) and GEN⁺ as its case ([README.md](README.md) §4), so the bounds above are counted as proved, and PUSH of §1.2 is proved.
-- **Conditional, not counted** (now proved, [SHIFT5.md](SHIFT5.md) §3): given GEN past $`\Omega_\omega\cdot\omega`$, natively $`\iota(\mathrm{CH}_3) \ge \theta_{\Xi[\omega]}(0) \ge \psi_{\Omega_1}(\Omega_\omega\cdot\omega^\omega)`$.
-- **Open**: GEN past $`\Omega_\omega\cdot\omega`$ (the extraction step of GEN-EXT seemed to fail once $`\Omega_\omega`$ is absorbed into $`P\cdot\eta`$; it does not, and GEN holds for every η, [SHIFT5.md](SHIFT5.md) §3); native stages $`\ge \omega^\omega`$ and uncountable stage indices; $`\mathrm{CH}_2`$ past $`\Theta_1`$.
+- **Conditional, not counted** (now proved, [SHIFT5.md](SHIFT5.md) §1.3): given GEN past $`\Omega_\omega\cdot\omega`$, natively $`\iota(\mathrm{CH}_3) \ge \theta_{\Xi[\omega]}(0) \ge \psi_{\Omega_1}(\Omega_\omega\cdot\omega^\omega)`$.
+- **Open**: GEN past $`\Omega_\omega\cdot\omega`$ (the extraction step of GEN-EXT seemed to fail once $`\Omega_\omega`$ is absorbed into $`P\cdot\eta`$; it does not, and GEN holds for every η, [SHIFT5.md](SHIFT5.md) §1.3); native stages $`\ge \omega^\omega`$ and uncountable stage indices; $`\mathrm{CH}_2`$ past $`\Theta_1`$.
 - The referee's minor points: one side claim (a parameter set is $`\{1\}`$, not empty) is false and harmless; at a limit stage one case of the proof is empty and closes directly;
   the paper's own test never reached limit stages (the referee's does); two reasons are stated loosely. (The referee of the twenty-fifth round: the proof of PUSH uses $`P\cdot\Omega_k = \Omega_k`$, false for $`k = 1`$; harmless, $`k \ge 2`$ suffices.)
 
 ### 2.5 Status after the twenty-fourth round
 
-The twenty-fifth round changed this status; see [SHIFT5.md](SHIFT5.md) §4.
+The twenty-fifth and twenty-sixth rounds changed this status; see [SHIFT5.md](SHIFT5.md) §1.4, §2.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{18}]`$ given FRAG ($`[0, X_{16}]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$. No InaccPsi upper
   bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -385,7 +386,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 2.7 Open
 
-The twenty-fifth round changed this list; the current list is [SHIFT5.md](SHIFT5.md) §6.
+The twenty-fifth and twenty-sixth rounds changed this list; the current list is [SHIFT5.md](SHIFT5.md) §2.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps past $`G(\hat\zeta_2)`$ and a lower bound at code $`P'`$; (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.

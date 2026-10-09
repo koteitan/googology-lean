@@ -123,7 +123,7 @@ pair, and $`\nu_{nest}`$ the least top $`y`$ of a realization of PS.
 - **Corollaries** (proved, 1 review; $`R_2^C`$).
   - $`\beta_0 \ge \nu_C \gt \nu_P`$. Before: $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$. (Now $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$, 1 review, and
     $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$, proved as a transfer, [THETA.md](THETA.md) §1; now $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ and
-    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, [THETA.md](THETA.md) §9.1; then $`\nu_C \ge X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$ with $`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$, [SHIFT.md](SHIFT.md) §1; then $`\nu_C \ge X_5`$ given FRAG, [SHIFT.md](SHIFT.md) §8.1; then $`\nu_C \ge X_8`$ given FRAG, §9.1 there; then $`\nu_C \ge X_9`$ given FRAG, [SHIFT2.md](SHIFT2.md) §1.1; then $`\nu_C \ge X_{11}`$ given FRAG, §2.1 there; then $`\nu_C \ge X_{12}`$ given FRAG, §3.1 there; then $`\nu_C \ge X_{13}`$ given FRAG, [SHIFT3.md](SHIFT3.md) §1.1; then $`\nu_C \ge X_{14}`$ given FRAG, §2.1 there; then $`\nu_C \ge X_{15}`$ given FRAG, [SHIFT4.md](SHIFT4.md) §1.1; then $`\nu_C \ge X_{16}`$ given FRAG, §1.4 there; then $`\nu_C \ge X_{17}`$ and $`\nu_C \ge X_{18}`$ given FRAG, §2.1, §2.2 there; then $`\nu_C \ge X_{19}`$ given FRAG, [SHIFT5.md](SHIFT5.md) §1.)
+    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, [THETA.md](THETA.md) §9.1; then $`\nu_C \ge X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$ with $`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$, [SHIFT.md](SHIFT.md) §1; then $`\nu_C \ge X_5`$ given FRAG, [SHIFT.md](SHIFT.md) §8.1; then $`\nu_C \ge X_8`$ given FRAG, §9.1 there; then $`\nu_C \ge X_9`$ given FRAG, [SHIFT2.md](SHIFT2.md) §1.1; then $`\nu_C \ge X_{11}`$ given FRAG, §2.1 there; then $`\nu_C \ge X_{12}`$ given FRAG, §3.1 there; then $`\nu_C \ge X_{13}`$ given FRAG, [SHIFT3.md](SHIFT3.md) §1.1; then $`\nu_C \ge X_{14}`$ given FRAG, §2.1 there; then $`\nu_C \ge X_{15}`$ given FRAG, [SHIFT4.md](SHIFT4.md) §1.1; then $`\nu_C \ge X_{16}`$ given FRAG, §1.4 there; then $`\nu_C \ge X_{17}`$ and $`\nu_C \ge X_{18}`$ given FRAG, §2.1, §2.2 there; then $`\nu_C \ge X_{19}`$ given FRAG, [SHIFT5.md](SHIFT5.md) §1.1; then $`\nu_C \ge X_{21}`$ given FRAG, §2.1 there.)
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$, so the core of $`R_2^C`$ contains $`[0, \nu_P]`$. Before: $`[0, \rho_{\Theta_{d\omega}})`$, and $`[0, T_C]`$ with $`T_C`$ not
     compared with $`\nu_P`$.
   - SKEL⁺ (with HC and INC1-nonups) holds in $`R_2^C`$ on $`[0, \nu_C)`$. Now with no hypothesis ([COVER.md](COVER.md) §5.1).
@@ -135,7 +135,7 @@ pair, and $`\nu_{nest}`$ the least top $`y`$ of a realization of PS.
   $`K`$ = (1,1,0)(2,2,1)(2,2,1), $`M_a = QK(2,0,0)`$ and $`M_\nu = M_a(1,1,0)(2,2,1)(2,2,1)`$: the least point of PS lies between the
   points of $`\Phi_3(QK^3)`$ and $`\Phi_3(M_a(1,0,0))`$, and $`T_C`$ between those of $`\Phi_3(M_\nu[2])`$ and $`\Phi_3(M_\nu(1,0,0))`$. The least fan
   pattern PT has its point above that of $`\Phi_3(\mathrm{SRO})`$ and below $`m_3`$.
-- **Theorem GEN-EXT** (proved, 1 review; extended to every η by GEN-ALL, [SHIFT5.md](SHIFT5.md) §3). Theorem GEN ([PINS.md](PINS.md) §3) holds word for word for $`\eta \lt \Omega_\omega\cdot\omega`$:
+- **Theorem GEN-EXT** (proved, 1 review; extended to every η by GEN-ALL, [SHIFT5.md](SHIFT5.md) §1.3). Theorem GEN ([PINS.md](PINS.md) §3) holds word for word for $`\eta \lt \Omega_\omega\cdot\omega`$:
   $`H(\eta) = \upsilon_{1+\iota(\eta)}`$ for every such $`\eta`$ in $`D`$. **Lemma RI3**: $`\iota(\eta)`$ is a multiple of $`\omega^3`$ iff
   $`\mathrm{logend}(\eta) \ge 3`$. The referee's random test: 480 values of $`\eta`$, 0 mismatches.
 - **Theorem PS-TERMS** (proved, 1 review). In $`R_2^S`$ the least realization of PS is
@@ -155,7 +155,7 @@ pair, and $`\nu_{nest}`$ the least top $`y`$ of a realization of PS.
   for a new $`\lt_2`$-pair in $`R_2^S`$. Proved bounds: $`\nu \gt a_0 \ge m_0 \ge \rho_{\Lambda^*}`$, and $`\nu \lt m_3`$.
 - **Not proved** (blocking point, 1 review): "the InaccPsi side of the names is complete; no extension of the maps $`B`$ and $`E`$
   of GEN-EXT is needed". GEN-EXT names the $`\upsilon`$-points only below $`\sup H[D]`$, and no InaccPsi upper bound on $`a_0`$ or $`\nu`$ is
-  proved (the only one is $`\nu \lt m_3`$, and $`m_3`$ has no name). (GEN-ALL, [SHIFT5.md](SHIFT5.md) §3, now names every $`\upsilon`$-point below $`\upsilon^\infty \gt \psi_{\Omega_1}(I_\omega)`$; the bound on $`a_0`$ and $`\nu`$ is still open.)
+  proved (the only one is $`\nu \lt m_3`$, and $`m_3`$ has no name). (GEN-ALL, [SHIFT5.md](SHIFT5.md) §1.3, now names every $`\upsilon`$-point below $`\upsilon^\infty \gt \psi_{\Omega_1}(I_\omega)`$; the bound on $`a_0`$ and $`\nu`$ is still open.)
 - **The first fan** (proved, 1 review). In $`R_2^S`$ its apex is a new left end above $`\nu`$, and both successors are above $`\nu`$. In
   $`R_2^C`$ it lies above $`\nu_C`$ (NU-CT) and above the point of $`\Phi_3(\mathrm{SRO})`$ (certificates). Where it lies against the levels of
   nested pairs is in §6. Its name is open.
