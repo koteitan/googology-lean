@@ -7,7 +7,7 @@
 合わせて 16 の論文から来ている（3 回目は §7、4 回目は §8）。どの論文も 1 回ずつ査読された。「査読 1 回」は査読者 1 人。「査読 2 回」は、独立した
 2 つの論文がその結果を証明し、それぞれが 1 回ずつ査読されたこと。査読者が未証明、または書いたままでは偽と判定した
 命題は、その論文のほかの部分が証明済みでも **未証明** に書く。16 の論文はどれも Wilken, JSL 72 (2007)、
-Carlson, AML 38 (1999)、Wilken, AML 45 (2006) を使わない。このページの結果はどれも Lean には無い。5 回目から 7 回目（どれも 4 つの論文）は次のページ [COVER-ja.md](COVER-ja.md)、8 回目から 10 回目は [FANFREE-ja.md](FANFREE-ja.md)、11 回目と 12 回目は [VEBLEN-ja.md](VEBLEN-ja.md) にある。6 回目は
+Carlson, AML 38 (1999)、Wilken, AML 45 (2006) を使わない。このページの結果はどれも Lean には無い。5 回目から 7 回目（どれも 4 つの論文）は次のページ [COVER-ja.md](COVER-ja.md)、8 回目から 10 回目は [FANFREE-ja.md](FANFREE-ja.md)、11 回目と 12 回目は [VEBLEN-ja.md](VEBLEN-ja.md) にある。$`\nu_C`$ についてのあとの評価の一覧は [BREAK2-ja.md](BREAK2-ja.md) にある。6 回目は
 SKEL⁺ と SKEL$`^\omega`$ を完全に証明したので、下の §1、§7.1、§8 で概略の段階でしか証明されていなかった結果のいくつかは今は証明済み
 （[COVER-ja.md](COVER-ja.md) §5.1）。下の付け方はそれを書いている。
 
@@ -120,9 +120,7 @@ $`\nu_{nest}`$ は PS の実現の最小の上端 $`y`$。
   どちらの場合も、2 つの構造は右端が $`\nu_C`$ 未満のどの関係でも一致する。さらに証明済み：$`\nu_C = \nu_S`$ ⇔ 幽霊が無い ⇔
   $`\beta_0 \gt \nu_S`$ ⇔ $`T_C = \nu_S`$。
 - **系**（証明済み、査読 1 回。$`R_2^C`$）。
-  - $`\beta_0 \ge \nu_C \gt \nu_P`$。前は $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$。（今は $`\nu_C \gt \upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$、査読 1 回。そして
-    移し替えとして証明済みの $`\nu_P \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$、[THETA-ja.md](THETA-ja.md) §1。今は $`\nu_P = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+2})`$ と
-    $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$、[THETA-ja.md](THETA-ja.md) §9.1。さらに $`\nu_C \ge X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 2)`$（$`G_2 = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+2})`$）、[SHIFT-ja.md](SHIFT-ja.md) §1。さらに FRAG のもとで $`\nu_C \ge X_5`$、[SHIFT-ja.md](SHIFT-ja.md) §8.1。さらに FRAG のもとで $`\nu_C \ge X_8`$、そこの §9.1。さらに FRAG のもとで $`\nu_C \ge X_9`$、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{11}`$、そこの §2.1。さらに FRAG のもとで $`\nu_C \ge X_{12}`$、そこの §3.1。さらに FRAG のもとで $`\nu_C \ge X_{13}`$、[SHIFT3-ja.md](SHIFT3-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{14}`$、そこの §2.1。さらに FRAG のもとで $`\nu_C \ge X_{15}`$、[SHIFT4-ja.md](SHIFT4-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{16}`$、そこの §1.4。さらに FRAG のもとで $`\nu_C \ge X_{17}`$ と $`\nu_C \ge X_{18}`$、そこの §2.1、§2.2。さらに FRAG のもとで $`\nu_C \ge X_{19}`$、[SHIFT5-ja.md](SHIFT5-ja.md) §1.1。さらに FRAG のもとで $`\nu_C \ge X_{21}`$、そこの §2.1。さらに FRAG のもとで $`\nu_C \ge X_{22}`$ と $`\nu_C \ge X_{23}`$、[SHIFT6-ja.md](SHIFT6-ja.md) §1.1、§2.1 と、そこの §3.1 の直し。さらに FRAG のもとで $`\nu_C \ge L(\omega+1) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P')`$、[SHIFT7-ja.md](SHIFT7-ja.md) §1.1。さらに FRAG のもとで $`\nu_C = \nu_S = L(\omega+1)`$、そこの §2.1（監査はそこの §3.1）。さらに FRAG のもとで、その上で $`y^C_\nu \ge X_A = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P' + \omega^{\theta+3}\cdot 2)`$ として $`[0, y^C_\nu] \subseteq \mathrm{Core}(R_2^C)`$、そこの §3.2。さらに FRAG のもとで $`[0, L(\Omega_1\cdot\omega)] \subseteq \mathrm{Core}(R_2^C)`$、[SHIFT8-ja.md](SHIFT8-ja.md) §1.1。さらに FRAG のもとで $`[0, L(\varepsilon_{\Phi_\Omega+1})] \subseteq \mathrm{Core}(R_2^C)`$、そこの §2.1。）
+  - $`\beta_0 \ge \nu_C \gt \nu_P`$。前は $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$。（あとの評価は、$`\nu_C \gt \upsilon^*`$ から FRAG のもとでの $`[0, L(G_2)] \subseteq \mathrm{Core}(R_2^C)`$ まで、[BREAK2-ja.md](BREAK2-ja.md) §1 に挙げる。）
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$。だから $`R_2^C`$ の核は $`[0, \nu_P]`$ を含む。前は $`[0, \rho_{\Theta_{d\omega}})`$ と、$`\nu_P`$ と比べて
     いない $`T_C`$ での $`[0, T_C]`$。
   - SKEL⁺（HC と INC1-nonups も）が $`R_2^C`$ の $`[0, \nu_C)`$ で成り立つ。今は仮定なしで（[COVER-ja.md](COVER-ja.md) §5.1）。

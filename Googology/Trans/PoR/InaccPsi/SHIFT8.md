@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the thirty-third and thirty-fourth rounds: Theorem B$`^\nu`$, the skeleton of the points $`L(e)`$ up to $`L(\varepsilon_{\Phi_\Omega+1})`$, the residue of the audit, Carlson's categoricity theorem for $`R_2^S`$, and native codes up to $`\psi_{\Omega_1}(\Omega_{\omega+1}^2 + \sigma_2)`$
 
-This page continues [SHIFT7.md](SHIFT7.md) (§3 there is the thirty-second round); §1 is the thirty-third round, §2 the thirty-fourth. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT7.md](SHIFT7.md) (§3 there is the thirty-second round); §1 is the thirty-third round, §2 the thirty-fourth; the thirty-fifth round is on [SHIFT9.md](SHIFT9.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -221,7 +221,7 @@ L(\varepsilon_{\Phi_\Omega+1}) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{
   $`L(\varepsilon_{\Omega_1+1})`$; the tower must start at $`t_0 = \Phi_\Omega+1`$, and the claim stands (m1). EXACT-G″ was stated for every code below $`\varepsilon_{\Phi_\Omega+1}`$, also for indices $`\lambda'' \ge \varepsilon_{\Phi_\Omega+1}`$, where the
   domain lemmas are not available; it is restricted as above, which is all that is used (m2). The step at $`L(\Omega_1\cdot\omega)`$ is a transfer of §1.1, not a citation (m3). One step uses
   $`r(b) \ge \delta''_1`$ before it is proved; what it needs, $`b \le_1 \rho_\lambda \le_1 g`$, holds (m4). Three rows of the checks have wrong labels (m5). The normal forms must fix whether $`p`$ or $`\omega^p`$ is
-  written, since $`\Phi_\Omega = \omega^{\Phi_\Omega}`$ (m6). One intermediate point is labelled with codes up to $`\Phi_\Omega+1`$, it covers codes up to $`\Phi_\Omega`$ (m7).
+  written, since $`\Phi_\Omega = \omega^{\Phi_\Omega}`$ (m6). One intermediate point is labelled with codes up to $`\Phi_\Omega+1`$, it covers codes up to $`\Phi_\Omega`$ (m7; this point was itself wrong: since $`-1 + x = x`$ for infinite $`x`$, the label was exact, [SHIFT9.md](SHIFT9.md) §1.1).
 - **Not proved.** The Veblen closure above $`\Phi_\Omega`$, which would move the frontier to $`L(\Gamma_{\Phi_\Omega+1})`$: outline. EXACT-O″ (the offset is the order type of the codes below $`c`$ whose constants
   are below $`L(\lambda'')`$) and the long restarts of the skeleton (from the code $`\psi_{\Omega_2}(\Omega_\omega\cdot 2 + \psi_{\Omega_3}(\Omega_\omega\cdot 2)\cdot\omega^2)`$ on): conjectures. The landing calculus of the long
   restarts of the skeleton, the codes below $`P_3`$, and $`\nu_3`$: open. With the calculus for every code below $`P_3`$, the shift criterion one level up would give a triple nest with top
@@ -295,6 +295,8 @@ r \lt x \lt A(b_N) \lt \dots \lt A(b_1) \lt A(\delta) \lt y \lt v_N \lt \dots \l
 
 ### 2.4 Status after the thirty-fourth round
 
+Superseded by [SHIFT9.md](SHIFT9.md) §1.4.
+
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, L(\varepsilon_{\Phi_\Omega+1})]`$ given FRAG, with $`L(\varepsilon_{\Phi_\Omega+1}) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+\varepsilon_{\Phi_\Omega+1}})`$** ($`[0, X_{21}]`$ with
   2 reviews; up to $`\nu_C = \nu_S = L(\omega+1)`$ with 1 review and an audit; from $`\nu_C`$ to $`L(\omega^2)`$ with 2 reviews; from $`L(\omega^2)`$ to $`L(\Omega_1\cdot\omega)`$ with 1 review; from $`L(\Omega_1\cdot\omega)`$ to $`Z^+`$
   with 2 reviews, two proofs, §2.1, §2.2; from $`Z^+`$ to $`L(\varepsilon_{\Phi_\Omega+1})`$ with 1 review, §2.1).
@@ -323,6 +325,8 @@ Each run was under 60 seconds; none is a proof.
   row under the $`\Omega'`$ unit (no certificate support, not a disproof). Reverse certificates: 0 of 6 (author), 0 of 13 (referee).
 
 ### 2.6 Open
+
+Superseded by [SHIFT9.md](SHIFT9.md) §1.6.
 
 - The claim above $`L(\varepsilon_{\Phi_\Omega+1})`$ given FRAG (above $`X_4`$ without FRAG). Next: the Veblen closure above $`\Phi_\Omega`$ (frontier $`L(\Gamma_{\Phi_\Omega+1})`$), the offsets EXACT-O″, the long restarts
   of the skeleton and their landing calculus, the codes below $`P_3`$, and $`\nu_3`$. In $`R_2^S`$: the claim above $`L(\Omega_1\cdot\omega)`$; $`o_k = \omega`$ for the levels above $`\nu`$ without FRAG.

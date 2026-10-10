@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 30〜32 回目：どの深さでも相対的な遠いピン、LOW の否定、$`\nu_C = \nu_S = L(\omega+1)`$ とその監査、$`\nu_C`$ の上の $`X_A`$ までの主張、$`\psi_{\Omega_1}(\Omega_{\omega+1})`$ までの素の符号
 
-このページは [SHIFT6-ja.md](SHIFT6-ja.md) の続き（そこの §3 が 29 回目）。§1 が 30 回目、§2 が 31 回目、§3 が 32 回目。33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT6-ja.md](SHIFT6-ja.md) の続き（そこの §3 が 29 回目）。§1 が 30 回目、§2 が 31 回目、§3 が 32 回目。33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md)、35 回目は [SHIFT9-ja.md](SHIFT9-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -440,7 +440,7 @@ X_A = H(\eta_\nu + \omega^3\cdot 2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \om
 
 ### 3.4 32 回目のあとの状態
 
-[SHIFT8-ja.md](SHIFT8-ja.md) §2.4 で置き換えた。
+[SHIFT9-ja.md](SHIFT9-ja.md) §1.4 で置き換えた。
 
 - $`R_2^C`$ での Wilken の主張：FRAG 無しで $`[0, X_4]`$、そして **FRAG のもとで $`[0, X_A]`$、$`X_A = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P' + \omega^{\theta+3}\cdot 2)`$** で両方の半分とも
   成り立つ（$`[0, X_{21}]`$ は査読 2 回。$`\nu_C = \nu_S = L(\omega+1)`$ までは査読 1 回と監査 1 回で、FRAG、FRAG2、FRAG-SUBST、いちばん弱い 3 つのつなぎは査読 2 回、§3.1。$`\nu_C`$ から $`X_A`$ までは
@@ -468,7 +468,7 @@ X_A = H(\eta_\nu + \omega^3\cdot 2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \om
 
 ### 3.6 未解決
 
-[SHIFT8-ja.md](SHIFT8-ja.md) §2.6 で置き換えた。
+[SHIFT9-ja.md](SHIFT9-ja.md) §1.6 で置き換えた。
 
 - FRAG のもとで $`X_A`$ より上の主張（FRAG 無しでは $`X_4`$ より上）。まず B-1 の直し（区域の形の GAP-CALC。そのあとどの $`j`$ でも $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$ と $`[0, L(\omega^2)]`$
   での主張）、次に $`\nu`$ の上の骨組みの最初のやり直し $`L(\omega^2)`$：いくつかの $`L(e)`$ を一度に動かす FRAG、その骨組みのやり直しの計算、その $`P'`$ 以上の符号。そのあと $`\nu_3`$。$`R_2^S`$ で：
