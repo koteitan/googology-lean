@@ -17,7 +17,9 @@ $`\rho_\lambda = \upsilon_\lambda`$。その上の組は $`\tau^\lambda_j = \ups
 $`\delta_\lambda = \delta^\lambda_1`$ は最初のブロックの上端。$`\Xi_1 \lt \Xi_2 \lt \cdots`$ は $`\iota \mapsto \upsilon_\iota`$ の 0 でない不動点で、
 $`\Xi_\omega = \sup_n \Xi_n`$。$`\lambda \lt \Xi_\omega`$ では $`c^*(\lambda) = c(\lambda)`$、$`c^*(\Xi_\omega) = \Xi_\omega + 1`$ とおく。
 
-## 1. 補題 FRAG（証明済み）
+## 1. 補題 FRAG（証明済み、査読 2 回）
+
+2 回目の査読は 32 回目の監査で、論文の本文から証明を導き直した（[SHIFT7-ja.md](SHIFT7-ja.md) §3.1）。FRAG2 と FRAG-SUBST も同じ。
 
 **定理 FRAG**（有限の形）。$`\kappa`$ を $`\varepsilon`$ 数である $`\upsilon`$ の点とし、$`b_1 \lt \cdots \lt b_m`$ と
 $`c_1 \lt \cdots \lt c_m`$ を $`\kappa`$ より上の $`\upsilon`$ の点とする。$`\kappa`$ 未満か $`b_k`$ の区間（そのパラメータも含む）にある
@@ -53,14 +55,14 @@ $`\le_1`$ で 836,413 組。わざと入れた 3 つのバグはすべて見つ�
 これらは Wilken の項のプログラムのモデルを試すもので、$`R_1^+`$ そのものではない。
 
 **予想**（確認済み、使わない）：証明の写像は $`\beta_k`$ の選び方によらない。今は証明済み：この写像は代入の写像と等しい
-（FRAG-SUBST、[BREAK-ja.md](BREAK-ja.md) §4、査読 1 回）。
+（FRAG-SUBST、[BREAK-ja.md](BREAK-ja.md) §4、査読 2 回）。
 
 ## 2. $`\le_2`$ を保つ基の付け替え（定理 FRAG2）
 
 集合 $`Y`$ の上で $`R_2^+`$ が**骨組み型**とは：$`Y`$ の $`\upsilon`$ の点でない点はどれも $`R_1^+`$ の届く先を持ち、$`\lt_2`$ の組は
 どれも $`(\upsilon_\xi, \upsilon_{\xi+1})`$ であること。$`\mathrm{cap}(u) = \mathrm{lh}(u)`$ と書く。
 
-- **定理 FRAG2**（証明済み。FRAG を使う）。$`\Psi`$ を FRAG の写像、$`Y`$ を有限集合とし、$`Y \cup \Psi[Y]`$ の上で $`R_2^+`$ が
+- **定理 FRAG2**（証明済み、査読 2 回。FRAG を使う）。$`\Psi`$ を FRAG の写像、$`Y`$ を有限集合とし、$`Y \cup \Psi[Y]`$ の上で $`R_2^+`$ が
   骨組み型とする。このとき、$`\Psi`$ が $`Y`$ の上で $`0, +, \le, \le_1, \le_2`$ を保つ ⇔ $`Y`$ の $`\upsilon`$ の点 $`u`$ と $`Y`$ の
   $`z \gt u`$ のすべてで、(C1) $`z \le \mathrm{cap}(u) \Leftrightarrow \Psi z \le \mathrm{cap}(\Psi u)`$、(C2)
   $`u \lt_2 z \Leftrightarrow \Psi u \lt_2 \Psi z`$。つまり $`\le_2`$ を保つ写像は、添字だけでは決まらず、$`Y`$ から見える届く先と組の

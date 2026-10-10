@@ -1,8 +1,8 @@
 [← Back](README.md) | [English](SHIFT7.md) | [Japanese](SHIFT7-ja.md)
 
-# $`R_2^+`$, the thirtieth and thirty-first rounds: the relative far pin at every depth, not-LOW, $`\nu_C = \nu_S = L(\omega+1)`$, and the ω-top up to $`\varepsilon_{\Omega_\omega+1}`$
+# $`R_2^+`$, the thirtieth to thirty-second rounds: the relative far pin at every depth, not-LOW, $`\nu_C = \nu_S = L(\omega+1)`$ and its audit, the claim up to $`X_A`$ above $`\nu_C`$, and native codes up to $`\psi_{\Omega_1}(\Omega_{\omega+1})`$
 
-This page continues [SHIFT6.md](SHIFT6.md) (§3 there is the twenty-ninth round); §1 is the thirtieth round, §2 the thirty-first. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT6.md](SHIFT6.md) (§3 there is the twenty-ninth round); §1 is the thirtieth round, §2 the thirty-first, §3 the thirty-second. The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -219,7 +219,8 @@ L(n) \le_1 L(n+1),\qquad L(n) \le_1 L(\omega),\qquad L(\omega) \le_1 L(\omega+1)
   $`[L(n), L(n+1))`$, $`r(B_n R) = B_n(r(R))`$: the exact calculus at level 2 and EQUIV$`^{\mathrm{rel}}`$ (§1.1), applied to a base change under which codes grow. $`B_n`$ restricted to $`[0, L(n+1))`$ is an
   embedding of $`R_2^S`$ (it keeps $`0`$, $`+`$, $`\lt`$, $`\le_1`$, $`\le_2`$) into $`[0, L(\omega+1))`$, and every finite $`Y \subseteq [L(\omega), L(\omega+1))`$ lies in its image for every large $`n`$. The referee's minor points: the
   gap $`[m^*, L(1))`$ ($`n = 0`$) is used once and needs only the calculus (m2); one case of $`\le_2`$ in EMB must use the map on the offsets, since at the base the code changes from $`P'`$ to $`P'+1`$ (m3);
-  the paper should say that EQUIV$`^{\mathrm{rel}}`$ uses neither CODE-MON nor reaches, and how the supremum at the image is evaluated (m5); its own order test covers only some atoms (m6).
+  the paper should say that EQUIV$`^{\mathrm{rel}}`$ uses neither CODE-MON nor reaches, and how the supremum at the image is evaluated (m5); its own order test covers only some atoms (m6). The audit of
+  §3.1 checked m3 and m5: both steps hold as the referee said.
 - **PAIR, UP, NU** (proved, given FRAG). The three statements above are exactly the hypotheses of the shift criterion SHIFT ([SHIFT.md](SHIFT.md) §1, refereed) with $`a = L(\omega)`$, $`b = L(\omega+1)`$ and
   $`c_n = L(n)`$ (the referee checked them against its exact statement, "$`c_{n+1} \le_1 a`$ for every $`n`$" included). So $`L(\omega) \lt_2 L(\omega+1)`$ in $`R_2^S`$ (PAIR), and $`\nu_C \le \nu_S \le L(\omega+1)`$ (UP; this half uses
   neither the lower half nor not-LOW). With the lower half of §1.1 and LC-STRICT:
@@ -291,6 +292,8 @@ L(n) \le_1 L(n+1),\qquad L(n) \le_1 L(\omega),\qquad L(\omega) \le_1 L(\omega+1)
 
 ### 2.4 Status after the thirty-first round
 
+Superseded by §3.4.
+
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, \nu_C]`$ given FRAG, with $`\nu_C = \nu_S = L(\omega+1) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P')`$** ($`[0, X_{21}]`$ with
   2 reviews; up to $`L(\omega+1)`$ the lower half with 1 review, §1.1, and its repair with 2, §2.1, §2.2; the upper half with 1 review, §2.1).
 - $`R_2^S`$ against $`R_2^C`$: $`\nu_C = \nu_S`$ given FRAG (no ghost, 1 review); $`R_2^S = R_2^C`$ above $`\nu`$ is open.
@@ -315,6 +318,8 @@ Each run was under 60 seconds; none is a proof.
 
 ### 2.6 Open
 
+Superseded by §3.6.
+
 - The claim above $`\nu_C = L(\omega+1)`$ given FRAG (above $`X_4`$ without FRAG). Above $`\nu`$ the structure is not skeletal: the pairs of level 2 and up, the fans, toward $`\theta_0`$; the calculus for codes
   $`\ge P'`$ at level 2 and above; in $`R_2^S`$, $`o_k = \omega`$ for the levels above $`\nu`$, the reaches of their restarts, and their names (conjecture: $`\psi_{\Omega_1}(\Omega_\omega\cdot k)`$,
   $`\psi_{\Omega_1}(\Omega_\omega\cdot k + \omega^{P_k+1})`$, $`\psi_{\Omega_1}(\Omega_\omega\cdot k + \omega^{P_k+1} + P_k)`$ with $`P_k = \psi_{\Omega_2}(\Omega_\omega\cdot k)`$). The crossing at $`m^*`$ across two levels as its own step (minor m1 of §2.1).
@@ -322,5 +327,154 @@ Each run was under 60 seconds; none is a proof.
 - Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, and an upper bound for $`\iota(\mathrm{CH}_3)`$.
 - The first inaccessible: $`\varepsilon_{\Omega_\omega+1}`$ itself and the Veblen functions over $`\Omega_\omega`$; labels of level $`\omega`$ ($`\Omega_{\omega+1}`$), $`\Omega_{\omega\cdot 2}`$, and on to $`\theta_0`$; $`\mathrm{CH}_2`$ past $`\Theta_1`$;
   the step for all standard matrices below SRO.
+- Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; an InaccPsi formula for the reach in terms of the code; names above $`\nu`$ for the points that are not
+  $`\upsilon`$-points; the rest of [COVER.md](COVER.md) §9.
+
+## 3. The thirty-second round
+
+Three papers (2026-10), each refereed once: an audit of the proof of §2.1 (§3.1), a paper on the first segment above $`\nu_C`$ (§3.2), and a paper on native codes (§3.3). A result in this
+section has 1 review unless a count is given. The audit is a second, independent referee pass: it re-derived Theorem FRAG, FRAG2 and FRAG-SUBST from the paper texts, and checked the three
+weakest links of the chain to $`\nu_C`$ line by line; its own referee checked the audit and agreed. So these results now have **2 reviews**; every other link of the chain keeps its count
+(the table is on the page [AUDIT.md](AUDIT.md)). **2 reviews** also means, as in §2, that a referee of the thirty-first round asked for a change and a referee of this round checked it. None of
+the papers uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006) (the referees checked this). Papers cited: in §3.1 [W07a] (Def 3.26–3.28, L.3.27, L.3.30, L.4.3,
+Def 5.1, L.5.3, Def 6.1, L.6.3, L.6.9, L.6.10), [W07b] (§4, L.4.4, Thm 5.3, Cor 5.7, Cor 5.10; L.2.1 and Thm 2.2 only through the project's own proof of them, refereed in an early round) and
+Wilken 2020, Prop. 21.6; in §3.2 Wilken 2020 (L.21.7, L.21.10, L.21.12, Prop. 21.6, Prop. 21.11), Carlson 2009 (Def 5.3, L.5.5, Thm 14.10, Thm 14.14) and [W07b] Cor 5.10. The referees
+checked every citation against the paper text. No paper is used in a proved step of §3.3, which does not use FRAG; its facts on $`\psi`$ come from the Lean development of InaccPsi (the
+referee checked every cited line). No Lean file was added: the papers of §3.2 and §3.3 checked their ordinal inputs with Lean files that only compare terms (`#eval`, no theorem; green,
+and identical in the referees' reruns); these count as checks. Levels are numbered as in §1 (one higher than in the papers). From now on "given FRAG" means given FRAG together with
+FRAG-SUBST, SUBST-COMM and the own proof of [W07b] Thm 2.2 (the audit's minor point F-1; all refereed).
+
+### 3.1 The audit: FRAG refereed a second time, and the chain to $`\nu_C = L(\omega+1)`$
+
+- **Verdict.** No fatal and no blocking point anywhere in the chain. The milestone of §2.1, $`\nu_C = \nu_S = L(\omega+1)`$ with Wilken's claim in $`R_2^C`$ on $`[0, \nu_C]`$ (given FRAG), holds at the
+  standard "proved by transfer"; its count is now 1 review and 1 audit. FRAG is no longer the weak point of the chain.
+- **Theorem FRAG** (proved, **2 reviews**; [RESTARTS.md](RESTARTS.md) §1). The audit checked every citation with its exact hypotheses, and Lemmas ST, COMP and R, the four steps and the
+  cases D1–D4 again. The step that [W07b] takes from Wilken, AML 45 (2006) is replaced by the project's own proof. **FRAG2** (proved, **2 reviews**) and **FRAG-SUBST** (the map of FRAG is
+  the substitution map; proved, **2 reviews**). Minor points: FRAG alone gives some isomorphism, while the later proofs use specific transport maps, so "given FRAG" is to be read as above (F-1);
+  where a copy uses an $`\varepsilon`$-number $`\kappa_0`$ that is not a $`\upsilon`$-point, FRAG is applied with any $`\upsilon`$-point in $`(\kappa_0 + 1, \rho_\mu)`$, which works (F-2); FRAG2 should be stated for every
+  $`R_1^+`$-isomorphism of a finite set that keeps the $`\upsilon`$-points (F-3).
+- **The dependency table** ([AUDIT.md](AUDIT.md)): 34 nodes from the milestone down to the cited papers; 11 of them are proved by transfer. Before the audit only the results of the paper of
+  [SHIFT3.md](SHIFT3.md) §2.4 that the chain uses had 2 reviews (the referee corrected the audit here: the full proof of SKEL⁺ has 1 review).
+- **The three weakest links**, checked line by line against their inputs (each now **2 reviews**):
+  - L1: PSI-W$`^{(k)}`$ and THETA$`^\omega`$ ([SHIFT6.md](SHIFT6.md) §3), the ordinal side of the whole calculus. Every place where they adapt the counting rule PSI-n and CNST$`^n`$
+    ([SHIFT3.md](SHIFT3.md) §2.1) matches. Minor: the numeric checks test only the order of codes without constants, and nothing checks CNST$`_j`$ past $`\theta`$; one scope line at level 2 is not written (it holds).
+  - L2: the transfer of the exact calculus to level 2 (§1.1, with the tools of [SHIFT5.md](SHIFT5.md) §2.2). Each of its four rows is supplied by written lemmas. Minor: the audit rows at level 2 for
+    several earlier lemmas are not written (the earlier review checked sample rows only), and the base case for short codes at level 2 is not restated (its inputs exist).
+  - L3: the upper half of §2.1 (CROSS-LIM, TC⁺$`^\omega`$, EMB, ONTO-FIN, and the hypotheses of the shift criterion SHIFT of [SHIFT.md](SHIFT.md) §1). Minor points on citations and scope; two of them
+    confirm the minor points m3 and m5 of the review of §2.1 (both hold), and one (the reach of $`m^*`$) lies outside the milestone.
+- **The referee of the audit** (all minor). (R-1) The one unwritten lemma of the chain is the long-restart step LONG-RS$`^U`$ for η-offsets in $`[\psi_{\Omega_2}(\Omega_2), P')`$: it is stated
+  ([SHIFT2.md](SHIFT2.md) §2.1) only for offsets below $`\psi_{\Omega_2}(\Omega_2)`$, and the uses past that bound, at level 1 too, rest on a review remark. So the lower half of §1.1 uses it as well,
+  while its transfer to level 2 is written. Every ingredient exists; it should be stated as a lemma with the base change BC$`^{\mathrm{rel}}`$ of §1.1. (R-2) One citation in CROSS-LIM needs the
+  transport lemma of §1.1 at the base of a crossed restart, stated without a copy; its proof does not use the copy, so the step holds. (R-3) The count for SKEL⁺ above.
+- **Left** (text only; no gap in the mathematics was found): LONG-RS$`^U`$ past $`\psi_{\Omega_2}(\Omega_2)`$ as a lemma, the audit rows at level 2, a numeric check of CNST$`_j`$, and the citations.
+
+### 3.2 Above $`\nu_C`$: the region of $`\nu`$, and Wilken's claim on $`[0, X_A]`$, given FRAG
+
+Write $`\nu = L(\omega+1) = H(\eta_\nu)`$ with $`\eta_\nu = \Omega_\omega + \omega^{P'+1} + P'`$, so $`\nu = \rho_{\mu_0}`$ with $`\omega^3`$ dividing $`\mu_0`$, and $`\rho^+ = H(\eta_\nu + \omega^2)`$, the next restart. A **nested
+configuration** is $`x \lt u \lt v \lt y`$ with $`x \lt_2 y`$ and $`u \lt_2 v`$; $`y^C_\nu`$ is the least top of one in $`R_2^C`$ with $`x \gt \nu`$, and $`y^S_\nu`$ the least right end of a pair of $`R_2^S`$ with left end $`\gt \nu`$
+that is not a $`\tau`$–$`\delta`$ pair. A **cap** is a $`T`$ with $`\mathrm{lh}(\alpha) \le T`$ for every $`\alpha \le T`$; $`\nu`$ is a cap with $`\mathrm{lh}(\nu) = \nu`$.
+
+- **CAP$`^p`$, DECOUPLE$`^p`$, NONUPS** (proved). CAP$`^p`$: if a finite configuration $`Q`$ of $`\lt`$, $`\le_1`$, $`\le_2`$ has a realization above $`p`$, and $`T`$ is the least top of such a realization, then
+  $`\mathrm{lh}(\alpha) \le T`$ for every $`\alpha \in (p, T]`$, in $`R_2^S`$ and in $`R_2^C`$; if $`p`$ is a cap, so is $`T`$. (Referee, m3: in $`R_2^C`$ this is proved for configurations whose points are left ends of $`\lt_1`$ or right ends
+  of $`\lt_2`$, which are the ones used; a general $`Q`$ needs Carlson 2009, L.2.5.) DECOUPLE$`^p`$: below and above a cap $`p`$ no $`\le_1`$ or $`\le_2`$ holds (its clause on $`+`$ is false at $`p`$ itself, m4).
+  NONUPS: a point that is not a $`\upsilon`$-point reaches below the next $`\upsilon`$-point; so $`\mathrm{Core}(R_2^C)`$ is a $`\upsilon`$-point above $`\nu`$.
+- **The region of $`\nu`$** (proved, given FRAG; in $`R_2^S`$ and $`R_2^C`$). $`\nu`$ is the only restart in $`[\nu, \rho^+)`$; the $`\lt_2`$-pairs with right end in $`(\nu, \rho^+)`$ are exactly the
+  $`(\tau^\nu_j, \delta^\nu_j)`$, $`\tau^\nu_j = H(\eta_\nu + \omega\cdot j)`$, $`\delta^\nu_j = H(\eta_\nu + \omega\cdot j + 1)`$; a point that is not a restart reaches $`\min(\mathrm{lh}_1(\alpha), d(\alpha))`$ (its $`R_1^+`$ reach and its block top);
+  nothing below $`\rho^+`$ reaches $`\rho^+`$. So $`[\nu, \rho^+)`$ has the shape of $`[0, \upsilon_{\omega^2})`$, with $`\nu`$ in the role of $`0`$.
+- **FIRST-PAIR$`^\nu`$, NU-CT$`^\nu`$** (proved, given FRAG). The first pair $`(x, y)`$ above $`\nu`$ that is not a $`\tau`$–$`\delta`$ pair has $`x = \rho_\Lambda`$ with $`\omega^3`$ dividing $`\Lambda`$, $`y = \mathrm{lh}(x)`$ and
+  $`y = \rho_{\mu'}`$ with $`\mu' \ge \Lambda + \omega^3 \ge \mu_0 + \omega^3\cdot 2`$. $`R_2^C`$ agrees with $`R_2^S`$ on every relation with right end below $`y^C_\nu`$, and a ghost pair above $`\nu`$ (if any) obeys the same bound.
+- **Theorem A$`^\nu`$** (proved, given FRAG; FRAG enters only through §2.1). $`[0, y^C_\nu] \subseteq \mathrm{Core}(R_2^C)`$, and $`y^C_\nu \ge X_A`$ with
+
+```math
+X_A = H(\eta_\nu + \omega^3\cdot 2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P' + \omega^{\theta+3}\cdot 2).
+```
+
+  So **Wilken's claim holds in $`R_2^C`$ on $`[0, X_A]`$ (given FRAG)**, both halves: the core half by Theorem A$`^\nu`$, the names half because $`X_A`$ is a normal form (Lemma L). This is the first proved
+  range above $`\nu_C`$. The paper's remark: without a calculus of reaches above $`\nu`$ this is the most the method gives.
+- **Theorem B$`^\nu`$: not proved** (blocking point B-1). The paper claims, for every $`j \ge 1`$, $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$ in both structures, that these are all the new pairs below $`L(\omega^2)`$, an exact reach for every
+  restart below $`L(\omega^2)`$, $`\beta_0 \gt L(\omega^2)`$, and so the claim on $`[0, L(\omega^2)]`$, $`L(\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+2})`$. The referee: the lower bound LOWER$`_j`$ (the least top above the cap
+  $`L(\omega\cdot(j-1)+1)`$ is at least $`L(\omega\cdot j+1)`$) applies CAP-1 and LONG-CLASS$`^\omega`$ inside one gap $`[L(e), L(e+1))`$ that may contain that top, but the lemmas that move the calculus into the gaps
+  (BASE-INV, GAP-CALC) are stated only for whole gaps below it. So LOWER$`_j`$, NU$`_j`$, Theorem B$`^\nu`$ and the claim on $`[0, L(\omega^2)]`$ are not proved as written. The likely repair (not checked):
+  state GAP-CALC in the region form that CAP-1 has in §1.1.
+- **GAP-CALC, CROSS-LIM″, PAIR$`_j`$** (proved by transfer, given FRAG, with the referee's minor corrections m1 and m2 written in). The exact calculus of level 2 holds in every whole gap
+  $`[L(e), L(e+1))`$ below the least top; $`L(e) \le_1 L(\omega\cdot j)`$ for the $`e`$ of the block; and if $`L(\omega\cdot j+1)`$ is at most the least top, then $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$ in $`R_2^S`$ (the shift criterion,
+  as in §2.1). BASE-INV is not proved as written: one case is circular (m1), and FRAG2 needs its skeletal hypothesis on the fixed set, which fails above $`\nu`$ because the fixed set may contain
+  the pairs $`(L(\omega\cdot i), L(\omega\cdot i+1))`$ (m2: a relative FRAG2 is needed); the referee gives a correct argument for both. Other minor points: wording (m5), the limit case $`e = \omega\cdot j`$ (m6), a
+  membership that a check prints without computing it (m7), the reach of $`m^*`$ (m8, harmless).
+- **Above $`\nu`$** (remark and conjecture). The points $`L(e)`$ play the role of the $`\upsilon`$-points one step up: each gap $`[L(e), L(e+1))`$ carries a whole copy of the level-2 calculus, $`L(\omega) \lt_2 L(\omega+1)`$
+  is the first $`\tau`$–$`\delta`$ pair of this skeleton, and its right end $`\nu`$ is a cap. Conjecture SKEL″: the analogue of SKEL$`^\infty`$ for this skeleton, up to $`\nu_3`$ below. The first point past
+  Theorem B$`^\nu`$ is the first restart $`L(\omega^2)`$ of this skeleton; it needs a FRAG that moves several $`L(e)`$ at once, the restart calculus of this skeleton, and its codes $`\ge P'`$ (open). For
+  $`R_2^C`$ nothing new is needed: the relative NU-CT carries every fact of $`R_2^S`$ over.
+- **Landmarks** (conjecture; normal forms and order checked in Python and Lean). The least 3-nest has top $`\nu_3 = \psi_{\Omega_1}(\Omega_\omega\cdot 3 + \omega^{P_3+1} + P_3)`$, $`P_3 = \psi_{\Omega_2}(\Omega_\omega\cdot 3)`$ (the case $`k = 3`$ of the
+  conjectured names of §2.6), with its least realization written out; $`T_\omega = \psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$; the least fan $`x_F = \psi_{\Omega_1}(I_0 + \omega^{\psi_{\Omega_2}(I_0)+2})`$ (weak support: an analogy
+  only). Conjecture LEVEL-LIFT$`_k`$: replacing $`(\Omega_\omega\cdot k, P_k)`$ by $`(\Omega_\omega\cdot(k+1), P_{k+1})`$ in the names maps the skeleton of level $`k`$ into the next one, keeping $`\le_1`$ and $`\le_2`$.
+
+### 3.3 Native codes: atom units with one pair, and $`\iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\Omega_{\omega+1})`$
+
+- **The minor points of the review of §2.3 are applied** (**2 reviews**). **ONTO$`^{\mathrm{ord}}`$** (proved; the referee checked every Lean line it cites): for $`s \le \omega`$ and every $`\beta`$ below the bound
+  $`\Lambda`$ of the system, every strongly critical $`y`$ with $`\Omega_s \lt y \lt \psi_{\Omega_{s+1}}(\beta)`$ is $`\psi_{\Omega_{s+1}}(d)`$ for a normal form $`d \lt \beta`$. With it, DESCENT holds for labels that are ordinals, and the last
+  step of PSI-n that used the values of terms holds for ordinals (given the reading of PSI-n).
+- **Why chain number 3 stops at $`\varepsilon_{\Omega_\omega+1}`$** (remark). The region calculus copies blocks but never raises the nesting depth, and a unit of weight $`\varepsilon_{\Omega_\omega+1}`$ would need units of every
+  depth. A code past it with chain number 3 is open.
+- **The ordinal side up to $`\sigma_{\omega+1} = \psi_{\Omega_{\omega+1}}(\Omega_{\omega+1})`$** (proved; the last two by transfer). Let $`f(x) = \psi_{\Omega_{\omega+1}}(\Omega_\omega\cdot x)`$, $`S_1 = \Omega_\omega`$ and $`S_{m+1} = f(S_m)`$. Then
+  $`\sigma_{\omega+1} = \sup_m S_m`$ is the least fixed point of $`f`$ above $`\Omega_\omega`$ (FIX-σ$`_{\omega+1}`$); every $`d \lt \sigma_{\omega+1}`$ is a normal-form argument of $`\psi_{\Omega_{\omega+1}}`$, the stages below $`\sigma_{\omega+1}`$ are good
+  at a finite level, and $`\psi_{\Omega_{\omega+1}}`$ is continuous there (ALL-NF, GOOD$`^\sigma`$, LIM$`^\sigma`$); $`\sigma_{\omega+1}`$ is good at no finite level (BAD-σ); STAGE$`^\sigma`$, PUSH$`^\sigma`$. And (SUP-(ω+1), the conjecture of §2.3):
+
+```math
+\psi_{\Omega_1}(\Omega_{\omega+1}) = \sup_m \psi_{\Omega_1}(S_m).
+```
+
+- **Atom units** (proved; SUP$`^A`$, REGION$`^A`$, LEX$`^A`$, TOP-HOST$`^A`$, IDX$`^A`$ by transfer). An atom is an $`\varepsilon`$-number $`E`$ with $`\Omega_\omega \lt E \lt \sigma_{\omega+1}`$. A Veblen atom $`\varphi(\alpha, \beta)`$ gets the unit
+  $`r \lt x \lt A(\alpha) \lt A(\beta) \lt y \lt v \lt c`$ with $`x \lt_2 y`$, $`v \le_1 v + d_\alpha`$, $`c \le_1 c\cdot 2 + v + d_\beta`$ and $`r, x \le_1 c\cdot 2 + v + d_\beta`$; an atom $`\psi_{\Omega_{\omega+1}}(\delta)`$ gets
+  $`r \lt x \lt A(\delta) \lt y \lt c`$ with $`x \lt_2 y`$, $`c \le_1 c\cdot 3 + d_\delta`$ and $`r, x \le_1 c\cdot 3 + d_\delta`$ ($`A(z)`$ is the code of the argument $`z`$, with its point $`d_z`$). The pair of an atom hosts every
+  unit of smaller weight (ATOM-SUP), one universal top hosts every unit of weight below $`\sigma_{\omega+1}`$ (UNIV$`^A`$), and the codes are fan-free with chain number 3 (WT$`^A`$, ORD-A, SHAPE$`^A`$). With
+  MODULE-RED$`_4`$, natively:
+
+```math
+\iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\Gamma_{\Omega_\omega+1}),\qquad \iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\Omega_{\omega+1})\qquad (\Gamma_{\Omega_\omega+1} = \psi_{\Omega_{\omega+1}}(0)),
+```
+
+  and RED-TOWER holds with $`\mathrm{CH}_4`$ for every $`t \lt \psi_{\Omega_1}(\Omega_{\omega+1})`$ (proved by transfer). The bound for $`\mathrm{CH}_3`$ stays $`\psi_{\Omega_1}(\varepsilon_{\Omega_\omega+1})`$. These are lower bounds only.
+- The referee's minor points: an example has a wrong term (m1); for an $`\varepsilon`$-number argument $`z \gt \Omega_\omega`$, $`A(z)`$ is a formal decoration, and the proofs hold with it (m2); ATOM-SUP's hypothesis
+  misses the scope condition on label pairs (m3); several lemmas should be labelled "by transfer" (m4); wording (m5, m7). The least checked step (m6): a new argument code placed inside the pair
+  of an atom; the certificate searches time out on it and also on small toy versions, and the referee proved a two-step toy by hand, so "not found" there is a limit of the search; the step
+  rests on the proof.
+- **Open**: $`\psi_{\Omega_1}(\Omega_{\omega+1}+1)`$, $`\psi_{\Omega_1}(\Omega_{\omega\cdot 2})`$ and on to $`\theta_0`$ (they need stage systems with units above $`\Omega_{\omega+1}`$); chain number 3 past $`\varepsilon_{\Omega_\omega+1}`$.
+
+### 3.4 Status after the thirty-second round
+
+- Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, X_A]`$ given FRAG, with $`X_A = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P' + \omega^{\theta+3}\cdot 2)`$** ($`[0, X_{21}]`$ with
+  2 reviews; up to $`\nu_C = \nu_S = L(\omega+1)`$ with 1 review and 1 audit, FRAG, FRAG2, FRAG-SUBST and the three weakest links with 2 reviews, §3.1; from $`\nu_C`$ to $`X_A`$ with 1 review, §3.2).
+  $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$ for $`j \ge 2`$ and the claim on $`[0, L(\omega^2)]`$: not proved (blocking point B-1).
+- $`R_2^S`$ against $`R_2^C`$: $`\nu_C = \nu_S`$, and the two agree on every relation with right end below $`y^C_\nu \ge X_A`$ (given FRAG); further up, open.
+- Reaches (given FRAG): exact for every restart below $`\nu`$; above $`\nu`$, inside $`[\nu, \rho^+)`$ (§3.2).
+- **LOW: false, given FRAG**; **LOW$`^\infty`$: true, given FRAG** (1 review each).
+- The lower-bound program below $`\theta_0`$: native bounds $`\iota(\mathrm{CH}_3) \ge \psi_{\Omega_1}(\varepsilon_{\Omega_\omega+1})`$ and $`\iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\Omega_{\omega+1})`$ (1 review each). The step below SRO: no change (every $`n`$ on
+  all 3,166 sample matrices; the general statement for all standard matrices below SRO is open).
+
+### 3.5 Checks of the thirty-second round
+
+Each run was under 60 seconds; none is a proof.
+
+- §3.1. The old FRAG test program with two new seeds: 1,318,321 pairs for order and $`+`$, 102,054 pairs for $`\le_1`$, 24,644 values equal to the substitution, 0 failures. The referee: one more new seed
+  (595,477 pairs, 0 failures); at $`L(1)`$, $`L(2)`$, $`L(\omega)`$ crossed restarts exist whose long code has a leaf in $`[\rho_\lambda, R)`$, 9 of 9 (the premise of one minor point); LC-STRICT with two new seeds,
+  961 and 927 cases, 0 failures; the Lean file of §2.1 rerun green, identical.
+- §3.2. 22 points from $`\nu`$ to $`\psi_{\Omega_1}(\Omega_\omega\cdot 3)`$ (among them $`\rho^+`$, $`X_A`$, $`L(\omega\cdot 2+1)`$, $`L(\omega^2)`$) and the landmarks: normal forms, indices in $`D`$, strictly increasing; Lean green,
+  identical to Python. The referee: the base change of PAIR$`_j`$ on 2,869 offsets and 2,425,752 ordered pairs, 0 failures; the realizer conditions of CROSS-LIM″, 65 of 65; the region of $`\nu`$ and the
+  index of $`X_A`$, 44 of 44; the Lean rerun identical.
+- §3.3. Names on two seeds, 100 checks each, 0 failures; Lean green, identical to Python; 17 codes with atom units and the top have chain number 3, both mutants 4. Certificates (replayed):
+  forward 9 of 11, the top below $`\mathrm{CH}_4`$ found, and the stand-alone atom units of three cases of ATOM-SUP and of UNIV$`^A`$ with a $`\psi`$ guest found; every case that places a new argument code
+  inside the pair of an atom, and every hosting by the full top, timed out at 45–54 seconds; reverse 0 of 8. The referee: a new seed, 0 failures; own tests on 4,136 normal-form arguments,
+  12,408 terms of φ-ladders and 3,846 pairs of atoms, 0 failures; a toy certificate found, and a two-step toy proved by hand.
+
+### 3.6 Open
+
+- The claim above $`X_A`$ given FRAG (above $`X_4`$ without FRAG). First the repair of B-1 (GAP-CALC in region form; then $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$ for every $`j`$ and the claim on $`[0, L(\omega^2)]`$),
+  then the first restart $`L(\omega^2)`$ of the skeleton above $`\nu`$: a FRAG that moves several $`L(e)`$ at once, the restart calculus of that skeleton, and its codes $`\ge P'`$; then $`\nu_3`$. In $`R_2^S`$:
+  $`o_k = \omega`$ for the levels above $`\nu`$, their reaches and names (conjecture of §2.6).
+- LONG-RS$`^U`$ past $`\psi_{\Omega_2}(\Omega_2)`$ as a lemma, the other text items of §3.1, and the crossing at $`m^*`$ across two levels as its own step (minor m1 of §2.1).
+- $`R_2^S = R_2^C`$ above $`y^C_\nu`$; the core half in $`R_2^S`$ above $`\upsilon_{\omega^3}`$.
+- Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, and an upper bound for $`\iota(\mathrm{CH}_3)`$.
+- The first inaccessible: chain number 3 past $`\varepsilon_{\Omega_\omega+1}`$; $`\psi_{\Omega_1}(\Omega_{\omega+1}+1)`$, $`\Omega_{\omega\cdot 2}`$, and on to $`\theta_0`$; $`\mathrm{CH}_2`$ past $`\Theta_1`$; the step for all standard matrices below SRO.
 - Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; an InaccPsi formula for the reach in terms of the code; names above $`\nu`$ for the points that are not
   $`\upsilon`$-points; the rest of [COVER.md](COVER.md) §9.

@@ -19,7 +19,9 @@ $`\tau^\lambda_j = \upsilon_{\lambda+\omega j}`$ and $`\delta^\lambda_j = \upsil
 the top of its first block. $`\Xi_1 \lt \Xi_2 \lt \cdots`$ are the nonzero fixed points of $`\iota \mapsto \upsilon_\iota`$, and
 $`\Xi_\omega = \sup_n \Xi_n`$. Write $`c^*(\lambda) = c(\lambda)`$ for $`\lambda \lt \Xi_\omega`$ and $`c^*(\Xi_\omega) = \Xi_\omega + 1`$.
 
-## 1. Lemma FRAG (proved)
+## 1. Lemma FRAG (proved, 2 reviews)
+
+The second review is the audit of the thirty-second round, which re-derived the proof from the paper texts ([SHIFT7.md](SHIFT7.md) §3.1); the same holds for FRAG2 and FRAG-SUBST.
 
 **Theorem FRAG** (finite form). Let $`\kappa`$ be a $`\upsilon`$-point that is an $`\varepsilon`$-number, and let
 $`b_1 \lt \cdots \lt b_m`$ and $`c_1 \lt \cdots \lt c_m`$ be $`\upsilon`$-points above $`\kappa`$. For every finite set $`F`$ of ordinals
@@ -59,14 +61,14 @@ and $`+`$; 836,413 pairs for $`\le_1`$ inside a segment; three planted bugs were
 seeds: about 1.9 million pairs, 0 failures. These runs test a program model of Wilken's terms, not $`R_1^+`$ itself.
 
 **Conjecture** (checked, not used): the map of the proof does not depend on the choice of the $`\beta_k`$. Now proved: the map
-equals a substitution map (FRAG-SUBST, [BREAK.md](BREAK.md) §4, 1 review).
+equals a substitution map (FRAG-SUBST, [BREAK.md](BREAK.md) §4, 2 reviews).
 
 ## 2. Base changes that keep $`\le_2`$ (Theorem FRAG2)
 
 $`R_2^+`$ is **skeletal** on a set $`Y`$ if every point of $`Y`$ that is not a $`\upsilon`$-point has its $`R_1^+`$ reach, and every
 $`\lt_2`$-pair is $`(\upsilon_\xi, \upsilon_{\xi+1})`$. Write $`\mathrm{cap}(u) = \mathrm{lh}(u)`$.
 
-- **Theorem FRAG2** (proved; it uses FRAG). Let $`\Psi`$ be a map of FRAG and $`Y`$ finite with $`R_2^+`$ skeletal on
+- **Theorem FRAG2** (proved, 2 reviews; it uses FRAG). Let $`\Psi`$ be a map of FRAG and $`Y`$ finite with $`R_2^+`$ skeletal on
   $`Y \cup \Psi[Y]`$. Then $`\Psi`$ keeps $`0, +, \le, \le_1, \le_2`$ on $`Y`$ if and only if for each $`\upsilon`$-point $`u \in Y`$ and
   each $`z \gt u`$ in $`Y`$: (C1) $`z \le \mathrm{cap}(u) \Leftrightarrow \Psi z \le \mathrm{cap}(\Psi u)`$, and (C2)
   $`u \lt_2 z \Leftrightarrow \Psi u \lt_2 \Psi z`$. So the maps that keep $`\le_2`$ are fixed by the reach and pair facts that $`Y`$
