@@ -26,6 +26,7 @@
 | $`[0, L(\Omega_1\cdot\omega)] \subseteq \mathrm{Core}(R_2^C)`$ | FRAG | [SHIFT8-ja.md](SHIFT8-ja.md) §1.1 |
 | $`[0, L(\varepsilon_{\Phi_\Omega+1})] \subseteq \mathrm{Core}(R_2^C)`$ | FRAG | [SHIFT8-ja.md](SHIFT8-ja.md) §2.1 |
 | $`[0, L(G_2)] \subseteq \mathrm{Core}(R_2^C)`$、$`L(G_2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+G_2})`$（$`L(\varepsilon_{\Phi_\Omega+1}+\omega^2)`$ までは 2 つの証明で査読 2 回） | FRAG | [SHIFT9-ja.md](SHIFT9-ja.md) §1.1、§1.2 |
+| $`[0, L(\Omega_2+\Phi^{P'}\cdot\omega)] \subseteq \mathrm{Core}(R_2^C)`$、$`L(\Omega_2+\Phi^{P'}\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \Omega_2 + \omega^{\Phi^{P'}+1})`$（$`L(G(\Omega_1)\cdot\omega)`$ までは 2 つの証明で査読 2 回） | FRAG | [SHIFT9-ja.md](SHIFT9-ja.md) §2.1、§2.2 |
 
-ここで $`L(e) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + P'\cdot e)`$、$`P' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)`$、$`\Phi_\Omega = \psi_{\Omega_2}(\Omega_2)`$、$`\theta = \psi_{\Omega_2}(\Omega_\omega)`$、$`\theta_2 = \psi_{\Omega_3}(\Omega_\omega)`$。点 $`X_n`$ の名前は
+ここで $`L(e) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + P'\cdot e)`$、$`P' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)`$、$`\Phi_\Omega = \psi_{\Omega_2}(\Omega_2)`$、$`\theta = \psi_{\Omega_2}(\Omega_\omega)`$、$`\theta_2 = \psi_{\Omega_3}(\Omega_\omega)`$、$`\Phi^{P'} = \psi_{\Omega_2}(\Omega_\omega\cdot 2+\Omega_2)`$、$`G(\Omega_1) = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_1})`$。点 $`X_n`$ の名前は
 [README-ja.md](README-ja.md) §2 と引いたページにある。

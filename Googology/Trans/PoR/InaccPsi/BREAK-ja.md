@@ -120,7 +120,7 @@ $`\nu_{nest}`$ は PS の実現の最小の上端 $`y`$。
   どちらの場合も、2 つの構造は右端が $`\nu_C`$ 未満のどの関係でも一致する。さらに証明済み：$`\nu_C = \nu_S`$ ⇔ 幽霊が無い ⇔
   $`\beta_0 \gt \nu_S`$ ⇔ $`T_C = \nu_S`$。
 - **系**（証明済み、査読 1 回。$`R_2^C`$）。
-  - $`\beta_0 \ge \nu_C \gt \nu_P`$。前は $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$。（あとの評価は、$`\nu_C \gt \upsilon^*`$ から FRAG のもとでの $`[0, L(G_2)] \subseteq \mathrm{Core}(R_2^C)`$ まで、[BREAK2-ja.md](BREAK2-ja.md) §1 に挙げる。）
+  - $`\beta_0 \ge \nu_C \gt \nu_P`$。前は $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$。（あとの評価は、$`\nu_C \gt \upsilon^*`$ から FRAG のもとでの $`[0, L(\Omega_2+\Phi^{P'}\cdot\omega)] \subseteq \mathrm{Core}(R_2^C)`$ まで、[BREAK2-ja.md](BREAK2-ja.md) §1 に挙げる。）
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$。だから $`R_2^C`$ の核は $`[0, \nu_P]`$ を含む。前は $`[0, \rho_{\Theta_{d\omega}})`$ と、$`\nu_P`$ と比べて
     いない $`T_C`$ での $`[0, T_C]`$。
   - SKEL⁺（HC と INC1-nonups も）が $`R_2^C`$ の $`[0, \nu_C)`$ で成り立つ。今は仮定なしで（[COVER-ja.md](COVER-ja.md) §5.1）。

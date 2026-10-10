@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the thirty-third and thirty-fourth rounds: Theorem B$`^\nu`$, the skeleton of the points $`L(e)`$ up to $`L(\varepsilon_{\Phi_\Omega+1})`$, the residue of the audit, Carlson's categoricity theorem for $`R_2^S`$, and native codes up to $`\psi_{\Omega_1}(\Omega_{\omega+1}^2 + \sigma_2)`$
 
-This page continues [SHIFT7.md](SHIFT7.md) (§3 there is the thirty-second round); §1 is the thirty-third round, §2 the thirty-fourth; the thirty-fifth round is on [SHIFT9.md](SHIFT9.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT7.md](SHIFT7.md) (§3 there is the thirty-second round); §1 is the thirty-third round, §2 the thirty-fourth; the thirty-fifth and thirty-sixth rounds are on [SHIFT9.md](SHIFT9.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -295,7 +295,7 @@ r \lt x \lt A(b_N) \lt \dots \lt A(b_1) \lt A(\delta) \lt y \lt v_N \lt \dots \l
 
 ### 2.4 Status after the thirty-fourth round
 
-Superseded by [SHIFT9.md](SHIFT9.md) §1.4.
+Superseded by [SHIFT9.md](SHIFT9.md) §2.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, L(\varepsilon_{\Phi_\Omega+1})]`$ given FRAG, with $`L(\varepsilon_{\Phi_\Omega+1}) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+\varepsilon_{\Phi_\Omega+1}})`$** ($`[0, X_{21}]`$ with
   2 reviews; up to $`\nu_C = \nu_S = L(\omega+1)`$ with 1 review and an audit; from $`\nu_C`$ to $`L(\omega^2)`$ with 2 reviews; from $`L(\omega^2)`$ to $`L(\Omega_1\cdot\omega)`$ with 1 review; from $`L(\Omega_1\cdot\omega)`$ to $`Z^+`$
@@ -326,7 +326,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 2.6 Open
 
-Superseded by [SHIFT9.md](SHIFT9.md) §1.6.
+Superseded by [SHIFT9.md](SHIFT9.md) §2.6.
 
 - The claim above $`L(\varepsilon_{\Phi_\Omega+1})`$ given FRAG (above $`X_4`$ without FRAG). Next: the Veblen closure above $`\Phi_\Omega`$ (frontier $`L(\Gamma_{\Phi_\Omega+1})`$), the offsets EXACT-O″, the long restarts
   of the skeleton and their landing calculus, the codes below $`P_3`$, and $`\nu_3`$. In $`R_2^S`$: the claim above $`L(\Omega_1\cdot\omega)`$; $`o_k = \omega`$ for the levels above $`\nu`$ without FRAG.

@@ -1,8 +1,8 @@
 [← Back](README.md) | [English](SHIFT9.md) | [Japanese](SHIFT9-ja.md)
 
-# $`R_2^+`$, the thirty-fifth round: the reaches of the skeleton up to $`L(G_2)`$, the first gap of $`\mathrm{Core}(R_2^S)`$, and the stage route toward $`\theta_0`$
+# $`R_2^+`$, the thirty-fifth and thirty-sixth rounds: the reaches of the skeleton up to $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$, the first gap of $`\mathrm{Core}(R_2^S)`$, and the stage route toward $`\theta_0`$
 
-This page continues [SHIFT8.md](SHIFT8.md) (§2 there is the thirty-fourth round); §1 is the thirty-fifth round. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT8.md](SHIFT8.md) (§2 there is the thirty-fourth round); §1 is the thirty-fifth round, §2 the thirty-sixth. The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -64,7 +64,7 @@ L(G_2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+G_2}),\qquad G_2 = \p
   covered is $`G_2`$, at the point itself; its reading would be the first restart inside the gap.
 - The referee's minor points (none changes a result). In one example the code of $`\lambda'' = G(\omega+1)\cdot\omega = \omega^{G(\omega+1)+1}`$ is $`G(\omega+1)+1`$, not $`G(\omega+1)\cdot\omega`$, so one landmark and two rows of
   the checks are mislabelled (m1). One check label of the repair of m1 names the wrong point; the claim holds (m2). In the description of the skeleton inside a gap, "$`n \ge 1`$ or $`j = 0`$"
-  should read "$`n \ge 1`$", and PIN-R uses a bound on the reach of the left ends that should be stated there (m3). The author's own slip of procedure (a stray directory change that failed and
+  should read "$`n \ge 1`$" (still off at $`n = 1`$, §2.1), and PIN-R uses a bound on the reach of the left ends that should be stated there (m3). The author's own slip of procedure (a stray directory change that failed and
   changed nothing; m7).
 - **Not proved.** PIN-R (the pin at the first restart inside the gap): proved up to m3, not used for the frontier; that the same argument works at every restart of the gap: outline (m4). The
   relative far pin through the whole gap: outline. EXACT-O″ for every short restart below $`\psi_{\Omega_1}(\Omega_\omega\cdot 3)`$ (readings that stay below $`\delta''_1\cdot\omega`$): conjecture; it needs that pin and the
@@ -117,7 +117,7 @@ Notation as in [SHIFT8.md](SHIFT8.md) §2.3: $`\Omega' = \Omega_{\omega+1}`$. A 
 ```
 
   STEP is proved too. The referee: state one convention for "label-free" (m1); the decomposition term must be split into Cantor normal form summands (m2).
-- **Not proved: STAGE$`^G`$** (blocking point B-1, probably repairable). The general stage lemma, which joins these lemmas to the stage systems, uses a family that must be cofinal among all
+- **Not proved: STAGE$`^G`$** (blocking point B-1, probably repairable; repaired in §2.3). The general stage lemma, which joins these lemmas to the stage systems, uses a family that must be cofinal among all
   earlier stages. At the level of the labels of $`T`$ it is not: the referee gives a counterexample with an $`\varepsilon`$-number label of level 1. At higher levels it is not shown cofinal among the
   earlier stages that are not good there, which the earlier rounds got from explicit chains. Likely repair: a larger closure bound and a lemma BUMP (every earlier stage lies below an earlier
   stage whose multiple is in that closure). So PUSH$`^G`$, "the ordinal side is complete up to $`\theta_0`$" and the two bounds below are not proved.
@@ -126,7 +126,7 @@ Notation as in [SHIFT8.md](SHIFT8.md) §2.3: $`\Omega' = \Omega_{\omega+1}`$. A 
   parts (Veblen atoms over $`\Omega'`$ and collapses by $`\psi_{\Omega_{\omega+2}}`$): objects with several additive principal points and no pair (multiplicities 2 and 3); the next host position is an atom
   that can be copied (NEXT-HOST, by $`\varepsilon`$-closure); the $`\Omega'`$ unit gets a universal source without a pair above $`y`$. Every code keeps chain number 3. Minor: one copy must be placed above
   a given point (m3); one closure needs a point above the labels (m4).
-- **Not proved: the bounds** (they rest on STAGE$`^G`$). Natively, with $`\mathrm{CH}_4`$,
+- **Not proved: the bounds** (they rest on STAGE$`^G`$; now proved, §2.3). Natively, with $`\mathrm{CH}_4`$,
 
 ```math
 \iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\varepsilon_{\Omega_{\omega+1}+1}) \quad\text{(Conjecture TREE)},\qquad \iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\Omega_{\omega+2}),
@@ -140,16 +140,7 @@ Notation as in [SHIFT8.md](SHIFT8.md) §2.3: $`\Omega' = \Omega_{\omega+1}`$. A 
 
 ### 1.4 Status after the thirty-fifth round
 
-- Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, L(G_2)]`$ given FRAG, with $`L(G_2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+G_2})`$** ($`[0, X_{21}]`$ with 2 reviews; up to
-  $`\nu_C = \nu_S = L(\omega+1)`$ with 1 review and an audit; from $`\nu_C`$ to $`L(\omega^2)`$ with 2 reviews; from $`L(\omega^2)`$ to $`L(\Omega_1\cdot\omega)`$ with 1 review; from $`L(\Omega_1\cdot\omega)`$ to $`Z^+`$ with 2 reviews; from $`Z^+`$
-  to $`L(\varepsilon_{\Phi_\Omega+1})`$ with 1 review, [SHIFT8.md](SHIFT8.md) §2; from $`L(\varepsilon_{\Phi_\Omega+1})`$ to $`L(\varepsilon_{\Phi_\Omega+1}+\omega^2)`$ with 2 reviews, two proofs, §1.1, §1.2; from there to $`L(G_2)`$ with 1 review, §1.1).
-- Wilken's claim in $`R_2^S`$: on $`[0, L(\varepsilon_{\Phi_\Omega+1}+\omega^2))`$ given FRAG (§1.2); without FRAG up to $`\upsilon_{\omega^3}`$.
-- $`R_2^S`$ against $`R_2^C`$: the two agree on every relation with right end at most $`L(G_2)`$ (given FRAG); $`\beta_0 \ge \sigma_S`$, and $`\sigma_S`$ is additively principal and in $`[\rho(\beta_0), \beta_0]`$; (E) is
-  equivalent to "the two cores are equal", and does not follow from the hypotheses of [C11] with MIN and CC alone. $`\beta_0`$ is not located.
-- Reaches (given FRAG): exact for every restart below $`L(G_2)`$.
-- **LOW: false, given FRAG**; **LOW$`^\infty`$: true, given FRAG** (1 review each; no change). The steps PIN and LOW of Conjecture CORE-2: undecided (no change).
-- The lower-bound program below $`\theta_0`$: native bounds $`\iota(\mathrm{CH}_3) \ge \psi_{\Omega_1}(\varepsilon_{\Omega_\omega+1})`$ and $`\iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\Omega_{\omega+1}^2 + \sigma_2)`$ (1 review each; no change: the bounds of
-  §1.3 wait for STAGE$`^G`$). The step below SRO: no change (every $`n`$ on all 3,166 sample matrices; the general statement for all standard matrices below SRO is open).
+Superseded by §2.4.
 
 ### 1.5 Checks of the thirty-fifth round
 
@@ -167,14 +158,162 @@ Each run was under 60 seconds; none is a proof.
 
 ### 1.6 Open
 
-- The claim above $`L(G_2)`$ given FRAG (above $`X_4`$ without FRAG). Next: the codes from $`G_2`$ on (the relative far pin through the whole gap, then the window rule one step up), the long
-  restarts of the skeleton and their landing calculus, the codes below $`P_3`$, and $`\nu_3`$. In $`R_2^S`$: the claim above $`L(\varepsilon_{\Phi_\Omega+1}+\omega^2)`$; $`o_k = \omega`$ for the levels above $`\nu`$ without
-  FRAG.
+Superseded by §2.6.
+
+## 2. The thirty-sixth round
+
+Three papers (2026-10), each refereed once: a paper on the reaches of the skeleton for every code below $`\Phi^{P'}`$ (§2.1), a paper on (E), $`\beta_0`$ and the reading through the gap
+(§2.2), and a paper on native codes (§2.3). A result in this section has 1 review unless a count is given. The claim on $`[0, L(G(\Omega_1)\cdot\omega)]`$ is proved in the first two papers
+independently, by two different readings of the gap of a restart, so the step from $`L(G_2)`$ to $`L(G(\Omega_1)\cdot\omega)`$ has **2 reviews**. The minor points of the reviews of §1.1 and §1.2 are applied
+by the first two papers, and their referees checked each repair (**2 reviews**); the third paper applies those of §1.3 (its referee checked them). None of the papers uses Wilken, JSL 72 (2007),
+Carlson, AML 38 (1999), or Wilken, AML 45 (2006) (the referees checked this). Papers cited: in §2.1 only through refereed stages; in §2.2 [C11] and Carlson 2009 (Def 5.3, Def 5.4, L.5.5,
+L.5.7) as in §1.2; no paper in a proved step of §2.3, which does not use FRAG. No Lean file was added: the ordinal inputs of §2.1 and §2.2 were checked with Lean files that only compare
+terms (`#eval`, no theorem; green, identical to Python, and identical in the referees' reruns), and the abstract cores of the lemmas of §2.3 with a Lean file (green, only the standard axioms,
+no `sorry`; the referee rechecked it); these count as checks. Levels and "given FRAG" are as in §1.
+
+Notation (as in §1): $`\Phi^X`$ is the least fixed point of $`\alpha \mapsto \Gamma_\alpha`$ above $`X`$, so $`\Phi^{P'} = \psi_{\Omega_2}(\Omega_\omega\cdot 2 + \Omega_2)`$; $`\hat G = G(\Omega_2)`$; for a restart $`b = L(\lambda'')`$ of the skeleton,
+$`b_1 = L(\lambda''+1)`$ and $`u_\xi = H(\eta_{\lambda''}+\xi)`$, the points of the gap of $`b`$.
+
+### 2.1 The reaches of the skeleton for every code below $`\Phi^{P'}`$, and the claim up to $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$, given FRAG
+
+- **The repairs of the review of §1.1** (m1–m7; **2 reviews**). The skeleton inside a gap is restated block by block; the reading "$`n \ge 1`$" of m3 there is still wrong at $`n = 1`$, since $`\delta_j`$
+  itself reaches only $`\delta_j`$, and PIN-R is proved again in the corrected form (not used for the frontier). The step "the same argument for every restart of the gap" (m4) is now an
+  outline, replaced by FAR-PIN″ below. The upper half of RED-O″ is TOP-REG″ with the fixed set enlarged by a pin pattern (TOP-REG″⁺, m5). The rest are labels.
+- **The domain of $`L`$ below $`\Phi^{P'}`$, and $`L(\Omega_2)`$** (PSI2$`^{P'}`$, ARG-BOUND$`^\Phi`$, DOM″$`^\Phi`$, EMPTY″, FIX″$`_2`$, DOWN″, COF″, TAIL″; proved). $`\psi_{\Omega_2}(\Omega_\omega\cdot 2+1+\beta) = \Gamma_{P'+1+\beta}`$ for
+  $`\beta \lt \Phi^{P'}`$ (the $`\Gamma`$ tier above $`P'`$). The domain criterion of §1.1 holds for every normal form $`e \lt \Phi^{P'}`$ and for $`e \in [\Omega_2, \Omega_2+\Phi^{P'}\cdot\omega)`$. No $`e \in [\Phi^{P'}, \Omega_2)`$ is in
+  the domain, so $`L(\Omega_2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2+\Omega_2)`$ is the supremum of the points $`L(e)`$ below it, and its code is $`\Phi^{P'}`$; above $`\Omega_2`$ the codes below $`\Phi^{P'}`$ come again.
+- **The reading at a base of the skeleton** (THETA$`^b`$, THETA$`^\Gamma`$; proved by transfer, no FRAG). The reading THETA$`^\omega`$ of [SHIFT6.md](SHIFT6.md) §3, run at $`b`$, gives $`o_b(c)`$ inside the gap
+  $`[b, b_1)`$ for every code $`c \lt P'`$: $`o_b(G_2) = u_{\omega^2}`$ (the first restart inside the gap), $`o_b(\hat G) = u_{\Omega_1}`$ (its first index fixed point), and the supremum is $`b_1`$. For $`c \in [P', \Phi^{P'})`$,
+  $`o_b(c)`$ is the reading at the $`\upsilon`$-point $`b_1`$ of the code $`c`$ with $`P'`$ replaced by $`\Omega_1`$. The referee: for $`\lambda'' \lt \Omega_2`$ the codes with constants below $`b`$ end below $`\Phi^{P'}`$,
+  so the reading is onto an initial segment only, and one equality of the transport fails at some tails; the inequalities that are used hold (m2).
+- **The relative far pin** (L-PIN, FAR-PIN″, PIN-S at $`b_1`$; proved by transfer, given FRAG). A copy at $`b`$ sends $`L(\lambda''+n)`$ to a point $`L(e) \ge L(\mu''+n)`$, where $`L(\mu'')`$ is the image
+  of $`b`$ (L-PIN). For every finite set of points of $`[b, \tau''_1)`$ a finite pin pattern makes the copy send each of them at least to its transport (FAR-PIN″): the relative pin of
+  [SHIFT7.md](SHIFT7.md) §1.1, applied at the relative bases $`L(\lambda''+n)`$. The referee: proved at the root gap, which is all that the frontier uses; over several gaps the pattern must hold every
+  $`L(\lambda''+i)`$, $`1 \le i \le \max n`$, not only the bases of the gaps met (m1); the relative bound should be $`b_1`$ (m3); an image restart that is a point $`L(e)`$ needs the other clauses written (m4);
+  PIN-S needs its form with moved parameters (m5).
+- **Theorems EXACT-O″$`^\omega`$ and EXACT-O″$`^\Gamma`$** (TOP-REG″⁺, RED-O″⁺, ATTAIN″; proved by transfer, given FRAG). For every restart $`b = L(\lambda'')`$ whose code $`c`$ is at most $`\Phi^{P'}`$:
+
+```math
+r(L(\lambda'')) = \delta''_1(\lambda'') + o_b(c).
+```
+
+  So every code in $`[G_2, P')`$ is short: its reading stays in the gap of $`b`$. Examples: $`r(L(G_2)) = \delta''_1 + u_{\omega^2}`$ at $`b = L(G_2)`$, and $`r(L(\Omega_2)) = \delta''_1 + \Phi^{L(\Omega_2+1)}`$.
+- **Theorem C$`^\Phi`$ and the new frontier** (proved by transfer, given FRAG). Below $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$, $`R_2^S`$ is skeletal for the skeleton of the points $`L(e)`$, every restart has an exact reach, and
+  there is no fan apex and no triple nest. So $`\beta_0`$ and the least top of a triple nest in $`R_2^C`$ are above it, and **Wilken's claim holds in $`R_2^C`$ on $`[0, L(\Omega_2+\Phi^{P'}\cdot\omega)]`$**, both halves:
+
+```math
+L(\Omega_2+\Phi^{P'}\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \Omega_2 + \omega^{\Phi^{P'}+1}),\qquad \Phi^{P'} = \psi_{\Omega_2}(\Omega_\omega\cdot 2 + \Omega_2).
+```
+
+  On the way, each with both halves: $`L(\varepsilon_{G_2+1})`$, $`L(\hat G)`$, $`L(G(\Omega_3))`$, $`L(P') = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'\cdot 2})`$, $`L(\varepsilon_{P'+1})`$, $`L(\Gamma_{P'+1}) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \psi_{\Omega_2}(\Omega_\omega\cdot 2+1))`$ and $`L(\Omega_2)`$.
+- Other minor points (none changes a result): ATTAIN″ compares offsets read at different bases and should be stated by codes (m6); the author's checks missed the new bases
+  $`L(\Omega_2)`$, $`L(\Omega_2+\Phi^{P'}\cdot k)`$, which the referee checked (m7).
+- **Not proved.** FAR-PIN″ over several gaps as written (m1; not used). FAR-PIN″ with parameters in earlier gaps: outline. Conjecture TAU: the segment tier $`[\Omega_1, \psi_{\Omega_2}(\Omega_3))`$ carries over
+  above $`P'`$ (checked), which would move the frontier to $`L(\psi_{\Omega_3}(\Omega_3))`$. Conjecture READ″: the code $`\psi_{\Omega_2}(\Omega_\omega\cdot 2 + \psi_{\Omega_3}(\Omega_\omega\cdot 2)\cdot\zeta)`$ reads $`L(\lambda''+1+\zeta)`$; this supports the
+  conjectured start of the long restarts in §1.1. Proved: if $`\lambda'' \le \theta_2`$, every code is at most $`\psi_{\Omega_2}(\Omega_\omega\cdot 2+\theta_2)`$, so long restarts need an uncountable $`\lambda''`$. Open: the window rule
+  one step up, the long restarts and their landing calculus, the codes below $`P_3`$, and $`\nu_3`$. $`T_3 \le \nu_3`$ is not claimed.
+
+### 2.2 (E), the reading through the gap, and $`\beta_0`$
+
+Words as in §1.2.
+
+- **The repairs of the review of §1.2** (m1–m8; **2 reviews**). Only "$`f^{-1}(\alpha) \gt \alpha \Rightarrow \sigma_S \le \alpha`$" is kept, and the converse is false (a counterexample is given); SHARP-RIG is required at
+  every bound below $`x_F^C`$; the sentence on closedness is a remark; citations and wording.
+- **NO-GAP$`^\theta`$** (proved by transfer, given FRAG). $`[0, L(G_2)) \subseteq \mathrm{Core}(R_2^S)`$, with $`f`$ the identity there: the bound $`\beta_0 \gt L(G_2)`$ of §1.1 with a lemma of
+  [SHIFT8.md](SHIFT8.md) §2.2 applied at the point $`L(G_2)`$.
+- **The reading through the gap** (G-CONT, FIX-G, READ$`^{\mathrm{gap}}`$ by transfer; PIN-GAP, PIN-b, INDEX$`^{\mathrm{gap}}`$, H-RC$`^{\mathrm{gap}}`$ without FRAG, given the induction hypothesis; TOP-REG″$`^{\mathrm{gap}}`$ by
+  transfer; all proved, every case of the pins checked by hand). $`G`$ is continuous on $`[0, \hat G]`$, and a code below $`G(\Omega_1)`$ whose countable constants lie below an $`\varepsilon`$-number $`z`$ is
+  below $`G(z)`$ (G-CONT). $`o_b(G(\zeta)) = u_{1+\zeta}`$ for $`\zeta \lt b`$ and $`o_b(G(\Omega_1)) = u_b`$ (READ$`^{\mathrm{gap}}`$): the reading runs through the restarts $`u_{\omega^2\cdot k}`$, $`u_{\omega^3}`$, …, $`u_{\varepsilon_0}`$, … of
+  the gap. A copy that sends $`b`$ to $`b' = L(\mu'')`$ sends each $`u_\xi`$ with a fixed countable $`\xi`$ at least to $`H(\eta_{\mu''}+\xi)`$, since no restart of the image between the image of the
+  prefix and that point has the code of $`u_\xi`$ (PIN-GAP); the same for $`\xi = b`$ (PIN-b). $`L(G(\Omega_1))`$ is the least fixed point of $`\zeta \mapsto L(G(\zeta))`$ (FIX-G).
+- **Theorems EXACT-O″$`^G`$ and EXACT-O″$`_{G(\Omega_1)}`$** (proved by transfer, given FRAG). Every restart with code $`c \lt G(\Omega_1)`$ has $`r = \delta''_1 + o_b(c)`$ (on $`[G_2, G(\Omega_1))`$ a second proof of
+  §2.1), and the limit code $`G(\Omega_1)`$ gives $`r = \delta''_1 + u_b`$. So (Theorem C$`^{G1}`$) the claim holds in $`R_2^C`$ on $`[0, L(G(\Omega_1)\cdot\omega)]`$, $`\beta_0 \gt L(G(\Omega_1)\cdot\omega+\omega+1)`$, and
+  **$`[0, L(G(\Omega_1)\cdot\omega)) \subseteq \mathrm{Core}(R_2^S)`$ with $`f`$ the identity there, so the claim holds in $`R_2^S`$ on $`[0, L(G(\Omega_1)\cdot\omega))`$**:
+
+```math
+L(G(\Omega_1)\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+G(\Omega_1)+1}),\qquad G(\Omega_1) = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_1}).
+```
+
+  On the way: $`L(G_2+\omega^2)`$, $`L(G_2\cdot\omega)`$, $`L(G(\omega^3))`$, $`L(G(\varepsilon_0))`$, $`L(G(\Omega_1))`$. Codes in $`(G(\Omega_1), \hat G)`$: outline in this paper (§2.1 reads them in another way). Minor: one
+  bound needs $`\kappa_0`$ to be an $`\varepsilon`$-number, which can be chosen (m1); the reading for every countable $`\zeta`$ is a re-run of the earlier proof, not a citation of it (m6); the block facts must be
+  cited in the form that holds at every countable stage (m7); one step needs "suppose $`b \le_1 y+1`$" (m8); one check label (m2).
+- **Toward (E)** (proved; no FRAG except in the first). If (E) fails, then $`\sigma_S \ge L(G(\Omega_1)\cdot\omega)`$ and the extra left end is above $`L(G(\Omega_1)\cdot\omega+\omega+1)`$ (given FRAG). PERSIST:
+  $`\Sigma_2`$ truths go up along $`\le_1`$, so in $`R_2^S`$ $`\le_2`$ respects $`\le_1`$; its use proves only that a refuting point lies in $`[\mathrm{lh}_S(\beta_0), \delta)`$, and the rest is a remark (m3). N2-SHAPE: a
+  difference of shape (N2) looks like the counterexample of NO-GO (§1.2); one clause holds only for the sets that contain $`\gamma`$ with an $`S`$-successor (m4). FAN-BOTTOM: $`f(x_F^S) = x_F^C`$. F-SHAPE+: in
+  a difference of type F the second branch of the fan of $`R_2^C`$ appears in $`R_2^S`$ only higher, at an $`S`$-successor $`f^{-1}(\beta_0) \gt \beta_0`$ (the paper says "the second"; m5).
+- Remark NO-LIFT: reflecting the pair to copies below $`\alpha`$ gives copies that pass Carlson's tests only up to a fixed size; excluding (N1) this way needs the uniform finite-set test (one copy for
+  all sizes at once), which is open.
+- **Not proved.** (E): open. The referee's exact gap: clause-2 rigidity at every cap of a left end (N1′) and (N2′), for every $`b`$ from $`L(G(\Omega_1)\cdot\omega+\omega+1)`$ to $`\kappa_C`$; the first code that
+  this paper does not read is $`G(\Omega_1)+1`$. $`\beta_0 \ge x_F^C`$: conjecture; it needs SHARP-RIG at every bound below $`x_F^C`$, so the codes above $`G(\Omega_1)`$, the long restarts and their landing calculus, the
+  codes below $`P_3`$, $`\nu_3`$ and the long pairs below $`x_F`$. Type F is not excluded.
+
+### 2.3 Native codes: the stage lemma repaired, and $`\Omega_{\omega+n}`$
+
+Notation as in §1.3.
+
+- **The repairs of the review of §1.3** (m1–m5; the referee checked them). "Label-free" now means generated, and the level of a stage counts every leaf below $`\Omega_\omega`$.
+- **BUMP-CL** (proved, given the finiteness lemma of m1 below). For stages $`T' \lt T`$ and $`\beta`$ above every leaf of $`\Omega_\omega\cdot T`$, the closure $`\mathrm{Cl}(\Omega_\omega\cdot T, \beta)`$ has an element in
+  $`[\Omega_\omega\cdot T', \Omega_\omega\cdot T)`$. The proof is an induction over the two readings with a stack of frames, one for each pair of collapses with the same index; the frames keep the bumped collapse
+  strictly smaller. The referee checked every case and that the measure decreases. With it: the family of the stage lemma is cofinal among all earlier stages from the level of the labels on
+  (at the referee's counterexample of §1.3 it contains the stages $`t_2+\lambda+n`$), the good stages are cofinal one level higher, and at successor stages the earlier stages have a largest one (SUCC).
+- **STAGE$`^G`$, PUSH$`^G`$ and the ordinal side up to $`\theta_0`$** (proved by transfer). The blocking point B-1 of §1.3 is closed. So Conjecture TREE is now a theorem, and
+
+```math
+\iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\varepsilon_{\Omega_{\omega+1}+1}),\qquad \iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\Omega_{\omega+2})
+```
+
+  (proved by transfer).
+- **MULT$`^n`$** (proved; REGION, SHAPE and IDX by transfer; the referee checked HIGH, NEXT-HOST, MERGED-LEX, DEPTH, SOURCE, SCOPE-SUP and UNIT-SUP case by case). For every $`n`$,
+  $`\iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\Omega_{\omega+n})`$, so RED-TOWER with $`\mathrm{CH}_4`$ holds below $`\psi_{\Omega_1}(\Omega_{\omega\cdot 2})`$. The units have no pair: an inner scope inside every collapse object whose
+  argument reaches its own $`\Omega`$, multiplicities ordered by level (Veblen 2, a collapse of level $`l`$ $`2l-1`$, $`\Omega_{\omega+l}`$ $`2l`$), and universal sources whose capacity is $`n`$ minus the depth of the
+  scope. The depth is at most $`n-2`$, so one finite top hosts every unit, and every code keeps chain number 3.
+- Minor points: that the reading of a value with uncountable leaves is a finite tree is used but not proved; the referee gives a short proof by the same frames (an infinite reading gives an
+  infinite descending sequence) (m1); in SUCC the chain of inequalities is wrong, and the subterm cycle is the right argument (m2); citations (m3); one part of a fact is a remark (m4); the scope
+  of the checks (m5, m6).
+- **Further** (not proved). Past $`\Omega_{\omega\cdot 2}`$ the stage sets need unbounded levels and unbounded nesting (proved for the levels; checked up to depth 4 for the nesting), so this scheme
+  stops there. Nested pairs cost one more link at every depth (codes of chain number 4, so $`\mathrm{CH}_5`$; checked on mock patterns); with units indexed by level: outline, and conjecture:
+  RED-TOWER with $`\mathrm{CH}_5`$ up to $`\psi_{\Omega_1}(\Omega_{\Omega_1})`$. $`\theta_0`$ and "the first fan needs an inaccessible": open.
+
+### 2.4 Status after the thirty-sixth round
+
+- Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, L(\Omega_2+\Phi^{P'}\cdot\omega)]`$ given FRAG, with $`L(\Omega_2+\Phi^{P'}\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \Omega_2 + \omega^{\Phi^{P'}+1})`$**
+  ($`[0, X_{21}]`$ with 2 reviews; up to $`\nu_C = \nu_S = L(\omega+1)`$ with 1 review and an audit; from $`\nu_C`$ to $`L(\omega^2)`$ with 2 reviews; from $`L(\omega^2)`$ to $`L(\Omega_1\cdot\omega)`$ with 1 review; from
+  $`L(\Omega_1\cdot\omega)`$ to $`Z^+`$ with 2 reviews; from $`Z^+`$ to $`L(\varepsilon_{\Phi_\Omega+1})`$ with 1 review; from there to $`L(\varepsilon_{\Phi_\Omega+1}+\omega^2)`$ with 2 reviews, §1.1, §1.2; from there to $`L(G_2)`$ with 1
+  review, §1.1; from there to $`L(G(\Omega_1)\cdot\omega)`$ with 2 reviews, two proofs, §2.1, §2.2; from there to $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ with 1 review, §2.1).
+- Wilken's claim in $`R_2^S`$: on $`[0, L(G(\Omega_1)\cdot\omega))`$ given FRAG (§2.2); without FRAG up to $`\upsilon_{\omega^3}`$.
+- $`R_2^S`$ against $`R_2^C`$: the two agree on every relation with right end at most $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ (given FRAG); $`\beta_0 \ge \sigma_S`$, and $`\sigma_S`$ is additively principal, in $`[\rho(\beta_0), \beta_0]`$,
+  and at least $`L(G(\Omega_1)\cdot\omega)`$ given FRAG; (E) is equivalent to "the two cores are equal", and does not follow from the hypotheses of [C11] with MIN and CC alone. $`\beta_0`$ is not located.
+- Reaches (given FRAG): exact for every restart below $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$.
+- **LOW: false, given FRAG**; **LOW$`^\infty`$: true, given FRAG** (1 review each; no change). The steps PIN and LOW of Conjecture CORE-2: undecided (no change).
+- The lower-bound program below $`\theta_0`$: native bounds $`\iota(\mathrm{CH}_3) \ge \psi_{\Omega_1}(\varepsilon_{\Omega_\omega+1})`$ (no change) and $`\iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\Omega_{\omega+n})`$ for every $`n`$ (§2.3), so RED-TOWER with
+  $`\mathrm{CH}_4`$ below $`\psi_{\Omega_1}(\Omega_{\omega\cdot 2})`$ (1 review each). The step below SRO: no change (every $`n`$ on all 3,166 sample matrices; the general statement for all standard matrices below
+  SRO is open).
+
+### 2.5 Checks of the thirty-sixth round
+
+Each run was under 60 seconds; none is a proof.
+
+- §2.1. 33 runs, 0 mismatches: the domain, the order of the names, the transport maps (about 58,000 pairs) and the bounds on codes; Lean green, identical to Python. The referee: the domain
+  criterion on 1,500 indices with nested $`\Gamma`$ atoms, 0 mismatches; 600 indices in $`[\Phi^{P'}, \Omega_2)`$, none in the domain; $`\beta \mapsto \psi_{\Omega_2}(\Omega_\omega\cdot 2+1+\beta)`$ keeps the order on 14,641 pairs; the cap
+  bound at the new bases; the author's runs and the Lean file rerun, identical (one printed sample line differs only by the order of a set).
+- §2.2. Six runs passed (the domain on 1,201 indices with 0 mismatches, the continuity of $`G`$, the gap points, 64 targets, the chain of landmarks, FIX-G); one test first stated the wrong property,
+  and the corrected test passes; Lean green, identical to Python. The referee: the author's runs rerun, identical; G-CONT at its exact bound on 1,400 terms, offsets past $`b`$, FIX-G at the
+  border and the arithmetic of PIN-GAP on 1,710 cases, no counterexample; the Lean file rerun, identical. $`R_2^S`$, $`R_2^C`$, reaches and $`f`$ cannot be computed.
+- §2.3. The Lean file green (only the standard axioms, no `sorry`; the referee rechecked it); the frame algorithm on 2 seeds, 1,400 pairs, frames up to depth 4, 0 failures (a first version had a
+  bug in the frame descent, and its fix also corrected one rule of the proof); names on 2 seeds, 0 failures; 26 patterns. The referee: the author's runs rerun, identical; the frame algorithm
+  written again from the text, on 3 seeds, 7,143 pairs, 0 failures. Certificates (replayed): 4 of 4 forward toys found, 0 of 3 reverse. Frames of depth 2 or more occur only in one special
+  family, the depth bound is reached only for $`n = 3`$, and the toys are single objects (m6).
+
+### 2.6 Open
+
+- The claim above $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ given FRAG (above $`X_4`$ without FRAG). Next: Conjecture TAU (to $`L(\psi_{\Omega_3}(\Omega_3))`$), Conjecture READ″, the window rule one step up, the long
+  restarts of the skeleton and their landing calculus, the codes below $`P_3`$, and $`\nu_3`$; FAR-PIN″ over several gaps and with parameters in earlier gaps. In $`R_2^S`$: the claim above
+  $`L(G(\Omega_1)\cdot\omega)`$; $`o_k = \omega`$ for the levels above $`\nu`$ without FRAG.
 - The crossing at $`m^*`$ across two levels as its own step with its audit row (minor m5 of [SHIFT8.md](SHIFT8.md) §1.2).
-- $`R_2^S = R_2^C`$ above $`L(G_2)`$: (E), that is, clause-2 rigidity at every cap below the core of $`R_2^C`$ (§1.2), and $`\beta_0`$ itself (conjecture: $`\beta_0 \ge x_F^C`$); the converse for $`\le_1`$ at
-  successor stages above $`\kappa_C`$.
+- $`R_2^S = R_2^C`$ above $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$: (E), that is, clause-2 rigidity at every cap from $`L(G(\Omega_1)\cdot\omega+\omega+1)`$ on (§2.2), the uniform finite-set test, and $`\beta_0`$ itself
+  (conjecture: $`\beta_0 \ge x_F^C`$; type F is not excluded); the converse for $`\le_1`$ at successor stages above $`\kappa_C`$.
 - Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, and an upper bound for $`\iota(\mathrm{CH}_3)`$.
-- The first inaccessible: chain number 3 past $`\varepsilon_{\Omega_\omega+1}`$; the lemma BUMP (the repair of B-1 of §1.3), which would give $`\iota(\mathrm{CH}_4) \ge \psi_{\Omega_1}(\Omega_{\omega+2})`$; then MULT$`^n`$ up to $`\Omega_{\omega\cdot 2}`$,
-  $`\Omega`$ units indexed by their argument codes, $`\Omega_{\Omega_1}`$ and the tower of $`\Omega`$'s up to $`\theta_0`$; $`\mathrm{CH}_2`$ past $`\Theta_1`$; the step for all standard matrices below SRO.
+- The first inaccessible: chain number 3 past $`\varepsilon_{\Omega_\omega+1}`$; past $`\Omega_{\omega\cdot 2}`$ with nested pairs and units indexed by level (conjecture: RED-TOWER with $`\mathrm{CH}_5`$ up to $`\psi_{\Omega_1}(\Omega_{\Omega_1})`$), then the
+  tower of $`\Omega`$'s up to $`\theta_0`$; $`\mathrm{CH}_2`$ past $`\Theta_1`$; the step for all standard matrices below SRO.
 - Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; an InaccPsi formula for the reach in terms of the code; names above $`\nu`$ for the points that are not
   $`\upsilon`$-points; the rest of [COVER.md](COVER.md) §9.

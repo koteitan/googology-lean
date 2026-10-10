@@ -26,6 +26,7 @@ math of that page stays within what GitHub renders. The status words are those o
 | $`[0, L(\Omega_1\cdot\omega)] \subseteq \mathrm{Core}(R_2^C)`$ | FRAG | [SHIFT8.md](SHIFT8.md) §1.1 |
 | $`[0, L(\varepsilon_{\Phi_\Omega+1})] \subseteq \mathrm{Core}(R_2^C)`$ | FRAG | [SHIFT8.md](SHIFT8.md) §2.1 |
 | $`[0, L(G_2)] \subseteq \mathrm{Core}(R_2^C)`$, $`L(G_2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+G_2})`$ (up to $`L(\varepsilon_{\Phi_\Omega+1}+\omega^2)`$ by two proofs, 2 reviews) | FRAG | [SHIFT9.md](SHIFT9.md) §1.1, §1.2 |
+| $`[0, L(\Omega_2+\Phi^{P'}\cdot\omega)] \subseteq \mathrm{Core}(R_2^C)`$, $`L(\Omega_2+\Phi^{P'}\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \Omega_2 + \omega^{\Phi^{P'}+1})`$ (up to $`L(G(\Omega_1)\cdot\omega)`$ by two proofs, 2 reviews) | FRAG | [SHIFT9.md](SHIFT9.md) §2.1, §2.2 |
 
-Here $`L(e) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + P'\cdot e)`$, $`P' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)`$, $`\Phi_\Omega = \psi_{\Omega_2}(\Omega_2)`$, $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$ and $`\theta_2 = \psi_{\Omega_3}(\Omega_\omega)`$; the points $`X_n`$ are named in
+Here $`L(e) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + P'\cdot e)`$, $`P' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)`$, $`\Phi_\Omega = \psi_{\Omega_2}(\Omega_2)`$, $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$, $`\theta_2 = \psi_{\Omega_3}(\Omega_\omega)`$, $`\Phi^{P'} = \psi_{\Omega_2}(\Omega_\omega\cdot 2+\Omega_2)`$ and $`G(\Omega_1) = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_1})`$; the points $`X_n`$ are named in
 [README.md](README.md) §2 and on the cited pages.
