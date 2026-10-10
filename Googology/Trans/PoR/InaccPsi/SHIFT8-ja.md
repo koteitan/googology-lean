@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 33 回目と 34 回目：定理 B$`^\nu`$、$`L(\varepsilon_{\Phi_\Omega+1})`$ までの点 $`L(e)`$ の骨組み、監査の残り、$`R_2^S`$ での Carlson の範疇性の定理、$`\psi_{\Omega_1}(\Omega_{\omega+1}^2 + \sigma_2)`$ までの素の符号
 
-このページは [SHIFT7-ja.md](SHIFT7-ja.md) の続き（そこの §3 が 32 回目）。§1 が 33 回目、§2 が 34 回目。35 回目と 36 回目は [SHIFT9-ja.md](SHIFT9-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT7-ja.md](SHIFT7-ja.md) の続き（そこの §3 が 32 回目）。§1 が 33 回目、§2 が 34 回目。35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -292,7 +292,7 @@ r \lt x \lt A(b_N) \lt \dots \lt A(b_1) \lt A(\delta) \lt y \lt v_N \lt \dots \l
 
 ### 2.4 34 回目のあとの状態
 
-[SHIFT9-ja.md](SHIFT9-ja.md) §2.4 で置き換えた。
+[SHIFT9-ja.md](SHIFT9-ja.md) §3.4 で置き換えた。
 
 - $`R_2^C`$ での Wilken の主張：FRAG 無しで $`[0, X_4]`$、そして **FRAG のもとで $`[0, L(\varepsilon_{\Phi_\Omega+1})]`$、$`L(\varepsilon_{\Phi_\Omega+1}) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+\varepsilon_{\Phi_\Omega+1}})`$** で両方の半分とも成り立つ
   （$`[0, X_{21}]`$ は査読 2 回。$`\nu_C = \nu_S = L(\omega+1)`$ までは査読 1 回と監査。$`\nu_C`$ から $`L(\omega^2)`$ までは査読 2 回。$`L(\omega^2)`$ から $`L(\Omega_1\cdot\omega)`$ までは査読 1 回。$`L(\Omega_1\cdot\omega)`$ から
@@ -323,7 +323,7 @@ r \lt x \lt A(b_N) \lt \dots \lt A(b_1) \lt A(\delta) \lt y \lt v_N \lt \dots \l
 
 ### 2.6 未解決
 
-[SHIFT9-ja.md](SHIFT9-ja.md) §2.6 で置き換えた。
+[SHIFT9-ja.md](SHIFT9-ja.md) §3.6 で置き換えた。
 
 - FRAG のもとで $`L(\varepsilon_{\Phi_\Omega+1})`$ より上の主張（FRAG 無しでは $`X_4`$ より上）。次は $`\Phi_\Omega`$ より上の Veblen の閉包（最前線 $`L(\Gamma_{\Phi_\Omega+1})`$）、ずれ EXACT-O″、骨組みの
   長いやり直しとその着地の計算、$`P_3`$ より下の符号、$`\nu_3`$。$`R_2^S`$ で：$`L(\Omega_1\cdot\omega)`$ より上の主張。FRAG 無しで $`\nu`$ より上の段の $`o_k = \omega`$。

@@ -121,7 +121,7 @@ pair, and $`\nu_{nest}`$ the least top $`y`$ of a realization of PS.
   In both cases the two structures agree on every relation with right end $`\lt \nu_C`$. Also proved: $`\nu_C = \nu_S`$ iff there is
   no ghost iff $`\beta_0 \gt \nu_S`$ iff $`T_C = \nu_S`$.
 - **Corollaries** (proved, 1 review; $`R_2^C`$).
-  - $`\beta_0 \ge \nu_C \gt \nu_P`$. Before: $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$. (The later bounds, from $`\nu_C \gt \upsilon^*`$ up to $`[0, L(\Omega_2+\Phi^{P'}\cdot\omega)] \subseteq \mathrm{Core}(R_2^C)`$ given FRAG, are listed on [BREAK2.md](BREAK2.md) §1.)
+  - $`\beta_0 \ge \nu_C \gt \nu_P`$. Before: $`\beta_0 \ge \rho_{\Theta_A+\omega^2}`$. (The later bounds, from $`\nu_C \gt \upsilon^*`$ up to $`[0, L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)] \subseteq \mathrm{Core}(R_2^C)`$ given FRAG, are listed on [BREAK2.md](BREAK2.md) §1.)
   - $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$, so the core of $`R_2^C`$ contains $`[0, \nu_P]`$. Before: $`[0, \rho_{\Theta_{d\omega}})`$, and $`[0, T_C]`$ with $`T_C`$ not
     compared with $`\nu_P`$.
   - SKEL⁺ (with HC and INC1-nonups) holds in $`R_2^C`$ on $`[0, \nu_C)`$. Now with no hypothesis ([COVER.md](COVER.md) §5.1).
