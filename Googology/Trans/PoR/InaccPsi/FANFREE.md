@@ -557,4 +557,4 @@ Each run was under 60 seconds; none is a proof.
 
 ## 13. Open
 
-The later rounds changed this list; the current list is [SHIFT10.md](SHIFT10.md) §2.6.
+The later rounds changed this list; the current list is [SHIFT10.md](SHIFT10.md) §3.6.

@@ -2,9 +2,11 @@
 
 # $`R_2^+`$, the thirtieth to thirty-second rounds: the relative far pin at every depth, not-LOW, $`\nu_C = \nu_S = L(\omega+1)`$ and its audit, the claim up to $`X_A`$ above $`\nu_C`$, and native codes up to $`\psi_{\Omega_1}(\Omega_{\omega+1})`$
 
-This page continues [SHIFT6.md](SHIFT6.md) (§3 there is the twenty-ninth round); §1 is the thirtieth round, §2 the thirty-first, §3 the thirty-second; the thirty-third and thirty-fourth rounds are on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md), the thirty-eighth and thirty-ninth on [SHIFT10.md](SHIFT10.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT6.md](SHIFT6.md) (§3 there is the twenty-ninth round); §1 is the thirtieth round, §2 the thirty-first, §3 the thirty-second; the thirty-third and thirty-fourth rounds are on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md), the thirty-eighth to fortieth on [SHIFT10.md](SHIFT10.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
+
+**Later (the fortieth round, [SHIFT10.md](SHIFT10.md) §3.2):** the milestone of this page is **not proved as written**. LAND$`^\omega`$ (§1.1) uses the old exact long value, which is false at $`m_0 \ge \Omega_1`$, and the chain to $`\nu_C`$ needs caps and exact reaches at codes up to $`P'`$ (for example the code $`G_2 + P`$), which are now known only below $`\hat G + G_2`$ ([SHIFT10.md](SHIFT10.md) §3.1). So CAP-0 below $`P'`$, not-LOW, CAP-1 and $`\nu_C \ge L(\omega+1)`$ (§1.1), CROSS-LIM, TC⁺$`^\omega`$, EMB, ONTO-FIN, PAIR, UP, NU, NU-NAME, LOW$`^\infty`$ and $`\nu_C = \nu_S = L(\omega+1)`$ (§2.1), the verdict of the audit (§3.1, [AUDIT.md](AUDIT.md)), and the region of $`\nu`$ with $`X_A`$ (§3.2) are not proved as written. They stand: the relative transports (BC$`^{\mathrm{rel}}`$, CODE-MON, DOM$`^{\mathrm{rel}}`$, THETA-EQ$`^{\mathrm{rel}}`$, EQUIV$`^{\mathrm{rel}}`$, EQ-F$`^{\mathrm{rel}}`$), FAR-PIN$`^{L,\mathrm{rel}}`$ as a schema, the code inequalities of LC-STRICT, the criterion SHIFT, CAP$`^p`$, DECOUPLE$`^p`$, NONUPS, FRAG and FRAG2 (now also in Lean, [LEAN.md](LEAN.md)), and the native codes of §1.3, §2.3, §3.3. LOW and LOW$`^\infty`$ are undecided again. Given FRAG, the claim is proved in $`R_2^C`$ on $`[0, X_{21}]`$.
 
 ## 1. The thirtieth round
 
@@ -443,7 +445,7 @@ X_A = H(\eta_\nu + \omega^3\cdot 2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \om
 
 ### 3.4 Status after the thirty-second round
 
-Superseded by [SHIFT10.md](SHIFT10.md) §2.4.
+Superseded by [SHIFT10.md](SHIFT10.md) §3.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, X_A]`$ given FRAG, with $`X_A = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P' + \omega^{\theta+3}\cdot 2)`$** ($`[0, X_{21}]`$ with
   2 reviews; up to $`\nu_C = \nu_S = L(\omega+1)`$ with 1 review and 1 audit, FRAG, FRAG2, FRAG-SUBST and the three weakest links with 2 reviews, §3.1; from $`\nu_C`$ to $`X_A`$ with 1 review, §3.2).
@@ -471,7 +473,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 3.6 Open
 
-Superseded by [SHIFT10.md](SHIFT10.md) §2.6.
+Superseded by [SHIFT10.md](SHIFT10.md) §3.6.
 
 - The claim above $`X_A`$ given FRAG (above $`X_4`$ without FRAG). First the repair of B-1 (GAP-CALC in region form; then $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$ for every $`j`$ and the claim on $`[0, L(\omega^2)]`$),
   then the first restart $`L(\omega^2)`$ of the skeleton above $`\nu`$: a FRAG that moves several $`L(e)`$ at once, the restart calculus of that skeleton, and its codes $`\ge P'`$; then $`\nu_3`$. In $`R_2^S`$:

@@ -11,6 +11,8 @@ Buchholz の $`\psi`$）の項。このディレクトリには、G. Wilken の�
 回数の書いていない証明済みの結果は査読 1 回）。**引用**
 （論文と場所）。**確認済み**（有限個の場合で計算）。**予想**。**未解決**。
 
+**40 回目のあとの状態（2026-10）。** 節目 $`\nu_C = \nu_S = L(\omega+1)`$ と **$`X_{21}`$ より上のどの範囲も、書いたままでは証明されていない**：40 回目の査読者たちは、$`\nu_C`$ への鎖と $`X_{21}`$ より上のどの最前線も、値が偽になる符号での長い届く先のちょうどの値を使うことを見つけた（[SHIFT10-ja.md](SHIFT10-ja.md) §3.1、§3.2）。FRAG のもとで、Wilken の主張は今は $`R_2^C`$ で $`[0, X_{21}]`$ で証明済み（§2）、$`R_2^S`$ では $`\upsilon_{\omega^3}`$ までだけ。前に記録した $`X_{21}`$ より上の範囲（$`Z^\Lambda`$ まで）は、歴史として下に残し「書いたままでは証明されていない」と印をつける。LOW はまた決まっていない。FRAG そのものは今は引いた 20 個の事実からの Lean の定理（[LEAN-ja.md](LEAN-ja.md)）。
+
 ## 1. 主張とその出典
 
 G. Wilken, "A glimpse of Σ₃-elementarity" (2020), 420–421 ページ。G. Wilken, "Pure
@@ -86,93 +88,49 @@ X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 
 ```
 
 まで成り立つ（査読 1 回、FRAG 無し、[SHIFT-ja.md](SHIFT-ja.md) §1）。FRAG のもとで $`X_5`$ まで（[SHIFT-ja.md](SHIFT-ja.md) §8.1）、$`X_8`$ まで（査読 2 回、[SHIFT-ja.md](SHIFT-ja.md) §9.1）、$`X_9 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Omega_1} + \omega^{G(\Omega_1)+1} + \omega^{G_2+1})`$ まで（$`G(\Omega_1) = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_1})`$。
-査読 2 回、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1、§2.1）、最初の添字の不動点を越えて $`X_{11}`$ まで（[SHIFT2-ja.md](SHIFT2-ja.md) §2.1）、$`X_{12}`$ まで（[SHIFT2-ja.md](SHIFT2-ja.md) §3.1）、$`X_{13}`$ まで（[SHIFT3-ja.md](SHIFT3-ja.md) §1.1）、$`X_{14}`$ まで（[SHIFT3-ja.md](SHIFT3-ja.md) §2.1）、$`X_{15}`$ と $`X_{16}`$ まで（査読 2 回、[SHIFT4-ja.md](SHIFT4-ja.md) §1.1、§1.4、§2.1）、$`X_{17}`$ まで（[SHIFT4-ja.md](SHIFT4-ja.md) §2.1）、$`X_{18}`$ まで（査読 2 回。[SHIFT4-ja.md](SHIFT4-ja.md) §2.2、[SHIFT5-ja.md](SHIFT5-ja.md) §1.1）、$`X_{19}`$ まで（[SHIFT5-ja.md](SHIFT5-ja.md) §1.1）、$`\hat\zeta_H = \theta_3\cdot\Omega_3 + \omega^{\hat g_3+g_3}`$ として $`X_{21} = \psi_{\Omega_1}(\Omega_\omega + \hat\zeta_H + \omega^{G(\hat\zeta_H)+1}\cdot 2)`$ まで
-（査読 2 回。[SHIFT5-ja.md](SHIFT5-ja.md) §2.1、[SHIFT6-ja.md](SHIFT6-ja.md) §1.1）、$`X_{22}`$ まで（[SHIFT6-ja.md](SHIFT6-ja.md) §1.1）、そして
+査読 2 回、[SHIFT2-ja.md](SHIFT2-ja.md) §1.1、§2.1）、最初の添字の不動点を越えて $`X_{11}`$ まで（[SHIFT2-ja.md](SHIFT2-ja.md) §2.1）、$`X_{12}`$ まで（[SHIFT2-ja.md](SHIFT2-ja.md) §3.1）、$`X_{13}`$ まで（[SHIFT3-ja.md](SHIFT3-ja.md) §1.1）、$`X_{14}`$ まで（[SHIFT3-ja.md](SHIFT3-ja.md) §2.1）、$`X_{15}`$ と $`X_{16}`$ まで（査読 2 回、[SHIFT4-ja.md](SHIFT4-ja.md) §1.1、§1.4、§2.1）、$`X_{17}`$ まで（[SHIFT4-ja.md](SHIFT4-ja.md) §2.1）、$`X_{18}`$ まで（査読 2 回。[SHIFT4-ja.md](SHIFT4-ja.md) §2.2、[SHIFT5-ja.md](SHIFT5-ja.md) §1.1）、$`X_{19}`$ まで（[SHIFT5-ja.md](SHIFT5-ja.md) §1.1）、そして
 
 ```math
-X_{23} = \psi_{\Omega_1}(\Omega_\omega + \hat\zeta_{23} + \omega^{G(\hat\zeta_{23})+1}\cdot 2),\quad \hat\zeta_{23} = \theta_4\cdot\Omega_4 + \varepsilon_{\hat g_4+1}
+X_{21} = \psi_{\Omega_1}(\Omega_\omega + \hat\zeta_H + \omega^{G(\hat\zeta_H)+1}\cdot 2),\quad \hat\zeta_H = \theta_3\cdot\Omega_3 + \omega^{\hat g_3+g_3}
 ```
 
-まで成り立つ（[SHIFT6-ja.md](SHIFT6-ja.md) §2.1、§3.1。$`X_{22}`$ と $`X_{23}`$ は、それらのクッションの蓋が使う長いちょうどの届く先の進行を止める点 B-1 が直るまで、書いたままでは
-未証明だった。直しについて査読 1 回、[SHIFT6-ja.md](SHIFT6-ja.md) §3.1。$`\theta_3 = \psi_{\Omega_4}(\Omega_\omega)`$、$`\theta_4 = \psi_{\Omega_5}(\Omega_\omega)`$、$`g_3`$、$`\hat g_3`$、$`\hat g_4`$ と、下で使うほかの ^ の付いた乗数は
-[SHIFT5-ja.md](SHIFT5-ja.md) と [SHIFT6-ja.md](SHIFT6-ja.md) で定義する）。さらに FRAG のもとで、主張は
+まで成り立つ（最初の証明は査読 2 回、[SHIFT5-ja.md](SHIFT5-ja.md) §2.1、[SHIFT6-ja.md](SHIFT6-ja.md) §1.1。その証明はある符号で偽になるちょうどの長い届く先を使っていて、直した証明は
+査読 1 回、[SHIFT10-ja.md](SHIFT10-ja.md) §3.1。$`X_{19}^{\mathrm{lin}}`$ までは 2 つの証明で査読 2 回、そこの §3.2。$`\theta_3 = \psi_{\Omega_4}(\Omega_\omega)`$、$`g_3`$、$`\hat g_3`$ と ^ の付いたほかの乗数は
+[SHIFT5-ja.md](SHIFT5-ja.md) と [SHIFT6-ja.md](SHIFT6-ja.md) で定義する）。**これが今の最前線。** 核の側だけなら $`R_2^C`$ でさらに先、$`[0, \nu_C]`$ で証明済み。$`\nu_C`$（FRAG のもとで
+$`\ge X_{21}`$、FRAG 無しで $`\ge X_4`$）は $`R_2^C`$ が骨組み型でなくなる最初の点（[BREAK-ja.md](BREAK-ja.md) §2）。$`R_2^S`$ では主張は $`\upsilon_{\omega^3}`$ まで証明済み（§3）。
+
+**書いたままでは証明されていないもの**（[SHIFT10-ja.md](SHIFT10-ja.md) §3.2、[AUDIT-ja.md](AUDIT-ja.md)）。前の回は、FRAG のもとで $`R_2^C`$ での主張を、$`X_{22}`$ と $`X_{23}`$ まで
+（[SHIFT6-ja.md](SHIFT6-ja.md)）、
 
 ```math
 L(\omega+1) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P'),\quad P' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)
 ```
 
-まで成り立つ（査読 1 回、[SHIFT7-ja.md](SHIFT7-ja.md) §1.1）。これはちょうど骨組み型でなくなる最初の点：FRAG のもとで $`\nu_C = \nu_S = L(\omega+1)`$（査読 1 回と、致命的な点も進行を止める点も見つけなかった監査、[SHIFT7-ja.md](SHIFT7-ja.md) §2.1、§3.1、[AUDIT-ja.md](AUDIT-ja.md)）。だから
-**FRAG のもとで、$`R_2^C`$ での Wilken の主張は $`[0, \nu_C]`$ で成り立ち**、2 つの定義の骨組み型でなくなる最初の点は同じで、仮定 LOW（$`\nu_C \le \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$）は偽。FRAG 無しでは、核の側だけなら $`R_2^C`$ でさらに先、
-$`[0, \nu_C]`$ で証明済み。$`\nu_C`$（FRAG 無しで $`\ge X_4`$）は $`R_2^C`$ が骨組み型でなくなる最初の点（[BREAK-ja.md](BREAK-ja.md) §2）。
-
-$`\nu_C`$ の上では、FRAG のもとで $`R_2^C`$ での主張は
+まで、$`\nu_C = \nu_S = L(\omega+1)`$、$`[0, \nu_C]`$ での主張、「LOW は偽」とともに（[SHIFT7-ja.md](SHIFT7-ja.md) §1.1、§2.1）、そして $`\nu_C`$ の上で、$`L(e) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + P'\cdot e)`$ として
+$`X_A`$、$`L(\omega^2)`$、$`L(\Omega_1\cdot\omega)`$、$`L(\varepsilon_{\Phi_\Omega+1})`$、$`L(G_2)`$、$`L(\Omega_2+\Phi^{P'}\cdot\omega)`$、$`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ まで（[SHIFT7-ja.md](SHIFT7-ja.md) §3.2、
+[SHIFT8-ja.md](SHIFT8-ja.md)、[SHIFT9-ja.md](SHIFT9-ja.md)。点はそこで定める）、$`Z^\varepsilon`$ と
 
 ```math
-X_A = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P' + \omega^{\theta+3}\cdot 2)
+Z^\Lambda = L(\theta'_2\cdot\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+2}),\quad \theta'_2 = \psi_{\Omega_3}(\Omega_\omega\cdot 2)
 ```
 
-まで成り立つ（査読 1 回、[SHIFT7-ja.md](SHIFT7-ja.md) §3.2）：$`\nu_C`$ の区域は最初の区域の形をしていて、$`R_2^C`$ の核は $`[0, y^C_\nu]`$ を含む。ここで $`y^C_\nu`$ は $`\nu_C`$ より上の
-入れ子の組の最小の上端で、今は $`y^C_\nu = L(\omega\cdot 2+1)`$。さらに FRAG のもとで、どの $`j`$ でも $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$ で、主張は $`L(\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+2})`$ まで
-成り立ち（定理 B$`^\nu`$。査読 2 回で、独立した 2 つの証明、[SHIFT8-ja.md](SHIFT8-ja.md) §1.1、§1.2）、さらに
-
-```math
-L(\Omega_1\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+\Omega_1+1}),\quad L(e) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + P'\cdot e)
-```
-
-まで成り立つ（査読 1 回、[SHIFT8-ja.md](SHIFT8-ja.md) §1.1）：$`\nu_C`$ の上では点 $`L(e)`$ が 1 つ上の骨組みをなし、基の取りかえがそのいくつかを一度に動かし（FRAG″）、
-$`L(\Omega_1\cdot\omega)`$ より下のどのやり直しもちょうどの届く先を持つ。さらに FRAG のもとで $`r(L(\Omega_1\cdot\omega)) = L(\Omega_1\cdot\omega+\omega+1) + L(\Omega_1\cdot\omega) + 1`$ で、
-骨組みの符号を置き換えで読むことで、主張は
-
-```math
-L(\varepsilon_{\Phi_\Omega+1}) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+\varepsilon_{\Phi_\Omega+1}}),\quad \Phi_\Omega = \psi_{\Omega_2}(\Omega_2)
-```
-
-まで成り立つ（査読 1 回。$`L(\Omega_1\cdot\omega+\omega+1)`$ までは 2 つの証明で査読 2 回。[SHIFT8-ja.md](SHIFT8-ja.md) §2.1、§2.2）。さらに FRAG のもとで、符号が $`G_2`$ より下の骨組みの
-どのやり直しでも、届く先のずれは、それより小さい符号のうち定数がそのやり直しより下にあるものの順序型で、主張は
-
-```math
-L(G_2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+G_2})
-```
-
-まで成り立つ（査読 1 回。$`L(\varepsilon_{\Phi_\Omega+1}+\omega^2)`$ までは 2 つの証明で査読 2 回。[SHIFT9-ja.md](SHIFT9-ja.md) §1.1、§1.2）。さらに FRAG のもとで、同じことが
-$`P'`$ より上の $`\alpha \mapsto \Gamma_\alpha`$ の最小の不動点 $`\Phi^{P'} = \psi_{\Omega_2}(\Omega_\omega\cdot 2+\Omega_2)`$ より下のどの符号でも成り立つ。$`[\Phi^{P'}, \Omega_2)`$ のどの添字も $`L`$ の定義域に入らないので、$`L(\Omega_2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2+\Omega_2)`$
-はそれより下の点 $`L(e)`$ の上限で、符号は $`\Phi^{P'}`$。そして主張は
-
-```math
-L(\Omega_2+\Phi^{P'}\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \Omega_2 + \omega^{\Phi^{P'}+1})
-```
-
-まで成り立つ（査読 1 回。$`G(\Omega_1) = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_1})`$ として $`L(G(\Omega_1)\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+G(\Omega_1)+1})`$ までは 2 つの証明で査読 2 回。[SHIFT9-ja.md](SHIFT9-ja.md) §2.1、§2.2）。さらに FRAG のもとで、$`G''(\zeta) = \psi_{\Omega_2}(\Omega_\omega\cdot 2 + \theta'_2\cdot\zeta)`$、$`\theta'_2 = \psi_{\Omega_3}(\Omega_\omega\cdot 2)`$ として、段の写像 $`\mathrm{Tr}_n`$ が
-$`[\Omega_1, P')`$ の符号を $`[G''(n), G''(n+1))`$ の符号の上へ写す。これで同じことが $`G''(\omega+1)`$ までのどの符号でも成り立ち、主張は
-
-```math
-L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+1} + \theta'_2 + \omega^{G''(\omega+1)+1})
-```
-
-まで成り立つ（査読 1 回。$`\Phi^{P'}_{\omega+1} = \psi_{\Omega_2}(\Omega_\omega\cdot 2+\Omega_2\cdot(\omega+1))`$ として $`Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \Omega_2\cdot(\omega+1) + \omega^{\Phi^{P'}_{\omega+1}+1} + \omega^{P'+2})`$ までは 2 つの証明で査読 2 回。[SHIFT9-ja.md](SHIFT9-ja.md) §3.1、§3.2）。
-さらに FRAG のもとで、骨組みの区間全体の閉じた点が切片と同じように並べられ、$`G''(\omega^2)`$ より下のどの符号もちょうどの届く先を持ち（1 つ上の窓の規則）、主張は
-
-```math
-Z^\Lambda = L(\theta'_2\cdot\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+2})
-```
-
-まで成り立つ（査読 1 回。[SHIFT10-ja.md](SHIFT10-ja.md) §1 の点 $`Z^\varepsilon`$ までは 2 つの証明で査読 2 回。そこの §1.1、§1.2）。1 回の査読は、最初の長いやり直しを通してさらに
-$`Z^{\mathrm{LL}}`$ = $`L(\theta'_2\cdot\omega^2+\omega^{G''(\omega^2)^2})`$ まで証明済みと認めたが、2 回目の査読が、そこで使うちょうどの長い届く先がある符号で偽だと見つけたので、その段階は書いたままでは証明されていない（そこの §2.1）。
-$`Z^\varepsilon`$ より下で $`R_2^C = R_2^S`$ で、$`R_2^S`$ での主張は $`[0, Z^\varepsilon)`$ で成り立つ（そこの §1.2。Carlson の範疇性の定理による、[SHIFT8-ja.md](SHIFT8-ja.md) §2.2）。
+まで（[SHIFT10-ja.md](SHIFT10-ja.md) §1。$`G''(\zeta) = \psi_{\Omega_2}(\Omega_\omega\cdot 2 + \theta'_2\cdot\zeta)`$）記録し、$`R_2^S`$ では範囲 $`[0, Z^\varepsilon)`$ を記録した。40 回目は、$`\nu_C`$ への鎖と
+これらのどの段階も、前の値が偽になる符号でのちょうどの長い届く先を使うことを見つけたので、どれも書いたままでは証明されていない。届く先を使わない部分は成り立つ。ちょうどの長い
+届く先は今は符号 $`\hat G + G_2`$ より下で証明済み（TRANSLATION、[SHIFT10-ja.md](SHIFT10-ja.md) §3.1）。確かめは、それが $`P'`$ より下のどの符号でも証明されれば節目が戻ると見ている（予想）。
 
 ## 3. 証明済みのこと
 
 **まとめ。** $`\upsilon_{\omega\cdot\omega}`$ より下では、主張は $`R_2^C`$ でも $`R_2^S`$ でも成り立つ：$`\upsilon_{\omega\cdot\omega}`$ 未満の
 どの順序数も核に入り、しかも、つぶす引数がすべて $`I_\omega`$ 未満の InaccPsi の標準形の可算な値である（下の定理 LOW）。
 Wilken の点には正確な名前がある：$`\eta \lt \Gamma_0`$ で $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$（定理 T、§4）。のちに $`\upsilon^*`$ より下の
-すべての $`\upsilon`$ 点に（定理 GEN）、$`\eta \lt \Omega_\omega`$ に（GEN⁺、GEN-EXT の場合）広がり、今は $`I_\omega`$ の先まで届く類のどの $`\eta`$ にも広がった（GEN-ALL、[SHIFT5-ja.md](SHIFT5-ja.md) §1.3）。$`R_2^C`$ では主張は $`X_4`$ まで、FRAG のもとで $`\nu_C = L(\omega+1)`$ の上の $`Z^\Lambda`$ まで成り立ち、核は $`[0, \nu_C]`$ を含む（§2）。
+すべての $`\upsilon`$ 点に（定理 GEN）、$`\eta \lt \Omega_\omega`$ に（GEN⁺、GEN-EXT の場合）広がり、今は $`I_\omega`$ の先まで届く類のどの $`\eta`$ にも広がった（GEN-ALL、[SHIFT5-ja.md](SHIFT5-ja.md) §1.3）。$`R_2^C`$ では主張は $`X_4`$ まで、FRAG のもとで $`X_{21}`$ まで成り立ち（$`Z^\Lambda`$ までの前の範囲は書いたままでは証明されていない、§2）、核は $`[0, \nu_C]`$ を含む（§2）。
 研究は、査読された 4 つの論文ずつの回で進んだ。このページには 1 回目の結果がある（その一部は [ROUND1-ja.md](ROUND1-ja.md)）。のちの回はページ
 [RESTARTS-ja.md](RESTARTS-ja.md)、[REACHES-ja.md](REACHES-ja.md)、[PINS-ja.md](PINS-ja.md)、[BREAK-ja.md](BREAK-ja.md)（続きは [BREAK2-ja.md](BREAK2-ja.md)）、[COVER-ja.md](COVER-ja.md)、[FANFREE-ja.md](FANFREE-ja.md)、[VEBLEN-ja.md](VEBLEN-ja.md)、
-[THETA-ja.md](THETA-ja.md)、[SHIFT-ja.md](SHIFT-ja.md)、[SHIFT2-ja.md](SHIFT2-ja.md)、[SHIFT3-ja.md](SHIFT3-ja.md)、[SHIFT4-ja.md](SHIFT4-ja.md)、[SHIFT5-ja.md](SHIFT5-ja.md)、[SHIFT6-ja.md](SHIFT6-ja.md)、[SHIFT7-ja.md](SHIFT7-ja.md)、[SHIFT8-ja.md](SHIFT8-ja.md)、[SHIFT9-ja.md](SHIFT9-ja.md)、[SHIFT10-ja.md](SHIFT10-ja.md)（監査の依存の表は [AUDIT-ja.md](AUDIT-ja.md)）にある。1〜12 回目のまとめは [THETA-ja.md](THETA-ja.md) §8.1 に、13〜39 回目のまとめは [ROUND2-ja.md](ROUND2-ja.md) §1 にある（道の歩みはそこの §5）。未解決：FRAG のもとで $`R_2^C`$ で $`Z^\Lambda`$ より、$`R_2^S`$ で $`Z^\varepsilon`$ より上（FRAG 無しでは $`R_2^C`$ で $`X_4`$ より上、
-$`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上）の両方の半分；$`Z^\varepsilon`$ より上の $`R_2^S = R_2^C`$（その下では FRAG のもとで 2 つは一致する）；$`\theta_0`$ より下の下界；
+[THETA-ja.md](THETA-ja.md)、[SHIFT-ja.md](SHIFT-ja.md)、[SHIFT2-ja.md](SHIFT2-ja.md)、[SHIFT3-ja.md](SHIFT3-ja.md)、[SHIFT4-ja.md](SHIFT4-ja.md)、[SHIFT5-ja.md](SHIFT5-ja.md)、[SHIFT6-ja.md](SHIFT6-ja.md)、[SHIFT7-ja.md](SHIFT7-ja.md)、[SHIFT8-ja.md](SHIFT8-ja.md)、[SHIFT9-ja.md](SHIFT9-ja.md)、[SHIFT10-ja.md](SHIFT10-ja.md)（監査の依存の表は [AUDIT-ja.md](AUDIT-ja.md)、Lean のファイルは [LEAN-ja.md](LEAN-ja.md)）にある。1〜12 回目のまとめは [THETA-ja.md](THETA-ja.md) §8.1 に、13〜40 回目のまとめは [ROUND2-ja.md](ROUND2-ja.md) §1 にある（道の歩みはそこの §5）。未解決：FRAG のもとで $`R_2^C`$ で $`X_{21}`$ より上（FRAG 無しでは $`X_4`$ より上）、
+$`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上の両方の半分；$`\nu_C = \nu_S`$ と一般の $`R_2^S = R_2^C`$；$`\theta_0`$ より下の下界；
 最初の扇に到達不能基数が要るか；$`C^*_3`$ の InaccPsi による上からの評価（$`C^*_3`$ は $`\omega_1^{CK}`$ より下、Carlson 2009, Thm 15.2）。
 
-**Lean**（このディレクトリの 5 つのファイル。ライブラリ全体と一緒にビルドした）：
+**Lean**（このディレクトリの 5 つのファイルと [R2/](R2/) の 9 つのファイル。ライブラリ全体と一緒にビルドした）：
 
 - **補題 L**（`CSet_inter_Om1`）。どの $`\alpha`$ でも、集合として $`\mathrm{Cl}(\alpha, 0) \cap \Omega_1 = \psi_{\Omega_1}(\alpha)`$。
   だから $`X`$ で上を抑えた項の可算な値は、ちょうど $`\psi_{\Omega_1}(X)`$ 未満の順序数
@@ -196,6 +154,9 @@ $`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上）の両方の半分；$`Z^\vare
   仮定する）を満たすどの単調な $`u`$ でも、$`\eta \le \omega^2`$ で $`\psi_{\Omega_1}(A_\eta) \le u(1+\eta)`$（`lower_bound`、
   `lower_bound_ww`）。`upper_bound` の仮定も合わせると $`u(1+\eta) = \psi_{\Omega_1}(A_\eta)`$（`conjT`、`conjT_ww`）。LOW-0 と
   LOW-STEP は仮定で、写像 $`E`$ は Lean に無い。
+- **$`R_2^C`$、核、FRAG**（[R2/](R2/)、説明は [LEAN-ja.md](LEAN-ja.md)）。$`R_2^C`$ は Carlson 2009, Def 5.3–5.4 から定義し、その基本の性質、同型最小の集合、核、補題 LOC はほかの公理
+  無しで証明済み。定理 FRAG（可算の基がいくつでも）と定理 FRAG2 は、1 つのファイルの 27 個の公理から証明済み：7 個の定数と、Wilken の 2007 年の 2 本の論文（APAL 145）から
+  引いた 20 個の事実。どれも監査が論文と照らし合わせた（2026-10）。
 
 **紙の上で証明し、査読済み。** どの査読も反論を試みるものだった。ここに挙げる結果に対して、致命的な点や止める点を
 見つけた査読は無い（止める点のある主張は、「証明されていない」と書いて載せる）。ほかの止める点は未解決の目標についてのもので、「証明されていないこと」に書く。
@@ -258,14 +219,14 @@ $`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上）の両方の半分；$`Z^\vare
 
 **$`\upsilon_{\omega^3}`$ まで、FRAG なしで**（2026-10、$`R_2^C`$）。定理 CORE-C$`^\Xi`$ で $`[0, \Xi_\omega]`$ まで延びた
 （[RESTARTS-ja.md](RESTARTS-ja.md) §3）。さらに $`[0, \Lambda_\varepsilon)`$ と $`[0, \rho_{\Theta_P})`$ まで延びた（[REACHES-ja.md](REACHES-ja.md) §2）。
-さらに $`[0, \rho_{\Theta_A+\omega^2})`$ まで（[PINS-ja.md](PINS-ja.md) §2）。さらに $`[0, \rho_{\Theta_{d\omega}})`$ まで、さらに $`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ まで（[BREAK-ja.md](BREAK-ja.md) §2、§4）、今は $`\nu_C \ge X_4`$（[SHIFT-ja.md](SHIFT-ja.md) §1）、FRAG のもとで §2 のそれぞれの点 $`X_5, \dots, X_{23}`$ について $`\nu_C \ge X_n`$（[SHIFT6-ja.md](SHIFT6-ja.md) §2.1、§3.1）、そして $`\nu_C \ge L(\omega+1)`$（[SHIFT7-ja.md](SHIFT7-ja.md) §1.1）、そして $`\nu_C = L(\omega+1)`$（そこの §2.1）、その上で $`y^C_\nu \ge X_A`$ として $`[0, y^C_\nu]`$（そこの §3.2）、今は $`y^C_\nu = L(\omega\cdot 2+1)`$ で $`[0, L(\Omega_1\cdot\omega)]`$（[SHIFT8-ja.md](SHIFT8-ja.md) §1.1、§1.2）、さらに $`[0, L(\varepsilon_{\Phi_\Omega+1})]`$（そこの §2.1）、さらに $`[0, L(G_2)]`$（[SHIFT9-ja.md](SHIFT9-ja.md) §1.1）、さらに $`[0, L(\Omega_2+\Phi^{P'}\cdot\omega)]`$（そこの §2.1）、さらに $`[0, L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)]`$（そこの §3.1）、さらに $`[0, Z^\Lambda]`$（[SHIFT10-ja.md](SHIFT10-ja.md) §1.1、§2.1）。
+さらに $`[0, \rho_{\Theta_A+\omega^2})`$ まで（[PINS-ja.md](PINS-ja.md) §2）。さらに $`[0, \rho_{\Theta_{d\omega}})`$ まで、さらに $`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ まで（[BREAK-ja.md](BREAK-ja.md) §2、§4）、今は $`\nu_C \ge X_4`$（[SHIFT-ja.md](SHIFT-ja.md) §1）、FRAG のもとで §2 のそれぞれの点 $`X_5, \dots, X_{21}`$ について $`\nu_C \ge X_n`$（[SHIFT5-ja.md](SHIFT5-ja.md) §2.1、[SHIFT10-ja.md](SHIFT10-ja.md) §3.1）。ここに記録したその後の段階（$`\nu_C \ge X_{23}`$、$`\nu_C = L(\omega+1)`$、その上の $`[0, Z^\Lambda]`$ まで、[SHIFT6-ja.md](SHIFT6-ja.md)〜[SHIFT10-ja.md](SHIFT10-ja.md)）は書いたままでは証明されていない（[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）。
 
 - 補題 PT、定理 CORE-C3（FRAG なしで、$`\upsilon_{\omega^3}`$ 以下のどの順序数も $`\mathrm{Core}(R_2^C)`$ に入る）とその系 $`m_3 \ge \upsilon_{\omega^3}`$（どれも査読 1 回）は
   [ROUND2-ja.md](ROUND2-ja.md) §2 にある。
 
 **$`R_2^S`$ と $`R_2^C`$**（2026-10）。これらの結果は今は [THETA-ja.md](THETA-ja.md) §8.2 にある：2 つの構造が食い違う最小の段 $`\beta_0`$ と、
 それより上のすべてに $`\le_1^X`$ な最小の $`\kappa`$ である $`\kappa_X`$；補題 STAGE と系 FIRST（右端が $`\beta_0`$ 以下の $`R_2^S`$ の関係はどれも $`R_2^C`$ で成り立ち、
-今は $`\beta_0 \ge \nu_C \gt \nu_P`$）；定理 LOC と $`\nu_C = \nu_S`$ の帰着（今はねじれた上向きの規則に、[THETA-ja.md](THETA-ja.md) §4。$`\nu_C = \nu_S`$ そのものは今は FRAG のもとで証明済み、[SHIFT7-ja.md](SHIFT7-ja.md) §2.1。$`\nu`$ の上では $`Z^\varepsilon`$ まで 2 つは一致する、[SHIFT8-ja.md](SHIFT8-ja.md) §1.1、§2.1、[SHIFT9-ja.md](SHIFT9-ja.md) §1.1、§2.1、§3.1、[SHIFT10-ja.md](SHIFT10-ja.md) §1.2、§2.1。(E) は [C11] の仮定と MIN と CC だけからは出ず、$`R_2^S`$ の核の最初の穴は加法的に主要、[SHIFT9-ja.md](SHIFT9-ja.md) §1.2、しかも FRAG のもとで $`Z^\varepsilon`$ 以上、[SHIFT10-ja.md](SHIFT10-ja.md) §1.2、§2.1。Carlson の範疇性の定理 [C11] で MIN$`^S`$ が成り立ち、2 つの核は同型で、(E) は AGR と同値で (R) を導く、そこの §2.2）；補題 UPG；KAPPA と CORE-EQ
+今は $`\beta_0 \ge \nu_C \gt \nu_P`$）；定理 LOC と $`\nu_C = \nu_S`$ の帰着（今はねじれた上向きの規則に、[THETA-ja.md](THETA-ja.md) §4。FRAG のもとでの $`\nu_C = \nu_S`$ の証明（[SHIFT7-ja.md](SHIFT7-ja.md) §2.1）と、$`\nu`$ の上の $`Z^\varepsilon`$ までの一致は、書いたままでは証明されていない、[SHIFT10-ja.md](SHIFT10-ja.md) §3.2。(E) は [C11] の仮定と MIN と CC だけからは出ず、$`R_2^S`$ の核の最初の穴は加法的に主要、[SHIFT9-ja.md](SHIFT9-ja.md) §1.2。Carlson の範疇性の定理 [C11] で MIN$`^S`$ が成り立ち、2 つの核は同型で、(E) は AGR と同値で (R) を導く、そこの §2.2）；補題 UPG；KAPPA と CORE-EQ
 （$`\max(\kappa_S, \kappa_C) \le \beta_0`$、つまり AGR なら、2 つの核は等しい）；一致する段での逆向き $`C \Rightarrow S`$（CORE-1、LIM1、ONE-POINT、SUCC2、LIM2）；
 DICH；R-INC；型 (ii) の段（MAX2、RED-d、FIRST2、UPCOPY、予想 CORE-2 を含む EQ-E、R-OM、未解決の段 PIN と LOW）。
 
@@ -290,9 +251,9 @@ DICH；R-INC；型 (ii) の段（MAX2、RED-d、FIRST2、UPCOPY、予想 CORE-2 
 
 **証明されていないこと：**
 
-- **$`R_2^C`$ で FRAG のもとで $`Z^\Lambda`$ より上（FRAG 無しで $`X_4`$ より上。$`Z^{\mathrm{LL}}`$ までの段階は書いたままでは証明されていない、[SHIFT10-ja.md](SHIFT10-ja.md) §2.1）、$`R_2^S`$ で FRAG のもとで $`Z^\varepsilon`$ より上（FRAG 無しで $`\upsilon_{\omega^3}`$ より上）での主張**、両方の半分（$`\nu_C`$ より上では構造は骨組み型でない。$`\nu_C`$ までとその上の道は [ROUND2-ja.md](ROUND2-ja.md) §5.1 に挙げる）。$`\Theta_A`$ より上の
-  やり直しの届く先（$`\Theta_A`$ そのものでの届く先は今は分かっている）と、[SHIFT10-ja.md](SHIFT10-ja.md) §2.6、[COVER-ja.md](COVER-ja.md) §9、[BREAK-ja.md](BREAK-ja.md) §10、[PINS-ja.md](PINS-ja.md) §6、[REACHES-ja.md](REACHES-ja.md) §7、[RESTARTS-ja.md](RESTARTS-ja.md) §6 の残り。
-- **$`Z^\varepsilon`$ より上の $`R_2^S = R_2^C`$**（その下では FRAG のもとで 2 つは一致する：$`\nu_C = \nu_S`$、[SHIFT7-ja.md](SHIFT7-ja.md) §2.1、そして $`\nu`$ の上の $`Z^\varepsilon`$ まで、[SHIFT8-ja.md](SHIFT8-ja.md) §1.1、§2.1、[SHIFT9-ja.md](SHIFT9-ja.md) §1.1、§2.1、§3.1、[SHIFT10-ja.md](SHIFT10-ja.md) §1.2、§2.1）：$`\le_1`$ の逆向き $`C \Rightarrow S`$ は、$`\kappa_C`$ より上の後続の段で $`\alpha \notin G_C`$ のとき未解決。
+- **$`R_2^C`$ で FRAG のもとで $`X_{21}`$ より上（FRAG 無しで $`X_4`$ より上。その上に記録した $`Z^\Lambda`$ までの範囲と $`\nu_C = \nu_S = L(\omega+1)`$ は書いたままでは証明されていない、[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）、$`R_2^S`$ で $`\upsilon_{\omega^3}`$ より上での主張**、両方の半分（$`\nu_C`$ より上では構造は骨組み型でない。道は [ROUND2-ja.md](ROUND2-ja.md) §5.1 と [SHIFT10-ja.md](SHIFT10-ja.md) §3.6 に挙げる）。$`\Theta_A`$ より上の
+  やり直しの届く先（$`\Theta_A`$ そのものでの届く先は今は分かっている）と、[SHIFT10-ja.md](SHIFT10-ja.md) §3.6、[COVER-ja.md](COVER-ja.md) §9、[BREAK-ja.md](BREAK-ja.md) §10、[PINS-ja.md](PINS-ja.md) §6、[REACHES-ja.md](REACHES-ja.md) §7、[RESTARTS-ja.md](RESTARTS-ja.md) §6 の残り。
+- **$`R_2^S = R_2^C`$**、その最初の場合 $`\nu_C = \nu_S`$ も（その証明 [SHIFT7-ja.md](SHIFT7-ja.md) §2.1 は書いたままでは正しくない、[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）：$`\le_1`$ の逆向き $`C \Rightarrow S`$ は、$`\kappa_C`$ より上の後続の段で $`\alpha \notin G_C`$ のとき未解決。
   $`\le_2`$ の逆向きは、(ii) の型の段で未解決（$`\Pi_2`$ 文を上向きに移すことが要るが、上向きの 2-反映でも持ち上げでも
   得られない。いまは段ごとに 1 つの組 $`(a^*, \beta)`$ の話で、$`\kappa_C`$ より下では予想 CORE-2 と同値。残りは PIN と LOW）。
   Σ2-GAP、INC、W(C)、(R)、AGR、$`\beta_0 = \infty`$ も未解決（これらの言葉は [THETA-ja.md](THETA-ja.md) §8.2 で定める。(R) と AGR は今は (E) から出る、[SHIFT8-ja.md](SHIFT8-ja.md) §2.2）。定理 CC とすべての証明書は $`R_2^C`$ の話。
@@ -395,12 +356,7 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       （ROOT-LOC、ENUM、EXACT-CL\*、$`\Omega_3\cdot\omega`$ までの層、定理 X17。[SHIFT4-ja.md](SHIFT4-ja.md) §2.1）。$`\nu_C \ge X_{18}`$ として $`X_{18}`$ まで — FRAG のもとで証明済み
       （PHI-COMM、順序数の側の READ、$`G(\hat\zeta_2)`$ より下の蓋、定理 X18。[SHIFT4-ja.md](SHIFT4-ja.md) §2.2。[SHIFT5-ja.md](SHIFT5-ja.md) §1.1 の直しで査読 2 回）。$`\nu_C \ge X_{19}`$ として $`X_{19}`$ まで — FRAG のもとで証明済み
       （SEP$`^{\mathrm{near}}`$、NO-LIT、EXACT-LONG⁺、FAR-PIN$`^L`$、TOP-REG-LAND、LAND-CAP、定理 X19。[SHIFT5-ja.md](SHIFT5-ja.md) §1.1）。$`\nu_C \ge X_{21}`$ として $`X_{21}`$ まで — FRAG のもとで証明済み
-      （THETA$`^G`$、EXACT-LONG$`^G`$、EXACT-F、NO-READL、CAP$`^\sharp`$、定理 X21。[SHIFT5-ja.md](SHIFT5-ja.md) §2.1。[SHIFT6-ja.md](SHIFT6-ja.md) §1.1 の直しで査読 2 回）。$`\nu_C \ge X_{23}`$ として $`X_{22}`$ と $`X_{23}`$ まで — FRAG のもとで証明済み
-      （CUSHION、定理 X22、CUSHION$`^\varepsilon`$、定理 X23。長いちょうどの届く先は着地の符号で直した：AGREE、EXACT-LONG$`^{(3)\sharp}`$。[SHIFT6-ja.md](SHIFT6-ja.md) §1.1、§2.1、§3.1。直しについて査読 1 回）。$`\nu_C \ge L(\omega+1)`$ として $`L(\omega+1)`$ まで — FRAG のもとで証明済み
-      （FAR-PIN$`^{L,\mathrm{rel}}`$、LAND$`^\omega`$、$`P'`$ より下の EX$`^w`$ と CAP-0、CAP-1、NU-LOW″⁺。[SHIFT7-ja.md](SHIFT7-ja.md) §1.1。査読 1 回）。**$`\nu_C = \nu_S = L(\omega+1)`$ で $`[0, \nu_C]`$ 全体で — FRAG のもとで証明済み**
-      （CROSS-LIM、TC⁺$`^\omega`$、EMB、ONTO-FIN、PAIR、UP、NU、LC-STRICT。[SHIFT7-ja.md](SHIFT7-ja.md) §2.1。査読 1 回と監査、[AUDIT-ja.md](AUDIT-ja.md)。下の半分の 1 つの穴の直しは査読 2 回）。$`\nu_C`$ の上の $`X_A`$ まで — FRAG のもとで証明済み
-      （CAP$`^p`$、$`\nu`$ の区域、FIRST-PAIR$`^\nu`$、NU-CT$`^\nu`$、定理 A$`^\nu`$。[SHIFT7-ja.md](SHIFT7-ja.md) §3.2）。$`L(\omega^2)`$ まで — FRAG のもとで証明済み（GAP-CALC$`^{\mathrm{reg}}`$、定理 B$`^\nu`$、AGREE$`^\nu`$。
-      [SHIFT8-ja.md](SHIFT8-ja.md) §1.1、§1.2。査読 2 回で 2 つの証明）。$`L(\Omega_1\cdot\omega)`$ まで — FRAG のもとで証明済み（FRAG″、FIX″、EXACT-C″、EXACT-Ω″、定理 C″。[SHIFT8-ja.md](SHIFT8-ja.md) §1.1。査読 1 回）。$`L(\varepsilon_{\Phi_\Omega+1})`$ まで — FRAG のもとで証明済み（DOM″、EXACT-W″、EXACT-G″、定理 C$`^G`$。[SHIFT8-ja.md](SHIFT8-ja.md) §2.1。査読 1 回）。$`L(G_2)`$ まで — FRAG のもとで証明済み（$`P'`$ より下の DOM″、EXACT-O″、EXACT-O″$`^\theta`$、定理 C$`^\theta`$。[SHIFT9-ja.md](SHIFT9-ja.md) §1.1。査読 1 回）。$`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ まで — FRAG のもとで証明済み（FAR-PIN″、EXACT-O″$`^\omega`$、EXACT-O″$`^\Gamma`$、定理 C$`^\Phi`$。[SHIFT9-ja.md](SHIFT9-ja.md) §2.1。査読 1 回。$`L(G(\Omega_1)\cdot\omega)`$ までは PIN-GAP でも出る、そこの §2.2。査読 2 回）。$`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ まで — FRAG のもとで証明済み（TIER$`_n`$、READ″、いくつもの区間にわたる FAR-PIN″、EXACT-O″$`^R`$、定理 C$`^R`$。[SHIFT9-ja.md](SHIFT9-ja.md) §3.1。査読 1 回。$`Z^\Gamma`$ までは $`P'`$ より上の $`\Gamma`$ の段でも出る、そこの §3.2。査読 2 回）。$`Z^\Lambda`$ まで — FRAG のもとで証明済み（TIER$`_\zeta`$、ENUM″、EXACT-CL″\*、定理 C$`^\Lambda`$。[SHIFT10-ja.md](SHIFT10-ja.md) §1.1。査読 1 回。$`Z^\varepsilon`$ までは EXACT-CL″$`^\varepsilon`$ でも出る、そこの §1.2。査読 2 回）。$`Z^{\mathrm{LL}}`$ まで — 書いたままでは証明されていない（EXACT-LONG-CL″\* はある符号で偽で、定理 C$`^{\mathrm{LL}}`$ には進行を止める点がある。そこの §2.1）
+      （THETA$`^G`$、CAP$`^\sharp`$、定理 X21。[SHIFT5-ja.md](SHIFT5-ja.md) §2.1。証明は TRANSLATION と FAR-PIN$`^{L\sharp}`$ で直した、[SHIFT10-ja.md](SHIFT10-ja.md) §3.1、査読 1 回。$`X_{19}^{\mathrm{lin}}`$ までは 2 つの証明で査読 2 回、そこの §3.2）。**書いたままでは証明されていない**（[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）：$`X_{22}`$ と $`X_{23}`$ まで、$`L(\omega+1)`$ まで、$`[0, \nu_C]`$ での主張つきの $`\nu_C = \nu_S = L(\omega+1)`$、そして $`\nu_C`$ の上の §2 の $`Z^\Lambda`$ までの範囲（27〜39 回目に査読 1–2 回で記録、[SHIFT6-ja.md](SHIFT6-ja.md)〜[SHIFT10-ja.md](SHIFT10-ja.md)。$`Z^{\mathrm{LL}}`$ までの段階は前から未証明、そこの §2.1）
     - $`R_2^C`$ の核は $`\rho_{\Theta_{d\omega}}`$ までと、$`\nu_C \gt \nu_P`$ で $`[0, \nu_C]`$ で — 証明済み（CORE-C$`^{d\omega}`$、CAP、NU-CT。[BREAK-ja.md](BREAK-ja.md)）
   - **B** 上界 $`\mathrm{Core}(R_2^+) \subseteq \psi_{\Omega_1}(I_\omega)`$ — 未解決
     - B0 最小の鎖への帰着（定理 CC） — $`R_2^C`$ で証明済み
@@ -415,18 +371,18 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       足りる（CRIT、[COVER-ja.md](COVER-ja.md) §6.2）が、$`x_F`$ や $`c_0`$ を押さえる InaccPsi の項は証明されていない
       （$`n = 3`$ の予想は §3）。$`m_F`$ の評価は組の列の 1 本の列の評価（[FANFREE-ja.md](FANFREE-ja.md) §4）。評価 $`\iota(\mathrm{CH}_2) \lt t`$ は、ちょうど
       $`t`$ より下の 1 点での 3 つの関係（[FANFREE-ja.md](FANFREE-ja.md) §7.4）
-    - B-NU $`\nu_C`$ の InaccPsi による上からの評価 — FRAG のもとで証明済み：$`\nu_C \le \nu_S \le L(\omega+1)`$（SHIFT による PAIR、CROSS-LIM、TC⁺$`^\omega`$、EMB、ONTO-FIN とあわせて。[SHIFT7-ja.md](SHIFT7-ja.md) §2.1。査読 1 回と監査、そこの §3.1）。道筋は [ROUND2-ja.md](ROUND2-ja.md) §5.2 に挙げる
+    - B-NU $`\nu_C`$ の InaccPsi による上からの評価 — また未解決：$`\nu_C \le \nu_S \le L(\omega+1)`$ の証明（[SHIFT7-ja.md](SHIFT7-ja.md) §2.1）は CROSS-LIM を使い、それは書いたままでは証明されていない（[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）。道筋は [ROUND2-ja.md](ROUND2-ja.md) §5.2 に挙げる
     - B2 $`R_2^+`$ での $`\lt_2`$ の有限集合による判定 — 証明済み（T1、T2）。一様な形（すべての $`k`$ に 1 つの写し）が
-      必要条件でもあるかは $`R_2^+`$ で未解決（FRAG のもとで $`Z^\varepsilon`$ より下では証明済み、[SHIFT10-ja.md](SHIFT10-ja.md) §1.2。共終な Pred₁ を持つどの左端も 2 つの分かった種類のどれかである点より下でも、そこの §2.2。+ の無い $`R_2`$ では成り立つと Wilken 2021, 6 ページが言う）
+      必要条件でもあるかは $`R_2^+`$ で未解決（共終な Pred₁ を持つどの左端も 2 つの分かった種類のどれかである点より下では証明済み、[SHIFT10-ja.md](SHIFT10-ja.md) §2.2。$`Z^\varepsilon`$ より下の場合は書いたままでは証明されていない、そこの §3.2。+ の無い $`R_2`$ では成り立つと Wilken 2021, 6 ページが言う）
     - B3 $`0, +, \le, \le_1, \le_2`$ を保つ基の付け替え — $`R_2^+`$ が骨組み型の所で証明済み（定理 FRAG2。FRAG そのものも
-      証明済みで、その写像は代入の写像と等しい、FRAG-SUBST、[BREAK-ja.md](BREAK-ja.md) §4。3 つとも査読 2 回、[SHIFT7-ja.md](SHIFT7-ja.md) §3.1）。骨組みの外では、仮定付きで証明済み（FRAG2-W、FRAG2-C、FRAG2-1E）。$`\nu`$ より上で動かない集合に組があっても（FRAG2$`^{\mathrm{rel}}`$）、最前線より下でいくつかの点 $`L(e)`$ を一度に動かしても（FRAG″、FRAG2″。[SHIFT8-ja.md](SHIFT8-ja.md) §1.1、§2.1）証明済み。$`\upsilon`$ の点でない基をいくつも
+      証明済みで、その写像は代入の写像と等しい、FRAG-SUBST、[BREAK-ja.md](BREAK-ja.md) §4。3 つとも査読 2 回、[SHIFT7-ja.md](SHIFT7-ja.md) §3.1。FRAG と FRAG2 は引いた 20 個の事実から Lean でも証明済み、[LEAN-ja.md](LEAN-ja.md)）。骨組みの外では、仮定付きで証明済み（FRAG2-W、FRAG2-C、FRAG2-1E）。$`\nu`$ より上で動かない集合に組があっても（FRAG2$`^{\mathrm{rel}}`$）証明済み（いくつかの点 $`L(e)`$ を一度に動かす FRAG″ (d) と FRAG2″ は書いたままでは証明されていない、[SHIFT8-ja.md](SHIFT8-ja.md) §1.1、[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）。$`\upsilon`$ の点でない基をいくつも
       同時に（FRAG-E） — 未解決、とても難しい
     - B4 B3 が動かす点の間の $`\le_2`$ の組 — $`R_2^S`$ で $`\nu_P`$ より下、両方の構造で $`\rho_{\Theta_A+\omega^2}`$ より下で証明済み
       （SKEL、BLK$`^O`$、EQB-A）、$`R_2^S`$ では骨組み型でない最初の点 $`\nu`$ まで（SKEL⁺、FIRST-PAIR）。$`\lt_2`$ の左端はどれも
       $`\lambda`$ が極限の $`\upsilon_\lambda`$（LEFT。今は仮定なし：INC1 と NOBAD、
       [BREAK-ja.md](BREAK-ja.md) §1）。$`R_2^S`$ では、どの可算順序数でも、どの組も標準の組か 2 つの
       やり直しの点を結ぶ組なので、$`R_2^S`$ で RIGHT（どの右端も $`\upsilon`$ の点）が成り立つ（SKEL$`^\infty`$、[COVER-ja.md](COVER-ja.md) §5.1）。
-      $`Z^\Lambda`$ より上のやり直しの点の間の組の全体（その下では FRAG のもとで分かっている、定理 C″、C$`^G`$、C$`^\theta`$、C$`^\Phi`$、C$`^R`$、C$`^\Lambda`$、[SHIFT8-ja.md](SHIFT8-ja.md) §1.1、§2.1、[SHIFT9-ja.md](SHIFT9-ja.md) §1.1、§2.1、§3.1、[SHIFT10-ja.md](SHIFT10-ja.md) §1.1）と、$`\beta_0`$ より上の $`R_2^C`$ の RIGHT — 未解決
+      $`X_{21}`$ より上のやり直しの点の間の組の全体（$`\nu_C`$ の上の [SHIFT8-ja.md](SHIFT8-ja.md)〜[SHIFT10-ja.md](SHIFT10-ja.md) の定理 C″、C$`^G`$、C$`^\theta`$、C$`^\Phi`$、C$`^R`$、C$`^\Lambda`$ は書いたままでは証明されていない、[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）と、$`\beta_0`$ より上の $`R_2^C`$ の RIGHT — 未解決
     - B5 B2 + B3 + B4 を組み立てる — 形だけ
     - B-PT 証明論の別の道：到達不能基数 $`n`$ 個の理論が「長さ $`n`$ の鎖がある」を証明する — 未解決。
       $`\lt_2`$ の集合論的な十分条件が要るが、知られていない
@@ -440,7 +396,7 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       正確な届く先とともに $`\Lambda_\varepsilon`$ まで、定理 EXACT-A が $`\Theta_A`$ まで延ばし（[PINS-ja.md](PINS-ja.md)）、STRUCT′ が $`\rho_{\Lambda'+\omega^2}`$ まで名前で書き（[FANFREE-ja.md](FANFREE-ja.md) §10.4）、STRUCT″ が $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$ まで（[VEBLEN-ja.md](VEBLEN-ja.md) §8）、KV-NAMES が
       $`\nu_C`$ より下の Klammer の届く先を名前から読み（同じ所）、$`\Theta_A`$ での値と
       目印 $`\Theta_\delta`$、$`\Theta_{d\omega}`$（[BREAK-ja.md](BREAK-ja.md) §4）とその名前、$`\Lambda^*`$ と $`\nu_P`$ の名前（[THETA-ja.md](THETA-ja.md) §9.1）、可算の指数のやり直しと $`\Lambda^*`$ の正確な届く先（EXACT-C、LONG-G2）、指数が非可算のときの最初のちょうどの届く先とすべての長いやり直しの下からの評価（EXACT-W、LONG-ALL、RL-UP。[SHIFT-ja.md](SHIFT-ja.md) §9.1）、区域を越える届く先の下からの評価（CROSS、RL-UNC、RL-2。[SHIFT2-ja.md](SHIFT2-ja.md) §1.1）、指数が $`\psi_{\Omega_2}(\Omega_2)`$ より下の短いやり直しのちょうどの届く先と、添字の不動点での鋭い越え方（EXACT-V、CROSS-SHARP。[SHIFT2-ja.md](SHIFT2-ja.md) §2.1）、長いやり直しの届く先の正確な尾 $`\delta\cdot 2 + t`$（TAIL-MIN、BASE0-TAIL。[SHIFT-ja.md](SHIFT-ja.md) §8.1、§8.4）、定理 SKEL が $`R_2^S`$ で $`[0, \nu_P)`$ で与え（[REACHES-ja.md](REACHES-ja.md)）、
-      SKEL⁺ が $`\nu`$ まで与え（[BREAK-ja.md](BREAK-ja.md) §2）、$`R_2^S`$ の段 0 の記述はどの可算順序数でも成り立つ（SKEL$`^\infty`$、[COVER-ja.md](COVER-ja.md) §5.1）。FRAG のもとで、$`\nu`$ の区域は次のやり直しまで（[SHIFT7-ja.md](SHIFT7-ja.md) §3.2）、点 $`L(e)`$ の骨組みはちょうどの届く先つきで $`Z^\Lambda`$ まで（定理 C″、C$`^G`$、C$`^\theta`$、C$`^\Phi`$、C$`^R`$、C$`^\Lambda`$、[SHIFT8-ja.md](SHIFT8-ja.md) §1.1、§2.1、[SHIFT9-ja.md](SHIFT9-ja.md) §1.1、§2.1、§3.1、[SHIFT10-ja.md](SHIFT10-ja.md) §1.1）。入れ子の組のどの段でも最初のブロック（LIFT-0、
+      SKEL⁺ が $`\nu`$ まで与え（[BREAK-ja.md](BREAK-ja.md) §2）、$`R_2^S`$ の段 0 の記述はどの可算順序数でも成り立つ（SKEL$`^\infty`$、[COVER-ja.md](COVER-ja.md) §5.1）。FRAG のもとで、符号 $`\hat G + G_2`$ より下のちょうどの長い届く先（TRANSLATION、[SHIFT10-ja.md](SHIFT10-ja.md) §3.1。$`\nu`$ の区域と $`Z^\Lambda`$ までの点 $`L(e)`$ の骨組み、[SHIFT7-ja.md](SHIFT7-ja.md) §3.2、[SHIFT8-ja.md](SHIFT8-ja.md)〜[SHIFT10-ja.md](SHIFT10-ja.md) は書いたままでは証明されていない、そこの §3.2）。入れ子の組のどの段でも最初のブロック（LIFT-0、
       [BREAK-ja.md](BREAK-ja.md) §5）、$`T_\omega`$ より下のどの段のどのブロックも（SH、[BREAK-ja.md](BREAK-ja.md) §7.1） — 証明済み。各段の順序型
       （$`o_k = \omega`$。隙間の間の有限の基の付け替え GI と同じ） — $`R_2^C`$ では証明済み（定理 O$`^C`$、[BREAK-ja.md](BREAK-ja.md) §8.1、
       査読 1 回）、$`R_2^S`$ では未解決（Carlson の最小性の $`R_2^S`$ の形と 1 つの止める命題に帰着、[COVER-ja.md](COVER-ja.md) §4。その最小性は
@@ -450,8 +406,8 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
     - A3 最小の実現を項で書く — 未解決
     - A4 **予想 CH**：長さ $`k+2`$ の最小の鎖には到達不能基数が $`k`$ 個要る — 予想
     - A5 上限より下のどの項も、あるパターンの値 — 未解決
-    - A6 どこでも $`R_2^S = R_2^C`$ — 未解決（$`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$ より下では一致）。その最初の場合 $`\nu_C = \nu_S`$ — FRAG のもとで証明済みで、幽霊の組は無い
-      （NU。[SHIFT7-ja.md](SHIFT7-ja.md) §2.1。査読 1 回と監査。$`\nu`$ の上では $`Z^\varepsilon`$ まで 2 つは一致する、[SHIFT8-ja.md](SHIFT8-ja.md) §1.1、§2.1、[SHIFT9-ja.md](SHIFT9-ja.md) §1.1、§2.1、§3.1、[SHIFT10-ja.md](SHIFT10-ja.md) §1.2、§2.1）。**FRAG のもとで LOW は偽**（[SHIFT7-ja.md](SHIFT7-ja.md) §1.1、査読 1 回）。前の道は [ROUND2-ja.md](ROUND2-ja.md) §5.3
+    - A6 どこでも $`R_2^S = R_2^C`$ — 未解決（$`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$ より下では一致）。その最初の場合 $`\nu_C = \nu_S`$ — また未解決（証明 NU、[SHIFT7-ja.md](SHIFT7-ja.md) §2.1 は書いたままでは証明されていない、
+      [SHIFT10-ja.md](SHIFT10-ja.md) §3.2）。LOW はまた決まっていない（その否定は $`P'`$ より下の CAP-0 を使い、それは書いたままでは証明されていない）。前の道は [ROUND2-ja.md](ROUND2-ja.md) §5.3
     - A7 $`R_1^+`$ の相対化したパターンと、順序数とパターンの間の一様な対応（Wilken が予告） — 証明済み（RC-PIN、RC、U、
       UNIF。[PINS-ja.md](PINS-ja.md) §1。閉包は有限（CL-FIN）で、具体的なピンのパターン（EXPL）、[BREAK-ja.md](BREAK-ja.md) §4）。
       対応が初等再帰的であること — 概略だけ
@@ -476,8 +432,8 @@ $`\mathrm{code}_0`$ は $`\theta`$ より下にとどまる。[R2PLUS-ja.md](../
       鎖の底はちょうど無限の閉じた扇を持つ核の点で、最小の閉じた $`n`$ 扇は $`m_3`$ より下にとどまる（CP3、FIN-FAN）。最小の扇は記述でき、
       順序型は $`\omega^2`$（FS、OF。[COVER-ja.md](COVER-ja.md) の §2 と §5.2）、$`m_F \gt \nu_C`$（[COVER-ja.md](COVER-ja.md) §6.4）。$`m_F`$ は組の列の 1 本の列の点の極限で、
       $`\sigma_N = m_F`$（[FANFREE-ja.md](FANFREE-ja.md) §4）。$`c_2 \lt \omega_1^{CK}`$）
-    - Lean：上を抑えた項の順序型が $`\psi_{\Omega_1}(X)`$ であること。補題 LOC（有限集合が isominimal かどうかは、
-      その最大の元までの構造だけで決まる。紙の上、査読なし） — 未解決
+    - Lean：上を抑えた項の順序型が $`\psi_{\Omega_1}(X)`$ であること — 未解決。$`R_2^C`$、同型最小の集合、核、補題 LOC、FRAG、FRAG2 — Lean、引いた 20 個の事実から（[LEAN-ja.md](LEAN-ja.md)）。
+      Lean での $`\nu_C`$ への鎖（INC1、Carlson 2009, Thm 14.10 と 14.14、ブロック、SKEL⁺、CAP、O$`^C`$、NU-CT） — 未解決
 
 ## 6. 実験
 
@@ -620,11 +576,12 @@ $`m_3 \lt \min C^*_3`$ より下。以前の 8 個の証明書は、もう要ら
 | [ConjT.lean](ConjT.lean) | 定理 T-UP の InaccPsi 側：$`A_\eta`$ での (HA)、STEP を仮定とした $`\eta = \omega^2`$ までの帰納法、そこからの予想 U、補題 M の算術 |
 | [LowerT.lean](LowerT.lean) | 定理 T-LOW の InaccPsi 側：LOW-0 と LOW-STEP を仮定とした $`\eta = \omega^2`$ までの帰納法と、両方の半分からの定理 T |
 | [LowTerms.lean](LowTerms.lean) | §4 の 7 つの項 $`u(\eta)`$：標準形、値、順序、$`u(\omega^2) \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ |
+| [R2/](R2/) | Carlson 2009 から定義した $`R_2^C`$、同型最小の集合、核、補題 LOC、定理 FRAG と FRAG2（9 つのファイル。公理と定理は [LEAN-ja.md](LEAN-ja.md)） |
 
-$`R_2^+`$ そのものについては、Lean には何も無い。$`\upsilon_{\omega^3}`$ より上の結果は 2 ページ目
+$`R_2^+`$ そのものについての Lean のファイルは [LEAN-ja.md](LEAN-ja.md) で説明する。$`\upsilon_{\omega^3}`$ より上の結果は 2 ページ目
 [RESTARTS-ja.md](RESTARTS-ja.md) に、$`\Xi_\omega`$ より上の結果は 3 ページ目 [REACHES-ja.md](REACHES-ja.md) に、$`\Lambda_\varepsilon`$ より先の
 結果は 4 ページ目 [PINS-ja.md](PINS-ja.md) に、骨組みが終わる所とその上の段の結果は 5 ページ目 [BREAK-ja.md](BREAK-ja.md)（続きは [BREAK2-ja.md](BREAK2-ja.md)）に、
-被覆に対する最小性による結果と段 0 の記述（5 回目から 7 回目）は 6 ページ目 [COVER-ja.md](COVER-ja.md) に、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md)、11 回目と 12 回目は 8 ページ目 [VEBLEN-ja.md](VEBLEN-ja.md) に、13 回目と 14 回目は 9 ページ目 [THETA-ja.md](THETA-ja.md) にある（そこには、前の回のまとめと、$`R_2^S`$ と $`R_2^C`$ を比べた結果も、このページから移した）。15 回目から 17 回目は 10 ページ目 [SHIFT-ja.md](SHIFT-ja.md) に、18 回目から 20 回目は 11 ページ目 [SHIFT2-ja.md](SHIFT2-ja.md) に、21 回目と 22 回目は 12 ページ目 [SHIFT3-ja.md](SHIFT3-ja.md) に、23 回目と 24 回目は 13 ページ目 [SHIFT4-ja.md](SHIFT4-ja.md) に、25 回目と 26 回目は 14 ページ目 [SHIFT5-ja.md](SHIFT5-ja.md) に、27 回目から 29 回目は 15 ページ目 [SHIFT6-ja.md](SHIFT6-ja.md) に、30〜32 回目は 16 ページ目 [SHIFT7-ja.md](SHIFT7-ja.md) に、33 回目と 34 回目は 17 ページ目 [SHIFT8-ja.md](SHIFT8-ja.md) に、35〜37 回目は 18 ページ目 [SHIFT9-ja.md](SHIFT9-ja.md) に、38 回目と 39 回目は 19 ページ目 [SHIFT10-ja.md](SHIFT10-ja.md) に（監査の依存の表は [AUDIT-ja.md](AUDIT-ja.md) に）ある。1 回目の結果の一部は [ROUND1-ja.md](ROUND1-ja.md) に、このページから移した古い細部は [ROUND2-ja.md](ROUND2-ja.md) にある。
+被覆に対する最小性による結果と段 0 の記述（5 回目から 7 回目）は 6 ページ目 [COVER-ja.md](COVER-ja.md) に、8 回目から 10 回目は 7 ページ目 [FANFREE-ja.md](FANFREE-ja.md)、11 回目と 12 回目は 8 ページ目 [VEBLEN-ja.md](VEBLEN-ja.md) に、13 回目と 14 回目は 9 ページ目 [THETA-ja.md](THETA-ja.md) にある（そこには、前の回のまとめと、$`R_2^S`$ と $`R_2^C`$ を比べた結果も、このページから移した）。15 回目から 17 回目は 10 ページ目 [SHIFT-ja.md](SHIFT-ja.md) に、18 回目から 20 回目は 11 ページ目 [SHIFT2-ja.md](SHIFT2-ja.md) に、21 回目と 22 回目は 12 ページ目 [SHIFT3-ja.md](SHIFT3-ja.md) に、23 回目と 24 回目は 13 ページ目 [SHIFT4-ja.md](SHIFT4-ja.md) に、25 回目と 26 回目は 14 ページ目 [SHIFT5-ja.md](SHIFT5-ja.md) に、27 回目から 29 回目は 15 ページ目 [SHIFT6-ja.md](SHIFT6-ja.md) に、30〜32 回目は 16 ページ目 [SHIFT7-ja.md](SHIFT7-ja.md) に、33 回目と 34 回目は 17 ページ目 [SHIFT8-ja.md](SHIFT8-ja.md) に、35〜37 回目は 18 ページ目 [SHIFT9-ja.md](SHIFT9-ja.md) に、38〜40 回目は 19 ページ目 [SHIFT10-ja.md](SHIFT10-ja.md) に（監査の依存の表は [AUDIT-ja.md](AUDIT-ja.md) に、Lean のファイルは [LEAN-ja.md](LEAN-ja.md) に）ある。1 回目の結果の一部は [ROUND1-ja.md](ROUND1-ja.md) に、このページから移した古い細部は [ROUND2-ja.md](ROUND2-ja.md) にある。
 
 ## 8. 文献
 

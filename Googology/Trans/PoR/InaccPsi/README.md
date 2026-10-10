@@ -12,6 +12,8 @@ blocking point; "(2026-10, 2 reviews)" means the result is from October 2026 and
 checked it; a proved result with no count had 1 review); **cited** (a paper and the place); **checked** (computed on finitely many cases);
 **conjecture**; **open**.
 
+**Status after the fortieth round (2026-10).** The milestone $`\nu_C = \nu_S = L(\omega+1)`$ and **every range above $`X_{21}`$ are not proved as written**: the referees of the fortieth round found that the chain to $`\nu_C`$ and every frontier above $`X_{21}`$ use exact values of long reaches at codes where those values are false ([SHIFT10.md](SHIFT10.md) §3.1, §3.2). Given FRAG, Wilken's claim is now proved in $`R_2^C`$ on $`[0, X_{21}]`$ (§2), and in $`R_2^S`$ only up to $`\upsilon_{\omega^3}`$. The ranges recorded earlier above $`X_{21}`$ (up to $`Z^\Lambda`$) are kept below as history, marked "not proved as written". LOW is undecided again. FRAG itself is now a Lean theorem from 20 cited facts ([LEAN.md](LEAN.md)).
+
 ## 1. The claim and its source
 
 G. Wilken, "A glimpse of Σ₃-elementarity" (2020), pp. 420–421, repeated in G. Wilken, "Pure
@@ -89,80 +91,34 @@ X_4 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2+1}\cdot 
 ```
 
 (1 review, no FRAG, [SHIFT.md](SHIFT.md) §1), and, given FRAG, up to $`X_5`$ ([SHIFT.md](SHIFT.md) §8.1), up to $`X_8`$ (2 reviews, [SHIFT.md](SHIFT.md) §9.1), up to $`X_9 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+\Omega_1} + \omega^{G(\Omega_1)+1} + \omega^{G_2+1})`$ with $`G(\Omega_1) = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_1})`$
-(2 reviews, [SHIFT2.md](SHIFT2.md) §1.1, §2.1), then, past the first index fixed point, up to $`X_{11}`$ ([SHIFT2.md](SHIFT2.md) §2.1), up to $`X_{12}`$ ([SHIFT2.md](SHIFT2.md) §3.1), up to $`X_{13}`$ ([SHIFT3.md](SHIFT3.md) §1.1), up to $`X_{14}`$ ([SHIFT3.md](SHIFT3.md) §2.1), up to $`X_{15}`$ and $`X_{16}`$ (2 reviews, [SHIFT4.md](SHIFT4.md) §1.1, §1.4, §2.1), up to $`X_{17}`$ ([SHIFT4.md](SHIFT4.md) §2.1), up to $`X_{18}`$ (2 reviews; [SHIFT4.md](SHIFT4.md) §2.2, [SHIFT5.md](SHIFT5.md) §1.1), up to $`X_{19}`$ ([SHIFT5.md](SHIFT5.md) §1.1), up to $`X_{21} = \psi_{\Omega_1}(\Omega_\omega + \hat\zeta_H + \omega^{G(\hat\zeta_H)+1}\cdot 2)`$ with $`\hat\zeta_H = \theta_3\cdot\Omega_3 + \omega^{\hat g_3+g_3}`$
-(2 reviews; [SHIFT5.md](SHIFT5.md) §2.1, [SHIFT6.md](SHIFT6.md) §1.1), up to $`X_{22}`$ ([SHIFT6.md](SHIFT6.md) §1.1), and up to
+(2 reviews, [SHIFT2.md](SHIFT2.md) §1.1, §2.1), then, past the first index fixed point, up to $`X_{11}`$ ([SHIFT2.md](SHIFT2.md) §2.1), up to $`X_{12}`$ ([SHIFT2.md](SHIFT2.md) §3.1), up to $`X_{13}`$ ([SHIFT3.md](SHIFT3.md) §1.1), up to $`X_{14}`$ ([SHIFT3.md](SHIFT3.md) §2.1), up to $`X_{15}`$ and $`X_{16}`$ (2 reviews, [SHIFT4.md](SHIFT4.md) §1.1, §1.4, §2.1), up to $`X_{17}`$ ([SHIFT4.md](SHIFT4.md) §2.1), up to $`X_{18}`$ (2 reviews; [SHIFT4.md](SHIFT4.md) §2.2, [SHIFT5.md](SHIFT5.md) §1.1), up to $`X_{19}`$ ([SHIFT5.md](SHIFT5.md) §1.1), and up to
 
 ```math
-X_{23} = \psi_{\Omega_1}(\Omega_\omega + \hat\zeta_{23} + \omega^{G(\hat\zeta_{23})+1}\cdot 2),\quad \hat\zeta_{23} = \theta_4\cdot\Omega_4 + \varepsilon_{\hat g_4+1}
+X_{21} = \psi_{\Omega_1}(\Omega_\omega + \hat\zeta_H + \omega^{G(\hat\zeta_H)+1}\cdot 2),\quad \hat\zeta_H = \theta_3\cdot\Omega_3 + \omega^{\hat g_3+g_3}
 ```
 
-([SHIFT6.md](SHIFT6.md) §2.1, §3.1; $`X_{22}`$ and $`X_{23}`$ were not proved as written until the blocking point B-1 in the exact long reaches that their cushion caps use was repaired, with 1 review
-of the repair, [SHIFT6.md](SHIFT6.md) §3.1; $`\theta_3 = \psi_{\Omega_4}(\Omega_\omega)`$, $`\theta_4 = \psi_{\Omega_5}(\Omega_\omega)`$, and $`g_3`$, $`\hat g_3`$, $`\hat g_4`$ and the other multipliers with a hat used below are defined in
-[SHIFT5.md](SHIFT5.md) and [SHIFT6.md](SHIFT6.md)). Then, given FRAG, the claim holds up to
+(its first proof had 2 reviews, [SHIFT5.md](SHIFT5.md) §2.1, [SHIFT6.md](SHIFT6.md) §1.1; that proof used exact long reaches that are false for some codes, and the repaired proof has 1 review,
+[SHIFT10.md](SHIFT10.md) §3.1; up to $`X_{19}^{\mathrm{lin}}`$ two proofs, 2 reviews, §3.2 there; $`\theta_3 = \psi_{\Omega_4}(\Omega_\omega)`$, and $`g_3`$, $`\hat g_3`$ and the other multipliers with a hat are
+defined in [SHIFT5.md](SHIFT5.md) and [SHIFT6.md](SHIFT6.md)). **This is the frontier now.** The core half alone is proved in $`R_2^C`$ further, on $`[0, \nu_C]`$, where $`\nu_C`$ ($`\ge X_{21}`$ given
+FRAG, $`\ge X_4`$ without it) is the first point where $`R_2^C`$ stops being skeletal ([BREAK.md](BREAK.md) §2). In $`R_2^S`$ the claim is proved up to $`\upsilon_{\omega^3}`$ (§3).
+
+**Not proved as written** ([SHIFT10.md](SHIFT10.md) §3.2, [AUDIT.md](AUDIT.md)). Earlier rounds recorded, given FRAG, the claim in $`R_2^C`$ up to $`X_{22}`$ and $`X_{23}`$ ([SHIFT6.md](SHIFT6.md)), up to
 
 ```math
-L(\omega+1) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P'),\quad P' = \psi_{\Omega_2}(\Omega_\omega\cdot 2)
+L(\omega+1) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P'),\quad P' = \psi_{\Omega_2}(\Omega_\omega\cdot 2),
 ```
 
-(1 review, [SHIFT7.md](SHIFT7.md) §1.1). This is exactly the first non-skeletal point: given FRAG, $`\nu_C = \nu_S = L(\omega+1)`$ (1 review, and an audit that found no fatal or blocking point, [SHIFT7.md](SHIFT7.md) §2.1, §3.1, [AUDIT.md](AUDIT.md)), so
-**Wilken's claim holds in $`R_2^C`$ on $`[0, \nu_C]`$ (given FRAG)**, the two definitions have the same first non-skeletal point, and the hypothesis LOW
-($`\nu_C \le \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$) is false. Without FRAG, the core half alone is proved in $`R_2^C`$ further, on
-$`[0, \nu_C]`$, where $`\nu_C`$ ($`\ge X_4`$ without FRAG) is the first point where $`R_2^C`$ stops being skeletal ([BREAK.md](BREAK.md) §2).
-
-Above $`\nu_C`$, given FRAG, the claim holds in $`R_2^C`$ up to
+with $`\nu_C = \nu_S = L(\omega+1)`$, the claim on $`[0, \nu_C]`$ and "LOW is false" ([SHIFT7.md](SHIFT7.md) §1.1, §2.1), and above $`\nu_C`$, with $`L(e) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + P'\cdot e)`$, up to
+$`X_A`$, $`L(\omega^2)`$, $`L(\Omega_1\cdot\omega)`$, $`L(\varepsilon_{\Phi_\Omega+1})`$, $`L(G_2)`$, $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ and $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ ([SHIFT7.md](SHIFT7.md) §3.2,
+[SHIFT8.md](SHIFT8.md), [SHIFT9.md](SHIFT9.md); the points are defined there), $`Z^\varepsilon`$ and
 
 ```math
-X_A = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P' + \omega^{\theta+3}\cdot 2)
+Z^\Lambda = L(\theta'_2\cdot\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+2}),\quad \theta'_2 = \psi_{\Omega_3}(\Omega_\omega\cdot 2)
 ```
 
-(1 review, [SHIFT7.md](SHIFT7.md) §3.2): the region of $`\nu_C`$ has the shape of the first region, and the core of $`R_2^C`$ contains $`[0, y^C_\nu]`$, where $`y^C_\nu`$ is the least
-top of a nested pair above $`\nu_C`$; now $`y^C_\nu = L(\omega\cdot 2+1)`$. Then, given FRAG, $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$ for every $`j`$ and the claim holds up to $`L(\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+2})`$
-(Theorem B$`^\nu`$; 2 reviews, two independent proofs, [SHIFT8.md](SHIFT8.md) §1.1, §1.2), and up to
-
-```math
-L(\Omega_1\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+\Omega_1+1}),\quad L(e) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + P'\cdot e)
-```
-
-(1 review, [SHIFT8.md](SHIFT8.md) §1.1): above $`\nu_C`$ the points $`L(e)`$ form a skeleton one step up, a base change moves several of them at once (FRAG″), and every restart below
-$`L(\Omega_1\cdot\omega)`$ has an exact reach. Then, given FRAG, $`r(L(\Omega_1\cdot\omega)) = L(\Omega_1\cdot\omega+\omega+1) + L(\Omega_1\cdot\omega) + 1`$, and with the reading of the skeleton
-codes by substitution the claim holds up to
-
-```math
-L(\varepsilon_{\Phi_\Omega+1}) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+\varepsilon_{\Phi_\Omega+1}}),\quad \Phi_\Omega = \psi_{\Omega_2}(\Omega_2)
-```
-
-(1 review; up to $`L(\Omega_1\cdot\omega+\omega+1)`$ two proofs, 2 reviews; [SHIFT8.md](SHIFT8.md) §2.1, §2.2). Then, given FRAG, the offset of the reach of every restart of the skeleton
-whose code is below $`G_2`$ is the order type of the smaller codes whose constants lie below the restart, and the claim holds up to
-
-```math
-L(G_2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+G_2})
-```
-
-(1 review; up to $`L(\varepsilon_{\Phi_\Omega+1}+\omega^2)`$ two proofs, 2 reviews; [SHIFT9.md](SHIFT9.md) §1.1, §1.2). Then, given FRAG, the same holds for every code below
-$`\Phi^{P'} = \psi_{\Omega_2}(\Omega_\omega\cdot 2+\Omega_2)`$, the least fixed point of $`\alpha \mapsto \Gamma_\alpha`$ above $`P'`$; no index in $`[\Phi^{P'}, \Omega_2)`$ is in the domain of $`L`$, so $`L(\Omega_2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2+\Omega_2)`$
-is the supremum of the points $`L(e)`$ below it, with code $`\Phi^{P'}`$; and the claim holds up to
-
-```math
-L(\Omega_2+\Phi^{P'}\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \Omega_2 + \omega^{\Phi^{P'}+1})
-```
-
-(1 review; up to $`L(G(\Omega_1)\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+G(\Omega_1)+1})`$, $`G(\Omega_1) = \psi_{\Omega_2}(\Omega_\omega + \omega^{\theta_2+\Omega_1})`$, two proofs, 2 reviews; [SHIFT9.md](SHIFT9.md) §2.1, §2.2). Then, given FRAG, tier maps $`\mathrm{Tr}_n`$ carry the codes in $`[\Omega_1, P')`$ onto the codes in $`[G''(n), G''(n+1))`$, where
-$`G''(\zeta) = \psi_{\Omega_2}(\Omega_\omega\cdot 2 + \theta'_2\cdot\zeta)`$ and $`\theta'_2 = \psi_{\Omega_3}(\Omega_\omega\cdot 2)`$; with them the same holds for every code up to $`G''(\omega+1)`$, and the claim holds up to
-
-```math
-L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+1} + \theta'_2 + \omega^{G''(\omega+1)+1})
-```
-
-(1 review; up to $`Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \Omega_2\cdot(\omega+1) + \omega^{\Phi^{P'}_{\omega+1}+1} + \omega^{P'+2})`$, $`\Phi^{P'}_{\omega+1} = \psi_{\Omega_2}(\Omega_\omega\cdot 2+\Omega_2\cdot(\omega+1))`$, two proofs, 2 reviews; [SHIFT9.md](SHIFT9.md) §3.1, §3.2).
-Then, given FRAG, the closed points of a whole gap of the skeleton are enumerated as in a segment, every code below $`G''(\omega^2)`$ has an exact reach (the window rule one step up), and the claim holds up to
-
-```math
-Z^\Lambda = L(\theta'_2\cdot\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+2})
-```
-
-(1 review; up to the point $`Z^\varepsilon`$ of [SHIFT10.md](SHIFT10.md) §1, two proofs, 2 reviews; §1.1, §1.2 there). One review found the claim proved further, up to
-$`Z^{\mathrm{LL}}`$ = $`L(\theta'_2\cdot\omega^2+\omega^{G''(\omega^2)^2})`$, through the first long restarts; the second review found the exact long reaches used there false for some codes, so that step is not proved as written (§2.1 there).
-Below $`Z^\varepsilon`$, $`R_2^C = R_2^S`$, and in $`R_2^S`$ the claim holds on $`[0, Z^\varepsilon)`$ (§1.2 there; with Carlson's categoricity theorem, [SHIFT8.md](SHIFT8.md) §2.2).
+([SHIFT10.md](SHIFT10.md) §1), with $`G''(\zeta) = \psi_{\Omega_2}(\Omega_\omega\cdot 2 + \theta'_2\cdot\zeta)`$, and in $`R_2^S`$ the range $`[0, Z^\varepsilon)`$. The fortieth round found that the chain to $`\nu_C`$ and
+every one of these steps use exact long reaches at codes where the old value is false, so none of them is proved as written; their parts that use no reach stand. The exact long reaches are now
+proved below the code $`\hat G + G_2`$ (TRANSLATION, [SHIFT10.md](SHIFT10.md) §3.1); the audit expects the milestone to come back once they are proved for every code below $`P'`$ (a conjecture).
 
 ## 3. What is proved
 
@@ -170,16 +126,16 @@ Below $`Z^\varepsilon`$, $`R_2^C = R_2^S`$, and in $`R_2^S`$ the claim holds on 
 below $`\upsilon_{\omega\cdot\omega}`$ is in the core, and it is the countable value of an InaccPsi normal form whose
 collapse arguments are below $`I_\omega`$ (Theorem LOW below). Wilken's points have exact names:
 $`\upsilon_{1+\eta} = \psi_{\Omega_1}(\Omega_\omega + \theta\cdot\eta)`$ for $`\eta \lt \Gamma_0`$ (Theorem T, §4), later for every $`\upsilon`$-point below
-$`\upsilon^*`$ (Theorem GEN), for $`\eta \lt \Omega_\omega`$ (GEN⁺, a case of GEN-EXT), and now for every $`\eta`$ in a class that reaches past $`I_\omega`$ (GEN-ALL, [SHIFT5.md](SHIFT5.md) §1.3). In $`R_2^C`$ the claim holds up to $`X_4`$, and up to $`Z^\Lambda`$, above $`\nu_C = L(\omega+1)`$, given FRAG, and the core contains
+$`\upsilon^*`$ (Theorem GEN), for $`\eta \lt \Omega_\omega`$ (GEN⁺, a case of GEN-EXT), and now for every $`\eta`$ in a class that reaches past $`I_\omega`$ (GEN-ALL, [SHIFT5.md](SHIFT5.md) §1.3). In $`R_2^C`$ the claim holds up to $`X_4`$, and up to $`X_{21}`$ given FRAG (the earlier ranges up to $`Z^\Lambda`$ are not proved as written, §2), and the core contains
 $`[0, \nu_C]`$ (§2). The work came in rounds of four refereed papers. This page has the results of the first round (some are on [ROUND1.md](ROUND1.md)); the later rounds are on the pages
 [RESTARTS.md](RESTARTS.md), [REACHES.md](REACHES.md), [PINS.md](PINS.md), [BREAK.md](BREAK.md) (continued on [BREAK2.md](BREAK2.md)), [COVER.md](COVER.md), [FANFREE.md](FANFREE.md), [VEBLEN.md](VEBLEN.md),
-[THETA.md](THETA.md), [SHIFT.md](SHIFT.md), [SHIFT2.md](SHIFT2.md), [SHIFT3.md](SHIFT3.md), [SHIFT4.md](SHIFT4.md), [SHIFT5.md](SHIFT5.md), [SHIFT6.md](SHIFT6.md), [SHIFT7.md](SHIFT7.md), [SHIFT8.md](SHIFT8.md), [SHIFT9.md](SHIFT9.md) and [SHIFT10.md](SHIFT10.md) (with the dependency table of the audit on [AUDIT.md](AUDIT.md)). A summary of the rounds 1–12 is in [THETA.md](THETA.md) §8.1, and a summary of the rounds 13–39 is in [ROUND2.md](ROUND2.md) §1 (the history of the routes is in §5 there).
-Open: both halves above $`Z^\Lambda`$ given FRAG (above $`X_4`$ without FRAG) in
-$`R_2^C`$, and above $`Z^\varepsilon`$ in $`R_2^S`$ (above $`\upsilon_{\omega^3}`$ without FRAG); $`R_2^S = R_2^C`$ above $`Z^\varepsilon`$ (below it the two agree given FRAG); the
+[THETA.md](THETA.md), [SHIFT.md](SHIFT.md), [SHIFT2.md](SHIFT2.md), [SHIFT3.md](SHIFT3.md), [SHIFT4.md](SHIFT4.md), [SHIFT5.md](SHIFT5.md), [SHIFT6.md](SHIFT6.md), [SHIFT7.md](SHIFT7.md), [SHIFT8.md](SHIFT8.md), [SHIFT9.md](SHIFT9.md) and [SHIFT10.md](SHIFT10.md) (with the dependency table of the audit on [AUDIT.md](AUDIT.md), and the Lean files on [LEAN.md](LEAN.md)). A summary of the rounds 1–12 is in [THETA.md](THETA.md) §8.1, and a summary of the rounds 13–40 is in [ROUND2.md](ROUND2.md) §1 (the history of the routes is in §5 there).
+Open: both halves above $`X_{21}`$ given FRAG (above $`X_4`$ without FRAG) in
+$`R_2^C`$, and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$; $`\nu_C = \nu_S`$, and $`R_2^S = R_2^C`$ in general; the
 lower bound below $`\theta_0`$; whether the first fan needs an inaccessible; any InaccPsi upper bound for $`C^*_3`$, which lies below $`\omega_1^{CK}`$
 (Carlson 2009, Thm 15.2).
 
-**Lean** (the five files of this directory, built with the whole library):
+**Lean** (the five files of this directory and the nine files of [R2/](R2/), built with the whole library):
 
 - **Lemma L** (`CSet_inter_Om1`). For every $`\alpha`$: $`\mathrm{Cl}(\alpha, 0) \cap \Omega_1 = \psi_{\Omega_1}(\alpha)`$ as sets.
   So the countable values of the terms bounded by $`X`$ are exactly the ordinals below
@@ -206,6 +162,9 @@ lower bound below $`\theta_0`$; whether the first fan needs an inaccessible; any
   $`\psi_{\Omega_1}(A_\eta) \le u(1+\eta)`$ for $`\eta \le \omega^2`$ (`lower_bound`, `lower_bound_ww`); with the hypotheses of
   `upper_bound` too, $`u(1+\eta) = \psi_{\Omega_1}(A_\eta)`$ (`conjT`, `conjT_ww`). LOW-0 and LOW-STEP are hypotheses; the map
   $`E`$ is not in Lean.
+- **$`R_2^C`$, the core and FRAG** ([R2/](R2/), described on [LEAN.md](LEAN.md)). $`R_2^C`$ is defined from Carlson 2009, Def 5.3–5.4; its basic facts, isominimal sets, the core and Lemma LOC are
+  proved with no further axiom. Theorem FRAG (any number of countable bases) and Theorem FRAG2 are proved from 27 axioms in one file: 7 constants and 20 facts cited from Wilken's two papers
+  of 2007 (APAL 145), each checked against the paper by an audit (2026-10).
 
 **Proved on paper and refereed.** Each review was adversarial (it tried to refute the result). No review found a
 fatal or blocking point against a result listed here as proved (the claims with a blocking point are listed and
@@ -278,7 +237,7 @@ listed under "Not proved".
 
 **Up to $`\upsilon_{\omega^3}`$, without FRAG** (2026-10, $`R_2^C`$). Extended to $`[0, \Xi_\omega]`$ by Theorem CORE-C$`^\Xi`$
 ([RESTARTS.md](RESTARTS.md) §3), to $`[0, \Lambda_\varepsilon)`$ and $`[0, \rho_{\Theta_P})`$ ([REACHES.md](REACHES.md) §2), and to
-$`[0, \rho_{\Theta_A+\omega^2})`$ ([PINS.md](PINS.md) §2), and to $`[0, \rho_{\Theta_{d\omega}})`$, and to $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$ ([BREAK.md](BREAK.md) §2, §4), now with $`\nu_C \ge X_4`$ ([SHIFT.md](SHIFT.md) §1), and, given FRAG, with $`\nu_C \ge X_n`$ for each point $`X_5, \dots, X_{23}`$ of §2 ([SHIFT6.md](SHIFT6.md) §2.1, §3.1), and $`\nu_C \ge L(\omega+1)`$ ([SHIFT7.md](SHIFT7.md) §1.1), and $`\nu_C = L(\omega+1)`$ (§2.1 there), and above it $`[0, y^C_\nu]`$ with $`y^C_\nu \ge X_A`$ (§3.2 there), now $`y^C_\nu = L(\omega\cdot 2+1)`$ and $`[0, L(\Omega_1\cdot\omega)]`$ ([SHIFT8.md](SHIFT8.md) §1.1, §1.2), then $`[0, L(\varepsilon_{\Phi_\Omega+1})]`$ (§2.1 there), then $`[0, L(G_2)]`$ ([SHIFT9.md](SHIFT9.md) §1.1), then $`[0, L(\Omega_2+\Phi^{P'}\cdot\omega)]`$ (§2.1 there), then $`[0, L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)]`$ (§3.1 there), then $`[0, Z^\Lambda]`$ ([SHIFT10.md](SHIFT10.md) §1.1, §2.1).
+$`[0, \rho_{\Theta_A+\omega^2})`$ ([PINS.md](PINS.md) §2), and to $`[0, \rho_{\Theta_{d\omega}})`$, and to $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$ ([BREAK.md](BREAK.md) §2, §4), now with $`\nu_C \ge X_4`$ ([SHIFT.md](SHIFT.md) §1), and, given FRAG, with $`\nu_C \ge X_n`$ for each point $`X_5, \dots, X_{21}`$ of §2 ([SHIFT5.md](SHIFT5.md) §2.1, [SHIFT10.md](SHIFT10.md) §3.1). The later steps recorded here ($`\nu_C \ge X_{23}`$, $`\nu_C = L(\omega+1)`$, and above it up to $`[0, Z^\Lambda]`$, [SHIFT6.md](SHIFT6.md)–[SHIFT10.md](SHIFT10.md)) are not proved as written ([SHIFT10.md](SHIFT10.md) §3.2).
 
 - Lemma PT, Theorem CORE-C3 (every ordinal $`\le \upsilon_{\omega^3}`$ is in $`\mathrm{Core}(R_2^C)`$, without FRAG) and its corollary $`m_3 \ge \upsilon_{\omega^3}`$ (1 review each) are in
   [ROUND2.md](ROUND2.md) §2.
@@ -286,7 +245,7 @@ $`[0, \rho_{\Theta_A+\omega^2})`$ ([PINS.md](PINS.md) §2), and to $`[0, \rho_{\
 **$`R_2^S`$ against $`R_2^C`$** (2026-10). These results are now in [THETA.md](THETA.md) §8.2: $`\beta_0`$, the least stage at which the two
 structures differ, and $`\kappa_X`$, the least $`\kappa`$ that is $`\le_1^X`$ to everything above it; Lemma STAGE and Corollary FIRST (every $`R_2^S`$ relation with right end
 at most $`\beta_0`$ holds in $`R_2^C`$, and now $`\beta_0 \ge \nu_C \gt \nu_P`$); Theorem LOC and the reductions of $`\nu_C = \nu_S`$ (now to a twisted upward rule,
-[THETA.md](THETA.md) §4; $`\nu_C = \nu_S`$ itself is now proved given FRAG, [SHIFT7.md](SHIFT7.md) §2.1; above $`\nu`$ the two agree up to $`Z^\varepsilon`$, [SHIFT8.md](SHIFT8.md) §1.1, §2.1, [SHIFT9.md](SHIFT9.md) §1.1, §2.1, §3.1, [SHIFT10.md](SHIFT10.md) §1.2, §2.1; by Carlson's categoricity theorem [C11], MIN$`^S`$ holds, the two cores are isomorphic, and (E) is equivalent to AGR and implies (R), [SHIFT8.md](SHIFT8.md) §2.2; (E) does not follow from the hypotheses of [C11] with MIN and CC alone, and the first gap of the core of $`R_2^S`$ is additively principal, [SHIFT9.md](SHIFT9.md) §1.2, and at least $`Z^\varepsilon`$ given FRAG, [SHIFT10.md](SHIFT10.md) §1.2, §2.1); Lemma UPG; KAPPA and CORE-EQ (if $`\max(\kappa_S, \kappa_C) \le \beta_0`$, AGR, the two cores are equal); the converse $`C \Rightarrow S`$ at stages of
+[THETA.md](THETA.md) §4; the proof of $`\nu_C = \nu_S`$ given FRAG, [SHIFT7.md](SHIFT7.md) §2.1, and the agreement above $`\nu`$ up to $`Z^\varepsilon`$ are not proved as written, [SHIFT10.md](SHIFT10.md) §3.2; by Carlson's categoricity theorem [C11], MIN$`^S`$ holds, the two cores are isomorphic, and (E) is equivalent to AGR and implies (R), [SHIFT8.md](SHIFT8.md) §2.2; (E) does not follow from the hypotheses of [C11] with MIN and CC alone, and the first gap of the core of $`R_2^S`$ is additively principal, [SHIFT9.md](SHIFT9.md) §1.2); Lemma UPG; KAPPA and CORE-EQ (if $`\max(\kappa_S, \kappa_C) \le \beta_0`$, AGR, the two cores are equal); the converse $`C \Rightarrow S`$ at stages of
 agreement (CORE-1, LIM1, ONE-POINT, SUCC2, LIM2); DICH; R-INC; and the stages of type (ii) (MAX2, RED-d, FIRST2, UPCOPY, EQ-E with Conjecture CORE-2,
 R-OM, and the open steps PIN and LOW).
 
@@ -312,9 +271,9 @@ pointwise least one.
 
 **Not proved:**
 
-- **The claim above $`Z^\Lambda`$ given FRAG, and above $`X_4`$ without FRAG,** in $`R_2^C`$ (the step to $`Z^{\mathrm{LL}}`$ is not proved as written, [SHIFT10.md](SHIFT10.md) §2.1), and above $`Z^\varepsilon`$ in $`R_2^S`$ given FRAG (above $`\upsilon_{\omega^3}`$ without), both halves (above $`\nu_C`$ the structure is not skeletal; the route to $`\nu_C`$ and above it is listed in [ROUND2.md](ROUND2.md) §5.1). The reaches of the restarts
-  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [SHIFT10.md](SHIFT10.md) §2.6, [COVER.md](COVER.md) §9, [BREAK.md](BREAK.md) §10, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
-- **$`R_2^S = R_2^C`$** above $`Z^\varepsilon`$ (below it the two agree given FRAG: $`\nu_C = \nu_S`$, [SHIFT7.md](SHIFT7.md) §2.1, and above $`\nu`$ up to $`Z^\varepsilon`$, [SHIFT8.md](SHIFT8.md) §1.1, §2.1, [SHIFT9.md](SHIFT9.md) §1.1, §2.1, §3.1, [SHIFT10.md](SHIFT10.md) §1.2, §2.1): the converse $`C \Rightarrow S`$ for $`\le_1`$ at a successor stage $`\beta \gt \kappa_C`$ with
+- **The claim above $`X_{21}`$ given FRAG, and above $`X_4`$ without FRAG,** in $`R_2^C`$ (the ranges recorded above it, up to $`Z^\Lambda`$, and $`\nu_C = \nu_S = L(\omega+1)`$ are not proved as written, [SHIFT10.md](SHIFT10.md) §3.2), and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$, both halves (above $`\nu_C`$ the structure is not skeletal; the route is listed in [ROUND2.md](ROUND2.md) §5.1 and [SHIFT10.md](SHIFT10.md) §3.6). The reaches of the restarts
+  above $`\Theta_A`$ (the reach at $`\Theta_A`$ itself is now known), and the rest of [SHIFT10.md](SHIFT10.md) §3.6, [COVER.md](COVER.md) §9, [BREAK.md](BREAK.md) §10, [PINS.md](PINS.md) §6, [REACHES.md](REACHES.md) §7 and [RESTARTS.md](RESTARTS.md) §6.
+- **$`R_2^S = R_2^C`$**, already its first case $`\nu_C = \nu_S`$ (its proof, [SHIFT7.md](SHIFT7.md) §2.1, is not valid as written, [SHIFT10.md](SHIFT10.md) §3.2): the converse $`C \Rightarrow S`$ for $`\le_1`$ at a successor stage $`\beta \gt \kappa_C`$ with
   $`\alpha \notin G_C`$, and for $`\le_2`$ at stages of type (ii) (this needs an upward transfer of $`\Pi_2`$ sentences, which
   neither upward 2-reflection nor liftings give; it is now one pair $`(a^*, \beta)`$ per stage, and below $`\kappa_C`$ it is
   Conjecture CORE-2; left: PIN and LOW); Σ2-GAP, INC, W(C), (R), AGR, and $`\beta_0 = \infty`$ (these words are defined in [THETA.md](THETA.md) §8.2; (R) and AGR now follow from (E), [SHIFT8.md](SHIFT8.md) §2.2).
@@ -420,12 +379,7 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       (ROOT-LOC, ENUM, EXACT-CL\*, the tier up to $`\Omega_3\cdot\omega`$, Theorem X17; [SHIFT4.md](SHIFT4.md) §2.1); up to $`X_{18}`$, with $`\nu_C \ge X_{18}`$ — proved given FRAG
       (PHI-COMM, READ on the ordinal side, the caps below $`G(\hat\zeta_2)`$, Theorem X18; [SHIFT4.md](SHIFT4.md) §2.2; 2 reviews with the repairs of [SHIFT5.md](SHIFT5.md) §1.1); up to $`X_{19}`$, with $`\nu_C \ge X_{19}`$ — proved given FRAG
       (SEP$`^{\mathrm{near}}`$, NO-LIT, EXACT-LONG⁺, FAR-PIN$`^L`$, TOP-REG-LAND, LAND-CAP, Theorem X19; [SHIFT5.md](SHIFT5.md) §1.1); up to $`X_{21}`$, with $`\nu_C \ge X_{21}`$ — proved given FRAG
-      (THETA$`^G`$, EXACT-LONG$`^G`$, EXACT-F, NO-READL, CAP$`^\sharp`$, Theorem X21; [SHIFT5.md](SHIFT5.md) §2.1; 2 reviews with the repairs of [SHIFT6.md](SHIFT6.md) §1.1); up to $`X_{22}`$ and $`X_{23}`$, with $`\nu_C \ge X_{23}`$ — proved given FRAG
-      (CUSHION, Theorem X22, CUSHION$`^\varepsilon`$, Theorem X23, with the exact long reaches repaired by the landing code: AGREE, EXACT-LONG$`^{(3)\sharp}`$; [SHIFT6.md](SHIFT6.md) §1.1, §2.1, §3.1; 1 review of the repair); up to $`L(\omega+1)`$, with $`\nu_C \ge L(\omega+1)`$ — proved given FRAG
-      (FAR-PIN$`^{L,\mathrm{rel}}`$, LAND$`^\omega`$, EX$`^w`$ and CAP-0 below $`P'`$, CAP-1, NU-LOW″⁺; [SHIFT7.md](SHIFT7.md) §1.1; 1 review); **on all of $`[0, \nu_C]`$, with $`\nu_C = \nu_S = L(\omega+1)`$ — proved given FRAG**
-      (CROSS-LIM, TC⁺$`^\omega`$, EMB, ONTO-FIN, PAIR, UP, NU, LC-STRICT; [SHIFT7.md](SHIFT7.md) §2.1; 1 review and an audit, [AUDIT.md](AUDIT.md); the repair of the one gap of the lower half 2 reviews); up to $`X_A`$ above $`\nu_C`$ — proved given FRAG
-      (CAP$`^p`$, the region of $`\nu`$, FIRST-PAIR$`^\nu`$, NU-CT$`^\nu`$, Theorem A$`^\nu`$; [SHIFT7.md](SHIFT7.md) §3.2); up to $`L(\omega^2)`$ — proved given FRAG (GAP-CALC$`^{\mathrm{reg}}`$, Theorem B$`^\nu`$, AGREE$`^\nu`$;
-      [SHIFT8.md](SHIFT8.md) §1.1, §1.2; 2 reviews, two proofs); up to $`L(\Omega_1\cdot\omega)`$ — proved given FRAG (FRAG″, FIX″, EXACT-C″, EXACT-Ω″, Theorem C″; [SHIFT8.md](SHIFT8.md) §1.1; 1 review); up to $`L(\varepsilon_{\Phi_\Omega+1})`$ — proved given FRAG (DOM″, EXACT-W″, EXACT-G″, Theorem C$`^G`$; [SHIFT8.md](SHIFT8.md) §2.1; 1 review); up to $`L(G_2)`$ — proved given FRAG (DOM″ below $`P'`$, EXACT-O″, EXACT-O″$`^\theta`$, Theorem C$`^\theta`$; [SHIFT9.md](SHIFT9.md) §1.1; 1 review); up to $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ — proved given FRAG (FAR-PIN″, EXACT-O″$`^\omega`$, EXACT-O″$`^\Gamma`$, Theorem C$`^\Phi`$; [SHIFT9.md](SHIFT9.md) §2.1; 1 review; up to $`L(G(\Omega_1)\cdot\omega)`$ also by PIN-GAP, §2.2 there, 2 reviews); up to $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ — proved given FRAG (TIER$`_n`$, READ″, FAR-PIN″ over several gaps, EXACT-O″$`^R`$, Theorem C$`^R`$; [SHIFT9.md](SHIFT9.md) §3.1; 1 review; up to $`Z^\Gamma`$ also by the $`\Gamma`$ tier above $`P'`$, §3.2 there, 2 reviews); up to $`Z^\Lambda`$ — proved given FRAG (TIER$`_\zeta`$, ENUM″, EXACT-CL″\*, Theorem C$`^\Lambda`$; [SHIFT10.md](SHIFT10.md) §1.1; 1 review; up to $`Z^\varepsilon`$ also by EXACT-CL″$`^\varepsilon`$, §1.2 there, 2 reviews); up to $`Z^{\mathrm{LL}}`$ — not proved as written (EXACT-LONG-CL″\* is false for some codes, and Theorem C$`^{\mathrm{LL}}`$ has a blocking point; §2.1 there)
+      (THETA$`^G`$, CAP$`^\sharp`$, Theorem X21; [SHIFT5.md](SHIFT5.md) §2.1; the proof repaired with TRANSLATION and FAR-PIN$`^{L\sharp}`$, [SHIFT10.md](SHIFT10.md) §3.1, 1 review; up to $`X_{19}^{\mathrm{lin}}`$ two proofs, 2 reviews, §3.2 there); **not proved as written** ([SHIFT10.md](SHIFT10.md) §3.2): up to $`X_{22}`$ and $`X_{23}`$, up to $`L(\omega+1)`$, $`\nu_C = \nu_S = L(\omega+1)`$ with the claim on $`[0, \nu_C]`$, and above $`\nu_C`$ the ranges of §2 up to $`Z^\Lambda`$ (recorded with 1–2 reviews in the twenty-seventh to thirty-ninth rounds, [SHIFT6.md](SHIFT6.md)–[SHIFT10.md](SHIFT10.md); the step to $`Z^{\mathrm{LL}}`$ was already not proved, §2.1 there)
     - the core of $`R_2^C`$ up to $`\rho_{\Theta_{d\omega}}`$, and on $`[0, \nu_C]`$ with $`\nu_C \gt \nu_P`$ — proved (CORE-C$`^{d\omega}`$, CAP, NU-CT; [BREAK.md](BREAK.md))
   - **B** upper bound $`\mathrm{Core}(R_2^+) \subseteq \psi_{\Omega_1}(I_\omega)`$ — open
     - B0 reduction to least chains (Theorem CC) — proved for $`R_2^C`$
@@ -440,18 +394,18 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       more point (CRIT, [COVER.md](COVER.md) §6.2), but no InaccPsi term is proved to bound $`x_F`$ or $`c_0`$
       (conjecture for $`n = 3`$ in §3); a bound for $`m_F`$ is a bound for one sequence of chains of pairs ([FANFREE.md](FANFREE.md) §4); a bound $`\iota(\mathrm{CH}_2) \lt t`$ is exactly three
       relations at one point below $`t`$ ([FANFREE.md](FANFREE.md) §7.4)
-    - B-NU an InaccPsi upper bound for $`\nu_C`$ — proved given FRAG: $`\nu_C \le \nu_S \le L(\omega+1)`$ (PAIR by SHIFT, with CROSS-LIM, TC⁺$`^\omega`$, EMB, ONTO-FIN; [SHIFT7.md](SHIFT7.md) §2.1; 1 review and an audit, §3.1 there). The route is listed in [ROUND2.md](ROUND2.md) §5.2
+    - B-NU an InaccPsi upper bound for $`\nu_C`$ — open again: the proof of $`\nu_C \le \nu_S \le L(\omega+1)`$ ([SHIFT7.md](SHIFT7.md) §2.1) uses CROSS-LIM, which is not proved as written ([SHIFT10.md](SHIFT10.md) §3.2). The route is listed in [ROUND2.md](ROUND2.md) §5.2
     - B2 a finite-set test for $`\lt_2`$ in $`R_2^+`$ — proved (T1, T2); whether the uniform form (one copy for all
-      $`k`$) is also necessary is open in $`R_2^+`$ (proved below $`Z^\varepsilon`$ given FRAG, [SHIFT10.md](SHIFT10.md) §1.2, and below every point where each left end with a cofinal Pred₁ is of one of two known kinds, §2.2 there) (Wilken 2021, p. 6, says it is for pure $`R_2`$)
+      $`k`$) is also necessary is open in $`R_2^+`$ (proved below every point where each left end with a cofinal Pred₁ is of one of two known kinds, [SHIFT10.md](SHIFT10.md) §2.2; its instance below $`Z^\varepsilon`$ is not proved as written, §3.2 there) (Wilken 2021, p. 6, says it is for pure $`R_2`$)
     - B3 base changes that keep $`0, +, \le, \le_1, \le_2`$ — proved where $`R_2^+`$ is skeletal (Theorem FRAG2; FRAG itself is
-      proved; its map equals a substitution map, FRAG-SUBST, [BREAK.md](BREAK.md) §4; all three 2 reviews, [SHIFT7.md](SHIFT7.md) §3.1); beyond the skeleton, proved with their
-      hypotheses (FRAG2-W, FRAG2-C, FRAG2-1E), and above $`\nu`$ with pairs in the fixed set (FRAG2$`^{\mathrm{rel}}`$) and for several points $`L(e)`$ at once below the frontier (FRAG″, FRAG2″; [SHIFT8.md](SHIFT8.md) §1.1, §2.1); several non-$`\upsilon`$ bases at once (FRAG-E) — open, very hard
+      proved; its map equals a substitution map, FRAG-SUBST, [BREAK.md](BREAK.md) §4; all three 2 reviews, [SHIFT7.md](SHIFT7.md) §3.1; FRAG and FRAG2 also in Lean from 20 cited facts, [LEAN.md](LEAN.md)); beyond the skeleton, proved with their
+      hypotheses (FRAG2-W, FRAG2-C, FRAG2-1E), and above $`\nu`$ with pairs in the fixed set (FRAG2$`^{\mathrm{rel}}`$; FRAG″ (d) and FRAG2″, which move several points $`L(e)`$ at once, are not proved as written, [SHIFT8.md](SHIFT8.md) §1.1, [SHIFT10.md](SHIFT10.md) §3.2); several non-$`\upsilon`$ bases at once (FRAG-E) — open, very hard
     - B4 the $`\le_2`$-pairs among the points that B3 moves — proved below $`\nu_P`$ in $`R_2^S`$ and below $`\rho_{\Theta_A+\omega^2}`$ in both
       structures (SKEL, BLK$`^O`$, EQB-A), and up to the first non-skeletal point $`\nu`$ in $`R_2^S`$ (SKEL⁺, FIRST-PAIR); every
       $`\lt_2`$-left end is a $`\upsilon_\lambda`$ with $`\lambda`$ a limit (LEFT, now with no hypothesis: INC1
       and NOBAD, [BREAK.md](BREAK.md) §1); in $`R_2^S`$, at every countable ordinal, every pair is a standard pair or joins two restarts, so
       RIGHT (every right end is a $`\upsilon`$-point) holds in $`R_2^S`$ (SKEL$`^\infty`$, [COVER.md](COVER.md) §5.1);
-      the pairs between restarts above $`Z^\Lambda`$ (below it they are known given FRAG, Theorems C″, C$`^G`$, C$`^\theta`$, C$`^\Phi`$, C$`^R`$ and C$`^\Lambda`$, [SHIFT8.md](SHIFT8.md) §1.1, §2.1, [SHIFT9.md](SHIFT9.md) §1.1, §2.1, §3.1, [SHIFT10.md](SHIFT10.md) §1.1), and RIGHT in $`R_2^C`$ above $`\beta_0`$ — open
+      the pairs between restarts above $`X_{21}`$ (above $`\nu_C`$ the Theorems C″, C$`^G`$, C$`^\theta`$, C$`^\Phi`$, C$`^R`$ and C$`^\Lambda`$ of [SHIFT8.md](SHIFT8.md)–[SHIFT10.md](SHIFT10.md) are not proved as written, [SHIFT10.md](SHIFT10.md) §3.2), and RIGHT in $`R_2^C`$ above $`\beta_0`$ — open
     - B5 assembly B2 + B3 + B4 — proof form only
     - B-PT proof-theoretic variant: theories with $`n`$ inaccessibles prove "a chain of length $`n`$ exists" —
       open; needs a set-theoretic condition for $`\lt_2`$ that is not known
@@ -465,7 +419,7 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       ([PINS.md](PINS.md)), STRUCT′ writes it with names up to $`\rho_{\Lambda'+\omega^2}`$ ([FANFREE.md](FANFREE.md) §10.4) and STRUCT″ up to $`\rho_{\Lambda_{\mathrm{fp}2}+\omega^2}`$ ([VEBLEN.md](VEBLEN.md) §8), KV-NAMES reads the
       Klammer reaches below $`\nu_C`$ off the names (same place), the value at $`\Theta_A`$ and the landmarks $`\Theta_\delta`$, $`\Theta_{d\omega}`$ ([BREAK.md](BREAK.md) §4) with their names and those of $`\Lambda^*`$, $`\nu_P`$ ([THETA.md](THETA.md) §9.1), the exact reaches of the restarts with countable exponent and of $`\Lambda^*`$ (EXACT-C, LONG-G2), the first exact reach with an uncountable exponent and lower bounds for all long restarts (EXACT-W, LONG-ALL, RL-UP; [SHIFT.md](SHIFT.md) §9.1), lower bounds for reaches across regions (CROSS, RL-UNC, RL-2; [SHIFT2.md](SHIFT2.md) §1.1), the exact reaches of the short restarts with exponent below $`\psi_{\Omega_2}(\Omega_2)`$ and the sharp crossing at index fixed points (EXACT-V, CROSS-SHARP; [SHIFT2.md](SHIFT2.md) §2.1), and the exact tails $`\delta\cdot 2 + t`$ of long restarts (TAIL-MIN, BASE0-TAIL; [SHIFT.md](SHIFT.md) §8.1, §8.4), Theorem SKEL gives it in
       $`R_2^S`$ on $`[0, \nu_P)`$ ([REACHES.md](REACHES.md)), SKEL⁺ up to $`\nu`$ ([BREAK.md](BREAK.md) §2), and the level-0 description of $`R_2^S`$ at every
-      countable ordinal (SKEL$`^\infty`$, [COVER.md](COVER.md) §5.1); the region of $`\nu`$ up to the next restart, given FRAG ([SHIFT7.md](SHIFT7.md) §3.2), and the skeleton of the points $`L(e)`$ up to $`Z^\Lambda`$ with exact reaches, given FRAG (Theorems C″, C$`^G`$, C$`^\theta`$, C$`^\Phi`$, C$`^R`$ and C$`^\Lambda`$, [SHIFT8.md](SHIFT8.md) §1.1, §2.1, [SHIFT9.md](SHIFT9.md) §1.1, §2.1, §3.1, [SHIFT10.md](SHIFT10.md) §1.1); the first block of every level of nested pairs (LIFT-0,
+      countable ordinal (SKEL$`^\infty`$, [COVER.md](COVER.md) §5.1); the exact long reaches below the code $`\hat G + G_2`$, given FRAG (TRANSLATION, [SHIFT10.md](SHIFT10.md) §3.1; the region of $`\nu`$ and the skeleton of the points $`L(e)`$ up to $`Z^\Lambda`$, [SHIFT7.md](SHIFT7.md) §3.2, [SHIFT8.md](SHIFT8.md)–[SHIFT10.md](SHIFT10.md), are not proved as written, §3.2 there); the first block of every level of nested pairs (LIFT-0,
       [BREAK.md](BREAK.md) §5), and every block of every level below $`T_\omega`$ (SH, [BREAK.md](BREAK.md) §7.1) — proved; the order type of each level
       ($`o_k = \omega`$, equivalent to a finite base change between its gaps, GI) — proved in $`R_2^C`$ (Theorem O$`^C`$, [BREAK.md](BREAK.md) §8.1,
       1 review), open in $`R_2^S`$ (reduced to an $`R_2^S`$ form of Carlson's minimality and one pinning statement, [COVER.md](COVER.md) §4; that minimality
@@ -475,8 +429,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
     - A3 least realizations as terms — open
     - A4 **Conjecture CH**: the least chain of length $`k+2`$ needs $`k`$ inaccessibles — conjecture
     - A5 every term below the bound is the value of a pattern — open
-    - A6 $`R_2^S = R_2^C`$ everywhere — open (known below $`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$); its first case $`\nu_C = \nu_S`$ — proved given FRAG, so there is no ghost pair
-      (NU; [SHIFT7.md](SHIFT7.md) §2.1; 1 review and an audit; above $`\nu`$ the two agree up to $`Z^\varepsilon`$, [SHIFT8.md](SHIFT8.md) §1.1, §2.1, [SHIFT9.md](SHIFT9.md) §1.1, §2.1, §3.1, [SHIFT10.md](SHIFT10.md) §1.2, §2.1). **LOW is false given FRAG** ([SHIFT7.md](SHIFT7.md) §1.1, 1 review); the earlier route is in [ROUND2.md](ROUND2.md) §5.3
+    - A6 $`R_2^S = R_2^C`$ everywhere — open (known below $`\beta_0 \gt \upsilon_{\omega\cdot\omega}`$); its first case $`\nu_C = \nu_S`$ — open again (the proof NU, [SHIFT7.md](SHIFT7.md) §2.1, is not proved as written,
+      [SHIFT10.md](SHIFT10.md) §3.2). LOW is undecided again (its refutation used CAP-0 below $`P'`$, which is not proved as written); the earlier route is in [ROUND2.md](ROUND2.md) §5.3
     - A7 relativized patterns of $`R_1^+`$ and uniform assignments between ordinals and patterns (announced by Wilken) —
       proved (RC-PIN, RC, U, UNIF; [PINS.md](PINS.md) §1; the closures are finite, CL-FIN, and are explicit pin patterns, EXPL,
       [BREAK.md](BREAK.md) §4); that the assignments are elementary recursive — outline only
@@ -501,8 +455,8 @@ Three routes: B gives the upper bound, A is a full analysis, L gives the lower b
       chains are exactly the points of the core with an infinite closed fan, and the least closed $`n`$-fans stay below $`m_3`$ (CP3, FIN-FAN);
       the least fan is described, with order type $`\omega^2`$ (FS, OF; [COVER.md](COVER.md) §2, §5.2), and $`m_F \gt \nu_C`$ ([COVER.md](COVER.md) §6.4); $`m_F`$ is the limit of the points of one sequence of chains of pairs, and
       $`\sigma_N = m_F`$ ([FANFREE.md](FANFREE.md) §4); $`c_2 \lt \omega_1^{CK}`$)
-    - Lean: the order type of the bounded terms is $`\psi_{\Omega_1}(X)`$; Lemma LOC (whether a finite set is
-      isominimal depends only on the structure up to its largest element; on paper, not refereed) — open
+    - Lean: the order type of the bounded terms is $`\psi_{\Omega_1}(X)`$ — open; $`R_2^C`$, isominimal sets, the core, Lemma LOC, FRAG and FRAG2 — Lean, from 20 cited facts ([LEAN.md](LEAN.md));
+      the chain to $`\nu_C`$ in Lean (INC1, Carlson 2009, Thm 14.10 and 14.14, the blocks, SKEL⁺, CAP, O$`^C`$, NU-CT) — open
 
 ## 6. Experiments
 
@@ -652,11 +606,12 @@ needs "$`\Phi_3(M)`$ is a pattern" (open), and it is about $`R_2^C`$ only.
 | [ConjT.lean](ConjT.lean) | the InaccPsi side of Theorem T-UP: (HA) for $`A_\eta`$, the induction to $`\eta = \omega^2`$ with STEP as a hypothesis, Conjecture U from it, and the arithmetic of Lemma M |
 | [LowerT.lean](LowerT.lean) | the InaccPsi side of Theorem T-LOW: the induction to $`\eta = \omega^2`$ with LOW-0 and LOW-STEP as hypotheses, and Theorem T from both halves |
 | [LowTerms.lean](LowTerms.lean) | the seven terms $`u(\eta)`$ of §4: normal forms, values, order, and $`u(\omega^2) \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ |
+| [R2/](R2/) | $`R_2^C`$ defined from Carlson 2009, isominimal sets, the core, Lemma LOC, Theorems FRAG and FRAG2 (nine files; axioms and theorems on [LEAN.md](LEAN.md)) |
 
-Nothing about $`R_2^+`$ itself is in Lean. The results above $`\upsilon_{\omega^3}`$ are on the second page
+The Lean files about $`R_2^+`$ itself are described on [LEAN.md](LEAN.md). The results above $`\upsilon_{\omega^3}`$ are on the second page
 [RESTARTS.md](RESTARTS.md), those above $`\Xi_\omega`$ on the third page [REACHES.md](REACHES.md), those beyond $`\Lambda_\varepsilon`$ on
 the fourth page [PINS.md](PINS.md), and those where the skeleton ends, with the levels above it, on the fifth page [BREAK.md](BREAK.md) (continued on [BREAK2.md](BREAK2.md)), and the
-results by covering minimality and the level-0 description (the fifth to seventh rounds) on the sixth page [COVER.md](COVER.md), and the eighth to tenth rounds on the seventh page [FANFREE.md](FANFREE.md), and the eleventh and twelfth on the eighth page [VEBLEN.md](VEBLEN.md), and the thirteenth and fourteenth on the ninth page [THETA.md](THETA.md) (with the summary of the earlier rounds and the results on $`R_2^S`$ against $`R_2^C`$, moved there from this page), and the fifteenth to seventeenth on the tenth page [SHIFT.md](SHIFT.md), and the eighteenth to twentieth on the eleventh page [SHIFT2.md](SHIFT2.md), and the twenty-first and twenty-second on the twelfth page [SHIFT3.md](SHIFT3.md), and the twenty-third and twenty-fourth on the thirteenth page [SHIFT4.md](SHIFT4.md), and the twenty-fifth and twenty-sixth on the fourteenth page [SHIFT5.md](SHIFT5.md), and the twenty-seventh to twenty-ninth on the fifteenth page [SHIFT6.md](SHIFT6.md), the thirtieth to thirty-second on the sixteenth page [SHIFT7.md](SHIFT7.md), and the thirty-third and thirty-fourth on the seventeenth page [SHIFT8.md](SHIFT8.md), and the thirty-fifth to thirty-seventh on the eighteenth page [SHIFT9.md](SHIFT9.md), and the thirty-eighth and thirty-ninth on the nineteenth page [SHIFT10.md](SHIFT10.md), with the dependency table of the audit on [AUDIT.md](AUDIT.md); some results of the first round are on [ROUND1.md](ROUND1.md), and older details moved from this page are on [ROUND2.md](ROUND2.md).
+results by covering minimality and the level-0 description (the fifth to seventh rounds) on the sixth page [COVER.md](COVER.md), and the eighth to tenth rounds on the seventh page [FANFREE.md](FANFREE.md), and the eleventh and twelfth on the eighth page [VEBLEN.md](VEBLEN.md), and the thirteenth and fourteenth on the ninth page [THETA.md](THETA.md) (with the summary of the earlier rounds and the results on $`R_2^S`$ against $`R_2^C`$, moved there from this page), and the fifteenth to seventeenth on the tenth page [SHIFT.md](SHIFT.md), and the eighteenth to twentieth on the eleventh page [SHIFT2.md](SHIFT2.md), and the twenty-first and twenty-second on the twelfth page [SHIFT3.md](SHIFT3.md), and the twenty-third and twenty-fourth on the thirteenth page [SHIFT4.md](SHIFT4.md), and the twenty-fifth and twenty-sixth on the fourteenth page [SHIFT5.md](SHIFT5.md), and the twenty-seventh to twenty-ninth on the fifteenth page [SHIFT6.md](SHIFT6.md), the thirtieth to thirty-second on the sixteenth page [SHIFT7.md](SHIFT7.md), and the thirty-third and thirty-fourth on the seventeenth page [SHIFT8.md](SHIFT8.md), and the thirty-fifth to thirty-seventh on the eighteenth page [SHIFT9.md](SHIFT9.md), and the thirty-eighth to fortieth on the nineteenth page [SHIFT10.md](SHIFT10.md), with the dependency table of the audit on [AUDIT.md](AUDIT.md) and the Lean files on [LEAN.md](LEAN.md); some results of the first round are on [ROUND1.md](ROUND1.md), and older details moved from this page are on [ROUND2.md](ROUND2.md).
 
 ## 8. References
 

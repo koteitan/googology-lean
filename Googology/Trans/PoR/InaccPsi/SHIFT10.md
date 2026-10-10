@@ -1,10 +1,12 @@
 [← Back](README.md) | [English](SHIFT10.md) | [Japanese](SHIFT10-ja.md)
 
-# $`R_2^+`$, the thirty-eighth and thirty-ninth rounds: the window rule one step up, the first long restarts of the skeleton, the criterion as an induction, marked sources, a fatal point against the exact long reaches, and capacities per unit
+# $`R_2^+`$, the thirty-eighth to fortieth rounds: the window rule one step up, the first long restarts of the skeleton, the criterion as an induction, marked sources, the exact long reaches (a fatal point and a partial repair), capacities per unit, and FRAG in Lean
 
-This page continues [SHIFT9.md](SHIFT9.md) (§3 there is the thirty-seventh round); §1 is the thirty-eighth round and §2 the thirty-ninth. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT9.md](SHIFT9.md) (§3 there is the thirty-seventh round); §1 is the thirty-eighth round, §2 the thirty-ninth and §3 the fortieth. The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a fatal or blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known, or of the target, is not counted as progress.
+
+**Later (the fortieth round, §3):** the frontiers of §1 and §2 ($`Z^\varepsilon`$, $`Z^\Lambda`$, and $`[0, Z^\varepsilon)`$ in $`R_2^S`$) rest on $`\nu_C = \nu_S = L(\omega+1)`$, which is **not proved as written** (the chain to it uses exact long reaches at codes where the old value is false); so are they. Their parts that use no reach (the code side, the schemata of §1.2 and §2.2, the native codes of §1.3 and §2.3) stand. Given FRAG, the claim is proved in $`R_2^C`$ on $`[0, X_{21}]`$ (§3.4).
 
 ## 1. The thirty-eighth round
 
@@ -148,7 +150,7 @@ Notation as in [SHIFT9.md](SHIFT9.md) §1.3 and §3.3 (units, objects, sources, 
 
 ### 1.4 Status after the thirty-eighth round
 
-Superseded by §2.4.
+Superseded by §3.4.
 
 ### 1.5 Checks of the thirty-eighth round
 
@@ -167,7 +169,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 1.6 Open
 
-Superseded by §2.6.
+Superseded by §3.6.
 
 ## 2. The thirty-ninth round
 
@@ -290,19 +292,7 @@ Z^{\mathrm{LL}\sharp} = L(\lambda^{\mathrm{LL}}+\omega^2) = \psi_{\Omega_1}(\Ome
 
 ### 2.4 Status after the thirty-ninth round
 
-- Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, Z^\Lambda]`$ given FRAG, with $`Z^\Lambda = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+2})`$** (the reviews up to
-  $`Z_R = L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ as in [SHIFT9.md](SHIFT9.md) §3.4; from $`Z_R`$ to $`Z^\varepsilon`$ with 2 reviews, two proofs, §1.1, §1.2; from $`Z^\varepsilon`$ to $`Z^\Lambda`$ with 1 review, §1.1). The step
-  to $`Z^{\mathrm{LL}}`$ (§1.1) is not proved as written: its first review found it proved, its second found a blocking point (§2.1).
-- Wilken's claim in $`R_2^S`$: on $`[0, Z^\varepsilon)`$ given FRAG (on $`[0, Z^\Gamma)`$ as in [SHIFT9.md](SHIFT9.md) §3.4; from $`Z^\Gamma`$ to $`Z^\varepsilon`$ with 2 reviews, two proofs); without FRAG up to $`\upsilon_{\omega^3}`$.
-- $`R_2^S`$ against $`R_2^C`$: the two agree on every relation with right end at most $`Z^\varepsilon`$ (given FRAG); $`\beta_0 \ge \sigma_S \ge Z^\varepsilon`$ given FRAG; the criterion of [CW12b] and the necessity of the
-  uniform test hold at every pair with right end at most $`Z^\varepsilon`$, and the hypothesis of CRIT-IND is a theorem wherever every left end with a cofinal Pred₁ is of kind K01 or K2 (§2.2); at the
-  least fan only two first differences are possible; (E) is open, and $`\beta_0`$ is not located.
-- Reaches (given FRAG): exact for every restart below $`Z^\Lambda`$; for the long restarts above it the earlier exact value is false for some codes, and only lower and upper bounds are proved (§2.1). The
-  exact long reaches of the first skeleton have the same defect (§2.1).
-- **LOW: false, given FRAG**; **LOW$`^\infty`$: true, given FRAG** (1 review each; no change). The steps PIN and LOW of Conjecture CORE-2: undecided (no change).
-- The lower-bound program below $`\theta_0`$: chain number 3 below $`\psi_{\Omega_1}(\varepsilon_{\Omega_\omega+1})`$, 4 below $`\psi_{\Omega_1}(\Omega_{\omega\cdot 2})`$, and now 5 below $`\psi_{\Omega_1}(S_*)`$, so
-  $`\iota(\mathrm{CH}_5) \ge \psi_{\Omega_1}(S_*)`$ and $`m_F \gt \psi_{\Omega_1}(S_*)`$ (§2.3). The step below SRO: no change (every $`n`$ on all 3,166 sample matrices; the general statement for all standard matrices below SRO
-  is open).
+Superseded by §3.4.
 
 ### 2.5 Checks of the thirty-ninth round
 
@@ -320,15 +310,153 @@ Each run was under 60 seconds; none is a proof.
 
 ### 2.6 Open
 
-- The claim above $`Z^\Lambda`$ given FRAG (above $`X_4`$ without FRAG) in $`R_2^C`$, and above $`Z^\varepsilon`$ in $`R_2^S`$. Next: the corrected exact value of the long reaches (F-1 of §2.1), with its proof and its
-  invariance under the transports, for the first skeleton and one level up; then Theorems C$`^{\mathrm{LL}}`$ and C$`^{\mathrm{FP}}`$ again (or the frontier by UNIFORM-A, §2.2, which needs only upper bounds); the codes from $`\hat G''+G''(\omega^2)`$ on,
-  the tiers from $`\Omega_2`$ on, the landing calculus one level up, CAP-0 and NOT-LOW below $`P_3`$, and $`\nu_3`$ by CAP-0, CAP-1 and an analogue of NU-CT. $`o_k = \omega`$ for the levels above $`\nu`$ without FRAG.
-- Which results of [SHIFT2.md](SHIFT2.md)–[SHIFT6.md](SHIFT6.md) use the exact long reaches at the codes of F-1 (§2.1).
-- The crossing at $`m^*`$ across two levels as its own step with its audit row (minor m5 of [SHIFT8.md](SHIFT8.md) §1.2).
-- $`R_2^S = R_2^C`$ above $`Z^\varepsilon`$: (E), with the kinds of left ends above the frontier and the exclusion of the extra pairs at fan apexes and caps; and $`\beta_0`$ itself (conjecture: $`\beta_0 \ge x_F^C`$; at the
-  least fan the cases $`\beta_0 = y_1`$ and (N0) remain; FAN-LOAD is a conjecture, with one more route through the apex's own gap); the converse for $`\le_1`$ at successor stages above $`\kappa_C`$.
+Superseded by §3.6.
+
+## 3. The fortieth round
+
+Three papers (2026-10): a paper that repairs the exact long reaches (§3.1) and an audit of which recorded results use the false value (§3.2), each refereed once, and the first Lean stage
+for $`R_2^C`$ (§3.3), whose audit checked the axioms and the definitions (Lean checks the proofs). A result in this section has 1 review unless a count is given. The minor points of the reviews
+of §2.1, §2.2 and §2.3 are already in the record of §2.
+
+**The frontier of the claim moves down, and the milestone is no longer proved.** Both referees found that the chain to $`\nu_C = \nu_S = L(\omega+1)`$ ([SHIFT7.md](SHIFT7.md) §2.1) and every
+frontier above $`X_{21}`$ use exact long reaches at codes where the old value is false. So **$`\nu_C = \nu_S = L(\omega+1)`$, Wilken's claim on $`[0, \nu_C]`$, not-LOW, and every range above $`X_{21}`$ (up to
+$`Z^\Lambda`$) are not proved as written.** Given FRAG, the claim is proved in $`R_2^C`$ on $`[0, X_{21}]`$ (the repaired proof, 1 review; up to the point $`X_{19}^{\mathrm{lin}}`$ of §3.2 two proofs, 2 reviews),
+and in $`R_2^S`$ only up to $`\upsilon_{\omega^3}`$, as without FRAG. Here
+
+```math
+X_{21} = \psi_{\Omega_1}(\Omega_\omega + \hat\zeta_H + \omega^{G(\hat\zeta_H)+1}\cdot 2),\quad \hat\zeta_H = \theta_3\cdot\Omega_3 + \omega^{\hat g_3+g_3},\quad \theta_3 = \psi_{\Omega_4}(\Omega_\omega),
+```
+
+with $`\hat g_3 = \psi_{\Omega_3}(\Omega_\omega + \theta_3\cdot\Omega_3)`$ and $`g_3 = \psi_{\Omega_3}(\Omega_\omega + \theta_3\cdot\omega^2)`$ ([SHIFT5.md](SHIFT5.md) §2.1). FRAG itself is now proved in Lean from 20 cited facts of two
+papers (§3.3, [LEAN.md](LEAN.md)).
+
+Papers cited: in §3.1 and §3.2 Wilken, "Σ₁-elementarity and Skolem hull operators" [W07b] (APAL 145, 2007; L.2.1), Wilken, "Ordinal arithmetic based on Skolem hulling" [W07a] (APAL 145, 2007),
+Wilken's "A glimpse of Σ₃-elementarity" (Prop 21.6) and Carlson 2009, besides refereed stages; in §3.3 Carlson 2009 (Def 2.1, 2.3, 2.6, 5.2–5.4, for the definitions only) and [W07a], [W07b] (the
+cited facts, listed in [LEAN.md](LEAN.md)). None uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006); the statements of [W07b] L.2.1 and Thm 2.2 are taken from [W07b] §2.
+Levels are numbered as in [SHIFT8.md](SHIFT8.md).
+
+Notation: for a restart $`\lambda`$, $`R_1 = \rho_{\lambda+\omega^2}`$ is the next restart, $`\delta_R`$ is the first block top of a restart $`R`$ ([REACHES.md](REACHES.md)), $`\Theta_\lambda = o_\lambda`$ reads a code at $`\lambda`$
+(the order type of the smaller codes whose constants lie below $`\rho_\lambda`$), $`\hat G = G(\Omega_2)`$, and $`F_\lambda = H(\eta_\lambda + \Omega_1)`$ is the first index fixed point above $`\lambda`$. A long code is
+$`m = G_2\cdot D + m_0`$ with $`D \ge 1`$, $`m_0 \lt G_2`$.
+
+### 3.1 The exact long reaches repaired below $`\hat G + G_2`$, and the frontier $`X_{21}`$
+
+- **The error is wider than F-1** (the referee confirmed the diagnosis on its own). A realizer of a restart $`\lambda`$ lies below $`\rho_\lambda`$, so its code has only constants below $`\rho_\lambda`$. The old
+  proofs of the long lower bounds (from EXACT-LONG and CROSS-O of [SHIFT2.md](SHIFT2.md) §3.1 on) let codes with constants up to the landing point $`\rho_\nu`$ act as realizer codes. This breaks the part
+  $`m_0`$ (F-1 of §2.1) and also the crossing by the part $`D`$. The whole code must be read at $`\lambda`$ by $`\Theta_\lambda`$, and the landing restart is the largest restart point $`\le \Theta_\lambda(m)`$, not
+  $`\upsilon_{\lambda+\omega^2\cdot\Theta(D)}`$.
+- **Counterexamples** (proved by transfer, given FRAG; at restarts below $`X_6`$, where every hypothesis holds; the witnesses checked). For a code $`G_2 + x`$ with $`x \lt G_2`$:
+  $`r(\lambda) = \delta_{R_1} + 1 + \Theta_\lambda(x)`$. So $`G_2 + \Omega_1`$ reaches $`\delta_{R_1} + \rho_\lambda`$; $`G_2 + \Omega_1 + 1`$ reaches $`\delta_{R_1} + \rho_\lambda + 1`$, so the repair proposed in §2.1 is false;
+  $`G_2 + \varepsilon_{\Omega_1+1}`$ reaches $`\delta_{R_1} + \varepsilon_{\rho_\lambda+1}`$, so the list of codes that §2.1 calls unaffected is wrong. **NO-CROSS**: the code $`G_2\cdot 2`$ reaches
+  $`\delta_{R_1} + R_1 \lt \rho_{\lambda+\omega^2\cdot 2}`$, so CROSS-O is false at $`x = 2`$ and the old landing is wrong for every $`2 \le D \lt \hat G`$; a witness is the restart
+  $`\psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{G_2\cdot 2})`$. The refereed bounds of the seventeenth round (RL-UP and the cap of codes below $`G_2\cdot 2`$, [SHIFT.md](SHIFT.md) §9.1) agree with
+  these values.
+- **Theorem TRANSLATION** (proved by transfer, given FRAG). Let $`K_\lambda`$ be the set of the points $`y \ge \delta_\lambda`$ such that every $`\alpha \in (\rho_\lambda, y]`$ has $`\mathrm{lh}(\alpha) \le y`$ (the points that can be
+  the reach of $`\lambda`$), and $`k_\lambda`$ its increasing enumeration. For every long restart $`\lambda`$ below $`\nu_S`$ and $`\psi_{\Omega_1}(\Omega_\omega\cdot 2)`$ whose code (or π-code) $`m`$ has
+  $`G_2 \le m \lt \hat G + G_2`$:
+
+```math
+r(\lambda) = k_\lambda(\Theta_\lambda(m)) = F(\nu, \tau_\nu + x),\qquad \rho_\nu = \text{the largest restart point} \le \Theta_\lambda(m),\quad x = \Theta_\nu^{-1}(-\rho_\nu + \Theta_\lambda(m)),
+```
+
+  with $`F`$ the value of a short code at $`\nu`$ ([SHIFT6.md](SHIFT6.md) §3.1). "$`\ge`$" by realizers with constants below $`\rho_\lambda`$; "$`\le`$" by the far pin with the addition of $`R_2^+`$ and pins on
+  every component of the target. Also MONO♯ (the value increases with the code), TF5♯ (it commutes with every far transport, also with moved constants) and BC♯ (base changes); the same in the
+  region $`[m^*, \psi_{\Omega_1}(\Omega_\omega\cdot 3))`$. The referee's minor points: the domain of the codes must be the refereed hull, and a choice of the bound $`\kappa_0`$ removes the π-code tails (m1);
+  one transport must be the relative one (m2); BC♯ needs the finite closedness criterion (m3; not used below); "the new value is at most the old one" was taken from the unrefereed audit, and
+  the referee gives a direct proof (m4).
+- **SHARP-CROSS** (proved). Below $`F_\lambda`$: $`r(\lambda) \ge \upsilon_{\lambda+\zeta}`$ exactly when $`m_\lambda \ge G(\zeta)`$, for every countable multiple $`\zeta \ge \omega^2`$ of $`\omega^2`$ below $`\rho_\lambda`$. This was a
+  conjecture of the seventeenth round.
+- **FAR-PIN$`^{L\sharp}`$** (proved by transfer, given FRAG): the far pin of [SHIFT5.md](SHIFT5.md) §1.1 with the corrected value as its exact atom, for every long prefix code below $`\hat G + G_2`$. So the
+  landing caps LAND-CAP, LAND-CAP$`^G`$, LAND-CAP$`^F`$, CAP$`^\sharp`$ and READ$`^\sharp`$ below $`\hat\zeta_H`$ ([SHIFT5.md](SHIFT5.md) §1.1, §2.1) stand, and with them $`X_{19}`$, $`X_{20}`$, $`X_{21}`$.
+- **Theorem X21 again** (proved by transfer, given FRAG): $`\nu_C \ge X_{21}`$, $`\nu_S \ge X_{21}`$, and **Wilken's claim in $`R_2^C`$ on $`[0, X_{21}]`$, both halves**. The proof meets long prefix atoms only at
+  codes below $`\hat G + G_2`$ (this bound is checked on 889 multipliers, as before) and uses no lower bound from the part $`D`$. The repaired form has 1 review (m6).
+- **Not proved.** Above $`X_{21}`$: $`X_{22}`$, $`X_{23}`$ ([SHIFT6.md](SHIFT6.md)), CAP-0 below $`P'`$, CAP-1, $`\nu_C \ge L(\omega+1)`$ ([SHIFT7.md](SHIFT7.md) §1.1) and every later step, since they use atoms or
+  crossings at codes $`\ge \hat G + G_2`$. The value for every code below $`P'`$ is conjecture ENUM-REACH: past $`\hat G + G_2`$ the reach crosses long restarts, and the landing calculus must be done
+  again with the new landings. **One level up** (an outline, not counted; blocking point B-1 of the review): TRANSLATION″ below $`\hat G'' + G''(\omega^2)`$ and Theorems C$`^{\mathrm{LL}\sharp}`$, C$`^{\mathrm{FP}\sharp}`$ (the
+  claim in $`R_2^C`$ on $`[0, Z^{\mathrm{FP}}]`$), all under (H0) = ENUM-REACH below $`P'`$ with the chain to $`\nu_C`$ proved again on it; the proof of TRANSLATION″ only lists its tools. In the outline the
+  code $`G''(\omega^2)\cdot 2`$ does not reach $`L(\lambda''+\omega^2\cdot 2)`$, so the first inequality of CROSS″ in §2.1 is withdrawn; its weak form $`r \ge L(\lambda''+\zeta)`$ is kept as part of the outline.
+
+### 3.2 The audit: which results use the false value
+
+- **The corrected value in the simplest cases** (proved, given FRAG). UB: the "$`\le`$" halves of the old proofs stand by themselves. BRACKET: the two readings differ at every $`m_0 \ge \Omega_1`$.
+  **CV-LIN**: for $`D = 1`$ and $`m_0 = \Omega_1\cdot k + c`$ with $`c \lt \rho_\lambda`$, $`r(\lambda) = r(\nu) + \rho_\lambda\cdot k + c`$ (the referee redid the step at $`m_0 = \Omega_1`$ by hand; it agrees with RL-UP and
+  with §3.1). FALSE-ω: at $`m_0 = \Omega_1\cdot\omega`$ the reach is at most $`r(\nu) + \rho_\nu`$, below the old value. PIN-LIN: the far pin works with the corrected atom for these codes. LB-CORR
+  ($`r(\lambda) \ge r(\nu) + \Theta_\lambda(m_0)`$ at the old landing $`\nu`$): its referee found it proved for small $`m_0`$ and not proved above (blocking point B-1: the step needs the invariance of the
+  corrected value under transports, which is open); by NO-CROSS of §3.1 its old landing is wrong for $`2 \le D \lt \hat G`$, so it is counted only for $`D = 1`$.
+- **Where the affected codes first occur** (proved, checked). With $`\zeta_1 = \hat\zeta_3 + \omega^{g_3+\Omega_2}`$ ($`\hat\zeta_3 = \theta_3\cdot\omega^2`$), below $`G(\zeta_1)`$ no landing prefix has $`m_0 \ge \Omega_1`$, and $`\zeta_1`$
+  gives the first prefix with $`m_0 = \Omega_1`$, inside the range of the landing cap of $`X_{19}`$. The referee: the countable rest can be $`\omega`$, $`\varepsilon_0`$, $`\varphi(2,1)`$, not only finite (m4); the
+  conclusion stands, and its search found 0 counterexamples among 2,512 normal multipliers.
+- **$`X_{19}^{\mathrm{lin}}`$** (proved, given FRAG). With $`\zeta_{\mathrm{lin}} = \hat\zeta_3 + \omega^{g_3+\Omega_2\cdot\omega}`$: $`\nu_C \ge X_{19}^{\mathrm{lin}} = \psi_{\Omega_1}(\Omega_\omega + \zeta_{\mathrm{lin}} + \omega^{G(\zeta_{\mathrm{lin}})+1}\cdot 2)`$, $`\nu_S \ge X_{19}^{\mathrm{lin}}`$,
+  and the claim holds in $`R_2^C`$ on $`[0, X_{19}^{\mathrm{lin}}]`$; also $`X_{19}^\flat`$ with $`\zeta_1`$ in place of $`\zeta_{\mathrm{lin}}`$, with no new lemma, and $`X_{18} \lt X_{19}^\flat \lt X_{19}^{\mathrm{lin}} \lt X_{19} \lt X_{21}`$. It uses only
+  codes with $`D = 1`$, so neither B-1 nor §3.1 touches it. With §3.1 this is a second proof of the claim below $`X_{19}^{\mathrm{lin}}`$: **2 reviews**.
+- **The milestone is not proved as written** (the referee confirmed). CROSS-LIM ([SHIFT7.md](SHIFT7.md) §2.1) crosses a restart of code $`G_2 + P`$, whose reach is only bracketed, and the long-restart
+  step needs its exact value and its invariance under the transport. So CROSS-LIM, the hypotheses (C1)–(C3) of the shift criterion, PAIR, UP, NU, NU-NAME and LOW$`^\infty`$ are not proved as
+  written, nor are not-LOW, CAP-0 below $`P'`$ and CAP-1, which need caps at every code in $`[G_2, P')`$. They stand: the criterion SHIFT itself, the core half $`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$,
+  the code inequalities of LC-STRICT, and the transport lemmas. The audit expects the milestone to come back with the corrected value (a conjecture). The sentence "no shorter route exists" is a
+  remark, not proved (m5).
+- **The table** (on [AUDIT.md](AUDIT.md)). $`X_9`$ to $`X_{18}`$ stand (no exact long value at an affected code). The exact long formulas at $`m_0 \ge \Omega_1`$ (EXACT-LONG of [SHIFT2.md](SHIFT2.md) §3.1, its
+  forms on [SHIFT3.md](SHIFT3.md)–[SHIFT6.md](SHIFT6.md), EXACT-LONG-CL\* of [SHIFT4.md](SHIFT4.md) §2.1, LAND$`^\omega`$ of [SHIFT7.md](SHIFT7.md) §1.1) are false as stated; their upper bounds stand. Everything recorded above
+  $`X_{21}`$ is not proved as written: $`X_{22}`$, $`X_{23}`$, $`L(\omega+1)`$, $`\nu_C = \nu_S`$, $`X_A`$, $`L(\omega^2)`$, $`L(\Omega_1\cdot\omega)`$, $`L(\varepsilon_{\Phi_\Omega+1})`$, $`L(G_2)`$, $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$,
+  $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$, $`Z^\Gamma`$, $`Z^\varepsilon`$, $`Z^\Lambda`$, and in $`R_2^S`$ the range $`[0, Z^\varepsilon)`$. The audit also had $`X_{19}`$ to $`X_{21}`$ as not proved; §3.1 repairs them.
+- **Blocking points of the review against the inventory** (B-2, B-3). The lower-bound step (b) of [SHIFT2.md](SHIFT2.md) §3.1 has the same defect even when restricted, and so has the lower end of the
+  bracket there. Further exact long formulas at affected codes are on [SHIFT3.md](SHIFT3.md) §1.1, §2.1 (the forms of EXACT-LONG), [SHIFT4.md](SHIFT4.md) §1.1 (EXACT-LONG-CL), [SHIFT5.md](SHIFT5.md) §2.2 (the
+  level-2 form) and [SHIFT6.md](SHIFT6.md) §1.2 (EXACT-LONG$`^e`$); they are false as stated too. The ranges up to $`X_{15}`$ are not affected, since they lie below $`X_{21}`$, which is proved again.
+- **Not counted.** The table's verdicts "survives with the corrected value" (they rest on the open conjecture CV, its invariance and its pin), and the list of what must be proved again; that list
+  is the plan of §3.6.
+
+### 3.3 Lean, stage 1: $`R_2^C`$, the core, and FRAG
+
+- **$`R_2^C`$ is defined in Lean, not assumed.** $`\le_1`$ and $`\le_2`$ follow Carlson 2009, Def 5.3–5.4, by recursion on the right end (with Def 2.1, 2.3, 5.2). No axiom mentions $`R_2^C`$, so a misreading of
+  the paper could only make the Lean $`R_2^C`$ differ from Carlson's; it cannot make the axioms contradict each other. With no axiom beyond Lean's standard three, Lean proves: the recursion
+  equations; $`\le_1`$ and $`\le_2`$ are reflexive, transitive and inside $`\le`$; the interval and limit properties; Carlson 2009, L.5.5 (1), (3)–(6); the reach $`\mathrm{lh}(x)`$ exists unless $`x \le_1`$ every larger
+  ordinal; isominimal sets and the core (Def 2.6) for any interpretation; Lemma LOC and its corollary.
+- **Theorem FRAG in Lean**, for any number of countable bases (its domain contains the one of the paper proof, so the Lean statement is stronger), with Lemma ST, FRAG with one base on the whole
+  domain, and Theorem FRAG2 for the Lean $`R_2^C`$ (which uses only the constant $`\le_1`$ of $`R_1^+`$). They use 27 axioms in one file: 7 constants ($`\le_1`$ of $`R_1^+`$, Wilken's term systems $`T^\tau`$, their
+  parameters, the base change $`\pi_{\sigma,\tau}`$, heights, two families of terms) and 20 facts cited from [W07a] and [W07b].
+- **The audit**: every axiom faithful to the paper (8 of them join 2–3 cited clauses; each join checked), every definition right, every main theorem Lean-proved; no fatal or blocking point. Minor
+  points: three facts on $`R_1^+`$ are proved in a paper we do not have, and their statements are in [W07b] §2 (m1); FRAG needs countable bases (m4); the modules were built only as one bundle (m5;
+  in the repository they now build as modules); the doc comments named local files (m6; replaced); the Lean $`\upsilon`$ is not yet shown to be Wilken's $`\upsilon`$ (m7); no link yet between $`\le_1`$ of $`R_1^+`$
+  and $`\le_1`$ of $`R_2^C`$ (m9).
+- So "given FRAG" now means "given 20 cited facts of two papers"; the paper proof of FRAG no longer needs a review. The files, the axioms with their sources and the theorems are on
+  [LEAN.md](LEAN.md).
+
+### 3.4 Status after the fortieth round
+
+- **Wilken's claim in $`R_2^C`$**: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, X_{21}]`$ given FRAG** ($`[0, X_{18}]`$ with 2 reviews as before; up to $`X_{19}^{\mathrm{lin}}`$ with 2 reviews, two proofs,
+  §3.1, §3.2; from $`X_{19}^{\mathrm{lin}}`$ to $`X_{21}`$ with 1 review of the repaired proof). The core half holds on $`[0, \nu_C]`$, and $`\nu_C \ge X_{21}`$ given FRAG. **Not proved as written**: $`\nu_C = \nu_S = L(\omega+1)`$,
+  the claim on $`[0, \nu_C]`$, and every range above $`X_{21}`$ recorded in [SHIFT6.md](SHIFT6.md)–[SHIFT9.md](SHIFT9.md) and in §1, §2 here.
+- **Wilken's claim in $`R_2^S`$**: proved only up to $`\upsilon_{\omega^3}`$ (with or without FRAG); $`\nu_S \ge X_{21}`$ given FRAG. The agreement of $`R_2^S`$ and $`R_2^C`$ above $`\nu_C`$, $`\sigma_S \ge Z^\varepsilon`$, and
+  the criterion up to $`Z^\varepsilon`$ rested on the milestone and are not proved as written. Results without reaches stand: Carlson's categoricity [C11] with MIN$`^S`$, and the schemata K01, K2,
+  CRIT-IND$`^K`$, UNIFORM-A (§2.2). (E) is open, and $`\beta_0`$ is not located.
+- **Reaches** (given FRAG): exact for every restart below $`X_{21}`$, and for every long code below $`\hat G + G_2`$ (TRANSLATION). The old exact long formulas are false as stated at $`m_0 \ge \Omega_1`$ and at
+  $`2 \le D \lt \hat G`$; their upper bounds stand.
+- **LOW and LOW$`^\infty`$: undecided again** (not-LOW and LOW$`^\infty`$ rested on the chain to $`\nu_C`$). The steps PIN and LOW of Conjecture CORE-2: undecided.
+- **Lean**: $`R_2^C`$, isominimal sets, the core, LOC, FRAG and FRAG2 (§3.3).
+- The lower-bound program below $`\theta_0`$: no change ($`\iota(\mathrm{CH}_5) \ge \psi_{\Omega_1}(S_*)`$, §2.3). The step below SRO: no change (every $`n`$ on all 3,166 sample matrices; the general statement for
+  all standard matrices below SRO is open).
+
+### 3.5 Checks of the fortieth round
+
+Each run was under 60 seconds; none is a proof.
+
+- §3.1. One run: the witness restarts (membership in the domain, normal forms, order below $`X_6`$), 0 failures. The referee ran no search: the weakest steps are pins, transports and counts, which a
+  short search cannot test.
+- §3.2. Six runs (the corrected value at small codes, the boundary $`\zeta_1`$, the witnesses, the names and the order $`X_{18} \lt X_{19}^\flat \lt X_{19}^{\mathrm{lin}} \lt X_{19}`$), 0 failures. The referee: a search
+  over 2,512 normal multipliers in $`[\hat\zeta_3, \zeta_{\mathrm{lin}})`$ with two seeds, 0 counterexamples to the boundary.
+- §3.3. Lean (no `#eval`): the bundle of the nine files green, and the two files that import only Mathlib green on their own; the audit rebuilt the bundle (identical) and printed the axioms of
+  38 theorems, as claimed. In the repository the nine files build as modules with the whole library (green, no `sorry`).
+- The author of §3.1 disclosed one stray shell command (no effect).
+
+### 3.6 Open
+
+- The milestone again, in this order: ENUM-REACH (the corrected value for every code below $`P'`$), its invariance under the transports and its far pin; then CAP-0 below $`P'`$, not-LOW, CAP-1,
+  CROSS-LIM, TC⁺$`^\omega`$, EMB, ONTO-FIN, PAIR, UP and $`\nu_C = \nu_S = L(\omega+1)`$; then the frontiers above $`\nu_C`$ ($`X_A`$ to $`Z^\Lambda`$) and the $`R_2^S`$ side; then one level up (Theorems C$`^{\mathrm{LL}}`$,
+  C$`^{\mathrm{FP}}`$, $`\nu_3`$).
+- The claim above $`X_{21}`$ given FRAG in $`R_2^C`$ (above $`X_4`$ without FRAG), and above $`\upsilon_{\omega^3}`$ in $`R_2^S`$.
+- Lean: the link of $`\le_1`$ of $`R_2^C`$ with $`R_1^+`$ (INC1), Carlson 2009, Thm 14.10 and 14.14, that the Lean $`\upsilon`$ is Wilken's; then the blocks below $`\upsilon_{\omega^3}`$, the restart blocks, SKEL⁺, CAP,
+  LIFT-0, O$`^C`$ and NU-CT ([LEAN.md](LEAN.md)).
+- $`R_2^S = R_2^C`$: (E), $`\beta_0`$ (conjecture: $`\beta_0 \ge x_F^C`$), FAN-LOAD, and the converse for $`\le_1`$ at successor stages above $`\kappa_C`$.
 - Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, and an upper bound for $`\iota(\mathrm{CH}_3)`$.
-- The first inaccessible: chain number 3 past $`\varepsilon_{\Omega_\omega+1}`$; past $`S_*`$, capacities with $`\alpha \ge \Gamma_0`$ (conjecture LEX-SELF) or another way, and B-1; then the tower of $`\Omega`$'s up to $`\theta_0`$;
+- The first inaccessible: chain number 3 past $`\varepsilon_{\Omega_\omega+1}`$; past $`S_*`$, capacities with $`\alpha \ge \Gamma_0`$ (conjecture LEX-SELF) or another way; then the tower of $`\Omega`$'s up to $`\theta_0`$;
   $`\mathrm{CH}_2`$ past $`\Theta_1`$; the step for all standard matrices below SRO.
-- Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; an InaccPsi formula for the reach in terms of the code; names above $`\nu`$ for the points that are not
-  $`\upsilon`$-points; the rest of [COVER.md](COVER.md) §9.
+- Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; an InaccPsi formula for the reach in terms of the code; the rest of [COVER.md](COVER.md) §9.

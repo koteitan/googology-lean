@@ -2,11 +2,11 @@
 
 # $`R_2^+`$, the eighteenth to twentieth rounds: $`\nu_C \ge X_9`$, $`X_{11}`$ and $`X_{12}`$ given FRAG, reaches across index fixed points, exact caps by order type, flat and nested codes, HOST$`_k`$, SYM-Q, GRN and MIN-EXACT
 
-This page continues [SHIFT.md](SHIFT.md) (§9 there is the seventeenth round); §1 is the eighteenth round, §2 the nineteenth and §3 the twentieth. The twenty-first and twenty-second rounds are on [SHIFT3.md](SHIFT3.md), the twenty-third and twenty-fourth on [SHIFT4.md](SHIFT4.md), the twenty-fifth and twenty-sixth on [SHIFT5.md](SHIFT5.md), the twenty-seventh to twenty-ninth on [SHIFT6.md](SHIFT6.md), the thirtieth to thirty-second on [SHIFT7.md](SHIFT7.md), the thirty-third and thirty-fourth on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md), the thirty-eighth and thirty-ninth on [SHIFT10.md](SHIFT10.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT.md](SHIFT.md) (§9 there is the seventeenth round); §1 is the eighteenth round, §2 the nineteenth and §3 the twentieth. The twenty-first and twenty-second rounds are on [SHIFT3.md](SHIFT3.md), the twenty-third and twenty-fourth on [SHIFT4.md](SHIFT4.md), the twenty-fifth and twenty-sixth on [SHIFT5.md](SHIFT5.md), the twenty-seventh to twenty-ninth on [SHIFT6.md](SHIFT6.md), the thirtieth to thirty-second on [SHIFT7.md](SHIFT7.md), the thirty-third and thirty-fourth on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md), the thirty-eighth to fortieth on [SHIFT10.md](SHIFT10.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
-**Later (the thirty-ninth round, [SHIFT10.md](SHIFT10.md) §2.1):** the exact value $`r(\lambda) = r(\nu) + o_\nu(m_0)`$ of the long reaches (EXACT-LONG and its later forms on this page), which reads $`m_0`$ at the landing point $`\nu`$, is false when $`m_0`$ is like $`\Omega_1`$ (a fatal point found by that round's referee); its upper-bound half stays true. Which results on this page use the exact value at such $`m_0`$ is not yet checked.
+**Later (the thirty-ninth and fortieth rounds, [SHIFT10.md](SHIFT10.md) §2.1, §3.1, §3.2):** the exact value $`r(\lambda) = r(\nu) + o_\nu(m_0)`$ of the long reaches (EXACT-LONG and its later forms), which reads $`m_0`$ at the landing point $`\nu`$ and lands at $`\upsilon_{\lambda+\omega^2\cdot\Theta(D)}`$, is false as stated: a realizer carries only constants below $`\rho_\lambda`$, so the value is wrong at every $`m_0 \ge \Omega_1`$, and the landing is wrong for $`2 \le D \lt \hat G`$ (so CROSS-O is false at $`x = 2`$). The upper-bound halves stay true. The corrected value (TRANSLATION, [SHIFT10.md](SHIFT10.md) §3.1) is proved for every code below $`\hat G + G_2`$. On this page: EXACT-LONG and CROSS-O of §3.1 (and the lower-bound step (b) there) are false as stated; the ranges $`X_9`$, $`X_{11}`$, $`X_{12}`$ stand (they use no exact long value at an affected code, and they lie below $`X_{21}`$, which is proved again).
 
 §1: four papers (2026-10), each refereed once, so a result in §1 has 1 review unless a count is given. **2 reviews** means that the referee of the
 seventeenth round proposed the repair (or checked the result) and the referee of this round checked it again as written out. None of the papers uses
@@ -512,7 +512,7 @@ whether this carries over to $`R_2^+`$ at the pair $`(x, \nu)`$.
 
 ### 3.5 Status after the twentieth round
 
-The twenty-first to thirty-ninth rounds changed this status; see [SHIFT3.md](SHIFT3.md) §1.5, §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 , [SHIFT7.md](SHIFT7.md) §1.4, §2.4, §3.4, [SHIFT8.md](SHIFT8.md) §1.4, §2.4, [SHIFT9.md](SHIFT9.md) §1.4, §2.4, §3.4, [SHIFT10.md](SHIFT10.md) §1.4 and §2.4.
+The twenty-first to fortieth rounds changed this status; see [SHIFT3.md](SHIFT3.md) §1.5, §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 , [SHIFT7.md](SHIFT7.md) §1.4, §2.4, §3.4, [SHIFT8.md](SHIFT8.md) §1.4, §2.4, [SHIFT9.md](SHIFT9.md) §1.4, §2.4, §3.4, [SHIFT10.md](SHIFT10.md) §1.4, §2.4 and §3.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{12}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$.
   No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -535,7 +535,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 3.7 Open
 
-The twenty-first to thirty-ninth rounds changed this list; the current list is [SHIFT10.md](SHIFT10.md) §2.6.
+The twenty-first to fortieth rounds changed this list; the current list is [SHIFT10.md](SHIFT10.md) §3.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs (V1″) and (V2″) of §3.1, and (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$,
   $`m_3`$, $`c_0`$.

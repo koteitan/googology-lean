@@ -2,9 +2,11 @@
 
 # $`R_2^+`$, the thirty-fifth to thirty-seventh rounds: the reaches of the skeleton up to $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$, the first gap of $`\mathrm{Core}(R_2^S)`$, and the stage route toward $`\theta_0`$
 
-This page continues [SHIFT8.md](SHIFT8.md) (§2 there is the thirty-fourth round); §1 is the thirty-fifth round, §2 the thirty-sixth, §3 the thirty-seventh; the thirty-eighth and thirty-ninth rounds are on [SHIFT10.md](SHIFT10.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT8.md](SHIFT8.md) (§2 there is the thirty-fourth round); §1 is the thirty-fifth round, §2 the thirty-sixth, §3 the thirty-seventh; the thirty-eighth to fortieth rounds are on [SHIFT10.md](SHIFT10.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
+
+**Later (the fortieth round, [SHIFT10.md](SHIFT10.md) §3.2):** the frontiers of this page ($`L(G_2)`$, $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$, $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$, and $`Z^\Gamma`$ in $`R_2^S`$) rest on $`\nu_C = \nu_S = L(\omega+1)`$ and on the exact calculus in the gaps, which are not proved as written; so they are **not proved as written**. The code side (the tier maps), the results on (E) that use no reach, and the native codes stand. Given FRAG, the claim is proved in $`R_2^C`$ on $`[0, X_{21}]`$.
 
 ## 1. The thirty-fifth round
 
@@ -440,7 +442,7 @@ Notation as in §1.3.
 
 ### 3.4 Status after the thirty-seventh round
 
-Superseded by [SHIFT10.md](SHIFT10.md) §2.4.
+Superseded by [SHIFT10.md](SHIFT10.md) §3.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)]`$ given FRAG, with
   $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+1} + \theta'_2 + \omega^{G''(\omega+1)+1})`$** (the review counts up to $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ as in §2.4;
@@ -470,7 +472,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 3.6 Open
 
-Superseded by [SHIFT10.md](SHIFT10.md) §2.6.
+Superseded by [SHIFT10.md](SHIFT10.md) §3.6.
 
 - The claim above $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ given FRAG (above $`X_4`$ without FRAG). Next: the codes from $`G''(\omega+1)`$ on (outline up to $`G''(\omega+1)\cdot\omega`$), the window rule one
   step up, the blocks $`j \ge 1`$, the long restarts from the code $`G''(\omega^2)`$ and their landing calculus, the codes below $`P_3`$, and $`\nu_3`$. In $`R_2^S`$: the claim above

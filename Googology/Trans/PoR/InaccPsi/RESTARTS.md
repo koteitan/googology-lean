@@ -21,6 +21,8 @@ $`\Xi_\omega = \sup_n \Xi_n`$. Write $`c^*(\lambda) = c(\lambda)`$ for $`\lambda
 
 ## 1. Lemma FRAG (proved, 2 reviews)
 
+**Later (the fortieth round):** FRAG (for any number of countable bases) and FRAG2 are now also proved in Lean, from 20 facts cited from [W07a] and [W07b] ([LEAN.md](LEAN.md), [SHIFT10.md](SHIFT10.md) §3.3). FRAG″ (d) and FRAG2″ of §2 below are not proved as written ([SHIFT10.md](SHIFT10.md) §3.2).
+
 The second review is the audit of the thirty-second round, which re-derived the proof from the paper texts ([SHIFT7.md](SHIFT7.md) §3.1); the same holds for FRAG2 and FRAG-SUBST.
 
 **Theorem FRAG** (finite form). Let $`\kappa`$ be a $`\upsilon`$-point that is an $`\varepsilon`$-number, and let

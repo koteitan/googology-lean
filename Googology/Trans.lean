@@ -114,3 +114,12 @@ import Googology.Trans.PoR.InaccPsi.LowSeg
 import Googology.Trans.PoR.InaccPsi.LowTerms
 import Googology.Trans.PoR.InaccPsi.ConjT
 import Googology.Trans.PoR.InaccPsi.LowerT
+import Googology.Trans.PoR.InaccPsi.R2.Defs
+import Googology.Trans.PoR.InaccPsi.R2.Basic
+import Googology.Trans.PoR.InaccPsi.R2.Loc
+import Googology.Trans.PoR.InaccPsi.R2.Cited
+import Googology.Trans.PoR.InaccPsi.R2.Points
+import Googology.Trans.PoR.InaccPsi.R2.Frag
+import Googology.Trans.PoR.InaccPsi.R2.FragBase
+import Googology.Trans.PoR.InaccPsi.R2.FragM
+import Googology.Trans.PoR.InaccPsi.R2.Frag2

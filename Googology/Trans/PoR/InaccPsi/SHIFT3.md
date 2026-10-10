@@ -2,11 +2,11 @@
 
 # $`R_2^+`$, the twenty-first and twenty-second rounds: $`\nu_C \ge X_{14}`$ given FRAG, the hierarchies $`\vartheta_D`$ and the counting rule PSI-n, pair blocks, the shapes of $`\Phi_3`$, and LOW
 
-This page continues [SHIFT2.md](SHIFT2.md) (§3 there is the twentieth round); §1 is the twenty-first round and §2 the twenty-second. The twenty-third and twenty-fourth rounds are on [SHIFT4.md](SHIFT4.md), the twenty-fifth and twenty-sixth on [SHIFT5.md](SHIFT5.md), the twenty-seventh to twenty-ninth on [SHIFT6.md](SHIFT6.md), the thirtieth to thirty-second on [SHIFT7.md](SHIFT7.md), the thirty-third and thirty-fourth on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md), the thirty-eighth and thirty-ninth on [SHIFT10.md](SHIFT10.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT2.md](SHIFT2.md) (§3 there is the twentieth round); §1 is the twenty-first round and §2 the twenty-second. The twenty-third and twenty-fourth rounds are on [SHIFT4.md](SHIFT4.md), the twenty-fifth and twenty-sixth on [SHIFT5.md](SHIFT5.md), the twenty-seventh to twenty-ninth on [SHIFT6.md](SHIFT6.md), the thirtieth to thirty-second on [SHIFT7.md](SHIFT7.md), the thirty-third and thirty-fourth on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md), the thirty-eighth to fortieth on [SHIFT10.md](SHIFT10.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
-**Later (the thirty-ninth round, [SHIFT10.md](SHIFT10.md) §2.1):** the exact value $`r(\lambda) = r(\nu) + o_\nu(m_0)`$ of the long reaches (EXACT-LONG and its later forms on this page), which reads $`m_0`$ at the landing point $`\nu`$, is false when $`m_0`$ is like $`\Omega_1`$ (a fatal point found by that round's referee); its upper-bound half stays true. Which results on this page use the exact value at such $`m_0`$ is not yet checked.
+**Later (the thirty-ninth and fortieth rounds, [SHIFT10.md](SHIFT10.md) §2.1, §3.1, §3.2):** the exact value $`r(\lambda) = r(\nu) + o_\nu(m_0)`$ of the long reaches (EXACT-LONG and its later forms), which reads $`m_0`$ at the landing point $`\nu`$ and lands at $`\upsilon_{\lambda+\omega^2\cdot\Theta(D)}`$, is false as stated: a realizer carries only constants below $`\rho_\lambda`$, so the value is wrong at every $`m_0 \ge \Omega_1`$, and the landing is wrong for $`2 \le D \lt \hat G`$ (so CROSS-O is false at $`x = 2`$). The upper-bound halves stay true. The corrected value (TRANSLATION, [SHIFT10.md](SHIFT10.md) §3.1) is proved for every code below $`\hat G + G_2`$. On this page: the forms of EXACT-LONG and CROSS-O in §1.1 and §2.1 are false as stated; the ranges $`X_{13}`$, $`X_{14}`$ stand (they lie below $`X_{21}`$, which is proved again).
 
 ## 1. The twenty-first round
 
@@ -168,7 +168,7 @@ that the reaches of restarts commute with base change.
 - Upper bounds: still none by an InaccPsi term for $`\iota(\mathrm{CH}_k)`$, $`m_F`$, $`x_F`$, $`C^*_3`$ or $`\nu_C`$.
 - $`\nu_C = \nu_S`$: left: (D1b) and (E4); every η-form tool needs LOW, which is open.
 
-The twenty-second to thirty-ninth rounds changed this status; see §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 , [SHIFT7.md](SHIFT7.md) §1.4, §2.4, §3.4, [SHIFT8.md](SHIFT8.md) §1.4, §2.4, [SHIFT9.md](SHIFT9.md) §1.4, §2.4, §3.4, [SHIFT10.md](SHIFT10.md) §1.4 and §2.4.
+The twenty-second to fortieth rounds changed this status; see §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 , [SHIFT7.md](SHIFT7.md) §1.4, §2.4, §3.4, [SHIFT8.md](SHIFT8.md) §1.4, §2.4, [SHIFT9.md](SHIFT9.md) §1.4, §2.4, §3.4, [SHIFT10.md](SHIFT10.md) §1.4, §2.4 and §3.4.
 
 ### 1.6 Checks of the twenty-first round
 
@@ -190,7 +190,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 1.7 Open
 
-The twenty-second to thirty-ninth rounds changed this list; the current list is [SHIFT10.md](SHIFT10.md) §2.6.
+The twenty-second to fortieth rounds changed this list; the current list is [SHIFT10.md](SHIFT10.md) §3.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$; (P) needs the caps listed in §1.1, and (Q′) the isominimal patterns of $`L(\omega)`$; bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$,
   $`f_0`$, $`m_3`$, $`c_0`$.
@@ -346,7 +346,7 @@ and of level 2 if it is in $`[\psi_{\Omega_1}(\Omega_\omega\cdot 2), \psi_{\Omeg
 
 ### 2.5 Status after the twenty-second round
 
-The twenty-third to thirty-ninth rounds changed this status; see [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 , [SHIFT7.md](SHIFT7.md) §1.4, §2.4, §3.4, [SHIFT8.md](SHIFT8.md) §1.4, §2.4, [SHIFT9.md](SHIFT9.md) §1.4, §2.4, §3.4, [SHIFT10.md](SHIFT10.md) §1.4 and §2.4.
+The twenty-third to fortieth rounds changed this status; see [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 , [SHIFT7.md](SHIFT7.md) §1.4, §2.4, §3.4, [SHIFT8.md](SHIFT8.md) §1.4, §2.4, [SHIFT9.md](SHIFT9.md) §1.4, §2.4, §3.4, [SHIFT10.md](SHIFT10.md) §1.4, §2.4 and §3.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and on $`[0, X_{14}]`$ given FRAG ($`[0, X_9]`$ with 2 reviews); the core half holds on $`[0, \nu_C]`$.
   No InaccPsi upper bound for $`\nu_C`$: (P) at a named pair stays open.
@@ -374,7 +374,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 2.7 Open
 
-The twenty-third to thirty-ninth rounds changed this list; the current list is [SHIFT10.md](SHIFT10.md) §2.6.
+The twenty-third to fortieth rounds changed this list; the current list is [SHIFT10.md](SHIFT10.md) §3.6.
 
 - Upper bounds: (P) and (Q′) at one named pair for $`\nu_C`$. (P) needs the caps of §2.1 and a lower bound at code $`P'`$ (§2.4); (Q′) needs the isominimal patterns of $`L(\omega)`$.
   Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
