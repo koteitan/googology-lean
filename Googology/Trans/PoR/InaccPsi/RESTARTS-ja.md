@@ -60,7 +60,7 @@ $`\le_1`$ で 836,413 組。わざと入れた 3 つのバグはすべて見つ�
 ## 2. $`\le_2`$ を保つ基の付け替え（定理 FRAG2）
 
 33 回目に、FRAG2 は動かない集合が組を含みうる $`\nu`$ より上でも成り立つと示され（FRAG2$`^{\mathrm{rel}}`$）、FRAG はいくつかの点 $`L(e)`$ を
-それぞれの区間ごと一度に動かすものに広げられた（FRAG″ と FRAG2″、$`L(\Omega_1\cdot\omega)`$ より下）。どれも査読 1 回（[SHIFT8-ja.md](SHIFT8-ja.md) §1.1。最前線より下の区間に限った形で査読 2 回、そこの §2.1。最前線 $`L(G_2)`$、$`L(\Omega_2+\Phi^{P'}\cdot\omega)`$、$`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ より下でも使う、[SHIFT9-ja.md](SHIFT9-ja.md) §1.1、§2.1、§3.1）。
+それぞれの区間ごと一度に動かすものに広げられた（FRAG″ と FRAG2″、$`L(\Omega_1\cdot\omega)`$ より下）。どれも査読 1 回（[SHIFT8-ja.md](SHIFT8-ja.md) §1.1。最前線より下の区間に限った形で査読 2 回、そこの §2.1。最前線 $`L(G_2)`$、$`L(\Omega_2+\Phi^{P'}\cdot\omega)`$、$`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$、$`Z^{\mathrm{LL}}`$ より下でも使う、[SHIFT9-ja.md](SHIFT9-ja.md) §1.1、§2.1、§3.1、[SHIFT10-ja.md](SHIFT10-ja.md) §1.1）。
 
 集合 $`Y`$ の上で $`R_2^+`$ が**骨組み型**とは：$`Y`$ の $`\upsilon`$ の点でない点はどれも $`R_1^+`$ の届く先を持ち、$`\lt_2`$ の組は
 どれも $`(\upsilon_\xi, \upsilon_{\xi+1})`$ であること。$`\mathrm{cap}(u) = \mathrm{lh}(u)`$ と書く。

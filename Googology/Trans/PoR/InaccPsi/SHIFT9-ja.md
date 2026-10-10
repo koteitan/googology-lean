@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 35〜37 回目：$`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ までの骨組みの届く先、$`\mathrm{Core}(R_2^S)`$ の最初の穴、$`\theta_0`$ へ向かう段階の道
 
-このページは [SHIFT8-ja.md](SHIFT8-ja.md) の続き（そこの §2 が 34 回目）。§1 が 35 回目、§2 が 36 回目、§3 が 37 回目。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT8-ja.md](SHIFT8-ja.md) の続き（そこの §2 が 34 回目）。§1 が 35 回目、§2 が 36 回目、§3 が 37 回目。38 回目は [SHIFT10-ja.md](SHIFT10-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -394,7 +394,7 @@ Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2) =
 ```
 
   途中の点：$`L(\Omega_2\cdot k) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \Omega_2\cdot k)`$、$`L(\Omega_2\cdot\omega)`$、$`L(\Omega_2\cdot(\omega+1))`$。この点 $`Z^\Gamma`$ は §3.1 の $`L(\theta'_2)`$ より下なので、$`R_2^C`$ で
-  $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ から $`Z^\Gamma`$ までの段階には 2 つの証明がある。Lean のファイルは $`Z^\Gamma`$ を含まず、Python だけで確かめた (m3)。
+  $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ から $`Z^\Gamma`$ までの段階には 2 つの証明がある。Lean のファイルは $`Z^\Gamma`$ を含まず、Python だけで確かめた（m3。今は含む、[SHIFT10-ja.md](SHIFT10-ja.md) §1.2）。
 - **一様な試験**。(a) §2.2 の注意 NO-LIFT を直した（反例で証明済み）：$`\Sigma_2`$ の反映が運ぶのは組の量化子の無い図式と $`\Pi_1`$ の型で、Carlson の句ではない。この $`\Sigma_n`$ の階層では
   有界な式はただではないから：$`(\mathrm{Ord}; \lt)`$ で $`\omega \le_1 \omega\cdot 2`$ だが、「ある $`v \gt 5`$ は極限」は $`\omega\cdot 2`$ より下で成り立ち、$`\omega`$ より下では成り立たない。その前提は取り下げ、
   結論はそのまま。(b) [CW12b] Prop 7.4 の判定（すべての拡大に 1 つの写し）が $`\kappa_C`$ より下の $`R_2^C`$ のどの $`\lt_2`$ の組でも成り立てば (E) が出る（証明済み。局所的な形には $`b \lt \kappa_C`$ が
@@ -429,6 +429,8 @@ Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2) =
 
 ### 3.4 37 回目のあとの状態
 
+[SHIFT10-ja.md](SHIFT10-ja.md) §1.4 で置き換えた。
+
 - $`R_2^C`$ での Wilken の主張：FRAG 無しで $`[0, X_4]`$、そして **FRAG のもとで $`[0, L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)]`$、
   $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+1} + \theta'_2 + \omega^{G''(\omega+1)+1})`$** で両方の半分とも成り立つ（$`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ までの
   査読の回数は §2.4 のとおり。そこから $`Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2)`$ までは査読 2 回で 2 つの証明、§3.1、§3.2。$`Z^\Gamma`$ から最前線までは査読 1 回、§3.1）。
@@ -455,6 +457,8 @@ Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2) =
   配置 A だけを試す (m5)。
 
 ### 3.6 未解決
+
+[SHIFT10-ja.md](SHIFT10-ja.md) §1.6 で置き換えた。
 
 - FRAG のもとで $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ より上の主張（FRAG 無しでは $`X_4`$ より上）。次は $`G''(\omega+1)`$ からの符号（$`G''(\omega+1)\cdot\omega`$ までは概略）、1 つ上の窓の規則、
   ブロック $`j \ge 1`$、符号 $`G''(\omega^2)`$ からの長いやり直しとその着地の計算、$`P_3`$ より下の符号、$`\nu_3`$。$`R_2^S`$ で：$`Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2)`$ より上の主張。

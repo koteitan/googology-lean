@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 23 回目と 24 回目：FRAG のもとで $`\nu_C \ge X_{18}`$、閉じた届く先とちょうどの届く先、$`\Omega_k`$ での平ら、$`\Phi_3`$ の形、$`\psi_{\Omega_1}(\Omega_\omega\cdot\omega)`$ の先へ行く素の符号
 
-このページは [SHIFT3-ja.md](SHIFT3-ja.md) の続き（そこの §2 が 22 回目）。§1 が 23 回目、§2 が 24 回目。25 回目と 26 回目は [SHIFT5-ja.md](SHIFT5-ja.md)、27〜29 回目は [SHIFT6-ja.md](SHIFT6-ja.md)、30〜32 回目は [SHIFT7-ja.md](SHIFT7-ja.md)、33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md)、35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT3-ja.md](SHIFT3-ja.md) の続き（そこの §2 が 22 回目）。§1 が 23 回目、§2 が 24 回目。25 回目と 26 回目は [SHIFT5-ja.md](SHIFT5-ja.md)、27〜29 回目は [SHIFT6-ja.md](SHIFT6-ja.md)、30〜32 回目は [SHIFT7-ja.md](SHIFT7-ja.md)、33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md)、35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md)、38 回目は [SHIFT10-ja.md](SHIFT10-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -167,7 +167,7 @@ $`\nu_C \ge X_{14}^+ = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2\cdot 2} 
 
 ### 1.5 23 回目のあとの状態
 
-24〜37 回目でこの状態は変わった。§2.5、[SHIFT5-ja.md](SHIFT5-ja.md) §1.4、§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §1.4、§2.4、§3.4、[SHIFT7-ja.md](SHIFT7-ja.md) §1.4、§2.4、§3.4、[SHIFT8-ja.md](SHIFT8-ja.md) §1.4、§2.4、[SHIFT9-ja.md](SHIFT9-ja.md) §1.4、§2.4、§3.4 を見よ。
+24〜38 回目でこの状態は変わった。§2.5、[SHIFT5-ja.md](SHIFT5-ja.md) §1.4、§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §1.4、§2.4、§3.4、[SHIFT7-ja.md](SHIFT7-ja.md) §1.4、§2.4、§3.4、[SHIFT8-ja.md](SHIFT8-ja.md) §1.4、§2.4、[SHIFT9-ja.md](SHIFT9-ja.md) §1.4、§2.4、§3.4、[SHIFT10-ja.md](SHIFT10-ja.md) §1.4 を見よ。
 
 - $`R_2^C`$ での Wilken の主張：$`[0, X_4]`$ では FRAG 無しで、$`[0, X_{16}]`$ では FRAG のもとで（$`[0, X_9]`$ は査読 2 回。$`X_{15}`$ と $`X_{16}`$ は置き換えの一覧として証明された層に立つ）、
   両方の半分とも成り立つ。核の側は $`[0, \nu_C]`$ で成り立つ。$`\nu_C`$ の InaccPsi による上からの評価は無い：名前の付いた組での (P) は未解決のまま。
@@ -195,7 +195,7 @@ $`\nu_C \ge X_{14}^+ = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2\cdot 2} 
 
 ### 1.7 未解決
 
-24〜37 回目でこの一覧は変わった。今の一覧は [SHIFT9-ja.md](SHIFT9-ja.md) §3.6 にある。
+24〜38 回目でこの一覧は変わった。今の一覧は [SHIFT10-ja.md](SHIFT10-ja.md) §1.6 にある。
 
 - 上からの評価：$`\nu_C`$ について名前の付いた 1 つの組での (P) と (Q′)。(P) には §1.1 と §1.4 より先の蓋と、符号 $`P'`$ での下からの評価が要り、(Q′) には $`L(\omega)`$ の等最小の
   パターンが要る。$`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価。
@@ -355,7 +355,7 @@ $`X_{18} \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$）。
 
 ### 2.5 24 回目のあとの状態
 
-25〜37 回目でこの状態は変わった。[SHIFT5-ja.md](SHIFT5-ja.md) §1.4、§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §1.4、§2.4、§3.4、[SHIFT7-ja.md](SHIFT7-ja.md) §1.4、§2.4、§3.4、[SHIFT8-ja.md](SHIFT8-ja.md) §1.4、§2.4、[SHIFT9-ja.md](SHIFT9-ja.md) §1.4、§2.4、§3.4 を見よ。
+25〜38 回目でこの状態は変わった。[SHIFT5-ja.md](SHIFT5-ja.md) §1.4、§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §1.4、§2.4、§3.4、[SHIFT7-ja.md](SHIFT7-ja.md) §1.4、§2.4、§3.4、[SHIFT8-ja.md](SHIFT8-ja.md) §1.4、§2.4、[SHIFT9-ja.md](SHIFT9-ja.md) §1.4、§2.4、§3.4、[SHIFT10-ja.md](SHIFT10-ja.md) §1.4 を見よ。
 
 - $`R_2^C`$ での Wilken の主張：$`[0, X_4]`$ では FRAG 無しで、$`[0, X_{18}]`$ では FRAG のもとで（$`[0, X_{16}]`$ は査読 2 回）両方の半分とも成り立つ。核の側は $`[0, \nu_C]`$ で成り立つ。
   $`\nu_C`$ の InaccPsi による上からの評価は無い：名前の付いた組での (P) は未解決のまま。
@@ -383,7 +383,7 @@ $`X_{18} \lt \psi_{\Omega_1}(\Omega_\omega\cdot 2)`$）。
 
 ### 2.7 未解決
 
-25〜37 回目でこの一覧は変わった。今の一覧は [SHIFT9-ja.md](SHIFT9-ja.md) §3.6 にある。
+25〜38 回目でこの一覧は変わった。今の一覧は [SHIFT10-ja.md](SHIFT10-ja.md) §1.6 にある。
 
 - 上からの評価：$`\nu_C`$ について名前の付いた 1 つの組での (P) と (Q′)。(P) には $`G(\hat\zeta_2)`$ より先の蓋と、符号 $`P'`$ での下からの評価が要り、(Q′) には $`L(\omega)`$ の等最小の
   パターンが要る。$`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価。

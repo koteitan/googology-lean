@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the thirtieth to thirty-second rounds: the relative far pin at every depth, not-LOW, $`\nu_C = \nu_S = L(\omega+1)`$ and its audit, the claim up to $`X_A`$ above $`\nu_C`$, and native codes up to $`\psi_{\Omega_1}(\Omega_{\omega+1})`$
 
-This page continues [SHIFT6.md](SHIFT6.md) (§3 there is the twenty-ninth round); §1 is the thirtieth round, §2 the thirty-first, §3 the thirty-second; the thirty-third and thirty-fourth rounds are on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT6.md](SHIFT6.md) (§3 there is the twenty-ninth round); §1 is the thirtieth round, §2 the thirty-first, §3 the thirty-second; the thirty-third and thirty-fourth rounds are on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md), the thirty-eighth on [SHIFT10.md](SHIFT10.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -443,7 +443,7 @@ X_A = H(\eta_\nu + \omega^3\cdot 2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \om
 
 ### 3.4 Status after the thirty-second round
 
-Superseded by [SHIFT9.md](SHIFT9.md) §3.4.
+Superseded by [SHIFT10.md](SHIFT10.md) §1.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, X_A]`$ given FRAG, with $`X_A = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P' + \omega^{\theta+3}\cdot 2)`$** ($`[0, X_{21}]`$ with
   2 reviews; up to $`\nu_C = \nu_S = L(\omega+1)`$ with 1 review and 1 audit, FRAG, FRAG2, FRAG-SUBST and the three weakest links with 2 reviews, §3.1; from $`\nu_C`$ to $`X_A`$ with 1 review, §3.2).
@@ -471,7 +471,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 3.6 Open
 
-Superseded by [SHIFT9.md](SHIFT9.md) §3.6.
+Superseded by [SHIFT10.md](SHIFT10.md) §1.6.
 
 - The claim above $`X_A`$ given FRAG (above $`X_4`$ without FRAG). First the repair of B-1 (GAP-CALC in region form; then $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$ for every $`j`$ and the claim on $`[0, L(\omega^2)]`$),
   then the first restart $`L(\omega^2)`$ of the skeleton above $`\nu`$: a FRAG that moves several $`L(e)`$ at once, the restart calculus of that skeleton, and its codes $`\ge P'`$; then $`\nu_3`$. In $`R_2^S`$:

@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the thirty-fifth to thirty-seventh rounds: the reaches of the skeleton up to $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$, the first gap of $`\mathrm{Core}(R_2^S)`$, and the stage route toward $`\theta_0`$
 
-This page continues [SHIFT8.md](SHIFT8.md) (§2 there is the thirty-fourth round); §1 is the thirty-fifth round, §2 the thirty-sixth, §3 the thirty-seventh. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT8.md](SHIFT8.md) (§2 there is the thirty-fourth round); §1 is the thirty-fifth round, §2 the thirty-sixth, §3 the thirty-seventh; the thirty-eighth round is on [SHIFT10.md](SHIFT10.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
@@ -401,7 +401,7 @@ Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2) =
 ```
 
   On the way: $`L(\Omega_2\cdot k) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \Omega_2\cdot k)`$, $`L(\Omega_2\cdot\omega)`$, $`L(\Omega_2\cdot(\omega+1))`$. This point $`Z^\Gamma`$ is below $`L(\theta'_2)`$ of §3.1, so in $`R_2^C`$ the step from
-  $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ to $`Z^\Gamma`$ has two proofs. The Lean file does not cover $`Z^\Gamma`$; it is checked in Python only (m3).
+  $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ to $`Z^\Gamma`$ has two proofs. The Lean file does not cover $`Z^\Gamma`$; it is checked in Python only (m3; now covered, [SHIFT10.md](SHIFT10.md) §1.2).
 - **The uniform test.** (a) The remark NO-LIFT of §2.2 is corrected (proved by a counterexample): $`\Sigma_2`$ reflection carries the quantifier-free diagram and the $`\Pi_1`$ type of the pair, not
   Carlson's clauses, because bounded formulas are not free in this $`\Sigma_n`$ hierarchy; in $`(\mathrm{Ord}; \lt)`$, $`\omega \le_1 \omega\cdot 2`$, but "some $`v \gt 5`$ is a limit" holds below $`\omega\cdot 2`$ and not
   below $`\omega`$. Its premise is withdrawn; its conclusion stands. (b) If the criterion of [CW12b] Prop 7.4 (one copy for all extensions) held at every $`\lt_2`$-pair of $`R_2^C`$ below $`\kappa_C`$,
@@ -440,6 +440,8 @@ Notation as in §1.3.
 
 ### 3.4 Status after the thirty-seventh round
 
+Superseded by [SHIFT10.md](SHIFT10.md) §1.4.
+
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_4]`$ without FRAG, and **on $`[0, L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)]`$ given FRAG, with
   $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+1} + \theta'_2 + \omega^{G''(\omega+1)+1})`$** (the review counts up to $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ as in §2.4;
   from there to $`Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2)`$ with 2 reviews, two proofs, §3.1, §3.2; from $`Z^\Gamma`$ to the frontier with 1 review, §3.1).
@@ -467,6 +469,8 @@ Each run was under 60 seconds; none is a proof.
   Lean. The toys test layout A only (m5).
 
 ### 3.6 Open
+
+Superseded by [SHIFT10.md](SHIFT10.md) §1.6.
 
 - The claim above $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ given FRAG (above $`X_4`$ without FRAG). Next: the codes from $`G''(\omega+1)`$ on (outline up to $`G''(\omega+1)\cdot\omega`$), the window rule one
   step up, the blocks $`j \ge 1`$, the long restarts from the code $`G''(\omega^2)`$ and their landing calculus, the codes below $`P_3`$, and $`\nu_3`$. In $`R_2^S`$: the claim above
