@@ -3,10 +3,10 @@ import Mathlib
 /-!
 # The cited facts, as axioms (the only axioms of `Googology.Trans.PoR.InaccPsi.R2`)
 
-`R₂^C` itself (`Defs.lean`) is DEFINED from [C09] Def 5.3–5.4 and needs no axiom.  The axioms
+`R₂^C` itself (`R2.Defs`) is DEFINED from [C09] Def 5.3–5.4 and needs no axiom.  The axioms
 below are about `R₁⁺ = (On; 0, +, ≤, ≤₁)` (Carlson's `R₁`, `≤₁` by `Σ₁`-elementarity) and
 Wilken's notation systems `Tᵗ` with the base change `π_{σ,τ}`; they are what Lemma FRAG
-(`Frag.lean`) uses.  Papers:
+(`R2.Frag`) uses.  Papers:
 
 * [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161;
 * [W07b] G. Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007) 162–175.

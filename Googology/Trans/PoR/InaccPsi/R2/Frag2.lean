@@ -3,7 +3,7 @@ import Googology.Trans.PoR.InaccPsi.R2.FragM
 /-!
 # Theorem FRAG2 for `R₂^C`
 
-Def SK and Theorem FRAG2 of the paper proof (see RESTARTS.md §1), for `R₂^C` as defined in `Defs.lean`.
+Def SK and Theorem FRAG2 of the project's paper proof, for `R₂^C` as defined in `R2.Defs`.
 `R₂^C` is skeletal on `Z` if for `a < b` in `Z`: (SK1) a non-`υ`-point `a` has
 `a ≤₁ b ⇔ a ≤₁ b in R₁⁺`; (SK2) a `υ`-point `a` has `a ≤₁ b ⇔ b ≤ cap(a)`; (SK3) `a <₂ b`
 only if `a` and `b` are `υ`-points (the paper proof asks `b = a^∞`; only this weaker form is used).

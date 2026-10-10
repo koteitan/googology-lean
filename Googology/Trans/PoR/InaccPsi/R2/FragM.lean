@@ -3,13 +3,13 @@ import Googology.Trans.PoR.InaccPsi.R2.FragBase
 /-!
 # Theorem FRAG (finite form, any number of bases)
 
-Theorem FRAG of the paper proof (see RESTARTS.md §1), with the domain `D_m` of `FragBase.lean` (parameters in
+Theorem FRAG of the project's paper proof, with the domain `D_m` of `R2.FragBase` (parameters in
 `Cl(D_{k})`).  The proof is an induction on the number of bases: the top segment `seg(b_m)` is
 pushed by `π_{β, b_m}` into `[β, β⁺) ⊆ seg(b_{m-1})`, `β = ϑ^{b_{m-1}}(Δ_M)` (Lemma COMP of
 the paper proof, with [W07a] Lemma 6.10 for the parameters), the induction hypothesis moves the
 lower `m` segments together with the compressed points, and `π_{γ, c_m}⁻¹`
 (`γ` the image of `β`) expands them into `seg(c_m)`.  This is the paper proof's composite
-`E_m ∘ ⋯ ∘ C_m` regrouped as an induction.  Axioms only from `Cited.lean`.
+`E_m ∘ ⋯ ∘ C_m` regrouped as an induction.  Axioms only from `R2.Cited`.
 -/
 
 namespace Googology.Trans.PoR.InaccPsi.R2
@@ -568,7 +568,7 @@ theorem frag_aux (m : ℕ) : ∀ {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}},
     · exact frag_one hb hc hF hbF
     · exact frag_step (fun F' hF' hbF' => ih hb.of_succ hc.of_succ F' hF' hbF') hb hc hF hbF
 
-/-- **Theorem FRAG** (the paper proof, see RESTARTS.md §1; finite form).  Let `κ` be a countable `υ`-point,
+/-- **Theorem FRAG** (the project's paper proof; finite form).  Let `κ` be a countable `υ`-point,
 `b_0 < ⋯ < b_{m-1}` and `c_0 < ⋯ < c_{m-1}` countable `υ`-points above `κ` (no other relation
 between the `b`'s and the `c`'s), and `F` a finite subset of
 `D_m = κ ∪ ⋃_k {x ∈ seg(b_k) ∩ Ω₁ ∩ T^{b_k} | Par^{b_k}(x) ⊆ Cl(D_k)}`.  There is `Ψ` with

@@ -2,11 +2,11 @@
 
 # $`R_2^+`$, the thirty-fifth to thirty-seventh rounds: the reaches of the skeleton up to $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$, the first gap of $`\mathrm{Core}(R_2^S)`$, and the stage route toward $`\theta_0`$
 
-This page continues [SHIFT8.md](SHIFT8.md) (§2 there is the thirty-fourth round); §1 is the thirty-fifth round, §2 the thirty-sixth, §3 the thirty-seventh; the thirty-eighth to fortieth rounds are on [SHIFT10.md](SHIFT10.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT8.md](SHIFT8.md) (§2 there is the thirty-fourth round); §1 is the thirty-fifth round, §2 the thirty-sixth, §3 the thirty-seventh; the thirty-eighth to fortieth rounds are on [SHIFT10.md](SHIFT10.md), the forty-first on [SHIFT11.md](SHIFT11.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 
-**Later (the fortieth round, [SHIFT10.md](SHIFT10.md) §3.2):** the frontiers of this page ($`L(G_2)`$, $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$, $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$, and $`Z^\Gamma`$ in $`R_2^S`$) rest on $`\nu_C = \nu_S = L(\omega+1)`$ and on the exact calculus in the gaps, which are not proved as written; so they are **not proved as written**. The code side (the tier maps), the results on (E) that use no reach, and the native codes stand. Given FRAG, the claim is proved in $`R_2^C`$ on $`[0, X_{21}]`$.
+**Later (the fortieth round, [SHIFT10.md](SHIFT10.md) §3.2):** the frontiers of this page ($`L(G_2)`$, $`L(\Omega_2+\Phi^{P'}\cdot\omega)`$, $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$, and $`Z^\Gamma`$ in $`R_2^S`$) rest on $`\nu_C = \nu_S = L(\omega+1)`$ and on the exact calculus in the gaps, which are not proved as written; so they are **not proved as written**. The code side (the tier maps), the results on (E) that use no reach, and the native codes stand. Given FRAG, the claim is proved in $`R_2^C`$ on $`[0, X_{21}]`$. **Later (the forty-first round, [SHIFT11.md](SHIFT11.md) §1.1):** $`\nu_C = \nu_S = L(\omega+1)`$ and the claim on $`[0, \nu_C]`$ are proved again, given FRAG; the exact calculus in the gaps above $`\nu_C`$ is not yet run again, so the results of this page above $`\nu_C`$ stay not proved as written.
 
 ## 1. The thirty-fifth round
 

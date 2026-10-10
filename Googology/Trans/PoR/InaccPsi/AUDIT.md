@@ -17,6 +17,8 @@ in [SHIFT7.md](SHIFT7.md) (one higher than in the papers). "Given FRAG" means gi
 
 **Later (the fortieth round, [SHIFT10.md](SHIFT10.md) §3.2):** a second audit and two referees found that the chain uses exact long reaches at codes where the old value is false (every $`m_0 \ge \Omega_1`$, for example the code $`G_2 + P`$ that CROSS-LIM crosses, and the landing for $`2 \le D \lt \hat G`$). So **T0 is not proved as written**, and so are the rows marked so below; the verdict above is superseded. The rows that use no exact long value at an affected code stand. FRAG (S13) and FRAG2 (S15) are now also proved in Lean from 20 cited facts ([LEAN.md](LEAN.md)).
 
+**Later (the forty-first round, [SHIFT11.md](SHIFT11.md) §1.1):** the corrected exact long reach is proved for every code below $`P'`$ at levels 1 and 2 (ENUM-REACH), and the chain was run again on it. So **T0 is proved again** (given FRAG; 1 review of the new proof), and so are the rows marked "not proved as written (fortieth round)" below, as the table of the forty-first round at the end of this page says. The rows S1 and S2 are replaced by ENUM-REACH.
+
 | node | statement | where | status | reviews | rests on |
 |---|---|---|---|---|---|
 | T0 | $`\nu_C = \nu_S = L(\omega+1)`$; the claim in $`R_2^C`$ on $`[0, \nu_C]`$ | [SHIFT7.md](SHIFT7.md) §2.1 | **not proved as written** (fortieth round) | 1 and the audit | T1, T2, T3, T4 |
@@ -91,3 +93,20 @@ It is now written (row T2b2).
 | the frontiers above $`\nu_C`$ up to $`Z^\Lambda`$ ([SHIFT7.md](SHIFT7.md) §3.2 to [SHIFT10.md](SHIFT10.md) §1), and $`[0, Z^\varepsilon)`$ in $`R_2^S`$ | not proved as written |
 | the exact long formulas at $`m_0 \ge \Omega_1`$, and the landing for $`2 \le D \lt \hat G`$ | false as stated (the upper bounds stand) |
 | the lower-bound step (b) of [SHIFT2.md](SHIFT2.md) §3.1, the step (b) of NO-READL ([SHIFT5.md](SHIFT5.md) §2.1) | wrong as proved; no later theorem needs them |
+
+**The table of the forty-first round** ([SHIFT11.md](SHIFT11.md) §1.1, §1.2; each result 1 review unless a count is given):
+
+| result | status after the forty-first round |
+|---|---|
+| ENUM-REACH: $`r(\lambda) = k_\lambda(\Theta_\lambda(m))`$ for every code $`m \lt P'`$, levels 1 and 2 (replaces S1, S2) | proved, given FRAG |
+| COUNT♯, LAND$`^{\omega\sharp}`$, NEST, SHADOW-PREFIX, BOUND♯, CAP♯, CROSS♯, MONO♯ | proved (the count without FRAG) |
+| TRANSLATION$`^{(3)}`$ (every code below $`G(\hat\zeta_3)`$) | proved by transfer, given FRAG |
+| CAP-0 below $`P'`$, not-LOW, CAP-1, LONG-CLASS$`^\Omega`$, NU-LOW″⁺, $`\nu_C \ge L(\omega+1)`$ (T1, T1b, T1c) | proved by transfer, given FRAG |
+| CROSS-LIM, (H4) and CAP-SUPPLY at the crossed codes, (C1)–(C3), TC⁺$`^\omega`$ (with (EQ) for the maps that raise codes proved after ENUM-REACH), EMB, ONTO-FIN, PAIR, UP, NU (T2, T2b, T2b1, T2c) | proved by transfer, given FRAG |
+| T0: $`\nu_C = \nu_S = L(\omega+1)`$, the claim on $`[0, \nu_C]`$; NU-NAME, LOW$`^\infty`$ | proved, given FRAG |
+| $`X_{22}`$, $`X_{23}`$ | below $`\nu_C`$, so covered by T0 |
+| $`X_9`$ to $`X_{18}`$, $`X_{19}^\flat`$, $`X_{19}^{\mathrm{lin}}`$; $`X_{19}`$ to $`X_{21}`$ | stand as written; with FAR-PIN$`^{L\sharp}`$ and EXP-BOUND (read again by the audit) |
+| LB-b-FALSE, NO-CROSS$`^F`$, TRANSLATION$`^e`$, TC⁺♯, EXP-BOUND | proved (EXP-BOUND: the normal form of $`\hat\zeta_H`$ is checked) |
+| EXACT-LONG$`^e`$ ([SHIFT6.md](SHIFT6.md) §1.2) | false at every code of its range |
+| NO-READL ([SHIFT5.md](SHIFT5.md) §2.1) | not proved as written |
+| the frontiers above $`\nu_C`$ up to $`Z^\Lambda`$, and $`[0, Z^\varepsilon)`$ in $`R_2^S`$ | not proved as written (the gap calculus is not run again) |

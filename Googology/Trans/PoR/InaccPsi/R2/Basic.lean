@@ -3,7 +3,7 @@ import Googology.Trans.PoR.InaccPsi.R2.Defs
 /-!
 # `R₂^C`: the recursion equations and the basic facts on `≤₁`, `≤₂`
 
-All proved from the definitions of `Defs.lean` ([C09] Def 2.3, 5.2–5.4), with no axiom.
+All proved from the definitions of `R2.Defs` ([C09] Def 2.3, 5.2–5.4), with no axiom.
 
 * `le1_iff`, `le2_iff`: the equations of [C09] Def 5.4, `α ≤ₙ β ⇔ α ≤ₙ^∞ β in R₂`.
 * `le1_le`, `le2_le1`, `le1_refl`, `le2_refl`, `le1_antisymm` ([C09] Lemma 5.5 (3)–(6), part).

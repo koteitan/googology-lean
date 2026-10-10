@@ -123,3 +123,13 @@ import Googology.Trans.PoR.InaccPsi.R2.Frag
 import Googology.Trans.PoR.InaccPsi.R2.FragBase
 import Googology.Trans.PoR.InaccPsi.R2.FragM
 import Googology.Trans.PoR.InaccPsi.R2.Frag2
+import Googology.Trans.PoR.InaccPsi.R2.Arith
+import Googology.Trans.PoR.InaccPsi.R2.CitedC09
+import Googology.Trans.PoR.InaccPsi.R2.CoreC
+import Googology.Trans.PoR.InaccPsi.R2.Move
+import Googology.Trans.PoR.InaccPsi.R2.CitedR1
+import Googology.Trans.PoR.InaccPsi.R2.Ups
+import Googology.Trans.PoR.InaccPsi.R2.R1Gap
+import Googology.Trans.PoR.InaccPsi.R2.CCF
+import Googology.Trans.PoR.InaccPsi.R2.Inc1
+import Googology.Trans.PoR.InaccPsi.R2.BlockC

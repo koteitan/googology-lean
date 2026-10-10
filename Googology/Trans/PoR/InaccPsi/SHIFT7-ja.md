@@ -2,11 +2,13 @@
 
 # $`R_2^+`$ の 30〜32 回目：どの深さでも相対的な遠いピン、LOW の否定、$`\nu_C = \nu_S = L(\omega+1)`$ とその監査、$`\nu_C`$ の上の $`X_A`$ までの主張、$`\psi_{\Omega_1}(\Omega_{\omega+1})`$ までの素の符号
 
-このページは [SHIFT6-ja.md](SHIFT6-ja.md) の続き（そこの §3 が 29 回目）。§1 が 30 回目、§2 が 31 回目、§3 が 32 回目。33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md)、35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md)、38〜40 回目は [SHIFT10-ja.md](SHIFT10-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT6-ja.md](SHIFT6-ja.md) の続き（そこの §3 が 29 回目）。§1 が 30 回目、§2 が 31 回目、§3 が 32 回目。33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md)、35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md)、38〜40 回目は [SHIFT10-ja.md](SHIFT10-ja.md)、41 回目は [SHIFT11-ja.md](SHIFT11-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
 **のちに（40 回目、[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）：** このページの節目は**書いたままでは証明されていない**。LAND$`^\omega`$（§1.1）は前のちょうどの長い値を使い、それは $`m_0 \ge \Omega_1`$ で偽。そして $`\nu_C`$ への鎖は $`P'`$ までの符号（たとえば符号 $`G_2 + P`$）での蓋とちょうどの届く先を要るが、それは今は $`\hat G + G_2`$ より下でだけ分かっている（[SHIFT10-ja.md](SHIFT10-ja.md) §3.1）。だから $`P'`$ より下の CAP-0、not-LOW、CAP-1、$`\nu_C \ge L(\omega+1)`$（§1.1）、CROSS-LIM、TC⁺$`^\omega`$、EMB、ONTO-FIN、PAIR、UP、NU、NU-NAME、LOW$`^\infty`$、$`\nu_C = \nu_S = L(\omega+1)`$（§2.1）、監査の判定（§3.1、[AUDIT-ja.md](AUDIT-ja.md)）、$`\nu`$ の区域と $`X_A`$（§3.2）は書いたままでは証明されていない。成り立つもの：相対的な移し（BC$`^{\mathrm{rel}}`$、CODE-MON、DOM$`^{\mathrm{rel}}`$、THETA-EQ$`^{\mathrm{rel}}`$、EQUIV$`^{\mathrm{rel}}`$、EQ-F$`^{\mathrm{rel}}`$）、型としての FAR-PIN$`^{L,\mathrm{rel}}`$、LC-STRICT の符号の不等式、判定 SHIFT、CAP$`^p`$、DECOUPLE$`^p`$、NONUPS、FRAG と FRAG2（今は Lean でも、[LEAN-ja.md](LEAN-ja.md)）、§1.3、§2.3、§3.3 の素の符号。LOW と LOW$`^\infty`$ はまた決まっていない。FRAG のもとで、主張は $`R_2^C`$ で $`[0, X_{21}]`$ で証明済み。
+
+**のちに（41 回目、[SHIFT11-ja.md](SHIFT11-ja.md) §1.1）：** §1.1 と §2.1 の鎖を、$`P'`$ より下のどの符号でも証明された直した値（ENUM-REACH）の上でもう一度走らせた。だから $`P'`$ より下の CAP-0、not-LOW、CAP-1、LONG-CLASS$`^\Omega`$、$`\nu_C \ge L(\omega+1)`$、CROSS-LIM、(C1)–(C3)、TC⁺$`^\omega`$、EMB、ONTO-FIN、PAIR、UP、NU、NU-NAME、LOW$`^\infty`$、$`[0, \nu_C]`$ での主張つきの $`\nu_C = \nu_S = L(\omega+1)`$ は、FRAG のもとでもう一度証明された（新しい証明で査読 1 回）。LOW はまた偽。$`\nu`$ の区域（§3.2）は書いたままでは証明されていないまま。
 
 ## 1. 30 回目
 

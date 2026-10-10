@@ -3,7 +3,7 @@ import Googology.Trans.PoR.InaccPsi.R2.Points
 /-!
 # Lemma ST and Lemma FRAG with one base (`m = 1`)
 
-Lemma ST and Theorem FRAG of the paper proof (see RESTARTS.md §1) for `m = 1`.  Axioms only from `Cited.lean`.
+Lemma ST and Theorem FRAG of the project's paper proof, for `m = 1`.  Axioms only from `R2.Cited`.
 
 * `st_le1` (**Lemma ST (b)**): one base change `π_{σ,τ}` keeps and reflects `≤₁` of `R₁⁺` on
   `Tᵗ[σ] ∩ (τ, Ω₁)` against `Tᵗ[σ]`.

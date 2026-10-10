@@ -2,11 +2,13 @@
 
 # $`R_2^+`$, the thirty-eighth to fortieth rounds: the window rule one step up, the first long restarts of the skeleton, the criterion as an induction, marked sources, the exact long reaches (a fatal point and a partial repair), capacities per unit, and FRAG in Lean
 
-This page continues [SHIFT9.md](SHIFT9.md) (§3 there is the thirty-seventh round); §1 is the thirty-eighth round, §2 the thirty-ninth and §3 the fortieth. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT9.md](SHIFT9.md) (§3 there is the thirty-seventh round); §1 is the thirty-eighth round, §2 the thirty-ninth and §3 the fortieth; the forty-first round is on [SHIFT11.md](SHIFT11.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a fatal or blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known, or of the target, is not counted as progress.
 
 **Later (the fortieth round, §3):** the frontiers of §1 and §2 ($`Z^\varepsilon`$, $`Z^\Lambda`$, and $`[0, Z^\varepsilon)`$ in $`R_2^S`$) rest on $`\nu_C = \nu_S = L(\omega+1)`$, which is **not proved as written** (the chain to it uses exact long reaches at codes where the old value is false); so are they. Their parts that use no reach (the code side, the schemata of §1.2 and §2.2, the native codes of §1.3 and §2.3) stand. Given FRAG, the claim is proved in $`R_2^C`$ on $`[0, X_{21}]`$ (§3.4).
+
+**Later (the forty-first round, [SHIFT11.md](SHIFT11.md) §1.1):** the corrected value is proved for every code below $`P'`$ (ENUM-REACH), and with it $`\nu_C = \nu_S = L(\omega+1)`$ and the claim on $`[0, \nu_C]`$ again, given FRAG (1 review). The frontiers of §1 and §2 above $`\nu_C`$ stay not proved as written: the exact calculus in the gaps is not yet run again.
 
 ## 1. The thirty-eighth round
 
@@ -372,7 +374,7 @@ r(\lambda) = k_\lambda(\Theta_\lambda(m)) = F(\nu, \tau_\nu + x),\qquad \rho_\nu
   codes below $`\hat G + G_2`$ (this bound is checked on 889 multipliers, as before) and uses no lower bound from the part $`D`$. The repaired form has 1 review (m6).
 - **Not proved.** Above $`X_{21}`$: $`X_{22}`$, $`X_{23}`$ ([SHIFT6.md](SHIFT6.md)), CAP-0 below $`P'`$, CAP-1, $`\nu_C \ge L(\omega+1)`$ ([SHIFT7.md](SHIFT7.md) §1.1) and every later step, since they use atoms or
   crossings at codes $`\ge \hat G + G_2`$. The value for every code below $`P'`$ is conjecture ENUM-REACH: past $`\hat G + G_2`$ the reach crosses long restarts, and the landing calculus must be done
-  again with the new landings. **One level up** (an outline, not counted; blocking point B-1 of the review): TRANSLATION″ below $`\hat G'' + G''(\omega^2)`$ and Theorems C$`^{\mathrm{LL}\sharp}`$, C$`^{\mathrm{FP}\sharp}`$ (the
+  again with the new landings. (Later: proved, [SHIFT11.md](SHIFT11.md) §1.1; a reach first crosses a long restart at the code $`G(\hat\zeta_3)`$, not right after $`\hat G + G_2`$.) **One level up** (an outline, not counted; blocking point B-1 of the review): TRANSLATION″ below $`\hat G'' + G''(\omega^2)`$ and Theorems C$`^{\mathrm{LL}\sharp}`$, C$`^{\mathrm{FP}\sharp}`$ (the
   claim in $`R_2^C`$ on $`[0, Z^{\mathrm{FP}}]`$), all under (H0) = ENUM-REACH below $`P'`$ with the chain to $`\nu_C`$ proved again on it; the proof of TRANSLATION″ only lists its tools. In the outline the
   code $`G''(\omega^2)\cdot 2`$ does not reach $`L(\lambda''+\omega^2\cdot 2)`$, so the first inequality of CROSS″ in §2.1 is withdrawn; its weak form $`r \ge L(\lambda''+\zeta)`$ is kept as part of the outline.
 
@@ -400,7 +402,7 @@ r(\lambda) = k_\lambda(\Theta_\lambda(m)) = F(\nu, \tau_\nu + x),\qquad \rho_\nu
   $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$, $`Z^\Gamma`$, $`Z^\varepsilon`$, $`Z^\Lambda`$, and in $`R_2^S`$ the range $`[0, Z^\varepsilon)`$. The audit also had $`X_{19}`$ to $`X_{21}`$ as not proved; §3.1 repairs them.
 - **Blocking points of the review against the inventory** (B-2, B-3). The lower-bound step (b) of [SHIFT2.md](SHIFT2.md) §3.1 has the same defect even when restricted, and so has the lower end of the
   bracket there. Further exact long formulas at affected codes are on [SHIFT3.md](SHIFT3.md) §1.1, §2.1 (the forms of EXACT-LONG), [SHIFT4.md](SHIFT4.md) §1.1 (EXACT-LONG-CL), [SHIFT5.md](SHIFT5.md) §2.2 (the
-  level-2 form) and [SHIFT6.md](SHIFT6.md) §1.2 (EXACT-LONG$`^e`$); they are false as stated too. The ranges up to $`X_{15}`$ are not affected, since they lie below $`X_{21}`$, which is proved again.
+  level-2 form) and [SHIFT6.md](SHIFT6.md) §1.2 (EXACT-LONG$`^e`$); they are false as stated too. The ranges up to $`X_{15}`$ are not affected, since they lie below $`X_{21}`$, which is proved again. (Later, the audit of [SHIFT11.md](SHIFT11.md) §1.2 settled B-2 and B-3: step (b) is false even when restricted (LB-b-FALSE), $`X_9`$ to $`X_{18}`$ stand as written, and $`X_{19}`$ to $`X_{21}`$ with FAR-PIN$`^{L\sharp}`$.)
 - **Not counted.** The table's verdicts "survives with the corrected value" (they rest on the open conjecture CV, its invariance and its pin), and the list of what must be proved again; that list
   is the plan of §3.6.
 
@@ -448,6 +450,8 @@ Each run was under 60 seconds; none is a proof.
 - The author of §3.1 disclosed one stray shell command (no effect).
 
 ### 3.6 Open
+
+Later: the milestone is proved again ([SHIFT11.md](SHIFT11.md) §1.1); the current list is [SHIFT11.md](SHIFT11.md) §1.6.
 
 - The milestone again, in this order: ENUM-REACH (the corrected value for every code below $`P'`$), its invariance under the transports and its far pin; then CAP-0 below $`P'`$, not-LOW, CAP-1,
   CROSS-LIM, TC⁺$`^\omega`$, EMB, ONTO-FIN, PAIR, UP and $`\nu_C = \nu_S = L(\omega+1)`$; then the frontiers above $`\nu_C`$ ($`X_A`$ to $`Z^\Lambda`$) and the $`R_2^S`$ side; then one level up (Theorems C$`^{\mathrm{LL}}`$,

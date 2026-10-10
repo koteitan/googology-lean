@@ -19,7 +19,7 @@ $`\Xi_\omega = \sup_n \Xi_n`$。$`\lambda \lt \Xi_\omega`$ では $`c^*(\lambda)
 
 ## 1. 補題 FRAG（証明済み、査読 2 回）
 
-**のちに（40 回目）：** FRAG（可算の基がいくつでも）と FRAG2 は今は Lean でも証明済みで、[W07a] と [W07b] から引いた 20 個の事実から出る（[LEAN-ja.md](LEAN-ja.md)、[SHIFT10-ja.md](SHIFT10-ja.md) §3.3）。下の §2 の FRAG″ (d) と FRAG2″ は書いたままでは証明されていない（[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）。
+**のちに（40 回目）：** FRAG（可算の基がいくつでも）と FRAG2 は今は Lean でも証明済みで、[W07a] と [W07b] から引いた 20 個の事実から出る（[LEAN-ja.md](LEAN-ja.md)、[SHIFT10-ja.md](SHIFT10-ja.md) §3.3）。下の §2 の FRAG″ (d) と FRAG2″ は書いたままでは証明されていない（[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）。**のちに（41 回目）：** Lean には今は INC1 と、$`R_2^C`$ で FRAG と FRAG2 を初めて使う結果もある（[LEAN-ja.md](LEAN-ja.md)、[SHIFT11-ja.md](SHIFT11-ja.md) §1.3）。
 
 2 回目の査読は 32 回目の監査で、論文の本文から証明を導き直した（[SHIFT7-ja.md](SHIFT7-ja.md) §3.1）。FRAG2 と FRAG-SUBST も同じ。
 

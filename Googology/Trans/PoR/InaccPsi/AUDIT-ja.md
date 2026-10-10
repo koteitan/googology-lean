@@ -17,6 +17,8 @@
 
 **のちに（40 回目、[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）：** 2 つ目の確かめと 2 人の査読者は、この鎖が、前の値が偽になる符号（$`m_0 \ge \Omega_1`$ のどれでも。たとえば CROSS-LIM がまたぐ符号 $`G_2 + P`$。そして $`2 \le D \lt \hat G`$ での着地）でのちょうどの長い届く先を使うことを見つけた。だから **T0 は書いたままでは証明されていない**。下でそう印をつけた行も同じ。上の判定は置き換えた。影響を受ける符号でのちょうどの長い値を使わない行は成り立つ。FRAG（S13）と FRAG2（S15）は今は引いた 20 個の事実から Lean でも証明済み（[LEAN-ja.md](LEAN-ja.md)）。
 
+**のちに（41 回目、[SHIFT11-ja.md](SHIFT11-ja.md) §1.1）：** 直したちょうどの長い届く先は段 1 と 2 で $`P'`$ より下のどの符号でも証明済み（ENUM-REACH）で、鎖はその上でもう一度走らせた。だから **T0 はもう一度証明された**（FRAG のもと。新しい証明で査読 1 回）。下で「書いたままでは証明されていない（40 回目）」と印をつけた行も、このページの最後の 41 回目の表のとおり同じ。行 S1 と S2 は ENUM-REACH に置き換わる。
+
 | 節 | 主張 | 場所 | 状態 | 査読 | 立つもの |
 |---|---|---|---|---|---|
 | T0 | $`\nu_C = \nu_S = L(\omega+1)`$。$`R_2^C`$ の $`[0, \nu_C]`$ での主張 | [SHIFT7-ja.md](SHIFT7-ja.md) §2.1 | **書いたままでは証明されていない**（40 回目） | 1 と監査 | T1、T2、T3、T4 |
@@ -91,3 +93,20 @@ $`[\psi_{\Omega_2}(\Omega_2), P')`$ にあるときの LONG-RS$`^U`$（R-1）：
 | $`\nu_C`$ より上の $`Z^\Lambda`$ までの最前線（[SHIFT7-ja.md](SHIFT7-ja.md) §3.2 から [SHIFT10-ja.md](SHIFT10-ja.md) §1）と、$`R_2^S`$ での $`[0, Z^\varepsilon)`$ | 書いたままでは証明されていない |
 | $`m_0 \ge \Omega_1`$ でのちょうどの長い式と、$`2 \le D \lt \hat G`$ での着地 | 書いたとおりでは偽（上からの評価は成り立つ） |
 | [SHIFT2-ja.md](SHIFT2-ja.md) §3.1 の下からの評価の段階 (b)、NO-READL の段階 (b)（[SHIFT5-ja.md](SHIFT5-ja.md) §2.1） | 証明のとおりでは誤り。のちの定理はどれもそれを要らない |
+
+**41 回目の表**（[SHIFT11-ja.md](SHIFT11-ja.md) §1.1、§1.2。回数を書いていなければ査読 1 回）：
+
+| 結果 | 41 回目のあとの状態 |
+|---|---|
+| ENUM-REACH：段 1 と 2 の $`P'`$ より下のどの符号 $`m`$ でも $`r(\lambda) = k_\lambda(\Theta_\lambda(m))`$（S1、S2 に代わる） | 証明済み、FRAG のもと |
+| COUNT♯、LAND$`^{\omega\sharp}`$、NEST、SHADOW-PREFIX、BOUND♯、CAP♯、CROSS♯、MONO♯ | 証明済み（数え上げは FRAG 無し） |
+| TRANSLATION$`^{(3)}`$（$`G(\hat\zeta_3)`$ より下のどの符号でも） | 移しで証明済み、FRAG のもと |
+| $`P'`$ より下の CAP-0、not-LOW、CAP-1、LONG-CLASS$`^\Omega`$、NU-LOW″⁺、$`\nu_C \ge L(\omega+1)`$（T1、T1b、T1c） | 移しで証明済み、FRAG のもと |
+| CROSS-LIM、またいだ符号での (H4) と CAP-SUPPLY、(C1)–(C3)、TC⁺$`^\omega`$（符号を上げる写像の (EQ) は ENUM-REACH のあとで証明）、EMB、ONTO-FIN、PAIR、UP、NU（T2、T2b、T2b1、T2c） | 移しで証明済み、FRAG のもと |
+| T0：$`\nu_C = \nu_S = L(\omega+1)`$、$`[0, \nu_C]`$ での主張。NU-NAME、LOW$`^\infty`$ | 証明済み、FRAG のもと |
+| $`X_{22}`$、$`X_{23}`$ | $`\nu_C`$ より下なので T0 が覆う |
+| $`X_9`$ から $`X_{18}`$、$`X_{19}^\flat`$、$`X_{19}^{\mathrm{lin}}`$。$`X_{19}`$ から $`X_{21}`$ | 書いたままで成り立つ。FAR-PIN$`^{L\sharp}`$ と EXP-BOUND で成り立つ（監査がもう一度読んだ） |
+| LB-b-FALSE、NO-CROSS$`^F`$、TRANSLATION$`^e`$、TC⁺♯、EXP-BOUND | 証明済み（EXP-BOUND：$`\hat\zeta_H`$ の標準形は確かめ） |
+| EXACT-LONG$`^e`$（[SHIFT6-ja.md](SHIFT6-ja.md) §1.2） | その範囲のどの符号でも偽 |
+| NO-READL（[SHIFT5-ja.md](SHIFT5-ja.md) §2.1） | 書いたままでは証明されていない |
+| $`\nu_C`$ より上の $`Z^\Lambda`$ までの最前線と、$`R_2^S`$ での $`[0, Z^\varepsilon)`$ | 書いたままでは証明されていない（区間の計算はやり直していない） |

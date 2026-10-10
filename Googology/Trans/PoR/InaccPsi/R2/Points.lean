@@ -11,9 +11,9 @@ import Googology.Trans.PoR.InaccPsi.R2.Cited
   second half of [W07b] Cor 5.10 and is not used).
 * `IsNext b m`: `m = b^∞`, the least `υ`-point above `b`; `seg(b) = [b, b^∞)`.
 * `IsRestartIdx λ` (`λ` a nonzero multiple of `ω²`), `rho λ = υ_λ` (the restart `ρ_λ`),
-  `reach x = lh(x)` in `R₂^C`, `rReach λ = r(λ) = lh(ρ_λ)` (RESTARTS.md, REACHES.md, PINS.md).
+  `reach x = lh(x)` in `R₂^C`, `rReach λ = r(λ) = lh(ρ_λ)` (the project's notation for restarts and reaches).
 
-Proved (axioms only from `Cited.lean`):
+Proved (axioms only from `R2.Cited`):
 * `upsPt_inE`: a nonzero `υ`-point is an `ε`-number;
 * `le1R_lt_ups`: for a `υ`-point `κ`, `x < κ ≤ y`: `x ≤₁ y ⇔ x <₁ ∞` (in `R₁⁺`);
 * `not_le1R_gap`: a point strictly inside `seg(b)` is not `≤₁` anything `≥ b^∞`;

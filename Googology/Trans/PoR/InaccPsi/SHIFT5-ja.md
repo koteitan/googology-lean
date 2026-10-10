@@ -2,11 +2,11 @@
 
 # $`R_2^+`$ の 25 回目と 26 回目：FRAG のもとで $`\nu_C \ge X_{21}`$、着地の蓋と包の蓋、最初の添字の不動点までの長いちょうどの届く先、どの段でも TC⁺、どの η でも GEN、$`\psi_{\Omega_1}(\Omega_\omega\cdot\varepsilon_0)`$ までの素の符号
 
-このページは [SHIFT4-ja.md](SHIFT4-ja.md) の続き（そこの §2 が 24 回目）。§1 が 25 回目、§2 が 26 回目。27 回目から 29 回目は [SHIFT6-ja.md](SHIFT6-ja.md)、30〜32 回目は [SHIFT7-ja.md](SHIFT7-ja.md)、33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md)、35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md)、38〜40 回目は [SHIFT10-ja.md](SHIFT10-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT4-ja.md](SHIFT4-ja.md) の続き（そこの §2 が 24 回目）。§1 が 25 回目、§2 が 26 回目。27 回目から 29 回目は [SHIFT6-ja.md](SHIFT6-ja.md)、30〜32 回目は [SHIFT7-ja.md](SHIFT7-ja.md)、33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md)、35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md)、38〜40 回目は [SHIFT10-ja.md](SHIFT10-ja.md)、41 回目は [SHIFT11-ja.md](SHIFT11-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
-**のちに（39 回目と 40 回目、[SHIFT10-ja.md](SHIFT10-ja.md) §2.1、§3.1、§3.2）：** 長い届く先のちょうどの値 $`r(\lambda) = r(\nu) + o_\nu(m_0)`$（EXACT-LONG とその後の形）は、$`m_0`$ を着地の点 $`\nu`$ で読み、$`\upsilon_{\lambda+\omega^2\cdot\Theta(D)}`$ に着地するが、書いたとおりでは偽：実現は $`\rho_\lambda`$ より下の定数しか持たないので、値は $`m_0 \ge \Omega_1`$ のどこでも誤りで、着地は $`2 \le D \lt \hat G`$ で誤り（だから CROSS-O は $`x = 2`$ で偽）。上からの評価の半分は正しいまま。直した値（TRANSLATION、[SHIFT10-ja.md](SHIFT10-ja.md) §3.1）は $`\hat G + G_2`$ より下のどの符号でも証明済み。このページでは：EXACT-LONG⁺（§1.1）、EXACT-LONG$`^G`$ と EXACT-F（§2.1）、§2.2 の段 2 の形は書いたとおりでは偽。遠い留め、着地の蓋、$`X_{19}`$、$`X_{20}`$、$`X_{21}`$ は直した原子で成り立つ（FAR-PIN$`^{L\sharp}`$。直しについて査読 1 回）。長い符号での §1.2 の TC⁺ とまたぎは、書いたままでは証明されていない。
+**のちに（39 回目と 40 回目、[SHIFT10-ja.md](SHIFT10-ja.md) §2.1、§3.1、§3.2）：** 長い届く先のちょうどの値 $`r(\lambda) = r(\nu) + o_\nu(m_0)`$（EXACT-LONG とその後の形）は、$`m_0`$ を着地の点 $`\nu`$ で読み、$`\upsilon_{\lambda+\omega^2\cdot\Theta(D)}`$ に着地するが、書いたとおりでは偽：実現は $`\rho_\lambda`$ より下の定数しか持たないので、値は $`m_0 \ge \Omega_1`$ のどこでも誤りで、着地は $`2 \le D \lt \hat G`$ で誤り（だから CROSS-O は $`x = 2`$ で偽）。上からの評価の半分は正しいまま。直した値（TRANSLATION、[SHIFT10-ja.md](SHIFT10-ja.md) §3.1）は $`\hat G + G_2`$ より下のどの符号でも証明済み。このページでは：EXACT-LONG⁺（§1.1）、EXACT-LONG$`^G`$ と EXACT-F（§2.1）、§2.2 の段 2 の形は書いたとおりでは偽。遠い留め、着地の蓋、$`X_{19}`$、$`X_{20}`$、$`X_{21}`$ は直した原子で成り立つ（FAR-PIN$`^{L\sharp}`$。直しについて査読 1 回）。長い符号での §1.2 の TC⁺ とまたぎは、書いたままでは証明されていない。NO-READL（§2.1）は書いたままでは証明されていない。 **のちに（41 回目、[SHIFT11-ja.md](SHIFT11-ja.md) §1.1、§1.2）：** 直した値は $`P'`$ より下のどの符号でも証明済み（ENUM-REACH）。監査が $`X_{21}`$ より下のどのちょうどの長い式も分類し、$`X_{21}`$ より下のどの範囲も下がらない。
 
 ## 1. 25 回目
 
@@ -136,7 +136,7 @@ GEN、GEN-EXT、GEN⁺ は GEN-ALL を制限したものなので、[SHIFT4-ja.m
 
 ### 1.4 25 回目のあとの状態
 
-26 回目から 40 回目でこの状態は変わった。§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §3.4、[SHIFT7-ja.md](SHIFT7-ja.md) §1.4、§2.4、§3.4、[SHIFT8-ja.md](SHIFT8-ja.md) §1.4、§2.4、[SHIFT9-ja.md](SHIFT9-ja.md) §1.4、§2.4、§3.4、[SHIFT10-ja.md](SHIFT10-ja.md) §1.4、§2.4、§3.4 を見よ。
+26 回目から 41 回目でこの状態は変わった。§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §3.4、[SHIFT7-ja.md](SHIFT7-ja.md) §1.4、§2.4、§3.4、[SHIFT8-ja.md](SHIFT8-ja.md) §1.4、§2.4、[SHIFT9-ja.md](SHIFT9-ja.md) §1.4、§2.4、§3.4、[SHIFT10-ja.md](SHIFT10-ja.md) §1.4、§2.4、§3.4、[SHIFT11-ja.md](SHIFT11-ja.md) §1.4 を見よ。
 
 - $`R_2^C`$ での Wilken の主張：$`[0, X_4]`$ では FRAG 無しで、$`[0, X_{19}]`$ では FRAG のもとで（$`[0, X_{18}]`$ は査読 2 回）両方の半分とも成り立つ。核の側は $`[0, \nu_C]`$ で成り立つ。
   $`\nu_C`$ の InaccPsi による上からの評価は無い：名前の付いた組での (P) は未解決のまま。
@@ -162,7 +162,7 @@ GEN、GEN-EXT、GEN⁺ は GEN-ALL を制限したものなので、[SHIFT4-ja.m
 
 ### 1.6 未解決
 
-26 回目から 40 回目でこの一覧は変わった。今の一覧は [SHIFT10-ja.md](SHIFT10-ja.md) §3.6 にある。
+26 回目から 41 回目でこの一覧は変わった。今の一覧は [SHIFT11-ja.md](SHIFT11-ja.md) §1.6 にある。
 
 - 上からの評価：$`\nu_C`$ について名前の付いた 1 つの組での (P) と (Q′)。(P) には $`G(\hat\zeta_\varepsilon)`$ より先の蓋と、符号 $`P'`$ での下からの評価が要り、(Q′) には $`L(\omega)`$ の等最小の
   パターンが要る。$`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価。
@@ -237,7 +237,7 @@ $`R(\hat\zeta_G) = \hat G`$、$`R(\hat\zeta_A) = \hat G + \Omega_1`$、$`R(\hat\
 $`\nu_C \ge X_{20} = \psi_{\Omega_1}(\Omega_\omega + \theta_2\cdot\hat\zeta_A + \omega^{G(\hat\zeta_A)+1}\cdot 2)`$ を与え、新しい道具の一部だけでは $`X_{19}`$ と $`X_{20}`$ の間の 3 つの点を与える。（査読者：$`\hat\zeta_A`$ での
 天井は確かめただけでなく証明済み。）**仮定つき。数えない**：LOW が偽なら $`\nu_C \ge \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{G(\hat\zeta_H)+1})`$。
 
-- **未証明**（未解決。$`\theta_2+1`$ での PSI-θ による $`D \lt G(\hat\zeta_3)`$ の長いちょうどの届く先、[SHIFT6-ja.md](SHIFT6-ja.md) §1.1、はいくつかの符号で進行を止める点を持っていた、そこの §2.1。そこの §3.1 の直した値で証明済みで、$`\varepsilon_{G(\hat\zeta_G)+1}`$ までも同じ）：$`D \gt \hat G`$ での長いちょうどの届く先（$`\Phi^{\hat G}`$（$`\hat G`$ の上の $`\Phi'`$ の類似）より下では基 $`F_\lambda`$ で読むあらすじ。$`\Phi^{\hat G}`$ からは添字
+- **未証明**（未解決。$`\theta_2+1`$ での PSI-θ による $`D \lt G(\hat\zeta_3)`$ の長いちょうどの届く先、[SHIFT6-ja.md](SHIFT6-ja.md) §1.1、はいくつかの符号で進行を止める点を持っていた、そこの §2.1。そこの §3.1 の直した値は直っていないので、その道では書いたままでは証明されていない。今は ENUM-REACH で証明済み、[SHIFT11-ja.md](SHIFT11-ja.md) §1.1）：$`D \gt \hat G`$ での長いちょうどの届く先（$`\Phi^{\hat G}`$（$`\hat G`$ の上の $`\Phi'`$ の類似）より下では基 $`F_\lambda`$ で読むあらすじ。$`\Phi^{\hat G}`$ からは添字
   $`\theta_2 + 1`$ での PSI-θ が要り、それは証明されていない。実現の読み方と蓋の読み方がまだ違うのはここ）。$`\hat\zeta_H`$ より先の READ$`^\sharp`$（予想。やり直し自身の前置きによる
   最初の越えは $`\hat\zeta_f`$。$`\Omega_k`$（$`k \ge 4`$）と $`\Omega_\omega`$ では包が入れ子になる）。どの正規の乗数でも READ$`^\sharp`$ なら $`P'`$ より下で CAP-0、だから LOW は偽。LOW。(P)。(Q′)。
 - 査読者のほかの細かい点：NO-READL は新しい EXACT-LONG$`^G`$ と EXACT-F に頼る（NO-LIT は頼らなかった）。途中の長いやり直しの蓋について 1 行（移しの定義域に入る）。
@@ -300,7 +300,7 @@ $`\nu_C \ge X_{20} = \psi_{\Omega_1}(\Omega_\omega + \theta_2\cdot\hat\zeta_A + 
 
 ### 2.4 26 回目のあとの状態
 
-27 回目から 40 回目でこの状態は変わった。[SHIFT6-ja.md](SHIFT6-ja.md) §3.4、[SHIFT7-ja.md](SHIFT7-ja.md) §1.4、§2.4、§3.4、[SHIFT8-ja.md](SHIFT8-ja.md) §1.4、§2.4、[SHIFT9-ja.md](SHIFT9-ja.md) §1.4、§2.4、§3.4、[SHIFT10-ja.md](SHIFT10-ja.md) §1.4、§2.4、§3.4 を見よ。
+27 回目から 41 回目でこの状態は変わった。[SHIFT6-ja.md](SHIFT6-ja.md) §3.4、[SHIFT7-ja.md](SHIFT7-ja.md) §1.4、§2.4、§3.4、[SHIFT8-ja.md](SHIFT8-ja.md) §1.4、§2.4、[SHIFT9-ja.md](SHIFT9-ja.md) §1.4、§2.4、§3.4、[SHIFT10-ja.md](SHIFT10-ja.md) §1.4、§2.4、§3.4、[SHIFT11-ja.md](SHIFT11-ja.md) §1.4 を見よ。
 
 - $`R_2^C`$ での Wilken の主張：$`[0, X_4]`$ では FRAG 無しで、$`[0, X_{21}]`$ では FRAG のもとで（$`[0, X_{18}]`$ は査読 2 回）両方の半分とも成り立つ。核の側は $`[0, \nu_C]`$ で成り立つ。
   $`\nu_C`$ の InaccPsi による上からの評価は無い：名前の付いた組での (P) は未解決のまま。
@@ -327,7 +327,7 @@ $`\nu_C \ge X_{20} = \psi_{\Omega_1}(\Omega_\omega + \theta_2\cdot\hat\zeta_A + 
 
 ### 2.6 未解決
 
-27 回目から 40 回目でこの一覧は変わった。今の一覧は [SHIFT10-ja.md](SHIFT10-ja.md) §3.6 にある。
+27 回目から 41 回目でこの一覧は変わった。今の一覧は [SHIFT11-ja.md](SHIFT11-ja.md) §1.6 にある。
 
 - 上からの評価：$`\nu_C`$ について名前の付いた 1 つの組での (P) と (Q′)。(P) には $`G(\hat\zeta_H)`$ より先の蓋と、符号 $`P'`$ での下からの評価が要り、(Q′) には $`L(\omega)`$ の等最小の
   パターンが要る。$`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価。
