@@ -32,7 +32,10 @@ def LeInfC (κ : Ordinal.{0}) : Prop := ∀ a, κ ≤ a → le1 κ a
 `P*` of `R₂` such that 1. `P*` is isomorphic to `P`. 2. `|P*| ≤pw |Q|` whenever `Q` is a closed
 substructure of `R₂` which is a covering of `P*`. 3. `P*` is an isominimal substructure of `R₂`."
 Stated for `P` the finite closed substructure of `R₂` with universe `A` (a pattern by [C09]
-Lemma 5.7 (2), covered by the identity). -/
+Lemma 5.7 (2), covered by the identity).  The case `0 ∉ A` (allowed by `Closed`) follows from the case
+`0 ∈ A`: apply the theorem to `A ∪ {0}` and remove `0` from the copy; in `R₂` the relation `0 ≤ᵢ b`
+holds only for `b = 0` (the clause of [C09] Def 5.3 with `Y = {0}` fails), and isomorphisms and
+coverings send `0` to `0`, the only `x` with `x + x = x`. -/
 axiom C09_thm14_10 {A : Finset Ordinal.{0}} (hA : Closed ↑A) :
     ∃ Ps : Finset Ordinal.{0}, (∃ g, Iso R2C ↑A ↑Ps g) ∧
       (∀ Q : Finset Ordinal.{0}, Closed ↑Q → (∃ h, Cov R2C R2C ↑Ps ↑Q h) → PwLe Ps Q) ∧

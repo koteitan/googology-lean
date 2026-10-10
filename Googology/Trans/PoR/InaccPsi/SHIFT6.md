@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the twenty-seventh to twenty-ninth rounds: exact long reaches, the cushion cap, the blocking point B-1 and its repair, the reduction EX-RED$`^w`$, the moved-lower pin, and native codes up to $`\psi_{\Omega_1}(\Omega_\omega\cdot\Omega_2)`$
 
-This page continues [SHIFT5.md](SHIFT5.md) (§2 there is the twenty-sixth round); §1 is the twenty-seventh round, §2 the twenty-eighth, §3 the twenty-ninth; the thirtieth to thirty-second rounds are on [SHIFT7.md](SHIFT7.md), the thirty-third and thirty-fourth on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md), the thirty-eighth to fortieth on [SHIFT10.md](SHIFT10.md), the forty-first on [SHIFT11.md](SHIFT11.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT5.md](SHIFT5.md) (§2 there is the twenty-sixth round); §1 is the twenty-seventh round, §2 the twenty-eighth, §3 the twenty-ninth; the thirtieth to thirty-second rounds are on [SHIFT7.md](SHIFT7.md), the thirty-third and thirty-fourth on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md), the thirty-eighth to fortieth on [SHIFT10.md](SHIFT10.md), the forty-first and forty-second on [SHIFT11.md](SHIFT11.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 

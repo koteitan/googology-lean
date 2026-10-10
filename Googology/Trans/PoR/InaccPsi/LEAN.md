@@ -1,14 +1,15 @@
 [← Back](README.md) | [English](LEAN.md) | [Japanese](LEAN-ja.md)
 
-# $`R_2^+`$ in Lean: $`R_2^C`$, the core, and FRAG
+# $`R_2^+`$ in Lean: $`R_2^C`$, the core, FRAG, and the blocks below $`\upsilon_{\omega^3}`$
 
-This page describes the Lean files of the directory [R2/](R2/) (namespace `Googology.Trans.PoR.InaccPsi.R2`), added in the fortieth round ([SHIFT10.md](SHIFT10.md) §3.3, stage 1) and the
-forty-first round ([SHIFT11.md](SHIFT11.md) §1.3, stage 2). Every file builds as a module with the whole library (`lake build`, green, no `sorry`). The audit of each stage found every axiom
+This page describes the Lean files of the directory [R2/](R2/) (namespace `Googology.Trans.PoR.InaccPsi.R2`), added in the fortieth round ([SHIFT10.md](SHIFT10.md) §3.3, stage 1), the
+forty-first round ([SHIFT11.md](SHIFT11.md) §1.3, stage 2) and the forty-second round ([SHIFT11.md](SHIFT11.md) §2.3, stage 3). Every file builds as a module with the whole library (`lake build`, green, no `sorry`). The audit of each stage found every axiom
 faithful to the paper it cites, every definition right, and every main theorem proved by Lean; it found no fatal and no blocking point.
 
 **What this changes.** Almost every result above $`\upsilon_{\omega\cdot\omega}`$ on the other pages is stated "given FRAG". FRAG is now a Lean theorem whose only non-standard axioms are 20
-facts cited from two papers of Wilken (and 7 constants for the objects of those papers). So "given FRAG" can be read as "given these 20 cited facts". The second stage adds INC1, Carlson's theorems on the core and Theorem CP. The axioms are in three files, Cited, CitedR1 and
-CitedC09: 40 axioms in all (8 constants and 32 facts).
+facts cited from two papers of Wilken (and 7 constants for the objects of those papers). So "given FRAG" can be read as "given these 20 cited facts". The second stage adds INC1, Carlson's theorems on the core and Theorem CP. The third stage adds Lemma L and the structure of $`R_2^C`$ below $`\upsilon_{\omega^3}`$
+(the first pair, Theorems B and B″ with TOP, RS and SK3). The axioms are in four files, Cited, CitedR1, CitedC09 and CitedL: 44 axioms in all (9 constants and 35 facts).
+These counts, and every count of axioms on this page, leave out Lean's three standard axioms `propext`, `Classical.choice`, `Quot.sound` (so a raw `#print axioms` lists three more).
 
 ## 1. The files
 
@@ -33,6 +34,14 @@ CitedC09: 40 axioms in all (8 constants and 32 facts).
 | [R2/CCF.lean](R2/CCF.lean) | Theorem CC-F (closed covering copies in $`R_1^+`$) | cited |
 | [R2/Inc1.lean](R2/Inc1.lean) | LEFT-AT, FANCOF, PI2-UP, CLEAN-C, NOBAD; Theorem INC1 | cited |
 | [R2/BlockC.lean](R2/BlockC.lean) | RIGHT-LIM, LEFT with a limit index, RE-U, SK1 in a block, $`R_2^C = R_1^+`$ for $`\le_1`$ below the first pair, FRAG2 and FRAG with the reduced skeleton | cited |
+| [R2/CitedL.lean](R2/CitedL.lean) | the four axioms of stage 3 (§2.4) | — |
+| [R2/ChainL.lean](R2/ChainL.lean) | Lemma L (the bound on chains, also inside a gap) | cited (16) |
+| [R2/BaseC.lean](R2/BaseC.lean) | the base change and its inverse keep additive principal numbers and $`\le_1`$ of $`R_1^+`$; closed images | cited |
+| [R2/Pair1.lean](R2/Pair1.lean) | Theorem A in $`R_2^C`$: the first pair $`\upsilon_\omega \lt_2 \upsilon_{\omega+1}`$; Lemma COMP-C | cited (35) |
+| [R2/BlockB.lean](R2/BlockB.lean) | SK1 in a block; Theorem B (the pairs below $`\upsilon_{\omega\cdot\omega}`$) | cited (35) |
+| [R2/RstC.lean](R2/RstC.lean) | a restart and its first block: Lemma C″ (a), B″4, TOP | cited (35) |
+| [R2/Blk3.lean](R2/Blk3.lean) | every restart below $`\upsilon_{\omega^3}`$: Theorem B″, the pairs below $`\upsilon_{\omega^3}`$, SK3 | cited (35) |
+| [R2/RS.lean](R2/RS.lean) | Lemmas RS and RS$`^h`$: the reach of $`\rho_h`$ | cited (41) |
 
 Two readings in [R2/Defs.lean](R2/Defs.lean) are equivalent to Carlson's text and are explained there: clauses (c) and (d) of $`\le_2^\infty`$ are one covering (a covering of finite sets is the order
 isomorphism), and "any finite structure" ranges over finite closed sets of ordinals with relations (every finite arithmetic structure is isomorphic to one, Carlson 2009, remark after L.4.6).
@@ -103,6 +112,18 @@ have either, but it reprints the proof, so nothing is taken from that paper. A c
 These are the first axioms that mention $`R_2^C`$: they would be false if the Lean $`R_2^C`$ differed from Carlson's (both audits found the definitions literal). The Lean form of Thm 14.10
 also allows sets without $`0`$; that case follows from the case with $`0`$, since $`0 \le_i b`$ only for $`b = 0`$ and coverings keep $`0`$ out.
 
+### 2.4 Stage 3 ([R2/CitedL.lean](R2/CitedL.lean))
+
+| axiom | statement (short) | source |
+|---|---|---|
+| `lhT` (constant) | $`\mathrm{lh}^\tau(\alpha)`$, defined for $`\alpha \in T^\tau \cap \Omega_1`$ | [W07b] Def 4.1 |
+| `lh_eq_lhT` | for $`\tau \in \{1\} \cup E`$ countable and $`\alpha \in T^\tau`$ additive principal with $`\tau \lt \alpha \lt \Omega_1`$, the reach of $`\alpha`$ in $`R_1^+`$ is $`\mathrm{lh}^\tau(\alpha)`$ | [W07b] Thm 5.3 |
+| `ht_lhT_lt` | for such $`\alpha`$ that is an $`\varepsilon`$-number: $`\mathrm{ht}_\alpha(\mathrm{lh}^\tau(\alpha)) \lt \mathrm{ht}_\tau(\alpha)`$ | [W07b] L.4.5 |
+| `Par_sub` | $`\mathrm{Par}^\tau(\alpha) \subseteq \tau`$ (stated for $`\tau \in E`$ only; the paper also has $`\tau = 1`$, which is not needed) | [W07a] Def 3.28 |
+
+The audit found all four faithful. "$`\alpha = \vartheta^\tau(\Delta + \eta)`$" of the paper is read as "$`\alpha`$ is additive principal", by the join already in CitedR1, and "$`\Delta \gt 0`$" as
+"$`\alpha`$ is an $`\varepsilon`$-number" ([W07a] L.4.3). No new axiom mentions $`R_2^C`$, and no theorem of stage 3 uses an axiom of CitedC09.
+
 ## 3. The theorems
 
 "None" means only Lean's standard axioms `propext`, `Classical.choice`, `Quot.sound` (by `#print axioms`).
@@ -144,17 +165,32 @@ also allows sets without $`0`$; that case follows from the case with $`0`$, sinc
 The proof of INC1 uses [W07b] Cor 5.9 (finitely many $`\lt_1`$-predecessors inside a gap) in place of the project's Lemma L, which makes it simpler. The audit printed the axioms of 101
 theorems; every one uses only Lean's three standard axioms and the 40 cited ones.
 
+**Stage 3.** In `thmB2_C`, `rs_h` and `reach_rst` the Lean index is one less than the paper's: Lean's $`h`$ is the restart $`\rho_{h+1} = \upsilon_{\omega^2(h+1)}`$.
+
+| theorem | statement | axioms |
+|---|---|---|
+| `chain_bound`, `chain_bound_gap` | **Lemma L**: for $`\tau \in \{1\} \cup E`$ and $`z_0 \in T^\tau \cap (\tau, \Omega_1)`$, a chain $`z_0 \lt_1 \dots \lt_1 z_k`$ of $`R_1^+`$ has $`k \le \mathrm{ht}_\tau(z_0) + 1`$; the same inside a gap | cited (16) |
+| `thmA_C`, `first_pair` | **Theorem A**: $`\upsilon_\omega \lt_2 \upsilon_{\omega+1}`$ is the least pair of $`R_2^C`$, with $`\upsilon_\omega`$ its only left end; $`\le_1 = \le_1`$ of $`R_1^+`$ up to $`\upsilon_{\omega+1}`$; no point at most $`\upsilon_{\omega+1}`$ is $`\le_1`$ to a larger point | cited (35) |
+| `comp_c` | **Lemma COMP-C**: the compression of a segment (Theorem CC-F, then the inverse base change) is a covering of $`R_2^C`$ | cited (35) |
+| `thmB_C` | **Theorem B**: below $`\upsilon_{\omega\cdot\omega}`$ the pairs are exactly $`(\upsilon_{\omega(j+1)}, \upsilon_{\omega(j+1)+1})`$; caps at the block tops; $`\le_1`$ of $`R_1^+`$ inside the blocks | cited (35) |
+| `thmB2_C` | **Theorem B″ with TOP**, for every restart below $`\upsilon_{\omega^3}`$ (its seven clauses, [SHIFT11.md](SHIFT11.md) §2.3) | cited (35) |
+| `rs_h`, `reach_rst` | **RS, RS$`^h`$**: $`\rho_h \le_1 \delta_h + 1`$, and $`\mathrm{lh}(\rho_h) = \delta_h + 1`$ | cited (41) |
+| `pairs_lt_w3` | the pairs below $`\upsilon_{\omega^3}`$ are exactly $`(\upsilon_\xi, \upsilon_{\xi+1})`$, $`\xi = \omega^2 h + \omega j + \omega`$ | cited (35) |
+| `sk3_C` | **SK3**: below $`\upsilon_{\omega^3}`$ every point that is not a $`\upsilon`$-point has $`\le_1`$ of $`R_1^+`$ to every $`\gamma`$ | cited (35) |
+| `not_le1_zero` | $`0 \le_1 b`$ in $`R_2^C`$ only for $`b = 0`$ | none |
+
+The audit printed the axioms of the eleven main statements; together they use 41 of the 44 cited axioms. Each module was also checked alone with only the modules it imports, and a
+false statement added at the end made that check fail.
+
 The domain $`D_m`$ of `frag` allows parameters in the closure of $`D_{m-1}`$; it contains the domain of the paper proof ([RESTARTS.md](RESTARTS.md) §1), so the Lean theorem is stronger. All bases
 are countable, which is the only case used on these pages.
 
 ## 4. Not yet in Lean
 
-In order (the paper proofs of these steps exist; see [SHIFT11.md](SHIFT11.md) §1.6):
+In order (the paper proofs of these steps exist; see [SHIFT11.md](SHIFT11.md) §2.6):
 
-- Lemma L (the bound on chains in a gap); it needs a few more cited facts ([W07b] Thm 5.3, L.4.5; [W07a] L.3.27, L.4.3, L.6.3).
-- The first pair $`\upsilon_\omega \lt_2 \upsilon_{\omega+1}`$ in $`R_2^C`$. Its second clause needs the compression of segments inside the proof of FRAG as a lemma of its own, shown to be a covering of
-  $`R_2^C`$.
-- Theorems B and B″, TOP, RS and SK3 below $`\upsilon_{\omega^3}`$ (the reduction lemmas `frag_frag2_C`, `block_le1_iff`, `le1_iff_le1R_below` are in place; what is missing are the copies, block by block).
-- The restart blocks (BLK$`^\Xi`$, BLK$`^O`$).
+- The restart blocks (BLK$`^\Xi`$, BLK$`^O`$). From $`\lambda = \omega^3`$ on, the reach of $`\rho_\lambda`$ is $`\delta_\lambda + c^*(\lambda)`$ with an offset above 1, so the step "no point at most $`\delta + 1`$ is $`\le_1`$
+  to a point above $`\delta + 1`$" fails; the induction must run over restart indices that are ordinals, TOP$`_\lambda`$ needs smaller offsets at the restarts shortly before $`\lambda`$, and RS$`_\lambda`$ needs the
+  proof of [REACHES.md](REACHES.md) §1, not FRAG alone.
 - SKEL⁺, CAP, LIFT-0; then Theorem O$`^C`$ (CP is ready), NU-CT and $`\nu_C`$.
 - The $`R_2^S`$ side is not formalized.

@@ -1,14 +1,15 @@
 [← Back](README-ja.md) | [English](LEAN.md) | [Japanese](LEAN-ja.md)
 
-# Lean での $`R_2^+`$：$`R_2^C`$、核、FRAG
+# Lean での $`R_2^+`$：$`R_2^C`$、核、FRAG、$`\upsilon_{\omega^3}`$ より下のブロック
 
-このページは、40 回目（[SHIFT10-ja.md](SHIFT10-ja.md) §3.3、段階 1）と 41 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §1.3、段階 2）で足したディレクトリ [R2/](R2/)（名前空間
+このページは、40 回目（[SHIFT10-ja.md](SHIFT10-ja.md) §3.3、段階 1）、41 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §1.3、段階 2）、42 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §2.3、段階 3）で足したディレクトリ [R2/](R2/)（名前空間
 `Googology.Trans.PoR.InaccPsi.R2`）の Lean のファイルを説明する。どのファイルもライブラリ全体とともにモジュールとして作られる（`lake build`、緑、`sorry` 無し）。どちらの段階の監査も、
 どの公理も引いた論文に忠実で、どの定義も正しく、どの主な定理も Lean が証明していると認め、致命的な点も進行を止める点も見つけなかった。
 
 **これで何が変わるか。** ほかのページの $`\upsilon_{\omega\cdot\omega}`$ より上のほとんどの結果は「FRAG のもと」で述べている。FRAG は今は Lean の定理で、標準でない公理は Wilken の 2 本の論文
-から引いた 20 個の事実（とその論文の対象のための 7 個の定数）だけ。だから「FRAG のもと」は「この 20 個の引いた事実のもと」と読める。段階 2 は INC1、核についての Carlson の定理、定理 CP を足す。公理は 3 つのファイル Cited、CitedR1、
-CitedC09 にあり、全部で 40 個（定数 8 個と事実 32 個）。
+から引いた 20 個の事実（とその論文の対象のための 7 個の定数）だけ。だから「FRAG のもと」は「この 20 個の引いた事実のもと」と読める。段階 2 は INC1、核についての Carlson の定理、定理 CP を足す。段階 3 は補題 L と、$`\upsilon_{\omega^3}`$ より下の $`R_2^C`$ の構造（最初の組、
+定理 B と TOP つきの B″、RS、SK3）を足す。公理は 4 つのファイル Cited、CitedR1、CitedC09、CitedL にあり、全部で 44 個（定数 9 個と事実 35 個）。この数も、このページのどの公理の数も、
+Lean の 3 つの標準の公理 `propext`、`Classical.choice`、`Quot.sound` を除いている（だから `#print axioms` をそのまま見ると 3 個多い）。
 
 ## 1. ファイル
 
@@ -33,6 +34,14 @@ CitedC09 にあり、全部で 40 個（定数 8 個と事実 32 個）。
 | [R2/CCF.lean](R2/CCF.lean) | 定理 CC-F（$`R_1^+`$ での閉じた被覆の写し） | 引いたもの |
 | [R2/Inc1.lean](R2/Inc1.lean) | LEFT-AT、FANCOF、PI2-UP、CLEAN-C、NOBAD。定理 INC1 | 引いたもの |
 | [R2/BlockC.lean](R2/BlockC.lean) | RIGHT-LIM、極限の添字つきの LEFT、RE-U、ブロックの中の SK1、最初の組より下で $`\le_1`$ について $`R_2^C = R_1^+`$、骨組みを減らした FRAG2 と FRAG | 引いたもの |
+| [R2/CitedL.lean](R2/CitedL.lean) | 段階 3 の 4 つの公理（§2.4） | — |
+| [R2/ChainL.lean](R2/ChainL.lean) | 補題 L（鎖の上限。区間の中でも） | 引いたもの（16 個） |
+| [R2/BaseC.lean](R2/BaseC.lean) | 基の取りかえとその逆は加法的に主要な数と $`R_1^+`$ の $`\le_1`$ を保つ。閉じた像 | 引いたもの |
+| [R2/Pair1.lean](R2/Pair1.lean) | $`R_2^C`$ での定理 A：最初の組 $`\upsilon_\omega \lt_2 \upsilon_{\omega+1}`$。補題 COMP-C | 引いたもの（35 個） |
+| [R2/BlockB.lean](R2/BlockB.lean) | ブロックの中の SK1。定理 B（$`\upsilon_{\omega\cdot\omega}`$ より下の組） | 引いたもの（35 個） |
+| [R2/RstC.lean](R2/RstC.lean) | やり直しとその最初のブロック：補題 C″ (a)、B″4、TOP | 引いたもの（35 個） |
+| [R2/Blk3.lean](R2/Blk3.lean) | $`\upsilon_{\omega^3}`$ より下のどのやり直しでも：定理 B″、$`\upsilon_{\omega^3}`$ より下の組、SK3 | 引いたもの（35 個） |
+| [R2/RS.lean](R2/RS.lean) | 補題 RS と RS$`^h`$：$`\rho_h`$ の届く先 | 引いたもの（41 個） |
 
 [R2/Defs.lean](R2/Defs.lean) の 2 つの読みは Carlson の文と同じ意味で、そこで説明している：$`\le_2^\infty`$ の節 (c) と (d) は 1 つの被覆にする（有限集合の被覆は順序の同型）。「どの有限の構造」は
 関係つきの順序数の有限の閉じた集合の上を動く（どの有限の算術の構造もそのどれかと同型、Carlson 2009 の L.4.6 のあとの注意）。「$`c`$ より下に共終に多く」は狭い意味で読む（どの
@@ -103,6 +112,18 @@ Wilken, AML 45 (2006) の結果の言い直しで、主張は [W07b] §2 にあ�
 これらは $`R_2^C`$ に触れる最初の公理：Lean の $`R_2^C`$ が Carlson のものと違えば偽になりうる（どちらの監査も定義は文字どおりと認めた）。Thm 14.10 の Lean の形は $`0`$ を含まない
 集合も許すが、その場合は $`0`$ を含む場合から出る。$`0 \le_i b`$ は $`b = 0`$ のときだけで、被覆は $`0`$ を外に保つから。
 
+### 2.4 段階 3（[R2/CitedL.lean](R2/CitedL.lean)）
+
+| 公理 | 主張（短く） | 出典 |
+|---|---|---|
+| `lhT`（定数） | $`\alpha \in T^\tau \cap \Omega_1`$ について定義される $`\mathrm{lh}^\tau(\alpha)`$ | [W07b] Def 4.1 |
+| `lh_eq_lhT` | 可算の $`\tau \in \{1\} \cup E`$ と、$`\tau \lt \alpha \lt \Omega_1`$ で加法的に主要な $`\alpha \in T^\tau`$ について、$`R_1^+`$ での $`\alpha`$ の届く先は $`\mathrm{lh}^\tau(\alpha)`$ | [W07b] Thm 5.3 |
+| `ht_lhT_lt` | そのような $`\alpha`$ が $`\varepsilon`$ 数なら $`\mathrm{ht}_\alpha(\mathrm{lh}^\tau(\alpha)) \lt \mathrm{ht}_\tau(\alpha)`$ | [W07b] L.4.5 |
+| `Par_sub` | $`\mathrm{Par}^\tau(\alpha) \subseteq \tau`$（$`\tau \in E`$ についてだけ述べる。論文は $`\tau = 1`$ も持つが要らない） | [W07a] Def 3.28 |
+
+監査は 4 つとも忠実と認めた。論文の「$`\alpha = \vartheta^\tau(\Delta + \eta)`$」は、CitedR1 にすでにあるつなぎで「$`\alpha`$ は加法的に主要」と読み、「$`\Delta \gt 0`$」は「$`\alpha`$ は
+$`\varepsilon`$ 数」と読む（[W07a] L.4.3）。新しい公理はどれも $`R_2^C`$ に触れず、段階 3 のどの定理も CitedC09 の公理を使わない。
+
 ## 3. 定理
 
 「無し」は Lean の標準の公理 `propext`、`Classical.choice`、`Quot.sound` だけということ（`#print axioms` による）。
@@ -144,16 +165,32 @@ Wilken, AML 45 (2006) の結果の言い直しで、主張は [W07b] §2 にあ�
 INC1 の証明は、このプロジェクトの補題 L の代わりに [W07b] Cor 5.9（区間の中の $`\lt_1`$ の前の点は有限個）を使い、そのぶん簡単になった。監査は 101 個の定理の公理を印字した。どれも
 Lean の標準の 3 つと引いた 40 個だけを使う。
 
+**段階 3。** `thmB2_C`、`rs_h`、`reach_rst` では Lean の添字は論文より 1 小さい：Lean の $`h`$ はやり直し $`\rho_{h+1} = \upsilon_{\omega^2(h+1)}`$。
+
+| 定理 | 主張 | 公理 |
+|---|---|---|
+| `chain_bound`、`chain_bound_gap` | **補題 L**：$`\tau \in \{1\} \cup E`$、$`z_0 \in T^\tau \cap (\tau, \Omega_1)`$ について、$`R_1^+`$ の鎖 $`z_0 \lt_1 \dots \lt_1 z_k`$ は $`k \le \mathrm{ht}_\tau(z_0) + 1`$。区間の中でも同じ | 引いたもの（16 個） |
+| `thmA_C`、`first_pair` | **定理 A**：$`\upsilon_\omega \lt_2 \upsilon_{\omega+1}`$ が $`R_2^C`$ の最小の組で、左端は $`\upsilon_\omega`$ だけ。$`\upsilon_{\omega+1}`$ までは $`\le_1`$ は $`R_1^+`$ のもの。$`\upsilon_{\omega+1}`$ 以下のどの点もより大きい点に $`\le_1`$ でない | 引いたもの（35 個） |
+| `comp_c` | **補題 COMP-C**：切片の圧縮（定理 CC-F、そして逆向きの基の取りかえ）は $`R_2^C`$ の被覆 | 引いたもの（35 個） |
+| `thmB_C` | **定理 B**：$`\upsilon_{\omega\cdot\omega}`$ より下の組はちょうど $`(\upsilon_{\omega(j+1)}, \upsilon_{\omega(j+1)+1})`$。ブロックの頂上で蓋。ブロックの中で $`R_1^+`$ の $`\le_1`$ | 引いたもの（35 個） |
+| `thmB2_C` | **TOP つきの定理 B″**。$`\upsilon_{\omega^3}`$ より下のどのやり直しでも（その 7 つの節、[SHIFT11-ja.md](SHIFT11-ja.md) §2.3） | 引いたもの（35 個） |
+| `rs_h`、`reach_rst` | **RS、RS$`^h`$**：$`\rho_h \le_1 \delta_h + 1`$、そして $`\mathrm{lh}(\rho_h) = \delta_h + 1`$ | 引いたもの（41 個） |
+| `pairs_lt_w3` | $`\upsilon_{\omega^3}`$ より下の組はちょうど $`(\upsilon_\xi, \upsilon_{\xi+1})`$、$`\xi = \omega^2 h + \omega j + \omega`$ | 引いたもの（35 個） |
+| `sk3_C` | **SK3**：$`\upsilon_{\omega^3}`$ より下で $`\upsilon`$ の点でないどの点も、どの $`\gamma`$ とも $`R_1^+`$ の $`\le_1`$ を持つ | 引いたもの（35 個） |
+| `not_le1_zero` | $`R_2^C`$ で $`0 \le_1 b`$ は $`b = 0`$ のときだけ | 無し |
+
+監査は 11 個の主な主張の公理を印字した。あわせて 44 個の引いた公理のうち 41 個を使う。どのモジュールも、それが取り込むモジュールだけとともに単独でも確かめ、終わりに偽の主張を
+足すとその確かめは失敗した。
+
 `frag` の定義域 $`D_m`$ は $`D_{m-1}`$ の閉包の中のパラメタを許す。これは論文の証明（[RESTARTS-ja.md](RESTARTS-ja.md) §1）の定義域を含むので、Lean の定理のほうが強い。基はすべて可算で、
 これらのページで使うのはその場合だけ。
 
 ## 4. まだ Lean に無いもの
 
-この順に（これらの段階の論文での証明はある。[SHIFT11-ja.md](SHIFT11-ja.md) §1.6 を見よ）：
+この順に（これらの段階の論文での証明はある。[SHIFT11-ja.md](SHIFT11-ja.md) §2.6 を見よ）：
 
-- 補題 L（区間の中の鎖の上限）。もう少し引いた事実が要る（[W07b] Thm 5.3、L.4.5。[W07a] L.3.27、L.4.3、L.6.3）。
-- $`R_2^C`$ での最初の組 $`\upsilon_\omega \lt_2 \upsilon_{\omega+1}`$。その 2 つ目の節には、FRAG の証明の中の切片の圧縮を、$`R_2^C`$ の被覆であることを示した、それだけの補題として要る。
-- $`\upsilon_{\omega^3}`$ より下の定理 B と B″、TOP、RS、SK3（帰着の補題 `frag_frag2_C`、`block_le1_iff`、`le1_iff_le1R_below` はある。足りないのはブロックごとの写し）。
-- やり直しのブロック（BLK$`^\Xi`$、BLK$`^O`$）。
+- やり直しのブロック（BLK$`^\Xi`$、BLK$`^O`$）。$`\lambda = \omega^3`$ からは $`\rho_\lambda`$ の届く先が 1 より大きいずれを持つ $`\delta_\lambda + c^*(\lambda)`$ なので、「$`\delta + 1`$ 以下のどの点も $`\delta + 1`$ より上の
+  点に $`\le_1`$ でない」という段階が成り立たない。帰納法は順序数のやり直しの添字の上で走らせる必要があり、TOP$`_\lambda`$ は $`\lambda`$ のすぐ前のやり直しでより小さいずれを要し、RS$`_\lambda`$ は
+  FRAG だけでなく [REACHES-ja.md](REACHES-ja.md) §1 の証明が要る。
 - SKEL⁺、CAP、LIFT-0。次に定理 O$`^C`$（CP は用意できている）、NU-CT、$`\nu_C`$。
 - $`R_2^S`$ の側は形式化していない。

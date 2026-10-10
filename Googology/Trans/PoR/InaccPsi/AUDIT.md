@@ -19,6 +19,8 @@ in [SHIFT7.md](SHIFT7.md) (one higher than in the papers). "Given FRAG" means gi
 
 **Later (the forty-first round, [SHIFT11.md](SHIFT11.md) §1.1):** the corrected exact long reach is proved for every code below $`P'`$ at levels 1 and 2 (ENUM-REACH), and the chain was run again on it. So **T0 is proved again** (given FRAG; 1 review of the new proof), and so are the rows marked "not proved as written (fortieth round)" below, as the table of the forty-first round at the end of this page says. The rows S1 and S2 are replaced by ENUM-REACH.
 
+**Later (the forty-second round, [SHIFT11.md](SHIFT11.md) §2.1):** the step TC⁺$`^\omega`$ for $`B_n`$ (T2c) now cites EQ$`^{\mathrm{all}}`$, so T0 is complete as written; and the gap calculus above $`\nu_C`$ is run again, so the frontiers up to $`Z^\Lambda`$ are proved again (the table of the forty-second round at the end of this page).
+
 | node | statement | where | status | reviews | rests on |
 |---|---|---|---|---|---|
 | T0 | $`\nu_C = \nu_S = L(\omega+1)`$; the claim in $`R_2^C`$ on $`[0, \nu_C]`$ | [SHIFT7.md](SHIFT7.md) §2.1 | **not proved as written** (fortieth round) | 1 and the audit | T1, T2, T3, T4 |
@@ -110,3 +112,22 @@ It is now written (row T2b2).
 | EXACT-LONG$`^e`$ ([SHIFT6.md](SHIFT6.md) §1.2) | false at every code of its range |
 | NO-READL ([SHIFT5.md](SHIFT5.md) §2.1) | not proved as written |
 | the frontiers above $`\nu_C`$ up to $`Z^\Lambda`$, and $`[0, Z^\varepsilon)`$ in $`R_2^S`$ | not proved as written (the gap calculus is not run again) |
+
+
+**The table of the forty-second round** ([SHIFT11.md](SHIFT11.md) §2.1, §2.2; each result 1 review):
+
+| result | status after the forty-second round |
+|---|---|
+| EQ$`^{\mathrm{all}}`$: the corrected value commutes with every base change of the class BC$`^\pi`$, also those that raise constants (closes point m1 of the review of ENUM-REACH; T2c now cites it) | proved, given FRAG |
+| T0: $`\nu_C = \nu_S = L(\omega+1)`$, the claim on $`[0, \nu_C]`$ | proved, given FRAG (the chain complete as written) |
+| VAL-IF: above $`\nu_C`$ a reach of level 1 or 2 enters only through V0–V4 | proved, by reading |
+| GAP-CALC$`^{\sharp\mathrm{reg}}`$ with the region condition (REG♯) | proved by transfer, given FRAG |
+| FAR-PIN″♯, CROSS-LIM″♯, PAIR$`_j`$♯, LOW$`_j`$♯, C-TRANSFER♯, TC⁺″♯, TRANS-K″♯ | proved by transfer, given FRAG |
+| Theorem C$`^{\Lambda\sharp}`$; the claim in $`R_2^C`$ on $`[0, Z^\Lambda]`$, $`\beta_0 \gt Z^\Lambda`$, and the frontiers $`X_A`$ to $`Z^\varepsilon`$ as restrictions | proved by transfer, given FRAG |
+| $`r(b) = k''_b(o_b(c''))`$ at the restarts $`b = L(\lambda'')`$ below $`Z^\Lambda`$ | proved |
+| $`Z^{\mathrm{LL}}`$ (Theorem C$`^{\mathrm{LL}}`$) | not proved (FALSE-LB″ is a conjecture) |
+| $`\beta_0 \gt \nu_C`$; the claim in $`R_2^S`$ on $`[0, \nu_C]`$ and on $`[0, F_\nu)`$ | proved, given FRAG and EQ$`^{\mathrm{all}}`$ (the review's blocking point B-1 was this label) |
+| Theorem X-COF, Lemma E1$`^p`$ | proved, without FRAG (for an admissible base) |
+| UNIFORM-B, FIN-CROSS, K2$`^{\mathrm{cap}}`$ | proved, given their hypotheses (K2$`^{\mathrm{cap}}`$ after the repair m1) |
+| $`R_2^S`$ on $`[0, Z^\varepsilon)`$ along the re-run | an outline |
+| $`R_2^S`$ on $`[0, Z^\Lambda)`$; $`R_2^C`$ on $`[0, Q^\Lambda]`$ | conditional (labels checked only) |

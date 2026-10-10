@@ -348,7 +348,7 @@ $`X = P^* \cap [x, x^\#)`$、$`\tilde X`$ はその下向きの写しで $`\tild
 - $`\nu_C = \nu_S`$：(HC) のもとで、下向きの写しは $`T`$ による写しで、局所的な部分が成り立ち、そのような平行移動を持たないどの拡張も実現される
   （§11）。(LOC$`_T`$) と (TR$`_T`$) への帰着はそこでは働かない。残り：(R1)〜(R3) と、ET-TF の形の帰着。
 
-13〜41 回目でこの状況は変わった。[THETA-ja.md](THETA-ja.md) の §5 と §9.5、[SHIFT-ja.md](SHIFT-ja.md) の §5、§8.5、§9.5、[SHIFT2-ja.md](SHIFT2-ja.md) §1.5、§2.5、§3.5、[SHIFT3-ja.md](SHIFT3-ja.md) §1.5、§2.5、[SHIFT4-ja.md](SHIFT4-ja.md) §1.5、§2.5、[SHIFT5-ja.md](SHIFT5-ja.md) §1.4、§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §1.4、§2.4、§3.4、[SHIFT7-ja.md](SHIFT7-ja.md) §1.4、§2.4、§3.4、[SHIFT8-ja.md](SHIFT8-ja.md) §1.4、§2.4、[SHIFT9-ja.md](SHIFT9-ja.md) §1.4、§2.4、§3.4、[SHIFT10-ja.md](SHIFT10-ja.md) §1.4、§2.4、§3.4、[SHIFT11-ja.md](SHIFT11-ja.md) §1.4 を見よ。
+13〜42 回目でこの状況は変わった。[THETA-ja.md](THETA-ja.md) の §5 と §9.5、[SHIFT-ja.md](SHIFT-ja.md) の §5、§8.5、§9.5、[SHIFT2-ja.md](SHIFT2-ja.md) §1.5、§2.5、§3.5、[SHIFT3-ja.md](SHIFT3-ja.md) §1.5、§2.5、[SHIFT4-ja.md](SHIFT4-ja.md) §1.5、§2.5、[SHIFT5-ja.md](SHIFT5-ja.md) §1.4、§2.4 と [SHIFT6-ja.md](SHIFT6-ja.md) §1.4、§2.4、§3.4、[SHIFT7-ja.md](SHIFT7-ja.md) §1.4、§2.4、§3.4、[SHIFT8-ja.md](SHIFT8-ja.md) §1.4、§2.4、[SHIFT9-ja.md](SHIFT9-ja.md) §1.4、§2.4、§3.4、[SHIFT10-ja.md](SHIFT10-ja.md) §1.4、§2.4、§3.4、[SHIFT11-ja.md](SHIFT11-ja.md) §1.4、§2.4 を見よ。
 
 ## 13. 12 回目の確認
 
@@ -370,4 +370,4 @@ $`X = P^* \cap [x, x^\#)`$、$`\tilde X`$ はその下向きの写しで $`\tild
 
 ## 14. 未解決
 
-13〜41 回目でこの一覧は変わった。今の一覧は [SHIFT11-ja.md](SHIFT11-ja.md) §1.6 にある。
+13〜42 回目でこの一覧は変わった。今の一覧は [SHIFT11-ja.md](SHIFT11-ja.md) §2.6 にある。
