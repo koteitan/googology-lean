@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 35〜37 回目：$`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ までの骨組みの届く先、$`\mathrm{Core}(R_2^S)`$ の最初の穴、$`\theta_0`$ へ向かう段階の道
 
-このページは [SHIFT8-ja.md](SHIFT8-ja.md) の続き（そこの §2 が 34 回目）。§1 が 35 回目、§2 が 36 回目、§3 が 37 回目。38 回目は [SHIFT10-ja.md](SHIFT10-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT8-ja.md](SHIFT8-ja.md) の続き（そこの §2 が 34 回目）。§1 が 35 回目、§2 が 36 回目、§3 が 37 回目。38 回目と 39 回目は [SHIFT10-ja.md](SHIFT10-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -429,7 +429,7 @@ Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2) =
 
 ### 3.4 37 回目のあとの状態
 
-[SHIFT10-ja.md](SHIFT10-ja.md) §1.4 で置き換えた。
+[SHIFT10-ja.md](SHIFT10-ja.md) §2.4 で置き換えた。
 
 - $`R_2^C`$ での Wilken の主張：FRAG 無しで $`[0, X_4]`$、そして **FRAG のもとで $`[0, L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)]`$、
   $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+1} + \theta'_2 + \omega^{G''(\omega+1)+1})`$** で両方の半分とも成り立つ（$`L(\Omega_2+\Phi^{P'}\cdot\omega)`$ までの
@@ -458,7 +458,7 @@ Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2) =
 
 ### 3.6 未解決
 
-[SHIFT10-ja.md](SHIFT10-ja.md) §1.6 で置き換えた。
+[SHIFT10-ja.md](SHIFT10-ja.md) §2.6 で置き換えた。
 
 - FRAG のもとで $`L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ より上の主張（FRAG 無しでは $`X_4`$ より上）。次は $`G''(\omega+1)`$ からの符号（$`G''(\omega+1)\cdot\omega`$ までは概略）、1 つ上の窓の規則、
   ブロック $`j \ge 1`$、符号 $`G''(\omega^2)`$ からの長いやり直しとその着地の計算、$`P_3`$ より下の符号、$`\nu_3`$。$`R_2^S`$ で：$`Z^\Gamma = L(\Omega_2\cdot(\omega+1)+\Phi^{P'}_{\omega+1}\cdot\omega+\omega^2)`$ より上の主張。

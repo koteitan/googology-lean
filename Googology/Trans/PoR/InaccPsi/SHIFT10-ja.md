@@ -1,8 +1,8 @@
 [← Back](README-ja.md) | [English](SHIFT10.md) | [Japanese](SHIFT10-ja.md)
 
-# $`R_2^+`$ の 38 回目：1 つ上の窓の規則、骨組みの最初の長いやり直し、$`Z^{\mathrm{LL}}`$ までの主張、帰納法としての判定、印のついた源
+# $`R_2^+`$ の 38 回目と 39 回目：1 つ上の窓の規則、骨組みの最初の長いやり直し、帰納法としての判定、印のついた源、ちょうどの長い届く先への致命的な点、単位ごとの容量
 
-このページは [SHIFT9-ja.md](SHIFT9-ja.md) の続き（そこの §3 が 37 回目）。§1 が 38 回目。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT9-ja.md](SHIFT9-ja.md) の続き（そこの §3 が 37 回目）。§1 が 38 回目、§2 が 39 回目。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。致命的な点か進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことか目標そのものの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -32,7 +32,7 @@ Z^{\mathrm{LL}} = L(\theta'_2\cdot\omega^2+\omega^{G''(\omega^2)^2}) = \psi_{\Om
 Z^\varepsilon = \varphi(\omega, \delta^\varepsilon+1),\qquad \delta^\varepsilon = L(\theta'_2\cdot(\omega+1)+\varepsilon_{G''(\omega+1)+\omega}+\omega+1) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+1} + \theta'_2 + \varepsilon_{G''(\omega+1)+\omega} + \omega^{P'+1} + P').
 ```
 
-ここで $`\delta^\varepsilon`$ はやり直し $`L(\theta'_2\cdot(\omega+1)+\varepsilon_{G''(\omega+1)+\omega})`$（符号は $`\varepsilon_{G''(\omega+1)+\omega}`$）の点 $`\delta''_1`$ で、$`Z^\varepsilon \lt L(\theta'_2\cdot\omega^2) \lt Z^{\mathrm{LL}}`$。
+ここで $`\delta^\varepsilon`$ はやり直し $`L(\theta'_2\cdot(\omega+1)+\varepsilon_{G''(\omega+1)+\omega})`$（符号は $`\varepsilon_{G''(\omega+1)+\omega}`$）の点 $`\delta''_1`$ で、$`Z^\varepsilon \lt L(\theta'_2\cdot\omega^2) \lt Z^{\mathrm{LL}}`$。39 回目のあとでは、$`L(\theta'_2\cdot\omega^2)`$ から $`Z^{\mathrm{LL}}`$ までの段階は書いたままでは証明されていない（§2.1）。
 
 ### 1.1 1 つ上の窓の規則と最初の長いやり直し：FRAG のもとで $`Z^{\mathrm{LL}}`$ までの主張
 
@@ -76,12 +76,12 @@ r(L(\theta'_2\cdot\omega^2)) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\t
   $`D, m_0 \lt G''(\omega^2)`$ で符号 $`c = G''(\omega^2)\cdot D + m_0`$、$`\nu = L(\lambda''+\omega^2\cdot o_b(D))`$ のとき：$`m_0 \lt P'`$ なら $`r(L(\lambda'')) = r(\nu) + o_\nu(m_0)`$、$`m_0 \ge P'`$ なら $`\nu`$ での窓の
   規則。だから $`G''(\omega^2)^2`$ より下のどの符号もちょうどの届く先を持つ。CROSSED″：長い届く先がまたぐ区域は骨組みを保つ。査読者：1 つの引用はその仮定の外で使われているが、結論は同じ
   補題のほかの部分で成り立つ (m4)。EXACT-LONG-CL″\* と CROSSED″ の証明は位置をまたいで互いに頼るので、帰納法は符号でなく右の上限に沿って進めるべきで、前の査読済みの証明と同じ。
-  そうすれば閉じる (m5)。
+  そうすれば閉じる (m5)。**のちに（§2.1）：値 $`r(\nu) + o_\nu(m_0)`$ はある $`m_0`$ で偽（2 回目の査読の致命的な点 F-1）。**
 - **定理 C$`^{\mathrm{LL}}`$ と新しい最前線**（移しで証明済み、FRAG のもと）。$`Z^{\mathrm{LL}}`$ より下ではどのやり直しもちょうどの届く先を持ち、扇の頂点も 3 重の入れ子も無い。だから $`\beta_0 \gt Z^{\mathrm{LL}}`$、
   $`T_3^C \gt Z^{\mathrm{LL}}`$、**$`R_2^C`$ での Wilken の主張は $`[0, Z^{\mathrm{LL}}]`$ で両方の半分とも成り立ち**、**$`[0, Z^{\mathrm{LL}}) \subseteq \mathrm{Core}(R_2^S)`$ で、だから $`R_2^S`$ での主張は $`[0, Z^{\mathrm{LL}})`$ で成り立つ**
   （NO-GAP の議論による、[SHIFT9-ja.md](SHIFT9-ja.md) §3.2）。これは $`R_2^S`$ の最前線 $`Z^\Gamma`$ を越える。1 つの文（「固さの一覧はそのまま成り立つ」）は確かめておらず、要らない：注意 (m6)。
-  CODES‴（証明済み）：$`\psi_{\Omega_1}(\Omega_\omega\cdot 3)`$ より下の骨組みのどのやり直しも、$`\Omega_2`$ より下の符号か $`P_3`$ より下の π の符号を持つ。言い回し (m7)。
-- **未証明**。CROSS″（符号が $`G''(\zeta)`$ 以上、$`\omega^2 \le \zeta \lt b`$ のときの下からの評価 $`r(b) \ge L(\lambda''+\zeta)`$）：概略。未解決：符号が $`G''(\omega^2)^2`$ 以上のちょうどの届く先、$`\omega^2`$ より
+  CODES‴（証明済み）：$`\psi_{\Omega_1}(\Omega_\omega\cdot 3)`$ より下の骨組みのどのやり直しも、$`\Omega_2`$ より下の符号か $`P_3`$ より下の π の符号を持つ。言い回し (m7)。**のちに（§2.1）：定理 C$`^{\mathrm{LL}}`$ は書いたままでは証明されていない（2 回目の査読の進行を止める点 B-1）。定理 C$`^\Lambda`$ は残る。**
+- **未証明**。CROSS″（符号が $`G''(\zeta)`$ 以上、$`\omega^2 \le \zeta \lt b`$ のときの下からの評価 $`r(b) \ge L(\lambda''+\zeta)`$）：概略（§2.1 で証明済み）。未解決：符号が $`G''(\omega^2)^2`$ 以上のちょうどの届く先、$`\omega^2`$ より
   先の段 $`G''(\zeta)`$ を長い符号として、$`G''(\Omega_1)`$ からの符号、1 つ上の着地の計算、1 つ上の CAP-0 と NOT-LOW（最初の試しの場合は $`L(\Omega_3)`$）、$`\nu_3`$ のための 1 つ上の CROSS-LIM、FRAG、
   SHIFT。$`T_3 \le \nu_3`$ は主張しない。分かっていること：$`T_3^C \gt Z^{\mathrm{LL}}`$。
 
@@ -145,17 +145,7 @@ r(L(\theta'_2\cdot\omega^2)) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\t
 
 ### 1.4 38 回目のあとの状態
 
-- $`R_2^C`$ での Wilken の主張：FRAG 無しで $`[0, X_4]`$、そして **FRAG のもとで $`[0, Z^{\mathrm{LL}}]`$、$`Z^{\mathrm{LL}} = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+2} + \omega^{\omega^{G''(\omega^2)\cdot 2}})`$** で両方の半分とも
-  成り立つ（$`Z_R = L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ までの査読の回数は [SHIFT9-ja.md](SHIFT9-ja.md) §3.4 のとおり。$`Z_R`$ から $`Z^\varepsilon`$ までは査読 2 回で 2 つの証明、§1.1、§1.2。
-  $`Z^\varepsilon`$ から $`Z^{\mathrm{LL}}`$ までは査読 1 回、§1.1）。
-- $`R_2^S`$ での Wilken の主張：FRAG のもとで $`[0, Z^{\mathrm{LL}})`$（$`[0, Z^\Gamma)`$ は [SHIFT9-ja.md](SHIFT9-ja.md) §3.4 のとおり。$`Z^\Gamma`$ から $`Z^\varepsilon`$ までは査読 2 回で 2 つの証明。$`Z^\varepsilon`$ から先は
-  査読 1 回）。FRAG 無しでは $`\upsilon_{\omega^3}`$ まで。
-- $`R_2^S`$ と $`R_2^C`$：右端が $`Z^{\mathrm{LL}}`$ 以下のどの関係でも 2 つは一致する（FRAG のもと）。FRAG のもとで $`\beta_0 \ge \sigma_S \ge Z^{\mathrm{LL}}`$。右端が $`Z^\varepsilon`$ 以下のどの組でも [CW12b] の判定と
-  一様な試験が必要なことが成り立つ。(E) は未解決で、$`\beta_0`$ の場所は分かっていない。
-- 届く先（FRAG のもと）：$`Z^{\mathrm{LL}}`$ より下のどのやり直しでもちょうど。
-- **LOW：FRAG のもとで偽**。**LOW$`^\infty`$：FRAG のもとで真**（どちらも査読 1 回。変化なし）。予想 CORE-2 の段階 PIN と LOW：決まっていない（変化なし）。
-- $`\theta_0`$ より下の下からの評価の計画：素の評価は [SHIFT9-ja.md](SHIFT9-ja.md) §2.4 のとおり（変化なし）。$`\psi_{\Omega_1}(\Omega_{\omega\cdot 2})`$ より先では、印が正しい順なら場合 F1 は宿り、
-  足りないのは (REP$`^\rho`$)（§1.3）。SRO より下の段階：変化なし（3,166 個の標本の行列すべてでどの $`n`$ でも。SRO より下のすべての標準の行列についての一般の命題は未解決）。
+§2.4 で置き換えた。
 
 ### 1.5 38 回目の確かめ
 
@@ -174,13 +164,163 @@ r(L(\theta'_2\cdot\omega^2)) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\t
 
 ### 1.6 未解決
 
-- FRAG のもとで $`Z^{\mathrm{LL}}`$ より上の主張（FRAG 無しでは $`X_4`$ より上）、$`R_2^C`$ でも $`R_2^S`$ でも。次は、1 つの区域を越える遠い留めと符号が $`G''(\omega^2)^2`$ 以上のちょうどの届く先、
-  CROSS″ と $`G''(\Omega_1)`$ までの段 $`G''(\zeta)`$、$`G''(\Omega_1)`$ からの符号と 1 つ上の着地の計算、$`P_3`$ より下の CAP-0 と NOT-LOW、$`\nu_3`$。FRAG 無しで $`\nu`$ より上の段の $`o_k = \omega`$。
+§2.6 で置き換えた。
+
+## 2. 39 回目
+
+論文は 3 本（2026-10）、どれも査読 1 回：最初の添字の固定点までの骨組みの長いやり直しの論文（§2.1）、(E)：組の種類ごとの補題と扇の論文（§2.2）、素の符号の論文（§2.3）。この節の結果は、
+回数を書いていなければ査読 1 回。§1.1、§1.2、§1.3 の査読の細かい点は 3 本の論文が反映し、その査読者がどの直しも確かめた（**査読 2 回**）。**主張の最前線は下がる。** §2.1 の査読者は、
+§1.1 の長い届く先のちょうどの値（EXACT-LONG-CL″\*）に致命的な点を、その値を帰納法で使う定理 C$`^{\mathrm{LL}}`$ に進行を止める点を見つけた。どちらにとってもこれが 2 回目の査読。だから FRAG の
+もとで、主張は $`R_2^C`$ で $`[0, Z^\Lambda]`$（§1.1 の定理 C$`^\Lambda`$。査読 1 回、$`Z^\varepsilon`$ までは査読 2 回）、$`R_2^S`$ で $`[0, Z^\varepsilon)`$（査読 2 回）で証明済み。ここで
+
+```math
+Z^\Lambda = L(\theta'_2\cdot\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+2}).
+```
+
+査読者は、$`[0, Z^{\mathrm{LL}}]`$ とその先での主張は直したあとも残ると見ている。直しはまだ書かれていない。引く論文：§2.1 は査読済みの段階のほかに Wilken "Σ₁-elementarity and Skolem hull
+operators"（APAL 145, 2007。L.2.1、Def 4.1、Thm 2.2、Cor 5.10）、Carlson 2009（Def 5.3、L.5.5、L.5.7）、Wilken の "A glimpse of Σ₃-elementarity"（L.21.10、Thm 21.13）。§2.2 は Carlson 2009（Def 5.3 の
+節 2、Def 5.4、L.5.5、L.5.7）、[CW12b]（Prop 7.4 と、型として読んだ Thm 7.9 の証明）、Wilken "Tracking chains revisited" [W17t]、https://arxiv.org/abs/1611.04348（Cor 5.8、たとえとしてだけ）。§2.3 の
+証明済みの段階はどの論文も使わず、FRAG も使わない。どの論文も Wilken, JSL 72 (2007)、Carlson, AML 38 (1999)、Wilken, AML 45 (2006) を使わない。Lean のファイルは足していない：§2.1 と §2.2 の
+順序数の入力は項を比べるだけの Lean のファイルで確かめた（`#eval`、定理は無い。緑で Python と同じ出力。査読者の確かめ直しでも同じ）。§2.3 の査読者は 3 つの段階を別の Lean のファイルで
+確かめた（緑）。これらは確かめた扱い。段の番号は [SHIFT8-ja.md](SHIFT8-ja.md) と同じ。「FRAG のもと」もそこと同じ。
+
+記号は §1 と同じ。新しく：$`\hat G'' = G''(\Omega_2) = \psi_{\Omega_2}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+\Omega_2})`$ は $`\zeta \mapsto G''(\zeta)`$ の最小の固定点。骨組みのやり直し $`b = L(\lambda'')`$ について
+$`F''_b = L(\lambda''+\Omega_1)`$ はその最初の添字の固定点。$`\lambda^{\mathrm{LL}} = \theta'_2\cdot\omega^2+\omega^{G''(\omega^2)^2}`$ で、$`Z^{\mathrm{LL}} = L(\lambda^{\mathrm{LL}})`$。
+
+### 2.1 最初の添字の固定点までの長いやり直し、そして長い届く先のちょうどの値への致命的な点
+
+- **§1.1 の査読の直し**（m1–m7。**査読 2 回**）。届く先についての命題は今はすべて右の上限に沿った 1 つの帰納法で証明する (m5)。§1.2 の致命的な点が挙げたやり直し
+  $`L(\theta'_2\cdot(\omega+1)+\varepsilon_{G''(\omega+1)+\omega}\cdot\omega)`$ は $`Z^\Lambda`$ より下にあり、窓の規則により $`\varepsilon_{\delta''_1+\omega}\cdot 2+2`$ に届く。
+- **符号の側**（GHAT″、EMPTY″、TIER$`_\zeta`$、OFF″、FIX″、THETA″$`^G`$。証明済み、FRAG 無し。読みは移しで）。$`\hat G''`$ は $`G''`$ の最小の固定点で、$`[\theta'_2\cdot\hat G'', \theta'_2\cdot\Omega_2)`$ の
+  添字はどれも $`L`$ の定義域に入らない。段の写像はどの標準形 $`\zeta \lt \hat G''`$ でも働く（$`\zeta \in [\hat G'', \Omega_2)`$ では項 $`G''(\zeta)`$ は標準形でない）。可算の $`x \ge 1`$ について、$`\lambda''+x`$ が定義域に
+  入るのは $`x \lt L(\lambda''+x)`$ のときちょうどで、それは $`x \lt F''_b`$ のときちょうど。読みは $`o_b(G''(\zeta)) = L(\lambda''+1+o_b(\zeta))`$ で、$`o_b`$ は $`b`$ での定義域に入る $`\hat G''`$ より下の符号を
+  $`[0, F''_b)`$ の上へ写す。可算の $`\zeta`$ ではこれは §1.1 の READ″$`_\zeta`$ で、今は **査読 2 回**。
+- **1 つ上の遠い留め**（T$`^F`$、MULTI-RC″$`^F`$、PIN-ALL″$`^F`$、SEP″$`(\Omega_1)`$、TOP-REG-FAR″$`^F`$、LONG-RS″$`^F`$、CROSSED″$`^F`$。移しで証明済み、FRAG のもと）。$`F''_b`$ より下のどの可算の添字の
+  距離と、1 つのずれ $`\Omega_1`$ にわたる遠い移し、どの遠い位置での留め。$`\Omega_1+\omega^2`$ までの添字の距離をまたいでも骨組みは保たれる。
+- **CROSS″**（移しで証明済み、FRAG のもと。§1.1 では概略）：$`G''(\zeta)`$ 以上の符号は少なくとも $`L(\lambda''+\omega^2\cdot L(\lambda''+1+o_b(\zeta))) \ge L(\lambda''+\zeta)`$ に届く。LB″$`^G`$、R-CAP″$`^G`$、CROSS-O″、
+  CROSS-F″（$`\hat G''`$ 以上の符号は $`F''_b`$ に届く）も証明済み。これらは $`m_0 = 0`$ か $`D`$ の読みだけを使う。
+- **致命的な点 F-1：長い届く先のちょうどの値は、ある符号で偽。** 長い符号 $`c = G''(\omega^2)\cdot D + m_0`$ について、§1.1 の値 $`r(L(\lambda'')) = r(\nu) + o_\nu(m_0)`$（EXACT-LONG-CL″\*）と、この論文での
+  その広げたもの（$`D \lt \hat G''`$ の EXACT-LONG″$`^G`$、$`D = \hat G''`$ の EXACT-F″、AGREE″ の 1 つの値）は、$`m_0`$ を着地の点 $`\nu`$ で読む。正しくは、定数が $`b`$ より下の符号の上で読まなければ
+  ならない。反例：添字 $`\theta'_2\cdot\omega^2+\omega^{G''(\omega^2)+\Omega_1}`$ のやり直し $`b`$（符号は $`G''(\omega^2)+\Omega_1`$、$`Z^{\mathrm{LL}}`$ より下）は $`r(b) = r(\nu) + b`$ で、$`r(\nu) + \nu`$ ではない。
+  「$`\le`$」は行き先 $`r(\nu)+b`$ での遠い留めから（$`R_2^+`$ の足し算を使う）、「$`\ge`$」は実現から。符号 $`\hat G''+\Omega_1`$ でも同じことが起きる。当てはまるのは $`\Omega_1`$、$`\Omega_1\cdot k`$、
+  $`\omega^{\Omega_1\cdot 2}`$ のような $`m_0`$ で、そこでは定数が $`b`$ より下の小さい符号が共終でない。$`m_0 = 0, 1, P'`$ は当てはまらない。「$`\le`$」の半分は上からの評価として正しいまま。
+  **最初の骨組みのちょうどの長い届く先にも同じ欠けがある**：[SHIFT2-ja.md](SHIFT2-ja.md) §3.1 の EXACT-LONG から先（[SHIFT3-ja.md](SHIFT3-ja.md)〜[SHIFT6-ja.md](SHIFT6-ja.md) のその後の形）。前の下からの評価
+  RL-UP（[SHIFT-ja.md](SHIFT-ja.md) §9.1）は $`m_0`$ をやり直しの点で読み、直した値と合う。直した式（$`\nu`$ での $`m_0`$ のブロックの、定数が $`b`$ より下の小さい符号の値より上の最小の閉じた点）が
+  示されているが、確かめていない。そのような $`m_0`$ でのちょうどの値を、のちのどの結果が使っているかはまだ確かめていない。
+- **進行を止める点 B-1：定理 C$`^{\mathrm{LL}}`$ と新しい最前線は、書いたままでは証明されていない。** 定理 C$`^{\mathrm{FP}}`$（$`R_2^C`$ で $`[0, Z^{\mathrm{FP}}]`$、$`R_2^S`$ で $`[0, Z^{\mathrm{FP}})`$ での主張。
+  $`Z^{\mathrm{FP}} = L(\theta'_2\cdot\Omega_2+\omega^{\hat G''+G''(\omega^2)}) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+\Omega_2} + \omega^{\hat G''+G''(\omega^2)})`$。途中の最前線 $`L(\theta'_2\cdot\Omega_1)`$ と $`L(\theta'_2\cdot\Omega_2)`$ も）と
+  §1.1 の定理 C$`^{\mathrm{LL}}`$ は、F-1 の値で帰納法を進める。直した値はどれも主張した値と同じブロックにあるので、上からの評価、蓋、最前線をまたぐ届く先が無いことは影響を受けず
+  （RANGE$`^{\mathrm{FP}}`$：証明済み）、**$`Z^{\mathrm{FP}}`$ より下の CAP-0″**（$`Z^{\mathrm{FP}}`$ より下のどのやり直しも自分をまたがない。上からの評価だけを使う）は証明済み。査読者は、どちらの定理も直したあと
+  残ると見ている。
+- **点 $`\nu_3`$**（進行を止める点 B-2）。$`L_3(e) = \psi_{\Omega_1}(\Omega_\omega\cdot 3 + P_3\cdot e)`$、$`\nu_3 = L_3(\omega+1) = \psi_{\Omega_1}(\Omega_\omega\cdot 3 + \omega^{P_3+1} + P_3)`$ とする。符号
+  $`c_k = G''(\theta'_{k+1}\cdot\omega^2)`$、$`\theta'_k = \psi_{\Omega_{k+1}}(\Omega_\omega\cdot 2)`$ は増えて $`P_3`$ に近づく（証明済み）。論文の判定 SHIFT$`_3`$（$`[0, \nu_3)`$ での 3 つの仮定から $`L_3(\omega) \lt_2^S L_3(\omega+1)`$
+  と $`T_3^S = \nu_3`$ が出る）は中身が無い：はじめの仮定（$`\nu_3`$ より下の骨組み）は、ほかの 2 つが与える $`L_3(1) \le_1 L_3(\omega)`$ と両立しない。だから $`\nu_3`$ を 3 つの仮定に帰着させることは
+  うまくいかない。うまくいく道は $`\nu_C`$ で使ったもの：1 つ上の CAP-0 と CAP-1、そして NU-CT の類似。細かい点：2 つ目の仮定の区域の上限は符号 1 で偽 (m1)。1 つの添字 (m2)。
+  $`m_0`$ が $`\Omega_1`$ のような場合の例 (m3)。$`R_2^S`$ の側は B-1 に頼る (m4)。
+- **未証明。** EXACT-LONG″（F-1）。定理 C$`^{\mathrm{LL}}`$、C$`^{\mathrm{FP}}`$ と途中の最前線（B-1）。SHIFT$`_3`$ と $`\nu_3`$ の帰着（B-2）。未解決：$`\hat G''+G''(\omega^2)`$ からの符号（$`F''_b`$ での着地の
+  あとの族）、$`\zeta \ge \Omega_2`$ の段 $`G''(\zeta)`$、深さ 2 以上の着地の計算、$`P_3`$ より下の CAP-0 と 1 つ上の NOT-LOW（概略）、1 つ上の包の蓋 READ$`^\sharp`$（予想）。
+
+### 2.2 (E)：組の種類ごとの補題、最小の扇
+
+言葉は §1.2 のもの。
+
+- **§1.2 の査読の直し**（F-1 と m1–m7。**査読 2 回**）。場所の主張は取り下げ、査読者の命題に置き換えた：$`\upsilon`$ の点 $`d`$ の切片の $`d`$ 以外のどの点も共終な Pred₁ を持たない
+  （NOBAD と INC1、[BREAK-ja.md](BREAK-ja.md) §1）。SEG-GAP⁺（証明済み）：最初のブロックが分かっている計算の基の点で、$`\delta''_1`$ と、その次の極限の添字の $`\upsilon`$ の点との間のどの点も
+  共終な Pred₁ を持たず、$`\beta_0`$ と $`T_3^C`$ はその点以上（§1.2 の査読者の注意 m1。今は証明済み）。
+- **組の種類ごとの補題**（K01、K2。証明済み。K01 は FRAG 無しでどの $`\upsilon`$ の点でも、K2 は移しで FRAG のもと）。共終な Pred₁ を持つ左端 $`t`$ について、Carlson 2009, Def 5.3 の節 2 だけを使う
+  補題が、$`\beta_0`$ より下の $`R_2^C`$ での $`t`$ の後の点は $`R_2^S`$ での後の点の中にあることを示す：届く先が次の $`\upsilon`$ の点である $`\upsilon`$ の点 $`t`$（種類 K01）と、§1.1 の骨組みを持つ区域の
+  $`\tau''_j`$（種類 K2）。組の証明（PAIR、相対化した PAIR、SHIFT）とあわせ、どの種類も判定を満たす。査読者：K01 は記述 SKEL$`^\infty`$（[COVER-ja.md](COVER-ja.md) §5.1）の $`\tau`$ の点として定める
+  べき (m3)。
+- **CRIT-IND$`^K`$**（証明済み）。$`b`$ より下で共終な Pred₁ を持つどの $`\alpha`$ も種類 K01 か K2 で、$`b`$ より下で $`R_2^S`$ に 3 重の入れ子が無ければ、$`\beta_0 \ge b`$、$`T_3^C \ge b`$ で、右端が $`b`$ より
+  下のどの組も判定を満たし、そこで一様な有限集合の試験も必要。だから CRIT-IND（§1.2）の仮定はそこで、仮定するのでなく証明される。
+- **CAP-PERSIST、SKEL″$`^x`$、UPPER″、PRED1″、UNIFORM-A**（証明済み。移しで、FRAG のもと）。区域の組の骨組みに要るのは、その下の骨組み、届く先の上からの評価、共終な Pred₁ を
+  持つやり直しが無いことだけ。ちょうどの届く先は要らない。UNIFORM-A は型：$`Z'`$ より下のどのやり直しも、届く先が計算で与えられるか $`Z'`$ に届き、どれも共終な Pred₁ を持たなければ、
+  $`\beta_0 \ge Z'`$、$`T_3^C \ge Z'`$、$`Z'`$ より下で一様な試験は必要で、主張は $`R_2^C`$ で $`[0, Z')`$ で成り立つ。査読者：計算された届く先を持つまたぐ点が着地する区域には §1.1 の CROSSED″ が
+  要る (m4)。言い回し (m6)。
+- **定理 C$`^{\mathrm{LL}}`$ に頼る結果**（その査読者は FRAG のもとで証明済みと認めたが、§2.1 が B-1 を見つけた定理 C$`^{\mathrm{LL}}`$ を使うので、B-1 が直るまで **数えない**）：LOAD$`^{\mathrm{LL}}`$
+  （右端が $`Z^{\mathrm{LL}}`$ 以下のどの組も種類 K01 か K2 で、判定を満たす）。C$`^{\mathrm{LL}\sharp}`$（$`\beta_0 \gt Z^{\mathrm{LL}\sharp}`$ と、$`R_2^C`$ での $`[0, Z^{\mathrm{LL}\sharp}]`$ での主張）。C$`^{\mathrm{LX}}`$
+  （$`\beta_0 \gt Z^{\mathrm{LX}}`$ と、$`R_2^C`$ での $`[0, Z^{\mathrm{LX}}]`$ での主張。査読者：書き方が循環しているが、右の上限に沿った 1 つの帰納法で直せる、m1。端の点でのちょうどの届く先は
+  証明されていない、m2）。ここで
+
+```math
+Z^{\mathrm{LL}\sharp} = L(\lambda^{\mathrm{LL}}+\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+2} + \omega^{\omega^{G''(\omega^2)\cdot 2}} + \omega^{P'+2}),\qquad Z^{\mathrm{LX}} = L(\lambda^{\mathrm{LL}}+\omega^2\cdot Z^{\mathrm{LL}\sharp}).
+```
+
+  条件つき（概略）：符号 $`G''(\omega^2)^2`$ のやり直しの届く先がどこに着地するかについての未解決の命題のもとで、$`\beta_0 \ge L(\theta'_2\cdot\omega^2+\omega^{G''(\omega^2)^2+1})`$。
+- **扇**（FAN-SHAPES、LEAST-FAN。証明済み）。部分型 (N0) が起きるのは、左端での $`R_2^C`$ の扇が開いている（下の後の点が $`\beta_0`$ に $`\le_1`$ でない）ときちょうど。型 F には閉じた扇が要るので、
+  その左端は閉じた扇の最小の頂点 $`f_0^C`$ 以上で、それは $`x_F^C`$ より上。最小の扇 $`x_F^C`$ では、最初の食い違いは 2 つだけ：$`\beta_0 = y_1`$（型 N）か、$`\beta_0 = y_2`$ の (N0)。そこで型 F は起きず、
+  そこでの (N0) は $`R_2^S`$ の最小の扇の上端を $`R_2^C`$ のものより上に置く。CI-EXTRA：余分な組では、ずらし、載せ、上限のどのデータも無い（はじめの文は証明済み。「だから…」の文は未証明、m5）。
+- **LOAD-SHAPE への進行を止める点 B-1。** 最小の扇の載せは自分の頂点を使えない、という主張は証明されていない：頂点自身の区間の中に長い組がある（$`\Pi_2`$ の文が下から上がる）ので、
+  [CW12b] Thm 7.9 の証明のように、載せがそれを通るかもしれない。だから FAN-LOAD への道の一覧は欠けている。(E) については失うものは無い：NO-SELF-LOAD（§1.2）は分ける集合ではなお
+  成り立つ。FAN-LOAD：予想。CRIT-IND が最初に破れうる場所の論文の一覧は注意：それで全部であることは証明されていない (m7)。
+- **未解決。** (E)。FAN-LOAD。$`\beta_0 \ge x_F^C`$（予想）。
+
+### 2.3 素の符号：単位ごとの容量、$`\psi_{\Omega_1}(\Omega_{\omega\cdot 2})`$ を越える最初の評価
+
+- **§1.3 の査読の直し**（m1–m8。査読者が確かめた）。REP-RANK はその部分 (i)–(iii) だけを残す。「(REP$`^\rho`$) が成り立つのは $`\rho(H)`$ が $`H`$ の中に符号を持つときちょうど」と「壁は
+  (REP$`^\rho`$) が成り立たないことと同値」は取り下げ (m1)。PER-KIND は窓の降下を使う (m2)。NO-FIX は 2 つの仮定を持つ (m3)。
+- **LEX-CAP、MARK$`^{\mathrm{lex}}`$、UNIT-SUP$`^{\mathrm{lex}}`$**（証明済み）。単位 $`U`$ ごとの容量を辞書式の順で比べる：（添字、種類、$`\alpha(U)`$、$`n(U)`$ から深さを引いたもの）。$`n(U)`$ が $`U`$ の源の
+  深さ以上で、1 つの添字の類の中で $`(\alpha, n)`$ が減らなければ、どの 2 つの単位でも (C1)–(C3) を満たす。深さの項が真の段差を与える。そのような容量は印で実現されるので、§1.3 の宿す補題が
+  使える。PER-KIND とは矛盾しない：容量は値と深さだけでなく単位で決まる。
+- **ALPHA-LOW、REDUCTION**（証明済み）：すぐ下で源の深さが限りなく大きくなるどの単位でも、$`\alpha`$ は跳ばなければならない。**RHO-LEAF**（書いたままで証明済み）：$`\Omega_{\omega\cdot 2}`$ より下の
+  $`\psi_{\Omega_{\omega+1}}(\Omega_{\omega+5} + \omega^{\Omega_{\omega+3}+b})`$ の宿す階数 $`\rho`$ は、どの $`b \lt \Gamma_0`$ でも $`b`$ 以上。査読者：単位はもう $`b`$ の符号を持っているので、これは単位ごとに 1 つの印が
+  求めすぎだとは示さない (m1)。MARKER-SELF は脇に置く。反証ではない。
+- **例**（LEVEL-BOUND、LEX$`[\Omega_{\omega\cdot 2}]`$、UNITS、SC-MAX、LEX$`[S_*]`$。証明済み）。$`\Omega_{\omega\cdot 2}`$ までの段階の集合では $`\alpha = 0`$ で足り、$`S_*`$（下）までは有限の桁で $`\alpha \lt \omega^{\omega+1}`$
+  で足りる。ALPHA-LOW$`^\Gamma`$（証明済み）：さらに上には、そのようなどの容量でも $`\alpha \ge \Gamma_0`$ となる単位がある。「有限の桁は $`S_*`$ で止まる」は未証明（注意、m2）。
+- **新しい素の評価**（$`S_*`$ までの段階の集合での REGION、SHAPE、IDX。移しで証明済み）：
+
+```math
+\iota(\mathrm{CH}_5) \ge \psi_{\Omega_1}(S_*),\qquad S_* = e_* + \psi_{\Omega_{\omega+1}}(e_*),\quad e_* = \Omega_{\omega\cdot 2} + \psi_{\Omega_{\omega+2}}(\Omega_{\omega\cdot 2})\cdot\omega^\omega,
+```
+
+  そして $`\psi_{\Omega_1}(\Omega_{\omega\cdot 2}) \lt \psi_{\Omega_1}(S_*) \lt \psi_{\Omega_1}(\Omega_{\omega\cdot 2}\cdot 2)`$。だから $`\psi_{\Omega_1}(S_*)`$ より下で鎖の数 5 で RED-TOWER が成り立ち、$`m_F \gt \psi_{\Omega_1}(S_*)`$。これは
+  $`\psi_{\Omega_1}(\Omega_{\omega\cdot 2})`$ を越える最初の素の評価：「鎖の数を固めると段階の道は $`\psi_{\Omega_1}(\Omega_{\omega\cdot 2})`$ で止まる」は鎖の数 5 で偽で、§1.3 の壁はそこで挙げた容量の形でだけ
+  成り立つ。$`\psi_{\Omega_1}(S_*)`$ が $`\iota(\mathrm{CH}_4)`$ より上かどうかは分かっていない (m7)。細かい点：UNITS の 1 つの理由 (m3)、1 つの上限 (m4)、見出しの 1 つの条件 (m5)、1 つの節の範囲 (m6)
+  と確かめの範囲 (m8)。
+- **未解決。** LEX-SELF（$`\alpha`$ を各単位自身の境の符号から読む）：予想。それがあれば（概略）$`\psi_{\Omega_1}(\Omega_{\omega\cdot 2+1})`$、$`\theta_0`$、$`H_m`$、「最初の扇は到達不能基数を要する」。配置 B（B-1）。
+  鎖の数 4 が $`\psi_{\Omega_1}(\Omega_{\omega\cdot 2})`$ を越えるか。
+
+### 2.4 39 回目のあとの状態
+
+- $`R_2^C`$ での Wilken の主張：FRAG 無しで $`[0, X_4]`$、そして **FRAG のもとで $`[0, Z^\Lambda]`$、$`Z^\Lambda = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+2})`$** で両方の半分とも成り立つ
+  （$`Z_R = L(\theta'_2\cdot(\omega+1)+G''(\omega+1)\cdot\omega)`$ までの査読の回数は [SHIFT9-ja.md](SHIFT9-ja.md) §3.4 のとおり。$`Z_R`$ から $`Z^\varepsilon`$ までは査読 2 回で 2 つの証明、§1.1、§1.2。$`Z^\varepsilon`$ から
+  $`Z^\Lambda`$ までは査読 1 回、§1.1）。$`Z^{\mathrm{LL}}`$ までの段階（§1.1）は書いたままでは証明されていない：1 回目の査読は証明済みと認め、2 回目の査読が進行を止める点を見つけた（§2.1）。
+- $`R_2^S`$ での Wilken の主張：FRAG のもとで $`[0, Z^\varepsilon)`$（$`[0, Z^\Gamma)`$ は [SHIFT9-ja.md](SHIFT9-ja.md) §3.4 のとおり。$`Z^\Gamma`$ から $`Z^\varepsilon`$ までは査読 2 回で 2 つの証明）。FRAG 無しでは
+  $`\upsilon_{\omega^3}`$ まで。
+- $`R_2^S`$ と $`R_2^C`$：右端が $`Z^\varepsilon`$ 以下のどの関係でも 2 つは一致する（FRAG のもと）。FRAG のもとで $`\beta_0 \ge \sigma_S \ge Z^\varepsilon`$。右端が $`Z^\varepsilon`$ 以下のどの組でも [CW12b] の判定と
+  一様な試験が必要なことが成り立ち、共終な Pred₁ を持つどの左端も種類 K01 か K2 である所では CRIT-IND の仮定は定理（§2.2）。最小の扇では最初の食い違いは 2 つだけ。(E) は未解決で、
+  $`\beta_0`$ の場所は分かっていない。
+- 届く先（FRAG のもと）：$`Z^\Lambda`$ より下のどのやり直しでもちょうど。その上の長いやり直しでは前のちょうどの値はある符号で偽で、証明済みなのは下からと上からの評価だけ（§2.1）。最初の
+  骨組みのちょうどの長い届く先にも同じ欠けがある（§2.1）。
+- **LOW：FRAG のもとで偽**。**LOW$`^\infty`$：FRAG のもとで真**（どちらも査読 1 回。変化なし）。予想 CORE-2 の段階 PIN と LOW：決まっていない（変化なし）。
+- $`\theta_0`$ より下の下からの評価の計画：$`\psi_{\Omega_1}(\varepsilon_{\Omega_\omega+1})`$ より下で鎖の数 3、$`\psi_{\Omega_1}(\Omega_{\omega\cdot 2})`$ より下で 4、今は $`\psi_{\Omega_1}(S_*)`$ より下で 5。だから
+  $`\iota(\mathrm{CH}_5) \ge \psi_{\Omega_1}(S_*)`$、$`m_F \gt \psi_{\Omega_1}(S_*)`$（§2.3）。SRO より下の段階：変化なし（3,166 個の標本の行列すべてでどの $`n`$ でも。SRO より下のすべての標準の行列に
+  ついての一般の命題は未解決）。
+
+### 2.5 39 回目の確かめ
+
+どの実行も 60 秒未満。どれも証明ではない。
+
+- §2.1。9 回の実行（固定点、$`\hat G''`$ より下の段、ずれの定義域、読み、遠い移し、名前の鎖、符号 $`c_k`$）、食い違い 0。試験の道具の誤りを 4 つ見つけて直し、論文はそのことを書いている。
+  Lean は緑で Python と同じ。査読者：4 つの基で 100 個の一般の可算のずれ、食い違い 0。定義域の 337 個の添字で符号の上限の破れ 0。F-1 と m1 の反例、B-2 の点。著者の Lean のファイルの
+  再実行は同じ出力。
+- §2.2。4 回の実行（$`Z^{\mathrm{LL}}`$ の区域の符号と点、届く先の分からないやり直し、最小の扇の形）、失敗 0。Lean は緑で Python と同じ。査読者：実行の再実行は同じ出力。600 個のでたらめな
+  添字のうち、$`Z^{\mathrm{LL}}`$ と $`Z^{\mathrm{LX}}`$ の間の 147 個はすべて予想どおりの形。Lean のファイルの再実行は緑。$`R_2^S`$、$`R_2^C`$、届く先、写し、判定は計算できない。
+- §2.3。LEX-CAP の 2 つの条件を、種ごとに 380 個のでたらめな引数、2 つの種で（約 71,700 の順序のついた組、深さ 6 まで）。$`S_*`$、RHO-LEAF、証拠の族、ALPHA-LOW$`^\Gamma`$ も。失敗 0。
+  査読者：どちらの種の再実行も同じ出力。自前の深さの読み手で 2 つの種（種ごとに約 51,000 組、より深い入れ子、より多くの類）、失敗 0。(C1) の真の段差、ALPHA-LOW、REDUCTION の Lean の
+  ファイル、緑。確かめは引数の 1 つの類だけを覆う (m8)。
+
+### 2.6 未解決
+
+- FRAG のもとで $`R_2^C`$ で $`Z^\Lambda`$ より上（FRAG 無しでは $`X_4`$ より上）、$`R_2^S`$ で $`Z^\varepsilon`$ より上の主張。次は、長い届く先の直した値（§2.1 の F-1）とその証明と移しでの不変性を、
+  最初の骨組みと 1 つ上で。そのあと定理 C$`^{\mathrm{LL}}`$ と C$`^{\mathrm{FP}}`$ をもう一度（または、上からの評価だけを要る UNIFORM-A（§2.2）での最前線）。$`\hat G''+G''(\omega^2)`$ からの符号、$`\Omega_2`$ からの段、
+  1 つ上の着地の計算、$`P_3`$ より下の CAP-0 と NOT-LOW、CAP-0、CAP-1、NU-CT の類似による $`\nu_3`$。FRAG 無しで $`\nu`$ より上の段の $`o_k = \omega`$。
+- [SHIFT2-ja.md](SHIFT2-ja.md)〜[SHIFT6-ja.md](SHIFT6-ja.md) のどの結果が、F-1 の符号でのちょうどの長い届く先を使っているか（§2.1）。
 - 2 つの段をまたぐ $`m^*`$ での越え方を、確かめの行つきの独立の段階として書くこと（[SHIFT8-ja.md](SHIFT8-ja.md) §1.2 の細かい点 m5）。
-- 最前線より上の $`R_2^S = R_2^C`$：(E)。符号が $`\varepsilon_{G''(\omega+1)+\omega}+1`$ 以上の区域の新しい組での SHIFT のデータと、扇の頂点と蓋での余分な組を除くこと（§1.2）。そして $`\beta_0`$ そのもの
-  （予想：$`\beta_0 \ge x_F^C`$。型 F は除かれておらず、$`x_F^C`$ より上では純粋な扇と部分型 (N0) が残る。FAN-LOAD は予想）。$`\kappa_C`$ より上の後続の段階での $`\le_1`$ の逆向き。
+- $`Z^\varepsilon`$ より上の $`R_2^S = R_2^C`$：(E)。最前線より上の左端の種類と、扇の頂点と蓋での余分な組を除くこと。そして $`\beta_0`$ そのもの（予想：$`\beta_0 \ge x_F^C`$。最小の扇では
+  $`\beta_0 = y_1`$ と (N0) の場合が残る。FAN-LOAD は予想で、頂点自身の区間を通る道が 1 つ増えた）。$`\kappa_C`$ より上の後続の段階での $`\le_1`$ の逆向き。
 - $`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価と $`\iota(\mathrm{CH}_3)`$ の上からの評価。
-- 最初の到達不能基数：$`\varepsilon_{\Omega_\omega+1}`$ より先の鎖の数 3。$`\Omega_{\omega\cdot 2}`$ より先は、(REP$`^\rho`$)（各単位の中の宿す階数の符号。予想 MARKER-SELF）か段階の道の壁を越える別のやり方、
-  そして B-1。そのあと $`\theta_0`$ までの $`\Omega`$ の塔。$`\Theta_1`$ より先の $`\mathrm{CH}_2`$。SRO より下のすべての標準の行列での段階。
+- 最初の到達不能基数：$`\varepsilon_{\Omega_\omega+1}`$ より先の鎖の数 3。$`S_*`$ より先は、$`\alpha \ge \Gamma_0`$ の容量（予想 LEX-SELF）か別のやり方、そして B-1。そのあと $`\theta_0`$ までの $`\Omega`$ の塔。
+  $`\Theta_1`$ より先の $`\mathrm{CH}_2`$。SRO より下のすべての標準の行列での段階。
 - 名前：$`R(\Theta_{d\omega})`$。$`\Lambda_{\mathrm{fp}2}`$ と $`\Theta_1`$ の間の正確なずれ。符号で書いた届く先の InaccPsi の式。$`\nu`$ より上の、$`\upsilon`$ の点でない点の名前。
   [COVER-ja.md](COVER-ja.md) §9 の残り。

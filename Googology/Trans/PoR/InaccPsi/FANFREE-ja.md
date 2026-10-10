@@ -520,4 +520,4 @@ $`\Lambda' = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta+\varepsilon_{\zeta_{
 
 ## 13. 未解決
 
-あとの回でこの一覧は変わった。今の一覧は [SHIFT10-ja.md](SHIFT10-ja.md) §1.6 にある。
+あとの回でこの一覧は変わった。今の一覧は [SHIFT10-ja.md](SHIFT10-ja.md) §2.6 にある。
