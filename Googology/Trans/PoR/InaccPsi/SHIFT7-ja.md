@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 30〜32 回目：どの深さでも相対的な遠いピン、LOW の否定、$`\nu_C = \nu_S = L(\omega+1)`$ とその監査、$`\nu_C`$ の上の $`X_A`$ までの主張、$`\psi_{\Omega_1}(\Omega_{\omega+1})`$ までの素の符号
 
-このページは [SHIFT6-ja.md](SHIFT6-ja.md) の続き（そこの §3 が 29 回目）。§1 が 30 回目、§2 が 31 回目、§3 が 32 回目。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT6-ja.md](SHIFT6-ja.md) の続き（そこの §3 が 29 回目）。§1 が 30 回目、§2 が 31 回目、§3 が 32 回目。33 回目は [SHIFT8-ja.md](SHIFT8-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -364,7 +364,7 @@ Wilken 2020（L.21.7、L.21.10、L.21.12、Prop. 21.6、Prop. 21.11）、Carlson
   （[SHIFT2-ja.md](SHIFT2-ja.md) §2.1）$`\psi_{\Omega_2}(\Omega_2)`$ より下のずれについてだけ書かれていて、その先での使い方は、段 1 でも、査読の注意に立つ。だから §1.1 の下の半分もそれを
   使う。段 2 への移しは書かれている。材料はどれもある。§1.1 の基の取りかえ BC$`^{\mathrm{rel}}`$ を使った補題として書くべき。(R-2) CROSS-LIM の 1 つの引用は、越えたやり直しの基で、
   複写無しに書いた §1.1 の移しの補題が要る。その証明は複写を使わないので、段階は成り立つ。(R-3) 上の SKEL⁺ の回数。
-- **残り**（文章だけ。数学の穴は見つからなかった）：$`\psi_{\Omega_2}(\Omega_2)`$ より先の LONG-RS$`^U`$ を補題として、段 2 での確かめの行、CNST$`_j`$ の数値の確かめ、引用。
+- **残り**（文章だけ。数学の穴は見つからなかった）：$`\psi_{\Omega_2}(\Omega_2)`$ より先の LONG-RS$`^U`$ を補題として、段 2 での確かめの行、CNST$`_j`$ の数値の確かめ、引用。4 つとも 33 回目に済んだ（[SHIFT8-ja.md](SHIFT8-ja.md) §1.2）。
 
 ### 3.2 $`\nu_C`$ の上：$`\nu`$ の区域と、FRAG のもとで $`[0, X_A]`$ での Wilken の主張
 
@@ -389,7 +389,7 @@ X_A = H(\eta_\nu + \omega^3\cdot 2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \om
 
   だから **FRAG のもとで、$`R_2^C`$ での Wilken の主張は $`[0, X_A]`$ で成り立つ**。両方の半分とも：核の側は定理 A$`^\nu`$ から、名前の側は $`X_A`$ が標準形だから（補題 L）。
   これは $`\nu_C`$ より上で初めて証明された範囲。論文の注意：$`\nu`$ より上の届く先の計算が無ければ、この方法で得られるのはここまで。
-- **定理 B$`^\nu`$：未証明**（進行を止める点 B-1）。論文の主張：どの $`j \ge 1`$ でも両方の構造で $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$、これらが $`L(\omega^2)`$ より下の新しい組のすべて、
+- **定理 B$`^\nu`$：未証明**（進行を止める点 B-1。33 回目に直して証明した、[SHIFT8-ja.md](SHIFT8-ja.md) §1.1、§1.2）。論文の主張：どの $`j \ge 1`$ でも両方の構造で $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$、これらが $`L(\omega^2)`$ より下の新しい組のすべて、
   $`L(\omega^2)`$ より下のどのやり直しもちょうどの届く先を持つ、$`\beta_0 \gt L(\omega^2)`$、だから $`[0, L(\omega^2)]`$（$`L(\omega^2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+2})`$）での主張。査読者：下からの評価 LOWER$`_j`$
   （蓋 $`L(\omega\cdot(j-1)+1)`$ の上の最小の上端は $`L(\omega\cdot j+1)`$ 以上）は、その上端を含みうる 1 つの区間 $`[L(e), L(e+1))`$ の中で CAP-1 と LONG-CLASS$`^\omega`$ を使うが、計算を区間に
   移す補題（BASE-INV、GAP-CALC）は、それより下のまるごとの区間についてだけ書かれている。だから LOWER$`_j`$、NU$`_j`$、定理 B$`^\nu`$、$`[0, L(\omega^2)]`$ での主張は、書いたままでは
@@ -422,7 +422,7 @@ X_A = H(\eta_\nu + \omega^3\cdot 2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \om
 \psi_{\Omega_1}(\Omega_{\omega+1}) = \sup_m \psi_{\Omega_1}(S_m).
 ```
 
-- **原子の単位**（証明済み。SUP$`^A`$、REGION$`^A`$、LEX$`^A`$、TOP-HOST$`^A`$、IDX$`^A`$ は移しで）。原子とは $`\Omega_\omega \lt E \lt \sigma_{\omega+1}`$ の $`\varepsilon`$ 数 $`E`$ のこと。Veblen の原子 $`\varphi(\alpha, \beta)`$ は単位
+- **原子の単位**（証明済み。SUP$`^A`$、REGION$`^A`$、LEX$`^A`$、SHAPE$`^A`$、TOP-HOST$`^A`$、IDX$`^A`$ は移しで、細かい点 m4）。原子とは $`\Omega_\omega \lt E \lt \sigma_{\omega+1}`$ の $`\varepsilon`$ 数 $`E`$ のこと。Veblen の原子 $`\varphi(\alpha, \beta)`$ は単位
   $`r \lt x \lt A(\alpha) \lt A(\beta) \lt y \lt v \lt c`$、$`x \lt_2 y`$、$`v \le_1 v + d_\alpha`$、$`c \le_1 c\cdot 2 + v + d_\beta`$、$`r, x \le_1 c\cdot 2 + v + d_\beta`$ を持ち、原子 $`\psi_{\Omega_{\omega+1}}(\delta)`$ は
   $`r \lt x \lt A(\delta) \lt y \lt c`$、$`x \lt_2 y`$、$`c \le_1 c\cdot 3 + d_\delta`$、$`r, x \le_1 c\cdot 3 + d_\delta`$ を持つ（$`A(z)`$ は引数 $`z`$ の符号で、その点が $`d_z`$）。原子の組はより小さい重みのどの単位も
   宿し（ATOM-SUP）、1 つの普遍な上端が $`\sigma_{\omega+1}`$ より下の重みのどの単位も宿し（UNIV$`^A`$）、符号は鎖の数 3 の扇の無いもの（WT$`^A`$、ORD-A、SHAPE$`^A`$）。MODULE-RED$`_4`$ で、
@@ -439,6 +439,8 @@ X_A = H(\eta_\nu + \omega^3\cdot 2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \om
 - **未解決**：$`\psi_{\Omega_1}(\Omega_{\omega+1}+1)`$、$`\psi_{\Omega_1}(\Omega_{\omega\cdot 2})`$、そして $`\theta_0`$ まで（$`\Omega_{\omega+1}`$ より上の単位を持つ段階の系が要る）。$`\varepsilon_{\Omega_\omega+1}`$ より先の鎖の数 3。
 
 ### 3.4 32 回目のあとの状態
+
+[SHIFT8-ja.md](SHIFT8-ja.md) §1.4 で置き換えた。
 
 - $`R_2^C`$ での Wilken の主張：FRAG 無しで $`[0, X_4]`$、そして **FRAG のもとで $`[0, X_A]`$、$`X_A = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P' + \omega^{\theta+3}\cdot 2)`$** で両方の半分とも
   成り立つ（$`[0, X_{21}]`$ は査読 2 回。$`\nu_C = \nu_S = L(\omega+1)`$ までは査読 1 回と監査 1 回で、FRAG、FRAG2、FRAG-SUBST、いちばん弱い 3 つのつなぎは査読 2 回、§3.1。$`\nu_C`$ から $`X_A`$ までは
@@ -465,6 +467,8 @@ X_A = H(\eta_\nu + \omega^3\cdot 2) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \om
   自前の試し、失敗 0。模型の証明書を 1 つ見つけ、2 段の模型は手で証明した。
 
 ### 3.6 未解決
+
+[SHIFT8-ja.md](SHIFT8-ja.md) §1.6 で置き換えた。
 
 - FRAG のもとで $`X_A`$ より上の主張（FRAG 無しでは $`X_4`$ より上）。まず B-1 の直し（区域の形の GAP-CALC。そのあとどの $`j`$ でも $`L(\omega\cdot j) \lt_2 L(\omega\cdot j+1)`$ と $`[0, L(\omega^2)]`$
   での主張）、次に $`\nu`$ の上の骨組みの最初のやり直し $`L(\omega^2)`$：いくつかの $`L(e)`$ を一度に動かす FRAG、その骨組みのやり直しの計算、その $`P'`$ 以上の符号。そのあと $`\nu_3`$。$`R_2^S`$ で：

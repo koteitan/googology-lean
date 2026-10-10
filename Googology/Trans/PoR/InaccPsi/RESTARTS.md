@@ -65,6 +65,9 @@ equals a substitution map (FRAG-SUBST, [BREAK.md](BREAK.md) §4, 2 reviews).
 
 ## 2. Base changes that keep $`\le_2`$ (Theorem FRAG2)
 
+In the thirty-third round FRAG2 was shown to hold also above $`\nu`$, where the fixed set may contain pairs (FRAG2$`^{\mathrm{rel}}`$), and FRAG was extended to move several points
+$`L(e)`$ at once, each with its gap (FRAG″ and FRAG2″, below $`L(\Omega_1\cdot\omega)`$), 1 review each ([SHIFT8.md](SHIFT8.md) §1.1).
+
 $`R_2^+`$ is **skeletal** on a set $`Y`$ if every point of $`Y`$ that is not a $`\upsilon`$-point has its $`R_1^+`$ reach, and every
 $`\lt_2`$-pair is $`(\upsilon_\xi, \upsilon_{\xi+1})`$. Write $`\mathrm{cap}(u) = \mathrm{lh}(u)`$.
 

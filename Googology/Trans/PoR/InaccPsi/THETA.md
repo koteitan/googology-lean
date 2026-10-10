@@ -167,7 +167,7 @@ Notation of [VEBLEN.md](VEBLEN.md) §11: $`u_m = \upsilon^2_m`$, $`x = x_2`$, $`
 
 ## 5. Status after the thirteenth round
 
-The fourteenth to thirty-second rounds changed this status; see §9.5, [SHIFT.md](SHIFT.md) §5, §8.5, §9.5, [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5, [SHIFT3.md](SHIFT3.md) §1.5, §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 and [SHIFT7.md](SHIFT7.md) §1.4, §2.4, §3.4.
+The fourteenth to thirty-third rounds changed this status; see §9.5, [SHIFT.md](SHIFT.md) §5, §8.5, §9.5, [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5, [SHIFT3.md](SHIFT3.md) §1.5, §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 , [SHIFT7.md](SHIFT7.md) §1.4, §2.4, §3.4 and [SHIFT8.md](SHIFT8.md) §1.4.
 
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, \upsilon^*)`$ with $`\upsilon^* = \psi_{\Omega_1}(\Omega_\omega + \Omega_2)`$ (resting on one transfer), and on $`[0, X_2)`$ with
@@ -199,7 +199,7 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 
 ## 7. Open
 
-The fourteenth to thirty-second rounds changed this list; the current list is [SHIFT7.md](SHIFT7.md) §3.6.
+The fourteenth to thirty-third rounds changed this list; the current list is [SHIFT8.md](SHIFT8.md) §1.6.
 
 
 - The first inaccessible: $`H_m`$ (enough: $`\iota(\mathrm{CH}_2) \ge \theta_0`$, through modules for the fixed points of $`\upsilon`$ from $`\Lambda_\Gamma`$ up to $`\theta_0`$, with MODULE-RED widened
@@ -505,7 +505,7 @@ Notation of §4.
 
 ### 9.5 Status after the fourteenth round
 
-The fifteenth to thirty-second rounds changed this status; see [SHIFT.md](SHIFT.md) §5, §8.5, §9.5, [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5, [SHIFT3.md](SHIFT3.md) §1.5, §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 and [SHIFT7.md](SHIFT7.md) §1.4, §2.4, §3.4.
+The fifteenth to thirty-third rounds changed this status; see [SHIFT.md](SHIFT.md) §5, §8.5, §9.5, [SHIFT2.md](SHIFT2.md) §1.5, §2.5, §3.5, [SHIFT3.md](SHIFT3.md) §1.5, §2.5, [SHIFT4.md](SHIFT4.md) §1.5, §2.5, [SHIFT5.md](SHIFT5.md) §1.4, §2.4, [SHIFT6.md](SHIFT6.md) §1.4, §2.4, §3.4 , [SHIFT7.md](SHIFT7.md) §1.4, §2.4, §3.4 and [SHIFT8.md](SHIFT8.md) §1.4.
 
 - Wilken's claim in $`R_2^C`$: both halves hold on $`[0, X_3]`$ with $`X_3 = \psi_{\Omega_1}(\Omega_\omega + \omega^{\theta_2+2} + \omega^{\theta+3}\cdot 2)`$, no FRAG and no transfer left;
   the names of $`\Theta_\delta`$, $`\Theta_{d\omega}`$, $`\Lambda^*`$ and $`\nu_P = X_2`$ are proved; the core half holds on $`[0, \nu_C]`$ with $`\nu_C \ge X_3`$.
@@ -529,7 +529,7 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 
 ### 9.7 Open
 
-The fifteenth to thirty-second rounds changed this list; the current list is [SHIFT7.md](SHIFT7.md) §3.6.
+The fifteenth to thirty-third rounds changed this list; the current list is [SHIFT8.md](SHIFT8.md) §1.6.
 
 - Upper bounds: an InaccPsi bound for $`\nu_C`$ (one new pair $`\rho_L \lt_2 b`$ at a named $`b`$, §9.1), for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$.
 - The first inaccessible: $`H_m`$, through $`\iota(\mathrm{CH}_2) \ge \theta_0`$ (modules from $`\Lambda_T`$ on: several slots, CHAIN-REL, or the collapsing function $`\vartheta^\upsilon`$);

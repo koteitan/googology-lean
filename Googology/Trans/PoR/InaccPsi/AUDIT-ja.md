@@ -2,7 +2,7 @@
 
 # $`R_2^+`$：$`\nu_C = L(\omega+1)`$ の依存の表（32 回目の監査）
 
-このページは [SHIFT7-ja.md](SHIFT7-ja.md) §3.1 に属する。[SHIFT7-ja.md](SHIFT7-ja.md) §2.1 の節目が何に立つかを並べる：
+このページは [SHIFT7-ja.md](SHIFT7-ja.md) §3.1 に属する。行 T2b2、T2c1 と最後の節は 33 回目に更新した（[SHIFT8-ja.md](SHIFT8-ja.md) §1.2）。[SHIFT7-ja.md](SHIFT7-ja.md) §2.1 の節目が何に立つかを並べる：
 
 ```math
 \nu_C = \nu_S = L(\omega+1) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P'),\quad\text{and Wilken's claim in } R_2^C \text{ on } [0, \nu_C]\quad(\text{given FRAG}).
@@ -27,10 +27,10 @@
 | T2a | ずらしの判定 SHIFT | [SHIFT-ja.md](SHIFT-ja.md) §1 | 証明済み | 1（その仮定は監査が確かめた） | Wilken 2020、Prop. 21.11 |
 | T2b | (C1)、(C2)、(P)：$`L(n) \le_1 L(n+1)`$、$`L(n) \le_1 L(\omega) \le_1 L(\omega+1)`$ | [SHIFT7-ja.md](SHIFT7-ja.md) §2.1 | 移し、FRAG のもと | 2（監査） | T2b1 |
 | T2b1 | CROSS-LIM：符号と指数が $`P'`$ 以上のやり直しは $`H(\eta + P')`$ に届く（つなぎ L3） | [SHIFT7-ja.md](SHIFT7-ja.md) §2.1 | 移し、FRAG のもと | 2（監査） | T2b2、T2b3、S2、S10 |
-| T2b2 | LONG-RS$`^U`$：長いやり直しの段階 | [SHIFT2-ja.md](SHIFT2-ja.md) §1.1、§2.1 | η のずれが $`\psi_{\Omega_2}(\Omega_2)`$ より下で証明済み、FRAG のもと。その先は段 1 でも査読の注意だけ（R-1） | 1 | S13–S15 |
+| T2b2 | LONG-RS$`^U`$、今は LONG-RS$`^{\mathrm{rel}}`$：長いやり直しの段階 | [SHIFT2-ja.md](SHIFT2-ja.md) §1.1、§2.1。[SHIFT8-ja.md](SHIFT8-ja.md) §1.2 | どの段でも、$`c \lt \Omega_2`$ の $`\omega^c`$ より下のどの η のずれでも証明済み、FRAG のもと（CAP-SUPPLY、XA$`^p`$、FRAG2$`^{\mathrm{rel}}`$ とあわせて。33 回目に書いた、R-1） | 1 | S13–S15 |
 | T2b3 | どの段でも実現するもの | [SHIFT5-ja.md](SHIFT5-ja.md) §2.2。[SHIFT3-ja.md](SHIFT3-ja.md) §2.4 | 証明済み | 1 / 2 | S11 |
 | T2c | (C3)：TC⁺$`^\omega`$、EMB、ONTO-FIN（つなぎ L3） | [SHIFT7-ja.md](SHIFT7-ja.md) §2.1 | 移し、FRAG のもと | 2（監査） | T2c1、T2c2、S1、S12 |
-| T2c1 | THETA-EQ$`^{\mathrm{rel}}`$、EQUIV$`^{\mathrm{rel}}`$、EQ-F$`^{\mathrm{rel}}`$ | [SHIFT7-ja.md](SHIFT7-ja.md) §1.1 | 移し | 1 | S3、S6 |
+| T2c1 | THETA-EQ$`^{\mathrm{rel}}`$、EQUIV$`^{\mathrm{rel}}`$、EQ-F$`^{\mathrm{rel}}`$。複写の無い基では 2.6′ と TC⁺$`^{\mathrm{rel}}`$（R-2） | [SHIFT7-ja.md](SHIFT7-ja.md) §1.1。[SHIFT8-ja.md](SHIFT8-ja.md) §1.2 | 移し | 1 | S3、S6 |
 | T2c2 | どの段でも基の取りかえ BC$`^\pi`$。短い符号での TC⁺。READ-EQ | [SHIFT5-ja.md](SHIFT5-ja.md) §1.2、§2.2 | 証明済み（TC⁺ は FRAG のもと） | 1 | S11 |
 | T2d | FIRST-PAIR、蓋 CAP、NU-CT | [BREAK-ja.md](BREAK-ja.md) §2 | 証明済み | 1 | S12 |
 | T3 | 核の側：$`[0, \nu_C] \subseteq \mathrm{Core}(R_2^C)`$ | [BREAK-ja.md](BREAK-ja.md) §2 | 証明済み | 1 | S12。Carlson 2009 |
@@ -61,3 +61,13 @@ Skolem hulling", APAL 145 (2007) 130–161、[W07b] は Wilken, "Σ₁-elementar
 **いちばん弱い 3 つのつなぎ**（それが崩れたら崩れるものの多さと、確かめの少なさで選んだ）：L1 = S3、S4。L2 = T1c と S10。L3 = T2、T2b、T2b1、T2c。監査はそこに致命的な点も
 進行を止める点も見つけなかった。その細かい点と、その査読者の細かい点は [SHIFT7-ja.md](SHIFT7-ja.md) §3.1 にある。鎖が使うのに補題として書かれていないただ 1 つのものは、η のずれが
 $`[\psi_{\Omega_2}(\Omega_2), P')`$ にあるときの LONG-RS$`^U`$（R-1）：材料はどれもあり、段 1 で（S1、S2、T1b、だから下の半分が）と段 2 で（T2b1 が）使う。
+今はそれは書かれた（行 T2b2）。
+
+**33 回目に閉じた残り**（[SHIFT8-ja.md](SHIFT8-ja.md) §1.2。どれも査読 1 回で、致命的な点も進行を止める点も無い）：
+
+- R-1：CAP-SUPPLY とあわせた LONG-RS$`^{\mathrm{rel}}`$。査読者の 1 行の直し 2 つのあとで、FRAG のもとで証明済み（XA$`^p`$ の上限は、やり直しでない動かない点の
+  $`\mathrm{lh}(x)`$ も超えること。$`\pi`$ の符号のやり直しでは $`c = D' + 1`$ と取ること）。
+- R-2 と L3-b：複写の無い基での計算の等式（2.6′）と TC⁺$`^{\mathrm{rel}}`$。移しで証明済み。引用は直した。
+- L2-a、L1-b、L2-b：段 2 での確かめの行。移しで証明済み（査読者は行の見本を確かめた）。
+- L1-a：可算の定数つきの $`\theta`$ より先の CNST$`_j`$。確かめた（失敗 0。査読者が新しい種で確かめ直した）。R-3 はもう表で直してある。
+- 残り：2 つの段をまたぐ $`m^*`$ での越え方には確かめの行が無い（節目では使わない）。
