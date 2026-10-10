@@ -2,7 +2,7 @@
 
 # $`R_2^+`$: the dependency table of $`\nu_C = L(\omega+1)`$ (the audit of the thirty-second round)
 
-This page belongs to [SHIFT7.md](SHIFT7.md) §3.1; the rows T2b2 and T2c1 and the last section are updated by the thirty-third round ([SHIFT8.md](SHIFT8.md) §1.2). It lists what the milestone of [SHIFT7.md](SHIFT7.md) §2.1 rests on:
+This page belongs to [SHIFT7.md](SHIFT7.md) §3.1; the rows T2b2 and T2c1 and the last section are updated by the thirty-third round ([SHIFT8.md](SHIFT8.md) §1.2) and the thirty-fourth round (§2.1 there). It lists what the milestone of [SHIFT7.md](SHIFT7.md) §2.1 rests on:
 
 ```math
 \nu_C = \nu_S = L(\omega+1) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P'),\quad\text{and Wilken's claim in } R_2^C \text{ on } [0, \nu_C]\quad(\text{given FRAG}).
@@ -27,7 +27,7 @@ in [SHIFT7.md](SHIFT7.md) (one higher than in the papers). "Given FRAG" means gi
 | T2a | the shift criterion SHIFT | [SHIFT.md](SHIFT.md) §1 | proved | 1 (its hypotheses checked by the audit) | Wilken 2020, Prop. 21.11 |
 | T2b | (C1), (C2), (P): $`L(n) \le_1 L(n+1)`$, $`L(n) \le_1 L(\omega) \le_1 L(\omega+1)`$ | [SHIFT7.md](SHIFT7.md) §2.1 | transfer, given FRAG | 2 (audit) | T2b1 |
 | T2b1 | CROSS-LIM: a restart with code and exponent $`\ge P'`$ reaches $`H(\eta + P')`$ (link L3) | [SHIFT7.md](SHIFT7.md) §2.1 | transfer, given FRAG | 2 (audit) | T2b2, T2b3, S2, S10 |
-| T2b2 | LONG-RS$`^U`$, now LONG-RS$`^{\mathrm{rel}}`$: the long-restart step | [SHIFT2.md](SHIFT2.md) §1.1, §2.1; [SHIFT8.md](SHIFT8.md) §1.2 | proved, given FRAG, for every η-offset below $`\omega^c`$, $`c \lt \Omega_2`$, at every level (with CAP-SUPPLY, XA$`^p`$, FRAG2$`^{\mathrm{rel}}`$; written in the thirty-third round, R-1) | 1 | S13–S15 |
+| T2b2 | LONG-RS$`^U`$, now LONG-RS$`^{\mathrm{rel}}`$: the long-restart step | [SHIFT2.md](SHIFT2.md) §1.1, §2.1; [SHIFT8.md](SHIFT8.md) §1.2 | proved, given FRAG, for every η-offset below $`\omega^c`$, $`c \lt \Omega_2`$, at every level (with CAP-SUPPLY, XA$`^p`$, FRAG2$`^{\mathrm{rel}}`$; written in the thirty-third round, R-1) | 1; the repaired form 2 | S13–S15 |
 | T2b3 | realizers at every level | [SHIFT5.md](SHIFT5.md) §2.2; [SHIFT3.md](SHIFT3.md) §2.4 | proved | 1 / 2 | S11 |
 | T2c | (C3): TC⁺$`^\omega`$, EMB, ONTO-FIN (link L3) | [SHIFT7.md](SHIFT7.md) §2.1 | transfer, given FRAG | 2 (audit) | T2c1, T2c2, S1, S12 |
 | T2c1 | THETA-EQ$`^{\mathrm{rel}}`$, EQUIV$`^{\mathrm{rel}}`$, EQ-F$`^{\mathrm{rel}}`$; for bases without a copy 2.6′ and TC⁺$`^{\mathrm{rel}}`$ (R-2) | [SHIFT7.md](SHIFT7.md) §1.1; [SHIFT8.md](SHIFT8.md) §1.2 | transfer | 1 | S3, S6 |
@@ -70,4 +70,6 @@ It is now written (row T2b2).
 - R-2 and L3-b: the identities of the calculus for bases without a copy (2.6′) and TC⁺$`^{\mathrm{rel}}`$, proved by transfer; the citations are corrected.
 - L2-a, L1-b, L2-b: the audit rows at level 2, proved by transfer (the referee checked a sample of the rows).
 - L1-a: CNST$`_j`$ past $`\theta`$ with countable constants, checked (0 failures; the referee confirmed it with a new seed). R-3 was corrected in the table already.
+- In the thirty-fourth round every use of the long-restart step cites LONG-RS$`^{\mathrm{rel}}`$ with these two repairs, also at a base point that is not a bare cap, and its referee
+  checked the instances ([SHIFT8.md](SHIFT8.md) §2.1; 2 reviews).
 - Left: the crossing at $`m^*`$ across two levels has no audit row (not used by the milestone).

@@ -2,7 +2,7 @@
 
 # $`R_2^+`$：$`\nu_C = L(\omega+1)`$ の依存の表（32 回目の監査）
 
-このページは [SHIFT7-ja.md](SHIFT7-ja.md) §3.1 に属する。行 T2b2、T2c1 と最後の節は 33 回目に更新した（[SHIFT8-ja.md](SHIFT8-ja.md) §1.2）。[SHIFT7-ja.md](SHIFT7-ja.md) §2.1 の節目が何に立つかを並べる：
+このページは [SHIFT7-ja.md](SHIFT7-ja.md) §3.1 に属する。行 T2b2、T2c1 と最後の節は 33 回目（[SHIFT8-ja.md](SHIFT8-ja.md) §1.2）と 34 回目（そこの §2.1）に更新した。[SHIFT7-ja.md](SHIFT7-ja.md) §2.1 の節目が何に立つかを並べる：
 
 ```math
 \nu_C = \nu_S = L(\omega+1) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{P'+1} + P'),\quad\text{and Wilken's claim in } R_2^C \text{ on } [0, \nu_C]\quad(\text{given FRAG}).
@@ -27,7 +27,7 @@
 | T2a | ずらしの判定 SHIFT | [SHIFT-ja.md](SHIFT-ja.md) §1 | 証明済み | 1（その仮定は監査が確かめた） | Wilken 2020、Prop. 21.11 |
 | T2b | (C1)、(C2)、(P)：$`L(n) \le_1 L(n+1)`$、$`L(n) \le_1 L(\omega) \le_1 L(\omega+1)`$ | [SHIFT7-ja.md](SHIFT7-ja.md) §2.1 | 移し、FRAG のもと | 2（監査） | T2b1 |
 | T2b1 | CROSS-LIM：符号と指数が $`P'`$ 以上のやり直しは $`H(\eta + P')`$ に届く（つなぎ L3） | [SHIFT7-ja.md](SHIFT7-ja.md) §2.1 | 移し、FRAG のもと | 2（監査） | T2b2、T2b3、S2、S10 |
-| T2b2 | LONG-RS$`^U`$、今は LONG-RS$`^{\mathrm{rel}}`$：長いやり直しの段階 | [SHIFT2-ja.md](SHIFT2-ja.md) §1.1、§2.1。[SHIFT8-ja.md](SHIFT8-ja.md) §1.2 | どの段でも、$`c \lt \Omega_2`$ の $`\omega^c`$ より下のどの η のずれでも証明済み、FRAG のもと（CAP-SUPPLY、XA$`^p`$、FRAG2$`^{\mathrm{rel}}`$ とあわせて。33 回目に書いた、R-1） | 1 | S13–S15 |
+| T2b2 | LONG-RS$`^U`$、今は LONG-RS$`^{\mathrm{rel}}`$：長いやり直しの段階 | [SHIFT2-ja.md](SHIFT2-ja.md) §1.1、§2.1。[SHIFT8-ja.md](SHIFT8-ja.md) §1.2 | どの段でも、$`c \lt \Omega_2`$ の $`\omega^c`$ より下のどの η のずれでも証明済み、FRAG のもと（CAP-SUPPLY、XA$`^p`$、FRAG2$`^{\mathrm{rel}}`$ とあわせて。33 回目に書いた、R-1） | 1。直した形は 2 | S13–S15 |
 | T2b3 | どの段でも実現するもの | [SHIFT5-ja.md](SHIFT5-ja.md) §2.2。[SHIFT3-ja.md](SHIFT3-ja.md) §2.4 | 証明済み | 1 / 2 | S11 |
 | T2c | (C3)：TC⁺$`^\omega`$、EMB、ONTO-FIN（つなぎ L3） | [SHIFT7-ja.md](SHIFT7-ja.md) §2.1 | 移し、FRAG のもと | 2（監査） | T2c1、T2c2、S1、S12 |
 | T2c1 | THETA-EQ$`^{\mathrm{rel}}`$、EQUIV$`^{\mathrm{rel}}`$、EQ-F$`^{\mathrm{rel}}`$。複写の無い基では 2.6′ と TC⁺$`^{\mathrm{rel}}`$（R-2） | [SHIFT7-ja.md](SHIFT7-ja.md) §1.1。[SHIFT8-ja.md](SHIFT8-ja.md) §1.2 | 移し | 1 | S3、S6 |
@@ -70,4 +70,6 @@ $`[\psi_{\Omega_2}(\Omega_2), P')`$ にあるときの LONG-RS$`^U`$（R-1）：
 - R-2 と L3-b：複写の無い基での計算の等式（2.6′）と TC⁺$`^{\mathrm{rel}}`$。移しで証明済み。引用は直した。
 - L2-a、L1-b、L2-b：段 2 での確かめの行。移しで証明済み（査読者は行の見本を確かめた）。
 - L1-a：可算の定数つきの $`\theta`$ より先の CNST$`_j`$。確かめた（失敗 0。査読者が新しい種で確かめ直した）。R-3 はもう表で直してある。
+- 34 回目に、長いやり直しの段階のどの使い方も、この 2 つの直しを入れた LONG-RS$`^{\mathrm{rel}}`$ を引くようになった。裸の蓋でない基の点でも同じ。その査読者が
+  場合を確かめた（[SHIFT8-ja.md](SHIFT8-ja.md) §2.1。査読 2 回）。
 - 残り：2 つの段をまたぐ $`m^*`$ での越え方には確かめの行が無い（節目では使わない）。

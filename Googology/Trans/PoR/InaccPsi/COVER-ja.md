@@ -161,8 +161,9 @@ Carlson の被覆（Carlson 2009, Def 5.2）を $`R_2^S`$ で読んだもの。$
   増える関係は $`R_2^C`$ の $`s \lt_2 s^+`$ だけ、$`\max \mathrm{Pred}_1(s^+) = s`$（だから [THETA-ja.md](THETA-ja.md) §8.2 の LIM2 は使えない）、$`s`$ を含む
   どの S 最小な集合も $`\ge s^+`$ の点を持つ。だから幽霊の問いは、1 つの組 $`(s, s^+)`$ での逆向き $`C \Rightarrow S`$。
 - **予想** MIN$`^S`$。2 つの構造が一致する所では成り立つ。Carlson の Thm 14.10(2) の証明は彼の補題 14.9 を使い、その $`R_2^S`$ の形は
-  知られていない。
-- **未解決**：PINNING（言い換え：$`\mathrm{Core}_C(R_2^S)`$ は $`\nu_S`$ まで始切片か？）と、$`k \ge 2`$ での $`R_2^S`$ の $`o_k = \omega`$。
+  知られていない。今は Carlson の範疇性の論文 [C11] の Claim 1 から $`R_2^S`$ 全体で引用する（arXiv の preprint。査読者が証明をやり直した。[SHIFT8-ja.md](SHIFT8-ja.md) §2.2）。
+- **未解決**：PINNING（言い換え：$`\mathrm{Core}_C(R_2^S)`$ は $`\nu_S`$ まで始切片か？）と、$`k \ge 2`$ での $`R_2^S`$ の $`o_k = \omega`$。今は各段で、$`R_2^S`$ での
+  $`o_k = \omega`$ はその段の留めの命題と同値で、どちらも (E) から出る。FRAG のもとで段 2 では成り立つ（[SHIFT8-ja.md](SHIFT8-ja.md) §2.2）。
 
 ## 5. 6 回目
 
@@ -431,7 +432,7 @@ $`S_n = [\upsilon^2_n, \upsilon^2_{n+1})`$ と $`S_\omega = [x, \nu)`$。
   区間の条件 SC から出る。SC は $`x_2`$ の最初のブロックで証明済み。一般には、段 2 の区間の間でやり直しの点の届く先が対応することが
   要る（RM、予想）。
 - $`R_2^S`$ での $`o_k = \omega`$（$`k \ge 2`$）：未解決。MIN$`^S`$ は $`\beta_0`$ まで成り立つ（§5.4）。場合 (P3b) では、$`s`$ を含む S 最小な集合で偽
-  （MOVE$`^S`$）。だからそこでの目標は、(P3b) を PINNING と合わせて否定すること。
+  （MOVE$`^S`$）。だからそこでの目標は、(P3b) を PINNING と合わせて否定すること（今は：(P3b) は FRAG のもとで起きず、FRAG 無しでは $`\mathrm{Core}(R_2^S)`$ に穴を作る、[SHIFT8-ja.md](SHIFT8-ja.md) §2.2）。
 
 ## 8. 確認
 
@@ -482,6 +483,6 @@ $`S_n = [\upsilon^2_n, \upsilon^2_{n+1})`$ と $`S_\omega = [x, \nu)`$。
 - 到達不能基数：$`H_m`$（$`= FF_{RF} = FF_N`$、そして $`m_F = \sup_k \iota(\mathrm{CH}_k)`$、[FANFREE-ja.md](FANFREE-ja.md) §4。残りは、$`D`$ 全体から扇の無い RF パターンへの写像で、どの段でも $`\nu(s) \ll \nu(t)`$ となるもの、§6.1。値が L1p の無いパターンなら $`\iota(\mathrm{CH}_2) \ge \theta_0`$ が出る、[FANFREE-ja.md](FANFREE-ja.md) §7.2。素の符号は Bachmann–Howard 順序数まで届く、[FANFREE-ja.md](FANFREE-ja.md) §10.2。今は $`\upsilon_2\cdot\upsilon_1`$ まで、[VEBLEN-ja.md](VEBLEN-ja.md) §2。さらに $`\Phi_1`$ まで、§9）、
   $`FF_{cl}`$、FF、POINT-SRO。$`H_m`$ は $`x_F \gt \theta_0`$ と同じか。
 - 最小の扇：名前（基 $`B_F`$。予想は $`I_0`$、§6.4）、$`x_F \lt \psi_{\Omega_1}(I_0\cdot\omega)`$ のような上からの評価（$`\sigma_N = m_F`$ は今は証明済み、[FANFREE-ja.md](FANFREE-ja.md) §4）。
-- $`R_2^S`$：CP3 の (ii) ⇒ (i) と LEFT-CHAR の「⇐」。$`\beta_0`$ より上の MIN$`^S`$。PINNING と CORE-S。$`k \ge 2`$ での $`o_k = \omega`$。幽霊があるときの
+- $`R_2^S`$：CP3 の (ii) ⇒ (i) と LEFT-CHAR の「⇐」。$`\beta_0`$ より上の MIN$`^S`$（今は引用、[SHIFT8-ja.md](SHIFT8-ja.md) §2.2）。PINNING と CORE-S（今は (E) に帰着）。$`k \ge 2`$ での $`o_k = \omega`$。幽霊があるときの
   $`\beta_0`$ より上の NOLIM（と NOLIM$`^*`$）。$`\nu_C = \nu_S`$（§6.3 により：SC、または RM。各区間の臨界な添字の最初の極限より先での SC、[FANFREE-ja.md](FANFREE-ja.md) §7.3。今は、帰着がいつも要る長いやり直しの点での SC、[FANFREE-ja.md](FANFREE-ja.md) §10.3。$`\Sigma_2`$ の形で直接扱えば、写しより下の有限集合を止めたままの、局所的な基の取り替えと平行移動、[VEBLEN-ja.md](VEBLEN-ja.md) §4。その集合を止めると、基の取り替えの区域で帰着が働かない、§11。今は (HC) が証明され帰着が直された。残りはねじれた上向きの規則、[THETA-ja.md](THETA-ja.md) §4）。[BREAK-ja.md](BREAK-ja.md) §7.3 の名前 (N-χ) と (N-ν)。$`\beta_0`$ より
   上の $`R_2^C`$ の RIGHT。

@@ -167,8 +167,9 @@ S-covering of it (the $`R_2^S`$ form of Thm 14.10(2)).
   extra relation is $`s \lt_2 s^+`$ in $`R_2^C`$, $`\max \mathrm{Pred}_1(s^+) = s`$ (so LIM2 of [THETA.md](THETA.md) §8.2 does not apply), and every S-isominimal
   set that contains $`s`$ has a point $`\ge s^+`$. So the ghost question is the converse $`C \Rightarrow S`$ at the one pair $`(s, s^+)`$.
 - **Conjecture** MIN$`^S`$. It holds wherever the two structures agree; Carlson's proof of Thm 14.10(2) uses his Lemma 14.9, which has no
-  known $`R_2^S`$ form.
-- **Open**: PINNING (equivalently: is $`\mathrm{Core}_C(R_2^S)`$ an initial segment up to $`\nu_S`$?), and $`o_k = \omega`$ in $`R_2^S`$ for $`k \ge 2`$.
+  known $`R_2^S`$ form. Now cited for all of $`R_2^S`$ from Carlson's categoricity paper [C11], Claim 1 (an arXiv preprint; the referee re-did the proof; [SHIFT8.md](SHIFT8.md) §2.2).
+- **Open**: PINNING (equivalently: is $`\mathrm{Core}_C(R_2^S)`$ an initial segment up to $`\nu_S`$?), and $`o_k = \omega`$ in $`R_2^S`$ for $`k \ge 2`$. Now at each level $`o_k = \omega`$ in $`R_2^S`$ is
+  equivalent to the pinning statement of that level, and both follow from (E); given FRAG they hold at level 2 ([SHIFT8.md](SHIFT8.md) §2.2).
 
 ## 5. The sixth round
 
@@ -448,7 +449,7 @@ Notation of §2 and §5.2.
   (§6.3). A segment condition SC implies it; SC is proved on the first block of $`x_2`$; in general it needs the reaches of restarts to
   correspond between the segments of level 2 (RM, conjecture).
 - $`o_k = \omega`$ in $`R_2^S`$ ($`k \ge 2`$): open. MIN$`^S`$ holds up to $`\beta_0`$ (§5.4). In case (P3b) it is false at the S-isominimal sets that contain $`s`$
-  (MOVE$`^S`$), so there the target is to refute (P3b) together with PINNING.
+  (MOVE$`^S`$), so there the target is to refute (P3b) together with PINNING (now: (P3b) is excluded given FRAG, and without FRAG it forces a gap in $`\mathrm{Core}(R_2^S)`$, [SHIFT8.md](SHIFT8.md) §2.2).
 
 ## 8. Checks
 
@@ -501,6 +502,6 @@ Each run was under 60 seconds; none is a proof. Certificates count only when rep
 - The inaccessible: $`H_m`$ ($`= FF_{RF} = FF_N`$, and $`m_F = \sup_k \iota(\mathrm{CH}_k)`$, [FANFREE.md](FANFREE.md) §4; what is left is a map from all of $`D`$ to RF fan-free patterns with $`\nu(s) \ll \nu(t)`$ at every step, §6.1; with values without L1p it gives $`\iota(\mathrm{CH}_2) \ge \theta_0`$, [FANFREE.md](FANFREE.md) §7.2; native codes reach the Bachmann–Howard ordinal, [FANFREE.md](FANFREE.md) §10.2, and now $`\upsilon_2\cdot\upsilon_1`$, [VEBLEN.md](VEBLEN.md) §2, then $`\Phi_1`$, §9),
   $`FF_{cl}`$, FF, POINT-SRO; whether $`H_m`$ is equivalent to $`x_F \gt \theta_0`$.
 - The least fan: the names (the base $`B_F`$; conjecture $`I_0`$, §6.4), and an upper bound such as $`x_F \lt \psi_{\Omega_1}(I_0\cdot\omega)`$ ($`\sigma_N = m_F`$ is now proved, [FANFREE.md](FANFREE.md) §4).
-- $`R_2^S`$: (ii) ⇒ (i) of CP3 and "⇐" of LEFT-CHAR; MIN$`^S`$ above $`\beta_0`$; PINNING and CORE-S; $`o_k = \omega`$ for $`k \ge 2`$; NOLIM with a ghost
+- $`R_2^S`$: (ii) ⇒ (i) of CP3 and "⇐" of LEFT-CHAR; MIN$`^S`$ above $`\beta_0`$ (now cited, [SHIFT8.md](SHIFT8.md) §2.2); PINNING and CORE-S (now reduced to (E)); $`o_k = \omega`$ for $`k \ge 2`$; NOLIM with a ghost
   above $`\beta_0`$ (and NOLIM$`^*`$); $`\nu_C = \nu_S`$ (by §6.3: SC, or RM; SC beyond the first limit of critical indices in each segment, [FANFREE.md](FANFREE.md) §7.3; now SC at the long restarts, which the reduction always needs, [FANFREE.md](FANFREE.md) §10.3; directly in $`\Sigma_2`$ form, a local base change and translations with a fixed finite set below the copy, [VEBLEN.md](VEBLEN.md) §4; with that set the reduction fails on the zone of the base change, §11; now (HC) is proved and the reduction repaired, left: a twisted upward rule, [THETA.md](THETA.md) §4); the names (N-χ) and (N-ν) of [BREAK.md](BREAK.md) §7.3; RIGHT in $`R_2^C`$ above
   $`\beta_0`$.
