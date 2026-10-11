@@ -10,6 +10,8 @@ import Googology.Trans.PoR.InaccPsi.R2.RstC
 * `chainA_*`: what a chain gives below `υ_{a+ω·ω}`: the pairs, the closedness of points below,
   landing blocks, the caps of the pairs.
 * `rst_of_chain`, `rstCtx`: the restart context of `ρ_{h+1} = υ_{ω²·(h+1)}` for every `h`.
+  Index shift: in `rI h`, `rstCtx h` and `thmB2_C h` the Lean argument `h` is the paper's `h − 1`
+  (they are about the paper's restart `ρ_{h+1}`; `h = 0` is `ρ_1 = υ_{ω²}`).
 * `thmB2_C` (**Theorem B″ in `R₂^C` for every restart below `υ_{ω³}`, with TOP^h**), `pairs_lt_w3`
   (the `<₂`-pairs below `υ_{ω³}`), `sk3_C` (**Lemma SK3 in `R₂^C`**: skeletal below `υ_{ω³}`).
 -/
@@ -278,7 +280,8 @@ theorem rst_of_chain {a T0 r : Ordinal.{0}}
       hcx.trans (upsilon_normal.strictMono (lt_succ ι)), ?_⟩
     exact upsilon_normal.strictMono (hlim.succ_lt hι)
 
-/-- The restart index `ω²·(h+1)`. -/
+/-- The restart index `ω²·(h+1)` (Lean `h` = paper `h − 1`: `rI h` is the index of the paper's
+restart `ρ_{h+1}`; `rI 0 = ω²`). -/
 noncomputable def rI (h : ℕ) : Ordinal.{0} := ω * ω * ((h + 1 : ℕ) : Ordinal.{0})
 
 /-- The base index of the blocks after the restart block of `ρ_{h+1}`. -/
@@ -359,7 +362,8 @@ theorem rstCtx : ∀ h : ℕ, RstCtx (upsilon (rI h)) (upsilon (rI h + ω)) (ups
 
 /-! ## Theorem B″ for every restart, the pairs, Lemma SK3 -/
 
-/-- **Theorem B″ with Lemma TOP^h in `R₂^C`**, for the restart `ρ = υ_{ω²·(h+1)}` with
+/-- **Theorem B″ with Lemma TOP^h in `R₂^C`** (Lean `h` = paper `h − 1`: this is the paper's
+restart `ρ_{h+1}`), for the restart `ρ = υ_{ω²·(h+1)}` with
 `τ = υ_{ω²·(h+1)+ω}`, `δ = υ_{ω²·(h+1)+ω+1}`: (1) no point below `ρ` is `≤₁` a point `≥ ρ` (so `ρ` has
 no `<₁`-predecessor); (2) `ρ` has no `<₂`-successor; (3) `ρ ≤₁ γ` for `γ ∈ [ρ, δ]`; (4) (TOP) `ρ` is not
 `≤₁` any `γ > δ + 1`; (5) `τ <₂ δ`, and `≤₁` is that of `R₁⁺` on `(ρ, δ]`; (6) no point `≤ δ + 1` is `≤₁`

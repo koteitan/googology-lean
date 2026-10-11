@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the thirtieth to thirty-second rounds: the relative far pin at every depth, not-LOW, $`\nu_C = \nu_S = L(\omega+1)`$ and its audit, the claim up to $`X_A`$ above $`\nu_C`$, and native codes up to $`\psi_{\Omega_1}(\Omega_{\omega+1})`$
 
-This page continues [SHIFT6.md](SHIFT6.md) (§3 there is the twenty-ninth round); §1 is the thirtieth round, §2 the thirty-first, §3 the thirty-second; the thirty-third and thirty-fourth rounds are on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md), the thirty-eighth to fortieth on [SHIFT10.md](SHIFT10.md), the forty-first and forty-second on [SHIFT11.md](SHIFT11.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT6.md](SHIFT6.md) (§3 there is the twenty-ninth round); §1 is the thirtieth round, §2 the thirty-first, §3 the thirty-second; the thirty-third and thirty-fourth rounds are on [SHIFT8.md](SHIFT8.md), the thirty-fifth to thirty-seventh on [SHIFT9.md](SHIFT9.md), the thirty-eighth to fortieth on [SHIFT10.md](SHIFT10.md), the forty-first to forty-third on [SHIFT11.md](SHIFT11.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known is not counted as progress.
 

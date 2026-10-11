@@ -2,13 +2,13 @@
 
 # $`R_2^+`$ の 33 回目と 34 回目：定理 B$`^\nu`$、$`L(\varepsilon_{\Phi_\Omega+1})`$ までの点 $`L(e)`$ の骨組み、監査の残り、$`R_2^S`$ での Carlson の範疇性の定理、$`\psi_{\Omega_1}(\Omega_{\omega+1}^2 + \sigma_2)`$ までの素の符号
 
-このページは [SHIFT7-ja.md](SHIFT7-ja.md) の続き（そこの §3 が 32 回目）。§1 が 33 回目、§2 が 34 回目。35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md)、38〜40 回目は [SHIFT10-ja.md](SHIFT10-ja.md)、41 回目と 42 回目は [SHIFT11-ja.md](SHIFT11-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT7-ja.md](SHIFT7-ja.md) の続き（そこの §3 が 32 回目）。§1 が 33 回目、§2 が 34 回目。35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md)、38〜40 回目は [SHIFT10-ja.md](SHIFT10-ja.md)、41〜43 回目は [SHIFT11-ja.md](SHIFT11-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
 **のちに（40 回目、[SHIFT10-ja.md](SHIFT10-ja.md) §3.2）：** このページの $`\nu_C`$ より上の結果は、$`\nu_C = \nu_S = L(\omega+1)`$（[SHIFT7-ja.md](SHIFT7-ja.md) §2.1）と、長い符号で前のちょうどの長い値を使う区間の中のちょうどの計算（GAP-CALC$`^{\mathrm{reg}}`$）に立つので、**書いたままでは証明されていない**：定理 B$`^\nu`$ と $`L(\omega^2)`$、FRAG″ (d)、FRAG2″、定理 C″ と $`L(\Omega_1\cdot\omega)`$（§1.1）、CAP-SUPPLY (ii) と $`\nu`$ より上の $`R_2^S`$（§1.2）、$`L(\varepsilon_{\Phi_\Omega+1})`$（§2.1）、$`R_2^S`$ での主張つきの AGREE⁺（§2.2）。成り立つもの：FRAG2$`^{\mathrm{rel}}`$、DECOUPLE、BASE-INV$`^{\mathrm{reg}}`$、FIX″、IDX″、TAIL″、補題としての LONG-RS$`^{\mathrm{rel}}`$、MIN$`^S`$ つきの Carlson の範疇性の定理、LEAST、CAT、CAT-$`\beta_0`$、CAT-E、O$`^S`$、C-TRANSFER$`^{\mathrm{RIG}}`$、GHOST-SHAPE、素の符号。FRAG のもとで、主張は $`R_2^C`$ で $`[0, X_{21}]`$ で証明済み。**のちに（41 回目、[SHIFT11-ja.md](SHIFT11-ja.md) §1.1）：** FRAG のもとで $`\nu_C = \nu_S = L(\omega+1)`$ と $`[0, \nu_C]`$ での主張がもう一度証明された。$`\nu_C`$ より上の区間の中のちょうどの計算はまだやり直していないので、このページの $`\nu_C`$ より上の結果は書いたままでは証明されていないまま。
 
-**のちに（42 回目、[SHIFT11-ja.md](SHIFT11-ja.md) §2.1、§2.2）：** 区間の計算を直した値でやり直した。定理 B$`^\nu`$ と $`L(\omega^2)`$、FRAG″ (d)、FRAG2″、定理 C″ と $`L(\Omega_1\cdot\omega)`$、CAP-SUPPLY (ii)、$`L(\varepsilon_{\Phi_\Omega+1})`$ は $`R_2^C`$ でもう一度証明された（FRAG のもと、やり直しで査読 1 回）。§1.2 と §2.2 の $`R_2^S`$ の側は 1 行ずつはやり直していない（概略）。$`R_2^S`$ では主張は今は FRAG のもとで $`[0, F_\nu)`$ で成り立つ（[SHIFT11-ja.md](SHIFT11-ja.md) §2.2）。
+**のちに（42 回目、[SHIFT11-ja.md](SHIFT11-ja.md) §2.1、§2.2）：** 区間の計算を直した値でやり直した。定理 B$`^\nu`$ と $`L(\omega^2)`$、FRAG″ (d)、FRAG2″、定理 C″ と $`L(\Omega_1\cdot\omega)`$、CAP-SUPPLY (ii)、$`L(\varepsilon_{\Phi_\Omega+1})`$ は $`R_2^C`$ でもう一度証明された（FRAG のもと、やり直しで査読 1 回）。§1.2 と §2.2 の $`R_2^S`$ の側は 1 行ずつはやり直していない（概略）。$`R_2^S`$ では主張は今は FRAG のもとで $`[0, F_\nu)`$ で成り立つ（[SHIFT11-ja.md](SHIFT11-ja.md) §2.2）。**のちに（43 回目、[SHIFT11-ja.md](SHIFT11-ja.md) §3.2）：** $`R_2^S`$ では主張は FRAG のもとで $`[0, Z^\Lambda)`$ で成り立つので、このページの $`R_2^S`$ での範囲は覆われる。
 
 ## 1. 33 回目
 

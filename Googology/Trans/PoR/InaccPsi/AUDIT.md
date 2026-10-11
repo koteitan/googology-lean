@@ -19,7 +19,7 @@ in [SHIFT7.md](SHIFT7.md) (one higher than in the papers). "Given FRAG" means gi
 
 **Later (the forty-first round, [SHIFT11.md](SHIFT11.md) §1.1):** the corrected exact long reach is proved for every code below $`P'`$ at levels 1 and 2 (ENUM-REACH), and the chain was run again on it. So **T0 is proved again** (given FRAG; 1 review of the new proof), and so are the rows marked "not proved as written (fortieth round)" below, as the table of the forty-first round at the end of this page says. The rows S1 and S2 are replaced by ENUM-REACH.
 
-**Later (the forty-second round, [SHIFT11.md](SHIFT11.md) §2.1):** the step TC⁺$`^\omega`$ for $`B_n`$ (T2c) now cites EQ$`^{\mathrm{all}}`$, so T0 is complete as written; and the gap calculus above $`\nu_C`$ is run again, so the frontiers up to $`Z^\Lambda`$ are proved again (the table of the forty-second round at the end of this page).
+**Later (the forty-second round, [SHIFT11.md](SHIFT11.md) §2.1):** the step TC⁺$`^\omega`$ for $`B_n`$ (T2c) now cites EQ$`^{\mathrm{all}}`$, so T0 is complete as written; and the gap calculus above $`\nu_C`$ is run again, so the frontiers up to $`Z^\Lambda`$ are proved again (the table of the forty-second round at the end of this page). **Later (the forty-third round):** the claim goes on to $`Z^{\mathrm{FP}}`$ in $`R_2^C`$, and some refereed lower bounds of level 3 are withdrawn (the last table).
 
 | node | statement | where | status | reviews | rests on |
 |---|---|---|---|---|---|
@@ -131,3 +131,22 @@ It is now written (row T2b2).
 | UNIFORM-B, FIN-CROSS, K2$`^{\mathrm{cap}}`$ | proved, given their hypotheses (K2$`^{\mathrm{cap}}`$ after the repair m1) |
 | $`R_2^S`$ on $`[0, Z^\varepsilon)`$ along the re-run | an outline |
 | $`R_2^S`$ on $`[0, Z^\Lambda)`$; $`R_2^C`$ on $`[0, Q^\Lambda]`$ | conditional (labels checked only) |
+
+**The table of the forty-third round** ([SHIFT11.md](SHIFT11.md) §3.1, §3.2; each result 1 review unless a count is given):
+
+| result | status after the forty-third round |
+|---|---|
+| READ$`^{\mathrm{FP}}`$, RANGE″ (no long restart of level 3 is crossed below $`Z^{\mathrm{FP}}`$); NEST″, COUNT♯″, LAND″♯, SHADOW-PREFIX″ | proved, without FRAG |
+| ENUM-REACH″$`^{\mathrm{FP}}`$: $`r(b) = k''_b(o_b(c''))`$ at every restart $`b = L(\lambda'')`$ below $`Z^{\mathrm{FP}}`$, long codes included (closes F-1 of [SHIFT10.md](SHIFT10.md) §2.1) | proved by transfer, given FRAG (with the review's m1) |
+| EQ″ | proved for the far transport; for the other maps not proved as written (not used) |
+| FALSE-LB″ | proved, given FRAG |
+| LB″, EXACT-LONG-CL″\* ([SHIFT10.md](SHIFT10.md) §1.1); LB″$`^G`$, the strong CROSS″, CROSS-O″, EXACT-LONG″$`^G`$, EXACT-F″, the value of AGREE″ (§2.1 there) | false where the corrected value differs; withdrawn |
+| Theorems C$`^{\mathrm{LL}\sharp}`$, C$`^{\mathrm{FP}\sharp}`$; the claim in $`R_2^C`$ on $`[0, Z^{\mathrm{FP}}]`$, $`\beta_0 \gt Z^{\mathrm{FP}}`$; $`Z^{\mathrm{LL}}`$, $`L(\theta'_2\cdot\Omega_1)`$, $`L(\theta'_2\cdot\Omega_2)`$ as restrictions | proved by transfer, given FRAG |
+| Theorem Z$`^{\mathrm{LG}}`$: $`\beta_0 \gt Z^{\mathrm{LG}}`$ and the claim in $`R_2^C`$ on $`[0, Z^{\mathrm{LG}}]`$ with caps only (SKEL″$`^{\mathrm{cr}}`$, UPPER$`^{\mathrm{cr}}`$, PRED1$`^{\mathrm{cr}}`$, C$`^{\Lambda 1}`$) | proved by transfer, given FRAG; with §3.1, 2 reviews for $`(Z^\Lambda, Z^{\mathrm{LG}}]`$ |
+| the claim in $`R_2^S`$ on $`[0, Z^\Lambda)`$; BLOCK″$`_0(Z^\Lambda)`$♯, $`\beta_0 \gt Q^\Lambda`$ | proved, given FRAG (was conditional) |
+| UNIFORM-B⁺, K2$`^{\mathrm{cap}}`$ repaired | proved, given their hypotheses |
+| S-COND | proved as an implication; the claim in $`R_2^S`$ on $`[0, Z^{\mathrm{LG}})`$ conditional on LONG″-CAP |
+| CAP-0″ below $`Z^{\mathrm{FP}}`$ (sharp form) | proved, given FRAG |
+| LOW-RED″, BASE″, NU-LOW‴, SHIFT$`_3'`$ ($`L_3(\omega) \lt_2 L_3(\omega+1)`$) | proved as implications |
+| $`T_3^S \le \nu_3`$, $`T_3^S = \nu_3`$ | not proved (blocking point B-1 of the review) |
+| $`R_2^S`$ at $`Z^{\mathrm{FP}}`$; NU-CT$`_3`$ | outlines |

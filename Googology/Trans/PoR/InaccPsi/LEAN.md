@@ -1,14 +1,14 @@
 [← Back](README.md) | [English](LEAN.md) | [Japanese](LEAN-ja.md)
 
-# $`R_2^+`$ in Lean: $`R_2^C`$, the core, FRAG, and the blocks below $`\upsilon_{\omega^3}`$
+# $`R_2^+`$ in Lean: $`R_2^C`$, the core, FRAG, and the restart blocks below $`V_\omega(1)`$
 
 This page describes the Lean files of the directory [R2/](R2/) (namespace `Googology.Trans.PoR.InaccPsi.R2`), added in the fortieth round ([SHIFT10.md](SHIFT10.md) §3.3, stage 1), the
-forty-first round ([SHIFT11.md](SHIFT11.md) §1.3, stage 2) and the forty-second round ([SHIFT11.md](SHIFT11.md) §2.3, stage 3). Every file builds as a module with the whole library (`lake build`, green, no `sorry`). The audit of each stage found every axiom
+forty-first round ([SHIFT11.md](SHIFT11.md) §1.3, stage 2) the forty-second round ([SHIFT11.md](SHIFT11.md) §2.3, stage 3) and the forty-third round ([SHIFT11.md](SHIFT11.md) §3.3, stage 4). Every file builds as a module with the whole library (`lake build`, green, no `sorry`). The audit of each stage found every axiom
 faithful to the paper it cites, every definition right, and every main theorem proved by Lean; it found no fatal and no blocking point.
 
 **What this changes.** Almost every result above $`\upsilon_{\omega\cdot\omega}`$ on the other pages is stated "given FRAG". FRAG is now a Lean theorem whose only non-standard axioms are 20
 facts cited from two papers of Wilken (and 7 constants for the objects of those papers). So "given FRAG" can be read as "given these 20 cited facts". The second stage adds INC1, Carlson's theorems on the core and Theorem CP. The third stage adds Lemma L and the structure of $`R_2^C`$ below $`\upsilon_{\omega^3}`$
-(the first pair, Theorems B and B″ with TOP, RS and SK3). The axioms are in four files, Cited, CitedR1, CitedC09 and CitedL: 44 axioms in all (9 constants and 35 facts).
+(the first pair, Theorems B and B″ with TOP, RS and SK3). The fourth stage adds the restart blocks over restart indices that are ordinals: Lemmas TOP$`_\lambda`$ and RS$`_\lambda`$, Theorem BLK$`^\Xi`$, Theorem BLK$`^O`$ with the closed form of OFF-V below $`V_\omega(1)`$, and CORE-C below $`V_\omega(1)`$, with no new axiom. The axioms are in four files, Cited, CitedR1, CitedC09 and CitedL: 44 axioms in all (9 constants and 35 facts).
 These counts, and every count of axioms on this page, leave out Lean's three standard axioms `propext`, `Classical.choice`, `Quot.sound` (so a raw `#print axioms` lists three more).
 
 ## 1. The files
@@ -42,6 +42,13 @@ These counts, and every count of axioms on this page, leave out Lean's three sta
 | [R2/RstC.lean](R2/RstC.lean) | a restart and its first block: Lemma C″ (a), B″4, TOP | cited (35) |
 | [R2/Blk3.lean](R2/Blk3.lean) | every restart below $`\upsilon_{\omega^3}`$: Theorem B″, the pairs below $`\upsilon_{\omega^3}`$, SK3 | cited (35) |
 | [R2/RS.lean](R2/RS.lean) | Lemmas RS and RS$`^h`$: the reach of $`\rho_h`$ | cited (41) |
+| [R2/RstK.lean](R2/RstK.lean) | a restart context without caps below the restart; the lemmas of stage 3 that do not use the caps; **Lemma TOP with an offset** for the terms $`x\cdot m + k`$ | cited (35) |
+| [R2/Off.lean](R2/Off.lean) | $`\Xi`$ (the derivative of $`\upsilon`$), $`\Xi_\omega`$; $`c(\lambda) = -1 + \mathrm{logend}(\lambda)`$ and the offset $`c^*`$; the offset lemma up to $`\Xi_\omega`$ | cited (≤ 14) |
+| [R2/BlkX.lean](R2/BlkX.lean) | the block structure along the restart indices for any offset with the needed inputs, without FRAG; TOP$`_\lambda`$ | cited (35) |
+| [R2/RSX.lean](R2/RSX.lean) | **Lemma RS with a restart target**; RS$`_\lambda`$; **Theorem BLK$`^\Xi`$**; the reaches at $`\omega^e`$, $`\Xi_n`$, $`\Xi_\omega`$ | cited (41) |
+| [R2/OffPhi.lean](R2/OffPhi.lean) | $`\mathrm{logend}`$; $`\Phi_1`$; the offset below $`\Phi_1`$; BLK$`^O`$ below $`\Phi_1`$ | cited (41) |
+| [R2/OffV.lean](R2/OffV.lean) | $`V_n`$, $`V_\omega(1)`$, the closed form of OFF-V; **Theorem BLK$`^O`$ below $`V_\omega(1)`$**; the reaches at $`V_n(\alpha)`$ and $`\Phi_1`$ | cited (41) |
+| [R2/CoreX.lean](R2/CoreX.lean) | **CORE-C**: $`[0, V_\omega(1)) \subseteq \mathrm{Core}(R_2^C)`$ | cited (35) + C09 |
 
 Two readings in [R2/Defs.lean](R2/Defs.lean) are equivalent to Carlson's text and are explained there: clauses (c) and (d) of $`\le_2^\infty`$ are one covering (a covering of finite sets is the order
 isomorphism), and "any finite structure" ranges over finite closed sets of ordinals with relations (every finite arithmetic structure is isomorphic to one, Carlson 2009, remark after L.4.6).
@@ -165,7 +172,7 @@ The audit found all four faithful. "$`\alpha = \vartheta^\tau(\Delta + \eta)`$" 
 The proof of INC1 uses [W07b] Cor 5.9 (finitely many $`\lt_1`$-predecessors inside a gap) in place of the project's Lemma L, which makes it simpler. The audit printed the axioms of 101
 theorems; every one uses only Lean's three standard axioms and the 40 cited ones.
 
-**Stage 3.** In `thmB2_C`, `rs_h` and `reach_rst` the Lean index is one less than the paper's: Lean's $`h`$ is the restart $`\rho_{h+1} = \upsilon_{\omega^2(h+1)}`$.
+**Stage 3.** In `rI`, `rstCtx`, `thmB2_C`, `rs_h` and `reach_rst` the Lean index is one less than the paper's (Lean $`h`$ = paper $`h - 1`$): Lean's $`h`$ is the restart $`\rho_{h+1} = \upsilon_{\omega^2(h+1)}`$. The doc lines of these files say so since stage 4, and that of `Par_sub` says that it is stated for $`\tau \in E`$ only.
 
 | theorem | statement | axioms |
 |---|---|---|
@@ -182,15 +189,34 @@ theorems; every one uses only Lean's three standard axioms and the 40 cited ones
 The audit printed the axioms of the eleven main statements; together they use 41 of the 44 cited axioms. Each module was also checked alone with only the modules it imports, and a
 false statement added at the end made that check fail.
 
+**Stage 4.** No new axiom. Here $`\Xi_\alpha`$ is the $`\alpha`$-th nonzero fixed point of $`\iota \mapsto \upsilon_\iota`$, $`V_0 = \upsilon`$, $`V_{n+1}`$ is the derivative of $`V_n`$, $`V_\omega(1) = \sup_n V_{n+1}(1)`$, $`\Phi_1 = V_2(1)`$, and
+$`c^*(\lambda) = -1 + \mathrm{logend}(\lambda)`$ below $`\Xi_\omega`$, $`c^*(\Xi_\omega) = \Xi_\omega + 1`$ ([REACHES.md](REACHES.md) §1).
+
+| theorem | statement | axioms |
+|---|---|---|
+| `RstK.top_gen` | **Lemma TOP with an offset**: in a restart context without caps below $`\rho`$, for a term $`t(x) = x\cdot m + k`$, if no pair above some $`x_0 \lt \rho`$ has a point that reaches past its right end by more than the term allows, then $`\rho`$ is not $`\le_1`$ to any point above $`\delta + t(\rho)`$ | cited (35) |
+| `rs_rst` | **Lemma RS with a restart target**: if restarts $`\rho_\mu`$ cofinal below $`\rho_r`$ satisfy $`\rho_\mu \le_1 \delta_\mu + t(\rho_\mu)`$, then $`\rho_r \le_1 \delta_r + t(\rho_r) + 1`$ (by FRAG) | cited (41) |
+| `rs_all`, `reach_all` | **RS$`_\lambda`$ and TOP$`_\lambda`$**: $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + c^*(\lambda)`$ for every restart index $`\lambda \le \Xi_\omega`$ | cited (41) |
+| `blkXi` | **Theorem BLK$`^\Xi`$**: (i) the $`\lt_2`$-pairs with right end below $`\upsilon_{\Xi_\omega+\omega^2}`$ are exactly the $`(\upsilon_{\mu+\omega j}, \upsilon_{\mu+\omega j+1})`$; (ii) for $`\lambda \le \Xi_\omega`$, no point below $`\rho_\lambda`$ is $`\le_1`$ to a point at or above it, $`\rho_\lambda`$ has no $`\lt_2`$-successor, and its reach is $`\delta_\lambda + c^*(\lambda)`$; (iii) every point below the bound that is not a $`\upsilon`$-point has the $`\le_1`$ of $`R_1^+`$ | cited (41) |
+| `blkPhi`, `blkV` | **Theorem BLK$`^O`$** below $`\Phi_1`$ and below $`V_\omega(1)`$, with the closed form of OFF-V: the offset is $`c(\lambda)`$ at level 0 and $`\rho\cdot n + \mathrm{logend}(\alpha)`$ at $`\lambda = V_n(\alpha)`$ | cited (41) |
+| `reach_w3`, `reach_ww`, `reach_Xi`, `reach_XiW`, `reach_XiA`, `reach_Phi1`, `reach_Vn` | the reaches $`\delta + 2`$ at $`\omega^3`$, $`\delta + \omega`$ at $`\omega^\omega`$, $`\delta + \Xi_n`$ at $`\Xi_n`$, $`\delta + \Xi_\omega + 1`$ at $`\Xi_\omega`$, $`\delta + \Xi_\alpha + \mathrm{logend}(\alpha)`$ at $`\Xi_\alpha`$ ($`\alpha \lt \Phi_1`$), $`\delta + \Phi_1\cdot 2`$ at $`\Phi_1`$, $`\delta + V_n(\alpha)\cdot n + \mathrm{logend}(\alpha)`$ at $`V_n(\alpha)`$ | cited (41) |
+| `core_Xi`, `core_Phi`, `core_V` | **CORE-C**: $`[0, \upsilon_{\Xi_\omega+\omega^2})`$, $`[0, \Phi_1)`$ and $`[0, V_\omega(1))`$ are contained in $`\mathrm{Core}(R_2^C)`$ (without FRAG) | cited (35) + Thm 14.14 |
+
+The audit printed the axioms of 76 theorems; together they use 42 of the 44 cited axioms (not `le1R_limit` and `C09_thm14_10`). It re-ran each module alone and all together, and found no
+fatal and no blocking point. Its three minor points: (i) is about the pairs whose **right** end is below the bound (the paper's statement speaks of left ends; for restarts (ii) excludes the rest);
+(iii) covers the points that are not $`\upsilon`$-points, not the $`\upsilon`$-points that are not restarts; and (ii) is stated with `IsReach` (the largest $`\gamma`$ with $`\rho \le_1 \gamma`$), and the interval
+form $`\{\gamma : \rho \le_1 \gamma\} = [\rho, \delta + c^*]`$ follows with `le1_of_le_of_le1` of Basic, which uses no axiom. The paper's recursive offset $`O`$ is not formalized: Lean proves the closed
+form directly below $`V_\omega(1)`$. The offset terms are $`x\cdot m + k`$ with $`m`$ finite, so [W07a] L.4.2 and [W07b] Thm 2.2 are not needed; this is why the stage stops at $`V_\omega(1)`$, where the
+offset $`\rho\cdot\omega`$ needs the term $`\omega^{x+1}`$.
+
 The domain $`D_m`$ of `frag` allows parameters in the closure of $`D_{m-1}`$; it contains the domain of the paper proof ([RESTARTS.md](RESTARTS.md) §1), so the Lean theorem is stronger. All bases
 are countable, which is the only case used on these pages.
 
 ## 4. Not yet in Lean
 
-In order (the paper proofs of these steps exist; see [SHIFT11.md](SHIFT11.md) §2.6):
+In order (the paper proofs of these steps exist; see [SHIFT11.md](SHIFT11.md) §3.6):
 
-- The restart blocks (BLK$`^\Xi`$, BLK$`^O`$). From $`\lambda = \omega^3`$ on, the reach of $`\rho_\lambda`$ is $`\delta_\lambda + c^*(\lambda)`$ with an offset above 1, so the step "no point at most $`\delta + 1`$ is $`\le_1`$
-  to a point above $`\delta + 1`$" fails; the induction must run over restart indices that are ordinals, TOP$`_\lambda`$ needs smaller offsets at the restarts shortly before $`\lambda`$, and RS$`_\lambda`$ needs the
-  proof of [REACHES.md](REACHES.md) §1, not FRAG alone.
+- BLK$`^O`$ above $`V_\omega(1)`$ (up to $`\Lambda_\varepsilon`$). It needs offset terms with $`\omega^t`$ and $`\varepsilon_{x+1}`$, so [W07a] L.4.2 and [W07b] Thm 2.2 in general as cited facts (the proof of
+  Thm 2.2 is in Wilken, AML 45 (2006), which we do not have; its statement would be cited from [W07b] §2, or the project's own proof formalized), or else the recursive offset $`O`$.
 - SKEL⁺, CAP, LIFT-0; then Theorem O$`^C`$ (CP is ready), NU-CT and $`\nu_C`$.
 - The $`R_2^S`$ side is not formalized.

@@ -15,7 +15,8 @@ principal" (the join stated in `R2.CitedR1`: [W07a] Def 3.22, Thm 3.23, Lemma 3.
 * `lhT` (constant): `lhᵗ(α)` of [W07b] Def 4.1.
 * `lh_eq_lhT`: [W07b] Theorem 5.3 (last sentence, "`lh(α) = lhᵗ(α)`").
 * `ht_lhT_lt`: [W07b] Lemma 4.5 ("Let `α = ϑᵗ(Δ + η)` where `Δ > 0`. Then `ht_α(lhᵗ(α)) < htᵗ(α)`").
-* `Par_sub`: [W07a] Def 3.28 ("`Parᵗ(α) := Subᵗ₀(α) ∩ τ`").
+* `Par_sub`: [W07a] Def 3.28 ("`Parᵗ(α) := Subᵗ₀(α) ∩ τ`"), stated here only for `τ ∈ E` (the
+  paper also covers `τ = 1`; that case is not used).
 -/
 
 namespace Googology.Trans.PoR.InaccPsi.R2
@@ -39,7 +40,8 @@ axiom ht_lhT_lt {τ α : Ordinal.{0}} (hτ : τ = 1 ∨ InE τ) (hτ1 : τ < Om1
     (hτα : τ < α) (hα1 : α < Om1) (hαE : InE α) : ht α (lhT τ α) < ht τ α
 
 /-- **[W07a] Def 3.28**: "The set of parameters `< τ` used in the unique term denoting some
-`α ∈ Tᵗ` is denoted by `Parᵗ(α) := Subᵗ₀(α) ∩ τ`", so `Parᵗ(α) ⊆ τ`. -/
+`α ∈ Tᵗ` is denoted by `Parᵗ(α) := Subᵗ₀(α) ∩ τ`", so `Parᵗ(α) ⊆ τ`.  Stated only for `τ ∈ E`
+(the paper's definition also covers `τ = 1`; that case is not used). -/
 axiom Par_sub {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {x : Ordinal.{0}}
     (hxT : x ∈ Tset τ) : ↑(Par τ x) ⊆ Set.Iio τ
 

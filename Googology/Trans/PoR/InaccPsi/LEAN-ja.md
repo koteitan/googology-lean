@@ -1,14 +1,14 @@
 [← Back](README-ja.md) | [English](LEAN.md) | [Japanese](LEAN-ja.md)
 
-# Lean での $`R_2^+`$：$`R_2^C`$、核、FRAG、$`\upsilon_{\omega^3}`$ より下のブロック
+# Lean での $`R_2^+`$：$`R_2^C`$、核、FRAG、$`V_\omega(1)`$ より下のやり直しのブロック
 
-このページは、40 回目（[SHIFT10-ja.md](SHIFT10-ja.md) §3.3、段階 1）、41 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §1.3、段階 2）、42 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §2.3、段階 3）で足したディレクトリ [R2/](R2/)（名前空間
+このページは、40 回目（[SHIFT10-ja.md](SHIFT10-ja.md) §3.3、段階 1）、41 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §1.3、段階 2）、42 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §2.3、段階 3）、43 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §3.3、段階 4）で足したディレクトリ [R2/](R2/)（名前空間
 `Googology.Trans.PoR.InaccPsi.R2`）の Lean のファイルを説明する。どのファイルもライブラリ全体とともにモジュールとして作られる（`lake build`、緑、`sorry` 無し）。どちらの段階の監査も、
 どの公理も引いた論文に忠実で、どの定義も正しく、どの主な定理も Lean が証明していると認め、致命的な点も進行を止める点も見つけなかった。
 
 **これで何が変わるか。** ほかのページの $`\upsilon_{\omega\cdot\omega}`$ より上のほとんどの結果は「FRAG のもと」で述べている。FRAG は今は Lean の定理で、標準でない公理は Wilken の 2 本の論文
 から引いた 20 個の事実（とその論文の対象のための 7 個の定数）だけ。だから「FRAG のもと」は「この 20 個の引いた事実のもと」と読める。段階 2 は INC1、核についての Carlson の定理、定理 CP を足す。段階 3 は補題 L と、$`\upsilon_{\omega^3}`$ より下の $`R_2^C`$ の構造（最初の組、
-定理 B と TOP つきの B″、RS、SK3）を足す。公理は 4 つのファイル Cited、CitedR1、CitedC09、CitedL にあり、全部で 44 個（定数 9 個と事実 35 個）。この数も、このページのどの公理の数も、
+定理 B と TOP つきの B″、RS、SK3）を足す。段階 4 は順序数のやり直しの添字の上のやり直しのブロックを足す：補題 TOP$`_\lambda`$ と RS$`_\lambda`$、定理 BLK$`^\Xi`$、$`V_\omega(1)`$ より下で OFF-V の閉じた形つきの定理 BLK$`^O`$、$`V_\omega(1)`$ より下の CORE-C。新しい公理は無い。公理は 4 つのファイル Cited、CitedR1、CitedC09、CitedL にあり、全部で 44 個（定数 9 個と事実 35 個）。この数も、このページのどの公理の数も、
 Lean の 3 つの標準の公理 `propext`、`Classical.choice`、`Quot.sound` を除いている（だから `#print axioms` をそのまま見ると 3 個多い）。
 
 ## 1. ファイル
@@ -42,6 +42,13 @@ Lean の 3 つの標準の公理 `propext`、`Classical.choice`、`Quot.sound` �
 | [R2/RstC.lean](R2/RstC.lean) | やり直しとその最初のブロック：補題 C″ (a)、B″4、TOP | 引いたもの（35 個） |
 | [R2/Blk3.lean](R2/Blk3.lean) | $`\upsilon_{\omega^3}`$ より下のどのやり直しでも：定理 B″、$`\upsilon_{\omega^3}`$ より下の組、SK3 | 引いたもの（35 個） |
 | [R2/RS.lean](R2/RS.lean) | 補題 RS と RS$`^h`$：$`\rho_h`$ の届く先 | 引いたもの（41 個） |
+| [R2/RstK.lean](R2/RstK.lean) | やり直しより下の蓋を求めないやり直しの文脈。蓋を使わない段階 3 の補題。項 $`x\cdot m + k`$ についての **ずれつきの補題 TOP** | 引いたもの（35 個） |
+| [R2/Off.lean](R2/Off.lean) | $`\Xi`$（$`\upsilon`$ の導関数）、$`\Xi_\omega`$。$`c(\lambda) = -1 + \mathrm{logend}(\lambda)`$ とずれ $`c^*`$。$`\Xi_\omega`$ までのずれの補題 | 引いたもの（14 個以下） |
+| [R2/BlkX.lean](R2/BlkX.lean) | 要る入力を持つどのずれでも、やり直しの添字に沿ったブロックの構造（FRAG 無し）。TOP$`_\lambda`$ | 引いたもの（35 個） |
+| [R2/RSX.lean](R2/RSX.lean) | **やり直しを行き先とする補題 RS**。RS$`_\lambda`$。**定理 BLK$`^\Xi`$**。$`\omega^e`$、$`\Xi_n`$、$`\Xi_\omega`$ での届く先 | 引いたもの（41 個） |
+| [R2/OffPhi.lean](R2/OffPhi.lean) | $`\mathrm{logend}`$。$`\Phi_1`$。$`\Phi_1`$ より下のずれ。$`\Phi_1`$ より下の BLK$`^O`$ | 引いたもの（41 個） |
+| [R2/OffV.lean](R2/OffV.lean) | $`V_n`$、$`V_\omega(1)`$、OFF-V の閉じた形。**$`V_\omega(1)`$ より下の定理 BLK$`^O`$**。$`V_n(\alpha)`$ と $`\Phi_1`$ での届く先 | 引いたもの（41 個） |
+| [R2/CoreX.lean](R2/CoreX.lean) | **CORE-C**：$`[0, V_\omega(1)) \subseteq \mathrm{Core}(R_2^C)`$ | 引いたもの（35 個）+ C09 |
 
 [R2/Defs.lean](R2/Defs.lean) の 2 つの読みは Carlson の文と同じ意味で、そこで説明している：$`\le_2^\infty`$ の節 (c) と (d) は 1 つの被覆にする（有限集合の被覆は順序の同型）。「どの有限の構造」は
 関係つきの順序数の有限の閉じた集合の上を動く（どの有限の算術の構造もそのどれかと同型、Carlson 2009 の L.4.6 のあとの注意）。「$`c`$ より下に共終に多く」は狭い意味で読む（どの
@@ -165,7 +172,7 @@ $`\varepsilon`$ 数」と読む（[W07a] L.4.3）。新しい公理はどれも 
 INC1 の証明は、このプロジェクトの補題 L の代わりに [W07b] Cor 5.9（区間の中の $`\lt_1`$ の前の点は有限個）を使い、そのぶん簡単になった。監査は 101 個の定理の公理を印字した。どれも
 Lean の標準の 3 つと引いた 40 個だけを使う。
 
-**段階 3。** `thmB2_C`、`rs_h`、`reach_rst` では Lean の添字は論文より 1 小さい：Lean の $`h`$ はやり直し $`\rho_{h+1} = \upsilon_{\omega^2(h+1)}`$。
+**段階 3。** `rI`、`rstCtx`、`thmB2_C`、`rs_h`、`reach_rst` では Lean の添字は論文より 1 小さい（Lean の $`h`$ ＝ 論文の $`h - 1`$）：Lean の $`h`$ はやり直し $`\rho_{h+1} = \upsilon_{\omega^2(h+1)}`$。段階 4 からはこれらのファイルの説明の行にそう書いてあり、`Par_sub` の説明の行は $`\tau \in E`$ についてだけ述べていると書く。
 
 | 定理 | 主張 | 公理 |
 |---|---|---|
@@ -182,15 +189,33 @@ Lean の標準の 3 つと引いた 40 個だけを使う。
 監査は 11 個の主な主張の公理を印字した。あわせて 44 個の引いた公理のうち 41 個を使う。どのモジュールも、それが取り込むモジュールだけとともに単独でも確かめ、終わりに偽の主張を
 足すとその確かめは失敗した。
 
+**段階 4。** 新しい公理は無い。ここで $`\Xi_\alpha`$ は $`\iota \mapsto \upsilon_\iota`$ の 0 でない $`\alpha`$ 番目の固定点、$`V_0 = \upsilon`$、$`V_{n+1}`$ は $`V_n`$ の導関数、$`V_\omega(1) = \sup_n V_{n+1}(1)`$、$`\Phi_1 = V_2(1)`$、
+$`\Xi_\omega`$ より下で $`c^*(\lambda) = -1 + \mathrm{logend}(\lambda)`$、$`c^*(\Xi_\omega) = \Xi_\omega + 1`$（[REACHES-ja.md](REACHES-ja.md) §1）。
+
+| 定理 | 主張 | 公理 |
+|---|---|---|
+| `RstK.top_gen` | **ずれつきの補題 TOP**：$`\rho`$ より下の蓋を求めないやり直しの文脈で、項 $`t(x) = x\cdot m + k`$ について、ある $`x_0 \lt \rho`$ より上のどの組も、項が許すより先にその右端を越えて届く点を持たなければ、$`\rho`$ は $`\delta + t(\rho)`$ より上のどの点にも $`\le_1`$ でない | 引いたもの（35 個） |
+| `rs_rst` | **やり直しを行き先とする補題 RS**：$`\rho_r`$ より下で共終なやり直し $`\rho_\mu`$ が $`\rho_\mu \le_1 \delta_\mu + t(\rho_\mu)`$ を満たせば、$`\rho_r \le_1 \delta_r + t(\rho_r) + 1`$（FRAG による） | 引いたもの（41 個） |
+| `rs_all`、`reach_all` | **RS$`_\lambda`$ と TOP$`_\lambda`$**：$`\lambda \le \Xi_\omega`$ のどのやり直しの添字でも $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + c^*(\lambda)`$ | 引いたもの（41 個） |
+| `blkXi` | **定理 BLK$`^\Xi`$**：(i) 右端が $`\upsilon_{\Xi_\omega+\omega^2}`$ より下の $`\lt_2`$ の組はちょうど $`(\upsilon_{\mu+\omega j}, \upsilon_{\mu+\omega j+1})`$。(ii) $`\lambda \le \Xi_\omega`$ では、$`\rho_\lambda`$ より下のどの点もそれ以上の点に $`\le_1`$ でなく、$`\rho_\lambda`$ は $`\lt_2`$ の後の点を持たず、その届く先は $`\delta_\lambda + c^*(\lambda)`$。(iii) 上限より下で $`\upsilon`$ の点でないどの点も $`R_1^+`$ の $`\le_1`$ を持つ | 引いたもの（41 個） |
+| `blkPhi`、`blkV` | $`\Phi_1`$ より下と $`V_\omega(1)`$ より下の **定理 BLK$`^O`$**。OFF-V の閉じた形つき：ずれは段 0 で $`c(\lambda)`$、$`\lambda = V_n(\alpha)`$ で $`\rho\cdot n + \mathrm{logend}(\alpha)`$ | 引いたもの（41 個） |
+| `reach_w3`、`reach_ww`、`reach_Xi`、`reach_XiW`、`reach_XiA`、`reach_Phi1`、`reach_Vn` | 届く先：$`\omega^3`$ で $`\delta + 2`$、$`\omega^\omega`$ で $`\delta + \omega`$、$`\Xi_n`$ で $`\delta + \Xi_n`$、$`\Xi_\omega`$ で $`\delta + \Xi_\omega + 1`$、$`\Xi_\alpha`$（$`\alpha \lt \Phi_1`$）で $`\delta + \Xi_\alpha + \mathrm{logend}(\alpha)`$、$`\Phi_1`$ で $`\delta + \Phi_1\cdot 2`$、$`V_n(\alpha)`$ で $`\delta + V_n(\alpha)\cdot n + \mathrm{logend}(\alpha)`$ | 引いたもの（41 個） |
+| `core_Xi`、`core_Phi`、`core_V` | **CORE-C**：$`[0, \upsilon_{\Xi_\omega+\omega^2})`$、$`[0, \Phi_1)`$、$`[0, V_\omega(1))`$ は $`\mathrm{Core}(R_2^C)`$ に入る（FRAG 無し） | 引いたもの（35 個）+ Thm 14.14 |
+
+監査は 76 個の定理の公理を印字した。あわせて 44 個の引いた公理のうち 42 個を使う（`le1R_limit` と `C09_thm14_10` は使わない）。どのモジュールも単独で、そして全部まとめて確かめ直し、
+致命的な点も進行を止める点も見つけなかった。3 つの細かい点：(i) は **右** 端が上限より下の組についてのもの（論文の主張は左端で述べる。やり直しについては (ii) が残りを除く）。
+(iii) は $`\upsilon`$ の点でない点を覆い、やり直しでない $`\upsilon`$ の点は覆わない。(ii) は `IsReach`（$`\rho \le_1 \gamma`$ となる最大の $`\gamma`$）で述べ、区間の形
+$`\{\gamma : \rho \le_1 \gamma\} = [\rho, \delta + c^*]`$ は公理を使わない Basic の `le1_of_le_of_le1` から出る。論文の再帰的なずれ $`O`$ は形式化していない：Lean は $`V_\omega(1)`$ より下で閉じた形を
+直接証明する。ずれの項は $`m`$ が有限の $`x\cdot m + k`$ なので、[W07a] L.4.2 と [W07b] Thm 2.2 は要らない。だからこの段階は、ずれ $`\rho\cdot\omega`$ が項 $`\omega^{x+1}`$ を要する $`V_\omega(1)`$ で止まる。
+
 `frag` の定義域 $`D_m`$ は $`D_{m-1}`$ の閉包の中のパラメタを許す。これは論文の証明（[RESTARTS-ja.md](RESTARTS-ja.md) §1）の定義域を含むので、Lean の定理のほうが強い。基はすべて可算で、
 これらのページで使うのはその場合だけ。
 
 ## 4. まだ Lean に無いもの
 
-この順に（これらの段階の論文での証明はある。[SHIFT11-ja.md](SHIFT11-ja.md) §2.6 を見よ）：
+この順に（これらの段階の論文での証明はある。[SHIFT11-ja.md](SHIFT11-ja.md) §3.6 を見よ）：
 
-- やり直しのブロック（BLK$`^\Xi`$、BLK$`^O`$）。$`\lambda = \omega^3`$ からは $`\rho_\lambda`$ の届く先が 1 より大きいずれを持つ $`\delta_\lambda + c^*(\lambda)`$ なので、「$`\delta + 1`$ 以下のどの点も $`\delta + 1`$ より上の
-  点に $`\le_1`$ でない」という段階が成り立たない。帰納法は順序数のやり直しの添字の上で走らせる必要があり、TOP$`_\lambda`$ は $`\lambda`$ のすぐ前のやり直しでより小さいずれを要し、RS$`_\lambda`$ は
-  FRAG だけでなく [REACHES-ja.md](REACHES-ja.md) §1 の証明が要る。
+- $`V_\omega(1)`$ より上の BLK$`^O`$（$`\Lambda_\varepsilon`$ まで）。$`\omega^t`$ と $`\varepsilon_{x+1}`$ を持つずれの項が要るので、引いた事実として [W07a] L.4.2 と一般の [W07b] Thm 2.2 が要る（Thm 2.2 の
+  証明は手元に無い Wilken, AML 45 (2006) にある。その主張を [W07b] §2 から引くか、このプロジェクト自身の証明を形式化する）。あるいは再帰的なずれ $`O`$。
 - SKEL⁺、CAP、LIFT-0。次に定理 O$`^C`$（CP は用意できている）、NU-CT、$`\nu_C`$。
 - $`R_2^S`$ の側は形式化していない。

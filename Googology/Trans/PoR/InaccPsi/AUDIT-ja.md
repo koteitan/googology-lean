@@ -19,7 +19,7 @@
 
 **のちに（41 回目、[SHIFT11-ja.md](SHIFT11-ja.md) §1.1）：** 直したちょうどの長い届く先は段 1 と 2 で $`P'`$ より下のどの符号でも証明済み（ENUM-REACH）で、鎖はその上でもう一度走らせた。だから **T0 はもう一度証明された**（FRAG のもと。新しい証明で査読 1 回）。下で「書いたままでは証明されていない（40 回目）」と印をつけた行も、このページの最後の 41 回目の表のとおり同じ。行 S1 と S2 は ENUM-REACH に置き換わる。
 
-**のちに（42 回目、[SHIFT11-ja.md](SHIFT11-ja.md) §2.1）：** $`B_n`$ での段階 TC⁺$`^\omega`$（T2c）は今は EQ$`^{\mathrm{all}}`$ を引くので T0 は書いたままで完全。そして $`\nu_C`$ より上の区間の計算をやり直したので、$`Z^\Lambda`$ までの最前線はもう一度証明された（このページの終わりの 42 回目の表）。
+**のちに（42 回目、[SHIFT11-ja.md](SHIFT11-ja.md) §2.1）：** $`B_n`$ での段階 TC⁺$`^\omega`$（T2c）は今は EQ$`^{\mathrm{all}}`$ を引くので T0 は書いたままで完全。そして $`\nu_C`$ より上の区間の計算をやり直したので、$`Z^\Lambda`$ までの最前線はもう一度証明された（このページの終わりの 42 回目の表）。**のちに（43 回目）：** 主張は $`R_2^C`$ で $`Z^{\mathrm{FP}}`$ まで進み、査読済みだった段 3 の下からの評価のいくつかは取り下げた（最後の表）。
 
 | 節 | 主張 | 場所 | 状態 | 査読 | 立つもの |
 |---|---|---|---|---|---|
@@ -131,3 +131,22 @@ $`[\psi_{\Omega_2}(\Omega_2), P')`$ にあるときの LONG-RS$`^U`$（R-1）：
 | UNIFORM-B、FIN-CROSS、K2$`^{\mathrm{cap}}`$ | その仮定のもとで証明済み（K2$`^{\mathrm{cap}}`$ は m1 の直しのあと） |
 | やり直しに沿った $`R_2^S`$ での $`[0, Z^\varepsilon)`$ | 概略 |
 | $`R_2^S`$ での $`[0, Z^\Lambda)`$。$`R_2^C`$ での $`[0, Q^\Lambda]`$ | 条件つき（書き方だけ確かめた） |
+
+**43 回目の表**（[SHIFT11-ja.md](SHIFT11-ja.md) §3.1、§3.2。回数を書いていなければ査読 1 回）：
+
+| 結果 | 43 回目のあとの状態 |
+|---|---|
+| READ$`^{\mathrm{FP}}`$、RANGE″（$`Z^{\mathrm{FP}}`$ より下で段 3 の長いやり直しはまたがれない）。NEST″、COUNT♯″、LAND″♯、SHADOW-PREFIX″ | 証明済み、FRAG 無し |
+| ENUM-REACH″$`^{\mathrm{FP}}`$：$`Z^{\mathrm{FP}}`$ より下のどのやり直し $`b = L(\lambda'')`$ でも長い符号も含めて $`r(b) = k''_b(o_b(c''))`$（[SHIFT10-ja.md](SHIFT10-ja.md) §2.1 の F-1 を閉じる） | 移しで証明済み、FRAG のもと（査読の m1 つき） |
+| EQ″ | 遠い移しについて証明済み。ほかの写像では書いたままでは証明されていない（使わない） |
+| FALSE-LB″ | 証明済み、FRAG のもと |
+| LB″、EXACT-LONG-CL″\*（[SHIFT10-ja.md](SHIFT10-ja.md) §1.1）。LB″$`^G`$、強い CROSS″、CROSS-O″、EXACT-LONG″$`^G`$、EXACT-F″、AGREE″ の値（そこの §2.1） | 直した値が違う所で偽。取り下げ |
+| 定理 C$`^{\mathrm{LL}\sharp}`$、C$`^{\mathrm{FP}\sharp}`$。$`R_2^C`$ で $`[0, Z^{\mathrm{FP}}]`$ での主張、$`\beta_0 \gt Z^{\mathrm{FP}}`$。その制限として $`Z^{\mathrm{LL}}`$、$`L(\theta'_2\cdot\Omega_1)`$、$`L(\theta'_2\cdot\Omega_2)`$ | 移しで証明済み、FRAG のもと |
+| 定理 Z$`^{\mathrm{LG}}`$：蓋だけで $`\beta_0 \gt Z^{\mathrm{LG}}`$ と $`R_2^C`$ で $`[0, Z^{\mathrm{LG}}]`$ での主張（SKEL″$`^{\mathrm{cr}}`$、UPPER$`^{\mathrm{cr}}`$、PRED1$`^{\mathrm{cr}}`$、C$`^{\Lambda 1}`$） | 移しで証明済み、FRAG のもと。§3.1 とあわせ $`(Z^\Lambda, Z^{\mathrm{LG}}]`$ は査読 2 回 |
+| $`R_2^S`$ で $`[0, Z^\Lambda)`$ での主張。BLOCK″$`_0(Z^\Lambda)`$♯、$`\beta_0 \gt Q^\Lambda`$ | 証明済み、FRAG のもと（前は条件つき） |
+| UNIFORM-B⁺、直した K2$`^{\mathrm{cap}}`$ | その仮定のもとで証明済み |
+| S-COND | 含意として証明済み。$`R_2^S`$ で $`[0, Z^{\mathrm{LG}})`$ での主張は LONG″-CAP のもとでの条件つき |
+| $`Z^{\mathrm{FP}}`$ より下の CAP-0″（鋭い形） | 証明済み、FRAG のもと |
+| LOW-RED″、BASE″、NU-LOW‴、SHIFT$`_3'`$（$`L_3(\omega) \lt_2 L_3(\omega+1)`$） | 含意として証明済み |
+| $`T_3^S \le \nu_3`$、$`T_3^S = \nu_3`$ | 証明されていない（査読の進行を止める点 B-1） |
+| $`Z^{\mathrm{FP}}`$ での $`R_2^S`$。NU-CT$`_3`$ | 概略 |

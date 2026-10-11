@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 30〜32 回目：どの深さでも相対的な遠いピン、LOW の否定、$`\nu_C = \nu_S = L(\omega+1)`$ とその監査、$`\nu_C`$ の上の $`X_A`$ までの主張、$`\psi_{\Omega_1}(\Omega_{\omega+1})`$ までの素の符号
 
-このページは [SHIFT6-ja.md](SHIFT6-ja.md) の続き（そこの §3 が 29 回目）。§1 が 30 回目、§2 が 31 回目、§3 が 32 回目。33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md)、35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md)、38〜40 回目は [SHIFT10-ja.md](SHIFT10-ja.md)、41 回目と 42 回目は [SHIFT11-ja.md](SHIFT11-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT6-ja.md](SHIFT6-ja.md) の続き（そこの §3 が 29 回目）。§1 が 30 回目、§2 が 31 回目、§3 が 32 回目。33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md)、35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md)、38〜40 回目は [SHIFT10-ja.md](SHIFT10-ja.md)、41〜43 回目は [SHIFT11-ja.md](SHIFT11-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 

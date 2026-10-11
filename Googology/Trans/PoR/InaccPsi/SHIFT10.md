@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the thirty-eighth to fortieth rounds: the window rule one step up, the first long restarts of the skeleton, the criterion as an induction, marked sources, the exact long reaches (a fatal point and a partial repair), capacities per unit, and FRAG in Lean
 
-This page continues [SHIFT9.md](SHIFT9.md) (§3 there is the thirty-seventh round); §1 is the thirty-eighth round, §2 the thirty-ninth and §3 the fortieth; the forty-first and forty-second rounds are on [SHIFT11.md](SHIFT11.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT9.md](SHIFT9.md) (§3 there is the thirty-seventh round); §1 is the thirty-eighth round, §2 the thirty-ninth and §3 the fortieth; the forty-first to forty-third rounds are on [SHIFT11.md](SHIFT11.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a fatal or blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known, or of the target, is not counted as progress.
 
@@ -11,6 +11,8 @@ A certificate counts only when it was replayed. A result that the referee calls 
 **Later (the forty-first round, [SHIFT11.md](SHIFT11.md) §1.1):** the corrected value is proved for every code below $`P'`$ (ENUM-REACH), and with it $`\nu_C = \nu_S = L(\omega+1)`$ and the claim on $`[0, \nu_C]`$ again, given FRAG (1 review). The frontiers of §1 and §2 above $`\nu_C`$ stay not proved as written: the exact calculus in the gaps is not yet run again.
 
 **Later (the forty-second round, [SHIFT11.md](SHIFT11.md) §2.1, §2.2):** $`Z^\varepsilon`$ and $`Z^\Lambda`$ are proved again in $`R_2^C`$, given FRAG (Theorem C$`^{\Lambda\sharp}`$, 1 review of the re-run), with $`\beta_0 \gt Z^\Lambda`$. $`[0, Z^\varepsilon)`$ in $`R_2^S`$ is an outline on the corrected values, and $`[0, Z^\Lambda)`$ in $`R_2^S`$ is conditional. The step to $`Z^{\mathrm{LL}}`$ (§1) is not proved: its lower bound copies a landing that is false one level down (conjecture FALSE-LB″).
+
+**Later (the forty-third round, [SHIFT11.md](SHIFT11.md) §3):** with the whole code read at the restart, the exact reach of level 3 is proved for every restart below $`Z^{\mathrm{FP}}`$, long codes included, so Theorems C$`^{\mathrm{LL}}`$ and C$`^{\mathrm{FP}}`$ hold in $`R_2^C`$, given FRAG (1 review), which settles B-1 of §2.1. FALSE-LB″ is proved: LB″ and EXACT-LONG-CL″\* of §1.1 and LB″$`^G`$, the strong CROSS″, CROSS-O″, EXACT-LONG″$`^G`$ and EXACT-F″ of §2.1 are false where the corrected value differs. The $`R_2^S`$ halves of these theorems are outlines; in $`R_2^S`$ the claim holds on $`[0, Z^\Lambda)`$. $`\nu_3`$ (B-2) is reduced to hypotheses by implications, and its upper half has a new blocking point.
 
 ## 1. The thirty-eighth round
 
@@ -83,11 +85,11 @@ r(L(\theta'_2\cdot\omega^2)) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\t
   For a code $`c = G''(\omega^2)\cdot D + m_0`$ with $`D, m_0 \lt G''(\omega^2)`$ and $`\nu = L(\lambda''+\omega^2\cdot o_b(D))`$: $`r(L(\lambda'')) = r(\nu) + o_\nu(m_0)`$ if $`m_0 \lt P'`$, and the window rule at $`\nu`$ if
   $`m_0 \ge P'`$. So every code below $`G''(\omega^2)^2`$ has an exact reach. CROSSED″: the regions crossed by a long reach keep their skeleton. The referee: one citation is used outside its
   hypothesis, and the conclusion holds by the other parts of the same lemma (m4); the proofs of EXACT-LONG-CL″\* and CROSSED″ depend on each other across positions, so the induction must run
-  along the right bound, not along the codes, as in an earlier refereed proof; run that way it closes (m5). **Later (§2.1): the value $`r(\nu) + o_\nu(m_0)`$ is false for some $`m_0`$ (fatal point F-1 of the second review).**
+  along the right bound, not along the codes, as in an earlier refereed proof; run that way it closes (m5). **Later (§2.1): the value $`r(\nu) + o_\nu(m_0)`$ is false for some $`m_0`$ (fatal point F-1 of the second review).** **Later (the forty-third round, [SHIFT11.md](SHIFT11.md) §3):** the corrected value is proved below $`Z^{\mathrm{FP}}`$; LB″ and EXACT-LONG-CL″\* are false for $`x_D \ge 2`$ (FALSE-LB″) and for $`m_0 \ge \Omega_1`$; LONG″-$`G''(\omega^2)`$, PIN-ALL″, TOP-REG-FAR″ and CROSSED″ stand.
 - **Theorem C$`^{\mathrm{LL}}`$ and the new frontier** (proved by transfer, given FRAG). Below $`Z^{\mathrm{LL}}`$ every restart has an exact reach, and there is no fan apex and no triple nest; so $`\beta_0 \gt Z^{\mathrm{LL}}`$,
   $`T_3^C \gt Z^{\mathrm{LL}}`$, **Wilken's claim holds in $`R_2^C`$ on $`[0, Z^{\mathrm{LL}}]`$**, both halves, and **$`[0, Z^{\mathrm{LL}}) \subseteq \mathrm{Core}(R_2^S)`$, so the claim holds in $`R_2^S`$ on $`[0, Z^{\mathrm{LL}})`$**
   (by the argument of NO-GAP, [SHIFT9.md](SHIFT9.md) §3.2). This passes the frontier $`Z^\Gamma`$ of $`R_2^S`$. One sentence ("the rigidity list holds verbatim") is not checked and not needed: a remark (m6).
-  CODES‴ (proved): every restart of the skeleton below $`\psi_{\Omega_1}(\Omega_\omega\cdot 3)`$ has a code below $`\Omega_2`$ or a π-code below $`P_3`$. Wording (m7). **Later (§2.1): Theorem C$`^{\mathrm{LL}}`$ is not proved as written (blocking point B-1 of the second review); Theorem C$`^\Lambda`$ stands.**
+  CODES‴ (proved): every restart of the skeleton below $`\psi_{\Omega_1}(\Omega_\omega\cdot 3)`$ has a code below $`\Omega_2`$ or a π-code below $`P_3`$. Wording (m7). **Later (§2.1): Theorem C$`^{\mathrm{LL}}`$ is not proved as written (blocking point B-1 of the second review); Theorem C$`^\Lambda`$ stands.** **Later (the forty-third round, [SHIFT11.md](SHIFT11.md) §3):** the claim in $`R_2^C`$ on $`[0, Z^{\mathrm{LL}}]`$ is proved again with the corrected values (Theorem C$`^{\mathrm{LL}\sharp}`$); the $`R_2^S`$ part is an outline.
 - **Not proved.** CROSS″ (the lower bound $`r(b) \ge L(\lambda''+\zeta)`$ for codes $`\ge G''(\zeta)`$, $`\omega^2 \le \zeta \lt b`$): outline (proved in §2.1). Open: exact reaches for codes $`\ge G''(\omega^2)^2`$, the tiers $`G''(\zeta)`$ past
   $`\omega^2`$ as long codes, the codes from $`G''(\Omega_1)`$ on, the landing calculus one level up, CAP-0 and NOT-LOW one level up (first test case $`L(\Omega_3)`$), and CROSS-LIM, FRAG and SHIFT one
   level up for $`\nu_3`$; $`T_3 \le \nu_3`$ is not claimed. Known: $`T_3^C \gt Z^{\mathrm{LL}}`$.
@@ -209,7 +211,7 @@ $`F''_b = L(\lambda''+\Omega_1)`$, its first index fixed point; $`\lambda^{\math
 - **The far pins one level up** (T$`^F`$, MULTI-RC″$`^F`$, PIN-ALL″$`^F`$, SEP″$`(\Omega_1)`$, TOP-REG-FAR″$`^F`$, LONG-RS″$`^F`$, CROSSED″$`^F`$; proved by transfer, given FRAG). A far transport over every
   countable index distance below $`F''_b`$ and over the one offset $`\Omega_1`$, pins at every far position, and crossings over index distances up to $`\Omega_1+\omega^2`$ keep the skeleton.
 - **CROSS″** (proved by transfer, given FRAG; an outline in §1.1): a code $`\ge G''(\zeta)`$ reaches at least $`L(\lambda''+\omega^2\cdot L(\lambda''+1+o_b(\zeta))) \ge L(\lambda''+\zeta)`$. Also LB″$`^G`$, R-CAP″$`^G`$,
-  CROSS-O″ and CROSS-F″ (codes $`\ge \hat G''`$ reach $`F''_b`$): proved; they use only $`m_0 = 0`$ or the reading of $`D`$.
+  CROSS-O″ and CROSS-F″ (codes $`\ge \hat G''`$ reach $`F''_b`$): proved; they use only $`m_0 = 0`$ or the reading of $`D`$. **Later (the forty-third round, [SHIFT11.md](SHIFT11.md) §3):** this strong CROSS″, LB″$`^G`$ and CROSS-O″ (for $`x \ge 2`$) are false where the corrected value is lower, and their verdict is withdrawn (the proofs read the old values at smaller codes); the weak form $`r(b) \ge L(\lambda''+1+o_b(\zeta))`$, R-CAP″$`^G`$ and CROSS-F″ stand.
 - **Fatal point F-1: the exact long reaches are false for some codes.** For a long code $`c = G''(\omega^2)\cdot D + m_0`$ the value $`r(L(\lambda'')) = r(\nu) + o_\nu(m_0)`$ of §1.1 (EXACT-LONG-CL″\*), and
   its extensions in this paper (EXACT-LONG″$`^G`$ for $`D \lt \hat G''`$, EXACT-F″ for $`D = \hat G''`$, and the single value of AGREE″), read $`m_0`$ at the landing point $`\nu`$; it must be read over the
   codes whose constants lie below $`b`$. Counterexample: the restart $`b`$ with index $`\theta'_2\cdot\omega^2+\omega^{G''(\omega^2)+\Omega_1}`$ (code $`G''(\omega^2)+\Omega_1`$, below $`Z^{\mathrm{LL}}`$) has
@@ -223,12 +225,12 @@ $`F''_b = L(\lambda''+\Omega_1)`$, its first index fixed point; $`\lambda^{\math
   $`Z^{\mathrm{FP}} = L(\theta'_2\cdot\Omega_2+\omega^{\hat G''+G''(\omega^2)}) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+\Omega_2} + \omega^{\hat G''+G''(\omega^2)})`$, and the frontiers $`L(\theta'_2\cdot\Omega_1)`$ and $`L(\theta'_2\cdot\Omega_2)`$ on the way)
   and Theorem C$`^{\mathrm{LL}}`$ of §1.1 run their induction with the values of F-1. Every corrected value lies in the same block as the claimed one, so the upper bounds, the caps, and the absence of
   reaches across the frontier are not affected (RANGE$`^{\mathrm{FP}}`$: proved), and **CAP-0″ below $`Z^{\mathrm{FP}}`$** (no restart below $`Z^{\mathrm{FP}}`$ crosses itself; it uses only upper bounds) is proved.
-  The referee expects both theorems to survive the repair.
+  The referee expects both theorems to survive the repair. **Later (the forty-third round, [SHIFT11.md](SHIFT11.md) §3):** both are proved in $`R_2^C`$ with the corrected values (Theorems C$`^{\mathrm{LL}\sharp}`$ and C$`^{\mathrm{FP}\sharp}`$, 1 review); the $`R_2^S`$ half is an outline.
 - **The point $`\nu_3`$** (blocking point B-2). With $`L_3(e) = \psi_{\Omega_1}(\Omega_\omega\cdot 3 + P_3\cdot e)`$ and $`\nu_3 = L_3(\omega+1) = \psi_{\Omega_1}(\Omega_\omega\cdot 3 + \omega^{P_3+1} + P_3)`$: the codes
   $`c_k = G''(\theta'_{k+1}\cdot\omega^2)`$, $`\theta'_k = \psi_{\Omega_{k+1}}(\Omega_\omega\cdot 2)`$, increase to $`P_3`$ (proved). The paper's criterion SHIFT$`_3`$ (three hypotheses on $`[0, \nu_3)`$ give
   $`L_3(\omega) \lt_2^S L_3(\omega+1)`$ and $`T_3^S = \nu_3`$) is vacuous: the first hypothesis (the skeleton below $`\nu_3`$) contradicts what the other two give, since they give $`L_3(1) \le_1 L_3(\omega)`$. So the
   reduction of $`\nu_3`$ to the three hypotheses does not work; the route that works is the one used for $`\nu_C`$: CAP-0 and CAP-1 one level up and an analogue of NU-CT. Minor: the region bound of
-  the second hypothesis is false at the code 1 (m1); one index (m2); instances with $`m_0`$ like $`\Omega_1`$ (m3); the $`R_2^S`$ side depends on B-1 (m4).
+  the second hypothesis is false at the code 1 (m1); one index (m2); instances with $`m_0`$ like $`\Omega_1`$ (m3); the $`R_2^S`$ side depends on B-1 (m4). **Later (the forty-third round, [SHIFT11.md](SHIFT11.md) §3):** the route through CAP-0″, CAP-1″ and NU-CT is written as implications; the upper half $`T_3^S \le \nu_3`$ is not proved (a new blocking point).
 - **Not proved.** EXACT-LONG″ (F-1); Theorems C$`^{\mathrm{LL}}`$, C$`^{\mathrm{FP}}`$ and the frontiers on the way (B-1); SHIFT$`_3`$ and the reduction of $`\nu_3`$ (B-2). Open: the codes from $`\hat G''+G''(\omega^2)`$ on
   (the family after the landing at $`F''_b`$), the tiers $`G''(\zeta)`$ for $`\zeta \ge \Omega_2`$, the landing calculus at depth 2 and more, CAP-0 below $`P_3`$ and NOT-LOW one level up (outlines), and the
   hull cap READ$`^\sharp`$ one level up (conjecture).
@@ -453,7 +455,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 3.6 Open
 
-Later: the milestone is proved again ([SHIFT11.md](SHIFT11.md) §1.1); the current list is [SHIFT11.md](SHIFT11.md) §2.6.
+Later: the milestone is proved again ([SHIFT11.md](SHIFT11.md) §1.1); the current list is [SHIFT11.md](SHIFT11.md) §3.6.
 
 - The milestone again, in this order: ENUM-REACH (the corrected value for every code below $`P'`$), its invariance under the transports and its far pin; then CAP-0 below $`P'`$, not-LOW, CAP-1,
   CROSS-LIM, TC⁺$`^\omega`$, EMB, ONTO-FIN, PAIR, UP and $`\nu_C = \nu_S = L(\omega+1)`$; then the frontiers above $`\nu_C`$ ($`X_A`$ to $`Z^\Lambda`$) and the $`R_2^S`$ side; then one level up (Theorems C$`^{\mathrm{LL}}`$,

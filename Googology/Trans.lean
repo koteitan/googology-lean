@@ -141,3 +141,10 @@ import Googology.Trans.PoR.InaccPsi.R2.BlockB
 import Googology.Trans.PoR.InaccPsi.R2.RstC
 import Googology.Trans.PoR.InaccPsi.R2.Blk3
 import Googology.Trans.PoR.InaccPsi.R2.RS
+import Googology.Trans.PoR.InaccPsi.R2.RstK
+import Googology.Trans.PoR.InaccPsi.R2.Off
+import Googology.Trans.PoR.InaccPsi.R2.BlkX
+import Googology.Trans.PoR.InaccPsi.R2.RSX
+import Googology.Trans.PoR.InaccPsi.R2.OffPhi
+import Googology.Trans.PoR.InaccPsi.R2.OffV
+import Googology.Trans.PoR.InaccPsi.R2.CoreX

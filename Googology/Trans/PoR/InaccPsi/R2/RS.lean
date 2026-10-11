@@ -16,6 +16,8 @@ map `Ψ` (Theorem FRAG, `frag`) that moves the bases `υ_r, υ_{r+1}, …, υ_{r
 * `DD_down`, `ix`, `ix_lt`: domains of FRAG and the index lists of the bases.
 * `rs_gen` (**Lemma RS**, general form), `rs_h` (**Lemma RS^h** for every restart below `υ_{ω³}`),
   `reach_rst` (`lh(ρ_{h+1}) = δ_{h+1} + 1` in `R₂^C`, with Lemma TOP^h).
+  Index shift: in `rs_h h` and `reach_rst h` the Lean argument `h` is the paper's `h − 1` (they are
+  about the paper's restart `ρ_{h+1} = υ_{ω²·(h+1)}`; `h = 0` is `ρ_1 = υ_{ω²}`).
 -/
 
 namespace Googology.Trans.PoR.InaccPsi.R2
@@ -499,7 +501,8 @@ theorem target_of_chain {a T0 : Ordinal.{0}}
     simp only [topA, lpA] at this
     rwa [hA] at this
 
-/-- **Lemma RS^h** in `R₂^C`: `ρ_{h+1} ≤₁ δ_{h+1} + 1` for every restart below `υ_{ω³}`. -/
+/-- **Lemma RS^h** in `R₂^C`: `ρ_{h+1} ≤₁ δ_{h+1} + 1` for every restart below `υ_{ω³}` (Lean `h` =
+paper `h − 1`). -/
 theorem rs_h (h : ℕ) : le1 (upsilon (rI h)) (upsilon (rI h + ω + 1) + 1) := by
   rcases h with _ | h
   · refine rs_gen (rstCtx 0).1 ?_
@@ -509,7 +512,8 @@ theorem rs_h (h : ℕ) : le1 (upsilon (rI h)) (upsilon (rI h + ω + 1) + 1) := b
     rw [← rI_succ h]
     exact target_of_chain (rstCtx h).2 ((rstCtx h).1.next.1.le.trans le_self_add)
 
-/-- **The reach of every restart below `υ_{ω³}`** in `R₂^C`: `lh(ρ_{h+1}) = δ_{h+1} + 1` (Lemmas RS^h
+/-- **The reach of every restart below `υ_{ω³}`** in `R₂^C` (Lean `h` = paper `h − 1`):
+`lh(ρ_{h+1}) = δ_{h+1} + 1` (Lemmas RS^h
 and TOP^h). -/
 theorem reach_rst (h : ℕ) : IsReach R2C (upsilon (rI h)) (upsilon (rI h + ω + 1) + 1) := by
   refine ⟨rs_h h, fun g hg => ?_⟩

@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 27 回目から 29 回目：長いちょうどの届く先、クッションの蓋、進行を止める点 B-1 とその直し、帰着 EX-RED$`^w`$、動く下の点のピン、$`\psi_{\Omega_1}(\Omega_\omega\cdot\Omega_2)`$ までの素の符号
 
-このページは [SHIFT5-ja.md](SHIFT5-ja.md) の続き（そこの §2 が 26 回目）。§1 が 27 回目、§2 が 28 回目、§3 が 29 回目。30〜32 回目は [SHIFT7-ja.md](SHIFT7-ja.md)、33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md)、35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md)、38〜40 回目は [SHIFT10-ja.md](SHIFT10-ja.md)、41 回目と 42 回目は [SHIFT11-ja.md](SHIFT11-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT5-ja.md](SHIFT5-ja.md) の続き（そこの §2 が 26 回目）。§1 が 27 回目、§2 が 28 回目、§3 が 29 回目。30〜32 回目は [SHIFT7-ja.md](SHIFT7-ja.md)、33 回目と 34 回目は [SHIFT8-ja.md](SHIFT8-ja.md)、35〜37 回目は [SHIFT9-ja.md](SHIFT9-ja.md)、38〜40 回目は [SHIFT10-ja.md](SHIFT10-ja.md)、41〜43 回目は [SHIFT11-ja.md](SHIFT11-ja.md) にある。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことの言い直しにすぎないと言った結果は、進みとして数えない。
 
