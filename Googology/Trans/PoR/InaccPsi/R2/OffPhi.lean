@@ -397,11 +397,12 @@ theorem specPhi : OffSpec offP Phi1 :=
     fun _ hl _ h2 => offP_succ hl h2, fun _ hl _ h2 => (rsInP hl h2).toRsIn⟩
 
 /-- **Theorem BLK^O below `Φ_1`** in `R₂^C` (the project's Theorem BLK^O with the closed form of
-Theorem OFF-V for the restart indices below `Φ_1`): (i) the `<₂`-pairs with right end below
+Theorem OFF-V for the restart indices below `Φ_1`): (i) the `<₂`-pairs whose RIGHT end is below
 `Φ_1 = υ_{Φ_1}` are exactly `(υ_{μ+ω·j}, υ_{μ+ω·j+1})`, `j ≥ 1`, `μ < Φ_1` zero or a restart
-index; (ii) a restart `ρ_λ` (`λ < Φ_1`) has no `<₁`-predecessor and no `<₂`-successor, and
-`{γ : ρ_λ ≤₁ γ} = [ρ_λ, δ_λ + O(λ)]` with `O(Ξ_α) = Ξ_α + logend(α)` and `O(λ) = c(λ)` otherwise;
-(iii) every point below `Φ_1` that is not a `υ`-point has its `R₁⁺` reach. -/
+index; (ii) a restart `ρ_λ` (`λ < Φ_1`) has no `<₁`-predecessor and no `<₂`-successor, and its
+reach is `δ_λ + O(λ)` (`IsReach`, the maximum; the interval form `{γ : ρ_λ ≤₁ γ} = [ρ_λ, δ_λ + O(λ)]`
+follows with `Basic.le1_of_le_of_le1`) with `O(Ξ_α) = Ξ_α + logend(α)` and `O(λ) = c(λ)` otherwise;
+(iii) only for the points below `Φ_1` that are NOT `υ`-points: they have their `R₁⁺` reach. -/
 theorem blkPhi :
     (∀ c d, c < d → d < Phi1 → (le2 c d ↔ ∃ μ, ∃ j : ℕ,
       (μ = 0 ∨ IsRestartIdx μ) ∧ μ < Phi1 ∧ c = upsilon (μ + ω * ((j + 1 : ℕ) : Ordinal.{0})) ∧

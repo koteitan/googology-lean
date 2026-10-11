@@ -19,7 +19,7 @@ in [SHIFT7.md](SHIFT7.md) (one higher than in the papers). "Given FRAG" means gi
 
 **Later (the forty-first round, [SHIFT11.md](SHIFT11.md) §1.1):** the corrected exact long reach is proved for every code below $`P'`$ at levels 1 and 2 (ENUM-REACH), and the chain was run again on it. So **T0 is proved again** (given FRAG; 1 review of the new proof), and so are the rows marked "not proved as written (fortieth round)" below, as the table of the forty-first round at the end of this page says. The rows S1 and S2 are replaced by ENUM-REACH.
 
-**Later (the forty-second round, [SHIFT11.md](SHIFT11.md) §2.1):** the step TC⁺$`^\omega`$ for $`B_n`$ (T2c) now cites EQ$`^{\mathrm{all}}`$, so T0 is complete as written; and the gap calculus above $`\nu_C`$ is run again, so the frontiers up to $`Z^\Lambda`$ are proved again (the table of the forty-second round at the end of this page). **Later (the forty-third round):** the claim goes on to $`Z^{\mathrm{FP}}`$ in $`R_2^C`$, and some refereed lower bounds of level 3 are withdrawn (the last table).
+**Later (the forty-second round, [SHIFT11.md](SHIFT11.md) §2.1):** the step TC⁺$`^\omega`$ for $`B_n`$ (T2c) now cites EQ$`^{\mathrm{all}}`$, so T0 is complete as written; and the gap calculus above $`\nu_C`$ is run again, so the frontiers up to $`Z^\Lambda`$ are proved again (the table of the forty-second round at the end of this page). **Later (the forty-third round):** the claim goes on to $`Z^{\mathrm{FP}}`$ in $`R_2^C`$, and some refereed lower bounds of level 3 are withdrawn (the last table). **Later (the forty-fourth round):** the claim goes on to $`Z^{\mathrm{W}}`$ in $`R_2^C`$ and to $`[0, Z^{\mathrm{FP}})`$ in $`R_2^S`$, and the blocking point of the forty-third round toward $`\nu_3`$ is closed (the last table).
 
 | node | statement | where | status | reviews | rests on |
 |---|---|---|---|---|---|
@@ -150,3 +150,27 @@ It is now written (row T2b2).
 | LOW-RED″, BASE″, NU-LOW‴, SHIFT$`_3'`$ ($`L_3(\omega) \lt_2 L_3(\omega+1)`$) | proved as implications |
 | $`T_3^S \le \nu_3`$, $`T_3^S = \nu_3`$ | not proved (blocking point B-1 of the review) |
 | $`R_2^S`$ at $`Z^{\mathrm{FP}}`$; NU-CT$`_3`$ | outlines |
+
+**The table of the forty-fourth round** ([SHIFT12.md](SHIFT12.md) §1.1, §1.2; each result 1 review unless a count is given):
+
+| result | status after the forty-fourth round |
+|---|---|
+| TIER, THETA″$`^W`$ (the tiers $`G''(\Omega_2+x)`$, $`x \lt \omega^2`$, read in the window of the restart); the range lemmas up to $`Z^{\mathrm{W}}`$ (no long restart of level 3 is crossed) | proved, without FRAG |
+| ENUM-REACH″$`^{\mathrm{W}}`$: $`r(b) = k''_b(o_b(c''))`$ at every restart $`b = L(\lambda'')`$ below $`Z^{\mathrm{W}}`$; codes $`\ge \hat G''`$ land at $`F''_b`$ | proved by transfer, given FRAG |
+| Theorem C$`^{\mathrm{W}\sharp}`$; the claim in $`R_2^C`$ on $`[0, Z^{\mathrm{W}}]`$, $`\beta_0 \gt Z^{\mathrm{W}}`$; the points $`L(\theta'_2\cdot(\Omega_2+x))`$ as restrictions | proved by transfer, given FRAG |
+| CAP-0″ below $`Z^{\mathrm{W}}`$ (sharp form); the far top lemma with the larger set of pins (m1 of the forty-third review) | proved, given FRAG |
+| TAUL | proved, without FRAG |
+| SKEL″$`^\nu`$ (the skeleton of a region of level 3 below $`y_3`$ with any $`\le_1`$-predecessors) | proved by transfer, given FRAG, below $`\min(y_3, L(\Omega_\omega))`$; above it an implication |
+| SHIFT$`_3''`$: from (Y), (H2$`^{\mathrm{cr}}`$), (H3), $`L_3(\omega) \lt_2 \nu_3`$ with a triple nest, $`T_3^S = y_3 = \nu_3`$ (closes B-1 of the forty-third round) | proved as an implication, given FRAG |
+| NU-LOW‴ with the hypotheses of the forty-third review | proved as an implication |
+| $`\nu_3`$; CAP-0″ on $`[Z^{\mathrm{W}}, L(\Omega_\omega))`$, CAP-1″, LONG-CLASS at level 4, (H2$`^{\mathrm{cr}}`$), LEFT⁺ one level up | open |
+| (H3), NU-CT$`_3`$; the second window; $`R_2^S`$ at $`Z^{\mathrm{W}}`$ | outlines |
+| the first crossing of a long restart of level 3 at the code $`G''(\theta'_3\cdot\omega^2)`$ | conjecture |
+| $`r(Z^\Lambda) = \delta''_1(L(\theta'_2\cdot\omega^2+\omega^2)) + 1`$; LONG″-CAP (the conjecture of the forty-third round) | proved, given FRAG |
+| LOC-PASS | proved |
+| S-PAST-Λ: the claim in $`R_2^S`$ on $`[0, Z^{\mathrm{LG}})`$ | proved, given FRAG |
+| S-FOLLOW; the claim in $`R_2^S`$ on $`[0, Z^{\mathrm{FP}})`$ and Carlson's criterion below $`Z^{\mathrm{FP}}`$ | proved, given FRAG |
+| the induction with caps only at the base $`Z^{\mathrm{FP}}`$: $`\beta_0 \gt Z^{\mathrm{FPG}}`$, the claim in $`R_2^C`$ on $`[0, Z^{\mathrm{FPG}}]`$ | proved by transfer, given FRAG; with the row of C$`^{\mathrm{W}\sharp}`$, 2 reviews for $`(Z^{\mathrm{FP}}, Z^{\mathrm{FPG}}]`$ |
+| S-COND$`^{\mathrm{FP}}`$ | proved as an implication |
+| the remark "$`Z^{\mathrm{FP}}`$ is in the core of $`R_2^S`$ if and only if an indecomposable $`\mu`$ lies in $`(r(Z^{\mathrm{FP}}), \beta_0]`$" | only the "if" half is proved |
+| CAP$`^{\mathrm{FP}}`$ (a cap on $`r(Z^{\mathrm{FP}})`$) | conjecture |

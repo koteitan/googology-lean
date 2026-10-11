@@ -13,9 +13,10 @@ multiple of `ω²`):
   between) cofinal below `υ_l`;
 * `caps` (BLOCKTOP with the reaches): if `c <₂ d`, `d < υ_l`, `x ≤ c` and `x ≤₁ g`, then `g ≤ d`, or
   `x = ρ_μ` is a restart with `δ_μ ≤ d` and `g ≤ δ_μ + O(μ)`;
-* `pairs` (BLK (i)): the `<₂`-pairs below `υ_l` are exactly `(υ_{μ+ω(j+1)}, υ_{μ+ω(j+1)+1})`,
+* `pairs` (BLK (i), right ends below `υ_l`): the `<₂`-pairs below `υ_l` are exactly `(υ_{μ+ω(j+1)}, υ_{μ+ω(j+1)+1})`,
   `μ = 0` or a restart index, `μ < l`;
-* `sk` (BLK (iii), skeletal): a point below `υ_l` that is not a `υ`-point has its `R₁⁺` reach;
+* `sk` (BLK (iii) for the points that are not `υ`-points only, skeletal): a point below `υ_l` that
+  is not a `υ`-point has its `R₁⁺` reach;
 * `rst` (BLK (ii), upper end): every restart `μ < l` has a restart context (`RstK`), Lemma TOP
   (`ρ_μ` is not `≤₁` any `γ > δ_μ + O(μ)`), and the chain of block contexts after `δ_μ + O(μ)`.
 

@@ -423,12 +423,13 @@ theorem specV : OffSpec offV Vw1 :=
     fun _ hl hlB h2 => offV_succ hl hlB h2, fun _ hl hlB h2 => rsInV hl hlB h2⟩
 
 /-- **Theorem BLK^O below `V_ω(1)`** in `R₂^C` (the project's Theorem BLK^O with the closed form of
-Theorem OFF-V for every restart index below `V_ω(1)`): (i) the `<₂`-pairs with right end below
+Theorem OFF-V for every restart index below `V_ω(1)`): (i) the `<₂`-pairs whose RIGHT end is below
 `V_ω(1) = υ_{V_ω(1)}` are exactly `(υ_{μ+ω·j}, υ_{μ+ω·j+1})`, `j ≥ 1`, `μ < V_ω(1)` zero or a restart
-index; (ii) a restart `ρ_λ` (`λ < V_ω(1)`) has no `<₁`-predecessor and no `<₂`-successor, and
-`{γ : ρ_λ ≤₁ γ} = [ρ_λ, δ_λ + O(λ)]` with `O(V_n(α)) = V_n(α)·n + logend(α)` at level `n ≥ 1` and
-`O(λ) = c(λ)` at level `0`; (iii) every point below `V_ω(1)` that is not a `υ`-point has its `R₁⁺`
-reach. -/
+index; (ii) a restart `ρ_λ` (`λ < V_ω(1)`) has no `<₁`-predecessor and no `<₂`-successor, and its
+reach is `δ_λ + O(λ)` (`IsReach`, the maximum; the interval form `{γ : ρ_λ ≤₁ γ} = [ρ_λ, δ_λ + O(λ)]`
+follows with `Basic.le1_of_le_of_le1`) with `O(V_n(α)) = V_n(α)·n + logend(α)` at level `n ≥ 1` and
+`O(λ) = c(λ)` at level `0`; (iii) only for the points below `V_ω(1)` that are NOT `υ`-points: they
+have their `R₁⁺` reach. -/
 theorem blkV :
     (∀ c d, c < d → d < Vw1 → (le2 c d ↔ ∃ μ, ∃ j : ℕ,
       (μ = 0 ∨ IsRestartIdx μ) ∧ μ < Vw1 ∧ c = upsilon (μ + ω * ((j + 1 : ℕ) : Ordinal.{0})) ∧

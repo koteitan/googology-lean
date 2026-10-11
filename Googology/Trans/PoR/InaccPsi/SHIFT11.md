@@ -2,14 +2,14 @@
 
 # $`R_2^+`$, the forty-first to forty-third rounds: the exact long reach below $`P'`$, $`\nu_C = \nu_S = L(\omega+1)`$ again, the claim in $`R_2^C`$ up to $`Z^{\mathrm{FP}}`$ and in $`R_2^S`$ up to $`Z^\Lambda`$, and the restart blocks of $`R_2^C`$ in Lean
 
-This page continues [SHIFT10.md](SHIFT10.md) (§3 there is the fortieth round); §1 is the forty-first round, §2 the forty-second and §3 the forty-third. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT10.md](SHIFT10.md) (§3 there is the fortieth round); §1 is the forty-first round, §2 the forty-second and §3 the forty-third; the forty-fourth round is on [SHIFT12.md](SHIFT12.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a fatal or blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known, or of the target, is not counted as progress.
 
 ## 1. The forty-first round
 
 **Later (the forty-second round, §2):** the gap calculus above $`\nu_C`$ is run again on the corrected values, so, given FRAG, the claim holds in $`R_2^C`$ on $`[0, Z^\Lambda]`$
-again (1 review), and the step TC⁺$`^\omega`$ for $`B_n`$ now cites EQ$`^{\mathrm{all}}`$ (§2.1); in $`R_2^S`$ the claim holds on $`[0, F_\nu)`$, past $`\nu_C`$ (§2.2). **Later (the forty-third round, §3):** the claim holds in $`R_2^C`$ on $`[0, Z^{\mathrm{FP}}]`$ and in $`R_2^S`$ on $`[0, Z^\Lambda)`$, given FRAG. The open list is §3.6.
+again (1 review), and the step TC⁺$`^\omega`$ for $`B_n`$ now cites EQ$`^{\mathrm{all}}`$ (§2.1); in $`R_2^S`$ the claim holds on $`[0, F_\nu)`$, past $`\nu_C`$ (§2.2). **Later (the forty-third round, §3):** the claim holds in $`R_2^C`$ on $`[0, Z^{\mathrm{FP}}]`$ and in $`R_2^S`$ on $`[0, Z^\Lambda)`$, given FRAG. **Later (the forty-fourth round, [SHIFT12.md](SHIFT12.md) §1):** in $`R_2^C`$ on $`[0, Z^{\mathrm{W}}]`$ and in $`R_2^S`$ on $`[0, Z^{\mathrm{FP}})`$, given FRAG. The open list is [SHIFT12.md](SHIFT12.md) §1.6.
 
 Three papers (2026-10): the exact long reach for every code below $`P'`$ with the chain to $`\nu_C`$ run again (§1.1) and an audit of every exact long formula below $`X_{21}`$ (§1.2), each refereed
 once, and the second Lean stage for $`R_2^C`$ (§1.3), whose audit checked the axioms and the definitions (Lean checks the proofs). A result in this section has 1 review unless a count is given.
@@ -342,6 +342,8 @@ Each run was under 60 seconds; none is a proof.
 
 ## 3. The forty-third round
 
+**Later (the forty-fourth round, [SHIFT12.md](SHIFT12.md) §1):** the exact reach of level 3 is proved up to $`Z^{\mathrm{W}}`$, and given FRAG the claim holds in $`R_2^C`$ on $`[0, Z^{\mathrm{W}}]`$ (1 review), with $`(Z^{\mathrm{FP}}, Z^{\mathrm{FPG}}]`$ by two proofs; in $`R_2^S`$ on $`[0, Z^{\mathrm{FP}})`$ (1 review); the blocking point B-1 of §3.1 is closed, and $`T_3^S = \nu_3`$ follows from three named hypotheses; the conjecture LONG″-CAP of §3.2 is proved.
+
 Three papers (2026-10): the exact reaches of level 3 below $`Z^{\mathrm{FP}}`$ (§3.1) and the $`R_2^S`$ side up to $`Z^\Lambda`$ with an induction above it that reads only caps (§3.2), each refereed once,
 and the fourth Lean stage for $`R_2^C`$ (§3.3), whose audit checked the axioms and the definitions. A result in this section has 1 review unless a count is given. Levels are numbered as in §1
 (one higher than in the papers): the restarts $`L(\lambda'')`$ are at level 3, and the points $`L_3(e) = \psi_{\Omega_1}(\Omega_\omega\cdot 3 + P_3\cdot e)`$ of [SHIFT10.md](SHIFT10.md) §2.1 are the restarts of level 4.
@@ -406,7 +408,7 @@ $`k''_b`$ enumerates the points $`y \ge \delta''_1(b)`$ that are closed relative
   - SHIFT$`_3'`$ (proved as an implication, given FRAG): with (H1′), $`L_3(\omega) \lt_2 L_3(\omega+1)`$ in $`R_2^S`$.
   - **Not proved: $`T_3^S \le \nu_3`$ and $`T_3^S = \nu_3`$** (blocking point B-1 of the review). The triple nest at $`L_3(\omega)`$ uses the block lemma at $`L_3(\omega)`$, which needs a base point or a
     bounded set of $`\le_1`$-predecessors; neither holds, since $`L_3(n) \le_1 L_3(\omega)`$ for every $`n`$. (H1′) does not give that block, and if its clause on crossings is read literally it fails at
-    $`L_3(\omega)`$, as the first hypothesis of SHIFT$`_3`$ did.
+    $`L_3(\omega)`$, as the first hypothesis of SHIFT$`_3`$ did. **Later ([SHIFT12.md](SHIFT12.md) §1.1):** closed: the block at $`L_3(\omega)`$ comes from SKEL″$`^\nu`$, which needs no base point, and $`T_3^S = \nu_3`$ follows, as an implication, from three named hypotheses.
   - Open: the corrected exact reach for every code below $`P_3`$ at levels 3 and 4 (the first open code is $`\hat G''+G''(\omega^2)`$; up to $`(\hat G'')^2`$ the author expects only checks of
     the domain), then CAP-0″ on $`[Z^{\mathrm{FP}}, L(\Omega_\omega))`$, CAP-1″, LONG-CLASS at level 4, the block at $`L_3(\omega)`$, and NU-CT$`_3`$.
 - **Minor point m5**: the reason given for n8 in the paper is not a reason; the bound holds as stated in the paper of §2.1.
@@ -435,7 +437,7 @@ Words as in §2.2. A crosser of $`b`$ is a point $`x \lt b`$ with $`x \le_1 b`$.
   conjecture LONG″-CAP (a long restart of level 3 of code $`G''(\omega^2)`$ reaches below $`L(\lambda''+\omega^2\cdot 2)`$), the claim in $`R_2^S`$ would hold on $`[0, Z^{\mathrm{LG}})`$ (conditional). Minor point m1:
   for an indecomposable $`\mu`$ with $`r(Z^\Lambda) \lt \mu \le \beta_0`$ the core of $`R_2^S`$ already passes $`Z^\Lambda`$, so a cap $`r(Z^\Lambda) \lt Z^{\mathrm{LG}}`$ alone is enough to pass $`Z^\Lambda`$.
 - **Not counted** (no referee has checked it): $`r(Z^\Lambda) = \delta''_1(L(\theta'_2\cdot\omega^2+\omega^2)) + 1`$ ([SHIFT10.md](SHIFT10.md) §1.1, LONG″-$`G''(\omega^2)`$, which stands; also §3.1) is below $`Z^{\mathrm{LG}}`$,
-  so with m1 the claim in $`R_2^S`$ would pass $`Z^\Lambda`$.
+  so with m1 the claim in $`R_2^S`$ would pass $`Z^\Lambda`$. **Later ([SHIFT12.md](SHIFT12.md) §1.2):** this value is now proved (LONG″-CAP), and the claim holds in $`R_2^S`$ on $`[0, Z^{\mathrm{LG}})`$ and on $`[0, Z^{\mathrm{FP}})`$.
 
 ### 3.3 Lean, stage 4: the restart blocks over ordinal restart indices
 
@@ -480,6 +482,8 @@ Each run was under 60 seconds; none is a proof.
   green, with no `sorry`.
 
 ### 3.6 Open
+
+Later: the current list is [SHIFT12.md](SHIFT12.md) §1.6.
 
 - Above $`Z^{\mathrm{FP}}`$: the exact reach of level 3 for the codes from $`\hat G''+G''(\omega^2)`$ on (the reading past the next $`\psi_{\Omega_2}`$-term above $`\hat G''`$, BOUND♯ and the caps one level up,
   the relative pins, and crossings of long restarts of level 3); then CAP-0″ up to $`L(\Omega_\omega)`$, CAP-1″, LONG-CLASS at level 4, the block at $`L_3(\omega)`$, NU-CT$`_3`$ and $`\nu_3`$.

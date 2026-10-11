@@ -148,3 +148,11 @@ import Googology.Trans.PoR.InaccPsi.R2.RSX
 import Googology.Trans.PoR.InaccPsi.R2.OffPhi
 import Googology.Trans.PoR.InaccPsi.R2.OffV
 import Googology.Trans.PoR.InaccPsi.R2.CoreX
+import Googology.Trans.PoR.InaccPsi.R2.CitedW
+import Googology.Trans.PoR.InaccPsi.R2.FragX
+import Googology.Trans.PoR.InaccPsi.R2.Exact
+import Googology.Trans.PoR.InaccPsi.R2.RSG
+import Googology.Trans.PoR.InaccPsi.R2.TopG
+import Googology.Trans.PoR.InaccPsi.R2.BlkG
+import Googology.Trans.PoR.InaccPsi.R2.OffG
+import Googology.Trans.PoR.InaccPsi.R2.OffG2

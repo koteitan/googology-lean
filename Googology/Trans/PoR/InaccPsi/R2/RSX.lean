@@ -489,10 +489,13 @@ theorem reach_allO {l : Ordinal.{0}} (hl : IsRestartIdx l) (hlB : l < B) :
   ⟨rs_allO S l hl hlB, fun g hg => not_lt.1 (fun h => (rstO S hl hlB).2.1 g h hg)⟩
 
 /-- **The block theorem below `υ_B`** for an offset specification `O` up to `B`: (i) the `<₂`-pairs
-with right end below `υ_B` are exactly `(υ_{μ+ω·j}, υ_{μ+ω·j+1})`, `j ≥ 1`, `μ < B` zero or a
-restart index; (ii) a restart `ρ_λ` (`λ < B`) has no `<₁`-predecessor and no `<₂`-successor, and
-`{γ : ρ_λ ≤₁ γ} = [ρ_λ, δ_λ + O(λ)]`; (iii) every point below `υ_B` that is not a `υ`-point has
-its `R₁⁺` reach. -/
+whose RIGHT end is below `υ_B` are exactly `(υ_{μ+ω·j}, υ_{μ+ω·j+1})`, `j ≥ 1`, `μ < B` zero or a
+restart index (pairs with left end below `υ_B` and right end `≥ υ_B` are not described; for a
+restart left end (ii) excludes them); (ii) a restart `ρ_λ` (`λ < B`) has no `<₁`-predecessor and no
+`<₂`-successor, and its reach is `δ_λ + O(λ)` (`IsReach`: `ρ_λ ≤₁ δ_λ + O(λ)` and every `γ` with
+`ρ_λ ≤₁ γ` is `≤ δ_λ + O(λ)`; the interval form `{γ : ρ_λ ≤₁ γ} = [ρ_λ, δ_λ + O(λ)]` follows with
+`Basic.le1_of_le_of_le1`); (iii) only for the points below `υ_B` that are NOT `υ`-points: they have
+their `R₁⁺` reach (the `υ`-points that are not restarts are not covered by this statement). -/
 theorem blk_gen :
     (∀ c d, c < d → d < upsilon B → (le2 c d ↔ ∃ μ, ∃ j : ℕ,
       (μ = 0 ∨ IsRestartIdx μ) ∧ μ < B ∧ c = upsilon (μ + ω * ((j + 1 : ℕ) : Ordinal.{0})) ∧
@@ -528,11 +531,14 @@ theorem reach_all {l : Ordinal.{0}} (hl : IsRestartIdx l) (hlX : l ≤ XiW) :
     IsReach R2C (upsilon l) (upsilon (l + ω + 1) + off l) :=
   reach_allO specXi hl (lt_XiW_add hlX)
 
-/-- **Theorem BLK^Ξ in `R₂^C`.**  (i) The `<₂`-pairs with right end below `υ_{Ξ_ω+ω²}` are exactly
-`(τ^μ_j, δ^μ_j) = (υ_{μ+ω·j}, υ_{μ+ω·j+1})`, `j ≥ 1`, `μ = 0` or a restart index `≤ Ξ_ω`.
-(ii) A restart `ρ_λ` (`λ ≤ Ξ_ω`) has no `<₁`-predecessor and no `<₂`-successor, and
-`{γ : ρ_λ ≤₁ γ} = [ρ_λ, δ_λ + c*(λ)]`.  (iii) Every point below `υ_{Ξ_ω+ω²}` that is not a
-`υ`-point has its `R₁⁺` reach (`≤₁` of `R₂^C` = `≤₁` of `R₁⁺` from it). -/
+/-- **Theorem BLK^Ξ in `R₂^C`.**  (i) The `<₂`-pairs whose RIGHT end is below `υ_{Ξ_ω+ω²}` are
+exactly `(τ^μ_j, δ^μ_j) = (υ_{μ+ω·j}, υ_{μ+ω·j+1})`, `j ≥ 1`, `μ = 0` or a restart index `≤ Ξ_ω`
+(the paper's (i) speaks of left ends; pairs with right end `≥ υ_{Ξ_ω+ω²}` are not described here).
+(ii) A restart `ρ_λ` (`λ ≤ Ξ_ω`) has no `<₁`-predecessor and no `<₂`-successor, and its reach is
+`δ_λ + c*(λ)` (`IsReach`, the maximum; the interval form `{γ : ρ_λ ≤₁ γ} = [ρ_λ, δ_λ + c*(λ)]`
+follows with `Basic.le1_of_le_of_le1`).  (iii) Only for the points below `υ_{Ξ_ω+ω²}` that are NOT
+`υ`-points: they have their `R₁⁺` reach (`≤₁` of `R₂^C` = `≤₁` of `R₁⁺` from them); the paper's (iii)
+also covers the `υ`-points that are not restarts, which are not in this statement. -/
 theorem blkXi :
     (∀ c d, c < d → d < upsilon (XiW + ω * ω) → (le2 c d ↔ ∃ μ, ∃ j : ℕ,
       (μ = 0 ∨ IsRestartIdx μ) ∧ μ ≤ XiW ∧ c = upsilon (μ + ω * ((j + 1 : ℕ) : Ordinal.{0})) ∧
