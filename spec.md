@@ -29,6 +29,7 @@ other is what we measure it against.
 Googology/
   Core/            expansion systems, standard forms, translations, goal records
   Rank.lean        a well-founded system carries an ordinal measure
+  Cofinal.lean     cofinality in a common form (Eval.Cofinal); a cofinal evaluation is the rank
   Notation/<Name>/ one directory per system
   Trans/<A>/<B>/       the translation A → B, one directory per direction
   Trans/<A>/common/    facts about A alone that two or more translations use

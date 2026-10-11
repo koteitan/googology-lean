@@ -14,7 +14,7 @@ Lake の依存であり、定理を使うだけで写してはいない。
 |---|---|
 | `Expand.lean` | pss-proof の展開はこのライブラリの展開である。長さ 2 以上のどの標準ペア数列でも `oper M (N+1) = expand2L N M`（`oper_succ_eq_expand2L_of_ctps`）。標準の二つの意味も一致する（`isPair_iff`） |
 | `Terms.lean` | pss-proof の Buchholz 項（添字は `ℕ ∪ {w}`）は、拡張ブーフホルツ項へ単射で順序を保って写る（`toTerm_injective`、`lessBT_iff_lt`）。標準であることと、像が標準であることは同値（`OT_toTerm_iff`）。像は `p0(W_w)` 未満の標準形全部（`toTerm_bijOn_TransRange`） |
-| `Rank.lean` | **ペア数列の階数は、その項の `1 + val` である**（`rank_pairL_eq`）。空列は 0。値はちょうど `p0(W_w)` 未満の順序数全部（`range_pairOrd`）。写像は単射で、辞書式順序を保つ（`pairOrd_injective`、`ltPS_iff_pairOrd_lt`）。階数は下にある標準ペア数列の順序型である（`rank_eq_typein`） |
+| `Rank.lean` | **ペア数列の階数は、その項の `1 + val` である**（`rank_pairL_eq`。共通の形の共終性 `pairOrdEval_cofinal : pairOrdEval.Cofinal` から出す）。空列は 0。値はちょうど `p0(W_w)` 未満の順序数全部（`range_pairOrd`）。写像は単射で、辞書式順序を保つ（`pairOrd_injective`、`ltPS_iff_pairOrd_lt`）。階数は下にある標準ペア数列の順序型である（`rank_eq_typein`） |
 
 ## `1 +` が付く理由
 

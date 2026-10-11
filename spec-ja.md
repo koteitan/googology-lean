@@ -24,6 +24,7 @@
 Googology/
   Core/            展開系、標準形、翻訳、目標の記録
   Rank.lean        整礎な系は順序数の測度を持つ
+  Cofinal.lean     共通の形の共終性（Eval.Cofinal）。共終な評価は階数に等しい
   Notation/<名前>/ 系ごとに 1 ディレクトリ
   Trans/<A>/<B>/       翻訳 A → B。向きごとに 1 ディレクトリ
   Trans/<A>/common/    2 つ以上の翻訳が使う、A だけについての事実
