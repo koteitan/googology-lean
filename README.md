@@ -14,7 +14,7 @@ Links to the formal proofs by koteitan and Phyrion are in [portal/](portal/READM
 
 ## What it proves
 
-Every notation gets the same goals. They are defined exactly in section 6 of [spec.md](spec.md).
+Every notation gets the same goals. They are defined exactly in chapter 1 of [spec.md](spec.md).
 
 | notation | expansion defined | well-foundedness | well-foundedness (non-standard) |
 |---|:-:|:-:|:-:|

@@ -6,7 +6,7 @@ import Googology.Trans
 /-!
 # The goal records of this library
 
-One `def` per record, and the list `audit` of all their lines (section 7.6 of
+One `def` per record, and the list `audit` of all their lines (section 3.5 of
 `spec.md`).  `test/GoalsAudit.lean` prints it, and `scripts/check_readme.py`
 compares it with the tables of `README.md` and `README-ja.md`.
 

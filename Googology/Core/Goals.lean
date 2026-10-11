@@ -4,12 +4,12 @@ import Googology.Core.Morphism
 /-!
 # Goal records
 
-Section 6 of `spec.md` fixes one proposition per column of the README tables.
+Chapter 1 of `spec.md` fixes one proposition per column of the README tables.
 This file holds the types that record, as Lean values, which of those
-propositions are proved for a notation (section 7 of `spec.md`).
+propositions are proved for a notation (chapters 1 and 3 of `spec.md`).
 
 * `Rewrite.Std.WF`: one step, restricted to the standard forms, is well
-  founded.  It is the well-foundedness of section 6.
+  founded.  It is the well-foundedness of section 1.1.2.
 * `Goal P`: `P` is proved, refuted, or not yet proved.
 * `Runs R`: the expansion of `R` runs, on codes.
 * `Incl R Q`: `R` is `Q` on part of its states.
@@ -163,7 +163,7 @@ structure AuditLine where
   targetEn : String
   /-- The target label in `README-ja.md`; `""` unless `table = "between"`. -/
   targetJa : String
-  /-- A column id of section 7.4 of `spec.md`. -/
+  /-- A column id of chapter 1 of `spec.md`. -/
   column : String
   /-- The status. -/
   status : Status

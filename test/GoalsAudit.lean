@@ -4,7 +4,7 @@ import Lean
 /-!
 # The audit of the goal records
 
-Prints, in format `1` of section 7.7 of `spec.md`, one line per record and
+Prints, in format `1` of section 2.2 of `spec.md`, one line per record and
 column, and then the axioms the records use.  `scripts/check_readme.py`
 compares the output with the tables of `README.md` and `README-ja.md`:
 

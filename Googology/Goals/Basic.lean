@@ -4,7 +4,7 @@ import Googology.Rank
 /-!
 # Goal records for translations
 
-The record types of the second and third tables of the README (section 7.4 of
+The record types of the second and third tables of the README (section 1.2 of
 `spec.md`).  They talk about ordinals and ranks, so they live outside `Core`.
 
 * `OrdGoals`: a translation `o` of a notation into the ordinals.
@@ -49,7 +49,7 @@ structure OrdGoals {Idx : Type} (sys : Idx → Rewrite)
 
 /-- The goals of a translation `F` from `R` to `Q`, on the states `dom`: the
 six marks of a cell of the third table.  With `dom i := fun _ => True` the
-fields are the propositions of section 6 of `spec.md` word for word. -/
+fields are the propositions of section 1.2.2 of `spec.md` word for word. -/
 structure TransGoals {Idx : Type} (R Q : Idx → Rewrite)
     (dom : (i : Idx) → (R i).State → Prop)
     (F : (i : Idx) → (R i).State → (Q i).State) where

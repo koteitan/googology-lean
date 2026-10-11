@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Check that the tables of README.md and README-ja.md agree with the audit.
 
-This is the script of spec.md, section 7.8.
+This is the script of spec.md, chapter 2.
 
     python3 scripts/check_readme.py --audit audit.txt [--root DIR]
 
-The audit is the standard output of test/GoalsAudit.lean (spec.md 7.7). The
+The audit is the standard output of test/GoalsAudit.lean (spec.md 2.2). The
 script reads the audit and the two README files and writes none. It never
 changes a README. It does not run Lean.
 
@@ -26,7 +26,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
-# Constants of spec.md 7.4, 7.7 and 7.8
+# Constants of spec.md chapters 1 and 2
 
 AUDIT_VERSION = "1"
 
@@ -105,7 +105,7 @@ class Audit:
 
 
 def parse_audit(text: str) -> Audit:
-    """Read the audit output of spec.md 7.7. Raise Fatal if it is not valid."""
+    """Read the audit output of spec.md 2.2. Raise Fatal if it is not valid."""
     begins, ends, axioms_lines, goals = [], [], [], []
     for number, raw in enumerate(text.splitlines(), 1):
         line = raw.rstrip("\r\n")
@@ -204,7 +204,7 @@ def parse_audit(text: str) -> Audit:
 
 
 def expected_mark(at: AuditTable, table: str, row: str, target: str | None = None) -> str:
-    """The mark of spec.md 7.5, in normalized form."""
+    """The mark of spec.md 2.5, in normalized form."""
     if table == "between":
         if row == target:
             return DIAGONAL
@@ -238,7 +238,7 @@ class Table:
 
 
 def split_cells(line: str) -> list:
-    """Split a table line into cells as spec.md 7.8 says."""
+    """Split a table line into cells as spec.md 2.4 says."""
     body = line[1:] if line.startswith("|") else line
     if body.endswith("|"):
         body = body[:-1]
@@ -341,7 +341,7 @@ def line_repr(values: list) -> str:
 
 
 def check_file(tables: dict, audit: Audit, lang: str, name: str) -> list:
-    """Mismatches 1 to 4 of spec.md 7.8, for one file."""
+    """Mismatches 1 to 4 of spec.md 2.6, for one file."""
     out = []
     for t in TABLES:
         table = tables[t]
@@ -378,7 +378,7 @@ def check_file(tables: dict, audit: Audit, lang: str, name: str) -> list:
                     col = f": column {column}" if column else ""
                     out.append(f'{where}{col}: not an allowed form: found "{raw}"')
                     continue
-                # 2. and 4. (diagonal): the mark of 7.5
+                # 2. and 4. (diagonal): the mark of 2.5
                 if t == "between":
                     expected = expected_mark(at, t, label, tgt)
                     if expected == found:
@@ -398,7 +398,7 @@ def check_file(tables: dict, audit: Audit, lang: str, name: str) -> list:
 
 
 def check_pair(en_tables: dict, ja_tables: dict, audit: Audit) -> list:
-    """Mismatches 5 and 6 of spec.md 7.8, between the two files."""
+    """Mismatches 5 and 6 of spec.md 2.6, between the two files."""
     out = []
     en_name, ja_name = FILES["en"], FILES["ja"]
     for t in TABLES:
@@ -450,7 +450,7 @@ def read_text(path: str) -> str:
 def main(argv: list | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Check that the tables of README.md and README-ja.md "
-                    "agree with the audit of test/GoalsAudit.lean (spec.md 7.8).")
+                    "agree with the audit of test/GoalsAudit.lean (spec.md chapter 2).")
     parser.add_argument("--audit", required=True, metavar="FILE",
                         help="a file holding the audit output; - reads standard input")
     parser.add_argument("--root", metavar="DIR",
