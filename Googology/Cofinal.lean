@@ -41,6 +41,28 @@ theorem Eval.Cofinal.rank_eq {R : Rewrite} [IsWellFounded R.State R.Rel]
       _ = IsWellFounded.rank R.Rel b := (IH b hb).symm
       _ < IsWellFounded.rank R.Rel a := IsWellFounded.rank_lt_of_rel hb
 
+/-- **The rank is cofinal.**  An evaluation that equals the rank is cofinal,
+because the rank is the supremum of `rank b + 1` over the successors `b`. -/
+theorem Eval.cofinal_of_rank_eq {R : Rewrite} [IsWellFounded R.State R.Rel]
+    (e : Eval R (· < · : Ordinal.{0} → Ordinal.{0} → Prop))
+    (he : ∀ a, IsWellFounded.rank R.Rel a = e.val a) : e.Cofinal where
+  exists_ge a β hβ := by
+    rw [← he a, IsWellFounded.rank_eq] at hβ
+    obtain ⟨⟨b, hb⟩, hβb⟩ := Ordinal.lt_iSup_iff.mp hβ
+    exact ⟨b, hb, by rw [← he b]; exact Order.lt_succ_iff.mp hβb⟩
+
+/-- **Cofinality on the standard forms**: the successor that reaches high
+enough is standard when its source is, because a step keeps a state
+standard.  This is the form of the column "cofinal" of `OrdGoals`. -/
+theorem Eval.Cofinal.std {R : Rewrite}
+    {e : Eval R (· < · : Ordinal.{0} → Ordinal.{0} → Prop)} (hc : e.Cofinal) (S : R.Std) :
+    ∀ a, S.Standard a → ∀ β < e.val a, ∃ b, S.Standard b ∧ R.Rel b a ∧ β ≤ e.val b := by
+  intro a ha β hβ
+  obtain ⟨b, hb, hβb⟩ := hc.exists_ge a β hβ
+  refine ⟨b, ?_, hb, hβb⟩
+  obtain ⟨-, k, rfl⟩ := hb
+  exact S.step_std a k ha
+
 /-- The same with the rank of `Googology/Rank.lean`. -/
 theorem Eval.Cofinal.rank_eq' {R : Rewrite} (h : R.WF)
     {e : Eval R (· < · : Ordinal.{0} → Ordinal.{0} → Prop)} (hc : e.Cofinal) (a : R.State) :

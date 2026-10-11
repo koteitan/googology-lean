@@ -34,22 +34,23 @@ Every notation gets the same goals. They are defined exactly in section 6 of [sp
 
 A map sending each state to the ordinal it names.
 
-| notation | defined | injective | surjective | decreases on expansion | equals the rank | order-preserving |
-|---|:-:|:-:|:-:|:-:|:-:|:-:|
-| BMS with at most 2 rows | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| BMS with 3 rows or more |  |  |  |  |  |  |
-| one-row DBMS | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| DBMS with 2 rows | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| DBMS with 3 rows or more |  |  |  |  |  |  |
-| Y sequence |  |  |  |  |  |  |
-| ω-Y |  |  |  |  |  |  |
-| extended Buchholz's ψ | ✅ | ✅ | ✅(*1) | ✅ | ✅ | ✅ |
+| notation | defined | injective | surjective | decreases on expansion | cofinal | equals the rank | order-preserving |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| BMS with at most 2 rows | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| BMS with 3 rows or more |  |  |  |  |  |  |  |
+| one-row DBMS | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| DBMS with 2 rows | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| DBMS with 3 rows or more |  |  |  |  |  |  |  |
+| Y sequence |  |  |  |  |  |  |  |
+| ω-Y |  |  |  |  |  |  |  |
+| extended Buchholz's ψ | ✅ | ✅ | ✅(*1) | ✅ | ✅ | ✅ | ✅ |
 
 - defined: the map is defined in Lean. For primitive sequences and one-row DBMS it reads the state as an extended Buchholz term and takes its value. For pair sequences it sends the state to a Buchholz term by the `Trans` of [koteitan/pss-proof](https://github.com/koteitan/pss-proof), maps that to an extended Buchholz term, and takes `1 + val` (0 for the empty sequence). For two-row DBMS, a standard form splits into blocks that start with `(0,0)`; the rest of each block is read as a pair sequence `M_i`, and the value is `ω^o(M_0) + ω^o(M_1) + ...`, where `o` is the ordinal of a pair sequence. For extended Buchholz's ψ it is the value of the term.
 - injective: distinct standard forms go to distinct ordinals. For BMS and DBMS a standard form is its matrix, so two states are compared as matrices, by their entries.
 - surjective: the image is known exactly — the ordinals below `ε₀` for primitive sequences and one-row DBMS, the ordinals below `ψ_0(Ω_ω)` for pair sequences and two-row DBMS, the ordinals below `ψ_0(Λ)` for extended Buchholz's ψ (*1).
 - (*1) The states of extended Buchholz's ψ are the standard terms below `Ω`, so the image is not all of `C_0(Λ)` but its part below `Ω`, that is, the ordinals below `ψ_0(Λ)`.
 - decreases on expansion: one expansion step makes the value strictly smaller.
+- cofinal: one expansion step reaches every ordinal below the value: if `x < o(a)`, some state `a'` obtained from `a` by one step has `x <= o(a')`. With "decreases on expansion" it gives "equals the rank" (`Eval.Cofinal.rank_eq` in `Googology/Cofinal.lean`).
 - equals the rank: the value is the rank of the expansion (how far expansion can descend). Only one map can do this.
 - order-preserving: the order on the states matches the order on the ordinals.
 

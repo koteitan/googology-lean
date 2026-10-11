@@ -36,7 +36,8 @@ TABLES = ("notation", "ordinal", "between")
 # `between`: the order of the six marks of a cell).
 COLUMNS = {
     "notation": ("expansion", "wf", "wf-nonstd"),
-    "ordinal": ("defined", "injective", "surjective", "decreasing", "rank", "order"),
+    "ordinal": ("defined", "injective", "surjective", "decreasing", "cofinal", "rank",
+                "order"),
     "between": ("defined", "preserves", "commutes", "injective", "surjective", "rank"),
 }
 
@@ -56,13 +57,14 @@ HEADERS = {
         "notation": ("notation", "expansion defined", "well-foundedness",
                      "well-foundedness (non-standard)"),
         "ordinal": ("notation", "defined", "injective", "surjective",
-                    "decreases on expansion", "equals the rank", "order-preserving"),
+                    "decreases on expansion", "cofinal", "equals the rank",
+                    "order-preserving"),
         "between": "from \\\\ to",  # two backslashes, as in the source
     },
     "ja": {
         "notation": ("表記", "展開の定義", "整礎性", "整礎性(非標準)"),
         "ordinal": ("表記", "定義", "単射性", "全射性", "展開で値が下がる",
-                    "階数と一致", "順序を保つ"),
+                    "共終性", "階数と一致", "順序を保つ"),
         "between": "翻訳元＼翻訳先",  # U+FF3C
     },
 }
