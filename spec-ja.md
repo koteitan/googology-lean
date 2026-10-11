@@ -295,6 +295,8 @@ structure TransGoals {Idx : Type} (R Q : Idx → Rewrite)
       (∀ a, dom i a → (Q i).halted (F i a) → (R i).halted a))
   injective : Goal (∀ i a b, dom i a → dom i b → F i a = F i b → a = b)
   surjective : Goal (∀ i c, ∃ a, dom i a ∧ F i a = c)
+  cofinal : Goal (∀ i a, dom i a → ∀ c, (Q i).Rel c (F i a) →
+      ∃ b, dom i b ∧ (R i).Rel b a ∧ Relation.ReflTransGen (Q i).Rel c (F i b))
   rank : Goal (∀ i, ∃ (hR : (R i).WF) (hQ : (Q i).WF),
       ∀ a, dom i a → Rewrite.rank hQ (F i a) = Rewrite.rank hR a)
 ```
@@ -335,14 +337,23 @@ F(\mathrm{step}_R(a, k)) = \mathrm{step}_Q(F(a), \rho(k)),
 \forall c \in S_Q,\ \exists a \in S_R,\ F(a) = c .
 ```
 
+**共終性**（`cofinal`）：$`F(a)`$ を翻訳先で一回展開した状態は、どれも、$`a`$ を一回展開した
+状態の像から 0 回以上の展開で届く。$`\preceq_Q`$ を $`\prec_Q`$ の反射推移閉包として、
+
+```math
+\forall a \in S_R,\ \forall c \prec_Q F(a),\ \exists b \prec_R a,\ c \preceq_Q F(b) .
+```
+
+一回の展開を 1 回以上の展開に写す写像なら、これと合わせて階数を保つ（1.3）。
+
 **階数を保つ**（`rank`）：
 
 ```math
 \forall a \in S_R,\ \mathrm{rank}_Q(F(a)) = \mathrm{rank}_R(a) .
 ```
 
-マスの 6 つの印は、この順に `defined`、`preserves`、`commutes`、`injective`、`surjective`、
-`rank` である。
+マスの 7 つの印は、この順に `defined`、`preserves`、`commutes`、`injective`、`surjective`、
+`cofinal`、`rank` である。
 
 ### 1.3 共通の部品による証明
 
@@ -354,8 +365,8 @@ structure の値を一つ作れば、欄の証明が手に入る。
 | `Rewrite.WF`（`Core/Rewrite.lean`） | 一歩が整礎 | 1.1.2 整礎性（`Rewrite.Std.wf_of_wf` を通して） |
 | `Eval R lt`（`Core/Morphism.lean`） | 値 `val` と、一歩で値が下がること `val_lt` | 1.2.1 の定義と展開で値が下がる。`Eval.wf` で整礎性も |
 | `Eval.Cofinal e`（`Googology/Cofinal.lean`） | 値より小さい順序数には一歩の展開で届く | 1.2.1 の共終性（`Eval.Cofinal.std`）。`Eval.Cofinal.rank_eq` で階数と一致も |
-| `StepHom R Q`（`Core/Morphism.lean`） | 一歩を一歩に写す写像と括弧の付け替え | 1.2.2 の展開を保つ、展開と可換。付け替えが全射で停止が一致すれば、`StepHom.rank_map` で階数を保つも |
-| `Equiv R Q`（`Core/Morphism.lean`） | 両向きの `StepHom` | 1.2.2 の単射性、全射性 |
+| `StepHom R Q`（`Core/Morphism.lean`） | 一歩を一歩に写す写像と括弧の付け替え | 1.2.2 の展開を保つ、展開と可換。付け替えが全射で停止が一致すれば、共終性（`StepHom.cofinal`）と階数を保つ（`StepHom.rank_map`）も |
+| `Equiv R Q`（`Core/Morphism.lean`） | 両向きの写像 | 1.2.2 の単射性、全射性、共終性（`Equiv.cofinal`） |
 
 `Eval.Cofinal` と階数の関係は次の二つの定理である。
 
@@ -373,6 +384,20 @@ theorem Eval.cofinal_of_rank_eq {R : Rewrite} [IsWellFounded R.State R.Rel]
 
 原始数列とペア数列は、共終性（`primEval_cofinal`、`pairOrdEval_cofinal`）を先に示し、
 `Eval.Cofinal.rank_eq` で階数と一致を出す。
+
+表記の間の翻訳写像でも同じ形の定理がある。
+
+```lean
+/-- 共終で、一回の展開を 1 回以上の展開に写す翻訳は、階数を保つ。 -/
+theorem Rewrite.rank_map_of_cofinal {R Q : Rewrite} [IsWellFounded R.State R.Rel]
+    [IsWellFounded Q.State Q.Rel] (F : R.State → Q.State)
+    (hp : ∀ a b, R.Rel b a → Relation.TransGen Q.Rel (F b) (F a))
+    (hc : ∀ a c, Q.Rel c (F a) → ∃ b, R.Rel b a ∧ Relation.ReflTransGen Q.Rel c (F b)) :
+    ∀ a, IsWellFounded.rank Q.Rel (F a) = IsWellFounded.rank R.Rel a
+```
+
+ペア数列 → 拡張ブーフホルツ ψ は展開を保たない（一回の展開が一回の展開にならない）が、
+共終である（`pairToExb_cofinal`）。
 
 部品の形をとらない欄（順序数への翻訳の単射性、全射性、順序を保つ、など）は、表記ごとの
 定理を、記録の中で欄の型に合わせて入れる。
@@ -492,7 +517,7 @@ GOALS-AXIOMS	<公理>,<公理>,…
 次のとおり。
 
 * 表 `notation` と `ordinal`：空、または `✅`（U+2705）
-* 表 `between`：空、`—`（U+2014）、または `✅` か `❌`（U+274C）をちょうど 6 文字
+* 表 `between`：空、`—`（U+2014）、または `✅` か `❌`（U+274C）をちょうど 7 文字
 
 ### 2.5 行とマスの印
 
@@ -573,7 +598,7 @@ README-ja.md:35: ordinal: row "1 行の DBMS": column injective: expected "✅",
 |---|---|---|
 | `Googology/Core/Goals.lean` | `Rewrite.Std.WF`、`Status`、`Goal`、`Runs`、`Incl`、`NotationGoals`、`NonStdGoals`、`AuditLine` | `Googology.Core.Std`、`Googology.Core.Morphism` だけ |
 | `Googology/Rank.lean` | `Rewrite.Std.wf_of_terminates`、`Rewrite.Std.wf_iff_terminates`、`Rewrite.rank`、`Rewrite.Std.rank`、`Rewrite.Std.rank_eq` | `Googology.Core` と mathlib |
-| `Googology/Cofinal.lean` | `Eval.Cofinal`、`Eval.Cofinal.rank_eq`、`Eval.cofinal_of_rank_eq`、`Eval.Cofinal.std` | `Googology.Rank` だけ |
+| `Googology/Cofinal.lean` | `Eval.Cofinal`、`Eval.Cofinal.rank_eq`、`Eval.cofinal_of_rank_eq`、`Eval.Cofinal.std`、`Rewrite.rank_map_of_cofinal`、`StepHom.cofinal`、`Equiv.cofinal` | `Googology.Rank` だけ |
 | `Googology/Goals/Basic.lean` | `OrdGoals`、`TransGoals` | `Googology.Core.Goals`、`Googology.Rank` |
 | `Googology/Goals.lean` | 具体的な記録と、リスト `Googology.Goals.audit` | `Googology.Goals.Basic` と、必要な表記と翻訳 |
 | `test/GoalsAudit.lean` | 監査の結果を出力する | `Googology.Goals`、`Lean` |
@@ -647,7 +672,7 @@ theorem Rewrite.Std.rank_eq {R : Rewrite} (S : R.Std) (h : R.WF)
 
 記録の型ごとに関数 `lines (g) (name : String) : List AuditLine` を置く。記録の列ごとに
 1 行を返す。`NotationGoals` は 2 行（`expansion`、`wf`）、`NonStdGoals` は 1 行
-（`wf-nonstd`）、`OrdGoals` は 7 行、`TransGoals` は 6 行である。`name` は記録の Lean の
+（`wf-nonstd`）、`OrdGoals` と `TransGoals` は 7 行ずつである。`name` は記録の Lean の
 名前で、名前が間違っていればコンパイルが通らないように、名前リテラルで書く。
 
 ```lean

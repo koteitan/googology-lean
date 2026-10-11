@@ -33,12 +33,13 @@ AUDIT_VERSION = "1"
 TABLES = ("notation", "ordinal", "between")
 
 # The column ids of each table, in the order of the README columns (for
-# `between`: the order of the six marks of a cell).
+# `between`: the order of the seven marks of a cell).
 COLUMNS = {
     "notation": ("expansion", "wf", "wf-nonstd"),
     "ordinal": ("defined", "injective", "surjective", "decreasing", "cofinal", "rank",
                 "order"),
-    "between": ("defined", "preserves", "commutes", "injective", "surjective", "rank"),
+    "between": ("defined", "preserves", "commutes", "injective", "surjective", "cofinal",
+                "rank"),
 }
 
 STATUSES = ("proved", "refuted", "open")
@@ -329,7 +330,7 @@ def normalize(cell: str) -> str:
 def allowed(table: str, cell: str) -> bool:
     if table == "between":
         return (cell in ("", DIAGONAL)
-                or (len(cell) == 6 and all(ch in (PROVED_MARK, REFUTED_MARK) for ch in cell)))
+                or (len(cell) == len(COLUMNS["between"]) and all(ch in (PROVED_MARK, REFUTED_MARK) for ch in cell)))
     return cell in ("", PROVED_MARK)
 
 
@@ -383,7 +384,7 @@ def check_file(tables: dict, audit: Audit, lang: str, name: str) -> list:
                     expected = expected_mark(at, t, label, tgt)
                     if expected == found:
                         continue
-                    if len(expected) == 6 and len(found) == 6:
+                    if len(expected) == len(found) == len(COLUMNS["between"]):
                         for c, e, f in zip(COLUMNS["between"], expected, found):
                             if e != f:
                                 out.append(f'{where}: column {c}: expected "{e}", found "{f}"')

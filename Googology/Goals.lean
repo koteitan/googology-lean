@@ -259,6 +259,64 @@ theorem pairToExb_rank : ∀ _ : Unit, ∃ (hR : pairL.WF) (hQ : exbPair.WF),
 
 end Extra
 
+section Reach
+
+open Googology.Trans.BMS Googology.Trans.PSS
+open Relation
+
+/-- One step of `exbPair` is one step of `exbOT` on the underlying term. -/
+theorem exbPair_rel_map {A B : exbPair.State} (h : exbPair.Rel B A) :
+    exbOT.Rel (exbPairHom.map B) (exbPairHom.map A) := by
+  obtain ⟨hne, n, rfl⟩ := h
+  exact ⟨hne, n, rfl⟩
+
+/-- Below a state of `exbPair`, everything standard is reached from it. -/
+theorem exbPair_transGen_of_lt : ∀ A B : exbPair.State, B.1 < A.1 → TransGen exbPair.Rel B A := by
+  intro A
+  induction A using WellFounded.induction exbPair_wf with
+  | _ A ih =>
+    intro B hBA
+    have hne : A.1 ≠ nil := fun h => not_lt_nil _ (h ▸ hBA)
+    obtain ⟨n, hn⟩ :=
+      exists_le_fs_idx A.2.1 (lt_tW_of_lt_psiOmegaOmega A.2.2) hne B.2.1 hBA
+    have hrel : exbPair.Rel (exbPair.step A n) A := ⟨hne, n, rfl⟩
+    rcases le_iff_lt_or_eq.mp hn with h | h
+    · exact TransGen.tail (ih _ hrel B h) hrel
+    · rw [show B = exbPair.step A n from Subtype.ext h]
+      exact TransGen.single hrel
+
+/-- In `exbPair`, `B` is reached from `A` by one or more steps exactly when `B < A`. -/
+theorem exbPair_transGen_iff (A B : exbPair.State) :
+    TransGen exbPair.Rel B A ↔ B.1 < A.1 :=
+  ⟨fun h => (exbOT_transGen_iff _ _).mp (TransGen.lift exbPairHom.map (fun _ _ => exbPair_rel_map) h),
+   exbPair_transGen_of_lt A B⟩
+
+/-- **Pair sequences → extended Buchholz's ψ preserves and reflects reachability**:
+`pairToExb b` is reached from `pairToExb a` by one or more steps exactly when `b`
+is reached from `a` by one or more expansions. -/
+theorem pairToExb_transGen_iff (a b : PairState) :
+    TransGen exbPair.Rel (pairToExb b) (pairToExb a) ↔ TransGen pairL.Rel b a := by
+  rw [exbPair_transGen_iff, pairL_transGen_iff]
+  exact pairToExbOT_lt_iff a b
+
+/-- **Pair sequences → extended Buchholz's ψ is cofinal.**  A step `c` of
+`pairToExb a` is the image of some `N` (onto), `N` is reached from `a`
+(reachability is reflected), so `N` is reached from some step `b` of `a`, and
+then `c` is reached from `pairToExb b`. -/
+theorem pairToExb_cofinal : ∀ (_ : Unit) (a : pairL.State), True → ∀ c,
+    exbPair.Rel c (pairToExb a) →
+      ∃ b, True ∧ pairL.Rel b a ∧ ReflTransGen exbPair.Rel c (pairToExb b) := by
+  intro _ a _ c hc
+  obtain ⟨N, rfl⟩ := pairToExb_surjective c
+  have hNa : TransGen pairL.Rel N a := (pairToExb_transGen_iff a N).mp (TransGen.single hc)
+  obtain ⟨b, hNb, hba⟩ := TransGen.tail'_iff.mp hNa
+  refine ⟨b, trivial, hba, ?_⟩
+  rcases reflTransGen_iff_eq_or_transGen.mp hNb with h | h
+  · rw [h]
+  · exact ((pairToExb_transGen_iff b N).mpr h).to_reflTransGen
+
+end Reach
+
 section PairExp
 
 open Googology.Trans.BMS Googology.Trans.PSS
@@ -484,6 +542,13 @@ def exbOrd : OrdGoals (fun _ : Unit => exbOT) (fun _ => exbOTStd)
 
 /-! ## The third table: translations between notations -/
 
+/-- The record form, on all states, of a cofinality statement. -/
+theorem cofinal_all {R Q : Rewrite} {F : R.State → Q.State}
+    (h : ∀ a c, Q.Rel c (F a) → ∃ b, R.Rel b a ∧ Relation.ReflTransGen Q.Rel c (F b)) :
+    ∀ a, True → ∀ c, Q.Rel c (F a) →
+      ∃ b, True ∧ R.Rel b a ∧ Relation.ReflTransGen Q.Rel c (F b) :=
+  fun a _ c hc => let ⟨b, hb, hr⟩ := h a c hc; ⟨b, trivial, hb, hr⟩
+
 /-- Primitive sequences → pair sequences: a row of zeros underneath. -/
 def primToPair : TransGoals (fun _ : Unit => prim) (fun _ => pairL) (fun _ _ => True)
     (fun _ => primHomPair.map) where
@@ -497,6 +562,10 @@ def primToPair : TransGoals (fun _ : Unit => prim) (fun _ => pairL) (fun _ _ => 
      fun a _ h => primHomPair.map_halted a h⟩⟩
   injective := .proved fun _ _ _ _ _ h => primHomPair_injective h
   surjective := .todo
+  cofinal := .proved fun _ => cofinal_all (primHomPair.cofinal (fun k => ⟨k, rfl⟩)
+    (fun s => by
+      show s.1 = [] ↔ withZero s.1 = []
+      rw [withZero, List.map_eq_nil_iff]))
   rank := .proved fun _ => ⟨prim_wf, pairL_wf, fun a _ => rank_toPairS a⟩
 
 /-- Primitive sequences → extended Buchholz's ψ: the reading, onto the
@@ -515,6 +584,7 @@ def primToExb : TransGoals (fun _ : Unit => prim) (fun _ => exbE0) (fun _ _ => T
     rw [← primEquivE0.left_inv a, ← primEquivE0.left_inv b]
     exact congrArg primEquivE0.invFun.map h
   surjective := .proved fun _ c => ⟨primEquivE0.invFun.map c, trivial, primEquivE0.right_inv c⟩
+  cofinal := .proved fun _ => cofinal_all (F := primHomE0.map) primEquivE0.cofinal
   rank := .proved fun _ => ⟨prim_wf, primEquivE0.wf_iff.mp prim_wf,
     fun a _ => rank_primHomE0 a⟩
 
@@ -530,6 +600,7 @@ def pairToExbGoals : TransGoals (fun _ : Unit => pairL) (fun _ => exbPair) (fun 
   commutes := .refuted pairToExb_not_commutes
   injective := .proved fun _ _ _ _ _ h => pairToExb_injective h
   surjective := .proved fun _ c => (pairToExb_surjective c).imp fun _ h => ⟨trivial, h⟩
+  cofinal := .proved pairToExb_cofinal
   rank := .proved pairToExb_rank
 
 /-- BMS `r` rows → BMS `r + 1` rows: a row of zeros underneath, on the
@@ -546,6 +617,8 @@ def bmsToSucc : TransGoals bmsL (fun r => bmsL (r + 1)) (fun _ _ => True)
      fun a _ h => (bmsL_homSucc i).map_halted a h⟩⟩
   injective := .proved bmsToSucc_injective
   surjective := .refuted bmsToSucc_not_surjective
+  cofinal := .proved fun i => cofinal_all ((bmsL_homSucc i).cofinal (fun k => ⟨k, rfl⟩)
+    (fun s => (zeroRow_nil_iff s.1).symm))
   rank := .proved fun i => ⟨bmsL_wf i, bmsL_wf (i + 1), fun a _ => rank_zeroRow i a⟩
 
 /-- One-row DBMS → primitive sequences, on the matrices (`dbmsL1`): the
@@ -564,6 +637,7 @@ def dbmsToPrim : TransGoals (fun _ : Unit => dbmsL1) (fun _ => prim) (fun _ _ =>
      fun a _ h => dbmsL1Prim.map_halted a h⟩⟩
   injective := .proved fun _ _ _ _ _ h => dbmsL1Prim_injective h
   surjective := .proved fun _ c => ⟨primToL1 c, trivial, dbmsL1Prim_surjective c⟩
+  cofinal := .proved fun _ => cofinal_all (dbmsL1Prim.cofinal (fun k => ⟨k, rfl⟩) (fun _ => Iff.rfl))
   rank := .proved fun _ => ⟨dbmsL1_wf, prim_wf, fun a _ => by
     rw [Rewrite.rank_def, Rewrite.rank_def]
     exact rank_dbmsL1Prim a⟩
@@ -578,6 +652,8 @@ def dbmsToBms : TransGoals dbms bmsAll (fun _ _ => True) (fun r => (dbmsSim r).m
   commutes := .proved dbmsToBms_commutes
   injective := .proved dbmsToBms_injective
   surjective := .todo
+  cofinal := .proved fun i => cofinal_all (F := (dbmsSim i).map)
+    ((dbmsStepHom i).cofinal (fun k => ⟨k, rfl⟩) (fun _ => Iff.rfl))
   rank := .proved dbmsToBms_rank
 
 /-- DBMS `r` rows → DBMS `r + 1` rows: a row of zeros underneath, on the
@@ -592,6 +668,8 @@ def dbmsToSucc : TransGoals dbmsL (fun r => dbmsL (r + 1)) (fun _ _ => True)
   commutes := .proved dbmsToSucc_commutes
   injective := .proved dbmsToSucc_injective
   surjective := .refuted dbmsToSucc_not_surjective
+  cofinal := .proved fun i => cofinal_all ((dbmsL_homSucc i).cofinal (fun k => ⟨k, rfl⟩)
+    (fun s => (zeroRow_nil_iff s.1).symm))
   rank := .proved dbmsToSucc_rank
 
 /-- Extended Buchholz's ψ → trio sequences: `omegaIndexMatrix`, transcribed
@@ -607,6 +685,7 @@ def exbToTrioGoals : TransGoals (fun _ : Unit => exbOT) (fun _ => bmsAllL 2)
   commutes := .todo
   injective := .proved exbToTrio_injective
   surjective := .todo
+  cofinal := .todo
   rank := .todo
 
 /-! ## The audit -/

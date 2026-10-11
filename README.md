@@ -54,22 +54,63 @@ A map sending each state to the ordinal it names.
 - equals the rank: the value is the rank of the expansion (how far expansion can descend). Only one map can do this.
 - order-preserving: the order on the states matches the order on the ordinals.
 
+#### How the properties relate
+
+```mermaid
+flowchart LR
+  dec[decreases on expansion]
+  cof[cofinal]
+  rank[equals the rank]
+  ord[order-preserving]
+  inj[injective]
+  sur[surjective]
+  wf[well-foundedness]
+  tri[state order trichotomous]
+  wo[state order a well-order]
+  fs[cofinal fundamental sequences]
+  and1((and))
+  and2((and))
+  and3((and))
+  and4((and))
+  dec --> and1
+  cof --> and1
+  and1 -->|Eval.Cofinal.rank_eq| rank
+  rank -->|Eval.cofinal_of_rank_eq| cof
+  rank -->|rank_lt_of_rel| dec
+  dec -->|Eval.wf| wf
+  ord --> and2
+  tri --> and2
+  and2 -->|injective_of_iff| inj
+  ord --> and3
+  inj --> and3
+  and3 -->|isWellOrder_of_iff| wo
+  sur -.-> and4
+  ord -.-> and4
+  fs -.-> and4
+  and4 -.->|primEval_cofinal and others| cof
+```
+
+- When every arrow into an "and" holds, the arrow out of it holds. An arrow's label is its theorem.
+- Solid arrows are general theorems that any notation can use (`Googology/Cofinal.lean`, `Googology/Core/Morphism.lean`, `Trans/BMS/ExBuchholz/PSS/Rank.lean`, mathlib).
+- Dashed arrows are how cofinality was proved for primitive and pair sequences (`primEval_cofinal`, `pairOrdEval_cofinal`): an ordinal below the value is the value of a state by surjectivity, that state is below the original one by order preservation, and the notation's cofinal fundamental sequences put it under one expansion step. This is not one general theorem.
+- Well-foundedness is a property of the notation (the first table). A trichotomous or well-ordered state order, and cofinal fundamental sequences, are properties that are not columns of the tables.
+
 ### Translations between notations
 
 | from \\ to | primitive sequences | pair sequences | trio sequences | BMS, `r` rows | BMS, `r+1` rows | one-row DBMS | DBMS, `r` rows | DBMS, `r+1` rows | extended Buchholz's ψ |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| primitive sequences | — | ✅✅✅✅❌✅ |  |  |  |  |  |  | ✅✅✅✅✅✅ |
-| pair sequences |  | — |  |  |  |  |  |  | ✅❌❌✅✅✅(*2) |
+| primitive sequences | — | ✅✅✅✅❌✅✅ |  |  |  |  |  |  | ✅✅✅✅✅✅✅ |
+| pair sequences |  | — |  |  |  |  |  |  | ✅❌❌✅✅✅✅(*2) |
 | trio sequences |  |  | — |  |  |  |  |  |  |
-| BMS, `r` rows |  |  |  | — | ✅✅✅✅❌✅(*4) |  |  |  |  |
+| BMS, `r` rows |  |  |  | — | ✅✅✅✅❌✅✅(*4) |  |  |  |  |
 | BMS, `r+1` rows |  |  |  |  | — |  |  |  |  |
-| one-row DBMS | ✅✅✅✅✅✅ |  |  |  |  | — |  |  |  |
-| DBMS, `r` rows |  |  |  | ✅✅✅✅❌✅ |  |  | — | ✅✅✅✅❌✅(*3) |  |
+| one-row DBMS | ✅✅✅✅✅✅✅ |  |  |  |  | — |  |  |  |
+| DBMS, `r` rows |  |  |  | ✅✅✅✅❌✅✅ |  |  | — | ✅✅✅✅❌✅✅(*3) |  |
 | DBMS, `r+1` rows |  |  |  |  |  |  |  | — |  |
-| extended Buchholz's ψ |  |  | ✅❌❌✅❌❌ |  |  |  |  |  | — |
+| extended Buchholz's ψ |  |  | ✅❌❌✅❌❌❌ |  |  |  |  |  | — |
 
 - Rows are the source, columns the target. An empty cell is a pair with no translation defined yet.
-- The six marks of a cell are, from left to right: defined, preserves expansion, commutes with expansion, injective, surjective, preserves the rank. ✅ is proved, ❌ is not yet.
+- The seven marks of a cell are, from left to right: defined, preserves expansion, commutes with expansion, injective, surjective, cofinal, preserves the rank. ✅ is proved, ❌ is not yet.
 - BMS `r` rows → BMS `r+1` rows is one map for every `r`. The target of DBMS `r` rows → BMS `r` rows is all arrays, not only standard forms. Extended Buchholz's ψ → trio sequences is a map on the terms of the form `ψ_0(Ω_α)` only.
 - defined: the map is defined in Lean. Primitive sequences go to the standard forms below `ψ_0(Ω)`, pair sequences to those below `ψ_0(Ω_ω)`. Primitive sequences → pair sequences, BMS `r` rows → `r+1` rows and DBMS `r` rows → `r+1` rows put a row of zeros underneath. The map into trio sequences is defined for `α < ε₀`. Extended Buchholz's ψ → trio sequences transcribes the map of [koteitan/trio](https://github.com/koteitan/trio). For `α < ε₀` it is proved that the image is a standard form of three-row BMS (`trioMatrix_std`) and that the map preserves and reflects the order (`omegaIndexMatrix_lt_iff`). Rules 1–10 for `ε₀ ≤ α < Λ` are transcribed (`TrioRules.lean`) and checked against the published table. For terms whose subscripts are `0` or `1` (all below `ψ_0(Ω_2)`) and whose depth is at most 200, rules 1–10 give standard forms and preserve and reflect the order (`TrioTreeRules.lean`).
 - (*2) Pair sequences → extended Buchholz's ψ does not preserve expansion and does not commute with it (refuted). The generator `(0,0)(1,1)` expands with `[0]` to `(0,0)`; they go to `ψ_0(Ω_1)` and `1`, and no term of the fundamental sequence of `ψ_0(Ω_1)` is `1` (`Trans/BMS/ExBuchholz/PSS/Expansion.lean`). But one step goes to one or more steps on the ψ side, and "reached in one or more steps" is preserved and reflected by the map (`pairToExb_transGen_iff`, `Trans/BMS/ExBuchholz/PSS/Steps.lean`). Example: `(0,0)(1,1)[0]` goes to `ψ_0(Ω_1) →[0] ω →[1] 1`. The number of ψ steps has no bound: `(0,0)...(p,p)(p+1,p)[0]` takes exactly `p+1` steps (`pairToExb_steps_unbounded`, `pairToExb_min_steps`).
@@ -78,6 +119,7 @@ A map sending each state to the ordinal it names.
 - preserves expansion: one expansion step goes to one expansion step in the target.
 - commutes with expansion: bracket numbers included, expanding and then translating gives the same as translating and then expanding.
 - injective, surjective: onto the standard forms of the target. Primitive sequences → extended Buchholz's ψ is both, so the two systems are one system written two ways. One-row DBMS → primitive sequences is both too: the standard one-row DBMS matrices are the primitive sequences.
+- cofinal: every state obtained from `F(a)` by one step of the target is reached, in zero or more steps, from the image `F(b)` of some state `b` obtained from `a` by one step. With preserving expansion (as one or more steps) it gives preserving the rank (`Rewrite.rank_map_of_cofinal` in `Googology/Cofinal.lean`).
 - preserves the rank: the rank is the same before and after the translation.
 - The full list of theorems, including the intermediate lemmas, is in [results.md](results.md).
 

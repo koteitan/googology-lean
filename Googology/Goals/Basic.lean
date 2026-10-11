@@ -48,7 +48,7 @@ structure OrdGoals {Idx : Type} (sys : Idx → Rewrite)
       (lt i a b ↔ o i a < o i b))
 
 /-- The goals of a translation `F` from `R` to `Q`, on the states `dom`: the
-six marks of a cell of the third table.  With `dom i := fun _ => True` the
+seven marks of a cell of the third table.  With `dom i := fun _ => True` the
 fields are the propositions of section 1.2.2 of `spec.md` word for word. -/
 structure TransGoals {Idx : Type} (R Q : Idx → Rewrite)
     (dom : (i : Idx) → (R i).State → Prop)
@@ -73,6 +73,9 @@ structure TransGoals {Idx : Type} (R Q : Idx → Rewrite)
   injective : Goal (∀ i a b, dom i a → dom i b → F i a = F i b → a = b)
   /-- Surjective onto the states of the target. -/
   surjective : Goal (∀ i c, ∃ a, dom i a ∧ F i a = c)
+  /-- Cofinal: every step of an image is reached from the image of a step. -/
+  cofinal : Goal (∀ i a, dom i a → ∀ c, (Q i).Rel c (F i a) →
+      ∃ b, dom i b ∧ (R i).Rel b a ∧ Relation.ReflTransGen (Q i).Rel c (F i b))
   /-- The rank is the same on both sides. -/
   rank : Goal (∀ i, ∃ (hR : (R i).WF) (hQ : (Q i).WF),
       ∀ a, dom i a → Rewrite.rank hQ (F i a) = Rewrite.rank hR a)
@@ -104,6 +107,8 @@ table. -/
       g.injective.status⟩,
     ⟨"between", name, g.sourceEn, g.sourceJa, g.targetEn, g.targetJa, "surjective",
       g.surjective.status⟩,
+    ⟨"between", name, g.sourceEn, g.sourceJa, g.targetEn, g.targetJa, "cofinal",
+      g.cofinal.status⟩,
     ⟨"between", name, g.sourceEn, g.sourceJa, g.targetEn, g.targetJa, "rank",
       g.rank.status⟩ ]
 

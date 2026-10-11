@@ -319,6 +319,8 @@ structure TransGoals {Idx : Type} (R Q : Idx → Rewrite)
       (∀ a, dom i a → (Q i).halted (F i a) → (R i).halted a))
   injective : Goal (∀ i a b, dom i a → dom i b → F i a = F i b → a = b)
   surjective : Goal (∀ i c, ∃ a, dom i a ∧ F i a = c)
+  cofinal : Goal (∀ i a, dom i a → ∀ c, (Q i).Rel c (F i a) →
+      ∃ b, dom i b ∧ (R i).Rel b a ∧ Relation.ReflTransGen (Q i).Rel c (F i b))
   rank : Goal (∀ i, ∃ (hR : (R i).WF) (hQ : (Q i).WF),
       ∀ a, dom i a → Rewrite.rank hQ (F i a) = Rewrite.rank hR a)
 ```
@@ -362,14 +364,26 @@ It implies the previous column.
 \forall c \in S_Q,\ \exists a \in S_R,\ F(a) = c .
 ```
 
+**cofinal** (`cofinal`): every state obtained from $`F(a)`$ by one step of the
+target is reached, in zero or more steps, from the image of a state obtained
+from $`a`$ by one step. With $`\preceq_Q`$ the reflexive-transitive closure of
+$`\prec_Q`$,
+
+```math
+\forall a \in S_R,\ \forall c \prec_Q F(a),\ \exists b \prec_R a,\ c \preceq_Q F(b) .
+```
+
+For a map that sends one step to one or more steps, it gives "preserves the
+rank" (1.3).
+
 **preserves the rank** (`rank`):
 
 ```math
 \forall a \in S_R,\ \mathrm{rank}_Q(F(a)) = \mathrm{rank}_R(a) .
 ```
 
-The six marks of a cell are, in this order, `defined`, `preserves`,
-`commutes`, `injective`, `surjective`, `rank`.
+The seven marks of a cell are, in this order, `defined`, `preserves`,
+`commutes`, `injective`, `surjective`, `cofinal`, `rank`.
 
 ### 1.3 Proofs from shared parts
 
@@ -382,8 +396,8 @@ of the field.
 | `Rewrite.WF` (`Core/Rewrite.lean`) | one step is well founded | 1.1.2 well-foundedness (through `Rewrite.Std.wf_of_wf`) |
 | `Eval R lt` (`Core/Morphism.lean`) | a value `val` and the descent `val_lt` | 1.2.1 defined and decreases on expansion; well-foundedness too, by `Eval.wf` |
 | `Eval.Cofinal e` (`Googology/Cofinal.lean`) | one step reaches every ordinal below the value | 1.2.1 cofinal (`Eval.Cofinal.std`); equals the rank too, by `Eval.Cofinal.rank_eq` |
-| `StepHom R Q` (`Core/Morphism.lean`) | a map sending one step to one step, with a renumbering of brackets | 1.2.2 preserves and commutes with expansion; preserves the rank too, by `StepHom.rank_map`, when the renumbering is onto and halting agrees |
-| `Equiv R Q` (`Core/Morphism.lean`) | a `StepHom` both ways | 1.2.2 injective and surjective |
+| `StepHom R Q` (`Core/Morphism.lean`) | a map sending one step to one step, with a renumbering of brackets | 1.2.2 preserves and commutes with expansion; when the renumbering is onto and halting agrees, also cofinal (`StepHom.cofinal`) and preserves the rank (`StepHom.rank_map`) |
+| `Equiv R Q` (`Core/Morphism.lean`) | maps both ways | 1.2.2 injective, surjective and cofinal (`Equiv.cofinal`) |
 
 `Eval.Cofinal` and the rank are tied by two theorems:
 
@@ -401,6 +415,20 @@ theorem Eval.cofinal_of_rank_eq {R : Rewrite} [IsWellFounded R.State R.Rel]
 
 Primitive and pair sequences prove cofinality first (`primEval_cofinal`,
 `pairOrdEval_cofinal`) and get "equals the rank" by `Eval.Cofinal.rank_eq`.
+
+Translations between notations have a theorem of the same shape:
+
+```lean
+/-- A cofinal translation that sends one step to one or more steps keeps the rank. -/
+theorem Rewrite.rank_map_of_cofinal {R Q : Rewrite} [IsWellFounded R.State R.Rel]
+    [IsWellFounded Q.State Q.Rel] (F : R.State → Q.State)
+    (hp : ∀ a b, R.Rel b a → Relation.TransGen Q.Rel (F b) (F a))
+    (hc : ∀ a c, Q.Rel c (F a) → ∃ b, R.Rel b a ∧ Relation.ReflTransGen Q.Rel c (F b)) :
+    ∀ a, IsWellFounded.rank Q.Rel (F a) = IsWellFounded.rank R.Rel a
+```
+
+Pair sequences → extended Buchholz's ψ does not preserve expansion (one step
+does not go to one step) but is cofinal (`pairToExb_cofinal`).
 
 A field that is not in one of these shapes (injective, surjective and
 order-preserving for translations into the ordinals, and so on) is filled with
@@ -528,7 +556,7 @@ selector) and footnote markers `(*n)` with `n` a number, such as `✅(*1)`. The
 footnote itself is written under the table. The allowed forms are:
 
 * tables `notation` and `ordinal`: empty or `✅` (U+2705);
-* table `between`: empty, `—` (U+2014), or exactly six characters each `✅`
+* table `between`: empty, `—` (U+2014), or exactly seven characters each `✅`
   or `❌` (U+274C).
 
 ### 2.5 Rows, cells and marks
@@ -615,7 +643,7 @@ The audit prints each record's Lean name so that it can be found.
 |---|---|---|
 | `Googology/Core/Goals.lean` | `Rewrite.Std.WF`, `Status`, `Goal`, `Runs`, `Incl`, `NotationGoals`, `NonStdGoals`, `AuditLine` | `Googology.Core.Std`, `Googology.Core.Morphism` only |
 | `Googology/Rank.lean` | `Rewrite.Std.wf_of_terminates`, `Rewrite.Std.wf_iff_terminates`, `Rewrite.rank`, `Rewrite.Std.rank`, `Rewrite.Std.rank_eq` | `Googology.Core` and mathlib |
-| `Googology/Cofinal.lean` | `Eval.Cofinal`, `Eval.Cofinal.rank_eq`, `Eval.cofinal_of_rank_eq`, `Eval.Cofinal.std` | `Googology.Rank` only |
+| `Googology/Cofinal.lean` | `Eval.Cofinal`, `Eval.Cofinal.rank_eq`, `Eval.cofinal_of_rank_eq`, `Eval.Cofinal.std`, `Rewrite.rank_map_of_cofinal`, `StepHom.cofinal`, `Equiv.cofinal` | `Googology.Rank` only |
 | `Googology/Goals/Basic.lean` | `OrdGoals`, `TransGoals` | `Googology.Core.Goals`, `Googology.Rank` |
 | `Googology/Goals.lean` | the concrete records and the list `Googology.Goals.audit` | `Googology.Goals.Basic`, the notations and translations it needs |
 | `test/GoalsAudit.lean` | prints the audit | `Googology.Goals`, `Lean` |
@@ -696,8 +724,8 @@ standard. It lets the existing theorems, stated with
 
 Each record type has a function `lines (g) (name : String) : List AuditLine`
 that gives one line per column of the record: `NotationGoals` two
-(`expansion`, `wf`), `NonStdGoals` one (`wf-nonstd`), `OrdGoals` seven,
-`TransGoals` six. `name` is the record's Lean name, written with a name
+(`expansion`, `wf`), `NonStdGoals` one (`wf-nonstd`), `OrdGoals` and
+`TransGoals` seven each. `name` is the record's Lean name, written with a name
 literal so that a wrong name does not compile:
 
 ```lean

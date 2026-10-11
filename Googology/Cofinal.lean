@@ -71,4 +71,76 @@ theorem Eval.Cofinal.rank_eq' {R : Rewrite} (h : R.WF)
   rw [Rewrite.rank_def]
   exact hc.rank_eq a
 
+/-! ## Cofinality of a translation between notations
+
+A translation `F : R → Q` is cofinal when every step of an image is reached,
+in zero or more steps of `Q`, from the image of a step.  With "one step goes
+to one or more steps" it carries the rank across (`Rewrite.rank_map_of_cofinal`),
+just as `Eval.Cofinal` with the descent gives the rank. -/
+
+/-- Along zero or more steps the rank does not grow. -/
+theorem rank_le_of_reflTransGen {α : Type} {r : α → α → Prop} [IsWellFounded α r]
+    {a b : α} (h : Relation.ReflTransGen r a b) :
+    IsWellFounded.rank r a ≤ IsWellFounded.rank r b := by
+  induction h with
+  | refl => exact le_rfl
+  | tail _ hbc ih => exact ih.trans (IsWellFounded.rank_lt_of_rel hbc).le
+
+/-- Along one or more steps the rank goes down. -/
+theorem rank_lt_of_transGen {α : Type} {r : α → α → Prop} [IsWellFounded α r]
+    {a b : α} (h : Relation.TransGen r a b) :
+    IsWellFounded.rank r a < IsWellFounded.rank r b := by
+  induction h with
+  | single h => exact IsWellFounded.rank_lt_of_rel h
+  | tail _ hbc ih => exact ih.trans (IsWellFounded.rank_lt_of_rel hbc)
+
+/-- **A cofinal translation that sends one step to one or more steps keeps the
+rank.** -/
+theorem Rewrite.rank_map_of_cofinal {R Q : Rewrite} [IsWellFounded R.State R.Rel]
+    [IsWellFounded Q.State Q.Rel] (F : R.State → Q.State)
+    (hp : ∀ a b, R.Rel b a → Relation.TransGen Q.Rel (F b) (F a))
+    (hc : ∀ a c, Q.Rel c (F a) → ∃ b, R.Rel b a ∧ Relation.ReflTransGen Q.Rel c (F b)) :
+    ∀ a, IsWellFounded.rank Q.Rel (F a) = IsWellFounded.rank R.Rel a := by
+  intro a
+  induction a using WellFounded.induction (IsWellFounded.wf (r := R.Rel)) with
+  | _ a IH =>
+    refine le_antisymm ?_ ?_
+    · rw [IsWellFounded.rank_eq]
+      refine Ordinal.iSup_le ?_
+      rintro ⟨c, hc'⟩
+      obtain ⟨b, hb, hcb⟩ := hc a c hc'
+      refine Order.succ_le_of_lt ?_
+      calc IsWellFounded.rank Q.Rel c ≤ IsWellFounded.rank Q.Rel (F b) := rank_le_of_reflTransGen hcb
+        _ = IsWellFounded.rank R.Rel b := IH b hb
+        _ < IsWellFounded.rank R.Rel a := IsWellFounded.rank_lt_of_rel hb
+    · rw [IsWellFounded.rank_eq]
+      refine Ordinal.iSup_le ?_
+      rintro ⟨b, hb⟩
+      refine Order.succ_le_of_lt ?_
+      rw [← IH b hb]
+      exact rank_lt_of_transGen (hp a b hb)
+
+/-- **A translation that commutes with expansion is cofinal**, when its
+renumbering of brackets is onto and it halts exactly where the source does:
+every step of an image is the image of a step.  These are the hypotheses of
+`StepHom.rank_map`. -/
+theorem StepHom.cofinal {R Q : Rewrite} (f : StepHom R Q)
+    (hre : Function.Surjective f.reindex) (hh : ∀ s, R.halted s ↔ Q.halted (f.map s)) :
+    ∀ a c, Q.Rel c (f.map a) → ∃ b, R.Rel b a ∧ Relation.ReflTransGen Q.Rel c (f.map b) := by
+  rintro a c ⟨hna, k', rfl⟩
+  obtain ⟨k, rfl⟩ := hre k'
+  refine ⟨R.step a k, ⟨fun h => hna ((hh a).mp h), k, rfl⟩, ?_⟩
+  rw [f.map_step]
+
+/-- **Mutually inverse translations are cofinal**: a step of an image goes
+back to a step of the source, whose image it is. -/
+theorem Equiv.cofinal {R Q : Rewrite} (e : Equiv R Q) :
+    ∀ a c, Q.Rel c (e.toFun.map a) →
+      ∃ b, R.Rel b a ∧ Relation.ReflTransGen Q.Rel c (e.toFun.map b) := by
+  intro a c hc
+  refine ⟨e.invFun.map c, ?_, ?_⟩
+  · have h := e.invFun.map_rel _ _ hc
+    rwa [e.left_inv] at h
+  · rw [e.right_inv]
+
 end Googology
