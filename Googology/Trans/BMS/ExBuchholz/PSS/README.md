@@ -15,7 +15,7 @@ repository is a Lake dependency; its theorems are used, not copied.
 |---|---|
 | `Expand.lean` | pss-proof's expansion is this library's: `oper M (N+1) = expand2L N M` on every standard pair sequence of length at least 2 (`oper_succ_eq_expand2L_of_ctps`), and the two notions of standard agree (`isPair_iff`) |
 | `Terms.lean` | pss-proof's Buchholz terms, with subscripts in `ℕ ∪ {ω}`, map injectively and order-preservingly into extended Buchholz terms (`toTerm_injective`, `lessBT_iff_lt`), standard exactly when their image is (`OT_toTerm_iff`), onto the standard forms below `ψ_0(Ω_ω)` (`toTerm_bijOn_TransRange`) |
-| `Rank.lean` | **the rank of a pair sequence is `1 + val` of its term** (`rank_pairL_eq`), 0 for the empty sequence; the values are exactly the ordinals below `ψ_0(Ω_ω)` (`range_pairOrd`); the map is injective and order-preserving for the lexicographic order (`pairOrd_injective`, `ltPS_iff_pairOrd_lt`); and the rank is the order type of the standard pair sequences below (`rank_eq_typein`) |
+| `Rank.lean` | **the rank of a pair sequence is `1 + val` of its term** (`rank_pairL_eq`, from cofinality in the common form `pairOrdEval_cofinal : pairOrdEval.Cofinal`), 0 for the empty sequence; the values are exactly the ordinals below `ψ_0(Ω_ω)` (`range_pairOrd`); the map is injective and order-preserving for the lexicographic order (`pairOrd_injective`, `ltPS_iff_pairOrd_lt`); and the rank is the order type of the standard pair sequences below (`rank_eq_typein`) |
 
 ## Why `1 +`
 

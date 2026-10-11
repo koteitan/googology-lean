@@ -470,13 +470,13 @@ theorem range_pairOrd : Set.range pairOrdEval.val = Set.Iio (val psiOmegaOmega) 
 
 /-! ## The rank -/
 
-/-- **The rank of a state of `pairL` is its ordinal**: `0` for `[]`, and
-`1 + val (toTerm (Trans M))` for a standard pair sequence `M`. -/
-theorem rank_pairL_eq (l : pairL.State) : IsWellFounded.rank pairL.Rel l = pairOrdL l.1 := by
-  induction l using WellFounded.induction pairL_wf with
-  | _ l IH =>
-    refine le_antisymm (Eval.rank_le pairOrdEval l) ?_
-    refine le_of_forall_lt (fun α hα => ?_)
+/-- **Cofinality of the pair sequences**, in the common form `Eval.Cofinal`.
+An ordinal `1 + β` below `1 + val (Trans M)` is the ordinal of a standard
+pair sequence `N` (`val_pairTerm_bijOn_below`), and `exists_le_oper` puts `N`
+at or under some expansion of `M`. -/
+theorem pairOrdEval_cofinal : pairOrdEval.Cofinal where
+  exists_ge l α hα := by
+    change α < pairOrdL l.1 at hα
     have hne : l.1 ≠ [] := by
       intro h
       rw [h, pairOrdL_nil] at hα
@@ -484,7 +484,7 @@ theorem rank_pairL_eq (l : pairL.State) : IsWellFounded.rank pairL.Rel l = pairO
     have hC : CTPS l.1 := ((isPair_iff l.1).mp l.2).resolve_left hne
     have hna : ¬ pairL.halted l := hne
     rcases eq_or_ne α 0 with rfl | hα0
-    · exact Rewrite.rank_pos hna
+    · exact ⟨pairL.step l 0, ⟨hna, 0, rfl⟩, by simp⟩
     · have hαβ : 1 + (α - 1) = α :=
         Ordinal.add_sub_cancel_of_le (Order.one_le_iff_ne_zero.mpr hα0)
       rw [pairOrdL_of_ne hne, ← hαβ, add_lt_add_iff_left] at hα
@@ -499,8 +499,9 @@ theorem rank_pairL_eq (l : pairL.State) : IsWellFounded.rank pairL.Rel l = pairO
       obtain ⟨n, hn, hle⟩ := exists_le_oper hN hC hNl
       have hs : (pairL.step l (n - 1)).1 = _root_.PSS.oper l.1 n := by
         rw [pairL_step_eq_oper l (n - 1) hL, Nat.sub_add_cancel hn]
-      have hrel : pairL.Rel (pairL.step l (n - 1)) l := ⟨hna, n - 1, rfl⟩
       have hsC : CTPS (pairL.step l (n - 1)).1 := hs ▸ Bijectivity.ctps_oper hC hn
+      refine ⟨pairL.step l (n - 1), ⟨hna, n - 1, rfl⟩, ?_⟩
+      show α ≤ pairOrdL (pairL.step l (n - 1)).1
       have hle' : pairOrdL N ≤ pairOrdL (pairL.step l (n - 1)).1 := by
         rw [hs]
         rcases hle with h | h
@@ -511,8 +512,12 @@ theorem rank_pairL_eq (l : pairL.State) : IsWellFounded.rank pairL.Rel l = pairO
               simp only at hvN
               rw [pairOrdL_of_ne (ctps_ne_nil hN), hvN, hαβ]
         _ ≤ pairOrdL (pairL.step l (n - 1)).1 := hle'
-        _ = IsWellFounded.rank pairL.Rel (pairL.step l (n - 1)) := (IH _ hrel).symm
-        _ < IsWellFounded.rank pairL.Rel l := IsWellFounded.rank_lt_of_rel hrel
+
+/-- **The rank of a state of `pairL` is its ordinal**: `0` for `[]`, and
+`1 + val (toTerm (Trans M))` for a standard pair sequence `M`.
+`Eval.Cofinal.rank_eq` applied to `pairOrdEval_cofinal`. -/
+theorem rank_pairL_eq (l : pairL.State) : IsWellFounded.rank pairL.Rel l = pairOrdL l.1 :=
+  pairOrdEval_cofinal.rank_eq l
 
 /-- **Equals the rank**: the ordinal translation and the rank are one map. -/
 theorem pairOrdEval_eq_rankEval : pairOrdEval.val = (Rewrite.rankEval pairL_wf).val := by

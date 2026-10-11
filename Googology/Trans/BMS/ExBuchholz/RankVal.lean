@@ -2,6 +2,7 @@ import Googology.Trans.BMS.common.Same
 import Googology.Trans.BMS.ExBuchholz.Eps0
 import Googology.Trans.BMS.BMS.ZeroRow
 import Googology.Trans.BMS.common.Append
+import Googology.Cofinal
 
 /-!
 # The rank of the system is the ordinal of the term
@@ -43,41 +44,37 @@ open Googology.Notation.ExBuchholz.Term
 
 instance instIsWellFoundedPrim : IsWellFounded prim.State prim.Rel := ⟨prim_wf⟩
 
-/-- **The rank of the primitive sequence system is the value of the term.** -/
+/-- **Cofinality of the primitive sequences**, in the common form
+`Eval.Cofinal`.  An ordinal `β` below the value is the value of a standard
+form `Y` (`val` is onto below `ε₀`), `Y` is below the term, and
+`exists_le_fs` puts `Y` under some `X[n]`, which is the term of a one-step
+successor. -/
+theorem primEval_cofinal : primEval.Cofinal where
+  exists_ge l β hβ := by
+    change β < val (read 0 l.1) at hβ
+    have hX : OT (read 0 l.1) := l.2.2
+    have hAX : AllNil (read 0 l.1) := allNil_read 0 l.1
+    have hβ0 : β < Ord.eps0 := lt_trans hβ (val_read_lt_eps0 hX)
+    obtain ⟨Y, hOTY, hAY, hvY⟩ := exists_OT_of_lt_eps0 hβ0
+    have hYX : Y < read 0 l.1 := lt_of_val_lt hOTY hX (by rw [hvY]; exact hβ)
+    obtain ⟨n, hn⟩ := exists_le_fs (read 0 l.1) Y hX hOTY hAX hAY hYX
+    have hnil : ¬ prim.halted l := by
+      intro h
+      have : read 0 l.1 = nil := by
+        show read 0 l.1 = nil
+        rw [show l.1 = [] from h, read_nil]
+      rw [this, val_nil] at hβ
+      exact absurd hβ (by simp)
+    refine ⟨prim.step l n, ⟨hnil, n, rfl⟩, ?_⟩
+    show β ≤ val (read 0 (expandL n 0 l.1))
+    rw [read_expandL n l.1 0 l.2.1, ← hvY]
+    exact val_le_val hOTY (Term.step_ok hX (read_lt_tW 0 l.1) (n + 1)).1 hn
+
+/-- **The rank of the primitive sequence system is the value of the term.**
+`Eval.Cofinal.rank_eq` applied to `primEval_cofinal`. -/
 theorem rank_prim_eq_val : ∀ l : PrimState,
-    IsWellFounded.rank prim.Rel l = val (read 0 l.1) := by
-  intro l
-  induction l using WellFounded.induction prim_wf with
-  | _ l IH =>
-    rw [IsWellFounded.rank_eq]
-    refine le_antisymm ?_ ?_
-    · refine Ordinal.iSup_le ?_
-      rintro ⟨m, hna, N, rfl⟩
-      show Order.succ (IsWellFounded.rank prim.Rel (prim.step l N)) ≤ _
-      rw [IH _ ⟨hna, N, rfl⟩]
-      exact Order.succ_le_of_lt (primEval.val_lt l (prim.step l N) ⟨hna, N, rfl⟩)
-    · refine le_of_forall_lt (fun β hβ => ?_)
-      have hX : OT (read 0 l.1) := l.2.2
-      have hAX : AllNil (read 0 l.1) := allNil_read 0 l.1
-      have hβ0 : β < Ord.eps0 := lt_trans hβ (val_read_lt_eps0 hX)
-      obtain ⟨Y, hOTY, hAY, hvY⟩ := exists_OT_of_lt_eps0 hβ0
-      have hYX : Y < read 0 l.1 := lt_of_val_lt hOTY hX (by rw [hvY]; exact hβ)
-      obtain ⟨n, hn⟩ := exists_le_fs (read 0 l.1) Y hX hOTY hAX hAY hYX
-      have hnil : ¬ prim.halted l := by
-        intro h
-        have : read 0 l.1 = nil := by
-          show read 0 l.1 = nil
-          rw [show l.1 = [] from h, read_nil]
-        rw [this, val_nil] at hβ
-        exact absurd hβ (by simp)
-      have hrel : prim.Rel (prim.step l n) l := ⟨hnil, n, rfl⟩
-      refine Ordinal.lt_iSup_iff.mpr ⟨⟨prim.step l n, hrel⟩, ?_⟩
-      show β < Order.succ (IsWellFounded.rank prim.Rel (prim.step l n))
-      refine lt_of_le_of_lt ?_ (Order.lt_succ _)
-      rw [IH _ hrel]
-      show β ≤ val (read 0 (expandL n 0 l.1))
-      rw [read_expandL n l.1 0 l.2.1, ← hvY]
-      exact val_le_val hOTY (Term.step_ok hX (read_lt_tW 0 l.1) (n + 1)).1 hn
+    IsWellFounded.rank prim.Rel l = val (read 0 l.1) :=
+  primEval_cofinal.rank_eq
 
 /-- **The two measures on the primitive sequence system are one measure.** -/
 theorem primRankEval_val (l : PrimState) : primRankEval.val l = primEval.val l :=

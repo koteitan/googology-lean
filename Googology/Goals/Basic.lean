@@ -37,6 +37,9 @@ structure OrdGoals {Idx : Type} (sys : Idx → Rewrite)
   /-- One step lowers the value. -/
   decreasing : Goal (∀ i a b, (std i).Standard a → (std i).Standard b →
       (sys i).Rel b a → o i b < o i a)
+  /-- Cofinal: below the value, one step reaches at least as high. -/
+  cofinal : Goal (∀ i a, (std i).Standard a → ∀ β < o i a,
+      ∃ b, (std i).Standard b ∧ (sys i).Rel b a ∧ β ≤ o i b)
   /-- The value is the rank. -/
   rank : Goal (∀ i, ∃ h : (std i).WF,
       ∀ a (ha : (std i).Standard a), o i a = (std i).rank h a ha)
@@ -83,6 +86,7 @@ structure TransGoals {Idx : Type} (R Q : Idx → Rewrite)
     ⟨"ordinal", name, g.labelEn, g.labelJa, "", "", "injective", g.injective.status⟩,
     ⟨"ordinal", name, g.labelEn, g.labelJa, "", "", "surjective", g.surjective.status⟩,
     ⟨"ordinal", name, g.labelEn, g.labelJa, "", "", "decreasing", g.decreasing.status⟩,
+    ⟨"ordinal", name, g.labelEn, g.labelJa, "", "", "cofinal", g.cofinal.status⟩,
     ⟨"ordinal", name, g.labelEn, g.labelJa, "", "", "rank", g.rank.status⟩,
     ⟨"ordinal", name, g.labelEn, g.labelJa, "", "", "order", g.order.status⟩ ]
 

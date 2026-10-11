@@ -24,6 +24,7 @@
 Googology/
   Core/            展開系、標準形、翻訳、目標の記録
   Rank.lean        整礎な系は順序数の測度を持つ
+  Cofinal.lean     共通の形の共終性（Eval.Cofinal）。共終な評価は階数に等しい
   Notation/<名前>/ 系ごとに 1 ディレクトリ
   Trans/<A>/<B>/       翻訳 A → B。向きごとに 1 ディレクトリ
   Trans/<A>/common/    2 つ以上の翻訳が使う、A だけについての事実
@@ -168,6 +169,15 @@ $`X`$ は行ごとに書く。原始数列と DBMS 1 行では $`\{\alpha \mid \
 \forall a, b \in \mathrm{Std},\ b \prec a \Rightarrow o(b) < o(a) .
 ```
 
+**共終性**：値より小さい順序数には、一回の展開で届く。
+
+```math
+\forall a \in \mathrm{Std},\ \forall \beta < o(a),\ \exists b \in \mathrm{Std},\ b \prec a \land \beta \le o(b) .
+```
+
+「展開で値が下がる」と合わせると「階数と一致」になる（`Googology/Cofinal.lean` の
+`Eval.Cofinal.rank_eq`）。逆に、階数と一致する写像は共終である（`Eval.cofinal_of_rank_eq`）。
+
 **階数と一致**：階数を $`\mathrm{rank}(a) = \sup_{b \prec a} (\mathrm{rank}(b) + 1)`$ で
 定めて、
 
@@ -238,6 +248,7 @@ README は生成しない。表もファイルの他の部分と同じく手で�
 | ファイル | 中身 | import |
 |---|---|---|
 | `Googology/Core/Goals.lean` | `Rewrite.Std.WF`、`Status`、`Goal`、`Runs`、`Incl`、`NotationGoals`、`NonStdGoals`、`AuditLine` | `Googology.Core.Std`、`Googology.Core.Morphism` だけ |
+| `Googology/Cofinal.lean` | `Eval.Cofinal`、`Eval.Cofinal.rank_eq`、`Eval.cofinal_of_rank_eq`、`Eval.Cofinal.std` | `Googology.Rank` だけ |
 | `Googology/Rank.lean`（追加分） | `Rewrite.Std.wf_of_terminates`、`Rewrite.Std.wf_iff_terminates`、`Rewrite.rank`、`Rewrite.Std.rank`、`Rewrite.Std.rank_eq` | 今のまま |
 | `Googology/Goals/Basic.lean` | `OrdGoals`、`TransGoals` | `Googology.Core.Goals`、`Googology.Rank` |
 | `Googology/Goals.lean` | 具体的な記録と、リスト `Googology.Goals.audit` | `Googology.Goals.Basic` と、必要な表記と翻訳 |
@@ -414,6 +425,8 @@ structure OrdGoals {Idx : Type} (sys : Idx → Rewrite)
   surjective : Goal (∀ i, {α | ∃ a, (std i).Standard a ∧ o i a = α} = X i)
   decreasing : Goal (∀ i a b, (std i).Standard a → (std i).Standard b →
       (sys i).Rel b a → o i b < o i a)
+  cofinal : Goal (∀ i a, (std i).Standard a → ∀ β < o i a,
+      ∃ b, (std i).Standard b ∧ (sys i).Rel b a ∧ β ≤ o i b)
   rank : Goal (∀ i, ∃ h : (std i).WF,
       ∀ a (ha : (std i).Standard a), o i a = (std i).rank h a ha)
   order : Goal (∀ i a b, (std i).Standard a → (std i).Standard b →
@@ -428,6 +441,7 @@ structure OrdGoals {Idx : Type} (sys : Idx → Rewrite)
 | `injective` | injective / 単射性 | `injective` |
 | `surjective` | surjective / 全射性 | `surjective` |
 | `decreasing` | decreases on expansion / 展開で値が下がる | `decreasing` |
+| `cofinal` | cofinal / 共終性 | `cofinal` |
 | `rank` | equals the rank / 階数と一致 | `rank` |
 | `order` | order-preserving / 順序を保つ | `order` |
 
@@ -548,7 +562,7 @@ def AuditLine.printAll : List AuditLine → IO Unit
 
 記録の型ごとに関数 `lines (g) (name : String) : List AuditLine` を置く。記録の列ごとに
 1 行を返す。`NotationGoals` は 2 行（`expansion`、`wf`）、`NonStdGoals` は 1 行
-（`wf-nonstd`）、`OrdGoals` と `TransGoals` は 6 行ずつである。`name` は記録の Lean の
+（`wf-nonstd`）、`OrdGoals` は 7 行、`TransGoals` は 6 行である。`name` は記録の Lean の
 名前で、名前が間違っていればコンパイルが通らないように、名前リテラルで書く。
 
 ```lean
@@ -643,7 +657,7 @@ python3 scripts/check_readme.py --audit audit.txt [--root DIR]
 | 表 | `README.md` の見出しの行 | `README-ja.md` の見出しの行 |
 |---|---|---|
 | `notation` | `notation`、`expansion defined`、`well-foundedness`、`well-foundedness (non-standard)` | `表記`、`展開の定義`、`整礎性`、`整礎性(非標準)` |
-| `ordinal` | `notation`、`defined`、`injective`、`surjective`、`decreases on expansion`、`equals the rank`、`order-preserving` | `表記`、`定義`、`単射性`、`全射性`、`展開で値が下がる`、`階数と一致`、`順序を保つ` |
+| `ordinal` | `notation`、`defined`、`injective`、`surjective`、`decreases on expansion`、`cofinal`、`equals the rank`、`order-preserving` | `表記`、`定義`、`単射性`、`全射性`、`展開で値が下がる`、`共終性`、`階数と一致`、`順序を保つ` |
 | `between` | 最初のマスが `from \\ to`（ソースのとおり、バックスラッシュ 2 つ） | 最初のマスが `翻訳元＼翻訳先`（U+FF3C） |
 
 `notation` と `ordinal` の表は見出しの行全体で見つける。`between` の表は見出しの

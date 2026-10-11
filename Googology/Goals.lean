@@ -404,6 +404,7 @@ def bmsOneRowOrd : OrdGoals (fun _ : Unit => prim) (fun _ => primStd)
   injective := .proved fun _ _ _ _ _ h => primEval_injective h
   surjective := .proved fun _ => primEval_image
   decreasing := .proved fun _ a b _ _ h => primEval.val_lt a b h
+  cofinal := .proved fun _ => primEval_cofinal.std primStd
   rank := .proved fun _ => ⟨primStd.wf_of_wf prim_wf, fun a ha => by
     rw [Rewrite.Std.rank_eq primStd prim_wf a ha]
     exact (rank_prim_eq_val a).symm⟩
@@ -419,6 +420,7 @@ def bmsTwoRowOrd : OrdGoals (fun _ : Unit => pairL) (fun _ => pairStd)
   injective := .proved fun _ _ _ _ _ h => pairOrd_injective h
   surjective := .proved fun _ => pairOrd_image
   decreasing := .proved fun _ a b _ _ h => pairOrdEval.val_lt a b h
+  cofinal := .proved fun _ => pairOrdEval_cofinal.std pairStd
   rank := .proved fun _ => ⟨pairStd.wf_of_wf pairL_wf, fun a ha => by
     rw [Rewrite.Std.rank_eq pairStd pairL_wf a ha]
     exact (rank_pairL_eq a).symm⟩
@@ -438,6 +440,8 @@ def dbmsOneRowOrd : OrdGoals (fun _ : Unit => dbmsL1) (fun _ => dbmsL1Std)
   injective := .proved fun _ _ _ _ _ h => dbmsL1OrdEval_injective h
   surjective := .proved fun _ => dbmsL1Ord_image
   decreasing := .proved fun _ a b _ _ h => dbmsL1OrdEval.val_lt a b h
+  cofinal := .proved fun _ =>
+    (Eval.cofinal_of_rank_eq dbmsL1OrdEval rank_dbmsL1_eq_val).std dbmsL1Std
   rank := .proved fun _ => ⟨dbmsL1Std.wf_of_wf dbmsL1_wf, fun a ha => by
     rw [Rewrite.Std.rank_eq dbmsL1Std dbmsL1_wf a ha]
     exact (rank_dbmsL1_eq_val a).symm⟩
@@ -455,6 +459,8 @@ def dbmsTwoRowOrd : OrdGoals (fun _ : Unit => dbmsL2) (fun _ => dbmsL2Std)
   injective := .proved fun _ _ _ _ _ h => dbmsL2OrdEval_injective h
   surjective := .proved fun _ => dbmsL2Ord_image
   decreasing := .proved fun _ a b _ _ h => dbmsL2OrdEval.val_lt a b h
+  cofinal := .proved fun _ =>
+    (Eval.cofinal_of_rank_eq dbmsL2OrdEval rank_dbmsL2_eq).std dbmsL2Std
   rank := .proved fun _ => ⟨dbmsL2Std.wf_of_wf dbmsL2_wf, fun a ha => by
     rw [Rewrite.Std.rank_eq dbmsL2Std dbmsL2_wf a ha]
     exact (rank_dbmsL2_eq a).symm⟩
@@ -469,6 +475,8 @@ def exbOrd : OrdGoals (fun _ : Unit => exbOT) (fun _ => exbOTStd)
   injective := .proved fun _ a b _ _ h => Subtype.ext (val_inj_of_OT a.2.1 b.2.1 h)
   surjective := .proved fun _ => exbOT_image
   decreasing := .proved fun _ a b _ _ h => exbOTEval.val_lt a b h
+  cofinal := .proved fun _ =>
+    (Eval.cofinal_of_rank_eq exbOTEval rank_exbOT_eq_val).std exbOTStd
   rank := .proved fun _ => ⟨exbOTStd.wf_of_wf exbOT_wf, fun a ha => by
     rw [Rewrite.Std.rank_eq exbOTStd exbOT_wf a ha]
     exact (rank_exbOT_eq_val a).symm⟩

@@ -29,6 +29,7 @@ other is what we measure it against.
 Googology/
   Core/            expansion systems, standard forms, translations, goal records
   Rank.lean        a well-founded system carries an ordinal measure
+  Cofinal.lean     cofinality in a common form (Eval.Cofinal); a cofinal evaluation is the rank
   Notation/<Name>/ one directory per system
   Trans/<A>/<B>/       the translation A → B, one directory per direction
   Trans/<A>/common/    facts about A alone that two or more translations use
@@ -183,6 +184,16 @@ Buchholz's ψ.
 \forall a, b \in \mathrm{Std},\ b \prec a \Rightarrow o(b) < o(a) .
 ```
 
+**cofinal**: one expansion step reaches every ordinal below the value.
+
+```math
+\forall a \in \mathrm{Std},\ \forall \beta < o(a),\ \exists b \in \mathrm{Std},\ b \prec a \land \beta \le o(b) .
+```
+
+With "decreases on expansion" it gives "equals the rank" (`Eval.Cofinal.rank_eq` in
+`Googology/Cofinal.lean`). Conversely, a map that equals the rank is cofinal
+(`Eval.cofinal_of_rank_eq`).
+
 **equals the rank**: with the rank defined by
 $`\mathrm{rank}(a) = \sup_{b \prec a} (\mathrm{rank}(b) + 1)`$,
 
@@ -258,6 +269,7 @@ the file. The script only reads it and reports differences.
 | file | holds | imports |
 |---|---|---|
 | `Googology/Core/Goals.lean` | `Rewrite.Std.WF`, `Status`, `Goal`, `Runs`, `Incl`, `NotationGoals`, `NonStdGoals`, `AuditLine` | `Googology.Core.Std`, `Googology.Core.Morphism` only |
+| `Googology/Cofinal.lean` | `Eval.Cofinal`, `Eval.Cofinal.rank_eq`, `Eval.cofinal_of_rank_eq`, `Eval.Cofinal.std` | `Googology.Rank` only |
 | `Googology/Rank.lean` (additions) | `Rewrite.Std.wf_of_terminates`, `Rewrite.Std.wf_iff_terminates`, `Rewrite.rank`, `Rewrite.Std.rank`, `Rewrite.Std.rank_eq` | as now |
 | `Googology/Goals/Basic.lean` | `OrdGoals`, `TransGoals` | `Googology.Core.Goals`, `Googology.Rank` |
 | `Googology/Goals.lean` | the concrete records and the list `Googology.Goals.audit` | `Googology.Goals.Basic`, the notations and translations it needs |
@@ -444,6 +456,8 @@ structure OrdGoals {Idx : Type} (sys : Idx → Rewrite)
   surjective : Goal (∀ i, {α | ∃ a, (std i).Standard a ∧ o i a = α} = X i)
   decreasing : Goal (∀ i a b, (std i).Standard a → (std i).Standard b →
       (sys i).Rel b a → o i b < o i a)
+  cofinal : Goal (∀ i a, (std i).Standard a → ∀ β < o i a,
+      ∃ b, (std i).Standard b ∧ (sys i).Rel b a ∧ β ≤ o i b)
   rank : Goal (∀ i, ∃ h : (std i).WF,
       ∀ a (ha : (std i).Standard a), o i a = (std i).rank h a ha)
   order : Goal (∀ i a b, (std i).Standard a → (std i).Standard b →
@@ -458,6 +472,7 @@ Columns of the second table:
 | `injective` | injective / 単射性 | `injective` |
 | `surjective` | surjective / 全射性 | `surjective` |
 | `decreasing` | decreases on expansion / 展開で値が下がる | `decreasing` |
+| `cofinal` | cofinal / 共終性 | `cofinal` |
 | `rank` | equals the rank / 階数と一致 | `rank` |
 | `order` | order-preserving / 順序を保つ | `order` |
 
@@ -585,8 +600,8 @@ def AuditLine.printAll : List AuditLine → IO Unit
 
 Each record type has a function `lines (g) (name : String) : List AuditLine`
 that gives one line per column of the record: `NotationGoals` two
-(`expansion`, `wf`), `NonStdGoals` one (`wf-nonstd`), `OrdGoals` and
-`TransGoals` six each. `name` is the record's Lean name, written with a
+(`expansion`, `wf`), `NonStdGoals` one (`wf-nonstd`), `OrdGoals` seven,
+`TransGoals` six. `name` is the record's Lean name, written with a
 name literal so that a wrong name does not compile:
 
 ```lean
@@ -687,7 +702,7 @@ headings may change. In the source text:
 | table | `README.md` header | `README-ja.md` header |
 |---|---|---|
 | `notation` | `notation`, `expansion defined`, `well-foundedness`, `well-foundedness (non-standard)` | `表記`, `展開の定義`, `整礎性`, `整礎性(非標準)` |
-| `ordinal` | `notation`, `defined`, `injective`, `surjective`, `decreases on expansion`, `equals the rank`, `order-preserving` | `表記`, `定義`, `単射性`, `全射性`, `展開で値が下がる`, `階数と一致`, `順序を保つ` |
+| `ordinal` | `notation`, `defined`, `injective`, `surjective`, `decreases on expansion`, `cofinal`, `equals the rank`, `order-preserving` | `表記`, `定義`, `単射性`, `全射性`, `展開で値が下がる`, `共終性`, `階数と一致`, `順序を保つ` |
 | `between` | first cell `from \\ to` (two backslashes, as in the source) | first cell `翻訳元＼翻訳先` (U+FF3C) |
 
 The `notation` and `ordinal` tables are found by the whole header row. The
