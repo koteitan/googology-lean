@@ -2,7 +2,7 @@
 
 # 形式証明へのリンク集
 
-koteitan と Phyrion による、巨大数の表記の形式証明をリポジトリごとにまとめる。
+巨大数の表記の形式証明をリポジトリごとにまとめる。
 
 - 状態は 2026-09-26 の時点のもの。
 - 完了の ✅ は、主定理が `sorry` と独自の公理なしで証明されていることをいう。
@@ -28,15 +28,21 @@ koteitan と Phyrion による、巨大数の表記の形式証明をリポジ�
 
 ## 翻訳写像
 
-完了の欄の 🚧α は、α まで完成していて、その先は作業中であることをいう。
+完了の欄の 🚧α は、α まで完成していて、その先は作業中であることをいう。α の無い 🚧 は、主定理の一部がまだ証明されていないことをいう。
 
 | 表記 | リンク | アルゴリズム | 形式化 | 証明 | 証明内容 | 手法 | 完了 |
 |---|---|---|---|---|---|---|:-:|
-| BMS・DBMS・拡張ブーフホルツの ψ | googology-lean [Trans](../Googology/Trans/README.md) | koteitan（ペア数列 → ψ は P進大好きbot 氏の Trans） | koteitan | koteitan（Trans の全単射性は Naruyoko 氏） | 1 行・2 行の BMS と DBMS、拡張ブーフホルツの ψ の間の翻訳と、順序数への翻訳 | 展開の模倣（一歩を一歩に写す）と、値が展開の階数に等しいこと | 🚧ψ₀(Ω_ω) |
-| BMS と Rathjen の ψ | [koteitan/bms-rathjen](https://github.com/koteitan/bms-rathjen) | koteitan（行ごとの証明書の探索） | koteitan | koteitan | BMS と Rathjen の順序数崩壊関数の対応表 | 行ごとの証明書の機械検査 | 🚧ε_ω+1 |
-| UNOCF と Taranovsky の C | [koteitan/bms-vs-taranovskys-c](https://github.com/koteitan/bms-vs-taranovskys-c) | koteitan（2 行は P進大好きbot 氏の写像で Buchholz の表記を経由する） | koteitan（定義と照合テストだけ） | なし | UNOCF の項から Taranovsky の表記 C への翻訳写像と対応表 | UNOCF の項を C の項に写す（Lean と JavaScript） | 🚧ψ₀(Ω_ω) |
-| 拡張ブーフホルツの ψ とトリオ数列 | [koteitan/trio ebp2bms](https://github.com/koteitan/trio/tree/main/ebp2bms) | koteitan | なし | ψ₀(Ω_ω) 以下は koteitan（ペア数列の形式証明）。その先はなし | ψ₀(Ω_α)（α < Λ）に対応するトリオ数列の標準形の一般式と対応表 | ψ₀(Ω_ω) 以下はペア数列の形式証明による。その先は BM4-Analysis シートとの数値の照合 | 🚧ψ₀(Ω_ω) |
-| 拡張ブーフホルツの ψ と 3 行の DBMS | [koteitan/trio ebp2dbms](https://github.com/koteitan/trio/tree/main/ebp2dbms) | koteitan（ψ → トリオ数列）と MrredsharkFan（bmsToDbms） | なし | なし | ψ₀(Ω_α) に対応する 3 行の DBMS の標準形の対応表 | MrredsharkFan 氏の bmsToDbms による変換との数値の照合 | 🚧ψ₀(Ω_ω) |
+| 原始数列 ⇒ 拡張ブーフホルツの ψ | googology-lean [Trans/BMS/ExBuchholz](../Googology/Trans/BMS/ExBuchholz/README-ja.md) | koteitan | koteitan | koteitan | 原始数列を ψ₀(Ω) 未満の標準形の項に読む写像。全単射で、展開と可換、値が展開の階数に等しく、共終 | 展開の模倣（一歩を一歩に写す）と、値が展開の階数に等しいこと | ✅ |
+| ペア数列 ⇒ 拡張ブーフホルツの ψ | googology-lean [Trans/BMS/ExBuchholz/PSS](../Googology/Trans/BMS/ExBuchholz/PSS/README-ja.md) | P進大好きbot（Trans） | koteitan | koteitan（Trans の全単射性は Naruyoko 氏） | ψ₀(Ω_ω) 未満の標準形への全単射、値が展開の階数に等しく、共終。一歩を一歩には写さない（反証済み） | 順序数への翻訳と、値が展開の階数に等しいこと | ✅ |
+| 拡張ブーフホルツの ψ ⇒ トリオ数列 | googology-lean [Trans/ExBuchholz/BMS](../Googology/Trans/ExBuchholz/BMS/README-ja.md) | koteitan | koteitan | koteitan | ψ₀(Ω_α)（α < ε₀）のトリオ行列の規則、ψ₀(Ω₂) 未満での標準形と順序、単射性 | 規則の写像の機械検査と、BM4-Analysis シートとの突き合わせ | 🚧ψ₀(Ω₂) |
+| 拡張ブーフホルツの ψ ⇒ トリオ数列 | [koteitan/trio ebp2bms](https://github.com/koteitan/trio/tree/main/ebp2bms) | koteitan | なし | ψ₀(Ω_ω) 以下は koteitan（ペア数列の形式証明）。その先はなし | ψ₀(Ω_α)（α < Λ）に対応するトリオ数列の標準形の一般式と対応表 | ψ₀(Ω_ω) 以下はペア数列の形式証明による。その先は BM4-Analysis シートとの数値の照合 | 🚧ψ₀(Ω_ω) |
+| 拡張ブーフホルツの ψ ⇒ 3 行の DBMS | [koteitan/trio ebp2dbms](https://github.com/koteitan/trio/tree/main/ebp2dbms) | koteitan と MrredsharkFan | なし | なし | ψ₀(Ω_α) に対応する 3 行の DBMS の標準形の対応表 | 拡張ブーフホルツの ψ ⇒ トリオ数列の一般式に、MrredsharkFan 氏の bmsToDbms を合成し、その変換と数値で照合 | 🚧ψ₀(Ω_ω) |
+| BMS ⇒ BMS | googology-lean [Trans/BMS/BMS](../Googology/Trans/BMS/BMS/README-ja.md) | koteitan | koteitan | koteitan | 原始数列 ⇒ ペア数列と、r 行 ⇒ r + 1 行（下に 0 の行を足す）。展開と可換で単射、階数を保ち、共終。全射でない（反証済み） | 展開の模倣 | ✅ |
+| DBMS ⇒ BMS | googology-lean [Trans/DBMS/BMS](../Googology/Trans/DBMS/BMS/README-ja.md) | koteitan | koteitan | koteitan | 1 行の DBMS ⇒ 原始数列は全単射。r 行の DBMS ⇒ r 行の BMS（全配列）は展開と可換で単射、階数を保ち、共終。後者の全射性は未証明 | 展開の模倣 | 🚧 |
+| DBMS ⇒ DBMS | googology-lean [Trans/DBMS/DBMS](../Googology/Trans/DBMS/DBMS/README-ja.md) | koteitan | koteitan | koteitan | r 行 ⇒ r + 1 行（下に 0 の行を足す）。展開と可換で単射、階数を保ち、共終。全射でない（反証済み） | 展開の模倣 | ✅ |
+| DBMS ⇒ 拡張ブーフホルツの ψ | googology-lean [Trans/DBMS/ExBuchholz](../Googology/Trans/DBMS/ExBuchholz/README-ja.md) | koteitan | koteitan | koteitan | 1 行と 2 行の DBMS の順序数への翻訳。値が展開の階数に等しく、共終で、順序を保つ | 順序数への翻訳と、値が展開の階数に等しいこと | 🚧ψ₀(Ω_ω) |
+| BMS ⇒ Rathjen の ψ | [koteitan/bms-rathjen](https://github.com/koteitan/bms-rathjen) | koteitan | koteitan | koteitan | BMS と Rathjen の順序数崩壊関数の対応表 | 行ごとの証明書の機械検査 | 🚧ε_ω+1 |
+| UNOCF ⇒ Taranovsky の C | [koteitan/bms-vs-taranovskys-c](https://github.com/koteitan/bms-vs-taranovskys-c) | koteitan（2 行は P進大好きbot 氏の写像で Buchholz の表記を経由する） | koteitan（定義と照合テストだけ） | なし | UNOCF の項から Taranovsky の表記 C への翻訳写像と対応表 | UNOCF の項を C の項に写す（Lean と JavaScript） | 🚧ψ₀(Ω_ω) |
 
 ## その他
 
