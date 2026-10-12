@@ -12,18 +12,18 @@ koteitan と Phyrion による、巨大数の表記の形式証明をリポジ�
 
 | 表記 | リンク | 形式化 | 証明 | 手法 | 完了 |
 |---|---|---|---|---|:-:|
-| ω-Y（公式） | [koteitan/wy-wo-por](https://github.com/koteitan/wy-wo-por) | koteitan（Phyrion 氏の Lean の層を一部移した） | koteitan（Phyrion 氏の反映の定理を使う） | patterns of resemblance（ω₁ 未満の順序数の Σ₁ 初等性）と、Phyrion 氏の組合せの層を節点ごとの脚の原子に替えたもの | ✅ |
+| ω-Y（公式） | [koteitan/wy-wo-por](https://github.com/koteitan/wy-wo-por) | koteitan（Phyrion 氏の Lean の層を一部移した） | koteitan | patterns of resemblance（ω₁ 未満の順序数の Σ₁ 初等性）と、Phyrion 氏の組合せの層を節点ごとの脚の原子に替えたもの | ✅ |
 | Weak Magma ω-Y | [Phyrion1343/omega-Y-Well-Ordering-Lean](https://github.com/Phyrion1343/omega-Y-Well-Ordering-Lean) | Phyrion | Phyrion | ω₁ 以下の順序数のラベルと、有限図式の反映 | ✅ |
-| Weak Magma ω-Y | [koteitan/wmwy-wo-por](https://github.com/koteitan/wmwy-wo-por) | koteitan（組合せの層は Phyrion 氏の Lean を移した） | Phyrion（意味の層は koteitan が替えた） | patterns of resemblance（Phyrion 氏の組合せの層はそのまま使う） | ✅ |
+| Weak Magma ω-Y | [koteitan/wmwy-wo-por](https://github.com/koteitan/wmwy-wo-por) | koteitan（組合せの層は Phyrion 氏の Lean を移した） | koteitan | patterns of resemblance（Phyrion 氏の組合せの層はそのまま使う） | ✅ |
 | 1-Y | [Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean) | Phyrion | Phyrion | 構成可能宇宙 L の Σ₁ 初等性（Adequate 順序数、Skolem 包と凝縮） | ✅ |
-| 1-Y | [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) | koteitan（組合せの層は Phyrion 氏の Lean を移した） | Phyrion（意味の層は koteitan が替えた） | patterns of resemblance（層つきの Σ₁ 初等性。Phyrion 氏の組合せの層はそのまま使う） | ✅ |
-| 0-Y | [Phyrion1343/0Y-Well-Ordering-Lean](https://github.com/Phyrion1343/0Y-Well-Ordering-Lean) | Phyrion（BMS の整礎性は EgoFakeFantasy 氏の形式化に頼る） | Phyrion（BMS の整礎性の部分は不明） | 符号化と復号による BMS への順序同型 | ✅ |
-| BMS | [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) | koteitan | koteitan（DH 氏の証明の骨格で、ラベルを Carlson の R_N に替えた） | Carlson の構造 R_N（Σ₁, …, Σ_N 初等部分構造）のラベルと有限反映 | ✅ |
+| 1-Y | [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) | koteitan（組合せの層は Phyrion 氏の Lean を移した） | koteitan | patterns of resemblance（層つきの Σ₁ 初等性。Phyrion 氏の組合せの層はそのまま使う） | ✅ |
+| 0-Y | [Phyrion1343/0Y-Well-Ordering-Lean](https://github.com/Phyrion1343/0Y-Well-Ordering-Lean) | Phyrion（BMS の整礎性は EgoFakeFantasy 氏の形式化に頼る） | Phyrion | 符号化と復号による BMS への順序同型 | ✅ |
+| BMS | [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) | koteitan | koteitan | Carlson の構造 R_N（Σ₁, …, Σ_N 初等部分構造）のラベルと有限反映 | ✅ |
 | BMS | [koteitan/dh-bms-wf-formal](https://github.com/koteitan/dh-bms-wf-formal) | koteitan | DH | 論文の証明（安定ラベルと有限反映）に忠実に写す | ✅ |
 | トリオ数列 | [koteitan/trio](https://github.com/koteitan/trio) | koteitan | koteitan | 構文的な証明 | 未完成 |
 | ペア数列 | [koteitan/pss-proof](https://github.com/koteitan/pss-proof) | koteitan | P進大好きbot（変換写像の全単射性は Naruyoko 氏） | Buchholz の ψ の項への翻訳 Trans | ✅ |
 | ペア数列 | [koteitan/yet-another-pss-proof](https://github.com/koteitan/yet-another-pss-proof) | koteitan | koteitan | 構文的証明 | ✅ |
-| 原始数列 | [koteitan/prss-proof](https://github.com/koteitan/prss-proof) | koteitan | koteitan（方針の最初の出典は不明） | 構文的証明 | ✅ |
+| 原始数列 | [koteitan/prss-proof](https://github.com/koteitan/prss-proof) | koteitan | koteitan | 構文的証明 | ✅ |
 | 拡張ブーフホルツの ψ | googology-lean [Notation/ExBuchholz](../Googology/Notation/ExBuchholz/README.md) | koteitan | koteitan | 項の値（順序数）が展開で下がること。Buchholz の Lemma 3.2〜3.6 を自前で証明 | ✅ |
 
 ## 翻訳写像

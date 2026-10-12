@@ -12,18 +12,18 @@ Formal proofs about googological notations by koteitan and Phyrion, one row per 
 
 | notation | link | formalization | proof | method | complete |
 |---|---|---|---|---|:-:|
-| ω-Y (official) | [koteitan/wy-wo-por](https://github.com/koteitan/wy-wo-por) | koteitan (part of Phyrion's Lean layers moved in) | koteitan (uses Phyrion's reflection theorem) | patterns of resemblance (Σ₁ elementarity of countable ordinals), with Phyrion's combinatorial layer changed to one leg atom per node | ✅ |
+| ω-Y (official) | [koteitan/wy-wo-por](https://github.com/koteitan/wy-wo-por) | koteitan (part of Phyrion's Lean layers moved in) | koteitan | patterns of resemblance (Σ₁ elementarity of countable ordinals), with Phyrion's combinatorial layer changed to one leg atom per node | ✅ |
 | Weak Magma ω-Y | [Phyrion1343/omega-Y-Well-Ordering-Lean](https://github.com/Phyrion1343/omega-Y-Well-Ordering-Lean) | Phyrion | Phyrion | ordinal labels up to ω₁ and reflection of finite diagrams | ✅ |
-| Weak Magma ω-Y | [koteitan/wmwy-wo-por](https://github.com/koteitan/wmwy-wo-por) | koteitan (the combinatorial layer is Phyrion's Lean, moved in) | Phyrion (the semantic layer replaced by koteitan) | patterns of resemblance (Phyrion's combinatorial layer kept as it is) | ✅ |
+| Weak Magma ω-Y | [koteitan/wmwy-wo-por](https://github.com/koteitan/wmwy-wo-por) | koteitan (the combinatorial layer is Phyrion's Lean, moved in) | koteitan | patterns of resemblance (Phyrion's combinatorial layer kept as it is) | ✅ |
 | 1-Y | [Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean) | Phyrion | Phyrion | Σ₁ elementarity in the constructible universe L (adequate ordinals, Skolem hulls and condensation) | ✅ |
-| 1-Y | [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) | koteitan (the combinatorial layer is Phyrion's Lean, moved in) | Phyrion (the semantic layer replaced by koteitan) | patterns of resemblance (layered Σ₁ elementarity; Phyrion's combinatorial layer kept as it is) | ✅ |
-| 0-Y | [Phyrion1343/0Y-Well-Ordering-Lean](https://github.com/Phyrion1343/0Y-Well-Ordering-Lean) | Phyrion (the well-ordering of BMS relies on EgoFakeFantasy's formalization) | Phyrion (the well-ordering of BMS: unknown) | an order isomorphism to BMS by encoding and decoding | ✅ |
-| BMS | [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) | koteitan | koteitan (DH's proof outline, with the labels replaced by Carlson's R_N) | labels in Carlson's structures R_N (Σ₁, …, Σ_N elementary substructures) and finite reflection | ✅ |
+| 1-Y | [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) | koteitan (the combinatorial layer is Phyrion's Lean, moved in) | koteitan | patterns of resemblance (layered Σ₁ elementarity; Phyrion's combinatorial layer kept as it is) | ✅ |
+| 0-Y | [Phyrion1343/0Y-Well-Ordering-Lean](https://github.com/Phyrion1343/0Y-Well-Ordering-Lean) | Phyrion (the well-ordering of BMS relies on EgoFakeFantasy's formalization) | Phyrion | an order isomorphism to BMS by encoding and decoding | ✅ |
+| BMS | [koteitan/bms-elem-pattern](https://github.com/koteitan/bms-elem-pattern) | koteitan | koteitan | labels in Carlson's structures R_N (Σ₁, …, Σ_N elementary substructures) and finite reflection | ✅ |
 | BMS | [koteitan/dh-bms-wf-formal](https://github.com/koteitan/dh-bms-wf-formal) | koteitan | DH | follows the paper's proof (stable labels and finite reflection) | ✅ |
 | trio sequences | [koteitan/trio](https://github.com/koteitan/trio) | koteitan | koteitan | a syntactic proof | unfinished |
 | pair sequences | [koteitan/pss-proof](https://github.com/koteitan/pss-proof) | koteitan | P進大好きbot (the bijectivity of the translation map: Naruyoko) | the translation Trans into Buchholz ψ terms | ✅ |
 | pair sequences | [koteitan/yet-another-pss-proof](https://github.com/koteitan/yet-another-pss-proof) | koteitan | koteitan | a syntactic proof | ✅ |
-| primitive sequences | [koteitan/prss-proof](https://github.com/koteitan/prss-proof) | koteitan | koteitan (the first source of the approach: unknown) | a syntactic proof | ✅ |
+| primitive sequences | [koteitan/prss-proof](https://github.com/koteitan/prss-proof) | koteitan | koteitan | a syntactic proof | ✅ |
 | extended Buchholz's ψ | googology-lean [Notation/ExBuchholz](../Googology/Notation/ExBuchholz/README.md) | koteitan | koteitan | the value of a term (an ordinal) decreases on expansion; Buchholz's Lemmas 3.2–3.6 proved in the library | ✅ |
 
 ## Translation maps
