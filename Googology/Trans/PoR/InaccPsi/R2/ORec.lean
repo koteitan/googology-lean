@@ -10,6 +10,16 @@ if restarts `μ ∈ (ν, λ)` realize it for every `ν < λ`; and
 `Λ_ε` is the least restart index below which `ε_{x+1}` is realized cofinally (`ε_{ρ_μ+1} ≤ O(μ)`
 for cofinally many `μ`), or `Ω₁` if there is none.
 
+Three differences from the paper's `O` (its Definition 2.2), none of them used below `Λ_ε`:
+(1) the set always contains `1`, so `O = 1` at a successor restart index, where no term is realized
+cofinally (the paper's supremum of the empty set would be `0`; the offset there is `1`);
+(2) the terms here are those of `OT` only, without the paper's term `ε_{x+1}`, so `O(λ) ≤ ε_{ρ_λ+1}`
+everywhere, and this `O` differs from the paper's `O` exactly at the restart indices `λ ≥ Λ_ε` where
+`ε_{x+1}` is realized cofinally (a paper-level statement, not a theorem of this module); no theorem of this module uses `O` there (`B ≤ Λ_ε`, `λ < B`);
+(3) the exponentials are `ω^{x+t}` only; a paper term with constants below an `ε`-number `x` has the
+same value at `x` as a term of `OT` (`c + ω^{x+u} = ω^{x+u}`, `ω^c` is a constant), uniformly, and
+`rep` covers every value below `ε_{x+1}`.
+
 * `CofReal`, `OSet`, `Ostep`, `Orec` (by well-founded recursion), `Orec_eq`;
 * `Orec_le_eN` (`O(λ) ≤ ε_{ρ+1}`), `one_le_Orec`, `Orec_succ` (`O(λ₀ + ω²) = 1`);
 * `rsIn_Orec` (the input of Lemma RS: every value below `O(λ)` is at most a term realized
@@ -220,7 +230,9 @@ theorem blkO {B : Ordinal.{0}} (hm : ω * ω ∣ B) (hc : B < Om1) (hB : B ≤ L
     (∀ α < upsilon B, ¬ UpsPt α → ∀ γ, le1 α γ ↔ le1R α γ) :=
   blk_genH (specO_of_le hm hc hB)
 
-/-- **The exact reach of every restart below `Λ_ε`** in `R₂^C`: `lh(ρ_λ) = δ_λ + O(λ)`. -/
+/-- **The exact reach of every restart below `Λ_ε`** in `R₂^C`: `lh(ρ_λ) = δ_λ + O(λ)`.  The
+hypothesis `λ < Ω₁` is redundant (`λ < Λ_ε ≤ Ω₁`, `LamE_le_Om1`); it is kept so that the statement
+does not change. -/
 theorem reach_Orec {l : Ordinal.{0}} (hl : IsRestartIdx l) (hlE : l < LamE) (hl1 : l < Om1) :
     IsReach R2C (upsilon l) (upsilon (l + ω + 1) + Orec l) := by
   have hww : 0 < ω * ω := mul_pos omega0_pos omega0_pos

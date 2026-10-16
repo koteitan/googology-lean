@@ -1,8 +1,8 @@
 [← Back](README-ja.md) | [English](SHIFT12.md) | [Japanese](SHIFT12-ja.md)
 
-# $`R_2^+`$ の 44・45 回目：$`R_2^C`$ で $`Z^{\mathrm{WW}}`$ まで、$`R_2^S`$ で $`Z^{\mathrm{W}}`$ までの主張、$`L_3(\omega)`$ でのブロック、$`R_2^C`$ の $`\Lambda_\varepsilon`$ までのやり直しのブロックを Lean で
+# $`R_2^+`$ の 44〜46 回目：$`R_2^C`$ で $`Z^{\mathrm{V}}`$ まで、$`R_2^S`$ で $`Z^{\mathrm{WW}}`$ までの主張、$`L_3(\omega)`$ でのブロック、Lean で $`R_2^C`$ の $`\Lambda_{\varepsilon\cdot 2}`$ までのやり直しのブロックと NU-CT
 
-このページは [SHIFT11-ja.md](SHIFT11-ja.md) の続き（そこの §3 が 43 回目）。§1 が 44 回目、§2 が 45 回目。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT11-ja.md](SHIFT11-ja.md) の続き（そこの §3 が 43 回目）。§1 が 44 回目、§2 が 45 回目、§3 が 46 回目。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。致命的な点か進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことか目標そのものの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -159,7 +159,7 @@ $`G''(\zeta) = \psi_{\Omega_2}(\Omega_\omega\cdot 2 + \theta'_2\cdot\zeta)`$、$
   SRO より下のすべての標準の行列での段階。
 - 名前：$`R(\Theta_{d\omega})`$。$`\Lambda_{\mathrm{fp}2}`$ と $`\Theta_1`$ の間の正確なずれ。符号で書いた届く先の InaccPsi の式。[COVER-ja.md](COVER-ja.md) §9 の残り。
 
-後で：今の一覧は §2.6。
+後で：今の一覧は §3.6。
 
 ## 2. 45 回目
 
@@ -306,6 +306,147 @@ Z^{\mathrm{WG}} = L(\theta'_2\cdot(\Omega_2+\omega^2) + \omega^{G''(\omega^2)+1}
   CAP$`^{\mathrm{W}}`$ (ii) は予想。$`Z^{\mathrm{W2}}`$ と $`Z^{\mathrm{WW}}`$ での $`R_2^S`$ の側は条件つき）。
 - Lean、この順に：$`\Lambda_\varepsilon \lt \Omega_1`$。$`\Lambda_\varepsilon`$ を越える BLK$`^O`$（$`\varepsilon_{x+1}`$ を越える項と、それについての EXACT と IMG）。$`\Phi_\Gamma`$ と $`\Lambda_\varepsilon`$ の間の
   $`O`$ の閉じた値。$`\nu_C`$ の上からの評価（$`T_C \lt \Omega_1`$ かは未解決）。LIFT-0、O$`^C`$、NU-CT、$`\nu_C`$ の値。$`R_2^S`$ の側。
+- $`R_2^S = R_2^C`$：(E)、$`\beta_0`$、FAN-LOAD、$`\kappa_C`$ より上の後続の段での $`\le_1`$ の逆向き。
+- $`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価と、$`\iota(\mathrm{CH}_3)`$ の上からの評価。
+- 最初の到達不能基数（この回は扱っていない）：$`S_*`$ より先は $`\alpha \ge \Gamma_0`$ の容量（予想 LEX-SELF）か別の道。そして $`\theta_0`$ までの $`\Omega`$ の塔。$`\Theta_1`$ を越える $`\mathrm{CH}_2`$。
+  SRO より下のすべての標準の行列での段階。
+- 名前：$`R(\Theta_{d\omega})`$。$`\Lambda_{\mathrm{fp}2}`$ と $`\Theta_1`$ の間の正確なずれ。符号で書いた届く先の InaccPsi の式。[COVER-ja.md](COVER-ja.md) §9 の残り。
+
+後で：今の一覧は §3.6。
+
+## 3. 46 回目
+
+論文は 3 本（2026-10）：$`Z^{\mathrm{WW}}`$ より先の $`\psi_{\Omega_3}(0)`$ より下の乗数の論文（§3.1）と、$`Z^{\mathrm{W}}`$ より先の $`R_2^S`$ の側の論文（§3.2）は、どちらも査読 1 回。$`R_2^C`$ の
+Lean の 7 つ目の段階（§3.3）は、公理と定義を確かめる監査を受けた。この節の結果は、回数を書いていなければ査読 1 回。段の番号は §1 と同じ。
+
+**$`R_2^C`$ での最前線は $`Z^{\mathrm{V}}`$ に進んだ。** FRAG のもとで、**Wilken の主張は $`R_2^C`$ で $`[0, Z^{\mathrm{V}}]`$ で成り立つ（両方の半分）**。ここで
+
+```math
+Z^{\mathrm{V}} = L(\theta'_2\cdot\psi_{\Omega_3}(0)) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+\psi_{\Omega_3}(0)}),\qquad \psi_{\Omega_3}(0) = \Gamma_{\Omega_2+1},
+```
+
+で、$`\beta_0 \gt Z^{\mathrm{V}}`$ と $`T_3^C \gt Z^{\mathrm{V}}`$ も成り立つ（§3.1）。§2.1 の査読が一番弱い段階だけを確かめた部分 $`(Z^{\mathrm{W2}}, Z^{\mathrm{WW}}]`$ は、今は全部書き出されて査読された。
+**$`R_2^S`$ では主張は今は $`[0, Z^{\mathrm{WW}})`$ で成り立つ**（FRAG のもと、§3.2）。§2.2 の進行を止める点 B-1 は閉じ、LB$`^{\mathrm{W}}`$ は証明された。$`Z^{\mathrm{WW}}`$ から
+
+```math
+Z^{\mathrm{WWG}} = L(\theta'_2\cdot\Omega_2^2 + \omega^{G''(\omega^2)+1}) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+\Omega_2\cdot 2} + \omega^{G''(\omega^2)+1})
+```
+
+への段階には、蓋だけを読む 2 つ目の証明がある（§3.2）ので、**査読 2 回**。Lean では：$`\Lambda_\varepsilon \lt \Omega_1`$、$`\Lambda_{\varepsilon\cdot 2}`$ までの定理 BLK$`^O`$、$`R_2^C`$ での定理 NU-CT（§3.3）。
+
+引く論文：§3.1 と §3.2 は査読済みの段階を通してだけ：[W07a] と [W07b]（L.2.1）、Carlson 2009（Def 5.3、L.5.5、L.5.7 (3)）、Wilken 2020（Prop 21.6、(21.10)）、[CW12b]（L.7.5。§3.2 の査読者が
+読み直した）、[C11]（LOC-ISO を通して）。§3.3 は Carlson 2009（Cor 15.15、Lemma 15.11、Thm 14.10 (1)）、Carlson 2001（「respects」の定義）、前の段階の公理を通してだけの [W07a] と [W07b]。
+どれも Wilken, JSL 72 (2007)、Carlson, AML 38 (1999)、Wilken, AML 45 (2006) を使わない。
+
+45 回目の査読の細かい点は直した：§2.1 の査読の m1–m5 は §3.1 の論文で、§2.2 の査読の m1–m5 は §3.2 の論文で、§2.3 の監査の n1 と n3 は ORec の説明の行で（§3.3。n2、n4、n5 は
+すでに [LEAN-ja.md](LEAN-ja.md) にある）。
+
+### 3.1 $`\psi_{\Omega_3}(0)`$ より下の乗数と、$`R_2^C`$ で $`[0, Z^{\mathrm{V}}]`$ での主張
+
+記号は §2.1 のもの。乗数とは $`\zeta \lt \psi_{\Omega_3}(0)`$ で、$`\Omega_2`$ の上のヴェブレン標準形で書く。$`G''(\zeta)`$ が標準形のとき、乗数は正規という。段 3 のやり直し $`b = L(\lambda'')`$ での
+$`\zeta`$ の読み $`R''_b(\zeta)`$ は、その形で $`\Omega_2`$ を $`\Omega_1`$ に置き換え、各定数 $`c \lt \Omega_2`$ を $`o_b(c)`$ と読んだもの。
+
+- **全部書き出した $`(Z^{\mathrm{W2}}, Z^{\mathrm{WW}}]`$ の段階**（FRAG 無しで証明済み。つなぎは FRAG のもと）：$`\lambda''+\Omega_1\cdot u`$ が $`L`$ の定義域に入る可算の $`u`$ のちょうどの集合、
+  §2.1 の $`\Omega_2^2`$ より下の読み、符号 $`\Omega_1+c`$ のつなぎ。§2.1 の査読とあわせ、この部分は今は全部を 1 回、一番弱い段階を 1 回読まれた。細かい点：$`L`$ の定義域についての 2 つの補題を、
+  証明された範囲より上で引いている。定義域の補題の一般の形でこれは閉じ、査読者は 360 個のずれで確かめた (m1)。言葉の誤り (m3)。
+- **THETA″$`^{\mathrm{V}}`$**（FRAG 無しで証明済み）。どの正規な乗数でも段の補題が成り立ち、$`\zeta \mapsto 1 + R''_b(\zeta)`$ は、$`o_b`$ の定義域にある正規な乗数から、$`\lambda''+u`$ が $`L`$ の
+  定義域に入るずれ $`1 \le u \lt \psi_{\Omega_2}(0)`$ の上への順序同型。だから $`o_b(G''(\zeta)) = L(\lambda''+1+R''_b(\zeta))`$ で、$`o_b`$ は $`G''(\psi_{\Omega_3}(0))`$ より下の符号を
+  $`[0, L(\lambda''+\psi_{\Omega_2}(0)))`$ の上へ移す。§1.1 と §2.1 の読みと一致する。細かい点：「$`k \ge 3`$ の $`\psi_{\Omega_k}`$ の原子を持たない」は定数の外での話 (m2)。2 つの値の間のずれの場合に使う
+  2 つの事実を書くこと (m4)。
+- **つなぎ**（証明済み。2 つ目は FRAG のもと）。符号 $`\Omega_1\cdot m+d`$（$`m`$ は有限なので $`\Omega_1\cdot 2`$ も）のつなぎは和だけで済む。$`[\Omega_1, \psi_{\Omega_2}(0)]`$ のどのヴェブレンの符号
+  （$`\Omega_1\cdot\omega`$、$`\Omega_1^2`$、$`\varepsilon_{\Omega_1+1}`$、$`\varphi(\Omega_1, 1)`$、$`\Gamma_{\Omega_1+1}`$ など）のつなぎも、像のやり直しが運びの像でないつなぎでの留めの補題を使う。査読者は、新しい
+  仮定（下の写像が動く引数を像のやり直しより下へ送る）がただ 1 つで、それが証明されていることを確かめた。細かい点：新しい部分の名札が大きすぎる (m5)。
+- **遠い留め**（運び、留め、頂上の補題、長いやり直しの一歩、しきい値 $`\psi_{\Omega_2}(0)`$ のまたぎの補題）と **定理 ENUM-REACH″$`^{\mathrm{V}}`$**（移しで証明済み、FRAG のもと）：$`Z^{\mathrm{V}}`$ より
+  下で符号 $`c''`$ を持つ段 3 のどのやり直し $`b = L(\lambda'')`$ でも $`r(b) = k''_b(o_b(c''))`$ で、$`r(b) \lt L(\lambda''+\psi_{\Omega_2}(0))`$。たとえば
+  $`N = L(\theta'_2\cdot\Omega_2^2+\Omega_1^2)`$ で $`r(Z^{\mathrm{WW}}) = \delta''_1(N) + N\cdot 2`$。これは §3.2 の予想 CAP$`^{\mathrm{WW}}`$ (i) の値。
+- **定理 C$`^{\mathrm{V}\sharp}`$ と $`[0, Z^{\mathrm{V}}]`$ での主張**（移しで証明済み、FRAG のもと）。$`Z^{\mathrm{V}}`$ より下の新しい組はどれも、中に新しい組を持たない段 3 の
+  $`\tau''`$-$`\delta''`$ の組で、扇の頂点も 3 重の入れ子も無い。$`\zeta`$ が正規（添字が $`L`$ の定義域にある）のどの $`L(\theta'_2\cdot\zeta)`$ も、$`\le_1`$ の前の点を持たず、下のどの点も越えて
+  届かない点。だから $`\beta_0 \gt Z^{\mathrm{V}}`$、$`T_3^C \gt Z^{\mathrm{V}}`$、$`[0, Z^{\mathrm{V}}] \subseteq \mathrm{Core}(R_2^C)`$ で、$`Z^{\mathrm{V}}`$ はつぶす引数が $`I_\omega`$ より下の InaccPsi の標準形。
+  途中に $`L(\theta'_2\cdot\Omega_2^\omega)`$、$`L(\theta'_2\cdot\varepsilon_{\Omega_2+1})`$、$`L(\theta'_2\cdot\varphi(\Omega_2, 1))`$。2 つの部分は分けて記録する (m6)：$`(Z^{\mathrm{WW}}, L(\theta'_2\cdot\Omega_2^\omega)]`$ は
+  和によるつなぎだけを使い、$`(L(\theta'_2\cdot\Omega_2^\omega), Z^{\mathrm{V}}]`$ はヴェブレンの符号のつなぎも使う。$`Z^{\mathrm{V}}`$ での $`R_2^S`$ の側は条件つき（数えない）。
+- **鋭い形の $`Z^{\mathrm{V}}`$ より下の CAP-0″**。$`Z^{\mathrm{V}}`$ より下では段 3 の長いやり直しはまたがれない（証明済み、FRAG のもと）。
+  $`N = L(\theta'_2\cdot\psi_{\Omega_3}(0)+\psi_{\Omega_2}(0))`$ で $`r(Z^{\mathrm{V}}) = \delta''_1(N) + \Gamma_{N+1}`$（証明済み、FRAG のもと。例として）。
+- **$`Z^{\mathrm{V}}`$ より先**（数えない）：$`\psi_{\Omega_3}`$ の原子を持つ乗数（段の補題の新しい一歩と、$`\psi_{\Omega_2}`$ の原子を持つずれ）は未解決。予想：主張は
+  $`L(\theta'_2\cdot\psi_{\Omega_3}(\Omega_3))`$ まで続く。長いやり直しの最初のまたぎが符号 $`G''(\theta'_3\cdot\omega^2)`$ で起こるかは予想のまま。
+
+### 3.2 $`R_2^S`$ で $`[0, Z^{\mathrm{WW}})`$、LB$`^{\mathrm{W}}`$、基 $`Z^{\mathrm{W2}}`$ と $`Z^{\mathrm{WW}}`$ で蓋だけを読む帰納法
+
+言葉は §2.2 のもの。$`\lambda_{\mathrm{W}}`$ は $`Z^{\mathrm{W}}`$ の添字。
+
+- **CAP$`^{\mathrm{W}}`$ と LB$`^{\mathrm{W}}`$**（証明済み、FRAG のもと。45 回目の §2.1 の例で、その帰納法は $`Z^{\mathrm{W}}`$ を越える）。$`r(Z^{\mathrm{W}}) = \delta''_1(R''_1(F''_{Z^{\mathrm{W}}})) + 1`$ で、
+  $`k \ge 1`$ のどの $`b = L(\lambda_{\mathrm{W}} + G''(\omega^2)\cdot k)`$ でも $`r(b) = \delta''_1(R''_1(b)) + 1`$。だから LB$`^{\mathrm{W}}`$ が成り立ち、**B-1 は閉じた**。細かい点：写しの境を
+  $`Z^{\mathrm{W}}`$ より上だけでなく $`r(Z^{\mathrm{W}})`$ より上にとること (m3)。
+- **$`R_2^S`$ での主張**（証明済み、FRAG のもと）：$`[0, Z^{\mathrm{WG}})`$ で（S-COND$`^{\mathrm{W}}`$ と CAP$`^{\mathrm{W}}`$）、$`[0, Z^{\mathrm{W2}})`$ で（$`Z^{\mathrm{W2}}`$ での S-FOLLOW。§2.1 の
+  $`Z^{\mathrm{W2}}`$ より下の部分から）、$`[0, Z^{\mathrm{WW}})`$ で（$`Z^{\mathrm{WW}}`$ での S-FOLLOW。$`Z^{\mathrm{W2}}`$ より上の部分から）。$`Z^{\mathrm{WW}}`$ より下で Carlson の判定が成り立つ。§2.2 の
+  S-F2 とあわせ、$`[0, Z^{\mathrm{W}})`$ には 2 つの証明がある（査読 2 回）。
+- **BASE-TEST″ と $`(Z^{\mathrm{W}}, Z^{\mathrm{WW}}]`$ の基の点の表**（証明済み）：それぞれの基の点の届く先、その蓋、次の $`\tau''`$ の点、次の基の点。細かい点：1 つの文の「最初の」には
+  その点より下の骨組みが要る。さもなければ消すこと (m2)。1 つの式で $`P = \psi_{\Omega_2}(\Omega_\omega)`$ と名指すこと (m1)。
+- **基 $`Z^{\mathrm{W2}}`$ と $`Z^{\mathrm{WW}}`$ で蓋だけを読む帰納法**（移しで証明済み、FRAG のもと）：$`\beta_0 \gt Z^{\mathrm{WWG}}`$、$`T_3^C \gt Z^{\mathrm{WWG}}`$、$`R_2^C`$ で
+  $`[0, Z^{\mathrm{WWG}}]`$ での主張。$`r(Z^{\mathrm{WW}})`$ の値は読まない。$`Z^{\mathrm{WWG}} \lt Z^{\mathrm{V}}`$ なので、これは $`(Z^{\mathrm{WW}}, Z^{\mathrm{WWG}}]`$ の 2 つ目の証明。
+- **CAP$`^{\mathrm{W2}}`$**（証明済み、FRAG のもと。§2.1 の例）：$`N = L(\theta'_2\cdot\Omega_2\cdot 2+\Omega_1\cdot 2)`$ で $`r(Z^{\mathrm{W2}}) = \delta''_1(N) + N`$。S-COND$`^{\mathrm{W2}}`$ とあわせ、
+  $`R_2^S`$ で $`L(\theta'_2\cdot\Omega_2\cdot 2+\omega^{G''(\omega^2)+1})`$ より下での主張の 2 つ目の証明になる。
+- **CAP$`^{\mathrm{WW}}`$** はこの論文では予想。その値 (i) は ENUM-REACH″$`^{\mathrm{V}}`$ の 1 行（§3.1）。S-COND$`^{\mathrm{WW}}`$ とあわせると $`R_2^S`$ で $`Z^{\mathrm{WW}}`$ を越える主張が出るはずだが、
+  この組み合わせは査読されていないので数えない。記録 (m4)：$`[0, Z^{\mathrm{W2}})`$ は §2.1 の全部を読まれた部分に頼る。$`[Z^{\mathrm{W2}}, Z^{\mathrm{WW}})`$ と $`\beta_0 \gt Z^{\mathrm{WWG}}`$ は
+  $`Z^{\mathrm{W2}}`$ より上の部分に頼り、それも今は全部を読まれた（§3.1）。
+
+### 3.3 Lean、段階 7：$`\Lambda_\varepsilon \lt \Omega_1`$、$`\Lambda_{\varepsilon\cdot 2}`$ までのやり直しのブロック、NU-CT
+
+- **ファイル。** [R2/](R2/) の新しい 8 個のモジュール（CitedCore、LamLt、EpsE、ORecE、BlkE、NestC、NuCT、OC2）と、ORec の説明の行（§2.3 の監査の n1、n3 と、この監査の m5。コードは
+  変わらない）。CitedCore に **新しい公理が 2 つ**：Carlson 2009 の Cor 15.15（「核は可算の順序数」として使う）と、Lemma 15.11 と Thm 14.10 (1)（「中に組が入れ子になった組がある」として
+  使う）。これで公理は 6 個のファイルに 51 個。主な定理はそのうち 50 個を使う。リポジトリでは CitedCore は $`\Omega_1`$ を定めるファイルも import する：それが無いと、Lean は 1 つ目の公理の
+  $`\Omega_1`$ を自由な変数と読んだ。import があれば、公理は監査が読んだとおりのことを言う。ライブラリ全体が作られる（緑、`sorry` 無し）。詳しくは [LEAN-ja.md](LEAN-ja.md)。
+- **$`\Lambda_\varepsilon \lt \Omega_1`$**（`LamE_lt_Om1`）：そうでなければ §2.3 の CORE-C がすべての可算の順序数を核に入れてしまう。だから BLK$`^O`$ と CORE-C は $`B = \Lambda_\varepsilon`$ そのものでも
+  成り立つ。
+- **項 $`\varepsilon_{x+1}`$。** $`\varepsilon_{x+1}`$ と $`\varepsilon_{x+1}+t`$ の EXACT は新しい公理無しで：基の取り替えは $`\le_1`$、$`+`$、$`\lt`$ を保ち、$`\alpha \gt 0`$ が $`\varepsilon`$ 数であるのは
+  $`\alpha \le_1 \alpha\cdot 2`$ のとき、そのときだけ。$`\varepsilon_{x+1}+t`$ と $`\varepsilon_{x+1}\cdot 2`$ の IMG と、どの行き先の項でもの RS も。
+- **$`\Lambda_{\varepsilon\cdot 2}`$ までの BLK$`^O`$**（`blkE`）。項 $`\varepsilon_{x+1}+t`$ を足したずれは、$`\Lambda_\varepsilon`$ より下では §2.3 の $`O`$ と等しく、$`O(\Lambda_\varepsilon) = \varepsilon_{\rho+1}+1`$。
+  $`\Lambda_{\varepsilon+1}`$、$`\Lambda_{\varepsilon\cdot 2}`$ を、その下で $`\varepsilon_{x+1}+1`$、$`\varepsilon_{x+1}\cdot 2`$ がそれぞれ共終に実現される最小のやり直しの添字とする。すると
+  $`\Lambda_\varepsilon \lt \Lambda_{\varepsilon+1} \lt \Lambda_{\varepsilon\cdot 2} \lt \Omega_1`$ で、$`B \le \Lambda_{\varepsilon\cdot 2}`$ のどのやり直しの添字でも、ちょうどの届く先と CORE-C つきで BLK$`^O`$ の (i)–(iii) が成り立つ。
+- **[REACHES-ja.md](REACHES-ja.md) §1 の $`O`$**（余分な項は $`\varepsilon_{x+1}`$ だけ）は $`\Lambda_{\varepsilon+1}`$ より下でちょうどの届く先を与えるが、$`\Lambda_{\varepsilon+1}`$ では与えない：そこではそれは
+  $`\varepsilon_{\rho+1}+1`$ 以下だが、届く先は $`\delta + \varepsilon_{\rho+1}+2`$ 以上。文書の主張は変わらない（文書は $`O`$ を $`\Lambda_\varepsilon`$ より下でだけ使う）。
+- **$`\nu_C`$ へ**（Lean の $`\nu_C`$：標準でない組の最小の右端）。$`T_C \lt \Omega_1`$（新しい公理で）、$`T_C`$ での CAP、$`[0, T_C] \subseteq \mathrm{Core}(R_2^C)`$、
+  $`\upsilon_{\Lambda_{\varepsilon\cdot 2}} \le \nu_C`$。**$`R_2^C`$ での定理 NU-CT**：$`\nu_C = T_C`$（新しい公理は使わない）。標準でない最初の組は $`(\rho_L, \nu_C)`$ で $`\rho_L`$ はやり直し、
+  $`\rho_L`$ は $`\nu_C`$ のただ 1 つの $`\lt_2`$ の前の点。**段 2 での LIFT-0** の組と届く先の項：$`\nu_C`$ に $`\le_1`$ などの点も届く先は $`\nu_C`$ で、それらに端を持つ $`\lt_2`$ の関係は
+  $`\rho_L \lt_2 \nu_C`$ だけ。**段 2 での O$`^C`$**：$`\rho_L`$ の $`\lt_1`$ の前の点の順序型は $`\omega`$。
+- **監査** は各モジュールを単独でとまとめて走らせ直し、97 個の定理すべての公理を書き出した。致命的な点も進行を止める点も無い。新しい 2 つの公理はどちらも忠実。私たちの段階
+  （Cor 15.15 の仮定が $`(\mathrm{Ord}; 0, +, \le)`$ で成り立つことと、入れ子の型が型であること）は正しい。細かい点：Carlson の §15 が有限の言語を仮定することを CitedCore に書く (m1、済み)。
+  「6 個のファイルに 51 個の公理」と数える (m2)。LIFT-0 の形の項は Lean で述べていない (m3)。$`\nu_C`$ には記法による上界が無く、$`\nu_C \lt \Omega_1`$ だけ (m4)。説明の行の 1 つは紙の上の主張
+  (m5、済み)。[REACHES-ja.md](REACHES-ja.md) §1 はその $`O`$ がどこで止まるかを書く (m6、済み)。定理の数 (m7)。
+
+### 3.4 46 回目のあとの状態
+
+- **$`R_2^C`$ での Wilken の主張**：両方の半分が FRAG 無しで $`[0, X_4]`$ で、**FRAG のもとで $`[0, Z^{\mathrm{V}}]`$ で** 成り立つ（査読 1 回、§3.1。$`(Z^{\mathrm{W2}}, Z^{\mathrm{WW}}]`$ はこの回に
+  全部を読まれ、前に一番弱い段階を読まれた）。$`(Z^\Lambda, Z^{\mathrm{LG}}]`$、$`(Z^{\mathrm{FP}}, Z^{\mathrm{FPG}}]`$、$`(Z^{\mathrm{W}}, Z^{\mathrm{WG}}]`$、$`(Z^{\mathrm{WW}}, Z^{\mathrm{WWG}}]`$ は 2 つの証明
+  （査読 2 回）。$`Z^{\mathrm{V}}`$ より上：証明されていない。
+- **$`R_2^S`$ での Wilken の主張**：$`[0, \upsilon_{\omega^3}]`$ で、そして FRAG のもとで **$`[0, Z^{\mathrm{WW}})`$ で**（査読 1 回、§3.2）。$`[0, Z^{\mathrm{W}})`$ は 2 つの証明（査読 2 回）。
+  FRAG のもとで $`\beta_0 \gt Z^{\mathrm{V}}`$。(E) は未解決で、$`\beta_0`$ の場所は分からない。
+- **届く先**（FRAG のもと）：段 3 では $`Z^{\mathrm{V}}`$ より下のどのやり直しでも $`r(b) = k''_b(o_b(c''))`$。$`r(Z^{\mathrm{W}})`$、$`r(Z^{\mathrm{W2}})`$、$`r(Z^{\mathrm{WW}})`$、$`r(Z^{\mathrm{V}})`$ は §3.1、§3.2 のとおり。
+- **LOW：FRAG のもとで偽**（[SHIFT11-ja.md](SHIFT11-ja.md) §1.1、査読 1 回）。この回は触れていない。**$`\nu_3`$：証明されていない**。CAP-0″ は $`Z^{\mathrm{V}}`$ より下で成り立つ。
+- **Lean**：§2.4 のものに加えて、今は $`\Lambda_\varepsilon \lt \Omega_1`$、$`\Lambda_{\varepsilon\cdot 2}`$ までの BLK$`^O`$ と CORE-C、$`T_C \lt \Omega_1`$、$`R_2^C`$ での NU-CT（$`\nu_C = T_C`$）、段 2 での
+  LIFT-0 と O$`^C`$（§3.3）。
+- $`\theta_0`$ より下の下からの評価の計画：この回は扱っていない（$`\iota(\mathrm{CH}_5) \ge \psi_{\Omega_1}(S_*)`$。$`S_*`$ より先は予想 LEX-SELF）。SRO より下の段階：変化なし（3,166 個の見本の
+  行列すべてでどの $`n`$ でも済み。SRO より下のすべての標準の行列についての一般の主張だけが未解決）。
+
+### 3.5 46 回目の確かめ
+
+どの実行も 60 秒未満。どれも証明ではない。
+
+- §3.1。著者：名前、正規性、$`L`$ の定義域、14,280 組での読みの順序、段、値の 9 つの確かめ、失敗 0。査読者：古い定義域の補題の範囲より上の 3 つの基での 161 個の頭の部分を持つ
+  360 個のずれ、定義域の段階の 57 の場合、正規性の境目の 300 個の乗数（22,350 組での順序）、失敗 0。
+- §3.2。著者：順序、標準形、定義域、符号、式の形についての 4 回の実行、失敗 0。査読者：$`r(Z^{\mathrm{W}})`$ までの 670 個のやり直しの点と、$`Z^{\mathrm{W2}}`$ と $`Z^{\mathrm{WW}}`$ での 423 個の
+  ずれ、失敗 0（2 つ目の探しの最初の実行には、査読者自身の候補の集まりに誤りがあった）。
+- §3.3。Lean：8 個のモジュールをそれぞれ単独で、そして全部まとめて、緑。終わりに偽の主張を足すと失敗する。監査が自分で作った、97 個の定理すべての公理つきのまとめも緑。リポジトリでの
+  ライブラリ全体の build は緑で、`sorry` 無し。8 個のモジュールで自由な変数を禁じる見張りをつけても緑。
+
+### 3.6 未解決
+
+- $`Z^{\mathrm{V}}`$ より上：$`\psi_{\Omega_3}`$ の原子を持つ乗数（段の補題と、$`\psi_{\Omega_2}`$ の原子を持つずれ。予想：$`L(\theta'_2\cdot\psi_{\Omega_3}(\Omega_3))`$ まで）、そして $`\psi_{\Omega_4}`$ の原子と、
+  段 3 の長いやり直しのまたぎ（予想：最初は符号 $`G''(\theta'_3\cdot\omega^2)`$ で）。そして $`L(\Omega_\omega)`$ までの CAP-0″、CAP-1″、段 4 の LONG-CLASS、(H2$`^{\mathrm{cr}}`$)、1 つ上の LEFT⁺、(H3)、
+  NU-CT$`_3`$、$`\nu_3`$。
+- FRAG のもとで $`R_2^C`$ で $`Z^{\mathrm{V}}`$ より上の主張（FRAG 無しなら $`X_4`$ より上）、$`R_2^S`$ で $`Z^{\mathrm{WW}}`$ より上の主張（CAP$`^{\mathrm{WW}}`$ と S-COND$`^{\mathrm{WW}}`$ の組は査読が要る。
+  $`Z^{\mathrm{V}}`$ での $`R_2^S`$ の側は条件つき）。
+- Lean、この順に：$`\nu_C`$ がやり直しであること。$`\Lambda_{\varepsilon\cdot 2}`$ を越える BLK$`^O`$。$`\Lambda_\varepsilon`$、$`\Lambda_{\varepsilon+1}`$、$`\Lambda_{\varepsilon\cdot 2}`$ の閉じた値と InaccPsi の名前。
+  どの段でもの LIFT-0 と段 3 からの O$`^C`$。$`\nu_C`$ の値。$`R_2^S`$ の側。
 - $`R_2^S = R_2^C`$：(E)、$`\beta_0`$、FAN-LOAD、$`\kappa_C`$ より上の後続の段での $`\le_1`$ の逆向き。
 - $`\iota(\mathrm{CH}_2)`$、$`m_F`$、$`x_F`$、$`f_0`$、$`m_3`$、$`c_0`$ の評価と、$`\iota(\mathrm{CH}_3)`$ の上からの評価。
 - 最初の到達不能基数（この回は扱っていない）：$`S_*`$ より先は $`\alpha \ge \Gamma_0`$ の容量（予想 LEX-SELF）か別の道。そして $`\theta_0`$ までの $`\Omega`$ の塔。$`\Theta_1`$ を越える $`\mathrm{CH}_2`$。

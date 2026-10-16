@@ -19,7 +19,7 @@ in [SHIFT7.md](SHIFT7.md) (one higher than in the papers). "Given FRAG" means gi
 
 **Later (the forty-first round, [SHIFT11.md](SHIFT11.md) §1.1):** the corrected exact long reach is proved for every code below $`P'`$ at levels 1 and 2 (ENUM-REACH), and the chain was run again on it. So **T0 is proved again** (given FRAG; 1 review of the new proof), and so are the rows marked "not proved as written (fortieth round)" below, as the table of the forty-first round at the end of this page says. The rows S1 and S2 are replaced by ENUM-REACH.
 
-**Later (the forty-second round, [SHIFT11.md](SHIFT11.md) §2.1):** the step TC⁺$`^\omega`$ for $`B_n`$ (T2c) now cites EQ$`^{\mathrm{all}}`$, so T0 is complete as written; and the gap calculus above $`\nu_C`$ is run again, so the frontiers up to $`Z^\Lambda`$ are proved again (the table of the forty-second round at the end of this page). **Later (the forty-third round):** the claim goes on to $`Z^{\mathrm{FP}}`$ in $`R_2^C`$, and some refereed lower bounds of level 3 are withdrawn (the last table). **Later (the forty-fourth round):** the claim goes on to $`Z^{\mathrm{W}}`$ in $`R_2^C`$ and to $`[0, Z^{\mathrm{FP}})`$ in $`R_2^S`$, and the blocking point of the forty-third round toward $`\nu_3`$ is closed (the last table). **Later (the forty-fifth round):** the claim goes on to $`Z^{\mathrm{WW}}`$ in $`R_2^C`$ and to $`[0, Z^{\mathrm{W}})`$ in $`R_2^S`$ (the last table).
+**Later (the forty-second round, [SHIFT11.md](SHIFT11.md) §2.1):** the step TC⁺$`^\omega`$ for $`B_n`$ (T2c) now cites EQ$`^{\mathrm{all}}`$, so T0 is complete as written; and the gap calculus above $`\nu_C`$ is run again, so the frontiers up to $`Z^\Lambda`$ are proved again (the table of the forty-second round at the end of this page). **Later (the forty-third round):** the claim goes on to $`Z^{\mathrm{FP}}`$ in $`R_2^C`$, and some refereed lower bounds of level 3 are withdrawn (the last table). **Later (the forty-fourth round):** the claim goes on to $`Z^{\mathrm{W}}`$ in $`R_2^C`$ and to $`[0, Z^{\mathrm{FP}})`$ in $`R_2^S`$, and the blocking point of the forty-third round toward $`\nu_3`$ is closed (the last table). **Later (the forty-fifth round):** the claim goes on to $`Z^{\mathrm{WW}}`$ in $`R_2^C`$ and to $`[0, Z^{\mathrm{W}})`$ in $`R_2^S`$ (the table of that round). **Later (the forty-sixth round):** the claim goes on to $`Z^{\mathrm{V}}`$ in $`R_2^C`$ and to $`[0, Z^{\mathrm{WW}})`$ in $`R_2^S`$, and the blocking point B-1 of the forty-fifth round is closed (the last table).
 
 | node | statement | where | status | reviews | rests on |
 |---|---|---|---|---|---|
@@ -195,4 +195,26 @@ It is now written (row T2b2).
 | LB$`^{\mathrm{W}}`$ as proved in the $`R_2^S`$ paper | not proved (blocking point B-1); the value of $`r(Z^{\mathrm{W}})`$ comes from ENUM-REACH″$`^{\mathrm{W2}}`$ |
 | the claim in $`R_2^S`$ on $`[0, L(\lambda_{\mathrm{W}} + G''(\omega^2)))`$ from $`r(Z^{\mathrm{W}})`$ and S-COND$`^{\mathrm{W}}`$ | not refereed as a combination; not counted |
 | CAP$`^{\mathrm{W}}`$ (ii) | conjecture |
+| $`\nu_3`$; LEFT⁺ one level up, CAP-1″, LONG-CLASS at level 4, (H2$`^{\mathrm{cr}}`$) | open |
+
+**Later (the forty-sixth round):** LB$`^{\mathrm{W}}`$ and CAP$`^{\mathrm{W}}`$ (ii) are proved, and the combination above is replaced by a refereed proof (next table).
+
+**The table of the forty-sixth round** ([SHIFT12.md](SHIFT12.md) §3.1, §3.2; each result 1 review unless a count is given; a multiplier is a $`\zeta \lt \psi_{\Omega_3}(0)`$):
+
+| result | status after the forty-sixth round |
+|---|---|
+| the step $`(Z^{\mathrm{W2}}, Z^{\mathrm{WW}}]`$ written out in full (the domain of $`L`$ at $`\lambda''+\Omega_1\cdot u`$, the readings below $`\Omega_2^2`$, the link of code $`\Omega_1+c`$) | proved, without FRAG (the link given FRAG); read in full in this round, at its weakest steps in the forty-fifth |
+| THETA″$`^{\mathrm{V}}`$: the tier lemma and the reading $`o_b(G''(\zeta)) = L(\lambda''+1+R''_b(\zeta))`$ for every normal multiplier | proved, without FRAG |
+| the links of code $`\Omega_1\cdot m+d`$ (sums only) and of every Veblen code up to $`\psi_{\Omega_2}(0)`$ | proved; the second given FRAG |
+| the far pins with threshold $`\psi_{\Omega_2}(0)`$; ENUM-REACH″$`^{\mathrm{V}}`$ below $`Z^{\mathrm{V}}`$ | proved by transfer, given FRAG |
+| Theorem C$`^{\mathrm{V}\sharp}`$; the claim in $`R_2^C`$ on $`[0, Z^{\mathrm{V}}]`$, $`\beta_0 \gt Z^{\mathrm{V}}`$ | proved by transfer, given FRAG; $`(Z^{\mathrm{WW}}, L(\theta'_2\cdot\Omega_2^\omega)]`$ uses the links by sums only |
+| CAP-0″ below $`Z^{\mathrm{V}}`$ (sharp form); no long restart crossed below $`Z^{\mathrm{V}}`$; $`r(Z^{\mathrm{V}})`$ | proved, given FRAG |
+| the multipliers with $`\psi_{\Omega_3}`$-atoms | open |
+| the claim up to $`L(\theta'_2\cdot\psi_{\Omega_3}(\Omega_3))`$; the first crossing of a long restart of level 3 at the code $`G''(\theta'_3\cdot\omega^2)`$ | conjecture |
+| CAP$`^{\mathrm{W}}`$ and LB$`^{\mathrm{W}}`$ (closes B-1) | proved, given FRAG |
+| the claim in $`R_2^S`$ on $`[0, Z^{\mathrm{WG}})`$, $`[0, Z^{\mathrm{W2}})`$ and $`[0, Z^{\mathrm{WW}})`$; Carlson's criterion below $`Z^{\mathrm{WW}}`$ | proved, given FRAG; with S-F2, 2 reviews for $`[0, Z^{\mathrm{W}})`$ |
+| BASE-TEST″ and the table of base points in $`(Z^{\mathrm{W}}, Z^{\mathrm{WW}}]`$ | proved |
+| the induction with caps only at the bases $`Z^{\mathrm{W2}}`$ and $`Z^{\mathrm{WW}}`$: $`\beta_0 \gt Z^{\mathrm{WWG}}`$, the claim in $`R_2^C`$ on $`[0, Z^{\mathrm{WWG}}]`$ | proved by transfer, given FRAG; with C$`^{\mathrm{V}\sharp}`$, 2 reviews for $`(Z^{\mathrm{WW}}, Z^{\mathrm{WWG}}]`$ |
+| CAP$`^{\mathrm{W2}}`$: $`r(Z^{\mathrm{W2}})`$ | proved, given FRAG |
+| CAP$`^{\mathrm{WW}}`$; the claim in $`R_2^S`$ past $`Z^{\mathrm{WW}}`$ from it | conjecture (its value (i) is a row of ENUM-REACH″$`^{\mathrm{V}}`$); the combination is not refereed, not counted |
 | $`\nu_3`$; LEFT⁺ one level up, CAP-1″, LONG-CLASS at level 4, (H2$`^{\mathrm{cr}}`$) | open |

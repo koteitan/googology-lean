@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 38〜40 回目：1 つ上の窓の規則、骨組みの最初の長いやり直し、帰納法としての判定、印のついた源、ちょうどの長い届く先（致命的な点と一部の直し）、単位ごとの容量、Lean での FRAG
 
-このページは [SHIFT9-ja.md](SHIFT9-ja.md) の続き（そこの §3 が 37 回目）。§1 が 38 回目、§2 が 39 回目、§3 が 40 回目。41〜43 回目は [SHIFT11-ja.md](SHIFT11-ja.md)、44・45 回目は [SHIFT12-ja.md](SHIFT12-ja.md)。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT9-ja.md](SHIFT9-ja.md) の続き（そこの §3 が 37 回目）。§1 が 38 回目、§2 が 39 回目、§3 が 40 回目。41〜43 回目は [SHIFT11-ja.md](SHIFT11-ja.md)、44〜46 回目は [SHIFT12-ja.md](SHIFT12-ja.md)。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。致命的な点か進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことか目標そのものの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -14,7 +14,7 @@
 
 **のちに（43 回目、[SHIFT11-ja.md](SHIFT11-ja.md) §3）：** 符号全体をやり直しで読んで、段 3 のちょうどの届く先は $`Z^{\mathrm{FP}}`$ より下のどのやり直しでも長い符号も含めて証明され、定理 C$`^{\mathrm{LL}}`$ と C$`^{\mathrm{FP}}`$ は FRAG のもとで $`R_2^C`$ で成り立つ（査読 1 回）。これで §2.1 の B-1 が片づく。FALSE-LB″ は証明済み：§1.1 の LB″ と EXACT-LONG-CL″\*、§2.1 の LB″$`^G`$、強い CROSS″、CROSS-O″、EXACT-LONG″$`^G`$、EXACT-F″ は、直した値が違う所で偽。これらの定理の $`R_2^S`$ の半分は概略。$`R_2^S`$ では主張は $`[0, Z^\Lambda)`$ で成り立つ。$`\nu_3`$（B-2）は含意で仮定に帰着され、その上の半分に新しい進行を止める点がある。
 
-**のちに（44 回目、[SHIFT12-ja.md](SHIFT12-ja.md) §1）：** 段 3 のちょうどの届く先は $`Z^{\mathrm{W}} = L(\theta'_2\cdot(\Omega_2+\omega^2))`$ まで証明され、FRAG のもとで主張は $`R_2^C`$ で $`[0, Z^{\mathrm{W}}]`$、$`R_2^S`$ で $`[0, Z^{\mathrm{FP}})`$ で成り立つ。§1.1 の LONG″-$`G''(\omega^2)`$ は $`Z^\Lambda`$ の届く先を与える。$`\nu_3`$ の新しい進行を止める点は片づいた：その上の半分は今は名前のついた 3 つの仮定からの含意。**のちに（45 回目、[SHIFT12-ja.md](SHIFT12-ja.md) §2）：** 段 3 のちょうどの届く先は $`Z^{\mathrm{WW}} = L(\theta'_2\cdot\Omega_2^2)`$ まで証明され、FRAG のもとで主張は $`R_2^C`$ で $`[0, Z^{\mathrm{WW}}]`$、$`R_2^S`$ で $`[0, Z^{\mathrm{W}})`$ で成り立つ。
+**のちに（44 回目、[SHIFT12-ja.md](SHIFT12-ja.md) §1）：** 段 3 のちょうどの届く先は $`Z^{\mathrm{W}} = L(\theta'_2\cdot(\Omega_2+\omega^2))`$ まで証明され、FRAG のもとで主張は $`R_2^C`$ で $`[0, Z^{\mathrm{W}}]`$、$`R_2^S`$ で $`[0, Z^{\mathrm{FP}})`$ で成り立つ。§1.1 の LONG″-$`G''(\omega^2)`$ は $`Z^\Lambda`$ の届く先を与える。$`\nu_3`$ の新しい進行を止める点は片づいた：その上の半分は今は名前のついた 3 つの仮定からの含意。**のちに（45 回目、[SHIFT12-ja.md](SHIFT12-ja.md) §2）：** 段 3 のちょうどの届く先は $`Z^{\mathrm{WW}} = L(\theta'_2\cdot\Omega_2^2)`$ まで証明され、FRAG のもとで主張は $`R_2^C`$ で $`[0, Z^{\mathrm{WW}}]`$、$`R_2^S`$ で $`[0, Z^{\mathrm{W}})`$ で成り立つ。**のちに（46 回目、[SHIFT12-ja.md](SHIFT12-ja.md) §3）：** 段 3 のちょうどの届く先は $`Z^{\mathrm{V}} = L(\theta'_2\cdot\psi_{\Omega_3}(0))`$ まで証明され、FRAG のもとで主張は $`R_2^C`$ で $`[0, Z^{\mathrm{V}}]`$、$`R_2^S`$ で $`[0, Z^{\mathrm{WW}})`$ で成り立つ。
 
 ## 1. 38 回目
 
@@ -441,7 +441,7 @@ r(\lambda) = k_\lambda(\Theta_\lambda(m)) = F(\nu, \tau_\nu + x),\qquad \rho_\nu
 
 ### 3.6 未解決
 
-のちに：節目はもう一度証明された（[SHIFT11-ja.md](SHIFT11-ja.md) §1.1）。今の一覧は [SHIFT12-ja.md](SHIFT12-ja.md) §2.6 にある。
+のちに：節目はもう一度証明された（[SHIFT11-ja.md](SHIFT11-ja.md) §1.1）。今の一覧は [SHIFT12-ja.md](SHIFT12-ja.md) §3.6 にある。
 
 - 節目をもう一度、この順で：ENUM-REACH（$`P'`$ より下のどの符号でも直した値）、その移しでの不変性とその遠い留め。次に $`P'`$ より下の CAP-0、not-LOW、CAP-1、CROSS-LIM、TC⁺$`^\omega`$、EMB、
   ONTO-FIN、PAIR、UP、$`\nu_C = \nu_S = L(\omega+1)`$。次に $`\nu_C`$ より上の最前線（$`X_A`$ から $`Z^\Lambda`$）と $`R_2^S`$ の側。次に 1 つ上（定理 C$`^{\mathrm{LL}}`$、C$`^{\mathrm{FP}}`$、$`\nu_3`$）。

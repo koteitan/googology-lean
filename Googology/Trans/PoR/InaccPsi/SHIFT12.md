@@ -1,8 +1,8 @@
 [← Back](README.md) | [English](SHIFT12.md) | [Japanese](SHIFT12-ja.md)
 
-# $`R_2^+`$, the forty-fourth and forty-fifth rounds: the claim in $`R_2^C`$ up to $`Z^{\mathrm{WW}}`$ and in $`R_2^S`$ up to $`Z^{\mathrm{W}}`$, the block at $`L_3(\omega)`$, and the restart blocks of $`R_2^C`$ up to $`\Lambda_\varepsilon`$ in Lean
+# $`R_2^+`$, the forty-fourth to forty-sixth rounds: the claim in $`R_2^C`$ up to $`Z^{\mathrm{V}}`$ and in $`R_2^S`$ up to $`Z^{\mathrm{WW}}`$, the block at $`L_3(\omega)`$, and in Lean the restart blocks of $`R_2^C`$ up to $`\Lambda_{\varepsilon\cdot 2}`$ and NU-CT
 
-This page continues [SHIFT11.md](SHIFT11.md) (§3 there is the forty-third round); §1 is the forty-fourth round and §2 the forty-fifth. The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT11.md](SHIFT11.md) (§3 there is the forty-third round); §1 is the forty-fourth round, §2 the forty-fifth and §3 the forty-sixth. The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a fatal or blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known, or of the target, is not counted as progress.
 
@@ -166,7 +166,7 @@ Each run was under 60 seconds; none is a proof.
   $`\Theta_1`$; the step for all standard matrices below SRO.
 - Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; an InaccPsi formula for the reach in terms of the code; the rest of [COVER.md](COVER.md) §9.
 
-Later: the current list is §2.6.
+Later: the current list is §3.6.
 
 ## 2. The forty-fifth round
 
@@ -317,6 +317,146 @@ Each run was under 60 seconds; none is a proof.
   CAP$`^{\mathrm{W}}`$ (ii) is a conjecture; the $`R_2^S`$ side at $`Z^{\mathrm{W2}}`$ and $`Z^{\mathrm{WW}}`$ is conditional).
 - Lean, in order: $`\Lambda_\varepsilon \lt \Omega_1`$; BLK$`^O`$ past $`\Lambda_\varepsilon`$ (terms beyond $`\varepsilon_{x+1}`$, with EXACT and IMG for them); the closed values of $`O`$ between $`\Phi_\Gamma`$ and
   $`\Lambda_\varepsilon`$; an upper bound for $`\nu_C`$ (whether $`T_C \lt \Omega_1`$ is open); LIFT-0, O$`^C`$, NU-CT and the value of $`\nu_C`$; the $`R_2^S`$ side.
+- $`R_2^S = R_2^C`$: (E), $`\beta_0`$, FAN-LOAD, and the converse for $`\le_1`$ at successor stages above $`\kappa_C`$.
+- Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, and an upper bound for $`\iota(\mathrm{CH}_3)`$.
+- The first inaccessible (not worked on in this round): past $`S_*`$, capacities with $`\alpha \ge \Gamma_0`$ (conjecture LEX-SELF) or another way; then the tower of $`\Omega`$'s up to $`\theta_0`$; $`\mathrm{CH}_2`$ past
+  $`\Theta_1`$; the step for all standard matrices below SRO.
+- Names: $`R(\Theta_{d\omega})`$; the exact offsets between $`\Lambda_{\mathrm{fp}2}`$ and $`\Theta_1`$; an InaccPsi formula for the reach in terms of the code; the rest of [COVER.md](COVER.md) §9.
+
+Later: the current list is §3.6.
+
+## 3. The forty-sixth round
+
+Three papers (2026-10): the multipliers below $`\psi_{\Omega_3}(0)`$ past $`Z^{\mathrm{WW}}`$ (§3.1) and the $`R_2^S`$ side past $`Z^{\mathrm{W}}`$ (§3.2), each refereed once, and the seventh Lean stage
+for $`R_2^C`$ (§3.3), whose audit checked the axioms and the definitions. A result in this section has 1 review unless a count is given. Levels are numbered as in §1.
+
+**The frontier in $`R_2^C`$ moves to $`Z^{\mathrm{V}}`$.** Given FRAG, **Wilken's claim holds in $`R_2^C`$ on $`[0, Z^{\mathrm{V}}]`$, both halves**, with
+
+```math
+Z^{\mathrm{V}} = L(\theta'_2\cdot\psi_{\Omega_3}(0)) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+\psi_{\Omega_3}(0)}),\qquad \psi_{\Omega_3}(0) = \Gamma_{\Omega_2+1},
+```
+
+and $`\beta_0 \gt Z^{\mathrm{V}}`$ and $`T_3^C \gt Z^{\mathrm{V}}`$ (§3.1). The part $`(Z^{\mathrm{W2}}, Z^{\mathrm{WW}}]`$, which the review of §2.1 checked only at its weakest steps, is now written out in full and refereed. **In
+$`R_2^S`$ the claim now holds on $`[0, Z^{\mathrm{WW}})`$**, given FRAG (§3.2): the blocking point B-1 of §2.2 is closed, so LB$`^{\mathrm{W}}`$ is proved. The step from $`Z^{\mathrm{WW}}`$ to
+
+```math
+Z^{\mathrm{WWG}} = L(\theta'_2\cdot\Omega_2^2 + \omega^{G''(\omega^2)+1}) = \psi_{\Omega_1}(\Omega_\omega\cdot 2 + \omega^{\theta'_2+\Omega_2\cdot 2} + \omega^{G''(\omega^2)+1})
+```
+
+has a second proof that reads only caps (§3.2), so it has **2 reviews**. In Lean: $`\Lambda_\varepsilon \lt \Omega_1`$, Theorem BLK$`^O`$ up to $`\Lambda_{\varepsilon\cdot 2}`$, and Theorem NU-CT in $`R_2^C`$ (§3.3).
+
+Papers cited: in §3.1 and §3.2 only through refereed stages: [W07a] and [W07b] (L.2.1), Carlson 2009 (Def 5.3, L.5.5, L.5.7 (3)), Wilken 2020 (Prop 21.6, (21.10)), [CW12b] (L.7.5; the referee of §3.2
+read it again) and [C11] (through LOC-ISO). In §3.3: Carlson 2009 (Cor 15.15, Lemma 15.11, Thm 14.10 (1)), Carlson 2001 (the definition of "respects"), [W07a] and [W07b] through the axioms of the
+earlier stages. None uses Wilken, JSL 72 (2007), Carlson, AML 38 (1999), or Wilken, AML 45 (2006).
+
+The minor points of the reviews of the forty-fifth round are applied: m1–m5 of the review of §2.1 in the paper of §3.1, m1–m5 of the review of §2.2 in the paper of §3.2, and n1 and n3 of the audit of
+§2.3 in the doc lines of ORec (§3.3; n2, n4 and n5 were already on [LEAN.md](LEAN.md)).
+
+### 3.1 The multipliers below $`\psi_{\Omega_3}(0)`$, and the claim in $`R_2^C`$ on $`[0, Z^{\mathrm{V}}]`$
+
+Notation as in §2.1. A multiplier is a $`\zeta \lt \psi_{\Omega_3}(0)`$, written in its Veblen normal form over $`\Omega_2`$; it is normal if $`G''(\zeta)`$ is a normal form. For a restart $`b = L(\lambda'')`$
+of level 3, the reading of $`\zeta`$ at $`b`$ is $`R''_b(\zeta)`$: replace $`\Omega_2`$ by $`\Omega_1`$ in that form and read each constant $`c \lt \Omega_2`$ as $`o_b(c)`$.
+
+- **The step $`(Z^{\mathrm{W2}}, Z^{\mathrm{WW}}]`$ written out in full** (proved, without FRAG; the link given FRAG): the exact set of countable $`u`$ with $`\lambda''+\Omega_1\cdot u`$ in the domain of $`L`$,
+  the readings below $`\Omega_2^2`$ of §2.1, and the link of code $`\Omega_1+c`$. With the review of §2.1, this part has now been read in full once and checked at its weakest steps once. Minor: two
+  lemmas on the domain of $`L`$ are cited above the range where they were proved; the general form of the domain lemma closes this, and the referee checked it on 360 offsets (m1); a wording slip (m3).
+- **THETA″$`^{\mathrm{V}}`$** (proved, without FRAG). The tier lemma holds for every normal multiplier, and $`\zeta \mapsto 1 + R''_b(\zeta)`$ is an order isomorphism from the normal multipliers in the domain
+  of $`o_b`$ onto the offsets $`1 \le u \lt \psi_{\Omega_2}(0)`$ with $`\lambda''+u`$ in the domain of $`L`$. So $`o_b(G''(\zeta)) = L(\lambda''+1+R''_b(\zeta))`$, and $`o_b`$ maps the codes below
+  $`G''(\psi_{\Omega_3}(0))`$ onto $`[0, L(\lambda''+\psi_{\Omega_2}(0)))`$. It agrees with the readings of §1.1 and §2.1. Minor: "no $`\psi_{\Omega_k}`$-atom with $`k \ge 3`$" means outside the
+  constants (m2); state two facts used in the case of an offset between two values (m4).
+- **The links** (proved; the second given FRAG). A link of code $`\Omega_1\cdot m+d`$ ($`m`$ finite, so also $`\Omega_1\cdot 2`$) needs sums only. A link of any Veblen code in $`[\Omega_1, \psi_{\Omega_2}(0)]`$
+  ($`\Omega_1\cdot\omega`$, $`\Omega_1^2`$, $`\varepsilon_{\Omega_1+1}`$, $`\varphi(\Omega_1, 1)`$, $`\Gamma_{\Omega_1+1}`$, …) uses the pin lemma at a link whose image restart is not a transport image; the referee
+  checked that the only new hypothesis (the lower map sends the moved parameters below the image restart) is proved. Minor: the label overstates what is new (m5).
+- **The far pins** (transport, pins, top lemma, long restart step, crossing lemma with threshold $`\psi_{\Omega_2}(0)`$) and **Theorem ENUM-REACH″$`^{\mathrm{V}}`$** (proved by transfer, given FRAG): for every
+  restart $`b = L(\lambda'')`$ of level 3 below $`Z^{\mathrm{V}}`$, with code $`c''`$: $`r(b) = k''_b(o_b(c''))`$, and $`r(b) \lt L(\lambda''+\psi_{\Omega_2}(0))`$. For example
+  $`r(Z^{\mathrm{WW}}) = \delta''_1(N) + N\cdot 2`$ with $`N = L(\theta'_2\cdot\Omega_2^2+\Omega_1^2)`$, the value of the conjecture CAP$`^{\mathrm{WW}}`$ (i) of §3.2.
+- **Theorem C$`^{\mathrm{V}\sharp}`$ and the claim on $`[0, Z^{\mathrm{V}}]`$** (proved by transfer, given FRAG). Every new pair below $`Z^{\mathrm{V}}`$ is a $`\tau''`$-$`\delta''`$ pair of level 3 with no new
+  pair inside, there is no fan apex and no triple nest, and every $`L(\theta'_2\cdot\zeta)`$ with $`\zeta`$ normal (index in the domain of $`L`$) is a point with no $`\le_1`$-predecessor that nothing below
+  reaches past. So $`\beta_0 \gt Z^{\mathrm{V}}`$, $`T_3^C \gt Z^{\mathrm{V}}`$, $`[0, Z^{\mathrm{V}}] \subseteq \mathrm{Core}(R_2^C)`$, and $`Z^{\mathrm{V}}`$ is an InaccPsi normal form with collapse arguments
+  below $`I_\omega`$. On the way: $`L(\theta'_2\cdot\Omega_2^\omega)`$, $`L(\theta'_2\cdot\varepsilon_{\Omega_2+1})`$, $`L(\theta'_2\cdot\varphi(\Omega_2, 1))`$. The two parts are recorded apart (m6):
+  $`(Z^{\mathrm{WW}}, L(\theta'_2\cdot\Omega_2^\omega)]`$ uses only the links by sums, and $`(L(\theta'_2\cdot\Omega_2^\omega), Z^{\mathrm{V}}]`$ also the links of Veblen codes. The $`R_2^S`$ side at $`Z^{\mathrm{V}}`$ is
+  conditional (not counted).
+- **CAP-0″ below $`Z^{\mathrm{V}}`$** (sharp form), and no long restart of level 3 is crossed below $`Z^{\mathrm{V}}`$ (proved, given FRAG); $`r(Z^{\mathrm{V}}) = \delta''_1(N) + \Gamma_{N+1}`$ with
+  $`N = L(\theta'_2\cdot\psi_{\Omega_3}(0)+\psi_{\Omega_2}(0))`$ (proved, given FRAG; an instance).
+- **Past $`Z^{\mathrm{V}}`$** (not counted): the multipliers with $`\psi_{\Omega_3}`$-atoms (a new step of the tier lemma, and offsets with $`\psi_{\Omega_2}`$-atoms) are open. Conjecture: the claim goes on
+  to $`L(\theta'_2\cdot\psi_{\Omega_3}(\Omega_3))`$. The first crossing of a long restart at the code $`G''(\theta'_3\cdot\omega^2)`$ is still a conjecture.
+
+### 3.2 $`R_2^S`$ on $`[0, Z^{\mathrm{WW}})`$, LB$`^{\mathrm{W}}`$, and the induction with caps only at $`Z^{\mathrm{W2}}`$ and $`Z^{\mathrm{WW}}`$
+
+Words as in §2.2; $`\lambda_{\mathrm{W}}`$ is the index of $`Z^{\mathrm{W}}`$.
+
+- **CAP$`^{\mathrm{W}}`$ and LB$`^{\mathrm{W}}`$** (proved, given FRAG; instances of §2.1 of the forty-fifth round, whose induction reaches past $`Z^{\mathrm{W}}`$). $`r(Z^{\mathrm{W}}) = \delta''_1(R''_1(F''_{Z^{\mathrm{W}}})) + 1`$,
+  and every $`b = L(\lambda_{\mathrm{W}} + G''(\omega^2)\cdot k)`$, $`k \ge 1`$, has $`r(b) = \delta''_1(R''_1(b)) + 1`$. So LB$`^{\mathrm{W}}`$ holds, and **B-1 is closed**. Minor: take the bound of the copy
+  above $`r(Z^{\mathrm{W}})`$, not only above $`Z^{\mathrm{W}}`$ (m3).
+- **The claim in $`R_2^S`$** (proved, given FRAG) on $`[0, Z^{\mathrm{WG}})`$ (S-COND$`^{\mathrm{W}}`$ with CAP$`^{\mathrm{W}}`$), on $`[0, Z^{\mathrm{W2}})`$ (S-FOLLOW at $`Z^{\mathrm{W2}}`$, from the part of §2.1 below
+  $`Z^{\mathrm{W2}}`$), and on $`[0, Z^{\mathrm{WW}})`$ (S-FOLLOW at $`Z^{\mathrm{WW}}`$, from the part above $`Z^{\mathrm{W2}}`$); Carlson's criterion holds below $`Z^{\mathrm{WW}}`$. With S-F2 of §2.2,
+  $`[0, Z^{\mathrm{W}})`$ has two proofs (2 reviews).
+- **BASE-TEST″ and the table of base points in $`(Z^{\mathrm{W}}, Z^{\mathrm{WW}}]`$** (proved): each base point's reach, its cap, the next $`\tau''`$-point and the next base point. Minor: "first" in one
+  sentence needs the skeleton below that point, or should go (m2); name $`P = \psi_{\Omega_2}(\Omega_\omega)`$ in one formula (m1).
+- **The induction with caps only, at the bases $`Z^{\mathrm{W2}}`$ and $`Z^{\mathrm{WW}}`$** (proved by transfer, given FRAG): $`\beta_0 \gt Z^{\mathrm{WWG}}`$, $`T_3^C \gt Z^{\mathrm{WWG}}`$ and the claim in $`R_2^C`$ on
+  $`[0, Z^{\mathrm{WWG}}]`$. It reads no value of $`r(Z^{\mathrm{WW}})`$. Since $`Z^{\mathrm{WWG}} \lt Z^{\mathrm{V}}`$, this is a second proof of $`(Z^{\mathrm{WW}}, Z^{\mathrm{WWG}}]`$.
+- **CAP$`^{\mathrm{W2}}`$** (proved, given FRAG; an instance of §2.1): $`r(Z^{\mathrm{W2}}) = \delta''_1(N) + N`$ with $`N = L(\theta'_2\cdot\Omega_2\cdot 2+\Omega_1\cdot 2)`$; with S-COND$`^{\mathrm{W2}}`$ it gives a second
+  proof of the claim in $`R_2^S`$ below $`L(\theta'_2\cdot\Omega_2\cdot 2+\omega^{G''(\omega^2)+1})`$.
+- **CAP$`^{\mathrm{WW}}`$** is a conjecture in this paper. Its value (i) is a row of ENUM-REACH″$`^{\mathrm{V}}`$ (§3.1); with S-COND$`^{\mathrm{WW}}`$ it would give the claim in $`R_2^S`$ past $`Z^{\mathrm{WW}}`$, but
+  this combination has not been refereed, so it is not counted. Record (m4): $`[0, Z^{\mathrm{W2}})`$ rests on the part of §2.1 that was read in full; $`[Z^{\mathrm{W2}}, Z^{\mathrm{WW}})`$ and
+  $`\beta_0 \gt Z^{\mathrm{WWG}}`$ rest on the part above $`Z^{\mathrm{W2}}`$, now also read in full (§3.1).
+
+### 3.3 Lean, stage 7: $`\Lambda_\varepsilon \lt \Omega_1`$, the restart blocks up to $`\Lambda_{\varepsilon\cdot 2}`$, and NU-CT
+
+- **Files.** Eight new modules of [R2/](R2/) (CitedCore, LamLt, EpsE, ORecE, BlkE, NestC, NuCT, OC2), and doc lines in ORec (n1, n3 of the audit of §2.3, and m5 of this audit; the code is unchanged).
+  **Two new axioms**, in CitedCore: Carlson 2009, Cor 15.15, used as "the core is a countable ordinal", and Lemma 15.11 with Thm 14.10 (1), used as "a pair with a pair nested inside exists". Now 51
+  axioms in six files; the main theorems use 50 of them. In the repository CitedCore also imports the file that defines $`\Omega_1`$: without it Lean read $`\Omega_1`$ in the first axiom as a free variable.
+  With it, the axiom says what the audit read. The whole library builds (green, no `sorry`). Details on [LEAN.md](LEAN.md).
+- **$`\Lambda_\varepsilon \lt \Omega_1`$** (`LamE_lt_Om1`): otherwise CORE-C of §2.3 would put every countable ordinal into the core. So BLK$`^O`$ and CORE-C hold at $`B = \Lambda_\varepsilon`$ itself.
+- **The term $`\varepsilon_{x+1}`$.** EXACT for $`\varepsilon_{x+1}`$ and $`\varepsilon_{x+1}+t`$ with no new axiom: the base change keeps $`\le_1`$, $`+`$ and $`\lt`$, and $`\alpha \gt 0`$ is an $`\varepsilon`$-number iff
+  $`\alpha \le_1 \alpha\cdot 2`$. Also IMG for $`\varepsilon_{x+1}+t`$ and $`\varepsilon_{x+1}\cdot 2`$, and RS for any target term.
+- **BLK$`^O`$ up to $`\Lambda_{\varepsilon\cdot 2}`$** (`blkE`). With the terms $`\varepsilon_{x+1}+t`$ added, the offset equals the $`O`$ of §2.3 below $`\Lambda_\varepsilon`$, and $`O(\Lambda_\varepsilon) = \varepsilon_{\rho+1}+1`$.
+  Let $`\Lambda_{\varepsilon+1}`$ and $`\Lambda_{\varepsilon\cdot 2}`$ be the least restart indices below which $`\varepsilon_{x+1}+1`$, resp. $`\varepsilon_{x+1}\cdot 2`$, is realized cofinally. Then
+  $`\Lambda_\varepsilon \lt \Lambda_{\varepsilon+1} \lt \Lambda_{\varepsilon\cdot 2} \lt \Omega_1`$, and (i)–(iii) of BLK$`^O`$ hold for every restart index $`B \le \Lambda_{\varepsilon\cdot 2}`$, with the exact reaches and CORE-C.
+- **The $`O`$ of [REACHES.md](REACHES.md) §1** (its only extra term is $`\varepsilon_{x+1}`$) gives the exact reach below $`\Lambda_{\varepsilon+1}`$, but not at $`\Lambda_{\varepsilon+1}`$: there it is at most
+  $`\varepsilon_{\rho+1}+1`$, while the reach is at least $`\delta + \varepsilon_{\rho+1}+2`$. No claim of the docs is changed (they use $`O`$ below $`\Lambda_\varepsilon`$ only).
+- **Toward $`\nu_C`$** (Lean's $`\nu_C`$: the least right end of a non-standard pair). $`T_C \lt \Omega_1`$ (with the new axioms), CAP at $`T_C`$, $`[0, T_C] \subseteq \mathrm{Core}(R_2^C)`$, and
+  $`\upsilon_{\Lambda_{\varepsilon\cdot 2}} \le \nu_C`$. **Theorem NU-CT in $`R_2^C`$**: $`\nu_C = T_C`$ (without the new axioms); the first non-standard pair is $`(\rho_L, \nu_C)`$ with $`\rho_L`$ a restart, and
+  $`\rho_L`$ is the only $`\lt_2`$-predecessor of $`\nu_C`$. **LIFT-0 at level 2**, the pair and reach clauses: every point $`\le_1 \nu_C`$ has reach $`\nu_C`$, and $`\rho_L \lt_2 \nu_C`$ is the only
+  $`\lt_2`$-relation with an end among them. **O$`^C`$ at level 2**: the $`\lt_1`$-predecessors of $`\rho_L`$ have order type $`\omega`$.
+- **The audit** re-ran each module alone and all together, and printed the axioms of all 97 theorems. No fatal and no blocking point. Both new axioms are faithful; the step that is ours (the
+  hypothesis of Cor 15.15 holds for $`(\mathrm{Ord}; 0, +, \le)`$, and the nested pattern is a pattern) is correct. Minor: say in CitedCore that Carlson's §15 assumes a finite language (m1, done); count
+  "51 axioms in six files" (m2); the shape clause of LIFT-0 is not stated in Lean (m3); there is no notation bound for $`\nu_C`$, only $`\nu_C \lt \Omega_1`$ (m4); one doc line is a paper-level claim (m5,
+  done); [REACHES.md](REACHES.md) §1 should say where its $`O`$ stops (m6, done); the theorem count (m7).
+
+### 3.4 Status after the forty-sixth round
+
+- **Wilken's claim in $`R_2^C`$**: both halves on $`[0, X_4]`$ without FRAG, and **on $`[0, Z^{\mathrm{V}}]`$ given FRAG** (1 review, §3.1; $`(Z^{\mathrm{W2}}, Z^{\mathrm{WW}}]`$ read in full in this round and at
+  its weakest steps before), with $`(Z^\Lambda, Z^{\mathrm{LG}}]`$, $`(Z^{\mathrm{FP}}, Z^{\mathrm{FPG}}]`$, $`(Z^{\mathrm{W}}, Z^{\mathrm{WG}}]`$ and $`(Z^{\mathrm{WW}}, Z^{\mathrm{WWG}}]`$ by two proofs (2 reviews). Above
+  $`Z^{\mathrm{V}}`$: not proved.
+- **Wilken's claim in $`R_2^S`$**: on $`[0, \upsilon_{\omega^3}]`$, and, given FRAG, **on $`[0, Z^{\mathrm{WW}})`$** (1 review, §3.2), with $`[0, Z^{\mathrm{W}})`$ by two proofs (2 reviews).
+  $`\beta_0 \gt Z^{\mathrm{V}}`$ given FRAG. (E) is open, and $`\beta_0`$ is not located.
+- **Reaches** (given FRAG): at level 3 $`r(b) = k''_b(o_b(c''))`$ for every restart below $`Z^{\mathrm{V}}`$; $`r(Z^{\mathrm{W}})`$, $`r(Z^{\mathrm{W2}})`$, $`r(Z^{\mathrm{WW}})`$ and $`r(Z^{\mathrm{V}})`$ as in §3.1, §3.2.
+- **LOW: false, given FRAG** ([SHIFT11.md](SHIFT11.md) §1.1, 1 review); not touched in this round. **$`\nu_3`$: not proved**; CAP-0″ holds below $`Z^{\mathrm{V}}`$.
+- **Lean**: as in §2.4, and now $`\Lambda_\varepsilon \lt \Omega_1`$, BLK$`^O`$ and CORE-C up to $`\Lambda_{\varepsilon\cdot 2}`$, $`T_C \lt \Omega_1`$, NU-CT in $`R_2^C`$ ($`\nu_C = T_C`$), and LIFT-0 and O$`^C`$ at level 2 (§3.3).
+- The lower-bound program below $`\theta_0`$: not worked on in this round ($`\iota(\mathrm{CH}_5) \ge \psi_{\Omega_1}(S_*)`$; past $`S_*`$ the conjecture LEX-SELF). The step below SRO: no change (done for every
+  $`n`$ on all 3,166 sample matrices; only the general statement for all standard matrices below SRO is open).
+
+### 3.5 Checks of the forty-sixth round
+
+Each run was under 60 seconds; none is a proof.
+
+- §3.1. The author: nine checks of names, normality, the domain of $`L`$, the order of the readings on 14,280 pairs, the tiers and the values, 0 failures. The referee: 360 offsets with 161 prefixes at three
+  bases above the range of the old domain lemmas, 57 cases of the domain step, and 300 multipliers at the boundary of normality (order on 22,350 pairs), 0 failures.
+- §3.2. The author: four runs on order, normal forms, domain, codes and literal forms, 0 failures. The referee: 670 restart points up to $`r(Z^{\mathrm{W}})`$ and 423 offsets at $`Z^{\mathrm{W2}}`$ and
+  $`Z^{\mathrm{WW}}`$, 0 failures (a first run of the second search had a bug in the referee's own pool).
+- §3.3. Lean: each of the eight modules alone and all together, green, and a false statement added at the end fails; the audit's own bundle with the axioms of all 97 theorems, green; the
+  repository build of the whole library is green, with no `sorry`, also with a guard that forbids free variables in the eight modules.
+
+### 3.6 Open
+
+- Above $`Z^{\mathrm{V}}`$: the multipliers with $`\psi_{\Omega_3}`$-atoms (the tier lemma and the offsets with $`\psi_{\Omega_2}`$-atoms; conjecture: up to $`L(\theta'_2\cdot\psi_{\Omega_3}(\Omega_3))`$), then
+  $`\psi_{\Omega_4}`$-atoms and the crossings of long restarts of level 3 (conjecture: first at the code $`G''(\theta'_3\cdot\omega^2)`$); then CAP-0″ up to $`L(\Omega_\omega)`$, CAP-1″, LONG-CLASS at level 4,
+  (H2$`^{\mathrm{cr}}`$), LEFT⁺ one level up, (H3), NU-CT$`_3`$ and $`\nu_3`$.
+- The claim above $`Z^{\mathrm{V}}`$ given FRAG in $`R_2^C`$ (above $`X_4`$ without FRAG), and above $`Z^{\mathrm{WW}}`$ in $`R_2^S`$ (CAP$`^{\mathrm{WW}}`$ with S-COND$`^{\mathrm{WW}}`$ needs a review; the
+  $`R_2^S`$ side at $`Z^{\mathrm{V}}`$ is conditional).
+- Lean, in order: $`\nu_C`$ is a restart; BLK$`^O`$ past $`\Lambda_{\varepsilon\cdot 2}`$; the closed values and the InaccPsi names of $`\Lambda_\varepsilon`$, $`\Lambda_{\varepsilon+1}`$, $`\Lambda_{\varepsilon\cdot 2}`$; LIFT-0 at every
+  level and O$`^C`$ from level 3; the value of $`\nu_C`$; the $`R_2^S`$ side.
 - $`R_2^S = R_2^C`$: (E), $`\beta_0`$, FAN-LOAD, and the converse for $`\le_1`$ at successor stages above $`\kappa_C`$.
 - Bounds for $`\iota(\mathrm{CH}_2)`$, $`m_F`$, $`x_F`$, $`f_0`$, $`m_3`$, $`c_0`$, and an upper bound for $`\iota(\mathrm{CH}_3)`$.
 - The first inaccessible (not worked on in this round): past $`S_*`$, capacities with $`\alpha \ge \Gamma_0`$ (conjecture LEX-SELF) or another way; then the tower of $`\Omega`$'s up to $`\theta_0`$; $`\mathrm{CH}_2`$ past

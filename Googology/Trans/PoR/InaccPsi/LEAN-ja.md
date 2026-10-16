@@ -1,14 +1,14 @@
 [← Back](README-ja.md) | [English](LEAN.md) | [Japanese](LEAN-ja.md)
 
-# Lean での $`R_2^+`$：$`R_2^C`$、核、FRAG、$`\Lambda_\varepsilon`$ までのやり直しのブロック
+# Lean での $`R_2^+`$：$`R_2^C`$、核、FRAG、$`\Lambda_{\varepsilon\cdot 2}`$ までのやり直しのブロック、NU-CT
 
-このページは、40 回目（[SHIFT10-ja.md](SHIFT10-ja.md) §3.3、段階 1）、41 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §1.3、段階 2）、42 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §2.3、段階 3）、43 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §3.3、段階 4）、44 回目（[SHIFT12-ja.md](SHIFT12-ja.md) §1.3、段階 5）、45 回目（[SHIFT12-ja.md](SHIFT12-ja.md) §2.3、段階 6）で足したディレクトリ [R2/](R2/)（名前空間
+このページは、40 回目（[SHIFT10-ja.md](SHIFT10-ja.md) §3.3、段階 1）、41 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §1.3、段階 2）、42 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §2.3、段階 3）、43 回目（[SHIFT11-ja.md](SHIFT11-ja.md) §3.3、段階 4）、44 回目（[SHIFT12-ja.md](SHIFT12-ja.md) §1.3、段階 5）、45 回目（[SHIFT12-ja.md](SHIFT12-ja.md) §2.3、段階 6）、46 回目（[SHIFT12-ja.md](SHIFT12-ja.md) §3.3、段階 7）で足したディレクトリ [R2/](R2/)（名前空間
 `Googology.Trans.PoR.InaccPsi.R2`）の Lean のファイルを説明する。どのファイルもライブラリ全体とともにモジュールとして作られる（`lake build`、緑、`sorry` 無し）。どちらの段階の監査も、
 どの公理も引いた論文に忠実で、どの定義も正しく、どの主な定理も Lean が証明していると認め、致命的な点も進行を止める点も見つけなかった。
 
 **これで何が変わるか。** ほかのページの $`\upsilon_{\omega\cdot\omega}`$ より上のほとんどの結果は「FRAG のもと」で述べている。FRAG は今は Lean の定理で、標準でない公理は Wilken の 2 本の論文
 から引いた 20 個の事実（とその論文の対象のための 7 個の定数）だけ。だから「FRAG のもと」は「この 20 個の引いた事実のもと」と読める。段階 2 は INC1、核についての Carlson の定理、定理 CP を足す。段階 3 は補題 L と、$`\upsilon_{\omega^3}`$ より下の $`R_2^C`$ の構造（最初の組、
-定理 B と TOP つきの B″、RS、SK3）を足す。段階 4 は順序数のやり直しの添字の上のやり直しのブロックを足す：補題 TOP$`_\lambda`$ と RS$`_\lambda`$、定理 BLK$`^\Xi`$、$`V_\omega(1)`$ より下で OFF-V の閉じた形つきの定理 BLK$`^O`$、$`V_\omega(1)`$ より下の CORE-C。新しい公理は無い。段階 5 は 5 個の引いた事実を足し、それを使って、$`\Lambda_\Gamma`$ までと $`\Phi_\Gamma`$ より下で、どの順序数の段でも定理 BLK$`^O`$、$`\Phi_\Gamma`$ より下の CORE-C を足す。段階 6 は新しい公理無しで、再帰的なずれ $`O`$ と $`\Lambda_\varepsilon`$ までのどのやり直しの添字でも定理 BLK$`^O`$、それらの添字 $`B`$ での $`\upsilon_B`$ より下の CORE-C、$`\nu_C`$ より下の届く先を使わない $`R_2^C`$ の SKEL⁺、$`T_C`$ での CAP を足す。公理は 5 つのファイル Cited、CitedR1、CitedC09、CitedL、CitedW にあり、全部で 49 個（定数 10 個と事実 39 個）。この数も、このページのどの公理の数も、
+定理 B と TOP つきの B″、RS、SK3）を足す。段階 4 は順序数のやり直しの添字の上のやり直しのブロックを足す：補題 TOP$`_\lambda`$ と RS$`_\lambda`$、定理 BLK$`^\Xi`$、$`V_\omega(1)`$ より下で OFF-V の閉じた形つきの定理 BLK$`^O`$、$`V_\omega(1)`$ より下の CORE-C。新しい公理は無い。段階 5 は 5 個の引いた事実を足し、それを使って、$`\Lambda_\Gamma`$ までと $`\Phi_\Gamma`$ より下で、どの順序数の段でも定理 BLK$`^O`$、$`\Phi_\Gamma`$ より下の CORE-C を足す。段階 6 は新しい公理無しで、再帰的なずれ $`O`$ と $`\Lambda_\varepsilon`$ までのどのやり直しの添字でも定理 BLK$`^O`$、それらの添字 $`B`$ での $`\upsilon_B`$ より下の CORE-C、$`\nu_C`$ より下の届く先を使わない $`R_2^C`$ の SKEL⁺、$`T_C`$ での CAP を足す。段階 7 は Carlson 2009 から 2 個の引いた事実を足し、それを使って、$`\Lambda_\varepsilon \lt \Omega_1`$、ずれの中の項 $`\varepsilon_{x+1}`$ と $`\Lambda_{\varepsilon\cdot 2}`$ までの定理 BLK$`^O`$、$`T_C \lt \Omega_1`$、段 2 での LIFT-0 と O$`^C`$ つきの $`R_2^C`$ での定理 NU-CT（$`\nu_C = T_C`$）を足す。公理は 6 つのファイル Cited、CitedR1、CitedC09、CitedL、CitedW、CitedCore にあり、全部で 51 個（定数 10 個と事実 41 個）。この数も、このページのどの公理の数も、
 Lean の 3 つの標準の公理 `propext`、`Classical.choice`、`Quot.sound` を除いている（だから `#print axioms` をそのまま見ると 3 個多い）。
 
 ## 1. ファイル
@@ -65,6 +65,14 @@ Lean の 3 つの標準の公理 `propext`、`Classical.choice`、`Quot.sound` �
 | [R2/OPhi.lean](R2/OPhi.lean) | $`\Phi_\Gamma`$ より下で $`O`$ は OffG2 の閉じた形と等しい。$`\Phi_\Gamma \lt \Lambda_\varepsilon`$。$`O(\Phi_\Gamma) = \Phi_\Gamma^2 + \Phi_\Gamma`$。$`\upsilon_{\Phi_\Gamma+\omega^2}`$ より下の BLK$`^O`$ と CORE-C | 引いたもの（46 個）+ C09 |
 | [R2/SkelC.lean](R2/SkelC.lean) | **$`\nu_C`$ より下の届く先を使わない $`R_2^C`$ の SKEL⁺**。標準の組、$`\nu_C`$、$`T_C`$。**CAP** | 引いたもの（32 個） |
 | [R2/SkelO.lean](R2/SkelO.lean) | $`B \le \Lambda_\varepsilon`$ のどのやり直しの添字でも $`\upsilon_B \le \nu_C`$。$`\Phi_\Gamma \lt \nu_C`$ | 引いたもの（46 個） |
+| [R2/CitedCore.lean](R2/CitedCore.lean) | 段階 7 の 2 個の公理（§2.6） | — |
+| [R2/LamLt.lean](R2/LamLt.lean) | $`\Lambda_\varepsilon \lt \Omega_1`$。$`B = \Lambda_\varepsilon`$ での BLK$`^O`$ と CORE-C | 引いたもの + Cor 15.15 |
+| [R2/EpsE.lean](R2/EpsE.lean) | $`\varepsilon_{x+1}`$ と $`\varepsilon_{x+1}+t`$ の **補題 EXACT**（新しい公理無し）。$`\varepsilon_{x+1}+t`$ と $`\varepsilon_{x+1}\cdot 2`$ の **補題 IMG**。どの行き先の項でもの **補題 RS** | 引いたもの |
+| [R2/ORecE.lean](R2/ORecE.lean) | 項の集合の上のずれ。項 $`\varepsilon_{x+1}+t`$ つきのずれと、[REACHES-ja.md](REACHES-ja.md) §1 の項の集合でのずれ。$`\Lambda_{\varepsilon+1}`$、$`\Lambda_{\varepsilon\cdot 2}`$ | 引いたもの |
+| [R2/BlkE.lean](R2/BlkE.lean) | 届く先と CORE-C つきの **$`\Lambda_{\varepsilon\cdot 2}`$ までの定理 BLK$`^O`$**。$`\Lambda_\varepsilon \lt \Lambda_{\varepsilon+1} \lt \Lambda_{\varepsilon\cdot 2} \lt \Omega_1`$。[REACHES-ja.md](REACHES-ja.md) §1 の $`O`$ が届く先でなくなる所 | 引いたもの + Cor 15.15 |
+| [R2/NestC.lean](R2/NestC.lean) | $`T_C \lt \Omega_1`$、$`T_C`$ での CAP、$`[0, T_C] \subseteq \mathrm{Core}(R_2^C)`$。$`\upsilon_{\Lambda_{\varepsilon\cdot 2}} \le \nu_C`$ | 引いたもの + 新しい 2 個 |
+| [R2/NuCT.lean](R2/NuCT.lean) | **$`R_2^C`$ での定理 NU-CT**：$`\nu_C = T_C`$。標準でない最初の組はやり直しから始まる | 引いたもの（$`\nu_C = T_C`$ に新しい公理は使わない） |
+| [R2/OC2.lean](R2/OC2.lean) | 段 2 での LIFT-0（組と届く先の項）。**段 2 での定理 O$`^C`$** | 引いたもの + 新しい 2 個 |
 
 [R2/Defs.lean](R2/Defs.lean) の 2 つの読みは Carlson の文と同じ意味で、そこで説明している：$`\le_2^\infty`$ の節 (c) と (d) は 1 つの被覆にする（有限集合の被覆は順序の同型）。「どの有限の構造」は
 関係つきの順序数の有限の閉じた集合の上を動く（どの有限の算術の構造もそのどれかと同型、Carlson 2009 の L.4.6 のあとの注意）。「$`c`$ より下に共終に多く」は狭い意味で読む（どの
@@ -160,6 +168,18 @@ $`\varepsilon`$ 数」と読む（[W07a] L.4.3）。新しい公理はどれも 
 監査は 5 個とも忠実と認め、前の公理と矛盾しないことも確かめた（`le1R_thm22` で $`\xi = \alpha`$ とすると `le1R_two_iff` になり、`le1R_lim_P` とも合う）。**[W07b] Thm 2.2 は主張だけを
 引く**：その証明は Wilken, AML 45 (2006) にあり、それは使わない。[W07a] の $`\Omega_1`$ は $`\tau`$ より大きい非可算の正則基数。ここでは Cited.lean と同じく $`\omega_1`$ と取る。
 `vt_wbar` は論文と同じくどの $`\alpha \lt \Omega_1`$ でも述べる（$`\vartheta_0`$ は $`\vartheta_1 \gt \Omega_1`$ の上の関数）。
+
+### 2.6 段階 7（[R2/CitedCore.lean](R2/CitedCore.lean)）
+
+| 公理 | 主張（短く） | 出どころ |
+|---|---|---|
+| `C09_cor15_15` | $`R_2^C`$ の核は、ある $`\kappa \lt \Omega_1`$ で $`[0, \kappa)`$ | Carlson 2009, Cor 15.15（「核は可算の順序数」としてだけ使う） |
+| `C09_nest` | $`x \le_2 y`$ と $`x' \le_2 y'`$ を満たす $`x \lt x' \lt y' \lt y`$ がある | Carlson 2009, Lemma 15.11 と Thm 14.10 (1)、1 つの型について |
+
+監査は 2 つとも忠実と認めた。Cor 15.15 は算術の構造が計算可能であることを仮定する。$`(\mathrm{Ord}; 0, +, \le)`$ でのこれは私たち自身の段階で、説明の行に書いてあり（増えていく
+直既約の和は増えない和に直り、そういう和は辞書式に比べられる）、監査が確かめた。`C09_nest` の型（中に組が入れ子になった組）は、Carlson 2009 の Def 5.6 と項目ごとに、「respects」は
+Carlson 2001 のもので照らし合わせた。どちらの公理も定義された $`R_2^C`$ についてだけ述べる。リポジトリでは CitedCore は $`\Omega_1`$ を定める Cited も import する。その行が無いと、Lean は
+`C09_cor15_15` の $`\Omega_1`$ を自由な変数と読んだ（監査のまとめではそれは見えていた）。自由な変数を禁じた build は新しい 8 個のモジュールで緑。
 
 ## 3. 定理
 
@@ -293,16 +313,41 @@ $`(\upsilon_{\mu+\omega\cdot(j+1)}, \upsilon_{\mu+\omega\cdot(j+1)+1})`$。$`T_C
 (n3) `reach_Orec` には余計な仮定 $`\lambda \lt \Omega_1`$ がある。(n4) [W07b] Thm 2.2 は段階 5 と同じく主張だけを引く。(n5) サーバが import をためているので確かめは数秒で終わる。CitedW と OffG2 の
 説明の行は今は段階 5 の監査の m2–m5 が求めたとおりに書いてある。コードは変わらない。
 
+**段階 7。** 新しい公理は 2 個（§2.6）。項の集合 $`S`$ の上のずれは、`OT` のかわりに $`S`$ を使って段階 6 と同じく定める。使う集合は 3 つ：`OT`（段階 6）、
+[REACHES-ja.md](REACHES-ja.md) §1 の項の集合（`OT` と項 $`\varepsilon_{x+1}`$。ずれ `OrecD`）、項 $`\varepsilon_{x+1}+t`$ を足した `OT`（ずれ `OrecE`）。$`\Lambda_{\varepsilon+1}`$（`LamE1`）と
+$`\Lambda_{\varepsilon\cdot 2}`$（`LamE2`）は、その下で $`\varepsilon_{x+1}+1`$、$`\varepsilon_{x+1}\cdot 2`$ がそれぞれ `OrecE` で共終に実現される最小のやり直しの添字（無ければ $`\Omega_1`$）。$`U_2`$ は
+$`u \le_1 \nu_C`$ を満たす $`u \le \nu_C`$ の集合で、$`\rho_L`$ は標準でない最初の組の左端。
+
+| 定理 | 主張 | 公理 |
+|---|---|---|
+| `LamE_lt_Om1`、`blkO_LamE`、`coreO_LamE` | $`\Lambda_\varepsilon \lt \Omega_1`$。$`B = \Lambda_\varepsilon`$ での BLK$`^O`$ と CORE-C | 引いたもの + Cor 15.15 |
+| `pi_eN`、`pi_eNt` | $`\varepsilon_{x+1}`$ と $`\varepsilon_{x+1}+t`$ の **補題 EXACT**（[W07b] Thm 2.2 の後の注意から：$`\alpha \gt 0`$ が $`\varepsilon`$ 数であるのは $`\alpha \le_1 \alpha\cdot 2`$ のとき、そのときだけ） | 引いたもの |
+| `ImgPkg.add`、`RstK.pkg_eNt`、`RstK.pkg_eN2`、`rs_rstF`、`rs_rstE` | $`\varepsilon_{x+1}+t`$ と $`\varepsilon_{x+1}\cdot 2`$ の **補題 IMG**。どの行き先の項でもの **補題 RS** | 引いたもの |
+| `OrecE_eq_Orec`、`OrecE_LamE` | `OrecE` は $`\Lambda_\varepsilon`$ より下で段階 6 の $`O`$ と等しい。$`O(\Lambda_\varepsilon) = \varepsilon_{\rho+1}+1`$ | 引いたもの |
+| `LamE_lt_LamE1`、`LamE1_lt_LamE2`、`LamE2_lt_Om1` | $`\Lambda_\varepsilon \lt \Lambda_{\varepsilon+1} \lt \Lambda_{\varepsilon\cdot 2} \lt \Omega_1`$ | 引いたもの + Cor 15.15 |
+| `blkE`、`reach_OrecE`、`coreE`、`blkE_LamE2` | **$`\Lambda_{\varepsilon\cdot 2}`$ までの定理 BLK$`^O`$**：$`B \le \Lambda_{\varepsilon\cdot 2}`$ のどのやり直しの添字でも (i)–(iii)、$`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + O(\lambda)`$ と CORE-C つき | 引いたもの + Cor 15.15 |
+| `reach_LamE` | $`\mathrm{lh}(\rho_{\Lambda_\varepsilon}) = \delta + \varepsilon_{\rho+1} + 1`$ | 引いたもの |
+| `OrecD_eq_OrecE`、`OrecE_LamE1`、`reach_LamE1` | [REACHES-ja.md](REACHES-ja.md) §1 の $`O`$ は $`\Lambda_{\varepsilon+1}`$ より下で届く先を与える。$`\Lambda_{\varepsilon+1}`$ では届く先は $`\delta + \varepsilon_{\rho+1} + 2`$ 以上で、その $`O`$ より大きい | 引いたもの |
+| `TnestC_lt_Om1`、`cap_TC`、`TC_lt_core`、`LamE2_le_nuC` | $`T_C \lt \Omega_1`$。仮定無しの $`T_C`$ での CAP。$`[0, T_C] \subseteq \mathrm{Core}(R_2^C)`$。$`\Lambda_{\varepsilon\cdot 2} \le \upsilon_{\Lambda_{\varepsilon\cdot 2}} \le \nu_C`$ | 引いたもの + 新しい 2 個 |
+| `nuC_eq_TnestC`、`pairs_cof_nuC` | **$`R_2^C`$ での定理 NU-CT**：$`\nu_C = T_C`$。標準でない最初の組は $`(\rho_L, \nu_C)`$ で $`\rho_L`$ はやり直し、$`\lt_2`$ の組は $`\nu_C`$ より下で共終 | 引いたもの（新しい公理無し） |
+| `reach_U2`、`left_unique`、`no_pair_U2` | **段 2 での LIFT-0** の組と届く先の項：$`U_2`$ のどの元も届く先は $`\nu_C`$。$`\rho_L`$ は $`\nu_C`$ のただ 1 つの $`\lt_2`$ の前の点で、$`U_2`$ に端を持つただ 1 つの $`\lt_2`$ の関係 | 引いたもの + 新しい 2 個 |
+| `oC2`、`level2` | **段 2 での定理 O$`^C`$**：$`\rho_L`$ の $`\lt_1`$ の前の点の順序型は $`\omega`$ | 引いたもの + 新しい 2 個 |
+
+監査は各モジュールを単独でとまとめて走らせ直し、97 個の定理（93 個と simp 補題 4 個）すべての公理を書き出した：51 個の引いた公理のうち 50 個（`le1R_limit` 以外）、`sorry` 無し。
+致命的な点も進行を止める点も無い。細かい点：CitedCore の説明の行に、Carlson の §15 が有限の言語を仮定することを書いた (m1)。「6 個のファイルに 51 個の公理」(m2)。LIFT-0 の形の項
+（$`U_2`$ は $`\rho_L`$ の $`\lt_1`$ の前の点と $`\rho_L`$ と $`\nu_C`$ からなる）は Lean の主張でない (m3)。$`\nu_C`$ には記法による上界が無く、$`\nu_C \lt \Omega_1`$ だけ (m4)。ORec の説明の行のうち、その $`O`$ が
+論文のものと違う所についての文は紙の上の主張と書いた (m5)。[REACHES-ja.md](REACHES-ja.md) §1 は今はその $`O`$ が届く先でなくなる所を書く (m6)。定理の数 (m7)。ORec の説明の行には段階 6 の
+監査の n1 と n3 も書いた。コードは変わらない。
+
 `frag` の定義域 $`D_m`$ は $`D_{m-1}`$ の閉包の中のパラメタを許す。これは論文の証明（[RESTARTS-ja.md](RESTARTS-ja.md) §1）の定義域を含むので、Lean の定理のほうが強い。基はすべて可算で、
 これらのページで使うのはその場合だけ。
 
 ## 4. まだ Lean に無いもの
 
-この順に（これらの段階の論文での証明はある。[SHIFT12-ja.md](SHIFT12-ja.md) §2.6 を見よ）：
+この順に（[SHIFT12-ja.md](SHIFT12-ja.md) §3.6 を見よ）：
 
-- $`\Lambda_\varepsilon \lt \Omega_1`$（紙の上にある、査読 1 回）。そして $`B = \Lambda_\varepsilon`$ での BLK$`^O`$。
-- $`\Lambda_\varepsilon`$ を越える BLK$`^O`$：$`\varepsilon_{x+1}`$ を越える項（$`\varepsilon_{x+2}`$、…、$`x`$ についてのヴェブレンの項）と、それについての EXACT と IMG。再帰的な $`O`$ は同じ。
-- $`\Phi_\Gamma`$ と $`\Lambda_\varepsilon`$ の間の $`O`$ の閉じた値（[REACHES-ja.md](REACHES-ja.md) の表の確かめとして）と、$`\Lambda_\varepsilon`$ の InaccPsi の名前。
-- $`\nu_C`$ の上からの評価（$`R_2^C`$ の標準でない組。$`T_C \lt \Omega_1`$ かは未解決）。それで SKEL⁺ と CAP が知られた最前線に届く。そして LIFT-0、定理 O$`^C`$（CP は用意できている）、NU-CT、
-  $`\nu_C`$ の値。
+- $`\nu_C`$ がやり直しであること。
+- $`\Lambda_{\varepsilon\cdot 2}`$ を越える BLK$`^O`$：$`x`$ についてのもっと多くの項（$`\varepsilon_{x+1}\cdot 2 + t`$、$`\varepsilon_{x+2}`$、…、$`x`$ についてのヴェブレンの項）と、それについての EXACT と IMG。
+- $`\Phi_\Gamma`$ と $`\Lambda_{\varepsilon\cdot 2}`$ の間の $`O`$ の閉じた値（[REACHES-ja.md](REACHES-ja.md) の表の確かめとして）と、$`\Lambda_\varepsilon`$、$`\Lambda_{\varepsilon+1}`$、$`\Lambda_{\varepsilon\cdot 2}`$ の InaccPsi の名前。
+- どの段でもの LIFT-0（形の項つき）、段 3 からの定理 O$`^C`$、$`\nu_C`$ の値（Lean にあるのは $`\nu_C \lt \Omega_1`$ だけ）。
 - $`R_2^S`$ の側は形式化していない。

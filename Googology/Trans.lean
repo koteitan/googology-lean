@@ -164,3 +164,11 @@ import Googology.Trans.PoR.InaccPsi.R2.ORec
 import Googology.Trans.PoR.InaccPsi.R2.OPhi
 import Googology.Trans.PoR.InaccPsi.R2.SkelC
 import Googology.Trans.PoR.InaccPsi.R2.SkelO
+import Googology.Trans.PoR.InaccPsi.R2.CitedCore
+import Googology.Trans.PoR.InaccPsi.R2.LamLt
+import Googology.Trans.PoR.InaccPsi.R2.EpsE
+import Googology.Trans.PoR.InaccPsi.R2.ORecE
+import Googology.Trans.PoR.InaccPsi.R2.BlkE
+import Googology.Trans.PoR.InaccPsi.R2.NestC
+import Googology.Trans.PoR.InaccPsi.R2.NuCT
+import Googology.Trans.PoR.InaccPsi.R2.OC2
