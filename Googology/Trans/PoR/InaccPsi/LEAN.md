@@ -1,14 +1,14 @@
 [← Back](README.md) | [English](LEAN.md) | [Japanese](LEAN-ja.md)
 
-# $`R_2^+`$ in Lean: $`R_2^C`$, the core, FRAG, the restart blocks up to $`\Lambda_{\varepsilon\cdot 2}`$, and NU-CT
+# $`R_2^+`$ in Lean: $`R_2^C`$, the core, FRAG, the restart blocks up to $`\Lambda_{\varepsilon\cdot\omega}`$, NU-CT, and LIFT-0 at every level
 
 This page describes the Lean files of the directory [R2/](R2/) (namespace `Googology.Trans.PoR.InaccPsi.R2`), added in the fortieth round ([SHIFT10.md](SHIFT10.md) §3.3, stage 1), the
-forty-first round ([SHIFT11.md](SHIFT11.md) §1.3, stage 2) the forty-second round ([SHIFT11.md](SHIFT11.md) §2.3, stage 3), the forty-third round ([SHIFT11.md](SHIFT11.md) §3.3, stage 4) the forty-fourth round ([SHIFT12.md](SHIFT12.md) §1.3, stage 5), the forty-fifth round ([SHIFT12.md](SHIFT12.md) §2.3, stage 6) and the forty-sixth round ([SHIFT12.md](SHIFT12.md) §3.3, stage 7). Every file builds as a module with the whole library (`lake build`, green, no `sorry`). The audit of each stage found every axiom
+forty-first round ([SHIFT11.md](SHIFT11.md) §1.3, stage 2) the forty-second round ([SHIFT11.md](SHIFT11.md) §2.3, stage 3), the forty-third round ([SHIFT11.md](SHIFT11.md) §3.3, stage 4) the forty-fourth round ([SHIFT12.md](SHIFT12.md) §1.3, stage 5), the forty-fifth round ([SHIFT12.md](SHIFT12.md) §2.3, stage 6) the forty-sixth round ([SHIFT12.md](SHIFT12.md) §3.3, stage 7) and the forty-seventh round ([SHIFT13.md](SHIFT13.md) §1.3, stage 8). Every file builds as a module with the whole library (`lake build`, green, no `sorry`). The audit of each stage found every axiom
 faithful to the paper it cites, every definition right, and every main theorem proved by Lean; it found no fatal and no blocking point.
 
 **What this changes.** Almost every result above $`\upsilon_{\omega\cdot\omega}`$ on the other pages is stated "given FRAG". FRAG is now a Lean theorem whose only non-standard axioms are 20
 facts cited from two papers of Wilken (and 7 constants for the objects of those papers). So "given FRAG" can be read as "given these 20 cited facts". The second stage adds INC1, Carlson's theorems on the core and Theorem CP. The third stage adds Lemma L and the structure of $`R_2^C`$ below $`\upsilon_{\omega^3}`$
-(the first pair, Theorems B and B″ with TOP, RS and SK3). The fourth stage adds the restart blocks over restart indices that are ordinals: Lemmas TOP$`_\lambda`$ and RS$`_\lambda`$, Theorem BLK$`^\Xi`$, Theorem BLK$`^O`$ with the closed form of OFF-V below $`V_\omega(1)`$, and CORE-C below $`V_\omega(1)`$, with no new axiom. The fifth stage adds five cited facts and, with them, Theorem BLK$`^O`$ at every ordinal level up to $`\Lambda_\Gamma`$ and below $`\Phi_\Gamma`$, and CORE-C below $`\Phi_\Gamma`$. The sixth stage adds, with no new axiom, the recursive offset $`O`$ with Theorem BLK$`^O`$ for every restart index up to $`\Lambda_\varepsilon`$ and CORE-C below $`\upsilon_B`$ for those indices $`B`$, SKEL⁺ in $`R_2^C`$ below $`\nu_C`$ without reaches, and CAP at $`T_C`$. The seventh stage adds two cited facts of Carlson 2009 and, with them, $`\Lambda_\varepsilon \lt \Omega_1`$, the term $`\varepsilon_{x+1}`$ in the offset with Theorem BLK$`^O`$ up to $`\Lambda_{\varepsilon\cdot 2}`$, $`T_C \lt \Omega_1`$, and Theorem NU-CT in $`R_2^C`$ ($`\nu_C = T_C`$) with LIFT-0 and O$`^C`$ at level 2. The axioms are in six files, Cited, CitedR1, CitedC09, CitedL, CitedW and CitedCore: 51 axioms in all (10 constants and 41 facts).
+(the first pair, Theorems B and B″ with TOP, RS and SK3). The fourth stage adds the restart blocks over restart indices that are ordinals: Lemmas TOP$`_\lambda`$ and RS$`_\lambda`$, Theorem BLK$`^\Xi`$, Theorem BLK$`^O`$ with the closed form of OFF-V below $`V_\omega(1)`$, and CORE-C below $`V_\omega(1)`$, with no new axiom. The fifth stage adds five cited facts and, with them, Theorem BLK$`^O`$ at every ordinal level up to $`\Lambda_\Gamma`$ and below $`\Phi_\Gamma`$, and CORE-C below $`\Phi_\Gamma`$. The sixth stage adds, with no new axiom, the recursive offset $`O`$ with Theorem BLK$`^O`$ for every restart index up to $`\Lambda_\varepsilon`$ and CORE-C below $`\upsilon_B`$ for those indices $`B`$, SKEL⁺ in $`R_2^C`$ below $`\nu_C`$ without reaches, and CAP at $`T_C`$. The seventh stage adds two cited facts of Carlson 2009 and, with them, $`\Lambda_\varepsilon \lt \Omega_1`$, the term $`\varepsilon_{x+1}`$ in the offset with Theorem BLK$`^O`$ up to $`\Lambda_{\varepsilon\cdot 2}`$, $`T_C \lt \Omega_1`$, and Theorem NU-CT in $`R_2^C`$ ($`\nu_C = T_C`$) with LIFT-0 and O$`^C`$ at level 2. The eighth stage adds one cited fact of Carlson 2009 (a nest of $`k`$ pairs exists for every $`k`$) and, with it and with no other new axiom, $`\nu_C`$ is a restart, Theorem BLK$`^O`$ up to $`\Lambda_{\varepsilon\cdot\omega}`$, $`\upsilon_{\Lambda_{\varepsilon\cdot\omega}} \le \rho_L`$, and LIFT-0 and O$`^C`$ at every level. The axioms are in seven files, Cited, CitedR1, CitedC09, CitedL, CitedW, CitedCore and CitedNest: 52 axioms in all (10 constants and 42 facts).
 These counts, and every count of axioms on this page, leave out Lean's three standard axioms `propext`, `Classical.choice`, `Quot.sound` (so a raw `#print axioms` lists three more).
 
 ## 1. The files
@@ -73,6 +73,14 @@ These counts, and every count of axioms on this page, leave out Lean's three sta
 | [R2/NestC.lean](R2/NestC.lean) | $`T_C \lt \Omega_1`$, CAP at $`T_C`$, $`[0, T_C] \subseteq \mathrm{Core}(R_2^C)`$; $`\upsilon_{\Lambda_{\varepsilon\cdot 2}} \le \nu_C`$ | cited + both new |
 | [R2/NuCT.lean](R2/NuCT.lean) | **Theorem NU-CT in $`R_2^C`$**: $`\nu_C = T_C`$; the first non-standard pair starts at a restart | cited (no new axiom for $`\nu_C = T_C`$) |
 | [R2/OC2.lean](R2/OC2.lean) | LIFT-0 at level 2 (the pair and reach clauses); **Theorem O$`^C`$ at level 2** | cited + both new |
+| [R2/NuRst.lean](R2/NuRst.lean) | $`\nu_C`$ is a restart; $`\mathrm{lh}(\rho_L) = \nu_C`$; $`U_2 = \mathrm{Pred}_1(\rho_L) \cup \{\rho_L, \nu_C\}`$ | cited + `C09_nest` |
+| [R2/EpsM.lean](R2/EpsM.lean) | **Lemma EXACT**, IMG and RS for the terms $`\varepsilon_{x+1}\cdot n + t`$ | cited |
+| [R2/BlkGen.lean](R2/BlkGen.lean) | the block theorem for any term function with its own Lemma RS; the specification of stage 7 is an instance; $`\rho_L \ge \upsilon_B`$ for every specification up to $`B`$ | cited |
+| [R2/ORecM.lean](R2/ORecM.lean) | the offset over the terms $`\varepsilon_{x+1}\cdot(m+1)+t`$; $`\Lambda_{\varepsilon\cdot\omega}`$; **Theorem BLK$`^O`$ up to $`\Lambda_{\varepsilon\cdot\omega}`$** with the reaches and CORE-C; $`\Lambda_{\varepsilon\cdot\omega} \lt \Omega_1`$ | cited + Cor 15.15 |
+| [R2/LamVal.lean](R2/LamVal.lean) | the offsets at $`\Lambda_\varepsilon`$, $`\Lambda_{\varepsilon+1}`$, $`\Lambda_{\varepsilon\cdot 2}`$, $`\Lambda_{\varepsilon\cdot\omega}`$; $`\upsilon_{\Lambda_{\varepsilon\cdot\omega}} \le \rho_L \lt \nu_C \lt \Omega_1`$ | cited + both of stage 7 |
+| [R2/NestK.lean](R2/NestK.lean) | $`k`$-nests and $`T_k`$; for a given nest: NEST-UP, $`T_k \lt \Omega_1`$, CAP at $`T_k`$, the core, **LIFT-0 and Theorem O$`^C`$ at level $`k`$**; $`T_2 = \nu_C`$ | Carlson 2009 only (≤ 3) |
+| [R2/CitedNest.lean](R2/CitedNest.lean) | the axiom of stage 8 (§2.7) | — |
+| [R2/LiftK.lean](R2/LiftK.lean) | LIFT-0 and O$`^C`$ at every level without hypothesis; $`T_1 \lt T_2 \lt T_3 \lt \dots \lt \Omega_1`$ | Carlson 2009 only (4) |
 
 Two readings in [R2/Defs.lean](R2/Defs.lean) are equivalent to Carlson's text and are explained there: clauses (c) and (d) of $`\le_2^\infty`$ are one covering (a covering of finite sets is the order
 isomorphism), and "any finite structure" ranges over finite closed sets of ordinals with relations (every finite arithmetic structure is isomorphic to one, Carlson 2009, remark after L.4.6).
@@ -180,6 +188,16 @@ The audit found both faithful. Cor 15.15 assumes that the arithmetic structures 
 indecomposables reduces to a non-increasing sum, and such sums compare lexicographically), and the audit checked it. The pattern of `C09_nest` (a pair with a pair nested inside) is checked
 against Carlson 2009, Def 5.6, item by item, with "respects" from Carlson 2001. Both axioms speak only of the defined $`R_2^C`$. In the repository CitedCore also imports Cited, where $`\Omega_1`$ is
 defined; without that line Lean read $`\Omega_1`$ in `C09_cor15_15` as a free variable (the audit's bundle had it in scope). A build with free variables forbidden is green on the eight new modules.
+
+### 2.7 Stage 8 ([R2/CitedNest.lean](R2/CitedNest.lean))
+
+| axiom | statement (short) | source |
+|---|---|---|
+| `C09_nestk` | for every $`k`$ there is a $`k`$-nest: $`a_0 \lt \dots \lt a_{k-1} \lt b_{k-1} \lt \dots \lt b_0`$ with $`a_i \le_2 b_i`$ | Carlson 2009, Lemma 15.11 with Thm 14.10 (1), for the pattern of $`k`$ nested pairs |
+
+The audit found it faithful. The step that is ours, that the structure of $`k`$ nested pairs is a pattern (Carlson 2009, Def 5.6, items 1–7, with "respects" from Carlson 2001), is written in
+the doc line and was checked item by item. The axiom speaks only of the defined $`R_2^C`$, and `C09_nest` of §2.6 is its case $`k = 2`$ (both are kept). The theorems of stage 8 use 51 of the 52
+axioms (not `le1R_limit`). Every Cited\* file builds with free variables forbidden (`autoImplicit false`), and a control axiom with a free variable fails.
 
 ## 3. The theorems
 
@@ -340,15 +358,41 @@ fatal and no blocking point. Its minor points: the doc line of CitedCore now say
 its $`O`$ differs from the paper's is now marked as a paper-level statement (m5); [REACHES.md](REACHES.md) §1 now says where its $`O`$ stops being the reach (m6); the theorem count (m7). The doc lines of
 ORec also carry n1 and n3 of the audit of stage 6; the code is unchanged.
 
+**Stage 8.** One new axiom (§2.7). $`\varepsilon = \varepsilon_{\rho+1}`$ at the restart in question. The offset `OrecM` is the offset over `OT` with the terms $`\varepsilon_{x+1}\cdot(m+1)+t`$, and
+$`\Lambda_{\varepsilon\cdot\omega}`$ (`LamEw`) is the least restart index below which $`\varepsilon_{x+1}\cdot j`$ is realized cofinally for every $`j \lt \omega`$ ($`\Omega_1`$ if there is none). A $`k`$-nest (`NestSeq`) is
+$`a_0 \lt \dots \lt a_{k-1} \lt b_{k-1} \lt \dots \lt b_0`$ with $`a_i \le_2 b_i`$, $`T_k`$ (`Tk`) is the least top $`b_0`$ ($`\Omega_1`$ if there is none), $`x = a_0`$ and $`U = \{u \le T_k : u \le_1 T_k\}`$. In the
+repository nine names of BlkGen carry the suffix `Gen` (`RsInGen`, `OffSpecGen`, `good_allGen`, `good_BGen`, `rstGen`, `rs_allGen`, `reach_allGen`, `blk_genGen`, `core_genGen`), because BlkG has the same
+names; the audit read them without the suffix.
+
+| theorem | statement | axioms |
+|---|---|---|
+| `nuC_restart`, `nuC_reach`, `level2_restart` | $`\nu_C`$ is a restart $`\rho_\xi`$; $`\mathrm{lh}(\rho_L) = \nu_C`$ | cited (38) |
+| `U2_shape`, `U2_gap` | $`U_2 = \mathrm{Pred}_1(\rho_L) \cup \{\rho_L, \nu_C\}`$ (m3 of the audit of stage 7) | cited (5) |
+| `pi_eNm`, `pi_eMt`, `RstK.pkg_eNm`, `RstK.pkg_eMt`, `rs_rstM` | **Lemma EXACT**, IMG and RS for $`\varepsilon_{x+1}\cdot n + t`$ | cited |
+| `blk_genGen`, `core_genGen`, `left_ge_of_spec` | BLK$`^O`$ and CORE-C for any term function with its own RS; $`\rho_L \ge \upsilon_B`$ | cited |
+| `OrecM_eq_OrecE`, `OrecM_LamE2`, `OrecE_lt_OrecM_LamE2` | `OrecM` equals the offset of stage 7 below $`\Lambda_{\varepsilon\cdot 2}`$; $`O(\Lambda_{\varepsilon\cdot 2}) = \varepsilon\cdot 2+1`$, where the offset of stage 7 stops being the reach | cited |
+| `blkM`, `coreM`, `reach_OrecM`, `LamEw_lt_Om1`, `OrecM_LamEw` | **Theorem BLK$`^O`$ up to $`\Lambda_{\varepsilon\cdot\omega}`$** with $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + O(\lambda)`$ and CORE-C; $`\Lambda_{\varepsilon\cdot\omega} \lt \Omega_1`$; $`O(\Lambda_{\varepsilon\cdot\omega}) = \varepsilon\cdot\omega`$ | cited + Cor 15.15 |
+| `lam_chain`, `lam_values`, `lam_reaches` | $`\Lambda_\varepsilon \lt \Lambda_{\varepsilon+1} \lt \Lambda_{\varepsilon\cdot 2} \lt \Lambda_{\varepsilon\cdot\omega} \lt \Omega_1`$; the offsets $`\varepsilon+1`$, $`\varepsilon+2`$, $`\varepsilon\cdot 2+1`$, $`\varepsilon\cdot\omega`$ there | cited + Cor 15.15 |
+| `left_ge_LamEw`, `nuC_bound` | $`\upsilon_{\Lambda_{\varepsilon\cdot\omega}} \le \rho_L \lt \nu_C \lt \Omega_1`$ | cited + both of stage 7 |
+| `nest_up`, `Tk_lt_Om1`, `cap_Tk`, `Tk_core` | for a given $`k`$-nest: NEST-UP; $`T_k \lt \Omega_1`$; CAP at $`T_k`$; $`[0, T_k] \subseteq \mathrm{Core}(R_2^C)`$ | Carlson 2009 (≤ 3) |
+| `succ_x`, `pred_T`, `noLeft_below`, `noRight_U`, `gap_empty`, `U_shape`, `reach_U`, `nests_below`, `Tk_lt_mem` | **LIFT-0 at level $`k`$**: the pair, shape, reach and gap clauses, and $`T_{k-1} \lt s_k`$ | Carlson 2009 (≤ 3) |
+| `oC`, `Tk_lt_succ`, `Tk_two` | **Theorem O$`^C`$ at level $`k`$**; $`T_k \lt T_{k+1}`$; $`T_2 = \nu_C`$ | Carlson 2009 (3); `Tk_two` cited (35) |
+| `liftK`, `Tk_lt_Om1_all`, `Tk_strictMono` | with `C09_nestk`: LIFT-0 and O$`^C`$ at every level; $`T_1 \lt T_2 \lt \dots \lt \Omega_1`$ | Carlson 2009 (4) |
+
+The audit rebuilt the bundle of the eight modules, ran it (green, no warning, no `sorry`) and printed the axioms of all 116 theorems: 51 of the 52 cited axioms, all in the Cited\* files. It found no
+fatal and no blocking point. Its minor points: `liftK_two` does not use `C09_nestk` (n1); `C09_nest` is the case $`k = 2`$ of `C09_nestk` (n2, now said in the doc line of LiftK); the doc line
+"$`x_k = \upsilon^k_\omega`$, $`T_k = \upsilon^k_{\omega+1}`$" of LiftK is in the notation of these pages, not a Lean statement (n3, now said there); the InaccPsi names of $`\Lambda_{\varepsilon+1}`$, $`\Lambda_{\varepsilon\cdot 2}`$,
+$`\Lambda_{\varepsilon\cdot\omega}`$ are derived on paper only and stay a conjecture (n4).
+
 The domain $`D_m`$ of `frag` allows parameters in the closure of $`D_{m-1}`$; it contains the domain of the paper proof ([RESTARTS.md](RESTARTS.md) §1), so the Lean theorem is stronger. All bases
 are countable, which is the only case used on these pages.
 
 ## 4. Not yet in Lean
 
-In order (see [SHIFT12.md](SHIFT12.md) §3.6):
+In order (see [SHIFT13.md](SHIFT13.md) §1.6):
 
-- $`\nu_C`$ is a restart.
-- BLK$`^O`$ past $`\Lambda_{\varepsilon\cdot 2}`$: more terms in $`x`$ ($`\varepsilon_{x+1}\cdot 2 + t`$, $`\varepsilon_{x+2}`$, …, Veblen terms in $`x`$) with EXACT and IMG for them.
-- The closed values of $`O`$ between $`\Phi_\Gamma`$ and $`\Lambda_{\varepsilon\cdot 2}`$ (as a check of the table of [REACHES.md](REACHES.md)), and the InaccPsi names of $`\Lambda_\varepsilon`$, $`\Lambda_{\varepsilon+1}`$ and $`\Lambda_{\varepsilon\cdot 2}`$.
-- LIFT-0 at every level (with its shape clause), Theorem O$`^C`$ from level 3 on, and the value of $`\nu_C`$ (only $`\nu_C \lt \Omega_1`$ is in Lean).
+- BLK$`^O`$ at $`\Lambda_{\varepsilon\cdot\omega}`$ and past it: EXACT and IMG for the atom $`\omega^{\varepsilon+1}`$ (with $`\varepsilon`$ as a base of its own), then $`\varepsilon_{x+2}`$ and the Veblen terms in $`x`$.
+- The InaccPsi names of $`\Lambda_\varepsilon`$, $`\Lambda_{\varepsilon+1}`$, $`\Lambda_{\varepsilon\cdot 2}`$ and $`\Lambda_{\varepsilon\cdot\omega}`$ (Lean has no link from InaccPsi to $`\upsilon`$ yet; the last three names are derived on paper only).
+- The rest of LIFT-0: the closure of $`[0, s_k)`$ under reaches, the reaches in the gaps, and Theorem SH.
+- The value of $`\nu_C`$: a notation bound (target $`L(\omega+1)`$); Lean has only $`\upsilon_{\Lambda_{\varepsilon\cdot\omega}} \le \rho_L \lt \nu_C \lt \Omega_1`$.
 - The $`R_2^S`$ side is not formalized.

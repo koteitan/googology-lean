@@ -218,3 +218,29 @@ It is now written (row T2b2).
 | CAP$`^{\mathrm{W2}}`$: $`r(Z^{\mathrm{W2}})`$ | proved, given FRAG |
 | CAP$`^{\mathrm{WW}}`$; the claim in $`R_2^S`$ past $`Z^{\mathrm{WW}}`$ from it | conjecture (its value (i) is a row of ENUM-REACH″$`^{\mathrm{V}}`$); the combination is not refereed, not counted |
 | $`\nu_3`$; LEFT⁺ one level up, CAP-1″, LONG-CLASS at level 4, (H2$`^{\mathrm{cr}}`$) | open |
+
+**Later (the forty-seventh round):** the row $`r(Z^{\mathrm{V}})`$ above is conditional as proved there (its proof reads a reach above $`Z^{\mathrm{V}}`$, outside the range of the induction; B-1 of
+the review of [SHIFT13.md](SHIFT13.md) §1.2); the value is proved again by ENUM-REACH″$`^\theta`$. CAP$`^{\mathrm{WW}}`$ is proved (next table).
+
+**The table of the forty-seventh round** ([SHIFT13.md](SHIFT13.md) §1.1, §1.2; each result 1 review unless a count is given; a multiplier is a $`\zeta \lt \theta_2 = \psi_{\Omega_3}(\Omega_\omega)`$, and
+$`\theta = \psi_{\Omega_2}(\Omega_\omega)`$):
+
+| result | status after the forty-seventh round |
+|---|---|
+| DOWN″, CMAX and the criterion for the domain of $`L`$ at every index (m1 of the review of the forty-sixth round) | proved, without FRAG |
+| THETA″$`^\theta`$: the tier lemma and the reading $`o_b(G''(\zeta)) = L(\lambda''+1+R''_b(\zeta))`$ for every normal multiplier, onto the offsets below $`\theta`$ | proved, without FRAG |
+| EXACT-GS⁺ | proved, without FRAG |
+| the links of every code below $`\theta`$; the far pins with threshold $`\theta`$ (below the endpoint $`L(\lambda''+\theta)`$) | proved, given FRAG |
+| ENUM-REACH″$`^\theta`$ below $`Z^\theta`$, with $`r(Z^{\mathrm{V}})`$ and $`r(Z^\Phi)`$ | proved by transfer, given FRAG |
+| Theorem C$`^{\theta\sharp}`$; the claim in $`R_2^C`$ on $`[0, Z^\theta]`$, $`\beta_0 \gt Z^\theta`$, $`T_3^C \gt Z^\theta`$ | proved by transfer, given FRAG; $`(Z^{\mathrm{V}}, Z^\Phi]`$ uses only the tier of the $`\Gamma`$-atoms, $`(Z^\Phi, Z^{\mathrm{E}}]`$ also EXACT-GS⁺ |
+| CAP-0″ below $`Z^\theta`$ (sharp form); no long restart crossed below $`Z^\theta`$ | proved, given FRAG |
+| PLATEAU″-3, ALIGN″, HN″, MONO″ (without constants); LONG-FIRST″ as an implication | proved |
+| THETA″$`^{\mathrm{READ}}`$; the claim up to $`L(\theta'_2\cdot\theta'_2)`$ | conjecture |
+| the pins at links of codes in $`[\theta, P')`$; $`r(Z^\theta)`$ | open |
+| CAP$`^{\mathrm{WW}}`$: $`r(Z^{\mathrm{WW}})`$, $`r(Z^{\mathrm{WWG}})`$ and the restarts between | proved, given FRAG |
+| the claim in $`R_2^S`$ on $`[0, Z^{\mathrm{WWG}})`$, $`[0, L(\theta'_2\cdot\Omega_2^\omega))`$ and $`[0, Z^{\mathrm{V}})`$; Carlson's criterion below $`Z^{\mathrm{V}}`$ | proved, given FRAG; 2 reviews for $`[0, Z^{\mathrm{WW}})`$ |
+| BASE-TEST″$`^{\mathrm{V}}`$, NEXT-BASE″$`^{\mathrm{V}}`$ and the table of base points in $`(Z^{\mathrm{WW}}, Z^{\mathrm{V}})`$ | proved |
+| the induction with caps only at the base $`Z^{\mathrm{V}}`$: $`\beta_0 \gt Z^{\mathrm{VG}}`$, the claim in $`R_2^C`$ on $`[0, Z^{\mathrm{VG}}]`$ | proved by transfer, given FRAG; with C$`^{\theta\sharp}`$, 2 reviews for $`(Z^{\mathrm{V}}, Z^{\mathrm{VG}}]`$ |
+| the claim in $`R_2^S`$ on $`[0, L(\lambda_{\mathrm{V}}+G''(\omega^2)))`$, $`Z^{\mathrm{V}} \in \mathrm{Core}(R_2^S)`$ | not proved (blocking point B-1: it used $`r(Z^{\mathrm{V}})`$ from outside the range of an induction); with ENUM-REACH″$`^\theta`$ the combination is not refereed, not counted |
+| CAP$`^{\mathrm{V}}`$ (ii) | conjecture |
+| $`\nu_3`$; LEFT⁺ one level up, CAP-1″, LONG-CLASS at level 4, (H2$`^{\mathrm{cr}}`$) | open |

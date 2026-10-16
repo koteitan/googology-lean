@@ -172,3 +172,11 @@ import Googology.Trans.PoR.InaccPsi.R2.BlkE
 import Googology.Trans.PoR.InaccPsi.R2.NestC
 import Googology.Trans.PoR.InaccPsi.R2.NuCT
 import Googology.Trans.PoR.InaccPsi.R2.OC2
+import Googology.Trans.PoR.InaccPsi.R2.NuRst
+import Googology.Trans.PoR.InaccPsi.R2.EpsM
+import Googology.Trans.PoR.InaccPsi.R2.BlkGen
+import Googology.Trans.PoR.InaccPsi.R2.ORecM
+import Googology.Trans.PoR.InaccPsi.R2.LamVal
+import Googology.Trans.PoR.InaccPsi.R2.NestK
+import Googology.Trans.PoR.InaccPsi.R2.CitedNest
+import Googology.Trans.PoR.InaccPsi.R2.LiftK

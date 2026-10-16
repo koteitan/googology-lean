@@ -2,7 +2,7 @@
 
 # $`R_2^+`$ の 44〜46 回目：$`R_2^C`$ で $`Z^{\mathrm{V}}`$ まで、$`R_2^S`$ で $`Z^{\mathrm{WW}}`$ までの主張、$`L_3(\omega)`$ でのブロック、Lean で $`R_2^C`$ の $`\Lambda_{\varepsilon\cdot 2}`$ までのやり直しのブロックと NU-CT
 
-このページは [SHIFT11-ja.md](SHIFT11-ja.md) の続き（そこの §3 が 43 回目）。§1 が 44 回目、§2 が 45 回目、§3 が 46 回目。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
+このページは [SHIFT11-ja.md](SHIFT11-ja.md) の続き（そこの §3 が 43 回目）。§1 が 44 回目、§2 が 45 回目、§3 が 46 回目。47 回目は [SHIFT13-ja.md](SHIFT13-ja.md)。状態の言葉は [README-ja.md](README-ja.md) §3 のもの：**証明済み** とは、独立した査読者が、
 致命的な点も進行を止める点も無しに証明されていると認めたこと。致命的な点か進行を止める点があるものは **未証明** に挙げる。証明書は再生されたものだけを数える。
 査読者が、知られたことか目標そのものの言い直しにすぎないと言った結果は、進みとして数えない。
 
@@ -365,7 +365,8 @@ $`\zeta`$ の読み $`R''_b(\zeta)`$ は、その形で $`\Omega_2`$ を $`\Omeg
   途中に $`L(\theta'_2\cdot\Omega_2^\omega)`$、$`L(\theta'_2\cdot\varepsilon_{\Omega_2+1})`$、$`L(\theta'_2\cdot\varphi(\Omega_2, 1))`$。2 つの部分は分けて記録する (m6)：$`(Z^{\mathrm{WW}}, L(\theta'_2\cdot\Omega_2^\omega)]`$ は
   和によるつなぎだけを使い、$`(L(\theta'_2\cdot\Omega_2^\omega), Z^{\mathrm{V}}]`$ はヴェブレンの符号のつなぎも使う。$`Z^{\mathrm{V}}`$ での $`R_2^S`$ の側は条件つき（数えない）。
 - **鋭い形の $`Z^{\mathrm{V}}`$ より下の CAP-0″**。$`Z^{\mathrm{V}}`$ より下では段 3 の長いやり直しはまたがれない（証明済み、FRAG のもと）。
-  $`N = L(\theta'_2\cdot\psi_{\Omega_3}(0)+\psi_{\Omega_2}(0))`$ で $`r(Z^{\mathrm{V}}) = \delta''_1(N) + \Gamma_{N+1}`$（証明済み、FRAG のもと。例として）。
+  $`N = L(\theta'_2\cdot\psi_{\Omega_3}(0)+\psi_{\Omega_2}(0))`$ で $`r(Z^{\mathrm{V}}) = \delta''_1(N) + \Gamma_{N+1}`$（例として。この証明は $`N \gt Z^{\mathrm{V}}`$ の届く先、つまり帰納法の範囲の外を読むので、
+  ここでは条件つき：[SHIFT13-ja.md](SHIFT13-ja.md) §1.2 の査読の B-1。値は 47 回目に証明された、[SHIFT13-ja.md](SHIFT13-ja.md) §1.1）。
 - **$`Z^{\mathrm{V}}`$ より先**（数えない）：$`\psi_{\Omega_3}`$ の原子を持つ乗数（段の補題の新しい一歩と、$`\psi_{\Omega_2}`$ の原子を持つずれ）は未解決。予想：主張は
   $`L(\theta'_2\cdot\psi_{\Omega_3}(\Omega_3))`$ まで続く。長いやり直しの最初のまたぎが符号 $`G''(\theta'_3\cdot\omega^2)`$ で起こるかは予想のまま。
 
@@ -386,7 +387,7 @@ $`\zeta`$ の読み $`R''_b(\zeta)`$ は、その形で $`\Omega_2`$ を $`\Omeg
 - **CAP$`^{\mathrm{W2}}`$**（証明済み、FRAG のもと。§2.1 の例）：$`N = L(\theta'_2\cdot\Omega_2\cdot 2+\Omega_1\cdot 2)`$ で $`r(Z^{\mathrm{W2}}) = \delta''_1(N) + N`$。S-COND$`^{\mathrm{W2}}`$ とあわせ、
   $`R_2^S`$ で $`L(\theta'_2\cdot\Omega_2\cdot 2+\omega^{G''(\omega^2)+1})`$ より下での主張の 2 つ目の証明になる。
 - **CAP$`^{\mathrm{WW}}`$** はこの論文では予想。その値 (i) は ENUM-REACH″$`^{\mathrm{V}}`$ の 1 行（§3.1）。S-COND$`^{\mathrm{WW}}`$ とあわせると $`R_2^S`$ で $`Z^{\mathrm{WW}}`$ を越える主張が出るはずだが、
-  この組み合わせは査読されていないので数えない。記録 (m4)：$`[0, Z^{\mathrm{W2}})`$ は §2.1 の全部を読まれた部分に頼る。$`[Z^{\mathrm{W2}}, Z^{\mathrm{WW}})`$ と $`\beta_0 \gt Z^{\mathrm{WWG}}`$ は
+  この組み合わせは査読されていないので数えない。**のちに（47 回目、[SHIFT13-ja.md](SHIFT13-ja.md) §1.2）：** CAP$`^{\mathrm{WW}}`$ は証明され、$`R_2^S`$ での主張は $`[0, Z^{\mathrm{V}})`$ で成り立つ。記録 (m4)：$`[0, Z^{\mathrm{W2}})`$ は §2.1 の全部を読まれた部分に頼る。$`[Z^{\mathrm{W2}}, Z^{\mathrm{WW}})`$ と $`\beta_0 \gt Z^{\mathrm{WWG}}`$ は
   $`Z^{\mathrm{W2}}`$ より上の部分に頼り、それも今は全部を読まれた（§3.1）。
 
 ### 3.3 Lean、段階 7：$`\Lambda_\varepsilon \lt \Omega_1`$、$`\Lambda_{\varepsilon\cdot 2}`$ までのやり直しのブロック、NU-CT
@@ -427,6 +428,8 @@ $`\zeta`$ の読み $`R''_b(\zeta)`$ は、その形で $`\Omega_2`$ を $`\Omeg
 - $`\theta_0`$ より下の下からの評価の計画：この回は扱っていない（$`\iota(\mathrm{CH}_5) \ge \psi_{\Omega_1}(S_*)`$。$`S_*`$ より先は予想 LEX-SELF）。SRO より下の段階：変化なし（3,166 個の見本の
   行列すべてでどの $`n`$ でも済み。SRO より下のすべての標準の行列についての一般の主張だけが未解決）。
 
+後で：[SHIFT13-ja.md](SHIFT13-ja.md) §1.4。
+
 ### 3.5 46 回目の確かめ
 
 どの実行も 60 秒未満。どれも証明ではない。
@@ -439,6 +442,8 @@ $`\zeta`$ の読み $`R''_b(\zeta)`$ は、その形で $`\Omega_2`$ を $`\Omeg
   ライブラリ全体の build は緑で、`sorry` 無し。8 個のモジュールで自由な変数を禁じる見張りをつけても緑。
 
 ### 3.6 未解決
+
+後で：今の一覧は [SHIFT13-ja.md](SHIFT13-ja.md) §1.6。
 
 - $`Z^{\mathrm{V}}`$ より上：$`\psi_{\Omega_3}`$ の原子を持つ乗数（段の補題と、$`\psi_{\Omega_2}`$ の原子を持つずれ。予想：$`L(\theta'_2\cdot\psi_{\Omega_3}(\Omega_3))`$ まで）、そして $`\psi_{\Omega_4}`$ の原子と、
   段 3 の長いやり直しのまたぎ（予想：最初は符号 $`G''(\theta'_3\cdot\omega^2)`$ で）。そして $`L(\Omega_\omega)`$ までの CAP-0″、CAP-1″、段 4 の LONG-CLASS、(H2$`^{\mathrm{cr}}`$)、1 つ上の LEFT⁺、(H3)、

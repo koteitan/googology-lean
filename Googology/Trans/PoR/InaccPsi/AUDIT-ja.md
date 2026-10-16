@@ -218,3 +218,28 @@ $`[\psi_{\Omega_2}(\Omega_2), P')`$ にあるときの LONG-RS$`^U`$（R-1）：
 | CAP$`^{\mathrm{W2}}`$：$`r(Z^{\mathrm{W2}})`$ | 証明済み、FRAG のもと |
 | CAP$`^{\mathrm{WW}}`$。そこからの $`R_2^S`$ で $`Z^{\mathrm{WW}}`$ を越える主張 | 予想（その値 (i) は ENUM-REACH″$`^{\mathrm{V}}`$ の 1 行）。組み合わせは査読されていない。数えない |
 | $`\nu_3`$。1 つ上の LEFT⁺、CAP-1″、段 4 の LONG-CLASS、(H2$`^{\mathrm{cr}}`$) | 未解決 |
+
+**のちに（47 回目）：** 上の行 $`r(Z^{\mathrm{V}})`$ は、そこでの証明のままでは条件つき（証明が $`Z^{\mathrm{V}}`$ より上の届く先、つまり帰納法の範囲の外を読む。
+[SHIFT13-ja.md](SHIFT13-ja.md) §1.2 の査読の B-1）。値は ENUM-REACH″$`^\theta`$ でもう一度証明された。CAP$`^{\mathrm{WW}}`$ は証明された（次の表）。
+
+**47 回目の表**（[SHIFT13-ja.md](SHIFT13-ja.md) §1.1、§1.2。回数を書いていなければ査読 1 回。乗数とは $`\zeta \lt \theta_2 = \psi_{\Omega_3}(\Omega_\omega)`$、$`\theta = \psi_{\Omega_2}(\Omega_\omega)`$）：
+
+| 結果 | 47 回目のあとの状態 |
+|---|---|
+| どの添字でもの DOWN″、CMAX、$`L`$ の定義域の判定（46 回目の査読の m1） | FRAG 無しで証明済み |
+| THETA″$`^\theta`$：どの正規な乗数でも段の補題と、$`\theta`$ より下のずれの上への読み $`o_b(G''(\zeta)) = L(\lambda''+1+R''_b(\zeta))`$ | FRAG 無しで証明済み |
+| EXACT-GS⁺ | FRAG 無しで証明済み |
+| $`\theta`$ より下のどの符号のつなぎ。しきい値 $`\theta`$ の遠い留め（端の点 $`L(\lambda''+\theta)`$ より下） | 証明済み、FRAG のもと |
+| $`Z^\theta`$ より下の ENUM-REACH″$`^\theta`$、$`r(Z^{\mathrm{V}})`$ と $`r(Z^\Phi)`$ つき | 移しで証明済み、FRAG のもと |
+| 定理 C$`^{\theta\sharp}`$。$`R_2^C`$ で $`[0, Z^\theta]`$ での主張、$`\beta_0 \gt Z^\theta`$、$`T_3^C \gt Z^\theta`$ | 移しで証明済み、FRAG のもと。$`(Z^{\mathrm{V}}, Z^\Phi]`$ は $`\Gamma`$ の原子の層だけを使い、$`(Z^\Phi, Z^{\mathrm{E}}]`$ は EXACT-GS⁺ も使う |
+| 鋭い形の $`Z^\theta`$ より下の CAP-0″。$`Z^\theta`$ より下で長いやり直しはまたがれない | 証明済み、FRAG のもと |
+| PLATEAU″-3、ALIGN″、HN″、MONO″（定数無し）。含意としての LONG-FIRST″ | 証明済み |
+| THETA″$`^{\mathrm{READ}}`$。$`L(\theta'_2\cdot\theta'_2)`$ までの主張 | 予想 |
+| $`[\theta, P')`$ の符号のつなぎでの留め。$`r(Z^\theta)`$ | 未解決 |
+| CAP$`^{\mathrm{WW}}`$：$`r(Z^{\mathrm{WW}})`$、$`r(Z^{\mathrm{WWG}})`$ とその間のやり直し | 証明済み、FRAG のもと |
+| $`R_2^S`$ で $`[0, Z^{\mathrm{WWG}})`$、$`[0, L(\theta'_2\cdot\Omega_2^\omega))`$、$`[0, Z^{\mathrm{V}})`$ での主張。$`Z^{\mathrm{V}}`$ より下の Carlson の判定 | 証明済み、FRAG のもと。$`[0, Z^{\mathrm{WW}})`$ は査読 2 回 |
+| BASE-TEST″$`^{\mathrm{V}}`$、NEXT-BASE″$`^{\mathrm{V}}`$ と $`(Z^{\mathrm{WW}}, Z^{\mathrm{V}})`$ の基の点の表 | 証明済み |
+| 基 $`Z^{\mathrm{V}}`$ で蓋だけを読む帰納法：$`\beta_0 \gt Z^{\mathrm{VG}}`$、$`R_2^C`$ で $`[0, Z^{\mathrm{VG}}]`$ での主張 | 移しで証明済み、FRAG のもと。C$`^{\theta\sharp}`$ とあわせ $`(Z^{\mathrm{V}}, Z^{\mathrm{VG}}]`$ は査読 2 回 |
+| $`R_2^S`$ で $`[0, L(\lambda_{\mathrm{V}}+G''(\omega^2)))`$ での主張、$`Z^{\mathrm{V}} \in \mathrm{Core}(R_2^S)`$ | 証明されていない（進行を止める点 B-1：帰納法の範囲の外から $`r(Z^{\mathrm{V}})`$ を使った）。ENUM-REACH″$`^\theta`$ との組み合わせは査読されていない。数えない |
+| CAP$`^{\mathrm{V}}`$ (ii) | 予想 |
+| $`\nu_3`$。1 つ上の LEFT⁺、CAP-1″、段 4 の LONG-CLASS、(H2$`^{\mathrm{cr}}`$) | 未解決 |
