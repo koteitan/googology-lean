@@ -34,6 +34,9 @@ Every notation gets the same goals. They are defined exactly in chapter 1 of [sp
 
 A map sending each state to the ordinal it names.
 
+- state: one object of the notation, the thing that is expanded. A matrix for BMS and DBMS, a sequence for the Y sequence and ω-Y, a term for extended Buchholz's ψ.
+- state order: the order on the states that the notation defines itself, without the map to the ordinals. The lexicographic order of sequences for primitive sequences and one-row DBMS, the lexicographic order of [koteitan/pss-proof](https://github.com/koteitan/pss-proof) for pair sequences, the blockwise lexicographic order for two-row DBMS, and the order on terms for extended Buchholz's ψ.
+
 | notation | defined | injective | surjective | decreases on expansion | cofinal | equals the rank | order-preserving |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | BMS with at most 2 rows | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -75,8 +78,6 @@ flowchart LR
   dec --> and1
   cof --> and1
   and1 -->|Eval.Cofinal.rank_eq| rank
-  rank -->|Eval.cofinal_of_rank_eq| cof
-  rank -->|rank_lt_of_rel| dec
   dec -->|Eval.wf| wf
   ord --> and2
   tri --> and2
@@ -91,6 +92,7 @@ flowchart LR
 ```
 
 - When every arrow into an "and" holds, the arrow out of it holds. An arrow's label is its theorem.
+- Conversely, a map that equals the rank decreases on expansion (`IsWellFounded.rank_lt_of_rel` in mathlib) and is cofinal (`Eval.cofinal_of_rank_eq`). So "equals the rank" is equivalent to "decreases on expansion and cofinal". The diagram leaves out these backward arrows.
 - Solid arrows are general theorems that any notation can use (`Googology/Cofinal.lean`, `Googology/Core/Morphism.lean`, `Trans/BMS/ExBuchholz/PSS/Rank.lean`, mathlib).
 - Dashed arrows are how cofinality was proved for primitive and pair sequences (`primEval_cofinal`, `pairOrdEval_cofinal`): an ordinal below the value is the value of a state by surjectivity, that state is below the original one by order preservation, and the notation's cofinal fundamental sequences put it under one expansion step. This is not one general theorem.
 - Well-foundedness is a property of the notation (the first table). A trichotomous or well-ordered state order, and cofinal fundamental sequences, are properties that are not columns of the tables.

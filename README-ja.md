@@ -32,6 +32,9 @@ koteitan と Phyrion による形式証明のリンク集は [portal/](portal/RE
 
 各状態に、それが名指す順序数を割り当てる写像。
 
+- 状態：表記の 1 つ 1 つのもので、展開する対象そのもの。BMS・DBMS では行列、Y 数列・ω-Y では数列、拡張ブーフホルツ ψ では項。
+- 状態の順序：表記の側で、順序数への写像を使わずに定義した、状態どうしの大小。原始数列と 1 行の DBMS では列の辞書式順序、ペア数列では [koteitan/pss-proof](https://github.com/koteitan/pss-proof) の辞書式順序、2 行の DBMS ではブロックごとの辞書式順序、拡張ブーフホルツ ψ では項の順序。
+
 | 表記 | 定義 | 単射性 | 全射性 | 展開で値が下がる | 共終性 | 階数と一致 | 順序を保つ |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | 2 行以下の BMS | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
@@ -73,8 +76,6 @@ flowchart LR
   dec --> and1
   cof --> and1
   and1 -->|Eval.Cofinal.rank_eq| rank
-  rank -->|Eval.cofinal_of_rank_eq| cof
-  rank -->|rank_lt_of_rel| dec
   dec -->|Eval.wf| wf
   ord --> and2
   tri --> and2
@@ -89,6 +90,7 @@ flowchart LR
 ```
 
 - 「かつ」に入る矢印をすべて満たすと、出る矢印の先が成り立つ。矢印の名前はその定理である。
+- 逆に、階数と一致すれば、展開で値が下がり（mathlib の `IsWellFounded.rank_lt_of_rel`）、共終性も成り立つ（`Eval.cofinal_of_rank_eq`）。つまり「階数と一致」は「展開で値が下がる かつ 共終性」と同値である。図では、この逆向きの矢印を省いている。
 - 実線は、どの表記にも使える一般の定理である（`Googology/Cofinal.lean`、`Googology/Core/Morphism.lean`、`Trans/BMS/ExBuchholz/PSS/Rank.lean`、mathlib）。
 - 点線は、原始数列とペア数列で共終性を示したときの証明の筋である（`primEval_cofinal`、`pairOrdEval_cofinal`）。値より小さい順序数を全射性で状態に戻し、順序を保つことで元の状態より小さいと分かり、表記の基本列の共終性で一回の展開の下に入れる。一つの一般の定理にはなっていない。
 - 整礎性は表記の性質（一つ目の表）、状態の順序が三分律・整列順序であることと、表記の基本列の共終性は、表の列ではない性質である。
