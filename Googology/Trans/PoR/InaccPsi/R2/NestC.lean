@@ -8,8 +8,10 @@ import Googology.Trans.PoR.InaccPsi.R2.SkelC
 pair nested inside (PS) in `R₂^C` (`TnestC`, `Ω₁` if there is none), and `ν_C` the least right end of a
 non-standard `<₂`-pair (`nuC`); `ν_C ≤ T_C` (`nuC_le_TnestC`).
 
-* `nest_core`: some realization of PS lies in the core of `R₂^C` ([C09] Lemma 15.11 with Theorem 14.10
-  (1), `C09_nest`, then Theorem 14.10 (1), (3) for a finite closed substructure, `C09_thm14_10`);
+* `C09_nest` (a pair with a pair nested inside exists: the case `k = 2` of the cited fact `C09_nestk`,
+  [C09] Lemma 15.11 with Theorem 14.10 (1));
+* `nest_core`: some realization of PS lies in the core of `R₂^C` (`C09_nest`, then Theorem 14.10 (1),
+  (3) for a finite closed substructure, `C09_thm14_10`);
 * `TnestC_lt_Om1` (**`T_C < Ω₁`**; the core is countable, [C09] Cor 15.15), `PS_TnestC` (`T_C` is
   attained), `cap_TC` (**Lemma CAP at `T_C`** without hypothesis: no `α ≤ T_C` is `≤₁` a point
   `> T_C`), `TC_lt_core` (`[0, T_C] ⊆ Core(R₂^C)`), `nuC_lt_Om1`;
@@ -22,6 +24,13 @@ non-standard `<₂`-pair (`nuC`); `ν_C ≤ T_C` (`nuC_le_TnestC`).
 namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal Order
+
+/-- **A pair with a pair nested inside** exists in `R₂^C`: `x < x' < y' < y` with `x ≤₂ y` and `x' ≤₂ y'`.
+The case `k = 2` of `C09_nestk` (`x = a₀`, `x' = a₁`, `y' = b₁`, `y = b₀`). -/
+theorem C09_nest : ∃ x x' y' y : Ordinal.{0}, x < x' ∧ x' < y' ∧ y' < y ∧ le2 x y ∧ le2 x' y' := by
+  obtain ⟨a, b, h1, h2⟩ := C09_nestk 2
+  exact ⟨a 0, a 1, b 1, b 0, (h1 0 (by omega)).1, (h2 1 (by omega)).1, (h1 0 (by omega)).2,
+    (h2 0 (by omega)).2, (h2 1 (by omega)).2⟩
 
 /-- A realization of PS that lies in the core of `R₂^C`. -/
 theorem nest_core : ∃ x x' y' y, PSReal x x' y' y ∧ y ∈ Core R2C := by

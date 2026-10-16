@@ -243,3 +243,26 @@ $`[\psi_{\Omega_2}(\Omega_2), P')`$ にあるときの LONG-RS$`^U`$（R-1）：
 | $`R_2^S`$ で $`[0, L(\lambda_{\mathrm{V}}+G''(\omega^2)))`$ での主張、$`Z^{\mathrm{V}} \in \mathrm{Core}(R_2^S)`$ | 証明されていない（進行を止める点 B-1：帰納法の範囲の外から $`r(Z^{\mathrm{V}})`$ を使った）。ENUM-REACH″$`^\theta`$ との組み合わせは査読されていない。数えない |
 | CAP$`^{\mathrm{V}}`$ (ii) | 予想 |
 | $`\nu_3`$。1 つ上の LEFT⁺、CAP-1″、段 4 の LONG-CLASS、(H2$`^{\mathrm{cr}}`$) | 未解決 |
+
+**のちに（48 回目）：** 上の表の、$`Z^{\mathrm{V}}`$ を越える $`R_2^S`$ の行（進行を止める点 B-1）は閉じた：CAP$`^{\mathrm{V}}`$ は ENUM-REACH″$`^\theta`$ の場合として証明され、その帰納法は
+$`Z^{\mathrm{V}}`$ の窓を覆う。$`r(Z^\theta)`$ と $`[\theta, P')`$ の符号のつなぎは証明された（次の表）。
+
+**48 回目の表**（[SHIFT13-ja.md](SHIFT13-ja.md) §2.1、§2.2。回数を書いていなければ査読 1 回。$`\Phi^{P'} = \psi_{\Omega_2}(\Omega_\omega\cdot 2+\Omega_2)`$）：
+
+| 結果 | 48 回目のあとの状態 |
+|---|---|
+| SHIFT$`^K`$（定数つきの段のずらし）。引数の上界。どの基でも $`\Phi^{P'}`$ より下のずれでの $`L`$ の定義域。空の平らな所 $`[\zeta^*, \Omega_3)`$（$`\zeta^* = \psi_{\Omega_3}(\Omega_\omega\cdot 2+\Omega_3)`$） | FRAG 無しで証明済み |
+| THETA″$`^{\Omega_3}`$：$`\Omega_3`$ より下のどの正規な乗数でも、$`\Phi^{P'}`$ より下のずれの上への読み | FRAG 無しで証明済み |
+| $`[\theta, P')`$ のどの符号のつなぎ（相対的な遠い留めを 1 段上げたもの）。47 回目の端点 $`\theta`$ も含む | 移しで証明済み、FRAG のもと |
+| $`[P', \Phi^{P'})`$ のどの符号のつなぎ（L-PIN と勝手な像での H-RC） | 移しで証明済み、FRAG のもと |
+| $`Z^{\Omega_3}`$ より下の ENUM-REACH″$`^{\Omega_3}`$。$`r(Z^\theta)`$、$`r(N^\theta)`$、$`r(Z^{\theta'})`$ | 移しで証明済み、FRAG のもと |
+| 定理 C$`^{\Omega_3\sharp}`$。$`R_2^C`$ で $`[0, Z^{\Omega_3}]`$ での主張、$`\beta_0 \gt Z^{\Omega_3}`$、$`T_3^C \gt Z^{\Omega_3}`$ | 移しで証明済み、FRAG のもと。$`[0, Z^{\theta'}]`$ は $`[P', \Phi^{P'})`$ の符号のつなぎ無しで |
+| $`Z^{\Omega_3}`$ より下の CAP-0″。$`Z^{\Omega_3}`$ より下で長いやり直しはまたがれない | 証明済み、FRAG のもと |
+| $`[\Omega_3, \theta'_3\cdot\omega^2]`$ での THETA″$`^{\mathrm{READ}}`$。次の最前線 $`\psi_{\Omega_1}(\Omega_\omega\cdot 2+\omega^{\theta'_3+2})`$ | 予想 |
+| $`[\Phi^{P'}, G''(\omega^2))`$ の符号のつなぎ | 未解決 |
+| CAP$`^{\mathrm{V}}`$：$`r(Z^{\mathrm{V}})`$、$`r(Z^{\mathrm{VG}})`$ とその間のやり直し（B-1 は閉じた） | 証明済み、FRAG のもと |
+| $`R_2^S`$ で $`Z^{\mathrm{V}} \in \mathrm{Core}(R_2^S)`$ つきの $`[0, Z^{\mathrm{VG}})`$ と、$`[0, Z^\theta)`$ での主張。$`Z^\theta`$ より下の Carlson の判定 | 証明済み、FRAG のもと。$`[0, Z^{\mathrm{V}})`$ は査読 2 回 |
+| BASE-TEST″$`^\theta`$、NEXT-BASE″$`^\theta`$、FIRST-LL と $`(Z^{\mathrm{V}}, Z^\theta)`$ の基の点の表 | 証明済み |
+| 基 $`Z^\theta`$ で蓋だけを読む帰納法：$`\beta_0 \gt Z^{\theta\mathrm{G}}`$、$`R_2^C`$ で $`[0, Z^{\theta\mathrm{G}}]`$ での主張 | 移しで証明済み、FRAG のもと。C$`^{\Omega_3\sharp}`$ とあわせ $`(Z^\theta, Z^{\theta\mathrm{G}}]`$ は査読 2 回 |
+| S-COND$`^\theta`$（窓の届く先から $`Z^\theta`$ を越える $`R_2^S`$ での主張） | 含意として証明済み。$`r(Z^\theta)`$ との組み合わせは査読されていないので数えない |
+| $`\nu_3`$。1 つ上の LEFT⁺、CAP-1″、段 4 の LONG-CLASS、(H2$`^{\mathrm{cr}}`$) | 未解決 |

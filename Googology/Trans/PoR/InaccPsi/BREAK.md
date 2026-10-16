@@ -238,7 +238,8 @@ $`C_\tau(z)`$ is the closure of $`\{0, \tau, z\}`$ under Cantor normal form part
 
 For $`k \ge 1`$ let $`T_k`$ be the least top of a $`k`$-nest, $`x_k`$ the least outer left end of a $`k`$-nest with top $`T_k`$,
 $`U_k = \{u \in (0, T_k] : u \le_1 T_k\}`$ and $`s_k = \min U_k`$. So $`(s_1, x_1, T_1) = (\upsilon_1, \upsilon_\omega, \upsilon_{\omega+1})`$, and $`(s_2, x_2, T_2) = (m_0, a_0, \nu)`$
-of §2 (in $`R_2^C`$, $`T_2 = \nu_C`$ by NU-CT). $`T_\omega = \sup_k T_k`$.
+of §2 (in $`R_2^C`$, $`T_2 = \nu_C`$ by NU-CT). $`T_\omega = \sup_k T_k`$. **In Lean** ($`R_2^C`$): LIFT-0 and O$`^C`$ at every level
+([SHIFT13.md](SHIFT13.md) §1.3), and the remaining clauses below (closure under reaches, reaches in the gaps, $`s_k`$; §2.3 there).
 
 - **Theorem LIFT-0** (proved, 1 review; $`R_2^S`$ and $`R_2^C`$, every $`k`$, no hypothesis). The first block of level $`k`$ has the shape of the
   first block $`[\upsilon_1, \upsilon_{\omega+1}]`$ of level 1:
@@ -324,6 +325,8 @@ of §4 (by SKEL$`^\omega`$ below); level 2 starts with $`(s_2, x_2, T_2) = (m_0,
 that is $`a \le_1 b+1`$. $`(x_L, y_L)`$ is the least long pair, and $`m_L = \min\{m : m \le_1 x_L\}`$.
 
 ### 7.1 The structure below $`T_\omega`$ (LIFT-REC restated)
+
+In Lean ($`R_2^C`$) only the block shape of Theorem SH is proved ([SHIFT13.md](SHIFT13.md) §2.3): "exactly one $`\lt_2`$-predecessor" is proved only among the points above $`\xi`$.
 
 - **Lemma DEEP** (proved, 1 review; $`R_2^S`$ and $`R_2^C`$). If $`x \lt_2 y`$ and $`\mathrm{lh}(x) \gt y`$, then $`(x, y)`$ is the outer pair of a
   $`k`$-nest for every $`k`$.

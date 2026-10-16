@@ -1,4 +1,4 @@
-import Googology.Trans.PoR.InaccPsi.R2.CitedNest
+import Googology.Trans.PoR.InaccPsi.R2.NestK
 
 /-!
 # LIFT-0 and Theorem O^C at every level of `R₂^C`
@@ -16,7 +16,7 @@ results of `R2.NestK` hold for every level `k = m + 1` without hypothesis:
   `T_{k-1} < T_k`), so `T_{k-1} < s_k = min U_k`);
 * `liftK_two` (at `k = 2` the top is `ν_C`; it does not use `C09_nestk`).
 
-`C09_nest` of `R2.CitedCore` is the case `k = 2` of `C09_nestk` (via `nest2_iff`); both axioms are kept.
+`C09_nestk` is an axiom of `R2.CitedCore`; its case `k = 2` is the theorem `C09_nest` of `R2.NestC`.
 
 [C09] T. J. Carlson, "Patterns of resemblance of order 2", APAL 158 (2009) 90–124.
 -/

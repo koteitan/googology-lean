@@ -3,7 +3,8 @@ import Googology.Trans.PoR.InaccPsi.R2.NuRst
 /-!
 # `k`-nests in `R₂^C`: the first block of every level (LIFT-0) and Theorem O^C at every level
 
-A **`k`-nest** is `a₀ < a₁ < ⋯ < a_{k-1} < b_{k-1} < ⋯ < b₀` with `aᵢ <₂ bᵢ` (`NestSeq k a b`); its top is
+A **`k`-nest** is `a₀ < a₁ < ⋯ < a_{k-1} < b_{k-1} < ⋯ < b₀` with `aᵢ <₂ bᵢ` (`NestSeq k a b`, defined in
+`R2.NestDef`); its top is
 `b₀`, its outer left end `a₀`.  `T_k` (`Tk k`) is the least top of a `k`-nest (`Ω₁` if there is none).
 Fix a `(m+1)`-nest `(a, b)` with top `T = T_{m+1}` and outer left end `x = a₀`, and let
 `U = {u ≤ T : u ≤₁ T}`.  Everything below holds for a given nest, with no new axiom.
@@ -36,10 +37,6 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 open Ordinal Order
 
 /-! ## `k`-nests -/
-
-/-- **A `k`-nest**: `a 0 < ⋯ < a (k-1) < b (k-1) < ⋯ < b 0` with `a i <₂ b i`. -/
-def NestSeq (k : ℕ) (a b : ℕ → Ordinal.{0}) : Prop :=
-  (∀ i, i + 1 < k → a i < a (i + 1) ∧ b (i + 1) < b i) ∧ (∀ i, i < k → a i < b i ∧ le2 (a i) (b i))
 
 /-- The points of a `k`-nest. -/
 noncomputable def nestPts (k : ℕ) (a b : ℕ → Ordinal.{0}) : Finset Ordinal.{0} :=

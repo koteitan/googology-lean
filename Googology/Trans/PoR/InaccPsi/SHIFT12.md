@@ -2,7 +2,7 @@
 
 # $`R_2^+`$, the forty-fourth to forty-sixth rounds: the claim in $`R_2^C`$ up to $`Z^{\mathrm{V}}`$ and in $`R_2^S`$ up to $`Z^{\mathrm{WW}}`$, the block at $`L_3(\omega)`$, and in Lean the restart blocks of $`R_2^C`$ up to $`\Lambda_{\varepsilon\cdot 2}`$ and NU-CT
 
-This page continues [SHIFT11.md](SHIFT11.md) (§3 there is the forty-third round); §1 is the forty-fourth round, §2 the forty-fifth and §3 the forty-sixth; the forty-seventh round is on [SHIFT13.md](SHIFT13.md). The status words are those of [README.md](README.md) §3: **proved** means that
+This page continues [SHIFT11.md](SHIFT11.md) (§3 there is the forty-third round); §1 is the forty-fourth round, §2 the forty-fifth and §3 the forty-sixth; the forty-seventh and forty-eighth rounds are on [SHIFT13.md](SHIFT13.md). The status words are those of [README.md](README.md) §3: **proved** means that
 an independent referee found the result proved with no fatal or blocking point. A statement with a fatal or blocking point against it is listed under **Not proved**.
 A certificate counts only when it was replayed. A result that the referee calls only a restatement of something known, or of the target, is not counted as progress.
 
@@ -378,7 +378,7 @@ of level 3, the reading of $`\zeta`$ at $`b`$ is $`R''_b(\zeta)`$: replace $`\Om
   conditional (not counted).
 - **CAP-0″ below $`Z^{\mathrm{V}}`$** (sharp form), and no long restart of level 3 is crossed below $`Z^{\mathrm{V}}`$ (proved, given FRAG); $`r(Z^{\mathrm{V}}) = \delta''_1(N) + \Gamma_{N+1}`$ with
   $`N = L(\theta'_2\cdot\psi_{\Omega_3}(0)+\psi_{\Omega_2}(0))`$ (an instance; this proof reads the reach of $`N \gt Z^{\mathrm{V}}`$, outside the range of the induction, so here it is conditional: B-1 of
-  the review of [SHIFT13.md](SHIFT13.md) §1.2; the value is proved in the forty-seventh round, [SHIFT13.md](SHIFT13.md) §1.1).
+  the review of [SHIFT13.md](SHIFT13.md) §1.2; the value is proved in the forty-seventh round, [SHIFT13.md](SHIFT13.md) §1.1, and is CAP$`^{\mathrm{V}}`$ (i) of the forty-eighth round, §2.2 there).
 - **Past $`Z^{\mathrm{V}}`$** (not counted): the multipliers with $`\psi_{\Omega_3}`$-atoms (a new step of the tier lemma, and offsets with $`\psi_{\Omega_2}`$-atoms) are open. Conjecture: the claim goes on
   to $`L(\theta'_2\cdot\psi_{\Omega_3}(\Omega_3))`$. The first crossing of a long restart at the code $`G''(\theta'_3\cdot\omega^2)`$ is still a conjecture.
 
@@ -399,7 +399,7 @@ Words as in §2.2; $`\lambda_{\mathrm{W}}`$ is the index of $`Z^{\mathrm{W}}`$.
 - **CAP$`^{\mathrm{W2}}`$** (proved, given FRAG; an instance of §2.1): $`r(Z^{\mathrm{W2}}) = \delta''_1(N) + N`$ with $`N = L(\theta'_2\cdot\Omega_2\cdot 2+\Omega_1\cdot 2)`$; with S-COND$`^{\mathrm{W2}}`$ it gives a second
   proof of the claim in $`R_2^S`$ below $`L(\theta'_2\cdot\Omega_2\cdot 2+\omega^{G''(\omega^2)+1})`$.
 - **CAP$`^{\mathrm{WW}}`$** is a conjecture in this paper. Its value (i) is a row of ENUM-REACH″$`^{\mathrm{V}}`$ (§3.1); with S-COND$`^{\mathrm{WW}}`$ it would give the claim in $`R_2^S`$ past $`Z^{\mathrm{WW}}`$, but
-  this combination has not been refereed, so it is not counted. **Later (the forty-seventh round, [SHIFT13.md](SHIFT13.md) §1.2):** CAP$`^{\mathrm{WW}}`$ is proved, and the claim in $`R_2^S`$ holds on $`[0, Z^{\mathrm{V}})`$. Record (m4): $`[0, Z^{\mathrm{W2}})`$ rests on the part of §2.1 that was read in full; $`[Z^{\mathrm{W2}}, Z^{\mathrm{WW}})`$ and
+  this combination has not been refereed, so it is not counted. **Later (the forty-seventh round, [SHIFT13.md](SHIFT13.md) §1.2):** CAP$`^{\mathrm{WW}}`$ is proved, and the claim in $`R_2^S`$ holds on $`[0, Z^{\mathrm{V}})`$. **Later (the forty-eighth round, [SHIFT13.md](SHIFT13.md) §2.2):** CAP$`^{\mathrm{V}}`$ is proved, and the claim in $`R_2^S`$ holds on $`[0, Z^\theta)`$. Record (m4): $`[0, Z^{\mathrm{W2}})`$ rests on the part of §2.1 that was read in full; $`[Z^{\mathrm{W2}}, Z^{\mathrm{WW}})`$ and
   $`\beta_0 \gt Z^{\mathrm{WWG}}`$ rest on the part above $`Z^{\mathrm{W2}}`$, now also read in full (§3.1).
 
 ### 3.3 Lean, stage 7: $`\Lambda_\varepsilon \lt \Omega_1`$, the restart blocks up to $`\Lambda_{\varepsilon\cdot 2}`$, and NU-CT
@@ -438,7 +438,7 @@ Words as in §2.2; $`\lambda_{\mathrm{W}}`$ is the index of $`Z^{\mathrm{W}}`$.
 - The lower-bound program below $`\theta_0`$: not worked on in this round ($`\iota(\mathrm{CH}_5) \ge \psi_{\Omega_1}(S_*)`$; past $`S_*`$ the conjecture LEX-SELF). The step below SRO: no change (done for every
   $`n`$ on all 3,166 sample matrices; only the general statement for all standard matrices below SRO is open).
 
-Later: [SHIFT13.md](SHIFT13.md) §1.4.
+Later: [SHIFT13.md](SHIFT13.md) §1.4, §2.4.
 
 ### 3.5 Checks of the forty-sixth round
 
@@ -453,7 +453,7 @@ Each run was under 60 seconds; none is a proof.
 
 ### 3.6 Open
 
-Later: the current list is [SHIFT13.md](SHIFT13.md) §1.6.
+Later: the current list is [SHIFT13.md](SHIFT13.md) §2.6.
 
 - Above $`Z^{\mathrm{V}}`$: the multipliers with $`\psi_{\Omega_3}`$-atoms (the tier lemma and the offsets with $`\psi_{\Omega_2}`$-atoms; conjecture: up to $`L(\theta'_2\cdot\psi_{\Omega_3}(\Omega_3))`$), then
   $`\psi_{\Omega_4}`$-atoms and the crossings of long restarts of level 3 (conjecture: first at the code $`G''(\theta'_3\cdot\omega^2)`$); then CAP-0″ up to $`L(\Omega_\omega)`$, CAP-1″, LONG-CLASS at level 4,

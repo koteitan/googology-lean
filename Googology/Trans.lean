@@ -164,6 +164,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ORec
 import Googology.Trans.PoR.InaccPsi.R2.OPhi
 import Googology.Trans.PoR.InaccPsi.R2.SkelC
 import Googology.Trans.PoR.InaccPsi.R2.SkelO
+import Googology.Trans.PoR.InaccPsi.R2.NestDef
 import Googology.Trans.PoR.InaccPsi.R2.CitedCore
 import Googology.Trans.PoR.InaccPsi.R2.LamLt
 import Googology.Trans.PoR.InaccPsi.R2.EpsE
@@ -178,5 +179,12 @@ import Googology.Trans.PoR.InaccPsi.R2.BlkGen
 import Googology.Trans.PoR.InaccPsi.R2.ORecM
 import Googology.Trans.PoR.InaccPsi.R2.LamVal
 import Googology.Trans.PoR.InaccPsi.R2.NestK
-import Googology.Trans.PoR.InaccPsi.R2.CitedNest
 import Googology.Trans.PoR.InaccPsi.R2.LiftK
+import Googology.Trans.PoR.InaccPsi.R2.EpsQ
+import Googology.Trans.PoR.InaccPsi.R2.ORecQ
+import Googology.Trans.PoR.InaccPsi.R2.LiftR
+import Googology.Trans.PoR.InaccPsi.R2.EpsX
+import Googology.Trans.PoR.InaccPsi.R2.ORecX
+import Googology.Trans.PoR.InaccPsi.R2.EpsY
+import Googology.Trans.PoR.InaccPsi.R2.ImgY
+import Googology.Trans.PoR.InaccPsi.R2.ORecY

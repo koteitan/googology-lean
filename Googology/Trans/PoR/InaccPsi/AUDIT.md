@@ -244,3 +244,26 @@ $`\theta = \psi_{\Omega_2}(\Omega_\omega)`$):
 | the claim in $`R_2^S`$ on $`[0, L(\lambda_{\mathrm{V}}+G''(\omega^2)))`$, $`Z^{\mathrm{V}} \in \mathrm{Core}(R_2^S)`$ | not proved (blocking point B-1: it used $`r(Z^{\mathrm{V}})`$ from outside the range of an induction); with ENUM-REACH″$`^\theta`$ the combination is not refereed, not counted |
 | CAP$`^{\mathrm{V}}`$ (ii) | conjecture |
 | $`\nu_3`$; LEFT⁺ one level up, CAP-1″, LONG-CLASS at level 4, (H2$`^{\mathrm{cr}}`$) | open |
+
+**Later (the forty-eighth round):** in the table above, the row on $`R_2^S`$ past $`Z^{\mathrm{V}}`$ (blocking point B-1) is closed: CAP$`^{\mathrm{V}}`$ is proved as an instance of ENUM-REACH″$`^\theta`$,
+whose induction covers the window of $`Z^{\mathrm{V}}`$; $`r(Z^\theta)`$ and the links of codes in $`[\theta, P')`$ are proved (next table).
+
+**The table of the forty-eighth round** ([SHIFT13.md](SHIFT13.md) §2.1, §2.2; each result 1 review unless a count is given; $`\Phi^{P'} = \psi_{\Omega_2}(\Omega_\omega\cdot 2+\Omega_2)`$):
+
+| result | status after the forty-eighth round |
+|---|---|
+| SHIFT$`^K`$ (the shift of the levels with constants); the argument bounds; the domain of $`L`$ for offsets below $`\Phi^{P'}`$ at every base; the empty plateau $`[\zeta^*, \Omega_3)`$, $`\zeta^* = \psi_{\Omega_3}(\Omega_\omega\cdot 2+\Omega_3)`$ | proved, without FRAG |
+| THETA″$`^{\Omega_3}`$: the reading of every normal multiplier below $`\Omega_3`$ onto the offsets below $`\Phi^{P'}`$ | proved, without FRAG |
+| the links of every code in $`[\theta, P')`$ (the relative far pin one level up), the endpoint $`\theta`$ of the forty-seventh round included | proved by transfer, given FRAG |
+| the links of every code in $`[P', \Phi^{P'})`$ (L-PIN and H-RC at an arbitrary image) | proved by transfer, given FRAG |
+| ENUM-REACH″$`^{\Omega_3}`$ below $`Z^{\Omega_3}`$; $`r(Z^\theta)`$, $`r(N^\theta)`$, $`r(Z^{\theta'})`$ | proved by transfer, given FRAG |
+| Theorem C$`^{\Omega_3\sharp}`$; the claim in $`R_2^C`$ on $`[0, Z^{\Omega_3}]`$, $`\beta_0 \gt Z^{\Omega_3}`$, $`T_3^C \gt Z^{\Omega_3}`$ | proved by transfer, given FRAG; $`[0, Z^{\theta'}]`$ without the links of codes in $`[P', \Phi^{P'})`$ |
+| CAP-0″ below $`Z^{\Omega_3}`$; no long restart crossed below $`Z^{\Omega_3}`$ | proved, given FRAG |
+| THETA″$`^{\mathrm{READ}}`$ on $`[\Omega_3, \theta'_3\cdot\omega^2]`$; the next frontier $`\psi_{\Omega_1}(\Omega_\omega\cdot 2+\omega^{\theta'_3+2})`$ | conjecture |
+| the links of codes in $`[\Phi^{P'}, G''(\omega^2))`$ | open |
+| CAP$`^{\mathrm{V}}`$: $`r(Z^{\mathrm{V}})`$, $`r(Z^{\mathrm{VG}})`$ and the restarts between (B-1 closed) | proved, given FRAG |
+| the claim in $`R_2^S`$ on $`[0, Z^{\mathrm{VG}})`$ with $`Z^{\mathrm{V}} \in \mathrm{Core}(R_2^S)`$, and on $`[0, Z^\theta)`$; Carlson's criterion below $`Z^\theta`$ | proved, given FRAG; 2 reviews for $`[0, Z^{\mathrm{V}})`$ |
+| BASE-TEST″$`^\theta`$, NEXT-BASE″$`^\theta`$, FIRST-LL and the table of base points in $`(Z^{\mathrm{V}}, Z^\theta)`$ | proved |
+| the induction with caps only at the base $`Z^\theta`$: $`\beta_0 \gt Z^{\theta\mathrm{G}}`$, the claim in $`R_2^C`$ on $`[0, Z^{\theta\mathrm{G}}]`$ | proved by transfer, given FRAG; with C$`^{\Omega_3\sharp}`$, 2 reviews for $`(Z^\theta, Z^{\theta\mathrm{G}}]`$ |
+| S-COND$`^\theta`$ (the claim in $`R_2^S`$ past $`Z^\theta`$ from the reaches of its window) | proved as an implication; with $`r(Z^\theta)`$ the combination is not refereed, not counted |
+| $`\nu_3`$; LEFT⁺ one level up, CAP-1″, LONG-CLASS at level 4, (H2$`^{\mathrm{cr}}`$) | open |
