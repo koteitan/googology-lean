@@ -7,8 +7,11 @@ import Googology.Trans.PoR.InaccPsi.R2.OffPhi
 [W07b] G. Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007) 162–175.
 
 Same conventions as `R2.Cited` (`Ω₁ = ω₁`, `Tset τ = Tᵗ`, `Par τ = Parᵗ`, `pi σ τ = π_{σ,τ}`, all bases
-countable).  [W07b] Theorem 2.2 is proved in another paper, which is not used; here, as in `R2.Cited`
-(`le1R_two_iff`, the case `ξ = α`), it is cited from its statement in [W07b] §2.
+countable).  `Ω₁ = ω₁` is the choice, made in `R2.Cited`, of "an uncountable regular cardinal number
+greater than `τ`" of [W07a] §3; `vt_wbar` states [W07a] Lemma 4.2 for every `α < Ω₁`, as the paper does
+(`ϑ₀` is a function on all of `Ω₂`), although below it is used only at terms.  [W07b] Theorem 2.2 is
+proved in another paper, which is not used; here, as in `R2.Cited` (`le1R_two_iff`, the case `ξ = α`),
+it is cited from its statement in [W07b] §2.
 
 * `le1R_thm22`: [W07b] Theorem 2.2 ("For `α ∈ On` and `ξ ∈ (0, α]` we have
   `α ≤₁ α + ξ ⇔ α = ω^{α'}` for some `α'` with `logend(α') ≥ ξ`").  `logend(α')` is "the exponent of the
@@ -35,7 +38,8 @@ open Ordinal
 
 /-- **[W07b] Theorem 2.2**, as stated in [W07b] §2: for `ξ ∈ (0, α]`,
 `α ≤₁ α + ξ` iff `α = ω^{α'}` for some `α'` with `logend(α') ≥ ξ` (here `α' ≠ 0`, `logend = lg`,
-see the module docstring). -/
+see the module docstring).  Only the statement is cited; the proof of Theorem 2.2 is in a paper that
+is not used here. -/
 axiom le1R_thm22 {a ξ : Ordinal.{0}} (h0 : 0 < ξ) (hξ : ξ ≤ a) :
     le1R a (a + ξ) ↔ ∃ a', a' ≠ 0 ∧ a = ω ^ a' ∧ ξ ≤ lg a'
 

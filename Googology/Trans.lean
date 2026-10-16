@@ -156,3 +156,11 @@ import Googology.Trans.PoR.InaccPsi.R2.TopG
 import Googology.Trans.PoR.InaccPsi.R2.BlkG
 import Googology.Trans.PoR.InaccPsi.R2.OffG
 import Googology.Trans.PoR.InaccPsi.R2.OffG2
+import Googology.Trans.PoR.InaccPsi.R2.OTerm
+import Googology.Trans.PoR.InaccPsi.R2.TopO
+import Googology.Trans.PoR.InaccPsi.R2.RSO
+import Googology.Trans.PoR.InaccPsi.R2.BlkO
+import Googology.Trans.PoR.InaccPsi.R2.ORec
+import Googology.Trans.PoR.InaccPsi.R2.OPhi
+import Googology.Trans.PoR.InaccPsi.R2.SkelC
+import Googology.Trans.PoR.InaccPsi.R2.SkelO

@@ -18,6 +18,9 @@ other restart index the formula of Theorem OFF-V (`c(λ)` at level `0`, `ρ·γ 
 * `blkG2` (**Theorem BLK^O below `Φ_Γ`**), `reach_GG` (`lh(GG(α)) = δ + GG(α)² + logend(α)`),
   `reach_VG2` (OFF-V for every point of level `γ ≥ 1` below `Φ_Γ` that is not a `Γ`-point),
   `coreG2`, `LamG_lt_PhiG`.
+
+The offset at `Φ_Γ` itself is not computed in this module, and no name of `GG(α)` or `Φ_Γ` as an
+InaccPsi term is claimed here.
 -/
 
 namespace Googology.Trans.PoR.InaccPsi.R2
@@ -617,7 +620,8 @@ theorem reach_GG2 : IsReach R2C (GG 2) (upsilon (GG 2 + ω + 1) + GG 2 * GG 2) :
   have hlg : lg (2 : Ordinal.{0}) = 0 := by exact_mod_cast lg_nat (n := 2) (by norm_num)
   rwa [hlg, add_zero] at h
 
-/-- **CORE-C below `Φ_Γ`**: `[0, Φ_Γ) ⊆ Core(R₂^C)` (FRAG-free; [C09] Theorem 14.14). -/
+/-- **CORE-C below `Φ_Γ`**: `[0, Φ_Γ) ⊆ Core(R₂^C)` (FRAG-free; [C09] Theorem 14.14).  This range
+contains the range `[0, υ_{Λ_Γ+ω²})` of `coreG` (`υ_{Λ_Γ+ω²} < Φ_Γ`), so the two state one range. -/
 theorem coreG2 : Set.Iio PhiG ⊆ Core R2C := by
   have := core_genG specG2; rwa [PhiG_ups] at this
 

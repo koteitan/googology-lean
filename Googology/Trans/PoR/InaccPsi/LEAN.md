@@ -1,14 +1,14 @@
 [← Back](README.md) | [English](LEAN.md) | [Japanese](LEAN-ja.md)
 
-# $`R_2^+`$ in Lean: $`R_2^C`$, the core, FRAG, and the restart blocks below $`\Phi_\Gamma`$
+# $`R_2^+`$ in Lean: $`R_2^C`$, the core, FRAG, and the restart blocks up to $`\Lambda_\varepsilon`$
 
 This page describes the Lean files of the directory [R2/](R2/) (namespace `Googology.Trans.PoR.InaccPsi.R2`), added in the fortieth round ([SHIFT10.md](SHIFT10.md) §3.3, stage 1), the
-forty-first round ([SHIFT11.md](SHIFT11.md) §1.3, stage 2) the forty-second round ([SHIFT11.md](SHIFT11.md) §2.3, stage 3), the forty-third round ([SHIFT11.md](SHIFT11.md) §3.3, stage 4) and the forty-fourth round ([SHIFT12.md](SHIFT12.md) §1.3, stage 5). Every file builds as a module with the whole library (`lake build`, green, no `sorry`). The audit of each stage found every axiom
+forty-first round ([SHIFT11.md](SHIFT11.md) §1.3, stage 2) the forty-second round ([SHIFT11.md](SHIFT11.md) §2.3, stage 3), the forty-third round ([SHIFT11.md](SHIFT11.md) §3.3, stage 4) the forty-fourth round ([SHIFT12.md](SHIFT12.md) §1.3, stage 5) and the forty-fifth round ([SHIFT12.md](SHIFT12.md) §2.3, stage 6). Every file builds as a module with the whole library (`lake build`, green, no `sorry`). The audit of each stage found every axiom
 faithful to the paper it cites, every definition right, and every main theorem proved by Lean; it found no fatal and no blocking point.
 
 **What this changes.** Almost every result above $`\upsilon_{\omega\cdot\omega}`$ on the other pages is stated "given FRAG". FRAG is now a Lean theorem whose only non-standard axioms are 20
 facts cited from two papers of Wilken (and 7 constants for the objects of those papers). So "given FRAG" can be read as "given these 20 cited facts". The second stage adds INC1, Carlson's theorems on the core and Theorem CP. The third stage adds Lemma L and the structure of $`R_2^C`$ below $`\upsilon_{\omega^3}`$
-(the first pair, Theorems B and B″ with TOP, RS and SK3). The fourth stage adds the restart blocks over restart indices that are ordinals: Lemmas TOP$`_\lambda`$ and RS$`_\lambda`$, Theorem BLK$`^\Xi`$, Theorem BLK$`^O`$ with the closed form of OFF-V below $`V_\omega(1)`$, and CORE-C below $`V_\omega(1)`$, with no new axiom. The fifth stage adds five cited facts and, with them, Theorem BLK$`^O`$ at every ordinal level up to $`\Lambda_\Gamma`$ and below $`\Phi_\Gamma`$, and CORE-C below $`\Phi_\Gamma`$. The axioms are in five files, Cited, CitedR1, CitedC09, CitedL and CitedW: 49 axioms in all (10 constants and 39 facts).
+(the first pair, Theorems B and B″ with TOP, RS and SK3). The fourth stage adds the restart blocks over restart indices that are ordinals: Lemmas TOP$`_\lambda`$ and RS$`_\lambda`$, Theorem BLK$`^\Xi`$, Theorem BLK$`^O`$ with the closed form of OFF-V below $`V_\omega(1)`$, and CORE-C below $`V_\omega(1)`$, with no new axiom. The fifth stage adds five cited facts and, with them, Theorem BLK$`^O`$ at every ordinal level up to $`\Lambda_\Gamma`$ and below $`\Phi_\Gamma`$, and CORE-C below $`\Phi_\Gamma`$. The sixth stage adds, with no new axiom, the recursive offset $`O`$ with Theorem BLK$`^O`$ for every restart index up to $`\Lambda_\varepsilon`$ and CORE-C below $`\upsilon_B`$ for those indices $`B`$, SKEL⁺ in $`R_2^C`$ below $`\nu_C`$ without reaches, and CAP at $`T_C`$. The axioms are in five files, Cited, CitedR1, CitedC09, CitedL and CitedW: 49 axioms in all (10 constants and 39 facts).
 These counts, and every count of axioms on this page, leave out Lean's three standard axioms `propext`, `Classical.choice`, `Quot.sound` (so a raw `#print axioms` lists three more).
 
 ## 1. The files
@@ -57,6 +57,14 @@ These counts, and every count of axioms on this page, leave out Lean's three sta
 | [R2/BlkG.lean](R2/BlkG.lean) | the block structure along the restart indices for these terms | cited (46) |
 | [R2/OffG.lean](R2/OffG.lean) | $`V_\gamma`$ for every ordinal $`\gamma`$, $`\Lambda_\Gamma`$, the level and the offset; **Theorem BLK$`^O`$ up to $`\Lambda_\Gamma`$**; the reaches at $`V_\gamma(\alpha)`$, $`V_\omega(1)`$, $`\Lambda_\Gamma`$; CORE-C there; the interval form of the reach | cited (46) + C09 |
 | [R2/OffG2.lean](R2/OffG2.lean) | the Γ-points, their enumeration $`G_\Gamma`$ and its first fixed point $`\Phi_\Gamma`$; **Theorem BLK$`^O`$ below $`\Phi_\Gamma`$**; the reaches at the Γ-points; **CORE-C below $`\Phi_\Gamma`$** | cited (46) + C09 |
+| [R2/OTerm.lean](R2/OTerm.lean) | terms in one variable $`x`$ (constants, $`\omega^{x+t}`$, sums) and their values; **Lemma EXACT** for every term; the **uniform comparison** of two terms at two bases; every ordinal below $`\varepsilon_{r+1}`$ is the value of a term at $`r`$ | cited (12) |
+| [R2/TopO.lean](R2/TopO.lean) | **Lemma IMG** for every value below $`\varepsilon_{\rho+1}`$; the inputs of **Lemma TOP** for every term and for $`\varepsilon_{x+1}`$ | cited (≤ 39) |
+| [R2/RSO.lean](R2/RSO.lean) | **Lemma RS$`^O`$** with a restart target for every term | cited (45) |
+| [R2/BlkO.lean](R2/BlkO.lean) | the block structure along the restart indices for an offset given by terms, with its inputs as hypotheses | cited (45) |
+| [R2/ORec.lean](R2/ORec.lean) | the **recursive offset $`O`$** and $`\Lambda_\varepsilon`$; **Theorem BLK$`^O`$ up to $`\Lambda_\varepsilon`$**; the reaches $`\delta_\lambda + O(\lambda)`$; **CORE-C** below $`\upsilon_B`$ for those indices $`B`$ | cited (46) |
+| [R2/OPhi.lean](R2/OPhi.lean) | $`O`$ equals the closed form of OffG2 below $`\Phi_\Gamma`$; $`\Phi_\Gamma \lt \Lambda_\varepsilon`$; $`O(\Phi_\Gamma) = \Phi_\Gamma^2 + \Phi_\Gamma`$; BLK$`^O`$ and CORE-C below $`\upsilon_{\Phi_\Gamma+\omega^2}`$ | cited (46) + C09 |
+| [R2/SkelC.lean](R2/SkelC.lean) | **SKEL⁺ in $`R_2^C`$ below $`\nu_C`$ without reaches**; standard pairs, $`\nu_C`$, $`T_C`$; **CAP** | cited (32) |
+| [R2/SkelO.lean](R2/SkelO.lean) | $`\upsilon_B \le \nu_C`$ for every restart index $`B \le \Lambda_\varepsilon`$; $`\Phi_\Gamma \lt \nu_C`$ | cited (46) |
 
 Two readings in [R2/Defs.lean](R2/Defs.lean) are equivalent to Carlson's text and are explained there: clauses (c) and (d) of $`\le_2^\infty`$ are one covering (a covering of finite sets is the order
 isomorphism), and "any finite structure" ranges over finite closed sets of ordinals with relations (every finite arithmetic structure is isomorphic to one, Carlson 2009, remark after L.4.6).
@@ -254,15 +262,48 @@ false statement added at the end failed; it found no fatal and no blocking point
 (m2), $`\Omega_1 = \omega_1`$ (m3), and one range for CORE-C (m5). The offset $`\rho^2 + \rho`$ expected at $`\Phi_\Gamma`$ itself is only on paper; it is not a Lean result (m4). The doc lines of RSX,
 OffPhi, OffV and BlkX now say what n1–n3 of the audit of stage 4 asked for; their code is unchanged.
 
+**Stage 6.** No new axiom. Here a term (`OT`) is built from constants, $`\omega^{x+t}`$ and sums; for an $`\varepsilon`$-number $`x`$ above the constants these are all Cantor normal forms relative to $`x`$.
+The recursive offset is $`O(\lambda) = \sup(\{1\} \cup \{t(\rho_\lambda)+1 : t \text{ realized cofinally below } \lambda\})`$, where $`t`$ is realized cofinally below $`\lambda`$ if for every $`\nu \lt \lambda`$ some restart index
+$`\mu \in (\nu, \lambda)`$ has $`t(\rho_\mu) \le O(\mu)`$; $`\Lambda_\varepsilon`$ (`LamE`) is the least restart index $`\lambda`$ such that $`\varepsilon_{\rho_\mu+1} \le O(\mu)`$ for restart indices $`\mu`$ cofinal below $`\lambda`$
+($`\Omega_1`$ if there is none). $`\nu_C`$ (`nuC`) is the least right end of a $`\lt_2`$-pair that is not standard, a standard pair being $`(\upsilon_{\mu+\omega\cdot(j+1)}, \upsilon_{\mu+\omega\cdot(j+1)+1})`$ with
+$`\mu = 0`$ or a restart index, and $`T_C`$ (`TnestC`) is the least top $`y`$ of $`x \lt x' \lt y' \lt y`$ with $`x \lt_2 y`$ and $`x' \lt_2 y'`$ ($`\Omega_1`$ if there is none).
+
+| theorem | statement | axioms |
+|---|---|---|
+| `pi_ev` | **Lemma EXACT** for every term: $`t(r) \in T^r[s]`$ and $`\pi(t(r)) = t(s)`$ for the base change $`\pi`$ from $`r`$ to $`s`$ | cited (12) |
+| `uni_le`, `uni_lt`, `uni_eq` | the **uniform comparison**: $`t(r) \le u(r) \iff t(s) \le u(s)`$, and the same for $`\lt`$ and $`=`$ | cited (12) |
+| `rep` | every $`z \lt \varepsilon_{r+1}`$ is $`t(r)`$ for a term $`t`$ with constants below $`r`$ | none |
+| `RstK.img_val`, `RstK.top_pkg` | **Lemma IMG** for every value below $`\varepsilon_{\rho+1}`$; **Lemma TOP** | cited (39), cited (35) |
+| `rs_rstT` | **Lemma RS$`^O`$** with a restart target for every term | cited (45) |
+| `Orec_eq`, `Orec_le_eN`, `Orec_succ`, `topIn_Orec` | the fixed-point equation of $`O`$; $`O(\lambda) \le \varepsilon_{\rho_\lambda+1}`$; $`O = 1`$ at successor restart indices; the input of TOP for $`O`$ (proved, not assumed) | cited (1), cited (39) |
+| `blkO` | **Theorem BLK$`^O`$ up to $`\Lambda_\varepsilon`$**: (i)–(iii) of BLK$`^O`$ for every restart index $`B \le \Lambda_\varepsilon`$ with $`B \lt \Omega_1`$ | cited (46) |
+| `reach_Orec` | $`\mathrm{lh}(\rho_\lambda) = \delta_\lambda + O(\lambda)`$ for every restart index $`\lambda \lt \Lambda_\varepsilon`$ | cited (46) |
+| `coreO` | **CORE-C**: $`[0, \upsilon_B) \subseteq \mathrm{Core}(R_2^C)`$ for the same $`B`$ (without FRAG) | cited (41) |
+| `Orec_eq_offG2`, `PhiG_lt_LamE`, `Orec_PhiG`, `reach_PhiG` | $`O`$ equals the closed form below $`\Phi_\Gamma`$; $`\Phi_\Gamma \lt \Lambda_\varepsilon`$; $`O(\Phi_\Gamma) = \Phi_\Gamma^2 + \Phi_\Gamma`$; $`\mathrm{lh}(\Phi_\Gamma) = \delta + \Phi_\Gamma^2 + \Phi_\Gamma`$ | cited (46) |
+| `blkPhi1`, `corePhi1` | BLK$`^O`$ and CORE-C below $`\upsilon_{\Phi_\Gamma+\omega^2}`$ | cited (46), cited (46) + Thm 14.14 |
+| `skelPlusC` | **SKEL⁺ in $`R_2^C`$ on $`[0, \nu_C)`$**: every $`\lt_2`$-pair with right end below $`\nu_C`$ is standard, and every such standard pair is a $`\lt_2`$-pair; every point is a restart or lies in a block, with $`\le_1`$ of $`R_1^+`$ inside a block below $`\nu_C`$; a restart is $`\le_1`$ to every point of its first block; the $`\lt_1`$-predecessors of a restart are restarts | cited (32) |
+| `capTC`, `nuC_le_TnestC` | **CAP**: if $`T_C \lt \Omega_1`$ is attained, no $`\alpha \le T_C`$ is $`\le_1`$ to a point above $`T_C`$; $`\nu_C \le T_C`$ | cited (16) |
+| `ups_le_nuC`, `PhiG_lt_nuC` | $`\upsilon_B \le \nu_C`$ for every restart index $`B \le \Lambda_\varepsilon`$ with $`B \lt \Omega_1`$; $`\Phi_\Gamma \lt \nu_C`$ | cited (46) |
+
+The proof of `skelPlusC` uses no offset and no reach value: in place of the exact reach it uses coverings that keep $`\le_1`$ and $`\le_2`$ only forward, and one bound $`\sigma_0`$ (`sigma0`, no axiom) above the reaches
+that end below a point; it uses none of the axioms of CitedW. The audit bundled the eight modules itself and ran a scanner of the axioms of all 235 theorem constants: together they use 47
+of the 49 cited axioms (the same as stage 5), all declared in the Cited\* files, and a control with a `sorry` and a local axiom was flagged. It found no fatal and no blocking point. Its minor points:
+(n1) the Lean $`O`$ differs from the $`O`$ of [REACHES.md](REACHES.md) §1 in three harmless ways: Lean adds 1 to the set (at a successor restart index the docs give the supremum of the empty set, while
+the offset is 1); Lean has no term $`\varepsilon_{x+1}`$, so its $`O`$ is at most $`\varepsilon_{\rho+1}`$ and differs from the docs only from $`\Lambda_\varepsilon`$ on, where no theorem uses it; and Lean uses only
+$`\omega^{x+t}`$, which gives every term of the docs below $`\varepsilon_{x+1}`$; (n2) $`\Lambda_\varepsilon \lt \Omega_1`$ is not in Lean (only $`\Lambda_\varepsilon \le \Omega_1`$; the paper proves the strict bound), so the
+Lean range is "$`B \le \Lambda_\varepsilon`$ with $`B \lt \Omega_1`$"; (n3) `reach_Orec` has a redundant hypothesis $`\lambda \lt \Omega_1`$; (n4) [W07b] Thm 2.2 is cited from its statement only, as in stage 5; (n5) the checks
+take seconds because the server caches the imports. The doc lines of CitedW and OffG2 now say what m2–m5 of the audit of stage 5 asked for; their code is unchanged.
+
 The domain $`D_m`$ of `frag` allows parameters in the closure of $`D_{m-1}`$; it contains the domain of the paper proof ([RESTARTS.md](RESTARTS.md) §1), so the Lean theorem is stronger. All bases
 are countable, which is the only case used on these pages.
 
 ## 4. Not yet in Lean
 
-In order (the paper proofs of these steps exist; see [SHIFT12.md](SHIFT12.md) §1.6):
+In order (the paper proofs of these steps exist; see [SHIFT12.md](SHIFT12.md) §2.6):
 
-- BLK$`^O`$ from $`\Phi_\Gamma`$ to $`\Lambda_\varepsilon`$. It needs offset terms in general Cantor normal form with one uniform comparison, or more closed-form layers; or else the recursive offset $`O`$,
-  which is not formalized.
-- SKEL⁺, CAP, LIFT-0; then Theorem O$`^C`$ (CP is ready), NU-CT and $`\nu_C`$. The block induction in Lean still needs the exact reach of each restart; the next step is a form that does not
-  compute reaches.
+- $`\Lambda_\varepsilon \lt \Omega_1`$ (on paper, 1 review), and then BLK$`^O`$ at $`B = \Lambda_\varepsilon`$.
+- BLK$`^O`$ past $`\Lambda_\varepsilon`$: terms beyond $`\varepsilon_{x+1}`$ ($`\varepsilon_{x+2}`$, …, Veblen terms in $`x`$) with EXACT and IMG for them, and the same recursive $`O`$.
+- The closed values of $`O`$ between $`\Phi_\Gamma`$ and $`\Lambda_\varepsilon`$ (as a check of the table of [REACHES.md](REACHES.md)), and the InaccPsi name of $`\Lambda_\varepsilon`$.
+- An upper bound for $`\nu_C`$ (a non-standard pair in $`R_2^C`$; whether $`T_C \lt \Omega_1`$ is open), so that SKEL⁺ and CAP reach the known frontier; then LIFT-0, Theorem O$`^C`$ (CP is ready), NU-CT and
+  the value of $`\nu_C`$.
 - The $`R_2^S`$ side is not formalized.
