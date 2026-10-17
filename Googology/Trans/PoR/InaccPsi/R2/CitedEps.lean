@@ -12,7 +12,9 @@ least `ε`-number above `x`; in the notation of [W07a] §2 this is `x^E` ("`α^P
 least additive principal number strictly greater than `α`"; `E` is the class of `ε`-numbers).
 `vt τ` is a function on all ordinals in Lean; [W07a] Def 3.22 defines `ϑ₀ = ϑᵗ` on `θ₁`, which contains
 `Ω₁ + k` (`k < ω`, see 2. below).  The axioms of `R2.CitedW` are stated only for countable arguments;
-the axioms below are the only ones about `vt τ` at an argument `≥ Ω₁`.
+the axioms below and those of `R2.CitedEv` (`vt_memTwo`, `vt_rep`, `vt_E_iff`, `vt_lt_Om1_add`,
+`vt_Om1_add_lt`, `lt_vt_Om1_add`, `lhT_Om1_add`, `pi_vt_two`: arguments in `[Ω₁, Ω₂)`, all for elements of
+`Tᵗ`) are the only ones about `vt τ` at an argument `≥ Ω₁`.
 
 1. `Dl_one_eq`: `ϑᵗ(ϑ₁(0)) = τ^E`, i.e. `Dl τ 1 = eN τ`.  Literal texts:
    * [W07a] Corollary 3.24: "For every `k ≥ m` we have `sup(T_m ∩ Ω_{k+2}) = θ_{k+1}`.  For `m < n` we
