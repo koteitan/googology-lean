@@ -265,3 +265,15 @@ import Googology.Trans.PoR.InaccPsi.R2.NcJump
 import Googology.Trans.PoR.InaccPsi.R2.NcLev
 import Googology.Trans.PoR.InaccPsi.R2.NcBig
 import Googology.Trans.PoR.InaccPsi.R2.NcGG
+import Googology.Trans.PoR.InaccPsi.R2.PpIdx
+import Googology.Trans.PoR.InaccPsi.R2.PpRst
+import Googology.Trans.PoR.InaccPsi.R2.PpCross
+import Googology.Trans.PoR.InaccPsi.R2.QqEmb
+import Googology.Trans.PoR.InaccPsi.R2.QqShift
+import Googology.Trans.PoR.InaccPsi.R2.QqCap
+import Googology.Trans.PoR.InaccPsi.R2.QqName
+import Googology.Trans.PoR.InaccPsi.R2.QqTc
+import Googology.Trans.PoR.InaccPsi.R2.LwFix
+import Googology.Trans.PoR.InaccPsi.R2.LwName
+import Googology.Trans.PoR.InaccPsi.R2.LwLev
+import Googology.Trans.PoR.InaccPsi.R2.LwTop
