@@ -8,33 +8,41 @@ import Googology.Trans.PoR.InaccPsi.R2.BrLs5
   below `F(E c)`;
 * `Q1s` (Lemma Q1): for an anchor `ψ_{Ω₂}(d)` of the class, the `K*₁`-elements of `E(d)` are below
   `G(d) = ϑ̄_{M+1}(Ω_{M+1}·2 + E d)`, `M = max(lvl d, 1)`.
+
+The statements are proved for `A` the sum of any list `L` of summands (namespace `R2.Bt`: `AA S L` the
+sum of `L`, `kA S L` its length, `GoodL S L` where it is needed); the original statements for
+`A = A_{ω·m+n}` (namespace `R2.Br`, the same names) follow as corollaries at `L = Alist S m n`.
 -/
 
-namespace Googology.Trans.PoR.InaccPsi.R2.Br
+/-! ## The list version (namespace `R2.Bt`) -/
 
-open Ordinal Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.InaccSeq Tm
+namespace Googology.Trans.PoR.InaccPsi.R2.Bt
 
-variable {S : InaccSeq.{0}} {σ : Ordinal.{0}} {m n : ℕ}
+open Googology.Trans.PoR.InaccPsi.R2.Br
 
-/-- `E` for the data `(S, σ, A_{ω·m+n})`. -/
-noncomputable abbrev Ex (S : InaccSeq.{0}) (σ : Ordinal.{0}) (m n : ℕ) : Term → Tm :=
-  EL S σ (kA S m n)
+open Ordinal Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.InaccSeq Googology.Trans.PoR.InaccPsi.R2.Br.Tm
+
+variable {S : InaccSeq.{0}} {σ : Ordinal.{0}} {L : List Ordinal.{0}}
+
+/-- `E` for the data `(S, σ, A)`, with `A` the sum of the list `L`. -/
+noncomputable abbrev Ex (S : InaccSeq.{0}) (σ : Ordinal.{0}) (L : List Ordinal.{0}) : Term → Tm :=
+  EL S σ (kA S L)
 
 /-- The invariants of `E(t)`. -/
-structure DL (S : InaccSeq.{0}) (σ : Ordinal.{0}) (m n : ℕ) (t : Term) : Prop where
-  nf : NF σ (Ex S σ m n t)
-  lt : ev σ (Ex S σ m n t) < OmT σ (lvl (Term.val S t) + 1)
-  ne : Term.val S t ≠ 0 → ev σ (Ex S σ m n t) ≠ 0
-  ge : ¬ Term.val S t < σ → σ ≤ ev σ (Ex S σ m n t)
+structure DL (S : InaccSeq.{0}) (σ : Ordinal.{0}) (L : List Ordinal.{0}) (t : Term) : Prop where
+  nf : NF σ (Ex S σ L t)
+  lt : ev σ (Ex S σ L t) < OmT σ (lvl (Term.val S t) + 1)
+  ne : Term.val S t ≠ 0 → ev σ (Ex S σ L t) ≠ 0
+  ge : ¬ Term.val S t < σ → σ ≤ ev σ (Ex S σ L t)
   prin : t.isPrin = true → ¬ Term.val S t < σ →
-    OmT σ (lvl (Term.val S t)) ≤ ev σ (Ex S σ m n t) ∧ ∃ e, Ex S σ m n t = th (lvl (Term.val S t)) e
-  hd : ¬ Term.val S t < σ → t ≠ .zero → hd σ (Ex S σ m n t) = ev σ (Ex S σ m n (Term.head t))
-  add : ∀ a b, t = .add a b → ¬ Term.val S t < σ → Ex S σ m n t = Tm.add (Ex S σ m n a) (Ex S σ m n b)
-  lv : lvl (ev σ (Ex S σ m n t)) = lvl (Term.val S t)
+    OmT σ (lvl (Term.val S t)) ≤ ev σ (Ex S σ L t) ∧ ∃ e, Ex S σ L t = th (lvl (Term.val S t)) e
+  hd : ¬ Term.val S t < σ → t ≠ .zero → hd σ (Ex S σ L t) = ev σ (Ex S σ L (Term.head t))
+  add : ∀ a b, t = .add a b → ¬ Term.val S t < σ → Ex S σ L t = Tm.add (Ex S σ L a) (Ex S σ L b)
+  lv : lvl (ev σ (Ex S σ L t)) = lvl (Term.val S t)
 
 /-- The `G`-code of an anchor argument `d`. -/
-noncomputable def Gd (S : InaccSeq.{0}) (σ : Ordinal.{0}) (m n : ℕ) (d : Term) : Tm :=
-  th (max (lvl (Term.val S d)) 1 + 1) (gFarg σ (max (lvl (Term.val S d)) 1) (Ex S σ m n d))
+noncomputable def Gd (S : InaccSeq.{0}) (σ : Ordinal.{0}) (L : List Ordinal.{0}) (d : Term) : Tm :=
+  th (max (lvl (Term.val S d)) 1 + 1) (gFarg σ (max (lvl (Term.val S d)) 1) (Ex S σ L d))
 
 theorem Om1_eq_OmT (σ : Ordinal.{0}) : Om (1 : Ordinal.{0}) = OmT σ 1 := by
   rw [OmT_pos_of_ne one_ne_zero]; simp
@@ -42,9 +50,9 @@ theorem Om1_eq_OmT (σ : Ordinal.{0}) : Om (1 : Ordinal.{0}) = OmT σ 1 := by
 theorem lt_OmT1 (hσ : Base σ) : σ < OmT σ 1 := by rw [← Om1_eq_OmT]; exact hσ.lt_Om1
 
 /-- `E` of a parameter. -/
-theorem Ex_par {t : Term} (h : Term.val S t < σ) : Ex S σ m n t = par (Term.val S t) := EL_par h
+theorem Ex_par {t : Term} (h : Term.val S t < σ) : Ex S σ L t = par (Term.val S t) := EL_par h
 
-theorem DL_par (hσ : Base σ) {t : Term} (h : Term.val S t < σ) : DL S σ m n t := by
+theorem DL_par (hσ : Base σ) {t : Term} (h : Term.val S t < σ) : DL S σ L t := by
   have hv1 : Term.val S t < OmT σ 1 := h.trans (lt_OmT1 hσ)
   have hl0 : lvl (Term.val S t) = 0 := by
     have := lvl_le_of_lt (n := 0) (by rw [← OmT_succ_indep σ 0]; simpa using hv1); omega
@@ -60,16 +68,16 @@ theorem DL_par (hσ : Base σ) {t : Term} (h : Term.val S t < σ) : DL S σ m n 
 /-- **Lemma Q** for the `ψ`-clause, `μ = ψ_{Ω_{k+1}}(c)`, `k ≥ 1`. -/
 theorem QBs (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) {k : ℕ} (_hk0 : k ≠ 0)
     (hk : Term.val S s = k) (hcω : Term.val S c < Om (ω : Ordinal.{0}))
-    (hD : ∀ u : Term, u.size ≤ c.size → CL S σ m n u → DL S σ m n u)
-    (hM : ∀ x : Term, x.size < c.size → CL S σ m n x → Term.val S x < Term.val S c →
-      ev σ (Ex S σ m n x) < ev σ (Ex S σ m n c))
-    (hc : CL S σ m n c) (hc0 : ev σ (Ex S σ m n c) ≠ 0) :
-    ∀ u : Term, CL S σ m n u → u.size ≤ c.size → Term.KLt (.psiS s c) u c →
+    (hD : ∀ u : Term, u.size ≤ c.size → CL S σ L u → DL S σ L u)
+    (hM : ∀ x : Term, x.size < c.size → CL S σ L x → Term.val S x < Term.val S c →
+      ev σ (Ex S σ L x) < ev σ (Ex S σ L c))
+    (hc : CL S σ L c) (hc0 : ev σ (Ex S σ L c) ≠ 0) :
+    ∀ u : Term, CL S σ L u → u.size ≤ c.size → Term.KLt (.psiS s c) u c →
       Term.val S u ≤ Term.val S c →
-      ∀ p ∈ Kst (k + 1) (Ex S σ m n u), ev σ p.2 < ev σ (gFc σ (Ex S σ m n c)) := by
+      ∀ p ∈ Kst (k + 1) (Ex S σ L u), ev σ p.2 < ev σ (gFc σ (Ex S σ L c)) := by
   have hDc := hD c le_rfl hc
-  have hEcω : ev σ (Ex S σ m n c) < Om (ω : Ordinal.{0}) := hDc.lt.trans (OmT_succ_lt_Om_omega σ _)
-  set X := ev σ (gFc σ (Ex S σ m n c)) with hX
+  have hEcω : ev σ (Ex S σ L c) < Om (ω : Ordinal.{0}) := hDc.lt.trans (OmT_succ_lt_Om_omega σ _)
+  set X := ev σ (gFc σ (Ex S σ L c)) with hX
   have hX0 : 0 < X := lt_of_le_of_lt zero_le (gOmT_lt_Fc hσ hDc.nf hEcω hc0 (Nat.zero_le _))
   have hXP : IsPrincipal (· + ·) X := gFc_principal hσ hDc.nf hEcω hc0
   have hlvX : ∀ j : ℕ, j ≤ lvl (Term.val S c) → ev σ (Pk j) < X ∧ OmT σ (j + 1) < X := by
@@ -102,9 +110,9 @@ theorem QBs (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) {k : ℕ} (
     obtain ⟨vx, vy⟩ := NF_phi_lt (S := S) hn
     set j := lvl (Term.val S (.phi x y)) with hjdef
     have hvω : Term.val S (.phi x y) < Om (ω : Ordinal.{0}) := lt_of_le_of_lt hle hcω
-    have hxk : ev σ (Ex S σ m n x) < OmT σ (j + 1) :=
+    have hxk : ev σ (Ex S σ L x) < OmT σ (j + 1) :=
       lt_of_lt_of_le hDx.lt (OmT_mono hσ (by have := lvl_mono hvω vx.le; omega))
-    have hyk : ev σ (Ex S σ m n y) < OmT σ (j + 1) :=
+    have hyk : ev σ (Ex S σ L y) < OmT σ (j + 1) :=
       lt_of_lt_of_le hDy.lt (OmT_mono hσ (by have := lvl_mono hvω vy.le; omega))
     have hjm : j ≤ lvl (Term.val S c) := lvl_mono hcω hle
     rw [Ex, EL_phi hv, ← hjdef] at hp
@@ -143,10 +151,10 @@ theorem QBs (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) {k : ℕ} (
     have hc_lt : Term.val S c' < Term.val S c := (Term.cmp_lt_iff S hn.2.1 hμ.2.1).1 hca
     have hsc : c'.size < c.size := by simp [Term.size] at hs; omega
     have hDc' := hD c' (le_of_lt hsc) hcc
-    have hEc : ev σ (Ex S σ m n c') < ev σ (Ex S σ m n c) := hM c' hsc hcc hc_lt
+    have hEc : ev σ (Ex S σ L c') < ev σ (Ex S σ L c) := hM c' hsc hcc hc_lt
     have hjm : j ≤ lvl (Term.val S c) := by
       have := lvl_mono hcω hle; rw [lvl_psiS s' c' hj] at this; exact this
-    have hFc : ev σ (gFc σ (Ex S σ m n c')) < X := gFc_lt hσ hDc'.nf hDc.nf hEcω hEc
+    have hFc : ev σ (gFc σ (Ex S σ L c')) < X := gFc_lt hσ hDc'.nf hDc.nf hEcω hEc
     rcases List.mem_cons.1 hp with hp | hp
     · subst hp
       rw [gev_codepsi hσ hDc'.nf (hEc.trans hEcω)]
@@ -157,7 +165,7 @@ theorem QBs (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) {k : ℕ} (
         rcases h with rfl | rfl
         · rw [gev_Omk hσ]; exact (hlvX j hjm).2
         · exact hX0
-      · by_cases hc0' : ev σ (Ex S σ m n c') = 0
+      · by_cases hc0' : ev σ (Ex S σ L c') = 0
         · rw [gFc_zero hσ hc0'] at h; simp [Kst] at h
         have h' := gKst_Fc hσ hc0' h
         split_ifs at h' with hl
@@ -170,5 +178,53 @@ theorem QBs (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) {k : ℕ} (
           · rcases List.mem_append.1 h' with h' | h'
             · rw [Kst_Omk (by omega)] at h'; simp at h'; subst h'; exact hX0
             · exact ihc (le_of_lt hsc) hKc hc_lt.le p h'
+
+end Googology.Trans.PoR.InaccPsi.R2.Bt
+
+/-! ## The interface for `A = A_{ω·m+n}` (namespace `R2.Br`): corollaries at `L = Alist S m n` -/
+
+namespace Googology.Trans.PoR.InaccPsi.R2.Br
+
+open Ordinal Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.InaccSeq Tm
+
+variable {S : InaccSeq.{0}} {σ : Ordinal.{0}} {m n : ℕ}
+
+/-- `E` for the data `(S, σ, A_{ω·m+n})`. -/
+noncomputable abbrev Ex (S : InaccSeq.{0}) (σ : Ordinal.{0}) (m n : ℕ) : Term → Tm :=
+  EL S σ (kA S m n)
+
+/-- The invariants of `E(t)` for `A = A_{ω·m+n}` (`Bt.DL` at `Alist S m n`). -/
+abbrev DL (S : InaccSeq.{0}) (σ : Ordinal.{0}) (m n : ℕ) (t : Term) : Prop := Bt.DL S σ (Alist S m n) t
+
+/-- The `G`-code of an anchor argument `d` for `A = A_{ω·m+n}` (`Bt.Gd` at `Alist S m n`). -/
+noncomputable abbrev Gd (S : InaccSeq.{0}) (σ : Ordinal.{0}) (m n : ℕ) (d : Term) : Tm :=
+  Bt.Gd S σ (Alist S m n) d
+
+theorem Om1_eq_OmT (σ : Ordinal.{0}) : Om (1 : Ordinal.{0}) = OmT σ 1 := by
+  apply Bt.Om1_eq_OmT
+
+theorem lt_OmT1 (hσ : Base σ) : σ < OmT σ 1 := by
+  apply Bt.lt_OmT1; assumption
+
+/-- `E` of a parameter. -/
+theorem Ex_par {t : Term} (h : Term.val S t < σ) : Ex S σ m n t = par (Term.val S t) := by
+  apply Bt.Ex_par; assumption
+
+theorem DL_par (hσ : Base σ) {t : Term} (h : Term.val S t < σ) : DL S σ m n t := by
+  apply Bt.DL_par <;> assumption
+
+/-! ## Lemma Q over `σ` -/
+
+/-- **Lemma Q** for the `ψ`-clause, `μ = ψ_{Ω_{k+1}}(c)`, `k ≥ 1`. -/
+theorem QBs (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) {k : ℕ} (_hk0 : k ≠ 0)
+    (hk : Term.val S s = k) (hcω : Term.val S c < Om (ω : Ordinal.{0}))
+    (hD : ∀ u : Term, u.size ≤ c.size → CL S σ m n u → DL S σ m n u)
+    (hM : ∀ x : Term, x.size < c.size → CL S σ m n x → Term.val S x < Term.val S c →
+      ev σ (Ex S σ m n x) < ev σ (Ex S σ m n c))
+    (hc : CL S σ m n c) (hc0 : ev σ (Ex S σ m n c) ≠ 0) :
+    ∀ u : Term, CL S σ m n u → u.size ≤ c.size → Term.KLt (.psiS s c) u c →
+      Term.val S u ≤ Term.val S c →
+      ∀ p ∈ Kst (k + 1) (Ex S σ m n u), ev σ p.2 < ev σ (gFc σ (Ex S σ m n c)) := by
+  apply Bt.QBs <;> assumption
 
 end Googology.Trans.PoR.InaccPsi.R2.Br

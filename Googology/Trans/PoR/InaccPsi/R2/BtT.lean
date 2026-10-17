@@ -1,4 +1,4 @@
-import Googology.Trans.PoR.InaccPsi.R2.BtL13
+import Googology.Trans.PoR.InaccPsi.R2.BrLs13
 
 /-!
 # Theorem T up to the first fixed point

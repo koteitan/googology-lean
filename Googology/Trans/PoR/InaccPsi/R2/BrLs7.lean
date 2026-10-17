@@ -7,13 +7,21 @@ import Googology.Trans.PoR.InaccPsi.R2.BrLs6
   strictly increasing (`GT_lt`), `P_j < G(x)` for `j ≤ M`;
 * `Q1s` (**Lemma Q1**): for an anchor `ψ_{Ω₂}(d)` of the class, the `K*₁`-elements of `E(u)` for the parts
   `u` of `d` visited from the anchor are below `G(E d)` (a level-1 stop is a new anchor).
+
+The statements are proved for `A` the sum of any list `L` of summands (namespace `R2.Bt`: `AA S L` the
+sum of `L`, `kA S L` its length, `GoodL S L` where it is needed); the original statements for
+`A = A_{ω·m+n}` (namespace `R2.Br`, the same names) follow as corollaries at `L = Alist S m n`.
 -/
 
-namespace Googology.Trans.PoR.InaccPsi.R2.Br
+/-! ## The list version (namespace `R2.Bt`) -/
 
-open Ordinal Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.InaccSeq Tm
+namespace Googology.Trans.PoR.InaccPsi.R2.Bt
 
-variable {S : InaccSeq.{0}} {σ : Ordinal.{0}} {m n : ℕ}
+open Googology.Trans.PoR.InaccPsi.R2.Br
+
+open Ordinal Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.InaccSeq Googology.Trans.PoR.InaccPsi.R2.Br.Tm
+
+variable {S : InaccSeq.{0}} {σ : Ordinal.{0}} {L : List Ordinal.{0}}
 
 /-- `G(x) = ϑ̄_{M+1}(Ω_{M+1}·2 + x)`, `M = max(lvl x, 1)`. -/
 noncomputable def GT (σ : Ordinal.{0}) (x : Tm) : Tm :=
@@ -96,7 +104,7 @@ theorem GT_pos (hσ : Base σ) {x : Tm} (hx : NF σ x) (hxω : ev σ x < Om (ω 
     0 < ev σ (GT σ x) := lt_of_le_of_lt zero_le (OmT_lt_GT hσ hx hxω (Nat.zero_le _))
 
 /-- `Gd d = G(E d)` (`lvl` of `E d` is `lvl d`). -/
-theorem Gd_eq {d : Term} (hD : DL S σ m n d) : Gd S σ m n d = GT σ (Ex S σ m n d) := by
+theorem Gd_eq {d : Term} (hD : DL S σ L d) : Gd S σ L d = GT σ (Ex S σ L d) := by
   unfold Gd GT; rw [hD.lv]
 
 /-! ## Lemma Q1 -/
@@ -104,21 +112,21 @@ theorem Gd_eq {d : Term} (hD : DL S σ m n d) : Gd S σ m n d = GT σ (Ex S σ m
 /-- **Lemma Q1.** -/
 theorem Q1s (hσ : Base σ) : ∀ (N : ℕ) (s' d : Term), (Term.psiS s' d).size ≤ N →
     Term.NF (.psiS s' d) → Term.val S s' = 1 → Term.val S d < Om (ω : Ordinal.{0}) →
-    (∀ u : Term, u.size ≤ d.size → CL S σ m n u → DL S σ m n u) →
-    (∀ x y : Term, x.size ≤ d.size → y.size ≤ d.size → CL S σ m n x → CL S σ m n y →
-      Term.val S x < Term.val S y → ev σ (Ex S σ m n x) < ev σ (Ex S σ m n y)) →
-    CL S σ m n d →
-    ∀ u : Term, CL S σ m n u → u.size ≤ d.size → Term.KLt (.psiS s' d) u d →
+    (∀ u : Term, u.size ≤ d.size → CL S σ L u → DL S σ L u) →
+    (∀ x y : Term, x.size ≤ d.size → y.size ≤ d.size → CL S σ L x → CL S σ L y →
+      Term.val S x < Term.val S y → ev σ (Ex S σ L x) < ev σ (Ex S σ L y)) →
+    CL S σ L d →
+    ∀ u : Term, CL S σ L u → u.size ≤ d.size → Term.KLt (.psiS s' d) u d →
       Term.val S u ≤ Term.val S d →
-      ∀ p ∈ Kst 1 (Ex S σ m n u), ev σ p.2 < ev σ (GT σ (Ex S σ m n d)) := by
+      ∀ p ∈ Kst 1 (Ex S σ L u), ev σ p.2 < ev σ (GT σ (Ex S σ L d)) := by
   intro N
   induction N with
   | zero => intro s' d h; exact absurd (Term.size_pos (.psiS s' d)) (by omega)
   | succ N ihN =>
     intro s' d hsz hμ hs1 hdω hD hM hd
     have hDd := hD d le_rfl hd
-    have hEdω : ev σ (Ex S σ m n d) < Om (ω : Ordinal.{0}) := hDd.lt.trans (OmT_succ_lt_Om_omega σ _)
-    set X := ev σ (GT σ (Ex S σ m n d)) with hX
+    have hEdω : ev σ (Ex S σ L d) < Om (ω : Ordinal.{0}) := hDd.lt.trans (OmT_succ_lt_Om_omega σ _)
+    set X := ev σ (GT σ (Ex S σ L d)) with hX
     have hX0 : 0 < X := GT_pos hσ hDd.nf hEdω
     have hXP : IsPrincipal (· + ·) X := (GT_bounds hσ hDd.nf hEdω).2.2.2
     have hlvX : ∀ j : ℕ, j ≤ lvl (Term.val S d) → ev σ (Pk j) < X ∧ OmT σ (j + 1) < X := by
@@ -128,8 +136,8 @@ theorem Q1s (hσ : Base σ) : ∀ (N : ℕ) (s' d : Term), (Term.psiS s' d).size
     have hP1X : ev σ (Pk 1) < X ∧ OmT σ 2 < X :=
       ⟨Pk_lt_GT hσ hDd.nf hEdω (le_max_right _ _), OmT_lt_GT hσ hDd.nf hEdω (le_max_right _ _)⟩
     -- `F` and `G` of a smaller argument
-    have hFG : ∀ c : Term, c.size < d.size → CL S σ m n c → Term.val S c < Term.val S d →
-        ev σ (gFc σ (Ex S σ m n c)) < X ∧ ev σ (GT σ (Ex S σ m n c)) < X := by
+    have hFG : ∀ c : Term, c.size < d.size → CL S σ L c → Term.val S c < Term.val S d →
+        ev σ (gFc σ (Ex S σ L c)) < X ∧ ev σ (GT σ (Ex S σ L c)) < X := by
       intro c hsc hcc hlt
       have hDc := hD c hsc.le hcc
       have hE := hM c d hsc.le le_rfl hcc hd hlt
@@ -166,9 +174,9 @@ theorem Q1s (hσ : Base σ) : ∀ (N : ℕ) (s' d : Term), (Term.psiS s' d).size
       obtain ⟨vx, vy⟩ := NF_phi_lt (S := S) hn
       set j := lvl (Term.val S (.phi x y)) with hjdef
       have hvω : Term.val S (.phi x y) < Om (ω : Ordinal.{0}) := lt_of_le_of_lt hle hdω
-      have hxk : ev σ (Ex S σ m n x) < OmT σ (j + 1) :=
+      have hxk : ev σ (Ex S σ L x) < OmT σ (j + 1) :=
         lt_of_lt_of_le hDx.lt (OmT_mono hσ (by have := lvl_mono hvω vx.le; omega))
-      have hyk : ev σ (Ex S σ m n y) < OmT σ (j + 1) :=
+      have hyk : ev σ (Ex S σ L y) < OmT σ (j + 1) :=
         lt_of_lt_of_le hDy.lt (OmT_mono hσ (by have := lvl_mono hvω vy.le; omega))
       have hjm : j ≤ lvl (Term.val S d) := lvl_mono hdω hle
       rw [Ex, EL_phi hv, ← hjdef] at hp
@@ -211,7 +219,7 @@ theorem Q1s (hσ : Base σ) : ∀ (N : ℕ) (s' d : Term), (Term.psiS s' d).size
         · exact ⟨(Term.cmp_lt_iff S hn.2.1 hμ.2.1).1 hca, Or.inl hKc⟩
       obtain ⟨hFc, hGc⟩ := hFG c'' hsc hcc hcd.1
       have hDc := hD c'' hsc.le hcc
-      have hEcω : ev σ (Ex S σ m n c'') < Om (ω : Ordinal.{0}) := hDc.lt.trans (OmT_succ_lt_Om_omega σ _)
+      have hEcω : ev σ (Ex S σ L c'') < Om (ω : Ordinal.{0}) := hDc.lt.trans (OmT_succ_lt_Om_omega σ _)
       rcases List.mem_cons.1 hp with hp | hp
       · subst hp
         rw [gev_codepsi hσ hDc.nf hEcω]
@@ -222,7 +230,7 @@ theorem Q1s (hσ : Base σ) : ∀ (N : ℕ) (s' d : Term), (Term.psiS s' d).size
           rcases h with rfl | rfl
           · rw [gev_Omk hσ]; exact (hlvX j hjm).2
           · exact hX0
-        · by_cases hc0' : ev σ (Ex S σ m n c'') = 0
+        · by_cases hc0' : ev σ (Ex S σ L c'') = 0
           · rw [gFc_zero hσ hc0'] at h; simp [Kst] at h
           have h' := gKst_Fc hσ hc0' h
           split_ifs at h' with hl
@@ -243,5 +251,68 @@ theorem Q1s (hσ : Base σ) : ∀ (N : ℕ) (s' d : Term), (Term.psiS s' d).size
                     (fun x y hx hy hcx hcy hxy => hM x y (hx.trans hsc.le) (hy.trans hsc.le) hcx hcy hxy)
                     hcc c'' hcc le_rfl hn.2.2 le_rfl p h'
                   exact this.trans hGc
+
+end Googology.Trans.PoR.InaccPsi.R2.Bt
+
+/-! ## The interface for `A = A_{ω·m+n}` (namespace `R2.Br`): corollaries at `L = Alist S m n` -/
+
+namespace Googology.Trans.PoR.InaccPsi.R2.Br
+
+open Ordinal Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.InaccSeq Tm
+
+variable {S : InaccSeq.{0}} {σ : Ordinal.{0}} {m n : ℕ}
+
+/-- `G(x) = ϑ̄_{M+1}(Ω_{M+1}·2 + x)`, `M = max(lvl x, 1)` (`Bt.GT`). -/
+noncomputable abbrev GT (σ : Ordinal.{0}) (x : Tm) : Tm := Bt.GT σ x
+
+theorem GT_NF (hσ : Base σ) {x : Tm} (hx : NF σ x) (hxω : ev σ x < Om (ω : Ordinal.{0})) :
+    NF σ (GT σ x) := by
+  apply Bt.GT_NF <;> assumption
+
+theorem GT_bounds (hσ : Base σ) {x : Tm} (hx : NF σ x) (hxω : ev σ x < Om (ω : Ordinal.{0})) :
+    ev σ (gFarg σ (max (lvl (ev σ x)) 1) x) < ev σ (GT σ x) ∧
+      OmT σ (max (lvl (ev σ x)) 1 + 1) ≤ ev σ (GT σ x) ∧
+      ev σ (GT σ x) < OmT σ (max (lvl (ev σ x)) 1 + 2) ∧ IsPrincipal (· + ·) (ev σ (GT σ x)) := by
+  apply Bt.GT_bounds <;> assumption
+
+theorem OmT_lt_GT (hσ : Base σ) {x : Tm} (hx : NF σ x) (hxω : ev σ x < Om (ω : Ordinal.{0})) {j : ℕ}
+    (hj : j ≤ max (lvl (ev σ x)) 1) : OmT σ (j + 1) < ev σ (GT σ x) := by
+  apply Bt.OmT_lt_GT <;> assumption
+
+theorem Pk_lt_GT (hσ : Base σ) {x : Tm} (hx : NF σ x) (hxω : ev σ x < Om (ω : Ordinal.{0})) {j : ℕ}
+    (hj : j ≤ max (lvl (ev σ x)) 1) : ev σ (Pk j) < ev σ (GT σ x) := by
+  apply Bt.Pk_lt_GT <;> assumption
+
+/-- `F(x) ≤ G(x)`. -/
+theorem Fc_le_GT (hσ : Base σ) {x : Tm} (hx : NF σ x) (hxω : ev σ x < Om (ω : Ordinal.{0})) :
+    ev σ (gFc σ x) ≤ ev σ (GT σ x) := by
+  apply Bt.Fc_le_GT <;> assumption
+
+/-- **`G` is strictly increasing.** -/
+theorem GT_lt (hσ : Base σ) {x y : Tm} (hx : NF σ x) (hy : NF σ y) (hyω : ev σ y < Om (ω : Ordinal.{0}))
+    (hxy : ev σ x < ev σ y) : ev σ (GT σ x) < ev σ (GT σ y) := by
+  apply Bt.GT_lt <;> assumption
+
+theorem GT_pos (hσ : Base σ) {x : Tm} (hx : NF σ x) (hxω : ev σ x < Om (ω : Ordinal.{0})) :
+    0 < ev σ (GT σ x) := by
+  apply Bt.GT_pos <;> assumption
+
+/-- `Gd d = G(E d)` (`lvl` of `E d` is `lvl d`). -/
+theorem Gd_eq {d : Term} (hD : DL S σ m n d) : Gd S σ m n d = GT σ (Ex S σ m n d) := by
+  apply Bt.Gd_eq; assumption
+
+/-! ## Lemma Q1 -/
+
+/-- **Lemma Q1.** -/
+theorem Q1s (hσ : Base σ) : ∀ (N : ℕ) (s' d : Term), (Term.psiS s' d).size ≤ N →
+    Term.NF (.psiS s' d) → Term.val S s' = 1 → Term.val S d < Om (ω : Ordinal.{0}) →
+    (∀ u : Term, u.size ≤ d.size → CL S σ m n u → DL S σ m n u) →
+    (∀ x y : Term, x.size ≤ d.size → y.size ≤ d.size → CL S σ m n x → CL S σ m n y →
+      Term.val S x < Term.val S y → ev σ (Ex S σ m n x) < ev σ (Ex S σ m n y)) →
+    CL S σ m n d →
+    ∀ u : Term, CL S σ m n u → u.size ≤ d.size → Term.KLt (.psiS s' d) u d →
+      Term.val S u ≤ Term.val S d →
+      ∀ p ∈ Kst 1 (Ex S σ m n u), ev σ p.2 < ev σ (GT σ (Ex S σ m n d)) := by
+  apply Bt.Q1s; assumption
 
 end Googology.Trans.PoR.InaccPsi.R2.Br

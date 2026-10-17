@@ -7,22 +7,30 @@ import Googology.Trans.PoR.InaccPsi.R2.BrLs9
 * `KB0`: the level-`0` parts of `E(u)`, `u` visited from the `A`-clause term `μ = ψ_{Ω₁}(A + ζ)`, are below
   a bound (no level-0 code `F` exists);
 * `head_mem_Ki_s`, `via_head_s`: case (II) of [W25] Prop 2.15 through a head, over `σ`.
+
+The statements are proved for `A` the sum of any list `L` of summands (namespace `R2.Bt`: `AA S L` the
+sum of `L`, `kA S L` its length, `GoodL S L` where it is needed); the original statements for
+`A = A_{ω·m+n}` (namespace `R2.Br`, the same names) follow as corollaries at `L = Alist S m n`.
 -/
 
-namespace Googology.Trans.PoR.InaccPsi.R2.Br
+/-! ## The list version (namespace `R2.Bt`) -/
 
-open Ordinal Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.InaccSeq Tm
+namespace Googology.Trans.PoR.InaccPsi.R2.Bt
 
-variable {S : InaccSeq.{0}} {σ : Ordinal.{0}} {m n : ℕ}
+open Googology.Trans.PoR.InaccPsi.R2.Br
+
+open Ordinal Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.InaccSeq Googology.Trans.PoR.InaccPsi.R2.Br.Tm
+
+variable {S : InaccSeq.{0}} {σ : Ordinal.{0}} {L : List Ordinal.{0}}
 
 /-- The oracle of Lemma M over `σ`. -/
-def MOs (S : InaccSeq.{0}) (σ : Ordinal.{0}) (m n : ℕ) (N M : ℕ) : Prop :=
-  ∀ x y : Term, x.size ≤ N → y.size ≤ N → x.size + y.size < M → CL S σ m n x → CL S σ m n y →
-    Term.val S x < Term.val S y → ev σ (Ex S σ m n x) < ev σ (Ex S σ m n y)
+def MOs (S : InaccSeq.{0}) (σ : Ordinal.{0}) (L : List Ordinal.{0}) (N M : ℕ) : Prop :=
+  ∀ x y : Term, x.size ≤ N → y.size ≤ N → x.size + y.size < M → CL S σ L x → CL S σ L y →
+    Term.val S x < Term.val S y → ev σ (Ex S σ L x) < ev σ (Ex S σ L y)
 
 /-- The oracle of Lemma D over `σ`. -/
-def DOs (S : InaccSeq.{0}) (σ : Ordinal.{0}) (m n : ℕ) (N : ℕ) : Prop :=
-  ∀ u : Term, u.size ≤ N → CL S σ m n u → DL S σ m n u
+def DOs (S : InaccSeq.{0}) (σ : Ordinal.{0}) (L : List Ordinal.{0}) (N : ℕ) : Prop :=
+  ∀ u : Term, u.size ≤ N → CL S σ L u → DL S σ L u
 
 theorem KLt_topAtom {μ α : Term} : ∀ {t a : Term}, Term.KLt μ t α → a ∈ topAtoms t → Term.KLt μ a α
   | .zero, a, _, h => by simp [topAtoms] at h
@@ -55,12 +63,12 @@ theorem psiA_lvl {s c : Term} (hs0 : Term.val S s = 0) : lvl (Term.val S (.psiS 
 /-- **Lemma KB at level `0`.** -/
 theorem KB0 (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) (hs0 : Term.val S s = 0)
     (hμσ : σ ≤ Term.val S (.psiS s c)) (Y : Ordinal.{0}) {N : ℕ}
-    (hD : DOs S σ m n N)
-    (hO1 : ∀ r : Term, r.size ≤ N → CL S σ m n r → r.isPrin = true →
-      lvl (Term.val S r) = 0 → Term.val S r < Term.val S (.psiS s c) → ev σ (Ex S σ m n r) < Y) :
-    ∀ u : Term, CL S σ m n u → u.size ≤ N → Term.KLt (.psiS s c) u c →
-      ∀ v ∈ Ki 0 (Ex S σ m n u), ev σ v < Y := by
-  have hpb : ∀ r : Term, CL S σ m n r → r.isPrin = true → lvl (Term.val S r) = 0 →
+    (hD : DOs S σ L N)
+    (hO1 : ∀ r : Term, r.size ≤ N → CL S σ L r → r.isPrin = true →
+      lvl (Term.val S r) = 0 → Term.val S r < Term.val S (.psiS s c) → ev σ (Ex S σ L r) < Y) :
+    ∀ u : Term, CL S σ L u → u.size ≤ N → Term.KLt (.psiS s c) u c →
+      ∀ v ∈ Ki 0 (Ex S σ L u), ev σ v < Y := by
+  have hpb : ∀ r : Term, CL S σ L r → r.isPrin = true → lvl (Term.val S r) = 0 →
       Term.KLt (.psiS s c) r c → Term.val S r < Term.val S (.psiS s c) :=
     fun r hc hp hl hK => parts_b_CL hσ hμ (k := 0) (by rw [hs0]; rfl) hμσ r.size r le_rfl hc hp hl hK
   intro u hu
@@ -79,9 +87,9 @@ theorem KB0 (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) (hs0 : Term
     simp [Omk, Ki, show ¬ j < 0 by omega, show j ≠ 0 from hj0] at hv'
   | @phi x y hn hv hx hy ihx ihy =>
     intro hs hK v hv'
-    have hc' : CL S σ m n (.phi x y) := CL.phi hn hv hx hy
+    have hc' : CL S σ L (.phi x y) := CL.phi hn hv hx hy
     set j := lvl (Term.val S (.phi x y)) with hjdef
-    have e : Ex S σ m n (.phi x y) = th j (plus σ (th (j + 1) (Ex S σ m n x)) (Ex S σ m n y)) := by
+    have e : Ex S σ L (.phi x y) = th j (plus σ (th (j + 1) (Ex S σ L x)) (Ex S σ L y)) := by
       rw [Ex, EL_phi hv]
     rw [e] at hv'
     simp only [Ki] at hv'
@@ -96,9 +104,9 @@ theorem KB0 (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) (hs0 : Term
       · exact ihy (by simp [Term.size] at hs; omega) hK.2 v h
   | @psiA s' c' hn hv hs0' h1 h2 h3 h4 _ =>
     intro hs hK v hv'
-    have hc' : CL S σ m n (.psiS s' c') := CL.psiA hn hv hs0' h1 h2 h3 h4
+    have hc' : CL S σ L (.psiS s' c') := CL.psiA hn hv hs0' h1 h2 h3 h4
     have h0 : natOf (Term.val S s') = 0 := by rw [hs0']; exact natOf_nat 0
-    have e := EL_psi0 (kA := kA S m n) hv h0
+    have e := EL_psi0 (kA := kA S L) hv h0
     rw [Ex, e] at hv'
     simp only [Ki, show ¬ (0 : ℕ) < 0 by omega, if_false, if_true] at hv'
     simp at hv'; subst hv'
@@ -118,10 +126,10 @@ theorem KB0 (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) (hs0 : Term
       exact absurd (h1'.trans h3') (not_lt.2 ((BP.Om_one_le_Om_nat hj0).trans h2'.le))
     have hsc' : c'.size ≤ N := le_trans (by simp only [Term.size]; omega) hs
     have hDc := hD c' hsc' hcc
-    have hEcω : ev σ (Ex S σ m n c') < Om (ω : Ordinal.{0}) := hDc.lt.trans (OmT_succ_lt_Om_omega σ _)
+    have hEcω : ev σ (Ex S σ L c') < Om (ω : Ordinal.{0}) := hDc.lt.trans (OmT_succ_lt_Om_omega σ _)
     rcases List.mem_append.1 (Ki_plus σ 0 _ _ hv') with h | h
     · simp [Pk, Omk, Ki] at h
-    · by_cases hc0 : ev σ (Ex S σ m n c') = 0
+    · by_cases hc0 : ev σ (Ex S σ L c') = 0
       · rw [gFc_zero hσ hc0] at h; simp [Ki] at h
       have h' := gKi_Fc hσ hc0 h
       split_ifs at h' with g1 g2
@@ -131,10 +139,10 @@ theorem KB0 (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) (hs0 : Term
 
 /-! ## Case (II) through a head -/
 
-theorem head_mem_Ki_s {N : ℕ} (hD : DOs S σ m n N) {z : Term} (hz : z.size ≤ N) (hc : CL S σ m n z)
+theorem head_mem_Ki_s {N : ℕ} (hD : DOs S σ L N) {z : Term} (hz : z.size ≤ N) (hc : CL S σ L z)
     (hz0 : z ≠ .zero) (hσz : ¬ Term.val S (Term.head z) < σ) {k : ℕ}
     (hk : lvl (Term.val S (Term.head z)) = k) (_hσ : Base σ) :
-    Ex S σ m n (Term.head z) ∈ Ki k (Ex S σ m n z) := by
+    Ex S σ L (Term.head z) ∈ Ki k (Ex S σ L z) := by
   have hDz := hD _ hz hc
   have hzσ : ¬ Term.val S z < σ := fun h => hσz (lt_of_le_of_lt (val_head_le z) h)
   cases hc with
@@ -163,14 +171,14 @@ theorem head_mem_Ki_s {N : ℕ} (hD : DOs S σ m n N) {z : Term} (hz : z.size �
     rw [he, hk]; simp [Ki]
 
 /-- **Case (II) through a head** over `σ`. -/
-theorem via_head_s (hσ : Base σ) {N : ℕ} (hD : DOs S σ m n N) {p q z : Term} (hsp : p.size ≤ N)
-    (hsq : q.size ≤ N) (IHi : MOs S σ m n N (p.size + q.size)) (cp : CL S σ m n p)
+theorem via_head_s (hσ : Base σ) {N : ℕ} (hD : DOs S σ L N) {p q z : Term} (hsp : p.size ≤ N)
+    (hsq : q.size ≤ N) (IHi : MOs S σ L N (p.size + q.size)) (cp : CL S σ L p)
     (pp : p.isPrin = true) (hpσ : ¬ Term.val S p < σ)
-    {k : ℕ} (hkp : lvl (Term.val S p) = k) {ep eq : Tm} (hep : Ex S σ m n p = th k ep)
-    (heq : Ex S σ m n q = th k eq) (nEp : NF σ (th k ep)) (nEq : NF σ (th k eq))
-    (hsz : z.size < q.size) (hcz : CL S σ m n z)
+    {k : ℕ} (hkp : lvl (Term.val S p) = k) {ep eq : Tm} (hep : Ex S σ L p = th k ep)
+    (heq : Ex S σ L q = th k eq) (nEp : NF σ (th k ep)) (nEq : NF σ (th k eq))
+    (hsz : z.size < q.size) (hcz : CL S σ L z)
     (hpz : Term.val S p ≤ Term.val S z) (hzq : Term.val S z < OmT 1 (k + 1))
-    (hsub : Ki k (Ex S σ m n z) ⊆ Ki k eq) : ev σ (Ex S σ m n p) < ev σ (Ex S σ m n q) := by
+    (hsub : Ki k (Ex S σ L z) ⊆ Ki k eq) : ev σ (Ex S σ L p) < ev σ (Ex S σ L q) := by
   have np := cp.NF
   have hnz := hcz.NF
   have hz0 : z ≠ .zero := by
@@ -185,7 +193,7 @@ theorem via_head_s (hσ : Base σ) {N : ℕ} (hD : DOs S σ m n N) {p q z : Term
     lvl_of_th_bounds (hpOm.trans hhead) (lt_of_le_of_lt (val_head_le z) hzq)
   have hσh : ¬ Term.val S (Term.head z) < σ := fun h => hpσ (lt_of_le_of_lt hhead h)
   have hmem := hsub (head_mem_Ki_s hD (by omega) hcz hz0 hσh hlvh hσ)
-  have hle : ev σ (Ex S σ m n p) ≤ ev σ (Ex S σ m n (Term.head z)) := by
+  have hle : ev σ (Ex S σ L p) ≤ ev σ (Ex S σ L (Term.head z)) := by
     rcases eq_or_lt_of_le hhead with he | he
     · rw [Term.eq_of_val_eq S np hnz.head he]
     · exact (IHi p (Term.head z) hsp (by have := Term.size_head_le z; omega)
@@ -193,5 +201,59 @@ theorem via_head_s (hσ : Base σ) {N : ℕ} (hD : DOs S σ m n N) {p q z : Term
   rw [hep, heq]
   rw [hep] at hle
   exact thb_lt_of_II hσ nEp nEq (hle.trans (le_star hmem))
+
+end Googology.Trans.PoR.InaccPsi.R2.Bt
+
+/-! ## The interface for `A = A_{ω·m+n}` (namespace `R2.Br`): corollaries at `L = Alist S m n` -/
+
+namespace Googology.Trans.PoR.InaccPsi.R2.Br
+
+open Ordinal Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.InaccSeq Tm
+
+variable {S : InaccSeq.{0}} {σ : Ordinal.{0}} {m n : ℕ}
+
+/-- The oracle of Lemma M over `σ` for `A = A_{ω·m+n}` (`Bt.MOs` at `Alist S m n`). -/
+abbrev MOs (S : InaccSeq.{0}) (σ : Ordinal.{0}) (m n : ℕ) (N M : ℕ) : Prop := Bt.MOs S σ (Alist S m n) N M
+
+/-- The oracle of Lemma D over `σ` for `A = A_{ω·m+n}` (`Bt.DOs` at `Alist S m n`). -/
+abbrev DOs (S : InaccSeq.{0}) (σ : Ordinal.{0}) (m n : ℕ) (N : ℕ) : Prop := Bt.DOs S σ (Alist S m n) N
+
+theorem KLt_topAtom {μ α : Term} : ∀ {t a : Term}, Term.KLt μ t α → a ∈ topAtoms t → Term.KLt μ a α := by
+  exact Bt.KLt_topAtom
+
+theorem KLt_dropT {μ α : Term} : ∀ (k : ℕ) (x : Term), Term.KLt μ x α → Term.KLt μ (dropT k x) α := by
+  exact Bt.KLt_dropT
+
+theorem psiA_lvl {s c : Term} (hs0 : Term.val S s = 0) : lvl (Term.val S (.psiS s c)) = 0 := by
+  apply Bt.psiA_lvl; assumption
+
+/-- **Lemma KB at level `0`.** -/
+theorem KB0 (hσ : Base σ) {s c : Term} (hμ : Term.NF (.psiS s c)) (hs0 : Term.val S s = 0)
+    (hμσ : σ ≤ Term.val S (.psiS s c)) (Y : Ordinal.{0}) {N : ℕ}
+    (hD : DOs S σ m n N)
+    (hO1 : ∀ r : Term, r.size ≤ N → CL S σ m n r → r.isPrin = true →
+      lvl (Term.val S r) = 0 → Term.val S r < Term.val S (.psiS s c) → ev σ (Ex S σ m n r) < Y) :
+    ∀ u : Term, CL S σ m n u → u.size ≤ N → Term.KLt (.psiS s c) u c →
+      ∀ v ∈ Ki 0 (Ex S σ m n u), ev σ v < Y := by
+  apply Bt.KB0 <;> assumption
+
+/-! ## Case (II) through a head -/
+
+theorem head_mem_Ki_s {N : ℕ} (hD : DOs S σ m n N) {z : Term} (hz : z.size ≤ N) (hc : CL S σ m n z)
+    (hz0 : z ≠ .zero) (hσz : ¬ Term.val S (Term.head z) < σ) {k : ℕ}
+    (hk : lvl (Term.val S (Term.head z)) = k) (_hσ : Base σ) :
+    Ex S σ m n (Term.head z) ∈ Ki k (Ex S σ m n z) := by
+  apply Bt.head_mem_Ki_s <;> assumption
+
+/-- **Case (II) through a head** over `σ`. -/
+theorem via_head_s (hσ : Base σ) {N : ℕ} (hD : DOs S σ m n N) {p q z : Term} (hsp : p.size ≤ N)
+    (hsq : q.size ≤ N) (IHi : MOs S σ m n N (p.size + q.size)) (cp : CL S σ m n p)
+    (pp : p.isPrin = true) (hpσ : ¬ Term.val S p < σ)
+    {k : ℕ} (hkp : lvl (Term.val S p) = k) {ep eq : Tm} (hep : Ex S σ m n p = th k ep)
+    (heq : Ex S σ m n q = th k eq) (nEp : NF σ (th k ep)) (nEq : NF σ (th k eq))
+    (hsz : z.size < q.size) (hcz : CL S σ m n z)
+    (hpz : Term.val S p ≤ Term.val S z) (hzq : Term.val S z < OmT 1 (k + 1))
+    (hsub : Ki k (Ex S σ m n z) ⊆ Ki k eq) : ev σ (Ex S σ m n p) < ev σ (Ex S σ m n q) := by
+  apply Bt.via_head_s <;> assumption
 
 end Googology.Trans.PoR.InaccPsi.R2.Br
