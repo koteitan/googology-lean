@@ -1,4 +1,5 @@
 import Googology.Trans.PoR.InaccPsi.R2.LbCrit
+import Googology.Trans.PoR.InaccPsi.R2.FxFold
 
 /-!
 # BLK^O past `B₀`: the frontier `Λ_B⁺` and the exact reaches of every restart below it
@@ -13,7 +14,9 @@ to the first restart index where such restarts are cofinal:
 
 * `RzBad λ`: `λ` is a restart index, `VzOrec(λ) = B(ρ_λ)`, and restart indices `μ < λ` with
   `VzOrec(μ) = B(ρ_μ)` have `ρ_μ` cofinal in `ρ_λ`;
-* `rzLam` (**`Λ_B⁺`**): the least `λ` with `RzBad λ` (`Ω₁` if there is none);
+* `rzLam` (**`Λ_B⁺`**): defined as `Cp.cpB1` (the least `λ > 0` below which the restart indices `μ` with
+  `VzOrec(μ) = B(ρ_μ)` are cofinal, `R2.CpFront`); `rzLam_def` (**the original definition**: `Λ_B⁺` is the
+  least `λ` with `RzBad λ`, `Ω₁` if there is none; `Fx.fxB1_eq`), `rzLam_eq_cpB1`;
 * `rzTopIn` (**the input of Lemma TOP below `Λ_B⁺`**), `rzSpec_of_le`, `rzLam_lt_Om1` (`Λ_B⁺ < Ω₁`, the core is
   countable, [C09] Cor 15.15), `rzLam_bad`, `rzLam_ri`, `rzSpec` (**`VzOrec` is a general offset specification
   up to `Λ_B⁺`**);
@@ -38,14 +41,18 @@ def RzBad (l : Ordinal.{0}) : Prop :=
   IsRestartIdx l ∧ VzOrec l = VzB (upsilon l) ∧
     ∀ x0 < upsilon l, ∃ μ, IsRestartIdx μ ∧ μ < l ∧ x0 < upsilon μ ∧ VzOrec μ = VzB (upsilon μ)
 
-/-- **`Λ_B⁺`**: the least restart index with `RzBad` (`Ω₁` if there is none). -/
-noncomputable def rzLam : Ordinal.{0} := sInf (insert Om1 {l | RzBad l})
+/-- **`Λ_B⁺`**: the frontier `Cp.cpB1` (one point, one name; `rzLam_def` is its characterization as the
+least restart index with `RzBad`). -/
+noncomputable abbrev rzLam : Ordinal.{0} := Cp.cpB1
 
-theorem rzLam_le_Om1 : rzLam ≤ Om1 := csInf_le (OrderBot.bddBelow _) (Set.mem_insert _ _)
+theorem rzLam_eq_cpB1 : rzLam = Cp.cpB1 := rfl
 
-theorem rz_not_bad {l : Ordinal.{0}} (hl : l < rzLam) : ¬ RzBad l := fun h =>
-  absurd (csInf_le (OrderBot.bddBelow _) (Set.mem_insert_of_mem _ (show l ∈ {l | RzBad l} from h)))
-    (not_le.2 hl)
+/-- **The original definition of `Λ_B⁺`**: the least restart index with `RzBad` (`Ω₁` if there is none). -/
+theorem rzLam_def : rzLam = sInf (insert Om1 {l | RzBad l}) := Fx.fxB1_eq
+
+theorem rzLam_le_Om1 : rzLam ≤ Om1 := Cp.cpB1_le_Om1
+
+theorem rz_not_bad {l : Ordinal.{0}} (hl : l < rzLam) : ¬ RzBad l := Fx.fx_not_bad hl
 
 /-- **The input of Lemma TOP below `Λ_B⁺`**: the term of `VzOrec(λ)` (`vzTopIn`), or `B` itself. -/
 theorem rzTopIn {l : Ordinal.{0}} (hl : IsRestartIdx l) (hlR : l < rzLam) (hl1 : l < Om1) :
@@ -75,10 +82,7 @@ theorem rzLam_lt_Om1 : rzLam < Om1 := by
   · exfalso
     exact not_core_all (fun B hm hc => core_genGen (rzSpec_of_le hm hc (by rw [h]; exact hc.le)))
 
-theorem rzLam_bad : RzBad rzLam := by
-  rcases csInf_mem (s := insert Om1 {l | RzBad l}) ⟨Om1, Set.mem_insert _ _⟩ with h' | h'
-  · exact absurd (h' ▸ rzLam_lt_Om1 : Om1 < Om1) (lt_irrefl _)
-  · exact h'
+theorem rzLam_bad : RzBad rzLam := Fx.fxB1_bad
 
 theorem rzLam_ri : IsRestartIdx rzLam := rzLam_bad.1
 
