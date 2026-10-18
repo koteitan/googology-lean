@@ -16,8 +16,8 @@ The copying principle `Cv.cvLe1_of_maps` and the realizer maps `Cv.CvReal S a t`
   into `[0, D(a))`, which is impossible at `z = D(a)`;
 * `rlMaps_le`: the hypotheses of `Cv.cvLe1_of_maps` force `b ≤ a + a`;
   `rlReal_le`: `CvReal S a t → t ≤ a + a`; `rlRealCof_le`: `CvRealCof S a b → b ≤ a + a`;
-* the named restarts are additively principal and increasing, so **every realizer hypothesis of
-  `Cv.cvNamed_of_real`, `Cv.cvCROSS_of_real`, `Cv.cvRoad_front` and `Cv.cvRoad_rz` is false**:
+* the named restarts are additively principal and increasing, so **every realizer hypothesis of the
+  round-64 road through `Cv.CvReal` is false** (those theorems are removed from `R2.CvNamed`):
   `rlNoReal_m` (at `m*`, target `L(1)`), `rlNoReal_n` (at `L(n+1)`, target `L(n+2)`),
   `rlNoReal_w` (at `L(ω)`, target `L(ω+1)`), `rlNoReal_cross` (the CROSS targets
   `P(Ω_ω + P'·(n+1) + c')`, `c' ≥ 1`).
@@ -115,24 +115,21 @@ theorem rlM_lt_L1 : Nc.ncL S 0 < Nc.ncL S 1 := by
   rw [Lw.lw_L_eq S 0, Lw.lw_L_eq S 1, mul_zero, add_zero, mul_one]
   exact (Pv_lt_succ rlGood_W).trans_le (Pv_mono (add_le_add_right rlOne_lt_Pp.le _))
 
-/-- **No realizer maps at `m*`** (the hypothesis `h0` of `Cv.cvNamed_of_real`, `Cv.cvRoad_front`,
-`Cv.cvRoad_rz` is false). -/
+/-- **No realizer maps at `m*`** (`CvRealCof S m* L(1)` is false). -/
 theorem rlNoReal_m : ¬ CvRealCof S (Nc.ncL S 0) (Nc.ncL S 1) := fun h =>
   absurd (rlRealCof_le h) (not_le.2 (Bc.ncL_add_lt rlM_lt_L1 rlM_lt_L1))
 
-/-- **No realizer maps at `L(n+1)`** (the hypothesis `hn` of `Cv.cvCL_of_real`, `Cv.cvNamed_of_real`,
-`Cv.cvRoad_front`, `Cv.cvRoad_rz` is false). -/
+/-- **No realizer maps at `L(n+1)`** (`CvRealCof S L(n+1) L(n+2)` is false). -/
 theorem rlNoReal_n (n : ℕ) :
     ¬ CvRealCof S (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0})) (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0})) :=
   fun h => absurd (rlRealCof_le h)
     (not_le.2 (Bc.ncL_add_lt (Pp.ppL_lt_succ n) (Pp.ppL_lt_succ n)))
 
-/-- **No realizer maps at `L(ω)`** (the hypothesis `hw` of `Cv.cvT_of_real`, `Cv.cvNamed_of_real`,
-`Cv.cvRoad_front`, `Cv.cvRoad_rz` is false). -/
+/-- **No realizer maps at `L(ω)`** (`CvRealCof S L(ω) L(ω+1)` is false). -/
 theorem rlNoReal_w : ¬ CvRealCof S (Nc.ncL S ω) (Nc.ncL S (ω + 1)) := fun h =>
   absurd (rlRealCof_le h) (not_le.2 (Bc.ncL_add_lt (Qq.qqL_lt_succ S) (Qq.qqL_lt_succ S)))
 
-/-- **No realizer maps at the CROSS targets** (the hypothesis of `Cv.cvCROSS_of_real` is false):
+/-- **No realizer maps at the CROSS targets** (the round-64 CROSS hypothesis through `CvReal` is false):
 for `c' ≥ 1`, `L(n+1) + L(n+1) < P(Ω_ω + P'·(n+1) + c')`. -/
 theorem rlNoReal_cross (n : ℕ) {c' : Ordinal.{0}} (hc : 1 ≤ c') :
     ¬ CvReal S (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))
@@ -146,7 +143,7 @@ theorem rlNoReal_cross (n : ℕ) {c' : Ordinal.{0}} (hc : 1 ≤ c') :
     exact (Pv_lt_succ hg).trans_le (Pv_mono (add_le_add_right hc _))
   exact absurd (rlReal_le h) (not_le.2 ((Pv_SC S _).isPrincipal ha ha))
 
-/-- **The hypothesis of `Cv.cvCROSS_of_real` is false.** -/
+/-- **The round-64 CROSS hypothesis through `CvReal` is false.** -/
 theorem rlNoReal_crossAll :
     ¬ (∀ n : ℕ, ∀ c < Nc.ncPp S, ∃ c', c ≤ c' ∧ c' < Nc.ncPp S ∧
       CvReal S (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))

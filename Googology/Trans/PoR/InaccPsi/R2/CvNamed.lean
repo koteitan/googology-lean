@@ -2,29 +2,29 @@ import Googology.Trans.PoR.InaccPsi.R2.CvCopy
 import Googology.Trans.PoR.InaccPsi.R2.CxRoad
 
 /-!
-# The crossing relations at the named restarts by copy maps (the realizer step of CROSS-LIM)
+# Realizer maps at the named restarts: the pieces that survive
 
 `L(ξ) = Nc.ncL S ξ`, `m* = L(0)`, `P' = Nc.ncPp S`, `ρ_λ = υ_λ`, `r(λ) = cdR S λ`, Range = `CdRange`,
 LOWER = `CdLOWER`.  The docs' proof of CROSS-LIM copies every finite configuration above a named restart
 `a` to a configuration just below `a`, whose bottom is a restart `ρ_μ` of the range of ENUM-REACH
-(code `< P'`) and whose top lies below `r(μ)`.  This file states that step with the copying principle
-`Cv.cvLe1_of_maps` and proves what is left of it in `R₂^C`:
+(code `< P'`) and whose top lies below `r(μ)`.  This file keeps the parts of that step whose hypotheses
+can hold:
 
 * `cvM_GP`, `cvM_restart`: `m* = P(Ω_ω)` is a `Γ`-point, hence a restart;
 * `cvStd_left`: a restart `ρ_λ` is never the left end of a standard pair;
   `CvNoPair a b`: no `≤₂`-pair `(x, y)` with `x < a ≤ y < b` and none `(a, y)` with `a < y < b`;
   `cvNoPair_of_nu`: `CvNoPair a b` holds at every restart `a = ρ_λ` with `b ≤ ν_C` (below `ν_C` every
   `<₂`-pair is standard, and no standard pair straddles or starts at a restart);
-* `CvReal S a b` (**the realizer maps** for `a ≤₁ b`): maps `D_k` as in `Cv.cvLe1_of_maps` with
-  `D_k(a) = ρ_{μ_k}` for a restart `μ_k` of the range, `D_k(y) ≤ r(μ_k)` on `[a, b)`, keeping `≤₁`,
-  `≤₂` on the pairs of `(a, b)`; `cvLe1_of_real`: LOWER, `CvNoPair a b` and `CvReal S a b` give
-  `a ≤₁ b` (the pairs `(a, y)` of `≤₁` are carried by LOWER at `μ_k`); `CvRealCof`: realizer maps for
-  cofinally many targets `t ≤ b`, and `cvLe1_of_realCof`;
-* `cvCL_of_real` (**(CL)**), `cvCROSS_of_real` (**CROSS**, the targets `P(Ω_ω + P'·(n+1) + c')`),
-  `cvM_of_real` (**`m* ≤₁ L(1)`**), `cvT_of_real` (**T**), `cvNamed_of_real` (**`CxNamed`**);
-* `cvRoad_front`, `cvRoad_rz`: `Cx.cxRoad_front` and `Cx.cxRoad_rz` with `CxNamed` replaced by the
-  realizer maps at `m*`, `L(n+1)`, `L(ω)` and `CvNoPair` at `L(ω)`
-  (`L(ω) ≤ ν_C` comes from `Cd.cdLow_enum`).
+  `cvNoPair_T_of_nu`: `CvNoPair L(ω) L(ω+1)` when `L(ω+1) ≤ ν_C`;
+* `CvReal S a b` (realizer maps on the whole interval `[a, b)`, as in `Cv.cvLe1_of_maps`) and
+  `cvLe1_of_real`: LOWER, `CvNoPair a b` and `CvReal S a b` give `a ≤₁ b`; `CvRealCof`,
+  `cvLe1_of_realCof`.
+
+`CvReal S a t` forces `t ≤ a + a` (`Rl.rlReal_le`), so at the named restarts, whose targets lie far
+above `a + a`, it is false (`Rl.rlNoReal_m`, `rlNoReal_n`, `rlNoReal_w`, `rlNoReal_cross`).  The
+theorems of round 64 that derived (CL), CROSS, `m* ≤₁ L(1)`, T, `CxNamed` and the roads from `CvReal`
+at those points had false hypotheses and are removed; the road with realizer maps on finite
+configurations is `Rl.rlNamed_of_real`, `Rl.rlRoad_front`, `Rl.rlRoad_rz`.
 
 No new axiom.
 -/
@@ -145,106 +145,11 @@ theorem cvLe1_of_realCof (hL : CdLOWER S) {a b : Ordinal.{0}} (hab : a ≤ b) (h
     obtain ⟨t, hyt, htb, hRt⟩ := hR y hay hyb
     exact ⟨t, hyt, cvLe1_of_real hL (hay.trans hyt.le) (cvNoPair_mono hP htb) hRt⟩
 
-/-- **(CL) from the realizer maps at the restarts `L(n+1)`** (targets cofinal in `L(n+2)`). -/
-theorem cvCL_of_real (hL : CdLOWER S) (hlow : Nc.ncL S ω ≤ nuC)
-    (h : ∀ n : ℕ, CvRealCof S (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))
-      (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0}))) : CdCL S := by
-  intro n
-  obtain ⟨l, hl, e⟩ := Pp.ppL_succ_restart (S := S) n
-  exact cvLe1_of_realCof hL (Pp.ppL_lt_succ n).le
-    (cvNoPair_of_nu hl e ((Pp.ppL_lt_omega (n + 1)).le.trans hlow)) (h n)
-
-/-- **CROSS from the realizer maps at `L(n+1)` with the targets `P(Ω_ω + P'·(n+1) + c')`**, `c'`
-cofinal in `P'`; hence (CL) by `Cx.cxCROSS_iff`. -/
-theorem cvCROSS_of_real (hL : CdLOWER S) (hlow : Nc.ncL S ω ≤ nuC)
-    (h : ∀ n : ℕ, ∀ c < Nc.ncPp S, ∃ c', c ≤ c' ∧ c' < Nc.ncPp S ∧
-      CvReal S (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))
-        (Pv S (Om ω + Nc.ncPp S * ((n + 1 : ℕ) : Ordinal.{0}) + c'))) :
-    CdCROSS S ∧ CdCL S := by
-  have hX : CdCROSS S := by
-    intro n c hc
-    obtain ⟨c', hcc', hc'P, hR⟩ := h n c hc
-    obtain ⟨l, hl, e⟩ := Pp.ppL_succ_restart (S := S) n
-    have h1 : Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) ≤
-        Pv S (Om ω + Nc.ncPp S * ((n + 1 : ℕ) : Ordinal.{0}) + c') := by
-      rw [Lw.lw_L_eq S]; exact Pv_mono le_self_add
-    have h2 : Pv S (Om ω + Nc.ncPp S * ((n + 1 : ℕ) : Ordinal.{0}) + c') ≤
-        Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0}) := by
-      have e2 : ((n + 2 : ℕ) : Ordinal.{0}) = ((n + 1 : ℕ) : Ordinal.{0}) + 1 := Nat.cast_succ (n + 1)
-      rw [e2, Pp.ppL_succ_eq]
-      exact Pv_mono (add_le_add_right hc'P.le _)
-    refine ⟨c', hcc', hc'P, cvLe1_of_real hL h1 (cvNoPair_of_nu hl e ?_) hR⟩
-    exact h2.trans ((Pp.ppL_lt_omega (n + 1)).le.trans hlow)
-  exact ⟨hX, cxCROSS_iff.1 hX⟩
-
-/-- **`m* ≤₁ L(1)` from the realizer maps at `m*`.** -/
-theorem cvM_of_real (hL : CdLOWER S) (hlow : Nc.ncL S ω ≤ nuC)
-    (h : CvRealCof S (Nc.ncL S 0) (Nc.ncL S 1)) : le1 (Nc.ncL S 0) (Nc.ncL S 1) := by
-  obtain ⟨l, hl, e⟩ := cvM_restart (S := S)
-  exact cvLe1_of_realCof hL (Pp.ppL_mono zero_le)
-    (cvNoPair_of_nu hl e ((Pp.ppL_mono one_lt_omega0.le).trans hlow)) h
-
-/-- **`T` from the realizer maps at `L(ω)`** and `CvNoPair` there. -/
-theorem cvT_of_real (hL : CdLOWER S) (hP : CvNoPair (Nc.ncL S ω) (Nc.ncL S (ω + 1)))
-    (h : CvRealCof S (Nc.ncL S ω) (Nc.ncL S (ω + 1))) : CxT S :=
-  cvLe1_of_realCof hL (Qq.qqL_lt_succ S).le hP h
 
 /-- `CvNoPair` at `L(ω)` holds if `L(ω+1) ≤ ν_C`. -/
 theorem cvNoPair_T_of_nu (h : Nc.ncL S (ω + 1) ≤ nuC) :
     CvNoPair (Nc.ncL S ω) (Nc.ncL S (ω + 1)) := by
   obtain ⟨l, hl, e⟩ := Pp.ppL_omega_restart (S := S)
   exact cvNoPair_of_nu hl e h
-
-/-- **The crossing relations at the named restarts from the realizer maps.** -/
-theorem cvNamed_of_real (hL : CdLOWER S) (hlow : Nc.ncL S ω ≤ nuC)
-    (h0 : CvRealCof S (Nc.ncL S 0) (Nc.ncL S 1))
-    (hn : ∀ n : ℕ, CvRealCof S (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))
-      (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0})))
-    (hP : CvNoPair (Nc.ncL S ω) (Nc.ncL S (ω + 1)))
-    (hw : CvRealCof S (Nc.ncL S ω) (Nc.ncL S (ω + 1))) : CxNamed S :=
-  ⟨cvM_of_real hL hlow h0, cvCL_of_real hL hlow hn, cvT_of_real hL hP hw⟩
-
-/-- **The road with `CxNamed` replaced by the realizer maps** (`Cx.cxRoad_front`). -/
-theorem cvRoad_front (hU : CdUPPER S) (hL : CdLOWER S)
-    (hV : ∀ l, CdRange S l → upsilon l < Nc.ncL S ω → CdCapV S l)
-    (hEQ : CxEQtop S) (htop : CxTCtopOff S) (hups : CxUpsRestTop S)
-    (h0 : CvRealCof S (Nc.ncL S 0) (Nc.ncL S 1))
-    (hn : ∀ n : ℕ, CvRealCof S (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))
-      (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0})))
-    (hP : CvNoPair (Nc.ncL S ω) (Nc.ncL S (ω + 1)))
-    (hw : CvRealCof S (Nc.ncL S ω) (Nc.ncL S (ω + 1)))
-    (hmove : CxStdMoveTop S) (hstd : CxStdPairTop S) :
-    CdEQ S ∧ CdTC S ∧ CdEMB2 S ∧ CxT S ∧ CdCL S ∧ CdCROSS S ∧ CdC1 S ∧
-      nuC = Nc.ncL S (ω + 1) ∧ Nc.ncL S ω ≤ nuC ∧ le2 (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
-      Nc.NcCofPred (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
-      ¬ le1 (Nc.ncL S ω) (Nc.ncL S (ω + 1) + 1) ∧
-      IsReach R2C (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
-      ∀ n : ℕ, IsReach R2C (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0})) (Nc.ncL S (ω + 1)) :=
-  cxRoad_front hU hL hV hEQ htop hups
-    (cvNamed_of_real hL (cdLow_enum hU hV) h0 hn hP hw) hmove hstd
-
-/-- **The reduced road (`Cx.cxRoad_rz`) with `CxNamed` replaced by the realizer maps.** -/
-theorem cvRoad_rz (hU : ∀ l, CdRange S l → Rz.RzRest l → CdUpper S l)
-    (hO : ∀ l, CdRange S l → l < Rz.rzLam → upsilon l ≠ l → VzOrec l ≤ cL l)
-    (hL : ∀ l, CdRange S l → Rz.RzRest l → CdLower S l)
-    (hV : ∀ l, CdRange S l → upsilon l < Nc.ncL S ω → Rz.RzRest l → CdCapV S l)
-    (hEQ : CxEQtop S) (htop : CxTCtopOff S) (hups : CxUpsRestTop S)
-    (h0 : CvRealCof S (Nc.ncL S 0) (Nc.ncL S 1))
-    (hn : ∀ n : ℕ, CvRealCof S (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))
-      (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0})))
-    (hP : CvNoPair (Nc.ncL S ω) (Nc.ncL S (ω + 1)))
-    (hw : CvRealCof S (Nc.ncL S ω) (Nc.ncL S (ω + 1)))
-    (hmove : CxStdMoveTop S) (hstd : CxStdPairTop S) :
-    CdEQ S ∧ CdTC S ∧ CdEMB2 S ∧ CxT S ∧ CdCL S ∧ CdCROSS S ∧ CdC1 S ∧
-      nuC = Nc.ncL S (ω + 1) ∧ Nc.ncL S ω ≤ nuC ∧ le2 (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
-      Nc.NcCofPred (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
-      ¬ le1 (Nc.ncL S ω) (Nc.ncL S (ω + 1) + 1) ∧
-      IsReach R2C (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
-      ∀ n : ℕ, IsReach R2C (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0})) (Nc.ncL S (ω + 1)) := by
-  have hU' := Rz.rzUPPER_of_rest hU hO
-  have hL' := Rz.rzLOWER_of_rest hL
-  have hV' := Rz.rzCapV_of_rest hV
-  exact cxRoad_rz hU hO hL hV hEQ htop hups
-    (cvNamed_of_real hL' (cdLow_enum hU' hV') h0 hn hP hw) hmove hstd
 
 end Googology.Trans.PoR.InaccPsi.R2.Cv
