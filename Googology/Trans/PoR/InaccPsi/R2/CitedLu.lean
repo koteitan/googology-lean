@@ -1,4 +1,7 @@
-import Googology.Trans.PoR.InaccPsi.R2.CitedLt
+import Googology.Trans.PoR.InaccPsi.R2.CitedL
+import Googology.Trans.PoR.InaccPsi.R2.CitedW
+
+set_option autoImplicit false
 
 /-!
 # Cited facts of Wilken 2007, as axioms, ONCE for the arguments `Ω₁·β + η` of every constant level `β < τ`
@@ -112,6 +115,9 @@ Our steps on the levels (used in every docstring below; `β < τ` a level, `η �
 namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal
+
+/-- The regular successor cardinal Ω₂ = ω₂. -/
+noncomputable def OmTwo : Ordinal.{0} := Ordinal.omega 2
 
 open Classical in
 /-- **`ζᵗ_α` of [W07a] Def 4.11** for `α = ϑᵗ(Ω₁·β + η)` (step ★ζ of the module docstring): `logend(η)` if

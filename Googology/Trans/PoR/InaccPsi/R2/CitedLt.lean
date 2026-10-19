@@ -1,4 +1,7 @@
 import Googology.Trans.PoR.InaccPsi.R2.CitedLz
+import Googology.Trans.PoR.InaccPsi.R2.CitedLu
+import Googology.Trans.PoR.InaccPsi.R2.EpsQ
+import Googology.Trans.PoR.InaccPsi.R2.EvV
 
 /-!
 # Cited facts of Wilken 2007, as axioms: the `R₁⁺`-reach of `ϑᵗ(Ω₁·ω + η)`, and `ϑᵗ` at `Ω₁·(ω+1)`
@@ -92,6 +95,27 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal
 
+private theorem luOld_omega_lt_E {τ : Ordinal.{0}} (hτ : InE τ) : (ω : Ordinal.{0}) < τ := omega0_lt_inE hτ
+
+private theorem luOld_one_lt_E {τ : Ordinal.{0}} (hτ : InE τ) : (1 : Ordinal.{0}) < τ :=
+  one_lt_omega0.trans (luOld_omega_lt_E hτ)
+
+private theorem luOld_omega_one_lt_E {τ : Ordinal.{0}} (hτ : InE τ) : (ω : Ordinal.{0}) + 1 < τ :=
+  (inE_indec hτ).add_lt (luOld_omega_lt_E hτ) (luOld_one_lt_E hτ)
+
+private theorem luOld_zero_T {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) :
+    (0 : Ordinal.{0}) ∈ Tset τ := mem_T_of_le hτ hτ1 zero_le
+
+private theorem luOld_lev_lt {τ β' η' β η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1)
+    (hβ'β : β' < β) (hβ : β < τ) (hη' : η' ∈ Tset τ) (hη'1 : η' < Om1)
+    (hη : η ∈ Tset τ) (hη1 : η < Om1) (h : η' < vt τ (Om1 * β + η)) :
+    vt τ (Om1 * β' + η') < vt τ (Om1 * β + η) := by
+  refine luVt_lt hτ hτ1 (hβ'β.trans hβ) hη' hη'1 hβ hη hη1 ?_ h
+  calc Om1 * β' + η' < Om1 * β' + Om1 := (add_lt_add_iff_left _).2 hη'1
+    _ = Om1 * (β' + 1) := by rw [mul_add_one]
+    _ ≤ Om1 * β := mul_le_mul_right (Order.add_one_le_of_lt hβ'β) Om1
+    _ ≤ Om1 * β + η := le_self_add
+
 /-- **[W07b] Def 4.1, the case `δ > α` with `cr(α, δ) = m`, with [W07a] Def 7.5, Def 7.1, Def 6.1, Def 4.11,
 Def 4.6, Def 7.15, Convention 6.6, Convention 4.1, Lemma 6.3, Lemma 4.2, Lemma 4.3, Def 3.4, Def 3.28, Def 3.22,
 Theorem 3.23** (texts H, Λ, I, D, G, LOC, CR, TR, C, W, E, S, T, Θ): for `η ∈ Tᵗ ∩ Ω₁`, `η ≠ 0`, with
@@ -134,26 +158,39 @@ axiom ltLhT_w_lim {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : 
 Our steps.  `γ := Ω₁·ω + η ∈ Tᵗ ∩ Ω₂` (★w).  Lemma 3.30 (`m = 0`): `γ^* < ϑ₀(γ)`, and `γ^* = η^*` (★w).  By Lemma 4.3
 (`Δ = Ω₁·ω > 0`), `τ < ϑ₀(γ) ∈ E ⊆ P`.  By (★1) every additive component of `η` is `< τ` or `≤ η^*`, so it is
 `< ϑ₀(γ)`; as `ϑ₀(γ)` is additive principal, `η < ϑ₀(γ)` (for `η = 0` as `ϑ₀(γ) > τ > 0`).  (For `Ω₁·n + η`,
-`1 ≤ n < ω`, this is the axiom `vzLt_vt_self` of `R2.CitedVz`, with the same steps.) -/
-axiom ltLt_vt_self_w {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1) :
-    η < vt τ (Om1 * ω + η)
+`1 ≤ n < ω`, this is the axiom `vzLt_vt_self` of `R2.CitedVz`, with the same steps.) Proved from `CitedLu`. -/
+theorem ltLt_vt_self_w {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ)
+    (hη1 : η < Om1) : η < vt τ (Om1 * ω + η) :=
+  luLt_vt_self hτ hτ1 one_lt_omega0.le (luOld_omega_lt_E hτ) hη hη1
+
+
 
 /-- **[W07a] Lemma 3.30, the direction `⇐`, at `γ = Ω₁·(ω+1)`, with Def 3.28** (texts L, S, ★w, ★w1, ★1): for
 `η' ∈ Tᵗ ∩ Ω₁` with `η' < ϑᵗ(Ω₁·(ω+1))`, `ϑᵗ(Ω₁·ω + η') < ϑᵗ(Ω₁·(ω+1))`.
 
 Our steps.  `α := Ω₁·ω + η' ∈ Tᵗ ∩ Ω₂` (★w) and `γ := Ω₁·(ω+1) ∈ Tᵗ ∩ Ω₂` (★w1); `α < Ω₁·ω + Ω₁ = γ` (`η' < Ω₁`).
 By (★w) and (★1), `α^* = η'^* ≤ η' < ϑ₀(γ)`.  So the first disjunct of the right side of Lemma 3.30 (`m = 0`) holds:
-`ϑ₀(α) < ϑ₀(γ)`. -/
-axiom ltVt_lt_w1 {τ η' : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ) (hη'1 : η' < Om1)
-    (h : η' < vt τ (Om1 * (ω + 1))) : vt τ (Om1 * ω + η') < vt τ (Om1 * (ω + 1))
+`ϑ₀(α) < ϑ₀(γ)`. Proved from `CitedLu`. -/
+theorem ltVt_lt_w1 {τ η' : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
+    (hη'1 : η' < Om1) (h : η' < vt τ (Om1 * (ω + 1))) : vt τ (Om1 * ω + η') < vt τ (Om1 * (ω + 1)) := by
+  rw [← add_zero (Om1 * (ω + 1))] at h ⊢
+  exact luOld_lev_lt hτ hτ1 (lt_add_one ω) (luOld_omega_one_lt_E hτ) hη' hη'1 (luOld_zero_T hτ hτ1)
+    (Ordinal.omega_pos 1) h
+
+
 
 /-- **[W07a] Lemma 3.30, the direction `⇒`, at `γ = Ω₁·(ω+1)`, with Def 3.28** (texts L, S, ★w1): for
 `ξ ∈ Tᵗ ∩ Ω₂`, `ϑᵗ(ξ) < ϑᵗ(Ω₁·(ω+1))` implies `ξ < Ω₁·(ω+1)`.
 
 Our steps.  `γ := Ω₁·(ω+1) ∈ Tᵗ ∩ Ω₂` and `γ^* = 0` (★w1).  Lemma 3.30 (`m = 0`, `α = ξ`): `ϑ₀(ξ) < ϑ₀(γ)` gives
-`ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^* = 0`; the second is impossible (`ϑ₀(ξ) ∈ P`, so `> 0`).  So `ξ < γ`. -/
-axiom ltLt_of_vt_lt_w1 {τ ξ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo)
-    (h : vt τ ξ < vt τ (Om1 * (ω + 1))) : ξ < Om1 * (ω + 1)
+`ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^* = 0`; the second is impossible (`ϑ₀(ξ) ∈ P`, so `> 0`).  So `ξ < γ`. Proved from `CitedLu`. -/
+theorem ltLt_of_vt_lt_w1 {τ ξ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ)
+    (hξ2 : ξ < OmTwo) (h : vt τ ξ < vt τ (Om1 * (ω + 1))) : ξ < Om1 * (ω + 1) := by
+  have h0 : (0 : Ordinal.{0}) < vt τ ξ := hτ.pos.trans_le (vt_memTwo hτ hτ1 hξ hξ2).2.1
+  rw [← add_zero (Om1 * (ω + 1))] at h ⊢
+  exact luLt_of_vt_lt hτ hτ1 hξ hξ2 (luOld_omega_one_lt_E hτ) (luOld_zero_T hτ hτ1) (Ordinal.omega_pos 1) h0 h
+
+
 
 /-- **[W07b] Def 4.1, the case `δ > α` with `cr(α, δ) = m`, with [W07a] Def 7.5, Def 7.1, Def 6.1, Def 4.11,
 Def 4.6, Def 7.15, Convention 6.6, Convention 4.1, Lemma 6.3, Lemma 4.2, Lemma 4.3, Def 3.4, Def 3.28, Def 3.22, the

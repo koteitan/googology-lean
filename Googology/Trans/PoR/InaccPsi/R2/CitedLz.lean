@@ -1,4 +1,5 @@
 import Googology.Trans.PoR.InaccPsi.R2.CitedXt
+import Googology.Trans.PoR.InaccPsi.R2.CitedLu
 
 /-!
 # Cited facts of Wilken 2007, as axioms: [W07a] Lemma 3.30 at the arguments `Ω₁·ω + η`
@@ -59,33 +60,55 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal
 
+private theorem luOld_omega_lt_E {τ : Ordinal.{0}} (hτ : InE τ) : (ω : Ordinal.{0}) < τ := omega0_lt_inE hτ
+
+private theorem luOld_lev_lt {τ β' η' β η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1)
+    (hβ'β : β' < β) (hβ : β < τ) (hη' : η' ∈ Tset τ) (hη'1 : η' < Om1)
+    (hη : η ∈ Tset τ) (hη1 : η < Om1) (h : η' < vt τ (Om1 * β + η)) :
+    vt τ (Om1 * β' + η') < vt τ (Om1 * β + η) := by
+  refine luVt_lt hτ hτ1 (hβ'β.trans hβ) hη' hη'1 hβ hη hη1 ?_ h
+  calc Om1 * β' + η' < Om1 * β' + Om1 := (add_lt_add_iff_left _).2 hη'1
+    _ = Om1 * (β' + 1) := by rw [mul_add_one]
+    _ ≤ Om1 * β := mul_le_mul_right (Order.add_one_le_of_lt hβ'β) Om1
+    _ ≤ Om1 * β + η := le_self_add
+
 /-- **[W07a] Lemma 3.30, the direction `⇐`, at `γ = Ω₁·ω + η`, with Def 3.28** (texts L, S, ★3, ★w, ★1): for
 `η', η ∈ Tᵗ ∩ Ω₁` and `m < ω` with `η' < ϑᵗ(Ω₁·ω + η)`, `ϑᵗ(Ω₁·m + η') < ϑᵗ(Ω₁·ω + η)`.
 
 Our steps.  `α := Ω₁·m + η' ∈ Tᵗ ∩ Ω₂` (★3) and `γ := Ω₁·ω + η ∈ Tᵗ ∩ Ω₂` (★w); `α < Ω₁·(m + 1) ≤ Ω₁·ω ≤ γ`.  By
 (★3) and (★1), `α^* = η'^* ≤ η' < ϑ₀(γ)`.  So the first disjunct of the right side of Lemma 3.30 (`m = 0`) holds:
-`α < γ ∧ α^* < ϑ₀(γ)`, and `ϑ₀(α) < ϑ₀(γ)`. -/
-axiom lzVt_lt_w {τ η' η : Ordinal.{0}} {m : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
+`α < γ ∧ α^* < ϑ₀(γ)`, and `ϑ₀(α) < ϑ₀(γ)`. Proved from `CitedLu`. -/
+theorem lzVt_lt_w {τ η' η : Ordinal.{0}} {m : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
     (hη'1 : η' < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1) (h : η' < vt τ (Om1 * ω + η)) :
-    vt τ (Om1 * (m : Ordinal.{0}) + η') < vt τ (Om1 * ω + η)
+    vt τ (Om1 * (m : Ordinal.{0}) + η') < vt τ (Om1 * ω + η) :=
+  luOld_lev_lt hτ hτ1 (natCast_lt_omega0 m) (luOld_omega_lt_E hτ) hη' hη'1 hη hη1 h
+
+
 
 /-- **[W07a] Lemma 3.30, the direction `⇐`, between `Ω₁·ω + η'` and `Ω₁·ω + η`, with Def 3.28** (texts L, S, ★w,
 ★1): for `η', η ∈ Tᵗ ∩ Ω₁` with `η' < η` and `η' < ϑᵗ(Ω₁·ω + η)`, `ϑᵗ(Ω₁·ω + η') < ϑᵗ(Ω₁·ω + η)`.
 
 Our steps.  `α := Ω₁·ω + η'` and `γ := Ω₁·ω + η` lie in `Tᵗ ∩ Ω₂` (★w; `η' < η < Ω₁`), and `α < γ`.  By (★w) and
 (★1), `α^* = η'^* ≤ η' < ϑ₀(γ)`.  So the first disjunct of the right side of Lemma 3.30 (`m = 0`) holds:
-`ϑ₀(α) < ϑ₀(γ)`. -/
-axiom lzVt_lt_ww {τ η' η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
+`ϑ₀(α) < ϑ₀(γ)`. Proved from `CitedLu`. -/
+theorem lzVt_lt_ww {τ η' η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
     (hη : η ∈ Tset τ) (hη1 : η < Om1) (hlt : η' < η) (h : η' < vt τ (Om1 * ω + η)) :
-    vt τ (Om1 * ω + η') < vt τ (Om1 * ω + η)
+    vt τ (Om1 * ω + η') < vt τ (Om1 * ω + η) :=
+  luVt_lt hτ hτ1 (luOld_omega_lt_E hτ) hη' (hlt.trans hη1) (luOld_omega_lt_E hτ) hη hη1
+    ((add_lt_add_iff_left _).2 hlt) h
+
+
 
 /-- **[W07a] Lemma 3.30, the direction `⇒`, at `γ = Ω₁·ω + η`, with Def 3.28** (texts L, S, ★w, ★1): for
 `ξ ∈ Tᵗ ∩ Ω₂` and `η ∈ Tᵗ ∩ Ω₁` with `η < ϑᵗ(ξ)`, `ϑᵗ(ξ) < ϑᵗ(Ω₁·ω + η)` implies `ξ < Ω₁·ω + η`.
 
 Our steps.  `γ := Ω₁·ω + η ∈ Tᵗ ∩ Ω₂` (★w).  By (★w) and (★1), `γ^* = η^* ≤ η < ϑᵗ(ξ)`.  Lemma 3.30 with `m = 0`,
-`α = ξ`: `ϑ₀(ξ) < ϑ₀(γ)` gives `ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^*`; the second is impossible.  So `ξ < γ`. -/
-axiom lzLt_of_vt_lt_ww {τ ξ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ)
+`α = ξ`: `ϑ₀(ξ) < ϑ₀(γ)` gives `ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^*`; the second is impossible.  So `ξ < γ`. Proved from `CitedLu`. -/
+theorem lzLt_of_vt_lt_ww {τ ξ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ)
     (hξ2 : ξ < OmTwo) (hη : η ∈ Tset τ) (hη1 : η < Om1) (hηξ : η < vt τ ξ)
-    (h : vt τ ξ < vt τ (Om1 * ω + η)) : ξ < Om1 * ω + η
+    (h : vt τ ξ < vt τ (Om1 * ω + η)) : ξ < Om1 * ω + η :=
+  luLt_of_vt_lt hτ hτ1 hξ hξ2 (luOld_omega_lt_E hτ) hη hη1 hηξ h
+
+
 
 end Googology.Trans.PoR.InaccPsi.R2

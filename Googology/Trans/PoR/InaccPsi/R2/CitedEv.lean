@@ -1,5 +1,7 @@
 import Googology.Trans.PoR.InaccPsi.R2.CitedEps
 import Googology.Trans.PoR.InaccPsi.R2.CitedL
+import Googology.Trans.PoR.InaccPsi.R2.EpsQ
+import Googology.Trans.PoR.InaccPsi.R2.CitedLu
 
 /-!
 # Cited facts of Wilken 2007, as axioms: the terms `ϑᵗ(ξ)` with `ξ < Ω₂`, the base change at them, and the
@@ -102,8 +104,19 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal
 
-/-- `Ω₂ = ω₂`, the regular cardinal successor of `Ω₁ = ω₁` ([W07a] §3). -/
-noncomputable def OmTwo : Ordinal.{0} := Ordinal.omega 2
+
+private theorem lu_nat_lt_E {x : Ordinal.{0}} (hx : InE x) (n : ℕ) : (n : Ordinal.{0}) < x :=
+  (natCast_lt_omega0 n).trans (omega0_lt_inE hx)
+
+private theorem lu_one_lt_E {x : Ordinal.{0}} (hx : InE x) : (1 : Ordinal.{0}) < x := by
+  have hh := lu_nat_lt_E hx 1
+  rwa [Nat.cast_one] at hh
+
+private theorem lu_one_cast (η : Ordinal.{0}) : Om1 * 1 + η = Om1 + η := by rw [mul_one]
+
+private theorem lu_zeta_lim {τ β η : Ordinal.{0}}
+    (h : ∃ σ, σ < η ∧ η < vt τ (Om1 * β + σ)) : luZeta τ β η = lg η := by
+  simp [luZeta, h]
 
 /-- **[W07a] Def 3.22, the remark after Def 3.1, Def 3.28** (texts T, Z, U, S of the module docstring): for
 `η ∈ Tᵗ ∩ Ω₁`, `Ω₁ + η ∈ Tᵗ`, and every parameter of `Ω₁ + η` is `0` or at most a parameter of `η`.
@@ -153,10 +166,12 @@ axiom vt_E_iff {τ ξ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ 
 
 Our steps.  `γ := Ω₁ + η ∈ Tᵗ ∩ Ω₂` (axiom `Om1_add_T`; `Ω₁ + η < Ω₁·2 < Ω₂`).  By (★2) and (★1) of the
 module docstring, `γ^* = η^* ≤ η < ϑᵗ(ξ)`.  Lemma 3.30 with `m = 0`, `α = ξ`: `ϑ₀(ξ) < ϑ₀(γ)` gives
-`ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^*`; the second is impossible.  So `ξ < γ`. -/
-axiom vt_lt_Om1_add {τ ξ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ)
+`ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^*`; the second is impossible.  So `ξ < γ`. Proved from `CitedLu`. -/
+theorem vt_lt_Om1_add {τ ξ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ)
     (hξ2 : ξ < OmTwo) (hη : η ∈ Tset τ) (hη1 : η < Om1) (hηξ : η < vt τ ξ)
-    (h : vt τ ξ < vt τ (Om1 + η)) : ξ < Om1 + η
+    (h : vt τ ξ < vt τ (Om1 + η)) : ξ < Om1 + η := by
+  rw [← lu_one_cast] at h ⊢
+  exact luLt_of_vt_lt hτ hτ1 hξ hξ2 (lu_one_lt_E hτ) hη hη1 hηξ h
 
 /-- **[W07a] Lemma 3.30, the direction `⇐`, with Def 3.28** (texts L, S, ★): for `η' < η` in `Tᵗ ∩ Ω₁` with
 `η' < ϑᵗ(Ω₁ + η)`, `ϑᵗ(Ω₁ + η') < ϑᵗ(Ω₁ + η)` (the remark after Convention 4.1: "immediately seen to be
@@ -164,18 +179,23 @@ strictly increasing").
 
 Our steps.  `α := Ω₁ + η'` and `γ := Ω₁ + η` lie in `Tᵗ ∩ Ω₂` (axiom `Om1_add_T`), and `α < γ`.  By (★2) and
 (★1), `α^* = η'^* ≤ η' < ϑ₀(γ)`.  So the first disjunct of the right side of Lemma 3.30 (`m = 0`) holds:
-`ϑ₀(α) < ϑ₀(γ)`. -/
-axiom vt_Om1_add_lt {τ η' η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
+`ϑ₀(α) < ϑ₀(γ)`. Proved from `CitedLu`. -/
+theorem vt_Om1_add_lt {τ η' η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
     (hη : η ∈ Tset τ) (hη1 : η < Om1) (hη'η : η' < η) (h : η' < vt τ (Om1 + η)) :
-    vt τ (Om1 + η') < vt τ (Om1 + η)
+    vt τ (Om1 + η') < vt τ (Om1 + η) := by
+  have h' : η' < vt τ (Om1 * 1 + η) := by rw [lu_one_cast]; exact h
+  have := luVt_lt hτ hτ1 (lu_one_lt_E hτ) hη' (hη'η.trans hη1) (lu_one_lt_E hτ) hη hη1
+    ((add_lt_add_iff_left _).2 hη'η) h'
+  rwa [lu_one_cast, lu_one_cast] at this
 
 /-- **[W07a] Lemma 3.30, Lemma 4.3, Def 3.28** (texts L, E, S, ★): for `η ∈ Tᵗ ∩ Ω₁`, `η < ϑᵗ(Ω₁ + η)`.
 
 Our steps.  `γ := Ω₁ + η ∈ Tᵗ ∩ Ω₂` (axiom `Om1_add_T`).  Lemma 3.30: `γ^* < ϑ₀(γ)`, and `γ^* = η^*` (★2).  By
 Lemma 4.3 (`γ ≥ Ω₁`, so `Δ > 0`), `τ < ϑ₀(γ) ∈ E ⊆ P`.  By (★1) every additive component of `η` is `< τ` or
-`≤ η^*`, so it is `< ϑ₀(γ)`; as `ϑ₀(γ)` is additive principal, `η < ϑ₀(γ)` (for `η = 0` as `ϑ₀(γ) > τ > 0`). -/
-axiom lt_vt_Om1_add {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1) :
-    η < vt τ (Om1 + η)
+`≤ η^*`, so it is `< ϑ₀(γ)`; as `ϑ₀(γ)` is additive principal, `η < ϑ₀(γ)` (for `η = 0` as `ϑ₀(γ) > τ > 0`). Proved from `CitedLu`. -/
+theorem lt_vt_Om1_add {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1) :
+    η < vt τ (Om1 + η) := by
+  rw [← lu_one_cast]; exact luLt_vt_self hτ hτ1 le_rfl (lu_one_lt_E hτ) hη hη1
 
 /-- **[W07b] Def 4.1 with [W07a] Def 7.5, Def 7.1, Def 6.1, Def 4.11, the remark after Def 3.1 and the
 proof of Lemma 3.27** (texts H, Λ, I, G, Z): for `η ∈ Tᵗ ∩ Ω₁`, `η ≠ 0`, with `η < ϑᵗ(Ω₁ + σ)` for some
@@ -191,10 +211,15 @@ Our steps.  `α = ϑᵗ(Δ + η)` with `Δ = Ω₁` (`Ω₁ | Ω₁`, `η < Ω�
 * `λᵗ_α` (Λ): `α ∈ E`, so `λᵗ_α = ι_{τ,α}(Δ) + ζᵗ_α = α + logend(η)`.
 * `lhᵗ(α)` (H): `α = ϑᵗ(Δ + η) > τ`; `logend(η) ≤ η < α` (axiom `lt_vt_Om1_add`), so the maximum additive
   principal number `≤ α + logend(η)` is `α` (`α ∈ P`, and `α·2 > α + logend(η)`): `δ = (λᵗ_α)^* = α ≤ α` (also
-  `Δ = Ω₁ = ϑ₁(0) < ϑ₁(1)`), so `lhᵗ(α) = α + λᵗ_α = α + α + logend(η) = α·2 + logend(η)`. -/
-axiom lhT_Om1_add {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1)
-    (hη0 : η ≠ 0) (hlim : ∃ σ, σ < η ∧ η < vt τ (Om1 + σ)) :
-    lhT τ (vt τ (Om1 + η)) = vt τ (Om1 + η) * 2 + lg η
+  `Δ = Ω₁ = ϑ₁(0) < ϑ₁(1)`), so `lhᵗ(α) = α + λᵗ_α = α + α + logend(η) = α·2 + logend(η)`. Proved from `CitedLu`. -/
+theorem lhT_Om1_add {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1)
+    (_hη0 : η ≠ 0) (hlim : ∃ σ, σ < η ∧ η < vt τ (Om1 + σ)) :
+    lhT τ (vt τ (Om1 + η)) = vt τ (Om1 + η) * 2 + lg η := by
+  have hlim' : ∃ σ, σ < η ∧ η < vt τ (Om1 * 1 + σ) := by
+    obtain ⟨σ, h1, h2⟩ := hlim; exact ⟨σ, h1, by rw [lu_one_cast]; exact h2⟩
+  have h := luLhT_fin hτ hτ1 le_rfl one_lt_omega0 hη hη1
+  rw [lu_zeta_lim hlim', lu_one_cast, mul_one, ← add_assoc, ← mul_two_eq] at h
+  exact h
 
 /-- **[W07a] Def 5.1, fourth clause** (text P): `π_{σ,τ}(ϑᵗ(ξ)) = ϑ^σ(π_{σ,τ}(ξ))` for `ξ ∈ Tᵗ[σ] ∩ Ω₂`.
 The clause is literally for every `η ∈ Tᵗ[σ] ∩ Ω₂`; the axiom `pi_vt` of `R2.CitedW` is its case `ξ < Ω₁`.

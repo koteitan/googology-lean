@@ -1,4 +1,7 @@
 import Googology.Trans.PoR.InaccPsi.R2.CitedEv
+import Googology.Trans.PoR.InaccPsi.R2.CitedLu
+import Googology.Trans.PoR.InaccPsi.R2.EpsQ
+import Googology.Trans.PoR.InaccPsi.R2.EvV
 
 /-!
 # Cited facts of Wilken 2007, as axioms: the arguments `Ω₁·n + η` of `ϑᵗ`
@@ -91,6 +94,22 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal
 
+private theorem luVz_nat_lt_E {x : Ordinal.{0}} (hx : InE x) (n : ℕ) : (n : Ordinal.{0}) < x :=
+  (natCast_lt_omega0 n).trans (omega0_lt_inE hx)
+private theorem luVz_one_lt_E {x : Ordinal.{0}} (hx : InE x) : (1 : Ordinal.{0}) < x := by
+  have hh := luVz_nat_lt_E hx 1; rwa [Nat.cast_one] at hh
+private theorem luVz_omega_lt_E {x : Ordinal.{0}} (hx : InE x) : (ω : Ordinal.{0}) < x := omega0_lt_inE hx
+private theorem luVz_zero_T {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) :
+    (0 : Ordinal.{0}) ∈ Tset τ := mem_T_of_le hτ hτ1 zero_le
+private theorem luVz_zeta_lim {τ β η : Ordinal.{0}}
+    (h : ∃ σ, σ < η ∧ η < vt τ (Om1 * β + σ)) : luZeta τ β η = lg η := by simp [luZeta, h]
+private theorem luVz_zeta_fix {τ β η : Ordinal.{0}}
+    (h : ∀ σ, σ < η → vt τ (Om1 * β + σ) ≤ η) : luZeta τ β η = 0 := by
+  unfold luZeta; rw [if_neg]; rintro ⟨σ, hσ, hlt⟩; exact absurd (h σ hσ) (not_le.2 hlt)
+private theorem luVz_nat_one_le {n : ℕ} (hn : 1 ≤ n) : (1 : Ordinal.{0}) ≤ (n : Ordinal.{0}) := by exact_mod_cast hn
+private theorem luVz_one_add_nat (n : ℕ) : (1 : Ordinal.{0}) + (n : Ordinal.{0}) = ((n + 1 : ℕ) : Ordinal.{0}) := by
+  rw [← Nat.cast_one, ← Nat.cast_add, add_comm 1 n]
+
 /-- **[W07a] Def 3.22, second clause** (text T): "`ξ, η ∈ T_m ⇒ ξ + η ∈ T_m`", for `m = 0` (Convention 3.25:
 `T₀ = Tᵗ`).  Literal; the hypotheses on `τ` are the standing setting (`τ ∈ E` countable). -/
 axiom vzT_add {τ x y : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hx : x ∈ Tset τ) (hy : y ∈ Tset τ) :
@@ -115,22 +134,27 @@ with `η < ϑᵗ(ξ)` and `n < ω`, `ϑᵗ(ξ) < ϑᵗ(Ω₁·n + η)` implies `
 
 Our steps.  `γ := Ω₁·n + η ∈ Tᵗ ∩ Ω₂` (★3; `Ω₁·n + η < Ω₁·ω ≤ Ω₂`).  By (★3) and (★1), `γ^* = η^* ≤ η < ϑᵗ(ξ)`.
 Lemma 3.30 with `m = 0`, `α = ξ`: `ϑ₀(ξ) < ϑ₀(γ)` gives `ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^*`; the second is
-impossible.  So `ξ < γ`.  (For `n = 1` this is the axiom `vt_lt_Om1_add` of `R2.CitedEv`.) -/
-axiom vzLt_of_vt_lt {τ ξ η : Ordinal.{0}} {n : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ)
+impossible.  So `ξ < γ`.  (For `n = 1` this is the axiom `vt_lt_Om1_add` of `R2.CitedEv`.) Proved from `CitedLu`. -/
+theorem vzLt_of_vt_lt {τ ξ η : Ordinal.{0}} {n : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ)
     (hξ2 : ξ < OmTwo) (hη : η ∈ Tset τ) (hη1 : η < Om1) (hηξ : η < vt τ ξ)
-    (h : vt τ ξ < vt τ (Om1 * (n : Ordinal.{0}) + η)) : ξ < Om1 * (n : Ordinal.{0}) + η
+    (h : vt τ ξ < vt τ (Om1 * (n : Ordinal.{0}) + η)) : ξ < Om1 * (n : Ordinal.{0}) + η :=
+  luLt_of_vt_lt hτ hτ1 hξ hξ2 (luVz_nat_lt_E hτ n) hη hη1 hηξ h
+
+
 
 /-- **[W07a] Lemma 3.30, the direction `⇐`, with Def 3.28** (texts L, S, ★): for `η', η ∈ Tᵗ ∩ Ω₁` and `m, n < ω`
 with `Ω₁·m + η' < Ω₁·n + η` and `η' < ϑᵗ(Ω₁·n + η)`, `ϑᵗ(Ω₁·m + η') < ϑᵗ(Ω₁·n + η)`.
 
 Our steps.  `α := Ω₁·m + η'` and `γ := Ω₁·n + η` lie in `Tᵗ ∩ Ω₂` (★3), and `α < γ`.  By (★3) and (★1),
 `α^* = η'^* ≤ η' < ϑ₀(γ)`.  So the first disjunct of the right side of Lemma 3.30 (`m = 0`) holds:
-`ϑ₀(α) < ϑ₀(γ)`.  (For `m = n = 1` this is the axiom `vt_Om1_add_lt` of `R2.CitedEv`.) -/
-axiom vzVt_lt {τ η' η : Ordinal.{0}} {m n : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
+`ϑ₀(α) < ϑ₀(γ)`.  (For `m = n = 1` this is the axiom `vt_Om1_add_lt` of `R2.CitedEv`.) Proved from `CitedLu`. -/
+theorem vzVt_lt {τ η' η : Ordinal.{0}} {m n : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
     (hη'1 : η' < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1)
     (hlt : Om1 * (m : Ordinal.{0}) + η' < Om1 * (n : Ordinal.{0}) + η)
     (h : η' < vt τ (Om1 * (n : Ordinal.{0}) + η)) :
-    vt τ (Om1 * (m : Ordinal.{0}) + η') < vt τ (Om1 * (n : Ordinal.{0}) + η)
+    vt τ (Om1 * (m : Ordinal.{0}) + η') < vt τ (Om1 * (n : Ordinal.{0}) + η) :=
+  luVt_lt hτ hτ1 (luVz_nat_lt_E hτ m) hη' hη'1 (luVz_nat_lt_E hτ n) hη hη1 hlt h
+
 
 /-- **[W07b] Def 4.1 with [W07a] Def 7.5, Def 7.1, Def 6.1, Def 4.11, Lemma 4.3, the remark after Def 3.1 and
 the proof of Lemma 3.27** (texts H, Λ, I, D, G, E, Z, ★): for `1 ≤ n < ω` and `η ∈ Tᵗ ∩ Ω₁` with
@@ -147,11 +171,15 @@ clause), and `τ < α ∈ E` (E, `Δ > 0`).
 * `λᵗ_α` (Λ): `α ∈ E`, so `λᵗ_α = ι_{τ,α}(Δ) + ζᵗ_α = α·n`.
 * `lhᵗ(α)` (H): `α = ϑᵗ(Δ + η) > τ`; the maximum additive principal number `≤ α·n` is `α` (`α ∈ P`, and the next
   additive principal number after `α` is `α·ω > α·n`), so `δ = (λᵗ_α)^* = α ≤ α` (also `Δ = Ω₁·n < Ω₁·ω = ϑ₁(1)`,
-  [W07a] Lemma 4.2 with `m = 1`), and `lhᵗ(α) = α + λᵗ_α = α + α·n = α·(n + 1)`. -/
-axiom vzLhT_fix {τ η : Ordinal.{0}} {n : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hn : 1 ≤ n) (hη : η ∈ Tset τ)
+  [W07a] Lemma 4.2 with `m = 1`), and `lhᵗ(α) = α + λᵗ_α = α + α·n = α·(n + 1)`. Proved from `CitedLu`. -/
+theorem vzLhT_fix {τ η : Ordinal.{0}} {n : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hn : 1 ≤ n) (hη : η ∈ Tset τ)
     (hη1 : η < Om1) (hfix : ∀ σ, σ < η → vt τ (Om1 * (n : Ordinal.{0}) + σ) ≤ η) :
     lhT τ (vt τ (Om1 * (n : Ordinal.{0}) + η)) =
-      vt τ (Om1 * (n : Ordinal.{0}) + η) * ((n + 1 : ℕ) : Ordinal.{0})
+      vt τ (Om1 * (n : Ordinal.{0}) + η) * ((n + 1 : ℕ) : Ordinal.{0}) := by
+  rw [luLhT_fin hτ hτ1 (luVz_nat_one_le hn) (natCast_lt_omega0 n) hη hη1, luVz_zeta_fix hfix, add_zero,
+    ← mul_one_add, luVz_one_add_nat]
+
+
 
 /-- **[W07a] Lemma 3.30, Lemma 4.3, Def 3.28** (texts L, E, S, ★): for `1 ≤ n < ω` and `η ∈ Tᵗ ∩ Ω₁`,
 `η < ϑᵗ(Ω₁·n + η)`.
@@ -159,9 +187,12 @@ axiom vzLhT_fix {τ η : Ordinal.{0}} {n : ℕ} (hτ : InE τ) (hτ1 : τ < Om1)
 Our steps.  `γ := Ω₁·n + η ∈ Tᵗ ∩ Ω₂` (★3).  Lemma 3.30: `γ^* < ϑ₀(γ)`, and `γ^* = η^*` (★3).  By Lemma 4.3
 (`Δ = Ω₁·n > 0`), `τ < ϑ₀(γ) ∈ E ⊆ P`.  By (★1) every additive component of `η` is `< τ` or `≤ η^*`, so it is
 `< ϑ₀(γ)`; as `ϑ₀(γ)` is additive principal, `η < ϑ₀(γ)` (for `η = 0` as `ϑ₀(γ) > τ > 0`).  (For `n = 1` this is
-the axiom `lt_vt_Om1_add` of `R2.CitedEv`.) -/
-axiom vzLt_vt_self {τ η : Ordinal.{0}} {n : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hn : 1 ≤ n) (hη : η ∈ Tset τ)
-    (hη1 : η < Om1) : η < vt τ (Om1 * (n : Ordinal.{0}) + η)
+the axiom `lt_vt_Om1_add` of `R2.CitedEv`.) Proved from `CitedLu`. -/
+theorem vzLt_vt_self {τ η : Ordinal.{0}} {n : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hn : 1 ≤ n) (hη : η ∈ Tset τ)
+    (hη1 : η < Om1) : η < vt τ (Om1 * (n : Ordinal.{0}) + η) :=
+  luLt_vt_self hτ hτ1 (luVz_nat_one_le hn) (luVz_nat_lt_E hτ n) hη hη1
+
+
 
 /-- **[W07b] Def 4.1 with [W07a] Def 7.5, Def 7.1, Def 6.1, Def 4.11, Lemma 4.3, the remark after Def 3.1 and
 the proof of Lemma 3.27** (texts H, Λ, I, D, G, E, Z, ★): for `1 ≤ n < ω` and `η ∈ Tᵗ ∩ Ω₁`, `η ≠ 0`, with
@@ -175,11 +206,15 @@ Our steps.  `α = ϑᵗ(Δ + η)` with `Δ = Ω₁·n` (Convention 4.1); `α ∈
 * `λᵗ_α` (Λ): `α ∈ E`, so `λᵗ_α = α·n + logend(η)`.
 * `lhᵗ(α)` (H): `logend(η) ≤ η < α` (axiom `vzLt_vt_self`), so `α·n + logend(η) < α·(n + 1) ≤ α·ω`, and the maximum
   additive principal number `≤ λᵗ_α` is `α`: `δ = α ≤ α`, `lhᵗ(α) = α + λᵗ_α = α·(n + 1) + logend(η)`.  (For `n = 1`
-  this is the axiom `lhT_Om1_add` of `R2.CitedEv`.) -/
-axiom vzLhT_lim {τ η : Ordinal.{0}} {n : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hn : 1 ≤ n) (hη : η ∈ Tset τ)
-    (hη1 : η < Om1) (hη0 : η ≠ 0) (hlim : ∃ σ, σ < η ∧ η < vt τ (Om1 * (n : Ordinal.{0}) + σ)) :
+  this is the axiom `lhT_Om1_add` of `R2.CitedEv`.) Proved from `CitedLu`. -/
+theorem vzLhT_lim {τ η : Ordinal.{0}} {n : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hn : 1 ≤ n) (hη : η ∈ Tset τ)
+    (hη1 : η < Om1) (_hη0 : η ≠ 0) (hlim : ∃ σ, σ < η ∧ η < vt τ (Om1 * (n : Ordinal.{0}) + σ)) :
     lhT τ (vt τ (Om1 * (n : Ordinal.{0}) + η)) =
-      vt τ (Om1 * (n : Ordinal.{0}) + η) * ((n + 1 : ℕ) : Ordinal.{0}) + lg η
+      vt τ (Om1 * (n : Ordinal.{0}) + η) * ((n + 1 : ℕ) : Ordinal.{0}) + lg η := by
+  rw [luLhT_fin hτ hτ1 (luVz_nat_one_le hn) (natCast_lt_omega0 n) hη hη1, luVz_zeta_lim hlim, ← add_assoc,
+    ← mul_one_add, luVz_one_add_nat]
+
+
 
 /-- **[W07a] Lemma 4.4, the direction `⇒`, with Lemma 3.30 (1-1), Convention 4.1 and Theorem 3.23** (texts F, L,
 C, Θ, U): for `1 ≤ k < ω` and `η ∈ Tᵗ ∩ Ω₁`, `η > 0`, with `ϑᵗ(Ω₁·k + σ) < η` for every `σ < η`: every
@@ -202,8 +237,11 @@ Lemma 4.2 with `m = 1`, `α = 0`: `ϑ₁(1) = ω̄_{Ω₁}`.  By Def 3.4, `ω̄`
 order type `Ω₁`: it is a subset of `Ω₁`, and `c ↦ ω^{c+1}` maps `Ω₁` strictly increasingly into it (`ω^{c+1}` is not
 an `ε`-number, its exponent being a successor).  So `ω̄_c < Ω₁` for `c < Ω₁`, and `ω̄_{Ω₁}` is the least element of
 `P ∖ E` that is `≥ Ω₁`.  `Ω₁ = ω₁ = ω^{Ω₁}` is an `ε`-number, and the least additive principal number above it is
-`ω^{Ω₁+1} = Ω₁·ω ∉ E`.  So `Ω₁·ω = ϑ₁(1) ∈ T₀ = Tᵗ`. -/
-axiom vzOm1w_T {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) : Om1 * ω ∈ Tset τ
+`ω^{Ω₁+1} = Ω₁·ω ∉ E`.  So `Ω₁·ω = ϑ₁(1) ∈ T₀ = Tᵗ`. Proved from `CitedLu`. -/
+theorem vzOm1w_T {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) : Om1 * ω ∈ Tset τ := by
+  simpa using luOm1_opow_T hτ hτ1 ((natCast_lt_omega0 1).trans (omega0_lt_inE hτ)).le
+
+
 
 /-- **[W07a] Lemma 3.30, the direction `⇒`, at `γ = Ω₁·ω`, with Def 3.28** (texts L, S, W): for `ξ ∈ Tᵗ ∩ Ω₂`,
 `ϑᵗ(ξ) < ϑᵗ(Ω₁·ω)` implies `ξ < Ω₁·ω`.
@@ -211,19 +249,33 @@ axiom vzOm1w_T {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) : Om1 * ω �
 Our steps.  `γ := Ω₁·ω = ϑ₁(1) ∈ Tᵗ ∩ Ω₂` (axiom `vzOm1w_T`).  By (S), `Subᵗ₀(ϑ₁(1)) = {ϑ₁(1)} ∪ Subᵗ₀(1) = {Ω₁·ω, 1}`
 (`k = 1 ≥ m = 0`; `1 < τ` a parameter), so `P₀(γ) = ∅` (`Ω₁·ω ≥ Ω₁`, `1 < τ`) and `γ^* = 0`.  Lemma 3.30 (`m = 0`):
 `ϑ₀(ξ) < ϑ₀(γ)` gives `ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^* = 0`; the second is impossible (`ϑ₀(ξ) ∈ P`, so `> 0`).
-So `ξ < γ`. -/
-axiom vzLt_of_vt_lt_w {τ ξ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo)
-    (h : vt τ ξ < vt τ (Om1 * ω)) : ξ < Om1 * ω
+So `ξ < γ`. Proved from `CitedLu`. -/
+theorem vzLt_of_vt_lt_w {τ ξ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ)
+    (hξ2 : ξ < OmTwo) (h : vt τ ξ < vt τ (Om1 * ω)) : ξ < Om1 * ω := by
+  have h0 : (0 : Ordinal.{0}) < vt τ ξ := hτ.pos.trans_le (vt_memTwo hτ hτ1 hξ hξ2).2.1
+  rw [← add_zero (Om1 * ω)] at h ⊢
+  exact luLt_of_vt_lt hτ hτ1 hξ hξ2 (luVz_omega_lt_E hτ) (luVz_zero_T hτ hτ1) (Ordinal.omega_pos 1) h0 h
+
+
 
 /-- **[W07a] Lemma 3.30, the direction `⇐`, at `γ = Ω₁·ω`, with Def 3.28** (texts L, S, ★, W): for `η' ∈ Tᵗ ∩ Ω₁`
 and `m < ω` with `η' < ϑᵗ(Ω₁·ω)`, `ϑᵗ(Ω₁·m + η') < ϑᵗ(Ω₁·ω)`.
 
 Our steps.  `α := Ω₁·m + η' ∈ Tᵗ ∩ Ω₂` (★3) and `γ := Ω₁·ω ∈ Tᵗ ∩ Ω₂` (axiom `vzOm1w_T`); `α < Ω₁·(m + 1) ≤ γ`.  By
 (★3) and (★1), `α^* = η'^* ≤ η' < ϑ₀(γ)`.  So the first disjunct of the right side of Lemma 3.30 (`m = 0`) holds:
-`ϑ₀(α) < ϑ₀(γ)`. -/
-axiom vzVt_lt_w {τ η' : Ordinal.{0}} {m : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
+`ϑ₀(α) < ϑ₀(γ)`. Proved from `CitedLu`. -/
+theorem vzVt_lt_w {τ η' : Ordinal.{0}} {m : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
     (hη'1 : η' < Om1) (h : η' < vt τ (Om1 * ω)) :
-    vt τ (Om1 * (m : Ordinal.{0}) + η') < vt τ (Om1 * ω)
+    vt τ (Om1 * (m : Ordinal.{0}) + η') < vt τ (Om1 * ω) := by
+  rw [← add_zero (Om1 * ω)] at h ⊢
+  refine luVt_lt hτ hτ1 (luVz_nat_lt_E hτ m) hη' hη'1 (luVz_omega_lt_E hτ) (luVz_zero_T hτ hτ1) (Ordinal.omega_pos 1)
+    ?_ h
+  calc Om1 * (m : Ordinal.{0}) + η' < Om1 * (m : Ordinal.{0}) + Om1 := (add_lt_add_iff_left _).2 hη'1
+    _ = Om1 * ((m : Ordinal.{0}) + 1) := by rw [mul_add_one]
+    _ ≤ Om1 * ω := mul_le_mul_right (Order.add_one_le_of_lt (natCast_lt_omega0 m)) Om1
+    _ = Om1 * ω + 0 := (add_zero _).symm
+
+
 
 /-- **[W07b] Def 4.1, the case `δ > α`, with [W07a] Def 7.5, Def 7.1, Def 6.1, Def 4.11, Def 4.6, Def 7.15,
 Convention 6.6, Lemma 6.3, Lemma 4.2, Lemma 4.3, Def 3.4, Def 3.28** (texts H, Λ, I, D, G, LOC, CR, TR, W, E, S):
