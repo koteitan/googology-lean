@@ -133,17 +133,8 @@ by the third clause of T with `k = 1 ≥ m = 0` and `b ∈ T₀ ∩ Ω₃` (`b <
 ϑ₀(0) ∈ T₀`).  For `b = 1` this is the axiom `vzOm1w_T` of `R2.CitedVz`. -/
 axiom luOm1_opow_T {τ b : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hb : b ≤ τ) : Om1 * ω ^ b ∈ Tset τ
 
-/-- **[W07a] Def 5.1 (first and third clauses), Def 3.28, Def 3.22, Lemma 4.2 (`m = 1`)** (texts P, S, T, W, Z): for
-bases `σ < τ` and `b < σ`, `Ω₁·ω^b ∈ Tᵗ[σ]` and `π_{σ,τ}(Ω₁·ω^b) = Ω₁·ω^b`.
-
-Our steps.  `Ω₁·ω^b = ϑ₁(b)` is a term of `Tᵗ` (★p).  By S (third clause, `k = 1 ≥ 0`) and the first clause (`b < τ` a
-parameter), `Subᵗ₀(ϑ₁(b)) = {ϑ₁(b), b}`, so `Parᵗ(Ω₁·ω^b) = {b}` (`Ω₁·ω^b ≥ Ω₁ > τ`), and `{b} ⊆ σ`: `Ω₁·ω^b ∈ Tᵗ[σ]`
-(P); also `b ∈ Tᵗ[σ] ∩ Ω₃` (`Parᵗ(b) = {b}`).  P, third clause (`ξ = ϑ₁(b)`, `k = 1 > 0`): `π_{σ,τ}(ϑ₁(b)) =
-ϑ₁(π_{σ,τ}(b))`; P, first clause (`b < σ`): `π_{σ,τ}(b) = b`.  So `π_{σ,τ}(Ω₁·ω^b)` is the term `ϑ₁(b)` of `Tᵟ`, and
-there too `ϑ₁(b) = Ω₁·ω^b` (★p for the system over `σ`; Z for `b = 0`).  For `b = 1` this is the axiom `xtOm1w_TB` of
-`R2.CitedXt`, for `b = 0` the axiom `pi_Om1` of `R2.Cited`. -/
-axiom luOm1_opow_TB {σ τ b : Ordinal.{0}} (h : Bases σ τ) (hb : b < σ) :
-    Om1 * ω ^ b ∈ TB τ σ ∧ pi σ τ (Om1 * ω ^ b) = Om1 * ω ^ b
+/-! The base-change axiom `luOm1_opow_TB` (`Ω₁·ω^b ∈ Tᵗ[σ]`, `π_{σ,τ}(Ω₁·ω^b) = Ω₁·ω^b` for `b < σ`) is stated in
+`R2.Cited`, so that `pi_Om1` (its case `b = 0`) is a theorem there. -/
 
 /-- **[W07a] Lemma 3.30, the direction `⇐`, with Def 3.28** (texts L, S, U, ★1, ★β): for levels `β', β < τ` and
 `η', η ∈ Tᵗ ∩ Ω₁` with `Ω₁·β' + η' < Ω₁·β + η` and `η' < ϑᵗ(Ω₁·β + η)`: `ϑᵗ(Ω₁·β' + η') < ϑᵗ(Ω₁·β + η)`.

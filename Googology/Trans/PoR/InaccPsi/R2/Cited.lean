@@ -26,7 +26,8 @@ The axioms (27 = 7 constants + 20 facts):
   `Dl` (`ϑᵗ(Δₙ)`), `Dp` (`ϑᵗ(Δₙ + 1)`);
 * `R₁⁺`: `le1R_trans`, `le1R_le`, `le1R_of_le` ([W07b] Lemma 2.1, §1), `le1R_two_iff` ([W07b]
   remark after Thm 2.2);
-* base change: `TB_inter_lt`, `pi_lt`, `pi_base`, `pi_Om1`, `pi_bijOn`, `pi_add`, `pi_ht_Par`
+* base change: `TB_inter_lt`, `pi_lt`, `pi_base`, `luOm1_opow_TB` (moved here from `R2.CitedLu`; `pi_Om1` is its
+  case `b = 0`, a theorem), `pi_bijOn`, `pi_add`, `pi_ht_Par`
   ([W07a] Def 5.1, Lemma 5.3, Cor 5.4), `lh_pi` ([W07b] Lemma 4.4, Thm 5.3, Cor 5.7),
   `T_inter_Om1` ([W07b] Cor 5.10);
 * terms: `Par_lt`, `Par_comps` ([W07a] Def 3.28), `ht_spec` ([W07a] Lemma 3.27), `Dl_spec`
@@ -104,9 +105,47 @@ axiom pi_lt {σ τ : Ordinal.{0}} (h : Bases σ τ) {x : Ordinal.{0}} (hx : x < 
 Lemma 3.27: "We have `ϑ₀(0) = τ`"): `τ ∈ Tᵗ[σ]` and `π_{σ,τ}(τ) = ϑᵟ(0) = σ`. -/
 axiom pi_base {σ τ : Ordinal.{0}} (h : Bases σ τ) : τ ∈ TB τ σ ∧ pi σ τ τ = σ
 
+/-- **[W07a] Def 5.1 (first and third clauses), Def 3.28, Def 3.22, Lemma 4.2 (`m = 1`), Def 3.4, the remark
+after Def 3.1** (moved here unchanged from `R2.CitedLu`): for bases `σ < τ` and `b < σ`, `Ω₁·ω^b ∈ Tᵗ[σ]` and
+`π_{σ,τ}(Ω₁·ω^b) = Ω₁·ω^b`.
+
+Literal texts ([W07a]):
+* (P) Def 5.1: "Let `τ ∈ E` and `Tᵗ` be the notation system over `τ`.  Further, let `σ ∈ {1} ∪ (E ∩ τ)`.  We define
+  `Tᵗ[σ] := {α ∈ Tᵗ | Parᵗ(α) ⊆ σ}` and `π_{σ,τ} : Tᵗ[σ] → Tᵟ` by the following clauses: • `π_{σ,τ}(ξ) := ξ` if
+  `ξ < σ` • `π_{σ,τ}(ξ) := π_{σ,τ}(ξ₁) + π_{σ,τ}(ξ₂)` if `ξ =NF ξ₁ + ξ₂ > τ` • `π_{σ,τ}(ξ) := ϑ_k(π_{σ,τ}(η))` if
+  `ξ = ϑ_k(η)` for some `k > 0` and `η ∈ Tᵗ[σ] ∩ Ω_{k+2}` • `π_{σ,τ}(ξ) := ϑ^σ(π_{σ,τ}(η))` if `ξ = ϑᵗ(η)` for some
+  `η ∈ Tᵗ[σ] ∩ Ω₂`."
+* (S) Def 3.28: "`Subᵗ_m(α) := {α}` for parameters `α < τ`; … `Subᵗ_m(α) := {α} ∪ Subᵗ_m(ξ)` if `k ≥ m` (`{α}` if
+  `k < m`) for `α = ϑ_k(ξ)` where `ξ ∈ Tᵗ ∩ Ω_{k+2}`. … The set of parameters `< τ` used in the unique term denoting
+  some `α ∈ Tᵗ` is denoted by `Parᵗ(α) := Subᵗ₀(α) ∩ τ`."
+* (T) Def 3.22: "`T_m` is defined inductively as follows: • `Ω_m ⊆ T_m` • `ξ, η ∈ T_m ⇒ ξ + η ∈ T_m`
+  • `ξ ∈ T_m ∩ Ω_{k+2} ⇒ ϑ_k(ξ) ∈ T_m` for `k ≥ m`."
+* (W) Def 3.4: "Let `α ↦ ω̄_α` be the enumeration function of the additive principle numbers which are not epsilon
+  numbers."  Lemma 4.2: "For any `m < ω` and any `α < Ω_{m+1}` we have `ϑ_m(1 + α) = ω̄_{Ω_m+α}`."
+* (Z) Remark after Def 3.1: "Note that we have `ϑⁿ_m(0) = Ω_m` for `m < n`" (so `ϑ₁(0) = Ω₁`).
+
+Our steps.  `Ω₁·ω^b = ϑ₁(b)`: for `b = 0`, `Ω₁·ω⁰ = Ω₁ = ϑ₁(0)` (Z); for `b = 1 + a ≥ 1`, `ϑ₁(1 + a) = ω̄_{Ω₁+a}` (W,
+`m = 1`), `(P ∖ E) ∩ Ω₁` has order type `Ω₁` (it lies in `Ω₁`, and `c ↦ ω^{c+1}` maps `Ω₁` strictly increasingly into
+it), and the elements of `P ∖ E` from `Ω₁ = ω^{Ω₁}` on are `ω^{Ω₁+1+a}`, so `ω̄_{Ω₁+a} = ω^{Ω₁+1+a} = Ω₁·ω^{1+a}`.
+`b < σ < τ` is a parameter, `b ∈ T₀ ∩ Ω₃` (T, first clause: `Ω₀ = τ ⊆ T₀`), so `ϑ₁(b) ∈ T₀` (T, third clause,
+`k = 1 ≥ m = 0`).  By S (third clause, `k = 1 ≥ 0`) and the first clause, `Subᵗ₀(ϑ₁(b)) = {ϑ₁(b), b}`, so
+`Parᵗ(Ω₁·ω^b) = {b}` (`Ω₁·ω^b ≥ Ω₁ > τ`), and `{b} ⊆ σ`: `Ω₁·ω^b ∈ Tᵗ[σ]` (P); also `b ∈ Tᵗ[σ] ∩ Ω₃`
+(`Parᵗ(b) = {b}`).  P, third clause (`ξ = ϑ₁(b)`, `k = 1 > 0`): `π_{σ,τ}(ϑ₁(b)) = ϑ₁(π_{σ,τ}(b))`; P, first clause
+(`b < σ`): `π_{σ,τ}(b) = b`.  So `π_{σ,τ}(Ω₁·ω^b)` is the term `ϑ₁(b)` of `Tᵟ`, and there too `ϑ₁(b) = Ω₁·ω^b` (the
+same computation over the base `σ`; Z for `b = 0`). -/
+axiom luOm1_opow_TB {σ τ b : Ordinal.{0}} (h : Bases σ τ) (hb : b < σ) :
+    Om1 * ω ^ b ∈ TB τ σ ∧ pi σ τ (Om1 * ω ^ b) = Om1 * ω ^ b
+
 /-- **[W07a] Def 5.1**, third clause with `k = 1`, `η = 0`, and `ϑ₁(0) = Ω₁` ([W07a] remark
-after Def 3.1: "`ϑᵐₙ(0) = Ωₘ` for `m < n`"): `Ω₁ ∈ Tᵗ[σ]` and `π_{σ,τ}(Ω₁) = Ω₁`. -/
-axiom pi_Om1 {σ τ : Ordinal.{0}} (h : Bases σ τ) : Om1 ∈ TB τ σ ∧ pi σ τ Om1 = Om1
+after Def 3.1: "`ϑᵐₙ(0) = Ωₘ` for `m < n`"): `Ω₁ ∈ Tᵗ[σ]` and `π_{σ,τ}(Ω₁) = Ω₁`.  Proved: the case `b = 0` of
+`luOm1_opow_TB` (`Ω₁·ω⁰ = Ω₁`; `0 < σ` as `σ ∈ E`). -/
+theorem pi_Om1 {σ τ : Ordinal.{0}} (h : Bases σ τ) : Om1 ∈ TB τ σ ∧ pi σ τ Om1 = Om1 := by
+  have h0 : (0 : Ordinal.{0}) < σ := by
+    have h1 : (0 : Ordinal.{0}) < ω ^ σ := opow_pos σ omega0_pos
+    have h2 : ω ^ σ = σ := h.1
+    rwa [h2] at h1
+  have := luOm1_opow_TB h h0
+  rwa [opow_zero, mul_one] at this
 
 /-- **[W07a] Lemma 5.3 (b), (d)** (Cor 5.4): `π_{σ,τ}` is a strictly increasing map of `Tᵗ[σ]`
 onto `Tᵟ`. -/

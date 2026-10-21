@@ -147,10 +147,18 @@ Our steps.  `Δ := Ω₁·ω = ϑ₁(1)` (★w; the axiom `vzOm1w_T` of `R2.Cite
   `ξ' = α` (`α` additive principal `> τ`), `ξ_δ = 1 + α = α`.  `λᵗ_δ = ζᵗ_δ` (Λ, `δ ∉ E`), and `ζᵗ_δ = 0` (G):
   every `σ' < α` has `ϑᵗ(σ') < α` (`ϑᵗ(1 + σ'') = ω̄_{τ+σ''}` with `τ + σ'' < α`, and `ω̄` maps `α` into `α`), so
   `sup_{σ'<α} ϑᵗ(σ') ≤ α` and `α < sup` fails.  So `(λᵗ_δ)^* = 0 ≤ δ` and `lhᵗ(δ) = δ + λᵗ_δ = δ` (first branch).
-So `lhᵗ(α) = δ + ρ = α·ω + logend(η)`.  (For `η = 0`, `ζᵗ_α = 0` and the same steps give the axiom `vzLhT_w`.) -/
-axiom ltLhT_w_lim {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1)
+So `lhᵗ(α) = δ + ρ = α·ω + logend(η)`.  (For `η = 0`, `ζᵗ_α = 0` and the same steps give the axiom `vzLhT_w`.)
+Proved from `CitedLu` (`luLhT_inf` at `β = ω`, and the `R₁⁺`-reach of `α·ω = ω^{α+1}` from [W07b] Theorem 2.2
+and Theorem 5.3). -/
+theorem ltLhT_w_lim {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1)
     (hη0 : η ≠ 0) (hself : η < vt τ (Om1 * ω + η)) (hlim : ∃ σ, σ < η ∧ η < vt τ (Om1 * ω + σ)) :
-    lhT τ (vt τ (Om1 * ω + η)) = vt τ (Om1 * ω + η) * ω + lg η
+    lhT τ (vt τ (Om1 * ω + η)) = vt τ (Om1 * ω + η) * ω + lg η := by
+  have _ := hη0
+  have _ := hself
+  have h := luLhT_inf hτ hτ1 le_rfl (luOld_omega_lt_E hτ) hη hη1
+  rw [lkcLog_omega, opow_one, lkcZeta_lim hlim, Ordinal.add_sub_cancel,
+    lkcLhT_mul_omega hτ hτ1 one_lt_omega0.le (luOld_omega_lt_E hτ) hη hη1] at h
+  exact h
 
 /-- **[W07a] Lemma 3.30 (`α^* < ϑ₀(α)`), Lemma 4.3, Def 3.28** (texts L, E, S, ★w, ★1): for `η ∈ Tᵗ ∩ Ω₁`,
 `η < ϑᵗ(Ω₁·ω + η)`.
@@ -217,8 +225,19 @@ clause, `Δ ∈ Tᵗ ∩ Ω₂`) and `τ < α ∈ E` (E, `Δ > 0`).
   `ρ := −δ + λᵗ_α = −(α·ω) + α·ω + α = α`.
 * `lhᵗ(δ) = δ` for `δ = α·ω`, exactly as in the docstring of `ltLhT_w_lim` (`δ ∈ P ∖ E`, `δ = ϑᵗ(α)`, `λᵗ_δ = ζᵗ_δ = 0`,
   first branch of H).
-So `lhᵗ(α) = δ + ρ = α·ω + α`. -/
-axiom ltLhT_w1 {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) :
-    lhT τ (vt τ (Om1 * (ω + 1))) = vt τ (Om1 * (ω + 1)) * ω + vt τ (Om1 * (ω + 1))
+So `lhᵗ(α) = δ + ρ = α·ω + α`.  Proved from `CitedLu` (`luLhT_inf` at `β = ω + 1`, `η = 0`, and the `R₁⁺`-reach
+of `α·ω` from [W07b] Theorem 2.2 and Theorem 5.3). -/
+theorem ltLhT_w1 {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) :
+    lhT τ (vt τ (Om1 * (ω + 1))) = vt τ (Om1 * (ω + 1)) * ω + vt τ (Om1 * (ω + 1)) := by
+  have hω1 : (ω : Ordinal.{0}) ≤ ω + 1 := le_self_add
+  have h := luLhT_inf hτ hτ1 hω1 (lkcOmega_one_lt_E hτ) (luOld_zero_T hτ hτ1) (Ordinal.omega_pos 1)
+  have hm := lkcLhT_mul_omega hτ hτ1 (one_lt_omega0.le.trans hω1) (lkcOmega_one_lt_E hτ) (luOld_zero_T hτ hτ1)
+    (Ordinal.omega_pos 1)
+  simp only [add_zero] at hm
+  rw [lkcLog_omega_one, opow_one, lkcZeta_zero, add_zero, hm] at h
+  simp only [add_zero] at h
+  set α := vt τ (Om1 * (ω + 1)) with hα
+  rw [show α * (ω + 1) = α * ω + α from mul_add_one α ω, Ordinal.add_sub_cancel] at h
+  exact h
 
 end Googology.Trans.PoR.InaccPsi.R2

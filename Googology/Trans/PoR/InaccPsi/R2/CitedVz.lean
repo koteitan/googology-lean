@@ -129,6 +129,221 @@ first clause). -/
 axiom vzRem_T {τ ξ Δ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo)
     (hdec : ξ = Δ + η) (hΔ : Om1 ∣ Δ) (hη : η < Om1) : η ∈ Tset τ
 
+/-! ## Helpers for the conversions below (copies of `R2.LuTh` lemmas, stated here so that `CitedVz` and `CitedLt`
+need nothing above them) -/
+
+theorem lkcInE_of_cof {a : Ordinal.{0}} (ha : 0 < a) (h : ∀ c < a, ∃ e, InE e ∧ c < e ∧ e < a) : InE a := by
+  have hlim : Order.IsSuccLimit a := by
+    refine Ordinal.isSuccLimit_iff.2 ⟨ha.ne', Order.isSuccPrelimit_of_succ_lt (fun c hc => ?_)⟩
+    obtain ⟨e, he, hce, hea⟩ := h c hc
+    have h1 : Order.succ c < e := by
+      rw [Order.succ_eq_add_one]
+      exact (inE_indec he).add_lt hce (luVz_one_lt_E he)
+    exact h1.trans hea
+  refine le_antisymm ?_ (right_le_opow a one_lt_omega0)
+  rw [(isNormal_opow one_lt_omega0).apply_of_isSuccLimit hlim]
+  refine Ordinal.iSup_le (fun c => ?_)
+  obtain ⟨e, he, hce, hea⟩ := h c.1 c.2
+  have : ω ^ c.1 < e := he.opow_lt hce
+  exact (this.trans hea).le
+
+theorem lkcLg_add {a b : Ordinal.{0}} (ha : InE a) (hb0 : b ≠ 0) (hba : b < a) : lg (a + b) = lg b := by
+  have hab0 : a + b ≠ 0 := (lt_of_lt_of_le ha.pos le_self_add).ne'
+  refine le_antisymm ?_ (le_lg hab0 (dvd_add (opow_dvd_of_inE ha ((lg_le hb0).trans hba.le)) (lg_dvd hb0)))
+  set k := lg (a + b) with hk
+  rcases le_or_gt k a with hka | hak
+  · have hda : ω ^ k ∣ a := opow_dvd_of_inE ha hka
+    exact le_lg hb0 ((dvd_add_iff hda).1 (lg_dvd hab0))
+  · exfalso
+    have h1 : ω ^ (a + 1) ≤ ω ^ k := (opow_le_opow_iff_right one_lt_omega0).2 (Order.add_one_le_of_lt hak)
+    have h2 : ω ^ k ≤ a + b := le_of_dvd hab0 (lg_dvd hab0)
+    have h3 : a + b < ω ^ (a + 1) := by
+      rw [opow_add, opow_one, show ω ^ a = a from ha]
+      calc a + b < a + a := (add_lt_add_iff_left a).2 hba
+        _ = a * 2 := (mul_two_eq a).symm
+        _ < a * ω := (mul_lt_mul_iff_right₀ ha.pos).2 (by exact_mod_cast natCast_lt_omega0 2)
+    exact absurd (h1.trans h2) (not_le.2 h3)
+
+theorem lkcIsLh1_unique {a l1 l2 : Ordinal.{0}} (h1 : IsLh1 a l1) (h2 : IsLh1 a l2) : l1 = l2 :=
+  le_antisymm (h2.2 l1 h1.1) (h1.2 l2 h2.1)
+
+/-- The `R₁⁺`-reach of a non-`ε` power (`R2.LuTh.lu_lh_opow`). -/
+theorem lkcLh_opow {c : Ordinal.{0}} (hc0 : c ≠ 0) (hcE : c < ω ^ c) : IsLh1 (ω ^ c) (ω ^ c + lg c) := by
+  set d := ω ^ c with hd
+  have hd0 : 0 < d := opow_pos c omega0_pos
+  have hlgd : lg c ≤ d := (lg_le hc0).trans hcE.le
+  refine ⟨?_, fun g hg => ?_⟩
+  · rcases eq_or_ne (lg c) 0 with h0 | h0
+    · rw [h0, add_zero]; exact le1R_refl d
+    · exact (le1R_thm22 (pos_iff_ne_zero.2 h0) hlgd).2 ⟨c, hc0, rfl, le_rfl⟩
+  · have hdg : d ≤ g := le1R_le hg
+    rcases le_or_gt g (d + d) with hgd | hgd
+    · set ξ := g - d with hξ
+      have hge : d + ξ = g := Ordinal.add_sub_cancel_of_le hdg
+      have hξd : ξ ≤ d := (add_le_add_iff_left d).1 (by rw [hge]; exact hgd)
+      rcases eq_or_ne ξ 0 with h0 | h0
+      · rw [← hge, h0, add_zero]; exact le_self_add
+      · rw [← hge] at hg
+        obtain ⟨a', -, ha', hle⟩ := (le1R_thm22 (pos_iff_ne_zero.2 h0) hξd).1 hg
+        have : c = a' := opow_inj ha'
+        rw [← this] at hle
+        rw [← hge]
+        exact (add_le_add_iff_left d).2 hle
+    · exfalso
+      have h2 : le1R d (d * 2) :=
+        le1R_of_le (by rw [mul_two_eq]; exact le_self_add) (by rw [mul_two_eq]; exact hgd.le) hg
+      have hE : InE d := (le1R_two_iff hd0).1 h2
+      have : ω ^ d = ω ^ c := hE
+      exact absurd (opow_inj this) (ne_of_gt hcE)
+
+theorem lkcNext {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) :
+    ∃ m, x < m ∧ (∀ a, a < Om1 → (a ∈ Tset x ↔ a < m)) ∧ m < Om1 ∧ InE m := by
+  obtain ⟨m, hxm, hm, -, hTm, hm1⟩ := T_next (Or.inr hx) hx1
+  have hm0 : 0 < m := lt_of_le_of_lt zero_le hxm
+  exact ⟨m, hxm, hTm, hm1, (le1R_two_iff hm0).1 (hm _ (by rw [mul_two_eq]; exact le_self_add))⟩
+
+theorem lkcT_down {τ x y : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hx : x ∈ Tset τ) (hx1 : x < Om1)
+    (hy : y ≤ x) : y ∈ Tset τ := by
+  obtain ⟨m, -, -, -, hTm, -⟩ := T_next (Or.inr hτ) hτ1
+  exact (hTm y (lt_of_le_of_lt hy hx1)).2 (lt_of_le_of_lt hy ((hTm x hx1).1 hx))
+
+theorem lkcOpow_nat_T {x b : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hb : b ≤ x) :
+    ∀ n : ℕ, Om1 * ω ^ b * (n : Ordinal.{0}) ∈ Tset x
+  | 0 => by rw [Nat.cast_zero, mul_zero]; exact luVz_zero_T hx hx1
+  | n + 1 => by
+    rw [Nat.cast_succ, mul_add_one]
+    exact vzT_add hx hx1 (lkcOpow_nat_T hx hx1 hb n) (luOm1_opow_T hx hx1 hb)
+
+theorem lkcMul_T_lt {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) : ∀ β, β < x → Om1 * β ∈ Tset x := by
+  intro β
+  induction β using WellFoundedLT.induction with
+  | ind β IH =>
+  intro hβ
+  rcases eq_or_ne β 0 with rfl | hβ0
+  · rw [mul_zero]; exact luVz_zero_T hx hx1
+  set b := log ω β with hb
+  have hω0 : ω ^ b ≠ 0 := (opow_pos b omega0_pos).ne'
+  have hdm : ω ^ b * (β / ω ^ b) + β % ω ^ b = β := div_add_mod β (ω ^ b)
+  have hmlt : β % ω ^ b < ω ^ b := mod_lt β hω0
+  have hgle : ω ^ b ≤ β := opow_log_le_self ω hβ0
+  obtain ⟨n, hn⟩ := lt_omega0.1 (div_opow_log_lt β one_lt_omega0)
+  have hbβ : b ≤ β := log_le_self ω β
+  have hm : Om1 * (β % ω ^ b) ∈ Tset x := IH _ (hmlt.trans_le hgle) ((hmlt.trans_le hgle).trans hβ)
+  have e : Om1 * β = Om1 * ω ^ b * (n : Ordinal.{0}) + Om1 * (β % ω ^ b) := by
+    conv_lhs => rw [← hdm]
+    rw [mul_add, hn, mul_assoc]
+  rw [e]
+  exact vzT_add hx hx1 (lkcOpow_nat_T hx hx1 (hbβ.trans hβ.le) n) hm
+
+theorem lkcMul_add_T {x β η : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hβ : β < x) (hη : η ∈ Tset x) :
+    Om1 * β + η ∈ Tset x :=
+  vzT_add hx hx1 (lkcMul_T_lt hx hx1 β hβ) hη
+
+theorem lkcMul_lt {β η : Ordinal.{0}} (hβ : β < Om1) (hη : η < Om1) : Om1 * β + η < OmTwo := by
+  have hO : Om1 < OmTwo := Om1_lt_OmTwo
+  have h1 : Om1 * β < OmTwo := isPrincipal_mul_omega 2 hO (hβ.trans hO)
+  exact isPrincipal_add_omega 2 h1 (hη.trans hO)
+
+/-- The facts on a term `ϑˣ(Ω₁·β + η)` (`1 ≤ β < x`, `η ∈ Tˣ ∩ Ω₁`), as `R2.LuTh.lu_th_facts`. -/
+theorem lkcTh_facts {x β η : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hβ1 : 1 ≤ β) (hβ : β < x)
+    (hη : η ∈ Tset x) (hη1 : η < Om1) :
+    Om1 * β + η ∈ Tset x ∧ Om1 * β + η < OmTwo ∧
+    vt x (Om1 * β + η) ∈ Tset x ∧ x < vt x (Om1 * β + η) ∧
+    vt x (Om1 * β + η) < Om1 ∧ InE (vt x (Om1 * β + η)) ∧
+    Indec (vt x (Om1 * β + η)) ∧ η < vt x (Om1 * β + η) := by
+  have hγT := lkcMul_add_T hx hx1 hβ hη
+  have hγ2 := lkcMul_lt (hβ.trans hx1) hη1
+  obtain ⟨hvT, -, hv1, hvP, -⟩ := vt_memTwo hx hx1 hγT hγ2
+  have hΩ : Om1 ≤ Om1 * β + η := by
+    calc Om1 = Om1 * 1 := (mul_one _).symm
+      _ ≤ Om1 * β := mul_le_mul_right hβ1 Om1
+      _ ≤ _ := le_self_add
+  have hE := (vt_E_iff hx hx1 hγT hγ2).2 hΩ
+  exact ⟨hγT, hγ2, hvT, hE.1, hv1, hE.2, hvP, luLt_vt_self hx hx1 hβ1 hβ hη hη1⟩
+
+/-- A lower level is below (`R2.LuTh.lu_lev_lt`). -/
+theorem lkcLev_lt {x β' η' β η : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hβ'β : β' < β) (hβ : β < x)
+    (hη' : η' ∈ Tset x) (hη'1 : η' < Om1) (hη : η ∈ Tset x) (hη1 : η < Om1) (h : η' < vt x (Om1 * β + η)) :
+    vt x (Om1 * β' + η') < vt x (Om1 * β + η) := by
+  refine luVt_lt hx hx1 (hβ'β.trans hβ) hη' hη'1 hβ hη hη1 ?_ h
+  calc Om1 * β' + η' < Om1 * β' + Om1 := (add_lt_add_iff_left _).2 hη'1
+    _ = Om1 * (β' + 1) := by rw [mul_add_one]
+    _ ≤ Om1 * β := mul_le_mul_right (Order.add_one_le_of_lt hβ'β) Om1
+    _ ≤ Om1 * β + η := le_self_add
+
+/-- Division by `Ω₁` of an argument `ξ ≥ Ω₁` (`R2.LuTh.lu_split`). -/
+theorem lkcSplit {x ξ : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hξT : ξ ∈ Tset x) (hξ2 : ξ < OmTwo)
+    (hΩξ : Om1 ≤ ξ) :
+    1 ≤ ξ / Om1 ∧ ξ % Om1 ∈ Tset x ∧ ξ % Om1 < Om1 ∧ Om1 * (ξ / Om1) + ξ % Om1 = ξ := by
+  have hdec : Om1 * (ξ / Om1) + ξ % Om1 = ξ := Ordinal.div_add_mod ξ Om1
+  have hr1 : ξ % Om1 < Om1 := Ordinal.mod_lt ξ (Ordinal.omega_pos 1).ne'
+  have hq1 : 1 ≤ ξ / Om1 := by
+    rcases eq_or_ne (ξ / Om1) 0 with h0 | h0
+    · exfalso
+      rw [h0, mul_zero, zero_add] at hdec
+      exact absurd (hdec ▸ hr1) (not_lt.2 hΩξ)
+    · exact Order.one_le_iff_ne_zero.2 h0
+  exact ⟨hq1, vzRem_T hx hx1 hξT hξ2 hdec.symm (dvd_mul_right _ _) hr1, hr1, hdec⟩
+
+/-- `lhᵗ(a·ω^b) = a·ω^b + logend(b)` (`R2.LuTh.lu_lhT_mul_opow`). -/
+theorem lkcLhT_mul_opow {x a b : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (haT : a ∈ Tset x) (hxa : x < a)
+    (ha1 : a < Om1) (haE : InE a) (hb1 : 1 ≤ b) (hba : b < a) : lhT x (a * ω ^ b) = a * ω ^ b + lg b := by
+  have hb0 : b ≠ 0 := (lt_of_lt_of_le zero_lt_one hb1).ne'
+  have e : a * ω ^ b = ω ^ (a + b) := by rw [opow_add, show ω ^ a = a from haE]
+  have hab0 : a + b ≠ 0 := (lt_of_lt_of_le haE.pos le_self_add).ne'
+  have hlt : a + b < ω ^ (a + b) := by
+    rw [opow_add, show ω ^ a = a from haE]
+    calc a + b < a + a := (add_lt_add_iff_left a).2 hba
+      _ = a * 2 := (mul_two_eq a).symm
+      _ < a * ω := (mul_lt_mul_iff_right₀ haE.pos).2 (by exact_mod_cast natCast_lt_omega0 2)
+      _ = a * ω ^ (1 : Ordinal.{0}) := by rw [opow_one]
+      _ ≤ a * ω ^ b := mul_le_mul_right ((opow_le_opow_iff_right one_lt_omega0).2 hb1) a
+  have hL : IsLh1 (a * ω ^ b) (a * ω ^ b + lg b) := by
+    have := lkcLh_opow hab0 hlt
+    rwa [lkcLg_add haE hb0 hba, ← e] at this
+  obtain ⟨m, -, hTm, hm1, hmE⟩ := lkcNext hx hx1
+  have ham : a < m := (hTm a ha1).1 haT
+  have hδm : a * ω ^ b < m := by
+    rw [e]; exact hmE.opow_lt ((inE_indec hmE).add_lt ham (hba.trans ham))
+  have hδ1 : a * ω ^ b < Om1 := hδm.trans hm1
+  have hδT : a * ω ^ b ∈ Tset x := (hTm _ hδ1).2 hδm
+  have hxδ : x < a * ω ^ b := hxa.trans_le (le_mul_left a (opow_pos b omega0_pos))
+  have hδP : Indec (a * ω ^ b) := by rw [e]; exact indec_opow _
+  exact lkcIsLh1_unique (lh_eq_lhT (Or.inr hx) hx1 hδT hxδ hδ1 hδP) hL
+
+/-- `lhᵗ(α·ω) = α·ω` for `α = ϑᵗ(Ω₁·β + η)`, `1 ≤ β < τ` (`R2.LuOld.lu_lhT_mul_omega`). -/
+theorem lkcLhT_mul_omega {τ β η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hβ1 : 1 ≤ β) (hβ : β < τ)
+    (hη : η ∈ Tset τ) (hη1 : η < Om1) :
+    lhT τ (vt τ (Om1 * β + η) * ω) = vt τ (Om1 * β + η) * ω := by
+  obtain ⟨-, -, hvT, hxv, hv1, hvE, -, -⟩ := lkcTh_facts hτ hτ1 hβ1 hβ hη hη1
+  have h := lkcLhT_mul_opow hτ hτ1 hvT hxv hv1 hvE le_rfl (luVz_one_lt_E hvE)
+  have hlg : lg (1 : Ordinal.{0}) = 0 := by
+    have := lg_nat (n := 1) one_ne_zero; rwa [Nat.cast_one] at this
+  rwa [opow_one, hlg, add_zero] at h
+
+theorem lkcLog_omega : log ω (ω : Ordinal.{0}) = 1 := by
+  have := log_opow one_lt_omega0 (1 : Ordinal.{0}); rwa [opow_one] at this
+
+theorem lkcLog_omega_one : log ω ((ω : Ordinal.{0}) + 1) = 1 := by
+  refine (log_eq_iff one_lt_omega0 (lt_of_lt_of_le omega0_pos le_self_add).ne' 1).2 ⟨?_, ?_⟩
+  · rw [opow_one]; exact le_self_add
+  · rw [opow_add, opow_one]
+    calc (ω : Ordinal.{0}) + 1 < ω + ω := (add_lt_add_iff_left _).2 one_lt_omega0
+      _ = ω * 2 := (mul_two_eq _).symm
+      _ < ω * ω := (mul_lt_mul_iff_right₀ omega0_pos).2 (by exact_mod_cast natCast_lt_omega0 2)
+
+theorem lkcZeta_zero (τ β : Ordinal.{0}) : luZeta τ β 0 = 0 := by
+  unfold luZeta
+  rw [if_neg]
+  rintro ⟨σ, hσ, -⟩
+  exact absurd hσ (not_lt.2 zero_le)
+
+theorem lkcZeta_lim {τ β η : Ordinal.{0}} (h : ∃ σ, σ < η ∧ η < vt τ (Om1 * β + σ)) : luZeta τ β η = lg η := by
+  unfold luZeta; rw [if_pos h]
+
+theorem lkcOmega_one_lt_E {τ : Ordinal.{0}} (hτ : InE τ) : (ω : Ordinal.{0}) + 1 < τ :=
+  (inE_indec hτ).add_lt (omega0_lt_inE hτ) (luVz_one_lt_E hτ)
+
 /-- **[W07a] Lemma 3.30, the direction `⇒`, with Def 3.28** (texts L, S, ★): for `ξ ∈ Tᵗ ∩ Ω₂`, `η ∈ Tᵗ ∩ Ω₁`
 with `η < ϑᵗ(ξ)` and `n < ω`, `ϑᵗ(ξ) < ϑᵗ(Ω₁·n + η)` implies `ξ < Ω₁·n + η`.
 
@@ -225,10 +440,43 @@ Our steps.  `α := ϑᵗ(Ω₁·k + η) ∈ Tᵗ` (★3, T), with `Δ = Ω₁·k
 `≥ sup_{σ<η} (σ + 1) = η`.  Lemma 4.4 (`⇒`): the term of `η` has the form `ϑᵗ(Γ + ρ)` with `Γ > Δ`, `Ω₁ | Γ`,
 `ρ < Ω₁` (C), and `Γ + ρ ∈ Tᵗ ∩ Ω₂` is its argument (U, T).  For `ξ` as given, `ϑᵗ(ξ) = η = ϑᵗ(Γ + ρ)` and
 Lemma 3.30 (`ϑ₀ ↾ Tᵗ ∩ Ω₂` is 1-1) give `ξ = Γ + ρ`.  `Γ` is a multiple of `Ω₁` above `Ω₁·k`, so `Γ ≥ Ω₁·(k + 1)` and
-`ξ ≥ Ω₁·(k + 1)`. -/
-axiom vzFix_level {τ η ξ : Ordinal.{0}} {k : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hk : 1 ≤ k) (hη : η ∈ Tset τ)
+`ξ ≥ Ω₁·(k + 1)`.  Proved from `CitedLu` (Lemma 3.30 alone: a fixed point `η` of `σ ↦ ϑᵗ(Ω₁·k + σ)` is an
+`ε`-number, so its argument is `Ω₁·q + s`, `q ≥ 1`; `q ≤ k` would give `ϑᵗ(Ω₁·k + s) < η = ϑᵗ(Ω₁·q + s) ≤
+ϑᵗ(Ω₁·k + s)`). -/
+theorem vzFix_level {τ η ξ : Ordinal.{0}} {k : ℕ} (hτ : InE τ) (hτ1 : τ < Om1) (hk : 1 ≤ k) (hη : η ∈ Tset τ)
     (hη1 : η < Om1) (hη0 : 0 < η) (hfix : ∀ σ, σ < η → vt τ (Om1 * (k : Ordinal.{0}) + σ) < η)
-    (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo) (hv : vt τ ξ = η) : Om1 * ((k + 1 : ℕ) : Ordinal.{0}) ≤ ξ
+    (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo) (hv : vt τ ξ = η) : Om1 * ((k + 1 : ℕ) : Ordinal.{0}) ≤ ξ := by
+  have hk1 := luVz_nat_one_le hk
+  have hkτ := luVz_nat_lt_E hτ k
+  have hηE : InE η := by
+    refine lkcInE_of_cof hη0 (fun c hc => ?_)
+    have hcT : c ∈ Tset τ := lkcT_down hτ hτ1 hη hη1 hc.le
+    obtain ⟨-, -, -, -, -, hE, -, hcv⟩ := lkcTh_facts hτ hτ1 hk1 hkτ hcT (hc.trans hη1)
+    exact ⟨_, hE, hcv, hfix c hc⟩
+  have hτη : τ < η := by
+    obtain ⟨-, -, -, h1, -, -, -, -⟩ := lkcTh_facts hτ hτ1 hk1 hkτ (luVz_zero_T hτ hτ1) (Ordinal.omega_pos 1)
+    exact h1.trans (hfix 0 hη0)
+  have hΩξ : Om1 ≤ ξ := (vt_E_iff hτ hτ1 hξ hξ2).1 ⟨by rw [hv]; exact hτη, by rw [hv]; exact hηE⟩
+  by_contra hlt
+  push Not at hlt
+  obtain ⟨hq1, hsT, hs1, hdec⟩ := lkcSplit hτ hτ1 hξ hξ2 hΩξ
+  set q := ξ / Om1 with hq
+  set s := ξ % Om1 with hs
+  have hqk : q ≤ (k : Ordinal.{0}) := by
+    have h1 : Om1 * q < Om1 * ((k + 1 : ℕ) : Ordinal.{0}) := lt_of_le_of_lt (hdec ▸ le_self_add) hlt
+    have h2 := (mul_lt_mul_iff_right₀ (Ordinal.omega_pos 1)).1 h1
+    rw [Nat.cast_succ] at h2
+    exact Order.lt_add_one_iff.1 h2
+  have hqτ : q < τ := lt_of_le_of_lt hqk hkτ
+  have hsη : s < η := by rw [← hv, ← hdec]; exact luLt_vt_self hτ hτ1 hq1 hqτ hsT hs1
+  have h1 := hfix s hsη
+  rcases hqk.lt_or_eq with hqk' | hqk'
+  · have h2 : vt τ (Om1 * q + s) < vt τ (Om1 * (k : Ordinal.{0}) + s) :=
+      lkcLev_lt hτ hτ1 hqk' hkτ hsT hs1 hsT hs1 (luLt_vt_self hτ hτ1 hk1 hkτ hsT hs1)
+    rw [hdec, hv] at h2
+    exact lt_irrefl _ (h1.trans h2)
+  · rw [← hqk', hdec, hv] at h1
+    exact lt_irrefl _ h1
 
 /-- **[W07a] Def 3.22, Lemma 4.2 (`m = 1`), Def 3.4** (texts T, W): `Ω₁·ω ∈ Tᵗ`.
 
@@ -302,8 +550,15 @@ Our steps.  `Δ := Ω₁·ω = ϑ₁(1)` (axiom `vzOm1w_T`), `α = ϑᵗ(Δ + 0)
   additive principal `> τ`), `ξ_δ = 1 + α = α`.  `λᵗ_δ = ζᵗ_δ` (Λ, `δ ∉ E`), and `ζᵗ_δ = 0` (G): every `σ < α` has
   `ϑᵗ(σ) < α` (`ϑᵗ(1 + σ') = ω̄_{τ+σ'}` with `τ + σ' < α`, and `ω̄` maps `α` into `α`, see above), so
   `sup_{σ<α} ϑᵗ(σ) ≤ α` and `α < sup` fails.  `(λᵗ_δ)^* = 0 ≤ δ`, so `lhᵗ(δ) = δ + 0 = δ`.
-So `lhᵗ(α) = δ + 0 = α·ω`. -/
-axiom vzLhT_w {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) :
-    lhT τ (vt τ (Om1 * ω)) = vt τ (Om1 * ω) * ω
+So `lhᵗ(α) = δ + 0 = α·ω`.  Proved from `CitedLu` (`luLhT_inf` at `β = ω`, `η = 0`, and the `R₁⁺`-reach of
+`α·ω = ω^{α+1}` from [W07b] Theorem 2.2 and Theorem 5.3). -/
+theorem vzLhT_w {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) :
+    lhT τ (vt τ (Om1 * ω)) = vt τ (Om1 * ω) * ω := by
+  have h := luLhT_inf hτ hτ1 le_rfl (luVz_omega_lt_E hτ) (luVz_zero_T hτ hτ1) (Ordinal.omega_pos 1)
+  have hm := lkcLhT_mul_omega hτ hτ1 one_lt_omega0.le (luVz_omega_lt_E hτ) (luVz_zero_T hτ hτ1)
+    (Ordinal.omega_pos 1)
+  simp only [lkcLog_omega, opow_one, lkcZeta_zero, add_zero, Ordinal.sub_self] at h hm
+  rw [hm] at h
+  exact h
 
 end Googology.Trans.PoR.InaccPsi.R2
