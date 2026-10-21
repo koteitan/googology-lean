@@ -21,7 +21,7 @@ legitimate choice.  `Tset τ` is the set of ordinals denoted in `Tᵗ` ([W07a] C
 constants without a definition (the term systems are not formalized); the axioms state the
 cited facts about them, always under `σ, τ ∈ E`, `σ < τ < Ω₁`.
 
-The axioms (27 = 7 constants + 20 facts):
+The axioms (28 = 7 constants + 21 facts):
 * constants: `le1R` (`≤₁` of `R₁⁺`), `Tset` (`Tᵗ`), `Par` (`Parᵗ`), `pi` (`π_{σ,τ}`), `ht` (`htᵗ`),
   `Dl` (`ϑᵗ(Δₙ)`), `Dp` (`ϑᵗ(Δₙ + 1)`);
 * `R₁⁺`: `le1R_trans`, `le1R_le`, `le1R_of_le` ([W07b] Lemma 2.1, §1), `le1R_two_iff` ([W07b]
@@ -30,7 +30,8 @@ The axioms (27 = 7 constants + 20 facts):
   case `b = 0`, a theorem), `pi_bijOn`, `pi_add`, `pi_ht_Par`
   ([W07a] Def 5.1, Lemma 5.3, Cor 5.4), `lh_pi` ([W07b] Lemma 4.4, Thm 5.3, Cor 5.7),
   `T_inter_Om1` ([W07b] Cor 5.10);
-* terms: `Par_lt`, `Par_comps` ([W07a] Def 3.28), `ht_spec` ([W07a] Lemma 3.27), `Dl_spec`
+* terms: `vzT_add` ([W07a] Def 3.22; moved here unchanged from `R2.CitedVz`), `Par_lt`, `Par_comps_eq`
+  ([W07a] Def 3.28; `Par_comps` is now a theorem from it), `ht_spec` ([W07a] Lemma 3.27), `Dl_spec`
   ([W07a] Def 3.26), `Dl_E` ([W07a] Lemma 4.3, Def 3.28), `Dp_spec` ([W07a] Conv. 4.1,
   Lemma 6.3), `par_track` ([W07a] Lemma 6.10 with Lemmas 6.3, 3.30).
 -/
@@ -205,13 +206,56 @@ axiom Dp : Ordinal.{0} → ℕ → Ordinal.{0}
 axiom Par_lt {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {x : Ordinal.{0}} (hx : x < τ) :
     Par τ x = {x}
 
+/-- **[W07a] Def 3.22, second clause** (text T): "`ξ, η ∈ T_m ⇒ ξ + η ∈ T_m`", for `m = 0` (Convention 3.25:
+`T₀ = Tᵗ`).  Literal; the hypotheses on `τ` are the standing setting (`τ ∈ E` countable).  (Moved here unchanged
+from `R2.CitedVz`, same name and statement.) -/
+axiom vzT_add {τ x y : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hx : x ∈ Tset τ) (hy : y ∈ Tset τ) :
+    x + y ∈ Tset τ
+
+/-- **[W07a] Def 3.28 (the clause for sums), with §2 (`=ANF`, `=NF`), Def 3.22, the remark after Cor 3.24 and
+Lemma 3.30**: for `x ∈ Tᵗ` with `τ ≤ x`, every additive component of `x` lies in `Tᵗ`, and
+`Parᵗ(x) = ⋃ {Parᵗ(p) | p an additive component of x}`.
+
+Literal texts ([W07a]):
+* (S) Def 3.28: "We define sets of subterms `Subᵗ_m(α)` for `m < ω` and notations `α` in `Tᵗ` by recursion on the
+  build up of `Tᵗ`: • `Subᵗ_m(α) := {α}` for parameters `α < τ` • `Subᵗ_m(α) := {α} ∪ Subᵗ_m(ξ) ∪ Subᵗ_m(η)` for
+  `ξ, η ∈ Tᵗ` s.t. `α =NF ξ + η > τ` • `Subᵗ_m(α) := {α} ∪ Subᵗ_m(ξ)` if `k ≥ m`, `{α}` if `k < m`, for
+  `α = ϑ_k(ξ)` where `ξ ∈ Tᵗ ∩ Ω_{k+2}`. … The set of parameters `< τ` used in the unique term denoting some
+  `α ∈ Tᵗ` is denoted by `Parᵗ(α) := Subᵗ₀(α) ∩ τ`."
+* (A) §2: "We write `ξ =ANF ξ₁ + ⋯ + ξₙ` if `ξ₁, …, ξₙ ∈ P`, `ξ₁ ≥ ⋯ ≥ ξₙ` (`ξ` given in additive normal form).  For
+  convenience we also write `ξ =NF η + ρ` provided `η =ANF η₁ + ⋯ + ηₙ` for some `η₁, …, ηₙ`, and `ηₙ ≥ ρ ∈ P`."
+* (T) Def 3.22: "`T_m` is defined inductively as follows: • `Ω_m ⊆ T_m` • `ξ, η ∈ T_m ⇒ ξ + η ∈ T_m`
+  • `ξ ∈ T_m ∩ Ω_{k+2} ⇒ ϑ_k(ξ) ∈ T_m` for `k ≥ m`."
+* (U) Remark after Cor 3.24: "each `T_m` again gives rise to a notation system with parameters from `Ω_m` that
+  provides a unique term for every ordinal which is element of some `Tⁿ_m` where `n > m` (again refining the
+  clause for ordinal addition as we did for the systems `Tⁿ_m`)".
+* (L) Lemma 3.30: "For `m < ω` the function `ϑ_m ↾ Tᵗ ∩ Ω_{m+2}` is 1-1 and has values in `P ∩ [Ω_m, Ω_{m+1})`."
+* (5.7) Proof of Lemma 5.7 (for `ξ ∈ Tᵗ ∩ Ω₁`, `ξ =ANF ξ₁ + ⋯ + ξₙ`): "Case 2: `ξ₁ ≥ τ`.  Then
+  `Parᵗ(ξ) = ⋃_{j=1}^n Parᵗ(ξⱼ)`" (the same identity below `Ω₁`).
+
+Our steps.  Let `x =ANF x₁ + ⋯ + xₙ` (`n ≥ 1`, as `x ≥ τ > 0`); the components `p ∈ comps x` are the distinct
+`xⱼ`.  By (U) `x` has a unique term, built by the clauses of (T) with sums refined to `=NF`-sums.  If that term is
+a parameter then `x < τ`, excluded.  If it is `ϑ_k(ξ)`, then `x ∈ P` (L), so `n = 1`, `comps x = [x]`, and both
+claims are trivial (`x ∈ Tᵗ`).  Otherwise it is an `=NF`-sum `ξ + η > τ` with `ξ, η ∈ Tᵗ` (S); as `η ∈ P` and the
+last component of `ξ` is `≥ η` (A), `η = xₙ` and `ξ =ANF x₁ + ⋯ + xₙ₋₁` (the additive normal form is unique), and
+by (S) `Parᵗ(x) = ({x} ∪ Subᵗ₀(ξ) ∪ Subᵗ₀(η)) ∩ τ = Parᵗ(ξ) ∪ Parᵗ(xₙ)` (`x > τ`).  Here `ξ ≥ x₁ ≥ τ` (if
+`x₁ < τ`, every component is `< τ ∈ P` and `x < τ`), so by induction on `n` the claim for `ξ` (`n − 1` summands)
+gives `x₁, …, xₙ₋₁ ∈ Tᵗ` and `Parᵗ(ξ) = ⋃_{j<n} Parᵗ(xⱼ)`; and `xₙ = η ∈ Tᵗ`.  So every component lies in `Tᵗ`
+and `Parᵗ(x) = ⋃ⱼ Parᵗ(xⱼ)`. -/
+axiom Par_comps_eq {τ x : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hxT : x ∈ Tset τ) (hτx : τ ≤ x) :
+    (∀ p ∈ comps x, p ∈ Tset τ) ∧ ∀ q, q ∈ Par τ x ↔ ∃ p ∈ comps x, q ∈ Par τ p
+
 /-- **[W07a] Def 3.28** for `ξ =NF ξ₁ + ξ₂ > τ` (`Subᵗ(ξ) ⊇ Subᵗ(ξ₁) ∪ Subᵗ(ξ₂)`), applied to
 the additive normal form `ξ =ANF ξ₁ + ⋯ + ξₙ ≥ τ` of an element of `Tᵗ`: a component `ξᵢ < τ` is
 a parameter of `ξ`, and a component `ξᵢ ≥ τ` is a subterm of `ξ` (in `Tᵗ`, with
-`Parᵗ(ξᵢ) ⊆ Parᵗ(ξ)`). -/
-axiom Par_comps {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {x : Ordinal.{0}}
+`Parᵗ(ξᵢ) ⊆ Parᵗ(ξ)`).  Proved from `Par_comps_eq` and `Par_lt` (`Parᵗ(ξᵢ) = {ξᵢ}` for `ξᵢ < τ`). -/
+theorem Par_comps {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {x : Ordinal.{0}}
     (hxT : x ∈ Tset τ) (hτx : τ ≤ x) (hx1 : x < Om1) {p : Ordinal.{0}} (hp : p ∈ comps x) :
-    (p < τ → p ∈ Par τ x) ∧ (τ ≤ p → p ∈ Tset τ ∧ Par τ p ⊆ Par τ x)
+    (p < τ → p ∈ Par τ x) ∧ (τ ≤ p → p ∈ Tset τ ∧ Par τ p ⊆ Par τ x) := by
+  obtain ⟨hT, hiff⟩ := Par_comps_eq hτ hτ1 hxT hτx
+  refine ⟨fun hpτ => (hiff p).2 ⟨p, hp, ?_⟩, fun _ => ⟨hT p hp, fun q hq => (hiff q).2 ⟨p, hp, hq⟩⟩⟩
+  rw [Par_lt hτ hτ1 hpτ]
+  exact Finset.mem_singleton_self p
 
 /-- **[W07a] Lemma 3.27**: "For `α < Tᵗ ∩ Ω₁`, `htᵗ(α) = min{n | α < ϑ₀(⋯(ϑₙ(0))⋯)}`" (the
 minimum exists). -/

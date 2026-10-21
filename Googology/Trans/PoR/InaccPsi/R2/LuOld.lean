@@ -10,9 +10,9 @@ the level-free axioms (`vt_memTwo`, `vt_E_iff`, `vzRem_T`, `vzT_add`, `lh_eq_lhT
 `T_inter_Om1`, …).  The old axioms are not deleted; `#print axioms` of each theorem below shows that it does not use
 the axiom whose statement it proves.
 
-Not covered: the parameter clause of `Om1_add_T` (only its membership half is `luOld_Om1_add_T_mem`), and the axioms
-that are not facts of Lemma 3.30 / Def 4.1 (`vt_Om1_mem`, `vt_Om1_succ` of `R2.CitedEps`; `vzT_add`, `vzRem_T`, which
-are level-free and used as they are).
+`Om1_add_T` itself is now a theorem of `R2.CitedEv` (both clauses; here only its membership half is
+`luOld_Om1_add_T_mem`).  Not covered: the axioms that are not facts of Lemma 3.30 / Def 4.1 (`vt_Om1_mem`,
+`vt_Om1_succ` of `R2.CitedEps`; `vzT_add`, `vzRem_T`, which are level-free and used as they are).
 
 No new axiom.
 -/

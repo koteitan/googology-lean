@@ -77,9 +77,9 @@ Two facts on `α^* = α^{*0}` used below (our steps, from (S), (U), (L)):
   of `η` is the `=NF`-sum of its components (or the single component), and its partial sums with `≥ 2`
   summands are not in `P`.
 
-The axioms (9 facts, no constant):
+The facts (9; `Om1_add_T` and 5–8 are theorems, the others axioms, no constant):
 1. `Om1_add_T` (T, Z, U, S): for `η ∈ Tᵗ ∩ Ω₁`, `Ω₁ + η ∈ Tᵗ`, and each parameter of `Ω₁ + η` is `0` or `≤` a
-   parameter of `η`.
+   parameter of `η` (a theorem: from `vzT_add`, `Par_comps_eq` of `R2.Cited`, `vt_memTwo`, `vt_Om1_mem`, `Dl_E`).
 2. `vt_memTwo` (T, L, S): for `ξ ∈ Tᵗ ∩ Ω₂`, `ϑᵗ(ξ) ∈ Tᵗ ∩ P ∩ [τ, Ω₁)` and `Parᵗ(ϑᵗ(ξ)) = Parᵗ(ξ)`.
 3. `vt_rep` (T, U, L): an additive principal `x ∈ Tᵗ ∩ [τ, Ω₁)` is `ϑᵗ(ξ)` for some `ξ ∈ Tᵗ ∩ Ω₂`.
 4. `vt_E_iff` (E, C): for `ξ ∈ Tᵗ ∩ Ω₂`, `τ < ϑᵗ(ξ) ∈ E ⇔ Ω₁ ≤ ξ`.
@@ -118,19 +118,6 @@ private theorem lu_zeta_lim {τ β η : Ordinal.{0}}
     (h : ∃ σ, σ < η ∧ η < vt τ (Om1 * β + σ)) : luZeta τ β η = lg η := by
   simp [luZeta, h]
 
-/-- **[W07a] Def 3.22, the remark after Def 3.1, Def 3.28** (texts T, Z, U, S of the module docstring): for
-`η ∈ Tᵗ ∩ Ω₁`, `Ω₁ + η ∈ Tᵗ`, and every parameter of `Ω₁ + η` is `0` or at most a parameter of `η`.
-
-Our steps.  Membership: `0 ∈ Ω₀ = τ ⊆ T₀` (first clause), so `ϑ₁(0) ∈ T₀` (third clause, `k = 1 ≥ m = 0`,
-`0 ∈ T₀ ∩ Ω₃`), and `ϑ₁(0) = Ω₁` (Z); with `η ∈ T₀`, `Ω₁ + η ∈ T₀` (second clause).  Parameters: by (★2) of the
-module docstring, `Subᵗ₀(Ω₁ + η) = {Ω₁ + η₁ + ⋯ + ηⱼ | j ≤ n} ∪ {Ω₁, 0} ∪ ⋃ⱼ Subᵗ₀(ηⱼ)` (`η =ANF η₁ + ⋯ + ηₙ`), so
-`Parᵗ(Ω₁ + η) = {0} ∪ ⋃ⱼ (Subᵗ₀(ηⱼ) ∩ τ)`.  For `η < τ` (a parameter, `Parᵗ(η) = {η}`) each `ηⱼ` is a parameter
-with `Subᵗ₀(ηⱼ) = {ηⱼ}` and `ηⱼ ≤ η`.  For `η ≥ τ` the term of `η` is the `=NF`-sum of its components (§2), so
-`Subᵗ₀(ηⱼ) ⊆ Subᵗ₀(η)` and `Subᵗ₀(ηⱼ) ∩ τ ⊆ Parᵗ(η)`.  In both cases every element of `Parᵗ(Ω₁ + η)` is `0` or
-`≤` an element of `Parᵗ(η)`. -/
-axiom Om1_add_T {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1) :
-    Om1 + η ∈ Tset τ ∧ ∀ p ∈ Par τ (Om1 + η), p = 0 ∨ ∃ q ∈ Par τ η, p ≤ q
-
 /-- **[W07a] Def 3.22, Lemma 3.30, Def 3.28** (texts T, L, S): for `ξ ∈ Tᵗ ∩ Ω₂`, `ϑᵗ(ξ) ∈ Tᵗ`, its value
 is an additive principal number in `[τ, Ω₁)`, and `Parᵗ(ϑᵗ(ξ)) = Parᵗ(ξ)`.
 
@@ -140,6 +127,62 @@ nonzero) is `Indec` here.  By (S) with `k = m = 0`, `Subᵗ₀(ϑ₀(ξ)) = {ϑ�
 in `τ`, so `Parᵗ(ϑ₀(ξ)) = Subᵗ₀(ξ) ∩ τ = Parᵗ(ξ)`.  (For `ξ < Ω₁` this is the axiom `vt_mem` of `R2.CitedW`.) -/
 axiom vt_memTwo {τ ξ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo) :
     vt τ ξ ∈ Tset τ ∧ τ ≤ vt τ ξ ∧ vt τ ξ < Om1 ∧ Indec (vt τ ξ) ∧ Par τ (vt τ ξ) = Par τ ξ
+
+theorem tqc_Om1_lt_OmTwo : Om1 < OmTwo := omega_lt_omega.2 one_lt_two
+
+/-- The additive components of `Ω₁ + η` (`η < Ω₁`) are `Ω₁` and the components of `η`. -/
+theorem tqc_comps_Om1_add {η : Ordinal.{0}} (hη1 : η < Om1) :
+    ∀ c ∈ comps (Om1 + η), c = Om1 ∨ c ∈ comps η := by
+  have hP : IsPrincipal (· + ·) Om1 := isPrincipal_add_omega 1
+  rcases isPrincipal_add_iff_zero_or_omega0_opow.1 hP with h0 | ⟨e, he⟩
+  · rw [h0] at hη1; exact absurd hη1 (not_lt_of_ge zero_le)
+  have he' : (ω : Ordinal.{0}) ^ e = Om1 := he
+  have hηe : η < ω ^ e := he' ▸ hη1
+  intro c hc
+  have hcnf : CNF ω (Om1 + η) = (e, 1) :: CNF ω η := by
+    rw [← he', ← mul_one ((ω : Ordinal.{0}) ^ e)]
+    exact CNF.opow_mul_add one_lt_omega0 one_ne_zero one_lt_omega0 hηe
+  unfold comps at hc
+  rw [hcnf, List.map_cons, List.mem_cons] at hc
+  rcases hc with hc | hc
+  · left; rw [hc]; exact he'
+  · right; exact hc
+
+/-- **`Om1_add_T`** ([W07a] Def 3.22, the remark after Def 3.1, Def 3.28; texts T, Z, U, S of the module docstring):
+for `η ∈ Tᵗ ∩ Ω₁`, `Ω₁ + η ∈ Tᵗ`, and every parameter of `Ω₁ + η` is `0` or at most a parameter of `η`.
+Formerly an axiom; now proved (same name, same statement) from `vzT_add`, `luOm1_opow_T` (`b = 0`: `Ω₁ ∈ Tᵗ`),
+`Par_comps_eq` and `Par_comps`, `Par_lt` (all of `R2.Cited`), and, for `Parᵗ(Ω₁) ⊆ {0}`, `vt_memTwo`
+(`Parᵗ(ϑᵗ(Ω₁)) = Parᵗ(Ω₁)`), `vt_Om1_mem` (`ϑᵗ(Ω₁) = ϑᵗ(Δ₁)`) and `Dl_E` (`Parᵗ(ϑᵗ(Δ₁)) ⊆ {0}`).
+
+Our steps (the Lean proof).  The components of `Ω₁ + η` are `Ω₁` and those of `η` (`Ω₁ = ω^e` is additive
+principal, `η < Ω₁`).  A parameter `p` of `Ω₁ + η` is a parameter of one of them (`Par_comps_eq`).  For `Ω₁`:
+`p = 0`.  For a component `c` of `η`: if `η < τ`, then `c ≤ η < τ`, `Parᵗ(c) = {c}`, `p = c ≤ η ∈ Parᵗ(η) = {η}`;
+if `η ≥ τ`, then `c < τ` gives `p = c ∈ Parᵗ(η)`, and `c ≥ τ` gives `p ∈ Parᵗ(c) ⊆ Parᵗ(η)` (`Par_comps`). -/
+theorem Om1_add_T {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1) :
+    Om1 + η ∈ Tset τ ∧ ∀ p ∈ Par τ (Om1 + η), p = 0 ∨ ∃ q ∈ Par τ η, p ≤ q := by
+  have hO : Om1 ∈ Tset τ := by
+    have h := luOm1_opow_T hτ hτ1 (zero_le : (0 : Ordinal.{0}) ≤ τ)
+    rwa [opow_zero, mul_one] at h
+  have hmem : Om1 + η ∈ Tset τ := vzT_add hτ hτ1 hO hη
+  refine ⟨hmem, fun p hp => ?_⟩
+  obtain ⟨-, hiff⟩ := Par_comps_eq hτ hτ1 hmem (hτ1.le.trans le_self_add)
+  obtain ⟨c, hc, hpc⟩ := (hiff p).1 hp
+  rcases tqc_comps_Om1_add hη1 c hc with rfl | hcη
+  · left
+    have h1 : Par τ (vt τ Om1) = Par τ Om1 := (vt_memTwo hτ hτ1 hO tqc_Om1_lt_OmTwo).2.2.2.2
+    rw [← h1, (vt_Om1_mem hτ hτ1 0).2.2] at hpc
+    exact Set.mem_singleton_iff.1 ((Dl_E hτ hτ1 (le_refl 1)).2.2 (Finset.mem_coe.2 hpc))
+  · right
+    rcases lt_or_ge η τ with hητ | hτη
+    · have hcτ : c < τ := (le_of_mem_comps hcη).trans_lt hητ
+      rw [Par_lt hτ hτ1 hcτ, Finset.mem_singleton] at hpc
+      refine ⟨η, ?_, hpc ▸ le_of_mem_comps hcη⟩
+      rw [Par_lt hτ hτ1 hητ]; exact Finset.mem_singleton_self η
+    · have hPc := Par_comps hτ hτ1 hη hτη hη1 hcη
+      rcases lt_or_ge c τ with hcτ | hτc
+      · rw [Par_lt hτ hτ1 hcτ, Finset.mem_singleton] at hpc
+        exact ⟨c, hPc.1 hcτ, hpc.le⟩
+      · exact ⟨p, (hPc.2 hτc).2 hpc, le_rfl⟩
 
 /-- **[W07a] Def 3.22, the remark after Cor 3.24 and Thm 3.23, Lemma 3.30** (texts T, U, L): an additive
 principal `x ∈ Tᵗ` with `τ ≤ x < Ω₁` is `ϑᵗ(ξ)` for some `ξ ∈ Tᵗ ∩ Ω₂`.
@@ -164,7 +207,7 @@ axiom vt_E_iff {τ ξ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ 
 /-- **[W07a] Lemma 3.30, the direction `⇒`, with Def 3.28** (texts L, S, ★): for `ξ ∈ Tᵗ ∩ Ω₂` and
 `η ∈ Tᵗ ∩ Ω₁` with `η < ϑᵗ(ξ)`, `ϑᵗ(ξ) < ϑᵗ(Ω₁ + η)` implies `ξ < Ω₁ + η`.
 
-Our steps.  `γ := Ω₁ + η ∈ Tᵗ ∩ Ω₂` (axiom `Om1_add_T`; `Ω₁ + η < Ω₁·2 < Ω₂`).  By (★2) and (★1) of the
+Our steps.  `γ := Ω₁ + η ∈ Tᵗ ∩ Ω₂` (`Om1_add_T`; `Ω₁ + η < Ω₁·2 < Ω₂`).  By (★2) and (★1) of the
 module docstring, `γ^* = η^* ≤ η < ϑᵗ(ξ)`.  Lemma 3.30 with `m = 0`, `α = ξ`: `ϑ₀(ξ) < ϑ₀(γ)` gives
 `ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^*`; the second is impossible.  So `ξ < γ`. Proved from `CitedLu`. -/
 theorem vt_lt_Om1_add {τ ξ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ)
@@ -177,7 +220,7 @@ theorem vt_lt_Om1_add {τ ξ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) 
 `η' < ϑᵗ(Ω₁ + η)`, `ϑᵗ(Ω₁ + η') < ϑᵗ(Ω₁ + η)` (the remark after Convention 4.1: "immediately seen to be
 strictly increasing").
 
-Our steps.  `α := Ω₁ + η'` and `γ := Ω₁ + η` lie in `Tᵗ ∩ Ω₂` (axiom `Om1_add_T`), and `α < γ`.  By (★2) and
+Our steps.  `α := Ω₁ + η'` and `γ := Ω₁ + η` lie in `Tᵗ ∩ Ω₂` (`Om1_add_T`), and `α < γ`.  By (★2) and
 (★1), `α^* = η'^* ≤ η' < ϑ₀(γ)`.  So the first disjunct of the right side of Lemma 3.30 (`m = 0`) holds:
 `ϑ₀(α) < ϑ₀(γ)`. Proved from `CitedLu`. -/
 theorem vt_Om1_add_lt {τ η' η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη' : η' ∈ Tset τ)
@@ -190,7 +233,7 @@ theorem vt_Om1_add_lt {τ η' η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1)
 
 /-- **[W07a] Lemma 3.30, Lemma 4.3, Def 3.28** (texts L, E, S, ★): for `η ∈ Tᵗ ∩ Ω₁`, `η < ϑᵗ(Ω₁ + η)`.
 
-Our steps.  `γ := Ω₁ + η ∈ Tᵗ ∩ Ω₂` (axiom `Om1_add_T`).  Lemma 3.30: `γ^* < ϑ₀(γ)`, and `γ^* = η^*` (★2).  By
+Our steps.  `γ := Ω₁ + η ∈ Tᵗ ∩ Ω₂` (`Om1_add_T`).  Lemma 3.30: `γ^* < ϑ₀(γ)`, and `γ^* = η^*` (★2).  By
 Lemma 4.3 (`γ ≥ Ω₁`, so `Δ > 0`), `τ < ϑ₀(γ) ∈ E ⊆ P`.  By (★1) every additive component of `η` is `< τ` or
 `≤ η^*`, so it is `< ϑ₀(γ)`; as `ϑ₀(γ)` is additive principal, `η < ϑ₀(γ)` (for `η = 0` as `ϑ₀(γ) > τ > 0`). Proved from `CitedLu`. -/
 theorem lt_vt_Om1_add {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hη1 : η < Om1) :
@@ -201,7 +244,7 @@ theorem lt_vt_Om1_add {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (h�
 proof of Lemma 3.27** (texts H, Λ, I, G, Z): for `η ∈ Tᵗ ∩ Ω₁`, `η ≠ 0`, with `η < ϑᵗ(Ω₁ + σ)` for some
 `σ < η`, and `α := ϑᵗ(Ω₁ + η)`: `lhᵗ(α) = α·2 + logend(η)` (`logend = lg`, see `R2.CitedW`; `η ≠ 0`).
 
-Our steps.  `α = ϑᵗ(Δ + η)` with `Δ = Ω₁` (`Ω₁ | Ω₁`, `η < Ω₁`: Convention 4.1); `α ∈ Tᵗ` (axioms `Om1_add_T`,
+Our steps.  `α = ϑᵗ(Δ + η)` with `Δ = Ω₁` (`Ω₁ | Ω₁`, `η < Ω₁`: Convention 4.1); `α ∈ Tᵗ` (`Om1_add_T`,
 `vt_memTwo`) and `τ < α ∈ E` (Lemma 4.3, `Δ > 0`).
 * `ζᵗ_α` (G): `η < ϑᵗ(Ω₁ + σ) ≤ sup_{σ'<η} ϑᵗ(Δ + σ')` for the given `σ < η`; hence `ζᵗ_α = logend(η)`.
 * `ι_{τ,α}(Δ)` (I): `Δ = Ω₁ = ϑ₁(0)` (Z), and `Δ ∈ Tᵗ_α` (`Δ^* = max(P₀(ϑ₁(0)) ∪ {0}) = 0 < α`: `Subᵗ₀(ϑ₁(0)) =

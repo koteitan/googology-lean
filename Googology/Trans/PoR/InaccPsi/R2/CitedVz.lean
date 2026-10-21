@@ -110,10 +110,8 @@ private theorem luVz_nat_one_le {n : ℕ} (hn : 1 ≤ n) : (1 : Ordinal.{0}) ≤
 private theorem luVz_one_add_nat (n : ℕ) : (1 : Ordinal.{0}) + (n : Ordinal.{0}) = ((n + 1 : ℕ) : Ordinal.{0}) := by
   rw [← Nat.cast_one, ← Nat.cast_add, add_comm 1 n]
 
-/-- **[W07a] Def 3.22, second clause** (text T): "`ξ, η ∈ T_m ⇒ ξ + η ∈ T_m`", for `m = 0` (Convention 3.25:
-`T₀ = Tᵗ`).  Literal; the hypotheses on `τ` are the standing setting (`τ ∈ E` countable). -/
-axiom vzT_add {τ x y : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hx : x ∈ Tset τ) (hy : y ∈ Tset τ) :
-    x + y ∈ Tset τ
+/-! The axiom `vzT_add` ([W07a] Def 3.22, second clause: `x, y ∈ Tᵗ ⇒ x + y ∈ Tᵗ`) is stated in `R2.Cited` (moved
+there unchanged), so that `Om1_add_T` of `R2.CitedEv` is a theorem. -/
 
 /-- **[W07a] Convention 4.1 with Def 3.22, the remark after Cor 3.24 and Def 3.28** (texts C, T, U, S): if
 `ξ ∈ Tᵗ ∩ Ω₂` and `ξ = Δ + η` with `Ω₁ | Δ` and `η < Ω₁`, then `η ∈ Tᵗ`.
