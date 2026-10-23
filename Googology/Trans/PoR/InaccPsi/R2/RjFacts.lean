@@ -3,6 +3,7 @@ import Googology.Trans.PoR.InaccPsi.R2.RjArg
 import Googology.Trans.PoR.InaccPsi.R2.RiTh
 import Googology.Trans.PoR.InaccPsi.R2.LqLh
 import Googology.Trans.PoR.InaccPsi.R2.GgFront
+import Googology.Trans.PoR.InaccPsi.R2.RkArgT
 
 /-!
 # The terms `ϑᵗ(Ω₁·M + η)` at every level `Ω₁ ≤ M < ε_{Ω₁+1}`
@@ -16,7 +17,7 @@ base `< Ω₁`.  From the cited facts of `R2.CitedRj` (generic in the level):
   (**Lemma 3.30 between two levels, both directions**), `rjK_SC` (**`ϑᵗ(Ω₁·M + η)` is strongly critical**: the `SC`
   hypothesis of `R2.rjLhT` is a theorem);
 * `rj_Th_mul` (**`Θ_y(Ω₁·M) = y·Θ_y(M)`**), `rj_code_of` (**`M` is a code over `ϑᵗ(Ω₁·M + η)`**);
-* `rjArg_T` (**`R2.riArg_T` from `R2.rjArgT_gamma` and the theorem `rjArgT_beta`**), `rjLq_arg` (**`R2.lqArg_mem`
+* `rjArg_T` (**`R2.riArg_T` from `Rk.rkArgT_gamma` and the theorem `rjArgT_beta`**), `rjLq_arg` (**`R2.lqArg_mem`
   from `R2.rjArg_mem`**), `rjLq_lh` (**the equation of `R2.lqLhT` from `R2.rjLhT`** at `M = Ω₁·γ + β`, a strongly
   critical base): the new cited facts agree with the old ones on their common range.
 
@@ -160,10 +161,10 @@ theorem rj_Th_mul {y M : Ordinal.{0}} (hy : SC y) (hy1 : y < Om1) (hM : GgCl y M
   have e : (Om1 : Ordinal.{0}) * M = ω ^ (Om 1) * M := by rw [Bt.Om1_opow, rj_Om1]
   rw [e, Ph.phTh_opow_mul hy GgCl.om M hM, ggTh_Om1 hy hy1', gg_SC_eps hy]
 
-/-- **`R2.riArg_T` without `R2.riArg_T`**: from the `γ` half `R2.rjArgT_gamma` and the theorem `rjArgT_beta`. -/
+/-- **`R2.riArg_T` without `R2.riArg_T`**: from the `γ` half `Rk.rkArgT_gamma` and the theorem `rjArgT_beta`. -/
 theorem rjArg_T {τ γ β η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hγΩ : γ < Om1) (hβΩ : β < Om1)
     (hηΩ : η < Om1) (h : Om1 * (Om1 * γ + β) + η ∈ Tset τ) : γ ∈ Tset τ ∧ β ∈ Tset τ :=
-  ⟨rjArgT_gamma hτ hτ1 hγΩ hβΩ hηΩ h, rjArgT_beta hτ hτ1 hγΩ hβΩ hηΩ h⟩
+  ⟨Rk.rkArgT_gamma hτ hτ1 hγΩ hβΩ hηΩ h, rjArgT_beta hτ hτ1 hγΩ hβΩ hηΩ h⟩
 
 /-- The data of a level of `R2.CitedLq` lie in `Tᵗ`. -/
 theorem rjLq_dat {τ γ β : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hγ : γ ∈ Tset τ) (hγΩ : γ < Om1)

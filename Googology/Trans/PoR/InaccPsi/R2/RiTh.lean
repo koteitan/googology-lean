@@ -1,13 +1,13 @@
 import Googology.Trans.PoR.InaccPsi.R2.RhTh2
 import Googology.Trans.PoR.InaccPsi.R2.RiPsi
-import Googology.Trans.PoR.InaccPsi.R2.CitedRi
+import Googology.Trans.PoR.InaccPsi.R2.RkArgT
 
 /-!
 # `ϑᵗ(Ω₁·(Ω₁ + μ) + η)` at every level `μ < Ω₁·Ω₁`: the values of `Φ_μ` above `τ`
 
 For a strongly critical base `τ < Ω₁`, `Φ_μ = Ri.riP μ`, `riDat μ = max(μ/Ω₁, μ mod Ω₁)`, `Δ_μ = Ω₁·(Ω₁ + μ) =
 Ω₁·(Ω₁·(1 + μ/Ω₁) + μ mod Ω₁)` (`riK_eq`), from the cited facts of `R2.CitedLq` at `γ = 1 + μ/Ω₁ ≥ 1` (all `γ < Ω₁`
-at once) and `R2.CitedRi`:
+at once) and `R2.CitedRj`:
 
 * `riK_facts`, `riK_lt_gen`, `riK_lt`, `riK_lt_lower`, `riK_SC`, `riK_decomp` (as `Rh.rhk_*`, at every level `μ` with
   `riDat μ ∈ Tᵗ`; a lower level `j < μ` is compared under `riDat j < ϑᵗ(Δ_μ + η)`);
@@ -22,7 +22,7 @@ at once) and `R2.CitedRi`:
 * `riK_lh` (**`lhᵗ(x) = lqL(x, 1 + μ/Ω₁, μ mod Ω₁) + ζᵗ_x`** for `x = ϑᵗ(Δ_μ + η)`, `Lq.lq_lh`).
 
 The step past `R2.RhTh`/`R2.RhTh2` (`μ < Ω₁`): a lower level `j < μ` can carry data `riDat j` above `riDat μ`; its
-data lies in `Tᵗ` by `R2.riArg_T` (the converse of `lqArg_mem`).  No new axiom beyond `R2.CitedLq`, `R2.CitedRi` and
+data lies in `Tᵗ` by `Rk.rkArg_T` (the converse of `lqArg_mem`).  No new axiom beyond `R2.CitedLq`, `R2.CitedRj` and
 the axioms of `R2.RbTh`.  New definitions: the statement names `RiKLE`, `RiKREP2`.
 -/
 
@@ -250,7 +250,7 @@ theorem riK_min {μ : Ordinal.{0}} (hμT : riDat μ ∈ Tset τ) (hμΩ : μ < O
           exact (inE_indec hE1).add_lt (Lu.lu_one_lt_E hE1) hq1
         have hξT' : Om1 * (Om1 * (1 + j / Om 1) + j % Om 1) + σ ∈ Tset τ := by
           rw [← riK_eq, ← he]; exact hξT
-        obtain ⟨h1T, h2T⟩ := riArg_T hτE hτ1 hγ'1 hr1 hσΩ hξT'
+        obtain ⟨h1T, h2T⟩ := Rk.rkArg_T hτE hτ1 hγ'1 hr1 hσΩ hξT'
         have hqT : j / Om 1 ∈ Tset τ := vz_T_down hτE hτ1 h1T hγ'1 le_add_self
         unfold riDat
         rcases max_choice (j / Om 1) (j % Om 1) with h | h <;> rw [h]

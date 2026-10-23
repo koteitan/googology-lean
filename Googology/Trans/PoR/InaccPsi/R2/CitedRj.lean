@@ -20,10 +20,10 @@ covers `R2.CitedLq` (`M = Ω₁·γ + β`, `1 ≤ γ < Ω₁`) and every `M` up 
 
 What is **not** restated (checked first): `R2.CitedLq` (`lqArg_mem`, `lqVt_lt`, `lqLt_of_vt_lt`, `lqLevel_lt_vt`,
 `lqLhT`, `lqPi`: the levels `M = Ω₁·γ + β`), `R2.CitedLg`, `R2.CitedLv`, `R2.CitedLu` (levels `M < Ω₁` and
-`M = Ω₁`), `R2.CitedRi` (`riArg_T`), `vt_memTwo`, `vt_rep`, `vt_E_iff` (`R2.CitedEv`), `lh_eq_lhT` (`R2.CitedL`).
+`M = Ω₁`), `riArg_T` (formerly `R2.CitedRi`, now the theorem `R2.Rk.rkArg_T`), `vt_memTwo`, `vt_rep`, `vt_E_iff` (`R2.CitedEv`), `lh_eq_lhT` (`R2.CitedL`).
 The axioms below contain those of `R2.CitedLq` as the special case `M = Ω₁·γ + β` (proved in `R2.RjFacts`:
-`rjLq_arg`, `rjLq_lh`), and `rjArgT_gamma` is the `γ` half of `riArg_T` (its `β` half is the theorem
-`R2.Rj.rjArgT_beta`).  Nothing is changed or removed here.
+`rjLq_arg`, `rjLq_lh`).  The former axiom `rjArgT_gamma` (the `γ` half of `riArg_T`) is the theorem
+`R2.Rk.rkArgT_gamma`, from the generic cited fact `R2.rkArg_dat` of `R2.CitedRk`.
 
 Literal texts (all of [W07a] unless said otherwise):
 * (T) Def 3.22: "`Ω_m ⊆ T_m` • `ξ, η ∈ T_m ⇒ ξ + η ∈ T_m` • `ξ ∈ T_m ∩ Ω_{k+2} ⇒ ϑ_k(ξ) ∈ T_m` for `k ≥ m`."
@@ -98,24 +98,6 @@ Our steps (`τ` a countable `ε`-number, `η ∈ Tᵗ ∩ Ω₁`, `M` a code; us
 namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal Googology.Trans.PoR.InaccPsi.R2.Rj
-
-/-- **[W07a] Def 3.22, Theorem 3.23, the Remark after Corollary 3.24, Def 3.28, Lemma 3.30 (`m = 1`), Lemma 4.2, the
-remark after Def 3.1, Lemma 4.3** (texts T, Θ, U, S, L, W, Z, E): for `γ, β, η < Ω₁` with `Ω₁·(Ω₁·γ + β) + η ∈ Tᵗ`:
-`γ ∈ Tᵗ`.  (The `γ` half of `R2.riArg_T`; the `β` half is the theorem `Rj.rjArgT_beta`, proved from `Par_comps_eq`,
-`lgQuot_mem`, `T_inter_Om1` and `vzT_add`.)
-
-Our steps.  Write `γ =ANF ω^{c₁} + ⋯ + ω^{cᵢ}` (`cₗ ≤ γ < Ω₁`); if `γ = 0` then `0 ∈ Tᵗ` (`0 < τ` a parameter,
-S first clause).  By □1, `ϑ₁(Ω₁ + c) = ω^{Ω₁·2+c} = Ω₁·Ω₁·ω^c`, so `ξ := Ω₁·(Ω₁·γ + β) + η =NF ϑ₁(Ω₁ + c₁) + ⋯ +
-ϑ₁(Ω₁ + cᵢ) + Σₗ ϑ₁(bₗ) + η` (`β =ANF Σ ω^{bₗ}`, `ϑ₁(b) = Ω₁·ω^b`).  By U the term of `ξ ∈ Tᵗ` is unique, and it is
-this sum: an additive principal member of `Tᵗ` in `[Ω₁, Ω₂)` is a `ϑ₁`-term (not a parameter, not a `ϑ₀`-value
-`< Ω₁`, not a `ϑ_k`-value `≥ Ω₂` for `k ≥ 2` by L, not a proper sum).  By S (second clause) each summand
-`ϑ₁(Ω₁ + cₗ)` is in `Tᵗ`, and by S (third clause, `k = 1 ≥ 0`) its argument `ζ ∈ Tᵗ ∩ Ω₃`.  By L (`m = 1`), `ζ ≥ Ω₂`
-would give `ϑ₁(ζ) ≥ ϑ₁(Ω₂)` (`(Ω₂)^{*1} = 0`) and `ϑ₁(Ω₂) > ϑ₁(Ω₁·2) = Ω₁³` (`Ω₁·2 < Ω₂`, `(Ω₁·2)^{*1} = Ω₁ <
-ϑ₁(Ω₂)`), above the summand; so `ζ < Ω₂` and `ζ = Ω₁ + cₗ` (L: `ϑ₁` is 1-1; W, Z).  By S (second clause for
-`Ω₁ + cₗ =NF Ω₁ + cₗ₁ + ⋯`, `Ω₁ = ϑ₁(0)` by Z) the components of `cₗ` are in `Tᵗ`, so `cₗ ∈ Tᵗ` (T).  `Tᵗ ∩ Ω₁ = θ₀`
-(Θ) is a supremum of `ε`-numbers (E), closed under `ω^·` and `+`: `γ ∈ Tᵗ`. -/
-axiom rjArgT_gamma {τ γ β η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hγΩ : γ < Om1) (hβΩ : β < Om1)
-    (hηΩ : η < Om1) (h : Om1 * (Om1 * γ + β) + η ∈ Tset τ) : γ ∈ Tset τ
 
 /-- **[W07a] Def 3.22, Lemma 4.2 (`m = 1`), the remark after Def 3.1, Theorem 3.23, Convention 4.1** (texts T, W, Z,
 Θ, C): for a code `Ω₁ ≤ M < ε_{Ω₁+1}` with `rjDat M ∈ Tᵗ` and `η ∈ Tᵗ ∩ Ω₁`: `Ω₁·M + η ∈ Tᵗ`.

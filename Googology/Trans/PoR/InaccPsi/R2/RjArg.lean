@@ -16,7 +16,7 @@ import Googology.Trans.PoR.InaccPsi.R2.BtJ
   `R2.T_next`) and `R2.vzT_add`.  `R2.riArg_T` is NOT used.
 
 So the `β` half of `R2.riArg_T` is a theorem from the earlier axioms; only the `γ` half (`Ω₁²·ω^c ∈ Tᵗ ⇒ c ∈ Tᵗ`)
-needs a cited fact (`R2.CitedRj.rjArgT_gamma`).
+needs a cited fact (`R2.rkArg_dat` of `R2.CitedRk`, through `R2.Rk.rkArgT_gamma`).
 
 No new axiom, no new definition.
 -/
