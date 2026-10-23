@@ -2,20 +2,16 @@ import Googology.Trans.PoR.InaccPsi.R2.RjArg
 import Googology.Trans.PoR.InaccPsi.R2.CitedRk
 
 /-!
-# The statements of `R2.riArg_T` and `R2.rjArgT_gamma` as theorems placed before `R2.RiTh` (audit MINOR 2 of
-# round 75)
+# The converse of `R2.rjArg_mem` at `M = Ω₁·γ + β`, as theorems placed before `R2.RiTh`
 
-* `rkArgT_gamma` (**`Ω₁·(Ω₁·γ + β) + η ∈ Tᵗ ⇒ γ ∈ Tᵗ`**, the statement of the axiom `R2.rjArgT_gamma`): from the
+* `rkArgT_gamma` (**`Ω₁·(Ω₁·γ + β) + η ∈ Tᵗ ⇒ γ ∈ Tᵗ`**, formerly the cited axiom `rjArgT_gamma`): from the
   generic cited fact `R2.rkArg_dat` (`rjDat M ∈ Tᵗ` for `M = Ω₁·γ + β`), since `log_ω γ ≤ rjDat M` and `Tᵗ ∩ Ω₁` is
   an `ε`-number (`R2.vz_next`);
-* `rkArg_T` (**`Ω₁·(Ω₁·γ + β) + η ∈ Tᵗ ⇒ γ, β ∈ Tᵗ`**, the statement of the axiom `R2.riArg_T`): `rkArgT_gamma` and
+* `rkArg_T` (**`Ω₁·(Ω₁·γ + β) + η ∈ Tᵗ ⇒ γ, β ∈ Tᵗ`**, formerly the cited axiom `riArg_T`): `rkArgT_gamma` and
   the theorem `Rj.rjArgT_beta`.
 
-This module imports only `R2.RjArg` and `R2.CitedRk` (neither imports `R2.RiTh`, `R2.CitedRi` or `R2.RjFacts`), so
-`R2.RiTh` can use `rkArg_T` in place of `R2.riArg_T` and `R2.RjFacts` can use `rkArgT_gamma` in place of
-`R2.rjArgT_gamma`; then `R2.riArg_T` (the only axiom of `R2.CitedRi`) and `R2.rjArgT_gamma` are not used anywhere and
-can be removed.  The patched `R2.RiTh` and `R2.RjFacts` (one import and one name changed each) are checked
-separately.
+This module imports only `R2.RjArg` and `R2.CitedRk` (neither imports `R2.RiTh` or `R2.RjFacts`), so `R2.RiTh` uses
+`rkArg_T` and `R2.RjFacts` uses `rkArgT_gamma`; the two former axioms are no longer stated.
 
 No new axiom, no new definition.
 -/

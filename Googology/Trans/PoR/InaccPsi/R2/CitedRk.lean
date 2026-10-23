@@ -12,11 +12,9 @@ Same conventions as `R2.CitedRj` (`Ω₁ = Om1`, `Ω₂ = OmTwo`, `Tset τ = T�
 normal form over `{0, Ω₁}`).
 
 What is **not** restated (checked first): `R2.CitedRj` (`rjArg_mem` is the direction "data in `Tᵗ` ⇒ argument in
-`Tᵗ`"; `rjArgT_gamma` is the converse only at `M = Ω₁·γ + β`), `R2.CitedRi` (`riArg_T`, the same converse at
-`M = Ω₁·γ + β`), `R2.CitedLq`, `R2.CitedLg`, `R2.CitedLv`, `R2.CitedLu`.  The axiom below is **the converse of
-`rjArg_mem` at every level**; the statements of `rjArgT_gamma` and `riArg_T` follow from it (`Rk.rkArgT_gamma`,
-`Rk.rkArg_T`, with the closure of `Tᵗ ∩ Ω₁` under `ω^·` and `+` and the theorem `Rj.rjArgT_beta`), so these
-two cited facts can be removed (a proposed change for the merge).  Nothing is changed or removed here.
+`Tᵗ`"), `R2.CitedLq`, `R2.CitedLg`, `R2.CitedLv`, `R2.CitedLu`.  The axiom below is **the converse of `rjArg_mem` at
+every level**.  The converse at `M = Ω₁·γ + β` (`γ ∈ Tᵗ` and `β ∈ Tᵗ`) is a theorem derived from it (`Rk.rkArg_T`,
+`Rk.rkArgT_gamma`, with the closure of `Tᵗ ∩ Ω₁` under `ω^·` and `+` and the theorem `Rj.rjArgT_beta`).
 
 Literal texts (all of [W07a]; as quoted in `R2.CitedRj` and checked again against the paper):
 * (T) Def 3.22: "`Ω_m ⊆ T_m` • `ξ, η ∈ T_m ⇒ ξ + η ∈ T_m` • `ξ ∈ T_m ∩ Ω_{k+2} ⇒ ϑ_k(ξ) ∈ T_m` for `k ≥ m`."
@@ -31,10 +29,7 @@ Literal texts (all of [W07a]; as quoted in `R2.CitedRj` and checked again agains
   where `ξ ∈ Tᵗ ∩ Ω_{k+2}`.  …  `P_m(α) := Subᵗ_m(α) ∩ P ∩ [Ω_m, Ω_{m+1})` and `α^{*m} := max(P_m(α) ∪ {0})`."
 * (L) Lemma 3.30: "For `m < ω` the function `ϑ_m ↾ Tᵗ ∩ Ω_{m+2}` is 1-1 and has values in `P ∩ [Ω_m, Ω_{m+1})`.  Let
   `α, γ ∈ Tᵗ ∩ Ω_{m+2}`.  Then `α^{*m} < ϑ_m(α)` and `ϑ_m(α) < ϑ_m(γ) ⇔ α < γ ∧ α^{*m} < ϑ_m(γ) ∨ ϑ_m(α) ≤ γ^{*m}`."
-* (C) Convention 4.1 and the text after it: "`α = ϑᵗ(Δ + η)` automatically means that `ξ = Δ + η` is a
-  decomposition such that `Ω₁ | Δ` and `η < Ω₁`. …  Clearly, for the argument of a `ϑᵗ`-term in `Tᵗ`, to be a nonzero
-  multiple of `Ω₁` means to be a sum of `ϑ₁`-terms.  The rest term `η` of the decomposition is then a sum of
-  `ϑᵗ`-terms and parameters below `τ`."
+* (E) Lemma 4.3: "Let `α = ϑᵗ(Δ + η) ∈ Tᵗ`.  Then `τ < α ∈ E ⇔ Δ > 0`."
 -/
 
 namespace Googology.Trans.PoR.InaccPsi.R2
@@ -42,7 +37,7 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 open Ordinal Googology.Trans.PoR.InaccPsi.R2.Rj
 
 /-- **[W07a] Def 3.22, Theorem 3.23, the Remark after Corollary 3.24, Def 3.28, Lemma 3.30 (`m = 1`), Lemma 4.2, the
-remark after Def 3.1, Convention 4.1** (texts T, Θ, U, S, L, W, Z, C): for a code `Ω₁ ≤ M < ε_{Ω₁+1}` and `η < Ω₁`
+remark after Def 3.1, Lemma 4.3** (texts T, Θ, U, S, L, W, Z, E): for a code `Ω₁ ≤ M < ε_{Ω₁+1}` and `η < Ω₁`
 with `Ω₁·M + η ∈ Tᵗ`: `rjDat M ∈ Tᵗ` (**the converse of `R2.rjArg_mem`**).
 
 Our steps.
@@ -67,13 +62,14 @@ Our steps.
   `Tᵗ ∩ Ω₁`, and so does their sum, the countable remainder of `z` (T).  The leaves of `z` (the countable remainders
   and countable exponents of its hereditary normal form) are exactly these remainders and the leaves of the exponents
   `e` of its components, all in `Tᵗ`.
-* (★5) **The claim.**  `ξ := Ω₁·M + η ∈ Tᵗ ∩ Ω₂` (`M < ε_{Ω₁+1}`).  By C, `Δ := Ω₁·M` (the part of `ξ` that is a
-  multiple of `Ω₁`) is a sum of `ϑ₁`-terms, the components `≥ Ω₁` of `ξ`, which are in `Tᵗ` (U, S second clause).  For
+* (★5) **The claim.**  `ξ := Ω₁·M + η ∈ Tᵗ ∩ Ω₂` (`M < ε_{Ω₁+1}`).  By U the term of `ξ` is unique; its additive
+  components are in `Tᵗ` (S, second clause), and as in ★4 each component `≥ Ω₁` is a `ϑ₁`-term; these components sum
+  to `Δ := Ω₁·M` (the part of `ξ` that is a multiple of `Ω₁`), and the components `< Ω₁` sum to `η`.  For
   `M =CNF Σ ω^{e_l}·k_l + r` (`e_l ≥ Ω₁`, `r < Ω₁`, `r =ANF Σ ω^{b_i}`): `Δ = Σ ω^{Ω₁+e_l}·k_l + Σ ω^{Ω₁+b_i}`.  For a
   component `ω^{Ω₁+e_l} = ϑ₁(e_l)` (★1) ★3 gives `e_l ∈ Tᵗ`, and ★4 (with `e_l ∈ [Ω₁, ε_{Ω₁+1})`) puts the leaves of
   `e_l` in `Tᵗ`.  For a component `ω^{Ω₁+b_i} = ϑ₁(b_i)` (`b_i ≥ 1`) or `= Ω₁ = ϑ₁(0)` (`b_i = 0`), ★3 gives
-  `b_i ∈ Tᵗ`; so `r = Σ ω^{b_i} ∈ Tᵗ ∩ Ω₁ = θ₀` (Θ: `θ₀` is a supremum of `ε`-numbers `ϑ₀(ϑ₁(⋯))`, closed under `ω^·`
-  and `+`).  The leaves of `M` are `r` and the leaves of the `e_l` (`rjDat`: the recursion through `log_ω` and the
+  `b_i ∈ Tᵗ`; so `r = Σ ω^{b_i} ∈ Tᵗ ∩ Ω₁ = θ₀` (Θ: `θ₀` is a supremum of values `ϑ₀(ϑ₁(⋯))`, which are `ε`-numbers by E
+  (`Δ = ϑ₁(⋯) > 0`); so `θ₀` is closed under `ω^·` and `+`).  The leaves of `M` are `r` and the leaves of the `e_l` (`rjDat`: the recursion through `log_ω` and the
   remainder), all in `Tᵗ`; `rjDat M` is one of them (or `0 ∈ Tᵗ`, a parameter, if there is none). -/
 axiom rkArg_dat {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hME : M < Gg.ggE)
     (hηΩ : η < Om1) (h : Om1 * M + η ∈ Tset τ) : rjDat M ∈ Tset τ
