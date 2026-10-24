@@ -37,15 +37,17 @@ Literal texts (all of [W07a]; checked against the paper):
   [Ω_m, Ω_{m+1}]`.  (c) Let `ξ =ANF ξ₁ + ⋯ + ξ_l`.  Then `ξ ∈ Cⁿ_m(α, β)` iff `ξ₁, …, ξ_l ∈ Cⁿ_m(α, β)`."
 * (W) Def 3.4: "Let `α ↦ ω̄_α` be the enumeration function of the additive principle numbers which are not epsilon
   numbers."  Lemma 3.5: "Let `m < n`.  For every `α < Ω_{m+1}` we have `ϑⁿ_m(1 + α) = ω̄_{Ω_m+α}`."  Lemma 4.2: "For
-  any `m < ω` and any `α < Ω_{m+1}` we have `ϑ_m(1 + α) = ω̄_{Ω_m+α}`" ("for `m = 0` by convention we have `Ω₀ = τ`").
+  any `m < ω` and any `α < Ω_{m+1}` we have `ϑ_m(1 + α) = ω̄_{Ω_m+α}`"; its proof adds: "for `m = 0` by
+  convention we have `Ω₀ = τ`".
 * (EX) Corollary 3.21: "Let `m < n`.  `Tⁿ_m ⊆ Tⁿ⁺¹_m` and for `k` such that `m ≤ k < n` the functions `ϑⁿ_k` and
   `ϑⁿ⁺¹_k` agree on `Tⁿ_m ∩ Ω_{k+2}`."
 * (T) Def 3.22: "For `m < ω` we set `θ_m := sup_{n>m} θⁿ_m`.  We define a function `ϑ_m : θ_{m+1} → Ω_{m+1}` by
   `ϑ_m(α) := ϑⁿ_m(α)` for `α < θ_{m+1}` where `n > m` is large enough to satisfy `α < θⁿ_{m+1}`.  `T_m` is defined
   inductively as follows: • `Ω_m ⊆ T_m` • `ξ, η ∈ T_m ⇒ ξ + η ∈ T_m` • `ξ ∈ T_m ∩ Ω_{k+2} ⇒ ϑ_k(ξ) ∈ T_m` for
   `k ≥ m`."
-* (Θ) Theorem 3.23: "`T_m ∩ Ω_{m+1} = θ_m = sup_{n≥m} ϑ_m(⋯(ϑ_n(0))⋯)`."  Corollary 3.24: "For every `k ≥ m` we have
-  `sup(T_m ∩ Ω_{k+2}) = θ_{k+1}`.  For `m < n` we have `Tⁿ_m ∩ Ω_{m+1} = θⁿ_m = ϑ_m(⋯(ϑ_n(0))⋯)`."
+* (Θ) Theorem 3.23 (its first part, `T_m = ⋃_{n>m} Tⁿ_m`, is cut): "… `T_m ∩ Ω_{m+1} = θ_m =
+  sup_{n≥m} ϑ_m(⋯(ϑ_n(0))⋯)`."  Corollary 3.24: "For every `k ≥ m` we have `sup(T_m ∩ Ω_{k+2}) = θ_{k+1}`.
+  For `m < n` we have `Tⁿ_m ∩ Ω_{m+1} = θⁿ_m = ϑ_m(⋯(ϑ_n(0))⋯)`."
 * (U) Remark after Corollary 3.24: "each `T_m` again gives rise to a notation system with parameters from `Ω_m` that
   provides a unique term for every ordinal which is element of some `Tⁿ_m` where `n > m`".
 * (S) Def 3.28: "`Subᵗ_m(α) := {α}` for parameters `α < τ`; `Subᵗ_m(α) := {α} ∪ Subᵗ_m(ξ) ∪ Subᵗ_m(η)` for `ξ, η ∈
@@ -147,7 +149,8 @@ Our steps (`τ` a countable `ε`-number; `x ∪ ω` adds the finite ordinals, al
   Induction on `y`: `p` is additive principal, so `p ≤ lead(y)`, a component of `y` (S).  If `lead(y) ∈ F_b`, `p =
   lead(y)`.  If `lead(y) = ω^e` is not an `ε`-number, `p ≤ e` (`p = ω^p`), and `e ∈ Tᵗ` with `Parᵗ(e) ∪ ω = Parᵗ(e⁻) ∪
   ω` (◇N, ◇I), `e < y`: i.h.  If `lead(y) = φ(a₂, c₂) ∉ F_b` (normal form), then `a₂ ≤ b` and `F_b ⊆ F_{a₂}`, so
-  `q ∈ F_b`, `q < φ(a₂, c₂)` gives `q < c₂`; `c₂ ∈ Tᵗ` with `Parᵗ(c₂) ∪ ω = Parᵗ(c₂*) ∪ ω` (◇I, O6), `c₂ < y`: i.h.
+  `p ∈ F_b`, `p = φ(a₂, p) < φ(a₂, c₂)` gives `p < c₂`; `c₂ ∈ Tᵗ` with `Parᵗ(c₂) ∪ ω = Parᵗ(c₂*) ∪ ω` (◇I,
+  O6), `c₂ < y`: i.h.
 * (◇π) **Base change** (`Bases σ τ`).  By induction on the ordinal, for codes and countable ordinals in `Tᵗ`:
   (π1) for `x ∈ Tᵗ ∩ Ω₁`, `ω^x ∈ Tᵗ[σ] ⇔ x ∈ Tᵗ[σ]` and then `π(ω^x) = ω^{π x}`; (π2) the same for codes `g ≥ Ω₁`
   with `ω^g < G`; (π3) for an `ε`-number `z = φ(a, c) ∈ (Ω₁, G)` in normal form, `z ∈ Tᵗ[σ] ⇔ a, c ∈ Tᵗ[σ]`, and then
