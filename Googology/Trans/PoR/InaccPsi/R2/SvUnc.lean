@@ -1,0 +1,190 @@
+import Googology.Trans.PoR.InaccPsi.R2.SvPi
+
+/-!
+# `Ss.SsUncAllHi` reduced to the arguments `[Γ_{Ω₁+1}, Ω₂)`; `Rt.RtPiComm`, `Rk.RkLhTopE`, `Tp.TpLhEps` and the road
+
+`B_n = Bc.bcB S n`, `π = pi σ τ`, `Se.SeComm`, `E₁ = ε_{Ω₁+1}`, `Γ_{Ω₁+1} = Gg.ggGam`.  Under the two hypothesis
+packages `SvCit Γ_{Ω₁+1}` (`R2.SvCit`: [W07a] Lemma 3.30 at the Veblen levels) and `SvCitPi Γ_{Ω₁+1}` (`R2.SvPi`:
+[W07a] Def 5.1 on the Veblen codes), every argument below `Γ_{Ω₁+1}` is handled:
+
+* `svArgMid` (**`SeComm` at `ξ ∈ Tᵗ[σ] ∩ [E₁, M)`** from `SeComm` at the countable terms below `ϑᵗ(ξ)`: `ξ = Ω₁·μ +
+  η₀`, `ssDatL μ, η₀ < ϑᵗ(ξ)` (`Sv.svc_dat`, `Sv.svc_level`), so `ssDat ξ < ϑᵗ(ξ)` (`ϑᵗ(ξ)` strongly critical,
+  `Sv.svK_SC`), and `Sv.svUncG`);
+* `SvUncFrom S n σ τ L`, `SvUncAllFrom S L` (hypothesis names: `Ss.SsUncHi`, `Ss.SsUncAllHi` on the arguments `[L,
+  Ω₂)`), `svArgE` (every uncountable argument), `svComm_all`, `svUnc_of`;
+* `svUncAll_iff` (**under `Sp.SpVtTopAll`, `SvCit Γ_{Ω₁+1}`, `SvCitPi Γ_{Ω₁+1}`: `Sp.SpUncAll S ↔ SvUncAllFrom S
+  Γ_{Ω₁+1}`**), `svUncAllHi_iff` (the same for `Ss.SsUncAllHi`);
+* `svPiComm`, `svLhTopE`, `svLhEps` (**`Rt.RtPiComm`, `Rk.RkLhTopE`, `Tp.TpLhEps` from the two packages and the two
+  hypotheses on the arguments `≥ Γ_{Ω₁+1}` only**), `svRoadG` (**the road `Ss.ssRoadE` with `SvVtTopFrom S Γ_{Ω₁+1}`,
+  `SvUncAllFrom S Γ_{Ω₁+1}` and the packages in place of `Ss.SsVtTopHi`, `Ss.SsUncAllHi`**).
+
+No new axiom.  New definitions: the hypothesis names `SvUncFrom`, `SvUncAllFrom`.
+-/
+
+set_option autoImplicit false
+
+namespace Googology.Trans.PoR.InaccPsi.R2.Sv
+
+open Ordinal Order Set Googology.Notation.InaccPsi Googology.Trans.PoR.InaccPsi.R2
+  Googology.Trans.PoR.InaccPsi.R2.Gg Googology.Trans.PoR.InaccPsi.R2.Rj Googology.Trans.PoR.InaccPsi.R2.Ss
+  Googology.Trans.PoR.InaccPsi.R2.Si Googology.Trans.PoR.InaccPsi.R2.Sp
+
+variable {S : InaccSeq.{0}}
+
+/-- **`SeComm` at `ξ ∈ Tᵗ[σ] ∩ [E₁, M)`** under `SvCit M` and `SvCitPi M`, from `SeComm` at the countable terms below
+`ϑᵗ(ξ)` (a strongly critical base `τ`). -/
+theorem svArgMid {M : Ordinal.{0}} (hC : SvCit M) (hP : SvCitPi M) (hMG : M ≤ ggGam)
+    (hMB : ∀ n : ℕ, ∀ ξ, ξ < M → GgCl (Bc.bcC S (n + 1)) ξ → Bc.bcB S n ξ < M)
+    {n : ℕ} {σ τ ξ : Ordinal.{0}} (hB : Bases σ τ) (hτSC : SC τ) (hτc : τ < Bc.bcC S (n + 1))
+    (hξ : ξ ∈ TB τ σ) (hlo : ggE ≤ ξ) (hhi : ξ < M)
+    (hCw : ∀ w ∈ TB τ σ, w < Om1 → w < vt τ ξ → Se.SeComm S n σ τ w) :
+    Bc.bcB S n ξ < OmTwo ∧ pi σ τ ξ < OmTwo ∧ Se.SeComm S n σ τ ξ := by
+  have hτE : InE τ := hB.2.1
+  have hτ1 : τ < Om1 := hB.2.2.2
+  have hO0 : (Om1 : Ordinal.{0}) ≠ 0 := rj_Om1_pos.ne'
+  set μ := ξ / Om1 with hμdef
+  set η0 := ξ % Om1 with hη0def
+  have hdec : Om1 * μ + η0 = ξ := Ordinal.div_add_mod ξ Om1
+  have hη0Ω : η0 < Om1 := Ordinal.mod_lt ξ hO0
+  have hEμ : ggE ≤ μ := by
+    rw [hμdef]; refine (Ordinal.mul_le_iff_le_div hO0).1 ?_
+    rw [ss_Om1_mul_E]; exact hlo
+  have hμM : μ < M := (Ordinal.div_le_of_le_mul (Ordinal.le_mul_right ξ rj_Om1_pos)).trans_lt hhi
+  have hOμ : Om1 + μ = μ := sv_Om1_add_big hEμ
+  have hηeq : Om1 * (Om1 + μ) + η0 = ξ := by rw [hOμ, hdec]
+  have hG2 : (ggGam : Ordinal.{0}) ≤ OmTwo := sv_G_le_Om2
+  have hξ2 : ξ < OmTwo := (hhi.trans_le hMG).trans_le hG2
+  have hη0T : η0 ∈ Tset τ := vzRem_T hτE hτ1 hξ.1 hξ2 hdec.symm (dvd_mul_right _ _) hη0Ω
+  have hμT : ssDatL μ ∈ Tset τ := svc_dat hC hτE hτ1 hEμ hμM hη0Ω (by rw [hηeq]; exact hξ.1)
+  have hlv := svc_level hC hτE hτ1 hEμ hμM hμT hη0T hη0Ω
+  have hqSC := svK_SC hC hMG hτSC hτ1 hEμ hμM hμT hη0T hη0Ω
+  rw [hηeq] at hlv hqSC
+  set q := vt τ ξ with hqdef
+  -- `ssDat ξ < q`
+  have hμG : μ < ggGam := hμM.trans_le hMG
+  have hμq : GgCl q μ := ss_code_lvl hqSC hμG hlv.1
+  have hξq : GgCl q ξ := by
+    rw [← hdec, rj_Om1]
+    exact GgCl.add (Rk.rk_cl_Om1_mul hqSC hμq) (GgCl.small hlv.2)
+  have hDq : ssDat ξ < q := ss_cl_dat hqSC ξ hξq
+  have hvm := vt_memTwo hτE hτ1 hξ.1 hξ2
+  have hqc : q < Bc.bcC S (n + 1) := si_T_lt_c hτE hτc hvm.1 hvm.2.2.1
+  have hξ1 : Om1 ≤ ξ := rj_Om1_lt_E.le.trans hlo
+  obtain ⟨hBG, hπG, -, hcomm⟩ := svUncG hP hMG hMB hB hτc (hDq.trans hqc)
+    (fun w hw hw1 hwD => hCw w hw hw1 (hwD.trans_lt hDq)) ξ hξ hξ1 hhi le_rfl
+  exact ⟨hBG.trans_le hG2, hπG.trans_le hG2, hcomm⟩
+
+/-- **`B_n` commutes with `π_{σ,τ}` on `Tᵗ[σ] ∩ [L, Ω₂)`** (a hypothesis name). -/
+def SvUncFrom (S : InaccSeq.{0}) (n : ℕ) (σ τ L : Ordinal.{0}) : Prop :=
+  ∀ ξ ∈ TB τ σ, L ≤ ξ → ξ < OmTwo → Bc.bcB S n ξ < OmTwo ∧ pi σ τ ξ < OmTwo ∧ Se.SeComm S n σ τ ξ
+
+/-- **`SvUncFrom` at every pair of bases of `Sp.SpUncAll`** (a hypothesis name). -/
+def SvUncAllFrom (S : InaccSeq.{0}) (L : Ordinal.{0}) : Prop :=
+  ∀ n : ℕ, ∀ σ τ, Bases σ τ → SpLC σ → LtInf1 τ → Bc.bcC S n ≤ τ → τ < Bc.bcC S (n + 1) → SvUncFrom S n σ τ L
+
+/-- `B_n ξ < Γ_{Ω₁+1}` for the codes over `c_{n+1}`. -/
+theorem sv_MB_G (n : ℕ) (ξ : Ordinal.{0}) (_ : ξ < ggGam) (hξ : GgCl (Bc.bcC S (n + 1)) ξ) :
+    Bc.bcB S n ξ < ggGam := ssB_lt_Gam hξ
+
+/-- **Every uncountable argument** `ξ ∈ Tᵗ[σ] ∩ [Ω₁, Ω₂)`, under the packages at `Γ_{Ω₁+1}` and `SvUncFrom` at
+`Γ_{Ω₁+1}`, from `SeComm` at the countable terms below `ϑᵗ(ξ)`. -/
+theorem svArgE (hC : SvCit ggGam) (hP : SvCitPi ggGam) {n : ℕ} {σ τ ξ : Ordinal.{0}} (hB : Bases σ τ)
+    (hτSC : SC τ) (hτc : τ < Bc.bcC S (n + 1)) (hU : SvUncFrom S n σ τ ggGam) (hξ : ξ ∈ TB τ σ)
+    (hξ1 : Om1 ≤ ξ) (hξ2 : ξ < OmTwo) (hCw : ∀ w ∈ TB τ σ, w < Om1 → w < vt τ ξ → Se.SeComm S n σ τ w) :
+    Bc.bcB S n ξ < OmTwo ∧ pi σ τ ξ < OmTwo ∧ Se.SeComm S n σ τ ξ := by
+  rcases lt_or_ge ξ (Om1 * Om1) with hξ11 | hξ11
+  · exact siArgLow hB hτc hξ hξ1 hξ11 hCw
+  rcases le_or_gt ggGam ξ with hξG | hξG
+  · exact hU ξ hξ hξG hξ2
+  rcases le_or_gt ggE ξ with hξE | hξE
+  · exact svArgMid hC hP le_rfl (fun n ξ h1 h2 => sv_MB_G n ξ h1 h2) hB hτSC hτc hξ hξE hξG hCw
+  -- `[Ω₁·Ω₁, E₁)`: the proof of `Ss.ssArgE`
+  have hτE : InE τ := hB.2.1
+  have hτ1 : τ < Om1 := hB.2.2.2
+  obtain ⟨hdec, hη1⟩ := vz_div_Om1 ξ
+  have hM1 : Om1 ≤ ξ / Om1 := (Ordinal.mul_le_iff_le_div rj_Om1_pos.ne').1 hξ11
+  have hME : ξ / Om1 < ggE := (Ordinal.div_le_of_le_mul (Ordinal.le_mul_right ξ rj_Om1_pos)).trans_lt hξE
+  have hdatT : rjDat (ξ / Om1) ∈ Tset τ := rkArg_dat hτE hτ1 hM1 hME hη1 (by rw [hdec]; exact hξ.1)
+  have hηT : ξ % Om1 ∈ Tset τ := vzRem_T hτE hτ1 hξ.1 hξ2 hdec.symm (dvd_mul_right _ _) hη1
+  have hlv := rjLevel_lt_vt hτE hτ1 hM1 hME hdatT hηT hη1
+  rw [hdec] at hlv
+  have hDz : max (rjDat (ξ / Om1)) (ξ % Om1) < vt τ ξ := max_lt hlv.1 hlv.2
+  have hvm := vt_memTwo hτE hτ1 hξ.1 hξ2
+  have hDc : max (rjDat (ξ / Om1)) (ξ % Om1) < Bc.bcC S (n + 1) :=
+    hDz.trans (si_T_lt_c hτE hτc hvm.1 hvm.2.2.1)
+  have hξD : rjDat ξ ≤ max (rjDat (ξ / Om1)) (ξ % Om1) := by
+    conv_lhs => rw [← hdec]
+    exact si_rjDat_arg hM1 hME hη1
+  obtain ⟨hBE, hπE, -, hcomm⟩ := siUncE (n := n) hB hτc hDc
+    (fun w hw hw1 hwD => hCw w hw hw1 (hwD.trans_lt hDz)) ξ hξ hξ1 hξE hξD
+  exact ⟨hBE.trans_le rj_E_le_Om2, hπE.trans_le rj_E_le_Om2, hcomm⟩
+
+/-- **The joint induction**: under `Si.SiVtU` at `τ` and at `σ`, the packages and `SvUncFrom` at `Γ_{Ω₁+1}`,
+`Se.SeComm` holds at every `z ∈ Tᵗ[σ] ∩ Ω₁`. -/
+theorem svComm_all (hC : SvCit ggGam) (hP : SvCitPi ggGam) {n : ℕ} {σ τ : Ordinal.{0}} (hB : Bases σ τ)
+    (hτSC : SC τ) (hτc : τ < Bc.bcC S (n + 1)) (hVT : SiVtU S n τ) (hVS : SiVtU S n σ)
+    (hU : SvUncFrom S n σ τ ggGam) : ∀ z ∈ TB τ σ, z < Om1 → Se.SeComm S n σ τ z :=
+  siComm_gen hB hτc hVT hVS fun _ hξ hξ1 hξ2 hCw => svArgE hC hP hB hτSC hτc hU hξ hξ1 hξ2 hCw
+
+/-- **Under `Sp.SpVtTopAll` and the packages at `Γ_{Ω₁+1}`: `Sp.SpUncAll S ↔ SvUncAllFrom S Γ_{Ω₁+1}`.** -/
+theorem svUncAll_iff (hV : SpVtTopAll S) (hC : SvCit ggGam) (hP : SvCitPi ggGam) :
+    SpUncAll S ↔ SvUncAllFrom S ggGam := by
+  constructor
+  · intro h n σ τ hB hσ hτL hcτ hτc ξ hξ hG hξ2
+    exact h n σ τ hB hσ hτL hcτ hτc ξ hξ (ggE_le_ggGam.trans hG) hξ2
+  · intro h n σ τ hB hσ hτL hcτ hτc
+    have hσc : σ < Bc.bcC S (n + 1) := hB.2.2.1.trans hτc
+    have hτ : SpLC τ := ssLC_of_inf hB.2.1 hτL hτc
+    have hVT := spVtU_all hτ hτc (hV n τ hτ hτc)
+    have hVS := spVtU_all hσ hσc (hV n σ hσ hσc)
+    have hU := h n σ τ hB hσ hτL hcτ hτc
+    have hCc := svComm_all hC hP hB hτ.1 hτc hVT hVS hU
+    intro ξ hξ hEξ hξ2
+    rcases lt_or_ge ξ ggGam with hlo | hhi
+    · exact svArgMid hC hP le_rfl (fun n ξ h1 h2 => sv_MB_G n ξ h1 h2) hB hτ.1 hτc hξ hEξ hlo
+        fun w hw hw1 _ => hCc w hw hw1
+    · exact hU ξ hξ hhi hξ2
+
+/-- **Under `Sp.SpVtTopAll` and the packages at `Γ_{Ω₁+1}`: `Ss.SsUncAllHi S ↔ SvUncAllFrom S Γ_{Ω₁+1}`.** -/
+theorem svUncAllHi_iff (hV : SpVtTopAll S) (hC : SvCit ggGam) (hP : SvCitPi ggGam) :
+    SsUncAllHi S ↔ SvUncAllFrom S ggGam :=
+  (ssUncAll_iff hV).symm.trans (svUncAll_iff hV hC hP)
+
+/-- **`Ss.SsVtTopHi` and `Ss.SsUncAllHi` from the packages and the hypotheses on `[Γ_{Ω₁+1}, Ω₂)`.** -/
+theorem svHi_of (hC : SvCit ggGam) (hP : SvCitPi ggGam) (hVt : SvVtTopFrom S ggGam)
+    (hUn : SvUncAllFrom S ggGam) : SsVtTopHi S ∧ SsUncAllHi S := by
+  have hV : SpVtTopAll S := (svVtTopAll_iff hC).2 hVt
+  exact ⟨(svVtTopHi_iff hC).2 hVt, (svUncAllHi_iff hV hC hP).2 hUn⟩
+
+/-- **`Rt.RtPiComm`** from the packages and the hypotheses on `[Γ_{Ω₁+1}, Ω₂)`. -/
+theorem svPiComm (hC : SvCit ggGam) (hP : SvCitPi ggGam) (hVt : SvVtTopFrom S ggGam)
+    (hUn : SvUncAllFrom S ggGam) : Rt.RtPiComm S :=
+  ssPiComm (svHi_of hC hP hVt hUn).1 (svHi_of hC hP hVt hUn).2
+
+/-- **`Rk.RkLhTopE`** from the packages and the hypotheses on `[Γ_{Ω₁+1}, Ω₂)`. -/
+theorem svLhTopE (hC : SvCit ggGam) (hP : SvCitPi ggGam) (hVt : SvVtTopFrom S ggGam)
+    (hUn : SvUncAllFrom S ggGam) : Rk.RkLhTopE S :=
+  ssLhTopE (svHi_of hC hP hVt hUn).1 (svHi_of hC hP hVt hUn).2
+
+/-- **`Tp.TpLhEps`** from the packages and the hypotheses on `[Γ_{Ω₁+1}, Ω₂)`. -/
+theorem svLhEps (hC : SvCit ggGam) (hP : SvCitPi ggGam) (hVt : SvVtTopFrom S ggGam)
+    (hUn : SvUncAllFrom S ggGam) : Tp.TpLhEps S :=
+  ssLhEps (svHi_of hC hP hVt hUn).1 (svHi_of hC hP hVt hUn).2
+
+/-- **The road `Ss.ssRoadE`** with the packages and the hypotheses on `[Γ_{Ω₁+1}, Ω₂)` in place of `Ss.SsVtTopHi`,
+`Ss.SsUncAllHi`. -/
+theorem svRoadG (hU : ∀ l, Cd.CdRange S l → Bt.iota S Ge.geV ≤ l → Cd.CdUpper S l)
+    (hL : ∀ l, Cd.CdRange S l → Bt.iota S Ge.geV ≤ l → Cd.CdLower S l)
+    (hV : ∀ l, Cd.CdRange S l → upsilon l < Nc.ncL S ω → Bt.iota S Ge.geV ≤ l → Cd.CdCapV S l)
+    (hEQ : Cd.CdEQ S) (hν : Nc.ncL S (ω + 1) ≤ nuC) (hC : SvCit ggGam) (hP : SvCitPi ggGam)
+    (hVt : SvVtTopFrom S ggGam) (hUn : SvUncAllFrom S ggGam)
+    (hT : Cx.CxT S) (hcl : ∀ n : ℕ, le1 (Bc.bcC S n) (Bc.bcC S (n + 1))) :
+    Cd.CdTC S ∧ Cd.CdEMB2 S ∧ Cd.CdCL S ∧ Cd.CdC1 S ∧
+      nuC = Nc.ncL S (ω + 1) ∧ Nc.ncL S ω ≤ nuC ∧ le2 (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
+      Nc.NcCofPred (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
+      ¬ le1 (Nc.ncL S ω) (Nc.ncL S (ω + 1) + 1) ∧
+      IsReach R2C (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
+      ∀ k : ℕ, IsReach R2C (Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0})) (Nc.ncL S (ω + 1)) :=
+  ssRoadE hU hL hV hEQ hν (svHi_of hC hP hVt hUn).1 (svHi_of hC hP hVt hUn).2 hT hcl
+
+end Googology.Trans.PoR.InaccPsi.R2.Sv
