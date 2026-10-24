@@ -1,10 +1,17 @@
 import Googology.Trans.PoR.InaccPsi.R2.CitedSs
 import Googology.Trans.PoR.InaccPsi.R2.SsFn
+import Googology.Trans.PoR.InaccPsi.R2.TfSy
 
 set_option autoImplicit false
 
 /-!
 # Cited facts of Wilken 2007, as axioms, ONCE for every Veblen level `ε_{Ω₁+1} < μ < Γ_{Ω₁+1}` and every Veblen code
+
+**Round 92: this file has no axiom left.**  The seven facts below (the fields of `Sv.SvCit Γ_{Ω₁+1}` and
+`Sv.SvCitPi Γ_{Ω₁+1}`) are theorems: the instances `M = Ω₁ + μ`, `E₁ < μ < Γ_{Ω₁+1}`, and the codes below
+`Γ_{Ω₁+1}`, of the generic citation `R2.CitedTf`, with `Tf.tfDat = Ss.ssDat` below `Γ_{Ω₁+1}` (`R2.TfSy`).  The literal
+texts and steps below (◇O, ◇P, ◇N, ◇K, ◇M, ◇I, ◇V, ◇Δ, ◇F, ◇π) are kept as their reading; `R2.CitedTf` states them once
+for every level below `B_Γ`.
 
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 
@@ -175,81 +182,109 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal
 
-/-- **[W07a] Def 3.22, Theorem 3.23, Def 3.1, Lemma 3.3, Lemma 3.5, Lemma 4.2, Def 3.28, Lemma 3.30 (`m = 0, 1, 2`)**
+/-- **Theorem (formerly an axiom)**: the instance `M = Ω₁ + μ` of `R2.tfArg_mem`.
+**[W07a] Def 3.22, Theorem 3.23, Def 3.1, Lemma 3.3, Lemma 3.5, Lemma 4.2, Def 3.28, Lemma 3.30 (`m = 0, 1, 2`)**
 (texts T, Θ, D, B, W, S, L): for a level `E₁ < μ < Γ_{Ω₁+1}` with `ssDatL μ ∈ Tᵗ` and `η ∈ Tᵗ ∩ Ω₁`:
 `Ω₁·(Ω₁ + μ) + η ∈ Tᵗ` (the field `mem` of `Sv.SvCit Γ_{Ω₁+1}`).
 
 Our steps.  ◇Δ of the module docstring with `M' = μ` (`ssDatL μ = ssDat μ`): `Ω₁·μ ∈ Tᵗ` by ◇V (V1) (the canonical
 term of ◇K, built by T from countable parts `≤` the leaves, which lie in the initial segment `θᵗ`), and `Ω₁·μ + η ∈
 Tᵗ` (T, second clause). -/
-axiom syArg_mem {τ μ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hEμ : Gg.ggE < μ) (hμG : μ < Gg.ggGam)
-    (hμT : Ss.ssDatL μ ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1) : Om1 * (Om1 + μ) + η ∈ Tset τ
+theorem syArg_mem {τ μ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hEμ : Gg.ggE < μ) (hμG : μ < Gg.ggGam)
+    (hμT : Ss.ssDatL μ ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1) : Om1 * (Om1 + μ) + η ∈ Tset τ := by
+  have _ := hEμ
+  have hB : Om1 + μ < Tf.tfBG := (Tf.tf_Om1_add_lt_gg hμG).trans Tf.tf_gg_lt_BG
+  exact tfArg_mem hτ hτ1 le_self_add hB (by rwa [Tf.tfDatL_eq_ss hμG]) hη hηΩ
 
-/-- **[W07a] Def 3.22, Theorem 3.23, the Remark after Corollary 3.24, Def 3.1, Lemma 3.3, Lemma 3.5, Lemma 4.2,
+/-- **Theorem (formerly an axiom)**: the instance `M = Ω₁ + μ` of `R2.tfArg_dat`.
+**[W07a] Def 3.22, Theorem 3.23, the Remark after Corollary 3.24, Def 3.1, Lemma 3.3, Lemma 3.5, Lemma 4.2,
 Def 3.28, Lemma 3.30 (`m = 0, 1, 2`)** (texts T, Θ, U, D, B, W, S, L): for a level `E₁ < μ < Γ_{Ω₁+1}` and `η < Ω₁` with
 `Ω₁·(Ω₁ + μ) + η ∈ Tᵗ`: `ssDatL μ ∈ Tᵗ` (the field `dat` of `Sv.SvCit Γ_{Ω₁+1}`).
 
 Our steps.  `ξ := Ω₁·μ + η` (`Ω₁ + μ = μ`).  By U its term is unique; its components are in `Tᵗ` (S, second clause),
 and those `≥ Ω₁` sum to `Ω₁·μ` (`η < Ω₁`), which is in `Tᵗ` (T).  ◇V (V1) at the code `Ω₁·μ` (◇I: the term is the
 canonical term) and ◇Δ: `ssDat μ ∈ Tᵗ`. -/
-axiom syArg_dat {τ μ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hEμ : Gg.ggE < μ) (hμG : μ < Gg.ggGam)
-    (hηΩ : η < Om1) (h : Om1 * (Om1 + μ) + η ∈ Tset τ) : Ss.ssDatL μ ∈ Tset τ
+theorem syArg_dat {τ μ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hEμ : Gg.ggE < μ) (hμG : μ < Gg.ggGam)
+    (hηΩ : η < Om1) (h : Om1 * (Om1 + μ) + η ∈ Tset τ) : Ss.ssDatL μ ∈ Tset τ := by
+  have _ := hEμ
+  have hB : Om1 + μ < Tf.tfBG := (Tf.tf_Om1_add_lt_gg hμG).trans Tf.tf_gg_lt_BG
+  rw [← Tf.tfDatL_eq_ss hμG]; exact tfArg_dat hτ hτ1 le_self_add hB hηΩ h
 
-/-- **[W07a] Lemma 3.30, the direction `⇐`, with Def 3.28** (texts L, S, and the steps ◇): for a level
+/-- **Theorem (formerly an axiom)**: the instance `M = Ω₁ + μ` of `R2.tfVt_lt`.
+**[W07a] Lemma 3.30, the direction `⇐`, with Def 3.28** (texts L, S, and the steps ◇): for a level
 `E₁ < μ < Γ_{Ω₁+1}` and `M' ≤ Ω₁ + μ` with `ssDat M', ssDatL μ ∈ Tᵗ`, `η', η ∈ Tᵗ ∩ Ω₁`, `Ω₁·M' + η' < Ω₁·(Ω₁ + μ) +
 η` and `ssDat M', η'` below `ϑᵗ(Ω₁·(Ω₁ + μ) + η)`: `ϑᵗ(Ω₁·M' + η') < ϑᵗ(Ω₁·(Ω₁ + μ) + η)` (the field `vt_lt`).
 
 Our steps.  `α := Ω₁·M' + η'` and `γ := Ω₁·(Ω₁ + μ) + η` lie in `Tᵗ ∩ Ω₂` (◇Δ; `M' ≤ μ < Γ_{Ω₁+1}` is a code).
 `α^* ≤ max(ssDat M', η') < ϑ₀(γ)` (◇Δ, the hypotheses).  So `α < γ ∧ α^* < ϑ₀(γ)`, the first disjunct of the right side
 of L (`m = 0`), and `ϑ₀(α) < ϑ₀(γ)`. -/
-axiom syVt_lt {τ M' η' μ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hEμ : Gg.ggE < μ) (hμG : μ < Gg.ggGam)
+theorem syVt_lt {τ M' η' μ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hEμ : Gg.ggE < μ) (hμG : μ < Gg.ggGam)
     (hM' : M' ≤ Om1 + μ) (hM'T : Ss.ssDat M' ∈ Tset τ) (hη' : η' ∈ Tset τ) (hη'Ω : η' < Om1)
     (hμT : Ss.ssDatL μ ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1)
     (harg : Om1 * M' + η' < Om1 * (Om1 + μ) + η) (hd' : Ss.ssDat M' < vt τ (Om1 * (Om1 + μ) + η))
-    (hη'v : η' < vt τ (Om1 * (Om1 + μ) + η)) : vt τ (Om1 * M' + η') < vt τ (Om1 * (Om1 + μ) + η)
+    (hη'v : η' < vt τ (Om1 * (Om1 + μ) + η)) : vt τ (Om1 * M' + η') < vt τ (Om1 * (Om1 + μ) + η) := by
+  have _ := hEμ
+  have hB : Om1 + μ < Tf.tfBG := (Tf.tf_Om1_add_lt_gg hμG).trans Tf.tf_gg_lt_BG
+  have hM'G : M' < Gg.ggGam := hM'.trans_lt (Tf.tf_Om1_add_lt_gg hμG)
+  exact tfVt_lt hτ hτ1 le_self_add hB hM' (by rwa [Tf.tfDat_eq_ss M' hM'G]) hη' hη'Ω
+    (by rwa [Tf.tfDatL_eq_ss hμG]) hη hηΩ harg (by rwa [Tf.tfDat_eq_ss M' hM'G]) hη'v
 
-/-- **[W07a] Lemma 3.30, the direction `⇒`, with Def 3.28** (texts L, S, and the steps ◇): for a level
+/-- **Theorem (formerly an axiom)**: the instance `M = Ω₁ + μ` of `R2.tfLt_of_vt_lt`.
+**[W07a] Lemma 3.30, the direction `⇒`, with Def 3.28** (texts L, S, and the steps ◇): for a level
 `E₁ < μ < Γ_{Ω₁+1}` with `ssDatL μ ∈ Tᵗ`, `ξ ∈ Tᵗ ∩ Ω₂`, `η ∈ Tᵗ ∩ Ω₁`, `ssDatL μ, η < ϑᵗ(ξ)`:
 `ϑᵗ(ξ) < ϑᵗ(Ω₁·(Ω₁ + μ) + η)` implies `ξ < Ω₁·(Ω₁ + μ) + η` (the field `lt_of`).
 
 Our steps.  `γ := Ω₁·(Ω₁ + μ) + η ∈ Tᵗ ∩ Ω₂` and `γ^* ≤ max(ssDatL μ, η) < ϑ₀(ξ)` (◇Δ, the hypotheses).  L (`m = 0`,
 `α = ξ`): `ϑ₀(ξ) < ϑ₀(γ)` gives `ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^*`; the second is impossible.  So `ξ < γ`. -/
-axiom syLt_of_vt_lt {τ ξ μ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hEμ : Gg.ggE < μ) (hμG : μ < Gg.ggGam)
+theorem syLt_of_vt_lt {τ ξ μ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hEμ : Gg.ggE < μ) (hμG : μ < Gg.ggGam)
     (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo) (hμT : Ss.ssDatL μ ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1)
     (hdξ : Ss.ssDatL μ < vt τ ξ) (hηξ : η < vt τ ξ) (h : vt τ ξ < vt τ (Om1 * (Om1 + μ) + η)) :
-    ξ < Om1 * (Om1 + μ) + η
+    ξ < Om1 * (Om1 + μ) + η := by
+  have _ := hEμ
+  have hB : Om1 + μ < Tf.tfBG := (Tf.tf_Om1_add_lt_gg hμG).trans Tf.tf_gg_lt_BG
+  exact tfLt_of_vt_lt hτ hτ1 le_self_add hB hξ hξ2 (by rwa [Tf.tfDatL_eq_ss hμG]) hη hηΩ
+    (by rwa [Tf.tfDatL_eq_ss hμG]) hηξ h
 
-/-- **[W07a] Lemma 3.30 (`α^* < ϑ₀(α)`), Lemma 4.3, Def 3.28, Convention 4.1** (texts L, E, S, C, and the steps ◇):
+/-- **Theorem (formerly an axiom)**: the instance `M = Ω₁ + μ` of `R2.tfLevel_lt`.
+**[W07a] Lemma 3.30 (`α^* < ϑ₀(α)`), Lemma 4.3, Def 3.28, Convention 4.1** (texts L, E, S, C, and the steps ◇):
 for a level `E₁ < μ < Γ_{Ω₁+1}` with `ssDatL μ ∈ Tᵗ` and `η ∈ Tᵗ ∩ Ω₁`: `ssDatL μ, η < ϑᵗ(Ω₁·(Ω₁ + μ) + η)` (the
 field `level`).
 
 Our steps.  `γ := Ω₁·μ + η ∈ Tᵗ ∩ Ω₂` (◇Δ) with `Δ = Ω₁·μ > 0` (C).  L (`m = 0`): `γ^* < ϑ₀(γ) =: q`; E: `τ < q ∈ E`.
 ◇Δ (last clause, `ξ' = γ`): `ssDat μ < q`.  The additive components of `η` are `< τ` or `≤ η^* ≤ γ^*` (step ★1 of
 `R2.CitedLu`; `P₀(η) ⊆ P₀(γ)`), hence `< q`, and `q` is additive principal: `η < q`. -/
-axiom syLevel_lt {τ μ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hEμ : Gg.ggE < μ) (hμG : μ < Gg.ggGam)
+theorem syLevel_lt {τ μ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hEμ : Gg.ggE < μ) (hμG : μ < Gg.ggGam)
     (hμT : Ss.ssDatL μ ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1) :
-    Ss.ssDatL μ < vt τ (Om1 * (Om1 + μ) + η) ∧ η < vt τ (Om1 * (Om1 + μ) + η)
+    Ss.ssDatL μ < vt τ (Om1 * (Om1 + μ) + η) ∧ η < vt τ (Om1 * (Om1 + μ) + η) := by
+  have _ := hEμ
+  have hB : Om1 + μ < Tf.tfBG := (Tf.tf_Om1_add_lt_gg hμG).trans Tf.tf_gg_lt_BG
+  rw [← Tf.tfDatL_eq_ss hμG]
+  exact tfLevel_lt hτ hτ1 le_self_add hB (by rwa [Tf.tfDatL_eq_ss hμG]) hη hηΩ
 
-/-- **[W07a] Def 5.1 (all four clauses), Lemma 5.3 (b)–(d), Def 3.28, Def 3.22, Def 3.1, Lemma 3.3, Lemma 3.5,
+/-- **Theorem (formerly an axiom)**: `R2.tfPhi_TB` below `Γ_{Ω₁+1}`.
+**[W07a] Def 5.1 (all four clauses), Lemma 5.3 (b)–(d), Def 3.28, Def 3.22, Def 3.1, Lemma 3.3, Lemma 3.5,
 Lemma 4.2, Lemma 4.3, Lemma 3.30** (texts P, Π, S, T, D, B, W, E, L, and the steps ◇): for bases `σ < τ` and an
 `ε`-number `φ(a, c) ∈ (Ω₁, Γ_{Ω₁+1})` in normal form (`1 ≤ a`, `a, c < φ(a, c)`): `φ(a, c) ∈ Tᵗ[σ] ⇔ a, c ∈ Tᵗ[σ]`,
 and then `π_{σ,τ}(φ(a, c)) = φ(π_{σ,τ}(a), π_{σ,τ}(c))` (the field `eps` of `Sv.SvCitPi Γ_{Ω₁+1}`).
 
 Our steps.  Step π3 of ◇π in the module docstring (the term `ϑ₁(Ω₂·a + c*)` of ◇K, ◇P, ◇I; the parameters through
 S; the value through P, third clause with `k = 1, 2`, and the fixed-point shift O6 kept by `π` through ◇F). -/
-axiom syPhi_TB {σ τ a c : Ordinal.{0}} (h : Bases σ τ) (ha : 1 ≤ a) (haz : a < veblen a c)
+theorem syPhi_TB {σ τ a c : Ordinal.{0}} (h : Bases σ τ) (ha : 1 ≤ a) (haz : a < veblen a c)
     (hcz : c < veblen a c) (h1 : Om1 < veblen a c) (hG : veblen a c < Gg.ggGam) :
     (veblen a c ∈ TB τ σ ↔ a ∈ TB τ σ ∧ c ∈ TB τ σ) ∧
-      (a ∈ TB τ σ → c ∈ TB τ σ → pi σ τ (veblen a c) = veblen (pi σ τ a) (pi σ τ c))
+      (a ∈ TB τ σ → c ∈ TB τ σ → pi σ τ (veblen a c) = veblen (pi σ τ a) (pi σ τ c)) :=
+  tfPhi_TB h ha haz hcz h1 (hG.trans Tf.tf_gg_lt_BG)
 
-/-- **[W07a] Def 5.1 (first three clauses), Lemma 5.3 (b)–(d), Def 3.28, Def 3.22, Lemma 3.5, Lemma 4.2, Lemma 3.30**
+/-- **Theorem (formerly an axiom)**: `R2.tfOpow_TB` below `Γ_{Ω₁+1}`.
+**[W07a] Def 5.1 (first three clauses), Lemma 5.3 (b)–(d), Def 3.28, Def 3.22, Lemma 3.5, Lemma 4.2, Lemma 3.30**
 (texts P, Π, S, T, W, L, and the steps ◇): for bases `σ < τ` and `g ≥ E₁`, not an `ε`-number, with `ω^g <
 Γ_{Ω₁+1}`: `ω^g ∈ Tᵗ[σ] ⇔ g ∈ Tᵗ[σ]`, and then `π_{σ,τ}(ω^g) = ω^{π_{σ,τ}(g)}` (the field `opow`).
 
 Our steps.  Step π2 of ◇π: `ω^g = ϑ₁(g⁻)` (◇N), `Parᵗ(ω^g) = Parᵗ(g⁻)` (S, `k = 1`), `π(ω^g) = ϑ₁(π(g⁻))` (P, third
 clause), `π(g⁻) = (π g)⁻` (◇F, π3), and `ϑ₁((π g)⁻) = ω^{π g}` (◇N). -/
-axiom syOpow_TB {σ τ g : Ordinal.{0}} (h : Bases σ τ) (hg : Gg.ggE ≤ g) (hgE : ω ^ g ≠ g)
+theorem syOpow_TB {σ τ g : Ordinal.{0}} (h : Bases σ τ) (hg : Gg.ggE ≤ g) (hgE : ω ^ g ≠ g)
     (hG : ω ^ g < Gg.ggGam) :
-    (ω ^ g ∈ TB τ σ ↔ g ∈ TB τ σ) ∧ (g ∈ TB τ σ → pi σ τ (ω ^ g) = ω ^ pi σ τ g)
+    (ω ^ g ∈ TB τ σ ↔ g ∈ TB τ σ) ∧ (g ∈ TB τ σ → pi σ τ (ω ^ g) = ω ^ pi σ τ g) :=
+  tfOpow_TB h hg hgE (hG.trans Tf.tf_gg_lt_BG)
 
 end Googology.Trans.PoR.InaccPsi.R2

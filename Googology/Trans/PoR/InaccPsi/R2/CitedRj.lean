@@ -1,10 +1,17 @@
 import Googology.Trans.PoR.InaccPsi.R2.CitedLq
 import Googology.Trans.PoR.InaccPsi.R2.RjCode
+import Googology.Trans.PoR.InaccPsi.R2.CitedTf
 
 set_option autoImplicit false
 
 /-!
 # Cited facts of Wilken 2007, as axioms, ONCE for every level `Δ = Ω₁·M` with `Ω₁ ≤ M < ε_{Ω₁+1}`
+
+**Round 92: the four Lemma 3.30 facts below (`rjArg_mem`, `rjVt_lt`, `rjLt_of_vt_lt`, `rjLevel_lt_vt`) are now
+theorems**: the instances `Ω₁ ≤ M < ε_{Ω₁+1}` of the generic citation `R2.CitedTf` (`tfArg_mem`, `tfVt_lt`,
+`tfLt_of_vt_lt`, `tfLevel_lt`, every level `Ω₁ ≤ M < B_Γ`), with `Tf.tfDat = rjDat` below `ε_{Ω₁+1}`
+(`Tf.tfDat_eq_rj`).  Their docstrings keep the citation and the steps; the literal texts below serve `rjLhT`, which
+stays an axiom ([W07b] Def 4.1 is not part of the generic citation).
 
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 [W07b] G. Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007) 162–175.
@@ -99,47 +106,60 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal Googology.Trans.PoR.InaccPsi.R2.Rj
 
-/-- **[W07a] Def 3.22, Lemma 4.2 (`m = 1`), the remark after Def 3.1, Theorem 3.23, Convention 4.1** (texts T, W, Z,
+/-- **Theorem (formerly an axiom)**: the instance `Ω₁ ≤ M < ε_{Ω₁+1}` of `R2.tfArg_mem`
+(`Tf.tfDat = rjDat` below `ε_{Ω₁+1}`).
+**[W07a] Def 3.22, Lemma 4.2 (`m = 1`), the remark after Def 3.1, Theorem 3.23, Convention 4.1** (texts T, W, Z,
 Θ, C): for a code `Ω₁ ≤ M < ε_{Ω₁+1}` with `rjDat M ∈ Tᵗ` and `η ∈ Tᵗ ∩ Ω₁`: `Ω₁·M + η ∈ Tᵗ`.
 
 Our steps.  Step □2 of the module docstring: `Ω₁·M` is the `=NF`-sum of the `ϑ₁`-terms `ϑ₁(m_l)` built by T from
 `Ω₁ = ϑ₁(0)` and the leaves of `M`, which are `≤ rjDat M ∈ Tᵗ ∩ Ω₁` and so in `Tᵗ` (Θ: an initial segment); then
 `Ω₁·M + η ∈ Tᵗ` (T, second clause).  For `M = Ω₁·γ + β` this is `lqArg_mem` of `R2.CitedLq`. -/
-axiom rjArg_mem {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hME : M < Gg.ggE)
+theorem rjArg_mem {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hME : M < Gg.ggE)
     (hMT : rjDat M ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1) :
-    Om1 * M + η ∈ Tset τ
+    Om1 * M + η ∈ Tset τ :=
+  tfArg_mem hτ hτ1 hM1 (hME.trans Tf.tf_E_lt_BG) (by rwa [Tf.tfDat_eq_rj M hME]) hη hηΩ
 
-/-- **[W07a] Lemma 3.30, the direction `⇐`, with Def 3.28** (texts L, S): for codes `M' < ε_{Ω₁+1}` (`M' < Ω₁`
+/-- **Theorem (formerly an axiom)**: the instance `Ω₁ ≤ M < ε_{Ω₁+1}` of `R2.tfVt_lt`
+(`M' ≤ M` from the order of the arguments).
+**[W07a] Lemma 3.30, the direction `⇐`, with Def 3.28** (texts L, S): for codes `M' < ε_{Ω₁+1}` (`M' < Ω₁`
 allowed) and `Ω₁ ≤ M < ε_{Ω₁+1}` with data in `Tᵗ`, `η', η ∈ Tᵗ ∩ Ω₁`, `ξ' := Ω₁·M' + η' < ξ := Ω₁·M + η` and
 `rjDat M', η' < ϑᵗ(ξ)`: `ϑᵗ(ξ') < ϑᵗ(ξ)`.
 
 Our steps.  `ξ', ξ ∈ Tᵗ ∩ Ω₂` (□2; for `M' < Ω₁` the step ◆β of `R2.CitedLv`).  By □*, `ξ'^* ≤ max(rjDat M', η') <
 ϑ₀(ξ)`.  So `ξ' < ξ ∧ ξ'^* < ϑ₀(ξ)`, the first disjunct of the right side of L (`m = 0`), and `ϑ₀(ξ') < ϑ₀(ξ)`.
 (`lqVt_lt` of `R2.CitedLq` is the case `M = Ω₁·γ + β`, `M' = Ω₁·γ' + β'`.) -/
-axiom rjVt_lt {τ M' η' M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM'E : M' < Gg.ggE)
+theorem rjVt_lt {τ M' η' M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM'E : M' < Gg.ggE)
     (hM'T : rjDat M' ∈ Tset τ) (hη' : η' ∈ Tset τ) (hη'Ω : η' < Om1) (hM1 : Om1 ≤ M) (hME : M < Gg.ggE)
     (hMT : rjDat M ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1) (harg : Om1 * M' + η' < Om1 * M + η)
     (hd' : rjDat M' < vt τ (Om1 * M + η)) (hη'v : η' < vt τ (Om1 * M + η)) :
-    vt τ (Om1 * M' + η') < vt τ (Om1 * M + η)
+    vt τ (Om1 * M' + η') < vt τ (Om1 * M + η) :=
+  tfVt_lt hτ hτ1 hM1 (hME.trans Tf.tf_E_lt_BG) (Tf.tf_M_le hηΩ harg) (by rwa [Tf.tfDat_eq_rj M' hM'E]) hη' hη'Ω
+    (by rwa [Tf.tfDat_eq_rj M hME]) hη hηΩ harg (by rwa [Tf.tfDat_eq_rj M' hM'E]) hη'v
 
-/-- **[W07a] Lemma 3.30, the direction `⇒`, with Def 3.28** (texts L, S): for `ξ ∈ Tᵗ ∩ Ω₂`, a code
+/-- **Theorem (formerly an axiom)**: the instance `Ω₁ ≤ M < ε_{Ω₁+1}` of `R2.tfLt_of_vt_lt`.
+**[W07a] Lemma 3.30, the direction `⇒`, with Def 3.28** (texts L, S): for `ξ ∈ Tᵗ ∩ Ω₂`, a code
 `Ω₁ ≤ M < ε_{Ω₁+1}` with `rjDat M ∈ Tᵗ` and `η ∈ Tᵗ ∩ Ω₁` with `rjDat M, η < ϑᵗ(ξ)`: `ϑᵗ(ξ) < ϑᵗ(Ω₁·M + η)` implies
 `ξ < Ω₁·M + η`.
 
 Our steps.  `ζ := Ω₁·M + η ∈ Tᵗ ∩ Ω₂` (□2) and `ζ^* ≤ max(rjDat M, η) < ϑᵗ(ξ)` (□*).  L (`m = 0`, `α = ξ`): `ϑ₀(ξ)
 < ϑ₀(ζ)` gives `ξ < ζ ∧ ξ^* < ϑ₀(ζ)` or `ϑ₀(ξ) ≤ ζ^*`; the second is impossible.  So `ξ < ζ`. -/
-axiom rjLt_of_vt_lt {τ ξ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo)
+theorem rjLt_of_vt_lt {τ ξ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo)
     (hM1 : Om1 ≤ M) (hME : M < Gg.ggE) (hMT : rjDat M ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1)
-    (hdξ : rjDat M < vt τ ξ) (hηξ : η < vt τ ξ) (h : vt τ ξ < vt τ (Om1 * M + η)) : ξ < Om1 * M + η
+    (hdξ : rjDat M < vt τ ξ) (hηξ : η < vt τ ξ) (h : vt τ ξ < vt τ (Om1 * M + η)) : ξ < Om1 * M + η :=
+  tfLt_of_vt_lt hτ hτ1 hM1 (hME.trans Tf.tf_E_lt_BG) hξ hξ2 (by rwa [Tf.tfDat_eq_rj M hME]) hη hηΩ
+    (by rwa [Tf.tfDat_eq_rj M hME]) hηξ h
 
-/-- **[W07a] Lemma 3.30 (`α^* < ϑ₀(α)`), Lemma 4.3, Def 3.28** (texts L, E, S): for a code `Ω₁ ≤ M < ε_{Ω₁+1}` with
+/-- **Theorem (formerly an axiom)**: the instance `Ω₁ ≤ M < ε_{Ω₁+1}` of `R2.tfLevel_lt`.
+**[W07a] Lemma 3.30 (`α^* < ϑ₀(α)`), Lemma 4.3, Def 3.28** (texts L, E, S): for a code `Ω₁ ≤ M < ε_{Ω₁+1}` with
 `rjDat M ∈ Tᵗ` and `η ∈ Tᵗ ∩ Ω₁`: `rjDat M, η < ϑᵗ(Ω₁·M + η)`.
 
 Our steps.  `ξ := Ω₁·M + η ∈ Tᵗ ∩ Ω₂` (□2).  L (`m = 0`): `ξ^* < ϑ₀(ξ) =: a`.  E (`Δ = Ω₁·M > 0`): `τ < a ∈ E`.
 By □<, `rjDat M, η < a`. -/
-axiom rjLevel_lt_vt {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hME : M < Gg.ggE)
+theorem rjLevel_lt_vt {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hME : M < Gg.ggE)
     (hMT : rjDat M ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1) :
-    rjDat M < vt τ (Om1 * M + η) ∧ η < vt τ (Om1 * M + η)
+    rjDat M < vt τ (Om1 * M + η) ∧ η < vt τ (Om1 * M + η) := by
+  rw [← Tf.tfDat_eq_rj M hME]
+  exact tfLevel_lt hτ hτ1 hM1 (hME.trans Tf.tf_E_lt_BG) (by rwa [Tf.tfDat_eq_rj M hME]) hη hηΩ
 
 /-- **[W07b] Def 4.1, the case `δ > α` with `cr(α, δ) = m`, with [W07a] Def 7.5, Def 7.1, Lemma 7.2 (b)–(d),
 Def 6.1, Def 4.11, Def 4.6, Def 7.15, Convention 6.6, Convention 4.1, Lemma 6.3, Lemma 4.2, Lemma 4.3, Lemma 3.30,

@@ -5,6 +5,10 @@ set_option autoImplicit false
 /-!
 # A cited fact of Wilken 2007, as an axiom, ONCE for every level `Ω₁ ≤ M < ε_{Ω₁+1}`: the data of the argument
 
+**Round 92: `rkArg_dat` is now a theorem**: the instance `Ω₁ ≤ M < ε_{Ω₁+1}` of `R2.tfArg_dat` of the generic
+citation `R2.CitedTf` (`Tf.tfDat = rjDat` below `ε_{Ω₁+1}`).  The literal texts and steps below are kept as its
+reading; this file has no axiom left.
+
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 
 Same conventions as `R2.CitedRj` (`Ω₁ = Om1`, `Ω₂ = OmTwo`, `Tset τ = Tᵗ`, `vt τ = ϑᵗ = ϑ₀`, every base `τ` a countable
@@ -36,7 +40,9 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal Googology.Trans.PoR.InaccPsi.R2.Rj
 
-/-- **[W07a] Def 3.22, Theorem 3.23, the Remark after Corollary 3.24, Def 3.28, Lemma 3.30 (`m = 1`), Lemma 4.2, the
+/-- **Theorem (formerly an axiom)**: the instance `Ω₁ ≤ M < ε_{Ω₁+1}` of `R2.tfArg_dat`
+(`R2.CitedTf`).
+**[W07a] Def 3.22, Theorem 3.23, the Remark after Corollary 3.24, Def 3.28, Lemma 3.30 (`m = 1`), Lemma 4.2, the
 remark after Def 3.1, Lemma 4.3** (texts T, Θ, U, S, L, W, Z, E): for a code `Ω₁ ≤ M < ε_{Ω₁+1}` and `η < Ω₁`
 with `Ω₁·M + η ∈ Tᵗ`: `rjDat M ∈ Tᵗ` (**the converse of `R2.rjArg_mem`**).
 
@@ -71,7 +77,8 @@ Our steps.
   `b_i ∈ Tᵗ`; so `r = Σ ω^{b_i} ∈ Tᵗ ∩ Ω₁ = θ₀` (Θ: `θ₀` is a supremum of values `ϑ₀(ϑ₁(⋯))`, which are `ε`-numbers by E
   (`Δ = ϑ₁(⋯) > 0`); so `θ₀` is closed under `ω^·` and `+`).  The leaves of `M` are `r` and the leaves of the `e_l` (`rjDat`: the recursion through `log_ω` and the
   remainder), all in `Tᵗ`; `rjDat M` is one of them (or `0 ∈ Tᵗ`, a parameter, if there is none). -/
-axiom rkArg_dat {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hME : M < Gg.ggE)
-    (hηΩ : η < Om1) (h : Om1 * M + η ∈ Tset τ) : rjDat M ∈ Tset τ
+theorem rkArg_dat {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hME : M < Gg.ggE)
+    (hηΩ : η < Om1) (h : Om1 * M + η ∈ Tset τ) : rjDat M ∈ Tset τ :=
+  by rw [← Tf.tfDat_eq_rj M hME]; exact tfArg_dat hτ hτ1 hM1 (hME.trans Tf.tf_E_lt_BG) hηΩ h
 
 end Googology.Trans.PoR.InaccPsi.R2

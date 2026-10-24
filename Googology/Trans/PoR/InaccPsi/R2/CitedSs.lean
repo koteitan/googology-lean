@@ -5,6 +5,11 @@ set_option autoImplicit false
 /-!
 # Cited facts of Wilken 2007, as axioms, ONCE for the level `Δ = ε_{Ω₁+1} = ϑ₁(Ω₂)`
 
+**Round 92: this file has no axiom left.**  The five facts below are theorems: the instances `M = E₁` of the
+generic citation `R2.CitedTf` (`tfArg_mem`, `tfVt_lt`, `tfLt_of_vt_lt`, `tfLevel_lt`, `tfPhi_TB` at `φ(1, Ω₁ + 1)`),
+with `Ω₁·E₁ = E₁`, `E₁ = φ(1, Ω₁ + 1)`, `Tf.tfDat E₁ = 1` and `Tf.tfDat = rjDat` below `E₁` (`R2.TfDat`).  The literal
+texts and steps below are kept as their reading.
+
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 
 Same conventions as `R2.CitedRj` and `R2.CitedRk` (`Ω₁ = Om1`, `Ω₂ = OmTwo`, `Tset τ = Tᵗ`, `Par τ = Parᵗ`,
@@ -88,13 +93,19 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal Googology.Trans.PoR.InaccPsi.R2.Rj
 
-/-- **[W07a] Def 3.1, Lemma 3.3 (b), Lemma 3.5, Corollary 3.21, Def 3.22, Corollary 3.24, Def 3.28, Lemma 3.30
+/-- **Theorem (formerly an axiom)**: the instance `M = E₁` of `R2.tfArg_mem` (`η = 0`, `Ω₁·E₁ = E₁`).
+**[W07a] Def 3.1, Lemma 3.3 (b), Lemma 3.5, Corollary 3.21, Def 3.22, Corollary 3.24, Def 3.28, Lemma 3.30
 (`m = 1`)** (texts D, B, W, EX, T, Θ, S, L): `ε_{Ω₁+1} ∈ Tᵗ` for every base `τ`.
 
 Our steps.  ◇2 of the module docstring: `ε_{Ω₁+1} = ϑ₁(Ω₂)` and `ϑ₁(Ω₂) ∈ T₀ = Tᵗ` (T, third clause twice). -/
-axiom ssE_mem {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) : Gg.ggE ∈ Tset τ
+theorem ssE_mem {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) : Gg.ggE ∈ Tset τ := by
+  have h := tfArg_mem (M := Gg.ggE) (η := 0) hτ hτ1 rj_Om1_lt_E.le Tf.tf_E_lt_BG
+    (by rw [Tf.tfDat_E]; exact Tf.tf_T_lt hτ hτ1 (Tf.tf_one_lt hτ))
+    (Tf.tf_T_lt hτ hτ1 (zero_lt_one.trans (Tf.tf_one_lt hτ))) rj_Om1_pos
+  rwa [add_zero, Tf.tf_Om1_mul_E] at h
 
-/-- **[W07a] Def 5.1 (first and third clauses), Def 3.28, Def 3.1, Lemma 3.3 (b), Lemma 3.5, Def 3.22, Corollary
+/-- **Theorem (formerly an axiom)**: `R2.tfPhi_TB` at `E₁ = φ(1, Ω₁ + 1)`.
+**[W07a] Def 5.1 (first and third clauses), Def 3.28, Def 3.1, Lemma 3.3 (b), Lemma 3.5, Def 3.22, Corollary
 3.24, Lemma 3.30 (`m = 1`)** (texts P, S, D, B, W, T, Θ, EX, L): for bases `σ < τ` (`σ ∈ E ∩ τ`):
 `ε_{Ω₁+1} ∈ Tᵗ[σ]` and `π_{σ,τ}(ε_{Ω₁+1}) = ε_{Ω₁+1}`.
 
@@ -102,38 +113,68 @@ Our steps.  `ε_{Ω₁+1} = ϑ₁(Ω₂)` (◇2) with `Parᵗ(ε_{Ω₁+1}) = {0
 third clause with `k = 2`, `η = 0 ∈ Tᵗ[σ] ∩ Ω₄`: `π_{σ,τ}(Ω₂) = π_{σ,τ}(ϑ₂(0)) = ϑ₂(π_{σ,τ}(0)) = ϑ₂(0) = Ω₂` (first
 clause, `0 < σ`); third clause with `k = 1`, `η = Ω₂ ∈ Tᵗ[σ] ∩ Ω₃` (`Parᵗ(Ω₂) = {0}`, S): `π_{σ,τ}(ϑ₁(Ω₂)) =
 ϑ₁(Ω₂)`.  The `ϑ₁` of `T^σ` is the same function (◇1), so the value is `ε_{Ω₁+1}` again (◇2 over the base `σ`). -/
-axiom ssE_TB {σ τ : Ordinal.{0}} (h : Bases σ τ) : Gg.ggE ∈ TB τ σ ∧ pi σ τ Gg.ggE = Gg.ggE
+theorem ssE_TB {σ τ : Ordinal.{0}} (h : Bases σ τ) : Gg.ggE ∈ TB τ σ ∧ pi σ τ Gg.ggE = Gg.ggE := by
+  have h1σ : (1 : Ordinal.{0}) < σ := Tf.tf_one_lt h.1
+  have h1 : (1 : Ordinal.{0}) ∈ TB τ σ := (TB_inter_lt h (h1σ.trans h.2.2.1)).2 h1σ
+  obtain ⟨hc, hcp⟩ := Tf.tf_Om1_succ_TB h
+  have hB : veblen 1 (Om1 + 1) < Tf.tfBG := by rw [← Tf.tf_E_eq]; exact Tf.tf_E_lt_BG
+  have ha : (1 : Ordinal.{0}) < veblen 1 (Om1 + 1) := Tf.tf_one_lt_Om1.trans ((lt_add_one _).trans Tf.tf_E_arg_lt)
+  obtain ⟨hiff, hpi⟩ := tfPhi_TB h le_rfl ha Tf.tf_E_arg_lt ((lt_add_one _).trans Tf.tf_E_arg_lt) hB
+  rw [Tf.tf_E_eq]
+  exact ⟨hiff.2 ⟨h1, hc⟩, by rw [hpi h1 hc, pi_lt h h1σ, hcp]⟩
 
-/-- **[W07a] Lemma 3.30, the direction `⇐`, with Def 3.28, Def 3.22, Convention 4.1** (texts L, S, T, C, and ◇):
+/-- **Theorem (formerly an axiom)**: the instance `M = E₁` of `R2.tfVt_lt`.
+**[W07a] Lemma 3.30, the direction `⇐`, with Def 3.28, Def 3.22, Convention 4.1** (texts L, S, T, C, and ◇):
 for `M' ≤ ε_{Ω₁+1}` (a code, or `ε_{Ω₁+1}` itself) with `rjDat M' ∈ Tᵗ`, `η', η ∈ Tᵗ ∩ Ω₁`, `Ω₁·M' + η' <
 ε_{Ω₁+1} + η`, and `rjDat M', η'` below `ϑᵗ(ε_{Ω₁+1} + η)`: `ϑᵗ(Ω₁·M' + η') < ϑᵗ(ε_{Ω₁+1} + η)`.
 
 Our steps.  `α := Ω₁·M' + η'` and `γ := ε_{Ω₁+1} + η` lie in `Tᵗ ∩ Ω₂` (◇*, ◇T).  `α^* ≤ max(rjDat M', η') <
 ϑ₀(γ)` (◇*, the hypotheses).  So `α < γ ∧ α^* < ϑ₀(γ)`, the first disjunct of the right side of L (`m = 0`), and
 `ϑ₀(α) < ϑ₀(γ)`. -/
-axiom ssVt_lt {τ M' η' η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM'E : M' ≤ Gg.ggE)
+theorem ssVt_lt {τ M' η' η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM'E : M' ≤ Gg.ggE)
     (hM'T : rjDat M' ∈ Tset τ) (hη' : η' ∈ Tset τ) (hη'Ω : η' < Om1) (hη : η ∈ Tset τ) (hηΩ : η < Om1)
     (harg : Om1 * M' + η' < Gg.ggE + η) (hd' : rjDat M' < vt τ (Gg.ggE + η))
     (hη'v : η' < vt τ (Gg.ggE + η)) :
-    vt τ (Om1 * M' + η') < vt τ (Gg.ggE + η)
+    vt τ (Om1 * M' + η') < vt τ (Gg.ggE + η) := by
+  have hE : Om1 ≤ Gg.ggE := rj_Om1_lt_E.le
+  have hET : Tf.tfDat Gg.ggE ∈ Tset τ := by rw [Tf.tfDat_E]; exact Tf.tf_T_lt hτ hτ1 (Tf.tf_one_lt hτ)
+  have hlev := tfLevel_lt hτ hτ1 hE Tf.tf_E_lt_BG hET hη hηΩ
+  rw [Tf.tf_Om1_mul_E, Tf.tfDat_E] at hlev
+  have hd : Tf.tfDat M' ∈ Tset τ ∧ Tf.tfDat M' < vt τ (Gg.ggE + η) := by
+    rcases hM'E.lt_or_eq with hlt | rfl
+    · rw [Tf.tfDat_eq_rj M' hlt]; exact ⟨hM'T, hd'⟩
+    · rw [Tf.tfDat_E]; exact ⟨Tf.tf_T_lt hτ hτ1 (Tf.tf_one_lt hτ), hlev.1⟩
+  rw [← Tf.tf_Om1_mul_E] at harg hη'v ⊢
+  rw [← Tf.tf_Om1_mul_E] at hd
+  exact tfVt_lt hτ hτ1 hE Tf.tf_E_lt_BG (Tf.tf_M_le hηΩ harg) hd.1 hη' hη'Ω hET hη hηΩ harg hd.2 hη'v
 
-/-- **[W07a] Lemma 3.30, the direction `⇒`, with Def 3.28** (texts L, S, and ◇): for `ξ ∈ Tᵗ ∩ Ω₂` and `η ∈ Tᵗ ∩ Ω₁`
+/-- **Theorem (formerly an axiom)**: the instance `M = E₁` of `R2.tfLt_of_vt_lt` (`1 < τ ≤ ϑᵗ(ξ)`).
+**[W07a] Lemma 3.30, the direction `⇒`, with Def 3.28** (texts L, S, and ◇): for `ξ ∈ Tᵗ ∩ Ω₂` and `η ∈ Tᵗ ∩ Ω₁`
 with `η < ϑᵗ(ξ)`: `ϑᵗ(ξ) < ϑᵗ(ε_{Ω₁+1} + η)` implies `ξ < ε_{Ω₁+1} + η`.
 
 Our steps.  `γ := ε_{Ω₁+1} + η ∈ Tᵗ ∩ Ω₂` (◇T) and `γ^* ≤ η < ϑ₀(ξ)` (◇S, the hypothesis).  L (`m = 0`, `α = ξ`):
 `ϑ₀(ξ) < ϑ₀(γ)` gives `ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^*`; the second is impossible.  So `ξ < γ`. -/
-axiom ssLt_of_vt_lt {τ ξ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo)
+theorem ssLt_of_vt_lt {τ ξ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo)
     (hη : η ∈ Tset τ) (hηΩ : η < Om1) (hηξ : η < vt τ ξ) (h : vt τ ξ < vt τ (Gg.ggE + η)) :
-    ξ < Gg.ggE + η
+    ξ < Gg.ggE + η := by
+  have hET : Tf.tfDat Gg.ggE ∈ Tset τ := by rw [Tf.tfDat_E]; exact Tf.tf_T_lt hτ hτ1 (Tf.tf_one_lt hτ)
+  have hdξ : Tf.tfDat Gg.ggE < vt τ ξ := by
+    rw [Tf.tfDat_E]; exact (Tf.tf_one_lt hτ).trans_le (vt_memTwo hτ hτ1 hξ hξ2).2.1
+  rw [← Tf.tf_Om1_mul_E] at h ⊢
+  exact tfLt_of_vt_lt hτ hτ1 rj_Om1_lt_E.le Tf.tf_E_lt_BG hξ hξ2 hET hη hηΩ hdξ hηξ h
 
-/-- **[W07a] Lemma 3.30 (`α^* < ϑ₀(α)`), Lemma 4.3, Def 3.28, Convention 4.1** (texts L, E, S, C, and ◇): for `η ∈ Tᵗ ∩
+/-- **Theorem (formerly an axiom)**: the instance `M = E₁` of `R2.tfLevel_lt`.
+**[W07a] Lemma 3.30 (`α^* < ϑ₀(α)`), Lemma 4.3, Def 3.28, Convention 4.1** (texts L, E, S, C, and ◇): for `η ∈ Tᵗ ∩
 Ω₁`: `η < ϑᵗ(ε_{Ω₁+1} + η)`.
 
 Our steps.  `γ := ε_{Ω₁+1} + η ∈ Tᵗ ∩ Ω₂` with `Δ = ε_{Ω₁+1} > 0` (◇T).  L (`m = 0`): `γ^* < ϑ₀(γ) =: a`.  E: `τ < a
 ∈ E`.  Every additive component of `η` is `< τ` or `≤` a member of `P₀(η) = P₀(γ)` (◇S; step ★1 of `R2.CitedLu`:
 the components of `η ≥ τ` are `ϑ₀`-terms, members of `P₀(η)`), hence `< a`; `a ∈ P`, so `η < a` (for `η = 0`: `a >
 τ > 0`). -/
-axiom ssLevel_lt {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hηΩ : η < Om1) :
-    η < vt τ (Gg.ggE + η)
+theorem ssLevel_lt {τ η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hη : η ∈ Tset τ) (hηΩ : η < Om1) :
+    η < vt τ (Gg.ggE + η) := by
+  have hET : Tf.tfDat Gg.ggE ∈ Tset τ := by rw [Tf.tfDat_E]; exact Tf.tf_T_lt hτ hτ1 (Tf.tf_one_lt hτ)
+  have h := (tfLevel_lt hτ hτ1 rj_Om1_lt_E.le Tf.tf_E_lt_BG hET hη hηΩ).2
+  rwa [Tf.tf_Om1_mul_E] at h
 
 end Googology.Trans.PoR.InaccPsi.R2
