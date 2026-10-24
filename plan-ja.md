@@ -6,7 +6,7 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
 
 - Wilken の主張：Core(R₂⁺) = ψ_{Ω₁}(I_ω)（[Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README-ja.md)）
   - Lean：Wilken の系と InaccPsi の間の写像
-    - R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
+    - 🤖 R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
       - 済み（仮定なし）：前線 ι(Γ_{Ω₁+1+ε_{Ω₁+2}}) まで。その P は L(0) = m* より下。供給 SlSupW。引用した公理は 97 個で、すべて監査済み。
       - 道（仮定つき）：前線より上の restart で UPPER、LOWER、cap が成り立ち、ほかに CL、EQ などが成り立てば、ν_C = L(ω+1) と L(ω) <₂ L(ω+1)。
       - 残り 1（前線）：コード ε_{Ω₁+2}·ω、ζ_{Ω₁+1}、ϑˣ での読み、ι(Ω₂) から L(0)、そして [L(0), L(ω+1))。
