@@ -6,7 +6,7 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
 
 - Wilken の主張：Core(R₂⁺) = ψ_{Ω₁}(I_ω)（[Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README-ja.md)）
   - Lean：Wilken の系と InaccPsi の間の写像
-    - R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
+    - 🤖 R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
       - 済み（仮定なし）：前線 ι(Γ_{ε_{Γ_{Ω₁+1}+ε₀}}) < ι(Ω₂)、その P は L(0) = m* より下。c < B_Γ の原子 ψ_{Ω₂}(c) を B_n が動かす。公理は 100 個で監査済み。
       - 道（仮定つき）：前線より上で UPPER、LOWER、cap、[B_Γ, Ω₂) で TopFrom/Unc、ほかに CL、EQ、TdAtMove16 などが成り立てば、ν_C = L(ω+1) と L(ω) <₂ L(ω+1)。
       - 残り 1（前線）：門つきの桁の系（門が無いと底 φ(1, Γ_{x+1}+ε₀) で破れる）、2 以上の Veblen の段、コードの中の原子 Γ_{Ω₁+1+c}、そして ι(Ω₂) から L(ω+1)。
