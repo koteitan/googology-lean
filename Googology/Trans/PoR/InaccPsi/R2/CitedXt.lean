@@ -12,7 +12,7 @@ Same conventions as `R2.Cited` and `R2.CitedVz` (`Ω₁ = ω₁`, `Tset τ = T�
 
 Literal texts used ([W07a]):
 * (D) Def 5.1: "Let `τ ∈ E` and `Tᵗ` be the notation system over `τ`.  Further, let `σ ∈ {1} ∪ (E ∩ τ)`.  We define
-  `Tᵗ[σ] := {α ∈ Tᵗ | Parᵗ(α) ⊆ σ}` and `π_{σ,τ} : Tᵗ[σ] → Tᵟ` by the following clauses:
+  `Tᵗ[σ] := {α ∈ Tᵗ | Parᵗ(α) ⊆ σ}` and `π_{σ,τ} : Tᵗ[σ] → T^σ` by the following clauses:
   • `π_{σ,τ}(ξ) := ξ` if `ξ < σ`
   • `π_{σ,τ}(ξ) := π_{σ,τ}(ξ₁) + π_{σ,τ}(ξ₂)` if `ξ =NF ξ₁ + ξ₂ > τ`
   • `π_{σ,τ}(ξ) := ϑ_k(π_{σ,τ}(η))` if `ξ = ϑ_k(η)` for some `k > 0` and `η ∈ Tᵗ[σ] ∩ Ω_{k+2}`
@@ -45,7 +45,7 @@ numbers that are not `ε`-numbers, `(P ∖ E) ∩ Ω₁` has order type `Ω₁`,
 `1 ∈ Tᵗ[σ] ∩ Ω₃`.
 (3) The base change.  D, third clause (`ξ = ϑ₁(η)`, `k = 1 > 0`, `η = 1 ∈ Tᵗ[σ] ∩ Ω₃`):
 `π_{σ,τ}(ϑ₁(1)) = ϑ₁(π_{σ,τ}(1))`; D, first clause (`1 < σ`): `π_{σ,τ}(1) = 1`.  So `π_{σ,τ}(Ω₁·ω)` is `ϑ₁(1)` of
-the system `Tᵟ` over `σ`, and there too `ϑ₁(1) = ω̄_{Ω₁} = Ω₁·ω` (W for the system over `σ`, the computation of
+the system `T^σ` over `σ`, and there too `ϑ₁(1) = ω̄_{Ω₁} = Ω₁·ω` (W for the system over `σ`, the computation of
 (1)). Proved from `CitedLu`. -/
 theorem xtOm1w_TB {σ τ : Ordinal.{0}} (h : Bases σ τ) : Om1 * ω ∈ TB τ σ ∧ pi σ τ (Om1 * ω) = Om1 * ω := by
   have := luOm1_opow_TB h ((one_lt_omega0).trans (omega0_lt_inE h.1)); rwa [opow_one] at this

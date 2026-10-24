@@ -3,7 +3,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ChainL
 /-!
 # One base change between two `υ`-points: indecomposables, closed images, `≤₁` of `R₁⁺`
 
-For countable `υ`-points `σ < τ` (so `σ, τ ∈ E`), the base change `π = π_{σ,τ} : Tᵗ[σ] → Tᵟ`
+For countable `υ`-points `σ < τ` (so `σ, τ ∈ E`), the base change `π = π_{σ,τ} : Tᵗ[σ] → T^σ`
 ([W07a] Def 5.1) and its inverse `up σ τ`:
 
 * `lead_comp`, `exists_comp_absorb`: the leading Cantor normal form component of a decomposable
@@ -138,7 +138,7 @@ theorem down_le1R {σ τ x y : Ordinal.{0}} (hσ : UpsPt σ) (hτ : UpsPt τ) (h
       · exact ⟨fun _ => hσ.2 _ (down_ge h hy hyτ), fun _ => e ▸ hτ.2 _ hyτ⟩
     · exact st_le1 h hx hxτ' hx1 hy
 
-/-- `π_{σ,τ}⁻¹` keeps and reflects `≤₁` of `R₁⁺` on `Tᵟ ∩ Ω₁`. -/
+/-- `π_{σ,τ}⁻¹` keeps and reflects `≤₁` of `R₁⁺` on `T^σ ∩ Ω₁`. -/
 theorem up_le1R {σ τ x y : Ordinal.{0}} (hσ : UpsPt σ) (hτ : UpsPt τ) (h : Bases σ τ)
     (hx : x ∈ Tset σ) (hy : y ∈ Tset σ) (hx1 : x < Om1) :
     le1R x y ↔ le1R (up σ τ x) (up σ τ y) := by

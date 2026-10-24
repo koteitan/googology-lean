@@ -262,7 +262,7 @@ theorem down_E {σ τ : Ordinal.{0}} (h : Bases σ τ) {x : Ordinal.{0}} (hx : x
   rw [← le1R_two_iff hx0, ← le1R_two_iff hp0, mul_two_eq, mul_two_eq, st_le1 h hx h1 h2 hxx,
     hpxx]
 
-/-- The inverse base change `π_{σ,τ}⁻¹ : Tᵟ → Tᵗ[σ]`. -/
+/-- The inverse base change `π_{σ,τ}⁻¹ : T^σ → Tᵗ[σ]`. -/
 noncomputable def up (σ τ : Ordinal.{0}) : Ordinal.{0} → Ordinal.{0} :=
   Function.invFunOn (pi σ τ) (TB τ σ)
 

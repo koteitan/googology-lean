@@ -7,7 +7,7 @@ import Googology.Trans.PoR.InaccPsi.R2.SfLh
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 [W07b] G. Wilken, "Σ₁-elementarity and Skolem hull operators", APAL 145 (2007) 162–175.
 
-`B_n = Bc.bcB S n`, `c_n = L(n+1)`, `lh` the `R₁⁺`-reach (`IsLh1`), `π_{σ,τ} = pi σ τ : Tᵗ[σ] → Tᵟ` ([W07a]
+`B_n = Bc.bcB S n`, `c_n = L(n+1)`, `lh` the `R₁⁺`-reach (`IsLh1`), `π_{σ,τ} = pi σ τ : Tᵗ[σ] → T^σ` ([W07a]
 Def 5.1, a repo constant).  The repo axiom `lh_pi` ([W07b] Cor 5.7: `lh(π_{σ,τ}(α)) = π_{σ,τ}(lh(α))` for
 `α ∈ Tᵗ[σ] ∩ (τ, Ω₁)`) is a statement for **every** `α`, whatever the argument `ξ` of `α = ϑᵗ(ξ)`: it needs no
 level, no localization and no `cr`.  Here it carries the lh move from the point `π_{σ,τ}(x) < τ < x` up to `x`.

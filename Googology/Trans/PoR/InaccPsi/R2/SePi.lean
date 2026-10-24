@@ -292,7 +292,7 @@ def SeVtHom (S : InaccSeq.{0}) (n : ℕ) (β : Ordinal.{0}) : Prop :=
 theorem seVtT_of {n : ℕ} {σ τ : Ordinal.{0}} (h : SeVtHom S n τ) : SeVtT S n σ τ :=
   fun ξ hξ hξ2 => h ξ hξ.1 hξ2
 
-/-- `SeVtHom` at `σ` and `SeUnc` give `SeVtS` (`π_{σ,τ}(ξ) ∈ Tᵟ`, below `Ω₂`). -/
+/-- `SeVtHom` at `σ` and `SeUnc` give `SeVtS` (`π_{σ,τ}(ξ) ∈ T^σ`, below `Ω₂`). -/
 theorem seVtS_of {n : ℕ} {σ τ : Ordinal.{0}} (hB : Bases σ τ) (h : SeVtHom S n σ) (hU : SeUnc S n σ τ) :
     SeVtS S n σ τ := fun ξ hξ hξ2 => by
   refine h _ ((pi_bijOn hB).1.mapsTo hξ) ?_

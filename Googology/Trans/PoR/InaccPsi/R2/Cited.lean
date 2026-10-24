@@ -86,7 +86,7 @@ axiom Par : Ordinal.{0} → Ordinal.{0} → Finset Ordinal.{0}
 /-- `Tᵗ[σ] := {α ∈ Tᵗ | Parᵗ(α) ⊆ σ}` ([W07a] Def 5.1). -/
 def TB (τ σ : Ordinal.{0}) : Set Ordinal.{0} := {a | a ∈ Tset τ ∧ ↑(Par τ a) ⊆ Set.Iio σ}
 
-/-- `π_{σ,τ} : Tᵗ[σ] → Tᵟ` ([W07a] Def 5.1); written `pi σ τ`.  A constant without
+/-- `π_{σ,τ} : Tᵗ[σ] → T^σ` ([W07a] Def 5.1); written `pi σ τ`.  A constant without
 definition. -/
 axiom pi : Ordinal.{0} → Ordinal.{0} → Ordinal.{0} → Ordinal.{0}
 
@@ -112,7 +112,7 @@ after Def 3.1** (moved here unchanged from `R2.CitedLu`): for bases `σ < τ` an
 
 Literal texts ([W07a]):
 * (P) Def 5.1: "Let `τ ∈ E` and `Tᵗ` be the notation system over `τ`.  Further, let `σ ∈ {1} ∪ (E ∩ τ)`.  We define
-  `Tᵗ[σ] := {α ∈ Tᵗ | Parᵗ(α) ⊆ σ}` and `π_{σ,τ} : Tᵗ[σ] → Tᵟ` by the following clauses: • `π_{σ,τ}(ξ) := ξ` if
+  `Tᵗ[σ] := {α ∈ Tᵗ | Parᵗ(α) ⊆ σ}` and `π_{σ,τ} : Tᵗ[σ] → T^σ` by the following clauses: • `π_{σ,τ}(ξ) := ξ` if
   `ξ < σ` • `π_{σ,τ}(ξ) := π_{σ,τ}(ξ₁) + π_{σ,τ}(ξ₂)` if `ξ =NF ξ₁ + ξ₂ > τ` • `π_{σ,τ}(ξ) := ϑ_k(π_{σ,τ}(η))` if
   `ξ = ϑ_k(η)` for some `k > 0` and `η ∈ Tᵗ[σ] ∩ Ω_{k+2}` • `π_{σ,τ}(ξ) := ϑ^σ(π_{σ,τ}(η))` if `ξ = ϑᵗ(η)` for some
   `η ∈ Tᵗ[σ] ∩ Ω₂`."
@@ -132,7 +132,7 @@ it), and the elements of `P ∖ E` from `Ω₁ = ω^{Ω₁}` on are `ω^{Ω₁+1
 `k = 1 ≥ m = 0`).  By S (third clause, `k = 1 ≥ 0`) and the first clause, `Subᵗ₀(ϑ₁(b)) = {ϑ₁(b), b}`, so
 `Parᵗ(Ω₁·ω^b) = {b}` (`Ω₁·ω^b ≥ Ω₁ > τ`), and `{b} ⊆ σ`: `Ω₁·ω^b ∈ Tᵗ[σ]` (P); also `b ∈ Tᵗ[σ] ∩ Ω₃`
 (`Parᵗ(b) = {b}`).  P, third clause (`ξ = ϑ₁(b)`, `k = 1 > 0`): `π_{σ,τ}(ϑ₁(b)) = ϑ₁(π_{σ,τ}(b))`; P, first clause
-(`b < σ`): `π_{σ,τ}(b) = b`.  So `π_{σ,τ}(Ω₁·ω^b)` is the term `ϑ₁(b)` of `Tᵟ`, and there too `ϑ₁(b) = Ω₁·ω^b` (the
+(`b < σ`): `π_{σ,τ}(b) = b`.  So `π_{σ,τ}(Ω₁·ω^b)` is the term `ϑ₁(b)` of `T^σ`, and there too `ϑ₁(b) = Ω₁·ω^b` (the
 same computation over the base `σ`; Z for `b = 0`). -/
 axiom luOm1_opow_TB {σ τ b : Ordinal.{0}} (h : Bases σ τ) (hb : b < σ) :
     Om1 * ω ^ b ∈ TB τ σ ∧ pi σ τ (Om1 * ω ^ b) = Om1 * ω ^ b
@@ -149,7 +149,7 @@ theorem pi_Om1 {σ τ : Ordinal.{0}} (h : Bases σ τ) : Om1 ∈ TB τ σ ∧ pi
   rwa [opow_zero, mul_one] at this
 
 /-- **[W07a] Lemma 5.3 (b), (d)** (Cor 5.4): `π_{σ,τ}` is a strictly increasing map of `Tᵗ[σ]`
-onto `Tᵟ`. -/
+onto `T^σ`. -/
 axiom pi_bijOn {σ τ : Ordinal.{0}} (h : Bases σ τ) :
     Set.BijOn (pi σ τ) (TB τ σ) (Tset σ) ∧ StrictMonoOn (pi σ τ) (TB τ σ)
 

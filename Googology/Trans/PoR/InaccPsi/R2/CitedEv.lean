@@ -48,7 +48,7 @@ Literal texts used below (all of [W07a] unless said otherwise):
   `η < sup_{σ<η} ϑᵗ(Δ + σ)`, `0` otherwise."  §2: "`logend(α)` is defined to be `0` if `α = 0` and `αₙ` if
   `α =CNF ω^{α₁} + ⋯ + ω^{αₙ}`."
 * (P) Def 5.1: "Let `τ ∈ E` … let `σ ∈ {1} ∪ (E ∩ τ)`.  We define `Tᵗ[σ] := {α ∈ Tᵗ | Parᵗ(α) ⊆ σ}` and
-  `π_{σ,τ} : Tᵗ[σ] → Tᵟ` by the following clauses: … • `π_{σ,τ}(ξ) := ϑ^σ(π_{σ,τ}(η))` if `ξ = ϑᵗ(η)` for
+  `π_{σ,τ} : Tᵗ[σ] → T^σ` by the following clauses: … • `π_{σ,τ}(ξ) := ϑ^σ(π_{σ,τ}(η))` if `ξ = ϑᵗ(η)` for
   some `η ∈ Tᵗ[σ] ∩ Ω₂`."
 * (I) Def 7.1: "Let `α = ϑᵗ(Δ + η)` where `Δ > 0`.  We define `ι_{τ,α} : Tᵗ_α → T^α` by recursion on the
   definition of `Tᵗ` as follows: • `ι_{τ,α}(ξ) := ξ` if `ξ < α` • `ι_{τ,α}(ξ) := ι_{τ,α}(ξ₁) + ι_{τ,α}(ξ₂)` if

@@ -6,7 +6,7 @@ import Googology.Trans.PoR.InaccPsi.LowerT
 
 * `PMs_low`, `M_step_s`, `E_main_s`: Lemma D and Lemma M for the map over `σ`, all sizes;
 * `Bt.low_step` (**Theorem LOW-STEP**): for `A` the sum of a list `L` with `GoodL S L`, a base `σ` with
-  `ψ_{Ω₁}(A) ≤ σ` and `Tᵟ ∩ Ω₁ = M`: `ψ_{Ω₁}(A + θ) ≤ M`; `Br.low_step`: the same for `A = A_{ω·m+n}`;
+  `ψ_{Ω₁}(A) ≤ σ` and `T^σ ∩ Ω₁ = M`: `ψ_{Ω₁}(A + θ) ≤ M`; `Br.low_step`: the same for `A = A_{ω·m+n}`;
 * `Bt.ups_low_step`: `ψ_{Ω₁}(A) ≤ υ_ξ ⇒ ψ_{Ω₁}(A + θ) ≤ υ_{ξ+1}`; `Br.ups_low_step`: for `A = A_{ω·m+n}`;
 * `ups_lower` (**Theorem T-LOW** below `ω²`), `ups_lower_ww`;
 * `ups_eq` (**Theorem T** below `ω²`): `υ_{1+η} = ψ_{Ω₁}(Ω_ω + θ·η)` for `η = ω·m + n`, and `ups_eq_ww`:
@@ -184,7 +184,7 @@ theorem E_DL_s (hσ : Base σ) {x : Term} (hcx : CL S σ L x) : DL S σ L x :=
 /-! ## Theorem LOW-STEP -/
 
 /-- **Theorem LOW-STEP.**  For `A` the sum of a list `L` with `GoodL S L`, a base `σ` with
-`ψ_{Ω₁}(A) ≤ σ`, and `M = Tᵟ ∩ Ω₁`: `ψ_{Ω₁}(A + θ) ≤ M`. -/
+`ψ_{Ω₁}(A) ≤ σ`, and `M = T^σ ∩ Ω₁`: `ψ_{Ω₁}(A + θ) ≤ M`. -/
 theorem low_step (S : InaccSeq.{0}) (L : List Ordinal.{0}) (hL : GoodL S L) {σ M : Ordinal.{0}} (hσ : Base σ)
     (hA : S.psi (AA S L) (Om 1) ≤ σ) (hT : ∀ a, a < Om (1 : Ordinal.{0}) → (a ∈ Tset σ ↔ a < M)) :
     S.psi (AA S L + ConjT.th S) (Om 1) ≤ M := by
@@ -291,7 +291,7 @@ theorem E_DL_s (hσ : Base σ) {x : Term} (hcx : CL S σ m n x) : DL S σ m n x 
 
 /-! ## Theorem LOW-STEP -/
 
-/-- **Theorem LOW-STEP.**  For `A = A_{ω·m+n}`, a base `σ` with `ψ_{Ω₁}(A) ≤ σ`, and `M = Tᵟ ∩ Ω₁`:
+/-- **Theorem LOW-STEP.**  For `A = A_{ω·m+n}`, a base `σ` with `ψ_{Ω₁}(A) ≤ σ`, and `M = T^σ ∩ Ω₁`:
 `ψ_{Ω₁}(A + θ) ≤ M`. -/
 theorem low_step (S : InaccSeq.{0}) (m n : ℕ) {σ M : Ordinal.{0}} (hσ : Base σ)
     (hA : S.psi (AA S m n) (Om 1) ≤ σ) (hT : ∀ a, a < Om (1 : Ordinal.{0}) → (a ∈ Tset σ ↔ a < M)) :
