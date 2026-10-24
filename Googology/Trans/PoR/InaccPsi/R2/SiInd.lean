@@ -1,8 +1,7 @@
 import Googology.Trans.PoR.InaccPsi.R2.SiCnt
 
 /-!
-# The commutation of `B_n` with `π` on the countable terms, asking `ϑ` only at uncountable arguments and `π` only
-# from `Ω₁·Ω₁` on
+# The commutation of `B_n` with `π` on the countable terms, asking `ϑ` only at uncountable arguments
 
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 
@@ -21,13 +20,12 @@ import Googology.Trans.PoR.InaccPsi.R2.SiCnt
 * `siComm_gen` (**THE JOINT INDUCTION, generic: under `SiVtU` at `τ` and `σ`, if each uncountable argument `ξ` has
   `SeComm` once the countable terms below `ϑᵗ(ξ)` have it, then `SeComm` holds at every `z ∈ Tᵗ[σ] ∩ Ω₁`**; arguments
   `ξ < Ω₁` by `Si.siVtHomC`);
-* `SiUncH S n σ τ` (a hypothesis name): the clause `Se.SeUnc` only at `ξ ∈ Tᵗ[σ] ∩ [Ω₁·Ω₁, Ω₂)`; `siComm_all`
-  (`siComm_gen` with `siArgLow` and `SiUncH`), `siUnc_of` (**`SiUncH ⇒ Se.SeUnc`**);
-* `SiPiHom S` (a hypothesis name: `Se.SePiHom2` with `SiVtU` and `SiUncH` in place of `SeVtHom` and `SeUnc`),
-  `siPiHom_iff` (**`SiPiHom S ↔ Se.SePiHom2 S`**), `siPiComm` (`⇒ Rt.RtPiComm`), `siLhTopE` (`⇒ Rk.RkLhTopE`),
-  `siLhEps` (`⇒ Tp.TpLhEps`), `siRoadE_nu` (the road `Se.seRoadE_nuHom2` with `SiPiHom`).
 
-No new axiom.  New definitions: the hypothesis names `SiVtU`, `SiUncH`, `SiPiHom`.
+The `Ω₁·Ω₁` version of the hypothesis (`SiUncH`, `SiPiHom`, `siComm_all`, `siUnc_of`, `siPiHom_iff`, `siPiComm`,
+`siLhTopE`, `siLhEps`, `siRoadE_nu`) was dropped: it is superseded by `SiUncHE`, `SiPiHomE` and their consequences in
+`R2.SiUnc` (`SiPiHomE ↔ Se.SePiHom2`), and nothing used it.
+
+No new axiom.  New definition: the hypothesis name `SiVtU`.
 -/
 
 set_option autoImplicit false
@@ -173,12 +171,6 @@ theorem siUncLow {n : ℕ} {σ τ b e : Ordinal.{0}} (h : Bases σ τ) (hτc : �
 
 /-! ## The joint induction -/
 
-/-- **`B_n` commutes with the base changes on `Tᵗ[σ] ∩ [Ω₁·Ω₁, Ω₂)`**, and `B_n ξ`, `π ξ` stay below `Ω₂`
-(a hypothesis name: the clause `Se.SeUnc` from `Ω₁·Ω₁` on). -/
-def SiUncH (S : InaccSeq.{0}) (n : ℕ) (σ τ : Ordinal.{0}) : Prop :=
-  ∀ ξ ∈ TB τ σ, Om1 * Om1 ≤ ξ → ξ < OmTwo →
-    Bc.bcB S n ξ < OmTwo ∧ pi σ τ ξ < OmTwo ∧ Se.SeComm S n σ τ ξ
-
 /-- **The arguments `ξ = Ω₁·b + e < Ω₁·Ω₁`**: `SeComm` at `ξ` from `SeComm` at the countable terms below `ϑᵗ(ξ)`
 (`b, e < ϑᵗ(ξ)` by [W07a] Lemma 3.30: `lvLevel_lt_vt` for `b ≥ τ`, `luLt_vt_self` for `b < τ`; then `siUncLow`). -/
 theorem siArgLow {n : ℕ} {σ τ ξ : Ordinal.{0}} (hB : Bases σ τ) (hτc : τ < Bc.bcC S (n + 1))
@@ -287,69 +279,5 @@ theorem siComm_gen {n : ℕ} {σ τ : Ordinal.{0}} (hB : Bases σ τ)
     refine ⟨by rw [hBz]; exact hsumTB, ?_⟩
     rw [hBz, hsumπ, hLπ, hqπ, ← Bc.bcB_add (hπL L hLTB hL1) (hπL q hqTB hq1), ← hzLq,
       (pi_add hB0 hLTB hqTB).2]
-
-/-- **THE JOINT INDUCTION**: under `SiVtU` at `τ` and at `σ` and `SiUncH`, `SeComm` holds at every
-`z ∈ Tᵗ[σ] ∩ Ω₁` (`siComm_gen`; the arguments `ξ < Ω₁·Ω₁` by `siArgLow`). -/
-theorem siComm_all {n : ℕ} {σ τ : Ordinal.{0}} (hB : Bases σ τ)
-    (hτc : τ < Bc.bcC S (n + 1)) (hVT : SiVtU S n τ) (hVS : SiVtU S n σ) (hU : SiUncH S n σ τ) :
-    ∀ z ∈ TB τ σ, z < Om1 → Se.SeComm S n σ τ z :=
-  siComm_gen hB hτc hVT hVS fun ξ hξ hξ1 hξ2 hC => by
-    rcases lt_or_ge ξ (Om1 * Om1) with hξ11 | hξ11
-    · exact siArgLow hB hτc hξ hξ1 hξ11 hC
-    · exact hU ξ hξ hξ11 hξ2
-
-/-- **`SiUncH` gives `Se.SeUnc`** once `SeComm` holds on the countable terms (on `[Ω₁, Ω₁·Ω₁)` by `siArgLow`). -/
-theorem siUnc_of {n : ℕ} {σ τ : Ordinal.{0}} (hB : Bases σ τ) (hτc : τ < Bc.bcC S (n + 1))
-    (hC : ∀ z ∈ TB τ σ, z < Om1 → Se.SeComm S n σ τ z) (hU : SiUncH S n σ τ) : Se.SeUnc S n σ τ := by
-  intro ξ hξ hξ1 hξ2
-  rcases lt_or_ge ξ (Om1 * Om1) with h | h
-  · exact siArgLow hB hτc hξ hξ1 h fun w hw hw1 _ => hC w hw hw1
-  · exact hU ξ hξ h hξ2
-
-/-! ## The hypothesis and its consequences -/
-
-/-- **`Se.SePiHom2` asking `ϑ` only at uncountable arguments and `π` only from `Ω₁·Ω₁` on** (a hypothesis name):
-every non-`υ` point `x ∈ [c_n, c_{n+1})` has bases `σ < τ` as in `Se.seBases` with `SiVtU` at `τ` and at `σ` and
-`SiUncH`. -/
-def SiPiHom (S : InaccSeq.{0}) : Prop :=
-  ∀ n : ℕ, ∀ x, Bc.bcC S n ≤ x → x < Bc.bcC S (n + 1) → ¬ UpsPt x →
-    ∃ σ τ, Bases σ τ ∧ LtInf1 τ ∧ τ < x ∧ x ∈ TB τ σ ∧ SiVtU S n τ ∧ SiVtU S n σ ∧ SiUncH S n σ τ
-
-/-- **`SiPiHom S ↔ Se.SePiHom2 S`**: the countable arguments of `ϑ` and the arguments `ξ < Ω₁·Ω₁` of `π` are
-theorems. -/
-theorem siPiHom_iff : SiPiHom S ↔ Se.SePiHom2 S := by
-  constructor
-  · intro h n x hc hx hU
-    obtain ⟨σ, τ, hB, hτL, hτx, hxT, hT, hS, hUn⟩ := h n x hc hx hU
-    have hτc : τ < Bc.bcC S (n + 1) := hτx.trans hx
-    exact ⟨σ, τ, hB, hτL, hτx, hxT, siVtHom_of hB.2.1 hτc hT, siVtHom_of hB.1 (hB.2.2.1.trans hτc) hS,
-      siUnc_of hB hτc (siComm_all hB hτc hT hS hUn) hUn⟩
-  · intro h n x hc hx hU
-    obtain ⟨σ, τ, hB, hτL, hτx, hxT, hT, hS, hUn⟩ := h n x hc hx hU
-    exact ⟨σ, τ, hB, hτL, hτx, hxT, fun η hη _ hη2 => hT η hη hη2, fun η hη _ hη2 => hS η hη hη2,
-      fun ξ hξ hξ1 hξ2 => hUn ξ hξ ((Ordinal.le_mul_right Om1 Rj.rj_Om1_pos).trans hξ1) hξ2⟩
-
-/-- **`SiPiHom` gives `Rt.RtPiComm`.** -/
-theorem siPiComm (h : SiPiHom S) : Rt.RtPiComm S := Se.sePiComm (Se.sePiHom_of (siPiHom_iff.1 h))
-
-/-- **`SiPiHom` gives `Rk.RkLhTopE`.** -/
-theorem siLhTopE (h : SiPiHom S) : Rk.RkLhTopE S := Se.seLhTopE2 (siPiHom_iff.1 h)
-
-/-- **`SiPiHom` gives `Tp.TpLhEps`.** -/
-theorem siLhEps (h : SiPiHom S) : Tp.TpLhEps S := Se.seLhEps (Se.sePiHom_of (siPiHom_iff.1 h))
-
-/-- **The road `Se.seRoadE_nuHom2` with `SiPiHom`.** -/
-theorem siRoadE_nu (hU : ∀ l, Cd.CdRange S l → Bt.iota S Ge.geV ≤ l → Cd.CdUpper S l)
-    (hL : ∀ l, Cd.CdRange S l → Bt.iota S Ge.geV ≤ l → Cd.CdLower S l)
-    (hV : ∀ l, Cd.CdRange S l → upsilon l < Nc.ncL S ω → Bt.iota S Ge.geV ≤ l → Cd.CdCapV S l)
-    (hEQ : Cd.CdEQ S) (hν : Nc.ncL S (ω + 1) ≤ nuC) (hpi : SiPiHom S)
-    (hT : Cx.CxT S) (hcl : ∀ n : ℕ, le1 (Bc.bcC S n) (Bc.bcC S (n + 1))) :
-    Cd.CdTC S ∧ Cd.CdEMB2 S ∧ Cd.CdCL S ∧ Cd.CdC1 S ∧
-      nuC = Nc.ncL S (ω + 1) ∧ Nc.ncL S ω ≤ nuC ∧ le2 (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
-      Nc.NcCofPred (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
-      ¬ le1 (Nc.ncL S ω) (Nc.ncL S (ω + 1) + 1) ∧
-      IsReach R2C (Nc.ncL S ω) (Nc.ncL S (ω + 1)) ∧
-      ∀ k : ℕ, IsReach R2C (Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0})) (Nc.ncL S (ω + 1)) :=
-  Se.seRoadE_nuHom2 hU hL hV hEQ hν (siPiHom_iff.1 hpi) hT hcl
 
 end Googology.Trans.PoR.InaccPsi.R2.Si
