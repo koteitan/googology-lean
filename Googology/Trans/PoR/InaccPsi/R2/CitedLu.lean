@@ -133,8 +133,8 @@ by the third clause of T with `k = 1 ≥ m = 0` and `b ∈ T₀ ∩ Ω₃` (`b <
 ϑ₀(0) ∈ T₀`).  For `b = 1` this is the axiom `vzOm1w_T` of `R2.CitedVz`. -/
 axiom luOm1_opow_T {τ b : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hb : b ≤ τ) : Om1 * ω ^ b ∈ Tset τ
 
-/-! The base-change axiom `luOm1_opow_TB` (`Ω₁·ω^b ∈ Tᵗ[σ]`, `π_{σ,τ}(Ω₁·ω^b) = Ω₁·ω^b` for `b < σ`) is stated in
-`R2.Cited`, so that `pi_Om1` (its case `b = 0`) is a theorem there. -/
+/-! The base-change fact `luOm1_opow_TB` (`Ω₁·ω^b ∈ Tᵗ[σ]`, `π_{σ,τ}(Ω₁·ω^b) = Ω₁·ω^b` for `b < σ`) is a theorem in
+`R2.Cited` (from the cited axiom `om1_opow_TB_all`), so that `pi_Om1` (its case `b = 0`) is a theorem there. -/
 
 /-- **[W07a] Lemma 3.30, the direction `⇐`, with Def 3.28** (texts L, S, U, ★1, ★β): for levels `β', β < τ` and
 `η', η ∈ Tᵗ ∩ Ω₁` with `Ω₁·β' + η' < Ω₁·β + η` and `η' < ϑᵗ(Ω₁·β + η)`: `ϑᵗ(Ω₁·β' + η') < ϑᵗ(Ω₁·β + η)`.

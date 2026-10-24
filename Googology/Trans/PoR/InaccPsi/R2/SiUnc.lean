@@ -18,7 +18,7 @@ largest countable leaf of the hereditary Cantor normal form of a code `ξ < ε_{
 * `siComm_add` (`SeComm` is closed under `+` on `Tᵗ[σ]`);
 * `siUncE` (**THE INNER INDUCTION: if `SeComm` holds at the countable `w ∈ Tᵗ[σ]` with `w ≤ D < c_{n+1}`, then it holds
   at every `ξ ∈ Tᵗ[σ] ∩ [Ω₁, ε_{Ω₁+1})` with `rjDat ξ ≤ D`**, with `π ξ < ε_{Ω₁+1}`: the leading component `ω^g =
-  Ω₁·ω^b` by the cited `siOm1_opow_TB` and the induction hypothesis at `b`, finite multiples and the remainder by
+  Ω₁·ω^b` by `siOm1_opow_TB` (a theorem from the cited `om1_opow_TB_all`) and the induction hypothesis at `b`, finite multiples and the remainder by
   `siComm_add`);
 * `SiUncHE S n σ τ` (a hypothesis name: the clause `Se.SeUnc` only from `ε_{Ω₁+1}` on), `siComm_allE` (**THE JOINT
   INDUCTION with `SiVtU` at `τ`, `σ` and `SiUncHE`**: a `ϑᵗ`-term `z = ϑᵗ(Ω₁·M + η)`, `Ω₁ ≤ M < ε_{Ω₁+1}`, has
@@ -26,7 +26,7 @@ largest countable leaf of the hereditary Cantor normal form of a code `ξ < ε_{
 * `SiPiHomE S` (a hypothesis name: `Se.SePiHom2` with `SiVtU` and `SiUncHE`), `siPiHomE_iff` (**`SiPiHomE S ↔
   Se.SePiHom2 S`**), `siPiCommE`, `siLhTopEE` (**`SiPiHomE ⇒ Rk.RkLhTopE`**), `siLhEpsE`, `siRoadE_nuE`.
 
-New axiom: `siOm1_opow_TB` (in `R2.CitedSi`).  New definitions: the hypothesis names `SiUncHE`, `SiPiHomE`.
+No new axiom (`siOm1_opow_TB` is a theorem from the cited `R2.om1_opow_TB_all`).  New definitions: the hypothesis names `SiUncHE`, `SiPiHomE`.
 -/
 
 set_option autoImplicit false
@@ -529,7 +529,7 @@ def SiPiHomE (S : InaccSeq.{0}) : Prop :=
     ∃ σ τ, Bases σ τ ∧ LtInf1 τ ∧ τ < x ∧ x ∈ TB τ σ ∧ SiVtU S n τ ∧ SiVtU S n σ ∧ SiUncHE S n σ τ
 
 /-- **`SiPiHomE S ↔ Se.SePiHom2 S`**: the countable arguments of `ϑ` and the arguments `ξ < ε_{Ω₁+1}` of `π` are
-theorems (with the cited `siOm1_opow_TB`). -/
+theorems (with `siOm1_opow_TB`, from the cited `om1_opow_TB_all`). -/
 theorem siPiHomE_iff : SiPiHomE S ↔ Se.SePiHom2 S := by
   constructor
   · intro h n x hc hx hU
