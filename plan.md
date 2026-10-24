@@ -6,7 +6,7 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
       - done (no hypotheses): the frontier ι(Γ_{Ω₁+1+ζ_{Ω₁+1}}); its P is below L(0) = m*. 102 cited axioms, all audited.
       - road (with hypotheses): if UPPER, LOWER and cap hold at restarts above the frontier, plus CL, EQ and others, then ν_C = L(ω+1), L(ω) <₂ L(ω+1).
       - left 1 (frontier): the code ζ_{Ω₁+1} and above, ϑˣ-readings, ι(Ω₂) to L(0), then [L(0), L(ω+1)).
