@@ -34,7 +34,7 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.I
 variable {S : InaccSeq.{0}}
 
 
-/-- The levels condition on `x` below `q`: every level `j < Γ_{Ω₁+1}` of `x` has `tcDatL j < q`. -/
+/-- The levels condition on `x` below `q`: every level `j < Γ'` of `x` has `tcDatL j < q`. -/
 def TcLev (q x : Ordinal.{0}) : Prop :=
   ∀ j, j < lgGam' → x / Le.leOe j % Om 1 ≠ 0 → tcDatL j < q
 
@@ -49,7 +49,7 @@ theorem tc_Om1_mul_succ_lt {j : Ordinal.{0}} (hj : j < lgGam') : Om 1 * j + Om 1
   rw [← mul_add_one]
   exact tc_G'_inE.mul_lt tc_Om1'_lt_G' (tc_G'_inE.add_lt hj (gg_one_lt_of_SC tc_SC_G'))
 
-/-- **A level `j < Γ_{Ω₁+1}` of `ω^y` is `y / Ω₁`, and `y < Γ_{Ω₁+1}`.** -/
+/-- **A level `j < Γ'` of `ω^y` is `y / Ω₁`, and `y < Γ'`.** -/
 theorem tc_dig_opow_lvl {j y : Ordinal.{0}} (hj : j < lgGam') (h : ω ^ y / Le.leOe j % Om 1 ≠ 0) :
     y / Om 1 = j ∧ y < lgGam' := by
   obtain ⟨hlo, hhi⟩ := ri_dig_opow_ne h
@@ -176,12 +176,12 @@ theorem tc_diglev {a q : Ordinal.{0}} (hq : SC q)
 /-- `q` is closed under every `Φ_j`, `j < μ`, with `tcDatL j < q`. -/
 def TcClo (μ q : Ordinal.{0}) : Prop := ∀ j < μ, tcDatL j < q → ∀ z < q, tcP j z < q
 
-/-- **CL(μ)** for `ssP`. -/
+/-- **CL(μ)** for `tcP`. -/
 def TcCL (S : InaccSeq.{0}) (μ : Ordinal.{0}) : Prop :=
   ∀ B e q : Ordinal.{0}, Le.leOe μ ∣ B → SC q → TcClo μ q → S.psi B (Om 1) < q → e < Le.leOe μ →
     RiDg q e → TcLev q e → S.psi (B + e) (Om 1) < q
 
-/-- **UB(μ)** for `ssP`: `ψ_{Ω₁}(B + u_μ·D) ≤ Φ_μ(c + D)` for `u_μ ∣ B`, `ψ_{Ω₁}(B) ≤ Φ_μ(c)`, `D ≤ Ω₁`. -/
+/-- **UB(μ)** for `tcP`: `ψ_{Ω₁}(B + u_μ·D) ≤ Φ_μ(c + D)` for `u_μ ∣ B`, `ψ_{Ω₁}(B) ≤ Φ_μ(c)`, `D ≤ Ω₁`. -/
 def TcUB (S : InaccSeq.{0}) (μ : Ordinal.{0}) : Prop :=
   ∀ B c D : Ordinal.{0}, Le.leOe μ ∣ B → S.psi B (Om 1) ≤ tcP μ c → D ≤ Om 1 →
     S.psi (B + Le.leOe μ * D) (Om 1) ≤ tcP μ (c + D)

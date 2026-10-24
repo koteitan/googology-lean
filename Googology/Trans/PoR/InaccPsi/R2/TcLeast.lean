@@ -29,7 +29,7 @@ variable {S : InaccSeq.{0}}
 
 
 /-- **The first value of `Φ_μ` above `m`**: for an own `K` with `ψ_{Ω₁}(K) ≤ m < ψ_{Ω₁}(K + 1)` and `tcDatL μ ≤ m`
-(`μ < Γ_{Ω₁+1}`), `ψ_{Ω₁}(K + u_μ)` is a value of `Φ_μ` above `m`, below every value of `Φ_μ` above `m`; `K + u_μ` is
+(`μ < Γ'`), `ψ_{Ω₁}(K + u_μ)` is a value of `Φ_μ` above `m`, below every value of `Φ_μ` above `m`; `K + u_μ` is
 own. -/
 theorem tc_least {μ K m : Ordinal.{0}} (hμG : μ < lgGam')
     (hown : K ∈ S.CSet K (S.psi K (Om 1)))

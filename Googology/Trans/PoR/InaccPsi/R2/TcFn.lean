@@ -220,7 +220,7 @@ def TcFWD (S : InaccSeq.{0}) (μ : Ordinal.{0}) : Prop :=
   ∀ B : Ordinal.{0}, B ∈ S.CSet B (S.psi B (Om 1)) → Le.leOe (μ + 1) ∣ B → B ≠ 0 →
     tcDatL μ < S.psi B (Om 1) → tcP μ (S.psi B (Om 1)) = S.psi B (Om 1)
 
-/-- **FWD(μ) at every level `μ < Γ_{Ω₁+1}` of `tcP`** (the proof of `Rk.rk_fwd`, codes read by `ss_cl_iff`). -/
+/-- **FWD(μ) at every level `μ < Γ'` of `tcP`** (the proof of `Rk.rk_fwd`, codes read by `ss_cl_iff`). -/
 theorem tcFwdAll (μ : Ordinal.{0}) : μ < lgGam' → TcFWD S μ := by
   induction μ using WellFoundedLT.induction with
   | ind μ IH =>
