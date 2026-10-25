@@ -74,7 +74,7 @@ they are `< E₂·2 < θⁿ₂`, since `E₂ = ϑⁿ₂(ϑⁿ₃(0))`: `C(Ω₃,
   and `ϑ₁(ξ) = W₂(γ', c') < v` (i.h., Ψ2).  Sums: `v` is additively principal; `u + (Ω₂² + w) = Ω₂² + w` for `u <
   Ω₂²`; sums of members of `[Ω₂², E₂)` stay in it with components in `v` (◇C).  So `C(ζ, v) ∩ Ω₂ ⊆ v` and D gives
   `ϑ₁(ζ) ≤ v`.  `≥`: suppose `ξ₀ := ϑ₁(ζ) < v`.  By D and B (a), `ζ ∈ C(ζ, ξ₀)` and `ξ₀ = C(ζ, ξ₀) ∩ Ω₂`; as in ◇Φ,
-  `Ω₁ < ξ₀` and `ξ₀` is strongly critical.  By B (c) the base-`ω` components `ϑ₂(1 + α)` of `ζ` are in `C`, hence (L,
+  `Ω₁ < ξ₀` and `ξ₀` is strongly critical.  By B (c) the base-`ω` components `ϑ₂(α)` of `ζ` are in `C`, hence (L,
   injectivity, `m = 2`) their arguments, hereditarily, and the exponents `δ` of ◇C are in `C ∩ Ω₂ = ξ₀`; so
   `comps(γ) ⊆ ξ₀` (`ξ₀` is an `ε`-number, `d = Σ ω^δ·k < ξ₀`), `C(γ) < ξ₀`, and `c < ξ₀`.  For `(γ', c') < (γ, c)`
   lexicographically with `C(γ'), c' < ξ₀`: `Ω₂·(Ω₂ + γ') + c' ∈ C ∩ ζ` (◇C), so `W₂(γ', c') = ϑ₁(Ω₂·(Ω₂ + γ') + c') <
