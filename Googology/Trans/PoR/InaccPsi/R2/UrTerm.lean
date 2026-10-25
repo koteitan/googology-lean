@@ -86,7 +86,8 @@ def WFr (τ : Ordinal.{0}) : {k : Bool} → UnT k → Prop
 open Classical in
 /-- **The translation `t^a_b` of [W07a] Def 6.2 at every level** (`ϑ^a(0) ↦ a`, `ϑ^a(1 + ξ) ↦ ϑ^b(1 + a + ξ)`,
 `ϑ^a(Ω₁·q + ρ) ↦ ϑ^b(Ω₁·q + a + ρ)`; `ϑ^a(Γ + ρ) ↦ ϑ^b(Γ + a + ρ)` at a low level, `ϑ^a(Γ + ρ) ↦ ϑ^b(Γ + ρ)`
-otherwise, the leaves of `Γ` translated). -/
+otherwise, the leaves of `Γ` translated).  The syntax test `LoL a G` agrees with the printed condition
+"`Γ^* < α`" only under `HdD`; every use (`urTrA`, `urTrB`) assumes `HdD`. -/
 noncomputable def trr (a : Ordinal.{0}) : {k : Bool} → UnT k → UnT k
   | _, .par p => .par p
   | _, .add s t => .add (trr a s) (trr a t)
