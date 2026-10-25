@@ -6,12 +6,12 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
-      - done (only S assumed): frontier ι(Γ(φ(ω, G+1))) ≤ ι(Ω₂) (G = Γ_{Ω₁+1}), P < L(0) = m*; Φ_μ (μ ≤ B₂): CL, UB, EQ; H^s for all finite s. 104 axioms.
+    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+      - done (only S assumed): frontier ι(Γ(φ(ω, G+ε₀))) ≤ ι(Ω₂) (G = Γ_{Ω₁+1}), P < L(0) = m*; Φ_μ (μ ≤ B₂): CL, UB, EQ; all finite H^s. 104 axioms.
       - 4 roads, not yet one (hyp.: UPPER, LOWER, cap above frontier, CL, EQ, TopFrom/Unc in [B₂, Ω₂), UdAtMove25, …): ν_C = L(ω+1), L(ω) <₂ L(ω+1).
-      - left 1 (frontier): the wall φ(ω, G+1) is proved; next IMG at Veblen level ω, a bound past B_ω, level ω as codes, atoms Γ(c), offsets ≥ Γ_{x+2}.
-      - left 2 (CL): hull iso at Ω₁·M < ε_{Ω₁+1} for rjDat M < κ and ≥ κ (one layer of level terms); left: nested levels, Γ ≥ ε_{Ω₁+1}, TkSucc, EQ, supply.
-      - left 3 (moves): T < Y₃, levels past Γ₂ (hyp.: restart index); lifted H below Ω_{s+2} (hyp.: UlDV); left: UlDV, Y₃, θ and its citation, join roads.
+      - left 1 (frontier): IMG at every constant Veblen level (hyp.: restart context); next offsets ≥ ε₀ or read by codes, IMG at level ρ, code levels.
+      - left 2 (CL): nested level terms in normal form, terms from ordinal data; left: gap levels, reach values, Γ ≥ ε_{Ω₁+1}, TkSucc, EQ, supply.
+      - left 3 (moves): T < Y₃, levels past Γ₂ for E < Γ₂ (hyp.: restart index), lifted H with no UlDV; left: prefix past Γ₂ to Y₃, θ₁ = θ, join roads.
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
