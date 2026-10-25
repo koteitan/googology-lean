@@ -6,7 +6,7 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
 
 - Wilken の主張：Core(R₂⁺) = ψ_{Ω₁}(I_ω)（[Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README-ja.md)）
   - Lean：Wilken の系と InaccPsi の間の写像
-    - R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
+    - 🤖 R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
       - 済み（仮定は S だけ）：前線 ι(Γ(ζ_{Γ_{Ω₁+1}+2})) は ι(Ω₂) 以下、P < L(0) = m*。μ ≤ X の Φ_μ で CL、UB、CONV。φ(Ω₂+1,0) 未満で step。公理は 101 個。
       - 道（仮定：前線より上で UPPER、LOWER、cap、[X, Ω₂) で TopFrom/Unc、CL、EQ、UaAtMove24 など）：ν_C = L(ω+1) と L(ω) <₂ L(ω+1)。
       - 残り 1（前線）：ζ_{G+n} → ζ_{G+n+1}（G = Γ_{Ω₁+1}）の step を n について一般にして ζ_{G+ω} へ。その先は極限の不動点 ζ_{G+λ} での IMG。
