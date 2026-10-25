@@ -21,7 +21,7 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 open Ordinal
 
 /-- **[W07a] Definition 6.2 and Lemma 6.3 (p. 148–149), with Definition 5.1 and Lemma 5.3 (p. 144), Convention 4.1
-(p. 142), Lemma 4.3 (p. 142–143), Definition 3.22 (p. 139), the Remark after Corollary 3.24 (p. 140), Definition 3.28
+(p. 142), Lemma 4.3 (p. 142), Definition 3.22 (p. 139), the Remark after Corollary 3.24 (p. 140), Definition 3.28
 (p. 141), Lemma 3.30 (p. 142), Definition 6.1 (p. 148).**  For bases `σ < τ`, `n ≥ 1`, `α = ϑᵗ(Δₙ)`, `α' = ϑ^σ(Δₙ)`
 and `y ∈ T^α[σ]` with `α ≤ y < α⁺`: `π_{σ,τ}(y) ∈ T^{α'}[σ]` and `π_{σ,α'}(π_{σ,τ}(y)) = π_{σ,α}(y)`.
 
@@ -129,8 +129,8 @@ Our steps.
   t(ρ)` (IH); `t(ζ)` and `ζ` both have one.  (ii): `q(ζ) = ϑ^σ(q ν)` (P, fourth clause; `ν ∈ Tᵗ[σ] ∩ Ω₂`) with
   `q ν = α' + (−1 + q ρ)` (A; `q` fixes natural numbers and keeps `≥ ω`, Π b), `q Γ + α' + q ρ` (B), `q Γ + q ρ` (C′)
   (Π c, ★1a); `q(ζ) ∈ (α', α'⁺)` (Π b, ★1a).  Per C, `q ν = Γ' + ρ'` with `Γ' = q Γ` (`q` maps the `ϑ₁`-terms of `Γ`
-  to `ϑ₁`-terms, ★0, additive principal `≥ Ω₁` by L, hence multiples of `Ω₁`; `Γ' = 0 ⇔ Γ = 0`) and `ρ' = α' + (−1 +
-  q ρ)`, `α' + q ρ`, `q ρ` (countable, Π "intervals").  The subcase of `t'` (6.2, first part, at `(σ, α')`) matches:
+  to `ϑ₁`-terms, ★0, additive principal `≥ Ω₁` by L, hence multiples of `Ω₁`; `Γ' = 0 ⇔ Γ = 0`; `Γ' < Δ` from
+  `Γ < Δ`, Π b and `q(Δ) = Δ`) and `ρ' = α' + (−1 + q ρ)`, `α' + q ρ`, `q ρ` (countable, Π "intervals").  The subcase of `t'` (6.2, first part, at `(σ, α')`) matches:
   `Γ' = 0 ⇔ (A)`; for `Γ > 0`, `Γ'^{*σ}` is `0` or the value of a `ϑ^σ`-subterm of `q̂(t Γ)` (★0), these values lie in
   `[α', α'⁺)` (IH (i) for `Γ`, Π b), so `Γ'^{*σ} ≥ α' ⇔ t(Γ)` has a `ϑᵗ`-subterm `⇔ Γ` has a `ϑ^α`-subterm (IH (i))
   `⇔ Γ^{*α} ≥ α` (★0: `P^α₀(Γ)` = its `ϑ^α`-subterms, values `≥ α`).  The three subcases of `t'` give
