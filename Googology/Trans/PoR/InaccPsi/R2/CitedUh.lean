@@ -1,4 +1,5 @@
 import Googology.Trans.PoR.InaccPsi.R2.CitedRj
+import Googology.Trans.PoR.InaccPsi.R2.UrTr
 
 set_option autoImplicit false
 
@@ -7,7 +8,8 @@ set_option autoImplicit false
 
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 
-One axiom, `uhVt_tr`: the statement of `R2.ueVt_tr` with the countable level `1 ≤ q < τ` replaced by a code `1 ≤ M <
+Formerly one axiom, now the theorem `uhVt_tr` (proved as `R2.Ur.urVt_tr_uh` from the axiom `R2.urVt_tr2`):
+the statement of `R2.ueVt_tr` with the countable level `1 ≤ q < τ` replaced by a code `1 ≤ M <
 ε_{Ω₁+1}` (`Gg.ggE`) whose countable data `Rj.rjDat M` (the largest countable leaf of the hereditary Cantor normal form
 of `M` over `{0, Ω₁}`) is below `τ`.  For `M < Ω₁`, `rjDat M = M`, so `R2.ueVt_tr` is the special case (proved there as
 a theorem from `uhVt_tr`).  It is the same printed subcase ("`Γ > 0` and `Γ^* < α`") of both translations of [W07a] Def
@@ -132,11 +134,12 @@ Our steps.
   ϑ^α(Ω₁·M + ρ)`.
 * (Remark) At `n = 1`, `Δ₁ = Ω₁ ≤ Γ`, so `ϑ^α(Γ + ρ) ≥ ϑ^α(Δ) = α⁺` (L) and both parts are vacuous; for `n ≥ 2`,
   `Δₙ ≥ ϑ₁(Ω₂) ≥ ε_{Ω₁+1} > Γ`. -/
-axiom uhVt_tr {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {n : ℕ} (hn : 1 ≤ n) {M ρ : Ordinal.{0}}
+theorem uhVt_tr {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {n : ℕ} (hn : 1 ≤ n) {M ρ : Ordinal.{0}}
     (hM1 : 1 ≤ M) (hME : M < Gg.ggE) (hMτ : Rj.rjDat M < τ) (hρ1 : ρ < Om1) :
     (Om1 * M + ρ ∈ Tset (Dl τ n) → vt (Dl τ n) (Om1 * M + ρ) < Dp τ n →
       vt (Dl τ n) (Om1 * M + ρ) = vt τ (Om1 * M + (Dl τ n + ρ))) ∧
     (Om1 * M + (Dl τ n + ρ) ∈ Tset τ → vt τ (Om1 * M + (Dl τ n + ρ)) < Dp τ n →
-      vt τ (Om1 * M + (Dl τ n + ρ)) = vt (Dl τ n) (Om1 * M + ρ))
+      vt τ (Om1 * M + (Dl τ n + ρ)) = vt (Dl τ n) (Om1 * M + ρ)) :=
+  Ur.urVt_tr_uh hτ hτ1 hn hM1 hME hMτ hρ1
 
 end Googology.Trans.PoR.InaccPsi.R2
