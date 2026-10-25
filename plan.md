@@ -6,12 +6,12 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
-      - done (no hypotheses): frontier ι(Γ_{ε_{Γ_{Ω₁+1}+Γ₀}}) ≤ ι(Ω₂), P < L(0) = m*; B_n moves ψ_{Ω₂}(c), c < B_Γ; ϑ_1 cited to X > B_Γ. 100 axioms, audited.
-      - road (with hypotheses): UPPER, LOWER, cap above the frontier, TopFrom/Unc in [B_Γ, Ω₂), CL, EQ, TjAtMove17 etc. give ν_C = L(ω+1), L(ω) <₂ L(ω+1).
-      - left 1 (frontier): it fails at index Γ₀ (proved); a gated code system and frontier lemma, indices Ω₁ ↦ x, Veblen levels ≥ 2, atoms Γ(c), then L(ω+1).
-      - left 2 (CL): CL ⇔ one step per block (TkSucc); it needs base changes composed over all segments, EQ of the closed points, non-pure offsets, r(μ).
-      - left 3 (moves): link ψ_{Ω₂} to F_β to move atoms up to X; ϑ_1 steps to Ω₂; a code-only limit rule at level Ω₂; then ψ₃-atoms, θ, RnThMoveM, RnEQhi2.
+    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+      - done (no hypotheses): frontier ι(Γ_{ε_{Γ_{Ω₁+1}+ζ_{Γ₀+1}}}) ≤ ι(Ω₂), P < L(0) = m*; ψ_{Ω₂} = F_β at every level β; ψ_{Ω₂}(Ω₂^{Ω₂}) = X. 100 axioms.
+      - road (with hypotheses): UPPER, LOWER, cap above the frontier, TopFrom/Unc in [B_Γ, Ω₂), CL, EQ, TnAtMove18 etc. give ν_C = L(ω+1), L(ω) <₂ L(ω+1).
+      - left 1 (frontier): it stops at index ζ_{Γ₀+1} (base fields asked at every base), then Γ₁; indices Ω₁ ↦ x, Veblen levels ≥ 2, atoms Γ(c), L(ω+1).
+      - left 2 (CL): TkSucc; the carry over all segments is proved under TrInner (open: needs [W07a] §6 on terms); EQ of closed points, non-pure offsets, r(μ)
+      - left 3 (moves): B_n e for uncountable β, Φ_μ on [B_Γ, X); ϑ_1 past Ω₂²·2; level-2 prefixes φ(Ω₂,1)+Ω₂³ to ψ₃(0); ψ₃-atoms, θ, RnThMoveM, RnEQhi2.
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
