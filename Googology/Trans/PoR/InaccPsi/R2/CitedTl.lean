@@ -1,9 +1,15 @@
-import Googology.Trans.PoR.InaccPsi.R2.TlDat
+import Googology.Trans.PoR.InaccPsi.R2.CitedUc
 
 set_option autoImplicit false
 
 /-!
 # The generic citation of Wilken 2007: Lemma 3.30, Def 3.28, Def 5.1 / Lemma 5.3 ONCE for every level `Ω₁ ≤ M < X`
+
+**Round 98: this file has no axiom left.**  The eight facts below are theorems: the instances `M < X` (and the atoms
+`F_β(y) < X`, the codes below `X`) of the generic citation `R2.CitedUc` (levels `Ω₁ ≤ M < B₂`, `X < B₂ < Ω₂`,
+`Uc.uc_X_lt_B`), with `Uc.ucDat = Tl.tlDat` below `X` (`Uc.ucDat_lt_X`) and the parts of an atom `F_β(y) < X` equal to
+`{β, y}` (`Uc.ucParts_F`, `Uc.ucRebuild_F`).  The literal texts and steps below are kept as their reading;
+`R2.CitedUc` states them once for every level below `B₂`.
 
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 
@@ -136,8 +142,10 @@ open Ordinal
 Our steps.  ◇Δ′ of the module docstring: `Ω₁·M ∈ Tᵗ` by ◇V′ (V1) (the canonical term of ◇K′, built by T from the
 countable parts, `≤` the leaves, which lie in the initial segment `θᵗ`, the atoms `ϑ₁(ϑ₂(ϑ₂(0)) + Σ ϑ₂(l_i)·k_i +
 c)`), and `Ω₁·M + η ∈ Tᵗ` (T, second clause). -/
-axiom tlArg_mem {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hMX : M < Tl.tlX)
-    (hMT : Tl.tlDat M ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1) : Om1 * M + η ∈ Tset τ
+theorem tlArg_mem {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hMX : M < Tl.tlX)
+    (hMT : Tl.tlDat M ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1) : Om1 * M + η ∈ Tset τ := by
+  rw [← Uc.ucDat_lt_X hMX] at hMT
+  exact ucArg_mem hτ hτ1 hM1 (hMX.trans Uc.uc_X_lt_B) hMT hη hηΩ
 
 /-- **[W07a] Def 3.22, Theorem 3.23, the Remark after Corollary 3.24, Def 3.1, Lemma 3.3, Lemma 3.5, Lemma 4.2,
 Def 3.28, Lemma 3.30 (`m = 0, 1, 2`)** (texts T, Θ, U, D, B, W, S, L): for a level `Ω₁ ≤ M < X` and `η < Ω₁` with
@@ -146,8 +154,10 @@ Def 3.28, Lemma 3.30 (`m = 0, 1, 2`)** (texts T, Θ, U, D, B, W, S, L): for a le
 Our steps.  By U the term of `Ω₁·M + η` is unique; its components are in `Tᵗ` (S, second clause), and those `≥ Ω₁` sum
 to `Ω₁·M` (`η < Ω₁`), which is in `Tᵗ` (T).  ◇V′ (V1) at the code `Ω₁·M` (◇I′: the term is the canonical term) and
 ◇Δ′: `tlDat M ∈ Tᵗ`. -/
-axiom tlArg_dat {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hMX : M < Tl.tlX)
-    (hηΩ : η < Om1) (h : Om1 * M + η ∈ Tset τ) : Tl.tlDat M ∈ Tset τ
+theorem tlArg_dat {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hMX : M < Tl.tlX)
+    (hηΩ : η < Om1) (h : Om1 * M + η ∈ Tset τ) : Tl.tlDat M ∈ Tset τ := by
+  rw [← Uc.ucDat_lt_X hMX]
+  exact ucArg_dat hτ hτ1 hM1 (hMX.trans Uc.uc_X_lt_B) hηΩ h
 
 /-- **[W07a] Lemma 3.30, the direction `⇐`, with Def 3.28** (texts L, S, and the steps ◇): for a level
 `Ω₁ ≤ M < X` and `M' ≤ M` with `tlDat M', tlDat M ∈ Tᵗ`, `η', η ∈ Tᵗ ∩ Ω₁`, `Ω₁·M' + η' < Ω₁·M + η` and `tlDat M', η'`
@@ -156,11 +166,14 @@ below `ϑᵗ(Ω₁·M + η)`: `ϑᵗ(Ω₁·M' + η') < ϑᵗ(Ω₁·M + η)`.
 Our steps.  `α := Ω₁·M' + η'` and `γ := Ω₁·M + η` lie in `Tᵗ ∩ Ω₂` (◇Δ′; `M' ≤ M < X` is a code).  `α^* ≤ max(tlDat
 M', η') < ϑ₀(γ)` (◇Δ′, the hypotheses).  So `α < γ ∧ α^* < ϑ₀(γ)`, the first disjunct of the right side of L (`m = 0`),
 and `ϑ₀(α) < ϑ₀(γ)`. -/
-axiom tlVt_lt {τ M' η' M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hMX : M < Tl.tlX)
+theorem tlVt_lt {τ M' η' M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hMX : M < Tl.tlX)
     (hM' : M' ≤ M) (hM'T : Tl.tlDat M' ∈ Tset τ) (hη' : η' ∈ Tset τ) (hη'Ω : η' < Om1)
     (hMT : Tl.tlDat M ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1)
     (harg : Om1 * M' + η' < Om1 * M + η) (hd' : Tl.tlDat M' < vt τ (Om1 * M + η))
-    (hη'v : η' < vt τ (Om1 * M + η)) : vt τ (Om1 * M' + η') < vt τ (Om1 * M + η)
+    (hη'v : η' < vt τ (Om1 * M + η)) : vt τ (Om1 * M' + η') < vt τ (Om1 * M + η) := by
+  rw [← Uc.ucDat_lt_X (hM'.trans_lt hMX)] at hM'T hd'
+  rw [← Uc.ucDat_lt_X hMX] at hMT
+  exact ucVt_lt hτ hτ1 hM1 (hMX.trans Uc.uc_X_lt_B) hM' hM'T hη' hη'Ω hMT hη hηΩ harg hd' hη'v
 
 /-- **[W07a] Lemma 3.30, the direction `⇒`, with Def 3.28** (texts L, S, and the steps ◇): for a level
 `Ω₁ ≤ M < X` with `tlDat M ∈ Tᵗ`, `ξ ∈ Tᵗ ∩ Ω₂`, `η ∈ Tᵗ ∩ Ω₁`, `tlDat M, η < ϑᵗ(ξ)`: `ϑᵗ(ξ) < ϑᵗ(Ω₁·M + η)`
@@ -168,9 +181,11 @@ implies `ξ < Ω₁·M + η`.
 
 Our steps.  `γ := Ω₁·M + η ∈ Tᵗ ∩ Ω₂` and `γ^* ≤ max(tlDat M, η) < ϑ₀(ξ)` (◇Δ′, the hypotheses).  L (`m = 0`, `α = ξ`):
 `ϑ₀(ξ) < ϑ₀(γ)` gives `ξ < γ ∧ ξ^* < ϑ₀(γ)` or `ϑ₀(ξ) ≤ γ^*`; the second is impossible.  So `ξ < γ`. -/
-axiom tlLt_of_vt_lt {τ ξ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hMX : M < Tl.tlX)
+theorem tlLt_of_vt_lt {τ ξ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hMX : M < Tl.tlX)
     (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo) (hMT : Tl.tlDat M ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1)
-    (hdξ : Tl.tlDat M < vt τ ξ) (hηξ : η < vt τ ξ) (h : vt τ ξ < vt τ (Om1 * M + η)) : ξ < Om1 * M + η
+    (hdξ : Tl.tlDat M < vt τ ξ) (hηξ : η < vt τ ξ) (h : vt τ ξ < vt τ (Om1 * M + η)) : ξ < Om1 * M + η := by
+  rw [← Uc.ucDat_lt_X hMX] at hMT hdξ
+  exact ucLt_of_vt_lt hτ hτ1 hM1 (hMX.trans Uc.uc_X_lt_B) hξ hξ2 hMT hη hηΩ hdξ hηξ h
 
 /-- **[W07a] Lemma 3.30 (`α^* < ϑ₀(α)`), Lemma 4.3, Def 3.28, Convention 4.1** (texts L, E, S, C, and the steps ◇):
 for a level `Ω₁ ≤ M < X` with `tlDat M ∈ Tᵗ` and `η ∈ Tᵗ ∩ Ω₁`: `tlDat M, η < ϑᵗ(Ω₁·M + η)`.
@@ -178,9 +193,11 @@ for a level `Ω₁ ≤ M < X` with `tlDat M ∈ Tᵗ` and `η ∈ Tᵗ ∩ Ω₁
 Our steps.  `γ := Ω₁·M + η ∈ Tᵗ ∩ Ω₂` (◇Δ′) with `Δ = Ω₁·M > 0` (C).  L (`m = 0`): `γ^* < ϑ₀(γ) =: q`; E: `τ < q ∈ E`.
 ◇Δ′ (last clause, `ξ' = γ`): `tlDat M < q`.  The additive components of `η` are `< τ` or `≤ η^* ≤ γ^*` (step ★1 of
 `R2.CitedLu`; `P₀(η) ⊆ P₀(γ)`), hence `< q`, and `q` is additive principal: `η < q`. -/
-axiom tlLevel_lt {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hMX : M < Tl.tlX)
+theorem tlLevel_lt {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hMX : M < Tl.tlX)
     (hMT : Tl.tlDat M ∈ Tset τ) (hη : η ∈ Tset τ) (hηΩ : η < Om1) :
-    Tl.tlDat M < vt τ (Om1 * M + η) ∧ η < vt τ (Om1 * M + η)
+    Tl.tlDat M < vt τ (Om1 * M + η) ∧ η < vt τ (Om1 * M + η) := by
+  rw [← Uc.ucDat_lt_X hMX] at hMT ⊢
+  exact ucLevel_lt hτ hτ1 hM1 (hMX.trans Uc.uc_X_lt_B) hMT hη hηΩ
 
 /-- **[W07a] Def 5.1 (first three clauses), Lemma 5.3 (b)–(d), Def 3.28, Def 3.22, Def 3.1, Lemma 3.3, Lemma 3.5,
 Lemma 4.2, Lemma 3.30** (texts P, Π, S, T, D, B, W, L, and the steps ◇): for bases `σ < τ` and an atom `F_β(y)` in
@@ -190,10 +207,21 @@ F_{π_{σ,τ}(β)}(π_{σ,τ}(y))`.
 Our steps.  Step π0′ of ◇π′: `F_β(y) = ϑ₁(Ω₂² + Ω₂·β + c)` (◇Φ, Φ6; `β < F_β(y)`: `β ≤ Ω₁ < F_β(y)`, or `Ω₁ < β <
 X` and `F_β(y) ≥ F_β(0) > β`), the parameters through S, the value through P (`k = 1, 2`), Π (c), the shift Φ6 kept by
 `π` through ◇F′, and ◇Φ over `σ`.  (`tfGam_TB` of `R2.CitedTf` is the case `β = 0`.) -/
-axiom tlAtom_TB {σ τ β y : Ordinal.{0}} (h : Bases σ τ) (h1 : Om1 < Rh.rhF β y) (hX : Rh.rhF β y < Tl.tlX)
+theorem tlAtom_TB {σ τ β y : Ordinal.{0}} (h : Bases σ τ) (h1 : Om1 < Rh.rhF β y) (hX : Rh.rhF β y < Tl.tlX)
     (hy : y < Rh.rhF β y) :
     (Rh.rhF β y ∈ TB τ σ ↔ β ∈ TB τ σ ∧ y ∈ TB τ σ) ∧
-      (β ∈ TB τ σ → y ∈ TB τ σ → pi σ τ (Rh.rhF β y) = Rh.rhF (pi σ τ β) (pi σ τ y))
+      (β ∈ TB τ σ → y ∈ TB τ σ → pi σ τ (Rh.rhF β y) = Rh.rhF (pi σ τ β) (pi σ τ y)) := by
+  obtain ⟨hA, hP⟩ := ucAtom_TB h (Rh.rhF_SC β y) h1 (hX.trans Uc.uc_X_lt_B)
+  rw [Uc.ucParts_F hX hy] at hA hP
+  rw [Uc.ucRebuild_F _ hX hy] at hP
+  have hiff : (∀ x ∈ ({β, y} : Set Ordinal.{0}), x ∈ TB τ σ) ↔ β ∈ TB τ σ ∧ y ∈ TB τ σ := by
+    constructor
+    · intro H; exact ⟨H β (Set.mem_insert _ _), H y (Set.mem_insert_of_mem _ rfl)⟩
+    · rintro ⟨hb, hy'⟩ x hx
+      rcases hx with rfl | hx
+      · exact hb
+      · rw [Set.mem_singleton_iff] at hx; rw [hx]; exact hy'
+  exact ⟨hA.trans hiff, fun hb hy' => hP (hiff.2 ⟨hb, hy'⟩)⟩
 
 /-- **[W07a] Def 5.1 (all four clauses), Lemma 5.3 (b)–(d), Def 3.28, Def 3.22, Def 3.1, Lemma 3.3, Lemma 3.5,
 Lemma 4.2, Lemma 4.3, Lemma 3.30** (texts P, Π, S, T, D, B, W, E, L, and the steps ◇): for bases `σ < τ` and an
@@ -202,10 +230,11 @@ Lemma 4.2, Lemma 4.3, Lemma 3.30** (texts P, Π, S, T, D, B, W, E, L, and the st
 
 Our steps.  Step π3 of ◇π′ (the term `ϑ₁(Ω₂·a + c*)` of ◇K′, ◇P*, ◇I′; the parameters through S; the value through P,
 third clause with `k = 1, 2`, and the fixed-point shift of O6 kept by `π` through ◇F′; π0′ for the atoms). -/
-axiom tlPhi_TB {σ τ a c : Ordinal.{0}} (h : Bases σ τ) (ha : 1 ≤ a) (haz : a < veblen a c)
+theorem tlPhi_TB {σ τ a c : Ordinal.{0}} (h : Bases σ τ) (ha : 1 ≤ a) (haz : a < veblen a c)
     (hcz : c < veblen a c) (h1 : Om1 < veblen a c) (hX : veblen a c < Tl.tlX) :
     (veblen a c ∈ TB τ σ ↔ a ∈ TB τ σ ∧ c ∈ TB τ σ) ∧
-      (a ∈ TB τ σ → c ∈ TB τ σ → pi σ τ (veblen a c) = veblen (pi σ τ a) (pi σ τ c))
+      (a ∈ TB τ σ → c ∈ TB τ σ → pi σ τ (veblen a c) = veblen (pi σ τ a) (pi σ τ c)) :=
+  ucPhi_TB h ha haz hcz h1 (hX.trans Uc.uc_X_lt_B)
 
 /-- **[W07a] Def 5.1 (first three clauses), Lemma 5.3 (b)–(d), Def 3.28, Def 3.22, Lemma 3.5, Lemma 4.2, Lemma 3.30**
 (texts P, Π, S, T, W, L, and the steps ◇): for bases `σ < τ` and `g ≥ E₁`, not an `ε`-number, with `ω^g < X`:
@@ -213,8 +242,9 @@ axiom tlPhi_TB {σ τ a c : Ordinal.{0}} (h : Bases σ τ) (ha : 1 ≤ a) (haz :
 
 Our steps.  Step π2 of ◇π′: `ω^g = ϑ₁(g⁻)` (◇N), `Parᵗ(ω^g) = Parᵗ(g⁻)` (S, `k = 1`), `π(ω^g) = ϑ₁(π(g⁻))` (P, third
 clause), `π(g⁻) = (π g)⁻` (◇F′, π0′, π3), and `ϑ₁((π g)⁻) = ω^{π g}` (◇N). -/
-axiom tlOpow_TB {σ τ g : Ordinal.{0}} (h : Bases σ τ) (hg : Gg.ggE ≤ g) (hgE : ω ^ g ≠ g)
+theorem tlOpow_TB {σ τ g : Ordinal.{0}} (h : Bases σ τ) (hg : Gg.ggE ≤ g) (hgE : ω ^ g ≠ g)
     (hX : ω ^ g < Tl.tlX) :
-    (ω ^ g ∈ TB τ σ ↔ g ∈ TB τ σ) ∧ (g ∈ TB τ σ → pi σ τ (ω ^ g) = ω ^ pi σ τ g)
+    (ω ^ g ∈ TB τ σ ↔ g ∈ TB τ σ) ∧ (g ∈ TB τ σ → pi σ τ (ω ^ g) = ω ^ pi σ τ g) :=
+  ucOpow_TB h hg hgE (hX.trans Uc.uc_X_lt_B)
 
 end Googology.Trans.PoR.InaccPsi.R2
