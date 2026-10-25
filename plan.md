@@ -6,12 +6,12 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
-      - done (only S assumed): frontier ι(Γ(ζ_{G+ε₀})) ≤ ι(Ω₂) (G = Γ_{Ω₁+1}), P < L(0) = m*; Φ_μ (μ ≤ B₂): CL, UB, EQ; levels below Γ₂. 103 axioms.
-      - 4 roads, not yet one (hyp.: UPPER, LOWER, cap above frontier, TopFrom/Unc in [B₂, Ω₂), CL, EQ, UdAtMove25, …): ν_C = L(ω+1), L(ω) <₂ L(ω+1).
-      - left 1 (frontier): gated ζ-index (one recursion over ε-indices from a gate-0 start) to reach ι(Γ(φ(3, G+1))); IMG at B₃ and Veblen levels ≥ 3.
-      - left 2 (CL): TkSucc via UeTyVis: hull isomorphism at Ω₁·M (M ≥ Ω₁), Γ^* ≥ α, Γ ≥ ε_{Ω₁+1}; form of reaches; EQ at closed points; supply.
-      - left 3 (moves): past B₂ = ψ_{Ω₂}(ε_{Ω₂+1}) (H²_γ, ψ_{Ω₃} ↔ ϑ₂); level system past Γ₂ for atoms up to θ; θ, RnThMoveM, RnEQhi2; join the roads.
+    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+      - done (only S assumed): frontier ι(Γ(φ(3, G+1))) ≤ ι(Ω₂) (G = Γ_{Ω₁+1}), P < L(0) = m*; Φ_μ (μ ≤ B₂): CL, UB, EQ; H^s for all finite s. 104 axioms.
+      - 4 roads, not yet one (hyp.: UPPER, LOWER, cap above frontier, CL, EQ, TopFrom/Unc in [B₂, Ω₂), UdAtMove25, …): ν_C = L(ω+1), L(ω) <₂ L(ω+1).
+      - left 1 (frontier): the wall φ(3, G+1) is proved; next a system with Z ≤ B₄ (IMG holds below B₄), Veblen levels ≥ 4, atoms Γ(c), offsets ≥ Γ_{x+2}.
+      - left 2 (CL): hull isomorphism done at Ω₁·M with rjDat M < κ; left: rjDat M ≥ κ, Γ ≥ ε_{Ω₁+1}, TkSucc, form of reaches, EQ at closed points, supply.
+      - left 3 (moves): image T done below Y₃ = ψ₃(Ω₃) (hyp.: restart index); T past Y₃, level systems up to Y₃, H^k up to θ, its citation; θ; join roads.
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
