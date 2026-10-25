@@ -6,12 +6,12 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
 
 - Wilken の主張：Core(R₂⁺) = ψ_{Ω₁}(I_ω)（[Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README-ja.md)）
   - Lean：Wilken の系と InaccPsi の間の写像
-    - 🤖 R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
-      - 済み（仮定は S だけ）：前線 ι(Γ(ζ_{Γ_{Ω₁+1}+2})) は ι(Ω₂) 以下、P < L(0) = m*。μ ≤ X の Φ_μ で CL、UB、CONV。φ(Ω₂+1,0) 未満で step。公理は 101 個。
-      - 道（仮定：前線より上で UPPER、LOWER、cap、[X, Ω₂) で TopFrom/Unc、CL、EQ、UaAtMove24 など）：ν_C = L(ω+1) と L(ω) <₂ L(ω+1)。
-      - 残り 1（前線）：ζ_{G+n} → ζ_{G+n+1}（G = Γ_{Ω₁+1}）の step を n について一般にして ζ_{G+ω} へ。その先は極限の不動点 ζ_{G+λ} での IMG。
-      - 残り 2（CL）：TkSucc を m* と各 L(n+1) での UbTyVis から得る。未解決：非可算な引数での hull の同型、到達の形、閉じた点の EQ、r(μ)。
-      - 残り 3（移動）：[X, B₂ = ψ_{Ω₂}(ε_{Ω₂+1})) の Φ_μ で CL、UB、EQ、道。B₂ より先（ψ_{Ω₃} ↔ ϑ₂）。Ω₂ より上の段の節点、Γ₂ までの段。ψ₃、θ。
+    - R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
+      - 済み（仮定は S だけ）：前線 ι(Γ(ζ_{G+ε₀})) は ι(Ω₂) 以下（G = Γ_{Ω₁+1}）、P < L(0) = m*。μ ≤ B₂ の Φ_μ で CL、UB、EQ。Γ₂ 未満の段。公理は 103 個。
+      - 道は 4 本でまだ 1 本でない（仮定：前線より上で UPPER、LOWER、cap、[B₂, Ω₂) で TopFrom/Unc、CL、EQ、UdAtMove25 など）：ν_C = L(ω+1) と L(ω) <₂ L(ω+1)。
+      - 残り 1（前線）：ζ の添字にゲートを付ける（ゲート 0 から ε の添字すべてで 1 つの再帰）で ι(Γ(φ(3, G+1))) へ。B₃ と Veblen の段 3 以上での IMG。
+      - 残り 2（CL）：TkSucc を UeTyVis から得る。Ω₁·M（M ≥ Ω₁）、Γ^* ≥ α、Γ ≥ ε_{Ω₁+1} での hull の同型、到達の形、閉じた点の EQ、供給。
+      - 残り 3（移動）：B₂ = ψ_{Ω₂}(ε_{Ω₂+1}) より先（H²_γ、ψ_{Ω₃} ↔ ϑ₂）。θ までの原子のための Γ₂ より先の段の系。θ、RnThMoveM、RnEQhi2。道を 1 本にまとめる。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
   - ✅ M < (0,0,0)(1,1,1)：紙と Lean で証明済み
