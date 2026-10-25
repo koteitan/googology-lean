@@ -1,4 +1,3 @@
-import Googology.Trans.PoR.InaccPsi.R2.CitedUe
 import Googology.Trans.PoR.InaccPsi.R2.CitedRj
 
 set_option autoImplicit false
@@ -8,13 +7,13 @@ set_option autoImplicit false
 
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 
-One axiom, `uhVt_tr`: the statement of `R2.ueVt_tr` with the countable level `1 ≤ q < τ` replaced by a code
-`1 ≤ M < ε_{Ω₁+1}` (`Gg.ggE`) whose countable data `Rj.rjDat M` (the largest countable leaf of the hereditary Cantor
-normal form of `M` over `{0, Ω₁}`) is below `τ`.  For `M < Ω₁`, `rjDat M = M`, so `R2.ueVt_tr` is the special case
-(`Uh.uhVt_tr_ue` in `R2.UhTerm`).  It is the same printed subcase ("`Γ > 0` and `Γ^* < α`") of both translations of
-[W07a] Def 6.2, read with Lemma 6.3; only the step that computes the term of `Γ` (◇1 below) is longer.  It does not
-follow from the earlier `Cited*` axioms: `R2.vt_wbar` is the case `Γ = 0`, `R2.ueVt_tr` has `Γ < Ω₁·Ω₁`, and the
-Lemma 3.30 facts of `R2.CitedRj` / `R2.CitedTf` compare `ϑᵗ`-values over ONE base only.
+One axiom, `uhVt_tr`: the statement of `R2.ueVt_tr` with the countable level `1 ≤ q < τ` replaced by a code `1 ≤ M <
+ε_{Ω₁+1}` (`Gg.ggE`) whose countable data `Rj.rjDat M` (the largest countable leaf of the hereditary Cantor normal form
+of `M` over `{0, Ω₁}`) is below `τ`.  For `M < Ω₁`, `rjDat M = M`, so `R2.ueVt_tr` is the special case (proved there as
+a theorem from `uhVt_tr`).  It is the same printed subcase ("`Γ > 0` and `Γ^* < α`") of both translations of [W07a] Def
+6.2, read with Lemma 6.3; only the step that computes the term of `Γ` (◇1 below) is longer.  It does not follow from the
+earlier `Cited*` axioms: `R2.vt_wbar` is the case `Γ = 0`, `R2.ueVt_tr` has `Γ < Ω₁·Ω₁`, and the Lemma 3.30 facts of
+`R2.CitedRj` / `R2.CitedTf` compare `ϑᵗ`-values over ONE base only.
 -/
 
 namespace Googology.Trans.PoR.InaccPsi.R2

@@ -1,5 +1,6 @@
 import Googology.Trans.PoR.InaccPsi.R2.Cited
 import Googology.Trans.PoR.InaccPsi.R2.CitedW
+import Googology.Trans.PoR.InaccPsi.R2.CitedUh
 
 set_option autoImplicit false
 
@@ -8,7 +9,8 @@ set_option autoImplicit false
 
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 
-Two axioms.
+One axiom, `ueDp_pi`, and one theorem, `ueVt_tr` (an axiom until `R2.CitedUh`; now the case `M = q < Ω₁` of
+`R2.uhVt_tr`, since `Rj.rjDat q = q`).
 * `ueVt_tr` (**[W07a] Definition 6.2 and Lemma 6.3, the subcase "`Γ > 0` and `Γ^* < α`" of both translations**):
   for `α = ϑᵗ(Δₙ) = Dl τ n` (`n ≥ 1`), `α⁺ = Dp τ n`, a countable level `1 ≤ q < τ` and `ρ < Ω₁`:
   `ϑ^α(Ω₁·q + ρ) = ϑᵗ(Ω₁·q + α + ρ)` whenever the left side lies in `T^α` below `α⁺` (translation `t^α_τ`), and the
@@ -16,7 +18,7 @@ Two axioms.
 * `ueDp_pi` (**[W07a] Definition 5.1 and Definition 3.28 at `α⁺ = ϑᵗ(Δₙ + 1)`**): `α⁺ ∈ Tᵗ[σ]` and
   `π_{σ,τ}(ϑᵗ(Δₙ + 1)) = ϑ^σ(Δₙ + 1)`.
 
-Neither follows from the earlier `Cited*` axioms: `R2.vt_wbar` describes `ϑᵗ` only at countable arguments
+Neither follows from the `Cited*` axioms before `R2.CitedUh`: `R2.vt_wbar` describes `ϑᵗ` only at countable arguments
 (the case `Γ = 0` of Definition 6.2, used in `Ub.ubTr`), and the constant `Dp` was so far described only by
 `R2.Dp_spec` (membership, `Dp τ n = Dl (Dl τ n) n`).
 -/
@@ -25,7 +27,8 @@ namespace Googology.Trans.PoR.InaccPsi.R2
 
 open Ordinal
 
-/-- **[W07a] Definition 6.2 (p. 148) and Lemma 6.3 (p. 149), the subcase "`Γ > 0` and `Γ^* < α`" of both
+/-- **Theorem (the case `M = q < Ω₁` of `R2.uhVt_tr`).**  The text below is its source and argument as first cited.
+**[W07a] Definition 6.2 (p. 148) and Lemma 6.3 (p. 149), the subcase "`Γ > 0` and `Γ^* < α`" of both
 translations, with Convention 4.1 and Lemma 4.3 (p. 142), Lemma 4.5 (p. 143), Definition 6.1 (p. 148), Definition 3.22
 (p. 139), the Remark after Corollary 3.24 (p. 140), Definition 3.28 (p. 141), Lemma 3.30 (p. 142), Lemma 4.2
 (p. 142).**  For `τ ∈ E ∩ Ω₁`, `n ≥ 1`, `α := Dl τ n = ϑᵗ(Δₙ)`, `α⁺ := Dp τ n = ϑᵗ(Δₙ + 1)`, `1 ≤ q < τ` and
@@ -118,12 +121,14 @@ Our steps.
   `ρ' = α + ρ = ρ`; otherwise the components of `ρ` are the components of `ρ'` after the first one (`α`); in both
   cases they are components of `ξ'`, so `ρ ∈ Tᵗ` (T) and `ρ^{*τ} ≤ ξ'^{*τ} < β' < α⁺`; by Lemma 6.3 (second item)
   `ρ^{t^τ_α}` denotes `ρ`.  `Γ^{t^τ_α}` denotes `Γ` (◇1).  So `β' = ϑ^α(Γ + ρ) = ϑ^α(Ω₁·q + ρ)`. -/
-axiom ueVt_tr {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {n : ℕ} (hn : 1 ≤ n) {q ρ : Ordinal.{0}}
+theorem ueVt_tr {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {n : ℕ} (hn : 1 ≤ n) {q ρ : Ordinal.{0}}
     (hq1 : 1 ≤ q) (hqτ : q < τ) (hρ1 : ρ < Om1) :
     (Om1 * q + ρ ∈ Tset (Dl τ n) → vt (Dl τ n) (Om1 * q + ρ) < Dp τ n →
       vt (Dl τ n) (Om1 * q + ρ) = vt τ (Om1 * q + (Dl τ n + ρ))) ∧
     (Om1 * q + (Dl τ n + ρ) ∈ Tset τ → vt τ (Om1 * q + (Dl τ n + ρ)) < Dp τ n →
-      vt τ (Om1 * q + (Dl τ n + ρ)) = vt (Dl τ n) (Om1 * q + ρ))
+      vt τ (Om1 * q + (Dl τ n + ρ)) = vt (Dl τ n) (Om1 * q + ρ)) := by
+  have hqO : q < Om1 := hqτ.trans hτ1
+  exact uhVt_tr hτ hτ1 hn hq1 (hqO.trans Rj.rj_Om1_lt_E) (by rw [Rj.rjDat_small hqO]; exact hqτ) hρ1
 
 /-- **[W07a] Definition 5.1 (p. 144), Definition 3.28 (p. 141), Definition 3.22 (p. 139), Convention 4.1 (p. 142).**
 For bases `σ < τ` (countable `ε`-numbers) and `n ≥ 1`: `α⁺ = Dp τ n = ϑᵗ(Δₙ + 1) ∈ Tᵗ[σ]` and
