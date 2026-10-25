@@ -23,10 +23,10 @@ open Ordinal
 /-- **[W07a] Definition 6.2 (p. 148) and Lemma 6.3 (p. 149), the subcase "`Γ^* ≥ α`" of both translations, with the
 remark after Def 6.2 (p. 149), Convention 4.1 and Lemma 4.3 (p. 142), Lemma 4.5 (p. 143), Definition 6.1 (p. 148),
 Definition 3.22 (p. 139), Theorem 3.23 (p. 139), the Remark after Corollary 3.24 (p. 140), Definition 3.28 (p. 141),
-Lemma 3.30 (p. 142), Lemma 4.2 (p. 142), the remark after Definition 3.1.**  For `τ ∈ E ∩ Ω₁`, `n ≥ 1`,
-`α := Dl τ n = ϑᵗ(Δₙ)`, `α⁺ := Dp τ n = ϑᵗ(Δₙ + 1)`, `1 ≤ M` with `Ω₁·M < ε_{Ω₁+1}` and `α ≤ rjDat (Ω₁·M)`, and
-`ρ < Ω₁`: (i) if `Ω₁·M + ρ ∈ T^α` and `ϑ^α(Ω₁·M + ρ) < α⁺` then `Ω₁·M + ρ ∈ Tᵗ` and `ϑ^α(Ω₁·M + ρ) = ϑᵗ(Ω₁·M + ρ)`;
-(ii) if `Ω₁·M + ρ ∈ Tᵗ` and `ϑᵗ(Ω₁·M + ρ) < α⁺` then `Ω₁·M + ρ ∈ T^α` and `ϑᵗ(Ω₁·M + ρ) = ϑ^α(Ω₁·M + ρ)`.
+Lemma 3.30 (p. 142), Definition 3.4 (p. 132), Lemma 4.2 (p. 142), the remark after Definition 3.1.**  For
+`τ ∈ E ∩ Ω₁`, `n ≥ 1`, `α := Dl τ n = ϑᵗ(Δₙ)`, `α⁺ := Dp τ n = ϑᵗ(Δₙ + 1)`, `1 ≤ M` with `Ω₁·M < ε_{Ω₁+1}` and `α ≤
+rjDat (Ω₁·M)`, and `ρ < Ω₁`: (i) if `Ω₁·M + ρ ∈ T^α` and `ϑ^α(Ω₁·M + ρ) < α⁺` then `Ω₁·M + ρ ∈ Tᵗ` and `ϑ^α(Ω₁·M + ρ) =
+ϑᵗ(Ω₁·M + ρ)`; (ii) if `Ω₁·M + ρ ∈ Tᵗ` and `ϑᵗ(Ω₁·M + ρ) < α⁺` then `Ω₁·M + ρ ∈ T^α` and `ϑᵗ(Ω₁·M + ρ) = ϑ^α(Ω₁·M + ρ)`.
 
 Literal texts (all of [W07a], checked against the paper; `Tᵗ_α`, `t^τ_α`, `t^α_τ` as printed there):
 * (6.1) Def 6.1: "Let `α = ϑᵗ(Δ + η) ∈ Tᵗ`.  The restriction of `Tᵗ` to `α`, written as `Tᵗ_α`, is defined by
@@ -115,17 +115,19 @@ Our steps.
   `Δ^{*α} = 0` gives `ξ < Δ`, so `Γ ≤ ξ < Δ`.  By ◇* (`β = α`) `Γ^{*α} ≥ α`: the third subcase, `b^{t^α_τ} :=
   ϑᵗ(Γ^{t^α_τ} + ρ^{t^α_τ})`.  `b ∈ T^α_{α⁺}`: `b ∈ P₀(b)` and every other element of `P₀(b)` lies in `P₀(ξ)` (S), so
   is `≤ ξ^{*α} < b`; hence `b^{*α} = b < α⁺` (6.1), and by 6.3 (third item) `b^{t^α_τ}` denotes `b`; by the remark
-  after 6.2 it is a term of `Tᵗ`, so its argument `Γ^{t^α_τ} + ρ^{t^α_τ}` is a term of `Tᵗ` (T: the subterms of a term
-  are terms).  `Γ ∈ T^α_{α⁺}`: `Γ` is the sum of the uncountable components of `ξ` (C), in `T^α` (T, second clause),
-  and `P₀(Γ) ⊆ P₀(ξ)` (S), so `Γ^{*α} ≤ ξ^{*α} < α⁺`; by 6.3 `Γ^{t^α_τ}` denotes `Γ`.  Likewise `ρ` (the countable
-  part of `ξ`, its components are components of `ξ`): `ρ^{t^α_τ}` denotes `ρ`.  So `b = ϑᵗ(Γ + ρ)` and `Γ + ρ ∈ Tᵗ`.
+  after 6.2 ("the assigned ordinals belong to the respective notation system") it is a term of `Tᵗ`, and so are the
+  assigned `Γ^{t^α_τ}`, `ρ^{t^α_τ}`; so its argument `Γ^{t^α_τ} + ρ^{t^α_τ}` is a term of `Tᵗ` (T, second clause).
+  `Γ ∈ T^α_{α⁺}`: `Γ` is the sum of the uncountable components of `ξ` (C), in `T^α` (T, second clause), and `P₀(Γ) ⊆
+  P₀(ξ)` (S), so `Γ^{*α} ≤ ξ^{*α} < α⁺`; by 6.3 `Γ^{t^α_τ}` denotes `Γ`.  Likewise `ρ` (the countable part of `ξ`, its
+  components are components of `ξ`): `ρ^{t^α_τ}` denotes `ρ`.  So `b = ϑᵗ(Γ + ρ)` and `Γ + ρ ∈ Tᵗ`.
 * (◇4) **Part (ii), `t^τ_α`.**  Let `ξ := Γ + ρ ∈ Tᵗ`, `b := ϑᵗ(ξ) < α⁺` (hypotheses); `b ∈ Tᵗ` as in ◇3.  `α < b`:
   by ◇* (`β = τ`) and `P₀(Γ) ⊆ P₀(ξ)`, `α ≤ Γ^{*τ} ≤ ξ^{*τ}`, so L (`m = 0`, second disjunct `ϑ₀(Δ) = α ≤ ξ^{*τ}`)
   gives `α < b`.  So `b ∈ (α, α⁺)`, the second case of `t^τ_α`; `ξ = Γ + ρ` is the decomposition of C, `Γ < Δ` (4.5),
   `α ≤ ξ^{*τ} < b < α⁺` (L).  By ◇* (`β = τ`) `Γ^{*τ} ≥ α`: the third subcase, `b^{t^τ_α} := ϑ^α(Γ^{t^τ_α} +
   ρ^{t^τ_α})`.  As in ◇3 (over `τ`): `b^{*τ} = b < α⁺`, so `b ∈ Tᵗ_{α⁺}` and by 6.3 (second item) `b^{t^τ_α}` denotes
   `b`, a term of `T^α` (remark); `Γ, ρ ∈ Tᵗ_{α⁺}` (`Γ^{*τ}, ρ^{*τ} ≤ ξ^{*τ} < α⁺`), so `Γ^{t^τ_α}`, `ρ^{t^τ_α}` denote
-  `Γ`, `ρ` (6.3).  So `b = ϑ^α(Γ + ρ)` and `Γ + ρ ∈ T^α`.
+  `Γ`, `ρ` (6.3), which are terms of `T^α` by the same remark.  So `b = ϑ^α(Γ + ρ)` and `Γ + ρ ∈ T^α` (T, second
+  clause).
 * (Remark) At `n = 1`, `Δ₁ = Ω₁ ≤ Γ`, so `ϑ^β(Γ + ρ) ≥ ϑ^β(Δ)` (L) and both parts are vacuous; for `n ≥ 2` they are
   not (e.g. `M = α` countable: `rjDat(Ω₁·α) = rjDat(Ω₁ + α) = α`, `Ω₁·α = ϑ₁(α) ∈ Tᵗ`, `ϑᵗ(Ω₁·α) < α⁺` by L as
   `Ω₁·α < Δ₂` and `(Ω₁·α)^{*τ} = α < α⁺`). -/
