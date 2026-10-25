@@ -130,7 +130,8 @@ Our steps.
   `q ν = α' + (−1 + q ρ)` (A; `q` fixes natural numbers and keeps `≥ ω`, Π b), `q Γ + α' + q ρ` (B), `q Γ + q ρ` (C′)
   (Π c, ★1a); `q(ζ) ∈ (α', α'⁺)` (Π b, ★1a).  Per C, `q ν = Γ' + ρ'` with `Γ' = q Γ` (`q` maps the `ϑ₁`-terms of `Γ`
   to `ϑ₁`-terms, ★0, additive principal `≥ Ω₁` by L, hence multiples of `Ω₁`; `Γ' = 0 ⇔ Γ = 0`; `Γ' < Δ` from
-  `Γ < Δ`, Π b and `q(Δ) = Δ`) and `ρ' = α' + (−1 + q ρ)`, `α' + q ρ`, `q ρ` (countable, Π "intervals").  The subcase of `t'` (6.2, first part, at `(σ, α')`) matches:
+  `Γ < Δ`, Π b and `q(Δ) = Δ`) and `ρ' = α' + (−1 + q ρ)`, `α' + q ρ`, `q ρ` (countable, Π "intervals").
+  The subcase of `t'` (6.2, first part, at `(σ, α')`) matches:
   `Γ' = 0 ⇔ (A)`; for `Γ > 0`, `Γ'^{*σ}` is `0` or the value of a `ϑ^σ`-subterm of `q̂(t Γ)` (★0), these values lie in
   `[α', α'⁺)` (IH (i) for `Γ`, Π b), so `Γ'^{*σ} ≥ α' ⇔ t(Γ)` has a `ϑᵗ`-subterm `⇔ Γ` has a `ϑ^α`-subterm (IH (i))
   `⇔ Γ^{*α} ≥ α` (★0: `P^α₀(Γ)` = its `ϑ^α`-subterms, values `≥ α`).  The three subcases of `t'` give
