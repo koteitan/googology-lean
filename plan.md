@@ -6,12 +6,12 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
-      - done (only S assumed): frontier ι(Γ(φ(K, G+1))), K = ψ_{Ω₁}(Ω_ω), G = Γ_{Ω₁+1}, P < L(0) = m*; Φ_μ (μ ≤ B₂): CL, UB, EQ; all H^s. 105 axioms.
+    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+      - done (only S assumed): frontier ι(Γ(φ(Ω₁, G+ε₀))), G = Γ_{Ω₁+1}, P < L(0) = m*; the level map T at every k; data below θ. 105 axioms.
       - 4 roads, not yet one (hyp.: UPPER, LOWER, cap above frontier, CL, EQ, TopFrom/Unc on [B₂, θ), atom moves from ψ₂(Y₃) to θ, …): ν_C = L(ω+1).
-      - left 1 (frontier): the level K itself (its base gate is K; locating needs a gate below K), then levels read by codes ≥ Ω₁.
-      - left 2 (CL): done: translation below B₂, levels Ω₁·M with small data; left: cdR past m*, level terms ≥ E1, closed-point EQ, supply, TkSucc
-      - left 3 (moves): done: FV, L1 with no notation hyp., θ₁ ≤ θ (cited); left: T past Y₃ (any k), atoms up to θ, data below θ, Uf/Ti to θ, 1 road.
+      - left 1 (frontier): bases with a gate, the offset ε₀ of the level Ω₁; then levels Ω₁+ν, atoms Γ(c) with c ≥ 1, levels Ω₁·M.
+      - left 2 (CL): done: levels Ω₁·M < B₂ with any leaves; left: terms with the new node, cdR past m*, values Θ_λ(m_λ), EQ, supply, TkSucc.
+      - left 3 (moves): T = ugTh below Y₃, T on codes, atoms from ψ₂(Y₃) to θ (any k); codes and Φ_μ below θ; Uf/Ti to θ; 1 road.
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
