@@ -117,8 +117,9 @@ not depend on `τ` (D: `Ω₀ = τ` enters `Cⁿ_m` only for `m = 0`).  `T_{m+1}
 
 namespace Googology.Trans.PoR.InaccPsi.R2
 
-/-- **[W07a] Theorem 3.23 (at `m = 1`), Def 3.22, Def 3.13, Theorem 3.14, Def 3.1, Lemma 3.2 (b), Lemma 3.3, Def 3.4,
-Lemma 3.5, Lemma 3.7, Lemma 3.8, Corollary 3.9, Def 3.10, Lemma 3.11 (b), Convention 3.25, Lemma 3.30** (texts D, M,
+/-- **[W07a] Theorem 3.23 (at `m = 1`), Def 3.22, Def 3.13, Theorem 3.14, the Remark after Corollary 3.15, Def 3.1,
+Lemma 3.2 (b), Lemma 3.3, Def 3.4, Lemma 3.5, Def 3.6, Lemma 3.7, Lemma 3.8, Corollary 3.9, Def 3.10, Lemma 3.11 (a)
+(b), Convention 3.25, Lemma 3.30** (texts D, M,
 B, W, I, R, Q, S, T, Θ, L, and the steps ◇X, ◇K, ◇CL, ◇D, ◇B, ◇F of the module docstring): **every `η ∈ Tᵝ ∩ Ω₂`,
 `β` a countable `ε`-number, is below `θ = ψ_{Ω₂}(Ω_ω)`** (`Ui.UiTBound (ConjT.th S)`).
 
