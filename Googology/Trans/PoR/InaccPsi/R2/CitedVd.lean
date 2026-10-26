@@ -165,9 +165,11 @@ as written there; "Lean" marks a theorem of the repository or of `R2.VdNF`, `R2.
   `a, y ∈ m`: `m` is strongly critical.
 * (◇R) **The reading of membership.**  For `M ∈ [B₂, θ)` and `η ∈ Tᵗ ∩ Ω₁`: `M ∈ Tⁿ₁` (◇θ), `γ := Ω₁·M + η ∈ Tⁿ₁`,
   and `P₀(γ) ∪ ω = P₀(M) ∪ comps(η) ∪ ω` (Q; `Ω₁·ω^g = ω^{Ω₁+g}` is `ω^g` or a `ϑ₁`-term with the parts of `g`, D(1)
-  (C)).  By 3.11 (b) (`m = 0`, `β = 0`, `α < Ω₂` large; `Tⁿ₀ = Cⁿ₀(Ω₂, 0)`, Θ, EX): `γ ∈ Tᵗ ⇔ P₀(γ) ⊆ Tᵗ ∩ Ω₁ = m`
-  ⇔ `γ ∈ K⁽⁰⁾_m` (◇V0, ◇m) ⇔ `M ∈ K⁽⁰⁾_m ∧ η < m` (`Uz.uz_parts` at `k = 0`, `Ul.ulK_lt_W`) ⇔ `d_S(M) ∈ Tᵗ ∧ η ∈ Tᵗ`
-  (`Ul.ul_vis`, Θ).  The same with `M` alone: `P₀(M) ⊆ v ⇔ d_S(M) < v` for every strongly critical `v ≤ Ω₁`.
+  (C)); the bounds in ◇Δ‴ (b), (c) need only `P₀(Ω₁·M) ⊆ q ⇔ Ω₁·M ∈ K⁽⁰⁾_q ⇔ M ∈ K⁽⁰⁾_q` (VIS(0) of `R2.CitedUz`,
+  `Uz.uz_parts`), with `comps(η)` taken separately.  By 3.11 (b) (`m = 0`, `β = 0`, `α < Ω₂` large; `Tⁿ₀ = Cⁿ₀(Ω₂, 0)`,
+  Θ, EX): `γ ∈ Tᵗ ⇔ P₀(γ) ⊆ Tᵗ ∩ Ω₁ = m` ⇔ `γ ∈ K⁽⁰⁾_m` (◇V0, ◇m) ⇔ `M ∈ K⁽⁰⁾_m ∧ η < m` (`Uz.uz_parts` at `k = 0`,
+  `Ul.ulK_lt_W`) ⇔ `d_S(M) ∈ Tᵗ ∧ η ∈ Tᵗ` (`Ul.ul_vis`, Θ).  The same with `M` alone: `P₀(M) ⊆ v ⇔ d_S(M) < v` for every
+  strongly critical `v ≤ Ω₁`.
 * (◇S) **The readings do not depend on `S`.**  For `M ∈ [B₂, θ)` and strongly critical `q ≤ Ω₁`: `d_S(M) < q ⇔ P₀(M) ⊆
   q` (◇R, for every `S`), and the right side mentions no `S`; `θ = θ₁` (◇θ).  So `∃ S` in a hypothesis and `∀ S` in a
   conclusion say the same.  Likewise the normal form: `z = Hˡ_λ(y) = W₁(λ, c)` (D(1) (H), `c` the index of `y` in `Ord ∖
@@ -178,9 +180,10 @@ as written there; "Lean" marks a theorem of the repository or of `R2.VdNF`, `R2.
   `α^{*0} ≤ max(P₀(M') ∪ comps(η')) < v` for `α := Ω₁·M' + η'` (with `M' < B₂`, Part I ◇Δ″); the first disjunct of L.
   (c) `vdLt_of_vt_lt`: `d_S(M) < q ≤ ϑᵗ(ξ)` gives `γ^{*0} < ϑᵗ(ξ)`, the second disjunct of L is impossible, so `ξ < γ`.
   (d) `vdLevel_lt`: L gives `γ^{*0} < ϑᵗ(γ) =: v`, and `τ < v ∈ E` (E, C: `Δ = Ω₁·M > 0`); so `P₀(M) ⊆ v` (the elements
-  below `τ` are below `v`), hence `P₀(M) ⊆ q` and `d_S(M) < q` for every strongly critical `q ≥ v` (◇R); `η < v` as in
-  ◇Δ″.  (The `K⁽⁰⁾`-datum is read only at strongly critical points: `d_S(Ω₁ + φ(2, 0)) = 0`, while the countable part
-  `φ(2, 0)` may exceed `ϑᵗ(γ)`; hence the forms of `Vd.VdLtIn`, `Vd.VdLtAll`.)
+  below `τ` are below `v`), hence `P₀(M) ⊆ q` and `d_S(M) < q` for every strongly critical `q` with `v ≤ q ≤ Ω₁` (◇R),
+  and for strongly critical `q > Ω₁` since `d_S(M) < Ω₁` (`Vd.vdD_lt_Om1`, `M < θ`); `η < v` as in ◇Δ″.  (The
+  `K⁽⁰⁾`-datum is read only at strongly critical points: `d_S(Ω₁ + φ(2, 0)) = 0`, while the countable part `φ(2, 0)` may
+  exceed `ϑᵗ(γ)`; hence the forms of `Vd.VdLtIn`, `Vd.VdLtAll`.)
 * (◇F‴) **Fixed points.**  For `λ ∈ Tᵗ ∩ Ω₃` and `y ∈ Tᵗ ∩ Ω₂` with `p := max(Fix_λ ∩ (y + 1))` existing (`Fix_λ` is
   closed): `p ∈ Tᵗ` and `Parᵗ(p) ⊆ Parᵗ(y) ∪ ω`.  As ◇F″ of Part I, by induction on `y`, with visibility in place of
   components: `p` is strongly critical, so `p ≤ lead(y)`, an additive component of `y` (S).  If `lead(y) ∈ Fix_λ`, `p =
@@ -192,9 +195,11 @@ as written there; "Lean" marks a theorem of the repository or of `R2.VdNF`, `R2.
   a part of `y` (◇X: `y₂` and `c₂` have the same parameters up to finite ones): i.h.
 * (◇Ω₂) **The factor `Ω₂`.**  For `x ∈ Tᵗ ∩ Ω₃`: `Ω₂·x ∈ Tᵗ ⇔ x ∈ Tᵗ`, `Parᵗ(Ω₂·x) ∪ ω = Parᵗ(x) ∪ ω`, and for `x ∈
   Tᵗ[σ]`: `π(Ω₂·x) = Ω₂·π(x)`.  `Ω₂·x = Σ ω^{Ω₂ + x_i}·k_i` over the Cantor terms `ω^{x_i}·k_i` of `x`; `ω^{Ω₂ + x_i}
-  = ϑ₂(1 + α_i)` with `idx_ε(Ω₂ + α_i) = Ω₂ + x_i` (D(2) (C), ◇X), and `Ω₂ = ϑ₂(0)`; S and P (third clause, `k = 2`),
-  Π (c), and `π(idx_ε(w)) = idx_ε(π w)` (`π` keeps `+`, `<` and maps the `ε`-numbers of `Tᵗ[σ]`, the `ϑ_j`-values of
-  the forms (V), (H) and `Ω_j`, to `ε`-numbers, and is onto `T^σ`, Π (d)).
+  = ϑ₂(1 + α_i)` with `idx_ε(Ω₂ + α_i) = Ω₂ + x_i` (D(2) (C), ◇X) when `x_i` is not an `ε`-number above `Ω₂`; if `x_i`
+  is an `ε`-number `> Ω₂`, then `ω^{Ω₂ + x_i} = x_i`, the summand is `x_i·k_i` with the parameters of `x_i`, and
+  `π(x_i)` is again an `ε`-number `> Ω₂`, so `Ω₂·π(x_i) = π(x_i)`; and `Ω₂ = ϑ₂(0)`; S and P (third clause, `k = 2`), Π
+  (c), and `π(idx_ε(w)) = idx_ε(π w)` (`π` keeps `+`, `<` and maps the `ε`-numbers of `Tᵗ[σ]`, the `ϑ_j`-values of the
+  forms (V), (H) and `Ω_j`, to `ε`-numbers, and is onto `T^σ`, Π (d)).
 * (◇π‴) **Atoms** (`Bases σ τ`): a strongly critical `z ∈ [B₂, θ)` with normal form `Hˡ_λ(y)`.  By ◇θ, D(1) (H) and L:
   `z = ϑ₁(ζ)`, `ζ = Ω₂·(Ω₂ + λ) + c`, `c` the index of `y` (◇X: `y = p + 1 + (c − p)` with `p = max(Fix_λ ∩ (y + 1))`,
   or `y = c`).  `z ∈ Tᵗ ⇔ ζ ∈ Tᵗ` (T′, U) with `Parᵗ(z) = Parᵗ(ζ)` (S); `ζ ∈ Tᵗ[σ] ⇔ λ, c ∈ Tᵗ[σ]` (◇Ω₂, Π (c)), and `c
