@@ -1,4 +1,5 @@
 import Googology.Trans.PoR.InaccPsi.R2.CitedRj
+import Googology.Trans.PoR.InaccPsi.R2.UvTr
 
 set_option autoImplicit false
 
@@ -7,7 +8,9 @@ set_option autoImplicit false
 
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 
-One axiom, `urVt_tr2`: the printed subcase "`Γ > 0` and `Γ^* < α`" of both translations of [W07a] Def 6.2, read with
+Formerly one axiom, now the theorem `urVt_tr2` (proved as `R2.Uv.uvVt_tr2` from the axiom `R2.uvVt_trL` of
+`R2.CitedUv`, its case `Γ < ε_{Ω₁+1}`, where `Uc.ucDat Γ = Rj.rjDat Γ`).
+It is the printed subcase "`Γ > 0` and `Γ^* < α`" of both translations of [W07a] Def 6.2, read with
 Lemma 6.3, at every level `Γ = Ω₁·M` with `1 ≤ M`, `Γ < ε_{Ω₁+1}` and countable data `rjDat Γ < α` (`Rj.rjDat`: the
 largest countable leaf of the hereditary Cantor normal form over `{0, Ω₁}`).  It is the exact twin of `R2.ukVt_tr3`
 (data `≥ α`, the subcase `Γ^* ≥ α`): the two hypotheses `rjDat Γ < α` and `α ≤ rjDat Γ` split every level, and the
@@ -137,11 +140,12 @@ Our steps.
 * (Remark) At `n = 1`, `Δ₁ = Ω₁ ≤ Γ`, so `ϑ^β(Γ + ρ) ≥ ϑ^β(Δ)` (L) and both parts are vacuous; for `n ≥ 2` they are
   not, also at gap data: `M = τ` (`τ ∈ E`, so `Ω₁·τ = Ω₁·ω^τ = ϑ₁(τ)`, `rjDat(Ω₁·τ) = rjDat(Ω₁ + τ) = τ ∈ [τ, α)`,
   `ϑ^α(Ω₁·τ) < ϑ^α(Δ₂) = α⁺` by L as `Ω₁·τ < Δ₂` and `(Ω₁·τ)^{*α} = 0`). -/
-axiom urVt_tr2 {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {n : ℕ} (hn : 1 ≤ n) {M ρ : Ordinal.{0}}
+theorem urVt_tr2 {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {n : ℕ} (hn : 1 ≤ n) {M ρ : Ordinal.{0}}
     (hM1 : 1 ≤ M) (hME : Om1 * M < Gg.ggE) (hMα : Rj.rjDat (Om1 * M) < Dl τ n) (hρ1 : ρ < Om1) :
     (Om1 * M + ρ ∈ Tset (Dl τ n) → vt (Dl τ n) (Om1 * M + ρ) < Dp τ n →
       Om1 * M + (Dl τ n + ρ) ∈ Tset τ ∧ vt (Dl τ n) (Om1 * M + ρ) = vt τ (Om1 * M + (Dl τ n + ρ))) ∧
     (Om1 * M + (Dl τ n + ρ) ∈ Tset τ → vt τ (Om1 * M + (Dl τ n + ρ)) < Dp τ n →
-      Om1 * M + ρ ∈ Tset (Dl τ n) ∧ vt τ (Om1 * M + (Dl τ n + ρ)) = vt (Dl τ n) (Om1 * M + ρ))
+      Om1 * M + ρ ∈ Tset (Dl τ n) ∧ vt τ (Om1 * M + (Dl τ n + ρ)) = vt (Dl τ n) (Om1 * M + ρ)) :=
+  Uv.uvVt_tr2 hτ hτ1 hn hM1 hME hMα hρ1
 
 end Googology.Trans.PoR.InaccPsi.R2

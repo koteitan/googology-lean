@@ -1,4 +1,5 @@
 import Googology.Trans.PoR.InaccPsi.R2.CitedUh
+import Googology.Trans.PoR.InaccPsi.R2.UvTr
 
 set_option autoImplicit false
 
@@ -7,7 +8,9 @@ set_option autoImplicit false
 
 [W07a] G. Wilken, "Ordinal arithmetic based on Skolem hulling", APAL 145 (2007) 130–161.
 
-One axiom, `ukVt_tr3`: the printed subcase "`Γ^* ≥ α`" of both translations of [W07a] Def 6.2, read with Lemma 6.3,
+Formerly one axiom, now the theorem `ukVt_tr3` (proved as `R2.Uv.uvVt_tr3` from the axiom `R2.uvVt_trH` of
+`R2.CitedUv`, its case `Γ < ε_{Ω₁+1}`, where `Uc.ucDat Γ = Rj.rjDat Γ`).
+It is the printed subcase "`Γ^* ≥ α`" of both translations of [W07a] Def 6.2, read with Lemma 6.3,
 at every level `Γ = Ω₁·M` with `1 ≤ M`, `Γ < ε_{Ω₁+1}` and countable data `α ≤ rjDat Γ` (`Rj.rjDat`: the largest
 countable leaf of the hereditary Cantor normal form over `{0, Ω₁}`).  There the translation keeps the argument:
 `ϑ^α(Γ + ρ) = ϑᵗ(Γ + ρ)` (no `α` is inserted, unlike the subcase "`Γ^* < α`" of `R2.uhVt_tr`).  The step ◇* below shows
@@ -131,11 +134,12 @@ Our steps.
 * (Remark) At `n = 1`, `Δ₁ = Ω₁ ≤ Γ`, so `ϑ^β(Γ + ρ) ≥ ϑ^β(Δ)` (L) and both parts are vacuous; for `n ≥ 2` they are
   not (e.g. `M = α` countable: `rjDat(Ω₁·α) = rjDat(Ω₁ + α) = α`, `Ω₁·α = ϑ₁(α) ∈ Tᵗ`, `ϑᵗ(Ω₁·α) < α⁺` by L as
   `Ω₁·α < Δ₂` and `(Ω₁·α)^{*τ} = α < α⁺`). -/
-axiom ukVt_tr3 {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {n : ℕ} (hn : 1 ≤ n) {M ρ : Ordinal.{0}}
+theorem ukVt_tr3 {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {n : ℕ} (hn : 1 ≤ n) {M ρ : Ordinal.{0}}
     (hM1 : 1 ≤ M) (hME : Om1 * M < Gg.ggE) (hMα : Dl τ n ≤ Rj.rjDat (Om1 * M)) (hρ1 : ρ < Om1) :
     (Om1 * M + ρ ∈ Tset (Dl τ n) → vt (Dl τ n) (Om1 * M + ρ) < Dp τ n →
       Om1 * M + ρ ∈ Tset τ ∧ vt (Dl τ n) (Om1 * M + ρ) = vt τ (Om1 * M + ρ)) ∧
     (Om1 * M + ρ ∈ Tset τ → vt τ (Om1 * M + ρ) < Dp τ n →
-      Om1 * M + ρ ∈ Tset (Dl τ n) ∧ vt τ (Om1 * M + ρ) = vt (Dl τ n) (Om1 * M + ρ))
+      Om1 * M + ρ ∈ Tset (Dl τ n) ∧ vt τ (Om1 * M + ρ) = vt (Dl τ n) (Om1 * M + ρ)) :=
+  Uv.uvVt_tr3 hτ hτ1 hn hM1 hME hMα hρ1
 
 end Googology.Trans.PoR.InaccPsi.R2
