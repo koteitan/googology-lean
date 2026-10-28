@@ -6,12 +6,12 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
-      - done (only S assumed): frontier ι(Γ(φ(Ω₁, G+ε₀))), G = Γ_{Ω₁+1}, P < L(0) = m*; the level map T at every k; data below θ. 105 axioms.
-      - 4 roads, not yet one (hyp.: UPPER, LOWER, cap above frontier, CL, EQ, TopFrom/Unc on [B₂, θ), atom moves from ψ₂(Y₃) to θ, …): ν_C = L(ω+1).
-      - left 1 (frontier): done: gated bases at level Ω₁; left: the gated offset recursion to φ(Ω₁+1, G+1); levels Ω₁+ν, atoms Γ(c), levels Ω₁·M.
-      - left 2 (CL): done: levels Ω₁·M < B₂ with any leaves; left: terms with the new node, cdR past m*, values Θ_λ(m_λ), EQ, supply, TkSucc.
-      - left 3 (moves): done: T = ugTh below Ω₂, κ on base-Ω₁ forms, codes and Φ_μ below θ; left: T = ugTh below Y₃, T on codes, atoms to θ, Uf/Ti to θ.
+    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+      - done (only S assumed): frontier ι(Γ(φ(Ω₁+K, G+1))), G = Γ_{Ω₁+1}, K = ψ_{Ω₁}(Ω_ω), P < L(0) = m*; T on all of D; ϑ-side TopFrom to θ. 105 axioms.
+      - 4 roads, not yet one (hyp.: UPPER, LOWER, cap above frontier, CL, EQ, Unc (π side) on [B₂, θ), atom moves from ψ₂(Y₃) to θ, …): ν_C = L(ω+1).
+      - left 1 (frontier): levels Ω₁+κ for κ ≥ K (level index as a code), their union up to φ(Ω₁·2, G+1), levels Ω₁·M, atoms Γ(c) in codes.
+      - left 2 (CL): done: the node thz G r and its laws; left: FRAG (level clause for Ψ), Shift to GdRoad with it, cdR past m*, EQ, supply, TkSucc.
+      - left 3 (moves): π facts one cardinal up (new citation), atom moves at Ω₂ and Ω₃, Uf/Ti to θ, readings with bound generic in k, Θ_λ(θ).
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
