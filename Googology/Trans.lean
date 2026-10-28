@@ -1693,3 +1693,8 @@ import Googology.Trans.PoR.InaccPsi.R2.VcSub
 import Googology.Trans.PoR.InaccPsi.R2.VcNode
 import Googology.Trans.PoR.InaccPsi.R2.VcBound
 import Googology.Trans.PoR.InaccPsi.R2.VcComp
+import Googology.Trans.PoR.InaccPsi.R2.HhQB
+import Googology.Trans.PoR.InaccPsi.R2.VeAgreeLow
+import Googology.Trans.PoR.InaccPsi.R2.VeOm1
+import Googology.Trans.PoR.InaccPsi.R2.VgCode
+import Googology.Trans.PoR.InaccPsi.R2.VgPhi
