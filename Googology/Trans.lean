@@ -1817,3 +1817,12 @@ import Googology.Trans.PoR.InaccPsi.R2.VrForm
 import Googology.Trans.PoR.InaccPsi.R2.VrReal
 import Googology.Trans.PoR.InaccPsi.R2.VrWit
 import Googology.Trans.PoR.InaccPsi.R2.VrRoad
+import Googology.Trans.PoR.InaccPsi.R2.VsBase
+import Googology.Trans.PoR.InaccPsi.R2.VsHt
+import Googology.Trans.PoR.InaccPsi.R2.VsMove
+import Googology.Trans.PoR.InaccPsi.R2.VsLex
+import Googology.Trans.PoR.InaccPsi.R2.VsDict
+import Googology.Trans.PoR.InaccPsi.R2.CitedVp
+import Googology.Trans.PoR.InaccPsi.R2.VsPkg
+import Googology.Trans.PoR.InaccPsi.R2.VsComm
+import Googology.Trans.PoR.InaccPsi.R2.VsTop
