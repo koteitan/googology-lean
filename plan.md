@@ -6,7 +6,7 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
       - done (only S assumed): frontier ι(Γ(φ(Ω₁·Ω₁, G+1))·ω), G = Γ_{Ω₁+1}, P < L(0) = m*; atom moves and π facts on [B₂, θ) (CitedVp). 109 axioms.
       - best road vsRoad (hyp.: UPPER, LOWER, cap above frontier, CL, EQ, …; none on [B₂, θ)): ν_C = L(ω+1). CL road vrRoad: hyp. supply, EQ.
       - left 1 (frontier): the level Ω₁·Ω₁ (code gate past Ω₁², low field tied to the next union), then atoms Γ(c), c ≥ 1, in codes.
