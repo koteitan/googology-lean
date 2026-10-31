@@ -13,6 +13,7 @@ import Googology.Trans.PoR.InaccPsi.R2.WsZeta
 import Googology.Trans.PoR.InaccPsi.R2.WtTow
 import Googology.Trans.PoR.InaccPsi.R2.WxTop
 import Googology.Trans.PoR.InaccPsi.R2.WyLv
+import Googology.Trans.PoR.InaccPsi.R2.XcQ
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -139,6 +140,18 @@ the target `Wn.WnEnt3 S 0` is equivalent to its `Hn` form (`skA3EntHn`), and `sk
 packages at the tower levels `G^{⋯^G}` extending each other (`skA3TowPk`, the `Ws` family over (A3) raw data; (A2)
 enters only there, through `skBaseA2Hi`) and the pseudo-base `φ(t₀, G)` with a start (`skA3QT0`); the `ω`-limit at
 `t₀` is `Wy.wySeqT0` / `Wy.wyPkT0` (`Wm.wmPkL` along `Wt.wtTowSeq`).
+
+Round 121 (leaf reg6, modules `R2.Xc*`; the PROVED nodes below can be checked only after the merge): the (A3) code
+interface `Xc.xcA3 : Ws.WsC` (bound `t₀`, reading `Wt.wtD.R`, gate `max 1 wtD.g`), its classification
+`Ws.WsCls Xc.xcA3 t₀` with NO hypothesis (`skA3Cls`: one induction on `G^j·d + r`, the one base `G` has an
+`ω`-sequence of gate-`0` (A2) codes, below `G` the (A2) classification), the family at every (A3) level below `t₀`,
+the tower packages extending each other (`skA3TowPk1`, gate `1`; it REPLACES `skA3TowPk`, whose gate-`0` data are not
+the data of any `Ws` family, `Xc.xc_lv_ne`), and the (A3) package at `t₀` on a gate-`1` datum (`skA3PkT0`).  A
+pseudo-base over `Wn.wnLv3T0` raised to the gate `max 1 γ` is started by the same systems (`Xc.xc_start_raise`), so
+`skSysA3Lev0W` needs ONLY `skA3QT0` (`Xc.xcEnt3_of`).  The pseudo-base `φ(t₀, G)` itself is built (`skA3T0Q`, reading
+`ϑˣ(Ω₁·ε_{Γ_{x+1}+1} + Γ_{x+1})`), so `skA3QT0` is REDUCED to its start `skA3T0Start`, a system with bound
+`φ(t₀, G)` (`Xc.xc_start_iff`, `Xc.xc_start_B`); it lies above `φ(ℓ, G+1)` for every `ℓ < t₀`
+(`Xc.xc_start_cover`), so it is the whole of region (A3) below `φ(t₀, G)` (all (A3) levels, all offsets).
 -/
 
 set_option autoImplicit false
@@ -1161,37 +1174,69 @@ theorem skA3EntHn (S : InaccSeq.{0}) : SkPk3W S 0 ↔
       (∃ K : Hn.HnPk, K.Λ = Wy.wyLv Λ) ∧ ∃ (Q : Hn.HnVQ (Wy.wyLv Λ) 0) (U : Hg.HgVD) (_ : Hg.HgSStart (Hn.hnVPB Q) U),
         Q.F = veblen (Wj.wjT 0) (Gc.gcG 0) ∧ Q.γ < Td.tdK S := Wy.wyEnt3_iff S
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (round 121: by skA3TowPk1; the data `Wy.wyLv (Wt.wtTwLv n)` have gate `0`, the data of the
+`Ws` family have gate `max 1 g = 1` (`Xc.xc_lv_ne`), and the target needs no gate-`0` datum: `Xc.xcEnt3_of` uses the
+gate-`1` datum `Xc.xcLvT0`.  REFUTE FIRST: NO EVIDENCE against the gate-`0` statement; it is no longer needed)
 SIZE: L
-the packages at the tower levels G^{⋯^G} (as band data, Wy.wyLv (Wt.wtTwLv n)) extending each other (Wm.WmExt):
-the Ws family (Ws.wsFam / Ws.wsPkOf, now on code interfaces with Bd < Γ(1)) over an (A3) code interface below t₀
-(the codes of Wt.wtD, gate as in Ws.wsA2) with its classification; (A2) enters only through skBaseA2Hi (the base
-digits of Wt.wtD are the (A2) codes).  REFUTE FIRST: NO EVIDENCE (no no-go result mentions packages). -/
+the packages at the tower levels G^{⋯^G} (as band data, Wy.wyLv (Wt.wtTwLv n)) extending each other (Wm.WmExt). -/
 theorem skA3TowPk (S : InaccSeq.{0}) : ∃ K : ℕ → Hn.HnPk, (∀ n, (K n).Λ = Wy.wyLv (Wt.wtTwLv n)) ∧
     ∀ n, Wm.WmExt (K n) (K (n + 1)) := by
   sorry
 
+/-- STATUS: PROVED (Xc.xcCls; round 121)
+SIZE: L
+THE (A3) CLASSIFICATION, unconditional: every level `ℓ < t₀` of the (A3) code interface `Xc.xcA3` that is not `Ω₁`, not
+a successor level and has no `ω`-sequence has an `Ω₁`-sequence of levels (one induction on `G^j·d + r`; the base `G`
+has the `ω`-sequence `Gl.glCfn k k`; below `G` the (A2) classification `Ws.ws_br`, `Wx.wx_baseI`). -/
+theorem skA3Cls : Ws.WsCls Xc.xcA3 (Wj.wjT 0) := Xc.xcCls
+
+/-- STATUS: PROVED (Xc.xcTowPk; round 121, replaces skA3TowPk)
+SIZE: L
+the packages of the (A3) family at the tower levels `G^{⋯^G}` (data `Xc.xcA3.lv (wtTw n)`, gate `1`) extend each
+other (`Wm.WmExt`, from `Ws.WsExt` by `Xc.xc_wmExt`). -/
+theorem skA3TowPk1 : ∃ K : ℕ → Hn.HnPk, (∀ n, (K n).Λ = Xc.xcA3.lv (Wt.wtTw n) (Xc.xc_lev_tw n)) ∧
+    ∀ n, Wm.WmExt (K n) (K (n + 1)) := Xc.xcTowPk
+
+/-- STATUS: PROVED (Xc.xcPkT0; round 121)
+SIZE: M
+THE (A3) PACKAGE AT `t₀`, unconditional: the `ω`-limit (`Wm.wmPkL`) of skA3TowPk1 on the datum `Xc.xcLvT0` (level `t₀`,
+reading `ε_{Γ_{x+1}+1}`, gate `1`). -/
+theorem skA3PkT0 : ∃ K : Wn.WnPk3, K.Λ.L = Wj.wjT 0 ∧ K.Λ.g = 1 := ⟨Xc.xcPkT0, rfl, rfl⟩
+
+/-- STATUS: PROVED (Xc.xcQT0; round 121)
+SIZE: M
+the pseudo-base of level `t₀` at `φ(t₀, G)` over `Wn.wnLv3T0`, gate `0`, reading `ϑˣ(Ω₁·ε_{Γ_{x+1}+1} + Γ_{x+1})`. -/
+theorem skA3T0Q : Xc.xcQT0.F = veblen (Wj.wjT 0) (Gc.gcG 0) ∧ Xc.xcQT0.γ = 0 := ⟨rfl, rfl⟩
+
 /-- STATUS: OPEN
 SIZE: L
-the pseudo-base φ(t₀, G) of level t₀ over the datum of t₀ (bound fields: Wn.wnQ3_bounds) with gate < K, and a
-system starting it (the offset recursion of level t₀ along the second argument up to G).  REFUTE FIRST: NO EVIDENCE;
-it is the second half of the target in Hn form (skA3EntHn) at Λ = Wn.wnLv3T0. -/
-theorem skA3QT0 (S : InaccSeq.{0}) : ∃ (Q : Hn.HnVQ (Wy.wyLv Wn.wnLv3T0) 0) (U : Hg.HgVD)
-    (_ : Hg.HgSStart (Hn.hnVPB Q) U), Q.F = veblen (Wj.wjT 0) (Gc.gcG 0) ∧ Q.γ < Td.tdK S := by
+a system starting the pseudo-base `φ(t₀, G)` (round 121).  By `Xc.xc_start_iff`: `U.ix = φ(t₀, G)` (so
+`U.B = φ(t₀, G)`, `Xc.xc_start_B`), `U.γ` below every `ε`-number, `U.b x = ϑˣ(Ω₁·ε_{Γ_{x+1}+1} + Γ_{x+1})`,
+`U.Z x = ζ` of it.  `U.B > φ(ℓ, G+1)` for every `ℓ < t₀` (`Xc.xc_start_cover`): U is region (A3) below `φ(t₀, G)`, a
+recursion over the (A3) levels `ℓ ≤ t₀` and the offsets `ν` of the pseudo-bases `φ(ℓ, ν)` (the (A3) family
+`Xc.xcFam` gives the step of every level `ℓ < t₀` at every raw datum; the pseudo-bases `φ(ℓ, ν)`, `ℓ > G`, and their
+starts are what is missing).  REFUTE FIRST: NO EVIDENCE (the fields of the start are consistent: `xcQT0` exists). -/
+theorem skA3T0Start : ∃ U : Hg.HgVD, Hg.HgSStart (Hn.hnVPB Xc.xcQT0) U := by
   sorry
 
-/-- STATUS: REDUCED (skA3TowPk, skA3QT0, Wy.wyEnt3_of; was OPEN L)
+/-- STATUS: REDUCED (skA3T0Start, Xc.xcQT0_of_start; round 121, was OPEN L)
 SIZE: L
-the (A3) package at t₀ = ε_{G+1} (Wn.WnPk3 on a datum with L = t₀, e.g. Wn.wnLv3T0: a step at every pseudo-base
-of level t₀) and the pseudo-base φ(t₀, G) of level t₀ with gate < K and a system starting it (Wn.wnQ3_bounds gives
-its bound fields).  Round 119 (reg4): REFUTE-FIRST NO EVIDENCE (no no-go result mentions packages or pseudo-bases).
-Needs, in order: (A2) closed (PROVED in round 120, skClsA2; by skA3StepLow the t₀-step contains the (A2)-level steps), the widened
-Hn.HnLv (L < Γ(1), ℓ(x) < Γ_{x+2}) so that skA3DatumAll's data are Hn.HnLv's, the Wo family over (A3) raw data on
-the levels (G, t₀), the ω-limit at t₀ along skA3Tow, the offset recursion of level t₀ up to φ(t₀, G). -/
+the pseudo-base φ(t₀, G) of level t₀ over the datum of t₀ (bound fields: Wn.wnQ3_bounds) with gate < K, and a
+system starting it.  REFUTE FIRST: NO EVIDENCE; it is the second half of the target in Hn form (skA3EntHn) at
+Λ = Wn.wnLv3T0. -/
+theorem skA3QT0 (S : InaccSeq.{0}) : ∃ (Q : Hn.HnVQ (Wy.wyLv Wn.wnLv3T0) 0) (U : Hg.HgVD)
+    (_ : Hg.HgSStart (Hn.hnVPB Q) U), Q.F = veblen (Wj.wjT 0) (Gc.gcG 0) ∧ Q.γ < Td.tdK S := by
+  obtain ⟨U, hU⟩ := skA3T0Start
+  exact Xc.xcQT0_of_start S U hU
+
+/-- STATUS: REDUCED (skA3QT0 only, by Xc.xcEnt3_of; round 121; was REDUCED to skA3TowPk, skA3QT0)
+SIZE: L
+the (A3) package at t₀ = ε_{G+1} (Xc.xcPkT0: the ω-limit of the (A3) family at the towers, datum Xc.xcLvT0 of gate 1)
+and the pseudo-base φ(t₀, G) of level t₀ with gate < K and a system starting it (skA3QT0; its raise to the gate
+`max 1 γ` is started by the same system, Xc.xc_start_raise). -/
 theorem skSysA3Lev0W (S : InaccSeq.{0}) : SkPk3W S 0 := by
-  obtain ⟨K, hK, he⟩ := skA3TowPk S
   obtain ⟨Q, U, hU, hF, hγ⟩ := skA3QT0 S
-  exact Wy.wyEnt3_of S K hK he Q U hU hF hγ
+  exact Xc.xcEnt3_of S Q U hU hF hγ
 
 /-- STATUS: OPEN
 SIZE: L

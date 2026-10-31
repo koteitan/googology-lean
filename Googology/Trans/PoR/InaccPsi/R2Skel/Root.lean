@@ -11,8 +11,9 @@ parts only:
 - frontier `SkF.skFront` → hUH, hLH, hVH, hVt;
 - reading `SkR.skWall`, `SkR.skThHi` → the hypothesis `hRead` of `SkE.skEQ`;
 - `SkE.skEQ hRead` → hT, hF;
-- supply `SkS.skSupW` → h0, hn, and `SkS.skRealB` → hB (round 120: `Wf.wfRoad` is void, `Ww.wwRoad_false`;
-  the root now applies the repaired road `Ww.wwRoad`).
+- supply `SkS.skSupX` → h0, hn, and `SkS.skShiftTh` → the shift (round 120: `Wf.wfRoad` is void, `Ww.wwRoad_false`;
+  round 121: the bridge `Ww.WwRealB` of `Ww.wwRoad` is SUSPECT as stated, so the root applies `Xb.xbRoad`, which is
+  `Ww.wwRoad` with `hB` replaced by `Xb.XbShift S` and the supply by `Xb.XbVisGen`).
 
 `sorry` enters only through the OPEN / SUSPECT leaves of the parts (see STATUS.md).
 -/
@@ -23,7 +24,7 @@ namespace R2Skel.Root
 
 open Ordinal Order Set Googology.Notation.InaccPsi Googology.Trans.PoR.InaccPsi.R2
 
-/-- STATUS: REDUCED (SkF.skFrontU/L/V/Vt, SkR.skWall, SkR.skThHi, SkE.skEQ, SkS.skRealB, SkS.skSupW, Ww.wwRoad)
+/-- STATUS: REDUCED (SkF.skFrontU/L/V/Vt, SkR.skWall, SkR.skThHi, SkE.skEQ, SkS.skShiftTh, SkS.skSupX, Xb.xbRoad)
 SIZE: L
 The root: the conclusion of `Wf.wfRoad` (same as `Wd.wdRoadL`) for every `S`. -/
 theorem skNuC (S : InaccSeq.{0}) :
@@ -37,8 +38,8 @@ theorem skNuC (S : InaccSeq.{0}) :
     ⟨Googology.Trans.PoR.InaccPsi.R2Skel.SkR.skWall S hν,
       Googology.Trans.PoR.InaccPsi.R2Skel.SkR.skThHi S hν⟩
   have hE := _root_.R2Skel.SkE.skEQ hRead
-  have hS := _root_.R2Skel.SkS.skSupW (S := S)
-  exact Ww.wwRoad (_root_.R2Skel.SkF.skFrontU S) (_root_.R2Skel.SkF.skFrontL S)
-    (_root_.R2Skel.SkF.skFrontV S) (_root_.R2Skel.SkF.skFrontVt S) hE.1 hE.2 (_root_.R2Skel.SkS.skRealB S) hS.1 hS.2
+  have hS := _root_.R2Skel.SkS.skSupX (S := S)
+  exact Xb.xbRoad (_root_.R2Skel.SkF.skFrontU S) (_root_.R2Skel.SkF.skFrontL S)
+    (_root_.R2Skel.SkF.skFrontV S) (_root_.R2Skel.SkF.skFrontVt S) hE.1 hE.2 (_root_.R2Skel.SkS.skShiftTh S) hS.1 hS.2
 
 end R2Skel.Root

@@ -16,6 +16,10 @@ import Googology.Trans.PoR.InaccPsi.R2.WuImg
 import Googology.Trans.PoR.InaccPsi.R2.WwGap
 import Googology.Trans.PoR.InaccPsi.R2.WwForm
 import Googology.Trans.PoR.InaccPsi.R2.WwRoad
+import Googology.Trans.PoR.InaccPsi.R2.XbImg
+import Googology.Trans.PoR.InaccPsi.R2.XbReal
+import Googology.Trans.PoR.InaccPsi.R2.XbRoad
+import Googology.Trans.PoR.InaccPsi.R2.XaRep
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -93,6 +97,41 @@ Round 120 (leaf "decide WuGap: is the supply road vacuous?", sup42).  `X = ϑ^{u
   (OPEN).  `skSupK` (and its subtree `skCarryWit`, `skCarryOther`, `skCarryHigh`, `skImgEps`) is now OFF THE ROAD: its
   statement `Wf.WfSup` follows from `skSupKW` (`Ww.wwSup_wf`).
 This file imports the new `Ww` modules, so it can be checked only after the merge.
+
+Round 121 (leaf "the realizer bridge for ϑ-nodes: skRealB", real1).
+* REFUTE FIRST at the gap witness: NO EVIDENCE.  The image of the `ϑ`-node `th 1 B₂ (lo λ)` under an offset map with
+  `f(1) = 1` is `ϑ^{υ_{μ+1}}(B₂ + υ_μ)` (`Xb.xb_img_gap`), an `ε`-number of `T^{υ_{μ+1}}` in `(υ_{μ+1}, υ_{μ+2})` with
+  the parameter `υ_μ` (`Xb.xbIX_spec`): the shape of the gap witness one segment down (NEW node `skImgGap`, PROVED).
+* The gap of `skRealB`, in Lean names: (G1) `Vl.vlShiftCore` has the term clause only for nodes `thz (Ω₁·q) r` with
+  `Ω₁·q < B₂` (`Vi.Nz.qB`); the `ϑ`-node clause `Xb.XbThCl` is missing; (G2) `R2.uvVt_trL` / `uvVt_trH` (the
+  translations of [W07a] Def 6.2 / Lemma 6.3 used by every FRAG step) stop at `B₂`; `CitedVd` gives membership,
+  order, data and `π` below `θ` but no translation.  (G3) `Ww.WwCarry` bounds images only under `Ww.WwR` (data of
+  every `ϑ`-level below `υ_μ`), while `Ww.WwWF` allows `ϑ`-levels with data in `[υ_λ, υ_{λ+h})`: the bridge
+  `Ww.WwRealB` as stated asks an image bound that the carry does not give.  `skRealB` is SUSPECT as stated and OFF THE
+  ROAD.
+* REDUCTION (`Xb.xbRealB`): `Xb.XbShift S` (`vlShiftCore` + `XbThCl` at constant levels: `1 ≤ M`, data below the
+  bottom `γ`) gives `Xb.XbRealB S` (the bridge for `Xb.XbGen`: forms with constant `ϑ`-levels, `Xb.XbForm`).  NEW leaf
+  `skShiftTh` (OPEN), NEW node `skRealBX` (REDUCED).
+* NEW ROAD `Xb.xbRoad`: `Ww.wwRoad` with `hB` replaced by `XbShift S` and the supply by `Xb.XbVisGen`
+  (`Xb.xbVisGen_ww`: `XbVisGen ⇒ WwVisGen`).  NEW TOP `skSupX` (XbVisGen at `m*` and every `L(n+1)`); the old top
+  `skSupW` is kept with its exact statement and is REDUCED from `skSupX`.  `Root.skNuC` must apply
+  `Xb.xbRoad (SkF.skFrontU S) (skFrontL S) (skFrontV S) (skFrontVt S) hE.1 hE.2 (SkS.skShiftTh S) skSupX.1 skSupX.2`.
+  NEW nodes: `skFormHighX` (OPEN; `skFormHighW` with constant `ϑ`-levels; the gap witness satisfies it,
+  `Xb.xbForm_gap`), `skFormX`, `skGenX`, `skVisKX` (REDUCED).  `skFormHighW`, `skFormW`, `skGenW`, `skVisKW` are OFF
+  THE ROAD (they feed only `skSupW`, which now follows from `skSupX`).  `skSupKW` stays on the road (`XbGen` uses
+  `Ww.WwSup`).
+This file imports the new `Xb` modules, so it can be checked only after the merge.
+
+Round 121 (leaf "skFormHighW, skSupKW", sup43; joined with real1 at the merge).
+* REFUTE FIRST `skFormHighW`: NO countable ordinal below `υ_{λ+β}` escapes the repaired forms.  Every `x < υ_{λ+β}`,
+  `x < Ω₁`, is `wwVal l E` of a well-formed `E` (`Xa.xaRep`, by induction on `x`: `lo` below `υ_{λ+1}`, sums at
+  decomposable `x`, `sg h x` at `x = υ_{λ+h}`, otherwise `x = ϑ^{υ_{λ+h}}(Ω₁·M + η)` by `vt_rep` with `η ∈ T`, `η < x`,
+  `Xa.xa_arg`).  So the forms clause holds at EVERY offset and window (`Xa.xaForm_all`, given only `0 < λ`,
+  `υ_{λ+β} ≤ Ω₁`): `skFormHighW` and `skFormW` are PROVED, and `Ww.WwGen` is the UPPER clause plus `Ww.WwSup`
+  (`Xa.xaGen_iff`).  After the join both are OFF THE ROAD (the road `Xb.xbRoad` needs forms with constant `ϑ`-levels,
+  `skFormHighX`, still OPEN; `Xa.xaRep` may use levels with data in `[υ_λ, υ_{λ+h})`).
+* `skSupKW` stays OPEN (on the road through `skGenX`).  REFUTE FIRST: NO EVIDENCE (see its docstring).
+This file imports `Xa.XaRep`, so it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -286,8 +325,11 @@ theorem skFormHigh_false (k : ℕ) : ¬ (∀ l ν, SkCtx S k l ν → ¬ SkWit l
     exact (lt_add_of_pos_right X (pow_pos omega0_pos 2)).trans_le le_self_add
   exact hfail (H l (l + X + ω ^ 2) hC hW hE X (InE.pos hXE) hXβ hω2g)
 
-/-- STATUS: OPEN (NEW round 120; REPLACES the refuted `skFormHigh`)
-SIZE: L
+/-- STATUS: PROVED (round 121, by `Xa.xaForm_all`, `skWin`, `Vr.vr_facts`), OFF THE ROAD since round 121 (feeds only
+`skSupW`, now REDUCED from `skSupX`; replaced on the road by `skFormHighX`) (NEW round 120; REPLACES the refuted
+`skFormHigh`).  Round 121: the hypothesis `hE` is not used; every countable ordinal below `υ_{λ+β}` is the value of a
+repaired decomposition (`Xa.xaRep`).
+SIZE: L (was)
 the REPAIRED forms clause at the windows with `ν − λ ≥ ε_{u₁+1}`: every inner reach `r(λ+z)`, `z < β(ν)`, is a big
 reach or the value of a repaired decomposition (`Ww.WwForm`: old nodes and `ϑ`-nodes `ϑ^{υ_{λ+h}}(Ω₁·M + val e)` of
 any level `M`).  REFUTE FIRST (round 120): NO EVIDENCE.  The refutation of the old node does not apply: at the gap
@@ -296,20 +338,23 @@ Expected proof: every point of `T^{υ_{λ+h}}` is a sum of components, each `< �
 `ϑ^{υ_{λ+h}}(Ω₁·M + η)` with `η` below it (`CitedVd.vdLevel_lt`, `CitedLu.luLt_vt_self`, `CitedLv.lvLevel_lt_vt`), by
 induction on the point; plus the long region `z ≥ υ_{λ+2}` (reaches not known in Lean).
 ¬(ν − λ < ε_{u₁+1}) ⇒ ∀ z < β(ν), ω² | z ⇒ υ_{λ+β} ≤ r(λ+z) ∨ WwForm(λ, β, z) -/
-theorem skFormHighW {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hE : ¬ ν - l < eN (upsilon (l + 1))) :
+theorem skFormHighW {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (_hE : ¬ ν - l < eN (upsilon (l + 1))) :
     ∀ g, 0 < g → g < ν - l + ω ^ 2 → ω ^ 2 ∣ g →
-      upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S (l + g) ∨ Ww.WwForm S l (ν - l + ω ^ 2) g := by sorry
+      upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S (l + g) ∨ Ww.WwForm S l (ν - l + ω ^ 2) g := by
+  intro g _ _ _
+  obtain ⟨-, -, -, -, -, -, hL1O, -, -⟩ := Vr.vr_facts (S := S) k
+  exact Xa.xaForm_all S (pos_iff_ne_zero.2 h.1.1) ((skWin h).2.trans hL1O.le) g
 
-/-- STATUS: REDUCED (from `skFormEps` with `Ww.wwForm_of_vr`, and `skFormHighW`; NEW round 120, REPLACES `skForm`)
-SIZE: L
+/-- STATUS: PROVED (round 121, by `Xa.xaForm_all`, `skWin`, `Vr.vr_facts`; was REDUCED from `skFormEps`, `skFormHighW`),
+OFF THE ROAD since round 121 (NEW round 120, REPLACES `skForm`)
+SIZE: L (was)
 ∀ z < β(ν), ω² | z ⇒ υ_{λ+β} ≤ r(λ+z) ∨ WwForm(λ, β, z) -/
 theorem skFormW {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) :
     ∀ g, 0 < g → g < ν - l + ω ^ 2 → ω ^ 2 ∣ g →
       upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S (l + g) ∨ Ww.WwForm S l (ν - l + ω ^ 2) g := by
-  intro g hg0 hgβ hgd
-  by_cases hE : ν - l < eN (upsilon (l + 1))
-  · exact (skFormEps h hE g hg0 hgβ hgd).imp_right Ww.wwForm_of_vr
-  · exact skFormHighW h hE g hg0 hgβ hgd
+  intro g _ _ _
+  obtain ⟨-, -, -, -, -, -, hL1O, -, -⟩ := Vr.vr_facts (S := S) k
+  exact Xa.xaForm_all S (pos_iff_ne_zero.2 h.1.1) ((skWin h).2.trans hL1O.le) g
 
 /-! ## The supply clause `Vr.VrSup` at `β(ν)` -/
 
@@ -714,16 +759,26 @@ the REPAIRED supply clause `Ww.WwSup` at `β(ν)`: supply restarts `μ` (`skMu`,
 carry `Ww.WwCarry` bounds the image of every repaired decomposition, `ϑ`-nodes included (at the gap witness the image
 is `ϑ^{υ_{μ+f(1)}}(B₂ + υ_μ)`).  REFUTE FIRST (round 120): NO EVIDENCE (not touched by `Vo.voNoGo`, `Vn.vnTop_Om3`,
 `Wf.wfSide_false`; the image of a `ϑ`-node depends only on its level and the image of its countable argument, and
-`ϑ^{υ_λ}` is injective on `T ∩ Ω₂` by [W07a] Lemma 3.30). -/
+`ϑ^{υ_λ}` is injective on `T ∩ Ω₂` by [W07a] Lemma 3.30).
+Round 121: REFUTE FIRST again, NO EVIDENCE.  (a) Since `Xa.xaRep` every reach has repaired decompositions, so the
+carry is a statement about every inner reach; two decompositions of one value differ only in (i) the split into
+sums (images are additive), (ii) `sg h x` against `th h M e` at the same `x` (the `sg` node asks `Par ⊆ υ_λ` and its
+`WfR` asks the parameters below `υ_μ`; then the level data and the leaves of `e` are below `υ_μ` and both images are
+the base change of `x`: `mv` = `π` / `up` at `ϑ`, `pi_vt_two`), (iii) the decomposition `e` of the countable
+argument (handled recursively).  (b) At the gap witness the image of the form of `Ww.wwForm_X` is
+`mv υ_{λ+h} υ_{μ+f h} υ_{λ+h} + ϑ^{υ_{μ+f(1)}}(Ω₁·B₂ + υ_μ)` (`Xa.xaImg_X`), `h = X+ω+1`; with `f(X) = X_μ :=
+ϑ^{υ_{μ+1}}(B₂ + υ_μ)` (and `f(X+ω+1) = f(X)+ω+1` by `Sl.SlOff`) the carry there asks `υ_{μ+X_μ+ω+1} + X_μ ≤
+r(μ+X_μ)`, which is the equality `Wu.wuR_X` transported to `μ` (proved in Lean only at `L(k)`).  Not touched by
+`Vo.voNoGo`, `Vn.vnTop_Om3`, `Wf.wfSide_false` (no old form language, no top law). -/
 theorem skSupKW {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Ww.WwSup S l (ν - l + ω ^ 2) := by sorry
 
-/-- STATUS: REDUCED (from `skUp`, `skFormW`, `skSupKW`; NEW round 120, REPLACES `skGen`)
+/-- STATUS: REDUCED, OFF THE ROAD since round 121 (from `skUp`, `skFormW` (PROVED round 121), `skSupKW`; NEW round 120, REPLACES `skGen`)
 SIZE: L
 WwGen(λ, β(ν)) -/
 theorem skGenW {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Ww.WwGen S l (ν - l + ω ^ 2) :=
   ⟨skUp h, skFormW h, skSupKW h⟩
 
-/-- STATUS: REDUCED (from `skWin`, `skGenW`; NEW round 120, REPLACES `skVisK`)
+/-- STATUS: REDUCED, OFF THE ROAD since round 121 (from `skWin`, `skGenW`; NEW round 120, REPLACES `skVisK`)
 SIZE: L
 ∀ k, υ_λ = L(k) ⇒ WwVisGen(λ, L(k+1), υ_{L(k)+W(L(k))}) -/
 theorem skVisKW (k : ℕ) : ∀ l, IsRestartIdx l → Nc.ncL S (k : Ordinal.{0}) = upsilon l →
@@ -733,7 +788,10 @@ theorem skVisKW (k : ℕ) : ∀ l, IsRestartIdx l → Nc.ncL S (k : Ordinal.{0})
   have hC : SkCtx S k l ν := ⟨hl, e, h1, h2, h3, h4, h5, h6⟩
   exact ⟨_, (skWin hC).1, (skWin hC).2, skGenW hC⟩
 
-/-- STATUS: OPEN (NEW round 120)
+/-- STATUS: SUSPECT, OFF THE ROAD since round 121 (`Xb.xbRoad` uses `skShiftTh` / `skRealBX`; reason: `Ww.WwCarry` bounds
+the image only of decompositions with `Ww.WwR`, data of every `ϑ`-level below `υ_μ`, but `Ww.WwWF` allows `ϑ`-levels
+with a datum in `[υ_λ, υ_{λ+h})`; for such a form the realizer must bound `D(r(λ+g))` and the carry gives nothing.
+REFUTE FIRST round 121: NO EVIDENCE against the realizer itself, `skImgGap`) (NEW round 120)
 SIZE: L
 the realizer bridge `Ww.WwRealB`: `Ww.WwGen` at `(λ, β)` gives `Lr.LrReal (υ_λ) (υ_{λ+β})` (as `Wf.wfReal_gen`; on old
 decompositions it IS `Wf.wfReal_gen`, `Ww.wwRealB_of`).  The new part: the realizer map must send a `ϑ`-node value
@@ -741,19 +799,102 @@ decompositions it IS `Wf.wfReal_gen`, `Ww.wwRealB_of`).  The new part: the reali
 translations) at levels `M ≥ B₂`, cited so far only below `B₂` (`CitedUv`).  REFUTE FIRST: NO EVIDENCE. -/
 theorem skRealB (S : InaccSeq.{0}) : Ww.WwRealB S := by sorry
 
-/-- STATUS: REDUCED (from `skVisKW`)
+/-- STATUS: PROVED (by `Xb.xb_img_gap_k`; NEW round 121; REFUTE-FIRST test of the bridge at the gap witness)
+SIZE: S
+at `L(k)`: the `ϑ`-node `th 1 B₂ (lo λ)` has the value `Ww.wwX S k`; for every `υ_μ < υ_λ`, `0 < μ`, and `f(1) = 1`
+its image is `ϑ^{υ_{μ+1}}(B₂ + υ_μ)`, an `ε`-number of `T^{υ_{μ+1}}` in `(υ_{μ+1}, υ_{μ+2})` with the parameter
+`υ_μ`. -/
+theorem skImgGap (k : ℕ) {μ : Ordinal.{0}} {f : Ordinal.{0} → Ordinal.{0}} (hμ : 0 < μ)
+    (hμl : upsilon μ < upsilon (Nc.ncL S (k : Ordinal.{0}))) (hf : f 1 = 1) :
+    Ww.wwVal (Nc.ncL S (k : Ordinal.{0})) (.th 1 Uc.ucB (.old (.lo (Nc.ncL S (k : Ordinal.{0}))))) = Ww.wwX S k ∧
+    Ww.wwImg (Nc.ncL S (k : Ordinal.{0})) μ f (.th 1 Uc.ucB (.old (.lo (Nc.ncL S (k : Ordinal.{0}))))) =
+      Xb.xbIX μ ∧
+    Xb.xbIX μ ∈ Tset (upsilon (μ + 1)) ∧ InE (Xb.xbIX μ) ∧ upsilon (μ + 1) < Xb.xbIX μ ∧
+    Xb.xbIX μ < upsilon (μ + 2) ∧ upsilon μ ∈ Par (upsilon (μ + 1)) (Xb.xbIX μ) :=
+  Xb.xb_img_gap_k k hμ hμl hf
+
+/-- STATUS: OPEN (NEW round 121; the gap of `skRealB`)
 SIZE: L
-NEW TOP (round 120; replaces the REFUTED top `skSup`): h0'' ∧ ∀ n, hn'' n, the supply hypotheses of `Ww.wwRoad`
-(`Ww.WwVisGen`); with `skRealB` they feed `Ww.wwRoad`.  `Root.skNuC` must apply `Ww.wwRoad` (arguments: the four
-frontier tops, `hE.1`, `hE.2`, `SkS.skRealB S`, `skSupW.1`, `skSupW.2`) in place of `Wf.wfRoad`. -/
+`Xb.XbShift S`: the shift `Vl.vlShiftCore` with the `ϑ`-node clause `Xb.XbThCl`: for `y ∈ Y` in the segment of
+`υ_{λ+h}`, `y = ϑ^{υ_{λ+h}}(Ω₁·M + η)` with `1 ≤ M`, the data of `M` below the bottom `γ` (`Vd.VdLtIn M γ`), `η < Ω₁`
+in `X ∪ Y`: `D(y) = ϑ^{υ_{μ+f(h)}}(Ω₁·M + D(η))`.  Below `B₂` this is the term clause of `vlShiftCore` for the term
+`thc M (par η)`.  Needs (i) the translations of [W07a] Def 6.2 / Lemma 6.3, subcase `Γ^* < α`, at the levels
+`B₂ ≤ Ω₁·M < θ` (a twin of `R2.uvVt_trL` with the `K⁽⁰⁾`-datum of `CitedVd`; not cited yet), (ii) FRAG
+(`Vl.vlFrag`, `Uy.uyFrag`) with constant levels up to `θ` (the node lemmas of `R2.UyFix` at those levels:
+membership `CitedVd.vdArg_mem`, order `vdVt_lt`, `π` on the level from `vdAtom_TB` / `vdPhi_TB` / `vdOpow_TB`).
+REFUTE FIRST round 121: NO EVIDENCE (`skImgGap`; not touched by `Vo.voNoGo`, `Vn.vnTop_Om3`, `Wf.wfSide_false`). -/
+theorem skShiftTh (S : InaccSeq.{0}) : Xb.XbShift S := by sorry
+
+/-- STATUS: REDUCED (from `skShiftTh` by `Xb.xbRealB`; NEW round 121, REPLACES `skRealB` on the road)
+SIZE: L
+the bridge for forms with constant `ϑ`-levels, `Xb.XbRealB S` -/
+theorem skRealBX (S : InaccSeq.{0}) : Xb.XbRealB S := Xb.xbRealB (skShiftTh S)
+
+/-- STATUS: OPEN (NEW round 121; `skFormHighW` with constant `ϑ`-levels; REPLACES it on the road)
+SIZE: L
+the forms clause at the windows with `ν − λ ≥ ε_{u₁+1}` with forms `Xb.XbForm` (every `ϑ`-level `M` with `1 ≤ M` and
+its data below some `c < υ_λ`).  REFUTE FIRST round 121: NO EVIDENCE; at the gap witness the form exists with `M = B₂`,
+data below `Γ₀` (`Xb.xbForm_X`, `Xb.xbForm_gap`).  Expected proof: as `skFormHighW`, with the induction on the point
+of `T^{υ_{λ+h}}` writing `ϑ^{υ_{λ+h}}(Ω₁·M + η)` with `M`'s data below `υ_λ` as a `ϑ`-node and every other point as a
+`sg`-node or a sum (a level with a datum in `[υ_λ, υ_{λ+h})` must be unfolded further).
+¬(ν − λ < ε_{u₁+1}) ⇒ ∀ z < β(ν), ω² | z ⇒ υ_{λ+β} ≤ r(λ+z) ∨ XbForm(λ, β, z) -/
+theorem skFormHighX {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hE : ¬ ν - l < eN (upsilon (l + 1))) :
+    ∀ g, 0 < g → g < ν - l + ω ^ 2 → ω ^ 2 ∣ g →
+      upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S (l + g) ∨ Xb.XbForm S l (ν - l + ω ^ 2) g := by sorry
+
+/-- STATUS: REDUCED (from `skFormEps` with `Xb.xbForm_of_vr`, and `skFormHighX`; NEW round 121)
+SIZE: L
+∀ z < β(ν), ω² | z ⇒ υ_{λ+β} ≤ r(λ+z) ∨ XbForm(λ, β, z) -/
+theorem skFormX {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) :
+    ∀ g, 0 < g → g < ν - l + ω ^ 2 → ω ^ 2 ∣ g →
+      upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S (l + g) ∨ Xb.XbForm S l (ν - l + ω ^ 2) g := by
+  have hl : 0 < upsilon l := InE.pos (upsPt_inE (upsPt_upsilon (pos_iff_ne_zero.2 h.1.1)))
+  intro g hg0 hgβ hgd
+  by_cases hE : ν - l < eN (upsilon (l + 1))
+  · exact (skFormEps h hE g hg0 hgβ hgd).imp_right (Xb.xbForm_of_vr hl)
+  · exact skFormHighX h hE g hg0 hgβ hgd
+
+/-- STATUS: REDUCED (from `skUp`, `skFormX`, `skSupKW`; NEW round 121)
+SIZE: L
+XbGen(λ, β(ν)) -/
+theorem skGenX {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Xb.XbGen S l (ν - l + ω ^ 2) :=
+  ⟨skUp h, skFormX h, skSupKW h⟩
+
+/-- STATUS: REDUCED (from `skWin`, `skGenX`; NEW round 121)
+SIZE: L
+∀ k, υ_λ = L(k) ⇒ XbVisGen(λ, L(k+1), υ_{L(k)+W(L(k))}) -/
+theorem skVisKX (k : ℕ) : ∀ l, IsRestartIdx l → Nc.ncL S (k : Ordinal.{0}) = upsilon l →
+    Xb.XbVisGen S l (Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}))
+      (upsilon (Nc.ncL S (k : Ordinal.{0}) + Te.teW (Nc.ncL S (k : Ordinal.{0})))) := by
+  intro l hl e ν h1 h2 h3 h4 h5 h6
+  have hC : SkCtx S k l ν := ⟨hl, e, h1, h2, h3, h4, h5, h6⟩
+  exact ⟨_, (skWin hC).1, (skWin hC).2, skGenX hC⟩
+
+/-- STATUS: REDUCED (from `skVisKX`)
+SIZE: L
+NEW TOP (round 121; the supply hypotheses of `Xb.xbRoad`): `Xb.XbVisGen` at `m*` and every `L(n+1)`; with
+`skShiftTh` they feed `Xb.xbRoad`.  `Root.skNuC` must apply `Xb.xbRoad` (arguments: the four frontier tops, `hE.1`,
+`hE.2`, `SkS.skShiftTh S`, `skSupX.1`, `skSupX.2`) in place of `Ww.wwRoad`. -/
+theorem skSupX :
+    (∀ l, IsRestartIdx l → Nc.ncL S 0 = upsilon l →
+      Xb.XbVisGen S l (Nc.ncL S 1) (upsilon (Nc.ncL S 0 + Te.teW (Nc.ncL S 0)))) ∧
+    (∀ n : ℕ, ∀ l, IsRestartIdx l → Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) = upsilon l →
+      Xb.XbVisGen S l (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0}))
+        (upsilon (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) + Te.teW (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))))) := by
+  refine ⟨fun l hl e => ?_, fun n l hl e => skVisKX (n + 1) l hl e⟩
+  have h := skVisKX (S := S) 0 l hl (by simpa using e)
+  simpa using h
+
+/-- STATUS: REDUCED (round 121: from `skSupX` by `Xb.xbVisGen_ww`; round 120: from `skVisKW`)
+SIZE: L
+THE ROUND-120 TOP, kept with its exact statement (round 121: no longer the top; `Xb.xbRoad` uses `skSupX`):
+h0'' ∧ ∀ n, hn'' n, the supply hypotheses of `Ww.wwRoad` (`Ww.WwVisGen`). -/
 theorem skSupW :
     (∀ l, IsRestartIdx l → Nc.ncL S 0 = upsilon l →
       Ww.WwVisGen S l (Nc.ncL S 1) (upsilon (Nc.ncL S 0 + Te.teW (Nc.ncL S 0)))) ∧
     (∀ n : ℕ, ∀ l, IsRestartIdx l → Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) = upsilon l →
       Ww.WwVisGen S l (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0}))
         (upsilon (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) + Te.teW (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))))) := by
-  refine ⟨fun l hl e => ?_, fun n l hl e => skVisKW (n + 1) l hl e⟩
-  have h := skVisKW (S := S) 0 l hl (by simpa using e)
-  simpa using h
+  exact ⟨fun l hl e => Xb.xbVisGen_ww (skSupX.1 l hl e), fun n l hl e => Xb.xbVisGen_ww (skSupX.2 n l hl e)⟩
 
 end R2Skel.SkS

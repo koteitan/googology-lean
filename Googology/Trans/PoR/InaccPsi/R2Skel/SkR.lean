@@ -11,6 +11,7 @@ import Googology.Trans.PoR.InaccPsi.R2.WlLow
 import Googology.Trans.PoR.InaccPsi.R2.WrMid
 import Googology.Trans.PoR.InaccPsi.R2.WvImg
 import Googology.Trans.PoR.InaccPsi.R2.WzUp
+import Googology.Trans.PoR.InaccPsi.R2.XdLaw1
 
 /-!
 # Skeleton, part "readings": the reading move `hν → Wd.WdThLow S`
@@ -48,6 +49,13 @@ gives the lower half of the law at `k = 0, β = Ω₃` (`skX0LowOm3`), and the l
 (`skX0Om3Iff`).  New OPEN node `skUpU` (`Wz.WzUpU`: `Θ(ψ₂(a)) ≤ ψ₁(A + 1 + ψ₂(T a))` for normal `a ∈ D`; tight at
 `a = Ω₃`, `Ω₃·2`, `θ`); `skX0Om3` (the law at `k = 0, β = Ω₃`) is REDUCED to it.  This file imports the new module
 `R2.WzUp`: it can be checked only after the merge.
+Round 121 (leaf read45): `skUpU` is PROVED (`Xd.xdUpU`: one induction on the atom, with the transfer `Xd.xdT_cl` /
+`Xd.xdTr`: `x ∈ Cl(a, ψ₂(a)) ⇒ T x ∈ Cl(T a, ψ₂(T a))`), so `skX0Om3` is PROVED.  REFUTE FIRST on `skX0Law`: REFUTED
+(`Xd.xdX0Law_false`): `T = Vb.vbT` is `0` off its domain, so at `β = Ω_ω` (allowed by `Ro.RoBaseE` at the restart of
+`m*`) the image is `Y₂`, while the lift at the base `Ω_ω` (`Xd.xdLift`) gives readings above `ψ₁(A + θ + Y₂)` below
+`ψ₂(Ω_ω + Ω₃)`.  Replaced by `skX0LawDK` (the same law for bases `β ∈ D`, OPEN), with the parts `skX0LawD` (k = 0, every
+`β ∈ D`, PROVED, `Xd.xdLaw0D`) and `skX0Law1` (k = 1, β = 0, PROVED, `Xd.xdLaw1`).  This file imports the new module
+`R2.XdLaw1`: it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -267,7 +275,11 @@ theorem skX0Tests (S : InaccSeq.{0}) :
     ⟨Wv.wvX0_law00 hl hX hA hρ, (Wv.wvX0_sep hl hX).1, (Wv.wvX0_sep hl hX).2.2.2,
       Wv.wvX0_lt_th hl hX, (Wv.wvX0_one_in hl hX).1⟩
 
-/-- STATUS: OPEN (NEW round 113)
+/-- STATUS: REFUTED (Xd.xdX0Law_false, from Xd.xdRef; round 121; REPLACED by skX0LawDK; kept for the record, no node
+uses it): at the restart of m* = L(0), β = Ω_ω satisfies Ro.RoBaseE at Ω₃ (A > Ω_ω + Ω₃, Xd.xdA_big), T Ω_ω = 0
+(Xd.xdT_OmW: Vb.vbT is 0 off its domain), so the image is X̂⁰_0(Ω_ω) = Y₂; the law would give Θ(ψ₂(Ω_ω + Ω₃)) =
+ψ₁(A + θ + Y₂), but the lift at the base Ω_ω (Xd.xdLift, Â = A + θ, L(ζ) = Ω₂ + ζ) gives ψ₁(A + θ + z₂) ≤ Θ(ψ₂(Ω_ω + κ z₂))
+with z₂ = ψ₂(Ω₂ + Y₂) > Y₂.
 SIZE: L
 `∀ k, ∀ restart λ, A own, ψ₁(A) = ρ_λ, ∀ base β of Ω_{k+3} (exponent 0) : Θ(ψ₂(β + Ω_{k+3})) = ψ₁(Â_β + Ω^{X̂⁰_k(β)})`,
 X̂⁰_k(β) = ψ₂(T β + Ω_{k+2}) (the e = 0 part of skTopFam with an explicit image).  Proved: k = 0, β = 0 (skX0Tests).
@@ -286,6 +298,55 @@ theorem skX0Law (S : InaccSeq.{0}) :
       Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) 0 β →
       Wg.WgTopAt S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) (Wv.wvX0 S l k β) 0 β := by
   sorry
+
+/-- STATUS: PROVED (Xd.xdRef, Xd.xdX0Law_false; NEW round 121; a REFUTE-FIRST record, no node uses it)
+SIZE: S
+`¬ skX0Law`: the statement of skX0Law fails at k = 0, β = Ω_ω, the restart of m* = L(0). -/
+theorem skX0Ref (S : InaccSeq.{0}) :
+    ¬ ∀ (k : ℕ) (l ηx A β : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) 0 β →
+      Wg.WgTopAt S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) (Wv.wvX0 S l k β) 0 β :=
+  Xd.xdX0Law_false S
+
+/-- STATUS: OPEN (NEW round 121; replaces the REFUTED skX0Law: bases restricted to the domain D of T)
+SIZE: L
+`∀ k, ∀ restart λ, A own, ψ₁(A) = ρ_λ, ∀ β ∈ D (Vb.VbD), RoBaseE λ Ω_{k+3} 0 β : Θ(ψ₂(β + Ω_{k+3})) =
+ψ₁(Â_β + Ω^{X̂⁰_k(β)})`, X̂⁰_k(β) = ψ₂(T β + Ω_{k+2}).  PROVED parts: k = 0, every β ∈ D (skX0LawD); k = 1, β = 0
+(skX0Law1).  REFUTE FIRST: NO EVIDENCE (the upper half holds at every (k, β), Xd.xdUp_at; equality at (0, β ∈ D),
+(1, 0); Xd.xdX0Law_false needs β ∉ D).  Route at k = 1, β ∈ D: the lower half from skX0LawD at the bases β + u, u
+cofinal ψ_{Ω₄}-iterates over β (T(β + u_n) = T β + y_n), with ψ₂(T β + Ω₃) = sup_n ψ₂(T β + y_n) (the base-relative
+Vn.vnPsi2_eq / Uu.uuY_le_sup); then k + 1 from k at every base the same way (induction on k with the law at all
+bases).  L: a base-relative version of Vn.vnPsi2_eq and of the ψ_{Ω_{k+3}}-iterates over a base. -/
+theorem skX0LawDK (S : InaccSeq.{0}) :
+    ∀ (k : ℕ) (l ηx A β : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l → Vb.VbD S l β →
+      Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) 0 β →
+      Wg.WgTopAt S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) (Wv.wvX0 S l k β) 0 β := by
+  sorry
+
+/-- STATUS: PROVED (Xd.xdLaw0D, from Xd.xdUp_at, Xd.xdLow0, Xd.xdLift, Xd.xdLtPsi, Xd.xdX_le_sup, Xd.xdT_mod,
+Xd.xdT_leaf, Xd.xdTr; NEW round 121; checkable only after the merge)
+SIZE: M
+skX0LawDK at k = 0: `restart λ, A own, ψ₁(A) = ρ_λ, β ∈ D, RoBaseE λ Ω₃ 0 β ⇒ WgTopAt λ Ω₃ (X̂⁰_0(β)) 0 β`
+(Θ(ψ₂(β + Ω₃)) = ψ₁(A + ψ₂(T β + Ω₂))).  Non-vacuity: Xd.xdLaw0D_wit (β = Ω₃ at the restart of m*). -/
+theorem skX0LawD (S : InaccSeq.{0}) :
+    ∀ (l ηx A β : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l → Vb.VbD S l β →
+      Ro.RoBaseE S l (Om (1 + 1 + 1)) 0 β →
+      Wg.WgTopAt S l (Om (1 + 1 + 1)) (Wv.wvX0 S l 0 β) 0 β :=
+  fun _ _ _ _ hl hX hA hρ hβ hB => Xd.xdLaw0D hl hX hA hρ hβ hB
+
+/-- STATUS: PROVED (Xd.xdLaw1, Xd.xdLaw1_val, from Xd.xdUp_at, Xd.xdLow0 at the bases u_n = ψ_{Ω₄}^n(0), Xd.xdU_T,
+Xd.xdPsi3_cof; NEW round 121; checkable only after the merge)
+SIZE: M
+skX0LawDK at k = 1, β = 0: `restart λ, A own, ψ₁(A) = ρ_λ ⇒ WgTopAt λ Ω₄ (X̂⁰_1(0)) 0 0`
+(Θ(ψ₂(Ω₄)) = ψ₁(A + 1 + ψ₂(Ω₃)); the image ψ₂(Ω₃) passes skImgLtTh, skImg1Gt, skX0Tests2). -/
+theorem skX0Law1 (S : InaccSeq.{0}) :
+    ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      Wg.WgTopAt S l (Om (((1 : ℕ) : Ordinal.{0}) + 1 + 1 + 1)) (Wv.wvX0 S l 1 0) 0 0 :=
+  fun _ _ _ hl hX hA hρ => Xd.xdLaw1 hl hX hA hρ
 
 /-- STATUS: PROVED (Wz.wzLawLow, from Wz.wzLowAll, Wz.wzLift, Wz.wzL_memL, Wz.wzLtPsi, Wz.wzX_le_sup, Rx.rxLift,
 Lw.lw_psi_limit; NEW round 114; checkable only after the merge)
@@ -313,7 +374,8 @@ theorem skX0Om3Iff (S : InaccSeq.{0}) :
           S.psi (ConjT.Aη S (cdEta S l) + S.psi (Om (1 + 1) + Om (1 + 1)) (Om (1 + 1))) (Om 1)) :=
   fun _ _ _ hl hX hA hρ => Wz.wzLaw_iff hl hX hA hρ
 
-/-- STATUS: OPEN (NEW round 114)
+/-- STATUS: PROVED (Xd.xdUpU, from Xd.xdUp_at, Xd.xdT_cl, Xd.xdTr, Xd.xdT_psi_lt, Ld.ldAtom_le, Mx.mxGx_bound; round 121;
+checkable only after the merge; was OPEN L)
 SIZE: L
 `Wz.WzUpU`: `∀ restart λ, A own, ψ₁(A) = ρ_λ, ∀ a ∈ D (Vb.VbD), a ∈ Cl(a, ψ₂(a)) : Θ(ψ₂(a)) ≤ ψ₁(A + 1 + ψ₂(T a))`
 (T = Vb.vbT).  REFUTE FIRST: NO EVIDENCE: equality at a = Ω₃ (Wz.wzU_Om3), tight at a = Ω₃·2 (Wz.wzU_Om33_low) and
@@ -323,10 +385,10 @@ Plan: induction on the atom (Ld.ldAtom_le); for atoms t' = ψ₂(a') < t = ψ₂
 T a' ∈ Cl(T a, ψ₂(T a)) (codes of a' are below ψ₂(a), T maps them to countable Θ-values), the leaves of T a' are
 below Θ(t') ≤ ψ₁(A + 1 + ψ₂(T a')) (so A + 1 + ψ₂(T a') is own), hence ψ₁(A+1+ψ₂(T a')) < ψ₁(A+1+ψ₂(T a)).
 L: the transfer of ψ₂-closure through T and the leaf bound are not in Lean. -/
-theorem skUpU (S : InaccSeq.{0}) : Wz.WzUpU S := by
-  sorry
+theorem skUpU (S : InaccSeq.{0}) : Wz.WzUpU S := Xd.xdUpU
 
-/-- STATUS: REDUCED (skUpU; Wz.wzLaw_of_U, Wz.wzUp_Om3_of, Wz.wzT_Om33, Wz.wzLaw_iff; NEW round 114)
+/-- STATUS: PROVED (skUpU; Wz.wzLaw_of_U, Wz.wzUp_Om3_of, Wz.wzT_Om33, Wz.wzLaw_iff; NEW round 114; round 121: all
+children proved; = skX0LawD at β = Ω₃)
 SIZE: S
 skX0Law at k = 0, β = Ω₃: `restart λ, A own, ψ₁(A) = ρ_λ ⇒ WgTopAt λ Ω₃ (X̂⁰_0(Ω₃)) 0 Ω₃`
 (Θ(ψ₂(Ω₃·2)) = ψ₁(A + 1 + Y₂ + ψ₂(Ω₂·2))). -/
