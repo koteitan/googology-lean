@@ -9,6 +9,7 @@ import Googology.Trans.PoR.InaccPsi.R2.WgFam
 import Googology.Trans.PoR.InaccPsi.R2.WgTh
 import Googology.Trans.PoR.InaccPsi.R2.WlLow
 import Googology.Trans.PoR.InaccPsi.R2.WrMid
+import Googology.Trans.PoR.InaccPsi.R2.WvImg
 
 /-!
 # Skeleton, part "readings": the reading move `hν → Wd.WdThLow S`
@@ -33,6 +34,11 @@ windows with `m_λ ≥ θ⁺`, so `skMidAssemble` cannot use its wall hypothesis
 restated without code hypotheses (`Wr.WrWallCF`; `WallBelow` lost its code hypotheses), `skWallCF` gives it, `skWall`
 follows (`Wr.wrWall_of_cf`), and `skMidCF` (`Wr.wrMid`: `WrWallCF ⇒ RnThMoveM`) is PROVED.  This file imports the
 new module `R2.WrMid`: it can be checked only after the merge.
+Round 113 (leaf read43): REFUTE FIRST on the images of `skTopFam`.  Every image of the law at the base `0` has
+`Ω^{X̂} < θ` (`Wv.wvImg_lt_th`, from `Θ_λ(θ) = ψ₁(A+θ)`), so the naive intrinsic image `X̂ = T(Y(0)) = Y_{k+2}` is
+REFUTED at every `k ≥ 1` (`Wv.wvNoT`; `Wb.wbNoY_ge1` gave only some `k`).  New candidate `X̂⁰_k(β) = ψ₂(T β + Ω_{k+2})`
+(`Wv.wvX0`; equal to `T(ψ₃(β+Ω₃))` at `k = 0`) passes every Lean test (`skX0Tests`); its law at every base is the new
+OPEN node `skX0Law`.  This file imports the new module `R2.WvImg`: it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -173,7 +179,11 @@ REFUTE FIRST: NO EVIDENCE.  `SkRX.skrxDyn01` does not apply (`Wg.wgSep01`: X̂�
 consistent; the contradiction is the case X̂₁ = X̂₀); `Vx.vxDyn_le0` / `vxDyn_gtOm3` / `vxDyn_nonconst` / `vxNoCompat`
 constrain X̂₀ only; `Vn.vnTop_Om3`, `Vq.vqNoTop_Om3` refute constant images only; `Wb.wbNoY` / `wbNoIt` refute the
 image Y_{k+2} at β = 0, not every image.  Proved part: e = 0 at β = 0 (`skTopFam0`).  Open: every other base
-(β = Ω₃·γ, γ ≥ 1, at e = 0: no Lean value of Θ(ψ₂(Ω₃·γ + Ω₃))) and e ≥ 1 (β = 0, e = 1: no value of Θ(ψ₂(Ω₃·Ω₂))). -/
+(β = Ω₃·γ, γ ≥ 1, at e = 0: no Lean value of Θ(ψ₂(Ω₃·γ + Ω₃))) and e ≥ 1 (β = 0, e = 1: no value of Θ(ψ₂(Ω₃·Ω₂))).
+Round 113: every image at the base 0 has Ω^{X̂} < θ (skImgLtTh), the naive image T(Y(β)) is REFUTED at every k ≥ 1
+(skNaiveT); the e = 0 part with the candidate image X̂⁰_k(β) = ψ₂(T β + Ω_{k+2}) is the node skX0Law (OPEN, all
+Lean tests passed, skX0Tests).  Expected at e = 1, β = 0 (not in Lean): X̂₁(0) = ψ₂(Ω₂·Θ(t₁)), t₁ = ψ₂(Ω₃·Ω₂), i.e. the
+level map T taken relative to the hull of the atom (Ω₂ ↦ Θ(t₁)), the image of ψ₃(Ω₃·Ω₂). -/
 theorem skTopFam (S : InaccSeq.{0}) : Wg.WgTopFamAll S := by
   sorry
 
@@ -199,6 +209,69 @@ theorem skTopSep (S : InaccSeq.{0}) :
         X0 0 ≤ S.psi (Om (1 + 1)) (Om (1 + 1)) ∧ S.psi (Om (1 + 1)) (Om (1 + 1)) < X0 (Om (1 + 1 + 1)) ∧
           X0 (Om (1 + 1 + 1)) ≤ X1 0 :=
   fun _ _ _ hl hX hA hρ _ _ h0 h1 => Wg.wgSep01 hl hX hA hρ h0 h1
+
+/-- STATUS: PROVED (Wv.wvImg_lt_th, from Wl.wlThVal, Wv.wvRead_lt_th; NEW round 113)
+SIZE: S
+REFUTE-FIRST record for skTopFam: `restart λ, A own, ψ₁(A) = ρ_λ, WgTopAt λ Ω_{k+3} Z 0 0 ⇒ Ω^Z < θ` (every image of
+the law at the base 0 is below θ, at every level k). -/
+theorem skImgLtTh (S : InaccSeq.{0}) :
+    ∀ (k : ℕ) (l ηx A Z : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      Wg.WgTopAt S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) Z 0 0 → Le.leOe Z < ConjT.th S :=
+  fun k _ _ _ _ hl hX hA hρ hT => Wv.wvImg_lt_th hl hX hA hρ k hT
+
+/-- STATUS: PROVED (Wv.wvNoT, Wv.wvT_Y, Wv.wvNoBig; NEW round 113; a NO-GO record, no node uses it)
+SIZE: S
+`∀ k ≥ 1 : ¬ WgTopAt λ Ω_{k+3} (T(Y_{k+3})) 0 0`: the naive intrinsic image X̂ = T(ψ_{Ω_{k+3}}(β + Ω_{k+3})) (the moved
+shift read one level down, `T = Vb.vbT`) is REFUTED at β = 0 for every k ≥ 1 (T(Y_{k+3}) = Y_{k+2} ≥ Ω₂ > θ). -/
+theorem skNaiveT (S : InaccSeq.{0}) :
+    ∀ (k : ℕ) (l ηx A : Ordinal.{0}), 1 ≤ k → IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      ¬ Wg.WgTopAt S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) (Vb.vbT S l (Uj.ujY S ((k : Ordinal.{0}) + 1))) 0 0 :=
+  fun k _ _ _ hk hl hX hA hρ => Wv.wvNoT hl hX hA hρ k hk
+
+/-- STATUS: PROVED (Wv.wvImg1_gt, from Vq.vqRead_Om3Y3; NEW round 113)
+SIZE: S
+`WgTopAt λ Ω₄ Z 0 0 ⇒ Y₂ + Y₂ < Ω^Z` (lower test at k = 1; with skImgLtTh: Y₂ + Y₂ < Ω^Z < θ). -/
+theorem skImg1Gt (S : InaccSeq.{0}) :
+    ∀ (l ηx A Z : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      Wg.WgTopAt S l (Om (1 + 1 + 1 + 1)) Z 0 0 →
+        S.psi (Om (1 + 1)) (Om (1 + 1)) + S.psi (Om (1 + 1)) (Om (1 + 1)) < Le.leOe Z :=
+  fun _ _ _ _ hl hX hA hρ hT => Wv.wvImg1_gt hl hX hA hρ hT
+
+/-- STATUS: PROVED (Wv.wvX0_law00, Wv.wvX0_sep, Wv.wvX0_lt_th, Wv.wvX0_one_in; NEW round 113)
+SIZE: S
+REFUTE-FIRST tests of the candidate X̂⁰_k(β) = ψ₂(T β + Ω_{k+2}) (`Wv.wvX0`): the law holds at k = 0, β = 0
+(image Y₂, Wg.wgTop0_base0); Ω^{X̂⁰_0(0)} ≤ Y₂ < Ω^{X̂⁰_0(Ω₃)} (Vx.vxDyn_le0, Vx.vxDyn_gtOm3, Wg.wgSep01; not constant:
+Vx.vxDyn_nonconst, Vq.vqNoTop_Om3, Vn.vnTop_Om3); Ω^{X̂⁰_k(0)} < θ at every k (skImgLtTh; so Wb.wbNoY, skNaiveT do not
+apply); Y₂ + Y₂ < Ω^{X̂⁰_1(0)} (skImg1Gt). -/
+theorem skX0Tests (S : InaccSeq.{0}) :
+    ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      Wg.WgTopAt S l (Om (1 + 1 + 1)) (Wv.wvX0 S l 0 0) 0 0 ∧
+      Le.leOe (Wv.wvX0 S l 0 0) ≤ S.psi (Om (1 + 1)) (Om (1 + 1)) ∧
+      S.psi (Om (1 + 1)) (Om (1 + 1)) < Le.leOe (Wv.wvX0 S l 0 (Om (1 + 1 + 1))) ∧
+      (∀ k : ℕ, Le.leOe (Wv.wvX0 S l k 0) < ConjT.th S) ∧
+      S.psi (Om (1 + 1)) (Om (1 + 1)) + S.psi (Om (1 + 1)) (Om (1 + 1)) < Le.leOe (Wv.wvX0 S l 1 0) :=
+  fun _ _ _ hl hX hA hρ =>
+    ⟨Wv.wvX0_law00 hl hX hA hρ, (Wv.wvX0_sep hl hX).1, (Wv.wvX0_sep hl hX).2.2.2,
+      Wv.wvX0_lt_th hl hX, (Wv.wvX0_one_in hl hX).1⟩
+
+/-- STATUS: OPEN (NEW round 113)
+SIZE: L
+`∀ k, ∀ restart λ, A own, ψ₁(A) = ρ_λ, ∀ base β of Ω_{k+3} (exponent 0) : Θ(ψ₂(β + Ω_{k+3})) = ψ₁(Â_β + Ω^{X̂⁰_k(β)})`,
+X̂⁰_k(β) = ψ₂(T β + Ω_{k+2}) (the e = 0 part of skTopFam with an explicit image).  Proved: k = 0, β = 0 (skX0Tests).
+REFUTE FIRST: NO EVIDENCE (skX0Tests: every Lean constraint holds).  Open: β = Ω₃ at k = 0 (image ψ₂(Ω₂·2): the atom
+ψ₂(Ω₃·2) = ψ₂(Ω₃ + ψ₃(Ω₃·2)) is the limit of ψ₂(Ω₃ + x_n), x_{n+1} = ψ₃(Ω₃ + x_n), whose shifts x_n ≥ Y₃ for n ≥ 1
+are past the Y₃ wall: no level system there) and k = 1 at β = 0 (image ψ₂(Ω₃); needs offsets up to ψ₂(Ω₃) lifted
+at the base 0, where the Rx lift fails).  L: same missing level system as skWallBase. -/
+theorem skX0Law (S : InaccSeq.{0}) :
+    ∀ (k : ℕ) (l ηx A β : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) 0 β →
+      Wg.WgTopAt S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) (Wv.wvX0 S l k β) 0 β := by
+  sorry
 
 /-- STATUS: OPEN (RISK: the family law fixes no B_n-move of the images X̂_e; the step will likely need, in addition,
 `B_n X̂^λ_e(β) = X̂^{λ'}_{B_n e}(B_n β)`, which is itself a move statement; round 112: for own images that move IS the

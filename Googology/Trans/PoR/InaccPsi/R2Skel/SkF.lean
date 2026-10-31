@@ -9,6 +9,8 @@ import Googology.Trans.PoR.InaccPsi.R2.WnSucc
 import Googology.Trans.PoR.InaccPsi.R2.WnLv3
 import Googology.Trans.PoR.InaccPsi.R2.WoTop
 import Googology.Trans.PoR.InaccPsi.R2.WpStep
+import Googology.Trans.PoR.InaccPsi.R2.WsZeta
+import Googology.Trans.PoR.InaccPsi.R2.WtTow
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -87,6 +89,32 @@ successor, every level with a gated `ω`-sequence (`Wp.WpFs`), every coefficient
 lemma `Wp.wp_glG_coef`) and every cofinal level `glBn n` are PROVED; (A2) is REDUCED to the one leaf `skStepOm1WG2`
 (`Wp.WpOm1Step G`, the levels with no gated `ω`-sequence); `skSysAllG` keeps its statement.  Non-vacuity:
 `skFamSqG` (the corrected family on `[Ω₁, Ω₁²)`, no hypothesis).
+
+Round 119 (leaf gam44, modules `R2.Ws*`; the new nodes below import `R2.WsTop`, so they can be checked only after the
+merge): the family over raw data of `R2.Wo` is now written ONCE for a CODE INTERFACE `Ws.WsC` (bound, reading, gate,
+low field and their facts); the `Ω₁`-cofinal step is generic (`skStepOm1Ws`); the (A1) instance `Ws.wsA1` reproves
+`Wo.woStep_om1` and `Wo.woSysA1` (`skA1Check`, `skA1SysCheck`); the (A2) instance `Ws.wsA2` uses the gate
+`Ws.gh = max 1 glG`.  REFUTE FIRST: `ε_{Ω₁+1}` lies in the remaining case of `Wp.WpOm1Step G` and has neither a
+`Wp.WpFs` sequence nor an `Ω₁`-sequence (`skGlGNoFsE`), so no classification with the gate `glG` exists; with `gh`
+the towers `Ω₁^{…}` serve.  ONE induction on the base-`e` normal form (`Ws.ws_br`) reduces the whole (A2)
+classification to the `ε`-number codes (`skBaseA2`), proved for every code of Veblen level 1, i.e. up to
+`ζ_{Ω₁+1}` (`skBaseZ`, from the classification of the index); OPEN: the Veblen nodes `e ∈ (ζ_{Ω₁+1}, G)`
+(`skBaseA2Hi`).  `skStepOm1WG2` (arbitrary coherent families) is REPLACED (not proved, not needed), with
+`skStepWG2`, `skFamWG2`, and `skSysAllG` (gate `≤ glG ℓ`; replaced by `skSysAllG2`, gate `≤ gh ℓ`, only `< K` is used).
+The frontier moves to `skFW = ι(Γ(φ(ε_{Ω₁+ω}, G+1))·ω)` (`skSysWV`, `skLocW`, `skHypIffW`; road `Ws.wsRoad`) and then
+to `skFZ = ι(Γ(φ(ζ_{Ω₁+1}, G+1))·ω)` (`skSysZV`, `skLocZ`, `skHypIffZ`; road `Ws.wsRoadZ`).
+
+Round 119 (leaf reg4, modules `R2.Wt*`; the PROVED nodes below can be checked only after the merge): the (A3) level
+data below `t₀`.  Every (A3) level `G < L < t₀`, `Ω₁ ∣ L` has a `Wn.WnLv3` (`skA3DatumAll`: codes of the hereditary
+step `Go.goGl.step`, reading `G ↦ Γ_{x+1}`, gate from `Go.GoD.code_gate` via `Wt.wt_cl_head`); the towers
+`G^{⋯^G}` give the `ω`-sequence of (A3) level data of gate `0` below `Wn.wnLv3T0` with readings `+x`-increasing and
+cofinal (`skA3Tow`); a step at an (A3) level contains the steps of every lower level at the same pseudo-base, (A1)
+and (A2) included (`skA3StepLow`), so `skSysA3Lev0W` needs (A2) closed (now `skBaseA2Hi`).  Route: neither a copy of
+the `Hn` package stack nor the `Wo` family can be written for `Wn.WnLv3` without copying the `Hn` stack, because the
+pseudo-base / package / successor / limit machinery (`Hn.HnVQ` … `Hn.HnWP`, `Wm.WmPkL`, `Wm.WmExt`, `Ho.hoOU`) is
+typed by `Hn.HnLv`, whose fields `L < G`, `ℓ(x) < Γ_{x+1}` exclude every (A3) level; the stack itself uses neither
+field (only `Ω₁ ≤ L` and `ℓ(x) + ν < Γ_{x+2}`).  Shortest road: WIDEN `Hn.HnLv` to `L < Γ(1)`, `ℓ(x) < Γ_{x+2}`
+(a repo refactor), then every `Wn.WnLv3` is an `Hn.HnLv` and the `Wo` family form applies over (A3) raw data.
 -/
 
 set_option autoImplicit false
@@ -471,6 +499,54 @@ theorem skHypIffE (S : InaccSeq.{0}) (h : ∀ l, Cd.CdRange S l → skFE S ≤ l
   · exact skLocE S l hr h'
   · exact h l hr h'
 
+/-- The frontier of round 119: `ι(Γ(φ(ε_{Ω₁+ω}, G+1))·ω)`. -/
+noncomputable def skFW (S : InaccSeq.{0}) : Ordinal.{0} := Bt.iota S (Gc.gcG Ws.wsVw.B * ω)
+
+/-- STATUS: PROVED (Ws.wsVw_B, Ws.wsVw_γK: the system of the generic (A2) family at the level ε_{Ω₁+ω})
+SIZE: M
+the system over G at φ(ε_{Ω₁+ω}, G+1), gate < K. -/
+theorem skSysWV (S : InaccSeq.{0}) : ∃ V : Hg.HgVD, V.B = veblen Ws.wsLw (Gc.gcG 0 + 1) ∧ V.γ < Td.tdK S :=
+  ⟨Ws.wsVw, Ws.wsVw_B, Ws.wsVw_γK S⟩
+
+/-- STATUS: PROVED (Ws.wsW_enum, Ws.wsW_capV)
+SIZE: S
+UPPER ∧ LOWER ∧ CapV at every range restart below skFW. -/
+theorem skLocW (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → l < skFW S → SkUV S l := fun _ hr hl =>
+  ⟨(Ws.wsW_enum S hr hl).1, (Ws.wsW_enum S hr hl).2, Ws.wsW_capV S hr hl⟩
+
+/-- STATUS: PROVED (Ws.wsW_fr_order, skLocW, skHypIffE)
+SIZE: S
+THE FRONTIER MOVES: the restarts in [skFHo, skFW) are settled, so UPPER / LOWER / CapV above skFW suffice. -/
+theorem skHypIffW (S : InaccSeq.{0}) (h : ∀ l, Cd.CdRange S l → skFW S ≤ l → SkUV S l) :
+    ∀ l, Cd.CdRange S l → skFHo S ≤ l → SkUV S l := fun l hr _ => by
+  rcases lt_or_ge l (skFW S) with h' | h'
+  · exact skLocW S l hr h'
+  · exact h l hr h'
+
+/-- The frontier of round 119 (leaf gam44, final): `ι(Γ(φ(ζ_{Ω₁+1}, G+1))·ω)`. -/
+noncomputable def skFZ (S : InaccSeq.{0}) : Ordinal.{0} := Bt.iota S (Gc.gcG Ws.wsVz.B * ω)
+
+/-- STATUS: PROVED (Ws.wsVz_B, Ws.wsVz_γK: the system of the generic (A2) family at the level ζ_{Ω₁+1}, gate ≤ 1)
+SIZE: M
+the system over G at φ(ζ_{Ω₁+1}, G+1), gate < K. -/
+theorem skSysZV (S : InaccSeq.{0}) : ∃ V : Hg.HgVD, V.B = veblen Ws.wsZ (Gc.gcG 0 + 1) ∧ V.γ < Td.tdK S :=
+  ⟨Ws.wsVz, Ws.wsVz_B, Ws.wsVz_γK S⟩
+
+/-- STATUS: PROVED (Ws.wsZ_enum, Ws.wsZ_capV)
+SIZE: S
+UPPER ∧ LOWER ∧ CapV at every range restart below skFZ. -/
+theorem skLocZ (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → l < skFZ S → SkUV S l := fun _ hr hl =>
+  ⟨(Ws.wsZ_enum S hr hl).1, (Ws.wsZ_enum S hr hl).2, Ws.wsZ_capV S hr hl⟩
+
+/-- STATUS: PROVED (Ws.wsZ_fr_order, skLocZ)
+SIZE: S
+THE FRONTIER MOVES: the restarts in [skFHo, skFZ) are settled, so UPPER / LOWER / CapV above skFZ suffice. -/
+theorem skHypIffZ (S : InaccSeq.{0}) (h : ∀ l, Cd.CdRange S l → skFZ S ≤ l → SkUV S l) :
+    ∀ l, Cd.CdRange S l → skFHo S ≤ l → SkUV S l := fun l hr _ => by
+  rcases lt_or_ge l (skFZ S) with h' | h'
+  · exact skLocZ S l hr h'
+  · exact h l hr h'
+
 
 /-! ## (A2) and (A3): the level codes past `ε_{Ω₁+1}` (round 116, leaf reg1)
 
@@ -780,7 +856,9 @@ SIZE: S
 the step at every cofinal level glBn n of (A2), on SkCohWG2. -/
 theorem skStepBnWG2 : ∀ n : ℕ, SkStepAtWG2 (Gl.glBn n) := Wp.wpStep_Bn
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (round 119: by the family over raw data for the code interface Ws.wsA2 (Ws.wsFam), whose only
+remaining hypothesis is the arithmetic leaf skBaseA2; this node asks the step for ARBITRARY coherent families, and its
+remaining case contains ε_{Ω₁+1}, which has no gated sequence at all (skGlGNoFsE); not proved, not needed)
 SIZE: L
 THE ONE REMAINING STEP OF (A2): every level ℓ < G that is not Ω₁, not ℓ' + Ω₁ and has no gated ω-sequence
 (cofinality Ω₁: P + Ω₁^{e+1}, P + Ω₁^e with e of cofinality Ω₁, incl. the (A1) levels of skStepOm1W2), on SkCohWG2.
@@ -789,12 +867,12 @@ The same generic recursion as skStepOm1W2 with (rdc, gtc, whGW) ↦ (glR, glG, w
 theorem skStepOm1WG2 : Wp.WpOm1Step (Gc.gcG 0) := by
   sorry
 
-/-- STATUS: REDUCED (skStepBaseWG2, skStepSuccWG2, skStepFsWG2, skStepOm1WG2; Wp.wpStep_all)
+/-- STATUS: REPLACED (round 119: rests on the REPLACED skStepOm1WG2; not used)
 SIZE: M
 the step at every (A2) level on SkCohWG2. -/
 theorem skStepWG2 : ∀ ℓ, SkLevG ℓ → SkStepAtWG2 ℓ := fun ℓ hℓ => Wp.wpStep_all skStepOm1WG2 ℓ hℓ hℓ.2.2
 
-/-- STATUS: REDUCED (skStepOm1WG2; Wp.wpFam)
+/-- STATUS: REPLACED (round 119: rests on the REPLACED skStepOm1WG2; the generic family Ws.wsFam replaces it)
 SIZE: M
 one generic induction over every level ℓ < G on SkCohWG2. -/
 theorem skFamWG2 : ∃ F : Ordinal.{0} → SkEnt,
@@ -809,7 +887,8 @@ theorem skFamSqG : ∃ F : Ordinal.{0} → SkEnt, ∀ ℓ, SkLevG ℓ → ℓ < 
     SkAtWG ℓ (F ℓ) ∧ ∀ ℓ', ℓ' < ℓ → SkLevG ℓ' → SkExtW2 (F ℓ') (F ℓ) :=
   ⟨Wp.wpF _ Wp.wpOm1Step_sq, Wp.wpFam_sq⟩
 
-/-- STATUS: REDUCED (skFamWG2, i.e. only skStepOm1WG2: Wp.wpSysAll; was REDUCED (skFamWG))
+/-- STATUS: REPLACED (round 119: by skSysAllG2, gate ≤ Ws.gh ℓ = max 1 (glG ℓ); at ℓ = ε_{Ω₁+1} the families give
+gate 1 > glG ℓ = 0; only γ < K is used downstream)
 SIZE: M -/
 theorem skSysAllG : ∀ ℓ, SkLevG ℓ → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.gcG 0 + 1) ∧ V.γ ≤ Gl.glG ℓ := by
   intro ℓ hℓ
@@ -831,14 +910,102 @@ SIZE: S
 the gate of the cofinal levels is small: glG (glBn n) < K. -/
 theorem skGateBn (S : InaccSeq.{0}) : ∀ n, Gl.glG (Gl.glBn n) < Td.tdK S := Wn.wnGateBnK S
 
-/-- STATUS: REDUCED (skSysAllG, skLevG_Bn, skGateBn)
+/-- STATUS: PROVED (Ws.wsStep_om1: the Ho.hoOU union of the entries at an Ω₁-sequence of levels, for EVERY code
+interface Ws.WsC; R2.Wo's step with surjectivity of rdc replaced by cofinality of the reading)
+SIZE: L
+THE Ω₁-COFINAL STEP, GENERIC in the level and in the code interface. -/
+theorem skStepOm1Ws : ∀ (C : Ws.WsC) (ℓ : Ordinal.{0}) (s : Ordinal.{0} → Ordinal.{0}), C.Fs1 ℓ s →
+    Ws.WsStepAt C ℓ := fun _ _ _ hs => Ws.wsStep_om1 hs
+
+/-- STATUS: PROVED (Ws.wsA1_step_om1: the (A1) instance Ws.wsA1 of the interface)
+SIZE: S
+CHECK: Wo.woStep_om1 reproved from the generic step. -/
+theorem skA1Check : ∀ ℓ s, Wo.WoFs1 ℓ s → Wo.WoStepAt ℓ := fun _ _ hs => Ws.wsA1_step_om1 hs
+
+/-- STATUS: PROVED (Ws.wsA1_sysA1: the generic family Ws.wsF of Ws.wsA1, Wh.whCofLev)
+SIZE: S
+CHECK: Wo.woSysA1 (region A1) reproved from the generic family. -/
+theorem skA1SysCheck (S : InaccSeq.{0}) : ∀ B, B < veblen Gf.gfE (Gc.gcG 0 + 1) →
+    ∃ V : Hg.HgVD, B ≤ V.B ∧ V.γ < Td.tdK S := Ws.wsA1_sysA1 S
+
+/-- STATUS: PROVED (Ws.ws_glG_E_noFs)
+SIZE: S
+REFUTE FIRST on skStepOm1WG2: ε_{Ω₁+1} is an (A2) level of its remaining case (not Ω₁, not a successor, no
+Wp.WpFs: every level below has glG ≥ 1 > 0 = glG ε_{Ω₁+1}) and it has no Ω₁-sequence (cofinality ω). -/
+theorem skGlGNoFsE : Wp.WpLev Gf.gfE ∧ Gf.gfE ≠ Om1 ∧ (¬ ∃ ℓ', Wp.WpLev ℓ' ∧ Gf.gfE = ℓ' + Om1) ∧
+    ¬ Wp.WpFs Gf.gfE ∧ ¬ ∃ s, Ws.wsA2.Seq1 Gf.gfE s := Ws.ws_glG_E_noFs
+
+/-- STATUS: PROVED (Ws.ws_baseI_Z: Ws.ws_base_one — η = 0: towers Ω₁^{…}; η' + 1: towers over glPsi 1 η';
+η a limit: from the sequence of η, continuity Ws.ws_psi1_cont, gate-cofinality through the bracket of b — and
+Ws.ws_base_Z: the iterates φ(1, ·)^{k+1}(Ω₁+1))
+SIZE: M
+THE VEBLEN NODES OF LEVEL 1: every ε-number code e ∈ [ε_{Ω₁+1}, ζ_{Ω₁+1}] has a sequence of levels, given the
+sequences of the smaller limit codes. -/
+theorem skBaseZ : Ws.WsBaseI (Ws.wsZ + 1) := Ws.ws_baseI_Z
+
+/-- STATUS: PROVED (Ws.wsCls_Z)
+SIZE: M
+the (A2) classification up to ζ_{Ω₁+1}, unconditional. -/
+theorem skClsZ : Ws.WsCls Ws.wsA2 (Ws.wsZ + 1) := Ws.wsCls_Z
+
+/-- STATUS: PROVED (Ws.wsSysZ)
+SIZE: M
+the systems over G at every (A2) level ℓ ≤ ζ_{Ω₁+1}, unconditional. -/
+theorem skSysZ : ∀ ℓ, SkLevG ℓ → ℓ ≤ Ws.wsZ → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.gcG 0 + 1) ∧ V.γ ≤ Ws.gh ℓ :=
+  Ws.wsSysZ
+
+/-- STATUS: OPEN
+SIZE: L
+THE VEBLEN NODES OF LEVEL ≥ 2: every ε-number code e ∈ (ζ_{Ω₁+1}, G) (e = glPsi α η, α ≥ 2 or the level-1 codes
+above the first ζ) has an ω- or Ω₁-sequence of levels (gate gh = max 1 glG), given the sequences of the smaller
+limit codes.  Cases: η a limit not in F_α (from η, as Ws.ws_base_one; gate-cofinality needs the comparison of
+brackets across levels, Gl.glPsi_lt_lev / glPsi_lt_lev'); η = 0 / successor / in F_α with α a successor (iterates
+of φ(α', ·), cofinality ω) or α a limit (from the sequence of α).  REFUTE FIRST: NO EVIDENCE (pure code arithmetic,
+no system; the level-1 case is proved, skBaseZ; no no-go result mentions codes). -/
+theorem skBaseA2Hi : ∀ e, InE e → Ws.wsZ < e → e < Gc.gcG 0 →
+    (∀ c, c < e → IsSuccLimit c → Ws.BCls (fun _ => True) c) → Ws.BCls Ws.ML e := by
+  sorry
+
+/-- STATUS: REDUCED (skBaseA2Hi, skBaseZ; Ws.wsBaseI_of_hi)
+SIZE: L
+THE VEBLEN NODES OF (A2): every ε-number code e ∈ [ε_{Ω₁+1}, G) has an ω- or Ω₁-sequence of levels (gate
+gh = max 1 glG), given the sequences of the smaller limit codes. -/
+theorem skBaseA2 : Ws.WsBaseI (Gc.gcG 0) := Ws.wsBaseI_of_hi skBaseA2Hi
+
+/-- STATUS: REDUCED (skBaseA2; Ws.wsCls_of_baseI: ONE well-founded induction Ws.ws_br on the base-e normal form —
+rest, digit, power, base)
+SIZE: M
+THE (A2) CLASSIFICATION: every (A2) level that is not Ω₁ and not a successor has an ω-sequence (Ws.wsA2.Fs) or an
+Ω₁-sequence (Ws.wsA2.Fs1). -/
+theorem skClsA2 : Ws.WsCls Ws.wsA2 (Gc.gcG 0) := Ws.wsCls_of_baseI le_rfl skBaseA2
+
+/-- STATUS: PROVED (Ws.ws_base_w: Ws.ws_base_E (towers Ω₁^{…}), Ws.ws_base_succ (towers e^{…}), Ws.ws_base_top)
+SIZE: M
+non-vacuity of skBaseA2: every ε-number code in [ε_{Ω₁+1}, ε_{Ω₁+ω}] has a sequence of levels. -/
+theorem skBaseW : Ws.WsBase (Ws.wsLw + 1) := Ws.ws_base_w
+
+/-- STATUS: PROVED (Ws.wsCls_w)
+SIZE: M
+the (A2) classification up to ε_{Ω₁+ω}, unconditional. -/
+theorem skClsW : Ws.WsCls Ws.wsA2 (Ws.wsLw + 1) := Ws.wsCls_w
+
+/-- STATUS: REDUCED (skClsA2; Ws.wsA2_sysAll: the generic family Ws.wsF of Ws.wsA2)
+SIZE: M
+the systems over G at every (A2) level: B = φ(ℓ, G+1), gate ≤ gh ℓ. -/
+theorem skSysAllG2 : ∀ ℓ, SkLevG ℓ → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.gcG 0 + 1) ∧ V.γ ≤ Ws.gh ℓ :=
+  Ws.wsA2_sysAll skClsA2
+
+/-- STATUS: PROVED (Ws.wsSysW)
+SIZE: M
+the systems over G at every (A2) level ℓ ≤ ε_{Ω₁+ω}, unconditional. -/
+theorem skSysW : ∀ ℓ, SkLevG ℓ → ℓ ≤ Ws.wsLw → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.gcG 0 + 1) ∧ V.γ ≤ Ws.gh ℓ :=
+  Ws.wsSysW
+
+/-- STATUS: REDUCED (skBaseA2; Ws.wsSysA2Lev_baseI; was REDUCED (skSysAllG, skLevG_Bn, skGateBn))
 SIZE: M
 ∀ n ∃ system V: B_V = φ(glBn n, G+1), γ_V < K. -/
 theorem skSysA2Lev (S : InaccSeq.{0}) : ∀ n, ∃ V : Hg.HgVD, V.B = veblen (Gl.glBn n) (Gc.gcG 0 + 1) ∧
-    V.γ < Td.tdK S := by
-  intro n
-  obtain ⟨V, hB, hγ⟩ := skSysAllG _ (skLevG_Bn n)
-  exact ⟨V, hB, hγ.trans_lt (skGateBn S n)⟩
+    V.γ < Td.tdK S := Ws.wsSysA2Lev_baseI S skBaseA2
 
 /-- A3 package at the ladder level `t_n` (only the system; see skSysA3Step). -/
 def SkPk3 (S : InaccSeq.{0}) (n : ℕ) : Prop :=
@@ -867,6 +1034,35 @@ theorem skA3Datum0 : ∃ Λ : Wn.WnLv3, Λ.L = Wj.wjT 0 ∧ Λ.g = 0 ∧
     ∀ x, InE x → x < Om1 → Λ.l x = eN (lgG x) :=
   ⟨Wn.wnLv3T0, rfl, rfl, fun _ hx hx1 => Wn.wnLv3T0_l hx hx1⟩
 
+/-- STATUS: PROVED (Wt.wtLv3DatumAll)
+SIZE: M
+every (A3) level below t₀ has an (A3) level datum: G < L < t₀, Ω₁ ∣ L ⇒ ∃ Λ : WnLv3, L_Λ = L, gate g(L) of the
+hereditary step Go.goGl.step, reading its reading R(L, x) above the gate. -/
+theorem skA3DatumAll : ∀ L, Gc.gcG 0 < L → Om1 ∣ L → L < Wj.wjT 0 → ∃ Λ : Wn.WnLv3, Λ.L = L ∧
+    Λ.g = Wt.wtD.g L ∧ ∀ x, InE x → x < Om1 → Λ.g < x → Λ.l x = Wt.wtD.R L x :=
+  Wt.wtLv3DatumAll
+
+/-- STATUS: PROVED (Wt.wtTowSeq)
+SIZE: M
+the ω-sequence of (A3) level data below t₀ (towers G^{⋯^G}, gate 0): levels +Ω₁-increasing and cofinal in t₀,
+readings +x-increasing, below and cofinal in ε_{Γ_{x+1}+1} (the data of the limit step at t₀, Wm.WmSeq-style). -/
+theorem skA3Tow :
+    (∀ n, (Wt.wtTwLv n).g ≤ Wn.wnLv3T0.g) ∧
+    (∀ n, (Wt.wtTwLv n).L + Om1 ≤ (Wt.wtTwLv (n + 1)).L ∧ (Wt.wtTwLv n).L + Om1 ≤ Wn.wnLv3T0.L) ∧
+    (∀ y, y < Wn.wnLv3T0.L → ∃ n, y < (Wt.wtTwLv n).L) ∧
+    (∀ x, InE x → x < Om1 → ∀ n,
+      (Wt.wtTwLv n).l x + x ≤ (Wt.wtTwLv (n + 1)).l x ∧ (Wt.wtTwLv n).l x + x ≤ Wn.wnLv3T0.l x) ∧
+    (∀ x, InE x → x < Om1 → ∀ ν, ν < Wn.wnLv3T0.l x → ∃ n, ν < (Wt.wtTwLv n).l x) :=
+  Wt.wtTowSeq
+
+/-- STATUS: PROVED (Wt.wt_Q3_low)
+SIZE: S
+an (A3) pseudo-base F of level L is in range φ(μ, ·) and hdNx μ F < hdNx L F for every μ < L: the step at an (A3)
+level contains the steps of all lower levels ((A1), (A2) included) at F, so skSysA3Lev0W needs (A2) closed. -/
+theorem skA3StepLow : ∀ (Λ : Wn.WnLv3) (Q : Wn.WnQ3 Λ 0) (μ : Ordinal.{0}), μ < Λ.L →
+    veblen μ Q.F = Q.F ∧ Hd.hdNx μ Q.F < Hd.hdNx Λ.L Q.F :=
+  fun _ Q _ hμ => Wt.wt_Q3_low Q hμ
+
 /-- The (A3) invariant at `t_n` with the FULL package (`Wn.WnEnt3`). -/
 def SkPk3W (S : InaccSeq.{0}) (n : ℕ) : Prop := Wn.WnEnt3 S n
 
@@ -879,7 +1075,10 @@ theorem skPk3_of_W (S : InaccSeq.{0}) (n : ℕ) (h : SkPk3W S n) : SkPk3 S n := 
 SIZE: L
 the (A3) package at t₀ = ε_{G+1} (Wn.WnPk3 on a datum with L = t₀, e.g. Wn.wnLv3T0: a step at every pseudo-base
 of level t₀) and the pseudo-base φ(t₀, G) of level t₀ with gate < K and a system starting it (Wn.wnQ3_bounds gives
-its bound fields). -/
+its bound fields).  Round 119 (reg4): REFUTE-FIRST NO EVIDENCE (no no-go result mentions packages or pseudo-bases).
+Needs, in order: (A2) closed (now skBaseA2Hi; by skA3StepLow the t₀-step contains the (A2)-level steps), the widened
+Hn.HnLv (L < Γ(1), ℓ(x) < Γ_{x+2}) so that skA3DatumAll's data are Hn.HnLv's, the Wo family over (A3) raw data on
+the levels (G, t₀), the ω-limit at t₀ along skA3Tow, the offset recursion of level t₀ up to φ(t₀, G). -/
 theorem skSysA3Lev0W (S : InaccSeq.{0}) : SkPk3W S 0 := by
   sorry
 

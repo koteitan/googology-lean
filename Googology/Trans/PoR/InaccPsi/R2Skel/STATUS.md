@@ -1,39 +1,38 @@
-# R₂^C skeleton: status (round 118)
+# R₂^C skeleton: status (round 119)
 
 Root `R2Skel.Root.skNuC (S : InaccSeq)` = the conclusion of `Wf.wfRoad` (same as `Wd.wdRoadL`: ν_C = L(ω+1), …),
 whose supply hypotheses h0/hn are `Wf.WfVisGen`. Parts: frontier `SkF.skFront` → hUH/hLH/hVH/hVt; reading
 `SkR.skWall`, `SkR.skThHi` → `SkE.skEQ` → hT/hF; supply `SkS.skSup` → h0/hn. Root and the top nodes are unchanged.
-The bundle SkF + SkE + SkR + SkS + Root checks against the main build with only `declaration uses sorry` warnings (39).
+The bundle SkF + SkR + SkE + SkS + Root checks against the main build with only `declaration uses sorry` warnings (42).
 
 ## Node tree (STATUS SIZE)
 
 ```
 skNuC REDUCED L
 ├ SkF.skFront REDUCED L  (U/L/V/Vt REDUCED L; skRoad REDUCED L; skHypIff PROVED S)
-│ │   frontier moved: skSysE, skLocE, skHypIffE PROVED (ι(Γ(φ(ε_{Ω₁+1}, G+1))·ω), road `Wo.woRoad`)
+│ │   frontier moved: skLocZ, skHypIffZ, skSysZV PROVED (F_Z = ι(Γ(φ(ζ_{Ω₁+1}, G+1))·ω), road `Ws.wsRoadZ`)
 │ └ skAbove REDUCED L
 │   ├ skRegA REDUCED L ─ skLocOfSys PROVED S, skSysCof REDUCED L
-│   │ ├ skSysA1 PROVED M   ℓ < ε_{Ω₁+1}: skSysAll, skFam PROVED M (region A1 CLOSED)
-│   │ │   skStepAllWo PROVED M, skStepOm1Wo PROVED L (cofinality Ω₁), skFs1, skFamW2 PROVED M
-│   │ │   (skStepBaseW2 … skStepExpLimFsW2 PROVED; skStepOm1W2, skStepW2 REPLACED)
-│   │ ├ skSysA2 REDUCED L   [φ(E, G+1), φ(G, 1)): skSysA2Lev REDUCED M ─ skSysAllG REDUCED M
-│   │ │ └ skFamWG2 ─ skStepWG2 REDUCED M (on SkCohWG2 = Wp.WpCoh: Wn.WnAt, Wm.WmExtE)
-│   │ │     skStepBaseWG2, skStepExpLimFsWG2, skStepBnWG2 PROVED S; skStepSuccWG2, skStepFsWG2,
-│   │ │     skStepCoefLimWG2 PROVED M; skFamSqG PROVED M; skStepOm1WG2 OPEN L (cofinality Ω₁)
-│   │ │     (skGateDropG, skCohWG2_old, skLevG_Bn, skGateBn PROVED S; old A2 steps REPLACED)
+│   │ ├ skSysA1 PROVED M   ℓ < ε_{Ω₁+1} (region A1 CLOSED; re-proved by the generic interface: skA1Check, skA1SysCheck)
+│   │ ├ skSysA2 REDUCED L ─ skSysA2Lev REDUCED M ─ skBaseA2 REDUCED L (code interface `Ws.WsC`, instance `Ws.wsA2`)
+│   │ │   skStepOm1Ws PROVED L (generic Ω₁-cofinal step); skClsA2, skSysAllG2 REDUCED M
+│   │ │   levels ≤ ζ_{Ω₁+1}: skBaseZ, skClsZ, skSysZ PROVED M (also skBaseW, skClsW, skSysW at ε_{Ω₁+ω})
+│   │ │   skBaseA2Hi OPEN L: ε-number codes e in (ζ_{Ω₁+1}, G), Veblen level ≥ 2
+│   │ │   (skGlGNoFsE PROVED S; skStepOm1WG2, skStepWG2, skFamWG2, skSysAllG REPLACED)
 │   │ └ skSysA3 REDUCED L ─ skSysA3All ─ skSysA3Lev ─ skSysA3LevW REDUCED L (on SkPk3W = Wn.WnEnt3)
-│   │     skSysA3Lev0W OPEN L, skSysA3StepW OPEN L; skA3NoBand, skA3NoGBase, skA3Datum0, skPk3_of_W PROVED S
+│   │     skSysA3Lev0W OPEN L, skSysA3StepW OPEN L; skA3DatumAll, skA3Tow PROVED M; skA3StepLow PROVED S
+│   │     (skA3NoBand, skA3NoGBase, skA3Datum0, skPk3_of_W PROVED S)
 │   ├ skRegB REDUCED L    (Wj.wjRegB_iff): skRegBlo OPEN L, skRegBhi OPEN L,
 │   │   skWin: skWinA / skWinB OPEN L; skTop: skTopA / skTopB OPEN L
 │   └ skRegC REDUCED L    skLongPre OPEN L; skLongMid, skLongTop PROVED S (vacuous)
 ├ SkR.skWall REDUCED L
 │ ├ skWallLow REDUCED L: skThCof PROVED S, skWallLevAll REDUCED L
 │ │   skTopFam OPEN M (skTopFam0, skTopSep PROVED S), skWallBase OPEN L, skWallStep OPEN L (code-free)
+│ │   images: skImgLtTh, skNaiveT, skImg1Gt, skX0Tests PROVED S; skX0Law OPEN L (candidate X̂⁰_k(β), not used yet)
 │ ├ skWallCF REDUCED L (the wall with no code hypothesis)
 │ └ skWallTh PROVED M: skThVal PROVED S (skThUp PROVED S, skThLow PROVED L), skThAtom PROVED S
-├ SkR.skThHi REDUCED L: skThMid REDUCED M (skBlkLaw PROVED S, skMidCF PROVED M by Wr.wrMid), skThFar OPEN L
-│   (side: skRead REDUCED L; skLowExp, skBelowThP, skRead_of_EQ, skNonVac PROVED S;
-│    skMidAssemble SUSPECT M, off the road; skTopDyn REFUTED M)
+├ SkR.skThHi REDUCED L: skThMid REDUCED M (skBlkLaw PROVED S, skMidCF PROVED M), skThFar OPEN L
+│   (side: skRead REDUCED L; skMidAssemble SUSPECT M, off the road; skTopDyn REFUTED M)
 ├ SkE.skEQ REDUCED L
 │ ├ skThLow REDUCED L: skThLow_of PROVED S
 │ └ skEQfar REDUCED L: skEQfar_of PROVED S, skThFar OPEN L, skKFar REDUCED L
@@ -41,50 +40,50 @@ skNuC REDUCED L
 └ SkS.skSup REDUCED L ─ skVisK REDUCED L: skWin PROVED S, skGen REDUCED L
     ├ skUp REDUCED S ─ skUpRR REDUCED L (from SkF)
     ├ skForm REDUCED L: skFormWit REDUCED S ─ skNu REDUCED L (from SkF)
-    │   skFormOther REDUCED L: skFormEps REDUCED M (below ε_{u₁+1}), skFormHigh OPEN L
+    │   skFormOther REDUCED L: skFormEps REDUCED M, skFormHigh SUSPECT L (skHighWin REDUCED)
+    │   refutation side: skFormHigh_ref, skRoadRef PROVED (conditional on skGap); skGap OPEN M, off the road
     └ skSupK REDUCED L
-      ├ skMu PROVED L: skCodeCof PROVED S, skRead0 PROVED L (Wk.wkRead0)
-      ├ skCarryWit REDUCED L ─ skCarryEps REDUCED L: skImgEps OPEN L; skEpsU2, skWitEps PROVED S
-      │   (skImgF_ref PROVED L, skImgF_false PROVED S; skOffMapW, skLowerF, skBigF, skBigTop off the road)
+      ├ skMu PROVED L: skCodeCof PROVED S, skRead0 PROVED L
+      ├ skCarryWit REDUCED L ─ skCarryEps REDUCED L: skImgEps OPEN L (supply piece skSupEps PROVED,
+      │   skImgVal PROVED); skEpsU2, skWitEps PROVED S; skImgF_ref, skImgF_false PROVED
       └ skCarryOther REDUCED L: skCarryEps, skCarryHigh OPEN L
 ```
 
-## Counts (195 nodes)
+## Counts (229 nodes)
 
 | part | PROVED | REDUCED | OPEN | SUSPECT | REFUTED | REPLACED | S | M | L |
 |---|---|---|---|---|---|---|---|---|---|
-| SkF | 61 | 24 | 10 | 0 | 1 | 22 | 42 | 45 | 31 |
-| SkR | 14 | 7 | 4 | 1 | 1 | 0 | 11 | 6 | 10 |
+| SkF | 80 | 24 | 10 | 0 | 1 | 26 | 50 | 57 | 34 |
+| SkR | 18 | 7 | 5 | 1 | 1 | 0 | 15 | 6 | 11 |
 | SkE | 8 | 4 | 4 | 0 | 0 | 0 | 8 | 0 | 8 |
-| SkS | 11 | 19 | 3 | 0 | 0 | 0 | 9 | 6 | 18 |
+| SkS | 15 | 20 | 3 | 1 | 0 | 0 | 12 | 9 | 18 |
 | Root | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
-| all | 94 | 55 | 21 | 1 | 2 | 22 | 70 | 57 | 68 |
+| all | 121 | 56 | 22 | 2 | 2 | 26 | 85 | 72 | 72 |
 
-OPEN by size: SkF L 10; SkR M 1, L 3; SkE L 4; SkS L 3; all S 0, M 1, L 20 (skThFar is counted in SkR and SkE).
-Sorry leaves (39): OPEN 21; SUSPECT skMidAssemble (M); REFUTED skTopDyn (M, kept for the record); REPLACED 16 with
-sorry (15 M, skStepOm1W2 L; kept, not used). The refuted `skImgF` was removed (its refutation is skImgF_false).
-Round 117 → 118: sorry leaves 39 → 39, OPEN 26 → 21 (M 6 → 1, L 20 → 20), SUSPECT 0 → 1, REPLACED 12 → 16.
+OPEN by size: SkF L 10; SkR M 1, L 4; SkE L 4; SkS M 1, L 2; all S 0, M 2, L 20 (skThFar is counted in SkR and SkE).
+Sorry leaves (42): OPEN 22; SUSPECT skMidAssemble (M), skFormHigh (L); REFUTED skTopDyn (M, kept for the record);
+REPLACED 17 with sorry (15 M; skStepOm1W2, skStepOm1WG2 L; kept, not used).
+Round 118 → 119: sorry leaves 39 → 42, OPEN 21 → 22 (M 1 → 2, L 20 → 20), SUSPECT 1 → 2, REPLACED 22 → 26.
 
 ## REFUTED and SUSPECT
 
-- **skImgF REFUTED L** (`Wq.wqImgF_ref`, node skImgF_false): `SkMapP` leaves f(z) free when m(z) ≥ u₁; with
-  z = ω^{u₁}, f(z) = ω² the image exceeds r(μ+ω²). Replaced by skImgEps (one map f, ∃, instead of every map).
-- **skMidAssemble SUSPECT M**: its hypothesis `Wd.WdAtWall` covers only F_W ≤ m_λ < θ⁺, but the move asks m_λ ≥ θ⁺.
-  Replaced by skMidCF on the code-free wall `Wr.WrWallCF` (a stronger hypothesis, open in skWallBase / skWallStep).
+- **skStepOm1WG2 route REFUTED, node REPLACED** (`Ws.ws_glG_E_noFs`): ε_{Ω₁+1} is an A2 level with no gated
+  ω-sequence and no Ω₁-sequence (glG = 0 there, ≥ 1 below). Replaced by the generic family with gate max 1 (glG).
+- **skFormHigh SUSPECT L** (`Wu.wuVis_ref`, `Wu.wuRoad_vac`): if `WuGap` (skGap) holds, an ε-number X in (u₁, u₂)
+  has a reach no repaired form can end in, so skFormHigh and `WfVisGen` fail at L(k), and `Wf.wfRoad` is vacuous.
+- **skMidAssemble SUSPECT M**: its hypothesis `Wd.WdAtWall` covers only F_W ≤ m_λ < θ⁺; replaced by skMidCF.
 - **skTopDyn REFUTED M** (`R2.SkRXTop`): no single image X̂ fits e = 0 and e = 1; replaced by `Wg.WgTopFamAll`.
-- **skShapeNat_false REFUTED S** (`Wh.whShapeNat_false`, proved): with `e : ℕ` the shape leaf is false (Ω₁^ω).
-- **Old A2 steps REPLACED** (skStepPowWG, skStepCoefLimWG, skStepExpLimWG): they sit on `Hn.HnkExt`, vacuous across a
-  gate drop, and gate drops occur in A2 (glG(Ω₁·Ω₁) = 2 < ω = glG(Ω₁·ω), `Wp.wp_gate_drop`).
-- **skStepOm1W2 REPLACED**: A1 is proved by families over all base data (`Wo.woFam`), no gate condition needed.
-- Risk notes: adding the image move as a hypothesis to the wall steps is circular (`Wr.wrImgMove_iff`);
-  skWinA/B, skTopA/B are each as strong as "ν_C is not in that window"; skTopFam at e = 1 only reasoned.
+- **skImgF REFUTED** (`Wq.wqImgF_ref`): the map f is too small, not the decomposition (`Wu.wuImg_test`).
+- **skShapeNat_false REFUTED S** (`Wh.whShapeNat_false`): with `e : ℕ` the shape leaf is false (Ω₁^ω).
+- Naive image formula T(ψ_{Ω_{k+3}}(β+Ω_{k+3})) REFUTED for every k ≥ 1 (`Wv.wvNoT`, node skNaiveT).
+- Risk notes: skWinA/B, skTopA/B are each as strong as "ν_C is not in that window"; skX0Law is only tested.
 
 ## Suggested order of the next rounds
 
-1. Frontier A2: skStepOm1WG2 = `Wp.WpOm1Step G`: cut the A1 Ω₁-step (`Wo.woStep_om1`) into an interface over any
-   entry predicate, instantiate with glR, glG, wnGW, WnAt, and add the Ω₁-sequences of Veblen exponents.
-2. Supply: skImgEps (code move for u₁ ≤ m(z) < ε_{u₁+1}; image depends only on the value), then skFormHigh,
-   skCarryHigh.
-3. Reading: skWallBase / skWallStep (an intrinsic formula for the images X̂_e(β)); skTopFam; skThFar.
-4. Frontier A3: skSysA3Lev0W (port the Hn package stack to WnLv3), skSysA3StepW.
+1. Supply: skGap (decides whether `Wf.wfRoad` survives): WuGap at X = ϑ^{u₁}(B₂ + υ_λ). If it holds, repair the
+   supply forms; if it fails, prove skFormHigh. Then skImgEps, skCarryHigh.
+2. Frontier A2: skBaseA2Hi (bracket comparison across Veblen levels, iterates of φ(α′, ·), α-limit cases).
+3. Frontier A3: widen `Hn.HnLv` (L < Γ(1), ℓ(x) < Γ_{x+2}), the Wo family over A3 raw data, the ω-limit at t₀
+   along skA3Tow, the pseudo-base φ(t₀, G); then skSysA3Lev0W, skSysA3StepW.
+4. Reading: skX0Law (k = 0, β = Ω₃; k = 1, β = 0), the e = 1 formula, then skWallBase / skWallStep; skThFar.
 5. The L leaves tied to the main target: skRegBlo, skRegBhi, skLongPre, skWin*/skTop*, SkE skK*.

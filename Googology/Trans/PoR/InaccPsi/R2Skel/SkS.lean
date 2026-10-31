@@ -10,6 +10,9 @@ import Googology.Trans.PoR.InaccPsi.R2.WkRead
 import Googology.Trans.PoR.InaccPsi.R2.WkCarry
 import Googology.Trans.PoR.InaccPsi.R2.WqImgRef
 import Googology.Trans.PoR.InaccPsi.R2.WqCarry
+import Googology.Trans.PoR.InaccPsi.R2.WuSup
+import Googology.Trans.PoR.InaccPsi.R2.WuWin
+import Googology.Trans.PoR.InaccPsi.R2.WuImg
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -53,6 +56,22 @@ Round 118 (leaf "the supply leaves skBigTop, skImgF, skFormOther, skCarryOther",
 * Non-vacuity: the witness context exists with `ν` explicit (`Wq.wqWitCtx`, used in `skImgF_ref`).
 * `skOffMapW`, `skLowerF`, `skBigF` stay as they are but are OFF THE ROAD (`skCarryEps` uses `Wq.wqCarry_low`).
 This file imports the new `Wq` modules, so it can be checked only after the merge.
+
+Round 119 (leaf "skImgEps, skFormHigh, skCarryHigh", sup41).  `X` an `ε`-number with `u₁ < X < u₂ = υ_{λ+2}`.
+* REFUTE FIRST, "is the image of a decomposition a function of its value?": NO EVIDENCE against.  On the value
+  `τ + u₁` of `Wq.wqImgF_ref` three different decompositions have one image for every `f` (`Wu.wuImg_test`; NEW node
+  `skImgVal`); in a realizer configuration every two decompositions of one value have one image (`Vr.vrImg_agree`).
+* `skImgEps` stays OPEN; its piece (i) "a supply past `Wc.wcX`" is PROVED: `υ_{μ+φ(1,u'+1)} ≤ r(μ)`, `φ(1,u'+1) ≥
+  ε_{u'+1}` (`Wu.wuSup`; NEW node `skSupEps`).
+* `skFormHigh` SUSPECT.  The code of `λ + X` is `X` and `r(λ+X) = υ_{λ+(X+ω+1)} + X` (`Wu.wuR_X`); `ν_X = λ + X + ω²`
+  is a window (`Wu.wuWin`; at `X = ε_{u₁+1}` a high window, NEW node `skHighWin`: the hypotheses of `skFormHigh` /
+  `skCarryHigh` are satisfiable).  A repaired form of a value ending in `X` ends in an `sg`-node with parameters below
+  `υ_λ` or in `X = ϑ^{u₁}(ξ)`, `ξ ∈ T^{u₁}`, `ξ < B₂` (`Wu.wuLast`, `Wu.wuForm_X`: the term languages stop at the
+  level `B₂`).  So `Wu.WuGap S k` (an `X` that is neither) REFUTES `skFormHigh` (NEW node `skFormHigh_ref`) and the
+  supply hypothesis of `Wf.wfRoad` at `L(k)` (`Wu.wuVis_ref`; at `k = 0` the road is vacuous: NEW node `skRoadRef`).
+  NEW leaf `skGap` (`WuGap`, OFF THE ROAD: a refutation target; expected witness `X = ϑ^{u₁}(B₂ + υ_λ)`).
+* `skCarryHigh` stays OPEN (moot if `skGap` holds).
+This file imports the new `Wu` modules, so it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -220,11 +239,14 @@ theorem skFormEps {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hE : ν -
   intro g hg0 hgβ hgd
   exact Or.inr (Wq.wqForms_eps (S := S) k hν hβd hβ g hg0 hgβ hgd)
 
-/-- STATUS: OPEN (NEW round 118)
+/-- STATUS: SUSPECT (round 119; was OPEN, NEW round 118)
 SIZE: L
 the forms clause at the windows with `ν − λ ≥ ε_{u₁+1}`: inner restarts `λ + z` with codes `m ≥ ε_{u₁+1}`
 (`z < υ_{λ+2}`: a decomposition of the code over `u₁` past the next `ε`-number; `Vr.vrTerm_ex` stops there) and the
-long region `z ≥ υ_{λ+2}` (reaches not known in Lean).  REFUTE FIRST: NO EVIDENCE.
+long region `z ≥ υ_{λ+2}` (reaches not known in Lean).  REFUTE FIRST (round 119): SUSPECT.  At `z = X` (an `ε`-number
+in `(u₁, u₂)`) the reach `υ_{λ+(X+ω+1)} + X` ends in `X`, and a repaired form must end in an `sg`-node with parameters
+below `υ_λ` or in `ϑ^{u₁}(ξ)` with `ξ < B₂` (`Wu.wuForm_X`); `Wu.WuGap` (leaf `skGap`) refutes this node
+(`skFormHigh_ref`).
 ¬(ν − λ < ε_{u₁+1}) ⇒ ∀ z < β(ν), ω² | z ⇒ υ_{λ+β} ≤ r(λ+z) ∨ VrForm(λ, β, z) -/
 theorem skFormHigh {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : ¬ SkWit l ν)
     (hE : ¬ ν - l < eN (upsilon (l + 1))) :
@@ -447,7 +469,10 @@ REFUTE FIRST: NO EVIDENCE (`Wq.wqImgF_ref` refutes only the `∀ f` form; `Wf.wf
 witness decomposition and at the low decompositions `ub(z+ω+1) + lo(m z)`).  Left: (i) the code move at offsets with
 `u₁ ≤ m z < ε_{u₁+1}` (`f z` with `m(f z) ≥` the image of the code over `u' = υ_{μ+1}`; for `m z > ω^{u₁+1}` this
 needs `B > Wc.wcX`, i.e. a supply `υ_{μ+B} ≤ r(μ)` past `WcRead0`), (ii) the image of a decomposition depends only on
-its value (`ub` / `sg` / `tm` nodes over `u₁` and over `υ_{λ+(z+ω+1)}`). -/
+its value (`ub` / `sg` / `tm` nodes over `u₁` and over `υ_{λ+(z+ω+1)}`).
+Round 119: REFUTE FIRST on (ii): NO EVIDENCE (`skImgVal`, `Vr.vrImg_agree`).  (i): the supply `υ_{μ+B} ≤ r(μ)` for every
+`B ≤ φ(1, u'+1)` (so every `B < ε_{u'+1}`) is PROVED (`skSupEps`, `Wu.wuSup_lt`); left: the code move itself (an `f`
+with `m(f z) ≥` the image of `m z` over `u'`) and (ii) as a Lean statement over all decompositions. -/
 theorem skImgEps {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hE : ν - l < eN (upsilon (l + 1))) :
     ∀ μ, upsilon μ < upsilon l → SkMu S μ → (∃ w, Ty.TyWin S k w ∧ w < upsilon μ) →
       ∀ Os : Finset Ordinal.{0}, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
@@ -485,7 +510,8 @@ theorem skCarryWit {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : SkW
         Wf.WfCarry S l (ν - l + ω ^ 2) μ f B Os :=
   skCarryEps h (skWitEps hw)
 
-/-- STATUS: OPEN (NEW round 118; the part of the old `skCarryOther` left)
+/-- STATUS: OPEN (NEW round 118; the part of the old `skCarryOther` left; round 119: moot if `skGap` holds, since then
+the forms clause already fails at these windows)
 SIZE: L
 the supply and carry at the windows with `ν − λ ≥ ε_{u₁+1}`: offsets with codes `≥ ε_{u₁+1}` (`z < υ_{λ+2}`) and the
 long region (`z ≥ υ_{λ+2}`, reaches not known in Lean), a supply past `X` (readings at the code levels `θ_{k+2}`
@@ -545,6 +571,89 @@ theorem skSideRef {μ g : Ordinal.{0}} {Os : Finset Ordinal.{0}} (hz : ∃ z ∈
     ¬ ∀ Q : Ordinal.{0} → Ordinal.{0}, ∀ z ∈ Os, z ≠ g →
       ω ≤ Vy.vyMap Q z ∧ Vy.vyMap Q z < upsilon (μ + 2) ∧ upsilon (μ + Vy.vyMap Q z + ω + 1) < nuC :=
   Wf.wfSide_false hz
+
+/-! ## Round 119: the supply past `Wc.wcX`, the image test, the high windows and the refutation of `skFormHigh` -/
+
+/-- STATUS: PROVED (by `Wu.wuSup`, `Wu.wuEN_le`; NEW round 119)
+SIZE: M
+the supply past `Wc.wcX` at every supply restart: SkMu(μ) ⇒ υ_{μ+φ(1,u'+1)} ≤ r(μ), ε_{u'+1} ≤ φ(1,u'+1) -/
+theorem skSupEps : ∀ μ, SkMu S μ →
+    upsilon (μ + Wu.wuX (upsilon (μ + 1))) ≤ cdR S μ ∧ eN (upsilon (μ + 1)) ≤ Wu.wuX (upsilon (μ + 1)) :=
+  fun _ hM => ⟨(Wu.wuSup (k := 0) hM.1 hM.2.1 hM.2.2.1 hM.2.2.2).2.2.2, Wu.wuEN_le _⟩
+
+/-- STATUS: PROVED (by `Wu.wuImg_test`; NEW round 119; REFUTE-FIRST test of "the image is a function of the value")
+SIZE: S
+the three decompositions `ub h base + ub 1 base`, `ub h (base + u₁)`, `ub h base + tm 1 base` of `υ_{λ+h} + u₁` (the value
+of `Wq.wqImgF_ref`) have one image for every `f` -/
+theorem skImgVal (l μ h δ : Ordinal.{0}) (Lf : Finset Ordinal.{0}) (f : Ordinal.{0} → Ordinal.{0}) :
+    Vr.vrImg l μ f (.add (.ub h .base) (.ub 1 .base)) =
+        Vr.vrImg l μ f (.ub h (.add .base (.par (upsilon (l + 1))))) ∧
+      Vr.vrImg l μ f (.add (.ub h .base) (.ub 1 .base)) = Vr.vrImg l μ f (.add (.ub h .base) (.tm 1 .base Lf δ)) := by
+  obtain ⟨-, h1, h2, h3⟩ := Wu.wuImg_test l μ h δ Lf f
+  exact ⟨h1.trans h2.symm, h1.trans h3.symm⟩
+
+/-- STATUS: REDUCED (from the shared leaf `skNu` only, by `Wu.wuWin`, `Wu.wuWin_high`; NEW round 119; NON-VACUITY of
+`skFormHigh` / `skCarryHigh`)
+SIZE: S
+a high window exists at every `L(k)`: ν = λ + ε_{u₁+1} + ω², SkCtx, ¬ SkWit, ¬(ν − λ < ε_{u₁+1}) -/
+theorem skHighWin (k : ℕ) :
+    SkCtx S k (Nc.ncL S (k : Ordinal.{0}))
+        (Nc.ncL S (k : Ordinal.{0}) + eN (upsilon (Nc.ncL S (k : Ordinal.{0}) + 1)) + ω ^ 2) ∧
+      ¬ SkWit (Nc.ncL S (k : Ordinal.{0}))
+        (Nc.ncL S (k : Ordinal.{0}) + eN (upsilon (Nc.ncL S (k : Ordinal.{0}) + 1)) + ω ^ 2) ∧
+      ¬ (Nc.ncL S (k : Ordinal.{0}) + eN (upsilon (Nc.ncL S (k : Ordinal.{0}) + 1)) + ω ^ 2 -
+          Nc.ncL S (k : Ordinal.{0}) < eN (upsilon (Nc.ncL S (k : Ordinal.{0}) + 1))) := by
+  have hν : Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}) ≤ nuC :=
+    ((Pp.ppL_lt_omega k).trans (Qq.qqL_lt_succ S)).le.trans skNu
+  obtain ⟨h1, h2, h3⟩ := Wu.wuWin_high (S := S) k
+  have hu : upsilon (Nc.ncL S (k : Ordinal.{0}) + 1) < eN (upsilon (Nc.ncL S (k : Ordinal.{0}) + 1)) :=
+    lt_of_lt_of_le (lt_add_one _) (le_nfp _ _)
+  exact ⟨Wu.wuWin k hν (eN_E _) hu h1, h3, h2⟩
+
+/-- STATUS: PROVED (a CONDITIONAL REFUTATION recorded as a node, by `Wu.wuFormHigh_fail`, `Wu.wuWin`, `Wq.wqWit_eps` and
+the shared leaf `skNu`; NEW round 119)
+SIZE: M
+`WuGap S k` refutes `skFormHigh` at `L(k)`: at the window `ν_X = λ + X + ω²` the forms clause fails at the offset `X` -/
+theorem skFormHigh_ref (k : ℕ) (hG : Wu.WuGap S k) : ¬ (∀ l ν, SkCtx S k l ν → ¬ SkWit l ν →
+    ¬ ν - l < eN (upsilon (l + 1)) → ∀ g, 0 < g → g < ν - l + ω ^ 2 → ω ^ 2 ∣ g →
+      upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S (l + g) ∨ Vr.VrForm S l (ν - l + ω ^ 2) g) := by
+  intro H
+  have hν : Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}) ≤ nuC :=
+    ((Pp.ppL_lt_omega k).trans (Qq.qqL_lt_succ S)).le.trans skNu
+  obtain ⟨X, hXE, hX1, hX2, heN, -, hfail⟩ := Wu.wuFormHigh_fail k hν hG
+  set l := Nc.ncL S (k : Ordinal.{0}) with hldef
+  have hC : SkCtx S k l (l + X + ω ^ 2) := Wu.wuWin k hν hXE hX1 hX2
+  have e : l + X + ω ^ 2 - l = X + ω ^ 2 := by rw [add_assoc, Ordinal.add_sub_cancel]
+  have hE : ¬ l + X + ω ^ 2 - l < eN (upsilon (l + 1)) := by rw [e]; exact not_lt.2 (heN.trans le_self_add)
+  have hW : ¬ SkWit l (l + X + ω ^ 2) := fun hw => hE (skWitEps hw)
+  have hωX : ω ≤ X := Vo.vo_omega_le hXE (InE.pos hXE)
+  have hω2g : ω ^ 2 ∣ X := by
+    have h := Vo.vo_e2 ▸ opow_dvd_opow ω ((natCast_lt_omega0 2).trans_le hωX).le
+    rwa [hXE] at h
+  have hXβ : X < l + X + ω ^ 2 - l + ω ^ 2 := by
+    rw [e]
+    exact (lt_add_of_pos_right X (pow_pos omega0_pos 2)).trans_le le_self_add
+  exact hfail (H l (l + X + ω ^ 2) hC hW hE X (InE.pos hXE) hXβ hω2g)
+
+/-- STATUS: PROVED (by `Wu.wuRoad_vac`; NEW round 119; a CONDITIONAL REFUTATION of the road)
+SIZE: S
+`WuGap S 0` makes the supply hypothesis `h0'` of `Wf.wfRoad` (the first half of the top `skSup`) incompatible with
+`L(1) ≤ ν_C` (a consequence of the road's own conclusion): the road would be vacuous -/
+theorem skRoadRef (hG : Wu.WuGap S 0) :
+    ¬ ((∀ l, IsRestartIdx l → Nc.ncL S 0 = upsilon l →
+        Wf.WfVisGen S l (Nc.ncL S 1) (upsilon (Nc.ncL S 0 + Te.teW (Nc.ncL S 0)))) ∧
+      Nc.ncL S 1 ≤ nuC) :=
+  Wu.wuRoad_vac hG
+
+/-- STATUS: OPEN (NEW round 119; OFF THE ROAD: a REFUTATION TARGET of `skFormHigh` and of the road)
+SIZE: M
+`WuGap S k`: an `ε`-number `X ∈ (u₁, u₂)` with `X ≠ ϑ^{u₁}(ξ)` for every `ξ ∈ T^{u₁}`, `ξ < B₂`, and with a Wilken
+parameter `≥ υ_λ` in every segment point ending in `X`.  Expected witness `X = ϑ^{u₁}(B₂ + υ_λ)` ([W07a] Lemma 3.30:
+`ϑ^{u₁}` is injective on `T^{u₁} ∩ Ω₂`, `B₂ + υ_λ ∈ T^{u₁}`; `Par(X) = Par(B₂ + υ_λ) ∋ υ_λ`, `CitedEv.vt_memTwo`,
+`Cited.Par_comps_eq`); needs the datum `vdD S 0 B₂` (`Vd.vd_dat_ui`), `Ω₁·B₂ = B₂`, `CitedVd.vdVt_lt` / `vdLevel_lt` for
+`ξ ≥ Ω₁²`, the countable levels for `Ω₁ ≤ ξ < Ω₁²`, and `ω^{cdExp y} ∈ comps y`.  `ξ < Ω₁` is excluded by
+`CitedEv.vt_E_iff`. -/
+theorem skGap (k : ℕ) : Wu.WuGap S k := by sorry
 
 /-! ## Assembly -/
 
