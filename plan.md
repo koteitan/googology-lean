@@ -6,12 +6,12 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
-      - done (only S assumed): frontier ι(Γ(φ(ε_{Ω₁+1}, G+1))·ω), G = Γ_{Ω₁+1}; region A1 closed (systems below φ(ε_{Ω₁+1}, G+1)). 109 axioms.
-      - region A2 (all B < φ(G, 1)) holds if the Ω₁-cofinal step WpOm1Step(G) holds; at restarts λ: Θ_λ(θ) = ψ₁(A+θ) = υ_{λ+1} if ρ_λ = ψ₁(A) < Pv(η).
-      - road woRoad (hyp.: UPPER, LOWER, cap above the new frontier; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; WfVisGen at m*, L(n+1)): ν_C = L(ω+1).
-      - skeleton of the road ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): 39 sorry leaves: OPEN 21 (M 1, L 20), SUSPECT 1 (M), REFUTED 1 (M), REPLACED 16.
-      - next: skStepOm1WG2 (A2, port of the A1 Ω₁-step); skImgEps, skFormHigh, skCarryHigh; skWallBase/skWallStep, skTopFam; A3; then the L leaves.
+    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+      - done (only S assumed): frontier ι(Γ(φ(ζ_{Ω₁+1}, G+1))·ω), G = Γ_{Ω₁+1}; A1 closed; A2 holds up to level ζ_{Ω₁+1}. 107 axioms, none new.
+      - A2 (all B < φ(G, 1)) holds if each ε-number code in (ζ_{Ω₁+1}, G) has its sequence. If WuGap holds, WfVisGen fails and the road is void.
+      - road wsRoadZ (hyp.: UPPER, LOWER, cap above F_Z; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; WfVisGen at m*, L(n+1)): ν_C = L(ω+1).
+      - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): 42 sorry leaves: OPEN 22 (M 2, L 20), SUSPECT 2 (M, L), REFUTED 1 (M), REPLACED 17.
+      - next: skGap (decides WfVisGen), skImgEps; skBaseA2Hi; A3 (widen HnLv, family up to t₀); skX0Law, skWallBase/Step; then the L leaves.
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
