@@ -10,7 +10,7 @@ written once for an arbitrary code interface `C : Ws.WsC`.  The raw datum `Wo.Wo
 * `WsGood C r ℓ` (**a raw datum good up to the level `ℓ` of `C`**), `WsGood.mono`;
 * `wsWB` (**the two-gate base of every level `μ` with `μ + Ω₁ ≤ ℓ`**: an `Hn.HnWB (C.lv μ)`);
 * `WsSh C r ℓ S` (**the shape of a system at the level `ℓ` over `r`**), `wsSh_W`, `wsSh_succ`;
-* `wsG C` (`G` with the low field `C.Zo`), `wsGood_G` (**`G` is good up to every level**), `wsGood_Q` (**every
+* `wsG C` (`G` with the low field `C.Zo`), `wsGood_G` (**`G` is good up to every level**, given `WsCG C`), `wsGood_Q` (**every
   pseudo-base of a level is good up to it**).
 
 No new axiom.  New definitions: `WsGood`, `wsWB`, `WsSh`, `wsG`.
@@ -242,14 +242,14 @@ noncomputable def wsG : WoR := ⟨gcG 0, lgG, 0, C.Zo⟩
 
 variable {C}
 
-theorem ws_G_fix {μ : Ordinal.{0}} (hμ : C.Lev μ) : veblen μ (gcG 0) = gcG 0 :=
-  gn_veb_fix (gcG_SC 0) (C.lt_G hμ.2.2)
+theorem ws_G_fix (hG : WsCG C) {μ : Ordinal.{0}} (hμ : C.Lev μ) : veblen μ (gcG 0) = gcG 0 :=
+  gn_veb_fix (gcG_SC 0) (C.lt_G hG hμ.2.2)
 
 /-- **`G` IS GOOD UP TO EVERY LEVEL.** -/
-theorem wsGood_G {ℓ : Ordinal.{0}} (hℓ : C.Lev ℓ) : WsGood C (wsG C) ℓ where
+theorem wsGood_G (hG : WsCG C) {ℓ : Ordinal.{0}} (hℓ : C.Lev ℓ) : WsGood C (wsG C) ℓ where
   lev := hℓ
   γ_lt := gv_Om1_pos
-  F_P := ⟨gcG 0, ws_G_fix hℓ⟩
+  F_P := ⟨gcG 0, ws_G_fix hG hℓ⟩
   G_le := le_rfl
   S_lt1 := by
     have hG1 := gcG_SC 1
@@ -257,31 +257,31 @@ theorem wsGood_G {ℓ : Ordinal.{0}} (hℓ : C.Lev ℓ) : WsGood C (wsG C) ℓ w
     have hfix : veblen ℓ (gcG 1) = gcG 1 := gn_veb_fix hG1 (hℓ.2.2.trans C.Bd_lt_G1)
     have h2 := (isNormal_veblen ℓ).strictMono ((ev_isSuccLimit_of_inE hE).add_one_lt (gcG_lt zero_lt_one))
     show hdNx ℓ (gcG 0) < gcG 1
-    rw [hdNx_fixP (ws_G_fix hℓ)]; rwa [hfix] at h2
+    rw [hdNx_fixP (ws_G_fix hG hℓ)]; rwa [hfix] at h2
   F_mem := fun S _ _ ha _ => gmS_G0_mem S ha
   S_mem := fun μ hμ _ S _ _ ha hb => by
     show hdNx μ (gcG 0) ∈ _
-    rw [hdNx_fixP (ws_G_fix hμ)]
+    rw [hdNx_fixP (ws_G_fix hG hμ)]
     exact CSet.phi_mem ((C.lv μ hμ).L_mem S _ _ ha (max_lt_iff.1 hb).2) (CSet.succ_mem (gmS_G0_mem S ha))
   S_memW := fun μ hμ hle S _ _ ha hb => by
     show hdNx (μ + Om1) (gcG 0) ∈ _
-    rw [hdNx_fixP (ws_G_fix (lev_succ hμ hℓ hle))]
+    rw [hdNx_fixP (ws_G_fix hG (lev_succ hμ hℓ hle))]
     exact CSet.phi_mem ((C.lv μ hμ).succ.L_mem S _ _ ha (max_lt_iff.1 hb).2) (CSet.succ_mem (gmS_G0_mem S ha))
   F_code := fun _ _ _ _ _ _ _ => GxCl.atom (Set.mem_singleton _)
   F_cl := fun _ hZ _ _ _ _ _ => hZ.1
   S_cl := fun _ hZ _ _ => hZ.1
   rd := fun μ hμ _ x hx hx1 hg => by
     have hgx : C.g μ < x := (max_lt_iff.1 hg).2
-    have hlt := C.R_lt hx hx1 hμ.2.2 hgx
+    have hlt := hG.R_lt hx hx1 hμ.2.2 hgx
     have hfix := hjG_fix hx hx1 (one_le_R hx hx1 hμ.1 hμ.2.2 hgx) hlt
-    exact ⟨⟨lgG x, hfix⟩, hlt, C.Zo_gt hx hx1 hμ.1 hμ.2.2 hgx⟩
+    exact ⟨⟨lgG x, hfix⟩, hlt, hG.Zo_gt hx hx1 hμ.1 hμ.2.2 hgx⟩
   S_pi := fun μ hμ _ σ ρ hB hg => by
     have hgσ : C.g μ < σ := (max_lt_iff.1 hg).2
     have hρ1 : ρ < Om1 := hB.2.2.2
     have hσ1 : σ < Om1 := hB.2.2.1.trans hρ1
     have hgρ : C.g μ < ρ := hgσ.trans hB.2.2.1
     exact hjG_S_pi hB (C.R_pi hB hμ.2.2 hgσ) (one_le_R hB.2.1 hρ1 hμ.1 hμ.2.2 hgρ)
-      (C.R_lt hB.2.1 hρ1 hμ.2.2 hgρ) (one_le_R hB.1 hσ1 hμ.1 hμ.2.2 hgσ) (C.R_lt hB.1 hσ1 hμ.2.2 hgσ)
+      (hG.R_lt hB.2.1 hρ1 hμ.2.2 hgρ) (one_le_R hB.1 hσ1 hμ.1 hμ.2.2 hgσ) (hG.R_lt hB.1 hσ1 hμ.2.2 hgσ)
   Zo_fix := C.Zo_fix
   Zo_G1 := fun _ hx hx1 => C.Zo_G1 _ hx hx1
   Fr_pi := fun hB _ => Go.goGl.ba_pi _ _ hB

@@ -15,7 +15,9 @@ lies above `φ(a, Γ_{x+1}+1)` for EVERY `a < Γ_{x+1}`; so the base needs no bo
   bound `φ(ℓ, G+1)`, a start over `wnGW` at the package), `wnAt_base`;
 * `wnSuccV`, `wnSucc_at`, `wnSucc_ext`, `wnSucc_ext_lt` (**THE SUCCESSOR STEP of region (A2)**).
 
-The extension statement is `Wh.WhExt`.  No new axiom.  New definitions: `wnZo`, `wnGW`, `WnAt`, `wnSuccV`.
+The extension statement is `Wh.WhExt`.  Round 120: `wnGW` asks `WnNB Λ` (`ℓ(x) < Γ_{x+1}` above the gate, `L < G`), which an entry `WnAt` now carries.
+
+No new axiom.  New definitions: `wnZo`, `WnNB`, `wnGW`, `WnAt`, `wnSuccV`.
 -/
 
 set_option autoImplicit false
@@ -75,13 +77,23 @@ theorem wn_S_Zo {x a : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (h1 : 1 ≤ a) 
 
 /-! ## `G` as a base of level `L + Ω₁` -/
 
+/-- **The (A1)/(A2) bounds of a band level datum above its gate**: `ℓ(x) < Γ_{x+1}` above the gate and `L < G` (the
+band level datum was widened to `L < Γ(1)`, `ℓ(x) < Γ_{x+2}` in round 120). -/
+def WnNB (Λ : HnLv) : Prop := (∀ x, InE x → x < Om1 → Λ.g < x → Λ.l x < lgG x) ∧ Λ.L < gcG 0
+
+theorem wnNB_of_G {Λ : HnLv} (h : HnLvG Λ) : WnNB Λ := ⟨fun x hx hx1 _ => h.l_lt x hx hx1, h.L_G⟩
+
+/-- **The next level datum keeps `WnNB`.** -/
+theorem wnNB_succ {Λ : HnLv} (h : WnNB Λ) : WnNB Λ.succ :=
+  ⟨fun x hx hx1 hg => hnG_q Λ hx hx1 (h.1 x hx hx1 hg), (inE_indec gr_G_inE).add_lt h.2 (hg_Om1_lt_G 0)⟩
+
 section GW
 
 variable (Λ : HnLv)
 
 /-- **`G` AS A BASE OF LEVEL `L + Ω₁`** for every band level datum (code gate `0`, reading gate `g`, reading
 `Γ_{x+1}`, outer low field `Z_o`). -/
-noncomputable def wnGW : HnWB Λ where
+noncomputable def wnGW (hN : WnNB Λ) : HnWB Λ where
   F := gcG 0
   Fr := lgG
   γ := 0
@@ -92,60 +104,62 @@ noncomputable def wnGW : HnWB Λ where
   γ_le := zero_le
   lg := le_rfl
   γR_cl := fun _ _ _ _ h => h
-  F_P := ⟨gcG 0, hnG_FP Λ⟩
+  F_P := ⟨gcG 0, hnG_FP Λ hN.2⟩
   G_le := le_rfl
   S_lt1 := by
     have hG1 := gcG_SC 1
     have hE := Low.opow_eq_self_of_SC hG1
-    have hfix : veblen (Λ.L + Om1) (gcG 1) = gcG 1 := gn_veb_fix hG1 (Λ.succ.L_lt 1)
+    have hfix : veblen (Λ.L + Om1) (gcG 1) = gcG 1 := gn_veb_fix hG1 Λ.succ.L_G
     have h2 := (isNormal_veblen (Λ.L + Om1)).strictMono
       ((ev_isSuccLimit_of_inE hE).add_one_lt (gcG_lt zero_lt_one))
-    rw [hdNx_fixP (hnG_FP Λ)]; rwa [hfix] at h2
+    rw [hdNx_fixP (hnG_FP Λ hN.2)]; rwa [hfix] at h2
   F_mem := fun S _ _ ha _ => gmS_G0_mem S ha
   S_mem := fun S a b ha hb => by
-    rw [hdNx_fixP (hnG_FP Λ)]
+    rw [hdNx_fixP (hnG_FP Λ hN.2)]
     exact CSet.phi_mem (Λ.succ.L_mem S a b ha hb) (CSet.succ_mem (gmS_G0_mem S ha))
   F_code := fun _ _ _ _ _ _ _ => GxCl.atom (Set.mem_singleton _)
   F_cl := fun _ hZ _ _ _ _ _ => hZ.1
   S_cl := fun _ hZ _ _ => hZ.1
-  Fr_gt := fun hx hx1 _ => hnG_q Λ hx hx1
-  Fr_P := fun hx hx1 _ => ⟨lgG _, hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1)⟩
-  S_Zo := fun {x} hx hx1 _ => wn_S_Zo hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1)
+  Fr_gt := fun hx hx1 hg => hnG_q Λ hx hx1 (hN.1 _ hx hx1 hg)
+  Fr_P := fun hx hx1 hg => ⟨lgG _, hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1 (hN.1 _ hx hx1 hg))⟩
+  S_Zo := fun {x} hx hx1 hg => wn_S_Zo hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1 (hN.1 _ hx hx1 hg))
   Zo_fix := wnZo_fix
   Zo_G1 := fun _ hx hx1 => wnZo_G1 hx hx1
   Fr_pi := fun hB _ => Go.goGl.ba_pi _ _ hB
-  S_pi := fun hB hg => hjG_S_pi hB (Λ.succ.l_pi _ _ hB hg) (hnG_one Λ hB.2.1) (hnG_q Λ hB.2.1 hB.2.2.2)
-    (hnG_one Λ hB.1) (hnG_q Λ hB.1 (hB.2.2.1.trans hB.2.2.2))
+  S_pi := fun hB hg => hjG_S_pi hB (Λ.succ.l_pi _ _ hB hg) (hnG_one Λ hB.2.1)
+    (hnG_q Λ hB.2.1 hB.2.2.2 (hN.1 _ hB.2.1 hB.2.2.2 (hg.trans hB.2.2.1)))
+    (hnG_one Λ hB.1) (hnG_q Λ hB.1 (hB.2.2.1.trans hB.2.2.2) (hN.1 _ hB.1 (hB.2.2.1.trans hB.2.2.2) hg))
 
-theorem wnGW_γR : (wnGW Λ).γR = Λ.g := rfl
+theorem wnGW_γR (hN : WnNB Λ) : (wnGW Λ hN).γR = Λ.g := rfl
 
 /-- **The union over `G` with a package at `Λ` starts the next package at `Λ.succ`.** -/
-theorem wnGU_shape (St0 : HnVStTy Λ 0) (h0 : ∀ Q U h, HnVSpec Q U (St0 Q U h))
-    (S0 : HgVD) (hS0 : HnWShape (wnGW Λ) 0 S0) :
-    HnWShape (wnGW Λ.succ) 0 (hnwU (wnGW Λ) St0 h0 S0 hS0) := by
-  refine ⟨?_, fun x _ _ => ?_, fun x hx hx1 _ => ?_, fun x hx hx1 => ?_, fun _ σ _ _ hσ _ _ => hσ.pos⟩
+theorem wnGU_shape (hN : WnNB Λ) (St0 : HnVStTy Λ 0) (h0 : ∀ Q U h, HnVSpec Q U (St0 Q U h))
+    (S0 : HgVD) (hS0 : HnWShape (wnGW Λ hN) 0 S0) :
+    HnWShape (wnGW Λ.succ (wnNB_succ hN)) 0 (hnwU (wnGW Λ hN) St0 h0 S0 hS0) := by
+  refine ⟨?_, fun x _ _ => ?_, fun x hx hx1 hm => ?_, fun x hx hx1 => ?_, fun _ σ _ _ hσ _ _ => hσ.pos⟩
   · show hdNx (Λ.L + Om1) (gcG 0) = veblen (Λ.succ.L + 0) (gcG 0 + 1)
-    rw [add_zero, hdNx_fixP (hnG_FP Λ)]; rfl
+    rw [add_zero, hdNx_fixP (hnG_FP Λ hN.2)]; rfl
   · show Λ.g < x ↔ max Λ.g 0 < x
     rw [max_eq_left zero_le]
   · show hdNx (Λ.l x + x) (lgG x) = veblen (Λ.succ.l x + 0) (lgG x + 1)
-    rw [add_zero, hdNx_fixP (hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1))]; rfl
-  · show hnwUZ (wnGW Λ) x = if max Λ.g 0 < x then evZ (veblen (Λ.succ.l x + 0) (lgG x + 1))
-      else (wnGW Λ.succ).hnwZo x
+    rw [add_zero, hdNx_fixP (hjG_fix hx hx1 (hnG_one Λ hx)
+      (hnG_q Λ hx hx1 (hN.1 _ hx hx1 ((le_max_left _ _).trans_lt hm))))]; rfl
+  · show hnwUZ (wnGW Λ hN) x = if max Λ.g 0 < x then evZ (veblen (Λ.succ.l x + 0) (lgG x + 1))
+      else (wnGW Λ.succ (wnNB_succ hN)).hnwZo x
     unfold hnwUZ
     rw [max_eq_left zero_le]
     by_cases hg : Λ.g < x
-    · rw [if_pos (show (wnGW Λ).γR < x from hg), if_pos hg, add_zero]
+    · rw [if_pos (show (wnGW Λ hN).γR < x from hg), if_pos hg, add_zero]
       show evZ (hdNx (Λ.l x + x) (lgG x)) = evZ (veblen (Λ.l x + x) (lgG x + 1))
-      rw [hdNx_fixP (hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1))]
-    · rw [if_neg (show ¬ (wnGW Λ).γR < x from hg), if_neg hg,
-        (wnGW Λ.succ).hnwZo_low (show ¬ (wnGW Λ.succ).γR < x from hg)]
+      rw [hdNx_fixP (hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1 (hN.1 _ hx hx1 hg)))]
+    · rw [if_neg (show ¬ (wnGW Λ hN).γR < x from hg), if_neg hg,
+        (wnGW Λ.succ (wnNB_succ hN)).hnwZo_low (show ¬ (wnGW Λ.succ (wnNB_succ hN)).γR < x from hg)]
       rfl
 
 end GW
 
 /-- **`Hg.hgU` IS A START OVER `wnGW Hn.hnL1` AT THE LEVEL `Ω₁ + 0`.** -/
-theorem wnU_shape : HnWShape (wnGW hnL1) 0 hgU := by
+theorem wnU_shape : HnWShape (wnGW hnL1 (wnNB_of_G hnL1_G)) 0 hgU := by
   refine ⟨by show veblen Om1 (gcG 0 + 1) = veblen (Om1 + 0) (gcG 0 + 1); rw [add_zero],
     fun x _ _ => ?_, fun x _ _ _ => ?_, fun x hx _ => ?_, fun _ σ _ _ hσ _ _ => hσ.pos⟩
   · show (0 : Ordinal.{0}) < x ↔ max (0 : Ordinal.{0}) 0 < x
@@ -153,7 +167,7 @@ theorem wnU_shape : HnWShape (wnGW hnL1) 0 hgU := by
   · show veblen x (lgG x + 1) = veblen (x + 0) (lgG x + 1)
     rw [add_zero]
   · show evZ (hcBR x) = if max 0 0 < x then evZ (veblen (x + 0) (lgG x + 1))
-      else (wnGW hnL1).hnwZo x
+      else (wnGW hnL1 (wnNB_of_G hnL1_G)).hnwZo x
     rw [max_self, if_pos hx.pos, add_zero]; rfl
 
 /-! ## Entries of region (A2) -/
@@ -164,12 +178,12 @@ theorem wnU_shape : HnWShape (wnGW hnL1) 0 hgU := by
 def WnAt (ℓ : Ordinal.{0}) (K : HnPk) (V : HgVD) : Prop :=
   K.Λ.L = ℓ ∧ (∀ x, InE x → x < Om1 → K.Λ.g < x → K.Λ.l x = glR ℓ x) ∧
     V.B = veblen ℓ (gcG 0 + 1) ∧ V.γ ≤ glG ℓ ∧ K.Λ.g ≤ glG ℓ ∧
-    (∀ x, InE x → x < Om1 → K.Λ.g < x → glG ℓ < x) ∧ HnWShape (wnGW K.Λ) 0 V
+    (∀ x, InE x → x < Om1 → K.Λ.g < x → glG ℓ < x) ∧ ∃ hN : WnNB K.Λ, HnWShape (wnGW K.Λ hN) 0 V
 
 /-- **THE ENTRY AT THE LEVEL `Ω₁`**: `Hn.hnPk1` and `Hg.hgU`. -/
 theorem wnAt_base : WnAt Om1 hnPk1 hgU := by
   have hgO : glG Om1 = 1 := by rw [glG_low Om1_lt_eW, (rdc_Om1 0).2]
-  refine ⟨rfl, fun x _ _ _ => ?_, hgU_B, ?_, ?_, fun x hx _ _ => ?_, wnU_shape⟩
+  refine ⟨rfl, fun x _ _ _ => ?_, hgU_B, ?_, ?_, fun x hx _ _ => ?_, wnNB_of_G hnL1_G, wnU_shape⟩
   · rw [wh_hnPk1_l, glR_low Om1_lt_eW, (rdc_Om1 x).1]
   · rw [hgU_γ]; exact zero_le
   · show (0 : Ordinal.{0}) ≤ _; exact zero_le
@@ -183,19 +197,20 @@ variable {ℓ' : Ordinal.{0}} {K' : HnPk} {V' : HgVD}
 
 /-- **The next system**: the union over `G` of the levels `ℓ' + κ`, `κ < Ω₁`, started at `V'`. -/
 noncomputable def wnSuccV (hat : WnAt ℓ' K' V') : HgVD :=
-  hnwU (wnGW K'.Λ) K'.St0 K'.h0 V' hat.2.2.2.2.2.2
+  hnwU (wnGW K'.Λ hat.2.2.2.2.2.2.choose) K'.St0 K'.h0 V' hat.2.2.2.2.2.2.choose_spec
 
 theorem wnSuccV_B (hat : WnAt ℓ' K' V') : (wnSuccV hat).B = veblen (ℓ' + Om1) (gcG 0 + 1) := by
   show hdNx (K'.Λ.L + Om1) (gcG 0) = _
-  rw [hdNx_fixP (hnG_FP K'.Λ), hat.1]
+  rw [hdNx_fixP (hnG_FP K'.Λ hat.2.2.2.2.2.2.choose.2), hat.1]
 
 /-- **The next entry is an entry at `ℓ' + Ω₁`.** -/
 theorem wnSucc_at (h2 : Om1 ∣ ℓ') (h3 : ℓ' < gcG 0) (hat : WnAt ℓ' K' V') :
     WnAt (ℓ' + Om1) K'.succ (wnSuccV hat) := by
-  obtain ⟨e1, e2, e3, e4, e5, e6, hsh⟩ := hat
+  obtain ⟨e1, e2, e3, e4, e5, e6, hN, hsh⟩ := hat
   have hga := (wn_glR_add_Om1 ℓ' h3 h2 0).2
   refine ⟨by show K'.Λ.L + Om1 = _; rw [e1], fun x hx hx1 hg => ?_, wnSuccV_B _, ?_, ?_,
-    fun x hx hx1 hg => wn_glG_add_Om1_lt hx h3 (e6 x hx hx1 hg), wnGU_shape K'.Λ K'.St0 K'.h0 V' _⟩
+    fun x hx hx1 hg => wn_glG_add_Om1_lt hx h3 (e6 x hx hx1 hg), wnNB_succ hN,
+    wnGU_shape K'.Λ hN K'.St0 K'.h0 V' _⟩
   · show K'.Λ.l x + x = _
     rw [e2 x hx hx1 hg, (wn_glR_add_Om1 ℓ' h3 h2 x).1]
   · show K'.Λ.g ≤ _; exact e5.trans hga
@@ -203,7 +218,7 @@ theorem wnSucc_at (h2 : Om1 ∣ ℓ') (h3 : ℓ' < gcG 0) (hat : WnAt ℓ' K' V'
 
 /-- **The next entry extends the entry at `ℓ'`.** -/
 theorem wnSucc_ext (hat : WnAt ℓ' K' V') : WhExt K' V' K'.succ (wnSuccV hat) := by
-  set hsh := hat.2.2.2.2.2.2
+  set hsh := hat.2.2.2.2.2.2.choose_spec
   refine ⟨?_, ?_, fun c x hc => ⟨hnwU_R0 _ _ _ _ hsh hc x, hnwU_g0 _ _ _ _ hsh hc⟩⟩
   · intro hg' hL' hl' Q U hU c x hc
     have hsh' := hnw_shape_dn Q (K'.h0 Q.dn U hU)

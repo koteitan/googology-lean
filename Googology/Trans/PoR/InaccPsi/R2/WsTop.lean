@@ -43,9 +43,9 @@ theorem wsLw_lev : wsA2.Lev wsLw := ⟨wsLw_Om1.le, wp_Om1_dvd_E wsLw_E wsLw_Om1
 /-- **THE SYSTEM OVER `G` AT THE LEVEL `ε_{Ω₁+ω}`.** -/
 noncomputable def wsVw : HgVD := wsV wsCls_w wsLw
 
-theorem wsVw_B : wsVw.B = veblen wsLw (gcG 0 + 1) := wsV_B wsCls_w wsLw_lev (lt_add_one _)
+theorem wsVw_B : wsVw.B = veblen wsLw (gcG 0 + 1) := wsV_B wsA2_G wsCls_w wsLw_lev (lt_add_one _)
 
-theorem wsVw_γ : wsVw.γ ≤ gh wsLw := wsV_γ wsCls_w wsLw_lev (lt_add_one _)
+theorem wsVw_γ : wsVw.γ ≤ gh wsLw := wsV_γ wsA2_G wsCls_w wsLw_lev (lt_add_one _)
 
 /-- `ε_{Ω₁+ω} = φ(1, Ω₁ + ω)` is a code over `Γ₀` with the atom `G`. -/
 theorem wsLw_code : GxCl (gamma 0) {gcG 0} wsLw := by
@@ -160,6 +160,6 @@ end Fr
 /-- **REGION (A2) BELOW `φ(ε_{Ω₁+ω}, G+1)`, UNCONDITIONAL**: every (A2) level `ℓ ≤ ε_{Ω₁+ω}` has a system over `G`
 with `B = φ(ℓ, G+1)` and gate `≤ gh ℓ`. -/
 theorem wsSysW : ∀ ℓ, WpLev ℓ → ℓ ≤ wsLw → ∃ V : HgVD, V.B = veblen ℓ (gcG 0 + 1) ∧ V.γ ≤ gh ℓ :=
-  fun ℓ hℓ hle => wsSysAll wsCls_w ℓ hℓ (Order.lt_add_one_iff.2 hle)
+  fun ℓ hℓ hle => wsSysAll wsA2_G wsCls_w ℓ hℓ (Order.lt_add_one_iff.2 hle)
 
 end Googology.Trans.PoR.InaccPsi.R2.Ws

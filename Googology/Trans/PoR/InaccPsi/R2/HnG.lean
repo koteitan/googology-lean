@@ -193,7 +193,7 @@ noncomputable def hnkGCh : HgfCh where
       refine (hb_evZ_lt_fix2 hP ?_).le
       show veblen ((hnkPk (heFs l k)).Λ.l x + 0) (lgG x + 1) < _
       rw [add_zero, max_eq_right (omega0_lt_inE hx).le]
-      exact hd_veb_left_lt (le_self_add.trans_lt (hnkNB hk1 x hx hx1 (max_lt_iff.1 h').1)) _
+      exact hd_veb_left_lt (le_self_add.trans_lt (hnkNB hk1 |>.1 x hx hx1 (max_lt_iff.1 h').1)) _
     · rw [(hnGW (hnkPk (heFs l k)).Λ (hnkNB hk1)).hnwZo_low (fun h'' => h' (max_lt h'' hx.pos))]
       rfl
   Zo_fix := fun x => hc_fix_down one_le_two ((hnGW (hnMLv l hle) (hnMLv_NB l hle)).hnwZo_fix x)

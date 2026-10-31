@@ -1946,3 +1946,14 @@ import Googology.Trans.PoR.InaccPsi.R2.WuAtom
 import Googology.Trans.PoR.InaccPsi.R2.WuWin
 import Googology.Trans.PoR.InaccPsi.R2.WuImg
 import Googology.Trans.PoR.InaccPsi.R2.WvImg
+import Googology.Trans.PoR.InaccPsi.R2.WwGap
+import Googology.Trans.PoR.InaccPsi.R2.WwForm
+import Googology.Trans.PoR.InaccPsi.R2.WwRoad
+import Googology.Trans.PoR.InaccPsi.R2.WxVeb
+import Googology.Trans.PoR.InaccPsi.R2.WxBase
+import Googology.Trans.PoR.InaccPsi.R2.WxTop
+import Googology.Trans.PoR.InaccPsi.R2.WyLv
+import Googology.Trans.PoR.InaccPsi.R2.WzIt
+import Googology.Trans.PoR.InaccPsi.R2.WzLift
+import Googology.Trans.PoR.InaccPsi.R2.WzLow
+import Googology.Trans.PoR.InaccPsi.R2.WzUp

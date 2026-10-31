@@ -58,7 +58,7 @@ noncomputable def wsA2 : WsC where
   g := gh
   Zo := wnZo
   Om1_lt := gl_Om1_lt_G0
-  Bd_le := le_rfl
+  Bd_lt1 := gcG_lt zero_lt_one
   add_lt := fun _ _ ha hb => (inE_indec gl_G0_E).add_lt ha hb
   g_lt := fun a ha => max_lt wh_one_lt_Om1 (glG_lt_Om1 a ha)
   R_Om1 := fun x => by rw [glR_low Om1_lt_eW, (rdc_Om1 x).1]
@@ -69,7 +69,7 @@ noncomputable def wsA2 : WsC where
   g_succ1 := fun {x t} hx ht hg => (gh_lt_iff hx).2
     (glG_succ (ev_isSuccLimit_of_inE hx) t ((inE_indec gl_G0_E).add_lt ht gl_one_lt_G0) ((gh_lt_iff hx).1 hg))
   le_R := fun hx hx1 h1 hB hg => wn_le_glR hx hx1 h1 hB ((gh_lt_iff hx).1 hg)
-  R_lt := fun hx hx1 hB hg => glR_lt_G hx hx1 hB ((gh_lt_iff hx).1 hg)
+  R_lt := fun hx hx1 hB hg => (glR_lt_G hx hx1 hB ((gh_lt_iff hx).1 hg)).trans (mg_lgG_lt_G1 hx hx1)
   R_mono := fun hx hx1 hc hbc hgc hgb => glR_mono hx hx1 hc hbc ((gh_lt_iff hx).1 hgc) ((gh_lt_iff hx).1 hgb)
   R_cof := fun hx hx1 hc hg ν hν => by
     obtain ⟨b, hb, hgb, hνb⟩ := glR_cof hx hx1 _ hc ((gh_lt_iff hx).1 hg) ν hν
@@ -79,6 +79,11 @@ noncomputable def wsA2 : WsC where
   L_mem := fun ℓ h _ _ _ _ hb => (gl_mem ℓ h ((glG_le_gh ℓ).trans_lt hb)).1
   Zo_fix := wnZo_fix
   Zo_G1 := fun _ hx hx1 => wnZo_G1 hx hx1
+
+/-- **`G` is a base for `wsA2`.** -/
+theorem wsA2_G : WsCG wsA2 where
+  Bd_le := le_rfl
+  R_lt := fun hx hx1 hB hg => glR_lt_G hx hx1 hB ((gh_lt_iff hx).1 hg)
   Zo_gt := fun hx hx1 h1 hB hg =>
     wn_S_Zo hx hx1 ((wo_one_lt_inE hx).le.trans (wn_le_glR hx hx1 h1 hB ((gh_lt_iff hx).1 hg)))
       (glR_lt_G hx hx1 hB ((gh_lt_iff hx).1 hg))
@@ -127,7 +132,7 @@ theorem wsA2_fam : ∀ ℓ, WpLev ℓ → WsSpec wsA2 ℓ (wsF hc ℓ) ∧
 
 /-- **THE SYSTEMS OVER `G` AT EVERY (A2) LEVEL** given the classification (the statement of `Wp.wpSysAll` at `G`). -/
 theorem wsA2_sysAll : ∀ ℓ, WpLev ℓ → ∃ V : HgVD, V.B = veblen ℓ (gcG 0 + 1) ∧ V.γ ≤ gh ℓ := fun ℓ hℓ =>
-  wsSysAll hc ℓ hℓ hℓ.2.2
+  wsSysAll wsA2_G hc ℓ hℓ hℓ.2.2
 
 /-- **REGION (A2)** given the classification: every `B < φ(G, 1)` is `≤` the bound of a system over `G` whose gate
 is below `K`. -/
@@ -143,6 +148,6 @@ end Fam
 /-- **THE SYSTEMS OVER `G` AT EVERY (A2) LEVEL BELOW `ε_{Ω₁+1}`**, with no hypothesis (non-vacuity of the (A2)
 family). -/
 theorem wsA2_sysE : ∀ ℓ, WpLev ℓ → ℓ < gfE → ∃ V : HgVD, V.B = veblen ℓ (gcG 0 + 1) ∧ V.γ ≤ gh ℓ :=
-  fun ℓ hℓ hE => wsSysAll wsA2_clsE ℓ hℓ hE
+  fun ℓ hℓ hE => wsSysAll wsA2_G wsA2_clsE ℓ hℓ hE
 
 end Googology.Trans.PoR.InaccPsi.R2.Ws

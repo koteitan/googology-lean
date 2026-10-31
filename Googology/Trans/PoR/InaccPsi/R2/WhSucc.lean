@@ -152,12 +152,13 @@ theorem whS_W (h3 : ℓ' + Om1 < gfE) : ℓ' < gfE := (lt_add_of_pos_right _ wh_
 
 /-- The outer-field bound of the next level datum. -/
 theorem whS_NB (h2 : Om1 ∣ ℓ') (h3 : ℓ' + Om1 < gfE) (hat : WhAt ℓ' K' V') : WhNB K'.Λ.succ :=
-  fun x hx hx1 hg => by
+  ⟨fun x hx hx1 hg => by
   show K'.Λ.l x + x + x < eN x
   have hW := whS_W h3
   rw [hat.2.1 x hx hx1 hg, ← (wh_rdc_add_Om1 ℓ' hW h2 x).1]
   exact (inE_indec (eN_E x)).add_lt
-    (rdc_lt_eN hx _ (wh_gtc_add_Om1_ltE hx hW (hat.2.2.2.2.2.1 x hx hx1 hg))) (lt_eN x)
+    (rdc_lt_eN hx _ (wh_gtc_add_Om1_ltE hx hW (hat.2.2.2.2.2.1 x hx hx1 hg))) (lt_eN x),
+    by show K'.Λ.L + Om1 < gcG 0; rw [hat.1]; exact h3.trans gfE_lt_G0⟩
 
 /-- **The next system**: the union over `G` of the levels `ℓ' + κ`, `κ < Ω₁`, started at `V'`. -/
 noncomputable def whSuccV (hat : WhAt ℓ' K' V') : HgVD :=
@@ -165,7 +166,7 @@ noncomputable def whSuccV (hat : WhAt ℓ' K' V') : HgVD :=
 
 theorem whSuccV_B (hat : WhAt ℓ' K' V') : (whSuccV hat).B = veblen (ℓ' + Om1) (gcG 0 + 1) := by
   show hdNx (K'.Λ.L + Om1) (gcG 0) = _
-  rw [hdNx_fixP (hnG_FP K'.Λ), hat.1]
+  rw [hdNx_fixP (hnG_FP K'.Λ hat.2.2.2.2.2.2.choose.2), hat.1]
 
 /-- **The next entry is an entry at `ℓ' + Ω₁`.** -/
 theorem whSucc_at (h2 : Om1 ∣ ℓ') (h3 : ℓ' + Om1 < gfE) (hat : WhAt ℓ' K' V') :

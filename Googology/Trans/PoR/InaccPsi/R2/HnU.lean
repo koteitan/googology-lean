@@ -274,7 +274,7 @@ theorem hn_Z_le {μ : Ordinal.{0}} (hμ : μ < Om1) : (hnkGS μ).Z x ≤ hnBR x 
     rw [add_zero]
     refine hd_veb_left_lt ?_ _
     rw [← mul_two_eq]
-    exact le_self_add.trans_lt (hnkNB hμ x hx hx1 (max_lt_iff.1 h).1)
+    exact le_self_add.trans_lt (hnkNB hμ |>.1 x hx hx1 (max_lt_iff.1 h).1)
   · rw [(hnGW (hnkPk μ).Λ (hnkNB hμ)).hnwZo_low (fun h' => h (max_lt h' hx.pos))]
     show veblen (max ω x * max ω x * 2) (lgG x + 1) ≤ hnBR x
     rw [max_eq_right (omega0_lt_inE hx).le, mul_two_eq]; exact le_rfl

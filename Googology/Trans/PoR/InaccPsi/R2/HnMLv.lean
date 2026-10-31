@@ -75,6 +75,13 @@ theorem hn_OOM_lt {M : Ordinal.{0}} (hM : M < Om1) (α : Ordinal.{0}) : (Om1 : O
   (inE_indec (Low.opow_eq_self_of_SC (gcG_SC α))).add_lt (hl_OO_lt_G α)
     (InE.mul_lt (Low.opow_eq_self_of_SC (gcG_SC α)) (hg_Om1_lt_G α) (hM.trans (hg_Om1_lt_G α)))
 
+/-- The reading `x·x + x·M` (above the gate) is below `Γ_{x+1}`. -/
+theorem hnRd_lt0 (M : Ordinal.{0}) : ∀ x, InE x → x < Om1 → hnRd M x < lgG x := fun x hx hx1 => by
+  unfold hnRd; split_ifs with h
+  · exact (inE_indec (lgG_facts hx hx1).2.2.2.1).add_lt (hl_sq_lt hx hx1)
+      (InE.mul_lt (lgG_facts hx hx1).2.2.2.1 (lgG_facts hx hx1).2.1 ((hl_gt_E hx h).trans (lgG_facts hx hx1).2.1))
+  · exact hl_sq_lt hx hx1
+
 /-- **THE BAND LEVEL DATUM `Ω₁·Ω₁ + Ω₁·M`, READ AS `x·x + x·M`** (above the gate `hlGt M`), for `M < Ω₁`. -/
 noncomputable def hnMLv (M : Ordinal.{0}) (hM : M < Om1) : HnLv where
   L := Om1 * Om1 + Om1 * M
@@ -85,7 +92,7 @@ noncomputable def hnMLv (M : Ordinal.{0}) (hM : M < Om1) : HnLv where
   g_lt := (hlGt_le M).trans_lt hM
   q_lt := hM
   OL := (le_mul_of_one_le_right' hg_one_lt_Om1.le).trans le_self_add
-  L_G := hn_OOM_lt hM 0
+  L_G := HnLvG.wL (hn_OOM_lt hM 0)
   L_eq := by rw [← Br.Om1_eq]
   g_cl := fun _ y hZ hZ1 hy hMy hy2 => (hlGt_le M).trans_lt (hn_band_cl hZ hZ1 hy
     (by simpa only [Br.Om1_eq] using hMy) (by simpa only [Br.Om1_eq] using hy2))
@@ -98,14 +105,13 @@ noncomputable def hnMLv (M : Ordinal.{0}) (hM : M < Om1) : HnLv where
     unfold hnRd; split_ifs
     · exact (hn_le_sq x).trans le_self_add
     · exact hn_le_sq x
-  l_lt := fun x hx hx1 => by
-    unfold hnRd; split_ifs with h
-    · exact (inE_indec (lgG_facts hx hx1).2.2.2.1).add_lt (hl_sq_lt hx hx1)
-        (InE.mul_lt (lgG_facts hx hx1).2.2.2.1 (lgG_facts hx hx1).2.1 ((hl_gt_E hx h).trans (lgG_facts hx hx1).2.1))
-    · exact hl_sq_lt hx hx1
+  l_lt := HnLvG.wl (hnRd_lt0 M)
   l_pi := fun σ ρ hB hg => by
     rw [hnRd_eq hg, hnRd_eq (hg.trans hB.2.2.1)]
     exact Hm.hmLayer_exact hB (hl_gt_E hB.1 hg)
+
+/-- **`Ω₁·Ω₁ + Ω₁·M` has the (A1)/(A2) bounds.** -/
+theorem hnMLv_G (M : Ordinal.{0}) (hM : M < Om1) : HnLvG (hnMLv M hM) := ⟨hn_OOM_lt hM 0, hnRd_lt0 M⟩
 
 theorem hnMLv_L (M : Ordinal.{0}) (hM : M < Om1) : (hnMLv M hM).L = Om1 * Om1 + Om1 * M := rfl
 
@@ -118,7 +124,7 @@ theorem hnMLv_g (M : Ordinal.{0}) (hM : M < Om1) : (hnMLv M hM).g = hlGt M := rf
 
 /-- **`ℓ(x) + x < x·x·2`** for a reading `x·x + x·μ` whose gate forces `μ < x`. -/
 theorem hn_NB_of {Λ : HnLv} {μ : Ordinal.{0}} (hμ : ∀ x, InE x → Λ.g < x → μ < x)
-    (hl : ∀ x, Λ.g < x → Λ.l x = x * x + x * μ) : HnNB Λ := fun x hx _ hg => by
+    (hl : ∀ x, Λ.g < x → Λ.l x = x * x + x * μ) (hL : Λ.L < gcG 0) : HnNB Λ := ⟨fun x hx _ hg => by
   rw [hl x hg]
   have hμx := hμ x hx hg
   have hlx := ev_isSuccLimit_of_inE hx
@@ -126,10 +132,10 @@ theorem hn_NB_of {Λ : HnLv} {μ : Ordinal.{0}} (hμ : ∀ x, InE x → Λ.g < x
   _ < x * x + x * x := (add_lt_add_iff_left _).2 (mul_lt_mul_of_pos_left
       (by rw [show (2 : Ordinal.{0}) = 1 + 1 by norm_num, ← add_assoc]
           exact hlx.add_one_lt (hlx.add_one_lt hμx)) hx.pos)
-  _ = x * x * 2 := (mul_two_eq _).symm
+  _ = x * x * 2 := (mul_two_eq _).symm, hL⟩
 
 theorem hnMLv_NB (M : Ordinal.{0}) (hM : M < Om1) : HnNB (hnMLv M hM) :=
-  hn_NB_of (fun _ hx hg => hl_gt_E hx hg) (fun _ hg => hnMLv_l M hM hg)
+  hn_NB_of (fun _ hx hg => hl_gt_E hx hg) (fun _ hg => hnMLv_l M hM hg) (hn_OOM_lt hM 0)
 
 /-! ## Cofinality with a prefix -/
 

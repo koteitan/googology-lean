@@ -245,6 +245,12 @@ theorem wnRd_eq {ℓ x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (h1 : Om1 ≤
     (hg : glG ℓ < x) : wnRd ℓ x = glR ℓ x := by
   unfold wnRd; rw [if_pos hg, max_eq_right (wn_le_glR hx hx1 h1 hB hg)]
 
+/-- The reading `wnRd ℓ x` is below `Γ_{x+1}` for `ℓ < G`. -/
+theorem wnRd_lt0 {ℓ : Ordinal.{0}} (h3 : ℓ < gcG 0) : ∀ x, InE x → x < Om1 → wnRd ℓ x < lgG x := fun x hx hx1 => by
+  unfold wnRd; split_ifs with hg
+  · exact max_lt (lgG_facts hx hx1).2.1 (glR_lt_G hx hx1 h3 hg)
+  · exact (lgG_facts hx hx1).2.1
+
 /-- **THE LEVEL DATUM OF EVERY LEVEL** `Ω₁ ≤ ℓ`, `Ω₁ ∣ ℓ`, `ℓ < G`: `L = ℓ`, gate `glG ℓ`, reading `glR ℓ x` above
 the gate (`Wh.whLv` with `(rdc, gtc, ε_{Ω₁+1})` replaced by `(glR, glG, G)`). -/
 noncomputable def wnLv (ℓ : Ordinal.{0}) (h1 : Om1 ≤ ℓ) (h2 : Om1 ∣ ℓ) (h3 : ℓ < gcG 0) : HnLv where
@@ -256,7 +262,7 @@ noncomputable def wnLv (ℓ : Ordinal.{0}) (h1 : Om1 ≤ ℓ) (h2 : Om1 ∣ ℓ)
   g_lt := glG_lt_Om1 ℓ h3
   q_lt := (wh_L_dec h2).2
   OL := h1
-  L_G := h3
+  L_G := HnLvG.wL h3
   L_eq := by rw [← Br.Om1_eq]; exact (wh_L_dec h2).1
   g_cl := fun Z y hZ hZ1 hy hLy hy2 => by
     rw [← Br.Om1_eq] at hy2
@@ -304,13 +310,14 @@ noncomputable def wnLv (ℓ : Ordinal.{0}) (h1 : Om1 ≤ ℓ) (h2 : Om1 ∣ ℓ)
     exact wn_glG_Om1_mul hZl hωZ _ hsB hg2
   L_mem := fun _ _ _ _ hb => (gl_mem ℓ h3 hb).1
   l_ge := fun x => by unfold wnRd; split_ifs; exacts [le_max_left _ _, le_rfl]
-  l_lt := fun x hx hx1 => by
-    unfold wnRd; split_ifs with hg
-    · exact max_lt (lgG_facts hx hx1).2.1 (glR_lt_G hx hx1 h3 hg)
-    · exact (lgG_facts hx hx1).2.1
+  l_lt := HnLvG.wl (wnRd_lt0 h3)
   l_pi := fun σ ρ hB hg => by
     rw [wnRd_eq hB.2.1 hB.2.2.2 h1 h3 (hg.trans hB.2.2.1), wnRd_eq hB.1 (hB.2.2.1.trans hB.2.2.2) h1 h3 hg]
     exact gl_pi hB ℓ h3 hg
+
+/-- **`Wn.wnLv ℓ` has the (A1)/(A2) bounds.** -/
+theorem wnLv_G {ℓ : Ordinal.{0}} (h1 : Om1 ≤ ℓ) (h2 : Om1 ∣ ℓ) (h3 : ℓ < gcG 0) : HnLvG (wnLv ℓ h1 h2 h3) :=
+  ⟨h3, wnRd_lt0 h3⟩
 
 theorem wnLv_L {ℓ : Ordinal.{0}} (h1 : Om1 ≤ ℓ) (h2 : Om1 ∣ ℓ) (h3 : ℓ < gcG 0) : (wnLv ℓ h1 h2 h3).L = ℓ := rfl
 

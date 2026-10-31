@@ -5,8 +5,9 @@ import Googology.Trans.PoR.InaccPsi.R2.HnWP
 # WnLv3: THE LEVEL DATUM OF REGION (A3) (levels `G < L < Γ(1)`, readings above `Γ_{x+1}`), ITS PSEUDO-BASES AND
 # PACKAGES
 
-`G = Γ_{Ω₁+1}`, `Γ(1) = Γ_{Ω₁+2}`.  A band level datum `Hn.HnLv` has `L < G` and `ℓ(x) < Γ_{x+1}` (fields `L_G`,
-`l_lt`), so it cannot carry a level of region (A3) (`wnHnLv_lt_T0`, `wnHnLv_noRead`).  Moreover at a level `L > G`
+`G = Γ_{Ω₁+1}`, `Γ(1) = Γ_{Ω₁+2}`.  A band level datum `Hn.HnLv` with the (A1)/(A2) bounds `Hn.HnLvG` (`L < G`,
+`ℓ(x) < Γ_{x+1}`) cannot carry a level of region (A3) (`wnHnLv_lt_T0`, `wnHnLv_noRead`); since round 120 the band
+level datum itself asks only `L < Γ(1)`, `ℓ(x) < Γ_{x+2}`.  Moreover at a level `L > G`
 the point `G` is not in the range of `φ(L, ·)` (`wnG_notRange`), so the start "over `G`" of regions (A1)/(A2)
 (`Hn.HnWShape` over a base with `F = G`) does not exist at (A3) levels: the system with the bound `φ(L, G+1)` is the
 step of the level-`L` package at the PSEUDO-BASE `φ(L, G)` (`wnA3_bound`: `φ(L, G+1) = hdNx L (φ(L, G))`).
@@ -46,12 +47,14 @@ open Googology.Trans.PoR.InaccPsi.R2.Wh Googology.Trans.PoR.InaccPsi.R2.Gk
 
 /-! ## REFUTE FIRST: the band level datum cannot carry an (A3) level, and `G` is no base there -/
 
-/-- **Every band level datum lies below the first (A3) level `t₀ = ε_{G+1}`.** -/
-theorem wnHnLv_lt_T0 (Λ : HnLv) : Λ.L < Wj.wjT 0 := Λ.L_G.trans (Wj.wjT_spec 0).1
+/-- **Every band level datum with the (A1)/(A2) bounds lies below the first (A3) level `t₀ = ε_{G+1}`.** -/
+theorem wnHnLv_lt_T0 (Λ : HnLv) (hG : HnLvG Λ) : Λ.L < Wj.wjT 0 := hG.L_G.trans (Wj.wjT_spec 0).1
 
-/-- **No band level datum reads `ε_{Γ_{x+1}+1}`** (the reading of `t₀`) at any `ε`-number `x < Ω₁`. -/
-theorem wnHnLv_noRead (Λ : HnLv) {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) : Λ.l x ≠ eN (lgG x) :=
-  fun h => absurd ((Λ.l_lt x hx hx1).trans (lt_eN (lgG x))) (by rw [h]; exact lt_irrefl _)
+/-- **No band level datum with the (A1)/(A2) bounds reads `ε_{Γ_{x+1}+1}`** (the reading of `t₀`) at any
+`ε`-number `x < Ω₁`. -/
+theorem wnHnLv_noRead (Λ : HnLv) (hG : HnLvG Λ) {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) :
+    Λ.l x ≠ eN (lgG x) :=
+  fun h => absurd ((hG.l_lt x hx hx1).trans (lt_eN (lgG x))) (by rw [h]; exact lt_irrefl _)
 
 /-- **At a level `L > G` the point `G` is not in the range of `φ(L, ·)`.** -/
 theorem wnG_notRange {L : Ordinal.{0}} (hL : gcG 0 < L) : ¬ LuP L (gcG 0) := by

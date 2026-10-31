@@ -9,7 +9,7 @@ import Googology.Trans.PoR.InaccPsi.R2.WsLim
   generic `Ω₁`-cofinal step `Ws.wsStep_om1`);
 * `wsF`, `wsFam` (**THE FAMILY**: an entry at every level below `L`, each extending every earlier one over every
   datum);
-* `wsSh_hgU` (`Hg.hgU` has the shape at `Ω₁` over `G`, for every `C`), `wsV` (**the system over `G` at `ℓ`**),
+* `wsSh_hgU` (`Hg.hgU` has the shape at `Ω₁` over `G`, for every `C` with `WsCG C`), `wsV` (**the system over `G` at `ℓ`**),
   `wsSysAll` (`B = φ(ℓ, G+1)`, gate `≤ g ℓ`).
 
 No new axiom.  New definitions: `WsCls`, `wsGs`, `wsF`, `wsV`.
@@ -86,13 +86,13 @@ theorem wsFam {L : Ordinal.{0}} (hc : WsCls C L) : ∀ ℓ, C.Lev ℓ → ℓ < 
 /-! ## The systems over `G` -/
 
 /-- **`Hg.hgU` has the shape at `Ω₁` over `G`** (for every code interface). -/
-theorem wsSh_hgU : WsSh C (wsG C) Om1 hgU := by
+theorem wsSh_hgU (hG : WsCG C) : WsSh C (wsG C) Om1 hgU := by
   obtain ⟨sB, sγ, sb, sZ, shi⟩ := whU_shape
   have hγ0 : hgU.γ = 0 := hgU_γ
   refine ⟨?_, ⟨by rw [hγ0]; exact le_rfl, by rw [hγ0]; exact zero_le⟩, fun x hx _ => ?_, fun x hx hx1 hk => ?_,
     fun x hx hx1 => ?_, fun c σ h1 h2 hσ hσ1 h3 => shi c σ h1 h2 hσ hσ1 h3⟩
   · rw [sB]; show veblen (Om1 + 0) (gcG 0 + 1) = hdNx Om1 (gcG 0)
-    rw [add_zero, hdNx_fixP (ws_G_fix (lev_Om1 (C := C)))]
+    rw [add_zero, hdNx_fixP (ws_G_fix hG (lev_Om1 (C := C)))]
   · rw [hγ0]
     exact ⟨fun _ => (cut1 hx).2 hx.pos, fun _ => hx.pos⟩
   · rw [sb x hx hx1 (by show max hnL1.g 0 < x; rw [wh_hnL1_g, max_self]; exact hx.pos)]
@@ -110,21 +110,23 @@ theorem wsSh_hgU : WsSh C (wsG C) Om1 hgU := by
 /-- **THE SYSTEM OVER `G` AT THE LEVEL `ℓ`.** -/
 noncomputable def wsV {L : Ordinal.{0}} (hc : WsCls C L) (ℓ : Ordinal.{0}) : HgVD := wsF hc ℓ (wsG C) hgU
 
-theorem wsV_sh {L ℓ : Ordinal.{0}} (hc : WsCls C L) (hℓ : C.Lev ℓ) (hL : ℓ < L) : WsSh C (wsG C) ℓ (wsV hc ℓ) :=
-  ((wsFam hc ℓ hℓ hL).1 (wsG C) hgU (wsGood_G hℓ) wsSh_hgU).1
+theorem wsV_sh (hG : WsCG C) {L ℓ : Ordinal.{0}} (hc : WsCls C L) (hℓ : C.Lev ℓ) (hL : ℓ < L) :
+    WsSh C (wsG C) ℓ (wsV hc ℓ) :=
+  ((wsFam hc ℓ hℓ hL).1 (wsG C) hgU (wsGood_G hG hℓ) (wsSh_hgU hG)).1
 
-theorem wsV_B {L ℓ : Ordinal.{0}} (hc : WsCls C L) (hℓ : C.Lev ℓ) (hL : ℓ < L) :
+theorem wsV_B (hG : WsCG C) {L ℓ : Ordinal.{0}} (hc : WsCls C L) (hℓ : C.Lev ℓ) (hL : ℓ < L) :
     (wsV hc ℓ).B = veblen ℓ (gcG 0 + 1) := by
-  rw [(wsV_sh hc hℓ hL).1]; exact hdNx_fixP (ws_G_fix hℓ)
+  rw [(wsV_sh hG hc hℓ hL).1]; exact hdNx_fixP (ws_G_fix hG hℓ)
 
-theorem wsV_γ {L ℓ : Ordinal.{0}} (hc : WsCls C L) (hℓ : C.Lev ℓ) (hL : ℓ < L) : (wsV hc ℓ).γ ≤ C.g ℓ := by
-  have := (wsV_sh hc hℓ hL).2.1.2
+theorem wsV_γ (hG : WsCG C) {L ℓ : Ordinal.{0}} (hc : WsCls C L) (hℓ : C.Lev ℓ) (hL : ℓ < L) :
+    (wsV hc ℓ).γ ≤ C.g ℓ := by
+  have := (wsV_sh hG hc hℓ hL).2.1.2
   rwa [show max (wsG C).γ (C.g ℓ) = C.g ℓ from max_eq_right zero_le] at this
 
 /-- **THE SYSTEMS OVER `G` AT EVERY LEVEL BELOW `L`** given the classification below `L`. -/
-theorem wsSysAll {L : Ordinal.{0}} (hc : WsCls C L) :
+theorem wsSysAll (hG : WsCG C) {L : Ordinal.{0}} (hc : WsCls C L) :
     ∀ ℓ, C.Lev ℓ → ℓ < L → ∃ V : HgVD, V.B = veblen ℓ (gcG 0 + 1) ∧ V.γ ≤ C.g ℓ := fun ℓ hℓ hL =>
-  ⟨wsV hc ℓ, wsV_B hc hℓ hL, wsV_γ hc hℓ hL⟩
+  ⟨wsV hc ℓ, wsV_B hG hc hℓ hL, wsV_γ hG hc hℓ hL⟩
 
 /-- A classification below `L` holds below every `L' ≤ L`. -/
 theorem wsCls_mono {L L' : Ordinal.{0}} (h : WsCls C L) (hle : L' ≤ L) : WsCls C L' :=

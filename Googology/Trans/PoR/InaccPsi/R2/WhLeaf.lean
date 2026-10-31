@@ -200,6 +200,12 @@ theorem whRd_eq {ℓ x : Ordinal.{0}} (hx : InE x) (h1 : Om1 ≤ ℓ) (hW : ℓ 
     whRd ℓ x = rdc ℓ x := by
   unfold whRd; rw [if_pos hg, max_eq_right (wh_le_rdc hx h1 hW)]
 
+/-- The reading `whRd ℓ x` is below `Γ_{x+1}`. -/
+theorem whRd_lt0 (ℓ : Ordinal.{0}) : ∀ x, InE x → x < Om1 → whRd ℓ x < lgG x := fun x hx hx1 => by
+  unfold whRd; split_ifs with hg
+  · exact max_lt (lgG_facts hx hx1).2.1 ((rdc_lt_eN hx ℓ hg).trans (gT_lt_lgG hx hx1 0))
+  · exact (lgG_facts hx hx1).2.1
+
 /-- **THE LEVEL DATUM OF EVERY LEVEL** `Ω₁ ≤ ℓ`, `Ω₁ ∣ ℓ`, `ℓ < ε_{Ω₁+1}`: `L = ℓ`, gate `gtc ℓ`, reading
 `rdc ℓ x` above the gate. -/
 noncomputable def whLv (ℓ : Ordinal.{0}) (h1 : Om1 ≤ ℓ) (h2 : Om1 ∣ ℓ) (h3 : ℓ < gfE) : HnLv where
@@ -211,7 +217,7 @@ noncomputable def whLv (ℓ : Ordinal.{0}) (h1 : Om1 ≤ ℓ) (h2 : Om1 ∣ ℓ)
   g_lt := gtc_lt_Om1 ℓ h3
   q_lt := (wh_L_dec h2).2
   OL := h1
-  L_G := h3.trans gfE_lt_G0
+  L_G := HnLvG.wL (h3.trans gfE_lt_G0)
   L_eq := by rw [← Br.Om1_eq]; exact (wh_L_dec h2).1
   g_cl := fun Z y hZ hZ1 hy hLy hy2 => by
     rw [← Br.Om1_eq] at hy2
@@ -261,13 +267,14 @@ noncomputable def whLv (ℓ : Ordinal.{0}) (h1 : Om1 ≤ ℓ) (h2 : Om1 ∣ ℓ)
     refine (hgU.mem S a b ha ℓ hlt ?_).1
     rw [hgU.g_lowE ℓ h3]; exact hb
   l_ge := fun x => by unfold whRd; split_ifs; exacts [le_max_left _ _, le_rfl]
-  l_lt := fun x hx hx1 => by
-    unfold whRd; split_ifs with hg
-    · exact max_lt (lgG_facts hx hx1).2.1 ((rdc_lt_eN hx ℓ hg).trans (gT_lt_lgG hx hx1 0))
-    · exact (lgG_facts hx hx1).2.1
+  l_lt := HnLvG.wl (whRd_lt0 ℓ)
   l_pi := fun σ ρ hB hg => by
     rw [whRd_eq hB.2.1 h1 h3 (hg.trans hB.2.2.1), whRd_eq hB.1 h1 h3 hg]
     exact rdc_pi hB h3 hg
+
+/-- **`Wh.whLv ℓ` has the (A1)/(A2) bounds.** -/
+theorem whLv_G {ℓ : Ordinal.{0}} (h1 : Om1 ≤ ℓ) (h2 : Om1 ∣ ℓ) (h3 : ℓ < gfE) : HnLvG (whLv ℓ h1 h2 h3) :=
+  ⟨h3.trans gfE_lt_G0, whRd_lt0 ℓ⟩
 
 theorem whLv_L {ℓ : Ordinal.{0}} (h1 : Om1 ≤ ℓ) (h2 : Om1 ∣ ℓ) (h3 : ℓ < gfE) : (whLv ℓ h1 h2 h3).L = ℓ := rfl
 

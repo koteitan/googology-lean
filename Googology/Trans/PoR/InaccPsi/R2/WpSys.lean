@@ -65,6 +65,9 @@ noncomputable abbrev Λ : HnLv := wnLv ℓ W.h1 W.h2 W.h3
 
 theorem lsG (k : ℕ) : ls W k < gcG 0 := (W.lt k).trans W.h3
 
+/-- The limit level datum has the (A1)/(A2) bounds. -/
+theorem G : HnLvG W.Λ := wnLv_G W.h1 W.h2 W.h3
+
 theorem Kg (k : ℕ) : (W.K k).Λ.g ≤ glG ℓ := (W.at' k).2.2.2.2.1.trans (W.gate k)
 
 theorem gk {x : Ordinal.{0}} (k : ℕ) (hg : glG ℓ < x) : glG (W.ls k) < x := (W.gate k).trans_lt hg
@@ -73,6 +76,10 @@ theorem Kgx {x : Ordinal.{0}} (k : ℕ) (hg : glG ℓ < x) : (W.K k).Λ.g < x :=
 
 theorem Kl {x : Ordinal.{0}} (k : ℕ) (hx : InE x) (hx1 : x < Om1) (hg : glG ℓ < x) :
     (W.K k).Λ.l x = glR (W.ls k) x := (W.at' k).2.1 x hx hx1 (W.Kgx k hg)
+
+/-- The member readings are below `Γ_{x+1}` above the gate. -/
+theorem Kq {x : Ordinal.{0}} (k : ℕ) (hx : InE x) (hx1 : x < Om1) (hg : glG ℓ < x) : (W.K k).Λ.l x < lgG x := by
+  rw [W.Kl k hx hx1 hg]; exact glR_lt_G hx hx1 (W.lsG k) (W.gk k hg)
 
 theorem Λl {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hg : glG ℓ < x) : W.Λ.l x = glR ℓ x :=
   wnRd_eq hx hx1 W.h1 W.h3 hg
@@ -122,7 +129,7 @@ theorem VB (k : ℕ) : (W.V k).B = veblen (W.ls k) (gcG 0 + 1) := (W.at' k).2.2.
 /-- The shape of the member `k`: its base reading above the gate. -/
 theorem Vb (k : ℕ) {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hg : glG ℓ < x) :
     (W.V k).b x = veblen ((W.K k).Λ.l x) (lgG x + 1) := by
-  have hsh := (W.at' k).2.2.2.2.2.2
+  have hsh := (W.at' k).2.2.2.2.2.2.choose_spec
   have h := hsh.2.2.1 x hx hx1 (max_lt (W.Kgx k hg) hx.pos)
   rw [h, add_zero]; rfl
 
@@ -157,7 +164,7 @@ noncomputable def ch : HgfCh where
   B_lt1 := by
     have hG1 := gcG_SC 1
     have hE := Low.opow_eq_self_of_SC hG1
-    have hfix : veblen ℓ (gcG 1) = gcG 1 := gn_veb_fix hG1 (W.Λ.L_lt 1)
+    have hfix : veblen ℓ (gcG 1) = gcG 1 := gn_veb_fix hG1 W.Λ.L_G
     have h2 := (isNormal_veblen ℓ).strictMono ((ev_isSuccLimit_of_inE hE).add_one_lt (gcG_lt zero_lt_one))
     rwa [hfix] at h2
   B_fix := veblen_veblen_of_lt (hg_one_lt_Om1.trans_le W.h1) _
@@ -167,26 +174,26 @@ noncomputable def ch : HgfCh where
     exact (hd_veb_left_lt (glR_mono hx hx1 W.h3 (W.lt k) hγ (W.gk k hγ)) _).le
   b_cof := fun x hx hx1 hγ ν hν => by
     have h0 : W.Λ.l x ≠ 0 := (zero_lt_one.trans (WmLim.one_lt_l W.Λ hx)).ne'
-    obtain ⟨b, hb, hνb⟩ := hgVeb_cof h0 (hjG_fix hx hx1 (WmLim.one_le_l W.Λ hx) (W.Λ.l_lt x hx hx1)) hν
+    obtain ⟨b, hb, hνb⟩ := hgVeb_cof h0 (hjG_fix hx hx1 (WmLim.one_le_l W.Λ hx) (W.G.l_lt x hx hx1)) hν
     rw [W.Λl hx hx1 hγ] at hb
     obtain ⟨k, hk⟩ := W.lcof hx hx1 hγ hb
     refine ⟨k, ?_⟩
-    rw [W.Vb k hx hx1 hγ, ← hdNx_fixP (hjG_fix hx hx1 (WmLim.one_le_l (W.K k).Λ hx) ((W.K k).Λ.l_lt x hx hx1))]
+    rw [W.Vb k hx hx1 hγ, ← hdNx_fixP (hjG_fix hx hx1 (WmLim.one_le_l (W.K k).Λ hx) (W.Kq k hx hx1 hγ))]
     refine hνb.trans (hdN_lt_Nx ?_)
     rw [W.Kl k hx hx1 hγ]; exact hk
   b_fix := fun x hx _ _ => veblen_veblen_of_lt (WmLim.one_lt_l W.Λ hx) _
   b_gt := fun x hx hx1 _ => (lgG_facts hx hx1).2.1.trans ((lt_add_one _).trans_le (right_le_veblen _ _))
   b_lt := fun x hx hx1 _ => by
-    rw [← hdNx_fixP (hjG_fix hx hx1 (WmLim.one_le_l W.Λ hx) (W.Λ.l_lt x hx hx1))]
-    exact hjG_lt1 hx hx1 (WmLim.one_le_l W.Λ hx) (W.Λ.l_lt x hx hx1)
+    rw [← hdNx_fixP (hjG_fix hx hx1 (WmLim.one_le_l W.Λ hx) (W.G.l_lt x hx hx1))]
+    exact hjG_lt1 hx hx1 (WmLim.one_le_l W.Λ hx) (W.G.l_lt x hx hx1)
   b_pi := fun σ ρ hB hγ => by
     have hρ1 : ρ < Om1 := hB.2.2.2
     have hσ1 : σ < Om1 := hB.2.2.1.trans hρ1
-    rw [← hdNx_fixP (hjG_fix hB.2.1 hρ1 (WmLim.one_le_l W.Λ hB.2.1) (W.Λ.l_lt ρ hB.2.1 hρ1)),
-      ← hdNx_fixP (hjG_fix hB.1 hσ1 (WmLim.one_le_l W.Λ hB.1) (W.Λ.l_lt σ hB.1 hσ1))]
-    exact hjG_S_pi hB (W.Λ.l_pi σ ρ hB hγ) (WmLim.one_le_l W.Λ hB.2.1) (W.Λ.l_lt ρ hB.2.1 hρ1)
-      (WmLim.one_le_l W.Λ hB.1) (W.Λ.l_lt σ hB.1 hσ1)
-  Z_low := fun k x hx hx1 _ => wpZ_le (W.at' k).2.2.2.2.2.2 hx hx1
+    rw [← hdNx_fixP (hjG_fix hB.2.1 hρ1 (WmLim.one_le_l W.Λ hB.2.1) (W.G.l_lt ρ hB.2.1 hρ1)),
+      ← hdNx_fixP (hjG_fix hB.1 hσ1 (WmLim.one_le_l W.Λ hB.1) (W.G.l_lt σ hB.1 hσ1))]
+    exact hjG_S_pi hB (W.Λ.l_pi σ ρ hB hγ) (WmLim.one_le_l W.Λ hB.2.1) (W.G.l_lt ρ hB.2.1 hρ1)
+      (WmLim.one_le_l W.Λ hB.1) (W.G.l_lt σ hB.1 hσ1)
+  Z_low := fun k x hx hx1 _ => wpZ_le (W.at' k).2.2.2.2.2.2.choose_spec hx hx1
   Zo_fix := fun x => hc_fix_down one_le_two (wnZo_fix x)
   Zo_G1 := fun x hx hx1 => wnZo_G1 hx hx1
 
@@ -194,7 +201,7 @@ noncomputable def ch : HgfCh where
 noncomputable def V' : HgVD := W.ch.U
 
 /-- **THE LIMIT SYSTEM IS A START OVER `Wn.wnGW` AT THE LIMIT PACKAGE.** -/
-theorem shape : HnWShape (wnGW W.Λ) 0 W.V' := by
+theorem shape : HnWShape (wnGW W.Λ (wnNB_of_G W.G)) 0 W.V' := by
   refine ⟨?_, fun x _ _ => ?_, fun x hx hx1 _ => ?_, fun x hx hx1 => ?_, fun _ σ _ _ hσ _ _ => hσ.pos⟩
   · show veblen ℓ (gcG 0 + 1) = veblen (ℓ + 0) (gcG 0 + 1); rw [add_zero]
   · show glG ℓ < x ↔ max (glG ℓ) 0 < x
@@ -202,15 +209,15 @@ theorem shape : HnWShape (wnGW W.Λ) 0 W.V' := by
   · show veblen (W.Λ.l x) (lgG x + 1) = veblen (W.Λ.l x + 0) (lgG x + 1)
     rw [add_zero]
   · show (if glG ℓ < x then evZ (veblen (W.Λ.l x) (lgG x + 1)) else wnZo x) =
-      if max (glG ℓ) 0 < x then evZ (veblen (W.Λ.l x + 0) (lgG x + 1)) else (wnGW W.Λ).hnwZo x
+      if max (glG ℓ) 0 < x then evZ (veblen (W.Λ.l x + 0) (lgG x + 1)) else (wnGW W.Λ (wnNB_of_G W.G)).hnwZo x
     rw [max_eq_left zero_le, add_zero]
     split_ifs with hg
     · rfl
-    · rw [(wnGW W.Λ).hnwZo_low (show ¬ glG ℓ < x from hg)]; rfl
+    · rw [(wnGW W.Λ (wnNB_of_G W.G)).hnwZo_low (show ¬ glG ℓ < x from hg)]; rfl
 
 /-- **THE LIMIT ENTRY IS AN (A2) ENTRY AT `ℓ`.** -/
 theorem at_lim : WnAt ℓ W.K' W.V' :=
-  ⟨rfl, fun x hx hx1 hg => W.Λl hx hx1 hg, rfl, le_rfl, le_rfl, fun _ _ _ hg => hg, W.shape⟩
+  ⟨rfl, fun x hx hx1 hg => W.Λl hx hx1 hg, rfl, le_rfl, le_rfl, fun _ _ _ hg => hg, wnNB_of_G W.G, W.shape⟩
 
 /-- **THE LIMIT ENTRY EXTENDS EVERY MEMBER** (package in the corrected sense, system by agreement). -/
 theorem ext_mem (k : ℕ) : WmExt (W.K k) W.K' ∧ (W.V k).B < W.V'.B ∧

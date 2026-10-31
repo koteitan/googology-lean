@@ -210,6 +210,16 @@ theorem ho_next_le {v : Ordinal.{0}} (hv : v < Om1) :
 
 theorem ho_xsq_le {x v : Ordinal.{0}} (hv1 : 1 ≤ v) : x * x ≤ x * x * v := le_mul_of_one_le_right' hv1
 
+/-- The reading `x·x·v + x·M` (above the gate) is below `Γ_{x+1}`. -/
+theorem hoRd_lt0 (v M : Ordinal.{0}) : ∀ x, InE x → x < Om1 → hoRd v M x < lgG x := fun x hx hx1 => by
+  unfold hoRd; split_ifs with h
+  · have hE := (lgG_facts hx hx1).2.2.2.1
+    have hxl := (lgG_facts hx hx1).2.1
+    exact (inE_indec hE).add_lt (InE.mul_lt hE (hl_sq_lt hx hx1)
+      ((hl_gt_E hx ((le_max_left _ _).trans_lt h)).trans hxl))
+      (InE.mul_lt hE hxl ((hl_gt_E hx ((le_max_right _ _).trans_lt h)).trans hxl))
+  · exact hl_sq_lt hx hx1
+
 /-- **THE BAND LEVEL DATUM `Ω₁·Ω₁·v + Ω₁·M`, READ AS `x·x·v + x·M`** above the gate `max (hlGt v) (hlGt M)`. -/
 noncomputable def hoLv (v M : Ordinal.{0}) (hv1 : 1 ≤ v) (hv : v < Om1) (hM : M < Om1) : HnLv where
   L := Om1 * Om1 * v + Om1 * M
@@ -220,7 +230,7 @@ noncomputable def hoLv (v M : Ordinal.{0}) (hv1 : 1 ≤ v) (hv : v < Om1) (hM : 
   g_lt := max_lt ((hlGt_le v).trans_lt hv) ((hlGt_le M).trans_lt hM)
   q_lt := hM
   OL := ((le_mul_of_one_le_right' hg_one_lt_Om1.le).trans (ho_xsq_le hv1)).trans le_self_add
-  L_G := ho_L_lt_G hv hM 0
+  L_G := HnLvG.wL (ho_L_lt_G hv hM 0)
   L_eq := by rw [← Br.Om1_eq, mul_assoc]
   g_cl := fun Z y hZ hZ1 hy hLy hy2 => by
     have hy2' : y < Om1 * Om1 * v + Om1 * Om1 := by rw [← Br.Om1_eq] at hy2; rw [mul_assoc]; exact hy2
@@ -232,20 +242,17 @@ noncomputable def hoLv (v M : Ordinal.{0}) (hv1 : 1 ≤ v) (hv : v < Om1) (hM : 
     unfold hoRd; split_ifs
     · exact ((hn_le_sq x).trans (ho_xsq_le hv1)).trans le_self_add
     · exact hn_le_sq x
-  l_lt := fun x hx hx1 => by
-    unfold hoRd; split_ifs with h
-    · have hE := (lgG_facts hx hx1).2.2.2.1
-      have hxl := (lgG_facts hx hx1).2.1
-      exact (inE_indec hE).add_lt (InE.mul_lt hE (hl_sq_lt hx hx1)
-        ((hl_gt_E hx ((le_max_left _ _).trans_lt h)).trans hxl))
-        (InE.mul_lt hE hxl ((hl_gt_E hx ((le_max_right _ _).trans_lt h)).trans hxl))
-    · exact hl_sq_lt hx hx1
+  l_lt := HnLvG.wl (hoRd_lt0 v M)
   l_pi := fun σ ρ hB hg => by
     rw [hoRd_eq hg, hoRd_eq (hg.trans hB.2.2.1)]
     obtain ⟨a1, a2⟩ := ho_pi_sqmul hB v (hl_gt_E hB.1 ((le_max_left _ _).trans_lt hg))
     obtain ⟨b1, b2⟩ := pi_mul hB M (hl_gt_E hB.1 ((le_max_right _ _).trans_lt hg))
     obtain ⟨c1, c2⟩ := pi_add hB a1 b1
     exact ⟨c1, by rw [c2, a2, b2]⟩
+
+/-- **`Ω₁·Ω₁·v + Ω₁·M` has the (A1)/(A2) bounds.** -/
+theorem hoLv_G (v M : Ordinal.{0}) (hv1 : 1 ≤ v) (hv : v < Om1) (hM : M < Om1) : HnLvG (hoLv v M hv1 hv hM) :=
+  ⟨ho_L_lt_G hv hM 0, hoRd_lt0 v M⟩
 
 section Lv
 
