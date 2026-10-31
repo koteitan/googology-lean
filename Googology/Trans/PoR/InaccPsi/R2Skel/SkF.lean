@@ -11,6 +11,8 @@ import Googology.Trans.PoR.InaccPsi.R2.WoTop
 import Googology.Trans.PoR.InaccPsi.R2.WpStep
 import Googology.Trans.PoR.InaccPsi.R2.WsZeta
 import Googology.Trans.PoR.InaccPsi.R2.WtTow
+import Googology.Trans.PoR.InaccPsi.R2.WxTop
+import Googology.Trans.PoR.InaccPsi.R2.WyLv
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -109,12 +111,34 @@ data below `t₀`.  Every (A3) level `G < L < t₀`, `Ω₁ ∣ L` has a `Wn.WnL
 step `Go.goGl.step`, reading `G ↦ Γ_{x+1}`, gate from `Go.GoD.code_gate` via `Wt.wt_cl_head`); the towers
 `G^{⋯^G}` give the `ω`-sequence of (A3) level data of gate `0` below `Wn.wnLv3T0` with readings `+x`-increasing and
 cofinal (`skA3Tow`); a step at an (A3) level contains the steps of every lower level at the same pseudo-base, (A1)
-and (A2) included (`skA3StepLow`), so `skSysA3Lev0W` needs (A2) closed (now `skBaseA2Hi`).  Route: neither a copy of
+and (A2) included (`skA3StepLow`), so `skSysA3Lev0W` needs (A2) closed (done in round 120, `skClsA2`).  Route: neither a copy of
 the `Hn` package stack nor the `Wo` family can be written for `Wn.WnLv3` without copying the `Hn` stack, because the
 pseudo-base / package / successor / limit machinery (`Hn.HnVQ` … `Hn.HnWP`, `Wm.WmPkL`, `Wm.WmExt`, `Ho.hoOU`) is
 typed by `Hn.HnLv`, whose fields `L < G`, `ℓ(x) < Γ_{x+1}` exclude every (A3) level; the stack itself uses neither
 field (only `Ω₁ ≤ L` and `ℓ(x) + ν < Γ_{x+2}`).  Shortest road: WIDEN `Hn.HnLv` to `L < Γ(1)`, `ℓ(x) < Γ_{x+2}`
 (a repo refactor), then every `Wn.WnLv3` is an `Hn.HnLv` and the `Wo` family form applies over (A3) raw data.
+
+Round 120 (leaf gam45, modules `R2.Wx*`; the nodes below that use `Wx.*` import `R2.WxTop`, so they can be checked
+only after the merge): REGION (A2) IS CLOSED WITH NO HYPOTHESIS.  `skBaseA2Hi` is PROVED (`Wx.wx_baseA2Hi`) by ONE
+proof generic in the Veblen level `α` of `e = glPsi α η = φ(α, Λ_α(η))`: a limit argument (`η` a limit, `¬ glFw α η`)
+takes the sequence of `η` (continuity `Wx.wx_psi_cont`, gate-cofinality by the recursion `Wx.wx_rec` through the
+bracket of `b`, comparing `α_b` with `α`); a successor or zero argument has a predecessor `f` (`Wx.wx_pkg`) and
+takes the towers over `f` (`α = 1`), the iterates of `φ(α', ·)` over `f + 1` (`α = α'+1 ≥ 2`), or `φ(α_k, f+1)` /
+`φ(s μ, f+1)` from the sequence of `α` (`α` a limit).  REFUTE FIRST at the first codes past level 1,
+`φ(1, ζ_{Ω₁+1}+1)` and `φ(2, Ω₁+2)`: no evidence, both proved (`skRefuteA2Hi`).  Hence `skBaseA2`, `skClsA2`,
+`skSysAllG2`, `skSysA2Lev` are PROVED, and the frontier moves to the END OF (A2): `WxPast S λ` (`ι(Γ(B)·ω) ≤ λ` for
+every `B < φ(G, 1)`; `F_{A2} = sup_n ι(Γ(φ(glBn n, G+1))·ω) ≤ ι(Γ(φ(G, 1)))`; `skSysA2V`, `skLocA2`, `skHypIffA2`;
+road `Wx.wxRoadA2`).  (A3) (`skSysA3Lev0W`, `skSysA3StepW`) no longer waits for (A2).
+
+Round 120 (leaf reg5, module `R2.WyLv`; repo DEFINITIONS CHANGED: `Hn.HnLv` widened to `L < Γ(1)`,
+`ℓ(x) < Γ_{x+2}`, the old bounds are the predicate `Hn.HnLvG`; `Hn.HnNB`, `Wh.WhNB` also ask `L < G`; `Wn.wnGW`
+asks `Wn.WnNB` and `Wn.WnAt` carries it; `Ws.WsC` asks `Bd < Γ(1)`, `R < Γ_{x+2}`, the facts of `G` as a base are
+`Ws.WsCG`).  `skA3NoBand` is restated with `Hn.HnLvG` (its old first half is REFUTED: `skA3NoBandOld`).  Every
+(A3) datum is a band datum (`skA3Band`), (A3) pseudo-bases / specifications / packages are those of the `Hn` stack,
+the target `Wn.WnEnt3 S 0` is equivalent to its `Hn` form (`skA3EntHn`), and `skSysA3Lev0W` is REDUCED to the
+packages at the tower levels `G^{⋯^G}` extending each other (`skA3TowPk`, the `Ws` family over (A3) raw data; (A2)
+enters only there, through `skBaseA2Hi`) and the pseudo-base `φ(t₀, G)` with a start (`skA3QT0`); the `ω`-limit at
+`t₀` is `Wy.wySeqT0` / `Wy.wyPkT0` (`Wm.wmPkL` along `Wt.wtTowSeq`).
 -/
 
 set_option autoImplicit false
@@ -547,6 +571,42 @@ theorem skHypIffZ (S : InaccSeq.{0}) (h : ∀ l, Cd.CdRange S l → skFZ S ≤ l
   · exact skLocZ S l hr h'
   · exact h l hr h'
 
+/-- The frontier of round 120 (leaf gam45): THE END OF (A2), `λ` past `ι(Γ(B)·ω)` for every `B < φ(G, 1)`. -/
+def skPastA2 (S : InaccSeq.{0}) (l : Ordinal.{0}) : Prop := Wx.WxPast S l
+
+/-- STATUS: PROVED (Wx.wxSysA2 = Ws.wsSysA2_baseI S Wx.wx_baseI)
+SIZE: M
+REGION (A2), UNCONDITIONAL: every B < φ(G, 1) is ≤ the bound of a system over G with gate < K. -/
+theorem skSysA2V (S : InaccSeq.{0}) : ∀ B, B < veblen (Gc.gcG 0) 1 → ∃ V : Hg.HgVD, B ≤ V.B ∧ V.γ < Td.tdK S :=
+  Wx.wxSysA2 S
+
+/-- STATUS: PROVED (Wx.wxA2_enum, Wx.wxA2_capV)
+SIZE: S
+UPPER ∧ LOWER ∧ CapV at every range restart below the end of (A2). -/
+theorem skLocA2 (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → ¬ skPastA2 S l → SkUV S l := fun _ hr hl => by
+  have h := (not_congr (Wx.wx_past_iff S)).1 hl
+  rw [not_not] at h
+  exact ⟨(Wx.wxA2_enum S hr h).1, (Wx.wxA2_enum S hr h).2, Wx.wxA2_capV S hr h⟩
+
+/-- STATUS: PROVED (Wx.wxFA2_cof, Wx.wxFA2_le)
+SIZE: S
+WHERE THE FRONTIER IS: past the end of (A2) ⇔ past every ι(Γ(φ(glBn n, G+1))·ω); each ι(Γ(B)·ω), B < φ(G, 1), is
+≤ ι(Γ(φ(G, 1))). -/
+theorem skFA2Where (S : InaccSeq.{0}) :
+    (∀ l, skPastA2 S l ↔ ∀ n : ℕ, Bt.iota S (Gc.gcG (veblen (Gl.glBn n) (Gc.gcG 0 + 1)) * ω) ≤ l) ∧
+    ∀ B, B < veblen (Gc.gcG 0) 1 → Bt.iota S (Gc.gcG B * ω) ≤ Bt.iota S (Gc.gcG (veblen (Gc.gcG 0) 1)) :=
+  ⟨fun _ => Wx.wxFA2_cof S, fun _ hB => Wx.wxFA2_le S hB⟩
+
+/-- STATUS: PROVED (skLocA2)
+SIZE: S
+THE FRONTIER MOVES TO THE END OF (A2): the restarts in [skFHo, F_{A2}) are settled, so UPPER / LOWER / CapV past
+the end of (A2) suffice (road Wx.wxRoadA2, hypotheses equivalent to Ws.wsRoadZ's: Wx.wxRoadA2_hyp_iff). -/
+theorem skHypIffA2 (S : InaccSeq.{0}) (h : ∀ l, Cd.CdRange S l → skPastA2 S l → SkUV S l) :
+    ∀ l, Cd.CdRange S l → skFHo S ≤ l → SkUV S l := fun l hr _ => by
+  by_cases h' : skPastA2 S l
+  · exact h l hr h'
+  · exact skLocA2 S l hr h'
+
 
 /-! ## (A2) and (A3): the level codes past `ε_{Ω₁+1}` (round 116, leaf reg1)
 
@@ -954,25 +1014,33 @@ the systems over G at every (A2) level ℓ ≤ ζ_{Ω₁+1}, unconditional. -/
 theorem skSysZ : ∀ ℓ, SkLevG ℓ → ℓ ≤ Ws.wsZ → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.gcG 0 + 1) ∧ V.γ ≤ Ws.gh ℓ :=
   Ws.wsSysZ
 
-/-- STATUS: OPEN
+/-- STATUS: PROVED (Wx.wx_baseA2Hi = Wx.wx_base_hi: ONE proof for every Veblen level α of e = glPsi α η; was OPEN L)
 SIZE: L
 THE VEBLEN NODES OF LEVEL ≥ 2: every ε-number code e ∈ (ζ_{Ω₁+1}, G) (e = glPsi α η, α ≥ 2 or the level-1 codes
 above the first ζ) has an ω- or Ω₁-sequence of levels (gate gh = max 1 glG), given the sequences of the smaller
-limit codes.  Cases: η a limit not in F_α (from η, as Ws.ws_base_one; gate-cofinality needs the comparison of
-brackets across levels, Gl.glPsi_lt_lev / glPsi_lt_lev'); η = 0 / successor / in F_α with α a successor (iterates
-of φ(α', ·), cofinality ω) or α a limit (from the sequence of α).  REFUTE FIRST: NO EVIDENCE (pure code arithmetic,
-no system; the level-1 case is proved, skBaseZ; no no-go result mentions codes). -/
+limit codes.  Cases (Wx.wx_base_I, Wx.wx_pkg, Wx.wx_base_one, Wx.wx_base_succ, Wx.wx_base_lim): η a limit not in
+F_α (from η; gate-cofinality by Wx.wx_rec through Gl.glPsi_lt_lev / glPsi_lt_lev'); otherwise the predecessor f
+(e = φ(α, y+1), f = φ(α, y), or e = φ(α, 0), f = Ω₁) and α = 1 (towers over f), α = α'+1 ≥ 2 (iterates of
+φ(α', ·) over f+1), α a limit (φ(α_k, f+1) / φ(s μ, f+1) from the sequence of α).  REFUTE FIRST: NO EVIDENCE
+(skRefuteA2Hi). -/
 theorem skBaseA2Hi : ∀ e, InE e → Ws.wsZ < e → e < Gc.gcG 0 →
-    (∀ c, c < e → IsSuccLimit c → Ws.BCls (fun _ => True) c) → Ws.BCls Ws.ML e := by
-  sorry
+    (∀ c, c < e → IsSuccLimit c → Ws.BCls (fun _ => True) c) → Ws.BCls Ws.ML e :=
+  Wx.wx_baseA2Hi
 
-/-- STATUS: REDUCED (skBaseA2Hi, skBaseZ; Ws.wsBaseI_of_hi)
+/-- STATUS: PROVED (Wx.wx_refute)
+SIZE: S
+REFUTE FIRST on skBaseA2Hi at the first codes past level 1: φ(1, ζ_{Ω₁+1}+1) and φ(2, Ω₁+2) have sequences of
+levels. -/
+theorem skRefuteA2Hi : Ws.BCls Ws.ML (veblen 1 (Ws.wsZ + 1)) ∧ Ws.BCls Ws.ML (veblen 2 (Om1 + 1 + 1)) :=
+  Wx.wx_refute
+
+/-- STATUS: PROVED (skBaseA2Hi, skBaseZ; Ws.wsBaseI_of_hi; was REDUCED)
 SIZE: L
 THE VEBLEN NODES OF (A2): every ε-number code e ∈ [ε_{Ω₁+1}, G) has an ω- or Ω₁-sequence of levels (gate
 gh = max 1 glG), given the sequences of the smaller limit codes. -/
 theorem skBaseA2 : Ws.WsBaseI (Gc.gcG 0) := Ws.wsBaseI_of_hi skBaseA2Hi
 
-/-- STATUS: REDUCED (skBaseA2; Ws.wsCls_of_baseI: ONE well-founded induction Ws.ws_br on the base-e normal form —
+/-- STATUS: PROVED (skBaseA2; Ws.wsCls_of_baseI: ONE well-founded induction Ws.ws_br on the base-e normal form —
 rest, digit, power, base)
 SIZE: M
 THE (A2) CLASSIFICATION: every (A2) level that is not Ω₁ and not a successor has an ω-sequence (Ws.wsA2.Fs) or an
@@ -989,7 +1057,7 @@ SIZE: M
 the (A2) classification up to ε_{Ω₁+ω}, unconditional. -/
 theorem skClsW : Ws.WsCls Ws.wsA2 (Ws.wsLw + 1) := Ws.wsCls_w
 
-/-- STATUS: REDUCED (skClsA2; Ws.wsA2_sysAll: the generic family Ws.wsF of Ws.wsA2)
+/-- STATUS: PROVED (skClsA2; Ws.wsA2_sysAll: the generic family Ws.wsF of Ws.wsA2; was REDUCED)
 SIZE: M
 the systems over G at every (A2) level: B = φ(ℓ, G+1), gate ≤ gh ℓ. -/
 theorem skSysAllG2 : ∀ ℓ, SkLevG ℓ → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.gcG 0 + 1) ∧ V.γ ≤ Ws.gh ℓ :=
@@ -1001,7 +1069,7 @@ the systems over G at every (A2) level ℓ ≤ ε_{Ω₁+ω}, unconditional. -/
 theorem skSysW : ∀ ℓ, SkLevG ℓ → ℓ ≤ Ws.wsLw → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.gcG 0 + 1) ∧ V.γ ≤ Ws.gh ℓ :=
   Ws.wsSysW
 
-/-- STATUS: REDUCED (skBaseA2; Ws.wsSysA2Lev_baseI; was REDUCED (skSysAllG, skLevG_Bn, skGateBn))
+/-- STATUS: PROVED (skBaseA2; Ws.wsSysA2Lev_baseI; was REDUCED (skBaseA2), before (skSysAllG, skLevG_Bn, skGateBn))
 SIZE: M
 ∀ n ∃ system V: B_V = φ(glBn n, G+1), γ_V < K. -/
 theorem skSysA2Lev (S : InaccSeq.{0}) : ∀ n, ∃ V : Hg.HgVD, V.B = veblen (Gl.glBn n) (Gc.gcG 0 + 1) ∧
@@ -1013,12 +1081,25 @@ def SkPk3 (S : InaccSeq.{0}) (n : ℕ) : Prop :=
 
 /-! ### (A3) on the new level datum (round 117, leaf reg2) -/
 
-/-- STATUS: PROVED (Wn.wnHnLv_lt_T0, Wn.wnHnLv_noRead)
+/-- STATUS: PROVED (Wn.wnHnLv_lt_T0, Wn.wnHnLv_noRead; RESTATED round 120: `Hn.HnLv` was widened, the old datum is
+`Hn.HnLvG`; the old first half is REFUTED, skA3NoBandOld)
 SIZE: S
-REFUTE-FIRST of the old datum: every Hn.HnLv lies below t₀ and never reads ε_{Γ_{x+1}+1}. -/
-theorem skA3NoBand : (∀ Λ : Hn.HnLv, Λ.L < Wj.wjT 0) ∧
-    ∀ (Λ : Hn.HnLv) (x : Ordinal.{0}), InE x → x < Om1 → Λ.l x ≠ eN (lgG x) :=
-  ⟨Wn.wnHnLv_lt_T0, fun Λ _ hx hx1 => Wn.wnHnLv_noRead Λ hx hx1⟩
+REFUTE-FIRST of the old datum: every Hn.HnLv with the (A1)/(A2) bounds lies below t₀ and never reads
+ε_{Γ_{x+1}+1}. -/
+theorem skA3NoBand : (∀ Λ : Hn.HnLv, Hn.HnLvG Λ → Λ.L < Wj.wjT 0) ∧
+    ∀ (Λ : Hn.HnLv) (x : Ordinal.{0}), Hn.HnLvG Λ → InE x → x < Om1 → Λ.l x ≠ eN (lgG x) :=
+  ⟨Wn.wnHnLv_lt_T0, fun Λ _ hG hx hx1 => Wn.wnHnLv_noRead Λ hG hx hx1⟩
+
+/-- STATUS: PROVED (Wy.wyNoBand_false; REFUTES the round-117 first half of skA3NoBand for the widened datum)
+SIZE: S
+NOT every band level datum lies below t₀ (the datum of t₀ is one). -/
+theorem skA3NoBandOld : ¬ (∀ Λ : Hn.HnLv, Λ.L < Wj.wjT 0) := Wy.wyNoBand_false
+
+/-- STATUS: PROVED (Wy.wyLv)
+SIZE: S
+every (A3) level datum is a band level datum (same level, gate, reading). -/
+theorem skA3Band : ∀ Λ : Wn.WnLv3, ∃ Λ' : Hn.HnLv, Λ'.L = Λ.L ∧ Λ'.g = Λ.g ∧ ∀ x, Λ'.l x = Λ.l x :=
+  fun Λ => ⟨Wy.wyLv Λ, rfl, rfl, fun _ => rfl⟩
 
 /-- STATUS: PROVED (Wn.wnG_notRange, Wn.wnA3_bound)
 SIZE: S
@@ -1071,16 +1152,46 @@ SIZE: S
 the full invariant gives the old one: SkPk3W S n ⇒ SkPk3 S n. -/
 theorem skPk3_of_W (S : InaccSeq.{0}) (n : ℕ) (h : SkPk3W S n) : SkPk3 S n := Wn.wnEnt3_sys h
 
+/-- STATUS: PROVED (Wy.wyEnt3_iff)
+SIZE: S
+the (A3) target at t₀ in Hn form: WnEnt3 S 0 ⇔ some (A3) datum Λ of level t₀, gate < K, carries an Hn package
+and a pseudo-base of wyLv Λ at φ(t₀, G) with gate < K and a start. -/
+theorem skA3EntHn (S : InaccSeq.{0}) : SkPk3W S 0 ↔
+    ∃ Λ : Wn.WnLv3, Λ.L = Wj.wjT 0 ∧ Λ.g < Td.tdK S ∧
+      (∃ K : Hn.HnPk, K.Λ = Wy.wyLv Λ) ∧ ∃ (Q : Hn.HnVQ (Wy.wyLv Λ) 0) (U : Hg.HgVD) (_ : Hg.HgSStart (Hn.hnVPB Q) U),
+        Q.F = veblen (Wj.wjT 0) (Gc.gcG 0) ∧ Q.γ < Td.tdK S := Wy.wyEnt3_iff S
+
 /-- STATUS: OPEN
+SIZE: L
+the packages at the tower levels G^{⋯^G} (as band data, Wy.wyLv (Wt.wtTwLv n)) extending each other (Wm.WmExt):
+the Ws family (Ws.wsFam / Ws.wsPkOf, now on code interfaces with Bd < Γ(1)) over an (A3) code interface below t₀
+(the codes of Wt.wtD, gate as in Ws.wsA2) with its classification; (A2) enters only through skBaseA2Hi (the base
+digits of Wt.wtD are the (A2) codes).  REFUTE FIRST: NO EVIDENCE (no no-go result mentions packages). -/
+theorem skA3TowPk (S : InaccSeq.{0}) : ∃ K : ℕ → Hn.HnPk, (∀ n, (K n).Λ = Wy.wyLv (Wt.wtTwLv n)) ∧
+    ∀ n, Wm.WmExt (K n) (K (n + 1)) := by
+  sorry
+
+/-- STATUS: OPEN
+SIZE: L
+the pseudo-base φ(t₀, G) of level t₀ over the datum of t₀ (bound fields: Wn.wnQ3_bounds) with gate < K, and a
+system starting it (the offset recursion of level t₀ along the second argument up to G).  REFUTE FIRST: NO EVIDENCE;
+it is the second half of the target in Hn form (skA3EntHn) at Λ = Wn.wnLv3T0. -/
+theorem skA3QT0 (S : InaccSeq.{0}) : ∃ (Q : Hn.HnVQ (Wy.wyLv Wn.wnLv3T0) 0) (U : Hg.HgVD)
+    (_ : Hg.HgSStart (Hn.hnVPB Q) U), Q.F = veblen (Wj.wjT 0) (Gc.gcG 0) ∧ Q.γ < Td.tdK S := by
+  sorry
+
+/-- STATUS: REDUCED (skA3TowPk, skA3QT0, Wy.wyEnt3_of; was OPEN L)
 SIZE: L
 the (A3) package at t₀ = ε_{G+1} (Wn.WnPk3 on a datum with L = t₀, e.g. Wn.wnLv3T0: a step at every pseudo-base
 of level t₀) and the pseudo-base φ(t₀, G) of level t₀ with gate < K and a system starting it (Wn.wnQ3_bounds gives
 its bound fields).  Round 119 (reg4): REFUTE-FIRST NO EVIDENCE (no no-go result mentions packages or pseudo-bases).
-Needs, in order: (A2) closed (now skBaseA2Hi; by skA3StepLow the t₀-step contains the (A2)-level steps), the widened
+Needs, in order: (A2) closed (PROVED in round 120, skClsA2; by skA3StepLow the t₀-step contains the (A2)-level steps), the widened
 Hn.HnLv (L < Γ(1), ℓ(x) < Γ_{x+2}) so that skA3DatumAll's data are Hn.HnLv's, the Wo family over (A3) raw data on
 the levels (G, t₀), the ω-limit at t₀ along skA3Tow, the offset recursion of level t₀ up to φ(t₀, G). -/
 theorem skSysA3Lev0W (S : InaccSeq.{0}) : SkPk3W S 0 := by
-  sorry
+  obtain ⟨K, hK, he⟩ := skA3TowPk S
+  obtain ⟨Q, U, hU, hF, hγ⟩ := skA3QT0 S
+  exact Wy.wyEnt3_of S K hK he Q U hU hF hγ
 
 /-- STATUS: OPEN
 SIZE: L

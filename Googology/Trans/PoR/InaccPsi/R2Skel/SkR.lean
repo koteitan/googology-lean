@@ -10,6 +10,7 @@ import Googology.Trans.PoR.InaccPsi.R2.WgTh
 import Googology.Trans.PoR.InaccPsi.R2.WlLow
 import Googology.Trans.PoR.InaccPsi.R2.WrMid
 import Googology.Trans.PoR.InaccPsi.R2.WvImg
+import Googology.Trans.PoR.InaccPsi.R2.WzUp
 
 /-!
 # Skeleton, part "readings": the reading move `hν → Wd.WdThLow S`
@@ -39,6 +40,14 @@ Round 113 (leaf read43): REFUTE FIRST on the images of `skTopFam`.  Every image 
 REFUTED at every `k ≥ 1` (`Wv.wvNoT`; `Wb.wbNoY_ge1` gave only some `k`).  New candidate `X̂⁰_k(β) = ψ₂(T β + Ω_{k+2})`
 (`Wv.wvX0`; equal to `T(ψ₃(β+Ω₃))` at `k = 0`) passes every Lean test (`skX0Tests`); its law at every base is the new
 OPEN node `skX0Law`.  This file imports the new module `R2.WvImg`: it can be checked only after the merge.
+Round 114 (leaf read44): REFUTE FIRST on the candidate at `k = 1, β = 0` and `k = 0, β = Ω₃`: NO EVIDENCE (new lower tests
+`Wz.wzImg1_gt`: every image at `Ω₄`, base `0`, has `X̂ < Ω^Z` with `X̂ = ψ₂(Ω₂·2)`; `Wz.wzImg0_ge`: every image at `Ω₃`,
+base `Ω₃`, has `X̂ ≤ Ω^Z`; the candidates `ψ₂(Ω₃)`, `ψ₂(Ω₂·2)` pass).  The lift of `Rx.rxBlkTh` at the base `Ω₃` for
+the offsets `ζ < ψ₂(Ω₂·2)` (`Wz.wzLift`; `ζ < ψ₂(Ω₂ + ζ)`, `Wz.wzLtPsi`; level bound `L = Ω₂ + ζ`, `Wz.wzL_memL`)
+gives the lower half of the law at `k = 0, β = Ω₃` (`skX0LowOm3`), and the law there is equivalent to its upper half
+(`skX0Om3Iff`).  New OPEN node `skUpU` (`Wz.WzUpU`: `Θ(ψ₂(a)) ≤ ψ₁(A + 1 + ψ₂(T a))` for normal `a ∈ D`; tight at
+`a = Ω₃`, `Ω₃·2`, `θ`); `skX0Om3` (the law at `k = 0, β = Ω₃`) is REDUCED to it.  This file imports the new module
+`R2.WzUp`: it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -265,13 +274,84 @@ X̂⁰_k(β) = ψ₂(T β + Ω_{k+2}) (the e = 0 part of skTopFam with an explic
 REFUTE FIRST: NO EVIDENCE (skX0Tests: every Lean constraint holds).  Open: β = Ω₃ at k = 0 (image ψ₂(Ω₂·2): the atom
 ψ₂(Ω₃·2) = ψ₂(Ω₃ + ψ₃(Ω₃·2)) is the limit of ψ₂(Ω₃ + x_n), x_{n+1} = ψ₃(Ω₃ + x_n), whose shifts x_n ≥ Y₃ for n ≥ 1
 are past the Y₃ wall: no level system there) and k = 1 at β = 0 (image ψ₂(Ω₃); needs offsets up to ψ₂(Ω₃) lifted
-at the base 0, where the Rx lift fails).  L: same missing level system as skWallBase. -/
+at the base 0, where the Rx lift fails).  L: same missing level system as skWallBase.
+Round 114: at k = 0, β = Ω₃ the lower half is PROVED (skX0LowOm3) and the law is REDUCED to skUpU (skX0Om3).
+Route: skUpU gives the upper half at every (k, β) whose base image is absorbed (Â_β < A + 1 + X̂⁰_k(β), itself from
+skUpU at β); the lower half at k = 0 and every base β ≥ Ω₃ is the lift of Wz.wzLift at the base β with the level
+bound L = T β + ζ (needs ζ < ψ₂(T β + ζ) below ψ₂(T β + Ω₂), the analogue of Wz.wzLtPsi); at k ≥ 1 the lift by κ
+reaches only offsets ζ < ψ₂(T β + Ω₂) (κ ζ < Ω₃): the lower half needs atoms ψ₂(β + y), y ∈ [Ω₃, Ω_{k+3}). -/
 theorem skX0Law (S : InaccSeq.{0}) :
     ∀ (k : ℕ) (l ηx A β : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
       A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
       Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) 0 β →
       Wg.WgTopAt S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) (Wv.wvX0 S l k β) 0 β := by
   sorry
+
+/-- STATUS: PROVED (Wz.wzLawLow, from Wz.wzLowAll, Wz.wzLift, Wz.wzL_memL, Wz.wzLtPsi, Wz.wzX_le_sup, Rx.rxLift,
+Lw.lw_psi_limit; NEW round 114; checkable only after the merge)
+SIZE: M
+Lower half of skX0Law at k = 0, β = Ω₃: `restart λ, A own, ψ₁(A) = ρ_λ, ∀ own Â with Θ(ψ₂(Ω₃)) = ψ₁(Â) :
+ψ₁(Â + Ω^{X̂⁰_0(Ω₃) + Θ 0}) ≤ Θ(T_{Ω₃}(Ω₃))` (X̂⁰_0(Ω₃) = ψ₂(Ω₂·2), Â = A + 1 + Y₂: the bound is ψ₁(A + ψ₂(Ω₂·2))). -/
+theorem skX0LowOm3 (S : InaccSeq.{0}) :
+    ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      ∀ Â, Â ∈ S.CSet Â (S.psi Â (Om 1)) →
+        gxTh (upsilon l) (ldAtR S l) (S.psi (Om (1 + 1 + 1)) (Om (1 + 1))) = S.psi Â (Om 1) →
+        S.psi (Â + Le.leOe (Wv.wvX0 S l 0 (Om (1 + 1 + 1)) + gxTh (upsilon l) (ldAtR S l) 0)) (Om 1) ≤
+          gxTh (upsilon l) (ldAtR S l) (Le.leTe S (Om (1 + 1 + 1) + 0) (Om (1 + 1 + 1))) :=
+  fun _ _ _ hl hX hA hρ => Wz.wzLawLow hl hX hA hρ
+
+/-- STATUS: PROVED (Wz.wzLaw_iff, Wz.wzRHS, Wz.wzHat_eq, Wz.wzBase; NEW round 114; checkable only after the merge)
+SIZE: S
+`restart λ, A own, ψ₁(A) = ρ_λ : WgTopAt λ Ω₃ (X̂⁰_0(Ω₃)) 0 Ω₃ ⇔ Θ(ψ₂(Ω₃ + Ω₃)) ≤ ψ₁(A_{η_λ} + ψ₂(Ω₂ + Ω₂))`
+(the law at k = 0, β = Ω₃ is exactly its upper half). -/
+theorem skX0Om3Iff (S : InaccSeq.{0}) :
+    ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      (Wg.WgTopAt S l (Om (1 + 1 + 1)) (Wv.wvX0 S l 0 (Om (1 + 1 + 1))) 0 (Om (1 + 1 + 1)) ↔
+        gxTh (upsilon l) (ldAtR S l) (S.psi (Om (1 + 1 + 1) + Om (1 + 1 + 1)) (Om (1 + 1))) ≤
+          S.psi (ConjT.Aη S (cdEta S l) + S.psi (Om (1 + 1) + Om (1 + 1)) (Om (1 + 1))) (Om 1)) :=
+  fun _ _ _ hl hX hA hρ => Wz.wzLaw_iff hl hX hA hρ
+
+/-- STATUS: OPEN (NEW round 114)
+SIZE: L
+`Wz.WzUpU`: `∀ restart λ, A own, ψ₁(A) = ρ_λ, ∀ a ∈ D (Vb.VbD), a ∈ Cl(a, ψ₂(a)) : Θ(ψ₂(a)) ≤ ψ₁(A + 1 + ψ₂(T a))`
+(T = Vb.vbT).  REFUTE FIRST: NO EVIDENCE: equality at a = Ω₃ (Wz.wzU_Om3), tight at a = Ω₃·2 (Wz.wzU_Om33_low) and
+at θ (Wl.wlThVal: ψ₁(A + θ) = ψ₁(A + 1 + ψ₂(T Ω_ω))), loose at a = 0, Ω₃ + Y₃ (Vq.vqRead_Om3Y3), y_n (Vq.vqTop_it),
+consistent with every lift lower bound (Wz.wzU_lift, Wl.wlBlk0) and with Wv.wvImg_lt_th, Wb.wbNoY.
+Plan: induction on the atom (Ld.ldAtom_le); for atoms t' = ψ₂(a') < t = ψ₂(a) (normal a', a): a' ∈ Cl(a, ψ₂(a)) ⇒
+T a' ∈ Cl(T a, ψ₂(T a)) (codes of a' are below ψ₂(a), T maps them to countable Θ-values), the leaves of T a' are
+below Θ(t') ≤ ψ₁(A + 1 + ψ₂(T a')) (so A + 1 + ψ₂(T a') is own), hence ψ₁(A+1+ψ₂(T a')) < ψ₁(A+1+ψ₂(T a)).
+L: the transfer of ψ₂-closure through T and the leaf bound are not in Lean. -/
+theorem skUpU (S : InaccSeq.{0}) : Wz.WzUpU S := by
+  sorry
+
+/-- STATUS: REDUCED (skUpU; Wz.wzLaw_of_U, Wz.wzUp_Om3_of, Wz.wzT_Om33, Wz.wzLaw_iff; NEW round 114)
+SIZE: S
+skX0Law at k = 0, β = Ω₃: `restart λ, A own, ψ₁(A) = ρ_λ ⇒ WgTopAt λ Ω₃ (X̂⁰_0(Ω₃)) 0 Ω₃`
+(Θ(ψ₂(Ω₃·2)) = ψ₁(A + 1 + Y₂ + ψ₂(Ω₂·2))). -/
+theorem skX0Om3 (S : InaccSeq.{0}) :
+    ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      Wg.WgTopAt S l (Om (1 + 1 + 1)) (Wv.wvX0 S l 0 (Om (1 + 1 + 1))) 0 (Om (1 + 1 + 1)) :=
+  fun _ _ _ hl hX hA hρ => Wz.wzLaw_of_U hl hX (skUpU S) hA hρ
+
+/-- STATUS: PROVED (Wz.wzImg0_ge, Wz.wzImg1_gt, Wz.wzU_Om3; NEW round 114; a REFUTE-FIRST record, no node uses it)
+SIZE: S
+`WgTopAt λ Ω₃ Z 0 Ω₃ ⇒ ψ₂(Ω₂·2) ≤ Ω^Z` and `WgTopAt λ Ω₄ Z 0 0 ⇒ ψ₂(Ω₂·2) < Ω^Z` (lower tests at k = 0, β = Ω₃ and
+k = 1, β = 0; the candidates X̂⁰_0(Ω₃) = ψ₂(Ω₂·2), X̂⁰_1(0) = ψ₂(Ω₃) pass; sharpens skImg1Gt), and the skUpU bound is
+an equality at a = Ω₃. -/
+theorem skX0Tests2 (S : InaccSeq.{0}) :
+    ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      (∀ Z, Wg.WgTopAt S l (Om (1 + 1 + 1)) Z 0 (Om (1 + 1 + 1)) →
+        S.psi (Om (1 + 1) + Om (1 + 1)) (Om (1 + 1)) ≤ Le.leOe Z) ∧
+      (∀ Z, Wg.WgTopAt S l (Om (1 + 1 + 1 + 1)) Z 0 0 →
+        S.psi (Om (1 + 1) + Om (1 + 1)) (Om (1 + 1)) < Le.leOe Z) ∧
+      gxTh (upsilon l) (ldAtR S l) (S.psi (Om (1 + 1 + 1)) (Om (1 + 1))) =
+        S.psi (A + 1 + S.psi (Vb.vbT S l (Om (1 + 1 + 1))) (Om (1 + 1))) (Om 1) :=
+  fun _ _ _ hl hX hA hρ =>
+    ⟨fun _ hT => Wz.wzImg0_ge hl hX hA hρ hT, fun _ hT => Wz.wzImg1_gt hl hX hA hρ hT, Wz.wzU_Om3 hl hX hA hρ⟩
 
 /-- STATUS: OPEN (RISK: the family law fixes no B_n-move of the images X̂_e; the step will likely need, in addition,
 `B_n X̂^λ_e(β) = X̂^{λ'}_{B_n e}(B_n β)`, which is itself a move statement; round 112: for own images that move IS the
