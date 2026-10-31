@@ -8,10 +8,10 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
   - Lean：Wilken の系と InaccPsi の間の写像
     - R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
       - 済み（仮定は S だけ）：前線 ι(Γ(φ(Ω₁³, G+1))·ω)、G = Γ_{Ω₁+1}、P < L(0) = m*。すべての v < Ω₁ で帯 Ω₁²·v。公理は 109 個。
-      - 最良の道 wdRoadL（仮定：前線より上で UPPER、LOWER、cap。L(ω+1) ≤ ν_C のとき WdThLow、WdEQfar。m* と L(n+1) での VrVisGen）：ν_C = L(ω+1)。
-      - 残り 1（前線）：すべての擬似基での Ω₁³ の包み、段 Ω₁³·w+Ω₁²·v+Ω₁·M、Ω₁ のべきで添字づけた積み重ね、Ω₁^ω から先の桁の門。
-      - 残り 2（EQ）：Θ_λ(θ) の正確な値（Lean：≠ ψ₁(A+1+Ω_ω)）、次に WdThLow、WdThHi、WdAtWall、WdEQfar。VyPast のための WcRead0 と WcPiLo。
-      - 残り 3（移動）：部分基ごとの像で Ω₃ 以上の基の頂、E ≥ Y₃ での段の命題、RnThMoveM、次に供給の h0 と hn。
+      - 道 wfRoad（仮定：前線より上で UPPER、LOWER、cap。L(ω+1) ≤ ν_C のとき WdThLow、WdEQfar。m* と L(n+1) での WfVisGen）：ν_C = L(ω+1)。
+      - wfRoad の骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：sorry の葉 40 個。OPEN 34（S 3、M 11、L 20）、SUSPECT 1（M）、REFUTED 1（M）、REPLACED 4（M）。
+      - WfVisGen は VrVisGen を lo の葉 p < υ_μ に限ったもの（VrVisGen から出る）。領域 (C) は L(0) より下。(B) は窓 [L(k), L(k+1)) で分けた。
+      - 次：skRead0（υ_{μ+1} ≤ Θ_C(θ)）。skThLow、すべての基での X̂_e、X̂ の B_n 移動。A1 の極限の段。A2 の G の段、A3 のデータ。そのあと L の葉。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
   - ✅ M < (0,0,0)(1,1,1)：紙と Lean で証明済み
