@@ -7,6 +7,8 @@ import Googology.Trans.PoR.InaccPsi.R2.WjVeb
 import Googology.Trans.PoR.InaccPsi.R2.WmA1
 import Googology.Trans.PoR.InaccPsi.R2.WnSucc
 import Googology.Trans.PoR.InaccPsi.R2.WnLv3
+import Googology.Trans.PoR.InaccPsi.R2.WoTop
+import Googology.Trans.PoR.InaccPsi.R2.WpStep
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -63,6 +65,28 @@ are OPEN; the `SkAtG` steps are REPLACED (kept, not used).
 `skA3NoGBase`); the (A3) datum is `Wn.WnLv3` (non-vacuity `skA3Datum0` at `t₀`), the package `Wn.WnPk3`, and the
 ladder invariant is `SkPk3W` (= `Wn.WnEnt3`: package at `t_n` + pseudo-base `φ(t_n, G)`); the SUSPECT of
 `skSysA3Step` is CONFIRMED (its invariant carries no level datum) and the node is REPLACED by `skSysA3StepW`.
+
+Round 118 (leaf gam43, modules `R2.Wo*`; the PROVED nodes below can be checked only after the merge, since they use
+the new modules): REGION A1 IS CLOSED.  An entry is now a FAMILY OF SYSTEMS OVER ALL RAW BASE DATA
+(`Wo.WoSpec`: point, reading, code gate, low field; every datum good up to the level, pseudo-bases and `G` alike), so
+two entries extend each other over every datum with no gate condition and the gate drop is no obstacle.  ONE generic
+induction (`Wo.woStep_all`): base, successor (`Hn.hnwU` over the two-gate base `Wo.woWB`), `ω`-limits (`Wm.WmFs`,
+chain union), and the levels of cofinality `Ω₁` (`Wo.wo_fs1`: an `Ω₁`-sequence of levels; `Wo.woStep_om1`:
+`Ho.hoOU` with SMALL from the region gates).  The family gives `Wh.WhAt` entries that extend each other in the
+corrected sense (`Wo.woFamW2`), so `skFam`, `skSysAll`, `skSysA1` are PROVED with their statements unchanged; the
+leaf `skStepOm1W2` (`Wm.WmOm1Step`: arbitrary coherent families) is REPLACED (not proved, not needed).  The system at
+`φ(ε_{Ω₁+1}, G+1)` exists (`Wo.woVE`, gate 1), so the frontier moves to `skFE = ι(Γ(φ(ε_{Ω₁+1}, G+1))·ω)`
+(`skLocE`, `skHypIffE`; road `Wo.woRoad`, `Wo.woRoad_hyp_iff`).
+
+Round 118 (leaf reg3, modules `R2.Wp*`; the PROVED nodes below can be checked only after the merge): the (A2)
+coherence `SkCohWG` relates packages by the old `Hn.HnkExt` (via `SkExt`), vacuous across a gate drop, and gate drops
+occur between (A2) levels (`skGateDropG`); the old leaves `skStepPowWG`, `skStepCoefLimWG`, `skStepExpLimWG` are
+REPLACED (with `skStepWG`, `skFamWG`).  The (A2) induction now runs on the CORRECTED coherence `SkCohWG2`
+(= `Wp.WpCoh`: entries `Wn.WnAt`, relation `Wm.WmExtE`), `SkCohWG2 ⇒ SkCohWG` (`skCohWG2_old`).  On it base,
+successor, every level with a gated `ω`-sequence (`Wp.WpFs`), every coefficient limit (UNCONDITIONAL, by the gate
+lemma `Wp.wp_glG_coef`) and every cofinal level `glBn n` are PROVED; (A2) is REDUCED to the one leaf `skStepOm1WG2`
+(`Wp.WpOm1Step G`, the levels with no gated `ω`-sequence); `skSysAllG` keeps its statement.  Non-vacuity:
+`skFamSqG` (the corrected family on `[Ω₁, Ω₁²)`, no hypothesis).
 -/
 
 set_option autoImplicit false
@@ -78,6 +102,9 @@ def SkUV (S : InaccSeq.{0}) (l : Ordinal.{0}) : Prop := Cd.CdUpper S l ∧ Cd.Cd
 
 /-- The frontier of `Ho.hoUf`: `ι(Γ(φ(Ω₁³, G+1))·ω)`. -/
 noncomputable def skFHo (S : InaccSeq.{0}) : Ordinal.{0} := Bt.iota S (Gc.gcG Ho.hoUf.B * ω)
+
+/-- The frontier of `Wo.woVE` (round 118): `ι(Γ(φ(ε_{Ω₁+1}, G+1))·ω)`. -/
+noncomputable def skFE (S : InaccSeq.{0}) : Ordinal.{0} := Bt.iota S (Gc.gcG Wo.woVE.B * ω)
 
 /-- The level codes of the generic induction: `Ω₁ ≤ ℓ`, `Ω₁ ∣ ℓ`, `ℓ < ε_{Ω₁+1}`. -/
 def SkLev (ℓ : Ordinal.{0}) : Prop := Om1 ≤ ℓ ∧ Om1 ∣ ℓ ∧ ℓ < Gf.gfE
@@ -373,7 +400,9 @@ theorem skStepExpLimFsW2 : ∀ ℓ P e, SkLev ℓ → IsSuccLimit e → Om1 ^ e 
   rintro ℓ P e hℓ he hP rfl hE
   exact Wm.wmStep_exp he hP hE hℓ
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (round 118: by skStepAllWo / skFamW2 — the family over all raw data, Wo.woStep_all,
+Wo.woFamW2; not used.  REFUTE FIRST: NO EVIDENCE against; for an ARBITRARY coherent family it is not proved: at a
+pseudo-base Q with gate γ the members at Ω₁·x, x an ε-number > γ, have gate ≥ x (Wo.wo_gate_ge) and give no step at Q)
 SIZE: L
 THE ONE REMAINING STEP OF A1: every level ℓ < ε_{Ω₁+1} that is not Ω₁, not ℓ' + Ω₁ and has no ω-sequence (cofinality
 Ω₁: P + Ω₁^{e+1}, and P + Ω₁^e with e of cofinality Ω₁), on SkCohW2.  Needed: for the members ℓ_v = P + Ω₁^e·v
@@ -386,7 +415,7 @@ pseudo-bases; the case ℓ = Ω₁²·(1+ν) is realised by the Ho stack with it
 theorem skStepOm1W2 : Wm.WmOm1Step Gf.gfE := by
   sorry
 
-/-- STATUS: REDUCED (skStepBaseW2, skStepSuccW2, skStepFsW2, skStepOm1W2; Wm.wmStep_all)
+/-- STATUS: REPLACED (round 118: by skStepAllWo; not used)
 SIZE: M
 the step at every level on SkCohW2. -/
 theorem skStepW2 : ∀ ℓ, SkLev ℓ → SkStepAtW2 ℓ := fun ℓ hℓ => Wm.wmStep_all skStepOm1W2 ℓ hℓ hℓ.2.2
@@ -397,6 +426,51 @@ NON-VACUITY of SkCohW2: a family on all levels below Ω₁², every entry SkAtW,
 theorem skFamSq : ∃ F : Ordinal.{0} → SkEnt, ∀ ℓ, SkLev ℓ → ℓ < Om1 * Om1 →
     SkAtW ℓ (F ℓ) ∧ ∀ ℓ', ℓ' < ℓ → SkLev ℓ' → SkExtW2 (F ℓ') (F ℓ) :=
   ⟨Wm.wmF _ Wm.wmOm1Step_sq, Wm.wmFam_sq⟩
+
+/-- STATUS: PROVED (Wo.wo_fs1, Wo.wo_seq_exp, Wo.wo_seq_term, Wo.wo_seq_pow)
+SIZE: M
+every level of the remaining case of Wm.WmOm1Step has an Ω₁-sequence of levels (gate-cofinal). -/
+theorem skFs1 : ∀ ℓ, SkLev ℓ → ℓ ≠ Om1 → (¬ ∃ ℓ', Wm.WmLev ℓ' ∧ ℓ = ℓ' + Om1) → ¬ Wm.WmFs ℓ →
+    ∃ s, Wo.WoFs1 ℓ s := fun _ hℓ h1 h2 h3 => Wo.wo_fs1 hℓ h1 h2 h3
+
+/-- STATUS: PROVED (Wo.woStep_om1: Wo.woFamO, Ho.hoOU)
+SIZE: L
+the step at every level with an Ω₁-sequence of levels, on families over all raw data. -/
+theorem skStepOm1Wo : ∀ ℓ s, Wo.WoFs1 ℓ s → Wo.WoStepAt ℓ := fun _ _ hs => Wo.woStep_om1 hs
+
+/-- STATUS: PROVED (Wo.woStep_all: Wo.woStep_base, Wo.woStep_succ, Wo.woStep_fs, skFs1, skStepOm1Wo)
+SIZE: M
+the step at every level, on families over all raw data (no remaining case). -/
+theorem skStepAllWo : ∀ ℓ, SkLev ℓ → Wo.WoStepAt ℓ := fun ℓ hℓ => Wo.woStep_all ℓ hℓ
+
+/-- STATUS: PROVED (Wo.woFamW2: Wo.woFam, Wo.woEnt_at, Wo.woEnt_ext)
+SIZE: M
+the family on ALL levels below ε_{Ω₁+1}: every entry SkAtW, every pair SkExtW2 (the conclusion of Wm.wmFam at
+ε_{Ω₁+1}, with no hypothesis). -/
+theorem skFamW2 : ∃ F : Ordinal.{0} → SkEnt, ∀ ℓ, SkLev ℓ →
+    SkAtW ℓ (F ℓ) ∧ ∀ ℓ', ℓ' < ℓ → SkLev ℓ' → SkExtW2 (F ℓ') (F ℓ) :=
+  ⟨Wo.woEnt, Wo.woFamW2⟩
+
+/-- STATUS: PROVED (Wo.woVE_B, Wo.woVE_γ: the ω-chain Wo.woChE of the systems at Ω₁, Ω₁^{Ω₁}, …)
+SIZE: M
+the system over G at φ(ε_{Ω₁+1}, G+1), gate 1. -/
+theorem skSysE : ∃ V : Hg.HgVD, V.B = veblen Gf.gfE (Gc.gcG 0 + 1) ∧ V.γ = 1 := ⟨Wo.woVE, rfl, rfl⟩
+
+/-- STATUS: PROVED (Wo.woE_enum, Wo.woE_capV)
+SIZE: S
+UPPER ∧ LOWER ∧ CapV at every range restart below skFE. -/
+theorem skLocE (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → l < skFE S → SkUV S l := fun _ hr hl =>
+  ⟨(Wo.woE_enum S hr hl).1, (Wo.woE_enum S hr hl).2, Wo.woE_capV S hr hl⟩
+
+/-- STATUS: PROVED (Wo.woE_fr_order, skLocE)
+SIZE: S
+THE FRONTIER MOVES: the restarts in [skFHo, skFE) are settled, so UPPER / LOWER / CapV above skFE suffice. -/
+theorem skHypIffE (S : InaccSeq.{0}) (h : ∀ l, Cd.CdRange S l → skFE S ≤ l → SkUV S l) :
+    ∀ l, Cd.CdRange S l → skFHo S ≤ l → SkUV S l := fun l hr _ => by
+  rcases lt_or_ge l (skFE S) with h' | h'
+  · exact skLocE S l hr h'
+  · exact h l hr h'
+
 
 /-! ## (A2) and (A3): the level codes past `ε_{Ω₁+1}` (round 116, leaf reg1)
 
@@ -589,27 +663,28 @@ theorem skStepSuccWG : ∀ ℓ, SkLevG ℓ → ShSuccG ℓ → SkStepAtWG ℓ :=
   · exact Wn.wnSucc_ext_lt hℓ'.2.1 hℓ'.2.2 hat' hl hℓ''.2.1 (hat ℓ'' h'' hℓ'') (hext ℓ'' ℓ' h'' hlt hl hℓ'' hℓ')
   · exact Wn.wnSucc_ext hat'
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (round 118: by skStepOm1WG2 on the corrected coherence SkCohWG2; on SkCohWG the package relation
+Hn.HnkExt is vacuous across a gate drop (skGateDropG), so a union cannot be shown to extend every member)
 SIZE: M
 ℓ = P + Ω₁^{e+1} < G, for SkAtWG (gam41's skStepPowW with (rdc, gtc, whGW) ↦ (glR, glG, wnGW); the union over
 the prefixes P + Ω₁^e·v, v < Ω₁, uses the gate-lowering extension of leaf gam42 (round 117)). -/
 theorem skStepPowWG : ∀ ℓ, SkLevG ℓ → ShPow ℓ → SkStepAtWG ℓ := by
   sorry
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (round 118: by skStepCoefLimWG2, PROVED on SkCohWG2; same reason as skStepPowWG)
 SIZE: M
 ℓ = P + Ω₁^e·c < G, c < Ω₁ limit, for SkAtWG (gam41's skStepCoefLimW, same substitution; gam42's extension). -/
 theorem skStepCoefLimWG : ∀ ℓ, SkLevG ℓ → ShCoefLim ℓ → SkStepAtWG ℓ := by
   sorry
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (round 118: by skStepExpLimFsWG2 (PROVED, gated ω-sequence) and skStepOm1WG2 on SkCohWG2)
 SIZE: M
 ℓ = P + Ω₁^e < G, e limit, for SkAtWG; besides gam41's cases the exponents e = φ(a, b) ≥ ε_{Ω₁+1} (Ω₁^e = e):
 the union along the Veblen fundamental sequence read by glR (cofinality ω or Ω₁; codes Gl.glCfn). -/
 theorem skStepExpLimWG : ∀ ℓ, SkLevG ℓ → ShExpLim ℓ → SkStepAtWG ℓ := by
   sorry
 
-/-- STATUS: REDUCED (skShapeG, skStepBaseWG, skStepSuccWG, skStepPowWG, skStepExpLimWG, skStepCoefLimWG)
+/-- STATUS: REPLACED (round 118: by skStepWG2; it rests on the REPLACED SkCohWG leaves)
 SIZE: M -/
 theorem skStepWG : ∀ ℓ, SkLevG ℓ → SkStepAtWG ℓ := by
   intro ℓ hℓ
@@ -626,7 +701,7 @@ noncomputable def skGWG (ℓ : Ordinal.{0}) (f : ∀ ℓ' : Ordinal.{0}, ℓ' < 
 
 noncomputable def skFWG : Ordinal.{0} → SkEnt := Ordinal.lt_wf.fix skGWG
 
-/-- STATUS: REDUCED (skStepWG)
+/-- STATUS: REPLACED (round 118: by skFamWG2 on SkCohWG2; it rests on skStepWG)
 SIZE: M
 one generic induction over every level ℓ < G on SkAtWG. -/
 theorem skFamWG : ∃ F : Ordinal.{0} → SkEnt,
@@ -644,11 +719,101 @@ theorem skFamWG : ∃ F : Ordinal.{0} → SkEnt,
     rw [heq, hG]
     exact ⟨hsp.1, fun ℓ' h h' => hsp.2 ℓ' h h'⟩
 
-/-- STATUS: REDUCED (skFamWG; was REDUCED (skFamG))
+/-! ### (A2) on the corrected coherence (round 118, leaf reg3, modules `R2.Wp*`) -/
+
+/-- The corrected (A2) coherence: entries `Wn.WnAt`, relation `Wm.WmExtE` (= `Wp.WpCoh`). -/
+def SkCohWG2 (ℓ : Ordinal.{0}) (f : ∀ ℓ' : Ordinal.{0}, ℓ' < ℓ → SkEnt) : Prop := Wp.WpCoh ℓ f
+
+/-- The (A2) step at `ℓ` on the corrected coherence (= `Wp.WpStepAt`). -/
+def SkStepAtWG2 (ℓ : Ordinal.{0}) : Prop := Wp.WpStepAt ℓ
+
+/-- STATUS: PROVED (Wp.wp_gate_drop)
+SIZE: S
+REFUTE-FIRST of the old (A2) leaves: a gate drop between (A2) levels: Ω₁·ω < Ω₁², glG(Ω₁²) = 2 < ω = glG(Ω₁·ω)
+(so Hn.HnkExt, hence SkCohWG, says nothing between them: Wm.wm_old_vacuous). -/
+theorem skGateDropG : SkLevG (Om1 * ω) ∧ SkLevG (Om1 * Om1) ∧ Om1 * ω < Om1 * Om1 ∧
+    Gl.glG (Om1 * Om1) < Gl.glG (Om1 * ω) := by
+  obtain ⟨h1, h2, h3, h4, h5⟩ := Wp.wp_gate_drop
+  refine ⟨h1, h2, h3, ?_⟩
+  rw [h4, h5]; exact natCast_lt_omega0 2
+
+/-- STATUS: PROVED (Wp.wpCoh_old, Wm.wmExtE_old)
+SIZE: S
+SkCohWG2 ⇒ SkCohWG (the corrected coherence is stronger). -/
+theorem skCohWG2_old {ℓ : Ordinal.{0}} {f : ∀ ℓ' : Ordinal.{0}, ℓ' < ℓ → SkEnt} (h : SkCohWG2 ℓ f) :
+    SkCohWG ℓ f :=
+  ⟨h.1, fun a b ha hb hab h1 h2 => Wm.wmExtE_old (h.2 a b ha hb hab h1 h2)⟩
+
+/-- STATUS: PROVED (Wp.wpStep_base: Wn.wnAt_base)
+SIZE: S -/
+theorem skStepBaseWG2 : SkStepAtWG2 Om1 := Wp.wpStep_base
+
+/-- STATUS: PROVED (Wp.wpStep_succ: Wn.wnSucc_at, Wn.wnSucc_ext(_lt), Wp.wpSucc_ext_lt, Wm.wmSucc_ext)
+SIZE: M
+ℓ = ℓ' + Ω₁ < G on SkCohWG2. -/
+theorem skStepSuccWG2 : ∀ ℓ, SkLevG ℓ → ShSuccG ℓ → SkStepAtWG2 ℓ := by
+  rintro ℓ hℓ ⟨ℓ', hℓ', rfl⟩
+  exact Wp.wpStep_succ hℓ' hℓ.2.2
+
+/-- STATUS: PROVED (Wp.wpStep_fs: Wp.WpLim — the limit package Wm.wmPkL of the sequence below Wn.wnLv ℓ and the gated
+ω-chain union of the systems over G for the base Wn.wnGW; Wp.WpLim.at_lim, Wp.WpLim.ext_below)
+SIZE: M
+every (A2) level with an ω-sequence of levels (cofinal with room for +1, gates glG ℓ_k ≤ glG ℓ), on SkCohWG2. -/
+theorem skStepFsWG2 : ∀ ℓ, SkLevG ℓ → Wp.WpFs ℓ → SkStepAtWG2 ℓ := fun _ hℓ h => Wp.wpStep_fs hℓ h
+
+/-- STATUS: PROVED (Wp.wpStep_coef, Wp.wpFs_coef, Wp.wp_glG_coef: glG(A + Ω₁^e·c') ≤ glG(A + Ω₁^e·c) for
+0 < c' ≤ c < Ω₁, Ω₁^{e+1} ∣ A, through Gl.glG_cnf)
+SIZE: M
+ℓ = P + Ω₁^e·c < G, c < Ω₁ limit, on SkCohWG2, UNCONDITIONAL. -/
+theorem skStepCoefLimWG2 : ∀ ℓ, SkLevG ℓ → ShCoefLim ℓ → SkStepAtWG2 ℓ := by
+  rintro ℓ hℓ ⟨P, e, c, he, hc, hcO, hP, rfl⟩
+  exact Wp.wpStep_coef he hc hcO hP hℓ
+
+/-- STATUS: PROVED (Wp.wpStep_fs; below ε_{Ω₁+1} the sequence comes from Wm.wmFs_exp via Wp.wpFs_of_wm)
+SIZE: S
+ℓ = P + Ω₁^e < G, e limit, with a gated ω-sequence of levels, on SkCohWG2. -/
+theorem skStepExpLimFsWG2 : ∀ ℓ, SkLevG ℓ → ShExpLim ℓ → Wp.WpFs ℓ → SkStepAtWG2 ℓ :=
+  fun _ hℓ _ h => Wp.wpStep_fs hℓ h
+
+/-- STATUS: PROVED (Wp.wpStep_Bn, Wp.wpFs_Bn: the codes Gl.glCfn n k, gate 0)
+SIZE: S
+the step at every cofinal level glBn n of (A2), on SkCohWG2. -/
+theorem skStepBnWG2 : ∀ n : ℕ, SkStepAtWG2 (Gl.glBn n) := Wp.wpStep_Bn
+
+/-- STATUS: OPEN
+SIZE: L
+THE ONE REMAINING STEP OF (A2): every level ℓ < G that is not Ω₁, not ℓ' + Ω₁ and has no gated ω-sequence
+(cofinality Ω₁: P + Ω₁^{e+1}, P + Ω₁^e with e of cofinality Ω₁, incl. the (A1) levels of skStepOm1W2), on SkCohWG2.
+The same generic recursion as skStepOm1W2 with (rdc, gtc, whGW) ↦ (glR, glG, wnGW).  REFUTE FIRST: NO EVIDENCE
+(no no-go result mentions packages, pseudo-bases or systems over G); non-vacuous: empty below Ω₁² (Wp.wpOm1Step_sq). -/
+theorem skStepOm1WG2 : Wp.WpOm1Step (Gc.gcG 0) := by
+  sorry
+
+/-- STATUS: REDUCED (skStepBaseWG2, skStepSuccWG2, skStepFsWG2, skStepOm1WG2; Wp.wpStep_all)
+SIZE: M
+the step at every (A2) level on SkCohWG2. -/
+theorem skStepWG2 : ∀ ℓ, SkLevG ℓ → SkStepAtWG2 ℓ := fun ℓ hℓ => Wp.wpStep_all skStepOm1WG2 ℓ hℓ hℓ.2.2
+
+/-- STATUS: REDUCED (skStepOm1WG2; Wp.wpFam)
+SIZE: M
+one generic induction over every level ℓ < G on SkCohWG2. -/
+theorem skFamWG2 : ∃ F : Ordinal.{0} → SkEnt,
+    ∀ ℓ, SkLevG ℓ → SkAtWG ℓ (F ℓ) ∧ ∀ ℓ', ℓ' < ℓ → SkLevG ℓ' → SkExtW2 (F ℓ') (F ℓ) :=
+  ⟨Wp.wpF _ skStepOm1WG2, fun ℓ hℓ => Wp.wpFam skStepOm1WG2 ℓ hℓ hℓ.2.2⟩
+
+/-- STATUS: PROVED (Wp.wpFam_sq, Wp.wpOm1Step_sq)
+SIZE: M
+NON-VACUITY of SkCohWG2: a family on all (A2) levels below Ω₁², every entry SkAtWG, every pair SkExtW2, with no
+hypothesis. -/
+theorem skFamSqG : ∃ F : Ordinal.{0} → SkEnt, ∀ ℓ, SkLevG ℓ → ℓ < Om1 * Om1 →
+    SkAtWG ℓ (F ℓ) ∧ ∀ ℓ', ℓ' < ℓ → SkLevG ℓ' → SkExtW2 (F ℓ') (F ℓ) :=
+  ⟨Wp.wpF _ Wp.wpOm1Step_sq, Wp.wpFam_sq⟩
+
+/-- STATUS: REDUCED (skFamWG2, i.e. only skStepOm1WG2: Wp.wpSysAll; was REDUCED (skFamWG))
 SIZE: M -/
 theorem skSysAllG : ∀ ℓ, SkLevG ℓ → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.gcG 0 + 1) ∧ V.γ ≤ Gl.glG ℓ := by
   intro ℓ hℓ
-  obtain ⟨F, hF⟩ := skFamWG
+  obtain ⟨F, hF⟩ := skFamWG2
   exact ⟨(F ℓ).2.down, (hF ℓ hℓ).1.2.2.1, (hF ℓ hℓ).1.2.2.2.1⟩
 
 /-- STATUS: PROVED (Gl.glBn_spec, Gf.Om1_lt_eW, Rj.rj_Om1_inE)
@@ -916,15 +1081,15 @@ theorem skStep : ∀ ℓ, SkLev ℓ → SkStepAtW ℓ := by
   · exact skStepExpLimW ℓ hℓ h
   · exact skStepCoefLimW ℓ hℓ h
 
-/-- STATUS: REDUCED (skStepOm1W2; Wm.wmFam on SkCohW2, Wm.wmExtE_old; statement unchanged)
+/-- STATUS: PROVED (round 118: skFamW2, Wm.wmExtE_old; statement unchanged)
 SIZE: M
 ∃ F: ∀ ℓ (SkLev): F ℓ at ℓ (SkAtW) ∧ ∀ ℓ' < ℓ (SkLev): F ℓ extends F ℓ'  (one generic induction over ℓ). -/
 theorem skFam : ∃ F : Ordinal.{0} → SkEnt,
     ∀ ℓ, SkLev ℓ → SkAtW ℓ (F ℓ) ∧ ∀ ℓ', ℓ' < ℓ → SkLev ℓ' → SkExt (F ℓ') (F ℓ) :=
-  ⟨Wm.wmF _ skStepOm1W2, fun ℓ hℓ => ⟨(Wm.wmFam skStepOm1W2 ℓ hℓ hℓ.2.2).1,
-    fun ℓ' h h' => Wm.wmExtE_old ((Wm.wmFam skStepOm1W2 ℓ hℓ hℓ.2.2).2 ℓ' h h')⟩⟩
+  ⟨Wo.woEnt, fun ℓ hℓ => ⟨(Wo.woFamW2 ℓ hℓ).1,
+    fun ℓ' h h' => Wm.wmExtE_old ((Wo.woFamW2 ℓ hℓ).2 ℓ' h h')⟩⟩
 
-/-- STATUS: REDUCED (skFam)
+/-- STATUS: PROVED (round 118: skFam; also Wo.woSysAll directly)
 SIZE: M
 ∀ ℓ (SkLev) ∃ system V over G: B_V = φ(ℓ, G+1), γ_V ≤ gtc ℓ. -/
 theorem skSysAll : ∀ ℓ, SkLev ℓ → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.gcG 0 + 1) ∧ V.γ ≤ Gf.gtc ℓ := by
@@ -932,7 +1097,7 @@ theorem skSysAll : ∀ ℓ, SkLev ℓ → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.
   obtain ⟨F, hF⟩ := skFam
   exact ⟨(F ℓ).2.down, (hF ℓ hℓ).1.2.2.1, (hF ℓ hℓ).1.2.2.2.1⟩
 
-/-- STATUS: REDUCED (skSysAll, skCofLev; i.e. only skStepOm1W2 — Wm.wmSysA1)
+/-- STATUS: PROVED (round 118: skSysAll, skCofLev; Wo.woSysA1)
 SIZE: M
 (A1) ∀ B < φ(ε_{Ω₁+1}, G+1) ∃ system V: B ≤ B_V, γ_V < K. -/
 theorem skSysA1 (S : InaccSeq.{0}) : ∀ B, B < veblen Gf.gfE (Gc.gcG 0 + 1) →

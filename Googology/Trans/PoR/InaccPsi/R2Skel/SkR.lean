@@ -8,6 +8,7 @@ import Googology.Trans.PoR.InaccPsi.R2.RoW
 import Googology.Trans.PoR.InaccPsi.R2.WgFam
 import Googology.Trans.PoR.InaccPsi.R2.WgTh
 import Googology.Trans.PoR.InaccPsi.R2.WlLow
+import Googology.Trans.PoR.InaccPsi.R2.WrMid
 
 /-!
 # Skeleton, part "readings": the reading move `hν → Wd.WdThLow S`
@@ -26,7 +27,12 @@ Round 110 (leaf read40): the refuted one-image top `skTopDyn` is replaced by the
 hypothesis; `skThVal` is REDUCED to its lower half `skThLow` (the upper half `skThUp` is `Wg.wgTheta_le`).
 Round 111 (leaf read41): `skThLow` is PROVED (`Wl.wlThLow`: the lift of `Rx.rxBlkTh` taken at the base `Ω_{k+2}`
 for the offsets `ζ < ψ_{Ω₂}(Ω_{k+1})`, `Wl.wlBlk0`), so `skThVal`, `skBlkLaw`, `skWallTh` are PROVED (all their
-children are proved).  This file imports the new module `R2.WlLow`: it can be checked only after the merge.
+children are proved).
+Round 112 (leaf read42): `Wd.WdAtWall` is stated only at windows with `F_W ≤ m_λ < θ⁺`, but `Rn.RnThMoveM` asks
+windows with `m_λ ≥ θ⁺`, so `skMidAssemble` cannot use its wall hypothesis (SUSPECT, REPLACED).  The wall is
+restated without code hypotheses (`Wr.WrWallCF`; `WallBelow` lost its code hypotheses), `skWallCF` gives it, `skWall`
+follows (`Wr.wrWall_of_cf`), and `skMidCF` (`Wr.wrMid`: `WrWallCF ⇒ RnThMoveM`) is PROVED.  This file imports the
+new module `R2.WrMid`: it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -60,11 +66,11 @@ def FarLowMove (S : InaccSeq.{0}) : Prop :=
     Rn.rnMW S < cdCode S l → cdTheta S l (cdCode S l) < cdDelta l * ω →
     Bc.bcB S n (cdTheta S l (cdCode S l)) = cdTheta S l' (cdCode S l')
 
-/-- `Wd.WdAtWall` with the atom bound `s < b` in place of `s ≤ θ`. -/
+/-- `Wr.WrWallCF` (the wall with no code hypothesis) with the atom bound `s < b` in place of `s ≤ θ`
+(round 112: the code hypotheses `ρ_λ < m_λ`, `F_W ≤ m_λ < θ⁺` are dropped). -/
 def WallBelow (S : InaccSeq.{0}) (b : Ordinal.{0}) : Prop :=
   ∀ n : ℕ, ∀ l l', CdRange S l → Bc.bcC S n < upsilon l → cdR S l < Bc.bcC S (n + 1) →
-    IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' → upsilon l < cdCode S l →
-    Le.leFWW S ≤ cdCode S l → cdCode S l < Lj.ljThP S →
+    IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
     ∀ s ∈ ldAtR S l, S.psi (Ug.ugY S) (Om (1 + 1)) ≤ s → s < b →
       (∀ x, GxCl (upsilon l) (ldAtR S l) x → x < s → MvD S x ∧
         GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
@@ -195,7 +201,9 @@ theorem skTopSep (S : InaccSeq.{0}) :
   fun _ _ _ hl hX hA hρ _ _ h0 h1 => Wg.wgSep01 hl hX hA hρ h0 h1
 
 /-- STATUS: OPEN (RISK: the family law fixes no B_n-move of the images X̂_e; the step will likely need, in addition,
-`B_n X̂^λ_e(β) = X̂^{λ'}_{B_n e}(B_n β)`, which is itself a move statement)
+`B_n X̂^λ_e(β) = X̂^{λ'}_{B_n e}(B_n β)`, which is itself a move statement; round 112: for own images that move IS the
+atom move at T_{X+e}(β), Wr.wrImgMove_iff, so it cannot be added as a hypothesis without assuming the conclusion)
+(round 112: CHANGED to the code-free WallBelow)
 SIZE: L
 `TopFamAll ∧ hν ⇒ every atom ψ₂(Y₃) ≤ s < ψ₂(Ω₄) moves: MvD s, B_n s ∈ At_{λ'}, Θ_{λ'}(B_n s) = B_n Θ_λ(s)`
 (was SUSPECT with the refuted TopDynAll; now with the unrefuted family law Wg.WgTopFamAll)
@@ -204,7 +212,8 @@ Vb.vbT, and vqStepA ported to VtTopDyn).  L: no Lean statement of the level syst
 theorem skWallBase (S : InaccSeq.{0}) : Wg.WgTopFamAll S → Nc.ncL S (ω + 1) ≤ nuC → WallBelow S (lev S 0) := by
   sorry
 
-/-- STATUS: OPEN (RISK as skWallBase: no B_n-move of the images in the hypothesis)
+/-- STATUS: OPEN (RISK as skWallBase: no B_n-move of the images in the hypothesis; Wr.wrImgMove_iff)
+(round 112: CHANGED to the code-free WallBelow)
 SIZE: L
 `TopFamAll ∧ hν ⇒ ∀ k, (atoms < ψ₂(Ω_{k+4}) move) ⇒ (atoms < ψ₂(Ω_{k+5}) move)` (one level up; the step
 Ω_{k+3} → Ω_{k+4} of the readings with sub-base images; Wb.wbKe_sup_it / wbTe_gt_Om give the layer facts).
@@ -224,12 +233,12 @@ theorem skWallLevAll (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → ∀ k : 
 
 /-- STATUS: REDUCED (skThCof, skWallLevAll)
 SIZE: L
-`hν ⇒ every atom ψ₂(Y₃) ≤ s < θ moves`. -/
-theorem skWallLow (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → WallBelow S (ConjT.th S) := by
-  intro hν n l l' hR h1 hr hl' hB hm hF hK s hs hsY hsθ IH
+`hν ⇒ every atom ψ₂(Y₃) ≤ s < θ moves at every window` (round 112: statement `Wr.WrWallLowCF`, no code hypothesis). -/
+theorem skWallLow (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → Wr.WrWallLowCF S := by
+  intro hν n l l' hR h1 hr hl' hB s hs hsY hsθ IH
   obtain ⟨a, ha1, ha2, rfl⟩ := hs
   obtain ⟨k, hk⟩ := skThCof S a hsθ
-  exact skWallLevAll S hν k n l l' hR h1 hr hl' hB hm hF hK _ ⟨a, ha1, ha2, rfl⟩ hsY hk IH
+  exact skWallLevAll S hν k n l l' hR h1 hr hl' hB _ ⟨a, ha1, ha2, rfl⟩ hsY hk IH
 
 /-- STATUS: PROVED (Wg.wgTheta_le, from Ld.ldTheta_le_psi, Wg.wgOwnEta)
 SIZE: S
@@ -329,15 +338,18 @@ theorem skWallTh (S : InaccSeq.{0}) : WallAtTheta S := by
   have hΘ' := skThVal S l' _ A' hl' hX' hA' hρA' (skThAtom S n l l' hR h1 hr hl' hB)
   rw [hΘ', hΘ, hBd, hBθ]
 
-/-- STATUS: REDUCED (skWallLow, skWallTh)
+/-- STATUS: REDUCED (skWallLow; Wr.wrWallCF_of_low, Wr.wrAtTh; NEW round 112)
 SIZE: L
-`hν ⇒ WdAtWall` (⇔ Ux.UxAtMove26 by Wd.wdWall_iff): atoms ψ₂(Y₃) ≤ s < θ and the atom θ. -/
-theorem skWall (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S := by
-  intro hν n l l' hR h1 hr hl' hB hm hF hK s hs hsY hsθ IH
-  rcases hsθ.lt_or_eq with hlt | heq
-  · exact skWallLow S hν n l l' hR h1 hr hl' hB hm hF hK s hs hsY hlt IH
-  · subst heq
-    exact skWallTh S n l l' hR h1 hr hl' hB hm hF hK hs
+`hν ⇒ Wr.WrWallCF`: the code-free wall, atoms ψ₂(Y₃) ≤ s < θ (skWallLow) and the atom θ (Wr.wrAtTh, code-free
+form of skWallTh). -/
+theorem skWallCF (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → Wr.WrWallCF S :=
+  fun hν => Wr.wrWallCF_of_low (skWallLow S hν)
+
+/-- STATUS: REDUCED (skWallCF; Wr.wrWall_of_cf; round 112: was REDUCED to skWallLow, skWallTh)
+SIZE: L
+`hν ⇒ WdAtWall` (⇔ Ux.UxAtMove26 by Wd.wdWall_iff): the code-free wall restricted to F_W ≤ m_λ < θ⁺. -/
+theorem skWall (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S :=
+  fun hν => Wr.wrWall_of_cf (skWallCF S hν)
 
 /-- STATUS: PROVED (skThVal; Cd.cdEta_pv, Ro.roThW_A; round 111: skThVal proved)
 SIZE: S
@@ -347,7 +359,9 @@ theorem skBlkLaw (S : InaccSeq.{0}) : BlkLaw S := by
   have hρ : S.psi A (Om 1) = upsilon l := by rw [hAη]; exact cdEta_pv hl.1 hX
   exact Ro.roThW_A hl hX hA hAη (skThVal S l ηx A hl hX hA hρ hθ)
 
-/-- STATUS: OPEN
+/-- STATUS: SUSPECT (round 112: its hypothesis `hν ⇒ WdAtWall` is stated only at windows with F_W ≤ m_λ < θ⁺,
+while RnThMoveM asks windows with m_λ ≥ θ⁺, so the atoms ≤ θ at those windows are not covered; REPLACED by skMidCF,
+which takes the code-free wall Wr.WrWallCF; no node uses it)
 SIZE: M
 `BlkLaw ∧ (hν ⇒ WdAtWall) ∧ hν ⇒ RnThMoveM`: codes θ⁺ ≤ m ≤ M_W are read through the atoms ψ₂(Ω_ω + c) (block
 law at λ and λ') and the atoms ≤ θ (WdAtWall); B_n ψ₁(A+θ+x) = ψ₁(A'+θ+B_n x) by Ld.ldB_psi_add (MvD, own).
@@ -357,11 +371,22 @@ theorem skMidAssemble (S : InaccSeq.{0}) : BlkLaw S → (Nc.ncL S (ω + 1) ≤ n
     Nc.ncL S (ω + 1) ≤ nuC → Rn.RnThMoveM S := by
   sorry
 
-/-- STATUS: REDUCED (skBlkLaw, skWall, skMidAssemble)
+/-- STATUS: PROVED (Wr.wrMid, from Wr.wrAtLow, Wr.wrAtBlk, Wr.wrThMW, Ld.ldGxStepRec; NEW round 112, replaces
+skMidAssemble)
+SIZE: M
+`(hν ⇒ Wr.WrWallCF) ∧ hν ⇒ RnThMoveM`: at a window with θ⁺ ≤ m_λ ≤ M_W the code is e = e(η_λ) (cdPi ≤ M_W is
+impossible above P(Ω₂)); atoms < θ⁺ move (Le.leAtMove_FWW, Ux.uxAtMoveTop, the wall), atoms ψ₂(Ω_ω + c) move by the
+block law at λ and λ' (skBlkLaw's content, Ro.roThW_A with Wl.wlThVal), all codes < M_W move (Ld.ldGxStepRec), and
+Θ_λ(M_W) = ψ₁(A + θ + Ω₁) (Wr.wrThMW) moves by Ld.ldB_psi_add.  Checkable only after the merge (imports R2.WrMid). -/
+theorem skMidCF (S : InaccSeq.{0}) : (Nc.ncL S (ω + 1) ≤ nuC → Wr.WrWallCF S) →
+    Nc.ncL S (ω + 1) ≤ nuC → Rn.RnThMoveM S :=
+  fun h hν => Wr.wrMid (h hν)
+
+/-- STATUS: REDUCED (skMidCF, skWallCF; round 112: was skBlkLaw, skWall, skMidAssemble)
 SIZE: M
 `hν ⇒ RnThMoveM`: the reading move at codes θ⁺ ≤ m_λ ≤ M_W. -/
 theorem skThMid (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → Rn.RnThMoveM S :=
-  skMidAssemble S (skBlkLaw S) (skWall S)
+  skMidCF S (skWallCF S)
 
 /-- STATUS: OPEN
 SIZE: L
