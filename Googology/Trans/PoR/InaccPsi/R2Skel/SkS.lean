@@ -6,6 +6,8 @@ import Googology.Trans.PoR.InaccPsi.R2Skel.SkF
 import Googology.Trans.PoR.InaccPsi.R2.WfRoad
 import Googology.Trans.PoR.InaccPsi.R2.WfWin
 import Googology.Trans.PoR.InaccPsi.R2.WfRefute
+import Googology.Trans.PoR.InaccPsi.R2.WkRead
+import Googology.Trans.PoR.InaccPsi.R2.WkCarry
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -24,6 +26,15 @@ RESTATED nodes: `SkMapP`, `skOffMapW` (now PROVED by `Wf.wfOffMap`), `skImgF`, `
 The SUSPECT reasons of the refuter (`SkSX.skSX_offMap_free`, `skSX_img_pi`, `skSX_sup_pi`) do not apply to the
 restated nodes (`Wf.wfR_skSX_excl`, `Wf.wfSup_lo`, `R2Skel.SkSX.skSX_notTB`).  This file imports the new `Wf`
 modules, so it can be checked only after the merge.  Every node is tagged STATUS / SIZE in its docstring.
+
+Round 117 (leaf "WcRead0, then the witness-window leaves", sup39): `skRead0` PROVED (`Wk.wkRead0`: the level-wise
+lift with atoms `ψ_{Ω₂}(Ω_{n+1} + κ ζ)` below `θ`), so `skMu` is PROVED.  `skLowerF` RESTATED (a window hypothesis
+`∃ w, Ty.TyWin S k w ∧ w < υ_μ`; the old `∀ μ` form asked LOWER at `μ + f z` with no Range / `RzRest` known when
+`υ_μ` lies below the window, e.g. at an index `L(j)`, code `P′`) and REDUCED (`Wk.wkLowerF` + the new shared leaf
+`skLowRR`); `skCarryWit`, `skCarryOther` carry the window hypothesis, `skSupK` picks `μ` above the window
+(`Wk.wkWin_ex`).  `skBigF` REDUCED (`Wk.wkBigF`: vacuous at every offset with `λ + z < ν` since `ν` is not covered)
+to the NEW leaf `skBigTop` (the single offset `z = ν − λ`).  This file imports the new `Wk` modules, so it can be
+checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -75,6 +86,17 @@ theorem skUpRR : ∀ l, CdRange S l → Rz.RzRest l → CdUpper S l := by
   by_cases h : Bt.iota S (Gc.gcG Hl.hlU.B * ω) ≤ l
   · exact _root_.R2Skel.SkF.skFrontU S l hr h
   · exact (Hl.hlU_enum S hr (lt_of_not_ge h)).1
+
+/-- STATUS: REDUCED (R2Skel.SkF.skFrontL, Hl.hlU_enum; NEW round 117)
+SIZE: L
+LOWER at every Range restart with `RzRest` (shared with part hLH: below the frontier by `Hl.hlU_enum`, above it
+by the frontier part `SkF.skFrontL`).
+∀ λ, Range(λ) ∧ RzRest(λ) ⇒ LOWER(λ) -/
+theorem skLowRR : ∀ l, CdRange S l → Rz.RzRest l → CdLower S l := by
+  intro l hr _
+  by_cases h : Bt.iota S (Gc.gcG Hl.hlU.B * ω) ≤ l
+  · exact _root_.R2Skel.SkF.skFrontL S l hr h
+  · exact (Hl.hlU_enum S hr (lt_of_not_ge h)).2
 
 /-- STATUS: REDUCED (R2Skel.SkF.skFrontU/L/V/Vt, Wd.wdNu; integration round 115)
 SIZE: L
@@ -179,15 +201,16 @@ theorem skCodeCof (k : ℕ) : ∀ γ < Nc.ncL S (k : Ordinal.{0}), ∃ μ, CdRan
   · obtain ⟨μ, hR, h1, h2, hc⟩ := Ls.lsNames_L (S := S) n 1 γ hγ
     exact ⟨μ, hR, h1, h2, hc, h2.trans (Qq.qqL_lt_omega S (n + 1))⟩
 
-/-- STATUS: OPEN
+/-- STATUS: PROVED (by `Wk.wkRead0`; round 117.  The lift of `Rx.rxLift` one level at a time: for members
+`ζ < ψ_{Ω₂}(Ω_n)` the atoms `ψ_{Ω₂}(Ω_{n+1} + κ ζ) < θ` of `At_C`, closure condition by `Wk.wkL_memN_lt`; `θ = sup_n
+ψ_{Ω₂}(Ω_n)` (`Wk.wkTh_cof`); continuity of `ψ_{Ω₁}` at `A + θ`.  Consequences: `Θ_C(θ) = Θ_μ(θ) = υ_{μ+1}`
+(`Wk.wkRead0_eq`, `Wk.wkTheta_th`))
 SIZE: L
-the first reading `WcRead0` (report sup37 (A)): a lower reading of `θ` by the atoms `ψ_{Ω₂}(x)`, `x ≤ Ω_ω`; not
-refuted (every proved bound gives `Θ_C(θ) ≤ u'`, `Wb.wbTheta_lt` gives `Θ(θ) ≤ ψ₁(A+θ+1)`)
 Range(μ), code(μ) = G₂+1, υ_μ < L(ω) ⇒ υ_{μ+1} ≤ Θ_C(θ) -/
 theorem skRead0 : ∀ μ, CdRange S μ → cdCode S μ = Ls.lsG S (0 + 1 + 1) + 1 → upsilon μ < Nc.ncL S ω →
-    Wc.WcRead0 S μ := by sorry
+    Wc.WcRead0 S μ := fun _ hR hc hω => Wk.wkRead0 hR hc hω
 
-/-- STATUS: REDUCED (from `skCodeCof`, `skRead0`)
+/-- STATUS: PROVED (from `skCodeCof`, `skRead0`, both PROVED; round 117)
 SIZE: L
 ∀ γ < υ_λ ∃ μ: γ < υ_μ < υ_λ, SkMu(μ) -/
 theorem skMu {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) :
@@ -216,24 +239,43 @@ theorem skOffMapW {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (_hw : SkW
     Wf.wfOffMap (S := S) k h.2.1 hM.1 hM.2.1 hM.2.2.1 hM.2.2.2 hμl hlν Os
   exact ⟨f, B, h1, h2, h3, h4, h5, h6⟩
 
-/-- STATUS: OPEN (round 116 note: Range of `μ + f z` needs its code; `Ls.lsCode_shift` gives it only for
-`f z ≤ υ_μ`, but `f z` runs up to `X > υ_{μ+1}` (at the witness `f g = g'`); `RzRest` needs `Rz.rzLam ≤ μ`, which
-`skMu` can supply by taking `γ ≥ υ(rzLam)` (`Ty.tyRz_lt_L`))
+/-- STATUS: REDUCED (by `Wk.wkLowerF` and the shared leaf `skLowRR`; RESTATED round 117: the window hypothesis
+`hwin`.  No code of `μ + f z` is needed: `υ_μ < υ_{μ+f z} < υ_λ = L(k)` lies above a window `w` of `L(k)`, so
+`Ty.tyWin_rng` gives Range and `RzRest`.  The old statement (all `μ` below `υ_λ`) is REPLACED: below the window
+`μ + f z` may hit an index `L(j)` (code `P′`, not Range))
 SIZE: M
-LOWER at the inner restarts `μ + f(z)` (Range with `RzRest` like `Ty.tyInner_rng`; then the shared LOWER leaf)
-SkMapP ⇒ ∀ z ∈ Os, ω² | z ⇒ LOWER(μ + f z) -/
-theorem skLowerF {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : SkWit l ν) :
-    ∀ μ, upsilon μ < upsilon l → SkMu S μ → ∀ (Os : Finset Ordinal.{0}) f B, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
-      SkMapP S l μ f B Os → ∀ g ∈ Os, 0 < g → ω ^ 2 ∣ g → CdLower S (μ + f g) := by sorry
+w window of L(k), w < υ_μ, SkMapP ⇒ ∀ z ∈ Os, 0 < z, ω² | z ⇒ LOWER(μ + f z) -/
+theorem skLowerF {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (_hw : SkWit l ν) :
+    ∀ μ, upsilon μ < upsilon l → SkMu S μ → (∃ w, Ty.TyWin S k w ∧ w < upsilon μ) →
+      ∀ (Os : Finset Ordinal.{0}) f B, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
+      SkMapP S l μ f B Os → ∀ g ∈ Os, 0 < g → ω ^ 2 ∣ g → CdLower S (μ + f g) := by
+  intro μ _ hM hwin Os f B _ hP
+  obtain ⟨w, hw, hwμ⟩ := hwin
+  exact Wk.wkLowerF skLowRR h.2.1 hw hwμ hM.1.1 hP.1 hP.2.2.2.1
 
-/-- STATUS: OPEN
+/-- STATUS: OPEN (NEW round 117; the single instance left of `skBigF`)
 SIZE: M
-the big-reach clause of `Vr.VrCarry` (expected vacuous at the witness window: UPPER keeps `r(λ+z) < υ_{λ+β}`)
+the big-reach clause at the offset `z = ν − λ` of `ν` itself.  REFUTE FIRST: NO EVIDENCE (neither
+`r(ν) < υ_{ν+ω²}` nor the transfer is decided in Lean: `ν` is uncovered and isolated, which bounds only the reaches
+of the restarts below `ν`; the no-go list says nothing on `r(ν)`).  It is vacuous iff `r(ν) < υ_{ν+ω²}`.
+ν − λ ∈ Os, υ_{ν+ω²} ≤ r(ν) ⇒ υ_{μ+B} ≤ r(μ + f(ν − λ)) -/
+theorem skBigTop {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : SkWit l ν) :
+    ∀ μ, upsilon μ < upsilon l → SkMu S μ → ∀ (Os : Finset Ordinal.{0}) f B, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
+      SkMapP S l μ f B Os → ν - l ∈ Os →
+        (upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S ν → upsilon (μ + B) ≤ cdR S (μ + f (ν - l))) := by sorry
+
+/-- STATUS: REDUCED (by `Wk.wkBigF` from `skBigTop`; round 117: every offset `z` with `λ + z < ν` is vacuous since `ν`
+is not covered (`Wk.wkBig_vac`), and the only other offset `z < β` with `ω² | z` is `z = ν − λ` (`Wk.wkTop_eq`))
+SIZE: M
+the big-reach clause of `Wf.WfCarry`
 υ_{λ+β} ≤ r(λ+z) ⇒ υ_{μ+B} ≤ r(μ+f z) -/
 theorem skBigF {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : SkWit l ν) :
     ∀ μ, upsilon μ < upsilon l → SkMu S μ → ∀ (Os : Finset Ordinal.{0}) f B, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
       SkMapP S l μ f B Os → ∀ g ∈ Os, 0 < g → ω ^ 2 ∣ g →
-        (upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S (l + g) → upsilon (μ + B) ≤ cdR S (μ + f g)) := by sorry
+        (upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S (l + g) → upsilon (μ + B) ≤ cdR S (μ + f g)) := by
+  intro μ hμ hM Os f B hOs hP g hg hg0 hgd
+  exact Wk.wkBigF h.1 h.2.2.1.1 h.2.2.2.2.2.1 h.2.1 h.2.2.2.2.1 h.2.2.2.2.2.2.1
+    (fun hm => skBigTop h hw μ hμ hM Os f B hOs hP hm) g hg hg0 hgd (hOs g hg)
 
 /-- STATUS: PROVED (refuter round: `exists_next` gives `c ∈ T^{υ_λ}`, `Par_sub` gives `Par ⊆ υ_λ`; the suspicion
 below is void; same proof as `R2Skel.SkSX.skSX_piT`)
@@ -284,44 +326,52 @@ theorem skImgF {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : SkWit l
         ∀ E : Vr.VrE, Vr.VrWF l (ν - l + ω ^ 2) E → Vr.vrVal l E = cdR S (l + g) → Vr.VrOs l Os E →
           Wf.WfR l μ E → Vr.vrImg l μ f E ≤ cdR S (μ + f g) := by sorry
 
-/-- STATUS: REDUCED (from `skOffMapW`, `skLowerF`, `skBigF`, `skImgF`; RESTATED round 116: `Wf.WfCarry`)
+/-- STATUS: REDUCED (from `skOffMapW`, `skLowerF`, `skBigF`, `skImgF`; RESTATED round 116: `Wf.WfCarry`;
+round 117: the window hypothesis `hwin`)
 SIZE: L
-ν witness ⇒ the supply data and `WfCarry` at every `μ` of `skMu` -/
+ν witness, μ above a window of L(k) ⇒ the supply data and `WfCarry` at every `μ` of `skMu` -/
 theorem skCarryWit {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : SkWit l ν) :
-    ∀ μ, upsilon μ < upsilon l → SkMu S μ → ∀ Os : Finset Ordinal.{0}, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
+    ∀ μ, upsilon μ < upsilon l → SkMu S μ → (∃ w, Ty.TyWin S k w ∧ w < upsilon μ) →
+      ∀ Os : Finset Ordinal.{0}, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
       ∃ f B, μ + B ≤ l ∧ ω ^ 2 ∣ B ∧ upsilon (μ + B) ≤ cdR S μ ∧ Sl.SlOff f Os B ∧
         Wf.WfCarry S l (ν - l + ω ^ 2) μ f B Os := by
-  intro μ hμ hM Os hOs
+  intro μ hμ hM hwin Os hOs
   obtain ⟨f, B, hP⟩ := skOffMapW h hw μ hμ hM Os hOs
   refine ⟨f, B, hP.1, hP.2.1, hP.2.2.1, hP.2.2.2.1, fun g hg hg0 hgd => ⟨?_, ?_, ?_⟩⟩
-  · exact skLowerF h hw μ hμ hM Os f B hOs hP g hg hg0 hgd
+  · exact skLowerF h hw μ hμ hM hwin Os f B hOs hP g hg hg0 hgd
   · exact skBigF h hw μ hμ hM Os f B hOs hP g hg hg0 hgd
   · exact skImgF h hw μ hμ hM Os f B hOs hP g hg hg0 hgd
 
 /-- STATUS: OPEN (RESTATED round 116 with `Wf.WfCarry`; the refuter's SUSPECT reason (`skSX_sup_pi`) is void for the
-restricted image clause)
+restricted image clause; round 117: the window hypothesis `hwin`, as in `skCarryWit`; its LOWER clause is
+`Wk.wkLowerF` for every offset map, its big-reach clause is `Wk.wkBigF` from the instance at `ν − λ`)
 SIZE: L
 the supply and carry at the other windows: offsets with codes `m z ≥ u₁` (leaves `υ_{λ+h'}` renamed to
 `υ_{μ+f h'}`), a supply past `X` (readings at the code levels `θ_{k+2}` beyond `WcRead0`)
 ¬ witness ⇒ the same as `skCarryWit` -/
 theorem skCarryOther {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : ¬ SkWit l ν) :
-    ∀ μ, upsilon μ < upsilon l → SkMu S μ → ∀ Os : Finset Ordinal.{0}, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
+    ∀ μ, upsilon μ < upsilon l → SkMu S μ → (∃ w, Ty.TyWin S k w ∧ w < upsilon μ) →
+      ∀ Os : Finset Ordinal.{0}, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
       ∃ f B, μ + B ≤ l ∧ ω ^ 2 ∣ B ∧ upsilon (μ + B) ≤ cdR S μ ∧ Sl.SlOff f Os B ∧
         Wf.WfCarry S l (ν - l + ω ^ 2) μ f B Os := by sorry
 
-/-- STATUS: REDUCED (from `skMu`, `skCarryWit`, `skCarryOther`; RESTATED round 116)
+/-- STATUS: REDUCED (from `skMu`, `skCarryWit`, `skCarryOther`; RESTATED round 116; round 117: `μ` is taken above
+`max(γ, w)` for a window `w` of `L(k)`, `Wk.wkWin_ex`)
 SIZE: L
 WfSup(λ, β(ν)) -/
 theorem skSupK {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Wf.WfSup S l (ν - l + ω ^ 2) := by
   intro γ hγ Os hOs
-  obtain ⟨μ, h1, h2, hM⟩ := skMu h γ hγ
+  obtain ⟨w, hw⟩ := Wk.wkWin_ex (S := S) k
+  have hwl : w < upsilon l := hw.2.1.trans_eq h.2.1
+  obtain ⟨μ, h1, h2, hM⟩ := skMu h (max γ w) (max_lt hγ hwl)
+  have hwin : ∃ w, Ty.TyWin S k w ∧ w < upsilon μ := ⟨w, hw, (le_max_right γ w).trans_lt h1⟩
   have hc : ∃ f B, μ + B ≤ l ∧ ω ^ 2 ∣ B ∧ upsilon (μ + B) ≤ cdR S μ ∧ Sl.SlOff f Os B ∧
       Wf.WfCarry S l (ν - l + ω ^ 2) μ f B Os := by
     by_cases hw : SkWit l ν
-    · exact skCarryWit h hw μ h2 hM Os hOs
-    · exact skCarryOther h hw μ h2 hM Os hOs
+    · exact skCarryWit h hw μ h2 hM hwin Os hOs
+    · exact skCarryOther h hw μ h2 hM hwin Os hOs
   obtain ⟨f, B, hB, hd, hs, ho, hC⟩ := hc
-  exact ⟨μ, f, B, hM.1, h1, h2, hB, hd, hs, ho, hC⟩
+  exact ⟨μ, f, B, hM.1, (le_max_left γ w).trans_lt h1, h2, hB, hd, hs, ho, hC⟩
 
 /-- STATUS: PROVED (by `Wf.wfPiLo`; round 116)
 SIZE: S

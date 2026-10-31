@@ -7,6 +7,7 @@ import Googology.Trans.PoR.InaccPsi.R2.RxLv
 import Googology.Trans.PoR.InaccPsi.R2.RoW
 import Googology.Trans.PoR.InaccPsi.R2.WgFam
 import Googology.Trans.PoR.InaccPsi.R2.WgTh
+import Googology.Trans.PoR.InaccPsi.R2.WlLow
 
 /-!
 # Skeleton, part "readings": the reading move `hν → Wd.WdThLow S`
@@ -23,7 +24,9 @@ or of a REFUTED node kept for the record.
 Round 110 (leaf read40): the refuted one-image top `skTopDyn` is replaced by the family law `skTopFam`
 (`Wg.WgTopFamAll`: one image `X̂_e(β)` per exponent `e` and base `β`); `skWallBase`, `skWallStep` take it as their
 hypothesis; `skThVal` is REDUCED to its lower half `skThLow` (the upper half `skThUp` is `Wg.wgTheta_le`).
-This file imports the new modules `R2.WgFam`, `R2.WgTh`: it can be checked only after the merge.
+Round 111 (leaf read41): `skThLow` is PROVED (`Wl.wlThLow`: the lift of `Rx.rxBlkTh` taken at the base `Ω_{k+2}`
+for the offsets `ζ < ψ_{Ω₂}(Ω_{k+1})`, `Wl.wlBlk0`), so `skThVal`, `skBlkLaw`, `skWallTh` are PROVED (all their
+children are proved).  This file imports the new module `R2.WlLow`: it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -237,20 +240,23 @@ theorem skThUp (S : InaccSeq.{0}) :
       gxTh (upsilon l) (ldAtR S l) (ConjT.th S) ≤ S.psi (A + ConjT.th S) (Om 1) :=
   fun _ _ _ hl hX hA hρ => Wg.wgTheta_le hl hX hA hρ
 
-/-- STATUS: OPEN
+/-- STATUS: PROVED (Wl.wlThLow, from Wl.wlBlk0, Wl.wlL_memB, Wl.wlCof, Rx.rxLift, Wg.wgLow_of_all; round 111)
 SIZE: L
 Lower half of skThVal: `restart λ, A own, ψ₁(A) = ρ_λ, θ ∈ At_λ ⇒ ψ₁(A_{η_λ} + θ) ≤ Θ_λ(θ)` (`Wg.WgThLow`;
 sufficient: ψ₁(A+ζ) < Θ_λ(θ) for every ζ < θ, Wg.wgLow_of_all).  REFUTE FIRST: NO EVIDENCE (the known readings below θ,
 Vn.vnRead_Y3, Vq.vqRead_Om3Y3, Ro.roTheta_th_gt, are far below ψ₁(A+θ) and do not decide it).  Blocker: the lift of
-Rx.rxBlkTh at the base 0 fails: Rx.rxL_memH needs Ω_ω ≤ a, and κ ζ < Ω₃ for ζ < θ, so κ(e') ∉ Cl(κ ζ, ψ₂(κ ζ)) when
-κ(e') has a ψ-argument ≥ κ ζ; readings of atoms cofinal in θ (the Y_{k+3}-plateaus for every k) are needed. -/
+Rx.rxBlkTh at the base 0 fails (Rx.rxL_memH needs Ω_ω ≤ a).  Proof (round 111): for ζ < θ pick a member w ≥ ζ over 2
+(Rx.rxCofTh) and k with w < B_k = ψ₂(Ω_{k+1}) (Wl.wlCof); lift at the base Ω_{k+2}: ψ₁(A + w) ≤ Θ(ψ₂(Ω_{k+2} + κ w))
+(Rx.rxLift on the members below B_k; the transfer κ(e − A) ∈ Cl(Ω_{k+2} + κ w, ·) is Wl.wlL_memB, every collapse
+argument of a member of Cl(Ω_{k+1}, B_k) is below Ω_{k+1}), and ψ₂(Ω_{k+2} + κ w) ≤ ψ₂(Ω_{k+3}) < θ.  The hypotheses
+"A own", "ψ₁(A) = ρ_λ", "θ ∈ At_λ" are not used. -/
 theorem skThLow (S : InaccSeq.{0}) :
     ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
       A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l → ConjT.th S ∈ ldAtR S l →
-      Wg.WgThLow S l := by
-  sorry
+      Wg.WgThLow S l :=
+  fun _ _ _ hl hX _ _ _ => Wl.wlThLow hl hX
 
-/-- STATUS: REDUCED (skThUp, skThLow; Wg.wgThVal_of_low)
+/-- STATUS: PROVED (skThUp, skThLow; Wg.wgThVal_of_low; = Wl.wlThVal, which needs no θ ∈ At_λ; round 111)
 SIZE: S
 `restart λ, A own, ψ₁(A) = ρ_λ, θ ∈ At_λ ⇒ Θ_λ(θ) = ψ₁(A + θ)` (the candidate TRUE value; consistent with
 Wb.wbTheta_lt and Ro.roTheta_th_gt; ψ₁(A+1+Ω_ω) is refuted by Wb.wbTheta_ne).  Statement unchanged. -/
@@ -287,7 +293,7 @@ theorem skThAtom (S : InaccSeq.{0}) :
   show Om ω < Om ω + ConjT.th S * cdEta S l'
   exact lt_add_of_pos_right _ (mul_pos (Sf.sfTh_pos S) (pos_iff_ne_zero.2 hη0))
 
-/-- STATUS: REDUCED (skThVal, skThAtom; with Lj.ljB_th, Ld.ldOwnA, Cd.cdEta_pv_spec, Mx.mxUps_succ,
+/-- STATUS: PROVED (skThVal, skThAtom; round 111: all children proved; with Lj.ljB_th, Ld.ldOwnA, Cd.cdEta_pv_spec, Mx.mxUps_succ,
 Ld.ldB_psi_add, Bc.bcB_bound')
 SIZE: M
 `θ atom: MvD θ, B_n θ = θ ∈ At_{λ'}, Θ_{λ'}(θ) = ψ₁(A'+θ) = B_n ψ₁(A+θ) = B_n Θ_λ(θ)`. -/
@@ -333,7 +339,7 @@ theorem skWall (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S 
   · subst heq
     exact skWallTh S n l l' hR h1 hr hl' hB hm hF hK hs
 
-/-- STATUS: REDUCED (skThVal; Cd.cdEta_pv, Ro.roThW_A)
+/-- STATUS: PROVED (skThVal; Cd.cdEta_pv, Ro.roThW_A; round 111: skThVal proved)
 SIZE: S
 `Θ_λ(ψ₂(Ω_ω + c)) = ψ₁(A + θ + Θ_λ(c))` for codes c < M_W with Ω_ω + c < A. -/
 theorem skBlkLaw (S : InaccSeq.{0}) : BlkLaw S := by
@@ -345,7 +351,8 @@ theorem skBlkLaw (S : InaccSeq.{0}) : BlkLaw S := by
 SIZE: M
 `BlkLaw ∧ (hν ⇒ WdAtWall) ∧ hν ⇒ RnThMoveM`: codes θ⁺ ≤ m ≤ M_W are read through the atoms ψ₂(Ω_ω + c) (block
 law at λ and λ') and the atoms ≤ θ (WdAtWall); B_n ψ₁(A+θ+x) = ψ₁(A'+θ+B_n x) by Ld.ldB_psi_add (MvD, own).
-Needs the gx-recursion of Ld.ldGxStepRec past θ⁺ (atoms up to M_W). -/
+Needs the gx-recursion of Ld.ldGxStepRec past θ⁺ (atoms up to M_W).  Round 111: the hypothesis BlkLaw is
+proved (skBlkLaw PROVED), so this node needs only (hν ⇒ WdAtWall). -/
 theorem skMidAssemble (S : InaccSeq.{0}) : BlkLaw S → (Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S) →
     Nc.ncL S (ω + 1) ≤ nuC → Rn.RnThMoveM S := by
   sorry

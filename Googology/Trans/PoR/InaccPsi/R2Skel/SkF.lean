@@ -4,6 +4,9 @@ import Googology.Trans.PoR.InaccPsi.R2.WhSucc
 import Googology.Trans.PoR.InaccPsi.R2.WhRefute
 import Googology.Trans.PoR.InaccPsi.R2.WjSplit
 import Googology.Trans.PoR.InaccPsi.R2.WjVeb
+import Googology.Trans.PoR.InaccPsi.R2.WmA1
+import Googology.Trans.PoR.InaccPsi.R2.WnSucc
+import Googology.Trans.PoR.InaccPsi.R2.WnLv3
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -37,6 +40,29 @@ Round 116 (leaf reg1, modules `R2.Wj*`): the nodes of (A2), (A3), (B) and (C) be
 Region (C) lies entirely below `L(0)` (`skLongMid`, `skLongTop` vacuous); old (B) is re-split by the windows
 `[L(k), L(k+1))` (`Wj.wjRegB_iff`, `skSplit`); the A2/A3 cut moves to `φ(G, 1)` (`Wj.wjA2Cof`, `Wj.wjA3Cof`).
 The A2 nodes use reg1's `SkAtG` (`↔ SkAt` below `ε_{Ω₁+1}`), not gam41's stronger `SkAtW`.
+
+Round 117 (leaf gam42, modules `R2.Wm*`; the PROVED nodes below can be checked only after the merge, since they use
+the new modules): the coherence `SkCohW` relates packages by `Hn.HnkExt`, which is vacuous across a gate drop
+(`skOldVacuous`; a drop exists: `Ω₁·ω < Ω₁²`, `gtc(Ω₁²) = 2 < ω = gtc(Ω₁·ω)`), so a limit entry could not be shown to
+extend every member.  The induction now runs on the CORRECTED coherence `SkCohW2` (= `Wm.WmCoh`), whose package
+relation `Wm.WmExt` lowers by the pseudo-base gate (`Wm.wmLowr`: only `g' ≤ Q.γ`); `SkCohW2 ⇒ SkCohW`
+(`skCohW2_old`).  On it: base, successor, EVERY level with an `ω`-sequence (`Wm.WmFs`: all coefficient limits, and
+the exponent limits whose exponent has an `ω`-sequence) are PROVED; the one remaining leaf is `skStepOm1W2` (the levels
+of cofinality `Ω₁`).  The family on all levels below `Ω₁²` is proved with no hypothesis (`skFamSq`).  The old
+`skStepPowW`, `skStepExpLimW`, `skStepCoefLimW`, `skStep` are REPLACED; `skFam` keeps its statement and is REDUCED to
+`skStepOm1W2`.  The frontier does not move yet.
+
+Round 117 (leaf reg2, modules `R2.Wn*`; the PROVED nodes below can be checked only after the merge):
+`skShapeG`, `skLvOfGateG`, `skGateBn` PROVED.  `SkAtG` has the defect gam41 found in `SkAt` (no start condition
+of the system over `G` at the package), and `Wh.WhAt` cannot be used past `ε_{Ω₁+1}` (its base `Wh.whGW` asks
+`ℓ(x) + x < ε_{x+1}`, false for every level `ℓ ≥ ε_{Ω₁+1}`); the (A2) induction now runs on `SkAtWG` (= `Wn.WnAt`:
+`glR`/`glG`, and the base `Wn.wnGW` whose outer low field `hdNx (Γ_{x+1}+1) (Γ_{x+1})` needs no bound on the
+level).  On it `skStepBaseWG` and `skStepSuccWG` are PROVED; `skStepPowWG`, `skStepCoefLimWG`, `skStepExpLimWG`
+are OPEN; the `SkAtG` steps are REPLACED (kept, not used).
+(A3): `Hn.HnLv` cannot carry an (A3) level and `G` is not in `range φ(L, ·)` for `L > G` (`skA3NoBand`,
+`skA3NoGBase`); the (A3) datum is `Wn.WnLv3` (non-vacuity `skA3Datum0` at `t₀`), the package `Wn.WnPk3`, and the
+ladder invariant is `SkPk3W` (= `Wn.WnEnt3`: package at `t_n` + pseudo-base `φ(t_n, G)`); the SUSPECT of
+`skSysA3Step` is CONFIRMED (its invariant carries no level datum) and the node is REPLACED by `skSysA3StepW`.
 -/
 
 set_option autoImplicit false
@@ -250,7 +276,8 @@ theorem skStepSuccW : ∀ ℓ, SkLev ℓ → ShSucc ℓ → SkStepAtW ℓ := by
   · exact Wh.whSucc_ext_lt hℓ'.2.1 hℓ.2.2 hat' hl hℓ''.2.1 (hat ℓ'' h'' hℓ'') (hext ℓ'' ℓ' h'' hlt hl hℓ'' hℓ')
   · exact Wh.whSucc_ext hat'
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (round 117: by skStepOm1W2 on the corrected coherence SkCohW2; on SkCohW the package relation
+HnkExt is vacuous across a gate drop, so the union cannot be shown to extend every member)
 SIZE: M
 ℓ = P + Ω₁^{e+1} (e ≥ 1, cf Ω₁), for SkAtW: package = at every pseudo-base Q the union over the systems over Q at
 the levels P + Ω₁^e·v (v < Ω₁) and everything between (a recursion of systems over a base datum, generic in the level;
@@ -258,13 +285,14 @@ Ho.HoBR / Ho.HoStep are P = 0, e = 2 with the band levels only); G-system = the 
 theorem skStepPowW : ∀ ℓ, SkLev ℓ → ShPow ℓ → SkStepAtW ℓ := by
   sorry
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (round 117: cf(e) = ω by skStepExpLimFsW2 (PROVED), cf(e) = Ω₁ by skStepOm1W2, both on
+SkCohW2; same reason as skStepPowW)
 SIZE: M
 ℓ = P + Ω₁^e, e limit, for SkAtW: cf(e) = ω: as skStepCoefLimW along e_k → e; cf(e) = Ω₁: as skStepPowW. -/
 theorem skStepExpLimW : ∀ ℓ, SkLev ℓ → ShExpLim ℓ → SkStepAtW ℓ := by
   sorry
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (round 117: by skStepCoefLimW2 (PROVED) on SkCohW2; same reason as skStepPowW)
 SIZE: M
 ℓ = P + Ω₁^e·c, c < Ω₁ limit, for SkAtW: package Ho.hoPkL of an Ho.HoSeq along c_k → c (needs gates non-decreasing
 along the sequence: SkAtW gives only g ≤ gtc ℓ; take a non-decreasing subsequence, or make the gate a function of ℓ);
@@ -277,6 +305,98 @@ SIZE: S
 ∀ B < φ(ε_{Ω₁+1}, G+1) ∃ ℓ (SkLev ℓ, gtc ℓ < K, B ≤ φ(ℓ, G+1)). -/
 theorem skCofLev (S : InaccSeq.{0}) : ∀ B, B < veblen Gf.gfE (Gc.gcG 0 + 1) →
     ∃ ℓ, SkLev ℓ ∧ Gf.gtc ℓ < Td.tdK S ∧ B ≤ veblen ℓ (Gc.gcG 0 + 1) := Wh.whCofLev S
+
+/-! ## Round 117: the corrected coherence (leaf gam42, modules `R2.Wm*`) -/
+
+/-- The corrected extension of entries: packages by `Wm.WmExt` (lowering by the pseudo-base gate). -/
+def SkExtW2 (E' E : SkEnt) : Prop := Wm.WmExtE E' E
+
+/-- The corrected coherence of a family below `ℓ` (`SkAtW` entries, `SkExtW2` between levels). -/
+def SkCohW2 (ℓ : Ordinal.{0}) (f : ∀ ℓ' : Ordinal.{0}, ℓ' < ℓ → SkEnt) : Prop := Wm.WmCoh ℓ f
+
+/-- The step at `ℓ` on the corrected coherence. -/
+def SkStepAtW2 (ℓ : Ordinal.{0}) : Prop := Wm.WmStepAt ℓ
+
+/-- STATUS: PROVED (Wm.wm_old_vacuous, Wm.wm_gate_drop)
+SIZE: S
+the old package relation HnkExt K' K holds whenever K.g < K'.g (it says nothing across a gate drop), and gate drops
+occur between levels: Ω₁·ω < Ω₁², gtc(Ω₁²) = 2 < ω = gtc(Ω₁·ω). -/
+theorem skOldVacuous : (∀ K' K : Hn.HnPk, K.Λ.g < K'.Λ.g → Hn.HnkExt K' K) ∧
+    SkLev (Om1 * ω) ∧ SkLev (Om1 * Om1) ∧ Om1 * ω < Om1 * Om1 ∧ Gf.gtc (Om1 * Om1) < Gf.gtc (Om1 * ω) := by
+  obtain ⟨h1, h2, h3, h4, h5⟩ := Wm.wm_gate_drop
+  refine ⟨fun _ _ h => Wm.wm_old_vacuous h, h1, h2, h3, ?_⟩
+  rw [h4, h5]; exact natCast_lt_omega0 2
+
+/-- STATUS: PROVED (Wm.wmExtE_old)
+SIZE: S
+SkExtW2 ⇒ SkExt (the corrected extension is stronger). -/
+theorem skExtW2_old {E' E : SkEnt} (h : SkExtW2 E' E) : SkExt E' E := Wm.wmExtE_old h
+
+/-- STATUS: PROVED (Wm.wmExtE_old)
+SIZE: S
+SkCohW2 ⇒ SkCohW. -/
+theorem skCohW2_old {ℓ : Ordinal.{0}} {f : ∀ ℓ' : Ordinal.{0}, ℓ' < ℓ → SkEnt} (h : SkCohW2 ℓ f) : SkCohW ℓ f :=
+  ⟨h.1, fun a b ha hb hab h1 h2 => Wm.wmExtE_old (h.2 a b ha hb hab h1 h2)⟩
+
+/-- STATUS: PROVED (Wm.wmStep_base)
+SIZE: S
+the entry at Ω₁ (Hn.hnPk1, Hg.hgU) on SkCohW2. -/
+theorem skStepBaseW2 : SkStepAtW2 Om1 := Wm.wmStep_base
+
+/-- STATUS: PROVED (Wm.wmStep_succ: Wm.wmSucc_ext, Wm.wmSucc_ext_lt, Wh.whSucc_at, Wh.whSucc_ext_lt)
+SIZE: M
+ℓ = ℓ' + Ω₁ on SkCohW2. -/
+theorem skStepSuccW2 : ∀ ℓ, SkLev ℓ → ShSucc ℓ → SkStepAtW2 ℓ := by
+  rintro ℓ hℓ ⟨ℓ', hℓ', rfl⟩
+  exact Wm.wmStep_succ hℓ' hℓ.2.2
+
+/-- STATUS: PROVED (Wm.wmStep_fs: Wm.WmLim — the limit package Wm.wmPkL of a Wm.WmSeq and the gated ω-chain union
+of the systems over G, Wm.WmLim.at_lim, Wm.WmLim.ext_below)
+SIZE: M
+every level with an ω-sequence of levels (strictly increasing, cofinal with room for +1, gates ≤ gtc ℓ), on
+SkCohW2. -/
+theorem skStepFsW2 : ∀ ℓ, SkLev ℓ → Wm.WmFs ℓ → SkStepAtW2 ℓ := fun _ hℓ h => Wm.wmStep_fs hℓ h
+
+/-- STATUS: PROVED (Wm.wmStep_coef, Wm.wmFs_coef: ℓ_k = P + Ω₁^e·(c_k + 1), c_k = He.heFs c k)
+SIZE: M
+ℓ = P + Ω₁^e·c, c < Ω₁ limit, on SkCohW2. -/
+theorem skStepCoefLimW2 : ∀ ℓ, SkLev ℓ → ShCoefLim ℓ → SkStepAtW2 ℓ := by
+  rintro ℓ hℓ ⟨P, e, c, he, hc, hcO, hP, rfl⟩
+  exact Wm.wmStep_coef he hc hcO hP hℓ
+
+/-- STATUS: PROVED (Wm.wmStep_exp, Wm.wmFs_exp: ℓ_k = P + Ω₁^{e_k}; Wm.wmExpFs_digit / Wm.wmExpFs_lim supply the
+ω-sequence of e when its last digit is a countable limit, or e = E + Ω₁^f·d' + Ω₁^f with f having one)
+SIZE: M
+ℓ = P + Ω₁^e, e limit with an ω-sequence of exponents (gates ≤ gtc e), on SkCohW2. -/
+theorem skStepExpLimFsW2 : ∀ ℓ P e, SkLev ℓ → IsSuccLimit e → Om1 ^ e ∣ P → ℓ = P + Om1 ^ e → Wm.WmExpFs e →
+    SkStepAtW2 ℓ := by
+  rintro ℓ P e hℓ he hP rfl hE
+  exact Wm.wmStep_exp he hP hE hℓ
+
+/-- STATUS: OPEN
+SIZE: L
+THE ONE REMAINING STEP OF A1: every level ℓ < ε_{Ω₁+1} that is not Ω₁, not ℓ' + Ω₁ and has no ω-sequence (cofinality
+Ω₁: P + Ω₁^{e+1}, and P + Ω₁^e with e of cofinality Ω₁), on SkCohW2.  Needed: for the members ℓ_v = P + Ω₁^e·v
+(v < Ω₁; for an exponent limit, along e's own Ω₁-sequence), at every base datum (a pseudo-base Q of level ℓ for the
+package, G for the system), a recursion of systems over the base through ALL levels in [P, ℓ) (successor: Hn.hnwU over
+the base with the family's package at the level; ω-limits: the chain of WmSys over the base; Ω₁-limits: recursively
+this step), then Ho.hoOU with SMALL (the gate of a member forces its index below σ); Ho.HoBR / Ho.HoStep are the case
+P = 0, e = 1 with the band packages.  REFUTE FIRST: NO EVIDENCE against (no no-go result mentions systems over G or
+pseudo-bases; the case ℓ = Ω₁²·(1+ν) is realised by the Ho stack with its own family). -/
+theorem skStepOm1W2 : Wm.WmOm1Step Gf.gfE := by
+  sorry
+
+/-- STATUS: REDUCED (skStepBaseW2, skStepSuccW2, skStepFsW2, skStepOm1W2; Wm.wmStep_all)
+SIZE: M
+the step at every level on SkCohW2. -/
+theorem skStepW2 : ∀ ℓ, SkLev ℓ → SkStepAtW2 ℓ := fun ℓ hℓ => Wm.wmStep_all skStepOm1W2 ℓ hℓ hℓ.2.2
+
+/-- STATUS: PROVED (Wm.wmFam_sq, Wm.wmOm1Step_sq: below Ω₁² every level is Ω₁, a successor or has an ω-sequence)
+SIZE: M
+NON-VACUITY of SkCohW2: a family on all levels below Ω₁², every entry SkAtW, every pair SkExtW2, with no hypothesis. -/
+theorem skFamSq : ∃ F : Ordinal.{0} → SkEnt, ∀ ℓ, SkLev ℓ → ℓ < Om1 * Om1 →
+    SkAtW ℓ (F ℓ) ∧ ∀ ℓ', ℓ' < ℓ → SkLev ℓ' → SkExtW2 (F ℓ') (F ℓ) :=
+  ⟨Wm.wmF _ Wm.wmOm1Step_sq, Wm.wmFam_sq⟩
 
 /-! ## (A2) and (A3): the level codes past `ε_{Ω₁+1}` (round 116, leaf reg1)
 
@@ -341,22 +461,21 @@ SIZE: S
 ∀ ℓ < G, glG ℓ < σ: glR ℓ ρ ∈ Tᵖ[σ] ∧ π(glR ℓ ρ) = glR ℓ σ. -/
 theorem skReadExactG : SkReadExactG := fun ℓ _ _ hℓ hB hg => Wj.wjReadExactG ℓ _ _ hℓ.2.2 hB hg
 
-/-- STATUS: OPEN
+/-- STATUS: PROVED (Wn.wnLvDatumAll; the level datum Wn.wnLv ℓ, gate = glG ℓ; the hypotheses are not needed)
 SIZE: S
 digit gate ∧ EXACT ⇒ level datum at every A2 level (port of skLvOfGate: (rdc, gtc) ↦ (glR, glG); HnLv allows
 L < G, l x < Γ_{x+1}). -/
-theorem skLvOfGateG : SkDigitGateG → SkReadExactG → SkLvDatumAllG := by
-  sorry
+theorem skLvOfGateG : SkDigitGateG → SkReadExactG → SkLvDatumAllG := fun _ _ => Wn.wnLvDatumAll
 
-/-- STATUS: REDUCED (skLvOfGateG, skDigitGateG, skReadExactG)
+/-- STATUS: PROVED (skLvOfGateG, skDigitGateG, skReadExactG)
 SIZE: S -/
 theorem skLvDatumG : SkLvDatumAllG := skLvOfGateG skDigitGateG skReadExactG
 
-/-- STATUS: OPEN
+/-- STATUS: PROVED (Wn.wnShape)
 SIZE: S
 Cantor normal form in base Ω₁ (no use of the bound): ℓ = Ω₁ ∨ succ ∨ pow ∨ exp-limit ∨ coefficient-limit. -/
-theorem skShapeG : ∀ ℓ, SkLevG ℓ → ℓ = Om1 ∨ ShSuccG ℓ ∨ ShPow ℓ ∨ ShExpLim ℓ ∨ ShCoefLim ℓ := by
-  sorry
+theorem skShapeG : ∀ ℓ, SkLevG ℓ → ℓ = Om1 ∨ ShSuccG ℓ ∨ ShPow ℓ ∨ ShExpLim ℓ ∨ ShCoefLim ℓ :=
+  fun ℓ h => Wn.wnShape ℓ h.1 h.2.1 h.2.2
 
 /-- STATUS: REDUCED (skStepBase)
 SIZE: S
@@ -369,25 +488,26 @@ theorem skStepBaseG : SkStepAtG Om1 := by
   obtain ⟨E, hE, -⟩ := skStepBase _ hf'
   exact ⟨E, (skAtG_iff hOE E).2 hE, fun _ h h' => absurd h'.1 (not_le.2 h)⟩
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (by skStepSuccWG: SkAtG, like SkAt, has no start condition of the system over G at the package,
+so the step would have to extend an ARBITRARY digit system; NO EVIDENCE against)
 SIZE: M
 ℓ = ℓ' + Ω₁ (skStepSucc's proof with (rdc, gtc, ε_{Ω₁+1}) ↦ (glR, glG, G)). -/
 theorem skStepSuccG (hLv : SkLvDatumAllG) : ∀ ℓ, SkLevG ℓ → ShSuccG ℓ → SkStepAtG ℓ := by
   sorry
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (by skStepPowWG; same reason as skStepSuccG)
 SIZE: M
 ℓ = P + Ω₁^{e+1} (skStepPow's proof, same substitution). -/
 theorem skStepPowG (hLv : SkLvDatumAllG) : ∀ ℓ, SkLevG ℓ → ShPow ℓ → SkStepAtG ℓ := by
   sorry
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (by skStepCoefLimWG; same reason as skStepSuccG)
 SIZE: M
 ℓ = P + Ω₁^e·c, c < Ω₁ limit (skStepCoefLim's proof, same substitution). -/
 theorem skStepCoefLimG (hLv : SkLvDatumAllG) : ∀ ℓ, SkLevG ℓ → ShCoefLim ℓ → SkStepAtG ℓ := by
   sorry
 
-/-- STATUS: OPEN
+/-- STATUS: REPLACED (by skStepExpLimWG; same reason as skStepSuccG)
 SIZE: M
 ℓ = P + Ω₁^e, e limit; NEW cases e = φ(a, b) ≥ ε_{Ω₁+1} (Ω₁^e = e): the union along the Veblen fundamental
 sequence read by glR (b limit: over b' < b; b = b'+1 or 0 with a = a'+1: ω-chain of φ(a', ·)-iterates;
@@ -395,7 +515,7 @@ a limit: over a' < a; cofinality ω or Ω₁; codes Gl.glCfn). -/
 theorem skStepExpLimG (hLv : SkLvDatumAllG) (hG : SkDigitGateG) : ∀ ℓ, SkLevG ℓ → ShExpLim ℓ → SkStepAtG ℓ := by
   sorry
 
-/-- STATUS: REDUCED (skShapeG, skStepBaseG, skStepSuccG, skStepPowG, skStepExpLimG, skStepCoefLimG, skLvDatumG)
+/-- STATUS: REPLACED (by skStepWG; it rests on the REPLACED SkAtG steps)
 SIZE: M -/
 theorem skStepG : ∀ ℓ, SkLevG ℓ → SkStepAtG ℓ := by
   intro ℓ hℓ
@@ -412,7 +532,7 @@ noncomputable def skGG (ℓ : Ordinal.{0}) (f : ∀ ℓ' : Ordinal.{0}, ℓ' < �
 
 noncomputable def skFG : Ordinal.{0} → SkEnt := Ordinal.lt_wf.fix skGG
 
-/-- STATUS: REDUCED (skStepG)
+/-- STATUS: REPLACED (by skFamWG; it rests on skStepG)
 SIZE: M
 one generic induction over every level ℓ < G (gam41's skFam with SkLev ↦ SkLevG). -/
 theorem skFamG : ∃ F : Ordinal.{0} → SkEnt,
@@ -430,12 +550,106 @@ theorem skFamG : ∃ F : Ordinal.{0} → SkEnt,
     rw [heq, hG]
     exact ⟨hsp.1, fun ℓ' h h' => hsp.2 ℓ' h h'⟩
 
-/-- STATUS: REDUCED (skFamG)
+/-! ### The (A2) induction on the corrected entry predicate `SkAtWG` (round 117, leaf reg2) -/
+
+/-- The corrected (A2) entry predicate: `Wn.WnAt` (package at `ℓ` read `glR ℓ x`, gate `≤ glG ℓ`, every
+`ε`-number above the gate is above `glG ℓ`, the system is a start over `G` at the package for the base `Wn.wnGW`). -/
+def SkAtWG (ℓ : Ordinal.{0}) (E : SkEnt) : Prop := Wn.WnAt ℓ E.1 E.2.down
+
+def SkCohWG (ℓ : Ordinal.{0}) (f : ∀ ℓ' : Ordinal.{0}, ℓ' < ℓ → SkEnt) : Prop :=
+  (∀ ℓ' (h : ℓ' < ℓ), SkLevG ℓ' → SkAtWG ℓ' (f ℓ' h)) ∧
+    ∀ ℓ'' ℓ' (h'' : ℓ'' < ℓ) (h' : ℓ' < ℓ), ℓ'' < ℓ' → SkLevG ℓ'' → SkLevG ℓ' → SkExt (f ℓ'' h'') (f ℓ' h')
+
+def SkStepAtWG (ℓ : Ordinal.{0}) : Prop :=
+  ∀ f, SkCohWG ℓ f → ∃ E, SkAtWG ℓ E ∧ ∀ ℓ' (h : ℓ' < ℓ), SkLevG ℓ' → SkExt (f ℓ' h) E
+
+/-- STATUS: PROVED (definitions)
+SIZE: S
+SkAtWG ℓ E ⇒ SkAtG ℓ E (the corrected entry is an entry of reg1's family). -/
+theorem skAtWG_G {ℓ : Ordinal.{0}} {E : SkEnt} (h : SkAtWG ℓ E) : SkAtG ℓ E :=
+  ⟨h.1, h.2.1, h.2.2.1, h.2.2.2.1⟩
+
+/-- STATUS: PROVED (Wn.wnAt_base)
+SIZE: S
+the entry at ℓ = Ω₁ for SkAtWG: Hn.hnPk1 and Hg.hgU (Hg.hgU is a start over Wn.wnGW Hn.hnL1, Wn.wnU_shape). -/
+theorem skStepBaseWG : SkStepAtWG Om1 := fun _ _ =>
+  ⟨(Hn.hnPk1, ULift.up Hg.hgU), Wn.wnAt_base, fun _ h hl => absurd hl.1 (not_le.2 h)⟩
+
+/-- STATUS: PROVED (Wn.wnSucc_at, Wn.wnSucc_ext, Wn.wnSucc_ext_lt)
+SIZE: M
+ℓ = ℓ' + Ω₁ < G: package Hn.HnPk.succ, G-system = the union over G (Wn.wnGW) started at the system at ℓ'. -/
+theorem skStepSuccWG : ∀ ℓ, SkLevG ℓ → ShSuccG ℓ → SkStepAtWG ℓ := by
+  rintro ℓ hℓ ⟨ℓ', hℓ', rfl⟩ f ⟨hat, hext⟩
+  have hlt : ℓ' < ℓ' + Om1 := lt_add_of_pos_right _ Wh.wh_Om1_pos
+  have hat' := hat ℓ' hlt hℓ'
+  refine ⟨((f ℓ' hlt).1.succ, ULift.up (Wn.wnSuccV hat')), Wn.wnSucc_at hℓ'.2.1 hℓ'.2.2 hat',
+    fun ℓ'' h'' hℓ'' => ?_⟩
+  have hle : ℓ'' ≤ ℓ' := not_lt.1 fun h => absurd h'' (not_lt.2 (Wh.wh_lev_succ_le hℓ'.2.1 hℓ''.2.1 h))
+  rcases hle.lt_or_eq with hl | rfl
+  · exact Wn.wnSucc_ext_lt hℓ'.2.1 hℓ'.2.2 hat' hl hℓ''.2.1 (hat ℓ'' h'' hℓ'') (hext ℓ'' ℓ' h'' hlt hl hℓ'' hℓ')
+  · exact Wn.wnSucc_ext hat'
+
+/-- STATUS: OPEN
+SIZE: M
+ℓ = P + Ω₁^{e+1} < G, for SkAtWG (gam41's skStepPowW with (rdc, gtc, whGW) ↦ (glR, glG, wnGW); the union over
+the prefixes P + Ω₁^e·v, v < Ω₁, uses the gate-lowering extension of leaf gam42 (round 117)). -/
+theorem skStepPowWG : ∀ ℓ, SkLevG ℓ → ShPow ℓ → SkStepAtWG ℓ := by
+  sorry
+
+/-- STATUS: OPEN
+SIZE: M
+ℓ = P + Ω₁^e·c < G, c < Ω₁ limit, for SkAtWG (gam41's skStepCoefLimW, same substitution; gam42's extension). -/
+theorem skStepCoefLimWG : ∀ ℓ, SkLevG ℓ → ShCoefLim ℓ → SkStepAtWG ℓ := by
+  sorry
+
+/-- STATUS: OPEN
+SIZE: M
+ℓ = P + Ω₁^e < G, e limit, for SkAtWG; besides gam41's cases the exponents e = φ(a, b) ≥ ε_{Ω₁+1} (Ω₁^e = e):
+the union along the Veblen fundamental sequence read by glR (cofinality ω or Ω₁; codes Gl.glCfn). -/
+theorem skStepExpLimWG : ∀ ℓ, SkLevG ℓ → ShExpLim ℓ → SkStepAtWG ℓ := by
+  sorry
+
+/-- STATUS: REDUCED (skShapeG, skStepBaseWG, skStepSuccWG, skStepPowWG, skStepExpLimWG, skStepCoefLimWG)
+SIZE: M -/
+theorem skStepWG : ∀ ℓ, SkLevG ℓ → SkStepAtWG ℓ := by
+  intro ℓ hℓ
+  rcases skShapeG ℓ hℓ with h | h | h | h | h
+  · subst h; exact skStepBaseWG
+  · exact skStepSuccWG ℓ hℓ h
+  · exact skStepPowWG ℓ hℓ h
+  · exact skStepExpLimWG ℓ hℓ h
+  · exact skStepCoefLimWG ℓ hℓ h
+
+noncomputable def skGWG (ℓ : Ordinal.{0}) (f : ∀ ℓ' : Ordinal.{0}, ℓ' < ℓ → SkEnt) : SkEnt := by
+  classical
+  exact if h : SkLevG ℓ ∧ SkCohWG ℓ f then Classical.choose (skStepWG ℓ h.1 f h.2) else (Hn.hnPk1, ULift.up Ho.hoUf)
+
+noncomputable def skFWG : Ordinal.{0} → SkEnt := Ordinal.lt_wf.fix skGWG
+
+/-- STATUS: REDUCED (skStepWG)
+SIZE: M
+one generic induction over every level ℓ < G on SkAtWG. -/
+theorem skFamWG : ∃ F : Ordinal.{0} → SkEnt,
+    ∀ ℓ, SkLevG ℓ → SkAtWG ℓ (F ℓ) ∧ ∀ ℓ', ℓ' < ℓ → SkLevG ℓ' → SkExt (F ℓ') (F ℓ) := by
+  refine ⟨skFWG, fun ℓ => ?_⟩
+  induction ℓ using WellFoundedLT.induction with
+  | _ ℓ ih =>
+    intro hℓ
+    have hcoh : SkCohWG ℓ (fun ℓ' _ => skFWG ℓ') :=
+      ⟨fun ℓ' h h' => (ih ℓ' h h').1, fun ℓ'' ℓ' _ h' hlt h1 h2 => (ih ℓ' h' h2).2 ℓ'' hlt h1⟩
+    have heq : skFWG ℓ = skGWG ℓ (fun ℓ' _ => skFWG ℓ') := Ordinal.lt_wf.fix_eq skGWG ℓ
+    have hsp := Classical.choose_spec (skStepWG ℓ hℓ (fun ℓ' _ => skFWG ℓ') hcoh)
+    have hG : skGWG ℓ (fun ℓ' _ => skFWG ℓ') = Classical.choose (skStepWG ℓ hℓ (fun ℓ' _ => skFWG ℓ') hcoh) := by
+      unfold skGWG; rw [dif_pos ⟨hℓ, hcoh⟩]
+    rw [heq, hG]
+    exact ⟨hsp.1, fun ℓ' h h' => hsp.2 ℓ' h h'⟩
+
+/-- STATUS: REDUCED (skFamWG; was REDUCED (skFamG))
 SIZE: M -/
 theorem skSysAllG : ∀ ℓ, SkLevG ℓ → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.gcG 0 + 1) ∧ V.γ ≤ Gl.glG ℓ := by
   intro ℓ hℓ
-  obtain ⟨F, hF⟩ := skFamG
-  exact ⟨(F ℓ).2.down, (hF ℓ hℓ).1.2.2.1, (hF ℓ hℓ).1.2.2.2⟩
+  obtain ⟨F, hF⟩ := skFamWG
+  exact ⟨(F ℓ).2.down, (hF ℓ hℓ).1.2.2.1, (hF ℓ hℓ).1.2.2.2.1⟩
 
 /-- STATUS: PROVED (Gl.glBn_spec, Gf.Om1_lt_eW, Rj.rj_Om1_inE)
 SIZE: S
@@ -447,11 +661,10 @@ theorem skLevG_Bn (n : ℕ) : SkLevG (Gl.glBn n) := by
   have h := opow_dvd_opow ω hO
   rwa [Rj.rj_Om1_inE, hInE] at h
 
-/-- STATUS: OPEN
+/-- STATUS: PROVED (Wn.wnGateBnK: glBn n is a code over Γ₀ with the atom G, so glG (glBn n) < Γ₀ ≤ K)
 SIZE: S
-the gate of the cofinal levels is small: glG (glBn n) < K (leaves ω, 1; expected glG (glBn n) ≤ ω). -/
-theorem skGateBn (S : InaccSeq.{0}) : ∀ n, Gl.glG (Gl.glBn n) < Td.tdK S := by
-  sorry
+the gate of the cofinal levels is small: glG (glBn n) < K. -/
+theorem skGateBn (S : InaccSeq.{0}) : ∀ n, Gl.glG (Gl.glBn n) < Td.tdK S := Wn.wnGateBnK S
 
 /-- STATUS: REDUCED (skSysAllG, skLevG_Bn, skGateBn)
 SIZE: M
@@ -466,27 +679,77 @@ theorem skSysA2Lev (S : InaccSeq.{0}) : ∀ n, ∃ V : Hg.HgVD, V.B = veblen (Gl
 def SkPk3 (S : InaccSeq.{0}) (n : ℕ) : Prop :=
   ∃ V : Hg.HgVD, V.B = veblen (Wj.wjT n) (Gc.gcG 0 + 1) ∧ V.γ < Td.tdK S
 
+/-! ### (A3) on the new level datum (round 117, leaf reg2) -/
+
+/-- STATUS: PROVED (Wn.wnHnLv_lt_T0, Wn.wnHnLv_noRead)
+SIZE: S
+REFUTE-FIRST of the old datum: every Hn.HnLv lies below t₀ and never reads ε_{Γ_{x+1}+1}. -/
+theorem skA3NoBand : (∀ Λ : Hn.HnLv, Λ.L < Wj.wjT 0) ∧
+    ∀ (Λ : Hn.HnLv) (x : Ordinal.{0}), InE x → x < Om1 → Λ.l x ≠ eN (lgG x) :=
+  ⟨Wn.wnHnLv_lt_T0, fun Λ _ hx hx1 => Wn.wnHnLv_noRead Λ hx hx1⟩
+
+/-- STATUS: PROVED (Wn.wnG_notRange, Wn.wnA3_bound)
+SIZE: S
+at L > G: G ∉ range φ(L, ·) (no start over G as in (A1)/(A2)); φ(L, G+1) = hdNx L (φ(L, G)). -/
+theorem skA3NoGBase : ∀ L, Gc.gcG 0 < L →
+    ¬ Lu.LuP L (Gc.gcG 0) ∧ veblen L (Gc.gcG 0 + 1) = Hd.hdNx L (veblen L (Gc.gcG 0)) :=
+  fun L hL => ⟨Wn.wnG_notRange hL, Wn.wnA3_bound L⟩
+
+/-- STATUS: PROVED (Wn.wnLv3T0)
+SIZE: S
+NON-VACUITY of the (A3) datum: ∃ Λ : WnLv3, L = t₀, gate 0, reading ε_{Γ_{x+1}+1}. -/
+theorem skA3Datum0 : ∃ Λ : Wn.WnLv3, Λ.L = Wj.wjT 0 ∧ Λ.g = 0 ∧
+    ∀ x, InE x → x < Om1 → Λ.l x = eN (lgG x) :=
+  ⟨Wn.wnLv3T0, rfl, rfl, fun _ hx hx1 => Wn.wnLv3T0_l hx hx1⟩
+
+/-- The (A3) invariant at `t_n` with the FULL package (`Wn.WnEnt3`). -/
+def SkPk3W (S : InaccSeq.{0}) (n : ℕ) : Prop := Wn.WnEnt3 S n
+
+/-- STATUS: PROVED (Wn.wnEnt3_sys)
+SIZE: S
+the full invariant gives the old one: SkPk3W S n ⇒ SkPk3 S n. -/
+theorem skPk3_of_W (S : InaccSeq.{0}) (n : ℕ) (h : SkPk3W S n) : SkPk3 S n := Wn.wnEnt3_sys h
+
 /-- STATUS: OPEN
 SIZE: L
-the first level above G: t₀ = ε_{G+1}; system φ(ε_{G+1}, G+1) (needs a level datum with the atom G read
-Γ_{x+1} and readings above Γ_{x+1}: Hn.HnLv.l_lt forbids them; a new level-datum structure). -/
-theorem skSysA3Lev0 (S : InaccSeq.{0}) : SkPk3 S 0 := by
+the (A3) package at t₀ = ε_{G+1} (Wn.WnPk3 on a datum with L = t₀, e.g. Wn.wnLv3T0: a step at every pseudo-base
+of level t₀) and the pseudo-base φ(t₀, G) of level t₀ with gate < K and a system starting it (Wn.wnQ3_bounds gives
+its bound fields). -/
+theorem skSysA3Lev0W (S : InaccSeq.{0}) : SkPk3W S 0 := by
   sorry
 
-/-- STATUS: SUSPECT (as stated: the invariant SkPk3 holds only the system; the step from t_n to
-φ(t_n, 0) needs the level package at t_n — strengthen SkPk3 to the A3 analogue of SkEnt when the datum exists)
+/-- STATUS: OPEN
+SIZE: L
+t_n ↦ t_{n+1} = φ(t_n, 0) with the full package as invariant: the (A3) level induction over the codes in
+(t_n, t_{n+1}] (the (A2) induction one level up: atoms {Ω₁, G}, readings Γ_{x+1} < ℓ(x) < Γ_{x+2}), then the
+pseudo-base φ(t_{n+1}, G) (reached by the offset recursion of level t_{n+1} along the second argument up to G). -/
+theorem skSysA3StepW (S : InaccSeq.{0}) : ∀ n, SkPk3W S n → SkPk3W S (n + 1) := by
+  sorry
+
+/-- STATUS: REDUCED (skSysA3Lev0W, skSysA3StepW)
+SIZE: L -/
+theorem skSysA3LevW (S : InaccSeq.{0}) : ∀ n, SkPk3W S n := by
+  intro n
+  induction n with
+  | zero => exact skSysA3Lev0W S
+  | succ n ih => exact skSysA3StepW S n ih
+
+/-- STATUS: REDUCED (skSysA3Lev0W, skPk3_of_W; was OPEN L)
+SIZE: L
+the first level above G: t₀ = ε_{G+1}; system φ(ε_{G+1}, G+1). -/
+theorem skSysA3Lev0 (S : InaccSeq.{0}) : SkPk3 S 0 := skPk3_of_W S 0 (skSysA3Lev0W S)
+
+/-- STATUS: REPLACED (by skSysA3StepW; SUSPECT CONFIRMED: the invariant SkPk3 carries no level datum, so the
+hypothesis gives nothing toward the package at t_{n+1}; Lean fact behind it: skA3NoGBase, the (A3) system is the step
+of the level package at the pseudo-base φ(t_n, G), which SkPk3 does not hold.  NO EVIDENCE that it is false)
 SIZE: M
 t_n ↦ t_{n+1} = φ(t_n, 0): the Veblen-exponent union (skStepExpLimG one level up, atoms {Ω₁, G}). -/
 theorem skSysA3Step (S : InaccSeq.{0}) : ∀ n, SkPk3 S n → SkPk3 S (n + 1) := by
   sorry
 
-/-- STATUS: REDUCED (skSysA3Lev0, skSysA3Step)
+/-- STATUS: REDUCED (skSysA3LevW, skPk3_of_W; was REDUCED (skSysA3Lev0, skSysA3Step))
 SIZE: L -/
-theorem skSysA3Lev (S : InaccSeq.{0}) : ∀ n, SkPk3 S n := by
-  intro n
-  induction n with
-  | zero => exact skSysA3Lev0 S
-  | succ n ih => exact skSysA3Step S n ih
+theorem skSysA3Lev (S : InaccSeq.{0}) : ∀ n, SkPk3 S n := fun n => skPk3_of_W S n (skSysA3LevW S n)
 
 /-- STATUS: REDUCED (Wj.wjA3Cof, skSysA3Lev)
 SIZE: L
@@ -640,7 +903,8 @@ SIZE: M
 ∀ ℓ (Ω₁ ≤ ℓ, Ω₁ ∣ ℓ, ℓ < ε_{Ω₁+1}) ∃ level datum Λ: L = ℓ, l(x) = rdc ℓ x above g ≤ gtc ℓ. -/
 theorem skLvDatum : SkLvDatumAll := skLvOfGate skDigitGate skReadExact
 
-/-- STATUS: REDUCED (skShape, skStepBaseW, skStepSuccW, skStepPowW, skStepExpLimW, skStepCoefLimW)
+/-- STATUS: REPLACED (round 117: by skStepW2 on SkCohW2; its leaves skStepPowW / skStepExpLimW / skStepCoefLimW are
+REPLACED; not used)
 SIZE: M
 ∀ ℓ: the step at ℓ for SkAtW (every coherent family below ℓ extends to ℓ). -/
 theorem skStep : ∀ ℓ, SkLev ℓ → SkStepAtW ℓ := by
@@ -652,31 +916,13 @@ theorem skStep : ∀ ℓ, SkLev ℓ → SkStepAtW ℓ := by
   · exact skStepExpLimW ℓ hℓ h
   · exact skStepCoefLimW ℓ hℓ h
 
-/-- The recursion step used by `skFam`. -/
-noncomputable def skG (ℓ : Ordinal.{0}) (f : ∀ ℓ' : Ordinal.{0}, ℓ' < ℓ → SkEnt) : SkEnt := by
-  classical
-  exact if h : SkLev ℓ ∧ SkCohW ℓ f then Classical.choose (skStep ℓ h.1 f h.2) else (Hn.hnPk1, ULift.up Ho.hoUf)
-
-/-- The family built by well-founded recursion. -/
-noncomputable def skF : Ordinal.{0} → SkEnt := Ordinal.lt_wf.fix skG
-
-/-- STATUS: REDUCED (skStep)
+/-- STATUS: REDUCED (skStepOm1W2; Wm.wmFam on SkCohW2, Wm.wmExtE_old; statement unchanged)
 SIZE: M
 ∃ F: ∀ ℓ (SkLev): F ℓ at ℓ (SkAtW) ∧ ∀ ℓ' < ℓ (SkLev): F ℓ extends F ℓ'  (one generic induction over ℓ). -/
 theorem skFam : ∃ F : Ordinal.{0} → SkEnt,
-    ∀ ℓ, SkLev ℓ → SkAtW ℓ (F ℓ) ∧ ∀ ℓ', ℓ' < ℓ → SkLev ℓ' → SkExt (F ℓ') (F ℓ) := by
-  refine ⟨skF, fun ℓ => ?_⟩
-  induction ℓ using WellFoundedLT.induction with
-  | _ ℓ ih =>
-    intro hℓ
-    have hcoh : SkCohW ℓ (fun ℓ' _ => skF ℓ') :=
-      ⟨fun ℓ' h h' => (ih ℓ' h h').1, fun ℓ'' ℓ' _ h' hlt h1 h2 => (ih ℓ' h' h2).2 ℓ'' hlt h1⟩
-    have heq : skF ℓ = skG ℓ (fun ℓ' _ => skF ℓ') := Ordinal.lt_wf.fix_eq skG ℓ
-    have hsp := Classical.choose_spec (skStep ℓ hℓ (fun ℓ' _ => skF ℓ') hcoh)
-    have hG : skG ℓ (fun ℓ' _ => skF ℓ') = Classical.choose (skStep ℓ hℓ (fun ℓ' _ => skF ℓ') hcoh) := by
-      unfold skG; rw [dif_pos ⟨hℓ, hcoh⟩]
-    rw [heq, hG]
-    exact ⟨hsp.1, fun ℓ' h h' => hsp.2 ℓ' h h'⟩
+    ∀ ℓ, SkLev ℓ → SkAtW ℓ (F ℓ) ∧ ∀ ℓ', ℓ' < ℓ → SkLev ℓ' → SkExt (F ℓ') (F ℓ) :=
+  ⟨Wm.wmF _ skStepOm1W2, fun ℓ hℓ => ⟨(Wm.wmFam skStepOm1W2 ℓ hℓ hℓ.2.2).1,
+    fun ℓ' h h' => Wm.wmExtE_old ((Wm.wmFam skStepOm1W2 ℓ hℓ hℓ.2.2).2 ℓ' h h')⟩⟩
 
 /-- STATUS: REDUCED (skFam)
 SIZE: M
@@ -686,7 +932,7 @@ theorem skSysAll : ∀ ℓ, SkLev ℓ → ∃ V : Hg.HgVD, V.B = veblen ℓ (Gc.
   obtain ⟨F, hF⟩ := skFam
   exact ⟨(F ℓ).2.down, (hF ℓ hℓ).1.2.2.1, (hF ℓ hℓ).1.2.2.2.1⟩
 
-/-- STATUS: REDUCED (skSysAll, skCofLev)
+/-- STATUS: REDUCED (skSysAll, skCofLev; i.e. only skStepOm1W2 — Wm.wmSysA1)
 SIZE: M
 (A1) ∀ B < φ(ε_{Ω₁+1}, G+1) ∃ system V: B ≤ B_V, γ_V < K. -/
 theorem skSysA1 (S : InaccSeq.{0}) : ∀ B, B < veblen Gf.gfE (Gc.gcG 0 + 1) →
