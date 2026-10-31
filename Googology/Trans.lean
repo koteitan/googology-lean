@@ -1879,3 +1879,7 @@ import Googology.Trans.PoR.InaccPsi.R2.WcQ
 import Googology.Trans.PoR.InaccPsi.R2.WcSupLo
 import Googology.Trans.PoR.InaccPsi.R2.WdSplit
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
+import Googology.Trans.PoR.InaccPsi.R2.SkFXRegB
+import Googology.Trans.PoR.InaccPsi.R2.SkRXTop
+import Googology.Trans.PoR.InaccPsi.R2.SkEXLeaf
+import Googology.Trans.PoR.InaccPsi.R2.SkSXPi
