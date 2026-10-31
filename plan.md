@@ -7,7 +7,7 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
     - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
-      - done (only S assumed): A1 and A2 closed; frontier F_A2 = sup_n ι(Γ(φ(glBn n, G+1))·ω), G = Γ_{Ω₁+1}. 107 axioms, none new.
+      - done (only S assumed): A1 and A2 closed; frontier F_A2 = sup_n ι(Γ(φ(glBn n, G+1))·ω), G = Γ_{Ω₁+1}. 109 axioms, none new.
       - the gap WwGap (part of WuGap) is proved, so the old road wfRoad is void; the supply forms are repaired with ϑ-nodes (WwE) in the new road wwRoadZ.
       - road wwRoadZ (hyp.: UPPER, LOWER, cap past F_A2; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; WwRealB; WwVisGen at m*, L(n+1)): ν_C = L(ω+1).
       - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): 44 sorry leaves: OPEN 25 (M 1, L 24), SUSPECT 1 (M), REFUTED 1 (M), REPLACED 17.
