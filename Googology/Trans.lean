@@ -1896,3 +1896,16 @@ import Googology.Trans.PoR.InaccPsi.R2.WhSucc
 import Googology.Trans.PoR.InaccPsi.R2.WhRefute
 import Googology.Trans.PoR.InaccPsi.R2.WjSplit
 import Googology.Trans.PoR.InaccPsi.R2.WjVeb
+import Googology.Trans.PoR.InaccPsi.R2.WkLift
+import Googology.Trans.PoR.InaccPsi.R2.WkRead
+import Googology.Trans.PoR.InaccPsi.R2.WkCarry
+import Googology.Trans.PoR.InaccPsi.R2.WlLow
+import Googology.Trans.PoR.InaccPsi.R2.WmLow
+import Googology.Trans.PoR.InaccPsi.R2.WmPkL
+import Googology.Trans.PoR.InaccPsi.R2.WmArith
+import Googology.Trans.PoR.InaccPsi.R2.WmSys
+import Googology.Trans.PoR.InaccPsi.R2.WmStep
+import Googology.Trans.PoR.InaccPsi.R2.WmA1
+import Googology.Trans.PoR.InaccPsi.R2.WnLv
+import Googology.Trans.PoR.InaccPsi.R2.WnSucc
+import Googology.Trans.PoR.InaccPsi.R2.WnLv3
