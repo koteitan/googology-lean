@@ -1883,3 +1883,16 @@ import Googology.Trans.PoR.InaccPsi.R2.SkFXRegB
 import Googology.Trans.PoR.InaccPsi.R2.SkRXTop
 import Googology.Trans.PoR.InaccPsi.R2.SkEXLeaf
 import Googology.Trans.PoR.InaccPsi.R2.SkSXPi
+import Googology.Trans.PoR.InaccPsi.R2.WfCarry
+import Googology.Trans.PoR.InaccPsi.R2.WfReal
+import Googology.Trans.PoR.InaccPsi.R2.WfRoad
+import Googology.Trans.PoR.InaccPsi.R2.WfWin
+import Googology.Trans.PoR.InaccPsi.R2.WfRefute
+import Googology.Trans.PoR.InaccPsi.R2.WgTh
+import Googology.Trans.PoR.InaccPsi.R2.WgFam
+import Googology.Trans.PoR.InaccPsi.R2.WhLeaf
+import Googology.Trans.PoR.InaccPsi.R2.WhGW
+import Googology.Trans.PoR.InaccPsi.R2.WhSucc
+import Googology.Trans.PoR.InaccPsi.R2.WhRefute
+import Googology.Trans.PoR.InaccPsi.R2.WjSplit
+import Googology.Trans.PoR.InaccPsi.R2.WjVeb
