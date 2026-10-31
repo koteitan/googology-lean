@@ -3,6 +3,9 @@ import Googology.Trans.PoR.InaccPsi.R2.WcSupLo
 import Googology.Trans.PoR.InaccPsi.R2.VrRoad
 import Googology.Trans.PoR.InaccPsi.R2.TyRng
 import Googology.Trans.PoR.InaccPsi.R2Skel.SkF
+import Googology.Trans.PoR.InaccPsi.R2.WfRoad
+import Googology.Trans.PoR.InaccPsi.R2.WfWin
+import Googology.Trans.PoR.InaccPsi.R2.WfRefute
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -11,9 +14,16 @@ import Googology.Trans.PoR.InaccPsi.R2Skel.SkF
 `β(ν) = (ν − λ) + ω²` (the window chosen at the isolated uncovered Range restart `ν`), `u' = υ_{μ+1}`,
 `X = ω^{ω^{u'+1}+1}` (`Wc.wcX`), `m(z) = cdOff(cdExp z)`, `π = π_{υ_μ, υ_λ}`.
 
-Top node `skSup`: exactly `h0 ∧ ∀ n, hn n` of `Wd.wdRoadL`.  Every node is tagged STATUS / SIZE in its docstring.
-`sorry` occurs only as the whole proof of OPEN / SUSPECT leaves.  Refuter round: `skPiT` PROVED; `skOffMapW`,
-`skImgF`, `skCarryOther` SUSPECT (free values of `π`, see the module `SkSXPi`).
+Round 116 (leaf "repair the supply road"): the road is replaced.  `Wf.wfRoad` has the conclusion of `Wd.wdRoadL`
+with `h0` / `hn` in the RESTRICTED form `Wf.WfVisGen` (the image clause of the carry only for decompositions with
+`Wf.WfR`: lo-leaves in `T^{υ_λ}[υ_μ]`, i.e. below `υ_μ` when below `υ_λ`); `Wf.wfVisGen_of_vr` shows the old
+statement implies the new one.  NEW top node `skSup`: `h0' ∧ ∀ n, hn' n` of `Wf.wfRoad`; `Root.skNuC` must apply
+`Wf.wfRoad` (same arguments) in place of `Wd.wdRoadL`.  The map data `SkMapP` has the restricted exponent clause.
+RESTATED nodes: `SkMapP`, `skOffMapW` (now PROVED by `Wf.wfOffMap`), `skImgF`, `skCarryWit`, `skCarryOther`,
+`skSupK`, `skGen`, `skVisK`, `skSup`.  NEW nodes: `skPiLo` (PROVED), `skSideRef` (PROVED negation).
+The SUSPECT reasons of the refuter (`SkSX.skSX_offMap_free`, `skSX_img_pi`, `skSX_sup_pi`) do not apply to the
+restated nodes (`Wf.wfR_skSX_excl`, `Wf.wfSup_lo`, `R2Skel.SkSX.skSX_notTB`).  This file imports the new `Wf`
+modules, so it can be checked only after the merge.  Every node is tagged STATUS / SIZE in its docstring.
 -/
 
 set_option autoImplicit false
@@ -43,12 +53,14 @@ def SkMu (S : InaccSeq.{0}) (μ : Ordinal.{0}) : Prop :=
 def SkWit (l ν : Ordinal.{0}) : Prop := ν = l + ω ^ ω ^ (upsilon (l + 1) + 1) + ω ^ 2
 
 /-- The map data at the witness window: bound, supply, `Sl.SlOff`, `f g = g'`, and the exponent condition
-`π(m z) ≤ m(f z)` at every low offset (`Vy.vyEQ_lo`). -/
+`π(m z) ≤ m(f z)` at every low offset with `m z ∈ T^{υ_λ}[υ_μ]` (RESTATED round 116: the restricted exponent
+clause; `Vy.vyEQ_lo`). -/
 def SkMapP (S : InaccSeq.{0}) (l μ : Ordinal.{0}) (f : Ordinal.{0} → Ordinal.{0}) (B : Ordinal.{0})
     (Os : Finset Ordinal.{0}) : Prop :=
   μ + B ≤ l ∧ ω ^ 2 ∣ B ∧ upsilon (μ + B) ≤ cdR S μ ∧ Sl.SlOff f Os B ∧
     (ω ^ ω ^ (upsilon (l + 1) + 1) ∈ Os → f (ω ^ ω ^ (upsilon (l + 1) + 1)) = ω ^ ω ^ (upsilon (μ + 1) + 1)) ∧
     ∀ z ∈ Os, 0 < z → ω ^ 2 ∣ z → cdOff (cdExp z) < upsilon (l + 1) →
+      cdOff (cdExp z) ∈ TB (upsilon l) (upsilon μ) →
       pi (upsilon μ) (upsilon l) (cdOff (cdExp z)) ≤ cdOff (cdExp (f z))
 
 /-! ## Shared leaves (content of the other parts of the road) -/
@@ -185,18 +197,28 @@ theorem skMu {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) :
   obtain ⟨μ, hR, h1, h2, hc, hω⟩ := skCodeCof (S := S) k γ hγ
   exact ⟨μ, h1, h2, hR, hc, hω, skRead0 μ hR hc hω⟩
 
-/-- STATUS: SUSPECT (refuter: at `z = ω^{υ_μ} ∈ Os` the exponent clause of `SkMapP` asks `π_{υ_μ,υ_λ}(υ_μ) < λ`,
-and `υ_μ ∉ T^{υ_λ}[υ_μ]`, where no axiom fixes `π`: independent of the axioms; `R2Skel.SkSX.skSX_offMap_free`)
+/-- STATUS: REDUCED (by `Wf.wfOffMap` and the shared leaf `skNu` only; round 116.  Was SUSPECT: the restricted exponent clause asks nothing
+at `z = ω^{υ_μ}` since `υ_μ ∉ T^{υ_λ}[υ_μ]`; `WcPiLo` restricted is the theorem `Wf.wfPiLo`; the side hypothesis
+`hside` of `Wc.wcSupLo` is REFUTED (`Wf.wfSide_false`) and not used: `Wf.wfOffMap` builds the block map on the blocks
+of every `Os` and derives the side conditions for that map)
 SIZE: M
-the map at the witness window: `Wc.wcSupLo` gives `B = X`, supply `υ_{μ+X} ≤ r(μ)`, `SlOff`, `f g = g'` from
-`WcRead0`; left: `WcPiLo` (`π(m z) < ω^{u'+1}` at the low offsets, see `skPiT`), `μ + X ≤ λ` (`λ` an ε-number
-above `μ`), the side conditions `hn`, `hCw`, `hside` of `Wc.wcQ_carry`, `g ∈ Os` (insert it)
-ν witness, SkMu(μ), υ_μ < υ_λ, Os ⊂ β ⇒ ∃ f B, SkMapP -/
-theorem skOffMapW {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : SkWit l ν) :
+ν witness, SkMu(μ), υ_μ < υ_λ, Os ⊂ β ⇒ ∃ f B, SkMapP (restricted) -/
+theorem skOffMapW {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (_hw : SkWit l ν) :
     ∀ μ, upsilon μ < upsilon l → SkMu S μ → ∀ Os : Finset Ordinal.{0}, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
-      ∃ f B, SkMapP S l μ f B Os := by sorry
+      ∃ f B, SkMapP S l μ f B Os := by
+  intro μ hμl hM Os _
+  have hlν : upsilon l < nuC := by
+    have h3 := h.2.2.2.2.1
+    have hk : Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}) ≤ nuC :=
+      ((Pp.ppL_lt_omega k).trans (Qq.qqL_lt_succ S)).le.trans skNu
+    exact (h.2.2.2.2.2.1.trans h3).trans_le hk
+  obtain ⟨f, B, h1, h2, h3, h4, h5, h6, -, -⟩ :=
+    Wf.wfOffMap (S := S) k h.2.1 hM.1 hM.2.1 hM.2.2.1 hM.2.2.2 hμl hlν Os
+  exact ⟨f, B, h1, h2, h3, h4, h5, h6⟩
 
-/-- STATUS: OPEN
+/-- STATUS: OPEN (round 116 note: Range of `μ + f z` needs its code; `Ls.lsCode_shift` gives it only for
+`f z ≤ υ_μ`, but `f z` runs up to `X > υ_{μ+1}` (at the witness `f g = g'`); `RzRest` needs `Rz.rzLam ≤ μ`, which
+`skMu` can supply by taking `γ ≥ υ(rzLam)` (`Ty.tyRz_lt_L`))
 SIZE: M
 LOWER at the inner restarts `μ + f(z)` (Range with `RzRest` like `Ty.tyInner_rng`; then the shared LOWER leaf)
 SkMapP ⇒ ∀ z ∈ Os, ω² | z ⇒ LOWER(μ + f z) -/
@@ -249,27 +271,26 @@ theorem skPiT {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) :
     exact lt_of_lt_of_le (Order.lt_add_one_iff.2 this) hσ
   · exact ⟨0, hτ.1, fun σ _ hB => absurd hB.2.2.2 h1⟩
 
-/-- STATUS: SUSPECT (refuter: at `E = lo p + D` (value `p + r = r`) it asks `π_{υ_μ,υ_λ}(p) + img D ≤ r(μ+f g)` for
-every `p < υ_λ`; for `p ∈ [υ_μ, υ_λ)`, `p ∉ T^{υ_λ}[υ_μ]` and no axiom fixes `π(p)`: independent of the axioms;
-`R2Skel.SkSX.skSX_img_pi`, `skSX_notTB`)
+/-- STATUS: OPEN (RESTATED round 116 with `Wf.WfR`; the refuter's SUSPECT reason is void here: the decomposition
+`lo p + D` with `p ∈ [υ_μ, υ_λ)` is excluded (`Wf.wfR_skSX_excl`), the allowed `lo p` ask only `p + img D ≤ r`
+(`Wf.wfSup_lo`), and every allowed lo-leaf has its image fixed by `pi_bijOn` (`Wf.wfImg_lo_mem`).  Proved cases for
+the map of `Wf.wfOffMap`: the witness decomposition (`Wf.wfR_Ew`, EQ) and the low ones `ub(z+ω+1) + lo(m z)`.
+Left: `sg` / `ub` / `tm` nodes with inner leaves, other splittings, and arbitrary maps with `SkMapP`.)
 SIZE: L
-the image clause of `Vr.VrCarry` for EVERY decomposition with offsets in `Os` (the witness one is `Vr.vrEQ_wit` /
-`Vy.vyEQ_wit`, the canonical low one `ub(z+ω+1) + lo(m z)` is `Vy.vyEQ_lo` with the exponent condition; left: the
-`sg` / `ub` / `tm` nodes with inner leaves, other splittings; needs `skPiT`)
-∀ E, WF(E), val(E) = r(λ+z), Os(E) ⇒ img_{μ,f}(E) ≤ r(μ+f z) -/
+∀ E, WF(E), val(E) = r(λ+z), Os(E), WfR(λ, μ, E) ⇒ img_{μ,f}(E) ≤ r(μ+f z) -/
 theorem skImgF {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : SkWit l ν) :
     ∀ μ, upsilon μ < upsilon l → SkMu S μ → ∀ (Os : Finset Ordinal.{0}) f B, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
       SkMapP S l μ f B Os → ∀ g ∈ Os, 0 < g → ω ^ 2 ∣ g →
         ∀ E : Vr.VrE, Vr.VrWF l (ν - l + ω ^ 2) E → Vr.vrVal l E = cdR S (l + g) → Vr.VrOs l Os E →
-          Vr.vrImg l μ f E ≤ cdR S (μ + f g) := by sorry
+          Wf.WfR l μ E → Vr.vrImg l μ f E ≤ cdR S (μ + f g) := by sorry
 
-/-- STATUS: REDUCED (from `skOffMapW`, `skLowerF`, `skBigF`, `skImgF`)
+/-- STATUS: REDUCED (from `skOffMapW`, `skLowerF`, `skBigF`, `skImgF`; RESTATED round 116: `Wf.WfCarry`)
 SIZE: L
-ν witness ⇒ the supply data and `VrCarry` at every `μ` of `skMu` -/
+ν witness ⇒ the supply data and `WfCarry` at every `μ` of `skMu` -/
 theorem skCarryWit {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : SkWit l ν) :
     ∀ μ, upsilon μ < upsilon l → SkMu S μ → ∀ Os : Finset Ordinal.{0}, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
       ∃ f B, μ + B ≤ l ∧ ω ^ 2 ∣ B ∧ upsilon (μ + B) ≤ cdR S μ ∧ Sl.SlOff f Os B ∧
-        Vr.VrCarry S l (ν - l + ω ^ 2) μ f B Os := by
+        Wf.WfCarry S l (ν - l + ω ^ 2) μ f B Os := by
   intro μ hμ hM Os hOs
   obtain ⟨f, B, hP⟩ := skOffMapW h hw μ hμ hM Os hOs
   refine ⟨f, B, hP.1, hP.2.1, hP.2.2.1, hP.2.2.2.1, fun g hg hg0 hgd => ⟨?_, ?_, ?_⟩⟩
@@ -277,8 +298,8 @@ theorem skCarryWit {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : SkW
   · exact skBigF h hw μ hμ hM Os f B hOs hP g hg hg0 hgd
   · exact skImgF h hw μ hμ hM Os f B hOs hP g hg hg0 hgd
 
-/-- STATUS: SUSPECT (refuter: its `Vr.VrCarry` contains the same image clause as `skImgF`, so it asks bounds on
-`π_{υ_μ,υ_λ}` at points of `[υ_μ, υ_λ)` that no axiom fixes; `R2Skel.SkSX.skSX_sup_pi`)
+/-- STATUS: OPEN (RESTATED round 116 with `Wf.WfCarry`; the refuter's SUSPECT reason (`skSX_sup_pi`) is void for the
+restricted image clause)
 SIZE: L
 the supply and carry at the other windows: offsets with codes `m z ≥ u₁` (leaves `υ_{λ+h'}` renamed to
 `υ_{μ+f h'}`), a supply past `X` (readings at the code levels `θ_{k+2}` beyond `WcRead0`)
@@ -286,35 +307,53 @@ the supply and carry at the other windows: offsets with codes `m z ≥ u₁` (le
 theorem skCarryOther {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hw : ¬ SkWit l ν) :
     ∀ μ, upsilon μ < upsilon l → SkMu S μ → ∀ Os : Finset Ordinal.{0}, (∀ d ∈ Os, d < ν - l + ω ^ 2) →
       ∃ f B, μ + B ≤ l ∧ ω ^ 2 ∣ B ∧ upsilon (μ + B) ≤ cdR S μ ∧ Sl.SlOff f Os B ∧
-        Vr.VrCarry S l (ν - l + ω ^ 2) μ f B Os := by sorry
+        Wf.WfCarry S l (ν - l + ω ^ 2) μ f B Os := by sorry
 
-/-- STATUS: REDUCED (from `skMu`, `skCarryWit`, `skCarryOther`)
+/-- STATUS: REDUCED (from `skMu`, `skCarryWit`, `skCarryOther`; RESTATED round 116)
 SIZE: L
-VrSup(λ, β(ν)) -/
-theorem skSupK {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Vr.VrSup S l (ν - l + ω ^ 2) := by
+WfSup(λ, β(ν)) -/
+theorem skSupK {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Wf.WfSup S l (ν - l + ω ^ 2) := by
   intro γ hγ Os hOs
   obtain ⟨μ, h1, h2, hM⟩ := skMu h γ hγ
   have hc : ∃ f B, μ + B ≤ l ∧ ω ^ 2 ∣ B ∧ upsilon (μ + B) ≤ cdR S μ ∧ Sl.SlOff f Os B ∧
-      Vr.VrCarry S l (ν - l + ω ^ 2) μ f B Os := by
+      Wf.WfCarry S l (ν - l + ω ^ 2) μ f B Os := by
     by_cases hw : SkWit l ν
     · exact skCarryWit h hw μ h2 hM Os hOs
     · exact skCarryOther h hw μ h2 hM Os hOs
   obtain ⟨f, B, hB, hd, hs, ho, hC⟩ := hc
   exact ⟨μ, f, B, hM.1, h1, h2, hB, hd, hs, ho, hC⟩
 
+/-- STATUS: PROVED (by `Wf.wfPiLo`; round 116)
+SIZE: S
+the exponent clause `WcPiLo` restricted to `T^{υ_λ}[υ_μ]` is a theorem:
+Bases(υ_μ, υ_λ), c ∈ T^{υ_λ}[υ_μ], c < Ω₁ ⇒ π(c) < ω^{υ_{μ+1}+1} -/
+theorem skPiLo {l μ c : Ordinal.{0}} (hB : Bases (upsilon μ) (upsilon l))
+    (hc : c ∈ TB (upsilon l) (upsilon μ)) (hc1 : c < Om1) :
+    pi (upsilon μ) (upsilon l) c < ω ^ (upsilon (μ + 1) + 1) :=
+  Wf.wfPiLo hB hc hc1
+
+/-- STATUS: PROVED (by `Wf.wfSide_false`; round 116; a REFUTATION recorded as a node)
+SIZE: S
+the side hypothesis `hside` of `Wc.wcQ_carry` / `Wc.wcSupLo` (bounds for EVERY block map `Q`) is false as soon as
+`Os` has an element `z ≠ g`; the old route `skOffMapW ← Wc.wcSupLo` was vacuous there -/
+theorem skSideRef {μ g : Ordinal.{0}} {Os : Finset Ordinal.{0}} (hz : ∃ z ∈ Os, z ≠ g) :
+    ¬ ∀ Q : Ordinal.{0} → Ordinal.{0}, ∀ z ∈ Os, z ≠ g →
+      ω ≤ Vy.vyMap Q z ∧ Vy.vyMap Q z < upsilon (μ + 2) ∧ upsilon (μ + Vy.vyMap Q z + ω + 1) < nuC :=
+  Wf.wfSide_false hz
+
 /-! ## Assembly -/
 
-/-- STATUS: REDUCED (from `skUp`, `skForm`, `skSupK`)
+/-- STATUS: REDUCED (from `skUp`, `skForm`, `skSupK`; RESTATED round 116)
 SIZE: L
-VrGen(λ, β(ν)) -/
-theorem skGen {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Vr.VrGen S l (ν - l + ω ^ 2) :=
+WfGen(λ, β(ν)) -/
+theorem skGen {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Wf.WfGen S l (ν - l + ω ^ 2) :=
   ⟨skUp h, skForm h, skSupK h⟩
 
-/-- STATUS: REDUCED (from `skWin`, `skGen`)
+/-- STATUS: REDUCED (from `skWin`, `skGen`; RESTATED round 116)
 SIZE: L
-∀ k, υ_λ = L(k) ⇒ VrVisGen(λ, L(k+1), υ_{L(k)+W(L(k))}) -/
+∀ k, υ_λ = L(k) ⇒ WfVisGen(λ, L(k+1), υ_{L(k)+W(L(k))}) -/
 theorem skVisK (k : ℕ) : ∀ l, IsRestartIdx l → Nc.ncL S (k : Ordinal.{0}) = upsilon l →
-    Vr.VrVisGen S l (Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}))
+    Wf.WfVisGen S l (Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}))
       (upsilon (Nc.ncL S (k : Ordinal.{0}) + Te.teW (Nc.ncL S (k : Ordinal.{0})))) := by
   intro l hl e ν h1 h2 h3 h4 h5 h6
   have hC : SkCtx S k l ν := ⟨hl, e, h1, h2, h3, h4, h5, h6⟩
@@ -322,12 +361,13 @@ theorem skVisK (k : ℕ) : ∀ l, IsRestartIdx l → Nc.ncL S (k : Ordinal.{0}) 
 
 /-- STATUS: REDUCED (from `skVisK`)
 SIZE: L
-h0 ∧ ∀ n, hn n  (the supply hypotheses of `Wd.wdRoadL`) -/
+NEW TOP (round 116; replaces the old top `h0 ∧ ∀ n, hn n` of `Wd.wdRoadL`, which implies it by
+`Wf.wfVisGen_of_vr`): h0' ∧ ∀ n, hn' n, the supply hypotheses of `Wf.wfRoad`; `Root.skNuC` applies `Wf.wfRoad`. -/
 theorem skSup :
     (∀ l, IsRestartIdx l → Nc.ncL S 0 = upsilon l →
-      Vr.VrVisGen S l (Nc.ncL S 1) (upsilon (Nc.ncL S 0 + Te.teW (Nc.ncL S 0)))) ∧
+      Wf.WfVisGen S l (Nc.ncL S 1) (upsilon (Nc.ncL S 0 + Te.teW (Nc.ncL S 0)))) ∧
     (∀ n : ℕ, ∀ l, IsRestartIdx l → Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) = upsilon l →
-      Vr.VrVisGen S l (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0}))
+      Wf.WfVisGen S l (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0}))
         (upsilon (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) + Te.teW (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))))) := by
   refine ⟨fun l hl e => ?_, fun n l hl e => skVisK (n + 1) l hl e⟩
   have h := skVisK (S := S) 0 l hl (by simpa using e)

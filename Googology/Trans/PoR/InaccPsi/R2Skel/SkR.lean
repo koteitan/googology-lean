@@ -5,6 +5,8 @@ import Googology.Trans.PoR.InaccPsi.R2.VtDynTop
 import Googology.Trans.PoR.InaccPsi.R2.RyNF
 import Googology.Trans.PoR.InaccPsi.R2.RxLv
 import Googology.Trans.PoR.InaccPsi.R2.RoW
+import Googology.Trans.PoR.InaccPsi.R2.WgFam
+import Googology.Trans.PoR.InaccPsi.R2.WgTh
 
 /-!
 # Skeleton, part "readings": the reading move `hν → Wd.WdThLow S`
@@ -15,7 +17,13 @@ Top node `skRead S : L(ω+1) ≤ ν_C → Wd.WdThLow S` (the hypothesis `hT` of 
 `M_W = Rn.rnMW = ψ_{Ω₂}(Ω_ω+Ω₂)`, `Y₃ = Ug.ugY`, `Γ = ggGam` (least strongly critical above `Ω₁`),
 `hν := L(ω+1) ≤ ν_C`, "window" = the hypotheses of `Wd.WdThLow` up to `ρ_λ < m_λ`.
 
-Every node's docstring starts with STATUS, SIZE, one line of math.  `sorry` only as the whole proof of an OPEN leaf.
+Every node's docstring starts with STATUS, SIZE, one line of math.  `sorry` only as the whole proof of an OPEN leaf
+or of a REFUTED node kept for the record.
+
+Round 110 (leaf read40): the refuted one-image top `skTopDyn` is replaced by the family law `skTopFam`
+(`Wg.WgTopFamAll`: one image `X̂_e(β)` per exponent `e` and base `β`); `skWallBase`, `skWallStep` take it as their
+hypothesis; `skThVal` is REDUCED to its lower half `skThLow` (the upper half `skThUp` is `Wg.wgTheta_le`).
+This file imports the new modules `R2.WgFam`, `R2.WgTh`: it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -139,7 +147,8 @@ theorem skThCof (S : InaccSeq.{0}) :
   rw [← hdeq]
   exact psi_lt_psi_of_mem (InR_Om_succ 1) hlt hmem
 
-/-- STATUS: REFUTED (SkRX.skrxTopDynAll_false: one image X̂ for e = 0 and e = 1 at k = 0 is impossible, SkRX.skrxDyn01)
+/-- STATUS: REFUTED (SkRX.skrxTopDynAll_false: one image X̂ for e = 0 and e = 1 at k = 0 is impossible, SkRX.skrxDyn01);
+REPLACED by skTopFam (no node uses it any more)
 SIZE: M
 `∀ k, ∀ restart λ, A own, ψ₁(A) = ρ_λ : ∃ X̂ : base ↦ image, ∀ e < Ω₂ in H_λ, ∀ β ≥ 0 :
 Θ(ψ₂(β + Ω₂^{Ω_{k+3}+e})) = ψ₁(Â_β + Ω₁^{X̂(β) + Θ e})` (one image per sub-base; Vx.vxNoCompat forbids a constant
@@ -147,33 +156,70 @@ X̂; known only at X = Y₃, b = Ω₃: Vt.vtTopY3_all_piecewise). -/
 theorem skTopDyn (S : InaccSeq.{0}) : TopDynAll S := by
   sorry
 
-/-- STATUS: SUSPECT (vacuous: its hypothesis TopDynAll is refuted, SkRX.skrxTopDynAll_false)
-SIZE: L
-`TopDynAll ∧ hν ⇒ every atom ψ₂(Y₃) ≤ s < ψ₂(Ω₄) moves: MvD s, B_n s ∈ At_{λ'}, Θ_{λ'}(B_n s) = B_n Θ_λ(s)`
-(first block past the Y₃ wall; needs the Uq prefixes / Uu level system with the bound as a field and the image
-Vb.vbT, and vqStepA ported to VtTopDyn).  L: no Lean statement of the level system past Y₃ exists yet. -/
-theorem skWallBase (S : InaccSeq.{0}) : TopDynAll S → Nc.ncL S (ω + 1) ≤ nuC → WallBelow S (lev S 0) := by
+/-- STATUS: OPEN
+SIZE: M
+`∀ k, ∀ restart λ, A own, ψ₁(A) = ρ_λ, ∀ code e < Ω₂ : ∃ X̂_e : base ↦ image, ∀ base β :
+Θ(ψ₂(β + Ω₂^{Ω_{k+3}+e})) = ψ₁(Â_β + Ω₁^{X̂_e(β) + Θ e})` (`Wg.WgTopFamAll`; per base by `Wg.wgDyn_iff_pt`).
+REFUTE FIRST: NO EVIDENCE.  `SkRX.skrxDyn01` does not apply (`Wg.wgSep01`: X̂₀(0) ≤ Y₂ < X̂₀(Ω₃) ≤ X̂₁(0) is
+consistent; the contradiction is the case X̂₁ = X̂₀); `Vx.vxDyn_le0` / `vxDyn_gtOm3` / `vxDyn_nonconst` / `vxNoCompat`
+constrain X̂₀ only; `Vn.vnTop_Om3`, `Vq.vqNoTop_Om3` refute constant images only; `Wb.wbNoY` / `wbNoIt` refute the
+image Y_{k+2} at β = 0, not every image.  Proved part: e = 0 at β = 0 (`skTopFam0`).  Open: every other base
+(β = Ω₃·γ, γ ≥ 1, at e = 0: no Lean value of Θ(ψ₂(Ω₃·γ + Ω₃))) and e ≥ 1 (β = 0, e = 1: no value of Θ(ψ₂(Ω₃·Ω₂))). -/
+theorem skTopFam (S : InaccSeq.{0}) : Wg.WgTopFamAll S := by
   sorry
 
-/-- STATUS: SUSPECT (vacuous: its hypothesis TopDynAll is refuted, SkRX.skrxTopDynAll_false)
+/-- STATUS: PROVED (Wg.wgTop0_base0, Wg.wgTop0_base0_wit)
+SIZE: S
+Non-vacuity of skTopFam at k = 0, e = 0, β = 0: `Θ(ψ₂(Ω₃)) = ψ₁(A+1+Ω₁^{Y₂})` (image X̂₀(0) = Y₂), at every restart
+with an own A, in particular at the witness restart of SkRX.skrxTopDynAll_false (the restart of m* = L(0)). -/
+theorem skTopFam0 (S : InaccSeq.{0}) :
+    ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      Wg.WgTopAt S l (Om (1 + 1 + 1)) (S.psi (Om (1 + 1)) (Om (1 + 1))) 0 0 :=
+  fun _ _ _ hl hX hA hρ => Wg.wgTop0_base0 hl hX hA hρ
+
+/-- STATUS: PROVED (Wg.wgSep01)
+SIZE: S
+REFUTE-FIRST record for skTopFam: `VtTopDyn λ 0 Ω₃ X̂₀ 0 ∧ VtTopDyn λ 0 Ω₃ X̂₁ 1 ⇒ X̂₀(0) ≤ Y₂ < X̂₀(Ω₃) ≤ X̂₁(0)`
+(so the image must depend on e; SkRX.skrxDyn01 is the case X̂₁ = X̂₀). -/
+theorem skTopSep (S : InaccSeq.{0}) :
+    ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      ∀ X0 X1 : Ordinal.{0} → Ordinal.{0}, Vt.VtTopDyn S l 0 (Om (1 + 1 + 1)) X0 0 →
+        Vt.VtTopDyn S l 0 (Om (1 + 1 + 1)) X1 1 →
+        X0 0 ≤ S.psi (Om (1 + 1)) (Om (1 + 1)) ∧ S.psi (Om (1 + 1)) (Om (1 + 1)) < X0 (Om (1 + 1 + 1)) ∧
+          X0 (Om (1 + 1 + 1)) ≤ X1 0 :=
+  fun _ _ _ hl hX hA hρ _ _ h0 h1 => Wg.wgSep01 hl hX hA hρ h0 h1
+
+/-- STATUS: OPEN (RISK: the family law fixes no B_n-move of the images X̂_e; the step will likely need, in addition,
+`B_n X̂^λ_e(β) = X̂^{λ'}_{B_n e}(B_n β)`, which is itself a move statement)
 SIZE: L
-`TopDynAll ∧ hν ⇒ ∀ k, (atoms < ψ₂(Ω_{k+4}) move) ⇒ (atoms < ψ₂(Ω_{k+5}) move)` (one level up; the step
+`TopFamAll ∧ hν ⇒ every atom ψ₂(Y₃) ≤ s < ψ₂(Ω₄) moves: MvD s, B_n s ∈ At_{λ'}, Θ_{λ'}(B_n s) = B_n Θ_λ(s)`
+(was SUSPECT with the refuted TopDynAll; now with the unrefuted family law Wg.WgTopFamAll)
+(first block past the Y₃ wall; needs the Uq prefixes / Uu level system with the bound as a field and the image
+Vb.vbT, and vqStepA ported to VtTopDyn).  L: no Lean statement of the level system past Y₃ exists yet. -/
+theorem skWallBase (S : InaccSeq.{0}) : Wg.WgTopFamAll S → Nc.ncL S (ω + 1) ≤ nuC → WallBelow S (lev S 0) := by
+  sorry
+
+/-- STATUS: OPEN (RISK as skWallBase: no B_n-move of the images in the hypothesis)
+SIZE: L
+`TopFamAll ∧ hν ⇒ ∀ k, (atoms < ψ₂(Ω_{k+4}) move) ⇒ (atoms < ψ₂(Ω_{k+5}) move)` (one level up; the step
 Ω_{k+3} → Ω_{k+4} of the readings with sub-base images; Wb.wbKe_sup_it / wbTe_gt_Om give the layer facts).
 L: same missing level system as skWallBase, generic in k. -/
-theorem skWallStep (S : InaccSeq.{0}) : TopDynAll S → Nc.ncL S (ω + 1) ≤ nuC →
+theorem skWallStep (S : InaccSeq.{0}) : Wg.WgTopFamAll S → Nc.ncL S (ω + 1) ≤ nuC →
     ∀ k : ℕ, WallBelow S (lev S k) → WallBelow S (lev S (k + 1)) := by
   sorry
 
-/-- STATUS: SUSPECT (the reduction uses skTopDyn, REFUTED; the statement itself is not refuted: it follows from UdAtMove25)
+/-- STATUS: REDUCED (skTopFam, skWallBase, skWallStep; no longer through the REFUTED skTopDyn)
 SIZE: L
 `hν ⇒ ∀ k < ω, every atom ψ₂(Y₃) ≤ s < ψ₂(Ω_{k+4}) moves` (induction on k). -/
 theorem skWallLevAll (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → ∀ k : ℕ, WallBelow S (lev S k) := by
   intro hν k
   induction k with
-  | zero => exact skWallBase S (skTopDyn S) hν
-  | succ k IH => exact skWallStep S (skTopDyn S) hν k IH
+  | zero => exact skWallBase S (skTopFam S) hν
+  | succ k IH => exact skWallStep S (skTopFam S) hν k IH
 
-/-- STATUS: REDUCED (skThCof, skWallLevAll; skWallLevAll is SUSPECT)
+/-- STATUS: REDUCED (skThCof, skWallLevAll)
 SIZE: L
 `hν ⇒ every atom ψ₂(Y₃) ≤ s < θ moves`. -/
 theorem skWallLow (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → WallBelow S (ConjT.th S) := by
@@ -182,16 +228,38 @@ theorem skWallLow (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → WallBelow S
   obtain ⟨k, hk⟩ := skThCof S a hsθ
   exact skWallLevAll S hν k n l l' hR h1 hr hl' hB hm hF hK _ ⟨a, ha1, ha2, rfl⟩ hsY hk IH
 
+/-- STATUS: PROVED (Wg.wgTheta_le, from Ld.ldTheta_le_psi, Wg.wgOwnEta)
+SIZE: S
+Upper half of skThVal: `restart λ, A own, ψ₁(A) = ρ_λ ⇒ Θ_λ(θ) ≤ ψ₁(A + θ)` (sharpens Wb.wbTheta_lt: A + θ + 1). -/
+theorem skThUp (S : InaccSeq.{0}) :
+    ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      gxTh (upsilon l) (ldAtR S l) (ConjT.th S) ≤ S.psi (A + ConjT.th S) (Om 1) :=
+  fun _ _ _ hl hX hA hρ => Wg.wgTheta_le hl hX hA hρ
+
 /-- STATUS: OPEN
-SIZE: M
-`restart λ, A own, ψ₁(A) = ρ_λ, θ ∈ At_λ ⇒ Θ_λ(θ) = ψ₁(A + θ)` (the candidate TRUE value; REFUTE FIRST: consistent
-with Wb.wbTheta_lt (≤ ψ₁(A+θ+1)) and Ro.roTheta_th_gt (> ψ₁(A+1+Ω₁^{Ω₁·K})); ψ₁(A+1+Ω_ω) is refuted by
-Wb.wbTheta_ne).  Expected route: θ = sup of atoms below (Lw.lw_psi_limit) and continuity of Θ at θ. -/
+SIZE: L
+Lower half of skThVal: `restart λ, A own, ψ₁(A) = ρ_λ, θ ∈ At_λ ⇒ ψ₁(A_{η_λ} + θ) ≤ Θ_λ(θ)` (`Wg.WgThLow`;
+sufficient: ψ₁(A+ζ) < Θ_λ(θ) for every ζ < θ, Wg.wgLow_of_all).  REFUTE FIRST: NO EVIDENCE (the known readings below θ,
+Vn.vnRead_Y3, Vq.vqRead_Om3Y3, Ro.roTheta_th_gt, are far below ψ₁(A+θ) and do not decide it).  Blocker: the lift of
+Rx.rxBlkTh at the base 0 fails: Rx.rxL_memH needs Ω_ω ≤ a, and κ ζ < Ω₃ for ζ < θ, so κ(e') ∉ Cl(κ ζ, ψ₂(κ ζ)) when
+κ(e') has a ψ-argument ≥ κ ζ; readings of atoms cofinal in θ (the Y_{k+3}-plateaus for every k) are needed. -/
+theorem skThLow (S : InaccSeq.{0}) :
+    ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l → ConjT.th S ∈ ldAtR S l →
+      Wg.WgThLow S l := by
+  sorry
+
+/-- STATUS: REDUCED (skThUp, skThLow; Wg.wgThVal_of_low)
+SIZE: S
+`restart λ, A own, ψ₁(A) = ρ_λ, θ ∈ At_λ ⇒ Θ_λ(θ) = ψ₁(A + θ)` (the candidate TRUE value; consistent with
+Wb.wbTheta_lt and Ro.roTheta_th_gt; ψ₁(A+1+Ω_ω) is refuted by Wb.wbTheta_ne).  Statement unchanged. -/
 theorem skThVal (S : InaccSeq.{0}) :
     ∀ (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
       A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l → ConjT.th S ∈ ldAtR S l →
       gxTh (upsilon l) (ldAtR S l) (ConjT.th S) = S.psi (A + ConjT.th S) (Om 1) := by
-  sorry
+  intro l ηx A hl hX hA hρ hθ
+  exact Wg.wgThVal_of_low hl hX hA hρ (skThLow S l ηx A hl hX hA hρ hθ)
 
 /-- STATUS: PROVED (Cd.cdEta_pv_spec, Bc.bcB_bound', Bc.bcB_fix', Bc.bcB_mono', Gv.gvK_eq, Td.tdK_lt_L)
 SIZE: S
