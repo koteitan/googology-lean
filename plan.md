@@ -6,7 +6,7 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
       - done (only S assumed): frontier ι(Γ(φ(ζ_{Ω₁+1}, G+1))·ω), G = Γ_{Ω₁+1}; A1 closed; A2 holds up to level ζ_{Ω₁+1}. 107 axioms, none new.
       - A2 (all B < φ(G, 1)) holds if each ε-number code in (ζ_{Ω₁+1}, G) has its sequence. If WuGap holds, WfVisGen fails and the road is void.
       - road wsRoadZ (hyp.: UPPER, LOWER, cap above F_Z; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; WfVisGen at m*, L(n+1)): ν_C = L(ω+1).
