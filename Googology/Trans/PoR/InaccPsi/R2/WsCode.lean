@@ -6,19 +6,20 @@ import Googology.Trans.PoR.InaccPsi.R2.WoTop
 `R2.Wo` builds a family of systems over raw base data at every level below `ε_{Ω₁+1}`; of the codes it uses only a
 reading, a gate, a bound and a few facts about them.  This module states those facts ONCE as a structure `WsC`:
 
-* the bound `Bd ≤ G` (closed under `+`, above `Ω₁`), the reading `R c x`, the gate `g c < Ω₁` (`g Ω₁ = 1`,
+* the bound `Bd < Γ(1)` (closed under `+`, above `Ω₁`; round 120: was `Bd ≤ G`), the reading `R c x`, the gate `g c < Ω₁` (`g Ω₁ = 1`,
   `R Ω₁ x = x`), the successor laws `R (a + Ω₁) x = R a x + x`, `g a ≤ g (a + Ω₁)` and their `ε`-cut, `g (t+1)` below
   every `ε`-number above `g t`;
-* `x ≤ R ℓ x < Γ_{x+1}`, monotonicity, COFINALITY (`ν < R c x` ⇒ `ν ≤ R b x` for a smaller code `b` with gate
+* `x ≤ R ℓ x < Γ_{x+2}` (round 120: was `< Γ_{x+1}`), monotonicity, COFINALITY (`ν < R c x` ⇒ `ν ≤ R b x` for a smaller code `b` with gate
   below `x`), Lemma EXACT (`R_pi`);
-* the digit gate (`g_cl`) and membership (`L_mem`) of a level, the outer low field `Zo` of `G` above every reading.
+* the digit gate (`g_cl`) and membership (`L_mem`) of a level, an outer low field `Zo`; the facts of `G` as a base
+  (`Bd ≤ G`, `R ℓ x < Γ_{x+1}`, `Zo` above every reading) are the predicate `WsCG` (round 120).
 
 From these: `WsC.Lev` (the levels), `WsC.lv` (**THE LEVEL DATUM OF EVERY LEVEL**, an `Hn.HnLv` with `L = ℓ` and gate
 `g ℓ` by definition), `WsC.Fs` (`ω`-sequences of levels), `WsC.Seq1` / `WsC.Fs1` (`Ω₁`-sequences), and the level
 arithmetic used by the steps.  The two instances are `Ws.wsA1` (`rdc`, `gtc`, `ε_{Ω₁+1}`) and `Ws.wsA2` (`glR`,
 `glG`, `G`).
 
-No new axiom.  New definitions: `WsC`, `WsC.Lev`, `WsC.rd`, `WsC.lv`, `WsC.Fs`, `WsC.Seq1`, `WsC.Fs1`.
+No new axiom.  New definitions: `WsC`, `WsCG`, `WsC.Lev`, `WsC.rd`, `WsC.lv`, `WsC.Fs`, `WsC.Seq1`, `WsC.Fs1`.
 -/
 
 set_option autoImplicit false
@@ -48,7 +49,7 @@ structure WsC where
   g : Ordinal.{0} → Ordinal.{0}
   Zo : Ordinal.{0} → Ordinal.{0}
   Om1_lt : Om1 < Bd
-  Bd_le : Bd ≤ gcG 0
+  Bd_lt1 : Bd < gcG 1
   add_lt : ∀ a b, a < Bd → b < Bd → a + b < Bd
   g_lt : ∀ a, a < Bd → g a < Om1
   R_Om1 : ∀ x, R Om1 x = x
@@ -58,7 +59,7 @@ structure WsC where
   succ_g_lt : ∀ {x a : Ordinal.{0}}, InE x → a < Bd → Om1 ∣ a → g a < x → g (a + Om1) < x
   g_succ1 : ∀ {x t : Ordinal.{0}}, InE x → t < Bd → g t < x → g (t + 1) < x
   le_R : ∀ {x ℓ : Ordinal.{0}}, InE x → x < Om1 → Om1 ≤ ℓ → ℓ < Bd → g ℓ < x → x ≤ R ℓ x
-  R_lt : ∀ {x ℓ : Ordinal.{0}}, InE x → x < Om1 → ℓ < Bd → g ℓ < x → R ℓ x < lgG x
+  R_lt : ∀ {x ℓ : Ordinal.{0}}, InE x → x < Om1 → ℓ < Bd → g ℓ < x → R ℓ x < gq 1 x
   R_mono : ∀ {x b c : Ordinal.{0}}, InE x → x < Om1 → c < Bd → b < c → g c < x → g b < x → R b x < R c x
   R_cof : ∀ {x c : Ordinal.{0}}, InE x → x < Om1 → c < Bd → g c < x → ∀ ν, ν < R c x →
     ∃ b, b < c ∧ g b < x ∧ ν ≤ R b x
@@ -68,7 +69,15 @@ structure WsC where
   L_mem : ∀ ℓ, ℓ < Bd → ∀ (S : InaccSeq.{0}) (a b : Ordinal.{0}), 0 < a → g ℓ < b → ℓ ∈ S.CSet a b
   Zo_fix : ∀ x, veblen 2 (Zo x) = Zo x
   Zo_G1 : ∀ x, InE x → x < Om1 → Zo x < gq 1 x
-  Zo_gt : ∀ {x ℓ : Ordinal.{0}}, InE x → x < Om1 → Om1 ≤ ℓ → ℓ < Bd → g ℓ < x → hdNx (R ℓ x) (lgG x) < Zo x
+
+/-- **THE FACTS OF `G` AS A BASE** for a code interface (the fields `Bd ≤ G`, `R ℓ x < Γ_{x+1}` and the outer low
+field above `hdNx (R ℓ x) (Γ_{x+1})` of `WsC` before round 120): asked only where `G` itself is the raw datum
+(`wsGood_G`, `wsSh_hgU`, `wsV`, `wsSysAll`). -/
+structure WsCG (C : WsC) : Prop where
+  Bd_le : C.Bd ≤ gcG 0
+  R_lt : ∀ {x ℓ : Ordinal.{0}}, InE x → x < Om1 → ℓ < C.Bd → C.g ℓ < x → C.R ℓ x < lgG x
+  Zo_gt : ∀ {x ℓ : Ordinal.{0}}, InE x → x < Om1 → Om1 ≤ ℓ → ℓ < C.Bd → C.g ℓ < x →
+    hdNx (C.R ℓ x) (lgG x) < C.Zo x
 
 namespace WsC
 
@@ -84,9 +93,22 @@ theorem rd_eq {ℓ x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (h1 : Om1 ≤ �
     C.rd ℓ x = C.R ℓ x := by
   unfold rd; rw [if_pos hg, max_eq_right (C.le_R hx hx1 h1 hB hg)]
 
-theorem Bd_lt_G1 : C.Bd < gcG 1 := C.Bd_le.trans_lt (gcG_lt zero_lt_one)
+theorem Bd_lt_G1 : C.Bd < gcG 1 := C.Bd_lt1
 
-theorem lt_G {a : Ordinal.{0}} (h : a < C.Bd) : a < gcG 0 := h.trans_le C.Bd_le
+theorem lt_G (hG : WsCG C) {a : Ordinal.{0}} (h : a < C.Bd) : a < gcG 0 := h.trans_le hG.Bd_le
+
+/-- The reading `rd ℓ x` is below `Γ_{x+1}` for a level `ℓ`. -/
+theorem rd_lt0 (hG : WsCG C) {ℓ : Ordinal.{0}} (h : C.Lev ℓ) : ∀ x, InE x → x < Om1 → C.rd ℓ x < lgG x :=
+  fun x hx hx1 => by
+  unfold rd; split_ifs with hg
+  · exact max_lt (lgG_facts hx hx1).2.1 (hG.R_lt hx hx1 h.2.2 hg)
+  · exact (lgG_facts hx hx1).2.1
+
+/-- The reading `rd ℓ x` is below `Γ_{x+2}`. -/
+theorem rd_lt1 {ℓ : Ordinal.{0}} (h : C.Lev ℓ) : ∀ x, InE x → x < Om1 → C.rd ℓ x < gq 1 x := fun x hx hx1 => by
+  unfold rd; split_ifs with hg
+  · exact max_lt (gm1_facts hx hx1).2.1 (C.R_lt hx hx1 h.2.2 hg)
+  · exact (gm1_facts hx hx1).2.1
 
 /-- **THE LEVEL DATUM OF EVERY LEVEL**: `L = ℓ`, gate `g ℓ`, reading `R ℓ x` above the gate. -/
 noncomputable def lv (ℓ : Ordinal.{0}) (h : C.Lev ℓ) : HnLv where
@@ -98,19 +120,20 @@ noncomputable def lv (ℓ : Ordinal.{0}) (h : C.Lev ℓ) : HnLv where
   g_lt := C.g_lt ℓ h.2.2
   q_lt := (wh_L_dec h.2.1).2
   OL := h.1
-  L_G := C.lt_G h.2.2
+  L_G := h.2.2.trans C.Bd_lt1
   L_eq := by rw [← Br.Om1_eq]; exact (wh_L_dec h.2.1).1
   g_cl := C.g_cl ℓ h.1 h.2.1 h.2.2
   L_mem := C.L_mem ℓ h.2.2
   l_ge := fun x => by unfold rd; split_ifs; exacts [le_max_left _ _, le_rfl]
-  l_lt := fun x hx hx1 => by
-    unfold rd; split_ifs with hg
-    · exact max_lt (lgG_facts hx hx1).2.1 (C.R_lt hx hx1 h.2.2 hg)
-    · exact (lgG_facts hx hx1).2.1
+  l_lt := C.rd_lt1 h
   l_pi := fun σ ρ hB hg => by
     rw [C.rd_eq hB.2.1 hB.2.2.2 h.1 h.2.2 (hg.trans hB.2.2.1),
       C.rd_eq hB.1 (hB.2.2.1.trans hB.2.2.2) h.1 h.2.2 hg]
     exact C.R_pi hB h.2.2 hg
+
+/-- **`C.lv ℓ` has the (A1)/(A2) bounds.** -/
+theorem lv_G (hG : WsCG C) {ℓ : Ordinal.{0}} (h : C.Lev ℓ) : HnLvG (C.lv ℓ h) :=
+  ⟨C.lt_G hG h.2.2, C.rd_lt0 hG h⟩
 
 theorem lv_l {ℓ x : Ordinal.{0}} (h : C.Lev ℓ) (hx : InE x) (hx1 : x < Om1) (hg : C.g ℓ < x) :
     (C.lv ℓ h).l x = C.R ℓ x := C.rd_eq hx hx1 h.1 h.2.2 hg

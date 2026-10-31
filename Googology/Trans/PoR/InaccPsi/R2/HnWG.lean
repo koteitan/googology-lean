@@ -14,6 +14,9 @@ start of the band recursion is `Hl.hlU` (bound `φ(Ω₁·Ω₁, G+1)`) at the d
   `Hl.hlU`, with the steps of the package `hnPkSq`), `hnS1_B`, `hnS1_γ`, `hnS1_loc` (**LOCATED**), `hnS1_blk`,
   `hnS1_enum`, `hnS1_capV`, `hnS1_road`.
 
+Round 120: `HnNB` also asks `L < G` (the band level datum was widened to `L < Γ(1)`), `hnG_q` asks
+`ℓ(x) < Γ_{x+1}`, `hnG_FP` asks `L < G`.
+
 No new axiom.  New definitions: `HnNB`, `hnGW`, `hnS1`.
 -/
 
@@ -56,7 +59,7 @@ theorem hn_sq2_lt1 {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) : veblen (x * 
   exact hjG_lt1 hx hx1 (hn_sq2_one hx) (hn_sq2_lt hx hx1)
 
 /-- **The outer-field bound of a band level datum**: `ℓ(x) + x < x·x·2` above the gate. -/
-def HnNB (Λ : HnLv) : Prop := ∀ x, InE x → x < Om1 → Λ.g < x → Λ.l x + x < x * x * 2
+def HnNB (Λ : HnLv) : Prop := (∀ x, InE x → x < Om1 → Λ.g < x → Λ.l x + x < x * x * 2) ∧ Λ.L < gcG 0
 
 section GW
 
@@ -65,12 +68,18 @@ variable (Λ : HnLv)
 theorem hnG_one {x : Ordinal.{0}} (hx : InE x) : (1 : Ordinal.{0}) ≤ Λ.l x + x :=
   (one_lt_omega0.trans (omega0_lt_inE hx)).le.trans le_add_self
 
-theorem hnG_q {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) : Λ.l x + x < lgG x := Λ.succ.l_lt x hx hx1
+theorem hnG_q {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (h : Λ.l x < lgG x) : Λ.l x + x < lgG x :=
+  (inE_indec (lgG_facts hx hx1).2.2.2.1).add_lt h (lgG_facts hx hx1).2.1
 
-theorem hnG_q2 {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) : Λ.l x + x + x < lgG x :=
-  (inE_indec (lgG_facts hx hx1).2.2.2.1).add_lt (hnG_q Λ hx hx1) (lgG_facts hx hx1).2.1
+theorem hnG_q2 {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (h : Λ.l x < lgG x) : Λ.l x + x + x < lgG x :=
+  (inE_indec (lgG_facts hx hx1).2.2.2.1).add_lt (hnG_q Λ hx hx1 h) (lgG_facts hx hx1).2.1
 
-theorem hnG_FP : veblen (Λ.L + Om1) (gcG 0) = gcG 0 := gn_veb_fix (gcG_SC 0) Λ.succ.L_G
+theorem hnG_FP (hL : Λ.L < gcG 0) : veblen (Λ.L + Om1) (gcG 0) = gcG 0 :=
+  gn_veb_fix (gcG_SC 0) ((inE_indec gr_G_inE).add_lt hL (hg_Om1_lt_G 0))
+
+/-- The reading bound `ℓ(x) < Γ_{x+1}` above the gate from `HnNB`. -/
+theorem hnNB_q (hN : HnNB Λ) {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hg : Λ.g < x) : Λ.l x < lgG x :=
+  le_self_add.trans_lt ((hN.1 x hx hx1 hg).trans (hn_sq2_lt hx hx1))
 
 /-- **`G` AS A BASE OF LEVEL `L + Ω₁`** (code gate `0`, reading gate `g`, reading `Γ_{x+1}`, outer low field
 `φ(x·x·2, Γ_{x+1}+1)`). -/
@@ -85,28 +94,29 @@ noncomputable def hnGW (hN : HnNB Λ) : HnWB Λ where
   γ_le := zero_le
   lg := le_rfl
   γR_cl := fun _ _ _ _ h => h
-  F_P := ⟨gcG 0, hnG_FP Λ⟩
+  F_P := ⟨gcG 0, hnG_FP Λ hN.2⟩
   G_le := le_rfl
   S_lt1 := by
     have hG1 := gcG_SC 1
     have hE := Low.opow_eq_self_of_SC hG1
-    have hfix : veblen (Λ.L + Om1) (gcG 1) = gcG 1 := gn_veb_fix hG1 (Λ.succ.L_lt 1)
+    have hfix : veblen (Λ.L + Om1) (gcG 1) = gcG 1 := gn_veb_fix hG1 Λ.succ.L_G
     have h2 := (isNormal_veblen (Λ.L + Om1)).strictMono
       ((ev_isSuccLimit_of_inE hE).add_one_lt (gcG_lt zero_lt_one))
-    rw [hdNx_fixP (hnG_FP Λ)]; rwa [hfix] at h2
+    rw [hdNx_fixP (hnG_FP Λ hN.2)]; rwa [hfix] at h2
   F_mem := fun S _ _ ha _ => gmS_G0_mem S ha
   S_mem := fun S a b ha hb => by
-    rw [hdNx_fixP (hnG_FP Λ)]
+    rw [hdNx_fixP (hnG_FP Λ hN.2)]
     exact CSet.phi_mem (Λ.succ.L_mem S a b ha hb) (CSet.succ_mem (gmS_G0_mem S ha))
   F_code := fun _ _ _ _ _ _ _ => GxCl.atom (Set.mem_singleton _)
   F_cl := fun _ hZ _ _ _ _ _ => hZ.1
   S_cl := fun _ hZ _ _ => hZ.1
-  Fr_gt := fun hx hx1 _ => hnG_q Λ hx hx1
-  Fr_P := fun hx hx1 _ => ⟨lgG _, hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1)⟩
+  Fr_gt := fun hx hx1 hg => hnG_q Λ hx hx1 (hnNB_q Λ hN hx hx1 hg)
+  Fr_P := fun hx hx1 hg => ⟨lgG _, hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1 (hnNB_q Λ hN hx hx1 hg))⟩
   S_Zo := fun {x} hx hx1 hg => by
     show hdNx (Λ.l x + x) (lgG x) < veblen (max ω x * max ω x * 2) (lgG x + 1)
-    rw [max_eq_right (omega0_lt_inE hx).le, hdNx_fixP (hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1))]
-    exact hd_veb_left_lt (hN x hx hx1 hg) _
+    rw [max_eq_right (omega0_lt_inE hx).le,
+      hdNx_fixP (hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1 (hnNB_q Λ hN hx hx1 hg)))]
+    exact hd_veb_left_lt (hN.1 x hx hx1 hg) _
   Zo_fix := fun x => veblen_veblen_of_lt ((show (2 : Ordinal.{0}) < ω from by
     exact_mod_cast natCast_lt_omega0 2).trans_le ((le_mul_of_one_le_right' (one_lt_omega0.le.trans
       (le_max_left ω x)) |>.trans' (le_max_left ω x)).trans (le_mul_of_one_le_right' one_le_two))) _
@@ -115,8 +125,9 @@ noncomputable def hnGW (hN : HnNB Λ) : HnWB Λ where
     rw [max_eq_right (omega0_lt_inE hx).le]
     exact hn_sq2_lt1 hx hx1
   Fr_pi := fun hB _ => Go.goGl.ba_pi _ _ hB
-  S_pi := fun hB hg => hjG_S_pi hB (Λ.succ.l_pi _ _ hB hg) (hnG_one Λ hB.2.1) (hnG_q Λ hB.2.1 hB.2.2.2)
-    (hnG_one Λ hB.1) (hnG_q Λ hB.1 (hB.2.2.1.trans hB.2.2.2))
+  S_pi := fun hB hg => hjG_S_pi hB (Λ.succ.l_pi _ _ hB hg) (hnG_one Λ hB.2.1)
+    (hnG_q Λ hB.2.1 hB.2.2.2 (hnNB_q Λ hN hB.2.1 hB.2.2.2 (hg.trans hB.2.2.1)))
+    (hnG_one Λ hB.1) (hnG_q Λ hB.1 (hB.2.2.1.trans hB.2.2.2) (hnNB_q Λ hN hB.1 (hB.2.2.1.trans hB.2.2.2) hg))
 
 theorem hnGW_γ (hN : HnNB Λ) : (hnGW Λ hN).γ = 0 := rfl
 
@@ -126,13 +137,14 @@ theorem hnGW_γR (hN : HnNB Λ) : (hnGW Λ hN).γR = Λ.g := rfl
 theorem hnGU_shape (hN : HnNB Λ) (hN' : HnNB Λ.succ) (St0 : HnVStTy Λ 0) (h0 : ∀ Q U h, HnVSpec Q U (St0 Q U h))
     (S0 : HgVD) (hS0 : HnWShape (hnGW Λ hN) 0 S0) :
     HnWShape (hnGW Λ.succ hN') 0 (hnwU (hnGW Λ hN) St0 h0 S0 hS0) := by
-  refine ⟨?_, fun x _ _ => ?_, fun x hx hx1 _ => ?_, fun x hx hx1 => ?_, fun _ σ _ _ hσ _ _ => hσ.pos⟩
+  refine ⟨?_, fun x _ _ => ?_, fun x hx hx1 hm => ?_, fun x hx hx1 => ?_, fun _ σ _ _ hσ _ _ => hσ.pos⟩
   · show hdNx (Λ.L + Om1) (gcG 0) = veblen (Λ.succ.L + 0) (gcG 0 + 1)
-    rw [add_zero, hdNx_fixP (hnG_FP Λ)]; rfl
+    rw [add_zero, hdNx_fixP (hnG_FP Λ hN.2)]; rfl
   · show Λ.g < x ↔ max Λ.g 0 < x
     rw [max_eq_left zero_le]
   · show hdNx (Λ.l x + x) (lgG x) = veblen (Λ.succ.l x + 0) (lgG x + 1)
-    rw [add_zero, hdNx_fixP (hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1))]; rfl
+    rw [add_zero, hdNx_fixP (hjG_fix hx hx1 (hnG_one Λ hx)
+      (hnG_q Λ hx hx1 (hnNB_q Λ hN hx hx1 ((le_max_left _ _).trans_lt hm))))]; rfl
   · show hnwUZ (hnGW Λ hN) x = if max Λ.g 0 < x then evZ (veblen (Λ.succ.l x + 0) (lgG x + 1))
       else (hnGW Λ.succ hN').hnwZo x
     unfold hnwUZ
@@ -140,7 +152,7 @@ theorem hnGU_shape (hN : HnNB Λ) (hN' : HnNB Λ.succ) (St0 : HnVStTy Λ 0) (h0 
     by_cases hg : Λ.g < x
     · rw [if_pos (show (hnGW Λ hN).γR < x from hg), if_pos hg, add_zero]
       show evZ (hdNx (Λ.l x + x) (lgG x)) = evZ (veblen (Λ.l x + x) (lgG x + 1))
-      rw [hdNx_fixP (hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1))]
+      rw [hdNx_fixP (hjG_fix hx hx1 (hnG_one Λ hx) (hnG_q Λ hx hx1 (hnNB_q Λ hN hx hx1 hg)))]
     · rw [if_neg (show ¬ (hnGW Λ hN).γR < x from hg), if_neg hg,
         (hnGW Λ.succ hN').hnwZo_low (show ¬ (hnGW Λ.succ hN').γR < x from hg)]
       rfl
@@ -150,7 +162,7 @@ end GW
 /-! ## The start: `Hl.hlU` at the level `Ω₁·Ω₁ + 0` -/
 
 /-- **The band datum `Ω₁·Ω₁` has the outer-field bound**: `x·x + x < x·x·2`. -/
-theorem hnSqNB : HnNB hnSqLv := fun _ hx _ _ => Hm.hmSq_next_bound hx
+theorem hnSqNB : HnNB hnSqLv := ⟨fun _ hx _ _ => Hm.hmSq_next_bound hx, hnSqLv_G.L_G⟩
 
 /-- **`Hl.hlU` IS A START OVER `G` AT THE LEVEL `Ω₁·Ω₁ + 0`.** -/
 theorem hnU_shape : HnWShape (hnGW hnSqLv hnSqNB) 0 hlU := by
@@ -172,7 +184,7 @@ noncomputable def hnS1 : HgVD := hnwU (hnGW hnSqLv hnSqNB) hnPkSq.St0 hnPkSq.h0 
 
 theorem hnS1_B : hnS1.B = veblen (Om1 * Om1 + Om1) (gcG 0 + 1) := by
   show hdNx (Om1 * Om1 + Om1) (gcG 0) = _
-  exact hdNx_fixP (hnG_FP hnSqLv)
+  exact hdNx_fixP (hnG_FP hnSqLv hnSqLv_G.L_G)
 
 theorem hnS1_γ : hnS1.γ = 0 := rfl
 

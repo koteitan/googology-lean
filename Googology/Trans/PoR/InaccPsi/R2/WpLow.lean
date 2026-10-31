@@ -60,17 +60,17 @@ theorem wpSucc_ext_lt {ℓ'' ℓ' : Ordinal.{0}} {K'' K' : HnPk} {V'' V' : HgVD}
   exact hl x hx hx1 (max_lt_iff.1 h').1 (max_lt_iff.1 h').2
 
 /-- **The low field of an (A2) start is at most `Wn.wnZo`.** -/
-theorem wpZ_le {Λ : HnLv} {V : HgVD} (hsh : HnWShape (wnGW Λ) 0 V) {x : Ordinal.{0}} (hx : InE x)
+theorem wpZ_le {Λ : HnLv} {hN : WnNB Λ} {V : HgVD} (hsh : HnWShape (wnGW Λ hN) 0 V) {x : Ordinal.{0}} (hx : InE x)
     (hx1 : x < Om1) : V.Z x ≤ wnZo x := by
   rw [hsh.2.2.2.1 x hx hx1]
   split_ifs with h
   · have h1 : (1 : Ordinal.{0}) ≤ Λ.l x + 0 := by rw [add_zero]; exact WmLim.one_le_l Λ hx
-    have h2 : Λ.l x + 0 < lgG x := by rw [add_zero]; exact Λ.l_lt x hx hx1
+    have h2 : Λ.l x + 0 < lgG x := by rw [add_zero]; exact hN.1 x hx hx1 ((le_max_left _ _).trans_lt h)
     refine (hb_evZ_lt_fix2 (wnZo_fix x) ?_).le
     show veblen (Λ.l x + 0) (lgG x + 1) < wnZo x
     rw [← hdNx_fixP (hjG_fix hx hx1 h1 h2)]
     exact wn_S_Zo hx hx1 h1 h2
-  · have hg : ¬ (wnGW Λ).γR < x := fun h' => h (max_lt h' hx.pos)
-    rw [(wnGW Λ).hnwZo_low hg]; exact le_rfl
+  · have hg : ¬ (wnGW Λ hN).γR < x := fun h' => h (max_lt h' hx.pos)
+    rw [(wnGW Λ hN).hnwZo_low hg]; exact le_rfl
 
 end Googology.Trans.PoR.InaccPsi.R2.Wp

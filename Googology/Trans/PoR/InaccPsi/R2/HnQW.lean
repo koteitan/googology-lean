@@ -53,13 +53,16 @@ noncomputable def hnSqLv : HnLv where
   g_lt := gv_Om1_pos
   q_lt := gv_Om1_pos
   OL := le_mul_of_one_le_right' hg_one_lt_Om1.le
-  L_G := hl_OO_lt_G 0
+  L_G := HnLvG.wL (hl_OO_lt_G 0)
   L_eq := by rw [mul_zero, add_zero, Br.Om1_eq]
   g_cl := fun _ _ hZ _ _ _ _ => hZ.1
   L_mem := fun S a b _ _ => hl_OO_mem S a b
   l_ge := hn_le_sq
-  l_lt := fun _ hx hx1 => hl_sq_lt hx hx1
+  l_lt := HnLvG.wl fun _ hx hx1 => hl_sq_lt hx hx1
   l_pi := fun _ _ hB _ => pi_sq hB
+
+/-- **`Ω₁·Ω₁` has the (A1)/(A2) bounds.** -/
+theorem hnSqLv_G : HnLvG hnSqLv := ⟨hl_OO_lt_G 0, fun _ hx hx1 => hl_sq_lt hx hx1⟩
 
 theorem hnSqLv_L : hnSqLv.L = Om1 * Om1 := rfl
 

@@ -259,10 +259,10 @@ theorem wsZ_gh : gh wsZ = 1 := by
 /-- **THE SYSTEM OVER `G` AT THE LEVEL `ζ_{Ω₁+1}`.** -/
 noncomputable def wsVz : HgVD := wsV wsCls_Z wsZ
 
-theorem wsVz_B : wsVz.B = veblen wsZ (gcG 0 + 1) := wsV_B wsCls_Z wsZ_lev (lt_add_one _)
+theorem wsVz_B : wsVz.B = veblen wsZ (gcG 0 + 1) := wsV_B wsA2_G wsCls_Z wsZ_lev (lt_add_one _)
 
 theorem wsVz_γ : wsVz.γ ≤ 1 := by
-  have := wsV_γ wsCls_Z wsZ_lev (lt_add_one _)
+  have := wsV_γ wsA2_G wsCls_Z wsZ_lev (lt_add_one _)
   change wsVz.γ ≤ gh wsZ at this
   rwa [wsZ_gh] at this
 
@@ -363,7 +363,7 @@ end Fr
 /-- **REGION (A2) BELOW `φ(ζ_{Ω₁+1}, G+1)`, UNCONDITIONAL**: every (A2) level `ℓ ≤ ζ_{Ω₁+1}` has a system over
 `G` with `B = φ(ℓ, G+1)` and gate `≤ gh ℓ`. -/
 theorem wsSysZ : ∀ ℓ, WpLev ℓ → ℓ ≤ wsZ → ∃ V : HgVD, V.B = veblen ℓ (gcG 0 + 1) ∧ V.γ ≤ gh ℓ :=
-  fun ℓ hℓ hle => wsSysAll wsCls_Z ℓ hℓ (Order.lt_add_one_iff.2 hle)
+  fun ℓ hℓ hle => wsSysAll wsA2_G wsCls_Z ℓ hℓ (Order.lt_add_one_iff.2 hle)
 
 /-- **REGION (A2) FROM THE BASES ABOVE `ζ_{Ω₁+1}`**: the bases below `ζ_{Ω₁+1}` are proved, so `WsBaseI G` reduces
 to the `ε`-number codes `e ∈ (ζ_{Ω₁+1}, G)` (Veblen level `≥ 2`). -/

@@ -20,7 +20,10 @@ asks `L` a code over every `Z` and the membership in every hull.
   readings at the level `ℓ(x) + ν` (ports of the `Hj.hjv_*` lemmas to `HlLv`; `hlv_glA_pi`, `hlv_lev1_pi` ask `g < σ`).
   The `Λ`-free lemmas `Hj.hj_cl_mod`, `Hj.hj_opow_mul`, `Hj.hj_absorb_mul`, `Hj.hj_mod_eq`, `Hj.hj_Om_E` are imported.
 
-No new axiom.  New definitions: `HnLv`, `ofHl` (every `Hl.HlLv` as band `u = 0`), `hnL1`, `HnLv.succ`.
+WIDENED (round 120): `L < Γ(1)` (field `L_G`) and `ℓ(x) < Γ_{x+2}` (field `l_lt`) in place of `L < G`, `ℓ(x) < Γ_{x+1}`,
+so that the levels of region (A3) (`G < L < Γ(1)`) are band level data; the old bounds are the predicate `HnLvG`.
+
+No new axiom.  New definitions: `HnLv`, `ofHl` (every `Hl.HlLv` as band `u = 0`), `hnL1`, `HnLv.succ`, `HnLvG`.
 -/
 
 set_option autoImplicit false
@@ -45,8 +48,8 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.I
 
 /-! ## The band level datum -/
 
-/-- **A BAND LEVEL DATUM**: `L = Ω₁·u + Ω₁·q` (`q < Ω₁`, the band `Ω₁·u` any multiple of `Ω₁`), `Ω₁ ≤ L < G`, read
-as `ℓ(x)` with `x ≤ ℓ(x)`, `ℓ(x) < Γ_{x+1}`; the LEVEL GATE `g < Ω₁` is below every strongly critical `Z ≤ Ω₁` over
+/-- **A BAND LEVEL DATUM**: `L = Ω₁·u + Ω₁·q` (`q < Ω₁`, the band `Ω₁·u` any multiple of `Ω₁`), `Ω₁ ≤ L < Γ(1)`,
+read as `ℓ(x)` with `x ≤ ℓ(x)`, `ℓ(x) < Γ_{x+2}`; the LEVEL GATE `g < Ω₁` is below every strongly critical `Z ≤ Ω₁` over
 which some code in `[L, Ω₁·u + Ω₁²)` exists (`g_cl`); `L` lies in every hull `C(a, b)` with `0 < a`, `g < b`; Lemma
 EXACT for `ℓ` holds at the base pairs `(σ, ρ)` with `g < σ`.  (`Hl.HlLv` is the band `u = 0` and asks in addition
 `ℓ(x) + x < x·x`.) -/
@@ -59,12 +62,12 @@ structure HnLv where
   g_lt : g < Om1
   q_lt : q < Om1
   OL : (Om1 : Ordinal.{0}) ≤ L
-  L_G : L < gcG 0
+  L_G : L < gcG 1
   L_eq : L = Om 1 * u + Om 1 * q
   g_cl : ∀ Z y : Ordinal.{0}, SC Z → Z ≤ Om 1 → GxCl Z {gcG 0} y → L ≤ y → y < Om 1 * u + Om 1 * Om 1 → g < Z
   L_mem : ∀ (S : InaccSeq.{0}) (a b : Ordinal.{0}), 0 < a → g < b → L ∈ S.CSet a b
   l_ge : ∀ x, x ≤ l x
-  l_lt : ∀ x, InE x → x < Om1 → l x < lgG x
+  l_lt : ∀ x, InE x → x < Om1 → l x < gq 1 x
   l_pi : ∀ σ ρ, Bases σ ρ → g < σ → l ρ ∈ TB ρ σ ∧ pi σ ρ (l ρ) = l σ
 
 /-- **Every `Hl.HlLv` is a band level datum** (band `u = 0`). -/
@@ -77,25 +80,40 @@ noncomputable def ofHl (Λ : HlLv) : HnLv where
   g_lt := Λ.g_lt
   q_lt := Λ.q_lt
   OL := Λ.OL
-  L_G := Λ.L_G
+  L_G := Λ.L_G.trans (gcG_lt one_pos)
   L_eq := by rw [mul_zero, zero_add]; exact Λ.L_eq
   g_cl := fun Z y hZ hZ1 hy hLy hy2 => Λ.g_cl Z y hZ hZ1 hy hLy (by rwa [mul_zero, zero_add] at hy2)
   L_mem := Λ.L_mem
   l_ge := Λ.l_ge
-  l_lt := Λ.l_lt
+  l_lt := fun x hx hx1 => (Λ.l_lt x hx hx1).trans (mg_lgG_lt_G1 hx hx1)
   l_pi := Λ.l_pi
 
 /-- **The level datum `Ω₁`, read as `x`** (gate `0`): `Hl.hlL1` as a band level datum. -/
 noncomputable def hnL1 : HnLv := ofHl hlL1
 
+/-- **THE BOUNDS OF REGIONS (A1)/(A2)** (the fields `L < G`, `ℓ(x) < Γ_{x+1}` of the band level datum before it was
+widened to `L < Γ(1)`, `ℓ(x) < Γ_{x+2}`): asked by the files that use `G` itself as a base (`Hn.hnGW`, `Wh.whGW`,
+`Wn.wnGW`) and by the (A1)/(A2) systems.  An old band level datum is exactly a widened one with `HnLvG`
+(`ofHl_G`, `HnLv.succ_G`). -/
+structure HnLvG (Λ : HnLv) : Prop where
+  L_G : Λ.L < gcG 0
+  l_lt : ∀ x, InE x → x < Om1 → Λ.l x < lgG x
+
+/-- **`Hl.HlLv` has the (A1)/(A2) bounds.** -/
+theorem ofHl_G (Λ : HlLv) : HnLvG (ofHl Λ) := ⟨Λ.L_G, Λ.l_lt⟩
+
+theorem hnL1_G : HnLvG hnL1 := ofHl_G hlL1
+
+/-- The widened level bound from the old one. -/
+theorem HnLvG.wL {L : Ordinal.{0}} (h : L < gcG 0) : L < gcG 1 := h.trans (gcG_lt zero_lt_one)
+
+/-- The widened reading bound from the old one. -/
+theorem HnLvG.wl {l : Ordinal.{0} → Ordinal.{0}} (h : ∀ x, InE x → x < Om1 → l x < lgG x) :
+    ∀ x, InE x → x < Om1 → l x < gq 1 x := fun x hx hx1 => (h x hx hx1).trans (mg_lgG_lt_G1 hx hx1)
+
 namespace HnLv
 
 variable (Λ : HnLv)
-
-theorem L_lt (α : Ordinal.{0}) : Λ.L < gcG α := by
-  rcases eq_or_ne α 0 with h | h
-  · rw [h]; exact Λ.L_G
-  · exact Λ.L_G.trans (gcG_lt (pos_iff_ne_zero.2 h))
 
 /-- **The next level datum `L + Ω₁`, read as `ℓ(x) + x`.** -/
 noncomputable def succ : HnLv where
@@ -107,19 +125,27 @@ noncomputable def succ : HnLv where
   g_lt := Λ.g_lt
   q_lt := gl_Om1_lim.add_one_lt Λ.q_lt
   OL := Λ.OL.trans le_self_add
-  L_G := (inE_indec gr_G_inE).add_lt Λ.L_G (hg_Om1_lt_G 0)
+  L_G := (inE_indec (Low.opow_eq_self_of_SC (gcG_SC 1))).add_lt Λ.L_G (hg_Om1_lt_G 1)
   L_eq := by rw [mul_add, mul_one, ← add_assoc, ← Λ.L_eq, Br.Om1_eq]
   g_cl := fun Z y hZ hZ1 hy hLy hy2 => Λ.g_cl Z y hZ hZ1 hy (le_self_add.trans hLy) hy2
   L_mem := fun S a b ha hb => CSet.add_mem (Λ.L_mem S a b ha hb)
     (by rw [Br.Om1_eq]; exact CSet.Om_mem (CSet.one_mem _ _))
   l_ge := fun x => (Λ.l_ge x).trans le_self_add
-  l_lt := fun x hx hx1 => (inE_indec (lgG_facts hx hx1).2.2.2.1).add_lt (Λ.l_lt x hx hx1) (lgG_facts hx hx1).2.1
+  l_lt := fun x hx hx1 => (inE_indec (gm1_facts hx hx1).2.2.2).add_lt (Λ.l_lt x hx hx1) (gm1_facts hx hx1).2.1
   l_pi := fun σ ρ hB hg => by
     obtain ⟨l1, l2⟩ := Λ.l_pi σ ρ hB hg
     obtain ⟨r1, r2⟩ := pi_base hB
     obtain ⟨u1, u2⟩ := pi_add hB l1 r1
     rw [l2, r2] at u2
     exact ⟨u1, u2⟩
+
+/-- **The next level datum keeps the (A1)/(A2) bounds.** -/
+theorem succ_G {Λ : HnLv} (h : HnLvG Λ) : HnLvG Λ.succ :=
+  ⟨(inE_indec gr_G_inE).add_lt h.L_G (hg_Om1_lt_G 0),
+    fun x hx hx1 => (inE_indec (lgG_facts hx hx1).2.2.2.1).add_lt (h.l_lt x hx hx1) (lgG_facts hx hx1).2.1⟩
+
+/-- **An (A1)/(A2) datum: `L + Ω₁ < G`.** -/
+theorem succ_L_G {Λ : HnLv} (h : HnLvG Λ) : Λ.succ.L < gcG 0 := (succ_G h).L_G
 
 theorem succ_L : Λ.succ.L = Λ.L + Om1 := rfl
 
@@ -208,13 +234,8 @@ theorem hnv_rfixω {v : Ordinal.{0}} (hv : LuP (Λ.l x + ν) v) : veblen ω v = 
 variable (hνx : ν < x)
 include hνx
 
-theorem hnv_G : Λ.l x + ν < lgG x :=
-  (inE_indec (lgG_facts hx hx1).2.2.2.1).add_lt (Λ.l_lt x hx hx1) (hνx.trans (lgG_facts hx hx1).2.1)
-
-theorem hnv_G1 : Λ.l x + ν + 1 < lgG x :=
-  (ev_isSuccLimit_of_inE (lgG_facts hx hx1).2.2.2.1).add_one_lt (hnv_G Λ hx hx1 hνx)
-
-theorem hnv_q : Λ.l x + ν < gq 1 x := (hnv_G Λ hx hx1 hνx).trans (mg_lgG_lt_G1 hx hx1)
+theorem hnv_q : Λ.l x + ν < gq 1 x :=
+  (inE_indec (gm1_facts hx hx1).2.2.2).add_lt (Λ.l_lt x hx hx1) (hνx.trans (gm1_facts hx hx1).2.1)
 
 theorem hnv_T : Λ.l x + ν ∈ Tset x ∧ Λ.l x + ν < Om1 := gm1_T hx hx1 (hnv_q Λ hx hx1 hνx)
 

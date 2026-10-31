@@ -163,7 +163,8 @@ theorem hnw_N_pi {κ σ ρ : Ordinal.{0}} (hB : Bases σ ρ) (hγ : max P.γR κ
   have hκρ : κ < ρ := hκσ.trans hB.2.2.1
   obtain ⟨u1, u2⟩ := hnv_lev1_pi Λ hB (P.lg.trans_lt hγσ) hκσ
   obtain ⟨g1, g2⟩ := P.Fr_pi hB hγσ
-  have hq1 : Λ.l ρ + κ + 1 < Om1 := (hnv_G1 Λ hB.2.1 hρ1 hκρ).trans (lgG_facts hB.2.1 hρ1).2.2.1
+  have hq1 : Λ.l ρ + κ + 1 < Om1 :=
+    (gm1_T hB.2.1 hρ1 ((ev_isSuccLimit_of_inE (gm1_facts hB.2.1 hρ1).2.2.2).add_one_lt (hnv_q Λ hB.2.1 hρ1 hκρ))).2
   have h := glA_pi hB u1 hq1 g1 (gm1_T hB.2.1 hρ1 (P.Fr_lt1 hB.2.1 hρ1 hγρ)).2
   rw [u2, g2] at h
   have hgt : ∀ {y}, InE y → y < Om1 → P.γR < y → κ < y → Λ.l y + κ + 1 < P.Fr y := fun hy hy1 hγy hκy =>

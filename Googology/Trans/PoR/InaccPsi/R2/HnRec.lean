@@ -208,6 +208,7 @@ theorem hnkPk_g_lt : ∀ ν, ν < Om1 → ∀ σ, InE σ → (hnkPk ν).Λ.g < �
 /-- **Every `hnkPk μ`, `μ < Ω₁`, and its successor have the outer-field bound `ℓ(x) + x < x·x·2`.** -/
 theorem hnkNB {μ : Ordinal.{0}} (hμ : μ < Om1) : HnNB (hnkPk μ).Λ :=
   hn_NB_of (fun x hx hg => hnkPk_g_lt μ hμ x hx hg) (fun x hg => hnkPk_l hμ hg)
+    (by rw [hnkPk_L hμ]; exact hn_OOM_lt hμ 0)
 
 theorem hnkNB' {μ : Ordinal.{0}} (hμ : μ < Om1) : HnNB (hnkPk μ).Λ.succ := by
   have h := hnkNB (gl_Om1_lim.add_one_lt hμ)

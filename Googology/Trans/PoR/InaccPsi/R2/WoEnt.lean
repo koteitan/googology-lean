@@ -49,9 +49,9 @@ theorem woEnt_at {ℓ : Ordinal.{0}} (hℓ : WmLev ℓ) : WhAt ℓ (woEnt ℓ).1
   have hmx : ∀ x : Ordinal.{0}, max woG.γ (gtc ℓ) < x ↔ max (gtc ℓ) 0 < x := fun x => by
     show max (0 : Ordinal.{0}) (gtc ℓ) < x ↔ _
     rw [max_eq_right zero_le, max_eq_left zero_le]
-  have hN : WhNB (woLv ℓ hℓ) := fun x hx hx1 hg => by
+  have hN : WhNB (woLv ℓ hℓ) := ⟨fun x hx hx1 hg => by
     rw [woLv_l hℓ hx hg]
-    exact (inE_indec (eN_E x)).add_lt (rdc_lt_eN hx ℓ hg) (lt_eN x)
+    exact (inE_indec (eN_E x)).add_lt (rdc_lt_eN hx ℓ hg) (lt_eN x), hℓ.2.2.trans gfE_lt_G0⟩
   refine ⟨rfl, fun x hx _ hg => woLv_l hℓ hx hg, woV_B hℓ, woV_γ hℓ, le_rfl, fun _ _ _ h => h, hN,
     ?_, fun x hx hx1 => ?_, fun x hx hx1 hk => ?_, fun x hx hx1 => ?_, fun c σ h1 h2 hσ hσ1 h3 => ?_⟩
   · show (woV ℓ).B = veblen (ℓ + 0) (gcG 0 + 1)

@@ -41,7 +41,7 @@ noncomputable def wsA1 : WsC where
   g := gtc
   Zo := whZo
   Om1_lt := Om1_lt_eW
-  Bd_le := gfE_lt_G0.le
+  Bd_lt1 := gfE_lt_G0.trans (gcG_lt zero_lt_one)
   add_lt := fun _ _ ha hb => eW_indec.add_lt ha hb
   g_lt := gtc_lt_Om1
   R_Om1 := fun x => (rdc_Om1 x).1
@@ -51,7 +51,7 @@ noncomputable def wsA1 : WsC where
   succ_g_lt := fun hx ha _ hg => wh_gtc_add_Om1_ltE hx ha hg
   g_succ1 := fun hx ht hg => ((rdc_succ _ ht 0).2.2).trans_lt (wo_add_one_lt_inE hx hg)
   le_R := fun hx _ h1 hB _ => wh_le_rdc hx h1 hB
-  R_lt := fun hx hx1 _ hg => (rdc_lt_eN hx _ hg).trans (wh_eN_lt_lgG hx hx1)
+  R_lt := fun hx hx1 _ hg => ((rdc_lt_eN hx _ hg).trans (wh_eN_lt_lgG hx hx1)).trans (mg_lgG_lt_G1 hx hx1)
   R_mono := fun hx _ hc hbc hgc hgb => rdc_mono hx hc hbc hgc hgb
   R_cof := fun hx hx1 hc hg ν hν => by
     obtain ⟨b, hb, hgb, e⟩ := rdc_surj hx hx1.le hc hg hν
@@ -64,6 +64,11 @@ noncomputable def wsA1 : WsC where
     rw [hgU.g_lowE ℓ h]; exact hb
   Zo_fix := whZo_fix
   Zo_G1 := fun _ hx hx1 => whZo_G1 hx hx1
+
+/-- **`G` is a base for `wsA1`.** -/
+theorem wsA1_G : WsCG wsA1 where
+  Bd_le := gfE_lt_G0.le
+  R_lt := fun hx hx1 _ hg => (rdc_lt_eN hx _ hg).trans (wh_eN_lt_lgG hx hx1)
   Zo_gt := fun {x ℓ} hx hx1 h1 hB hg => by
     have hlt : rdc ℓ x < lgG x := (rdc_lt_eN hx ℓ hg).trans (wh_eN_lt_lgG hx hx1)
     have hfix := hjG_fix hx hx1 ((wo_one_lt_inE hx).le.trans (wh_le_rdc hx h1 hB)) hlt
@@ -129,7 +134,7 @@ theorem wsA1_fam : ∀ ℓ, WmLev ℓ → WoSpec ℓ (wsF wsA1_cls ℓ) ∧
 
 /-- **`Wo.woSysAll` REPROVED.** -/
 theorem wsA1_sysAll : ∀ ℓ, WmLev ℓ → ∃ V : HgVD, V.B = veblen ℓ (gcG 0 + 1) ∧ V.γ ≤ gtc ℓ := fun ℓ hℓ =>
-  wsSysAll wsA1_cls ℓ hℓ hℓ.2.2
+  wsSysAll wsA1_G wsA1_cls ℓ hℓ hℓ.2.2
 
 /-- **`Wo.woSysA1` REPROVED (REGION A1)**: every `B < φ(ε_{Ω₁+1}, G+1)` is `≤` the bound of a system over `G`
 whose gate is below `K`. -/
