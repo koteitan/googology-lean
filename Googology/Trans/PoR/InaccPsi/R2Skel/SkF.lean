@@ -18,6 +18,7 @@ import Googology.Trans.PoR.InaccPsi.R2.XfFr
 import Googology.Trans.PoR.InaccPsi.R2.XlW
 import Googology.Trans.PoR.InaccPsi.R2.XhLev
 import Googology.Trans.PoR.InaccPsi.R2.XkLay
+import Googology.Trans.PoR.InaccPsi.R2.XpFr
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -214,6 +215,21 @@ interfaces take the base atom index `k` (`Xk.XkVD k`, `Xk.XkC k`, `Xk.XkCG`, `Xk
 systems over `Γ(k)`) and `skLayFront` (the frontier lemma over `Γ(k)`) for the indices `k + 1 < ε₀`, and
 `skLayLoBig` for the rest; both are theorems at `k = 0` (`skLaySys0`, `skLayFront0`).  `skLayFront k` (`k ≥ 1`)
 contains all of region (A) (the open `skA3T0Start` included): the layers come after (A3).
+
+Round 124 (leaf reg9, modules `R2.Xp*`; the nodes below that use `Xp.*` import `R2.XpFr`, so they can be checked
+only after the merge): REGION (A3) BELOW `φ(t₀, G+1)` IS CLOSED.  The band step is generic (`Xp.XpBd`: a package
+whose level `L > G` has a reading below `ε_{Γ_{x+1}+1}` that is not strongly critical; `Xp.xpBK`, `Xp.XpAt`,
+`Xp.xpK` (the bottoms `φ(L + κ, 0)`, ONE recursion on `κ < Ω₁`), `Xp.xpW` (the `Ω₁`-union `φ(L + Ω₁, 0)`):
+`skA3BandStep`).  ONE well-founded recursion along the (A3) code interface `Xc.xcA3` over every band level
+`G < ℓ < t₀` (`Ω₁ ∣ ℓ`; `G + Ω₁` from `Xl.xlW`, successors by the band step, limits by `ω`-chains or `Ω₁`-unions
+from `Xc.xc_br`, SMALL carried in level form) gives the system at every bottom `φ(ℓ, 0)` (`skA3Bands`); the tower
+union gives `φ(t₀, 0)` with gate `1` (`skA3T0Bot`); the bottom recursion of the level `t₀` (step of `Xc.xcPkT0`)
+reaches the offset `G` (`skA3T0G`), and `skSysA3Lev0W` (`Wn.WnEnt3 S 0`) is PROVED directly (`Xp.xpEnt3`), with the
+pseudo-base `φ(t₀, G)` over `Xc.xcLvT0` (gate `1`), not through `skA3QT0` / `skA3T0Start` (which ask the gate-`0`
+pseudo-base `Xc.xcQT0` and the reading `Γ_{x+1}` of the code `G`; both stay OPEN, OFF THE ROAD).  The frontier moves
+to `ι(Γ(φ(t₀, G+1))·ω)` (`skPastT0`, `skLocT0`, `skFT0Where`, `skHypIffT0`; `Xp.xpT0Hyp_iff`: the hypotheses past it
+are equivalent to those of `Xl.xlwRoadZ`; the road `Xp.xpT0RoadZ` is VACUOUS, `Xp.xpT0Road_vac`, like `Xb.xbRoad`).
+Next: `skSysA3StepW` (an (A3) code interface for the levels in `(t_n, t_{n+1})`, `t_{n+1} = φ(t_n, 0)`).
 -/
 
 set_option autoImplicit false
@@ -774,6 +790,39 @@ theorem skHypIffGW (S : InaccSeq.{0}) (h : ∀ l, Cd.CdRange S l → skPastGW S 
   by_cases h' : skPastGW S l
   · exact h l hr h'
   · exact skLocGW S l hr h'
+
+/-- STATUS: PROVED (definition; round 124)
+SIZE: S
+`l` lies past the frontier `ι(Γ(φ(t₀, G+1))·ω)` (`Xp.XpT0Past`, `t₀ = ε_{G+1}`). -/
+def skPastT0 (S : InaccSeq.{0}) (l : Ordinal.{0}) : Prop := Xp.XpT0Past S l
+
+/-- STATUS: PROVED (Xp.xpT0_notPast; round 124)
+SIZE: S
+UPPER ∧ LOWER ∧ CapV at every range restart below `ι(Γ(φ(t₀, G+1))·ω)` (the system `Xp.xpV1`, gate `1 < K`). -/
+theorem skLocT0 (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → ¬ skPastT0 S l → SkUV S l := fun _ hr h =>
+  Xp.xpT0_notPast S hr h
+
+/-- STATUS: PROVED (Xp.xpT0_past_W, Xp.xpT0_loc; round 124)
+SIZE: S
+WHERE THE FRONTIER IS: past `ι(Γ(φ(t₀, G+1))·ω)` ⇒ past `ι(Γ(φ(G + Ω₁, 0))·ω)`; the new frontier is the located
+`Λ⁺` of a system, with `P(…) < L(0)`. -/
+theorem skFT0Where (S : InaccSeq.{0}) :
+    (∀ l, skPastT0 S l → skPastGW S l) ∧
+    ∃ X : Xt.XtSys, Xt.XtTopPkg X ∧ Xt.xtB1 X = Bt.iota S (Gc.gcG (veblen (Wj.wjT 0) (Gc.gcG 0 + 1)) * ω) ∧
+      Nm.Pv S (Gc.gcG (veblen (Wj.wjT 0) (Gc.gcG 0 + 1)) * ω) < Nc.ncL S 0 := by
+  refine ⟨fun _ h => Xp.xpT0_past_W S h, ?_⟩
+  obtain ⟨X, h1, h2, -, h4⟩ := Xp.xpT0_loc S
+  exact ⟨X, h1, h2, h4⟩
+
+/-- STATUS: PROVED (skLocT0; round 124)
+SIZE: S
+THE FRONTIER MOVES TO `ι(Γ(φ(t₀, G+1))·ω)`: UPPER / LOWER / CapV past it suffice (`Xp.xpT0Hyp_iff`: equivalent to
+the hypotheses of `Xl.xlwRoadZ`). -/
+theorem skHypIffT0 (S : InaccSeq.{0}) (h : ∀ l, Cd.CdRange S l → skPastT0 S l → SkUV S l) :
+    ∀ l, Cd.CdRange S l → skFHo S ≤ l → SkUV S l := fun l hr _ => by
+  by_cases h' : skPastT0 S l
+  · exact h l hr h'
+  · exact skLocT0 S l hr h'
 
 
 /-! ## (A2) and (A3): the level codes past `ε_{Ω₁+1}` (round 116, leaf reg1)
@@ -1432,6 +1481,46 @@ every `B ≤ φ(G + Ω₁, 0)` lies below the bound of a system with gate `< K` 
 theorem skSysA3GW (S : InaccSeq.{0}) : ∀ B, B ≤ veblen (Gc.gcG 0 + Om1) 0 →
     ∃ V : Hg.HgVD, B ≤ V.B ∧ V.γ < Td.tdK S := Xl.xlw_sysG S
 
+/-- STATUS: PROVED (Xp.xpBandStep; round 124)
+SIZE: L
+THE GENERIC BAND STEP: for every band datum `B` (`Xp.XpBd`: a package at a level `L > G` with reading below
+`ε_{Γ_{x+1}+1}`, not strongly critical) a system at the bottom `φ(L, 0)` (`Xp.XpAt`) gives a system at the bottom
+`φ(L + Ω₁, 0)` of the next band, gate `g`, extending it (the levels `L + κ`: `Xp.xpK`, the `Ω₁`-union: `Xp.xpW`). -/
+theorem skA3BandStep (B : Xp.XpBd) (U0 : Hg.HgVD) (hU0 : Xp.XpAt B.K.Λ 0 U0) :
+    ∃ V : Hg.HgVD, Xp.XpAt B.succ.K.Λ 0 V ∧ V.γ = B.K.Λ.g ∧
+      ∀ c x, c < U0.B → V.R c x = U0.R c x ∧ V.g c = U0.g c :=
+  Xp.xpBandStep B U0 hU0
+
+/-- STATUS: PROVED (Xp.xpFam, Xp.xpSys_B, Xp.xpSys_γ, Xp.xpSys_hgU; round 124)
+SIZE: L
+EVERY (A3) BAND LEVEL: for every `G < ℓ < t₀` with `Ω₁ ∣ ℓ` a system with bound `φ(ℓ, 0)`, gate `≤ xg ℓ`, at the
+bottom of the datum `Xc.xcA3.lv ℓ`, extending `Hg.hgU`; one well-founded recursion along `Xc.xcA3` (later members
+extend earlier ones). -/
+theorem skA3Bands : ∀ ℓ, Gc.gcG 0 < ℓ → Om1 ∣ ℓ → ℓ < Wj.wjT 0 → ∃ U : Hg.HgVD, U.B = veblen ℓ 0 ∧ U.γ ≤ Xc.xg ℓ ∧
+    ∀ c x, c < Hg.hgU.B → U.R c x = Hg.hgU.R c x ∧ U.g c = Hg.hgU.g c := fun ℓ h1 h2 h3 =>
+  ⟨Xp.xpSys ℓ, Xp.xpSys_B ⟨h1, h2, h3⟩, Xp.xpSys_γ ⟨h1, h2, h3⟩, fun _ x hc => Xp.xpSys_hgU ⟨h1, h2, h3⟩ hc x⟩
+
+/-- STATUS: PROVED (Xp.xpV0, Xp.xp_at_t0; round 124)
+SIZE: M
+THE BOTTOM `φ(t₀, 0)`: the union of the tower bands, a system with bound `φ(t₀, 0)`, gate `1`, at the bottom of the
+datum `Xc.xcLvT0` of `t₀`. -/
+theorem skA3T0Bot : ∃ U : Hg.HgVD, U.B = veblen (Wj.wjT 0) 0 ∧ U.γ = 1 ∧ Xp.XpAt Xp.xpBT0.K.Λ 0 U :=
+  ⟨Xp.xpV0, Xp.xpV0_B, Xp.xpV0_γ, Xp.xp_at_t0⟩
+
+/-- STATUS: PROVED (Xp.xpQG, Xp.xpQG_start; round 124)
+SIZE: L
+THE LEVEL `t₀` UP TO THE OFFSET `G`: a pseudo-base of level `t₀ + 0` at `φ(t₀, G)` over the datum `Xc.xcLvT0`
+(gate `1`) and a system starting it (the stage `G` of the bottom recursion of `t₀`). -/
+theorem skA3T0G : ∃ (Q : Hn.HnVQ (Wy.wyLv Xc.xcLvT0) 0) (U : Hg.HgVD) (_ : Hg.HgSStart (Hn.hnVPB Q) U),
+    Q.F = veblen (Wj.wjT 0) (Gc.gcG 0) ∧ Q.γ = 1 :=
+  ⟨Xp.xpQG, Xp.xpVT (Gc.gcG 0), Xp.xpQG_start, Xp.xpQG_F, Xp.xpQG_γ⟩
+
+/-- STATUS: PROVED (Xp.xpT0_sysG; round 124)
+SIZE: S
+every `B ≤ φ(t₀, G+1)` lies below the bound of a system with gate `< K` (the step of `Xc.xcPkT0` at skA3T0G). -/
+theorem skSysA3T0G (S : InaccSeq.{0}) : ∀ B, B ≤ veblen (Wj.wjT 0) (Gc.gcG 0 + 1) →
+    ∃ V : Hg.HgVD, B ≤ V.B ∧ V.γ < Td.tdK S := Xp.xpT0_sysG S
+
 /-- STATUS: OPEN
 SIZE: L
 a system starting the pseudo-base `φ(t₀, G)` (round 121).  By `Xc.xc_start_iff`: `U.ix = φ(t₀, G)` (so
@@ -1459,11 +1548,17 @@ step `Hn.hnVLS xfPk.St0 κ`; (2) unions at limit `κ < Ω₁` and at `Ω₁` (`H
 interface (the band `G + Ω₁` is `Hn.HnLv.succ xfLv` with the package `HnPk.succ xfPk`; the bottom base `Xl.XlB` and
 the transfer `Xl.xl_start_of_at` / `Xl.xl_at_top` must be made generic in the band, `Xl.XlK*` / `Xl.XlW` are written
 for `xfLv`), the limits of bands (`Ω₁`-cofinal and `ω`-cofinal band codes, the packages of `Xc.xcFam`), the level
-`t₀`, and the offsets `ν ≤ G` at `t₀`. -/
+`t₀`, and the offsets `ν ≤ G` at `t₀`.
+Round 124: REFUTE FIRST again NO EVIDENCE.  All of that is DONE (skA3BandStep, skA3Bands, skA3T0Bot, skA3T0G), but
+for the pseudo-base over `Xc.xcLvT0` (gate `1`) and with the reading `R_U(G)` of the code `G` in the system itself;
+`skSysA3Lev0W` is PROVED from it directly (`Xp.xpEnt3`), so this node is OFF THE ROAD.  What it still asks beyond
+skA3T0G: `U.R G x = Γ_{x+1}` in the systems (no Lean lemma tracks the readings of the codes below `G` through the
+chain `Hg.hgU ← Hf ← … ← Gw.gw0`; `Gw.gw0` has base reading `Γ_{x+1}` at the bound `G`). -/
 theorem skA3T0Start : ∃ U : Hg.HgVD, Hg.HgSStart (Hn.hnVPB Xc.xcQT0) U := by
   sorry
 
-/-- STATUS: REDUCED (skA3T0Start, Xc.xcQT0_of_start; round 121, was OPEN L)
+/-- STATUS: REDUCED (skA3T0Start, Xc.xcQT0_of_start; round 121, was OPEN L; OFF THE ROAD since round 124:
+skSysA3Lev0W is PROVED by Xp.xpEnt3 over the datum Xc.xcLvT0)
 SIZE: L
 the pseudo-base φ(t₀, G) of level t₀ over the datum of t₀ (bound fields: Wn.wnQ3_bounds) with gate < K, and a
 system starting it.  REFUTE FIRST: NO EVIDENCE; it is the second half of the target in Hn form (skA3EntHn) at
@@ -1473,20 +1568,23 @@ theorem skA3QT0 (S : InaccSeq.{0}) : ∃ (Q : Hn.HnVQ (Wy.wyLv Wn.wnLv3T0) 0) (U
   obtain ⟨U, hU⟩ := skA3T0Start
   exact Xc.xcQT0_of_start S U hU
 
-/-- STATUS: REDUCED (skA3QT0 only, by Xc.xcEnt3_of; round 121; was REDUCED to skA3TowPk, skA3QT0)
+/-- STATUS: PROVED (Xp.xpEnt3; round 124; was REDUCED (skA3QT0 only, by Xc.xcEnt3_of))
 SIZE: L
 the (A3) package at t₀ = ε_{G+1} (Xc.xcPkT0: the ω-limit of the (A3) family at the towers, datum Xc.xcLvT0 of gate 1)
-and the pseudo-base φ(t₀, G) of level t₀ with gate < K and a system starting it (skA3QT0; its raise to the gate
-`max 1 γ` is started by the same system, Xc.xc_start_raise). -/
-theorem skSysA3Lev0W (S : InaccSeq.{0}) : SkPk3W S 0 := by
-  obtain ⟨Q, U, hU, hF, hγ⟩ := skA3QT0 S
-  exact Xc.xcEnt3_of S Q U hU hF hγ
+and the pseudo-base φ(t₀, G) of level t₀ with gate < K and a system starting it: the pseudo-base and the system of
+skA3T0G (gate 1), no longer through skA3QT0. -/
+theorem skSysA3Lev0W (S : InaccSeq.{0}) : SkPk3W S 0 := Xp.xpEnt3 S
 
 /-- STATUS: OPEN
 SIZE: L
 t_n ↦ t_{n+1} = φ(t_n, 0) with the full package as invariant: the (A3) level induction over the codes in
 (t_n, t_{n+1}] (the (A2) induction one level up: atoms {Ω₁, G}, readings Γ_{x+1} < ℓ(x) < Γ_{x+2}), then the
-pseudo-base φ(t_{n+1}, G) (reached by the offset recursion of level t_{n+1} along the second argument up to G). -/
+pseudo-base φ(t_{n+1}, G) (reached by the offset recursion of level t_{n+1} along the second argument up to G).
+Round 124: REFUTE FIRST: NO EVIDENCE (no listed no-go result mentions packages, starts or levels past t₀).  The
+machinery of round 124 is generic in the band (`Xp.XpBd`, `Xp.XpAt`, `Xp.xpBandStep`) except the bound
+`ε_{Γ_{x+1}+1}` of the readings (field `Xp.XpBd.l_lt`, the low field `Xp.xpZ`) and the code interface `Xc.xcA3`
+(bound t₀); missing: a code interface for the levels in (t_n, t_{n+1}) (Veblen nodes φ(α, ·), α < t_n, read with
+`Ω₁ ↦ x`), its classification, its packages, then the same recursion with the bound of t_{n+1}. -/
 theorem skSysA3StepW (S : InaccSeq.{0}) : ∀ n, SkPk3W S n → SkPk3W S (n + 1) := by
   sorry
 

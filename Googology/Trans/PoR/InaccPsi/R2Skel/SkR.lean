@@ -14,6 +14,9 @@ import Googology.Trans.PoR.InaccPsi.R2.WzUp
 import Googology.Trans.PoR.InaccPsi.R2.XdLaw1
 import Googology.Trans.PoR.InaccPsi.R2.XiRef
 import Googology.Trans.PoR.InaccPsi.R2.XmLim
+import Googology.Trans.PoR.InaccPsi.R2.XqTop
+import Googology.Trans.PoR.InaccPsi.R2.XsTop
+import Googology.Trans.PoR.InaccPsi.R2Skel.SkE
 
 /-!
 # Skeleton, part "readings": the reading move `hν → Wd.WdThLow S`
@@ -73,6 +76,22 @@ sub-bases `β + W^{X+e}·u_n` (`skTopUpSucc`), limits by continuity over the cod
 `Xi.xiReadOm`).  REFUTE FIRST at `e = 1` and `e = ω + 1` (`k = 0`, `β = 0`): both hold (`skTopUpTests`).
 `skWallBase`, `skWallStep` keep their statements (hypothesis `Xi.XiTopUp`, now a theorem) and stay OPEN.  This file
 imports the new module `R2.XmLim`: it can be checked only after the merge.
+Round 124 (leaf read48): REFUTE FIRST on the `ψ₂(T a)` form off the top atoms: REFUTED at `a = Ω₃ + 1`
+(`skWallRefNonTop`, `Xq.xqRef_wit`: `Θ(ψ₂(Ω₃ + 1)) = ψ₁(A + 1 + ψ₂(Ω₂) + 1) < ψ₁(A + 1 + ψ₂(T(Ω₃ + 1)))`).  New PROVED
+nodes for the missing pieces of `skWallBase` / `skWallStep`: (1) the block law above every top atom with the proved
+top value (`skTopBlk`, `Xq.xqTopBlk`: `Θ(ψ₂(t + c)) = ψ₁(A + 1 + ψ₂(T t) + Θ c)` for codes `c < ψ₂(t + Ω₂)`, and
+`Θ(ψ₂(t + Ω₂)) = ψ₁(A + 1 + ψ₂(T t) + Ω₁)`); (2) the move of `T` at every wall atom from the moves of the codes below
+it (`skTMove`, `Xq.xqTMove`: `T_{λ'}(B_n x) = B_n(T_λ x)` for `x ∈ D ∩ Cl(a, ψ₂ a)`), and `B_n` through `σ`
+(`skSigMove`, `Xq.xqSigMove`); (3) every top atom moves once its base data move (`skTopMove`, `Xq.xqTopMove`).
+`skWallBase`, `skWallStep` keep their statements and stay OPEN.  This file imports the new module `R2.XqTop`: it can
+be checked only after the merge.
+Round 124 (leaf far1): the readings past `M_W` on `[M_W, K_ω)` (`K_0 = 1`, `K_{j+1} = ψ_{Ω₂}(Ω_ω + Ω₂·K_j)`,
+`K_1 = M_W`): `Θ(ψ_{Ω₂}(Ω_ω + Ω₂·γ)) = ψ_{Ω₁}(A + θ + Ω₁·Θ γ)` (`skXsBase` = `Xs.xsBase`, one induction on the code `γ`)
+and the blocks above them (`skXsBlk` = `Xs.xsBlk`), and their move (`skXsMove` = `Xs.xsMove`: every window code
+`θ⁺ ≤ m_λ < K_{J+1}` moves, given the code-free wall).  `skThFar` (FarLowMove) is REDUCED to `skWallCF` and the new
+shared leaf `skTopK` (`Xs.XsTopK`: the move at every window code `≥ K_ω`; shared with SkE).  REFUTE FIRST:
+the level-down reading `ψ_{Ω₁}(A + θ + T d)` is REFUTED at `d = Ω_{k+1}`, `k ≥ 2` (`Xs.xsRefK`, record in SkE
+`skXsRef`).  This file imports the new module `R2.XsTop`: it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -551,11 +570,115 @@ theorem skX0Tests2 (S : InaccSeq.{0}) :
   fun _ _ _ hl hX hA hρ =>
     ⟨fun _ hT => Wz.wzImg0_ge hl hX hA hρ hT, fun _ hT => Wz.wzImg1_gt hl hX hA hρ hT, Wz.wzU_Om3 hl hX hA hρ⟩
 
+/-- STATUS: PROVED (Xq.xqRef_wit, from Xq.xqRef, Xq.xqBlk, Wz.wzBase, Vh.vhT_add, Vb.vbT_Om; NEW round 124; the
+REFUTE-FIRST record for the non-top atoms; checkable only after the merge)
+SIZE: S
+At the restart of m* = L(0) with its own A, the normal member a = Ω₃ + 1 ∈ D has
+`Θ(ψ₂ a) ≠ ψ₁(A + 1 + ψ₂(T a))` (the value is `ψ₁(A + 1 + ψ₂(Ω₂) + 1)`, the block law over the top Ω₃). -/
+theorem skWallRefNonTop (S : InaccSeq.{0}) :
+    ∃ l ηx A : Ordinal.{0}, IsRestartIdx l ∧ upsilon l < Nm.Pv S ηx ∧ A ∈ S.CSet A (S.psi A (Om 1)) ∧
+      S.psi A (Om 1) = upsilon l ∧ Vb.VbD S l (Om (1 + 1 + 1) + 1) ∧
+      Om (1 + 1 + 1) + 1 ∈ S.CSet (Om (1 + 1 + 1) + 1) (S.psi (Om (1 + 1 + 1) + 1) (Om (1 + 1))) ∧
+      gxTh (upsilon l) (ldAtR S l) (S.psi (Om (1 + 1 + 1) + 1) (Om (1 + 1))) ≠
+        S.psi (A + 1 + S.psi (Vb.vbT S l (Om (1 + 1 + 1) + 1)) (Om (1 + 1))) (Om 1) :=
+  Xq.xqRef_wit S
+
+/-- STATUS: PROVED (Xq.xqTopBlk, from Xq.xqBlk, Xq.xqOwn, Xm.xmTopUp, Ld.ldBlk_step, Ld.ldBlk_next; NEW round 124;
+checkable only after the merge)
+SIZE: M
+The block law with the proved top value, above every top atom `t = β + W^{Ω_{k+3}+e}`:
+`Θ(ψ₂(t + c)) = ψ₁(A + 1 + ψ₂(T t) + Θ c)` (codes `c < ψ₂(t + Ω₂)`), `Θ(ψ₂(t + Ω₂)) = ψ₁(A + 1 + ψ₂(T t) + Ω₁)`. -/
+theorem skTopBlk (S : InaccSeq.{0}) :
+    ∀ (k : ℕ) (l ηx A e β : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      GxCl (upsilon l) (ldAtR S l) e → e < Om (1 + 1) → Vb.VbD S l β →
+      Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) e β →
+      (∀ c, GxCl (upsilon l) (ldAtR S l) c → c < ldTop S (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) →
+        gxTh (upsilon l) (ldAtR S l) (S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e) + c) (Om (1 + 1))) =
+          S.psi (A + 1 + S.psi (Vb.vbT S l (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e))) (Om (1 + 1)) +
+            gxTh (upsilon l) (ldAtR S l) c) (Om 1)) ∧
+      gxTh (upsilon l) (ldAtR S l) (ldTop S (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e))) =
+        S.psi (A + 1 + S.psi (Vb.vbT S l (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e))) (Om (1 + 1)) + Om 1)
+          (Om 1) :=
+  fun k _ _ _ _ _ hl hX hA hρ hec he2 hβD hB => Xq.xqTopBlk hl hX hA hρ k hec he2 hβD hB
+
+/-- STATUS: PROVED (Xq.xqTMove, from Xq.xqTE, Xq.xqN_cl, Xq.xqLeaf, Vb.vbLeaf_of_codes, Vb.vbT_move, Xd.xdT_cl;
+NEW round 124; checkable only after the merge)
+SIZE: M
+The move of `T` at a wall atom `ψ₂ a` (`a ∈ D` normal) from the moves of the codes below it (the premise of
+WallBelow): `T_{λ'}(B_n x) = B_n(T_λ x)` for every `x ∈ D ∩ Cl(a, ψ₂ a)`. -/
+theorem skTMove (S : InaccSeq.{0}) :
+    ∀ (n : ℕ) (l l' ηx ηx' A a : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      IsRestartIdx l' → upsilon l' < Nm.Pv S ηx' →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      (∀ x, GxCl (upsilon l) (ldAtR S l) x → x < S.psi a (Om (1 + 1)) → MvD S x ∧
+        GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
+        gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) →
+      ∀ x, Vb.VbD S l x → x ∈ S.CSet a (S.psi a (Om (1 + 1))) →
+        MvD S x ∧ MvD S (Vb.vbT S l x) ∧ Vb.vbT S l' (Bc.bcB S n x) = Bc.bcB S n (Vb.vbT S l x) :=
+  fun _ _ _ _ _ _ _ hl hX hl' hX' hA hρ IH => Xq.xqTMove hl hX hl' hX' hA hρ IH
+
+/-- STATUS: PROVED (Xq.xqSigMove, from Xq.xqOwn, Xq.xqTnorm, Ld.ldB_psi_add, Ug.ugB_psiS, Mx.mxPsi_inj; NEW round 124;
+checkable only after the merge)
+SIZE: S
+`B_n` through `σ`: at a window (`c_n ≤ ρ_λ`, `B_n ρ_λ = ρ_{λ'}`), `B_n(ψ₁(A + 1 + ψ₂(T a))) = ψ₁(A' + 1 + ψ₂(B_n(T a)))`
+for every normal `a ∈ D` with `T a ∈ MvD` and `ψ₁(A + 1 + ψ₂(T a)) < c_{n+1}`. -/
+theorem skSigMove (S : InaccSeq.{0}) :
+    ∀ (n : ℕ) (l l' ηx A A' a : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      A' ∈ S.CSet A' (S.psi A' (Om 1)) → S.psi A' (Om 1) = upsilon l' →
+      Bc.bcC S n ≤ upsilon l → Bc.bcB S n (upsilon l) = upsilon l' → Vb.VbD S l a →
+      a ∈ S.CSet a (S.psi a (Om (1 + 1))) → MvD S (Vb.vbT S l a) →
+      S.psi (A + 1 + S.psi (Vb.vbT S l a) (Om (1 + 1))) (Om 1) < Bc.bcC S (n + 1) →
+      Bc.bcB S n (S.psi (A + 1 + S.psi (Vb.vbT S l a) (Om (1 + 1))) (Om 1)) =
+        S.psi (A' + 1 + S.psi (Bc.bcB S n (Vb.vbT S l a)) (Om (1 + 1))) (Om 1) :=
+  fun _ _ _ _ _ _ _ hl hX hA hρ hA' hρ' hlo hB ha han hDT hhi =>
+    (Xq.xqSigMove hl hX hA hρ hA' hρ' hlo hB ha han hDT hhi).2.2
+
+/-- STATUS: PROVED (Xq.xqTopMove, from Xq.xqTopD, Xq.xqLawMove, Xq.xqTMove, Xq.xqSigMove, Xm.xmTopUp at λ and λ';
+NEW round 124; checkable only after the merge)
+SIZE: M
+Every top atom `ψ₂(t)`, `t = β + W^{Ω_{k+3}+e}`, moves under the premise of WallBelow once its BASE DATA move
+(`B_n t = β' + W^{Ω_{k+3}+e'}` with `(e', β')` a top base of `λ'`) and `Θ(ψ₂ t) < c_{n+1}`. -/
+theorem skTopMove (S : InaccSeq.{0}) :
+    ∀ (n k : ℕ) (l l' ηx ηx' A A' e β e' β' : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      IsRestartIdx l' → upsilon l' < Nm.Pv S ηx' →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      A' ∈ S.CSet A' (S.psi A' (Om 1)) → S.psi A' (Om 1) = upsilon l' →
+      Bc.bcC S n ≤ upsilon l → Bc.bcB S n (upsilon l) = upsilon l' →
+      GxCl (upsilon l) (ldAtR S l) e → e < Om (1 + 1) → Vb.VbD S l β →
+      Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) e β →
+      GxCl (upsilon l') (ldAtR S l') e' → e' < Om (1 + 1) → Vb.VbD S l' β' →
+      Ro.RoBaseE S l' (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) e' β' →
+      Bc.bcB S n (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) =
+        β' + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e') →
+      (∀ x, GxCl (upsilon l) (ldAtR S l) x →
+        x < S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1)) → MvD S x ∧
+        GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
+        gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) →
+      gxTh (upsilon l) (ldAtR S l) (S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1))) <
+        Bc.bcC S (n + 1) →
+      gxTh (upsilon l') (ldAtR S l')
+          (Bc.bcB S n (S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1)))) =
+        Bc.bcB S n (gxTh (upsilon l) (ldAtR S l)
+          (S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1)))) :=
+  fun _ k _ _ _ _ _ _ _ _ _ _ hl hX hl' hX' hA hρ hA' hρ' hlo hB hec he2 hβD hBE hec' he2' hβD' hBE' hmv IH hhi =>
+    (Xq.xqTopMove hl hX hl' hX' hA hρ hA' hρ' hlo hB k hec he2 hβD hBE hec' he2' hβD' hBE' hmv IH hhi).2.2
+
 /-- STATUS: OPEN (RISK: the family law fixes no B_n-move of the images X̂_e; the step will likely need, in addition,
 `B_n X̂^λ_e(β) = X̂^{λ'}_{B_n e}(B_n β)`, which is itself a move statement; round 112: for own images that move IS the
 atom move at T_{X+e}(β), Wr.wrImgMove_iff, so it cannot be added as a hypothesis without assuming the conclusion)
 (round 112: CHANGED to the code-free WallBelow)
 (round 122: hypothesis CHANGED from the REFUTED Wg.WgTopFamAll (with it the node was vacuous) to Xi.XiTopUp)
+(round 124: REFUTE FIRST: the ψ₂(T a) form fails off the top atoms (skWallRefNonTop, a = Ω₃ + 1); (i) is PROVED in the
+first block above every top (skTopBlk), (ii) is PROVED (skTMove, skSigMove), and every top atom moves once its base
+data move (skTopMove).  Still missing: the BASE-DATA MOVE (B_n of a top base β + W^{X+e} is a top base β' + W^{X+e'}
+of λ', with RoBaseE at λ'), the bound Θ(ψ₂ t) < c_{n+1}, and the non-top atoms past the first block: offsets
+δ < W^X over a base t (the region [ψ₂(t), ψ₂(t + Y₃)] relative to t, i.e. Ux.uxAtMoveTop redone at every base t with
+the base image A + 1 + ψ₂(T t)), the sub-bases β + W^{X+e}·γ at limit γ (continuity, as in Xm.xmLim, once
+RoBaseE holds at the sub-bases), and the ψ₃-atoms inside the exponents.)
 (round 123: the hypothesis Xi.XiTopUp is now a theorem (skTopUp), so the node is not vacuous; still OPEN.  Missing:
 (i) the readings of the non-top atoms ψ₂(β + W^{X+e}·γ + δ) (block laws in the style of Ro.roStepA with the image
 ψ₁(A + 1 + ψ₂(T ·)) in place of a constant image; skTopUp gives only the tops), (ii) the B_n move of T = Vb.vbT and of
@@ -573,6 +696,7 @@ theorem skWallBase (S : InaccSeq.{0}) : Xi.XiTopUp S → Nc.ncL S (ω + 1) ≤ n
 (round 112: CHANGED to the code-free WallBelow)
 (round 122: hypothesis CHANGED from the REFUTED Wg.WgTopFamAll (with it the node was vacuous) to Xi.XiTopUp)
 (round 123: Xi.XiTopUp is now a theorem (skTopUp); still OPEN, same missing pieces (i), (ii) as skWallBase, generic in k)
+(round 124: skTopBlk, skTMove, skSigMove, skTopMove are generic in k; the same pieces as skWallBase are missing)
 SIZE: L
 `TopUp ∧ hν ⇒ ∀ k, (atoms < ψ₂(Ω_{k+4}) move) ⇒ (atoms < ψ₂(Ω_{k+5}) move)` (one level up; the step
 Ω_{k+3} → Ω_{k+4} of the readings with sub-base images; Wb.wbKe_sup_it / wbTe_gt_Om give the layer facts).
@@ -748,14 +872,20 @@ SIZE: M
 theorem skThMid (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → Rn.RnThMoveM S :=
   skMidCF S (skWallCF S)
 
-/-- STATUS: OPEN
-SIZE: L
-`hν ⇒ ∀ window λ, m_λ > M_W, Θ_λ(m_λ) < δ_λ·ω : B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})`.  L: no reading Θ_λ(m) is known
-for m > M_W (Th.ThObs: the level-shift lift stops at M_W); expected: atoms ψ₂(Ω_ω + Ω₂ + c) with c < P′.
-Sibling leaf: `R2Skel.SkE.skThFar` (the same move at the far codes, `δ_λ·ω ≤ Θ_λ(m_λ)`); one reading move at
-every code `≥ θ⁺` (`R2Skel.SkE.SkThTop`) closes both (`SkE.skThFar_of_top`, `SkE.skThHi_of_top`). -/
-theorem skThFar (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → FarLowMove S := by
-  sorry
+/-- STATUS: REDUCED (SkE.skTopK; round 124: the shared leaf, one copy kept in SkE)
+SIZE: S
+`hν ⇒ ∀ window λ → λ', (∀ j, K_j ≤ m_λ) ⇒ B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})`  (statement Xs.XsTopK S; the OPEN leaf is
+`R2Skel.SkE.skTopK`). -/
+theorem skTopK (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → Xs.XsTopK S :=
+  fun hν => _root_.R2Skel.SkE.skTopK hν
+
+/-- STATUS: REDUCED (round 124; was OPEN: skWallCF, skTopK; Xs.xsFarLow, Xs.xsMove)
+SIZE: M
+`hν ⇒ ∀ window λ, m_λ > M_W, Θ_λ(m_λ) < δ_λ·ω : B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})`: the codes `M_W < m_λ < K_ω` move by
+`Xs.xsMove` (block readings `Xs.xsBlk` at λ and λ', `Ld.ldB_psi_add`, `Ld.ldGxStepRec` with the bound `K_{J+1}`;
+atoms below `θ⁺` by the wall), the codes `m_λ ≥ K_ω` by `skTopK`.  Checkable only after the merge. -/
+theorem skThFar (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → FarLowMove S :=
+  fun hν => Xs.xsFarLow (skWallCF S hν) (Xs.xsFarHi_of_top (skTopK S hν))
 
 /-- STATUS: REDUCED (skThMid, skThFar)
 SIZE: L
@@ -795,5 +925,48 @@ theorem skNonVac (S : InaccSeq.{0}) (hEQ : Cd.CdEQ S) (hat : Nc.ncL S (ω + 1) �
   refine ⟨hW, fun hν => (Wd.wdRn_of hν (hH hν) (hF hν)).1, fun hν => ?_⟩
   intro n l l' hR h1 hr hl' hB hm _ hw
   exact (Wd.wdRoadL_hyps hEQ).1 hν n l l' hR h1 hr hl' hB hm hw
+
+/-! ## Round 124 (leaf far1): the readings past `M_W` -/
+
+/-- STATUS: PROVED (Xs.xsBase, from Wl.wlThVal, Ld.ldBlk_next, Ld.ldAtom_le, Ld.ldPsi1_le, Le.leDivOp_mem; NEW round 124;
+checkable only after the merge)
+SIZE: L
+`restart λ, A_{η_λ} own, Ω_ω + Ω₂·Ω₂ ≤ A, γ < Ω₂ a code whose codes γ' ≤ γ satisfy γ' < ψ₂(Ω_ω + Ω₂·γ') ⇒
+Θ(ψ₂(Ω_ω + Ω₂·γ)) = ψ₁(A + θ + Ω₁·Θ γ)` (successors by the next base, limits by cofinality). -/
+theorem skXsBase (S : InaccSeq.{0}) {l ηx : Ordinal.{0}} (hl : IsRestartIdx l) (hX : upsilon l < Nm.Pv S ηx)
+    (hown : ConjT.Aη S (cdEta S l) ∈
+      S.CSet (ConjT.Aη S (cdEta S l)) (S.psi (ConjT.Aη S (cdEta S l)) (Om 1)))
+    (hAb : Om ω + Om (1 + 1) * Om (1 + 1) ≤ ConjT.Aη S (cdEta S l)) :
+    ∀ γ, GxCl (upsilon l) (ldAtR S l) γ → γ < Om (1 + 1) →
+      (∀ γ', GxCl (upsilon l) (ldAtR S l) γ' → γ' ≤ γ → Xs.XsOwn S γ') →
+      gxTh (upsilon l) (ldAtR S l) (S.psi (Xs.xsB γ) (Om (1 + 1))) =
+        S.psi (ConjT.Aη S (cdEta S l) + ConjT.th S + Om 1 * gxTh (upsilon l) (ldAtR S l) γ) (Om 1) :=
+  Xs.xsBase hl hX hown hAb
+
+/-- STATUS: PROVED (Xs.xsBlk, from skXsBase, Ld.ldBlk_step; NEW round 124; checkable only after the merge)
+SIZE: S
+the block law above every own base: `Θ(ψ₂(Ω_ω + Ω₂·γ + c)) = ψ₁(A + θ + Ω₁·Θ γ + Θ c)` for codes `c < ψ₂(Ω_ω + Ω₂·(γ+1))`. -/
+theorem skXsBlk (S : InaccSeq.{0}) {l ηx : Ordinal.{0}} (hl : IsRestartIdx l) (hX : upsilon l < Nm.Pv S ηx)
+    (hown : ConjT.Aη S (cdEta S l) ∈
+      S.CSet (ConjT.Aη S (cdEta S l)) (S.psi (ConjT.Aη S (cdEta S l)) (Om 1)))
+    (hAb : Om ω + Om (1 + 1) * Om (1 + 1) ≤ ConjT.Aη S (cdEta S l)) {γ : Ordinal.{0}}
+    (hγ : GxCl (upsilon l) (ldAtR S l) γ) (hγ2 : γ < Om (1 + 1))
+    (hown' : ∀ γ', GxCl (upsilon l) (ldAtR S l) γ' → γ' ≤ γ → Xs.XsOwn S γ') :
+    ∀ c, GxCl (upsilon l) (ldAtR S l) c → c < ldTop S (Xs.xsB γ) →
+      gxTh (upsilon l) (ldAtR S l) (S.psi (Xs.xsB γ + c) (Om (1 + 1))) =
+        S.psi (ConjT.Aη S (cdEta S l) + ConjT.th S + Om 1 * gxTh (upsilon l) (ldAtR S l) γ +
+          gxTh (upsilon l) (ldAtR S l) c) (Om 1) :=
+  Xs.xsBlk hl hX hown hAb hγ hγ2 hown'
+
+/-- STATUS: PROVED (Xs.xsMove, from Xs.xsAtMove, Xs.xsAt_cls, Wr.wrAtLow, Ld.ldGxStepRec; NEW round 124; checkable only
+after the merge)
+SIZE: M
+`Wr.WrWallCF ⇒ ∀ J, ∀ window, θ⁺ ≤ m_λ < K_{J+1} ⇒ B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})`. -/
+theorem skXsMove (S : InaccSeq.{0}) (hW : Wr.WrWallCF S) (J : ℕ) :
+    ∀ n : ℕ, ∀ l l', CdRange S l → Bc.bcC S n < upsilon l → cdR S l < Bc.bcC S (n + 1) →
+      IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
+      Lj.ljThP S ≤ cdCode S l → cdCode S l < Xs.xsK S (J + 1) →
+      Bc.bcB S n (cdTheta S l (cdCode S l)) = cdTheta S l' (cdCode S l') :=
+  Xs.xsMove hW J
 
 end Googology.Trans.PoR.InaccPsi.R2Skel.SkR
