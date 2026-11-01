@@ -6,6 +6,7 @@
 - A から B への変換では、矢印をつないだ経路をたどります。
 - 実線の矢印は、書いてある範囲（定義域）で Lean が証明している写像です。
 - 点線の矢印は、`--wide` を付けたときだけ使います。Lean では `#guard` で確かめただけで、証明はありません。
+- 点線の矢印 `o?` は、`--candidate` を付けたときだけ使う。予想であり、**証明はなく**、Lean にもない。
 
 ```mermaid
 flowchart LR
@@ -39,6 +40,7 @@ flowchart LR
   exb -->|unread 0: e0 未満| bms1
   bms2 -->|pairOrdTerm| exb
   ssoss -->|o: (0,0,2) 未満| exb
+  ssoss -.->|o?: 候補, 証明なし| exb
   exb -->|trioE2: p0 W_a, a は W 未満, 添字は 0 か 1| bms3
   exb -.->|trioMatrixLSt: p0 W_a| bms3
   ord -.->|trioRuleMatrixSt: ラベル a| bms3
@@ -61,6 +63,7 @@ flowchart LR
 | `trioMatrixLSt` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:422` | `p0(W_a)` の形。`--wide` のときだけ |
 | `trioRuleMatrixSt` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:410` | シートのラベル `a`。`p0(W_a)` として読む。`--wide` のときだけ |
 | `o` | `Googology/Notation/SSOSS/SequenceOrdinal.lean:17` | 強2階探索数列。成分が 0 か 1 で、長さ 2 以上なら (0,0) で始まる |
+| `o?` | なし。[ssosn](https://github.com/koteitan/ssosn) の `work/token_value.py` を移したもの。**証明なし** | `(0,0,2) ≤ s < (0,0,2,1,0,2,1,1)` の標準形の数列 `s`。`--candidate` のときだけ（[README-ja.md](README-ja.md)） |
 | `phi.py`、`tr.py`、`phi3def2.py`、`tr3.py` | `Googology/Trans/BMS/PoR/` | プログラムのとおり |
 
 `bmsN` と `dbmsN` は、どの行数でもよいことを表します。`zeroRow` は、どの `N` でも `N` 行から `N+1` 行へ移します。
@@ -70,7 +73,7 @@ flowchart LR
 A から B への経路は、次の順に試します。
 
 1. 短い経路から先に試します。
-2. 長さが同じなら、点線の矢印が少ない経路を先に試します。それも同じなら、行列だけを通る経路（`zeroRow`）を先に試します。
+2. 長さが同じなら、`o?` を通らない経路、点線の矢印が少ない経路、行列だけを通る経路（`zeroRow`）の順に先に試す。
 
 - 経路上のすべての矢印が入力を受け付けた、最初の経路の結果を出します。
 - どれかの矢印が入力を拒んだら、次の経路を試します。

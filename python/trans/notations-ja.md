@@ -29,7 +29,7 @@
 | `inacc` | | ω 個の弱到達不能基数の上の ψ | `Notation.InaccPsi.Term` | 入力、出力 |
 | `y` | | Y 数列 | `List Nat` | 入力、出力 |
 | `omegay` | | ω-Y 数列 | `List Nat` | 入力、出力 |
-| `ssoss` | | 強2階探索数列（SSOSS）、(0,0,2) 未満 | `List Nat`（`Notation.SSOSS.Seq.Sequence`） | 入力、出力 |
+| `ssoss` | | 強2階探索数列（SSOSS）、(0,0,2) 未満。`--candidate` では (0,0,2,1,0,2,1,1) 未満まで（証明なし） | `List Nat`（`Notation.SSOSS.Seq.Sequence`） | 入力、出力 |
 | `por1` | | 1 階の類似パターン（R₁⁺） | （`phi.py`） | 出力 |
 | `por2` | | 2 階の類似パターン | （`phi3def2.py`） | 出力 |
 | `wilken1` | | Wilken の ϑ の項 T¹ | `Trans.BMS.PoR.PSS.TR.WP` | 出力 |
