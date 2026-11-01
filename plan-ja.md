@@ -7,11 +7,11 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
 - Wilken の主張：Core(R₂⁺) = ψ_{Ω₁}(I_ω)（[Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README-ja.md)）
   - Lean：Wilken の系と InaccPsi の間の写像
     - R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
-      - 済み（仮定は S だけ）：A1、A2 は閉じた。A3 の段 G は φ(G+Ω₁, 0) まで閉じた。XbShift と XbRealB を証明。読みの法則 XiTopUp を証明。公理は 110 個。
-      - ほかに：Γ_{ρ+3} より下で IMG（skL1Img）。WdThLow は WdAtWall ∧ WdThHi だけから出る。EQ は到達点の帰納法で、一番上の再始点を除いて済み。
-      - 道 xlwRoadZ（仮定：ι(Γ(φ(G+Ω₁, 0))·ω) より上で UPPER、LOWER、cap。L(ω+1) ≤ ν_C のとき WdThLow、WdEQfar。XbVisGen）：ν_C = L(ω+1)。供給の仮定は偽。
-      - 道の骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：sorry の葉 46 個。OPEN 22（全部 L）、SUSPECT 2（M 1、L 1）、REFUTED 5。道の上の OPEN は 20 個、全部 L。
-      - 次：新しい供給の道（データが [υ_λ, υ_{λ+h}) にある ϑ 段）。A3 の帯、skA3T0Start、skSysA3StepW。skWallBase/Step、skThFar。skEQTopR、skKCof。領域 B。
+      - 済み（仮定は S だけ）：A1、A2 は閉じた。A3 は t₀ = ε_{G+1} より下の帯と φ(t₀, G) の始まりまで。XbShift、XbRealB、XiTopUp を証明。公理 110 個。
+      - ほかに：Γ_{ρ+3} より下で IMG。頂点の原子の上のブロック則。[M_W, K_ω) の読み。EQ は到達点の帰納法で、B_n が跳ぶところを除いて済み。
+      - 道 xpT0RoadZ（仮定：ι(Γ(φ(t₀, G+1))·ω) より上で UPPER、LOWER、cap。L(ω+1) ≤ ν_C のとき WdThLow、WdEQfar。XbVisGen）：ν_C = L(ω+1)。供給の仮定は偽。
+      - 骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：sorry の葉 46。OPEN 22（L）、SUSPECT 2、REFUTED 5。道の上は OPEN 18（L）と REFUTED 1。
+      - 次：新しい供給の道（ϑ の level を項で書き、部分項もすべて制限）。skSysA3StepW。skWallBase/Step、skTopK。skEQJump、skKCofGap。領域 B。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
   - ✅ M < (0,0,0)(1,1,1)：紙と Lean で証明済み
