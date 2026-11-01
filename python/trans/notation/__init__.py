@@ -2,7 +2,7 @@
 
 import re
 
-from . import exb, inacc, label, matrix, seq
+from . import exb, inacc, label, matrix, seq, ssoss
 from .common import ParseError
 
 ALIASES = {'prim': 'bms1', 'pss': 'bms2', 'trio': 'bms3'}
@@ -29,6 +29,8 @@ FIXED = {
                     inacc.lean),
     'y': System('y', 'Y sequence', seq.parse, seq.show),
     'omegay': System('omegay', 'w-Y sequence', seq.parse, seq.show),
+    'ssoss': System('ssoss', 'strong second-order searching sequence, below (0,0,2)',
+                    ssoss.parse, ssoss.show, ssoss.lean),
     'por1': System('por1', 'pattern of resemblance of order 1 (R1+)', None, str),
     'por2': System('por2', 'pattern of resemblance of order 2', None, str),
     'wilken1': System('wilken1', "Wilken's theta terms T^1", None, str),

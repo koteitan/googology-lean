@@ -9,6 +9,7 @@ python/trans/trans --from pss --to exb "(0,0)(1,1)(2,2)"     # p0(W_2)
 python/trans/trans --from exb --to trio e0                   # (0,0,0)(1,1,0)
 python/trans/trans --from prim --to dbms2 --path "0,1,2"     # 経路を stderr に出す
 python/trans/trans --from exb --to trio --wide "p0(W_W)"     # ルールで動くプログラム
+python/trans/trans --from ssoss --to exb "(0,0,1,1)"         # p0(w)
 python/trans/trans --list                                    # 表記の一覧
 python/trans/trans --maps                                    # 写像の一覧
 ```
@@ -42,6 +43,7 @@ python/trans/trans --maps                                    # 写像の一覧
 | `trioE2` | `exb` → `bms3` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStripTree.lean:113` | `p0(W_a)` の形。`a` は OT、`0 < a < W`、`a` の添字はすべて 0 か 1 |
 | `trioMatrixLSt`（`--wide`） | `exb` → `bms3` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:422` | `p0(W_a)` の形。`a` は OT で、`a ≠ 0` |
 | `trioRuleMatrixSt`（`--wide`） | `ord` → `bms3` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:410` | 0 でないシートのラベル `a`。`p0(W_a)` として読む |
+| `o` | `ssoss` → `exb` | `Googology/Notation/SSOSS/SequenceOrdinal.lean:17` | 下を見てください |
 | `phi.py` | `bms2` → `por1` | `Googology/Trans/BMS/PoR/PSS/por/phi.py` | プログラムのとおり |
 | `tr.py`（= `trNode`） | `bms2` → `wilken1` | `Googology/Trans/BMS/PoR/PSS/por/tr.py` | プログラムのとおり |
 | `phi3def2.py` | `bms3` → `por2` | `Googology/Trans/BMS/PoR/Trio/por/phi3def2.py` | プログラムのとおり |
@@ -80,6 +82,13 @@ python/trans/trans --maps                                    # 写像の一覧
 - もっと広い範囲では、行列の順序がずれたり、標準形でなくなったりします（`Googology/Trans/ExBuchholz/BMS/Trio/TRIO-FIX-STRIP.md`）。
 - ほかの修正（U、U2、nonlast2、lastleaf、stretch、mul-normalize、fuel）は、`TrioRulesAll` の上に別々に当てた修正です。これらは移していません。
 
+### `o`（強2階探索数列の値）
+
+- `o` は、`(0,0,2)` 未満の強2階探索数列（SSOSS）の値です。`o (0,0) ⌢ Y = 2 + vs (parse Y)`、`val z = 1`、`val (b u) = w^(1 + vs u)` です。
+- Lean では計算できない関数です。Python ではカントール標準形として計算し、添字がすべて 0 の `exb` の項として出します。
+- 標準形の上で `o` が 1 歩の階数に等しいことは、Lean で証明されています（`ssoss_rank`）。
+- Lean には `Standard` を計算で判定する方法がありません。`trans` が確かめるのは、成分がすべて 0 か 1 であることと、長さ 2 以上なら (0,0) で始まることだけです。`o` に意味があるのは、この範囲です。
+
 ### たどり着けない変換
 
 - `inacc`、`y`、`omegay`: ライブラリのどの写像もここへは来ません。パーサーと表示部分だけがあります。
@@ -94,11 +103,12 @@ python/trans/trans --maps                                    # 写像の一覧
 | `trans` | コマンド本体 |
 | `notations.md` | ASCII 記法 |
 | `trans-ja.md` | ルートの図 |
-| `notation/` | パーサーと表示部分: `matrix`、`seq`、`exb`、`label`（`ord`）、`inacc`。`exb_std`（`Term.cmp`、`isOT`） |
+| `notation/` | パーサーと表示部分: `matrix`、`seq`、`ssoss`、`exb`、`label`（`ord`）、`inacc`。`exb_std`（`Term.cmp`、`isOT`） |
 | `maps/bms.py` | `zeroRow`、`read`、`unread` |
 | `maps/pss.py` | `pairTerm`、`pairOrdTerm` と、それに要る [pss-proof](https://github.com/koteitan/pss-proof) の部分（`PSS.Trans`、`Red`、`Adm` など） |
 | `maps/trio.py` | `trioE2`、`trioE`、`omegaIndexMatrix` |
 | `maps/trio_rules.py` | `trioMatrixLSt`、`trioRuleMatrixSt`、`ofTermFix`（ルールで動くプログラム） |
+| `maps/ssoss.py` | 強2階探索数列の `Seq.fs`、`parse`、`flat`、`encode` と値 `o` |
 | `maps/por.py` | PoR の 4 つのプログラム |
 | `maps/__init__.py` | 写像のグラフと経路探索 |
 | `tests/` | 単体テストと、Lean チェック用ファイルの生成スクリプト |
@@ -120,7 +130,8 @@ Lean との一致:
 |---|---|---|
 | `tests/gen_lean_check.py` | `ord` のラベル（158 個）、`exb` の略記、`inacc`。長さ 7 までのすべての `Col 0` リスト（626 個）での `read`、`unread`、`zeroRow` | 2047 |
 | `tests/gen_lean_pss.py` | 標準形のペア数列 1297 個での `pairTerm`、`pairOrdTerm`。1 行の `l` 84 個での `pairOrdTerm (withZero l) = read 0 l` | 2762 |
+| `tests/gen_lean_ssoss.py` | 標準形の強2階探索数列 180 個での `Seq.fs`（k = 1, 2, 3）と `encode (parse (S.drop 2)) = S` | 718 |
 | `tests/gen_lean_trio.py OUTDIR` | `Term.cmp`、`isOT`（600）。`smallFrag 7` の全 2398 項と、定義域外の 150 項での `trioE2`。`trioE`。`omegaIndexMatrix` | 4008 |
 | `tests/gen_lean_trio_rules.py OUTDIR` | `Googology/Trans/ExBuchholz/BMS/Trio/` の文字列リテラル全部（6160 個）での `trioRuleMatrixOfSt`。`smallFrag 7`（2398 項）、`TRIO-FIX-STRIP.md` の広い 4 族（2089 項）、ほか 402 項での `trioMatrixLSt` と `ofTermFix`。塔 `T_190`〜`T_212` と、fuel 200 の前後の深さ | 16080 |
 
-4 つとも通ります（`leanman` の exit 0）。わざと間違えた `#guard` を入れると失敗します（exit 2）。
+5 つとも通ります（`leanman` の exit 0）。わざと間違えた `#guard` を入れると失敗します（exit 2）。

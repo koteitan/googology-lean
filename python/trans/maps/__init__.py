@@ -7,7 +7,7 @@ An edge refuses an input outside its domain by raising DomainError.
 
 import re
 
-from . import bms, por, pss, trio, trio_rules
+from . import bms, por, pss, ssoss, trio, trio_rules
 from notation import exb
 from notation.exb_std import is_ot, lt
 from .errors import DomainError
@@ -75,6 +75,8 @@ FIXED = [
          'Googology/Trans/BMS/ExBuchholz/PSS/Rank.lean:344'),
     Edge('exb', 'bms3', exb_to_bms3, 'trioE2',
          'Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStripTree.lean:113'),
+    Edge('ssoss', 'exb', ssoss.ssoss_to_exb, 'o',
+         'Googology/Notation/SSOSS/SequenceOrdinal.lean:17'),
     Edge('bms2', 'por1', por.bms2_to_por1, 'phi.py',
          'Googology/Trans/BMS/PoR/PSS/por/phi.py'),
     Edge('bms2', 'wilken1', por.bms2_to_wilken1, 'tr.py (= trNode)',

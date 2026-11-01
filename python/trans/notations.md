@@ -33,6 +33,7 @@ is given, so that a printed term and a Lean `#eval` can be compared.
 | `inacc` | | ψ over ω weakly inaccessibles | `Notation.InaccPsi.Term` | in, out |
 | `y` | | Y sequence | `List Nat` | in, out |
 | `omegay` | | ω-Y sequence | `List Nat` | in, out |
+| `ssoss` | | strong second-order searching sequence (SSOSS), below (0,0,2) | `List Nat` (`Notation.SSOSS.Seq.Sequence`) | in, out |
 | `por1` | | pattern of resemblance of order 1 (R₁⁺) | (`phi.py`) | out |
 | `por2` | | pattern of resemblance of order 2 | (`phi3def2.py`) | out |
 | `wilken1` | | Wilken's ϑ terms T¹ | `Trans.BMS.PoR.PSS.TR.WP` | out |
@@ -72,7 +73,7 @@ column ::= '(' nat (',' nat)* ')'
 The parser checks the shape only. It does not check that the matrix is
 standard, although most maps are proved on standard forms only.
 
-## 2. Sequences: `y`, `omegay`
+## 2. Sequences: `y`, `omegay`, `ssoss`
 
 ```
 seq ::= nat (',' nat)*
@@ -86,6 +87,18 @@ seq ::= nat (',' nat)*
   and `1,h+2` for `omegay`.
 - No translation in the library touches `y` or `omegay` yet. The parser and the
   printer are there so that later maps have their ends ready.
+
+`ssoss` is written as in its source, with parentheses:
+
+```
+ssoss ::= '(' nat (',' nat)* ')'
+        | '()'                         the empty sequence
+```
+
+- The canonical output is `(0,0,1,1)`. On input the parentheses may be left
+  out: `0,0,1,1`.
+- The Lean type is `List Nat` (`Notation.SSOSS.Seq.Sequence`); `--lean` prints
+  `[0, 0, 1, 1]`.
 
 ## 3. Extended Buchholz ψ: `exb`
 

@@ -10,6 +10,7 @@ python/trans/trans --from pss --to exb "(0,0)(1,1)(2,2)"     # p0(W_2)
 python/trans/trans --from exb --to trio e0                   # (0,0,0)(1,1,0)
 python/trans/trans --from prim --to dbms2 --path "0,1,2"     # path on stderr
 python/trans/trans --from exb --to trio --wide "p0(W_W)"     # the rule program
+python/trans/trans --from ssoss --to exb "(0,0,1,1)"         # p0(w)
 python/trans/trans --list                                    # the systems
 python/trans/trans --maps                                    # the maps
 ```
@@ -40,6 +41,7 @@ length, a proved one is still tried first, so `trioE2` keeps its domain.
 | `trioE2` | `exb` → `bms3` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStripTree.lean:113` | `p0(W_a)` with `a` OT, `0 < a < W`, every subscript of `a` 0 or 1 |
 | `trioMatrixLSt` (`--wide`) | `exb` → `bms3` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:422` | `p0(W_a)` with `a` OT, `a ≠ 0` |
 | `trioRuleMatrixSt` (`--wide`) | `ord` → `bms3` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:410` | a nonzero sheet label `a`, read as `p0(W_a)` |
+| `o` | `ssoss` → `exb` | `Googology/Notation/SSOSS/SequenceOrdinal.lean:17` | see below |
 | `phi.py` | `bms2` → `por1` | `Googology/Trans/BMS/PoR/PSS/por/phi.py` | as the program |
 | `tr.py` (= `trNode`) | `bms2` → `wilken1` | `Googology/Trans/BMS/PoR/PSS/por/tr.py` | as the program |
 | `phi3def2.py` | `bms3` → `por2` | `Googology/Trans/BMS/PoR/Trio/por/phi3def2.py` | as the program |
@@ -55,6 +57,13 @@ and order-preserving on the domain above (`trioE2_std`, `trioE2_injective`,
 `trioE2_lt_iff`). The four programs of the last rows run as they are, in a
 subprocess.
 
+`o` is the value of a strong second-order searching sequence (SSOSS) below
+`(0,0,2)`: `o (0,0) ⌢ Y = 2 + vs (parse Y)`, with `val z = 1` and
+`val (b u) = w^(1 + vs u)`. It is noncomputable in Lean; the port computes it
+as a Cantor normal form, written as an `exb` term with every subscript 0.
+Lean proves that `o` equals the rank of one step on the standard forms
+(`ssoss_rank`).
+
 ### What is not checked
 
 - **Standard pair sequences.** `pairOrdTerm` is proved on the standard pair
@@ -63,6 +72,9 @@ subprocess.
   column is `(0,0)`, and the value is a standard form below `p0(W_w)`.
 - **Standard matrices with two or more rows** in general, for `zeroRow` and the
   programs.
+- **Standard SSOSS sequences.** Lean has no computable test of `Standard`.
+  `trans` checks only that every entry is 0 or 1 and that a sequence of length
+  2 or more starts with (0,0), the fragment on which `o` has its meaning.
 
 ### The `--wide` maps
 
@@ -93,11 +105,12 @@ patches on `TrioRulesAll` and are not ported.
 | `trans` | the command |
 | `notations.md` | the ASCII notations |
 | `trans.md` | the routes, as a diagram |
-| `notation/` | parsers and printers: `matrix`, `seq`, `exb`, `label` (`ord`), `inacc`; `exb_std` (`Term.cmp`, `isOT`) |
+| `notation/` | parsers and printers: `matrix`, `seq`, `ssoss`, `exb`, `label` (`ord`), `inacc`; `exb_std` (`Term.cmp`, `isOT`) |
 | `maps/bms.py` | `zeroRow`, `read`, `unread` |
 | `maps/pss.py` | `pairTerm`, `pairOrdTerm`, and the part of [pss-proof](https://github.com/koteitan/pss-proof) they need (`PSS.Trans`, `Red`, `Adm`, …) |
 | `maps/trio.py` | `trioE2`, `trioE`, `omegaIndexMatrix` |
 | `maps/trio_rules.py` | `trioMatrixLSt`, `trioRuleMatrixSt`, `ofTermFix` (the rule program) |
+| `maps/ssoss.py` | `Seq.fs`, `parse`, `flat`, `encode` and the value `o` of SSOSS |
 | `maps/por.py` | the four PoR programs |
 | `maps/__init__.py` | the graph of maps and the path search |
 | `tests/` | unit tests, and the generators of the Lean checks |
@@ -118,8 +131,9 @@ compare the Lean function with the Python one. Run each file with
 |---|---|---|
 | `tests/gen_lean_check.py` | `ord` labels (158), `exb` shorthands, `inacc`; `read`, `unread`, `zeroRow` on every `Col 0` list up to length 7 (626) | 2047 |
 | `tests/gen_lean_pss.py` | `pairTerm`, `pairOrdTerm` on 1297 standard pair sequences; `pairOrdTerm (withZero l) = read 0 l` on 84 one-row `l` | 2762 |
+| `tests/gen_lean_ssoss.py` | `Seq.fs` (k = 1, 2, 3) and `encode (parse (S.drop 2)) = S` on 180 standard SSOSS sequences | 718 |
 | `tests/gen_lean_trio.py OUTDIR` | `Term.cmp`, `isOT` (600); `trioE2` on all 2398 terms of `smallFrag 7` and 150 outside the domain; `trioE`; `omegaIndexMatrix` | 4008 |
 | `tests/gen_lean_trio_rules.py OUTDIR` | `trioRuleMatrixOfSt` on every string literal of `Googology/Trans/ExBuchholz/BMS/Trio/` (6160); `trioMatrixLSt`, `ofTermFix` on `smallFrag 7` (2398), on the four wide families of `TRIO-FIX-STRIP.md` (2089) and on 402 more terms; the towers `T_190`–`T_212` and the depth limits around fuel 200 | 16080 |
 
-All four pass (`leanman` exit 0). A false `#guard` added on purpose fails
+All five pass (`leanman` exit 0). A false `#guard` added on purpose fails
 (exit 2).

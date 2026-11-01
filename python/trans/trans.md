@@ -19,6 +19,9 @@ flowchart LR
     exb
     ord
   end
+  subgraph gS [sequences]
+    ssoss
+  end
   subgraph gP [programs]
     por1
     wilken1
@@ -35,6 +38,7 @@ flowchart LR
   bms1 -->|read 0| exb
   exb -->|unread 0: below e0| bms1
   bms2 -->|pairOrdTerm| exb
+  ssoss -->|o: below (0,0,2)| exb
   exb -->|trioE2: p0 W_a, a below W, subscripts 0 or 1| bms3
   exb -.->|trioMatrixLSt: p0 W_a| bms3
   ord -.->|trioRuleMatrixSt: label a| bms3
@@ -56,6 +60,7 @@ The labels of the arrows:
 | `trioE2` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStripTree.lean:113` | `p0(W_a)`, `a` standard, `0 < a < W`, every subscript of `a` 0 or 1 |
 | `trioMatrixLSt` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:422` | `p0(W_a)`, `--wide` only |
 | `trioRuleMatrixSt` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:410` | a sheet label `a`, read as `p0(W_a)`; `--wide` only |
+| `o` | `Googology/Notation/SSOSS/SequenceOrdinal.lean:17` | strong second-order searching sequences; entries 0 or 1, and (0,0) first when the length is 2 or more |
 | `phi.py`, `tr.py`, `phi3def2.py`, `tr3.py` | `Googology/Trans/BMS/PoR/` | as the programs |
 
 `bmsN` and `dbmsN` stand for every number of rows: `zeroRow` goes from `N`

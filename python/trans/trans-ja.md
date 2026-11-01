@@ -19,6 +19,9 @@ flowchart LR
     exb
     ord
   end
+  subgraph gS [数列]
+    ssoss
+  end
   subgraph gP [プログラム]
     por1
     wilken1
@@ -35,6 +38,7 @@ flowchart LR
   bms1 -->|read 0| exb
   exb -->|unread 0: e0 未満| bms1
   bms2 -->|pairOrdTerm| exb
+  ssoss -->|o: (0,0,2) 未満| exb
   exb -->|trioE2: p0 W_a, a は W 未満, 添字は 0 か 1| bms3
   exb -.->|trioMatrixLSt: p0 W_a| bms3
   ord -.->|trioRuleMatrixSt: ラベル a| bms3
@@ -56,6 +60,7 @@ flowchart LR
 | `trioE2` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStripTree.lean:113` | `p0(W_a)` の形。`a` は標準形、`0 < a < W`、`a` の添字はすべて 0 か 1 |
 | `trioMatrixLSt` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:422` | `p0(W_a)` の形。`--wide` のときだけ |
 | `trioRuleMatrixSt` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:410` | シートのラベル `a`。`p0(W_a)` として読む。`--wide` のときだけ |
+| `o` | `Googology/Notation/SSOSS/SequenceOrdinal.lean:17` | 強2階探索数列。成分が 0 か 1 で、長さ 2 以上なら (0,0) で始まる |
 | `phi.py`、`tr.py`、`phi3def2.py`、`tr3.py` | `Googology/Trans/BMS/PoR/` | プログラムのとおり |
 
 `bmsN` と `dbmsN` は、どの行数でもよいことを表します。`zeroRow` は、どの `N` でも `N` 行から `N+1` 行へ移します。
