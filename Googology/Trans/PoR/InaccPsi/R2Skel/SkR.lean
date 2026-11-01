@@ -17,6 +17,7 @@ import Googology.Trans.PoR.InaccPsi.R2.XmLim
 import Googology.Trans.PoR.InaccPsi.R2.XqTop
 import Googology.Trans.PoR.InaccPsi.R2.XsTop
 import Googology.Trans.PoR.InaccPsi.R2.XvTop0
+import Googology.Trans.PoR.InaccPsi.R2.YdMoveB
 import Googology.Trans.PoR.InaccPsi.R2Skel.SkE
 
 /-!
@@ -101,6 +102,18 @@ codes below `ψ₂(W^{X+e})`, a code `e < ψ₂(X)` of `λ` gives the top base `
 (`Xv.xvTop0Move`: every such top atom `ψ₂(W^{X+e})` moves; the bound `Θ(ψ₂ t) < c_{n+1}` of `skTopMove` is now
 derived, `Lj.ljTheta_lt_delta`).  `skWallBase`, `skWallStep` keep their statements and stay OPEN.  This file imports
 the new module `R2.XvTop0`: it can be checked only after the merge.
+Round 126 (leaf read50): REFUTE FIRST on the INVERSE CORRESPONDENCE (every code of `λ'` below `B_n(ψ₂ t)` is `B_n` of a
+code of `λ`): REFUTED (`skInvRef`, `Yd.ydInvRef`): at every window and level `k` the atom `F = ψ₂(Ω_{k+3} + c_n)` of
+`λ'` lies just above `B_n(ψ₂(W^X)) = ψ₂(X)` (below `ψ₂(W^{X+1})`) and is `B_n y` for NO `y ∈ MvD`.  It is not needed:
+the PLATEAU at `Ω₂` (`skPlatB`, `Yd.ydTopB_eq`: `ψ₂(β + W^{X+Ω₂}) = sup_m e_m`, `e_{m+1} = ψ₂(β + W^{X+e_m})`, for every
+normal base `β`) gives the own clause of `Ro.RoBaseE` for EVERY ordinal below `ψ₂(β + W^{X+Ω₂})`, and `B_n` maps the
+iterates over `β` to those over `B_n β` (`skOwnMove`, `Yd.ydOwnMoveB`).  New PROVED nodes: `skBaseMoveAll0`
+(`Yd.ydBaseMove`: the base-data move for EVERY top base `(e, 0)`; `RoBaseE λ X e 0 ⇔ e < ψ₂(W^{X+Ω₂})`,
+`Yd.ydBaseE_iff`), `skTopMoveAll0` (`Yd.ydTopMove`: every top atom over the base `0` moves).  New OPEN node
+`skBaseFactsB` (M): the two base facts at `λ'` for `β ≠ 0` (`W^{X+B_n e} ∣ B_n β`, `B_n β ∈ D_{λ'}`); new REDUCED node
+`skTopMoveAllB` (`Yd.ydTopMoveB` + `skBaseFactsB`: every top atom `ψ₂(β + W^{X+e})` moves).  `skWallBase`,
+`skWallStep` keep their statements and stay OPEN (they do not yet use `skTopMoveAllB`, so the road count is
+unchanged).  This file imports the new module `R2.YdMoveB`: it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -725,11 +738,149 @@ theorem skTop0Move (S : InaccSeq.{0}) :
     obtain ⟨hD, -, hat, hmv⟩ := Xv.xvTop0Move hR h1 hr hl' hB k hec heY IH
     exact ⟨hD, hat, hmv⟩
 
+/-- STATUS: PROVED (Yd.ydInvRef, from Yd.ydAtC, Lw.lw_psi_limit, Bc.bcB_base, Bc.bcB_fix', mvB_lt_iff; NEW round 126;
+a REFUTE-FIRST record, no node uses it; checkable only after the merge)
+SIZE: S
+REFUTED: the inverse correspondence.  At every window and `k`, `F = ψ₂(Ω_{k+3} + c_n)` is an atom of `λ'`,
+`B_n(ψ₂(W^X)) = ψ₂(X) < F < ψ₂(W^{X+1})`, and `F ≠ B_n y` for every `y ∈ MvD`. -/
+theorem skInvRef (S : InaccSeq.{0}) :
+    ∀ (n k : ℕ) (l l' : Ordinal.{0}), CdRange S l → Bc.bcC S n < upsilon l → cdR S l < Bc.bcC S (n + 1) →
+      IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
+      S.psi (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + Bc.bcC S n) (Om (1 + 1)) ∈ ldAtR S l' ∧
+        S.psi (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) (Om (1 + 1)) <
+          S.psi (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + Bc.bcC S n) (Om (1 + 1)) ∧
+        ∀ y, MvD S y → Bc.bcB S n y ≠ S.psi (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + Bc.bcC S n) (Om (1 + 1)) :=
+  fun _ k _ _ hR h1 hr hl' hB => by
+    obtain ⟨hat, -, hlow, -, hno⟩ := Yd.ydInvRef hR h1 hr hl' hB k
+    exact ⟨hat, hlow, hno⟩
+
+/-- STATUS: PROVED (Yd.ydTopB_eq, Yd.ydOwnB_iff, from Yd.ydKeyB, Yd.ydR3B, Yd.ydR3c; NEW round 126; checkable only after
+the merge)
+SIZE: S
+THE PLATEAU AT `Ω₂` over a normal base `β`: `ψ₂(β + W^{X+Ω₂}) = sup_m e_m` (`e_0 = 0`, `e_{m+1} = ψ₂(β + W^{X+e_m})`), and
+for EVERY ordinal `e`: `(∀ e' ≤ e, e' < ψ₂(β + W^{X+e'})) ⇔ e < ψ₂(β + W^{X+Ω₂})`. -/
+theorem skPlatB (S : InaccSeq.{0}) :
+    ∀ (X β : Ordinal.{0}), (∀ a b : Ordinal.{0}, X ∈ S.CSet a b) → β ∈ S.CSet β (S.psi β (Om (1 + 1))) →
+      S.psi (β + Le.leWe (X + Om (1 + 1))) (Om (1 + 1)) = ⨆ m : ℕ, Yd.ydEB S X β m ∧
+        ∀ e, (∀ e', e' ≤ e → e' < S.psi (β + Le.leWe (X + e')) (Om (1 + 1))) ↔
+          e < S.psi (β + Le.leWe (X + Om (1 + 1))) (Om (1 + 1)) :=
+  fun _ _ hX hβ => ⟨Yd.ydTopB_eq hX hβ, Yd.ydOwnB_iff hX hβ⟩
+
+/-- STATUS: PROVED (Yd.ydOwnMoveB, from Yd.ydFixB, Yd.ydNormB, Ug.ugB_fix, Ro.roB_We, Mx.mxB_atom; NEW round 126;
+checkable only after the merge)
+SIZE: S
+THE OWN CLAUSE MOVES: `β` normal in `MvD`, `e ∈ MvD`, `e < ψ₂(β + W^{X+Ω₂})` ⇒ `B_n e < ψ₂(B_n β + W^{X+Ω₂})` and every
+ordinal `e'' ≤ B_n e` has `e'' < ψ₂(B_n β + W^{X+e''})` (`X = Ω_{k+3}`; no inverse correspondence). -/
+theorem skOwnMove (S : InaccSeq.{0}) :
+    ∀ (k n : ℕ) (β e : Ordinal.{0}), MvD S β → β ∈ S.CSet β (S.psi β (Om (1 + 1))) → MvD S e →
+      e < S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + Om (1 + 1))) (Om (1 + 1)) →
+      Bc.bcB S n e <
+          S.psi (Bc.bcB S n β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + Om (1 + 1))) (Om (1 + 1)) ∧
+        ∀ e'', e'' ≤ Bc.bcB S n e →
+          e'' < S.psi (Bc.bcB S n β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e'')) (Om (1 + 1)) :=
+  fun k n _ _ hDβ hβ hDe he => Yd.ydOwnMoveB k n hDβ hβ hDe he
+
+/-- STATUS: PROVED (Yd.ydBaseMove, from Yd.ydBaseE_iff, Yd.ydLt_top, Yd.ydOwn, Yd.ydFix, Ro.roB_We; NEW round 126;
+generalizes skBaseMove0; checkable only after the merge)
+SIZE: M
+THE BASE-DATA MOVE at the base `0` for EVERY top base `(e, 0)` (`RoBaseE λ X e 0 ⇔ e < ψ₂(W^{X+Ω₂})`): at every window,
+under the moves of the codes below `ψ₂(W^{X+e})`, `B_n e` is a code of `λ'`, `(B_n e, 0)` is a top base of `λ'`, and
+`B_n(0 + W^{X+e}) = 0 + W^{X+B_n e}`. -/
+theorem skBaseMoveAll0 (S : InaccSeq.{0}) :
+    ∀ (n k : ℕ) (l l' e : Ordinal.{0}), CdRange S l → Bc.bcC S n < upsilon l → cdR S l < Bc.bcC S (n + 1) →
+      IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
+      GxCl (upsilon l) (ldAtR S l) e → Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) e 0 →
+      (∀ x, GxCl (upsilon l) (ldAtR S l) x →
+        x < S.psi (Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1)) → MvD S x ∧
+        GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
+        gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) →
+      GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n e) ∧
+        Ro.RoBaseE S l' (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) (Bc.bcB S n e) 0 ∧
+        Bc.bcB S n (0 + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) =
+          0 + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + Bc.bcB S n e) :=
+  fun _ k _ _ _ hR h1 hr hl' hB hec hb IH => by
+    obtain ⟨-, hBec, -, hb', -, hmv⟩ := Yd.ydBaseMove hR h1 hr hl' hB k hec hb IH
+    exact ⟨hBec, hb', hmv⟩
+
+/-- STATUS: PROVED (Yd.ydTopMove, from Yd.ydBaseMove, Xv.xvWin, Xq.xqTopMove, Lj.ljTheta_lt_delta; NEW round 126;
+generalizes skTop0Move; checkable only after the merge)
+SIZE: M
+EVERY top atom `s = ψ₂(W^{Ω_{k+3}+e})` over the base `0` (every top base `(e, 0)`) moves at every window under the
+premise of WallBelow at `s`: `MvD s`, `B_n s ∈ At_{λ'}`, `Θ_{λ'}(B_n s) = B_n Θ_λ(s)`. -/
+theorem skTopMoveAll0 (S : InaccSeq.{0}) :
+    ∀ (n k : ℕ) (l l' e : Ordinal.{0}), CdRange S l → Bc.bcC S n < upsilon l → cdR S l < Bc.bcC S (n + 1) →
+      IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
+      GxCl (upsilon l) (ldAtR S l) e → Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) e 0 →
+      (∀ x, GxCl (upsilon l) (ldAtR S l) x →
+        x < S.psi (Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1)) → MvD S x ∧
+        GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
+        gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) →
+      MvD S (S.psi (Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1))) ∧
+        Bc.bcB S n (S.psi (Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1))) ∈ ldAtR S l' ∧
+        gxTh (upsilon l') (ldAtR S l')
+            (Bc.bcB S n (S.psi (Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1)))) =
+          Bc.bcB S n (gxTh (upsilon l) (ldAtR S l)
+            (S.psi (Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1)))) :=
+  fun _ k _ _ _ hR h1 hr hl' hB hec hb IH => by
+    obtain ⟨hD, -, hat, hmv⟩ := Yd.ydTopMove hR h1 hr hl' hB k hec hb IH
+    exact ⟨hD, hat, hmv⟩
+
+/-- The premise of WallBelow at the top atom `ψ₂(β + W^{Ω_{k+3}+e})`, with a top base `(e, β)`, `β ∈ D`, at a window. -/
+def TopPrem (S : InaccSeq.{0}) (n k : ℕ) (l l' e β : Ordinal.{0}) : Prop :=
+  CdRange S l ∧ Bc.bcC S n < upsilon l ∧ cdR S l < Bc.bcC S (n + 1) ∧
+    IsRestartIdx l' ∧ Bc.bcB S n (upsilon l) = upsilon l' ∧
+    GxCl (upsilon l) (ldAtR S l) e ∧ Vb.VbD S l β ∧ Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) e β ∧
+    ∀ x, GxCl (upsilon l) (ldAtR S l) x →
+      x < S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1)) → MvD S x ∧
+      GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
+      gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
+      gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)
+
+/-- STATUS: OPEN (NEW round 126; REFUTE FIRST: NO EVIDENCE; holds at `β = 0` (`B_n 0 = 0`, `Xi.xiD_zero`) and at
+`(e, β) = (0, Ω_{k+3})` at every window (`Yd.ydNonvacW`); none of the no-go results speaks of it.  Off the road: no
+node on the road uses it until skWallBase is reduced)
+SIZE: M
+THE TWO BASE FACTS at `λ'` for a top base `(e, β)`, `β ∈ D`, under the premise of WallBelow at `ψ₂(β + W^{X+e})`:
+`W^{X+B_n e} ∣ B_n β` and `B_n β ∈ D_{λ'}`.  Expected route: `β = W^{X+e}·γ` with the move of the Cantor normal form
+of `β` (exponents `≥ Ω₂·(X+e)` move to exponents `≥ Ω₂·(X+B_n e)`, `Ld.ldB_opow`, `mvB_add`), and `B_n β = vbK_{λ'}(B_n(T β))`
+(`Vb.vbT_move` at `β` with `T = Θ(ψ₂ t)`) with `Rx.rxL_memH` for the hull `Cl(A_{η_λ'}, ρ_λ')` and for `Cl(Ω_ω, θ)`. -/
+theorem skBaseFactsB (S : InaccSeq.{0}) :
+    ∀ (n k : ℕ) (l l' e β : Ordinal.{0}), TopPrem S n k l l' e β →
+      Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + Bc.bcB S n e) ∣ Bc.bcB S n β ∧ Vb.VbD S l' (Bc.bcB S n β) := by
+  sorry
+
+/-- STATUS: REDUCED (skBaseFactsB; Yd.ydTopMoveB, from Yd.ydBaseMoveB, Yd.ydOwnMoveB, Yd.ydNormB, Yd.ydBaseE_lt,
+Xq.xqTMove, Xq.xqTopMove; NEW round 126; non-vacuous: Yd.ydNonvacB / ydNonvacW give every hypothesis at
+`(e, β) = (0, Ω_{k+3})`; checkable only after the merge)
+SIZE: M
+EVERY top atom `ψ₂(β + W^{Ω_{k+3}+e})` (every top base `(e, β)`, `β ∈ D`) moves at every window under the premise of
+WallBelow at it: `MvD s`, `B_n s = ψ₂(B_n β + W^{X+B_n e}) ∈ At_{λ'}`, `Θ_{λ'}(B_n s) = B_n Θ_λ(s)`. -/
+theorem skTopMoveAllB (S : InaccSeq.{0}) :
+    ∀ (n k : ℕ) (l l' e β : Ordinal.{0}), TopPrem S n k l l' e β →
+      MvD S (S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1))) ∧
+        Bc.bcB S n (S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1))) ∈ ldAtR S l' ∧
+        gxTh (upsilon l') (ldAtR S l')
+            (Bc.bcB S n (S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1)))) =
+          Bc.bcB S n (gxTh (upsilon l) (ldAtR S l)
+            (S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1)))) :=
+  fun n k l l' e β hP => by
+    obtain ⟨hdiv', hD'⟩ := skBaseFactsB S n k l l' e β hP
+    obtain ⟨hR, h1, hr, hl', hB, hec, hβD, hb, IH⟩ := hP
+    obtain ⟨hD, -, hat, hmv⟩ := Yd.ydTopMoveB hR h1 hr hl' hB k hec hβD hb IH hdiv' hD'
+    exact ⟨hD, hat, hmv⟩
+
 /-- STATUS: OPEN (RISK: the family law fixes no B_n-move of the images X̂_e; the step will likely need, in addition,
 `B_n X̂^λ_e(β) = X̂^{λ'}_{B_n e}(B_n β)`, which is itself a move statement; round 112: for own images that move IS the
 atom move at T_{X+e}(β), Wr.wrImgMove_iff, so it cannot be added as a hypothesis without assuming the conclusion)
 (round 112: CHANGED to the code-free WallBelow)
 (round 122: hypothesis CHANGED from the REFUTED Wg.WgTopFamAll (with it the node was vacuous) to Xi.XiTopUp)
+(round 126: REFUTE FIRST on the inverse correspondence: REFUTED (skInvRef).  Replaced by the plateau (skPlatB) and the
+move of the own clause (skOwnMove): EVERY top atom over the base 0 moves (skTopMoveAll0, no hypothesis), and every top
+atom over a base β ∈ D moves given the two base facts at λ' (skTopMoveAllB ⇐ skBaseFactsB, OPEN M).  Still missing for
+this node: skBaseFactsB, the non-top atoms past the first block above each top (offsets δ < W^X over t, the sub-bases
+β + W^{X+e}·γ at limit γ, the ψ₃-atoms inside the exponents), and the assembly of WallBelow from them.)
 (round 125: REFUTE FIRST on the BASE-DATA MOVE: NO EVIDENCE; it is PROVED at the base 0 for the exponents
 e < ψ₂(Ω_{k+3}) (skBaseMove0), and those top atoms move with no extra hypothesis (skTop0Move; the bound
 Θ(ψ₂ t) < c_{n+1} is derived).  Still missing for the general top base (e, β): the OWN CLAUSE of RoBaseE at λ' for the
@@ -762,6 +913,7 @@ theorem skWallBase (S : InaccSeq.{0}) : Xi.XiTopUp S → Nc.ncL S (ω + 1) ≤ n
 (round 123: Xi.XiTopUp is now a theorem (skTopUp); still OPEN, same missing pieces (i), (ii) as skWallBase, generic in k)
 (round 124: skTopBlk, skTMove, skSigMove, skTopMove are generic in k; the same pieces as skWallBase are missing)
 (round 125: skBaseMove0, skTop0Move are generic in k; the same pieces as skWallBase are missing)
+(round 126: skTopMoveAll0, skOwnMove, skTopMoveAllB are generic in k; the same pieces as skWallBase are missing)
 SIZE: L
 `TopUp ∧ hν ⇒ ∀ k, (atoms < ψ₂(Ω_{k+4}) move) ⇒ (atoms < ψ₂(Ω_{k+5}) move)` (one level up; the step
 Ω_{k+3} → Ω_{k+4} of the readings with sub-base images; Wb.wbKe_sup_it / wbTe_gt_Om give the layer facts).

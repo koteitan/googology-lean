@@ -29,6 +29,9 @@ import Googology.Trans.PoR.InaccPsi.R2.XoRoad
 import Googology.Trans.PoR.InaccPsi.R2.XoNode
 import Googology.Trans.PoR.InaccPsi.R2.XoSub
 import Googology.Trans.PoR.InaccPsi.R2.XoRef
+import Googology.Trans.PoR.InaccPsi.R2.YbCov
+import Googology.Trans.PoR.InaccPsi.R2.YbLev
+import Googology.Trans.PoR.InaccPsi.R2.YbSup
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -220,6 +223,30 @@ Round 121 (leaf "skFormHighW, skSupKW", sup43; joined with real1 at the merge).
   `skFormHighX`, still OPEN; `Xa.xaRep` may use levels with data in `[υ_λ, υ_{λ+h})`).
 * `skSupKW` stays OPEN (on the road through `skGenX`).  REFUTE FIRST: NO EVIDENCE (see its docstring).
 This file imports `Xa.XaRep`, so it can be checked only after the merge.
+
+Round 126 (leaf "the supply carry and the bridge of Xo.xoRoadH", sup48).  Top node `skSupXo` and its statement kept;
+`Root.skNuC` unchanged (it applies `Xo.xoRoadH`).
+* REFUTE FIRST, the risk "a `ϑ`-node image argument outside `T^{υ_{μ+f h}}`": NO EVIDENCE.  The leaves of a level
+  of a well-formed node of segment `h` are in segments `≤ h` unless absorbed (a level datum in `T^{υ_{λ+h}}` is below
+  `υ_{λ+h+1}`); absorption by `+`, `φ` or `ψ_{Ω_k}` (`k ≥ 2`) of a countable leaf does not depend on its value, and
+  a countable collapse is closed (`Xo.XoR`); the image moves each leaf inside its own target segment, so the image
+  level has its data below `υ_{μ+f h+1}`.  Not a Lean theorem (needs the hull isomorphism of `skRealBXo`).
+* COVERING LEMMA (`Yb`): every countable `x < υ_{λ+β}` has ONE well-formed, non-closed moving-leaf decomposition with
+  a finite offset set, restricted at every `μ` in a tail `γ < υ_μ < υ_λ` (`Yb.ybCover`), under the level statement
+  `Yb.YbLevK`, which follows from the notation-only statement `Yb.YbIF` (`Yb.ybLevK_of_IF`): every level
+  `Ω₁ ≤ M < θ` lies in the inacc-free closure `Yb.YbK S q` (fixed atoms with data below `Γ₀` allowed) at every
+  strongly critical `q ≤ Ω₁` above its datum.  NEW leaf `skYbIF` (OPEN, OFF THE ROAD: a tool for `skRealBXo`).
+  Reason it is needed: an inaccessible `I_n` has no restricted term (`lc (I n)` fails the `lc` clause, `I_n ≥ θ`),
+  so a high-data level whose every spelling needs `I_n` would have no restricted decomposition.
+* At the witnesses no hypothesis is needed (`Yb.ybCov_wit`, `Yb.ybTail_wwX`): `λ`, `r(λ+X′)`, `wwX`; the audit's
+  `F_k`, `F′_k`, `E″`, `E‴` have the values `λ`, `r(λ+X′)`.
+* NON-SILENCE (`Yb.ybSup_bound`): under `YbLevK`, `Xo.XoSup` gives for every `γ` and every finite offset set a
+  configuration whose carry bounds the image of a restricted decomposition of EVERY inner reach below `υ_{λ+β}` (the
+  audit's MINOR 2: the carry is not silent where the realizer needs it).
+* `skSupKXo`, `skRealBXo` stay OPEN (exact gaps in their docstrings).
+NEW nodes: `skYbIF` (OPEN), `skYbIFWit` (PROVED), `skLevOfIF` (PROVED), `skCoverLev` (PROVED), `skCoverXo` (REDUCED),
+`skCoverWit` (PROVED), `skSupNonSilent` (REDUCED).  This file imports the new `Yb` modules, so it can be checked only
+after the merge.
 -/
 
 set_option autoImplicit false
@@ -1088,6 +1115,14 @@ base change `π`), so different terms of one level give one image there.  Not to
 `Wf.wfSide_false`, `Xj.xjVis_ref` (no old form language, no top law; the forms clause always holds,
 `Xo.xoForms_all`).  Left: the reach formula `r(μ + f(g)) = υ_{μ+(f(g)+ω+1)} + f(g)` at the supply restarts (proved in
 Lean only at `L(k)`, `Wu.wuR_X`), and EQ under `η_λ ↦ η_μ` above `υ_{λ+2}`.
+REFUTE FIRST (round 126): NO EVIDENCE.  The carry is not silent where it matters: with the covering lemma every small
+reach has a restricted decomposition on a tail, and any `XoSup` configuration can be chosen to bound its image
+(`Yb.ybSup_bound`, nodes `skCoverXo`, `skSupNonSilent`); so `XoSup` really constrains `r(μ + f g)` at every small
+reach (it is not trivially satisfiable), and still no decomposition with two different images of one value was found
+(the image is the leaf substitution; leaves move order-preservingly inside their segments, absorption is structural).
+Exact gap: the reach formula `r(μ + f(g))` at the supply restarts for every `g` of the window (Lean has it only at
+`L(k)`, `Wu.wuR_X`), the supply `υ_{μ+B} ≤ r(μ)` with `B` above every `f(g)`, and EQ under `η_λ ↦ η_μ` above
+`υ_{λ+2}`.
 XoSup(λ, β(ν)) -/
 theorem skSupKXo {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Xo.XoSup S l (ν - l + ω ^ 2) := by sorry
 
@@ -1131,7 +1166,13 @@ Needed: FRAG (`Xj.xjFragV`) with a `ϑ`-node whose level is a term with moving l
 (`Xo.xoVt_up` / `Xo.xoVt_down`: both subcases of [W07a] Def 6.2, now cited on `[B₂, θ)`), the hull clause
 `Ψ(ϑ^{b_k}(Ω₁·L[b_k] + r)) = ϑ^{c_k}(Ω₁·L[Ψ] + vmap Ψ r)` and the carry.  It holds where the forms are constant-level
 forms (`Xo.xoReal_of_xb`, from `Xj.xbRealB_holds`).  REFUTE FIRST: NO EVIDENCE (the moving-leaf image of the witness
-is a valid point of the target segment, `Xo.xoXj_img`, `Xb.xbIX_spec`; on one segment the image is `π`, `Xo.xoImg_pi`). -/
+is a valid point of the target segment, `Xo.xoXj_img`, `Xb.xbIX_spec`; on one segment the image is `π`, `Xo.xoImg_pi`).
+REFUTE FIRST (round 126): the risk "image argument outside `T^{υ_{μ+f h}}`": NO EVIDENCE (see the round-126 note in
+the header); the audit's worry that the carry is silent at reaches with no restricted decomposition is answered by
+the covering lemma (`skCoverXo`, `skSupNonSilent`) up to `skYbIF`.  Exact gap: the FRAG step with a `ϑ`-node whose
+level is a term with moving leaves (`Ψ(ϑ^{b_k}(Ω₁·L[b_k] + r)) = ϑ^{c_k}(Ω₁·L[Ψ] + vmap Ψ r)`), the proof that the
+image argument lies in `T^{υ_{μ+f h}}` (data of `L[Ψ]` below `υ_{μ+f h+1}`), and the use of `skSupNonSilent` to
+place the image below the target reach. -/
 theorem skRealBXo (S : InaccSeq.{0}) : Xo.XoRealB S := by sorry
 
 /-- STATUS: PROVED (by `Xo.xoReal_of_xb`; NEW round 124)
@@ -1262,5 +1303,72 @@ is consistent with `Sl.SlOff`) -/
 theorem skXoOffWit {X Y : Ordinal.{0}} (hX : InE X) (hY : InE Y) (hX1 : 1 < X) (hY1 : 1 < Y) :
     ∃ f : Ordinal.{0} → Ordinal.{0}, Sl.SlOff f {1, X, X + ω + 1} (Y + ω ^ 2) ∧ f X = Y ∧ f 1 = 1 :=
   ⟨Xo.xoOffF X Y, Xo.xoOff_wit hX hY hX1 hY1⟩
+
+/-! ## Round 126: the covering lemma for the repaired `Xo.XoR` (`Yb`) -/
+
+/-- STATUS: OPEN (NEW round 126; OFF THE ROAD: a tool for `skRealBXo` through `skCoverXo`, not a hypothesis of
+`Xo.xoRoadH`)
+SIZE: L
+the notation statement `Yb.YbIF`: every level `Ω₁ ≤ M < θ` lies in the inacc-free closure `Yb.YbK S q` (small
+members below `q`, fixed atoms with data below `Γ₀`, `+`, `φ`, `Ω_·`, `ψ_π` with `π ≠ Ω₁`) at every strongly critical
+`q ≤ Ω₁` above its datum (`ucDat M` below `B₂`, `d_S(M)` on `[B₂, θ)`).
+REFUTE FIRST: NO EVIDENCE.  Holds at `Ω₁` and `B₂` (node `skYbIFWit`).  Expected route: below `B₂` the code test
+`Uc.UcCl` (whose constructors use only `Ω₁`, `+`, `φ`, `ψ_{Ω₂}`-atoms `Uc.ucH`) ported from `Uo.uo_ucK` with `YbK` in
+place of `Ul.UlK`; on `[B₂, θ)` the normal form `Hˡ_λ(y)` (`Vd.vd_nf_ex`) with `ψ_{Ω_k}` only.  A level that needs an
+inaccessible in every spelling would have no restricted term at all (`lc (I n)` is not restricted, `I_n ≥ θ`). -/
+theorem skYbIF (S : InaccSeq.{0}) : Yb.YbIF S := by sorry
+
+/-- STATUS: PROVED (by `Yb.ybIF_wit`; NEW round 126)
+SIZE: S
+`Ω₁, B₂ ∈ YbK S q` for every strongly critical `q` (the hypotheses of `skYbIF` are satisfiable) -/
+theorem skYbIFWit {q : Ordinal.{0}} (hq : SC q) : Yb.YbK S q Om1 ∧ Yb.YbK S q Uc.ucB := Yb.ybIF_wit hq
+
+/-- STATUS: PROVED (by `Yb.ybLevK_of_IF`; NEW round 126)
+SIZE: M
+`YbIF ⇒ YbLevK S λ β` (`0 < λ`, `υ_{λ+β} ≤ Ω₁`) -/
+theorem skLevOfIF {l β : Ordinal.{0}} (hl0 : 0 < l) (hb1 : upsilon (l + β) ≤ Om1) (hIF : Yb.YbIF S) :
+    Yb.YbLevK S l β :=
+  Yb.ybLevK_of_IF hl0 hb1 hIF
+
+/-- STATUS: PROVED (by `Yb.ybCover`; NEW round 126)
+SIZE: M
+the covering lemma from the level statement -/
+theorem skCoverLev {l β : Ordinal.{0}} (hl0 : 0 < l) (hK : Yb.YbLevK S l β) :
+    ∀ x, x < upsilon (l + β) → x < Om1 → Yb.YbCov S l β x :=
+  Yb.ybCover hl0 hK
+
+/-- STATUS: REDUCED (from `skYbIF`, `skLevOfIF`, `skCoverLev`; NEW round 126)
+SIZE: S
+THE COVERING LEMMA: every countable `x < υ_{λ+β} ≤ Ω₁` (`0 < λ`) has a well-formed, non-closed moving-leaf
+decomposition with a finite offset set below `β`, restricted (`Xo.XoR`) at every `μ` in a tail `γ < υ_μ < υ_λ` -/
+theorem skCoverXo {l β : Ordinal.{0}} (hl0 : 0 < l) (hb1 : upsilon (l + β) ≤ Om1) :
+    ∀ x, x < upsilon (l + β) → x < Om1 → Yb.YbCov S l β x :=
+  skCoverLev hl0 (skLevOfIF hl0 hb1 (skYbIF S))
+
+/-- STATUS: PROVED (by `Yb.ybCov_wit`, `Yb.ybTail_wwX`, `Yb.ybWwXE_val`; NEW round 126)
+SIZE: S
+the covering at the witnesses with no hypothesis: `λ`, `r(λ+X′)`, and `wwX` (restricted on a tail) -/
+theorem skCoverWit (k : ℕ) (hν : Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}) ≤ nuC) {β : Ordinal.{0}}
+    (hβ : Xj.xjX S k + ω + 1 < β) (hb1 : upsilon (Nc.ncL S (k : Ordinal.{0}) + β) ≤ Om1) :
+    Yb.YbCov S (Nc.ncL S (k : Ordinal.{0})) β (Nc.ncL S (k : Ordinal.{0})) ∧
+      Yb.YbCov S (Nc.ncL S (k : Ordinal.{0})) β (cdR S (Nc.ncL S (k : Ordinal.{0}) + Xj.xjX S k)) ∧
+      Yb.YbTail S (Nc.ncL S (k : Ordinal.{0})) (Yb.ybWwXE S k) ∧
+      Xo.xoVal S (Nc.ncL S (k : Ordinal.{0})) (Yb.ybWwXE S k) = Ww.wwX S k :=
+  ⟨(Yb.ybCov_wit k hν hβ hb1).1, (Yb.ybCov_wit k hν hβ hb1).2, Yb.ybTail_wwX k, Yb.ybWwXE_val k⟩
+
+/-- STATUS: REDUCED (from `skYbIF`, by `Yb.ybSup_bound_IF`; NEW round 126)
+SIZE: S
+THE NON-SILENT SUPPLY: from `Xo.XoSup S λ β`, for every `γ < υ_λ` and finite offset set `G` below `β`, a supply
+configuration `(μ, f, B, Os ⊇ G)` above `γ` whose carry bounds the image of a restricted decomposition of every inner
+reach `r(λ+g) < υ_{λ+β}`, `g ∈ G` -/
+theorem skSupNonSilent {l β : Ordinal.{0}} (hl0 : 0 < l) (hb1 : upsilon (l + β) ≤ Om1) (hl1 : upsilon l < Om1)
+    (hS : Xo.XoSup S l β) :
+    ∀ γ < upsilon l, ∀ G : Finset Ordinal.{0}, (∀ d ∈ G, d < β) →
+      ∃ μ f B, ∃ Os : Finset Ordinal.{0}, G ⊆ Os ∧ CdRange S μ ∧ γ < upsilon μ ∧ upsilon μ < upsilon l ∧
+        μ + B ≤ l ∧ ω ^ 2 ∣ B ∧ upsilon (μ + B) ≤ cdR S μ ∧ Sl.SlOff f Os B ∧ Xo.XoCarry S l β μ f B Os ∧
+        ∀ g ∈ G, 0 < g → ω ^ 2 ∣ g → cdR S (l + g) < upsilon (l + β) →
+          ∃ E : Xo.XoE, Xo.XoWF S l β E ∧ Xo.xoVal S l E = cdR S (l + g) ∧ Xo.XoR S l μ E ∧
+            Xo.xoImg S l μ f E ≤ cdR S (μ + f g) :=
+  Yb.ybSup_bound_IF hl0 hb1 hl1 (skYbIF S) hS
 
 end R2Skel.SkS
