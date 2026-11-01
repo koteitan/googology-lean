@@ -6,7 +6,7 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
       - done (only S assumed): A1, A2 closed; A3 bands below t₀ = ε_{G+1} and a start of φ(t₀, G); XbShift, XbRealB, XiTopUp proved. 110 axioms.
       - also: IMG below Γ_{ρ+3}; block law above top atoms; readings on [M_W, K_ω); EQ by reach induction except where B_n jumps.
       - road xpT0RoadZ (hyp.: UPPER, LOWER, cap past ι(Γ(φ(t₀, G+1))·ω); WdThLow, WdEQfar if L(ω+1) ≤ ν_C; XbVisGen): ν_C = L(ω+1). Supply hyp. false.
