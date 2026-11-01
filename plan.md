@@ -10,7 +10,7 @@ The remaining work, arranged by the cells of the README tables. Items not being 
       - done (only S assumed): A1, A2 closed; A3 bands below t₀ = ε_{G+1} and a start of φ(t₀, G); XbShift, XbRealB, XiTopUp proved. 110 axioms.
       - also: IMG below Γ_{ρ+3}; block law above top atoms; readings on [M_W, K_ω); EQ by reach induction except where B_n jumps.
       - road xpT0RoadZ (hyp.: UPPER, LOWER, cap past ι(Γ(φ(t₀, G+1))·ω); WdThLow, WdEQfar if L(ω+1) ≤ ν_C; XbVisGen): ν_C = L(ω+1). Supply hyp. false.
-      - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): 46 sorry leaves; OPEN 22 (L), SUSPECT 2, REFUTED 5; on the road 18 OPEN (L) + 1 REFUTED.
+      - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): 45 sorry leaves; OPEN 21 (L), SUSPECT 2, REFUTED 5; on the road 18 OPEN (L) + 1 REFUTED.
       - next: new supply road (ϑ-levels as terms, every subterm restricted); skSysA3StepW; skWallBase/Step, skTopK; skEQJump, skKCofGap; region B.
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))

@@ -10,7 +10,7 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
       - 済み（仮定は S だけ）：A1、A2 は閉じた。A3 は t₀ = ε_{G+1} より下の帯と φ(t₀, G) の始まりまで。XbShift、XbRealB、XiTopUp を証明。公理 110 個。
       - ほかに：Γ_{ρ+3} より下で IMG。頂点の原子の上のブロック則。[M_W, K_ω) の読み。EQ は到達点の帰納法で、B_n が跳ぶところを除いて済み。
       - 道 xpT0RoadZ（仮定：ι(Γ(φ(t₀, G+1))·ω) より上で UPPER、LOWER、cap。L(ω+1) ≤ ν_C のとき WdThLow、WdEQfar。XbVisGen）：ν_C = L(ω+1)。供給の仮定は偽。
-      - 骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：sorry の葉 46。OPEN 22（L）、SUSPECT 2、REFUTED 5。道の上は OPEN 18（L）と REFUTED 1。
+      - 骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：sorry の葉 45。OPEN 21（L）、SUSPECT 2、REFUTED 5。道の上は OPEN 18（L）と REFUTED 1。
       - 次：新しい供給の道（ϑ の level を項で書き、部分項もすべて制限）。skSysA3StepW。skWallBase/Step、skTopK。skEQJump、skKCofGap。領域 B。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
