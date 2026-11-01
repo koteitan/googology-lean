@@ -88,8 +88,7 @@ on the road 18 OPEN L → 21 OPEN L, 0 REFUTED.
   (`Wh.whShapeNat_false`). All replaced by proved nodes.
 - **skRealB SUSPECT L**: `Ww.WwCarry` gives no bound for ϑ-levels with data in [υ_λ, υ_{λ+h}). Off the road.
 - **skMidAssemble SUSPECT M**: its hypothesis covers only F_W ≤ m_λ < θ⁺; replaced by skMidCF. Off the road.
-- Also refuted (recorded as PROVED negations): the inverse map for λ' codes below B_n(ψ₂ t) (`Yd.ydInvRef`);
-  relabelling codes G ↦ Γ(k) (`Yc.ycRelab_gap`); the cell transport in the windows (`Yf.yfNoBase_win`).
+- PROVED negations: inverse map below B_n(ψ₂ t) (`Yd.ydInvRef`), relabelling G ↦ Γ(k) (`Yc.ycRelab_gap`), cells in windows.
 
 ## Suggested order of the next rounds
 
