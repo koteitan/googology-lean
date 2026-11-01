@@ -20,6 +20,9 @@ import Googology.Trans.PoR.InaccPsi.R2.XbImg
 import Googology.Trans.PoR.InaccPsi.R2.XbReal
 import Googology.Trans.PoR.InaccPsi.R2.XbRoad
 import Googology.Trans.PoR.InaccPsi.R2.XaRep
+import Googology.Trans.PoR.InaccPsi.R2.CitedXe
+import Googology.Trans.PoR.InaccPsi.R2.XeFix
+import Googology.Trans.PoR.InaccPsi.R2.XeShift
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -97,6 +100,21 @@ Round 120 (leaf "decide WuGap: is the supply road vacuous?", sup42).  `X = ϑ^{u
   (OPEN).  `skSupK` (and its subtree `skCarryWit`, `skCarryOther`, `skCarryHigh`, `skImgEps`) is now OFF THE ROAD: its
   statement `Wf.WfSup` follows from `skSupKW` (`Ww.wwSup_wf`).
 This file imports the new `Ww` modules, so it can be checked only after the merge.
+
+Round 122 (leaf "skShiftTh, following the paper", sup44).
+* NEW cited axiom `R2.xeVt_trL` (`R2.CitedXe`): [W07a] Def 6.2 + Lemma 6.3, subcase `Γ > 0`, `Γ^* < α`, at every
+  level `Γ = Ω₁·M`, `B₂ ≤ M < θ`, data `d_S(M) < q ≤ α` (`q` strongly critical); the twin of `R2.uvVt_trL` (ranges
+  disjoint: `Xe.xe_twin_disj`).  REFUTE FIRST: NO EVIDENCE (consistent with `uvVt_trL` below `B₂`; no no-go result
+  mentions translations).
+* The node lemmas of `R2.UyFix` below `θ` (`R2.XeFix`, NEW node `skNodeTh`, PROVED): the code `π`-fix
+  `Xe.xe_pi_fix_th` (every `z < θ` with `d_S(z) < q ≤ σ` is in `Tᵗ[σ]` and fixed by `π`: one induction along
+  `Vs.vsMu`, no axiom beyond `CitedVd`, `CitedVp`), `Xe.xe_Om1_mul_TB`, `Xe.xe_arg_T`, `Xe.xeLt_vt_self`,
+  `Xe.xeVt_tr` (both translations at every constant level `Ω₁·M < θ`), `Xe.xeDown`, `Xe.xeMv`.
+* `skShiftTh` REDUCED (`Xe.xbShift_of_xe`) to the NEW leaf `skShiftThHi` (`Xe.XeShift S`: the clause only for `η ∈ Y`
+  at levels `M ≥ B₂`).  The other cases are theorems: `η ∈ X` at every level `Ω₁·M < θ` (`Xe.xe_thCl_low`, from the
+  move clause of `Vl.vlShiftCore` and `Xe.xeMv`), every `η` at levels `Ω₁·M < B₂` (`Xe.xe_thCl_lowLev`, the term
+  clause of `vlShiftCore` at `thc M (par η)`).  `Root.skNuC` is unchanged.
+This file imports the new `Xe` modules, so it can be checked only after the merge.
 
 Round 121 (leaf "the realizer bridge for ϑ-nodes: skRealB", real1).
 * REFUTE FIRST at the gap witness: NO EVIDENCE.  The image of the `ϑ`-node `th 1 B₂ (lo λ)` under an offset map with
@@ -813,17 +831,37 @@ theorem skImgGap (k : ℕ) {μ : Ordinal.{0}} {f : Ordinal.{0} → Ordinal.{0}} 
     Xb.xbIX μ < upsilon (μ + 2) ∧ upsilon μ ∈ Par (upsilon (μ + 1)) (Xb.xbIX μ) :=
   Xb.xb_img_gap_k k hμ hμl hf
 
-/-- STATUS: OPEN (NEW round 121; the gap of `skRealB`)
+/-- STATUS: PROVED (by `Xe.xe_pi_fix_th`, `Xe.xe_Om1_mul_TB`, `Xe.xeVt_tr`; NEW round 122; the node lemmas of
+`R2.UyFix` at every constant level `Ω₁·M < θ`)
+SIZE: M
+for bases `σ < τ`, a strongly critical `q ≤ σ`: every `z < θ` with `d_S(z) < q` is in `Tᵗ[σ]` and `π z = z`; for a
+level `M` over `κ < τ` (`Xe.XeLev`): both translations of [W07a] Def 6.2 (subcase `Γ^* < α`). -/
+theorem skNodeTh (S : InaccSeq.{0}) :
+    (∀ σ τ q z, Bases σ τ → SC q → q ≤ σ → z < ConjT.th S → Vd.vdD S 0 z < q → Xe.XeFx σ τ z) ∧
+    (∀ κ τ (n : ℕ) M ρ, Bases κ τ → 1 ≤ n → Xe.XeLev κ M → ρ < Om1 →
+      (Om1 * M + ρ ∈ Tset (Dl τ n) → vt (Dl τ n) (Om1 * M + ρ) < Dp τ n →
+        Om1 * M + (Dl τ n + ρ) ∈ Tset τ ∧ vt (Dl τ n) (Om1 * M + ρ) = vt τ (Om1 * M + (Dl τ n + ρ)))) :=
+  ⟨fun _ _ _ _ h hq hqσ hz hd => Xe.xe_pi_fix_th (S := S) h hq hqσ hz hd,
+    fun _ _ _ _ _ hB hn hM hρ => (Xe.xeVt_tr hB hn hM hρ).1⟩
+
+/-- STATUS: OPEN (NEW round 122; the part of `skShiftTh` left by `Xe.xbShift_of_xe`)
+SIZE: L
+`Xe.XeShift S`: the shift `Vl.vlShiftCore` with the `ϑ`-node clause `Xe.XeThHi` for a point `η ∈ Y` and a level `M ≥
+B₂` (data below the bottom `γ`): `D(ϑ^{υ_{λ+h}}(Ω₁·M + η)) = ϑ^{υ_{μ+f(h)}}(Ω₁·M + D(η))`.  Needs FRAG
+(`Vl.vlFrag`) on a term type with a node of constant level `Ω₁·M ∈ [B₂, θ)` (`Un.UnC` has only `thc` with `Ω₁·q <
+B₂`, `Vi.Nz.qB`); its node cases are the theorems `Xe.xeDown` (`viDown`), `Xe.xeMv` (`viMv`), `Xe.xeVt_tr`
+(`viTrA` / `viTrB`), `Xe.xeLt_vt_self`, `Xe.xe_arg_T`, with order from `R2.vdVt_lt`, `R2.vdLt_of_vt_lt`.
+REFUTE FIRST round 122: NO EVIDENCE (at the gap witness the clause asks `D(X*) = ϑ^{υ_{μ+1}}(B₂ + υ_μ)`, the point of
+`skImgGap`; not touched by `Vo.voNoGo`, `Vn.vnTop_Om3`, `Wf.wfSide_false`, `Ww.wwRoad_false`). -/
+theorem skShiftThHi (S : InaccSeq.{0}) : Xe.XeShift S := by sorry
+
+/-- STATUS: REDUCED (from `skShiftThHi` by `Xe.xbShift_of_xe`; round 122; was OPEN, NEW round 121)
 SIZE: L
 `Xb.XbShift S`: the shift `Vl.vlShiftCore` with the `ϑ`-node clause `Xb.XbThCl`: for `y ∈ Y` in the segment of
 `υ_{λ+h}`, `y = ϑ^{υ_{λ+h}}(Ω₁·M + η)` with `1 ≤ M`, the data of `M` below the bottom `γ` (`Vd.VdLtIn M γ`), `η < Ω₁`
-in `X ∪ Y`: `D(y) = ϑ^{υ_{μ+f(h)}}(Ω₁·M + D(η))`.  Below `B₂` this is the term clause of `vlShiftCore` for the term
-`thc M (par η)`.  Needs (i) the translations of [W07a] Def 6.2 / Lemma 6.3, subcase `Γ^* < α`, at the levels
-`B₂ ≤ Ω₁·M < θ` (a twin of `R2.uvVt_trL` with the `K⁽⁰⁾`-datum of `CitedVd`; not cited yet), (ii) FRAG
-(`Vl.vlFrag`, `Uy.uyFrag`) with constant levels up to `θ` (the node lemmas of `R2.UyFix` at those levels:
-membership `CitedVd.vdArg_mem`, order `vdVt_lt`, `π` on the level from `vdAtom_TB` / `vdPhi_TB` / `vdOpow_TB`).
-REFUTE FIRST round 121: NO EVIDENCE (`skImgGap`; not touched by `Vo.voNoGo`, `Vn.vnTop_Om3`, `Wf.wfSide_false`). -/
-theorem skShiftTh (S : InaccSeq.{0}) : Xb.XbShift S := by sorry
+in `X ∪ Y`: `D(y) = ϑ^{υ_{μ+f(h)}}(Ω₁·M + D(η))`.  The cases `η ∈ X` (`Xe.xe_thCl_low`) and `Ω₁·M < B₂`
+(`Xe.xe_thCl_lowLev`) are theorems. -/
+theorem skShiftTh (S : InaccSeq.{0}) : Xb.XbShift S := Xe.xbShift_of_xe (skShiftThHi S)
 
 /-- STATUS: REDUCED (from `skShiftTh` by `Xb.xbRealB`; NEW round 121, REPLACES `skRealB` on the road)
 SIZE: L

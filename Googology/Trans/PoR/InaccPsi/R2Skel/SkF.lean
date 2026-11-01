@@ -14,6 +14,8 @@ import Googology.Trans.PoR.InaccPsi.R2.WtTow
 import Googology.Trans.PoR.InaccPsi.R2.WxTop
 import Googology.Trans.PoR.InaccPsi.R2.WyLv
 import Googology.Trans.PoR.InaccPsi.R2.XcQ
+import Googology.Trans.PoR.InaccPsi.R2.XfFr
+import Googology.Trans.PoR.InaccPsi.R2.XhLev
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -152,6 +154,31 @@ pseudo-base over `Wn.wnLv3T0` raised to the gate `max 1 γ` is started by the sa
 `ϑˣ(Ω₁·ε_{Γ_{x+1}+1} + Γ_{x+1})`), so `skA3QT0` is REDUCED to its start `skA3T0Start`, a system with bound
 `φ(t₀, G)` (`Xc.xc_start_iff`, `Xc.xc_start_B`); it lies above `φ(ℓ, G+1)` for every `ℓ < t₀`
 (`Xc.xc_start_cover`), so it is the whole of region (A3) below `φ(t₀, G)` (all (A3) levels, all offsets).
+
+Round 122 (leaf reg7, modules `R2.Xf*`; the PROVED nodes below can be checked only after the merge): THE FIRST (A3)
+LEVEL `G` FROM THE BOTTOM.  `φ(G, 0) = G`, so the offsets of the level `G` start at `0`, not at a base `F + 1`
+(`Hn.HnVRec`), and the family `Ws.wsF` does not apply at the level `G` over the datum `G` (`Ws.WsGood` asks
+`R G x < Γ_{x+1}`).  The system at `φ(G, 1)` is the gated `ω`-chain union of the (A2) systems over `G` at the
+`ω`-sequence of gate-`0` (A2) levels cofinal in `G` (`skA3G1`, `Xf.xfV1`); it starts the pseudo-base `φ(G, 1)` of the
+level `G`.  One recursion (`Xf.xfV`: the package of the (A3) family at `G` at successors, gated `ω`-chain unions at
+limits) gives a start of `φ(G, ν)` for every constant offset `1 ≤ ν < Γ₀` (gate `ν`; `skA3GOff`), the reading
+`ϑˣ(Ω₁·Γ_{x+1} + t) = φ(Γ_{x+1}, 1+t)` (`Xf.xf_glA_veb`) giving Lemma EXACT.  Every `B < φ(G, Γ₀)` lies below the
+bound of a system with gate `< K` (`skSysA3G`, used in `skSysA2`), and the frontier moves past `φ(G, 1)` to
+`F_G = sup_{ν<Γ₀} ι(Γ(φ(G, ν))·ω) ≤ ι(Γ(φ(G, Γ₀)))` (`skPastG`, `skLocG`, `skFGWhere`, `skHypIffG`; road
+`Xf.xfRoad`, `Xf.xfRoadZ`, hypotheses equivalent to those of `Xb.xbRoadZ`: `Xf.xfRoad_hyp_iff`).  `skA3T0Start`
+stays OPEN: next are the offsets of `G` read by codes (gates `≥ Γ₀`, `Ω₁`-cofinal unions) up to `φ(G+1, 0)`, then
+the levels above `G`.
+
+Round 122 (leaf regb1, modules `R2.Xh*`; the nodes below that use `Xh.*` import `R2.XhLev`, so they can be checked
+only after the merge): REGION (B) IS DECOMPOSED INTO CELLS (base, offset type).  Every region-(B) name is a base
+`β ∈ {0} ∪ {Ω₂·q} ∪ {b_k} ∪ {b_ω}` plus an offset `ζ < Ω₂` with `e(η) = e(ζ)` and code `-1 + e(ζ)` (`skBhiName`,
+`skWinOff`); every offset is of type (A) or in a name layer `c ≥ 1` (`Xh.xhNm_split`).  (B-lo) = base `0`: its
+LAYERS `c` (`Xh.XhLay`: past every `ι(Γ(B)·ω)`, `B < Γ(c)`, not past every one with `B < Γ(c+1)`; `skLayExists`)
+are region (A) again over the base `Γ(c)`: `skLayLevCof` (levels `ℓ < Γ(c)` reach exactly `φ(Γ(c), 1)`, generic in
+`c`) splits each layer into `skLayLo` (old levels over the base `Γ(c)`) and `skLayHi` (levels with the atom `Γ(c)`);
+the base atom is EXACT (`skLayExact` = `Gb.gq_pi`); the first missing ingredient is IMG below `Γ_{ρ+3}`
+(`skL1Img`).  (B-hi) is REDUCED to the cells `skBhiA` / `skBhiL`, `skWinB` to `skWinL`, `skTopB` to `skTopL`.
+Non-vacuity: `skBhiNonempty`, `skWinNonempty`.  The closed region (A2) bounds `ν_C` from below (`skNuA2`).
 -/
 
 set_option autoImplicit false
@@ -619,6 +646,36 @@ theorem skHypIffA2 (S : InaccSeq.{0}) (h : ∀ l, Cd.CdRange S l → skPastA2 S 
   by_cases h' : skPastA2 S l
   · exact h l hr h'
   · exact skLocA2 S l hr h'
+
+/-- The frontier of round 122 (leaf reg7): `λ` past `ι(Γ(φ(G, 1+ν))·ω)` for every `ν < Γ₀`. -/
+def skPastG (S : InaccSeq.{0}) (l : Ordinal.{0}) : Prop := Xf.XfPast S l
+
+/-- STATUS: PROVED (Xf.xf_notPast; round 122)
+SIZE: S
+UPPER ∧ LOWER ∧ CapV at every range restart below `ι(Γ(φ(G, 1+ν))·ω)` for some `ν < Γ₀` (the systems `Xf.xfV ν`,
+gate `≤ 1+ν < Γ₀ ≤ K`, located by `Hg.hgV_locD`). -/
+theorem skLocG (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → ¬ skPastG S l → SkUV S l := fun _ hr h =>
+  Xf.xf_notPast S hr h
+
+/-- STATUS: PROVED (Xf.xf_past_A2, Xf.xf_FG_le; round 122)
+SIZE: S
+WHERE THE FRONTIER IS: past `F_G` ⇒ past the end of (A2); each `ι(Γ(φ(G, 1+ν))·ω)`, `ν < Γ₀`, is
+`≤ ι(Γ(φ(G, Γ₀)))`. -/
+theorem skFGWhere (S : InaccSeq.{0}) :
+    (∀ l, skPastG S l → skPastA2 S l) ∧
+    ∀ ν, ν < gamma 0 → Bt.iota S (Gc.gcG (veblen (Gc.gcG 0) (1 + ν)) * ω) ≤
+      Bt.iota S (Gc.gcG (veblen (Gc.gcG 0) (gamma 0))) :=
+  ⟨fun _ h => Xf.xf_past_A2 S h, fun _ hν => Xf.xf_FG_le S hν⟩
+
+/-- STATUS: PROVED (skLocG; round 122)
+SIZE: S
+THE FRONTIER MOVES PAST `φ(G, 1)`: UPPER / LOWER / CapV past `F_G` suffice (road `Xf.xfRoad`, hypotheses equivalent
+to those of `Xb.xbRoadZ`: `Xf.xfRoad_hyp_iff`). -/
+theorem skHypIffG (S : InaccSeq.{0}) (h : ∀ l, Cd.CdRange S l → skPastG S l → SkUV S l) :
+    ∀ l, Cd.CdRange S l → skFHo S ≤ l → SkUV S l := fun l hr _ => by
+  by_cases h' : skPastG S l
+  · exact h l hr h'
+  · exact skLocG S l hr h'
 
 
 /-! ## (A2) and (A3): the level codes past `ε_{Ω₁+1}` (round 116, leaf reg1)
@@ -1208,6 +1265,29 @@ SIZE: M
 the pseudo-base of level `t₀` at `φ(t₀, G)` over `Wn.wnLv3T0`, gate `0`, reading `ϑˣ(Ω₁·ε_{Γ_{x+1}+1} + Γ_{x+1})`. -/
 theorem skA3T0Q : Xc.xcQT0.F = veblen (Wj.wjT 0) (Gc.gcG 0) ∧ Xc.xcQT0.γ = 0 := ⟨rfl, rfl⟩
 
+/-- STATUS: PROVED (Xf.xfV1, Xf.xf_start1; round 122)
+SIZE: M
+THE LEVEL `G` OVER THE RAW DATUM `G` (`φ(G, 0) = G`): a system with bound `φ(G, 1)`, gate `1`, starting the
+pseudo-base `φ(G, 1)` of the level `G` (`Xf.xfQ`): the gated `ω`-chain union of the (A2) systems over `G` at the
+gate-`0` (A2) levels `Xc.xcCf k` cofinal in `G` (`φ(G, 1) = sup_k φ(ℓ_k, G+1)`). -/
+theorem skA3G1 : ∃ U : Hg.HgVD, U.B = veblen (Gc.gcG 0) 1 ∧ U.γ = 1 ∧
+    Hg.HgSStart (Hn.hnVPB (Xf.xfQ 1 le_rfl Xf.xf_one_lt_gam0)) U := ⟨Xf.xfV1, rfl, rfl, Xf.xf_start1⟩
+
+/-- STATUS: PROVED (Xf.xfV_start, Xf.xfV_B, Xf.xfV_γ; round 122)
+SIZE: L
+THE CONSTANT OFFSETS OF THE LEVEL `G`: for every `ν < Γ₀` a system starting the pseudo-base `φ(G, 1+ν)` (gate
+`1+ν`), by one recursion `Xf.xfV` (successor: the package `Xf.xfPk` of the (A3) family at `G`; limit: the gated
+`ω`-chain union, gate `λ`); later systems extend earlier ones (`Xf.xfV_ext`). -/
+theorem skA3GOff : ∀ ν (hν : ν < gamma 0), ∃ U : Hg.HgVD, U.B = veblen (Gc.gcG 0) (1 + ν) ∧ U.γ ≤ 1 + ν ∧
+    Hg.HgSStart (Hn.hnVPB (Xf.xfQ (1 + ν) le_self_add (Xf.xf_one_add_lt hν))) U := fun _ hν =>
+  ⟨Xf.xfV _, Xf.xfV_B hν, Xf.xfV_γ hν, Xf.xfV_start hν⟩
+
+/-- STATUS: PROVED (Xf.xf_sysG; round 122)
+SIZE: S
+every `B < φ(G, Γ₀)` lies below the bound of a system with gate `< K` (the systems of skA3GOff). -/
+theorem skSysA3G (S : InaccSeq.{0}) : ∀ B, B < veblen (Gc.gcG 0) (gamma 0) →
+    ∃ V : Hg.HgVD, B ≤ V.B ∧ V.γ < Td.tdK S := Xf.xf_sysG S
+
 /-- STATUS: OPEN
 SIZE: L
 a system starting the pseudo-base `φ(t₀, G)` (round 121).  By `Xc.xc_start_iff`: `U.ix = φ(t₀, G)` (so
@@ -1215,7 +1295,13 @@ a system starting the pseudo-base `φ(t₀, G)` (round 121).  By `Xc.xc_start_if
 `U.Z x = ζ` of it.  `U.B > φ(ℓ, G+1)` for every `ℓ < t₀` (`Xc.xc_start_cover`): U is region (A3) below `φ(t₀, G)`, a
 recursion over the (A3) levels `ℓ ≤ t₀` and the offsets `ν` of the pseudo-bases `φ(ℓ, ν)` (the (A3) family
 `Xc.xcFam` gives the step of every level `ℓ < t₀` at every raw datum; the pseudo-bases `φ(ℓ, ν)`, `ℓ > G`, and their
-starts are what is missing).  REFUTE FIRST: NO EVIDENCE (the fields of the start are consistent: `xcQT0` exists). -/
+starts are what is missing).  REFUTE FIRST: NO EVIDENCE (the fields of the start are consistent: `xcQT0` exists).
+Round 122: REFUTE FIRST again NO EVIDENCE (no known no-go result mentions starts, pseudo-bases or packages; the
+pieces built so far are unconditional).  First steps PROVED: the level `G` from the bottom, `φ(G, ν)` for every
+constant `1 ≤ ν < Γ₀` (skA3G1, skA3GOff).  Next, in order: the offsets of `G` read by (A2) codes and past them
+(pseudo-bases `φ(G, ν)` with a code gate `≥ Γ₀`: a code of `[φ(G, ν), φ(G, ν+1))` over `Z` must force the gate of
+`ν` below `Z`; unions at `Ω₁`-cofinal offsets as `Ho.hoOU`; the gated frontier lemma `Gr.GrUni` at gates `≥ Γ₀`) up
+to `φ(G+1, 0)`; then every level `G < ℓ ≤ t₀` with its pseudo-bases `φ(ℓ, ν)` from the bottom `φ(ℓ, 0)`. -/
 theorem skA3T0Start : ∃ U : Hg.HgVD, Hg.HgSStart (Hn.hnVPB Xc.xcQT0) U := by
   sorry
 
@@ -1283,7 +1369,7 @@ theorem skSysA3All (S : InaccSeq.{0}) : ∀ B, B < Gc.gcG 1 → ∃ V : Hg.HgVD,
 /-- STATUS: REDUCED (Wj.wjA2Cof, skSysA2Lev, skSysA3All; was OPEN L)
 SIZE: L
 (A2) ∀ B ∈ [φ(ε_{Ω₁+1}, G+1), φ(G, G+1)) ∃ system V, B ≤ B_V, γ_V < K: below φ(G, 1) by the A2 levels glBn n,
-from φ(G, 1) on by the A3 levels. -/
+on [φ(G, 1), φ(G, Γ₀)) by the level G from the bottom (skSysA3G, round 122), from φ(G, Γ₀) on by the A3 levels. -/
 theorem skSysA2 (S : InaccSeq.{0}) : ∀ B, veblen Gf.gfE (Gc.gcG 0 + 1) ≤ B →
     B < veblen (Gc.gcG 0) (Gc.gcG 0 + 1) → ∃ V : Hg.HgVD, B ≤ V.B ∧ V.γ < Td.tdK S := by
   intro B _ hB
@@ -1291,6 +1377,8 @@ theorem skSysA2 (S : InaccSeq.{0}) : ∀ B, veblen Gf.gfE (Gc.gcG 0 + 1) ≤ B �
   · obtain ⟨n, hn⟩ := Wj.wjA2Cof h
     obtain ⟨V, hVB, hγ⟩ := skSysA2Lev S n
     exact ⟨V, hVB ▸ hn.le, hγ⟩
+  rcases lt_or_ge B (veblen (Gc.gcG 0) (gamma 0)) with h' | _
+  · exact skSysA3G S B h'
   · exact skSysA3All S B (hB.trans (Wj.wjVeb_lt_G1 Wj.wjG_lt_G1 Wj.wjG1_lt))
 
 /-- STATUS: REDUCED (skSysA3All; was OPEN L)
@@ -1309,20 +1397,138 @@ Above `L(0)` every name is `Ω_ω + β`, `0 < β < P′·(ω+1) < Ω₂`, so `e(
 def SkOffA (S : InaccSeq.{0}) (ξ l : Ordinal.{0}) : Prop :=
   ∃ B, B < Gc.gcG 1 ∧ Cd.cdEta S l - Wj.wjBase S ξ < Gc.gcG B * ω
 
+/-! ### Region (B) after round 122 (leaf regb1, modules `R2.Xh*`)
+
+Every region-(B) name is a base plus an offset `ζ < Ω₂` (`Xh.xhBhi_off`, `Xh.xhWin_off`), the code is `-1 + e(ζ)`;
+the offsets are of type (A) (`Xh.XhNmA`) or in a layer `c ≥ 1` (`Xh.XhNmLay`, `Xh.xhNm_split`).  (B-lo) is the base
+`0`: its layers `c` (`Xh.XhLay`, `Xh.xhLay_exists`) are region (A) again over the base `Γ(c)`: the levels
+`ℓ < Γ(c)` reach `φ(Γ(c), 1)` (`Xh.xhLevCof`), the levels `Γ(c) ≤ ℓ < Γ(c+1)` contain the atom `Γ(c)`. -/
+
+/-- STATUS: PROVED (Xh.xhBlo_iff)
+SIZE: S
+(B-lo) on names: η_λ < Ω₂ and Γ(B)·ω ≤ η_λ for every B < Γ(1). -/
+theorem skBloName (S : InaccSeq.{0}) {l : Ordinal.{0}} (hr : Cd.CdRange S l) :
+    (Wj.WjNotA S l ∧ upsilon l < Nc.ncL S 0 ∧ Cd.cdExp (Cd.cdEta S l) < Om (1 + 1) ∧
+      l < Bt.iota S (Om (1 + 1))) ↔
+    (Cd.cdEta S l < Om (1 + 1) ∧ ∀ B, B < Gc.gcG 1 → Gc.gcG B * ω ≤ Cd.cdEta S l) :=
+  Xh.xhBlo_iff hr
+
+/-- STATUS: PROVED (Xh.xhLay_exists, Xh.xhLay_unique)
+SIZE: S
+every (B-lo) restart lies in exactly one layer c, 1 ≤ c < Ω₂. -/
+theorem skLayExists (S : InaccSeq.{0}) {l : Ordinal.{0}} (hr : Cd.CdRange S l) (hN : Wj.WjNotA S l)
+    (hι : l < Bt.iota S (Om (1 + 1))) : ∃ c, 1 ≤ c ∧ c < Om (1 + 1) ∧ Xh.XhLay S c l :=
+  Xh.xhLay_exists hr hN hι
+
+/-- STATUS: PROVED (Xh.xhLevCof)
+SIZE: S
+in the layer c the levels ℓ < Γ(c) reach exactly φ(Γ(c), 1) (c = 0 is Wj.wjA2Cof). -/
+theorem skLayLevCof (c : Ordinal.{0}) {B : Ordinal.{0}} (hB : B < veblen (Gc.gcG c) 1) :
+    ∃ ℓ, ℓ < Gc.gcG c ∧ B < veblen ℓ (Gc.gcG c + 1) := Xh.xhLevCof c hB
+
+/-- STATUS: PROVED (Gb.gq_pi)
+SIZE: S
+EXACT for the base atom of the layer c (c a constant, read Γ_{x+1+c} = gq c x): π_{σ,ρ}(gq c ρ) = gq c σ. -/
+theorem skLayExact {σ ρ c : Ordinal.{0}} (hB : Bases σ ρ) (hc : c < σ) :
+    Gb.gq c ρ ∈ TB ρ σ ∧ pi σ ρ (Gb.gq c ρ) = Gb.gq c σ := Gb.gq_pi hB hc
+
 /-- STATUS: OPEN
-SIZE: L
-(B-lo) the intended region (B): past (A), υ_λ < L(0), e(η) < Ω₂, λ < ι(Ω₂) (codes with atoms Γ(c), c ≥ 1;
-names η < Ω₂). -/
-theorem skRegBlo (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Wj.WjNotA S l → upsilon l < Nc.ncL S 0 →
-    Cd.cdExp (Cd.cdEta S l) < Om (1 + 1) → l < Bt.iota S (Om (1 + 1)) → SkUV S l := by
+SIZE: M
+INGREDIENT of skLayLo 1 / skLayHi 1 (not wired: the layer-1 systems also need the code interface and the gated frontier
+lemma at the base Γ(1), see skLayLo): Lemma IMG below Γ_{ρ+3} = gq 2 ρ (He.he_img_G1 is the case gq 1 ρ). -/
+theorem skL1Img {ρ τ δ : Ordinal.{0}} (h : RstK ρ τ δ) : ∀ v, v < Gb.gq 2 ρ → Gn.GnI ρ δ v := by
   sorry
 
 /-- STATUS: OPEN
 SIZE: L
+the layer c, OLD levels ℓ < Γ(c) over the base Γ(c) (system bounds φ(ℓ, Γ(c)+1); for c = 1 the levels of
+(A1) ∪ (A2) ∪ (A3) again, now over Γ(1) read Γ_{x+2}; needs: a code interface like Ws.WsC with the base fields of
+Γ(c) in place of Ws.WsCG and readings < gq (c+1) x, IMG below gq (c+1) ρ (skL1Img), the gated frontier lemma
+(Gs.gsEnum / Gs.gsCapV) with the atom set {Γ(c') : c' ≤ c}, and the Ws.wsFam recursion over the levels). -/
+theorem skLayLo (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l → Xh.XhPast S c l →
+    (∃ ℓ, ℓ < Gc.gcG c ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) → SkUV S l := by
+  sorry
+
+/-- STATUS: OPEN
+SIZE: L
+the layer c, NEW levels Γ(c) ≤ ℓ < Γ(c+1) (levels containing the atom Γ(c); for c = 1 the analog of (A3) with the
+atom Γ(1)). -/
+theorem skLayHi (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l → Xh.XhPast S c l →
+    (∀ ℓ, ℓ < Gc.gcG c → Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω) ≤ l) →
+    (∃ ℓ, Gc.gcG c ≤ ℓ ∧ ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) →
+    SkUV S l := by
+  sorry
+
+/-- STATUS: REDUCED (Xh.xhLay_red, skLayLo, skLayHi)
+SIZE: L
+every layer c ≥ 1 of (B-lo). -/
+theorem skLay (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l → Xh.XhLay S c l →
+    l < Bt.iota S (Om (1 + 1)) → SkUV S l := by
+  intro c hc1 hc2 l hr hL _
+  exact Xh.xhLay_red (S := S) (SkUV S) c (skLayLo S c hc1 hc2) (skLayHi S c hc1 hc2) l hr hL
+
+/-- STATUS: REDUCED (Xh.xhRegBlo_of_lay, skLay; was OPEN L)
+SIZE: L
+(B-lo) the intended region (B): past (A), υ_λ < L(0), e(η) < Ω₂, λ < ι(Ω₂) (codes with atoms Γ(c), c ≥ 1;
+names η < Ω₂). -/
+theorem skRegBlo (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Wj.WjNotA S l → upsilon l < Nc.ncL S 0 →
+    Cd.cdExp (Cd.cdEta S l) < Om (1 + 1) → l < Bt.iota S (Om (1 + 1)) → SkUV S l :=
+  Xh.xhRegBlo_of_lay (S := S) (SkUV S) (skLay S)
+
+/-- STATUS: PROVED (Xh.xhBhi_iff, Xh.xhBhi_off)
+SIZE: S
+(B-hi) on names: Ω₂ ≤ η < Ω_ω, e(η) < Ω₂; η = Ω₂·q + ζ, 1 ≤ q, 0 < ζ < Ω₂, e(η) = e(ζ), code -1 + e(ζ). -/
+theorem skBhiName (S : InaccSeq.{0}) {l : Ordinal.{0}} (hr : Cd.CdRange S l) :
+    (Wj.WjNotA S l ∧ upsilon l < Nc.ncL S 0 ∧ Cd.cdExp (Cd.cdEta S l) < Om (1 + 1) ∧
+      Bt.iota S (Om (1 + 1)) ≤ l) ↔
+    (Om (1 + 1) ≤ Cd.cdEta S l ∧ Cd.cdEta S l < Om ω ∧ Cd.cdExp (Cd.cdEta S l) < Om (1 + 1)) :=
+  Xh.xhBhi_iff hr
+
+/-- STATUS: PROVED (Xh.xhBhi_nonempty)
+SIZE: S
+non-vacuity: (B-hi) contains range restarts. -/
+theorem skBhiNonempty (S : InaccSeq.{0}) : ∃ l, Cd.CdRange S l ∧ Wj.WjNotA S l ∧
+    upsilon l < Nc.ncL S 0 ∧ Cd.cdExp (Cd.cdEta S l) < Om (1 + 1) ∧ Bt.iota S (Om (1 + 1)) ≤ l :=
+  Xh.xhBhi_nonempty S
+
+/-- STATUS: OPEN
+SIZE: L
+(B-hi, A-type cell) base Ω₂·q, offset ζ of type (A): transport of region (A) along ζ ↦ Ω₂·q + ζ. -/
+theorem skBhiA (S : InaccSeq.{0}) : ∀ l q ζ, Cd.CdRange S l → Cd.cdEta S l = Om (1 + 1) * q + ζ → 1 ≤ q →
+    ζ ≠ 0 → ζ < Om (1 + 1) → Cd.cdEta S l < Om ω → Xh.XhNmA ζ → SkUV S l := by
+  sorry
+
+/-- STATUS: OPEN
+SIZE: L
+(B-hi, layer cells) base Ω₂·q, offset ζ in the name layer c ≥ 1: transport of skLay c along ζ ↦ Ω₂·q + ζ. -/
+theorem skBhiL (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l q ζ, Cd.CdRange S l →
+    Cd.cdEta S l = Om (1 + 1) * q + ζ → 1 ≤ q → ζ ≠ 0 → ζ < Om (1 + 1) → Cd.cdEta S l < Om ω →
+    Xh.XhNmLay c ζ → SkUV S l := by
+  sorry
+
+/-- STATUS: REDUCED (Xh.xhBhi_red, skBhiA, skBhiL; was OPEN L)
+SIZE: L
 (B-hi) names Ω₂ ≤ η < Ω_ω with last exponent < Ω₂ (offset codes), υ_λ < L(0). -/
 theorem skRegBhi (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Wj.WjNotA S l → upsilon l < Nc.ncL S 0 →
-    Cd.cdExp (Cd.cdEta S l) < Om (1 + 1) → Bt.iota S (Om (1 + 1)) ≤ l → SkUV S l := by
-  sorry
+    Cd.cdExp (Cd.cdEta S l) < Om (1 + 1) → Bt.iota S (Om (1 + 1)) ≤ l → SkUV S l :=
+  Xh.xhBhi_red (S := S) (SkUV S) (skBhiA S) (skBhiL S)
+
+/-- STATUS: PROVED (Xh.xhWin_off, Xh.xhWin_cap, Xh.xhWin_capV)
+SIZE: S
+a name in (b_ξ, b_{ξ+1}) is b_ξ + ζ, 0 < ζ < P′, e(η) = e(ζ), code -1 + e(ζ); its cap is ≤ L(ξ+1), so CapV
+gives r(λ) < L(ξ+1). -/
+theorem skWinOff (S : InaccSeq.{0}) {ξ l : Ordinal.{0}} (hr : Cd.CdRange S l) (h1 : Nc.ncL S ξ < upsilon l)
+    (h2 : upsilon l < Nc.ncL S (ξ + 1)) :
+    (∃ ζ, Cd.cdEta S l = Wj.wjBase S ξ + ζ ∧ ζ ≠ 0 ∧ ζ < Nc.ncPp S ∧
+      Cd.cdExp (Cd.cdEta S l) = Cd.cdExp ζ ∧ Cd.cdCode S l = Cd.cdOff (Cd.cdExp ζ)) ∧
+    Cd.cdCapB S l ≤ Nc.ncL S (ξ + 1) :=
+  ⟨Xh.xhWin_off hr h1 h2, Xh.xhWin_cap hr h1 h2⟩
+
+/-- STATUS: PROVED (Xh.xhNu_A2)
+SIZE: S
+the closed region (A2) bounds ν_C from below: υ(ι(Γ(B)·ω)) ≤ ν_C for every B < φ(G, 1) (no hypothesis). -/
+theorem skNuA2 (S : InaccSeq.{0}) {B : Ordinal.{0}} (hB : B < veblen (Gc.gcG 0) 1) :
+    upsilon (Bt.iota S (Gc.gcG B * ω)) ≤ nuC := Xh.xhNu_A2 S hB
 
 /-- STATUS: OPEN (as strong as: ν_C is in no window W_k, Wj.wjUV_ne_nuC)
 SIZE: L
@@ -1333,10 +1539,22 @@ theorem skWinA (S : InaccSeq.{0}) : ∀ k : ℕ, ∀ l, Cd.CdRange S l → Wj.Wj
 
 /-- STATUS: OPEN (as strong as: ν_C is in no window W_k)
 SIZE: L
+(W_k, layer cells) offset ζ = η - b_k in the name layer c ≥ 1 (ζ < P′). -/
+theorem skWinL (S : InaccSeq.{0}) : ∀ k : ℕ, ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l →
+    Wj.WjWin S k l → Xh.XhNmLay c (Cd.cdEta S l - Wj.wjBase S k) → SkUV S l := by
+  sorry
+
+theorem skRegbCast (k : ℕ) : ((k + 1 : ℕ) : Ordinal.{0}) = (k : Ordinal.{0}) + 1 := by push_cast; rfl
+
+/-- STATUS: REDUCED (Xh.xhWinB_red, skWinL; was OPEN L)
+SIZE: L
 (W_k, B-type) L(k) < υ_λ < L(k+1), offset past every copy of a region-(A) frontier (ζ < P′). -/
 theorem skWinB (S : InaccSeq.{0}) : ∀ k : ℕ, ∀ l, Cd.CdRange S l → Wj.WjWin S k l → ¬ SkOffA S k l →
     SkUV S l := by
-  sorry
+  intro k l hr hw hn
+  refine Xh.xhWinB_red (S := S) (SkUV S) (k : Ordinal.{0}) (fun c hc1 hc2 l hr h1 h2 hL => ?_) l hr hw.1
+    (skRegbCast k ▸ hw.2) hn
+  exact skWinL S k c hc1 hc2 l hr ⟨h1, skRegbCast k ▸ h2⟩ hL
 
 /-- STATUS: OPEN (as strong as: ν_C ∉ (L(ω), L(ω+1)); with skWin* and Sh.shNu this is L(ω+1) ≤ ν_C)
 SIZE: L
@@ -1346,9 +1564,18 @@ theorem skTopA (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Wj.WjTop S l → S
 
 /-- STATUS: OPEN (as strong as: ν_C ∉ (L(ω), L(ω+1)))
 SIZE: L
+(W_ω, layer cells) offset ζ = η - b_ω in the name layer c ≥ 1. -/
+theorem skTopL (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l → Wj.WjTop S l →
+    Xh.XhNmLay c (Cd.cdEta S l - Wj.wjBase S ω) → SkUV S l := by
+  sorry
+
+/-- STATUS: REDUCED (Xh.xhWinB_red, skTopL; was OPEN L)
+SIZE: L
 (W_ω, B-type). -/
 theorem skTopB (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Wj.WjTop S l → ¬ SkOffA S ω l → SkUV S l := by
-  sorry
+  intro l hr hw hn
+  exact Xh.xhWinB_red (S := S) (SkUV S) ω (fun c hc1 hc2 l hr h1 h2 hL => skTopL S c hc1 hc2 l hr ⟨h1, h2⟩ hL)
+    l hr hw.1 hw.2 hn
 
 /-- STATUS: REDUCED (skWinA, skWinB)
 SIZE: L
@@ -1378,7 +1605,8 @@ theorem skRegB (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l →
 /-- STATUS: OPEN
 SIZE: L
 (C) = (C1): names with e(η_λ) ≥ Ω₂ (code π_η, ι(Ω₂) ≤ λ, Wj.wjC_props); all of (C) lies below L(0)
-(Wj.wjExpHi_low). -/
+(Wj.wjExpHi_low).  Round 122: REFUTE FIRST, NO EVIDENCE (codes π_η > Γ_{Ω₁+ε₀}, Gc.gc_code_ge, outside every
+frontier lemma, Gc.gcFr_code; no L(k) inside); unchanged. -/
 theorem skLongPre (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Om (1 + 1) ≤ Cd.cdExp (Cd.cdEta S l) →
     upsilon l < Nc.ncL S 0 → SkUV S l := by
   sorry

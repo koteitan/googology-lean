@@ -1,4 +1,5 @@
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
+import Googology.Trans.PoR.InaccPsi.R2.XgReach
 
 /-!
 # Skeleton of part EQ: the hypotheses `(hν → WdThLow)` and `(hν → WdEQfar)` of `Wd.wdRoadL`
@@ -14,14 +15,21 @@ Tree (indent = child):
   * `skThLow` REDUCED: `WdThLow` from `hRead` and `skEQfar` (`waEQtop_ux`, `wdRn_of`, `wdEQtop_iff`).
   * `skEQfar` REDUCED: `WdEQfar` from `skThFar` and `skKFar`.
     * `skThFar` OPEN: the reading move at the far codes.
-    * `skKFar` REDUCED: `k_{λ'}(B_n p) = B_n(k_λ p)` for `δ_λ·ω ≤ p ≤ Θ_λ(m_λ)`, by induction on `p`
-      (base `p < δ_λ·ω`: `Wd.wdk_move`).
-      * `skKClosed` OPEN: `B_n` of a successor closed point is closed at `λ'`.
-      * `skKGap` OPEN: no closed point of `λ'` strictly between the images of two consecutive closed points of `λ`.
-      * `skKLim` OPEN: the limit step.
+    * `skKFar` REDUCED (round 116, `Xg.xgKFar_of_R`): induction on `p`; below `δ_λ·ω` `Wd.wdk_move`; inside a
+      block `[k_λ(q), k_λ(q)·ω)` (`Xg.xgK_add`, `Xg.xgk_add`: `k_λ(q+Z) = k_λ(q)+Z`) the move is carried from `q`;
+      at a cofinal index `p` (`k_λ(q) < p` for `q < p`) `k_λ(p)` is the `R₂^C`-reach of `p` (`Xg.xgk_reach`),
+      which moves at non-`υ`-points (`Xg.xgReach_nonUps`) and at non-range `υ`-points (`Xg.xgKReach_of`).
+      * `skKCof` OPEN: at a cofinal index `p`, `K_{λ'}` is cofinal below `B_n p` (PROVED where `B_n` is
+        continuous at `p`: `skKCof_cont`).
+      * `skKReachR` OPEN: at a cofinal index `p = ρ_μ` (`μ` a range restart) the reach of `ρ_μ` moves
+        (follows from `CdUPPER ∧ CdLOWER ∧ CdEQ`: `skKReachR_of_target`).
+  * old children of `skKFar`, now off the path: `skKGap` PROVED (`Xg.xgKGap`), `skKClosed` and `skKLim`
+    REDUCED to `skKFar` (`SkEX.skexClosed_of_far`, `SkEX.skexLim_of_far`).
 Guards and links (PROVED): `skNoIdx` (the index-keeping move `k_{λ'}(p) = B_n(k_λ p)` is false at `p = ρ_λ`),
 `skThFar_of_top` / `skThHi_of_top` (one reading move at every code `≥ θ⁺` gives both `skThFar` and `WdThHi`),
-`skThFar_of_EQ` (`CdEQ` and `skKFar` give `skThFar`: non-vacuity against the road's target).
+`skThFar_of_EQ` (`CdEQ` and `skKFar` give `skThFar`), `skKFar_of` (the old split), `skKCof_cont`,
+`skKCof_of_far` (`SkKFar` and `skKReachR` give `skKCof`), `skKReachR_of_target`, `skThFar_of_target`
+(`CdUPPER ∧ CdLOWER ∧ CdEQ ∧ skKCof` give `skThFar`: non-vacuity against the road's target).
 -/
 
 set_option autoImplicit false
@@ -83,27 +91,26 @@ theorem sk_one_lt (n : ℕ) : (1 : Ordinal.{0}) < Nc.ncL S ((n + 1 : ℕ) : Ordi
 
 /-- STATUS: OPEN
 SIZE: L
-REFUTE: SURVIVED (no Lean value of Θ above M_W; no no-go applies; ⇔ WdEQfar given SkKFar: SkEX.skexTh_of_EQfar)
+REFUTE: SURVIVED (round 116: no Lean value of Θ above M_W — Ro.roThW_A reads only ψ_{Ω₂}(Ω_ω + c), c < M_W;
+no no-go applies; implied by CdUPPER ∧ CdLOWER ∧ CdEQ ∧ skKCof: skThFar_of_target)
 ∀ far window: B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})  (codes m_λ > M_W; no value of Θ_λ above M_W is known). -/
 theorem skThFar (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkThFar S := by sorry
 
 /-- STATUS: OPEN
 SIZE: L
-REFUTE: SURVIVED (implied by the parent SkKFar: SkEX.skexClosed_of_far; no refutation found)
-δ_λ·ω ≤ q+1 ≤ Θ_λ(m_λ) ⇒ B_n(k_λ(q+1)) ∈ K_{λ'}  (lh ≤ B_n k_λ(q+1) at every a ∈ (ρ_{λ'}, B_n k_λ(q+1)], images or not). -/
-theorem skKClosed (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKClosed S := by sorry
+REFUTE: SURVIVED (round 116: true where B_n is continuous at p, skKCof_cont; implied by SkKFar ∧ skKReachR,
+skKCof_of_far; no no-go applies)
+cofinal far index p (δ_λ·ω ≤ p ≤ Θ_λ(m_λ), k_λ(q) < p for q < p), move below p ⇒ ∀ Q < B_n p, k_{λ'}(Q) < B_n p
+(left: the indices p where B_n jumps, e.g. p = ω^{e+L(n+1)}: closed points of λ' in [sup_{q<p} B_n q, B_n p)). -/
+theorem skKCof (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xg.XgKCof S := by sorry
 
 /-- STATUS: OPEN
 SIZE: L
-REFUTE: SURVIVED (implied by the parent SkKFar: SkEX.skexGap_of_far; no refutation found)
-z ∈ K_{λ'} ⇒ ¬ (B_n k_λ(q) < z < B_n k_λ(q+1))  (each non-image z in the gap has some a ≤ z with lh(a) > z). -/
-theorem skKGap (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKGap S := by sorry
-
-/-- STATUS: OPEN
-SIZE: L
-REFUTE: SURVIVED (implied by the parent SkKFar: SkEX.skexLim_of_far; discontinuity of B_n gives no contradiction)
-p limit, δ_λ·ω ≤ p ≤ Θ_λ(m_λ), (∀ q < p, k_{λ'}(B_n q) = B_n k_λ(q)) ⇒ k_{λ'}(B_n p) = B_n k_λ(p). -/
-theorem skKLim (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKLim S := by sorry
+REFUTE: SURVIVED (round 116: follows from CdUPPER ∧ CdLOWER ∧ CdEQ, skKReachR_of_target; it is EQ at the inner
+range restarts μ with ρ_μ ∈ [δ_λ·ω, Θ_λ(m_λ)], the same statement at a smaller window, but no well-founded
+order on windows is known for an induction)
+cofinal far index p = ρ_μ, μ a range restart ⇒ ∃ r, lh(ρ_μ) = r ∧ lh(B_n ρ_μ) = B_n r. -/
+theorem skKReachR (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xg.XgKReachR S := by sorry
 
 /-! ## Reduced nodes -/
 
@@ -156,9 +163,28 @@ theorem skKFar_of (hν : Nc.ncL S (ω + 1) ≤ nuC) (hC : SkKClosed S) (hG : SkK
 
 /-- STATUS: REDUCED
 SIZE: L
-∀ far window, ∀ δ_λ·ω ≤ p ≤ Θ_λ(m_λ): k_{λ'}(B_n p) = B_n(k_λ p)  (children skKClosed, skKGap, skKLim). -/
+∀ far window, ∀ δ_λ·ω ≤ p ≤ Θ_λ(m_λ): k_{λ'}(B_n p) = B_n(k_λ p)  (children skKCof, skKReachR;
+Xg.xgKFar_of_R; checkable after the merge of R2.XgK, R2.XgReach). -/
 theorem skKFar (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKFar S :=
-  skKFar_of hν (skKClosed hν) (skKGap hν) (skKLim hν)
+  Xg.xgKFar_of_R hν (skKCof hν) (skKReachR hν)
+
+/-- STATUS: REDUCED
+SIZE: S
+δ_λ·ω ≤ q+1 ≤ Θ_λ(m_λ) ⇒ B_n(k_λ(q+1)) ∈ K_{λ'}  (from skKFar: SkEX.skexClosed_of_far; off the path). -/
+theorem skKClosed (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKClosed S :=
+  R2Skel.SkEX.skexClosed_of_far hν (skKFar hν)
+
+/-- STATUS: PROVED (Xg.xgKGap: k_λ(q+1) = k_λ(q) + 1, Xg.xgk_succ)
+SIZE: S
+z ∈ K_{λ'} ⇒ ¬ (B_n k_λ(q) < z < B_n k_λ(q+1))  (no hypothesis needed). -/
+theorem skKGap (_hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKGap S :=
+  Xg.xgKGap
+
+/-- STATUS: REDUCED
+SIZE: S
+p limit, δ_λ·ω ≤ p ≤ Θ_λ(m_λ), IH ⇒ k_{λ'}(B_n p) = B_n k_λ(p)  (from skKFar: SkEX.skexLim_of_far; off the path). -/
+theorem skKLim (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKLim S :=
+  R2Skel.SkEX.skexLim_of_far (skKFar hν)
 
 /-- STATUS: PROVED (definitions only)
 SIZE: S
@@ -259,5 +285,36 @@ theorem skKTop_of_EQ (hν : Nc.ncL S (ω + 1) ≤ nuC) (hEQ : CdEQ S) (hT : SkTh
   have hE : Bc.bcB S n (cdR S l) = cdR S l' := hlong n l l' hR h1 hr hl' hB hm
   rw [hT n l l' hW' hw, ← sk_cdR_eq]
   exact hE.symm
+
+/-- STATUS: PROVED (Xg.xgCof_of_cont)
+SIZE: S
+skKCof at the indices where B_n is continuous (every Q < B_n p is ≤ some B_n q, q < p). -/
+theorem skKCof_cont {n : ℕ} {l l' p : Ordinal.{0}} (hW : SkWin S n l l')
+    (hp : p ≤ cdTheta S l (cdCode S l)) (hcof : ∀ q < p, cdk l q < p)
+    (hIH : ∀ q < p, cdk l' (Bc.bcB S n q) = Bc.bcB S n (cdk l q))
+    (hcont : ∀ Q < Bc.bcB S n p, ∃ q < p, Q ≤ Bc.bcB S n q) :
+    ∀ Q < Bc.bcB S n p, cdk l' Q < Bc.bcB S n p :=
+  Xg.xgCof_of_cont hW hp hcof hIH hcont
+
+/-- STATUS: PROVED (Xg.xgCof_of_far, Xg.xgKReach_of)
+SIZE: S
+NON-VACUITY: hν ∧ SkKFar ∧ skKReachR ⇒ skKCof (the leaf asks nothing beyond its parent and the reach move). -/
+theorem skKCof_of_far (hν : Nc.ncL S (ω + 1) ≤ nuC) (hK : SkKFar S) (hR : Xg.XgKReachR S) : Xg.XgKCof S :=
+  Xg.xgCof_of_far hν hK (Xg.xgKReach_of hν hR)
+
+/-- STATUS: PROVED (Xg.xgKReachR_of_EQ)
+SIZE: S
+NON-VACUITY: hν ∧ CdUPPER ∧ CdLOWER ∧ CdEQ (the road's target) ⇒ skKReachR. -/
+theorem skKReachR_of_target (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S)
+    (hEQ : CdEQ S) : Xg.XgKReachR S :=
+  Xg.xgKReachR_of_EQ hν hU hL hEQ
+
+/-- STATUS: PROVED (skThFar_of_EQ, Xg.xgKFar_of_R, Xg.xgKReachR_of_EQ)
+SIZE: S
+NON-VACUITY: hν ∧ CdUPPER ∧ CdLOWER ∧ CdEQ ∧ skKCof ⇒ SkKFar ∧ SkThFar. -/
+theorem skThFar_of_target (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S)
+    (hEQ : CdEQ S) (hC : Xg.XgKCof S) : SkKFar S ∧ SkThFar S := by
+  have hK : SkKFar S := Xg.xgKFar_of_R hν hC (Xg.xgKReachR_of_EQ hν hU hL hEQ)
+  exact ⟨hK, skThFar_of_EQ hν hEQ hK⟩
 
 end R2Skel.SkE
