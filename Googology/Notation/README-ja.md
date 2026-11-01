@@ -52,3 +52,4 @@ import する。順序数へ評価する系だけが import するのであっ�
 | [DBMS](DBMS/README-ja.md) | 配列 | BMS と同じ | `dstair` から到達可能 | `dbms r` | `dbmsEval`（階数）、`r = 1` では `Trans.DBMS.dbmsOrdEval` |
 | [Y](Y/README-ja.md) | 自然数の列 | 辞書式。標準形の上の整列順序（`yStd_strictWellOrder`） | `(1, h+1)` から到達可能 | `ySys`、合法な列すべての上では `yLegal` | `yEval`（階数） |
 | [OmegaY](OmegaY/README-ja.md) | 自然数の列 | まだ無い | 公式の規則で `(1, h+2)` から到達可能 | `omegaYSys`、列すべての上では `omegaYAll` | `omegaYEval`（階数） |
+| [SSOS](SSOS/README-ja.md) | 自然数の列（`(0,0,2)` 未満） | まだ無い | `(0,0,1,…,1)` から到達可能（`Standard`） | `ssosSys` | なし。値 `o` が階数に等しい（`ssos_rank`） |

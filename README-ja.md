@@ -21,12 +21,14 @@ koteitan と Phyrion による形式証明のリンク集は [portal/](portal/RE
 | Y 数列 | ✅ | ✅ | ✅ |
 | ω-Y（公式） | ✅ | ✅ | ✅ |
 | 拡張ブーフホルツ ψ | ✅ | ✅ |  |
+| 強2階探索表記（(0,0,2) 未満） | ✅ | ✅ |  |
 
 - 展開の定義：展開を Lean の関数として書き、実際に計算できる。
 - 整礎性：標準形の上の展開の関係に無限降下列が無い。停止性（どの展開列も有限で止まる）と同値で、それも証明してある。
 - 整礎性(非標準)：標準形でない状態も含めた全体の上で、同じことが成り立つ。
 - Y 数列では「全体」は合法な列すべてを指す。合法とは、項がすべて正で、空でなければ先頭が `1` であること。証明は [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) と [koteitan/1y-expand-equiv](https://github.com/koteitan/1y-expand-equiv) から移植した。[Notation/Y](Googology/Notation/Y/README-ja.md) にある。
 - ω-Y（公式）は、公式のプログラム [Naruyoko/StudyAndExpandSequence](https://github.com/Naruyoko/StudyAndExpandSequence) の `expand` の展開を持つ ω-Y 数列である。ここでは「全体」は自然数の列すべてを指し、条件は無い。Lean の規則は、想定した手順が実行できないときエラーを返し、そのとき一歩は `()` へ行く。プログラムと照合した 474 件の展開ではエラーは起きないが、標準形で起きないことは証明していない。証明は [koteitan/wy-wo-por](https://github.com/koteitan/wy-wo-por) から移植した。[Notation/OmegaY](Googology/Notation/OmegaY/README-ja.md) にある。
+- 強2階探索表記（(0,0,2) 未満）は、Kanrokoti 氏の強2階探索表記（[rev 76153](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Kanrokoti/%E5%BC%B72%E9%9A%8E%E6%8E%A2%E7%B4%A2%E8%A1%A8%E8%A8%98?oldid=76153)）を、`(0,0,2)` 未満の標準形に制限したものである。標準形は、生成元 `(0,0,1,...,1)` から展開で届く列である。一歩 `a[k]` は悪い部分を `k+1` 個並べ、末尾の `0` は取り除く。扱うのはこの部分だけで、表記全体ではない。証明は [koteitan/ssosn](https://github.com/koteitan/ssosn) から移植した。[Notation/SSOS](Googology/Notation/SSOS/README-ja.md) にある。
 
 ### 順序数への翻訳写像
 
@@ -45,10 +47,12 @@ koteitan と Phyrion による形式証明のリンク集は [portal/](portal/RE
 | Y 数列 |  |  |  |  |  |  |  |
 | ω-Y |  |  |  |  |  |  |  |
 | 拡張ブーフホルツ ψ | ✅ | ✅ | ✅(*1) | ✅ | ✅ | ✅ | ✅ |
+| 強2階探索表記（(0,0,2) 未満） | ✅ |  |  | ✅ | ✅ | ✅ |  |
 
-- 定義：写像を Lean で定義してある。原始数列と 1 行の DBMS では、拡張ブーフホルツ ψ の項に読んでその値を取る。ペア数列では、[koteitan/pss-proof](https://github.com/koteitan/pss-proof) の `Trans` で Buchholz 項に写し、拡張ブーフホルツ項に写して `1 + val` を取る（空列は 0）。2 行の DBMS では、標準形を `(0,0)` で始まるブロックに分け、各ブロックの残りをペア数列 `M_i` に読んで、`w^o(M_0) + w^o(M_1) + ...` を取る（`o` はペア数列の順序数）。拡張ブーフホルツ ψ では項の値そのもの。
+- 定義：写像を Lean で定義してある。原始数列と 1 行の DBMS では、拡張ブーフホルツ ψ の項に読んでその値を取る。ペア数列では、[koteitan/pss-proof](https://github.com/koteitan/pss-proof) の `Trans` で Buchholz 項に写し、拡張ブーフホルツ項に写して `1 + val` を取る（空列は 0）。2 行の DBMS では、標準形を `(0,0)` で始まるブロックに分け、各ブロックの残りをペア数列 `M_i` に読んで、`w^o(M_0) + w^o(M_1) + ...` を取る（`o` はペア数列の順序数）。拡張ブーフホルツ ψ では項の値そのもの。(0,0,2) 未満の強2階探索表記では [koteitan/ssosn](https://github.com/koteitan/ssosn) の写像 `o` で、先頭の `(0,0)` の後ろの列を木に読み、その木の順序数を取る。
 - 単射性：異なる標準形は異なる順序数に写る。BMS と DBMS では標準形は行列そのものなので、二つの状態は行列として、つまり成分で比べる。
 - 全射性：像がちょうど分かっている。原始数列と 1 行の DBMS では `e0` 未満の順序数全部、ペア数列と 2 行の DBMS では `p0(W_w)` 未満の順序数全部、拡張ブーフホルツ ψ では `p0(Λ)` 未満の順序数全部（*1）。
+- (0,0,2) 未満の強2階探索表記では、単射性、`e0` 未満の順序数への全射性、列の辞書式順序（真の接頭辞は小さい）を保つことは証明していない。
 - (*1) 拡張ブーフホルツ ψ の状態は `W` 未満の標準形の項なので、像は `C_0(Λ)` 全部ではなく、その `W` 未満の部分、つまり `p0(Λ)` 未満の順序数全部である。
 - 展開で値が下がる：一回展開すると値が真に小さくなる。
 - 共終性：値より小さい順序数には、一回の展開で届く。`x < o(a)` なら、`a` を一回展開した状態 `a'` で `x <= o(a')` となるものがある。「展開で値が下がる」と合わせると「階数と一致」が出る（`Googology/Cofinal.lean` の `Eval.Cofinal.rank_eq`）。
@@ -210,6 +214,7 @@ Googology/
     DBMS/            生成元の違う BMS
     Y/               Y 数列と、移植したその停止性の証明
     OmegaY/          公式の ω-Y 数列と、移植したその停止性の証明
+    SSOS/            (0,0,2) 未満の強2階探索表記と、移植したその値が階数に等しいことの証明
   Trans/           2 つの系の間の翻訳
 ```
 
@@ -243,6 +248,7 @@ Lean 4 v4.30.0。依存は 3 つで、mathlib と、BMS の停止性証明のた
 | [Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean)（Apache-2.0）、revision `6533b29` | 1-Y が整礎であることの証明の組合せの層。koteitan/1y-wo-por で翻案し、ここで Lean 4.30.0 へ移植した | `Notation/Y/WellOrder/ZeroY/`、`Notation/Y/WellOrder/OneY/` |
 | Yukito 氏の ω-Y 数列と、その公式プログラムである [Naruyoko/StudyAndExpandSequence](https://github.com/Naruyoko/StudyAndExpandSequence/blob/b26ba7e5fc2c8edb4065f1d721855a7e0e644ff2/script.js) の `expand`（revision `b26ba7e`、v1.1、既定の設定） | 定義。koteitan/wy-wo-por で規則の説明から書いたもので、プログラムのコードは使っていない。検算の期待値 | `Notation/OmegaY/Official.lean`、`test/OmegaYCheck.lean` |
 | [Phyrion1343/omega-Y-Well-Ordering-Lean](https://github.com/Phyrion1343/omega-Y-Well-Ordering-Lean)（Apache-2.0）、revision `33c16a8` | 正準の山、公式の規則のもとになった weak-magma の展開、証明のうち森、キー、反映のインターフェース。koteitan/wy-wo-por で翻案し、ここで Lean 4.30.0 へ移植した | `Notation/OmegaY/WellOrder/OmegaY/`（`Official/` を除く）、`Notation/OmegaY/Official.lean` |
+| Kanrokoti、[強2階探索表記](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Kanrokoti/%E5%BC%B72%E9%9A%8E%E6%8E%A2%E7%B4%A2%E8%A1%A8%E8%A8%98?oldid=76153)（rev 76153） | 展開の定義。koteitan/ssosn で書き起こした | `Notation/SSOS/Def.lean` |
 | p進大好きbot、[ペア数列の停止性](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:P%E9%80%B2%E5%A4%A7%E5%A5%BD%E3%81%8Dbot/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E3%81%AE%E5%81%9C%E6%AD%A2%E6%80%A7)。Naruyoko、[ペア数列システムの停止性証明に用いられた変換写像の全単射性](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Naruyoko/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E5%81%9C%E6%AD%A2%E6%80%A7%E8%A8%BC%E6%98%8E%E3%81%AB%E7%94%A8%E3%81%84%E3%82%89%E3%82%8C%E3%81%9F%E5%A4%89%E6%8F%9B%E5%86%99%E5%83%8F%E3%81%AE%E5%85%A8%E5%8D%98%E5%B0%84%E6%80%A7) | ペア数列から Buchholz 項への変換写像 `Trans` とその全単射性（依存先の koteitan/pss-proof が形式化したものを使う） | `Googology/Trans/PSS/` |
 | wiki の記事 [ペア数列数](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0) と [Y数列](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97) | 背景と対応表 | `memo.md` |
 
@@ -276,6 +282,7 @@ MIT ライセンス。[LICENSE](LICENSE) を参照。
 した。停止性は何も仮定せずに証明してある。`Notation/BMS` はどの行数でも停止する。
 `Notation/Y` は標準形の上でも、合法な列すべての上でも停止する。
 公式の ω-Y の `Notation/OmegaY` は、標準形の上でも、自然数の列すべての上でも停止する。
+`Notation/SSOS` は (0,0,2) 未満の強2階探索表記を扱い、そこでは値の写像が階数に等しい。
 `Trans/` は 1 行と 2 行（ペア数列）を決着させた。どの行列についても、翻訳写像の値が
 展開の階数と一致し、系全体では 1 行が `e0`、2 行が `p0(W_w)` になる。3 行から先の
 読み取りは無い。何が足りないかは `plan-ja.md` にある。

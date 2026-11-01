@@ -199,3 +199,12 @@
 |---|---|
 | **添字が 0 か 1 だけの可算な標準形の項で、構造的な写像 `trioE` は標準形を出し、順序を保ち、順序を反映する** | `Trans.BMS.TrioTreeStd.trioE_std`, `Trans.BMS.TrioTree.trioE_lt_iff`, `Trans.BMS.TrioTree.trioE_injective` |
 | 深さ 200 以下では規則 1〜10 は `trioE` と一致し、標準形を出し、順序を保つ | `Trans.BMS.TrioTreeRules.trioMatrixL_eq_trioE`, `Trans.BMS.TrioTreeRules.trioMatrixL_std`, `Trans.BMS.TrioTreeRules.trioMatrixL_lt_iff` |
+
+## (0,0,2) 未満の強2階探索表記
+
+| | |
+|---|---|
+| 強2階探索表記（rev 76153）を自然数の列の上の系として置く。出典の引き継ぎ資料の 6 個の展開を `#guard` で確かめる | `Notation.SSOS.Seq.fs`, `Notation.SSOS.ssosSys` |
+| 標準形は `(0,0,1,…,1)` を含み展開で閉じた最小の集合で、項は `0` と `1` | `Notation.SSOS.ssosStd`, `Notation.SSOS.standard_iff_reach`, `Notation.SSOS.standard_binary` |
+| **(0,0,2) 未満の標準形の上で、値 `o` は展開で下がり、共終で、階数に等しい**。よってそこでは展開は整礎 | `Notation.SSOS.ssos_decreasing`, `Notation.SSOS.ssos_cofinal`, `Notation.SSOS.ssos_rank`, `Notation.SSOS.ssosStd_wf` |
+| `(0,0,2)` の展開の値の上限は `e0` | `Notation.SSOS.o_fs_top_sup` |
