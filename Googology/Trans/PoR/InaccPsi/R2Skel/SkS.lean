@@ -25,6 +25,10 @@ import Googology.Trans.PoR.InaccPsi.R2.XeFix
 import Googology.Trans.PoR.InaccPsi.R2.XeShift
 import Googology.Trans.PoR.InaccPsi.R2.XjShift
 import Googology.Trans.PoR.InaccPsi.R2.XjGap
+import Googology.Trans.PoR.InaccPsi.R2.XoRoad
+import Googology.Trans.PoR.InaccPsi.R2.XoNode
+import Googology.Trans.PoR.InaccPsi.R2.XoSub
+import Googology.Trans.PoR.InaccPsi.R2.XoRef
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -135,6 +139,52 @@ Round 123 (leaf "the FRAG term language with the level as a parameter up to θ: 
   `Xj.xjRoad_false`).  `Root.skNuC` still applies `Xb.xbRoad`, now through a REFUTED leaf: the supply road must be
   replaced (forms whose `ϑ`-levels may have data in `[υ_λ, υ_{λ+h})`, i.e. the shift at moving levels `≥ B₂`).
 This file imports the new `Xj` modules, so it can be checked only after the merge.
+
+Round 125 (leaf "repair Xo.XoR and the supply road with moving leaves (skeleton SkS)", sup47; sup46 was not merged,
+its `Xo` modules enter here, fixed).
+* REPAIR of `Xo.XoR` (the BLOCKING finding of round 124: the level constructors gave fixed spellings, image = value,
+  of countable points `≥ υ_μ`, e.g. `F_k = ψ_{Ω₁}(Ω_ω·2 + P′·k) = λ`): every closed sub-term (no `old` leaf, no
+  `ϑ`-node, `Xo.XoCl`) has a low value (`Xo.XoLow`: below `θ` a data reading below `υ_μ`), and every collapse with a
+  countable value is closed and below `υ_μ`.  `Xo.xoR_fixed`: every closed spelling of a countable point `≥ υ_μ`
+  violates it; `Xo.xoFk_notR` (`F_k`), `Xo.xoE2_notR` (the audit's `E″`).
+* REFUTE FIRST of the repair as first asked (closed sub-terms only): REFUTED, `Xo.xoNaive_ref`.  The absorbed spelling
+  `F′_k = ψ_{Ω₁}(λ + Ω_ω + Ω_ω + P′·k)` carries the moving leaf `λ` (absorbed by `Ω_ω`), has value `λ` and image `λ`;
+  `E‴ = (F′_k + sg h₁) + th 1 (lc B₂ + lo λ) (lo λ)` is well formed with value `r(λ+X′)` and passes the syntactic
+  repair `Xo.XoRn`, its image is `≥ λ` (`Xo.xoE3_img_ge`), and under the reach formula at `μ + f(X′)` the carry asks
+  `λ ≤ r(μ+f(X′)) < λ`.  The collapse clause excludes it (`Xo.xoE3_notR`, `Xo.xoFkA_notR`).
+* REFUTE FIRST of the repaired road: NO EVIDENCE.  Forms clause: unchanged, always holds (`Xo.xoForms_all`; it does not
+  read `XoR`).  Under the repaired `XoR`: `λ` (`lo λ`, `Xo.xo_lo_R`), `X′` (`E′`, `Xo.xoXj_R`), the level with `u₁`
+  (`Xo.xoU1_R`) and the nested level (`Xo.xoNest_R`) keep their terms; a point of `[υ_μ, υ_λ)` has neither a moving
+  leaf (`Xo.xo_gap_noLeaf`) nor a fixed spelling, as before (`π` is free there); the obligation at `X′` stays
+  `X′_μ ≤ f(X′)` (`Xo.xoXj_obl`) and is consistent with `Sl.SlOff` (`Xo.xoOff_wit`).
+* Left on the supply: `skSupKXo` (OPEN, `Xo.XoSup` with the repaired `XoR`), `skRealBXo` (OPEN).  `Root.skNuC` must
+  apply `Xo.xoRoadH` as in round 124 (same statement, the repaired `XoR` inside `Xo.XoCarry`).
+This file imports the new `Xo` modules, so it can be checked only after the merge.
+
+Round 124 (leaf "a supply road whose ϑ-levels may carry moving leaves (skeleton SkS)", sup46).
+* REFUTE FIRST, the new supply: NO EVIDENCE.  Forms `Xo.XoE`: a `ϑ`-node `th h L e` whose level `L` is a term (leaves
+  are old nodes or nested `ϑ`-nodes and move; fixed constants `lc M` with data below `υ_μ`; `+`, `φ`, `Ω_·`, `ψ`);
+  image `Xo.xoImg` = the leaf substitution.  At the witness `X′ = Xj.xjX` the moving-leaf decomposition `E′ = sg h₁
+  υ_{λ+h₁} + th 1 (lc B₂ + lo λ) (lo λ)` is well formed and passes the restriction (`Xo.xoXj_WF`, `Xo.xoXj_R`; its
+  constant-level version was excluded, `Xo.xoXj_notWwR`); its image is `υ_{μ+f(h₁)} + X′_μ`, `X′_μ =
+  ϑ^{υ_{μ+f(1)}}(Ω₁·(B₂ + υ_μ) + υ_μ)` (`Xo.xoXj_img`), and the carry there asks exactly `X′_μ ≤ f(X′)`
+  (`Xo.xoCarry_xj`, `Xo.xoXj_obl`, given the reach formula at `μ`).  Next candidates (a level with the leaf `u₁`, a
+  level with the nested node `X′`): `u₁ ↦ υ_{μ+f(1)}`, `X′ ↦ X′_μ` (`Xo.xoNext_img`).  On one-segment levels the leaf
+  substitution is the base change (`Xo.xoImg_pi`; `π(B₂ + λ) = B₂ + υ_μ`, `Xo.xoXj_lev_pi`), so the image does not
+  depend on the term of the level.  Covering: every level with data below `υ_{λ+β}` is a term (`Xo.xoCover_lev`), every
+  `Ww.WwE` decomposition is rewritten with term levels (`Xo.xoRewrite`), the forms clause always holds
+  (`Xo.xoForms_all`).
+* NEW cited axiom `R2.xoVt_trH` (`R2.CitedXo`): [W07a] Def 6.2 + Lemma 6.3, subcase `Γ^* ≥ α`, at every level `B₂ ≤ M
+  < θ` with a strongly critical `q`, `α ≤ q ≤ d_S(M)` (twin of `R2.uvVt_trH`); `Xo.xoVt_up` / `Xo.xoVt_down` (both
+  subcases), `Xo.xoCase_disj` (the cases of `xeVt_trL` and `xoVt_trH` exclude each other), `Xo.xoH_wit`
+  (non-vacuity).
+* NEW ROAD `Xo.xoRoadH` / `Xo.xoRoad` (conclusion of `Xb.xbRoad` / `Xl.xlwRoad`) with the bridge `Xo.XoRealB` and the
+  supply `Xo.XoVisGen`; not touched by `Xj.xjVis_ref` (`Xo.xoVis_gap`).  NEW TOP `skSupXo` (REDUCED to the OPEN leaf
+  `skSupKXo`, `Xo.XoSup`) and NEW leaf `skRealBXo` (OPEN, `Xo.XoRealB`: FRAG with moving-leaf levels `≥ B₂` and the
+  carry).  The old top `skSupX` stays (REFUTED as a whole) and is OFF THE ROAD.  `Root.skNuC` must apply
+  `Xo.xoRoadH (SkF.skFrontU S) (SkF.skFrontL S) (SkF.skFrontV S) (SkF.skFrontVt S) hE.1 hE.2 (SkS.skRealBXo S)
+  SkS.skSupXo.1 SkS.skSupXo.2` in place of `Xb.xbRoad … (SkS.skShiftTh S) skSupX.1 skSupX.2`.
+This file imports the new `Xo` modules, so it can be checked only after the merge.
 
 Round 121 (leaf "the realizer bridge for ϑ-nodes: skRealB", real1).
 * REFUTE FIRST at the gap witness: NO EVIDENCE.  The image of the `ϑ`-node `th 1 B₂ (lo λ)` under an offset map with
@@ -791,7 +841,7 @@ theorem skSup_false :
     ((Pp.ppL_lt_omega 0).trans (Qq.qqL_lt_succ S)).le.trans skNu
   exact Ww.wwRoad_vac ⟨h0, by simpa using h1⟩
 
-/-- STATUS: OPEN (NEW round 120; REPLACES `skSupK` on the road; `skSupK` follows from it by `Ww.wwSup_wf`)
+/-- STATUS: OPEN, OFF THE ROAD since round 124 (it follows from `skSupKXo` by `Xo.xoSup_ww`, node `skSupKW_of_Xo`) (NEW round 120; REPLACES `skSupK` on the road; `skSupK` follows from it by `Ww.wwSup_wf`)
 SIZE: L
 the REPAIRED supply clause `Ww.WwSup` at `β(ν)`: supply restarts `μ` (`skMu`, `skSupEps`) with a map `(f, B)` whose
 carry `Ww.WwCarry` bounds the image of every repaired decomposition, `ϑ`-nodes included (at the gap witness the image
@@ -965,7 +1015,7 @@ theorem skVisKX (k : ℕ) : ∀ l, IsRestartIdx l → Nc.ncL S (k : Ordinal.{0})
   exact ⟨_, (skWin hC).1, (skWin hC).2, skGenX hC⟩
 
 /-- STATUS: REDUCED (from `skVisKX`); REFUTED as a whole (round 123: `skSupX_false`; it rests on the REFUTED leaf
-`skFormHighX`)
+`skFormHighX`); REPLACED on the road by `skSupXo` (round 124), OFF THE ROAD
 SIZE: L
 NEW TOP (round 121; the supply hypotheses of `Xb.xbRoad`): `Xb.XbVisGen` at `m*` and every `L(n+1)`; with
 `skShiftTh` they feed `Xb.xbRoad`.  `Root.skNuC` must apply `Xb.xbRoad` (arguments: the four frontier tops, `hE.1`,
@@ -1007,5 +1057,210 @@ theorem skSupW :
       Ww.WwVisGen S l (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0}))
         (upsilon (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) + Te.teW (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))))) := by
   exact ⟨fun l hl e => Xb.xbVisGen_ww (skSupX.1 l hl e), fun n l hl e => Xb.xbVisGen_ww (skSupX.2 n l hl e)⟩
+
+
+/-! ## Round 124: the supply with moving-leaf levels (`Xo`) -/
+
+/-- STATUS: PROVED (by `Xo.xoForms_all`, `skWin`, `Vr.vr_facts`; NEW round 124)
+SIZE: S
+∀ z < β(ν), ω² | z ⇒ υ_{λ+β} ≤ r(λ+z) ∨ XoForm(λ, β, z) -/
+theorem skFormXo {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) :
+    ∀ g, 0 < g → g < ν - l + ω ^ 2 → ω ^ 2 ∣ g →
+      upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S (l + g) ∨ Xo.XoForm S l (ν - l + ω ^ 2) g := by
+  intro g _ _ _
+  obtain ⟨-, -, -, -, -, -, hL1O, -, -⟩ := Vr.vr_facts (S := S) k
+  exact Xo.xoForms_all S (pos_iff_ne_zero.2 h.1.1) ((skWin h).2.trans hL1O.le) g
+
+/-- STATUS: OPEN (NEW round 124; RESTATED round 125: `Xo.XoCarry` reads the repaired `Xo.XoR`; REPLACES `skSupKW` on
+the road; `skSupKW` follows from it by `Xo.xoSup_ww`)
+SIZE: L
+the supply clause with the moving-leaf carry `Xo.XoCarry` at `β(ν)`: supply restarts `μ` with a map `(f, B)` whose
+carry bounds the image (`Xo.xoImg`, the leaf substitution) of every restricted moving-leaf decomposition.
+REFUTE FIRST (round 125, repaired `Xo.XoR`): NO EVIDENCE; the audit's `F_k` and the absorbed `F′_k` are excluded
+(`Xo.xoE2_notR`, `Xo.xoE3_notR`, nodes `skXoFixed`, `skXoFkEx`, `skXoAbsEx`); the syntactic repair is REFUTED (node
+`skXoNaiveRef`); the offset obligation at `X′` is consistent (node `skXoOffWit`).
+REFUTE FIRST (round 124, old `XoR`, REPLACED): NO EVIDENCE claimed there, BLOCKING in the audit.  At the witness `X′ = Xj.xjX` the decomposition `Xo.xoXjE` is well formed and
+restricted at every `μ` (`Xo.xoXj_WF`, `Xo.xoXj_R`), its image is `υ_{μ+f(h₁)} + X′_μ` (`Xo.xoXj_img`), and the carry
+asks exactly `X′_μ ≤ f(X′)` (`Xo.xoXj_obl`, under the reach formula at `μ`, the twin of `Wu.wuR_X`): an offset map
+sending `X′` to its twin `X′_μ` satisfies it with equality.  The next candidates (leaf `u₁`, nested node `X′`) move to
+their twins (`Xo.xoNext_img`).  The image is a function of the value on one-segment levels (`Xo.xoImg_pi`: it is the
+base change `π`), so different terms of one level give one image there.  Not touched by `Vo.voNoGo`, `Vn.vnTop_Om3`,
+`Wf.wfSide_false`, `Xj.xjVis_ref` (no old form language, no top law; the forms clause always holds,
+`Xo.xoForms_all`).  Left: the reach formula `r(μ + f(g)) = υ_{μ+(f(g)+ω+1)} + f(g)` at the supply restarts (proved in
+Lean only at `L(k)`, `Wu.wuR_X`), and EQ under `η_λ ↦ η_μ` above `υ_{λ+2}`.
+XoSup(λ, β(ν)) -/
+theorem skSupKXo {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Xo.XoSup S l (ν - l + ω ^ 2) := by sorry
+
+/-- STATUS: REDUCED (from `skUp`, `skFormXo` (PROVED), `skSupKXo`; NEW round 124)
+SIZE: S
+XoGen(λ, β(ν)) -/
+theorem skGenXo {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Xo.XoGen S l (ν - l + ω ^ 2) :=
+  ⟨skUp h, skFormXo h, skSupKXo h⟩
+
+/-- STATUS: REDUCED (from `skWin`, `skGenXo`; NEW round 124)
+SIZE: S
+∀ k, υ_λ = L(k) ⇒ XoVisGen(λ, L(k+1), υ_{L(k)+W(L(k))}) -/
+theorem skVisKXo (k : ℕ) : ∀ l, IsRestartIdx l → Nc.ncL S (k : Ordinal.{0}) = upsilon l →
+    Xo.XoVisGen S l (Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}))
+      (upsilon (Nc.ncL S (k : Ordinal.{0}) + Te.teW (Nc.ncL S (k : Ordinal.{0})))) := by
+  intro l hl e ν h1 h2 h3 h4 h5 h6
+  have hC : SkCtx S k l ν := ⟨hl, e, h1, h2, h3, h4, h5, h6⟩
+  exact ⟨_, (skWin hC).1, (skWin hC).2, skGenXo hC⟩
+
+/-- STATUS: REDUCED (from `skVisKXo`; NEW round 124)
+SIZE: L
+NEW TOP (round 124; the supply hypotheses of `Xo.xoRoadH`): `Xo.XoVisGen` at `m*` and every `L(n+1)`; with
+`skRealBXo` they feed `Xo.xoRoadH`.  `Root.skNuC` must apply `Xo.xoRoadH (SkF.skFrontU S) (SkF.skFrontL S)
+(SkF.skFrontV S) (SkF.skFrontVt S) hE.1 hE.2 (SkS.skRealBXo S) skSupXo.1 skSupXo.2` in place of `Xb.xbRoad`.
+NON-VACUITY: the refutation of the four earlier supply tops (`Xj.xjVis_ref` and its predecessors) goes through the
+forms clause, which now always holds (`Xo.xoForms_all`, `Xo.xoVis_gap`). -/
+theorem skSupXo :
+    (∀ l, IsRestartIdx l → Nc.ncL S 0 = upsilon l →
+      Xo.XoVisGen S l (Nc.ncL S 1) (upsilon (Nc.ncL S 0 + Te.teW (Nc.ncL S 0)))) ∧
+    (∀ n : ℕ, ∀ l, IsRestartIdx l → Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) = upsilon l →
+      Xo.XoVisGen S l (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0}))
+        (upsilon (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) + Te.teW (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}))))) := by
+  refine ⟨fun l hl e => ?_, fun n l hl e => skVisKXo (n + 1) l hl e⟩
+  have h := skVisKXo (S := S) 0 l hl (by simpa using e)
+  simpa using h
+
+/-- STATUS: OPEN (NEW round 124; REPLACES `skShiftTh` / `skRealBX` on the road)
+SIZE: L
+the realizer bridge for moving-leaf levels `Xo.XoRealB`: `Xo.XoGen` at `(λ, β)` gives `Lr.LrReal (υ_λ) (υ_{λ+β})`.
+Needed: FRAG (`Xj.xjFragV`) with a `ϑ`-node whose level is a term with moving leaves, the node lemmas at such levels
+(`Xo.xoVt_up` / `Xo.xoVt_down`: both subcases of [W07a] Def 6.2, now cited on `[B₂, θ)`), the hull clause
+`Ψ(ϑ^{b_k}(Ω₁·L[b_k] + r)) = ϑ^{c_k}(Ω₁·L[Ψ] + vmap Ψ r)` and the carry.  It holds where the forms are constant-level
+forms (`Xo.xoReal_of_xb`, from `Xj.xbRealB_holds`).  REFUTE FIRST: NO EVIDENCE (the moving-leaf image of the witness
+is a valid point of the target segment, `Xo.xoXj_img`, `Xb.xbIX_spec`; on one segment the image is `π`, `Xo.xoImg_pi`). -/
+theorem skRealBXo (S : InaccSeq.{0}) : Xo.XoRealB S := by sorry
+
+/-- STATUS: PROVED (by `Xo.xoReal_of_xb`; NEW round 124)
+SIZE: S
+the bridge where every form is a constant-level form -/
+theorem skRealBXoOld {l β : Ordinal.{0}} (hl : IsRestartIdx l) (hl1 : upsilon l < Om1) (hν : upsilon l < nuC)
+    (hνβ : upsilon (l + β) ≤ nuC) (hstd : Cx.CxStdPairTop S) (hlL : upsilon l ≤ Nc.ncL S (ω + 1))
+    (h : Xo.XoGen S l β)
+    (hold : ∀ g, 0 < g → g < β → ω ^ 2 ∣ g → upsilon (l + β) ≤ cdR S (l + g) ∨ Xb.XbForm S l β g) :
+    Lr.LrReal S (upsilon l) (upsilon (l + β)) :=
+  Xo.xoReal_of_xb hl hl1 hν hνβ hstd hlL h hold
+
+/-- STATUS: PROVED (by `Xo.xoCarry_xj`; NEW round 124; REFUTE-FIRST test of the moving-leaf carry at the witness)
+SIZE: M
+the carry at `X′` asks `υ_{μ+f(h₁)} + X′_μ ≤ r(μ+f(X′))` -/
+theorem skXoCarryWit (k : ℕ) (hν : Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}) ≤ nuC) {β μ B : Ordinal.{0}}
+    {f : Ordinal.{0} → Ordinal.{0}} {Os : Finset Ordinal.{0}}
+    (hC : Xo.XoCarry S (Nc.ncL S (k : Ordinal.{0})) β μ f B Os) (hX : Xj.xjX S k ∈ Os)
+    (h1 : Xj.xjX S k + ω + 1 ∈ Os) (hone : (1 : Ordinal.{0}) ∈ Os)
+    (hβ : Xj.xjX S k + ω + 1 < β) (hb1 : upsilon (Nc.ncL S (k : Ordinal.{0}) + β) ≤ Om1)
+    (hμ0 : 0 < μ) (hμl : upsilon μ < upsilon (Nc.ncL S (k : Ordinal.{0})))
+    (hτ'O : upsilon (μ + f (Xj.xjX S k + ω + 1)) < Om1) :
+    upsilon (μ + f (Xj.xjX S k + ω + 1)) + Xo.xoXjMu μ f ≤ cdR S (μ + f (Xj.xjX S k)) :=
+  Xo.xoCarry_xj k hν hC hX h1 hone hβ hb1 hμ0 hμl hτ'O
+
+/-- STATUS: PROVED (by `Xo.xoXj_obl`; NEW round 124)
+SIZE: S
+under the reach formula at `μ`, the carry at `X′` ⇔ `X′_μ ≤ f(X′)` -/
+theorem skXoObl (k : ℕ) {μ B : Ordinal.{0}} {f : Ordinal.{0} → Ordinal.{0}} {Os : Finset Ordinal.{0}}
+    (hO : Sl.SlOff f Os B)
+    (hr : cdR S (μ + f (Xj.xjX S k)) = upsilon (μ + (f (Xj.xjX S k) + ω + 1)) + f (Xj.xjX S k)) :
+    upsilon (μ + f (Xj.xjX S k + ω + 1)) + Xo.xoXjMu μ f ≤ cdR S (μ + f (Xj.xjX S k)) ↔
+      Xo.xoXjMu μ f ≤ f (Xj.xjX S k) :=
+  Xo.xoXj_obl k hO hr
+
+/-- STATUS: PROVED (by `Xo.xoRewrite`; NEW round 124; the covering argument)
+SIZE: M
+every `Ww.WwE` decomposition whose levels have data below `υ_{λ+β}` is a moving-leaf decomposition with term levels -/
+theorem skXoCover {l β : Ordinal.{0}} (hl0 : 0 < l) (hb1 : upsilon (l + β) ≤ Om1) :
+    ∀ E : Ww.WwE, Ww.WwWF l β E → Xo.XoLevLt S (upsilon (l + β)) E →
+      ∃ E' : Xo.XoE, Xo.XoWF S l β E' ∧ Xo.xoVal S l E' = Ww.wwVal l E :=
+  Xo.xoRewrite S hl0 hb1
+
+/-- STATUS: PROVED (by `Xo.xoXj_lev_pi`; NEW round 124)
+SIZE: S
+the leaf substitution at the witness level is the base change: `π(B₂ + λ) = B₂ + υ_μ` -/
+theorem skXoLevPi (k : ℕ) {μ : Ordinal.{0}} (f : Ordinal.{0} → Ordinal.{0}) (hμ0 : 0 < μ)
+    (hμl : upsilon μ < upsilon (Nc.ncL S (k : Ordinal.{0}))) :
+    pi (upsilon μ) (upsilon (Nc.ncL S (k : Ordinal.{0}))) (Uc.ucB + Nc.ncL S (k : Ordinal.{0})) =
+      Uc.ucB + upsilon μ :=
+  Xo.xoXj_lev_pi k f hμ0 hμl
+
+/-- STATUS: PROVED (by `Xo.xoVt_up`, from the NEW cited axiom `R2.xoVt_trH` and `R2.xeVt_trL`; NEW round 124)
+SIZE: M
+`t^α_τ` at every level `B₂ ≤ M < θ` in either subcase of [W07a] Def 6.2 -/
+theorem skXoTrUp {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {n : ℕ} (hn : 1 ≤ n) {M ρ : Ordinal.{0}}
+    (hMB : Uc.ucB ≤ M) (hMθ : M < ConjT.th S) (hc : Xo.XoCase S (Dl τ n) M) (hρ1 : ρ < Om1)
+    (hT : Om1 * M + ρ ∈ Tset (Dl τ n)) (hlt : vt (Dl τ n) (Om1 * M + ρ) < Dp τ n) :
+    ∃ ρ', (ρ' = Dl τ n + ρ ∨ ρ' = ρ) ∧ Om1 * M + ρ' ∈ Tset τ ∧
+      vt (Dl τ n) (Om1 * M + ρ) = vt τ (Om1 * M + ρ') :=
+  Xo.xoVt_up hτ hτ1 hn hMB hMθ hc hρ1 hT hlt
+
+/-- STATUS: PROVED (by `Xo.xoSup_ww`; NEW round 124)
+SIZE: S
+the old supply clause `Ww.WwSup` (leaf `skSupKW`, now OFF THE ROAD) follows from the new one -/
+theorem skSupKW_of_Xo {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Ww.WwSup S l (ν - l + ω ^ 2) :=
+  Xo.xoSup_ww (skSupKXo h)
+
+/-! ## Round 125: the repaired restriction -/
+
+/-- STATUS: PROVED (by `Xo.xoR_fixed`; NEW round 125)
+SIZE: S
+every closed spelling of a countable point `≥ υ_μ` violates the repaired `XoR` -/
+theorem skXoFixed {l μ : Ordinal.{0}} (E : Xo.XoE) (hc : Xo.XoCl E) (h1 : upsilon μ ≤ Xo.xoVal S l E)
+    (h2 : Xo.xoVal S l E < Om1) : ¬ Xo.XoR S l μ E :=
+  Xo.xoR_fixed E hc h1 h2
+
+/-- STATUS: PROVED (by `Xo.xoE2_notR`, `Xo.xoE2_WF`, `Xo.xoE2_val`; NEW round 125; the audit's BLOCKING witness)
+SIZE: S
+`E″ = sg h₁ + th 1 (lc B₂ + F_k) (lo λ)` is well formed with value `r(λ+X′)` and excluded at every `μ` with `υ_μ ≤ λ` -/
+theorem skXoFkEx (k : ℕ) (hν : Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}) ≤ nuC) {β μ : Ordinal.{0}}
+    (hβ : Xj.xjX S k + ω + 1 < β) (hb1 : upsilon (Nc.ncL S (k : Ordinal.{0}) + β) ≤ Om1)
+    (hμ : upsilon μ ≤ Nc.ncL S (k : Ordinal.{0})) :
+    Xo.XoWF S (Nc.ncL S (k : Ordinal.{0})) β (Xo.xoE2 S k) ∧
+      Xo.xoVal S (Nc.ncL S (k : Ordinal.{0})) (Xo.xoE2 S k) = cdR S (Nc.ncL S (k : Ordinal.{0}) + Xj.xjX S k) ∧
+      ¬ Xo.XoR S (Nc.ncL S (k : Ordinal.{0})) μ (Xo.xoE2 S k) :=
+  ⟨Xo.xoE2_WF k hβ hb1, (Xo.xoE2_val k).trans (Xo.xoXj_val k hν), Xo.xoE2_notR k hμ⟩
+
+/-- STATUS: PROVED (by `Xo.xoE3_notR`, `Xo.xoE3_WF`, `Xo.xoE3_val`; NEW round 125)
+SIZE: S
+the absorbed `E‴ = (F′_k + sg h₁) + th 1 (lc B₂ + lo λ) (lo λ)` is well formed with value `r(λ+X′)` and excluded -/
+theorem skXoAbsEx (k : ℕ) (hν : Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}) ≤ nuC) {β μ : Ordinal.{0}}
+    (hβ : Xj.xjX S k + ω + 1 < β) (hb1 : upsilon (Nc.ncL S (k : Ordinal.{0}) + β) ≤ Om1)
+    (hμ : upsilon μ ≤ Nc.ncL S (k : Ordinal.{0})) :
+    Xo.XoWF S (Nc.ncL S (k : Ordinal.{0})) β (Xo.xoE3 S k) ∧
+      Xo.xoVal S (Nc.ncL S (k : Ordinal.{0})) (Xo.xoE3 S k) = cdR S (Nc.ncL S (k : Ordinal.{0}) + Xj.xjX S k) ∧
+      ¬ Xo.XoR S (Nc.ncL S (k : Ordinal.{0})) μ (Xo.xoE3 S k) :=
+  ⟨Xo.xoE3_WF k hβ hb1, (Xo.xoE3_val k).trans (Xo.xoXj_val k hν), Xo.xoE3_notR k hμ⟩
+
+/-- STATUS: PROVED NEGATION (by `Xo.xoNaive_ref`; NEW round 125): the syntactic repair `Xo.XoRn` (closed sub-terms
+only) is REFUTED wherever the reach formula holds at `μ + f(X′)`
+SIZE: M -/
+theorem skXoNaiveRef (k : ℕ) (hν : Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}) ≤ nuC) {β μ B : Ordinal.{0}}
+    {f : Ordinal.{0} → Ordinal.{0}} {Os : Finset Ordinal.{0}}
+    (hβ : Xj.xjX S k + ω + 1 < β) (hb1 : upsilon (Nc.ncL S (k : Ordinal.{0}) + β) ≤ Om1)
+    (hμ0 : 0 < μ) (hμl : upsilon μ < upsilon (Nc.ncL S (k : Ordinal.{0})))
+    (hO : Sl.SlOff f Os B) (hμB : μ + B ≤ Nc.ncL S (k : Ordinal.{0}))
+    (hX : Xj.xjX S k ∈ Os) (h1 : Xj.xjX S k + ω + 1 ∈ Os) (hone : (1 : Ordinal.{0}) ∈ Os)
+    (hr : cdR S (μ + f (Xj.xjX S k)) = upsilon (μ + (f (Xj.xjX S k) + ω + 1)) + f (Xj.xjX S k)) :
+    ¬ Xo.XoCarryN S (Nc.ncL S (k : Ordinal.{0})) β μ f B Os :=
+  Xo.xoNaive_ref k hν hβ hb1 hμ0 hμl hO hμB hX h1 hone hr
+
+/-- STATUS: PROVED (by `Xo.xoXj_R`, `Xo.xoU1_R`, `Xo.xoNest_R`, `Xo.xo_lo_R`; NEW round 125)
+SIZE: S
+`λ`, `X′` and the next candidates keep restricted terms -/
+theorem skXoKeep (k : ℕ) {μ : Ordinal.{0}} (hμ0 : 0 < μ) (hμl : upsilon μ < upsilon (Nc.ncL S (k : Ordinal.{0})))
+    (hτO : upsilon (Nc.ncL S (k : Ordinal.{0}) + (Xj.xjX S k + ω + 1)) < Om1) :
+    Xo.XoR S (Nc.ncL S (k : Ordinal.{0})) μ (.old (.lo (Nc.ncL S (k : Ordinal.{0})))) ∧
+      Xo.XoR S (Nc.ncL S (k : Ordinal.{0})) μ (Xo.xoXjE S k) ∧
+      Xo.XoR S (Nc.ncL S (k : Ordinal.{0})) μ (Xo.xoU1E S k) ∧
+      Xo.XoR S (Nc.ncL S (k : Ordinal.{0})) μ (Xo.xoNestE S k) :=
+  ⟨Xo.xo_lo_R k hμ0 hμl, Xo.xoXj_R k hμ0 hμl hτO, Xo.xoU1_R k hμ0 hμl, Xo.xoNest_R k hμ0 hμl⟩
+
+/-- STATUS: PROVED (by `Xo.xoOff_wit`; NEW round 125)
+SIZE: S
+for all `ε`-numbers `X, Y > 1` an offset map on `{1, X, X+ω+1}` with `f(X) = Y` (the obligation `X′_μ ≤ f(X′)`
+is consistent with `Sl.SlOff`) -/
+theorem skXoOffWit {X Y : Ordinal.{0}} (hX : InE X) (hY : InE Y) (hX1 : 1 < X) (hY1 : 1 < Y) :
+    ∃ f : Ordinal.{0} → Ordinal.{0}, Sl.SlOff f {1, X, X + ω + 1} (Y + ω ^ 2) ∧ f X = Y ∧ f 1 = 1 :=
+  ⟨Xo.xoOffF X Y, Xo.xoOff_wit hX hY hX1 hY1⟩
 
 end R2Skel.SkS

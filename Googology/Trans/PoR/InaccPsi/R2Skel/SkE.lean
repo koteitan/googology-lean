@@ -5,6 +5,9 @@ import Googology.Trans.PoR.InaccPsi.R2.XrTop
 import Googology.Trans.PoR.InaccPsi.R2.XrCof
 import Googology.Trans.PoR.InaccPsi.R2.XsTop
 import Googology.Trans.PoR.InaccPsi.R2.XsRef
+import Googology.Trans.PoR.InaccPsi.R2.XwFirst
+import Googology.Trans.PoR.InaccPsi.R2.XwGap
+import Googology.Trans.PoR.InaccPsi.R2.XwJump
 
 /-!
 # Skeleton of part EQ: the hypotheses `(hν → WdThLow)` and `(hν → WdEQfar)` of `Wd.wdRoadL`
@@ -32,8 +35,11 @@ ENUM-REACH on the whole range (`skEnum`).
       which moves at non-`υ`-points (`Xg.xgReach_nonUps`) and at non-range `υ`-points (`Xg.xgKReach_of`).
       * `skKCof` REDUCED (round 124, `Xr.xrKCof_of_gap`): at a cofinal index `p`, `K_{λ'}` is cofinal below
         `B_n p`; below every `B_n q` (`q < p`) from the move below `p` (`Xr.xrKCof_below`).
-        * `skKCofGap` OPEN: the same only for `Q` in the jump gap `sup_{q<p} B_n q ≤ Q < B_n p`
-          (`Xr.XrKCofGap`; empty gap where `B_n` is continuous: `Xr.xrKCof_gap_empty`).
+        * `skKCofGap` REDUCED (round 125, `Xw.xwKCofGap_of_lh`): the same only for `Q` in the jump gap
+          `sup_{q<p} B_n q ≤ Q < B_n p` (`Xr.XrKCofGap`); at a decomposable `p` it holds outright (`Xw.xwDecomp`).
+          * `skGapLh` OPEN: at an indecomposable cofinal far index `p`, every point `a` of the jump gap has its
+            reach `lh(a) < B_n p` (`Xw.XwGapLh`; equivalent to `skKCofGap`: `Xw.xwKCofGap_iff`; under ENUM-REACH
+            split into range restarts `r(ν) < B_n p` and the other gap points: `Xw.xwGapLh_iff`).
       * `skKReachR` REDUCED (round 117, `Xn.xnPart`): EQ at the inner restarts by ONE induction on the predicted
         reach `r(λ)` (`Xn.xnEQ_all`): every inner `μ` with `ρ_μ < T_λ` has `r(μ) = k_λ(ρ_μ) < r(λ)`
         (`Xn.xnR_inner_lt`); only the TOP `ρ_μ = T_λ` has `r(μ) = r(λ)` (`Xn.xnR_inner_top`).
@@ -41,8 +47,12 @@ ENUM-REACH on the whole range (`skEnum`).
           (range restarts of reach `R` whose images have reach `R'`) have no largest element (`Xr.xrPt_succ`); at
           their supremum `s`, `lh(s) = R` (`le1_of_cof_left`); where `B_n` is continuous at `s`, `lh(B_n s) = R'`,
           and `s` is either a chain point or a non-range point whose reach moves (`Wa.waTCtopOff`): `B_n R = R'`.
-          * `skEQJump` OPEN: the same at a supremum `s` where `B_n` jumps (`Xr.XrJump`; equivalently the gap
-            bottom `s* = sup_{q<s} B_n q` has reach `B_n R`: `Xr.xrJump_iff_gap`).
+          * `skEQJump` REDUCED (round 125, `Xw.xwJump_of`): the same at a supremum `s` where `B_n` jumps
+            (`Xr.XrJump`), split by the kind of `s` (`Xw.xwJump_iff`):
+            * `skJumpOff` OPEN: `s` not a range restart: `B_n s ≤₁ R' = lh(s*)` (`Xw.XwJumpOff`; at such `s`,
+              `B_n R = R' ⇔ B_n s ≤₁ R'`: `Xw.xwJump_off_iff`);
+            * `skJumpNoRng` OPEN: no instance has a range restart as `s` (`Xw.XwJumpNoRng`; `XrJump` forces it,
+              `Xw.xwJump_noRng_of`).
   * old children of `skKFar`, now off the path: `skKGap` PROVED (`Xg.xgKGap`), `skKClosed` and `skKLim`
     REDUCED to `skKFar` (`SkEX.skexClosed_of_far`, `SkEX.skexLim_of_far`).
 Guards and links (PROVED): `skNoIdx` (the index-keeping move `k_{λ'}(p) = B_n(k_λ p)` is false at `p = ρ_λ`),
@@ -61,7 +71,13 @@ window has `K_j ≤ m_λ` for all `j` (`skFarGe` = `Xs.xsFar_ge`), because the r
 `δ_λ` (`Xs.xsRead_lt`).  The same leaf `skTopK` closes `SkR.skThFar` (with the wall `skWallCF`, `Xs.xsFarLow`) and
 `SkThTop` (`skThTopK` = `Xs.xsThTop`); non-vacuity `skTopKTarget` (`Xs.xsTopK_of_target`).  REFUTE FIRST record
 `skXsRef` (`Xs.xsRef_wit`: the level-down reading `ψ_{Ω₁}(A + θ + T d)` fails at every `d = Ω_{k+1}`, `k ≥ 2`).
-This file imports the new module `R2.XsTop`: it can be checked only after the merge.
+Round 125 (leaf eq4): REFUTE-FIRST record at the first jump `p = c_n·2` (`skFirstJump` = `Xw.xwFirst`: gap
+`[L(ω)+c_n, L(ω)·2)`, no `υ`-point and no closed point of any image window in it; both leaves ask nothing there,
+since `c_n·2 < δ_λ·ω` and every chain point is `> c_n·2`).  `skKCofGap` REDUCED to `skGapLh`, `skEQJump` REDUCED to
+`skJumpOff`, `skJumpNoRng`; guards `skKCofDecomp`, `skGapLh_iff`, `skGapLh_split`, `skGapLhTarget`, `skJump_iff`,
+`skJumpTarget`.
+This file imports the new modules `R2.XsTop`, `R2.XwFirst`, `R2.XwGap`, `R2.XwJump`: it can be checked only after
+the merge.
 -/
 
 set_option autoImplicit false
@@ -142,17 +158,52 @@ theorem skThFar (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkThFar S :=
 
 /-- STATUS: OPEN
 SIZE: L
+REFUTE: NO EVIDENCE (round 125: equivalent to skKCofGap and to XgKCof, skGapLh_iff (Xw.xwKCofGap_iff, Xw.xwKCof_iff);
+follows from hν ∧ CdUPPER ∧ CdLOWER ∧ CdEQ ∧ SkKFar, skGapLhTarget; at the first jump p = c_n·2 the gap
+[L(ω)+c_n, L(ω)·2) has no closed point of λ' (skFirstJump), but p = c_n·2 is no far index; no no-go result
+(Vo.voNoGo, Vn.vnTop_Om3, Vq.vqNoTop_Om3, Vx.vxNoCompat, Wb.*, Wc.*, Xd.xdX0Law_false, Xi.xiTopFam_false) speaks of
+reaches in (L(ω), L(ω+1)))
+NEW leaf (round 125).  window λ → λ', cofinal far index p (δ_λ·ω ≤ p ≤ Θ_λ(m_λ), k_λ(q) < p for q < p) with p
+indecomposable and the k-move below p, a in the jump gap (B_n q ≤ a < B_n p for all q < p)  ⇒  lh(a) < B_n p
+(statement Xw.XwGapLh S).  Under ENUM-REACH: r(ν) < B_n p at every range restart ν in the gap, and lh(a) < B_n p at
+the other gap points (skGapLh_split). -/
+theorem skGapLh (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xw.XwGapLh S := by sorry
+
+/-- STATUS: REDUCED (round 125; was OPEN)
+SIZE: S
 REFUTE: SURVIVED (round 124: equivalent to the old skKCof, skKCofGap_iff (Xr.xrKCof_iff_gap); empty where B_n is
 continuous at p, Xr.xrKCof_gap_empty; for indecomposable B_n p exactly the unboundedness of K_{λ'} in the gap,
 skKCofGap_unbdd; implied by SkKFar ∧ skKReachR via skKCof_of_far; no no-go result (Vo.voNoGo, Vn.vnTop_Om3,
 Vq.vqNoTop_Om3, Vx.vxNoCompat, Wb.*, Wc.*, Xd.xdX0Law_false, Xi.xiTopFam_false) speaks of closed points; the gap
 points (in (L(ω), L(ω+1))) are not images of any B_m, and no Lean value of their reaches is known)
-NEW leaf (round 124).  cofinal far index p, move below p, Q in the jump gap (B_n q ≤ Q for all q < p, Q < B_n p)
-⇒ k_{λ'}(Q) < B_n p  (statement Xr.XrKCofGap S). -/
-theorem skKCofGap (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xr.XrKCofGap S := by sorry
+cofinal far index p, move below p, Q in the jump gap (B_n q ≤ Q for all q < p, Q < B_n p)
+⇒ k_{λ'}(Q) < B_n p  (statement Xr.XrKCofGap S).  Child skGapLh (Xw.xwKCofGap_of_lh: at a decomposable p the
+block of closed points at k_{λ'}(B_n u), p = u + w, covers the gap, Xw.xwDecomp; at an indecomposable p the reach of
+the least point a₀ ≤ Q reaching past Q is a closed point of λ' in [Q, B_n p), Xw.xwClosed_at; checkable after the
+merge of R2.XwFirst, R2.XwGap). -/
+theorem skKCofGap (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xr.XrKCofGap S := Xw.xwKCofGap_of_lh (skGapLh hν)
 
 /-- STATUS: OPEN
 SIZE: L
+REFUTE: NO EVIDENCE (round 125: follows from the target, skJumpTarget (Xw.xwJump_of_EQtop), and from the old leaves
+Xn.XnTop, Xn.XnChainWF (Xw.xwJump_of_top, Xw.xwJump_of_wf); vacuous at the first jump s = c_n·2, skFirstJump; no
+no-go result speaks of ≤₁ between B_n s and the reach of the gap bottom)
+NEW leaf (round 125).  An instance of Xr.XrJump (n, R, R', s with all its hypotheses) whose jump point s is not a
+range restart  ⇒  B_n s ≤₁ R' (= lh(s*), s* = sup_{q<s} B_n q, Xr.xrGap_reach)  (statement Xw.XwJumpOff S; at such s
+the conclusion B_n R = R' of XrJump is equivalent to it, Xw.xwJump_off_iff). -/
+theorem skJumpOff (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xw.XwJumpOff S := by sorry
+
+/-- STATUS: OPEN
+SIZE: L
+REFUTE: NO EVIDENCE (round 125: follows from the target, skJumpTarget; XrJump forces it, Xw.xwJump_noRng_of;
+vacuous at s = c_n·2, skFirstJump; not derivable from skJumpOff alone: EQ at the range point s = ρ_μ fails exactly
+when B_n R = R' ≠ r(μ'), and the reach class (R, r(μ')) only yields a new range instance above s)
+NEW leaf (round 125).  No instance of Xr.XrJump has a range restart ρ_μ as its jump point s
+(statement Xw.XwJumpNoRng S). -/
+theorem skJumpNoRng (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xw.XwJumpNoRng S := by sorry
+
+/-- STATUS: REDUCED (round 125; was OPEN)
+SIZE: S
 REFUTE: SURVIVED (round 124: follows from the target, skEQJump_of_target (CdEQ ⇒ CxEQtop ⇒ Xr.XrJump); weaker than
 the old leaf Xn.XnTop (Xr.xrJump_of_top) and than the well-foundedness guard Xn.XnChainWF (Xr.xrJump_of_wf); no
 no-go result speaks of EQ at range restarts or of reaches at the jumps of B_n; the top relation was NOT shown
@@ -161,8 +212,9 @@ windows (Vo, wwX); an infinite chain is not excluded (its supremum s has lh(s) =
 B_n is continuous at s))
 NEW leaf (round 124).  n, R < c_{n+1}, EQ below R, the chain points of (R, R') cofinal below s and none ≥ s,
 lh(s) = R, B_n jumps at s (∃ Q < B_n s, ∀ q < s, B_n q ≤ Q)  ⇒  B_n R = R'  (statement Xr.XrJump S; the part's
-other hypotheses hν, ENUM, WdThLow, SkThFar, XgKCof are premises of the statement). -/
-theorem skEQJump (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xr.XrJump S := by sorry
+other hypotheses hν, ENUM, WdThLow, SkThFar, XgKCof are premises of the statement).  Children skJumpOff,
+skJumpNoRng (Xw.xwJump_of; checkable after the merge of R2.XwFirst, R2.XwGap, R2.XwJump). -/
+theorem skEQJump (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xr.XrJump S := Xw.xwJump_of (skJumpOff hν) (skJumpNoRng hν)
 
 /-! ## Reduced nodes -/
 
@@ -522,5 +574,63 @@ theorem skXsRef (S : InaccSeq.{0}) :
       Mx.gxTh (upsilon l) (Ld.ldAtR S l) (Rn.rnMW S * 2) =
         S.psi (ConjT.Aη S (cdEta S l) + ConjT.th S + Om 1) (Om 1) * 2 :=
   Xs.xsRef_wit S
+
+/-! ## Round 125 (leaf eq4): the jump gaps -/
+
+/-- STATUS: PROVED (Xw.xwFirst; NEW round 125; a REFUTE-FIRST record, no node uses it)
+SIZE: S
+At the first jump p = c_n·2: B_n p = L(ω)·2, B_n q < L(ω) + c_n for q < p (gap [L(ω)+c_n, L(ω)·2), nonempty), no
+indecomposable ordinal (so no υ-point) in the gap, and for every window c_n·2 < δ_λ·ω (p is no far index) and no
+point of K_{λ'} below L(ω)·2 (the closed points of λ' are NOT unbounded in this gap); no chain point is cofinal
+below c_n·2 (both leaves vacuous there). -/
+theorem skFirstJump (n : ℕ) :
+    Bc.bcB S n (Bc.bcC S n * 2) = Nc.ncL S ω * 2 ∧
+    (∀ q < Bc.bcC S n * 2, Bc.bcB S n q < Nc.ncL S ω + Bc.bcC S n) ∧
+    Nc.ncL S ω + Bc.bcC S n < Nc.ncL S ω * 2 ∧
+    (∀ x, Nc.ncL S ω + Bc.bcC S n ≤ x → x < Nc.ncL S ω * 2 → ¬ Indec x) ∧
+    (∀ l l', R2Skel.SkEX.SkWin S n l l' →
+      Bc.bcC S n * 2 < cdDelta l * ω ∧ ∀ y ∈ cdK l', Nc.ncL S ω * 2 < y) ∧
+    (∀ R R' : Ordinal.{0}, ¬ ∀ x < Bc.bcC S n * 2, ∃ y, x < y ∧ y < Bc.bcC S n * 2 ∧ Xr.XrPt S n R R' y) :=
+  Xw.xwFirst n
+
+/-- STATUS: PROVED (Xw.xwDecomp; NEW round 125)
+SIZE: S
+At a decomposable cofinal far index p the conclusion of XgKCof holds (no hypothesis on the gap). -/
+theorem skKCofDecomp {n : ℕ} {l l' p : Ordinal.{0}} (hW : R2Skel.SkEX.SkWin S n l l')
+    (hfar : cdDelta l * ω ≤ p) (hp : p ≤ cdTheta S l (cdCode S l)) (hcof : ∀ q < p, cdk l q < p)
+    (hIH : ∀ q < p, cdk l' (Bc.bcB S n q) = Bc.bcB S n (cdk l q)) (hI : ¬ Indec p) :
+    ∀ Q < Bc.bcB S n p, cdk l' Q < Bc.bcB S n p :=
+  Xw.xwDecomp hW hfar hp hcof hIH hI
+
+/-- STATUS: PROVED (Xw.xwKCofGap_iff, Xw.xwKCof_iff; NEW round 125)
+SIZE: S
+skGapLh ⇔ skKCofGap ⇔ XgKCof (unconditional). -/
+theorem skGapLh_iff : (Xr.XrKCofGap S ↔ Xw.XwGapLh S) ∧ (Xg.XgKCof S ↔ Xw.XwGapLh S) :=
+  ⟨Xw.xwKCofGap_iff, Xw.xwKCof_iff⟩
+
+/-- STATUS: PROVED (Xw.xwGapLh_iff; NEW round 125)
+SIZE: S
+Under ENUM-REACH: skGapLh ⇔ (r(ν) < B_n p at the range restarts ν in the gap) ∧ (lh(a) < B_n p at the other gap
+points). -/
+theorem skGapLh_split (hU : CdUPPER S) (hL : CdLOWER S) : Xw.XwGapLh S ↔ Xw.XwGapRst S ∧ Xw.XwGapOff S :=
+  Xw.xwGapLh_iff hU hL
+
+/-- STATUS: PROVED (Xw.xwGapLh_of_target; NEW round 125)
+SIZE: S
+NON-VACUITY: hν ∧ CdUPPER ∧ CdLOWER ∧ CdEQ ∧ SkKFar ⇒ skGapLh. -/
+theorem skGapLhTarget (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) (hEQ : CdEQ S)
+    (hK : R2Skel.SkEX.SkKFar S) : Xw.XwGapLh S :=
+  Xw.xwGapLh_of_target hν hU hL hEQ hK
+
+/-- STATUS: PROVED (Xw.xwJump_iff; NEW round 125)
+SIZE: S
+skEQJump ⇔ skJumpOff ∧ skJumpNoRng (unconditional). -/
+theorem skJump_iff : Xr.XrJump S ↔ Xw.XwJumpOff S ∧ Xw.XwJumpNoRng S := Xw.xwJump_iff
+
+/-- STATUS: PROVED (Xw.xwJump_of_EQtop; NEW round 125)
+SIZE: S
+NON-VACUITY: CdEQ (the road's target) ⇒ skJumpOff ∧ skJumpNoRng. -/
+theorem skJumpTarget (hEQ : CdEQ S) : Xw.XwJumpOff S ∧ Xw.XwJumpNoRng S :=
+  Xw.xwJump_of_EQtop (Wa.waEQtop_of_EQ hEQ)
 
 end R2Skel.SkE
