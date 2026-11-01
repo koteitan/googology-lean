@@ -10,12 +10,14 @@ python/trans/trans --from exb --to trio e0                   # (0,0,0)(1,1,0)
 python/trans/trans --from prim --to dbms2 --path "0,1,2"     # 経路を stderr に出す
 python/trans/trans --from exb --to trio --wide "p0(W_W)"     # ルールで動くプログラム
 python/trans/trans --from ssoss --to exb "(0,0,1,1)"         # p0(w)
+python/trans/trans --from bms --to exb "(0)(1,1)"            # e0: いちばん長い列から N = 2
 python/trans/trans --list                                    # 表記の一覧
 python/trans/trans --maps                                    # 写像の一覧
 ```
 
 - 項は標準入力から 1 行に 1 つずつ渡すこともできます。
 - `--lean` を付けると、結果を ASCII ではなく Lean の値で表示します。
+- N を付けない `bms` と `dbms` は、項から N を決めます。N は、いちばん長い列の長さです。短い列は下にゼロを足してそろえます。たとえば `(0)(1,1,1)` は `(0,0,0)(1,1,1)` です。
 - ASCII 記法は [notations.md](notations.md) で決めています。
 
 ## 写像

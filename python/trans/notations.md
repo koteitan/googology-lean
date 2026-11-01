@@ -28,6 +28,7 @@ is given, so that a printed term and a Lean `#eval` can be compared.
 | `bms3` | `trio` | trio sequence (BMS, 3 rows) | `List (List Nat)`, columns of length 3 | in, out |
 | `bmsN` | | BMS with `N` rows, `N ≥ 1` | `List (List Nat)`, columns of length `N` | in, out |
 | `dbms1`, `dbms2`, …, `dbmsN` | | DBMS with `N` rows | as BMS | in, out |
+| `bms`, `dbms` | | BMS / DBMS, `N` read from the term | as BMS | in, out |
 | `exb` | | extended Buchholz ψ | `Notation.ExBuchholz.Term` | in, out |
 | `ord` | | ordinals as the trio sheet labels | `Trans.BMS.TrioRules.Od` | in |
 | `inacc` | | ψ over ω weakly inaccessibles | `Notation.InaccPsi.Term` | in, out |
@@ -43,7 +44,7 @@ Lean note: `bms r` in `Notation/BMS` has `r` rows, but the list state
 `BmsState r` in `Trans/BMS/common/Agree.lean` has `r + 1` rows. The name
 `bmsN` here always counts the rows: `bms3` is `bms 3` = `BmsState 2`.
 
-## 1. Matrices: `bmsN`, `dbmsN`
+## 1. Matrices: `bmsN`, `dbmsN`, `bms`, `dbms`
 
 ```
 matrix ::= column*
@@ -53,14 +54,24 @@ column ::= '(' nat (',' nat)* ')'
 
 - A matrix is its columns from left to right. A column lists its entries from
   the top row (row 0) down.
-- Every column has exactly `N` entries for `bmsN` / `dbmsN`. A column of any
-  other length is an error.
+- A column with fewer than `N` entries is filled with zeros at the bottom:
+  `(0)(1,1,1)` is `(0,0,0)(1,1,1)` under `bms3`. A column with more than `N`
+  entries is an error.
+- `bms` and `dbms` without `N` take `N` from the term: the length of the
+  longest column (`N = 1` for the empty matrix). Then the shorter columns are
+  filled as above: `bms` reads `(0)(1,1,1)` as the `bms3` matrix
+  `(0,0,0)(1,1,1)`.
+- As an output system (`--to bms`), `bms` and `dbms` try `N` in this order:
+  the `N` of the input when it is a matrix, then `N = 1, 2, 3, …` up to the
+  larger of 3 and that `N`. The first `N` that a path of maps reaches gives the
+  result.
 - The empty matrix is `()`. (An empty argument `""` is also accepted.)
 - Two short forms are accepted on input only:
   - the Lean list form, as printed by `#eval`:
     `[[0,0],[1,1],[2,2]]`, and for `N = 1` also `[0,1,2]`;
-  - for `N = 1` only, a bare list without parentheses: `0,1,2`. For `N ≥ 2`
-    every column must be in parentheses.
+  - for `N = 1` (and for `bms` / `dbms`, which then read `N = 1`) only, a
+    bare list without parentheses: `0,1,2`. For `N ≥ 2` every column must be
+    in parentheses.
 - Canonical output: `(0,0)(1,1)(2,2)`, no spaces; `()` for the empty matrix.
 
 | system | example | meaning |
@@ -69,6 +80,7 @@ column ::= '(' nat (',' nat)* ')'
 | `bms2` | `(0,0)(1,1)(2,2)` | a pair sequence |
 | `bms3` | `(0,0,0)(1,1,1)(2,2,1)` | a trio sequence |
 | `dbms2` | `(0,0)(1,1)` | a 2-row DBMS array |
+| `bms` | `(0)(1,1,1)` = `(0,0,0)(1,1,1)` | a trio sequence (`N = 3` from the longest column) |
 
 The parser checks the shape only. It does not check that the matrix is
 standard, although most maps are proved on standard forms only.

@@ -29,10 +29,28 @@ class TestMatrix(unittest.TestCase):
         self.assertEqual(matrix.parse('', 3), ())
 
     def test_errors(self):
-        for s, r in [('0,1', 2), ('(0,0)(1)', 2), ('(0,0', 2), ('(0,0)x', 2),
-                     ('(0,1,2)', 1), ('[[0,0],[1]]', 2), ('[[-1]]', 1)]:
+        for s, r in [('0,1', 2), ('(0,0', 2), ('(0,0)x', 2),
+                     ('(0,1,2)', 1), ('(0,0,0)', 2), ('[[-1]]', 1)]:
             with self.assertRaises(ParseError, msg=s):
                 matrix.parse(s, r)
+
+    def test_fill_zeros(self):
+        """A shorter column is filled with zeros at the bottom."""
+        self.assertEqual(matrix.parse('(0,0)(1)', 2), ((0, 0), (1, 0)))
+        self.assertEqual(matrix.parse('[[0,0],[1]]', 2), ((0, 0), (1, 0)))
+        self.assertEqual(matrix.parse('(0)(1)', 3), ((0, 0, 0), (1, 0, 0)))
+
+    def test_auto_rows(self):
+        """With rows=None, N is the length of the longest column."""
+        self.assertEqual(matrix.parse('(0)(1,1,1)'), ((0, 0, 0), (1, 1, 1)))
+        self.assertEqual(matrix.parse('0,1,2'), ((0,), (1,), (2,)))
+        self.assertEqual(matrix.parse('[[0],[1,1]]'), ((0, 0), (1, 1)))
+        self.assertEqual(matrix.rows_of(matrix.parse('()')), 1)
+        self.assertEqual(notation.concrete('bms', ((0, 0), (1, 1))), 'bms2')
+        self.assertEqual(notation.concrete('dbms', ((0,),)), 'dbms1')
+        self.assertEqual(notation.targets('bms', 'bms2'), ['bms2', 'bms1', 'bms3'])
+        self.assertEqual(notation.targets('bms', 'exb'), ['bms1', 'bms2', 'bms3'])
+        self.assertEqual(notation.targets('exb', 'bms2'), ['exb'])
 
     def test_show(self):
         self.assertEqual(matrix.show(((0, 0, 0), (1, 1, 1))), '(0,0,0)(1,1,1)')
@@ -175,6 +193,14 @@ class TestCli(unittest.TestCase):
         self.assertIn('no map', r.stderr)
         r = self.run_trans('--from', 'ord', 'W')
         self.assertEqual(r.returncode, 2)
+
+    def test_auto_systems(self):
+        r = self.run_trans('--from', 'bms', '(0)(1,1,1)')
+        self.assertEqual((r.returncode, r.stdout), (0, '(0,0,0)(1,1,1)\n'))
+        r = self.run_trans('--from', 'bms', '--to', 'exb', '(0,0)(1,1)(2,2)')
+        self.assertEqual((r.returncode, r.stdout), (0, 'p0(W_2)\n'))
+        r = self.run_trans('--from', 'exb', '--to', 'bms', 'w', 'e0')
+        self.assertEqual((r.returncode, r.stdout), (0, '(0)(1)\n(0,0,0)(1,1,0)\n'))
 
     def test_systems(self):
         self.assertEqual(notation.get('trio').name, 'bms3')

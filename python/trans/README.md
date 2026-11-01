@@ -11,12 +11,15 @@ python/trans/trans --from exb --to trio e0                   # (0,0,0)(1,1,0)
 python/trans/trans --from prim --to dbms2 --path "0,1,2"     # path on stderr
 python/trans/trans --from exb --to trio --wide "p0(W_W)"     # the rule program
 python/trans/trans --from ssoss --to exb "(0,0,1,1)"         # p0(w)
+python/trans/trans --from bms --to exb "(0)(1,1)"            # e0: N = 2 from the longest column
 python/trans/trans --list                                    # the systems
 python/trans/trans --maps                                    # the maps
 ```
 
 Terms can also be given on stdin, one per line. `--lean` prints the Lean value
-of the result instead of its ASCII form. The ASCII notations are fixed in
+of the result instead of its ASCII form. `bms` and `dbms` without `N` read `N`
+from the term, the length of its longest column; a shorter column is filled
+with zeros at the bottom, so `(0)(1,1,1)` is `(0,0,0)(1,1,1)`. The ASCII notations are fixed in
 [notations.md](notations.md).
 
 ## Maps

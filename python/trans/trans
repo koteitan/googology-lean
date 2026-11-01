@@ -4,6 +4,8 @@
     trans --from SYS --to SYS TERM...
     trans --from SYS --to SYS < terms.txt      one term per line
     trans --list                               the systems
+    `bms` / `dbms` without N read N from the term (the longest column; shorter
+    columns are filled with zeros at the bottom).
     trans --maps                               the maps
 
 The ASCII notations are fixed in notations.md. The maps are ports of the
@@ -64,10 +66,21 @@ def main(argv=None):
     status = 0
     for text in terms:
         try:
-            value, path = maps.convert(src.name, dst.name, src.parse(text), wide=a.wide)
+            term = src.parse(text)
+            src_name = notation.concrete(src.name, term)
+            errors = []
+            for dst_name in notation.targets(dst.name, src_name):
+                try:
+                    value, path = maps.convert(src_name, dst_name, term, wide=a.wide)
+                    break
+                except DomainError as e:
+                    errors.append('to %s: %s' % (dst_name, e))
+            else:
+                raise DomainError('\n  '.join(errors) if len(errors) > 1 else
+                                  errors[0].split(': ', 1)[1])
             if a.path:
                 print('%s: %s' % (text, ' -> '.join(
-                    [src.name] + ['[%s] %s' % (e.name, e.dst) for e in path])),
+                    [src_name] + ['[%s] %s' % (e.name, e.dst) for e in path])),
                     file=sys.stderr)
             print(show(value))
         except (ParseError, DomainError) as e:
