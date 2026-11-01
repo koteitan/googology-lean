@@ -6,7 +6,7 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
       - done (only S assumed): A1, A2 closed; A3 level G built up to φ(G, Γ₀), frontier F_G = sup_{ν<Γ₀} ι(Γ(φ(G, ν))·ω). 110 axioms (1 new).
       - also done: image law at every k for β ∈ D (xiLawDK); the family form WgTopFamAll is refuted; XbShift ⇔ XeShift (only η ∈ Y, B₂ ≤ M < θ).
       - road xfRoadZ (hyp.: UPPER, LOWER, cap past F_G; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; shift XbShift; XbVisGen at m*, L(n+1)): ν_C = L(ω+1).

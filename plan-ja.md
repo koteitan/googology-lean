@@ -6,7 +6,7 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
 
 - Wilken の主張：Core(R₂⁺) = ψ_{Ω₁}(I_ω)（[Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README-ja.md)）
   - Lean：Wilken の系と InaccPsi の間の写像
-    - R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
+    - 🤖 R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
       - 済み（仮定は S だけ）：A1、A2 は閉じた。A3 の段 G を φ(G, Γ₀) まで作った。前線 F_G = sup_{ν<Γ₀} ι(Γ(φ(G, ν))·ω)。公理は 110 個（新しいもの 1 個）。
       - ほかに済み：像の法則はすべての k で β ∈ D のとき（xiLawDK）。族の形 WgTopFamAll は反証。XbShift ⇔ XeShift（η ∈ Y、B₂ ≤ M < θ だけ）。
       - 道 xfRoadZ（仮定：F_G より上で UPPER、LOWER、cap。L(ω+1) ≤ ν_C のとき WdThLow、WdEQfar。ずらし XbShift。m* と L(n+1) での XbVisGen）：ν_C = L(ω+1)。
