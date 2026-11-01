@@ -23,6 +23,8 @@ import Googology.Trans.PoR.InaccPsi.R2.XaRep
 import Googology.Trans.PoR.InaccPsi.R2.CitedXe
 import Googology.Trans.PoR.InaccPsi.R2.XeFix
 import Googology.Trans.PoR.InaccPsi.R2.XeShift
+import Googology.Trans.PoR.InaccPsi.R2.XjShift
+import Googology.Trans.PoR.InaccPsi.R2.XjGap
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -115,6 +117,24 @@ Round 122 (leaf "skShiftTh, following the paper", sup44).
   move clause of `Vl.vlShiftCore` and `Xe.xeMv`), every `η` at levels `Ω₁·M < B₂` (`Xe.xe_thCl_lowLev`, the term
   clause of `vlShiftCore` at `thc M (par η)`).  `Root.skNuC` is unchanged.
 This file imports the new `Xe` modules, so it can be checked only after the merge.
+
+Round 123 (leaf "the FRAG term language with the level as a parameter up to θ: skShiftThHi", sup45).
+* FRAG with a top `ϑ`-node of a constant level as a parameter (`Xj.XjNodeSys L`, `Xj.XjCl L`, `Xj.xjFragV`): the
+  node cases of `Vl.vlFrag_step` with the node lemmas `hL.down`, `hL.trA`, `hL.trB`, `hL.nodeUp`, `hL.nodeMv`; the
+  instances `L = Uy.UyLev` (bound `B₂`, from `R2.uvVt_trL` only: `Xj.xjNodeUy`, `Xj.xjLv_B_iff`) and `L = Xe.XeLev`
+  (bound `θ`: `Xj.xjNodeXe`, with `R2.xeVt_trL`).  REFUTE FIRST at `M = B₂`: NO EVIDENCE (`B₂` is a level of the new
+  instance, `Xj.xjLv_th_B`; `vmap` keeps it, `vtr` takes the branch `Γ^* < α`); the step is now a theorem.
+* `skShiftThHi` PROVED (`Xj.xeShift_holds`, from the shift `Xj.xjShiftCore` built with `Xj.xjFragV`), so
+  `skShiftTh` (`Xb.XbShift S`) and `skRealBX` (`Xb.XbRealB S`) are PROVED.  NEW node `skFragTh` (PROVED).
+* NEW REFUTATION: `skFormHighX` is REFUTED (`Xj.xjFormHighX_fail`; NEW node `skFormHighX_false`).  The witness
+  `X′ = ϑ^{u₁}(Ω₁·(B₂ + λ) + λ)` (`Xj.xjX`) is an `ε`-number in `(u₁, u₂)` whose only `ϑ`-reading has the level
+  `B₂ + λ`, whose data never lie below `λ` (`Xj.xj_M0_noLt`); a form with constant `ϑ`-levels cannot end in it
+  (`Xj.xjLast`, `Xj.xjVt_ne_lev`, `Xj.xjVt_ne_low`, `Xj.xj_par_X`).  So `Xb.XbVisGen` fails at every `L(k)` under
+  `L(k+1) ≤ ν_C` (`Xj.xjVis_ref`): the top `skSupX` is REFUTED (NEW node `skSupX_false`, from the shared node
+  `skNu`), and the hypotheses of `Xb.xbRoad` (and of `Xj.xjRoad`) are jointly FALSE (`Xj.xbRoad_false`,
+  `Xj.xjRoad_false`).  `Root.skNuC` still applies `Xb.xbRoad`, now through a REFUTED leaf: the supply road must be
+  replaced (forms whose `ϑ`-levels may have data in `[υ_λ, υ_{λ+h})`, i.e. the shift at moving levels `≥ B₂`).
+This file imports the new `Xj` modules, so it can be checked only after the merge.
 
 Round 121 (leaf "the realizer bridge for ϑ-nodes: skRealB", real1).
 * REFUTE FIRST at the gap witness: NO EVIDENCE.  The image of the `ϑ`-node `th 1 B₂ (lo λ)` under an offset map with
@@ -844,7 +864,8 @@ theorem skNodeTh (S : InaccSeq.{0}) :
   ⟨fun _ _ _ _ h hq hqσ hz hd => Xe.xe_pi_fix_th (S := S) h hq hqσ hz hd,
     fun _ _ _ _ _ hB hn hM hρ => (Xe.xeVt_tr hB hn hM hρ).1⟩
 
-/-- STATUS: OPEN (NEW round 122; the part of `skShiftTh` left by `Xe.xbShift_of_xe`)
+/-- STATUS: PROVED (by `Xj.xeShift_holds`; round 123: FRAG with a top `ϑ`-node of a constant level, `Xj.xjFragV`, in
+the shift `Xj.xjShiftCore`; was OPEN, NEW round 122; the part of `skShiftTh` left by `Xe.xbShift_of_xe`)
 SIZE: L
 `Xe.XeShift S`: the shift `Vl.vlShiftCore` with the `ϑ`-node clause `Xe.XeThHi` for a point `η ∈ Y` and a level `M ≥
 B₂` (data below the bottom `γ`): `D(ϑ^{υ_{λ+h}}(Ω₁·M + η)) = ϑ^{υ_{μ+f(h)}}(Ω₁·M + D(η))`.  Needs FRAG
@@ -853,9 +874,10 @@ B₂`, `Vi.Nz.qB`); its node cases are the theorems `Xe.xeDown` (`viDown`), `Xe.
 (`viTrA` / `viTrB`), `Xe.xeLt_vt_self`, `Xe.xe_arg_T`, with order from `R2.vdVt_lt`, `R2.vdLt_of_vt_lt`.
 REFUTE FIRST round 122: NO EVIDENCE (at the gap witness the clause asks `D(X*) = ϑ^{υ_{μ+1}}(B₂ + υ_μ)`, the point of
 `skImgGap`; not touched by `Vo.voNoGo`, `Vn.vnTop_Om3`, `Wf.wfSide_false`, `Ww.wwRoad_false`). -/
-theorem skShiftThHi (S : InaccSeq.{0}) : Xe.XeShift S := by sorry
+theorem skShiftThHi (S : InaccSeq.{0}) : Xe.XeShift S := Xj.xeShift_holds
 
-/-- STATUS: REDUCED (from `skShiftThHi` by `Xe.xbShift_of_xe`; round 122; was OPEN, NEW round 121)
+/-- STATUS: PROVED (from `skShiftThHi` by `Xe.xbShift_of_xe`; round 123; = `Xj.xbShift_holds`; was REDUCED round 122,
+OPEN round 121)
 SIZE: L
 `Xb.XbShift S`: the shift `Vl.vlShiftCore` with the `ϑ`-node clause `Xb.XbThCl`: for `y ∈ Y` in the segment of
 `υ_{λ+h}`, `y = ϑ^{υ_{λ+h}}(Ω₁·M + η)` with `1 ≤ M`, the data of `M` below the bottom `γ` (`Vd.VdLtIn M γ`), `η < Ω₁`
@@ -863,22 +885,56 @@ in `X ∪ Y`: `D(y) = ϑ^{υ_{μ+f(h)}}(Ω₁·M + D(η))`.  The cases `η ∈ X
 (`Xe.xe_thCl_lowLev`) are theorems. -/
 theorem skShiftTh (S : InaccSeq.{0}) : Xb.XbShift S := Xe.xbShift_of_xe (skShiftThHi S)
 
-/-- STATUS: REDUCED (from `skShiftTh` by `Xb.xbRealB`; NEW round 121, REPLACES `skRealB` on the road)
+/-- STATUS: PROVED (from `skShiftTh` by `Xb.xbRealB`; round 123; NEW round 121, REPLACES `skRealB` on the road)
 SIZE: L
 the bridge for forms with constant `ϑ`-levels, `Xb.XbRealB S` -/
 theorem skRealBX (S : InaccSeq.{0}) : Xb.XbRealB S := Xb.xbRealB (skShiftTh S)
 
-/-- STATUS: OPEN (NEW round 121; `skFormHighW` with constant `ϑ`-levels; REPLACES it on the road)
+/-- STATUS: PROVED (by `Xj.xjFragXe`; NEW round 123)
+SIZE: L
+FRAG with the hull isomorphism on `thz`-terms (`Vl.VlFragConcl`) and the clause at a top `ϑ`-node of every constant
+level `Ω₁·q < θ` (`Xj.XjCl Xe.XeLev`). -/
+theorem skFragTh {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb : Chain κ b m) (hc : Chain κ c m)
+    (F : Finset Ordinal.{0}) (hF : ↑F ⊆ DD κ b m) : ∃ Ψ, Xj.XjFragConcl Xe.XeLev κ b c m F Ψ :=
+  Xj.xjFragXe hb hc F hF
+
+/-- STATUS: REFUTED (round 123, by `Xj.xjFormHighX_fail` and the shared node `skNu`; node `skFormHighX_false`)
+(NEW round 121; `skFormHighW` with constant `ϑ`-levels; REPLACES it on the road)
 SIZE: L
 the forms clause at the windows with `ν − λ ≥ ε_{u₁+1}` with forms `Xb.XbForm` (every `ϑ`-level `M` with `1 ≤ M` and
 its data below some `c < υ_λ`).  REFUTE FIRST round 121: NO EVIDENCE; at the gap witness the form exists with `M = B₂`,
-data below `Γ₀` (`Xb.xbForm_X`, `Xb.xbForm_gap`).  Expected proof: as `skFormHighW`, with the induction on the point
+data below `Γ₀` (`Xb.xbForm_X`, `Xb.xbForm_gap`).  Round 123: REFUTED at the witness `Xj.xjX` (level `B₂ + λ` with
+the leaf `λ`).  Old expected proof: as `skFormHighW`, with the induction on the point
 of `T^{υ_{λ+h}}` writing `ϑ^{υ_{λ+h}}(Ω₁·M + η)` with `M`'s data below `υ_λ` as a `ϑ`-node and every other point as a
 `sg`-node or a sum (a level with a datum in `[υ_λ, υ_{λ+h})` must be unfolded further).
 ¬(ν − λ < ε_{u₁+1}) ⇒ ∀ z < β(ν), ω² | z ⇒ υ_{λ+β} ≤ r(λ+z) ∨ XbForm(λ, β, z) -/
 theorem skFormHighX {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) (hE : ¬ ν - l < eN (upsilon (l + 1))) :
     ∀ g, 0 < g → g < ν - l + ω ^ 2 → ω ^ 2 ∣ g →
       upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S (l + g) ∨ Xb.XbForm S l (ν - l + ω ^ 2) g := by sorry
+
+/-- STATUS: PROVED (a REFUTATION recorded as a node, by `Xj.xjFormHighX_fail`, `Wu.wuWin`, `skWitEps` and the shared
+node `skNu`; NEW round 123: `skFormHighX` is REFUTED)
+SIZE: M
+at every `L(k)` the forms clause with constant `ϑ`-levels fails at a high window: ¬ skFormHighX -/
+theorem skFormHighX_false (k : ℕ) : ¬ (∀ l ν, SkCtx S k l ν →
+    ¬ ν - l < eN (upsilon (l + 1)) → ∀ g, 0 < g → g < ν - l + ω ^ 2 → ω ^ 2 ∣ g →
+      upsilon (l + (ν - l + ω ^ 2)) ≤ cdR S (l + g) ∨ Xb.XbForm S l (ν - l + ω ^ 2) g) := by
+  intro H
+  have hν : Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}) ≤ nuC :=
+    ((Pp.ppL_lt_omega k).trans (Qq.qqL_lt_succ S)).le.trans skNu
+  obtain ⟨X, hXE, hX1, hX2, heN, -, hfail⟩ := Xj.xjFormHighX_fail k hν
+  set l := Nc.ncL S (k : Ordinal.{0}) with hldef
+  have hC : SkCtx S k l (l + X + ω ^ 2) := Wu.wuWin k hν hXE hX1 hX2
+  have e : l + X + ω ^ 2 - l = X + ω ^ 2 := by rw [add_assoc, Ordinal.add_sub_cancel]
+  have hE : ¬ l + X + ω ^ 2 - l < eN (upsilon (l + 1)) := by rw [e]; exact not_lt.2 (heN.trans le_self_add)
+  have hωX : ω ≤ X := Vo.vo_omega_le hXE (InE.pos hXE)
+  have hω2g : ω ^ 2 ∣ X := by
+    have h := Vo.vo_e2 ▸ opow_dvd_opow ω ((natCast_lt_omega0 2).trans_le hωX).le
+    rwa [hXE] at h
+  have hXβ : X < l + X + ω ^ 2 - l + ω ^ 2 := by
+    rw [e]
+    exact (lt_add_of_pos_right X (pow_pos omega0_pos 2)).trans_le le_self_add
+  exact hfail (H l (l + X + ω ^ 2) hC hE X (InE.pos hXE) hXβ hω2g)
 
 /-- STATUS: REDUCED (from `skFormEps` with `Xb.xbForm_of_vr`, and `skFormHighX`; NEW round 121)
 SIZE: L
@@ -908,7 +964,8 @@ theorem skVisKX (k : ℕ) : ∀ l, IsRestartIdx l → Nc.ncL S (k : Ordinal.{0})
   have hC : SkCtx S k l ν := ⟨hl, e, h1, h2, h3, h4, h5, h6⟩
   exact ⟨_, (skWin hC).1, (skWin hC).2, skGenX hC⟩
 
-/-- STATUS: REDUCED (from `skVisKX`)
+/-- STATUS: REDUCED (from `skVisKX`); REFUTED as a whole (round 123: `skSupX_false`; it rests on the REFUTED leaf
+`skFormHighX`)
 SIZE: L
 NEW TOP (round 121; the supply hypotheses of `Xb.xbRoad`): `Xb.XbVisGen` at `m*` and every `L(n+1)`; with
 `skShiftTh` they feed `Xb.xbRoad`.  `Root.skNuC` must apply `Xb.xbRoad` (arguments: the four frontier tops, `hE.1`,
@@ -922,6 +979,22 @@ theorem skSupX :
   refine ⟨fun l hl e => ?_, fun n l hl e => skVisKX (n + 1) l hl e⟩
   have h := skVisKX (S := S) 0 l hl (by simpa using e)
   simpa using h
+
+/-- STATUS: PROVED (a REFUTATION recorded as a node, by `Xj.xjRoad_vac` and the shared node `skNu`; NEW round 123.
+The top `skSupX` (the supply hypotheses `h0`, `hn` of `Xb.xbRoad`) is REFUTED; so the road `Xb.xbRoad` used by
+`Root.skNuC` is VACUOUS (`Xj.xbRoad_false`), and so is `Xj.xjRoad` (`Xj.xjRoad_false`))
+SIZE: S
+¬ (h0 ∧ ∀ n, hn n) of `Xb.xbRoad` -/
+theorem skSupX_false :
+    ¬ ((∀ l, IsRestartIdx l → Nc.ncL S 0 = upsilon l →
+        Xb.XbVisGen S l (Nc.ncL S 1) (upsilon (Nc.ncL S 0 + Te.teW (Nc.ncL S 0)))) ∧
+      (∀ n : ℕ, ∀ l, IsRestartIdx l → Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) = upsilon l →
+        Xb.XbVisGen S l (Nc.ncL S ((n + 2 : ℕ) : Ordinal.{0}))
+          (upsilon (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) + Te.teW (Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0})))))) := by
+  rintro ⟨h0, -⟩
+  have h1 : Nc.ncL S ((0 + 1 : ℕ) : Ordinal.{0}) ≤ nuC :=
+    ((Pp.ppL_lt_omega 0).trans (Qq.qqL_lt_succ S)).le.trans skNu
+  exact Xj.xjRoad_vac ⟨h0, by simpa using h1⟩
 
 /-- STATUS: REDUCED (round 121: from `skSupX` by `Xb.xbVisGen_ww`; round 120: from `skVisKW`)
 SIZE: L

@@ -1,5 +1,6 @@
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
 import Googology.Trans.PoR.InaccPsi.R2.XgReach
+import Googology.Trans.PoR.InaccPsi.R2.XnRoad
 
 /-!
 # Skeleton of part EQ: the hypotheses `(hν → WdThLow)` and `(hν → WdEQfar)` of `Wd.wdRoadL`
@@ -10,10 +11,15 @@ import Googology.Trans.PoR.InaccPsi.R2.XgReach
 A window `(n, λ, λ')`: `CdRange λ`, `c_n < ρ_λ`, `r(λ) < c_{n+1}`, `λ'` a restart, `B_n ρ_λ = ρ_{λ'}`, `ρ_λ < m_λ`.
 A far window: also `δ_λ·ω ≤ Θ_λ(m_λ)`.
 
-Tree (indent = child):
-* `skEQ` REDUCED: `(hν → WdThLow) ∧ (hν → WdEQfar)` from `hRead`.
-  * `skThLow` REDUCED: `WdThLow` from `hRead` and `skEQfar` (`waEQtop_ux`, `wdRn_of`, `wdEQtop_iff`).
-  * `skEQfar` REDUCED: `WdEQfar` from `skThFar` and `skKFar`.
+Tree (indent = child).  Round 117: the top takes, besides `hRead`, the frontier hypotheses `hUH`, `hLH` of the road
+(UPPER / LOWER past `ι(Γ(φ(Ω₁·Ω₁, G+1))·ω)`, i.e. `SkF.skFrontU S`, `SkF.skFrontL S`), which with `Hl.hlU_enum` give
+ENUM-REACH on the whole range (`skEnum`).
+* `skEQ` REDUCED: `(hν → WdThLow) ∧ (hν → WdEQfar)` from `hRead`, `hUH`, `hLH`.
+  * `skThLow` PROVED (round 117, `Xn.xnThLow`): `WdThLow` from `hRead` alone (the chain of the repo is pointwise;
+    a near window never uses the far EQ).  The cycle `skThLow ← skEQfar` is gone.
+  * `skEnum` PROVED (`Xn.xnEnum_of_front`): ENUM-REACH from `hUH`, `hLH`.
+  * `skEQfar` REDUCED: `WdEQfar` from the induction on `r(λ)` (`Xn.xnPart`): children `skThFar`, `skKCof`, `skEQTopR`,
+    and `skThLow`, `skEnum`.
     * `skThFar` OPEN: the reading move at the far codes.
     * `skKFar` REDUCED (round 116, `Xg.xgKFar_of_R`): induction on `p`; below `δ_λ·ω` `Wd.wdk_move`; inside a
       block `[k_λ(q), k_λ(q)·ω)` (`Xg.xgK_add`, `Xg.xgk_add`: `k_λ(q+Z) = k_λ(q)+Z`) the move is carried from `q`;
@@ -21,15 +27,20 @@ Tree (indent = child):
       which moves at non-`υ`-points (`Xg.xgReach_nonUps`) and at non-range `υ`-points (`Xg.xgKReach_of`).
       * `skKCof` OPEN: at a cofinal index `p`, `K_{λ'}` is cofinal below `B_n p` (PROVED where `B_n` is
         continuous at `p`: `skKCof_cont`).
-      * `skKReachR` OPEN: at a cofinal index `p = ρ_μ` (`μ` a range restart) the reach of `ρ_μ` moves
-        (follows from `CdUPPER ∧ CdLOWER ∧ CdEQ`: `skKReachR_of_target`).
+      * `skKReachR` REDUCED (round 117, `Xn.xnPart`): EQ at the inner restarts by ONE induction on the predicted
+        reach `r(λ)` (`Xn.xnEQ_all`): every inner `μ` with `ρ_μ < T_λ` has `r(μ) = k_λ(ρ_μ) < r(λ)`
+        (`Xn.xnR_inner_lt`); only the TOP `ρ_μ = T_λ` has `r(μ) = r(λ)` (`Xn.xnR_inner_top`).
+        * `skEQTopR` OPEN: EQ at the top restart given EQ at every smaller reach (`Xn.XnTop`; follows from the
+          target, `skEQTopR_of_target`; follows from the well-foundedness of the top relation, `skEQTopR_of_wf`).
   * old children of `skKFar`, now off the path: `skKGap` PROVED (`Xg.xgKGap`), `skKClosed` and `skKLim`
     REDUCED to `skKFar` (`SkEX.skexClosed_of_far`, `SkEX.skexLim_of_far`).
 Guards and links (PROVED): `skNoIdx` (the index-keeping move `k_{λ'}(p) = B_n(k_λ p)` is false at `p = ρ_λ`),
 `skThFar_of_top` / `skThHi_of_top` (one reading move at every code `≥ θ⁺` gives both `skThFar` and `WdThHi`),
 `skThFar_of_EQ` (`CdEQ` and `skKFar` give `skThFar`), `skKFar_of` (the old split), `skKCof_cont`,
 `skKCof_of_far` (`SkKFar` and `skKReachR` give `skKCof`), `skKReachR_of_target`, `skThFar_of_target`
-(`CdUPPER ∧ CdLOWER ∧ CdEQ ∧ skKCof` give `skThFar`: non-vacuity against the road's target).
+(`CdUPPER ∧ CdLOWER ∧ CdEQ ∧ skKCof` give `skThFar`: non-vacuity against the road's target), round 117:
+`skEQTopR_of_target`, `skEQTopR_of_wf`, `skKCof_of_blk` (one block of closed points per `Q < B_n p` gives `skKCof`),
+`skKCof_iff_unbdd` (for indecomposable `B_n p`: `skKCof` at `p` ⇔ `K_{λ'}` unbounded below `B_n p`).
 -/
 
 set_option autoImplicit false
@@ -92,27 +103,62 @@ theorem sk_one_lt (n : ℕ) : (1 : Ordinal.{0}) < Nc.ncL S ((n + 1 : ℕ) : Ordi
 /-- STATUS: OPEN
 SIZE: L
 REFUTE: SURVIVED (round 116: no Lean value of Θ above M_W — Ro.roThW_A reads only ψ_{Ω₂}(Ω_ω + c), c < M_W;
-no no-go applies; implied by CdUPPER ∧ CdLOWER ∧ CdEQ ∧ skKCof: skThFar_of_target)
+no no-go applies; implied by CdUPPER ∧ CdLOWER ∧ CdEQ ∧ skKCof: skThFar_of_target; round 117: unchanged, still no
+reading above M_W)
 ∀ far window: B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})  (codes m_λ > M_W; no value of Θ_λ above M_W is known). -/
 theorem skThFar (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkThFar S := by sorry
 
 /-- STATUS: OPEN
 SIZE: L
 REFUTE: SURVIVED (round 116: true where B_n is continuous at p, skKCof_cont; implied by SkKFar ∧ skKReachR,
-skKCof_of_far; no no-go applies)
+skKCof_of_far; no no-go applies; round 117: for indecomposable B_n p it is exactly the unboundedness of K_{λ'}
+below B_n p, skKCof_iff_unbdd; no Lean value of the reaches of the points of the jump gap, which contains
+υ-points that are not images of B_n)
 cofinal far index p (δ_λ·ω ≤ p ≤ Θ_λ(m_λ), k_λ(q) < p for q < p), move below p ⇒ ∀ Q < B_n p, k_{λ'}(Q) < B_n p
 (left: the indices p where B_n jumps, e.g. p = ω^{e+L(n+1)}: closed points of λ' in [sup_{q<p} B_n q, B_n p)). -/
 theorem skKCof (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xg.XgKCof S := by sorry
 
 /-- STATUS: OPEN
 SIZE: L
-REFUTE: SURVIVED (round 116: follows from CdUPPER ∧ CdLOWER ∧ CdEQ, skKReachR_of_target; it is EQ at the inner
-range restarts μ with ρ_μ ∈ [δ_λ·ω, Θ_λ(m_λ)], the same statement at a smaller window, but no well-founded
-order on windows is known for an induction)
-cofinal far index p = ρ_μ, μ a range restart ⇒ ∃ r, lh(ρ_μ) = r ∧ lh(B_n ρ_μ) = B_n r. -/
-theorem skKReachR (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xg.XgKReachR S := by sorry
+REFUTE: SURVIVED (round 117: follows from the target, skEQTopR_of_target (CdUPPER ∧ CdLOWER ∧ CxEQtop); follows from
+the well-foundedness of the top relation, skEQTopR_of_wf; no no-go result speaks of EQ at range restarts; the
+relation is not shown empty: T_λ = Θ_λ(m_λ) can be a restart υ-point for far codes)
+NEW leaf (round 117).  Long-code window λ whose top T_λ = Θ_λ(m_λ) is a cofinal far range restart ρ_μ
+(r(μ) = r(λ)), EQ at every window of smaller reach ⇒ EQ at μ  (statement Xn.XnTop S). -/
+theorem skEQTopR (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xn.XnTop S := by sorry
 
 /-! ## Reduced nodes -/
+
+/-- The frontier hypotheses of the road (UPPER past the frontier `ι(Γ(φ(Ω₁·Ω₁, G+1))·ω)`), `SkF.skFrontU S`. -/
+abbrev SkUH (S : InaccSeq.{0}) : Prop :=
+  ∀ l, CdRange S l → Bt.iota S (Gc.gcG Hl.hlU.B * ω) ≤ l → CdUpper S l
+
+/-- The frontier hypotheses of the road (LOWER past the frontier), `SkF.skFrontL S`. -/
+abbrev SkLH (S : InaccSeq.{0}) : Prop :=
+  ∀ l, CdRange S l → Bt.iota S (Gc.gcG Hl.hlU.B * ω) ≤ l → CdLower S l
+
+/-- STATUS: PROVED (Xn.xnEnum_of_front, Hl.hlU_enum)
+SIZE: S
+hUH ∧ hLH ⇒ CdUPPER ∧ CdLOWER (ENUM-REACH on the whole range). -/
+theorem skEnum (hUH : SkUH S) (hLH : SkLH S) : CdUPPER S ∧ CdLOWER S :=
+  Xn.xnEnum_of_front hUH hLH
+
+/-- STATUS: PROVED (Xn.xnThLow)
+SIZE: S
+hRead ⇒ (hν → WdThLow)  (no EQ needed; round 117). -/
+theorem skThLow (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) :
+    Nc.ncL S (ω + 1) ≤ nuC → Wd.WdThLow S :=
+  fun hν => Xn.xnThLow hν (hRead hν).1 (hRead hν).2
+
+/-- STATUS: REDUCED
+SIZE: L
+hRead, hUH, hLH, hν ⇒ XgKReachR  (children skThFar, skKCof, skEQTopR; Xn.xnPart: the induction on r(λ),
+Xn.xnEQ_all; checkable after the merge of R2.XnLow, R2.XnInd, R2.XnRoad). -/
+theorem skKReachR (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
+    (hLH : SkLH S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xg.XgKReachR S :=
+  (Xn.xnPart hν (hRead hν).1 (hRead hν).2 (skEnum hUH hLH).1 (skEnum hUH hLH).2 (skThFar hν) (skKCof hν)
+    (skEQTopR hν)).2.2.1
+
 
 /-- STATUS: PROVED (Wd.wdk_move, Bc.bcB_add, Bc.bcB_fixN, Bc.bcB_lt_iff, Ordinal.enumOrd_succ_le)
 SIZE: S
@@ -164,15 +210,17 @@ theorem skKFar_of (hν : Nc.ncL S (ω + 1) ≤ nuC) (hC : SkKClosed S) (hG : SkK
 /-- STATUS: REDUCED
 SIZE: L
 ∀ far window, ∀ δ_λ·ω ≤ p ≤ Θ_λ(m_λ): k_{λ'}(B_n p) = B_n(k_λ p)  (children skKCof, skKReachR;
-Xg.xgKFar_of_R; checkable after the merge of R2.XgK, R2.XgReach). -/
-theorem skKFar (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKFar S :=
-  Xg.xgKFar_of_R hν (skKCof hν) (skKReachR hν)
+Xg.xgKFar_of_R; checkable after the merge of R2.XgK, R2.XgReach, R2.Xn*). -/
+theorem skKFar (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
+    (hLH : SkLH S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKFar S :=
+  Xg.xgKFar_of_R hν (skKCof hν) (skKReachR hRead hUH hLH hν)
 
 /-- STATUS: REDUCED
 SIZE: S
 δ_λ·ω ≤ q+1 ≤ Θ_λ(m_λ) ⇒ B_n(k_λ(q+1)) ∈ K_{λ'}  (from skKFar: SkEX.skexClosed_of_far; off the path). -/
-theorem skKClosed (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKClosed S :=
-  R2Skel.SkEX.skexClosed_of_far hν (skKFar hν)
+theorem skKClosed (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
+    (hLH : SkLH S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKClosed S :=
+  R2Skel.SkEX.skexClosed_of_far hν (skKFar hRead hUH hLH hν)
 
 /-- STATUS: PROVED (Xg.xgKGap: k_λ(q+1) = k_λ(q) + 1, Xg.xgk_succ)
 SIZE: S
@@ -183,8 +231,9 @@ theorem skKGap (_hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKGap S :=
 /-- STATUS: REDUCED
 SIZE: S
 p limit, δ_λ·ω ≤ p ≤ Θ_λ(m_λ), IH ⇒ k_{λ'}(B_n p) = B_n k_λ(p)  (from skKFar: SkEX.skexLim_of_far; off the path). -/
-theorem skKLim (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKLim S :=
-  R2Skel.SkEX.skexLim_of_far (skKFar hν)
+theorem skKLim (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
+    (hLH : SkLH S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKLim S :=
+  R2Skel.SkEX.skexLim_of_far (skKFar hRead hUH hLH hν)
 
 /-- STATUS: PROVED (definitions only)
 SIZE: S
@@ -196,9 +245,10 @@ theorem skEQfar_of (hT : SkThFar S) (hK : SkKFar S) : Wd.WdEQfar S := by
 
 /-- STATUS: REDUCED
 SIZE: L
-hν ⇒ WdEQfar  (children skThFar, skKFar). -/
-theorem skEQfar : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdEQfar S :=
-  fun hν => skEQfar_of (skThFar hν) (skKFar hν)
+hRead, hUH, hLH ⇒ (hν ⇒ WdEQfar)  (children skThFar, skKFar). -/
+theorem skEQfar (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
+    (hLH : SkLH S) : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdEQfar S :=
+  fun hν => skEQfar_of (skThFar hν) (skKFar hRead hUH hLH hν)
 
 /-- STATUS: PROVED (Wa.waEQtop_ux, Wd.wdAtMove26_of_wall, Wd.wdRn_of, Wd.wdEQtop_iff)
 SIZE: S
@@ -210,19 +260,16 @@ theorem skThLow_of (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.W
   exact ((Wd.wdEQtop_iff hν).1
     (Wa.waEQtop_ux hν (Wd.wdAtMove26_of_wall (hRead hν).1) hrn.1 hrn.2)).1
 
-/-- STATUS: REDUCED
-SIZE: L
-hRead ⇒ (hν → WdThLow)  (children hRead, skEQfar). -/
-theorem skThLow (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) :
-    Nc.ncL S (ω + 1) ≤ nuC → Wd.WdThLow S :=
-  skThLow_of hRead skEQfar
 
 /-- STATUS: REDUCED
 SIZE: L
-TOP NODE. hRead: hν → WdAtWall ∧ WdThHi  ⇒  (hν → WdThLow) ∧ (hν → WdEQfar). -/
-theorem skEQ (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) :
+TOP NODE (round 117: new hypotheses hUH, hLH, the frontier hypotheses of the road; Root.skNuC applies
+`skEQ hRead (SkF.skFrontU S) (SkF.skFrontL S)`).
+hRead: hν → WdAtWall ∧ WdThHi, hUH, hLH  ⇒  (hν → WdThLow) ∧ (hν → WdEQfar). -/
+theorem skEQ (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
+    (hLH : SkLH S) :
     (Nc.ncL S (ω + 1) ≤ nuC → Wd.WdThLow S) ∧ (Nc.ncL S (ω + 1) ≤ nuC → Wd.WdEQfar S) :=
-  ⟨skThLow hRead, skEQfar⟩
+  ⟨skThLow hRead, skEQfar hRead hUH hLH⟩
 
 /-! ## Guards and links -/
 
@@ -316,5 +363,33 @@ theorem skThFar_of_target (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL
     (hEQ : CdEQ S) (hC : Xg.XgKCof S) : SkKFar S ∧ SkThFar S := by
   have hK : SkKFar S := Xg.xgKFar_of_R hν hC (Xg.xgKReachR_of_EQ hν hU hL hEQ)
   exact ⟨hK, skThFar_of_EQ hν hEQ hK⟩
+
+/-- STATUS: PROVED (Xn.xnTop_of_EQtop, Wa.waEQtop_of_EQ)
+SIZE: S
+NON-VACUITY: hν ∧ CdUPPER ∧ CdLOWER ∧ CdEQ (the road's target) ⇒ skEQTopR. -/
+theorem skEQTopR_of_target (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) (hEQ : CdEQ S) :
+    Xn.XnTop S :=
+  Xn.xnTop_of_EQtop hν hU hL (Wa.waEQtop_of_EQ hEQ)
+
+/-- STATUS: PROVED (Xn.xnTop_of_wf, Xn.xnEQ_all_wf: lexicographic induction on (r(λ), top relation))
+SIZE: S
+SkThFar ∧ XgKCof ∧ the top relation well-founded (Xn.XnChainWF; e.g. codes decreasing along it,
+Xn.xnChainWF_of_code) ⇒ skEQTopR. -/
+theorem skEQTopR_of_wf (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
+    (hLH : SkLH S) (hν : Nc.ncL S (ω + 1) ≤ nuC) (hTF : SkThFar S) (hC : Xg.XgKCof S)
+    (hWF : Xn.XnChainWF S) : Xn.XnTop S :=
+  Xn.xnTop_of_wf hν (skEnum hUH hLH).1 (skEnum hUH hLH).2 (skThLow hRead hν) hTF hC hWF
+
+/-- STATUS: PROVED (Xn.xnCof_of_blk)
+SIZE: S
+one block of closed points of λ' per Q < B_n p (y ∈ K_{λ'}, Q < y·ω, y + Q < B_n p) ⇒ skKCof. -/
+theorem skKCof_of_blk (h : Xn.XnCofBlk S) : Xg.XgKCof S := Xn.xnCof_of_blk h
+
+/-- STATUS: PROVED (Xn.xnCof_iff_unbdd)
+SIZE: S
+for indecomposable X = B_n p: the conclusion of skKCof at p ⇔ K_{λ'} unbounded below X. -/
+theorem skKCof_iff_unbdd {l' X : Ordinal.{0}} (hX : Indec X) :
+    (∀ Q < X, cdk l' Q < X) ↔ (∀ Q < X, ∃ y ∈ cdK l', Q ≤ y ∧ y < X) :=
+  Xn.xnCof_iff_unbdd hX
 
 end R2Skel.SkE

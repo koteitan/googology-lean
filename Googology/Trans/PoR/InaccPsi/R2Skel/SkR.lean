@@ -13,6 +13,7 @@ import Googology.Trans.PoR.InaccPsi.R2.WvImg
 import Googology.Trans.PoR.InaccPsi.R2.WzUp
 import Googology.Trans.PoR.InaccPsi.R2.XdLaw1
 import Googology.Trans.PoR.InaccPsi.R2.XiRef
+import Googology.Trans.PoR.InaccPsi.R2.XmLim
 
 /-!
 # Skeleton, part "readings": the reading move `hν → Wd.WdThLow S`
@@ -66,6 +67,12 @@ equals it (`Xi.xiShape`, `Xi.xiFamOm_false`).  Replaced by `skTopUp` (`Xi.XiTopU
 every top atom `ψ₂(β + W^{Ω_{k+3}+e})`, `β ∈ D`; OPEN, proved at `e = 0` and at `(k, e, β) = (0, ω, 0)`);
 `skWallBase`, `skWallStep` now take `Xi.XiTopUp` (with the refuted `Wg.WgTopFamAll` they were vacuous).  This file
 imports the new module `R2.XiRef`: it can be checked only after the merge.
+Round 123 (leaf read47): `skTopUp` is PROVED (`Xm.xmTopUp`): one induction on the code `e`; successors by the plateau
+lemma `skPlat` (`Xm.xmPlat`: `ψ₁(B + ψ₂(b + ω^m·Ω₁)) ≤ sup_n x_n`, `x_{n+1} = ψ₁(B + ψ₂(b + ω^m·x_n))`) over the
+sub-bases `β + W^{X+e}·u_n` (`skTopUpSucc`), limits by continuity over the codes `e' < e` (`skTopUpLim`, generalizing
+`Xi.xiReadOm`).  REFUTE FIRST at `e = 1` and `e = ω + 1` (`k = 0`, `β = 0`): both hold (`skTopUpTests`).
+`skWallBase`, `skWallStep` keep their statements (hypothesis `Xi.XiTopUp`, now a theorem) and stay OPEN.  This file
+imports the new module `R2.XmLim`: it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -224,20 +231,76 @@ SIZE: S
 `¬ skTopFam`: `¬ Wg.WgTopFamAll S` (fails at k = 0, e = ω, β = 0, the restart of m* = L(0)). -/
 theorem skTopFamRef (S : InaccSeq.{0}) : ¬ Wg.WgTopFamAll S := Xi.xiTopFam_false S
 
-/-- STATUS: OPEN (NEW round 122; replaces the REFUTED skTopFam)
+/-- STATUS: PROVED (Xm.xmTopUp, from Xm.xmSucc, Xm.xmLim, Xm.xmPlat, Xi.xiTopUp0; round 123: was OPEN; checkable only
+after the merge)
 SIZE: L
 `Xi.XiTopUp`: `∀ k, ∀ restart λ, A own, ψ₁(A) = ρ_λ, ∀ code e < Ω₂, ∀ β ∈ D, RoBaseE λ Ω_{k+3} e β :
 Θ(ψ₂(β + W^{Ω_{k+3}+e})) = ψ₁(A + 1 + ψ₂(T(β + W^{Ω_{k+3}+e})))` (the Wz.WzUpU bound, Xd.xdUp_at, is attained at
-every top atom).  PROVED parts: e = 0 at every k and β ∈ D (skTopUp0); k = 0, e = ω, β = 0 (skTopUpOm).
-REFUTE FIRST: NO EVIDENCE (the upper half holds everywhere; equality at e = 0 and at e = ω; Xi.xiTopFam_false uses
-the old image shape, not this law; Vo.voNoGo, Vn.vnTop_Om3, Vq.vqNoTop_Om3 concern forms / constant images; Wb.wbNoY,
-Wv.wvNoT concern atoms ψ₂(Y_{k+3}), not of this shape; the loose cases of WzUpU (a = 0, Ω₃ + Y₃, y_n) are not top atoms).
-Route: limit Θ e as in Xi.xiReadOm (bases β + W^{X+e'}·γ, e' < e, and continuity); successor Θ e = Θ e' + 1: the lower
-readings reach only ψ₁(A + ψ₂(T β + Ω^{Ω_{k+2}+Θ e'}·Θ(t))), t the atom, so equality needs the plateau lemma
-ψ₁(A + ψ₂(T β + Ω^{Ω_{k+2}+Θ e'}·Θ(t))) = ψ₁(A + ψ₂(T(β + W^{X+e})))
-(no member of Cl(·, Θ(t)) between: a closure-gap induction).  L: the plateau lemma is not in Lean. -/
-theorem skTopUp (S : InaccSeq.{0}) : Xi.XiTopUp S := by
-  sorry
+every top atom).  One induction on e: e = 0 (skTopUp0), successor (skTopUpSucc, with the plateau lemma skPlat),
+limit (skTopUpLim).  REFUTE FIRST (round 123) at e = 1 and e = ω + 1 (k = 0, β = 0): both hold (skTopUpTests). -/
+theorem skTopUp (S : InaccSeq.{0}) : Xi.XiTopUp S := Xm.xmTopUp S
+
+/-- STATUS: PROVED (Xm.xmPlat, from Xm.xmKey, Xm.xmR2, Xm.xmR3, Xm.xmStep; NEW round 123; checkable only after the merge)
+SIZE: M
+THE PLATEAU LEMMA: `x_0 ≤ x_1, x_0 < Ω₁, b ∈ Cl(b, ψ₂ b), m ∈ Cl(a, ψ₂ a) ∀ a, m ∈ Cl(a_n, x_{n+1}) ∀ n ⇒
+ψ₁(B + ψ₂(b + ω^m·Ω₁)) ≤ sup_n x_n`, `x_{n+1} = ψ₁(a_n)`, `a_n = B + ψ₂(b + ω^m·x_n)`. -/
+theorem skPlat (S : InaccSeq.{0}) : ∀ {B b m x0 : Ordinal.{0}}, b ∈ S.CSet b (S.psi b (Om (1 + 1))) →
+    (∀ a : Ordinal.{0}, m ∈ S.CSet a (S.psi a (Om (1 + 1)))) → x0 ≤ Xm.xmX S B b m x0 1 → x0 < Om 1 →
+    (∀ n, m ∈ S.CSet (Xm.xmA S B b m x0 n) (Xm.xmX S B b m x0 (n + 1))) →
+    S.psi (B + S.psi (b + ω ^ m * Om 1) (Om (1 + 1))) (Om 1) ≤ ⨆ n : ℕ, Xm.xmX S B b m x0 n :=
+  fun hb hm2 h0 hx0 hm => Xm.xmPlat hb hm2 h0 hx0 hm
+
+/-- STATUS: PROVED (Xm.xmSucc, from Xm.xmPlat, Xm.xmU_it, Xd.xdUp_at, Xd.xdTr, Vh.vhT_cnfW; NEW round 123; checkable only
+after the merge)
+SIZE: M
+Successor step of skTopUp: `(the law at e on every base of exponent e) ∧ RoBaseE λ Ω_{k+3} (e+1) β ⇒ the law at e + 1`
+(sub-bases β + W^{X+e}·u_n, u_{n+1} = ψ₂(β + W^{X+e}·u_n + W^{X+e}); T(β + W^{X+e+1}) = Tβ + Ω^{T(X+e)}·Ω₁). -/
+theorem skTopUpSucc (S : InaccSeq.{0}) :
+    ∀ (k : ℕ) (l ηx A e β : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l → GxCl (upsilon l) (ldAtR S l) e →
+      Vb.VbD S l β → Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) (e + 1) β →
+      (∀ β', Vb.VbD S l β' → Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) e β' →
+        gxTh (upsilon l) (ldAtR S l) (Le.leTe S (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e) β') =
+          S.psi (A + 1 + S.psi (Vb.vbT S l (β' + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e))) (Om (1 + 1)))
+            (Om 1)) →
+      gxTh (upsilon l) (ldAtR S l) (Le.leTe S (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + (e + 1)) β) =
+        S.psi (A + 1 + S.psi (Vb.vbT S l (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + (e + 1))))
+          (Om (1 + 1))) (Om 1) :=
+  fun k _ _ _ _ _ hl hX hA hρ hec hβD hB IH => Xm.xmSucc hl hX hA hρ k hec hβD hB IH
+
+/-- STATUS: PROVED (Xm.xmLim, from Xm.xmCofL, Xm.xmTh_lim, Xd.xdUp_at, Lw.lw_psi_limit; NEW round 123; generalizes
+Xi.xiReadOm; checkable only after the merge)
+SIZE: M
+Limit step of skTopUp: `e a limit code, RoBaseE λ Ω_{k+3} e β, the law at every code e' < e over β ⇒ the law at e`. -/
+theorem skTopUpLim (S : InaccSeq.{0}) :
+    ∀ (k : ℕ) (l ηx A e β : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l → GxCl (upsilon l) (ldAtR S l) e →
+      Order.IsSuccLimit e → Vb.VbD S l β → Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) e β →
+      (∀ e', GxCl (upsilon l) (ldAtR S l) e' → e' < e →
+        gxTh (upsilon l) (ldAtR S l) (Le.leTe S (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e') β) =
+          S.psi (A + 1 + S.psi (Vb.vbT S l (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e'))) (Om (1 + 1)))
+            (Om 1)) →
+      gxTh (upsilon l) (ldAtR S l) (Le.leTe S (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e) β) =
+        S.psi (A + 1 + S.psi (Vb.vbT S l (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e))) (Om (1 + 1)))
+          (Om 1) :=
+  fun k _ _ _ _ _ hl hX hA hρ hec hlim hβD hB IH => Xm.xmLim hl hX hA hρ k hec hlim hβD hB IH
+
+/-- STATUS: PROVED (Xm.xmTest1, Xm.xmTestW1, Xm.xmRB0; NEW round 123; the REFUTE-FIRST points of skTopUp and its
+non-vacuity; checkable only after the merge)
+SIZE: S
+At the restart of m* = L(0) with its own A: the law at (k, e, β) = (0, 1, 0) and (0, ω + 1, 0). -/
+theorem skTopUpTests (S : InaccSeq.{0}) :
+    (∃ l ηx A : Ordinal.{0}, IsRestartIdx l ∧ upsilon l < Nm.Pv S ηx ∧ A ∈ S.CSet A (S.psi A (Om 1)) ∧
+      S.psi A (Om 1) = upsilon l ∧
+      gxTh (upsilon l) (ldAtR S l) (Le.leTe S (Om (((0 : ℕ) : Ordinal.{0}) + 1 + 1 + 1) + 1) 0) =
+        S.psi (A + 1 + S.psi (Vb.vbT S l (0 + Le.leWe (Om (((0 : ℕ) : Ordinal.{0}) + 1 + 1 + 1) + 1))) (Om (1 + 1)))
+          (Om 1)) ∧
+    (∃ l ηx A : Ordinal.{0}, IsRestartIdx l ∧ upsilon l < Nm.Pv S ηx ∧ A ∈ S.CSet A (S.psi A (Om 1)) ∧
+      S.psi A (Om 1) = upsilon l ∧
+      gxTh (upsilon l) (ldAtR S l) (Le.leTe S (Om (((0 : ℕ) : Ordinal.{0}) + 1 + 1 + 1) + (ω + 1)) 0) =
+        S.psi (A + 1 + S.psi (Vb.vbT S l (0 + Le.leWe (Om (((0 : ℕ) : Ordinal.{0}) + 1 + 1 + 1) + (ω + 1))))
+          (Om (1 + 1))) (Om 1)) :=
+  ⟨Xm.xmTest1 S, Xm.xmTestW1 S⟩
 
 /-- STATUS: PROVED (Xi.xiTopUp0, from Xi.xiLow, Xi.xiLaw_of_low, Xd.xdUp_at; NEW round 122; checkable only after the merge)
 SIZE: S
@@ -493,6 +556,11 @@ theorem skX0Tests2 (S : InaccSeq.{0}) :
 atom move at T_{X+e}(β), Wr.wrImgMove_iff, so it cannot be added as a hypothesis without assuming the conclusion)
 (round 112: CHANGED to the code-free WallBelow)
 (round 122: hypothesis CHANGED from the REFUTED Wg.WgTopFamAll (with it the node was vacuous) to Xi.XiTopUp)
+(round 123: the hypothesis Xi.XiTopUp is now a theorem (skTopUp), so the node is not vacuous; still OPEN.  Missing:
+(i) the readings of the non-top atoms ψ₂(β + W^{X+e}·γ + δ) (block laws in the style of Ro.roStepA with the image
+ψ₁(A + 1 + ψ₂(T ·)) in place of a constant image; skTopUp gives only the tops), (ii) the B_n move of T = Vb.vbT and of
+A_η (B_n (T_λ x) = T_{λ'}(B_n x); Vb.vbT_move needs Vb.vbLeaf_of_codes), so that B_n maps ψ₁(A_λ + 1 + ψ₂(T_λ a)) to
+ψ₁(A_{λ'} + 1 + ψ₂(T_{λ'}(B_n a))).)
 SIZE: L
 `TopUp ∧ hν ⇒ every atom ψ₂(Y₃) ≤ s < ψ₂(Ω₄) moves: MvD s, B_n s ∈ At_{λ'}, Θ_{λ'}(B_n s) = B_n Θ_λ(s)`
 (was SUSPECT with the refuted TopDynAll; then with the family law Wg.WgTopFamAll, itself REFUTED in round 122)
@@ -504,6 +572,7 @@ theorem skWallBase (S : InaccSeq.{0}) : Xi.XiTopUp S → Nc.ncL S (ω + 1) ≤ n
 /-- STATUS: OPEN (RISK as skWallBase: no B_n-move of the images in the hypothesis; Wr.wrImgMove_iff)
 (round 112: CHANGED to the code-free WallBelow)
 (round 122: hypothesis CHANGED from the REFUTED Wg.WgTopFamAll (with it the node was vacuous) to Xi.XiTopUp)
+(round 123: Xi.XiTopUp is now a theorem (skTopUp); still OPEN, same missing pieces (i), (ii) as skWallBase, generic in k)
 SIZE: L
 `TopUp ∧ hν ⇒ ∀ k, (atoms < ψ₂(Ω_{k+4}) move) ⇒ (atoms < ψ₂(Ω_{k+5}) move)` (one level up; the step
 Ω_{k+3} → Ω_{k+4} of the readings with sub-base images; Wb.wbKe_sup_it / wbTe_gt_Om give the layer facts).
@@ -512,7 +581,8 @@ theorem skWallStep (S : InaccSeq.{0}) : Xi.XiTopUp S → Nc.ncL S (ω + 1) ≤ n
     ∀ k : ℕ, WallBelow S (lev S k) → WallBelow S (lev S (k + 1)) := by
   sorry
 
-/-- STATUS: REDUCED (skTopUp, skWallBase, skWallStep; round 122: skTopUp in place of the REFUTED skTopFam)
+/-- STATUS: REDUCED (skTopUp, skWallBase, skWallStep; round 122: skTopUp in place of the REFUTED skTopFam; round 123:
+skTopUp PROVED, so only skWallBase, skWallStep are open below it)
 SIZE: L
 `hν ⇒ ∀ k < ω, every atom ψ₂(Y₃) ≤ s < ψ₂(Ω_{k+4}) moves` (induction on k). -/
 theorem skWallLevAll (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → ∀ k : ℕ, WallBelow S (lev S k) := by
