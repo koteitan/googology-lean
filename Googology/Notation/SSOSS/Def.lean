@@ -8,7 +8,7 @@ number of entries retained. `fs S k` uses k copies, not k+1 copies.
 All searches are finite and all definitions are executable.
 -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 namespace Seq
 
 abbrev Sequence := List ℕ
@@ -76,4 +76,4 @@ def step (S : Sequence) (n : ℕ) : ℕ ⊕ (Sequence × ℕ) :=
   if S.isEmpty then .inl n else .inr (fs S (n + 1), n + 1)
 
 end Seq
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

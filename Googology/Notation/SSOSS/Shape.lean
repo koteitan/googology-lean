@@ -1,4 +1,4 @@
-import Googology.Notation.SSOS.Flat
+import Googology.Notation.SSOSS.Flat
 
 /-!
 Experimental shape invariant, independent of `Standard` and `CutCorrect`.
@@ -7,7 +7,7 @@ by exactly two external zeros. Extra zeros are allowed only at the end.
 No theorem identifying this predicate with standardness is claimed here.
 -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 inductive StdShape : List U → Prop
   | nil : StdShape []
@@ -24,7 +24,7 @@ theorem StdShape.canonical {t : List U} (h : StdShape t) : Canonical t := by
   | single _ ih => exact .block ih .nil trivial
   | next _ _ _ ihu ihP => exact .block ihu (.zero (.zero ihP)) trivial
 
-theorem StdShape.tower (n : ℕ) : StdShape (Googology.Notation.SSOS.tower n) := by
+theorem StdShape.tower (n : ℕ) : StdShape (Googology.Notation.SSOSS.tower n) := by
   induction n with
   | zero => exact .nil
   | succ n ih => exact .single ih
@@ -33,4 +33,4 @@ theorem StdShape.erase {t : List U} (h : StdShape (.z :: t)) : StdShape t := by
   cases h with
   | zero h => exact h
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

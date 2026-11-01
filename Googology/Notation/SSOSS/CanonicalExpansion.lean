@@ -1,8 +1,8 @@
-import Googology.Notation.SSOS.Expansion
+import Googology.Notation.SSOSS.Expansion
 
 /-! Canonical block boundaries survive the tree expansion, even off standard forms. -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 theorem canonical_zeros_append (k : ℕ) (P : List U) (hP : Canonical P) :
     Canonical (List.replicate k U.z ++ P) := by
@@ -45,4 +45,4 @@ theorem canonical_E (u P : List U) (hc : Canonical (.b u :: P))
     (k : ℕ) (hk : 1 ≤ k) : Canonical (E (.b u :: P) k) :=
   canonical_H_append u P hc k hk
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

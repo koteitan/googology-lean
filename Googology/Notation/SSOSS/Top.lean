@@ -1,9 +1,9 @@
-import Googology.Notation.SSOS.Bridge
-import Googology.Notation.SSOS.Standard
+import Googology.Notation.SSOSS.Bridge
+import Googology.Notation.SSOSS.Standard
 
 /-! Unconditional connection of the actual terms of `(0,0,2)` to the towers. -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 open Ordinal
 
@@ -35,4 +35,4 @@ theorem fs_top_cof_epsilon (β : Ordinal.{0}) (hβ : β < ε₀) :
     simpa [tower] using (lt_of_le_of_lt (le_max_right β 2) hn)
   exact ⟨n, by omega, tower n, fs_top n, lt_of_le_of_lt (le_max_left β 2) hn⟩
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

@@ -1,12 +1,12 @@
-import Googology.Notation.SSOS.Search
-import Googology.Notation.SSOS.Representation
+import Googology.Notation.SSOSS.Search
+import Googology.Notation.SSOSS.Representation
 
 /-!
 The binary search reduction. All results apply off standard forms too.
 `BinaryLimit` packages precisely: binary entries, prefix (0,0), last entry 1.
 -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 structure BinaryLimit (S : List ℕ) : Prop where
   binary : Binary S
@@ -340,4 +340,4 @@ theorem existsUnique_zeroArgmax (S : Sequence) (hS : BinaryLimit S) :
   exact ((cut_eq_iff_shortZero_argmax S hS r).2 hr).symm
 
 end Seq
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

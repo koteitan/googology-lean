@@ -1,11 +1,11 @@
-import Googology.Notation.SSOS.Def
+import Googology.Notation.SSOSS.Def
 
 /-!
 Search specifications, independent of standardness and of binary entries.
 The sentinel L has the empty suffix. Ties in mbp are resolved to the right.
 -/
 
-namespace Googology.Notation.SSOS.Seq
+namespace Googology.Notation.SSOSS.Seq
 
 theorem suf_succ (S : Sequence) (i : ℕ) : suf S (i+1) = S.drop i := by
   simp [suf]
@@ -149,4 +149,4 @@ theorem sp_origin (S : Sequence) (x : ℕ) :
   · simp only [List.mem_filter, List.mem_range, decide_eq_true_eq] at h
     exact Or.inr ⟨h.2.1, h.1, h.2.2⟩
 
-end Googology.Notation.SSOS.Seq
+end Googology.Notation.SSOSS.Seq

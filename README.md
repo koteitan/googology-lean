@@ -23,14 +23,14 @@ Every notation gets the same goals. They are defined exactly in chapter 1 of [sp
 | Y sequence | ✅ | ✅ | ✅ |
 | ω-Y (official) | ✅ | ✅ | ✅ |
 | extended Buchholz's ψ | ✅ | ✅ |  |
-| SSOS (below (0,0,2)) | ✅ | ✅ |  |
+| SSOSS (below (0,0,2)) | ✅ | ✅ |  |
 
 - expansion defined: the expansion is a Lean function that runs.
 - well-foundedness: the expansion relation on the standard forms has no infinite descending chain. It is equivalent to termination — every expansion sequence ends — and that is proved too.
 - well-foundedness (non-standard): the same holds on all states, standard or not.
 - For the Y sequence, "all states" means every legal sequence: its entries are positive and, if it is not empty, its first entry is `1`. The proof is ported from [koteitan/1y-wo-por](https://github.com/koteitan/1y-wo-por) and [koteitan/1y-expand-equiv](https://github.com/koteitan/1y-expand-equiv); see [Notation/Y](Googology/Notation/Y/README.md).
 - ω-Y (official) is the ω-Y sequence with the expansion of its official program, `expand` of [Naruyoko/StudyAndExpandSequence](https://github.com/Naruyoko/StudyAndExpandSequence). For it, "all states" means every list of natural numbers, with no condition. The Lean rule reports an error where a step it expects cannot be carried out, and the step then gives `()`; no error occurs on the 474 expansions checked against the program, but that none occurs on a standard form is not proved. The proof is ported from [koteitan/wy-wo-por](https://github.com/koteitan/wy-wo-por); see [Notation/OmegaY](Googology/Notation/OmegaY/README.md).
-- SSOS (below (0,0,2)) is Kanrokoti's strong second-order search sequence (強2階探索表記, [rev 76153](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Kanrokoti/%E5%BC%B72%E9%9A%8E%E6%8E%A2%E7%B4%A2%E8%A1%A8%E8%A8%98?oldid=76153)) on its standard forms below `(0,0,2)`: the sequences reached from the generators `(0,0,1,...,1)` by expansion. The step `a[k]` uses `k+1` copies of the bad part, and a final `0` is dropped. Only this fragment is covered; the notation as a whole is not. The proof is ported from [koteitan/ssosn](https://github.com/koteitan/ssosn); see [Notation/SSOS](Googology/Notation/SSOS/README.md).
+- SSOSS (below (0,0,2)) is Kanrokoti's strong second-order searching sequence (強2階探索数列, [rev 76153](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Kanrokoti/%E5%BC%B72%E9%9A%8E%E6%8E%A2%E7%B4%A2%E8%A1%A8%E8%A8%98?oldid=76153); English version: [Strong second-order searching notation](https://googology.fandom.com/wiki/User_blog:Kanrokoti/Strong_second-order_searching_notation)) on its standard forms below `(0,0,2)`: the sequences reached from the generators `(0,0,1,...,1)` by expansion. The step `a[k]` uses `k+1` copies of the bad part, and a final `0` is dropped. Only this fragment is covered; the notation as a whole is not. The proof is ported from [koteitan/ssosn](https://github.com/koteitan/ssosn); see [Notation/SSOSS](Googology/Notation/SSOSS/README.md).
 
 ### Translations into the ordinals
 
@@ -49,12 +49,12 @@ A map sending each state to the ordinal it names.
 | Y sequence |  |  |  |  |  |  |  |
 | ω-Y |  |  |  |  |  |  |  |
 | extended Buchholz's ψ | ✅ | ✅ | ✅(*1) | ✅ | ✅ | ✅ | ✅ |
-| SSOS (below (0,0,2)) | ✅ |  |  | ✅ | ✅ | ✅ |  |
+| SSOSS (below (0,0,2)) | ✅ |  |  | ✅ | ✅ | ✅ |  |
 
-- defined: the map is defined in Lean. For primitive sequences and one-row DBMS it reads the state as an extended Buchholz term and takes its value. For pair sequences it sends the state to a Buchholz term by the `Trans` of [koteitan/pss-proof](https://github.com/koteitan/pss-proof), maps that to an extended Buchholz term, and takes `1 + val` (0 for the empty sequence). For two-row DBMS, a standard form splits into blocks that start with `(0,0)`; the rest of each block is read as a pair sequence `M_i`, and the value is `ω^o(M_0) + ω^o(M_1) + ...`, where `o` is the ordinal of a pair sequence. For extended Buchholz's ψ it is the value of the term. For SSOS below `(0,0,2)` it is the map `o` of [koteitan/ssosn](https://github.com/koteitan/ssosn): it parses the sequence after its leading `(0,0)` as a tree and takes the tree's ordinal.
+- defined: the map is defined in Lean. For primitive sequences and one-row DBMS it reads the state as an extended Buchholz term and takes its value. For pair sequences it sends the state to a Buchholz term by the `Trans` of [koteitan/pss-proof](https://github.com/koteitan/pss-proof), maps that to an extended Buchholz term, and takes `1 + val` (0 for the empty sequence). For two-row DBMS, a standard form splits into blocks that start with `(0,0)`; the rest of each block is read as a pair sequence `M_i`, and the value is `ω^o(M_0) + ω^o(M_1) + ...`, where `o` is the ordinal of a pair sequence. For extended Buchholz's ψ it is the value of the term. For SSOSS below `(0,0,2)` it is the map `o` of [koteitan/ssosn](https://github.com/koteitan/ssosn): it parses the sequence after its leading `(0,0)` as a tree and takes the tree's ordinal.
 - injective: distinct standard forms go to distinct ordinals. For BMS and DBMS a standard form is its matrix, so two states are compared as matrices, by their entries.
 - surjective: the image is known exactly — the ordinals below `ε₀` for primitive sequences and one-row DBMS, the ordinals below `ψ_0(Ω_ω)` for pair sequences and two-row DBMS, the ordinals below `ψ_0(Λ)` for extended Buchholz's ψ (*1).
-- For SSOS below `(0,0,2)`, injectivity, surjectivity onto the ordinals below `ε₀`, and order preservation for the lexicographic order of sequences (a proper prefix is smaller) are not proved.
+- For SSOSS below `(0,0,2)`, injectivity, surjectivity onto the ordinals below `ε₀`, and order preservation for the lexicographic order of sequences (a proper prefix is smaller) are not proved.
 - (*1) The states of extended Buchholz's ψ are the standard terms below `Ω`, so the image is not all of `C_0(Λ)` but its part below `Ω`, that is, the ordinals below `ψ_0(Λ)`.
 - decreases on expansion: one expansion step makes the value strictly smaller.
 - cofinal: one expansion step reaches every ordinal below the value: if `x < o(a)`, some state `a'` obtained from `a` by one step has `x <= o(a')`. With "decreases on expansion" it gives "equals the rank" (`Eval.Cofinal.rank_eq` in `Googology/Cofinal.lean`).
@@ -217,7 +217,7 @@ Googology/
     DBMS/            BMS with other generators
     Y/               the Y sequence, and the ported proof of its termination
     OmegaY/          the official ω-Y sequence, and the ported proof of its termination
-    SSOS/            SSOS below (0,0,2), and the ported proof that its value is the rank
+    SSOSS/           SSOSS below (0,0,2), and the ported proof that its value is the rank
   Trans/           translations between two systems
 ```
 
@@ -252,7 +252,7 @@ koteitan's are linked where they are used and are not listed here.
 | [Phyrion1343/1Y-Well-Ordering-Lean](https://github.com/Phyrion1343/1Y-Well-Ordering-Lean) (Apache-2.0), revision `6533b29` | the combinatorial layer of the proof that 1-Y is well founded, adapted in koteitan/1y-wo-por and ported here to Lean 4.30.0 | `Notation/Y/WellOrder/ZeroY/`, `Notation/Y/WellOrder/OneY/` |
 | Yukito's ω-Y sequence, and its official program, `expand` of [Naruyoko/StudyAndExpandSequence](https://github.com/Naruyoko/StudyAndExpandSequence/blob/b26ba7e5fc2c8edb4065f1d721855a7e0e644ff2/script.js) (revision `b26ba7e`, v1.1, default settings) | the definition, written in koteitan/wy-wo-por from a description of the rule, not from the program's code; the expected values of the checks | `Notation/OmegaY/Official.lean`, `test/OmegaYCheck.lean` |
 | [Phyrion1343/omega-Y-Well-Ordering-Lean](https://github.com/Phyrion1343/omega-Y-Well-Ordering-Lean) (Apache-2.0), revision `33c16a8` | the canonical mountain, the weak-magma expansion that the official rule modifies, the forests, the keys and the reflection interface of the proof, adapted in koteitan/wy-wo-por and ported here to Lean 4.30.0 | `Notation/OmegaY/WellOrder/OmegaY/` except `Official/`; `Notation/OmegaY/Official.lean` |
-| Kanrokoti, [強2階探索表記](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Kanrokoti/%E5%BC%B72%E9%9A%8E%E6%8E%A2%E7%B4%A2%E8%A1%A8%E8%A8%98?oldid=76153) (rev 76153) | the definition of the expansion, transcribed in koteitan/ssosn | `Notation/SSOS/Def.lean` |
+| Kanrokoti, [強2階探索表記](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Kanrokoti/%E5%BC%B72%E9%9A%8E%E6%8E%A2%E7%B4%A2%E8%A1%A8%E8%A8%98?oldid=76153) (rev 76153) | the definition of the expansion, transcribed in koteitan/ssosn | `Notation/SSOSS/Def.lean` |
 | p進大好きbot, [ペア数列の停止性](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:P%E9%80%B2%E5%A4%A7%E5%A5%BD%E3%81%8Dbot/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E3%81%AE%E5%81%9C%E6%AD%A2%E6%80%A7); Naruyoko, [ペア数列システムの停止性証明に用いられた変換写像の全単射性](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Naruyoko/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E5%81%9C%E6%AD%A2%E6%80%A7%E8%A8%BC%E6%98%8E%E3%81%AB%E7%94%A8%E3%81%84%E3%82%89%E3%82%8C%E3%81%9F%E5%A4%89%E6%8F%9B%E5%86%99%E5%83%8F%E3%81%AE%E5%85%A8%E5%8D%98%E5%B0%84%E6%80%A7) | the translation `Trans` of pair sequences into Buchholz terms and its bijectivity, as formalized in the dependency koteitan/pss-proof | `Googology/Trans/PSS/` |
 | the wiki articles [ペア数列数](https://googology.fandom.com/ja/wiki/%E3%83%9A%E3%82%A2%E6%95%B0%E5%88%97%E6%95%B0) and [Y数列](https://googology.fandom.com/ja/wiki/Y%E6%95%B0%E5%88%97) | background and correspondence tables | `memo.md` |
 
@@ -287,7 +287,7 @@ notation system and as an expansion system: its termination is proved with
 nothing assumed. `Notation/BMS` terminates for every number of rows.
 `Notation/Y` terminates, on the standard forms and on every legal sequence.
 `Notation/OmegaY`, the official ω-Y, terminates, on the standard forms and on
-every list of naturals. `Notation/SSOS` covers SSOS below
+every list of naturals. `Notation/SSOSS` covers SSOSS below
 `(0,0,2)`: its value map equals the rank there. `Trans/`
 settles one row and two rows (pair sequences): for every matrix the value of
 the translation equals the rank of the expansion, and the systems reach `ε₀`

@@ -1,7 +1,7 @@
-import Googology.Notation.SSOS.Representation
-import Googology.Notation.SSOS.Bridge
-import Googology.Notation.SSOS.CanonicalExpansion
-import Googology.Notation.SSOS.Top
+import Googology.Notation.SSOSS.Representation
+import Googology.Notation.SSOSS.Bridge
+import Googology.Notation.SSOSS.CanonicalExpansion
+import Googology.Notation.SSOSS.Top
 
 /-!
 A value for the binary (0,0)-fragment, with uniqueness and the successor
@@ -11,7 +11,7 @@ but no meaning is assigned to its values outside this fragment. In
 particular, `o_fs_top_sup` describes (0,0,2) via its binary terms, not o [0,0,2].
 -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 noncomputable def o (S : List ℕ) : Ordinal.{0} :=
   if S.length < 2 then S.length else treeOrdinal (parse (S.drop 2))
@@ -79,4 +79,4 @@ theorem o_fs_top_sup : (⨆ n : ℕ, o (Seq.fs [0,0,2] (n+1))) = ε₀ := by
     rw [fs_top, o_encode _ (canonical_tower _)] at hle
     exact (not_lt_of_ge hle) hβ'
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

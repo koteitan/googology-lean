@@ -55,4 +55,4 @@ mathlib-free.
 | [DBMS](DBMS/README.md) | arrays | as BMS | reachable from `dstair` | `dbms r` | `dbmsEval` (the rank), and `Trans.DBMS.dbmsOrdEval` for `r = 1` |
 | [Y](Y/README.md) | sequences of naturals | lexicographic, a well-order on the standard forms (`yStd_strictWellOrder`) | reachable from `(1, h+1)` | `ySys`, and `yLegal` on every legal sequence | `yEval` (the rank) |
 | [OmegaY](OmegaY/README.md) | sequences of naturals | none yet | reachable from `(1, h+2)` by the official rule | `omegaYSys`, and `omegaYAll` on every list | `omegaYEval` (the rank) |
-| [SSOS](SSOS/README.md) | sequences of naturals, below `(0,0,2)` | none yet | reachable from `(0,0,1,…,1)` (`Standard`) | `ssosSys` | none; the value `o` equals the rank (`ssos_rank`) |
+| [SSOSS](SSOSS/README.md) | sequences of naturals, below `(0,0,2)` | none yet | reachable from `(0,0,1,…,1)` (`Standard`) | `ssossSys` | none; the value `o` equals the rank (`ssoss_rank`) |

@@ -1,9 +1,9 @@
-import Googology.Notation.SSOS.Shape
-import Googology.Notation.SSOS.Expansion
+import Googology.Notation.SSOSS.Shape
+import Googology.Notation.SSOSS.Expansion
 
 /-! Preservation of the candidate tree shape. No cut correctness is assumed. -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 theorem lex_le_append (s t : List ℕ) : s ≤ s ++ t := by
   cases t with
@@ -114,7 +114,7 @@ termination_by sizeOf u
 decreasing_by simp_wf; omega
 
 theorem StdShape.E (u P : List U) (h : StdShape (.b u :: P))
-    (k : ℕ) (hk : 1 ≤ k) : StdShape (Googology.Notation.SSOS.E (.b u :: P) k) :=
+    (k : ℕ) (hk : 1 ≤ k) : StdShape (Googology.Notation.SSOSS.E (.b u :: P) k) :=
   h.H_append u P k hk
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

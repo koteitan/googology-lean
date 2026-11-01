@@ -1,4 +1,4 @@
-import Googology.Notation.SSOS.Flat
+import Googology.Notation.SSOSS.Flat
 
 /-!
 The tree's cut, independently of the searches in `Seq`.
@@ -7,7 +7,7 @@ and its expansion is `g ++ (b ++ [0])^k`.
 These identities hold for every tree, even noncanonical ones.
 -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 def copies (s : List ℕ) (k : ℕ) : List ℕ := (List.replicate k s).flatten
 
@@ -71,4 +71,4 @@ theorem encode_E_parts (u P : List U) (k : ℕ) (hk : 1 ≤ k) :
       (encode P ++ (parts u).1) ++ copies ((parts u).2 ++ [0]) k := by
   simp [encode, E, flat_append, flat_H_parts u k hk, List.append_assoc]
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

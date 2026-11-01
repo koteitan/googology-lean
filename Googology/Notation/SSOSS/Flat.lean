@@ -1,4 +1,4 @@
-import Googology.Notation.SSOS.Tree
+import Googology.Notation.SSOSS.Tree
 
 /-!
 Serialization uses the same last-unit-first convention as `Tree`.
@@ -7,7 +7,7 @@ No normal-form assumption is made here: distinct trees can serialize to the
 same sequence if their block boundaries are not canonical.
 -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 def raiseBit (n : ℕ) : List ℕ := if n = 0 then [0, 1] else [1]
 
@@ -92,4 +92,4 @@ theorem flat_tower (n : ℕ) : flat (tower n) = List.replicate n 1 := by
     simp only [tower, flat_b, flat_nil, List.nil_append, ih, raiseBits]
     simp [List.flatMap_replicate, raiseBit, List.replicate_succ]
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

@@ -1,15 +1,17 @@
 [← Back](../README.md) | [English](README.md) | [Japanese](README-ja.md)
 
-# SSOS
+# SSOSS
 
-Kanrokoti's strong second-order search sequence (強2階探索表記, SSOS), as an
+Kanrokoti's strong second-order searching sequence (強2階探索数列, SSOSS), as an
 expansion system, on its standard forms below `(0,0,2)`.
 
 ## Where the definition comes from
 
 The definition is the blog post
 [ユーザーブログ:Kanrokoti/強2階探索表記](https://googology.fandom.com/ja/wiki/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%96%E3%83%AD%E3%82%B0:Kanrokoti/%E5%BC%B72%E9%9A%8E%E6%8E%A2%E7%B4%A2%E8%A1%A8%E8%A8%98?oldid=76153)
-on the Japanese Googology Wiki, revision 76153. `Def.lean` transcribes it; the
+on the Japanese Googology Wiki, revision 76153. The English version is
+[User blog:Kanrokoti/Strong second-order searching notation](https://googology.fandom.com/wiki/User_blog:Kanrokoti/Strong_second-order_searching_notation),
+which names the sequence SSOSS. `Def.lean` transcribes it; the
 transcription and all the proofs here come from
 [koteitan/ssosn](https://github.com/koteitan/ssosn) (revision `053b96c`, Lean 4.33.1),
 ported to Lean 4.30.0.
@@ -43,7 +45,7 @@ States are lists of naturals. Positions are counted from 1.
 | `Representation.lean`, `Top.lean` | the trees of the standard forms; the expansions of `(0,0,2)` |
 | `SequenceOrdinal.lean` | the value `o`: `0` and `1` on the lists of length below 2, and the ordinal of the tree otherwise |
 | `MainBelow002.lean` | the main theorems in the source's form: `Below002.closure`, `decreasing`, `cofinal`, `wf`, `rank_eq` |
-| `System.lean` | the system `ssosSys`, its standard forms `ssosStd`, and the theorems below |
+| `System.lean` | the system `ssossSys`, its standard forms `ssossStd`, and the theorems below |
 
 `System.lean` also checks six expansions of the source's handover with
 `#guard`. That is a check of the transcription, not a proof.
@@ -52,12 +54,12 @@ States are lists of naturals. Positions are counted from 1.
 
 | name | statement |
 |---|---|
-| `rel_iff` | one step of `ssosSys` is the source's one-step relation `Below002.Rel` |
+| `rel_iff` | one step of `ssossSys` is the source's one-step relation `Below002.Rel` |
 | `standard_iff_reach` | `Standard` is the least set holding the generators and closed under `step` |
-| `ssosStd_wf` | one step on the standard forms is well founded |
-| `ssos_decreasing` | on a standard form, one step makes `o` strictly smaller |
-| `ssos_cofinal` | for a standard `a` and `β < o(a)`, some standard `b` one step from `a` has `β ≤ o(b)` |
-| `ssos_rank` | on the standard forms, `o` equals the rank of one step |
+| `ssossStd_wf` | one step on the standard forms is well founded |
+| `ssoss_decreasing` | on a standard form, one step makes `o` strictly smaller |
+| `ssoss_cofinal` | for a standard `a` and `β < o(a)`, some standard `b` one step from `a` has `β ≤ o(b)` |
+| `ssoss_rank` | on the standard forms, `o` equals the rank of one step |
 
 Not proved: that `o` is injective on the standard forms, that its image is
 the ordinals below `ε₀`, and that it preserves the lexicographic order of

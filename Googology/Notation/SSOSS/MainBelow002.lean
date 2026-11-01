@@ -1,4 +1,4 @@
-import Googology.Notation.SSOS.CutShape
+import Googology.Notation.SSOSS.CutShape
 import Mathlib.SetTheory.Ordinal.Rank
 
 /-!
@@ -11,7 +11,7 @@ form an ordinal notation whose value map `o` is
 * equal to the well-founded rank of `Rel` on standard sequences.
 -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 namespace Below002
 
 /-- One-step expansion: `Rel b a` means `b` is obtained from `a` in one step.
@@ -108,4 +108,4 @@ theorem rank_eq (a : Std) : o a.1 = rank a := by
       exact Order.succ_le_of_lt (decreasing a.2 hb)
 
 end Below002
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

@@ -1,9 +1,9 @@
-import Googology.Notation.SSOS.Parse
-import Googology.Notation.SSOS.Standard
+import Googology.Notation.SSOSS.Parse
+import Googology.Notation.SSOSS.Standard
 
 /-! Binary preservation and the precise domain of the representation theorem. -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 theorem binary_iff_le_one (S : List ℕ) : Binary S ↔ ∀ n ∈ S, n ≤ 1 := by
   constructor <;> intro h n hn <;> specialize h n hn <;> omega
@@ -64,4 +64,4 @@ theorem standard_encode {Y : List ℕ} (hs : Standard ([0,0] ++ Y)) :
   apply binary_encode_exists
   exact fun n hn => standard_binary hs n (List.mem_append_right _ hn)
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

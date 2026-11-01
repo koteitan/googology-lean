@@ -1,4 +1,4 @@
-import Googology.Notation.SSOS.Flat
+import Googology.Notation.SSOSS.Flat
 
 /-!
 Canonical parsing by adding one bit at a time. `snocOne` either extends the
@@ -6,7 +6,7 @@ last run, merges across a single zero, or starts a new maximal block.
 This module uses no assumptions about the search expansion or standardness.
 -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 def Binary (s : List ℕ) : Prop := ∀ n ∈ s, n = 0 ∨ n = 1
 
@@ -171,4 +171,4 @@ theorem binary_encode_exists (Y : List ℕ) (hb : Binary Y) :
     ∃ t, Canonical t ∧ encode t = [0,0] ++ Y :=
   ⟨parse Y, canonical_parse Y, by simp [encode, flat_parse Y hb]⟩
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

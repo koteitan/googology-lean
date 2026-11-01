@@ -1,7 +1,7 @@
 import Googology.Goals.Basic
 import Googology.Notation.Y
 import Googology.Notation.OmegaY
-import Googology.Notation.SSOS
+import Googology.Notation.SSOSS
 import Googology.Trans
 
 /-!
@@ -68,18 +68,18 @@ def yRuns : Runs Notation.Y.ySys where
   source := "Notation.Y.expand transcribes script.js of Naruyoko/YNySequence (revision 2de1397); \
 test/YCheck.lean checks it against the official program on 213 expansions"
 
-/-- SSOS below `(0,0,2)` runs on lists: the step is `Seq.fs`. -/
-def ssosRuns : Runs Notation.SSOS.ssosSys where
+/-- SSOSS below `(0,0,2)` runs on lists: the step is `Seq.fs`. -/
+def ssossRuns : Runs Notation.SSOSS.ssossSys where
   Code := List Nat
   enc := fun s => s
-  run := fun a k => Notation.SSOS.Seq.fs a (k + 1)
+  run := fun a k => Notation.SSOSS.Seq.fs a (k + 1)
   halt := List.isEmpty
   enc_step := fun _ _ => rfl
   halt_iff := fun _ => List.isEmpty_iff
-  source := "Notation.SSOS.Seq.fs transcribes rev 76153 of Kanrokoti's 強2階探索表記 \
+  source := "Notation.SSOSS.Seq.fs transcribes rev 76153 of Kanrokoti's 強2階探索表記 \
 (https://googology.fandom.com/ja/wiki/ユーザーブログ:Kanrokoti/強2階探索表記?oldid=76153), \
 as in koteitan/ssosn (revision 053b96c); six expansions of its handover are checked by #guard \
-in Notation/SSOS/System.lean"
+in Notation/SSOSS/System.lean"
 
 /-- The ω-Y sequence runs on lists. -/
 def omegaYRuns : Runs Notation.OmegaY.omegaYSys where
@@ -455,15 +455,15 @@ def omegaYNonStd :
   incl := fun _ => ⟨omegaYIncl⟩
   wf := .proved fun _ => Notation.OmegaY.omegaYAll_wf
 
-/-- SSOS (Kanrokoti's 強2階探索表記, rev 76153) on the standard forms below
+/-- SSOSS (Kanrokoti's 強2階探索表記, rev 76153) on the standard forms below
 `(0,0,2)`: the source's `Standard`, the least set holding `(0,0,1,…,1)` and
-closed under `step` (`Notation.SSOS.standard_iff_reach`). -/
-def ssosNotation :
-    NotationGoals (fun _ : Unit => Notation.SSOS.ssosSys) (fun _ => Notation.SSOS.ssosStd) where
-  labelEn := "SSOS (below (0,0,2))"
-  labelJa := "強2階探索表記（(0,0,2) 未満）"
-  expansion := some fun _ => ssosRuns
-  wf := .proved fun _ => Notation.SSOS.ssosStd_wf
+closed under `step` (`Notation.SSOSS.standard_iff_reach`). -/
+def ssossNotation :
+    NotationGoals (fun _ : Unit => Notation.SSOSS.ssossSys) (fun _ => Notation.SSOSS.ssossStd) where
+  labelEn := "SSOSS (below (0,0,2))"
+  labelJa := "強2階探索数列（(0,0,2) 未満）"
+  expansion := some fun _ => ssossRuns
+  wf := .proved fun _ => Notation.SSOSS.ssossStd_wf
 
 /-- Extended Buchholz's ψ on the countable standard forms. -/
 def exbNotation : NotationGoals (fun _ : Unit => exbOT) (fun _ => exbOTStd) where
@@ -564,19 +564,19 @@ def exbOrd : OrdGoals (fun _ : Unit => exbOT) (fun _ => exbOTStd)
     exact (rank_exbOT_eq_val a).symm⟩
   order := .proved fun _ a b _ _ => lt_iff_val_lt a.2.1 b.2.1
 
-/-- SSOS below `(0,0,2)`: the value `o` of koteitan/ssosn, with `X` the
+/-- SSOSS below `(0,0,2)`: the value `o` of koteitan/ssosn, with `X` the
 ordinals below `ε₀` and the lexicographic order of lists (a proper prefix is
 smaller). -/
-def ssosOrd : OrdGoals (fun _ : Unit => Notation.SSOS.ssosSys) (fun _ => Notation.SSOS.ssosStd)
-    (fun _ => Notation.SSOS.o) (fun _ => Set.Iio (Ordinal.epsilon 0))
+def ssossOrd : OrdGoals (fun _ : Unit => Notation.SSOSS.ssossSys) (fun _ => Notation.SSOSS.ssossStd)
+    (fun _ => Notation.SSOSS.o) (fun _ => Set.Iio (Ordinal.epsilon 0))
     (fun _ (a b : List Nat) => a < b) where
-  labelEn := "SSOS (below (0,0,2))"
-  labelJa := "強2階探索表記（(0,0,2) 未満）"
+  labelEn := "SSOSS (below (0,0,2))"
+  labelJa := "強2階探索数列（(0,0,2) 未満）"
   injective := .todo
   surjective := .todo
-  decreasing := .proved fun _ a b ha _ h => Notation.SSOS.ssos_decreasing a b ha h
-  cofinal := .proved fun _ a ha => Notation.SSOS.ssos_cofinal a ha
-  rank := .proved fun _ => ⟨Notation.SSOS.ssosStd_wf, Notation.SSOS.ssos_rank⟩
+  decreasing := .proved fun _ a b ha _ h => Notation.SSOSS.ssoss_decreasing a b ha h
+  cofinal := .proved fun _ a ha => Notation.SSOSS.ssoss_cofinal a ha
+  rank := .proved fun _ => ⟨Notation.SSOSS.ssossStd_wf, Notation.SSOSS.ssoss_rank⟩
   order := .todo
 
 /-! ## The third table: translations between notations -/
@@ -740,13 +740,13 @@ def audit : List AuditLine :=
   omegaYNotation.lines (toString ``Googology.Goals.omegaYNotation) ++
   omegaYNonStd.lines (toString ``Googology.Goals.omegaYNonStd) ++
   exbNotation.lines (toString ``Googology.Goals.exbNotation) ++
-  ssosNotation.lines (toString ``Googology.Goals.ssosNotation) ++
+  ssossNotation.lines (toString ``Googology.Goals.ssossNotation) ++
   bmsOneRowOrd.lines (toString ``Googology.Goals.bmsOneRowOrd) ++
   bmsTwoRowOrd.lines (toString ``Googology.Goals.bmsTwoRowOrd) ++
   dbmsOneRowOrd.lines (toString ``Googology.Goals.dbmsOneRowOrd) ++
   dbmsTwoRowOrd.lines (toString ``Googology.Goals.dbmsTwoRowOrd) ++
   exbOrd.lines (toString ``Googology.Goals.exbOrd) ++
-  ssosOrd.lines (toString ``Googology.Goals.ssosOrd) ++
+  ssossOrd.lines (toString ``Googology.Goals.ssossOrd) ++
   primToPair.lines (toString ``Googology.Goals.primToPair) ++
   primToExb.lines (toString ``Googology.Goals.primToExb) ++
   pairToExbGoals.lines (toString ``Googology.Goals.pairToExbGoals) ++

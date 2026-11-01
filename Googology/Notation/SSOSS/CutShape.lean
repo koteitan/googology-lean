@@ -1,6 +1,6 @@
-import Googology.Notation.SSOS.CutReduction
-import Googology.Notation.SSOS.ShapeExpansion
-import Googology.Notation.SSOS.SequenceOrdinal
+import Googology.Notation.SSOSS.CutReduction
+import Googology.Notation.SSOSS.ShapeExpansion
+import Googology.Notation.SSOSS.SequenceOrdinal
 
 /-!
 # The cut of a `StdShape` tree (stage 2), and the standard forms
@@ -27,7 +27,7 @@ needs `Dom (flat u)`: every suffix after a zero is smaller than the whole list
 `B₁ 00 B₂ 00 … Bₖ 0^e` with non-increasing blocks `Bᵢ = raiseBits (flat uᵢ)`.
 -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 theorem flatMap_raiseBit_lt_iff (s t : List ℕ) (hs : Binary s) (ht : Binary t) :
     s.flatMap raiseBit < t.flatMap raiseBit ↔ s < t := by
   induction s generalizing t with
@@ -133,7 +133,7 @@ theorem liftBits_zero_pos (s : List ℕ) (j : ℕ) (h : (liftBits s)[j]? = some 
         simp [liftBit, ha] at hlen ⊢; omega
 
 
-open Googology.Notation.SSOS.Seq
+open Googology.Notation.SSOSS.Seq
 
 theorem entry_append_left' (A B : List ℕ) (i : ℕ) (h1 : 1 ≤ i) (h : i ≤ A.length) :
     entry (A ++ B) i = entry A i := by
@@ -929,4 +929,4 @@ theorem o_fs_sup_of_standard {S : List ℕ} (hS : Standard S) (hpos : 0 < entry 
   exact o_fs_sup_of_cutCorrect u P ht.canonical (cutCorrect_of_stdShape u P ht)
 
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

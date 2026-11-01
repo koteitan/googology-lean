@@ -2,7 +2,7 @@ import Mathlib.SetTheory.Ordinal.Veblen
 import Mathlib.SetTheory.Ordinal.Principal
 
 /-!
-# The (0,0)-fragment of the strong second-order search sequence as trees
+# The (0,0)-fragment of the strong second-order searching sequence as trees
 
 A sequence `(0,0) ⌢ Y` with entries of `Y` in `{0,1}` is read as a list of units:
 an entry `0` outside a block (`U.z`), or a block `U.b u` whose `T` (every maximal run
@@ -19,7 +19,7 @@ that is `(0,0,2)[k]`, have supremum `ε₀`).
 
 open Ordinal Order
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 /-- A unit: `z` is an entry `0` outside a block, `b u` is a block whose `T` is `u`. -/
 inductive U where
@@ -230,4 +230,4 @@ theorem tower_cof_epsilon (β : Ordinal.{0}) (hβ : β < ε₀) : ∃ n, β < 2 
   obtain ⟨n, hn⟩ := lt_epsilon_zero.1 hβ
   exact ⟨n, lt_of_lt_of_le hn ((iterate_le_vs_tower n).trans le_add_self)⟩
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

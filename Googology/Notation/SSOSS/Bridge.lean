@@ -1,5 +1,5 @@
-import Googology.Notation.SSOS.Def
-import Googology.Notation.SSOS.Expansion
+import Googology.Notation.SSOSS.Def
+import Googology.Notation.SSOSS.Expansion
 
 /-!
 The bridge is reduced to a single, k-independent cut equality.
@@ -8,7 +8,7 @@ trees encoding reachable standard forms is the remaining search-theoretic
 obligation. Canonicality matters because `flat` is not injective on all trees.
 -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 namespace Seq
 
@@ -88,4 +88,4 @@ theorem fs_encode_spec (u P : List U) (hc : CutCorrect u P) :
     obtain ⟨k, hk, h⟩ := treeOrdinal_E_cof u P β hβ
     exact ⟨k, hk, E (.b u :: P) k, fs_encode u P hc k hk, h⟩
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS

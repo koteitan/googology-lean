@@ -1,5 +1,5 @@
-import Googology.Notation.SSOS.BinarySearch
-import Googology.Notation.SSOS.Bridge
+import Googology.Notation.SSOSS.BinarySearch
+import Googology.Notation.SSOSS.Bridge
 
 /-!
 An exact combinatorial replacement for CutCorrect. The right-hand side
@@ -7,7 +7,7 @@ contains only a finite search on zeros, run lengths, suffix order, and the
 tree cut. No standardness or unproved cut assumption is used.
 -/
 
-namespace Googology.Notation.SSOS
+namespace Googology.Notation.SSOSS
 
 theorem binary_raiseBits (s : List ℕ) : Binary (raiseBits s) := by
   intro n hn
@@ -51,4 +51,4 @@ theorem cutCorrect_iff_shortZero_argmax (u P : List U) :
         (encode P ++ (parts u).1).length :=
   Seq.cut_eq_iff_shortZero_argmax _ (binaryLimit_encode_block u P) _
 
-end Googology.Notation.SSOS
+end Googology.Notation.SSOSS
