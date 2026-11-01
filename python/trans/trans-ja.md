@@ -1,4 +1,4 @@
-[English](trans.md) | [Japanese](trans-ja.md)
+[← Back](README-ja.md) | [English](trans.md) | [Japanese](trans-ja.md)
 
 # `trans` のルート
 

@@ -219,9 +219,11 @@ Googology/
     OmegaY/          the official ω-Y sequence, and the ported proof of its termination
     SSOSS/           SSOSS below (0,0,2), and the ported proof that its value is the rank
   Trans/           translations between two systems
+python/
+  trans/           convert a term of one notation into another, by Python ports of the maps of Trans/
 ```
 
-Each directory has its own README.
+Each directory has its own README. The Python tools are in [python](python/README.md).
 
 ## Build
 

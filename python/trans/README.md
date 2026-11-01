@@ -1,4 +1,4 @@
-[English](README.md) | [Japanese](README-ja.md)
+[← Back](../README.md) | [English](README.md) | [Japanese](README-ja.md)
 
 # trans
 

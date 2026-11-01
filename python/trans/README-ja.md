@@ -1,4 +1,4 @@
-[English](README.md) | [Japanese](README-ja.md)
+[← Back](../README-ja.md) | [English](README.md) | [Japanese](README-ja.md)
 
 # trans
 
@@ -18,7 +18,7 @@ python/trans/trans --maps                                    # 写像の一覧
 - 項は標準入力から 1 行に 1 つずつ渡すこともできます。
 - `--lean` を付けると、結果を ASCII ではなく Lean の値で表示します。
 - N を付けない `bms` と `dbms` は、項から N を決めます。N は、いちばん長い列の長さです。短い列は下にゼロを足してそろえます。たとえば `(0)(1,1,1)` は `(0,0,0)(1,1,1)` です。
-- ASCII 記法は [notations.md](notations.md) で決めています。
+- ASCII 記法は [notations-ja.md](notations-ja.md) で決めています。
 
 ## 写像
 
@@ -103,7 +103,7 @@ python/trans/trans --maps                                    # 写像の一覧
 | ファイル | 中身 |
 |---|---|
 | `trans` | コマンド本体 |
-| `notations.md` | ASCII 記法 |
+| `notations-ja.md` | ASCII 記法 |
 | `trans-ja.md` | ルートの図 |
 | `notation/` | パーサーと表示部分: `matrix`、`seq`、`ssoss`、`exb`、`label`（`ord`）、`inacc`。`exb_std`（`Term.cmp`、`isOT`） |
 | `maps/bms.py` | `zeroRow`、`read`、`unread` |

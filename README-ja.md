@@ -216,9 +216,11 @@ Googology/
     OmegaY/          公式の ω-Y 数列と、移植したその停止性の証明
     SSOSS/           (0,0,2) 未満の強2階探索数列と、移植したその値が階数に等しいことの証明
   Trans/           2 つの系の間の翻訳
+python/
+  trans/           ある表記の項を別の表記に変換する。Trans/ の写像を Python に移したものを使う
 ```
 
-各ディレクトリに README がある。
+各ディレクトリに README がある。Python の道具は [python](python/README-ja.md) にある。
 
 ## ビルド
 

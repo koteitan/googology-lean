@@ -1,3 +1,5 @@
+[← Back](README.md) | [English](notations.md) | [Japanese](notations-ja.md)
+
 # ASCII notations of `trans`
 
 `python/trans/trans` converts a term of one notation into another. This file
