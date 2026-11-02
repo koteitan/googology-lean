@@ -11,6 +11,8 @@ import Googology.Trans.PoR.InaccPsi.R2.XwJump
 import Googology.Trans.PoR.InaccPsi.R2.YeComp
 import Googology.Trans.PoR.InaccPsi.R2.YeGap
 import Googology.Trans.PoR.InaccPsi.R2.YeJump
+import Googology.Trans.PoR.InaccPsi.R2.YkBlk
+import Googology.Trans.PoR.InaccPsi.R2.YkJump
 
 /-!
 # Skeleton of part EQ: the hypotheses `(hν → WdThLow)` and `(hν → WdEQfar)` of `Wd.wdRoadL`
@@ -46,8 +48,8 @@ ENUM-REACH on the whole range (`skEnum`).
             `R₁⁺`-reach (`Ye.yeLh_easy`); left:
             * `skGapEps` OPEN: gap `ε`-numbers, no `υ`-point, no `υ`-point in `(a, B_n p]` (`Ye.YeGapEps`);
             * `skGapRng` OPEN: `p` a restart, gap points `υ_l`, `l` a restart index (`Ye.YeGapRng`);
-            * `skGapBlk` OPEN: `p` a restart, gap `υ`-points inside a block: the block top `< B_n p`
-              (`Ye.YeGapBlk`; the reach of such a point is the block top, `Ye.yeUps_block`).
+            * `skGapBlk` PROVED (round 127, `Yk.ykGapBlk`): `p` a restart, gap `υ`-points inside a block: the
+              block top `< B_n p` (`B_n p = υ_{κ'}`, `κ'` a restart index, restart indices are `ω·ω` apart).
             At a non-restart `p` the gap contains no `υ`-point (`Ye.yeNoUps_off`, from `Sf.sfShiftAll`).
       * `skKReachR` REDUCED (round 117, `Xn.xnPart`): EQ at the inner restarts by ONE induction on the predicted
         reach `r(λ)` (`Xn.xnEQ_all`): every inner `μ` with `ρ_μ < T_λ` has `r(μ) = k_λ(ρ_μ) < r(λ)`
@@ -61,7 +63,9 @@ ENUM-REACH on the whole range (`skEnum`).
             * `skJumpOff` PROVED (round 126, `Ye.yeJumpOff`): vacuous, the jump point `s` is always a range
               restart (`Ye.yeJump_rst`: `s = υ_l`, `l` the supremum of the chain indices, `ω² ∣ l`);
             * `skJumpNoRng` OPEN: no instance has a range restart as `s` (`Xw.XwJumpNoRng`; `XrJump` forces it,
-              `Xw.xwJump_noRng_of`).
+              `Xw.xwJump_noRng_of`); equivalently (round 127, `Yk.ykNoRng_iff_gap`) the range restart `κ` at the
+              bottom of the jump gap (`s* = sup_{q<s} B_n q = υ_κ`, no `B_n`-image, `r(κ) = R'`, `skJumpGapBot`)
+              has `r(κ) = B_n R`, i.e. it reaches past the gap (`skJumpGapShort`).
   * old children of `skKFar`, now off the path: `skKGap` PROVED (`Xg.xgKGap`), `skKClosed` and `skKLim`
     REDUCED to `skKFar` (`SkEX.skexClosed_of_far`, `SkEX.skexLim_of_far`).
 Guards and links (PROVED): `skNoIdx` (the index-keeping move `k_{λ'}(p) = B_n(k_λ p)` is false at `p = ρ_λ`),
@@ -93,7 +97,14 @@ gap-reach question moves to the window `m` (`skGapLhPre`); `skJumpOff` PROVED (`
 `skEQJump ⇔ skJumpNoRng` (`skJumpOnlyRng`); `skGapLh` REDUCED to `skGapEps`, `skGapRng`, `skGapBlk`
 (`skGapSplit3`, `skLhEasy`, `skUpsBlock`, non-vacuity `skGapTarget3`); a `υ`-point in the gap forces `p` to be a
 restart (`skNoUpsOff` = `Ye.yeNoUps_off`, `skGapUpsRst`), so `skGapRng`, `skGapBlk` ask only restart indices `p`.
-This file imports the new modules `R2.YeComp`, `R2.YeGap`, `R2.YeJump`: it can be checked only after the merge.
+Round 127 (leaf eq6): `skGapBlk` PROVED (`Yk.ykGapBlk`, no hypothesis), so `skGapLh` has the children
+`skGapEps`, `skGapRng` only (`Yk.ykGapLh_of`).  `skJumpNoRng` stays OPEN; guards: `skChainLe1` (every chain point is
+`≤₁ s`), `skJumpGapBot` (`Yk.ykGapBot`: the gap bottom `s*` is `υ_κ`, `κ` a range restart, `L(ω) < υ_κ < B_n s`, no
+`B_n`-image, `r(κ) = R'`), `skJumpGapIff` (`Yk.ykNoRng_iff_gap`: the leaf ⇔ `r(κ) = B_n R` at every instance),
+`skJumpGapShort` (`Yk.ykGap_short_ne`: an instance with `lh(s*) < B_n s` has `B_n R ≠ R'`, so the leaf asks that no
+such instance exists; the opposite direction to `skGapRng`), `skJumpGapTarget` (non-vacuity).
+This file imports the new modules `R2.YeComp`, `R2.YeGap`, `R2.YeJump`, `R2.YkBlk`, `R2.YkJump`: it can be
+checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -190,14 +201,13 @@ NEW leaf (round 126).  p = υ_κ a restart, a gap point υ_l with l a restart in
 (statement Ye.YeGapRng S; at a non-restart p there is no υ-point in the gap, skNoUpsOff). -/
 theorem skGapRng (hν : Nc.ncL S (ω + 1) ≤ nuC) : Ye.YeGapRng S := by sorry
 
-/-- STATUS: OPEN
-SIZE: L
-REFUTE: NO EVIDENCE (round 126: follows from the target, skGapTarget3; the reach of a block υ-point is the block
-top υ_{μ+ω(j+1)+1}, skUpsBlock; no no-go result speaks of blocks in (L(ω), L(ω+1)))
-NEW leaf (round 126).  p = υ_κ a restart, a gap υ-point a in the block (υ_{botI μ j}, υ_{μ+ω(j+1)+1}]
-⇒  υ_{μ+ω(j+1)+1} < B_n p  (statement Ye.YeGapBlk S; at a non-restart p there is no υ-point in the gap,
-skNoUpsOff). -/
-theorem skGapBlk (hν : Nc.ncL S (ω + 1) ≤ nuC) : Ye.YeGapBlk S := by sorry
+/-- STATUS: PROVED (round 127, Yk.ykGapBlk; was OPEN)
+SIZE: S
+REFUTE: none needed (proved with no hypothesis).
+p = υ_κ a restart, a gap υ-point a in the block (υ_{botI μ j}, υ_{μ+ω(j+1)+1}]  ⇒  υ_{μ+ω(j+1)+1} < B_n p
+(statement Ye.YeGapBlk S; B_n p = υ_{κ'} with κ' a restart index, Sf.sfRstMove; υ_μ < a < υ_{κ'} gives μ < κ', and
+restart indices are ω·ω apart, Ye.ye_rst_gap; checkable after the merge of R2.YkBlk). -/
+theorem skGapBlk (_hν : Nc.ncL S (ω + 1) ≤ nuC) : Ye.YeGapBlk S := Yk.ykGapBlk
 
 /-- STATUS: REDUCED (round 126; was OPEN)
 SIZE: S
@@ -205,10 +215,11 @@ REFUTE: SURVIVED (round 125: equivalent to skKCofGap and to XgKCof, skGapLh_iff;
 skGapLhTarget; at the first jump p = c_n·2 the gap has no closed point of λ' but p is no far index, skFirstJump)
 window λ → λ', cofinal far index p (δ_λ·ω ≤ p ≤ Θ_λ(m_λ), k_λ(q) < p for q < p) with p indecomposable and the
 k-move below p, a in the jump gap (B_n q ≤ a < B_n p for all q < p)  ⇒  lh(a) < B_n p  (statement Xw.XwGapLh S).
-Children skGapEps, skGapRng, skGapBlk (Ye.yeGapLh_of: non-υ gap points that are no ε-number, or have a υ-point in
-(a, B_n p], have lh(a) < B_n p by the R₁⁺-reach, Ye.yeLh_easy; checkable after the merge of R2.YeGap). -/
+Children skGapEps, skGapRng (skGapBlk PROVED, round 127; Yk.ykGapLh_of = Ye.yeGapLh_of with Yk.ykGapBlk: non-υ
+gap points that are no ε-number, or have a υ-point in (a, B_n p], have lh(a) < B_n p by the R₁⁺-reach,
+Ye.yeLh_easy; checkable after the merge of R2.YeGap, R2.YkBlk). -/
 theorem skGapLh (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xw.XwGapLh S :=
-  Ye.yeGapLh_of hν (skGapEps hν) (skGapRng hν) (skGapBlk hν)
+  Yk.ykGapLh_of hν (skGapEps hν) (skGapRng hν)
 
 /-- STATUS: REDUCED (round 125; was OPEN)
 SIZE: S
@@ -239,7 +250,16 @@ REFUTE: NO EVIDENCE (round 125: follows from the target, skJumpTarget; XrJump fo
 vacuous at s = c_n·2, skFirstJump; not derivable from skJumpOff alone: EQ at the range point s = ρ_μ fails exactly
 when B_n R = R' ≠ r(μ'), and the reach class (R, r(μ')) only yields a new range instance above s)
 NEW leaf (round 125).  No instance of Xr.XrJump has a range restart ρ_μ as its jump point s
-(statement Xw.XwJumpNoRng S). -/
+(statement Xw.XwJumpNoRng S).
+Round 127: still OPEN.  Equivalent (Yk.ykNoRng_iff_gap, skJumpGapIff) to Yk.YkJumpGap: at every instance the range
+restart κ with υ_κ = s* = sup_{q<s} B_n q (no B_n-image, r(κ) = R', skJumpGapBot) has r(κ) = B_n R ≥ B_n s, i.e. the
+gap-bottom restart reaches past the gap (skJumpGapShort).  REFUTE FIRST (round 127): the first range restart where
+B_n jumps lies at index ≥ c_n·2 (the first jump of B_n, skFirstJump), and a chain cofinal below it needs range
+restarts of one reach R ≥ s cofinal below s, each ≤₁ s (skChainLe1); no Lean value of a reach above c_n is known
+(the windows have no base condition, Yf.yfNoBase_win), so the chain below the first jump can be neither computed
+nor excluded: NO EVIDENCE either way.  Not a consequence of the part's other leaves: at an instance, EQ at the jump
+point μ (xnEQ_short / xnEQ_step, its top above s) and EQ at a chain point would together close it, but EQ fails at
+every chain point of an instance (B_n R ≠ R' there, by the equivalence with Xr.XrJump). -/
 theorem skJumpNoRng (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xw.XwJumpNoRng S := by sorry
 
 /-- STATUS: REDUCED (round 125; was OPEN)
@@ -785,5 +805,46 @@ A υ-point in the jump gap forces p to be a restart. -/
 theorem skGapUpsRst (hν : Nc.ncL S (ω + 1) ≤ nuC) {n : ℕ} {l l' p a : Ordinal.{0}}
     (hP : Ye.YeGapPt S n l l' p a) (hU : UpsPt a) : ∃ κ, IsRestartIdx κ ∧ p = upsilon κ :=
   Ye.yeGapUps_rst hν hP hU
+
+/-- STATUS: PROVED (Yk.ykChain_le1; NEW round 127)
+SIZE: S
+At an instance: every chain point y < s has y ≤₁ s. -/
+theorem skChainLe1 (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) {n : ℕ}
+    {R R' s y : Ordinal.{0}} (hRc : R < Bc.bcC S (n + 1)) (hsR : IsReach R2C s R)
+    (hy : Xr.XrPt S n R R' y) (hys : y < s) : le1 y s :=
+  Yk.ykChain_le1 hν hU hL hRc hsR hy hys
+
+/-- STATUS: PROVED (Yk.ykGapBot; NEW round 127)
+SIZE: S
+At an instance: s* = sup_{q<s} B_n q = υ_κ, κ a range restart, r(κ) = R', L(ω) < υ_κ < B_n s, B_n q < υ_κ for
+q < s, and υ_κ is no B_n-image. -/
+theorem skJumpGapBot (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) {n : ℕ}
+    {R R' s : Ordinal.{0}} (hRc : R < Bc.bcC S (n + 1)) (h1s : Bc.bcC S n < s)
+    (hcof : ∀ x < s, ∃ y, x < y ∧ y < s ∧ Xr.XrPt S n R R' y) (hsR : IsReach R2C s R)
+    (hjump : ∃ Q < Bc.bcB S n s, ∀ q < s, Bc.bcB S n q ≤ Q) :
+    ∃ κ, CdRange S κ ∧ sSup (Bc.bcB S n '' Iio s) = upsilon κ ∧ cdR S κ = R' ∧
+      Nc.ncL S ω < upsilon κ ∧ upsilon κ < Bc.bcB S n s ∧ (∀ q < s, Bc.bcB S n q < upsilon κ) ∧
+      ∀ y < Bc.bcC S (n + 1), Bc.bcB S n y ≠ upsilon κ :=
+  Yk.ykGapBot hν hU hL hRc h1s hcof hsR hjump
+
+/-- STATUS: PROVED (Yk.ykNoRng_iff_gap; NEW round 127)
+SIZE: S
+skJumpNoRng ⇔ Yk.YkJumpGap (r(κ) = B_n R at the gap-bottom restart of every instance). -/
+theorem skJumpGapIff : Xw.XwJumpNoRng S ↔ Yk.YkJumpGap S := Yk.ykNoRng_iff_gap
+
+/-- STATUS: PROVED (Yk.ykGap_short_ne; NEW round 127)
+SIZE: S
+At an instance with lh(s*) = R' < B_n s: B_n R ≠ R'. -/
+theorem skJumpGapShort (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) {n : ℕ}
+    {R R' s : Ordinal.{0}} (hRc : R < Bc.bcC S (n + 1)) (h1s : Bc.bcC S n < s)
+    (hcof : ∀ x < s, ∃ y, x < y ∧ y < s ∧ Xr.XrPt S n R R' y) (hsR : IsReach R2C s R)
+    (hjump : ∃ Q < Bc.bcB S n s, ∀ q < s, Bc.bcB S n q ≤ Q) (hshort : R' < Bc.bcB S n s) :
+    Bc.bcB S n R ≠ R' :=
+  Yk.ykGap_short_ne hν hU hL hRc h1s hcof hsR hjump hshort
+
+/-- STATUS: PROVED (Yk.ykJumpGap_of_EQtop; NEW round 127)
+SIZE: S
+NON-VACUITY: the target CxEQtop gives Yk.YkJumpGap. -/
+theorem skJumpGapTarget (h : Cx.CxEQtop S) : Yk.YkJumpGap S := Yk.ykJumpGap_of_EQtop h
 
 end R2Skel.SkE

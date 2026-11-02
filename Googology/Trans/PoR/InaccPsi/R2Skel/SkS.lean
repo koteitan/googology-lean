@@ -32,6 +32,10 @@ import Googology.Trans.PoR.InaccPsi.R2.XoRef
 import Googology.Trans.PoR.InaccPsi.R2.YbCov
 import Googology.Trans.PoR.InaccPsi.R2.YbLev
 import Googology.Trans.PoR.InaccPsi.R2.YbSup
+import Googology.Trans.PoR.InaccPsi.R2.YgIF
+import Googology.Trans.PoR.InaccPsi.R2.YgK
+import Googology.Trans.PoR.InaccPsi.R2.YgUc
+import Googology.Trans.PoR.InaccPsi.R2.YgWw
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -247,6 +251,29 @@ Round 126 (leaf "the supply carry and the bridge of Xo.xoRoadH", sup48).  Top no
 NEW nodes: `skYbIF` (OPEN), `skYbIFWit` (PROVED), `skLevOfIF` (PROVED), `skCoverLev` (PROVED), `skCoverXo` (REDUCED),
 `skCoverWit` (PROVED), `skSupNonSilent` (REDUCED).  This file imports the new `Yb` modules, so it can be checked only
 after the merge.
+
+Round 127 (leaf "YbIF, the bridge skRealBXo and the carry skSupKXo of Xo.xoRoadH: is the root non-vacuous?", sup49).
+Top node `skSupXo` and its statement kept; `Root.skNuC` unchanged (it applies `Xo.xoRoadH`).
+* REFUTE FIRST, `YbIF`: NO EVIDENCE.  The naive route (copy a `Vd.VdK`-derivation, drop the inaccessibles) is
+  REFUTED: `Y = ψ_{Ω₃}(I₀)` is in `Vd.VdK S 0 q` at every `q` but in no `Yb.YbK S q`, `q ≤ Ω₁` (`Yg.ygY_notK`,
+  `Yg.ygVdK_notYb`; NEW node `skYbNaiveRef`).  But below `Ω₂` the inaccessible washes out on the test level
+  `M₀ = ψ_{Ω₂}(ψ_{Ω₃}(I₀)) ∈ [B₂, θ)`: `M₀ = ψ_{Ω₂}(Ω₃)` (`Yg.ygTwin`, `Yg.ygTwin_lev`; NEW node `skYbTwin`).  `YbIF`
+  holds at every level with datum `< Γ₀` (`Yg.ygIF_low`) and at `B₂ + c`, `c < q` (`Yg.ygIF_B_add`).
+* `YbIF` BELOW `B₂` PROVED (`Yg.ygIF_lowB`, NEW node `skYbIFLowB`): `UcCl q ⊆ YgK S q ⊆ YbK S q` (`Yg.ygUcK`, the
+  inacc-free closure without fixed atoms `Yg.YgK`; the inversion `Uo.uoArg` is replaced by carrying the own argument
+  of every atom along the induction, `Yg.YgOwnK`).  `skYbIF` is REDUCED to the NEW leaf `skYbIFTh` (`Yg.YgIFTh`:
+  the levels `B₂ ≤ M < θ`), by `Yg.ygIF_of_th`.
+* REFUTE FIRST, the carry at the gap witness `wwX = ϑ^{u₁}(Ω₁·B₂ + λ)`: NO EVIDENCE.  `E_W = sg h_W + th 1 (lc B₂)
+  (lo λ)` is a well-formed restricted form of `r(λ+wwX)` (`Yg.ygWw_WF`, `Yg.ygWw_R`), its image is `υ_{μ+f(h_W)} +
+  W_μ` (`Yg.ygWw_img`), and under the reach formula at `μ` the carry asks exactly `W_μ ≤ f(wwX)` (`Yg.ygWw_obl`), the
+  same shape as at `X′` (`Xo.xoXj_obl`); NEW nodes `skXoCarryWw`, `skXoOblWw`.
+* REFUTE FIRST, the carry at a supply point with a large code (the Range restarts `μ` with code `G_{k+1}+1` of
+  `Wk.wkRead0`): NO EVIDENCE; Lean has no value of `r(μ + f g)` there (only `υ_{μ+B} ≤ r(μ)`, `Wu.wuSup`).
+* `skSupKXo`, `skRealBXo` stay OPEN.  NON-VACUITY of `Xo.xoRoadH`: not shown, not refuted; the exact gap is the
+  open leaves on the road (18, all L).
+NEW nodes: `skYbIFTh` (OPEN, off the road), `skYbIFLowB`, `skYbIFLow`, `skYbIFBAdd`, `skYbTwin`, `skXoCarryWw`,
+`skXoOblWw` (PROVED), `skYbNaiveRef` (PROVED NEGATION); `skYbIF` OPEN → REDUCED.  This file imports the new `Yg`
+modules, so it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -1306,7 +1333,18 @@ theorem skXoOffWit {X Y : Ordinal.{0}} (hX : InE X) (hY : InE Y) (hX1 : 1 < X) (
 
 /-! ## Round 126: the covering lemma for the repaired `Xo.XoR` (`Yb`) -/
 
-/-- STATUS: OPEN (NEW round 126; OFF THE ROAD: a tool for `skRealBXo` through `skCoverXo`, not a hypothesis of
+/-- STATUS: OPEN (NEW round 127; OFF THE ROAD: the part of `skYbIF` left)
+SIZE: L
+`Yg.YgIFTh`: every level `B₂ ≤ M < θ` with `d_S(M) < q` (`q` strongly critical, `q ≤ Ω₁`) is in `Yb.YbK S q`.
+REFUTE FIRST (round 127): NO EVIDENCE.  The naive route is refuted (`skYbNaiveRef`); at the test level
+`ψ_{Ω₂}(ψ_{Ω₃}(I₀))` the inaccessible washes out (`skYbTwin`); levels with datum `< Γ₀` hold (`skYbIFLow`).
+Expected route: the port of `Yg.ygUcK` to `[B₂, θ)` with the normal form `Hˡ_λ(y) = ψ_{Ω₂}(B + Ω₂^λ·D)`
+(`Vd.vd_nf_ex`): the own argument `B + Ω₂^λ·D < Ω_ω`, the level `λ < Ω₃` at the threshold `Ω₂` (`Vd.VdK S 1`),
+and the lemma that every collapse inside an own argument below `Ω_ω` has an argument below `Ω_ω` (no `I_n`, unlike
+`Y`); `Uf.ufRun` / `Uf.ufRun_eq` at `θ` are not in the repo. -/
+theorem skYbIFTh (S : InaccSeq.{0}) : Yg.YgIFTh S := by sorry
+
+/-- STATUS: REDUCED (round 127: from `skYbIFTh` by `Yg.ygIF_of_th`; below `B₂` PROVED, node `skYbIFLowB`) (NEW round 126; OFF THE ROAD: a tool for `skRealBXo` through `skCoverXo`, not a hypothesis of
 `Xo.xoRoadH`)
 SIZE: L
 the notation statement `Yb.YbIF`: every level `Ω₁ ≤ M < θ` lies in the inacc-free closure `Yb.YbK S q` (small
@@ -1316,7 +1354,7 @@ REFUTE FIRST: NO EVIDENCE.  Holds at `Ω₁` and `B₂` (node `skYbIFWit`).  Exp
 `Uc.UcCl` (whose constructors use only `Ω₁`, `+`, `φ`, `ψ_{Ω₂}`-atoms `Uc.ucH`) ported from `Uo.uo_ucK` with `YbK` in
 place of `Ul.UlK`; on `[B₂, θ)` the normal form `Hˡ_λ(y)` (`Vd.vd_nf_ex`) with `ψ_{Ω_k}` only.  A level that needs an
 inaccessible in every spelling would have no restricted term at all (`lc (I n)` is not restricted, `I_n ≥ θ`). -/
-theorem skYbIF (S : InaccSeq.{0}) : Yb.YbIF S := by sorry
+theorem skYbIF (S : InaccSeq.{0}) : Yb.YbIF S := Yg.ygIF_of_th (skYbIFTh S)
 
 /-- STATUS: PROVED (by `Yb.ybIF_wit`; NEW round 126)
 SIZE: S
@@ -1370,5 +1408,66 @@ theorem skSupNonSilent {l β : Ordinal.{0}} (hl0 : 0 < l) (hb1 : upsilon (l + β
           ∃ E : Xo.XoE, Xo.XoWF S l β E ∧ Xo.xoVal S l E = cdR S (l + g) ∧ Xo.XoR S l μ E ∧
             Xo.xoImg S l μ f E ≤ cdR S (μ + f g) :=
   Yb.ybSup_bound_IF hl0 hb1 hl1 (skYbIF S) hS
+
+/-! ## Round 127: `YbIF` below `B₂`, the naive route refuted, the carry at `wwX` (`Yg`) -/
+
+/-- STATUS: PROVED (by `Yg.ygIF_lowB`; NEW round 127)
+SIZE: L
+`YbIF` below `B₂`: `Ω₁ ≤ M < B₂`, `ucDat M < q` (`q` strongly critical, `q ≤ Ω₁`) ⇒ `M ∈ YbK S q` -/
+theorem skYbIFLowB {M q : Ordinal.{0}} (hq : SC q) (hq1 : q ≤ Om1) (hMB : M < Uc.ucB) (hd : Uc.ucDat M < q) :
+    Yb.YbK S q M :=
+  Yg.ygIF_lowB hq hq1 hMB hd
+
+/-- STATUS: PROVED (by `Yg.ygIF_low`; NEW round 127)
+SIZE: S
+`YbIF` at every level `M < θ` whose datum is below `Γ₀` -/
+theorem skYbIFLow {M : Ordinal.{0}} (q : Ordinal.{0}) (hMθ : M < ConjT.th S)
+    (h1 : M < Uc.ucB → Uc.ucDat M < gamma 0) (h2 : Uc.ucB ≤ M → Vd.vdD S 0 M < gamma 0) : Yb.YbK S q M :=
+  Yg.ygIF_low q hMθ h1 h2
+
+/-- STATUS: PROVED (by `Yg.ygIF_B_add`; NEW round 127; REFUTE-FIRST test just above `B₂`)
+SIZE: S
+`B₂ + c ∈ YbK S q` for `c < q` -/
+theorem skYbIFBAdd {q c : Ordinal.{0}} (hq : SC q) (hc : c < q) : Yb.YbK S q (Uc.ucB + c) :=
+  Yg.ygIF_B_add hq hc
+
+/-- STATUS: PROVED NEGATION (by `Yg.ygVdK_notYb`, `Yg.ygY_notK`, `Yg.ygY_VdK`; NEW round 127): the naive route to
+`skYbIF` (every `Vd.VdK`-derivation is inacc-free) is REFUTED: `ψ_{Ω₃}(I₀) ∈ Vd.VdK S 0 q \ Yb.YbK S q`
+SIZE: M -/
+theorem skYbNaiveRef {q : Ordinal.{0}} (hq : q ≤ Om1) :
+    Vd.VdK S 0 q (Yg.ygY S) ∧ ¬ Yb.YbK S q (Yg.ygY S) ∧ ¬ ∀ x, Vd.VdK S 0 q x → Yb.YbK S q x :=
+  ⟨Yg.ygY_VdK q, Yg.ygY_notK hq, Yg.ygVdK_notYb hq⟩
+
+/-- STATUS: PROVED (by `Yg.ygTwin_lev`; NEW round 127; REFUTE-FIRST test of `skYbIFTh`)
+SIZE: M
+the level `M₀ = ψ_{Ω₂}(ψ_{Ω₃}(I₀))` lies in `[B₂, θ)`, has a spelling with `I₀` at every threshold, and is in
+`YbK S q` (it equals `ψ_{Ω₂}(Ω₃)`) -/
+theorem skYbTwin {q : Ordinal.{0}} (hq : SC q) :
+    Uc.ucB ≤ S.psi (Yg.ygY S) (Om (1 + 1)) ∧ S.psi (Yg.ygY S) (Om (1 + 1)) < ConjT.th S ∧
+      Vd.VdK S 0 q (S.psi (Yg.ygY S) (Om (1 + 1))) ∧ Yb.YbK S q (S.psi (Yg.ygY S) (Om (1 + 1))) :=
+  Yg.ygTwin_lev hq
+
+/-- STATUS: PROVED (by `Yg.ygCarry_ww`; NEW round 127; REFUTE-FIRST test of the carry at the gap witness)
+SIZE: M
+the carry at `wwX` asks `υ_{μ+f(h_W)} + W_μ ≤ r(μ+f(wwX))` -/
+theorem skXoCarryWw (k : ℕ) (hν : Nc.ncL S ((k + 1 : ℕ) : Ordinal.{0}) ≤ nuC) {β μ B : Ordinal.{0}}
+    {f : Ordinal.{0} → Ordinal.{0}} {Os : Finset Ordinal.{0}}
+    (hC : Xo.XoCarry S (Nc.ncL S (k : Ordinal.{0})) β μ f B Os) (hX : Ww.wwX S k ∈ Os)
+    (h1 : Ww.wwX S k + ω + 1 ∈ Os) (hone : (1 : Ordinal.{0}) ∈ Os)
+    (hβ : Ww.wwX S k + ω + 1 < β) (hb1 : upsilon (Nc.ncL S (k : Ordinal.{0}) + β) ≤ Om1)
+    (hμ0 : 0 < μ) (hμl : upsilon μ < upsilon (Nc.ncL S (k : Ordinal.{0})))
+    (hτ'O : upsilon (μ + f (Ww.wwX S k + ω + 1)) < Om1) :
+    upsilon (μ + f (Ww.wwX S k + ω + 1)) + Yg.ygWwMu μ f ≤ cdR S (μ + f (Ww.wwX S k)) :=
+  Yg.ygCarry_ww k hν hC hX h1 hone hβ hb1 hμ0 hμl hτ'O
+
+/-- STATUS: PROVED (by `Yg.ygWw_obl`; NEW round 127)
+SIZE: S
+under the reach formula at `μ`, the carry at `wwX` ⇔ `W_μ ≤ f(wwX)` -/
+theorem skXoOblWw (k : ℕ) {μ B : Ordinal.{0}} {f : Ordinal.{0} → Ordinal.{0}} {Os : Finset Ordinal.{0}}
+    (hO : Sl.SlOff f Os B)
+    (hr : cdR S (μ + f (Ww.wwX S k)) = upsilon (μ + (f (Ww.wwX S k) + ω + 1)) + f (Ww.wwX S k)) :
+    upsilon (μ + f (Ww.wwX S k + ω + 1)) + Yg.ygWwMu μ f ≤ cdR S (μ + f (Ww.wwX S k)) ↔
+      Yg.ygWwMu μ f ≤ f (Ww.wwX S k) :=
+  Yg.ygWw_obl k hO hr
 
 end R2Skel.SkS
