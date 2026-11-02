@@ -202,3 +202,12 @@ measures, and all four morphisms — depends on no axiom at all.
 |---|---|
 | **On countable standard terms whose subscripts are `0` or `1`, the structural map `trioE` gives standard forms and preserves and reflects the order** | `Trans.BMS.TrioTreeStd.trioE_std`, `Trans.BMS.TrioTree.trioE_lt_iff`, `Trans.BMS.TrioTree.trioE_injective` |
 | At depth at most 200, rules 1–10 agree with `trioE`, give standard forms and preserve the order | `Trans.BMS.TrioTreeRules.trioMatrixL_eq_trioE`, `Trans.BMS.TrioTreeRules.trioMatrixL_std`, `Trans.BMS.TrioTreeRules.trioMatrixL_lt_iff` |
+
+## SSOSS below (0,0,2)
+
+| | |
+|---|---|
+| SSOSS (rev 76153) as a system on lists of naturals; six expansions of the source's handover checked by `#guard` | `Notation.SSOSS.Seq.fs`, `Notation.SSOSS.ssossSys` |
+| its standard forms are the least set holding `(0,0,1,…,1)` and closed under expansion; their entries are `0` and `1` | `Notation.SSOSS.ssossStd`, `Notation.SSOSS.standard_iff_reach`, `Notation.SSOSS.standard_binary` |
+| **on the standard forms below `(0,0,2)`, the value `o` decreases on expansion, is cofinal, and equals the rank**, so expansion is well founded there | `Notation.SSOSS.ssoss_decreasing`, `Notation.SSOSS.ssoss_cofinal`, `Notation.SSOSS.ssoss_rank`, `Notation.SSOSS.ssossStd_wf` |
+| the expansions of `(0,0,2)` have values with supremum `ε₀` | `Notation.SSOSS.o_fs_top_sup` |

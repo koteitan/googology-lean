@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+"""trans: convert a term of one notation into another.
+
+    trans --from SYS --to SYS TERM...
+    trans --from SYS --to SYS < terms.txt      one term per line
+    trans --list                               the systems
+    `bms` / `dbms` without N read N from the term (the longest column; shorter
+    columns are filled with zeros at the bottom).
+    trans --maps                               the maps
+
+The ASCII notations are fixed in notations.md. The maps are ports of the
+translations of the Lean library (Googology/Trans/); a conversion follows a
+path of maps, tried from the shortest, and the first path whose maps all
+accept the input gives the result. `--path` prints that path on stderr.
+"""
+
+import argparse
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+import maps  # noqa: E402
+import notation  # noqa: E402
+from maps import DomainError  # noqa: E402
+from notation import ParseError  # noqa: E402
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(prog='trans', description=__doc__.split('\n')[0])
+    ap.add_argument('--from', dest='src', help='system of the input')
+    ap.add_argument('--to', dest='dst', help='system of the output (default: --from)')
+    ap.add_argument('--lean', action='store_true', help='print the Lean value')
+    ap.add_argument('--path', action='store_true', help='print the path of maps on stderr')
+    ap.add_argument('--wide', action='store_true',
+                    help='also use the maps calibrated by #guard only, not proved')
+    ap.add_argument('--list', action='store_true', help='list the systems')
+    ap.add_argument('--maps', action='store_true', help='list the maps')
+    ap.add_argument('terms', nargs='*', help='terms; read from stdin when none')
+    a = ap.parse_args(argv)
+
+    if a.list:
+        for name, title, io in notation.listing():
+            print('%-8s %-8s %s' % (name, io, title))
+        return 0
+    if a.maps:
+        for e in maps.edges(3, wide=True):
+            print('%-7s -> %-8s %-18s %s%s' % (e.src, e.dst, e.name, e.lean,
+                                               '  (--wide)' if e.wide else ''))
+        print('(bmsN -> bms(N+1) and dbmsN -> dbms(N+1) by zeroRow for every N)')
+        return 0
+    if not a.src:
+        ap.error('--from is required')
+    try:
+        src = notation.get(a.src)
+        dst = notation.get(a.dst or a.src)
+    except KeyError as e:
+        ap.error(e.args[0])
+    if src.parse is None:
+        ap.error('%s is output only' % src.name)
+    show = dst.lean if a.lean else dst.show
+    if show is None:
+        ap.error('%s cannot be printed%s' % (dst.name, ' as Lean' if a.lean else ''))
+
+    terms = a.terms or [ln.strip() for ln in sys.stdin if ln.strip()]
+    status = 0
+    for text in terms:
+        try:
+            term = src.parse(text)
+            src_name = notation.concrete(src.name, term)
+            errors = []
+            for dst_name in notation.targets(dst.name, src_name):
+                try:
+                    value, path = maps.convert(src_name, dst_name, term, wide=a.wide)
+                    break
+                except DomainError as e:
+                    errors.append('to %s: %s' % (dst_name, e))
+            else:
+                raise DomainError('\n  '.join(errors) if len(errors) > 1 else
+                                  errors[0].split(': ', 1)[1])
+            if a.path:
+                print('%s: %s' % (text, ' -> '.join(
+                    [src_name] + ['[%s] %s' % (e.name, e.dst) for e in path])),
+                    file=sys.stderr)
+            print(show(value))
+        except (ParseError, DomainError) as e:
+            print('error: %s: %s' % (text, e), file=sys.stderr)
+            status = 1
+    return status
+
+
+if __name__ == '__main__':
+    sys.exit(main())
