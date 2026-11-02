@@ -6,7 +6,7 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
       - done (only S assumed): region A closed (A3 up to Γ(1), WnEnt3 S n for every n); layer frontier over Γ(k) for repaired systems, k+1 < ε₀. 111 axioms.
       - also: IMG below Γ_{ρ+3}; base-0 top atoms move for every exponent; UPPER, LOWER, cap carried along a cell; YbIF ⇒ XoR covering lemma.
       - road xoRoadH (hyp.: UPPER, LOWER, cap past the frontier; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; XoRealB; XoSup): ν_C = L(ω+1).
