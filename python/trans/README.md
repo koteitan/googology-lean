@@ -11,6 +11,7 @@ python/trans/trans --from exb --to trio e0                   # (0,0,0)(1,1,0)
 python/trans/trans --from prim --to dbms2 --path "0,1,2"     # path on stderr
 python/trans/trans --from exb --to trio --wide "p0(W_W)"     # the rule program
 python/trans/trans --from ssoss --to exb "(0,0,1,1)"         # p0(w)
+python/trans/trans --candidate --from ssoss --to exb "(0,0,2,1,0,2,1)"   # z0: a candidate, NOT proved
 python/trans/trans --from bms --to exb "(0)(1,1)"            # e0: N = 2 from the longest column
 python/trans/trans --list                                    # the systems
 python/trans/trans --maps                                    # the maps
@@ -34,6 +35,14 @@ With `--wide`, two more maps are used: the rule program of the trio sheet,
 which Lean checks by `#guard` but does not prove. Among paths of the same
 length, a proved one is still tried first, so `trioE2` keeps its domain.
 
+With `--candidate`, one more map is used: `o?`, a candidate value of SSOSS
+above `(0,0,2)`. It is a conjecture: it is **not proved**, in Lean or
+elsewhere, and it is not in Lean. Without `--candidate` it is never used.
+Among paths of the same length, a path without it is tried first, so below
+`(0,0,2)` the proved `o` still gives the value. When a value comes through
+`o?`, `trans` writes a note on stderr (`note: ...: a candidate value, not
+proved`).
+
 | map | from → to | Lean | accepted inputs |
 |---|---|---|---|
 | `zeroRow` (`toPairS` for one row) | `bmsN` → `bms(N+1)`, `dbmsN` → `dbms(N+1)` | `Googology/Trans/BMS/BMS/ZeroRow.lean:38`, `Googology/Trans/DBMS/DBMS/ZeroRow.lean:168` | any matrix |
@@ -45,6 +54,7 @@ length, a proved one is still tried first, so `trioE2` keeps its domain.
 | `trioMatrixLSt` (`--wide`) | `exb` → `bms3` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:422` | `p0(W_a)` with `a` OT, `a ≠ 0` |
 | `trioRuleMatrixSt` (`--wide`) | `ord` → `bms3` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:410` | a nonzero sheet label `a`, read as `p0(W_a)` |
 | `o` | `ssoss` → `exb` | `Googology/Notation/SSOSS/SequenceOrdinal.lean:17` | see below |
+| `o?` (`--candidate`, **not proved**) | `ssoss` → `exb` | none; a port of [ssosn](https://github.com/koteitan/ssosn) `work/token_value.py` | see below |
 | `phi.py` | `bms2` → `por1` | `Googology/Trans/BMS/PoR/PSS/por/phi.py` | as the program |
 | `tr.py` (= `trNode`) | `bms2` → `wilken1` | `Googology/Trans/BMS/PoR/PSS/por/tr.py` | as the program |
 | `phi3def2.py` | `bms3` → `por2` | `Googology/Trans/BMS/PoR/Trio/por/phi3def2.py` | as the program |
@@ -66,6 +76,46 @@ subprocess.
 as a Cantor normal form, written as an `exb` term with every subscript 0.
 Lean proves that `o` equals the rank of one step on the standard forms
 (`ssoss_rank`).
+
+### `o?`: the candidate value of SSOSS above (0,0,2) (not proved)
+
+`o?` gives a value to the standard SSOSS sequences `s` with
+`(0,0,2) ≤ s < P2 = (0,0,2,1,0,2,1,1)` (lexicographic order; the next standard
+form after this range is `(0,0,2,1,1)`). Its values reach ε₀ at `(0,0,2)`,
+ζ₀ at `P1 = (0,0,2,1,0,2,1)` and η₀ at `P1⌢(0,2,1)`, and climb below P2
+towards an expected φ(ω, 0). **None of these values is proved.**
+
+- It is a port of the conjectural evaluator of
+  [ssosn](https://github.com/koteitan/ssosn): `work/token_value.py`,
+  `value(s)`, with the flags `P1_ROOT_EXPERIMENT`, `P1_V_BITS_EXPERIMENT`,
+  `P2_V7_EXPERIMENT` on, and the modules it uses (notes `2026-10-17.md`,
+  sections 43–44). Only the code reachable with those flags is ported. Where
+  the source has no value (`Unknown`), `o?` refuses the input.
+- What supports it, in the source: bounded audits of the standard forms
+  (`o(S⌢0) = o(S)+1`, and the terms `S[n]` of a limit `S` below `o(S)`, with
+  sample suprema), with no failure up to raw length 18. That is evidence, not
+  a proof. The source also has a Lean port of the definition
+  (`lean/SSOS/ValueDef.lean`, `ValueDefP2.lean`) with no theorems about it.
+- The port gives the same values as the source on all 64,500 standard forms
+  of `[(0,0,2), P2)` up to length 18 (found by extending standard prefixes), and on 40,000 random sequences (values
+  and refusals alike). `tests/test_ssoss_candidate.py` keeps 415 of them.
+- Standardness is checked by the greedy descent of the source (`work/std.py`,
+  from `(0,0,3)`), which is correct only under two properties the source
+  checks by enumeration and does not prove ("no gaps", and that the
+  lexicographic order of standard forms is the order of their values). The
+  port agrees with the source on all 37,546 sequences of `[(0,0,2), P2)` with
+  entries 0–2 up to length 13.
+- The value is computed in Veblen normal form and written as an `exb` term by
+  the usual correspondence of Buchholz's ψ below ψ₀(Ω^ω): ω^b = ψ₀(b) for
+  b < ε₀, φ(n, c) = ψ₀(Ω^n·(1+c)) when no φ(m, ·) with m > n lies at or
+  below c, and so on (`maps/veblen.py`, `to_exb`). This correspondence is not
+  proved in Lean either (Lean proves the shorthands ε_N and ζ₀; see
+  [notations.md](notations.md)). It is checked by computation: all 64,500
+  values above map to standard terms (`isOT`) in the same order (`Term.cmp`),
+  and so do 6,000 random Veblen forms below φ(ω, 0) (60,000 random pairs).
+- Below `(0,0,2)`, the source evaluator agrees with the proved `o` on the
+  standard forms of the tests, but `o?` refuses these sequences: the proved
+  `o` gives their value.
 
 ### What is not checked
 
@@ -114,6 +164,8 @@ patches on `TrioRulesAll` and are not ported.
 | `maps/trio.py` | `trioE2`, `trioE`, `omegaIndexMatrix` |
 | `maps/trio_rules.py` | `trioMatrixLSt`, `trioRuleMatrixSt`, `ofTermFix` (the rule program) |
 | `maps/ssoss.py` | `Seq.fs`, `parse`, `flat`, `encode` and the value `o` of SSOSS |
+| `maps/ssoss_candidate.py` | the candidate value `o?` of SSOSS in `[(0,0,2), P2)` (not proved), ported from [ssosn](https://github.com/koteitan/ssosn) |
+| `maps/veblen.py` | ordinals in Veblen normal form, and `to_exb` into `exb` terms |
 | `maps/por.py` | the four PoR programs |
 | `maps/__init__.py` | the graph of maps and the path search |
 | `tests/` | unit tests, and the generators of the Lean checks |

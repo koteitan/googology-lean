@@ -12,6 +12,10 @@ The ASCII notations are fixed in notations.md. The maps are ports of the
 translations of the Lean library (Googology/Trans/); a conversion follows a
 path of maps, tried from the shortest, and the first path whose maps all
 accept the input gives the result. `--path` prints that path on stderr.
+
+`--candidate` also uses the maps that are conjectures, not proved (o?: the
+candidate value of ssoss from (0,0,2) up to below (0,0,2,1,0,2,1,1)). A value
+found through such a map is followed by a note on stderr.
 """
 
 import argparse
@@ -34,6 +38,8 @@ def main(argv=None):
     ap.add_argument('--path', action='store_true', help='print the path of maps on stderr')
     ap.add_argument('--wide', action='store_true',
                     help='also use the maps calibrated by #guard only, not proved')
+    ap.add_argument('--candidate', action='store_true',
+                    help='also use the candidate maps: conjectures, not proved (o?)')
     ap.add_argument('--list', action='store_true', help='list the systems')
     ap.add_argument('--maps', action='store_true', help='list the maps')
     ap.add_argument('terms', nargs='*', help='terms; read from stdin when none')
@@ -44,9 +50,11 @@ def main(argv=None):
             print('%-8s %-8s %s' % (name, io, title))
         return 0
     if a.maps:
-        for e in maps.edges(3, wide=True):
+        for e in maps.edges(3, wide=True, candidate=True):
             print('%-7s -> %-8s %-18s %s%s' % (e.src, e.dst, e.name, e.lean,
-                                               '  (--wide)' if e.wide else ''))
+                                               '  (--wide)' if e.wide else
+                                               '  (--candidate, not proved)' if e.candidate
+                                               else ''))
         print('(bmsN -> bms(N+1) and dbmsN -> dbms(N+1) by zeroRow for every N)')
         return 0
     if not a.src:
@@ -71,7 +79,8 @@ def main(argv=None):
             errors = []
             for dst_name in notation.targets(dst.name, src_name):
                 try:
-                    value, path = maps.convert(src_name, dst_name, term, wide=a.wide)
+                    value, path = maps.convert(src_name, dst_name, term, wide=a.wide,
+                                               candidate=a.candidate)
                     break
                 except DomainError as e:
                     errors.append('to %s: %s' % (dst_name, e))
@@ -83,6 +92,9 @@ def main(argv=None):
                     [src_name] + ['[%s] %s' % (e.name, e.dst) for e in path])),
                     file=sys.stderr)
             print(show(value))
+            if maps.is_candidate(path):
+                print('note: %s: a candidate value, not proved (map %s)' % (text, ', '.join(
+                    e.name for e in path if e.candidate)), file=sys.stderr)
         except (ParseError, DomainError) as e:
             print('error: %s: %s' % (text, e), file=sys.stderr)
             status = 1

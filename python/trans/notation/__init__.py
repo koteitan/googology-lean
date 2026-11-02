@@ -29,7 +29,8 @@ FIXED = {
                     inacc.lean),
     'y': System('y', 'Y sequence', seq.parse, seq.show),
     'omegay': System('omegay', 'w-Y sequence', seq.parse, seq.show),
-    'ssoss': System('ssoss', 'strong second-order searching sequence, below (0,0,2)',
+    'ssoss': System('ssoss', 'strong second-order searching sequence, below (0,0,2) '
+                    '(--candidate: below (0,0,2,1,0,2,1,1), not proved)',
                     ssoss.parse, ssoss.show, ssoss.lean),
     'por1': System('por1', 'pattern of resemblance of order 1 (R1+)', None, str),
     'por2': System('por2', 'pattern of resemblance of order 2', None, str),

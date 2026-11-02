@@ -5,7 +5,8 @@
 Each node is a notation (a system name of `trans`), and each arrow is a map.
 A conversion from A to B follows a path of arrows. Solid arrows are maps that
 Lean proves on the stated domain. Dashed arrows are used only with `--wide`:
-Lean checks them by `#guard` only.
+Lean checks them by `#guard` only. The dashed arrow `o?` is used only with
+`--candidate`: it is a conjecture, **not proved** and not in Lean.
 
 ```mermaid
 flowchart LR
@@ -39,6 +40,7 @@ flowchart LR
   exb -->|unread 0: below e0| bms1
   bms2 -->|pairOrdTerm| exb
   ssoss -->|o: below (0,0,2)| exb
+  ssoss -.->|o?: candidate, not proved| exb
   exb -->|trioE2: p0 W_a, a below W, subscripts 0 or 1| bms3
   exb -.->|trioMatrixLSt: p0 W_a| bms3
   ord -.->|trioRuleMatrixSt: label a| bms3
@@ -61,6 +63,7 @@ The labels of the arrows:
 | `trioMatrixLSt` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:422` | `p0(W_a)`, `--wide` only |
 | `trioRuleMatrixSt` | `Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:410` | a sheet label `a`, read as `p0(W_a)`; `--wide` only |
 | `o` | `Googology/Notation/SSOSS/SequenceOrdinal.lean:17` | strong second-order searching sequences; entries 0 or 1, and (0,0) first when the length is 2 or more |
+| `o?` | none: a port of [ssosn](https://github.com/koteitan/ssosn) `work/token_value.py`, **not proved** | standard sequences `s` with `(0,0,2) ≤ s < (0,0,2,1,0,2,1,1)`; `--candidate` only ([README.md](README.md)) |
 | `phi.py`, `tr.py`, `phi3def2.py`, `tr3.py` | `Googology/Trans/BMS/PoR/` | as the programs |
 
 `bmsN` and `dbmsN` stand for every number of rows: `zeroRow` goes from `N`
@@ -71,8 +74,8 @@ rows to `N+1` rows for every `N`.
 The paths from A to B are tried in this order:
 
 1. the shorter path first;
-2. among paths of the same length, the one with fewer dashed arrows first, then
-   the one through matrices only (`zeroRow`) first.
+2. among paths of the same length, the one without `o?` first, then the one
+   with fewer dashed arrows, then the one through matrices only (`zeroRow`).
 
 The first path whose arrows all accept the input gives the result. An arrow
 that refuses its input makes `trans` try the next path. With `--path`, the

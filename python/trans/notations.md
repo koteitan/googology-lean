@@ -36,7 +36,7 @@ is given, so that a printed term and a Lean `#eval` can be compared.
 | `inacc` | | ψ over ω weakly inaccessibles | `Notation.InaccPsi.Term` | in, out |
 | `y` | | Y sequence | `List Nat` | in, out |
 | `omegay` | | ω-Y sequence | `List Nat` | in, out |
-| `ssoss` | | strong second-order searching sequence (SSOSS), below (0,0,2) | `List Nat` (`Notation.SSOSS.Seq.Sequence`) | in, out |
+| `ssoss` | | strong second-order searching sequence (SSOSS), below (0,0,2); with `--candidate` also up to below (0,0,2,1,0,2,1,1), not proved | `List Nat` (`Notation.SSOSS.Seq.Sequence`) | in, out |
 | `por1` | | pattern of resemblance of order 1 (R₁⁺) | (`phi.py`) | out |
 | `por2` | | pattern of resemblance of order 2 | (`phi3def2.py`) | out |
 | `wilken1` | | Wilken's ϑ terms T¹ | `Trans.BMS.PoR.PSS.TR.WP` | out |

@@ -7,7 +7,7 @@ An edge refuses an input outside its domain by raising DomainError.
 
 import re
 
-from . import bms, por, pss, ssoss, trio, trio_rules
+from . import bms, por, pss, ssoss, ssoss_candidate, trio, trio_rules
 from notation import exb
 from notation.exb_std import is_ot, lt
 from .errors import DomainError
@@ -50,13 +50,14 @@ def bms2_to_exb(m):
 
 
 class Edge:
-    def __init__(self, src, dst, fn, name, lean, wide=False):
+    def __init__(self, src, dst, fn, name, lean, wide=False, candidate=False):
         self.src = src
         self.dst = dst
         self.fn = fn
         self.name = name      # the name of the Lean map (or the program)
         self.lean = lean      # where it is defined
         self.wide = wide      # calibrated by #guard only, not proved; used with --wide
+        self.candidate = candidate   # a conjecture, not in Lean; used with --candidate
 
     def __repr__(self):
         return '%s -> %s (%s)' % (self.src, self.dst, self.name)
@@ -114,10 +115,16 @@ WIDE = [
          'Googology/Trans/ExBuchholz/BMS/Trio/TrioFixStrip.lean:410', wide=True),
 ]
 
+CANDIDATE = [
+    Edge('ssoss', 'exb', ssoss_candidate.ssoss_candidate_to_exb, 'o?',
+         'https://github.com/koteitan/ssosn work/token_value.py (not proved)',
+         candidate=True),
+]
+
 _ROWS = re.compile(r'd?bms([1-9][0-9]*)')
 
 
-def edges(max_rows, wide=False):
+def edges(max_rows, wide=False, candidate=False):
     """Every edge, with the matrix families cut at `max_rows` rows.
 
     The zeroRow edges come first, so that among paths of the same length the
@@ -133,6 +140,8 @@ def edges(max_rows, wide=False):
     out += FIXED
     if wide:
         out += WIDE
+    if candidate:
+        out += CANDIDATE
     return out
 
 
@@ -141,10 +150,10 @@ def _rows(name):
     return int(m.group(1)) if m else 0
 
 
-def paths(src, dst, limit=8, wide=False):
+def paths(src, dst, limit=8, wide=False, candidate=False):
     """The simple paths from src to dst, shortest first; among paths of one
-    length, those without wide edges first."""
-    es = edges(max(3, _rows(src), _rows(dst)), wide)
+    length, those without candidate edges first, then those without wide edges."""
+    es = edges(max(3, _rows(src), _rows(dst)), wide, candidate)
     out = []
     frontier = [(src, [])]
     for _ in range(limit + 1):
@@ -158,15 +167,23 @@ def paths(src, dst, limit=8, wide=False):
                 if e.src == node and e.dst not in seen:
                     nxt.append((e.dst, path + [e]))
         frontier = nxt
-    return sorted(out, key=lambda p: (len(p), sum(e.wide for e in p)))
+    return sorted(out, key=lambda p: (len(p), sum(e.candidate for e in p),
+                                      sum(e.wide for e in p)))
 
 
-def convert(src, dst, term, wide=False):
-    """Convert `term` of system src to system dst. Returns (value, path)."""
-    ps = paths(src, dst, wide=wide)
+def convert(src, dst, term, wide=False, candidate=False):
+    """Convert `term` of system src to system dst. Returns (value, path).
+
+    A path with a candidate edge (an unproved conjecture) is tried only when
+    `candidate` is set; then the caller can tell from the path that the value
+    is a candidate (`is_candidate`).
+    """
+    ps = paths(src, dst, wide=wide, candidate=candidate)
     if not ps:
-        if not wide and paths(src, dst, wide=True):
+        if not wide and paths(src, dst, wide=True, candidate=candidate):
             raise DomainError('no map from %s to %s without --wide' % (src, dst))
+        if not candidate and paths(src, dst, wide=wide, candidate=True):
+            raise DomainError('no map from %s to %s without --candidate' % (src, dst))
         raise DomainError('no map from %s to %s' % (src, dst))
     errors = []
     for path in ps:
@@ -178,7 +195,18 @@ def convert(src, dst, term, wide=False):
             errors.append('%s: %s' % (' -> '.join([src] + [e.dst for e in path]), err))
             continue
         return x, path
+    if not candidate:
+        extra = sorted({e.name for p in paths(src, dst, wide=wide, candidate=True)
+                        for e in p if e.candidate})
+        if extra:
+            errors.append('(--candidate adds the unproved map%s %s)'
+                          % ('s' if len(extra) > 1 else '', ', '.join(extra)))
     raise DomainError('every path failed:\n  ' + '\n  '.join(errors))
 
 
-__all__ = ['DomainError', 'Edge', 'convert', 'edges', 'paths']
+def is_candidate(path):
+    """True if the path uses a candidate edge, so that its value is not proved."""
+    return any(e.candidate for e in path)
+
+
+__all__ = ['DomainError', 'Edge', 'convert', 'edges', 'is_candidate', 'paths']
