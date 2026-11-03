@@ -36,6 +36,11 @@ import Googology.Trans.PoR.InaccPsi.R2.YgIF
 import Googology.Trans.PoR.InaccPsi.R2.YgK
 import Googology.Trans.PoR.InaccPsi.R2.YgUc
 import Googology.Trans.PoR.InaccPsi.R2.YgWw
+import Googology.Trans.PoR.InaccPsi.R2.YqIF
+import Googology.Trans.PoR.InaccPsi.R2.YqCov
+import Googology.Trans.PoR.InaccPsi.R2.YqReal
+import Googology.Trans.PoR.InaccPsi.R2.YqShift
+import Googology.Trans.PoR.InaccPsi.R2.YqRoad
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -251,6 +256,30 @@ Round 126 (leaf "the supply carry and the bridge of Xo.xoRoadH", sup48).  Top no
 NEW nodes: `skYbIF` (OPEN), `skYbIFWit` (PROVED), `skLevOfIF` (PROVED), `skCoverLev` (PROVED), `skCoverXo` (REDUCED),
 `skCoverWit` (PROVED), `skSupNonSilent` (REDUCED).  This file imports the new `Yb` modules, so it can be checked only
 after the merge.
+
+Round 129 (leaf "YbIF above B₂, the bridge skRealBXo and the carry skSupKXo of Xo.xoRoadH", sup51).
+* `YbIF` ON THE NOTATION (`Yq.yqNotK`, no axiom): on the normal form of an ordinal below `θ` every collapse argument
+  is below `Ω_ω` (`Ui.ui_args_th`), so no `I_n` occurs in an uncountable subterm with value below `Ω_ω`
+  (`Yq.yqTermK`), and the countable leaves are below `q` (`Vd.vd_dat_ui`).  So `YgIFTh` holds at every level whose
+  datum is below some `ψ_{Ω₁}(A)` (`Yq.yqIF_dat`), `YbIF` at every threshold `q ≤ ψ_{Ω₁}(A)` (`Yq.yqIFN`), and the
+  covering lemma and the non-silent supply hold on every window `υ_{λ+β} ≤ ψ_{Ω₁}(A)`, e.g. `≤ L(ω+1)`, with no
+  hypothesis (`Yq.yqCover`, `Yq.yqSupBound`; NEW nodes `skYbIFNot`, `skLevKNot`, `skCoverXoL`, `skSupNonSilentL`).
+  `skYbIFTh` REDUCED to the NEW leaf `skYbIFHuge` (`Yq.YqIFHuge`: the levels whose datum is above every value of
+  `ψ_{Ω₁}`; `Yq.yqHuge_iff`: equivalent to `skYbIFTh`).
+* THE BRIDGE REDUCED TO A SHIFT CLAUSE: `Yq.yqReal_gen` (the proof of `Xb.xbReal_gen` with the decompositions taken
+  from the covering lemma instead of the forms clause) gives the realizer from the clause `Yq.XoDCl` (`D(value) =
+  image` on restricted decompositions with an `old` / `th` / `add` skeleton, the shape of the covering lemma
+  `Yq.yqCoverT`) of the shift `Yq.XoShift`; `Yq.yqShift_of2` reduces `XoDCl` to ONE node clause on top of
+  `Xb.XbShift`: `Yq.XoThCl` (the `ϑ`-node clause with a level term, moving leaves included).  NEW leaf `skShift2` (`Yq.XoShift2 S`, OPEN L, ON THE ROAD);
+  `skRealBXo` REDUCED (`Yq.yqRealB_huge`, off the road); NEW node `skRealBXoL` (`Yq.XoRealBL`: the bridge on the
+  windows `υ_{λ+β} ≤ L(ω+1)`, the only ones the road uses; from `skShift2` alone).
+* THE ROAD: `Yq.yqRoadS` is `Xo.xoRoadH` with the bridge replaced by `Yq.XoShift S` (through `Yq.XoRealBL`).
+  `Root.skNuC` must apply `Yq.yqRoadS (SkF.skFrontU S) (SkF.skFrontL S) (SkF.skFrontV S) (SkF.skFrontVt S) hE.1 hE.2
+  (SkS.skShiftXo S) hS.1 hS.2` in place of `Xo.xoRoadH … (SkS.skRealBXo S) …`.
+* REFUTE FIRST: `YbIF` at levels just above `B₂` and with an `Ω₂^λ·D` part: PROVED on the notation (no refutation
+  possible there); the carry at `wwX`, `xjX` and at a large-code supply point: NO EVIDENCE (unchanged); `XoShift2`:
+  NO EVIDENCE (no known no-go result speaks of the shift; it extends `Xb.XbShift`, PROVED by `Xj.xbShift_holds`).
+This file imports the new `Yq` modules, so it can be checked only after the merge.
 
 Round 127 (leaf "YbIF, the bridge skRealBXo and the carry skSupKXo of Xo.xoRoadH: is the root non-vacuous?", sup49).
 Top node `skSupXo` and its statement kept; `Root.skNuC` unchanged (it applies `Xo.xoRoadH`).
@@ -1186,7 +1215,74 @@ theorem skSupXo :
   have h := skVisKXo (S := S) 0 l hl (by simpa using e)
   simpa using h
 
-/-- STATUS: OPEN (NEW round 124; REPLACES `skShiftTh` / `skRealBX` on the road)
+/-- STATUS: OPEN (NEW round 129; REPLACES `skRealBXo` on the road)
+SIZE: L
+the shift with the `ϑ`-node clause `Yq.XoShift2 S`: `Xb.XbShift` (PROVED: `Xj.xbShift_holds`) with `Yq.XoThCl` in
+place of `Xb.XbThCl`, for one realizer map `D`.  `XoThCl`: `D(ϑ^{υ_{λ+h}}(Ω₁·L + e)) = ϑ^{υ_{μ+f h}}(Ω₁·L′ + e′)` for a
+level TERM `L` with moving leaves (`L′`, `e′` the leaf substitutions `Xo.xoImg`), at restricted well-formed nodes
+whose points lie in the configuration; at a constant level it is the clause `Xb.XbThCl` of `Xb.XbShift`.
+REFUTE FIRST (round 129): NO EVIDENCE; the clause asks the image to be a function of the value on restricted
+decompositions, which no test has broken (`Wu.wuImg_test`, `Vr.vrImg_agree`, `Xo.xoImg_pi`); no no-go result
+(`Vo.voNoGo`, `Vn.vnTop_Om3`, `Wf.wfSide_false`, `Xj.xjVis_ref`) speaks of the shift.
+Needed: FRAG (`Xj.xjFragV`) with nodes whose levels are terms with moving leaves (the two subcases `R2.xeVt_trL`,
+`R2.xoVt_trH`, through `Xo.xoVt_up` / `xoVt_down`); on one segment the leaf substitution of a level is `π`
+(`Xo.xoImg_pi`). -/
+theorem skShift2 (S : InaccSeq.{0}) : Yq.XoShift2 S := by sorry
+
+/-- STATUS: REDUCED (from `skShift2` by `Yq.yqShift_of2`; NEW round 129)
+SIZE: M
+the shift with the moving-leaf clause `Yq.XoShift S` (`D(value) = image` on restricted decompositions) -/
+theorem skShiftXo (S : InaccSeq.{0}) : Yq.XoShift S := Yq.yqShift_of2 (skShift2 S)
+
+/-- STATUS: REDUCED (from `skShiftXo` by `Yq.yqRealBL`; NEW round 129; ON THE ROAD through `Yq.yqRoadS`)
+SIZE: L
+the bridge on the windows `υ_{λ+β} ≤ L(ω+1)` (`Yq.XoRealBL`, all the road uses) -/
+theorem skRealBXoL (S : InaccSeq.{0}) : Yq.XoRealBL S := Yq.yqRealBL (skShiftXo S)
+
+/-- STATUS: OPEN (NEW round 129; OFF THE ROAD: the part of `skYbIFTh` left)
+SIZE: L
+`Yq.YqIFHuge`: `YgIFTh` at the levels `B₂ ≤ M < θ` whose `K⁽⁰⁾`-datum is above every value of `ψ_{Ω₁}` (above the
+countable part of the notation).  Equivalent to `skYbIFTh` (`Yq.yqHuge_iff`).  REFUTE FIRST: NO EVIDENCE.
+Needed: the code test `Ui.ui_code_th` relative to a countable base (normal forms with countable constants), or the
+port of `Yg.ygUcK` to `[B₂, θ)` through `Vd.vd_nf_ex` with an induction on own arguments. -/
+theorem skYbIFHuge (S : InaccSeq.{0}) : Yq.YqIFHuge S := by sorry
+
+/-- STATUS: PROVED (by `Yq.yqIFN`; NEW round 129)
+SIZE: M
+`YbIF` at every threshold `q ≤ ψ_{Ω₁}(A)` -/
+theorem skYbIFNot (S : InaccSeq.{0}) (A : Ordinal.{0}) : Yq.YqIFN S A := Yq.yqIFN A
+
+/-- STATUS: PROVED (by `Yq.yqLevK`; NEW round 129)
+SIZE: S
+the level statement of the covering lemma on every window `υ_{λ+β} ≤ ψ_{Ω₁}(A)` -/
+theorem skLevKNot {l β A : Ordinal.{0}} (hl0 : 0 < l) (hb1 : upsilon (l + β) ≤ Om1)
+    (hA : upsilon (l + β) ≤ S.psi A (Om 1)) : Yb.YbLevK S l β :=
+  Yq.yqLevK hl0 hb1 hA
+
+/-- STATUS: PROVED (by `Yq.yqCover_L`; NEW round 129)
+SIZE: S
+THE COVERING LEMMA on every window `υ_{λ+β} ≤ L(ω+1)`, with no hypothesis -/
+theorem skCoverXoL {l β : Ordinal.{0}} (hl0 : 0 < l) (hb1 : upsilon (l + β) ≤ Om1)
+    (hL : upsilon (l + β) ≤ Nc.ncL S (ω + 1)) :
+    ∀ x, x < upsilon (l + β) → x < Om1 → Yb.YbCov S l β x :=
+  Yq.yqCover_L hl0 hb1 hL
+
+/-- STATUS: PROVED (by `Yq.yqSupBound_L`; NEW round 129)
+SIZE: S
+THE NON-SILENT SUPPLY on every window `υ_{λ+β} ≤ L(ω+1)`: from `Xo.XoSup S λ β` alone -/
+theorem skSupNonSilentL {l β : Ordinal.{0}} (hl0 : 0 < l) (hb1 : upsilon (l + β) ≤ Om1) (hl1 : upsilon l < Om1)
+    (hL : upsilon (l + β) ≤ Nc.ncL S (ω + 1)) (hS : Xo.XoSup S l β) :
+    ∀ γ < upsilon l, ∀ G : Finset Ordinal.{0}, (∀ d ∈ G, d < β) →
+      ∃ μ f B, ∃ Os : Finset Ordinal.{0}, G ⊆ Os ∧ CdRange S μ ∧ γ < upsilon μ ∧ upsilon μ < upsilon l ∧
+        μ + B ≤ l ∧ ω ^ 2 ∣ B ∧ upsilon (μ + B) ≤ cdR S μ ∧ Sl.SlOff f Os B ∧ Xo.XoCarry S l β μ f B Os ∧
+        ∀ g ∈ G, 0 < g → ω ^ 2 ∣ g → cdR S (l + g) < upsilon (l + β) →
+          ∃ E : Xo.XoE, Xo.XoWF S l β E ∧ Xo.xoVal S l E = cdR S (l + g) ∧ Xo.XoR S l μ E ∧
+            Xo.xoImg S l μ f E ≤ cdR S (μ + f g) :=
+  Yq.yqSupBound_L hl0 hb1 hl1 hL hS
+
+/-- STATUS: REDUCED (round 129: from `skShiftXo` and `skYbIFHuge` by `Yq.yqRealB_huge`; OFF THE ROAD since round 129:
+the road `Yq.yqRoadS` asks the bridge only on the windows `υ_{λ+β} ≤ L(ω+1)`, node `skRealBXoL`) (NEW round 124;
+REPLACES `skShiftTh` / `skRealBX` on the road)
 SIZE: L
 the realizer bridge for moving-leaf levels `Xo.XoRealB`: `Xo.XoGen` at `(λ, β)` gives `Lr.LrReal (υ_λ) (υ_{λ+β})`.
 Needed: FRAG (`Xj.xjFragV`) with a `ϑ`-node whose level is a term with moving leaves, the node lemmas at such levels
@@ -1200,7 +1296,7 @@ the covering lemma (`skCoverXo`, `skSupNonSilent`) up to `skYbIF`.  Exact gap: t
 level is a term with moving leaves (`Ψ(ϑ^{b_k}(Ω₁·L[b_k] + r)) = ϑ^{c_k}(Ω₁·L[Ψ] + vmap Ψ r)`), the proof that the
 image argument lies in `T^{υ_{μ+f h}}` (data of `L[Ψ]` below `υ_{μ+f h+1}`), and the use of `skSupNonSilent` to
 place the image below the target reach. -/
-theorem skRealBXo (S : InaccSeq.{0}) : Xo.XoRealB S := by sorry
+theorem skRealBXo (S : InaccSeq.{0}) : Xo.XoRealB S := Yq.yqRealB_huge (skShiftXo S) (skYbIFHuge S)
 
 /-- STATUS: PROVED (by `Xo.xoReal_of_xb`; NEW round 124)
 SIZE: S
@@ -1333,7 +1429,8 @@ theorem skXoOffWit {X Y : Ordinal.{0}} (hX : InE X) (hY : InE Y) (hX1 : 1 < X) (
 
 /-! ## Round 126: the covering lemma for the repaired `Xo.XoR` (`Yb`) -/
 
-/-- STATUS: OPEN (NEW round 127; OFF THE ROAD: the part of `skYbIF` left)
+/-- STATUS: REDUCED (round 129: from `skYbIFHuge` by `Yq.yqIF_of_huge`; PROVED at every level whose datum is below
+some `ψ_{Ω₁}(A)`, `Yq.yqIF_dat`) (NEW round 127; OFF THE ROAD: the part of `skYbIF` left)
 SIZE: L
 `Yg.YgIFTh`: every level `B₂ ≤ M < θ` with `d_S(M) < q` (`q` strongly critical, `q ≤ Ω₁`) is in `Yb.YbK S q`.
 REFUTE FIRST (round 127): NO EVIDENCE.  The naive route is refuted (`skYbNaiveRef`); at the test level
@@ -1342,7 +1439,7 @@ Expected route: the port of `Yg.ygUcK` to `[B₂, θ)` with the normal form `Hˡ
 (`Vd.vd_nf_ex`): the own argument `B + Ω₂^λ·D < Ω_ω`, the level `λ < Ω₃` at the threshold `Ω₂` (`Vd.VdK S 1`),
 and the lemma that every collapse inside an own argument below `Ω_ω` has an argument below `Ω_ω` (no `I_n`, unlike
 `Y`); `Uf.ufRun` / `Uf.ufRun_eq` at `θ` are not in the repo. -/
-theorem skYbIFTh (S : InaccSeq.{0}) : Yg.YgIFTh S := by sorry
+theorem skYbIFTh (S : InaccSeq.{0}) : Yg.YgIFTh S := Yq.yqIF_of_huge (skYbIFHuge S)
 
 /-- STATUS: REDUCED (round 127: from `skYbIFTh` by `Yg.ygIF_of_th`; below `B₂` PROVED, node `skYbIFLowB`) (NEW round 126; OFF THE ROAD: a tool for `skRealBXo` through `skCoverXo`, not a hypothesis of
 `Xo.xoRoadH`)

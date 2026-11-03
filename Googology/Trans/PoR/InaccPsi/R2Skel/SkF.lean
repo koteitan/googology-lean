@@ -26,6 +26,8 @@ import Googology.Trans.PoR.InaccPsi.R2.YfWin
 import Googology.Trans.PoR.InaccPsi.R2.YhRS
 import Googology.Trans.PoR.InaccPsi.R2.YhDir
 import Googology.Trans.PoR.InaccPsi.R2.YiWin
+import Googology.Trans.PoR.InaccPsi.R2.YrDir
+import Googology.Trans.PoR.InaccPsi.R2.YsRsAll
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -285,6 +287,18 @@ THIRD ROUTE skips the systems: direct readings of the layer (`Yc.YcDirect S c Γ
 cofinal below `Γ(c+1)`) give `skLayLo` AND `skLayHi` at once (`skLayLoD`, `Yc.ycLay_of_direct`); non-vacuity at
 `c = 0` below `φ(G, 1)` (`skLayDirectA2`); `skLayHi` is REDUCED to `skLayDirect` (`c + 1 < ε₀`) and `skLayHiBig`.
 
+Round 129 (leaf regb7, modules `R2.Yr*`; this file imports `R2.YrDir`, so it can be checked only after the merge):
+READ ATOM INDICES.  The constant index of `Yh.yhR` is replaced by a read index: `Γ(i)` reads `Γ_{x+1+i(x)}`
+(`Yr.yrR_atom`), a recursion on the code since `i < Γ(i)` below `B_Γ = Tf.tfBG` (the least fixed point of `Γ`).  The
+facts bound to `c + 1 < ε₀` are generalized: `Xx.XxGq` to every admissible offset (`Yr.YrN`, `Yr.YrGq`), the union
+step, the layer construction and the frontier lemma to reading systems with admissible readings (`Yr.YrU`,
+`Yr.YrRS`, `Yr.YrLoc`), Lemma IMG at every base atom `ϑᵖ(Ω₁·Ω₁ + ν)` and below every admissible read bound
+(`Yr.yrI_atom`, `Yr.yrImg`), the hull lemma through `ψ_{Ω₂}(i) = Γ(i)` (`Yr.yr_mem`); then ONE theorem
+`Yr.yrDirect : YrDirect S B_Γ` (the tower `G, Γ(G), Γ(Γ(G)), …` with gate `0` is cofinal in `B_Γ`) gives the layers
+`c < B_Γ` whole (`Yr.yrLayAll`, node `skLayBelowBG`), the layers `ε₀ ≤ c + 1` included.  `skLayLoBig`, `skLayHiBig`
+are REDUCED to `skLayBelowBG` (PROVED) and the new leaves `skLayLoFix`, `skLayHiFix` (the layers `B_Γ ≤ c < Ω₂`, whose
+atoms `Γ(c)` have indices at or past a fixed point of `Γ`).
+
 Round 127 (leaf regb5, modules `R2.Yh*`; this file imports `R2.YhRS`, `R2.YhDir`, so it can be checked only after the
 merge): ROUTE (c) IS PROVED.  `skLayDirect` = `Yh.yhDirect` (`Yc.YcDirect S c Γ(c+1)` for EVERY `c` with
 `c + 1 < ε₀`, one theorem): the reading `Yh.yhR` of every code over all base atoms (`Γ(i)` read `Γ_{x+1+i}`, the
@@ -315,6 +329,23 @@ holds cofinally below `L(0)` (`skMShortRef`; so `skBhiAfar` cannot be closed by 
 induction must allow NESTED long reaches: corrected crossing clause `Yi.YiCross` (a crossing starts at a point
 `≤ L(k)` or at a restart `ρ_μ` and stays `≤ r(μ)`); its restart part is exactly UPPER (`skWinCross`).  Its step needs
 a restart context without the field `RstK.below` (false at every window restart under `L(k) ≤₁ L(k+1)`).
+
+Round 129 (leaf regw4, modules `R2.Ys*`; this file imports `R2.YsRsAll`, so it can be checked only after the
+merge): THE WINDOW INDUCTION WITH CROSSINGS.  The repo's block machinery is redone without `below`:
+`Ys.YsRstK` (restart context, `below` replaced by the pair field `nostr`; Lemma C″ (a), B″4, the pair, `capδ`,
+Lemma TOP `top_gen` unchanged), `Ys.YsPairCtx`, `Ys.YsBlkCtx` ((T3) only above a crossing bound `x₀`; the
+crossing points reach through each block), the chain `Ys.ysCtxA`, the relative block structure `Ys.YsGood a O l`
+of `(a, υ_l)` (crossing clause = `Yi.YiCross` with the bound `δ_μ + O(μ)`), its step `Ys.ysGood_step` (ordinary
+restarts with a short offset term AND supply restarts with a long reach: the chain then starts at `δ_μ` with
+`x₀ = ρ_μ`), the limit step, and the induction `Ys.ysGood_all` from any restart `l₀` (`Ys.YsSpec`; no base
+data, only the landing blocks below `ρ_{l₀}`); Lemma RS with crossings (`Ys.ysRs_gen`, `Ys.ysRs_all`).  The
+window leaves `skWinA`, `skWinL`, `skTopA`, `skTopL` are REDUCED (`skWinUL`, `skTopUL`) to the new leaves
+`skWinSpec` / `skTopSpec` (the relative specification on `[ι(L(k)), ι(L(k+1)))` with the bound
+`O = r − δ`), `skWinRsIn` / `skTopRsIn` (the RS input at the limit restarts) and `skWinCapV` / `skTopCapV`.
+The same specification on the top window gives `Rg.RgLwPair` (`skTopPair`) and so `L(ω+1) ≤ ν_C` with the
+road's hU / hV / hVt (`skTopNu`).  Non-vacuity: `skWinSpecOld` (the specification holds for `c*` below `Ξ_ω`).
+REFUTE FIRST: at the restart after a supply restart the short input with a crossing bound below the supply
+restart is impossible (`skWinShortX`): the supply restarts take the given-TOP input (`Ys.ysGiven_of_supply`).
 -/
 
 set_option autoImplicit false
@@ -2006,12 +2037,37 @@ theorem skLayLoD (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c + 1 < ε₀ → ∀ l
   rintro c hc1 hce l hr ⟨ℓ, hℓ, hl⟩
   exact Yc.ycLay_of_direct (skLayDirect S c hc1 hce) l hr ⟨ℓ, hℓ.trans (Gc.gcG_lt (lt_add_one c)), hl⟩
 
-/-- STATUS: OPEN (round 123)
+/-- STATUS: PROVED (Yr.yrLayAll; round 129, new node; REFUTE FIRST at c = ε₀, ε₀ + 1: NO EVIDENCE)
+SIZE: L
+EVERY LAYER c BELOW B_Γ (c + 1 < ε₀ or not), old and new levels at once: UPPER ∧ LOWER ∧ CapV at every range
+restart below ι(Γ(φ(ℓ, Γ(c)+1))·ω), ℓ < Γ(c+1).  One theorem Yr.yrDirect (YrDirect S B_Γ): the reading Yr.yrR with
+read atom indices (Γ(i) read Γ_{x+1+i(x)}), admissible readings (Yr.YrN), Lemma IMG at every read bound (Yr.yrImg),
+order, cofinality, Lemma EXACT, gates, hulls and limit data below B_Γ, and the tower G, Γ(G), … (gate 0) cofinal in
+B_Γ.  Imports the round-129 modules: checkable after the merge.  Non-vacuity: c = ε₀ (Yr.yrDirect_eps0). -/
+theorem skLayBelowBG (S : InaccSeq.{0}) : ∀ c, c < Tf.tfBG → ∀ l, Cd.CdRange S l →
+    (∃ ℓ, ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) → SkUV S l :=
+  fun _ hc l hr hex => Yr.yrLayAll S hc l hr hex
+
+/-- STATUS: OPEN (round 129, new node; REFUTE FIRST at c = B_Γ: NO EVIDENCE)
+SIZE: L
+the old levels of the layers B_Γ ≤ c < Ω₂ (the index c of the atom Γ(c) is at or past the least fixed point B_Γ of
+Γ, so the recursion i < Γ(i) of Yr.yrR stops; needs the fixed points of Γ as atoms, read as the fixed points of
+ν ↦ Γ_{x+1+ν} above x). -/
+theorem skLayLoFix (S : InaccSeq.{0}) : ∀ c, Tf.tfBG ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l →
+    Xh.XhPast S c l → (∃ ℓ, ℓ < Gc.gcG c ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) → SkUV S l := by
+  sorry
+
+/-- STATUS: REDUCED (skLayBelowBG (PROVED round 129), skLayLoFix; round 123, was OPEN L; REFUTE FIRST at c = ε₀,
+ε₀ + 1: NO EVIDENCE)
 SIZE: L
 the old levels of the layers c with ε₀ ≤ c + 1 (base atoms Γ(c) that are not constants below ε₀). -/
 theorem skLayLoBig (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ε₀ ≤ c + 1 → ∀ l, Cd.CdRange S l →
     Xh.XhPast S c l → (∃ ℓ, ℓ < Gc.gcG c ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) → SkUV S l := by
-  sorry
+  intro c _ hc2 _ l hr hP hex
+  by_cases hcB : c < Tf.tfBG
+  · obtain ⟨ℓ, hℓ, hl⟩ := hex
+    exact skLayBelowBG S c hcB l hr ⟨ℓ, hℓ.trans (Gc.gcG_lt (lt_add_one c)), hl⟩
+  · exact skLayLoFix S c (not_lt.1 hcB) hc2 l hr hP hex
 
 /-- STATUS: REDUCED (skLayLoD, skLayLoBig; round 127: the branch c + 1 < ε₀ now goes through the PROVED route (c)
 skLayDirect, so skLaySysY, skLaySysAll1, skLaySysYHi are OFF THE ROAD; round 126: Yc.ycLayLo_of, skLaySysY)
@@ -2027,14 +2083,28 @@ theorem skLayLo (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l
   · exact skLayLoD S c hc1 hce l hr hex
   · exact skLayLoBig S c hc1 hc2 (not_lt.1 hce) l hr hP hex
 
-/-- STATUS: OPEN (round 126, new node)
+/-- STATUS: OPEN (round 129, new node; REFUTE FIRST at c = B_Γ: NO EVIDENCE)
+SIZE: L
+skLayHi for the layers B_Γ ≤ c < Ω₂ (see skLayLoFix). -/
+theorem skLayHiFix (S : InaccSeq.{0}) : ∀ c, Tf.tfBG ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l →
+    Xh.XhPast S c l → (∀ ℓ, ℓ < Gc.gcG c → Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω) ≤ l) →
+    (∃ ℓ, Gc.gcG c ≤ ℓ ∧ ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) →
+    SkUV S l := by
+  sorry
+
+/-- STATUS: REDUCED (skLayBelowBG (PROVED round 129), skLayHiFix; round 126, was OPEN L; REFUTE FIRST at c = ε₀,
+ε₀ + 1: NO EVIDENCE)
 SIZE: L
 skLayHi for the layers c with ε₀ ≤ c + 1. -/
 theorem skLayHiBig (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ε₀ ≤ c + 1 → ∀ l, Cd.CdRange S l →
     Xh.XhPast S c l → (∀ ℓ, ℓ < Gc.gcG c → Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω) ≤ l) →
     (∃ ℓ, Gc.gcG c ≤ ℓ ∧ ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) →
     SkUV S l := by
-  sorry
+  intro c _ hc2 _ l hr hP hlo hex
+  by_cases hcB : c < Tf.tfBG
+  · obtain ⟨ℓ, -, hℓ, hl⟩ := hex
+    exact skLayBelowBG S c hcB l hr ⟨ℓ, hℓ, hl⟩
+  · exact skLayHiFix S c (not_lt.1 hcB) hc2 l hr hP hlo hex
 
 /-- STATUS: REDUCED (Yc.ycLay_of_direct, skLayDirect (PROVED round 127), skLayHiBig; round 126, was OPEN L)
 SIZE: L
@@ -2132,7 +2202,8 @@ data at `ι(Ω₂·q)` are consistent with every proved result for small `q`; fo
 `ψ_{Ω₂}`-arguments `≥ Ω_ω + θ₂`, cf. `Ls.lsNames_M`) a restart with a long reach below `ι(Ω₂·q)` would remove them
 (`Yf.yfNoBase_cross`), so this leaf must not assume them.  Round 127: under LOWER below `L(0)` the supply restarts
 of `Rx.rxSupAt` (cofinal below `L(0)`, `υ_{μ+γ} ≤ r(μ)`) are covered by no relative block induction (`skMShortRef`):
-past the first fixed points the cells must be joined by the same induction with nested long reaches as the windows. -/
+past the first fixed points the cells must be joined by the same induction with nested long reaches as the windows.
+Round 129: that induction now exists for any base restart `l₀` (`Ys.ysGood_all`, `Ys.YsSpec`); not yet applied here. -/
 theorem skBhiAfar (S : InaccSeq.{0}) : ∀ l q ζ, Cd.CdRange S l → Cd.cdEta S l = Om (1 + 1) * q + ζ → 1 ≤ q →
     ζ ≠ 0 → ζ < Om (1 + 1) → Cd.cdEta S l < Om ω → Xh.XhNmA ζ → ¬ SkBhiCell S q ζ → SkUV S l := by
   sorry
@@ -2179,16 +2250,83 @@ the closed region (A2) bounds ν_C from below: υ(ι(Γ(B)·ω)) ≤ ν_C for ev
 theorem skNuA2 (S : InaccSeq.{0}) {B : Ordinal.{0}} (hB : B < veblen (Gc.gcG 0) 1) :
     upsilon (Bt.iota S (Gc.gcG B * ω)) ≤ nuC := Xh.xhNu_A2 S hB
 
-/-- STATUS: OPEN (as strong as: ν_C is in no window W_k, Wj.wjUV_ne_nuC; round 126 REFUTE FIRST: NO EVIDENCE against
-the leaf; the cell transport Yf.yfStretch_UV is vacuous here under L(k) ≤₁ L(k+1), skWinNoBase; round 127: a window
-induction allowing only the long ≤₁ of L(k) with short inner offsets is REFUTED by this leaf's own LOWER
-(skWinShortRef, Yi.yiWinShort_ref): it must allow nested long reaches of the supply restarts, crossing clause
-Yi.YiCross, and a restart context without RstK.below)
+/-- STATUS: OPEN (round 129, new leaf, regw4)
+SIZE: L
+THE RELATIVE BLOCK SPECIFICATION ON THE WINDOW `W_k`: `Ys.YsSpec` on `[ι(Ω_ω + P′·k), ι(Ω_ω + P′·(k+1)))` with the
+bound `O = r − δ` (`Ys.ysO`) above the base (at the base `L(k)` the bound is free: Lemma TOP at `L(k)` must hold
+with it, so it is at least the reach of `L(k)`, which may exceed `r`): the landing blocks below `L(k)`, the pair field `nostr` at every restart, and at
+every restart a short input (offset term, crossing bound `x₀ ≥ L(k)`, chain data) or the given-TOP input
+(supply restarts: UPPER, LOWER, `nostr` of the chain, `Ys.ysGiven_of_supply`; the base `L(k)`).  REFUTE FIRST:
+NO EVIDENCE; the naive crossing bound `x₀ = L(k)` is refuted after supply restarts (skWinShortX); the
+specification asks no base data (so `Yf.yfNoBase_win` does not apply); non-vacuity of the shape: skWinSpecOld. -/
+theorem skWinSpec (S : InaccSeq.{0}) (k : ℕ) :
+    ∃ O : Ordinal.{0} → Ordinal.{0}, (∀ μ, Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0})) < μ →
+      O μ = Ys.ysO S μ) ∧
+    Ys.YsSpec O (Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0})))
+      (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) := by
+  sorry
+
+/-- STATUS: OPEN (round 129, new leaf, regw4)
+SIZE: L
+THE RS INPUT IN `W_k`: at every restart of the window LOWER itself, or a successor index with `O = 1`, or a limit
+index with the relative RS input `Ys.YsRsIn` (terms with a relative RS step `Ys.YsRsStep`, realized cofinally).
+REFUTE FIRST: NO EVIDENCE (the successor branch is a theorem, `Ys.ysRs_succ`; non-vacuity below `Ξ_ω`:
+`Ys.ysRsIn_old`). -/
+theorem skWinRsIn (S : InaccSeq.{0}) (k : ℕ) :
+    ∀ l, IsRestartIdx l → Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0})) < l →
+      l < Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0})) →
+      le1 (upsilon l) (upsilon (l + ω + 1) + Ys.ysO S l) ∨ (cL l < 2 ∧ Ys.ysO S l = 1) ∨
+        (2 ≤ cL l ∧ 1 ≤ Ys.ysO S l ∧ Ys.YsRsIn (Ys.ysO S) l) := by
+  sorry
+
+/-- STATUS: PROVED (definitions; round 129, new)
+SIZE: S
+the RS input depends on the bound only at and below the restart: the input with `ysO` is the input with any `O`
+that equals `ysO` above the base. -/
+theorem skRsInCongr {l0 : Ordinal.{0}} {O O' : Ordinal.{0} → Ordinal.{0}} (h : ∀ μ, l0 < μ → O μ = O' μ)
+    {l : Ordinal.{0}} (hl : l0 < l)
+    (hin : le1 (upsilon l) (upsilon (l + ω + 1) + O' l) ∨ (cL l < 2 ∧ O' l = 1) ∨
+        (2 ≤ cL l ∧ 1 ≤ O' l ∧ Ys.YsRsIn O' l)) :
+    le1 (upsilon l) (upsilon (l + ω + 1) + O l) ∨ (cL l < 2 ∧ O l = 1) ∨
+        (2 ≤ cL l ∧ 1 ≤ O l ∧ Ys.YsRsIn O l) := by
+  rw [h l hl]
+  rcases hin with h1 | h1 | ⟨h2, h3, h4⟩
+  · exact Or.inl h1
+  · exact Or.inr (Or.inl h1)
+  · refine Or.inr (Or.inr ⟨h2, h3, fun z hz => ?_⟩)
+    have hz' : z < O' l := by rw [← h l hl]; exact hz
+    obtain ⟨T, hT1, hT2, hT3⟩ := h4 z hz'
+    refine ⟨T, hT1, hT2, fun ν hν => ?_⟩
+    obtain ⟨μ, hμ, hνμ, hμl, hTμ⟩ := hT3 (max ν l0) (max_lt hν hl)
+    exact ⟨μ, hμ, (le_max_left _ _).trans_lt hνμ, hμl, by
+      rw [h μ ((le_max_right _ _).trans_lt hνμ)]; exact hTμ⟩
+
+/-- STATUS: OPEN (round 129, new leaf, regw4; the CapV part of the old skWinA / skWinL)
+SIZE: L
+CapV at every range restart of `W_k`. -/
+theorem skWinCapV (S : InaccSeq.{0}) (k : ℕ) :
+    ∀ l, Cd.CdRange S l → Wj.WjWin S k l → Cd.CdCapV S l := by
+  sorry
+
+/-- STATUS: PROVED (Ys.ysWin_UL; round 129, new; checked only after the merge)
+SIZE: S
+UPPER ∧ LOWER at every range restart of `W_k` from the relative block induction (`Ys.ysGood_all`, Lemma TOP
+`Ys.ysTop_short` / given, Lemma RS with crossings `Ys.ysRs_all`). -/
+theorem skWinUL (S : InaccSeq.{0}) (k : ℕ) :
+    ∀ l, Cd.CdRange S l → Wj.WjWin S k l → Cd.CdUpper S l ∧ Cd.CdLower S l := by
+  obtain ⟨O, hO, Sp⟩ := skWinSpec S k
+  exact Ys.ysWin_UL k hO Sp fun l hl h0 h1 => skRsInCongr hO h0 (skWinRsIn S k l hl h0 h1)
+
+/-- STATUS: REDUCED (skWinUL, skWinSpec, skWinRsIn, skWinCapV; round 129: was OPEN L — as strong as: ν_C is in no
+window W_k, Wj.wjUV_ne_nuC; round 126: the cell transport is vacuous here, skWinNoBase; round 127: a window
+induction allowing only the long ≤₁ of L(k) with short inner offsets is REFUTED, skWinShortRef; round 129: the
+induction with nested long reaches is built, Ys.ysGood_all)
 SIZE: L
 (W_k, A-type) L(k) < υ_λ < L(k+1), offset ζ = η - (Ω_ω + P′·k) a copy of a region-(A) name. -/
 theorem skWinA (S : InaccSeq.{0}) : ∀ k : ℕ, ∀ l, Cd.CdRange S l → Wj.WjWin S k l → SkOffA S k l →
     SkUV S l := by
-  sorry
+  intro k l hr hw _
+  exact ⟨(skWinUL S k l hr hw).1, (skWinUL S k l hr hw).2, skWinCapV S k l hr hw⟩
 
 /-- STATUS: PROVED (Yf.yfNoBase_win; round 126, new)
 SIZE: S
@@ -2241,13 +2379,55 @@ theorem skWinCross (S : InaccSeq.{0}) {a l : Ordinal.{0}}
       c ≤ a ∨ ∃ μ, IsRestartIdx μ ∧ c = upsilon μ ∧ Cd.CdUpper S μ) : Yi.YiCross S a l :=
   Yi.yiCross_of_upper h
 
-/-- STATUS: OPEN (as strong as: ν_C is in no window W_k; round 127: needs the window induction with nested long
-reaches, see skWinShortRef)
+/-- STATUS: PROVED (Ys.ysSpec_old; round 129, new; checked only after the merge)
+SIZE: S
+NON-VACUITY of the relative block specification: the repo's offsets `c*` satisfy `Ys.YsSpec` from `l₀ = ω²` up to
+`Ξ_ω + ω²` (the base with TOP given, the others with the short input). -/
+theorem skWinSpecOld : Ys.YsSpec off (ω * ω) (XiW + ω * ω) := Ys.ysSpec_old
+
+/-- STATUS: PROVED (Ys.ysShortX_ref; round 129, new; checked only after the merge)
+SIZE: S
+REFUTE FIRST for the crossing bound: under LOWER and TOP in `W_n`, cofinally in `W_n` there are range restarts `μ`
+such that at the restart `μ + ω²` no short input with a crossing bound `x₀ < ρ_μ` exists. -/
+theorem skWinShortX (S : InaccSeq.{0}) (n : ℕ) (O : Ordinal.{0} → Ordinal.{0})
+    (hL : ∀ μ, Cd.CdRange S μ → Nc.ncL S (n : Ordinal.{0}) < upsilon μ →
+      upsilon μ < Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) → Cd.CdLower S μ)
+    (hT : ∀ μ, Cd.CdRange S μ → Nc.ncL S (n : Ordinal.{0}) < upsilon μ →
+      upsilon μ < Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) →
+      ∀ g, upsilon (μ + ω + 1) + O μ < g → ¬ le1 (upsilon μ) g) :
+    ∀ γ < Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}), ∃ μ, Cd.CdRange S μ ∧ γ < upsilon μ ∧
+      Nc.ncL S (n : Ordinal.{0}) < upsilon μ ∧ upsilon μ < Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) ∧
+      ∀ (m : ℕ) (k x0 : Ordinal.{0}), x0 < upsilon μ → k < upsilon (μ + ω * ω) →
+        ¬ ∀ ν, IsRestartIdx ν → ν < μ + ω * ω → x0 < upsilon ν → O ν < tm m k (upsilon ν) :=
+  Ys.ysShortX_ref (S := S) n O hL hT
+
+/-- STATUS: PROVED (Ys.ysGood_step; round 129, new; checked only after the merge)
+SIZE: M
+THE WINDOW STEP: the relative block structure `(a, υ_l)` ⇒ `(a, υ_{l+ω²})` at a restart `l`, for a short offset and
+for a long reach (chain start `δ_l + o`, crossing bound `a ≤ x₀ ≤ ρ_l`, closedness above `x₀`, chain data). -/
+theorem skWinStep {a : Ordinal.{0}} {O : Ordinal.{0} → Ordinal.{0}} {l o x0 : Ordinal.{0}}
+    (hl : IsRestartIdx l) (G : Ys.YsGood a O l) (hal : a ≤ upsilon l)
+    (R : Ys.YsRstK (upsilon l) (upsilon (l + ω)) (upsilon (l + ω + 1)))
+    (htop : ∀ g, upsilon (l + ω + 1) + O l < g → ¬ le1 (upsilon l) g)
+    (ho : o < upsilon (l + ω + 1)) (hoO : o ≤ O l) (hax : a ≤ x0) (hxl : x0 ≤ upsilon l)
+    (hT3 : ∀ c, x0 < c → c ≤ upsilon (l + ω + 1) + o → ∀ g, upsilon (l + ω + 1) + o < g → ¬ le1 c g)
+    (hch : Ys.YsChainIn l o x0) (hcnt : l + ω * ω < Om1) : Ys.YsGood a O (l + ω * ω) :=
+  Ys.ysGood_step hl G hal R htop ho hoO hax hxl hT3 hch.1 hch.2 hcnt
+
+/-- STATUS: PROVED (Ys.ysGood_all; round 129, new; checked only after the merge)
+SIZE: M
+THE RELATIVE BLOCK INDUCTION from any restart `l₀`: `Ys.YsSpec O l₀ B` ⇒ `Ys.YsGood (ρ_{l₀}) O B`. -/
+theorem skWinInd {O : Ordinal.{0} → Ordinal.{0}} {l0 B : Ordinal.{0}} (Sp : Ys.YsSpec O l0 B) :
+    Ys.YsGood (upsilon l0) O B := Ys.ysGood_B Sp
+
+/-- STATUS: REDUCED (skWinUL, skWinCapV; round 129: was OPEN L — as strong as: ν_C is in no window W_k; the
+relative block induction covers every range restart of the window, A-type and layer cells alike)
 SIZE: L
 (W_k, layer cells) offset ζ = η - b_k in the name layer c ≥ 1 (ζ < P′). -/
 theorem skWinL (S : InaccSeq.{0}) : ∀ k : ℕ, ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l →
     Wj.WjWin S k l → Xh.XhNmLay c (Cd.cdEta S l - Wj.wjBase S k) → SkUV S l := by
-  sorry
+  intro k _ _ _ l hr hw _
+  exact ⟨(skWinUL S k l hr hw).1, (skWinUL S k l hr hw).2, skWinCapV S k l hr hw⟩
 
 theorem skRegbCast (k : ℕ) : ((k + 1 : ℕ) : Ordinal.{0}) = (k : Ordinal.{0}) + 1 := by push_cast; rfl
 
@@ -2261,21 +2441,74 @@ theorem skWinB (S : InaccSeq.{0}) : ∀ k : ℕ, ∀ l, Cd.CdRange S l → Wj.Wj
     (skRegbCast k ▸ hw.2) hn
   exact skWinL S k c hc1 hc2 l hr ⟨h1, skRegbCast k ▸ h2⟩ hL
 
-/-- STATUS: OPEN (as strong as: ν_C ∉ (L(ω), L(ω+1)); with skWin* and Sh.shNu this is L(ω+1) ≤ ν_C; round 126: the cell
-transport is vacuous here under L(ω) ≤₁ L(ω+1), skTopNoBase; round 127: NO EVIDENCE for nested long reaches inside
-W_ω (Rx.rxSupAt gives supply restarts only below L(ω); RaSupAt at L(ω+1) is not in Lean), the window induction
-of skWinShortRef is needed here too)
+/-- STATUS: OPEN (round 129, new leaf, regw4)
+SIZE: L
+THE RELATIVE BLOCK SPECIFICATION ON THE TOP WINDOW `W_ω` (as skWinSpec, on `[ι(Ω_ω + P′·ω), ι(Ω_ω + P′·(ω+1)))`;
+the base `L(ω)` with TOP given).  REFUTE FIRST: NO EVIDENCE; it implies `Rg.RgLwPair` (skTopPair), which under
+the road's hU / hV / hVt is equivalent to `L(ω+1) ≤ ν_C` (`Rg.rgNu_iff_pair`), part of the target. -/
+theorem skTopSpec (S : InaccSeq.{0}) :
+    ∃ O : Ordinal.{0} → Ordinal.{0}, (∀ μ, Bt.iota S (Om ω + Nc.ncPp S * ω) < μ → O μ = Ys.ysO S μ) ∧
+    Ys.YsSpec O (Bt.iota S (Om ω + Nc.ncPp S * ω)) (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) := by
+  sorry
+
+/-- STATUS: OPEN (round 129, new leaf, regw4)
+SIZE: L
+THE RS INPUT IN `W_ω` (as skWinRsIn). -/
+theorem skTopRsIn (S : InaccSeq.{0}) :
+    ∀ l, IsRestartIdx l → Bt.iota S (Om ω + Nc.ncPp S * ω) < l →
+      l < Bt.iota S (Om ω + Nc.ncPp S * (ω + 1)) →
+      le1 (upsilon l) (upsilon (l + ω + 1) + Ys.ysO S l) ∨ (cL l < 2 ∧ Ys.ysO S l = 1) ∨
+        (2 ≤ cL l ∧ 1 ≤ Ys.ysO S l ∧ Ys.YsRsIn (Ys.ysO S) l) := by
+  sorry
+
+/-- STATUS: OPEN (round 129, new leaf, regw4; the CapV part of the old skTopA / skTopL; hVt of the road)
+SIZE: L
+CapV at every range restart of `W_ω`. -/
+theorem skTopCapV (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Wj.WjTop S l → Cd.CdCapV S l := by
+  sorry
+
+/-- STATUS: PROVED (Ys.ysTop_UL; round 129, new; checked only after the merge)
+SIZE: S
+UPPER ∧ LOWER at every range restart of `W_ω` from the relative block induction. -/
+theorem skTopUL (S : InaccSeq.{0}) :
+    ∀ l, Cd.CdRange S l → Wj.WjTop S l → Cd.CdUpper S l ∧ Cd.CdLower S l := by
+  obtain ⟨O, hO, Sp⟩ := skTopSpec S
+  exact Ys.ysTop_UL hO Sp fun l hl h0 h1 => skRsInCongr hO h0 (skTopRsIn S l hl h0 h1)
+
+/-- STATUS: PROVED (Ys.ysLwPair; round 129, new; checked only after the merge)
+SIZE: S
+the relative block specification on `W_ω` (any bound) gives `Rg.RgLwPair` (no `L(ω) <₂ d` with
+`d ∈ (L(ω), L(ω+1))`, `Ys.ysNoPair_base`). -/
+theorem skTopPair (S : InaccSeq.{0}) {O : Ordinal.{0} → Ordinal.{0}}
+    (Sp : Ys.YsSpec O (Bt.iota S (Om ω + Nc.ncPp S * ω)) (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1)))) :
+    Rg.RgLwPair S := Ys.ysLwPair Sp
+
+/-- STATUS: PROVED (Ys.ysNu = Rg.rgNu with skTopPair; round 129, new; checked only after the merge)
+SIZE: S
+`L(ω+1) ≤ ν_C` from skTopSpec and the road's UPPER / CapV hypotheses. -/
+theorem skTopNu (S : InaccSeq.{0})
+    (hU : ∀ l, Cd.CdRange S l → Rz.RzRest l → Cd.CdUpper S l)
+    (hV : ∀ l, Cd.CdRange S l → upsilon l < Nc.ncL S ω → Rz.RzRest l → Cd.CdCapV S l)
+    (hVt : ∀ l, Cd.CdRange S l → Nc.ncL S ω < upsilon l → Cd.CdCapV S l) :
+    Nc.ncL S (ω + 1) ≤ nuC := by
+  obtain ⟨O, -, Sp⟩ := skTopSpec S
+  exact Ys.ysNu Sp hU hV hVt
+
+/-- STATUS: REDUCED (skTopUL, skTopCapV; round 129: was OPEN L — as strong as: ν_C ∉ (L(ω), L(ω+1)); with skWin*
+and Sh.shNu this is L(ω+1) ≤ ν_C; round 126: the cell transport is vacuous here, skTopNoBase)
 SIZE: L
 (W_ω, A-type) L(ω) < υ_λ < L(ω+1), offset a copy of a region-(A) name (hVt lives here). -/
 theorem skTopA (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Wj.WjTop S l → SkOffA S ω l → SkUV S l := by
-  sorry
+  intro l hr hw _
+  exact ⟨(skTopUL S l hr hw).1, (skTopUL S l hr hw).2, skTopCapV S l hr hw⟩
 
-/-- STATUS: OPEN (as strong as: ν_C ∉ (L(ω), L(ω+1)))
+/-- STATUS: REDUCED (skTopUL, skTopCapV; round 129: was OPEN L — as strong as: ν_C ∉ (L(ω), L(ω+1)))
 SIZE: L
 (W_ω, layer cells) offset ζ = η - b_ω in the name layer c ≥ 1. -/
 theorem skTopL (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l → Wj.WjTop S l →
     Xh.XhNmLay c (Cd.cdEta S l - Wj.wjBase S ω) → SkUV S l := by
-  sorry
+  intro _ _ _ l hr hw _
+  exact ⟨(skTopUL S l hr hw).1, (skTopUL S l hr hw).2, skTopCapV S l hr hw⟩
 
 /-- STATUS: REDUCED (Xh.xhWinB_red, skTopL; was OPEN L)
 SIZE: L

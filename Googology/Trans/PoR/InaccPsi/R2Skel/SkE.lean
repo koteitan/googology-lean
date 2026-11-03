@@ -13,6 +13,7 @@ import Googology.Trans.PoR.InaccPsi.R2.YeGap
 import Googology.Trans.PoR.InaccPsi.R2.YeJump
 import Googology.Trans.PoR.InaccPsi.R2.YkBlk
 import Googology.Trans.PoR.InaccPsi.R2.YkJump
+import Googology.Trans.PoR.InaccPsi.R2.YuEps
 
 /-!
 # Skeleton of part EQ: the hypotheses `(hν → WdThLow)` and `(hν → WdEQfar)` of `Wd.wdRoadL`
@@ -105,6 +106,11 @@ Round 127 (leaf eq6): `skGapBlk` PROVED (`Yk.ykGapBlk`, no hypothesis), so `skGa
 such instance exists; the opposite direction to `skGapRng`), `skJumpGapTarget` (non-vacuity).
 This file imports the new modules `R2.YeComp`, `R2.YeGap`, `R2.YeJump`, `R2.YkBlk`, `R2.YkJump`: it can be
 checked only after the merge.
+Round 129 (leaf eq8): `skGapEps` REDUCED to the new leaf `skGapEpsTop` (`Yu.yuGapEps_of_top`): a gap `ε`-number
+forces `p` and `B_n p` to be `ε`-numbers (`skGapEpsPE`, `skGapEpsEN`: `ε_{a+1} ≤ B_n p`), and below the top level
+(`a = ϑ^{υ_ξ}(ξ')`, `Ω₁ ≤ ξ' < Ω₁·ε_{Ω₁+1}`) the reach of `a` is below `ε_{a+1}` (`skLhLtEN`, from `Gq.gq_lh_th` and
+`Rj.rj_lh`); only the gap `ε`-numbers with `ξ' ≥ Ω₁·ε_{Ω₁+1}` are left.  `skGapRng`, `skJumpNoRng` stay OPEN.
+This file also imports the new module `R2.YuEps`: it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -185,20 +191,38 @@ theorem skThFar (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkThFar S :=
 
 /-- STATUS: OPEN
 SIZE: L
+REFUTE: NO EVIDENCE (round 129: follows from the target, skGapEpsTopTarget (Yu.yuTop_of_target); no no-go result
+(Vo.voNoGo, Vn.vnTop_Om3, Vq.vqNoTop_Om3, Vx.vxNoCompat, Wb.*, Wc.*, Xd.xdX0Law_false, Xi.xiTopFam_false,
+Yd.ydInvRef) speaks of R₁⁺-reaches of ε-numbers; it is empty unless B_n p lies above ϑ^{υ_ξ}(Ω₁·ε_{Ω₁+1}), the
+first point of its bracket fixed by every level Φ_μ, μ < ε_{Ω₁+1}; there the exact reach is not known in Lean
+(the same wall as Rj.RjLhTopOut), and [W07b] Lemma 4.2, lhᵗ(α) < α⁺ = ϑᵗ(ξ'+1), is not cited)
+NEW leaf (round 129).  a gap point (Ye.YeGapPt) that is an ε-number, no υ-point, with no υ-point in (a, B_n p],
+in the bracket (υ_ξ, υ_{ξ+1}), ξ ≠ 0, a = ϑ^{υ_ξ}(ξ') with ξ' ∈ T ∩ Ω₂ and Ω₁·ε_{Ω₁+1} ≤ ξ'  ⇒  lh(a) < B_n p
+(statement Yu.YuGapEpsTop S).  Next: cite [W07b] Lemma 4.2 (lhᵗ(a) < a⁺), then a⁺ ≤ B_n p from [W07a] Lemma 3.30
+(Vd.vdVt_lt, Vd.vdLt_of_vt_lt) once the data and the countable part of the argument of B_n p are shown to be
+B_n-images below a (B_n commutes with ϑ at υ-bases, Sm.smVtU_ups with Vj.vjVtTopAll). -/
+theorem skGapEpsTop (hν : Nc.ncL S (ω + 1) ≤ nuC) : Yu.YuGapEpsTop S := by sorry
+
+/-- STATUS: REDUCED (round 129; was OPEN)
+SIZE: S
 REFUTE: NO EVIDENCE (round 126: follows from the target, skGapTarget3 (Ye.yeGap_of_target); no no-go result
 (Vo.voNoGo, Vn.vnTop_Om3, Vq.vqNoTop_Om3, Vx.vxNoCompat, Wb.*, Wc.*, Xd.xdX0Law_false, Xi.xiTopFam_false) speaks of
 R₁⁺-reaches of ε-numbers in (L(ω), L(ω+1)); the first jump has no ε-number in its gap, skFirstJump)
-NEW leaf (round 126).  a gap point (Ye.YeGapPt) that is an ε-number, no υ-point, with no υ-point in (a, B_n p]
-⇒ lh(a) < B_n p  (statement Ye.YeGapEps S; there lh(a) = lhᵗ(a), τ the υ-point below a, Lh.lhSk_all; through
-B_m: lh(a) < B_n p ⇔ lh(a') < C_{n,m} p at the B_m-preimage a', skGapLhPre). -/
-theorem skGapEps (hν : Nc.ncL S (ω + 1) ≤ nuC) : Ye.YeGapEps S := by sorry
+a gap point (Ye.YeGapPt) that is an ε-number, no υ-point, with no υ-point in (a, B_n p]  ⇒  lh(a) < B_n p
+(statement Ye.YeGapEps S).  Child skGapEpsTop (Yu.yuGapEps_of_top: p is an ε-number, skGapEpsPE, so ε_{a+1} ≤ B_n p,
+skGapEpsEN; a = ϑ^{υ_ξ}(ξ') by vt_rep; for Ω₁ ≤ ξ' < Ω₁·ε_{Ω₁+1} the reach is below ε_{a+1}, skLhLtEN; checkable
+after the merge of R2.YuEps). -/
+theorem skGapEps (hν : Nc.ncL S (ω + 1) ≤ nuC) : Ye.YeGapEps S := Yu.yuGapEps_of_top hν (skGapEpsTop hν)
 
 /-- STATUS: OPEN
 SIZE: L
 REFUTE: NO EVIDENCE (round 126: follows from the target, skGapTarget3; under ENUM-REACH the reach of a range
 restart ν in the gap is r(ν), Xw.xwGapLh_iff; no no-go result speaks of reaches of restarts in (L(ω), L(ω+1)))
 NEW leaf (round 126).  p = υ_κ a restart, a gap point υ_l with l a restart index  ⇒  lh(υ_l) < B_n p
-(statement Ye.YeGapRng S; at a non-restart p there is no υ-point in the gap, skNoUpsOff). -/
+(statement Ye.YeGapRng S; at a non-restart p there is no υ-point in the gap, skNoUpsOff).
+Round 129: still OPEN; REFUTE FIRST: NO EVIDENCE (no Lean value of r(l) for a restart l in (L(ω), L(ω+1)); the
+short-code bound Rc.rcR_lowCode, r(l) < υ_{l+ω+2}, needs υ_l < L(ω); the gap bottom s* = sup_{q<p} B_n q is itself
+such a gap restart, and its reach is the least closed point of λ' at or above s*). -/
 theorem skGapRng (hν : Nc.ncL S (ω + 1) ≤ nuC) : Ye.YeGapRng S := by sorry
 
 /-- STATUS: PROVED (round 127, Yk.ykGapBlk; was OPEN)
@@ -259,7 +283,14 @@ restarts of one reach R ≥ s cofinal below s, each ≤₁ s (skChainLe1); no Le
 (the windows have no base condition, Yf.yfNoBase_win), so the chain below the first jump can be neither computed
 nor excluded: NO EVIDENCE either way.  Not a consequence of the part's other leaves: at an instance, EQ at the jump
 point μ (xnEQ_short / xnEQ_step, its top above s) and EQ at a chain point would together close it, but EQ fails at
-every chain point of an instance (B_n R ≠ R' there, by the equivalence with Xr.XrJump). -/
+every chain point of an instance (B_n R ≠ R' there, by the equivalence with Xr.XrJump).
+Round 129: still OPEN; REFUTE FIRST, both routes: NO EVIDENCE.  The first υ-point where B_n jumps is expected at
+s = υ_{c_n·2} (chain candidates υ_{c_n+ζ}, ζ < c_n, gap bottom κ = L(ω) + c_n, B_n s = υ_{L(ω)·2}); Lean has no
+B_n-value at υ_{c_n+ζ} for ζ ≥ ω·ω (Sf.sfShiftAll stops there) and no reach of any range restart in (c_n, c_{n+1})
+or (L(ω), L(ω+1)), so neither route (i) (no same-reach chain below s) nor route (ii) (r(κ) = B_n R) can be tested.
+Both are the EQ statement in disguise: in truth (CxEQtop) no instance exists, and an instance needs EQ to fail
+cofinally below s; through the composition B_n = B_m ∘ C_{n,m} (Ye.yeComp) the gap bottom is a B_m-image of
+sup_i C_{n,m} x_i, where B_m is continuous, so route (ii) becomes the same reach move for C_{n,m} in window m. -/
 theorem skJumpNoRng (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xw.XwJumpNoRng S := by sorry
 
 /-- STATUS: REDUCED (round 125; was OPEN)
@@ -846,5 +877,46 @@ theorem skJumpGapShort (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : 
 SIZE: S
 NON-VACUITY: the target CxEQtop gives Yk.YkJumpGap. -/
 theorem skJumpGapTarget (h : Cx.CxEQtop S) : Yk.YkJumpGap S := Yk.ykJumpGap_of_EQtop h
+
+/-- STATUS: PROVED (Yu.yu_gap_pE; NEW round 129)
+SIZE: S
+A gap ε-number forces the far index p to be an ε-number. -/
+theorem skGapEpsPE {n : ℕ} {l l' p a : Ordinal.{0}} (hP : Ye.YeGapPt S n l l' p a) (hE : InE a) : InE p :=
+  Yu.yu_gap_pE hP hE
+
+/-- STATUS: PROVED (Yu.yu_gap_eN; NEW round 129)
+SIZE: S
+At a gap ε-number: ε_{a+1} ≤ B_n p. -/
+theorem skGapEpsEN {n : ℕ} {l l' p a : Ordinal.{0}} (hP : Ye.YeGapPt S n l l' p a) (hE : InE a) :
+    eN a ≤ Bc.bcB S n p :=
+  Yu.yu_gap_eN hP hE
+
+/-- STATUS: PROVED (Yu.yuLh1_lt_eN; NEW round 129)
+SIZE: S
+The R₁⁺-reach of ϑᵗ(ξ) is below ε_{a+1} for Ω₁ ≤ ξ < Ω₁·ε_{Ω₁+1} (τ strongly critical, ξ ∈ Tᵗ ∩ Ω₂). -/
+theorem skLhLtEN {τ ξ : Ordinal.{0}} (hτ : SC τ) (hτ1 : τ < Om1) (hξT : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo)
+    (hΩξ : Om1 ≤ ξ) (hξE : ξ < Om1 * Gg.ggE) : ∃ r, IsLh1 (vt τ ξ) r ∧ r < eN (vt τ ξ) :=
+  Yu.yuLh1_lt_eN hτ hτ1 hξT hξ2 hΩξ hξE
+
+/-- STATUS: PROVED (Yu.yuGapEps_iff; NEW round 129)
+SIZE: S
+skGapEps ⇔ skGapEpsTop (under hν). -/
+theorem skGapEpsIff (hν : Nc.ncL S (ω + 1) ≤ nuC) : Ye.YeGapEps S ↔ Yu.YuGapEpsTop S := Yu.yuGapEps_iff hν
+
+/-- STATUS: PROVED (Yu.yuTop_of_target; NEW round 129)
+SIZE: S
+NON-VACUITY: the target (hν, ENUM-REACH, CdEQ, SkKFar) gives Yu.YuGapEpsTop. -/
+theorem skGapEpsTopTarget (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) (hEQ : CdEQ S)
+    (hK : SkKFar S) : Yu.YuGapEpsTop S :=
+  Yu.yuTop_of_target hν hU hL hEQ hK
+
+/-- STATUS: PROVED (Yu.yuTop_of_plus; NEW round 129)
+SIZE: S
+skGapEpsTop from two statement names: Yu.YuLhPlus ([W07b] Lemma 4.2, lhᵗ(α) < α⁺ = ϑᵗ(ξ+1); a paper lemma, not
+cited in the repo) and Yu.YuGapPlus (the notation statement a⁺ = ϑ^{υ_ξ}(ξ'+1) ≤ B_n p at a top-level gap
+ε-number).  Not used by the road (skGapEpsTop stays OPEN). -/
+theorem skGapEpsTopPlus (hν : Nc.ncL S (ω + 1) ≤ nuC) (h1 : Yu.YuLhPlus) (h2 : Yu.YuGapPlus S) :
+    Yu.YuGapEpsTop S :=
+  Yu.yuTop_of_plus hν h1 h2
 
 end R2Skel.SkE
