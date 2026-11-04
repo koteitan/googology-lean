@@ -6,12 +6,12 @@ The remaining work, arranged by the cells of the README tables. Items not being 
 
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: the maps between Wilken's systems and InaccPsi
-    - 🤖 R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
-      - done (only S assumed): region A closed; layer frontier and direct readings of every layer c below B_Γ (least fixed point of Γ above Ω₁). 112 axioms.
-      - also: YbIF on the notation range; covering lemma up to L(ω+1); window induction without the pair hypothesis; gap ε-number top; substitution below θ.
+    - R₂^C in Lean, and the chain to ν_C: the whole library builds with no sorry; the cited axioms are listed on [LEAN.md](Googology/Trans/PoR/InaccPsi/LEAN.md).
+      - done (only S assumed): region A closed; layer frontier and direct readings of every layer c below B_Γ and of the codes up to B_Γ + ε₀. 112 axioms.
+      - also: window base reach and RS step; top law past Ω₂; ψ₃-offsets below W^{Y₃+Ω₂·ε₀}; jumps and gaps of B_n, assuming the cap past the frontier.
       - road yqRoadS (hyp.: UPPER, LOWER, cap past the frontier; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; the shift XoShift; XoSup): ν_C = L(ω+1).
-      - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): 52 sorry leaves; OPEN 28 (all L), SUSPECT 2, REFUTED 7; 19 OPEN leaves on the road (all L); root vacuity open.
-      - next: skYvCl, skShift2, skSupKXo; skLayLoFix/HiFix; window inputs, RS, CapV, skTopLwNo2; skBhiAfar, skBhiL, skLongPre; skWallBase/Step; skGapRngHi.
+      - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): 57 sorry leaves; OPEN 28 (27 L, 1 S), SUSPECT 3, REFUTED 7; 18 OPEN leaves on the road (all L); root vacuity open.
+      - next: skShift2, skSupKXo; skZbDirect, skLayLoFixX/HiFixX; window inputs, RS, CapV, skTopLwNo2; skBhiAfar, skBhiL, skLongPre; skWallBase/Step; skTopK.
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
