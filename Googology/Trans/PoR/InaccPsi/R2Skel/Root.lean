@@ -10,7 +10,8 @@ import Googology.Trans.PoR.InaccPsi.R2Skel.SkS
 parts only:
 - frontier `SkF.skFront` → hUH, hLH, hVH, hVt;
 - reading `SkR.skWall`, `SkR.skThHi` → the hypothesis `hRead` of `SkE.skEQ`;
-- `SkE.skEQ hRead hUH hLH` → hT, hF (round 123: the EQ induction also uses ENUM-REACH, from `SkF.skFrontU/L`);
+- `SkE.skEQ hRead hUH hLH hVt` → hT, hF (round 123: the EQ induction also uses ENUM-REACH, from `SkF.skFrontU/L`;
+  round 131: the jumps and gaps of `B_n` use CapV in `(L(ω), L(ω+1))`, `SkF.skFrontVt`);
 - supply `SkS.skSupX` → h0, hn, and `SkS.skShiftTh` → the shift (round 120: `Wf.wfRoad` is void, `Ww.wwRoad_false`;
   round 121: the bridge `Ww.WwRealB` of `Ww.wwRoad` is SUSPECT as stated, so the root applies `Xb.xbRoad`, which is
   `Ww.wwRoad` with `hB` replaced by `Xb.XbShift S` and the supply by `Xb.XbVisGen`;
@@ -42,6 +43,7 @@ theorem skNuC (S : InaccSeq.{0}) :
     ⟨Googology.Trans.PoR.InaccPsi.R2Skel.SkR.skWall S hν,
       Googology.Trans.PoR.InaccPsi.R2Skel.SkR.skThHi S hν⟩
   have hE := _root_.R2Skel.SkE.skEQ hRead (_root_.R2Skel.SkF.skFrontU S) (_root_.R2Skel.SkF.skFrontL S)
+    (_root_.R2Skel.SkF.skFrontVt S)
   have hS := _root_.R2Skel.SkS.skSupXo (S := S)
   exact Yq.yqRoadS (_root_.R2Skel.SkF.skFrontU S) (_root_.R2Skel.SkF.skFrontL S)
     (_root_.R2Skel.SkF.skFrontV S) (_root_.R2Skel.SkF.skFrontVt S) hE.1 hE.2 (_root_.R2Skel.SkS.skShiftXo S) hS.1 hS.2

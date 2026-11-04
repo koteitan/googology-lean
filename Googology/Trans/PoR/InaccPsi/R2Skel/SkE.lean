@@ -15,6 +15,8 @@ import Googology.Trans.PoR.InaccPsi.R2.YkBlk
 import Googology.Trans.PoR.InaccPsi.R2.YkJump
 import Googology.Trans.PoR.InaccPsi.R2.YuEps
 import Googology.Trans.PoR.InaccPsi.R2.YzJump
+import Googology.Trans.PoR.InaccPsi.R2.ZeJump
+import Googology.Trans.PoR.InaccPsi.R2.ZeGap
 
 /-!
 # Skeleton of part EQ: the hypotheses `(hν → WdThLow)` and `(hν → WdEQfar)` of `Wd.wdRoadL`
@@ -66,7 +68,8 @@ ENUM-REACH on the whole range (`skEnum`).
             (`Xr.XrJump`), split by the kind of `s` (`Xw.xwJump_iff`):
             * `skJumpOff` PROVED (round 126, `Ye.yeJumpOff`): vacuous, the jump point `s` is always a range
               restart (`Ye.yeJump_rst`: `s = υ_l`, `l` the supremum of the chain indices, `ω² ∣ l`);
-            * `skJumpNoRng` OPEN: no instance has a range restart as `s` (`Xw.XwJumpNoRng`; `XrJump` forces it,
+            * `skJumpNoRng` PROVED (round 131, `Ze.zeJumpNoRng`, from `hVt`): no instance has a range restart as
+              `s` (`Xw.XwJumpNoRng`; `XrJump` forces it,
               `Xw.xwJump_noRng_of`); equivalently (round 127, `Yk.ykNoRng_iff_gap`) the range restart `κ` at the
               bottom of the jump gap (`s* = sup_{q<s} B_n q = υ_κ`, no `B_n`-image, `r(κ) = R'`, `skJumpGapBot`)
               has `r(κ) = B_n R`, i.e. it reaches past the gap (`skJumpGapShort`).
@@ -126,6 +129,20 @@ extension of `Rc.rcR_lowCode` above `L(ω)`, `Yz.yzR_lowCode`).  `skJumpNoRng` s
 instance refutes the target), `skJumpSplit` (`Yz.yzJumpNoRng_iff`).
 This file also imports the new modules `R2.CitedYz`, `R2.YzPlus`, `R2.YzRng`, `R2.YzJump`: it can be checked only
 after the merge.
+Round 131 (leaf eq10): the TOP NODE takes one more hypothesis of the road, `hVt : SkVt S` (CapV at the range
+restarts in `(L(ω), L(ω+1))` above the frontier, `SkF.skFrontVt S`; below the frontier `Hl.hlU_capV`,
+`Ze.zeCapHigh`); `Root.skNuC` applies `skEQ hRead (SkF.skFrontU S) (SkF.skFrontL S) (SkF.skFrontVt S)`.  With it:
+`skJumpNoRng` PROVED (`Ze.zeJumpNoRng`: by the cap window `Ze.zeCap_win` below the gap bottom `ρ_κ`, a chain image
+`ρ_{μ'}` near `ρ_κ` has `cap(μ') ≤ ρ_κ`, so CapV gives `R' = r(μ') < ρ_κ < r(κ) = R'`); its short-code half
+`Yz.YzJumpShort` even with no hypothesis (`skJumpShortU` = `Ze.zeJumpShortU`: near `ρ_κ` the codes are `< θ·ω`,
+`Ze.zeCode_win`, from the name window `Ze.zeName_win` and the bad-interval lemma `Ze.zeBad_top`); `skGapRngHi`
+PROVED (`Ze.zeGapRngHi`, indeed `Ye.YeGapRng` for every code, `Ze.zeGapRng`: the cap window of `B_n p` reaches down
+to a `B_n`-image, `Ze.zeGap_win`, computed through the argument terms of `P(η_κ)` and `B_n` on them, `Ze.zeB_term`,
+`Ze.zeVal_split`, `Ze.ze_cancel_last`).  The nodes on the path `skGapRng`, `skGapLh`, `skKCofGap`, `skKCof`,
+`skEQJump`, `skEQTopR`, `skKReachR`, `skKFar`, `skKClosed`, `skKLim`, `skEQfar`, `skEQ` take `hVt`; their statements
+are otherwise unchanged.  The only open leaf of SkE is `skTopK`.
+This file also imports the new modules `R2.ZeBad`, `R2.ZeWin`, `R2.ZeName`, `R2.ZeTerm`, `R2.ZeJump`, `R2.ZeGap`
+(through `R2.ZeJump`, `R2.ZeGap`): it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -183,6 +200,11 @@ theorem sk_cdR_eq (l : Ordinal.{0}) : cdR S l = cdk l (cdTheta S l (cdCode S l))
 theorem sk_one_lt (n : ℕ) : (1 : Ordinal.{0}) < Nc.ncL S ((n + 1 : ℕ) : Ordinal.{0}) :=
   one_lt_omega0.trans (Lw.lw_omega_lt_SC (Lw.lw_L_SC S _))
 
+/-- The frontier hypothesis `hVt` of the road (CapV at the range restarts in `(L(ω), L(ω+1))` past the frontier),
+`SkF.skFrontVt S` (round 131). -/
+abbrev SkVt (S : InaccSeq.{0}) : Prop :=
+  ∀ l, CdRange S l → Nc.ncL S ω < upsilon l → Bt.iota S (Gc.gcG Hl.hlU.B * ω) ≤ l → CdCapV S l
+
 /-! ## Open leaves -/
 
 /-- STATUS: OPEN
@@ -227,19 +249,26 @@ skGapEpsEN; a = ϑ^{υ_ξ}(ξ') by vt_rep; for Ω₁ ≤ ξ' < Ω₁·ε_{Ω₁+
 after the merge of R2.YuEps). -/
 theorem skGapEps (hν : Nc.ncL S (ω + 1) ≤ nuC) : Ye.YeGapEps S := Yu.yuGapEps_of_top hν (skGapEpsTop hν)
 
-/-- STATUS: OPEN
-SIZE: L
-REFUTE: NO EVIDENCE (round 130: follows from the target, skGapRngHiTarget (Yz.yzGapRngHi_of_target); a counterexample
-is a gap restart υ_l with code m_l > θ·ω reaching past B_n p = υ_{κ'}; Lean has no reading Θ_l(m_l) of such a code
-at a restart in (L(ω), L(ω+1)) that is not a B_m-image, so none can be built; no no-go result (Vo.voNoGo,
+/-- STATUS: PROVED (round 131, Ze.zeGapRngHi; was OPEN)
+SIZE: S
+REFUTE: NO EVIDENCE (round 130: follows from the target, skGapRngHiTarget (Yz.yzGapRngHi_of_target); round 131,
+bounded first step at the first long code above θ·ω: a counterexample is a gap restart ρ_{l₀} with r(l₀) ≥ B_n p; by
+the cap window of B_n p (Ze.zeGap_win) ρ_{l₀} would need a name outside the window (β', β' + ω^d) of the name
+β' + ω^d of B_n p, but the window starts at the B_n-image P(β') ≤ B_n q of a point q < p; no no-go result (Vo.voNoGo,
 Vn.vnTop_Om3, Vq.vqNoTop_Om3, Vx.vxNoCompat, Wb.*, Wc.*, Xd.xdX0Law_false, Xi.xiTopFam_false, Yd.ydInvRef) speaks of
-reaches of restarts in (L(ω), L(ω+1)))
+caps of restarts in (L(ω), L(ω+1)); the statement is now proved)
 NEW leaf (round 130).  hν, ENUM-REACH, p = υ_κ a restart, a gap point υ_l with l a restart index and
-θ·ω < m_l  ⇒  lh(υ_l) < B_n p  (statement Yz.YzGapRngHi S). -/
-theorem skGapRngHi (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) : Yz.YzGapRngHi S := by
-  sorry
+θ·ω < m_l  ⇒  lh(υ_l) < B_n p  (statement Yz.YzGapRngHi S).
+Round 131: PROVED with the road hypothesis hVt (CapV in (L(ω), L(ω+1))); in fact every code (Ze.zeGapRng): the cap
+window of B_n p (Ze.zeGap_win: the good name η_κ = β + ω^E of p, the argument term α_{n+1} + ρ of P(η_κ), ρ = I + L
+with L its last summand, |L| = θ·ω^E, α_{n+1} + |I| = A_β; σ keeps the split, B_n p = P(β' + ω^d),
+P(β') ≤ B_n P(ζ) for a good ζ ∈ [β, η_κ) with c_n ≤ P(ζ), which exists by Ze.zeIota_prefix_lt) contains every gap
+restart, and CapV gives r(l₀) < cap(l₀) ≤ B_n p.  Checkable after the merge of R2.Ze*. -/
+theorem skGapRngHi (_hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) (hVt : SkVt S) :
+    Yz.YzGapRngHi S :=
+  Ze.zeGapRngHi (Ze.zeCapHigh hVt) hU hL
 
-/-- STATUS: REDUCED (round 130; was OPEN)
+/-- STATUS: REDUCED (round 130; was OPEN; round 131: its child skGapRngHi PROVED, so no open leaf below)
 SIZE: S
 REFUTE: NO EVIDENCE (round 126: follows from the target, skGapTarget3; under ENUM-REACH the reach of a range
 restart ν in the gap is r(ν), Xw.xwGapLh_iff; no no-go result speaks of reaches of restarts in (L(ω), L(ω+1)))
@@ -251,8 +280,9 @@ such a gap restart, and its reach is the least closed point of λ' at or above s
 Round 130: REDUCED, with the new hypotheses CdUPPER, CdLOWER (from skEnum through skGapLh, skKCofGap, skKCof), to
 skGapRngHi (Yz.yzGapRng_of_hi): a gap restart with code m_l ≤ θ·ω has r(l) < υ_{l+ω+2} < υ_{κ'} = B_n p
 (skGapRngLow = Yz.yzGapRng_low; A_{η_l} is own below L(ω+1), Yz.yzOwnA_W1; checkable after the merge of R2.YzRng). -/
-theorem skGapRng (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) : Ye.YeGapRng S :=
-  Yz.yzGapRng_of_hi hν hU hL (skGapRngHi hν hU hL)
+theorem skGapRng (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) (hVt : SkVt S) :
+    Ye.YeGapRng S :=
+  Yz.yzGapRng_of_hi hν hU hL (skGapRngHi hν hU hL hVt)
 
 /-- STATUS: PROVED (round 127, Yk.ykGapBlk; was OPEN)
 SIZE: S
@@ -271,8 +301,9 @@ k-move below p, a in the jump gap (B_n q ≤ a < B_n p for all q < p)  ⇒  lh(a
 Children skGapEps, skGapRng (skGapBlk PROVED, round 127; Yk.ykGapLh_of = Ye.yeGapLh_of with Yk.ykGapBlk: non-υ
 gap points that are no ε-number, or have a υ-point in (a, B_n p], have lh(a) < B_n p by the R₁⁺-reach,
 Ye.yeLh_easy; checkable after the merge of R2.YeGap, R2.YkBlk). -/
-theorem skGapLh (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) : Xw.XwGapLh S :=
-  Yk.ykGapLh_of hν (skGapEps hν) (skGapRng hν hU hL)
+theorem skGapLh (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) (hVt : SkVt S) :
+    Xw.XwGapLh S :=
+  Yk.ykGapLh_of hν (skGapEps hν) (skGapRng hν hU hL hVt)
 
 /-- STATUS: REDUCED (round 125; was OPEN)
 SIZE: S
@@ -286,8 +317,9 @@ cofinal far index p, move below p, Q in the jump gap (B_n q ≤ Q for all q < p,
 block of closed points at k_{λ'}(B_n u), p = u + w, covers the gap, Xw.xwDecomp; at an indecomposable p the reach of
 the least point a₀ ≤ Q reaching past Q is a closed point of λ' in [Q, B_n p), Xw.xwClosed_at; checkable after the
 merge of R2.XwFirst, R2.XwGap). -/
-theorem skKCofGap (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) : Xr.XrKCofGap S :=
-  Xw.xwKCofGap_of_lh (skGapLh hν hU hL)
+theorem skKCofGap (hν : Nc.ncL S (ω + 1) ≤ nuC) (hU : CdUPPER S) (hL : CdLOWER S) (hVt : SkVt S) :
+    Xr.XrKCofGap S :=
+  Xw.xwKCofGap_of_lh (skGapLh hν hU hL hVt)
 
 /-- STATUS: PROVED (round 126, Ye.yeJumpOff; was OPEN)
 SIZE: S
@@ -298,8 +330,8 @@ An instance of Xr.XrJump (n, R, R', s with all its hypotheses) whose jump point 
 ⇒  B_n s ≤₁ R'  (statement Xw.XwJumpOff S; checkable after the merge of R2.YeJump). -/
 theorem skJumpOff (_hν : Nc.ncL S (ω + 1) ≤ nuC) : Xw.XwJumpOff S := Ye.yeJumpOff
 
-/-- STATUS: OPEN
-SIZE: L
+/-- STATUS: PROVED (round 131, Ze.zeJumpNoRng; was OPEN)
+SIZE: S
 REFUTE: NO EVIDENCE (round 125: follows from the target, skJumpTarget; XrJump forces it, Xw.xwJump_noRng_of;
 vacuous at s = c_n·2, skFirstJump; not derivable from skJumpOff alone: EQ at the range point s = ρ_μ fails exactly
 when B_n R = R' ≠ r(μ'), and the reach class (R, r(μ')) only yields a new range instance above s)
@@ -325,8 +357,15 @@ Round 130: still OPEN; REFUTE FIRST: NO EVIDENCE (no B_n-value of a range restar
 computable: Sf.sfShiftAll gives B_n υ_{μ+β} = υ_{μ'+β} only with μ' unknown).  New fact: an instance whose gap bottom κ
 has a code m_κ ≤ θ·ω has r(κ) < υ_{κ+ω+2} < B_n s (skJumpShortBot), so the leaf fails at such an instance, and the
 instance would refute the target CxEQtop (Yz.yzJump_short_noEQ); the expected first jump gap bottom (name η_{L(ω)}
-plus a countable offset) has a countable, hence short, code.  The leaf is split by the code of κ (skJumpSplit). -/
-theorem skJumpNoRng (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xw.XwJumpNoRng S := by sorry
+plus a countable offset) has a countable, hence short, code.  The leaf is split by the code of κ (skJumpSplit).
+Round 131: REFUTE FIRST on YzJumpShort (a jump instance whose gap bottom has code ≤ θ·ω): NO EVIDENCE, the statement
+is PROVED with no hypothesis (skJumpShortU = Ze.zeJumpShortU: the good name η_κ = β + ω^E has ι(β) < κ, since a bad
+interval [β, β + ω^E) would make η_κ bad, Ze.zeBad_top; the restarts of (υ_{ι(β)}, ρ_κ) have names in (β, η_κ), so
+last exponents < E ≤ θ·ω, Ze.zeCode_win; a chain image there has r(μ') < υ_{μ'+ω+2} < ρ_κ < r(κ) = R' = r(μ')).
+The whole leaf (both code cases) is PROVED from the road hypothesis hVt (Ze.zeJumpNoRng: the cap window Ze.zeCap_win
+below ρ_κ and CapV at a chain image give r(μ') < cap(μ') ≤ ρ_κ). -/
+theorem skJumpNoRng (_hν : Nc.ncL S (ω + 1) ≤ nuC) (hVt : SkVt S) : Xw.XwJumpNoRng S :=
+  Ze.zeJumpNoRng hVt
 
 /-- STATUS: REDUCED (round 125; was OPEN)
 SIZE: S
@@ -340,7 +379,8 @@ NEW leaf (round 124).  n, R < c_{n+1}, EQ below R, the chain points of (R, R') c
 lh(s) = R, B_n jumps at s (∃ Q < B_n s, ∀ q < s, B_n q ≤ Q)  ⇒  B_n R = R'  (statement Xr.XrJump S; the part's
 other hypotheses hν, ENUM, WdThLow, SkThFar, XgKCof are premises of the statement).  Children skJumpOff,
 skJumpNoRng (Xw.xwJump_of; checkable after the merge of R2.XwFirst, R2.XwGap, R2.XwJump). -/
-theorem skEQJump (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xr.XrJump S := Xw.xwJump_of (skJumpOff hν) (skJumpNoRng hν)
+theorem skEQJump (hν : Nc.ncL S (ω + 1) ≤ nuC) (hVt : SkVt S) : Xr.XrJump S :=
+  Xw.xwJump_of (skJumpOff hν) (skJumpNoRng hν hVt)
 
 /-! ## Reduced nodes -/
 
@@ -368,8 +408,8 @@ theorem skThLow (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdTh
 /-- STATUS: REDUCED (Xr.xrKCof_of_gap; checkable after the merge of R2.XrCof)
 SIZE: S
 skKCofGap ⇒ XgKCof: below every B_n q (q < p) from the move below p (Xr.xrKCof_below). -/
-theorem skKCof (hν : Nc.ncL S (ω + 1) ≤ nuC) (hUH : SkUH S) (hLH : SkLH S) : Xg.XgKCof S :=
-  Xr.xrKCof_of_gap (skKCofGap hν (skEnum hUH hLH).1 (skEnum hUH hLH).2)
+theorem skKCof (hν : Nc.ncL S (ω + 1) ≤ nuC) (hUH : SkUH S) (hLH : SkLH S) (hVt : SkVt S) : Xg.XgKCof S :=
+  Xr.xrKCof_of_gap (skKCofGap hν (skEnum hUH hLH).1 (skEnum hUH hLH).2 hVt)
 
 /-- STATUS: REDUCED (Xr.xrTop; checkable after the merge of R2.XrTop)
 SIZE: L
@@ -377,17 +417,18 @@ hRead, hUH, hLH, hν ⇒ Xn.XnTop  (children skEQJump, skThFar, skKCof, and skTh
 points of a reach class have no largest element, their supremum s has lh(s) = R; where B_n is continuous at s the
 reach moves (s a chain point or Wa.waTCtopOff); left: the jumps of B_n). -/
 theorem skEQTopR (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xn.XnTop S :=
-  Xr.xrTop hν (skEnum hUH hLH).1 (skEnum hUH hLH).2 (skThLow hRead hν) (skThFar hν) (skKCof hν hUH hLH) (skEQJump hν)
+    (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xn.XnTop S :=
+  Xr.xrTop hν (skEnum hUH hLH).1 (skEnum hUH hLH).2 (skThLow hRead hν) (skThFar hν) (skKCof hν hUH hLH hVt)
+    (skEQJump hν hVt)
 
 /-- STATUS: REDUCED
 SIZE: L
 hRead, hUH, hLH, hν ⇒ XgKReachR  (children skThFar, skKCof, skEQTopR; Xn.xnPart: the induction on r(λ),
 Xn.xnEQ_all; checkable after the merge of R2.XnLow, R2.XnInd, R2.XnRoad). -/
 theorem skKReachR (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xg.XgKReachR S :=
-  (Xn.xnPart hν (hRead hν).1 (hRead hν).2 (skEnum hUH hLH).1 (skEnum hUH hLH).2 (skThFar hν) (skKCof hν hUH hLH)
-    (skEQTopR hRead hUH hLH hν)).2.2.1
+    (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xg.XgKReachR S :=
+  (Xn.xnPart hν (hRead hν).1 (hRead hν).2 (skEnum hUH hLH).1 (skEnum hUH hLH).2 (skThFar hν)
+    (skKCof hν hUH hLH hVt) (skEQTopR hRead hUH hLH hVt hν)).2.2.1
 
 
 /-- STATUS: PROVED (Wd.wdk_move, Bc.bcB_add, Bc.bcB_fixN, Bc.bcB_lt_iff, Ordinal.enumOrd_succ_le)
@@ -442,15 +483,15 @@ SIZE: L
 ∀ far window, ∀ δ_λ·ω ≤ p ≤ Θ_λ(m_λ): k_{λ'}(B_n p) = B_n(k_λ p)  (children skKCof, skKReachR;
 Xg.xgKFar_of_R; checkable after the merge of R2.XgK, R2.XgReach, R2.Xn*). -/
 theorem skKFar (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKFar S :=
-  Xg.xgKFar_of_R hν (skKCof hν hUH hLH) (skKReachR hRead hUH hLH hν)
+    (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKFar S :=
+  Xg.xgKFar_of_R hν (skKCof hν hUH hLH hVt) (skKReachR hRead hUH hLH hVt hν)
 
 /-- STATUS: REDUCED
 SIZE: S
 δ_λ·ω ≤ q+1 ≤ Θ_λ(m_λ) ⇒ B_n(k_λ(q+1)) ∈ K_{λ'}  (from skKFar: SkEX.skexClosed_of_far; off the path). -/
 theorem skKClosed (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKClosed S :=
-  R2Skel.SkEX.skexClosed_of_far hν (skKFar hRead hUH hLH hν)
+    (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKClosed S :=
+  R2Skel.SkEX.skexClosed_of_far hν (skKFar hRead hUH hLH hVt hν)
 
 /-- STATUS: PROVED (Xg.xgKGap: k_λ(q+1) = k_λ(q) + 1, Xg.xgk_succ)
 SIZE: S
@@ -462,8 +503,8 @@ theorem skKGap (_hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKGap S :=
 SIZE: S
 p limit, δ_λ·ω ≤ p ≤ Θ_λ(m_λ), IH ⇒ k_{λ'}(B_n p) = B_n k_λ(p)  (from skKFar: SkEX.skexLim_of_far; off the path). -/
 theorem skKLim (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKLim S :=
-  R2Skel.SkEX.skexLim_of_far (skKFar hRead hUH hLH hν)
+    (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKLim S :=
+  R2Skel.SkEX.skexLim_of_far (skKFar hRead hUH hLH hVt hν)
 
 /-- STATUS: PROVED (definitions only)
 SIZE: S
@@ -477,8 +518,8 @@ theorem skEQfar_of (hT : SkThFar S) (hK : SkKFar S) : Wd.WdEQfar S := by
 SIZE: L
 hRead, hUH, hLH ⇒ (hν ⇒ WdEQfar)  (children skThFar, skKFar). -/
 theorem skEQfar (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdEQfar S :=
-  fun hν => skEQfar_of (skThFar hν) (skKFar hRead hUH hLH hν)
+    (hLH : SkLH S) (hVt : SkVt S) : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdEQfar S :=
+  fun hν => skEQfar_of (skThFar hν) (skKFar hRead hUH hLH hVt hν)
 
 /-- STATUS: PROVED (Wa.waEQtop_ux, Wd.wdAtMove26_of_wall, Wd.wdRn_of, Wd.wdEQtop_iff)
 SIZE: S
@@ -493,13 +534,14 @@ theorem skThLow_of (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.W
 
 /-- STATUS: REDUCED
 SIZE: L
-TOP NODE (round 117: new hypotheses hUH, hLH, the frontier hypotheses of the road; Root.skNuC applies
-`skEQ hRead (SkF.skFrontU S) (SkF.skFrontL S)`).
-hRead: hν → WdAtWall ∧ WdThHi, hUH, hLH  ⇒  (hν → WdThLow) ∧ (hν → WdEQfar). -/
+TOP NODE (round 117: new hypotheses hUH, hLH, the frontier hypotheses of the road; round 131: new hypothesis hVt,
+the frontier hypothesis CapV in (L(ω), L(ω+1)) of the road; Root.skNuC applies
+`skEQ hRead (SkF.skFrontU S) (SkF.skFrontL S) (SkF.skFrontVt S)`).
+hRead: hν → WdAtWall ∧ WdThHi, hUH, hLH, hVt  ⇒  (hν → WdThLow) ∧ (hν → WdEQfar). -/
 theorem skEQ (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) :
+    (hLH : SkLH S) (hVt : SkVt S) :
     (Nc.ncL S (ω + 1) ≤ nuC → Wd.WdThLow S) ∧ (Nc.ncL S (ω + 1) ≤ nuC → Wd.WdEQfar S) :=
-  ⟨skThLow hRead, skEQfar hRead hUH hLH⟩
+  ⟨skThLow hRead, skEQfar hRead hUH hLH hVt⟩
 
 /-! ## Guards and links -/
 
@@ -997,5 +1039,52 @@ SIZE: S
 skJumpNoRng ⇔ YzJumpShort ∧ YzJumpLong (split by the code of the gap bottom); an instance with a short-code gap
 bottom refutes CxEQtop (Yz.yzJump_short_noEQ), so skJumpNoRng holds there only by the absence of instances. -/
 theorem skJumpSplit : Xw.XwJumpNoRng S ↔ Yz.YzJumpShort S ∧ Yz.YzJumpLong S := Yz.yzJumpNoRng_iff
+
+/-- STATUS: PROVED (round 131, Ze.zeJumpShortU; NEW; no hypothesis beyond S)
+SIZE: S
+The short-code half of skJumpNoRng: no jump instance has a gap bottom with code ≤ θ·ω (statement Yz.YzJumpShort S;
+Ze.zeCode_win, Yz.yzR_lowCode).  A REFUTE-FIRST record: the case where the target would fail cannot occur. -/
+theorem skJumpShortU : Yz.YzJumpShort S := Ze.zeJumpShortU
+
+/-- STATUS: PROVED (round 131, Ze.zeJumpLong; NEW)
+SIZE: S
+The long-code half of skJumpNoRng from hVt (statement Yz.YzJumpLong S). -/
+theorem skJumpLongV (hVt : SkVt S) : Yz.YzJumpLong S := Ze.zeJumpLong hVt
+
+/-- STATUS: PROVED (round 131, Ze.zeBad_top; NEW)
+SIZE: S
+A bad interval [β, β + ω^E) (β ≠ 0, ω^E ∣ β) makes β + ω^E bad; hence a good η = β + ω^E has ι(β) < ι(η)
+(Ze.zeIota_prefix_lt). -/
+theorem skBadTop {β E : Ordinal.{0}} (hβ0 : β ≠ 0) (hd : ω ^ E ∣ β)
+    (hbad : ∀ ζ, β ≤ ζ → ζ < β + ω ^ E → ¬ Bt.Good S ζ) : ¬ Bt.Good S (β + ω ^ E) :=
+  Ze.zeBad_top hβ0 hd hbad
+
+/-- STATUS: PROVED (round 131, Ze.zeCap_win; NEW)
+SIZE: S
+The cap window: below every restart ρ_κ < L(ω+1) there is x < ρ_κ with cap(μ) ≤ ρ_κ for every restart
+ρ_μ ∈ (x, ρ_κ). -/
+theorem skCapWin {κ : Ordinal.{0}} (hκ : IsRestartIdx κ) (hκL : upsilon κ < Nc.ncL S (ω + 1)) :
+    ∃ x < upsilon κ, ∀ μ, IsRestartIdx μ → x < upsilon μ → upsilon μ < upsilon κ →
+      cdCapB S μ ≤ upsilon κ :=
+  Ze.zeCap_win hκ hκL
+
+/-- STATUS: PROVED (round 131, Ze.zeCode_win; NEW)
+SIZE: S
+Short codes are short near the top: m_κ ≤ θ·ω ⇒ every restart ρ_μ in a window (x, ρ_κ) has m_μ < θ·ω. -/
+theorem skCodeWin {κ : Ordinal.{0}} (hκ : IsRestartIdx κ) (hκL : upsilon κ < Nc.ncL S (ω + 1))
+    (hm : cdCode S κ ≤ ConjT.th S * ω) :
+    ∃ x < upsilon κ, ∀ μ, IsRestartIdx μ → x < upsilon μ → upsilon μ < upsilon κ →
+      cdCode S μ < ConjT.th S * ω :=
+  Ze.zeCode_win hκ hκL hm
+
+/-- STATUS: PROVED (round 131, Ze.zeGap_win; NEW; no hypothesis beyond S)
+SIZE: S
+The cap window of B_n p at a restart p = υ_κ of a gap configuration starts at a B_n-image: ∃ q < p, ∃ x ≤ B_n q,
+every restart ρ_μ ∈ (x, B_n p) has cap(μ) ≤ B_n p. -/
+theorem skGapWin {n : ℕ} {l l' p a κ : Ordinal.{0}} (hP : Ye.YeGapPt S n l l' p a)
+    (hκ : IsRestartIdx κ) (hpκ : p = upsilon κ) :
+    ∃ x q, q < p ∧ x ≤ Bc.bcB S n q ∧ ∀ μ, IsRestartIdx μ → x < upsilon μ →
+      upsilon μ < Bc.bcB S n p → cdCapB S μ ≤ Bc.bcB S n p :=
+  Ze.zeGap_win hP hκ hpκ
 
 end R2Skel.SkE

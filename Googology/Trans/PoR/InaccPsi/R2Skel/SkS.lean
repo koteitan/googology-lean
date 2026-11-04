@@ -48,6 +48,16 @@ import Googology.Trans.PoR.InaccPsi.R2.YvComp
 import Googology.Trans.PoR.InaccPsi.R2.YvUp
 import Googology.Trans.PoR.InaccPsi.R2.YvLev
 import Googology.Trans.PoR.InaccPsi.R2.YvWit
+import Googology.Trans.PoR.InaccPsi.R2.ZaLv
+import Googology.Trans.PoR.InaccPsi.R2.ZaUp
+import Googology.Trans.PoR.InaccPsi.R2.ZaTr
+import Googology.Trans.PoR.InaccPsi.R2.ZaNode
+import Googology.Trans.PoR.InaccPsi.R2.ZaFrag
+import Googology.Trans.PoR.InaccPsi.R2.ZaShift
+import Googology.Trans.PoR.InaccPsi.R2.ZaThCl
+import Googology.Trans.PoR.InaccPsi.R2.ZaRoad
+import Googology.Trans.PoR.InaccPsi.R2.ZaYvCl
+import Googology.Trans.PoR.InaccPsi.R2.ZaWit
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -331,6 +341,33 @@ and its statement kept; `Root.skNuC` unchanged (it applies `Yq.yqRoadS`).
   levels it is the proved `Xj.XjCl` (`Yv.yv_cl_const`, `Yv.yv_cl_frag`: the FRAG map of `Xj.xjFragXe`).  NEW node
   `skYvClConst` (PROVED), NEW leaf `skYvCl` (OPEN L, off the road: the next statement for `skShift2`).
 This file imports the new `Yv` modules, so it can be checked only after the merge.
+
+Round 131 (leaf "the hull clause YvCl, then the shift skShift2, then the carry skSupKXo", sup53).  Top node `skSupXo`
+and its statement kept; `Root.skNuC` unchanged (it applies `Yq.yqRoadS`).
+* FRAG WITH THE MOVING-LEVEL CLAUSE (`Za.zaFragV`, `Za.zaFragXe`): `Xj.xjFrag` with the extra clause `Za.ZaCl` at top
+  nodes whose level `Ω₁·q`, `B₂ ≤ q`, `Ω₁·q < θ`, has leaves in `F ∪ κ`: `Ψ(node) = ϑ^{c_k}(yvSub Ψ (Ω₁·q) + (vmap Ψ
+  r)[c_k])`, `yvSub Ψ (Ω₁·q) = Ω₁·q'` with `B₂ ≤ q'`, substitutions compose after `Ψ`, the leaves move by `Ψ` (the
+  invariant of the induction: `Za.za_lv_pi`, `Za.za_lv_up`, `Za.za_sub_up`, `Za.za_lev_comp`), the subcase of [W07a]
+  Def 6.2 read off the leaves at `β = ϑ^{b_n}(Δ_M)` and at its image (`Za.za_node_tr`), all under the one statement
+  `Za.ZaDlSC` (`Dl τ n` strongly critical for `n ≥ 2`; `Dl` has no definition in Lean, so this is a citation: NEW leaf
+  `skDlSC`, OPEN S).  NEW node `skZaFrag`.  The open leaf of round 130 `skYvCl` is REDUCED to `skDlSC` (`Za.za_yvCl`).
+* THE SHIFT (`Za.zaShiftCore`): `Xj.xjShiftCore` with `Za.zaFragV`, keeping `Za.ZaHiD`.  The node clause `Yq.XoThCl` at
+  every node all of whose `ϑ`-nodes have GOOD levels (`Za.ZaLevOK`: the leaves of `Ω₁·val L` in `X ∪ Y ∪ γ` and in
+  `T^{υ_{λ+h}}`, and `yvSub D (Ω₁·val L) = Ω₁·img L`) follows by induction (`Za.zaDCl`): `Za.ZaShift3 S` holds under
+  `ZaDlSC` (`Za.zaShift3`; NEW node `skZaShift3`), and `Za.ZaShift4 S` (`ZaShift3` with every restricted configuration
+  node good) implies `Yq.XoShift2 S` (`Za.zaShift2_of4`; NEW nodes `skShift2_of4` PROVED, `skShift4` SUSPECT, off the
+  road: a level value may have a canonical leaf that is no point of the term, e.g. the level `(Ω₁ + a) + b` has the leaf
+  `a + b`, which an arbitrary configuration need not contain).
+* REFUTE FIRST: at the first level with a moving leaf above `B₂` (`Ω₁·(B₂ + b)`, the leaf the base) the base case of
+  the moving-level clause holds with the moved level `Ω₁·(B₂ + c)` (`Za.za_wit_mv`; NEW node `skZaWitMv`); the
+  `φ`-move on the lowest segment at a moving leaf holds (`Za.za_wit_phi`: `π(φ(1, τ+1)) = φ(π 1, π(τ+1))`; NEW node
+  `skZaWitPhi`); a constant level is good (`Za.za_levOK_const`; NEW node `skZaLevConst`).  NO EVIDENCE against
+  `skShift2`; the carry `skSupKXo`: no progress.
+* `skShift2` stays OPEN on the road; exact gap: make every configuration node good — enlarge the configuration by the
+  canonical leaves of the levels of its nodes (finite leaf sets; leaves in `T^{υ_{λ+h}}` needs the next `υ`-point
+  strongly critical), and the level image `yvSub D (Ω₁·val L) = Ω₁·img L` (the realizer moves countable `φ`-values as
+  `φ`: needs the link `φ ↔ ϑ` on countable arguments).
+This file imports the new `Za` modules, so it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -1258,7 +1295,13 @@ Needed: FRAG (`Xj.xjFragV`) with nodes whose levels are terms with moving leaves
 Round 130: the level sort below `θ` is built (`Yv.yvSub`; nodes `skYvPi`, `skYvComp`, `skYvUp`, `skYvNode`, `skYvDat`,
 `skYvTr`, PROVED); REFUTE FIRST at the one-moving-leaf node `ϑ^{b}(Ω₁·(B₂ + b) + r)`: NO EVIDENCE, every FRAG step
 agrees with the leaf substitution there (`skYvWit`).  Next: `skYvCl` (FRAG with the moving-level clause), then
-`Xo.xoImg` of a restricted level term `= yvSub D` of its value. -/
+`Xo.xoImg` of a restricted level term `= yvSub D` of its value.
+Round 131: FRAG and the shift with the moving-level clause are built under `skDlSC` (`Za.zaFragV`, `Za.zaShiftCore`;
+nodes `skZaFrag`, `skYvCl` REDUCED); the node clause holds at every node with good levels (`Za.zaShift3`, node
+`skZaShift3`), and `Za.ZaShift4 S ⇒ Yq.XoShift2 S` (node `skShift2_of4`).  Left: every restricted configuration node
+good (node `skShift4`, SUSPECT as stated: canonical leaves that are no points of the term; the repair enlarges the
+configuration inside the proof), i.e. the leaf inclusion and the level image `yvSub D (Ω₁·val L) = Ω₁·img L`.
+REFUTE FIRST (round 131): NO EVIDENCE (`skZaWitMv`, `skZaWitPhi`). -/
 theorem skShift2 (S : InaccSeq.{0}) : Yq.XoShift2 S := by sorry
 
 /-- STATUS: REDUCED (from `skShift2` by `Yq.yqShift_of2`; NEW round 129)
@@ -1679,7 +1722,76 @@ theorem skYvClConst {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb
             Ur.WFr (c k) (Vi.vmap Ψ r) ∧ Vi.ZW (c k) (Vi.vmap Ψ r) ∧ Un.UnT.ev (c k) (Vi.vmap Ψ r) < Om1 :=
   Yv.yv_cl_frag hb hc F hF
 
-/-- STATUS: OPEN (NEW round 130; OFF THE ROAD: the next statement for `skShift2`, not yet a Lean reduction of it)
+/-! ## Round 131: FRAG and the shift with the moving-level clause (tools for `skShift2`) -/
+
+/-- STATUS: OPEN (NEW round 131; a citation; OFF THE ROAD: used only by the tools `skZaFrag`, `skZaShift3`, `skYvCl`)
+SIZE: S
+`ϑᵗ(Δₙ)` is strongly critical for `n ≥ 2` (`Za.ZaDlSC`).  `Dl` is a constant without definition (`R2.Dl_E` gives only
+`τ < Dl τ n ∈ E`), so no Lean proof exists; the paper argument is the non-vacuity paragraph of the docstring of
+`R2.CitedXo` ([W07a] Lemma 3.3 (a), Lemma 3.30, Lemma 4.2: `Δₙ ≥ ϑ₁(Ω₂) = ε_{Ω₁+1}`, and for `a', z < α` the value
+`φ(a', z) ≤ ϑᵗ(Ω₁·a' + z) < α`).  REFUTE FIRST: NO EVIDENCE (no Lean fact about `Dl` speaks against it; `Dl τ 1 =
+ϑᵗ(Ω₁) = ε_{τ+1}` is not strongly critical, so the bound `n ≥ 2` is needed; FRAG uses `M ≥ 2`). -/
+theorem skDlSC : Za.ZaDlSC := by sorry
+
+/-- STATUS: REDUCED (from `skDlSC` by `Za.zaFragXe`; NEW round 131)
+SIZE: L
+FRAG with the hull isomorphism (`Vl.VlFragConcl`), the constant-level clause (`Xj.XjCl Xe.XeLev`) and the
+moving-level clause `Za.ZaCl` at top nodes `ϑ^{b_k}(Ω₁·q + r[b_k])`, `B₂ ≤ q`, `Ω₁·q < θ`, leaves in `F ∪ κ`:
+`yvSub Ψ (Ω₁·q) = Ω₁·q'`, `B₂ ≤ q'`, substitutions compose after `Ψ`, the leaves move, and `Ψ(node) =
+ϑ^{c_k}(Ω₁·q' + (vmap Ψ r)[c_k])` -/
+theorem skZaFrag {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb : Chain κ b m) (hc : Chain κ c m)
+    (F : Finset Ordinal.{0}) (hF : ↑F ⊆ DD κ b m) : ∃ Ψ, Za.ZaFragConcl S Xe.XeLev κ b c m F Ψ :=
+  Za.zaFragXe skDlSC hb hc F hF
+
+/-- STATUS: REDUCED (from `skDlSC` by `Za.zaShift3`; NEW round 131)
+SIZE: L
+`Yq.XoShift2` with the node clause asked only at nodes all of whose `ϑ`-nodes have good levels (`Za.ZaLevOK`) -/
+theorem skZaShift3 (S : InaccSeq.{0}) : Za.ZaShift3 S := Za.zaShift3 skDlSC
+
+/-- STATUS: SUSPECT (NEW round 131; OFF THE ROAD)
+SIZE: L
+`Za.ZaShift4 S`: `Za.ZaShift3 S` with every restricted configuration node good (`Za.ZaNodesAll`).  Reason for SUSPECT:
+goodness asks the canonical leaves of the level value `Ω₁·val L` to lie in `X ∪ Y ∪ γ`; such a leaf need not be the
+value of a sub-term (the level `(Ω₁ + a) + b` with moving `a`, `b` has the leaf `a + b`), so for a configuration
+without it the statement fails whatever `D` is.  The repair (for `skShift2`): call the shift on the configuration
+enlarged by the canonical leaves of the levels of its nodes, so only the level image `yvSub D (Ω₁·val L) = Ω₁·img L`
+remains (and the leaves in `T^{υ_{λ+h}}`). -/
+theorem skShift4 (S : InaccSeq.{0}) : Za.ZaShift4 S := by sorry
+
+/-- STATUS: PROVED (by `Za.zaShift2_of4`; NEW round 131)
+SIZE: S
+`Za.ZaShift4 S ⇒ Yq.XoShift2 S` -/
+theorem skShift2_of4 (S : InaccSeq.{0}) (h : Za.ZaShift4 S) : Yq.XoShift2 S := Za.zaShift2_of4 h
+
+/-- STATUS: PROVED (by `Za.za_levOK_const`; NEW round 131; non-vacuity of the good levels)
+SIZE: S
+a constant level `lc M` with leaves below a strongly critical `q ≤ γ`, `q ≤ υ_{λ+h}` is good for every `D` fixing `q` -/
+theorem skZaLevConst {l μ γ h M q : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X Y : Finset Ordinal.{0}}
+    (hl0 : 0 < l) (hτ1 : upsilon (l + h) < Om1) (hqγ : q ≤ γ) (hqτ : q ≤ upsilon (l + h)) (hM1 : 1 ≤ M)
+    (hMθ : Om1 * M < ConjT.th S) (hL : Yv.YvLv S (· < q) (Om1 * M)) (hD : ∀ x, x < q → D x = x) :
+    Za.ZaLevOK S l μ γ f D X Y h (.lc M) :=
+  Za.za_levOK_const hl0 hτ1 hqγ hqτ hM1 hMθ hL hD
+
+/-- STATUS: PROVED (by `Za.za_wit_mv`; NEW round 131; REFUTE-FIRST test at the first level with a moving leaf above
+`B₂`)
+SIZE: S
+for `c < b`: `yvSub (mv b c) (Ω₁·(B₂ + b)) = Ω₁·(B₂ + c)` and `mv b c (ϑ^b(Ω₁·(B₂ + b))) = ϑ^c(Ω₁·(B₂ + c))` -/
+theorem skZaWitMv {κ b c : Ordinal.{0}} (hBκ : Bases κ b) (hκΓ : gamma 0 ≤ κ) (hc : InE c) (hκc : κ ≤ c)
+    (hcb : c < b) :
+    Yv.yvSub S (mv b c) (Om1 * (Uc.ucB + b)) = Om1 * (Uc.ucB + c) ∧
+      mv b c (vt b (Om1 * (Uc.ucB + b) + 0)) = vt c (Om1 * (Uc.ucB + c) + mv b c 0) ∧
+      ∃ q', Yv.yvSub S (mv b c) (Om1 * (Uc.ucB + b)) = Om1 * q' ∧ Uc.ucB ≤ q' ∧ Om1 * q' < ConjT.th S :=
+  Za.za_wit_mv hBκ hκΓ hc hκc hcb
+
+/-- STATUS: PROVED (by `Za.za_wit_phi`; NEW round 131; REFUTE-FIRST test of `D(φ(a,b)) = φ(Da, Db)` at a point with a
+moving leaf)
+SIZE: S
+`π(φ(1, τ + 1)) = φ(π 1, π(τ + 1))` for strongly critical bases `σ < τ` -/
+theorem skZaWitPhi {σ τ : Ordinal.{0}} (h : Bases σ τ) (hσ : SC σ) (hτ : SC τ) :
+    veblen 1 (τ + 1) ∈ TB τ σ ∧ pi σ τ (veblen 1 (τ + 1)) = veblen (pi σ τ 1) (pi σ τ (τ + 1)) :=
+  Za.za_wit_phi h hσ hτ
+
+/-- STATUS: REDUCED (round 131: from `skDlSC` by `Za.za_yvCl`; NEW round 130, was OPEN; OFF THE ROAD)
 SIZE: L
 FRAG with the moving-level hull clause below `θ`: for chains `b`, `c` over `κ` and a finite `F ⊆ D_m`, a FRAG map
 `Ψ` (`Vl.VlFragConcl`) with `Yv.YvCl S κ b c m F Ψ`.  Proof plan: `Xj.xjFrag_step` with the node lemmas
@@ -1691,6 +1803,7 @@ membership of a level from its leaves in `T^g` (the analogue of `Vl.vl_lv_mem`, 
 `skShift2` itself one more step: the image `Xo.xoImg` of a restricted level term equals `yvSub D` of its value. -/
 theorem skYvCl {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb : Chain κ b m) (hc : Chain κ c m)
     (F : Finset Ordinal.{0}) (hF : ↑F ⊆ DD κ b m) :
-    ∃ Ψ, Vl.VlFragConcl κ b c m F Ψ ∧ Yv.YvCl S κ b c m F Ψ := by sorry
+    ∃ Ψ, Vl.VlFragConcl κ b c m F Ψ ∧ Yv.YvCl S κ b c m F Ψ :=
+  Za.za_yvCl skDlSC hb hc F hF
 
 end R2Skel.SkS
