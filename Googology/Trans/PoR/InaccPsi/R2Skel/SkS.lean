@@ -58,6 +58,18 @@ import Googology.Trans.PoR.InaccPsi.R2.ZaThCl
 import Googology.Trans.PoR.InaccPsi.R2.ZaRoad
 import Googology.Trans.PoR.InaccPsi.R2.ZaYvCl
 import Googology.Trans.PoR.InaccPsi.R2.ZaWit
+import Googology.Trans.PoR.InaccPsi.R2.ZfSC
+import Googology.Trans.PoR.InaccPsi.R2.CitedZf
+import Googology.Trans.PoR.InaccPsi.R2.ZfDl
+import Googology.Trans.PoR.InaccPsi.R2.ZfPhi
+import Googology.Trans.PoR.InaccPsi.R2.ZfNo4
+import Googology.Trans.PoR.InaccPsi.R2.ZfFin
+import Googology.Trans.PoR.InaccPsi.R2.ZfInj
+import Googology.Trans.PoR.InaccPsi.R2.ZfLeaf
+import Googology.Trans.PoR.InaccPsi.R2.ZfDCl
+import Googology.Trans.PoR.InaccPsi.R2.ZfShift
+import Googology.Trans.PoR.InaccPsi.R2.ZfPi
+import Googology.Trans.PoR.InaccPsi.R2.ZfPiG
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -368,6 +380,38 @@ and its statement kept; `Root.skNuC` unchanged (it applies `Yq.yqRoadS`).
   strongly critical), and the level image `yvSub D (Ω₁·val L) = Ω₁·img L` (the realizer moves countable `φ`-values as
   `φ`: needs the link `φ ↔ ϑ` on countable arguments).
 This file imports the new `Za` modules, so it can be checked only after the merge.
+
+Round 132 (leaf "the shift skShift2, then skDlSC and the carry skSupKXo: is the root non-vacuous?", sup54).  Top node
+`skSupXo` and its statement kept; `Root.skNuC` unchanged (it applies `Yq.yqRoadS` through `skShiftXo`).
+* REFUTE FIRST (a3), the level image at Veblen indices past `1`: `π(φ(α, τ+1)) = φ(α, σ+1) = φ(π α, π(τ+1))` for
+  strongly critical bases `σ < τ` and every `1 ≤ α < σ` (`Zf.zf_wit_phiA`, `ϑˣ(Ω₁·α) = φ(α, x+1)`, `Zf.zf_glA_zero`),
+  in particular `α = 2`, `α = ω` (`Zf.zf_wit_phi2`, `Zf.zf_wit_phiW`); `φ(2, 0)`, `φ(ω, 1)` are fixed by `π`
+  (`Zf.zf_wit_const`).  NO EVIDENCE against the level image.  NEW node `skZfWitPhiA` (PROVED).
+* REFUTE FIRST (a1): `skShift4` is REFUTED as a road: the node `ϑ^{υ_{λ+1}}(Ω₁·0 + 1)` (level term `lc 0`) is well
+  formed and restricted, its points form an admissible configuration, and its level is `0`, so `Za.ZaNodesAll` fails
+  for every `D` (`Zf.zfNodesAll_false`) and `Za.ZaShift4 S` contradicts the hypotheses of the shift at every `β ≥ 2`
+  (`Zf.zfShift4_vac`; NEW node `skShift4_vac`).  The same node is in the scope of `Yq.XoThCl`: level `0` must be
+  treated separately (it is, in `Zf.zfDCl`, by the term `th1 (par (η − 1))` of `Un.UnC`).
+* (b) `skDlSC` PROVED, with ONE NEW cited axiom `R2.zfDl_vt` (`R2.CitedZf`: [W07a] Lemma 3.27 / Corollary 3.24, Defs
+  3.1, 3.4, 3.22, 3.28, Convention 3.25, Lemmas 3.30, 4.2: `Dl τ n = ϑᵗ(Δ)` with `Δ ∈ Tᵗ ∩ Ω₂`, `Ω₁·Ω₁ ≤ Δ`, for `n ≥
+  2`) and the Lean theorem `Zf.zf_vt_SC` (a `ϑᵗ`-value at a level `≥ Ω₁` is strongly critical, from `R2.vdVt_lt`,
+  `Gl.glA_veb_le`): `Zf.zfDlSC`.  So `skZaFrag`, `skZaShift3`, `skYvCl` are PROVED (they take `S` now).
+* (a) `skShift2` REDUCED to the NEW node `skLevImg` (`Zf.ZfImg S`: the shift with `Za.ZaHiD` and the level image
+  `Zf.ZfImgCl`, `yvSub D (Ω₁·val L) = Ω₁·img L`, in place of `Yq.XoThCl`) by `Zf.zfShift2`, which does (a1) and (a2):
+  the configuration is enlarged by the leaves of the level of every node value, the predecessor of its argument at
+  level `0`, and `ω` (`Zf.zf_enl`); a node value determines its segment and its argument (`Zf.zf_seg_unique`,
+  `Zf.zf_vt_inj`: `ϑᵗ` is one-to-one on `Tᵗ ∩ Ω₂`); every canonical decomposition has a finite leaf set
+  (`Zf.zf_yv_fin`); the leaves of a node level lie in `T^{υ_{λ+h}}` and below the next `υ`-point (`Zf.zf_lv_T`);
+  the node clause at every restricted decomposition, levels `0` included (`Zf.zfDCl`).  NEW nodes `skZfVtSC`,
+  `skZfVtInj`, `skZfLvT`, `skZfEnl` (PROVED).  The open leaf on the road is now `skLevImgHi2` (below).
+* (a3) first part: the level image holds on one-segment levels (`Zf.zf_img_pi`: `π(Ω₁·val L) = Ω₁·img L`,
+  `Zf.zf_pi_mul_pi`; `D = π` on the leaves), so `skLevImg` is REDUCED to the NEW leaf `skLevImgHi` (`Zf.ZfImgP S`: the
+  level image only at levels that are not one-segment terms) by `Zf.zfImg_of_P`; the same at every segment `h ≥ 1`
+  (`Zf.zf_img_piG`, `Zf.zf_seg_D`: there the shift is the base change `mv = π_{υ_{μ+f h},υ_{λ+h}}`), so `skLevImgHi` is
+  REDUCED to the NEW leaf `skLevImgHi2` (`Zf.ZfImgP2 S`: the level image only at levels that are one-base terms at no
+  segment) by `Zf.zfImgP_of_P2`.  NEW nodes `skZfImgPi`, `skZfImgPiG` (PROVED).
+* (c) `skSupKXo`: no progress (unchanged).
+This file imports the new `Zf` modules and `R2.CitedZf`, so it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -1280,7 +1324,78 @@ theorem skSupXo :
   have h := skVisKXo (S := S) 0 l hl (by simpa using e)
   simpa using h
 
-/-- STATUS: OPEN (NEW round 129; REPLACES `skRealBXo` on the road)
+/-- STATUS: OPEN (NEW round 132; the open leaf of the shift on the road; REPLACES `skShift2`, via `skLevImgHi`,
+`skLevImg`)
+SIZE: L
+`Zf.ZfImgP2 S`: `Zf.ZfImg S` with the level image asked only at levels that are one-base terms at NO segment
+(`Zf.ZfImgHi2`: neither `Xo.XoPi` nor `Zf.XoPiG` for the segment map `π_{υ_{μ+f h},υ_{λ+h}}` of any configuration
+segment `υ_{λ+h} ∈ Y`, `h > 0`).  At one-base levels it is the theorem `Zf.zf_img_piG` with `Zf.zf_seg_D` (node
+`skZfImgPiG`).
+REFUTE FIRST (round 132): NO EVIDENCE (see `skLevImg`).
+Exact gap: the level image at a level whose term mixes leaves of two segments (moved by two different base changes,
+e.g. `lc B₂ + lo λ + sg 1 y`), carries a nested `ϑ`-node, or uses `Ω_·`, `ψ`: `yvSub D` must be the hull isomorphism
+of FRAG extended to such level terms (a composition of the segment maps `π_{υ_{μ+f h},υ_{λ+h}}` that commutes with `+`,
+`φ` and with the canonical decomposition; the analogue of `Zf.zf_pi_mulG` for that composition). -/
+theorem skLevImgHi2 (S : InaccSeq.{0}) : Zf.ZfImgP2 S := by sorry
+
+/-- STATUS: PROVED (by `Zf.zf_img_piG`; NEW round 132)
+SIZE: S
+the level image on one-base levels: if `D = π_{σ,τ}` on every countable leaf in `Tᵗ[σ]` that lies in `X ∪ Y ∪ γ`, then
+`yvSub D (Ω₁·val L) = Ω₁·img L` at a one-base level term `L` (`Zf.XoPiG`) -/
+theorem skZfImgPiG {l μ σ τ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X Y : Finset Ordinal.{0}}
+    (hB : Bases σ τ) (hD : ∀ p, p ∈ TB τ σ → p < Om1 → (p ∈ X ∪ Y ∨ p < γ) → D p = pi σ τ p)
+    (L : Xo.XoE) (hP : Zf.XoPiG S l μ σ τ f L) (hz : Om1 * Xo.xoVal S l L < ConjT.th S)
+    (hL : Yv.YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * Xo.xoVal S l L)) :
+    Yv.yvSub S D (Om1 * Xo.xoVal S l L) = Om1 * Xo.xoImg S l μ f L :=
+  Zf.zf_img_piG hB hD L hP hz hL
+
+/-- STATUS: REDUCED (round 132: from `skLevImgHi2` by `Zf.zfImgP_of_P2`; NEW round 132)
+SIZE: L
+`Zf.ZfImgP S`: `Zf.ZfImg S` with the level image asked only at levels that are NOT one-segment terms (`Zf.ZfImgHi`:
+`¬ Xo.XoPi S l μ L`); at one-segment levels it is the theorem `Zf.zf_img_pi` (node `skZfImgPi`).
+REFUTE FIRST (round 132): NO EVIDENCE (see `skLevImg`; the witnesses `Xj.xjX`, `Ww.wwX` have one-segment levels `lc B₂ +
+lo λ`, `lc B₂`, so they are no longer in the scope of this leaf).
+Exact gap: the level image at a level whose term has a moving leaf in a segment `h ≥ 1` (an old `sg`/`ub`/`tm` leaf or a
+nested `ϑ`-node) or uses `Ω_·`, `ψ`: there `D` is not one base change; `yvSub D` must commute with `+`, `φ`, `Ω_·`, `ψ` on
+the hull of the configuration, i.e. the hull isomorphism of FRAG (`Za.zaFragV`) must extend to the level terms (the
+analogue of `Zf.zf_pi_mul_pi` for the segment maps `mv`, and the composition `π⁻¹ ∘ Ψ' ∘ π` of `Za.za_lev_comp`). -/
+theorem skLevImgHi (S : InaccSeq.{0}) : Zf.ZfImgP S := Zf.zfImgP_of_P2 (skLevImgHi2 S)
+
+/-- STATUS: PROVED (by `Zf.zf_img_pi`; NEW round 132)
+SIZE: S
+the level image on one-segment levels: if `D = π` on `Y ∩ υ_{λ+1}` and `D = id` below `γ` (`X < γ < υ_μ`), then at a
+one-segment level term `L` (`Xo.XoPi`) whose leaves lie in `X ∪ Y ∪ γ`, `yvSub D (Ω₁·val L) = Ω₁·img L` -/
+theorem skZfImgPi {l β μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X Y : Finset Ordinal.{0}}
+    (hl0 : 0 < l) (hB : Bases (upsilon μ) (upsilon l)) (hs1 : upsilon (succ l) ≤ Om1)
+    (hpi : ∀ y ∈ Y, y < upsilon (succ l) → D y = pi (upsilon μ) (upsilon l) y) (hid : ∀ x, x < γ → D x = x)
+    (hXγ : ∀ x ∈ X, x < γ) (hγμ : γ < upsilon μ) (L : Xo.XoE) (hP : Xo.XoPi S l μ L) (hW : Xo.XoWF S l β L)
+    (hz : Om1 * Xo.xoVal S l L < ConjT.th S)
+    (hL : Yv.YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * Xo.xoVal S l L)) :
+    Yv.yvSub S D (Om1 * Xo.xoVal S l L) = Om1 * Xo.xoImg S l μ f L :=
+  Zf.zf_img_pi hl0 hB hs1 hpi hid hXγ hγμ L hP hW hz hL
+
+/-- STATUS: REDUCED (round 132: from `skLevImgHi` by `Zf.zfImg_of_P`; NEW round 132)
+SIZE: L
+`Zf.ZfImg S`: the shift `Yq.XoShift2` with the moving-level clause `Za.ZaHiD` and the LEVEL IMAGE `Zf.ZfImgCl` in place
+of the node clause `Yq.XoThCl`: one realizer `D` for the configuration with `yvSub D (Ω₁·val L) = Ω₁·img L`
+(`img = Xo.xoImg`, the leaf substitution of the level term) at every restricted well-formed node of the configuration
+whose level has value `≥ 1` and leaves in `X ∪ Y ∪ γ`.  Everything but `ZfImgCl` is the conclusion of
+`Za.zaShiftCore` (a theorem under `skDlSC`, PROVED).
+REFUTE FIRST (round 132): NO EVIDENCE.  On the lowest segment `D = π` and `π` moves countable `φ`-values as `φ` at
+every Veblen index `1 ≤ α < σ` (`Zf.zf_wit_phiA`, node `skZfWitPhiA`); on one-segment level terms the image is `π` of
+the value (`Xo.xoImg_pi`), so it does not depend on the term; the level-`0` nodes and the leaves that are no points of
+the term (the two ways `Za.ZaShift4` fails, node `skShift4_vac`) are outside the clause (`1 ≤ val L`, leaves in the
+configuration: the enlargement of `Zf.zfShift2` puts them there).  Levels through `Ω_x` with a moving countable index
+`x` (e.g. `ψ_{Ω₂}(ψ_{Ω₃}(Ω_λ))`, a level below `θ`) absorb the index in the same way at `λ` and at its image.
+Exact gap: the leaf substitution `yvSub D` commutes with the level operations `+`, `φ`, `Ω_·`, `ψ` on the hull of the
+configuration, i.e. `D` extends to a homomorphism of the level terms (on one segment this is `π`, `Yv.yv_pi_TB`; on the
+higher segments `D` is the hull isomorphism of FRAG, and countable `φ`-values must move as `φ`: the `φ ↔ ϑ` link of
+`Zf.zf_glA_zero` / `Gl.glA_pi` at every argument, not only at `x + 1`); then `π(Ω₁·M) = Ω₁·π(M)` for uncountable `M`
+(Lean has it for countable `M`, `Gl.gl_pi_mul`). -/
+theorem skLevImg (S : InaccSeq.{0}) : Zf.ZfImg S := Zf.zfImg_of_P (skLevImgHi S)
+
+/-- STATUS: REDUCED (round 132: from `skLevImg` by `Zf.zfShift2`; NEW round 129, was OPEN; REPLACES `skRealBXo` on the
+road)
 SIZE: L
 the shift with the `ϑ`-node clause `Yq.XoShift2 S`: `Xb.XbShift` (PROVED: `Xj.xbShift_holds`) with `Yq.XoThCl` in
 place of `Xb.XbThCl`, for one realizer map `D`.  `XoThCl`: `D(ϑ^{υ_{λ+h}}(Ω₁·L + e)) = ϑ^{υ_{μ+f h}}(Ω₁·L′ + e′)` for a
@@ -1301,8 +1416,11 @@ nodes `skZaFrag`, `skYvCl` REDUCED); the node clause holds at every node with go
 `skZaShift3`), and `Za.ZaShift4 S ⇒ Yq.XoShift2 S` (node `skShift2_of4`).  Left: every restricted configuration node
 good (node `skShift4`, SUSPECT as stated: canonical leaves that are no points of the term; the repair enlarges the
 configuration inside the proof), i.e. the leaf inclusion and the level image `yvSub D (Ω₁·val L) = Ω₁·img L`.
-REFUTE FIRST (round 131): NO EVIDENCE (`skZaWitMv`, `skZaWitPhi`). -/
-theorem skShift2 (S : InaccSeq.{0}) : Yq.XoShift2 S := by sorry
+REFUTE FIRST (round 131): NO EVIDENCE (`skZaWitMv`, `skZaWitPhi`).
+Round 132: REDUCED to `skLevImg` (`Zf.zfShift2`): the leaf inclusion (a1) by enlarging the configuration
+(`Zf.zf_enl`: finite leaf sets `Zf.zf_yv_fin`, unique argument of a node value `Zf.zf_vt_inj`), the leaves in
+`T^{υ_{λ+h}}` (a2, `Zf.zf_lv_T`, from `skDlSC`), the nodes of level `0` (`Zf.zfDCl`).  Left: the level image (a3). -/
+theorem skShift2 (S : InaccSeq.{0}) : Yq.XoShift2 S := Zf.zfShift2 (skLevImg S)
 
 /-- STATUS: REDUCED (from `skShift2` by `Yq.yqShift_of2`; NEW round 129)
 SIZE: M
@@ -1724,16 +1842,17 @@ theorem skYvClConst {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb
 
 /-! ## Round 131: FRAG and the shift with the moving-level clause (tools for `skShift2`) -/
 
-/-- STATUS: OPEN (NEW round 131; a citation; OFF THE ROAD: used only by the tools `skZaFrag`, `skZaShift3`, `skYvCl`)
+/-- STATUS: PROVED (round 132, by `Zf.zfDlSC` from the NEW cited axiom `R2.zfDl_vt` of `R2.CitedZf` and the Lean theorem
+`Zf.zf_vt_SC`; NEW round 131, was OPEN; ON THE ROAD since round 132 through `Zf.zf_lv_T` in `skShift2`)
 SIZE: S
 `ϑᵗ(Δₙ)` is strongly critical for `n ≥ 2` (`Za.ZaDlSC`).  `Dl` is a constant without definition (`R2.Dl_E` gives only
 `τ < Dl τ n ∈ E`), so no Lean proof exists; the paper argument is the non-vacuity paragraph of the docstring of
 `R2.CitedXo` ([W07a] Lemma 3.3 (a), Lemma 3.30, Lemma 4.2: `Δₙ ≥ ϑ₁(Ω₂) = ε_{Ω₁+1}`, and for `a', z < α` the value
 `φ(a', z) ≤ ϑᵗ(Ω₁·a' + z) < α`).  REFUTE FIRST: NO EVIDENCE (no Lean fact about `Dl` speaks against it; `Dl τ 1 =
 ϑᵗ(Ω₁) = ε_{τ+1}` is not strongly critical, so the bound `n ≥ 2` is needed; FRAG uses `M ≥ 2`). -/
-theorem skDlSC : Za.ZaDlSC := by sorry
+theorem skDlSC (S : InaccSeq.{0}) : Za.ZaDlSC := Zf.zfDlSC S
 
-/-- STATUS: REDUCED (from `skDlSC` by `Za.zaFragXe`; NEW round 131)
+/-- STATUS: PROVED (round 132: `skDlSC` PROVED; from `skDlSC` by `Za.zaFragXe`; NEW round 131)
 SIZE: L
 FRAG with the hull isomorphism (`Vl.VlFragConcl`), the constant-level clause (`Xj.XjCl Xe.XeLev`) and the
 moving-level clause `Za.ZaCl` at top nodes `ϑ^{b_k}(Ω₁·q + r[b_k])`, `B₂ ≤ q`, `Ω₁·q < θ`, leaves in `F ∪ κ`:
@@ -1741,14 +1860,15 @@ moving-level clause `Za.ZaCl` at top nodes `ϑ^{b_k}(Ω₁·q + r[b_k])`, `B₂ 
 ϑ^{c_k}(Ω₁·q' + (vmap Ψ r)[c_k])` -/
 theorem skZaFrag {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb : Chain κ b m) (hc : Chain κ c m)
     (F : Finset Ordinal.{0}) (hF : ↑F ⊆ DD κ b m) : ∃ Ψ, Za.ZaFragConcl S Xe.XeLev κ b c m F Ψ :=
-  Za.zaFragXe skDlSC hb hc F hF
+  Za.zaFragXe (skDlSC S) hb hc F hF
 
-/-- STATUS: REDUCED (from `skDlSC` by `Za.zaShift3`; NEW round 131)
+/-- STATUS: PROVED (round 132: `skDlSC` PROVED; from `skDlSC` by `Za.zaShift3`; NEW round 131)
 SIZE: L
 `Yq.XoShift2` with the node clause asked only at nodes all of whose `ϑ`-nodes have good levels (`Za.ZaLevOK`) -/
-theorem skZaShift3 (S : InaccSeq.{0}) : Za.ZaShift3 S := Za.zaShift3 skDlSC
+theorem skZaShift3 (S : InaccSeq.{0}) : Za.ZaShift3 S := Za.zaShift3 (skDlSC S)
 
-/-- STATUS: SUSPECT (NEW round 131; OFF THE ROAD)
+/-- STATUS: REFUTED (round 132, as a road to `Yq.XoShift2`: `Zf.zfShift4_vac`, node `skShift4_vac`; NEW round 131,
+SUSPECT; OFF THE ROAD)
 SIZE: L
 `Za.ZaShift4 S`: `Za.ZaShift3 S` with every restricted configuration node good (`Za.ZaNodesAll`).  Reason for SUSPECT:
 goodness asks the canonical leaves of the level value `Ω₁·val L` to lie in `X ∪ Y ∪ γ`; such a leaf need not be the
@@ -1791,7 +1911,8 @@ theorem skZaWitPhi {σ τ : Ordinal.{0}} (h : Bases σ τ) (hσ : SC σ) (hτ : 
     veblen 1 (τ + 1) ∈ TB τ σ ∧ pi σ τ (veblen 1 (τ + 1)) = veblen (pi σ τ 1) (pi σ τ (τ + 1)) :=
   Za.za_wit_phi h hσ hτ
 
-/-- STATUS: REDUCED (round 131: from `skDlSC` by `Za.za_yvCl`; NEW round 130, was OPEN; OFF THE ROAD)
+/-- STATUS: PROVED (round 132: `skDlSC` PROVED; round 131: from `skDlSC` by `Za.za_yvCl`; NEW round 130, was OPEN; OFF
+THE ROAD)
 SIZE: L
 FRAG with the moving-level hull clause below `θ`: for chains `b`, `c` over `κ` and a finite `F ⊆ D_m`, a FRAG map
 `Ψ` (`Vl.VlFragConcl`) with `Yv.YvCl S κ b c m F Ψ`.  Proof plan: `Xj.xjFrag_step` with the node lemmas
@@ -1804,6 +1925,61 @@ membership of a level from its leaves in `T^g` (the analogue of `Vl.vl_lv_mem`, 
 theorem skYvCl {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb : Chain κ b m) (hc : Chain κ c m)
     (F : Finset Ordinal.{0}) (hF : ↑F ⊆ DD κ b m) :
     ∃ Ψ, Vl.VlFragConcl κ b c m F Ψ ∧ Yv.YvCl S κ b c m F Ψ :=
-  Za.za_yvCl skDlSC hb hc F hF
+  Za.za_yvCl (skDlSC S) hb hc F hF
+
+/-! ## Round 132: the shift from the level image; `skDlSC` cited (tools for `skShift2`) -/
+
+/-- STATUS: PROVED (a REFUTATION recorded as a node, by `Zf.zfShift4_vac`; NEW round 132)
+SIZE: S
+`Za.ZaShift4 S` contradicts the hypotheses of the shift at every `(λ, β)` with `β ≥ 2`: the node `ϑ^{υ_{λ+1}}(Ω₁·0 + 1)`
+(level term `lc 0`) is a restricted configuration node of level `0`, never good (`Zf.zfNodesAll_false`). -/
+theorem skShift4_vac (h4 : Za.ZaShift4 S) {l β : Ordinal.{0}}
+    {Q : Ordinal.{0} → (Ordinal.{0} → Ordinal.{0}) → Ordinal.{0} → Ordinal.{0} → Finset Ordinal.{0} → Prop}
+    (h2 : 1 < β) (hl : IsRestartIdx l) (hl1 : upsilon l < Om1) (hν : upsilon l < nuC)
+    (hνβ : upsilon (l + β) ≤ nuC)
+    (hsup : ∀ γ < upsilon l, ∀ Os : Finset Ordinal.{0}, (∀ d ∈ Os, d < β) →
+      ∃ μ f B, CdRange S μ ∧ γ < upsilon μ ∧ upsilon μ < upsilon l ∧ μ + B ≤ l ∧ ω ^ 2 ∣ B ∧
+        upsilon (μ + B) ≤ cdR S μ ∧ Sl.SlOff f Os B ∧ Q μ f B γ Os)
+    (hstd : Cx.CxStdPairTop S) (hlL : upsilon l ≤ Nc.ncL S (ω + 1)) : False :=
+  Zf.zfShift4_vac h4 h2 hl hl1 hν hνβ hsup hstd hlL
+
+/-- STATUS: PROVED (by `Zf.zf_wit_phiA`; NEW round 132; REFUTE-FIRST test of the level image at every Veblen index)
+SIZE: S
+`φ(α, τ+1) ∈ Tᵗ[σ]` and `π(φ(α, τ+1)) = φ(α, σ+1) = φ(π α, π(τ+1))` for strongly critical bases `σ < τ`, `1 ≤ α < σ` -/
+theorem skZfWitPhiA {σ τ α : Ordinal.{0}} (hB : Bases σ τ) (hσ : SC σ) (hτ : SC τ) (h1 : 1 ≤ α) (hασ : α < σ) :
+    veblen α (τ + 1) ∈ TB τ σ ∧ pi σ τ (veblen α (τ + 1)) = veblen α (σ + 1) ∧
+      pi σ τ (veblen α (τ + 1)) = veblen (pi σ τ α) (pi σ τ (τ + 1)) :=
+  Zf.zf_wit_phiA hB hσ hτ h1 hασ
+
+/-- STATUS: PROVED (by `Zf.zf_vt_SC`; NEW round 132)
+SIZE: S
+a `ϑᵗ`-value at a level `Ω₁ ≤ M` (`Ω₁·M + η ∈ Tᵗ ∩ Ω₂`, `η < Ω₁`) is strongly critical -/
+theorem skZfVtSC (S : InaccSeq.{0}) {τ M η : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : Om1 ≤ M) (hη1 : η < Om1)
+    (hξ : Om1 * M + η ∈ Tset τ) (hξ2 : Om1 * M + η < OmTwo) : SC (vt τ (Om1 * M + η)) :=
+  Zf.zf_vt_SC S hτ hτ1 hM1 hη1 hξ hξ2
+
+/-- STATUS: PROVED (by `Zf.zf_vt_inj`; NEW round 132)
+SIZE: S
+`ϑᵗ` is one-to-one on `Tᵗ ∩ Ω₂` -/
+theorem skZfVtInj (S : InaccSeq.{0}) {τ ξ ξ' : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hξ : ξ ∈ Tset τ) (hξ2 : ξ < OmTwo)
+    (hξ' : ξ' ∈ Tset τ) (hξ'2 : ξ' < OmTwo) (heq : vt τ ξ = vt τ ξ') : ξ = ξ' :=
+  Zf.zf_vt_inj S hτ hτ1 hξ hξ2 hξ' hξ'2 heq
+
+/-- STATUS: PROVED (by `Zf.zf_lv_T`; NEW round 132)
+SIZE: S
+the leaves of the level `Ω₁·M` of a node `ϑᵗ(Ω₁·M + η)` (`1 ≤ M`) lie in `Tᵗ` and below every `υ`-point `u > τ` -/
+theorem skZfLvT {τ M η u : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) (hM1 : 1 ≤ M) (hη1 : η < Om1)
+    (h : Om1 * M + η ∈ Tset τ) (h2 : Om1 * M + η < OmTwo) (hu : UpsPt u) (hτu : τ < u) :
+    Yv.YvLv S (fun p => p ∈ Tset τ ∧ p < u) (Om1 * M) :=
+  Zf.zf_lv_T S hτ hτ1 hM1 hη1 h h2 hu hτu
+
+/-- STATUS: PROVED (by `Zf.zf_enl`; NEW round 132)
+SIZE: S
+the enlargement: a finite set below `υ_{λ+β}` containing, for every node value `y ∈ Y`, the leaves of its level and the
+predecessor of its argument (level `0`) -/
+theorem skZfEnl {l β : Ordinal.{0}} (hl0 : 0 < l) (hb1 : upsilon (l + β) ≤ Om1) (Y : Finset Ordinal.{0})
+    (hYb : ∀ y ∈ Y, y < upsilon (l + β)) :
+    ∃ Z : Finset Ordinal.{0}, (∀ z ∈ Z, z < upsilon (l + β)) ∧ ∀ y ∈ Y, Zf.ZfEnlAt S l (upsilon (l + β)) y Z :=
+  Zf.zf_enl S hl0 hb1 Y hYb
 
 end R2Skel.SkS

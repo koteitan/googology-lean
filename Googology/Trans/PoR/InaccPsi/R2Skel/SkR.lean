@@ -25,6 +25,7 @@ import Googology.Trans.PoR.InaccPsi.R2.YyTest
 import Googology.Trans.PoR.InaccPsi.R2.YyOm2B
 import Googology.Trans.PoR.InaccPsi.R2.ZdTest
 import Googology.Trans.PoR.InaccPsi.R2.ZdChainR
+import Googology.Trans.PoR.InaccPsi.R2.ZiTop
 import Googology.Trans.PoR.InaccPsi.R2Skel.SkE
 
 /-!
@@ -1432,15 +1433,170 @@ theorem skTopMoveChainY3E0 (S : InaccSeq.{0}) :
   fun _ _ _ _ hR h1 hr hl' hB hA' hρ' k _ _ _ _ hξ hec hβD hbe hs hst hsT IH =>
     Zd.zdTopMoveChainY3E0 hR h1 hr hl' hB hA' hρ' k hξ hec hβD hbe hs hst hsT IH
 
-/-- STATUS: OPEN (NEW round 131; REFUTE FIRST: NO EVIDENCE — every point below `W^{Y₃+Ω₂·ε₀}` holds, skPsi3OffE0; no
-known no-go speaks of these atoms: Vq.vqNoSh (no SELF-relative shift in `[Y₃, Ω₃)`) concerns shifts relative to
-themselves, the shifts here are relative to the base `Ω₃`)
+/-- STATUS: PROVED (Zi.ziTestE0, Zi.ziTestY3two, Zi.ziTestOm3, from Zi.ziRS_cst, Zi.ziTopMoveWK, Zi.ziPlat3,
+Zi.ziU_one_Om3, Zi.ziY3_gt_chain; NEW round 132; the REFUTE-FIRST records of (a) and (b); checkable only after the merge)
+SIZE: S
+(a) at `Y₃·2`: `Y₃·2 = Y₃ + Ω₂·Ω₂·Y₃`, past `W^{Y₃+Ω₂·Ω₂·Ω₂}` and past `W^{Y₃+Ω₂·Ω₂·K₃}`, `B_n` fixes `Y₃`;
+(b) at `E = Ω₃`: `ψ₂(W^{Ω₃+Ω₃}) = sup_m ψ₂(W^{Ω₃+u_m})` with `u_m ∈ [Y₃, Ω₃)` above every chain exponent
+`Ω₂·ξ + e`; (a) at `Y₃ + Ω₂·ε₀`: a fixed relative shift with image `Y₂ + Ω₁·ε₀`, and the atom `ψ₂(Ω₃ + W^{Y₃+Ω₂·ε₀})`
+moves at every window under IH. -/
+theorem skRefTests132 (S : InaccSeq.{0}) :
+    (Ug.ugY S * 2 = Zi.ziPP S (Ug.ugY S) ∧ Zi.ziPP S (Om (1 + 1)) ≤ Ug.ugY S * 2 ∧
+      Zi.ziPP S (Zi.ziK3 S) < Ug.ugY S * 2 ∧ ∀ n : ℕ, Bc.bcB S n (Ug.ugY S) = Ug.ugY S) ∧
+    (S.psi (Le.leWe (Om (1 + 1 + 1) + Om (1 + 1 + 1))) (Om (1 + 1)) =
+        ⨆ m : ℕ, S.psi (Le.leWe (Om (1 + 1 + 1) + Zi.ziU S (Om (1 + 1 + 1)) 0 m)) (Om (1 + 1)) ∧
+      (∀ m : ℕ, Ug.ugY S ≤ Zi.ziU S (Om (1 + 1 + 1)) 0 (m + 1) ∧ Zi.ziU S (Om (1 + 1 + 1)) 0 (m + 1) < Om (1 + 1 + 1)) ∧
+      ∀ ξ e : Ordinal.{0}, ξ < Om (1 + 1) → e < Om (1 + 1) → Om (1 + 1) * ξ + e < Ug.ugY S) ∧
+    (Zd.ZdRS S (Zd.zdXr S ε₀) (Zd.zdXhr S ε₀) ∧
+      ∀ (n : ℕ) (l l' A' : Ordinal.{0}), CdRange S l → Bc.bcC S n < upsilon l →
+      cdR S l < Bc.bcC S (n + 1) → IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
+      A' ∈ S.CSet A' (S.psi A' (Om 1)) → S.psi A' (Om 1) = upsilon l' →
+      (S.psi (Om (1 + 1 + 1) + Le.leWe (Zd.zdXr S ε₀)) (Om (1 + 1)) ∈ ldAtR S l →
+        (∀ x, GxCl (upsilon l) (ldAtR S l) x → x < S.psi (Om (1 + 1 + 1) + Le.leWe (Zd.zdXr S ε₀)) (Om (1 + 1)) → MvD S x ∧
+          GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
+          gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
+          gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) →
+        MvD S (S.psi (Om (1 + 1 + 1) + Le.leWe (Zd.zdXr S ε₀)) (Om (1 + 1))) ∧ Bc.bcB S n (S.psi (Om (1 + 1 + 1) + Le.leWe (Zd.zdXr S ε₀)) (Om (1 + 1))) ∈ ldAtR S l' ∧
+          gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n (S.psi (Om (1 + 1 + 1) + Le.leWe (Zd.zdXr S ε₀)) (Om (1 + 1)))) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) (S.psi (Om (1 + 1 + 1) + Le.leWe (Zd.zdXr S ε₀)) (Om (1 + 1)))))) :=
+  ⟨Zi.ziTestY3two, Zi.ziTestOm3, Zi.ziRS_cst (Zi.ziEps0_lt_G.trans_le Zi.ziG_le_K3),
+    fun _ _ _ _ hR h1 hr hl' hB hA' hρ' => (Zi.ziTestE0 hR h1 hr hl' hB hA' hρ').2⟩
+
+/-- STATUS: PROVED (Zi.ziPlat3, from Zi.ziKeyU, Zi.ziR3U; NEW round 132; checkable only after the merge)
+SIZE: S
+THE LEVEL-3 PLATEAU: `ψ₂(β + W^{X+Ω₃}) = sup_m ψ₂(β + W^{X+u_m})`, `u_0 = 0`, `u_{m+1} = ψ₃(β + W^{X+u_m})`, for
+every `β`, `X` (the top atoms at exponents `E ≥ Ω₃` reduce to exponents below `Ω₃`). -/
+theorem skPlat3 (S : InaccSeq.{0}) :
+    ∀ X β : Ordinal.{0}, S.psi (β + Le.leWe (X + Om (1 + 1 + 1))) (Om (1 + 1)) =
+      ⨆ m : ℕ, S.psi (β + Le.leWe (X + Zi.ziU S X β m)) (Om (1 + 1)) :=
+  fun X β => Zi.ziPlat3 X β
+
+/-- STATUS: PROVED (Zi.ziRSPlat, from Zi.ziStepTop0, Zi.ziStepVqSh, Zi.ziStepShB, Zi.ziPlatO, Zi.ziPlatC, Zi.ziTopC,
+Vq.vqTopE; NEW round 132; checkable only after the merge)
+SIZE: M
+THE PLATEAU SHIFT IS A FIXED RELATIVE SHIFT: `(P, P̂)` a fixed relative shift ⇒ `(P + Ω₂·Ω₂, P̂ + Ω₁·Ω₁)` is one; in
+particular `Θ(ψ₂(β + W^{P+Ω₂·Ω₂})) = ψ₁(Â + Ω^{P̂+Ω₁·Ω₁})` at every base `β ≥ Ω₃` of exponent `0`. -/
+theorem skRSPlat (S : InaccSeq.{0}) :
+    ∀ P Pt : Ordinal.{0}, Zd.ZdRS S P Pt → Zd.ZdRS S (Zi.ziXp P (Om (1 + 1))) (Zi.ziXhp Pt (Om 1)) :=
+  fun _ _ hP => Zi.ziRSPlat hP
+
+/-- STATUS: PROVED (Zi.ziBotPlat, from Zi.ziBotC, Zi.ziRSC, Zi.ziXUpM, Zi.ziBaseXM, Zi.ziTopC, Zi.ziOwnC_iff,
+Zi.ziTC_move; NEW round 132; checkable only after the merge)
+SIZE: M
+THE MOVES BELOW THE PLATEAU SHIFT: for a fixed relative shift `P`, the moves below `P` give the moves below
+`P + Ω₂·Ω₂` (over every base `a ≥ Ω₃` with `W^{P+Ω₂·Ω₂} ∣ a`, `W^{P+Ω₂·Ω₂} ∣ B_n a`); the code coefficients `ξ` of
+`P + Ω₂·ξ` move under `B_n`. -/
+theorem skBotPlat (S : InaccSeq.{0}) :
+    ∀ (n : ℕ) (l l' A' : Ordinal.{0}), CdRange S l → Bc.bcC S n < upsilon l →
+      cdR S l < Bc.bcC S (n + 1) → IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
+      A' ∈ S.CSet A' (S.psi A' (Om 1)) → S.psi A' (Om 1) = upsilon l' →
+      ∀ P Pt : Ordinal.{0}, Zd.ZdRS S P Pt → Zd.ZdBot S n l l' A' P → Zd.ZdBot S n l l' A' (Zi.ziXp P (Om (1 + 1))) :=
+  fun _ _ _ _ hR h1 hr hl' hB hA' hρ' _ _ hP HB => Zi.ziBotPlat hR h1 hr hl' hB hA' hρ' hP HB
+
+/-- STATUS: PROVED (Zi.ziChain, from Zi.ziSh_cst, Zi.ziLimSh, Zd.zdNext, Zd.zdTopUp, Xm.xmTopUp; NEW round 132;
+checkable only after the merge)
+SIZE: M
+(b) THE TOP LAW AT EVERY EXPONENT `Ω_{k+3} + Ω₂·ξ + e`, `ξ < ψ_{Ω₁}(0)` (contains skTopLawChain). -/
+theorem skTopLawCst (S : InaccSeq.{0}) :
+    ∀ (k : ℕ) (l ηx A : Ordinal.{0}), IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      ∀ ξ, ξ < Zi.ziG S → ∀ e, GxCl (upsilon l) (ldAtR S l) e → e < Om (1 + 1) → ∀ β, Vb.VbD S l β →
+        Ro.RoBaseE S l (Zd.zdX k ξ) e β → Zd.ZdLaw S l A (Zd.zdX k ξ) e β :=
+  fun k _ _ _ hl hX hA hρ => Zi.ziChain hl hX hA hρ k
+
+/-- STATUS: PROVED (Zi.ziTopMoveWK, from Yj.yjTopBase, Yj.yjBaseFacts, Zi.ziPsi3OffWK; NEW round 132; supersedes
+skTopMoveY3E0; checkable only after the merge)
+SIZE: M
+Every atom `ψ₂(t) ≤ s < ψ₂(t + W^{Y₃+Ω₂·Ω₂·K₃})` above every top atom `t = β + W^{Ω_{k+3}+e}` moves (window, IH(s)). -/
+theorem skTopMoveWK (S : InaccSeq.{0}) :
+    ∀ (n : ℕ) (l l' A' : Ordinal.{0}), CdRange S l → Bc.bcC S n < upsilon l →
+      cdR S l < Bc.bcC S (n + 1) → IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
+      A' ∈ S.CSet A' (S.psi A' (Om 1)) → S.psi A' (Om 1) = upsilon l' →
+      ∀ (k : ℕ) (e β s : Ordinal.{0}), GxCl (upsilon l) (ldAtR S l) e → Vb.VbD S l β →
+      Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) e β → s ∈ ldAtR S l →
+      S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e)) (Om (1 + 1)) ≤ s →
+      s < S.psi (β + Le.leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e) + Le.leWe (Zi.ziPP S (Zi.ziK3 S))) (Om (1 + 1)) →
+      (∀ x, GxCl (upsilon l) (ldAtR S l) x → x < s → MvD S x ∧
+        GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
+        gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) →
+      MvD S s ∧ Bc.bcB S n s ∈ ldAtR S l' ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n s) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) s) :=
+  fun _ _ _ _ hR h1 hr hl' hB hA' hρ' k _ _ _ hec hβD hbe hs hst hsT IH =>
+    Zi.ziTopMoveWK hR h1 hr hl' hB hA' hρ' k hec hβD hbe hs hst hsT IH
+
+/-- STATUS: PROVED (Zi.ziTopMoveCstWK, from Zd.zdTopBase, Zd.zdBaseFacts, Zi.ziMv_cst, Zi.ziHL_cst, Zi.ziPsi3OffWK;
+NEW round 132; supersedes skTopMoveChainY3E0; checkable only after the merge)
+SIZE: M
+Every atom `ψ₂(t) ≤ s < ψ₂(t + W^{Y₃+Ω₂·Ω₂·K₃})` above every top atom `t = β + W^{X_ξ+e}`, `X_ξ = Ω_{k+3} + Ω₂·ξ`,
+`ξ < ψ_{Ω₁}(0)`, moves (window, IH(s)). -/
+theorem skTopMoveCstWK (S : InaccSeq.{0}) :
+    ∀ (n : ℕ) (l l' A' : Ordinal.{0}), CdRange S l → Bc.bcC S n < upsilon l →
+      cdR S l < Bc.bcC S (n + 1) → IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
+      A' ∈ S.CSet A' (S.psi A' (Om 1)) → S.psi A' (Om 1) = upsilon l' →
+      ∀ (k : ℕ) (ξ e β s : Ordinal.{0}), ξ < Zi.ziG S → GxCl (upsilon l) (ldAtR S l) e → Vb.VbD S l β →
+      Ro.RoBaseE S l (Zd.zdX k ξ) e β → s ∈ ldAtR S l → S.psi (β + Le.leWe (Zd.zdX k ξ + e)) (Om (1 + 1)) ≤ s →
+      s < S.psi (β + Le.leWe (Zd.zdX k ξ + e) + Le.leWe (Zi.ziPP S (Zi.ziK3 S))) (Om (1 + 1)) →
+      (∀ x, GxCl (upsilon l) (ldAtR S l) x → x < s → MvD S x ∧
+        GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
+        gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) →
+      MvD S s ∧ Bc.bcB S n s ∈ ldAtR S l' ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n s) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) s) :=
+  fun _ _ _ _ hR h1 hr hl' hB hA' hρ' k _ _ _ _ hξ hec hβD hbe hs hst hsT IH =>
+    Zi.ziTopMoveCstWK hR h1 hr hl' hB hA' hρ' k hξ hec hβD hbe hs hst hsT IH
+
+/-- STATUS: PROVED (Zi.ziPsi3OffWK, from Zi.ziBot_tow, Zi.ziRS_tow, Zi.ziBotPlat, Zi.ziRSPlat, Zi.ziStepTop0,
+Zi.ziPlatO, Zi.ziPlatC, Zi.ziOwnC_iff, Zi.ziBotC, Zi.ziRSC, Zi.ziTopC, Zi.ziVqShC, Zi.ziXUpM, Zi.ziBaseXM,
+Zi.ziOwnMoveBr, Zi.ziB_We, Zi.ziB_Oe, Zi.ziTopE_ge; NEW round 132; checkable only after the merge)
+SIZE: M
+(a) THE ψ₃-OFFSETS BELOW `W^{Y₃+Ω₂·Ω₂·K₃}`, `K₃ = ψ_{Ω₁}(Ω₃ + 1)` (contains skPsi3OffE0): above every base `a ≥ Ω₃`
+with a law at both ends, `Ω₃ ∣ a`, `Ω₃ ∣ B_n a`, every atom `ψ₂(a) ≤ s < ψ₂(a + W^{Y₃+Ω₂·Ω₂·K₃})` moves under IH(s). -/
+theorem skPsi3OffWK (S : InaccSeq.{0}) :
+    ∀ (n : ℕ) (l l' A' a D s : Ordinal.{0}), CdRange S l → Bc.bcC S n < upsilon l →
+      cdR S l < Bc.bcC S (n + 1) → IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
+      A' ∈ S.CSet A' (S.psi A' (Om 1)) → S.psi A' (Om 1) = upsilon l' → Yj.YjBase S n l l' A' a D →
+      Om (1 + 1 + 1) ∣ a → Om (1 + 1 + 1) ∣ Bc.bcB S n a → Om (1 + 1 + 1) ≤ a → s ∈ ldAtR S l →
+      S.psi a (Om (1 + 1)) ≤ s → s < S.psi (a + Le.leWe (Zi.ziPP S (Zi.ziK3 S))) (Om (1 + 1)) →
+      (∀ x, GxCl (upsilon l) (ldAtR S l) x → x < s → MvD S x ∧
+        GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
+        gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) →
+      MvD S s ∧ Bc.bcB S n s ∈ ldAtR S l' ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n s) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) s) :=
+  fun _ _ _ _ _ _ _ hR h1 hr hl' hB hA' hρ' hb hd hd' ha3 hs hsa hsT IH =>
+    Zi.ziPsi3OffWK hR h1 hr hl' hB hA' hρ' hb hd hd' ha3 hs hsa hsT IH
+
+/-- STATUS: OPEN (NEW round 132; REFUTE FIRST: NO EVIDENCE — every point below `W^{Y₃+Ω₂·Ω₂·K₃}` holds
+(skPsi3OffWK); the point `Y₃·2 = Y₃ + Ω₂·Ω₂·Y₃` lies in this range (Zi.ziTestY3two); no known no-go speaks of it)
 SIZE: L
-The ψ₃-offsets `W^{Y₃+Ω₂·ε₀} ≤ δ < Ω₃` above every `Ω₃`-divisible base with a law at both ends.  Missing: the relative
-shifts `X ∈ [Y₃ + Ω₂·ε₀, Ω₃)` of `Zd.ZdRS` (Zd.zdXUp, Zd.zdBaseXE work for ANY such shift): `Y₃ + Ω₂·ξ` for codes `ξ`
-not in every closure (`ξ ≥ ε₀`; the membership `Y₃ + Ω₂·ξ ∈ Cl(Ω₃ + W^X, ·)` then needs the own clause of `ξ`), the
-`Ω₂`-cofinal limits (`ξ = Ω₂`, a plateau over `ξ`), and the non-`Y₃`-headed shifts `Y₃·2`, `ψ₃(Ω₃ + 1)`, …, below `Ω₃`
-(a level-3 hierarchy: the tops `Rv.RvTop λ Ω₃ X X̂ 0` there are not in Lean). -/
+The ψ₃-offsets `W^{Y₃+Ω₂·Ω₂·K₃} ≤ δ < Ω₃` above every `Ω₃`-divisible base with a law at both ends.  Missing, in order:
+(i) the tower coefficient `η` of `Y₃ + Ω₂·Ω₂·η + Ω₂·ξ` as a CODE (`η ≥ K₃`): the prefix `Y₃ + Ω₂·Ω₂·η` then moves under
+`B_n` (`Zi.ziTopC`, `Zi.ziRSC`, `Zi.ziBotC`, `Zi.ziRSPlat` take a FIXED prefix `Zd.ZdRS`; redo them over a moving
+prefix `Zi.ZiRS` — the single-restart parts `Zi.ziTopC`, `Zi.ziStepTop0` only use the fields of the prefix at one
+restart), giving `W^{Y₃+Ω₂·Ω₂·Ω₂}`; (ii) the higher powers `Y₃ + Ω₂^j·…` (`j ≥ 3`, then `j` a code): the same plateau
+step one power up (`Zi.ziStepTop0` with the iterates of the coefficient of `Ω₂^j`); (iii) the shifts not below
+`Y₃ + Ω₂^{Ω₂}` (`Y₃·2`, `ψ₃(Ω₃+1)`, …): a level-3 hierarchy of fixed shifts (a constant shift has a constant
+image, `Zi.ziRSPlat`). -/
+theorem skPsi3OffRest2 (S : InaccSeq.{0}) :
+    ∀ (n : ℕ) (l l' A' a D s : Ordinal.{0}), CdRange S l → Bc.bcC S n < upsilon l →
+      cdR S l < Bc.bcC S (n + 1) → IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
+      A' ∈ S.CSet A' (S.psi A' (Om 1)) → S.psi A' (Om 1) = upsilon l' → Yj.YjBase S n l l' A' a D →
+      Om (1 + 1 + 1) ∣ a → Om (1 + 1 + 1) ∣ Bc.bcB S n a → Om (1 + 1 + 1) ≤ a → s ∈ ldAtR S l →
+      S.psi (a + Le.leWe (Zi.ziPP S (Zi.ziK3 S))) (Om (1 + 1)) ≤ s → s < S.psi (a + Om (1 + 1 + 1)) (Om (1 + 1)) →
+      (∀ x, GxCl (upsilon l) (ldAtR S l) x → x < s → MvD S x ∧
+        GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
+        gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) →
+      MvD S s ∧ Bc.bcB S n s ∈ ldAtR S l' ∧
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n s) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) s) := by
+  sorry
+
+/-- STATUS: REDUCED (skPsi3OffWK, skPsi3OffRest2; round 132: was OPEN; REFUTE FIRST: NO EVIDENCE — `Y₃ + Ω₂·ε₀`
+holds (skRefTests132), `Y₃·2` lies in the range of skPsi3OffRest2 (Zi.ziTestY3two); no known no-go speaks of these
+atoms: Vq.vqNoSh concerns self-relative shifts)
+SIZE: L
+The ψ₃-offsets `W^{Y₃+Ω₂·ε₀} ≤ δ < Ω₃` above every `Ω₃`-divisible base with a law at both ends (statement unchanged).
+Proof: below `W^{Y₃+Ω₂·Ω₂·K₃}` skPsi3OffWK, above it skPsi3OffRest2. -/
 theorem skPsi3OffRest (S : InaccSeq.{0}) :
     ∀ (n : ℕ) (l l' A' a D s : Ordinal.{0}), CdRange S l → Bc.bcC S n < upsilon l →
       cdR S l < Bc.bcC S (n + 1) → IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
@@ -1453,7 +1609,11 @@ theorem skPsi3OffRest (S : InaccSeq.{0}) :
         gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) →
       MvD S s ∧ Bc.bcB S n s ∈ ldAtR S l' ∧
         gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n s) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) s) := by
-  sorry
+  intro n l l' A' a D s hR h1 hr hl' hB hA' hρ' hb hd hd' ha3 hs hsa hsT IH
+  rcases lt_or_ge s (S.psi (a + Le.leWe (Zi.ziPP S (Zi.ziK3 S))) (Om (1 + 1))) with h | h
+  · exact skPsi3OffWK S n l l' A' a D s hR h1 hr hl' hB hA' hρ' hb hd hd' ha3 hs
+      ((psi_mono (InR_Om_succ 1) (le_self_add : a ≤ a + Le.leWe (Zd.zdXr S ε₀))).1.trans hsa) h IH
+  · exact skPsi3OffRest2 S n l l' A' a D s hR h1 hr hl' hB hA' hρ' hb hd hd' ha3 hs h hsT IH
 
 /-- STATUS: REDUCED (skPsi3OffE0, skPsi3OffRest; NEW round 131)
 SIZE: L
@@ -1498,6 +1658,14 @@ e < ψ₂(Ω_{k+3}) (skBaseMove0), and those top atoms move with no extra hypoth
 codes e'' ≤ B_n e of λ' with e'' ≥ ψ₂(B_n β + W^X) (needs a pullback: every code of λ' below B_n(ψ₂ t) is B_n of a code
 of λ; a failing e'' yields the failing atom code F = ψ₂(B_n β + W^{X+e''}) ≤ e'', so it suffices for atoms), and for
 β ≠ 0 the divisibility W^{X+B_n e} | B_n β, the normality of B_n β, and B_n β ∈ D' (vbT_move + Rx.rxL_memH).)
+(round 132: (1) the ψ₃-offsets below `W^{Y₃+Ω₂·Ω₂·K₃}`, `K₃ = ψ_{Ω₁}(Ω₃+1)`, PROVED (skPsi3OffWK; above every top
+atom skTopMoveWK, skTopMoveCstWK), the rest is skPsi3OffRest2 (via skPsi3OffRest, skPsi3OffD); the coefficients of the
+shifts `P + Ω₂·ξ` are now any CODE (moving shifts, skBotPlat), and every plateau shift `P + Ω₂·Ω₂` of a fixed shift is
+again a fixed shift with constant image (skRSPlat); (2) the top law at every `X + Ω₂·ξ + e`, `ξ < ψ_{Ω₁}(0)`
+(skTopLawCst); the exponents `E ≥ Ω₃` reduce to `E ∈ [Y₃, Ω₃)` (skPlat3); still missing for (2): the coefficients
+`ξ ≥ ψ_{Ω₁}(0)` (codes: `Zd.ZdSh` asks membership in every closure; redo `Zd.zdSucc` / `Zd.zdLim` / `Zd.zdLawW` with the
+relative membership `Zi.ZiMemR` and the move of `Zd.ZdMv` as in `Zi.ZiShB`), the plateau `X + Ω₂·Ω₂` (as `Zi.ziStepTop0`
+for the T-form), the exponents in `[Ω₂·Ω₂, Ω₃)`; (3) the assembly: unchanged.)
 (round 131: (1) for `Ω₃`-divisible bases the ψ₃-offsets below `W^{Y₃+Ω₂·ε₀}` PROVED (skPsi3OffE0; above every top
 atom skTopMoveY3E0, skTopMoveChainY3E0), the rest is skPsi3OffRest (via skPsi3OffD); (2) the top law and the move at
 EVERY exponent `X + Ω₂·ξ + e`, `ξ < ε₀` (skTopLawChain, skTopMoveChain, skTopBaseChain); still missing for (2): the
@@ -1543,6 +1711,8 @@ theorem skWallBase (S : InaccSeq.{0}) : Xi.XiTopUp S → Nc.ncL S (ω + 1) ≤ n
 (round 126: skTopMoveAll0, skOwnMove, skTopMoveAllB are generic in k; the same pieces as skWallBase are missing)
 (round 127: skBaseFactsB, skTopMoveAllB, skTopBase, skTopBlkFin are generic in k; the same pieces as skWallBase are
 missing)
+(round 132: skTopLawCst, skTopMoveWK, skTopMoveCstWK, skBotPlat, skRSPlat, skPsi3OffWK are generic in k; missing
+the same as skWallBase)
 (round 131: skTopLawChain, skTopBaseChain, skTopMoveChain, skPsi3OffE0, skTopMoveY3E0, skTopMoveChainY3E0 are generic
 in k; missing the same as skWallBase)
 (round 130: skTopLawOm2, skTopMoveOm2Y, skY3MoveW, skTopMoveY3W are generic in k; missing the same as skWallBase)
@@ -1724,12 +1894,13 @@ SIZE: M
 theorem skThMid (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → Rn.RnThMoveM S :=
   skMidCF S (skWallCF S)
 
-/-- STATUS: REDUCED (SkE.skTopK; round 124: the shared leaf, one copy kept in SkE)
+/-- STATUS: REDUCED (SkE.skTopK, skWallCF; round 124: the shared leaf, one copy kept in SkE; round 132: SkE.skTopK takes
+the code-free wall `SkE.SkWall S`, given here by `skWallCF`)
 SIZE: S
 `hν ⇒ ∀ window λ → λ', (∀ j, K_j ≤ m_λ) ⇒ B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})`  (statement Xs.XsTopK S; the OPEN leaf is
 `R2Skel.SkE.skTopK`). -/
 theorem skTopK (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC → Xs.XsTopK S :=
-  fun hν => _root_.R2Skel.SkE.skTopK hν
+  fun hν => _root_.R2Skel.SkE.skTopK (skWallCF S) hν
 
 /-- STATUS: REDUCED (round 124; was OPEN: skWallCF, skTopK; Xs.xsFarLow, Xs.xsMove)
 SIZE: M

@@ -17,6 +17,7 @@ import Googology.Trans.PoR.InaccPsi.R2.YuEps
 import Googology.Trans.PoR.InaccPsi.R2.YzJump
 import Googology.Trans.PoR.InaccPsi.R2.ZeJump
 import Googology.Trans.PoR.InaccPsi.R2.ZeGap
+import Googology.Trans.PoR.InaccPsi.R2.ZjRw
 
 /-!
 # Skeleton of part EQ: the hypotheses `(hν → WdThLow)` and `(hν → WdEQfar)` of `Wd.wdRoadL`
@@ -143,6 +144,21 @@ to a `B_n`-image, `Ze.zeGap_win`, computed through the argument terms of `P(η_�
 are otherwise unchanged.  The only open leaf of SkE is `skTopK`.
 This file also imports the new modules `R2.ZeBad`, `R2.ZeWin`, `R2.ZeName`, `R2.ZeTerm`, `R2.ZeJump`, `R2.ZeGap`
 (through `R2.ZeJump`, `R2.ZeGap`): it can be checked only after the merge.
+Round 132 (leaf eq11): `skTopK` REDUCED (`Zj.zjTopK_ofG`) to two children: the code-free wall (in the leaf: `skWallE`, OPEN, SHARED: the same
+statement as `SkR.skWallCF`, the code-free wall `Wr.WrWallCF`; the readings of every code `m_λ ≥ K_ω` contain atoms
+below `θ⁺`, so the wall is needed; at the merge it became the hypothesis `hW : SkWall S`, threaded
+through skThFar, skEQTopR, skKReachR, skKFar, skKClosed, skKLim, skEQfar, skEQ and supplied by Root from `SkR.skWallCF`,
+which keeps its reduction to `SkR.skWallLow`) and `skTopG` (OPEN, `Zj.ZjTopG`: the reading move at every window code
+`m_λ ≥ F₂^ω = ψ_{Ω₂}(Ω_ω + Ω₂^{Ω₂^{Ω₂}})`).  REFUTE FIRST: the expected plateau value is TRUE
+(`skKwSup`: `K_ω = sup_j K_j = ψ_{Ω₂}(Ω_ω + Ω₂²)`, no hypothesis; `skKwRead`: `Θ_λ(K_ω) = ψ_{Ω₁}(A + θ + Ω₁²)` at
+every restart with own `A ≥ Ω_ω·2`; `skKwWit`: at the restart of `L(0)`), and so is the move at the plateau
+(`skKwMove`: `B_n K_ω = K_ω`, `B_n Θ_λ(K_ω) = Θ_{λ'}(K_ω)` in every window, no wall).  Past the plateau: the base
+`Ω_ω` (reading `ψ_{Ω₁}(A + θ)`) is a base for the generic block machinery (`Le.LeBaseE`, `Ro.RoBaseE`, the
+base-indexed family `Rw.rwShG`), so every atom `θ < s < F₂^ω` is `ψ_{Ω₂}(Ω_ω + c)` with `c` own over `Ω_ω` and
+`Θ_λ(ψ_{Ω₂}(Ω_ω + c)) = ψ_{Ω₁}(A + θ + v)` (`Zj.zjReadG`; the bases `Ω_ω + W^e·δ`: `Zj.zjTop_read`), and these atoms
+move (`Zj.zjAtMoveG`); with the wall, the reading move holds at every window code `θ⁺ ≤ m_λ < F₂^ω` (`skMoveG` =
+`Zj.zjMoveG`).  Non-vacuity of the new leaf: `skTopGTarget` (`Zj.zjTopG_of_target`).  This file also imports the new
+modules `R2.ZjRead`, `R2.ZjMove`, `R2.ZjRo`, `R2.ZjRw` (through `R2.ZjRw`): it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -205,26 +221,39 @@ theorem sk_one_lt (n : ℕ) : (1 : Ordinal.{0}) < Nc.ncL S ((n + 1 : ℕ) : Ordi
 abbrev SkVt (S : InaccSeq.{0}) : Prop :=
   ∀ l, CdRange S l → Nc.ncL S ω < upsilon l → Bt.iota S (Gc.gcG Hl.hlU.B * ω) ≤ l → CdCapV S l
 
+/-- The code-free wall `Wr.WrWallCF` under `hν` (round 132, merge): the same statement as `SkR.skWallCF`, which reduces
+it to `SkR.skWallLow`; `Root.skNuC` passes `SkR.skWallCF S` to `skEQ` (SkE cannot import SkR). -/
+abbrev SkWall (S : InaccSeq.{0}) : Prop := Nc.ncL S (ω + 1) ≤ nuC → Wr.WrWallCF S
+
 /-! ## Open leaves -/
 
-/-- STATUS: OPEN
+/-- STATUS: OPEN (NEW round 132)
 SIZE: L
-REFUTE: NO EVIDENCE (round 124: follows from the target, skTopKTarget = Xs.xsTopK_of_target (hν ∧ CdEQ ∧ SkKFar);
+REFUTE: NO EVIDENCE (round 132: it follows from the target, skTopGTarget = Zj.zjTopG_of_target (hν ∧ CdEQ ∧ SkKFar);
 a move statement, so no no-go result applies (Vo.voNoGo, Vn.vnTop_Om3, Vq.vqNoTop_Om3, Xi.xiTopFam_false,
-Xd.xdX0Law_false speak of reach forms or top laws); the readings it needs are unknown past K_ω, and the natural
-level-down reading is REFUTED there, skXsRef)
-NEW leaf (round 124), shared with SkR (the one copy; `SkR.skTopK` is REDUCED to it).
+Xd.xdX0Law_false, Yd.ydInvRef speak of reach forms, top laws at base 0 or the inverse correspondence); the expected
+plateau value and the plateau move hold (skKwRead, skKwMove); the readings past F₂^ω are unknown: the next family
+(Sn/Sg: exponents E < ε_{Ω₂+1}) uses the closure condition Sn.snCL_atom only below θ, while over Ω_ω the
+exponents E ≥ θ occur)
+∀ window λ → λ', F₂^ω ≤ m_λ ⇒ B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})  (statement Zj.ZjTopG S,
+F₂^ω = ψ_{Ω₂}(Ω_ω + Ω₂^{Ω₂^{Ω₂}})). -/
+theorem skTopG (hν : Nc.ncL S (ω + 1) ≤ nuC) : Zj.ZjTopG S := by sorry
+
+/-- STATUS: REDUCED (round 132, Zj.zjTopK_ofG; was OPEN since round 124)
+SIZE: S
 ∀ window λ → λ', (∀ j, K_j ≤ m_λ) ⇒ B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})  (statement Xs.XsTopK S; K_ω = sup_j K_j,
-K_{j+1} = ψ_{Ω₂}(Ω_ω + Ω₂·K_j)).  Next readings: the plateau K_ω (expected ψ_{Ω₁}(A + θ + Ω₁²)), the bases
-Ω_ω + Ω₂^e·δ, then the ψ₃-atoms where the level-down value ψ_{Ω₁}(A + θ + T d) is false (xsRefK). -/
-theorem skTopK (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xs.XsTopK S := by sorry
+K_{j+1} = ψ_{Ω₂}(Ω_ω + Ω₂·K_j)).  Child skTopG and the hypothesis hW (the code-free wall, SkWall S = SkR.skWallCF, passed down from Root.skNuC): the codes K_ω ≤ m_λ < F₂^ω by Zj.zjMoveG (the atoms
+θ < s < F₂^ω over the base Ω_ω, Zj.zjAtMoveG; the atoms below θ⁺ by the wall), the codes ≥ F₂^ω by skTopG.
+Shared with SkR (SkR.skTopK forwards to it).  Checkable after the merge of R2.Zj*. -/
+theorem skTopK (hW : SkWall S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xs.XsTopK S :=
+  Zj.zjTopK_ofG (hW hν) (skTopG hν)
 
 /-- STATUS: REDUCED (round 124; was OPEN)
 SIZE: S
 ∀ far window: B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})  (child skTopK; Xs.xsFar_of_top: far codes are ≥ K_ω, skFarGe;
 checkable after the merge of R2.XsRd, R2.XsMv, R2.XsTop). -/
-theorem skThFar (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkThFar S :=
-  fun n l l' hW hw => Xs.xsFar_of_top (skTopK hν) n l l' hW hw
+theorem skThFar (hW : SkWall S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkThFar S :=
+  fun n l l' hWn hw => Xs.xsFar_of_top (skTopK hW hν) n l l' hWn hw
 
 /-- STATUS: PROVED (round 130, Yz.yzGapEpsTop; was OPEN)
 SIZE: S
@@ -416,19 +445,19 @@ SIZE: L
 hRead, hUH, hLH, hν ⇒ Xn.XnTop  (children skEQJump, skThFar, skKCof, and skThLow, skEnum; xrClass: the chain
 points of a reach class have no largest element, their supremum s has lh(s) = R; where B_n is continuous at s the
 reach moves (s a chain point or Wa.waTCtopOff); left: the jumps of B_n). -/
-theorem skEQTopR (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xn.XnTop S :=
-  Xr.xrTop hν (skEnum hUH hLH).1 (skEnum hUH hLH).2 (skThLow hRead hν) (skThFar hν) (skKCof hν hUH hLH hVt)
+theorem skEQTopR (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hW : SkWall S)
+    (hUH : SkUH S) (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xn.XnTop S :=
+  Xr.xrTop hν (skEnum hUH hLH).1 (skEnum hUH hLH).2 (skThLow hRead hν) (skThFar hW hν) (skKCof hν hUH hLH hVt)
     (skEQJump hν hVt)
 
 /-- STATUS: REDUCED
 SIZE: L
 hRead, hUH, hLH, hν ⇒ XgKReachR  (children skThFar, skKCof, skEQTopR; Xn.xnPart: the induction on r(λ),
 Xn.xnEQ_all; checkable after the merge of R2.XnLow, R2.XnInd, R2.XnRoad). -/
-theorem skKReachR (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xg.XgKReachR S :=
-  (Xn.xnPart hν (hRead hν).1 (hRead hν).2 (skEnum hUH hLH).1 (skEnum hUH hLH).2 (skThFar hν)
-    (skKCof hν hUH hLH hVt) (skEQTopR hRead hUH hLH hVt hν)).2.2.1
+theorem skKReachR (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hW : SkWall S)
+    (hUH : SkUH S) (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xg.XgKReachR S :=
+  (Xn.xnPart hν (hRead hν).1 (hRead hν).2 (skEnum hUH hLH).1 (skEnum hUH hLH).2 (skThFar hW hν)
+    (skKCof hν hUH hLH hVt) (skEQTopR hRead hW hUH hLH hVt hν)).2.2.1
 
 
 /-- STATUS: PROVED (Wd.wdk_move, Bc.bcB_add, Bc.bcB_fixN, Bc.bcB_lt_iff, Ordinal.enumOrd_succ_le)
@@ -482,16 +511,16 @@ theorem skKFar_of (hν : Nc.ncL S (ω + 1) ≤ nuC) (hC : SkKClosed S) (hG : SkK
 SIZE: L
 ∀ far window, ∀ δ_λ·ω ≤ p ≤ Θ_λ(m_λ): k_{λ'}(B_n p) = B_n(k_λ p)  (children skKCof, skKReachR;
 Xg.xgKFar_of_R; checkable after the merge of R2.XgK, R2.XgReach, R2.Xn*). -/
-theorem skKFar (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKFar S :=
-  Xg.xgKFar_of_R hν (skKCof hν hUH hLH hVt) (skKReachR hRead hUH hLH hVt hν)
+theorem skKFar (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hW : SkWall S)
+    (hUH : SkUH S) (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKFar S :=
+  Xg.xgKFar_of_R hν (skKCof hν hUH hLH hVt) (skKReachR hRead hW hUH hLH hVt hν)
 
 /-- STATUS: REDUCED
 SIZE: S
 δ_λ·ω ≤ q+1 ≤ Θ_λ(m_λ) ⇒ B_n(k_λ(q+1)) ∈ K_{λ'}  (from skKFar: SkEX.skexClosed_of_far; off the path). -/
-theorem skKClosed (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKClosed S :=
-  R2Skel.SkEX.skexClosed_of_far hν (skKFar hRead hUH hLH hVt hν)
+theorem skKClosed (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hW : SkWall S)
+    (hUH : SkUH S) (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKClosed S :=
+  R2Skel.SkEX.skexClosed_of_far hν (skKFar hRead hW hUH hLH hVt hν)
 
 /-- STATUS: PROVED (Xg.xgKGap: k_λ(q+1) = k_λ(q) + 1, Xg.xgk_succ)
 SIZE: S
@@ -502,9 +531,9 @@ theorem skKGap (_hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKGap S :=
 /-- STATUS: REDUCED
 SIZE: S
 p limit, δ_λ·ω ≤ p ≤ Θ_λ(m_λ), IH ⇒ k_{λ'}(B_n p) = B_n k_λ(p)  (from skKFar: SkEX.skexLim_of_far; off the path). -/
-theorem skKLim (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKLim S :=
-  R2Skel.SkEX.skexLim_of_far (skKFar hRead hUH hLH hVt hν)
+theorem skKLim (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hW : SkWall S)
+    (hUH : SkUH S) (hLH : SkLH S) (hVt : SkVt S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : SkKLim S :=
+  R2Skel.SkEX.skexLim_of_far (skKFar hRead hW hUH hLH hVt hν)
 
 /-- STATUS: PROVED (definitions only)
 SIZE: S
@@ -517,9 +546,9 @@ theorem skEQfar_of (hT : SkThFar S) (hK : SkKFar S) : Wd.WdEQfar S := by
 /-- STATUS: REDUCED
 SIZE: L
 hRead, hUH, hLH ⇒ (hν ⇒ WdEQfar)  (children skThFar, skKFar). -/
-theorem skEQfar (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hVt : SkVt S) : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdEQfar S :=
-  fun hν => skEQfar_of (skThFar hν) (skKFar hRead hUH hLH hVt hν)
+theorem skEQfar (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hW : SkWall S)
+    (hUH : SkUH S) (hLH : SkLH S) (hVt : SkVt S) : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdEQfar S :=
+  fun hν => skEQfar_of (skThFar hW hν) (skKFar hRead hW hUH hLH hVt hν)
 
 /-- STATUS: PROVED (Wa.waEQtop_ux, Wd.wdAtMove26_of_wall, Wd.wdRn_of, Wd.wdEQtop_iff)
 SIZE: S
@@ -536,12 +565,13 @@ theorem skThLow_of (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.W
 SIZE: L
 TOP NODE (round 117: new hypotheses hUH, hLH, the frontier hypotheses of the road; round 131: new hypothesis hVt,
 the frontier hypothesis CapV in (L(ω), L(ω+1)) of the road; Root.skNuC applies
-`skEQ hRead (SkF.skFrontU S) (SkF.skFrontL S) (SkF.skFrontVt S)`).
+`skEQ hRead (SkF.skFrontU S) (SkF.skFrontL S) (SkF.skFrontVt S)`; round 132: new hypothesis hW, the code-free wall
+SkR.skWallCF, so Root.skNuC applies `skEQ hRead (SkR.skWallCF S) (SkF.skFrontU S) (SkF.skFrontL S) (SkF.skFrontVt S)`).
 hRead: hν → WdAtWall ∧ WdThHi, hUH, hLH, hVt  ⇒  (hν → WdThLow) ∧ (hν → WdEQfar). -/
-theorem skEQ (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hUH : SkUH S)
-    (hLH : SkLH S) (hVt : SkVt S) :
+theorem skEQ (hRead : Nc.ncL S (ω + 1) ≤ nuC → Wd.WdAtWall S ∧ Wd.WdThHi S) (hW : SkWall S)
+    (hUH : SkUH S) (hLH : SkLH S) (hVt : SkVt S) :
     (Nc.ncL S (ω + 1) ≤ nuC → Wd.WdThLow S) ∧ (Nc.ncL S (ω + 1) ≤ nuC → Wd.WdEQfar S) :=
-  ⟨skThLow hRead, skEQfar hRead hUH hLH hVt⟩
+  ⟨skThLow hRead, skEQfar hRead hW hUH hLH hVt⟩
 
 /-! ## Guards and links -/
 
@@ -1086,5 +1116,69 @@ theorem skGapWin {n : ℕ} {l l' p a κ : Ordinal.{0}} (hP : Ye.YeGapPt S n l l'
     ∃ x q, q < p ∧ x ≤ Bc.bcB S n q ∧ ∀ μ, IsRestartIdx μ → x < upsilon μ →
       upsilon μ < Bc.bcB S n p → cdCapB S μ ≤ Bc.bcB S n p :=
   Ze.zeGap_win hP hκ hpκ
+
+
+/-! ## Round 132 (leaf eq11): the plateau `K_ω` and the base `Ω_ω` -/
+
+/-- STATUS: PROVED (Zj.zjKw_sup; NEW round 132; REFUTE-FIRST record)
+SIZE: S
+THE PLATEAU (no hypothesis): x < ψ_{Ω₂}(Ω_ω + Ω₂·Ω₂) ⇔ ∃ j, x < K_j, i.e. K_ω = sup_j K_j = ψ_{Ω₂}(Ω_ω + Ω₂²). -/
+theorem skKwSup (x : Ordinal.{0}) :
+    x < S.psi (Om ω + Om (1 + 1) * Om (1 + 1)) (Om (1 + 1)) ↔ ∃ j, x < Xs.xsK S j :=
+  Zj.zjKw_sup x
+
+/-- STATUS: PROVED (Zj.zjKw_read, from Le.leTopE at the base Ω_ω, Wl.wlThVal; NEW round 132; REFUTE-FIRST record)
+SIZE: S
+the expected plateau value is TRUE: Θ_λ(K_ω) = ψ_{Ω₁}(A + θ + Ω₁²) (leOe 2 = Ω₁·Ω₁) at every restart λ with
+ρ_λ < P(η_x), A = A_{η_λ} own, Ω_ω + Ω_ω ≤ A. -/
+theorem skKwRead {l ηx : Ordinal.{0}} (hl : IsRestartIdx l) (hX : upsilon l < Nm.Pv S ηx)
+    (hown : ConjT.Aη S (cdEta S l) ∈
+      S.CSet (ConjT.Aη S (cdEta S l)) (S.psi (ConjT.Aη S (cdEta S l)) (Om 1)))
+    (hAW : Om ω + Om ω ≤ ConjT.Aη S (cdEta S l)) :
+    Mx.gxTh (upsilon l) (Ld.ldAtR S l) (S.psi (Om ω + Om (1 + 1) * Om (1 + 1)) (Om (1 + 1))) =
+      S.psi (ConjT.Aη S (cdEta S l) + ConjT.th S + Le.leOe (1 + 1)) (Om 1) :=
+  Zj.zjKw_read hl hX hown hAW
+
+/-- STATUS: PROVED (Zj.zjKw_wit; NEW round 132; REFUTE-FIRST record)
+SIZE: S
+at the restart of m* = L(0) (no hypothesis): Θ_λ(K_ω) = ψ_{Ω₁}(A + θ + Ω₁·Ω₁). -/
+theorem skKwWit (S : InaccSeq.{0}) :
+    ∃ l : Ordinal.{0}, IsRestartIdx l ∧ upsilon l = Nc.ncL S 0 ∧
+      Mx.gxTh (upsilon l) (Ld.ldAtR S l) (S.psi (Om ω + Om (1 + 1) * Om (1 + 1)) (Om (1 + 1))) =
+        S.psi (ConjT.Aη S (cdEta S l) + ConjT.th S + Om 1 * Om 1) (Om 1) :=
+  Zj.zjKw_wit S
+
+/-- STATUS: PROVED (Zj.zjKw_move, from Wr.wrWin; NEW round 132; REFUTE-FIRST record)
+SIZE: S
+the move at the plateau is TRUE (no wall): in every window B_n K_ω = K_ω and B_n Θ_λ(K_ω) = Θ_{λ'}(K_ω). -/
+theorem skKwMove {n : ℕ} {l l' : Ordinal.{0}} (hW : SkWin S n l l') :
+    Bc.bcB S n (S.psi (Om ω + Om (1 + 1) * Om (1 + 1)) (Om (1 + 1))) =
+        S.psi (Om ω + Om (1 + 1) * Om (1 + 1)) (Om (1 + 1)) ∧
+      Bc.bcB S n (Mx.gxTh (upsilon l) (Ld.ldAtR S l) (S.psi (Om ω + Om (1 + 1) * Om (1 + 1)) (Om (1 + 1)))) =
+        Mx.gxTh (upsilon l') (Ld.ldAtR S l') (S.psi (Om ω + Om (1 + 1) * Om (1 + 1)) (Om (1 + 1))) := by
+  obtain ⟨hR, h1, hr, hl', hB, -⟩ := hW
+  exact Zj.zjKw_move hR h1 hr hl' hB
+
+/-- STATUS: PROVED (Zj.zjMoveG, from Zj.zjAtMoveG, Zj.zjMoveGen, Ld.ldGxStepRec; NEW round 132)
+SIZE: S
+WrWallCF ⇒ the reading move at every window code θ⁺ ≤ m_λ < F₂^ω = ψ_{Ω₂}(Ω_ω + Ω₂^{Ω₂^{Ω₂}}). -/
+theorem skMoveG (hW : Wr.WrWallCF S) {n : ℕ} {l l' : Ordinal.{0}} (hW' : SkWin S n l l')
+    (hP : Lj.ljThP S ≤ cdCode S l)
+    (hm : cdCode S l < S.psi (Om ω + Le.leWe (Le.leWe (Om (1 + 1)))) (Om (1 + 1))) :
+    Bc.bcB S n (cdTheta S l (cdCode S l)) = cdTheta S l' (cdCode S l') := by
+  obtain ⟨hR, h1, hr, hl', hB, -⟩ := hW'
+  exact Zj.zjMoveG hW n l l' hR h1 hr hl' hB hP hm
+
+/-- STATUS: PROVED (Zj.zjTopG_of_target; NEW round 132)
+SIZE: S
+NON-VACUITY: hν ∧ CdEQ (the road's target) ∧ SkKFar ⇒ skTopG. -/
+theorem skTopGTarget (hν : Nc.ncL S (ω + 1) ≤ nuC) (hEQ : CdEQ S) (hK : SkKFar S) : Zj.ZjTopG S :=
+  Zj.zjTopG_of_target hν hEQ hK
+
+/-- STATUS: PROVED (Zj.zjTopK_iffG; NEW round 132)
+SIZE: S
+under the wall the old leaf and the new one are equivalent: WrWallCF ⇒ (skTopK ⇔ skTopG). -/
+theorem skTopKIffG (hW : Wr.WrWallCF S) : Xs.XsTopK S ↔ Zj.ZjTopG S :=
+  Zj.zjTopK_iffG hW
 
 end R2Skel.SkE
