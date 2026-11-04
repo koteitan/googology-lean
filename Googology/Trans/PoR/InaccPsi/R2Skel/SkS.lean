@@ -41,6 +41,13 @@ import Googology.Trans.PoR.InaccPsi.R2.YqCov
 import Googology.Trans.PoR.InaccPsi.R2.YqReal
 import Googology.Trans.PoR.InaccPsi.R2.YqShift
 import Googology.Trans.PoR.InaccPsi.R2.YqRoad
+import Googology.Trans.PoR.InaccPsi.R2.YvSub
+import Googology.Trans.PoR.InaccPsi.R2.YvPi
+import Googology.Trans.PoR.InaccPsi.R2.YvDat
+import Googology.Trans.PoR.InaccPsi.R2.YvComp
+import Googology.Trans.PoR.InaccPsi.R2.YvUp
+import Googology.Trans.PoR.InaccPsi.R2.YvLev
+import Googology.Trans.PoR.InaccPsi.R2.YvWit
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -303,6 +310,27 @@ Top node `skSupXo` and its statement kept; `Root.skNuC` unchanged (it applies `X
 NEW nodes: `skYbIFTh` (OPEN, off the road), `skYbIFLowB`, `skYbIFLow`, `skYbIFBAdd`, `skYbTwin`, `skXoCarryWw`,
 `skXoOblWw` (PROVED), `skYbNaiveRef` (PROVED NEGATION); `skYbIF` OPEN → REDUCED.  This file imports the new `Yg`
 modules, so it can be checked only after the merge.
+
+Round 130 (leaf "the shift clause XoThCl and the carry skSupKXo: is the root non-vacuous?", sup52).  Top node `skSupXo`
+and its statement kept; `Root.skNuC` unchanged (it applies `Yq.yqRoadS`).
+* THE LEVEL SORT BELOW `θ` (the tool `skShift2` needs: a leaf substitution on the levels `[B₂, θ)` whose leaves move):
+  `Yv.YvLv` / `Yv.YvR` / `Yv.yvSub` (the canonical decomposition of every code below `θ`, through every cardinal level
+  of the dictionary `D(s)`, `Vs.vsShape`; below `B₂` it is `Vc.vcSub`), and for every base change: `π z = yvSub π z`
+  (`Yv.yv_pi`, `Yv.yv_pi_TB`), membership decided by the leaves (`Yv.yv_TB_iff`), the clause of `π z` is the
+  `π`-image of the clause of `z` (`Yv.yv_comp`), the inverse base change `π⁻¹ G = yvSub π⁻¹ G` (`Yv.yv_up`), the image
+  of a level is a level (`Yv.yv_level_img`), the node `π(ϑᵗ(Ω₁·M + ρ)) = ϑ^σ(yvSub π (Ω₁·M) + π ρ)` (`Yv.yv_node_img`),
+  the datum is decided by the leaves (`Yv.yv_dat_iff`, no axiom) and so is the subcase of [W07a] Def 6.2
+  (`Yv.yv_node_tr`).  NEW nodes `skYvPi`, `skYvComp`, `skYvUp`, `skYvNode`, `skYvDat`, `skYvTr` (PROVED).
+* REFUTE FIRST, `XoThCl` at a node whose level has one moving leaf (the base itself, `ϑ^{b}(Ω₁·(B₂ + b) + r)`): NO
+  EVIDENCE.  The compression gives `ϑ^σ(Ω₁·(B₂ + σ) + π r)` (`Yv.yv_wit_pi`: the leaf substitution `b ↦ σ`), the
+  translation keeps the argument (`Yv.yv_wit_hi`: subcase `Γ^* ≥ α`), the expansion is `yvSub π⁻¹` (`Yv.yv_up`): every
+  step of FRAG agrees with the leaf substitution there.  NEW node `skYvWit` (PROVED).  The carry `skSupKXo` at `wwX`,
+  `xjX` and at a supply restart with code `G_{k+1}+1`: NO EVIDENCE (unchanged; Lean has no value of `r(μ + f g)`).
+* `skShift2` stays OPEN.  The moving-level hull clause is stated (`Yv.YvCl`: `Ψ(ϑ^{b_k}(Ω₁·q + r[b_k])) =
+  ϑ^{c_k}(yvSub Ψ (Ω₁·q) + (vmap Ψ r)[c_k])` for levels `Ω₁·q < θ` with leaves in the configuration); at constant
+  levels it is the proved `Xj.XjCl` (`Yv.yv_cl_const`, `Yv.yv_cl_frag`: the FRAG map of `Xj.xjFragXe`).  NEW node
+  `skYvClConst` (PROVED), NEW leaf `skYvCl` (OPEN L, off the road: the next statement for `skShift2`).
+This file imports the new `Yv` modules, so it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -1226,7 +1254,11 @@ decompositions, which no test has broken (`Wu.wuImg_test`, `Vr.vrImg_agree`, `Xo
 (`Vo.voNoGo`, `Vn.vnTop_Om3`, `Wf.wfSide_false`, `Xj.xjVis_ref`) speaks of the shift.
 Needed: FRAG (`Xj.xjFragV`) with nodes whose levels are terms with moving leaves (the two subcases `R2.xeVt_trL`,
 `R2.xoVt_trH`, through `Xo.xoVt_up` / `xoVt_down`); on one segment the leaf substitution of a level is `π`
-(`Xo.xoImg_pi`). -/
+(`Xo.xoImg_pi`).
+Round 130: the level sort below `θ` is built (`Yv.yvSub`; nodes `skYvPi`, `skYvComp`, `skYvUp`, `skYvNode`, `skYvDat`,
+`skYvTr`, PROVED); REFUTE FIRST at the one-moving-leaf node `ϑ^{b}(Ω₁·(B₂ + b) + r)`: NO EVIDENCE, every FRAG step
+agrees with the leaf substitution there (`skYvWit`).  Next: `skYvCl` (FRAG with the moving-level clause), then
+`Xo.xoImg` of a restricted level term `= yvSub D` of its value. -/
 theorem skShift2 (S : InaccSeq.{0}) : Yq.XoShift2 S := by sorry
 
 /-- STATUS: REDUCED (from `skShift2` by `Yq.yqShift_of2`; NEW round 129)
@@ -1566,5 +1598,99 @@ theorem skXoOblWw (k : ℕ) {μ B : Ordinal.{0}} {f : Ordinal.{0} → Ordinal.{0
     upsilon (μ + f (Ww.wwX S k + ω + 1)) + Yg.ygWwMu μ f ≤ cdR S (μ + f (Ww.wwX S k)) ↔
       Yg.ygWwMu μ f ≤ f (Ww.wwX S k) :=
   Yg.ygWw_obl k hO hr
+
+
+/-! ## Round 130: the level sort below `θ` (tools for `skShift2`) -/
+
+/-- STATUS: PROVED (by `Yv.yv_pi_TB`; NEW round 130)
+SIZE: L
+`π_{σ,τ} = yvSub π_{σ,τ}` on `Tᵗ[σ] ∩ θ` (the base change on codes below `θ` is the leaf substitution) -/
+theorem skYvPi {σ τ z : Ordinal.{0}} (h : Bases σ τ) (hz : z < ConjT.th S) (hT : z ∈ TB τ σ) :
+    pi σ τ z = Yv.yvSub S (pi σ τ) z :=
+  Yv.yv_pi_TB h hz hT
+
+/-- STATUS: PROVED (by `Yv.yv_comp_sub`; NEW round 130)
+SIZE: L
+`yvSub g (π z) = yvSub (g ∘ π) z` (bases with `Γ₀ ≤ σ`, leaves of `z` in `Tᵗ[σ]`) -/
+theorem skYvComp {σ τ z : Ordinal.{0}} (h : Bases σ τ) (hσ : gamma 0 ≤ σ) (g : Ordinal.{0} → Ordinal.{0})
+    (hz : z < ConjT.th S) (hL : Yv.YvLv S (· ∈ TB τ σ) z) :
+    Yv.yvSub S g (pi σ τ z) = Yv.yvSub S (g ∘ pi σ τ) z :=
+  Yv.yv_comp_sub h hσ g hz hL (Yv.yvR_ex _ hL)
+
+/-- STATUS: PROVED (by `Yv.yv_up`; NEW round 130)
+SIZE: M
+`π⁻¹ G = yvSub π⁻¹ G` for `G ∈ T^σ`, `π⁻¹ G < θ` (bases with `Γ₀ ≤ σ`) -/
+theorem skYvUp {σ τ G : Ordinal.{0}} (h : Bases σ τ) (hσ : gamma 0 ≤ σ) (hG : G ∈ Tset σ)
+    (hz : up σ τ G < ConjT.th S) : up σ τ G = Yv.yvSub S (up σ τ) G :=
+  (Yv.yv_up h hσ hG hz).1
+
+/-- STATUS: PROVED (by `Yv.yv_node_img`; NEW round 130)
+SIZE: M
+the base change of a `ϑ`-node whose level `Ω₁·M < θ` has moving leaves: `π(ϑᵗ(Ω₁·M + ρ)) = ϑ^σ(Ω₁·M' + π ρ)`,
+`Ω₁·M' = yvSub π (Ω₁·M)` a level -/
+theorem skYvNode {σ τ M ρ : Ordinal.{0}} (h : Bases σ τ) (hM1 : 1 ≤ M) (hθ : Om1 * M < ConjT.th S)
+    (hT : Om1 * M ∈ TB τ σ) (hρ : ρ ∈ TB τ σ) (hρ1 : ρ < Om1) :
+    ∃ M', Om1 * M' = Yv.yvSub S (pi σ τ) (Om1 * M) ∧ 1 ≤ M' ∧ Om1 * M' < ConjT.th S ∧
+      Om1 * M + ρ ∈ TB τ σ ∧ pi σ τ (vt τ (Om1 * M + ρ)) = vt σ (Om1 * M' + pi σ τ ρ) :=
+  Yv.yv_node_img h hM1 hθ hT hρ hρ1
+
+/-- STATUS: PROVED (by `Yv.yv_dat_iff`, no project axiom; NEW round 130)
+SIZE: M
+`d_S(z) < q ⇔ every leaf of `z` is below `q`` (`q` strongly critical, `q ≤ Ω₁`, `z < θ`) -/
+theorem skYvDat {q z : Ordinal.{0}} (hq : SC q) (hq1 : q ≤ Om1) (hz : z < ConjT.th S) :
+    Vd.vdD S 0 z < q ↔ Yv.YvLv S (· < q) z :=
+  Yv.yv_dat_iff hq hq1 hz
+
+/-- STATUS: PROVED (by `Yv.yv_node_tr`; NEW round 130)
+SIZE: S
+the subcase of [W07a] Def 6.2 at a level `B₂ ≤ M < θ` with moving leaves is read off the leaves (`α = Dl τ n`
+strongly critical): all below `α` ⇒ `R2.xeVt_trL`, else `R2.xoVt_trH` -/
+theorem skYvTr {τ : Ordinal.{0}} (hτ : InE τ) (hτ1 : τ < Om1) {n : ℕ} (hn : 1 ≤ n) {M ρ : Ordinal.{0}}
+    (hMB : Uc.ucB ≤ M) (hMθ : M < ConjT.th S) (hα : SC (Dl τ n)) (hρ1 : ρ < Om1)
+    (hL : ¬ Yv.YvLv S (· < Dl τ n) M) (hT : Om1 * M + ρ ∈ Tset (Dl τ n))
+    (hlt : vt (Dl τ n) (Om1 * M + ρ) < Dp τ n) :
+    Om1 * M + ρ ∈ Tset τ ∧ vt (Dl τ n) (Om1 * M + ρ) = vt τ (Om1 * M + ρ) :=
+  ((Yv.yv_node_tr hτ hτ1 hn hMB hMθ hα hρ1).2 hL).1 hT hlt
+
+/-- STATUS: PROVED (by `Yv.yv_wit_pi`, `Yv.yv_wit_hi`; NEW round 130; REFUTE-FIRST test of `XoThCl` at a node whose
+level has one moving leaf, the base itself)
+SIZE: S
+`π(ϑᵗ(Ω₁·(B₂ + τ) + ρ)) = ϑ^σ(Ω₁·(B₂ + σ) + π ρ)`, and the leaf `α` of `B₂ + α` is not below `α` (subcase `Γ^* ≥ α`) -/
+theorem skYvWit {σ τ ρ α : Ordinal.{0}} (h : Bases σ τ) (hσ : gamma 0 ≤ σ) (hρ : ρ ∈ TB τ σ) (hρ1 : ρ < Om1)
+    (hα : SC α) (hα1 : α < Om1) :
+    pi σ τ (vt τ (Om1 * (Uc.ucB + τ) + ρ)) = vt σ (Om1 * (Uc.ucB + σ) + pi σ τ ρ) ∧
+      ¬ Yv.YvLv S (· < α) (Uc.ucB + α) :=
+  ⟨(Yv.yv_wit_pi S h hσ hρ hρ1).2, Yv.yv_wit_hi hα hα1⟩
+
+/-- STATUS: PROVED (by `Yv.yv_cl_frag`; NEW round 130; non-vacuity of `Yv.YvCl` on its constant part)
+SIZE: S
+the FRAG map of `Xj.xjFragXe` satisfies the moving-level clause at every constant level `B₂ ≤ q < θ` -/
+theorem skYvClConst {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb : Chain κ b m) (hc : Chain κ c m)
+    (F : Finset Ordinal.{0}) (hF : ↑F ⊆ DD κ b m) :
+    ∃ Ψ, Vl.VlFragConcl κ b c m F Ψ ∧ Xj.XjCl Xe.XeLev κ b c m F Ψ ∧
+      ∀ k, k < m → ∀ (q q₀ : Ordinal.{0}) (r : Un.UnC), Uc.ucB ≤ q → q < ConjT.th S → SC q₀ → q₀ ≤ κ →
+        Vd.vdD S 0 q < q₀ →
+        Vi.ZW (b k) r → Ur.WFr (b k) r → Un.UnT.ev (b k) r < Om1 →
+        Un.UnT.Lv (· ∈ F) r → Vi.ZL (fun p => p ∈ F ∨ p < κ) r → Un.UnT.Lv (· ∈ Tset (b k)) r →
+        Vi.ZL (· ∈ Tset (b k)) r →
+        vt (b k) (Om1 * q + Un.UnT.ev (b k) r) ∈ F → InSeg (b k) (vt (b k) (Om1 * q + Un.UnT.ev (b k) r)) →
+          Ψ (vt (b k) (Om1 * q + Un.UnT.ev (b k) r)) =
+              vt (c k) (Yv.yvSub S Ψ (Om1 * q) + Un.UnT.ev (c k) (Vi.vmap Ψ r)) ∧
+            Ur.WFr (c k) (Vi.vmap Ψ r) ∧ Vi.ZW (c k) (Vi.vmap Ψ r) ∧ Un.UnT.ev (c k) (Vi.vmap Ψ r) < Om1 :=
+  Yv.yv_cl_frag hb hc F hF
+
+/-- STATUS: OPEN (NEW round 130; OFF THE ROAD: the next statement for `skShift2`, not yet a Lean reduction of it)
+SIZE: L
+FRAG with the moving-level hull clause below `θ`: for chains `b`, `c` over `κ` and a finite `F ⊆ D_m`, a FRAG map
+`Ψ` (`Vl.VlFragConcl`) with `Yv.YvCl S κ b c m F Ψ`.  Proof plan: `Xj.xjFrag_step` with the node lemmas
+`Yv.yv_node_img` (compression), `Yv.yv_node_tr` (translation, the subcase read off the leaves of the compressed
+level; needs `α = Dl b_n M` strongly critical for `M ≥ 2`), `Yv.yv_up` (expansion), `Yv.yv_comp` (the substitutions
+compose); missing tools: the leaves of `yvSub π z` are the `π`-images of the leaves of `z` (both directions; the
+analogue of `Vi.vi_lv_pi`), the level clause `Vl.VlLC` with `yvSub` and bound `θ` (the analogue of `Vl.vl_lc_comp`),
+membership of a level from its leaves in `T^g` (the analogue of `Vl.vl_lv_mem`, from `R2.vdArg_mem`).  For
+`skShift2` itself one more step: the image `Xo.xoImg` of a restricted level term equals `yvSub D` of its value. -/
+theorem skYvCl {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb : Chain κ b m) (hc : Chain κ c m)
+    (F : Finset Ordinal.{0}) (hF : ↑F ⊆ DD κ b m) :
+    ∃ Ψ, Vl.VlFragConcl κ b c m F Ψ ∧ Yv.YvCl S κ b c m F Ψ := by sorry
 
 end R2Skel.SkS
