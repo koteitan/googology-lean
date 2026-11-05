@@ -37,6 +37,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZbE0
 import Googology.Trans.PoR.InaccPsi.R2.ZgSq
 import Googology.Trans.PoR.InaccPsi.R2.ZmCd
 import Googology.Trans.PoR.InaccPsi.R2.ZoBC
+import Googology.Trans.PoR.InaccPsi.R2.ZrBase
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -2730,15 +2731,36 @@ UPPER ∧ LOWER ∧ CapV AT THE BASE `l₀ = Zo.zoBase S` (the least restart ind
 theorem skBCBaseUV (S : InaccSeq.{0}) : SkUV S (Zo.zoBase S) := by
   sorry
 
-/-- STATUS: OPEN (round 133, new leaf, regc1)
+/-- STATUS: OPEN (round 134, new leaf; the reading part of skBCReach)
 SIZE: M
-THE CHAIN REACH DATUM AT THE BASE `l₀`, with a chain start `o ≤ r(l₀) − δ_{l₀}` (`o < δ_{l₀}`).  REFUTE FIRST: the
-form with `o = 0` (the base datum of the windows) is FALSE at a short-reach base `δ < r < top₁` under UPPER ∧ LOWER
-(skReach0Ref), so the leaf lets `o` range up to `r − δ`; with `o = 0` it holds when `ρ_{l₀} ≤₁ υ_{l₀+ω²}`
-(`Ys.ysReach_long`).  Non-vacuity: `Zo.zoBC_of_target` (chain start `0` from the target data). -/
-theorem skBCReach (S : InaccSeq.{0}) : ∃ o, o < upsilon (Zo.zoBase S + ω + 1) ∧ o ≤ Ys.ysO S (Zo.zoBase S) ∧
-    Ys.YsReachIn (Zo.zoBase S) o (upsilon (Zo.zoBase S)) := by
+THE READING OF THE BASE CODE (notation only, no `≤₁`): `Θ_{l₀}(m_{l₀}) < δ_{l₀}` (short reach) or
+`υ_{l₀+ω²} ≤ Θ_{l₀}(m_{l₀})` (long reach), `l₀ = Zo.zoBase S` (the least restart index `≥ ι(Ω₂)`; when it is
+`ι(Ω₂)` its name is `Ω₂`, `A = Ω_ω + Ω₂`, the code is `π_{Ω₂} = ψ_{Ω₂}(A)` and `Θ(π) = Θ(Ω₂) =
+otp(Cl(A, ρ) ∩ Ω₂)`, `Cd.cdTheta_pi`).  Expected: the first branch, `Θ(π)` below the first `Γ`-fixed point above
+`Θ(θ) = ψ_{Ω₁}(A + θ) = υ_{l₀+1}` (`Wl.wlThVal`), so `Θ(π) < υ_{l₀+2}`: the atoms above `θ` are
+`ψ_{Ω₂}(Ω_ω + c)`, `c < Ω₂`, cofinal in `π` by the iterates `t₀ = θ`, `t_{n+1} = ψ_{Ω₂}(Ω_ω + t_n)`; `Ω_ω` is not an
+`Rn.RnBase` here (`A < Ω_ω + Ω₂^{Ω₂}`), so the readings over `Ω_ω` of `Zj` do not apply as they stand.
+REFUTE FIRST: NO EVIDENCE.  In the middle zone `δ ≤ Θ < υ_{l₀+ω²}` the base datum would need `r(l₀)` to be a
+block top or `≥ υ_{l₀+ω²}`. -/
+theorem skBCThPos (S : InaccSeq.{0}) :
+    Cd.cdTheta S (Zo.zoBase S) (Cd.cdCode S (Zo.zoBase S)) < Cd.cdDelta (Zo.zoBase S) ∨
+      upsilon (Zo.zoBase S + ω * ω) ≤ Cd.cdTheta S (Zo.zoBase S) (Cd.cdCode S (Zo.zoBase S)) := by
   sorry
+
+/-- STATUS: REDUCED (round 134, Zr.zrBCReach2: skBCLow, skBCBaseUV, skBCThPos; was OPEN M, round 133)
+SIZE: M
+THE CHAIN REACH DATUM AT THE BASE `l₀`, with a chain start `o ≤ r(l₀) − δ_{l₀}` (`o < δ_{l₀}`).  The form with
+`o = 0` (the base datum of the windows) is FALSE at a short-reach base `δ < r < top₁` under UPPER ∧ LOWER
+(skReach0Ref).  Round 134: no point below `ρ_{l₀}` is `≤₁` any point `≥ ρ_{l₀}` (`Zr.zrNoCross`: the
+`<₁`-predecessors of a restart below `ν_C` are restarts, `R2.pred_restart_C`; every restart `μ < l₀` stays below
+`ρ_{l₀}`, `Zr.zrCapBelow`: below `B₀` by its exact reach `δ_μ + O(μ)`, from `B₀` on by UPPER and CapV with the cap
+`P(η_μ + ω^{e(η_μ)}) ≤ P(Ω₂)`; `ρ_{l₀} < ν_C`, `Zr.zrNu`).  So with UPPER at `l₀` the datum holds with
+`o = r − δ = Θ_{l₀}(m_{l₀})` when `Θ_{l₀}(m_{l₀}) < δ_{l₀}` (the closed points `δ + x`, `Zh.zhDense`, give
+`r = δ + Θ_{l₀}(m_{l₀})`; `Zr.zrReach`), and with LOWER at `l₀` and `o = 0` when `υ_{l₀+ω²} ≤ Θ_{l₀}(m_{l₀})`
+(`Zr.zrReach_long`).  REDUCED to skBCBaseUV and the notation leaf skBCThPos. -/
+theorem skBCReach (S : InaccSeq.{0}) : ∃ o, o < upsilon (Zo.zoBase S + ω + 1) ∧ o ≤ Ys.ysO S (Zo.zoBase S) ∧
+    Ys.YsReachIn (Zo.zoBase S) o (upsilon (Zo.zoBase S)) :=
+  Zr.zrBCReach2 (fun μ hr h => skBCLow S μ hr h) (skBCBaseUV S).1 (skBCBaseUV S).2.1 (skBCThPos S)
 
 /-- STATUS: PROVED (Zo.zoGiven_of, skBCBaseUV, skBCReach; round 133, new; checked only after the merge)
 SIZE: S
