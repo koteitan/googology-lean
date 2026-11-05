@@ -26,6 +26,7 @@ import Googology.Trans.PoR.InaccPsi.R2.YyOm2B
 import Googology.Trans.PoR.InaccPsi.R2.ZdTest
 import Googology.Trans.PoR.InaccPsi.R2.ZdChainR
 import Googology.Trans.PoR.InaccPsi.R2.ZiTop
+import Googology.Trans.PoR.InaccPsi.R2.ZpWall
 import Googology.Trans.PoR.InaccPsi.R2Skel.SkE
 
 /-!
@@ -173,6 +174,19 @@ above every top atom of `Ω_{k+3}` and of every `X_ξ` (`skTopMoveY3E0`, `skTopM
 `skPsi3OffD` (the ψ₃-offsets `[ψ₂(a), ψ₂(a + Ω₃))` over `Ω₃`-divisible bases, the form the assembly needs), new OPEN leaf
 `skPsi3OffRest` (the offsets `W^{Y₃+Ω₂·ε₀} ≤ δ < Ω₃`).  `skWallBase`, `skWallStep` keep their statements and stay OPEN.
 This file imports the new modules `R2.ZdTest`, `R2.ZdChainR`: it can be checked only after the merge.
+Round 133 (leaf read57): THE WALL ASSEMBLY.  REFUTE FIRST on the assembly: NOT REFUTED, it is PROVED that every atom
+`ψ₂(Y₃) ≤ s < θ` of `λ` is `ψ₂(d)` with `d` normal in `D_λ` and `d = b + δ`, `b = Ω₃·(d/Ω₃)` normal, in `D_λ`,
+`Ω₃ ∣ b`, `Ω₃ ≤ b`, `δ < Ω₃`, `ψ₂ b ≤ s < ψ₂(b + Ω₃)` (`skDecomp`, `Zp.zpDecomp`; the prefix of a normal argument is
+normal, `Zp.zpPre_norm`, by a gap argument on the closures); the test points `ψ₂(Ω₃·2 + Ω₃)` (`b = Ω₃·3`, `δ = 0`)
+and `ψ₂(W^{Ω₃+1} + Y₃·2)` (`b = Ω₃·Ω₂`, `δ = Y₃·2`) (`skRefTests133`).  Every such `b` is a base with a law at both
+ends (`Zp.zpYjBase`: the base data move for EVERY normal `b ∈ D`, `Zp.zpBaseD`, `Zp.zpDvd3`) once the top law holds
+at `b` and at `B_n b`.  ASSEMBLY: `skWallTh` (the wall below `θ`) ⇐ `skTopLawAll` (NEW OPEN leaf: the top law
+`Θ(ψ₂ b) = ψ₁(A + 1 + ψ₂(T b))` at every normal `Ω₃`-divisible `b ∈ D`, `b ≥ Ω₃`, one restart at a time) ∧
+`skPsi3OffD` (REDUCED to `skPsi3OffRest2`); so `skWallBase`, `skWallStep` are REDUCED (statements unchanged) and the
+SkR road leaves are `skTopLawAll`, `skPsi3OffRest2`.  Non-vacuity: `ZpPsi3OffAll` follows from the wall itself
+(`Zp.zpOff_of_wall`), `ZpTopLawAll` holds at every top atom with a code exponent (`Zp.zpLaw_top`, `Xm.xmTopUp`) and
+its premises are met at every restart (`Zp.zpLaw_wit`).  This file imports the new module `R2.ZpWall`: it can be
+checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -1637,7 +1651,105 @@ theorem skPsi3OffD (S : InaccSeq.{0}) :
   · exact skPsi3OffE0 S n l l' A' a D s hR h1 hr hl' hB hA' hρ' hb hd hd' ha3 hs hsa h IH
   · exact skPsi3OffRest S n l l' A' a D s hR h1 hr hl' hB hA' hρ' hb hd hd' ha3 hs h hsT IH
 
-/-- STATUS: OPEN (RISK: the family law fixes no B_n-move of the images X̂_e; the step will likely need, in addition,
+/-- STATUS: PROVED (Zp.zpTest1, Zp.zpTest2, Zp.zpDecomp; NEW round 133; the REFUTE-FIRST record of the assembly;
+checkable only after the merge)
+SIZE: S
+`Ω₃·((Ω₃·2+Ω₃)/Ω₃) = Ω₃·3`, `W^{Ω₃+1} = Ω₃·Ω₂`, `Y₃·2 < Ω₃`, `Ω₃·((W^{Ω₃+1}+Y₃·2)/Ω₃) = W^{Ω₃+1}`. -/
+theorem skRefTests133 (S : InaccSeq.{0}) :
+    (Om (1 + 1 + 1) * ((Om (1 + 1 + 1) * 2 + Om (1 + 1 + 1)) / Om (1 + 1 + 1)) = Om (1 + 1 + 1 : Ordinal.{0}) * 3 ∧
+      Om (1 + 1 + 1) * 2 + Om (1 + 1 + 1) = Om (1 + 1 + 1 : Ordinal.{0}) * 3) ∧
+    (Le.leWe (Om (1 + 1 + 1) + 1) = Om (1 + 1 + 1 : Ordinal.{0}) * Om (1 + 1) ∧
+      Ug.ugY S * 2 < Om (1 + 1 + 1) ∧
+      Om (1 + 1 + 1) * ((Le.leWe (Om (1 + 1 + 1) + 1) + Ug.ugY S * 2) / Om (1 + 1 + 1)) =
+        Le.leWe (Om (1 + 1 + 1 : Ordinal.{0}) + 1)) :=
+  ⟨Zp.zpTest1, Zp.zpTest2⟩
+
+/-- STATUS: PROVED (Zp.zpDecomp, from Zp.zpPre3_norm, Zp.zpPre_norm, Zp.zpGap_psi, Zp.zpGap_sub, Zp.zpPre_mem,
+Vb.vbReach, Zp.zpPsi_Om3 (Vn.vnPsi2_eq); NEW round 133; checkable only after the merge)
+SIZE: M
+EVERY ATOM BELOW THE WALL IS `ψ₂(b + δ)`: `s ∈ At_λ`, `ψ₂(Y₃) ≤ s < θ` ⇒ `s = ψ₂ d`, `d ∈ D_λ` normal,
+`b = Ω₃·(d/Ω₃)` normal, `b ∈ D_λ`, `Ω₃ ≤ b`, `d < b + Ω₃`, `ψ₂ b ≤ s < ψ₂(b + Ω₃)`. -/
+theorem skDecomp (S : InaccSeq.{0}) {l ηx : Ordinal.{0}} (hl : IsRestartIdx l) (hX : upsilon l < Nm.Pv S ηx)
+    {s : Ordinal.{0}} (hs : s ∈ ldAtR S l) (hsY : S.psi (Ug.ugY S) (Om (1 + 1)) ≤ s) (hsθ : s < ConjT.th S) :
+    ∃ d, Vb.VbD S l d ∧ S.psi d (Om (1 + 1)) = s ∧ d ∈ S.CSet d (S.psi d (Om (1 + 1))) ∧
+      Vb.VbD S l (Om (1 + 1 + 1) * (d / Om (1 + 1 + 1))) ∧
+      Om (1 + 1 + 1) * (d / Om (1 + 1 + 1)) ∈ S.CSet (Om (1 + 1 + 1) * (d / Om (1 + 1 + 1)))
+        (S.psi (Om (1 + 1 + 1) * (d / Om (1 + 1 + 1))) (Om (1 + 1))) ∧
+      Om (1 + 1 + 1) ≤ Om (1 + 1 + 1) * (d / Om (1 + 1 + 1)) ∧
+      d < Om (1 + 1 + 1) * (d / Om (1 + 1 + 1)) + Om (1 + 1 + 1) ∧
+      S.psi (Om (1 + 1 + 1) * (d / Om (1 + 1 + 1))) (Om (1 + 1)) ≤ s ∧
+      s < S.psi (Om (1 + 1 + 1) * (d / Om (1 + 1 + 1)) + Om (1 + 1 + 1)) (Om (1 + 1)) :=
+  Zp.zpDecomp hl hX hs hsY hsθ
+
+/-- STATUS: PROVED (Zp.zpYjBase, from Zp.zpBaseD, Zp.zpDvd3, Zp.zpB3_le, Xq.xqTMove, Xq.xqSigMove, Xq.xqOwn,
+Vb.vbT_move, Rx.rxL_memH, Yd.ydNormB, Yj.yjTh_hi; NEW round 133; checkable only after the merge)
+SIZE: M
+THE BASE: at a window, `ZpTopLawAll`, `b ∈ D_λ` normal, `Ω₃ ∣ b`, `Ω₃ ≤ b`, IH(ψ₂ b) ⇒
+`Yj.YjBase λ λ' A' b (1 + ψ₂(T b))` ∧ `Ω₃ ∣ B_n b`. -/
+theorem skBaseOfLaw (S : InaccSeq.{0}) {n : ℕ} {l l' A' : Ordinal.{0}} (hR : CdRange S l)
+    (h1 : Bc.bcC S n < upsilon l) (hr : cdR S l < Bc.bcC S (n + 1)) (hl' : IsRestartIdx l')
+    (hB : Bc.bcB S n (upsilon l) = upsilon l') (hA' : A' ∈ S.CSet A' (S.psi A' (Om 1)))
+    (hρ' : S.psi A' (Om 1) = upsilon l') (hLaw : Zp.ZpTopLawAll S) {b : Ordinal.{0}} (hbD : Vb.VbD S l b)
+    (hbn : b ∈ S.CSet b (S.psi b (Om (1 + 1)))) (hdv : Om (1 + 1 + 1) ∣ b) (h3 : Om (1 + 1 + 1) ≤ b)
+    (IH : ∀ x, GxCl (upsilon l) (ldAtR S l) x → x < S.psi b (Om (1 + 1)) → MvD S x ∧
+      GxCl (upsilon l') (ldAtR S l') (Bc.bcB S n x) ∧ Bc.bcB S n x < Lj.ljThP S ∧
+      gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
+      gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) :
+    Yj.YjBase S n l l' A' b (1 + S.psi (Vb.vbT S l b) (Om (1 + 1))) ∧ Om (1 + 1 + 1) ∣ Bc.bcB S n b :=
+  Zp.zpYjBase hR h1 hr hl' hB hA' hρ' hLaw hbD hbn hdv h3 IH
+
+/-- STATUS: OPEN (NEW round 133; REFUTE FIRST: NO EVIDENCE — it holds at every top atom `β + W^{Ω_{k+3}+e}`, `e` a
+code (Zp.zpLaw_top from Xm.xmTopUp), at the limit sub-bases of Yt.ytSubLaw, at the chain exponents of Zd.zdChain,
+Zi.ziChain, Yy.yyLawOm2 (all are instances of this form); at `W^{Ω₃+ω}` it is Xi.xiReadOm (`1 + P* = P*`);
+the refuted forms speak of other points or other images: Xq.xqRef_wit (`Ω₃+1`, not `Ω₃`-divisible), Xd.xdX0Law_false
+(`β = Ω_ω ∉ D`), Vn.vnTop_Om3 / Vq.vqNoTop_Om3 (a constant image), Wb.wbNoY (the image `Y_{k+2}` in place of
+`ψ₂(T Y_{k+3})`), Xi.xiTopFam_false (the family law); its premises are met at every restart (Zp.zpLaw_wit))
+SIZE: L
+THE TOP LAW AT EVERY EXPONENT: at every restart `λ` (`ρ_λ < P(η)`, `A` own, `ψ₁(A) = ρ_λ`), every normal `b ∈ D_λ`
+with `Ω₃ ∣ b`, `Ω₃ ≤ b` has `Θ_λ(ψ₂ b) = ψ₁(A + 1 + ψ₂(T_λ b))`.  Missing: the exponents of the top atoms past
+those of Xi.XiTopUp / Zd.zdChain / Zi.ziChain (`b = β + W^E`, `E ≥ Ω₃ + Ω₂·ψ₁(0)`, in particular `E ≥ Ω₃·2`), and
+the limit sub-bases `β + W^E·γ` at those exponents (continuity, as Yt.ytSubLaw). -/
+theorem skTopLawAll (S : InaccSeq.{0}) : Zp.ZpTopLawAll S := by
+  sorry
+
+/-- STATUS: REDUCED (skTopLawAll, skPsi3OffD; Zp.zpWall, from Zp.zpDecomp, Zp.zpYjBase; NEW round 133;
+checkable only after the merge)
+SIZE: L
+THE WALL BELOW `θ`: every atom `ψ₂(Y₃) ≤ s < θ` moves under IH(s) (`Zp.ZpWallTh`). -/
+theorem skWallTh133 (S : InaccSeq.{0}) : Zp.ZpWallTh S :=
+  Zp.zpWall (skTopLawAll S) (skPsi3OffD S)
+
+/-- STATUS: PROVED (Zp.zpOff_of_wall, Zp.zpLaw_wit; NEW round 133; the NON-VACUITY record of the two leaves)
+SIZE: S
+`ZpWallTh ⇒ ZpPsi3OffAll` (the ψ₃-offset leaf follows from the target), and at every restart some `b = Ω₃` meets
+the premises of `ZpTopLawAll` with its conclusion. -/
+theorem skWallNonVac (S : InaccSeq.{0}) :
+    (Zp.ZpWallTh S → Zp.ZpPsi3OffAll S) ∧
+    ∀ {l ηx A : Ordinal.{0}}, IsRestartIdx l → upsilon l < Nm.Pv S ηx →
+      A ∈ S.CSet A (S.psi A (Om 1)) → S.psi A (Om 1) = upsilon l →
+      ∃ b, Vb.VbD S l b ∧ b ∈ S.CSet b (S.psi b (Om (1 + 1))) ∧ Om (1 + 1 + 1) ∣ b ∧ Om (1 + 1 + 1) ≤ b ∧
+        gxTh (upsilon l) (ldAtR S l) (S.psi b (Om (1 + 1))) =
+          S.psi (A + 1 + S.psi (Vb.vbT S l b) (Om (1 + 1))) (Om 1) :=
+  ⟨Zp.zpOff_of_wall, fun hl hX hA hρ => Zp.zpLaw_wit hl hX hA hρ⟩
+
+/-- STATUS: PROVED (psi_mono; NEW round 133)
+SIZE: S
+`lev S k ≤ θ`. -/
+theorem skLev_le_th (S : InaccSeq.{0}) (k : ℕ) : lev S k ≤ ConjT.th S :=
+  (psi_mono (InR_Om_succ 1) (Om_le_Om.2 (Ordinal.natCast_lt_omega0 (k + 4)).le)).1
+
+/-- STATUS: PROVED (NEW round 133)
+SIZE: S
+The wall below any bound `b ≤ θ` from the wall below `θ`. -/
+theorem skWallOfTh (S : InaccSeq.{0}) (b : Ordinal.{0}) (hb : b ≤ ConjT.th S) (hW : Zp.ZpWallTh S) :
+    WallBelow S b := by
+  intro n l l' hR h1 hr hl' hB s hs hsY hsb IH
+  exact hW n l l' hR h1 hr hl' hB s hs hsY (hsb.trans_le hb) IH
+
+/-- STATUS: REDUCED (round 133: was OPEN; skWallTh133 ⇐ skTopLawAll, skPsi3OffD; statement unchanged; the hypotheses
+`Xi.XiTopUp`, `hν` are not used; the RISK below is gone: the B_n-move of the image is the law at both ends, taken
+from skTopLawAll at λ and at λ' with the base data moved by Zp.zpBaseD; checkable only after the merge)
+(was OPEN: RISK: the family law fixes no B_n-move of the images X̂_e; the step will likely need, in addition,
 `B_n X̂^λ_e(β) = X̂^{λ'}_{B_n e}(B_n β)`, which is itself a move statement; round 112: for own images that move IS the
 atom move at T_{X+e}(β), Wr.wrImgMove_iff, so it cannot be added as a hypothesis without assuming the conclusion)
 (round 112: CHANGED to the code-free WallBelow)
@@ -1699,10 +1811,12 @@ SIZE: L
 (was SUSPECT with the refuted TopDynAll; then with the family law Wg.WgTopFamAll, itself REFUTED in round 122)
 (first block past the Y₃ wall; needs the Uq prefixes / Uu level system with the bound as a field and the image
 Vb.vbT, and vqStepA ported to VtTopDyn).  L: no Lean statement of the level system past Y₃ exists yet. -/
-theorem skWallBase (S : InaccSeq.{0}) : Xi.XiTopUp S → Nc.ncL S (ω + 1) ≤ nuC → WallBelow S (lev S 0) := by
-  sorry
+theorem skWallBase (S : InaccSeq.{0}) : Xi.XiTopUp S → Nc.ncL S (ω + 1) ≤ nuC → WallBelow S (lev S 0) :=
+  fun _ _ => skWallOfTh S (lev S 0) (skLev_le_th S 0) (skWallTh133 S)
 
-/-- STATUS: OPEN (RISK as skWallBase: no B_n-move of the images in the hypothesis; Wr.wrImgMove_iff)
+/-- STATUS: REDUCED (round 133: was OPEN; skWallTh133 ⇐ skTopLawAll, skPsi3OffD, for every k at once: the
+decomposition Zp.zpDecomp needs no recursion over the levels; statement unchanged; checkable only after the merge)
+(was OPEN: RISK as skWallBase: no B_n-move of the images in the hypothesis; Wr.wrImgMove_iff)
 (round 112: CHANGED to the code-free WallBelow)
 (round 122: hypothesis CHANGED from the REFUTED Wg.WgTopFamAll (with it the node was vacuous) to Xi.XiTopUp)
 (round 123: Xi.XiTopUp is now a theorem (skTopUp); still OPEN, same missing pieces (i), (ii) as skWallBase, generic in k)
@@ -1724,8 +1838,8 @@ SIZE: L
 Ω_{k+3} → Ω_{k+4} of the readings with sub-base images; Wb.wbKe_sup_it / wbTe_gt_Om give the layer facts).
 L: same missing level system as skWallBase, generic in k. -/
 theorem skWallStep (S : InaccSeq.{0}) : Xi.XiTopUp S → Nc.ncL S (ω + 1) ≤ nuC →
-    ∀ k : ℕ, WallBelow S (lev S k) → WallBelow S (lev S (k + 1)) := by
-  sorry
+    ∀ k : ℕ, WallBelow S (lev S k) → WallBelow S (lev S (k + 1)) :=
+  fun _ _ k _ => skWallOfTh S (lev S (k + 1)) (skLev_le_th S (k + 1)) (skWallTh133 S)
 
 /-- STATUS: REDUCED (skTopUp, skWallBase, skWallStep; round 122: skTopUp in place of the REFUTED skTopFam; round 123:
 skTopUp PROVED, so only skWallBase, skWallStep are open below it)

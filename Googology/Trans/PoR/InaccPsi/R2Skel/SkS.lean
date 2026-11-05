@@ -70,6 +70,9 @@ import Googology.Trans.PoR.InaccPsi.R2.ZfDCl
 import Googology.Trans.PoR.InaccPsi.R2.ZfShift
 import Googology.Trans.PoR.InaccPsi.R2.ZfPi
 import Googology.Trans.PoR.InaccPsi.R2.ZfPiG
+import Googology.Trans.PoR.InaccPsi.R2.ZkNode
+import Googology.Trans.PoR.InaccPsi.R2.ZlCtx
+import Googology.Trans.PoR.InaccPsi.R2.ZlTest
 
 /-!
 # Skeleton of the part "supply": the hypotheses `h0` / `hn` of `Wd.wdRoadL`
@@ -412,6 +415,53 @@ Round 132 (leaf "the shift skShift2, then skDlSC and the carry skSupKXo: is the 
   segment) by `Zf.zfImgP_of_P2`.  NEW nodes `skZfImgPi`, `skZfImgPiG` (PROVED).
 * (c) `skSupKXo`: no progress (unchanged).
 This file imports the new `Zf` modules and `R2.CitedZf`, so it can be checked only after the merge.
+Round 133 (leaf "the level image skLevImgHi2 = Zf.ZfImgP2 S, and the non-vacuity of the road", sup55).  Top node
+`skSupXo` and its statement kept; `Root.skNuC` unchanged.
+* REFUTE FIRST (1a), a level mixing leaves of two segments: NO EVIDENCE — the level image is a THEOREM at every sum of
+  countable one-segment pieces (`Zk.zk_lev_seg`): the leaves of `Ω₁·v` (`v < Ω₁`) are the nonzero Cantor-normal-form
+  exponents of `v` (`Zk.zk_yvLv_mul`), `yvSub f (Ω₁·v) = Ω₁·zkCnf f v` (`Zk.zk_yvSub_mul`), the segment map `G`
+  (`Zk.zkG`: identity below `υ_μ`, `π_{υ_{μ+f g},υ_{λ+g}}` on `seg(υ_{λ+g}) ∩ T^{υ_{λ+g}}[υ_μ]`) is strictly
+  increasing on the exponents of all pieces (`Zk.zk_G_mono`), so the exponent map is additive (`Zk.zk_add`) and the
+  absorptions of the sum are kept; on the leaves `D = G` (`Zk.zk_DG`).  Witness: `old (sg h υ_{λ+h}) + old (lo υ_λ)`
+  is such a level, one-base at no segment (`Zk.zk_wit2`).  The same with ONE uncountable one-segment prefix piece
+  (`Ω₁ ∣ val P`, e.g. `lc B₂`; countable parts left of it absorbed): `Zk.zk_lev_ps`, from the additivity of the leaf
+  substitution at no-touch sums `a + b` (exponents of `a` `≥ Ω₁·2`, `b < Ω₁·Ω₁`; `Zk.zk_yv_add`); witness `lc B₂ +
+  (old (sg h υ_{λ+h}) + old (lo υ_λ))` (`Zk.zk_wit3`, given a strongly critical `q ≤ υ_μ`).
+* REFUTE FIRST (1b), a level that is a nested `ϑ`-node: NO EVIDENCE — there the level image is EQUIVALENT to
+  `D(val) = img` at the inner node (`Zk.zk_lev_node`: a countable `ε`-number is the only leaf of `Ω₁·v`), i.e. to the
+  conclusion of `Zf.zfDCl` at a smaller term.
+* (2) `skLevImgHi2` REDUCED to the NEW leaf `skLevImgHi4` (`Zk.ZkImgP4 S`: the level image only at levels that are no
+  one-base term, no countable segment sum and no prefix level) by `Zk.zkImgP2_of_P4` (through `Zk.zkImgP3_of_P4`,
+  `Zk.zkImgP2_of_P3`; the realizer is asked with `Q ∧ Sl.SlOff`); `Zk.ZkImgP4 S ⇔ Zk.ZkImgP3 S ⇔ Zf.ZfImgP2 S`
+  (`Zk.zkImgP4_of_P3`, `Zk.zkImgP3_of_P2`), so no vacuity is introduced.  NEW nodes `skLevImgHi3` (REDUCED),
+  `skZkLevSeg`, `skZkYvAdd`, `skZkLevPs`, `skZkWit2`, `skZkLevNode` (PROVED).
+* (3) Non-vacuity of `Yq.yqRoadS`: not shown, not refuted (the 18 road leaves; `skLevImgHi2` → `skLevImgHi4`).
+This file imports the new `Zk` modules, so it can be checked only after the merge.
+
+Round 133 (leaf "the carry at the supply restarts: skSupKXo", supk1).  Top node `skSupXo` and its statement kept;
+`Root.skNuC` unchanged.
+* REFUTE FIRST, the reach formula at the supply restarts: PROVED generically, NO EVIDENCE against.  Every supply
+  restart below `ν_C` is `υ`-fixed (`Zl.zlMu_fix`), and at every `υ`-fixed restart `μ` and every offset `z` (`0 < z`,
+  `ω² ∣ z`) with `μ + z` not `υ`-fixed: `r(μ + z) = υ_{μ+z+ω+1} + c(z)`, `c(z) = sup{k : ω^{1+k} ∣ z}`
+  (`Zl.zlR_addU`, `Zl.zlR_sup`); tests `g = 1` (offset `ω²`: `+ 1`, `Zl.zlR_sup_one`), `g = ω` (offset `ω^ω`: `+ ω`,
+  `Zl.zlR_sup_omega`), `ε`-offsets `X < μ` (`+ X`, `Zl.zlR_sup_eps`, the twin of `Wu.wuR_X`).  NEW node `skZlReach`
+  (PROVED).  The supply bound at `B = ω^{ω+1}` (above `f(ω²) = ω²`, `f(ω^ω) = ω^ω`): holds (`Zl.zlSup_test`); the
+  canonical decompositions at `g = ω²`, `g = ω^ω` pass the image bound with `f g = g` (`Zl.zlEQ_canon_one`,
+  `Zl.zlEQ_canon_omega`; in general the bound at the canonical decomposition is `c(g) ≤ c(f g)`,
+  `Zl.zlEQ_canon_iff`).  NEW node `skZlTests` (PROVED).
+* GENERIC supply: every code `m₀` of the closure `GxCl ρ_μ At` below `Ω₂` reads into the code set (`Zl.zlPast`), so
+  every limit `X ≤ min(Θ_μ(m₀), P(η_μ+2))` is supplied, `υ_{μ+X} ≤ r(μ)` (`Zl.zlSupCode`); from `Wc.WcRead0` the whole
+  `φ`-ladder `g₀ = u'+1`, `g_{n+1} = φ(g_n, 0)` (cofinal in the least `Γ`-number above `u' = υ_{μ+1}`) is supplied
+  (`Zl.zlSupG`, `Zl.zlSupG_le`; it contains `Wu.wuSup`, `Zl.zlSupG_wuX`).  NEW node `skZlSupG` (PROVED).
+* ASSEMBLY: `skSupKXo` REDUCED to the NEW leaf `skZlCfg` (`Zl.ZlCfg S λ β`) by `Zl.zlSup_ctx` with the shared nodes
+  `skNu` and `skLowRR`: at the short offsets (`λ + g` not `υ`-fixed) the long clause is vacuous, LOWER at `μ + f g`
+  follows from `skLowRR`, and both reaches are given by the formula, so the carry is `Zl.ZlEQs` (EQ under
+  `η_λ + g ↦ η_μ + f g`: `img E ≤ υ_{μ+fg+ω+1} + c(f g)` for every restricted decomposition `E` of
+  `υ_{λ+g+ω+1} + c(g)`); at the `υ`-fixed offsets the carry is kept (`Zl.ZlEQf`).  The reduction is EXACT:
+  `Zl.ZlCfg S λ β ⇔ Xo.XoSup S λ β` at every window context (`Zl.zlCtx_iff`, NEW node `skZlCfgIff`, PROVED), so
+  `skZlCfg` is satisfiable iff `skSupKXo` is (NON-VACUITY: as for `XoSup`; the earlier tests, `Xo.xoXj_obl`,
+  `Yb.ybSup_bound`, apply unchanged).
+This file imports the new `Zl` modules, so it can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -1263,7 +1313,63 @@ theorem skFormXo {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) :
   obtain ⟨-, -, -, -, -, -, hL1O, -, -⟩ := Vr.vr_facts (S := S) k
   exact Xo.xoForms_all S (pos_iff_ne_zero.2 h.1.1) ((skWin h).2.trans hL1O.le) g
 
-/-- STATUS: OPEN (NEW round 124; RESTATED round 125: `Xo.XoCarry` reads the repaired `Xo.XoR`; REPLACES `skSupKW` on
+/-- STATUS: PROVED (by `Zl.zlR_addU`, `Zl.zlMu_fix`; NEW round 133)
+SIZE: S
+THE REACH FORMULA at every inner restart of a `υ`-fixed restart (every supply restart below `ν_C` is `υ`-fixed):
+`μ` a restart index, `υ_μ = μ`, `0 < z`, `ω² ∣ z`, `μ + z < υ_{μ+z}`, `υ_{μ+z} < ν_C`, `υ_{μ+z} < P(η₁)` ⇒
+`r(μ + z) = υ_{μ+z+ω+1} + c(z)`. -/
+theorem skZlReach {μ z η1 : Ordinal.{0}} (hμ : IsRestartIdx μ) (hE : InE μ) (hz0 : 0 < z) (hzd : ω ^ 2 ∣ z)
+    (hfix : μ + z < upsilon (μ + z)) (hν : upsilon (μ + z) < nuC) (hn : upsilon (μ + z) < Nm.Pv S η1) :
+    cdR S (μ + z) = cdDelta (μ + z) + cL z :=
+  Zl.zlR_addU hμ hE hz0 hzd hfix hν hn
+
+/-- STATUS: PROVED (by `Zl.zlSupG`; NEW round 133)
+SIZE: S
+the supply along the `φ`-ladder at every supply restart: `Wc.WcRead0` ⇒ `υ_{μ+g_{n+1}} ≤ r(μ)`, `g₀ = υ_{μ+1}+1`,
+`g_{n+1} = φ(g_n, 0)` (generic form: `Zl.zlSupCode`, every code `m₀ ∈ GxCl ρ_μ At` below `Ω₂`). -/
+theorem skZlSupG {μ : Ordinal.{0}} (hR : CdRange S μ) (hc : cdCode S μ = Ls.lsG S (0 + 1 + 1) + 1)
+    (hω : upsilon μ < Nc.ncL S ω) (hr : Wc.WcRead0 S μ) (n : ℕ) :
+    upsilon (μ + Zl.zlG (upsilon (μ + 1)) (n + 1)) ≤ cdR S μ :=
+  Zl.zlSupG (k := 0) hR hc hω hr n
+
+/-- STATUS: PROVED (by `Zl.zlR_sup_one`, `Zl.zlR_sup_omega`, `Zl.zlSup_test`; NEW round 133)
+SIZE: S
+REFUTE-FIRST tests at the supply restarts: `r(μ+ω²) = δ_{μ+ω²} + 1`, `r(μ+ω^ω) = δ_{μ+ω^ω} + ω`,
+`υ_{μ+ω^{ω+1}} ≤ r(μ)` (given `υ_{μ+z} < ν_C`, `< L(ω+1)`). -/
+theorem skZlTests {μ : Ordinal.{0}} (hR : CdRange S μ) (hc : cdCode S μ = Ls.lsG S (0 + 1 + 1) + 1)
+    (hω : upsilon μ < Nc.ncL S ω) (hr : Wc.WcRead0 S μ) (hν : upsilon (μ + ω ^ ω) < nuC)
+    (hzL : upsilon (μ + ω ^ ω) < Nc.ncL S (ω + 1)) (hν2 : upsilon (μ + ω ^ 2) < nuC)
+    (hzL2 : upsilon (μ + ω ^ 2) < Nc.ncL S (ω + 1)) :
+    cdR S (μ + ω ^ 2) = cdDelta (μ + ω ^ 2) + 1 ∧ cdR S (μ + ω ^ ω) = cdDelta (μ + ω ^ ω) + ω ∧
+      upsilon (μ + ω ^ (ω + 1)) ≤ cdR S μ :=
+  ⟨Zl.zlR_sup_one hR hc hω hr hν2 hzL2, Zl.zlR_sup_omega hR hc hω hr hν hzL, Zl.zlSup_test hR hc hω hr⟩
+
+/-- STATUS: OPEN (NEW round 133; REPLACES `skSupKXo` on the road, exact: node `skZlCfgIff`)
+SIZE: L
+`Zl.ZlCfg S λ β(ν)`: for every `γ < υ_λ` and finite `Os ⊆ β`, a `υ`-fixed Range restart `μ` with `γ < υ_μ < υ_λ`, an
+offset map `(f, B)` (`Sl.SlOff`, `μ + B ≤ λ`, `ω² ∣ B`), the supply `υ_{μ+B} ≤ r(μ)`, EQ at the short offsets
+(`Zl.ZlEQs`: `img E ≤ υ_{μ+fg+ω+1} + c(fg)` for every restricted decomposition `E` of `υ_{λ+g+ω+1} + c(g)`, when
+`μ + f g` is short too; the plain carry when `μ + f g` is `υ`-fixed) and the carry at the `υ`-fixed offsets
+(`Zl.ZlEQf`).
+REFUTE FIRST (round 133): NO EVIDENCE (`skZlTests`; the canonical decomposition at a short `g` asks exactly `c(g) ≤
+c(f g)`, `Zl.zlEQ_canon_iff`).
+Exact gap: (i) the offset map with `c(f g) ≥` the image of `c(g)` and the supply `υ_{μ+B} ≤ r(μ)` for `B` above all
+`f g` (proved for `B` on the `φ`-ladder, `skZlSupG`; windows with codes `c(g) ≥ Γ_{υ_{λ+1}+1}` need `B ≥
+Γ_{υ_{μ+1}+1}`: readings of `ψ_{Ω₂}`-atom codes by `Zl.zlSupCode`), (ii) EQ: the image of every restricted
+decomposition of a value is at most the image of its canonical decomposition (the image as a function of the value,
+the content of the shift leaf `skLevImgHi2` at the reach values), (iii) the carry at the `υ`-fixed offsets (EQ under
+`η_λ ↦ η_μ` above `υ_{λ+2}`).
+ZlCfg(λ, β(ν)) -/
+theorem skZlCfg {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Zl.ZlCfg S l (ν - l + ω ^ 2) := by sorry
+
+/-- STATUS: PROVED (by `Zl.zlCtx_iff`; NEW round 133)
+SIZE: S
+the reduction is exact: `ZlCfg(λ, β(ν)) ⇔ XoSup(λ, β(ν))` at every window context. -/
+theorem skZlCfgIff {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) :
+    Zl.ZlCfg S l (ν - l + ω ^ 2) ↔ Xo.XoSup S l (ν - l + ω ^ 2) :=
+  Zl.zlCtx_iff k h.1 h.2.1 h.2.2.1 h.2.2.2.2.1 h.2.2.2.2.2.1 skNu skLowRR
+
+/-- STATUS: REDUCED (round 133: from `skZlCfg`, `skNu`, `skLowRR` by `Zl.zlSup_ctx`; was OPEN) (NEW round 124; RESTATED round 125: `Xo.XoCarry` reads the repaired `Xo.XoR`; REPLACES `skSupKW` on
 the road; `skSupKW` follows from it by `Xo.xoSup_ww`)
 SIZE: L
 the supply clause with the moving-leaf carry `Xo.XoCarry` at `β(ν)`: supply restarts `μ` with a map `(f, B)` whose
@@ -1289,7 +1395,8 @@ Exact gap: the reach formula `r(μ + f(g))` at the supply restarts for every `g`
 `L(k)`, `Wu.wuR_X`), the supply `υ_{μ+B} ≤ r(μ)` with `B` above every `f(g)`, and EQ under `η_λ ↦ η_μ` above
 `υ_{λ+2}`.
 XoSup(λ, β(ν)) -/
-theorem skSupKXo {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Xo.XoSup S l (ν - l + ω ^ 2) := by sorry
+theorem skSupKXo {k : ℕ} {l ν : Ordinal.{0}} (h : SkCtx S k l ν) : Xo.XoSup S l (ν - l + ω ^ 2) :=
+  Zl.zlSup_ctx k h.1 h.2.1 h.2.2.1 h.2.2.2.2.1 h.2.2.2.2.2.1 skNu skLowRR (skZlCfg h)
 
 /-- STATUS: REDUCED (from `skUp`, `skFormXo` (PROVED), `skSupKXo`; NEW round 124)
 SIZE: S
@@ -1324,19 +1431,104 @@ theorem skSupXo :
   have h := skVisKXo (S := S) 0 l hl (by simpa using e)
   simpa using h
 
-/-- STATUS: OPEN (NEW round 132; the open leaf of the shift on the road; REPLACES `skShift2`, via `skLevImgHi`,
-`skLevImg`)
+/-- STATUS: OPEN (NEW round 133; the open leaf of the shift on the road; REPLACES `skLevImgHi2`, via `skLevImgHi3`)
+SIZE: L
+`Zk.ZkImgP4 S`: `Zf.ZfImgP2 S` with the level image asked only at levels that are (i) one-base at no segment (as in
+`Zf.ZfImgHi2`), (ii) no sum of countable one-segment pieces (`¬ Zk.ZkSS (Zk.zkPc …) L`), (iii) no prefix level
+(`¬ Zk.ZkPS (Zk.zkPc …) (Zk.zkPf …) L`: one uncountable one-segment piece with `Ω₁ ∣ val`, countable segment sums
+around it).  Equivalent to `Zf.ZfImgP2 S` (`Zk.zkImgP4_of_P3`, `Zk.zkImgP3_of_P2`).
+REFUTE FIRST (round 133): NO EVIDENCE.  Two-segment sums are theorems (node `skZkLevSeg`, witness `skZkWit2`); a
+nested `ϑ`-node level is equivalent to the node clause at the inner node (node `skZkLevNode`).
+Exact gap (what (i)–(iii) leave): (a) levels containing a nested `ϑ`-node (by `skZkLevNode` the clause there is
+`D(val) = img` at the inner node: a recursion of `Zf.zfDCl` on the size of the term, with the level image at the inner
+level as the induction hypothesis), (b) countable `φ`-values whose arguments lie in two segments (`φ(a, b)`,
+`a ∈ seg(υ_λ)`, `b ∈ seg(υ_{λ+h})`: a point with a parameter `≥ υ_μ`, so `D` is not a segment map there; needs the
+`φ ↔ ϑ` link at mixed arguments and the term clause of the shift at the corresponding `ϑ`-term), (c) old `ub` / `tm`
+leaves with leaves in lower segments, (d) several uncountable pieces at different segments, or an uncountable piece
+whose value is no `Ω₁`-multiple (`lc (B₂ + 5) + …`: touching terms), (e) `Ω_·` and `ψ` with moving leaves. -/
+theorem skLevImgHi4 (S : InaccSeq.{0}) : Zk.ZkImgP4 S := by sorry
+
+/-- STATUS: REDUCED (round 133: from `skLevImgHi4` by `Zk.zkImgP3_of_P4`; NEW round 133)
+SIZE: L
+`Zk.ZkImgP3 S`: `Zf.ZfImgP2 S` with the level image asked only off the countable segment sums. -/
+theorem skLevImgHi3 (S : InaccSeq.{0}) : Zk.ZkImgP3 S := Zk.zkImgP3_of_P4 (skLevImgHi4 S)
+
+/-- STATUS: PROVED (by `Zk.zk_lev_seg`; NEW round 133)
+SIZE: M
+the level image at every sum of countable one-segment pieces (`Zk.ZkSS (Zk.zkPc S l μ f Y) L`), given the segment
+facts `Zk.ZkSegH` of the shift, `X < γ < υ_μ`, `D = id` below `γ`, `0 < γ`, `Y ≥ υ_λ` and the segment clause `D = mv`
+of the shift -/
+theorem skZkLevSeg {l μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X Y : Finset Ordinal.{0}}
+    (H : Zk.ZkSegH l μ f Y) (hXγ : ∀ x ∈ X, x < γ) (hγμ : γ < upsilon μ) (hid : ∀ x, x < γ → D x = x)
+    (hγ0 : 0 < γ) (hYl : ∀ y ∈ Y, upsilon l ≤ y)
+    (hmv : ∀ y ∈ Y, ∀ g, upsilon (l + g) ≤ y → y < upsilon (succ (l + g)) →
+      (∀ p ∈ Par (upsilon (l + g)) y, p < upsilon l) → D y = mv (upsilon (l + g)) (upsilon (μ + f g)) y)
+    (L : Xo.XoE) (hL : Zk.ZkSS (Zk.zkPc S l μ f Y) L)
+    (hLv : Yv.YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * Xo.xoVal S l L)) :
+    Yv.yvSub S D (Om1 * Xo.xoVal S l L) = Om1 * Xo.xoImg S l μ f L :=
+  Zk.zk_lev_seg H hXγ hγμ hid hγ0 hYl hmv L hL hLv
+
+/-- STATUS: PROVED (by `Zk.zk_yv_add`; NEW round 133)
+SIZE: M
+the leaf substitution is additive at no-touch sums: exponents of `a` all `≥ Ω₁·2`, `b < ω^{Ω₁·2}`, `a + b < θ`,
+`f 0 = 0`, `P 0` -/
+theorem skZkYvAdd (f : Ordinal.{0} → Ordinal.{0}) (hf0 : f 0 = 0) {P : Ordinal.{0} → Prop} (hP0 : P 0)
+    (a : Ordinal.{0}) (ha : Zk.ZkEx (fun e => Om1 * 2 ≤ e) a) (b : Ordinal.{0}) (hb : b < ω ^ ((Om1 : Ordinal.{0}) * 2))
+    (hθ : a + b < ConjT.th S) (hL : Yv.YvLv S P (a + b)) :
+    Yv.YvLv S P a ∧ Yv.YvLv S P b ∧ Yv.yvSub S f (a + b) = Yv.yvSub S f a + Yv.yvSub S f b :=
+  Zk.zk_yv_add f hf0 hP0 a ha b hb hθ hL
+
+/-- STATUS: PROVED (by `Zk.zk_lev_ps`; NEW round 133)
+SIZE: M
+the level image at every prefix level (`Zk.ZkPS`) -/
+theorem skZkLevPs {l μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X Y : Finset Ordinal.{0}}
+    (H : Zk.ZkSegH l μ f Y) (hl1 : upsilon l < Om1) (hX : ∀ x ∈ X, x < upsilon l) (hXγ : ∀ x ∈ X, x < γ)
+    (hγμ : γ < upsilon μ) (hid : ∀ x, x < γ → D x = x) (hγ0 : 0 < γ) (hYl : ∀ y ∈ Y, upsilon l ≤ y)
+    (hbelow : ∀ y ∈ Y, D y < upsilon l)
+    (hres : ∀ g, upsilon (l + g) ∈ Y → D (upsilon (l + g)) = upsilon (μ + f g))
+    (hpi : ∀ y ∈ Y, y < upsilon (succ l) → D y = pi (upsilon μ) (upsilon l) y)
+    (hmv : ∀ y ∈ Y, ∀ g, upsilon (l + g) ≤ y → y < upsilon (succ (l + g)) →
+      (∀ p ∈ Par (upsilon (l + g)) y, p < upsilon l) → D y = mv (upsilon (l + g)) (upsilon (μ + f g)) y)
+    (L : Xo.XoE) (hL : Zk.ZkPS (Zk.zkPc S l μ f Y) (Zk.zkPf S l μ f Y) L)
+    (hθ : Om1 * Xo.xoVal S l L < ConjT.th S)
+    (hLv : Yv.YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * Xo.xoVal S l L)) :
+    Yv.yvSub S D (Om1 * Xo.xoVal S l L) = Om1 * Xo.xoImg S l μ f L :=
+  Zk.zk_lev_ps H hl1 hX hXγ hγμ hid hγ0 hYl hbelow hres hpi hmv L hL hθ hLv
+
+/-- STATUS: PROVED (by `Zk.zk_wit2`; NEW round 133; the non-vacuity of `skZkLevSeg` at a two-segment level)
+SIZE: S
+`old (sg h υ_{λ+h}) + old (lo υ_λ)` is a countable segment sum, not `Xo.XoPi`, and `Zf.XoPiG` at no segment `h' > 0`
+with `υ_{μ+f h'} < υ_λ` -/
+theorem skZkWit2 {l μ : Ordinal.{0}} {f : Ordinal.{0} → Ordinal.{0}} {Y : Finset Ordinal.{0}}
+    (H : Zk.ZkSegH l μ f Y) {h : Ordinal.{0}} (h0 : 0 < h) (hτY : upsilon (l + h) ∈ Y) :
+    Zk.ZkSS (Zk.zkPc S l μ f Y) (.add (.old (.sg h (upsilon (l + h)))) (.old (.lo (upsilon l)))) ∧
+      ¬ Xo.XoPi S l μ (.add (.old (.sg h (upsilon (l + h)))) (.old (.lo (upsilon l)))) ∧
+      ∀ h', 0 < h' → upsilon (μ + f h') < upsilon l → upsilon (l + h') < Om1 →
+        ¬ Zf.XoPiG S l μ (upsilon (μ + f h')) (upsilon (l + h')) f
+          (.add (.old (.sg h (upsilon (l + h)))) (.old (.lo (upsilon l)))) :=
+  Zk.zk_wit2 H h0 hτY
+
+/-- STATUS: PROVED (by `Zk.zk_lev_node`; NEW round 133; REFUTE FIRST at a nested `ϑ`-node level)
+SIZE: S
+at a level that is a nested `ϑ`-node with level value `≥ 1`, the level image is equivalent to `D(val) = img` -/
+theorem skZkLevNode {l β μ h' : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {L' e' : Xo.XoE}
+    (hD0 : D 0 = 0) (hW : Xo.XoWF S l β (.th h' L' e')) (hM1 : 1 ≤ Xo.xoVal S l L')
+    (hτE : InE (upsilon (l + h'))) (hτ1 : upsilon (l + h') < Om1) (hv1 : Xo.xoVal S l (.th h' L' e') < Om1)
+    (hiE : InE (Xo.xoImg S l μ f (.th h' L' e'))) :
+    Yv.yvSub S D (Om1 * Xo.xoVal S l (.th h' L' e')) = Om1 * Xo.xoImg S l μ f (.th h' L' e') ↔
+      D (Xo.xoVal S l (.th h' L' e')) = Xo.xoImg S l μ f (.th h' L' e') :=
+  Zk.zk_lev_node hD0 hW hM1 hτE hτ1 hv1 hiE
+
+/-- STATUS: REDUCED (round 133: from `skLevImgHi4` by `Zk.zkImgP2_of_P4`; NEW round 132, was OPEN; the countable
+segment sums (`skZkLevSeg`) and the prefix levels (`skZkLevPs`) are proved)
 SIZE: L
 `Zf.ZfImgP2 S`: `Zf.ZfImg S` with the level image asked only at levels that are one-base terms at NO segment
 (`Zf.ZfImgHi2`: neither `Xo.XoPi` nor `Zf.XoPiG` for the segment map `π_{υ_{μ+f h},υ_{λ+h}}` of any configuration
 segment `υ_{λ+h} ∈ Y`, `h > 0`).  At one-base levels it is the theorem `Zf.zf_img_piG` with `Zf.zf_seg_D` (node
 `skZfImgPiG`).
-REFUTE FIRST (round 132): NO EVIDENCE (see `skLevImg`).
-Exact gap: the level image at a level whose term mixes leaves of two segments (moved by two different base changes,
-e.g. `lc B₂ + lo λ + sg 1 y`), carries a nested `ϑ`-node, or uses `Ω_·`, `ψ`: `yvSub D` must be the hull isomorphism
-of FRAG extended to such level terms (a composition of the segment maps `π_{υ_{μ+f h},υ_{λ+h}}` that commutes with `+`,
-`φ` and with the canonical decomposition; the analogue of `Zf.zf_pi_mulG` for that composition). -/
-theorem skLevImgHi2 (S : InaccSeq.{0}) : Zf.ZfImgP2 S := by sorry
+REFUTE FIRST (round 132): NO EVIDENCE (see `skLevImg`).  Round 133: NO EVIDENCE at two-segment sums (proved) and at
+nested `ϑ`-node levels (equivalent to the inner node clause). -/
+theorem skLevImgHi2 (S : InaccSeq.{0}) : Zf.ZfImgP2 S := Zk.zkImgP2_of_P4 (skLevImgHi4 S)
 
 /-- STATUS: PROVED (by `Zf.zf_img_piG`; NEW round 132)
 SIZE: S

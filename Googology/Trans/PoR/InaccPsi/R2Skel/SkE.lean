@@ -18,6 +18,7 @@ import Googology.Trans.PoR.InaccPsi.R2.YzJump
 import Googology.Trans.PoR.InaccPsi.R2.ZeJump
 import Googology.Trans.PoR.InaccPsi.R2.ZeGap
 import Googology.Trans.PoR.InaccPsi.R2.ZjRw
+import Googology.Trans.PoR.InaccPsi.R2.ZqBd
 
 /-!
 # Skeleton of part EQ: the hypotheses `(hν → WdThLow)` and `(hν → WdEQfar)` of `Wd.wdRoadL`
@@ -159,6 +160,18 @@ base-indexed family `Rw.rwShG`), so every atom `θ < s < F₂^ω` is `ψ_{Ω₂}
 move (`Zj.zjAtMoveG`); with the wall, the reading move holds at every window code `θ⁺ ≤ m_λ < F₂^ω` (`skMoveG` =
 `Zj.zjMoveG`).  Non-vacuity of the new leaf: `skTopGTarget` (`Zj.zjTopG_of_target`).  This file also imports the new
 modules `R2.ZjRead`, `R2.ZjMove`, `R2.ZjRo`, `R2.ZjRw` (through `R2.ZjRw`): it can be checked only after the merge.
+Round 133 (leaf eq12): `skTopG` REDUCED (`Zq.zqTopG3`) to the wall `hW` and the new leaf `skAtHi3` (OPEN,
+`Zq.ZqAtHi3`: the atom move on the band `K_Y < s < P′`, `K_Y = ψ_{Ω₂}(Ω_ω + Y₃)`, `Y₃ = ψ_{Ω₃}(Ω₃)`, asking only
+`B_n s` an atom at `λ'` and `Θ_{λ'}(B_n s) = B_n Θ_λ(s)`; `ZqAtHi3 ⇔ Zj.ZjAtK S P′`, `skAtHi3Iff`).  `skTopG` now
+takes `hW`.  The atom move below `K_Y` is PROVED (`skAtKY` = `Zq.zqAtK_Y`: the level systems `St.StLS` and `Uu.UuLS`
+are base-indexed, so `St.stClsLev_all` / `Ux.uxClsLev_all` run at the base `Ω_ω`; the closure condition of the level
+read off the digit part `d'` of the atom argument `Ω_ω + d'` is `Sn.snExtrRem` / `Ux.uxExtrRem`, since
+`W^{W^E} ∣ Ω_ω`; `Zq.zqRepSt`, `Zq.zqRepUx`, `Zq.zqAtMoveSt`, `Zq.zqAtMoveUx`, `Zq.zqAtK_Gam`), and so is the move at
+`K_Y` itself (`skY3Move` = `Zq.zqY3_move`, from `skReadY3` = `Zq.zqRead_Y3`: `Θ_λ(K_Y) = ψ_{Ω₁}(A + θ + Y₂)`).
+REFUTE-FIRST records: `skF2Read` (`Θ_λ(F₂^ω) = ψ_{Ω₁}(A + θ + Ω^{Ω^{Ω₁}})`), `skThThRead`
+(`Θ_λ(ψ_{Ω₂}(Ω_ω + θ)) = ψ_{Ω₁}(A + θ + ψ_{Ω₁}(A + θ))`); the atom lemma for `θ ≤ s < P′` (`skAtom` = `Zq.zqAtom`).
+This file also imports the new modules `R2.ZqSt`, `R2.ZqUx`, `R2.ZqY3`, `R2.ZqTop`, `R2.ZqBd` (through `R2.ZqBd`): it
+can be checked only after the merge.
 -/
 
 set_option autoImplicit false
@@ -227,26 +240,34 @@ abbrev SkWall (S : InaccSeq.{0}) : Prop := Nc.ncL S (ω + 1) ≤ nuC → Wr.WrWa
 
 /-! ## Open leaves -/
 
-/-- STATUS: OPEN (NEW round 132)
+/-- STATUS: OPEN (NEW round 133)
 SIZE: L
-REFUTE: NO EVIDENCE (round 132: it follows from the target, skTopGTarget = Zj.zjTopG_of_target (hν ∧ CdEQ ∧ SkKFar);
-a move statement, so no no-go result applies (Vo.voNoGo, Vn.vnTop_Om3, Vq.vqNoTop_Om3, Xi.xiTopFam_false,
-Xd.xdX0Law_false, Yd.ydInvRef speak of reach forms, top laws at base 0 or the inverse correspondence); the expected
-plateau value and the plateau move hold (skKwRead, skKwMove); the readings past F₂^ω are unknown: the next family
-(Sn/Sg: exponents E < ε_{Ω₂+1}) uses the closure condition Sn.snCL_atom only below θ, while over Ω_ω the
-exponents E ≥ θ occur)
+REFUTE: NO EVIDENCE (round 133: a move statement about hull atoms, so no no-go result applies (Vo.voNoGo, Vn.vnTop_Om3,
+Vq.vqNoTop_Om3, Xi.xiTopFam_false, Xd.xdX0Law_false, Yd.ydInvRef speak of reach forms, top laws at base 0 or the
+inverse correspondence); Xs.xsRefK refutes only the candidate value ψ_{Ω₁}(A + θ + T d) at d = Ω_{k+1}, k ≥ 2, not a
+move; the first atom K_Y of the band moves (skY3Move); the parts below K_Y hold (skAtKY))
+∀ window λ → λ', every atom K_Y < s < P′ of λ with the move of the codes below s:
+MvD s ∧ B_n s ∈ ldAtR λ' ∧ Θ_{λ'}(B_n s) = B_n Θ_λ(s)  (statement Zq.ZqAtHi3 S, K_Y = ψ_{Ω₂}(Ω_ω + Y₃),
+Y₃ = ψ_{Ω₃}(Ω₃), P′ = ψ_{Ω₂}(Ω_ω·2); ⇔ Zj.ZjAtK S P′ by Zq.zqAtHi3_iff).  Checkable after the merge of R2.Zq*. -/
+theorem skAtHi3 : Zq.ZqAtHi3 S := by sorry
+
+/-- STATUS: REDUCED (round 133, Zq.zqTopG3; was OPEN since round 132)
+SIZE: S
 ∀ window λ → λ', F₂^ω ≤ m_λ ⇒ B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})  (statement Zj.ZjTopG S,
-F₂^ω = ψ_{Ω₂}(Ω_ω + Ω₂^{Ω₂^{Ω₂}})). -/
-theorem skTopG (hν : Nc.ncL S (ω + 1) ≤ nuC) : Zj.ZjTopG S := by sorry
+F₂^ω = ψ_{Ω₂}(Ω_ω + Ω₂^{Ω₂^{Ω₂}})).  From the wall hW and the child skAtHi3: window codes are < P′ (Zq.zqCode_lt,
+Se.seCode_mid), Zj.zjMoveGen with the bound P′ and Zj.ZjAtK S P′ (Zq.zqAtK_Pp: below K_Y Zq.zqAtK_Y, at K_Y
+Zq.zqY3_move, above it skAtHi3 with Zq.zqTh_lt_c and B_n P′ = P′).  Now takes hW.  Checkable after the merge of R2.Zq*. -/
+theorem skTopG (hW : SkWall S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Zj.ZjTopG S :=
+  Zq.zqTopG3 (hW hν) skAtHi3
 
 /-- STATUS: REDUCED (round 132, Zj.zjTopK_ofG; was OPEN since round 124)
 SIZE: S
 ∀ window λ → λ', (∀ j, K_j ≤ m_λ) ⇒ B_n Θ_λ(m_λ) = Θ_{λ'}(m_{λ'})  (statement Xs.XsTopK S; K_ω = sup_j K_j,
 K_{j+1} = ψ_{Ω₂}(Ω_ω + Ω₂·K_j)).  Child skTopG and the hypothesis hW (the code-free wall, SkWall S = SkR.skWallCF, passed down from Root.skNuC): the codes K_ω ≤ m_λ < F₂^ω by Zj.zjMoveG (the atoms
 θ < s < F₂^ω over the base Ω_ω, Zj.zjAtMoveG; the atoms below θ⁺ by the wall), the codes ≥ F₂^ω by skTopG.
-Shared with SkR (SkR.skTopK forwards to it).  Checkable after the merge of R2.Zj*. -/
+Shared with SkR (SkR.skTopK forwards to it).  Checkable after the merge of R2.Zj*, R2.Zq* (round 133: skTopG takes hW). -/
 theorem skTopK (hW : SkWall S) (hν : Nc.ncL S (ω + 1) ≤ nuC) : Xs.XsTopK S :=
-  Zj.zjTopK_ofG (hW hν) (skTopG hν)
+  Zj.zjTopK_ofG (hW hν) (skTopG hW hν)
 
 /-- STATUS: REDUCED (round 124; was OPEN)
 SIZE: S
@@ -1180,5 +1201,74 @@ SIZE: S
 under the wall the old leaf and the new one are equivalent: WrWallCF ⇒ (skTopK ⇔ skTopG). -/
 theorem skTopKIffG (hW : Wr.WrWallCF S) : Xs.XsTopK S ↔ Zj.ZjTopG S :=
   Zj.zjTopK_iffG hW
+
+/-- STATUS: PROVED (Zq.zqAtK_Y; NEW round 133)
+SIZE: S
+the atom move above θ below K_Y = ψ_{Ω₂}(Ω_ω + Y₃) (Zj.ZjAtK S K_Y): the level system past Γ₂ (Uu.uuLSY, Ux.uxLSB_Y)
+over the base Ω_ω (Zq.zqRepUx, Zq.zqReadUx, Zq.zqAtMoveUx); likewise below ψ_{Ω₂}(Ω_ω + Γ₂) from the systems below Γ₂
+(Zq.zqAtK_Gam). -/
+theorem skAtKY : Zj.ZjAtK S (S.psi (Om ω + Ug.ugY S) (Om (1 + 1))) := Zq.zqAtK_Y
+
+/-- STATUS: PROVED (Zq.zqRead_Y3; NEW round 133; REFUTE-FIRST record for the band)
+SIZE: S
+Θ_λ(ψ_{Ω₂}(Ω_ω + Y₃)) = ψ_{Ω₁}(A + θ + Y₂) at every restart with own A ≥ Ω_ω·2. -/
+theorem skReadY3 {l ηx : Ordinal.{0}} (hl : IsRestartIdx l) (hX : upsilon l < Nm.Pv S ηx)
+    (hown : ConjT.Aη S (cdEta S l) ∈
+      S.CSet (ConjT.Aη S (cdEta S l)) (S.psi (ConjT.Aη S (cdEta S l)) (Om 1)))
+    (hAW : Om ω + Om ω ≤ ConjT.Aη S (cdEta S l)) :
+    Mx.gxTh (upsilon l) (Ld.ldAtR S l) (S.psi (Om ω + Ug.ugY S) (Om (1 + 1))) =
+      S.psi (ConjT.Aη S (cdEta S l) + ConjT.th S + S.psi (Om (1 + 1)) (Om (1 + 1))) (Om 1) :=
+  Zq.zqRead_Y3 hl hX hown hAW
+
+/-- STATUS: PROVED (Zq.zqY3_move; NEW round 133)
+SIZE: S
+in every window B_n Θ_λ(K_Y) = Θ_{λ'}(K_Y) (no wall). -/
+theorem skY3Move {n : ℕ} {l l' : Ordinal.{0}} (hW' : SkWin S n l l') :
+    Bc.bcB S n (Mx.gxTh (upsilon l) (Ld.ldAtR S l) (S.psi (Om ω + Ug.ugY S) (Om (1 + 1)))) =
+      Mx.gxTh (upsilon l') (Ld.ldAtR S l') (S.psi (Om ω + Ug.ugY S) (Om (1 + 1))) := by
+  obtain ⟨hR, h1, hr, hl', hB, -⟩ := hW'
+  exact Zq.zqY3_move hR h1 hr hl' hB
+
+/-- STATUS: PROVED (Zq.zqF2_read; NEW round 133; REFUTE-FIRST record)
+SIZE: S
+Θ_λ(F₂^ω) = ψ_{Ω₁}(A + θ + Ω₁^{Ω₁^{Ω₁}}). -/
+theorem skF2Read {l ηx : Ordinal.{0}} (hl : IsRestartIdx l) (hX : upsilon l < Nm.Pv S ηx)
+    (hown : ConjT.Aη S (cdEta S l) ∈
+      S.CSet (ConjT.Aη S (cdEta S l)) (S.psi (ConjT.Aη S (cdEta S l)) (Om 1)))
+    (hAW : Om ω + Om ω ≤ ConjT.Aη S (cdEta S l)) :
+    Mx.gxTh (upsilon l) (Ld.ldAtR S l) (S.psi (Om ω + Le.leWe (Le.leWe (Om (1 + 1)))) (Om (1 + 1))) =
+      S.psi (ConjT.Aη S (cdEta S l) + ConjT.th S + Le.leOe (Le.leOe (Om 1))) (Om 1) :=
+  Zq.zqF2_read hl hX hown hAW
+
+/-- STATUS: PROVED (Zq.zqThTh_read; NEW round 133; REFUTE-FIRST record)
+SIZE: S
+Θ_λ(ψ_{Ω₂}(Ω_ω + θ)) = ψ_{Ω₁}(A + θ + ψ_{Ω₁}(A + θ)). -/
+theorem skThThRead {l ηx : Ordinal.{0}} (hl : IsRestartIdx l) (hX : upsilon l < Nm.Pv S ηx)
+    (hown : ConjT.Aη S (cdEta S l) ∈
+      S.CSet (ConjT.Aη S (cdEta S l)) (S.psi (ConjT.Aη S (cdEta S l)) (Om 1)))
+    (hAW : Om ω + Om ω ≤ ConjT.Aη S (cdEta S l)) :
+    Mx.gxTh (upsilon l) (Ld.ldAtR S l) (S.psi (Om ω + ConjT.th S) (Om (1 + 1))) =
+      S.psi (ConjT.Aη S (cdEta S l) + ConjT.th S + S.psi (ConjT.Aη S (cdEta S l) + ConjT.th S) (Om 1)) (Om 1) :=
+  Zq.zqThTh_read hl hX hown hAW
+
+/-- STATUS: PROVED (Zq.zqAtom; NEW round 133)
+SIZE: S
+THE ATOM LEMMA for θ ≤ s < P′: s = ψ_{Ω₂}(Ω_ω + d), d < Ω_ω, Ω_ω + d own, in the hull, below A, d ∈ Cl(Ω_ω + d, s)
+and in the hull, every x ∈ Cl(Ω_ω + d, s) a code over every SC Q ≥ s (LeCl below ψ_{Ω₃}(0), UgC₂ below Y₃). -/
+theorem skAtom {l ηx s : Ordinal.{0}} (hl : IsRestartIdx l) (hX : upsilon l < Nm.Pv S ηx)
+    (hs : s ∈ Ld.ldAtR S l) (hθs : ConjT.th S ≤ s) (hsP : s < Nc.ncPp S) :
+    ∃ d, d < Om ω ∧ s = S.psi (Om ω + d) (Om (1 + 1)) ∧
+      Om ω + d ∈ S.CSet (Om ω + d) (S.psi (Om ω + d) (Om (1 + 1))) ∧
+      Om ω + d ∈ cdHull S l ∧ Om ω + d < ConjT.Aη S (cdEta S l) ∧
+      d ∈ S.CSet (Om ω + d) s ∧ d ∈ cdHull S l ∧
+      (∀ x, x ∈ S.CSet (Om ω + d) s → x < S.psi 0 (Om (1 + 1 + 1)) →
+        ∀ Q, SC Q → s ≤ Q → Le.LeCl (Om (1 + 1)) Q x) ∧
+      (∀ x, x ∈ S.CSet (Om ω + d) s → x < Ug.ugY S → ∀ Q, SC Q → s ≤ Q → Ug.UgC S (1 + 1) Q x) :=
+  Zq.zqAtom hl hX hs hθs hsP
+
+/-- STATUS: PROVED (Zq.zqAtHi3_iff; NEW round 133)
+SIZE: S
+the new leaf is exactly the atom move above θ below P′: skAtHi3 ⇔ Zj.ZjAtK S P′. -/
+theorem skAtHi3Iff : Zq.ZqAtHi3 S ↔ Zj.ZjAtK S (Nc.ncPp S) := Zq.zqAtHi3_iff
 
 end R2Skel.SkE

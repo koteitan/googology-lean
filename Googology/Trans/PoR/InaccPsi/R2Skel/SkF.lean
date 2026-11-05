@@ -31,9 +31,12 @@ import Googology.Trans.PoR.InaccPsi.R2.YsRsAll
 import Googology.Trans.PoR.InaccPsi.R2.YxVac
 import Googology.Trans.PoR.InaccPsi.R2.ZcSup
 import Googology.Trans.PoR.InaccPsi.R2.ZhFix
+import Googology.Trans.PoR.InaccPsi.R2.ZnIn
 import Googology.Trans.PoR.InaccPsi.R2.YwLad
 import Googology.Trans.PoR.InaccPsi.R2.ZbE0
 import Googology.Trans.PoR.InaccPsi.R2.ZgSq
+import Googology.Trans.PoR.InaccPsi.R2.ZmCd
+import Googology.Trans.PoR.InaccPsi.R2.ZoBC
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -293,6 +296,40 @@ THIRD ROUTE skips the systems: direct readings of the layer (`Yc.YcDirect S c Γ
 cofinal below `Γ(c+1)`) give `skLayLo` AND `skLayHi` at once (`skLayLoD`, `Yc.ycLay_of_direct`); non-vacuity at
 `c = 0` below `φ(G, 1)` (`skLayDirectA2`); `skLayHi` is REDUCED to `skLayDirect` (`c + 1 < ε₀`) and `skLayHiBig`.
 
+Round 133 (leaf regb11, modules `R2.Zm*`; this file imports `R2.ZmCd`, so it can be checked only after the merge):
+THE GENERIC HEREDITARY STEP PAST `B_Γ`.  A digit system `Zm.ZmDS` at an `ε`-number base `E = φ(1, E_i) ≥ B_Γ`
+(offsets `o < E`, reading `R(o)(x) < V(x)`, gates, order, successor, limits, cofinality, Lemma EXACT, the digit lemma,
+`TlCl Z o ⇔ gate < Z`, `ε_{V(x)+1} = ϑˣ(Ω₁ + W(x))`) gives a reading system `Zb.ZbRS` of the indices `B_Γ + 1 + o`
+and `ZbDirect S E` (`Zm.ZmDS.toRS`, `Zm.ZmDS.direct`); the `Yr` codes below `B_Γ` are one (`Zm.zmYr`, `V = D`).
+ONE generic step `Zm.ZmDS.step`: the codes `E^k·d + r < ε_{E+1}` (`k = log_E o < o`, `Zm.zm_log_lt`) read
+`V^{R(k)}·R(d) + R(r)`, gate `max`; order and top bound (`Zm.ZmDS.sR_main`), successors and limits
+(`Zm.ZmDS.sR_succ`, `Zm.ZmDS.sR_lim`), cofinality (`Zm.ZmDS.sR_cof`), Lemma EXACT for `R(o)` and `V·R(o)` through
+`Te.te_opow_pi` at the pseudo-base `V` (`Zm.ZmDS.sR_pi`), the digit lemma one level up (`Zm.ZmDS.sR_dig`), the
+`TlCl` inversion by division by `ω^a` (`Zm.zm_cl_divOp`, `Zm.ZmDS.sG_gate`), the tower cofinal in `ε_{E+1}`
+(`Zm.zmTw_cof`).  zgBw / zgSq are its first two cases.  Iterated (`Zm.zmCh`): `Zm.zmDirectW : ZbDirect S ε_{B_Γ+ω}`;
+with the global reading (`Zm.zmGR`: bracket of `φ(1, B_Γ+ν)`, base reading `φ(1, D(x)+ν)`, `Zm.zm_glA_veb`:
+`ϑˣ(Ω₁ + D(x) + t) = φ(1, D(x)+1+t)`) and the union at limit indices (`Zm.zmU`), ONE transfinite induction over
+every constant index `ν < ε₀` (`Zm.zmGood_all`) gives `Zm.zmDirectE0 : ZbDirect S ε_{B_Γ+ε₀}` (node `skZmDirectE0`)
+and UPPER ∧ LOWER ∧ CapV below `ι(Γ_{Ω₁+1+B}·ω)` for every `B < ε_{B_Γ+ε₀}` (`Zm.zmUVE0`, node `skZmFrontE0`),
+unconditional.  PAST THE INDEX `ε₀`: the interface carries a base gate (`Zm.ZmDS.Eg`; the base fields only above it;
+every nonzero code's gate at least it, `Zm.ZmDS.sG_Eg`; `Zm.ZmDS.raise`; the field "cofinally many small gates"
+moved to `Zm.ZmDS.Gc0`, which the step always has, `Zm.ZmDS.step_gc0`); the global reading with code indices
+(`Zm.zmHR`, `Zm.zmHG`: the index `n < o` of the bracket of `o` read too, `Zm.zm_bracket`, `Zm.zm_noFix`: no fixed
+point of `φ(1, ·)` in `(B_Γ, ζ_{B_Γ+1})`); `Zm.zm_glA_veb2` (`ϑˣ(Ω₁ + D + t) = φ(1, D+1+t)` below `ζ_{D+1}`); the
+`TlCl` inversions at `ε`-numbers (`Zm.zm_cl_eps`, `Zm.zm_cl_veb1`) and the global gate bound (`Zm.zmHG_gate`); ONE
+transfinite induction over every code index `c < ζ_{B_Γ+1}` (`Zm.zmGood2_all`: the step raised by the gate of
+`c+1`, `Zm.zmGood2_succ`; the union `Zm.zmCU` with the member at the bracket index, `Zm.zmGood2_lim`), so
+`Zm.zmDirectZ : ZbDirect S ζ_{B_Γ+1}` (node `skZmDirectZ`) and UPPER ∧ LOWER ∧ CapV below `ι(Γ_{Ω₁+1+B}·ω)` for
+every `B < ζ_{B_Γ+1}` (`Zm.zmUVZ`, node `skZmFrontZ`), unconditional.  REFUTE FIRST at the offset `B_Γ²·2 + 1` (reading `D(x)²·2 + 1`, gate `2`, no fixed point) and at
+the code `ε_{B_Γ+1}` (reading `ε_{D(x)+1} = ϑˣ(Ω₁ + D(x))`, no fixed point): NO EVIDENCE (node `skZmRef`).
+`skZbDirect` is REDUCED to `skZbDirectX` (`ZbDirect S X`, OPEN).  ASSEMBLY FIRST for the layers past `X`:
+`Zb.zbUV` is generic in the atom system, so `skLayLoFixX` and `skLayHiFixX` are REDUCED to the one new leaf
+`skLayPastX` (`Zm.ZmPastAt S c`: one atom system `A : Zb.ZbAS` with a layer `Zm.ZmLayA A S B` for every
+`B < Γ(c+1)`, `X ≤ c < Ω₂`; `Zm.zmLay_of_past`).  The interface `Zm.ZmDS` carries a base gate (`Zm.ZmDS.Eg`,
+`Zm.ZmDS.raise`) for the code indices to come.  The next wall: `ζ_{B_Γ+1}` (a fixed point of `φ(1, ·)`;
+the codes past it need the brackets `φ(1, P + n)` over the pseudo-bases `P = φ(2, b)`, read `φ(2, D(x) + b(x))`):
+next Lean statement a level-generic `Zm.ZmGood2` (the level `α` of `φ(α, ·)` a parameter, induction on `α`).
+
 Round 132 (leaf regb10, modules `R2.Zg*`; this file imports `R2.ZgSq`, so it can be checked only after the merge):
 THE OFFSETS PAST `B_Γ` UP TO `B_Γ·B_Γ`.  (1′) every `Yr` code `o < B_Γ` with gate `Yr.yrG o < Z` is a code of
 `Tl.TlCl Z` (`Zg.zgYr`, the `TlCl` versions of `Gf.gfW_mem`, `Gi.gw_mulOm_mem`, `Gl.gl_mem`, `Yr.yr_mem`; node
@@ -463,6 +500,37 @@ NAME `η_{λ₀} + z`, `z < ρ_{λ₀}`, and code `m_λ = cL λ` (`Zh.zh_code_cL
 (skRNonfix), its RS input is a theorem (skRsNonfix, `Zh.zhRsIn_nonfix`), so is CapV (skCapVNonfix), and every supply
 restart is a `υ`-fixed point (skSupFix).  The leaves skWinRsS / skTopRsS / skWinCapVL / skTopCapVL ask only the
 `υ`-fixed restarts of the windows (`Zh.zhWins6`, `Zh.zhTopAll6`).
+
+Round 133 (leaf regw8, modules `R2.Zn*`; the PROVED nodes below can be checked only after the merge): (1) LEMMA RS
+WITH A VALUE (skValRS, `Zn.znRs_rstV`): the offset term of `Zc.zcRs_rstT` is used only through its value
+`v < υ_{λ+1}`, whose FRAG image is `π_{ρ_μ,ρ_λ}(v)`; so the RS input may be the value input `Zn.ZnRsVal`
+(skRsAllVal, `Zn.znRs_all`; the term input gives it, skValOfTerm).  The term input is FALSE once an `ε`-number lies
+in `(ρ_λ, O(λ))` (skTermEpsNoGo), the value input once `υ_{λ+1} < O(λ)`.  (2) At a `υ`-fixed restart
+`c(λ) = λ` and `Θ_λ(m_λ) ≥ ρ_λ`; if `Θ_λ(m_λ) ≤ ρ_λ` the RS input is a THEOREM below `ν_C` (skRsFixShort,
+`Zn.znRsIn_fixShort`, constant terms); if `Θ_λ(m_λ) < δ_λ·ω` CapV is a THEOREM below `ν_C` (skCapVFixW,
+`Zn.znCapV_fixThW`: `r = δ + Θ < δ·ω ≤ υ_{λ+ω+2} ≤ P(η_λ+ω^e)`).  (3) REFUTE FIRST at the first `υ`-fixed restart
+of `W₁` (isolated from fixed restarts below): the supply branch `Zh.ZhSupInB` is FALSE for every `β` (skSupIsoNoGo;
+`β = ω²+ω+1` included), so are the term and value branches when `ρ_λ < Θ_λ(m_λ)` (skTermIsoNoGo, skValIsoNoGo):
+there the RS input is LOWER (skIsoLower); with the code statement `Θ_λ(m_λ) ≤ ρ_λ` (true below `cpB1`,
+`Cp.cpFix_code`) it is a theorem.  CapV there holds when `Θ_λ(m_λ) < δ_λ·ω`.  (4) skWinRsS / skTopRsS /
+skWinCapVL / skTopCapVL are REPLACED by skWinRsF / skTopRsF (fixed, `ρ_λ < Θ_λ(m_λ)`, given `υ_{B} ≤ ν_C`; value
+branch allowed) and skWinCapVF / skTopCapVF (fixed, `δ_λ·ω ≤ Θ_λ(m_λ)`, below `ν_C`); skWinAll = `Zn.znWins`,
+skTopAll = `Zn.znTopAll` (statements unchanged).  skWinRsF / skTopRsF are REDUCED (`Zn.znRsF_of_parts2`) to the code
+statement at the isolated fixed restarts (skWinIsoCode / skTopIsoCode), the code continuity `Zn.ZnThCont` where
+`ρ_λ < Θ_λ(m_λ) ≤ υ_{λ+1}` (skWinCont / skTopCont, no `≤₁`) and LOWER or the supply where `υ_{λ+1} < Θ_λ(m_λ)`
+(skWinBig / skTopBig; there `ZcRsIn` is LOWER, skBigLower), both only at fixed restarts that are limits of fixed
+restarts.  (5) Off the road: at a non-fixed restart below `ν_C` the short window input is a theorem from the
+separated chain reach datum (skShortInNonfix, `Zn.znShortIn_of_sep`).
+Round 133 (leaf regc1, modules `R2.Zo*`; this file imports `R2.ZoBC`, so it can be checked only after the merge):
+(B-hi) AND (C) BY ONE RELATIVE BLOCK INDUCTION.  Every (B-hi) restart (names `Ω₂·q + ζ`, cells and far offsets
+alike, layer cells included) and every (C) restart lies in `[ι(Ω₂), ι(Ω_ω))`; every range restart below `ι(Ω₂)` is in
+(A) or (B-lo) (skBCLow).  The window induction runs on `[l₀, ι(Ω_ω))`, `l₀ = Zo.zoBase S` the least restart index
+`≥ ι(Ω₂)` (`Zo.zoBC`), WITHOUT CAP-0: below `m*` the caps below the current height place every point below `ν_C`
+(`Zo.zoNu_gt0`).  skBhiAfar, skBhiL, skLongPre are PROVED from skBC, which is REDUCED to the leaves skBCBaseUV
+(UV at `l₀`), skBCReach (the base chain datum with a chain start `o ≤ r − δ`; with `o = 0` it is REFUTED at
+short-reach bases, skReach0Ref), skBCInR, skBCCapVH (CapV at fixed long-exponent restarts with high codes; the low
+codes are `Zo.zoCapV_low`), skBCRsS.  Bonus: skNuL0 (`L(0) ≤ ν_C`) from the same leaves.  Non-vacuity: skBCVac.
+The block (skBhiAfar … skLongTop) is moved after skRegA (it now uses skSplit, skRegA, skRegBlo).
 -/
 
 set_option autoImplicit false
@@ -2165,30 +2233,105 @@ theorem skLayBelowBG (S : InaccSeq.{0}) : ∀ c, c < Tf.tfBG → ∀ l, Cd.CdRan
     (∃ ℓ, ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) → SkUV S l :=
   fun _ hc l hr hex => Yr.yrLayAll S hc l hr hex
 
-/-- STATUS: OPEN (round 131, new node; REFUTE FIRST at c = B_Γ (the code B_Γ, B_Γ + 1 + n, B_Γ + 1 + o with o < ε₀ are
-PROVED: skZbDirectE0) and against Zb.zbGsCS_lt_BG (it does not apply: zbU is no Gs.GsCS): NO EVIDENCE; round 132:
-every index below B_Γ·B_Γ PROVED (skZgDirectSq: Zg.zgDirectSq : ZbDirect S (B_Γ·B_Γ)); REFUTE FIRST at the offsets
-1, ω and B_Γ: NO EVIDENCE (skZgRef); next Lean statement: a Zb.ZbRS for the offsets B_Γ^k·q + r (k < ω) read
-D(x)^{1+k}·(1 + yrR q x) + (the reading of r), with Lemma EXACT for ω^{D(ρ)·k+β}, giving ZbDirect S (B_Γ^ω))
+/-- STATUS: OPEN (round 133, new node; REFUTE FIRST at the offset B_Γ²·2 + 1 and at the code ε_{B_Γ+1}: NO EVIDENCE,
+skZmRef)
 SIZE: L
-DIRECT READINGS PAST B_Γ BELOW X: for every layer B_Γ ≤ c < X, a layer (gate below K) for every atom index
-B_Γ ≤ B < Γ(c+1) whose top reads a code T ≥ Γ_{Ω₁+1+B} with the atoms of Zb.zbU, with terms below it.  Next Lean
-statement: an instance of Zb.ZbRS with c₀ = B_Γ + 1 for the indices B_Γ + 1 + o, o < B_Γ, reading
-D(x) + Yr.yrR o x with gate Yr.yrG o (missing: "yrG o < Z ⇒ TlCl Z o" for o < B_Γ and strongly critical Z, the TlCl
-version of Yr.yr_mem / Gl.gl_mem / Gf.gfW_mem, needed for the field cl), then the indices with offsets ≥ B_Γ (a
-reading of the codes with the atom B_Γ ↦ D(x), like Yr.yrR with the fixed atom read), then the atoms of kind β ≥ 1
-(ywV β σ x, Yw.ywKind) as limits of ZbRS systems. -/
-theorem skZbDirect (S : InaccSeq.{0}) : ∀ c, Tf.tfBG ≤ c → c < Tl.tlX → Zb.ZbDirect S (Gc.gcG (c + 1)) := by
+DIRECT READINGS FOR EVERY ATOM INDEX B_Γ ≤ B < X (X = Tl.tlX).  PROVED below ζ_{B_Γ+1} = φ(2, B_Γ+1)
+(skZmDirectZ: the generic hereditary step Zm.ZmDS.step, the gated interface (base gate Zm.ZmDS.Eg, Zm.ZmDS.raise),
+the global reading with code indices Zm.zmHR, and one transfinite induction over every code index c < ζ_{B_Γ+1},
+Zm.zmGood2_all: step at successors, union Zm.zmCU at limits).  Next Lean statement: the same chain over any
+pseudo-base P = φ(2, b) read φ(2, D(x) + b(x)) (codes in [P, φ(2, b+1)) are the brackets φ(1, P + n)), i.e. a
+level-generic version of Zm.ZmGood2 with the level α of φ(α, ·) a parameter, by induction on α up to the next
+fixed point of Γ (closes the layer c = B_Γ), then the atoms of kind β ≥ 1 (Yw.ywV). -/
+theorem skZbDirectX (S : InaccSeq.{0}) : Zb.ZbDirect S Tl.tlX := by
   sorry
 
-/-- STATUS: OPEN (round 131, new node; REFUTE FIRST: NO EVIDENCE)
+/-- STATUS: PROVED (Zm.ZmDS.direct, Zm.ZmDS.step; round 133, new node)
+SIZE: M
+THE GENERIC HEREDITARY STEP: for a digit system Zm.ZmDS at a base E > B_Γ with base gate below K, the step to the
+base ε_{E+1} is again a digit system (codes E^k·d + r read V^{R(k)}·R(d) + R(r)) with the same base gate, and it
+gives ZbDirect S ε_{E+1} (its tower has small gates, Zm.ZmDS.step_gc0). -/
+theorem skZmStep (S : InaccSeq.{0}) : ∀ M : Zm.ZmDS, Tf.tfBG < M.E → M.Eg < Td.tdK S →
+    M.step.E = eN M.E ∧ Zb.ZbDirect S M.step.E :=
+  fun M h hK => ⟨rfl, M.step.direct S (h.trans (lt_eN _)) hK M.step_gc0⟩
+
+/-- STATUS: PROVED (Zm.zmDirectZ; round 133, new node)
+SIZE: L
+DIRECT READINGS FOR EVERY INDEX B_Γ ≤ B < ζ_{B_Γ+1} = φ(2, B_Γ+1): one transfinite induction over the code indices
+c < ζ_{B_Γ+1} (Zm.zmGood2_all; base φ(1, B_Γ + c) read φ(1, D(x) + R(c)(x)), gate of c raised into the system),
+the tower Zm.zmIt of small-gate indices cofinal in ζ_{B_Γ+1}. -/
+theorem skZmDirectZ (S : InaccSeq.{0}) : Zb.ZbDirect S (veblen 2 (Tf.tfBG + 1)) := Zm.zmDirectZ S
+
+/-- STATUS: PROVED (Zm.zmUVZ; round 133, new node)
+SIZE: L
+UPPER ∧ LOWER ∧ CapV at every range restart below ι(Γ_{Ω₁+1+B}·ω) for every B < ζ_{B_Γ+1} (frontier
+ι(Γ_{ζ_{B_Γ+1}})). -/
+theorem skZmFrontZ (S : InaccSeq.{0}) : ∀ B, B < veblen 2 (Tf.tfBG + 1) → ∀ l, Cd.CdRange S l →
+    l < Bt.iota S (Gc.gcG B * ω) → SkUV S l :=
+  fun _ hB _ hr hl => Zm.zmUVZ S hB hr hl
+
+/-- STATUS: PROVED (Zm.zmDirectW; round 133, new node)
+SIZE: L
+DIRECT READINGS FOR EVERY INDEX B_Γ ≤ B < ε_{B_Γ+ω}: the chain Zm.zmCh n of digit systems at the bases ε_{B_Γ+n}. -/
+theorem skZmDirectW (S : InaccSeq.{0}) : Zb.ZbDirect S (veblen 1 (Tf.tfBG + ω)) := Zm.zmDirectW S
+
+/-- STATUS: PROVED (Zm.zmDirectE0; round 133, new node)
+SIZE: L
+DIRECT READINGS FOR EVERY INDEX B_Γ ≤ B < ε_{B_Γ+ε₀}: one transfinite induction over the constant indices ν < ε₀
+(Zm.zmGood_all: step at successors, union Zm.zmU at limits, global reading Zm.zmGR). -/
+theorem skZmDirectE0 (S : InaccSeq.{0}) : Zb.ZbDirect S (veblen 1 (Tf.tfBG + ε₀)) := Zm.zmDirectE0 S
+
+/-- STATUS: PROVED (Zm.zmUVE0; round 133, new node)
+SIZE: L
+UPPER ∧ LOWER ∧ CapV at every range restart below ι(Γ_{Ω₁+1+B}·ω) for every B < ε_{B_Γ+ε₀} (frontier
+ι(Γ_{ε_{B_Γ+ε₀}})). -/
+theorem skZmFrontE0 (S : InaccSeq.{0}) : ∀ B, B < veblen 1 (Tf.tfBG + ε₀) → ∀ l, Cd.CdRange S l →
+    l < Bt.iota S (Gc.gcG B * ω) → SkUV S l :=
+  fun _ hB _ hr hl => Zm.zmUVE0 S hB hr hl
+
+/-- STATUS: PROVED (Zm.zmRef1, Zm.zmRef1_nonfix, Zm.zmRef2, Zm.zmRef2_nonfix; round 133, new node)
+SIZE: S
+REFUTE FIRST for the generic step: the offset B_Γ²·2 + 1 reads D(x)²·2 + 1 with gate 2 and its index is no fixed
+point of Γ; the code ε_{B_Γ+1} reads ε_{D(x)+1} = ϑˣ(Ω₁ + D(x)) and its index is no fixed point of Γ: NO
+EVIDENCE. -/
+theorem skZmRef : (∀ x, (Zm.zmCh 1).R (Tf.tfBG ^ (2 : Ordinal.{0}) * 2 + 1) x =
+      Yw.ywV 1 0 x ^ (2 : Ordinal.{0}) * 2 + 1) ∧
+    (∀ x, InE x → x < Om1 → (Zm.zmCh 2).R (eN Tf.tfBG) x = Gl.glA 1 (Yw.ywV 1 0 x) x) ∧
+    Om1 + 1 + (Tf.tfBG + 1 + eN Tf.tfBG) < gamma (Om1 + 1 + (Tf.tfBG + 1 + eN Tf.tfBG)) :=
+  ⟨fun x => (Zm.zmRef1 x).1, fun _ hx hx1 => (Zm.zmRef2 hx hx1).2.1, Zm.zmRef2_nonfix⟩
+
+/-- STATUS: REDUCED (round 133: skZbDirectX, Zb.zbDirect_mono; was OPEN L, round 131; REFUTE FIRST at c = B_Γ and
+against Zb.zbGsCS_lt_BG: NO EVIDENCE; round 132: every index below B_Γ·B_Γ PROVED; round 133: every index below
+ε_{B_Γ+ε₀} PROVED, skZmDirectE0)
+SIZE: L
+DIRECT READINGS PAST B_Γ BELOW X: for every layer B_Γ ≤ c < X, a layer (gate below K) for every atom index
+B_Γ ≤ B < Γ(c+1) whose top reads a code T ≥ Γ_{Ω₁+1+B} with the atoms of Zb.zbU, with terms below it.  Since
+Γ(c+1) < X for c < X, it is the statement ZbDirect S X (skZbDirectX). -/
+theorem skZbDirect (S : InaccSeq.{0}) : ∀ c, Tf.tfBG ≤ c → c < Tl.tlX → Zb.ZbDirect S (Gc.gcG (c + 1)) := by
+  intro c _ hc B hB1 hB2
+  have hc1 : c + 1 < Tl.tlX :=
+    (ev_isSuccLimit_of_inE (Low.opow_eq_self_of_SC Tl.tlX_SC)).add_one_lt hc
+  exact skZbDirectX S B hB1 (hB2.trans (Zb.ZbRS.gcG_lt_X hc1))
+
+/-- STATUS: OPEN (round 133, new node; REFUTE FIRST: NO EVIDENCE — the shape is satisfiable below X: Zm.ZmLayA
+Zb.zbU S B holds for every B_Γ ≤ B < ε_{B_Γ+ε₀}, skZmDirectE0)
+SIZE: L
+THE LAYERS PAST X FROM ONE ATOM SYSTEM: for every layer X ≤ c < Ω₂ an abstract atom system A : Zb.ZbAS with a layer
+(gate below K, top code read with the atoms of A, terms below it) for every atom index B < Γ(c+1) (Zm.ZmPastAt S c).
+Needs an atom system past X (atoms ψ_{Ω₂}(e), e ≥ Ω₂^{Ω₂}; hull lemma below θ, Uf.uf_key / Vd.vd_nf_ex). -/
+theorem skLayPastX (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < Om (1 + 1) → Zm.ZmPastAt S c := by
+  sorry
+
+/-- STATUS: REDUCED (round 133: Zm.zmLay_of_past, skLayPastX; was OPEN L, round 131; REFUTE FIRST: NO EVIDENCE)
 SIZE: L
 skLayLoFix for the layers X ≤ c < Ω₂ (X = Tl.tlX = ψ_{Ω₂}(Ω₂^{Ω₂})): the atom system zbU has the bound X; past X
 the atoms ψ_{Ω₂}(e) with e ≥ Ω₂^{Ω₂} (levels Ω₁²·γ + …, H_γ, Uc.ucDat) need another atom system with its hull
-lemma (Uf.uf_key / Vd.vd_nf_ex below θ). -/
+lemma (Uf.uf_key / Vd.vd_nf_ex below θ): skLayPastX. -/
 theorem skLayLoFixX (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l →
     Xh.XhPast S c l → (∃ ℓ, ℓ < Gc.gcG c ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) → SkUV S l := by
-  sorry
+  intro c hc1 hc2 l hr _ hex
+  obtain ⟨ℓ, hℓ, hl⟩ := hex
+  exact Zm.zmLay_of_past (skLayPastX S c hc1 hc2) l hr ⟨ℓ, hℓ.trans (Gc.gcG_lt (lt_add_one c)), hl⟩
 
 /-- STATUS: REDUCED (round 131: Zb.zbLay_of_direct, skZbDirect, skLayLoFixX; round 129, was OPEN L; round 130:
 REFUTE FIRST at c = B_Γ and at the second fixed point of Γ: NO EVIDENCE — the base atoms Γ(B_Γ) = B_Γ, Γ(B₂) = B₂
@@ -2231,14 +2374,16 @@ theorem skLayLo (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l
   · exact skLayLoD S c hc1 hce l hr hex
   · exact skLayLoBig S c hc1 hc2 (not_lt.1 hce) l hr hP hex
 
-/-- STATUS: OPEN (round 131, new node; REFUTE FIRST: NO EVIDENCE)
+/-- STATUS: REDUCED (round 133: Zm.zmLay_of_past, skLayPastX; was OPEN L, round 131; REFUTE FIRST: NO EVIDENCE)
 SIZE: L
-skLayHiFix for the layers X ≤ c < Ω₂ (see skLayLoFixX). -/
+skLayHiFix for the layers X ≤ c < Ω₂ (see skLayLoFixX): skLayPastX. -/
 theorem skLayHiFixX (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l →
     Xh.XhPast S c l → (∀ ℓ, ℓ < Gc.gcG c → Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω) ≤ l) →
     (∃ ℓ, Gc.gcG c ≤ ℓ ∧ ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) →
     SkUV S l := by
-  sorry
+  intro c hc1 hc2 l hr _ _ hex
+  obtain ⟨ℓ, -, hℓ, hl⟩ := hex
+  exact Zm.zmLay_of_past (skLayPastX S c hc1 hc2) l hr ⟨ℓ, hℓ, hl⟩
 
 /-- STATUS: REDUCED (round 131: Zb.zbLay_of_direct, skZbDirect, skLayHiFixX; round 129, was OPEN L; round 130:
 REFUTE FIRST at c = B_Γ and at the second fixed point of Γ: NO EVIDENCE, see skLayLoFix)
@@ -2475,84 +2620,6 @@ theorem skBhiAcell (S : InaccSeq.{0}) : ∀ l q ζ, Cd.CdRange S l → Cd.cdEta 
   obtain ⟨-, -, hU, hL, hV⟩ := Yf.yfGrid_UV S hg hri hn hb.1 hb.2 hr.1 hι he hζ0 hζ
   exact ⟨hU, hL, hV⟩
 
-/-- STATUS: OPEN (round 126: was the whole of skBhiA; the cell part is skBhiAcell)
-SIZE: L
-(B-hi, A-type cell, the rest) offsets `ζ` of type (A) where the cell condition fails: `ζ ≥ P(Ω₂·q)` (past the
-first fixed points of `υ` above the base), or no base data at `ι(Ω₂·q)`.  REFUTE FIRST: NO EVIDENCE.  The base
-data at `ι(Ω₂·q)` are consistent with every proved result for small `q`; for large `q` (names with collapsible
-`ψ_{Ω₂}`-arguments `≥ Ω_ω + θ₂`, cf. `Ls.lsNames_M`) a restart with a long reach below `ι(Ω₂·q)` would remove them
-(`Yf.yfNoBase_cross`), so this leaf must not assume them.  Round 127: under LOWER below `L(0)` the supply restarts
-of `Rx.rxSupAt` (cofinal below `L(0)`, `υ_{μ+γ} ≤ r(μ)`) are covered by no relative block induction (`skMShortRef`):
-past the first fixed points the cells must be joined by the same induction with nested long reaches as the windows.
-Round 129: that induction now exists for any base restart `l₀` (`Ys.ysGood_all`, `Ys.YsSpec`); not yet applied here. -/
-theorem skBhiAfar (S : InaccSeq.{0}) : ∀ l q ζ, Cd.CdRange S l → Cd.cdEta S l = Om (1 + 1) * q + ζ → 1 ≤ q →
-    ζ ≠ 0 → ζ < Om (1 + 1) → Cd.cdEta S l < Om ω → Xh.XhNmA ζ → ¬ SkBhiCell S q ζ → SkUV S l := by
-  sorry
-
-/-- STATUS: REDUCED (skBhiAcell, skBhiAfar; round 126, was OPEN L)
-SIZE: L
-(B-hi, A-type cell) base Ω₂·q, offset ζ of type (A): transport of region (A) along ζ ↦ Ω₂·q + ζ. -/
-theorem skBhiA (S : InaccSeq.{0}) : ∀ l q ζ, Cd.CdRange S l → Cd.cdEta S l = Om (1 + 1) * q + ζ → 1 ≤ q →
-    ζ ≠ 0 → ζ < Om (1 + 1) → Cd.cdEta S l < Om ω → Xh.XhNmA ζ → SkUV S l := by
-  intro l q ζ hr he hq hζ0 hζ hη hA
-  by_cases hc : SkBhiCell S q ζ
-  · exact skBhiAcell S l q ζ hr he hζ0 hc
-  · exact skBhiAfar S l q ζ hr he hq hζ0 hζ hη hA hc
-
-/-- STATUS: OPEN
-SIZE: L
-(B-hi, layer cells) base Ω₂·q, offset ζ in the name layer c ≥ 1: transport of skLay c along ζ ↦ Ω₂·q + ζ. -/
-theorem skBhiL (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l q ζ, Cd.CdRange S l →
-    Cd.cdEta S l = Om (1 + 1) * q + ζ → 1 ≤ q → ζ ≠ 0 → ζ < Om (1 + 1) → Cd.cdEta S l < Om ω →
-    Xh.XhNmLay c ζ → SkUV S l := by
-  sorry
-
-/-- STATUS: REDUCED (Xh.xhBhi_red, skBhiA, skBhiL; was OPEN L)
-SIZE: L
-(B-hi) names Ω₂ ≤ η < Ω_ω with last exponent < Ω₂ (offset codes), υ_λ < L(0). -/
-theorem skRegBhi (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Wj.WjNotA S l → upsilon l < Nc.ncL S 0 →
-    Cd.cdExp (Cd.cdEta S l) < Om (1 + 1) → Bt.iota S (Om (1 + 1)) ≤ l → SkUV S l :=
-  Xh.xhBhi_red (S := S) (SkUV S) (skBhiA S) (skBhiL S)
-
-/-- STATUS: PROVED (Xh.xhWin_off, Xh.xhWin_cap, Xh.xhWin_capV)
-SIZE: S
-a name in (b_ξ, b_{ξ+1}) is b_ξ + ζ, 0 < ζ < P′, e(η) = e(ζ), code -1 + e(ζ); its cap is ≤ L(ξ+1), so CapV
-gives r(λ) < L(ξ+1). -/
-theorem skWinOff (S : InaccSeq.{0}) {ξ l : Ordinal.{0}} (hr : Cd.CdRange S l) (h1 : Nc.ncL S ξ < upsilon l)
-    (h2 : upsilon l < Nc.ncL S (ξ + 1)) :
-    (∃ ζ, Cd.cdEta S l = Wj.wjBase S ξ + ζ ∧ ζ ≠ 0 ∧ ζ < Nc.ncPp S ∧
-      Cd.cdExp (Cd.cdEta S l) = Cd.cdExp ζ ∧ Cd.cdCode S l = Cd.cdOff (Cd.cdExp ζ)) ∧
-    Cd.cdCapB S l ≤ Nc.ncL S (ξ + 1) :=
-  ⟨Xh.xhWin_off hr h1 h2, Xh.xhWin_cap hr h1 h2⟩
-
-/-- STATUS: PROVED (Xh.xhNu_A2)
-SIZE: S
-the closed region (A2) bounds ν_C from below: υ(ι(Γ(B)·ω)) ≤ ν_C for every B < φ(G, 1) (no hypothesis). -/
-theorem skNuA2 (S : InaccSeq.{0}) {B : Ordinal.{0}} (hB : B < veblen (Gc.gcG 0) 1) :
-    upsilon (Bt.iota S (Gc.gcG B * ω)) ≤ nuC := Xh.xhNu_A2 S hB
-
-/-- STATUS: OPEN
-SIZE: L
-(C) = (C1): names with e(η_λ) ≥ Ω₂ (code π_η, ι(Ω₂) ≤ λ, Wj.wjC_props); all of (C) lies below L(0)
-(Wj.wjExpHi_low).  Round 122: REFUTE FIRST, NO EVIDENCE (codes π_η > Γ_{Ω₁+ε₀}, Gc.gc_code_ge, outside every
-frontier lemma, Gc.gcFr_code; no L(k) inside); unchanged. -/
-theorem skLongPre (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Om (1 + 1) ≤ Cd.cdExp (Cd.cdEta S l) →
-    upsilon l < Nc.ncL S 0 → SkUV S l := by
-  sorry
-
-/-- STATUS: PROVED (Wj.wjLongMid: VACUOUS, no such restart)
-SIZE: S
-(C2) range λ with e(η_λ) ≥ Ω₂ and L(0) ≤ υ_λ ≤ L(ω). -/
-theorem skLongMid (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Om (1 + 1) ≤ Cd.cdExp (Cd.cdEta S l) →
-    Nc.ncL S 0 ≤ upsilon l → upsilon l ≤ Nc.ncL S ω → SkUV S l :=
-  Wj.wjLongMid (SkUV S)
-
-/-- STATUS: PROVED (Wj.wjLongTop: VACUOUS, no such restart)
-SIZE: S
-(C3) range λ with e(η_λ) ≥ Ω₂ and L(ω) < υ_λ. -/
-theorem skLongTop (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Om (1 + 1) ≤ Cd.cdExp (Cd.cdEta S l) →
-    Nc.ncL S ω < upsilon l → SkUV S l :=
-  Wj.wjLongTop (SkUV S)
 
 /-- STATUS: PROVED (Wj.wjSplit, Wj.wjSplit_excl, Wj.wjWin_disj, Wj.wjWin_props, Wj.wjC_props)
 SIZE: S
@@ -2640,6 +2707,229 @@ theorem skRegA (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l →
   refine skLocOfSys S V hγ l hr (hl.trans_le ?_)
   exact Bt.iota_mono (S := S) _ _ (mul_le_mul_left (Gc.gcG_le hBV) ω)
 
+/-- STATUS: PROVED (skSplit, skRegA, skRegBlo, Wj.wjC_props; round 133, new; checked only after the merge)
+SIZE: S
+EVERY RANGE RESTART BELOW `ι(Ω₂)` IS IN (A) OR (B-lo): UPPER ∧ LOWER ∧ CapV there. -/
+theorem skBCLow (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → μ < Bt.iota S (Om (1 + 1)) → SkUV S μ := by
+  intro μ hr hι
+  have hP : upsilon μ < Nc.ncL S 0 :=
+    (upsilon_normal.strictMono hι).trans_le ((Bt.ups_iota S _).trans_le (Ga.ga_Pv_lt_L0 S le_rfl).le)
+  rcases skSplit S hr with hA | ⟨hn, hu, he, hi⟩ | ⟨-, -, -, hi⟩ | ⟨-, he⟩ | ⟨k, hw⟩ | hw
+  · exact skRegA S μ hr hA
+  · exact skRegBlo S μ hr hn hu he hi
+  · exact absurd hi (not_le.2 hι)
+  · exact absurd (Wj.wjC_props hr he).2.1 (not_le.2 hι)
+  · exact absurd (hw.1.trans hP) (not_lt.2 (Pp.ppL_mono (S := S) zero_le))
+  · exact absurd (hw.1.trans hP) (not_lt.2 (Pp.ppL_mono (S := S) zero_le))
+
+/-- STATUS: OPEN (round 133, new leaf, regc1)
+SIZE: M
+UPPER ∧ LOWER ∧ CapV AT THE BASE `l₀ = Zo.zoBase S` (the least restart index `≥ ι(Ω₂)`; a range restart,
+`Zo.zoBase_range`; a point of (B-hi) or (C) when `ι(Ω₂)` is itself a restart index).  REFUTE FIRST: NO EVIDENCE
+(part of the natural target). -/
+theorem skBCBaseUV (S : InaccSeq.{0}) : SkUV S (Zo.zoBase S) := by
+  sorry
+
+/-- STATUS: OPEN (round 133, new leaf, regc1)
+SIZE: M
+THE CHAIN REACH DATUM AT THE BASE `l₀`, with a chain start `o ≤ r(l₀) − δ_{l₀}` (`o < δ_{l₀}`).  REFUTE FIRST: the
+form with `o = 0` (the base datum of the windows) is FALSE at a short-reach base `δ < r < top₁` under UPPER ∧ LOWER
+(skReach0Ref), so the leaf lets `o` range up to `r − δ`; with `o = 0` it holds when `ρ_{l₀} ≤₁ υ_{l₀+ω²}`
+(`Ys.ysReach_long`).  Non-vacuity: `Zo.zoBC_of_target` (chain start `0` from the target data). -/
+theorem skBCReach (S : InaccSeq.{0}) : ∃ o, o < upsilon (Zo.zoBase S + ω + 1) ∧ o ≤ Ys.ysO S (Zo.zoBase S) ∧
+    Ys.YsReachIn (Zo.zoBase S) o (upsilon (Zo.zoBase S)) := by
+  sorry
+
+/-- STATUS: PROVED (Zo.zoGiven_of, skBCBaseUV, skBCReach; round 133, new; checked only after the merge)
+SIZE: S
+THE GIVEN INPUT AT THE BASE: Lemma TOP at `r(l₀)` is UPPER at `l₀`. -/
+theorem skBCGiven (S : InaccSeq.{0}) : Yx.YxGivenIn (Ys.ysO S) (Zo.zoBase S) := by
+  obtain ⟨o, h1, h2, h3⟩ := skBCReach S
+  exact Zo.zoGiven_of (skBCBaseUV S).1 h1 h2 h3
+
+/-- STATUS: OPEN (round 133, new leaf, regc1)
+SIZE: L
+THE PAIR-FREE INPUT AT THE RESTARTS STRICTLY INSIDE `(l₀, ι(Ω_ω))` (`Zc.ZcInR`, as skWinInR for the windows): at
+every restart `λ` the short input `Yx.YxShortIn ρ_{l₀} (ysO S) λ` or the given input `Yx.YxGivenIn (ysO S) λ`.
+REFUTE FIRST: NO EVIDENCE.  At a supply restart (cofinal below `L(0)`, `Rx.rxSupAt`) the given input follows from
+UPPER at `λ` and the supply below `ρ_λ` (`Zc.zcGiven_of_sup`); the short input after a supply restart is impossible
+(`Ys.ysShortX_ref`), the given input is not; `Yf.yfNoBase_cross`, `Yi.yiMShort_ref` concern the cell base data and
+short-only inputs, which are not asked.  Non-vacuity: `Zo.zoBC_of_target`. -/
+theorem skBCInR (S : InaccSeq.{0}) : Zc.ZcInR S (Zo.zoBase S) (Zo.zoTop S) := by
+  sorry
+
+/-- STATUS: OPEN (round 133, new leaf, regc1)
+SIZE: L
+CAPV AT THE `υ`-FIXED RANGE RESTARTS OF `(l₀, ι(Ω_ω))` below `ν_C` with neither a short last exponent nor a LOW code:
+`2 ≤ e(η_λ)` only together with `m_λ > θ·ω` (at `m_λ ≤ θ·ω`, `e ≥ 2` CapV is the theorem `Zo.zoCapV_low`; at
+`2 ≤ e < ρ_λ` it is `Zh.zhCapV_short`).  Contains every (C) restart below `ν_C` (codes `π_η > θ`, all `υ`-fixed:
+skCFix).  REFUTE FIRST: NO EVIDENCE. -/
+theorem skBCCapVH (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S < μ → μ < Zo.zoTop S →
+    upsilon μ = μ → upsilon μ < nuC → ¬ Zh.ZhShortExp S μ →
+    (ω ^ 2 ≤ ω ^ Cd.cdExp (Cd.cdEta S μ) → ConjT.th S * ω < Cd.cdCode S μ) → Cd.CdCapV S μ := by
+  sorry
+
+/-- STATUS: PROVED (skBCCapVH, Zo.zoCapV_low; round 133, new; checked only after the merge)
+SIZE: S
+CapV at the `υ`-fixed long-exponent range restarts of `(l₀, ι(Ω_ω))` below `ν_C`. -/
+theorem skBCCapVL (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S < μ → μ < Zo.zoTop S →
+    upsilon μ = μ → upsilon μ < nuC → ¬ Zh.ZhShortExp S μ → Cd.CdCapV S μ := by
+  intro μ hr h0 h1 hfix hν hns
+  by_cases hc : ω ^ 2 ≤ ω ^ Cd.cdExp (Cd.cdEta S μ) ∧ Cd.cdCode S μ ≤ ConjT.th S * ω
+  · have hm : upsilon μ < Cd.cdMstar S := by
+      rw [← Zo.zoTop_ups (S := S)]; exact upsilon_normal.strictMono h1
+    exact Zo.zoCapV_low (η1 := Om ω) hr.1 hm hν (hm.trans_le (Cd.cdMstar_le_L S ω)) hc.2 hc.1
+  · exact skBCCapVH S μ hr h0 h1 hfix hν hns fun h2 => not_le.1 fun h3 => hc ⟨h2, h3⟩
+
+/-- STATUS: OPEN (round 133, new leaf, regc1)
+SIZE: L
+THE RS INPUT AT THE `υ`-FIXED RESTARTS OF `(l₀, ι(Ω_ω))`, WITH THE SUPPLY (as skWinRsS): the old input `Zc.ZcRsIn`
+(LOWER, the successor case or the term input) or the supply input `Zh.ZhSupInB` to the top `ι(Ω_ω)`.  At the
+non-fixed restarts it is a theorem (`Zh.zhRsIn_nonfix`); at a supply restart the old input is LOWER itself
+(`Zc.zcRsIn_long_lower`), the supply branch needs only the supply.  REFUTE FIRST: NO EVIDENCE.  Non-vacuity: LOWER
+gives it (`Zh.zhIn4_of_lower`, `Zo.zoBC_of_target`). -/
+theorem skBCRsS (S : InaccSeq.{0}) : ∀ l, IsRestartIdx l → Zo.zoBase S < l → l < Zo.zoTop S → upsilon l = l →
+    Zc.ZcRsIn (Ys.ysO S) l ∨ Zh.ZhSupInB S l (Zo.zoTop S) := by
+  sorry
+
+/-- STATUS: REDUCED (Zo.zoBC; skBCLow, skBCBaseUV, skBCGiven, skBCInR, skBCCapVL, skBCRsS; round 133, new; checked
+only after the merge)
+SIZE: L
+REGIONS (B-hi) AND (C) BY ONE RELATIVE BLOCK INDUCTION ON `[l₀, ι(Ω_ω))`, `l₀ = Zo.zoBase S`: UPPER ∧ LOWER ∧
+CapV at every range restart `λ ≥ ι(Ω₂)` with `ρ_λ < m* = L(0)`.  No CAP-0 (`Zo.zoNu_gt0`: the caps below the
+current height suffice below `m*`). -/
+theorem skBC (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Bt.iota S (Om (1 + 1)) ≤ l →
+    upsilon l < Cd.cdMstar S → SkUV S l :=
+  (Zo.zoBC (skBCLow S) (skBCBaseUV S) (skBCGiven S) (skBCInR S) (skBCCapVL S) (skBCRsS S)).2
+
+/-- STATUS: REDUCED (Zo.zoBC_nu; the leaves of skBC; round 133, new; checked only after the merge)
+SIZE: S
+`L(0) ≤ ν_C` (the induction interval is not empty, `Zo.zoBC_nonempty0`). -/
+theorem skNuL0 (S : InaccSeq.{0}) : Nc.ncL S 0 ≤ nuC :=
+  Zo.zoBC_nu (skBCLow S) (skBCBaseUV S) (skBCGiven S) (skBCInR S) (skBCCapVL S) (skBCRsS S)
+
+/-- STATUS: PROVED (Zo.zoBC_of_target; round 133, new; checked only after the merge)
+SIZE: S
+NON-VACUITY of skBCGiven, skBCInR, skBCCapVL, skBCRsS: they follow from UPPER, LOWER, CapV at the range restarts
+of `[l₀, ι(Ω_ω))` and the chain reach data (chain start `0`) there. -/
+theorem skBCVac (S : InaccSeq.{0})
+    (hU : ∀ μ, Cd.CdRange S μ → Zo.zoBase S ≤ μ → μ < Zo.zoTop S → Cd.CdUpper S μ)
+    (hL : ∀ μ, Cd.CdRange S μ → Zo.zoBase S < μ → μ < Zo.zoTop S → Cd.CdLower S μ)
+    (hV : ∀ μ, Cd.CdRange S μ → Zo.zoBase S < μ → μ < Zo.zoTop S → Cd.CdCapV S μ)
+    (hR : ∀ l, IsRestartIdx l → Zo.zoBase S ≤ l → l < Zo.zoTop S → Ys.YsReachIn l 0 (upsilon l)) :
+    Yx.YxGivenIn (Ys.ysO S) (Zo.zoBase S) ∧ Zc.ZcInR S (Zo.zoBase S) (Zo.zoTop S) ∧
+      (∀ μ, Cd.CdRange S μ → Zo.zoBase S < μ → μ < Zo.zoTop S → upsilon μ = μ → upsilon μ < nuC →
+        ¬ Zh.ZhShortExp S μ → Cd.CdCapV S μ) ∧
+      (∀ l, IsRestartIdx l → Zo.zoBase S < l → l < Zo.zoTop S → upsilon l = l →
+        Zc.ZcRsIn (Ys.ysO S) l ∨ Zh.ZhSupInB S l (Zo.zoTop S)) :=
+  Zo.zoBC_of_target Zo.zoBase_lt_top hU hL hV hR
+
+/-- STATUS: PROVED (Zo.zoReach0_ref; round 133, new; checked only after the merge)
+SIZE: S
+REFUTE FIRST for a base datum with chain start `0` at a range base: false at a short-reach restart. -/
+theorem skReach0Ref (S : InaccSeq.{0}) {l : Ordinal.{0}} (hU : Cd.CdUpper S l) (hL : Cd.CdLower S l)
+    (h1 : upsilon (l + ω + 1) < Cd.cdR S l)
+    (h2 : Cd.cdR S l < topA (l + ω) (upsilon (l + ω + 1) + 0) 1) : ¬ Ys.YsReachIn l 0 (upsilon l) :=
+  Zo.zoReach0_ref hU hL h1 h2
+
+/-- STATUS: PROVED (Zo.zoC_fix; round 133, new; checked only after the merge)
+SIZE: S
+REFUTE FIRST for skLongPre: every (C) range restart is a `υ`-fixed point (so no short-exponent theorem applies). -/
+theorem skCFix (S : InaccSeq.{0}) {l : Ordinal.{0}} (hr : Cd.CdRange S l)
+    (he : Om (1 + 1) ≤ Cd.cdExp (Cd.cdEta S l)) (h0 : upsilon l < Nc.ncL S 0) : upsilon l = l :=
+  Zo.zoC_fix hr he h0
+
+/-- STATUS: PROVED (skBC, Zo.zoNameB; round 133, regc1: was OPEN L; checked only after the merge; round 126: was the
+whole of skBhiA; the cell part is skBhiAcell)
+SIZE: L
+(B-hi, A-type cell, the rest) offsets `ζ` of type (A) where the cell condition fails: `ζ ≥ P(Ω₂·q)` (past the
+first fixed points of `υ` above the base), or no base data at `ι(Ω₂·q)`.  REFUTE FIRST: NO EVIDENCE.  The base
+data at `ι(Ω₂·q)` are consistent with every proved result for small `q`; for large `q` (names with collapsible
+`ψ_{Ω₂}`-arguments `≥ Ω_ω + θ₂`, cf. `Ls.lsNames_M`) a restart with a long reach below `ι(Ω₂·q)` would remove them
+(`Yf.yfNoBase_cross`), so this leaf must not assume them.  Round 127: under LOWER below `L(0)` the supply restarts
+of `Rx.rxSupAt` (cofinal below `L(0)`, `υ_{μ+γ} ≤ r(μ)`) are covered by no relative block induction (`skMShortRef`):
+past the first fixed points the cells must be joined by the same induction with nested long reaches as the windows.
+Round 129: that induction now exists for any base restart `l₀` (`Ys.ysGood_all`, `Ys.YsSpec`).  Round 133: APPLIED
+(skBC): one relative block induction on `[l₀, ι(Ω_ω))` (`l₀` the least restart index `≥ ι(Ω₂)`) covers every
+(B-hi) and (C) restart, cells and far offsets alike; the leaf is REDUCED to the leaves of skBC. -/
+theorem skBhiAfar (S : InaccSeq.{0}) : ∀ l q ζ, Cd.CdRange S l → Cd.cdEta S l = Om (1 + 1) * q + ζ → 1 ≤ q →
+    ζ ≠ 0 → ζ < Om (1 + 1) → Cd.cdEta S l < Om ω → Xh.XhNmA ζ → ¬ SkBhiCell S q ζ → SkUV S l := by
+  intro l q ζ hr he hq _ _ hη _ _
+  obtain ⟨hι, hm⟩ := Zo.zoNameB hr he hq hη
+  exact skBC S l hr hι hm
+
+/-- STATUS: REDUCED (skBhiAcell, skBhiAfar; round 126, was OPEN L)
+SIZE: L
+(B-hi, A-type cell) base Ω₂·q, offset ζ of type (A): transport of region (A) along ζ ↦ Ω₂·q + ζ. -/
+theorem skBhiA (S : InaccSeq.{0}) : ∀ l q ζ, Cd.CdRange S l → Cd.cdEta S l = Om (1 + 1) * q + ζ → 1 ≤ q →
+    ζ ≠ 0 → ζ < Om (1 + 1) → Cd.cdEta S l < Om ω → Xh.XhNmA ζ → SkUV S l := by
+  intro l q ζ hr he hq hζ0 hζ hη hA
+  by_cases hc : SkBhiCell S q ζ
+  · exact skBhiAcell S l q ζ hr he hζ0 hc
+  · exact skBhiAfar S l q ζ hr he hq hζ0 hζ hη hA hc
+
+/-- STATUS: PROVED (skBC, Zo.zoNameB; round 133, regc1: was OPEN L; checked only after the merge)
+SIZE: L
+(B-hi, layer cells) base Ω₂·q, offset ζ in the name layer c ≥ 1.  Round 133: no transport of the layer results is
+needed: the relative block induction of skBC covers these restarts directly (REDUCED to the leaves of skBC). -/
+theorem skBhiL (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l q ζ, Cd.CdRange S l →
+    Cd.cdEta S l = Om (1 + 1) * q + ζ → 1 ≤ q → ζ ≠ 0 → ζ < Om (1 + 1) → Cd.cdEta S l < Om ω →
+    Xh.XhNmLay c ζ → SkUV S l := by
+  intro _ _ _ l q ζ hr he hq _ _ hη _
+  obtain ⟨hι, hm⟩ := Zo.zoNameB hr he hq hη
+  exact skBC S l hr hι hm
+
+/-- STATUS: REDUCED (Xh.xhBhi_red, skBhiA, skBhiL; was OPEN L)
+SIZE: L
+(B-hi) names Ω₂ ≤ η < Ω_ω with last exponent < Ω₂ (offset codes), υ_λ < L(0). -/
+theorem skRegBhi (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Wj.WjNotA S l → upsilon l < Nc.ncL S 0 →
+    Cd.cdExp (Cd.cdEta S l) < Om (1 + 1) → Bt.iota S (Om (1 + 1)) ≤ l → SkUV S l :=
+  Xh.xhBhi_red (S := S) (SkUV S) (skBhiA S) (skBhiL S)
+
+/-- STATUS: PROVED (Xh.xhWin_off, Xh.xhWin_cap, Xh.xhWin_capV)
+SIZE: S
+a name in (b_ξ, b_{ξ+1}) is b_ξ + ζ, 0 < ζ < P′, e(η) = e(ζ), code -1 + e(ζ); its cap is ≤ L(ξ+1), so CapV
+gives r(λ) < L(ξ+1). -/
+theorem skWinOff (S : InaccSeq.{0}) {ξ l : Ordinal.{0}} (hr : Cd.CdRange S l) (h1 : Nc.ncL S ξ < upsilon l)
+    (h2 : upsilon l < Nc.ncL S (ξ + 1)) :
+    (∃ ζ, Cd.cdEta S l = Wj.wjBase S ξ + ζ ∧ ζ ≠ 0 ∧ ζ < Nc.ncPp S ∧
+      Cd.cdExp (Cd.cdEta S l) = Cd.cdExp ζ ∧ Cd.cdCode S l = Cd.cdOff (Cd.cdExp ζ)) ∧
+    Cd.cdCapB S l ≤ Nc.ncL S (ξ + 1) :=
+  ⟨Xh.xhWin_off hr h1 h2, Xh.xhWin_cap hr h1 h2⟩
+
+/-- STATUS: PROVED (Xh.xhNu_A2)
+SIZE: S
+the closed region (A2) bounds ν_C from below: υ(ι(Γ(B)·ω)) ≤ ν_C for every B < φ(G, 1) (no hypothesis). -/
+theorem skNuA2 (S : InaccSeq.{0}) {B : Ordinal.{0}} (hB : B < veblen (Gc.gcG 0) 1) :
+    upsilon (Bt.iota S (Gc.gcG B * ω)) ≤ nuC := Xh.xhNu_A2 S hB
+
+/-- STATUS: PROVED (skBC, Zo.zoNameC; round 133, regc1: was OPEN L; checked only after the merge)
+SIZE: L
+(C) = (C1): names with e(η_λ) ≥ Ω₂ (code π_η, ι(Ω₂) ≤ λ, Wj.wjC_props); all of (C) lies below L(0)
+(Wj.wjExpHi_low).  Round 122: REFUTE FIRST, NO EVIDENCE (codes π_η > Γ_{Ω₁+ε₀}, Gc.gc_code_ge, outside every
+frontier lemma, Gc.gcFr_code; no L(k) inside).  Round 133: REFUTE FIRST at the first name with
+e(η_λ) = Ω₂: NO EVIDENCE; every (C) restart is υ-fixed (skCFix), so CapV there is asked by skBCCapVH; REDUCED to
+the leaves of skBC (the same induction as (B-hi)). -/
+theorem skLongPre (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Om (1 + 1) ≤ Cd.cdExp (Cd.cdEta S l) →
+    upsilon l < Nc.ncL S 0 → SkUV S l := by
+  intro l hr he h0
+  obtain ⟨hι, hm⟩ := Zo.zoNameC hr he h0
+  exact skBC S l hr hι hm
+
+/-- STATUS: PROVED (Wj.wjLongMid: VACUOUS, no such restart)
+SIZE: S
+(C2) range λ with e(η_λ) ≥ Ω₂ and L(0) ≤ υ_λ ≤ L(ω). -/
+theorem skLongMid (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Om (1 + 1) ≤ Cd.cdExp (Cd.cdEta S l) →
+    Nc.ncL S 0 ≤ upsilon l → upsilon l ≤ Nc.ncL S ω → SkUV S l :=
+  Wj.wjLongMid (SkUV S)
+
+/-- STATUS: PROVED (Wj.wjLongTop: VACUOUS, no such restart)
+SIZE: S
+(C3) range λ with e(η_λ) ≥ Ω₂ and L(ω) < υ_λ. -/
+theorem skLongTop (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Om (1 + 1) ≤ Cd.cdExp (Cd.cdEta S l) →
+    Nc.ncL S ω < upsilon l → SkUV S l :=
+  Wj.wjLongTop (SkUV S)
+
 /-- STATUS: REDUCED (skLongPre, skLongMid, skLongTop)
 SIZE: L
 (C) ∀ range λ with e(η_λ) ≥ Ω₂: UPPER ∧ LOWER ∧ CapV. -/
@@ -2719,7 +3009,8 @@ theorem skTopRsT (S : InaccSeq.{0}) :
       l < Bt.iota S (Om ω + Nc.ncPp S * (ω + 1)) → Zc.ZcRsIn (Ys.ysO S) l := by
   sorry
 
-/-- STATUS: OPEN (round 132, new leaf, regw7; replaces skWinRsT)
+/-- STATUS: REPLACED (round 133, regw8: by skWinRsF, asked only where `ρ_λ < Θ_λ(m_λ)`, given `υ_{B_k} ≤ ν_C`,
+with the value branch `Zn.ZnRsVal`; not used; was OPEN L, round 132, new leaf, regw7; replaces skWinRsT)
 SIZE: L
 THE RS INPUT IN `W_k` AT THE `υ`-FIXED RESTARTS (`υ_λ = λ`), WITH THE SUPPLY: at every such restart `λ` the old input `Zc.ZcRsIn` (LOWER, the
 successor case, or the term input) or the supply input `Zh.ZhSupInB` (a target `υ_{λ+β} ≥ r(λ)` with
@@ -2739,7 +3030,8 @@ theorem skWinRsS (S : InaccSeq.{0}) (k : ℕ) :
         Zh.ZhSupInB S l (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) := by
   sorry
 
-/-- STATUS: OPEN (round 132, new leaf, regw7; replaces skTopRsT)
+/-- STATUS: REPLACED (round 133, regw8: by skTopRsF; not used; was OPEN L, round 132, new leaf, regw7; replaces
+skTopRsT)
 SIZE: L
 THE RS INPUT IN `W_ω` AT THE `υ`-FIXED RESTARTS, WITH THE SUPPLY (as skWinRsS). -/
 theorem skTopRsS (S : InaccSeq.{0}) :
@@ -2907,7 +3199,8 @@ theorem skWinCapV (S : InaccSeq.{0}) (k : ℕ) :
     ∀ l, Cd.CdRange S l → Wj.WjWin S k l → Cd.CdCapV S l := by
   sorry
 
-/-- STATUS: OPEN (round 132, new leaf, regw7; the part of skWinCapV that is not a theorem)
+/-- STATUS: REPLACED (round 133, regw8: by skWinCapVF, asked only below `ν_C` where `δ_λ·ω ≤ Θ_λ(m_λ)`; not used;
+was OPEN L, round 132, new leaf, regw7; the part of skWinCapV that is not a theorem)
 SIZE: L
 CapV at the `υ`-FIXED range restarts of `W_k` WITHOUT a short last exponent (`Zh.ZhShortExp`: `2 ≤ e(η_λ) < ρ_λ`;
 every restart with `λ < υ_λ` has one, `Zh.zh_short_of_nonfix`, so CapV there is skCapVNonfix).  At the
@@ -2937,7 +3230,8 @@ CapV at every range restart of `W_ω`. -/
 theorem skTopCapV (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Wj.WjTop S l → Cd.CdCapV S l := by
   sorry
 
-/-- STATUS: OPEN (round 132, new leaf, regw7; the part of skTopCapV that is not a theorem)
+/-- STATUS: REPLACED (round 133, regw8: by skTopCapVF; not used; was OPEN L, round 132, new leaf, regw7; the part
+of skTopCapV that is not a theorem)
 SIZE: L
 CapV at the range restarts of `W_ω` without a short last exponent (as skWinCapVL). -/
 theorem skTopCapVL (S : InaccSeq.{0}) :
@@ -2984,6 +3278,225 @@ theorem skCapVNonfix {S : InaccSeq.{0}} {l η1 : Ordinal.{0}} (hl : IsRestartIdx
     (hfix : l < upsilon l) (hν : upsilon l < nuC) (hn : upsilon l < Nm.Pv S η1) : Cd.CdCapV S l :=
   Zh.zhCapV_nonfix hl hww hfix hν hn
 
+/-- STATUS: OPEN (round 133, new leaf, regw8; part of skWinRsF)
+SIZE: L
+THE CODE STATEMENT AT THE ISOLATED FIXED RESTARTS OF `W_k` (`Zn.ZnIsoCode`): at every `υ`-fixed restart `λ` of the
+window with `Cp.CpIso λ` (no fixed restart in some `(ν, λ)`), `Θ_λ(m_λ) ≤ ρ_λ` (it follows from `m_λ ≤ Ω₁`,
+`Zn.zn_theta_le_of_code`; below `cpB1` the isolated fixed points have this form, `Cp.cpFix_code`).  A statement on
+the names and codes only (no `≤₁`).  REFUTE FIRST: NO EVIDENCE; it is NEEDED for the road as built: at an isolated
+fixed restart with `ρ_λ < Θ_λ(m_λ)` the supply, term, value and successor branches are all false (skSupIsoNoGo,
+skTermIsoNoGo, skValIsoNoGo), so the RS input is LOWER itself there (skIsoLower). -/
+theorem skWinIsoCode (S : InaccSeq.{0}) (k : ℕ) : Zn.ZnIsoCode S (Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0}))) (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) := by
+  sorry
+
+/-- STATUS: OPEN (round 133, new leaf, regw8; part of skTopRsF)
+SIZE: L
+THE CODE STATEMENT AT THE ISOLATED FIXED RESTARTS OF `W_ω` (as skWinIsoCode). -/
+theorem skTopIsoCode (S : InaccSeq.{0}) : Zn.ZnIsoCode S (Bt.iota S (Om ω + Nc.ncPp S * ω)) (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) := by
+  sorry
+
+/-- STATUS: OPEN (round 133, new leaf, regw8; part of skWinRsF)
+SIZE: L
+THE CODE CONTINUITY AT THE NON-ISOLATED FIXED RESTARTS OF `W_k` WITH A READING IN `(ρ_λ, υ_{λ+1}]`
+(`Zn.ZnThCont`): every `z < Θ_λ(m_λ)` is below a value `v < υ_{λ+1}` with `π_{ρ_μ,ρ_λ}(v) ≤ Θ_μ(m_μ)` at restarts
+`μ` cofinal below `λ`.  A statement on the readings and the base change only (no `≤₁`); it follows from the hull
+form `Zn.znThCont_of_code` (for every hull code `c < m_λ`, cofinally `π(Θ_λ(c)) ≤ Θ_μ(m_μ)`, e.g. from
+`π(Θ_λ(c)) = Θ_μ(c)` and `c ≤ m_μ`).  REFUTE FIRST: NO EVIDENCE (at a limit of fixed restarts with `Θ_λ(m_λ) = ρ_λ+1`
+it holds with `v = ρ_λ`, `π(ρ_λ) = ρ_μ`, `Cl.pi_base`, at the fixed `μ`). -/
+theorem skWinCont (S : InaccSeq.{0}) (k : ℕ) :
+    ∀ l, IsRestartIdx l → Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0})) < l → l < Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0})) → upsilon l = l → ¬ Cp.CpIso l →
+      upsilon (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) ≤ nuC →
+      upsilon l < Cd.cdTheta S l (Cd.cdCode S l) → Cd.cdTheta S l (Cd.cdCode S l) ≤ upsilon (Order.succ l) →
+      Zn.ZnThCont S l := by
+  sorry
+
+/-- STATUS: OPEN (round 133, new leaf, regw8; part of skTopRsF)
+SIZE: L
+THE CODE CONTINUITY IN `W_ω` (as skWinCont). -/
+theorem skTopCont (S : InaccSeq.{0}) :
+    ∀ l, IsRestartIdx l → Bt.iota S (Om ω + Nc.ncPp S * ω) < l → l < Bt.iota S (Om ω + Nc.ncPp S * (ω + 1)) → upsilon l = l → ¬ Cp.CpIso l →
+      upsilon (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) ≤ nuC →
+      upsilon l < Cd.cdTheta S l (Cd.cdCode S l) → Cd.cdTheta S l (Cd.cdCode S l) ≤ upsilon (Order.succ l) →
+      Zn.ZnThCont S l := by
+  sorry
+
+/-- STATUS: OPEN (round 133, new leaf, regw8; part of skWinRsF)
+SIZE: L
+LOWER OR THE SUPPLY AT THE NON-ISOLATED FIXED RESTARTS OF `W_k` WITH `υ_{λ+1} < Θ_λ(m_λ)`: there the term, value
+and successor branches are false (skBigLower), so the RS input is LOWER or the supply `Zh.ZhSupInB`.  REFUTE
+FIRST: NO EVIDENCE (the supply branch needs supply restarts cofinal below `λ`, which are fixed, `Zh.zhSup_fix`). -/
+theorem skWinBig (S : InaccSeq.{0}) (k : ℕ) :
+    ∀ l, IsRestartIdx l → Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0})) < l → l < Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0})) → upsilon l = l → ¬ Cp.CpIso l →
+      upsilon (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) ≤ nuC →
+      upsilon (Order.succ l) < Cd.cdTheta S l (Cd.cdCode S l) →
+      Cd.CdLower S l ∨ Zh.ZhSupInB S l (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) := by
+  sorry
+
+/-- STATUS: OPEN (round 133, new leaf, regw8; part of skTopRsF)
+SIZE: L
+LOWER OR THE SUPPLY IN `W_ω` (as skWinBig). -/
+theorem skTopBig (S : InaccSeq.{0}) :
+    ∀ l, IsRestartIdx l → Bt.iota S (Om ω + Nc.ncPp S * ω) < l → l < Bt.iota S (Om ω + Nc.ncPp S * (ω + 1)) → upsilon l = l → ¬ Cp.CpIso l →
+      upsilon (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) ≤ nuC →
+      upsilon (Order.succ l) < Cd.cdTheta S l (Cd.cdCode S l) →
+      Cd.CdLower S l ∨ Zh.ZhSupInB S l (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) := by
+  sorry
+
+/-- STATUS: REDUCED (Zn.znRsF_of_parts2; skWinIsoCode, skWinCont, skWinBig; round 133, new, regw8; replaces
+skWinRsS; checked only after the merge)
+SIZE: L
+THE RS INPUT IN `W_k` AT THE `υ`-FIXED RESTARTS WITH `ρ_λ < Θ_λ(m_λ)`, given `υ_{B_k} ≤ ν_C`: `ZcRsIn`, the supply
+`Zh.ZhSupInB` or the value input `Zn.ZnRsVal`.  At the other restarts the input is a theorem (`Zh.zhRsIn_nonfix`,
+`Zn.znRsIn_fixShort`). -/
+theorem skWinRsF (S : InaccSeq.{0}) (k : ℕ) :
+    ∀ l, IsRestartIdx l → Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0})) < l → l < Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0})) → upsilon l = l →
+      upsilon (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) ≤ nuC →
+      upsilon l < Cd.cdTheta S l (Cd.cdCode S l) →
+      Zc.ZcRsIn (Ys.ysO S) l ∨ Zh.ZhSupInB S l (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) ∨ Zn.ZnRsVal (Ys.ysO S) l :=
+  Zn.znRsF_of_parts2 (skWinIsoCode S k) (skWinCont S k) (skWinBig S k)
+
+/-- STATUS: REDUCED (Zn.znRsF_of_parts2; skTopIsoCode, skTopCont, skTopBig; round 133, new, regw8; replaces
+skTopRsS; checked only after the merge)
+SIZE: L
+THE RS INPUT IN `W_ω` AT THE `υ`-FIXED RESTARTS WITH `ρ_λ < Θ_λ(m_λ)` (as skWinRsF). -/
+theorem skTopRsF (S : InaccSeq.{0}) :
+    ∀ l, IsRestartIdx l → Bt.iota S (Om ω + Nc.ncPp S * ω) < l → l < Bt.iota S (Om ω + Nc.ncPp S * (ω + 1)) → upsilon l = l →
+      upsilon (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) ≤ nuC →
+      upsilon l < Cd.cdTheta S l (Cd.cdCode S l) →
+      Zc.ZcRsIn (Ys.ysO S) l ∨ Zh.ZhSupInB S l (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) ∨ Zn.ZnRsVal (Ys.ysO S) l :=
+  Zn.znRsF_of_parts2 (skTopIsoCode S) (skTopCont S) (skTopBig S)
+
+/-- STATUS: OPEN (round 133, new leaf, regw8; replaces skWinCapVL)
+SIZE: L
+CAPV AT THE `υ`-FIXED RANGE RESTARTS OF `W_k` WITH A FAR READING `δ_λ·ω ≤ Θ_λ(m_λ)`, below `ν_C`.  At the other
+restarts CapV is a theorem below `ν_C` (`Zh.zhCapV_nonfix`, `Zh.zhCapV_short`, `Zn.znCapV_fixThW`).  REFUTE FIRST
+(at the first fixed restart of `W₁`): CapV holds there when `Θ_λ(m_λ) < δ_λ·ω`; NO EVIDENCE against the leaf. -/
+theorem skWinCapVF (S : InaccSeq.{0}) (k : ℕ) :
+    ∀ μ, Cd.CdRange S μ → Wj.WjWin S k μ → upsilon μ = μ → upsilon μ < nuC →
+      Cd.cdDelta μ * ω ≤ Cd.cdTheta S μ (Cd.cdCode S μ) → Cd.CdCapV S μ := by
+  sorry
+
+/-- STATUS: OPEN (round 133, new leaf, regw8; replaces skTopCapVL)
+SIZE: L
+CAPV AT THE `υ`-FIXED RANGE RESTARTS OF `W_ω` WITH A FAR READING (as skWinCapVF). -/
+theorem skTopCapVF (S : InaccSeq.{0}) :
+    ∀ μ, Cd.CdRange S μ → Wj.WjTop S μ → upsilon μ = μ → upsilon μ < nuC →
+      Cd.cdDelta μ * ω ≤ Cd.cdTheta S μ (Cd.cdCode S μ) → Cd.CdCapV S μ := by
+  sorry
+
+/-- STATUS: PROVED (Zn.znRs_rstV; round 133, new; checked only after the merge)
+SIZE: L
+LEMMA RS WITH A VALUE: `v < υ_{r+1}`, no pair from a point `≤ ρ` into `[ρ, δ+v]`, and restarts `μ` cofinal below
+`ρ` with `ρ_μ ≤₁ g` for `g ≤ δ_μ + π_{ρ_μ,ρ}(v)` give `ρ ≤₁ δ + v + 1`. -/
+theorem skValRS {r v : Ordinal.{0}} (h : Ys.YsRstK (upsilon r) (upsilon (r + ω)) (upsilon (r + ω + 1)))
+    (hv : v < upsilon (Order.succ r))
+    (hnostr : ∀ c d, c < d → c ≤ upsilon r → upsilon r ≤ d → d ≤ upsilon (r + ω + 1) + v → ¬ le2 c d)
+    (htarget : ∀ κ' < upsilon r, ∃ μ, κ' < upsilon μ ∧ upsilon (μ + ω + 1) < upsilon r ∧
+      Ys.YsRstK (upsilon μ) (upsilon (μ + ω)) (upsilon (μ + ω + 1)) ∧
+      ∀ g, upsilon μ ≤ g → g ≤ upsilon (μ + ω + 1) + pi (upsilon μ) (upsilon r) v → le1 (upsilon μ) g) :
+    le1 (upsilon r) (upsilon (r + ω + 1) + v + 1) :=
+  Zn.znRs_rstV h hv hnostr htarget
+
+/-- STATUS: PROVED (Zn.znVal_of_term; round 133, new; checked only after the merge)
+SIZE: S
+The term input gives the value input. -/
+theorem skValOfTerm {O : Ordinal.{0} → Ordinal.{0}} {l : Ordinal.{0}} (hl : IsRestartIdx l)
+    (hl1 : upsilon l < Om1) (h : Zc.ZcRsTerm O l) : Zn.ZnRsVal O l :=
+  Zn.znVal_of_term hl hl1 h
+
+/-- STATUS: PROVED (Zn.znRsTerm_false; round 133, new; checked only after the merge)
+SIZE: S
+NO-GO for the term input: an `ε`-number in `(ρ_λ, O(λ))` refutes it. -/
+theorem skTermEpsNoGo {O : Ordinal.{0} → Ordinal.{0}} {l E : Ordinal.{0}} (hE : InE E) (hρE : upsilon l < E)
+    (hEO : E < O l) : ¬ Zc.ZcRsTerm O l :=
+  Zn.znRsTerm_false hE hρE hEO
+
+/-- STATUS: PROVED (Zn.znRsIn_fixShort; round 133, new; checked only after the merge)
+SIZE: M
+THE RS INPUT AT A FIXED RESTART WITH `Θ_λ(m_λ) ≤ ρ_λ` (below `ν_C`). -/
+theorem skRsFixShort {S : InaccSeq.{0}} {l η1 : Ordinal.{0}} (hl : IsRestartIdx l) (hfix : upsilon l = l)
+    (hν : upsilon l < nuC) (hn : upsilon l < Nm.Pv S η1)
+    (hθ : Cd.cdTheta S l (Cd.cdCode S l) ≤ upsilon l) : Zc.ZcRsIn (Ys.ysO S) l :=
+  Zn.znRsIn_fixShort hl hfix hν hn hθ
+
+/-- STATUS: PROVED (Zn.znCapV_fixThW; round 133, new; checked only after the merge)
+SIZE: S
+CAPV AT A FIXED RESTART WITH `Θ_λ(m_λ) < δ_λ·ω` (below `ν_C`). -/
+theorem skCapVFixW {S : InaccSeq.{0}} {l η1 : Ordinal.{0}} (hl : IsRestartIdx l) (hfix : upsilon l = l)
+    (hν : upsilon l < nuC) (hn : upsilon l < Nm.Pv S η1)
+    (hθ : Cd.cdTheta S l (Cd.cdCode S l) < Cd.cdDelta l * ω) : Cd.CdCapV S l :=
+  Zn.znCapV_fixThW hl hfix hν hn hθ
+
+/-- STATUS: PROVED (Zn.znSupInB_false; round 133, new; checked only after the merge)
+SIZE: S
+REFUTE FIRST (a): THE SUPPLY BRANCH IS FALSE AT AN ISOLATED FIXED RESTART (every `β`, `β = ω²+ω+1` included). -/
+theorem skSupIsoNoGo {S : InaccSeq.{0}} {l B x0 η1 : Ordinal.{0}} (hν : upsilon l < nuC)
+    (hn : upsilon l < Nm.Pv S η1) (hpos : 0 < Cd.cdTheta S l (Cd.cdCode S l)) (hx0 : upsilon (ω * ω) ≤ x0)
+    (hx0l : x0 < upsilon l)
+    (hiso : ∀ μ, IsRestartIdx μ → x0 < upsilon μ → upsilon μ < upsilon l → μ < upsilon μ) :
+    ¬ Zh.ZhSupInB S l B :=
+  Zn.znSupInB_false hν hn hpos hx0 hx0l hiso
+
+/-- STATUS: PROVED (Zn.znRsTerm_iso_false; round 133, new; checked only after the merge)
+SIZE: S
+NO-GO for the term branch at an isolated fixed restart with `ρ_λ < O(λ)`. -/
+theorem skTermIsoNoGo {S : InaccSeq.{0}} {l x0 η1 : Ordinal.{0}} (hl : IsRestartIdx l) (hν : upsilon l < nuC)
+    (hn : upsilon l < Nm.Pv S η1) (hx0 : upsilon (ω * ω) ≤ x0) (hx0l : x0 < upsilon l)
+    (hiso : ∀ μ, IsRestartIdx μ → x0 < upsilon μ → upsilon μ < upsilon l → μ < upsilon μ)
+    (hlong : upsilon l < Ys.ysO S l) : ¬ Zc.ZcRsTerm (Ys.ysO S) l :=
+  Zn.znRsTerm_iso_false hl hν hn hx0 hx0l hiso hlong
+
+/-- STATUS: PROVED (Zn.znRsVal_iso_false; round 133, new; checked only after the merge)
+SIZE: S
+NO-GO for the value branch at an isolated fixed restart with `ρ_λ < O(λ)`. -/
+theorem skValIsoNoGo {S : InaccSeq.{0}} {l x0 η1 : Ordinal.{0}} (hl : IsRestartIdx l) (hν : upsilon l < nuC)
+    (hn : upsilon l < Nm.Pv S η1) (hx0 : upsilon (ω * ω) ≤ x0) (hx0l : x0 < upsilon l)
+    (hiso : ∀ μ, IsRestartIdx μ → x0 < upsilon μ → upsilon μ < upsilon l → μ < upsilon μ)
+    (hlong : upsilon l < Ys.ysO S l) : ¬ Zn.ZnRsVal (Ys.ysO S) l :=
+  Zn.znRsVal_iso_false hl hν hn hx0 hx0l hiso hlong
+
+/-- STATUS: PROVED (Zn.znIn_iso_lower; round 133, new; checked only after the merge)
+SIZE: S
+AT AN ISOLATED FIXED RESTART WITH `ρ_λ < Θ_λ(m_λ)` THE RS INPUT IS LOWER. -/
+theorem skIsoLower {S : InaccSeq.{0}} {l B η1 : Ordinal.{0}} (hl : IsRestartIdx l) (hfix : upsilon l = l)
+    (hiso : Cp.CpIso l) (hν : upsilon l < nuC) (hn : upsilon l < Nm.Pv S η1)
+    (hθ : upsilon l < Cd.cdTheta S l (Cd.cdCode S l))
+    (h : Zc.ZcRsIn (Ys.ysO S) l ∨ Zh.ZhSupInB S l B ∨ Zn.ZnRsVal (Ys.ysO S) l) : Cd.CdLower S l :=
+  Zn.znIn_iso_lower hl hfix hiso hν hn hθ h
+
+/-- STATUS: PROVED (Zn.znRsIn_big_lower; round 133, new; checked only after the merge)
+SIZE: S
+AT A FIXED RESTART WITH `υ_{λ+1} < Θ_λ(m_λ)` THE INPUT `ZcRsIn ∨ ZnRsVal` IS LOWER. -/
+theorem skBigLower {S : InaccSeq.{0}} {l : Ordinal.{0}} (hl : IsRestartIdx l) (hfix : upsilon l = l)
+    (hbig : upsilon (Order.succ l) < Cd.cdTheta S l (Cd.cdCode S l))
+    (h : Zc.ZcRsIn (Ys.ysO S) l ∨ Zn.ZnRsVal (Ys.ysO S) l) : Cd.CdLower S l :=
+  Zn.znRsIn_big_lower hl hfix hbig h
+
+/-- STATUS: PROVED (Zn.znInputs_of_zh; round 133, new; checked only after the merge)
+SIZE: S
+NON-VACUITY of skWinCapVF / skWinRsF: the round-132 inputs (skWinCapVL, skWinRsS) give them. -/
+theorem skInputsVac {S : InaccSeq.{0}}
+    (hVF : ∀ k : ℕ, ∀ μ, Cd.CdRange S μ → Wj.WjWin S k μ → upsilon μ = μ → ¬ Zh.ZhShortExp S μ → Cd.CdCapV S μ)
+    (hrsF : ∀ k : ℕ, ∀ l, IsRestartIdx l → Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0})) < l → l < Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0})) → upsilon l = l →
+      Zc.ZcRsIn (Ys.ysO S) l ∨ Zh.ZhSupInB S l (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0})))) :
+    (∀ k : ℕ, ∀ μ, Cd.CdRange S μ → Wj.WjWin S k μ → upsilon μ = μ → upsilon μ < nuC →
+      Cd.cdDelta μ * ω ≤ Cd.cdTheta S μ (Cd.cdCode S μ) → Cd.CdCapV S μ) ∧
+    (∀ k : ℕ, ∀ l, IsRestartIdx l → Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0})) < l → l < Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0})) → upsilon l = l →
+      upsilon (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) ≤ nuC → upsilon l < Cd.cdTheta S l (Cd.cdCode S l) →
+      Zc.ZcRsIn (Ys.ysO S) l ∨ Zh.ZhSupInB S l (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) ∨ Zn.ZnRsVal (Ys.ysO S) l) :=
+  Zn.znInputs_of_zh hVF hrsF
+
+/-- STATUS: PROVED, OFF THE ROAD (Zn.znShortIn_of_sep, Zn.znSep_exists; round 133, new; checked only after the merge)
+SIZE: M
+THE SHORT WINDOW INPUT AT A NON-FIXED RESTART BELOW `ν_C` (the part of skWinInR / skTopInR at the non-fixed
+restarts): `Yx.YxShortIn` with `m = 0`, `k = c(λ)` from the separated chain reach datum `Zn.ZnSepReach`; the
+separation itself exists (`Zn.znSep_exists`), so only `Ys.YsReachIn λ c(λ) x₀` at one separated `x₀` is left.  Off
+the road because skWinInR is asked without `ρ_λ < ν_C`. -/
+theorem skShortInNonfix {S : InaccSeq.{0}} {a l η1 : Ordinal.{0}} (hl : IsRestartIdx l) (hww : ω * ω < l)
+    (hfix : l < upsilon l) (hν : upsilon l < nuC) (hn : upsilon l < Nm.Pv S η1)
+    (h : Zn.ZnSepReach a l) : Yx.YxShortIn a (Ys.ysO S) l :=
+  Zn.znShortIn_of_sep hl hww hfix hν hn h
+
 /-- STATUS: REDUCED (skSplit, skRegA, skRegBlo, skRegBhi, skLongPre; round 130, new)
 SIZE: S
 ENUM-REACH and CapV at every range restart below `L(0)` (the windows lie above `L(0)`). -/
@@ -2997,7 +3510,8 @@ theorem skBelowL0 (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → upsilon l < Nc.
   · exact absurd (hw.1.trans h0) (not_lt.2 (Pp.ppL_mono (S := S) zero_le))
   · exact absurd (hw.1.trans h0) (not_lt.2 (Pp.ppL_mono (S := S) zero_le))
 
-/-- STATUS: REDUCED (Zh.zhWins6; skWinInR, skBelowL0, skWinCapVL, skWinRsS; round 132: was Zc.zcWins2 with skWinRsT,
+/-- STATUS: REDUCED (Zn.znWins; skWinInR, skBelowL0, skWinCapVF, skWinRsF; round 133: was Zh.zhWins6 with skWinCapVL,
+skWinRsS; round 132: was Zc.zcWins2 with skWinRsT,
 skWinCapV;
 round 131: was Yx.yxWins with
 skWinIn, skWinRsIn; round 130, new; checked only after the merge)
@@ -3011,9 +3525,10 @@ theorem skWinAll (S : InaccSeq.{0}) : ∀ k : ℕ, Nc.ncL S ((k + 1 : ℕ) : Ord
       (Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0})))
       (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) ∧
     ∀ μ, Cd.CdRange S μ → Wj.WjWin S k μ → Cd.CdUpper S μ ∧ Cd.CdLower S μ :=
-  Zh.zhWins6 (skWinInR S) (skBelowL0 S) (skWinCapVL S) (skWinRsS S)
+  Zn.znWins (skWinInR S) (skBelowL0 S) (skWinCapVF S) (skWinRsF S)
 
-/-- STATUS: REDUCED (Zh.zhTopAll6; skWinAll's leaves, skTopInR, skTopCapVL, skTopRsS, skTopLwNo2; round 132: was
+/-- STATUS: REDUCED (Zn.znTopAll; skWinAll's leaves, skTopInR, skTopCapVF, skTopRsF, skTopLwNo2; round 133: was
+Zh.zhTopAll6 with skTopCapVL, skTopRsS; round 132: was
 Zc.zcTopAll2 with skTopRsT, skTopCapV; round 131: was
 Yx.yxTopAll with skWinIn, skTopIn, skWinRsIn, skTopRsIn; round 130, new;
 checked only after the merge)
@@ -3023,22 +3538,24 @@ theorem skTopAll (S : InaccSeq.{0}) : Nc.ncL S (ω + 1) ≤ nuC ∧
     Ys.YsSpec (Yx.yxO S (Bt.iota S (Om ω + Nc.ncPp S * ω))) (Bt.iota S (Om ω + Nc.ncPp S * ω))
       (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) ∧
     ∀ μ, Cd.CdRange S μ → Wj.WjTop S μ → Cd.CdUpper S μ ∧ Cd.CdLower S μ :=
-  Zh.zhTopAll6 (skWinInR S) (skBelowL0 S) (skWinCapVL S) (skWinRsS S)
-    (skTopInR S) (skTopCapVL S) (skTopRsS S) (skTopLwNo2 S)
+  Zn.znTopAll (skWinInR S) (skBelowL0 S) (skWinCapVF S) (skWinRsF S)
+    (skTopInR S) (skTopCapVF S) (skTopRsF S) (skTopLwNo2 S)
 
-/-- STATUS: PROVED (Zh.zhWinCapV_all; round 132, new; checked only after the merge)
+/-- STATUS: PROVED (Zn.znWinCapV_all, Zn.znVL_of_fixW; round 133: was Zh.zhWinCapV_all with skWinCapVL; round 132,
+new; checked only after the merge)
 SIZE: S
 CAPV AT EVERY RANGE RESTART OF `W_k` (replaces skWinCapV): the long exponents from skWinCapVL, the short ones
 from `Zh.zhCapV_short` with `L(k+1) ≤ ν_C` (skWinAll). -/
 theorem skWinCapVAll (S : InaccSeq.{0}) (k : ℕ) :
     ∀ l, Cd.CdRange S l → Wj.WjWin S k l → Cd.CdCapV S l :=
-  Zh.zhWinCapV_all k (skWinAll S k).1 (Zh.zhVL_of_fix k (skWinCapVL S k))
+  Zn.znWinCapV_all k (skWinAll S k).1 (Zn.znVL_of_fixW k (skWinCapVF S k))
 
-/-- STATUS: PROVED (Zh.zhTopCapV_all; round 132, new; checked only after the merge)
+/-- STATUS: PROVED (Zn.znTopCapV_all, Zn.znVLT_of_fixW; round 133: was Zh.zhTopCapV_all with skTopCapVL; round
+132, new; checked only after the merge)
 SIZE: S
 CAPV AT EVERY RANGE RESTART OF `W_ω` (replaces skTopCapV). -/
 theorem skTopCapVAll (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Wj.WjTop S l → Cd.CdCapV S l :=
-  Zh.zhTopCapV_all (skTopAll S).1 (Zh.zhVLT_of_fix (skTopCapVL S))
+  Zn.znTopCapV_all (skTopAll S).1 (Zn.znVLT_of_fixW (skTopCapVF S))
 
 /-- STATUS: PROVED (Yx.yxSpec_nu; round 130, new)
 SIZE: S
