@@ -5,15 +5,15 @@ frontier `SkF.skFront` → hUH/hLH/hVH/hVt; reading `SkR.skWall`, `SkR.skThHi` �
 Round 131: `SkE.skEQ hRead hUH hLH hVt`. Round 132: `SkE.skEQ hRead hW hUH hLH hVt`, `hW = SkR.skWallCF S` (the code-free
 wall, used by `SkE.skTopK`). Round 133: Root unchanged; the bundle checks against the main build with only `declaration uses sorry` (68).
 ## Main progress number: OPEN / SUSPECT leaves on the road from `Root.skNuC`
-**23 distinct OPEN leaves (L 21, M 2); 0 SUSPECT; 0 REFUTED** (round 133: 23; round 132: 18 L; round 131: 18; round 130: 19 OPEN L; round 129: 19;
+**22 distinct OPEN leaves (L 21, M 1); 0 SUSPECT; 0 REFUTED** (round 133: 23; round 132: 18 L; round 131: 18; round 130: 19 OPEN L; round 129: 19;
 rounds 127, 128: 17). Counted by a Lean walk over the constants used by `skNuC`. On the road: SkF skZbDirectX, skLayPastX,
-skBC{BaseUV M, ThPos M, InR, CapVH, RsS}, skWin/Top{InR, IsoCode, Cont, Big, CapVF}, skTopLwNo2; SkR skTopLawAll, skPsi3OffRest2;
+skBC{BaseUL M, InR, CapVH, RsS}, skWin/Top{InR, IsoCode, Cont, Big, CapVF}, skTopLwNo2; SkR skTopLawAll, skPsi3OffRest2;
 SkE skAtHi3; SkS skZlCfg, skLevImgHi4. Round 130: skWin/TopSpec → skWinIn, skTopIn, skTopLwNo2; skGapRng → skGapRngHi. Round 131:
 skJumpNoRng, skGapRngHi PROVED (hVt); skLay{Lo,Hi}Fix → skZbDirect, skLay{Lo,Hi}FixX; skWin/TopIn, skWin/TopRsIn → skWin/TopInR,
 skWin/TopRsT. Round 132: skWin/TopRsT, skWin/TopCapV → skWin/TopRsS, skWin/TopCapVL; skTopK → skTopG; skShift2 → skLevImgHi2.
 Round 133 (narrower leaves, 18 → 23): skZbDirect → skZbDirectX; skLay{Lo,Hi}FixX → skLayPastX; skBhiAfar, skBhiL, skLongPre → 5
 skBC* leaves; skWin/TopRsS, skWin/TopCapVL → skWin/Top{IsoCode, Cont, Big, CapVF}; skWallBase, skWallStep → skTopLawAll,
-skPsi3OffRest2; skTopG → skAtHi3; skSupKXo → skZlCfg; skLevImgHi2 → skLevImgHi4. Round 134: skBCReach → skBCThPos (Zr).
+skPsi3OffRest2; skTopG → skAtHi3; skSupKXo → skZlCfg; skLevImgHi2 → skLevImgHi4. Round 134: skBCReach, skBCThPos PROVED from skBCBaseUL (Zr: l₀ = ι(Ω₂), Θ(π_{Ω₂}) < δ); skBCBaseUV → skBCBaseUL.
 
 **Vacuity of `Root.skNuC`: open.** No REFUTED or SUSPECT leaf on the road; `Zl.ZlCfg`, `Zk.ZkImgP4`, `Zq.ZqAtHi3` not shown satisfiable.
 ## Node tree (STATUS SIZE)
@@ -38,7 +38,7 @@ skNuC REDUCED L  (Yq.yqRoadS)
 │ │ └ skTopA, skTopB ─ skTopL REDUCED L ─ skTopUL, skTopPair, skTopNu, skTopNoBase PROVED S; skTopRsF REDUCED L (133, Zn.znTopAll)
 │ │     ─ skTop{IsoCode, Cont, Big, CapVF} OPEN L; skTopSpec REDUCED L (130 Yx.yxTopAll; 131 Zc.zcTopAll2) ─ skTopInR, skTopLwNo2 OPEN L
 │ └ skRegC REDUCED L    skLongPre (round 133: PROVED from skBC); skLongMid, skLongTop PROVED S (vacuous); skBelowL0 REDUCED S
-│     round 133: skBC REDUCED L (Zo.zoBC, one block induction on [l₀, ι(Ω_ω))) ─ skBC{BaseUV, Reach} OPEN M, skBC{InR, CapVH, RsS} OPEN L; round 134: skBCReach REDUCED (Zr) ─ skBCThPos OPEN M
+│     round 133: skBC REDUCED L (Zo.zoBC, one block induction on [l₀, ι(Ω_ω))) ─ skBC{BaseUV, Reach} OPEN M, skBC{InR, CapVH, RsS} OPEN L; round 134: skBCReach REDUCED, skBCThPos PROVED, skBCBaseUV REDUCED (CapV PROVED) ─ skBCBaseUL OPEN M
 ├ SkR.skWall REDUCED L ─ skWallCF ─ skWallLow REDUCED L   (round 132: skWallCF also feeds SkE.skEQ as hW)
 │ │ skWallLevAll REDUCED L: skWallBase, skWallStep REDUCED L (round 133, Zp.zpWall, Zp.zpDecomp) ─ skTopLawAll OPEN L
 │ │   (Θ(ψ₂ b) = ψ₁(A + 1 + ψ₂(T b)), normal Ω₃-divisible b ≥ Ω₃), skPsi3OffRest2 OPEN L (now on the road); skTopUp PROVED L
@@ -66,22 +66,22 @@ skNuC REDUCED L  (Yq.yqRoadS)
     off the road: skRealBXo REDUCED L; skYbIF REDUCED L ─ skYbIFTh REDUCED L ─ skYbIFNot PROVED M, skYbIFHuge OPEN L;
       skShiftTh PROVED L, skFormHighX REFUTED L, skSupKW, skImgEps, skCarryHigh OPEN L, skRealB SUSPECT L
 ```
-## Counts (713 nodes)
+## Counts (714 nodes)
 | part | PROVED | REDUCED | OPEN | SUSPECT | REFUTED | REPLACED | S | M | L |
 |---|---|---|---|---|---|---|---|---|---|
-| SkF | 248 | 44 | 21 | 0 | 3 | 39 | 153 | 81 | 121 |
+| SkF | 249 | 45 | 20 | 0 | 3 | 39 | 153 | 82 | 121 |
 | SkR | 90 | 15 | 3 | 1 | 3 | 0 | 44 | 47 | 21 |
 | SkE | 91 | 16 | 1 | 0 | 0 | 0 | 102 | 0 | 6 |
 | SkS | 90 | 38 | 6 | 1 | 2 | 0 | 59 | 29 | 49 |
 | Root | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
-| all | 519 | 114 | 31 | 2 | 8 | 39 | 358 | 157 | 198 |
+| all | 520 | 115 | 30 | 2 | 8 | 39 | 358 | 158 | 198 |
 
-OPEN by size: L 29 (SkF 19, SkR 3, SkE 1, SkS 6), M 2 (SkF skBCBaseUV, skBCThPos), S 0. Off the road (8): skA3T0Start, skLaySysAll1,
+OPEN by size: L 29 (SkF 19, SkR 3, SkE 1, SkS 6), M 1 (SkF skBCBaseUL), S 0. Off the road (8): skA3T0Start, skLaySysAll1,
 skLaySysYHi, skPsi3OffHi, skYbIFHuge, skSupKW, skImgEps, skCarryHigh. SUSPECT: skMidAssemble M, skRealB L.
-REFUTED: S 3, M 2, L 3. Sorry leaves (68): OPEN 31; SUSPECT 2; REFUTED skTopDyn, skTopFam, skX0Law, skFormHighX, skShift4
+REFUTED: S 3, M 2, L 3. Sorry leaves (67): OPEN 30; SUSPECT 2; REFUTED skTopDyn, skTopFam, skX0Law, skFormHighX, skShift4
 (record); REPLACED 30. Round 130 → 131: sorry 52 → 57, SUSPECT 2 → 3, nodes 549 → 588; road 19 → 18 OPEN L. Round 131 → 132:
 sorry 57 → 60, OPEN 28 (27 L, 1 S) → 27 (all L), SUSPECT 3 → 2, REFUTED 7 → 8, nodes 588 → 640; road 18 → 18 OPEN L. Round
-132 → 133: sorry 60 → 68, OPEN 27 (all L) → 31 (29 L, 2 M), nodes 640 → 712; road 18 L → 23 (21 L, 2 M). 133 → 134: nodes 713, road 23.
+132 → 133: sorry 60 → 68, OPEN 27 (all L) → 31 (29 L, 2 M), nodes 640 → 712; road 18 L → 23 (21 L, 2 M). 133 → 134: nodes 714, sorry 67, OPEN 30, road 22.
 ## REFUTED and SUSPECT
 - **skLaySys_false REFUTED S** (`Yc.ycVD_empty`): `Xk.XkVD k` is empty for 1 ≤ k ≤ G (hull fields ask Cl(1, b) < Γ(1)). Off road.
 - **skFixReadX_false REFUTED S** (round 130, `Yw.ywFirstFix_ref`): the least Γ-fixed point above x is ϑˣ(Ω₁·Ω₁+Ω₁). Off road.
@@ -96,5 +96,5 @@ sorry 57 → 60, OPEN 28 (27 L, 1 S) → 27 (all L), SUSPECT 3 → 2, REFUTED 7 
   131 `Zb.zbGsCS_lt_BG`, `Zc.zcRsTerm_long_false`; 132 `Zf.zfNodesAll_false`; 133 `Zn.znSupInB_false`, `Zn.znRsTerm_false`, `Zo.zoReach0_ref`.
 ## Suggested order of the next rounds
 1. Supply: skLevImgHi4 (nested ϑ-nodes: `Zf.zfDCl` by recursion on term size), skZlCfg (past the φ-ladder; EQ; υ-fixed carry).
-2. Region B, (C): skZbDirectX (level-generic `Zm.ZmGood2`), skLayPastX; skWin/Top{IsoCode, Cont, Big, CapVF, InR}, skTopLwNo2; skBC*.
+2. Region B, (C): skZbDirectX (level-generic `Zm.ZmGood2`), skLayPastX; skWin/Top{IsoCode, Cont, Big, CapVF, InR}, skTopLwNo2; skBCBaseUL (r = δ + Θ(π_{Ω₂})), skBC{InR, CapVH, RsS}.
 3. Reading: skAtHi3 (a level system over Ω_ω past Y₃), skTopLawAll (induction on the exponent E of b = β + W^E·γ), skPsi3OffRest2.

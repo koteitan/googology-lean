@@ -38,6 +38,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZgSq
 import Googology.Trans.PoR.InaccPsi.R2.ZmCd
 import Googology.Trans.PoR.InaccPsi.R2.ZoBC
 import Googology.Trans.PoR.InaccPsi.R2.ZrBase
+import Googology.Trans.PoR.InaccPsi.R2.ZrRead
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -2723,29 +2724,36 @@ theorem skBCLow (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → μ < Bt.iota S 
   · exact absurd (hw.1.trans hP) (not_lt.2 (Pp.ppL_mono (S := S) zero_le))
   · exact absurd (hw.1.trans hP) (not_lt.2 (Pp.ppL_mono (S := S) zero_le))
 
-/-- STATUS: OPEN (round 133, new leaf, regc1)
+/-- STATUS: OPEN (round 134, new leaf; the UPPER ∧ LOWER part of skBCBaseUV)
 SIZE: M
-UPPER ∧ LOWER ∧ CapV AT THE BASE `l₀ = Zo.zoBase S` (the least restart index `≥ ι(Ω₂)`; a range restart,
-`Zo.zoBase_range`; a point of (B-hi) or (C) when `ι(Ω₂)` is itself a restart index).  REFUTE FIRST: NO EVIDENCE
-(part of the natural target). -/
-theorem skBCBaseUV (S : InaccSeq.{0}) : SkUV S (Zo.zoBase S) := by
+UPPER ∧ LOWER AT THE BASE `l₀ = Zo.zoBase S = ι(Ω₂)` (`Zr.zrBase_eq`): `ρ = P(Ω₂)`, the name `Ω₂`, the code
+`π_{Ω₂}`, the predicted reach `r(l₀) = δ_{l₀} + Θ_{l₀}(π_{Ω₂})` with `Θ_{l₀}(π_{Ω₂}) ≤ ψ_{Ω₁}(A + θ + Ω₁) < δ_{l₀}`,
+`A = Ω_ω + Ω₂` (`Zr.zrTh_Om2`, `Zr.zrBCThPos`; the points `δ + x` are closed, `Zh.zhDense`): a short reach, inside
+the first block `(δ, υ_{l₀+ω·2+1})`.  LOWER asks `P(Ω₂) ≤₁ δ + Θ(π)`, UPPER asks not `P(Ω₂) ≤₁ δ + Θ(π) + 1`.  No
+point below `ρ` is `≤₁` a point `≥ ρ` (`Zr.zrNoCross`).  REFUTE FIRST: NO EVIDENCE (part of the natural target). -/
+theorem skBCBaseUL (S : InaccSeq.{0}) : Cd.CdUpper S (Zo.zoBase S) ∧ Cd.CdLower S (Zo.zoBase S) := by
   sorry
 
-/-- STATUS: OPEN (round 134, new leaf; the reading part of skBCReach)
+/-- STATUS: REDUCED (round 134: skBCBaseUL, and CapV PROVED, Zr.zrBaseCapV; was OPEN M, round 133)
+SIZE: M
+UPPER ∧ LOWER ∧ CapV AT THE BASE `l₀ = Zo.zoBase S = ι(Ω₂)`.  CapV: `r(l₀) = δ + Θ(π_{Ω₂}) < P(Ω₂ + Ω₂) ≤ cap(l₀)`
+(`Zr.zrBaseCapV`, given UPPER ∧ LOWER ∧ CapV below `ι(Ω₂)`, skBCLow). -/
+theorem skBCBaseUV (S : InaccSeq.{0}) : SkUV S (Zo.zoBase S) :=
+  ⟨(skBCBaseUL S).1, (skBCBaseUL S).2, Zr.zrBaseCapV fun μ hr h => skBCLow S μ hr h⟩
+
+/-- STATUS: PROVED (round 134, Zr.zrBCThPos, the short branch; new leaf of round 134, the reading part of skBCReach)
 SIZE: M
 THE READING OF THE BASE CODE (notation only, no `≤₁`): `Θ_{l₀}(m_{l₀}) < δ_{l₀}` (short reach) or
-`υ_{l₀+ω²} ≤ Θ_{l₀}(m_{l₀})` (long reach), `l₀ = Zo.zoBase S` (the least restart index `≥ ι(Ω₂)`; when it is
-`ι(Ω₂)` its name is `Ω₂`, `A = Ω_ω + Ω₂`, the code is `π_{Ω₂} = ψ_{Ω₂}(A)` and `Θ(π) = Θ(Ω₂) =
-otp(Cl(A, ρ) ∩ Ω₂)`, `Cd.cdTheta_pi`).  Expected: the first branch, `Θ(π)` below the first `Γ`-fixed point above
-`Θ(θ) = ψ_{Ω₁}(A + θ) = υ_{l₀+1}` (`Wl.wlThVal`), so `Θ(π) < υ_{l₀+2}`: the atoms above `θ` are
-`ψ_{Ω₂}(Ω_ω + c)`, `c < Ω₂`, cofinal in `π` by the iterates `t₀ = θ`, `t_{n+1} = ψ_{Ω₂}(Ω_ω + t_n)`; `Ω_ω` is not an
-`Rn.RnBase` here (`A < Ω_ω + Ω₂^{Ω₂}`), so the readings over `Ω_ω` of `Zj` do not apply as they stand.
-REFUTE FIRST: NO EVIDENCE.  In the middle zone `δ ≤ Θ < υ_{l₀+ω²}` the base datum would need `r(l₀)` to be a
-block top or `≥ υ_{l₀+ω²}`. -/
+`υ_{l₀+ω²} ≤ Θ_{l₀}(m_{l₀})` (long reach).  Round 134: `l₀ = Zo.zoBase S = ι(Ω₂)` (`Zr.zrBase_eq`: `P(Ω₂)` is a
+`Γ`-point, `Zr.zrGP_Om2`, by the plateau `ψ_{Ω₂}(Ω_ω + Ω₂) = sup_j K_j`, `K_{j+1} = ψ_{Ω₂}(Ω_ω + K_j)`), its name is
+`Ω₂`, `A = Ω_ω + Ω₂`, its code is `π_{Ω₂}` and `Θ(π) = Θ(Ω₂)` (`Zr.zrBase_theta`); with `g(x) = ψ_{Ω₁}(A + θ + x)`,
+`F_0 = ρ`, `F_{j+1} = g(F_j)`: every atom `ψ_{Ω₂}(Ω_ω + c)` with `c < K_j` reads at most `g(Θ(c))`
+(`Zr.zrInner`), `Θ(K_j) ≤ F_j` (`Zr.zrOuter`), so `Θ(Ω₂) ≤ ψ_{Ω₁}(A + θ + Ω₁) < ψ_{Ω₁}(A + θ·(ω+1)) = δ_{l₀}`
+(`Zr.zrTh_Om2`, `Zr.zrY_lt`); the first branch holds.  No hypothesis. -/
 theorem skBCThPos (S : InaccSeq.{0}) :
     Cd.cdTheta S (Zo.zoBase S) (Cd.cdCode S (Zo.zoBase S)) < Cd.cdDelta (Zo.zoBase S) ∨
-      upsilon (Zo.zoBase S + ω * ω) ≤ Cd.cdTheta S (Zo.zoBase S) (Cd.cdCode S (Zo.zoBase S)) := by
-  sorry
+      upsilon (Zo.zoBase S + ω * ω) ≤ Cd.cdTheta S (Zo.zoBase S) (Cd.cdCode S (Zo.zoBase S)) :=
+  Or.inl Zr.zrBCThPos
 
 /-- STATUS: REDUCED (round 134, Zr.zrBCReach2: skBCLow, skBCBaseUV, skBCThPos; was OPEN M, round 133)
 SIZE: M
@@ -2757,7 +2765,7 @@ THE CHAIN REACH DATUM AT THE BASE `l₀`, with a chain start `o ≤ r(l₀) − 
 `P(η_μ + ω^{e(η_μ)}) ≤ P(Ω₂)`; `ρ_{l₀} < ν_C`, `Zr.zrNu`).  So with UPPER at `l₀` the datum holds with
 `o = r − δ = Θ_{l₀}(m_{l₀})` when `Θ_{l₀}(m_{l₀}) < δ_{l₀}` (the closed points `δ + x`, `Zh.zhDense`, give
 `r = δ + Θ_{l₀}(m_{l₀})`; `Zr.zrReach`), and with LOWER at `l₀` and `o = 0` when `υ_{l₀+ω²} ≤ Θ_{l₀}(m_{l₀})`
-(`Zr.zrReach_long`).  REDUCED to skBCBaseUV and the notation leaf skBCThPos. -/
+(`Zr.zrReach_long`).  REDUCED to skBCBaseUV (the notation leaf skBCThPos is PROVED, `Zr.zrBCThPos`). -/
 theorem skBCReach (S : InaccSeq.{0}) : ∃ o, o < upsilon (Zo.zoBase S + ω + 1) ∧ o ≤ Ys.ysO S (Zo.zoBase S) ∧
     Ys.YsReachIn (Zo.zoBase S) o (upsilon (Zo.zoBase S)) :=
   Zr.zrBCReach2 (fun μ hr h => skBCLow S μ hr h) (skBCBaseUV S).1 (skBCBaseUV S).2.1 (skBCThPos S)
