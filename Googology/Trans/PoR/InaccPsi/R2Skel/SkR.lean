@@ -1709,10 +1709,13 @@ THE TOP LAW AT EVERY EXPONENT: at every restart `λ` (`ρ_λ < P(η)`, `A` own, 
 with `Ω₃ ∣ b`, `Ω₃ ≤ b` has `Θ_λ(ψ₂ b) = ψ₁(A + 1 + ψ₂(T_λ b))`.  Missing: the exponents of the top atoms past
 those of Xi.XiTopUp / Zd.zdChain / Zi.ziChain / Zv.zvChain / Zw.zwChain (`b = β + W^E`; round 141: every
 `E = Ω_{k+3} + Ω₂·ξ + e` with a CODE coefficient `ξ < θ` is done, `Zw.zwChain`, from the threshold shift data
-`Zd.ZdShQ`, on the bases with `Zw.ZwQ` (every code `ξ' ≤ ξ` below `ψ₂(β + W^{Ω_{k+3}+Ω₂·ξ'})`); left: (i) `ZwQ`
-from the normality of `b` (the analog of Yd.ydOwnB_iff one level up), (ii) `E ≥ Ω_{k+3} + Ω₂·Ω₂`, i.e. the jumps
-`W^g`, `g ≥ 2`, with plateaus over coefficients `u_m = ψ₂(β + W^{X + W^{g'}·u_{m-1}})`, and `E ≥ Ω₃·2`), and the
-limit sub-bases `β + W^E·γ` at those exponents (continuity, as Yt.ytSubLaw). -/
+`Zd.ZdShQ`, on the bases with `Zw.ZwQ` (every code `ξ' ≤ ξ` below `ψ₂(β + W^{Ω_{k+3}+Ω₂·ξ'})`); round 142: THE
+JUMP `X → X + W^{h+1}` for every shift `X` and exponent `h ∈ D` (`Zx.zxLawJ`, plateau of the two-level tower
+`Tβ + ω^{Ω₁·TX + ω^{Ω₁+Ω₁·Th}·x}`, `Zx.zxPlat_tower`), and its first instance `E = Ω_{k+3} + Ω₂·Ω₂ + e`
+(`Zx.zxLaw2All`); left: (i) `ZwQ` from the normality of `b`, (ii) the induction over the shifts `X + W^h·u` (the
+coefficient chain over any shift, the limit exponents `h` — continuity of `T`, or deeper towers when `T` jumps at
+`h` — and the `W`-fixed exponents `E ≥ Ω₃·2`, `ψ_{k+4}`-terms), and the limit sub-bases `β + W^E·γ` at those
+exponents (continuity, as Yt.ytSubLaw). -/
 theorem skTopLawAll (S : InaccSeq.{0}) : Zp.ZpTopLawAll S := by
   sorry
 
