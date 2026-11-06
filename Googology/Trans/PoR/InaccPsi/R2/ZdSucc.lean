@@ -6,7 +6,9 @@ import Googology.Trans.PoR.InaccPsi.R2.XmLim
 `Θ = gxTh ρ_λ (ldAtR λ)`, `T = Vb.vbT S λ`, `A = A_{η_λ}` (own, `ψ₁(A) = ρ_λ`), `W^x = leWe x`, `Ω^x = leOe x`.
 
 `Xm.xmSucc` / `Xm.xmLim` are written for the shift `X = Ω_{k+3}` only.  Here the shift is a parameter `X` with the
-data `ZdSh S λ X K`: `X` lies in every closure, `X < Ω_ω`, `T X = K`, `K` and `Ω₁·K` lie in every closure, `0 < K`.
+data `ZdSh S λ X K`: `X` lies in every closure `Cl(a, c)` with `Ω₁ ≤ c` and in `H_λ`, `X < Ω_ω`, `T X = K`, `K` and
+`Ω₁·K` lie in every closure `Cl(a, c)` with `ρ_λ ≤ c`, `0 < K` (round 140: these thresholds, in place of every
+closure, let the shift carry a countable coefficient `ξ < ρ_λ`, `zdSh_cnt`).
 The law at the exponent `X + e` over a base `β` is
 
   `ZdLaw S λ A X e β :  Θ(ψ₂(β + W^{X+e})) = ψ₁(A + 1 + ψ₂(T(β + W^{X+e})))`.
@@ -35,19 +37,22 @@ variable {S : InaccSeq.{0}}
 /-- **A shift in every closure**: `X ∈ Cl(a, c)` for all `a, c`, `X < Ω_ω`, `T X = K`, `K`, `Ω₁·K` in every
 closure, `0 < K`. -/
 structure ZdSh (S : InaccSeq.{0}) (l X K : Ordinal.{0}) : Prop where
-  mem : ∀ a c : Ordinal.{0}, X ∈ S.CSet a c
+  mem : ∀ a c : Ordinal.{0}, Om 1 ≤ c → X ∈ S.CSet a c
   lt : X < Om ω
   T : vbT S l X = K
-  Km : ∀ a c : Ordinal.{0}, K ∈ S.CSet a c
-  Km1 : ∀ a c : Ordinal.{0}, Om 1 * K ∈ S.CSet a c
+  Km : ∀ a c : Ordinal.{0}, upsilon l ≤ c → K ∈ S.CSet a c
+  Km1 : ∀ a c : Ordinal.{0}, upsilon l ≤ c → Om 1 * K ∈ S.CSet a c
   Kpos : 0 < K
+  memH : X ∈ cdHull S l
 
 /-- The top law at the exponent `X + e` over the base `β`. -/
 def ZdLaw (S : InaccSeq.{0}) (l A X e β : Ordinal.{0}) : Prop :=
   gxTh (upsilon l) (ldAtR S l) (leTe S (X + e) β) =
     S.psi (A + 1 + S.psi (vbT S l (β + leWe (X + e))) (Om (1 + 1))) (Om 1)
 
-theorem ZdSh.D {l X K : Ordinal.{0}} (hs : ZdSh S l X K) : VbD S l X := ⟨hs.mem _ _, hs.mem _ _, hs.lt⟩
+theorem zd_Om1_le_th : Om 1 ≤ ConjT.th S := (psiS_bounds (S := S) _ 1).1.le
+
+theorem ZdSh.D {l X K : Ordinal.{0}} (hs : ZdSh S l X K) : VbD S l X := ⟨hs.memH, hs.mem _ _ zd_Om1_le_th, hs.lt⟩
 
 /-- `Ω_{k+3}` is such a shift, with `K = Ω_{k+2}`. -/
 theorem zdSh_Om {l ηx : Ordinal.{0}} (hl : IsRestartIdx l) (hX : upsilon l < Pv S ηx) (k : ℕ) :
@@ -56,8 +61,8 @@ theorem zdSh_Om {l ηx : Ordinal.{0}} (hl : IsRestartIdx l) (hX : upsilon l < Pv
     gg_SC_eps (SC_Om (Xi.xiNe k 1))
   have hOK : Om 1 * Om ((k : Ordinal.{0}) + 1 + 1) = veblen 0 (Om 1 + Om ((k : Ordinal.{0}) + 1 + 1)) := by
     rw [veblen_zero_apply, opow_add, Om1_opow, hK2ε]
-  refine ⟨Vn.vnOmK3_mem k, Wv.wvOmK_lt_W k, ?_, fun a c => CSet.Om_mem (CSet.succ_mem (CSet.succ_mem
-    (Sc.scNat_mem a c k))), fun a c => ?_, Om_pos (Xi.xiNe k 1)⟩
+  refine ⟨fun a c _ => Vn.vnOmK3_mem k a c, Wv.wvOmK_lt_W k, ?_, fun a c _ => CSet.Om_mem (CSet.succ_mem
+    (CSet.succ_mem (Sc.scNat_mem a c k))), fun a c _ => ?_, Om_pos (Xi.xiNe k 1), Vn.vnOmK3_mem k _ _⟩
   · have h := vbT_Om (S := S) hl hX (k := k + 1 + 1) (by omega); rwa [Xi.xiC2] at h
   · rw [hOK]
     exact CSet.phi_mem (CSet.zero_mem _ _) (CSet.add_mem (CSet.Om_mem (CSet.one_mem _ _))
@@ -83,7 +88,6 @@ theorem zdSucc {X K : Ordinal.{0}} (hs : ZdSh S l X K) {e β : Ordinal.{0}} (hec
   have hAt : GxAt (ldAtR S l) := ldAt_GxAt _ _
   have hΘ1 : gxTh (upsilon l) (ldAtR S l) 1 = 1 := gxTh_small (gg_one_lt_of_SC hρSC).le
   set w := leWe (X + e) with hwdef
-  have hXmem : ∀ a c : Ordinal.{0}, X ∈ S.CSet a c := hs.mem
   have hXW : X < Om ω := hs.lt
   have hw2 : leWe (X + (e + 1)) = w * Om (1 + 1) := by rw [← add_assoc, leWe_succ]
   obtain ⟨hβd, hβH, hβA, hβown, hexpA⟩ := hB
@@ -97,14 +101,14 @@ theorem zdSucc {X K : Ordinal.{0}} (hs : ZdSh S l X K) {e β : Ordinal.{0}} (hec
   have hwW : w < Om ω := (leWe_lt_SC vkOmW.1 vkOmW.2 hgW).1
   have hβW : β < Om ω := hβD.2.2
   have heθ : e < ConjT.th S := hexp.trans_le (psi_mono hκ2 (vkOmW.1.isPrincipal hβW hwW).le).1
-  have hgH : X + e ∈ cdHull S l := CSet.add_mem (hXmem _ _) heH
-  have hgC : X + e ∈ S.CSet (Om ω) (ConjT.th S) := CSet.add_mem (hXmem _ _) (CSet.of_lt heθ)
+  have hgH : X + e ∈ cdHull S l := CSet.add_mem hs.memH heH
+  have hgC : X + e ∈ S.CSet (Om ω) (ConjT.th S) := CSet.add_mem (hs.mem _ _ zd_Om1_le_th) (CSet.of_lt heθ)
   have hgD : VbD S l (X + e) := ⟨hgH, hgC, hgW⟩
   have hg1D : VbD S l (X + e + 1) := ⟨CSet.succ_mem hgH, CSet.succ_mem hgC, hg1W⟩
   -- the iterates
   set u := xmU S β w with hudef
   have hgA : ∀ a, β + w ≤ a → X + e ∈ S.CSet a (S.psi a (Om (1 + 1))) := fun a ha =>
-    CSet.add_mem (hXmem _ _) (CSet.of_lt (hexp.trans_le (psi_mono hκ2 ha).1))
+    CSet.add_mem (hs.mem _ _ (psiS_bounds (S := S) _ 1).1.le) (CSet.of_lt (hexp.trans_le (psi_mono hκ2 ha).1))
   have hit := xmU_it (S := S) (β := β) (g := X + e) hβown hgA
   have hu2 : ∀ n, u n < Om (1 + 1) := xmU_lt2 β w
   have hwu : ∀ n, w * u n ≤ w * Om (1 + 1) := fun n => leMulWe_mono (hu2 n).le
@@ -179,10 +183,10 @@ theorem zdSucc {X K : Ordinal.{0}} (hs : ZdSh S l X K) {e β : Ordinal.{0}} (hec
   have hbn : b ∈ S.CSet b (S.psi b (Om (1 + 1))) := Xd.xdTr hl hX hβD hβD hβn
   have hTg : vbT S l (X + e) = K + gxTh (upsilon l) (ldAtR S l) e := by
     rw [Vh.vhT_add hl hX hs.D ⟨heH, CSet.of_lt heθ, heW.trans ldOm2_lt_OmW⟩, vbT_code hl hX heW heH, hs.T]
-  have hmC : ∀ a c, gxTh (upsilon l) (ldAtR S l) e < c → m ∈ S.CSet a c := by
-    intro a c hc
+  have hmC : ∀ a c, gxTh (upsilon l) (ldAtR S l) e < c → upsilon l ≤ c → m ∈ S.CSet a c := by
+    intro a c hc hρc
     rw [hmdef, hTg, mul_add]
-    exact CSet.add_mem (hs.Km1 a c) (mem_Om1_mul hc)
+    exact CSet.add_mem (hs.Km1 a c hρc) (mem_Om1_mul hc)
   have hu1 : u 1 = S.psi (β + w) (Om (1 + 1)) := by
     show S.psi (β + w * xmU S β w 0 + w) (Om (1 + 1)) = _
     rw [xmU_zero, mul_zero, add_zero]
@@ -198,10 +202,13 @@ theorem zdSucc {X K : Ordinal.{0}} (hs : ZdSh S l X K) {e β : Ordinal.{0}} (hec
     rw [xmX_succ]; unfold xmA; rw [xmX_zero]
     conv_lhs => rw [hx0v]
     exact (psi_mono hκ1 (add_le_add le_rfl (psi_mono hκ2 (add_le_add le_rfl (mul_le_mul_right hx0pos _))).1)).1
+  have hρx0 : upsilon l ≤ x0 := by
+    rw [hx0v, ← hρ]; exact (psi_mono hκ1 (le_self_add.trans le_self_add)).1
   have hm : ∀ n, m ∈ S.CSet (xmA S (A + 1) b m x0 n) (xmX S (A + 1) b m x0 (n + 1)) := fun n =>
     hmC _ _ (hex0.trans_le (xmX_monotone h0 (Nat.zero_le (n + 1))))
+      (hρx0.trans (xmX_monotone h0 (Nat.zero_le (n + 1))))
   have hm2 : ∀ a, m ∈ S.CSet a (S.psi a (Om (1 + 1))) := fun a =>
-    hmC _ _ ((hex0.trans hx01).trans (psiS_bounds (S := S) _ 1).1)
+    hmC _ _ ((hex0.trans hx01).trans (psiS_bounds (S := S) _ 1).1) (hρ1.trans (psiS_bounds (S := S) _ 1).1).le
   have hplat := xmPlat (S := S) (B := A + 1) hbn hm2 h0 hx01 hm
   have hdom : ∀ n, xmX S (A + 1) b m x0 n ≤ gxTh (upsilon l) (ldAtR S l) (u (n + 1)) :=
     xmX_le (y := fun n => gxTh (upsilon l) (ldAtR S l) (u (n + 1))) le_rfl fun n => by
@@ -240,7 +247,6 @@ theorem zdLim {X K : Ordinal.{0}} (hs : ZdSh S l X K) {e β : Ordinal.{0}} (hec 
   have hκ2 : S.InR (Om (1 + 1 : Ordinal.{0})) := InR_Om_succ 1
   obtain ⟨hρSC, hρ1⟩ := leRho hl hX
   have hΘ1 : gxTh (upsilon l) (ldAtR S l) 1 = 1 := gxTh_small (gg_one_lt_of_SC hρSC).le
-  have hXmem : ∀ a c : Ordinal.{0}, X ∈ S.CSet a c := hs.mem
   have hXW : X < Om ω := hs.lt
   obtain ⟨-, hβH, -, -, hexpA⟩ := hB
   have hexp : e < S.psi (β + leWe (X + e)) (Om (1 + 1)) := hexpA e hec le_rfl
@@ -259,7 +265,7 @@ theorem zdLim {X K : Ordinal.{0}} (hs : ZdSh S l X K) {e β : Ordinal.{0}} (hec 
     have hcD : VbD S l c := ⟨hcH, CSet.of_lt hcθ, hcW.trans ldOm2_lt_OmW⟩
     have hgcW : X + c < Om ω := vkOmW.1.isPrincipal hXW (hcW.trans ldOm2_lt_OmW)
     have hgD : VbD S l (X + c) :=
-      ⟨CSet.add_mem (hXmem _ _) hcH, CSet.add_mem (hXmem _ _) (CSet.of_lt hcθ), hgcW⟩
+      ⟨CSet.add_mem hs.memH hcH, CSet.add_mem (hs.mem _ _ zd_Om1_le_th) (CSet.of_lt hcθ), hgcW⟩
     have e1 : leWe (X + c) = leWe (X + c) * 1 + 0 := by rw [mul_one, add_zero]
     have hD1 : VbD S l (leWe (X + c) * 1 + 0) := by
       rw [mul_one, add_zero]
@@ -271,8 +277,8 @@ theorem zdLim {X K : Ordinal.{0}} (hs : ZdSh S l X K) {e β : Ordinal.{0}} (hec 
   have h0c : GxCl (upsilon l) (ldAtR S l) 0 := GxCl.zero hρSC.1
   -- the upper half
   have hD : VbD S l (β + leWe (X + e)) :=
-    ⟨CSet.add_mem hβH (leWe_mem (CSet.add_mem (hXmem _ _) ((ldHull_iff hl hX heW).2 hec))),
-      CSet.add_mem hβD.2.1 (leWe_mem (CSet.add_mem (hXmem _ _) (CSet.of_lt heθ))),
+    ⟨CSet.add_mem hβH (leWe_mem (CSet.add_mem hs.memH ((ldHull_iff hl hX heW).2 hec))),
+      CSet.add_mem hβD.2.1 (leWe_mem (CSet.add_mem (hs.mem _ _ zd_Om1_le_th) (CSet.of_lt heθ))),
       vkOmW.1.isPrincipal hβW hwW⟩
   have hup := Xd.xdUp_at hl hX hA hρ _ hD
   unfold leTe

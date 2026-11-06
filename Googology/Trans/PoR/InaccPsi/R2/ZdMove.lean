@@ -132,8 +132,8 @@ theorem zdFixB (n : ℕ) {β : Ordinal.{0}} (hDβ : MvD S β) (hβ : β ∈ S.CS
     rw [hBW] at hBa
     have hown : β + leWe (X + ydEB S X β m) ∈ S.CSet (β + leWe (X + ydEB S X β m))
         (S.psi (β + leWe (X + ydEB S X β m)) (Om (1 + 1))) := by
-      refine CSet.add_mem (ydNormD hm.mem hβ _) (leWe_mem (CSet.add_mem (hm.mem _ _) (CSet.of_lt ?_)))
-      rw [← ydEB_succ]; exact ydEB_lt_succ hm.mem hβ m
+      refine CSet.add_mem (ydNormD (fun a b _ => hm.mem a b) hβ _) (leWe_mem (CSet.add_mem (hm.mem _ _) (CSet.of_lt ?_)))
+      rw [← ydEB_succ]; exact ydEB_lt_succ (fun a b _ => hm.mem a b) hβ m
     obtain ⟨hDs, hBs⟩ := mxB_atom (n := n) hDa hown
     rw [hBa] at hBs
     rw [ydEB_succ, ydEB_succ]
@@ -144,13 +144,13 @@ theorem zdOwnMoveB (n : ℕ) {β e : Ordinal.{0}} (hDβ : MvD S β) (hβ : β �
     (hDe : MvD S e) (he : e < S.psi (β + leWe (X + Om (1 + 1))) (Om (1 + 1))) :
     Bc.bcB S n e < S.psi (Bc.bcB S n β + leWe (X + Om (1 + 1))) (Om (1 + 1)) ∧
       ∀ e'', e'' ≤ Bc.bcB S n e → e'' < S.psi (Bc.bcB S n β + leWe (X + e'')) (Om (1 + 1)) := by
-  obtain ⟨m, hm'⟩ := ydLtTopB hm.mem hβ he
+  obtain ⟨m, hm'⟩ := ydLtTopB (fun a b _ => hm.mem a b) hβ he
   obtain ⟨hDm, hBm⟩ := zdFixB hm n hDβ hβ m
   have h := (mvB_lt_iff (k := n) hDe hDm).2 hm'
   rw [hBm] at h
   have hB' : Bc.bcB S n e < S.psi (Bc.bcB S n β + leWe (X + Om (1 + 1))) (Om (1 + 1)) :=
     h.trans_le (ydEB_le_top _ _ m)
-  exact ⟨hB', (ydOwnB_iff hm.mem (ydNormB n hDβ hβ) _).2 hB'⟩
+  exact ⟨hB', (ydOwnB_iff (fun a b _ => hm.mem a b) (ydNormB n hDβ hβ) _).2 hB'⟩
 
 end Data
 
