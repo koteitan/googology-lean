@@ -1,7 +1,7 @@
-import Googology.Trans.PoR.InaccPsi.R2.VsFx
+import Googology.Trans.PoR.InaccPsi.R2.VaFx
 
 /-!
-# VsCg: DIGIT SYSTEMS OVER THE SEGMENT BASE — THE STEP TO THE NEXT `ε`-NUMBER
+# VaStep: DIGIT SYSTEMS OVER THE SEGMENT BASE — THE STEP TO THE NEXT `ε`-NUMBER
 
 `VsGood E`: a digit system `Zm.ZmDS` at the `ε`-number base `E ≥ B_Γ` read by `vR`, as `Va.VaGood`, over the
 segment base `B = vaFB E` (the largest fixed point of `Γ` in `(Ω₁, E]`) read `vR B`.  Below `B₂` it is

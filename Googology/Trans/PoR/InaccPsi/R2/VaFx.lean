@@ -1,7 +1,7 @@
-import Googology.Trans.PoR.InaccPsi.R2.VsSeg
+import Googology.Trans.PoR.InaccPsi.R2.VaSeg
 
 /-!
-# VsFx: THE FIXED POINTS OF `Γ` AS CODES — THE GATES OF THEIR PARTS
+# VaFx: THE FIXED POINTS OF `Γ` AS CODES — THE GATES OF THEIR PARTS
 
 A fixed-point atom `e` (`¬ yhJ e < e`) below `X` is `F_λ(y)` with `1 ≤ λ = tlLev e`, `y = tlI λ e` not a fixed point
 of `F_λ`; its reading is `ϑˣ(Ω₁·(Ω₁+λ(x)) + K(x))` with `K = f(x) + (y − (f+1))(x)` past the largest fixed point

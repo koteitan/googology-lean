@@ -1,7 +1,7 @@
 import Googology.Trans.PoR.InaccPsi.R2.VaCg
 
 /-!
-# VsSeg: THE SEGMENT OF A CODE PAST `B_Γ` — THE LARGEST FIXED POINT OF `Γ` BELOW IT
+# VaSeg: THE SEGMENT OF A CODE PAST `B_Γ` — THE LARGEST FIXED POINT OF `Γ` BELOW IT
 
 Every code `E ≥ B_Γ` lies in the segment of the largest fixed point `F = vaFB E` of `Γ` in `(Ω₁, E]`.  Inside a
 segment the atoms are `F` and the atoms `Γ(j)`, `F < j`; an atom index past `F` reads `F(x) + (j − (F+1))(x)`; the
