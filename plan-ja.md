@@ -16,7 +16,10 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
         - 済み：B₂ 未満の桁の系（Qc.QDS、その一段上げと門の引き上げ）。符号の門 qcG（Z 上の符号は門が Z 未満、Qc.qc_gate）。H_λ(y) の水準の読み λ(x)（Qc.qcLv_main）。Γ の不動点の読みは閉じた点（Qc.qc_fix_cl）。Qc.QsGood と一段上げ（Qc.qsGood_succ）、極限での和集合（Qc.qsGood_lim）と、原子でない点・原子での頂上（Qc.qsTopNA、Qc.qsTopAt）。
         - 済み：[X, B₂) の Γ の不動点 H_λ(y) での頂上（Qc.qsTopFix。水準の読みは共終、Qc.qcLv_cof、かつ正確、Qc.qs_lv_pi）。[B_Γ, B₂) のすべての ε 数での Qc.QsGood（Qc.qsGood_all）。
         - 済み：B₂ 未満の Γ の不動点での層（Qc.qsLay_all）、すべての c < B₂ での Zm.ZmPastAt S c（Qc.qc_past）。
-        - 🤖 残り：B₂ ≤ c < θ（Phase D：B₂ より先の atom 系）、そのあと skLayPastXθ。
+        - 🤖 残り：B₂ ≤ c < θ（skLayPastB2θ、Phase D。X ≤ c < B₂ は skLayPastXB2 で証明済み）。
+          - B₂ より先の atom 系：θ 未満の符号と atom Hˡ_λ(y)（Vd.vd_nf_ex、水準 λ < Ω₃）。Zb.ZbAS の欄 mem と hull をすべての S で。
+          - θ 未満の符号の読み：Γ の不動点 Hˡ_λ(y) では λ の水準の読み（基数を 1 つ下げ、葉を x で読む）と、そのデータ、順序、共終性、正確さ（R2.CitedVd）。
+          - 新しい上限での Qc の鎖：桁の系、頂上、層、門の小さい共終な不動点。
         - その後：道の上のほかの葉（skLayPastTh、窓と上の端、skBC、skFix、skZlCfg、skLevImgHi4）。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
