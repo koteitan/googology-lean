@@ -28,7 +28,7 @@ skNuC REDUCED L  (Yq.yqRoadS)
 │ │ │   round 131: ─ skZbDirect (B_Γ ≤ c < X), skLayLoFixX, skLayHiFixX (X ≤ c < Ω₂); skZbDirectE0 +3 PROVED
 │ │ │   round 132: skZbDirect holds below B_Γ·B_Γ with no hypothesis (skZgDirectSq); skZgTl, skZgRef +3 PROVED
 │ │ │   round 133: skZbDirect ─ skZbDirectX PROVED L (round 215, Va.vsDirectX; no hypothesis below B₂, the next fixed point of Γ: Va.vaDirectB2, skVaDirectB2, round 207; digit systems at every ε-number below X over gated segment bases: skVsGoodAll, round 213); skLay{Lo,Hi}FixX ─
-│ │ │     skLayPastX REFUTED (138) → skLayPastXθ, skLayPastTh OPEN L; 7 Zm PROVED. PROVED: skLayBelowBG L (129), skLayDirect0 M (127); 130 skFixImg …
+│ │ │     skLayPastX REFUTED (138) → skLayPastXθ, skLayPastTh OPEN L (skLayPastXθ below B₂ done: Qc.qc_past, round 218); 7 Zm PROVED. PROVED: skLayBelowBG L (129), …
 │ │ │   off the road: skLaySysY REDUCED L ─ skLaySysAll1, skLaySysYHi OPEN L; skLaySys_false, skFixReadX_false REFUTED S
 │ │ ├ skRegBhi REDUCED L: skBhiA REDUCED L ─ skBhiAcell PROVED M, skBhiAfar;  skBhiL  (round 133: both PROVED from skBC)
 │ │ ├ skWinA, skWinB ─ skWinL REDUCED L ─ skWinUL PROVED S, skWinSpec ─ skWinInR OPEN L
@@ -96,5 +96,5 @@ sorry 57 → 60, OPEN 28 (27 L, 1 S) → 27 (all L), SUSPECT 3 → 2, REFUTED 7 
   131 `Zb.zbGsCS_lt_BG`, `Zc.zcRsTerm_long_false`; 132 `Zf.zfNodesAll_false`; 133 `Zn.znSupInB_false`, `Zn.znRsTerm_false`, `Zo.zoReach0_ref`; 135 `Zs.zsBaseRs_lower`, `Zs.zsSup_false`.
 ## Suggested order of the next rounds
 1. Supply: skLevImgHi4 (nested ϑ-nodes: `Zf.zfDCl` by recursion on term size), skZlCfg (past the φ-ladder; EQ; υ-fixed carry).
-2. Region B, (C): skLayPastXθ, skLayPastTh (skZbDirectX PROVED, round 215); skFix{Cont, CapVF}, skWin/Top{Big, InR}, skTopLwNo2; skBCBaseUL (big reading: Lemma RS with values past υ_{l₀+1}), skBC{InR, CapVH, RsSH}.
+2. Region B, (C): skLayPastXθ (X ≤ c < B₂ PROVED, Qc.qc_past; left B₂ ≤ c < θ), skLayPastTh (skZbDirectX PROVED, round 215); skFix{Cont, CapVF}, skWin/Top{Big, InR}, skTopLwNo2; skBCBaseUL (big reading: Lemma RS with values past υ_{l₀+1}), skBC{InR, CapVH, RsSH}.
 3. Reading: skAtHi3 PROVED (rounds 177–182, Kz: T_K below K = Γ_{Ω_ω+1}, the top law Kz.kzTop, the offset law Kz.kzOff and the band moves Kz.kzMoveA on D_K).

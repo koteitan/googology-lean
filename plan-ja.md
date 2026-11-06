@@ -11,11 +11,12 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
       - ほかに：υ-不動点でない窓の再始動での RS の入力と cap、孤立した不動点では Θ = ρ。K_Y までの atom の移動。基 ι(Ω₂) で到達のデータと cap。K_ω 以下の code の読みは短い。
       - 道 yqRoadS（仮定：前線より上で UPPER、LOWER、cap。L(ω+1) ≤ ν_C のとき WdThLow、WdEQfar。ずらし XoShift。XoSup）：ν_C = L(ω+1)。
       - 骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：道の上の OPEN の葉は 14（すべて L）。skZbDirectX は証明済み（215 回目）。skTopLawAll、skPsi3OffRest2、skAtHi3 は証明済み（Kx.kxTopLawAll、Ky.kyPsi3OffRest2、Kz.kzAtHi3）。根が空虚かは未定。
-      - 🤖 次：X より上の層（skLayPastXθ）。まず X ≤ c < B₂ = ψ_{Ω₂}(ε_{Ω₂+1})（Phase C）、そのあと B₂ ≤ c < θ。
+      - 🤖 次：X より上の層（skLayPastXθ）。X ≤ c < B₂ = ψ_{Ω₂}(ε_{Ω₂+1}) は済み（Phase C）、そのあと B₂ ≤ c < θ。
         - 済み（Qc*）：B₂ 未満の符号の atom 系 qcU。ϑᵖ(Ω₁·N)（Ω₁ ≤ N < ε_{Ω₁+1}、データは ρ 未満）未満での Lemma IMG（Qc.qc_img_rst。層の頂上は X^x を越えてよい、Qc.QcBd）。B₂ 未満のすべての符号の読み vQ、門 qcG、基点の読み qcA。
         - 済み：B₂ 未満の桁の系（Qc.QDS、その一段上げと門の引き上げ）。符号の門 qcG（Z 上の符号は門が Z 未満、Qc.qc_gate）。H_λ(y) の水準の読み λ(x)（Qc.qcLv_main）。Γ の不動点の読みは閉じた点（Qc.qc_fix_cl）。Qc.QsGood と一段上げ（Qc.qsGood_succ）、極限での和集合（Qc.qsGood_lim）と、原子でない点・原子での頂上（Qc.qsTopNA、Qc.qsTopAt）。
         - 済み：[X, B₂) の Γ の不動点 H_λ(y) での頂上（Qc.qsTopFix。水準の読みは共終、Qc.qcLv_cof、かつ正確、Qc.qs_lv_pi）。[B_Γ, B₂) のすべての ε 数での Qc.QsGood（Qc.qsGood_all）。
-        - 🤖 残り：層（Va.VaLay と同じ形）、X ≤ c < B₂ での Zm.ZmPastAt S c。
+        - 済み：B₂ 未満の Γ の不動点での層（Qc.qsLay_all）、すべての c < B₂ での Zm.ZmPastAt S c（Qc.qc_past）。
+        - 🤖 残り：B₂ ≤ c < θ（Phase D：B₂ より先の atom 系）、そのあと skLayPastXθ。
         - その後：道の上のほかの葉（skLayPastTh、窓と上の端、skBC、skFix、skZlCfg、skLevImgHi4）。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
