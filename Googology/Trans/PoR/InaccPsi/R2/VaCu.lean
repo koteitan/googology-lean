@@ -125,7 +125,7 @@ theorem va_memV {c : Ordinal.{0}} (hc : c < E) :
   have heU : e < vaU := (hemax.trans_lt (max_lt hc hBE)).trans hEU
   have hgME : yrG M.E < y := by
     rw [yrG_base hMEE hGME, hME]
-    exact va_QE_eN_lt he heB heU hyl hωy ((le_max_right _ _).trans_lt (hEgeq ▸ hgM))
+    exact va_QE_eN_lt he heB (heU.trans_le va_U_le_B2) hyl hωy ((le_max_right _ _).trans_lt (hEgeq ▸ hgM))
   have hlt := va_lt_top hE hBE hEU hlim hIH hy hy1 hgy M.E hMlt hgME
   rw [vR_base hMEE hGME, ← (hV y hy hy1 hgM).2] at hlt
   exact hlt.le
@@ -420,7 +420,7 @@ theorem vaGood_all : ∀ E, InE E → tfBG ≤ E → E < vaU → VaGood E := by
   · rw [← heq]; exact vaGood_BG
   by_cases hs : ∃ e, InE e ∧ tfBG ≤ e ∧ e < E ∧ eN e = E
   · obtain ⟨e, he, heB, heE, rfl⟩ := hs
-    exact vaGood_succ he heB (heE.trans hEU) (IH e heE he heB (heE.trans hEU))
+    exact vaGood_succ he heB ((heE.trans hEU).trans_le va_U_le_B2) (IH e heE he heB (heE.trans hEU))
   · have hlim : ∀ e, InE e → e < E → eN e < E := by
       intro e he heE
       refine lt_of_le_of_ne (eN_le heE hE) fun h => ?_

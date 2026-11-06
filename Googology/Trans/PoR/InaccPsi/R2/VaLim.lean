@@ -32,7 +32,7 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.I
   Googology.Trans.PoR.InaccPsi.R2.Gk Googology.Trans.PoR.InaccPsi.R2.Xk
 
 /-- **The gate of the next base** stays below every limit above the gate of the base. -/
-theorem va_QE_eN_lt {e Z : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e < vaU) (hZ : IsSuccLimit Z)
+theorem va_QE_eN_lt {e Z : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e < vaB2) (hZ : IsSuccLimit Z)
     (hωZ : ω < Z) (hg : yrQE e < Z) : yrQE (eN e) < Z := by
   have hGe' : gcG 0 ≤ e := va_G_le_BG.trans hBe
   rcases va_eN_code he hBe heU with ⟨-, hN⟩ | ⟨hnA, hk, hN⟩
@@ -74,7 +74,7 @@ theorem va_mem {E c : Ordinal.{0}} (hEU : E < vaU) (hlim : ∀ e, InE e → e < 
       by rw [ZmDS.step_Eg, hEg₀]; exact max_le_max le_rfl hQc,
       fun x hx hx1 hgx => ?_, fun c' hc' x hx hx1 hgc => ?_, fun c' hc' hc0 => ?_, hD₀⟩
     · have h1 : M₀.step.V x = eN (vA M₀.E x) := by show eN (M₀.V x) = _; rw [hV₀ x hx hx1 hgx]
-      exact ⟨h1, h1.trans (va_eN M₀ hω hQ hBe (heE.trans hEU) hR₀ hG₀ hx hx1 hgx)⟩
+      exact ⟨h1, h1.trans (va_eN M₀ hω hQ hBe ((heE.trans hEU).trans_le va_U_le_B2) hR₀ hG₀ hx hx1 hgx)⟩
     · show M₀.sR c' x = vR c' x
       rcases eq_or_ne c' 0 with rfl | h0
       · rw [M₀.sR_zero, vR_zero]
@@ -398,7 +398,7 @@ theorem va_top (hgx : max ω (yrQE E) < x) : ∀ ν, ν < vA E x → ∃ b, b < 
       have heU : e < vaU := (hemax.trans_lt (max_lt hb hBE)).trans hEU
       have hgME : yrG M.E < x := by
         rw [yrG_base hMEE hGME, hME]
-        exact va_QE_eN_lt he heB heU hxl hωx ((le_max_right _ _).trans_lt (hEgeq ▸ hgM))
+        exact va_QE_eN_lt he heB (heU.trans_le va_U_le_B2) hxl hωx ((le_max_right _ _).trans_lt (hEgeq ▸ hgM))
       have hVu := hu1 M.E hMlt hgME
       rw [vR_base hMEE hGME] at hVu
       have hVE : InE (vA M.E x) := by rw [← (hV x hx hx1 hgM).2]; exact (M.V_T x hx hx1 hgM).2.1

@@ -27,7 +27,7 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.I
   Googology.Trans.PoR.InaccPsi.R2.Lu Googology.Trans.PoR.InaccPsi.R2.Gb Googology.Trans.PoR.InaccPsi.R2.Zb
   Googology.Trans.PoR.InaccPsi.R2.Gl Googology.Trans.PoR.InaccPsi.R2.Yh Googology.Trans.PoR.InaccPsi.R2.Zm
   Googology.Trans.PoR.InaccPsi.R2.Gk Googology.Trans.PoR.InaccPsi.R2.Xk Googology.Trans.PoR.InaccPsi.R2.Gm
-  Googology.Trans.PoR.InaccPsi.R2.Ge
+  Googology.Trans.PoR.InaccPsi.R2.Ge Googology.Trans.PoR.InaccPsi.R2.Rh
 
 /-! ## The bound `Γ_{B_Γ+1}` and the atoms below it -/
 
@@ -75,6 +75,42 @@ theorem va_U_le_B2 : vaU ≤ vaB2 := by
   have hjB : tfBG < j := by
     have h := va_BG_lt_B2; rw [hj, ← zb_gcG_BG] at h; exact gcG_strictMono.lt_iff_lt.1 h
   rw [hj]; exact gcG_le (Order.add_one_le_of_lt hjB)
+
+/-- **`B₂ < X`.** -/
+theorem va_B2_lt_X : vaB2 < tlX := by
+  have hXE : InE tlX := Low.opow_eq_self_of_SC tlX_SC
+  have h1X : (1 : Ordinal.{0}) < tlX := lu_one_lt_E hXE
+  have hfX : rhF 1 tlX = tlX := by
+    have h := Rh.rhF_fix_lower h1X 0; rwa [tlX_rhF] at h
+  have hO2 : Om1 + 1 + 1 < tlX :=
+    (ev_isSuccLimit_of_inE hXE).add_one_lt ((ev_isSuccLimit_of_inE hXE).add_one_lt tlX_gt)
+  have hF2 : rhF 1 (Om1 + 1 + 1) < tlX := by
+    rw [← hfX]; exact (Rh.rhF_normal 1).strictMono hO2
+  have hfix : gamma (rhF 1 (Om1 + 1 + 1)) = rhF 1 (Om1 + 1 + 1) := by
+    have h := Rh.rhF_fix_lower zero_lt_one (Om1 + 1 + 1); rwa [Rh.rhF_zero] at h
+  have hBF : tfBG < rhF 1 (Om1 + 1 + 1) := by
+    rw [tl_BG_eq]; exact (Rh.rhF_normal 1).strictMono (lt_add_one _)
+  exact (va_B2_min hBF hfix).trans_lt hF2
+
+/-- **Below `B₂` the atoms `≥ B_Γ` are `B_Γ` and the atoms `Γ(j)`, `B_Γ < j < Γ(j)`.** -/
+theorem va_atom_cases2 {e : Ordinal.{0}} (hBe : tfBG ≤ e) (heB : e < vaB2) :
+    e = tfBG ∨ (YhAt e ∧ tfBG < yhJ e ∧ yhJ e < e) ∨ ¬ YhAt e := by
+  by_cases hA : YhAt e
+  · obtain ⟨j, rfl⟩ := yhAt_iff.1 hA
+    have h1 : tfBG ≤ j := by
+      rw [← zb_gcG_BG] at hBe; exact gcG_strictMono.le_iff_le.1 hBe
+    rcases h1.lt_or_eq with h1 | h1
+    · refine Or.inr (Or.inl ⟨hA, by rw [yhJ_gcG]; exact h1, ?_⟩)
+      rw [yhJ_gcG]
+      refine lt_of_le_of_ne (gcG_strictMono.le_apply) fun he => ?_
+      have hjE : Om1 + 1 + j = j := by
+        obtain ⟨d, hd⟩ := exists_add_of_le h1.le
+        have hBE : InE tfBG := Low.opow_eq_self_of_SC tfBG_SC
+        rw [hd, ← add_assoc, gl_absorb hBE tfBG_gt]
+      have hfix : gamma j = j := by rw [← hjE, ← tf_gcG, hjE]; exact he.symm
+      exact absurd heB (not_lt.2 ((va_B2_min h1 hfix).trans (le_of_eq he)))
+    · left; rw [← h1, zb_gcG_BG]
+  · exact Or.inr (Or.inr hA)
 
 /-! ## The closed point after `D(x)` -/
 

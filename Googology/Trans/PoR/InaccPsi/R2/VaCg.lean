@@ -53,12 +53,14 @@ theorem va_G_lt_eN {e : Ordinal.{0}} (hGe : gcG 0 ≤ e) : gcG 0 < eN e := hGe.t
 
 /-- **The next `ε`-number on the code side**: `ε_{e+1} = yhPsi 1 e` at a fixed point of `φ(1, ·)`,
 `yhPsi 1 (η+1)` at `e = yhPsi 1 η`. -/
-theorem va_eN_code {e : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e < vaU) :
+theorem va_eN_code {e : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e < vaB2) :
     (veblen 1 e = e ∧ eN e = yhPsi 1 e) ∨
       (¬ YhAt e ∧ yhK e = 1 ∧ eN e = yhPsi 1 (yhI e + 1)) := by
   have hOe : Om1 < e := tfBG_gt.trans_le hBe
-  rcases va_atom_cases hBe heU with rfl | hnA
+  rcases va_atom_cases2 hBe heU with rfl | ⟨hA, -, -⟩ | hnA
   · exact Or.inl ⟨zm_BG_fix, (va_psi1_fix zm_BG_fix tfBG_gt).symm⟩
+  · have hfix : veblen 1 e = e := hA.1.veblen_right (gg_one_lt_of_SC hA.1)
+    exact Or.inl ⟨hfix, (va_psi1_fix hfix hOe).symm⟩
   have hGe : gcG 0 < e := by
     refine lt_of_le_of_ne (va_G_le_BG.trans hBe) fun h => hnA (h ▸ yhAt_gcG 0)
   obtain ⟨hk1, -, -, hpsi⟩ := va_data he hGe hnA
@@ -73,7 +75,7 @@ theorem va_eN_code {e : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e < 
     exact h.symm
 
 /-- **The base gate does not drop at the next `ε`-number.** -/
-theorem va_QE_eN {e : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e < vaU) :
+theorem va_QE_eN {e : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e < vaB2) :
     yrQE e ≤ max ω (yrQE (eN e)) := by
   have hGe' : gcG 0 ≤ e := va_G_le_BG.trans hBe
   rcases va_eN_code he hBe heU with ⟨hfix, hN⟩ | ⟨hnA, hk, hN⟩
@@ -186,7 +188,7 @@ end Step
 
 section ENext
 
-variable (M : ZmDS) (hω : ω ≤ M.Eg) (hQ : yrQE M.E ≤ M.Eg) (hBE : tfBG ≤ M.E) (hEU : M.E < vaU)
+variable (M : ZmDS) (hω : ω ≤ M.Eg) (hQ : yrQE M.E ≤ M.Eg) (hBE : tfBG ≤ M.E) (hEU : M.E < vaB2)
   (hV : ∀ x, InE x → x < Om1 → M.Eg < x → M.V x = vA M.E x)
   (hR : ∀ c, c < M.E → ∀ x, InE x → x < Om1 → M.G c < x → M.R c x = vR c x)
   (hG : ∀ c, c < M.E → c ≠ 0 → M.G c = max M.Eg (yrG c))
@@ -209,10 +211,24 @@ theorem va_eN {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hgx : M.Eg < x) :
     rw [← hR c hc x hx hx1 hGc]
     have hlt := M.lt c x hx hx1 hc hGc
     exact ⟨vz_T_down hx hx1 hVT hV1 hlt.le, hlt.trans hV1⟩
-  rcases va_atom_cases hBE hEU with hB | hnA
+  have hωx : ω < x := omega0_lt_inE hx
+  rcases va_atom_cases2 hBE hEU with hB | ⟨hA, hjB, hjE⟩ | hnA
   · rw [hB, vA_BG, ← va_psi1_fix zm_BG_fix tfBG_gt,
       vA_psi' le_rfl (va_psi1_fix zm_BG_fix tfBG_gt ▸ va_G_lt_eN va_G_le_BG), vR_one, vR_BG]
     exact zmD_eN hx hx1
+  · -- an atom `Γ(j)`, `B_Γ < j`: the index reading is below `D₂(x)`
+    have hfixE : veblen 1 M.E = M.E := hA.1.veblen_right (gg_one_lt_of_SC hA.1)
+    have hOE : Om1 < M.E := tfBG_gt.trans_le hBE
+    have hN : eN M.E = yhPsi 1 M.E := (va_psi1_fix hfixE hOE).symm
+    rw [hN, vA_psi' le_rfl (hN ▸ va_G_lt_eN hGe'), vR_one, vR_base hE hGe', vA_atom hA hjE, vI_high hjB]
+    obtain ⟨hDD2, hD2T, hD21, hD2E, -⟩ := va_D2_facts hx hx1
+    have hgj : yrG (yhJ M.E) < x := by
+      have h := yrQE_atom hA hjE ▸ hQ
+      exact yrG_of_Q hωx (h.trans_lt hgx)
+    have ho : yhJ M.E - (tfBG + 1) < vaB2 := ((Ordinal.sub_le_self _ _).trans_lt hjE).trans hEU
+    have hI : ywV 1 0 x + vR (yhJ M.E - (tfBG + 1)) x < ywV 1 1 x :=
+      (inE_indec hD2E).add_lt hDD2 (va_lt_D2 hx hx1 _ ho ((va_off_gate hjB).trans_lt (max_lt hωx hgj)))
+    exact va_eN_gq hx hx1 (vz_T_down hx hx1 hD2T hD21 hI.le) (hI.trans hD21)
   have hGe : gcG 0 < M.E := lt_of_le_of_ne hGe' fun h => hnA (h ▸ yhAt_gcG 0)
   obtain ⟨hk1, hkE, hiE, hpsi⟩ := va_data hE hGe hnA
   have hQE : yrQE M.E = max (yrQ (yhK M.E)) (yrQ (yhI M.E)) := yrQE_psi hnA
@@ -290,7 +306,7 @@ theorem vaGood_BG : VaGood tfBG := by
   rw [ZmDS.raise_G _ _ hc0, hEg]; rfl
 
 /-- **The step to the next `ε`-number**, raised to the gate of the new base. -/
-theorem vaGood_succ {e : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e < vaU) (h : VaGood e) :
+theorem vaGood_succ {e : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e < vaB2) (h : VaGood e) :
     VaGood (eN e) := by
   obtain ⟨M, hE, hEg, hV, hR, hG, hBB, hDD⟩ := h
   subst hE
