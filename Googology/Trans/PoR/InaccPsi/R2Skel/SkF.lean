@@ -39,6 +39,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZmRef
 import Googology.Trans.PoR.InaccPsi.R2.VaDir
 import Googology.Trans.PoR.InaccPsi.R2.VaDir2
 import Googology.Trans.PoR.InaccPsi.R2.VaAll
+import Googology.Trans.PoR.InaccPsi.R2.VaLay
 import Googology.Trans.PoR.InaccPsi.R2.ZoBC
 import Googology.Trans.PoR.InaccPsi.R2.ZrBase
 import Googology.Trans.PoR.InaccPsi.R2.ZrRead
@@ -2242,7 +2243,7 @@ theorem skLayBelowBG (S : InaccSeq.{0}) : ∀ c, c < Tf.tfBG → ∀ l, Cd.CdRan
     (∃ ℓ, ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) → SkUV S l :=
   fun _ hc l hr hex => Yr.yrLayAll S hc l hr hex
 
-/-- STATUS: OPEN (round 133, new node; REFUTE FIRST at the offset B_Γ²·2 + 1 and at the code ε_{B_Γ+1}: NO EVIDENCE,
+/-- STATUS: PROVED (Va.vsDirectX; round 215; was OPEN L, round 133, new node; REFUTE FIRST at the offset B_Γ²·2 + 1 and at the code ε_{B_Γ+1}: NO EVIDENCE,
 skZmRef)
 SIZE: L
 DIRECT READINGS FOR EVERY ATOM INDEX B_Γ ≤ B < X (X = Tl.tlX).  PROVED below B₂, the next fixed point of Γ (round
@@ -2258,12 +2259,15 @@ a gate (the base fields of Zm.ZmDS are gated; the gate of a fixed point F_λ(y) 
 fixed points of Γ are the new segment bases (Va.vsTopFix: the codes below F_λ(y) read below ϑˣ(Ω₁·(Ω₁+λ(x)) + K(x)),
 compared by levels, and cofinally: their supremum is a closed point ϑˣ(Ω₁·(Ω₁+j) + σ) read by a smaller code).  Big
 gates cannot be skipped: a union at a gate-0 limit of fixed points (e.g. F_1(Ω₁·2)) has members of every countable gate.
-Next Lean statement: Zb.ZbRS with a gated base (a gate-0 member for the unions), the layer at every fixed point F of
-Γ (a union) and the base layer at F + 1 (a ladder, Zm.ZmBase), then ZbDirect S X from the layers at the gate-0 fixed
-points tlG^n(Ω₁+1), cofinal in X (Zg.zbLayAt_mono).
+Round 214: Zb.ZbRS over a gated base (the layer of B_Γ for the constants of the unions; Zm.ZmDS.toRS gates every
+index above the base gate).  Round 215: PROVED with no hypothesis.  A layer at every fixed point B_Γ ≤ F < X of Γ
+(Va.vsLay_all, one induction over the fixed points): the union of the layers at the atom indices F' + 1 + b' below F
+(Va.vsLay_union; each from Zm.ZmDS.toRS over the digit system at the next ε-number, with the base layer of its segment
+the ladder over the layer at its segment base, Va.vsBase, Va.vsAt_of); a layer for the index F with gate below K
+(Va.vs_layAt); the tower B_Γ, F_{B_Γ}(0), … of fixed points of gate 0 is cofinal in X (Va.vsTw, Va.vsTw_cof), so
+ZbDirect S X by Zg.zbLayAt_mono (Va.vsDirectX).
 -/
-theorem skZbDirectX (S : InaccSeq.{0}) : Zb.ZbDirect S Tl.tlX := by
-  sorry
+theorem skZbDirectX (S : InaccSeq.{0}) : Zb.ZbDirect S Tl.tlX := Va.vsDirectX S
 
 /-- STATUS: PROVED (Va.vsGood_all3; rounds 209–213, new node)
 SIZE: L

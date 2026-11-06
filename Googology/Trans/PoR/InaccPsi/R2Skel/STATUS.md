@@ -1,12 +1,12 @@
-# R₂^C skeleton: status (round 213)
+# R₂^C skeleton: status (round 215)
 Root `R2Skel.Root.skNuC (S : InaccSeq)` = the conclusion of `Xo.xoRoadH` (ν_C = L(ω+1), …). Round 129: the root applies
 `Yq.yqRoadS` = `Xo.xoRoadH` with the bridge replaced by the shift `SkS.skShiftXo`; supply `SkS.skSupXo` (repaired `Xo.XoR`);
 frontier `SkF.skFront` → hUH/hLH/hVH/hVt; reading `SkR.skWall`, `SkR.skThHi` → `SkE.skEQ` → hT/hF. Round 130: Root unchanged.
 Round 131: `SkE.skEQ hRead hUH hLH hVt`. Round 132: `SkE.skEQ hRead hW hUH hLH hVt`, `hW = SkR.skWallCF S` (the code-free
 wall, used by `SkE.skTopK`). Round 133: Root unchanged; the bundle checks against the main build with only `declaration uses sorry` (68).
 ## Main progress number: OPEN / SUSPECT leaves on the road from `Root.skNuC`
-**15 distinct OPEN leaves (all L); 0 SUSPECT; 0 REFUTED** (round 182: skAtHi3 PROVED, Kz.kzAtHi3; 176: skPsi3OffRest2 PROVED, Ky.kyPsi3OffRest2; 174: skTopLawAll PROVED, Kx.kxTopLawAll; round 138: 17 after merges, then the road leaf skLayPastX was REFUTED and split; 137: 20; 135: 22 L; 134: 22; 133: 23; 132: 18 L; round 131: 18; round 130: 19 OPEN L; round 129: 19;
-rounds 127, 128: 17). Counted by a Lean walk over the constants used by `skNuC`. On the road: SkF skZbDirectX, skLayPastXθ, skLayPastTh,
+**14 distinct OPEN leaves (all L); 0 SUSPECT; 0 REFUTED** (round 215: skZbDirectX PROVED, Va.vsDirectX; round 182: skAtHi3 PROVED, Kz.kzAtHi3; 176: skPsi3OffRest2 PROVED, Ky.kyPsi3OffRest2; 174: skTopLawAll PROVED, Kx.kxTopLawAll; round 138: 17 after merges, then the road leaf skLayPastX was REFUTED and split; 137: 20; 135: 22 L; 134: 22; 133: 23; 132: 18 L; round 131: 18; round 130: 19 OPEN L; round 129: 19;
+rounds 127, 128: 17). Counted by a Lean walk over the constants used by `skNuC`. On the road: SkF skLayPastXθ, skLayPastTh,
 skBC{BaseUL, InR, RsSH}, skFix{Cont, CapVF}, skWin/Top{InR, Big}, skTopLwNo2;
 SkS skZlCfg, skLevImgHi4. Round 130: skWin/TopSpec → skWinIn, skTopIn, skTopLwNo2; skGapRng → skGapRngHi. Round 131:
 skJumpNoRng, skGapRngHi PROVED (hVt); skLay{Lo,Hi}Fix → skZbDirect, skLay{Lo,Hi}FixX; skWin/TopIn, skWin/TopRsIn → skWin/TopInR,
@@ -27,7 +27,7 @@ skNuC REDUCED L  (Yq.yqRoadS)
 │ │ │   skLayHi REDUCED L: skLayDirect PROVED L, skLayHiBig REDUCED L ─ skLayBelowBG, skLayHiFix REDUCED L
 │ │ │   round 131: ─ skZbDirect (B_Γ ≤ c < X), skLayLoFixX, skLayHiFixX (X ≤ c < Ω₂); skZbDirectE0 +3 PROVED
 │ │ │   round 132: skZbDirect holds below B_Γ·B_Γ with no hypothesis (skZgDirectSq); skZgTl, skZgRef +3 PROVED
-│ │ │   round 133: skZbDirect ─ skZbDirectX OPEN L (no hypothesis below B₂, the next fixed point of Γ: Va.vaDirectB2, skVaDirectB2, round 207; digit systems at every ε-number below X over gated segment bases: skVsGoodAll, round 213); skLay{Lo,Hi}FixX ─
+│ │ │   round 133: skZbDirect ─ skZbDirectX PROVED L (round 215, Va.vsDirectX; no hypothesis below B₂, the next fixed point of Γ: Va.vaDirectB2, skVaDirectB2, round 207; digit systems at every ε-number below X over gated segment bases: skVsGoodAll, round 213); skLay{Lo,Hi}FixX ─
 │ │ │     skLayPastX REFUTED (138) → skLayPastXθ, skLayPastTh OPEN L; 7 Zm PROVED. PROVED: skLayBelowBG L (129), skLayDirect0 M (127); 130 skFixImg …
 │ │ │   off the road: skLaySysY REDUCED L ─ skLaySysAll1, skLaySysYHi OPEN L; skLaySys_false, skFixReadX_false REFUTED S
 │ │ ├ skRegBhi REDUCED L: skBhiA REDUCED L ─ skBhiAcell PROVED M, skBhiAfar;  skBhiL  (round 133: both PROVED from skBC)
@@ -96,5 +96,5 @@ sorry 57 → 60, OPEN 28 (27 L, 1 S) → 27 (all L), SUSPECT 3 → 2, REFUTED 7 
   131 `Zb.zbGsCS_lt_BG`, `Zc.zcRsTerm_long_false`; 132 `Zf.zfNodesAll_false`; 133 `Zn.znSupInB_false`, `Zn.znRsTerm_false`, `Zo.zoReach0_ref`; 135 `Zs.zsBaseRs_lower`, `Zs.zsSup_false`.
 ## Suggested order of the next rounds
 1. Supply: skLevImgHi4 (nested ϑ-nodes: `Zf.zfDCl` by recursion on term size), skZlCfg (past the φ-ladder; EQ; υ-fixed carry).
-2. Region B, (C): skZbDirectX (level-generic `Zm.ZmGood2`), skLayPastXθ, skLayPastTh; skFix{Cont, CapVF}, skWin/Top{Big, InR}, skTopLwNo2; skBCBaseUL (big reading: Lemma RS with values past υ_{l₀+1}), skBC{InR, CapVH, RsSH}.
+2. Region B, (C): skLayPastXθ, skLayPastTh (skZbDirectX PROVED, round 215); skFix{Cont, CapVF}, skWin/Top{Big, InR}, skTopLwNo2; skBCBaseUL (big reading: Lemma RS with values past υ_{l₀+1}), skBC{InR, CapVH, RsSH}.
 3. Reading: skAtHi3 PROVED (rounds 177–182, Kz: T_K below K = Γ_{Ω_ω+1}, the top law Kz.kzTop, the offset law Kz.kzOff and the band moves Kz.kzMoveA on D_K).
