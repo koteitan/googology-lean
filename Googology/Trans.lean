@@ -2346,3 +2346,4 @@ import Googology.Trans.PoR.InaccPsi.R2.KnCls
 import Googology.Trans.PoR.InaccPsi.R2.KoOwn
 import Googology.Trans.PoR.InaccPsi.R2.KpCls
 import Googology.Trans.PoR.InaccPsi.R2.KqChain
+import Googology.Trans.PoR.InaccPsi.R2.KrPoly
