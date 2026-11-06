@@ -364,6 +364,7 @@ theorem kzTMove {a : Ordinal.{0}} (haA : a ≤ A)
       gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) :
     ∀ x, VbDK S l K x → x ∈ S.CSet a (S.psi a (Om (1 + 1))) →
       MvD S x ∧ MvD S (vbTK S l K x) ∧ RxEK S (vbW S l') K (Bc.bcB S n (vbTK S l K x)) ∧
+        vbK S l' (Bc.bcB S n (vbTK S l K x)) = Bc.bcB S n x ∧
         vbTK S l' K (Bc.bcB S n x) = Bc.bcB S n (vbTK S l K x) := by
   intro x hx hxC
   have hκ2 : S.InR (Om (1 + 1 : Ordinal.{0})) := InR_Om_succ 1
@@ -372,9 +373,8 @@ theorem kzTMove {a : Ordinal.{0}} (haA : a ≤ A)
     rw [vbW_eq hl hX]; exact gxTh_mono (psi_lt hκ2 a).le
   have hSC : SC (gxTh (upsilon l) (ldAtR S l) (S.psi a (Om (1 + 1)))) :=
     gxTh_SC hρSC (ldAt_GxAt _ _) (SC_psi hκ2 a) (hρ1.trans (psiS_bounds (S := S) a 1).1)
-  obtain ⟨hD, hDT, hBE, -, hmv⟩ := vbTK_move (n := n) hl hX hl' hX' hKB hSC hTW
+  exact vbTK_move (n := n) hl hX hl' hX' hKB hSC hTW
     (kzLeaf hl hX hl' hX' hKB hA hρ IH) hx (kzTE hl hX hKB hA hρ haA x hx hxC)
-  exact ⟨hD, hDT, hBE, hmv⟩
 
 end MoveA
 

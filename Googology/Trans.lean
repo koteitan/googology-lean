@@ -2379,3 +2379,6 @@ import Googology.Trans.PoR.InaccPsi.R2.KzInv
 import Googology.Trans.PoR.InaccPsi.R2.KzOff
 import Googology.Trans.PoR.InaccPsi.R2.KzTop
 import Googology.Trans.PoR.InaccPsi.R2.KzMove
+import Googology.Trans.PoR.InaccPsi.R2.KzBlk
+import Googology.Trans.PoR.InaccPsi.R2.KzMvB
+import Googology.Trans.PoR.InaccPsi.R2.KzBand
