@@ -108,7 +108,7 @@ theorem va_lt_at (hgx : max ω (yrQE E) < x) :
     rcases va_atom_cases2 heB ((hec.trans_lt hc).trans hEU) with hB | ⟨hAc, hjB', hjE'⟩ | hnA
     · rw [hB, vA_BG]; exact hDq
     · -- a smaller atom `Γ(j')`: `j' < j`
-      rw [vA_atom hAc hjE', vI_high hjB']
+      rw [vA_atom hAc hjE', vI_high hjB' (hjE'.trans ((hec.trans_lt hc).trans hEU))]
       have hj'j : yhJ (guE c) < yhJ E := by
         have h := hec.trans_lt hc
         rw [← va_at_E hAc hjE', ← va_at_E hA hjE] at h
@@ -134,7 +134,7 @@ omit hx hx1 in
 theorem va_ltTat : ∀ y, InE y → y < Om1 → max ω (yrQE E) < y → ∀ c, c < E → yrG c < y →
     vR c y < vA E y := by
   intro y hy hy1 hgy c hc hg
-  rw [vA_atom hA hjE, vI_high hjB]
+  rw [vA_atom hA hjE, vI_high hjB (hjE.trans hEU)]
   exact va_lt_at hE hBE hEU hlim hIH hA hjB hjE hy hy1 hgy c hc hg
 
 /-- **The readings of the codes below the atom are cofinal in `gq(I(x))`.** -/
@@ -170,7 +170,7 @@ theorem va_top_at (hgx : max ω (yrQE E) < x) :
         exact (natCast_lt_omega0 1).trans hωx
       exact yr_add hxP hωx _ _ (yr_add hxP hωx _ _ hgB h1) hgb
     refine ⟨hbE, by rw [yrG_atom hii]; exact (yrQ_le _).trans_lt hg1, ?_⟩
-    rw [vR_atom hii, vI_high hB1, Ordinal.add_sub_cancel]
+    rw [vR_atom hii, vI_high hB1 (hjb.trans (hjE.trans hEU)), Ordinal.add_sub_cancel]
   intro ν hν
   by_contra hcon
   push Not at hcon
@@ -297,19 +297,19 @@ noncomputable def vaTopAt : VaTop E where
     obtain ⟨-, hD2T, -, -, hD2X⟩ := va_D2_facts hx hx1
     obtain ⟨h1T, h1Ω⟩ := yw_one hx hx1
     have hcl : YwClosed x (ywV 1 1 x) := ywV_closed hx hx1 zero_lt_one h1T h1Ω h1T h1Ω
-    rw [vA_atom hA hjE, vI_high hjB]
+    rw [vA_atom hA hjE, vI_high hjB (hjE.trans hEU)]
     exact ⟨hqT, hqE, le_self_add.trans (gmq_gt hx hx1 hIT hI1).le, (hcl _ hIT hID2).trans hD2X⟩
   Vq := fun x hx hx1 hgx => by
     obtain ⟨hIT, hI1, -⟩ := va_at_I hE hBE hEU hlim hIH hA hjB hjE hx hx1 hgx
     obtain ⟨hsT, hs1⟩ := gl_T_succ hx hx1 hIT hI1
     obtain ⟨-, -, -, hqE, -⟩ := geq_facts hx hx1 hIT hI1
-    rw [vA_atom hA hjE, vI_high hjB]
+    rw [vA_atom hA hjE, vI_high hjB (hjE.trans hEU)]
     exact ⟨_, hsT, hs1, ((ev_isSuccLimit_of_inE hqE).add_one_lt (gmq_gt hx hx1 hIT hI1)).trans_le le_add_self,
       gmq_lt hx hx1 hsT hs1 (lt_add_one _)⟩
   W_T := fun x hx hx1 hgx => by
     obtain ⟨hIT, hI1, -⟩ := va_at_I hE hBE hEU hlim hIH hA hjB hjE hx hx1 hgx
     obtain ⟨hqT, -, hq1, -, -⟩ := geq_facts hx hx1 hIT hI1
-    rw [vA_atom hA hjE, vI_high hjB]
+    rw [vA_atom hA hjE, vI_high hjB (hjE.trans hEU)]
     exact ⟨hqT, hq1, va_eN_gq hx hx1 hIT hI1⟩
   V_pi := fun σ ρ hB hgσ => by
     have hρ1 : ρ < Om1 := hB.2.2.2
@@ -330,7 +330,7 @@ noncomputable def vaTopAt : VaTop E where
     have h0 : (0 : Ordinal.{0}) < σ := hB.1.pos
     have hq := ywV_pi hB (mem_TB_of_lt hB h0) (h0.trans hσ1) s1 hI1ρ
     rw [ywV_zero, pi_lt hB h0, ywV_zero, s2] at hq
-    rw [vA_atom hA hjE, vI_high hjB, vA_atom hA hjE, vI_high hjB]
+    rw [vA_atom hA hjE, vI_high hjB (hjE.trans hEU), vA_atom hA hjE, vI_high hjB (hjE.trans hEU)]
     exact hq
   W_pi := fun σ ρ hB hgσ => by
     have hρ1 : ρ < Om1 := hB.2.2.2
@@ -351,11 +351,11 @@ noncomputable def vaTopAt : VaTop E where
     have h0 : (0 : Ordinal.{0}) < σ := hB.1.pos
     have hq := ywV_pi hB (mem_TB_of_lt hB h0) (h0.trans hσ1) s1 hI1ρ
     rw [ywV_zero, pi_lt hB h0, ywV_zero, s2] at hq
-    rw [vA_atom hA hjE, vI_high hjB, vA_atom hA hjE, vI_high hjB]
+    rw [vA_atom hA hjE, vI_high hjB (hjE.trans hEU), vA_atom hA hjE, vI_high hjB (hjE.trans hEU)]
     exact hq
   lt := fun x hx hx1 hgx c hc hg => va_ltTat hE hBE hEU hlim hIH hA hjB hjE x hx hx1 hgx c hc hg
   top := fun x hx hx1 hgx ν hν => by
-    rw [vA_atom hA hjE, vI_high hjB] at hν
+    rw [vA_atom hA hjE, vI_high hjB (hjE.trans hEU)] at hν
     exact va_top_at hE hBE hEU hlim hIH hA hjB hjE hx hx1 hgx ν hν
 
 end Atom

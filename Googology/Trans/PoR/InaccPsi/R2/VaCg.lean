@@ -220,7 +220,7 @@ theorem va_eN {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hgx : M.Eg < x) :
     have hfixE : veblen 1 M.E = M.E := hA.1.veblen_right (gg_one_lt_of_SC hA.1)
     have hOE : Om1 < M.E := tfBG_gt.trans_le hBE
     have hN : eN M.E = yhPsi 1 M.E := (va_psi1_fix hfixE hOE).symm
-    rw [hN, vA_psi' le_rfl (hN ▸ va_G_lt_eN hGe'), vR_one, vR_base hE hGe', vA_atom hA hjE, vI_high hjB]
+    rw [hN, vA_psi' le_rfl (hN ▸ va_G_lt_eN hGe'), vR_one, vR_base hE hGe', vA_atom hA hjE, vI_high hjB (hjE.trans hEU)]
     obtain ⟨hDD2, hD2T, hD21, hD2E, -⟩ := va_D2_facts hx hx1
     have hgj : yrG (yhJ M.E) < x := by
       have h := yrQE_atom hA hjE ▸ hQ

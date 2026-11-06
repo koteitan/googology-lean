@@ -112,6 +112,43 @@ theorem va_atom_cases2 {e : Ordinal.{0}} (hBe : tfBG ≤ e) (heB : e < vaB2) :
     · left; rw [← h1, zb_gcG_BG]
   · exact Or.inr (Or.inr hA)
 
+/-- **Past `B_Γ` below `B₂` the largest fixed point of `Γ` below `j` is `B_Γ`.** -/
+theorem va_fpG_BG {j : Ordinal.{0}} (hj : tfBG < j) (hjB : j < vaB2) : VaFixG j ∧ vaFpG j = tfBG := by
+  refine ⟨⟨tfBG, tfBG_fix, tfBG_gt, hj⟩, ?_⟩
+  have hset : {F | gamma F = F ∧ Om1 < F ∧ F < j} = {tfBG} := by
+    ext F
+    simp only [Set.mem_setOf_eq, Set.mem_singleton_iff]
+    constructor
+    · rintro ⟨hF, hOF, hFj⟩
+      refine le_antisymm ?_ (tfBG_le hF hOF)
+      by_contra hc
+      exact absurd (hFj.trans hjB) (not_lt.2 (va_B2_min (not_le.1 hc) hF))
+    · rintro rfl; exact ⟨tfBG_fix, tfBG_gt, hj⟩
+  unfold vaFpG; rw [hset, csSup_singleton]
+
+theorem vI_high {j : Ordinal.{0}} (hj : tfBG < j) (hjB : j < vaB2) (x : Ordinal.{0}) :
+    vI j x = ywV 1 0 x + vR (j - (tfBG + 1)) x := by
+  obtain ⟨hF, hp⟩ := va_fpG_BG hj hjB
+  unfold vI; rw [if_pos hF, hp, vR_BG]
+
+/-- **Below `B₂` the only fixed-point atom is `B_Γ`.** -/
+theorem va_fix_atom_BG {e : Ordinal.{0}} (hA : YhAt e) (hi : ¬ yhJ e < e) (heB : e < vaB2) : e = tfBG := by
+  obtain ⟨j, rfl⟩ := yhAt_iff.1 hA
+  rw [yhJ_gcG] at hi
+  have hjj : j = gcG j := le_antisymm (gcG_strictMono.le_apply) (not_lt.1 hi)
+  have hE : InE (gcG j) := Low.opow_eq_self_of_SC (gcG_SC j)
+  have hO : Om1 < gcG j := hA.2
+  have hjE : InE j := by rw [hjj]; exact hE
+  have hjO : Om1 < j := by rw [hjj]; exact hO
+  have h1 : Om1 + 1 + j = j := gl_absorb hjE hjO
+  have hfix : gamma (gcG j) = gcG j := by
+    rw [← hjj]
+    conv_lhs => rw [← h1]
+    rw [← tf_gcG]; exact hjj.symm
+  rcases (tfBG_le hfix hO).lt_or_eq with h | h
+  · exact absurd heB (not_lt.2 (va_B2_min h hfix))
+  · exact h.symm
+
 /-! ## The closed point after `D(x)` -/
 
 section D2
@@ -293,13 +330,13 @@ theorem va_lt_D2 {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) :
           rw [yrQE_atom hAt hJ] at hgQE; exact yrG_of_Q hωx hgQE
         have hIlt : vI (yhJ (guE c)) x < ywV 1 1 x := by
           by_cases hjB : tfBG < yhJ (guE c)
-          · rw [vI_high hjB]
+          · rw [vI_high hjB (hJc.trans hc)]
             have hgo : yrG (yhJ (guE c) - (tfBG + 1)) < x := (va_off_gate hjB).trans_lt (max_lt hωx hgJ)
             have ho : yhJ (guE c) - (tfBG + 1) < c := (Ordinal.sub_le_self _ _).trans_lt hJc
             exact (inE_indec hD2E).add_lt hDD2 (IH _ ho (ho.trans hc) hgo)
           · rw [vI_low hjB]; exact IH _ hJc (hJc.trans hc) hgJ
         exact hcl _ (vz_T_down hx hx1 hD2T hD21 hIlt.le) hIlt
-      · rw [vA_atom_fix hAt hJ]; exact hDD2
+      · rw [va_fix_atom_BG hAt hJ ((hec.trans_lt hc)), vA_BG]; exact hDD2
     · rw [vA_psi hAt]
       have hK := yh_lev_lt hGc hAt
       have hI := yh_idx_lt hGc hAt
