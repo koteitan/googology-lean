@@ -9,13 +9,13 @@ in `Yr.yrR`: a code `c ≥ G` in the bracket of `e = guE c`, `c = e^j·d + r`, r
 non-atom `e = yhPsi α η` reads `ϑˣ(Ω₁·α(x) + η(x))`.  Below `B_Γ` it is `Yr.yrR` (`vR_yr`); the gate is `Yr.yrG`.
 The only fixed point of `Γ` below `Γ_{B_Γ+1}` is `B_Γ`, so this is the reading of every code below `Γ_{B_Γ+1}`.
 
-* `vR`, `vA` (the reading of an `ε`-number code as a base), `vA_atom`, `vA_atom_fix`, `vA_psi`;
+* `vR`, `vI` (the reading of an atom index), `vA` (the reading of an `ε`-number code as a base), `vA_atom`, `vA_atom_fix`, `vA_psi`;
 * `vR_low`, `vR_dec`, `vR_cnf`, `vR_base`, `vR_atom`, `vR_BG` (**`B_Γ` reads `D(x)`**), `vR_psi`, `vR_zero`,
   `vR_nat`, `vR_one`, `vR_succ`, `vR_yr` (**`vR = yrR` below `B_Γ`**);
 * `va_psi1_fix` (**`yhPsi 1 E = ε_{E+1}` at a fixed point `E > Ω₁` of `φ(1, ·)`**), `va_psi1_succ`
   (**`yhPsi 1 (η+1) = ε_{yhPsi 1 η + 1}`**).
 
-No new axiom.  New definitions: `vR`, `vA`.
+No new axiom.  New definitions: `vR`, `vI`, `vA`.
 -/
 
 set_option autoImplicit false
@@ -31,10 +31,14 @@ open Ordinal Order Set Googology.Trans.PoR.InaccPsi.R2 Googology.Notation.InaccP
 /-! ## The reading -/
 
 open Classical in
-/-- **The reading** of a code at `x`: as `Yr.yrR`, with a fixed point `Γ(i) = i` read `D(x)`. -/
+/-- **The reading** of a code at `x`: as `Yr.yrR`, with a fixed point `Γ(i) = i` read `D(x)`, and an atom `Γ(j)`,
+`B_Γ < j`, read `gq(D(x) + (j − (B_Γ+1))(x))` (the index past the closed point `D(x)`). -/
 noncomputable def vR (c x : Ordinal.{0}) : Ordinal.{0} :=
   if h : gcG 0 ≤ c then
-    (if hA : YhAt (guE c) then (if hi : yhJ (guE c) < guE c then gq (vR (yhJ (guE c)) x) x else ywV 1 0 x)
+    (if hA : YhAt (guE c) then (if hi : yhJ (guE c) < guE c then
+        gq (if Tf.tfBG < yhJ (guE c) then ywV 1 0 x + vR (yhJ (guE c) - (Tf.tfBG + 1)) x
+          else vR (yhJ (guE c)) x) x
+        else ywV 1 0 x)
       else glA (vR (yhK (guE c)) x) (vR (yhI (guE c)) x) x) ^ vR (log (guE c) c) x *
       vR (c / guE c ^ log (guE c) c) x + vR (c % guE c ^ log (guE c) c) x
   else glR c x
@@ -42,20 +46,33 @@ termination_by c
 decreasing_by
   all_goals first
     | exact yr_ix_lt h hi
+    | exact (Ordinal.sub_le_self _ _).trans_lt (yr_ix_lt h hi)
     | exact yh_lev_lt h hA
     | exact yh_idx_lt h hA
     | exact (gl_parts (yh_gfE_le h)).2.2.2.2.2.1
     | exact (gl_parts (yh_gfE_le h)).2.2.2.2.2.2.2
     | exact (gl_parts (yh_gfE_le h)).2.2.2.2.2.2.1
 
+open Classical in
+/-- **The reading of an atom index**: `D(x) + (j − (B_Γ+1))(x)` past `B_Γ`, `j(x)` below. -/
+noncomputable def vI (j x : Ordinal.{0}) : Ordinal.{0} :=
+  if Tf.tfBG < j then ywV 1 0 x + vR (j - (Tf.tfBG + 1)) x else vR j x
+
+theorem vI_low {j : Ordinal.{0}} (hj : ¬ Tf.tfBG < j) (x : Ordinal.{0}) : vI j x = vR j x := by
+  unfold vI; rw [if_neg hj]
+
+theorem vI_high {j : Ordinal.{0}} (hj : Tf.tfBG < j) (x : Ordinal.{0}) :
+    vI j x = ywV 1 0 x + vR (j - (Tf.tfBG + 1)) x := by
+  unfold vI; rw [if_pos hj]
+
 /-- **The reading of an `ε`-number code as a base.** -/
 noncomputable def vA (e x : Ordinal.{0}) : Ordinal.{0} := by
   classical
-  exact if YhAt e then (if yhJ e < e then gq (vR (yhJ e) x) x else ywV 1 0 x)
+  exact if YhAt e then (if yhJ e < e then gq (vI (yhJ e) x) x else ywV 1 0 x)
     else glA (vR (yhK e) x) (vR (yhI e) x) x
 
 theorem vA_atom {e : Ordinal.{0}} (h : YhAt e) (hi : yhJ e < e) (x : Ordinal.{0}) :
-    vA e x = gq (vR (yhJ e) x) x := by
+    vA e x = gq (vI (yhJ e) x) x := by
   unfold vA; rw [if_pos h, if_pos hi]
 
 theorem vA_atom_fix {e : Ordinal.{0}} (h : YhAt e) (hi : ¬ yhJ e < e) (x : Ordinal.{0}) : vA e x = ywV 1 0 x := by
@@ -74,7 +91,7 @@ theorem vR_dec {c : Ordinal.{0}} (h : gcG 0 ≤ c) (x : Ordinal.{0}) :
   rw [vR, dif_pos h]
   by_cases hA : YhAt (guE c)
   · by_cases hi : yhJ (guE c) < guE c
-    · rw [dif_pos hA, dif_pos hi, vA_atom hA hi]
+    · rw [dif_pos hA, dif_pos hi, vA_atom hA hi]; rfl
     · rw [dif_pos hA, dif_neg hi, vA_atom_fix hA hi]
   · rw [dif_neg hA, vA_psi hA]
 
@@ -98,8 +115,8 @@ theorem vR_base {e : Ordinal.{0}} (he : InE e) (hGe : gcG 0 ≤ e) (x : Ordinal.
   rw [← h1] at h
   rw [h, vR_one, vR_zero, opow_one, mul_one, add_zero]
 
-/-- **The base atom `Γ(i)`, `i < Γ(i)`, reads `Γ_{x+1+i(x)}`.** -/
-theorem vR_atom {i : Ordinal.{0}} (hi : i < gcG i) (x : Ordinal.{0}) : vR (gcG i) x = gq (vR i x) x := by
+/-- **The base atom `Γ(i)`, `i < Γ(i)`, reads `gq(i(x))` below `B_Γ`, `gq(D(x) + (i − (B_Γ+1))(x))` past it.** -/
+theorem vR_atom {i : Ordinal.{0}} (hi : i < gcG i) (x : Ordinal.{0}) : vR (gcG i) x = gq (vI i x) x := by
   have hE : InE (gcG i) := Low.opow_eq_self_of_SC (gcG_SC i)
   have hi' : yhJ (gcG i) < gcG i := by rw [yhJ_gcG]; exact hi
   rw [vR_base hE (gcG_le zero_le), vA_atom (yhAt_gcG i) hi', yhJ_gcG]
@@ -160,7 +177,8 @@ theorem vR_yr : ∀ c, c < Tf.tfBG → ∀ x, vR c x = yrR c x := by
       obtain ⟨hii, hie⟩ := yr_atom_idx hi (hEc.trans_lt hc)
       have hJ : yhJ (guE c) = i := by rw [hi, yhJ_gcG]
       have hJe : yhJ (guE c) < guE c := by rw [hJ]; exact hie
-      rw [vA_atom hAt hJe, yrA_atom hAt hJe, IH _ (hJe.trans_le hEc) ((hJe.trans_le hEc).trans hc)]
+      rw [vA_atom hAt hJe, yrA_atom hAt hJe, vI_low (not_lt.2 ((hJe.trans_le hEc).trans hc).le),
+        IH _ (hJe.trans_le hEc) ((hJe.trans_le hEc).trans hc)]
     · have hK := yh_lev_lt hcG hAt
       have hI := yh_idx_lt hcG hAt
       rw [vA_psi hAt, yrA_psi hAt, IH _ hK (hK.trans hc), IH _ hI (hI.trans hc)]
