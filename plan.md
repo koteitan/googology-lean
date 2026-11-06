@@ -11,7 +11,10 @@ The remaining work, arranged by the cells of the README tables. Items not being 
       - also: window RS input and cap off υ-fixed restarts, Θ = ρ at isolated ones; atoms move to K_Y; base ι(Ω₂): reach, cap; codes ≤ K_ω read short.
       - road yqRoadS (hyp.: UPPER, LOWER, cap past the frontier; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; the shift XoShift; XoSup): ν_C = L(ω+1).
       - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): OPEN leaves on the road: 14 (all L); skZbDirectX proved (round 215); skTopLawAll, skPsi3OffRest2 and skAtHi3 proved (Kx.kxTopLawAll, Ky.kyPsi3OffRest2, Kz.kzAtHi3); root vacuity open.
-      - 🤖 next: done: direct readings of every layer below X (skZbDirectX = Va.vsDirectX: digit systems at every ε-number below X, a layer at every fixed point of Γ). Left on the road (14 leaves): the layers past X (skLayPastXθ, skLayPastTh), the window and top leaves, the skBC leaves, skFix leaves, skZlCfg, skLevImgHi4.
+      - 🤖 next: the layers past X (skLayPastXθ), first X ≤ c < B₂ = ψ_{Ω₂}(ε_{Ω₂+1}) (Phase C), then B₂ ≤ c < θ.
+        - done (Qc*): the atom system qcU of the codes below B₂; Lemma IMG below every ϑᵖ(Ω₁·N), Ω₁ ≤ N < ε_{Ω₁+1}, data below ρ (Qc.qc_img_rst; the layer tops may pass X^x, Qc.QcBd); the reading vQ, gates qcG, base readings qcA of every code below B₂.
+        - 🤖 left: digit systems at every ε-number E ∈ [X, B₂) (as Va.vsGood_all3), layers at every fixed point of Γ in [X, B₂) (as Va.VaLay), then Zm.ZmPastAt S c for X ≤ c < B₂.
+        - then: the other road leaves (skLayPastTh, windows and tops, skBC, skFix, skZlCfg, skLevImgHi4).
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
