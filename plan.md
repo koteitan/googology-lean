@@ -11,11 +11,12 @@ The remaining work, arranged by the cells of the README tables. Items not being 
       - also: window RS input and cap off υ-fixed restarts, Θ = ρ at isolated ones; atoms move to K_Y; base ι(Ω₂): reach, cap; codes ≤ K_ω read short.
       - road yqRoadS (hyp.: UPPER, LOWER, cap past the frontier; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; the shift XoShift; XoSup): ν_C = L(ω+1).
       - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): OPEN leaves on the road: 14 (all L); skZbDirectX proved (round 215); skTopLawAll, skPsi3OffRest2 and skAtHi3 proved (Kx.kxTopLawAll, Ky.kyPsi3OffRest2, Kz.kzAtHi3); root vacuity open.
-      - 🤖 next: the layers past X (skLayPastXθ), first X ≤ c < B₂ = ψ_{Ω₂}(ε_{Ω₂+1}) (Phase C), then B₂ ≤ c < θ.
+      - 🤖 next: the layers past X (skLayPastXθ): X ≤ c < B₂ = ψ_{Ω₂}(ε_{Ω₂+1}) done (Phase C), then B₂ ≤ c < θ.
         - done (Qc*): the atom system qcU of the codes below B₂; Lemma IMG below every ϑᵖ(Ω₁·N), Ω₁ ≤ N < ε_{Ω₁+1}, data below ρ (Qc.qc_img_rst; the layer tops may pass X^x, Qc.QcBd); the reading vQ, gates qcG, base readings qcA of every code below B₂.
         - done: digit systems below B₂ (Qc.QDS, its step and raised gates); the gates qcG of the codes (a code over Z has its gate below Z, Qc.qc_gate); the level reading λ(x) of H_λ(y) (Qc.qcLv_main); the readings of fixed points of Γ are closed (Qc.qc_fix_cl); Qc.QsGood with the step (Qc.qsGood_succ) and the union at a limit (Qc.qsGood_lim) with the tops at non-atoms and atoms (Qc.qsTopNA, Qc.qsTopAt).
         - done: the top at a fixed point H_λ(y) of Γ in [X, B₂) (Qc.qsTopFix: the level readings cofinal, Qc.qcLv_cof, and exact, Qc.qs_lv_pi); Qc.QsGood at every ε-number in [B_Γ, B₂) (Qc.qsGood_all).
-        - 🤖 left: the layers (as Va.VaLay), Zm.ZmPastAt S c for X ≤ c < B₂.
+        - done: the layers at the fixed points of Γ below B₂ (Qc.qsLay_all), Zm.ZmPastAt S c for every c < B₂ (Qc.qc_past).
+        - 🤖 left: B₂ ≤ c < θ (Phase D: an atom system past B₂), then skLayPastXθ.
         - then: the other road leaves (skLayPastTh, windows and tops, skBC, skFix, skZlCfg, skLevImgHi4).
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
