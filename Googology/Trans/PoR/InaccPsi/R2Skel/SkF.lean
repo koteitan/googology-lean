@@ -38,6 +38,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZgSq
 import Googology.Trans.PoR.InaccPsi.R2.ZmRef
 import Googology.Trans.PoR.InaccPsi.R2.VaDir
 import Googology.Trans.PoR.InaccPsi.R2.VaDir2
+import Googology.Trans.PoR.InaccPsi.R2.VaAll
 import Googology.Trans.PoR.InaccPsi.R2.ZoBC
 import Googology.Trans.PoR.InaccPsi.R2.ZrBase
 import Googology.Trans.PoR.InaccPsi.R2.ZrRead
@@ -2251,13 +2252,25 @@ EVERY ε-number base below B₂ by one induction (Va.vaGood_all2: Zm.ZmDS.step a
 top data Va.VaTop at limits: Va.vaTopNA at non-atoms, cofinality by Gl.glA_min; Va.vaTopAt at the atoms Γ(j),
 cofinality by Xk.xk_sc_iff and Zb.zb_lt_lim_iff); no closed point of ν ↦ gq ν x between D(x) and D₂(x) =
 ϑˣ(Ω₁·(Ω₁+1) + 1) (Va.va_nonclosed); the tower of Γ-iterates with gates below K).  The digit systems carry the segment
-base B and its reading Dv (round 201).  Next Lean statement: the fixed points of Γ in [B₂, X): the base at a fixed
-point F (read Yw.ywV at its kind; a layer at F by Yw.ywLimB, the base layer of F + 1 by Yw.ywLadB, a Zm.ZmBase), the
-segments (F, F') over the base F (the readings of the atoms Γ(F + 1 + o) as gq(Dv + o(x))), and an induction over the
-fixed points (segment bases with ungated readings; the others covered by monotonicity).
+base B and its reading Dv (round 201).  Rounds 209–213: A DIGIT SYSTEM AT EVERY ε-NUMBER BASE B_Γ ≤ E < X
+(skVsGoodAll, Va.vsGood_all3), over the segment base vaFB E (the largest fixed point of Γ ≤ E) read vR (vaFB E) with
+a gate (the base fields of Zm.ZmDS are gated; the gate of a fixed point F_λ(y) is that of λ and of y − y₀(λ)); the
+fixed points of Γ are the new segment bases (Va.vsTopFix: the codes below F_λ(y) read below ϑˣ(Ω₁·(Ω₁+λ(x)) + K(x)),
+compared by levels, and cofinally: their supremum is a closed point ϑˣ(Ω₁·(Ω₁+j) + σ) read by a smaller code).  Big
+gates cannot be skipped: a union at a gate-0 limit of fixed points (e.g. F_1(Ω₁·2)) has members of every countable gate.
+Next Lean statement: Zb.ZbRS with a gated base (a gate-0 member for the unions), the layer at every fixed point F of
+Γ (a union) and the base layer at F + 1 (a ladder, Zm.ZmBase), then ZbDirect S X from the layers at the gate-0 fixed
+points tlG^n(Ω₁+1), cofinal in X (Zg.zbLayAt_mono).
 -/
 theorem skZbDirectX (S : InaccSeq.{0}) : Zb.ZbDirect S Tl.tlX := by
   sorry
+
+/-- STATUS: PROVED (Va.vsGood_all3; rounds 209–213, new node)
+SIZE: L
+A DIGIT SYSTEM AT EVERY ε-NUMBER BASE B_Γ ≤ E < X, read by Va.vR over the segment base Va.vaFB E (the largest fixed
+point of Γ ≤ E): one induction (the step at successors, the union at limits with the top data at a non-atom, at an
+atom Γ(j) past its segment base, at a fixed point of Γ). -/
+theorem skVsGoodAll : ∀ E, InE E → Tf.tfBG ≤ E → E < Tl.tlX → Va.VsGood E := Va.vsGood_all3
 
 /-- STATUS: PROVED (Va.vaDirectB2; round 207, new node)
 SIZE: L

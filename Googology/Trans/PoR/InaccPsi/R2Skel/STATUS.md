@@ -1,4 +1,4 @@
-# R₂^C skeleton: status (round 207)
+# R₂^C skeleton: status (round 213)
 Root `R2Skel.Root.skNuC (S : InaccSeq)` = the conclusion of `Xo.xoRoadH` (ν_C = L(ω+1), …). Round 129: the root applies
 `Yq.yqRoadS` = `Xo.xoRoadH` with the bridge replaced by the shift `SkS.skShiftXo`; supply `SkS.skSupXo` (repaired `Xo.XoR`);
 frontier `SkF.skFront` → hUH/hLH/hVH/hVt; reading `SkR.skWall`, `SkR.skThHi` → `SkE.skEQ` → hT/hF. Round 130: Root unchanged.
@@ -27,7 +27,7 @@ skNuC REDUCED L  (Yq.yqRoadS)
 │ │ │   skLayHi REDUCED L: skLayDirect PROVED L, skLayHiBig REDUCED L ─ skLayBelowBG, skLayHiFix REDUCED L
 │ │ │   round 131: ─ skZbDirect (B_Γ ≤ c < X), skLayLoFixX, skLayHiFixX (X ≤ c < Ω₂); skZbDirectE0 +3 PROVED
 │ │ │   round 132: skZbDirect holds below B_Γ·B_Γ with no hypothesis (skZgDirectSq); skZgTl, skZgRef +3 PROVED
-│ │ │   round 133: skZbDirect ─ skZbDirectX OPEN L (no hypothesis below B₂, the next fixed point of Γ: Va.vaDirectB2, skVaDirectB2, round 207); skLay{Lo,Hi}FixX ─
+│ │ │   round 133: skZbDirect ─ skZbDirectX OPEN L (no hypothesis below B₂, the next fixed point of Γ: Va.vaDirectB2, skVaDirectB2, round 207; digit systems at every ε-number below X over gated segment bases: skVsGoodAll, round 213); skLay{Lo,Hi}FixX ─
 │ │ │     skLayPastX REFUTED (138) → skLayPastXθ, skLayPastTh OPEN L; 7 Zm PROVED. PROVED: skLayBelowBG L (129), skLayDirect0 M (127); 130 skFixImg …
 │ │ │   off the road: skLaySysY REDUCED L ─ skLaySysAll1, skLaySysYHi OPEN L; skLaySys_false, skFixReadX_false REFUTED S
 │ │ ├ skRegBhi REDUCED L: skBhiA REDUCED L ─ skBhiAcell PROVED M, skBhiAfar;  skBhiL  (round 133: both PROVED from skBC)
