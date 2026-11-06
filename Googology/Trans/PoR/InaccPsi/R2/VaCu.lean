@@ -32,7 +32,7 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.I
 /-! ## Gates and codes -/
 
 /-- **A code `c < Γ_{B_Γ+1}` over a strongly critical `Z ≤ Ω₁` has gate below `Z`.** -/
-theorem va_gate {Z : Ordinal.{0}} (hZ : SC Z) (hZ1 : Z ≤ Om1) : ∀ c, TlCl Z c → c < vaU → yrG c < Z := by
+theorem va_gate {Z : Ordinal.{0}} (hZ : SC Z) (hZ1 : Z ≤ Om1) : ∀ c, TlCl Z c → c < vaB2 → yrG c < Z := by
   have hZa : ∀ u v, u < Z → v < Z → u + v < Z := fun u v hu hv => hZ.isPrincipal hu hv
   have hZp : ∀ u v, u < Z → v < Z → veblen u v < Z := fun u v hu hv => hZ.2 u hu v hv
   have hZw : ∀ u, u < Z → ω ^ u < Z := fun u hu => by
@@ -56,13 +56,34 @@ theorem va_gate {Z : Ordinal.{0}} (hZ : SC Z) (hZ1 : Z ≤ Om1) : ∀ c, TlCl Z 
     · rw [veblen_zero_apply]
       exact yr_opow_gate hZw hωZ y hgy
     · exact yr_phi_gate hωZ hx0 (va_G_le_BG.trans hge) (ihx (lt_of_le_of_lt (left_le_veblen x y) h)) hgy
-  | @atom β y hβ hy h1 _ _ =>
+  | @atom β y hβ hy h1 _ ihy =>
     intro h
     rcases lt_or_ge (rhF β y) tfBG with hlt | hge
     · exact hlow _ (TlCl.atom hβ hy h1) hlt
     have hA : YhAt (rhF β y) := ⟨rhF_SC β y, h1⟩
-    rcases va_atom_cases hge h with heq | hnA
+    rcases va_atom_cases2 hge h with heq | ⟨-, hjB, hjE⟩ | hnA
     · rw [heq, yrG_base (Low.opow_eq_self_of_SC tfBG_SC) va_G_le_BG, va_QE_BG]; exact hZ.1
+    · -- an atom `Γ(j)`: `β = 0` and the index is `y`
+      obtain ⟨j, hj⟩ := yhAt_iff.1 hA
+      have hJ : yhJ (rhF β y) = j := by rw [hj, yhJ_gcG]
+      rw [hJ] at hjB hjE
+      have hjg : j < gcG j := by rw [← hj]; exact hjE
+      have hβ0 : β = 0 := by
+        by_contra hβ
+        have hfix : gamma (rhF β y) = rhF β y := by
+          have := rhF_fix_lower (pos_iff_ne_zero.2 hβ) y; rwa [rhF_zero] at this
+        exact absurd h (not_lt.2 (va_B2_min (hjB.trans hjE) hfix))
+      subst hβ0
+      have hBE : InE tfBG := Low.opow_eq_self_of_SC tfBG_SC
+      have hjy : y = j := by
+        have e1 : gamma y = gamma (Om1 + 1 + j) := by rw [← tf_gcG, ← hj, rhF_zero]
+        have e2 := gamma_inj.1 e1
+        obtain ⟨d, hd⟩ := exists_add_of_le hjB.le
+        rw [e2, hd, ← add_assoc, gl_absorb hBE tfBG_gt]
+      have hyB : y < vaB2 := (rhF_le_self 0 y).trans_lt h
+      rw [hj, yrG_atom hjg]
+      rw [hjy] at hyB ihy
+      exact (yrQ_le j).trans_lt (ihy hyB)
     · exact absurd hA hnA
 
 theorem va_cl_lam {Z : Ordinal.{0}} (hZ : 0 < Z) (α : Ordinal.{0}) {η : Ordinal.{0}} (h : TlCl Z η) :
@@ -98,7 +119,7 @@ theorem va_U_lt_X : vaU < tlX := by
 
 section Union
 
-variable {E : Ordinal.{0}} (hE : InE E) (hBE : tfBG < E) (hEU : E < vaU)
+variable {E : Ordinal.{0}} (hE : InE E) (hBE : tfBG < E) (hEU : E < vaB2)
   (hlim : ∀ e, InE e → e < E → eN e < E) (hIH : ∀ e, InE e → tfBG ≤ e → e < E → VaGood e)
 
 include hE hBE hEU hlim hIH
@@ -110,7 +131,8 @@ theorem va_cl_code {Z : Ordinal.{0}} (hZ : SC Z) {c : Ordinal.{0}} (hc : c < E) 
   exact M.cl c Z hZ hcM (va_memG hωZ hEg hg hG hcM hg)
 
 /-- **A member whose base reading is below `vA E`** at every base above the gates. -/
-theorem va_memV {c : Ordinal.{0}} (hc : c < E) :
+theorem va_memV (htop : ∀ y, InE y → y < Om1 → max ω (yrQE E) < y → ∀ c, c < E → yrG c < y →
+      vR c y < vA E y) {c : Ordinal.{0}} (hc : c < E) :
     ∃ M : ZmDS, c < M.E ∧ M.E < E ∧ M.Eg ≤ max ω (yrG c) ∧
       (∀ y, InE y → y < Om1 → max ω (yrQE E) < y → yrG c < y → M.V y ≤ vA E y) ∧
       (∀ c', c' < M.E → ∀ y, InE y → y < Om1 → M.G c' < y → M.R c' y = vR c' y) ∧
@@ -122,17 +144,17 @@ theorem va_memV {c : Ordinal.{0}} (hc : c < E) :
   have hgM : M.Eg < y := hEg.trans_lt (max_lt hωy hg)
   have hMEE : InE M.E := by rw [hME]; exact eN_E e
   have hGME : gcG 0 ≤ M.E := (va_G_le_BG.trans heB).trans (hME ▸ (lt_eN e).le)
-  have heU : e < vaU := (hemax.trans_lt (max_lt hc hBE)).trans hEU
+  have heU : e < vaB2 := (hemax.trans_lt (max_lt hc hBE)).trans hEU
   have hgME : yrG M.E < y := by
     rw [yrG_base hMEE hGME, hME]
-    exact va_QE_eN_lt he heB (heU.trans_le va_U_le_B2) hyl hωy ((le_max_right _ _).trans_lt (hEgeq ▸ hgM))
-  have hlt := va_lt_top hE hBE hEU hlim hIH hy hy1 hgy M.E hMlt hgME
+    exact va_QE_eN_lt he heB heU hyl hωy ((le_max_right _ _).trans_lt (hEgeq ▸ hgM))
+  have hlt := htop y hy hy1 hgy M.E hMlt hgME
   rw [vR_base hMEE hGME, ← (hV y hy hy1 hgM).2] at hlt
   exact hlt.le
 
 open Classical in
 /-- **THE UNION AT A LIMIT `ε`-NUMBER BASE.** -/
-noncomputable def vaCU : ZmDS where
+noncomputable def vaCU (hnA : ¬ YhAt E) : ZmDS where
   E := E
   Ei := if yhK E = 1 then glLam 1 (yhI E) else E
   V := fun x => if max ω (yrQE E) < x then vA E x else 1
@@ -143,7 +165,7 @@ noncomputable def vaCU : ZmDS where
   B := tfBG
   Dv := ywV 1 0
   E_eq := by
-    obtain ⟨-, -, hk1, -, -, hpsi⟩ := va_dat hE hBE hEU
+    obtain ⟨-, -, hk1, -, -, hpsi⟩ := va_dat hE hBE hEU hnA
     split_ifs with h1
     · have h := hpsi
       rw [h1, yhPsi_ne va_one_notAt] at h
@@ -157,9 +179,9 @@ noncomputable def vaCU : ZmDS where
   B_cl := fun _ hZ => zbBG_tl hZ.1
   Dv_T := fun x hx hx1 => zmD_T hx hx1
   Dv_pi := fun _ _ hB => zmD_pi hB
-  E_X := hEU.trans va_U_lt_X
+  E_X := hEU.trans va_B2_lt_X
   Ei_cl := fun Z hZ hgZ => by
-    obtain ⟨hnA, -, hk1, hkE, hiE, hpsi⟩ := va_dat hE hBE hEU
+    obtain ⟨hnA, -, hk1, hkE, hiE, hpsi⟩ := va_dat hE hBE hEU hnA
     have hωZ : ω < Z := omega0_lt_inE (Low.opow_eq_self_of_SC hZ)
     have hQ := yrQE_psi hnA
     have hQle : max (yrQ (yhK E)) (yrQ (yhI E)) < Z := by rw [← hQ]; exact (le_max_right _ _).trans_lt hgZ
@@ -168,33 +190,31 @@ noncomputable def vaCU : ZmDS where
     split_ifs with h1
     · exact va_cl_lam hZ.1 1 hi
     · have h := va_cl_psi hZ.1 hk hi; rwa [hpsi] at h
-  nfx := fun y h1 h2 hΓ => by
-    have hSC : SC y := by have := Lq.lq_gamma_SC y; rwa [hΓ] at this
-    rcases va_atom_cases h1.le (h2.trans_lt hEU) with h | h
-    · exact absurd h h1.ne'
-    · exact h ⟨hSC, tfBG_gt.trans h1⟩
+  nfx := fun y h1 h2 hΓ => absurd (h2.trans_lt hEU) (not_lt.2 (va_B2_min h1 hΓ))
   Eg_le := fun c hc0 => by
     show max ω (yrQE E) ≤ (if c = 0 then 0 else max (max ω (yrQE E)) (yrG c))
     rw [if_neg hc0]; exact le_max_left _ _
   V_T := fun x hx hx1 hgx => by
     show (if max ω (yrQE E) < x then vA E x else 1) ∈ Tset x ∧ _
     rw [if_pos hgx]
-    obtain ⟨-, -, hv1, hkT, hk1', hiT, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hx hx1 hgx
+    obtain ⟨-, -, hv1, hkT, hk1', hiT, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hx hx1 hnA hgx
     obtain ⟨hVT, -, -, hVE, -, -⟩ := glA_facts hx hx1 hv1 hkT hk1' hiT hi1
     rw [← hA] at hVT hVE
-    exact ⟨hVT, hVE, (va_D_lt hE hBE hEU hlim hIH hx hx1 hgx).le,
-      (va_V_lt_gq hE hBE hEU hlim hIH hx hx1 hgx).trans (zm_gq_X hx hx1)⟩
+    exact ⟨hVT, hVE, (va_D_lt hE hBE hEU hlim hIH hx hx1 hnA hgx).le,
+      (va_V_lt_D2 hE hBE hEU hlim hIH hx hx1 hnA hgx).trans (va_D2_facts hx hx1).2.2.2.2⟩
   Vq := fun x hx hx1 hgx => by
     show ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < ywV 1 0 x + (if max ω (yrQE E) < x then vA E x else 1) ∧
       (if max ω (yrQE E) < x then vA E x else 1) < gq σ x
     rw [if_pos hgx]
-    obtain ⟨-, -, hv1, hkT, hk1', hiT, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hx hx1 hgx
-    obtain ⟨-, -, -, hVE, -, -⟩ := glA_facts hx hx1 hv1 hkT hk1' hiT hi1
-    rw [← hA] at hVE
-    exact zm_Vq_of hx hx1 (va_D_lt hE hBE hEU hlim hIH hx hx1 hgx).le (va_V_lt_gq hE hBE hEU hlim hIH hx hx1 hgx) hVE
+    obtain ⟨-, -, hv1, hkT, hk1', hiT, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hx hx1 hnA hgx
+    obtain ⟨hVT, -, -, -, -, -⟩ := glA_facts hx hx1 hv1 hkT hk1' hiT hi1
+    rw [← hA] at hVT
+    obtain ⟨σ, hσT, hσ1, hσV, hVσ⟩ := va_nonclosed hx hx1 hVT (va_D_lt hE hBE hEU hlim hIH hx hx1 hnA hgx)
+      (va_V_lt_D2 hE hBE hEU hlim hIH hx hx1 hnA hgx)
+    exact ⟨σ, hσT, hσ1, hσV.trans_le le_add_self, hVσ⟩
   W_T := fun x hx hx1 hgx => by
-    obtain ⟨-, -, hk1, hkE, -, -⟩ := va_dat hE hBE hEU
-    obtain ⟨hgk, -, hv1, hkT, hk1', hiT, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hx hx1 hgx
+    obtain ⟨-, -, hk1, hkE, -, -⟩ := va_dat hE hBE hEU hnA
+    obtain ⟨hgk, -, hv1, hkT, hk1', hiT, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hx hx1 hnA hgx
     show (if yhK E = 1 then vR (yhI E) x + 1 else vA E x) ∈ Tset x ∧
       (if yhK E = 1 then vR (yhI E) x + 1 else vA E x) < Om1 ∧
       eN (if max ω (yrQE E) < x then vA E x else 1) = glA 1 (if yhK E = 1 then vR (yhI E) x + 1 else vA E x) x
@@ -218,15 +238,15 @@ noncomputable def vaCU : ZmDS where
       refine ⟨hVT, hV1, ?_⟩
       rw [hA]; exact glA_eN_two hx hx1 hv2 hkT hk1' hiT hi1
   V_pi := fun σ ρ hB hgσ => by
-    obtain ⟨-, -, -, hkE, hiE, -⟩ := va_dat hE hBE hEU
+    obtain ⟨-, -, -, hkE, hiE, -⟩ := va_dat hE hBE hEU hnA
     have hρ1 : ρ < Om1 := hB.2.2.2
     have hσ1 : σ < Om1 := hB.2.2.1.trans hρ1
     have hgρ := hgσ.trans hB.2.2.1
-    obtain ⟨hgk, hgi, -, -, hk1', -, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hB.2.1 hρ1 hgρ
-    obtain ⟨hgkσ, hgiσ, -, -, -, -, -, hAσ⟩ := va_datx hE hBE hEU hlim hIH hB.1 hσ1 hgσ
+    obtain ⟨hgk, hgi, -, -, hk1', -, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hB.2.1 hρ1 hnA hgρ
+    obtain ⟨hgkσ, hgiσ, -, -, -, -, -, hAσ⟩ := va_datx hE hBE hEU hlim hIH hB.1 hσ1 hnA hgσ
     have hex : ∀ c, c < E → yrG c < σ → vR c ρ ∈ TB ρ σ ∧ R2.pi σ ρ (vR c ρ) = vR c σ := by
       intro c hc hgc
-      obtain ⟨M, hcM, -, hEg, -, hR, hG, -⟩ := va_memV hE hBE hEU hlim hIH hc
+      obtain ⟨M, hcM, -, hEg, -, hR, hG, -⟩ := va_memV hE hBE hEU hlim hIH (va_ltT hE hBE hEU hlim hIH hnA) hc
       have hGc := va_memG (omega0_lt_inE hB.1) hEg hgc hG hcM hgc
       rw [← hR c hcM ρ hB.2.1 hρ1 (hGc.trans hB.2.2.1), ← hR c hcM σ hB.1 hσ1 hGc]
       exact M.ex σ ρ c hB hcM hGc
@@ -238,15 +258,15 @@ noncomputable def vaCU : ZmDS where
       R2.pi σ ρ (if max ω (yrQE E) < ρ then vA E ρ else 1) = (if max ω (yrQE E) < σ then vA E σ else 1)
     rw [if_pos hgρ, if_pos hgσ, hA]; exact ⟨a1, a2⟩
   W_pi := fun σ ρ hB hgσ => by
-    obtain ⟨-, -, -, hkE, hiE, -⟩ := va_dat hE hBE hEU
+    obtain ⟨-, -, -, hkE, hiE, -⟩ := va_dat hE hBE hEU hnA
     have hρ1 : ρ < Om1 := hB.2.2.2
     have hσ1 : σ < Om1 := hB.2.2.1.trans hρ1
     have hgρ := hgσ.trans hB.2.2.1
-    obtain ⟨hgk, hgi, -, -, hk1', -, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hB.2.1 hρ1 hgρ
-    obtain ⟨hgkσ, hgiσ, -, -, -, -, -, hAσ⟩ := va_datx hE hBE hEU hlim hIH hB.1 hσ1 hgσ
+    obtain ⟨hgk, hgi, -, -, hk1', -, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hB.2.1 hρ1 hnA hgρ
+    obtain ⟨hgkσ, hgiσ, -, -, -, -, -, hAσ⟩ := va_datx hE hBE hEU hlim hIH hB.1 hσ1 hnA hgσ
     have hex : ∀ c, c < E → yrG c < σ → vR c ρ ∈ TB ρ σ ∧ R2.pi σ ρ (vR c ρ) = vR c σ := by
       intro c hc hgc
-      obtain ⟨M, hcM, -, hEg, -, hR, hG, -⟩ := va_memV hE hBE hEU hlim hIH hc
+      obtain ⟨M, hcM, -, hEg, -, hR, hG, -⟩ := va_memV hE hBE hEU hlim hIH (va_ltT hE hBE hEU hlim hIH hnA) hc
       have hGc := va_memG (omega0_lt_inE hB.1) hEg hgc hG hcM hgc
       rw [← hR c hcM ρ hB.2.1 hρ1 (hGc.trans hB.2.2.1), ← hR c hcM σ hB.1 hσ1 hGc]
       exact M.ex σ ρ c hB hcM hGc
@@ -277,11 +297,11 @@ noncomputable def vaCU : ZmDS where
     rcases eq_or_ne c 0 with rfl | hc0
     · rw [vR_zero]
       split_ifs with hgx
-      · exact lt_of_le_of_lt zero_le (va_D_lt hE hBE hEU hlim hIH hx hx1 hgx)
+      · exact lt_of_le_of_lt zero_le (va_D_lt hE hBE hEU hlim hIH hx hx1 hnA hgx)
       · exact zero_lt_one
     · rw [if_neg hc0] at hg
       rw [if_pos ((le_max_left _ _).trans_lt hg)]
-      exact va_lt_top hE hBE hEU hlim hIH hx hx1 ((le_max_left _ _).trans_lt hg) c hc
+      exact va_lt_top hE hBE hEU hlim hIH hx hx1 hnA ((le_max_left _ _).trans_lt hg) c hc
         ((le_max_right _ _).trans_lt hg)
   pos := fun c x hx hx1 hc0 hc hg => by
     change (if c = 0 then 0 else max (max ω (yrQE E)) (yrG c)) < x at hg
@@ -318,14 +338,14 @@ noncomputable def vaCU : ZmDS where
   lim := fun c x hx hx1 hl hc hg => by
     change (if c = 0 then 0 else max (max ω (yrQE E)) (yrG c)) < x at hg
     rw [if_neg (show c ≠ 0 from hl.bot_lt.ne')] at hg
-    obtain ⟨M, hcM, -, hEg, -, hR, hG, -⟩ := va_memV hE hBE hEU hlim hIH hc
+    obtain ⟨M, hcM, -, hEg, -, hR, hG, -⟩ := va_memV hE hBE hEU hlim hIH (va_ltT hE hBE hEU hlim hIH hnA) hc
     have hGc := va_memG (omega0_lt_inE hx) hEg ((le_max_right _ _).trans_lt hg) hG hcM ((le_max_right _ _).trans_lt hg)
     rw [← hR c hcM x hx hx1 hGc]
     exact M.lim c x hx hx1 hl hcM hGc
   nc := fun c x hx hx1 hl hc hg => by
     change (if c = 0 then 0 else max (max ω (yrQE E)) (yrG c)) < x at hg
     rw [if_neg (show c ≠ 0 from hl.bot_lt.ne')] at hg
-    obtain ⟨M, hcM, -, hEg, -, hR, hG, hDv⟩ := va_memV hE hBE hEU hlim hIH hc
+    obtain ⟨M, hcM, -, hEg, -, hR, hG, hDv⟩ := va_memV hE hBE hEU hlim hIH (va_ltT hE hBE hEU hlim hIH hnA) hc
     have hGc := va_memG (omega0_lt_inE hx) hEg ((le_max_right _ _).trans_lt hg) hG hcM ((le_max_right _ _).trans_lt hg)
     show ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < ywV 1 0 x + vR c x ∧ ywV 1 0 x + vR c x < gq σ x
     rw [← hR c hcM x hx hx1 hGc]
@@ -345,7 +365,7 @@ noncomputable def vaCU : ZmDS where
   top := fun x hx hx1 hgx ν hν => by
     change ν < (if max ω (yrQE E) < x then vA E x else 1) at hν
     rw [if_pos hgx] at hν
-    obtain ⟨b, hb, hgb, hνb⟩ := va_top hE hBE hEU hlim hIH hx hx1 hgx ν hν
+    obtain ⟨b, hb, hgb, hνb⟩ := va_top hE hBE hEU hlim hIH hx hx1 hnA hgx ν hν
     refine ⟨b, hb, ?_, hνb⟩
     show (if b = 0 then 0 else max (max ω (yrQE E)) (yrG b)) < x
     split_ifs
@@ -359,7 +379,7 @@ noncomputable def vaCU : ZmDS where
     · show vR 0 ρ ∈ TB ρ σ ∧ R2.pi σ ρ (vR 0 ρ) = vR 0 σ
       rw [vR_zero, vR_zero]; exact ⟨mem_TB_of_lt hB hB.1.pos, pi_lt hB hB.1.pos⟩
     rw [if_neg hc0] at hg
-    obtain ⟨M, hcM, -, hEg, -, hR, hG, -⟩ := va_memV hE hBE hEU hlim hIH hc
+    obtain ⟨M, hcM, -, hEg, -, hR, hG, -⟩ := va_memV hE hBE hEU hlim hIH (va_ltT hE hBE hEU hlim hIH hnA) hc
     have hGc := va_memG (omega0_lt_inE hB.1) hEg ((le_max_right _ _).trans_lt hg) hG hcM
       ((le_max_right _ _).trans_lt hg)
     show vR c ρ ∈ TB ρ σ ∧ R2.pi σ ρ (vR c ρ) = vR c σ
@@ -376,7 +396,7 @@ noncomputable def vaCU : ZmDS where
     rw [if_neg hd0] at hg
     have hgσ : max ω (yrQE E) < σ := (le_max_left _ _).trans_lt hg
     have hgρ : max ω (yrQE E) < ρ := hgσ.trans hB.2.2.1
-    obtain ⟨M, hdM, -, hEg, hVle, hR, hG, -⟩ := va_memV hE hBE hEU hlim hIH hd
+    obtain ⟨M, hdM, -, hEg, hVle, hR, hG, -⟩ := va_memV hE hBE hEU hlim hIH (va_ltT hE hBE hEU hlim hIH hnA) hd
     have hGd := va_memG (omega0_lt_inE hB.1) hEg ((le_max_right _ _).trans_lt hg) hG hdM
       ((le_max_right _ _).trans_lt hg)
     have hGdρ : yrG d < ρ := ((le_max_right _ _).trans_lt hg).trans hB.2.2.1
@@ -398,8 +418,8 @@ noncomputable def vaCU : ZmDS where
     · exact max_lt hgZ (va_gate hZ hZ1 c h (hc.trans hEU))
 
 /-- **The union is a system read by `vR`.** -/
-theorem vaGood_lim : VaGood E := by
-  refine ⟨vaCU hE hBE hEU hlim hIH, rfl, rfl, fun x _ _ hgx => ?_, fun c _ x _ _ _ => rfl, fun c _ hc0 => ?_, rfl,
+theorem vaGood_lim (hnA : ¬ YhAt E) : VaGood E := by
+  refine ⟨vaCU hE hBE hEU hlim hIH hnA, rfl, rfl, fun x _ _ hgx => ?_, fun c _ x _ _ _ => rfl, fun c _ hc0 => ?_, rfl,
     rfl⟩
   · have hgx' : max ω (yrQE E) < x := hgx
     show (if max ω (yrQE E) < x then vA E x else 1) = vA E x
@@ -429,6 +449,10 @@ theorem vaGood_all : ∀ E, InE E → tfBG ≤ E → E < vaU → VaGood E := by
         rw [h] at h1
         exact absurd hlt (not_lt.2 h1)
       · exact hs ⟨e, he, heB, heE, h⟩
-    exact vaGood_lim hE hlt hEU hlim fun e he heB heE => IH e heE he heB (heE.trans hEU)
+    have hnA : ¬ YhAt E := by
+      rcases va_atom_cases hlt.le hEU with h | h
+      · exact absurd h hlt.ne'
+      · exact h
+    exact vaGood_lim hE hlt (hEU.trans_le va_U_le_B2) hlim (fun e he heB heE => IH e heE he heB (heE.trans hEU)) hnA
 
 end Googology.Trans.PoR.InaccPsi.R2.Va
