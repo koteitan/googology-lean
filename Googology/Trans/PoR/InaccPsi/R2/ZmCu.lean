@@ -135,7 +135,14 @@ noncomputable def zmCU : ZmDS where
     have hVζ : veblen 1 (ywV 1 0 x + zmHR l x) < veblen 2 (ywV 1 0 x + 1) := by
       rw [← zm_veb2_fix (ywV 1 0 x + 1)]; exact (isNormal_veblen 1).strictMono hDt
     have hVq := hVζ.trans (zm_zeta_lt_gq hx hx1)
-    refine ⟨vz_T_down hx hx1 hqT hq1 hVq.le, zm_veb_E _, ?_, hVq⟩
+    refine ⟨vz_T_down hx hx1 hqT hq1 hVq.le, zm_veb_E _, ?_, hVq.trans (zm_gq_X hx hx1)⟩
+    calc ywV 1 0 x = veblen 1 (ywV 1 0 x) := (zmD_fix hx hx1).symm
+      _ ≤ veblen 1 (ywV 1 0 x + zmHR l x) := (isNormal_veblen 1).strictMono.monotone le_self_add
+  Vq := fun x hx hx1 hgl => by
+    obtain ⟨-, hDt, -⟩ := zmCu_l hl hlZ hG hx hx1 hgl
+    have hVζ : veblen 1 (ywV 1 0 x + zmHR l x) < veblen 2 (ywV 1 0 x + 1) := by
+      rw [← zm_veb2_fix (ywV 1 0 x + 1)]; exact (isNormal_veblen 1).strictMono hDt
+    refine zm_Vq_of hx hx1 ?_ (hVζ.trans (zm_zeta_lt_gq hx hx1)) (zm_veb_E _)
     calc ywV 1 0 x = veblen 1 (ywV 1 0 x) := (zmD_fix hx hx1).symm
       _ ≤ veblen 1 (ywV 1 0 x + zmHR l x) := (isNormal_veblen 1).strictMono.monotone le_self_add
   W_T := fun x hx hx1 hgl => by
@@ -298,6 +305,16 @@ noncomputable def zmCU : ZmDS where
     have hGc : M.G c < x := zm_memG hGg hcM (htr x hxl hgc) (Or.inr hgc)
     rw [← hR c hcM x hx hx1 hGc]
     exact M.lim c x hx hx1 hlc hcM hGc
+  nc := fun c x hx hx1 hlc hc hg => by
+    beta_reduce at hg ⊢
+    rw [if_pos ⟨hx, hx1, hc⟩]
+    rw [if_pos hc, if_neg (show c ≠ 0 from hlc.bot_lt.ne')] at hg
+    have hxl : IsSuccLimit x := ev_isSuccLimit_of_inE hx
+    have hgc : zmHG c < x := (le_max_right _ _).trans_lt hg
+    obtain ⟨M, μ, hμl, hcM, hE, hEg, hV, hVb, hR, hGg, htr⟩ := zmCu_pick hl hlZ hG hc
+    have hGc : M.G c < x := zm_memG hGg hcM (htr x hxl hgc) (Or.inr hgc)
+    rw [← hR c hcM x hx hx1 hGc]
+    exact M.nc c x hx hx1 hlc hcM hGc
   cof := fun c x hx hx1 hlc hc hg ν hν => by
     beta_reduce at hg hν ⊢
     rw [if_pos ⟨hx, hx1, hc⟩] at hν

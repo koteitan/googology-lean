@@ -2384,11 +2384,6 @@ import Googology.Trans.PoR.InaccPsi.R2.KzMvB
 import Googology.Trans.PoR.InaccPsi.R2.KzBand
 import Googology.Trans.PoR.InaccPsi.R2.NaGV
 import Googology.Trans.PoR.InaccPsi.R2.NaVeb
-import Googology.Trans.PoR.InaccPsi.R2.NbCx
-import Googology.Trans.PoR.InaccPsi.R2.NbCg
-import Googology.Trans.PoR.InaccPsi.R2.NbCi
-import Googology.Trans.PoR.InaccPsi.R2.NbCu
-import Googology.Trans.PoR.InaccPsi.R2.NbTop
 import Googology.Trans.PoR.InaccPsi.R2.VaR
 import Googology.Trans.PoR.InaccPsi.R2.VaCg
 import Googology.Trans.PoR.InaccPsi.R2.VaLim

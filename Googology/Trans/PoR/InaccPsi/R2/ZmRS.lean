@@ -40,15 +40,15 @@ theorem E_lim : IsSuccLimit M.E := ev_isSuccLimit_of_inE M.E_E
 theorem one_lt_E : (1 : Ordinal.{0}) < M.E := lu_one_lt_E M.E_E
 
 theorem V_lt (x : Ordinal.{0}) (hx : InE x) (hx1 : x < Om1) (hEg : M.Eg < x) : M.V x < Om1 :=
-  (M.V_T x hx hx1 hEg).2.2.2.trans (zm_gq_facts hx hx1).2.2.1
+  (M.V_T x hx hx1 hEg).2.2.2.trans (ywX_facts hx hx1).2.2.1
 
 theorem Eg_lt {c x : Ordinal.{0}} (hc0 : c ≠ 0) (hg : M.G c < x) : M.Eg < x := (M.Eg_le c hc0).trans_lt hg
 
-/-- A reading below the base is below `gq(D(x)+1)`. -/
-theorem R_gq {c x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hc : c < M.E) (hg : M.G c < x) :
-    M.R c x < gq (ywV 1 0 x + 1) x := by
+/-- A reading below the base is below `X^x`. -/
+theorem R_X {c x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hc : c < M.E) (hg : M.G c < x) :
+    M.R c x < ywX x := by
   rcases eq_or_ne c 0 with rfl | hc0
-  · rw [M.R0]; exact (hx.pos.trans (zmD_facts hx hx1).2.1).trans (zm_gq_facts hx hx1).1
+  · rw [M.R0]; exact hx.pos.trans (ywX_facts hx hx1).2.1
   · exact (M.lt c x hx hx1 hc hg).trans (M.V_T x hx hx1 (M.Eg_lt hc0 hg)).2.2.2
 
 /-- `B_Γ + 1 + o < E` for `o < E` (`E > B_Γ`). -/
@@ -161,16 +161,12 @@ include hx hx1
 
 theorem rR_facts {o : Ordinal.{0}} (ho : o < M.E) (hg : M.G o < x) :
     ywV 1 0 x + M.R o x ∈ Tset x ∧ ywV 1 0 x + M.R o x < Om1 ∧
-      ywV 1 0 x + M.R o x < gq (ywV 1 0 x + 1) x ∧ gq (ywV 1 0 x + M.R o x) x < ywX x := by
-  obtain ⟨hDq, hqT, hq1, hqfix, hqX⟩ := zm_gq_facts hx hx1
-  have hqE := zm_fix_E hqfix
-  have hS : ywV 1 0 x + M.R o x < gq (ywV 1 0 x + 1) x := (inE_indec hqE).add_lt hDq (M.R_gq hx hx1 ho hg)
-  have hST := vz_T_down hx hx1 hqT hq1 hS.le
-  have hSX : ywV 1 0 x + M.R o x < ywX x := hS.trans hqX
-  refine ⟨hST, hS.trans hq1, hS, ?_⟩
-  rw [← ywV_zero]
-  exact ywV_lt_X hx hx1 (mem_T_of_le hx hx1 zero_le) (hx.pos.trans hx1) hST (hS.trans hq1)
-    (hx.pos.trans (ywX_facts hx hx1).2.1) hSX
+      ywV 1 0 x + M.R o x < ywX x ∧ gq (ywV 1 0 x + M.R o x) x < ywX x := by
+  obtain ⟨hXT, -, hX1, hXE⟩ := ywX_facts hx hx1
+  have hDX : ywV 1 0 x < ywX x := (zm_gq_facts hx hx1).1.trans (zm_gq_X hx hx1)
+  have hSX : ywV 1 0 x + M.R o x < ywX x := (inE_indec hXE).add_lt hDX (M.R_X hx hx1 ho hg)
+  have hST := vz_T_down hx hx1 hXT hX1 hSX.le
+  exact ⟨hST, hSX.trans hX1, hSX, zm_gq_lt_X hx hx1 hST (hSX.trans hX1) hSX⟩
 
 end Rd
 
@@ -236,9 +232,8 @@ noncomputable def toRS (S : InaccSeq.{0}) (h : tfBG < M.E) : ZbRS where
       · exact h'
     rw [rR_eq]
     have hRl := M.lim o x hx hx1 hol ho hg
-    have h1r : (1 : Ordinal.{0}) < M.R o x := by simpa using hRl.add_one_lt hRl.bot_lt
-    exact ⟨isSuccLimit_add _ hRl, ywV 1 0 x + 1, (add_lt_add_iff_left _).2 h1r,
-      (M.rR_facts hx hx1 ho hg).2.2.1⟩
+    obtain ⟨σ, -, -, hσ1, hσ2⟩ := M.nc o x hx hx1 hol ho hg
+    exact ⟨isSuccLimit_add _ hRl, σ, hσ1, hσ2⟩
   cof := fun c x _ hc0 hc hx hx1 hg ν hν => by
     obtain ⟨o, rfl⟩ := exists_add_of_le hc0.le
     rw [rG_eq] at hg

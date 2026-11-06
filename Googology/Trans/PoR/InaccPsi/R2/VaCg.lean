@@ -218,7 +218,7 @@ theorem va_eN {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hgx : M.Eg < x) :
   have hE := M.E_E
   have hGe' : gcG 0 ≤ M.E := va_G_le_BG.trans hBE
   obtain ⟨hVT, -, -, hVq⟩ := M.V_T x hx hx1 hgx
-  have hV1 : M.V x < Om1 := hVq.trans (zm_gq_facts hx hx1).2.2.1
+  have hV1 : M.V x < Om1 := hVq.trans (ywX_facts hx hx1).2.2.1
   -- the readings of the codes below `E` are in `Tˣ ∩ Ω₁`
   have hcode : ∀ c, c < M.E → max M.Eg (yrG c) < x → vR c x ∈ Tset x ∧ vR c x < Om1 := by
     intro c hc hgc

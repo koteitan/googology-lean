@@ -175,7 +175,16 @@ noncomputable def vaCU : ZmDS where
     obtain ⟨-, -, hv1, hkT, hk1', hiT, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hx hx1 hgx
     obtain ⟨hVT, -, -, hVE, -, -⟩ := glA_facts hx hx1 hv1 hkT hk1' hiT hi1
     rw [← hA] at hVT hVE
-    exact ⟨hVT, hVE, (va_D_lt hE hBE hEU hlim hIH hx hx1 hgx).le, va_V_lt_gq hE hBE hEU hlim hIH hx hx1 hgx⟩
+    exact ⟨hVT, hVE, (va_D_lt hE hBE hEU hlim hIH hx hx1 hgx).le,
+      (va_V_lt_gq hE hBE hEU hlim hIH hx hx1 hgx).trans (zm_gq_X hx hx1)⟩
+  Vq := fun x hx hx1 hgx => by
+    show ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < ywV 1 0 x + (if max ω (yrQE E) < x then vA E x else 1) ∧
+      (if max ω (yrQE E) < x then vA E x else 1) < gq σ x
+    rw [if_pos hgx]
+    obtain ⟨-, -, hv1, hkT, hk1', hiT, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hx hx1 hgx
+    obtain ⟨-, -, -, hVE, -, -⟩ := glA_facts hx hx1 hv1 hkT hk1' hiT hi1
+    rw [← hA] at hVE
+    exact zm_Vq_of hx hx1 (va_D_lt hE hBE hEU hlim hIH hx hx1 hgx).le (va_V_lt_gq hE hBE hEU hlim hIH hx hx1 hgx) hVE
   W_T := fun x hx hx1 hgx => by
     obtain ⟨-, -, hk1, hkE, -, -⟩ := va_dat hE hBE hEU
     obtain ⟨hgk, -, hv1, hkT, hk1', hiT, hi1, hA⟩ := va_datx hE hBE hEU hlim hIH hx hx1 hgx
@@ -306,6 +315,14 @@ noncomputable def vaCU : ZmDS where
     have hGc := va_memG (omega0_lt_inE hx) hEg ((le_max_right _ _).trans_lt hg) hG hcM ((le_max_right _ _).trans_lt hg)
     rw [← hR c hcM x hx hx1 hGc]
     exact M.lim c x hx hx1 hl hcM hGc
+  nc := fun c x hx hx1 hl hc hg => by
+    change (if c = 0 then 0 else max (max ω (yrQE E)) (yrG c)) < x at hg
+    rw [if_neg (show c ≠ 0 from hl.bot_lt.ne')] at hg
+    obtain ⟨M, hcM, -, hEg, -, hR, hG⟩ := va_memV hE hBE hEU hlim hIH hc
+    have hGc := va_memG (omega0_lt_inE hx) hEg ((le_max_right _ _).trans_lt hg) hG hcM ((le_max_right _ _).trans_lt hg)
+    show ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < ywV 1 0 x + vR c x ∧ ywV 1 0 x + vR c x < gq σ x
+    rw [← hR c hcM x hx hx1 hGc]
+    exact M.nc c x hx hx1 hl hcM hGc
   cof := fun c x hx hx1 hl hc hg ν hν => by
     change (if c = 0 then 0 else max (max ω (yrQE E)) (yrG c)) < x at hg
     rw [if_neg (show c ≠ 0 from hl.bot_lt.ne')] at hg

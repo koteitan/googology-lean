@@ -156,7 +156,10 @@ noncomputable def zmU : ZmDS where
   Eg_le := fun _ _ => zero_le
   V_T := fun x hx hx1 _ => by
     obtain ⟨h1, h2, h3, h4⟩ := zmV_lim_facts hl.bot_lt hlε hx hx1
-    exact ⟨h1, h2, h3.le, h4⟩
+    exact ⟨h1, h2, h3.le, h4.trans (zm_gq_X hx hx1)⟩
+  Vq := fun x hx hx1 _ => by
+    obtain ⟨h1, h2, h3, h4⟩ := zmV_lim_facts hl.bot_lt hlε hx hx1
+    exact zm_Vq_of hx hx1 h3.le h4 h2
   W_T := fun x hx hx1 _ => by
     have hl1 : l + 1 < ε₀ := gc_eps0_lim.add_one_lt hlε
     obtain ⟨hT, h1⟩ := zmDt_T hx hx1 hl1
@@ -241,6 +244,13 @@ noncomputable def zmU : ZmDS where
     obtain ⟨M, ν, hν, hcM, -, hV, hR, hGg, hEgM⟩ := zmU_pick hl hG hc
     rw [← hR c hcM x hx hx1]; rw [← hGg c hcM] at hg
     exact M.lim c x hx hx1 hlc hcM hg
+  nc := fun c x hx hx1 hlc hc hg => by
+    beta_reduce at *
+    rw [if_pos hc] at hg
+    rw [if_pos ⟨hx, hx1, hc⟩]
+    obtain ⟨M, ν, hν, hcM, -, hV, hR, hGg, hEgM⟩ := zmU_pick hl hG hc
+    rw [← hR c hcM x hx hx1]; rw [← hGg c hcM] at hg
+    exact M.nc c x hx hx1 hlc hcM hg
   cof := fun c x hx hx1 hlc hc hg ν hν => by
     beta_reduce at *
     rw [if_pos hc] at hg

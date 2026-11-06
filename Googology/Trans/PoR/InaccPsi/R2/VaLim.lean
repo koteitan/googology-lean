@@ -97,6 +97,45 @@ theorem va_mem {E c : Ordinal.{0}} (hEU : E < vaU) (hlim : ∀ e, InE e → e < 
     obtain ⟨M, h1⟩ := key tfBG hBE' le_rfl hBE (hcB'.trans (lt_eN _)) (by rw [va_QE_BG]; exact zero_le)
     exact ⟨tfBG, M, hBE', le_rfl, fun h => absurd h hcB, le_max_right _ _, h1⟩
 
+/-- **Every code below `Γ_{B_Γ+1}` reads below `gq(D(x)+1)`.** -/
+theorem va_lt_gq {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) :
+    ∀ c, c < vaU → yrG c < x → vR c x < gq (ywV 1 0 x + 1) x := by
+  obtain ⟨hDq, -, -, hqfix, -⟩ := zm_gq_facts hx hx1
+  have hQE : InE (gq (ywV 1 0 x + 1) x) := zm_fix_E hqfix
+  obtain ⟨hDT, -, hD1, -⟩ := zmD_facts hx hx1
+  obtain ⟨hD1T, hD11⟩ := gl_T_succ hx hx1 hDT hD1
+  have hωx : ω < x := omega0_lt_inE hx
+  intro c
+  induction c using WellFoundedLT.induction with
+  | ind c IH =>
+  intro hc hg
+  by_cases hcB : c < tfBG
+  · rw [vR_yr c hcB x]; exact (zmYr.lt c x hx hx1 hcB hg).trans hDq
+  have hcB' : tfBG ≤ c := not_lt.1 hcB
+  have hGc : gcG 0 ≤ c := va_G_le_BG.trans hcB'
+  obtain ⟨-, -, -, -, -, hlog, hmod, hdiv⟩ := gl_parts (yh_gfE_le hGc)
+  rw [yrG_dec hGc] at hg
+  have hgQE : yrQE (guE c) < x := (le_max_left _ _).trans_lt ((le_max_left _ _).trans_lt hg)
+  have hgk : yrG (log (guE c) c) < x :=
+    yrG_of_Q hωx ((le_max_right _ _).trans_lt ((le_max_left _ _).trans_lt hg))
+  have hgd : yrG (c / guE c ^ log (guE c) c) < x :=
+    yrG_of_Q hωx ((le_max_left _ _).trans_lt ((le_max_right _ _).trans_lt hg))
+  have hgr : yrG (c % guE c ^ log (guE c) c) < x := (le_max_right _ _).trans_lt ((le_max_right _ _).trans_lt hg)
+  have heB : tfBG ≤ guE c := gl_E_max (Low.opow_eq_self_of_SC tfBG_SC) tfBG_gt hcB'
+  have hec : guE c ≤ c := gl_E_le (yh_gfE_le hGc)
+  have hA : vA (guE c) x < gq (ywV 1 0 x + 1) x := by
+    rcases va_atom_cases heB (hec.trans_lt hc) with hB | hnA
+    · rw [hB, vA_BG]; exact hDq
+    have hK := yh_lev_lt hGc hnA
+    have hI := yh_idx_lt hGc hnA
+    rw [yrQE_psi hnA] at hgQE
+    rw [vA_psi hnA]
+    exact xkA_lt hx hx1 hD1T hD11 (IH _ hK (hK.trans hc) (yrG_of_Q hωx ((le_max_left _ _).trans_lt hgQE)))
+      (IH _ hI (hI.trans hc) (yrG_of_Q hωx ((le_max_right _ _).trans_lt hgQE)))
+  rw [vR_dec hGc]
+  exact (inE_indec hQE).add_lt (InE.mul_lt hQE (zm_opow_lt hQE hA (IH _ hlog (hlog.trans hc) hgk))
+    (IH _ hdiv (hdiv.trans hc) hgd)) (IH _ hmod (hmod.trans hc) hgr)
+
 section Lim
 
 variable {E : Ordinal.{0}} (hE : InE E) (hBE : tfBG < E) (hEU : E < vaU)
@@ -120,11 +159,11 @@ theorem va_T {c : Ordinal.{0}} (hc : c < E) (hg : yrG c < x) :
   obtain ⟨e, M, -, -, -, -, -, hcM, -, -, -, hEg, -, hR, hG⟩ := va_mem hEU hlim hIH hBE hc
   have hgM : M.Eg < x := hEg.trans_lt (max_lt hωx hg)
   have hGc := va_memG hωx hEg hg hG hcM hg
-  obtain ⟨hVT, -, -, hVq⟩ := M.V_T x hx hx1 hgM
-  have hV1 : M.V x < Om1 := hVq.trans (zm_gq_facts hx hx1).2.2.1
+  obtain ⟨hVT, -, -, hVX⟩ := M.V_T x hx hx1 hgM
+  have hV1 : M.V x < Om1 := hVX.trans (ywX_facts hx hx1).2.2.1
   have hlt := M.lt c x hx hx1 hcM hGc
   rw [hR c hcM x hx hx1 hGc] at hlt
-  exact ⟨vz_T_down hx hx1 hVT hV1 hlt.le, hlt.trans hV1, hlt.trans hVq⟩
+  exact ⟨vz_T_down hx hx1 hVT hV1 hlt.le, hlt.trans hV1, va_lt_gq hx hx1 c (hc.trans hEU) hg⟩
 
 theorem va_mono {b c : Ordinal.{0}} (hbc : b < c) (hc : c < E) (hgb : yrG b < x) (hgc : yrG c < x) :
     vR b x < vR c x := by
