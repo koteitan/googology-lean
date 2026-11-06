@@ -78,12 +78,7 @@ theorem nonfix (h : M.B < M.E) {o : Ordinal.{0}} (ho : o < M.E) :
     rw [hν]; exact lt_of_lt_of_le (lt_add_one M.B) le_self_add
   exact M.nfx ν hB (M.idx_lt h ho).le heq.symm
 
-/-- **The segment base reads without a gate** (as `B_Γ` read `D(x)`): the arguments of `toRS`. -/
-def Ung : Prop := (∀ Z, SC Z → TlCl Z M.B) ∧
-  (∀ x, InE x → x < Om1 → M.Dv x ∈ Tset x ∧ InE (M.Dv x) ∧ x < M.Dv x ∧ M.Dv x < ywX x) ∧
-  (∀ σ ρ, Bases σ ρ → M.Dv ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (M.Dv ρ) = M.Dv σ)
-
-theorem zmInv (h : M.B < M.E) (hU : M.Ung) {Z o : Ordinal.{0}} (hZ : SC Z) (hZ1 : Z ≤ Om1) (ho : o < M.E)
+theorem zmInv (h : M.B < M.E) {Z o : Ordinal.{0}} (hZ : SC Z) (hZ1 : Z ≤ Om1) (hEgZ : M.Eg < Z) (ho : o < M.E)
     (hc : TlCl Z (gcG (M.B + 1 + o))) : TlCl Z o := by
   rw [tf_gcG] at hc
   have hlt := M.nonfix h ho
@@ -98,7 +93,7 @@ theorem zmInv (h : M.B < M.E) (hU : M.Ung) {Z o : Ordinal.{0}} (hZ : SC Z) (hZ1 
     (omega0_le_of_isSuccLimit zgBG_lim).trans (M.BG_B.trans (le_self_add.trans le_self_add))
   rw [add_assoc, one_add_of_omega0_le hω] at hI
   have hb := (tl_cl_Om1_add hZ).1 hI
-  have hx : TlCl Z (M.B + 1) := TlCl.add (hU.1 Z hZ) (TlCl.one hZ.1)
+  have hx : TlCl Z (M.B + 1) := TlCl.add (M.B_cl Z hZ hEgZ) (TlCl.one hZ.1)
   have := (tlDec hZ _ hb).1 _ hx le_self_add
   rwa [Ordinal.add_sub_cancel] at this
 
@@ -115,7 +110,7 @@ theorem rG_eq (o : Ordinal.{0}) : M.rG (M.B + 1 + o) = M.G o := by
   unfold rG; rw [Ordinal.add_sub_cancel]
 
 /-- **The gated cover** below `Γ_{Ω₁+1+c}` for a limit index `c ∈ (B_Γ+1, E)`. -/
-theorem zmCover (h : M.B < M.E) (hU : M.Ung) {Z : Ordinal.{0}} (hZ : SC Z) (hZ1 : Z < Om 1) {c : Ordinal.{0}}
+theorem zmCover (h : M.B < M.E) {Z : Ordinal.{0}} (hZ : SC Z) (hZ1 : Z < Om 1) {c : Ordinal.{0}}
     (hl : IsSuccLimit c) (hc0 : M.B + 1 < c) (hc : c < M.E) (hgc : M.rG c < Z) :
     ∀ d, GxCl Z (zbU.At Z) d → d < gcG c →
       ∃ b, M.B + 1 ≤ b ∧ b < c ∧ M.rG b < Z ∧ d < gcG b := by
@@ -141,7 +136,7 @@ theorem zmCover (h : M.B < M.E) (hU : M.Ung) {Z : Ordinal.{0}} (hZ : SC Z) (hZ1 
     obtain ⟨o, rfl⟩ := exists_add_of_le hb
     have ho : o < M.E := le_add_self.trans_lt (hbc.trans hc)
     rcases hs with hs | ⟨c', hc', -, e⟩
-    · have hT := M.zmInv h hU hZ hZ1' ho hs.2.2.2
+    · have hT := M.zmInv h hZ hZ1' hEgZ ho hs.2.2.2
       have hgo := M.gate o Z hZ hZ1' hEgZ ho hT
       refine ⟨M.B + 1 + (o + 1), le_self_add, ?_, ?_, ?_⟩
       · rw [← add_assoc]; exact hl.add_one_lt hbc
@@ -170,11 +165,11 @@ section Rd
 variable {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1)
 include hx hx1
 
-theorem rR_facts (hU : M.Ung) {o : Ordinal.{0}} (ho : o < M.E) (hg : M.G o < x) :
+theorem rR_facts (hEg : M.Eg < x) {o : Ordinal.{0}} (ho : o < M.E) (hg : M.G o < x) :
     M.Dv x + M.R o x ∈ Tset x ∧ M.Dv x + M.R o x < Om1 ∧
       M.Dv x + M.R o x < ywX x ∧ gq (M.Dv x + M.R o x) x < ywX x := by
   obtain ⟨hXT, -, hX1, hXE⟩ := ywX_facts hx hx1
-  have hDX : M.Dv x < ywX x := (hU.2.1 x hx hx1).2.2.2
+  have hDX : M.Dv x < ywX x := (M.Dv_T x hx hx1 hEg).2.2.2
   have hSX : M.Dv x + M.R o x < ywX x := (inE_indec hXE).add_lt hDX (M.R_X hx hx1 ho hg)
   have hST := vz_T_down hx hx1 hXT hX1 hSX.le
   exact ⟨hST, hSX.trans hX1, hSX, zm_gq_lt_X hx hx1 hST (hSX.trans hX1) hSX⟩
@@ -184,61 +179,64 @@ end Rd
 /-- **A base layer for the index `B + 1`**: gate `0`, reading `gq(Dv(x))`, top `Γ_{Ω₁+1+B+1}`. -/
 structure ZmBase (S : InaccSeq.{0}) (M : ZmDS) where
   L0 : GdB
-  L0_g : L0.g = 0
+  L0_g : L0.g ≤ M.Eg
   L0_E : ∀ x, InE x → x < Om1 → L0.K.E x = gq (M.Dv x) x
-  L0_top : ∀ y, SC y → y < Om 1 → L0.K.E y = gxTh y (zbU.At y) (gcG (M.B + 1))
+  L0_top : ∀ y, SC y → y < Om 1 → M.Eg < y → L0.K.E y = gxTh y (zbU.At y) (gcG (M.B + 1))
   L0_poly : ZbPolyG zbU L0.K.sys (gcG (M.B + 1))
+  Dv_ge : ∀ x, InE x → x < Om1 → M.Eg < x → ywV 1 0 x ≤ M.Dv x
 
 /-- **The base layer of `B_Γ + 1`** (`Zb.zbBGn 0`) for a system with base `B_Γ` read `D(x)`. -/
 noncomputable def zmBaseBG (S : InaccSeq.{0}) (hB : M.B = tfBG) (hD : M.Dv = ywV 1 0) : ZmBase S M where
   L0 := (zbBGn 0).1
-  L0_g := zbBGn_g 0
+  L0_g := by rw [zbBGn_g 0]; exact zero_le
   L0_E := fun x _ _ => by rw [zbBGn_E 0 x, hD, Nat.cast_zero, add_zero]
-  L0_top := fun y hy hy1 => by
+  L0_top := fun y hy hy1 _ => by
     have h' := (zbBGn_codes S 0).1 y hy hy1 (by rw [zbBGn_g]; exact hy.1)
     rw [h', hB]; unfold zbT; norm_num
   L0_poly := by
     have h' := (zbBGn_codes S 0).2
     unfold zbT at h'; norm_num at h'
     rw [hB]; exact h'
+  Dv_ge := fun x _ _ _ => by rw [hD]
 
 /-- **THE READING SYSTEM OF THE INDICES `B + 1 + o`, `o < E`.** -/
-noncomputable def toRS (S : InaccSeq.{0}) (h : M.B < M.E) (hU : M.Ung) (Lb : ZmBase S M) : ZbRS where
+noncomputable def toRS (S : InaccSeq.{0}) (h : M.B < M.E) (Lb : ZmBase S M) : ZbRS where
   c0 := M.B + 1
   Bd := M.E
-  gt := M.rG
+  gt := fun c => max M.Eg (M.rG c)
   R := M.rR
-  L0 := Lb.L0
+  L0 := Lb.L0.mono (Lb.L0_g.trans (le_max_left _ _))
   c0_ne := (lt_of_le_of_lt zero_le (lt_add_one M.B)).ne'
   c0_lt := (inE_indec M.E_E).add_lt h M.one_lt_E
   Bd_X := M.E_X.le
-  gt_c0 := by
-    have e : M.rG (M.B + 1) = M.rG (M.B + 1 + 0) := by rw [add_zero]
-    rw [e, rG_eq, M.G0]
-  L0_g := Lb.L0_g
+  L0_g := rfl
   L0_E := fun x hx hx1 => by
+    show Lb.L0.K.E x = gq (M.rR (M.B + 1) x) x
     rw [Lb.L0_E x hx hx1]
     have e : M.rR (M.B + 1) x = M.rR (M.B + 1 + 0) x := by rw [add_zero]
     rw [e, rR_eq, M.R0, add_zero]
-  L0_top := Lb.L0_top
-  L0_poly := Lb.L0_poly
+  L0_top := fun y hy hy1 hg => Lb.L0_top y hy hy1 ((le_max_left _ _).trans_lt hg)
+  L0_poly := Lb.L0_poly.mono (Lb.L0_g.trans (le_max_left _ _))
   RT := fun c x hx hx1 h1 h2 hg => by
     obtain ⟨o, rfl⟩ := exists_add_of_le h1
-    rw [rG_eq] at hg
+    have hEg : M.Eg < x := (le_max_left _ _).trans_lt hg
+    have hgo : M.G o < x := by have h' := (le_max_right _ _).trans_lt hg; rwa [rG_eq] at h'
     rw [rR_eq]
-    obtain ⟨hT, h1', -, hX⟩ := M.rR_facts hx hx1 hU (le_add_self.trans_lt h2) hg
+    obtain ⟨hT, h1', -, hX⟩ := M.rR_facts hx hx1 hEg (le_add_self.trans_lt h2) hgo
     exact ⟨hT, h1', hX⟩
   mono := fun b c x hx hx1 h1 hbc hc hgb hgc => by
     obtain ⟨o₂, rfl⟩ := exists_add_of_le (h1.trans hbc.le)
     obtain ⟨o₁, rfl⟩ := exists_add_of_le h1
-    rw [rG_eq] at hgb hgc
+    have hgb' : M.G o₁ < x := by have h' := (le_max_right _ _).trans_lt hgb; rwa [rG_eq] at h'
+    have hgc' : M.G o₂ < x := by have h' := (le_max_right _ _).trans_lt hgc; rwa [rG_eq] at h'
     rw [rR_eq, rR_eq]
     exact (add_lt_add_iff_left _).2 (M.mono o₁ o₂ x hx hx1 ((add_lt_add_iff_left _).1 hbc)
-      (le_add_self.trans_lt hc) hgb hgc)
+      (le_add_self.trans_lt hc) hgb' hgc')
   succ := fun b x hb => by
     obtain ⟨o, rfl⟩ := exists_add_of_le hb
     rw [add_assoc (M.B + 1) o 1, rR_eq, rR_eq, M.succ, add_assoc]
   gt_le_succ := fun b => by
+    refine max_le_max le_rfl ?_
     rcases lt_or_ge b (M.B + 1) with hb | hb
     · unfold rG
       rw [show b - (M.B + 1) = 0 from Ordinal.sub_eq_zero_iff_le.2 hb.le, M.G0]; exact zero_le
@@ -247,7 +245,7 @@ noncomputable def toRS (S : InaccSeq.{0}) (h : M.B < M.E) (hU : M.Ung) (Lb : ZmB
       exact M.g_le o
   lim_R := fun c x hl hc0 hc hx hx1 hg => by
     obtain ⟨o, rfl⟩ := exists_add_of_le hc0.le
-    rw [rG_eq] at hg
+    have hgo : M.G o < x := by have h' := (le_max_right _ _).trans_lt hg; rwa [rG_eq] at h'
     have ho : o < M.E := le_add_self.trans_lt hc
     have hol : IsSuccLimit o := by
       rcases zero_or_succ_or_isSuccLimit o with h0 | ⟨s, hs⟩ | h'
@@ -258,12 +256,13 @@ noncomputable def toRS (S : InaccSeq.{0}) (h : M.B < M.E) (hU : M.Ung) (Lb : ZmB
         exact Order.not_isSuccLimit_succ _ h'
       · exact h'
     rw [rR_eq]
-    have hRl := M.lim o x hx hx1 hol ho hg
-    obtain ⟨σ, -, -, hσ1, hσ2⟩ := M.nc o x hx hx1 hol ho hg
+    have hRl := M.lim o x hx hx1 hol ho hgo
+    obtain ⟨σ, -, -, hσ1, hσ2⟩ := M.nc o x hx hx1 hol ho hgo
     exact ⟨isSuccLimit_add _ hRl, σ, hσ1, hσ2⟩
-  cof := fun c x _ hc0 hc hx hx1 hg ν hν => by
+  cof := fun c x hl hc0 hc hx hx1 hg ν hν => by
     obtain ⟨o, rfl⟩ := exists_add_of_le hc0.le
-    rw [rG_eq] at hg
+    have hEg : M.Eg < x := (le_max_left _ _).trans_lt hg
+    have hgo : M.G o < x := by have h' := (le_max_right _ _).trans_lt hg; rwa [rG_eq] at h'
     rw [rR_eq] at hν
     have ho : o < M.E := le_add_self.trans_lt hc
     have hol : IsSuccLimit o := by
@@ -271,59 +270,72 @@ noncomputable def toRS (S : InaccSeq.{0}) (h : M.B < M.E) (hU : M.Ung) (Lb : ZmB
       · subst h0; rw [add_zero] at hc0; exact absurd hc0 (lt_irrefl _)
       · exfalso
         have h' : IsSuccLimit (Order.succ (M.B + 1 + s)) := by
-          rw [succ_eq_add_one, add_assoc, ← succ_eq_add_one s, hs]; exact ‹IsSuccLimit _›
+          rw [succ_eq_add_one, add_assoc, ← succ_eq_add_one s, hs]; exact hl
         exact Order.not_isSuccLimit_succ _ h'
       · exact h'
     rcases le_or_gt ν (M.Dv x) with hνD | hDν
     · refine ⟨M.B + 1 + 0, le_self_add, (add_lt_add_iff_left _).2 hol.bot_lt, ?_, ?_⟩
-      · rw [rG_eq, M.G0]; exact hx.pos
+      · show max M.Eg (M.rG _) < x
+        rw [rG_eq, M.G0]; exact max_lt hEg hx.pos
       · rw [rR_eq, M.R0, add_zero]; exact hνD
     · obtain ⟨e, rfl⟩ := exists_add_of_le hDν.le
       have he : e < M.R o x := (add_lt_add_iff_left _).1 hν
-      obtain ⟨b, hb, hgb, heb⟩ := M.cof o x hx hx1 hol ho hg e he
-      exact ⟨M.B + 1 + b, le_self_add, (add_lt_add_iff_left _).2 hb, by rw [rG_eq]; exact hgb,
+      obtain ⟨b, hb, hgb, heb⟩ := M.cof o x hx hx1 hol ho hgo e he
+      exact ⟨M.B + 1 + b, le_self_add, (add_lt_add_iff_left _).2 hb,
+        by show max M.Eg (M.rG _) < x; rw [rG_eq]; exact max_lt hEg hgb,
         by rw [rR_eq]; exact (add_le_add_iff_left _).2 heb⟩
   ex := fun σ ρ c hB h1 h2 hg => by
     obtain ⟨o, rfl⟩ := exists_add_of_le h1
-    change M.rG _ < σ at hg
-    rw [rG_eq] at hg
+    change max M.Eg (M.rG _) < σ at hg
+    have hEg : M.Eg < σ := (le_max_left _ _).trans_lt hg
+    have hgo : M.G o < σ := by have h' := (le_max_right _ _).trans_lt hg; rwa [rG_eq] at h'
     show M.rR _ ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (M.rR _ ρ) = M.rR _ σ
     rw [rR_eq, rR_eq]
-    obtain ⟨d1, d2⟩ := hU.2.2 σ ρ hB
-    obtain ⟨r1, r2⟩ := M.ex σ ρ o hB (le_add_self.trans_lt h2) hg
+    obtain ⟨d1, d2⟩ := M.Dv_pi σ ρ hB hEg
+    obtain ⟨r1, r2⟩ := M.ex σ ρ o hB (le_add_self.trans_lt h2) hgo
     obtain ⟨s1, s2⟩ := pi_add hB d1 r1
     exact ⟨s1, by rw [s2, d2, r2]⟩
-  cover := fun c Z hl hc0 hc hZ hZ1 hgc d hd hdT => M.zmCover h hU hZ hZ1 hl hc0 hc hgc d hd hdT
+  cover := fun c Z hl hc0 hc hZ hZ1 hgc d hd hdT => by
+    have hEgZ : M.Eg < Z := (le_max_left _ _).trans_lt hgc
+    obtain ⟨b, h1, h2, h3, h4⟩ := M.zmCover h hZ hZ1 hl hc0 hc ((le_max_right _ _).trans_lt hgc) d hd hdT
+    exact ⟨b, h1, h2, max_lt hEgZ h3, h4⟩
   cl := fun c Z h1 h2 hZ hg => by
     obtain ⟨o, rfl⟩ := exists_add_of_le h1
-    change M.rG _ < Z at hg
-    rw [rG_eq] at hg
+    change max M.Eg (M.rG _) < Z at hg
+    have hEgZ : M.Eg < Z := (le_max_left _ _).trans_lt hg
+    have hgo : M.G o < Z := by have h' := (le_max_right _ _).trans_lt hg; rwa [rG_eq] at h'
     have ho : o < M.E := le_add_self.trans_lt h2
     refine GxCl.atom (Or.inl ⟨gcG_SC _, gcG_Om1_lt _, ZbRS.gcG_lt_X (h2.trans_le M.E_X.le), ?_⟩)
     have harg : TlCl Z (Om1 + 1 + (M.B + 1 + o)) :=
       TlCl.add (TlCl.add TlCl.om (TlCl.one hZ.1))
-        (TlCl.add (TlCl.add (hU.1 Z hZ) (TlCl.one hZ.1)) (M.cl o Z hZ ho hg))
+        (TlCl.add (TlCl.add (M.B_cl Z hZ hEgZ) (TlCl.one hZ.1)) (M.cl o Z hZ ho hgo))
     rw [tf_gcG]
     exact TlCl.gam hZ.1 harg ((lt_add_one _).trans_le le_self_add)
+  D_le := fun c x hx hx1 hc0 hc hg => by
+    obtain ⟨o, rfl⟩ := exists_add_of_le hc0.le
+    show ywV 1 0 x ≤ M.rR (M.B + 1 + o) x
+    rw [rR_eq]
+    exact (Lb.Dv_ge x hx hx1 ((le_max_left _ _).trans_lt hg)).trans le_self_add
+  BG_top := fun y hy hy1 => zbBG_top S hy hy1
+  BG_poly := zbBG_poly S
+  BG_c0 := M.BG_B.trans (le_self_add.trans gcG_strictMono.le_apply)
 
 /-- **`ZbDirect S E`** for a system with base `B_Γ` read `D(x)`: a layer for every index `B_Γ ≤ B < E`
 (`B = B_Γ + 1 + o`: the layer of `B_Γ + 1 + o'`, `o ≤ o' < E` with gate `≤ max Eg 1`, `M.Gc0`). -/
 theorem direct (hB : M.B = tfBG) (hD : M.Dv = ywV 1 0) (S : InaccSeq.{0}) (h : tfBG < M.E)
     (hK : M.Eg < Td.tdK S) (hc : M.Gc0) : ZbDirect S M.E := by
   have h' : M.B < M.E := hB ▸ h
-  have hU : M.Ung := ⟨fun Z hZ => by rw [hB]; exact zbBG_tl hZ.1, fun x hx hx1 => by rw [hD]; exact zmD_T hx hx1,
-    fun σ ρ hB' => by rw [hD]; exact zmD_pi hB'⟩
   intro B hB1 hB2
   rcases hB1.lt_or_eq with hlt | heq
   · rw [← hB] at hlt
     obtain ⟨o, rfl⟩ := exists_add_of_le (Order.add_one_le_of_lt hlt)
     have ho : o < M.E := le_add_self.trans_lt hB2
     obtain ⟨o', hoo', ho', hg'⟩ := hc o ho
-    have hg : (M.toRS S h' hU (M.zmBaseBG S hB hD)).gt (M.B + 1 + o') < Td.tdK S := by
-      show M.rG _ < Td.tdK S
-      rw [rG_eq]; exact hg'.trans_lt (max_lt hK (gg_one_lt_of_SC Td.tdK_SC))
+    have hg : (M.toRS S h' (M.zmBaseBG S hB hD)).gt (M.B + 1 + o') < Td.tdK S := by
+      show max M.Eg (M.rG _) < Td.tdK S
+      rw [rG_eq]; exact max_lt hK (hg'.trans_lt (max_lt hK (gg_one_lt_of_SC Td.tdK_SC)))
     exact zbLayAt_mono ((add_le_add_iff_left _).2 hoo')
-      ((M.toRS S h' hU (M.zmBaseBG S hB hD)).layAt S le_self_add (M.idx_lt h' ho') hg)
+      ((M.toRS S h' (M.zmBaseBG S hB hD)).layAt S le_self_add (M.idx_lt h' ho') hg)
   · rw [← heq]; exact zbLayAt_BG S
 
 /-- **UPPER ∧ LOWER ∧ CapV at every range restart below `ι(Γ_{Ω₁+1+B}·ω)`, every `B < E`.** -/

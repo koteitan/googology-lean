@@ -42,10 +42,9 @@ structure ZbRS where
   c0_ne : c0 ≠ 0
   c0_lt : c0 < Bd
   Bd_X : Bd ≤ tlX
-  gt_c0 : gt c0 = 0
-  L0_g : L0.g = 0
+  L0_g : L0.g = gt c0
   L0_E : ∀ x, InE x → x < Om1 → L0.K.E x = gq (R c0 x) x
-  L0_top : ∀ y, SC y → y < Om 1 → L0.K.E y = gxTh y (zbU.At y) (gcG c0)
+  L0_top : ∀ y, SC y → y < Om 1 → gt c0 < y → L0.K.E y = gxTh y (zbU.At y) (gcG c0)
   L0_poly : ZbPolyG zbU L0.K.sys (gcG c0)
   RT : ∀ c x, InE x → x < Om1 → c0 ≤ c → c < Bd → gt c < x →
     R c x ∈ Tset x ∧ R c x < Om1 ∧ gq (R c x) x < ywX x
@@ -61,6 +60,10 @@ structure ZbRS where
   cover : ∀ c Z, IsSuccLimit c → c0 < c → c < Bd → SC Z → Z < Om 1 → gt c < Z → ∀ d,
     GxCl Z (zbU.At Z) d → d < gcG c → ∃ b, c0 ≤ b ∧ b < c ∧ gt b < Z ∧ d < gcG b
   cl : ∀ c Z, c0 ≤ c → c < Bd → SC Z → gt c < Z → GxCl Z (zbU.At Z) (gcG c)
+  D_le : ∀ c x, InE x → x < Om1 → c0 < c → c < Bd → gt c < x → ywV 1 0 x ≤ R c x
+  BG_top : ∀ y, SC y → y < Om 1 → ywBGB.K.E y = gxTh y (zbU.At y) tfBG
+  BG_poly : ZbPolyG zbU ywBGB.K.sys tfBG
+  BG_c0 : tfBG ≤ gcG c0
 
 namespace ZbRS
 
@@ -75,8 +78,8 @@ def St (c : Ordinal.{0}) : Type 2 :=
 
 /-- The base. -/
 noncomputable def stBase (c : Ordinal.{0}) (hE : c = RS.c0) : RS.St c :=
-  ⟨RS.L0, by rw [hE, RS.L0_g, RS.gt_c0], fun x hx hx1 _ => by rw [hE]; exact RS.L0_E x hx hx1,
-    fun y hy hy1 _ => by rw [hE]; exact RS.L0_top y hy hy1, by rw [hE]; exact RS.L0_poly⟩
+  ⟨RS.L0, by rw [hE, RS.L0_g], fun x hx hx1 _ => by rw [hE]; exact RS.L0_E x hx hx1,
+    fun y hy hy1 h => by subst hE; exact RS.L0_top y hy hy1 h, by rw [hE]; exact RS.L0_poly⟩
 
 /-- The ladder hypothesis for the successor `b + 1`. -/
 theorem stSuccH {b : Ordinal.{0}} (hb : RS.c0 ≤ b) (hbB : b < RS.Bd) (s : RS.St b) :
@@ -130,12 +133,15 @@ noncomputable def stSucc (b : Ordinal.{0}) (hb : RS.c0 ≤ b) (hc : b + 1 < RS.B
 /-- **The union data at a limit code `c`**: the layers of the codes `b ∈ [c₀, c)`, target `ϑˣ(Ω₁·Ω₁ + R(c)(x))`. -/
 noncomputable def stLimF (c : Ordinal.{0}) (hl : IsSuccLimit c) (hc0 : RS.c0 < c) (hc : c < RS.Bd)
     (IH : ∀ b, RS.c0 ≤ b → b < c → RS.St b) : YwUF (RS.gt c) where
-  I := {b : Ordinal.{0} // RS.c0 ≤ b ∧ b < c}
-  K := fun b => (IH b.1 b.2.1 b.2.2).1
-  gi := fun b => RS.gt b.1
-  i0 := ⟨RS.c0, le_rfl, hc0⟩
-  g_le := fun b => (IH b.1 b.2.1 b.2.2).2.1.le
-  gi0 := RS.gt_c0
+  I := Option {b : Ordinal.{0} // RS.c0 ≤ b ∧ b < c}
+  K := fun i => Option.elim i ywBGB fun b => (IH b.1 b.2.1 b.2.2).1
+  gi := fun i => Option.elim i 0 fun b => RS.gt b.1
+  i0 := none
+  g_le := fun i => by
+    cases i with
+    | none => exact le_of_eq ywBGB_g
+    | some b => exact (IH b.1 b.2.1 b.2.2).2.1.le
+  gi0 := rfl
   T := fun x => gq (RS.R c x) x
   T_E := fun x hx hx1 hg => (geq_facts hx hx1 (RS.RT c x hx hx1 hc0.le hc hg).1
     (RS.RT c x hx hx1 hc0.le hc hg).2.1).2.2.2.1
@@ -144,18 +150,24 @@ noncomputable def stLimF (c : Ordinal.{0}) (hl : IsSuccLimit c) (hc0 : RS.c0 < c
   T_gt := fun x hx hx1 hg => (geq_facts hx hx1 (RS.RT c x hx hx1 hc0.le hc hg).1
     (RS.RT c x hx hx1 hc0.le hc hg).2.1).2.1
   T_X := fun x hx hx1 hg => (RS.RT c x hx hx1 hc0.le hc hg).2.2
-  E_lt := fun b x hx hx1 hg hgb => by
-    show (IH b.1 b.2.1 b.2.2).1.K.E x < gq (RS.R c x) x
-    rw [(IH b.1 b.2.1 b.2.2).2.2.1 x hx hx1 hgb]
+  E_lt := fun i x hx hx1 hg hgb => by
     obtain ⟨hT, h1, -⟩ := RS.RT c x hx hx1 hc0.le hc hg
-    exact gmq_lt hx hx1 hT h1 (RS.mono b.1 c x hx hx1 b.2.1 b.2.2 hc hgb hg)
+    cases i with
+    | none =>
+      show ywBGB.K.E x < gq (RS.R c x) x
+      rw [ywBGB_E]
+      exact (RS.D_le c x hx hx1 hc0 hc hg).trans_lt (gmq_gt hx hx1 hT h1)
+    | some b =>
+      show (IH b.1 b.2.1 b.2.2).1.K.E x < gq (RS.R c x) x
+      rw [(IH b.1 b.2.1 b.2.2).2.2.1 x hx hx1 hgb]
+      exact gmq_lt hx hx1 hT h1 (RS.mono b.1 c x hx hx1 b.2.1 b.2.2 hc hgb hg)
   cof := fun x hx hx1 hg v hv => by
     obtain ⟨hT, h1, -⟩ := RS.RT c x hx hx1 hc0.le hc hg
     obtain ⟨hlR, hσ⟩ := RS.lim_R c x hl hc0 hc hx hx1 hg
     obtain ⟨ν, hν, hvν⟩ := zb_lt_lim_iff hx hx1 hlR hT h1 hσ v hv
     obtain ⟨b, h1b, h2b, h3b, h4b⟩ := RS.cof c x hl hc0 hc hx hx1 hg ν hν
     obtain ⟨hTb, h1b', -⟩ := RS.RT b x hx hx1 h1b (h2b.trans hc) h3b
-    refine ⟨⟨b, h1b, h2b⟩, h3b, ?_⟩
+    refine ⟨some ⟨b, h1b, h2b⟩, h3b, ?_⟩
     show v < (IH b h1b h2b).1.K.E x
     rw [(IH b h1b h2b).2.2.1 x hx hx1 h3b]
     exact hvν.trans_le (gmq_mono hx hx1 hTb h1b' h4b)
@@ -168,16 +180,26 @@ noncomputable def stLimF (c : Ordinal.{0}) (hl : IsSuccLimit c) (hc0 : RS.c0 < c
     rw [pi_lt hB h0σ, hRπ, ywV_zero, ywV_zero] at h
     exact h
 
-/-- **The limit step**: the union. -/
+/-- **The limit step**: the union (with the layer of `B_Γ` for the constants). -/
 noncomputable def stLim (c : Ordinal.{0}) (hl : IsSuccLimit c) (hc0 : RS.c0 < c) (hc : c < RS.Bd)
     (IH : ∀ b, RS.c0 ≤ b → b < c → RS.St b) : RS.St c := by
   set F := RS.stLimF c hl hc0 hc IH with hF
-  have hres := zbUnion_codes (A := zbU) F (fun i => gcG i.1) (Tc := gcG c)
-    (fun i y hy hy1 hi => (IH i.1 i.2.1 i.2.2).2.2.2.1 y hy hy1 hi)
-    (fun i => (IH i.1 i.2.1 i.2.2).2.2.2.2) (fun i => gcG_le i.2.2.le)
+  have hres := zbUnion_codes (A := zbU) F (fun i => Option.elim i tfBG fun b => gcG b.1) (Tc := gcG c)
+    (fun i y hy hy1 hi => by
+      cases i with
+      | none => exact RS.BG_top y hy hy1
+      | some b => exact (IH b.1 b.2.1 b.2.2).2.2.2.1 y hy hy1 hi)
+    (fun i => by
+      cases i with
+      | none => exact RS.BG_poly
+      | some b => exact (IH b.1 b.2.1 b.2.2).2.2.2.2)
+    (fun i => by
+      cases i with
+      | none => exact RS.BG_c0.trans (gcG_le hc0.le)
+      | some b => exact gcG_le b.2.2.le)
     (fun Z hZ hZ1 hgZ d hd hdT => by
       obtain ⟨b, h1, h2, h3, h4⟩ := RS.cover c Z hl hc0 hc hZ hZ1 hgZ d hd hdT
-      exact ⟨⟨b, h1, h2⟩, h3, h4⟩)
+      exact ⟨some ⟨b, h1, h2⟩, h3, h4⟩)
   exact ⟨ywLimB F, rfl, fun _ _ _ _ => rfl, hres.1, hres.2⟩
 
 /-- **THE LAYER OF EVERY CODE `c ∈ [c₀, Bd)`**, with its reading statement. -/
