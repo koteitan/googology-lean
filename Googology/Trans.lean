@@ -2407,6 +2407,7 @@ import Googology.Trans.PoR.InaccPsi.R2.QcBdC
 import Googology.Trans.PoR.InaccPsi.R2.QcR
 import Googology.Trans.PoR.InaccPsi.R2.QcG
 import Googology.Trans.PoR.InaccPsi.R2.QcEq
+import Googology.Trans.PoR.InaccPsi.R2.QcGEq
 import Googology.Trans.PoR.InaccPsi.R2.QcDS
 import Googology.Trans.PoR.InaccPsi.R2.QcCnt
 import Googology.Trans.PoR.InaccPsi.R2.QcConv
@@ -2414,3 +2415,6 @@ import Googology.Trans.PoR.InaccPsi.R2.QcRS
 import Googology.Trans.PoR.InaccPsi.R2.QcTo
 import Googology.Trans.PoR.InaccPsi.R2.QcSt
 import Googology.Trans.PoR.InaccPsi.R2.QcNx
+import Googology.Trans.PoR.InaccPsi.R2.QcCg
+import Googology.Trans.PoR.InaccPsi.R2.QcSeg
+import Googology.Trans.PoR.InaccPsi.R2.QcGx
