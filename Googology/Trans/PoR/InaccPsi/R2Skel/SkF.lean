@@ -37,6 +37,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZbE0
 import Googology.Trans.PoR.InaccPsi.R2.ZgSq
 import Googology.Trans.PoR.InaccPsi.R2.ZmRef
 import Googology.Trans.PoR.InaccPsi.R2.VaDir
+import Googology.Trans.PoR.InaccPsi.R2.VaDir2
 import Googology.Trans.PoR.InaccPsi.R2.ZoBC
 import Googology.Trans.PoR.InaccPsi.R2.ZrBase
 import Googology.Trans.PoR.InaccPsi.R2.ZrRead
@@ -2243,15 +2244,34 @@ theorem skLayBelowBG (S : InaccSeq.{0}) : ∀ c, c < Tf.tfBG → ∀ l, Cd.CdRan
 /-- STATUS: OPEN (round 133, new node; REFUTE FIRST at the offset B_Γ²·2 + 1 and at the code ε_{B_Γ+1}: NO EVIDENCE,
 skZmRef)
 SIZE: L
-DIRECT READINGS FOR EVERY ATOM INDEX B_Γ ≤ B < X (X = Tl.tlX).  PROVED below Γ_{B_Γ+1} (round 198, skVaDirectU,
-Va.vaDirectU: ONE reading Va.vR = Yr.yrR with the fixed point B_Γ read D(x) (ε-numbers yhPsi α η read
-ϑˣ(Ω₁·α(x) + η(x)), the level a parameter), digit systems Va.VaGood at EVERY ε-number base below Γ_{B_Γ+1} by one
-induction (Va.vaGood_all: Zm.ZmDS.step at successors, the union Va.vaCU at limits with cofinality by Gl.glA_min),
-the tower B_Γ+1, φ(·, 0)-iterates with gates below K); before: below ζ_{B_Γ+1} (skZmDirectZ).  Next Lean statement:
-the fixed points of Γ in [Γ_{B_Γ+1}, X) (atoms of kind β ≥ 1 read Yw.ywV β, layers at them by Yw.ywLimB) and
-digit systems between consecutive fixed points (codes Γ(i), i < Γ(i), read gq(R(i)), as in Yr.yrR). -/
+DIRECT READINGS FOR EVERY ATOM INDEX B_Γ ≤ B < X (X = Tl.tlX).  PROVED below B₂, the next fixed point of Γ (round
+207, skVaDirectB2, Va.vaDirectB2: ONE reading Va.vR = Yr.yrR with the fixed point B_Γ read D(x) and an atom Γ(j),
+B_Γ < j, read gq(D(x) + (j − (B_Γ+1))(x)) (Va.vI, the index past the closed point D(x)); digit systems Va.VaGood at
+EVERY ε-number base below B₂ by one induction (Va.vaGood_all2: Zm.ZmDS.step at successors, the union Va.vaCU over the
+top data Va.VaTop at limits: Va.vaTopNA at non-atoms, cofinality by Gl.glA_min; Va.vaTopAt at the atoms Γ(j),
+cofinality by Xk.xk_sc_iff and Zb.zb_lt_lim_iff); no closed point of ν ↦ gq ν x between D(x) and D₂(x) =
+ϑˣ(Ω₁·(Ω₁+1) + 1) (Va.va_nonclosed); the tower of Γ-iterates with gates below K).  The digit systems carry the segment
+base B and its reading Dv (round 201).  Next Lean statement: the fixed points of Γ in [B₂, X): the base at a fixed
+point F (read Yw.ywV at its kind; a layer at F by Yw.ywLimB, the base layer of F + 1 by Yw.ywLadB, a Zm.ZmBase), the
+segments (F, F') over the base F (the readings of the atoms Γ(F + 1 + o) as gq(Dv + o(x))), and an induction over the
+fixed points (segment bases with ungated readings; the others covered by monotonicity).
+-/
 theorem skZbDirectX (S : InaccSeq.{0}) : Zb.ZbDirect S Tl.tlX := by
   sorry
+
+/-- STATUS: PROVED (Va.vaDirectB2; round 207, new node)
+SIZE: L
+DIRECT READINGS FOR EVERY INDEX B_Γ ≤ B < B₂ (B₂ the least fixed point of Γ above B_Γ): digit systems at every
+ε-number base below B₂, atoms Γ(j) included (Va.vaGood_all2), the tower of Γ-iterates (Va.vaTw2). -/
+theorem skVaDirectB2 (S : InaccSeq.{0}) : Zb.ZbDirect S Va.vaB2 := Va.vaDirectB2 S
+
+/-- STATUS: PROVED (Va.vaLayB2; round 207, new node)
+SIZE: L
+EVERY LAYER c < B₂: UPPER ∧ LOWER ∧ CapV at every range restart below ι(Γ(φ(ℓ, Γ(c)+1))·ω), ℓ < Γ(c+1)
+(the conclusions of skLayLoFix and skLayHiFix at c). -/
+theorem skVaLayB2 (S : InaccSeq.{0}) : ∀ c, c < Va.vaB2 → ∀ l, Cd.CdRange S l →
+    (∃ ℓ, ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) → SkUV S l :=
+  fun _ hc l hr hex => Va.vaLayB2 S hc l hr hex
 
 /-- STATUS: PROVED (Va.vaDirectU; round 198, new node)
 SIZE: L
