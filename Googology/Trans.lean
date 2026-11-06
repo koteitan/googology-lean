@@ -2360,3 +2360,4 @@ import Googology.Trans.PoR.InaccPsi.R2.KuSucc
 import Googology.Trans.PoR.InaccPsi.R2.KwFU
 import Googology.Trans.PoR.InaccPsi.R2.KwLimC
 import Googology.Trans.PoR.InaccPsi.R2.KxInv
+import Googology.Trans.PoR.InaccPsi.R2.KxLim
