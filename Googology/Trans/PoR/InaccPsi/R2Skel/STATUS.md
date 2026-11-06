@@ -1,4 +1,4 @@
-# R₂^C skeleton: status (round 150)
+# R₂^C skeleton: status (round 151)
 Root `R2Skel.Root.skNuC (S : InaccSeq)` = the conclusion of `Xo.xoRoadH` (ν_C = L(ω+1), …). Round 129: the root applies
 `Yq.yqRoadS` = `Xo.xoRoadH` with the bridge replaced by the shift `SkS.skShiftXo`; supply `SkS.skSupXo` (repaired `Xo.XoR`);
 frontier `SkF.skFront` → hUH/hLH/hVH/hVt; reading `SkR.skWall`, `SkR.skThHi` → `SkE.skEQ` → hT/hF. Round 130: Root unchanged.
@@ -41,7 +41,7 @@ skNuC REDUCED L  (Yq.yqRoadS)
 │     round 133: skBC REDUCED L (Zo.zoBC, one block induction on [l₀, ι(Ω_ω))) ─ skBC{BaseUV, Reach} OPEN M, skBC{InR, CapVH, RsS} OPEN L; round 134: skBCReach REDUCED, skBCThPos PROVED, skBCBaseUV REDUCED (CapV PROVED) ─ skBCBaseUL OPEN L (135: big reading, skBCBaseBig PROVED); 135: skBCCapVK PROVED, skBCCapVH narrowed
 ├ SkR.skWall REDUCED L ─ skWallCF ─ skWallLow REDUCED L   (round 132: skWallCF also feeds SkE.skEQ as hW)
 │ │ skWallLevAll REDUCED L: skWallBase, skWallStep REDUCED L (round 133, Zp.zpWall, Zp.zpDecomp) ─ skTopLawAll OPEN L
-│ │   (Θ(ψ₂ b) = ψ₁(A + 1 + ψ₂(T b)), normal Ω₃-divisible b ≥ Ω₃; 141: done at E = Ω_{k+3}+Ω₂·ξ+e, ξ < θ a code, on the bases with Zw.ZwQ, Zw.zwChain; 142: the jump X → X + W^{h+1}, Zx.zxLawJ; 143: every E < Ω_{k+3} + W^ω, Zy.zyChainN; 145: code exponents h < θ of W^h with the thresholds at the first use, Kc.kcChain; any context, Kb.kbLawF; 146: the exponent Ω₂ of W, Kd.kdTop; 147: jumps at contexts of any depth, Ke.keLaw; 148: W-normal form in D, Kf.kfLast; 149-150: END TO END at every normal β + W^{Ω_{k+3} + W-polynomial + e}, Ki.kiTop), skPsi3OffRest2 OPEN L (now on the road); skTopUp PROVED L
+│ │   (Θ(ψ₂ b) = ψ₁(A + 1 + ψ₂(T b)), normal Ω₃-divisible b ≥ Ω₃; 141: done at E = Ω_{k+3}+Ω₂·ξ+e, ξ < θ a code, on the bases with Zw.ZwQ, Zw.zwChain; 142: the jump X → X + W^{h+1}, Zx.zxLawJ; 143: every E < Ω_{k+3} + W^ω, Zy.zyChainN; 145: code exponents h < θ of W^h with the thresholds at the first use, Kc.kcChain; any context, Kb.kbLawF; 146: the exponent Ω₂ of W, Kd.kdTop; 147: jumps at contexts of any depth, Ke.keLaw; 148: W-normal form in D, Kf.kfLast; 149-151: END TO END at every normal β + W^{Ω_{k+3} + W-polynomial + e}·γ, Kj.kjTop), skPsi3OffRest2 OPEN L (now on the road); skTopUp PROVED L
 │ │   off the road: skPsi3Off REDUCED L (round 130) ─ skPsi3OffLow PROVED, skPsi3OffHi OPEN L (bases a ≥ Ω₃);
 │ │     round 131 skPsi3OffD REDUCED L (Ω₃-divisible bases) ─ skPsi3OffE0 PROVED M, skPsi3OffRest REDUCED L (round 132:
 │ │     below W^{Y₃+Ω₂·Ω₂·K₃}, Zi.ziPsi3OffWK; law up to ξ < ψ₁(0), Zi.ziChain) ─ skPsi3OffRest2
