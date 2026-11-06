@@ -204,6 +204,37 @@ theorem vs_Dpi (hFE : vaFB E < E) {σ ρ : Ordinal.{0}} (hB : Bases σ ρ) (hgσ
   have h := M.Dv_pi σ ρ hB (hEg.trans_lt (max_lt hωσ hgF))
   rwa [hD] at h
 
+omit hEX in
+/-- **The index readings are not closed**: `F(x) + c(x)` for a limit code `c < E` past the segment base `F < E`
+(below `F` by `Va.vs_nc_lt`, from the member at the bracket of `c` above `F`). -/
+theorem vs_ncE (hFE : vaFB E < E) : ∀ c x, InE x → x < Om1 → IsSuccLimit c → c < E →
+    max (max ω (yrQE E)) (yrG c) < x →
+    ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < vR (vaFB E) x + vR c x ∧ vR (vaFB E) x + vR c x < gq σ x := by
+  intro c x hx hx1 hl hc hg
+  have hgx : max ω (yrQE E) < x := (le_max_left _ _).trans_lt hg
+  have hgc : yrG c < x := (le_max_right _ _).trans_lt hg
+  have hc0 : c ≠ 0 := hl.bot_lt.ne'
+  have hgF : yrG (vaFB E) < x :=
+    (vs_FB_gate E hBE.le).trans_lt (by rw [yrG_base hE (va_G_le_BG.trans hBE.le)]; exact hgx)
+  by_cases hcF : c < vaFB E
+  · obtain ⟨hDT, -, -, hDX⟩ := vs_xF hE hBE hlim hIH hx hx1 hFE hgx
+    have h0 : vR 0 x < vR c x := vs_mono hE hBE hlim hIH hx hx1 (pos_iff_ne_zero.2 hc0) hc
+      (by rw [yrG_zero]; exact hx.pos) hgc
+    rw [vR_zero] at h0
+    exact vs_nc_lt hx hx1 hDT (hDX.trans (ywX_facts hx hx1).2.2.1) h0
+      (vs_mono hE hBE hlim hIH hx hx1 hcF hFE hgc hgF)
+  · have hcF' : vaFB E ≤ c := not_lt.1 hcF
+    have hGc : gcG 0 ≤ c := va_G_le_BG.trans ((vs_FB_ge hBE.le).trans hcF')
+    obtain ⟨e, M, -, -, he, -, -, hcM, -, -, -, hEg, -, hR, hG, -, hD⟩ := vs_mem hlim hIH hBE hc
+    have heF : vaFB e = vaFB E := by
+      rw [he ((vs_FB_ge hBE.le).trans hcF')]
+      exact vs_FB_of_le hBE.le (gl_E_max (vs_FB_E hBE.le) (vs_FB_gt hBE.le) hcF')
+        ((gl_E_le (yh_gfE_le hGc)).trans hc.le)
+    have hGcM := vs_memG (omega0_lt_inE hx) hEg hgc hG hcM hgc
+    have h := M.nc c x hx hx1 hl hcM hGcM
+    rw [hD, heF, hR c hcM x hx hx1 hGcM] at h
+    exact h
+
 /-- **The data of the top `E`** for the union: the base reading `vA E` with its facts, the order and cofinality of
 the readings below it. -/
 structure VsTop (E : Ordinal.{0}) where
@@ -356,30 +387,7 @@ noncomputable def vsTopNA (hFE : vaFB E < E) (hnA : ¬ YhAt E) : VsTop E where
     exact vs_cl_code hE hBE hEX hlim hIH hZ hFE hgF
   D_T := fun x hx hx1 hgx => vs_xF hE hBE hlim hIH hx hx1 hFE hgx
   D_pi := fun σ ρ hB hgσ => vs_Dpi hE hBE hlim hIH hFE hB hgσ
-  nc := fun c x hx hx1 hl hc hg => by
-    have hgx : max ω (yrQE E) < x := (le_max_left _ _).trans_lt hg
-    have hgc : yrG c < x := (le_max_right _ _).trans_lt hg
-    have hc0 : c ≠ 0 := hl.bot_lt.ne'
-    have hgF : yrG (vaFB E) < x :=
-      (vs_FB_gate E hBE.le).trans_lt (by rw [yrG_base hE (va_G_le_BG.trans hBE.le)]; exact hgx)
-    by_cases hcF : c < vaFB E
-    · obtain ⟨hDT, -, -, hDX⟩ := vs_xF hE hBE hlim hIH hx hx1 hFE hgx
-      have h0 : vR 0 x < vR c x := vs_mono hE hBE hlim hIH hx hx1 (pos_iff_ne_zero.2 hc0) hc
-        (by rw [yrG_zero]; exact hx.pos) hgc
-      rw [vR_zero] at h0
-      exact vs_nc_lt hx hx1 hDT (hDX.trans (ywX_facts hx hx1).2.2.1) h0
-        (vs_mono hE hBE hlim hIH hx hx1 hcF hFE hgc hgF)
-    · have hcF' : vaFB E ≤ c := not_lt.1 hcF
-      have hGc : gcG 0 ≤ c := va_G_le_BG.trans ((vs_FB_ge hBE.le).trans hcF')
-      obtain ⟨e, M, -, -, he, -, -, hcM, -, -, -, hEg, -, hR, hG, -, hD⟩ := vs_mem hlim hIH hBE hc
-      have heF : vaFB e = vaFB E := by
-        rw [he ((vs_FB_ge hBE.le).trans hcF')]
-        exact vs_FB_of_le hBE.le (gl_E_max (vs_FB_E hBE.le) (vs_FB_gt hBE.le) hcF')
-          ((gl_E_le (yh_gfE_le hGc)).trans hc.le)
-      have hGcM := vs_memG (omega0_lt_inE hx) hEg hgc hG hcM hgc
-      have h := M.nc c x hx hx1 hl hcM hGcM
-      rw [hD, heF, hR c hcM x hx hx1 hGcM] at h
-      exact h
+  nc := fun c x hx hx1 hl hc hg => vs_ncE hE hBE hlim hIH hFE c x hx hx1 hl hc hg
 
 open Classical in
 /-- **THE UNION AT A LIMIT `ε`-NUMBER BASE** from the top data. -/
