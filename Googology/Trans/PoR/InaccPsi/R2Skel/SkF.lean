@@ -35,7 +35,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZnIn
 import Googology.Trans.PoR.InaccPsi.R2.YwLad
 import Googology.Trans.PoR.InaccPsi.R2.ZbE0
 import Googology.Trans.PoR.InaccPsi.R2.ZgSq
-import Googology.Trans.PoR.InaccPsi.R2.ZmCd
+import Googology.Trans.PoR.InaccPsi.R2.ZmRef
 import Googology.Trans.PoR.InaccPsi.R2.VaDir
 import Googology.Trans.PoR.InaccPsi.R2.ZoBC
 import Googology.Trans.PoR.InaccPsi.R2.ZrBase
@@ -2266,16 +2266,17 @@ theorem skVaFrontU (S : InaccSeq.{0}) : ∀ B, B < Gc.gcG (Tf.tfBG + 1) → ∀ 
     l < Bt.iota S (Gc.gcG B * ω) → SkUV S l :=
   fun _ hB _ hr hl => Va.vaUVU S hB hr hl
 
-/-- STATUS: PROVED (Zm.ZmDS.direct, Zm.ZmDS.step; round 133, new node)
+/-- STATUS: PROVED (Zm.ZmDS.direct, Zm.ZmDS.step; round 133, new node; round 201: the system carries its segment base
+B and base reading Dv, here B_Γ and D)
 SIZE: M
-THE GENERIC HEREDITARY STEP: for a digit system Zm.ZmDS at a base E > B_Γ with base gate below K, the step to the
-base ε_{E+1} is again a digit system (codes E^k·d + r read V^{R(k)}·R(d) + R(r)) with the same base gate, and it
-gives ZbDirect S ε_{E+1} (its tower has small gates, Zm.ZmDS.step_gc0). -/
-theorem skZmStep (S : InaccSeq.{0}) : ∀ M : Zm.ZmDS, Tf.tfBG < M.E → M.Eg < Td.tdK S →
-    M.step.E = eN M.E ∧ Zb.ZbDirect S M.step.E :=
-  fun M h hK => ⟨rfl, M.step.direct S (h.trans (lt_eN _)) hK M.step_gc0⟩
+THE GENERIC HEREDITARY STEP: for a digit system Zm.ZmDS over the base B_Γ read D at a base E > B_Γ with base gate
+below K, the step to the base ε_{E+1} is again a digit system (codes E^k·d + r read V^{R(k)}·R(d) + R(r)) with the
+same base gate, and it gives ZbDirect S ε_{E+1} (its tower has small gates, Zm.ZmDS.step_gc0). -/
+theorem skZmStep (S : InaccSeq.{0}) : ∀ M : Zm.ZmDS, M.B = Tf.tfBG → M.Dv = Yw.ywV 1 0 → Tf.tfBG < M.E →
+    M.Eg < Td.tdK S → M.step.E = eN M.E ∧ Zb.ZbDirect S M.step.E :=
+  fun M hB hD h hK => ⟨rfl, M.step.direct hB hD S (h.trans (lt_eN _)) hK M.step_gc0⟩
 
-/-- STATUS: PROVED (Zm.zmDirectZ; round 133, new node)
+/-- STATUS: PROVED (Zm.zmDirectZ; round 133, new node; round 201: a corollary of Va.vaDirectU, the chain Zm.zmGood2 removed)
 SIZE: L
 DIRECT READINGS FOR EVERY INDEX B_Γ ≤ B < ζ_{B_Γ+1} = φ(2, B_Γ+1): one transfinite induction over the code indices
 c < ζ_{B_Γ+1} (Zm.zmGood2_all; base φ(1, B_Γ + c) read φ(1, D(x) + R(c)(x)), gate of c raised into the system),
@@ -2295,7 +2296,7 @@ SIZE: L
 DIRECT READINGS FOR EVERY INDEX B_Γ ≤ B < ε_{B_Γ+ω}: the chain Zm.zmCh n of digit systems at the bases ε_{B_Γ+n}. -/
 theorem skZmDirectW (S : InaccSeq.{0}) : Zb.ZbDirect S (veblen 1 (Tf.tfBG + ω)) := Zm.zmDirectW S
 
-/-- STATUS: PROVED (Zm.zmDirectE0; round 133, new node)
+/-- STATUS: PROVED (Zm.zmDirectE0; round 133, new node; round 201: a corollary of Va.vaDirectU, the chain Zm.zmGood removed)
 SIZE: L
 DIRECT READINGS FOR EVERY INDEX B_Γ ≤ B < ε_{B_Γ+ε₀}: one transfinite induction over the constant indices ν < ε₀
 (Zm.zmGood_all: step at successors, union Zm.zmU at limits, global reading Zm.zmGR). -/
