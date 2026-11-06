@@ -1,4 +1,4 @@
-# R₂^C skeleton: status (round 152)
+# R₂^C skeleton: status (round 154)
 Root `R2Skel.Root.skNuC (S : InaccSeq)` = the conclusion of `Xo.xoRoadH` (ν_C = L(ω+1), …). Round 129: the root applies
 `Yq.yqRoadS` = `Xo.xoRoadH` with the bridge replaced by the shift `SkS.skShiftXo`; supply `SkS.skSupXo` (repaired `Xo.XoR`);
 frontier `SkF.skFront` → hUH/hLH/hVH/hVt; reading `SkR.skWall`, `SkR.skThHi` → `SkE.skEQ` → hT/hF. Round 130: Root unchanged.

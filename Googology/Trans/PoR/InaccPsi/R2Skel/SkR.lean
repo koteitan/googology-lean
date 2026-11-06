@@ -1724,7 +1724,9 @@ has code exponents and code coefficients (`Kc.kcTop`, by nesting); round 149: (i
 components are members of `Cl(b, ψ₂ b)`, the plateau at the level `Ω₂` gives the ownership of the contexts,
 `Kg.kgPlat`, `Kg.kgOwnBase`, `Kg.kgOwnExp`); round 150: every `W`-polynomial over `Ω_{k+3}` with code exponents and
 coefficients (`Ki.kiTop`, end to end); round 151: every last coefficient `γ` (`b = β + W^E·γ`, `Kj.kjTop`, end to
-end); round 152: the ownership of every context (`Kk.kkOwn`); left: (ii) the exponents `h > Ω₂` of `W^h` (round 146: the first one, `h = Ω₂`, is the
+end); round 152: the ownership of every context (`Kk.kkOwn`); rounds 153-154: the `W`-terms over the codes
+(`Kl.KlWT`, exponent data `Kl.klEx`) and the classification of the limit ones — continuity of `T` or the top of a
+context (`Kn.knClass`); left: (ii) the exponents `h > Ω₂` of `W^h` (round 146: the first one, `h = Ω₂`, is the
 jump `Kd.kdLaw` with the context `v ↦ X + W^v` and a three-level tower; round 147: the contexts of any depth
 `Ke.KeCtx`, closed under `v ↦ g₀ + W^j·v` and `v ↦ g₁ + W^{C'(v)}`, and the jump at every context `Ke.keLaw`; next:
 the recursion on the `W`-normal form of `h` — a limit exponent is a point of continuity of `T` (`Zz.zzLimW`) or the
