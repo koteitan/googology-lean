@@ -7,7 +7,10 @@ import Googology.Trans.PoR.InaccPsi.R2.ZxTwo
 `X₀` is a shift with threshold `q₀` and a base condition `Q₀` (upward closed, `Q₀ β ⇒ q₀ < ψ₂(β + W^{X₀})`), `h ∈ D`
 an exponent with `T h = H > 0` and threshold `q_h`.  The chain's base condition is
 
-  `ZyQ … ζ β :  Q₀ β ∧ q_h < ψ₂(β + W^{X₀}) ∧ ζ' < ψ₂(β + W^{X₀ + W^h·ζ'})` for every code `ζ' ≤ ζ`.
+  `ZyQ … ζ β :  Q₀ β ∧ q_h < ψ₂(β + W^{X₀ + W^h}) ∧ ζ' < ψ₂(β + W^{X₀ + W^h·ζ'})` for every code `ζ' ≤ ζ`
+
+(round 145: `q_h` is asked below the collapse at the first use of `h`, `X₀ + W^h`, which every normal base meets;
+`ψ₂(β + W^{X₀})` may equal `h`).
 
 * `zySh` (**`X₀ + W^h·ζ` is a shift**, `T = K₀ + Ω^H·Θζ`, threshold `max q₀ (max q_h ζ)`),
 * `zyLimSh` (**the limit step** at a limit code `ζ`: the readings `Θζ'` of the codes `ζ' < ζ` are cofinal in `Θζ`),
@@ -36,7 +39,7 @@ variable {S : InaccSeq.{0}}
 
 /-- **The base condition of the chain.** -/
 def ZyQ (S : InaccSeq.{0}) (l X₀ h qh : Ordinal.{0}) (Q₀ : Ordinal.{0} → Prop) (ζ β : Ordinal.{0}) : Prop :=
-  Q₀ β ∧ qh < S.psi (β + leWe X₀) (Om (1 + 1)) ∧
+  Q₀ β ∧ qh < S.psi (β + leWe (X₀ + leWe h)) (Om (1 + 1)) ∧
     ∀ ζ', GxCl (upsilon l) (ldAtR S l) ζ' → ζ' ≤ ζ → ζ' < S.psi (β + leWe (X₀ + leWe h * ζ')) (Om (1 + 1))
 
 theorem zyQ_up {l X₀ h qh : Ordinal.{0}} {Q₀ : Ordinal.{0} → Prop} (hQup : ∀ β β', β ≤ β' → Q₀ β → Q₀ β')
@@ -54,14 +57,22 @@ theorem zy_max_code {Z : Ordinal.{0}} {At : Set Ordinal.{0}} {a b : Ordinal.{0}}
   · rw [max_eq_right h]; exact hb
   · rw [max_eq_left h]; exact ha
 
-/-- The threshold of `X₀ + W^h·ζ` lies below `ψ₂(β + W^{X₀ + W^h·ζ})` on the bases with `ZyQ`. -/
+/-- The threshold of `X₀ + W^h·ζ` lies below `ψ₂(β + W^{X₀ + W^h·ζ})` on the bases with `ZyQ`, once `q_h` does. -/
 theorem zyThr {l X₀ q₀ h qh : Ordinal.{0}} {Q₀ : Ordinal.{0} → Prop}
     (hQq : ∀ β, Q₀ β → q₀ < S.psi (β + leWe X₀) (Om (1 + 1))) {ζ β : Ordinal.{0}}
-    (hQ : ZyQ S l X₀ h qh Q₀ ζ β) (hc : GxCl (upsilon l) (ldAtR S l) ζ) :
+    (hQ : ZyQ S l X₀ h qh Q₀ ζ β) (hc : GxCl (upsilon l) (ldAtR S l) ζ)
+    (hqh : qh < S.psi (β + leWe (X₀ + leWe h * ζ)) (Om (1 + 1))) :
     max q₀ (max qh ζ) < S.psi (β + leWe (X₀ + leWe h * ζ)) (Om (1 + 1)) := by
   have hmono : S.psi (β + leWe X₀) (Om (1 + 1)) ≤ S.psi (β + leWe (X₀ + leWe h * ζ)) (Om (1 + 1)) :=
     (psi_mono (InR_Om_succ 1) (add_le_add le_rfl (leWe_mono le_self_add))).1
-  exact max_lt ((hQq β hQ.1).trans_le hmono) (max_lt (hQ.2.1.trans_le hmono) (hQ.2.2 ζ hc le_rfl))
+  exact max_lt ((hQq β hQ.1).trans_le hmono) (max_lt hqh (hQ.2.2 ζ hc le_rfl))
+
+/-- On the bases with `ZyQ`, `q_h < ψ₂(β + W^{X₀ + W^h·ζ})` for every `ζ > 0`. -/
+theorem zyQh {l X₀ h qh : Ordinal.{0}} {Q₀ : Ordinal.{0} → Prop} {ζ β : Ordinal.{0}}
+    (hQ : ZyQ S l X₀ h qh Q₀ ζ β) (hpos : 0 < ζ) :
+    qh < S.psi (β + leWe (X₀ + leWe h * ζ)) (Om (1 + 1)) :=
+  hQ.2.1.trans_le (psi_mono (InR_Om_succ 1) (add_le_add le_rfl (leWe_mono (add_le_add le_rfl
+    (Ordinal.le_mul_left _ hpos))))).1
 
 section Main
 
@@ -235,11 +246,9 @@ theorem zyChain {X₀ K₀ q₀ h H qh : Ordinal.{0}} (hs0 : ZdShQ S l X₀ K₀
       e < Om (1 + 1) → ∀ β, VbD S l β → Ro.RoBaseE S l (X₀ + leWe h * ζ) e β → ZyQ S l X₀ h qh Q₀ ζ β →
         ZdLaw S l A (X₀ + leWe h * ζ) e β := by
   have hκ2 : S.InR (Om (1 + 1 : Ordinal.{0})) := InR_Om_succ 1
-  have hQq' : ∀ ζ, ∀ β, ZyQ S l X₀ h qh Q₀ ζ β → GxCl (upsilon l) (ldAtR S l) ζ →
-      max q₀ (max qh ζ) < S.psi (β + leWe (X₀ + leWe h * ζ)) (Om (1 + 1)) := fun ζ β hQ hc => by
-    have hmono : S.psi (β + leWe X₀) (Om (1 + 1)) ≤ S.psi (β + leWe (X₀ + leWe h * ζ)) (Om (1 + 1)) :=
-      (psi_mono hκ2 (add_le_add le_rfl (leWe_mono le_self_add))).1
-    exact max_lt ((hQq β hQ.1).trans_le hmono) (max_lt (hQ.2.1.trans_le hmono) (hQ.2.2 ζ hc le_rfl))
+  have hQq' : ∀ ζ, ∀ β, ZyQ S l X₀ h qh Q₀ ζ β → GxCl (upsilon l) (ldAtR S l) ζ → 0 < ζ →
+      max q₀ (max qh ζ) < S.psi (β + leWe (X₀ + leWe h * ζ)) (Om (1 + 1)) := fun ζ β hQ hc hpos =>
+    zyThr hQq hQ hc (zyQh hQ hpos)
   intro ζ
   induction ζ using WellFoundedLT.induction with
   | ind ζ IHζ =>
@@ -257,12 +266,14 @@ theorem zyChain {X₀ K₀ q₀ h H qh : Ordinal.{0}} (hs0 : ZdShQ S l X₀ K₀
     have hζ'θ : ζ' < ConjT.th S := (lt_add_one ζ').trans hζθ
     have e1 : X₀ + leWe h * (ζ' + 1) = X₀ + leWe h * ζ' + leWe h := by rw [mul_add_one, add_assoc]
     refine zdTopUpQ hl hX hA hρ (zySh hl hX hs0 hx hζc hζθ) (ZyQ S l X₀ h qh Q₀ (ζ' + 1))
-      (fun β hQ => hQq' (ζ' + 1) β hQ hζc) (fun _ _ hle hQ => zyQ_up hQup hle hQ) fun β hβD hB hQ => ?_
+      (fun β hQ => hQq' (ζ' + 1) β hQ hζc (lt_of_le_of_lt zero_le (lt_add_one ζ')))
+      (fun _ _ hle hQ => zyQ_up hQup hle hQ) fun β hβD hB hQ => ?_
     rw [e1] at hB ⊢
     exact Hs ζ' hζ'c hζ'θ β hβD hB hQ fun e hec he2 β' hβ'D hB' hQ' =>
       IHζ ζ' (lt_add_one ζ') hζ'c hζ'θ e hec he2 β' hβ'D hB' hQ'
   · refine zdTopUpQ hl hX hA hρ (zySh hl hX hs0 hx hζc hζθ) (ZyQ S l X₀ h qh Q₀ ζ)
-      (fun β hQ => hQq' ζ β hQ hζc) (fun _ _ hle hQ => zyQ_up hQup hle hQ) fun β hβD hB hQ => ?_
+      (fun β hQ => hQq' ζ β hQ hζc (pos_iff_ne_zero.2 hlim.ne_bot)) (fun _ _ hle hQ => zyQ_up hQup hle hQ)
+      fun β hβD hB hQ => ?_
     exact zyLimSh hl hX hA hρ hs0 hx hH0 hζc hζθ hlim hβD hB fun ζ' hc hlt hB' =>
       IHζ ζ' hlt hc (hlt.trans hζθ) 0 (GxCl.zero (leRho hl hX).1.1) ldOm2_SC.1 β hβD hB' (zyQ_mono hlt.le hQ)
 
@@ -283,8 +294,7 @@ theorem zyChain1 {X₀ K₀ q₀ : Ordinal.{0}} (hs0 : ZdShQ S l X₀ K₀ q₀)
     (psi_mono hκ2 (add_le_add le_rfl (leWe_mono le_self_add))).1
   exact zdNextQ hl hX hA hρ (zySh hl hX hs0 (zxEx_one hl hX) hc hθ) (ZyQ S l X₀ 1 0 Q₀ (ζ + 1))
     (fun β' hQ' => max_lt ((hQq β' hQ'.1).trans_le (psi_mono hκ2 (add_le_add le_rfl
-      (leWe_mono le_self_add))).1) (max_lt (hQ'.2.1.trans_le (psi_mono hκ2 (add_le_add le_rfl
-      (leWe_mono le_self_add))).1) (hQ'.2.2 ζ hc (lt_add_one ζ).le)))
+      (leWe_mono le_self_add))).1) (max_lt (SC_psi hκ2 _).1 (hQ'.2.2 ζ hc (lt_add_one ζ).le)))
     (fun _ _ hle hQ' => zyQ_up hQup hle hQ')
     (fun e hec he2 β' hβ'D hB' hQ' => IHc e hec he2 β' hβ'D hB' (zyQ_mono (lt_add_one ζ).le hQ'))
     0 (GxCl.zero (leRho hl hX).1.1) ldOm2_SC.1 β hβD hB hQ
@@ -315,9 +325,9 @@ theorem zyChainN : ∀ n : ℕ, 1 ≤ n → ∀ {X₀ K₀ q₀ : Ordinal.{0}}, 
       fun ζ hc hθ β hβD hB hQ IHc => ?_
     have hs' := zySh hl hX hs0 hxs hc hθ
     have hQζ : ZyQ S l X₀ ((n : Ordinal.{0}) + 1) 0 Q₀ ζ β := zyQ_mono (lt_add_one ζ).le hQ
-    refine zxLawJ hl hX hA hρ hs' (zxEx_nat hl hX n) hβD hB (zyThr hQq hQζ hc) (SC_psi hκ2 _).1
+    refine zxLawJ hl hX hA hρ hs' (zxEx_nat hl hX n) hβD hB (zyThr hQq hQζ hc (SC_psi hκ2 _).1) (SC_psi hκ2 _).1
       fun u hu huθ hown hBu => ?_
-    exact IHn hs' (ZyQ S l X₀ ((n : Ordinal.{0}) + 1) 0 Q₀ ζ) (fun β' hQ' => zyThr hQq hQ' hc)
+    exact IHn hs' (ZyQ S l X₀ ((n : Ordinal.{0}) + 1) 0 Q₀ ζ) (fun β' hQ' => zyThr hQq hQ' hc (SC_psi hκ2 _).1)
       (fun _ _ hle hQ' => zyQ_up hQup hle hQ') IHc u hu huθ 0 (GxCl.zero (leRho hl hX).1.1) ldOm2_SC.1 β hβD hBu
       ⟨hQζ, (SC_psi hκ2 _).1, hown⟩
 

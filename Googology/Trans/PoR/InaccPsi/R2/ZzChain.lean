@@ -1,7 +1,7 @@
 import Googology.Trans.PoR.InaccPsi.R2.ZyChain
 
 /-!
-# Zz: THE CHAIN OF `W^h` FOR EVERY CODE EXPONENT `1 ≤ h < θ`, over any shift
+# Zz: THE LIMIT EXPONENT of the top law, and the code exponents
 
 `Θ`, `T`, `A`, `W^x = leWe x`, `Ω^x = leOe x`, `Zd.ZdShQ`, `Zd.ZdLaw`, `Zx.ZxEx`, `Zy.ZyQ` as in `Zy.zyChain`.  A code
 `h < θ` is an exponent with `T h = Θ h` and threshold `h` (`zxEx_code`).  At a limit code `h` the map `T` is
@@ -12,10 +12,8 @@ is the limit of the laws at `X + W^{h'}`, `h' < h` (`zzLimW`).
   every `X' ≤ X`), `zxEx_code`;
 * `zzLimW` (**THE LIMIT EXPONENT**: if the readings `T h'` of exponents `h' ≤ h` with the law at `X + W^{h'}` are
   cofinal in `T h > 0`, the law holds at `X + W^h`);
-* `zzChain` (**THE CHAIN OF `W^h` FOR EVERY CODE `1 ≤ h < θ`**: over every shift `X₀` with the law at every `X₀ + e`,
-  the law at every `X₀ + W^h·ζ + e`, `ζ < θ`, `e < Ω₂` codes, on the bases with `ZyQ`; induction on `h`: `h = 1` is
-  `Zy.zyChain1`, a successor `h' + 1` is `Zy.zyChain` with the jump `Zx.zxLawJ` at `h'`, a limit is `Zy.zyChain` with
-  `zzLimW`), `zzTop` (**the top law at every exponent `Ω_{k+3} + W^h·ζ + e`**).
+The chain of `W^h` over every code `h` that uses these is `Kc.kcChain` (round 145: with the threshold of `h` below
+the first use of `h`, `Kb.kbLawJ`).
 
 No new axiom.  No new definition.
 -/
@@ -143,100 +141,8 @@ theorem zzLimW {X K q h H qh : Ordinal.{0}} (hs : ZdShQ S l X K q) (hx : ZxEx S 
     rw [ee]
     exact (psi_mono hκ1 (add_le_add le_rfl (hz.le.trans (psi_mono hκ2 hzq.le).1))).1.trans h2
 
-/-- **THE CHAIN OF `W^h` FOR EVERY CODE `1 ≤ h < θ`** over every shift `X₀` with the law at every `X₀ + e`. -/
-theorem zzChain : ∀ h, GxCl (upsilon l) (ldAtR S l) h → 1 ≤ h → h < ConjT.th S →
-    ∀ {X₀ K₀ q₀ : Ordinal.{0}}, ZdShQ S l X₀ K₀ q₀ →
-    ∀ (Q₀ : Ordinal.{0} → Prop), (∀ β, Q₀ β → q₀ < S.psi (β + leWe X₀) (Om (1 + 1))) →
-    (∀ β β', β ≤ β' → Q₀ β → Q₀ β') →
-    (∀ e, GxCl (upsilon l) (ldAtR S l) e → e < Om (1 + 1) → ∀ β, VbD S l β → Ro.RoBaseE S l X₀ e β →
-      Q₀ β → ZdLaw S l A X₀ e β) →
-    ∀ ζ, GxCl (upsilon l) (ldAtR S l) ζ → ζ < ConjT.th S → ∀ e, GxCl (upsilon l) (ldAtR S l) e →
-      e < Om (1 + 1) → ∀ β, VbD S l β → Ro.RoBaseE S l (X₀ + leWe h * ζ) e β →
-        ZyQ S l X₀ h h Q₀ ζ β → ZdLaw S l A (X₀ + leWe h * ζ) e β := by
-  have hκ2 : S.InR (Om (1 + 1 : Ordinal.{0})) := InR_Om_succ 1
-  obtain ⟨hρSC, -⟩ := leRho hl hX
-  have h0c : GxCl (upsilon l) (ldAtR S l) 0 := GxCl.zero hρSC.1
-  have hΘpos : ∀ c, GxCl (upsilon l) (ldAtR S l) c → 0 < c → 0 < gxTh (upsilon l) (ldAtR S l) c := fun c _ hc => by
-    have := gxTh_lt (Z := upsilon l) (At := ldAtR S l) h0c hc; rwa [gxTh_zero] at this
-  intro h
-  induction h using WellFoundedLT.induction with
-  | ind h IH =>
-  intro hc h1 hθ
-  have h2 : h < Om (1 + 1) := hθ.trans (psi_lt hκ2 _)
-  rcases zero_or_succ_or_isSuccLimit h with h0 | ⟨h', hh'⟩ | hlim
-  · subst h0; intro X₀ K₀ q₀; exfalso; exact (not_le.2 zero_lt_one) h1
-  · rw [succ_eq_add_one] at hh'
-    subst hh'
-    have hh'c : GxCl (upsilon l) (ldAtR S l) h' :=
-      (ldHull_iff hl hX ((lt_add_one h').trans h2)).1 (mem_of_add_one_mem ((ldHull_iff hl hX h2).2 hc))
-    have hh'θ : h' < ConjT.th S := (lt_add_one h').trans hθ
-    rcases eq_or_ne h' 0 with rfl | hne
-    · -- `h = 1`
-      intro X₀ K₀ q₀ hs0 Q₀ hQq hQup H0 ζ hζc hζθ e hec he2 β hβD hB hQ
-      rw [zero_add] at hB hQ ⊢
-      exact zyChain1 hl hX hA hρ hs0 Q₀ hQq hQup H0 ζ hζc hζθ e hec he2 β hβD hB
-        ⟨hQ.1, (SC_psi hκ2 _).1, hQ.2.2⟩
-    · -- a successor `h' + 1`, `h' ≥ 1`: the jump at `h'`
-      have hh'1 : 1 ≤ h' := Order.one_le_iff_pos.2 (pos_iff_ne_zero.2 hne)
-      intro X₀ K₀ q₀ hs0 Q₀ hQq hQup H0
-      have hxs := zxEx_code hl hX hc hθ
-      refine zyChain hl hX hA hρ hs0 hxs (hΘpos _ hc (lt_of_le_of_lt zero_le (lt_add_one h'))) Q₀ hQq hQup H0
-        fun ζ hζc hζθ β hβD hB hQ IHc => ?_
-      have hs' := zySh hl hX hs0 hxs hζc hζθ
-      have hQζ : ZyQ S l X₀ (h' + 1) (h' + 1) Q₀ ζ β := zyQ_mono (lt_add_one ζ).le hQ
-      have hmono : S.psi (β + leWe X₀) (Om (1 + 1)) ≤
-          S.psi (β + leWe (X₀ + leWe (h' + 1) * ζ)) (Om (1 + 1)) :=
-        (psi_mono hκ2 (add_le_add le_rfl (leWe_mono le_self_add))).1
-      have hh'X : h' < S.psi (β + leWe (X₀ + leWe (h' + 1) * ζ)) (Om (1 + 1)) :=
-        ((lt_add_one h').trans hQ.2.1).trans_le hmono
-      refine zxLawJ hl hX hA hρ hs' (zxEx_code hl hX hh'c hh'θ) hβD hB (zyThr hQq hQζ hζc) hh'X
-        fun u hu huθ hown hBu => ?_
-      exact IH h' (lt_add_one h') hh'c hh'1 hh'θ hs' (ZyQ S l X₀ (h' + 1) (h' + 1) Q₀ ζ)
-        (fun β' hQ' => zyThr hQq hQ' hζc) (fun _ _ hle hQ' => zyQ_up hQup hle hQ') IHc u hu huθ 0 h0c
-        ldOm2_SC.1 β hβD hBu ⟨hQζ, hh'X, hown⟩
-  · -- a limit code `h`: `T` is continuous at `h`
-    intro X₀ K₀ q₀ hs0 Q₀ hQq hQup H0
-    have hxs := zxEx_code hl hX hc hθ
-    have hh0 : (0 : Ordinal.{0}) < h := pos_iff_ne_zero.2 hlim.ne_bot
-    refine zyChain hl hX hA hρ hs0 hxs (hΘpos _ hc hh0) Q₀ hQq hQup H0 fun ζ hζc hζθ β hβD hB hQ IHc => ?_
-    have hs' := zySh hl hX hs0 hxs hζc hζθ
-    have hQζ : ZyQ S l X₀ h h Q₀ ζ β := zyQ_mono (lt_add_one ζ).le hQ
-    have hmono : S.psi (β + leWe X₀) (Om (1 + 1)) ≤ S.psi (β + leWe (X₀ + leWe h * ζ)) (Om (1 + 1)) :=
-      (psi_mono hκ2 (add_le_add le_rfl (leWe_mono le_self_add))).1
-    refine zzLimW hl hX hA hρ hs' hxs (hΘpos _ hc hh0) hβD fun y hy => ?_
-    obtain ⟨c, hcc, hch, hcy⟩ := gxTh_onto (xmTh_lim hl hX h2 hlim y hy)
-    have hc0 : 0 < c := by
-      rcases eq_or_ne c 0 with h0 | h0
-      · exfalso; rw [h0, gxTh_zero] at hcy; exact absurd hcy.symm (lt_of_le_of_lt zero_le (lt_add_one y)).ne'
-      · exact pos_iff_ne_zero.2 h0
-    have hcθ : c < ConjT.th S := hch.trans hθ
-    have hcx := zxEx_code hl hX hcc hcθ
-    refine ⟨c, hcx.D, hch.le, by rw [hcx.T, hcy]; exact lt_add_one y, ?_⟩
-    have hle : X₀ + leWe h * ζ + leWe c * 1 ≤ X₀ + leWe h * ζ + leWe h := by
-      rw [mul_one]; exact add_le_add le_rfl (leWe_mono hch.le)
-    have h1c : GxCl (upsilon l) (ldAtR S l) 1 := GxCl.small (gg_one_lt_of_SC hρSC)
-    have h1θ : (1 : Ordinal.{0}) < ConjT.th S := gg_one_lt_of_SC (ConjT.SC_th S)
-    have hlw := IH c hch hcc (Order.one_le_iff_pos.2 hc0) hcθ hs' (ZyQ S l X₀ h h Q₀ ζ)
-      (fun β' hQ' => zyThr hQq hQ' hζc) (fun _ _ hle hQ' => zyQ_up hQup hle hQ') IHc 1 h1c h1θ 0 h0c
-      ldOm2_SC.1 β hβD (zzBase0_mono hle hB) ⟨hQζ, (hch.trans hQ.2.1).trans_le hmono, fun u' _ hu' =>
-        hu'.trans_lt ((gg_one_lt_of_SC Ph.ph_SC_Om1).trans (psiS_bounds (S := S) _ 1).1)⟩
-    rwa [mul_one] at hlw
-
-/-- **THE TOP LAW AT EVERY EXPONENT `Ω_{k+3} + W^h·ζ + e`**, `h` a code with `1 ≤ h < θ` (`ζ < θ`, `e < Ω₂` codes, on
-the bases with `ZyQ`; the case `X₀ = Ω_{k+3}` of `zzChain`, with `Xm.xmTopUp` at the codes). -/
-theorem zzTop (k : ℕ) (h : Ordinal.{0}) (hc : GxCl (upsilon l) (ldAtR S l) h) (h1 : 1 ≤ h) (hθ : h < ConjT.th S) :
-    ∀ ζ, GxCl (upsilon l) (ldAtR S l) ζ → ζ < ConjT.th S → ∀ e, GxCl (upsilon l) (ldAtR S l) e →
-      e < Om (1 + 1) → ∀ β, VbD S l β →
-        Ro.RoBaseE S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + leWe h * ζ) e β →
-        ZyQ S l (Om ((k : Ordinal.{0}) + 1 + 1 + 1)) h h (fun _ => True) ζ β →
-          ZdLaw S l A (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + leWe h * ζ) e β :=
-  zzChain hl hX hA hρ h hc h1 hθ ((zdSh_Om hl hX (S := S) k).toQ (leRho hl hX).1.1) (fun _ => True)
-    (fun _ _ => (SC_psi (InR_Om_succ 1) _).1) (fun _ _ _ _ => trivial)
-    (fun e hec he2 β hβD hB _ => xmTopUp S k l ηx A hl hX hA hρ e β hec he2 hβD hB)
-
 end Main
 
 end Googology.Trans.PoR.InaccPsi.R2.Zz
 
-#print axioms Googology.Trans.PoR.InaccPsi.R2.Zz.zzChain
-#print axioms Googology.Trans.PoR.InaccPsi.R2.Zz.zzTop
+#print axioms Googology.Trans.PoR.InaccPsi.R2.Zz.zzLimW
