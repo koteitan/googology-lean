@@ -41,6 +41,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZrBase
 import Googology.Trans.PoR.InaccPsi.R2.ZrRead
 import Googology.Trans.PoR.InaccPsi.R2.ZsCap
 import Googology.Trans.PoR.InaccPsi.R2.ZtIso
+import Googology.Trans.PoR.InaccPsi.R2.ZuRef
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -329,7 +330,8 @@ the code `ε_{B_Γ+1}` (reading `ε_{D(x)+1} = ϑˣ(Ω₁ + D(x))`, no fixed poi
 `skZbDirect` is REDUCED to `skZbDirectX` (`ZbDirect S X`, OPEN).  ASSEMBLY FIRST for the layers past `X`:
 `Zb.zbUV` is generic in the atom system, so `skLayLoFixX` and `skLayHiFixX` are REDUCED to the one new leaf
 `skLayPastX` (`Zm.ZmPastAt S c`: one atom system `A : Zb.ZbAS` with a layer `Zm.ZmLayA A S B` for every
-`B < Γ(c+1)`, `X ≤ c < Ω₂`; `Zm.zmLay_of_past`).  The interface `Zm.ZmDS` carries a base gate (`Zm.ZmDS.Eg`,
+`B < Γ(c+1)`, `X ≤ c < Ω₂`; `Zm.zmLay_of_past`).  Round 138: skLayPastX is REFUTED at `c = θ` (every atom system
+stops at `θ`, `Zu.zuV_le_th`); replaced by skLayPastXθ (`X ≤ c < θ`) and skLayPastTh (`θ ≤ c < Ω₂`, as UV).  The interface `Zm.ZmDS` carries a base gate (`Zm.ZmDS.Eg`,
 `Zm.ZmDS.raise`) for the code indices to come.  The next wall: `ζ_{B_Γ+1}` (a fixed point of `φ(1, ·)`;
 the codes past it need the brackets `φ(1, P + n)` over the pseudo-bases `P = φ(2, b)`, read `φ(2, D(x) + b(x))`):
 next Lean statement a level-generic `Zm.ZmGood2` (the level `α` of `φ(α, ·)` a parameter, induction on `α`).
@@ -2317,25 +2319,55 @@ theorem skZbDirect (S : InaccSeq.{0}) : ∀ c, Tf.tfBG ≤ c → c < Tl.tlX → 
     (ev_isSuccLimit_of_inE (Low.opow_eq_self_of_SC Tl.tlX_SC)).add_one_lt hc
   exact skZbDirectX S B hB1 (hB2.trans (Zb.ZbRS.gcG_lt_X hc1))
 
-/-- STATUS: OPEN (round 133, new node; REFUTE FIRST: NO EVIDENCE — the shape is satisfiable below X: Zm.ZmLayA
-Zb.zbU S B holds for every B_Γ ≤ B < ε_{B_Γ+ε₀}, skZmDirectE0)
+/-- STATUS: REFUTED (round 138, Zu.zuLayPastX_false; was OPEN L, round 133, new node: the leaf skLayPastX)
+SIZE: S
+the round-133 statement `∀ c, X ≤ c → c < Ω₂ → Zm.ZmPastAt S c` (one abstract atom system `Zb.ZbAS` for every layer
+past X) is FALSE at the layer `c = θ = ψ_{Ω₂}(Ω_ω)`: every atom system has its bound `V ≤ θ` (`Zu.zuV_le_th`: its
+atoms lie in `Cl(Ω_ω, b)`, field `mem`, and `θ`, a strongly critical member of `Cl(Ω_ω + 1, Z)`, would be an atom,
+`Zu.zuSC_atom`), while the layer for the atom index `θ + 1 < Γ(θ+1)` asks `Γ(θ+1) ≤ T ≤ V`.  Replaced by
+skLayPastXθ (the layers below `θ`) and skLayPastTh (the layers from `θ` on, populated: the name `θ` is good, its
+restart reads the code `θ`). -/
+theorem skLayPastX_false (S : InaccSeq.{0}) :
+    ¬ (∀ c, Tl.tlX ≤ c → c < Om (1 + 1) → Zm.ZmPastAt S c) :=
+  Zu.zuLayPastX_false S
+
+/-- STATUS: OPEN (round 138: the part of the refuted skLayPastX below `θ`; round 133, new node; REFUTE FIRST: NO
+EVIDENCE — the shape is satisfiable below X: Zm.ZmLayA Zb.zbU S B holds for every B_Γ ≤ B < ε_{B_Γ+ε₀},
+skZmDirectE0; the bound `V ≤ θ` of every atom system, `Zu.zuV_le_th`, is no obstacle below `θ`)
 SIZE: L
-THE LAYERS PAST X FROM ONE ATOM SYSTEM: for every layer X ≤ c < Ω₂ an abstract atom system A : Zb.ZbAS with a layer
+THE LAYERS `X ≤ c < θ` FROM ONE ATOM SYSTEM: for every such layer an abstract atom system A : Zb.ZbAS with a layer
 (gate below K, top code read with the atoms of A, terms below it) for every atom index B < Γ(c+1) (Zm.ZmPastAt S c).
 Needs an atom system past X (atoms ψ_{Ω₂}(e), e ≥ Ω₂^{Ω₂}; hull lemma below θ, Uf.uf_key / Vd.vd_nf_ex). -/
-theorem skLayPastX (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < Om (1 + 1) → Zm.ZmPastAt S c := by
+theorem skLayPastXθ (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < ConjT.th S → Zm.ZmPastAt S c := by
   sorry
 
-/-- STATUS: REDUCED (round 133: Zm.zmLay_of_past, skLayPastX; was OPEN L, round 131; REFUTE FIRST: NO EVIDENCE)
+/-- STATUS: OPEN (round 138, new leaf: the part of the refuted skLayPastX from `θ` on, as UPPER ∧ LOWER ∧ CapV)
+SIZE: L
+THE LAYERS `θ ≤ c < Ω₂` (`θ = ψ_{Ω₂}(Ω_ω)`): UPPER ∧ LOWER ∧ CapV at every range restart of the layer below
+`ι(Γ(φ(ℓ, Γ(c)+1))·ω)`, `ℓ < Γ(c+1)` (the conclusion of `Zm.zmLay_of_past`).  No abstract atom system reaches these
+layers (`Zu.zuV_le_th`): their codes have atoms `ψ_{Ω₂}(Ω_ω + y)` (`y > 0`), which lie only in the hulls with
+`A > Ω_ω + y`, so the atoms depend on the restart.  REFUTE FIRST: NO EVIDENCE (part of the natural target; the
+layer `θ` holds the restart of the good name `θ`, code `θ`). -/
+theorem skLayPastTh (S : InaccSeq.{0}) : ∀ c, ConjT.th S ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l →
+    Xh.XhPast S c l → (∃ ℓ, ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) →
+    SkUV S l := by
+  sorry
+
+/-- STATUS: REDUCED (round 138: Zm.zmLay_of_past, skLayPastXθ, skLayPastTh; round 133: skLayPastX, REFUTED; was
+OPEN L, round 131; REFUTE FIRST: NO EVIDENCE)
 SIZE: L
 skLayLoFix for the layers X ≤ c < Ω₂ (X = Tl.tlX = ψ_{Ω₂}(Ω₂^{Ω₂})): the atom system zbU has the bound X; past X
 the atoms ψ_{Ω₂}(e) with e ≥ Ω₂^{Ω₂} (levels Ω₁²·γ + …, H_γ, Uc.ucDat) need another atom system with its hull
-lemma (Uf.uf_key / Vd.vd_nf_ex below θ): skLayPastX. -/
+lemma (Uf.uf_key / Vd.vd_nf_ex below θ): skLayPastXθ below θ, skLayPastTh from θ on. -/
 theorem skLayLoFixX (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l →
     Xh.XhPast S c l → (∃ ℓ, ℓ < Gc.gcG c ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) → SkUV S l := by
-  intro c hc1 hc2 l hr _ hex
+  intro c hc1 hc2 l hr hP hex
   obtain ⟨ℓ, hℓ, hl⟩ := hex
-  exact Zm.zmLay_of_past (skLayPastX S c hc1 hc2) l hr ⟨ℓ, hℓ.trans (Gc.gcG_lt (lt_add_one c)), hl⟩
+  have hex' : ∃ ℓ, ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω) :=
+    ⟨ℓ, hℓ.trans (Gc.gcG_lt (lt_add_one c)), hl⟩
+  by_cases hcθ : c < ConjT.th S
+  · exact Zm.zmLay_of_past (skLayPastXθ S c hc1 hcθ) l hr hex'
+  · exact skLayPastTh S c (not_lt.1 hcθ) hc2 l hr hP hex'
 
 /-- STATUS: REDUCED (round 131: Zb.zbLay_of_direct, skZbDirect, skLayLoFixX; round 129, was OPEN L; round 130:
 REFUTE FIRST at c = B_Γ and at the second fixed point of Γ: NO EVIDENCE — the base atoms Γ(B_Γ) = B_Γ, Γ(B₂) = B₂
@@ -2378,16 +2410,19 @@ theorem skLayLo (S : InaccSeq.{0}) : ∀ c, 1 ≤ c → c < Om (1 + 1) → ∀ l
   · exact skLayLoD S c hc1 hce l hr hex
   · exact skLayLoBig S c hc1 hc2 (not_lt.1 hce) l hr hP hex
 
-/-- STATUS: REDUCED (round 133: Zm.zmLay_of_past, skLayPastX; was OPEN L, round 131; REFUTE FIRST: NO EVIDENCE)
+/-- STATUS: REDUCED (round 138: Zm.zmLay_of_past, skLayPastXθ, skLayPastTh; round 133: skLayPastX, REFUTED; was
+OPEN L, round 131; REFUTE FIRST: NO EVIDENCE)
 SIZE: L
-skLayHiFix for the layers X ≤ c < Ω₂ (see skLayLoFixX): skLayPastX. -/
+skLayHiFix for the layers X ≤ c < Ω₂ (see skLayLoFixX): skLayPastXθ below θ, skLayPastTh from θ on. -/
 theorem skLayHiFixX (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l →
     Xh.XhPast S c l → (∀ ℓ, ℓ < Gc.gcG c → Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω) ≤ l) →
     (∃ ℓ, Gc.gcG c ≤ ℓ ∧ ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) →
     SkUV S l := by
-  intro c hc1 hc2 l hr _ _ hex
+  intro c hc1 hc2 l hr hP _ hex
   obtain ⟨ℓ, -, hℓ, hl⟩ := hex
-  exact Zm.zmLay_of_past (skLayPastX S c hc1 hc2) l hr ⟨ℓ, hℓ, hl⟩
+  by_cases hcθ : c < ConjT.th S
+  · exact Zm.zmLay_of_past (skLayPastXθ S c hc1 hcθ) l hr ⟨ℓ, hℓ, hl⟩
+  · exact skLayPastTh S c (not_lt.1 hcθ) hc2 l hr hP ⟨ℓ, hℓ, hl⟩
 
 /-- STATUS: REDUCED (round 131: Zb.zbLay_of_direct, skZbDirect, skLayHiFixX; round 129, was OPEN L; round 130:
 REFUTE FIRST at c = B_Γ and at the second fixed point of Γ: NO EVIDENCE, see skLayLoFix)
@@ -3418,7 +3453,7 @@ are in `(Ω₁, θ]`; the missing link is `π` on the readings (no lemma compute
 `vt_rep` gives `Θ_λ(c) = ϑ^{ρ_λ}(ξ)` for a principal reading, the map `c ↦ ξ` is not formalized).  Round 138: the
 layer reading systems prove such a link (`Zm.ZmDS`: Lemma EXACT for explicit readings `R(o)(x)`) for their codes;
 codes below `θ` past them (e.g. `ψ_{Ω₂}(ψ_{Ω₃}(Ω_ω·2))` at a window, where `A ≥ Ω_ω·2`) are the content of
-skZbDirectX, skLayPastX.  REFUTE FIRST: NO EVIDENCE (at a limit of fixed restarts with `Θ_λ(m_λ) = ρ_λ+1` it
+skZbDirectX, skLayPastXθ, skLayPastTh.  REFUTE FIRST: NO EVIDENCE (at a limit of fixed restarts with `Θ_λ(m_λ) = ρ_λ+1` it
 holds with `v = ρ_λ`, `π(ρ_λ) = ρ_μ`, `Cl.pi_base`, at the fixed `μ`). -/
 theorem skFixCont (S : InaccSeq.{0}) :
     ∀ l, IsRestartIdx l → Bt.iota S (Om ω) < l → l < Bt.iota S (Om ω + Nc.ncPp S * (ω + 1)) → upsilon l = l →
