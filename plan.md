@@ -11,7 +11,7 @@ The remaining work, arranged by the cells of the README tables. Items not being 
       - also: window RS input and cap off υ-fixed restarts, Θ = ρ at isolated ones; atoms move to K_Y; base ι(Ω₂): reach, cap; codes ≤ K_ω read short.
       - road yqRoadS (hyp.: UPPER, LOWER, cap past the frontier; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; the shift XoShift; XoSup): ν_C = L(ω+1).
       - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): 61 sorry leaves; OPEN 24 (all L), SUSPECT 2, REFUTED 9; 16 OPEN leaves on the road (all L); skTopLawAll and skPsi3OffRest2 proved (Kx.kxTopLawAll, Ky.kyPsi3OffRest2); root vacuity open.
-      - next: skLevImgHi4, skZlCfg; skZbDirectX, skLayPastXθ, skLayPastTh; skFix and window leaves, skTopLwNo2; skBC; skAtHi3.
+      - next: skLevImgHi4, skZlCfg; skZbDirectX, skLayPastXθ, skLayPastTh; skFix and window leaves, skTopLwNo2; skBC; 🤖 skAtHi3 (Kz: T_K below K = Γ_{Ω_ω+1}; upper bound and lower half done, next the offset law, top law and moves on D_K).
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
