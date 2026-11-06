@@ -2333,7 +2333,9 @@ theorem skLayPastX_false (S : InaccSeq.{0}) :
 
 /-- STATUS: OPEN (round 138: the part of the refuted skLayPastX below `θ`; round 133, new node; REFUTE FIRST: NO
 EVIDENCE — the shape is satisfiable below X: Zm.ZmLayA Zb.zbU S B holds for every B_Γ ≤ B < ε_{B_Γ+ε₀},
-skZmDirectE0; the bound `V ≤ θ` of every atom system, `Zu.zuV_le_th`, is no obstacle below `θ`)
+skZmDirectE0; the bound `V ≤ θ` of every atom system, `Zu.zuV_le_th`, is no obstacle below `θ` provided
+`Γ(c+1) ≤ θ` for `c < θ`, i.e. `θ` is a fixed point of `α ↦ Γ_{Ω₁+1+α}` (expected: `θ = ψ_{Ω₂}(Ω_ω)` is closed under
+it; not yet in Lean — if it failed, the layers `c` with `Γ(c+1) > θ` would refute this leaf as `Zu.zuPastAt_false`))
 SIZE: L
 THE LAYERS `X ≤ c < θ` FROM ONE ATOM SYSTEM: for every such layer an abstract atom system A : Zb.ZbAS with a layer
 (gate below K, top code read with the atoms of A, terms below it) for every atom index B < Γ(c+1) (Zm.ZmPastAt S c).
