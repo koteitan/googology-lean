@@ -65,7 +65,7 @@ theorem zrArg_lt {e c : Ordinal.{0}} (hlt : S.psi e (Om (1 + 1)) < S.psi (Om ω 
 
 section Read
 
-variable {A ρ : Ordinal.{0}} (hρ : S.psi A (Om 1) = ρ) (hA : A = Om ω + Om (1 + 1))
+variable {A ρ : Ordinal.{0}} (hρ : S.psi A (Om 1) = ρ) (hA : Om ω < A)
   (hown : A ∈ S.CSet A ρ)
 
 include hρ hA hown
@@ -74,8 +74,7 @@ theorem zrA_mem {a : Ordinal.{0}} (ha : A ≤ a) : A ∈ S.CSet a (S.psi a (Om 1
   have h : A ∈ S.CSet A (S.psi A (Om 1)) := by rw [hρ]; exact hown
   exact (psi_mono (S := S) Low.InR_Om_one ha).2 h
 
-theorem zrOmw_lt : Om ω < A := by
-  rw [hA]; exact lt_add_of_pos_right _ (Om_pos (by rw [one_add_one_eq_two]; exact two_ne_zero))
+theorem zrOmw_lt : Om ω < A := hA
 
 theorem zrAθ_mem (y : Ordinal.{0}) : A + ConjT.th S ∈ S.CSet (A + ConjT.th S + y) (zrPs S A y) :=
   CSet.add_mem (zrA_mem hρ hA hown (le_self_add.trans le_self_add))
@@ -193,18 +192,28 @@ theorem zrOuter : ∀ j, cdOtp (S.CSet A ρ) (zrK S j) ≤ zrF S A ρ j
       have hΘc : cdOtp (S.CSet A ρ) c < zrF S A ρ j := (cdOtp_lt_of_mem hcC hcK).trans_le hO
       exact hI.trans_lt (zrPs_strict hρ hA hown hΘc (hΘc.trans (zrF_lt_succ hρ hA hown j)))
 
-/-- **`Θ(Ω₂) ≤ ψ_{Ω₁}(A + θ + Ω₁)`.** -/
-theorem zrTh_Om2 : cdOtp (S.CSet A ρ) (Om (1 + 1)) ≤ zrPs S A (Om 1) := by
+/-- **`Θ(Ω₂) ≤ ψ_{Ω₁}(A + θ + Ω₁)`** at every own `A ∈ (Ω_ω, Ω_ω + Ω₂]` (all atoms lie below `K_ω`). -/
+theorem zrTh_Om2 (hA2 : A ≤ Om ω + Om (1 + 1)) : cdOtp (S.CSet A ρ) (Om (1 + 1)) ≤ zrPs S A (Om 1) := by
   refine Ls.lsOtp_least hρ le_rfl (SC_psi Low.InR_Om_one _) (zrPs_gt_rho hρ hA hown _) ?_
   intro t ht htlt
   have htC := Ls.lsAt_mem ht
   have hρle : ρ ≤ S.psi A (Om (1 + 1)) := by
     rw [← hρ]; exact ((psi_lt Low.InR_Om_one A).trans (psiS_bounds (S := S) A 1).1).le
-  have hπ : t < S.psi (Om ω + Om (1 + 1)) (Om (1 + 1)) := by
-    rw [← hA]; exact lt_psi_of_mem (InR_Om_succ 1) (CSet_mono le_rfl hρle htC) htlt
+  have hπ : t < S.psi (Om ω + Om (1 + 1)) (Om (1 + 1)) :=
+    (lt_psi_of_mem (InR_Om_succ 1) (CSet_mono le_rfl hρle htC) htlt).trans_le
+      (psi_mono (S := S) (InR_Om_succ 1) hA2).1
   obtain ⟨j, hj⟩ := zrK_sup hπ
-  have hKC : zrK S j ∈ S.CSet A ρ :=
-    zrK_mem j fun i _ => by rw [hA]; exact (add_lt_add_iff_left _).2 (zrK_lt_Om2 i)
+  exact (cdOtp_lt_of_mem htC hj).trans_le
+    ((zrOuter hρ hA hown hθ hΩ j).trans (zrF_lt_Y hρ hA hown j).le)
+
+/-- **`Θ(K_ω) ≤ ψ_{Ω₁}(A + θ + Ω₁)`** for every own `A ≥ Ω_ω + Ω₂`, `K_ω = ψ_{Ω₂}(Ω_ω + Ω₂) = sup_j K_j`: every
+atom below `K_ω` lies below some `K_j`. -/
+theorem zrTh_K : cdOtp (S.CSet A ρ) (S.psi (Om ω + Om (1 + 1)) (Om (1 + 1))) ≤ zrPs S A (Om 1) := by
+  refine Ls.lsOtp_least hρ (psi_lt (InR_Om_succ 1) _).le (SC_psi Low.InR_Om_one _)
+    (zrPs_gt_rho hρ hA hown _) ?_
+  intro t ht htlt
+  have htC := Ls.lsAt_mem ht
+  obtain ⟨j, hj⟩ := zrK_sup htlt
   exact (cdOtp_lt_of_mem htC hj).trans_le
     ((zrOuter hρ hA hown hθ hΩ j).trans (zrF_lt_Y hρ hA hown j).le)
 
@@ -259,9 +268,9 @@ theorem zrBCThPos : cdTheta S (zoBase S) (cdCode S (zoBase S)) < cdDelta (zoBase
     have hpv : Pv S (cdEta S (zoBase S)) = upsilon (zoBase S) := by rw [zrBase_eta, zrBase_rho]
     have h := cdTheta_Om1 (S := S) hpv
     unfold cdTheta at h; rwa [hHull] at h
-  have hmain := zrTh_Om2 hρ rfl hown hθ hΩ
   have hAw : Om ω < Om ω + Om (1 + 1) :=
     lt_add_of_pos_right _ (Om_pos (by rw [one_add_one_eq_two]; exact two_ne_zero))
+  have hmain := zrTh_Om2 hρ hAw hown hθ hΩ le_rfl
   have hY := zrY_lt hown' hAw
   have hγ : ω + 1 ≤ upsilon (zoBase S) := by
     have hSC : SC (upsilon (zoBase S)) := by rw [← hρ]; exact SC_psi Low.InR_Om_one _
