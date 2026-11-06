@@ -10,7 +10,8 @@ For `p = B_Γ` (`φ(2, B_Γ) = B_Γ`), `R₀ = Yr`, `V_P = D` this is `Zm.zmHR`.
 
 * `nb_fixP` (`φ(1, P) = P`), `nb_noFix` (**no fixed point of `φ(1, ·)` in `(P, Z)`**), `nb_veb_lt_Z`, `nb_idx_lt`
   (`c < φ(1, P + c)` for `c < Z`), `nbN`, `nbBE`, `nbN_eq`, `nbBE_eq`, `nb_bracket`, `nb_guards`;
-* `nbHR`, `nbHG` (**the global reading and gate over `P`**), `nbHR_lt`, `nbHG_lt`, `nbHR_cnf`, `nbHG_cnf`.
+* `nbHR`, `nbHG` (**the global reading and gate over `P`**), `nbHR_lt`, `nbHG_lt`, `nbHR_cnf`, `nbHG_cnf`, `nbHG_idx`,
+  `nb_succ_dec`, `nbHG_le_succ`, `nbHG_succ_lt`, `nbHR_succ` (from the same facts below `P`).
 
 No new axiom.  New definitions: `nbN`, `nbBE`, `nbHR`, `nbHG`.
 -/
@@ -192,6 +193,86 @@ theorem nbHG_cnf {o : Ordinal.{0}} (h1 : veblen 2 p ≤ o) (h2 : o < veblen 2 (p
       (max (nbHG p G₀ (o / nbBE p o ^ log (nbBE p o) o)) (nbHG p G₀ (o % nbBE p o ^ log (nbBE p o) o)))) := by
   obtain ⟨-, hg⟩ := nb_guards2 h1 h2
   rw [nbHG, dif_neg (not_lt.2 h1), dif_pos hg]
+
+theorem nbP_lim (p : Ordinal.{0}) : IsSuccLimit (veblen 2 p) := ev_isSuccLimit_of_inE (zm_fix_E (nb_fixP p))
+
+theorem nbZ_E (p : Ordinal.{0}) : InE (veblen 2 (p + 1)) := zm_fix_E (nbZ_fix p)
+
+/-- **The gate of a code bounds the gate of the index of its bracket.** -/
+theorem nbHG_idx {o : Ordinal.{0}} (h1 : veblen 2 p ≤ o) (h2 : o < veblen 2 (p + 1)) :
+    nbHG p G₀ (nbN p o) ≤ nbHG p G₀ o := by
+  rw [nbHG_cnf h1 h2]; exact le_max_left _ _
+
+/-- The bracket of `o + 1` is that of `o`, with the rest `r + 1`. -/
+theorem nb_succ_dec {o : Ordinal.{0}} (h1 : veblen 2 p ≤ o) (h2 : o < veblen 2 (p + 1)) :
+    veblen 2 p ≤ o + 1 ∧ o + 1 < veblen 2 (p + 1) ∧ nbN p (o + 1) = nbN p o ∧ nbBE p (o + 1) = nbBE p o ∧
+      log (nbBE p o) (o + 1) = log (nbBE p o) o ∧
+      (o + 1) / nbBE p o ^ log (nbBE p o) o = o / nbBE p o ^ log (nbBE p o) o ∧
+      (o + 1) % nbBE p o ^ log (nbBE p o) o = o % nbBE p o ^ log (nbBE p o) o + 1 ∧
+      o % nbBE p o ^ log (nbBE p o) o < o := by
+  obtain ⟨b1, b2, -⟩ := nb_bracket h1 h2
+  have hE := zm_veb_E (veblen 2 p + nbN p o)
+  have hEeq := nbBE_eq b1 b2
+  have hEo : nbBE p o ≤ o := hEeq ▸ b1
+  have hEE : InE (nbBE p o) := hEeq ▸ hE
+  have hb2' : o + 1 < veblen 1 (veblen 2 p + (nbN p o + 1)) :=
+    (ev_isSuccLimit_of_inE (zm_veb_E _)).add_one_lt b2
+  have hN1 : nbN p (o + 1) = nbN p o := nbN_eq (b1.trans (lt_add_one o).le) hb2'
+  have hZ1 : o + 1 < veblen 2 (p + 1) := (ev_isSuccLimit_of_inE (nbZ_E p)).add_one_lt h2
+  obtain ⟨hk0, hd0, hdE, hrk, hdec⟩ := zm_dec hEE hEo
+  set E := nbBE p o
+  set k := log E o
+  set d := o / E ^ k
+  set r := o % E ^ k
+  have hr1 : r + 1 < E ^ k := zm_opow_prin hEE k hrk (zm_one_lt_opow hEE hk0)
+  obtain ⟨u1, u2, u3⟩ := zm_dec_uniq hEE hd0.ne' hdE hr1
+  have e : o + 1 = E ^ k * d + (r + 1) := by rw [← add_assoc, hdec]
+  have hBE1 : nbBE p (o + 1) = E := by
+    show veblen 1 (veblen 2 p + nbN p (o + 1)) = E
+    rw [hN1]; exact hEeq.symm
+  refine ⟨h1.trans (lt_add_one o).le, hZ1, hN1, hBE1, ?_, ?_, ?_, zm_mod_lt hEE hEo⟩
+  · rw [e]; exact u1
+  · rw [e]; have := u2; rwa [u1] at this
+  · rw [e]; have := u3; rwa [u1] at this
+
+theorem nbHG_le_succ (hG₀ : ∀ o, o < veblen 2 p → G₀ o ≤ G₀ (o + 1)) :
+    ∀ o, o < veblen 2 (p + 1) → nbHG p G₀ o ≤ nbHG p G₀ (o + 1) := by
+  intro o
+  induction o using WellFoundedLT.induction with
+  | ind o IH =>
+  intro hoZ
+  rcases lt_or_ge o (veblen 2 p) with hoB | hoB
+  · rw [nbHG_lt hoB, nbHG_lt ((nbP_lim p).add_one_lt hoB)]; exact hG₀ o hoB
+  obtain ⟨s1, s2, s3, s4, s5, s6, s7, hro⟩ := nb_succ_dec hoB hoZ
+  rw [nbHG_cnf hoB hoZ, nbHG_cnf s1 s2, s3, s4, s5, s6, s7]
+  exact max_le_max le_rfl (max_le_max le_rfl (max_le_max le_rfl (IH _ hro (hro.trans hoZ))))
+
+theorem nbHG_succ_lt (hG₀ : ∀ o, o < veblen 2 p → ∀ Z, IsSuccLimit Z → G₀ o < Z → G₀ (o + 1) < Z) :
+    ∀ o, o < veblen 2 (p + 1) → ∀ Z, IsSuccLimit Z → nbHG p G₀ o < Z → nbHG p G₀ (o + 1) < Z := by
+  intro o
+  induction o using WellFoundedLT.induction with
+  | ind o IH =>
+  intro hoZ Z hZ hg
+  rcases lt_or_ge o (veblen 2 p) with hoB | hoB
+  · rw [nbHG_lt hoB] at hg; rw [nbHG_lt ((nbP_lim p).add_one_lt hoB)]; exact hG₀ o hoB Z hZ hg
+  obtain ⟨s1, s2, s3, s4, s5, s6, s7, hro⟩ := nb_succ_dec hoB hoZ
+  rw [nbHG_cnf hoB hoZ] at hg
+  rw [nbHG_cnf s1 s2, s3, s4, s5, s6, s7]
+  exact max_lt ((le_max_left _ _).trans_lt hg) (max_lt ((le_max_left _ _).trans_lt
+    ((le_max_right _ _).trans_lt hg)) (max_lt ((le_max_left _ _).trans_lt ((le_max_right _ _).trans_lt
+      ((le_max_right _ _).trans_lt hg))) (IH _ hro (hro.trans hoZ) Z hZ ((le_max_right _ _).trans_lt
+        ((le_max_right _ _).trans_lt ((le_max_right _ _).trans_lt hg))))))
+
+theorem nbHR_succ (hR₀ : ∀ o, o < veblen 2 p → ∀ x, R₀ (o + 1) x = R₀ o x + 1) :
+    ∀ o, o < veblen 2 (p + 1) → ∀ x, nbHR p R₀ VP (o + 1) x = nbHR p R₀ VP o x + 1 := by
+  intro o
+  induction o using WellFoundedLT.induction with
+  | ind o IH =>
+  intro hoZ x
+  rcases lt_or_ge o (veblen 2 p) with hoB | hoB
+  · rw [nbHR_lt hoB, nbHR_lt ((nbP_lim p).add_one_lt hoB), hR₀ o hoB x]
+  obtain ⟨s1, s2, s3, s4, s5, s6, s7, hro⟩ := nb_succ_dec hoB hoZ
+  rw [nbHR_cnf hoB hoZ, nbHR_cnf s1 s2, s3, s4, s5, s6, s7, IH _ hro (hro.trans hoZ), add_assoc]
 
 end Glob
 
