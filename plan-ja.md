@@ -14,7 +14,8 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
       - 🤖 次：X より上の層（skLayPastXθ）。まず X ≤ c < B₂ = ψ_{Ω₂}(ε_{Ω₂+1})（Phase C）、そのあと B₂ ≤ c < θ。
         - 済み（Qc*）：B₂ 未満の符号の atom 系 qcU。ϑᵖ(Ω₁·N)（Ω₁ ≤ N < ε_{Ω₁+1}、データは ρ 未満）未満での Lemma IMG（Qc.qc_img_rst。層の頂上は X^x を越えてよい、Qc.QcBd）。B₂ 未満のすべての符号の読み vQ、門 qcG、基点の読み qcA。
         - 済み：B₂ 未満の桁の系（Qc.QDS、その一段上げと門の引き上げ）。符号の門 qcG（Z 上の符号は門が Z 未満、Qc.qc_gate）。H_λ(y) の水準の読み λ(x)（Qc.qcLv_main）。Γ の不動点の読みは閉じた点（Qc.qc_fix_cl）。Qc.QsGood と一段上げ（Qc.qsGood_succ）、極限での和集合（Qc.qsGood_lim）と、原子でない点・原子での頂上（Qc.qsTopNA、Qc.qsTopAt）。
-        - 🤖 残り：[X, B₂) の Γ の不動点 H_λ(y) での頂上（すべての水準の閉じた点、水準の読みの共終性）、そのあと [X, B₂) のすべての ε 数での Qc.QsGood、層（Va.VaLay と同じ形）、X ≤ c < B₂ での Zm.ZmPastAt S c。
+        - 済み：[X, B₂) の Γ の不動点 H_λ(y) での頂上（Qc.qsTopFix。水準の読みは共終、Qc.qcLv_cof、かつ正確、Qc.qs_lv_pi）。[B_Γ, B₂) のすべての ε 数での Qc.QsGood（Qc.qsGood_all）。
+        - 🤖 残り：層（Va.VaLay と同じ形）、X ≤ c < B₂ での Zm.ZmPastAt S c。
         - その後：道の上のほかの葉（skLayPastTh、窓と上の端、skBC、skFix、skZlCfg、skLevImgHi4）。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
