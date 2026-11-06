@@ -36,6 +36,7 @@ import Googology.Trans.PoR.InaccPsi.R2.YwLad
 import Googology.Trans.PoR.InaccPsi.R2.ZbE0
 import Googology.Trans.PoR.InaccPsi.R2.ZgSq
 import Googology.Trans.PoR.InaccPsi.R2.ZmCd
+import Googology.Trans.PoR.InaccPsi.R2.VaDir
 import Googology.Trans.PoR.InaccPsi.R2.ZoBC
 import Googology.Trans.PoR.InaccPsi.R2.ZrBase
 import Googology.Trans.PoR.InaccPsi.R2.ZrRead
@@ -2242,15 +2243,28 @@ theorem skLayBelowBG (S : InaccSeq.{0}) : ∀ c, c < Tf.tfBG → ∀ l, Cd.CdRan
 /-- STATUS: OPEN (round 133, new node; REFUTE FIRST at the offset B_Γ²·2 + 1 and at the code ε_{B_Γ+1}: NO EVIDENCE,
 skZmRef)
 SIZE: L
-DIRECT READINGS FOR EVERY ATOM INDEX B_Γ ≤ B < X (X = Tl.tlX).  PROVED below ζ_{B_Γ+1} = φ(2, B_Γ+1)
-(skZmDirectZ: the generic hereditary step Zm.ZmDS.step, the gated interface (base gate Zm.ZmDS.Eg, Zm.ZmDS.raise),
-the global reading with code indices Zm.zmHR, and one transfinite induction over every code index c < ζ_{B_Γ+1},
-Zm.zmGood2_all: step at successors, union Zm.zmCU at limits).  Next Lean statement: the same chain over any
-pseudo-base P = φ(2, b) read φ(2, D(x) + b(x)) (codes in [P, φ(2, b+1)) are the brackets φ(1, P + n)), i.e. a
-level-generic version of Zm.ZmGood2 with the level α of φ(α, ·) a parameter, by induction on α up to the next
-fixed point of Γ (closes the layer c = B_Γ), then the atoms of kind β ≥ 1 (Yw.ywV). -/
+DIRECT READINGS FOR EVERY ATOM INDEX B_Γ ≤ B < X (X = Tl.tlX).  PROVED below Γ_{B_Γ+1} (round 198, skVaDirectU,
+Va.vaDirectU: ONE reading Va.vR = Yr.yrR with the fixed point B_Γ read D(x) (ε-numbers yhPsi α η read
+ϑˣ(Ω₁·α(x) + η(x)), the level a parameter), digit systems Va.VaGood at EVERY ε-number base below Γ_{B_Γ+1} by one
+induction (Va.vaGood_all: Zm.ZmDS.step at successors, the union Va.vaCU at limits with cofinality by Gl.glA_min),
+the tower B_Γ+1, φ(·, 0)-iterates with gates below K); before: below ζ_{B_Γ+1} (skZmDirectZ).  Next Lean statement:
+the fixed points of Γ in [Γ_{B_Γ+1}, X) (atoms of kind β ≥ 1 read Yw.ywV β, layers at them by Yw.ywLimB) and
+digit systems between consecutive fixed points (codes Γ(i), i < Γ(i), read gq(R(i)), as in Yr.yrR). -/
 theorem skZbDirectX (S : InaccSeq.{0}) : Zb.ZbDirect S Tl.tlX := by
   sorry
+
+/-- STATUS: PROVED (Va.vaDirectU; round 198, new node)
+SIZE: L
+DIRECT READINGS FOR EVERY INDEX B_Γ ≤ B < Γ_{B_Γ+1} (THE WHOLE LAYER c = B_Γ): one reading Va.vR, digit systems at
+every ε-number base below Γ_{B_Γ+1} (Va.vaGood_all), the tower Va.vaTw of small-gate codes cofinal in Γ_{B_Γ+1}. -/
+theorem skVaDirectU (S : InaccSeq.{0}) : Zb.ZbDirect S (Gc.gcG (Tf.tfBG + 1)) := Va.vaDirectU S
+
+/-- STATUS: PROVED (Va.vaUVU; round 198, new node)
+SIZE: L
+UPPER ∧ LOWER ∧ CapV at every range restart below ι(Γ_{Ω₁+1+B}·ω) for every B < Γ_{B_Γ+1}. -/
+theorem skVaFrontU (S : InaccSeq.{0}) : ∀ B, B < Gc.gcG (Tf.tfBG + 1) → ∀ l, Cd.CdRange S l →
+    l < Bt.iota S (Gc.gcG B * ω) → SkUV S l :=
+  fun _ hB _ hr hl => Va.vaUVU S hB hr hl
 
 /-- STATUS: PROVED (Zm.ZmDS.direct, Zm.ZmDS.step; round 133, new node)
 SIZE: M
