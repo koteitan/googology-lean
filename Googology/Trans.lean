@@ -2455,3 +2455,4 @@ import Googology.Trans.PoR.InaccPsi.R2.QdEq
 import Googology.Trans.PoR.InaccPsi.R2.QdGEq
 import Googology.Trans.PoR.InaccPsi.R2.QdBd
 import Googology.Trans.PoR.InaccPsi.R2.QdCl
+import Googology.Trans.PoR.InaccPsi.R2.QdK0
