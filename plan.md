@@ -17,8 +17,8 @@ The remaining work, arranged by the cells of the README tables. Items not being 
         - done: the top at a fixed point H_λ(y) of Γ in [X, B₂) (Qc.qsTopFix: the level readings cofinal, Qc.qcLv_cof, and exact, Qc.qs_lv_pi); Qc.QsGood at every ε-number in [B_Γ, B₂) (Qc.qsGood_all).
         - done: the layers at the fixed points of Γ below B₂ (Qc.qsLay_all), Zm.ZmPastAt S c for every c < B₂ (Qc.qc_past).
         - 🤖 left: B₂ ≤ c < θ (skLayPastB2θ, Phase D; X ≤ c < B₂ is skLayPastXB2, proved).
-          - an atom system past B₂: the codes below θ with the atoms Hˡ_λ(y) (Vd.vd_nf_ex, levels λ < Ω₃); the fields mem and hull of Zb.ZbAS for every S.
-          - the readings of the codes below θ: at a fixed point Hˡ_λ(y) of Γ a level reading of λ (one cardinal down, the leaves read at x) with its data, order, cofinality and exactness (R2.CitedVd).
+          - done: the atom system past B₂ with the bound θ (Qt.qtU S: atoms the strongly critical members of K⁽⁰⁾_Z in (Ω₁, θ)) and its hull facts at S (Zb.ZbAS.Ok, split from Zb.ZbAS so that the atoms may depend on S).
+          - 🤖 the readings of the codes below θ: first below B₃ = Qd.qdB (Veblen levels; Qd.qdLv done), then up to θ; at a fixed point Hˡ_λ(y) of Γ a level reading of λ (one cardinal down, the leaves read at x) with its data, order, cofinality and exactness (R2.CitedVd).
           - the Qc chain at the new bound: digit systems, the tops, the layers, cofinal fixed points with small gates.
         - then: the other road leaves (skLayPastTh, windows and tops, skBC, skFix, skZlCfg, skLevImgHi4).
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
