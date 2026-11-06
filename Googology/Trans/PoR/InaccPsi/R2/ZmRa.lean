@@ -62,9 +62,9 @@ noncomputable def raise : ZmDS where
   BG_le := M.BG_le
   BG_B := M.BG_B
   B_le := M.B_le
-  B_cl := M.B_cl
-  Dv_T := M.Dv_T
-  Dv_pi := M.Dv_pi
+  B_cl := fun Z hZ h => M.B_cl Z hZ ((le_max_left _ _).trans_lt h)
+  Dv_T := fun x hx hx1 h => M.Dv_T x hx hx1 ((le_max_left _ _).trans_lt h)
+  Dv_pi := fun σ ρ hB h => M.Dv_pi σ ρ hB ((le_max_left _ _).trans_lt h)
   E_X := M.E_X
   Ei_cl := fun Z hZ h => M.Ei_cl Z hZ ((le_max_left _ _).trans_lt h)
   nfx := M.nfx

@@ -48,7 +48,11 @@ theorem yrG_lt_Om1 : ∀ c, yrG c < Om1 := by
   by_cases hA : YhAt (guE c)
   · by_cases hi : yhJ (guE c) < guE c
     · rw [yrQE_atom hA hi]; exact hQ _ (yr_ix_lt hcG hi)
-    · rw [yrQE_atom_fix hA hi]; exact omega0_pos.trans omega_lt_Om1
+    · by_cases hL : Tl.tlLev (guE c) < guE c ∧ Tl.tlI (Tl.tlLev (guE c)) (guE c) < guE c
+      · have hec := gl_E_le (yh_gfE_le hcG)
+        rw [yrQE_atom_fixL hA hi hL]
+        exact max_lt (hQ _ (hL.1.trans_le hec)) (hQ _ ((Ordinal.sub_le_self _ _).trans_lt (hL.2.trans_le hec)))
+      · rw [yrQE_atom_fix hA hi hL]; exact omega0_pos.trans omega_lt_Om1
   · rw [yrQE_psi hA]
     exact max_lt (hQ _ (yh_lev_lt hcG hA)) (hQ _ (yh_idx_lt hcG hA))
 

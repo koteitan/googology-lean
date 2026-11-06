@@ -54,7 +54,11 @@ theorem va_atom_cases {e : Ordinal.{0}} (hBe : tfBG ≤ e) (heU : e < vaU) : e =
 theorem va_QE_BG : yrQE tfBG = 0 := by
   have hA : YhAt tfBG := by rw [← zb_gcG_BG]; exact yhAt_gcG _
   have hJ : yhJ tfBG = tfBG := by have h := yhJ_gcG tfBG; rwa [zb_gcG_BG] at h
-  exact yrQE_atom_fix hA (by rw [hJ]; exact lt_irrefl _)
+  have hidx : tlI 1 tfBG = Om1 + 1 := by rw [tl_BG_eq]; exact tlI_rhF 1 _
+  have hL : tlLev tfBG < tfBG ∧ tlI (tlLev tfBG) tfBG < tfBG := by
+    rw [tlLev_BG, hidx]; exact ⟨gg_one_lt_of_SC tfBG_SC, tl_Om1_succ_lt_BG⟩
+  rw [yrQE_atom_fixL hA (by rw [hJ]; exact lt_irrefl _) hL, tlLev_BG, hidx,
+    glY0_lt (one_lt_omega0.trans Gf.omega_lt_Om1), Ordinal.sub_self, yrQ_one, yrQ_zero, max_self]
 
 /-! ## The next fixed point of `Γ` -/
 

@@ -293,9 +293,9 @@ noncomputable def vaCU (T : VaTop E) : ZmDS where
   BG_le := hBE.le
   B_le := hBE.le
   BG_B := le_rfl
-  B_cl := fun _ hZ => zbBG_tl hZ.1
-  Dv_T := fun x hx hx1 => zmD_T hx hx1
-  Dv_pi := fun _ _ hB => zmD_pi hB
+  B_cl := fun _ hZ _ => zbBG_tl hZ.1
+  Dv_T := fun x hx hx1 _ => zmD_T hx hx1
+  Dv_pi := fun _ _ hB _ => zmD_pi hB
   E_X := hEU.trans va_B2_lt_X
   Ei_cl := T.Ei_cl
   nfx := fun y h1 h2 hΓ => absurd (h2.trans_lt hEU) (not_lt.2 (va_B2_min h1 hΓ))

@@ -203,13 +203,13 @@ structure ZmDS where
   BG_le : tfBG ≤ E
   BG_B : tfBG ≤ B
   B_le : B ≤ E
-  B_cl : ∀ Z, SC Z → TlCl Z B
+  B_cl : ∀ Z, SC Z → Eg < Z → TlCl Z B
   E_X : E < tlX
   Ei_cl : ∀ Z, SC Z → Eg < Z → TlCl Z Ei
   nfx : ∀ y, B < y → y ≤ E → gamma y ≠ y
   Eg_le : ∀ c, c ≠ 0 → Eg ≤ G c
-  Dv_T : ∀ x, InE x → x < Om1 → Dv x ∈ Tset x ∧ InE (Dv x) ∧ x < Dv x ∧ Dv x < ywX x
-  Dv_pi : ∀ σ ρ, Bases σ ρ → Dv ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (Dv ρ) = Dv σ
+  Dv_T : ∀ x, InE x → x < Om1 → Eg < x → Dv x ∈ Tset x ∧ InE (Dv x) ∧ x < Dv x ∧ Dv x < ywX x
+  Dv_pi : ∀ σ ρ, Bases σ ρ → Eg < σ → Dv ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (Dv ρ) = Dv σ
   V_T : ∀ x, InE x → x < Om1 → Eg < x →
     V x ∈ Tset x ∧ InE (V x) ∧ Dv x ≤ V x ∧ V x < ywX x
   Vq : ∀ x, InE x → x < Om1 → Eg < x → ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < Dv x + V x ∧ V x < gq σ x
@@ -258,9 +258,9 @@ noncomputable def zmYr : ZmDS where
   BG_le := le_rfl
   BG_B := le_rfl
   B_le := le_rfl
-  B_cl := fun _ hZ => zbBG_tl hZ.1
-  Dv_T := fun x hx hx1 => zmD_T hx hx1
-  Dv_pi := fun _ _ hB => zmD_pi hB
+  B_cl := fun _ hZ _ => zbBG_tl hZ.1
+  Dv_T := fun x hx hx1 _ => zmD_T hx hx1
+  Dv_pi := fun _ _ hB _ => zmD_pi hB
   E_X := tl_BG_lt_X
   Ei_cl := fun _ hZ _ => zbBG_tl hZ.1
   nfx := fun y h1 h2 => absurd h2 (not_le.2 h1)

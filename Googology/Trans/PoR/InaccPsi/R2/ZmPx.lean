@@ -38,7 +38,7 @@ theorem VN_lt (x : Ordinal.{0}) (hx : InE x) (hx1 : x < Om1) (hEg : M.Eg < x) : 
   rw [he]; exact (glA_facts hx hx1 le_rfl h1T h11 hWT hW1).2.2.1
 
 theorem V_gtx (x : Ordinal.{0}) (hx : InE x) (hx1 : x < Om1) (hEg : M.Eg < x) : x < M.V x :=
-  (M.Dv_T x hx hx1).2.2.1.trans_le (M.V_T x hx hx1 hEg).2.2.1
+  (M.Dv_T x hx hx1 hEg).2.2.1.trans_le (M.V_T x hx hx1 hEg).2.2.1
 
 theorem V_opow_eq (x a : Ordinal.{0}) (hx : InE x) (hx1 : x < Om1) (hEg : M.Eg < x) :
     M.V x ^ a = ω ^ (M.V x * a) :=

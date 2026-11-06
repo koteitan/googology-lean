@@ -295,10 +295,7 @@ def VaGood (E : Ordinal.{0}) : Prop :=
 
 /-- **The base `B_Γ`**: `Zm.zmYr` raised by `ω`. -/
 theorem vaGood_BG : VaGood tfBG := by
-  have hQ : yrQE tfBG = 0 := by
-    have hA : YhAt tfBG := by rw [← zb_gcG_BG]; exact yhAt_gcG _
-    have hJ : yhJ tfBG = tfBG := by have h := yhJ_gcG tfBG; rwa [zb_gcG_BG] at h
-    exact yrQE_atom_fix hA (by rw [hJ]; exact lt_irrefl _)
+  have hQ : yrQE tfBG = 0 := va_QE_BG
   have hEg : (zmYr.raise ω).Eg = ω := by
     rw [ZmDS.raise_Eg]; exact max_eq_right zero_le
   refine ⟨zmYr.raise ω, rfl, by rw [hEg, hQ, max_eq_left zero_le], fun x _ _ _ => (vA_BG x).symm,
