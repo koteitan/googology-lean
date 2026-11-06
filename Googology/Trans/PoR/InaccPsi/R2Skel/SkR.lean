@@ -1714,10 +1714,12 @@ JUMP `X → X + W^{h+1}` for every shift `X` and exponent `h ∈ D` (`Zx.zxLawJ`
 `Tβ + ω^{Ω₁·TX + ω^{Ω₁+Ω₁·Th}·x}`, `Zx.zxPlat_tower`), and its first instance `E = Ω_{k+3} + Ω₂·Ω₂ + e`
 (`Zx.zxLaw2All`); round 143: THE COEFFICIENT CHAIN `X₀ + W^h·ζ` over any shift `X₀` with the successor step as a
 hypothesis (`Zy.zyChain`), and every finite power `W^n` over any shift (`Zy.zyChainN`, induction on `n` with
-`Zx.zxLawJ`), so every `E = Ω_{k+3} + W^n·ζ + e` (`Zy.zyTopN`) and, by nesting, every `E < Ω_{k+3} + W^ω`; left:
-(i) the base conditions `Zy.ZyQ` from the normality of `b`, (ii) the infinite exponents `h ≥ ω` of `W^h` (continuity
-of `T` at a limit `h`, or deeper towers when `T` jumps at `h`, e.g. `h = Ω₂`) and the `W`-fixed exponents
-(`E ≥ Ω₃·2`, `ψ_{k+4}`-terms), and the limit sub-bases `β + W^E·γ` (continuity, as Yt.ytSubLaw). -/
+`Zx.zxLawJ`), so every `E = Ω_{k+3} + W^n·ζ + e` (`Zy.zyTopN`); round 144: every CODE exponent `1 ≤ h < θ` of
+`W^h` over any shift (`Zz.zzChain`; at a limit code `T` is continuous, `Zz.zzLimW`), so every `E` whose `W`-normal
+form over `Ω_{k+3}` has code exponents and code coefficients (`Zz.zzTop`, by nesting); left: (i) the base
+conditions `Zy.ZyQ` from the normality of `b`, (ii) the exponents `h ≥ Ω₂` of `W^h` (`T` jumps at `h = Ω₂`: deeper
+towers) and the `W`-fixed exponents (`E ≥ Ω₃·2`, `ψ_{k+4}`-terms), and the limit sub-bases `β + W^E·γ`
+(continuity, as Yt.ytSubLaw). -/
 theorem skTopLawAll (S : InaccSeq.{0}) : Zp.ZpTopLawAll S := by
   sorry
 
