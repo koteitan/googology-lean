@@ -2324,3 +2324,6 @@ import Googology.Trans.PoR.InaccPsi.R2.ZtIso
 import Googology.Trans.PoR.InaccPsi.R2.ZuRef
 import Googology.Trans.PoR.InaccPsi.R2.ZvChain
 import Googology.Trans.PoR.InaccPsi.R2.ZwChain
+import Googology.Trans.PoR.InaccPsi.R2.ZxPlat
+import Googology.Trans.PoR.InaccPsi.R2.ZxJump
+import Googology.Trans.PoR.InaccPsi.R2.ZxTwo
