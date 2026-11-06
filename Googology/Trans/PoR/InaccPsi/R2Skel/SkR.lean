@@ -27,6 +27,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZdTest
 import Googology.Trans.PoR.InaccPsi.R2.ZdChainR
 import Googology.Trans.PoR.InaccPsi.R2.ZiTop
 import Googology.Trans.PoR.InaccPsi.R2.ZpWall
+import Googology.Trans.PoR.InaccPsi.R2.KxTop
 import Googology.Trans.PoR.InaccPsi.R2Skel.SkE
 
 /-!
@@ -1698,59 +1699,19 @@ theorem skBaseOfLaw (S : InaccSeq.{0}) {n : ℕ} {l l' A' : Ordinal.{0}} (hR : C
     Yj.YjBase S n l l' A' b (1 + S.psi (Vb.vbT S l b) (Om (1 + 1))) ∧ Om (1 + 1 + 1) ∣ Bc.bcB S n b :=
   Zp.zpYjBase hR h1 hr hl' hB hA' hρ' hLaw hbD hbn hdv h3 IH
 
-/-- STATUS: OPEN (NEW round 133; REFUTE FIRST: NO EVIDENCE — it holds at every top atom `β + W^{Ω_{k+3}+e}`, `e` a
-code (Zp.zpLaw_top from Xm.xmTopUp), at the limit sub-bases of Yt.ytSubLaw, at the chain exponents of Zd.zdChain,
-Zi.ziChain, Yy.yyLawOm2 (all are instances of this form); at `W^{Ω₃+ω}` it is Xi.xiReadOm (`1 + P* = P*`);
-the refuted forms speak of other points or other images: Xq.xqRef_wit (`Ω₃+1`, not `Ω₃`-divisible), Xd.xdX0Law_false
-(`β = Ω_ω ∉ D`), Vn.vnTop_Om3 / Vq.vqNoTop_Om3 (a constant image), Wb.wbNoY (the image `Y_{k+2}` in place of
-`ψ₂(T Y_{k+3})`), Xi.xiTopFam_false (the family law); its premises are met at every restart (Zp.zpLaw_wit))
+/-- STATUS: PROVED (Kx.kxTopLawAll; rounds 159-174; OPEN since round 133; this file imports the new module
+`R2.KxTop`: checkable only after the merge)
 SIZE: L
 THE TOP LAW AT EVERY EXPONENT: at every restart `λ` (`ρ_λ < P(η)`, `A` own, `ψ₁(A) = ρ_λ`), every normal `b ∈ D_λ`
-with `Ω₃ ∣ b`, `Ω₃ ≤ b` has `Θ_λ(ψ₂ b) = ψ₁(A + 1 + ψ₂(T_λ b))`.  Missing: the exponents of the top atoms past
-those of Xi.XiTopUp / Zd.zdChain / Zi.ziChain / Zv.zvChain / Zw.zwChain (`b = β + W^E`; round 141: every
-`E = Ω_{k+3} + Ω₂·ξ + e` with a CODE coefficient `ξ < θ` is done, `Zw.zwChain`, from the threshold shift data
-`Zd.ZdShQ`, on the bases with `Zw.ZwQ` (every code `ξ' ≤ ξ` below `ψ₂(β + W^{Ω_{k+3}+Ω₂·ξ'})`); round 142: THE
-JUMP `X → X + W^{h+1}` for every shift `X` and exponent `h ∈ D` (`Zx.zxLawJ`, plateau of the two-level tower
-`Tβ + ω^{Ω₁·TX + ω^{Ω₁+Ω₁·Th}·x}`, `Zx.zxPlat_tower`), and its first instance `E = Ω_{k+3} + Ω₂·Ω₂ + e`
-(`Zx.zxLaw2All`); round 143: THE COEFFICIENT CHAIN `X₀ + W^h·ζ` over any shift `X₀` with the successor step as a
-hypothesis (`Zy.zyChain`), and every finite power `W^n` over any shift (`Zy.zyChainN`, induction on `n` with
-`Zx.zxLawJ`), so every `E = Ω_{k+3} + W^n·ζ + e` (`Zy.zyTopN`); round 144: at a limit code exponent `T` is
-continuous (`Zz.zzLimW`); round 145: the jump for ANY context `F` (`Kb.kbLawF`, towers of any depth `Ka.KaT`) with
-the thresholds asked at the first use (`Zy.ZyQ` had asked `h < ψ₂(β + W^{X₀})`, which the normal base
-`W^{Ω₃ + W^h}`, `h = ψ₂(Ω₃)`, misses; fixed: `h < ψ₂(β + W^{X₀ + W^h})`, cumulative in `h`, `Kc.KcE`), and every
-code exponent `1 ≤ h < θ` of `W^h` over any shift (`Kc.kcChain`), so every `E` whose `W`-normal form over `Ω_{k+3}`
-has code exponents and code coefficients (`Kc.kcTop`, by nesting); round 149: (i) is done for one `W`-term over
-`Ω_{k+3}` — THE TOP LAW AT EVERY NORMAL `b = β + W^{Ω_{k+3} + W^h·ζ + e}` from normality alone (`Kh.khTop`: the
-components are members of `Cl(b, ψ₂ b)`, the plateau at the level `Ω₂` gives the ownership of the contexts,
-`Kg.kgPlat`, `Kg.kgOwnBase`, `Kg.kgOwnExp`); round 150: every `W`-polynomial over `Ω_{k+3}` with code exponents and
-coefficients (`Ki.kiTop`, end to end); round 151: every last coefficient `γ` (`b = β + W^E·γ`, `Kj.kjTop`, end to
-end); round 152: the ownership of every context (`Kk.kkOwn`); rounds 153-154: the `W`-terms over the codes
-(`Kl.KlWT`, exponent data `Kl.klEx`) and the classification of the limit ones — continuity of `T` or the top of a
-context (`Kn.knClass`); rounds 155-157: the ownership of the components of a `W`-term at its first use
-(`Ko.koGOL`), the classification with the ownership (`Kp.kpClass`), and THE CHAIN OF `W^g` FOR EVERY `W`-TERM `g ≥ 1`
-over the codes (`Kq.kqChain`; the top law at every `Ω_{k+3} + W^g·ζ + e`, `Kq.kqTop`); round 158: END TO END at every
-normal `β + W^{Ω_{k+3} + w + e}·γ`, `w` a `W`-term over the codes (`Kr.krTop`); rounds 159-161: THE TOP LAW FROM ONE
-CLOSURE CONDITION (`Ks.ksLow`: the lower half by the least non-member, `Bt.psi_le_of_key`; `Ks.ksCont`: by the
-continuity of `ψ₂` at every limit) and the closure facts and the gap of towers for `Bt.HCl` (`Kt.ktHCl_div`,
-`Kt.ktGap`), the tools of one induction on `b`; rounds 162-165: the gap of a context over an abstract closure
-(products with no hypothesis on the exponent, powers, `φ(d, ·)`, `φ(·, 0)`; `Kt.ktG_KaT`, `Kt.ktG_phiR`,
-`Kt.ktG_phiL0`), and THE OWNERSHIP OF EVERY CONTEXT WITH NO THRESHOLD (`Kt.ktOwn`, `Kt.ktOwnCtx`), also toward any
-target `Y` (`Kt.ktOwnY`); rounds 166-169: the gaps toward a target through `φ(·, φ(α, d) + 1)` (`Ku.kuG_phiLS`),
-the reduction of the closure condition to the `ψ₂`-atoms (`Ku.kuDom`), THE JUMP AT ANY CONTEXT (`Ku.kuJump`), and
-THE TOP LAW AT EVERY SUCCESSOR EXPONENT `β + W^{E'+1}·(γ' + 1)` FROM THE LAW BELOW, any `E' ≥ Ω₃` of `D`
-(`Ku.kuSuccE`: the approximants are normal from an iterate of the plateau on, `Kg.kgKey`); round 170: THE FIRST USE
-`E ∈ Cl(β + W^E, ψ₂(β + W^E))` of a normal `β + W^E·γ`, any `E`, by the nesting depth of the collapses (`Kw.kwFU`), so every
-truncation `β + W^E·c` with `c < ψ₂(β + W^E·c)` is normal (`Kw.kwTrunc`); left (the normality of the approximants of a normal `b` through `φ(·, q + 1)` and
-`ψ_{k+3}`-nodes, the fundamental sequences of `D`): the exponents with `φ`-terms
-(`ψ₃(0) = Γ_{Ω₂+1}`), `ψ_{k+3}`-atoms and `Ω_{k+3}`-cofinal parts (`Ω₃·2`, …); earlier notes: (ii) the exponents `h > Ω₂` of `W^h` (round 146: the first one, `h = Ω₂`, is the
-jump `Kd.kdLaw` with the context `v ↦ X + W^v` and a three-level tower; round 147: the contexts of any depth
-`Ke.KeCtx`, closed under `v ↦ g₀ + W^j·v` and `v ↦ g₁ + W^{C'(v)}`, and the jump at every context `Ke.keLaw`; next:
-the recursion on the `W`-normal form of `h` — a limit exponent is a point of continuity of `T` (`Zz.zzLimW`) or the
-top of a context — over the decomposition of the members of `D`, round 148: `Kf.kfDec` (leading term), `Kf.kfLast`
-(last term)) and the `W`-fixed exponents (`E ≥ Ω₃·2`,
-`ψ_{k+4}`-terms), and the limit sub-bases `β + W^E·γ` (continuity, as Yt.ytSubLaw). -/
-theorem skTopLawAll (S : InaccSeq.{0}) : Zp.ZpTopLawAll S := by
-  sorry
+with `Ω₃ ∣ b`, `Ω₃ ≤ b` has `Θ_λ(ψ₂ b) = ψ₁(A + 1 + ψ₂(T_λ b))`.  One induction on `b` (`Kx.kxTop`), no
+classification of the exponents: (i) `b = β' + Ω₃`, `Ω₃ ∣ β'`: the law of `Xi.xiTopUp0` at `k = 0`; `β'` is normal by
+the first use at one collapse depth (`Kx.kwFUG`, the extraction `e ↦ Ω₃·(e/Ω₃)` on `[β', b)`; `Kw.KwC`).  (ii) the
+quotient `b/Ω₃` is a limit (`Kx.kxLim`): by `Ks.ksLow` and `Ku.kuDom` it suffices that every atom `ψ₂(e) < ψ₂(T b)` of
+`HCl(A + 1 + ψ₂(T b), Θ(ψ₂ b))` lies below `ψ₂(T a)` for some `a` of the domain below `b`; take `e* = M(e)` (normal,
+same `ψ₂`), `y = κ e* ∈ Cl(b, ψ₂ b)` (the bounded inverse transfer `Kx.kxK`: the countable parts of `e*` are below
+`Θ(ψ₂ b)`, its arguments below `T b`), `z = Ω₃·(y/Ω₃) + Ω₃ < b`, and `a = M(z)` (`Kx.kxNorm`: in `D`, normal,
+`Ω₃`-divisible, `ψ₂ a = ψ₂ z < ψ₂ b`); then `e* < T a`. -/
+theorem skTopLawAll (S : InaccSeq.{0}) : Zp.ZpTopLawAll S := Kx.kxTopLawAll S
 
 /-- STATUS: REDUCED (skTopLawAll, skPsi3OffD; Zp.zpWall, from Zp.zpDecomp, Zp.zpYjBase; NEW round 133;
 checkable only after the merge)
