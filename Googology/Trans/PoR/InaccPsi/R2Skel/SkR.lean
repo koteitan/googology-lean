@@ -1719,8 +1719,10 @@ continuous (`Zz.zzLimW`); round 145: the jump for ANY context `F` (`Kb.kbLawF`, 
 the thresholds asked at the first use (`Zy.ZyQ` had asked `h < ψ₂(β + W^{X₀})`, which the normal base
 `W^{Ω₃ + W^h}`, `h = ψ₂(Ω₃)`, misses; fixed: `h < ψ₂(β + W^{X₀ + W^h})`, cumulative in `h`, `Kc.KcE`), and every
 code exponent `1 ≤ h < θ` of `W^h` over any shift (`Kc.kcChain`), so every `E` whose `W`-normal form over `Ω_{k+3}`
-has code exponents and code coefficients (`Kc.kcTop`, by nesting); left: (i) `ZyQ`, `KcE` from the normality of
-`b` (plateaus at the `ψ₂` level), (ii) the exponents `h > Ω₂` of `W^h` (round 146: the first one, `h = Ω₂`, is the
+has code exponents and code coefficients (`Kc.kcTop`, by nesting); round 149: (i) is done for one `W`-term over
+`Ω_{k+3}` — THE TOP LAW AT EVERY NORMAL `b = β + W^{Ω_{k+3} + W^h·ζ + e}` from normality alone (`Kh.khTop`: the
+components are members of `Cl(b, ψ₂ b)`, the plateau at the level `Ω₂` gives the ownership of the contexts,
+`Kg.kgPlat`, `Kg.kgOwnBase`, `Kg.kgOwnExp`); left: (i) for longer `W`-normal forms (the same components, nested), (ii) the exponents `h > Ω₂` of `W^h` (round 146: the first one, `h = Ω₂`, is the
 jump `Kd.kdLaw` with the context `v ↦ X + W^v` and a three-level tower; round 147: the contexts of any depth
 `Ke.KeCtx`, closed under `v ↦ g₀ + W^j·v` and `v ↦ g₁ + W^{C'(v)}`, and the jump at every context `Ke.keLaw`; next:
 the recursion on the `W`-normal form of `h` — a limit exponent is a point of continuity of `T` (`Zz.zzLimW`) or the
