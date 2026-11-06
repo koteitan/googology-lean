@@ -61,23 +61,23 @@ theorem va_mem {E c : Ordinal.{0}} (hEU : E < vaU) (hlim : ∀ e, InE e → e < 
       M.E = eN e ∧ c < M.E ∧ M.E < E ∧ ω ≤ M.Eg ∧ M.Eg = max ω (yrQE e) ∧ M.Eg ≤ max ω (yrG c) ∧
       (∀ x, InE x → x < Om1 → M.Eg < x → M.V x = eN (vA e x) ∧ M.V x = vA M.E x) ∧
       (∀ c', c' < M.E → ∀ x, InE x → x < Om1 → M.G c' < x → M.R c' x = vR c' x) ∧
-      (∀ c', c' < M.E → c' ≠ 0 → M.G c' = max M.Eg (yrG c')) := by
+      (∀ c', c' < M.E → c' ≠ 0 → M.G c' = max M.Eg (yrG c')) ∧ M.Dv = ywV 1 0 := by
   have hBE' : InE tfBG := Low.opow_eq_self_of_SC tfBG_SC
   have key : ∀ e, InE e → tfBG ≤ e → e < E → c < eN e → yrQE e ≤ yrG c →
       ∃ M : ZmDS, M.E = eN e ∧ c < M.E ∧ M.E < E ∧ ω ≤ M.Eg ∧ M.Eg = max ω (yrQE e) ∧
         M.Eg ≤ max ω (yrG c) ∧
         (∀ x, InE x → x < Om1 → M.Eg < x → M.V x = eN (vA e x) ∧ M.V x = vA M.E x) ∧
         (∀ c', c' < M.E → ∀ x, InE x → x < Om1 → M.G c' < x → M.R c' x = vR c' x) ∧
-        (∀ c', c' < M.E → c' ≠ 0 → M.G c' = max M.Eg (yrG c')) := by
+        (∀ c', c' < M.E → c' ≠ 0 → M.G c' = max M.Eg (yrG c')) ∧ M.Dv = ywV 1 0 := by
     intro e he hBe heE hce hQc
-    obtain ⟨M₀, hE₀, hEg₀, hV₀, hR₀, hG₀⟩ := hIH e he hBe heE
+    obtain ⟨M₀, hE₀, hEg₀, hV₀, hR₀, hG₀, -, hD₀⟩ := hIH e he hBe heE
     subst hE₀
     have hω : ω ≤ M₀.Eg := hEg₀ ▸ le_max_left _ _
     have hQ : yrQE M₀.E ≤ M₀.Eg := hEg₀ ▸ le_max_right _ _
     have hGe : gcG 0 ≤ M₀.E := va_G_le_BG.trans hBe
     refine ⟨M₀.step, rfl, hce, hlim _ he heE, hω, by rw [ZmDS.step_Eg, hEg₀],
       by rw [ZmDS.step_Eg, hEg₀]; exact max_le_max le_rfl hQc,
-      fun x hx hx1 hgx => ?_, fun c' hc' x hx hx1 hgc => ?_, fun c' hc' hc0 => ?_⟩
+      fun x hx hx1 hgx => ?_, fun c' hc' x hx hx1 hgc => ?_, fun c' hc' hc0 => ?_, hD₀⟩
     · have h1 : M₀.step.V x = eN (vA M₀.E x) := by show eN (M₀.V x) = _; rw [hV₀ x hx hx1 hgx]
       exact ⟨h1, h1.trans (va_eN M₀ hω hQ hBe (heE.trans hEU) hR₀ hG₀ hx hx1 hgx)⟩
     · show M₀.sR c' x = vR c' x
@@ -156,7 +156,7 @@ include hE hBE hEU hlim hIH hx hx1
 theorem va_T {c : Ordinal.{0}} (hc : c < E) (hg : yrG c < x) :
     vR c x ∈ Tset x ∧ vR c x < Om1 ∧ vR c x < gq (ywV 1 0 x + 1) x := by
   have hωx : ω < x := omega0_lt_inE hx
-  obtain ⟨e, M, -, -, -, -, -, hcM, -, -, -, hEg, -, hR, hG⟩ := va_mem hEU hlim hIH hBE hc
+  obtain ⟨e, M, -, -, -, -, -, hcM, -, -, -, hEg, -, hR, hG, -⟩ := va_mem hEU hlim hIH hBE hc
   have hgM : M.Eg < x := hEg.trans_lt (max_lt hωx hg)
   have hGc := va_memG hωx hEg hg hG hcM hg
   obtain ⟨hVT, -, -, hVX⟩ := M.V_T x hx hx1 hgM
@@ -168,7 +168,7 @@ theorem va_T {c : Ordinal.{0}} (hc : c < E) (hg : yrG c < x) :
 theorem va_mono {b c : Ordinal.{0}} (hbc : b < c) (hc : c < E) (hgb : yrG b < x) (hgc : yrG c < x) :
     vR b x < vR c x := by
   have hωx : ω < x := omega0_lt_inE hx
-  obtain ⟨e, M, -, -, -, -, -, hcM, -, -, -, hEg, -, hR, hG⟩ := va_mem hEU hlim hIH hBE hc
+  obtain ⟨e, M, -, -, -, -, -, hcM, -, -, -, hEg, -, hR, hG, -⟩ := va_mem hEU hlim hIH hBE hc
   have hbM := hbc.trans hcM
   have hGc := va_memG hωx hEg hgc hG hcM hgc
   have hGb := va_memG hωx hEg hgc hG hbM hgb
@@ -191,7 +191,7 @@ theorem va_below {c : Ordinal.{0}} (hc : c < E) (hc0 : c ≠ 0) (hg : yrG c < x)
   · rw [Order.succ_eq_add_one] at hν hg ⊢
     rw [vR_succ] at hν
     exact ⟨b, lt_add_one b, (yrG_le_succ b).trans_lt hg, Order.lt_add_one_iff.1 hν⟩
-  · obtain ⟨e, M, -, -, -, -, -, hcM, -, -, -, hEg, -, hR, hG⟩ := va_mem hEU hlim hIH hBE hc
+  · obtain ⟨e, M, -, -, -, -, -, hcM, -, -, -, hEg, -, hR, hG, -⟩ := va_mem hEU hlim hIH hBE hc
     have hGc := va_memG hωx hEg hg hG hcM hg
     rw [← hR c hcM x hx hx1 hGc] at hν
     obtain ⟨b, hbc, hgb, hνb⟩ := M.cof c x hx hx1 hl hcM hGc ν hν
@@ -276,7 +276,7 @@ theorem va_lt_top (hgx : max ω (yrQE E) < x) : ∀ c, c < E → yrG c < x → v
   · -- inside the bracket of a smaller base
     have h1 := IH _ hlt (hlt.trans hc) hge
     rw [vR_base heE hGe] at h1
-    obtain ⟨e, M, -, -, he, -, hME, hcM, -, -, -, hEg, hV, hR, hG⟩ := va_mem hEU hlim hIH hBE hc
+    obtain ⟨e, M, -, -, he, -, hME, hcM, -, -, -, hEg, hV, hR, hG, -⟩ := va_mem hEU hlim hIH hBE hc
     rw [he hcB'] at hME hV
     have hgM : M.Eg < x := hEg.trans_lt (max_lt hωx hg)
     have hGcM := va_memG hωx hEg hg hG hcM hg
@@ -393,7 +393,7 @@ theorem va_top (hgx : max ω (yrQE E) < x) : ∀ ν, ν < vA E x → ∃ b, b < 
     · -- `a' = 0`: below the next base reading
       rw [h0, vR_zero] at ha'α''
       rw [le_antisymm ha'α'' zero_le, veblen_zero_apply]
-      obtain ⟨e, M, he, heB, -, hemax, hME, hbM, hMlt, -, hEgeq, hEg, hV, hR, hG⟩ := va_mem hEU hlim hIH hBE hb
+      obtain ⟨e, M, he, heB, -, hemax, hME, hbM, hMlt, -, hEgeq, hEg, hV, hR, hG, -⟩ := va_mem hEU hlim hIH hBE hb
       have hgM : M.Eg < x := hEg.trans_lt (max_lt hωx hgb)
       have hGbM := va_memG hωx hEg hgb hG hbM hgb
       have hlt := M.lt b x hx hx1 hbM hGbM

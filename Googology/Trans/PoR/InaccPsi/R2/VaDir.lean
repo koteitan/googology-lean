@@ -77,7 +77,7 @@ theorem vaDirectU (S : InaccSeq.{0}) : ZbDirect S vaU := by
   have heE : InE e := luP_E he1 (luP_veblen _ _)
   have heB : tfBG ≤ e := (vaTw_gt (n + 1)).le
   have heU : e < vaU := vaTw_lt (n + 1)
-  obtain ⟨M, hE, hEg, -, -, -⟩ := vaGood_all e heE heB heU
+  obtain ⟨M, hE, hEg, -, -, -, hBB, hDD⟩ := vaGood_all e heE heB heU
   have hK : SC (Td.tdK S) := Td.tdK_SC
   have hK1 : Td.tdK S ≤ Om1 := by rw [Br.Om1_eq]; exact (Td.tdK_lt_Om1 (S := S)).le
   have hge : yrG e < Td.tdK S := va_gate hK hK1 e (vaTw_cl hK.1 (n + 1)) heU
@@ -91,7 +91,7 @@ theorem vaDirectU (S : InaccSeq.{0}) : ZbDirect S vaU := by
   have hGM : tfBG < M.step.E := by
     show tfBG < eN M.E
     rw [hE]; exact heB.trans_lt (lt_eN e)
-  exact M.step.direct S hGM hgK M.step_gc0 B hB1 hBM
+  exact M.step.direct hBB hDD S hGM hgK M.step_gc0 B hB1 hBM
 
 /-- **UPPER ∧ LOWER ∧ CapV at every range restart below `ι(Γ_{Ω₁+1+B}·ω)`, every `B < Γ_{B_Γ+1}`
 (UNCONDITIONAL).** -/
@@ -106,3 +106,40 @@ theorem vaLayBG (S : InaccSeq.{0}) :
   zbLay_of_direct (vaDirectU S)
 
 end Googology.Trans.PoR.InaccPsi.R2.Va
+
+/-! ## The earlier bounds as corollaries (`Zm.zmDirectZ`, `Zm.zmDirectE0`) -/
+
+namespace Googology.Trans.PoR.InaccPsi.R2.Zm
+
+open Ordinal Order Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.InaccSeq
+  Googology.Trans.PoR.InaccPsi.R2 Googology.Trans.PoR.InaccPsi.R2.Tf Googology.Trans.PoR.InaccPsi.R2.Gc
+  Googology.Trans.PoR.InaccPsi.R2.Zb Googology.Trans.PoR.InaccPsi.R2.Cd Googology.Trans.PoR.InaccPsi.R2.Bt
+  Googology.Trans.PoR.InaccPsi.R2.Lu
+
+theorem zm_lt_vaU {y : Ordinal.{0}} (hy : y < Va.vaU) {a : Ordinal.{0}} (ha : a < Va.vaU) : veblen a y < Va.vaU :=
+  (gcG_SC _).2 a ha y hy
+
+/-- **`ZbDirect S ζ_{B_Γ+1}`** (from `Va.vaDirectU`). -/
+theorem zmDirectZ (S : InaccSeq.{0}) : ZbDirect S (veblen 2 (tfBG + 1)) := by
+  have hUE : InE Va.vaU := Low.opow_eq_self_of_SC (gcG_SC _)
+  have h1 : tfBG + 1 < Va.vaU := (ev_isSuccLimit_of_inE hUE).add_one_lt Va.va_BG_lt_U
+  have h2 : (2 : Ordinal.{0}) < Va.vaU := (show (2 : Ordinal.{0}) < ω from by
+    have := natCast_lt_omega0 2; exact_mod_cast this).trans (omega0_lt_inE hUE)
+  exact fun B hB1 hB2 => Va.vaDirectU S B hB1 (hB2.trans (zm_lt_vaU h1 h2))
+
+theorem zmUVZ (S : InaccSeq.{0}) {B l : Ordinal.{0}} (hB : B < veblen 2 (tfBG + 1)) (hr : CdRange S l)
+    (hl : l < iota S (gcG B * ω)) : CdUpper S l ∧ CdLower S l ∧ CdCapV S l :=
+  zbUV_of_direct (zmDirectZ S) l hr B hB hl
+
+/-- **`ZbDirect S ε_{B_Γ+ε₀}`** (from `Va.vaDirectU`). -/
+theorem zmDirectE0 (S : InaccSeq.{0}) : ZbDirect S (veblen 1 (tfBG + ε₀)) := by
+  have hUE : InE Va.vaU := Low.opow_eq_self_of_SC (gcG_SC _)
+  have he0 : ε₀ < Va.vaU := lt_of_le_of_lt (Gc.gc_eps0_le (Low.opow_eq_self_of_SC tfBG_SC)) Va.va_BG_lt_U
+  have h1 : tfBG + ε₀ < Va.vaU := (inE_indec hUE).add_lt Va.va_BG_lt_U he0
+  exact fun B hB1 hB2 => Va.vaDirectU S B hB1 (hB2.trans (zm_lt_vaU h1 (lu_one_lt_E hUE)))
+
+theorem zmUVE0 (S : InaccSeq.{0}) {B l : Ordinal.{0}} (hB : B < veblen 1 (tfBG + ε₀)) (hr : CdRange S l)
+    (hl : l < iota S (gcG B * ω)) : CdUpper S l ∧ CdLower S l ∧ CdCapV S l :=
+  zbUV_of_direct (zmDirectE0 S) l hr B hB hl
+
+end Googology.Trans.PoR.InaccPsi.R2.Zm

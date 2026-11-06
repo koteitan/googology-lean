@@ -1,4 +1,4 @@
-import Googology.Trans.PoR.InaccPsi.R2.ZmRef
+import Googology.Trans.PoR.InaccPsi.R2.ZmNx
 
 /-!
 # ZmRa: RAISING THE GATES OF A DIGIT SYSTEM
@@ -56,8 +56,15 @@ noncomputable def raise : ZmDS where
   R := M.R
   G := M.rgt g
   Eg := max M.Eg g
+  B := M.B
+  Dv := M.Dv
   E_eq := M.E_eq
   BG_le := M.BG_le
+  BG_B := M.BG_B
+  B_le := M.B_le
+  B_cl := M.B_cl
+  Dv_T := M.Dv_T
+  Dv_pi := M.Dv_pi
   E_X := M.E_X
   Ei_cl := fun Z hZ h => M.Ei_cl Z hZ ((le_max_left _ _).trans_lt h)
   nfx := M.nfx

@@ -2289,16 +2289,9 @@ import Googology.Trans.PoR.InaccPsi.R2.ZmCo
 import Googology.Trans.PoR.InaccPsi.R2.ZmPx
 import Googology.Trans.PoR.InaccPsi.R2.ZmTc
 import Googology.Trans.PoR.InaccPsi.R2.ZmNx
-import Googology.Trans.PoR.InaccPsi.R2.ZmGl
-import Googology.Trans.PoR.InaccPsi.R2.ZmLm
 import Googology.Trans.PoR.InaccPsi.R2.ZmRef
 import Googology.Trans.PoR.InaccPsi.R2.ZmRa
 import Googology.Trans.PoR.InaccPsi.R2.ZmPast
-import Googology.Trans.PoR.InaccPsi.R2.ZmCx
-import Googology.Trans.PoR.InaccPsi.R2.ZmCg
-import Googology.Trans.PoR.InaccPsi.R2.ZmCi
-import Googology.Trans.PoR.InaccPsi.R2.ZmCu
-import Googology.Trans.PoR.InaccPsi.R2.ZmCd
 import Googology.Trans.PoR.InaccPsi.R2.ZnRS
 import Googology.Trans.PoR.InaccPsi.R2.ZnAll
 import Googology.Trans.PoR.InaccPsi.R2.ZnFix

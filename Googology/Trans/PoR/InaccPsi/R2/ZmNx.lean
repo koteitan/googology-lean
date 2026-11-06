@@ -106,8 +106,15 @@ noncomputable def step : ZmDS where
   R := M.sR
   G := M.sG
   Eg := M.Eg
+  B := M.B
+  Dv := M.Dv
   E_eq := by rw [← M.E_eq, Go.go_eN_veb]
   BG_le := M.BG_le.trans (lt_eN _).le
+  BG_B := M.BG_B
+  B_le := M.B_le.trans (lt_eN _).le
+  B_cl := M.B_cl
+  Dv_T := M.Dv_T
+  Dv_pi := M.Dv_pi
   E_X := by
     rw [← M.E_eq, Go.go_eN_veb]
     have hi : M.Ei + 1 < tlX := by
@@ -213,6 +220,10 @@ theorem zmCh_E : ∀ n : ℕ, (zmCh n).E = veblen 1 (tfBG + n)
     show eN (zmCh n).E = _
     rw [zmCh_E n, Go.go_eN_veb, Nat.cast_succ, add_assoc]
 
+theorem zmCh_B : ∀ n : ℕ, (zmCh n).B = tfBG ∧ (zmCh n).Dv = ywV 1 0
+  | 0 => ⟨rfl, rfl⟩
+  | n + 1 => by show (zmCh n).B = tfBG ∧ (zmCh n).Dv = ywV 1 0; exact zmCh_B n
+
 theorem zmCh_Eg : ∀ n : ℕ, (zmCh n).Eg = 0
   | 0 => rfl
   | n + 1 => by show (zmCh n).Eg = 0; exact zmCh_Eg n
@@ -223,7 +234,7 @@ theorem zm_BG_lt_veb (n : ℕ) : tfBG < veblen 1 (tfBG + ((n + 1 : ℕ) : Ordina
 
 /-- **`ZbDirect S ε_{B_Γ+n+1}`, UNCONDITIONAL.** -/
 theorem zmDirectN (S : InaccSeq.{0}) (n : ℕ) : ZbDirect S (veblen 1 (tfBG + ((n + 1 : ℕ) : Ordinal.{0}))) := by
-  have h := (zmCh (n + 1)).direct S (by rw [zmCh_E]; exact zm_BG_lt_veb n)
+  have h := (zmCh (n + 1)).direct (zmCh_B _).1 (zmCh_B _).2 S (by rw [zmCh_E]; exact zm_BG_lt_veb n)
     (by rw [zmCh_Eg]; exact Td.tdK_SC.1) (zmCh n).step_gc0
   rwa [zmCh_E] at h
 

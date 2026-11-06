@@ -295,7 +295,7 @@ def VaGood (E : Ordinal.{0}) : Prop :=
   ∃ M : ZmDS, M.E = E ∧ M.Eg = max ω (yrQE E) ∧
     (∀ x, InE x → x < Om1 → M.Eg < x → M.V x = vA E x) ∧
     (∀ c, c < E → ∀ x, InE x → x < Om1 → M.G c < x → M.R c x = vR c x) ∧
-    (∀ c, c < E → c ≠ 0 → M.G c = max M.Eg (yrG c))
+    (∀ c, c < E → c ≠ 0 → M.G c = max M.Eg (yrG c)) ∧ M.B = tfBG ∧ M.Dv = ywV 1 0
 
 /-- **The base `B_Γ`**: `Zm.zmYr` raised by `ω`. -/
 theorem vaGood_BG : VaGood tfBG := by
@@ -306,13 +306,13 @@ theorem vaGood_BG : VaGood tfBG := by
   have hEg : (zmYr.raise ω).Eg = ω := by
     rw [ZmDS.raise_Eg]; exact max_eq_right zero_le
   refine ⟨zmYr.raise ω, rfl, by rw [hEg, hQ, max_eq_left zero_le], fun x _ _ _ => (vA_BG x).symm,
-    fun c hc x _ _ _ => (vR_yr c hc x).symm, fun c _ hc0 => ?_⟩
+    fun c hc x _ _ _ => (vR_yr c hc x).symm, fun c _ hc0 => ?_, rfl, rfl⟩
   rw [ZmDS.raise_G _ _ hc0, hEg]; rfl
 
 /-- **The step to the next `ε`-number**, raised to the gate of the new base. -/
 theorem vaGood_succ {e : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e < vaU) (h : VaGood e) :
     VaGood (eN e) := by
-  obtain ⟨M, hE, hEg, hV, hR, hG⟩ := h
+  obtain ⟨M, hE, hEg, hV, hR, hG, hBB, hDD⟩ := h
   subst hE
   have hω : ω ≤ M.Eg := hEg ▸ le_max_left _ _
   have hQ : yrQE M.E ≤ M.Eg := hEg ▸ le_max_right _ _
@@ -321,7 +321,8 @@ theorem vaGood_succ {e : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e <
   have hEg' : (M.step.raise g).Eg = g := by
     rw [ZmDS.raise_Eg, ZmDS.step_Eg, hEg]
     exact max_eq_right (max_le (le_max_left _ _) (va_QE_eN he hBe heU))
-  refine ⟨M.step.raise g, rfl, hEg', fun x hx hx1 hgx => ?_, fun c hc x hx hx1 hgc => ?_, fun c hc hc0 => ?_⟩
+  refine ⟨M.step.raise g, rfl, hEg', fun x hx hx1 hgx => ?_, fun c hc x hx hx1 hgc => ?_, fun c hc hc0 => ?_,
+    hBB, hDD⟩
   · have hgx' : M.Eg < x := (hEg ▸ max_le (le_max_left _ _) (va_QE_eN he hBe heU) : M.Eg ≤ g).trans_lt
       (hEg' ▸ hgx)
     show eN (M.V x) = _

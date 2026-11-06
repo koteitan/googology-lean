@@ -1,4 +1,4 @@
-import Googology.Trans.PoR.InaccPsi.R2.ZmLm
+import Googology.Trans.PoR.InaccPsi.R2.ZmNx
 
 /-!
 # ZmRef: REFUTE FIRST AT THE OFFSET `B_Γ²·2 + 1` AND AT THE CODE `ε_{B_Γ+1}`
@@ -64,7 +64,8 @@ theorem zmRef1_nonfix :
       gamma (Om1 + 1 + (tfBG + 1 + (tfBG ^ (2 : Ordinal.{0}) * 2 + 1))) := by
   have h : tfBG < (zmCh 1).E := by rw [zmCh_E]; exact zm_BG_lt_veb 0
   have ho : tfBG ^ (2 : Ordinal.{0}) * 2 + 1 < (zmCh 1).E := zmRef1_lt
-  exact (zmCh 1).nonfix h ho
+  have h' := (zmCh 1).nonfix (by rw [(zmCh_B 1).1]; exact h) ho
+  rwa [(zmCh_B 1).1] at h'
 
 /-- **REFUTE FIRST at the code `ε_{B_Γ+1}`**: it reads `ε_{D(x)+1} = ϑˣ(Ω₁ + D(x))`. -/
 theorem zmRef2 {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) :
@@ -80,6 +81,7 @@ theorem zmRef2 {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) :
 theorem zmRef2_nonfix : Om1 + 1 + (tfBG + 1 + eN tfBG) < gamma (Om1 + 1 + (tfBG + 1 + eN tfBG)) := by
   have h : tfBG < (zmCh 2).E := by rw [zmCh_E]; exact zm_BG_lt_veb 1
   have ho : eN tfBG < (zmCh 2).E := lt_eN (zmCh 1).E
-  exact (zmCh 2).nonfix h ho
+  have h' := (zmCh 2).nonfix (by rw [(zmCh_B 2).1]; exact h) ho
+  rwa [(zmCh_B 2).1] at h'
 
 end Googology.Trans.PoR.InaccPsi.R2.Zm

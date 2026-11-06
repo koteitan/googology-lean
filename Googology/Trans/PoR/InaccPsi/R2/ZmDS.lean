@@ -161,13 +161,18 @@ theorem zm_gq_lt_X {σ : Ordinal.{0}} (hσT : σ ∈ Tset x) (hσ1 : σ < Om1) (
     hσX
 
 /-- **The facts of a non-closure witness `σ < D(x) + V`, `V < X^x`.** -/
-theorem zm_q_facts {V σ : Ordinal.{0}} (hDV : ywV 1 0 x ≤ V) (hVX : V < ywX x) (hσT : σ ∈ Tset x)
-    (hσ1 : σ < Om1) (hσV : σ < ywV 1 0 x + V) :
+theorem zm_q_facts {d V σ : Ordinal.{0}} (hDV : d ≤ V) (hVX : V < ywX x) (hσT : σ ∈ Tset x)
+    (hσ1 : σ < Om1) (hσV : σ < d + V) :
     veblen 1 (gq σ x) = gq σ x ∧ gq σ x < ywX x ∧ InE (gq σ x) := by
   have hXE : InE (ywX x) := (ywX_facts hx hx1).2.2.2
   have hσX : σ < ywX x := hσV.trans ((inE_indec hXE).add_lt (hDV.trans_lt hVX) hVX)
   obtain ⟨-, -, -, hqE, -⟩ := geq_facts hx hx1 hσT hσ1
   exact ⟨xk_fix hx hx1 hσT hσ1 le_rfl (lu_one_lt_E hqE), zm_gq_lt_X hx hx1 hσT hσ1 hσX, hqE⟩
+
+/-- **`D(x)` as a segment base reading.** -/
+theorem zmD_T : ywV 1 0 x ∈ Tset x ∧ InE (ywV 1 0 x) ∧ x < ywV 1 0 x ∧ ywV 1 0 x < ywX x :=
+  ⟨(zmD_facts hx hx1).1, (zmD_facts hx hx1).2.2.2, (zmD_facts hx hx1).2.1,
+    (zm_gq_facts hx hx1).1.trans (zm_gq_X hx hx1)⟩
 
 end NC
 
@@ -192,15 +197,22 @@ structure ZmDS where
   R : Ordinal.{0} → Ordinal.{0} → Ordinal.{0}
   G : Ordinal.{0} → Ordinal.{0}
   Eg : Ordinal.{0}
+  B : Ordinal.{0}
+  Dv : Ordinal.{0} → Ordinal.{0}
   E_eq : veblen 1 Ei = E
   BG_le : tfBG ≤ E
+  BG_B : tfBG ≤ B
+  B_le : B ≤ E
+  B_cl : ∀ Z, SC Z → TlCl Z B
   E_X : E < tlX
   Ei_cl : ∀ Z, SC Z → Eg < Z → TlCl Z Ei
-  nfx : ∀ y, tfBG < y → y ≤ E → gamma y ≠ y
+  nfx : ∀ y, B < y → y ≤ E → gamma y ≠ y
   Eg_le : ∀ c, c ≠ 0 → Eg ≤ G c
+  Dv_T : ∀ x, InE x → x < Om1 → Dv x ∈ Tset x ∧ InE (Dv x) ∧ x < Dv x ∧ Dv x < ywX x
+  Dv_pi : ∀ σ ρ, Bases σ ρ → Dv ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (Dv ρ) = Dv σ
   V_T : ∀ x, InE x → x < Om1 → Eg < x →
-    V x ∈ Tset x ∧ InE (V x) ∧ ywV 1 0 x ≤ V x ∧ V x < ywX x
-  Vq : ∀ x, InE x → x < Om1 → Eg < x → ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < ywV 1 0 x + V x ∧ V x < gq σ x
+    V x ∈ Tset x ∧ InE (V x) ∧ Dv x ≤ V x ∧ V x < ywX x
+  Vq : ∀ x, InE x → x < Om1 → Eg < x → ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < Dv x + V x ∧ V x < gq σ x
   W_T : ∀ x, InE x → x < Om1 → Eg < x → W x ∈ Tset x ∧ W x < Om1 ∧ eN (V x) = glA 1 (W x) x
   V_pi : ∀ σ ρ, Bases σ ρ → Eg < σ → V ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (V ρ) = V σ
   W_pi : ∀ σ ρ, Bases σ ρ → Eg < σ → W ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (W ρ) = W σ
@@ -217,7 +229,7 @@ structure ZmDS where
   cof : ∀ c x, InE x → x < Om1 → IsSuccLimit c → c < E → G c < x → ∀ ν, ν < R c x →
     ∃ b, b < c ∧ G b < x ∧ ν ≤ R b x
   nc : ∀ c x, InE x → x < Om1 → IsSuccLimit c → c < E → G c < x →
-    ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < ywV 1 0 x + R c x ∧ ywV 1 0 x + R c x < gq σ x
+    ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < Dv x + R c x ∧ Dv x + R c x < gq σ x
   top : ∀ x, InE x → x < Om1 → Eg < x → ∀ ν, ν < V x → ∃ b, b < E ∧ G b < x ∧ ν ≤ R b x
   ex : ∀ σ ρ c, Bases σ ρ → c < E → G c < σ →
     R c ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (R c ρ) = R c σ
@@ -240,8 +252,15 @@ noncomputable def zmYr : ZmDS where
   R := yrR
   G := yrG
   Eg := 0
+  B := tfBG
+  Dv := ywV 1 0
   E_eq := zm_BG_fix
   BG_le := le_rfl
+  BG_B := le_rfl
+  B_le := le_rfl
+  B_cl := fun _ hZ => zbBG_tl hZ.1
+  Dv_T := fun x hx hx1 => zmD_T hx hx1
+  Dv_pi := fun _ _ hB => zmD_pi hB
   E_X := tl_BG_lt_X
   Ei_cl := fun _ hZ _ => zbBG_tl hZ.1
   nfx := fun y h1 h2 => absurd h2 (not_le.2 h1)
