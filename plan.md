@@ -11,7 +11,7 @@ The remaining work, arranged by the cells of the README tables. Items not being 
       - also: window RS input and cap off υ-fixed restarts, Θ = ρ at isolated ones; atoms move to K_Y; base ι(Ω₂): reach, cap; codes ≤ K_ω read short.
       - road yqRoadS (hyp.: UPPER, LOWER, cap past the frontier; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; the shift XoShift; XoSup): ν_C = L(ω+1).
       - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): 60 sorry leaves; OPEN 23 (all L), SUSPECT 2, REFUTED 9; 15 OPEN leaves on the road (all L); skTopLawAll, skPsi3OffRest2 and skAtHi3 proved (Kx.kxTopLawAll, Ky.kyPsi3OffRest2, Kz.kzAtHi3); root vacuity open.
-      - 🤖 next: segments past B₂: each Γ-fixed point F is a segment base read without a gate; the layer at F by a union, the base layer at F+1 by a ladder; induction over the fixed points below X ⇒ skZbDirectX; then the other layer, window and skBC leaves.
+      - 🤖 next: the layers past B₂. Done: a digit system over its segment base (the largest Γ-fixed point F ≤ E, read with a gate) at every ε-number below X (Va.vsGood_all3). Left: the layer at every Γ-fixed point F (a union) and the base layer at F+1 (a ladder) with gated bases ⇒ skZbDirectX; then the other layer, window and skBC leaves.
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
