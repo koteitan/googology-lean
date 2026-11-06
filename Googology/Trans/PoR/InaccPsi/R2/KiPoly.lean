@@ -186,16 +186,15 @@ theorem kiChain : ∀ (L : List (Ordinal.{0} × Ordinal.{0})) (hb : Ordinal.{0})
       H1 hvL
 
 omit hl hX hA hρ in
-/-- **THE BASE CONDITIONS FROM NORMALITY** along the list (`KiQ`), at a base `β` of `b = β + W^{kiX X₀ L + e}`
-whose components lie below `ψ₂ b`. -/
-theorem kiCond {β e : Ordinal.{0}} (he2 : e < Om (1 + 1)) :
+/-- **THE BASE CONDITIONS FROM NORMALITY** along the list (`KiQ`), at a base `β` whose components lie below `ψ₂ M`
+for some `M ≤ β + W^{kiX X₀ L + e + 1}` (e.g. `M = β + W^E·γ`, `γ < Ω₂`). -/
+theorem kiCondM {β e M : Ordinal.{0}} (he2 : e < Om (1 + 1)) :
     ∀ (L : List (Ordinal.{0} × Ordinal.{0})) (X₀ hb : Ordinal.{0}) (Q₀ : Ordinal.{0} → Prop),
-    KiValid S l hb L →
-    (∀ p ∈ L, p.1 < S.psi (β + leWe (kiX X₀ L + e)) (Om (1 + 1)) ∧
-      p.2 < S.psi (β + leWe (kiX X₀ L + e)) (Om (1 + 1))) →
+    KiValid S l hb L → M ≤ β + leWe (kiX X₀ L + e + 1) →
+    (∀ p ∈ L, p.1 < S.psi M (Om (1 + 1)) ∧ p.2 < S.psi M (Om (1 + 1))) →
     Q₀ β → KiQ S l X₀ Q₀ L β
-  | [], _, _, _, _, _, hQ => hQ
-  | p :: L, X₀, _, Q₀, hv, hcomp, hQ => by
+  | [], _, _, _, _, _, _, hQ => hQ
+  | p :: L, X₀, _, Q₀, hv, hM, hcomp, hQ => by
     have hκ2 : S.InR (Om (1 + 1 : Ordinal.{0})) := InR_Om_succ 1
     obtain ⟨hc, h1, hθ, _, hζc, hζ0, hζθ, hvL⟩ := hv
     have hh2 : p.1 < Om (1 + 1) := hθ.trans (psi_lt hκ2 _)
@@ -204,14 +203,27 @@ theorem kiCond {β e : Ordinal.{0}} (he2 : e < Om (1 + 1)) :
       kiTail (p :: L) X₀ (p.1 + 1) e le_add_self hv' he2
     have hE2 : kiX X₀ (p :: L) + e < X₀ + leWe (Om (1 + 1)) :=
       hE1.trans_le (add_le_add le_rfl (leWe_mono (Order.add_one_le_of_lt hh2)))
+    have hM1 : S.psi M (Om (1 + 1)) ≤ S.psi (β + leWe (X₀ + leWe (p.1 + 1))) (Om (1 + 1)) :=
+      (psi_mono hκ2 (hM.trans (add_le_add le_rfl (leWe_mono (Order.add_one_le_of_lt hE1))))).1
+    have hM2 : S.psi M (Om (1 + 1)) ≤ S.psi (β + leWe (X₀ + leWe (Om (1 + 1)))) (Om (1 + 1)) :=
+      (psi_mono hκ2 (hM.trans (add_le_add le_rfl (leWe_mono (Order.add_one_le_of_lt hE2))))).1
     obtain ⟨hp1b, hp2b⟩ := hcomp p List.mem_cons_self
-    have hKcE : KcE S l X₀ p.1 β := fun h' _ _ hle =>
-      kgOwnExp h' ((hle.trans_lt hp1b).trans_le (psi_mono hκ2 (add_le_add le_rfl (leWe_mono hE2.le))).1)
+    have hKcE : KcE S l X₀ p.1 β := fun h' _ _ hle => kgOwnExp h' ((hle.trans_lt hp1b).trans_le hM2)
     have hmid : p.1 < S.psi (β + leWe (X₀ + leWe p.1)) (Om (1 + 1)) := hKcE p.1 hc h1 le_rfl
     have hZ : ZyQ S l X₀ p.1 p.1 (fun β' => Q₀ β' ∧ KcE S l X₀ p.1 β') p.2 β :=
       ⟨⟨hQ, hKcE⟩, hmid, fun ζ' _ hle => kgOwnBase (fun a c _ hq => CSet.of_lt hq) hmid ζ'
-        ((hle.trans_lt hp2b).trans_le (psi_mono hκ2 (add_le_add le_rfl (leWe_mono hE1.le))).1)⟩
-    exact kiCond he2 L (X₀ + leWe p.1 * p.2) p.1 _ hvL (fun q hq => hcomp q (List.mem_cons_of_mem _ hq)) hZ
+        ((hle.trans_lt hp2b).trans_le hM1)⟩
+    exact kiCondM he2 L (X₀ + leWe p.1 * p.2) p.1 _ hvL hM (fun q hq => hcomp q (List.mem_cons_of_mem _ hq)) hZ
+
+omit hl hX hA hρ in
+/-- **THE BASE CONDITIONS FROM NORMALITY** along the list (`KiQ`), at a base `β` of `b = β + W^{kiX X₀ L + e}`
+whose components lie below `ψ₂ b`. -/
+theorem kiCond {β e : Ordinal.{0}} (he2 : e < Om (1 + 1)) (L : List (Ordinal.{0} × Ordinal.{0}))
+    (X₀ hb : Ordinal.{0}) (Q₀ : Ordinal.{0} → Prop) (hv : KiValid S l hb L)
+    (hcomp : ∀ p ∈ L, p.1 < S.psi (β + leWe (kiX X₀ L + e)) (Om (1 + 1)) ∧
+      p.2 < S.psi (β + leWe (kiX X₀ L + e)) (Om (1 + 1)))
+    (hQ : Q₀ β) : KiQ S l X₀ Q₀ L β :=
+  kiCondM he2 L X₀ hb Q₀ hv (add_le_add le_rfl (leWe_mono (le_of_lt (lt_add_one _)))) hcomp hQ
 
 /-- **THE TOP LAW AT EVERY NORMAL `b = β + W^{Ω_{k+3} + W^{h₁}·ζ₁ + … + W^{h_n}·ζ_n + e}`** (a valid list below
 `Ω₂`, `e` a code, `W^{E+1} ∣ β`). -/
