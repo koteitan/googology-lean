@@ -3455,7 +3455,15 @@ are in `(Ω₁, θ]`; the missing link is `π` on the readings (no lemma compute
 layer reading systems prove such a link (`Zm.ZmDS`: Lemma EXACT for explicit readings `R(o)(x)`) for their codes;
 codes below `θ` past them (e.g. `ψ_{Ω₂}(ψ_{Ω₃}(Ω_ω·2))` at a window, where `A ≥ Ω_ω·2`) are the content of
 skZbDirectX, skLayPastXθ, skLayPastTh.  REFUTE FIRST: NO EVIDENCE (at a limit of fixed restarts with `Θ_λ(m_λ) = ρ_λ+1` it
-holds with `v = ρ_λ`, `π(ρ_λ) = ρ_μ`, `Cl.pi_base`, at the fixed `μ`). -/
+holds with `v = ρ_λ`, `π(ρ_λ) = ρ_μ`, `Cl.pi_base`, at the fixed `μ`).
+Round 183 analysis: the readings of the codes `≤ θ` fill `T^{ρ_λ} ∩ Ω₁ = [0, υ_{λ+1})` (`T_inter_Om1`, `Θ_λ(θ) = υ_{λ+1}`),
+and `π_{ρ_μ,ρ_λ}` is a `(<, +)`-isomorphism of `T^{ρ_λ}[ρ_μ]` onto `T^{ρ_μ}` ([W07a] Lemma 5.3).  So the hull form follows
+from the HULL CORRESPONDENCE `T^{ρ_λ}[ρ_μ] ∩ Ω₁ = Θ_λ[H_μ ∩ θ]` (then `π = Θ_μ ∘ Θ_λ⁻¹` there, as both are isomorphisms
+onto initial segments).  The naive form `Par(Θ_λ c) ⊆ ρ_μ ⇔` (small parameters of `c` below `ρ_μ`) is FALSE:
+`c = ψ_{Ω₂}(ψ_{Ω₃}(A_μ)) ∈ H_λ` has small parameters below `ρ_μ` but is no code of `μ`.  Proving the correspondence needs
+the `ψ_{Ω₁} ↔ ϑ` dictionary (the terms of the readings in `T^{ρ_λ}`): the `Θ`-laws (`Kx.kxTopLawAll`, `Ky.kyOff`,
+`Kz.kzTop`) give `Θ_λ(ψ_{Ω₂}(d)) = ψ_{Ω₁}(A + 1 + ψ_{Ω₂}(T a) + T δ₀ + Θ c)`; the `ϑ`-side needs [W07a] Lemma 3.30 and
+Def 3.28 in general (now cited only for `ξ = Ω₁·β + η`, `β < τ`). -/
 theorem skFixCont (S : InaccSeq.{0}) :
     ∀ l, IsRestartIdx l → Bt.iota S (Om ω) < l → l < Bt.iota S (Om ω + Nc.ncPp S * (ω + 1)) → upsilon l = l →
       ¬ Cp.CpIso l → upsilon l < Cd.cdTheta S l (Cd.cdCode S l) →
