@@ -86,16 +86,20 @@ noncomputable def zbTl : ZbAS where
   supp := fun _ s hZ hs => by
     obtain ⟨Z', hZ', h'⟩ := zbTl_supp hZ hs.2.2.2
     exact ⟨Z', hZ', hs.1, hs.2.1, hs.2.2.1, h'⟩
-  mem := fun S a b Z s ha hb hb1 hZb hs => by
+
+theorem zbTl_ok (S : InaccSeq.{0}) : zbTl.Ok S where
+  mem := fun a b Z s ha hb hb1 hZb _ hs => by
     have hb1' : b ≤ Om1 := by rw [Br.Om1_eq]; exact hb1
     have hW : Le.leWe (Om (1 + 1)) ≤ a := tz_W_lt_Omw.le.trans ha
     exact (tw_mem_CSet (S := S) hb hb1' le_rfl s (hs.2.2.2.mono hZb) (tz_args_W hW hs.2.2.1)).1
-  hull := fun S a Z hZ hZ1 hkey x hx hxV => by
+  hull := fun a Z hZ hZ1 hkey x hx hxV => by
     have hcoll : ∀ e, e < a → e ∈ S.CSet a Z → Ri.RiDg Z e → TzLev Z e → S.psi e (Om 1) < Z :=
       fun e hea heC _ _ => hkey _ (CSet.psi_mem hea Low.InR_Om_one (CSet.Om_mem (CSet.one_mem _ _)) heC)
         (psi_lt Low.InR_Om_one _)
     obtain ⟨-, -, hT, -⟩ := tz_diglev (S := S) hZ hZ1 hcoll x hx
     exact zbTl_gx (hT hxV) hxV
+
+instance (S : InaccSeq.{0}) : Fact (zbTl.Ok S) := ⟨zbTl_ok S⟩
 
 theorem zbTl_V : zbTl.V = tlX := rfl
 

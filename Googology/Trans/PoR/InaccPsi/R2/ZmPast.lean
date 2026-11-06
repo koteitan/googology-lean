@@ -36,23 +36,25 @@ def ZmLayA (A : ZbAS) (S : InaccSeq.{0}) (B : Ordinal.{0}) : Prop :=
 theorem zmLayA_zbU (S : InaccSeq.{0}) (B : Ordinal.{0}) : ZmLayA zbU S B ↔ ZbLayAt S B := Iff.rfl
 
 /-- **UPPER ∧ LOWER ∧ CapV below `ι(Γ(B)·ω)` from a layer for `B` with any atom system.** -/
-theorem zmUV_of_layA {A : ZbAS} {S : InaccSeq.{0}} {B : Ordinal.{0}} (h : ZmLayA A S B) {l : Ordinal.{0}}
+theorem zmUV_of_layA {A : ZbAS} {S : InaccSeq.{0}} [Fact (A.Ok S)] {B : Ordinal.{0}} (h : ZmLayA A S B) {l : Ordinal.{0}}
     (hr : CdRange S l) (hl : l < iota S (gcG B * ω)) : CdUpper S l ∧ CdLower S l ∧ CdCapV S l := by
   obtain ⟨L, T, hBT, hg, hT, hTO, hTE, htop, hP, hcl, htopE⟩ := h
   have hl' : l < iota S (ω ^ T * ω) := by
     rw [hTE]; exact hl.trans_le (iota_mono (S := S) _ _ (mul_le_mul_left hBT ω))
   exact zbUV A L S hg T hT htop hP hcl htopE hTO hr hl'
 
-/-- **THE LAYER `c` PAST `X`**: one atom system with a layer for every atom index `B < Γ(c+1)`. -/
+/-- **THE LAYER `c` PAST `X`**: one atom system, with its hull facts at `S`, with a layer for every atom index
+`B < Γ(c+1)`. -/
 def ZmPastAt (S : InaccSeq.{0}) (c : Ordinal.{0}) : Prop :=
-  ∃ A : ZbAS, ∀ B, B < gcG (c + 1) → ZmLayA A S B
+  ∃ A : ZbAS, A.Ok S ∧ ∀ B, B < gcG (c + 1) → ZmLayA A S B
 
 /-- **`ZmPastAt S c` ⇒ the conclusions of `skLayLoFixX` and `skLayHiFixX` at `c`.** -/
 theorem zmLay_of_past {S : InaccSeq.{0}} {c : Ordinal.{0}} (h : ZmPastAt S c) :
     ∀ l, CdRange S l → (∃ ℓ, ℓ < gcG (c + 1) ∧ l < iota S (gcG (veblen ℓ (gcG c + 1)) * ω)) →
       CdUpper S l ∧ CdLower S l ∧ CdCapV S l := by
   rintro l hr ⟨ℓ, hℓ, hl⟩
-  obtain ⟨A, hA⟩ := h
+  obtain ⟨A, hok, hA⟩ := h
+  haveI : Fact (A.Ok S) := ⟨hok⟩
   exact zmUV_of_layA (hA _ (Yc.yc_veb_lt_next hℓ)) hr hl
 
 end Googology.Trans.PoR.InaccPsi.R2.Zm

@@ -186,7 +186,7 @@ theorem qc_layA_mono {A : Zb.ZbAS} {S : InaccSeq.{0}} {B B' : Ordinal.{0}} (h : 
 `Γ(c+1)` (the layer at a fixed point `H_{γ_n}(0)` above it). -/
 theorem qc_past (S : InaccSeq.{0}) : ∀ c, c < ucB → ZmPastAt S c := by
   intro c hc
-  refine ⟨qcU, fun B hB => ?_⟩
+  refine ⟨qcU, qcU_ok S, fun B hB => ?_⟩
   have hBB : B < ucB := hB.trans (qc_gcG_lt_B (ucB_SC.isSuccLimit.add_one_lt hc))
   obtain ⟨n, hn⟩ := qcF_cof hBB
   obtain ⟨hf, hb, hFB, hK⟩ := qcF_facts S n

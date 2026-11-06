@@ -32,7 +32,7 @@ def ZbPoly (A : ZbAS) (X : Xt.XtSys) (E κ : Ordinal.{0}) : Prop :=
   ∀ Z c, GxCl Z (A.At Z) c → c < E → ∃ s : X.Tm, ∀ y, SC y → y < Om 1 → Z ≤ y → κ < y →
     X.CB s y ∧ X.val s y = gxTh y (A.At y) c
 
-variable {S : InaccSeq.{0}} {A : ZbAS}
+variable {S : InaccSeq.{0}} {A : ZbAS} [Fact (A.Ok S)]
 
 /-- **THEOREM UNI WITH A GATE**: for every term system `X` with terms for the codes below `E ≤ A.V` at the bases
 above `κ < K = ψ_{Ω₁}(Ω_ω)`, every named restart index `F = υ_F` with `e(η_F) ≤ E` has `O_X(F) = Θ^b_F(e(η_F))`
@@ -147,7 +147,8 @@ theorem zbUniTh {X : XtSys} {E κ : Ordinal.{0}} (hκ : κ < Td.tdK S) (hE : E �
 
 /-- A code over every strongly critical base `≥ K` is a good name. -/
 theorem zb_good {η : Ordinal.{0}} (h : ∀ Z, SC Z → Td.tdK S ≤ Z → GxCl Z (A.At Z) η) : Bt.Good S η :=
-  A.cl_mem_CSet (ZbAS.Omw_le_A1 (S := S) _) (Pv_SC S _) (Pv_lt_Om1 S _).le le_rfl (h _ (Pv_SC S η) (gr_tdK_le_Pv S η))
+  A.cl_mem_CSet (ZbAS.Omw_le_A1 (S := S) _) (Pv_SC S _) (Pv_lt_Om1 S _).le le_rfl (fun _ hz => zb_Pv_N _ hz)
+    (h _ (Pv_SC S η) (gr_tdK_le_Pv S η))
 
 /-- **`ι(η) ≤ P(η) < P(Ω_ω) = L(0)`** for a code `η` over every strongly critical base. -/
 theorem zbIota_lt_L0 {η : Ordinal.{0}} (h : ∀ Z, SC Z → Td.tdK S ≤ Z → GxCl Z (A.At Z) η) :
