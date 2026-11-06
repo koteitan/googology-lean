@@ -1724,7 +1724,8 @@ has code exponents and code coefficients (`Kc.kcTop`, by nesting); left: (i) `Zy
 jump `Kd.kdLaw` with the context `v ↦ X + W^v` and a three-level tower; round 147: the contexts of any depth
 `Ke.KeCtx`, closed under `v ↦ g₀ + W^j·v` and `v ↦ g₁ + W^{C'(v)}`, and the jump at every context `Ke.keLaw`; next:
 the recursion on the `W`-normal form of `h` — a limit exponent is a point of continuity of `T` (`Zz.zzLimW`) or the
-top of a context — which needs a decomposition of the members of `D`) and the `W`-fixed exponents (`E ≥ Ω₃·2`,
+top of a context — over the decomposition of the members of `D`, round 148: `Kf.kfDec` (leading term), `Kf.kfLast`
+(last term)) and the `W`-fixed exponents (`E ≥ Ω₃·2`,
 `ψ_{k+4}`-terms), and the limit sub-bases `β + W^E·γ` (continuity, as Yt.ytSubLaw). -/
 theorem skTopLawAll (S : InaccSeq.{0}) : Zp.ZpTopLawAll S := by
   sorry
