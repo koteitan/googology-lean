@@ -184,13 +184,12 @@ noncomputable def zgB2 (S : InaccSeq.{0}) : ZbRS where
   c0_ne := (lt_of_le_of_lt zero_le (lt_add_one tfBG)).ne'
   c0_lt := (add_lt_add_iff_left _).2 (gg_one_lt_of_SC tfBG_SC)
   Bd_X := (tlX_SC.isPrincipal tl_BG_lt_X tl_BG_lt_X).le
-  gt_c0 := by show yrG (zbO (tfBG + 1)) = 0; rw [zbO_c0, yrG_zero]
-  L0_g := zbBGn_g 0
+  L0_g := by rw [zbBGn_g 0]; show (0 : Ordinal.{0}) = yrG (zbO (tfBG + 1)); rw [zbO_c0, yrG_zero]
   L0_E := fun x _ _ => by
     rw [zbBGn_E 0 x]
     show gq (ywV 1 0 x + ((0 : ℕ) : Ordinal.{0})) x = gq (ywV 1 0 x + yrR (zbO (tfBG + 1)) x) x
     rw [zbO_c0, yrR_zero, Nat.cast_zero]
-  L0_top := fun y hy hy1 => by
+  L0_top := fun y hy hy1 _ => by
     have h := (zbBGn_codes S 0).1 y hy hy1 (by rw [zbBGn_g]; exact hy.1)
     rw [h]; unfold zbT; norm_num
   L0_poly := by
@@ -280,6 +279,10 @@ noncomputable def zgB2 (S : InaccSeq.{0}) : ZbRS where
     change yrG (zbO (tfBG + 1 + o)) < Z at hg
     rw [zbO_add] at hg ho
     exact zgAtom hZ ho hg
+  D_le := fun c x _ _ _ _ _ => show ywV 1 0 x ≤ ywV 1 0 x + yrR (zbO c) x from le_self_add
+  BG_top := fun y hy hy1 => zbBG_top S hy hy1
+  BG_poly := zbBG_poly S
+  BG_c0 := le_self_add.trans gcG_strictMono.le_apply
 
 /-- **A layer for a larger index is a layer for a smaller one** (the same top code). -/
 theorem zbLayAt_mono {S : InaccSeq.{0}} {B B' : Ordinal.{0}} (h : B ≤ B') (hL : ZbLayAt S B') : ZbLayAt S B := by

@@ -1,0 +1,280 @@
+import Googology.Trans.PoR.InaccPsi.R2.ZmDS
+import Googology.Trans.PoR.InaccPsi.R2.TlBG
+
+/-!
+# VaR: ONE READING OF EVERY CODE PAST `B_Γ` — `Yr.yrR` WITH THE FIXED POINT `B_Γ` READ `D(x)`
+
+`Yr.yrR` reads a base atom `Γ(i)` with `i < Γ(i)` as `Γ_{x+1+i(x)}` and a fixed point `Γ(i) = i` as `0`.  Here the
+fixed point is read `D(x) = ϑˣ(Ω₁·Ω₁ + Ω₁)` (`Yw.ywV 1 0`, the reading of `B_Γ`, `Zm.zmYr`); everything else is as
+in `Yr.yrR`: a code `c ≥ G` in the bracket of `e = guE c`, `c = e^j·d + r`, reads `e(x)^{j(x)}·d(x) + r(x)`, a
+non-atom `e = yhPsi α η` reads `ϑˣ(Ω₁·α(x) + η(x))`.  Below `B_Γ` it is `Yr.yrR` (`vR_yr`); the gate is `Yr.yrG`.
+The only fixed point of `Γ` below `Γ_{B_Γ+1}` is `B_Γ`, so this is the reading of every code below `Γ_{B_Γ+1}`.
+
+* `vR`, `vI` (the reading of an atom index), `vA` (the reading of an `ε`-number code as a base), `vA_atom`, `vA_atom_fix`, `vA_psi`;
+* `vR_low`, `vR_dec`, `vR_cnf`, `vR_base`, `vR_atom`, `vR_BG` (**`B_Γ` reads `D(x)`**), `vR_psi`, `vR_zero`,
+  `vR_nat`, `vR_one`, `vR_succ`, `vR_yr` (**`vR = yrR` below `B_Γ`**);
+* `va_psi1_fix` (**`yhPsi 1 E = ε_{E+1}` at a fixed point `E > Ω₁` of `φ(1, ·)`**), `va_psi1_succ`
+  (**`yhPsi 1 (η+1) = ε_{yhPsi 1 η + 1}`**).
+
+No new axiom.  New definitions: `vR`, `vI`, `vA`.
+-/
+
+set_option autoImplicit false
+
+namespace Googology.Trans.PoR.InaccPsi.R2.Va
+
+open Ordinal Order Set Googology.Trans.PoR.InaccPsi.R2 Googology.Notation.InaccPsi
+  Googology.Notation.InaccPsi.InaccSeq Googology.Trans.PoR.InaccPsi.R2.Gf Googology.Trans.PoR.InaccPsi.R2.Gc
+  Googology.Trans.PoR.InaccPsi.R2.Lu Googology.Trans.PoR.InaccPsi.R2.Gl Googology.Trans.PoR.InaccPsi.R2.Gn
+  Googology.Trans.PoR.InaccPsi.R2.Gk Googology.Trans.PoR.InaccPsi.R2.Gb Googology.Trans.PoR.InaccPsi.R2.Xu
+  Googology.Trans.PoR.InaccPsi.R2.Yh Googology.Trans.PoR.InaccPsi.R2.Yr Googology.Trans.PoR.InaccPsi.R2.Yw
+  Googology.Trans.PoR.InaccPsi.R2.Tl Googology.Trans.PoR.InaccPsi.R2.Rh
+
+/-! ## The reading -/
+
+/-- A fixed point of `Γ` above `Ω₁` below `j`. -/
+def VaFixG (j : Ordinal.{0}) : Prop := ∃ F, gamma F = F ∧ Om1 < F ∧ F < j
+
+/-- **The largest fixed point of `Γ` above `Ω₁` below `j`** (`sSup`). -/
+noncomputable def vaFpG (j : Ordinal.{0}) : Ordinal.{0} := sSup {F | gamma F = F ∧ Om1 < F ∧ F < j}
+
+theorem va_fpG_le (j : Ordinal.{0}) : vaFpG j ≤ j := csSup_le' fun _ hF => hF.2.2.le
+
+/-- A fixed point of `F_λ` above `Ω₁` below `y`. -/
+def VaFixL (l y : Ordinal.{0}) : Prop := ∃ f, rhF l f = f ∧ Om1 < f ∧ f < y
+
+/-- **The largest fixed point of `F_λ` above `Ω₁` below `y`** (`sSup`). -/
+noncomputable def vaFpL (l y : Ordinal.{0}) : Ordinal.{0} := sSup {f | rhF l f = f ∧ Om1 < f ∧ f < y}
+
+theorem va_fpL_le (l y : Ordinal.{0}) : vaFpL l y ≤ y := csSup_le' fun _ hf => hf.2.2.le
+
+open Classical in
+/-- **The reading** of a code at `x`: as `Yr.yrR`, with
+* an atom `Γ(j)`, `j < Γ(j)`, read `gq(i(x))`: `i = j` below the first fixed point of `Γ`, and past the largest fixed
+  point `F < j` of `Γ` the index past the closed point: `F(x) + (j − (F+1))(x)`;
+* a fixed point `F_λ(y)` of `Γ` (`λ = tlLev ≥ 1`, `y = tlI`) read `ϑˣ(Ω₁·(Ω₁+λ(x)) + η(x))` (`Yw.ywV`): `η = y − y₀(λ)`
+  below the first fixed point of `F_λ` above `Ω₁`, and past the largest one `f < y`: `f(x) + (y − (f+1))(x)`. -/
+noncomputable def vR (c x : Ordinal.{0}) : Ordinal.{0} :=
+  if h : gcG 0 ≤ c then
+    (if hA : YhAt (guE c) then (if hi : yhJ (guE c) < guE c then
+        gq (if VaFixG (yhJ (guE c)) then vR (vaFpG (yhJ (guE c))) x +
+            vR (yhJ (guE c) - (vaFpG (yhJ (guE c)) + 1)) x
+          else vR (yhJ (guE c)) x) x
+        else (if hL : tlLev (guE c) < guE c ∧ tlI (tlLev (guE c)) (guE c) < guE c then
+          ywV (vR (tlLev (guE c)) x)
+            (if VaFixL (tlLev (guE c)) (tlI (tlLev (guE c)) (guE c)) then
+              vR (vaFpL (tlLev (guE c)) (tlI (tlLev (guE c)) (guE c))) x +
+              vR (tlI (tlLev (guE c)) (guE c) - (vaFpL (tlLev (guE c)) (tlI (tlLev (guE c)) (guE c)) + 1)) x
+            else vR (tlI (tlLev (guE c)) (guE c) - glY0 (tlLev (guE c))) x) x
+          else 0))
+      else glA (vR (yhK (guE c)) x) (vR (yhI (guE c)) x) x) ^ vR (log (guE c) c) x *
+      vR (c / guE c ^ log (guE c) c) x + vR (c % guE c ^ log (guE c) c) x
+  else glR c x
+termination_by c
+decreasing_by
+  all_goals first
+    | exact yr_ix_lt h hi
+    | exact (va_fpG_le _).trans_lt (yr_ix_lt h hi)
+    | exact (Ordinal.sub_le_self _ _).trans_lt (yr_ix_lt h hi)
+    | exact hL.1.trans_le (gl_E_le (yh_gfE_le h))
+    | exact (va_fpL_le _ _).trans_lt (hL.2.trans_le (gl_E_le (yh_gfE_le h)))
+    | exact (Ordinal.sub_le_self _ _).trans_lt (hL.2.trans_le (gl_E_le (yh_gfE_le h)))
+    | exact yh_lev_lt h hA
+    | exact yh_idx_lt h hA
+    | exact (gl_parts (yh_gfE_le h)).2.2.2.2.2.1
+    | exact (gl_parts (yh_gfE_le h)).2.2.2.2.2.2.2
+    | exact (gl_parts (yh_gfE_le h)).2.2.2.2.2.2.1
+
+open Classical in
+/-- **The reading of an atom index**: `F(x) + (j − (F+1))(x)` past the largest fixed point `F < j` of `Γ`, `j(x)`
+below the first. -/
+noncomputable def vI (j x : Ordinal.{0}) : Ordinal.{0} :=
+  if VaFixG j then vR (vaFpG j) x + vR (j - (vaFpG j + 1)) x else vR j x
+
+open Classical in
+/-- **The reading of the index of a fixed point of kind `λ`.** -/
+noncomputable def vK (l y x : Ordinal.{0}) : Ordinal.{0} :=
+  if VaFixL l y then vR (vaFpL l y) x + vR (y - (vaFpL l y + 1)) x else vR (y - glY0 l) x
+
+/-- **The reading of an `ε`-number code as a base.** -/
+noncomputable def vA (e x : Ordinal.{0}) : Ordinal.{0} := by
+  classical
+  exact if YhAt e then (if yhJ e < e then gq (vI (yhJ e) x) x else
+      (if tlLev e < e ∧ tlI (tlLev e) e < e then ywV (vR (tlLev e) x) (vK (tlLev e) (tlI (tlLev e) e) x) x
+        else 0))
+    else glA (vR (yhK e) x) (vR (yhI e) x) x
+
+theorem vA_atom {e : Ordinal.{0}} (h : YhAt e) (hi : yhJ e < e) (x : Ordinal.{0}) :
+    vA e x = gq (vI (yhJ e) x) x := by
+  unfold vA; rw [if_pos h, if_pos hi]
+
+theorem vA_atom_fix {e : Ordinal.{0}} (h : YhAt e) (hi : ¬ yhJ e < e) (hL : tlLev e < e ∧ tlI (tlLev e) e < e)
+    (x : Ordinal.{0}) : vA e x = ywV (vR (tlLev e) x) (vK (tlLev e) (tlI (tlLev e) e) x) x := by
+  unfold vA; rw [if_pos h, if_neg hi, if_pos hL]
+
+theorem vA_atom_fix0 {e : Ordinal.{0}} (h : YhAt e) (hi : ¬ yhJ e < e) (hL : ¬ (tlLev e < e ∧ tlI (tlLev e) e < e))
+    (x : Ordinal.{0}) : vA e x = 0 := by
+  unfold vA; rw [if_pos h, if_neg hi, if_neg hL]
+
+theorem vA_psi {e : Ordinal.{0}} (h : ¬ YhAt e) (x : Ordinal.{0}) :
+    vA e x = glA (vR (yhK e) x) (vR (yhI e) x) x := by
+  unfold vA; rw [if_neg h]
+
+theorem vR_low {c : Ordinal.{0}} (hc : c < gcG 0) (x : Ordinal.{0}) : vR c x = glR c x := by
+  rw [vR, dif_neg (not_le.2 hc)]
+
+theorem vR_dec {c : Ordinal.{0}} (h : gcG 0 ≤ c) (x : Ordinal.{0}) :
+    vR c x = vA (guE c) x ^ vR (log (guE c) c) x * vR (c / guE c ^ log (guE c) c) x +
+      vR (c % guE c ^ log (guE c) c) x := by
+  rw [vR, dif_pos h]
+  by_cases hA : YhAt (guE c)
+  · by_cases hi : yhJ (guE c) < guE c
+    · rw [dif_pos hA, dif_pos hi, vA_atom hA hi]; rfl
+    · rw [dif_pos hA, dif_neg hi]
+      by_cases hL : tlLev (guE c) < guE c ∧ tlI (tlLev (guE c)) (guE c) < guE c
+      · rw [dif_pos hL, vA_atom_fix hA hi hL]; rfl
+      · rw [dif_neg hL, vA_atom_fix0 hA hi hL]
+  · rw [dif_neg hA, vA_psi hA]
+
+/-- **No fixed point of `Γ` above `Ω₁` below `j ≤ B_Γ`.** -/
+theorem va_noFixG {j : Ordinal.{0}} (hj : ¬ Tf.tfBG < j) : ¬ VaFixG j := by
+  rintro ⟨F, hF, hOF, hFj⟩
+  exact absurd (Tf.tfBG_le hF hOF) (not_le.2 (hFj.trans_le (not_lt.1 hj)))
+
+theorem vI_low {j : Ordinal.{0}} (hj : ¬ Tf.tfBG < j) (x : Ordinal.{0}) : vI j x = vR j x := by
+  unfold vI; rw [if_neg (va_noFixG hj)]
+
+theorem vR_zero (x : Ordinal.{0}) : vR 0 x = 0 := by rw [vR_low (gcG_SC 0).1, glR_zero]
+
+theorem vR_nat (n : ℕ) (x : Ordinal.{0}) : vR n x = n := by rw [vR_low (yh_nat_lt_G n), glR_nat]
+
+theorem vR_one (x : Ordinal.{0}) : vR 1 x = 1 := by exact_mod_cast vR_nat 1 x
+
+theorem vR_cnf {e j d r : Ordinal.{0}} (he : InE e) (hGe : gcG 0 ≤ e) (hj : j ≠ 0) (hd0 : d ≠ 0) (hde : d < e)
+    (hr : r < e ^ j) (hv : e ^ j * d + r < eN e) (x : Ordinal.{0}) :
+    vR (e ^ j * d + r) x = vA e x ^ vR j x * vR d x + vR r x := by
+  obtain ⟨h1, h2, h3, h4, -⟩ := gl_cnf he (gl_Om1_lt_G0.trans_le hGe) hj hd0 hde hr hv
+  rw [vR_dec (yh_G_le_cnf he hGe hj hd0) x, h1, h2, h3, h4]
+
+/-- **An `ε`-number code `e ≥ G` reads `vA e`.** -/
+theorem vR_base {e : Ordinal.{0}} (he : InE e) (hGe : gcG 0 ≤ e) (x : Ordinal.{0}) : vR e x = vA e x := by
+  obtain ⟨h1, h2⟩ := gl_base_nf he
+  have hE1 : (1 : Ordinal.{0}) < e := Lu.lu_one_lt_E he
+  have h := vR_cnf he hGe one_ne_zero one_ne_zero hE1 (by rw [opow_one]; exact he.pos) h2 x
+  rw [← h1] at h
+  rw [h, vR_one, vR_zero, opow_one, mul_one, add_zero]
+
+/-- **The base atom `Γ(i)`, `i < Γ(i)`, reads `gq(i(x))` below `B_Γ`, `gq(D(x) + (i − (B_Γ+1))(x))` past it.** -/
+theorem vR_atom {i : Ordinal.{0}} (hi : i < gcG i) (x : Ordinal.{0}) : vR (gcG i) x = gq (vI i x) x := by
+  have hE : InE (gcG i) := Low.opow_eq_self_of_SC (gcG_SC i)
+  have hi' : yhJ (gcG i) < gcG i := by rw [yhJ_gcG]; exact hi
+  rw [vR_base hE (gcG_le zero_le), vA_atom (yhAt_gcG i) hi', yhJ_gcG]
+
+/-- **`B_Γ` reads `D(x) = ϑˣ(Ω₁·Ω₁ + Ω₁)`**: `B_Γ = F_1(Ω₁+1)`, the first fixed point of `Γ` above `Ω₁`. -/
+theorem vA_BG (x : Ordinal.{0}) : vA Tf.tfBG x = ywV 1 0 x := by
+  have hA : YhAt Tf.tfBG := by rw [← Zb.zb_gcG_BG]; exact yhAt_gcG _
+  have hJ : yhJ Tf.tfBG = Tf.tfBG := by
+    have h := yhJ_gcG Tf.tfBG; rwa [Zb.zb_gcG_BG] at h
+  have hi : ¬ yhJ Tf.tfBG < Tf.tfBG := by rw [hJ]; exact lt_irrefl _
+  have hy : Om1 + 1 < rhF 1 (Om1 + 1) := by rw [← tl_BG_eq]; exact tl_Om1_succ_lt_BG
+  have hlev : tlLev Tf.tfBG = 1 := by rw [tl_BG_eq]; exact tlLev_F hy
+  have hidx : tlI 1 Tf.tfBG = Om1 + 1 := by rw [tl_BG_eq]; exact tlI_rhF 1 _
+  have h1B : (1 : Ordinal.{0}) < Tf.tfBG := Gg.gg_one_lt_of_SC Tf.tfBG_SC
+  have hL : tlLev Tf.tfBG < Tf.tfBG ∧ tlI (tlLev Tf.tfBG) Tf.tfBG < Tf.tfBG := by
+    rw [hlev, hidx]; exact ⟨h1B, tl_Om1_succ_lt_BG⟩
+  have hnf : ¬ VaFixL 1 (Om1 + 1) := by
+    rintro ⟨f, -, hOf, hf⟩
+    exact absurd (Order.add_one_le_of_lt hOf) (not_le.2 hf)
+  rw [vA_atom_fix hA hi hL, hlev, hidx, vR_one]
+  unfold vK
+  rw [if_neg hnf, glY0_lt (one_lt_omega0.trans omega_lt_Om1), Ordinal.sub_self, vR_zero]
+
+theorem vR_BG (x : Ordinal.{0}) : vR Tf.tfBG x = ywV 1 0 x := by
+  have hE : InE Tf.tfBG := Low.opow_eq_self_of_SC Tf.tfBG_SC
+  have hG : gcG 0 ≤ Tf.tfBG := by rw [← Zb.zb_gcG_BG]; exact gcG_le zero_le
+  rw [vR_base hE hG, vA_BG]
+
+/-- **A non-atom `ε`-number code `e = yhPsi α η > G` reads `ϑˣ(Ω₁·α(x) + η(x))`.** -/
+theorem vR_psi {α η : Ordinal.{0}} (hα : 1 ≤ α) (hGe : gcG 0 < yhPsi α η) (x : Ordinal.{0}) :
+    vR (yhPsi α η) x = glA (vR α x) (vR η x) x := by
+  obtain ⟨h1, h2⟩ := yhData_eq hα hGe
+  rw [vR_base (yhPsi_E hα η) hGe.le, vA_psi (yhPsi_notAt hα), h1, h2]
+
+theorem vA_psi' {α η : Ordinal.{0}} (hα : 1 ≤ α) (hGe : gcG 0 < yhPsi α η) (x : Ordinal.{0}) :
+    vA (yhPsi α η) x = glA (vR α x) (vR η x) x := by
+  rw [← vR_base (yhPsi_E hα η) hGe.le]; exact vR_psi hα hGe x
+
+/-! ## Successors -/
+
+theorem vR_succ : ∀ b x : Ordinal.{0}, vR (b + 1) x = vR b x + 1 := by
+  intro b
+  induction b using WellFoundedLT.induction with
+  | ind b IH =>
+  intro x
+  rcases lt_or_ge b (gcG 0) with hbG | hbG
+  · have hb1 : b + 1 < gcG 0 := (ev_isSuccLimit_of_inE gl_G0_E).add_one_lt hbG
+    rw [vR_low hbG, vR_low hb1, glR_succ b hb1 x]
+  have hbE := yh_gfE_le hbG
+  obtain ⟨hk, hd0, hdE, -, -, -, hrb, -⟩ := gl_parts hbE
+  obtain ⟨e, hr1, hv⟩ := gl_succ_nf hbE
+  rw [e, vR_cnf (guE_E b) (yh_G_le_E hbG) hk hd0 hdE hr1 hv, IH _ hrb x, vR_dec hbG x, add_assoc]
+
+/-! ## Below `B_Γ` it is `Yr.yrR` -/
+
+/-- **`vR = yrR` below `B_Γ`.** -/
+theorem vR_yr : ∀ c, c < Tf.tfBG → ∀ x, vR c x = yrR c x := by
+  intro c
+  induction c using WellFoundedLT.induction with
+  | ind c IH =>
+  intro hc x
+  rcases lt_or_ge c (gcG 0) with hcG | hcG
+  · rw [vR_low hcG, yrR_low hcG]
+  have hEc : guE c ≤ c := gl_E_le (yh_gfE_le hcG)
+  obtain ⟨-, -, -, -, -, hlog, hmod, hdiv⟩ := gl_parts (yh_gfE_le hcG)
+  have hA : vA (guE c) x = yrA (guE c) x := by
+    by_cases hAt : YhAt (guE c)
+    · obtain ⟨i, hi⟩ := yhAt_iff.1 hAt
+      obtain ⟨hii, hie⟩ := yr_atom_idx hi (hEc.trans_lt hc)
+      have hJ : yhJ (guE c) = i := by rw [hi, yhJ_gcG]
+      have hJe : yhJ (guE c) < guE c := by rw [hJ]; exact hie
+      rw [vA_atom hAt hJe, yrA_atom hAt hJe, vI_low (not_lt.2 ((hJe.trans_le hEc).trans hc).le),
+        IH _ (hJe.trans_le hEc) ((hJe.trans_le hEc).trans hc)]
+    · have hK := yh_lev_lt hcG hAt
+      have hI := yh_idx_lt hcG hAt
+      rw [vA_psi hAt, yrA_psi hAt, IH _ hK (hK.trans hc), IH _ hI (hI.trans hc)]
+  rw [vR_dec hcG, yrR_dec hcG, hA, IH _ hlog (hlog.trans hc), IH _ hdiv (hdiv.trans hc),
+    IH _ hmod (hmod.trans hc)]
+
+/-! ## The next `ε`-number on the code side -/
+
+/-- **`yhPsi 1 E = ε_{E+1}` at a fixed point `E > Ω₁` of `φ(1, ·)`.** -/
+theorem va_psi1_fix {E : Ordinal.{0}} (hE : veblen 1 E = E) (hOE : Om1 < E) : yhPsi 1 E = eN E := by
+  have h1 : ¬ YhAt (1 : Ordinal.{0}) := fun h => absurd h.2 (not_lt.2 (le_of_lt
+    (one_lt_omega0.trans omega_lt_Om1)))
+  have hF : glFw 1 E := ⟨E, ⟨luP_succ.2 hE, hOE⟩, 0, by rw [Nat.cast_zero, add_zero]⟩
+  rw [yhPsi_ne h1, glPsi, glLam_of hF]
+  conv_rhs => rw [← hE]
+  rw [Go.go_eN_veb]
+
+/-- **`yhPsi 1 (η+1) = ε_{yhPsi 1 η + 1}`.** -/
+theorem va_psi1_succ (η : Ordinal.{0}) : yhPsi 1 (η + 1) = eN (yhPsi 1 η) := by
+  have h1 : ¬ YhAt (1 : Ordinal.{0}) := fun h => absurd h.2 (not_lt.2 (le_of_lt
+    (one_lt_omega0.trans omega_lt_Om1)))
+  rw [yhPsi_ne h1, yhPsi_ne h1, glPsi, glPsi, Go.go_eN_veb]
+  congr 1
+  by_cases hF : glFw 1 η
+  · obtain ⟨f, hf, n, hn⟩ := hF
+    have hF' : glFw 1 (η + 1) := ⟨f, hf, n + 1, by rw [hn, Nat.cast_succ, add_assoc]⟩
+    rw [glLam_of hF', glLam_of ⟨f, hf, n, hn⟩]
+  · have hF' : ¬ glFw 1 (η + 1) := by
+      rintro ⟨f, hf, m, hm⟩
+      rcases m with _ | n
+      · rw [Nat.cast_zero, add_zero] at hm
+        exact Order.not_isSuccLimit_succ η (by rw [succ_eq_add_one, hm]; exact ev_isSuccLimit_of_inE (glF_E hf))
+      · apply hF
+        refine ⟨f, hf, n, ?_⟩
+        rw [Nat.cast_succ, ← add_assoc, ← Order.succ_eq_add_one, ← Order.succ_eq_add_one] at hm
+        exact Order.succ_injective hm
+    rw [glLam_of_not hF', glLam_of_not hF, add_assoc]
+
+end Googology.Trans.PoR.InaccPsi.R2.Va

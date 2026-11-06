@@ -33,7 +33,7 @@ structure YwLH (B : GdB) (e : Ordinal.{0} → Ordinal.{0}) : Prop where
   ele : ∀ x, InE x → x < Om1 → B.g < x → e x ≤ B.K.E x
   lo : ∀ x, InE x → x < Om1 → B.g < x → ∀ j, j ∈ Tset x → j < e x → gq j x ≤ B.K.E x
   hi : ∀ x, InE x → x < Om1 → B.g < x → B.K.E x < gq (e x) x
-  X : ∀ x, InE x → x < Om1 → B.g < x → gq (e x) x < ywX x
+  X : ∀ x, InE x → x < Om1 → B.g < x → Qc.QcBd x (gq (e x) x)
   pi : ∀ σ ρ, Bases σ ρ → B.g < σ → e ρ ∈ TB ρ σ ∧ pi σ ρ (e ρ) = e σ
 
 variable {B : GdB}
@@ -41,7 +41,8 @@ variable {B : GdB}
 /-- **Every `Ge.GeqH` whose top is below `X^x` is a `YwLH`.** -/
 theorem YwLH.ofGe {e : Ordinal.{0} → Ordinal.{0}} (H : GeqH B e)
     (hX : ∀ x, InE x → x < Om1 → B.g < x → gq (e x) x < ywX x) : YwLH B e :=
-  ⟨H.mem, fun x hx hx1 hg => (H.elt x hx hx1 hg).le, H.lo, H.hi, hX, H.pi⟩
+  ⟨H.mem, fun x hx hx1 hg => (H.elt x hx hx1 hg).le, H.lo, H.hi,
+    fun x hx hx1 hg => Qc.qcBd_of_X hx (hX x hx hx1 hg), H.pi⟩
 
 section Lim
 
@@ -215,8 +216,8 @@ theorem ywBG1H : YwLH ywBGB (fun x => ywV 1 0 x) := by
     rw [← ywV_zero]
     have h0T : (0 : Ordinal.{0}) ∈ Tset x := mem_T_of_le hx hx1 zero_le
     obtain ⟨-, hxX, hX1, -⟩ := ywX_facts hx hx1
-    exact ywV_lt_X hx hx1 h0T (hx.pos.trans hx1) hDT ((ywD_lt_X hx hx1).trans hX1) (hx.pos.trans hxX)
-      (ywD_lt_X hx hx1)
+    exact Qc.qcBd_of_X hx (ywV_lt_X hx hx1 h0T (hx.pos.trans hx1) hDT ((ywD_lt_X hx hx1).trans hX1)
+      (hx.pos.trans hxX) (ywD_lt_X hx hx1))
   · have h1σ : (1 : Ordinal.{0}) < σ := lu_one_lt_E hB.1
     have h0σ : (0 : Ordinal.{0}) < σ := hB.1.pos
     have h1 := ywV_pi hB (mem_TB_of_lt hB h1σ) ((lu_one_lt_E hB.2.1).trans hB.2.2.2) (mem_TB_of_lt hB h0σ)

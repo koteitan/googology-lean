@@ -1,4 +1,4 @@
-import Googology.Trans.PoR.InaccPsi.R2.ZmRef
+import Googology.Trans.PoR.InaccPsi.R2.ZmNx
 
 /-!
 # ZmRa: RAISING THE GATES OF A DIGIT SYSTEM
@@ -56,13 +56,21 @@ noncomputable def raise : ZmDS where
   R := M.R
   G := M.rgt g
   Eg := max M.Eg g
+  B := M.B
+  Dv := M.Dv
   E_eq := M.E_eq
   BG_le := M.BG_le
+  BG_B := M.BG_B
+  B_le := M.B_le
+  B_cl := fun Z hZ h => M.B_cl Z hZ ((le_max_left _ _).trans_lt h)
+  Dv_T := fun x hx hx1 h => M.Dv_T x hx hx1 ((le_max_left _ _).trans_lt h)
+  Dv_pi := fun σ ρ hB h => M.Dv_pi σ ρ hB ((le_max_left _ _).trans_lt h)
   E_X := M.E_X
   Ei_cl := fun Z hZ h => M.Ei_cl Z hZ ((le_max_left _ _).trans_lt h)
   nfx := M.nfx
   Eg_le := fun c hc => by rw [M.rgt_ne g hc]; exact max_le_max (M.Eg_le c hc) le_rfl |>.trans_eq (max_comm _ _)
   V_T := fun x hx hx1 h => M.V_T x hx hx1 ((le_max_left _ _).trans_lt h)
+  Vq := fun x hx hx1 h => M.Vq x hx hx1 ((le_max_left _ _).trans_lt h)
   W_T := fun x hx hx1 h => M.W_T x hx hx1 ((le_max_left _ _).trans_lt h)
   V_pi := fun σ ρ hB h => M.V_pi σ ρ hB ((le_max_left _ _).trans_lt h)
   W_pi := fun σ ρ hB h => M.W_pi σ ρ hB ((le_max_left _ _).trans_lt h)
@@ -84,6 +92,7 @@ noncomputable def raise : ZmDS where
     have hgZ : g < Z := (le_max_right _ _).trans_lt hEg
     exact M.rgt_lt g hgZ (M.g_succ c Z hZ ((le_max_left _ _).trans_lt hEg) ((M.G_le_rgt g c).trans_lt hg))
   lim := fun c x hx hx1 hl hc hg => M.lim c x hx hx1 hl hc ((M.G_le_rgt g c).trans_lt hg)
+  nc := fun c x hx hx1 hl hc hg => M.nc c x hx hx1 hl hc ((M.G_le_rgt g c).trans_lt hg)
   cof := fun c x hx hx1 hl hc hg ν hν => by
     obtain ⟨b, hb, hgb, hνb⟩ := M.cof c x hx hx1 hl hc ((M.G_le_rgt g c).trans_lt hg) ν hν
     exact ⟨b, hb, M.rgt_lt g (M.g_lt_of g hl.bot_lt.ne' hg) hgb, hνb⟩

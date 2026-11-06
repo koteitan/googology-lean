@@ -106,8 +106,15 @@ noncomputable def step : ZmDS where
   R := M.sR
   G := M.sG
   Eg := M.Eg
+  B := M.B
+  Dv := M.Dv
   E_eq := by rw [← M.E_eq, Go.go_eN_veb]
   BG_le := M.BG_le.trans (lt_eN _).le
+  BG_B := M.BG_B
+  B_le := M.B_le.trans (lt_eN _).le
+  B_cl := M.B_cl
+  Dv_T := M.Dv_T
+  Dv_pi := M.Dv_pi
   E_X := by
     rw [← M.E_eq, Go.go_eN_veb]
     have hi : M.Ei + 1 < tlX := by
@@ -115,21 +122,28 @@ noncomputable def step : ZmDS where
       exact (ev_isSuccLimit_of_inE (Low.opow_eq_self_of_SC tlX_SC)).add_one_lt h
     exact tlX_SC.2 1 (gg_one_lt_of_SC tlX_SC) _ hi
   Ei_cl := fun Z hZ hEg => TlCl.add (M.Ei_cl Z hZ hEg) (TlCl.one hZ.1)
-  nfx := fun y h1 h2 => by
+  nfx := fun y h1 h2 hΓ => by
     rcases le_or_gt y M.E with hy | hy
-    · exact M.nfx y h1 hy
+    · exact M.nfx y h1 hy hΓ
+    refine absurd (zm_fix_of_gamma hΓ) ?_
     rcases h2.lt_or_eq with h3 | h3
     · intro hfix
       exact absurd (eN_le hy (zm_fix_E hfix)) (not_le.2 h3)
     · rw [h3]; exact zm_eN_nfix _
   Eg_le := fun c hc0 => M.sG_Eg c hc0
   V_T := fun x hx hx1 hEg => by
-    obtain ⟨hVT, hVE, hDV, hVq⟩ := M.V_T x hx hx1 hEg
+    obtain ⟨hVT, hVE, hDV, hVX⟩ := M.V_T x hx hx1 hEg
+    obtain ⟨σ, hσT, hσ1, hσV, hVσ⟩ := M.Vq x hx hx1 hEg
+    obtain ⟨hfix, hqX, -⟩ := zm_q_facts hx hx1 hDV hVX hσT hσ1 hσV
     obtain ⟨hWT, hW1, he⟩ := M.W_T x hx hx1 hEg
     obtain ⟨h1T, h11⟩ := gl_one_T hx hx1
-    obtain ⟨-, -, -, hfix, -⟩ := zm_gq_facts hx hx1
-    refine ⟨?_, eN_E _, hDV.trans (lt_eN _).le, zm_eN_lt_fix hVq hfix⟩
+    refine ⟨?_, eN_E _, hDV.trans (lt_eN _).le, (zm_eN_lt_fix hVσ hfix).trans hqX⟩
     rw [he]; exact (glA_facts hx hx1 le_rfl h1T h11 hWT hW1).1
+  Vq := fun x hx hx1 hEg => by
+    obtain ⟨hVT, hVE, hDV, hVX⟩ := M.V_T x hx hx1 hEg
+    obtain ⟨σ, hσT, hσ1, hσV, hVσ⟩ := M.Vq x hx hx1 hEg
+    obtain ⟨hfix, hqX, -⟩ := zm_q_facts hx hx1 hDV hVX hσT hσ1 hσV
+    exact ⟨σ, hσT, hσ1, hσV.trans_le ((add_le_add_iff_left _).2 (lt_eN _).le), zm_eN_lt_fix hVσ hfix⟩
   W_T := fun x hx hx1 hEg => by
     obtain ⟨hWT, hW1, he⟩ := M.W_T x hx hx1 hEg
     obtain ⟨hsT, hs1⟩ := gl_T_succ hx hx1 hWT hW1
@@ -153,6 +167,23 @@ noncomputable def step : ZmDS where
   g_succ := fun c Z hZ hEg hg => M.sG_succ_lt c Z hZ hEg hg
   lim := fun c x hx hx1 hl hc hg => M.sR_lim c x hx hx1 hl hc hg
   cof := fun c x hx hx1 hl hc hg ν hν => M.sR_cof c x hx hx1 hl hc hg ν hν
+  nc := fun c x hx hx1 hl hc hg => by
+    rcases lt_or_ge c M.E with hcE | hcE
+    · rw [M.sR_lt hcE]; rw [M.sG_lt hcE] at hg; exact M.nc c x hx hx1 hl hcE hg
+    have hc0 : c ≠ 0 := (lt_of_lt_of_le M.E_E.pos hcE).ne'
+    have hEg : M.Eg < x := (M.sG_Eg c hc0).trans_lt hg
+    obtain ⟨hVT, hVE, hDV, hVX⟩ := M.V_T x hx hx1 hEg
+    obtain ⟨σ, hσT, hσ1, hσV, hVσ⟩ := M.Vq x hx hx1 hEg
+    obtain ⟨hfix, -, hqE⟩ := zm_q_facts hx hx1 hDV hVX hσT hσ1 hσV
+    obtain ⟨hlt, -, -, hmono⟩ := M.sR_main hx hx1 c hc hg
+    have hVc : M.V x ≤ M.sR c x := by
+      obtain ⟨e1, e2⟩ := M.sR_tw x 0
+      rcases hcE.lt_or_eq with h | h
+      · have h' := hmono M.E h (e2.trans_lt (max_lt hEg (lu_one_lt_E hx)))
+        exact (e1.symm.trans_le h'.le)
+      · rw [← h]; exact e1.symm.le
+    exact ⟨σ, hσT, hσ1, hσV.trans_le ((add_le_add_iff_left _).2 hVc),
+      (inE_indec hqE).add_lt (hDV.trans_lt hVσ) (hlt.trans (zm_eN_lt_fix hVσ hfix))⟩
   top := fun x hx hx1 hEg ν hν => by
     obtain ⟨n, hn⟩ := zmTw_cof (M.V_T x hx hx1 hEg).2.1 hν
     obtain ⟨e1, e2⟩ := M.sR_tw x n
@@ -189,6 +220,10 @@ theorem zmCh_E : ∀ n : ℕ, (zmCh n).E = veblen 1 (tfBG + n)
     show eN (zmCh n).E = _
     rw [zmCh_E n, Go.go_eN_veb, Nat.cast_succ, add_assoc]
 
+theorem zmCh_B : ∀ n : ℕ, (zmCh n).B = tfBG ∧ (zmCh n).Dv = ywV 1 0
+  | 0 => ⟨rfl, rfl⟩
+  | n + 1 => by show (zmCh n).B = tfBG ∧ (zmCh n).Dv = ywV 1 0; exact zmCh_B n
+
 theorem zmCh_Eg : ∀ n : ℕ, (zmCh n).Eg = 0
   | 0 => rfl
   | n + 1 => by show (zmCh n).Eg = 0; exact zmCh_Eg n
@@ -199,7 +234,7 @@ theorem zm_BG_lt_veb (n : ℕ) : tfBG < veblen 1 (tfBG + ((n + 1 : ℕ) : Ordina
 
 /-- **`ZbDirect S ε_{B_Γ+n+1}`, UNCONDITIONAL.** -/
 theorem zmDirectN (S : InaccSeq.{0}) (n : ℕ) : ZbDirect S (veblen 1 (tfBG + ((n + 1 : ℕ) : Ordinal.{0}))) := by
-  have h := (zmCh (n + 1)).direct S (by rw [zmCh_E]; exact zm_BG_lt_veb n)
+  have h := (zmCh (n + 1)).direct (zmCh_B _).1 (zmCh_B _).2 S (by rw [zmCh_E]; exact zm_BG_lt_veb n)
     (by rw [zmCh_Eg]; exact Td.tdK_SC.1) (zmCh n).step_gc0
   rwa [zmCh_E] at h
 

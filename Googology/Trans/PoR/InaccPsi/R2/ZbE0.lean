@@ -77,13 +77,12 @@ noncomputable def zbE0 (S : InaccSeq.{0}) : ZbRS where
   c0_ne := (lt_of_le_of_lt zero_le (lt_add_one tfBG)).ne'
   c0_lt := (add_lt_add_iff_left _).2 (one_lt_omega0.trans_le (omega0_le_of_isSuccLimit gc_eps0_lim))
   Bd_X := (tlX_SC.isPrincipal tl_BG_lt_X (gc_eps0_le_Om1.trans_lt (by rw [← Br.Om1_eq]; exact tlX_gt))).le
-  gt_c0 := rfl
   L0_g := zbBGn_g 0
   L0_E := fun x _ _ => by
     rw [zbBGn_E 0 x]
     show gq (ywV 1 0 x + ((0 : ℕ) : Ordinal.{0})) x = gq (ywV 1 0 x + zbO (tfBG + 1)) x
     rw [show tfBG + 1 = tfBG + 1 + 0 from (add_zero _).symm, zbO_add, Nat.cast_zero]
-  L0_top := fun y hy hy1 => by
+  L0_top := fun y hy hy1 _ => by
     have h := (zbBGn_codes S 0).1 y hy hy1 (by rw [zbBGn_g]; exact hy.1)
     rw [h]; unfold zbT; norm_num
   L0_poly := by
@@ -167,6 +166,10 @@ noncomputable def zbE0 (S : InaccSeq.{0}) : ZbRS where
           (TlCl.add (TlCl.add (zbBG_tl hZ.1) (TlCl.one hZ.1)) (TlCl.small hoZ))
       rw [tf_gcG]
       exact TlCl.gam hZ.1 harg ((lt_add_one _).trans_le le_self_add)
+  D_le := fun c x _ _ _ _ _ => show ywV 1 0 x ≤ ywV 1 0 x + zbO c from le_self_add
+  BG_top := fun y hy hy1 => zbBG_top S hy hy1
+  BG_poly := zbBG_poly S
+  BG_c0 := le_self_add.trans gcG_strictMono.le_apply
 
 /-- **`ZbDirect S (B_Γ + ε₀)`, UNCONDITIONAL.** -/
 theorem zbDirect_e0 (S : InaccSeq.{0}) : ZbDirect S (tfBG + ε₀) :=

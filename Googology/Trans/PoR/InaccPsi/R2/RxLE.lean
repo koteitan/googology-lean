@@ -179,7 +179,9 @@ theorem rxL_atom {d : Ordinal.{0}} {k : ℕ} (hk : 1 ≤ k)
   have hDn : rxDn S (Om ((k : Ordinal.{0}) + 1)) x = d := rxDn_eq (InR_Om_succ _) hd
   have hg : rxMs S T (rxDn S (Om ((rxLvA x : Ordinal.{0}) + 1)) x) < rxMs S T x := by
     rw [hlv, hDn]; exact rxMs_lt_stage hdL hst
-  rw [rxL, dif_neg h1, dif_neg hΩ, dif_pos hA, dif_pos hg, hlv, hDn]
+  have hW : ¬ x = Om ω := fun e =>
+    (hb.2.trans (Om_lt_Om.2 (by exact_mod_cast (natCast_lt_omega0 (k + 1))))).ne e
+  rw [rxL, dif_neg h1, dif_neg hΩ, dif_neg hW, dif_pos hA, dif_pos hg, hlv, hDn]
 
 /-- **The Cantor normal form**: `κ x = ω^{κ ℓ}·n + κ r` (`ℓ = log_ω x < x`, `n = x / ω^ℓ`, `r = x mod ω^ℓ`). -/
 theorem rxL_gt {x : Ordinal.{0}} (hx : RxE S T x) (h1 : Om 1 < x)
@@ -200,7 +202,8 @@ theorem rxL_gt {x : Ordinal.{0}} (hx : RxE S T x) (h1 : Om 1 < x)
   have g5 : rxMs S T (log ω x) < rxMs S T x := rxMs_lt_val hl.2 h3
   have g6 : rxMs S T (x % ω ^ log ω x) < rxMs S T x :=
     rxMs_lt_val hr.2 (mod_opow_log_lt_self ω ((Om_pos one_ne_zero).trans h1).ne')
-  rw [rxL, dif_neg hc1, dif_neg hΩ, dif_neg hA, dif_pos h3, dif_pos g5, dif_pos g6]
+  have hW : ¬ x = Om ω := fun e => hnε (by rw [e]; exact gg_SC_eps (SC_Om omega0_ne_zero))
+  rw [rxL, dif_neg hc1, dif_neg hΩ, dif_neg hW, dif_neg hA, dif_pos h3, dif_pos g5, dif_pos g6]
 
 /-- **The Veblen normal form** of a non-strongly-critical `ε`-number of the domain above `Ω₁`. -/
 theorem rxL_veb {x : Ordinal.{0}} (hx : RxE S T x) (h1 : Om 1 < x)
@@ -219,7 +222,8 @@ theorem rxL_veb {x : Ordinal.{0}} (hx : RxE S T x) (h1 : Om 1 < x)
   obtain ⟨-, -, hha, hhb⟩ := rxE_veb hx hv hb
   have g7 : rxMs S T (invVeblen₁ x) < rxMs S T x := rxMs_lt_val hha ha
   have g8 : rxMs S T (invVeblen₂ x) < rxMs S T x := rxMs_lt_val hhb hb
-  rw [rxL, dif_neg hc1, dif_neg hΩ, dif_neg hA, dif_neg h3, dif_pos ⟨ha, hb⟩, dif_pos g7, dif_pos g8]
+  have hW : ¬ x = Om ω := fun e => hS (e ▸ SC_Om omega0_ne_zero)
+  rw [rxL, dif_neg hc1, dif_neg hΩ, dif_neg hW, dif_neg hA, dif_neg h3, dif_pos ⟨ha, hb⟩, dif_pos g7, dif_pos g8]
 
 end Eqn
 

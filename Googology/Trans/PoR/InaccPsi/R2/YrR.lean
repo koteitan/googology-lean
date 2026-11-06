@@ -61,7 +61,12 @@ the rest; `Gl.glG` below `G`. -/
 noncomputable def yrG (c : Ordinal.{0}) : Ordinal.{0} :=
   if h : gcG 0 ≤ c then
     max (max (if hA : YhAt (guE c) then
-          (if hi : yhJ (guE c) < guE c then (if yhJ (guE c) < ω then 0 else yrG (yhJ (guE c))) else 0) else
+          (if hi : yhJ (guE c) < guE c then (if yhJ (guE c) < ω then 0 else yrG (yhJ (guE c)))
+            else if hL : Tl.tlLev (guE c) < guE c ∧ Tl.tlI (Tl.tlLev (guE c)) (guE c) < guE c then
+              max (if Tl.tlLev (guE c) < ω then 0 else yrG (Tl.tlLev (guE c)))
+                (if Tl.tlI (Tl.tlLev (guE c)) (guE c) - glY0 (Tl.tlLev (guE c)) < ω then 0
+                  else yrG (Tl.tlI (Tl.tlLev (guE c)) (guE c) - glY0 (Tl.tlLev (guE c))))
+            else 0) else
           max (if yhK (guE c) < ω then 0 else yrG (yhK (guE c)))
             (if yhI (guE c) < ω then 0 else yrG (yhI (guE c))))
         (if log (guE c) c < ω then 0 else yrG (log (guE c) c)))
@@ -72,6 +77,8 @@ termination_by c
 decreasing_by
   all_goals first
     | exact yr_ix_lt h hi
+    | exact hL.1.trans_le (gl_E_le (yh_gfE_le h))
+    | exact (Ordinal.sub_le_self _ _).trans_lt (hL.2.trans_le (gl_E_le (yh_gfE_le h)))
     | exact yh_lev_lt h hA
     | exact yh_idx_lt h hA
     | exact (gl_parts (yh_gfE_le h)).2.2.2.2.2.1
@@ -81,10 +88,14 @@ decreasing_by
 /-- **The gate of a part**: `0` when finite. -/
 noncomputable def yrQ (a : Ordinal.{0}) : Ordinal.{0} := if a < ω then 0 else yrG a
 
-/-- **The gate of an `ε`-number code as a base**: `0` at an atom, the gates of the level and the index otherwise. -/
+/-- **The gate of an `ε`-number code as a base**: the gate of the index at an atom `Γ(j)`, the gates of the level
+`λ` and of the offset `y − y₀(λ)` at a fixed point `F_λ(y)` of `Γ`, the gates of the level and the index otherwise. -/
 noncomputable def yrQE (e : Ordinal.{0}) : Ordinal.{0} := by
   classical
-  exact if YhAt e then (if yhJ e < e then yrQ (yhJ e) else 0) else max (yrQ (yhK e)) (yrQ (yhI e))
+  exact if YhAt e then (if yhJ e < e then yrQ (yhJ e)
+      else if Tl.tlLev e < e ∧ Tl.tlI (Tl.tlLev e) e < e then
+        max (yrQ (Tl.tlLev e)) (yrQ (Tl.tlI (Tl.tlLev e) e - glY0 (Tl.tlLev e))) else 0)
+    else max (yrQ (yhK e)) (yrQ (yhI e))
 
 /-- **The reading of an `ε`-number code as a base.** -/
 noncomputable def yrA (e x : Ordinal.{0}) : Ordinal.{0} := by
@@ -105,8 +116,15 @@ theorem yrA_psi {e : Ordinal.{0}} (h : ¬ YhAt e) (x : Ordinal.{0}) :
 theorem yrQE_atom {e : Ordinal.{0}} (h : YhAt e) (hi : yhJ e < e) : yrQE e = yrQ (yhJ e) := by
   unfold yrQE; rw [if_pos h, if_pos hi]
 
-theorem yrQE_atom_fix {e : Ordinal.{0}} (h : YhAt e) (hi : ¬ yhJ e < e) : yrQE e = 0 := by
-  unfold yrQE; rw [if_pos h, if_neg hi]
+theorem yrQE_atom_fix {e : Ordinal.{0}} (h : YhAt e) (hi : ¬ yhJ e < e)
+    (hL : ¬ (Tl.tlLev e < e ∧ Tl.tlI (Tl.tlLev e) e < e)) : yrQE e = 0 := by
+  unfold yrQE; rw [if_pos h, if_neg hi, if_neg hL]
+
+/-- **The gate of a fixed point `F_λ(y)` of `Γ` as a base**: the gates of `λ` and of `y − y₀(λ)`. -/
+theorem yrQE_atom_fixL {e : Ordinal.{0}} (h : YhAt e) (hi : ¬ yhJ e < e)
+    (hL : Tl.tlLev e < e ∧ Tl.tlI (Tl.tlLev e) e < e) :
+    yrQE e = max (yrQ (Tl.tlLev e)) (yrQ (Tl.tlI (Tl.tlLev e) e - glY0 (Tl.tlLev e))) := by
+  unfold yrQE; rw [if_pos h, if_neg hi, if_pos hL]
 
 theorem yrQE_psi {e : Ordinal.{0}} (h : ¬ YhAt e) : yrQE e = max (yrQ (yhK e)) (yrQ (yhI e)) := by
   unfold yrQE; rw [if_neg h]
@@ -134,7 +152,9 @@ theorem yrG_dec {c : Ordinal.{0}} (h : gcG 0 ≤ c) :
   by_cases hA : YhAt (guE c)
   · by_cases hi : yhJ (guE c) < guE c
     · rw [dif_pos hA, dif_pos hi, yrQE_atom hA hi]; rfl
-    · rw [dif_pos hA, dif_neg hi, yrQE_atom_fix hA hi]; rfl
+    · by_cases hL : Tl.tlLev (guE c) < guE c ∧ Tl.tlI (Tl.tlLev (guE c)) (guE c) < guE c
+      · rw [dif_pos hA, dif_neg hi, dif_pos hL, yrQE_atom_fixL hA hi hL]; rfl
+      · rw [dif_pos hA, dif_neg hi, dif_neg hL, yrQE_atom_fix hA hi hL]; rfl
   · rw [dif_neg hA, yrQE_psi hA]; rfl
 
 theorem yrR_zero (x : Ordinal.{0}) : yrR 0 x = 0 := by rw [yrR_low (gcG_SC 0).1, glR_zero]

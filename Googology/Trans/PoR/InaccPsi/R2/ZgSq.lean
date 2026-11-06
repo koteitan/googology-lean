@@ -218,13 +218,12 @@ noncomputable def zgSq (S : InaccSeq.{0}) : ZbRS where
   c0_ne := (lt_of_le_of_lt zero_le (lt_add_one tfBG)).ne'
   c0_lt := zgSQ_prin zgBG_lt_SQ ((gg_one_lt_of_SC tfBG_SC).trans zgBG_lt_SQ)
   Bd_X := zgSQ_lt_X.le
-  gt_c0 := by unfold zgG3; rw [zgQ_c0, zgM_c0, yrG_zero, max_self]
-  L0_g := zbBGn_g 0
+  L0_g := by rw [zbBGn_g 0]; show (0 : Ordinal.{0}) = zgG3 (tfBG + 1); unfold zgG3; rw [zgQ_c0, zgM_c0, yrG_zero, max_self]
   L0_E := fun x _ _ => by
     rw [zbBGn_E 0 x]
     show gq (ywV 1 0 x + ((0 : ℕ) : Ordinal.{0})) x = gq (zgR3 (tfBG + 1) x) x
     unfold zgR3; rw [zgQ_c0, zgM_c0, yrR_zero, Nat.cast_zero, add_zero, add_zero, add_zero, mul_one]
-  L0_top := fun y hy hy1 => by
+  L0_top := fun y hy hy1 _ => by
     have h := (zbBGn_codes S 0).1 y hy hy1 (by rw [zbBGn_g]; exact hy.1)
     rw [h]; unfold zbT; norm_num
   L0_poly := by
@@ -431,6 +430,11 @@ noncomputable def zgSq (S : InaccSeq.{0}) : ZbRS where
           (TlCl.add hBq (zgYr hZ.1 r hr (le_max_right _ _ |>.trans_lt hg)).1))
     rw [tf_gcG]
     exact TlCl.gam hZ.1 harg ((lt_add_one _).trans_le le_self_add)
+  D_le := fun c x _ _ _ _ _ => show ywV 1 0 x ≤ ywV 1 0 x * (1 + yrR (zgQ c) x) + yrR (zgM c) x from
+    (Ordinal.le_mul_left _ (lt_of_lt_of_le zero_lt_one le_self_add)).trans le_self_add
+  BG_top := fun y hy hy1 => zbBG_top S hy hy1
+  BG_poly := zbBG_poly S
+  BG_c0 := le_self_add.trans gcG_strictMono.le_apply
 
 /-- **`ZbDirect S (B_Γ·B_Γ)`, UNCONDITIONAL**: a layer for every index `B_Γ ≤ B < B_Γ·B_Γ` (`B = B_Γ + 1 +
 (B_Γ·q + r)`: the layer of `B_Γ + 1 + B_Γ·a_m`, `a_m > q` the tower `Yr.yrTw`, gate `0`). -/

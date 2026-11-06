@@ -129,6 +129,62 @@ theorem zmDN_pi : eN (ywV 1 0 ρ) ∈ TB ρ σ ∧
 
 end DPi
 
+/-! ## The index readings below `gq(D(x)+1)` are not closed -/
+
+section NC
+
+variable {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1)
+include hx hx1
+
+/-- **An index reading `D(x) + r` below `gq(D(x)+1)`, `r` a limit, is not closed** (`σ = D(x) + 1`). -/
+theorem zm_nc_of {r : Ordinal.{0}} (hr : r < gq (ywV 1 0 x + 1) x) (hl : IsSuccLimit r) :
+    ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < ywV 1 0 x + r ∧ ywV 1 0 x + r < gq σ x := by
+  obtain ⟨hDT, -, hD1, -⟩ := zmD_facts hx hx1
+  obtain ⟨h1T, h11⟩ := gl_T_succ hx hx1 hDT hD1
+  obtain ⟨hDq, -, -, hqfix, -⟩ := zm_gq_facts hx hx1
+  have h1r : (1 : Ordinal.{0}) < r := by simpa using hl.add_one_lt hl.bot_lt
+  exact ⟨_, h1T, h11, (add_lt_add_iff_left _).2 h1r, (inE_indec (zm_fix_E hqfix)).add_lt hDq hr⟩
+
+/-- **A base reading `D(x) ≤ V < gq(D(x)+1)` is not closed** (`σ = D(x) + 1`). -/
+theorem zm_Vq_of {V : Ordinal.{0}} (hDV : ywV 1 0 x ≤ V) (hVq : V < gq (ywV 1 0 x + 1) x) (hVE : InE V) :
+    ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < ywV 1 0 x + V ∧ V < gq σ x := by
+  obtain ⟨hDT, -, hD1, -⟩ := zmD_facts hx hx1
+  obtain ⟨h1T, h11⟩ := gl_T_succ hx hx1 hDT hD1
+  exact ⟨_, h1T, h11, (add_lt_add_iff_left _).2 (lu_one_lt_E hVE), hVq⟩
+
+theorem zm_gq_X : gq (ywV 1 0 x + 1) x < ywX x := (zm_gq_facts hx hx1).2.2.2.2
+
+/-- **`gq σ x` below `X^x`** for `σ ∈ Tˣ ∩ X^x`. -/
+theorem zm_gq_lt_X {σ : Ordinal.{0}} (hσT : σ ∈ Tset x) (hσ1 : σ < Om1) (hσX : σ < ywX x) : gq σ x < ywX x := by
+  rw [← ywV_zero]
+  exact ywV_lt_X hx hx1 (mem_T_of_le hx hx1 zero_le) (hx.pos.trans hx1) hσT hσ1 (hx.pos.trans (ywX_facts hx hx1).2.1)
+    hσX
+
+/-- **The facts of a non-closure witness `σ < D(x) + V`, `V < X^x`.** -/
+theorem zm_q_facts {d V σ : Ordinal.{0}} (hDV : d ≤ V) (hVX : V < ywX x) (hσT : σ ∈ Tset x)
+    (hσ1 : σ < Om1) (hσV : σ < d + V) :
+    veblen 1 (gq σ x) = gq σ x ∧ gq σ x < ywX x ∧ InE (gq σ x) := by
+  have hXE : InE (ywX x) := (ywX_facts hx hx1).2.2.2
+  have hσX : σ < ywX x := hσV.trans ((inE_indec hXE).add_lt (hDV.trans_lt hVX) hVX)
+  obtain ⟨-, -, -, hqE, -⟩ := geq_facts hx hx1 hσT hσ1
+  exact ⟨xk_fix hx hx1 hσT hσ1 le_rfl (lu_one_lt_E hqE), zm_gq_lt_X hx hx1 hσT hσ1 hσX, hqE⟩
+
+/-- **`D(x)` as a segment base reading.** -/
+theorem zmD_T : ywV 1 0 x ∈ Tset x ∧ InE (ywV 1 0 x) ∧ x < ywV 1 0 x ∧ ywV 1 0 x < ywX x :=
+  ⟨(zmD_facts hx hx1).1, (zmD_facts hx hx1).2.2.2, (zmD_facts hx hx1).2.1,
+    (zm_gq_facts hx hx1).1.trans (zm_gq_X hx hx1)⟩
+
+end NC
+
+/-- A fixed point of `Γ` is a fixed point of `φ(1, ·)`. -/
+theorem zm_fix_of_gamma {y : Ordinal.{0}} (h : gamma y = y) : veblen 1 y = y := by
+  have h1G : (1 : Ordinal.{0}) < gamma y := one_lt_omega0.trans (omega0_lt_inE
+    (Low.opow_eq_self_of_SC (Lq.lq_gamma_SC y)))
+  have hfix : veblen 1 (gamma y) = gamma y := by
+    conv_lhs => rw [← veblen_gamma_zero y]
+    rw [veblen_veblen_of_lt h1G, veblen_gamma_zero]
+  rwa [h] at hfix
+
 /-! ## The interface -/
 
 /-- **A digit system at an `ε`-number base `E = φ(1, E_i) ≥ B_Γ`**: offsets `o < E`, reading `R(o)(x) < V(x)`, gate
@@ -141,14 +197,22 @@ structure ZmDS where
   R : Ordinal.{0} → Ordinal.{0} → Ordinal.{0}
   G : Ordinal.{0} → Ordinal.{0}
   Eg : Ordinal.{0}
+  B : Ordinal.{0}
+  Dv : Ordinal.{0} → Ordinal.{0}
   E_eq : veblen 1 Ei = E
   BG_le : tfBG ≤ E
+  BG_B : tfBG ≤ B
+  B_le : B ≤ E
+  B_cl : ∀ Z, SC Z → Eg < Z → TlCl Z B
   E_X : E < tlX
   Ei_cl : ∀ Z, SC Z → Eg < Z → TlCl Z Ei
-  nfx : ∀ y, tfBG < y → y ≤ E → veblen 1 y ≠ y
+  nfx : ∀ y, B < y → y ≤ E → gamma y ≠ y
   Eg_le : ∀ c, c ≠ 0 → Eg ≤ G c
+  Dv_T : ∀ x, InE x → x < Om1 → Eg < x → Dv x ∈ Tset x ∧ InE (Dv x) ∧ x < Dv x ∧ Dv x < ywX x
+  Dv_pi : ∀ σ ρ, Bases σ ρ → Eg < σ → Dv ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (Dv ρ) = Dv σ
   V_T : ∀ x, InE x → x < Om1 → Eg < x →
-    V x ∈ Tset x ∧ InE (V x) ∧ ywV 1 0 x ≤ V x ∧ V x < gq (ywV 1 0 x + 1) x
+    V x ∈ Tset x ∧ InE (V x) ∧ Dv x ≤ V x ∧ V x < ywX x
+  Vq : ∀ x, InE x → x < Om1 → Eg < x → ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < Dv x + V x ∧ V x < gq σ x
   W_T : ∀ x, InE x → x < Om1 → Eg < x → W x ∈ Tset x ∧ W x < Om1 ∧ eN (V x) = glA 1 (W x) x
   V_pi : ∀ σ ρ, Bases σ ρ → Eg < σ → V ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (V ρ) = V σ
   W_pi : ∀ σ ρ, Bases σ ρ → Eg < σ → W ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (W ρ) = W σ
@@ -164,6 +228,8 @@ structure ZmDS where
   lim : ∀ c x, InE x → x < Om1 → IsSuccLimit c → c < E → G c < x → IsSuccLimit (R c x)
   cof : ∀ c x, InE x → x < Om1 → IsSuccLimit c → c < E → G c < x → ∀ ν, ν < R c x →
     ∃ b, b < c ∧ G b < x ∧ ν ≤ R b x
+  nc : ∀ c x, InE x → x < Om1 → IsSuccLimit c → c < E → G c < x →
+    ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < Dv x + R c x ∧ Dv x + R c x < gq σ x
   top : ∀ x, InE x → x < Om1 → Eg < x → ∀ ν, ν < V x → ∃ b, b < E ∧ G b < x ∧ ν ≤ R b x
   ex : ∀ σ ρ c, Bases σ ρ → c < E → G c < σ →
     R c ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (R c ρ) = R c σ
@@ -186,13 +252,22 @@ noncomputable def zmYr : ZmDS where
   R := yrR
   G := yrG
   Eg := 0
+  B := tfBG
+  Dv := ywV 1 0
   E_eq := zm_BG_fix
   BG_le := le_rfl
+  BG_B := le_rfl
+  B_le := le_rfl
+  B_cl := fun _ hZ _ => zbBG_tl hZ.1
+  Dv_T := fun x hx hx1 _ => zmD_T hx hx1
+  Dv_pi := fun _ _ hB _ => zmD_pi hB
   E_X := tl_BG_lt_X
   Ei_cl := fun _ hZ _ => zbBG_tl hZ.1
   nfx := fun y h1 h2 => absurd h2 (not_le.2 h1)
   Eg_le := fun _ _ => zero_le
-  V_T := fun x hx hx1 _ => ⟨(zmD_facts hx hx1).1, (zmD_facts hx hx1).2.2.2, le_rfl, (zm_gq_facts hx hx1).1⟩
+  V_T := fun x hx hx1 _ => ⟨(zmD_facts hx hx1).1, (zmD_facts hx hx1).2.2.2, le_rfl,
+    (zm_gq_facts hx hx1).1.trans (zm_gq_X hx hx1)⟩
+  Vq := fun x hx hx1 _ => zm_Vq_of hx hx1 le_rfl (zm_gq_facts hx hx1).1 (zmD_facts hx hx1).2.2.2
   W_T := fun x hx hx1 _ => ⟨(zmD_facts hx hx1).1, (zmD_facts hx hx1).2.2.1, zmD_eN hx hx1⟩
   V_pi := fun _ _ hB _ => zmD_pi hB
   W_pi := fun _ _ hB _ => zmD_pi hB
@@ -211,6 +286,9 @@ noncomputable def zmYr : ZmDS where
   g_succ := fun c _ hZ _ hg => yrG_succ hZ c hg
   lim := fun c x hx hx1 hl hc hg => yr_lim_of_cof hx hx1 hl hc hg (yrR_cof hx hx1 c hc)
   cof := fun c x hx hx1 _ hc hg ν hν => yrR_cof hx hx1 c hc hg ν hν
+  nc := fun c x hx hx1 hl hc hg => zm_nc_of hx hx1
+    ((zgN_lt_D hx hx1 (yrR_N hx hx1 hc hg)).trans (zm_gq_facts hx hx1).1)
+    (yr_lim_of_cof hx hx1 hl hc hg (yrR_cof hx hx1 c hc))
   top := fun x hx hx1 _ ν hν => by
     obtain ⟨n, hn⟩ := zgCofD hx hx1 hν
     exact ⟨yrTw n, yrTw_lt_BG n, by rw [yrTw_g]; exact hx.pos, hn⟩
