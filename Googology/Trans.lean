@@ -2339,3 +2339,4 @@ import Googology.Trans.PoR.InaccPsi.R2.KgPlat
 import Googology.Trans.PoR.InaccPsi.R2.KhTop
 import Googology.Trans.PoR.InaccPsi.R2.KiPoly
 import Googology.Trans.PoR.InaccPsi.R2.KjCoef
+import Googology.Trans.PoR.InaccPsi.R2.KkOwn
