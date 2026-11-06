@@ -247,20 +247,21 @@ theorem nbHG_le_succ (hG₀ : ∀ o, o < veblen 2 p → G₀ o ≤ G₀ (o + 1))
   rw [nbHG_cnf hoB hoZ, nbHG_cnf s1 s2, s3, s4, s5, s6, s7]
   exact max_le_max le_rfl (max_le_max le_rfl (max_le_max le_rfl (IH _ hro (hro.trans hoZ))))
 
-theorem nbHG_succ_lt (hG₀ : ∀ o, o < veblen 2 p → ∀ Z, IsSuccLimit Z → G₀ o < Z → G₀ (o + 1) < Z) :
-    ∀ o, o < veblen 2 (p + 1) → ∀ Z, IsSuccLimit Z → nbHG p G₀ o < Z → nbHG p G₀ (o + 1) < Z := by
+theorem nbHG_succ_lt {Z : Ordinal.{0}} (hZ : IsSuccLimit Z)
+    (hG₀ : ∀ o, o < veblen 2 p → G₀ o < Z → G₀ (o + 1) < Z) :
+    ∀ o, o < veblen 2 (p + 1) → nbHG p G₀ o < Z → nbHG p G₀ (o + 1) < Z := by
   intro o
   induction o using WellFoundedLT.induction with
   | ind o IH =>
-  intro hoZ Z hZ hg
+  intro hoZ hg
   rcases lt_or_ge o (veblen 2 p) with hoB | hoB
-  · rw [nbHG_lt hoB] at hg; rw [nbHG_lt ((nbP_lim p).add_one_lt hoB)]; exact hG₀ o hoB Z hZ hg
+  · rw [nbHG_lt hoB] at hg; rw [nbHG_lt ((nbP_lim p).add_one_lt hoB)]; exact hG₀ o hoB hg
   obtain ⟨s1, s2, s3, s4, s5, s6, s7, hro⟩ := nb_succ_dec hoB hoZ
   rw [nbHG_cnf hoB hoZ] at hg
   rw [nbHG_cnf s1 s2, s3, s4, s5, s6, s7]
   exact max_lt ((le_max_left _ _).trans_lt hg) (max_lt ((le_max_left _ _).trans_lt
     ((le_max_right _ _).trans_lt hg)) (max_lt ((le_max_left _ _).trans_lt ((le_max_right _ _).trans_lt
-      ((le_max_right _ _).trans_lt hg))) (IH _ hro (hro.trans hoZ) Z hZ ((le_max_right _ _).trans_lt
+      ((le_max_right _ _).trans_lt hg))) (IH _ hro (hro.trans hoZ) ((le_max_right _ _).trans_lt
         ((le_max_right _ _).trans_lt ((le_max_right _ _).trans_lt hg))))))
 
 theorem nbHR_succ (hR₀ : ∀ o, o < veblen 2 p → ∀ x, R₀ (o + 1) x = R₀ o x + 1) :
