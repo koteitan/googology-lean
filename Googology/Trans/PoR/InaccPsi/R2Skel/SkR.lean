@@ -1732,7 +1732,11 @@ over the codes (`Kq.kqChain`; the top law at every `Ω_{k+3} + W^g·ζ + e`, `Kq
 normal `β + W^{Ω_{k+3} + w + e}·γ`, `w` a `W`-term over the codes (`Kr.krTop`); rounds 159-161: THE TOP LAW FROM ONE
 CLOSURE CONDITION (`Ks.ksLow`: the lower half by the least non-member, `Bt.psi_le_of_key`; `Ks.ksCont`: by the
 continuity of `ψ₂` at every limit) and the closure facts and the gap of towers for `Bt.HCl` (`Kt.ktHCl_div`,
-`Kt.ktGap`), the tools of one induction on `b`; left: the exponents with `φ`-terms
+`Kt.ktGap`), the tools of one induction on `b`; rounds 162-165: the gap of a context over an abstract closure
+(products with no hypothesis on the exponent, powers, `φ(d, ·)`, `φ(·, 0)`; `Kt.ktG_KaT`, `Kt.ktG_phiR`,
+`Kt.ktG_phiL0`), and THE OWNERSHIP OF EVERY CONTEXT WITH NO THRESHOLD (`Kt.ktOwn`, `Kt.ktOwnCtx`), also toward any
+target `Y` (`Kt.ktOwnY`); left (the normality of the approximants of a normal `b` through `φ(·, q + 1)` and
+`ψ_{k+3}`-nodes, the fundamental sequences of `D`): the exponents with `φ`-terms
 (`ψ₃(0) = Γ_{Ω₂+1}`), `ψ_{k+3}`-atoms and `Ω_{k+3}`-cofinal parts (`Ω₃·2`, …); earlier notes: (ii) the exponents `h > Ω₂` of `W^h` (round 146: the first one, `h = Ω₂`, is the
 jump `Kd.kdLaw` with the context `v ↦ X + W^v` and a three-level tower; round 147: the contexts of any depth
 `Ke.KeCtx`, closed under `v ↦ g₀ + W^j·v` and `v ↦ g₁ + W^{C'(v)}`, and the jump at every context `Ke.keLaw`; next:
