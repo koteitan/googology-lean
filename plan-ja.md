@@ -7,11 +7,11 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
 - Wilken の主張：Core(R₂⁺) = ψ_{Ω₁}(I_ω)（[Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README-ja.md)）
   - Lean：Wilken の系と InaccPsi の間の写像
     - 🤖 R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
-      - 済み（仮定は S だけ）：領域 A は閉じた。層の前線と直接の読みを B₂（B_Γ より上で最小の Γ の不動点）より下のすべての層 c で。すべての符号を 1 つの読み vR で読む。公理 113 個。
+      - 済み（仮定は S だけ）：領域 A は閉じた。層の前線と直接の読みを X より下のすべての層 c で（skZbDirectX）。すべての符号を 1 つの読み vR で読む。公理 113 個。
       - ほかに：υ-不動点でない窓の再始動での RS の入力と cap、孤立した不動点では Θ = ρ。K_Y までの atom の移動。基 ι(Ω₂) で到達のデータと cap。K_ω 以下の code の読みは短い。
       - 道 yqRoadS（仮定：前線より上で UPPER、LOWER、cap。L(ω+1) ≤ ν_C のとき WdThLow、WdEQfar。ずらし XoShift。XoSup）：ν_C = L(ω+1)。
-      - 骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：sorry の葉 60。OPEN 23（すべて L）、SUSPECT 2、REFUTED 9。道の上の OPEN の葉は 15（すべて L）。skTopLawAll、skPsi3OffRest2、skAtHi3 は証明済み（Kx.kxTopLawAll、Ky.kyPsi3OffRest2、Kz.kzAtHi3）。根が空虚かは未定。
-      - 🤖 次：B₂ より上の層。済み：X 未満のすべての ε 数で、区間の基点（E 以下で最大の Γ の不動点 F、門付きで読む）の上の桁の系（Va.vsGood_all3）。残り：Γ の各不動点 F での層（合併）と F+1 での基の層（梯子）を門付きの基点で作り、skZbDirectX。その後に残りの層・窓・skBC の葉。
+      - 骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：道の上の OPEN の葉は 14（すべて L）。skZbDirectX は証明済み（215 回目）。skTopLawAll、skPsi3OffRest2、skAtHi3 は証明済み（Kx.kxTopLawAll、Ky.kyPsi3OffRest2、Kz.kzAtHi3）。根が空虚かは未定。
+      - 🤖 次：済み：X 未満のすべての層の直接の読み（skZbDirectX = Va.vsDirectX。X 未満のすべての ε 数での桁の系、Γ のすべての不動点での層）。道の上の残り（葉 14）：X より上の層（skLayPastXθ、skLayPastTh）、窓と上の端の葉、skBC の葉、skFix の葉、skZlCfg、skLevImgHi4。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
   - ✅ M < (0,0,0)(1,1,1)：紙と Lean で証明済み
