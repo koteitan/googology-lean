@@ -40,6 +40,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZoBC
 import Googology.Trans.PoR.InaccPsi.R2.ZrBase
 import Googology.Trans.PoR.InaccPsi.R2.ZrRead
 import Googology.Trans.PoR.InaccPsi.R2.ZsCap
+import Googology.Trans.PoR.InaccPsi.R2.ZtIso
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -3348,22 +3349,25 @@ theorem skCapVNonfix {S : InaccSeq.{0}} {l η1 : Ordinal.{0}} (hl : IsRestartIdx
     (hfix : l < upsilon l) (hν : upsilon l < nuC) (hn : upsilon l < Nm.Pv S η1) : Cd.CdCapV S l :=
   Zh.zhCapV_nonfix hl hww hfix hν hn
 
-/-- STATUS: OPEN (round 133, new leaf, regw8; part of skWinRsF)
+/-- STATUS: PROVED (round 136, Zt.ztIsoCode from Fx.fxIso_theta; was OPEN L, round 133, new leaf, regw8; part of
+skWinRsF)
 SIZE: L
 THE CODE STATEMENT AT THE ISOLATED FIXED RESTARTS OF `W_k` (`Zn.ZnIsoCode`): at every `υ`-fixed restart `λ` of the
 window with `Cp.CpIso λ` (no fixed restart in some `(ν, λ)`), `Θ_λ(m_λ) ≤ ρ_λ` (it follows from `m_λ ≤ Ω₁`,
 `Zn.zn_theta_le_of_code`; below `cpB1` the isolated fixed points have this form, `Cp.cpFix_code`).  A statement on
 the names and codes only (no `≤₁`).  REFUTE FIRST: NO EVIDENCE; it is NEEDED for the road as built: at an isolated
 fixed restart with `ρ_λ < Θ_λ(m_λ)` the supply, term, value and successor branches are all false (skSupIsoNoGo,
-skTermIsoNoGo, skValIsoNoGo), so the RS input is LOWER itself there (skIsoLower). -/
-theorem skWinIsoCode (S : InaccSeq.{0}) (k : ℕ) : Zn.ZnIsoCode S (Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0}))) (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) := by
-  sorry
+skTermIsoNoGo, skValIsoNoGo), so the RS input is LOWER itself there (skIsoLower).  Round 136: at an isolated
+fixed restart with a name the name is `η₁ + Ω₁`, the code is `Ω₁` and `Θ_λ(m_λ) = λ = ρ_λ` (`Fx.fxIso_eta`,
+`Fx.fxIso_code`, `Fx.fxIso_theta`, no range bound), and every restart below `ι(η)` has a name: `Zt.ztIsoCode`. -/
+theorem skWinIsoCode (S : InaccSeq.{0}) (k : ℕ) : Zn.ZnIsoCode S (Bt.iota S (Om ω + Nc.ncPp S * (k : Ordinal.{0}))) (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) :=
+  Zt.ztIsoCode _ _
 
-/-- STATUS: OPEN (round 133, new leaf, regw8; part of skTopRsF)
+/-- STATUS: PROVED (round 136, Zt.ztIsoCode; was OPEN L, round 133, new leaf, regw8; part of skTopRsF)
 SIZE: L
 THE CODE STATEMENT AT THE ISOLATED FIXED RESTARTS OF `W_ω` (as skWinIsoCode). -/
-theorem skTopIsoCode (S : InaccSeq.{0}) : Zn.ZnIsoCode S (Bt.iota S (Om ω + Nc.ncPp S * ω)) (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) := by
-  sorry
+theorem skTopIsoCode (S : InaccSeq.{0}) : Zn.ZnIsoCode S (Bt.iota S (Om ω + Nc.ncPp S * ω)) (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) :=
+  Zt.ztIsoCode _ _
 
 /-- STATUS: OPEN (round 133, new leaf, regw8; part of skWinRsF)
 SIZE: L
