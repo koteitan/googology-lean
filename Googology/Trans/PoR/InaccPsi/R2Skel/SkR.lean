@@ -1721,8 +1721,10 @@ the thresholds asked at the first use (`Zy.ZyQ` had asked `h < ψ₂(β + W^{X�
 code exponent `1 ≤ h < θ` of `W^h` over any shift (`Kc.kcChain`), so every `E` whose `W`-normal form over `Ω_{k+3}`
 has code exponents and code coefficients (`Kc.kcTop`, by nesting); left: (i) `ZyQ`, `KcE` from the normality of
 `b` (plateaus at the `ψ₂` level), (ii) the exponents `h > Ω₂` of `W^h` (round 146: the first one, `h = Ω₂`, is the
-jump `Kd.kdLaw` with the context `v ↦ X + W^v` and a three-level tower; next the contexts `v ↦ X + W^{h₁ + W^g·v}`
-of `Kb.kbLawF`, by a recursion on the `W`-normal form of `h`) and the `W`-fixed exponents (`E ≥ Ω₃·2`,
+jump `Kd.kdLaw` with the context `v ↦ X + W^v` and a three-level tower; round 147: the contexts of any depth
+`Ke.KeCtx`, closed under `v ↦ g₀ + W^j·v` and `v ↦ g₁ + W^{C'(v)}`, and the jump at every context `Ke.keLaw`; next:
+the recursion on the `W`-normal form of `h` — a limit exponent is a point of continuity of `T` (`Zz.zzLimW`) or the
+top of a context — which needs a decomposition of the members of `D`) and the `W`-fixed exponents (`E ≥ Ω₃·2`,
 `ψ_{k+4}`-terms), and the limit sub-bases `β + W^E·γ` (continuity, as Yt.ytSubLaw). -/
 theorem skTopLawAll (S : InaccSeq.{0}) : Zp.ZpTopLawAll S := by
   sorry
