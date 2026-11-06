@@ -27,7 +27,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZdTest
 import Googology.Trans.PoR.InaccPsi.R2.ZdChainR
 import Googology.Trans.PoR.InaccPsi.R2.ZiTop
 import Googology.Trans.PoR.InaccPsi.R2.ZpWall
-import Googology.Trans.PoR.InaccPsi.R2.KxTop
+import Googology.Trans.PoR.InaccPsi.R2.KyMove
 import Googology.Trans.PoR.InaccPsi.R2Skel.SkE
 
 /-!
@@ -1581,17 +1581,15 @@ theorem skPsi3OffWK (S : InaccSeq.{0}) :
   fun _ _ _ _ _ _ _ hR h1 hr hl' hB hA' hρ' hb hd hd' ha3 hs hsa hsT IH =>
     Zi.ziPsi3OffWK hR h1 hr hl' hB hA' hρ' hb hd hd' ha3 hs hsa hsT IH
 
-/-- STATUS: OPEN (NEW round 132; REFUTE FIRST: NO EVIDENCE — every point below `W^{Y₃+Ω₂·Ω₂·K₃}` holds
-(skPsi3OffWK); the point `Y₃·2 = Y₃ + Ω₂·Ω₂·Y₃` lies in this range (Zi.ziTestY3two); no known no-go speaks of it)
+/-- STATUS: PROVED (Ky.kyPsi3OffRest2, rounds 175-176; OPEN since round 132; this file imports the new module
+`R2.KyMove`: checkable only after the merge)
 SIZE: L
-The ψ₃-offsets `W^{Y₃+Ω₂·Ω₂·K₃} ≤ δ < Ω₃` above every `Ω₃`-divisible base with a law at both ends.  Missing, in order:
-(i) the tower coefficient `η` of `Y₃ + Ω₂·Ω₂·η + Ω₂·ξ` as a CODE (`η ≥ K₃`): the prefix `Y₃ + Ω₂·Ω₂·η` then moves under
-`B_n` (`Zi.ziTopC`, `Zi.ziRSC`, `Zi.ziBotC`, `Zi.ziRSPlat` take a FIXED prefix `Zd.ZdRS`; redo them over a moving
-prefix `Zi.ZiRS` — the single-restart parts `Zi.ziTopC`, `Zi.ziStepTop0` only use the fields of the prefix at one
-restart), giving `W^{Y₃+Ω₂·Ω₂·Ω₂}`; (ii) the higher powers `Y₃ + Ω₂^j·…` (`j ≥ 3`, then `j` a code): the same plateau
-step one power up (`Zi.ziStepTop0` with the iterates of the coefficient of `Ω₂^j`); (iii) the shifts not below
-`Y₃ + Ω₂^{Ω₂}` (`Y₃·2`, `ψ₃(Ω₃+1)`, …): a level-3 hierarchy of fixed shifts (a constant shift has a constant
-image, `Zi.ziRSPlat`). -/
+The ψ₃-offsets `W^{Y₃+Ω₂·Ω₂·K₃} ≤ δ < Ω₃` above every `Ω₃`-divisible base with a law at both ends.  One argument for
+every atom `ψ₂(a) ≤ s < ψ₂(a + Ω₃)` (`Ky.kyMove`), no hierarchy of shifts: `s = ψ₂(d)`, `d = a' + c`,
+`a' = a + Ω₂·((d − a)/Ω₂)`, `c < Ω₂` a code; `a'` is normal (`Kx.kwFUG`), and it is a base with a law at both ends
+(`Ky.kyBase`) by THE OFFSET LAW `Θ(ψ₂(a + δ)) = ψ₁(Â + T δ)` for `Ω₃ ∣ a`, `δ < Ω₃`, `a + δ` normal (`Ky.kyOff`: the
+lift `Ky.kyLift` without `θ ∣ Â`, and the upper half `Ky.kyUp` as `Xd.xdUp_at`) at `λ` and at `λ'`, with
+`T_{λ'}(B_n δ) = B_n(T_λ δ)` (`Xq.xqTMove`); then the block move `Yj.yjBlkMove` at `a'`. -/
 theorem skPsi3OffRest2 (S : InaccSeq.{0}) :
     ∀ (n : ℕ) (l l' A' a D s : Ordinal.{0}), CdRange S l → Bc.bcC S n < upsilon l →
       cdR S l < Bc.bcC S (n + 1) → IsRestartIdx l' → Bc.bcB S n (upsilon l) = upsilon l' →
@@ -1603,8 +1601,9 @@ theorem skPsi3OffRest2 (S : InaccSeq.{0}) :
         gxTh (upsilon l) (ldAtR S l) x < Bc.bcC S (n + 1) ∧
         gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n x) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) x)) →
       MvD S s ∧ Bc.bcB S n s ∈ ldAtR S l' ∧
-        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n s) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) s) := by
-  sorry
+        gxTh (upsilon l') (ldAtR S l') (Bc.bcB S n s) = Bc.bcB S n (gxTh (upsilon l) (ldAtR S l) s) :=
+  fun _ _ _ _ _ _ _ hR h1 hr hl' hB hA' hρ' hb hd hd' _ hs hsa hsT IH =>
+    Ky.kyPsi3OffRest2 hR h1 hr hl' hB hA' hρ' hb hd hd' hs hsa hsT IH
 
 /-- STATUS: REDUCED (skPsi3OffWK, skPsi3OffRest2; round 132: was OPEN; REFUTE FIRST: NO EVIDENCE — `Y₃ + Ω₂·ε₀`
 holds (skRefTests132), `Y₃·2` lies in the range of skPsi3OffRest2 (Zi.ziTestY3two); no known no-go speaks of these
