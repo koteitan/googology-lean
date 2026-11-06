@@ -2356,3 +2356,4 @@ import Googology.Trans.PoR.InaccPsi.R2.KtOwnY
 import Googology.Trans.PoR.InaccPsi.R2.KuPhi
 import Googology.Trans.PoR.InaccPsi.R2.KuDom
 import Googology.Trans.PoR.InaccPsi.R2.KuJump
+import Googology.Trans.PoR.InaccPsi.R2.KuSucc
