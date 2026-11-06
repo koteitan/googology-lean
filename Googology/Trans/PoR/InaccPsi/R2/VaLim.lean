@@ -31,11 +31,6 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.I
   Googology.Trans.PoR.InaccPsi.R2.Gl Googology.Trans.PoR.InaccPsi.R2.Yh Googology.Trans.PoR.InaccPsi.R2.Zm
   Googology.Trans.PoR.InaccPsi.R2.Gk Googology.Trans.PoR.InaccPsi.R2.Xk
 
-theorem va_QE_BG : yrQE tfBG = 0 := by
-  have hA : YhAt tfBG := by rw [← zb_gcG_BG]; exact yhAt_gcG _
-  have hJ : yhJ tfBG = tfBG := by have h := yhJ_gcG tfBG; rwa [zb_gcG_BG] at h
-  exact yrQE_atom_fix hA (by rw [hJ]; exact lt_irrefl _)
-
 /-- **The gate of the next base** stays below every limit above the gate of the base. -/
 theorem va_QE_eN_lt {e Z : Ordinal.{0}} (he : InE e) (hBe : tfBG ≤ e) (heU : e < vaU) (hZ : IsSuccLimit Z)
     (hωZ : ω < Z) (hg : yrQE e < Z) : yrQE (eN e) < Z := by

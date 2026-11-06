@@ -1,4 +1,5 @@
-import Googology.Trans.PoR.InaccPsi.R2.VaDir
+import Googology.Trans.PoR.InaccPsi.R2.VaR
+import Googology.Trans.PoR.InaccPsi.R2.ZmNx
 
 /-!
 # VaB2: TOOLS PAST `Γ_{B_Γ+1}` — THE NEXT FIXED POINT `B₂` OF `Γ`, NO CLOSED POINT BETWEEN `D(x)` AND `D₂(x)`
@@ -10,7 +11,7 @@ the closed point after `D(x)`.
 * `va_D2_facts`, `va_nonclosed` (**every `p ∈ Tˣ ∩ (D(x), D₂(x))` has `σ < p` with `p < gq σ x`**: a closed point is a
   point of some level `j ≥ 1` (`Yw.ywC_rep`), and below `D₂(x)` that is `D(x)`, `Yw.ywV_lt_inv`);
 * `va_off_gate` (**the offset `j − (B_Γ+1)` of an atom index `B_Γ < j` keeps its gate up to `ω`**);
-* `va_eN_gq` (**`ε_{gq(I)+1} = ϑˣ(Ω₁ + gq(I))`**).
+* `va_eN_gq` (**`ε_{gq(I)+1} = ϑˣ(Ω₁ + gq(I))`**), `va_lt_D2` (**every code below `B₂` reads below `D₂(x)`**).
 
 No new axiom.  New definition: `vaB2`.
 -/
@@ -27,6 +28,33 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.I
   Googology.Trans.PoR.InaccPsi.R2.Gl Googology.Trans.PoR.InaccPsi.R2.Yh Googology.Trans.PoR.InaccPsi.R2.Zm
   Googology.Trans.PoR.InaccPsi.R2.Gk Googology.Trans.PoR.InaccPsi.R2.Xk Googology.Trans.PoR.InaccPsi.R2.Gm
   Googology.Trans.PoR.InaccPsi.R2.Ge
+
+/-! ## The bound `Γ_{B_Γ+1}` and the atoms below it -/
+
+/-- **The bound** `Γ_{B_Γ+1}`, the least strongly critical ordinal above `B_Γ`. -/
+noncomputable def vaU : Ordinal.{0} := gcG (tfBG + 1)
+
+theorem va_BG_lt_U : tfBG < vaU := by
+  unfold vaU; conv_lhs => rw [← zb_gcG_BG]
+  exact gcG_lt (lt_add_one _)
+
+theorem va_G_le_BG : gcG 0 ≤ tfBG := by rw [← zb_gcG_BG]; exact gcG_le zero_le
+
+/-- **Below `Γ_{B_Γ+1}` the only atom `≥ B_Γ` is `B_Γ`.** -/
+theorem va_atom_cases {e : Ordinal.{0}} (hBe : tfBG ≤ e) (heU : e < vaU) : e = tfBG ∨ ¬ YhAt e := by
+  by_cases hA : YhAt e
+  · left
+    obtain ⟨j, rfl⟩ := yhAt_iff.1 hA
+    have h1 : tfBG ≤ j := by
+      rw [← zb_gcG_BG] at hBe; exact gcG_strictMono.le_iff_le.1 hBe
+    have h2 : j < tfBG + 1 := gcG_strictMono.lt_iff_lt.1 heU
+    rw [le_antisymm (Order.lt_add_one_iff.1 h2) h1, zb_gcG_BG]
+  · exact Or.inr hA
+
+theorem va_QE_BG : yrQE tfBG = 0 := by
+  have hA : YhAt tfBG := by rw [← zb_gcG_BG]; exact yhAt_gcG _
+  have hJ : yhJ tfBG = tfBG := by have h := yhJ_gcG tfBG; rwa [zb_gcG_BG] at h
+  exact yrQE_atom_fix hA (by rw [hJ]; exact lt_irrefl _)
 
 /-! ## The next fixed point of `Γ` -/
 
@@ -186,5 +214,64 @@ theorem va_eN_gq {x I : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hIT : I ∈ T
   refine glA_min hx hx1 le_rfl h1T h11 hqT hq1 hP1 (hxq.trans (lt_eN _)) (lt_eN _) (h1q.trans (lt_eN _))
     (fun σ hσ => ?_)
   exact (xkA_lt hx hx1 hIT hI1 h1q hσ).trans (lt_eN _)
+
+/-! ## Every code below `B₂` reads below `D₂(x)` -/
+
+/-- **Every code below `B₂` (gate below `x`) reads below `D₂(x)`.** -/
+theorem va_lt_D2 {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) :
+    ∀ c, c < vaB2 → yrG c < x → vR c x < ywV 1 1 x := by
+  obtain ⟨hDD2, hD2T, hD21, hD2E, -⟩ := va_D2_facts hx hx1
+  obtain ⟨h1T, h1Ω⟩ := yw_one hx hx1
+  have hcl : YwClosed x (ywV 1 1 x) := ywV_closed hx hx1 zero_lt_one h1T h1Ω h1T h1Ω
+  have hωx : ω < x := omega0_lt_inE hx
+  have hglA : ∀ a t, a < ywV 1 1 x → t < ywV 1 1 x → glA a t x < ywV 1 1 x := by
+    intro a t ha ht
+    have hmT : max a t ∈ Tset x := vz_T_down hx hx1 hD2T hD21 (max_lt ha ht).le
+    have hm1 : max a t < Om1 := (max_lt ha ht).trans hD21
+    have hq := gmq_gt hx hx1 hmT hm1
+    exact (xkA_lt hx hx1 hmT hm1 ((le_max_left _ _).trans_lt hq) ((le_max_right _ _).trans_lt hq)).trans
+      (hcl _ hmT (max_lt ha ht))
+  intro c
+  induction c using WellFoundedLT.induction with
+  | ind c IH =>
+  intro hc hg
+  by_cases hcB : c < tfBG
+  · rw [vR_yr c hcB x]; exact (zmYr.lt c x hx hx1 hcB hg).trans hDD2
+  have hcB' : tfBG ≤ c := not_lt.1 hcB
+  have hGc : gcG 0 ≤ c := va_G_le_BG.trans hcB'
+  obtain ⟨-, -, -, -, -, hlog, hmod, hdiv⟩ := gl_parts (yh_gfE_le hGc)
+  rw [yrG_dec hGc] at hg
+  have hgQE : yrQE (guE c) < x := (le_max_left _ _).trans_lt ((le_max_left _ _).trans_lt hg)
+  have hgk : yrG (log (guE c) c) < x :=
+    yrG_of_Q hωx ((le_max_right _ _).trans_lt ((le_max_left _ _).trans_lt hg))
+  have hgd : yrG (c / guE c ^ log (guE c) c) < x :=
+    yrG_of_Q hωx ((le_max_left _ _).trans_lt ((le_max_right _ _).trans_lt hg))
+  have hgr : yrG (c % guE c ^ log (guE c) c) < x := (le_max_right _ _).trans_lt ((le_max_right _ _).trans_lt hg)
+  have hec : guE c ≤ c := gl_E_le (yh_gfE_le hGc)
+  have hA : vA (guE c) x < ywV 1 1 x := by
+    by_cases hAt : YhAt (guE c)
+    · by_cases hJ : yhJ (guE c) < guE c
+      · rw [vA_atom hAt hJ]
+        have hJc : yhJ (guE c) < c := hJ.trans_le hec
+        have hgJ : yrG (yhJ (guE c)) < x := by
+          rw [yrQE_atom hAt hJ] at hgQE; exact yrG_of_Q hωx hgQE
+        have hIlt : vI (yhJ (guE c)) x < ywV 1 1 x := by
+          by_cases hjB : tfBG < yhJ (guE c)
+          · rw [vI_high hjB]
+            have hgo : yrG (yhJ (guE c) - (tfBG + 1)) < x := (va_off_gate hjB).trans_lt (max_lt hωx hgJ)
+            have ho : yhJ (guE c) - (tfBG + 1) < c := (Ordinal.sub_le_self _ _).trans_lt hJc
+            exact (inE_indec hD2E).add_lt hDD2 (IH _ ho (ho.trans hc) hgo)
+          · rw [vI_low hjB]; exact IH _ hJc (hJc.trans hc) hgJ
+        exact hcl _ (vz_T_down hx hx1 hD2T hD21 hIlt.le) hIlt
+      · rw [vA_atom_fix hAt hJ]; exact hDD2
+    · rw [vA_psi hAt]
+      have hK := yh_lev_lt hGc hAt
+      have hI := yh_idx_lt hGc hAt
+      rw [yrQE_psi hAt] at hgQE
+      exact hglA _ _ (IH _ hK (hK.trans hc) (yrG_of_Q hωx ((le_max_left _ _).trans_lt hgQE)))
+        (IH _ hI (hI.trans hc) (yrG_of_Q hωx ((le_max_right _ _).trans_lt hgQE)))
+  rw [vR_dec hGc]
+  exact (inE_indec hD2E).add_lt (InE.mul_lt hD2E (zm_opow_lt hD2E hA (IH _ hlog (hlog.trans hc) hgk))
+    (IH _ hdiv (hdiv.trans hc) hgd)) (IH _ hmod (hmod.trans hc) hgr)
 
 end Googology.Trans.PoR.InaccPsi.R2.Va

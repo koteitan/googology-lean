@@ -1,4 +1,4 @@
-import Googology.Trans.PoR.InaccPsi.R2.VaR
+import Googology.Trans.PoR.InaccPsi.R2.VaB2
 import Googology.Trans.PoR.InaccPsi.R2.ZmNx
 import Googology.Trans.PoR.InaccPsi.R2.ZmRa
 
@@ -32,26 +32,6 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.I
   Googology.Trans.PoR.InaccPsi.R2.Gk
 
 /-! ## The bound `Γ_{B_Γ+1}` and the atoms below it -/
-
-/-- **The bound** `Γ_{B_Γ+1}`, the least strongly critical ordinal above `B_Γ`. -/
-noncomputable def vaU : Ordinal.{0} := gcG (tfBG + 1)
-
-theorem va_BG_lt_U : tfBG < vaU := by
-  unfold vaU; conv_lhs => rw [← zb_gcG_BG]
-  exact gcG_lt (lt_add_one _)
-
-theorem va_G_le_BG : gcG 0 ≤ tfBG := by rw [← zb_gcG_BG]; exact gcG_le zero_le
-
-/-- **Below `Γ_{B_Γ+1}` the only atom `≥ B_Γ` is `B_Γ`.** -/
-theorem va_atom_cases {e : Ordinal.{0}} (hBe : tfBG ≤ e) (heU : e < vaU) : e = tfBG ∨ ¬ YhAt e := by
-  by_cases hA : YhAt e
-  · left
-    obtain ⟨j, rfl⟩ := yhAt_iff.1 hA
-    have h1 : tfBG ≤ j := by
-      rw [← zb_gcG_BG] at hBe; exact gcG_strictMono.le_iff_le.1 hBe
-    have h2 : j < tfBG + 1 := gcG_strictMono.lt_iff_lt.1 heU
-    rw [le_antisymm (Order.lt_add_one_iff.1 h2) h1, zb_gcG_BG]
-  · exact Or.inr hA
 
 /-- **The gate of a part up to the finite ones**: `max g (yrG a) = max g (yrQ a)` for `ω ≤ g`. -/
 theorem va_maxQ {g : Ordinal.{0}} (hω : ω ≤ g) (a : Ordinal.{0}) : max g (yrG a) = max g (yrQ a) := by
