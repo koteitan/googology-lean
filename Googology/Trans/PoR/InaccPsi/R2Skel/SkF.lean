@@ -2810,8 +2810,21 @@ short-only inputs, which are not asked.  Non-vacuity: `Zo.zoBC_of_target`. -/
 theorem skBCInR (S : InaccSeq.{0}) : Zc.ZcInR S (Zo.zoBase S) (Zo.zoTop S) := by
   sorry
 
-/-- STATUS: OPEN (round 133, new leaf, regc1; round 135: narrowed to the codes `m_λ > K_ω`; round 137: and to the far
-readings `δ_λ·ω ≤ Θ_λ(m_λ)`, as skWinCapVF)
+/-- STATUS: OPEN (round 138: one leaf for every range restart above `l₀`, replaces skBCCapVH, skWinCapVF,
+skTopCapVF; round 133, regc1, regw8)
+SIZE: L
+CAPV AT THE `υ`-FIXED RANGE RESTARTS ABOVE `l₀ = ι(Ω₂)` (the (B-hi)/(C) block and the windows up to `L(ω+1)`)
+BELOW `ν_C` WITH A FAR READING `δ_λ·ω ≤ Θ_λ(m_λ)`.  At the other fixed restarts below `ν_C` CapV is a theorem
+(`Zn.znCapV_fixThW`; codes `≤ K_ω` read short, `Zs.zsShortK`; non-fixed: `Zh.zhCapV_nonfix`).  A far reading puts
+`r(λ) = k_λ(Θ_λ(m_λ))` past `δ_λ·ω`, so CapV needs the closed points of `(δ_λ, cap)`, which depend on the reaches
+of the points above `ρ_λ`.  REFUTE FIRST (at the first fixed restart of `W₁`): CapV holds there when
+`Θ_λ(m_λ) < δ_λ·ω`; NO EVIDENCE against the leaf. -/
+theorem skFixCapVF (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S < μ → upsilon μ = μ →
+    upsilon μ < nuC → Cd.cdDelta μ * ω ≤ Cd.cdTheta S μ (Cd.cdCode S μ) → Cd.CdCapV S μ := by
+  sorry
+
+/-- STATUS: PROVED (round 138, from skFixCapVF; was OPEN L: round 133, new leaf, regc1; round 135: narrowed to the
+codes `m_λ > K_ω`; round 137: and to the far readings `δ_λ·ω ≤ Θ_λ(m_λ)`, as skWinCapVF)
 SIZE: L
 CAPV AT THE `υ`-FIXED RANGE RESTARTS OF `(l₀, ι(Ω_ω))` below `ν_C` with neither a short last exponent nor a LOW code:
 `2 ≤ e(η_λ)` only together with `m_λ > θ·ω` (at `m_λ ≤ θ·ω`, `e ≥ 2` CapV is the theorem `Zo.zoCapV_low`; at
@@ -2825,8 +2838,8 @@ theorem skBCCapVH (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S <
     upsilon μ = μ → upsilon μ < nuC → ¬ Zh.ZhShortExp S μ →
     (ω ^ 2 ≤ ω ^ Cd.cdExp (Cd.cdEta S μ) → ConjT.th S * ω < Cd.cdCode S μ) →
     S.psi (Om ω + Om (1 + 1)) (Om (1 + 1)) < Cd.cdCode S μ →
-    Cd.cdDelta μ * ω ≤ Cd.cdTheta S μ (Cd.cdCode S μ) → Cd.CdCapV S μ := by
-  sorry
+    Cd.cdDelta μ * ω ≤ Cd.cdTheta S μ (Cd.cdCode S μ) → Cd.CdCapV S μ :=
+  fun μ hr h0 _ hfix hν _ _ _ hfar => skFixCapVF S μ hr h0 hfix hν hfar
 
 /-- STATUS: PROVED (Zs.zsCapV_K, Zs.zsEta_ne_above; round 135, new node)
 SIZE: S
@@ -3394,7 +3407,24 @@ THE CODE STATEMENT AT THE ISOLATED FIXED RESTARTS OF `W_ω` (as skWinIsoCode). -
 theorem skTopIsoCode (S : InaccSeq.{0}) : Zn.ZnIsoCode S (Bt.iota S (Om ω + Nc.ncPp S * ω)) (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) :=
   Zt.ztIsoCode _ _
 
-/-- STATUS: OPEN (round 133, new leaf, regw8; part of skWinRsF)
+/-- STATUS: OPEN (round 138: one leaf for every window, replaces skWinCont and skTopCont; round 133, regw8)
+SIZE: L
+THE CODE CONTINUITY AT THE NON-ISOLATED FIXED RESTARTS OF THE WINDOWS `(ι(L(0)), ι(L(ω+1)))` WITH A READING IN
+`(ρ_λ, υ_{λ+1}]` (`Zn.ZnThCont`; the same statement in every window `W_k` and in `W_ω`, and no `≤₁`, so no `ν_C`
+hypothesis): every `z < Θ_λ(m_λ)` is below a value `v < υ_{λ+1}` with `π_{ρ_μ,ρ_λ}(v) ≤ Θ_μ(m_μ)` at restarts
+`μ` cofinal below `λ`.  It follows from the hull form `Zn.znThCont_of_code` (for every hull code `c < m_λ`,
+cofinally `π(Θ_λ(c)) ≤ Θ_μ(m_μ)`, e.g. from `π(Θ_λ(c)) = Θ_μ(c)` and `c ≤ m_μ`).  Round 137 analysis: the codes
+are in `(Ω₁, θ]`, the readings below `θ` do not depend on `A`; the missing link is `π` on the readings (no lemma
+computes `π` of a value `ψ_{Ω₁}(A + x)`; `vt_rep` gives `Θ_λ(c) = ϑ^{ρ_λ}(ξ)` for a principal reading, the map
+`c ↦ ξ` is not formalized).  REFUTE FIRST: NO EVIDENCE (at a limit of fixed restarts with `Θ_λ(m_λ) = ρ_λ+1` it
+holds with `v = ρ_λ`, `π(ρ_λ) = ρ_μ`, `Cl.pi_base`, at the fixed `μ`). -/
+theorem skFixCont (S : InaccSeq.{0}) :
+    ∀ l, IsRestartIdx l → Bt.iota S (Om ω) < l → l < Bt.iota S (Om ω + Nc.ncPp S * (ω + 1)) → upsilon l = l →
+      ¬ Cp.CpIso l → upsilon l < Cd.cdTheta S l (Cd.cdCode S l) →
+      Cd.cdTheta S l (Cd.cdCode S l) ≤ upsilon (Order.succ l) → Zn.ZnThCont S l := by
+  sorry
+
+/-- STATUS: PROVED (round 138, from skFixCont; was OPEN L, round 133, new leaf, regw8; part of skWinRsF)
 SIZE: L
 THE CODE CONTINUITY AT THE NON-ISOLATED FIXED RESTARTS OF `W_k` WITH A READING IN `(ρ_λ, υ_{λ+1}]`
 (`Zn.ZnThCont`): every `z < Θ_λ(m_λ)` is below a value `v < υ_{λ+1}` with `π_{ρ_μ,ρ_λ}(v) ≤ Θ_μ(m_μ)` at restarts
@@ -3407,9 +3437,13 @@ theorem skWinCont (S : InaccSeq.{0}) (k : ℕ) :
       upsilon (Bt.iota S (Om ω + Nc.ncPp S * ((k + 1 : ℕ) : Ordinal.{0}))) ≤ nuC →
       upsilon l < Cd.cdTheta S l (Cd.cdCode S l) → Cd.cdTheta S l (Cd.cdCode S l) ≤ upsilon (Order.succ l) →
       Zn.ZnThCont S l := by
-  sorry
+  intro l hl h1 h2 hfix hiso _ hθ1 hθ2
+  refine skFixCont S l hl ((Bt.iota_mono (S := S) _ _ le_self_add).trans_lt h1)
+    (h2.trans_le (Bt.iota_mono (S := S) _ _ (add_le_add le_rfl (mul_le_mul_left' ?_ _)))) hfix hiso hθ1 hθ2
+  exact_mod_cast (show ((k + 1 : ℕ) : Ordinal.{0}) ≤ ω + 1 from
+    (Ordinal.natCast_lt_omega0 (k + 1)).le.trans le_self_add)
 
-/-- STATUS: OPEN (round 133, new leaf, regw8; part of skTopRsF)
+/-- STATUS: PROVED (round 138, from skFixCont; was OPEN L, round 133, new leaf, regw8; part of skTopRsF)
 SIZE: L
 THE CODE CONTINUITY IN `W_ω` (as skWinCont). -/
 theorem skTopCont (S : InaccSeq.{0}) :
@@ -3417,7 +3451,8 @@ theorem skTopCont (S : InaccSeq.{0}) :
       upsilon (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) ≤ nuC →
       upsilon l < Cd.cdTheta S l (Cd.cdCode S l) → Cd.cdTheta S l (Cd.cdCode S l) ≤ upsilon (Order.succ l) →
       Zn.ZnThCont S l := by
-  sorry
+  intro l hl h1 h2 hfix hiso _ hθ1 hθ2
+  exact skFixCont S l hl ((Bt.iota_mono (S := S) _ _ le_self_add).trans_lt h1) h2 hfix hiso hθ1 hθ2
 
 /-- STATUS: OPEN (round 133, new leaf, regw8; part of skWinRsF)
 SIZE: L
@@ -3465,7 +3500,7 @@ theorem skTopRsF (S : InaccSeq.{0}) :
       Zc.ZcRsIn (Ys.ysO S) l ∨ Zh.ZhSupInB S l (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) ∨ Zn.ZnRsVal (Ys.ysO S) l :=
   Zn.znRsF_of_parts2 (skTopIsoCode S) (skTopCont S) (skTopBig S)
 
-/-- STATUS: OPEN (round 133, new leaf, regw8; replaces skWinCapVL)
+/-- STATUS: PROVED (round 138, from skFixCapVF; was OPEN L, round 133, new leaf, regw8; replaces skWinCapVL)
 SIZE: L
 CAPV AT THE `υ`-FIXED RANGE RESTARTS OF `W_k` WITH A FAR READING `δ_λ·ω ≤ Θ_λ(m_λ)`, below `ν_C`.  At the other
 restarts CapV is a theorem below `ν_C` (`Zh.zhCapV_nonfix`, `Zh.zhCapV_short`, `Zn.znCapV_fixThW`).  REFUTE FIRST
@@ -3473,15 +3508,21 @@ restarts CapV is a theorem below `ν_C` (`Zh.zhCapV_nonfix`, `Zh.zhCapV_short`, 
 theorem skWinCapVF (S : InaccSeq.{0}) (k : ℕ) :
     ∀ μ, Cd.CdRange S μ → Wj.WjWin S k μ → upsilon μ = μ → upsilon μ < nuC →
       Cd.cdDelta μ * ω ≤ Cd.cdTheta S μ (Cd.cdCode S μ) → Cd.CdCapV S μ := by
-  sorry
+  intro μ hr hw hfix hν hfar
+  refine skFixCapVF S μ hr ?_ hfix hν hfar
+  refine upsilon_normal.strictMono.lt_iff_lt.1 (Zs.zsLt_L0.trans_le ?_ |>.trans hw.1)
+  exact Pp.ppL_mono (S := S) zero_le
 
-/-- STATUS: OPEN (round 133, new leaf, regw8; replaces skTopCapVL)
+/-- STATUS: PROVED (round 138, from skFixCapVF; was OPEN L, round 133, new leaf, regw8; replaces skTopCapVL)
 SIZE: L
 CAPV AT THE `υ`-FIXED RANGE RESTARTS OF `W_ω` WITH A FAR READING (as skWinCapVF). -/
 theorem skTopCapVF (S : InaccSeq.{0}) :
     ∀ μ, Cd.CdRange S μ → Wj.WjTop S μ → upsilon μ = μ → upsilon μ < nuC →
       Cd.cdDelta μ * ω ≤ Cd.cdTheta S μ (Cd.cdCode S μ) → Cd.CdCapV S μ := by
-  sorry
+  intro μ hr hw hfix hν hfar
+  refine skFixCapVF S μ hr ?_ hfix hν hfar
+  refine upsilon_normal.strictMono.lt_iff_lt.1 (Zs.zsLt_L0.trans_le ?_ |>.trans hw.1)
+  exact Pp.ppL_mono (S := S) zero_le
 
 /-- STATUS: PROVED (Zn.znRs_rstV; round 133, new; checked only after the merge)
 SIZE: L
