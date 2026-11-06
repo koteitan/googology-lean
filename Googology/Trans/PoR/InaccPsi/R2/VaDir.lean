@@ -80,7 +80,7 @@ theorem vaDirectU (S : InaccSeq.{0}) : ZbDirect S vaU := by
   obtain ⟨M, hE, hEg, -, -, -, hBB, hDD⟩ := vaGood_all e heE heB heU
   have hK : SC (Td.tdK S) := Td.tdK_SC
   have hK1 : Td.tdK S ≤ Om1 := by rw [Br.Om1_eq]; exact (Td.tdK_lt_Om1 (S := S)).le
-  have hge : yrG e < Td.tdK S := va_gate hK hK1 e (vaTw_cl hK.1 (n + 1)) heU
+  have hge : yrG e < Td.tdK S := va_gate hK hK1 e (vaTw_cl hK.1 (n + 1)) (heU.trans_le va_U_le_B2)
   have hgK : M.step.Eg < Td.tdK S := by
     rw [ZmDS.step_Eg, hEg]
     refine max_lt (omega0_lt_inE (Low.opow_eq_self_of_SC hK)) ?_
