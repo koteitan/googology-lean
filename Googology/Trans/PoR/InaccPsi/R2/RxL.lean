@@ -199,11 +199,12 @@ noncomputable def rxLvO (x : Ordinal.{0}) : ℕ :=
   if h : ∃ k : ℕ, x = Om (k : Ordinal.{0}) then Nat.find h else 0
 
 open Classical in
-/-- **The level shift at every finite level.** -/
+/-- **The level shift at every finite level** (`Ω_ω` is fixed, round 177). -/
 noncomputable def rxL (S : InaccSeq.{0}) (Z : Ordinal.{0}) (At : Set Ordinal.{0}) (T x : Ordinal.{0}) :
     Ordinal.{0} :=
   if _h1 : x < Om 1 then ruInv Z At x
   else if _hΩ : ∃ k : ℕ, x = Om (k : Ordinal.{0}) then Om ((rxLvO x : Ordinal.{0}) + 1)
+  else if _hW : x = Om ω then Om ω
   else if _hA : ∃ k : ℕ, 1 ≤ k ∧ SC x ∧ Om (k : Ordinal.{0}) < x ∧ x < Om ((k : Ordinal.{0}) + 1) then
     if hd : rxMs S T (rxDn S (Om ((rxLvA x : Ordinal.{0}) + 1)) x) < rxMs S T x then
       S.psi (rxL S Z At T (rxDn S (Om ((rxLvA x : Ordinal.{0}) + 1)) x))

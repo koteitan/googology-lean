@@ -2364,3 +2364,12 @@ import Googology.Trans.PoR.InaccPsi.R2.KxLim
 import Googology.Trans.PoR.InaccPsi.R2.KxTop
 import Googology.Trans.PoR.InaccPsi.R2.KyOff
 import Googology.Trans.PoR.InaccPsi.R2.KyMove
+import Googology.Trans.PoR.InaccPsi.R2.KzDom
+import Googology.Trans.PoR.InaccPsi.R2.KzLv
+import Googology.Trans.PoR.InaccPsi.R2.KzMono
+import Googology.Trans.PoR.InaccPsi.R2.KzVb
+import Googology.Trans.PoR.InaccPsi.R2.KzBack
+import Googology.Trans.PoR.InaccPsi.R2.KzOnto
+import Googology.Trans.PoR.InaccPsi.R2.KzLaw
+import Googology.Trans.PoR.InaccPsi.R2.KzAdd
+import Googology.Trans.PoR.InaccPsi.R2.KzTr
