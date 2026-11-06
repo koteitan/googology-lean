@@ -1,6 +1,8 @@
 import Googology.Trans.PoR.InaccPsi.R2.ZmPast
 import Googology.Trans.PoR.InaccPsi.R2.TzB
 import Googology.Trans.PoR.InaccPsi.R2.ZtIso
+import Googology.Trans.PoR.InaccPsi.R2.TsPsi
+import Googology.Trans.PoR.InaccPsi.R2.TfPsi
 
 /-!
 # Zu: every abstract atom system stops at `θ`; the layers past `θ` have no atom system
@@ -15,7 +17,9 @@ import Googology.Trans.PoR.InaccPsi.R2.ZtIso
   below `V` it would be an atom, hence in `Cl(Ω_ω, Z) ⊆ Cl(Ω_ω, θ)`, but `θ = ψ_{Ω₂}(Ω_ω)` is not in it);
 * `zuPastAt_false` (**`Zm.ZmPastAt S θ` is false**: the layer for the atom index `θ + 1 < Γ(θ+1)` asks
   `Γ(θ+1) ≤ T ≤ V ≤ θ`), `zuLayPastX_false` (**the statement of the skeleton leaf skLayPastX is false**, at the layer
-  `c = θ`, `X ≤ θ < Ω₂`).
+  `c = θ`, `X ≤ θ < Ω₂`);
+* `zuGamma_th` (**`Γ_θ = θ`**: `ψ_{Ω₂}(Ω_ω)` is a fixed point of `F_0 = Γ`, `Ts.ts_fwd` with `Ω₂ ∣ Ω_ω`),
+  `zuGcG_lt_th` (**`Γ_{Ω₁+1+c} < θ` for `c < θ`**: below `θ` the bound `V ≤ θ` is no obstacle to the layers).
 
 No new axiom.  No new definition.
 -/
@@ -91,5 +95,34 @@ theorem zuPastAt_false : ¬ Zm.ZmPastAt S (ConjT.th S) := by
 /-- **The statement of the skeleton leaf skLayPastX is false** (at the layer `c = θ`). -/
 theorem zuLayPastX_false : ¬ (∀ c, Tl.tlX ≤ c → c < Om (1 + 1) → Zm.ZmPastAt S c) := fun h =>
   zuPastAt_false S (h _ (Tz.tz_X_le_th S) (psi_lt (InR_Om_succ 1) _))
+
+/-- **`Γ_θ = θ`.** -/
+theorem zuGamma_th : gamma (ConjT.th S) = ConjT.th S := by
+  have hSC : SC (Om (ω : Ordinal.{0})) := SC_Om omega0_ne_zero
+  have hOw : ω ^ Om (ω : Ordinal.{0}) = Om ω := Low.opow_eq_self_of_SC hSC
+  have hown : Om ω ∈ S.CSet (Om ω) (S.psi (Om ω) (Om (1 + 1))) := ConjT.OmW_mem S _ _
+  have hdvd : Le.leWe (0 + 1) ∣ Om ω := by
+    unfold Le.leWe
+    conv_rhs => rw [← hOw]
+    refine opow_dvd_opow ω ?_
+    rw [zero_add, mul_one]
+    exact Om_le_Om.2 (by rw [one_add_one_eq_two]; exact (natCast_lt_omega0 2).le)
+  have h0 : Om (ω : Ordinal.{0}) ≠ 0 := (Om_pos omega0_ne_zero).ne'
+  have hpos : (0 : Ordinal.{0}) < S.psi (Om ω) (Om (1 + 1)) := (ConjT.SC_th S).1
+  have h := Ts.ts_fwd (S := S) 0 (Om ω) hown hdvd h0 hpos
+  rw [Rh.rhF_zero] at h
+  exact h
+
+/-- **`Γ_{Ω₁+1+c} < θ` for every `c < θ`.** -/
+theorem zuGcG_lt_th {c : Ordinal.{0}} (hc : c < ConjT.th S) : gcG c < ConjT.th S := by
+  rw [Tf.tf_gcG]
+  have hSC := ConjT.SC_th S
+  have h1 : Om1 + 1 < ConjT.th S := by
+    have hθ1 : Om 1 < ConjT.th S := Zr.zrTh_gt_Om1
+    rw [← Br.Om1_eq] at hθ1
+    exact hSC.isSuccLimit.add_one_lt hθ1
+  have h2 : Om1 + 1 + c < ConjT.th S := hSC.isPrincipal h1 hc
+  calc gamma (Om1 + 1 + c) < gamma (ConjT.th S) := gamma_lt_gamma.2 h2
+    _ = ConjT.th S := zuGamma_th S
 
 end Googology.Trans.PoR.InaccPsi.R2.Zu
