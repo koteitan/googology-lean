@@ -218,6 +218,7 @@ section K
 variable {S : InaccSeq.{0}} {v : Ordinal.{0}} (hv : SC v) (hvO : Om1 < v)
 include hv hvO
 
+omit hv hvO in
 theorem qd_two_lt_Om1 : (2 : Ordinal.{0}) < Om1 :=
   (show (2 : Ordinal.{0}) < ω from by exact_mod_cast natCast_lt_omega0 2).trans
     (omega0_lt_inE (show InE Om1 from rj_Om1_opow))
@@ -229,7 +230,7 @@ theorem qd_Omfix_gt {x : Ordinal.{0}} (hx : Om x = x) (h2 : 2 < x) : OmTwo < x :
 
 /-- **`⇐`: the leaves of a level visible at `v` are below `v`.** -/
 theorem qd_of_K : ∀ z : Ordinal.{0}, UlK S 1 v z → qdP v z := by
-  have h2O : (2 : Ordinal.{0}) < Om1 := qd_two_lt_Om1 hv hvO
+  have h2O : (2 : Ordinal.{0}) < Om1 := qd_two_lt_Om1
   intro z hz
   induction hz with
   | small h => exact qdP_of_lt h
