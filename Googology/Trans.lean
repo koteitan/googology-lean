@@ -2373,3 +2373,5 @@ import Googology.Trans.PoR.InaccPsi.R2.KzOnto
 import Googology.Trans.PoR.InaccPsi.R2.KzLaw
 import Googology.Trans.PoR.InaccPsi.R2.KzAdd
 import Googology.Trans.PoR.InaccPsi.R2.KzTr
+import Googology.Trans.PoR.InaccPsi.R2.KzUp
+import Googology.Trans.PoR.InaccPsi.R2.KzLow

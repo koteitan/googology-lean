@@ -4,19 +4,21 @@ import Googology.Trans.PoR.InaccPsi.R2.KyMove
 # Kz: THE DOMAIN OF THE LEVEL SHIFT BELOW A BOUND `K ≥ Ω_ω` (first step of the shift `T⁺` past `Ω_ω`)
 
 `κ = Rx.rxL S Z At T` (since round 177 `κ Ω_ω = Ω_ω`, so `κ(Ω_ω + y) = Ω_ω + κ y` by the Cantor normal form),
-`ψ_k = ψ_{Ω_k}`.  A bound `K` (`KzB`): strongly critical, `Ω_ω ≤ K ≤ ψ_{Ω_{ω+1}}(0)`, `K ∈ Cl(K, b)` for every `b`
-(`K = Ω_ω` and `K = ψ_{Ω_{ω+1}}(0)` are bounds).  `RxEK S T K`: the normal hull over `T`, `Cl(K, ψ₂ K)`, below `K`
+`ψ_k = ψ_{Ω_k}`.  A bound `K` (`KzB`): strongly critical, `Ω_ω ≤ K ≤ ψ_{Ω_{ω+1}}(0)`, every `z < K` below a
+closed term `w < K` (in every `Cl(a, b)`)
+(`K = Ω_ω` is a bound).  `RxEK S T K`: the normal hull over `T`, `Cl(K, ψ₂ K)`, below `K`
 (`Rx.RxE` is `K = Ω_ω`).  Below `K` the only cardinals are the `Ω_k` and `Ω_ω`, and the strongly critical members
 `> Ω₁` that are not cardinals are the atoms `ψ_{k+1}(d)` of finite levels.
 
-* `KzB`, `kzB_OmW`, `kzB_psiW1`, `RxEK`, `rxEK_of_E`;
+* `KzB`, `kzB_OmW`, `kzKW` (**`Γ_{Ω_ω+1}`, the least strongly critical ordinal above `Ω_ω`**), `kzB_KW`, `RxEK`,
+  `rxEK_of_E`;
 * `kzE_log`, `kzE_rem`, `kzE_veb` (**the parts of a member are members**), `kzE_card` (**a cardinal member is `Ω_k`,
   `k < ω`, or `Ω_ω`**), `kzE_atom` (**a strongly critical member `> Ω₁`, not a cardinal, is `ψ_{k+1}(d)`, `1 ≤ k < ω`,
   `d` a normal argument in the domain at a smaller stage**);
 * `kzL_OmW` (**`κ Ω_ω = Ω_ω`**), `kzL_psiE` (**`κ ψ_{k+1}(d) = ψ_{k+2}(κ d)`**), `kzL_gt` (the Cantor normal
   form), `kzL_veb` (the Veblen normal form) on `RxEK`.
 
-No new axiom.  New definitions: `KzB`, `RxEK`.
+No new axiom.  New definitions: `KzB`, `kzKW`, `RxEK`.
 -/
 
 set_option autoImplicit false
@@ -34,7 +36,7 @@ structure KzB (S : InaccSeq.{0}) (K : Ordinal.{0}) : Prop where
   sc : SC K
   ge : Om ω ≤ K
   le : K ≤ S.psi 0 (Om (ω + 1))
-  mem : ∀ a b, K ≤ a → K ∈ S.CSet a b
+  fin : ∀ z, z < K → ∃ w, z ≤ w ∧ w < K ∧ ∀ a b, w ∈ S.CSet a b
 
 /-- **The domain below `K`.** -/
 def RxEK (S : InaccSeq.{0}) (T K x : Ordinal.{0}) : Prop :=
@@ -48,21 +50,71 @@ theorem kzOmega_mem (a b : Ordinal.{0}) : (ω : Ordinal.{0}) ∈ S.CSet a b := b
   have := CSet.phi_mem (S := S) (CSet.zero_mem a b) (CSet.one_mem a b)
   rwa [veblen_zero_apply, opow_one] at this
 
-theorem kzB_psiW1 : KzB S (S.psi 0 (Om (ω + 1))) where
-  sc := SC_psi kzW1_InR 0
-  ge := kzOmW_lt_psiW1.le
-  le := le_rfl
-  mem := fun a b ha =>
-    CSet.psi_mem ((SC_psi kzW1_InR 0).1.trans_le ha) kzW1_InR
-      (CSet.Om_mem (CSet.succ_mem (kzOmega_mem a b))) (CSet.zero_mem a b)
-
 theorem kzB_OmW : KzB S (Om ω) where
   sc := SC_Om omega0_ne_zero
   ge := le_rfl
   le := kzOmW_lt_psiW1.le
-  mem := fun a b _ => ConjT.OmW_mem S a b
+  fin := fun z hz => by
+    obtain ⟨n, hn⟩ := rxOmW_nat hz
+    exact ⟨Om (n : Ordinal.{0}), hn.le, Om_lt_Om.2 (natCast_lt_omega0 n), fun a b => rxC_Om_nat a b n⟩
 
-theorem kzK_lt_Lam {K : Ordinal.{0}} (hK : KzB S K) : K < S.Lam := lt_Lam_of_mem zero_le (hK.mem K 0 le_rfl)
+/-- A fixed point of `x ↦ φ(x, 0)` is strongly critical. -/
+theorem kzSC_of_fix {γ : Ordinal.{0}} (h0 : 0 < γ) (h : veblen γ 0 = γ) : SC γ :=
+  ⟨h0, fun x hx y hy => by
+    have e := veblen_veblen_of_lt hx 0
+    rw [h] at e
+    exact e ▸ veblen_right_strictMono x hy⟩
+
+/-- **`Γ_{Ω_ω+1}`**: the least strongly critical ordinal above `Ω_ω`. -/
+noncomputable def kzKW : Ordinal.{0} := nfp (fun x => veblen x 0) (Om ω + 1)
+
+theorem kzKW_fix : veblen kzKW 0 = kzKW := nfp_fp isNormal_veblen_zero _
+
+theorem kzKW_gt : Om ω < kzKW := (lt_add_one _).trans_le (le_nfp _ _)
+
+theorem kzKW_SC : SC kzKW := kzSC_of_fix ((Om_pos omega0_ne_zero).trans kzKW_gt) kzKW_fix
+
+theorem kzKW_it_mem (a b : Ordinal.{0}) :
+    ∀ n : ℕ, (fun x => veblen x 0)^[n] (Om ω + 1) ∈ S.CSet a b
+  | 0 => CSet.succ_mem (CSet.Om_mem (kzOmega_mem a b))
+  | n + 1 => by
+    rw [Function.iterate_succ_apply']
+    exact CSet.phi_mem (kzKW_it_mem a b n) (CSet.zero_mem a b)
+
+theorem kzKW_step : (Om ω + 1 : Ordinal.{0}) < veblen (Om ω + 1) 0 := by
+  refine lt_of_le_of_ne (left_le_veblen _ _) fun e => ?_
+  obtain ⟨c, hc⟩ := veblen_mem_range_opow (Om ω + 1) 0
+  have hp : IsPrincipal (· + ·) (Om ω + 1) := by rw [e, ← hc]; exact isPrincipal_add_omega0_opow c
+  have h1 : (1 : Ordinal.{0}) < Om ω + 1 := (Order.one_le_iff_pos.2 (Om_pos omega0_ne_zero)).trans_lt (lt_add_one _)
+  exact (hp (lt_add_one (Om ω)) h1).ne rfl
+
+theorem kzKW_it_lt (n : ℕ) : (fun x => veblen x 0)^[n] (Om ω + 1) < kzKW := by
+  have hs : ∀ m : ℕ, (fun x => veblen x 0)^[m] (Om ω + 1) < (fun x => veblen x 0)^[m + 1] (Om ω + 1) := by
+    intro m
+    induction m with
+    | zero => exact kzKW_step
+    | succ m ih =>
+      have e1 : (fun x => veblen x 0)^[m + 1 + 1] (Om ω + 1) =
+          veblen ((fun x => veblen x 0)^[m + 1] (Om ω + 1)) 0 := Function.iterate_succ_apply' _ _ _
+      have e0 : (fun x => veblen x 0)^[m + 1] (Om ω + 1) =
+          veblen ((fun x => veblen x 0)^[m] (Om ω + 1)) 0 := Function.iterate_succ_apply' _ _ _
+      calc _ = veblen ((fun x => veblen x 0)^[m] (Om ω + 1)) 0 := e0
+        _ < veblen ((fun x => veblen x 0)^[m + 1] (Om ω + 1)) 0 := veblen_zero_strictMono ih
+        _ = _ := e1.symm
+  exact (hs n).trans_le (iterate_le_nfp _ _ _)
+
+theorem kzB_KW : KzB S kzKW where
+  sc := kzKW_SC
+  ge := kzKW_gt.le
+  le := nfp_le_fp isNormal_veblen_zero.strictMono.monotone (Order.add_one_le_of_lt kzOmW_lt_psiW1)
+    (SC_psi kzW1_InR 0).veblen_zero.le
+  fin := fun z hz => by
+    obtain ⟨n, hn⟩ := lt_nfp_iff.1 hz
+    exact ⟨_, hn.le, kzKW_it_lt n, fun a b => kzKW_it_mem a b n⟩
+
+theorem kzK_lt_Lam {K : Ordinal.{0}} (hK : KzB S K) : K < S.Lam :=
+  hK.le.trans_lt ((psi_lt kzW1_InR 0).trans
+    (lt_Lam_of_mem zero_le (CSet.Om_mem (CSet.succ_mem (kzOmega_mem (S := S) 0 0)))))
 
 section Dom
 
@@ -157,10 +209,10 @@ theorem kzE_atom (hT1 : T ≤ Om 1) {x : Ordinal.{0}} (hx : RxEK S T K x) (hS : 
         have h4 : k < 2 := by exact_mod_cast h3
         omega
       subst hk1
-      have hW : K ∈ S.CSet K (S.psi K (Om (1 + 1))) := hK.mem K _ le_rfl
       have hdn' : d ∈ S.CSet d (S.psi d (Om (1 + 1))) := by simpa using hdn
       have hθ' : S.psi d (Om (1 + 1)) < S.psi K (Om (1 + 1)) := by simpa using hθ
-      have hdW : d < K := lt_of_psi_lt hκ2 hdn' hW hθ'
+      have hdW : d < K := by
+        by_contra hc; push Not at hc; exact absurd hθ' (not_lt.2 (psi_mono hκ2 hc).1)
       exact ⟨CSet_mono hdW.le hθ'.le hdn', hdW⟩
   exact ⟨k, hk, d, ⟨rxN_iff_stage.2 ⟨m, hdm⟩, hdE.1, hdE.2⟩, hdn, rfl, hdr⟩
 
