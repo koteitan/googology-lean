@@ -2320,3 +2320,4 @@ import Googology.Trans.PoR.InaccPsi.R2.ZrTh
 import Googology.Trans.PoR.InaccPsi.R2.ZrRead
 import Googology.Trans.PoR.InaccPsi.R2.ZsBig
 import Googology.Trans.PoR.InaccPsi.R2.ZsCap
+import Googology.Trans.PoR.InaccPsi.R2.ZtIso
