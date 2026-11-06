@@ -11,7 +11,7 @@ The remaining work, arranged by the cells of the README tables. Items not being 
       - also: window RS input and cap off υ-fixed restarts, Θ = ρ at isolated ones; atoms move to K_Y; base ι(Ω₂): reach, cap; codes ≤ K_ω read short.
       - road yqRoadS (hyp.: UPPER, LOWER, cap past the frontier; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; the shift XoShift; XoSup): ν_C = L(ω+1).
       - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): 60 sorry leaves; OPEN 23 (all L), SUSPECT 2, REFUTED 9; 15 OPEN leaves on the road (all L); skTopLawAll, skPsi3OffRest2 and skAtHi3 proved (Kx.kxTopLawAll, Ky.kyPsi3OffRest2, Kz.kzAtHi3); root vacuity open.
-      - 🤖 next: the ψ₁ ↔ ϑ dictionary (the readings Θ_λ(c) as T^{ρ_λ}-terms; hull correspondence T^{ρ_λ}[ρ_μ] ∩ Ω₁ = Θ_λ[H_μ ∩ θ]) for skFixCont and the layer leaves skZbDirectX, skLayPastXθ, skLayPastTh; then the window and skBC leaves, skTopLwNo2, skLevImgHi4, skZlCfg.
+      - 🤖 next: ONE reading vR of every code past B_Γ (Yr.yrR with B_Γ read D(x)); digit systems at every ε-number base below Γ_{B_Γ+1} by one induction (step at successors, union at limits) ⇒ ZbDirect up to Γ_{B_Γ+1}; then the Γ-fixed points, skZbDirectX, and the other layer, window and skBC leaves.
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
