@@ -1728,7 +1728,9 @@ end); round 152: the ownership of every context (`Kk.kkOwn`); rounds 153-154: th
 (`Kl.KlWT`, exponent data `Kl.klEx`) and the classification of the limit ones — continuity of `T` or the top of a
 context (`Kn.knClass`); rounds 155-157: the ownership of the components of a `W`-term at its first use
 (`Ko.koGOL`), the classification with the ownership (`Kp.kpClass`), and THE CHAIN OF `W^g` FOR EVERY `W`-TERM `g ≥ 1`
-over the codes (`Kq.kqChain`; the top law at every `Ω_{k+3} + W^g·ζ + e`, `Kq.kqTop`); left: (ii) the exponents `h > Ω₂` of `W^h` (round 146: the first one, `h = Ω₂`, is the
+over the codes (`Kq.kqChain`; the top law at every `Ω_{k+3} + W^g·ζ + e`, `Kq.kqTop`); round 158: END TO END at every
+normal `β + W^{Ω_{k+3} + w + e}·γ`, `w` a `W`-term over the codes (`Kr.krTop`); left: the exponents with `φ`-terms
+(`ψ₃(0) = Γ_{Ω₂+1}`), `ψ_{k+3}`-atoms and `Ω_{k+3}`-cofinal parts (`Ω₃·2`, …); earlier notes: (ii) the exponents `h > Ω₂` of `W^h` (round 146: the first one, `h = Ω₂`, is the
 jump `Kd.kdLaw` with the context `v ↦ X + W^v` and a three-level tower; round 147: the contexts of any depth
 `Ke.KeCtx`, closed under `v ↦ g₀ + W^j·v` and `v ↦ g₁ + W^{C'(v)}`, and the jump at every context `Ke.keLaw`; next:
 the recursion on the `W`-normal form of `h` — a limit exponent is a point of continuity of `T` (`Zz.zzLimW`) or the
