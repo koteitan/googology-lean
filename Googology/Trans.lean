@@ -2410,3 +2410,4 @@ import Googology.Trans.PoR.InaccPsi.R2.QcEq
 import Googology.Trans.PoR.InaccPsi.R2.QcDS
 import Googology.Trans.PoR.InaccPsi.R2.QcCnt
 import Googology.Trans.PoR.InaccPsi.R2.QcConv
+import Googology.Trans.PoR.InaccPsi.R2.QcRS
