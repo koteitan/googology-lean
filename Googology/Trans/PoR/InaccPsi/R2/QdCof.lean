@@ -59,7 +59,7 @@ omit hf0 hfΩ hfm in
 theorem qd_c0 : ∀ d ∈ qdComps 0, Dm d := fun d hd => by
   rw [qdComps_small qd_Om2_pos, mem_singleton_iff] at hd; rw [hd]; exact hD0
 
-omit hf0 hfΩ hfm in
+omit hf0 hD0 hfΩ hfm in
 /-- The Cantor clause with no side condition. -/
 theorem qdComps_cnf'' {u n r : Ordinal.{0}} (hu : OmTwo ≤ u) (hn0 : n ≠ 0) (hn : n < ω) (hr : r < ω ^ u)
     (h2 : ω ^ u * n + r < qdG2) (huD : ∀ d ∈ qdComps u, Dm d) (hrD : ∀ d ∈ qdComps r, Dm d) :
@@ -111,7 +111,7 @@ theorem qdLv_pow {u : Ordinal.{0}} (hu : OmTwo ≤ u) (h2 : ω ^ u < qdG2) (huD 
 omit hf0 hfΩ hfm in
 theorem qdComps_pow {u : Ordinal.{0}} (hu : OmTwo ≤ u) (h2 : ω ^ u < qdG2) (huD : ∀ d ∈ qdComps u, Dm d) :
     ∀ d ∈ qdComps (ω ^ u), Dm d := by
-  have h := qdComps_cnf'' Dm hD0 hu one_ne_zero one_lt_omega0 (opow_pos _ omega0_pos)
+  have h := qdComps_cnf'' Dm hu one_ne_zero one_lt_omega0 (opow_pos _ omega0_pos)
     (by rw [mul_one, add_zero]; exact h2) huD (qd_c0 Dm hD0)
   rwa [mul_one, add_zero] at h
 
@@ -198,7 +198,7 @@ theorem qdLv_cof : ∀ γ : Ordinal.{0}, γ < qdG2 → (∀ d ∈ qdComps γ, Dm
     have hk1 : k + 1 < ω := by
       obtain ⟨n, rfl⟩ := lt_omega0.1 hk; exact_mod_cast natCast_lt_omega0 (n + 1)
     have hG' : ω ^ μ₁ * (k + 1) + 0 < qdG2 := by rw [add_zero]; exact hG
-    have hc := qdComps_cnf'' Dm hD0 hμ2 (by simp) hk1 (opow_pos _ omega0_pos) hG' hμD hc0
+    have hc := qdComps_cnf'' Dm hμ2 (by simp) hk1 (opow_pos _ omega0_pos) hG' hμD hc0
     rw [add_zero] at hc
     refine ⟨hc, ?_⟩
     have hL := qdLv_cnf'' f Dm hf0 hD0 hfΩ hfm hμ2 (by simp) hk1 (opow_pos _ omega0_pos) hG' hμD
@@ -464,7 +464,7 @@ theorem qdLv_cof : ∀ γ : Ordinal.{0}, γ < qdG2 → (∀ d ∈ qdComps γ, Dm
       obtain ⟨μ'', hμ''r, hμ''D, hJ'μ''⟩ := IH _ hrγ (hrγ.trans hγG) hrD J' hJ'r hJ'd
       have hμ''l : μ'' < ω ^ log ω γ := hμ''r.trans hrl
       have hμγ : ω ^ log ω γ * (γ / ω ^ log ω γ) + μ'' < γ := ((add_lt_add_iff_left _).2 hμ''r).trans_eq hdec
-      refine ⟨_, hμγ, qdComps_cnf'' Dm hD0 hl2 hn0 hnω hμ''l (hμγ.trans hγG) hlD hμ''D, ?_⟩
+      refine ⟨_, hμγ, qdComps_cnf'' Dm hl2 hn0 hnω hμ''l (hμγ.trans hγG) hlD hμ''D, ?_⟩
       rw [qdLv_cnf'' f Dm hf0 hD0 hfΩ hfm hl2 hn0 hnω hμ''l (hμγ.trans hγG) hlD, hJ']
       exact add_le_add le_rfl hJ'μ''
     · push Not at hJA
@@ -488,7 +488,7 @@ theorem qdLv_cof : ∀ γ : Ordinal.{0}, γ < qdG2 → (∀ d ∈ qdComps γ, Dm
           _ = ω ^ log ω γ * (J / ω ^ qdLv f (log ω γ) + 1) := (mul_add_one _ _).symm
           _ ≤ ω ^ log ω γ * (γ / ω ^ log ω γ) := mul_le_mul_right (Order.add_one_le_of_lt hqn) _
           _ ≤ γ := le_self_add.trans_eq hdec
-      refine ⟨_, hμγ, qdComps_cnf'' Dm hD0 hl2 hq0 (hqn.trans hnω) hμ'l (hμγ.trans hγG) hlD hμ'D, ?_⟩
+      refine ⟨_, hμγ, qdComps_cnf'' Dm hl2 hq0 (hqn.trans hnω) hμ'l (hμγ.trans hγG) hlD hμ'D, ?_⟩
       rw [qdLv_cnf'' f Dm hf0 hD0 hfΩ hfm hl2 hq0 (hqn.trans hnω) hμ'l (hμγ.trans hγG) hlD]
       calc J = ω ^ qdLv f (log ω γ) * (J / ω ^ qdLv f (log ω γ)) + J % ω ^ qdLv f (log ω γ) := hJdec.symm
         _ ≤ _ := add_le_add le_rfl hjμ'
