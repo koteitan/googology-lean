@@ -3414,9 +3414,11 @@ THE CODE CONTINUITY AT THE NON-ISOLATED FIXED RESTARTS OF THE WINDOWS `(ι(L(0))
 hypothesis): every `z < Θ_λ(m_λ)` is below a value `v < υ_{λ+1}` with `π_{ρ_μ,ρ_λ}(v) ≤ Θ_μ(m_μ)` at restarts
 `μ` cofinal below `λ`.  It follows from the hull form `Zn.znThCont_of_code` (for every hull code `c < m_λ`,
 cofinally `π(Θ_λ(c)) ≤ Θ_μ(m_μ)`, e.g. from `π(Θ_λ(c)) = Θ_μ(c)` and `c ≤ m_μ`).  Round 137 analysis: the codes
-are in `(Ω₁, θ]`, the readings below `θ` do not depend on `A`; the missing link is `π` on the readings (no lemma
-computes `π` of a value `ψ_{Ω₁}(A + x)`; `vt_rep` gives `Θ_λ(c) = ϑ^{ρ_λ}(ξ)` for a principal reading, the map
-`c ↦ ξ` is not formalized).  REFUTE FIRST: NO EVIDENCE (at a limit of fixed restarts with `Θ_λ(m_λ) = ρ_λ+1` it
+are in `(Ω₁, θ]`; the missing link is `π` on the readings (no lemma computes `π` of a value `ψ_{Ω₁}(A + x)`;
+`vt_rep` gives `Θ_λ(c) = ϑ^{ρ_λ}(ξ)` for a principal reading, the map `c ↦ ξ` is not formalized).  Round 138: the
+layer reading systems prove such a link (`Zm.ZmDS`: Lemma EXACT for explicit readings `R(o)(x)`) for their codes;
+codes below `θ` past them (e.g. `ψ_{Ω₂}(ψ_{Ω₃}(Ω_ω·2))` at a window, where `A ≥ Ω_ω·2`) are the content of
+skZbDirectX, skLayPastX.  REFUTE FIRST: NO EVIDENCE (at a limit of fixed restarts with `Θ_λ(m_λ) = ρ_λ+1` it
 holds with `v = ρ_λ`, `π(ρ_λ) = ρ_μ`, `Cl.pi_base`, at the fixed `μ`). -/
 theorem skFixCont (S : InaccSeq.{0}) :
     ∀ l, IsRestartIdx l → Bt.iota S (Om ω) < l → l < Bt.iota S (Om ω + Nc.ncPp S * (ω + 1)) → upsilon l = l →
