@@ -1707,11 +1707,12 @@ the refuted forms speak of other points or other images: Xq.xqRef_wit (`Ω₃+1`
 SIZE: L
 THE TOP LAW AT EVERY EXPONENT: at every restart `λ` (`ρ_λ < P(η)`, `A` own, `ψ₁(A) = ρ_λ`), every normal `b ∈ D_λ`
 with `Ω₃ ∣ b`, `Ω₃ ≤ b` has `Θ_λ(ψ₂ b) = ψ₁(A + 1 + ψ₂(T_λ b))`.  Missing: the exponents of the top atoms past
-those of Xi.XiTopUp / Zd.zdChain / Zi.ziChain / Zv.zvChain (`b = β + W^E`; round 140: every `E = Ω_{k+3} + Ω₂·ξ + e`
-with a countable coefficient `ξ < ρ_λ` is done, `Zv.zvChain`, from the relative shift data `Zd.ZdSh`; left:
-`E ≥ Ω_{k+3} + Ω₂·ρ_λ`, i.e. uncountable code coefficients — there `K = T X_ξ` carries `Θ_λ(ξ) ≥ ρ_λ` and the
-plateau iterates must exceed it — and `E ≥ Ω₃·2`), and the limit sub-bases `β + W^E·γ` at those exponents
-(continuity, as Yt.ytSubLaw). -/
+those of Xi.XiTopUp / Zd.zdChain / Zi.ziChain / Zv.zvChain / Zw.zwChain (`b = β + W^E`; round 141: every
+`E = Ω_{k+3} + Ω₂·ξ + e` with a CODE coefficient `ξ < θ` is done, `Zw.zwChain`, from the threshold shift data
+`Zd.ZdShQ`, on the bases with `Zw.ZwQ` (every code `ξ' ≤ ξ` below `ψ₂(β + W^{Ω_{k+3}+Ω₂·ξ'})`); left: (i) `ZwQ`
+from the normality of `b` (the analog of Yd.ydOwnB_iff one level up), (ii) `E ≥ Ω_{k+3} + Ω₂·Ω₂`, i.e. the jumps
+`W^g`, `g ≥ 2`, with plateaus over coefficients `u_m = ψ₂(β + W^{X + W^{g'}·u_{m-1}})`, and `E ≥ Ω₃·2`), and the
+limit sub-bases `β + W^E·γ` at those exponents (continuity, as Yt.ytSubLaw). -/
 theorem skTopLawAll (S : InaccSeq.{0}) : Zp.ZpTopLawAll S := by
   sorry
 
