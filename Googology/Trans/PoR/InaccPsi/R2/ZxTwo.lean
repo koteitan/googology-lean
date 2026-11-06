@@ -37,8 +37,8 @@ include hl hX
 theorem zxEx_one : ZxEx S l 1 1 0 := by
   obtain ⟨hρSC, -⟩ := leRho hl hX
   obtain ⟨h1D, hT1⟩ := Xi.xiSmall hl hX (gg_one_lt_of_SC hρSC).le (fun a b => CSet.one_mem a b)
-  exact ⟨h1D, hT1, fun a c _ _ => CSet.one_mem a c,
-    fun a c _ _ => by rw [mul_one]; exact CSet.Om_mem (CSet.one_mem _ _), GxCl.zero hρSC.1⟩
+  exact ⟨h1D, hT1, fun a c _ _ => CSet.one_mem a c, fun a c _ _ => CSet.one_mem a c, GxCl.zero hρSC.1,
+    (ConjT.SC_th S).1⟩
 
 /-- **`Ω_{k+3} + Ω₂·Ω₂` is a shift**, `T(Ω_{k+3} + W²) = Ω_{k+2} + Ω^2`, threshold `0`. -/
 theorem zxSh2 (k : ℕ) :

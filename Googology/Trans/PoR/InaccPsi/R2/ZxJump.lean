@@ -35,14 +35,19 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.I
 
 variable {S : InaccSeq.{0}}
 
-/-- **The exponent data**: `h ∈ D`, `T h = H`, `h ∈ Cl(a, c)` once `Ω₁ ≤ c`, `q_h < c`, `Ω₁·H ∈ Cl(a, c)` once
-`ρ_λ ≤ c`, `Θ q_h < c`, `q_h` a code. -/
+/-- **The exponent data**: `h ∈ D`, `T h = H`, `h ∈ Cl(a, c)` once `Ω₁ ≤ c`, `q_h < c`, `H ∈ Cl(a, c)` once
+`ρ_λ ≤ c`, `Θ q_h < c`, `q_h` a code below `θ`. -/
 structure ZxEx (S : InaccSeq.{0}) (l h H qh : Ordinal.{0}) : Prop where
   D : VbD S l h
   T : vbT S l h = H
   mem : ∀ a c : Ordinal.{0}, Om 1 ≤ c → qh < c → h ∈ S.CSet a c
-  Hm1 : ∀ a c : Ordinal.{0}, upsilon l ≤ c → gxTh (upsilon l) (ldAtR S l) qh < c → Om 1 * H ∈ S.CSet a c
+  Hm : ∀ a c : Ordinal.{0}, upsilon l ≤ c → gxTh (upsilon l) (ldAtR S l) qh < c → H ∈ S.CSet a c
   qc : GxCl (upsilon l) (ldAtR S l) qh
+  qθ : qh < ConjT.th S
+
+theorem ZxEx.Hm1 {l h H qh : Ordinal.{0}} (hx : ZxEx S l h H qh) (a c : Ordinal.{0}) (hc : upsilon l ≤ c)
+    (hq : gxTh (upsilon l) (ldAtR S l) qh < c) : Om 1 * H ∈ S.CSet a c :=
+  ldMulK_mem Ph.ph_SC_Om1 (CSet.Om_mem (CSet.one_mem _ _)) (hx.Hm a c hc hq)
 
 /-- The iterates `u_0 = 0`, `u_{m+1} = ψ₂(β + W^{X + W^h·u_m})`. -/
 noncomputable def zxU (S : InaccSeq.{0}) (β X h : Ordinal.{0}) : ℕ → Ordinal.{0}
