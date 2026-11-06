@@ -1712,10 +1712,12 @@ those of Xi.XiTopUp / Zd.zdChain / Zi.ziChain / Zv.zvChain / Zw.zwChain (`b = β
 `Zd.ZdShQ`, on the bases with `Zw.ZwQ` (every code `ξ' ≤ ξ` below `ψ₂(β + W^{Ω_{k+3}+Ω₂·ξ'})`); round 142: THE
 JUMP `X → X + W^{h+1}` for every shift `X` and exponent `h ∈ D` (`Zx.zxLawJ`, plateau of the two-level tower
 `Tβ + ω^{Ω₁·TX + ω^{Ω₁+Ω₁·Th}·x}`, `Zx.zxPlat_tower`), and its first instance `E = Ω_{k+3} + Ω₂·Ω₂ + e`
-(`Zx.zxLaw2All`); left: (i) `ZwQ` from the normality of `b`, (ii) the induction over the shifts `X + W^h·u` (the
-coefficient chain over any shift, the limit exponents `h` — continuity of `T`, or deeper towers when `T` jumps at
-`h` — and the `W`-fixed exponents `E ≥ Ω₃·2`, `ψ_{k+4}`-terms), and the limit sub-bases `β + W^E·γ` at those
-exponents (continuity, as Yt.ytSubLaw). -/
+(`Zx.zxLaw2All`); round 143: THE COEFFICIENT CHAIN `X₀ + W^h·ζ` over any shift `X₀` with the successor step as a
+hypothesis (`Zy.zyChain`), and every finite power `W^n` over any shift (`Zy.zyChainN`, induction on `n` with
+`Zx.zxLawJ`), so every `E = Ω_{k+3} + W^n·ζ + e` (`Zy.zyTopN`) and, by nesting, every `E < Ω_{k+3} + W^ω`; left:
+(i) the base conditions `Zy.ZyQ` from the normality of `b`, (ii) the infinite exponents `h ≥ ω` of `W^h` (continuity
+of `T` at a limit `h`, or deeper towers when `T` jumps at `h`, e.g. `h = Ω₂`) and the `W`-fixed exponents
+(`E ≥ Ω₃·2`, `ψ_{k+4}`-terms), and the limit sub-bases `β + W^E·γ` (continuity, as Yt.ytSubLaw). -/
 theorem skTopLawAll (S : InaccSeq.{0}) : Zp.ZpTopLawAll S := by
   sorry
 
