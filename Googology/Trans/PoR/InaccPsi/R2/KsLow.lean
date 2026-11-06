@@ -10,7 +10,8 @@ import Googology.Trans.PoR.InaccPsi.R2.KrPoly
 
 * `ksLow` (**THE TOP LAW FROM ONE CLOSURE CONDITION**): if every `ξ ∈ HCl(α_b, Z_b)` below `ψ₂(T b)` lies below
   `ψ₂(T a)` for some `a ∈ D` with `ψ₂ a < ψ₂ b` and the law at `a`, then the law holds at `b`.  No iteration and no
-  context: the plateau of the jumps and the continuity of the limits both become instances of this condition.
+  context: the plateau of the jumps and the continuity of the limits both become instances of this condition;
+* `ksCont` (**THE TOP LAW BY CONTINUITY**: `T b` a limit, the images `T a` of laws below cofinal in `T b`).
 
 No new axiom.  No new definition.
 -/
@@ -92,8 +93,27 @@ theorem ksLow {b : Ordinal.{0}} (hbD : VbD S l b)
       _ = gxTh (upsilon l) (ldAtR S l) (S.psi a (Om (1 + 1))) := hlaw.symm
       _ < Z := gxTh_lt (GxCl.atom (ksAt hl hX hA hρ haD)) hab
 
+/-- **THE TOP LAW BY CONTINUITY**: if `T b` is a limit and every `z < T b` lies below `T a` for some `a ∈ D` with
+`ψ₂ a < ψ₂ b` and the law at `a`, the law holds at `b` (`ψ₂` is continuous at the limit `T b`, `Lw.lw_psi_limit`). -/
+theorem ksCont {b : Ordinal.{0}} (hbD : VbD S l b) (hlim : IsSuccLimit (vbT S l b))
+    (hcof : ∀ z, z < vbT S l b → ∃ a, VbD S l a ∧ S.psi a (Om (1 + 1)) < S.psi b (Om (1 + 1)) ∧
+      z ≤ vbT S l a ∧ gxTh (upsilon l) (ldAtR S l) (S.psi a (Om (1 + 1))) =
+        S.psi (A + 1 + S.psi (vbT S l a) (Om (1 + 1))) (Om 1)) :
+    gxTh (upsilon l) (ldAtR S l) (S.psi b (Om (1 + 1))) =
+      S.psi (A + 1 + S.psi (vbT S l b) (Om (1 + 1))) (Om 1) := by
+  have hκ2 : S.InR (Om (1 + 1 : Ordinal.{0})) := InR_Om_succ 1
+  refine ksLow hl hX hA hρ hbD fun ξ _ hξ => ?_
+  rw [Lw.lw_psi_limit S hκ2 hlim] at hξ
+  have hbdd : BddAbove (range fun z : Iio (vbT S l b) => S.psi z.1 (Om (1 + 1))) :=
+    ⟨Om (1 + 1), by rintro _ ⟨z, rfl⟩; exact (psi_lt hκ2 _).le⟩
+  haveI : Nonempty (Iio (vbT S l b)) := ⟨⟨0, hlim.bot_lt⟩⟩
+  obtain ⟨z, hz⟩ := (lt_ciSup_iff hbdd).1 hξ
+  obtain ⟨a, haD, hab, hza, hlaw⟩ := hcof z.1 z.2
+  exact ⟨a, haD, hab, hz.le.trans (psi_mono hκ2 hza).1, hlaw⟩
+
 end Main
 
 end Googology.Trans.PoR.InaccPsi.R2.Ks
 
 #print axioms Googology.Trans.PoR.InaccPsi.R2.Ks.ksLow
+#print axioms Googology.Trans.PoR.InaccPsi.R2.Ks.ksCont
