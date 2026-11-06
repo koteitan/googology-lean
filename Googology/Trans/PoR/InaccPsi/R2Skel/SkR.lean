@@ -1738,8 +1738,9 @@ continuity of `ψ₂` at every limit) and the closure facts and the gap of tower
 target `Y` (`Kt.ktOwnY`); rounds 166-169: the gaps toward a target through `φ(·, φ(α, d) + 1)` (`Ku.kuG_phiLS`),
 the reduction of the closure condition to the `ψ₂`-atoms (`Ku.kuDom`), THE JUMP AT ANY CONTEXT (`Ku.kuJump`), and
 THE TOP LAW AT EVERY SUCCESSOR EXPONENT `β + W^{E'+1}·(γ' + 1)` FROM THE LAW BELOW, any `E' ≥ Ω₃` of `D`
-(`Ku.kuSuccE`: the approximants are normal from an iterate of the plateau on, `Kg.kgKey`); left (the first use
-`E ∈ Cl(β + W^E, ψ₂(β + W^E))` for the small parameters, the normality of the approximants of a normal `b` through `φ(·, q + 1)` and
+(`Ku.kuSuccE`: the approximants are normal from an iterate of the plateau on, `Kg.kgKey`); round 170: THE FIRST USE
+`E ∈ Cl(β + W^E, ψ₂(β + W^E))` of a normal `β + W^E·γ`, any `E`, by the nesting depth of the collapses (`Kw.kwFU`), so every
+truncation `β + W^E·c` with `c < ψ₂(β + W^E·c)` is normal (`Kw.kwTrunc`); left (the normality of the approximants of a normal `b` through `φ(·, q + 1)` and
 `ψ_{k+3}`-nodes, the fundamental sequences of `D`): the exponents with `φ`-terms
 (`ψ₃(0) = Γ_{Ω₂+1}`), `ψ_{k+3}`-atoms and `Ω_{k+3}`-cofinal parts (`Ω₃·2`, …); earlier notes: (ii) the exponents `h > Ω₂` of `W^h` (round 146: the first one, `h = Ω₂`, is the
 jump `Kd.kdLaw` with the context `v ↦ X + W^v` and a three-level tower; round 147: the contexts of any depth
