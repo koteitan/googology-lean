@@ -2393,3 +2393,4 @@ import Googology.Trans.PoR.InaccPsi.R2.VaCuS
 import Googology.Trans.PoR.InaccPsi.R2.VaAtS
 import Googology.Trans.PoR.InaccPsi.R2.VaFixS
 import Googology.Trans.PoR.InaccPsi.R2.VaAll
+import Googology.Trans.PoR.InaccPsi.R2.VaLay
