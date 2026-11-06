@@ -46,6 +46,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZrRead
 import Googology.Trans.PoR.InaccPsi.R2.ZsCap
 import Googology.Trans.PoR.InaccPsi.R2.ZtIso
 import Googology.Trans.PoR.InaccPsi.R2.ZuRef
+import Googology.Trans.PoR.InaccPsi.R2.QcPast
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -2383,16 +2384,34 @@ theorem skLayPastX_false (S : InaccSeq.{0}) :
     ¬ (∀ c, Tl.tlX ≤ c → c < Om (1 + 1) → Zm.ZmPastAt S c) :=
   Zu.zuLayPastX_false S
 
-/-- STATUS: OPEN (round 138: the part of the refuted skLayPastX below `θ`; round 133, new node; REFUTE FIRST: NO
-EVIDENCE — the shape is satisfiable below X: Zm.ZmLayA Zb.zbU S B holds for every B_Γ ≤ B < ε_{B_Γ+ε₀},
-skZmDirectE0; the bound `V ≤ θ` of every atom system, `Zu.zuV_le_th`, is no obstacle below `θ`: `Γ_θ = θ`
-(`Zu.zuGamma_th`), so `Γ(c+1) < θ` for every `c < θ` (`Zu.zuGcG_lt_th`))
+/-- STATUS: PROVED (round 219, Qc.qc_past: the atom system `Qc.qcU` of the codes below `B₂`, a layer at every fixed
+point of `Γ` below `B₂` (`Qc.qs_layAt`), cofinal fixed points `H_{γ_n}(0)` with small gates (`Qc.qcF_cof`))
+SIZE: L
+THE LAYERS `X ≤ c < B₂` (`B₂ = Uc.ucB = ψ_{Ω₂}(ε_{Ω₂+1})`): `Zm.ZmPastAt S c`. -/
+theorem skLayPastXB2 (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < Uc.ucB → Zm.ZmPastAt S c :=
+  fun c _ hc => Qc.qc_past S c hc
+
+/-- STATUS: OPEN (round 219: the part of skLayPastXθ from `B₂` on; round 138: skLayPastXθ, the part of the refuted
+skLayPastX below `θ`; REFUTE FIRST: NO EVIDENCE — below `B₂` it is a theorem, skLayPastXB2; the bound `V ≤ θ` of
+every atom system, `Zu.zuV_le_th`, is no obstacle below `θ`: `Γ_θ = θ` (`Zu.zuGamma_th`), so `Γ(c+1) < θ` for every
+`c < θ` (`Zu.zuGcG_lt_th`))
+SIZE: L
+THE LAYERS `B₂ ≤ c < θ` FROM ONE ATOM SYSTEM (`Zm.ZmPastAt S c`).  Needs an atom system past `B₂` (codes below `θ`
+with the atoms `Hˡ_λ(y)` of `Vd.vd_nf_ex`, levels `λ < Ω₃`; readings of the fixed points of `Γ` with a level reading of
+`λ`, the citations of `R2.CitedVd`; the fields `mem`/`hull` of `Zb.ZbAS` for every `S`). -/
+theorem skLayPastB2θ (S : InaccSeq.{0}) : ∀ c, Uc.ucB ≤ c → c < ConjT.th S → Zm.ZmPastAt S c := by
+  sorry
+
+/-- STATUS: REDUCED (round 219: skLayPastXB2 PROVED below `B₂`, skLayPastB2θ OPEN from `B₂` on; round 138: the part
+of the refuted skLayPastX below `θ`)
 SIZE: L
 THE LAYERS `X ≤ c < θ` FROM ONE ATOM SYSTEM: for every such layer an abstract atom system A : Zb.ZbAS with a layer
-(gate below K, top code read with the atoms of A, terms below it) for every atom index B < Γ(c+1) (Zm.ZmPastAt S c).
-Needs an atom system past X (atoms ψ_{Ω₂}(e), e ≥ Ω₂^{Ω₂}; hull lemma below θ, Uf.uf_key / Vd.vd_nf_ex). -/
+(gate below K, top code read with the atoms of A, terms below it) for every atom index B < Γ(c+1) (Zm.ZmPastAt S c). -/
 theorem skLayPastXθ (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < ConjT.th S → Zm.ZmPastAt S c := by
-  sorry
+  intro c hX hθ
+  rcases lt_or_ge c Uc.ucB with hB | hB
+  · exact skLayPastXB2 S c hX hB
+  · exact skLayPastB2θ S c hB hθ
 
 /-- STATUS: OPEN (round 138, new leaf: the part of the refuted skLayPastX from `θ` on, as UPPER ∧ LOWER ∧ CapV)
 SIZE: L
