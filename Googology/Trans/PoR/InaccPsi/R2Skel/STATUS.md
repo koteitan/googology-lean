@@ -1,4 +1,4 @@
-# R₂^C skeleton: status (round 176)
+# R₂^C skeleton: status (round 178)
 Root `R2Skel.Root.skNuC (S : InaccSeq)` = the conclusion of `Xo.xoRoadH` (ν_C = L(ω+1), …). Round 129: the root applies
 `Yq.yqRoadS` = `Xo.xoRoadH` with the bridge replaced by the shift `SkS.skShiftXo`; supply `SkS.skSupXo` (repaired `Xo.XoR`);
 frontier `SkF.skFront` → hUH/hLH/hVH/hVt; reading `SkR.skWall`, `SkR.skThHi` → `SkE.skEQ` → hT/hF. Round 130: Root unchanged.
@@ -97,4 +97,4 @@ sorry 57 → 60, OPEN 28 (27 L, 1 S) → 27 (all L), SUSPECT 3 → 2, REFUTED 7 
 ## Suggested order of the next rounds
 1. Supply: skLevImgHi4 (nested ϑ-nodes: `Zf.zfDCl` by recursion on term size), skZlCfg (past the φ-ladder; EQ; υ-fixed carry).
 2. Region B, (C): skZbDirectX (level-generic `Zm.ZmGood2`), skLayPastXθ, skLayPastTh; skFix{Cont, CapVF}, skWin/Top{Big, InR}, skTopLwNo2; skBCBaseUL (big reading: Lemma RS with values past υ_{l₀+1}), skBC{InR, CapVH, RsSH}.
-3. Reading: skAtHi3 (a level system over Ω_ω past Y₃; the offset law Ky.kyOff and the base construction Ky.kyBase may carry over to the base Ω_ω).
+3. Reading: skAtHi3 (a level system over Ω_ω past Y₃). Rounds 177–178 (Kz): the image T_K below the bound K = Γ_{Ω_ω+1} (Kz.kzB_KW), its laws, the upper bound Kz.kzUp_at and the lower half Kz.kzLow; next the offset law, top law and moves on D_K.
