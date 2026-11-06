@@ -2334,3 +2334,4 @@ import Googology.Trans.PoR.InaccPsi.R2.KbJump
 import Googology.Trans.PoR.InaccPsi.R2.KcChain
 import Googology.Trans.PoR.InaccPsi.R2.KdOm2
 import Googology.Trans.PoR.InaccPsi.R2.KeCtx
+import Googology.Trans.PoR.InaccPsi.R2.KfDec
