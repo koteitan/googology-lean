@@ -110,16 +110,20 @@ noncomputable def zbU : ZbAS where
     · obtain ⟨Z', h1, h2⟩ := zbTl.supp Z s hZ hs
       exact ⟨Z', h1, Or.inl h2⟩
     · exact ⟨yrG c + 1, hZ.isPrincipal hg (gg_one_lt_of_SC hZ), Or.inr ⟨c, hc, lt_add_one _, rfl⟩⟩
-  mem := fun S a b Z s ha hb hb1 hZb hs => by
+
+theorem zbU_ok (S : InaccSeq.{0}) : zbU.Ok S where
+  mem := fun a b Z s ha hb hb1 hZb hZN hs => by
     rcases hs with hs | ⟨c, hc, hg, rfl⟩
-    · exact zbTl.mem S a b Z s ha hb hb1 hZb hs
+    · exact (zbTl_ok S).mem a b Z s ha hb hb1 hZb hZN hs
     · have hca : c < a := (hc.trans tfBG_lt_Om2).trans (Ph.ph_Om2_lt_Omw.trans_le ha)
       have hcC := (yr_mem (S := S) c hc hca (hg.trans_le hZb)).1
       have hpsi : gcG c = S.psi c (Om (1 + 1)) := by rw [tf_psi S c hc.le, tf_gcG]
       rw [hpsi]
       exact CSet.psi_mem hca (InR_Om_succ 1) (Ga.ga_Om2_mem _ _) hcC
-  hull := fun S a Z hZ hZ1 hkey x hx hxV =>
-    (zbTl.hull S a Z hZ hZ1 hkey x hx hxV).mono le_rfl fun _ hs => Or.inl hs
+  hull := fun a Z hZ hZ1 hkey x hx hxV =>
+    ((zbTl_ok S).hull a Z hZ hZ1 hkey x hx hxV).mono le_rfl fun _ hs => Or.inl hs
+
+instance (S : InaccSeq.{0}) : Fact (zbU.Ok S) := ⟨zbU_ok S⟩
 
 theorem zbU_V : zbU.V = tlX := rfl
 

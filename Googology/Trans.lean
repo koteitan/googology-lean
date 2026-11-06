@@ -2439,3 +2439,11 @@ import Googology.Trans.PoR.InaccPsi.R2.QcFxE
 import Googology.Trans.PoR.InaccPsi.R2.QcAll
 import Googology.Trans.PoR.InaccPsi.R2.QcLay
 import Googology.Trans.PoR.InaccPsi.R2.QcPast
+import Googology.Trans.PoR.InaccPsi.R2.QdLv
+import Googology.Trans.PoR.InaccPsi.R2.QdLvM
+import Googology.Trans.PoR.InaccPsi.R2.QdLvH
+import Googology.Trans.PoR.InaccPsi.R2.QdCof
+import Googology.Trans.PoR.InaccPsi.R2.QdPi
+import Googology.Trans.PoR.InaccPsi.R2.QdK
+import Googology.Trans.PoR.InaccPsi.R2.QdDat
+import Googology.Trans.PoR.InaccPsi.R2.QtAt

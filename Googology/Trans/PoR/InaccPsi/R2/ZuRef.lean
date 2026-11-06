@@ -61,7 +61,7 @@ theorem zuSC_atom {Z : Ordinal.{0}} {At : Set Ordinal.{0}} (hZ1 : Z ≤ Om 1) {x
 variable (S : InaccSeq.{0})
 
 /-- **Every abstract atom system stops at `θ`: `A.V ≤ θ`.** -/
-theorem zuV_le_th (A : ZbAS) : A.V ≤ ConjT.th S := by
+theorem zuV_le_th (A : ZbAS) (hA : A.Ok S) : A.V ≤ ConjT.th S := by
   by_contra hlt
   rw [not_le] at hlt
   have hκ1 : S.InR (Om 1) := Low.InR_Om_one
@@ -72,10 +72,13 @@ theorem zuV_le_th (A : ZbAS) : A.V ≤ ConjT.th S := by
     fun y hy hy1 => lt_psi_of_mem hκ1 hy hy1
   have hθmem : ConjT.th S ∈ S.CSet (Om ω + 1) (S.psi (Om ω + 1) (Om 1)) :=
     ConjT.th_mem (S := S) (lt_add_one _)
-  have hcl := A.hull S (Om ω + 1) _ hZSC hZ1 hkey _ hθmem hlt
+  have hcl := hA.hull (Om ω + 1) _ hZSC hZ1 hkey _ hθmem hlt
   have hθ1 : Om 1 < ConjT.th S := Zr.zrTh_gt_Om1
   have hat := zuSC_atom hZ1 hcl (ConjT.SC_th S) hθ1
-  have hm := A.mem S (Om ω) _ _ _ le_rfl hZSC hZ1 le_rfl hat
+  have hZN : ∀ z < S.psi (Om ω + 1) (Om 1), z ∈ ⋃ e, S.CSet e 0 := fun z hz => by
+    have h := Low.lt_psi_one_mem_Vals (S := S) _ z hz
+    rw [← Term.vals_eq S]; exact h
+  have hm := hA.mem (Om ω) _ _ _ le_rfl hZSC hZ1 le_rfl hZN hat
   have hm2 : ConjT.th S ∈ S.CSet (Om ω) (S.psi (Om ω) (Om (1 + 1))) :=
     CSet_mono le_rfl (hZ1.trans hθ1.le) hm
   have h := lt_psi_of_mem hκ2 hm2 (psi_lt hκ2 _)
@@ -83,12 +86,12 @@ theorem zuV_le_th (A : ZbAS) : A.V ≤ ConjT.th S := by
 
 /-- **`Zm.ZmPastAt S θ` is false.** -/
 theorem zuPastAt_false : ¬ Zm.ZmPastAt S (ConjT.th S) := by
-  rintro ⟨A, hA⟩
+  rintro ⟨A, hok, hA⟩
   have hθG : ConjT.th S < gcG (ConjT.th S + 1) :=
     gcG_strictMono.le_apply.trans_lt (gcG_strictMono (lt_add_one _))
   have hB : ConjT.th S + 1 < gcG (ConjT.th S + 1) := (gcG_SC _).isSuccLimit.add_one_lt hθG
   obtain ⟨L, T, hBT, -, hTV, -⟩ := hA _ hB
-  have hle : gcG (ConjT.th S + 1) ≤ ConjT.th S := hBT.trans (hTV.trans (zuV_le_th S A))
+  have hle : gcG (ConjT.th S + 1) ≤ ConjT.th S := hBT.trans (hTV.trans (zuV_le_th S A hok))
   have h2 : gcG (ConjT.th S + 1) ≤ ConjT.th S := hle
   exact absurd h2 (not_le.2 (((lt_add_one _).trans hB)))
 

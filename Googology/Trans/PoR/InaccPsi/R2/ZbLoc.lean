@@ -53,7 +53,7 @@ theorem zbL_top (L : GdB) {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hgx : 
 
 section Code
 
-variable (A : ZbAS) (L : GdB) (S : InaccSeq.{0}) (hg : L.g < Td.tdK S)
+variable (A : ZbAS) (L : GdB) (S : InaccSeq.{0}) [Fact (A.Ok S)] (hg : L.g < Td.tdK S)
 variable (T : Ordinal.{0}) (hT : T ≤ A.V)
   (htop : ∀ y, SC y → y < Om 1 → L.g < y → L.K.E y = gxTh y (A.At y) T)
   (hP : ZbPolyG A L.K.sys T) (hcl : ∀ Z, SC Z → Td.tdK S ≤ Z → GxCl Z (A.At Z) T)
@@ -68,6 +68,7 @@ theorem zbX_top {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hgx : L.g < x) :
 include hg in
 theorem zbX_pkg : XtTopPkg (zbX L S hg) := XtLay.topPkg (zbLX L S hg)
 
+omit [Fact (A.Ok S)] in
 include hP in
 theorem zbX_poly : ZbPoly A (zbX L S hg) T L.g := by
   intro Z d hd hdE
@@ -77,6 +78,7 @@ theorem zbX_poly : ZbPoly A (zbX L S hg) T L.g := by
   obtain ⟨h1, h2⟩ := hs y hy hy1 (max_le hZy (Order.add_one_le_of_lt hgy))
   exact ⟨⟨hgy, h1⟩, h2⟩
 
+omit [Fact (A.Ok S)] in
 include htop in
 theorem zbX_topth : ∀ y, SC y → y < Om 1 → Td.tdK S ≤ y →
     (zbX L S hg).top y = gxTh y (A.At y) T := by

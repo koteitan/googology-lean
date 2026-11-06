@@ -11,11 +11,11 @@ below every strongly critical `Z`.  `ZbAS` asks exactly these facts, so the atom
 ordinals `> Ω₁` (`B_Γ` and the values of every `F_β` included, `Zb.ZbTl`).  The proofs are those of `Gs.GsmUni`
 with `K.At` replaced by `A.At`; every `GsCS` is an instance (`ZbAS.ofGs`).
 
-* `ZbAS`, `ZbAS.ofGs`; `cl_lt_V`, `cl_mem_CSet`, `support`;
+* `ZbAS`, `ZbAS.Ok` (the hull facts at `S`), `ZbAS.ofGs`, `zb_Pv_N`; `cl_lt_V`, `cl_mem_CSet`, `support`;
 * `hull_iff` (**at a named fixed point `F` the hull below `V` is the set of codes over `F`**), `theta_eq`, `code_eq`
   (`m_F = e(η_F)`), `expMem`, `cof` (**named fixed points with a prescribed last exponent are cofinal**).
 
-No new axiom.  New definitions: `ZbAS`, `ZbAS.ofGs`.
+No new axiom.  New definitions: `ZbAS`, `ZbAS.Ok`, `ZbAS.ofGs`.
 -/
 
 set_option autoImplicit false
@@ -29,8 +29,8 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Notation.InaccPsi.I
   Googology.Trans.PoR.InaccPsi.R2.Ga Googology.Trans.PoR.InaccPsi.R2.Gc Googology.Trans.PoR.InaccPsi.R2.Ph
 
 /-- **An abstract atom system**: atom sets `At Z` (strongly critical, above `Ω₁`, monotone in `Z`, with support below
-every strongly critical `Z`), a strongly critical bound `V < Ω₂` above every atom, hull membership of the atoms in
-every `Cl(a, b)` with `Ω_ω ≤ a`, `Z ≤ b ≤ Ω₁` (`b` strongly critical), and THE HULL LEMMA below `V`. -/
+every strongly critical `Z`) and a strongly critical bound `V < Ω₂` above every atom; the hull facts at `S` are
+`ZbAS.Ok`. -/
 structure ZbAS where
   At : Ordinal.{0} → Set Ordinal.{0}
   V : Ordinal.{0}
@@ -41,10 +41,15 @@ structure ZbAS where
   mono : ∀ Z Z', Z ≤ Z' → At Z ⊆ At Z'
   lt_V : ∀ Z s, s ∈ At Z → s < V
   supp : ∀ Z s, SC Z → s ∈ At Z → ∃ Z', Z' < Z ∧ s ∈ At Z'
-  mem : ∀ (S : InaccSeq.{0}) (a b Z s : Ordinal.{0}), Om ω ≤ a → SC b → b ≤ Om 1 → Z ≤ b → s ∈ At Z →
-    s ∈ S.CSet a b
-  hull : ∀ (S : InaccSeq.{0}) (a Z : Ordinal.{0}), SC Z → Z ≤ Om 1 → (∀ y ∈ S.CSet a Z, y < Om 1 → y < Z) →
-    ∀ x ∈ S.CSet a Z, x < V → GxCl Z (At Z) x
+
+/-- **The hull facts of an atom system at `S`**: hull membership of the atoms over `Z` in every `Cl(a, b)` with
+`Ω_ω ≤ a`, `Z ≤ b ≤ Ω₁` (`b` strongly critical) when every ordinal below `Z` is of the notation, and THE HULL LEMMA
+below `V`.  Separate from `ZbAS`, so that the atoms may depend on `S`. -/
+structure ZbAS.Ok (A : ZbAS) (S : InaccSeq.{0}) : Prop where
+  mem : ∀ (a b Z s : Ordinal.{0}), Om ω ≤ a → SC b → b ≤ Om 1 → Z ≤ b → (∀ z < Z, z ∈ ⋃ e, S.CSet e 0) →
+    s ∈ A.At Z → s ∈ S.CSet a b
+  hull : ∀ (a Z : Ordinal.{0}), SC Z → Z ≤ Om 1 → (∀ y ∈ S.CSet a Z, y < Om 1 → y < Z) →
+    ∀ x ∈ S.CSet a Z, x < A.V → GxCl Z (A.At Z) x
 
 /-- **Every code system `Gs.GsCS` is an atom system.** -/
 noncomputable def ZbAS.ofGs (K : GsCS) (S0 : InaccSeq.{0}) : ZbAS where
@@ -59,9 +64,19 @@ noncomputable def ZbAS.ofGs (K : GsCS) (S0 : InaccSeq.{0}) : ZbAS where
   supp := fun Z s hZ hs => by
     obtain ⟨c, hc, hg, rfl⟩ := hs
     exact ⟨K.gt c + 1, hZ.isPrincipal hg (gg_one_lt_of_SC hZ), gsmG_atom hc (lt_add_one _)⟩
-  mem := fun S a b Z s ha _ _ hZb hs =>
+
+theorem ZbAS.ofGs_ok (K : GsCS) (S0 S : InaccSeq.{0}) : (ZbAS.ofGs K S0).Ok S where
+  mem := fun _ _ _ _ ha _ _ hZb _ hs =>
     gsmAt_mem (S := S) ((gsm_B_lt_V K).trans ((gsmV_lt_Om2 K S).trans (ph_Om2_lt_Omw.trans_le ha))) hZb hs
-  hull := fun S a Z hZ hZ1 hkey x hx hxV => gsmCl_of_CSet (S := S) hZ.1 hZ1 hkey x hx hxV
+  hull := fun _ _ hZ hZ1 hkey x hx hxV => gsmCl_of_CSet (S := S) hZ.1 hZ1 hkey x hx hxV
+
+instance (K : GsCS) (S0 S : InaccSeq.{0}) : Fact ((ZbAS.ofGs K S0).Ok S) := ⟨ZbAS.ofGs_ok K S0 S⟩
+
+/-- **Every ordinal below `P(η) = ψ_{Ω₁}(Ω_ω + θ·η)` is of the notation.** -/
+theorem zb_Pv_N {S : InaccSeq.{0}} (η : Ordinal.{0}) {z : Ordinal.{0}} (hz : z < Pv S η) :
+    z ∈ ⋃ e, S.CSet e 0 := by
+  have h := Low.lt_psi_one_mem_Vals (S := S) _ z hz
+  rw [← Term.vals_eq S]; exact h
 
 namespace ZbAS
 
@@ -80,13 +95,13 @@ theorem cl_lt_V {Z c : Ordinal.{0}} (hZ : Z ≤ Om 1) (hc : GxCl Z (A.At Z) c) :
   | phi _ _ ihx ihy => exact A.V_SC.2 _ ihx _ ihy
 
 /-- **A code over `Z` lies in every hull `Cl(a, b)` with `Ω_ω ≤ a` and `Z ≤ b`.** -/
-theorem cl_mem_CSet {Z a b : Ordinal.{0}} (ha : Om ω ≤ a) (hb : SC b) (hb1 : b ≤ Om 1) (hZb : Z ≤ b)
-    {x : Ordinal.{0}}
+theorem cl_mem_CSet [hA : Fact (A.Ok S)] {Z a b : Ordinal.{0}} (ha : Om ω ≤ a) (hb : SC b) (hb1 : b ≤ Om 1)
+    (hZb : Z ≤ b) (hbN : ∀ z < b, z ∈ ⋃ e, S.CSet e 0) {x : Ordinal.{0}}
     (hx : GxCl Z (A.At Z) x) : x ∈ S.CSet a b := by
   induction hx with
   | small h => exact CSet.of_lt (lt_of_lt_of_le h hZb)
   | om => exact CSet.Om_mem (CSet.one_mem _ _)
-  | atom hs => exact A.mem S a b Z _ ha hb hb1 hZb hs
+  | atom hs => exact hA.out.mem a b Z _ ha hb hb1 hZb (fun z hz => hbN z (hz.trans_le hZb)) hs
   | add _ _ ihx ihy => exact CSet.add_mem ihx ihy
   | phi _ _ ihx ihy => exact CSet.phi_mem ihx ihy
 
@@ -114,19 +129,19 @@ theorem Omw_le_A (η : Ordinal.{0}) : Om ω ≤ ConjT.Aη S η := le_self_add
 theorem Omw_le_A1 (η : Ordinal.{0}) : Om ω ≤ ConjT.Aη S η + 1 := (Omw_le_A (S := S) η).trans le_self_add
 
 /-- **At a named fixed point the hull below `V` is the set of codes over `F`.** -/
-theorem hull_iff {F ηx x : Ordinal.{0}} (hF : IsRestartIdx F) (hfix : upsilon F = F)
+theorem hull_iff [hA : Fact (A.Ok S)] {F ηx x : Ordinal.{0}} (hF : IsRestartIdx F) (hfix : upsilon F = F)
     (hX : upsilon F < Pv S ηx) (hx : x < A.V) : x ∈ cdHull S F ↔ GxCl F (A.At F) x := by
   have hSC : SC (upsilon F) := by rw [hfix]; exact ggSC_fix hF hfix hX
   have hF1 : upsilon F ≤ Om 1 := by rw [hfix]; exact (Fx.fx_fix_lt_Om1 hfix hX).le
   constructor
   · intro h
-    have := A.hull S _ (upsilon F) hSC hF1 (ggKey hF hX) x h hx
+    have := hA.out.hull _ (upsilon F) hSC hF1 (ggKey hF hX) x h hx
     rwa [hfix] at this
   · intro h
-    exact A.cl_mem_CSet (Omw_le_A (S := S) _) hSC hF1 (by rw [hfix]) h
+    exact A.cl_mem_CSet (Omw_le_A (S := S) _) hSC hF1 (by rw [hfix]) (fun z hz => zb_Pv_N ηx (hz.trans hX)) h
 
 /-- **`Θ_F(m) = Θ^b_F(m)`** (reading with the atoms over `F`) for `m ≤ V` at a named fixed point. -/
-theorem theta_eq {F ηx m : Ordinal.{0}} (hF : IsRestartIdx F) (hfix : upsilon F = F)
+theorem theta_eq [Fact (A.Ok S)] {F ηx m : Ordinal.{0}} (hF : IsRestartIdx F) (hfix : upsilon F = F)
     (hX : upsilon F < Pv S ηx) (hm : m ≤ A.V) : cdTheta S F m = gxTh F (A.At F) m :=
   ggOtp_congr m fun _ hx => A.hull_iff hF hfix hX (hx.trans_le hm)
 
@@ -140,7 +155,7 @@ theorem code_eq {F ηx : Ordinal.{0}} (hF : IsRestartIdx F) (hfix : upsilon F = 
   rw [cdCodeOf_of_lt (he.trans_lt A.V_lt), cpOff_of_ge hω]
 
 /-- **The last exponent of the name of a named fixed point is a code over it** (when below `V`). -/
-theorem expMem {F ηx : Ordinal.{0}} (hF : IsRestartIdx F) (hfix : upsilon F = F)
+theorem expMem [Fact (A.Ok S)] {F ηx : Ordinal.{0}} (hF : IsRestartIdx F) (hfix : upsilon F = F)
     (hX : upsilon F < Pv S ηx) (he : cdExp (cdEta S F) < A.V) : GxCl F (A.At F) (cdExp (cdEta S F)) := by
   obtain ⟨hg, -, -, hpv⟩ := cdEta_pv_spec (S := S) hF.1 hX
   have hH := ggExp_HCl (Nn.nnGood_HCl hg)
@@ -149,7 +164,7 @@ theorem expMem {F ηx : Ordinal.{0}} (hF : IsRestartIdx F) (hfix : upsilon F = F
   exact (A.hull_iff hF hfix hX he).1 hmem
 
 /-- **Named fixed points with a prescribed last exponent `c ≥ Ω₁` (a code over `Z`) are cofinal below `F`.** -/
-theorem cof {F ηx c Z ν : Ordinal.{0}} (hF : IsRestartIdx F) (hfix : upsilon F = F)
+theorem cof [Fact (A.Ok S)] {F ηx c Z ν : Ordinal.{0}} (hF : IsRestartIdx F) (hfix : upsilon F = F)
     (hX : upsilon F < Pv S ηx) (hc : GxCl Z (A.At Z) c) (hc1 : Om 1 ≤ c) (hce : c < cdExp (cdEta S F))
     (hZ : Z < F) (hν : ν < F) :
     ∃ μ, IsRestartIdx μ ∧ upsilon μ = μ ∧ ν < μ ∧ μ < F ∧ Z ≤ μ ∧ cdExp (cdEta S μ) = c := by
@@ -190,7 +205,7 @@ theorem cof {F ηx c Z ν : Ordinal.{0}} (hF : IsRestartIdx F) (hfix : upsilon F
   have hg' : Bt.Good S (η1 + ω ^ c) := by
     refine good_add hg1 ?_
     have hcC : c ∈ S.CSet (ConjT.Aη S (η1 + ω ^ c) + 1) (Pv S (η1 + ω ^ c)) :=
-      A.cl_mem_CSet (Omw_le_A1 (S := S) _) (Pv_SC S _) (Pv_lt_Om1 S _).le hZP hc
+      A.cl_mem_CSet (Omw_le_A1 (S := S) _) (Pv_SC S _) (Pv_lt_Om1 S _).le hZP (fun z hz => zb_Pv_N _ hz) hc
     have := CSet.phi_mem (CSet.zero_mem _ _) hcC
     rwa [veblen_zero_apply] at this
   have hc0 : c ≠ 0 := (lt_of_lt_of_le (zero_lt_one.trans one_lt_Om1) hc1).ne'
