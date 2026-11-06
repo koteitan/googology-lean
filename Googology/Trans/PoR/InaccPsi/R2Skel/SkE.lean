@@ -19,6 +19,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZeJump
 import Googology.Trans.PoR.InaccPsi.R2.ZeGap
 import Googology.Trans.PoR.InaccPsi.R2.ZjRw
 import Googology.Trans.PoR.InaccPsi.R2.ZqBd
+import Googology.Trans.PoR.InaccPsi.R2.KzBand
 
 /-!
 # Skeleton of part EQ: the hypotheses `(hν → WdThLow)` and `(hν → WdEQfar)` of `Wd.wdRoadL`
@@ -240,7 +241,7 @@ abbrev SkWall (S : InaccSeq.{0}) : Prop := Nc.ncL S (ω + 1) ≤ nuC → Wr.WrWa
 
 /-! ## Open leaves -/
 
-/-- STATUS: OPEN (NEW round 133)
+/-- STATUS: PROVED (round 182, Kz.kzAtHi3; OPEN since round 133)
 SIZE: L
 REFUTE: NO EVIDENCE (round 133: a move statement about hull atoms, so no no-go result applies (Vo.voNoGo, Vn.vnTop_Om3,
 Vq.vqNoTop_Om3, Xi.xiTopFam_false, Xd.xdX0Law_false, Yd.ydInvRef speak of reach forms, top laws at base 0 or the
@@ -248,8 +249,11 @@ inverse correspondence); Xs.xsRefK refutes only the candidate value ψ_{Ω₁}(A
 move; the first atom K_Y of the band moves (skY3Move); the parts below K_Y hold (skAtKY))
 ∀ window λ → λ', every atom K_Y < s < P′ of λ with the move of the codes below s:
 MvD s ∧ B_n s ∈ ldAtR λ' ∧ Θ_{λ'}(B_n s) = B_n Θ_λ(s)  (statement Zq.ZqAtHi3 S, K_Y = ψ_{Ω₂}(Ω_ω + Y₃),
-Y₃ = ψ_{Ω₃}(Ω₃), P′ = ψ_{Ω₂}(Ω_ω·2); ⇔ Zj.ZjAtK S P′ by Zq.zqAtHi3_iff).  Checkable after the merge of R2.Zq*. -/
-theorem skAtHi3 : Zq.ZqAtHi3 S := by sorry
+Y₃ = ψ_{Ω₃}(Ω₃), P′ = ψ_{Ω₂}(Ω_ω·2); ⇔ Zj.ZjAtK S P′ by Zq.zqAtHi3_iff).  Proof (rounds 177-182, Kz): the image T_K below the bound K = Γ_{Ω_ω+1} (Kz.kzB_KW), the top law Kz.kzTop and
+the offset law Kz.kzOff on D_K; a band atom s = ψ₂(d), d normal, Ω_ω + Y₃ < d < Ω_ω·2, lies above the base
+a = Ω₃·(d/Ω₃), which is a band base with the law at both ends (Kz.KzBase); Kz.kzMoveA moves s (Kz.kzBaseStep,
+Kz.kzBlkMove).  Checkable after the merge of R2.Kz*. -/
+theorem skAtHi3 : Zq.ZqAtHi3 S := Kz.kzAtHi3 S
 
 /-- STATUS: REDUCED (round 133, Zq.zqTopG3; was OPEN since round 132)
 SIZE: S
