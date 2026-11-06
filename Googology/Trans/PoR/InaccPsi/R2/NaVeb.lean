@@ -9,7 +9,8 @@ import Googology.Trans.PoR.InaccPsi.R2.NaGV
   φ(β, w₀ + t)` as long as no fixed point of `φ(β, ·)` lies in `[w₀, w₀ + t]`);
 * `na_rep` (**every `φ(β, y)` in Veblen normal form above `x`, `y ∈ Tˣ ∩ Ω₁`, is an atom `ϑˣ(Ω₁·β + t)`,
   `t ∈ Tˣ ∩ Ω₁`, `t ≤ y`**: above the largest fixed point `V = φ(β+1, c) ≤ y` above `x`, `β` by `Na.na_glA`,
-  otherwise by `na_glA_low`).
+  otherwise by `na_glA_low`);
+* `na_pi` (**Lemma EXACT for `φ(β, V + 1 + t)`, `V = φ(β+1, b)`**, from `Na.na_glA` at both bases and `Gl.glA_pi`).
 
 No new axiom.  No new definition.
 -/
@@ -19,7 +20,7 @@ set_option autoImplicit false
 namespace Googology.Trans.PoR.InaccPsi.R2.Na
 
 open Ordinal Order Set Googology.Trans.PoR.InaccPsi.R2 Googology.Trans.PoR.InaccPsi.R2.Gl
-  Googology.Trans.PoR.InaccPsi.R2.Lu
+  Googology.Trans.PoR.InaccPsi.R2.Lu Googology.Trans.PoR.InaccPsi.R2.Gb Googology.Trans.PoR.InaccPsi.R2.Gf
 
 section Atom
 
@@ -133,6 +134,44 @@ theorem na_rep {β y : Ordinal.{0}} (hβ1 : 1 ≤ β) (hβT : β ∈ Tset x) (h�
     exact hex z hxz hβz hz2 hz
 
 end Atom
+
+section Pi
+
+variable {σ ρ : Ordinal.{0}} (hB : Bases σ ρ)
+include hB
+
+/-- **Lemma EXACT for the level-`β` readings above a value `V = φ(β+1, b)`**:
+`π(φ(β, V + 1 + t)) = φ(π β, π V + 1 + π t)` when the same data hold at `σ` for `π β`, `π V`, `π t`. -/
+theorem na_pi {β b t V b' : Ordinal.{0}} (hβ1 : 1 ≤ β) (hβ : β ∈ TB ρ σ) (hβΩ : β < Om1)
+    (hVb : veblen (β + 1) b = V) (hV : V ∈ TB ρ σ) (hV1 : V < Om1) (hρV : ρ < V) (hβV : β < V)
+    (ht : t ∈ TB ρ σ) (hVt1 : V + t < Om1) (hVtB : V + t < veblen (β + 1) (b + 1))
+    (hVb' : veblen (pi σ ρ β + 1) b' = pi σ ρ V) (hσV' : σ < pi σ ρ V) (hβV' : pi σ ρ β < pi σ ρ V)
+    (hVtB' : pi σ ρ V + pi σ ρ t < veblen (pi σ ρ β + 1) (b' + 1)) :
+    veblen β (V + 1 + t) ∈ TB ρ σ ∧
+      pi σ ρ (veblen β (V + 1 + t)) = veblen (pi σ ρ β) (pi σ ρ V + 1 + pi σ ρ t) := by
+  have hρE := hB.2.1
+  have hρ1 := hB.2.2.2
+  have hσE := hB.1
+  have hσ1 : σ < Om1 := hB.2.2.1.trans hρ1
+  obtain ⟨hVtTB, hπVt⟩ := pi_add hB hV ht
+  have e1 : glA β (V + t) ρ = veblen β (V + 1 + t) :=
+    na_glA hρE hρ1 hβ1 hβ.1 hβΩ hV.1 hV1 hρV hβV hVb t hVtTB.1 hVt1 hVtB
+  obtain ⟨a1, a2⟩ := glA_pi hB hβ hβΩ hVtTB hVt1
+  obtain ⟨o1, o2⟩ := one_TB hB
+  have hπβ1 : 1 ≤ pi σ ρ β := by
+    rcases hβ1.lt_or_eq with h | h
+    · have h' := (pi_bijOn hB).2 o1 hβ h; rw [o2] at h'; exact h'.le
+    · rw [← h, o2]
+  obtain ⟨hπβT, hπβΩ⟩ := gl_pi_T hB hβ hβΩ
+  obtain ⟨hπVT, hπV1⟩ := gl_pi_T hB hV hV1
+  obtain ⟨hπVtT, hπVt1⟩ := gl_pi_T hB hVtTB hVt1
+  rw [hπVt] at hπVtT hπVt1
+  have e2 : glA (pi σ ρ β) (pi σ ρ V + pi σ ρ t) σ = veblen (pi σ ρ β) (pi σ ρ V + 1 + pi σ ρ t) :=
+    na_glA hσE hσ1 hπβ1 hπβT hπβΩ hπVT hπV1 hσV' hβV' hVb' (pi σ ρ t) hπVtT hπVt1 hVtB'
+  refine ⟨e1 ▸ a1, ?_⟩
+  rw [← e1, a2, hπVt, e2]
+
+end Pi
 
 end Googology.Trans.PoR.InaccPsi.R2.Na
 
