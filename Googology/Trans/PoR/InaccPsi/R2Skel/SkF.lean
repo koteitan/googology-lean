@@ -39,6 +39,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZmCd
 import Googology.Trans.PoR.InaccPsi.R2.ZoBC
 import Googology.Trans.PoR.InaccPsi.R2.ZrBase
 import Googology.Trans.PoR.InaccPsi.R2.ZrRead
+import Googology.Trans.PoR.InaccPsi.R2.ZsCap
 
 /-!
 # SkF: skeleton (map) of the part "frontier" of `Wd.wdRoadL`
@@ -2724,15 +2725,35 @@ theorem skBCLow (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → μ < Bt.iota S 
   · exact absurd (hw.1.trans hP) (not_lt.2 (Pp.ppL_mono (S := S) zero_le))
   · exact absurd (hw.1.trans hP) (not_lt.2 (Pp.ppL_mono (S := S) zero_le))
 
-/-- STATUS: OPEN (round 134, new leaf; the UPPER ∧ LOWER part of skBCBaseUV)
-SIZE: M
+/-- STATUS: OPEN (round 134, new leaf; the UPPER ∧ LOWER part of skBCBaseUV; round 135: SIZE M → L, a BIG reading)
+SIZE: L
 UPPER ∧ LOWER AT THE BASE `l₀ = Zo.zoBase S = ι(Ω₂)` (`Zr.zrBase_eq`): `ρ = P(Ω₂)`, the name `Ω₂`, the code
 `π_{Ω₂}`, the predicted reach `r(l₀) = δ_{l₀} + Θ_{l₀}(π_{Ω₂})` with `Θ_{l₀}(π_{Ω₂}) ≤ ψ_{Ω₁}(A + θ + Ω₁) < δ_{l₀}`,
 `A = Ω_ω + Ω₂` (`Zr.zrTh_Om2`, `Zr.zrBCThPos`; the points `δ + x` are closed, `Zh.zhDense`): a short reach, inside
 the first block `(δ, υ_{l₀+ω·2+1})`.  LOWER asks `P(Ω₂) ≤₁ δ + Θ(π)`, UPPER asks not `P(Ω₂) ≤₁ δ + Θ(π) + 1`.  No
-point below `ρ` is `≤₁` a point `≥ ρ` (`Zr.zrNoCross`).  REFUTE FIRST: NO EVIDENCE (part of the natural target). -/
+point below `ρ` is `≤₁` a point `≥ ρ` (`Zr.zrNoCross`).  REFUTE FIRST: NO EVIDENCE (part of the natural target).
+Round 135 (skBCBaseBig): `l₀` is `υ`-fixed and its reading is BIG, `υ_{l₀+1} = Θ_{l₀}(θ) < Θ_{l₀}(π_{Ω₂})`
+(`Zs.zsBig`), the case of skWinBig: the term, value and successor branches of the RS input give only LOWER itself
+(`Zs.zsBaseRs_lower`) and the supply branch is false (`Zs.zsSup_false`: every restart below `l₀` reads short,
+`Zs.zsShortLow`).  LOWER needs Lemma RS with a value `v ∈ [υ_{l₀+1}, δ_{l₀})` (the FRAG image of `v` on the
+segment of `υ_{l₀+1}`; `Zn.znRs_rstV` takes values below `υ_{l₀+1}` only) and the code continuity at `l₀` for
+these values; UPPER is Lemma TOP at a big reading (the short input of Lemma TOP takes only offsets `ρ·m + k`). -/
 theorem skBCBaseUL (S : InaccSeq.{0}) : Cd.CdUpper S (Zo.zoBase S) ∧ Cd.CdLower S (Zo.zoBase S) := by
   sorry
+
+/-- STATUS: PROVED (Zs.zsFix, Zs.zsBig, Zs.zsBaseRs_lower, Zs.zsSup_false; round 135, new node)
+SIZE: S
+REFUTE FIRST for skBCBaseUL as a known RS case: `l₀ = ι(Ω₂)` is `υ`-fixed with the BIG reading
+`υ_{l₀+1} = ψ_{Ω₁}(A + θ) = Θ_{l₀}(θ) < Θ_{l₀}(π_{Ω₂})` (`θ = ψ_{Ω₂}(Ω_ω)` lies in the hull below `Ω₂`); the RS
+inputs `ZcRsIn ∨ ZnRsVal` give only LOWER itself, and the supply branch is false (given the region below `ι(Ω₂)`,
+skBCLow: the restarts below `l₀` read short, so none reaches `υ_{μ+ω+2}`). -/
+theorem skBCBaseBig (S : InaccSeq.{0}) :
+    upsilon (Zo.zoBase S) = Zo.zoBase S ∧
+      upsilon (Order.succ (Zo.zoBase S)) < Cd.cdTheta S (Zo.zoBase S) (Cd.cdCode S (Zo.zoBase S)) ∧
+      (Zc.ZcRsIn (Ys.ysO S) (Zo.zoBase S) ∨ Zn.ZnRsVal (Ys.ysO S) (Zo.zoBase S) →
+        Cd.CdLower S (Zo.zoBase S)) ∧
+      ∀ B, ¬ Zh.ZhSupInB S (Zo.zoBase S) B :=
+  ⟨Zs.zsFix, Zs.zsBig, Zs.zsBaseRs_lower, Zs.zsSup_false fun μ hr h => skBCLow S μ hr h⟩
 
 /-- STATUS: REDUCED (round 134: skBCBaseUL, and CapV PROVED, Zr.zrBaseCapV; was OPEN M, round 133)
 SIZE: M
@@ -2788,18 +2809,35 @@ short-only inputs, which are not asked.  Non-vacuity: `Zo.zoBC_of_target`. -/
 theorem skBCInR (S : InaccSeq.{0}) : Zc.ZcInR S (Zo.zoBase S) (Zo.zoTop S) := by
   sorry
 
-/-- STATUS: OPEN (round 133, new leaf, regc1)
+/-- STATUS: OPEN (round 133, new leaf, regc1; round 135: narrowed to the codes `m_λ > K_ω`)
 SIZE: L
 CAPV AT THE `υ`-FIXED RANGE RESTARTS OF `(l₀, ι(Ω_ω))` below `ν_C` with neither a short last exponent nor a LOW code:
 `2 ≤ e(η_λ)` only together with `m_λ > θ·ω` (at `m_λ ≤ θ·ω`, `e ≥ 2` CapV is the theorem `Zo.zoCapV_low`; at
 `2 ≤ e < ρ_λ` it is `Zh.zhCapV_short`).  Contains every (C) restart below `ν_C` (codes `π_η > θ`, all `υ`-fixed:
-skCFix).  REFUTE FIRST: NO EVIDENCE. -/
+skCFix).  REFUTE FIRST: NO EVIDENCE.  Round 135: only the codes `m_λ > K_ω = ψ_{Ω₂}(Ω_ω + Ω₂)` are asked (at
+`m_λ ≤ K_ω` the reading is short, `Θ_λ(m_λ) ≤ ψ_{Ω₁}(A + θ + Ω₁) < δ_λ`, and CapV is the theorem `Zs.zsCapV_K`,
+skBCCapVK); every (C) restart above `l₀` has `π_η > K_ω`.  There the hull below `m_λ` has atoms `ψ_{Ω₂}(Ω_ω + y)`
+with `y ≥ Ω₂`, whose readings are not bounded by the plateau iterates. -/
 theorem skBCCapVH (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S < μ → μ < Zo.zoTop S →
     upsilon μ = μ → upsilon μ < nuC → ¬ Zh.ZhShortExp S μ →
-    (ω ^ 2 ≤ ω ^ Cd.cdExp (Cd.cdEta S μ) → ConjT.th S * ω < Cd.cdCode S μ) → Cd.CdCapV S μ := by
+    (ω ^ 2 ≤ ω ^ Cd.cdExp (Cd.cdEta S μ) → ConjT.th S * ω < Cd.cdCode S μ) →
+    S.psi (Om ω + Om (1 + 1)) (Om (1 + 1)) < Cd.cdCode S μ → Cd.CdCapV S μ := by
   sorry
 
-/-- STATUS: PROVED (skBCCapVH, Zo.zoCapV_low; round 133, new; checked only after the merge)
+/-- STATUS: PROVED (Zs.zsCapV_K, Zs.zsEta_ne_above; round 135, new node)
+SIZE: S
+CAPV AT THE `υ`-FIXED RANGE RESTARTS OF `(l₀, ι(Ω_ω))` below `ν_C` WITH A CODE `m_λ ≤ K_ω = ψ_{Ω₂}(Ω_ω + Ω₂)`: every
+atom of the hull below `K_ω` lies below a plateau iterate `K_j`, so `Θ_λ(m_λ) ≤ Θ_λ(K_ω) ≤ ψ_{Ω₁}(A + θ + Ω₁) < δ_λ`
+(`Zr.zrTh_K`, `Zs.zsShortK`), and the short reading gives CapV (`Zn.znCapV_fixTh`). -/
+theorem skBCCapVK (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S < μ → μ < Zo.zoTop S →
+    upsilon μ = μ → upsilon μ < nuC →
+    Cd.cdCode S μ ≤ S.psi (Om ω + Om (1 + 1)) (Om (1 + 1)) → Cd.CdCapV S μ := by
+  intro μ hr h0 h1 hfix hν hc
+  have hm : upsilon μ < Cd.cdMstar S := by
+    rw [← Zo.zoTop_ups (S := S)]; exact upsilon_normal.strictMono h1
+  exact Zs.zsCapV_K hr hfix hν hm (Zs.zsEta_ne_above hr h0 hm) hc
+
+/-- STATUS: PROVED (skBCCapVH, skBCCapVK, Zo.zoCapV_low; round 133, new; checked only after the merge; round 135: + skBCCapVK)
 SIZE: S
 CapV at the `υ`-fixed long-exponent range restarts of `(l₀, ι(Ω_ω))` below `ν_C`. -/
 theorem skBCCapVL (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S < μ → μ < Zo.zoTop S →
@@ -2809,7 +2847,9 @@ theorem skBCCapVL (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S <
   · have hm : upsilon μ < Cd.cdMstar S := by
       rw [← Zo.zoTop_ups (S := S)]; exact upsilon_normal.strictMono h1
     exact Zo.zoCapV_low (η1 := Om ω) hr.1 hm hν (hm.trans_le (Cd.cdMstar_le_L S ω)) hc.2 hc.1
-  · exact skBCCapVH S μ hr h0 h1 hfix hν hns fun h2 => not_le.1 fun h3 => hc ⟨h2, h3⟩
+  · by_cases hK : Cd.cdCode S μ ≤ S.psi (Om ω + Om (1 + 1)) (Om (1 + 1))
+    · exact skBCCapVK S μ hr h0 h1 hfix hν hK
+    · exact skBCCapVH S μ hr h0 h1 hfix hν hns (fun h2 => not_le.1 fun h3 => hc ⟨h2, h3⟩) (not_le.1 hK)
 
 /-- STATUS: OPEN (round 133, new leaf, regc1)
 SIZE: L
