@@ -168,8 +168,8 @@ section Main
 variable (f : Ordinal.{0} → Ordinal.{0}) (Dm : Ordinal.{0} → Prop) (hf0 : f 0 = 0) (hD0 : Dm 0)
   (hfΩ : ∀ d, Dm d → f d < Om1) (hfm : ∀ d d', Dm d → Dm d' → d < d' → f d < f d')
   (hDm2 : ∀ d, Dm d → d < OmTwo) (hbelow : ∀ d, Dm d → ∀ ν, ν < f d → ∃ d', d' < d ∧ Dm d' ∧ ν ≤ f d')
-  {U : Ordinal.{0}} (hUE : InE U) (hU : ∀ ζ, ζ < U → ∃ d, Dm d ∧ ζ ≤ f d)
-include hf0 hD0 hfΩ hfm hDm2 hbelow hUE hU
+  {U : Ordinal.{0}} (hU : ∀ ζ, ζ < U → ∃ d, Dm d ∧ ζ ≤ f d)
+include hf0 hD0 hfΩ hfm hDm2 hbelow hU
 
 /-- **THE READINGS OF THE VEBLEN LEVELS ARE COFINAL**: every `J < γ(x)` with data below `U` is at most `μ(x)` for a
 level `μ < γ` with its leaves in `Dm`. -/
