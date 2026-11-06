@@ -60,7 +60,7 @@ theorem yyItBase (k : ℕ) {β : Ordinal.{0}} (hβD : VbD S l β) (hβn : β ∈
   intro m
   refine ⟨hH m, (ldHull_iff hl hX (ydEB_lt_Om2 X β m)).1 (hH m), hdv m, hβD.1, harg m,
     fun d _ => (psi_mono hκ2 le_self_add).2 hβn, fun e' _ he' => ?_⟩
-  exact ydOwnB X β (m + 1) e' (he'.trans_lt (ydEB_lt_succ hXm hβn m))
+  exact ydOwnB X β (m + 1) e' (he'.trans_lt (ydEB_lt_succ (fun a b _ => hXm a b) hβn m))
 
 /-- **`T(β + W^{X+Ω₂}) = T β + Ω^{K₂+Ω₁}`**, and `β + W^{X+Ω₂} ∈ D`. -/
 theorem yyTW (k : ℕ) {β : Ordinal.{0}} (hβD : VbD S l β) :
@@ -113,7 +113,7 @@ theorem yyLawOm2 (k : ℕ) {β : Ordinal.{0}} (hβD : VbD S l β) (hβn : β ∈
   set b := vbT S l β with hbdef
   -- the law at the iterates
   have hθ : ∀ m, ydEB S X β m < ConjT.th S := fun m =>
-    (ydEB_lt_succ (Vn.vnOmK3_mem k) hβn m).trans_le
+    (ydEB_lt_succ (fun a b _ => Vn.vnOmK3_mem k a b) hβn m).trans_le
       (psi_mono hκ2 (ydBW_lt k hβD.2.2 (ydEB_lt_Om2 X β m).le).le).1
   have h1H : (1 : Ordinal.{0}) ∈ cdHull S l := CSet.one_mem _ _
   have h1θ : (1 : Ordinal.{0}) < ConjT.th S := gg_one_lt_of_SC (ConjT.SC_th S)

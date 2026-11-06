@@ -74,7 +74,7 @@ theorem ydTopFailB (X β : Ordinal.{0}) :
 
 section Gen
 
-variable {X : Ordinal.{0}} (hX : ∀ a b : Ordinal.{0}, X ∈ S.CSet a b)
+variable {X : Ordinal.{0}} (hX : ∀ a b : Ordinal.{0}, Om 1 ≤ b → X ∈ S.CSet a b)
 include hX
 
 /-- **A member of `Cl(a, ψ₂ a)` below `W^{X+Ω₂}` is below `W^{X+ψ₂ a}`** (any `a`). -/
@@ -129,7 +129,8 @@ theorem ydEB_lt_succ : ∀ m, ydEB S X β m < ydEB S X β (m + 1)
     rw [ydEB_succ X β (m + 1)]
     conv_lhs => rw [ydEB_succ]
     refine psi_lt_psi_of_mem hκ2 ((add_lt_add_iff_left β).2 (leWe_lt ((add_lt_add_iff_left X).2 ih))) ?_
-    refine CSet.add_mem (ydNormD hX hβ _) (leWe_mem (CSet.add_mem (hX _ _) (CSet.of_lt ?_)))
+    refine CSet.add_mem (ydNormD hX hβ _) (leWe_mem (CSet.add_mem (hX _ _ (psiS_bounds (S := S) _ 1).1.le)
+      (CSet.of_lt ?_)))
     calc ydEB S X β m < ydEB S X β (m + 1) := ih
       _ = S.psi (β + leWe (X + ydEB S X β m)) (Om (1 + 1)) := ydEB_succ X β m
       _ ≤ S.psi (β + leWe (X + ydEB S X β (m + 1))) (Om (1 + 1)) :=
@@ -272,8 +273,8 @@ theorem ydFixB (k n : ℕ) {β : Ordinal.{0}} (hDβ : MvD S β) (hβ : β ∈ S.
     rw [hBW] at hBa
     have hown : β + leWe (X + ydEB S X β m) ∈ S.CSet (β + leWe (X + ydEB S X β m))
         (S.psi (β + leWe (X + ydEB S X β m)) (Om (1 + 1))) := by
-      refine CSet.add_mem (ydNormD (ydX_mem k) hβ _) (leWe_mem (CSet.add_mem (Vn.vnOmK3_mem k _ _) (CSet.of_lt ?_)))
-      rw [← ydEB_succ]; exact ydEB_lt_succ (ydX_mem k) hβ m
+      refine CSet.add_mem (ydNormD (fun a b _ => ydX_mem k a b) hβ _) (leWe_mem (CSet.add_mem (Vn.vnOmK3_mem k _ _) (CSet.of_lt ?_)))
+      rw [← ydEB_succ]; exact ydEB_lt_succ (fun a b _ => ydX_mem k a b) hβ m
     obtain ⟨hDs, hBs⟩ := mxB_atom (n := n) hDa hown
     rw [hBa] at hBs
     rw [ydEB_succ, ydEB_succ]
@@ -290,13 +291,13 @@ theorem ydOwnMoveB (k n : ℕ) {β e : Ordinal.{0}} (hDβ : MvD S β) (hβ : β 
         e'' < S.psi (Bc.bcB S n β + leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + e'')) (Om (1 + 1)) := by
   have hXm : ∀ a b : Ordinal.{0}, Om ((k : Ordinal.{0}) + 1 + 1 + 1) ∈ S.CSet a b :=
     fun a b => Vn.vnOmK3_mem k a b
-  obtain ⟨m, hm⟩ := ydLtTopB hXm hβ he
+  obtain ⟨m, hm⟩ := ydLtTopB (fun a b _ => hXm a b) hβ he
   obtain ⟨hDm, hBm⟩ := ydFixB k n hDβ hβ m
   have h := (mvB_lt_iff (k := n) hDe hDm).2 hm
   rw [hBm] at h
   have hB' : Bc.bcB S n e < S.psi (Bc.bcB S n β + leWe (Om ((k : Ordinal.{0}) + 1 + 1 + 1) + Om (1 + 1)))
       (Om (1 + 1)) := h.trans_le (ydEB_le_top _ _ m)
-  exact ⟨hB', (ydOwnB_iff hXm (ydNormB n hDβ hβ) _).2 hB'⟩
+  exact ⟨hB', (ydOwnB_iff (fun a b _ => hXm a b) (ydNormB n hDβ hβ) _).2 hB'⟩
 
 end Googology.Trans.PoR.InaccPsi.R2.Yd
 

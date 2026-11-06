@@ -82,14 +82,14 @@ theorem zdSh_chain (k : ℕ) {ξ : Ordinal.{0}} (hξ : ξ < ε₀) : ZdSh S l (z
       gxTh_small hξρ]
   have hD2 : VbD S l (Om (1 + 1) * ξ) := by
     have h := hWξD; rwa [leWe_one, add_zero] at h
-  refine ⟨fun a c => CSet.add_mem (hs0.mem a c) (ldMulK_mem ldOm2_SC (mxOm2_mem _ _) (hξm _ _)),
-    vkOmW.1.isPrincipal hs0.lt (zdMul2_lt hξ2), ?_, fun a c => ?_, fun a c => ?_,
-    hs0.Kpos.trans_le le_self_add⟩
+  refine ⟨fun a c h => CSet.add_mem (hs0.mem a c h) (ldMulK_mem ldOm2_SC (mxOm2_mem _ _) (hξm _ _)),
+    vkOmW.1.isPrincipal hs0.lt (zdMul2_lt hξ2), ?_, fun a c h => ?_, fun a c h => ?_,
+    hs0.Kpos.trans_le le_self_add, CSet.add_mem hs0.memH (ldMulK_mem ldOm2_SC (mxOm2_mem _ _) (hξm _ _))⟩
   · unfold zdX zdK; rw [Vh.vhT_add hl hX hs0.D hD2, hs0.T, hT2]
   · unfold zdK
-    exact CSet.add_mem (hs0.Km a c) (ldMulK_mem Ph.ph_SC_Om1 (CSet.Om_mem (CSet.one_mem _ _)) (hξm _ _))
+    exact CSet.add_mem (hs0.Km a c h) (ldMulK_mem Ph.ph_SC_Om1 (CSet.Om_mem (CSet.one_mem _ _)) (hξm _ _))
   · unfold zdK; rw [mul_add]
-    exact CSet.add_mem (hs0.Km1 a c) (ldMulK_mem Ph.ph_SC_Om1 (CSet.Om_mem (CSet.one_mem _ _))
+    exact CSet.add_mem (hs0.Km1 a c h) (ldMulK_mem Ph.ph_SC_Om1 (CSet.Om_mem (CSet.one_mem _ _))
       (ldMulK_mem Ph.ph_SC_Om1 (CSet.Om_mem (CSet.one_mem _ _)) (hξm _ _)))
 
 variable {A : Ordinal.{0}} (hA : A ∈ S.CSet A (S.psi A (Om 1))) (hρ : S.psi A (Om 1) = upsilon l)
