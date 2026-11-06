@@ -11,7 +11,7 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
       - ほかに：υ-不動点でない窓の再始動での RS の入力と cap、孤立した不動点では Θ = ρ。K_Y までの atom の移動。基 ι(Ω₂) で到達のデータと cap。K_ω 以下の code の読みは短い。
       - 道 yqRoadS（仮定：前線より上で UPPER、LOWER、cap。L(ω+1) ≤ ν_C のとき WdThLow、WdEQfar。ずらし XoShift。XoSup）：ν_C = L(ω+1)。
       - 骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：sorry の葉 60。OPEN 23（すべて L）、SUSPECT 2、REFUTED 9。道の上の OPEN の葉は 15（すべて L）。skTopLawAll、skPsi3OffRest2、skAtHi3 は証明済み（Kx.kxTopLawAll、Ky.kyPsi3OffRest2、Kz.kzAtHi3）。根が空虚かは未定。
-      - 🤖 次：B₂ より上の区間。Γ の各不動点 F を、門なしで読む区間の基点にする。F での層は合併で、F+1 での基の層は梯子で作る。X 未満の不動点についての帰納法で skZbDirectX。その後に残りの層・窓・skBC の葉。
+      - 🤖 次：B₂ より上の層。済み：X 未満のすべての ε 数で、区間の基点（E 以下で最大の Γ の不動点 F、門付きで読む）の上の桁の系（Va.vsGood_all3）。残り：Γ の各不動点 F での層（合併）と F+1 での基の層（梯子）を門付きの基点で作り、skZbDirectX。その後に残りの層・窓・skBC の葉。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
   - ✅ M < (0,0,0)(1,1,1)：紙と Lean で証明済み
