@@ -1,11 +1,11 @@
-# R₂^C skeleton: status (round 219)
+# R₂^C skeleton: status (round 220)
 Root `R2Skel.Root.skNuC (S : InaccSeq)` = the conclusion of `Xo.xoRoadH` (ν_C = L(ω+1), …). Round 129: the root applies
 `Yq.yqRoadS` = `Xo.xoRoadH` with the bridge replaced by the shift `SkS.skShiftXo`; supply `SkS.skSupXo` (repaired `Xo.XoR`);
 frontier `SkF.skFront` → hUH/hLH/hVH/hVt; reading `SkR.skWall`, `SkR.skThHi` → `SkE.skEQ` → hT/hF. Round 130: Root unchanged.
 Round 131: `SkE.skEQ hRead hUH hLH hVt`. Round 132: `SkE.skEQ hRead hW hUH hLH hVt`, `hW = SkR.skWallCF S` (the code-free
 wall, used by `SkE.skTopK`). Round 133: Root unchanged; the bundle checks against the main build with only `declaration uses sorry` (68).
 ## Main progress number: OPEN / SUSPECT leaves on the road from `Root.skNuC`
-**14 distinct OPEN leaves (all L); 0 SUSPECT; 0 REFUTED** (round 219: skLayPastXθ split, skLayPastXB2 PROVED (Qc.qc_past), skLayPastB2θ OPEN; round 215: skZbDirectX PROVED, Va.vsDirectX; round 182: skAtHi3 PROVED, Kz.kzAtHi3; 176: skPsi3OffRest2 PROVED, Ky.kyPsi3OffRest2; 174: skTopLawAll PROVED, Kx.kxTopLawAll; round 138: 17 after merges, then the road leaf skLayPastX was REFUTED and split; 137: 20; 135: 22 L; 134: 22; 133: 23; 132: 18 L; round 131: 18; round 130: 19 OPEN L; round 129: 19;
+**14 distinct OPEN leaves (all L); 0 SUSPECT; 0 REFUTED** (round 220: atom system below θ, Qt.qtU, with Zb.ZbAS.Ok; round 219: skLayPastXθ split, skLayPastXB2 PROVED (Qc.qc_past), skLayPastB2θ OPEN; round 215: skZbDirectX PROVED, Va.vsDirectX; round 182: skAtHi3 PROVED, Kz.kzAtHi3; 176: skPsi3OffRest2 PROVED, Ky.kyPsi3OffRest2; 174: skTopLawAll PROVED, Kx.kxTopLawAll; round 138: 17 after merges, then the road leaf skLayPastX was REFUTED and split; 137: 20; 135: 22 L; 134: 22; 133: 23; 132: 18 L; round 131: 18; round 130: 19 OPEN L; round 129: 19;
 rounds 127, 128: 17). Counted by a Lean walk over the constants used by `skNuC`. On the road: SkF skLayPastB2θ, skLayPastTh,
 skBC{BaseUL, InR, RsSH}, skFix{Cont, CapVF}, skWin/Top{InR, Big}, skTopLwNo2;
 SkS skZlCfg, skLevImgHi4. Round 130: skWin/TopSpec → skWinIn, skTopIn, skTopLwNo2; skGapRng → skGapRngHi. Round 131:
