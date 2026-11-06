@@ -115,9 +115,10 @@ noncomputable def step : ZmDS where
       exact (ev_isSuccLimit_of_inE (Low.opow_eq_self_of_SC tlX_SC)).add_one_lt h
     exact tlX_SC.2 1 (gg_one_lt_of_SC tlX_SC) _ hi
   Ei_cl := fun Z hZ hEg => TlCl.add (M.Ei_cl Z hZ hEg) (TlCl.one hZ.1)
-  nfx := fun y h1 h2 => by
+  nfx := fun y h1 h2 hΓ => by
     rcases le_or_gt y M.E with hy | hy
-    · exact M.nfx y h1 hy
+    · exact M.nfx y h1 hy hΓ
+    refine absurd (zm_fix_of_gamma hΓ) ?_
     rcases h2.lt_or_eq with h3 | h3
     · intro hfix
       exact absurd (eN_le hy (zm_fix_E hfix)) (not_le.2 h3)

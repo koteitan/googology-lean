@@ -114,11 +114,12 @@ noncomputable def zmCU : ZmDS where
     obtain ⟨M, μ, hμl, hlM, hE, hEg, hV, hVb, hR, hGg, htr⟩ := zmCu_pick hl hlZ hG (zm_idx_lt hlZ)
     have hGl : M.G l < Z := zm_memG hGg hlM (htr Z hZl hgZ) (Or.inr hgZ)
     exact TlCl.add (zbBG_tl hZ.1) (M.cl l Z hZ hlM hGl)
-  nfx := fun y h1 h2 => by
+  nfx := fun y h1 h2 hΓ => by
     rcases h2.lt_or_eq with h3 | h3
     · obtain ⟨M, -, -, hyM, -, -, -, -, -, -, -⟩ := zmCu_pick hl hlZ hG h3
-      exact M.nfx y h1 hyM.le
-    · intro hfix
+      exact M.nfx y h1 hyM.le hΓ
+    · refine absurd (zm_fix_of_gamma hΓ) ?_
+      intro hfix
       rw [h3] at hfix
       have e := (isNormal_veblen 1).strictMono.injective hfix
       have hBl : tfBG < tfBG + l := lt_add_of_pos_right _ hl.bot_lt

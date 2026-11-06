@@ -129,6 +129,15 @@ theorem zmDN_pi : eN (ywV 1 0 ρ) ∈ TB ρ σ ∧
 
 end DPi
 
+/-- A fixed point of `Γ` is a fixed point of `φ(1, ·)`. -/
+theorem zm_fix_of_gamma {y : Ordinal.{0}} (h : gamma y = y) : veblen 1 y = y := by
+  have h1G : (1 : Ordinal.{0}) < gamma y := one_lt_omega0.trans (omega0_lt_inE
+    (Low.opow_eq_self_of_SC (Lq.lq_gamma_SC y)))
+  have hfix : veblen 1 (gamma y) = gamma y := by
+    conv_lhs => rw [← veblen_gamma_zero y]
+    rw [veblen_veblen_of_lt h1G, veblen_gamma_zero]
+  rwa [h] at hfix
+
 /-! ## The interface -/
 
 /-- **A digit system at an `ε`-number base `E = φ(1, E_i) ≥ B_Γ`**: offsets `o < E`, reading `R(o)(x) < V(x)`, gate
@@ -145,7 +154,7 @@ structure ZmDS where
   BG_le : tfBG ≤ E
   E_X : E < tlX
   Ei_cl : ∀ Z, SC Z → Eg < Z → TlCl Z Ei
-  nfx : ∀ y, tfBG < y → y ≤ E → veblen 1 y ≠ y
+  nfx : ∀ y, tfBG < y → y ≤ E → gamma y ≠ y
   Eg_le : ∀ c, c ≠ 0 → Eg ≤ G c
   V_T : ∀ x, InE x → x < Om1 → Eg < x →
     V x ∈ Tset x ∧ InE (V x) ∧ ywV 1 0 x ≤ V x ∧ V x < gq (ywV 1 0 x + 1) x

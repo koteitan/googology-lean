@@ -139,11 +139,12 @@ noncomputable def zmU : ZmDS where
     have h1 : l < tlX := hlε.trans_le (gc_eps0_le (Low.opow_eq_self_of_SC tlX_SC))
     exact tlX_SC.2 1 (gg_one_lt_of_SC tlX_SC) _ ((inE_indec (Low.opow_eq_self_of_SC tlX_SC)).add_lt tl_BG_lt_X h1)
   Ei_cl := fun Z hZ _ => TlCl.add (zbBG_tl hZ.1) (TlCl.small (hlε.trans_le (gc_eps0_le (gg_SC_eps hZ))))
-  nfx := fun y h1 h2 => by
+  nfx := fun y h1 h2 hΓ => by
     rcases h2.lt_or_eq with h3 | h3
     · obtain ⟨M, -, -, hyM, -, -, -, -, -⟩ := zmU_pick hl hG h3
-      exact M.nfx y h1 hyM.le
-    · intro hfix
+      exact M.nfx y h1 hyM.le hΓ
+    · refine absurd (zm_fix_of_gamma hΓ) ?_
+      intro hfix
       rw [h3] at hfix
       have e := (isNormal_veblen 1).strictMono.injective hfix
       have hE := zm_veb_E (tfBG + l)

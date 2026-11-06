@@ -69,15 +69,9 @@ theorem nonfix (h : tfBG < M.E) {o : Ordinal.{0}} (ho : o < M.E) :
   rcases (isNormal_gamma.strictMono.le_apply (x := ν)).lt_or_eq with hlt | heq
   · exact hlt
   exfalso
-  have h1G : (1 : Ordinal.{0}) < gamma ν := one_lt_omega0.trans (omega0_lt_inE
-    (Low.opow_eq_self_of_SC (Lq.lq_gamma_SC ν)))
-  have hfix : veblen 1 (gamma ν) = gamma ν := by
-    conv_lhs => rw [← veblen_gamma_zero ν]
-    rw [veblen_veblen_of_lt h1G, veblen_gamma_zero]
-  rw [← heq] at hfix
   have hB : tfBG < ν := by
     rw [hν]; exact lt_of_lt_of_le (lt_add_one tfBG) le_self_add
-  exact M.nfx ν hB (M.idx_lt h ho).le hfix
+  exact M.nfx ν hB (M.idx_lt h ho).le heq.symm
 
 theorem zmInv (h : tfBG < M.E) {Z o : Ordinal.{0}} (hZ : SC Z) (hZ1 : Z ≤ Om1) (ho : o < M.E)
     (hc : TlCl Z (gcG (tfBG + 1 + o))) : TlCl Z o := by
