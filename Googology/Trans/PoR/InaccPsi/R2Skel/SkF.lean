@@ -2810,7 +2810,8 @@ short-only inputs, which are not asked.  Non-vacuity: `Zo.zoBC_of_target`. -/
 theorem skBCInR (S : InaccSeq.{0}) : Zc.ZcInR S (Zo.zoBase S) (Zo.zoTop S) := by
   sorry
 
-/-- STATUS: OPEN (round 133, new leaf, regc1; round 135: narrowed to the codes `m_λ > K_ω`)
+/-- STATUS: OPEN (round 133, new leaf, regc1; round 135: narrowed to the codes `m_λ > K_ω`; round 137: and to the far
+readings `δ_λ·ω ≤ Θ_λ(m_λ)`, as skWinCapVF)
 SIZE: L
 CAPV AT THE `υ`-FIXED RANGE RESTARTS OF `(l₀, ι(Ω_ω))` below `ν_C` with neither a short last exponent nor a LOW code:
 `2 ≤ e(η_λ)` only together with `m_λ > θ·ω` (at `m_λ ≤ θ·ω`, `e ≥ 2` CapV is the theorem `Zo.zoCapV_low`; at
@@ -2818,11 +2819,13 @@ CAPV AT THE `υ`-FIXED RANGE RESTARTS OF `(l₀, ι(Ω_ω))` below `ν_C` with n
 skCFix).  REFUTE FIRST: NO EVIDENCE.  Round 135: only the codes `m_λ > K_ω = ψ_{Ω₂}(Ω_ω + Ω₂)` are asked (at
 `m_λ ≤ K_ω` the reading is short, `Θ_λ(m_λ) ≤ ψ_{Ω₁}(A + θ + Ω₁) < δ_λ`, and CapV is the theorem `Zs.zsCapV_K`,
 skBCCapVK); every (C) restart above `l₀` has `π_η > K_ω`.  There the hull below `m_λ` has atoms `ψ_{Ω₂}(Ω_ω + y)`
-with `y ≥ Ω₂`, whose readings are not bounded by the plateau iterates. -/
+with `y ≥ Ω₂`, whose readings are not bounded by the plateau iterates.  Round 137: at `Θ_λ(m_λ) < δ_λ·ω` CapV is the
+theorem `Zn.znCapV_fixThW`, so only the far readings are asked. -/
 theorem skBCCapVH (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S < μ → μ < Zo.zoTop S →
     upsilon μ = μ → upsilon μ < nuC → ¬ Zh.ZhShortExp S μ →
     (ω ^ 2 ≤ ω ^ Cd.cdExp (Cd.cdEta S μ) → ConjT.th S * ω < Cd.cdCode S μ) →
-    S.psi (Om ω + Om (1 + 1)) (Om (1 + 1)) < Cd.cdCode S μ → Cd.CdCapV S μ := by
+    S.psi (Om ω + Om (1 + 1)) (Om (1 + 1)) < Cd.cdCode S μ →
+    Cd.cdDelta μ * ω ≤ Cd.cdTheta S μ (Cd.cdCode S μ) → Cd.CdCapV S μ := by
   sorry
 
 /-- STATUS: PROVED (Zs.zsCapV_K, Zs.zsEta_ne_above; round 135, new node)
@@ -2838,7 +2841,7 @@ theorem skBCCapVK (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S <
     rw [← Zo.zoTop_ups (S := S)]; exact upsilon_normal.strictMono h1
   exact Zs.zsCapV_K hr hfix hν hm (Zs.zsEta_ne_above hr h0 hm) hc
 
-/-- STATUS: PROVED (skBCCapVH, skBCCapVK, Zo.zoCapV_low; round 133, new; checked only after the merge; round 135: + skBCCapVK)
+/-- STATUS: PROVED (skBCCapVH, skBCCapVK, Zo.zoCapV_low, Zn.znCapV_fixThW; round 133, new; round 135: + skBCCapVK; round 137: + znCapV_fixThW)
 SIZE: S
 CapV at the `υ`-fixed long-exponent range restarts of `(l₀, ι(Ω_ω))` below `ν_C`. -/
 theorem skBCCapVL (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S < μ → μ < Zo.zoTop S →
@@ -2850,18 +2853,40 @@ theorem skBCCapVL (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S <
     exact Zo.zoCapV_low (η1 := Om ω) hr.1 hm hν (hm.trans_le (Cd.cdMstar_le_L S ω)) hc.2 hc.1
   · by_cases hK : Cd.cdCode S μ ≤ S.psi (Om ω + Om (1 + 1)) (Om (1 + 1))
     · exact skBCCapVK S μ hr h0 h1 hfix hν hK
-    · exact skBCCapVH S μ hr h0 h1 hfix hν hns (fun h2 => not_le.1 fun h3 => hc ⟨h2, h3⟩) (not_le.1 hK)
+    · by_cases hW : Cd.cdTheta S μ (Cd.cdCode S μ) < Cd.cdDelta μ * ω
+      · have hm : upsilon μ < Cd.cdMstar S := by
+          rw [← Zo.zoTop_ups (S := S)]; exact upsilon_normal.strictMono h1
+        exact Zn.znCapV_fixThW (η1 := Om ω) hr.1 hfix hν hm hW
+      · exact skBCCapVH S μ hr h0 h1 hfix hν hns (fun h2 => not_le.1 fun h3 => hc ⟨h2, h3⟩) (not_le.1 hK)
+          (not_lt.1 hW)
 
-/-- STATUS: OPEN (round 133, new leaf, regc1)
+/-- STATUS: OPEN (round 137: skBCRsS without its short-reading part; round 133, new leaf, regc1)
 SIZE: L
-THE RS INPUT AT THE `υ`-FIXED RESTARTS OF `(l₀, ι(Ω_ω))`, WITH THE SUPPLY (as skWinRsS): the old input `Zc.ZcRsIn`
-(LOWER, the successor case or the term input) or the supply input `Zh.ZhSupInB` to the top `ι(Ω_ω)`.  At the
-non-fixed restarts it is a theorem (`Zh.zhRsIn_nonfix`); at a supply restart the old input is LOWER itself
-(`Zc.zcRsIn_long_lower`), the supply branch needs only the supply.  REFUTE FIRST: NO EVIDENCE.  Non-vacuity: LOWER
-gives it (`Zh.zhIn4_of_lower`, `Zo.zoBC_of_target`). -/
-theorem skBCRsS (S : InaccSeq.{0}) : ∀ l, IsRestartIdx l → Zo.zoBase S < l → l < Zo.zoTop S → upsilon l = l →
+THE RS INPUT AT THE `υ`-FIXED RESTARTS OF `(l₀, ι(Ω_ω))` WITH `ρ_λ < Θ_λ(m_λ)` WHEN `ρ_λ < ν_C`, WITH THE SUPPLY (as
+skWinRsS): the old input `Zc.ZcRsIn` (LOWER, the successor case or the term input) or the supply input `Zh.ZhSupInB`
+to the top `ι(Ω_ω)`.  At the non-fixed restarts it is a theorem (`Zh.zhRsIn_nonfix`); at a fixed restart below
+`ν_C` with `Θ_λ(m_λ) ≤ ρ_λ` it is a theorem (`Zn.znRsIn_fixShort`; every isolated fixed restart is of this kind,
+`Zt.ztIsoCode`); at a supply restart the old input is LOWER itself (`Zc.zcRsIn_long_lower`), the supply branch needs
+only the supply.  REFUTE FIRST: NO EVIDENCE.  Non-vacuity: LOWER gives it (`Zh.zhIn4_of_lower`,
+`Zo.zoBC_of_target`). -/
+theorem skBCRsSH (S : InaccSeq.{0}) : ∀ l, IsRestartIdx l → Zo.zoBase S < l → l < Zo.zoTop S → upsilon l = l →
+    (upsilon l < nuC → upsilon l < Cd.cdTheta S l (Cd.cdCode S l)) →
     Zc.ZcRsIn (Ys.ysO S) l ∨ Zh.ZhSupInB S l (Zo.zoTop S) := by
   sorry
+
+/-- STATUS: REDUCED (round 137: skBCRsSH, Zn.znRsIn_fixShort; was OPEN L, round 133, new leaf, regc1)
+SIZE: L
+THE RS INPUT AT THE `υ`-FIXED RESTARTS OF `(l₀, ι(Ω_ω))`, WITH THE SUPPLY (as skWinRsS).  Below `ν_C` at a short
+reading `Θ_λ(m_λ) ≤ ρ_λ` it is the theorem `Zn.znRsIn_fixShort` (the term input with the constant terms `w < ρ_λ`);
+the rest is skBCRsSH. -/
+theorem skBCRsS (S : InaccSeq.{0}) : ∀ l, IsRestartIdx l → Zo.zoBase S < l → l < Zo.zoTop S → upsilon l = l →
+    Zc.ZcRsIn (Ys.ysO S) l ∨ Zh.ZhSupInB S l (Zo.zoTop S) := by
+  intro l hl h0 h1 hfix
+  by_cases hs : upsilon l < nuC ∧ Cd.cdTheta S l (Cd.cdCode S l) ≤ upsilon l
+  · have hm : upsilon l < Cd.cdMstar S := by
+      rw [← Zo.zoTop_ups (S := S)]; exact upsilon_normal.strictMono h1
+    exact Or.inl (Zn.znRsIn_fixShort (η1 := Om ω) hl hfix hs.1 hm hs.2)
+  · exact skBCRsSH S l hl h0 h1 hfix fun hν => not_le.1 fun hθ => hs ⟨hν, hθ⟩
 
 /-- STATUS: REDUCED (Zo.zoBC; skBCLow, skBCBaseUV, skBCGiven, skBCInR, skBCCapVL, skBCRsS; round 133, new; checked
 only after the merge)
