@@ -2335,3 +2335,5 @@ import Googology.Trans.PoR.InaccPsi.R2.KcChain
 import Googology.Trans.PoR.InaccPsi.R2.KdOm2
 import Googology.Trans.PoR.InaccPsi.R2.KeCtx
 import Googology.Trans.PoR.InaccPsi.R2.KfDec
+import Googology.Trans.PoR.InaccPsi.R2.KgPlat
+import Googology.Trans.PoR.InaccPsi.R2.KhTop
