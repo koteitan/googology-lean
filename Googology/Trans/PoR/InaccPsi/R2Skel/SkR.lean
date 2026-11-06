@@ -837,7 +837,7 @@ theorem skPlatB (S : InaccSeq.{0}) :
       S.psi (β + Le.leWe (X + Om (1 + 1))) (Om (1 + 1)) = ⨆ m : ℕ, Yd.ydEB S X β m ∧
         ∀ e, (∀ e', e' ≤ e → e' < S.psi (β + Le.leWe (X + e')) (Om (1 + 1))) ↔
           e < S.psi (β + Le.leWe (X + Om (1 + 1))) (Om (1 + 1)) :=
-  fun _ _ hX hβ => ⟨Yd.ydTopB_eq hX hβ, Yd.ydOwnB_iff hX hβ⟩
+  fun _ _ hX hβ => ⟨Yd.ydTopB_eq (fun a b _ => hX a b) hβ, Yd.ydOwnB_iff (fun a b _ => hX a b) hβ⟩
 
 /-- STATUS: PROVED (Yd.ydOwnMoveB, from Yd.ydFixB, Yd.ydNormB, Ug.ugB_fix, Ro.roB_We, Mx.mxB_atom; NEW round 126;
 checkable only after the merge)
