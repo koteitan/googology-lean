@@ -124,7 +124,7 @@ theorem vs_ladH {F : Ordinal.{0}} (hF : gamma F = F) (hBF : tfBG ≤ F) (hFX : F
   · obtain ⟨hT, -, -, -, -, h1⟩ := vs_DF hF hBF hFX hx hx1 (hUg ▸ hg)
     rw [hUE x hx hx1 hg]; exact gmq_gt hx hx1 hT h1
   · obtain ⟨hT, -, -, hX, -, h1⟩ := vs_DF hF hBF hFX hx hx1 (hUg ▸ hg)
-    exact Qc.qcBd_of_X hx (zm_gq_lt_X hx hx1 hT h1 hX)
+    exact Qc.yBd_of_qc (Qc.qcBd_of_X hx (zm_gq_lt_X hx hx1 hT h1 hX))
   · exact vs_DF_pi hF hBF hFX hB (hUg ▸ hg)
 
 /-- **THE BASE LAYER OF THE SEGMENT OF `F`**: the ladder over a layer at `F`, for a digit system over the segment
@@ -344,7 +344,7 @@ noncomputable def vsLayF : YwUF (max ω (yrQE F)) where
   T_E := fun x hx hx1 hg => (vs_DF hF hBF.le hFX hx hx1 hg).2.1
   T_mem := fun x hx hx1 hg => (vs_DF hF hBF.le hFX hx hx1 hg).1
   T_gt := fun x hx hx1 hg => (vs_DF hF hBF.le hFX hx hx1 hg).2.2.1
-  T_X := fun x hx hx1 hg => Qc.qcBd_of_X hx (vs_DF hF hBF.le hFX hx hx1 hg).2.2.2.1
+  T_X := fun x hx hx1 hg => Qc.yBd_of_qc (Qc.qcBd_of_X hx (vs_DF hF hBF.le hFX hx hx1 hg).2.2.2.1)
   E_lt := fun i x hx hx1 hg hgi => by
     cases i with
     | none =>

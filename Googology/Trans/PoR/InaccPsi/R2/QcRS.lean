@@ -114,7 +114,7 @@ theorem stSuccH {b : Ordinal.{0}} (hb : RS.c0 ≤ b) (hbB : b < RS.Bd) (s : RS.S
     obtain ⟨hT', h1'⟩ := Xk.xk_succT hx hx1 hT h1
     have hRb : QcBd x (RS.R b x) := qcBd_mono (gmq_gt hx hx1 hT h1).le hX
     have h1b : QcBd x 1 := qcBd_of_X hx ((Lu.lu_one_lt_E hx).trans (ywX_facts hx hx1).2.1)
-    exact qcBd_gq hx hx1 hT' (qcBd_add hx hx1 hRb h1b)
+    exact yBd_of_qc (qcBd_gq hx hx1 hT' (qcBd_add hx hx1 hRb h1b))
   · have h1σ : (1 : Ordinal.{0}) < σ := lu_one_lt_E hB.1
     obtain ⟨h1, h2⟩ := RS.ex σ ρ b hB hb hbB (hg σ h)
     obtain ⟨h3, h4⟩ := pi_add hB h1 (mem_TB_of_lt hB h1σ)
@@ -158,7 +158,7 @@ noncomputable def stLimF (c : Ordinal.{0}) (hl : IsSuccLimit c) (hc0 : RS.c0 < c
     (RS.RT c x hx hx1 hc0.le hc hg).2.1).1
   T_gt := fun x hx hx1 hg => (geq_facts hx hx1 (RS.RT c x hx hx1 hc0.le hc hg).1
     (RS.RT c x hx hx1 hc0.le hc hg).2.1).2.1
-  T_X := fun x hx hx1 hg => (RS.RT c x hx hx1 hc0.le hc hg).2.2
+  T_X := fun x hx hx1 hg => yBd_of_qc (RS.RT c x hx hx1 hc0.le hc hg).2.2
   E_lt := fun i x hx hx1 hg hgb => by
     obtain ⟨hT, h1, -⟩ := RS.RT c x hx hx1 hc0.le hc hg
     cases i with

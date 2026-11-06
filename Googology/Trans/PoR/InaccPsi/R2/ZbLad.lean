@@ -94,7 +94,7 @@ end BGn
 theorem zbBGnH (n : ℕ) (L : GdB) (hE : ∀ x, L.K.E x = gq (ywV 1 0 x + (n : Ordinal.{0})) x) :
     YwLH L (fun x => ywV 1 0 x + ((n + 1 : ℕ) : Ordinal.{0})) := by
   refine ⟨fun x hx hx1 _ => ⟨(zbD_n_T hx hx1 (n + 1)).1, zbD_n_lt hx hx1 (n + 1)⟩, fun x hx hx1 _ => ?_,
-    fun x hx hx1 _ j hjT hj => ?_, fun x hx hx1 _ => ?_, fun x hx hx1 _ => Qc.qcBd_of_X hx (zbgq_lt_X hx hx1 (n + 1)),
+    fun x hx hx1 _ j hjT hj => ?_, fun x hx hx1 _ => ?_, fun x hx hx1 _ => Qc.yBd_of_qc (Qc.qcBd_of_X hx (zbgq_lt_X hx hx1 (n + 1))),
     fun σ ρ hB _ => ?_⟩
   · rw [hE, Nat.cast_succ, ← add_assoc]
     exact Order.add_one_le_of_lt (gmq_gt hx hx1 (zbD_n_T hx hx1 n).1 (zbD_n_lt hx hx1 n))

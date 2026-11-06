@@ -1,6 +1,6 @@
 import Googology.Trans.PoR.InaccPsi.R2.YwLev
 import Googology.Trans.PoR.InaccPsi.R2.YrDir
-import Googology.Trans.PoR.InaccPsi.R2.QcBd
+import Googology.Trans.PoR.InaccPsi.R2.QcBdV
 
 /-!
 # YwU: THE TOP WITNESS FROM LEMMA IMG, AND THE UNION STEP AT EVERY TOP BELOW `X^x` (CLOSED TOPS INCLUDED)
@@ -65,11 +65,11 @@ theorem ywTopWit_of_GnI {E : Ordinal.{0}} (hE : InE E) (hρE : ρ < E) (hI : GnI
 /-- **THE TOP WITNESS OF EVERY `ε`-NUMBER TOP `T(ρ) ∈ (ρ, X^ρ)` WITH LEMMA EXACT** (for the copies that keep a gate
 `g < ρ`, `T` exact above `g`). -/
 theorem ywTopWit {g : Ordinal.{0}} {T : Ordinal.{0} → Ordinal.{0}} (hgρ : g < ρ) (hE : InE (T ρ)) (hρE : ρ < T ρ)
-    (hX : Qc.QcBd ρ (T ρ)) (hpi : ∀ σ, UpsPt σ → Bases σ ρ → g < σ → pi σ ρ (T ρ) = T σ) :
+    (hX : Qc.YBd ρ (T ρ)) (hpi : ∀ σ, UpsPt σ → Bases σ ρ → g < σ → pi σ ρ (T ρ) = T σ) :
     ∃ W Z : Finset Ordinal.{0}, WZ ρ δ W Z ∧ T ρ ∈ W ∧
       ∀ (A : Set Ordinal.{0}) (f : Ordinal.{0} → Ordinal.{0}), ↑W ⊆ A → ↑Z ⊆ A → GdCtx g ρ A f →
         (∃ e', f (T ρ) = ω ^ e' ∧ ω ^ f ρ ∣ e') ∧ T (f ρ) ≤ f (T ρ) := by
-  obtain ⟨W, Z, w, hTW, hI⟩ := ywTopWit_of_GnI h hE hρE (Qc.qc_img_bd h hX)
+  obtain ⟨W, Z, w, hTW, hI⟩ := ywTopWit_of_GnI h hE hρE (Qc.yBd_img h hX)
   refine ⟨W, Z, w, hTW, fun A f hW hZ C => ?_⟩
   obtain ⟨h1, h2⟩ := hI A f hW hZ C.1
   refine ⟨h1, ?_⟩
@@ -92,7 +92,7 @@ structure YwUF (g : Ordinal.{0}) where
   T_E : ∀ x, InE x → x < Om1 → g < x → InE (T x)
   T_mem : ∀ x, InE x → x < Om1 → g < x → T x ∈ Tset x
   T_gt : ∀ x, InE x → x < Om1 → g < x → x < T x
-  T_X : ∀ x, InE x → x < Om1 → g < x → Qc.QcBd x (T x)
+  T_X : ∀ x, InE x → x < Om1 → g < x → Qc.YBd x (T x)
   E_lt : ∀ i x, InE x → x < Om1 → g < x → gi i < x → (K i).K.E x < T x
   cof : ∀ x, InE x → x < Om1 → g < x → ∀ v < T x, ∃ i, gi i < x ∧ v < (K i).K.E x
   pi : ∀ σ ρ, UpsPt σ → UpsPt ρ → Bases σ ρ → g < σ → T ρ ∈ TB ρ σ ∧ pi σ ρ (T ρ) = T σ
@@ -102,7 +102,7 @@ namespace YwUF
 variable {g : Ordinal.{0}} (F : YwUF g)
 
 theorem T_lt1 {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hg : g < x) : F.T x < Om1 :=
-  Qc.qcBd_lt hx hx1 (F.T_X x hx hx1 hg)
+  Qc.yBd_lt hx hx1 (F.T_X x hx hx1 hg)
 
 theorem top_i (i : F.I) {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hi : F.gi i < x) :
     (F.K i).K.sys.top x = (F.K i).K.E x := by
@@ -287,7 +287,7 @@ noncomputable def ywBGF : YwUF 0 where
     (hx.pos.trans hx1)).2.2.2.1
   T_mem := fun x hx hx1 _ => (ywD_closed hx hx1).2.1
   T_gt := fun x hx hx1 _ => (ywD_closed hx hx1).1
-  T_X := fun x hx hx1 _ => Qc.qcBd_of_X hx (ywD_lt_X hx hx1)
+  T_X := fun x hx hx1 _ => Qc.yBd_of_qc (Qc.qcBd_of_X hx (ywD_lt_X hx hx1))
   E_lt := fun n x hx hx1 _ _ => by
     show (ywTwL n.down).K.E x < ywV 1 0 x
     rw [ywTwL_E n.down hx hx1]

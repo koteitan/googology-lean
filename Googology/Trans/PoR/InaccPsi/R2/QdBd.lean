@@ -1,4 +1,5 @@
 import Googology.Trans.PoR.InaccPsi.R2.QdGEq
+import Googology.Trans.PoR.InaccPsi.R2.QcBdV
 
 /-!
 # QdBd: THE BOUND OF THE LAYER TOPS PAST `B₂` — BELOW A POINT OF A VEBLEN LEVEL, AND LEMMA IMG THERE AS A HYPOTHESIS
@@ -16,7 +17,7 @@ Lemma IMG at the points of the levels `N ∈ [ε_{Ω₁+1}, Γ_{Ω₁+1})` is no
 needs the exact reach at those points ([W07b] Def 4.1 with `δ = (λ)^*` an `ε`-number, a nontrivial localization and
 `cr`), which `R2.CitedRj` states only below `ε_{Ω₁+1}`, and the copy lemma `Qc.qc_copy` has no `φ` case.
 
-No new axiom.  New definitions: `QdBd`, `QdImgH`.
+No new axiom, no new definition (`QdBd`, `QdImgH` are in `R2.QcBdV`).
 -/
 
 set_option autoImplicit false
@@ -29,25 +30,6 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Trans.PoR.InaccPsi.
   Googology.Trans.PoR.InaccPsi.R2.Gl Googology.Trans.PoR.InaccPsi.R2.Gb Googology.Trans.PoR.InaccPsi.R2.Yh
   Googology.Trans.PoR.InaccPsi.R2.Uc Googology.Trans.PoR.InaccPsi.R2.Gk Googology.Trans.PoR.InaccPsi.R2.Yw
   Googology.Trans.PoR.InaccPsi.R2.Qc
-
-/-- **`v` is below a point `ϑˣ(Ω₁·N)` of a Veblen level `Ω₁ ≤ N < Γ_{Ω₁+1}` with its data below `x`.** -/
-def QdBd (x v : Ordinal.{0}) : Prop :=
-  ∃ N, Om1 ≤ N ∧ N < ggGam ∧ Tf.tfDat N < x ∧ v < vt x (Om1 * N)
-
-/-- **Lemma IMG below every point of a Veblen level** (a hypothesis), in every restart context. -/
-def QdImgH : Prop := ∀ ρ τ δ v : Ordinal.{0}, RstK ρ τ δ → QdBd ρ v → GnI ρ δ v
-
-theorem qd_img_bd (hI : QdImgH) {ρ τ δ v : Ordinal.{0}} (h : RstK ρ τ δ) (hb : QdBd ρ v) : GnI ρ δ v :=
-  hI ρ τ δ v h hb
-
-theorem qd_gg_lt_Om2 : ggGam < (OmTwo : Ordinal.{0}) := by
-  rw [uc_Om2_eq]; exact Tf.tf_gg_lt_BG.trans Tf.tfBG_lt_Om2
-
-/-- The arguments `Ω₁·M + σ`, `M < Γ_{Ω₁+1}`, `σ < Ω₁`, are below `Ω₂`. -/
-theorem qd_arg_lt {M σ : Ordinal.{0}} (hM : M < ggGam) (hσΩ : σ < Om1) : Om1 * M + σ < OmTwo := by
-  have hE : InE (OmTwo : Ordinal.{0}) := Low.opow_eq_self_of_SC uc_SC_Om2
-  have hO1 : (Om1 : Ordinal.{0}) < OmTwo := uc_Om1_lt_Om2
-  exact (inE_indec hE).add_lt (hE.mul_lt hO1 (hM.trans qd_gg_lt_Om2)) (hσΩ.trans hO1)
 
 theorem qdBd_mono {x v w : Ordinal.{0}} (hwv : w ≤ v) (h : QdBd x v) : QdBd x w := by
   obtain ⟨N, h1, h2, h3, h4⟩ := h
@@ -62,20 +44,6 @@ section Bd
 
 variable {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1)
 include hx hx1
-
-/-- The point `ϑˣ(Ω₁·N)` is in `Tˣ ∩ Ω₁`, at least `x` and additively principal. -/
-theorem qd_bd_pt {N : Ordinal.{0}} (hN1 : Om1 ≤ N) (hNG : N < ggGam) (hNx : Tf.tfDat N < x) :
-    vt x (Om1 * N) ∈ Tset x ∧ vt x (Om1 * N) < Om1 ∧ x ≤ vt x (Om1 * N) ∧ Indec (vt x (Om1 * N)) := by
-  have h0T : (0 : Ordinal.{0}) ∈ Tset x := mem_T_of_le hx hx1 zero_le
-  have h0Ω : (0 : Ordinal.{0}) < Om1 := hx.pos.trans hx1
-  have hargT := tfArg_mem hx hx1 hN1 (hNG.trans Tf.tf_gg_lt_BG) (mem_T_of_le hx hx1 hNx.le) h0T h0Ω
-  rw [add_zero] at hargT
-  obtain ⟨hT, hx', h1, hI, -⟩ := vt_memTwo hx hx1 hargT (by simpa using qd_arg_lt hNG h0Ω)
-  exact ⟨hT, h1, hx', hI⟩
-
-theorem qdBd_lt {v : Ordinal.{0}} (h : QdBd x v) : v < Om1 := by
-  obtain ⟨N, h1, h2, h3, h4⟩ := h
-  exact h4.trans (qd_bd_pt hx hx1 h1 h2 h3).2.1
 
 theorem qdBd_T {v : Ordinal.{0}} (h : QdBd x v) : v ∈ Tset x := by
   obtain ⟨N, h1, h2, h3, h4⟩ := h
