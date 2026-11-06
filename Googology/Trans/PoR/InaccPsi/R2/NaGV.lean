@@ -3,14 +3,15 @@ import Googology.Trans.PoR.InaccPsi.R2.GlAt
 /-!
 # Na: THE ATOMS OF EVERY LEVEL ABOVE A FIXED POINT OF THE NEXT LEVEL (`Zm.zm_glA_veb2` at every level)
 
-`glA β t x = ϑˣ(Ω₁·β + t)` (`Gl.glA`).  For a level `1 ≤ β ∈ Tˣ ∩ Ω₁` and a fixed point `V = φ(β+1, V) ∈ Tˣ ∩ Ω₁`
-above `x` and `β`, the atoms of level `β` from `V` on are the values of `φ(β, ·)` from `V + 1` on, up to the next fixed
-point `φ(β+1, V+1)`:
+`glA β t x = ϑˣ(Ω₁·β + t)` (`Gl.glA`).  For a level `1 ≤ β ∈ Tˣ ∩ Ω₁` and a value `V = φ(β+1, b) ∈ Tˣ ∩ Ω₁` above
+`x` and `β`, the atoms of level `β` from `V` on are the values of `φ(β, ·)` from `V + 1` on, up to the next fixed point
+`φ(β+1, b+1)` of `φ(β, ·)`:
 
-* `na_noFix` (no fixed point of `φ(β, ·)` strictly between `V` and `φ(β+1, V+1)`), `na_fix` (`φ(β, V) = V`);
+* `na_noFix` (no fixed point of `φ(β, ·)` strictly between `V = φ(β+1, b)` and `φ(β+1, b+1)`), `na_fix`
+  (`φ(β, V) = V`);
 * `na_lt_V` (**every atom `ϑˣ(Ω₁·β + σ)`, `σ < V`, is below `V`**: minimality `Gl.glA_min` at `V` and `Gl.glA_notP`);
-* `na_glA` (**`ϑˣ(Ω₁·β + V + t) = φ(β, V + 1 + t)` for every `t` with `V + t < φ(β+1, V+1)`**; for `β = 1`,
-  `V = D(x)` this is `Zm.zm_glA_veb2`).
+* `na_glA` (**`ϑˣ(Ω₁·β + V + t) = φ(β, V + 1 + t)` for every `V = φ(β+1, b)` above `x`, `β` and every `t` with
+  `V + t < φ(β+1, b+1)`**; for `β = 1`, `V = b = D(x)` this is `Zm.zm_glA_veb2`).
 
 No new axiom.  No new definition.
 -/
@@ -22,9 +23,9 @@ namespace Googology.Trans.PoR.InaccPsi.R2.Na
 open Ordinal Order Set Googology.Trans.PoR.InaccPsi.R2 Googology.Trans.PoR.InaccPsi.R2.Gl
   Googology.Trans.PoR.InaccPsi.R2.Lu
 
-/-- **No fixed point of `φ(β, ·)` strictly between `V = φ(β+1, V)` and `φ(β+1, V+1)`.** -/
-theorem na_noFix {β V y : Ordinal.{0}} (hV : veblen (β + 1) V = V) (h1 : V < y)
-    (h2 : y < veblen (β + 1) (V + 1)) : veblen β y ≠ y := by
+/-- **No fixed point of `φ(β, ·)` strictly between `V = φ(β+1, b)` and `φ(β+1, b+1)`.** -/
+theorem na_noFix {β b V y : Ordinal.{0}} (hV : veblen (β + 1) b = V) (h1 : V < y)
+    (h2 : y < veblen (β + 1) (b + 1)) : veblen β y ≠ y := by
   intro hy
   obtain ⟨b, rfl⟩ := (luP_succ (β := β) (a := y)).2 hy
   rw [← hV] at h1
@@ -32,8 +33,8 @@ theorem na_noFix {β V y : Ordinal.{0}} (hV : veblen (β + 1) V = V) (h1 : V < y
   have hb2 := (isNormal_veblen (β + 1)).strictMono.lt_iff_lt.1 h2
   exact absurd (Order.add_one_le_of_lt hb1) (not_le.2 hb2)
 
-theorem na_fix {β V : Ordinal.{0}} (hV : veblen (β + 1) V = V) : veblen β V = V := by
-  have h := veblen_veblen_of_lt (lt_add_one β) V
+theorem na_fix {β b V : Ordinal.{0}} (hV : veblen (β + 1) b = V) : veblen β V = V := by
+  have h := veblen_veblen_of_lt (lt_add_one β) b
   rwa [hV] at h
 
 section Atom
@@ -56,11 +57,11 @@ theorem na_lt_V {β V : Ordinal.{0}} (hβ1 : 1 ≤ β) (hβT : β ∈ Tset x) (h
   refine lt_of_le_of_ne hle fun e => ?_
   exact glA_notP hx hx1 hβ1 hβT hβΩ hσT hσ1 (by rw [e]; exact (luP_succ (β := β) (a := V)).2 hV)
 
-/-- **`ϑˣ(Ω₁·β + V + t) = φ(β, V + 1 + t)`** for a fixed point `V = φ(β+1, V)` above `x`, `β` and every `t` with
-`V + t < φ(β+1, V+1)`. -/
-theorem na_glA {β V : Ordinal.{0}} (hβ1 : 1 ≤ β) (hβT : β ∈ Tset x) (hβΩ : β < Om1) (hVT : V ∈ Tset x)
-    (hV1 : V < Om1) (hxV : x < V) (hβV : β < V) (hV : veblen (β + 1) V = V) :
-    ∀ t, V + t ∈ Tset x → V + t < Om1 → V + t < veblen (β + 1) (V + 1) →
+/-- **`ϑˣ(Ω₁·β + V + t) = φ(β, V + 1 + t)`** for a value `V = φ(β+1, b)` above `x`, `β` and every `t` with
+`V + t < φ(β+1, b+1)`. -/
+theorem na_glA {β b V : Ordinal.{0}} (hβ1 : 1 ≤ β) (hβT : β ∈ Tset x) (hβΩ : β < Om1) (hVT : V ∈ Tset x)
+    (hV1 : V < Om1) (hxV : x < V) (hβV : β < V) (hV : veblen (β + 1) b = V) :
+    ∀ t, V + t ∈ Tset x → V + t < Om1 → V + t < veblen (β + 1) (b + 1) →
       glA β (V + t) x = veblen β (V + 1 + t) := by
   have hVβ := na_fix hV
   have hlow := na_lt_V hx hx1 hβ1 hβT hβΩ hVT hV1 hxV hβV hVβ
