@@ -20,7 +20,9 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
           - 済み：B₂ より先の atom 系、上限 θ（Qt.qtU S：atom は (Ω₁, θ) にある K⁽⁰⁾_Z の強臨界な元）と、S での hull の事実（Zb.ZbAS.Ok。atom が S に依ってよいように Zb.ZbAS から分けた）。
           - 済み（B₃ = Qd.qdB 未満）：B₃ 未満のすべての c で Zm.ZmPastAt S c（Qd.qd_past）。読み vD、digit system（Qd.qdGood_all）、層（Qd.qdLay_all）を Veblen の水準で Qc と同じ順に作った。
           - 済み：仮定なしの Qd.QdImgH（Qf.qf_imgH_all）。Veblen の水準の点の到達距離（引用公理 R2.qfLhT、Qf.qf_lh_lvl）、差の補題（Qf.qf_lam_gap）、分離（Qf.qf_sep_lvl）、すべての符号の写しの補題（Qf.qf_copy）、Tᵖ[σ] が ρ より上の可算の φ の値で閉じること（Qf.qf_TBphi、skTBphi）。
-          - 🤖 次：B₃ ≤ c < θ（skLayPastB3θ。λ の一般の水準の読み。基数を 1 つ下げ、葉を x で読む。R2.CitedVd）。
+          - 済み：θ 未満のすべての符号で Lemma EXACT と順序型の一致。読み R_x = π∘ι（ι と P₀ を引用、R2.CitedXi。Xi.xiR_pi、Xi.xiR_gx）。
+          - 済み（Xi.XiImgAll を仮定）：θ 未満のすべての層 c（Xi.xi_past。θ 未満の符号の上限ごとに 1 つの層、項は R_x で読む符号。skLayPastB3θ）。
+          - 🤖 次：Xi.XiImgAll（skXiImg）。θ 未満の符号 c のすべての読み R_ρ(c) での Lemma IMG。θ 未満のすべての水準 M での点 ϑᵖ(Ω₁·M + η) の到達距離（[W07b] Def 4.1、局所化と cr）、分離、atom 符号の写しの補題。
         - その後：道の上のほかの葉（skLayPastTh、窓と上の端、skBC、skFix、skZlCfg、skLevImgHi4）。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
