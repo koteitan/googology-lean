@@ -1,12 +1,12 @@
-# R₂^C skeleton: status (round 223)
+# R₂^C skeleton: status (round 224)
 Root `R2Skel.Root.skNuC (S : InaccSeq)` = the conclusion of `Xo.xoRoadH` (ν_C = L(ω+1), …). Round 129: the root applies
 `Yq.yqRoadS` = `Xo.xoRoadH` with the bridge replaced by the shift `SkS.skShiftXo`; supply `SkS.skSupXo` (repaired `Xo.XoR`);
 frontier `SkF.skFront` → hUH/hLH/hVH/hVt; reading `SkR.skWall`, `SkR.skThHi` → `SkE.skEQ` → hT/hF. Round 130: Root unchanged.
 Round 131: `SkE.skEQ hRead hUH hLH hVt`. Round 132: `SkE.skEQ hRead hW hUH hLH hVt`, `hW = SkR.skWallCF S` (the code-free
 wall, used by `SkE.skTopK`). Round 133: Root unchanged; the bundle checks against the main build with only `declaration uses sorry` (68).
 ## Main progress number: OPEN / SUSPECT leaves on the road from `Root.skNuC`
-**14 distinct OPEN leaves (all L); 0 SUSPECT; 0 REFUTED** (round 223: skTBphi PROVED (Qf.qf_TBphi), so skImgVeb holds with no hypothesis; round 222: skImgVeb PROVED from skTBphi (Qf.qf_imgH, with the cited `R2.qfLhT`), skTBphi OPEN (Tᵖ[σ] closed under countable φ); round 221: skLayPastB2θ split, skLayPastB2B3 PROVED from skImgVeb (Qd.qd_past: B₂ ≤ c < B₃ = Qd.qdB), skImgVeb (Lemma IMG at the Veblen levels, Qd.QdImgH) and skLayPastB3θ OPEN; round 220: atom system below θ, Qt.qtU, with Zb.ZbAS.Ok; round 219: skLayPastXθ split, skLayPastXB2 PROVED (Qc.qc_past), skLayPastB2θ OPEN; round 215: skZbDirectX PROVED, Va.vsDirectX; round 182: skAtHi3 PROVED, Kz.kzAtHi3; 176: skPsi3OffRest2 PROVED, Ky.kyPsi3OffRest2; 174: skTopLawAll PROVED, Kx.kxTopLawAll; round 138: 17 after merges, then the road leaf skLayPastX was REFUTED and split; 137: 20; 135: 22 L; 134: 22; 133: 23; 132: 18 L; round 131: 18; round 130: 19 OPEN L; round 129: 19;
-rounds 127, 128: 17). Counted by a Lean walk over the constants used by `skNuC`. On the road: SkF skLayPastB3θ, skLayPastTh,
+**14 distinct OPEN leaves (all L); 0 SUSPECT; 0 REFUTED** (round 224: skLayPastB3θ PROVED from the new leaf skXiImg (Xi.xi_past: one layer per code bound below θ, read by R_x = π∘ι, R2.CitedXi), skXiImg = Lemma IMG at every reading below θ OPEN; round 223: skTBphi PROVED (Qf.qf_TBphi), so skImgVeb holds with no hypothesis; round 222: skImgVeb PROVED from skTBphi (Qf.qf_imgH, with the cited `R2.qfLhT`), skTBphi OPEN (Tᵖ[σ] closed under countable φ); round 221: skLayPastB2θ split, skLayPastB2B3 PROVED from skImgVeb (Qd.qd_past: B₂ ≤ c < B₃ = Qd.qdB), skImgVeb (Lemma IMG at the Veblen levels, Qd.QdImgH) and skLayPastB3θ OPEN; round 220: atom system below θ, Qt.qtU, with Zb.ZbAS.Ok; round 219: skLayPastXθ split, skLayPastXB2 PROVED (Qc.qc_past), skLayPastB2θ OPEN; round 215: skZbDirectX PROVED, Va.vsDirectX; round 182: skAtHi3 PROVED, Kz.kzAtHi3; 176: skPsi3OffRest2 PROVED, Ky.kyPsi3OffRest2; 174: skTopLawAll PROVED, Kx.kxTopLawAll; round 138: 17 after merges, then the road leaf skLayPastX was REFUTED and split; 137: 20; 135: 22 L; 134: 22; 133: 23; 132: 18 L; round 131: 18; round 130: 19 OPEN L; round 129: 19;
+rounds 127, 128: 17). Counted by a Lean walk over the constants used by `skNuC`. On the road: SkF skXiImg, skLayPastTh,
 skBC{BaseUL, InR, RsSH}, skFix{Cont, CapVF}, skWin/Top{InR, Big}, skTopLwNo2;
 SkS skZlCfg, skLevImgHi4. Round 130: skWin/TopSpec → skWinIn, skTopIn, skTopLwNo2; skGapRng → skGapRngHi. Round 131:
 skJumpNoRng, skGapRngHi PROVED (hVt); skLay{Lo,Hi}Fix → skZbDirect, skLay{Lo,Hi}FixX; skWin/TopIn, skWin/TopRsIn → skWin/TopInR,
@@ -28,7 +28,7 @@ skNuC REDUCED L  (Yq.yqRoadS)
 │ │ │   round 131: ─ skZbDirect (B_Γ ≤ c < X), skLayLoFixX, skLayHiFixX (X ≤ c < Ω₂); skZbDirectE0 +3 PROVED
 │ │ │   round 132: skZbDirect holds below B_Γ·B_Γ with no hypothesis (skZgDirectSq); skZgTl, skZgRef +3 PROVED
 │ │ │   round 133: skZbDirect ─ skZbDirectX PROVED L (round 215, Va.vsDirectX; no hypothesis below B₂, the next fixed point of Γ: Va.vaDirectB2, skVaDirectB2, round 207; digit systems at every ε-number below X over gated segment bases: skVsGoodAll, round 213); skLay{Lo,Hi}FixX ─
-│ │ │     skLayPastX REFUTED (138) → skLayPastXθ REDUCED (219: skLayPastXB2 PROVED, Qc.qc_past; skLayPastB2θ REDUCED (221): skLayPastB2B3 PROVED from skImgVeb, Qd.qd_past; skImgVeb PROVED (222, Qf.qf_imgH; skTBphi PROVED 223, Qf.qf_TBphi); skLayPastB3θ OPEN L), skLayPastTh OPEN L; 7 Zm PROVED; skLayBelowBG L (129), …
+│ │ │     skLayPastX REFUTED (138) → skLayPastXθ REDUCED (219: skLayPastXB2 PROVED, Qc.qc_past; skLayPastB2θ REDUCED (221): skLayPastB2B3 PROVED from skImgVeb, Qd.qd_past; skImgVeb PROVED (222, Qf.qf_imgH; skTBphi PROVED 223, Qf.qf_TBphi); skLayPastB3θ PROVED from skXiImg (224, Xi.xi_past), skXiImg OPEN L), skLayPastTh OPEN L; 7 Zm PROVED; skLayBelowBG L (129), …
 │ │ │   off the road: skLaySysY REDUCED L ─ skLaySysAll1, skLaySysYHi OPEN L; skLaySys_false, skFixReadX_false REFUTED S
 │ │ ├ skRegBhi REDUCED L: skBhiA REDUCED L ─ skBhiAcell PROVED M, skBhiAfar;  skBhiL  (round 133: both PROVED from skBC)
 │ │ ├ skWinA, skWinB ─ skWinL REDUCED L ─ skWinUL PROVED S, skWinSpec ─ skWinInR OPEN L
@@ -66,15 +66,15 @@ skNuC REDUCED L  (Yq.yqRoadS)
     off the road: skRealBXo REDUCED L; skYbIF REDUCED L ─ skYbIFTh REDUCED L ─ skYbIFNot PROVED M, skYbIFHuge OPEN L;
       skShiftTh PROVED L, skFormHighX REFUTED L, skSupKW, skImgEps, skCarryHigh OPEN L, skRealB SUSPECT L
 ```
-## Counts (723 nodes)
+## Counts (724 nodes)
 | part | PROVED | REDUCED | OPEN | SUSPECT | REFUTED | REPLACED | S | M | L |
 |---|---|---|---|---|---|---|---|---|---|
-| SkF | 260 | 47 | 16 | 0 | 4 | 39 | 156 | 81 | 128 |
+| SkF | 261 | 47 | 16 | 0 | 4 | 39 | 156 | 81 | 128 |
 | SkR | 90 | 15 | 3 | 1 | 3 | 0 | 44 | 47 | 21 |
 | SkE | 92 | 16 | 0 | 0 | 0 | 0 | 102 | 0 | 6 |
 | SkS | 90 | 38 | 6 | 1 | 2 | 0 | 59 | 29 | 49 |
 | Root | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 1 |
-| all | 532 | 117 | 25 | 2 | 9 | 39 | 361 | 157 | 205 |
+| all | 533 | 117 | 25 | 2 | 9 | 39 | 361 | 157 | 205 |
 
 OPEN by size: L 23 (SkF 16, SkR 1, SkE 0, SkS 6), M 0, S 0. Off the road (8): skA3T0Start, skLaySysAll1,
 skLaySysYHi, skPsi3OffHi, skYbIFHuge, skSupKW, skImgEps, skCarryHigh. SUSPECT: skMidAssemble M, skRealB L.
@@ -96,5 +96,5 @@ sorry 57 → 60, OPEN 28 (27 L, 1 S) → 27 (all L), SUSPECT 3 → 2, REFUTED 7 
   131 `Zb.zbGsCS_lt_BG`, `Zc.zcRsTerm_long_false`; 132 `Zf.zfNodesAll_false`; 133 `Zn.znSupInB_false`, `Zn.znRsTerm_false`, `Zo.zoReach0_ref`; 135 `Zs.zsBaseRs_lower`, `Zs.zsSup_false`.
 ## Suggested order of the next rounds
 1. Supply: skLevImgHi4 (nested ϑ-nodes: `Zf.zfDCl` by recursion on term size), skZlCfg (past the φ-ladder; EQ; υ-fixed carry).
-2. Region B, (C): skLayPastB3θ (B₃ ≤ c < θ; X ≤ c < B₃ PROVED, Qc.qc_past, Qd.qd_past with skImgVeb, round 223), skLayPastTh (skZbDirectX PROVED, round 215); skFix{Cont, CapVF}, skWin/Top{Big, InR}, skTopLwNo2; skBCBaseUL (big reading: Lemma RS with values past υ_{l₀+1}), skBC{InR, CapVH, RsSH}.
+2. Region B, (C): skXiImg (Lemma IMG at every reading R_ρ(c) of a code below θ; with it every layer c < θ, Xi.xi_past, round 224; below the Veblen levels it is Qf.qf_imgH_all), skLayPastTh (skZbDirectX PROVED, round 215); skFix{Cont, CapVF}, skWin/Top{Big, InR}, skTopLwNo2; skBCBaseUL (big reading: Lemma RS with values past υ_{l₀+1}), skBC{InR, CapVH, RsSH}.
 3. Reading: skAtHi3 PROVED (rounds 177–182, Kz: T_K below K = Γ_{Ω_ω+1}, the top law Kz.kzTop, the offset law Kz.kzOff and the band moves Kz.kzMoveA on D_K).

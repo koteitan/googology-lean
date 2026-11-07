@@ -1,5 +1,6 @@
 import Googology.Trans.PoR.InaccPsi.R2.QdPast
 import Googology.Trans.PoR.InaccPsi.R2.QfTB
+import Googology.Trans.PoR.InaccPsi.R2.XiPast
 import Googology.Trans.PoR.InaccPsi.R2.HoRoad
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
 import Googology.Trans.PoR.InaccPsi.R2.WhSucc
@@ -2418,15 +2419,24 @@ a Veblen level below `Γ_{Ω₂+1}`): `Zm.ZmPastAt S c`. -/
 theorem skLayPastB2B3 (S : InaccSeq.{0}) : ∀ c, Uc.ucB ≤ c → c < Qd.qdB → Zm.ZmPastAt S c :=
   fun c _ hc => Qd.qd_past S skImgVeb c hc
 
-/-- STATUS: OPEN (round 221: the part of skLayPastB2θ from `B₃` on; REFUTE FIRST: NO EVIDENCE — below `B₃` it is a
-theorem given skImgVeb, skLayPastB2B3; `Γ(c+1) < θ` for every `c < θ`, `Zu.zuGcG_lt_th`)
+/-- STATUS: OPEN (round 224, new leaf: what remains of skLayPastB3θ; REFUTE FIRST: NO EVIDENCE — `R_ρ` maps the codes
+visible at `ρ` onto `Tᵖ ∩ Ω₁` (`Xi.xiR_onto`), so this is Lemma IMG at every point of `Tᵖ ∩ Ω₁` above `ρ`; it is a
+theorem below the points `ϑᵖ(Ω₁·N)` of the Veblen levels `N < Γ_{Ω₁+1}` (`Qf.qf_imgH_all`))
 SIZE: L
-THE LAYERS `B₃ ≤ c < θ` FROM ONE ATOM SYSTEM (`Zm.ZmPastAt S c`).  Needs readings of the fixed points `Hˡ_λ(y)` of `Γ`
-with the levels `λ ≥ Γ_{Ω₂+1}` of `Vd.vd_nf_ex` (below `Ω₃`): a level reading of `λ` one cardinal down, the leaves
-read at `x`, with its data, order, cofinality and exactness (`R2.CitedVd`), and the bound of the tops past
-`Γ_{Ω₁+1}`. -/
-theorem skLayPastB3θ (S : InaccSeq.{0}) : ∀ c, Qd.qdB ≤ c → c < ConjT.th S → Zm.ZmPastAt S c := by
+LEMMA IMG AT EVERY READING OF A CODE BELOW `θ` (`Xi.XiImgAll`): in every restart context `RstK ρ τ δ` with `Γ₀ < ρ`,
+`GnI ρ δ (R_ρ(c))` for every code `Ω₁ ≤ c < θ` visible at `ρ` (`R_ρ = π ∘ ι`, `Xi.xiR`).  Needs the reach of the points
+`ϑᵖ(Ω₁·M + η)` at every level `M < θ` ([W07b] Def 4.1 with the localization and `cr`; `ι` and `P₀` are Lean
+constants with cited facts, `R2.CitedXi`), the separation, and the copy lemma for the atom codes. -/
+theorem skXiImg (S : InaccSeq.{0}) : Xi.XiImgAll S := by
   sorry
+
+/-- STATUS: PROVED from skXiImg (round 224, Xi.xi_past: one layer for every code bound `T < θ`, its terms the codes
+read by `R_x = π ∘ ι` (`R2.CitedXi`; Lemma EXACT `Xi.xiR_pi` and the collapse `Xi.xiR_gx` for every code below `θ`), no
+digit systems; the cofinal bounds `ψ_{Ω₂}(ε_{Ω_n+1})` with gate `Γ₀`)
+SIZE: L
+THE LAYERS `B₃ ≤ c < θ` FROM ONE ATOM SYSTEM (`Zm.ZmPastAt S c`). -/
+theorem skLayPastB3θ (S : InaccSeq.{0}) : ∀ c, Qd.qdB ≤ c → c < ConjT.th S → Zm.ZmPastAt S c :=
+  fun c _ hc => Xi.xi_past (skXiImg S) c hc
 
 /-- STATUS: REDUCED (round 221: skLayPastB2B3 PROVED from skImgVeb below `B₃`, skLayPastB3θ OPEN from `B₃` on; round
 219: the part of skLayPastXθ from `B₂` on)
