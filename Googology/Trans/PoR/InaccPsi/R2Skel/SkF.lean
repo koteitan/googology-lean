@@ -1,3 +1,4 @@
+import Googology.Trans.PoR.InaccPsi.R2.QdPast
 import Googology.Trans.PoR.InaccPsi.R2.HoRoad
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
 import Googology.Trans.PoR.InaccPsi.R2.WhSucc
@@ -2391,16 +2392,44 @@ THE LAYERS `X ≤ c < B₂` (`B₂ = Uc.ucB = ψ_{Ω₂}(ε_{Ω₂+1})`): `Zm.Zm
 theorem skLayPastXB2 (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < Uc.ucB → Zm.ZmPastAt S c :=
   fun c _ hc => Qc.qc_past S c hc
 
-/-- STATUS: OPEN (round 219: the part of skLayPastXθ from `B₂` on; round 138: skLayPastXθ, the part of the refuted
-skLayPastX below `θ`; REFUTE FIRST: NO EVIDENCE — below `B₂` it is a theorem, skLayPastXB2; the bound `V ≤ θ` of
-every atom system, `Zu.zuV_le_th`, is no obstacle below `θ`: `Γ_θ = θ` (`Zu.zuGamma_th`), so `Γ(c+1) < θ` for every
-`c < θ` (`Zu.zuGcG_lt_th`))
+/-- STATUS: OPEN (round 221, new leaf: the hypothesis of the readings past `B₂`; REFUTE FIRST: NO EVIDENCE — below
+the points of the levels `N < ε_{Ω₁+1}` it is a theorem, `Qc.qc_img_rst`)
 SIZE: L
-THE LAYERS `B₂ ≤ c < θ` FROM ONE ATOM SYSTEM (`Zm.ZmPastAt S c`).  Needs an atom system past `B₂` (codes below `θ`
-with the atoms `Hˡ_λ(y)` of `Vd.vd_nf_ex`, levels `λ < Ω₃`; readings of the fixed points of `Γ` with a level reading of
-`λ`, the citations of `R2.CitedVd`; the fields `mem`/`hull` of `Zb.ZbAS` for every `S`). -/
-theorem skLayPastB2θ (S : InaccSeq.{0}) : ∀ c, Uc.ucB ≤ c → c < ConjT.th S → Zm.ZmPastAt S c := by
+LEMMA IMG BELOW THE POINTS OF THE VEBLEN LEVELS (`Qd.QdImgH`): in every restart context, every `v` below a point
+`ϑ^ρ(Ω₁·N)` of a level `Ω₁ ≤ N < Γ_{Ω₁+1}` with `tfDat N < ρ` has the image property.  Needs the reach at those points
+([W07b] Def 4.1 with `δ` an `ε`-number, localization, `cr`; `R2.CitedRj` states it only below `ε_{Ω₁+1}`) and a `φ`
+case of the copy lemma `Qc.qc_copy`. -/
+theorem skImgVeb : Qd.QdImgH := by
   sorry
+
+/-- STATUS: PROVED from skImgVeb (round 221, Qd.qd_past: the atom system `Qt.qtU S`, the readings `Qd.vD` with Veblen
+level readings, the digit systems `Qd.qdGood_all`, a layer at every fixed point of `Γ` below `B₃` (`Qd.qd_layAt`),
+cofinal fixed points `Hᵛ_{γ_n}(0)` with gate `0` (`Qd.qdF_cof`))
+SIZE: L
+THE LAYERS `B₂ ≤ c < B₃` (`B₃ = Qd.qdB`, the least strongly critical `z > Ω₁` with no normal form `Hᵛ_λ(y)`, `λ`
+a Veblen level below `Γ_{Ω₂+1}`): `Zm.ZmPastAt S c`. -/
+theorem skLayPastB2B3 (S : InaccSeq.{0}) : ∀ c, Uc.ucB ≤ c → c < Qd.qdB → Zm.ZmPastAt S c :=
+  fun c _ hc => Qd.qd_past S skImgVeb c hc
+
+/-- STATUS: OPEN (round 221: the part of skLayPastB2θ from `B₃` on; REFUTE FIRST: NO EVIDENCE — below `B₃` it is a
+theorem given skImgVeb, skLayPastB2B3; `Γ(c+1) < θ` for every `c < θ`, `Zu.zuGcG_lt_th`)
+SIZE: L
+THE LAYERS `B₃ ≤ c < θ` FROM ONE ATOM SYSTEM (`Zm.ZmPastAt S c`).  Needs readings of the fixed points `Hˡ_λ(y)` of `Γ`
+with the levels `λ ≥ Γ_{Ω₂+1}` of `Vd.vd_nf_ex` (below `Ω₃`): a level reading of `λ` one cardinal down, the leaves
+read at `x`, with its data, order, cofinality and exactness (`R2.CitedVd`), and the bound of the tops past
+`Γ_{Ω₁+1}`. -/
+theorem skLayPastB3θ (S : InaccSeq.{0}) : ∀ c, Qd.qdB ≤ c → c < ConjT.th S → Zm.ZmPastAt S c := by
+  sorry
+
+/-- STATUS: REDUCED (round 221: skLayPastB2B3 PROVED from skImgVeb below `B₃`, skLayPastB3θ OPEN from `B₃` on; round
+219: the part of skLayPastXθ from `B₂` on)
+SIZE: L
+THE LAYERS `B₂ ≤ c < θ` FROM ONE ATOM SYSTEM (`Zm.ZmPastAt S c`). -/
+theorem skLayPastB2θ (S : InaccSeq.{0}) : ∀ c, Uc.ucB ≤ c → c < ConjT.th S → Zm.ZmPastAt S c := by
+  intro c hB hθ
+  rcases lt_or_ge c Qd.qdB with h3 | h3
+  · exact skLayPastB2B3 S c hB h3
+  · exact skLayPastB3θ S c h3 hθ
 
 /-- STATUS: REDUCED (round 219: skLayPastXB2 PROVED below `B₂`, skLayPastB2θ OPEN from `B₂` on; round 138: the part
 of the refuted skLayPastX below `θ`)
