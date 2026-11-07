@@ -7,18 +7,18 @@ import Googology.Trans.PoR.InaccPsi.R2.ZkNode
 
 `Zk.ZkImgP4` asks the level image off the one-segment levels, the segment sums of one-segment pieces and the prefix
 levels; `Zf.zfShift2` adds the sum trees of nested nodes by induction on the size.  Here one induction does all of it
-and more: the pieces of a sum tree or of the countable rests of a prefix level may be one-segment pieces (`zkPc`) AND
-nested nodes (`Zf.ZfNodeOK`), mixed (`zkMx`).  The exponent map is `D` itself on the configuration, enlarged by the
+and more: the pieces of a sum tree or of the countable rests of a prefix level may be one-segment pieces (`zkPc`),
+nested nodes (`Zf.ZfNodeOK`) and low pieces (`ZkLow`: value below `υ_λ`, fixed by `D`), mixed (`zkMx`).  The exponent map is `D` itself on the configuration, enlarged by the
 Cantor exponents of its points (`zkExps`): a one-segment piece has image `zkCnf zkG val` and `zkG = D` on its exponents
 (`zk_DG`); a node is an `ε`-number, its own only exponent, with image `D(val)` (the node clause at it, a smaller term).
 
 * `zkExps`, `zkExps_le`, `zkEx_of_exps` (**the exponents of the Cantor normal form**);
 * `zk_lev_psD` (`zk_lev_ps` with the exponent map `D` and any pieces);
-* `zkMx` (**mixed pieces**), `ZkImgHi5`, `ZkImgP5` (statements: `ZkImgHi4`, `ZkImgP4` off the mixed sum trees and the
+* `zkCnf_id`, `ZkLow` (**low pieces**), `zkMx` (**mixed pieces**), `ZkImgHi5`, `ZkImgP5` (statements: `ZkImgHi4`, `ZkImgP4` off the mixed sum trees and the
   mixed prefix levels);
 * `zkShift2_P5` (**`ZkImgP5 S ⇒ Yq.XoShift2 S`**).
 
-No new axiom.  New definitions: `zkExps`, `zkMx` (a predicate), `ZkImgHi5`, `ZkImgP5` (statements).
+No new axiom.  New definitions: `zkExps`, `ZkLow`, `zkMx` (predicates), `ZkImgHi5`, `ZkImgP5` (statements).
 -/
 
 set_option autoImplicit false
@@ -100,10 +100,18 @@ theorem zk_lev_psD {l μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {
   have hbb : yvSub S D (Om1 * c) = Om1 * zkCnf D c := zk_yvSub_mul D hD0 hc1
   rw [hadd, ha, hbb, hi, mul_add]
 
-/-- **Mixed pieces**: one-segment pieces and nested nodes. -/
+/-- The Cantor map of the identity is the identity. -/
+theorem zkCnf_id : ∀ v, zkCnf (fun x => x) v = v :=
+  zk_ind (zkCnf_zero _) fun _ _ _ hk0 hk hr IH => by rw [zkCnf_step _ hk0 hk hr, IH]
+
+/-- **A low piece**: value below `υ_λ`, an `old` / `th` / `add` term or a constant (fixed by the shift). -/
+def ZkLow (S : InaccSeq.{0}) (l : Ordinal.{0}) (P : XoE) : Prop :=
+  xoVal S l P < upsilon l ∧ (XoTopF P ∨ ∃ M, P = .lc M)
+
+/-- **Mixed pieces**: one-segment pieces, nested nodes and low pieces. -/
 def zkMx (S : InaccSeq.{0}) (l μ : Ordinal.{0}) (f : Ordinal.{0} → Ordinal.{0}) (Y : Finset Ordinal.{0}) (P : XoE) :
     Prop :=
-  zkPc S l μ f Y P ∨ ZfNodeOK S l P
+  zkPc S l μ f Y P ∨ ZfNodeOK S l P ∨ ZkLow S l P
 
 /-- **The level image off the mixed sum trees and the mixed prefix levels** (statement). -/
 def ZkImgHi5 (S : InaccSeq.{0}) (l β μ γ : Ordinal.{0}) (f D : Ordinal.{0} → Ordinal.{0})
@@ -296,7 +304,7 @@ theorem zkShift2_P5 (hP : ZkImgP5 S) : XoShift2 S := by
         induction hN₀ with
         | @piece P hPm =>
           intro hsz' hWL0 hRL hpL hqL
-          rcases hPm with hpc | hOK
+          rcases hPm with hpc | hOK | hlow
           · -- a one-segment piece: the segment map is `D` on its exponents
             obtain ⟨h1, hEx, himg⟩ := zk_pc_cnf H P hpc
             obtain ⟨-, g, hg, -, hTμ⟩ := hpc
@@ -314,6 +322,31 @@ theorem zkShift2_P5 (hP : ZkImgP5 S) : XoShift2 S := by
             rw [himg]
             refine zkCnf_congr _ (zkEx_mono (fun x hx => (zk_DG H hXγ hγμ hid (fun y hy => (hY' y hy).1) hmv x
               hx.1 (Or.inl (Finset.mem_coe.1 hx.2))).symm) _ (zkEx_and _ hEx hExA))
+          rotate_left
+          · -- a low piece: fixed by `D`
+            obtain ⟨hvl, hform⟩ := hlow
+            have hvb : xoVal S l P < upsilon (l + β) := hvl.trans_le (upsilon_normal.monotone le_self_add)
+            have hvXY : xoVal S l P ∈ X ∪ Y := hqL _ (xoVal_mem P hvb)
+            have hvX' : xoVal S l P ∈ X' := by
+              rcases Finset.mem_union.1 (hsubXY _ hvXY) with h | h
+              · exact h
+              · exact absurd (hY' _ h).1 (not_le.2 hvl)
+            have himg : xoImg S l μ f P = xoVal S l P := by
+              rcases hform with hT | ⟨M, rfl⟩
+              · have hDP := zfDCl (Pt := fun z => z ∈ X ∪ Y) hl0 hβ0 hb1 hX' hY' hBμ hμ0 hLs.mono hLs.add
+                  hLs.below hres hold hun hLC hid hγU hZa n ih hLv' hPr' (Finset.mem_union_left _ hωX') P hsz'
+                  hWL0 hT hRL hpL hqL hvb
+                rw [← hDP, hLs.fix _ hvX']
+              · rfl
+            have hExA : ZkEx (· ∈ (↑(X' ∪ Y') : Set Ordinal.{0})) (xoVal S l P) :=
+              zkEx_of_exps _ _ (fun e he => Finset.mem_coe.2 (hCXY _ hvXY e he))
+            refine ZkSS.piece ⟨hvl.trans hl1, hExA, ?_⟩
+            have hfixE : ZkEx (fun x => D x = x) (xoVal S l P) := by
+              refine zkEx_of_exps _ _ (fun e he => hLs.fix _ ?_)
+              rcases Finset.mem_union.1 (hCXY _ hvXY e he) with h | h
+              · exact h
+              · exact absurd (hY' _ h).1 (not_le.2 ((zkExps_le _ he).trans_lt hvl))
+            rw [himg, zkCnf_congr _ hfixE, zkCnf_id]
           · -- a nested node
             obtain ⟨h', L', e', rfl, hF', hM1'⟩ := hOK
             have hWL := hWL0
