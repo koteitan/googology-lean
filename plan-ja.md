@@ -13,7 +13,7 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
       - 骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：道の上の OPEN の葉は 12（すべて L）。skZbDirectX は証明済み（215 回目）。skTopLawAll、skPsi3OffRest2、skAtHi3 は証明済み（Kx.kxTopLawAll、Ky.kyPsi3OffRest2、Kz.kzAtHi3）。根が空虚かは未定。
       - 済み：θ 未満で X より上の層（skLayPastXθ、仮定なし）。X ≤ c < B₂（Qc、Phase C）、B₂ ≤ c < B₃（Qd、Phase D1）、θ 未満のすべての c（Xi.xi_past：θ 未満の符号の上限ごとに 1 つの層、R_x = π∘ι で読む。ι と P₀ は R2.CitedXi で引用。Xi.xi_imgAll：Tᵖ ∩ Ω₁ のすべての点で Lemma IMG。被覆 π⁻¹∘f と全形の [W07b] Claim 5.6、R2.claim56pw）。skFixCont（Xi.xi_code_cont：c < m_λ の符号は θ 未満、π(Θ_λ c) = Θ_μ(c)、m_μ ≥ c の再始動 ι(g + ω^{e'}) が共終。(l₀, ι(Ω_ω)) でも skBCCont、区間の帰納 Zo.zoBC3 が値の入力を受け取る）。
       - 🤖 次：道の上の残り 12 の葉。skLayPastTh（θ ≤ c < Ω₂）、窓と上の端（skWin/Top{InR, Big}、skTopLwNo2）、skBC{BaseUL, InR, Big}、skFixCapVF、skZlCfg、skLevImgHi5。
-        - 🤖 今：skLevImgHi5（シフトの水準の像、Zk.ZkImgP5。skLevImgHi4 の置き換え）。Zk.zkShift2_P5 は、配置を点の Cantor 指数で広げ、指数の写像を D そのものにして、大きさの帰納を 1 回回す。これで一区間の部分と入れ子の節点が混ざった和の木と接頭部分の水準は済み。次は水準 0 の入れ子の節点や φ・定数の隣の節点、区間をまたぐ φ、old の ub/tm の葉、接する項、動く葉を持つ Ω/ψ。
+        - 🤖 今：skLayPastTh と大きい読み（υ_{λ+1} < Θ_λ(m_λ)）。υ_{λ+1} を越える値での Lemma RS には、hull の節を持つ FRAG（Za.zaFragV）の標準の像と、θ ≤ c < Ω₂ の符号の読みの式が要る。済み：台地の下では原子の読みが等式で決まる。Θ(ψ_{Ω₂}(Ω_ω + c)) = ψ_{Ω₁}(A + θ + Θ(c))、Θ(K_j) = F_j（Zr.zrInner_eq、Zr.zrOuter_eq）。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
   - ✅ M < (0,0,0)(1,1,1)：紙と Lean で証明済み
