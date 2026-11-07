@@ -18,10 +18,9 @@ The remaining work, arranged by the cells of the README tables. Items not being 
         - done: the layers at the fixed points of Γ below B₂ (Qc.qsLay_all), Zm.ZmPastAt S c for every c < B₂ (Qc.qc_past).
         - 🤖 left: B₂ ≤ c < θ (skLayPastB2θ, Phase D; X ≤ c < B₂ is skLayPastXB2, proved).
           - done: the atom system past B₂ with the bound θ (Qt.qtU S: atoms the strongly critical members of K⁽⁰⁾_Z in (Ω₁, θ)) and its hull facts at S (Zb.ZbAS.Ok, split from Zb.ZbAS so that the atoms may depend on S).
-          - 🤖 the readings of the codes below θ: first below B₃ = Qd.qdB (Veblen levels; Qd.qdLv done), then up to θ; at a fixed point Hˡ_λ(y) of Γ a level reading of λ (one cardinal down, the leaves read at x) with its data, order, cofinality and exactness (R2.CitedVd).
-            - done (Qd*): the reading vD and the gates qdGt with their clauses, B₂ < B₃ ≤ θ, the codes QdCl = K⁽⁰⁾ below B₃, the bound QdBd of the tops (Veblen levels N < Γ_{Ω₁+1}).
-            - open: Lemma IMG below the points of the Veblen levels (the hypothesis Qd.QdImgH): it needs the reach past ε_{Ω₁+1} ([W07b] Def 4.1 with δ an ε-number, localization, cr) and a φ case of the copy lemma.
-          - the Qc chain at the new bound: digit systems, the tops, the layers, cofinal fixed points with small gates.
+          - done below B₃ = Qd.qdB, given Qd.QdImgH: Zm.ZmPastAt S c for every c < B₃ (Qd.qd_past), with the reading vD, the digit systems (Qd.qdGood_all) and the layers (Qd.qdLay_all) of the Qc chain at the Veblen levels.
+          - open: Lemma IMG below the points of the Veblen levels (the hypothesis Qd.QdImgH): it needs the reach past ε_{Ω₁+1} ([W07b] Def 4.1 with δ an ε-number, localization, cr) and a φ case of the copy lemma.
+          - 🤖 next: B₃ ≤ c < θ (a general level reading of λ, one cardinal down, the leaves read at x, R2.CitedVd).
         - then: the other road leaves (skLayPastTh, windows and tops, skBC, skFix, skZlCfg, skLevImgHi4).
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
