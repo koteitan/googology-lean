@@ -2483,3 +2483,4 @@ import Googology.Trans.PoR.InaccPsi.R2.QdFxC
 import Googology.Trans.PoR.InaccPsi.R2.QdFxD
 import Googology.Trans.PoR.InaccPsi.R2.QdTopB2
 import Googology.Trans.PoR.InaccPsi.R2.QdFxE
+import Googology.Trans.PoR.InaccPsi.R2.QdAll
