@@ -2,6 +2,7 @@ import Googology.Trans.PoR.InaccPsi.R2.QdPast
 import Googology.Trans.PoR.InaccPsi.R2.QfTB
 import Googology.Trans.PoR.InaccPsi.R2.XiImg
 import Googology.Trans.PoR.InaccPsi.R2.XiCont
+import Googology.Trans.PoR.InaccPsi.R2.AwRoad
 import Googology.Trans.PoR.InaccPsi.R2.ZoInt3
 import Googology.Trans.PoR.InaccPsi.R2.HoRoad
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
@@ -2377,18 +2378,6 @@ theorem skZbDirect (S : InaccSeq.{0}) : ∀ c, Tf.tfBG ≤ c → c < Tl.tlX → 
     (ev_isSuccLimit_of_inE (Low.opow_eq_self_of_SC Tl.tlX_SC)).add_one_lt hc
   exact skZbDirectX S B hB1 (hB2.trans (Zb.ZbRS.gcG_lt_X hc1))
 
-/-- STATUS: REFUTED (round 138, Zu.zuLayPastX_false; was OPEN L, round 133, new node: the leaf skLayPastX)
-SIZE: S
-the round-133 statement `∀ c, X ≤ c → c < Ω₂ → Zm.ZmPastAt S c` (one abstract atom system `Zb.ZbAS` for every layer
-past X) is FALSE at the layer `c = θ = ψ_{Ω₂}(Ω_ω)`: every atom system has its bound `V ≤ θ` (`Zu.zuV_le_th`: its
-atoms lie in `Cl(Ω_ω, b)`, field `mem`, and `θ`, a strongly critical member of `Cl(Ω_ω + 1, Z)`, would be an atom,
-`Zu.zuSC_atom`), while the layer for the atom index `θ + 1 < Γ(θ+1)` asks `Γ(θ+1) ≤ T ≤ V`.  Replaced by
-skLayPastXθ (the layers below `θ`) and skLayPastTh (the layers from `θ` on, populated: the name `θ` is good, its
-restart reads the code `θ`). -/
-theorem skLayPastX_false (S : InaccSeq.{0}) :
-    ¬ (∀ c, Tl.tlX ≤ c → c < Om (1 + 1) → Zm.ZmPastAt S c) :=
-  Zu.zuLayPastX_false S
-
 /-- STATUS: PROVED (round 219, Qc.qc_past: the atom system `Qc.qcU` of the codes below `B₂`, a layer at every fixed
 point of `Γ` below `B₂` (`Qc.qs_layAt`), cofinal fixed points `H_{γ_n}(0)` with small gates (`Qc.qcF_cof`))
 SIZE: L
@@ -2459,17 +2448,16 @@ theorem skLayPastXθ (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < ConjT.th S
   · exact skLayPastXB2 S c hX hB
   · exact skLayPastB2θ S c hB hθ
 
-/-- STATUS: OPEN (round 138, new leaf: the part of the refuted skLayPastX from `θ` on, as UPPER ∧ LOWER ∧ CapV)
+/-- STATUS: PROVED (round 232, Aw.aw_layPast: the term system of the code bound `K_{j+1}`, constants and codes with readings `Θ_y`; Lemma IMG by
+Claim 5.6 and the FRAG map `Ψ(Θ_ρ z) = Θ_σ z`, Lemma RS with the same map; `P(Ω₂) ≤ sup_j P(K_{j+1} + W)`; was OPEN L, round 138)
 SIZE: L
 THE LAYERS `θ ≤ c < Ω₂` (`θ = ψ_{Ω₂}(Ω_ω)`): UPPER ∧ LOWER ∧ CapV at every range restart of the layer below
-`ι(Γ(φ(ℓ, Γ(c)+1))·ω)`, `ℓ < Γ(c+1)` (the conclusion of `Zm.zmLay_of_past`).  No abstract atom system reaches these
-layers (`Zu.zuV_le_th`): their codes have atoms `ψ_{Ω₂}(Ω_ω + y)` (`y > 0`), which lie only in the hulls with
-`A > Ω_ω + y`, so the atoms depend on the restart.  REFUTE FIRST: NO EVIDENCE (part of the natural target; the
-layer `θ` holds the restart of the good name `θ`, code `θ`). -/
+`ι(Γ(φ(ℓ, Γ(c)+1))·ω)`, `ℓ < Γ(c+1)` (the conclusion of `Zm.zmLay_of_past`). -/
 theorem skLayPastTh (S : InaccSeq.{0}) : ∀ c, ConjT.th S ≤ c → c < Om (1 + 1) → ∀ l, Cd.CdRange S l →
     Xh.XhPast S c l → (∃ ℓ, ℓ < Gc.gcG (c + 1) ∧ l < Bt.iota S (Gc.gcG (veblen ℓ (Gc.gcG c + 1)) * ω)) →
     SkUV S l := by
-  sorry
+  rintro c - hc2 l hr - ⟨ℓ, hℓ, hl⟩
+  exact Aw.aw_layPast hc2 hr hℓ hl
 
 /-- STATUS: REDUCED (round 138: Zm.zmLay_of_past, skLayPastXθ, skLayPastTh; round 133: skLayPastX, REFUTED; was
 OPEN L, round 131; REFUTE FIRST: NO EVIDENCE)
@@ -2879,7 +2867,7 @@ theorem skBCLow (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → μ < Bt.iota S 
   · exact absurd (hw.1.trans hP) (not_lt.2 (Pp.ppL_mono (S := S) zero_le))
   · exact absurd (hw.1.trans hP) (not_lt.2 (Pp.ppL_mono (S := S) zero_le))
 
-/-- STATUS: OPEN (round 134, new leaf; the UPPER ∧ LOWER part of skBCBaseUV; round 135: SIZE M → L, a BIG reading)
+/-- STATUS: PROVED (round 232, Aw.aw_base_UL: the term system of the bound `K_ω`; `l₀` is its first frontier; was OPEN, round 134, new leaf; the UPPER ∧ LOWER part of skBCBaseUV; round 135: SIZE M → L, a BIG reading)
 SIZE: L
 UPPER ∧ LOWER AT THE BASE `l₀ = Zo.zoBase S = ι(Ω₂)` (`Zr.zrBase_eq`): `ρ = P(Ω₂)`, the name `Ω₂`, the code
 `π_{Ω₂}`, the predicted reach `r(l₀) = δ_{l₀} + Θ_{l₀}(π_{Ω₂})` with `Θ_{l₀}(π_{Ω₂}) ≤ ψ_{Ω₁}(A + θ + Ω₁) < δ_{l₀}`,
@@ -2892,8 +2880,8 @@ Round 135 (skBCBaseBig): `l₀` is `υ`-fixed and its reading is BIG, `υ_{l₀+
 `Zs.zsShortLow`).  LOWER needs Lemma RS with a value `v ∈ [υ_{l₀+1}, δ_{l₀})` (the FRAG image of `v` on the
 segment of `υ_{l₀+1}`; `Zn.znRs_rstV` takes values below `υ_{l₀+1}` only) and the code continuity at `l₀` for
 these values; UPPER is Lemma TOP at a big reading (the short input of Lemma TOP takes only offsets `ρ·m + k`). -/
-theorem skBCBaseUL (S : InaccSeq.{0}) : Cd.CdUpper S (Zo.zoBase S) ∧ Cd.CdLower S (Zo.zoBase S) := by
-  sorry
+theorem skBCBaseUL (S : InaccSeq.{0}) : Cd.CdUpper S (Zo.zoBase S) ∧ Cd.CdLower S (Zo.zoBase S) :=
+  Aw.aw_base_UL
 
 /-- STATUS: PROVED (Zs.zsFix, Zs.zsBig, Zs.zsBaseRs_lower, Zs.zsSup_false; round 135, new node)
 SIZE: S
