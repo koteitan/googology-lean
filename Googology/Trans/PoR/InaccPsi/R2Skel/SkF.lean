@@ -1,5 +1,5 @@
 import Googology.Trans.PoR.InaccPsi.R2.QdPast
-import Googology.Trans.PoR.InaccPsi.R2.QfImg
+import Googology.Trans.PoR.InaccPsi.R2.QfTB
 import Googology.Trans.PoR.InaccPsi.R2.HoRoad
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
 import Googology.Trans.PoR.InaccPsi.R2.WhSucc
@@ -2393,17 +2393,15 @@ THE LAYERS `X ≤ c < B₂` (`B₂ = Uc.ucB = ψ_{Ω₂}(ε_{Ω₂+1})`): `Zm.Zm
 theorem skLayPastXB2 (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < Uc.ucB → Zm.ZmPastAt S c :=
   fun c _ hc => Qc.qc_past S c hc
 
-/-- STATUS: OPEN (round 222, new leaf: what remains of skImgVeb; REFUTE FIRST: NO EVIDENCE — `π_{σ,ρ}` is a
-`(<, +)`-isomorphism of `Tᵖ[σ]` onto `T^σ` ([W07a] Lemma 5.3) and the ϑ-terms of the Veblen points have the parameters
-of their level and index (`Lv.lvPhLev`, `Gl.glA_pi`))
+/-- STATUS: PROVED (round 223, Qf.qf_TBphi: the dictionary `Qf.qf_dict'` at every countable level, the parts of a
+ϑ-term `Qf.qf_glA_TB_inv`, the index structure `Qf.qf_ind_struct`, and one induction for the parts of a Veblen point and
+the largest fixed point of `φ_β` in `(ρ, x]`, `Qf.qf_TB_ind`)
 SIZE: L
-`Tᵖ[σ]` IS CLOSED UNDER THE COUNTABLE VALUES OF `φ` (`Qf.QfTBphi`): for bases `σ < ρ` and `a, b ∈ Tᵖ[σ]` with `φ(a, b)
-< Ω₁`, `φ(a, b) ∈ Tᵖ[σ]`.  Needs the ϑ-term of `φ(a, b)` over `ρ` at every countable level (the dictionary `Lv.lvPhLev`,
-also at strongly critical levels) and the parameters of the index (the largest fixed point below `b`). -/
-theorem skTBphi : Qf.QfTBphi := by
-  sorry
+`Tᵖ[σ]` IS CLOSED UNDER THE COUNTABLE VALUES OF `φ` ABOVE `ρ` (`Qf.QfTBphi`): for `υ`-points `σ < ρ` and
+`a, b ∈ Tᵖ[σ]` with `ρ < φ(a, b) < Ω₁`, `φ(a, b) ∈ Tᵖ[σ]`. -/
+theorem skTBphi : Qf.QfTBphi := Qf.qf_TBphi
 
-/-- STATUS: PROVED from skTBphi (round 222, Qf.qf_imgH: the reach at the Veblen levels `Qf.qf_lh_lvl` from the
+/-- STATUS: PROVED (round 222 from skTBphi, PROVED round 223; Qf.qf_imgH: the reach at the Veblen levels `Qf.qf_lh_lvl` from the
 cited `R2.qfLhT` ([W07b] Def 4.1 with `cr`), the gap `Qf.qf_lam_gap`, the separation `Qf.qf_sep_lvl`, the copy lemma
 for every code `Qf.qf_copy`, Lemma IMG `Qf.qf_img`)
 SIZE: L
