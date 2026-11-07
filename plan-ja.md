@@ -7,7 +7,7 @@
 - Wilken の主張：Core(R₂⁺) = ψ_{Ω₁}(I_ω)（[Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README-ja.md)）
   - Lean：R₂^C と ν_C = L(ω+1)（ブランチ feature/por。骨組みの根 `skNuC` が使う未証明の葉は 10 個。[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）
     - ι(Ω₂) より上の restart λ（葉 skBC{InR, Big}、skFixCapVF、skWin/Top{InR, Big}）。記号：Θ_λ は λ での符号の読み、m_λ は λ の符号、δ_λ = υ_{λ+ω+1}、K_ω = ψ_{Ω₂}(Ω_ω + Ω₂)、P′ = ψ_{Ω₂}(Ω_ω + Ω_ω)
-      - 🤖 K_ω ≤ c < P′ の符号 c の読みの式：Θ(ψ_{Ω₂}(Ω_ω + ξ)) = ϑˣ(Ω₁·Ω₁ + ξ のずらし)、FRAG は Za.zaFragV
+      - 🤖 K_ω ≤ c < P′ の符号の読みの式（Kz.kzOff、ψ の形）を FRAG の節（Za.ZaCl、ϑ の形）につなぐ
       - Lemma IMG を crossing のある文脈 YsRstK の上で作り直す（GnImg、XiImg、AwImg の移植）
       - Θ_λ(m_λ) ≥ δ_λ の restart での Lemma TOP と Lemma RS（到達点は k_λ(Θ_λ(m_λ))）
       - restart についての内部の帰納法で、不動点の UPPER（InR）と LOWER（Big）を示す

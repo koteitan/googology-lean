@@ -7,7 +7,7 @@ Only the work still to do, as a tree under the cells of the README tables. The r
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: R₂^C and ν_C = L(ω+1) (branch feature/por; the root `skNuC` of the skeleton uses 10 unproved leaves; [STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md))
     - the restarts λ above ι(Ω₂) (leaves skBC{InR, Big}, skFixCapVF, skWin/Top{InR, Big}). Symbols: Θ_λ is the reading of codes at λ, m_λ the code of λ, δ_λ = υ_{λ+ω+1}, K_ω = ψ_{Ω₂}(Ω_ω + Ω₂), P′ = ψ_{Ω₂}(Ω_ω + Ω_ω)
-      - 🤖 the reading law of the codes K_ω ≤ c < P′: Θ(ψ_{Ω₂}(Ω_ω + ξ)) = ϑˣ(Ω₁·Ω₁ + the shift of ξ), FRAG by Za.zaFragV
+      - 🤖 connect the reading law of the codes K_ω ≤ c < P′ (Kz.kzOff, in ψ form) to the FRAG clause (Za.ZaCl, in ϑ form)
       - redo Lemma IMG over the context with crossings YsRstK (port GnImg, XiImg, AwImg)
       - Lemma TOP and Lemma RS at the restarts with Θ_λ(m_λ) ≥ δ_λ (the reach is k_λ(Θ_λ(m_λ)))
       - an internal induction on the restart for UPPER (InR) and LOWER (Big) at the fixed restarts
