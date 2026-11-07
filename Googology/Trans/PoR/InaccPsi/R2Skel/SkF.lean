@@ -2937,8 +2937,8 @@ theorem skBCReach (S : InaccSeq.{0}) : ∃ o, o < upsilon (Zo.zoBase S + ω + 1)
 SIZE: S
 THE GIVEN INPUT AT THE BASE: Lemma TOP at `r(l₀)` is UPPER at `l₀`. -/
 theorem skBCGiven (S : InaccSeq.{0}) : Yx.YxGivenIn (Ys.ysO S) (Zo.zoBase S) := by
-  obtain ⟨o, h1, h2, h3⟩ := skBCReach S
-  exact Zo.zoGiven_of (skBCBaseUV S).1 h1 h2 h3
+  obtain ⟨o, h1, h2, -⟩ := skBCReach S
+  exact Zo.zoGiven_of (skBCBaseUV S).1 h1 h2
 
 /-- STATUS: OPEN (round 133, new leaf, regc1)
 SIZE: L
@@ -4026,7 +4026,7 @@ theorem skWinStep {a : Ordinal.{0}} {O : Ordinal.{0} → Ordinal.{0}} {l o x0 : 
     (ho : o < upsilon (l + ω + 1)) (hoO : o ≤ O l) (hax : a ≤ x0) (hxl : x0 ≤ upsilon l)
     (hT3 : ∀ c, x0 < c → c ≤ upsilon (l + ω + 1) + o → ∀ g, upsilon (l + ω + 1) + o < g → ¬ le1 c g)
     (hch : Ys.YsChainIn l o x0) (hcnt : l + ω * ω < Om1) : Ys.YsGood a O (l + ω * ω) :=
-  Ys.ysGood_step hl G hal R htop ho hoO hax hxl hT3 hch.1 hch.2 hcnt
+  Ys.ysGood_step hl G hal R htop ho hoO hax hxl hT3 hch hcnt
 
 /-- STATUS: PROVED (Ys.ysGood_all; round 129, new; checked only after the merge)
 SIZE: M
