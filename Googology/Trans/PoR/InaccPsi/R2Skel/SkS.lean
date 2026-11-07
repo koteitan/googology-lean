@@ -1,4 +1,5 @@
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
+import Googology.Trans.PoR.InaccPsi.R2.ZkShift
 import Googology.Trans.PoR.InaccPsi.R2.WcSupLo
 import Googology.Trans.PoR.InaccPsi.R2.VrRoad
 import Googology.Trans.PoR.InaccPsi.R2.TyRng
@@ -1431,7 +1432,8 @@ theorem skSupXo :
   have h := skVisKXo (S := S) 0 l hl (by simpa using e)
   simpa using h
 
-/-- STATUS: OPEN (NEW round 133; the open leaf of the shift on the road; REPLACES `skLevImgHi2`, via `skLevImgHi3`;
+/-- STATUS: REPLACED (round 229: off the road, by `skLevImgHi5` through `Zk.zkShift2_P5`; was OPEN, NEW round 133; the
+open leaf of the shift on the road; REPLACES `skLevImgHi2`, via `skLevImgHi3`;
 round 227: narrowed, the nested node levels `Zf.ZfNest` are excluded, PROVED by the recursion in `Zf.zfShift2`;
 round 228: `Zf.ZfNest` widened to sum trees of such nodes)
 SIZE: L
@@ -1589,8 +1591,24 @@ higher segments `D` is the hull isomorphism of FRAG, and countable `φ`-values m
 (Lean has it for countable `M`, `Gl.gl_pi_mul`). -/
 theorem skLevImg (S : InaccSeq.{0}) : Zf.ZfImg S := Zf.zfImg_of_P (skLevImgHi S)
 
-/-- STATUS: REDUCED (round 132: from `skLevImg` by `Zf.zfShift2`; NEW round 129, was OPEN; REPLACES `skRealBXo` on the
-road)
+/-- STATUS: OPEN (NEW round 229; the open leaf of the shift on the road; REPLACES `skLevImgHi4`)
+SIZE: L
+`Zk.ZkImgP5 S`: the shift with the level image asked only at levels that are (i) one-base at no segment, (ii) no sum
+tree of MIXED pieces (`¬ Zk.ZkSS (Zk.zkMx …) L`: one-segment pieces `Zk.zkPc` and nested nodes `Zf.ZfNodeOK`, mixed),
+(iii) no prefix level with mixed countable rests (`¬ Zk.ZkPS (Zk.zkMx …) (Zk.zkPf …) L`).  `Zk.zkShift2_P5` does one
+induction on `Zf.xoSize`: the configuration enlarged by the Cantor exponents of its points (`Zk.zkExps`), the exponent
+map `D` itself (a one-segment piece: `zkG = D` on its exponents, `Zk.zk_DG`; a nested node: an `ε`-number with image
+`D(val)`, the node clause at the smaller size).
+REFUTE FIRST (round 229): NO EVIDENCE (the excluded levels are theorems; what is left is as in skLevImgHi4 minus the
+nested node levels).
+Exact gap: (a) nested nodes of level `0`, or with a countable part outside `old` / `th` / `add`, or next to constants or
+`φ`, (b) countable `φ`-values with arguments in two segments, (c) old `ub` / `tm` leaves with leaves in lower segments
+(outside the one-segment pieces), (d) several uncountable pieces at different segments, or an uncountable piece whose
+value is no `Ω₁`-multiple (touching terms), (e) `Ω_·` and `ψ` with moving leaves. -/
+theorem skLevImgHi5 (S : InaccSeq.{0}) : Zk.ZkImgP5 S := by sorry
+
+/-- STATUS: REDUCED (round 229: from `skLevImgHi5` by `Zk.zkShift2_P5`; round 132: from `skLevImg` by `Zf.zfShift2`;
+NEW round 129, was OPEN; REPLACES `skRealBXo` on the road)
 SIZE: L
 the shift with the `ϑ`-node clause `Yq.XoShift2 S`: `Xb.XbShift` (PROVED: `Xj.xbShift_holds`) with `Yq.XoThCl` in
 place of `Xb.XbThCl`, for one realizer map `D`.  `XoThCl`: `D(ϑ^{υ_{λ+h}}(Ω₁·L + e)) = ϑ^{υ_{μ+f h}}(Ω₁·L′ + e′)` for a
@@ -1615,7 +1633,7 @@ REFUTE FIRST (round 131): NO EVIDENCE (`skZaWitMv`, `skZaWitPhi`).
 Round 132: REDUCED to `skLevImg` (`Zf.zfShift2`): the leaf inclusion (a1) by enlarging the configuration
 (`Zf.zf_enl`: finite leaf sets `Zf.zf_yv_fin`, unique argument of a node value `Zf.zf_vt_inj`), the leaves in
 `T^{υ_{λ+h}}` (a2, `Zf.zf_lv_T`, from `skDlSC`), the nodes of level `0` (`Zf.zfDCl`).  Left: the level image (a3). -/
-theorem skShift2 (S : InaccSeq.{0}) : Yq.XoShift2 S := Zf.zfShift2 (Zk.zkLevNode S) (skLevImg S)
+theorem skShift2 (S : InaccSeq.{0}) : Yq.XoShift2 S := Zk.zkShift2_P5 (skLevImgHi5 S)
 
 /-- STATUS: REDUCED (from `skShift2` by `Yq.yqShift_of2`; NEW round 129)
 SIZE: M
