@@ -63,7 +63,7 @@ theorem zcRsIn_long_lower {l : Ordinal.{0}} (hl : IsRestartIdx l)
 theorem zcGiven_of_up {l : Ordinal.{0}} (hl : IsRestartIdx l) (hU : CdUpper S l)
     (hE : le1 (upsilon l) (upsilon (l + ω * ω))) : Yx.YxGivenIn (Ys.ysO S) l := by
   refine ⟨0, lt_of_le_of_lt zero_le (upsilon_normal.strictMono (lt_of_lt_of_le
-    (pos_iff_ne_zero.2 hl.1) (le_self_add.trans le_self_add))), zero_le, ?_, Ys.ysReach_long hE⟩
+    (pos_iff_ne_zero.2 hl.1) (le_self_add.trans le_self_add))), zero_le, ?_⟩
   intro g hg h
   rw [Ys.ysO_eq] at hg
   exact hU (le1_of_le_of_le1 ((cdRho_lt_R S l).le.trans le_self_add) (Order.add_one_le_of_lt hg) h)

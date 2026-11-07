@@ -30,7 +30,6 @@ structure YsBlkCtx (T τ β x0 : Ordinal.{0}) : Prop where
   β1 : β < Om1
   Tτ : T < τ
   T3 : ∀ c, x0 < c → c ≤ T → ∀ g, T < g → ¬ le1 c g
-  reach : ∀ c, c ≤ x0 → c ≤ T → ∀ d, T < d → d < β → le1 c d → le1 c β
   nostr : ∀ c, c ≤ x0 → c ≤ T → ∀ d, T < d → d ≤ β → ¬ le2 c d
   left : ∀ l, IsSuccLimit l → T < upsilon l → upsilon l ≤ τ → upsilon l = τ
   cof : ∀ c' < τ, ∃ u, UpsPt u ∧ c' < u ∧ u < τ
@@ -39,7 +38,6 @@ structure YsBlkCtx (T τ β x0 : Ordinal.{0}) : Prop where
 theorem _root_.Googology.Trans.PoR.InaccPsi.R2.BlkCtx.toYs {T τ β : Ordinal.{0}} (h : BlkCtx T τ β)
     (x0 : Ordinal.{0}) : YsBlkCtx T τ β x0 :=
   ⟨h.τU, h.next, h.β1, h.Tτ, fun c _ hc g hg => h.T3 c hc g hg,
-    fun c _ hc d hd _ hcd => absurd hcd (h.T3 c hc d hd),
     fun c _ hc d hd _ h2 => h.T3 c hc d hd (le2_le1 h2), h.left, h.cof⟩
 
 namespace YsBlkCtx
@@ -176,11 +174,7 @@ theorem le2_eq {c d : Ordinal.{0}} (h2 : le2 c d) (hTd : T < d) (hdβ : d < β) 
 
 /-- A block context with crossings is a pair context with crossings. -/
 theorem toPair : YsPairCtx T τ β := by
-  refine ⟨h.τU, h.next, h.β1, h.Tτ, h.cof, h.no_pair_gap, h.le1_lowβ, ?_⟩
-  intro c hc d hd hdβ hcd g hg hgβ
-  rcases le_or_gt c x0 with hcx | hxc
-  · exact le1_of_le_of_le1 (hc.trans hg.le) hgβ (h.reach c hcx hc d hd hdβ hcd)
-  · exact absurd hcd (h.T3 c hxc hc d hd)
+  exact ⟨h.τU, h.next, h.β1, h.Tτ, h.cof, h.no_pair_gap, h.le1_lowβ⟩
 
 /-- The pair of the block, from the pair context. -/
 theorem pair : le2 τ β := h.toPair.pair
@@ -251,8 +245,6 @@ end YsBlkCtx
 /-- The chain of block contexts after `T₀`. -/
 theorem ysCtxA (a T0 x0 : Ordinal.{0})
     (hT3 : ∀ c, x0 < c → c ≤ T0 → ∀ g, T0 < g → ¬ le1 c g)
-    (hreach : ∀ j : ℕ, ∀ c, c ≤ x0 → c ≤ topA a T0 j → ∀ d, topA a T0 j < d → d < topA a T0 (j + 1) →
-      le1 c d → le1 c (topA a T0 (j + 1)))
     (hnostr : ∀ j : ℕ, ∀ c, c ≤ x0 → c ≤ topA a T0 j → ∀ d, topA a T0 j < d → d ≤ topA a T0 (j + 1) →
       ¬ le2 c d)
     (hT0 : T0 < lpA a 0) (hidx : ∀ l, IsSuccLimit l → T0 < upsilon l → a < l)
@@ -267,7 +259,7 @@ theorem ysCtxA (a T0 x0 : Ordinal.{0})
     have hnext : IsNext (lpA a j) (topA a T0 (j + 1)) := by
       have := upsilon_isNext (a + ω * (j : Ordinal.{0}) + ω)
       rwa [succ_eq_add_one] at this
-    refine ⟨upsPt_upsilon (lpA_index_pos a j), hnext, ?_, hTτ, hT3', hreach j, hnostr j, ?_, ?_⟩
+    refine ⟨upsPt_upsilon (lpA_index_pos a j), hnext, ?_, hTτ, hT3', hnostr j, ?_, ?_⟩
     · show upsilon (a + ω * (j : Ordinal.{0}) + ω + 1) < Om1
       have := hc (j + 1) 1
       rwa [omega_mul_succ, ← add_assoc, Nat.cast_one] at this

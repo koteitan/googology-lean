@@ -81,9 +81,8 @@ theorem ysGiven_of_supply {O : Ordinal.{0} → Ordinal.{0}} {μ : Ordinal.{0}} (
   have hle : le1 (upsilon μ) (upsilon (μ + ω * ω)) :=
     le1_of_le_of_le1 (upsilon_normal.strictMono.monotone le_self_add) hlong hL
   refine ⟨0, lt_of_le_of_lt zero_le (upsilon_normal.strictMono (lt_of_lt_of_le
-    (pos_iff_ne_zero.2 hμ.1) (le_self_add.trans le_self_add))), zero_le, ?_, ?_, ?_⟩
+    (pos_iff_ne_zero.2 hμ.1) (le_self_add.trans le_self_add))), zero_le, ?_, ?_⟩
   · rw [hOμ]; exact (ysTopR_iff hδ).2 hU
-  · exact ysReach_long hle
   · exact hN
 
 end Googology.Trans.PoR.InaccPsi.R2.Ys

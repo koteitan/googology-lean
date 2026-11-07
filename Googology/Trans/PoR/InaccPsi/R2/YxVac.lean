@@ -39,7 +39,7 @@ theorem yxWin_range {ξ l : Ordinal.{0}} (hξ : ξ ≤ ω) (hl : IsRestartIdx l)
 theorem yxIn_of_upper {l0 B : Ordinal.{0}} (hbase : Ys.YsReachIn l0 0 (upsilon l0))
     (h : ∀ l, IsRestartIdx l → l0 < l → l < B → CdUpper S l ∧ Ys.YsReachIn l 0 (upsilon l)) :
     YxIn S l0 B := by
-  refine ⟨hbase, fun l hl h0 h1 => Or.inr ⟨0, ?_, zero_le, ?_, (h l hl h0 h1).2⟩⟩
+  refine ⟨hbase, fun l hl h0 h1 => Or.inr ⟨0, ?_, zero_le, ?_⟩⟩
   · exact lt_of_le_of_lt zero_le (upsilon_normal.strictMono (lt_of_lt_of_le
       (pos_iff_ne_zero.2 hl.1) (le_self_add.trans le_self_add)))
   · exact (Ys.ysTopR_iff (S := S) (cdR_ge S l)).2 (h l hl h0 h1).1

@@ -141,8 +141,8 @@ theorem zoReach0_ref {l : Ordinal.{0}} (hU : CdUpper S l) (hL : CdLower S l)
 
 /-- **The given input at a base from UPPER and a reach datum with chain start `o ≤ r − δ`.** -/
 theorem zoGiven_of {l o : Ordinal.{0}} (hU : CdUpper S l) (ho1 : o < upsilon (l + ω + 1))
-    (ho2 : o ≤ Ys.ysO S l) (hR : Ys.YsReachIn l o (upsilon l)) : Yx.YxGivenIn (Ys.ysO S) l :=
-  ⟨o, ho1, ho2, (Ys.ysTopR_iff (S := S) (cdR_ge S l)).2 hU, hR⟩
+    (ho2 : o ≤ Ys.ysO S l) : Yx.YxGivenIn (Ys.ysO S) l :=
+  ⟨o, ho1, ho2, (Ys.ysTopR_iff (S := S) (cdR_ge S l)).2 hU⟩
 
 /-- **THE INTERVAL THEOREM below `m*`.**  On `[l₀, B)` with `υ_B ≤ m*`: the given input at the base `l₀`
 (bound `r − δ`), the pair-free inputs at the restarts of `(l₀, B)`, CapV at the `υ`-fixed long-exponent range
@@ -228,7 +228,7 @@ theorem zoInt_of_target {l0 B : Ordinal.{0}} (hl0B : cdB0 ≤ l0) (hBm : upsilon
     zoRange_lt hl (hl0B.trans h0) ((hm h1).trans_le hBm)
   have hδ : ∀ l : Ordinal.{0}, IsRestartIdx l → (0 : Ordinal.{0}) < upsilon (l + ω + 1) := fun l hl =>
     lt_of_le_of_lt zero_le (hm (lt_of_lt_of_le (pos_iff_ne_zero.2 hl.1) (le_self_add.trans le_self_add)))
-  refine ⟨zoGiven_of (hU l0 (hrg l0 hl0 le_rfl hlt) le_rfl hlt) (hδ l0 hl0) zero_le (hR l0 hl0 le_rfl hlt),
+  refine ⟨zoGiven_of (hU l0 (hrg l0 hl0 le_rfl hlt) le_rfl hlt) (hδ l0 hl0) zero_le,
     (Yx.yxIn_of_upper (B := B) (S := S) (hR l0 hl0 le_rfl hlt) fun l hl h0 h1 =>
       ⟨hU l (hrg l hl h0.le h1) h0.le h1, hR l hl h0.le h1⟩).2,
     fun μ hr h0 h1 _ _ _ => hV μ hr h0 h1,

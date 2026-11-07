@@ -8,7 +8,7 @@ both inputs.  By `Yx.yxSpec_nu` these contain `ν_C ∉ [ρ_{l₀}, υ_B)`, so a
 part of the target.  Here they are dropped:
 
 * `YxShortIn`, `YxGivenIn`, `YxSpec`: `Ys.YsShortIn`, `Ys.YsGivenIn`, `Ys.YsSpec` without any pair field (the
-  chain datum keeps only `Ys.YsReachIn`);
+  chain datum is dropped: a crossing point that reaches `τ` reaches `β` by transitivity);
 * `YxSpec.toYs`: with `υ_B ≤ ν_C` every pair field holds (`Yx.yxNostr_of_lt`, `Yx.yxChainNostr_of_lt`);
 * `YxSpec.restr`: the specification restricts to every restart index `B' ∈ (l₀, B]`;
 * `yxSpec_capsG` / `yxSpec_caps` (**the pair fields from the caps by the least counterexample**): `YxSpec O l₀ B`,
@@ -34,12 +34,12 @@ def YxShortIn (a : Ordinal.{0}) (O : Ordinal.{0} → Ordinal.{0}) (l : Ordinal.{
   ∃ (m : ℕ) (k x0 : Ordinal.{0}), O l = tm m k (upsilon l) ∧ k < upsilon l ∧ (m = 0 → 1 ≤ k) ∧
     a ≤ x0 ∧ x0 < upsilon l ∧
     (∀ μ, IsRestartIdx μ → μ < l → x0 < upsilon μ → O μ < tm m k (upsilon μ)) ∧
-    O l < upsilon (l + ω + 1) ∧ Ys.YsReachIn l (O l) x0
+    O l < upsilon (l + ω + 1)
 
 /-- The input with Lemma TOP given, without a pair field: `Ys.YsGivenIn` with the chain datum `reach` only. -/
 def YxGivenIn (O : Ordinal.{0} → Ordinal.{0}) (l : Ordinal.{0}) : Prop :=
   ∃ o, o < upsilon (l + ω + 1) ∧ o ≤ O l ∧
-    (∀ g, upsilon (l + ω + 1) + O l < g → ¬ le1 (upsilon l) g) ∧ Ys.YsReachIn l o (upsilon l)
+    (∀ g, upsilon (l + ω + 1) + O l < g → ¬ le1 (upsilon l) g)
 
 /-- **The relative block specification without pair fields.** -/
 structure YxSpec (O : Ordinal.{0} → Ordinal.{0}) (l0 B : Ordinal.{0}) : Prop where
@@ -56,10 +56,10 @@ structure YxSpec (O : Ordinal.{0} → Ordinal.{0}) (l0 B : Ordinal.{0}) : Prop w
 theorem _root_.Googology.Trans.PoR.InaccPsi.R2.Ys.YsSpec.toYx {O : Ordinal.{0} → Ordinal.{0}}
     {l0 B : Ordinal.{0}} (Sp : Ys.YsSpec O l0 B) : YxSpec O l0 B := by
   refine ⟨Sp.ri, Sp.mult, Sp.cnt, Sp.lt, Sp.land0, fun l hl h0 h1 => ?_⟩
-  rcases Sp.kind l hl h0 h1 with ⟨m, k, x0, a1, a2, a3, a4, a5, a6, a7, a8, -⟩ |
-    ⟨o, b1, b2, b3, b4, -⟩
-  · exact Or.inl ⟨m, k, x0, a1, a2, a3, a4, a5, a6, a7, a8⟩
-  · exact Or.inr ⟨o, b1, b2, b3, b4⟩
+  rcases Sp.kind l hl h0 h1 with ⟨m, k, x0, a1, a2, a3, a4, a5, a6, a7, -⟩ |
+    ⟨o, b1, b2, b3, -⟩
+  · exact Or.inl ⟨m, k, x0, a1, a2, a3, a4, a5, a6, a7⟩
+  · exact Or.inr ⟨o, b1, b2, b3⟩
 
 namespace YxSpec
 
@@ -71,10 +71,9 @@ theorem toYs (hν : upsilon B ≤ nuC) : Ys.YsSpec O l0 B := by
   have hlt : ∀ l, l < B → upsilon l < nuC := fun l h => (upsilon_normal.strictMono h).trans_le hν
   refine ⟨Sp.ri, Sp.mult, Sp.cnt, Sp.lt, Sp.land0, fun l hl _ h1 => yxNostr_of_lt hl (hlt l h1),
     fun l hl h0 h1 => ?_⟩
-  rcases Sp.kind l hl h0 h1 with ⟨m, k, x0, a1, a2, a3, a4, a5, a6, a7, a8⟩ | ⟨o, b1, b2, b3, b4⟩
-  · exact Or.inl ⟨m, k, x0, a1, a2, a3, a4, a5, a6, a7, a8,
-      yxChainNostr_of_lt hl (hlt l h1) a5.le⟩
-  · exact Or.inr ⟨o, b1, b2, b3, b4, yxChainNostr_of_lt hl (hlt l h1) le_rfl⟩
+  rcases Sp.kind l hl h0 h1 with ⟨m, k, x0, a1, a2, a3, a4, a5, a6, a7⟩ | ⟨o, b1, b2, b3⟩
+  · exact Or.inl ⟨m, k, x0, a1, a2, a3, a4, a5, a6, a7, yxChainNostr_of_lt hl (hlt l h1) a5.le⟩
+  · exact Or.inr ⟨o, b1, b2, b3, yxChainNostr_of_lt hl (hlt l h1) le_rfl⟩
 
 /-- **The specification restricts** to every restart index `B' ∈ (l₀, B]`. -/
 theorem restr {B' : Ordinal.{0}} (hB' : IsRestartIdx B') (h0 : l0 < B') (h1 : B' ≤ B) : YxSpec O l0 B' :=

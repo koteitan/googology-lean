@@ -167,17 +167,13 @@ theorem ysT3_long {l : Ordinal.{0}}
 reach): from `(a, υ_l)` to `(a, υ_{l+ω²})`.  Inputs: the restart context at `ρ_l` (`R`), Lemma TOP at
 `δ_l + O(l)` (`htop`), the start `T₀ = δ_l + o` of the chain (`o < δ_l`, `o ≤ O(l)`), the crossing bound `x₀`
 of the chain (`a ≤ x₀ ≤ ρ_l`) with the closedness `hT3` above `x₀` at `T₀`, and for the points `c ≤ x₀`
-crossing into a chain block: `hreach` (they reach its top) and `hnostrC` (no pair from them ends in it). -/
+crossing into a chain block: `hnostrC` (no pair from them ends in it). -/
 theorem ysGood_step {a : Ordinal.{0}} {O : Ordinal.{0} → Ordinal.{0}} {l o x0 : Ordinal.{0}}
     (hl : IsRestartIdx l) (G : YsGood a O l) (hal : a ≤ upsilon l)
     (R : YsRstK (upsilon l) (upsilon (l + ω)) (upsilon (l + ω + 1)))
     (htop : ∀ g, upsilon (l + ω + 1) + O l < g → ¬ le1 (upsilon l) g)
     (ho : o < upsilon (l + ω + 1)) (hoO : o ≤ O l) (hax : a ≤ x0) (hxl : x0 ≤ upsilon l)
     (hT3 : ∀ c, x0 < c → c ≤ upsilon (l + ω + 1) + o → ∀ g, upsilon (l + ω + 1) + o < g → ¬ le1 c g)
-    (hreach : ∀ j : ℕ, ∀ c, c ≤ x0 → c ≤ topA (l + ω) (upsilon (l + ω + 1) + o) j →
-      ∀ d, topA (l + ω) (upsilon (l + ω + 1) + o) j < d →
-      d < topA (l + ω) (upsilon (l + ω + 1) + o) (j + 1) → le1 c d →
-      le1 c (topA (l + ω) (upsilon (l + ω + 1) + o) (j + 1)))
     (hnostrC : ∀ j : ℕ, ∀ c, c ≤ x0 → c ≤ topA (l + ω) (upsilon (l + ω + 1) + o) j →
       ∀ d, topA (l + ω) (upsilon (l + ω + 1) + o) j < d →
       d ≤ topA (l + ω) (upsilon (l + ω + 1) + o) (j + 1) → ¬ le2 c d)
@@ -198,7 +194,7 @@ theorem ysGood_step {a : Ordinal.{0}} {O : Ordinal.{0} → Ordinal.{0}} {l o x0 
     have : upsilon (l + ω + 1) < upsilon l' := lt_of_le_of_lt le_self_add h
     exact lt_of_le_of_lt le_self_add (upsilon_normal.strictMono.lt_iff_lt.1 this)
   have C : ∀ j : ℕ, YsBlkCtx (topA (l + ω) T0 j) (lpA (l + ω) j) (topA (l + ω) T0 (j + 1)) x0 :=
-    ysCtxA (l + ω) T0 x0 hT3 hreach hnostrC hT0 hidx
+    ysCtxA (l + ω) T0 x0 hT3 hnostrC hT0 hidx
       (fun j n => ups_lt_Om1 _ ((idx_lt l j n).trans hcnt))
   have hTa : upsilon (l + ω) ≤ T0 := R.next.1.le.trans le_self_add
   have he : l + ω + ω * ω = l + ω * ω := by rw [add_assoc, w_add_ww]
