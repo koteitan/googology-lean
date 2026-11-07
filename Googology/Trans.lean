@@ -2505,3 +2505,5 @@ import Googology.Trans.PoR.InaccPsi.R2.XiLay
 import Googology.Trans.PoR.InaccPsi.R2.XiPast
 import Googology.Trans.PoR.InaccPsi.R2.CitedXc
 import Googology.Trans.PoR.InaccPsi.R2.XiImg
+import Googology.Trans.PoR.InaccPsi.R2.XiHull
+import Googology.Trans.PoR.InaccPsi.R2.XiCont
