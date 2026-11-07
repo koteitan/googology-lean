@@ -2486,3 +2486,13 @@ import Googology.Trans.PoR.InaccPsi.R2.QdFxE
 import Googology.Trans.PoR.InaccPsi.R2.QdAll
 import Googology.Trans.PoR.InaccPsi.R2.QdLay
 import Googology.Trans.PoR.InaccPsi.R2.QdPast
+import Googology.Trans.PoR.InaccPsi.R2.QfZeta
+import Googology.Trans.PoR.InaccPsi.R2.QfSep
+import Googology.Trans.PoR.InaccPsi.R2.CitedQf
+import Googology.Trans.PoR.InaccPsi.R2.QfK
+import Googology.Trans.PoR.InaccPsi.R2.QfLh
+import Googology.Trans.PoR.InaccPsi.R2.QfGap
+import Googology.Trans.PoR.InaccPsi.R2.QfRep
+import Googology.Trans.PoR.InaccPsi.R2.QfMul
+import Googology.Trans.PoR.InaccPsi.R2.QfCopy
+import Googology.Trans.PoR.InaccPsi.R2.QfImg
