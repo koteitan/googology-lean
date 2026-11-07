@@ -655,3 +655,15 @@ When the plan was shortened, its previous body was moved here unchanged.
       - prove that the fuel `max 200 (depth of α)` of `TrioFixFuel` is enough for every `α` (more fuel never changes the matrix; checked on the sheet labels and some families)
 - Library layout ([Googology/Trans/README.md](Googology/Trans/README.md))
   - `Trans/BMS/common/Cut.lean` still imports `Trans/BMS/ExBuchholz/Commute.lean`, so most of `BMS/common/` depends on extended Buchholz ψ: move the list lemmas (`Chain`, `Col`, `expandL`, `lastOf`, …) out of `ExBuchholz/Basic.lean` and `ExBuchholz/Commute.lean` into `BMS/common/`, so that `common/` imports nothing from `ExBuchholz/`
+
+## 2026-11-07: details moved out of the plan
+
+Finished in the Lean of R₂^C (only S assumed):
+
+- Region A is closed. Layer frontier and direct readings of every layer c below X (skZbDirectX), by one reading vR of all codes.
+- Window RS input and cap off υ-fixed restarts, Θ = ρ at isolated ones. Atoms move to K_Y. Base ι(Ω₂): reach, cap. Codes ≤ K_ω read short.
+- Road yqRoadS (hypotheses: UPPER, LOWER, cap past the frontier; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; the shift XoShift; XoSup): ν_C = L(ω+1).
+- skTopLawAll, skPsi3OffRest2, skAtHi3 are proved (Kx.kxTopLawAll, Ky.kyPsi3OffRest2, Kz.kzAtHi3).
+- The layers past X below θ (skLayPastXθ): X ≤ c < B₂ (Qc), B₂ ≤ c < B₃ (Qd), every c < θ (Xi.xi_past, Xi.xi_imgAll). skFixCont (Xi.xi_code_cont), skBCCont.
+- The layers θ ≤ c < Ω₂ and the base ι(Ω₂) (skLayPastTh, skBCBaseUL): the term system of a code bound ≤ K_ω, readings Θ_y, Lemma IMG and Lemma RS through the FRAG map (Aw.aw_UV, Aw.aw_base_UL).
+- The chain reach datum (YsReachIn) is off YxShortIn, YxGivenIn: a point reaching τ reaches β by transitivity.
