@@ -2527,3 +2527,5 @@ import Googology.Trans.PoR.InaccPsi.R2.FaAtom
 import Googology.Trans.PoR.InaccPsi.R2.FaAL
 import Googology.Trans.PoR.InaccPsi.R2.FaShape
 import Googology.Trans.PoR.InaccPsi.R2.FaLev
+import Googology.Trans.PoR.InaccPsi.R2.FaOps
+import Googology.Trans.PoR.InaccPsi.R2.FaZB

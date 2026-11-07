@@ -484,11 +484,17 @@ theorem faG_dvd {B γ : Ordinal.{0}} (hWK : Om ω < K) (hBD : VbDK S l K B) (hγ
   rw [e]
   exact dvd_add hdA (dvd_add hdL hTδ')
 
-/-- **THE READING MOVES THE ATOMS ABOVE `θ`**: `T(Hˡ¹_γ(y)) = Φ_{T γ}(T y)`. -/
-theorem faAL {γ y : Ordinal.{0}} (hWK : Om ω < K) (hγ : γ < S.psi (Om ω) (Om (1 + 1 + 1)))
+/-- **THE READING MOVES THE ATOMS ABOVE `θ`**, for a run `y = c + D` of `Hˡ¹_γ`: `T(Hˡ¹_γ(y)) = Φ_{T γ}(T c + T D)`. -/
+theorem faALc {γ y B c D : Ordinal.{0}} (hWK : Om ω < K) (hγ : γ < S.psi (Om ω) (Om (1 + 1 + 1)))
     (hy : y < ulH S 1 γ y) (hzW : ulH S 1 γ y < Om (1 + 1)) (hzD : VbDK S l K (ulH S 1 γ y))
-    (hθz : ConjT.th S < ulH S 1 γ y) :
-    VbDK S l K γ ∧ VbDK S l K y ∧ vbTK S l K γ < ConjT.th S ∧
+    (hθz : ConjT.th S < ulH S 1 γ y) (hown' : B ∈ S.CSet B (S.psi B (Om (1 + 1))))
+    (hc : ulH S 1 γ c = S.psi B (Om (1 + 1))) (hcD : c + D = y)
+    (hcond : ∀ d, d ≤ D → d < ulH S 1 γ (c + d))
+    (hcase : c = 0 ∨ (ulH S 1 γ c = c ∧ ∀ q, ulH S 1 γ q = q → q ≤ y → q ≤ c)) :
+    VbDK S l K γ ∧ VbDK S l K y ∧ VbDK S l K D ∧ VbDK S l K c ∧ vbTK S l K γ < ConjT.th S ∧
+      (∀ d, d ≤ vbTK S l K D → d < ulH S 0 (vbTK S l K γ) (vbTK S l K c + d)) ∧
+      ulH S 0 (vbTK S l K γ) (vbTK S l K c) = S.psi (faG S l K B) (Om 1) ∧
+      vbTK S l K y = vbTK S l K c + vbTK S l K D ∧
       vbTK S l K (ulH S 1 γ y) = ulH S 0 (vbTK S l K γ) (vbTK S l K y) := by
   have hPC := faPC_D (S := S) (l := l) hKB
   have hs : (1 : Ordinal.{0}) < ω := one_lt_omega0
@@ -499,7 +505,6 @@ theorem faAL {γ y : Ordinal.{0}} (hWK : Om ω < K) (hγ : γ < S.psi (Om ω) (O
   have hW : VbDK S l K (Om (1 + 1 : Ordinal.{0})) := by
     have := fa_Om1_D (S := S) (l := l) hKB 1; simpa using this
   have hA : ulH S 1 γ y < S.psi K (Om (1 + 1)) := lt_psi_of_mem hκ hzD.2.1 hzW
-  obtain ⟨B, c, D, hown', hc, hcD, hcond, hcase⟩ := Vp.vp_dec (S := S) (s := 1) hs hy hA
   have hDy : D ≤ y := by rw [← hcD]; exact le_add_self
   have hDW : D < Om (1 + 1) := (hDy.trans_lt hy).trans hzW
   obtain ⟨hψe, howne⟩ := Vp.vp_run (S := S) (s := 1) hs hγV hown' hc hDW hcond
@@ -647,7 +652,6 @@ theorem faAL {γ y : Ordinal.{0}} (hWK : Om ω < K) (hγ : γ < S.psi (Om ω) (O
     rwa [hTθ2] at h
   have hθ2 : ConjT.th S < Om (1 + 1) := psi_lt hκ _
   have hγ'V : vbTK S l K γ < Om (1 + 1) := hTγ.trans hθ2
-  refine ⟨hγD, hyD, hTγ, ?_⟩
   -- the moves
   have h3B : Om (1 + 1 + 1) ≤ B := h3Om.trans hWB
   obtain ⟨-, hownG, hTB⟩ := faG_law hl hX hKB hown hρ hBD hown' hBA h3B
@@ -715,7 +719,20 @@ theorem faAL {γ y : Ordinal.{0}} (hWK : Om ω < K) (hγ : γ < S.psi (Om ω) (O
   have hrun := fa0_run hγ'V hownG hbase hD'1 hcond'
   have hTy : vbTK S l K y = vbTK S l K c + vbTK S l K D := by
     rw [← hcD]; exact kzT_add hl hX hKB hcD' hDD
+  refine ⟨hγD, hyD, hDD, hcD', hTγ, hcond', hbase, hTy, ?_⟩
   rw [hTe, hrun, hTy]
+
+/-- **THE READING MOVES THE ATOMS ABOVE `θ`**: `T(Hˡ¹_γ(y)) = Φ_{T γ}(T y)`. -/
+theorem faAL {γ y : Ordinal.{0}} (hWK : Om ω < K) (hγ : γ < S.psi (Om ω) (Om (1 + 1 + 1)))
+    (hy : y < ulH S 1 γ y) (hzW : ulH S 1 γ y < Om (1 + 1)) (hzD : VbDK S l K (ulH S 1 γ y))
+    (hθz : ConjT.th S < ulH S 1 γ y) :
+    VbDK S l K γ ∧ VbDK S l K y ∧ vbTK S l K γ < ConjT.th S ∧
+      vbTK S l K (ulH S 1 γ y) = ulH S 0 (vbTK S l K γ) (vbTK S l K y) := by
+  have hA : ulH S 1 γ y < S.psi K (Om (1 + 1)) := lt_psi_of_mem (InR_Om_succ 1) hzD.2.1 hzW
+  obtain ⟨B, c, D, hown', hc, hcD, hcond, hcase⟩ := Vp.vp_dec (S := S) (s := 1) one_lt_omega0 hy hA
+  obtain ⟨h1, h2, -, -, h3, -, -, -, h4⟩ :=
+    faALc hl hX hKB hown hρ hWK hγ hy hzW hzD hθz hown' hc hcD hcond hcase
+  exact ⟨h1, h2, h3, h4⟩
 
 end Law
 
