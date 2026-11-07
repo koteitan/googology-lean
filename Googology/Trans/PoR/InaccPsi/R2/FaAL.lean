@@ -495,7 +495,8 @@ theorem faALc {γ y B c D : Ordinal.{0}} (hWK : Om ω < K) (hγ : γ < S.psi (Om
       (∀ d, d ≤ vbTK S l K D → d < ulH S 0 (vbTK S l K γ) (vbTK S l K c + d)) ∧
       ulH S 0 (vbTK S l K γ) (vbTK S l K c) = S.psi (faG S l K B) (Om 1) ∧
       vbTK S l K y = vbTK S l K c + vbTK S l K D ∧
-      vbTK S l K (ulH S 1 γ y) = ulH S 0 (vbTK S l K γ) (vbTK S l K y) := by
+      vbTK S l K (ulH S 1 γ y) = ulH S 0 (vbTK S l K γ) (vbTK S l K y) ∧
+      VbDK S l K B ∧ B < ConjT.Aη S (cdEta S l) ∧ Om ω ≤ B := by
   have hPC := faPC_D (S := S) (l := l) hKB
   have hs : (1 : Ordinal.{0}) < ω := one_lt_omega0
   have hκ1 : S.InR (Om 1) := Low.InR_Om_one
@@ -719,7 +720,7 @@ theorem faALc {γ y B c D : Ordinal.{0}} (hWK : Om ω < K) (hγ : γ < S.psi (Om
   have hrun := fa0_run hγ'V hownG hbase hD'1 hcond'
   have hTy : vbTK S l K y = vbTK S l K c + vbTK S l K D := by
     rw [← hcD]; exact kzT_add hl hX hKB hcD' hDD
-  refine ⟨hγD, hyD, hDD, hcD', hTγ, hcond', hbase, hTy, ?_⟩
+  refine ⟨hγD, hyD, hDD, hcD', hTγ, hcond', hbase, hTy, ?_, hBD, hBA, hWB⟩
   rw [hTe, hrun, hTy]
 
 /-- **THE READING MOVES THE ATOMS ABOVE `θ`**: `T(Hˡ¹_γ(y)) = Φ_{T γ}(T y)`. -/
@@ -730,7 +731,7 @@ theorem faAL {γ y : Ordinal.{0}} (hWK : Om ω < K) (hγ : γ < S.psi (Om ω) (O
       vbTK S l K (ulH S 1 γ y) = ulH S 0 (vbTK S l K γ) (vbTK S l K y) := by
   have hA : ulH S 1 γ y < S.psi K (Om (1 + 1)) := lt_psi_of_mem (InR_Om_succ 1) hzD.2.1 hzW
   obtain ⟨B, c, D, hown', hc, hcD, hcond, hcase⟩ := Vp.vp_dec (S := S) (s := 1) one_lt_omega0 hy hA
-  obtain ⟨h1, h2, -, -, h3, -, -, -, h4⟩ :=
+  obtain ⟨h1, h2, -, -, h3, -, -, -, h4, -⟩ :=
     faALc hl hX hKB hown hρ hWK hγ hy hzW hzD hθz hown' hc hcD hcond hcase
   exact ⟨h1, h2, h3, h4⟩
 
