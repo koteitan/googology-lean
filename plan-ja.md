@@ -7,10 +7,10 @@
 - Wilken の主張：Core(R₂⁺) = ψ_{Ω₁}(I_ω)（[Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README-ja.md)）
   - Lean：R₂^C と ν_C = L(ω+1)（ブランチ feature/por。骨組みの根 `skNuC` が使う未証明の葉は 10 個。[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）
     - ι(Ω₂) より上の restart λ（葉 skBC{InR, Big}、skFixCapVF、skWin/Top{InR, Big}）。記号：Θ_λ は λ での符号の読み、m_λ は λ の符号、δ_λ = υ_{λ+ω+1}、K_ω = ψ_{Ω₂}(Ω_ω + Ω₂)、P′ = ψ_{Ω₂}(Ω_ω + Ω_ω)
-      - 🤖 K_ω ≤ c < P′ の符号の読みの式（Kz.kzOff、ψ の形）を FRAG の節（Za.ZaCl、ϑ の形）につなぐ
-      - Lemma IMG を crossing のある文脈 YsRstK の上で作り直す（GnImg、XiImg、AwImg の移植）
-      - Θ_λ(m_λ) ≥ δ_λ の restart での Lemma TOP と Lemma RS（到達点は k_λ(Θ_λ(m_λ))）
-      - restart についての内部の帰納法で、不動点の UPPER（InR）と LOWER（Big）を示す
+      - 🤖 閉じた原子 ψ₂(E) の読み P(η+ζ) と restart の名前：λ の到達点の内側の restart と (ι(η₀), λ) の restart は符号が小さいこと（帰納法の順序）
+      - 符号についての帰納法の枠：到達点が未知の restart を底にした上の構造、各 restart のすぐ下の CAP から X < ν_C
+      - Lemma IMG を読み全体で示す（h(x) ≥ x の写像、閉じた原子は対と到達点、ε は Claim 5.6 と faCan）
+      - Θ_λ(m_λ) ≥ δ_λ の restart での Lemma TOP と Lemma RS（D = Θ_μ∘Θ_λ⁻¹ の realizer、内側の到達点の対応）
       - Θ_λ(m_λ) ≥ δ_λ·ω の restart での CapV（skFixCapVF）
     - skTopLwNo2：ν_C < L(ω+1) なら L(ω) ≤₂ ν_C でないこと
     - skZlCfg：supply の restart の構成（Zl.ZlCfg）
