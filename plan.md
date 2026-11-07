@@ -10,20 +10,9 @@ The remaining work, arranged by the cells of the README tables. Items not being 
       - done (only S assumed): region A closed; layer frontier and direct readings of every layer c below X (skZbDirectX), by one reading vR of all codes. 113 axioms.
       - also: window RS input and cap off υ-fixed restarts, Θ = ρ at isolated ones; atoms move to K_Y; base ι(Ω₂): reach, cap; codes ≤ K_ω read short.
       - road yqRoadS (hyp.: UPPER, LOWER, cap past the frontier; WdThLow, WdEQfar if L(ω+1) ≤ ν_C; the shift XoShift; XoSup): ν_C = L(ω+1).
-      - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): OPEN leaves on the road: 14 (all L); skZbDirectX proved (round 215); skTopLawAll, skPsi3OffRest2 and skAtHi3 proved (Kx.kxTopLawAll, Ky.kyPsi3OffRest2, Kz.kzAtHi3); root vacuity open.
-      - 🤖 next: the layers past X (skLayPastXθ): X ≤ c < B₂ = ψ_{Ω₂}(ε_{Ω₂+1}) done (Phase C), then B₂ ≤ c < θ.
-        - done (Qc*): the atom system qcU of the codes below B₂; Lemma IMG below every ϑᵖ(Ω₁·N), Ω₁ ≤ N < ε_{Ω₁+1}, data below ρ (Qc.qc_img_rst; the layer tops may pass X^x, Qc.QcBd); the reading vQ, gates qcG, base readings qcA of every code below B₂.
-        - done: digit systems below B₂ (Qc.QDS, its step and raised gates); the gates qcG of the codes (a code over Z has its gate below Z, Qc.qc_gate); the level reading λ(x) of H_λ(y) (Qc.qcLv_main); the readings of fixed points of Γ are closed (Qc.qc_fix_cl); Qc.QsGood with the step (Qc.qsGood_succ) and the union at a limit (Qc.qsGood_lim) with the tops at non-atoms and atoms (Qc.qsTopNA, Qc.qsTopAt).
-        - done: the top at a fixed point H_λ(y) of Γ in [X, B₂) (Qc.qsTopFix: the level readings cofinal, Qc.qcLv_cof, and exact, Qc.qs_lv_pi); Qc.QsGood at every ε-number in [B_Γ, B₂) (Qc.qsGood_all).
-        - done: the layers at the fixed points of Γ below B₂ (Qc.qsLay_all), Zm.ZmPastAt S c for every c < B₂ (Qc.qc_past).
-        - 🤖 left: B₂ ≤ c < θ (skLayPastB2θ, Phase D; X ≤ c < B₂ is skLayPastXB2, proved).
-          - done: the atom system past B₂ with the bound θ (Qt.qtU S: atoms the strongly critical members of K⁽⁰⁾_Z in (Ω₁, θ)) and its hull facts at S (Zb.ZbAS.Ok, split from Zb.ZbAS so that the atoms may depend on S).
-          - done below B₃ = Qd.qdB: Zm.ZmPastAt S c for every c < B₃ (Qd.qd_past), with the reading vD, the digit systems (Qd.qdGood_all) and the layers (Qd.qdLay_all) of the Qc chain at the Veblen levels.
-          - done: Qd.QdImgH with no hypothesis (Qf.qf_imgH_all): the reach at the points of the Veblen levels (cited R2.qfLhT, Qf.qf_lh_lvl), the gap (Qf.qf_lam_gap), the separation (Qf.qf_sep_lvl), the copy lemma for every code (Qf.qf_copy), and Tᵖ[σ] closed under the countable values of φ above ρ (Qf.qf_TBphi, skTBphi).
-          - done: Lemma EXACT and the collapse for every code below θ: the reading R_x = π∘ι (cited ι and P₀, R2.CitedXi; Xi.xiR_pi, Xi.xiR_gx).
-          - done given Xi.XiImgAll: every layer c < θ (Xi.xi_past: one layer per code bound below θ, its terms the codes read by R_x; skLayPastB3θ).
-          - 🤖 next: Xi.XiImgAll (skXiImg): Lemma IMG at every reading R_ρ(c), c < θ — the reach of ϑᵖ(Ω₁·M + η) at every level M < θ ([W07b] Def 4.1 with the localization and cr), the separation, the copy lemma for the atom codes.
-        - then: the other road leaves (skLayPastTh, windows and tops, skBC, skFix, skZlCfg, skLevImgHi4).
+      - skeleton ([STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)): OPEN leaves on the road: 13 (all L); skZbDirectX proved (round 215); skTopLawAll, skPsi3OffRest2 and skAtHi3 proved (Kx.kxTopLawAll, Ky.kyPsi3OffRest2, Kz.kzAtHi3); root vacuity open.
+      - done: the layers past X below θ (skLayPastXθ, no hypothesis): X ≤ c < B₂ (Qc, Phase C), B₂ ≤ c < B₃ (Qd, Phase D1), and every c < θ (Xi.xi_past: one layer per code bound below θ read by R_x = π∘ι, the cited ι and P₀ of R2.CitedXi; Xi.xi_imgAll: Lemma IMG at every point of Tᵖ ∩ Ω₁, the covering π⁻¹∘f against the full [W07b] Claim 5.6, R2.claim56pw).
+      - 🤖 next: the other 13 road leaves: skLayPastTh (θ ≤ c < Ω₂), windows and tops (skWin/Top{InR, Big}, skTopLwNo2), skBC{BaseUL, InR, RsSH}, skFix{Cont, CapVF}, skZlCfg, skLevImgHi4.
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
   - ✅ M < (0,0,0)(1,1,1): proved on paper and in Lean
