@@ -181,7 +181,7 @@ def ZfImgHi2 (S : InaccSeq.{0}) (l β μ γ : Ordinal.{0}) (f D : Ordinal.{0} �
   ∀ h : Ordinal.{0}, ∀ L e : XoE, XoWF S l β (.th h L e) → XoTopF e → XoR S l μ (.th h L e) →
     (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h L e), z ∈ X ∪ Y) → 1 ≤ xoVal S l L → ¬ XoPi S l μ L →
     (∀ h', 0 < h' → upsilon (l + h') ∈ Y → ¬ XoPiG S l μ (upsilon (μ + f h')) (upsilon (l + h')) f L) →
-    YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) →
+    YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) → ¬ ZfNest S l L →
     yvSub S D (Om1 * xoVal S l L) = Om1 * xoImg S l μ f L
 
 /-- **The shift with the level image at the levels that are one-base terms at no segment** (statement): `Zf.ZfImgP`
@@ -220,7 +220,7 @@ theorem zfImgP_of_P2 (hP : ZfImgP2 S) : ZfImgP S := by
   obtain ⟨D, μ, f, B, γ, Os, hA, hZa, hHi⟩ := hP l β Q hl hl1 hν hνβ hsup hstd hlL X Y hX hY
   refine ⟨D, μ, f, B, γ, Os, hA, hZa, ?_⟩
   obtain ⟨-, hXγ, hγμ, hLs, hres, -, ⟨hμl, -⟩, hmv, -, -, -, hid, -⟩ := hA
-  intro h L e hW hF hR hp hM1 hPi hL
+  intro h L e hW hF hR hp hM1 hPi hL hN
   by_cases hG : ∃ h', 0 < h' ∧ upsilon (l + h') ∈ Y ∧ XoPiG S l μ (upsilon (μ + f h')) (upsilon (l + h')) f L
   · obtain ⟨h', h'0, hτY, hPG⟩ := hG
     have hl0 : 0 < l := pos_iff_ne_zero.2 hl.1
@@ -238,9 +238,9 @@ theorem zfImgP_of_P2 (hP : ZfImgP2 S) : ZfImgP S := by
     have hθ := uzTBound (S := S) _ (upsPt_inE hτU) hτ1 _ hξT hξ2
     exact zf_img_piG hB' hD' L hPG (le_self_add.trans_lt hθ) hL
   · push Not at hG
-    exact hHi h L e hW hF hR hp hM1 hPi hG hL
+    exact hHi h L e hW hF hR hp hM1 hPi hG hL hN
 
 /-- **`ZfImgP2 S ⇒ Yq.XoShift2 S`.** -/
-theorem zfShift2_P2 (hP : ZfImgP2 S) : XoShift2 S := zfShift2_P (zfImgP_of_P2 hP)
+theorem zfShift2_P2 (hLN : ZfLevNode S) (hP : ZfImgP2 S) : XoShift2 S := zfShift2_P hLN (zfImgP_of_P2 hP)
 
 end Googology.Trans.PoR.InaccPsi.R2.Zf

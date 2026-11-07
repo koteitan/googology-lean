@@ -39,7 +39,7 @@ def ZkImgHi3 (S : InaccSeq.{0}) (l β μ γ : Ordinal.{0}) (f D : Ordinal.{0} �
     (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h L e), z ∈ X ∪ Y) → 1 ≤ xoVal S l L → ¬ XoPi S l μ L →
     (∀ h', 0 < h' → upsilon (l + h') ∈ Y → ¬ Zf.XoPiG S l μ (upsilon (μ + f h')) (upsilon (l + h')) f L) →
     ¬ ZkSS (zkPc S l μ f Y) L →
-    YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) →
+    YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) → ¬ Zf.ZfNest S l L →
     yvSub S D (Om1 * xoVal S l L) = Om1 * xoImg S l μ f L
 
 /-- **The shift with the level image off the segment sums** (statement): `Zf.ZfImgP2` with `ZkImgHi3`. -/
@@ -101,21 +101,21 @@ theorem zkImgP2_of_P3 (hP : ZkImgP3 S) : Zf.ZfImgP2 S := by
       hstd hlL X Y hX hY
   refine ⟨D, μ, f, B, γ, Os, ⟨hQ, hrest⟩, hZa, ?_⟩
   obtain ⟨hXγ, hγμ, hLs, hres, -, ⟨hμl, -⟩, hmv, -, -, -, hid, hγU⟩ := hrest
-  intro h L e hW hF hR hp hM1 hPi hG hLv
+  intro h L e hW hF hR hp hM1 hPi hG hLv hN
   by_cases hSS : ZkSS (zkPc S l μ f Y) L
   · have H : ZkSegH l μ f Y := zkSegH_of (pos_iff_ne_zero.2 hl.1) hl1 (hνβ.trans nuC_le_Om1) hY hLs hμl hres hSl
     have hγ0 : 0 < γ := omega0_pos.trans (omega0_lt_inE (upsPt_inE hγU))
     exact zk_lev_seg H hXγ hγμ hid hγ0 (fun y hy => (hY y hy).1) hmv L hSS hLv
-  · exact hHi h L e hW hF hR hp hM1 hPi hG hSS hLv
+  · exact hHi h L e hW hF hR hp hM1 hPi hG hSS hLv hN
 
 /-- **The converse**: `Zf.ZfImgP2 S ⇒ ZkImgP3 S` (so the two statements are equivalent). -/
 theorem zkImgP3_of_P2 (hP : Zf.ZfImgP2 S) : ZkImgP3 S := by
   intro l β Q hl hl1 hν hνβ hsup hstd hlL X Y hX hY
   obtain ⟨D, μ, f, B, γ, Os, hA, hZa, hHi⟩ := hP l β Q hl hl1 hν hνβ hsup hstd hlL X Y hX hY
-  exact ⟨D, μ, f, B, γ, Os, hA, hZa, fun h L e hW hF hR hp hM1 hPi hG _ hLv => hHi h L e hW hF hR hp hM1 hPi hG hLv⟩
+  exact ⟨D, μ, f, B, γ, Os, hA, hZa, fun h L e hW hF hR hp hM1 hPi hG _ hLv hN => hHi h L e hW hF hR hp hM1 hPi hG hLv hN⟩
 
 /-- **`ZkImgP3 S ⇒ Yq.XoShift2 S`.** -/
-theorem zkShift2_P3 (hP : ZkImgP3 S) : XoShift2 S := Zf.zfShift2_P2 (zkImgP2_of_P3 hP)
+theorem zkShift2_P3 (hLN : Zf.ZfLevNode S) (hP : ZkImgP3 S) : XoShift2 S := Zf.zfShift2_P2 hLN (zkImgP2_of_P3 hP)
 
 /-- **Non-vacuity of the fragment**: the two-segment level `old (sg h υ_{λ+h}) + old (lo υ_λ)` (`h > 0`,
 `υ_{λ+h} ∈ Y`) is a segment sum; it is not `Xo.XoPi`, and it is `Zf.XoPiG` at no segment `h'` with

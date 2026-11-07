@@ -17,15 +17,19 @@ on the configuration ENLARGED by, for every `y ∈ Y` that is a node value `ϑ^{
   enlarged configuration is admissible (`zf_enl`);
 * every clause of the shift for the enlarged configuration gives the clause for `X ∪ Y` (`zf_lsMapW_mono` and
   monotonicity of the other clauses);
-* `Zf.zfDCl` at the enlarged configuration, with the core points `X ∪ Y`, gives `Yq.XoThCl` for `X ∪ Y`.
+* `Zf.zfDCl` at the enlarged configuration, with the core points `X ∪ Y`, gives `Yq.XoThCl` for `X ∪ Y`;
+* at a nested node level (`Zf.ZfNest`: the level is a `ϑ`-node of level `≥ 1`) the level image is the node clause at
+  the inner node (`ZfLevNode`, a statement proved as `Zk.zkLevNode`), and the inner node is a smaller term: `zfDCl`
+  at it, by induction on the size (`xoSize`); the image is an `ε`-number by `R2.vt_E_iff` (the term clause below
+  `B₂`, `Za.ZaHiD` from `B₂` on).
 
-What is left is the **level image** (`Zf.ZfImgCl`): `ZfImg S` is `Yq.XoShift2` with `Za.ZaHiD` and `ZfImgCl` in place
+What is left is the **level image** off the nested node levels (`Zf.ZfImgCl`): `ZfImg S` is `Yq.XoShift2` with `Za.ZaHiD` and `ZfImgCl` in place
 of `XoThCl` (a statement; `Za.zaShiftCore` gives all of it but `ZfImgCl`).
 
-* `ZfImg` (statement), `zf_lsMapW_mono`, `zf_seg_unique`, `zf_enl` (**the enlargement**), `zfShift2`
-  (**`ZfImg S ⇒ Yq.XoShift2 S`**), `zfShiftXo` (`ZfImg S ⇒ Yq.XoShift S`).
+* `ZfLevNode` (statement), `ZfImg` (statement), `zf_lsMapW_mono`, `zf_seg_unique`, `zf_enl` (**the enlargement**), `zfShift2`
+  (**`ZfLevNode S ⇒ ZfImg S ⇒ Yq.XoShift2 S`**), `zfShiftXo` (`⇒ Yq.XoShift S`).
 
-No new axiom.  New definition: `ZfImg` (a statement).
+No new axiom.  New definitions: `ZfLevNode`, `ZfImg` (statements).
 -/
 
 set_option autoImplicit false
@@ -38,6 +42,16 @@ open Googology.Trans.PoR.InaccPsi.R2.Ur Googology.Trans.PoR.InaccPsi.R2.Vi Googo
   Googology.Trans.PoR.InaccPsi.R2.Xo Googology.Trans.PoR.InaccPsi.R2.Yq Googology.Trans.PoR.InaccPsi.R2.Yv
 
 variable {S : InaccSeq.{0}}
+
+/-- **The level image at a nested node level from the node clause at the inner node** (statement, a lemma on the
+values: `Zk.zkLevNode`): at a `ϑ`-node level of level `≥ 1` whose image is an `ε`-number, `D(val) = img` gives
+`yvSub D (Ω₁·val) = Ω₁·img`. -/
+def ZfLevNode (S : InaccSeq.{0}) : Prop :=
+  ∀ (l β μ h' : Ordinal.{0}) (f D : Ordinal.{0} → Ordinal.{0}) (L' e' : XoE), D 0 = 0 →
+    XoWF S l β (.th h' L' e') → 1 ≤ xoVal S l L' → InE (upsilon (l + h')) → upsilon (l + h') < Om1 →
+    xoVal S l (.th h' L' e') < Om1 → InE (xoImg S l μ f (.th h' L' e')) →
+    D (xoVal S l (.th h' L' e')) = xoImg S l μ f (.th h' L' e') →
+    yvSub S D (Om1 * xoVal S l (.th h' L' e')) = Om1 * xoImg S l μ f (.th h' L' e')
 
 /-- **The shift with the moving-level clause and the level image** (statement): `Yq.XoShift2` with `Za.ZaHiD` and
 `Zf.ZfImgCl` in place of `Yq.XoThCl`. -/
@@ -168,8 +182,9 @@ theorem zf_enl (S : InaccSeq.{0}) {l β : Ordinal.{0}} (hl0 : 0 < l) (hb1 : upsi
 
 /-- **`ZfImg S ⇒ Yq.XoShift2 S`**: the configuration is enlarged by the leaves of its node levels, the predecessors
 of the level-`0` arguments and `ω` (`zf_enl`); the shift for the enlarged configuration restricts to `X ∪ Y`, and
-`Zf.zfDCl` with the core points `X ∪ Y` gives `Yq.XoThCl`. -/
-theorem zfShift2 (hI : ZfImg S) : XoShift2 S := by
+`Zf.zfDCl` with the core points `X ∪ Y` gives `Yq.XoThCl`.  The level image at a nested node level (`ZfNest`) is
+the node clause at the inner node (`ZfLevNode`), a smaller term: `zfDCl` at it, by induction on the size. -/
+theorem zfShift2 (hLN : ZfLevNode S) (hI : ZfImg S) : XoShift2 S := by
   classical
   intro l β Q hl hl1 hν hνβ hsup hstd hlL X Y hX hY
   have hl0 : 0 < l := pos_iff_ne_zero.2 hl.1
@@ -215,18 +230,15 @@ theorem zfShift2 (hI : ZfImg S) : XoShift2 S := by
   have hBμ : Bases (upsilon μ) (upsilon l) := ⟨hμE, hlE, hμl, hl1⟩
   have hold := fun E hWE hp' =>
     (Vr.vrD_eq hl0 hb1 hX' hY' hLs.fix hLs.add hXγ hγμ hBμ hres hpi hmv hub hun hid E hWE hp').1
-  have hsb : upsilon (succ (l + h)) ≤ upsilon (l + β) :=
-    upsilon_normal.monotone (Order.succ_le_of_lt ((add_lt_add_iff_left l).2 hW.2.1))
-  have hv : xoVal S l (.th h L e) < upsilon (l + β) := hW.2.2.2.2.2.2.2.2.trans_le hsb
   have hyYof : ∀ y, y ∈ X ∪ Y → ∀ h', upsilon (l + h') ≤ y → y ∈ Y := by
     intro y hyP h' h1
     rcases Finset.mem_union.1 hyP with hx | hy
     · exact absurd (hX y hx) (not_lt.2 ((upsilon_normal.monotone le_self_add).trans h1))
     · exact hy
-  refine zfDCl (Pt := fun z => z ∈ X ∪ Y) hl0 hβ0 hb1 hX' hY' hBμ hμ0 hLs.mono hLs.add hLs.below hres hold hun
-    hLC hid hγU hZa hImg ?_ ?_ (Finset.mem_union_left _ hωX') (.th h L e) hW hF hR
-    (fun z hz => hsubXY z (hp z hz)) hp hv
-  · intro y hyP _ h' M η h1 h2 hM1 hη1 hT h2' hval
+  have hLv' : ∀ y, y ∈ X ∪ Y → y ∈ Y' → ∀ h' M η, upsilon (l + h') ≤ y → y < upsilon (succ (l + h')) →
+      1 ≤ M → η < Om1 → Om1 * M + η ∈ Tset (upsilon (l + h')) → Om1 * M + η < OmTwo →
+      vt (upsilon (l + h')) (Om1 * M + η) = y → YvLv S (fun p => p ∈ X' ∪ Y' ∨ p < γ) (Om1 * M) := by
+    intro y hyP _ h' M η h1 h2 hM1 hη1 hT h2' hval
     have hyY := hyYof y hyP h' h1
     have hξ1 : Om1 ≤ Om1 * M + η := (le_mul_left Om1 (zero_lt_one.trans_le hM1)).trans le_self_add
     obtain ⟨hA, -⟩ := hZ y hyY h' (Om1 * M + η) h1 h2 hT h2' hval
@@ -235,12 +247,124 @@ theorem zfShift2 (hI : ZfImg S) : XoShift2 S := by
     have hA' := hA hξ1
     rw [hdiv] at hA'
     exact hA'.mono fun p hp => Or.inl (hZXY p hp.1)
-  · intro y hyP _ h' η h1 h2 h1η hη1 hT hval
+  have hPr' : ∀ y, y ∈ X ∪ Y → y ∈ Y' → ∀ h' η, upsilon (l + h') ≤ y → y < upsilon (succ (l + h')) →
+      1 ≤ η → η < Om1 → η ∈ Tset (upsilon (l + h')) → vt (upsilon (l + h')) η = y → η - 1 ∈ X' ∪ Y' := by
+    intro y hyP _ h' η h1 h2 h1η hη1 hT hval
     have hyY := hyYof y hyP h' h1
     obtain ⟨-, hB'⟩ := hZ y hyY h' η h1 h2 hT (hη1.trans tqc_Om1_lt_OmTwo) hval
     exact hZXY _ (hB' h1η hη1).1
+  have hm := upsilon_normal.strictMono
+  have hbU : UpsPt (upsilon (l + β)) := upsPt_upsilon (hl0.trans_le le_self_add)
+  have hθ2 : ConjT.th S < OmTwo := by rw [← Ui.ui_one_W]; exact (InaccSeq.psiS_bounds (S := S) _ 1).2
+  have hIndec : Indec (OmTwo : Ordinal.{0}) := Lq.lq_SC_indec Uc.uc_SC_Om2
+  -- the level image at the nested node levels, by induction on the size
+  have hNestAll : ∀ n : ℕ, ∀ h₁ : Ordinal.{0}, ∀ L₁ e₁ : XoE, xoSize (.th h₁ L₁ e₁) ≤ n →
+      XoWF S l β (.th h₁ L₁ e₁) → XoTopF e₁ → XoR S l μ (.th h₁ L₁ e₁) →
+      (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h₁ L₁ e₁), z ∈ X' ∪ Y') →
+      (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h₁ L₁ e₁), z ∈ X ∪ Y) → 1 ≤ xoVal S l L₁ →
+      YvLv S (fun p => p ∈ X' ∪ Y' ∨ p < γ) (Om1 * xoVal S l L₁) → ZfNest S l L₁ →
+      yvSub S D (Om1 * xoVal S l L₁) = Om1 * xoImg S l μ f L₁ := by
+    intro n
+    induction n with
+    | zero =>
+      intro h₁ L₁ e₁ hsz
+      simp only [xoSize] at hsz
+      omega
+    | succ n ih =>
+      intro h₁ L₁ e₁ hsz hW₁ _ hR₁ hp₁ hq₁ _ _ hN
+      obtain ⟨h', L', e', rfl, hF', hM1'⟩ := hN
+      have hWL : XoWF S l β (.th h' L' e') := hW₁.2.2.1
+      obtain ⟨-, hh'β, -, -, hη1, hξT, hξ2, hby, hys⟩ := hWL
+      have hsb' : upsilon (succ (l + h')) ≤ upsilon (l + β) :=
+        upsilon_normal.monotone (Order.succ_le_of_lt ((add_lt_add_iff_left l).2 hh'β))
+      have hvL : xoVal S l (.th h' L' e') < upsilon (l + β) := hys.trans_le hsb'
+      have hsub : xoPts S l (upsilon (l + β)) (.th h' L' e') ⊆
+          xoPts S l (upsilon (l + β)) (.th h₁ (.th h' L' e') e₁) :=
+        yq_pts_sub (fun z hz => Finset.mem_insert_of_mem (Finset.mem_insert_of_mem (Finset.mem_union_left _ hz)))
+      have hsz' : xoSize (.th h' L' e') ≤ n := by simp only [xoSize] at hsz ⊢; omega
+      -- the node clause at the inner node
+      have hDL : D (xoVal S l (.th h' L' e')) = xoImg S l μ f (.th h' L' e') :=
+        zfDCl (Pt := fun z => z ∈ X ∪ Y) hl0 hβ0 hb1 hX' hY' hBμ hμ0 hLs.mono hLs.add hLs.below hres hold hun
+          hLC hid hγU hZa hImg n ih hLv' hPr' (Finset.mem_union_left _ hωX') (.th h' L' e') hsz' hW₁.2.2.1 hF'
+          hR₁.1 (fun z hz => hp₁ z (hsub hz)) (fun z hz => hq₁ z (hsub hz)) hvL
+      -- the inner value is an `ε`-number, and so is its image
+      have hτU : UpsPt (upsilon (l + h')) := upsPt_upsilon (hl0.trans_le le_self_add)
+      have hτE : InE (upsilon (l + h')) := upsPt_inE hτU
+      have hv1 : xoVal S l (.th h' L' e') < Om1 := hvL.trans_le hb1
+      have hτ1 : upsilon (l + h') < Om1 := hby.trans_lt hv1
+      have hτb : upsilon (l + h') < upsilon (l + β) := hm ((add_lt_add_iff_left l).2 hh'β)
+      have hηT : xoVal S l e' ∈ Tset (upsilon (l + h')) :=
+        vzRem_T hτE hτ1 hξT hξ2 rfl (dvd_mul_right Om1 _) hη1
+      have hηb : xoVal S l e' < upsilon (l + β) := Za.za_lt_next hτE hτ1 hηT hη1 hτb hbU
+      have hyXY : xoVal S l (.th h' L' e') ∈ X ∪ Y := hq₁ _ (hsub (xoVal_mem _ hvL))
+      have hyY : xoVal S l (.th h' L' e') ∈ Y := hyYof _ hyXY h' hby
+      have hyY' : xoVal S l (.th h' L' e') ∈ Y' := hYY' hyY
+      have hpe : xoPts S l (upsilon (l + β)) e' ⊆ xoPts S l (upsilon (l + β)) (.th h' L' e') :=
+        yq_pts_sub (fun z hz => Finset.mem_insert_of_mem (Finset.mem_insert_of_mem (Finset.mem_union_right _ hz)))
+      have hηXY : xoVal S l e' ∈ X' ∪ Y' := hp₁ _ (hsub (hpe (xoVal_mem e' hηb)))
+      have hτXY : upsilon (l + h') ∈ X' ∪ Y' :=
+        hp₁ _ (hsub (Finset.mem_filter.2 ⟨Finset.mem_insert_self _ _, hτb⟩))
+      have hτY' : upsilon (l + h') ∈ Y' := by
+        rcases Finset.mem_union.1 hτXY with hx | hy
+        · exact absurd (hX' _ hx) (not_lt.2 (upsilon_normal.monotone le_self_add))
+        · exact hy
+      have hDτ := (hres h' hτY').2
+      have hτ'1 : upsilon (μ + f h') < Om1 := (hDτ ▸ hLs.below _ hτY').trans hl1
+      have hτ'E : InE (upsilon (μ + f h')) := upsPt_inE (upsPt_upsilon (hμ0.trans_le le_self_add))
+      have hDη1 : D (xoVal S l e') < Om1 := by
+        rcases Finset.mem_union.1 hηXY with hx | hy
+        · rw [hLs.fix _ hx]; exact (hX' _ hx).trans hl1
+        · exact (hLs.below _ hy).trans hl1
+      have hlvF := hLv' _ hyXY hyY' h' (xoVal S l L') (xoVal S l e') hby hys hM1' hη1 hξT hξ2 rfl
+      have hlvT : YvLv S (· ∈ Tset (upsilon (l + h'))) (Om1 * xoVal S l L') :=
+        (zf_lv_T S hτE hτ1 hM1' hη1 hξT hξ2 hbU hτb).mono fun p hp => hp.1
+      have hξθ : Om1 * xoVal S l L' + xoVal S l e' < ConjT.th S := uzTBound (S := S) _ hτE hτ1 _ hξT hξ2
+      have hMθ : Om1 * xoVal S l L' < ConjT.th S := le_self_add.trans_lt hξθ
+      have hDE : InE (D (xoVal S l (.th h' L' e'))) := by
+        rcases lt_or_ge (xoVal S l L') Uc.ucB with hMB | hMB
+        · -- a level below `B₂`: the term `thc M (par η)`
+          have hqB : Om1 * xoVal S l L' < Uc.ucB := Xe.xe_mul_lt_B hMB
+          have hVT : Vc.VcLv (· ∈ Tset (upsilon (l + h'))) (Om1 * xoVal S l L') := by
+            cases hlvT with
+            | low _ hV => exact hV
+            | om hs _ heq => exact absurd hqB (not_lt.2 (heq ▸ yv_Om_ge_B hs))
+            | cnf _ _ _ _ hB' => exact absurd hqB (not_lt.2 hB')
+            | veb _ _ _ _ hB' => exact absurd hqB (not_lt.2 hB')
+            | atom _ _ _ _ hB' => exact absurd hqB (not_lt.2 hB')
+          have hVF : Vc.VcLv (fun p => p ∈ X' ∪ Y' ∨ p < γ) (Om1 * xoVal S l L') := by
+            cases hlvF with
+            | low _ hV => exact hV
+            | om hs _ heq => exact absurd hqB (not_lt.2 (heq ▸ yv_Om_ge_B hs))
+            | cnf _ _ _ _ hB' => exact absurd hqB (not_lt.2 hB')
+            | veb _ _ _ _ hB' => exact absurd hqB (not_lt.2 hB')
+            | atom _ _ _ _ hB' => exact absurd hqB (not_lt.2 hB')
+          have hGT : Om1 * xoVal S l L' ∈ Tset (upsilon (l + h')) := vl_lv_mem hτE hτ1 hM1' hqB hVT
+          have hZW : ZW (upsilon (l + h')) (UnT.thc (xoVal S l L') (UnT.par (xoVal S l e'))) :=
+            ⟨⟨hM1', hqB, hGT, hξT, Za.za_lt_vt_all hτE hτ1 hM1' hMθ hηT hη1 hξT⟩, trivial⟩
+          have hWF : WFr (upsilon (l + h')) (UnT.thc (xoVal S l L') (UnT.par (xoVal S l e'))) := ⟨trivial, hη1⟩
+          obtain ⟨e1, -, hZW'⟩ := hun _ hyY' h' hby hys (UnT.thc (xoVal S l L') (UnT.par (xoVal S l e'))) hZW hWF
+            hηXY ⟨hVF, trivial⟩ hηT ⟨hVT, trivial⟩ rfl
+          obtain ⟨hN', -⟩ := hZW'
+          rw [e1]
+          refine ((vt_E_iff hτ'E hτ'1 hN'.mem ?_).2 ?_).2
+          · exact hIndec.add_lt (hN'.qB.trans Uc.ucB_lt_Om2) (hDη1.trans Uc.uc_Om1_lt_Om2)
+          · exact (le_mul_left Om1 (zero_lt_one.trans_le hN'.q1)).trans le_self_add
+        · -- a level `≥ B₂`: the moving-level clause
+          obtain ⟨q', -, hq'1, -, hq'θ, -, -, hmemT, hDy, -⟩ := hZa _ hyY' h' hby hys (xoVal S l L')
+            (UnT.par (xoVal S l e')) hM1' hMB hMθ hlvF hlvT trivial trivial hη1 hηXY trivial hηT trivial rfl
+          rw [hDy]
+          refine ((vt_E_iff hτ'E hτ'1 hmemT ?_).2 ?_).2
+          · exact hIndec.add_lt (hq'θ.trans hθ2) (hDη1.trans Uc.uc_Om1_lt_Om2)
+          · exact (le_mul_left Om1 (zero_lt_one.trans_le hq'1)).trans le_self_add
+      exact hLN l β μ h' f D L' e' (hid 0 hγU.1) hW₁.2.2.1 hM1' hτE hτ1 hv1 (hDL ▸ hDE) hDL
+  have hsb : upsilon (succ (l + h)) ≤ upsilon (l + β) :=
+    upsilon_normal.monotone (Order.succ_le_of_lt ((add_lt_add_iff_left l).2 hW.2.1))
+  have hv : xoVal S l (.th h L e) < upsilon (l + β) := hW.2.2.2.2.2.2.2.2.trans_le hsb
+  exact zfDCl (Pt := fun z => z ∈ X ∪ Y) hl0 hβ0 hb1 hX' hY' hBμ hμ0 hLs.mono hLs.add hLs.below hres hold hun
+    hLC hid hγU hZa hImg _ (hNestAll (xoSize (.th h L e))) hLv' hPr' (Finset.mem_union_left _ hωX')
+    (.th h L e) le_rfl hW hF hR (fun z hz => hsubXY z (hp z hz)) hp hv
 
 /-- **`ZfImg S ⇒ Yq.XoShift S`** (`Yq.yqShift_of2`). -/
-theorem zfShiftXo (hI : ZfImg S) : XoShift S := yqShift_of2 (zfShift2 hI)
+theorem zfShiftXo (hLN : ZfLevNode S) (hI : ZfImg S) : XoShift S := yqShift_of2 (zfShift2 hLN hI)
 
 end Googology.Trans.PoR.InaccPsi.R2.Zf

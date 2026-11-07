@@ -15,12 +15,16 @@ asks `1 ≤ val L`; a node of level `0` is never good (`Zf.zfNodesAll_false`).  
   image** `yvSub D (Ω₁·val L) = Ω₁·img L` (`ZfImgCl`, a statement).
 
 * `zf_psi_zero`, `zf_psi_eq_zero`, `zf_vr_zero`, `zf_img_zero` (**a level term of value `0` has image `0`**);
-* `ZfImgCl` (**the level-image clause**, a statement);
+* `xoSize` (the size of a decomposition), `ZfNest` (**a nested node level**: the level is a `ϑ`-node of level `≥ 1`
+  with an `old` / `th` / `add` countable part);
+* `ZfImgCl` (**the level-image clause** off the nested node levels, a statement);
 * `zfDCl` (**`D(value) = image` at every restricted well-formed decomposition with an `old` / `th` / `add` skeleton**,
   given the clauses of the shift, `ZfImgCl`, the leaves of every node level in the configuration (`hLv`), the
-  predecessor `η − 1` of the countable part of every node of level `0` in the configuration (`hPr`), and `ω` in it).
+  predecessor `η − 1` of the countable part of every node of level `0` in the configuration (`hPr`), and `ω` in it;
+  at the nested node levels the level image is a hypothesis for the nodes of size `≤ n`, `hNest`, and the conclusion
+  is for the decompositions of size `≤ n`: `Zf.zfShift2` supplies `hNest` by induction on `n`).
 
-No new axiom.  New definition: `ZfImgCl` (a statement).
+No new axiom.  New definitions: `xoSize`, `ZfNest` (a predicate), `ZfImgCl` (a statement).
 -/
 
 set_option autoImplicit false
@@ -109,13 +113,28 @@ theorem zf_img_zero {l β μ : Ordinal.{0}} (f : Ordinal.{0} → Ordinal.{0}) (h
     show S.psi (xoImg S l μ f e) (xoImg S l μ f p) = 0
     rw [ihp hW.1 hp, zf_psi_zero]
 
+/-- The size of a decomposition. -/
+def xoSize : XoE → ℕ
+  | .old _ => 1
+  | .th _ L e => xoSize L + xoSize e + 1
+  | .add s t => xoSize s + xoSize t + 1
+  | .lc _ => 1
+  | .phi a b => xoSize a + xoSize b + 1
+  | .om a => xoSize a + 1
+  | .coll p e => xoSize p + xoSize e + 1
+
+/-- **A nested node level**: the level is itself a `ϑ`-node of level `≥ 1` whose countable part has an `old` /
+`th` / `add` skeleton (its level image is the node clause at the inner node, a smaller term). -/
+def ZfNest (S : InaccSeq.{0}) (l : Ordinal.{0}) (L : XoE) : Prop :=
+  ∃ h' : Ordinal.{0}, ∃ L' e' : XoE, L = .th h' L' e' ∧ XoTopF e' ∧ 1 ≤ xoVal S l L'
+
 /-- **The level-image clause** (statement): at every restricted well-formed node of the configuration whose level has
 value `≥ 1` and leaves in `X ∪ Y ∪ γ`, the leaf substitution of the level value is the image of the level term. -/
 def ZfImgCl (S : InaccSeq.{0}) (l β μ γ : Ordinal.{0}) (f D : Ordinal.{0} → Ordinal.{0})
     (X Y : Finset Ordinal.{0}) : Prop :=
   ∀ h : Ordinal.{0}, ∀ L e : XoE, XoWF S l β (.th h L e) → XoTopF e → XoR S l μ (.th h L e) →
     (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h L e), z ∈ X ∪ Y) → 1 ≤ xoVal S l L →
-    YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) →
+    YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) → ¬ ZfNest S l L →
     yvSub S D (Om1 * xoVal S l L) = Om1 * xoImg S l μ f L
 
 /-- **The node clause at every decomposition** (levels `0` included), from the clauses of the shift, the level image,
@@ -138,14 +157,19 @@ theorem zfDCl {l β μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X 
         D y = UnT.ev (upsilon (μ + f g)) (vmap D t) ∧ WFr (upsilon (μ + f g)) (vmap D t) ∧
           ZW (upsilon (μ + f g)) (vmap D t))
     (hLC : VlLC (fun p => p ∈ X ∪ Y ∨ p < γ) D) (hid : ∀ x, x < γ → D x = x) (hγU : UpsPt γ)
-    (hZa : Za.ZaHiD S l μ γ f D X Y) (hImg : ZfImgCl S l β μ γ f D X Y)
+    (hZa : Za.ZaHiD S l μ γ f D X Y) (hImg : ZfImgCl S l β μ γ f D X Y) (n : ℕ)
+    (hNest : ∀ h : Ordinal.{0}, ∀ L e : XoE, xoSize (.th h L e) ≤ n → XoWF S l β (.th h L e) → XoTopF e →
+      XoR S l μ (.th h L e) → (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h L e), z ∈ X ∪ Y) →
+      (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h L e), Pt z) → 1 ≤ xoVal S l L →
+      YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) → ZfNest S l L →
+      yvSub S D (Om1 * xoVal S l L) = Om1 * xoImg S l μ f L)
     (hLv : ∀ y, Pt y → y ∈ Y → ∀ h M η, upsilon (l + h) ≤ y → y < upsilon (succ (l + h)) → 1 ≤ M → η < Om1 →
       Om1 * M + η ∈ Tset (upsilon (l + h)) → Om1 * M + η < OmTwo → vt (upsilon (l + h)) (Om1 * M + η) = y →
       YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * M))
     (hPr : ∀ y, Pt y → y ∈ Y → ∀ h η, upsilon (l + h) ≤ y → y < upsilon (succ (l + h)) → 1 ≤ η → η < Om1 →
       η ∈ Tset (upsilon (l + h)) → vt (upsilon (l + h)) η = y → η - 1 ∈ X ∪ Y)
     (hω : ω ∈ X ∪ Y) :
-    ∀ E : XoE, XoWF S l β E → XoTopF E → XoR S l μ E → (∀ z ∈ xoPts S l (upsilon (l + β)) E, z ∈ X ∪ Y) →
+    ∀ E : XoE, xoSize E ≤ n → XoWF S l β E → XoTopF E → XoR S l μ E → (∀ z ∈ xoPts S l (upsilon (l + β)) E, z ∈ X ∪ Y) →
       (∀ z ∈ xoPts S l (upsilon (l + β)) E, Pt z) →
       xoVal S l E < upsilon (l + β) → D (xoVal S l E) = xoImg S l μ f E := by
   have hm := upsilon_normal.strictMono
@@ -154,12 +178,12 @@ theorem zfDCl {l β μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X 
   intro E
   induction E with
   | old E =>
-    intro hW _ _ hp _ _
+    intro _ hW _ _ hp _ _
     have hp' : ∀ z ∈ Vr.vrPts l E, z ∈ X ∪ Y := fun z hz =>
       hp z (Finset.mem_filter.2 ⟨hz, Vr.vrPts_lt hβ0 E hW z hz⟩)
     exact hold E hW hp'
   | th h L e _ ihe =>
-    intro hW hF hR hp hq hv
+    intro hsz hW hF hR hp hq hv
     have hW0 := hW
     obtain ⟨h0, hhβ, hWL, hWe, hη1, hξT, hξ2, hby, hys⟩ := hW
     set M := xoVal S l L with hMdef
@@ -177,7 +201,8 @@ theorem zfDCl {l β μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X 
     have hηb : η < b := Za.za_lt_next hτE hτ1 hηT hη1 hτb hbU
     have hpe : xoPts S l b e ⊆ xoPts S l b (.th h L e) :=
       yq_pts_sub (fun z hz => Finset.mem_insert_of_mem (Finset.mem_insert_of_mem (Finset.mem_union_right _ hz)))
-    have IHe := ihe hWe hF hR.2 (fun z hz => hp z (hpe hz)) (fun z hz => hq z (hpe hz)) hηb
+    have hsze : xoSize e ≤ n := by simp only [xoSize] at hsz; omega
+    have IHe := ihe hsze hWe hF hR.2 (fun z hz => hp z (hpe hz)) (fun z hz => hq z (hpe hz)) hηb
     have hyP : Pt (vt τ (Om1 * M + η)) := hq _ (xoVal_mem (.th h L e) hyb)
     have hηXY : η ∈ X ∪ Y := hp _ (hpe (xoVal_mem e hηb))
     have hyXY : vt τ (Om1 * M + η) ∈ X ∪ Y := hp _ (xoVal_mem (.th h L e) hyb)
@@ -247,7 +272,10 @@ theorem zfDCl {l β μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X 
         hLv _ hyP hyY h M η hby hys hM1 hη1 hξT hξ2 rfl
       have hlvT : YvLv S (· ∈ Tset τ) (Om1 * M) :=
         (zf_lv_T S hτE hτ1 hM1 hη1 hξT hξ2 hbU hτb).mono fun p hp => hp.1
-      have hsubeq := hImg h L e hW0 hF hR hp hM1 hlvF
+      have hsubeq : yvSub S D (Om1 * M) = Om1 * xoImg S l μ f L := by
+        by_cases hN : ZfNest S l L
+        · exact hNest h L e hsz hW0 hF hR hp hq hM1 hlvF hN
+        · exact hImg h L e hW0 hF hR hp hM1 hlvF hN
       rw [← hsubeq]
       rcases lt_or_ge M Uc.ucB with hMB | hMB
       · -- a level below `B₂`: the term `thc M (par η)`
@@ -281,7 +309,9 @@ theorem zfDCl {l β μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X 
         rw [hnode, e1]
         rfl
   | add s t ihs iht =>
-    intro hW hF hR hp hq hv
+    intro hsz hW hF hR hp hq hv
+    have hszs : xoSize s ≤ n := by simp only [xoSize] at hsz; omega
+    have hszt : xoSize t ≤ n := by simp only [xoSize] at hsz; omega
     have hv' : xoVal S l s + xoVal S l t < b := hv
     have hvs : xoVal S l s < b := le_self_add.trans_lt hv'
     have hvt : xoVal S l t < b := le_add_self.trans_lt hv'
@@ -289,15 +319,15 @@ theorem zfDCl {l β μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X 
       yq_pts_sub (fun z hz => Finset.mem_insert_of_mem (Finset.mem_union_left _ hz))
     have hpt : xoPts S l b t ⊆ xoPts S l b (.add s t) :=
       yq_pts_sub (fun z hz => Finset.mem_insert_of_mem (Finset.mem_union_right _ hz))
-    have es := ihs hW.1 hF.1 hR.1 (fun z hz => hp z (hps hz)) (fun z hz => hq z (hps hz)) hvs
-    have et := iht hW.2 hF.2 hR.2.1 (fun z hz => hp z (hpt hz)) (fun z hz => hq z (hpt hz)) hvt
+    have es := ihs hszs hW.1 hF.1 hR.1 (fun z hz => hp z (hps hz)) (fun z hz => hq z (hps hz)) hvs
+    have et := iht hszt hW.2 hF.2 hR.2.1 (fun z hz => hp z (hpt hz)) (fun z hz => hq z (hpt hz)) hvt
     have hsum := (hadd _ (hp _ (hps (xoVal_mem s hvs))) _ (hp _ (hpt (xoVal_mem t hvt))) _
       (hp _ (xoVal_mem (.add s t) hv))).1 rfl
     show D (xoVal S l s + xoVal S l t) = xoImg S l μ f s + xoImg S l μ f t
     rw [← es, ← et, hsum]; rfl
-  | lc _ => intro _ hF; exact hF.elim
-  | phi _ _ _ _ => intro _ hF; exact hF.elim
-  | om _ _ => intro _ hF; exact hF.elim
-  | coll _ _ _ _ => intro _ hF; exact hF.elim
+  | lc _ => intro _ _ hF; exact hF.elim
+  | phi _ _ _ _ => intro _ _ hF; exact hF.elim
+  | om _ _ => intro _ _ hF; exact hF.elim
+  | coll _ _ _ _ => intro _ _ hF; exact hF.elim
 
 end Googology.Trans.PoR.InaccPsi.R2.Zf
