@@ -15,8 +15,8 @@ asks `1 ≤ val L`; a node of level `0` is never good (`Zf.zfNodesAll_false`).  
   image** `yvSub D (Ω₁·val L) = Ω₁·img L` (`ZfImgCl`, a statement).
 
 * `zf_psi_zero`, `zf_psi_eq_zero`, `zf_vr_zero`, `zf_img_zero` (**a level term of value `0` has image `0`**);
-* `xoSize` (the size of a decomposition), `ZfNest` (**a nested node level**: the level is a `ϑ`-node of level `≥ 1`
-  with an `old` / `th` / `add` countable part);
+* `xoSize` (the size of a decomposition), `ZfNS`, `ZfNodeOK`, `ZfNest` (**a nested node level**: a sum tree of
+  `ϑ`-nodes of level `≥ 1` with `old` / `th` / `add` countable parts);
 * `ZfImgCl` (**the level-image clause** off the nested node levels, a statement);
 * `zfDCl` (**`D(value) = image` at every restricted well-formed decomposition with an `old` / `th` / `add` skeleton**,
   given the clauses of the shift, `ZfImgCl`, the leaves of every node level in the configuration (`hLv`), the
@@ -24,7 +24,8 @@ asks `1 ≤ val L`; a node of level `0` is never good (`Zf.zfNodesAll_false`).  
   at the nested node levels the level image is a hypothesis for the nodes of size `≤ n`, `hNest`, and the conclusion
   is for the decompositions of size `≤ n`: `Zf.zfShift2` supplies `hNest` by induction on `n`).
 
-No new axiom.  New definitions: `xoSize`, `ZfNest` (a predicate), `ZfImgCl` (a statement).
+No new axiom.  New definitions: `xoSize`, `ZfNS` (an inductive predicate), `ZfNodeOK`, `ZfNest` (predicates),
+`ZfImgCl` (a statement).
 -/
 
 set_option autoImplicit false
@@ -123,10 +124,18 @@ def xoSize : XoE → ℕ
   | .om a => xoSize a + 1
   | .coll p e => xoSize p + xoSize e + 1
 
-/-- **A nested node level**: the level is itself a `ϑ`-node of level `≥ 1` whose countable part has an `old` /
-`th` / `add` skeleton (its level image is the node clause at the inner node, a smaller term). -/
-def ZfNest (S : InaccSeq.{0}) (l : Ordinal.{0}) (L : XoE) : Prop :=
-  ∃ h' : Ordinal.{0}, ∃ L' e' : XoE, L = .th h' L' e' ∧ XoTopF e' ∧ 1 ≤ xoVal S l L'
+/-- **Sum trees of nodes**: `ϑ`-nodes with the property `Q`, and sums. -/
+inductive ZfNS (Q : XoE → Prop) : XoE → Prop
+  | node {h' : Ordinal.{0}} {L' e' : XoE} : Q (.th h' L' e') → ZfNS Q (.th h' L' e')
+  | add {s t : XoE} : ZfNS Q s → ZfNS Q t → ZfNS Q (.add s t)
+
+/-- A `ϑ`-node of level `≥ 1` whose countable part has an `old` / `th` / `add` skeleton. -/
+def ZfNodeOK (S : InaccSeq.{0}) (l : Ordinal.{0}) (N : XoE) : Prop :=
+  ∃ h' : Ordinal.{0}, ∃ L' e' : XoE, N = .th h' L' e' ∧ XoTopF e' ∧ 1 ≤ xoVal S l L'
+
+/-- **A nested node level**: a sum tree of `ϑ`-nodes of level `≥ 1` with `old` / `th` / `add` countable parts (its
+level image comes from the node clauses at the inner nodes, smaller terms). -/
+def ZfNest (S : InaccSeq.{0}) (l : Ordinal.{0}) (L : XoE) : Prop := ZfNS (ZfNodeOK S l) L
 
 /-- **The level-image clause** (statement): at every restricted well-formed node of the configuration whose level has
 value `≥ 1` and leaves in `X ∪ Y ∪ γ`, the leaf substitution of the level value is the image of the level term. -/

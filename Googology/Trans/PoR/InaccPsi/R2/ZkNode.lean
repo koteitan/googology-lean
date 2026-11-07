@@ -11,10 +11,11 @@ is `v` itself, so for an `ε`-number `w`: `yvSub D (Ω₁·v) = Ω₁·w ⇔ D v
 image when its argument lies in `T` below `Ω₂`; hence at the level `L = th h' L' e'` the level image is EQUIVALENT to
 `D(val L) = img L`, the conclusion of `Zf.zfDCl` at the inner node (`zk_lev_node`).  The inner node is a smaller
 term, and `Zf.zfShift2` now runs `Zf.zfDCl` by induction on the size, with `zkLevNode` at the nested levels
-(`Zf.ZfNest`: inner level `≥ 1`, inner countable part with an `old` / `th` / `add` skeleton).
+(`Zf.ZfNest`: sum trees of nodes of level `≥ 1` with `old` / `th` / `add` countable parts; the exponent map of
+`Zk.zk_ss_lev` is `D` itself).
 
-* `zk_lev_eps`, `zk_lev_node`, `zkLevNode` (**`Zf.ZfLevNode`**: the recursion itself is in `Zf.zfShift2`, by
-  induction on the size of the term).
+* `zk_lev_eps`, `zk_lev_node`, `zkLevNode` (**`Zf.ZfLevNode`**, at sum trees of nodes; the recursion itself is in
+  `Zf.zfShift2`, by induction on the size of the term).
 
 No new axiom.  No new definition.
 -/
@@ -62,8 +63,25 @@ theorem zk_lev_node {l β μ h' : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0
   have hvE : InE (xoVal S l (.th h' L' e')) := ((vt_E_iff hτE hτ1 hξT hξ2).2 hξ1).2
   exact zk_lev_eps hD0 hv1 hvE hiE
 
-/-- **`Zf.ZfLevNode`**: the level image at a nested node level is the node clause at the inner node. -/
-theorem zkLevNode (S : InaccSeq.{0}) : Zf.ZfLevNode S :=
-  fun _ _ _ _ _ _ _ _ hD0 hW hM1 hτE hτ1 hv1 hiE hDL => (zk_lev_node hD0 hW hM1 hτE hτ1 hv1 hiE).2 hDL
+/-- **`Zf.ZfLevNode`**: the level image at a sum tree of nodes from the node clauses there (`zk_ss_lev` with the
+exponent map `D` itself: the value of every node is an `ε`-number, its own only exponent, and so is its image). -/
+theorem zkLevNode (S : InaccSeq.{0}) : Zf.ZfLevNode S := by
+  intro l μ f D A P hD hD0 L hL hLv
+  have hSS : ZkSS (fun N => xoVal S l N < Om1 ∧ xoVal S l N ∈ A ∧ InE (xoVal S l N) ∧
+      InE (xoImg S l μ f N) ∧ D (xoVal S l N) = xoImg S l μ f N) L := by
+    clear hLv
+    induction hL with
+    | node h => exact ZkSS.piece h
+    | add _ _ ihs iht => exact ZkSS.add ihs iht
+  refine zk_ss_lev (G := D) (A := A) hD (fun N hN => ?_) hD0 hD0 (fun _ _ _ => rfl) L hSS hLv
+  obtain ⟨h1, hA, hvE, hiE, hDN⟩ := hN
+  have hpos : (0 : Ordinal.{0}) < ω ^ xoVal S l N := opow_pos _ omega0_pos
+  refine ⟨h1, ?_, ?_⟩
+  · have := (zkEx_step (· ∈ A) one_ne_zero zk_one_lt_omega hpos).2 ⟨hA, zkEx_zero _⟩
+    rwa [mul_one, add_zero, hvE] at this
+  · have hc := zkCnf_step D one_ne_zero zk_one_lt_omega hpos
+    rw [mul_one, add_zero, hvE, zkCnf_zero, add_zero, mul_one] at hc
+    rw [hc, hDN]
+    exact hiE.symm
 
 end Googology.Trans.PoR.InaccPsi.R2.Zk
