@@ -55,8 +55,7 @@ theorem ysChain_of_good {O : Ordinal.{0} → Ordinal.{0}} {l o x0 : Ordinal.{0}}
     · exact G.below c hlt d hld hcd
     · have hxe : x0 = upsilon l := le_antisymm hx (e ▸ hcx)
       exact htop d hTd hxe (e ▸ hcd)
-  exact ⟨fun j c hcx _ d hjd _ hcd => (key j c hcx d hjd hcd).elim,
-    fun j c hcx _ d hjd _ h2 => key j c hcx d hjd (le2_le1 h2)⟩
+  exact fun j c hcx _ d hjd _ h2 => key j c hcx d hjd (le2_le1 h2)
 
 /-- The old block structure at a restart index below `B`, from an offset specification. -/
 theorem ysGood_at {O : Ordinal.{0} → Ordinal.{0}} {B l : Ordinal.{0}} (Sp : OffSpec O B)

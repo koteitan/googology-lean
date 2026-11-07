@@ -43,7 +43,7 @@ def YsNostrIn (l o x0 : Ordinal.{0}) : Prop :=
       d ≤ topA (l + ω) (upsilon (l + ω + 1) + o) (j + 1) → ¬ le2 c d
 
 /-- The chain data after `T₀ = δ_l + o` for the crossing points `≤ x₀`. -/
-def YsChainIn (l o x0 : Ordinal.{0}) : Prop := YsReachIn l o x0 ∧ YsNostrIn l o x0
+def YsChainIn (l o x0 : Ordinal.{0}) : Prop := YsNostrIn l o x0
 
 /-- **The input at an ordinary restart** (short offset term, crossing bound `x₀`). -/
 def YsShortIn (a : Ordinal.{0}) (O : Ordinal.{0} → Ordinal.{0}) (l : Ordinal.{0}) : Prop :=
@@ -208,12 +208,12 @@ theorem ysGood_all : ∀ η, l0 ≤ ω * ω * η → ω * ω * η ≤ B → YsGo
       · rw [← e]; exact Sp.land0
       · exact G.land_all (upsilon_normal.strictMono h)
     have R := ysRst_of hl hland (Sp.nostr l hl hl0η' hlB) hδ1
-    rcases Sp.kind l hl hl0η' hlB with ⟨m, k, x0, hoff, hk, hk1, hax, hx0, hreal, hO, hch1, hch2⟩ |
-      ⟨o, ho, hoO, htop, hch1, hch2⟩
+    rcases Sp.kind l hl hl0η' hlB with ⟨m, k, x0, hoff, hk, hk1, hax, hx0, hreal, hO, hch2⟩ |
+      ⟨o, ho, hoO, htop, hch2⟩
     · have htop := ysTop_short G R hoff hk hk1 hax hx0 hreal
       have hbel := ysBel_of G hax (ysNoCross_short hl hk hreal)
-      exact ysGood_step hl G hal R htop hO le_rfl hax hx0.le (ysT3_short R hO htop hbel) hch1 hch2 hcnt
-    · exact ysGood_step hl G hal R htop ho hoO hal le_rfl (ysT3_given R ho) hch1 hch2 hcnt
+      exact ysGood_step hl G hal R htop hO le_rfl hax hx0.le (ysT3_short R hO htop hbel) hch2 hcnt
+    · exact ysGood_step hl G hal R htop ho hoO hal le_rfl (ysT3_given R ho) hch2 hcnt
   · exact ysGood_limit hlim hlt (fun η' hη' h0 =>
       IH η' hη' h0 (le_trans (mul_le_mul_right hη'.le _) hη))
 

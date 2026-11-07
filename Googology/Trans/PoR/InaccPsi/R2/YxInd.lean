@@ -88,13 +88,13 @@ theorem yxSpec_ofIn {l0 B : Ordinal.{0}} (hl0 : IsRestartIdx l0) (hB : IsRestart
     YxSpec (yxO S l0) l0 B := by
   refine ⟨hl0, (ri_iff.1 hB).2, hcnt, hlt, hland, fun l hl h0 h1 => ?_⟩
   rcases h0.lt_or_eq with h0 | rfl
-  · rcases hin.2 l hl h0 h1 with ⟨m, k, x0, a1, a2, a3, a4, a5, a6, a7, a8⟩ | ⟨o, b1, b2, b3, b4⟩
+  · rcases hin.2 l hl h0 h1 with ⟨m, k, x0, a1, a2, a3, a4, a5, a6, a7⟩ | ⟨o, b1, b2, b3⟩
     · refine Or.inl ⟨m, k, x0, by rw [yxO_above h0]; exact a1, a2, a3, a4, a5, fun μ hμ hμl hx => ?_,
-        by rw [yxO_above h0]; exact a7, by rw [yxO_above h0]; exact a8⟩
+        by rw [yxO_above h0]; exact a7⟩
       have hμ0 : l0 < μ := upsilon_normal.strictMono.lt_iff_lt.1 (lt_of_le_of_lt a4 hx)
       rw [yxO_above hμ0]; exact a6 μ hμ hμl hx
-    · exact Or.inr ⟨o, b1, by rw [yxO_above h0]; exact b2, by rw [yxO_above h0]; exact b3, b4⟩
-  · refine Or.inr ⟨0, ?_, zero_le, fun g hg => ?_, hin.1⟩
+    · exact Or.inr ⟨o, b1, by rw [yxO_above h0]; exact b2, by rw [yxO_above h0]; exact b3⟩
+  · refine Or.inr ⟨0, ?_, zero_le, fun g hg => ?_⟩
     · exact lt_of_le_of_lt zero_le (upsilon_normal.strictMono (lt_of_lt_of_le
         (pos_iff_ne_zero.2 hl0.1) (le_self_add.trans le_self_add)))
     · have hg' : nuC < g := by
@@ -124,7 +124,7 @@ theorem yxGiven_of_supply {μ : Ordinal.{0}} (hμ : IsRestartIdx μ) (hU : CdUpp
   have hle : le1 (upsilon μ) (upsilon (μ + ω * ω)) :=
     le1_of_le_of_le1 (upsilon_normal.strictMono.monotone le_self_add) hlong hL
   refine ⟨0, lt_of_le_of_lt zero_le (upsilon_normal.strictMono (lt_of_lt_of_le
-    (pos_iff_ne_zero.2 hμ.1) (le_self_add.trans le_self_add))), zero_le, ?_, Ys.ysReach_long hle⟩
+    (pos_iff_ne_zero.2 hμ.1) (le_self_add.trans le_self_add))), zero_le, ?_⟩
   intro g hg h
   rw [Ys.ysO_eq] at hg
   exact hU (le1_of_le_of_le1 ((cdRho_lt_R S μ).le.trans le_self_add) (Order.add_one_le_of_lt hg) h)

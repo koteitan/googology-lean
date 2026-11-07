@@ -10,7 +10,7 @@ of the block `(T, β]` be `T` itself.  Inside a window `W_k = [L(k), L(k+1))` th
 * `ysBlk` (**SK1 in a block, no crossing condition**): if no `<₂`-pair has its right end in `(T, B)`, then
   `≤₁` of `R₂^C` is `≤₁` of `R₁⁺` on `(T, B]`; a crossing `c ≤ T`, `c ≤₁ d` is copied by monotonicity
   (`c ≤ ψ(d) ≤ d`).  The repo's `le1_iff_le1R_blk'` has the same conclusion under an extra hypothesis.
-* `YsPairCtx T τ β`: `R2.PairCtx` with `reachT` replaced by `reachW` (a point `c ≤ T` that is `≤₁` a point of
+* `YsPairCtx T τ β`: `R2.PairCtx` without `reachT`; a point `c ≤ T` that is `≤₁` `τ` is `≤₁` `β` by transitivity (formerly `reachW`: a point `c ≤ T` that is `≤₁` a point of
   `(T, β)` is `≤₁` every point of `(T, β]`); `R2.PairCtx.toYs`; clause 1, Lemma COMP-C, clause 2 and
   **the pair `τ <₂ β`** (`YsPairCtx.pair`) in this context.
 
@@ -133,7 +133,7 @@ theorem ysBlk {T B : Ordinal.{0}} (hB : B < Om1)
   · rw [← himg]; exact hcov.restrict hsub'
 
 
-/-- A pair context with crossings: `R2.PairCtx` with `reachT` replaced by `reachW`. -/
+/-- A pair context with crossings: `R2.PairCtx` without `reachT`. -/
 structure YsPairCtx (T τ β : Ordinal.{0}) : Prop where
   τU : UpsPt τ
   next : IsNext τ β
@@ -142,7 +142,6 @@ structure YsPairCtx (T τ β : Ordinal.{0}) : Prop where
   cof : ∀ c' < τ, ∃ u, UpsPt u ∧ c' < u ∧ u < τ
   noPair : ∀ c d, c < d → T < d → d < β → ¬ le2 c d
   low : ∀ a b, T < a → b ≤ β → (le1 a b ↔ le1R a b)
-  reachW : ∀ c ≤ T, ∀ d, T < d → d < β → le1 c d → ∀ g, T < g → g ≤ β → le1 c g
 
 namespace YsPairCtx
 
@@ -254,8 +253,8 @@ theorem clause1 (X Y : Finset Ordinal.{0}) (hX : ∀ x ∈ X, x < τ)
             · exact hcX
             · exact absurd (lt_of_le_of_lt hcT h.Tτ) (not_lt.2 (hY c hcY).1)
           rw [hfix c hcX]
-          exact h.reachW c hcT d hTd (hY d hdY).2 hcd _ (hTf d (Finset.mem_coe.1 hd) hTd)
-            (hfβ d (Finset.mem_coe.1 hd)).le
+          exact le1_of_le_of_le1 (hcT.trans (hTf d (Finset.mem_coe.1 hd) hTd).le)
+            ((hYf d hdY).2.le.trans (hY d hdY).1) hcd
         have hR := inc1 ((hY d hdY).2.trans h.β1) hcd
         have hR' := (down_le1R hσU h.τU hB (hA hc) (hA hd)
           ((hA1 c (Finset.mem_coe.1 hc)).trans h.β1)).1 hR
@@ -290,6 +289,7 @@ theorem clause1 (X Y : Finset Ordinal.{0}) (hX : ∀ x ∈ X, x < τ)
 theorem comp (X : Finset Ordinal.{0}) (hX : ∀ x ∈ X, x < τ) {c' : Ordinal.{0}}
     (hc1 : τ ≤ c') (hc2 : c' < β) :
     ∃ c'' < τ, ∀ Y0 : Finset Ordinal.{0}, (∀ y ∈ Y0, c'' < y ∧ y < τ) →
+      (∀ c ∈ X, c ≤ T → ∀ d ∈ Y0, le1 c d → le1 c τ) →
       Closed ↑(X ∪ Y0) → ∃ Y : Finset Ordinal.{0}, (∀ y ∈ Y, c' < y ∧ y < β) ∧
         Closed ↑(X ∪ Y) ∧ ∃ g, Cov R2C R2C ↑(X ∪ Y0) ↑(X ∪ Y) g ∧ ∀ x ∈ X, g x = x := by
   classical
@@ -313,7 +313,7 @@ theorem comp (X : Finset Ordinal.{0}) (hX : ∀ x ∈ X, x < τ) {c' : Ordinal.{
   have hct1 : ct < Om1 := down_lt_Om1 hB hcTB (hc2.trans h.β1)
   have hctT : ct ∈ Tset σ := (pi_bijOn hB).1.mapsTo hcTB
   have hctσ' : ct < σ' := (hT ct hct1).1 hctT
-  refine ⟨ct, lt_of_lt_of_le hctσ' hσ'τ, fun Y0 hY0 hXY0 => ?_⟩
+  refine ⟨ct, lt_of_lt_of_le hctσ' hσ'τ, fun Y0 hY0 hcr hXY0 => ?_⟩
   set Y2 := Y0.filter (· < σ') with hY2
   set Y3 := Y0.filter (fun y => ¬ y < σ') with hY3
   obtain ⟨X', hsub, hX'C, hX'b⟩ := exists_closed (insert 0 (insert ct (X ∪ Y2)))
@@ -433,7 +433,8 @@ theorem comp (X : Finset Ordinal.{0}) (hX : ∀ x ∈ X, x < τ) {c' : Ordinal.{
             · exact absurd (lt_of_le_of_lt hcT (lt_of_lt_of_le hTσ (hctσ.trans (hY0 c hcY).1.le)))
                 (lt_irrefl _)
           rw [hgfix c hcX]
-          exact h.reachW c hcT d hTd ((hY0 d hdY).2.trans h.τβ) hcd _ (hTg d hd hTd) (hgβ d hd).le
+          exact le1_of_le_of_le1 (hcT.trans (hTg d hd hTd).le) (hgβ d hd).le
+            (le1_trans (hcr c hcX hcT d hdY hcd) ((h.low τ β h.Tτ le_rfl).2 (h.τU.2 β h.τβ.le)))
         have hR := inc1 ((hY0 d hdY).2.trans hτ1) hcd
         have hR' := hψR c (Finset.mem_coe.1 (hD hc)) d (Finset.mem_coe.1 (hD hd)) hR
         have hR'' := (up_le1R hσU h.τU hB (hψT c hc).1 (hψT d hd).1 (hψT c hc).2).1 hR'
@@ -464,6 +465,31 @@ theorem comp (X : Finset Ordinal.{0}) (hX : ∀ x ∈ X, x < τ) {c' : Ordinal.{
   · rw [himg]; exact hgcl
   · rw [himg]; exact hgcov
 
+/-- **A point below `τ` that does not reach `τ` has its reach bounded below `τ`.** -/
+theorem cross_bound (X : Finset Ordinal.{0}) (hX : ∀ x ∈ X, x < τ) :
+    ∃ b < τ, ∀ c ∈ X, ∀ d, b < d → d < τ → le1 c d → le1 c τ := by
+  classical
+  have hτE := upsPt_inE h.τU
+  have hlim : Order.IsSuccLimit τ := ev_isSuccLimit_of_inE hτE
+  induction X using Finset.induction_on with
+  | empty => exact ⟨0, hτE.pos, by simp⟩
+  | @insert a s _ IH =>
+    obtain ⟨b, hb, hbs⟩ := IH fun x hx => hX x (Finset.mem_insert_of_mem hx)
+    have haτ : a < τ := hX a (Finset.mem_insert_self _ _)
+    have hone : ∃ b' < τ, ∀ d, b' < d → d < τ → le1 a d → le1 a τ := by
+      by_cases hτa : le1 a τ
+      · exact ⟨0, hτE.pos, fun _ _ _ _ => hτa⟩
+      · by_contra hno
+        push Not at hno
+        refine hτa (le1_limit hlim haτ fun z hz1 hz2 => ?_)
+        obtain ⟨d, hzd, hdτ, had, -⟩ := hno z hz2
+        exact le1_of_le_of_le1 hz1 hzd.le had
+    obtain ⟨b', hb', hb's⟩ := hone
+    refine ⟨max b b', max_lt hb hb', fun c hc d hd hdτ hcd => ?_⟩
+    rcases Finset.mem_insert.1 hc with rfl | hc
+    · exact hb's d ((le_max_right _ _).trans_lt hd) hdτ hcd
+    · exact hbs c hc d ((le_max_left _ _).trans_lt hd) hdτ hcd
+
 /-- **Clause 2** of `τ ≤₂^∞ β` in a block context. -/
 theorem clause2 (X : Finset Ordinal.{0}) (hX : ∀ x ∈ X, x < τ) (Z : Finset Ordinal.{0}) (P : Str)
     (hC : CofCov R2C X Z P τ) : CofCov R2C X Z P β := by
@@ -472,8 +498,11 @@ theorem clause2 (X : Finset Ordinal.{0}) (hX : ∀ x ∈ X, x < τ) (Z : Finset 
   · obtain ⟨Y, hY, hcl, f, hcov⟩ := hC c' hlt
     exact ⟨Y, fun y hy => ⟨(hY y hy).1, (hY y hy).2.trans h.τβ⟩, hcl, f, hcov⟩
   · obtain ⟨c'', hc''τ, H⟩ := h.comp X hX hge hc'
-    obtain ⟨Y0, hY0, hcl0, h0, hcov0⟩ := hC c'' hc''τ
-    obtain ⟨Y, hY, hcl, g, hg, -⟩ := H Y0 hY0 hcl0
+    obtain ⟨b, hbτ, hb⟩ := h.cross_bound X hX
+    obtain ⟨Y0, hY0, hcl0, h0, hcov0⟩ := hC (max c'' b) (max_lt hc''τ hbτ)
+    obtain ⟨Y, hY, hcl, g, hg, -⟩ := H Y0
+      (fun y hy => ⟨(le_max_left _ _).trans_lt (hY0 y hy).1, (hY0 y hy).2⟩)
+      (fun c hc _ d hd hcd => hb c hc d ((le_max_right _ _).trans_lt (hY0 d hd).1) (hY0 d hd).2 hcd) hcl0
     exact ⟨Y, hY, hcl, g ∘ h0, hcov0.comp hg⟩
 
 /-- **The pair of the block**: `τ <₂ β` in `R₂^C`. -/
@@ -486,8 +515,6 @@ end YsPairCtx
 /-- An old pair context is a pair context with crossings. -/
 theorem _root_.Googology.Trans.PoR.InaccPsi.R2.PairCtx.toYs {T τ β : Ordinal.{0}} (h : PairCtx T τ β) :
     YsPairCtx T τ β :=
-  ⟨h.τU, h.next, h.β1, h.Tτ, h.cof, h.noPair, h.low, fun c hc d hd hdβ hcd g hg hgβ => by
-    obtain ⟨e, hr⟩ := h.reachT c hc d hd hdβ hcd
-    rw [e]; exact hr g hg hgβ⟩
+  ⟨h.τU, h.next, h.β1, h.Tτ, h.cof, h.noPair, h.low⟩
 
 end Googology.Trans.PoR.InaccPsi.R2.Ys

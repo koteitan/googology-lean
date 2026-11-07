@@ -48,8 +48,7 @@ theorem zn_nonfix_between {l0 z μ : Ordinal.{0}} (hl00 : 0 < l0) (hz : z < upsi
 /-- **The separated chain reach datum** at `λ` above `a`. -/
 def ZnSepReach (a l : Ordinal.{0}) : Prop :=
   ∃ x0, a ≤ x0 ∧ x0 < upsilon l ∧
-    (∀ μ, IsRestartIdx μ → μ < l → x0 < upsilon μ → ω * ω < μ ∧ μ < upsilon μ ∧ cL μ < cL l) ∧
-    Ys.YsReachIn l (cL l) x0
+    (∀ μ, IsRestartIdx μ → μ < l → x0 < upsilon μ → ω * ω < μ ∧ μ < upsilon μ ∧ cL μ < cL l)
 
 /-- **The separation exists** at a non-fixed restart `λ > ω²` for every `a < ρ_λ`. -/
 theorem znSep_exists {a l : Ordinal.{0}} (hl : IsRestartIdx l) (hww : ω * ω < l) (hfix : l < upsilon l)
@@ -74,11 +73,11 @@ theorem znShortIn_of_sep {a l η1 : Ordinal.{0}} (hl : IsRestartIdx l) (hww : ω
     (hfix : l < upsilon l) (hν : upsilon l < nuC) (hn : upsilon l < Nm.Pv S η1)
     (h : ZnSepReach a l) : Yx.YxShortIn a (Ys.ysO S) l := by
   have hm := upsilon_normal.strictMono
-  obtain ⟨x0, hax, hxl, hsep, hR⟩ := h
+  obtain ⟨x0, hax, hxl, hsep⟩ := h
   have hO := zn_O_nonfix hl hww hfix hν hn
   have htm : ∀ r : Ordinal.{0}, tm 0 (cL l) r = cL l := fun r => by simp [tm]
   refine ⟨0, cL l, x0, by rw [hO, htm], zn_cL_lt_nonfix hl hfix, fun _ => one_le_cL hl, hax, hxl,
-    fun μ hμ hμl hx => ?_, ?_, by rw [hO]; exact hR⟩
+    fun μ hμ hμl hx => ?_, ?_⟩
   · obtain ⟨hwwμ, hfμ, hcμ⟩ := hsep μ hμ hμl hx
     rw [htm, zn_O_nonfix hμ hwwμ hfμ ((hm hμl).trans hν) ((hm hμl).trans hn)]
     exact hcμ

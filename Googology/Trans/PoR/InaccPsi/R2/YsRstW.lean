@@ -320,7 +320,7 @@ theorem reachW : ∀ c ≤ ρ, ∀ d, ρ < d → d < δ → le1 c d → ∀ g, �
 
 /-- The restart block as a pair context with crossings. -/
 theorem toPair : YsPairCtx ρ τ δ :=
-  ⟨h.τU, h.next, h.δ1, h.ρτ, h.cof, h.noPairGap, h.lowδ, h.reachW⟩
+  ⟨h.τU, h.next, h.δ1, h.ρτ, h.cof, h.noPairGap, h.lowδ⟩
 
 /-- **The pair of the restart block**: `τ <₂ δ`. -/
 theorem pair : le2 τ δ := h.toPair.pair
