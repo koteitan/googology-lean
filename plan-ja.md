@@ -18,10 +18,9 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
         - 済み：B₂ 未満の Γ の不動点での層（Qc.qsLay_all）、すべての c < B₂ での Zm.ZmPastAt S c（Qc.qc_past）。
         - 🤖 残り：B₂ ≤ c < θ（skLayPastB2θ、Phase D。X ≤ c < B₂ は skLayPastXB2 で証明済み）。
           - 済み：B₂ より先の atom 系、上限 θ（Qt.qtU S：atom は (Ω₁, θ) にある K⁽⁰⁾_Z の強臨界な元）と、S での hull の事実（Zb.ZbAS.Ok。atom が S に依ってよいように Zb.ZbAS から分けた）。
-          - 済み（B₃ = Qd.qdB 未満、Qd.QdImgH を仮定）：B₃ 未満のすべての c で Zm.ZmPastAt S c（Qd.qd_past）。読み vD、digit system（Qd.qdGood_all）、層（Qd.qdLay_all）を Veblen の水準で Qc と同じ順に作った。
-          - 済み（QfTBphi を仮定）：Qd.QdImgH（Qf.qf_imgH）。Veblen の水準の点の到達距離（引用公理 R2.qfLhT、Qf.qf_lh_lvl）、差の補題（Qf.qf_lam_gap）、分離（Qf.qf_sep_lvl）、すべての符号の写しの補題（Qf.qf_copy）。
-          - 🤖 次：Qf.QfTBphi（Tᵖ[σ] が可算の φ で閉じる、skTBphi）。辞書 Lv.lvPhLev（強臨界の水準も）と Gl.glA_pi、添字の parameter（b 以下の最大の不動点）。
-          - その次：B₃ ≤ c < θ（λ の一般の水準の読み。基数を 1 つ下げ、葉を x で読む。R2.CitedVd）。
+          - 済み（B₃ = Qd.qdB 未満）：B₃ 未満のすべての c で Zm.ZmPastAt S c（Qd.qd_past）。読み vD、digit system（Qd.qdGood_all）、層（Qd.qdLay_all）を Veblen の水準で Qc と同じ順に作った。
+          - 済み：仮定なしの Qd.QdImgH（Qf.qf_imgH_all）。Veblen の水準の点の到達距離（引用公理 R2.qfLhT、Qf.qf_lh_lvl）、差の補題（Qf.qf_lam_gap）、分離（Qf.qf_sep_lvl）、すべての符号の写しの補題（Qf.qf_copy）、Tᵖ[σ] が ρ より上の可算の φ の値で閉じること（Qf.qf_TBphi、skTBphi）。
+          - 🤖 次：B₃ ≤ c < θ（skLayPastB3θ。λ の一般の水準の読み。基数を 1 つ下げ、葉を x で読む。R2.CitedVd）。
         - その後：道の上のほかの葉（skLayPastTh、窓と上の端、skBC、skFix、skZlCfg、skLevImgHi4）。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
