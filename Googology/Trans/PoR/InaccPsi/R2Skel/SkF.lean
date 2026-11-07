@@ -1,6 +1,6 @@
 import Googology.Trans.PoR.InaccPsi.R2.QdPast
 import Googology.Trans.PoR.InaccPsi.R2.QfTB
-import Googology.Trans.PoR.InaccPsi.R2.XiPast
+import Googology.Trans.PoR.InaccPsi.R2.XiImg
 import Googology.Trans.PoR.InaccPsi.R2.HoRoad
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
 import Googology.Trans.PoR.InaccPsi.R2.WhSucc
@@ -2419,16 +2419,14 @@ a Veblen level below `Γ_{Ω₂+1}`): `Zm.ZmPastAt S c`. -/
 theorem skLayPastB2B3 (S : InaccSeq.{0}) : ∀ c, Uc.ucB ≤ c → c < Qd.qdB → Zm.ZmPastAt S c :=
   fun c _ hc => Qd.qd_past S skImgVeb c hc
 
-/-- STATUS: OPEN (round 224, new leaf: what remains of skLayPastB3θ; REFUTE FIRST: NO EVIDENCE — `R_ρ` maps the codes
-visible at `ρ` onto `Tᵖ ∩ Ω₁` (`Xi.xiR_onto`), so this is Lemma IMG at every point of `Tᵖ ∩ Ω₁` above `ρ`; it is a
-theorem below the points `ϑᵖ(Ω₁·N)` of the Veblen levels `N < Γ_{Ω₁+1}` (`Qf.qf_imgH_all`))
+/-- STATUS: PROVED (round 225, Xi.xi_imgAll: Lemma IMG at every point of `Tᵖ ∩ Ω₁`, Xi.xi_img_all — at an `ε`-number
+`e` the covering `π⁻¹ ∘ f` of the sets of [W07b] Claim 5.6 at the base of minimality of `e` (`R2.le1R_loc`) keeps `<`,
+`+`, `≤₁`, moves `X` up (Lemma IMG below `e`) and `Z` below `e` (`R2.lh_pi`), against the cited full Claim 5.6
+`R2.claim56pw`; no reach formula)
 SIZE: L
 LEMMA IMG AT EVERY READING OF A CODE BELOW `θ` (`Xi.XiImgAll`): in every restart context `RstK ρ τ δ` with `Γ₀ < ρ`,
-`GnI ρ δ (R_ρ(c))` for every code `Ω₁ ≤ c < θ` visible at `ρ` (`R_ρ = π ∘ ι`, `Xi.xiR`).  Needs the reach of the points
-`ϑᵖ(Ω₁·M + η)` at every level `M < θ` ([W07b] Def 4.1 with the localization and `cr`; `ι` and `P₀` are Lean
-constants with cited facts, `R2.CitedXi`), the separation, and the copy lemma for the atom codes. -/
-theorem skXiImg (S : InaccSeq.{0}) : Xi.XiImgAll S := by
-  sorry
+`GnI ρ δ (R_ρ(c))` for every code `Ω₁ ≤ c < θ` visible at `ρ` (`R_ρ = π ∘ ι`, `Xi.xiR`). -/
+theorem skXiImg (S : InaccSeq.{0}) : Xi.XiImgAll S := Xi.xi_imgAll S
 
 /-- STATUS: PROVED from skXiImg (round 224, Xi.xi_past: one layer for every code bound `T < θ`, its terms the codes
 read by `R_x = π ∘ ι` (`R2.CitedXi`; Lemma EXACT `Xi.xiR_pi` and the collapse `Xi.xiR_gx` for every code below `θ`), no
