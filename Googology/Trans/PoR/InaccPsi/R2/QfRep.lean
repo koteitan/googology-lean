@@ -12,7 +12,7 @@ For `E = ϑˣ(Ω₁·M + σ)`, `ε_{Ω₁+1} ≤ M < Γ_{Ω₁+1}` (the port of 
   σ')` of a level `Ω₁ ≤ M' < Γ_{Ω₁+1}` with `(M', σ') < (M, σ)` lexicographically**: [W07a] Lemma 3.30 through
   `R2.tfLt_of_vt_lt`);
 * `qf_LB` (**the lower bound `E'`**, as `Qc.qc_LB`);
-* `qf_sep` (**THE SEPARATION**: a Veblen point has a reach below `a·a` (`Yw.ywLow`); a point of a level `M' <
+* `qf_sep_lvl` (**THE SEPARATION**: a Veblen point has a reach below `a·a` (`Yw.ywLow`); a point of a level `M' <
   ε_{Ω₁+1}` has the reach `rjL(Θ_a(Ω₁·M')) + ζ' < Θ_a(qfLam M)` (`rjL(Ω₁·M') + Ω₁ < ε_{Ω₁+1} ≤ qfLam M`); a point of a
   Veblen level `M' < M` has the reach `Θ_a(qfLam M') + ζ'` with `qfLam M' + Ω₁ ≤ qfLam M` (`Qf.qf_lam_gap`); a point
   of the level `M` has `ζ' < ζ_E` by `E'`).
@@ -178,7 +178,7 @@ theorem qf_rjL_lt_E {l : Ordinal.{0}} (hl : l < ggE) : rjL l < ggE := by
 
 /-- **THE SEPARATION AT A POINT OF A VEBLEN LEVEL** (the hypothesis of the image lemma), for a strongly critical base
 `x`. -/
-theorem qf_sep (hxS : SC x) {M σ E' : Ordinal.{0}} (hM1 : ggE ≤ M) (hMG : M < ggGam)
+theorem qf_sep_lvl (hxS : SC x) {M σ E' : Ordinal.{0}} (hM1 : ggE ≤ M) (hMG : M < ggGam)
     (hMT : Tf.tfDat M ∈ Tset x) (hσT : σ ∈ Tset x) (hσΩ : σ < Om1) (hxE' : x ≤ E') (hdE' : Tf.tfDat M ≤ E')
     (hσE' : σ ≤ E')
     (hJ : ∀ σ', σ' ∈ Tset x → σ' < σ → E' < vt x (Om1 * M + σ') →
