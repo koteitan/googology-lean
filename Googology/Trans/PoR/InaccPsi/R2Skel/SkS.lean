@@ -1432,18 +1432,19 @@ theorem skSupXo :
   simpa using h
 
 /-- STATUS: OPEN (NEW round 133; the open leaf of the shift on the road; REPLACES `skLevImgHi2`, via `skLevImgHi3`;
-round 227: narrowed, the nested node levels `Zf.ZfNest` are excluded, PROVED by the recursion in `Zf.zfShift2`)
+round 227: narrowed, the nested node levels `Zf.ZfNest` are excluded, PROVED by the recursion in `Zf.zfShift2`;
+round 228: `Zf.ZfNest` widened to sum trees of such nodes)
 SIZE: L
 `Zk.ZkImgP4 S`: `Zf.ZfImgP2 S` with the level image asked only at levels that are (i) one-base at no segment (as in
 `Zf.ZfImgHi2`), (ii) no sum of countable one-segment pieces (`¬ Zk.ZkSS (Zk.zkPc …) L`), (iii) no prefix level
 (`¬ Zk.ZkPS (Zk.zkPc …) (Zk.zkPf …) L`: one uncountable one-segment piece with `Ω₁ ∣ val`, countable segment sums
-around it), (iv) no nested node level (`¬ Zf.ZfNest S λ L`: the level itself a `ϑ`-node of level `≥ 1` with an
-`old` / `th` / `add` countable part; round 227).  Equivalent to `Zf.ZfImgP2 S` (`Zk.zkImgP4_of_P3`, `Zk.zkImgP3_of_P2`).
+around it), (iv) no nested node level (`¬ Zf.ZfNest S λ L`: a sum tree of `ϑ`-nodes of level `≥ 1` with `old` /
+`th` / `add` countable parts; rounds 227–228).  Equivalent to `Zf.ZfImgP2 S` (`Zk.zkImgP4_of_P3`, `Zk.zkImgP3_of_P2`).
 REFUTE FIRST (round 133): NO EVIDENCE.  Two-segment sums are theorems (node `skZkLevSeg`, witness `skZkWit2`); a
 nested `ϑ`-node level is equivalent to the node clause at the inner node (node `skZkLevNode`).
-Exact gap (what (i)–(iv) leave): (a) levels containing a nested `ϑ`-node below the top (a sum or `φ` with a node
-part), or a nested node of level `0` or with a countable part outside `old` / `th` / `add` (round 227: the level that
-is itself such a node is done, `Zf.zfShift2` runs `Zf.zfDCl` by induction on `Zf.xoSize` with `Zk.zkLevNode`), (b) countable `φ`-values whose arguments lie in two segments (`φ(a, b)`,
+Exact gap (what (i)–(iv) leave): (a) levels with a nested `ϑ`-node next to other pieces (a prefix, old leaves,
+constants, `φ`), or a nested node of level `0` or with a countable part outside `old` / `th` / `add` (rounds 227–228:
+sum trees of such nodes are done, `Zf.zfShift2` runs `Zf.zfDCl` by induction on `Zf.xoSize` with `Zk.zkLevNode`), (b) countable `φ`-values whose arguments lie in two segments (`φ(a, b)`,
 `a ∈ seg(υ_λ)`, `b ∈ seg(υ_{λ+h})`: a point with a parameter `≥ υ_μ`, so `D` is not a segment map there; needs the
 `φ ↔ ϑ` link at mixed arguments and the term clause of the shift at the corresponding `ϑ`-term), (c) old `ub` / `tm`
 leaves with leaves in lower segments, (d) several uncountable pieces at different segments, or an uncountable piece
