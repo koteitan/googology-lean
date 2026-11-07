@@ -29,7 +29,8 @@ open Ordinal Order Set Googology.Notation.InaccPsi Googology.Trans.PoR.InaccPsi.
 
 /-- **`Tᵖ[σ]` is closed under the countable values of `φ`** (a hypothesis). -/
 def QfTBphi : Prop :=
-  ∀ σ ρ a b : Ordinal.{0}, Bases σ ρ → a ∈ TB ρ σ → b ∈ TB ρ σ → veblen a b < Om1 → veblen a b ∈ TB ρ σ
+  ∀ σ ρ a b : Ordinal.{0}, UpsPt σ → UpsPt ρ → Bases σ ρ → a ∈ TB ρ σ → b ∈ TB ρ σ → ρ < veblen a b →
+    veblen a b < Om1 → veblen a b ∈ TB ρ σ
 
 /-- Copy data survive enlarging the base witness sets. -/
 theorem qf_cd_mono {ρ δ E z : Ordinal.{0}} {W Z W₁ Z₁ : Finset Ordinal.{0}} (w₁ : WZ ρ δ W₁ Z₁) (hW : W ⊆ W₁)
@@ -233,7 +234,20 @@ theorem qf_copy_eps (hTB : QfTBphi) {E z : Ordinal.{0}} {W Z : Finset Ordinal.{0
     exact Ph.phTh_phi hu a hau b hbu
   have hY1 : ggTh u z < Om1 := by rw [rj_Om1]; exact Ph.phTh_lt_Om1 hu hu1 huz
   have hYT : ggTh u z ∈ TB ρ (f ρ) := by
-    rw [hYeq]; exact hTB (f ρ) ρ Au Bu hB haT hbT (hYeq ▸ hY1)
+    have hρu : ρ < u := by
+      have hEA : E ∈ As := hA (Finset.mem_coe.2 (hW3 hEW))
+      have hfE : f ρ < f E := C.mono C.rho hEA hρE
+      by_contra hle
+      push Not at hle
+      rcases hle.lt_or_eq with hlt | heq
+      · have huσ : u < f ρ := (TB_inter_lt hB hlt).1 huT
+        rw [pi_lt hB huσ] at hπu
+        exact absurd (hπu ▸ huσ) (not_lt.2 hfE.le)
+      · rw [heq, (pi_base hB).2] at hπu
+        exact absurd hπu hfE.ne
+    have hρY : ρ < veblen Au Bu := by
+      rw [← hYeq]; exact hρu.trans ((ggTh_Om1 hu hu1).symm.trans_lt (ggTh_lt GgCl.om hz1))
+    rw [hYeq]; exact hTB (f ρ) ρ Au Bu C.ups h.ρU hB haT hbT hρY (hYeq ▸ hY1)
   refine ⟨hYT, ?_⟩
   by_contra hlt
   push Not at hlt
