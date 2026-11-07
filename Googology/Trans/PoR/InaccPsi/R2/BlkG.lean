@@ -47,7 +47,7 @@ theorem top_of_goodG {O : Ordinal.{0} → Ordinal.{0}} {l : Ordinal.{0}} (hT : T
     ∀ g, upsilon (l + ω + 1) + O l < g → ¬ le1 (upsilon l) g := by
   obtain ⟨b, γ, e, x0, hoff, hγ, he, h1, hx0, hreal⟩ := hT
   rw [hoff]
-  refine R.top_tq hγ he h1 hx0 G.sk ?_
+  refine R.top_tq hγ he h1 hx0 G.sk ?_ (G.pair_ups x0)
   intro c d _ hcd hd h2 x hx0x hxc e' he1 hte hxe
   rcases G.caps c d hcd hd h2 x hxc (d + e') hxe with hle | ⟨μ, hμ, hμl, rfl, hδd, hg⟩
   · exact absurd hle (not_le.2 (lt_add_of_pos_right d (lt_of_lt_of_le zero_lt_one he1)))

@@ -115,7 +115,7 @@ theorem zbU_ok (S : InaccSeq.{0}) : zbU.Ok S where
   mem := fun a b Z s ha hb hb1 hZb hZN hs => by
     rcases hs with hs | ⟨c, hc, hg, rfl⟩
     · exact (zbTl_ok S).mem a b Z s ha hb hb1 hZb hZN hs
-    · have hca : c < a := (hc.trans tfBG_lt_Om2).trans (Ph.ph_Om2_lt_Omw.trans_le ha)
+    · have hca : c < a := (hc.trans tfBG_lt_Om2).trans (Ph.ph_Om2_lt_Omw.trans_le (le_self_add.trans ha))
       have hcC := (yr_mem (S := S) c hc hca (hg.trans_le hZb)).1
       have hpsi : gcG c = S.psi c (Om (1 + 1)) := by rw [tf_psi S c hc.le, tf_gcG]
       rw [hpsi]

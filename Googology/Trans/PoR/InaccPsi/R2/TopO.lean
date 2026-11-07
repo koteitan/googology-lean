@@ -549,10 +549,11 @@ include h
 theorem top_pkg {T : Ordinal.{0} → Ordinal.{0}} {x0 : Ordinal.{0}} (hP : ImgPkg ρ δ T)
     (hx0 : x0 < ρ) (hsk : ∀ α < ρ, ¬ UpsPt α → ∀ g, le1 α g ↔ le1R α g)
     (hcap : ∀ c d, x0 < c → c < d → d < ρ → le2 c d → ∀ x, x0 < x → x ≤ c → ∀ e', 1 ≤ e' →
-      (UpsPt x → T x ≤ e') → ¬ le1 x (d + e')) :
+      (UpsPt x → T x ≤ e') → ¬ le1 x (d + e'))
+    (hpu : ∀ c d, x0 < c → c < d → d < ρ → le2 c d → UpsPt c) :
     ∀ g, δ + T ρ < g → ¬ le1 ρ g := by
   obtain ⟨h1, hδ, W, Z, ⟨hW, hZ, hcl⟩, hm, hI⟩ := hP
-  exact h.top_core hx0 h1 hδ hW hZ hcl hm hsk hI hcap
+  exact h.top_core hx0 h1 hδ hW hZ hcl hm hsk hI hcap hpu
 
 /-- The package of a term of `OT` with constants below `ρ` and value `≥ 1` (Lemma IMG). -/
 theorem pkg_ot {t : OT} (ht : CB t ρ) (h1 : 1 ≤ ev t ρ) : ImgPkg ρ δ (ev t) := by

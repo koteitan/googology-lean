@@ -187,14 +187,14 @@ theorem zaShiftCore (hDl : ZaDlSC) {L : Ordinal.{0} → Ordinal.{0} → Prop} (h
     intro k _ z _ e'
     simp only [hcdef, e', hsbdef, lrIx_up]
   have hbC : Chain κ b m := by
-    refine ⟨hκU, hκ1, fun k hk => ?_, hbmono, fun k hk => ?_⟩
+    refine ⟨upsPt_inE hκU, hκ1, fun k hk => ?_, hbmono, fun k hk => ?_⟩
     · obtain ⟨z, hz, e'⟩ := hbz k hk
       rw [e']; exact ⟨sbU z (hPCa z hz), sb1 z (hPCa z hz) (hPC1 z hz)⟩
     · obtain ⟨z, hz, e'⟩ := hbz k hk
       rw [e']
       exact hκa.trans_le (hm.monotone (sbge z (hPCa z hz)))
   have hcC : Chain κ c m := by
-    refine ⟨hκU, hκ1, fun k hk => ?_, fun j k hjk hk => ?_, fun k hk => ?_⟩
+    refine ⟨upsPt_inE hκU, hκ1, fun k hk => ?_, fun j k hjk hk => ?_, fun k hk => ?_⟩
     · obtain ⟨z, hz, e'⟩ := hbz k hk
       rw [hck k hk z hz e']
       refine ⟨upsPt_upsilon (lt_of_lt_of_le (pos_iff_ne_zero.2 hμri.1) le_self_add), ?_⟩

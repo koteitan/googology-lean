@@ -38,7 +38,7 @@ theorem xi_hull_iff {A ρ : Ordinal.{0}} (hA : Om ω ≤ A) (hρS : SC ρ) (hρ1
     induction hc with
     | small h => exact CSet.of_lt h
     | om => exact CSet.Om_mem (CSet.one_mem _ _)
-    | atom hs => exact (Qt.qtU_ok S).mem A ρ ρ _ hA hρS hρ1' le_rfl hnot hs
+    | atom hs => exact Qt.qt_mem hA hρS hρ1' le_rfl hnot hs
     | add _ _ ihx ihy => exact CSet.add_mem ihx ihy
     | phi _ _ ihx ihy => exact CSet.phi_mem ihx ihy
 

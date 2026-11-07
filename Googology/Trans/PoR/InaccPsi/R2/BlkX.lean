@@ -163,6 +163,14 @@ structure Good (O : Ordinal.{0} → Ordinal.{0}) (l : Ordinal.{0}) : Prop where
     (∀ j : ℕ, BlkCtx (topA (μ + ω) (upsilon (μ + ω + 1) + O μ) j) (lpA (μ + ω) j)
       (topA (μ + ω) (upsilon (μ + ω + 1) + O μ) (j + 1)))
 
+/-- **Below `υ_l` the left end of a `<₂`-pair is a `υ`-point.** -/
+theorem Good.pair_ups {O : Ordinal.{0} → Ordinal.{0}} {l : Ordinal.{0}} (G : Good O l) (x0 : Ordinal.{0}) :
+    ∀ c d, x0 < c → c < d → d < upsilon l → le2 c d → UpsPt c := by
+  intro c d _ hcd hd h2
+  obtain ⟨μ, j, -, -, rfl, -⟩ := (G.pairs c d hcd hd).1 h2
+  refine upsPt_upsilon (lt_of_lt_of_le (mul_pos omega0_pos ?_) le_add_self)
+  exact_mod_cast Nat.succ_pos j
+
 theorem good_zero (O : Ordinal.{0} → Ordinal.{0}) : Good O 0 := by
   refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
   · intro c hc; rw [upsilon_zero] at hc; exact absurd hc (not_lt.2 zero_le)

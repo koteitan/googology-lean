@@ -126,7 +126,7 @@ noncomputable def qcU : ZbAS where
 theorem qcU_ok (S : InaccSeq.{0}) : qcU.Ok S where
   mem := fun a b Z s ha hb hb1 hZb _ hs => by
     have hb1' : b ≤ Om1 := by rw [Br.Om1_eq]; exact hb1
-    have hE : ucE ≤ a := Uf.uf_E_lt_Omw.le.trans ha
+    have hE : ucE ≤ a := Uf.uf_E_lt_Omw.le.trans (le_self_add.trans ha)
     exact (Uf.uf_mem_CSet (S := S) hb hb1' le_rfl s (hs.2.2.2.mono hZb) (Uf.uf_args_E hE hs.2.2.1)).1
   hull := fun a Z hZ hZ1 hkey x hx hxV => by
     have hZ1' : Z ≤ Om1 := by rw [Br.Om1_eq]; exact hZ1

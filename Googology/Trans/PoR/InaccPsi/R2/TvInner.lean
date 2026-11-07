@@ -134,7 +134,7 @@ theorem tvInnerAll {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} {m : ℕ} (hb 
     (hc : Chain κ c m) : TrInnerAll κ b c m := by
   intro k hk M hM
   have hkm : k < m := by omega
-  exact tvInner (upsPt_inE hb.kap) (hb.ups k hkm).1 (hb.ups k hkm).2 (hc.ups k hkm).1 (hc.ups k hkm).2
+  exact tvInner (hb.kap) (hb.ups k hkm).1 (hb.ups k hkm).2 (hc.ups k hkm).1 (hc.ups k hkm).2
     (hb.bot k hkm) (hc.bot k hkm) hM
 
 /-- **The commutation `mv b' c' ∘ π_{β,b} = π_{γ,c} ∘ mv b c`** on the low-parameter points of `seg(b)` of height

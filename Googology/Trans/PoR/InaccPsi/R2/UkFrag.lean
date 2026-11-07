@@ -50,7 +50,7 @@ theorem ukFrag_one {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb : Chain κ
   obtain ⟨Ψ, h1, h2⟩ := trFrag_one hb hc hF hbF
   refine ⟨Ψ, ⟨h1, h2⟩, fun k hk t hq hw hl _ hxF _ => ?_⟩
   obtain rfl : k = 0 := by omega
-  have hκE := upsPt_inE hb.kap
+  have hκE := hb.kap
   have hb0 := hb.ups 0 (by omega)
   have hc0 := hc.ups 0 (by omega)
   have hκb := hb.bot 0 (by omega)
@@ -85,7 +85,7 @@ theorem ukFrag_step {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} {n : ℕ}
   have hc't' : c n < c (n + 1) := hc.mono n (n + 1) (by omega) (by omega)
   have hb'E := upsPt_inE hb'U.1
   have htE := upsPt_inE htU.1
-  have hκ0 : (0 : Ordinal.{0}) < κ := hb.kap.1
+  have hκ0 : (0 : Ordinal.{0}) < κ := hb.kap.pos
   have h0Dn : (0 : Ordinal.{0}) ∈ DD κ b n := Iio_sub_DD n hκ0
   -- the top part and the low part of `F`
   have hlt_t : ∀ x ∈ DD κ b (n + 1), x < b (n + 1) := fun x hx =>
@@ -347,7 +347,7 @@ theorem ukFrag_step {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} {n : ℕ}
     refine Or.inr ⟨hβseg, hβT, hβP.trans ?_⟩
     rw [Set.singleton_subset_iff]; exact ClS.sub _ h0Dn
   -- `β⁺ = Dp b_n M` is a low-parameter point of `seg(b_n)` (`R2.ueDp_pi`)
-  have hκE' : InE κ := upsPt_inE hb.kap
+  have hκE' : InE κ := hb.kap
   have hκbn : κ < b n := hb.bot n (by omega)
   have hBκb : Bases κ (b n) := ⟨hκE', hb'E, hκbn, hb'U.2⟩
   have hDpTB : Dp (b n) M ∈ TB (b n) κ := (ueDp_pi hBκb hM1).1
@@ -534,7 +534,7 @@ theorem ukFrag_step {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} {n : ℕ}
       exact P10 k hk' x (hlowF' x hx hxt) hs hT
     · have : k = n + 1 := by omega
       subst this
-      have hκE : InE κ := upsPt_inE hb.kap
+      have hκE : InE κ := hb.kap
       have hκb' : κ < b n := hb.bot n (by omega)
       have hκc' : κ < c n := hc.bot n (by omega)
       have hβlow : β ∈ TB (b n) κ := ⟨hβT, fun p hp => by
@@ -661,7 +661,7 @@ theorem ukFrag {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb : Ch
   have hbD : ∀ k, k < m → b k ∈ DD κ b m := by
     intro k hk
     have hbk := hb.ups k hk
-    have hBk : Bases κ (b k) := ⟨upsPt_inE hb.kap, upsPt_inE hbk.1, hb.bot k hk, hbk.2⟩
+    have hBk : Bases κ (b k) := ⟨hb.kap, upsPt_inE hbk.1, hb.bot k hk, hbk.2⟩
     refine DD_mono (show k + 1 ≤ m by omega) (Or.inr ⟨InSeg.self hbk.2, (pi_base hBk).1.1, ?_⟩)
     exact (pi_base hBk).1.2.trans ((Iio_sub_DD k).trans (ClS.sub _))
   have hF₁ : ↑F₁ ⊆ DD κ b m := by
