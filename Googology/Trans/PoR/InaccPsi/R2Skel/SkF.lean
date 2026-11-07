@@ -2,6 +2,7 @@ import Googology.Trans.PoR.InaccPsi.R2.QdPast
 import Googology.Trans.PoR.InaccPsi.R2.QfTB
 import Googology.Trans.PoR.InaccPsi.R2.XiImg
 import Googology.Trans.PoR.InaccPsi.R2.XiCont
+import Googology.Trans.PoR.InaccPsi.R2.ZoInt3
 import Googology.Trans.PoR.InaccPsi.R2.HoRoad
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
 import Googology.Trans.PoR.InaccPsi.R2.WhSucc
@@ -3025,7 +3026,9 @@ theorem skBCCapVL (S : InaccSeq.{0}) : ∀ μ, Cd.CdRange S μ → Zo.zoBase S <
       · exact skBCCapVH S μ hr h0 h1 hfix hν hns (fun h2 => not_le.1 fun h3 => hc ⟨h2, h3⟩) (not_le.1 hK)
           (not_lt.1 hW)
 
-/-- STATUS: OPEN (round 137: skBCRsS without its short-reading part; round 133, new leaf, regc1)
+/-- STATUS: REPLACED (round 230: off the road; its parts are skBCCont (PROVED), skBCBig (OPEN), the isolated restarts
+(Zt.ztIsoCode) and the short readings, by Zo.zoRsF3; was OPEN, round 137: skBCRsS without its short-reading part; round
+133, new leaf, regc1)
 SIZE: L
 THE RS INPUT AT THE `υ`-FIXED RESTARTS OF `(l₀, ι(Ω_ω))` WITH `ρ_λ < Θ_λ(m_λ)` WHEN `ρ_λ < ν_C`, WITH THE SUPPLY (as
 skWinRsS): the old input `Zc.ZcRsIn` (LOWER, the successor case or the term input) or the supply input `Zh.ZhSupInB`
@@ -3053,7 +3056,36 @@ theorem skBCRsS (S : InaccSeq.{0}) : ∀ l, IsRestartIdx l → Zo.zoBase S < l �
     exact Or.inl (Zn.znRsIn_fixShort (η1 := Om ω) hl hfix hs.1 hm hs.2)
   · exact skBCRsSH S l hl h0 h1 hfix fun hν => not_le.1 fun hθ => hs ⟨hν, hθ⟩
 
-/-- STATUS: REDUCED (Zo.zoBC; skBCLow, skBCBaseUV, skBCGiven, skBCInR, skBCCapVL, skBCRsS; round 133, new; checked
+/-- STATUS: PROVED (round 230, Xi.xi_code_cont; new node)
+SIZE: L
+THE CODE CONTINUITY AT THE NON-ISOLATED FIXED RESTARTS OF `(l₀, ι(Ω_ω))` WITH `ρ_λ < Θ_λ(m_λ) ≤ υ_{λ+1}`
+(`Zn.ZnThCont`, as skFixCont for the windows): the codes `c < m_λ` lie below `θ`, `Θ_λ = R_{ρ_λ}` there,
+`π(Θ_λ c) = Θ_μ(c)`, and the restarts `ι(g + ω^{e'})` with `m_μ ≥ c` are cofinal. -/
+theorem skBCCont (S : InaccSeq.{0}) : ∀ l, IsRestartIdx l → Zo.zoBase S < l → l < Zo.zoTop S → upsilon l = l →
+    ¬ Cp.CpIso l → upsilon (Zo.zoTop S) ≤ nuC → upsilon l < Cd.cdTheta S l (Cd.cdCode S l) →
+    Cd.cdTheta S l (Cd.cdCode S l) ≤ upsilon (Order.succ l) → Zn.ZnThCont S l :=
+  fun _ hl _ h1 _ _ _ hθ1 hθ2 => Xi.xi_code_cont hl h1 hθ1 hθ2
+
+/-- STATUS: OPEN (round 230, new leaf: replaces skBCRsSH on the road, its part at the big readings)
+SIZE: L
+LOWER OR THE SUPPLY AT THE NON-ISOLATED FIXED RESTARTS OF `(l₀, ι(Ω_ω))` WITH `υ_{λ+1} < Θ_λ(m_λ)` (as skWinBig for
+the windows).  REFUTE FIRST: NO EVIDENCE.  The other parts of skBCRsSH are theorems: the short readings
+(`Zn.znRsIn_fixShort`), the isolated restarts (`Zt.ztIsoCode`), the code continuity (skBCCont); the value input
+`Zn.ZnRsVal` is accepted by the block induction `Zo.zoBC3`. -/
+theorem skBCBig (S : InaccSeq.{0}) : ∀ l, IsRestartIdx l → Zo.zoBase S < l → l < Zo.zoTop S → upsilon l = l →
+    ¬ Cp.CpIso l → upsilon (Zo.zoTop S) ≤ nuC → upsilon (Order.succ l) < Cd.cdTheta S l (Cd.cdCode S l) →
+    Cd.CdLower S l ∨ Zh.ZhSupInB S l (Zo.zoTop S) := by
+  sorry
+
+/-- STATUS: REDUCED (round 230, Zo.zoRsF3: skBCCont, skBCBig, the isolated restarts and the short readings)
+SIZE: L
+THE RS INPUT AT THE `υ`-FIXED RESTARTS OF `(l₀, ι(Ω_ω))` WITH THE VALUE INPUT (`Zo.zoBC3`). -/
+theorem skBCRsS3 (S : InaccSeq.{0}) : ∀ l, IsRestartIdx l → Zo.zoBase S < l → l < Zo.zoTop S → upsilon l = l →
+    upsilon (Zo.zoTop S) ≤ nuC →
+    Zc.ZcRsIn (Ys.ysO S) l ∨ Zh.ZhSupInB S l (Zo.zoTop S) ∨ Zn.ZnRsVal (Ys.ysO S) l :=
+  Zo.zoRsF3 (skBCCont S) (skBCBig S)
+
+/-- STATUS: REDUCED (round 230: Zo.zoBC3 with skBCRsS3; Zo.zoBC; skBCLow, skBCBaseUV, skBCGiven, skBCInR, skBCCapVL, skBCRsS; round 133, new; checked
 only after the merge)
 SIZE: L
 REGIONS (B-hi) AND (C) BY ONE RELATIVE BLOCK INDUCTION ON `[l₀, ι(Ω_ω))`, `l₀ = Zo.zoBase S`: UPPER ∧ LOWER ∧
@@ -3061,13 +3093,13 @@ CapV at every range restart `λ ≥ ι(Ω₂)` with `ρ_λ < m* = L(0)`.  No CAP
 current height suffice below `m*`). -/
 theorem skBC (S : InaccSeq.{0}) : ∀ l, Cd.CdRange S l → Bt.iota S (Om (1 + 1)) ≤ l →
     upsilon l < Cd.cdMstar S → SkUV S l :=
-  (Zo.zoBC (skBCLow S) (skBCBaseUV S) (skBCGiven S) (skBCInR S) (skBCCapVL S) (skBCRsS S)).2
+  (Zo.zoBC3 (skBCLow S) (skBCBaseUV S) (skBCGiven S) (skBCInR S) (skBCCapVL S) (skBCRsS3 S)).2
 
 /-- STATUS: REDUCED (Zo.zoBC_nu; the leaves of skBC; round 133, new; checked only after the merge)
 SIZE: S
 `L(0) ≤ ν_C` (the induction interval is not empty, `Zo.zoBC_nonempty0`). -/
 theorem skNuL0 (S : InaccSeq.{0}) : Nc.ncL S 0 ≤ nuC :=
-  Zo.zoBC_nu (skBCLow S) (skBCBaseUV S) (skBCGiven S) (skBCInR S) (skBCCapVL S) (skBCRsS S)
+  Zo.zoBC3_nu (skBCLow S) (skBCBaseUV S) (skBCGiven S) (skBCInR S) (skBCCapVL S) (skBCRsS3 S)
 
 /-- STATUS: PROVED (Zo.zoBC_of_target; round 133, new; checked only after the merge)
 SIZE: S
