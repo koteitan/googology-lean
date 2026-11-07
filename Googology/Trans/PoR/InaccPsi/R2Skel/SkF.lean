@@ -1,6 +1,7 @@
 import Googology.Trans.PoR.InaccPsi.R2.QdPast
 import Googology.Trans.PoR.InaccPsi.R2.QfTB
 import Googology.Trans.PoR.InaccPsi.R2.XiImg
+import Googology.Trans.PoR.InaccPsi.R2.XiCont
 import Googology.Trans.PoR.InaccPsi.R2.HoRoad
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
 import Googology.Trans.PoR.InaccPsi.R2.WhSucc
@@ -3558,7 +3559,9 @@ THE CODE STATEMENT AT THE ISOLATED FIXED RESTARTS OF `W_ω` (as skWinIsoCode). -
 theorem skTopIsoCode (S : InaccSeq.{0}) : Zn.ZnIsoCode S (Bt.iota S (Om ω + Nc.ncPp S * ω)) (Bt.iota S (Om ω + Nc.ncPp S * (ω + 1))) :=
   Zt.ztIsoCode _ _
 
-/-- STATUS: OPEN (round 138: one leaf for every window, replaces skWinCont and skTopCont; round 133, regw8)
+/-- STATUS: PROVED (round 226, Xi.xi_code_cont: the codes `c < m_λ` lie below `θ`, `Θ_λ = R_{ρ_λ}` there, and the
+restarts `ι(g + ω^{e'})` with `m_μ ≥ c` are cofinal; was OPEN L, round 138: one leaf for every window, replaces
+skWinCont and skTopCont; round 133, regw8)
 SIZE: L
 THE CODE CONTINUITY AT THE NON-ISOLATED FIXED RESTARTS OF THE WINDOWS `(ι(L(0)), ι(L(ω+1)))` WITH A READING IN
 `(ρ_λ, υ_{λ+1}]` (`Zn.ZnThCont`; the same statement in every window `W_k` and in `W_ω`, and no `≤₁`, so no `ν_C`
@@ -3582,8 +3585,8 @@ Def 3.28 in general (now cited only for `ξ = Ω₁·β + η`, `β < τ`). -/
 theorem skFixCont (S : InaccSeq.{0}) :
     ∀ l, IsRestartIdx l → Bt.iota S (Om ω) < l → l < Bt.iota S (Om ω + Nc.ncPp S * (ω + 1)) → upsilon l = l →
       ¬ Cp.CpIso l → upsilon l < Cd.cdTheta S l (Cd.cdCode S l) →
-      Cd.cdTheta S l (Cd.cdCode S l) ≤ upsilon (Order.succ l) → Zn.ZnThCont S l := by
-  sorry
+      Cd.cdTheta S l (Cd.cdCode S l) ≤ upsilon (Order.succ l) → Zn.ZnThCont S l :=
+  fun _ hl _ h2 _ _ hθ1 hθ2 => Xi.xi_code_cont hl h2 hθ1 hθ2
 
 /-- STATUS: PROVED (round 138, from skFixCont; was OPEN L, round 133, new leaf, regw8; part of skWinRsF)
 SIZE: L
