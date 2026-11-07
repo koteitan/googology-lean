@@ -13,7 +13,7 @@ README の表のセルごとに、残りの作業を並べる。いま作業し�
       - 骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：道の上の OPEN の葉は 12（すべて L）。skZbDirectX は証明済み（215 回目）。skTopLawAll、skPsi3OffRest2、skAtHi3 は証明済み（Kx.kxTopLawAll、Ky.kyPsi3OffRest2、Kz.kzAtHi3）。根が空虚かは未定。
       - 済み：θ 未満で X より上の層（skLayPastXθ、仮定なし）。X ≤ c < B₂（Qc、Phase C）、B₂ ≤ c < B₃（Qd、Phase D1）、θ 未満のすべての c（Xi.xi_past：θ 未満の符号の上限ごとに 1 つの層、R_x = π∘ι で読む。ι と P₀ は R2.CitedXi で引用。Xi.xi_imgAll：Tᵖ ∩ Ω₁ のすべての点で Lemma IMG。被覆 π⁻¹∘f と全形の [W07b] Claim 5.6、R2.claim56pw）。skFixCont（Xi.xi_code_cont：c < m_λ の符号は θ 未満、π(Θ_λ c) = Θ_μ(c)、m_μ ≥ c の再始動 ι(g + ω^{e'}) が共終）。
       - 🤖 次：道の上の残り 12 の葉。skLayPastTh（θ ≤ c < Ω₂）、窓と上の端（skWin/Top{InR, Big}、skTopLwNo2）、skBC{BaseUL, InR, RsSH}、skFixCapVF、skZlCfg、skLevImgHi4。
-        - 🤖 今：skWin/TopBig（υ_{λ+1} < Θ_λ(m_λ) の υ 固定で孤立しない再始動で LOWER か供給）。符号 m_λ > θ は υ_{λ+1} を超えて読まれる（Θ_λ(P') ≥ ψ_{Ω₁}(A + θ·ρ_λ)、ThLow）。そこで LOWER に何が要るかを調べる（υ_{λ+1} を超える値の Lemma RS。Zn.znRs_rstV は v < υ_{λ+1} だけ）。
+        - 🤖 今：skLevImgHi4（シフトの水準の像、Zk.ZkImgP4）。水準そのものが入れ子の ϑ 節点である場合は済み（Zf.zfShift2 が Zf.zfDCl を Zf.xoSize の帰納で回す、Zk.zkLevNode）。次は頂点より下の入れ子の節点（節点を部分に持つ和と φ）、そのあと区間をまたぐ φ、old の ub/tm の葉、複数の非可算な部分、動く葉を持つ Ω/ψ。
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
   - ✅ M < (0,0,0)(1,1,1)：紙と Lean で証明済み
