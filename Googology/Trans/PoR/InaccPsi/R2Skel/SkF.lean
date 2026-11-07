@@ -1,4 +1,5 @@
 import Googology.Trans.PoR.InaccPsi.R2.QdPast
+import Googology.Trans.PoR.InaccPsi.R2.QfImg
 import Googology.Trans.PoR.InaccPsi.R2.HoRoad
 import Googology.Trans.PoR.InaccPsi.R2.WdRoad
 import Googology.Trans.PoR.InaccPsi.R2.WhSucc
@@ -2392,15 +2393,23 @@ THE LAYERS `X ≤ c < B₂` (`B₂ = Uc.ucB = ψ_{Ω₂}(ε_{Ω₂+1})`): `Zm.Zm
 theorem skLayPastXB2 (S : InaccSeq.{0}) : ∀ c, Tl.tlX ≤ c → c < Uc.ucB → Zm.ZmPastAt S c :=
   fun c _ hc => Qc.qc_past S c hc
 
-/-- STATUS: OPEN (round 221, new leaf: the hypothesis of the readings past `B₂`; REFUTE FIRST: NO EVIDENCE — below
-the points of the levels `N < ε_{Ω₁+1}` it is a theorem, `Qc.qc_img_rst`)
+/-- STATUS: OPEN (round 222, new leaf: what remains of skImgVeb; REFUTE FIRST: NO EVIDENCE — `π_{σ,ρ}` is a
+`(<, +)`-isomorphism of `Tᵖ[σ]` onto `T^σ` ([W07a] Lemma 5.3) and the ϑ-terms of the Veblen points have the parameters
+of their level and index (`Lv.lvPhLev`, `Gl.glA_pi`))
+SIZE: L
+`Tᵖ[σ]` IS CLOSED UNDER THE COUNTABLE VALUES OF `φ` (`Qf.QfTBphi`): for bases `σ < ρ` and `a, b ∈ Tᵖ[σ]` with `φ(a, b)
+< Ω₁`, `φ(a, b) ∈ Tᵖ[σ]`.  Needs the ϑ-term of `φ(a, b)` over `ρ` at every countable level (the dictionary `Lv.lvPhLev`,
+also at strongly critical levels) and the parameters of the index (the largest fixed point below `b`). -/
+theorem skTBphi : Qf.QfTBphi := by
+  sorry
+
+/-- STATUS: PROVED from skTBphi (round 222, Qf.qf_imgH: the reach at the Veblen levels `Qf.qf_lh_lvl` from the
+cited `R2.qfLhT` ([W07b] Def 4.1 with `cr`), the gap `Qf.qf_lam_gap`, the separation `Qf.qf_sep_lvl`, the copy lemma
+for every code `Qf.qf_copy`, Lemma IMG `Qf.qf_img`)
 SIZE: L
 LEMMA IMG BELOW THE POINTS OF THE VEBLEN LEVELS (`Qd.QdImgH`): in every restart context, every `v` below a point
-`ϑ^ρ(Ω₁·N)` of a level `Ω₁ ≤ N < Γ_{Ω₁+1}` with `tfDat N < ρ` has the image property.  Needs the reach at those points
-([W07b] Def 4.1 with `δ` an `ε`-number, localization, `cr`; `R2.CitedRj` states it only below `ε_{Ω₁+1}`) and a `φ`
-case of the copy lemma `Qc.qc_copy`. -/
-theorem skImgVeb : Qd.QdImgH := by
-  sorry
+`ϑ^ρ(Ω₁·N)` of a level `Ω₁ ≤ N < Γ_{Ω₁+1}` with `tfDat N < ρ` has the image property. -/
+theorem skImgVeb : Qd.QdImgH := Qf.qf_imgH skTBphi
 
 /-- STATUS: PROVED from skImgVeb (round 221, Qd.qd_past: the atom system `Qt.qtU S`, the readings `Qd.vD` with Veblen
 level readings, the digit systems `Qd.qdGood_all`, a layer at every fixed point of `Γ` below `B₃` (`Qd.qd_layAt`),
