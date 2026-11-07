@@ -1431,17 +1431,19 @@ theorem skSupXo :
   have h := skVisKXo (S := S) 0 l hl (by simpa using e)
   simpa using h
 
-/-- STATUS: OPEN (NEW round 133; the open leaf of the shift on the road; REPLACES `skLevImgHi2`, via `skLevImgHi3`)
+/-- STATUS: OPEN (NEW round 133; the open leaf of the shift on the road; REPLACES `skLevImgHi2`, via `skLevImgHi3`;
+round 227: narrowed, the nested node levels `Zf.ZfNest` are excluded, PROVED by the recursion in `Zf.zfShift2`)
 SIZE: L
 `Zk.ZkImgP4 S`: `Zf.ZfImgP2 S` with the level image asked only at levels that are (i) one-base at no segment (as in
 `Zf.ZfImgHi2`), (ii) no sum of countable one-segment pieces (`¬ Zk.ZkSS (Zk.zkPc …) L`), (iii) no prefix level
 (`¬ Zk.ZkPS (Zk.zkPc …) (Zk.zkPf …) L`: one uncountable one-segment piece with `Ω₁ ∣ val`, countable segment sums
-around it).  Equivalent to `Zf.ZfImgP2 S` (`Zk.zkImgP4_of_P3`, `Zk.zkImgP3_of_P2`).
+around it), (iv) no nested node level (`¬ Zf.ZfNest S λ L`: the level itself a `ϑ`-node of level `≥ 1` with an
+`old` / `th` / `add` countable part; round 227).  Equivalent to `Zf.ZfImgP2 S` (`Zk.zkImgP4_of_P3`, `Zk.zkImgP3_of_P2`).
 REFUTE FIRST (round 133): NO EVIDENCE.  Two-segment sums are theorems (node `skZkLevSeg`, witness `skZkWit2`); a
 nested `ϑ`-node level is equivalent to the node clause at the inner node (node `skZkLevNode`).
-Exact gap (what (i)–(iii) leave): (a) levels containing a nested `ϑ`-node (by `skZkLevNode` the clause there is
-`D(val) = img` at the inner node: a recursion of `Zf.zfDCl` on the size of the term, with the level image at the inner
-level as the induction hypothesis), (b) countable `φ`-values whose arguments lie in two segments (`φ(a, b)`,
+Exact gap (what (i)–(iv) leave): (a) levels containing a nested `ϑ`-node below the top (a sum or `φ` with a node
+part), or a nested node of level `0` or with a countable part outside `old` / `th` / `add` (round 227: the level that
+is itself such a node is done, `Zf.zfShift2` runs `Zf.zfDCl` by induction on `Zf.xoSize` with `Zk.zkLevNode`), (b) countable `φ`-values whose arguments lie in two segments (`φ(a, b)`,
 `a ∈ seg(υ_λ)`, `b ∈ seg(υ_{λ+h})`: a point with a parameter `≥ υ_μ`, so `D` is not a segment map there; needs the
 `φ ↔ ϑ` link at mixed arguments and the term clause of the shift at the corresponding `ϑ`-term), (c) old `ub` / `tm`
 leaves with leaves in lower segments, (d) several uncountable pieces at different segments, or an uncountable piece
@@ -1612,7 +1614,7 @@ REFUTE FIRST (round 131): NO EVIDENCE (`skZaWitMv`, `skZaWitPhi`).
 Round 132: REDUCED to `skLevImg` (`Zf.zfShift2`): the leaf inclusion (a1) by enlarging the configuration
 (`Zf.zf_enl`: finite leaf sets `Zf.zf_yv_fin`, unique argument of a node value `Zf.zf_vt_inj`), the leaves in
 `T^{υ_{λ+h}}` (a2, `Zf.zf_lv_T`, from `skDlSC`), the nodes of level `0` (`Zf.zfDCl`).  Left: the level image (a3). -/
-theorem skShift2 (S : InaccSeq.{0}) : Yq.XoShift2 S := Zf.zfShift2 (skLevImg S)
+theorem skShift2 (S : InaccSeq.{0}) : Yq.XoShift2 S := Zf.zfShift2 (Zk.zkLevNode S) (skLevImg S)
 
 /-- STATUS: REDUCED (from `skShift2` by `Yq.yqShift_of2`; NEW round 129)
 SIZE: M
