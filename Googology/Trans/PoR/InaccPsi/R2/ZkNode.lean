@@ -9,11 +9,12 @@ REFUTE FIRST at a level with a nested `ϑ`-node.  For a countable `ε`-number `v
 is `v` itself, so for an `ε`-number `w`: `yvSub D (Ω₁·v) = Ω₁·w ⇔ D v = w` (`zk_lev_eps`).  A nested node
 `ϑ^{υ_{λ+h'}}(Ω₁·val L' + val e')` with `1 ≤ val L'` is an `ε`-number ([W07a] Lemma 4.3, `R2.vt_E_iff`), and so is its
 image when its argument lies in `T` below `Ω₂`; hence at the level `L = th h' L' e'` the level image is EQUIVALENT to
-`D(val L) = img L`, the conclusion of `Zf.zfDCl` at the inner node (`zk_lev_node`).  No evidence against the level
-image there; what is missing is the recursion (the inner node is a smaller term, and `Zf.zfDCl` needs the level image
-at the inner level).
+`D(val L) = img L`, the conclusion of `Zf.zfDCl` at the inner node (`zk_lev_node`).  The inner node is a smaller
+term, and `Zf.zfShift2` now runs `Zf.zfDCl` by induction on the size, with `zkLevNode` at the nested levels
+(`Zf.ZfNest`: inner level `≥ 1`, inner countable part with an `old` / `th` / `add` skeleton).
 
-* `zk_lev_eps`, `zk_lev_node`.
+* `zk_lev_eps`, `zk_lev_node`, `zkLevNode` (**`Zf.ZfLevNode`**: the recursion itself is in `Zf.zfShift2`, by
+  induction on the size of the term).
 
 No new axiom.  No new definition.
 -/
@@ -60,5 +61,9 @@ theorem zk_lev_node {l β μ h' : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0
     (le_mul_left Om1 (zero_lt_one.trans_le hM1)).trans le_self_add
   have hvE : InE (xoVal S l (.th h' L' e')) := ((vt_E_iff hτE hτ1 hξT hξ2).2 hξ1).2
   exact zk_lev_eps hD0 hv1 hvE hiE
+
+/-- **`Zf.ZfLevNode`**: the level image at a nested node level is the node clause at the inner node. -/
+theorem zkLevNode (S : InaccSeq.{0}) : Zf.ZfLevNode S :=
+  fun _ _ _ _ _ _ _ _ hD0 hW hM1 hτE hτ1 hv1 hiE hDL => (zk_lev_node hD0 hW hM1 hτE hτ1 hv1 hiE).2 hDL
 
 end Googology.Trans.PoR.InaccPsi.R2.Zk

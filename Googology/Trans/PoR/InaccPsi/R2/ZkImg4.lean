@@ -207,7 +207,7 @@ def ZkImgHi4 (S : InaccSeq.{0}) (l β μ γ : Ordinal.{0}) (f D : Ordinal.{0} �
     (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h L e), z ∈ X ∪ Y) → 1 ≤ xoVal S l L → ¬ XoPi S l μ L →
     (∀ h', 0 < h' → upsilon (l + h') ∈ Y → ¬ Zf.XoPiG S l μ (upsilon (μ + f h')) (upsilon (l + h')) f L) →
     ¬ ZkSS (zkPc S l μ f Y) L → ¬ ZkPS (zkPc S l μ f Y) (zkPf S l μ f Y) L →
-    YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) →
+    YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) → ¬ Zf.ZfNest S l L →
     yvSub S D (Om1 * xoVal S l L) = Om1 * xoImg S l μ f L
 
 /-- **The shift with the level image off the segment sums and the prefix levels** (statement): `ZkImgP3` with
@@ -250,7 +250,7 @@ theorem zkImgP3_of_P4 (hP : ZkImgP4 S) : ZkImgP3 S := by
       hstd hlL X Y hX hY
   refine ⟨D, μ, f, B, γ, Os, ⟨hQ, hrest⟩, hZa, ?_⟩
   obtain ⟨hXγ, hγμ, hLs, hres, -, ⟨hμl, hpi⟩, hmv, -, -, -, hid, hγU⟩ := hrest
-  intro h L e hW hF hR hp hM1 hPi hG hSS hLv
+  intro h L e hW hF hR hp hM1 hPi hG hSS hLv hN
   by_cases hPS : ZkPS (zkPc S l μ f Y) (zkPf S l μ f Y) L
   · have hl0 : 0 < l := pos_iff_ne_zero.2 hl.1
     have hb1 : upsilon (l + β) ≤ Om1 := hνβ.trans nuC_le_Om1
@@ -264,20 +264,20 @@ theorem zkImgP3_of_P4 (hP : ZkImgP4 S) : ZkImgP3 S := by
     have hθ := uzTBound (S := S) _ (upsPt_inE hτU) hτ1 _ hξT hξ2
     exact zk_lev_ps H hl1 hX hXγ hγμ hid hγ0 (fun y hy => (hY y hy).1) hLs.below
       (fun g hg => (hres g hg).2) hpi hmv L hPS (le_self_add.trans_lt hθ) hLv
-  · exact hHi h L e hW hF hR hp hM1 hPi hG hSS hPS hLv
+  · exact hHi h L e hW hF hR hp hM1 hPi hG hSS hPS hLv hN
 
 /-- **The converse**: `ZkImgP3 S ⇒ ZkImgP4 S`. -/
 theorem zkImgP4_of_P3 (hP : ZkImgP3 S) : ZkImgP4 S := by
   intro l β Q hl hl1 hν hνβ hsup hstd hlL X Y hX hY
   obtain ⟨D, μ, f, B, γ, Os, hA, hZa, hHi⟩ := hP l β Q hl hl1 hν hνβ hsup hstd hlL X Y hX hY
   exact ⟨D, μ, f, B, γ, Os, hA, hZa,
-    fun h L e hW hF hR hp hM1 hPi hG hSS _ hLv => hHi h L e hW hF hR hp hM1 hPi hG hSS hLv⟩
+    fun h L e hW hF hR hp hM1 hPi hG hSS _ hLv hN => hHi h L e hW hF hR hp hM1 hPi hG hSS hLv hN⟩
 
 /-- **`ZkImgP4 S ⇒ Zf.ZfImgP2 S`.** -/
 theorem zkImgP2_of_P4 (hP : ZkImgP4 S) : Zf.ZfImgP2 S := zkImgP2_of_P3 (zkImgP3_of_P4 hP)
 
 /-- **`ZkImgP4 S ⇒ Yq.XoShift2 S`.** -/
-theorem zkShift2_P4 (hP : ZkImgP4 S) : XoShift2 S := zkShift2_P3 (zkImgP3_of_P4 hP)
+theorem zkShift2_P4 (hLN : Zf.ZfLevNode S) (hP : ZkImgP4 S) : XoShift2 S := zkShift2_P3 hLN (zkImgP3_of_P4 hP)
 
 /-- **A prefix level** (given a strongly critical `q ≤ υ_μ`): `lc B₂ + (old (sg h υ_{λ+h}) + old (lo υ_λ))`. -/
 theorem zk_wit3 {l μ : Ordinal.{0}} {f : Ordinal.{0} → Ordinal.{0}} {Y : Finset Ordinal.{0}}

@@ -174,7 +174,7 @@ def ZfImgHi (S : InaccSeq.{0}) (l β μ γ : Ordinal.{0}) (f D : Ordinal.{0} →
     (X Y : Finset Ordinal.{0}) : Prop :=
   ∀ h : Ordinal.{0}, ∀ L e : XoE, XoWF S l β (.th h L e) → XoTopF e → XoR S l μ (.th h L e) →
     (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h L e), z ∈ X ∪ Y) → 1 ≤ xoVal S l L → ¬ XoPi S l μ L →
-    YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) →
+    YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) → ¬ ZfNest S l L →
     yvSub S D (Om1 * xoVal S l L) = Om1 * xoImg S l μ f L
 
 /-- **The shift with the moving-level clause and the level image at the levels that are not one-segment terms**
@@ -212,7 +212,7 @@ theorem zfImg_of_P (hP : ZfImgP S) : ZfImg S := by
   obtain ⟨D, μ, f, B, γ, Os, hA, hZa, hHi⟩ := hP l β Q hl hl1 hν hνβ hsup hstd hlL X Y hX hY
   refine ⟨D, μ, f, B, γ, Os, hA, hZa, ?_⟩
   obtain ⟨-, hXγ, hγμ, hLs, -, -, ⟨hμl, hpi⟩, -, -, -, -, hid, -⟩ := hA
-  intro h L e hW hF hR hp hM1 hL
+  intro h L e hW hF hR hp hM1 hL hN
   by_cases hPi : XoPi S l μ L
   · have hl0 : 0 < l := pos_iff_ne_zero.2 hl.1
     have hlE : InE (upsilon l) := upsPt_inE (upsPt_upsilon hl0)
@@ -230,9 +230,9 @@ theorem zfImg_of_P (hP : ZfImgP S) : ZfImg S := by
         ((add_lt_add_iff_left l).2 hhβ)) |>.trans (hνβ.trans nuC_le_Om1))
     have hθ := uzTBound (S := S) _ (upsPt_inE hτU) hτ1 _ hξT hξ2
     exact zf_img_pi hl0 hBμ hs1 hpi hid hXγ hγμ L hPi hWL (le_self_add.trans_lt hθ) hL
-  · exact hHi h L e hW hF hR hp hM1 hPi hL
+  · exact hHi h L e hW hF hR hp hM1 hPi hL hN
 
 /-- **`ZfImgP S ⇒ Yq.XoShift2 S`.** -/
-theorem zfShift2_P (hP : ZfImgP S) : XoShift2 S := zfShift2 (zfImg_of_P hP)
+theorem zfShift2_P (hLN : ZfLevNode S) (hP : ZfImgP S) : XoShift2 S := zfShift2 hLN (zfImg_of_P hP)
 
 end Googology.Trans.PoR.InaccPsi.R2.Zf
