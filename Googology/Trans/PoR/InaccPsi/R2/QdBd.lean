@@ -11,6 +11,7 @@ levels `λ(x) < Γ_{Ω₁+1}` (`Qd.qdLv_main`), so their bound is a point of a V
 * `QdBd x v` (**`v < ϑˣ(Ω₁·N)` for a level `Ω₁ ≤ N < Γ_{Ω₁+1}` with `tfDat N < x`**), `qdBd_of_qc` (every `QcBd`),
   `qdBd_mono`, `qd_bd_pt`, `qdBd_lt` (`v < Ω₁`), `qdBd_T` (`v ∈ Tˣ`);
 * `qd_vt_mono`, `qdBd_up`, `qdBd_add` (**closed under `+`**), `qdBd_gq` (**closed under `σ ↦ ϑˣ(Ω₁·Ω₁ + σ)`**);
+* `yBd_of_qd`, `yBd_mono`, `yBd_T`, `yBd_add`, `yBd_gq` (the same for the bound `Qc.YBd`);
 * `QdImgH` (**the hypothesis: Lemma IMG at every `v` with `QdBd ρ v`**, in every restart context), `qd_img_bd`.
 
 Lemma IMG at the points of the levels `N ∈ [ε_{Ω₁+1}, Γ_{Ω₁+1})` is not proved here: the proof of `Qc.qc_img_atom`
@@ -114,5 +115,40 @@ theorem qdBd_gq {σ : Ordinal.{0}} (hσT : σ ∈ Tset x) (h : QdBd x σ) : QdBd
   exact h1
 
 end Bd
+
+/-! ## The bound `Qc.YBd` of the layer tops -/
+
+section Y
+
+variable {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1)
+include hx hx1
+
+omit hx hx1 in
+theorem yBd_of_qd (hI : QdImgH) {v : Ordinal.{0}} (h : QdBd x v) : YBd x v := Or.inr ⟨hI, h⟩
+
+omit hx hx1 in
+theorem yBd_mono {v w : Ordinal.{0}} (hwv : w ≤ v) (h : YBd x v) : YBd x w := by
+  rcases h with h | ⟨hI, h⟩
+  · exact Or.inl (qcBd_mono hwv h)
+  · exact Or.inr ⟨hI, qdBd_mono hwv h⟩
+
+theorem yBd_T {v : Ordinal.{0}} (h : YBd x v) : v ∈ Tset x := by
+  rcases h with h | ⟨-, h⟩
+  · exact qcBd_T hx hx1 h
+  · exact qdBd_T hx hx1 h
+
+theorem yBd_add {a b : Ordinal.{0}} (ha : YBd x a) (hb : YBd x b) : YBd x (a + b) := by
+  rcases ha with ha | ⟨hI, ha⟩ <;> rcases hb with hb | ⟨hI', hb⟩
+  · exact Or.inl (qcBd_add hx hx1 ha hb)
+  · exact Or.inr ⟨hI', qdBd_add hx hx1 (qdBd_of_qc ha) hb⟩
+  · exact Or.inr ⟨hI, qdBd_add hx hx1 ha (qdBd_of_qc hb)⟩
+  · exact Or.inr ⟨hI, qdBd_add hx hx1 ha hb⟩
+
+theorem yBd_gq {σ : Ordinal.{0}} (hσT : σ ∈ Tset x) (h : YBd x σ) : YBd x (gq σ x) := by
+  rcases h with h | ⟨hI, h⟩
+  · exact Or.inl (qcBd_gq hx hx1 hσT h)
+  · exact Or.inr ⟨hI, qdBd_gq hx hx1 hσT h⟩
+
+end Y
 
 end Googology.Trans.PoR.InaccPsi.R2.Qd
