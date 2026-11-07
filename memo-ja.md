@@ -590,3 +590,15 @@ plan を短くしたときに、それまでの plan の本文をそのままこ
       - `TrioFixFuel` の燃料 `max 200 (a の深さ)` が、どの `a` でも足りることを証明する（燃料を増やしても行列が変わらない。シートのラベルといくつかの族で確認済み）
 - ライブラリの配置（[Googology/Trans/README-ja.md](Googology/Trans/README-ja.md)）
   - `Trans/BMS/common/Cut.lean` がまだ `Trans/BMS/ExBuchholz/Commute.lean` を import しているので、`BMS/common/` の大半が拡張ブーフホルツ ψ に依存している。リストの補題（`Chain`、`Col`、`expandL`、`lastOf` など）を `ExBuchholz/Basic.lean` と `ExBuchholz/Commute.lean` から `BMS/common/` へ移し、`common/` が `ExBuchholz/` の何も import しないようにする
+
+## 2026-11-07：plan から移した細部
+
+R₂^C の Lean で済んだこと（仮定は S だけ）：
+
+- 領域 A は閉じた。層の前線と直接の読みを X より下のすべての層 c で（skZbDirectX）。すべての符号を 1 つの読み vR で読む。
+- υ-不動点でない窓の再始動での RS の入力と cap、孤立した不動点では Θ = ρ。K_Y までの atom の移動。基 ι(Ω₂) で到達のデータと cap。K_ω 以下の符号の読みは短い。
+- 道 yqRoadS（仮定：前線より上で UPPER、LOWER、cap。L(ω+1) ≤ ν_C のとき WdThLow、WdEQfar。ずらし XoShift。XoSup）：ν_C = L(ω+1)。
+- skTopLawAll、skPsi3OffRest2、skAtHi3 は証明済み（Kx.kxTopLawAll、Ky.kyPsi3OffRest2、Kz.kzAtHi3）。
+- θ 未満で X より上の層（skLayPastXθ）：X ≤ c < B₂（Qc）、B₂ ≤ c < B₃（Qd）、θ 未満のすべての c（Xi.xi_past、Xi.xi_imgAll）。skFixCont（Xi.xi_code_cont）、skBCCont。
+- 層 θ ≤ c < Ω₂ と基点 ι(Ω₂)（skLayPastTh、skBCBaseUL）：符号の上限 ≤ K_ω の項の系、読み Θ_y、FRAG の写像を通した Lemma IMG と Lemma RS（Aw.aw_UV、Aw.aw_base_UL）。
+- chain reach datum（YsReachIn）を YxShortIn、YxGivenIn から外した。τ に届く点は推移律で β に届く。

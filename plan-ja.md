@@ -2,19 +2,20 @@
 
 # 計画
 
-README の表のセルごとに、残りの作業を並べる。いま作業していない項目は 1 行に縮めた。細部は [memo-ja.md](memo-ja.md) の「2026-10-24：plan から移した細部」と git の履歴にある。ほかのブランチを書いていない項目は、ブランチ main で作業する。
+これからやる作業だけを、README の表のセルごとに木にした。済んだ作業の記録は [memo-ja.md](memo-ja.md) にある。ほかのブランチを書いていない項目は、ブランチ main で作業する。
 
 - Wilken の主張：Core(R₂⁺) = ψ_{Ω₁}(I_ω)（[Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README-ja.md)）
-  - Lean：Wilken の系と InaccPsi の間の写像
-    - 🤖 R₂^C を Lean で、そして ν_C への鎖：ライブラリ全体が sorry 無しで作られる。引用した公理の一覧は [LEAN-ja.md](Googology/Trans/PoR/InaccPsi/LEAN-ja.md) にある。
-      - 済み（仮定は S だけ）：領域 A は閉じた。層の前線と直接の読みを X より下のすべての層 c で（skZbDirectX）。すべての符号を 1 つの読み vR で読む。公理 113 個。
-      - ほかに：υ-不動点でない窓の再始動での RS の入力と cap、孤立した不動点では Θ = ρ。K_Y までの atom の移動。基 ι(Ω₂) で到達のデータと cap。K_ω 以下の code の読みは短い。
-      - 道 yqRoadS（仮定：前線より上で UPPER、LOWER、cap。L(ω+1) ≤ ν_C のとき WdThLow、WdEQfar。ずらし XoShift。XoSup）：ν_C = L(ω+1)。
-      - 骨組み（[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）：道の上の OPEN の葉は 12（すべて L）。skZbDirectX は証明済み（215 回目）。skTopLawAll、skPsi3OffRest2、skAtHi3 は証明済み（Kx.kxTopLawAll、Ky.kyPsi3OffRest2、Kz.kzAtHi3）。根が空虚かは未定。
-      - 済み：θ 未満で X より上の層（skLayPastXθ、仮定なし）。X ≤ c < B₂（Qc、Phase C）、B₂ ≤ c < B₃（Qd、Phase D1）、θ 未満のすべての c（Xi.xi_past：θ 未満の符号の上限ごとに 1 つの層、R_x = π∘ι で読む。ι と P₀ は R2.CitedXi で引用。Xi.xi_imgAll：Tᵖ ∩ Ω₁ のすべての点で Lemma IMG。被覆 π⁻¹∘f と全形の [W07b] Claim 5.6、R2.claim56pw）。skFixCont（Xi.xi_code_cont：c < m_λ の符号は θ 未満、π(Θ_λ c) = Θ_μ(c)、m_μ ≥ c の再始動 ι(g + ω^{e'}) が共終。(l₀, ι(Ω_ω)) でも skBCCont、区間の帰納 Zo.zoBC3 が値の入力を受け取る）。
-      - 済み：層 θ ≤ c < Ω₂ と基点 ι(Ω₂)（skLayPastTh、skBCBaseUL）。符号の上限 ≤ K_ω の項の系、読み Θ_y、FRAG の写像を通した Lemma IMG と Lemma RS（Aw）。
-      - 🤖 次：道の上の残り 10 の葉。窓と上の端（skWin/Top{InR, Big}、skTopLwNo2）、skBC{InR, Big}、skFixCapVF、skZlCfg、skLevImgHi5。
-        - 🤖 今：ι(Ω₂) より上の大きい読み。K_ω ≤ c < P′ の符号の読みの式（Θ(ψ_{Ω₂}(Ω_ω + ξ)) = ϑˣ(Ω₁·Ω₁ + ξ のずらし)、ブロックの段 G(x) ↦ υ_{λ+1+x}）と、動く level での FRAG の節（Za.zaFragV）が要る。済み：ι(Ω₂) より下のすべての range restart と基点 ι(Ω₂)（Aw.aw_UV、Aw.aw_base_UL）。
+  - Lean：R₂^C と ν_C = L(ω+1)（ブランチ feature/por。骨組みの根 `skNuC` が使う未証明の葉は 10 個。[STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md)）
+    - ι(Ω₂) より上の restart λ（葉 skBC{InR, Big}、skFixCapVF、skWin/Top{InR, Big}）。記号：Θ_λ は λ での符号の読み、m_λ は λ の符号、δ_λ = υ_{λ+ω+1}、K_ω = ψ_{Ω₂}(Ω_ω + Ω₂)、P′ = ψ_{Ω₂}(Ω_ω + Ω_ω)
+      - 🤖 K_ω ≤ c < P′ の符号 c の読みの式：Θ(ψ_{Ω₂}(Ω_ω + ξ)) = ϑˣ(Ω₁·Ω₁ + ξ のずらし)、FRAG は Za.zaFragV
+      - Lemma IMG を crossing のある文脈 YsRstK の上で作り直す（GnImg、XiImg、AwImg の移植）
+      - Θ_λ(m_λ) ≥ δ_λ の restart での Lemma TOP と Lemma RS（到達点は k_λ(Θ_λ(m_λ))）
+      - restart についての内部の帰納法で、不動点の UPPER（InR）と LOWER（Big）を示す
+      - Θ_λ(m_λ) ≥ δ_λ·ω の restart での CapV（skFixCapVF）
+    - skTopLwNo2：ν_C < L(ω+1) なら L(ω) ≤₂ ν_C でないこと
+    - skZlCfg：supply の restart の構成（Zl.ZlCfg）
+    - skLevImgHi5：ずらしの level の像（Zk.ZkImgP5）
+    - 根 `skNuC` の仮定が空虚でないことを確かめる
   - 中断（2026-10-17 から。上の Lean が済んでから再開）：上界の残り（長さ n の鎖、R₂^S、基の付け替え）、全部の解析、下界、最初の到達不能基数
 - BMS → PoR 変換 conv（行列 M をパターン conv(M) に変える。ord(P) はパターン P の表す順序数。目標は M < M' ⇔ ord(conv(M)) < ord(conv(M'))）
   - ✅ M < (0,0,0)(1,1,1)：紙と Lean で証明済み
