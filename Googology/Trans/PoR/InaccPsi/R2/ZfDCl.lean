@@ -21,8 +21,8 @@ asks `1 ≤ val L`; a node of level `0` is never good (`Zf.zfNodesAll_false`).  
 * `zfDCl` (**`D(value) = image` at every restricted well-formed decomposition with an `old` / `th` / `add` skeleton**,
   given the clauses of the shift, `ZfImgCl`, the leaves of every node level in the configuration (`hLv`), the
   predecessor `η − 1` of the countable part of every node of level `0` in the configuration (`hPr`), and `ω` in it;
-  at the nested node levels the level image is a hypothesis for the nodes of size `≤ n`, `hNest`, and the conclusion
-  is for the decompositions of size `≤ n`: `Zf.zfShift2` supplies `hNest` by induction on `n`).
+  the level image is a hypothesis for the nodes of size `≤ n` and the conclusion is for the decompositions of size
+  `≤ n`: `Zf.zfShift2` supplies it by induction on `n`, with the node clauses at the inner nodes of nested levels).
 
 No new axiom.  New definitions: `xoSize`, `ZfNS` (an inductive predicate), `ZfNodeOK`, `ZfNest` (predicates),
 `ZfImgCl` (a statement).
@@ -166,11 +166,11 @@ theorem zfDCl {l β μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X 
         D y = UnT.ev (upsilon (μ + f g)) (vmap D t) ∧ WFr (upsilon (μ + f g)) (vmap D t) ∧
           ZW (upsilon (μ + f g)) (vmap D t))
     (hLC : VlLC (fun p => p ∈ X ∪ Y ∨ p < γ) D) (hid : ∀ x, x < γ → D x = x) (hγU : UpsPt γ)
-    (hZa : Za.ZaHiD S l μ γ f D X Y) (hImg : ZfImgCl S l β μ γ f D X Y) (n : ℕ)
-    (hNest : ∀ h : Ordinal.{0}, ∀ L e : XoE, xoSize (.th h L e) ≤ n → XoWF S l β (.th h L e) → XoTopF e →
+    (hZa : Za.ZaHiD S l μ γ f D X Y) (n : ℕ)
+    (hImg : ∀ h : Ordinal.{0}, ∀ L e : XoE, xoSize (.th h L e) ≤ n → XoWF S l β (.th h L e) → XoTopF e →
       XoR S l μ (.th h L e) → (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h L e), z ∈ X ∪ Y) →
       (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h L e), Pt z) → 1 ≤ xoVal S l L →
-      YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) → ZfNest S l L →
+      YvLv S (fun p => p ∈ X ∪ Y ∨ p < γ) (Om1 * xoVal S l L) →
       yvSub S D (Om1 * xoVal S l L) = Om1 * xoImg S l μ f L)
     (hLv : ∀ y, Pt y → y ∈ Y → ∀ h M η, upsilon (l + h) ≤ y → y < upsilon (succ (l + h)) → 1 ≤ M → η < Om1 →
       Om1 * M + η ∈ Tset (upsilon (l + h)) → Om1 * M + η < OmTwo → vt (upsilon (l + h)) (Om1 * M + η) = y →
@@ -281,10 +281,7 @@ theorem zfDCl {l β μ γ : Ordinal.{0}} {f D : Ordinal.{0} → Ordinal.{0}} {X 
         hLv _ hyP hyY h M η hby hys hM1 hη1 hξT hξ2 rfl
       have hlvT : YvLv S (· ∈ Tset τ) (Om1 * M) :=
         (zf_lv_T S hτE hτ1 hM1 hη1 hξT hξ2 hbU hτb).mono fun p hp => hp.1
-      have hsubeq : yvSub S D (Om1 * M) = Om1 * xoImg S l μ f L := by
-        by_cases hN : ZfNest S l L
-        · exact hNest h L e hsz hW0 hF hR hp hq hM1 hlvF hN
-        · exact hImg h L e hW0 hF hR hp hM1 hlvF hN
+      have hsubeq : yvSub S D (Om1 * M) = Om1 * xoImg S l μ f L := hImg h L e hsz hW0 hF hR hp hq hM1 hlvF
       rw [← hsubeq]
       rcases lt_or_ge M Uc.ucB with hMB | hMB
       · -- a level below `B₂`: the term `thc M (par η)`
