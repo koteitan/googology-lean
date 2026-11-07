@@ -38,7 +38,7 @@ section Chain
 variable {κ : Ordinal.{0}} {e : ℕ → Ordinal.{0}} {m : ℕ}
 
 theorem trBases_chain (he : Chain κ e m) {k : ℕ} (hk : k < m) : Bases κ (e k) :=
-  ⟨upsPt_inE he.kap, upsPt_inE (he.ups k hk).1, he.bot k hk, (he.ups k hk).2⟩
+  ⟨he.kap, upsPt_inE (he.ups k hk).1, he.bot k hk, (he.ups k hk).2⟩
 
 theorem trLowT_of_lt (he : Chain κ e m) {k : ℕ} (hk : k < m) {w : Ordinal.{0}} (hw : w < κ) :
     w ∈ TrLowT (e k) κ :=

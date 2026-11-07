@@ -124,7 +124,7 @@ noncomputable def qtU : ZbAS where
     exact ⟨m + 1, hZ.isSuccLimit.add_one_lt hm, hs.1, hs.2.1, hs.2.2.1, hk⟩
 
 theorem qtU_ok : (qtU S).Ok S where
-  mem := fun _ _ _ _ ha hb hb1 hZb hZN hs => qt_mem ha hb hb1 hZb hZN hs
+  mem := fun _ _ _ _ ha hb hb1 hZb hZN hs => qt_mem (le_self_add.trans ha) hb hb1 hZb hZN hs
   hull := fun _ _ _ hZ1 hkey x hx hxV => qt_hull hZ1 hkey x hx hxV
 
 instance : Fact ((qtU S).Ok S) := ⟨qtU_ok S⟩

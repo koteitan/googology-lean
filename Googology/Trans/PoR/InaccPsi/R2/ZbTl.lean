@@ -90,7 +90,7 @@ noncomputable def zbTl : ZbAS where
 theorem zbTl_ok (S : InaccSeq.{0}) : zbTl.Ok S where
   mem := fun a b Z s ha hb hb1 hZb _ hs => by
     have hb1' : b ≤ Om1 := by rw [Br.Om1_eq]; exact hb1
-    have hW : Le.leWe (Om (1 + 1)) ≤ a := tz_W_lt_Omw.le.trans ha
+    have hW : Le.leWe (Om (1 + 1)) ≤ a := tz_W_lt_Omw.le.trans (le_self_add.trans ha)
     exact (tw_mem_CSet (S := S) hb hb1' le_rfl s (hs.2.2.2.mono hZb) (tz_args_W hW hs.2.2.1)).1
   hull := fun a Z hZ hZ1 hkey x hx hxV => by
     have hcoll : ∀ e, e < a → e ∈ S.CSet a Z → Ri.RiDg Z e → TzLev Z e → S.psi e (Om 1) < Z :=

@@ -35,7 +35,7 @@ def SoFragConcl (κ : Ordinal.{0}) (b c : ℕ → Ordinal.{0}) (m : ℕ) (F : Fi
 theorem soFrag_one {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb : Chain κ b 1) (hc : Chain κ c 1)
     {F : Finset Ordinal.{0}} (hF : ↑F ⊆ DD κ b 1) (hbF : ∀ k, k < 1 → b k ∈ F) :
     ∃ Ψ, SoFragConcl κ b c 1 F Ψ := by
-  have hκE := upsPt_inE hb.kap
+  have hκE := hb.kap
   have ht := hb.ups 0 (by omega)
   have ht' := hc.ups 0 (by omega)
   have hκt := hb.bot 0 (by omega)
@@ -114,7 +114,7 @@ theorem soFrag_step {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} {n : ℕ}
   have hc't' : c n < c (n + 1) := hc.mono n (n + 1) (by omega) (by omega)
   have hb'E := upsPt_inE hb'U.1
   have htE := upsPt_inE htU.1
-  have hκ0 : (0 : Ordinal.{0}) < κ := hb.kap.1
+  have hκ0 : (0 : Ordinal.{0}) < κ := hb.kap.pos
   have h0Dn : (0 : Ordinal.{0}) ∈ DD κ b n := Iio_sub_DD n hκ0
   -- the top part and the low part of `F`
   have hlt_t : ∀ x ∈ DD κ b (n + 1), x < b (n + 1) := fun x hx =>
@@ -560,7 +560,7 @@ theorem soFrag {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} (hb : Ch
   have hbD : ∀ k, k < m → b k ∈ DD κ b m := by
     intro k hk
     have hbk := hb.ups k hk
-    have hBk : Bases κ (b k) := ⟨upsPt_inE hb.kap, upsPt_inE hbk.1, hb.bot k hk, hbk.2⟩
+    have hBk : Bases κ (b k) := ⟨hb.kap, upsPt_inE hbk.1, hb.bot k hk, hbk.2⟩
     refine DD_mono (show k + 1 ≤ m by omega) (Or.inr ⟨InSeg.self hbk.2, (pi_base hBk).1.1, ?_⟩)
     exact (pi_base hBk).1.2.trans ((Iio_sub_DD k).trans (ClS.sub _))
   have hF₁ : ↑F₁ ⊆ DD κ b m := by

@@ -38,7 +38,7 @@ theorem za_yvCl (hDl : ZaDlSC) {m : ℕ} {κ : Ordinal.{0}} {b c : ℕ → Ordin
   intro k hk q r hq1 hqθ hlvF hlvT hz hw hρ1 hl hzl hlT hzT hxF hs
   have hbkU := hb.ups k hk
   have hbE : InE (b k) := upsPt_inE hbkU.1
-  have hBk : Bases κ (b k) := ⟨upsPt_inE hb.kap, hbE, hb.bot k hk, hbkU.2⟩
+  have hBk : Bases κ (b k) := ⟨hb.kap, hbE, hb.bot k hk, hbkU.2⟩
   rcases lt_or_ge q Uc.ucB with hqB' | hqB'
   · have hqB : Om1 * q < Uc.ucB := Xe.xe_mul_lt_B hqB'
     have hVT : Vc.VcLv (· ∈ Tset (b k)) (Om1 * q) := by

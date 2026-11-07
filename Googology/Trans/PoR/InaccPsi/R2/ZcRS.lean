@@ -146,7 +146,7 @@ theorem zcRs_rstT {r : Ordinal.{0}} (h : Ys.YsRstK (upsilon r) (upsilon (r + ω)
     · exact absurd h0 (ne_of_gt (lt_of_lt_of_le hρ0 (hbge j hj)))
     · exact hU
   have hbC : Chain κ bb (N + 3) :=
-    ⟨hκU, hκ1, hbU, hbmono, fun j hj => lt_of_lt_of_le hκρ (hbge j hj)⟩
+    ⟨upsPt_inE hκU, hκ1, hbU, hbmono, fun j hj => lt_of_lt_of_le hκρ (hbge j hj)⟩
   -- the segments of the points of `F0` above `ρ`
   have hseg : ∀ z ∈ F0, ρ ≤ z → ∃ j < N + 3, InSeg (bb j) z := by
     intro z hz hρz
@@ -228,7 +228,7 @@ theorem zcRs_rstT {r : Ordinal.{0}} (h : Ys.YsRstK (upsilon r) (upsilon (r + ω)
     · exact absurd h0 (ne_of_gt (lt_of_lt_of_le hμ0 (hcge j hj)))
     · exact hU
   have hcC : Chain κ cc (N + 3) :=
-    ⟨hκU, hκ1, hcU, hcmono, fun j hj => lt_of_lt_of_le hκμ (hcge j hj)⟩
+    ⟨upsPt_inE hκU, hκ1, hcU, hcmono, fun j hj => lt_of_lt_of_le hκμ (hcge j hj)⟩
   -- FRAG
   obtain ⟨Ψ, ⟨Q1, -, Q3, Q4, Q5, -, -⟩, Q8⟩ := fragX hbC hcC F0 hF0DD
   have hΨmono : StrictMonoOn Ψ ↑F0 := Q4.2.1

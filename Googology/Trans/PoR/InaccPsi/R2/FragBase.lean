@@ -156,7 +156,7 @@ def DD (κ : Ordinal.{0}) (b : ℕ → Ordinal.{0}) : ℕ → Set Ordinal.{0}
 
 /-- The hypotheses on a list of bases `b_0 < ⋯ < b_{m-1}` above `κ`. -/
 structure Chain (κ : Ordinal.{0}) (b : ℕ → Ordinal.{0}) (m : ℕ) : Prop where
-  kap : UpsPt κ
+  kap : InE κ
   kap1 : κ < Om1
   ups : ∀ k, k < m → UpsPt (b k) ∧ b k < Om1
   mono : ∀ j k, j < k → k < m → b j < b k
@@ -397,8 +397,8 @@ theorem concl_of {κ : Ordinal.{0}} {b c : ℕ → Ordinal.{0}} {m : ℕ} (hb : 
   · intro x hx y hy
     rcases hloc x hx with hxk | ⟨j, hj, hxs⟩ <;> rcases hloc y hy with hyk | ⟨k, hk, hys⟩
     · rw [h1 x hx hxk, h1 y hy hyk]
-    · rw [h1 x hx hxk, le1R_lt_ups hb.kap hxk ((hb.bot k hk).le.trans hys.1),
-        le1R_lt_ups hb.kap hxk ((hc.bot k hk).le.trans (h2 k hk y hy hys).1)]
+    · rw [h1 x hx hxk, le1R_lt_ups (hb.ups k hk).1 (hxk.trans (hb.bot k hk)) hys.1,
+        le1R_lt_ups (hc.ups k hk).1 (hxk.trans (hc.bot k hk)) (h2 k hk y hy hys).1]
     · have hyx : y < x := lt_of_lt_of_le (hyk.trans (hb.bot j hj)) hxs.1
       have hyx' : Ψ y < Ψ x := h4 hy hx hyx
       exact ⟨fun h => absurd (le1R_le h) (not_le.2 hyx),

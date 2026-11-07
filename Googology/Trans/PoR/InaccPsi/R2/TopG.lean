@@ -33,6 +33,7 @@ structure ImgCtx (ρ : Ordinal.{0}) (A : Set Ordinal.{0}) (f : Ordinal.{0} → O
   rho : ρ ∈ A
   ups : UpsPt (f ρ)
   sk : ∀ α < ρ, ¬ UpsPt α → ∀ g, le1 α g ↔ le1R α g
+  pinU : ∀ τ' δ', RstK ρ τ' δ' → UpsPt (f τ')
 
 /-- `b < a`, `ω^z ∣ a`, `ω^z ∣ b` give `b + ω^z ≤ a`. -/
 theorem dvd_next {z a b : Ordinal.{0}} (ha : ω ^ z ∣ a) (hb : ω ^ z ∣ b) (hba : b < a) :
@@ -400,6 +401,33 @@ theorem wit_sq (A : Set Ordinal.{0}) (f : Ordinal.{0} → Ordinal.{0})
     exact (opow_le_opow_iff_right one_lt_omega0).2 h5
 
 
+/-- The limit `τ` of a restart context is `υ` of a limit index. -/
+theorem tau_lim : ∃ l, IsSuccLimit l ∧ τ = upsilon l := by
+  obtain ⟨ι, hι0, hι⟩ := upsPt_iff_upsilon.1 h.τU
+  refine ⟨ι, ?_, hι⟩
+  rcases zero_or_succ_or_isSuccLimit ι with rfl | ⟨k, rfl⟩ | hl
+  · exact absurd hι0 (lt_irrefl _)
+  · exfalso
+    have hnx := upsilon_isNext k
+    obtain ⟨u, hU, hku, huτ⟩ := h.cof (upsilon k) (by rw [hι]; exact hnx.1)
+    have := hnx.2.2 u hku hU
+    rw [hι] at huτ
+    exact absurd huτ (not_lt.2 this)
+  · exact hl
+
+/-- **The limit `τ` of a restart context is unique.** -/
+theorem tau_eq {τ' δ' : Ordinal.{0}} (h' : RstK ρ τ' δ') : τ' = τ := by
+  obtain ⟨l, hl, e⟩ := h.tau_lim
+  obtain ⟨l', hl', e'⟩ := h'.tau_lim
+  rcases lt_trichotomy τ' τ with hlt | he | hgt
+  · have := h.left l' hl' (by rw [← e']; exact h'.ρτ) (by rw [← e']; exact hlt.le)
+    rw [← e'] at this
+    exact absurd this hlt.ne
+  · exact he
+  · have := h'.left l hl (by rw [← e]; exact h.ρτ) (by rw [← e]; exact hgt.le)
+    rw [← e] at this
+    exact absurd this hgt.ne
+
 /-- **Lemma TOP from a witness package** (the project's Lemma TOP^O, FRAG-free): if a finite witness
 set `W ⊆ [ρ, δ)` with constants `Z < ρ` makes every covering copy `f` with `f(ρ)` a `υ`-point satisfy
 `T(f ρ) ≤ f(t)` (Lemma IMG), and no pair above `x₀` below `ρ` has a point `x` with `x ≤₁ d + e'`
@@ -413,7 +441,8 @@ theorem top_core {x0 t : Ordinal.{0}} {T : Ordinal.{0} → Ordinal.{0}} {W Z : F
     (himg : ∀ (A : Set Ordinal.{0}) (f : Ordinal.{0} → Ordinal.{0}), ↑W ⊆ A → ↑Z ⊆ A →
       ImgCtx ρ A f → T (f ρ) ≤ f t)
     (hcap : ∀ c d, x0 < c → c < d → d < ρ → le2 c d → ∀ x, x0 < x → x ≤ c → ∀ e', 1 ≤ e' →
-      (UpsPt x → T x ≤ e') → ¬ le1 x (d + e')) :
+      (UpsPt x → T x ≤ e') → ¬ le1 x (d + e'))
+    (hpu : ∀ c d, x0 < c → c < d → d < ρ → le2 c d → UpsPt c) :
     ∀ g, δ + t < g → ¬ le1 ρ g := by
   classical
   intro g hg hρg
@@ -507,14 +536,16 @@ theorem top_core {x0 t : Ordinal.{0}} {T : Ordinal.{0} → Ordinal.{0}} {W Z : F
   exact himg _ f (fun w hw => mY w (hWY w hw)) (fun z hz => mX z (hZX z hz))
     ⟨hf.1.2.1, hfadd, fun x hx hI => hf.1.indec hclYt hx hI, hf.2.1,
       fun x hx hxρ => hfix x (hAX x hx hxρ), hlow,
-      fun x hx hxρ => hXYt x (hAX x hx hxρ) _ (hmap ρ hρY), mY ρ hρY, hU, hsk⟩
+      fun x hx hxρ => hXYt x (hAX x hx hxρ) _ (hmap ρ hρY), mY ρ hρY, hU, hsk,
+      fun τ' δ' h' => by rw [h.tau_eq h']; exact hpu (f τ) (f δ) hτ'.1 hlt hδ'.2 h2⟩
 
 /-- **Lemma TOP^O for the terms `x·γ + e` and `x·x + e`** in `R₂^C` (FRAG-free). -/
 theorem top_tq {b : Bool} {γ e x0 : Ordinal.{0}} (hγ : γ < ρ) (he : e < ρ)
     (h1 : b = false → γ = 0 → 1 ≤ e) (hx0 : x0 < ρ)
     (hsk : ∀ α < ρ, ¬ UpsPt α → ∀ g, le1 α g ↔ le1R α g)
     (hcap : ∀ c d, x0 < c → c < d → d < ρ → le2 c d → ∀ x, x0 < x → x ≤ c → ∀ e', 1 ≤ e' →
-      (UpsPt x → tq b γ e x ≤ e') → ¬ le1 x (d + e')) :
+      (UpsPt x → tq b γ e x ≤ e') → ¬ le1 x (d + e'))
+    (hpu : ∀ c d, x0 < c → c < d → d < ρ → le2 c d → UpsPt c) :
     ∀ g, δ + tq b γ e ρ < g → ¬ le1 ρ g := by
   classical
   have hρE := h.ρE
@@ -541,7 +572,7 @@ theorem top_tq {b : Bool} {γ e x0 : Ordinal.{0}} (hγ : γ < ρ) (he : e < ρ)
       have he1 : 1 ≤ e := h1 rfl hγ0
       refine h.top_core (W := W1) (Z := insert e (insert γ Z1)) (T := fun x => tg γ e x) hx0
         (by rw [ht]; exact he1) htδ hbW hZ (fun w hw => cl_mono (subset_refl W1) (by
-          intro x hx; simp [hx]) (hcl1 w hw)) (by rw [ht]; simp) hsk ?_ hcap
+          intro x hx; simp [hx]) (hcl1 w hw)) (by rw [ht]; simp) hsk ?_ hcap hpu
       intro A f _ hZA C
       have heA : e ∈ A := hZA (by simp)
       show tg γ e (f ρ) ≤ f t
@@ -550,7 +581,7 @@ theorem top_tq {b : Bool} {γ e x0 : Ordinal.{0}} (hγ : γ < ρ) (he : e < ρ)
       have ht1 : 1 ≤ t := (h1ρ.le.trans (le_mul_left ρ (pos_iff_ne_zero.2 hγ0))).trans le_self_add
       have hρt : ρ ≤ t := (le_mul_left ρ (pos_iff_ne_zero.2 hγ0)).trans le_self_add
       refine h.top_core (W := insert t W1) (Z := insert e (insert γ Z1))
-        (T := fun x => tg γ e x) hx0 ht1 htδ ?_ hZ ?_ (by simp) hsk ?_ hcap
+        (T := fun x => tg γ e x) hx0 ht1 htδ ?_ hZ ?_ (by simp) hsk ?_ hcap hpu
       · intro w hw
         rcases Finset.mem_insert.1 hw with rfl | hw
         · exact ⟨hρt, htδ⟩
@@ -590,7 +621,7 @@ theorem top_tq {b : Bool} {γ e x0 : Ordinal.{0}} (hγ : γ < ρ) (he : e < ρ)
         nth_rewrite 1 [← hr]; nth_rewrite 2 [← hr]; rw [← opow_add]
       rw [this]; exact indec_opow _
     refine h.top_core (W := {ρ, ρ * ρ, ρ * ρ + ρ, t}) (Z := {e}) (T := fun x => x * x + e) hx0
-      ((h1ρ.le.trans hρp.le).trans le_self_add) htδ ?_ (by simpa using he) ?_ (by simp) hsk ?_ hcap
+      ((h1ρ.le.trans hρp.le).trans le_self_add) htδ ?_ (by simpa using he) ?_ (by simp) hsk ?_ hcap hpu
     · intro w hw
       simp only [Finset.mem_insert, Finset.mem_singleton] at hw
       rcases hw with rfl | rfl | rfl | rfl

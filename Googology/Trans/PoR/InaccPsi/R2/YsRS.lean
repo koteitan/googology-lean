@@ -107,7 +107,7 @@ theorem ysRs_gen {r : Ordinal.{0}}
     · exact absurd h0 (ne_of_gt (lt_of_lt_of_le hρ0 (hbge k hk)))
     · exact hU
   have hbC : Chain κ b (N + 3) :=
-    ⟨hκU, hκ1, hbU, hbmono, fun k hk => lt_of_lt_of_le hκρ (hbge k hk)⟩
+    ⟨upsPt_inE hκU, hκ1, hbU, hbmono, fun k hk => lt_of_lt_of_le hκρ (hbge k hk)⟩
   -- the segments of the points of `F0` above `ρ`
   have hseg : ∀ z ∈ F0, upsilon r ≤ z → ∃ k < N + 3, InSeg (b k) z := by
     intro z hz hρz
@@ -186,7 +186,7 @@ theorem ysRs_gen {r : Ordinal.{0}}
     · exact absurd h0 (ne_of_gt (lt_of_le_of_lt zero_le (hTc k hk)))
     · exact hU
   have hcC : Chain κ c (N + 3) :=
-    ⟨hκU, hκ1, hcU, hcmono, fun k hk => hκA.trans (hTc k hk)⟩
+    ⟨upsPt_inE hκU, hκ1, hcU, hcmono, fun k hk => hκA.trans (hTc k hk)⟩
   -- FRAG
   obtain ⟨Ψ, Q1, Q2, Q3, Q4, Q5, -, -⟩ := frag hbC hcC F0 hF0DD
   have hΨb : ∀ z ∈ F0, upsilon r ≤ z → c 0 ≤ Ψ z ∧ Ψ z ≤ upsilon (A' + ω + 1) := by

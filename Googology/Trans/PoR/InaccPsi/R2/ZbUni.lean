@@ -141,13 +141,17 @@ theorem zbUniTh {X : XtSys} {E κ : Ordinal.{0}} (hκ : κ < Td.tdK S) (hE : E �
     {F ηx : Ordinal.{0}}
     (hF : IsRestartIdx F) (hfix : upsilon F = F) (hX : upsilon F < Pv S ηx) (he : cdExp (cdEta S F) ≤ E) :
     cdTheta S F (cdCode S F) = xtOrec X F := by
-  rw [A.code_eq hF hfix hX (he.trans hE), A.theta_eq hF hfix hX (he.trans hE),
+  have heη : cdExp (cdEta S F) ≤ ConjT.th S * cdEta S F := by
+    obtain ⟨η0, hdec, -⟩ := cdExp_decomp (gg_name_ne hF hfix hX)
+    refine (right_le_opow _ one_lt_omega0).trans ((le_add_self (a := ω ^ cdExp (cdEta S F)) (b := η0)).trans ?_)
+    rw [← hdec]; exact ZbAS.le_th_mul (S := S) _
+  rw [A.code_eq hF hfix hX (he.trans hE), A.theta_eq hF hfix hX (he.trans hE) heη,
     zbUni2 hκ hE hP F ηx hF hfix hX he]
 
 
 /-- A code over every strongly critical base `≥ K` is a good name. -/
 theorem zb_good {η : Ordinal.{0}} (h : ∀ Z, SC Z → Td.tdK S ≤ Z → GxCl Z (A.At Z) η) : Bt.Good S η :=
-  A.cl_mem_CSet (ZbAS.Omw_le_A1 (S := S) _) (Pv_SC S _) (Pv_lt_Om1 S _).le le_rfl (fun _ hz => zb_Pv_N _ hz)
+  A.cl_mem_CSet (ZbAS.Omw_add_le_A1 (S := S) le_rfl) (Pv_SC S _) (Pv_lt_Om1 S _).le le_rfl (fun _ hz => zb_Pv_N _ hz)
     (h _ (Pv_SC S η) (gr_tdK_le_Pv S η))
 
 /-- **`ι(η) ≤ P(η) < P(Ω_ω) = L(0)`** for a code `η` over every strongly critical base. -/
