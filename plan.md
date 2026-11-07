@@ -7,8 +7,8 @@ Only the work still to do, as a tree under the cells of the README tables. The r
 - Wilken's claim: Core(R₂⁺) = ψ_{Ω₁}(I_ω) ([Trans/PoR/InaccPsi](Googology/Trans/PoR/InaccPsi/README.md))
   - Lean: R₂^C and ν_C = L(ω+1) (branch feature/por; the root `skNuC` of the skeleton uses 10 unproved leaves; [STATUS.md](https://github.com/koteitan/googology-lean/blob/feature/r2-skel/Googology/Trans/PoR/InaccPsi/R2Skel/STATUS.md))
     - the restarts λ above ι(Ω₂) (leaves skBC{InR, Big}, skFixCapVF, skWin/Top{InR, Big}). Symbols: Θ_λ is the reading of codes at λ, m_λ the code of λ, δ_λ = υ_{λ+ω+1}, K_ω = ψ_{Ω₂}(Ω_ω + Ω₂), P′ = ψ_{Ω₂}(Ω_ω + Ω_ω)
-      - 🤖 closed atoms ψ₂(E) read P(η+ζ), the names of restarts: restarts inside the reach of λ and in (ι(η₀), λ) have smaller codes (the induction order)
-      - the frame of the induction on the code: structure above a base of unknown reach; X < ν_C from the caps just below each restart
+      - closed atoms ψ₂(E) read P(η+ζ), the names of restarts: restarts inside the reach of λ and in (ι(η₀), λ) have smaller codes (the induction order)
+      - 🤖 the frame of the induction on the code: structure above a base of unknown reach; X < ν_C from the caps just below each restart
       - Lemma IMG on all readings (maps with h(x) ≥ x; closed atoms by pairs and reaches; ε-points by Claim 5.6 and faCan)
       - Lemma TOP and Lemma RS at the restarts with Θ_λ(m_λ) ≥ δ_λ (realizers D = Θ_μ∘Θ_λ⁻¹, carry of the inner reaches)
       - CapV at the restarts with Θ_λ(m_λ) ≥ δ_λ·ω (skFixCapVF)
