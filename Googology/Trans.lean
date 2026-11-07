@@ -2532,3 +2532,5 @@ import Googology.Trans.PoR.InaccPsi.R2.FaZB
 import Googology.Trans.PoR.InaccPsi.R2.FaVt
 import Googology.Trans.PoR.InaccPsi.R2.FaCnf
 import Googology.Trans.PoR.InaccPsi.R2.FaCan
+import Googology.Trans.PoR.InaccPsi.R2.FaLeaf
+import Googology.Trans.PoR.InaccPsi.R2.FaClose
