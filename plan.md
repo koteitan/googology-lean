@@ -20,7 +20,9 @@ The remaining work, arranged by the cells of the README tables. Items not being 
           - done: the atom system past B₂ with the bound θ (Qt.qtU S: atoms the strongly critical members of K⁽⁰⁾_Z in (Ω₁, θ)) and its hull facts at S (Zb.ZbAS.Ok, split from Zb.ZbAS so that the atoms may depend on S).
           - done below B₃ = Qd.qdB: Zm.ZmPastAt S c for every c < B₃ (Qd.qd_past), with the reading vD, the digit systems (Qd.qdGood_all) and the layers (Qd.qdLay_all) of the Qc chain at the Veblen levels.
           - done: Qd.QdImgH with no hypothesis (Qf.qf_imgH_all): the reach at the points of the Veblen levels (cited R2.qfLhT, Qf.qf_lh_lvl), the gap (Qf.qf_lam_gap), the separation (Qf.qf_sep_lvl), the copy lemma for every code (Qf.qf_copy), and Tᵖ[σ] closed under the countable values of φ above ρ (Qf.qf_TBphi, skTBphi).
-          - 🤖 next: B₃ ≤ c < θ (skLayPastB3θ: a general level reading of λ, one cardinal down, the leaves read at x, R2.CitedVd).
+          - done: Lemma EXACT and the collapse for every code below θ: the reading R_x = π∘ι (cited ι and P₀, R2.CitedXi; Xi.xiR_pi, Xi.xiR_gx).
+          - done given Xi.XiImgAll: every layer c < θ (Xi.xi_past: one layer per code bound below θ, its terms the codes read by R_x; skLayPastB3θ).
+          - 🤖 next: Xi.XiImgAll (skXiImg): Lemma IMG at every reading R_ρ(c), c < θ — the reach of ϑᵖ(Ω₁·M + η) at every level M < θ ([W07b] Def 4.1 with the localization and cr), the separation, the copy lemma for the atom codes.
         - then: the other road leaves (skLayPastTh, windows and tops, skBC, skFix, skZlCfg, skLevImgHi4).
   - paused (since 2026-10-17; resumes after the Lean work above): the rest of the upper bound (chains of length n, R₂^S, base changes), the full analysis, the lower bound, the first inaccessible
 - BMS → PoR converter conv (turns a matrix M into a pattern conv(M); ord(P) is the ordinal of a pattern P; the goal is M < M' ⇔ ord(conv(M)) < ord(conv(M')))
