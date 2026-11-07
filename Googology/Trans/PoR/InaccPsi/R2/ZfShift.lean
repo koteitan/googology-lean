@@ -257,12 +257,12 @@ theorem zfShift2 (hLN : ZfLevNode S) (hI : ZfImg S) : XoShift2 S := by
   have hbU : UpsPt (upsilon (l + β)) := upsPt_upsilon (hl0.trans_le le_self_add)
   have hθ2 : ConjT.th S < OmTwo := by rw [← Ui.ui_one_W]; exact (InaccSeq.psiS_bounds (S := S) _ 1).2
   have hIndec : Indec (OmTwo : Ordinal.{0}) := Lq.lq_SC_indec Uc.uc_SC_Om2
-  -- the level image at the nested node levels, by induction on the size
-  have hNestAll : ∀ n : ℕ, ∀ h₁ : Ordinal.{0}, ∀ L₁ e₁ : XoE, xoSize (.th h₁ L₁ e₁) ≤ n →
+  -- the level image at every node, by induction on the size (the nested node levels from the inner nodes)
+  have hImgAll : ∀ n : ℕ, ∀ h₁ : Ordinal.{0}, ∀ L₁ e₁ : XoE, xoSize (.th h₁ L₁ e₁) ≤ n →
       XoWF S l β (.th h₁ L₁ e₁) → XoTopF e₁ → XoR S l μ (.th h₁ L₁ e₁) →
       (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h₁ L₁ e₁), z ∈ X' ∪ Y') →
       (∀ z ∈ xoPts S l (upsilon (l + β)) (.th h₁ L₁ e₁), z ∈ X ∪ Y) → 1 ≤ xoVal S l L₁ →
-      YvLv S (fun p => p ∈ X' ∪ Y' ∨ p < γ) (Om1 * xoVal S l L₁) → ZfNest S l L₁ →
+      YvLv S (fun p => p ∈ X' ∪ Y' ∨ p < γ) (Om1 * xoVal S l L₁) →
       yvSub S D (Om1 * xoVal S l L₁) = Om1 * xoImg S l μ f L₁ := by
     intro n
     induction n with
@@ -271,7 +271,10 @@ theorem zfShift2 (hLN : ZfLevNode S) (hI : ZfImg S) : XoShift2 S := by
       simp only [xoSize] at hsz
       omega
     | succ n ih =>
-      intro h₁ L₁ e₁ hsz hW₁ _ hR₁ hp₁ hq₁ _ hlv hN
+      intro h₁ L₁ e₁ hsz hW₁ hF₁ hR₁ hp₁ hq₁ hM1₁ hlv
+      by_cases hN : ZfNest S l L₁
+      swap
+      · exact hImg h₁ L₁ e₁ hW₁ hF₁ hR₁ hp₁ hM1₁ hlv hN
       have hszL : xoSize L₁ ≤ n := by simp only [xoSize] at hsz; omega
       have hsubL : xoPts S l (upsilon (l + β)) L₁ ⊆ xoPts S l (upsilon (l + β)) (.th h₁ L₁ e₁) :=
         yq_pts_sub (fun z hz => Finset.mem_insert_of_mem (Finset.mem_insert_of_mem (Finset.mem_union_left _ hz)))
@@ -298,7 +301,7 @@ theorem zfShift2 (hLN : ZfLevNode S) (hI : ZfImg S) : XoShift2 S := by
           -- the node clause at the inner node
           have hDL : D (xoVal S l (.th h' L' e')) = xoImg S l μ f (.th h' L' e') :=
             zfDCl (Pt := fun z => z ∈ X ∪ Y) hl0 hβ0 hb1 hX' hY' hBμ hμ0 hLs.mono hLs.add hLs.below hres hold hun
-              hLC hid hγU hZa hImg n ih hLv' hPr' (Finset.mem_union_left _ hωX') (.th h' L' e') hsz' hWL0 hF'
+              hLC hid hγU hZa n ih hLv' hPr' (Finset.mem_union_left _ hωX') (.th h' L' e') hsz' hWL0 hF'
               hRL hpL hqL hvL
           -- the inner value is an `ε`-number, and so is its image
           have hτU : UpsPt (upsilon (l + h')) := upsPt_upsilon (hl0.trans_le le_self_add)
@@ -394,7 +397,7 @@ theorem zfShift2 (hLN : ZfLevNode S) (hI : ZfImg S) : XoShift2 S := by
     upsilon_normal.monotone (Order.succ_le_of_lt ((add_lt_add_iff_left l).2 hW.2.1))
   have hv : xoVal S l (.th h L e) < upsilon (l + β) := hW.2.2.2.2.2.2.2.2.trans_le hsb
   exact zfDCl (Pt := fun z => z ∈ X ∪ Y) hl0 hβ0 hb1 hX' hY' hBμ hμ0 hLs.mono hLs.add hLs.below hres hold hun
-    hLC hid hγU hZa hImg _ (hNestAll (xoSize (.th h L e))) hLv' hPr' (Finset.mem_union_left _ hωX')
+    hLC hid hγU hZa _ (hImgAll (xoSize (.th h L e))) hLv' hPr' (Finset.mem_union_left _ hωX')
     (.th h L e) le_rfl hW hF hR (fun z hz => hsubXY z (hp z hz)) hp hv
 
 /-- **`ZfImg S ⇒ Yq.XoShift S`** (`Yq.yqShift_of2`). -/
