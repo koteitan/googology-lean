@@ -5,12 +5,13 @@ import Googology.Trans.PoR.InaccPsi.R2.QdK0
 
 `Qc.QDS` is a digit system at an `ε`-number base `E < B₂`: offsets `o < E` read `R(o)(x)`, codes of `Uc.UcCl`,
 readings below a point of a generic level (`Qc.QcBd`).  `QdDS` is the same at a base `E < B₃ = Qd.qdB`, with the codes
-`Qd.QdCl` and the readings below a point of a Veblen level (`Qd.QdBd`, where Lemma IMG is the hypothesis
-`Qd.QdImgH`).  Every `QDS` is one (`QDS.toQd`: `UcCl ⊆ QdCl`, `B₂ < B₃`, `QcBd ⊆ QdBd`; below `B₂` a code `QdCl` is a
+`Qd.QdCl` and the readings in the bound `Qc.YBd` (a point of a generic level, or of a Veblen level under the
+hypothesis `Qd.QdImgH`).  Every `QDS` is one (`QDS.toQd`: `UcCl ⊆ QdCl`, `B₂ < B₃`, `QcBd ⊆ YBd`; below `B₂` a code
+`QdCl` is a
 code `UcCl`, `qd_cl_uc`).
 
 * `QdDS`, `qd_cl_uc`, `Qc.QDS.toQd`; `QdDS.E_E`, `QdDS.V_lt`, `QdDS.Eg_lt`, `QdDS.R_bd` (**every reading is
-  `QdBd`**), `QdDS.rR_facts`.
+  `YBd`**), `QdDS.rR_facts`.
 
 No new axiom.  New definitions: `QdDS`, `Qc.QDS.toQd`.
 -/
@@ -45,10 +46,10 @@ structure QdDS where
   Ei_cl : ∀ Z, SC Z → Eg < Z → QdCl Z Ei
   nfx : ∀ y, B < y → y ≤ E → gamma y ≠ y
   Eg_le : ∀ c, c ≠ 0 → Eg ≤ G c
-  Dv_T : ∀ x, InE x → x < Om1 → Eg < x → Dv x ∈ Tset x ∧ InE (Dv x) ∧ x < Dv x ∧ QdBd x (Dv x)
+  Dv_T : ∀ x, InE x → x < Om1 → Eg < x → Dv x ∈ Tset x ∧ InE (Dv x) ∧ x < Dv x ∧ YBd x (Dv x)
   Dv_pi : ∀ σ ρ, Bases σ ρ → Eg < σ → Dv ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (Dv ρ) = Dv σ
   V_T : ∀ x, InE x → x < Om1 → Eg < x →
-    V x ∈ Tset x ∧ InE (V x) ∧ Dv x ≤ V x ∧ QdBd x (V x)
+    V x ∈ Tset x ∧ InE (V x) ∧ Dv x ≤ V x ∧ YBd x (V x)
   Vq : ∀ x, InE x → x < Om1 → Eg < x → ∃ σ, σ ∈ Tset x ∧ σ < Om1 ∧ σ < Dv x + V x ∧ V x < gq σ x
   W_T : ∀ x, InE x → x < Om1 → Eg < x → W x ∈ Tset x ∧ W x < Om1 ∧ eN (V x) = glA 1 (W x) x
   V_pi : ∀ σ ρ, Bases σ ρ → Eg < σ → V ρ ∈ TB ρ σ ∧ Googology.Trans.PoR.InaccPsi.R2.pi σ ρ (V ρ) = V σ
@@ -112,11 +113,11 @@ noncomputable def _root_.Googology.Trans.PoR.InaccPsi.R2.Qc.QDS.toQd (S : InaccS
   Eg_le := M.Eg_le
   Dv_T := fun x hx hx1 hg => by
     obtain ⟨h1, h2, h3, h4⟩ := M.Dv_T x hx hx1 hg
-    exact ⟨h1, h2, h3, qdBd_of_qc h4⟩
+    exact ⟨h1, h2, h3, yBd_of_qc h4⟩
   Dv_pi := M.Dv_pi
   V_T := fun x hx hx1 hg => by
     obtain ⟨h1, h2, h3, h4⟩ := M.V_T x hx hx1 hg
-    exact ⟨h1, h2, h3, qdBd_of_qc h4⟩
+    exact ⟨h1, h2, h3, yBd_of_qc h4⟩
   Vq := M.Vq
   W_T := M.W_T
   V_pi := M.V_pi
@@ -150,26 +151,26 @@ theorem E_lim : IsSuccLimit M.E := ev_isSuccLimit_of_inE M.E_E
 theorem one_lt_E : (1 : Ordinal.{0}) < M.E := lu_one_lt_E M.E_E
 
 theorem V_lt (x : Ordinal.{0}) (hx : InE x) (hx1 : x < Om1) (hEg : M.Eg < x) : M.V x < Om1 :=
-  qdBd_lt hx hx1 (M.V_T x hx hx1 hEg).2.2.2
+  yBd_lt hx hx1 (M.V_T x hx hx1 hEg).2.2.2
 
 theorem Eg_lt {c x : Ordinal.{0}} (hc0 : c ≠ 0) (hg : M.G c < x) : M.Eg < x := (M.Eg_le c hc0).trans_lt hg
 
 /-- **Every reading below the base is below a point of a Veblen level.** -/
 theorem R_bd {c x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hc : c < M.E) (hg : M.G c < x) :
-    QdBd x (M.R c x) := by
+    YBd x (M.R c x) := by
   rcases eq_or_ne c 0 with rfl | hc0
   · rw [M.R0]
-    exact qdBd_mono zero_le (qdBd_of_qc (qcBd_of_X hx (hx.pos.trans (ywX_facts hx hx1).2.1)))
-  · exact qdBd_mono (M.lt c x hx hx1 hc hg).le (M.V_T x hx hx1 (M.Eg_lt hc0 hg)).2.2.2
+    exact yBd_mono zero_le (yBd_of_qc (qcBd_of_X hx (hx.pos.trans (ywX_facts hx hx1).2.1)))
+  · exact yBd_mono (M.lt c x hx hx1 hc hg).le (M.V_T x hx hx1 (M.Eg_lt hc0 hg)).2.2.2
 
 /-- **The reading of an index `B + 1 + o`** is in `Tˣ ∩ Ω₁`, and so is its `gq`, both below a generic-level point. -/
 theorem rR_facts {x : Ordinal.{0}} (hx : InE x) (hx1 : x < Om1) (hEg : M.Eg < x) {o : Ordinal.{0}} (ho : o < M.E)
     (hg : M.G o < x) :
     M.Dv x + M.R o x ∈ Tset x ∧ M.Dv x + M.R o x < Om1 ∧
-      QdBd x (M.Dv x + M.R o x) ∧ QdBd x (gq (M.Dv x + M.R o x) x) := by
-  have hS : QdBd x (M.Dv x + M.R o x) := qdBd_add hx hx1 (M.Dv_T x hx hx1 hEg).2.2.2 (M.R_bd hx hx1 ho hg)
-  have hST := qdBd_T hx hx1 hS
-  exact ⟨hST, qdBd_lt hx hx1 hS, hS, qdBd_gq hx hx1 hST hS⟩
+      YBd x (M.Dv x + M.R o x) ∧ YBd x (gq (M.Dv x + M.R o x) x) := by
+  have hS : YBd x (M.Dv x + M.R o x) := yBd_add hx hx1 (M.Dv_T x hx hx1 hEg).2.2.2 (M.R_bd hx hx1 ho hg)
+  have hST := yBd_T hx hx1 hS
+  exact ⟨hST, yBd_lt hx hx1 hS, hS, yBd_gq hx hx1 hST hS⟩
 
 end QdDS
 
