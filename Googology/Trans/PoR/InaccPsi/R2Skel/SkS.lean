@@ -1591,18 +1591,20 @@ higher segments `D` is the hull isomorphism of FRAG, and countable `φ`-values m
 (Lean has it for countable `M`, `Gl.gl_pi_mul`). -/
 theorem skLevImg (S : InaccSeq.{0}) : Zf.ZfImg S := Zf.zfImg_of_P (skLevImgHi S)
 
-/-- STATUS: OPEN (NEW round 229; the open leaf of the shift on the road; REPLACES `skLevImgHi4`)
+/-- STATUS: OPEN (NEW round 229; the open leaf of the shift on the road; REPLACES `skLevImgHi4`; round 231: low pieces
+`Zk.ZkLow` in the mixed pieces)
 SIZE: L
 `Zk.ZkImgP5 S`: the shift with the level image asked only at levels that are (i) one-base at no segment, (ii) no sum
-tree of MIXED pieces (`¬ Zk.ZkSS (Zk.zkMx …) L`: one-segment pieces `Zk.zkPc` and nested nodes `Zf.ZfNodeOK`, mixed),
+tree of MIXED pieces (`¬ Zk.ZkSS (Zk.zkMx …) L`: one-segment pieces `Zk.zkPc`, nested nodes `Zf.ZfNodeOK` and low
+pieces `Zk.ZkLow` (value below `υ_λ`, fixed by `D`), mixed),
 (iii) no prefix level with mixed countable rests (`¬ Zk.ZkPS (Zk.zkMx …) (Zk.zkPf …) L`).  `Zk.zkShift2_P5` does one
 induction on `Zf.xoSize`: the configuration enlarged by the Cantor exponents of its points (`Zk.zkExps`), the exponent
 map `D` itself (a one-segment piece: `zkG = D` on its exponents, `Zk.zk_DG`; a nested node: an `ε`-number with image
 `D(val)`, the node clause at the smaller size).
 REFUTE FIRST (round 229): NO EVIDENCE (the excluded levels are theorems; what is left is as in skLevImgHi4 minus the
 nested node levels).
-Exact gap: (a) nested nodes of level `0`, or with a countable part outside `old` / `th` / `add`, or next to constants or
-`φ`, (b) countable `φ`-values with arguments in two segments, (c) old `ub` / `tm` leaves with leaves in lower segments
+Exact gap: (a) nested nodes of level `0`, or with a countable part outside `old` / `th` / `add`, or next to `φ` or
+countable constants above `υ_λ`, (b) countable `φ`-values with arguments in two segments, (c) old `ub` / `tm` leaves with leaves in lower segments
 (outside the one-segment pieces), (d) several uncountable pieces at different segments, or an uncountable piece whose
 value is no `Ω₁`-multiple (touching terms), (e) `Ω_·` and `ψ` with moving leaves. -/
 theorem skLevImgHi5 (S : InaccSeq.{0}) : Zk.ZkImgP5 S := by sorry
