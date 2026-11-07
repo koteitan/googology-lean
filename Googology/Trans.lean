@@ -2276,6 +2276,7 @@ import Googology.Trans.PoR.InaccPsi.R2.ZkImg3
 import Googology.Trans.PoR.InaccPsi.R2.ZkPre
 import Googology.Trans.PoR.InaccPsi.R2.ZkImg4
 import Googology.Trans.PoR.InaccPsi.R2.ZkNode
+import Googology.Trans.PoR.InaccPsi.R2.ZkShift
 import Googology.Trans.PoR.InaccPsi.R2.ZlReach
 import Googology.Trans.PoR.InaccPsi.R2.ZlSup
 import Googology.Trans.PoR.InaccPsi.R2.ZlAsm
